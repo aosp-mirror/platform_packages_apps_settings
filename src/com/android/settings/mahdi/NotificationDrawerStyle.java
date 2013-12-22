@@ -58,12 +58,15 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
             "notification_wallpaper_landscape";
     private static final String PREF_NOTIFICATION_WALLPAPER_ALPHA =
             "notification_wallpaper_alpha";
+    private static final String PREF_NOTIFICATION_ALPHA =
+            "notification_alpha";
 
     private static final int DLG_PICK_COLOR = 0;
 
     private ListPreference mNotificationWallpaper;
     private ListPreference mNotificationWallpaperLandscape;
     SeekBarPreference mWallpaperAlpha;
+    SeekBarPreference mNotificationAlpha;
 
     private File mImageTmp;
 
@@ -109,6 +112,19 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
         mWallpaperAlpha.setInitValue((int) (transparency * 100));
         mWallpaperAlpha.setProperty(Settings.System.NOTIFICATION_BACKGROUND_ALPHA);
         mWallpaperAlpha.setOnPreferenceChangeListener(this);
+
+        try{
+            transparency = Settings.System.getFloat(getContentResolver(),
+                    Settings.System.NOTIFICATION_ALPHA);
+        } catch (Exception e) {
+            transparency = 0;
+            Settings.System.putFloat(getContentResolver(),
+                    Settings.System.NOTIFICATION_ALPHA, 0.0f);
+        }
+        mNotificationAlpha = (SeekBarPreference) findPreference(PREF_NOTIFICATION_ALPHA);
+        mNotificationAlpha.setInitValue((int) (transparency * 100));
+        mNotificationAlpha.setProperty(Settings.System.NOTIFICATION_ALPHA);
+        mNotificationAlpha.setOnPreferenceChangeListener(this);
 
         updateCustomBackgroundSummary();
     }
@@ -250,6 +266,11 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
             Settings.System.putFloat(getContentResolver(),
                     Settings.System.NOTIFICATION_BACKGROUND_ALPHA, valNav / 100);
             return true;
+        } else if (preference == mNotificationAlpha) {
+            float valNav = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(getContentResolver(),
+                    Settings.System.NOTIFICATION_ALPHA, valNav / 100);
+            return true;
         }else if (preference == mNotificationWallpaper) {
             int indexOf = mNotificationWallpaper.findIndexOfValue(newValue.toString());
             switch (indexOf) {
@@ -351,5 +372,4 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
 
         }
     }
-
 }
