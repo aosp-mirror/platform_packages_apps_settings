@@ -52,43 +52,5 @@
             android:defaultValue="true" />
 
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/title_widgets">
-	
-        <PreferenceScreen
-        android:key="lock_clock"
-        android:title="@string/lock_clock_title"
-        android:summary="@string/lock_clock_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.cyanogenmod.lockclock"
-                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
-        </PreferenceScreen>
-
-	 <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-            android:key="lockscreen_enable_widgets"
-            android:title="@string/security_enable_widgets_title" />
-
-         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-            android:key="lockscreen_camera_widget"
-            android:title="@string/lockscreen_camera_widget_title"
-            android:summary="@string/lockscreen_camera_widget_summary" />
-
-         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-            android:key="lockscreen_use_widget_container_carousel"
-            android:title="@string/lockscreen_use_widget_container_carousel_title"
-            android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
-
-         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-            android:key="lockscreen_disable_hints"
-            android:title="@string/lockscreen_disable_hints_title"
-            android:summary="@string/lockscreen_disable_hints_summary" />
-
-         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:title="@string/lockscreen_maximize_widgets_title"
-            android:summary="@string/lockscreen_maximize_widgets_summary" />
-
-    </PreferenceCategory>
 	    
 </PreferenceScreen>
