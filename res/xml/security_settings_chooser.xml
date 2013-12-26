@@ -29,12 +29,7 @@
         <PreferenceScreen
             android:key="keyguard_enable_widgets"
             android:fragment="com.android.settings.mahdi.LockscreenWidgets"
-            android:title="@string/lockscreen_widgets_title"/>
-
-	<CheckBoxPreference
-            android:key="menu_unlock"
-            android:title="@string/unlock_menu_unlock_title"
-            android:summary="@string/unlock_menu_unlock_summary" />
+            android:title="@string/lockscreen_widgets_title"/>	
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"

@@ -51,6 +51,11 @@
             android:key="power_button_instantly_locks"
             android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
 
+        <CheckBoxPreference
+            android:key="lock_before_unlock"
+            android:title="@string/lock_before_unlock_title"
+            android:summary="@string/lock_before_unlock_summary" />
+
         <PreferenceScreen
             android:key="keyguard_enable_widgets"
             android:fragment="com.android.settings.mahdi.LockscreenWidgets"

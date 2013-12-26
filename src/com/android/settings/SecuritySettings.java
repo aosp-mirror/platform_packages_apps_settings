@@ -30,6 +30,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -49,9 +50,12 @@ import android.util.Log;
 import com.android.internal.telephony.util.BlacklistUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.mahdi.HardwareKeys;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  * Gesture lock pattern settings.
@@ -67,6 +71,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_BIOMETRIC_WEAK_LIVELINESS = "biometric_weak_liveliness";
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
+    private static final String KEY_VISIBLE_ERROR_PATTERN = "visible_error_pattern";
+    private static final String KEY_VISIBLE_DOTS = "visibledots";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
@@ -95,9 +101,11 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
     private static final String KEY_APP_SECURITY_CATEGORY = "app_security";
     private static final String KEY_BLACKLIST = "blacklist";
+    private static final String SLIDE_LOCK_TIMEOUT_DELAY = "slide_lock_timeout_delay";
+    private static final String SLIDE_LOCK_SCREENOFF_DELAY = "slide_lock_screenoff_delay";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "quick_unlock_control";
+    private static final String CATEGORY_ADDITIONAL = "additional_options";
     private static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
-    private static final String MENU_UNLOCK_PREF = "menu_unlock";
 
     private PackageManager mPM;
     private DevicePolicyManager mDPM;
@@ -108,6 +116,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     private CheckBoxPreference mBiometricWeakLiveliness;
     private CheckBoxPreference mVisiblePattern;
+    private CheckBoxPreference mVisibleErrorPattern;
+    private CheckBoxPreference mVisibleDots;
 
     private CheckBoxPreference mShowPassword;
 
@@ -130,6 +140,9 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mQuickUnlockScreen;
     private ListPreference mLockNumpadRandom;
     private CheckBoxPreference mMenuUnlock;
+    private ListPreference mSlideLockTimeoutDelay;
+    private ListPreference mSlideLockScreenOffDelay;
+
 
     public SecuritySettings() {
         super(null /* Don't ask for restrictions pin on creation. */);
@@ -155,16 +168,19 @@ public class SecuritySettings extends RestrictedSettingsFragment
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
 
-        // Add package manager to check if features are available
-        PackageManager pm = getPackageManager();
-
         // Mahdi-Rom - allows for calling the settings screen with stock or mahdi view
         boolean isMahdiSecurity = false;
         Bundle args = getArguments();
         if (args != null) {
              isMahdiSecurity = args.getBoolean("mahdi_security");
          }
-        ContentResolver resolver = getActivity().getApplicationContext().getContentResolver();
+
+        final ContentResolver resolver = getContentResolver();
+        final Resources res = getResources();
+
+        // Add package manager to check if features are available
+        PackageManager pm = getPackageManager();
+
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
             // if there are multiple users, disable "None" setting
@@ -213,6 +229,99 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
+        // lock after preference
+        mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
+        if (mLockAfter != null) {
+            setupLockAfterPreference();
+            updateLockAfterPreferenceSummary();
+        } else if (!mLockPatternUtils.isLockScreenDisabled()) {
+            addPreferencesFromResource(R.xml.security_settings_slide_delay_mahdi);
+
+            mSlideLockTimeoutDelay = (ListPreference) root
+                    .findPreference(SLIDE_LOCK_TIMEOUT_DELAY);
+            int slideTimeoutDelay = Settings.System.getInt(resolver,
+                    Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, 5000);
+            mSlideLockTimeoutDelay.setValue(String.valueOf(slideTimeoutDelay));
+            updateSlideAfterTimeoutSummary();
+            mSlideLockTimeoutDelay.setOnPreferenceChangeListener(this);
+
+            mSlideLockScreenOffDelay = (ListPreference) root
+                    .findPreference(SLIDE_LOCK_SCREENOFF_DELAY);
+            int slideScreenOffDelay = Settings.System.getInt(resolver,
+                    Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, 0);
+            mSlideLockScreenOffDelay.setValue(String.valueOf(slideScreenOffDelay));
+            updateSlideAfterScreenOffSummary();
+            mSlideLockScreenOffDelay.setOnPreferenceChangeListener(this);
+        }
+
+        if (mIsPrimary) {
+            // lock instantly on power key press
+            mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
+                    KEY_POWER_INSTANTLY_LOCKS);
+            checkPowerInstantLockDependency();
+
+	// Add the additional Mahdi-Rom settings
+        addPreferencesFromResource(R.xml.security_settings_mahdi);
+
+            // Lock before Unlock
+            mLockBeforeUnlock = (CheckBoxPreference) root
+                    .findPreference(LOCK_BEFORE_UNLOCK);
+            mLockBeforeUnlock.setChecked(Settings.Secure.getInt(resolver,
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, 0) == 1);
+
+            // disable lock options if lock screen set to NONE
+            // or if using pattern as a primary lock screen or
+            // as a backup to biometric
+            if ((!mLockPatternUtils.isSecure() && mLockPatternUtils.isLockScreenDisabled())
+                || (mLockPatternUtils.isLockPatternEnabled())) {               
+            if (mLockPatternUtils.isLockPatternEnabled()) {
+                mLockBeforeUnlock.setEnabled(true);
+            } else {
+                mLockBeforeUnlock.setEnabled(false);
+            }             
+            } else if (mLockPatternUtils.isLockPasswordEnabled()) {                
+                mLockBeforeUnlock.setEnabled(true);                       
+            } else {                
+                mLockBeforeUnlock.setEnabled(false);
+            }
+
+            CheckBoxPreference quickUnlockScreen = (CheckBoxPreference)
+                    findPreference(Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL);
+            CheckBoxPreference menuUnlock = (CheckBoxPreference)
+                    findPreference(Settings.System.MENU_UNLOCK_SCREEN);
+            CheckBoxPreference homeUnlock = (CheckBoxPreference)
+                    findPreference(Settings.System.HOME_UNLOCK_SCREEN);
+            CheckBoxPreference vibratePref = (CheckBoxPreference)
+                    findPreference(Settings.System.LOCKSCREEN_VIBRATE_ENABLED);
+
+            final int deviceKeys = res.getInteger(
+                    com.android.internal.R.integer.config_deviceHardwareKeys);
+            final PreferenceGroup additionalPrefs =
+                    (PreferenceGroup) findPreference(CATEGORY_ADDITIONAL);
+
+            // hide all lock options if lock screen set to NONE
+            if (mLockPatternUtils.isLockScreenDisabled()) {
+                root.removePreference(additionalPrefs);                
+            // hide the quick unlock and vibrate if using Pattern
+            } else if (mLockPatternUtils.isLockPatternEnabled()) {
+                additionalPrefs.removePreference(vibratePref);
+                additionalPrefs.removePreference(quickUnlockScreen);
+            // hide vibrate on unlock options if using PIN/password
+            // as primary lock screen or as backup to biometric
+            } else if (mLockPatternUtils.isLockPasswordEnabled()) {
+                additionalPrefs.removePreference(vibratePref);
+            // hide the quick unlock if its not using PIN/password
+            // as a primary lock screen or as a backup to biometric
+            } else {
+                additionalPrefs.removePreference(quickUnlockScreen);
+            }
+            
+            // Hide the HomeUnlock setting if no home button is available
+            if ((deviceKeys & HardwareKeys.KEY_MASK_HOME) == 0) {
+                additionalPrefs.removePreference(homeUnlock);
+            }
+        }
+
         if (mIsPrimary) {
             switch (mDPM.getStorageEncryptionStatus()) {
             case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
@@ -226,60 +335,18 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
-        // lock after preference
-        mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
-        if (mLockAfter != null) {
-            setupLockAfterPreference();
-            updateLockAfterPreferenceSummary();
-        }
-
-	// Add the additional Mahdi-Rom settings
-        addPreferencesFromResource(R.xml.security_settings_mahdi);
-
-        // Lock before Unlock
-            mLockBeforeUnlock = (CheckBoxPreference) root
-                    .findPreference(LOCK_BEFORE_UNLOCK);
-            mLockBeforeUnlock.setChecked(Settings.Secure.getInt(resolver,
-                    Settings.Secure.LOCK_BEFORE_UNLOCK, 0) == 1);
-
-        // disable lock options if lock screen set to NONE
-            // or if using pattern as a primary lock screen or
-            // as a backup to biometric
-            if ((!mLockPatternUtils.isSecure() && mLockPatternUtils.isLockScreenDisabled())
-                || (mLockPatternUtils.isLockPatternEnabled())) {               
-                if (mLockPatternUtils.isLockPatternEnabled()) {
-                    mLockBeforeUnlock.setEnabled(true);
-                } else {
-                    mLockBeforeUnlock.setEnabled(false);
-                } 
-
-            // disable menu unlock and vibrate on unlock options if
-            // using PIN/password as primary lock screen or as
-            // backup to biometric
-            } else if (mLockPatternUtils.isLockPasswordEnabled()) {                
-                mLockBeforeUnlock.setEnabled(true);
-           
-            // Disable the quick unlock if its not using PIN/password
-            // as a primary lock screen or as a backup to biometric
-            } else {                
-                mLockBeforeUnlock.setEnabled(false);
-            }
-
-	// Menu Unlock
-        mMenuUnlock = (CheckBoxPreference) root.findPreference(MENU_UNLOCK_PREF);
-        if (mMenuUnlock != null) {
-            final boolean configDisabled = getResources().getBoolean
-                    (com.android.internal.R.bool.config_disableMenuKeyInLockScreen);
-            mMenuUnlock.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.MENU_UNLOCK_SCREEN, configDisabled ? 0 : 1) == 1);
-        }
-
         // biometric weak liveliness
         mBiometricWeakLiveliness =
                 (CheckBoxPreference) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
 
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
+
+         // visible error pattern
+        mVisibleErrorPattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_ERROR_PATTERN);
+
+        // visible dots
+        mVisibleDots = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_DOTS);
 
         // lock instantly on power key press
         mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
@@ -291,17 +358,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
             PreferenceGroup securityCategory = (PreferenceGroup)
                     root.findPreference(KEY_SECURITY_CATEGORY);
-            if (securityCategory != null && mVisiblePattern != null) {
-                securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
+            if (securityCategory != null && mVisiblePattern != null &&
+                    mVisibleErrorPattern != null && mVisibleDots != null) {
+                securityCategory.removePreference(mVisiblePattern);
+                securityCategory.removePreference(mVisibleErrorPattern);
+                securityCategory.removePreference(mVisibleDots);
             }
-        }
-
-	// Quick Unlock Screen Control
-        mQuickUnlockScreen = (CheckBoxPreference) root
-                .findPreference(LOCKSCREEN_QUICK_UNLOCK_CONTROL);
-        if (mQuickUnlockScreen != null) {
-            mQuickUnlockScreen.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
         }
 
 	// Lock Numpad Random
@@ -311,10 +373,11 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.LOCK_NUMPAD_RANDOM, 0)));
             mLockNumpadRandom.setSummary(mLockNumpadRandom.getEntry());
-            mLockNumpadRandom.setOnPreferenceChangeListener(this);
+            mLockNumpadRandom.setOnPreferenceChangeListener(this);        
+
         }
 
-        // Append the rest of the settings
+        // Append the rest of the settings        
         addPreferencesFromResource(R.xml.security_settings_misc);
 
         // Do not display SIM lock for devices without an Icc card
@@ -513,6 +576,38 @@ public class SecuritySettings extends RestrictedSettingsFragment
         }
     }
 
+    private void updateSlideAfterTimeoutSummary() {
+        // Update summary message with current value
+        long currentTimeout = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, 5000);
+        final CharSequence[] entries = mSlideLockTimeoutDelay.getEntries();
+        final CharSequence[] values = mSlideLockTimeoutDelay.getEntryValues();
+        int best = 0;
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.valueOf(values[i].toString());
+            if (currentTimeout >= timeout) {
+                best = i;
+            }
+        }
+        mSlideLockTimeoutDelay.setSummary(entries[best]);
+    }
+
+    private void updateSlideAfterScreenOffSummary() {
+        // Update summary message with current value
+        long currentTimeout = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, 0);
+        final CharSequence[] entries = mSlideLockScreenOffDelay.getEntries();
+        final CharSequence[] values = mSlideLockScreenOffDelay.getEntryValues();
+        int best = 0;
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.valueOf(values[i].toString());
+            if (currentTimeout >= timeout) {
+                best = i;
+            }
+        }
+        mSlideLockScreenOffDelay.setSummary(entries[best]);
+    }
+
     private void setupLockAfterPreference() {
         // Compatible with pre-Froyo
         long currentTimeout = Settings.Secure.getLong(getContentResolver(),
@@ -544,6 +639,18 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
         mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
+    }
+
+    private void checkPowerInstantLockDependency() {
+        if (mPowerButtonInstantlyLocks != null) {
+            long timeout = Settings.Secure.getLong(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
+            if (timeout == 0) {
+                mPowerButtonInstantlyLocks.setEnabled(false);
+            } else {
+                mPowerButtonInstantlyLocks.setEnabled(true);
+            }
+        }
     }
 
     private void disableUnusableTimeouts(long maxTimeout) {
@@ -590,6 +697,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
         }
         if (mVisiblePattern != null) {
             mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
+        }
+        if (mVisibleErrorPattern != null) {
+            mVisibleErrorPattern.setChecked(lockPatternUtils.isShowErrorPath());
+        }
+        if (mVisibleDots != null) {
+            mVisibleDots.setChecked(lockPatternUtils.isVisibleDotsEnabled());
         }
         if (mPowerButtonInstantlyLocks != null) {
             mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks());
@@ -661,14 +774,15 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
             lockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
+        } else if (KEY_VISIBLE_ERROR_PATTERN.equals(key)) {
+            lockPatternUtils.setShowErrorPath(isToggled(preference));
+        } else if (KEY_VISIBLE_DOTS.equals(key)) {
+            lockPatternUtils.setVisibleDotsEnabled(isToggled(preference));
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
 	} else if (preference == mLockBeforeUnlock) {
             Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.Secure.LOCK_BEFORE_UNLOCK, isToggled(preference) ? 1 : 0);
-	} else if (preference == mMenuUnlock) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.MENU_UNLOCK_SCREEN, isToggled(preference) ? 1 : 0);        
+                    Settings.Secure.LOCK_BEFORE_UNLOCK, isToggled(preference) ? 1 : 0);      
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
@@ -682,10 +796,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
-	} else if (preference == mQuickUnlockScreen) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL,
-                    isToggled(preference) ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -731,12 +841,23 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
             updateLockAfterPreferenceSummary();
+            checkPowerInstantLockDependency();
 	} else if (preference == mLockNumpadRandom) {
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.LOCK_NUMPAD_RANDOM,
                     Integer.valueOf((String) value));
             mLockNumpadRandom.setValue(String.valueOf(value));
             mLockNumpadRandom.setSummary(mLockNumpadRandom.getEntry());
+        } else if (preference == mSlideLockTimeoutDelay) {
+            int slideTimeoutDelay = Integer.valueOf((String) value);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, slideTimeoutDelay);
+            updateSlideAfterTimeoutSummary();
+        } else if (preference == mSlideLockScreenOffDelay) {
+            int slideScreenOffDelay = Integer.valueOf((String) value);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, slideScreenOffDelay);
+            updateSlideAfterScreenOffSummary();
         }
         return true;
     }

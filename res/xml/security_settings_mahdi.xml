@@ -20,11 +20,27 @@
     <PreferenceCategory
         android:key="additional_options"
         android:title="@string/additional_options_title">
+
+        <CheckBoxPreference
+            android:key="lock_before_unlock"
+            android:title="@string/lock_before_unlock_title"
+            android:summary="@string/lock_before_unlock_summary" />
     
-    <CheckBoxPreference
-        android:key="lock_before_unlock"
-        android:title="@string/lock_before_unlock_title"
-        android:summary="@string/lock_before_unlock_summary" />
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="home_unlock_screen"
+            android:title="@string/unlock_home_unlock_title"
+            android:summary="@string/unlock_home_unlock_summary" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="lockscreen_quick_unlock_control"
+            android:title="@string/unlock_quick_unlock_control_title"
+            android:summary="@string/unlock_quick_unlock_control_summary" />
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="lockscreen.vibrate_enabled"
+            android:title="@string/lockscreen_vibrate_enabled_title"
+            android:summary="@string/lockscreen_vibrate_enabled_head"
+            android:defaultValue="true" />
 
     </PreferenceCategory>
 

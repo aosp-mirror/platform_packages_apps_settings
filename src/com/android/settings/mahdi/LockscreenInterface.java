@@ -93,11 +93,9 @@ OnPreferenceChangeListener {
                 
         final int unsecureUnlockMethod = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.LOCKSCREEN_UNSECURE_USED, 1);
-        final int lockBeforeUnlock = Settings.Secure.getInt(getActivity().getContentResolver(),
-                Settings.Secure.LOCK_BEFORE_UNLOCK, 0);
 
         //setup custom lockscreen customize view
-        if ((unsecureUnlockMethod != 1 && lockBeforeUnlock == 0)
+        if ((unsecureUnlockMethod != 1)
                  || unsecureUnlockMethod == -1) {             
         }
                         
