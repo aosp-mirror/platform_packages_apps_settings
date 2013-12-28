@@ -33,6 +33,7 @@ import static com.android.internal.util.mahdi.QSConstants.TILE_NETWORKADB;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NETWORKMODE;
 import static com.android.internal.util.mahdi.QSConstants.TILE_NFC;
 import static com.android.internal.util.mahdi.QSConstants.TILE_PROFILE;
+import static com.android.internal.util.mahdi.QSConstants.TILE_QUICKRECORD;
 import static com.android.internal.util.mahdi.QSConstants.TILE_QUIETHOURS;
 import static com.android.internal.util.mahdi.QSConstants.TILE_RINGER;
 import static com.android.internal.util.mahdi.QSConstants.TILE_SCREENTIMEOUT;
@@ -119,6 +120,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_PROFILE, R.string.title_tile_profile,
                 "com.android.systemui:drawable/ic_qs_profiles"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_QUICKRECORD, R.string.title_tile_quick_record,
+                "com.android.systemui:drawable/ic_qs_quickrecord"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_QUIETHOURS, R.string.title_tile_quiet_hours,
                 "com.android.systemui:drawable/ic_qs_quiet_hours_on"));
