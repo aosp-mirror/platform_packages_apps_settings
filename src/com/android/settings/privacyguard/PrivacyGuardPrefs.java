@@ -53,12 +53,8 @@ public class PrivacyGuardPrefs extends SettingsPreferenceFragment implements
         mPrivacyGuardDefault = (CheckBoxPreference) findPreference(KEY_PRIVACY_GUARD_DEFAULT);
         mPrivacyGuardDefault.setOnPreferenceChangeListener(this);
 
-        try {
-            mPrivacyGuardDefault.setChecked(Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.PRIVACY_GUARD_DEFAULT) == 1);
-        } catch (SettingNotFoundException e) {
-            mPrivacyGuardDefault.setChecked(false);
-        }
+        mPrivacyGuardDefault.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.PRIVACY_GUARD_DEFAULT, 0) == 1);
     }
 
     @Override
