@@ -35,15 +35,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -360,10 +365,42 @@ public class TrustedCredentialsSettings extends Fragment {
     }
 
     private void showCertDialog(final CertHolder certHolder) {
-        View view = certHolder.mSslCert.inflateCertificateView(getActivity());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(com.android.internal.R.string.ssl_certificate);
-        builder.setView(view);
+
+        final ArrayList<View> views =  new ArrayList<View>();
+        final ArrayList<String> titles = new ArrayList<String>();
+        addCertChain(certHolder, views, titles);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item,
+                titles);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = new Spinner(getActivity());
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position,
+                        long id) {
+                    for(int i = 0; i < views.size(); i++) {
+                        views.get(i).setVisibility(i == position ? View.VISIBLE : View.GONE);
+                    }
+                }
+               @Override
+               public void onNothingSelected(AdapterView<?> parent) { }
+            });
+
+        LinearLayout container = new LinearLayout(getActivity());
+        container.setOrientation(LinearLayout.VERTICAL);
+        container.addView(spinner);
+        for (int i = 0; i < views.size(); ++i) {
+            View certificateView = views.get(i);
+            if (i != 0) {
+                certificateView.setVisibility(View.GONE);
+            }
+            container.addView(certificateView);
+        }
+        builder.setView(container);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
@@ -371,6 +408,7 @@ public class TrustedCredentialsSettings extends Fragment {
         });
         final Dialog certDialog = builder.create();
 
+        View view = views.get(0);
         ViewGroup body = (ViewGroup) view.findViewById(com.android.internal.R.id.body);
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         Button removeButton = (Button) inflater.inflate(R.layout.trusted_credential_details,
@@ -407,6 +445,27 @@ public class TrustedCredentialsSettings extends Fragment {
         });
 
         certDialog.show();
+    }
+
+    private void addCertChain(final CertHolder certHolder, final ArrayList<View> views,
+            final ArrayList<String> titles) {
+
+        List<X509Certificate> certificates = null;
+        try {
+            certificates = mStore.getCertificateChain(certHolder.mX509Cert);
+        } catch (CertificateException ex) {
+            return;
+        }
+        for (X509Certificate certificate : certificates) {
+            addCertDetails(certificate, views, titles);
+        }
+    }
+
+    private void addCertDetails(X509Certificate certificate, final ArrayList<View> views,
+            final ArrayList<String> titles) {
+        SslCertificate sslCert = new SslCertificate(certificate);
+        views.add(sslCert.inflateCertificateView(getActivity()));
+        titles.add(sslCert.getIssuedTo().getCName());
     }
 
     @Override
