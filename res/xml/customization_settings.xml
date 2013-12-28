@@ -85,5 +85,13 @@
         android:summary="@string/halo_settings_summary"
         android:icon="@drawable/ic_settings_halo"
         android:fragment="com.android.settings.mahdi.Halo" />
+
+    <PreferenceScreen
+        android:id="@+id/interface_animation"
+        android:title="@string/interface_animation_title"
+        android:summary="@string/interface_animation_summary"
+        android:breadCrumbTitle="@string/interface_animation_title"
+        android:fragment="com.android.settings.mahdi.aokp.AnimationInterfaceSettings"
+        android:icon="@drawable/ic_rom_control_animations" />
        
 </PreferenceScreen>

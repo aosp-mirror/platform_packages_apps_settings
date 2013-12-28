@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  Copyright (C) 2013 The OmniROM Project
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="interface_animation_scroll"
+        android:title="@string/interface_animation_title"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+            android:key="category_system_scroll"
+            android:title="@string/scrolling_title">
+
+        <SwitchPreference
+            android:key="animation_no_scroll"
+            android:persistent="false"
+            android:title="@string/animation_no_scroll_title"
+            android:summaryOff="@string/animation_no_scroll_summary_off"
+            android:summaryOn="@string/animation_no_scroll_summary_on" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="animation_fling_velocity"
+            android:persistent="false"
+            android:title="@string/animation_fling_velocity_title"
+            android:summary="@string/animation_duration_summary"
+            android:max="10000"
+            settings:min="1000"
+            settings:interval="500"
+            settings:unitsLeft=""
+            settings:unitsRight="px/sec"
+            android:defaultValue="8000"
+            android:dependency="animation_no_scroll" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="animation_scroll_friction"
+            android:persistent="false"
+            android:title="@string/animation_scroll_friction_title"
+            android:summary="@string/animation_duration_summary"
+            android:max="1000"
+            settings:min="100"
+            settings:interval="10"
+            settings:unitsLeft=""
+            settings:unitsRight="units"
+            android:defaultValue="150"
+            android:dependency="animation_no_scroll" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="animation_overscroll_distance"
+            android:persistent="false"
+            android:title="@string/animation_overscroll_distance_title"
+            android:summary="@string/animation_duration_summary"
+            android:max="100"
+            settings:min="0"
+            settings:interval="1"
+            settings:unitsLeft=""
+            settings:unitsRight="px"
+            android:defaultValue="0"
+            android:dependency="animation_no_scroll" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="animation_overfling_distance"
+            android:persistent="false"
+            android:title="@string/animation_overfling_distance_title"
+            android:summary="@string/animation_duration_summary"
+            android:max="100"
+            settings:min="0"
+            settings:interval="1"
+            settings:unitsLeft=""
+            settings:unitsRight="px"
+            android:defaultValue="6"
+            android:dependency="animation_no_scroll" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

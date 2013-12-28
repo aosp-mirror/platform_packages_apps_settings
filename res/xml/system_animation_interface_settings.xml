@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  
+  Copyright (C) 2013 The OmniROM Project
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="interface_animation_system"
+        android:title="@string/interface_animation_title"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+            android:key="category_system"
+            android:title="@string/system_animation_title">
+
+        <SwitchPreference
+            android:key="animation_no_override"
+            android:persistent="false"
+            android:title="@string/animation_no_override_title"
+            android:summaryOff="@string/animation_no_override_summary_off"
+            android:summaryOn="@string/animation_no_override_summary_on" />
+
+        <ListPreference
+            android:key="activity_open"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/activity_open_title" />
+
+        <ListPreference
+            android:key="activity_close"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/activity_close_title" />
+
+        <ListPreference
+            android:key="task_open"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/task_open_title" />
+
+        <ListPreference
+            android:key="task_close"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/task_close_title" />
+
+        <ListPreference
+            android:key="task_move_to_front"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/task_move_to_front_title" />
+
+        <ListPreference
+            android:key="task_move_to_back"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/task_move_to_back_title" />
+
+        <ListPreference
+            android:key="wallpaper_open"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/wallpaper_open_title" />
+
+        <ListPreference
+            android:key="wallpaper_close"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/wallpaper_close_title" />
+
+        <ListPreference
+            android:key="wallpaper_intra_open"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/wallpaper_intra_open_title" />
+
+        <ListPreference
+            android:key="wallpaper_intra_close"
+            android:persistent="false"
+            android:entries="@array/anim_controls_entries"
+            android:entryValues="@array/anim_controls_values"
+            android:defaultValue="0"
+            android:title="@string/wallpaper_intra_close_title" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="animation_duration"
+            android:persistent="false"
+            android:title="@string/animation_duration_title"
+            android:summary="@string/animation_duration_summary"
+            android:max="100"
+            settings:min="0"
+            settings:interval="1"
+            settings:unitsLeft=""
+            settings:unitsRight="0ms"
+            android:defaultValue="0" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

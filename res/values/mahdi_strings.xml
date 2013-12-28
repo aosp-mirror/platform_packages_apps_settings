@@ -1303,16 +1303,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="notif_wallpaper_alpha_title">Background transparency</string>
     <string name="notif_alpha_title">Notification transparency</string>
 
-    <!-- Display : Animation options -->
-    <string name="display_category_animation_options_title">Animation options</string>
-    <string name="system_power_crt_mode_title">CRT animation </string>
-    <string name="system_power_crt_mode_dialog_title">CRT animation</string>
-    <string name="system_power_crt_mode_off">Don\'t show</string>
-    <string name="system_power_crt_mode_horizontal">Collapse horizontal</string>
-    <string name="system_power_crt_mode_vertical">Collapse vertical</string>
-    <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
-    <string name="system_power_crt_mode_scale">Scale down</string>
-
     <!-- Double tap to sleep -->
     <string name="double_tap_to_sleep">Double tap to sleep</string>
     <string name="double_tap_to_sleep_summary">If this option is enabled you can put the device to sleep by double tapping the statusbar</string>
@@ -1394,4 +1384,115 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="app_ops_reset_counters">Reset allow/deny counters</string>
     <string name="app_ops_reset_confirm_title">Confirm counters reset</string>
     <string name="app_ops_reset_confirm_mesg">Are you sure you wish to reset AppOps counters ?</string>
+
+    <!-- Screen off animation options -->
+    <string name="system_power_crt_mode_title">CRT animation </string>
+    <string name="system_power_crt_mode_dialog_title">CRT animation</string>
+    <string name="system_power_crt_mode_off">Don\'t show</string>
+    <string name="system_power_crt_mode_horizontal">Collapse horizontal</string>
+    <string name="system_power_crt_mode_vertical">Collapse vertical</string>
+    <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
+    <string name="system_power_crt_mode_scale">Scale down</string>
+
+    <!-- Animation Control -->
+    <string name="interface_animation_title">Animation Control</string>
+    <string name="interface_animation_summary">Choose alternative animations for System, Listview, Scroll and Keyboard</string>
+
+    <!-- ListView animation -->
+    <string name="system_animation_title">System</string>
+    <string name="system_animation_summary">View or change system animations</string>
+    <string name="listview_title">ListView</string>
+    <string name="listview_summary">View or change listview animations</string>
+    <string name="listview_animation_title">ListView Animation</string>
+    <string name="listview_off">Off</string>
+    <string name="listview_wave_left">Wave (Left)</string>
+    <string name="listview_wave_right">Wave (Right)</string>
+    <string name="listview_alpha">Alpha</string>
+    <string name="listview_scale">Scale</string>
+    <string name="listview_stack_top">Stack (Top)</string>
+    <string name="listview_stack_bottom">Stack (Bottom)</string>
+    <string name="listview_unfold">Unfold</string>
+    <string name="listview_fold">Fold</string>
+    <string name="listview_translate_left">Translate (Left)</string>
+    <string name="listview_translate_right">Translate (Right)</string>
+    <string name="listview_duration_title">ListView Duration</string>
+    <string name="listview_cache_title">ListView Persistent Cache</string>
+    <string name="listview_cache_none">No Cache</string>
+    <string name="listview_cache_anim">Animation Cache</string>
+    <string name="listview_cache_scroll">Scrolling Cache</string>
+    <string name="listview_cache_all">Animation &amp; Scrolling</string>
+    <string name="listview_blacklist_title">Excluded applications</string>
+    <string name="listview_blacklist_summary">Prevent Apps from animating</string>
+    <string name="listview_test">Test ListView</string>
+    <string name="listview_test_summary">Open Test Dialog with a ListView</string>
+    <string name="listview_test_instructions">Scroll to see changes</string>
+    <string name="listview_test_item">ListView Item</string>
+
+    <!-- ListView interpolator -->
+    <string name="listview_interpolator_title">ListView Interpolator</string>
+    <string name="listview_accelerate_interpolator">Accelerate</string>
+    <string name="listview_decelerate_interpolator">Decelerate</string>
+    <string name="listview_accelerate_decelerate_interpolator">Accelerate and Decelerate</string>
+    <string name="listview_anticipate_interpolator">Anticipate</string>
+    <string name="listview_overshoot_interpolator">Overshoot</string>
+    <string name="listview_anticipate_overshoot_interpolator">Anticipate and Overshoot</string>
+    <string name="listview_bounce_interpolator">Bounce</string>
+    <string name="listview_cycle_interpolator">Cycle</string>
+    <string name="listview_linear_interpolator">Linear</string>
+
+    <!-- Animation Controls -->
+    <string name="animation_settings_reset_message">Reset all animation settings to default?</string>
+    <string name="animation_controls_title">Animation Controls</string>
+    <string name="activity_open_title">Open In-App Activity Animation</string>
+    <string name="activity_close_title">Close In-App Activity Animation</string>
+    <string name="task_open_title">Launch From In App Animation</string>
+    <string name="task_close_title">Return To Previous Animation</string>
+    <string name="task_move_to_front_title">Move To Front Animation</string>
+    <string name="task_move_to_back_title">Move To Back Animation</string>
+    <string name="wallpaper_open_title">Return To Homescreen Animation</string>
+    <string name="wallpaper_close_title">Launch From Homescreen Animation</string>
+    <string name="wallpaper_intra_open_title">Recents Page Open Animation</string>
+    <string name="wallpaper_intra_close_title">Recents Page Close Animation</string>
+    <string name="animation_duration_title">Animation Duration</string>
+    <string name="animation_no_override_title">Prevent App Overrides</string>
+    <string name="animation_no_override_summary_on">Prevent apps from overriding transitions.</string>
+    <string name="animation_no_override_summary_off">Apps can overriding transitions.</string>
+
+    <!-- Animation Strings -->
+    <string name="animation_default">Default</string>
+    <string name="animation_fade">Fade</string>
+    <string name="animation_slide_right">Slide in right</string>
+    <string name="animation_slide_left">Slide in left</string>
+    <string name="animation_slide_right_no_fade">Slide in right (No fade)</string>
+    <string name="animation_slide_left_no_fade">Slide in left (No fade)</string>
+    <string name="animation_slide_up">Slide in bottom</string>
+    <string name="animation_slide_down">Slide in top</string>
+    <string name="animation_translucent">Translucent</string>
+    <string name="animation_grow_shrink">Grow in (Top)</string>
+    <string name="animation_grow_shrink_center">Grow in (Center)</string>
+    <string name="animation_grow_shrink_bottom">Grow in (Bottom)</string>
+    <string name="animation_grow_shrink_left">Grow in (Left)</string>
+    <string name="animation_grow_shrink_right">Grow in (Right)</string>
+    <string name="animation_random">Random</string>
+
+    <!-- Scrolling Animation Controls -->
+    <string name="scrolling_title">Scrolling</string>
+    <string name="scrolling_summary">View or change scrolling animations</string>
+    <string name="animation_fling_velocity_title">Fling Velocity</string>
+    <string name="animation_scroll_friction_title">Scroll Friction</string>
+    <string name="animation_overscroll_distance_title">Overscroll Distance</string>
+    <string name="animation_overfling_distance_title">Overfling Distance</string>
+    <string name="animation_duration_summary">Set duration</string>
+    <string name="animation_no_scroll_title">Customizing scroll</string>
+    <string name="animation_no_scroll_summary_on">Enabled</string>
+    <string name="animation_no_scroll_summary_off">Disabled</string>
+
+    <!-- IME Animation Controls -->
+    <string name="ime_animation_title">Keyboard</string>
+    <string name="ime_animation_summary">View or change keyboard animations</string>
+    <string name="ime_animation_test_title">Test IME Animation Here</string>
+    <string name="ime_enter_animation_title">Enter Animation</string>
+    <string name="ime_exit_animation_title">Exit Animation</string>
+    <string name="ime_interpolator_title">Interpolator</string>
+    <string name="ime_duration_title">IME Duration</string>
 </resources>

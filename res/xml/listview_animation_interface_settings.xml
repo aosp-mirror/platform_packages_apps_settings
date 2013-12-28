@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  
+  Copyright (C) 2013 The OmniROM Project
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="interface_animation_listview"
+        android:title="@string/interface_animation_title"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+            android:key="category_system_listview"
+            android:title="@string/listview_title">
+
+        <ListPreference
+            android:key="listview_animation"
+            android:dialogTitle="@string/listview_animation_title"
+            android:title="@string/listview_animation_title"
+            android:entries="@array/listview_animation_entries"
+            android:entryValues="@array/listview_animation_values"
+            android:persistent="false"
+            android:defaultValue="0" />
+
+         <ListPreference
+            android:key="listview_interpolator"
+            android:dialogTitle="@string/listview_interpolator_title"
+            android:title="@string/listview_interpolator_title"
+            android:entries="@array/listview_interpolator_entries"
+            android:entryValues="@array/listview_interpolator_values"
+            android:persistent="false"
+            android:defaultValue="0" />
+
+         <ListPreference
+            android:key="listview_cache"
+            android:dialogTitle="@string/listview_cache_title"
+            android:title="@string/listview_cache_title"
+            android:entries="@array/listview_cache_entries"
+            android:entryValues="@array/listview_cache_values"
+            android:persistent="false"
+            android:defaultValue="0" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="listview_anim_duration"
+            android:persistent="false"
+            android:title="@string/listview_duration_title"
+            android:summary="@string/animation_duration_summary"
+            android:max="1500"
+            settings:min="100"
+            settings:interval="100"
+            settings:unitsLeft=""
+            settings:unitsRight="ms"
+            android:defaultValue="500" />
+
+        <com.android.settings.mahdi.aokp.TestListView
+            android:summary="@string/listview_test_summary"
+            android:title="@string/listview_test" />
+
+        <com.android.settings.mahdi.lsn.AppMultiSelectListPreference
+            android:key="listview_blacklist"
+            android:persistent="false"
+            android:title="@string/listview_blacklist_title"
+            android:summary="@string/listview_blacklist_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

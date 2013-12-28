@@ -1108,23 +1108,6 @@
         <item>1800000</item>
     </string-array>
 
-    <!-- CRT off animation mode -->
-    <string-array name="entries_system_power_crt_mode">
-        <item>@string/system_power_crt_mode_off</item>
-        <item>@string/system_power_crt_mode_horizontal</item>
-        <item>@string/system_power_crt_mode_vertical</item>
-        <item>@string/system_power_crt_mode_both</item>
-        <item>@string/system_power_crt_mode_scale</item>
-    </string-array>
-
-    <string-array name="values_system_power_crt_mode" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
-
     <!-- Notification hide labels -->
     <string-array name="notification_hide_labels_entries">
         <item>@string/notification_hide_labels_disable</item>
@@ -1297,5 +1280,129 @@
         <item>Media</item>
         <item>Device</item>
         <item>@string/app_ops_categories_bootup</item>
+    </string-array>
+
+    <!-- CRT off animation mode -->
+    <string-array name="entries_system_power_crt_mode">
+        <item>@string/system_power_crt_mode_off</item>
+        <item>@string/system_power_crt_mode_horizontal</item>
+        <item>@string/system_power_crt_mode_vertical</item>
+        <item>@string/system_power_crt_mode_both</item>
+        <item>@string/system_power_crt_mode_scale</item>
+    </string-array>
+
+    <string-array name="values_system_power_crt_mode" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Listview animation -->
+    <string-array name="listview_animation_entries">
+        <item>@string/listview_off</item>
+        <item>@string/listview_wave_left</item>
+        <item>@string/listview_wave_right</item>
+        <item>@string/listview_scale</item>
+        <item>@string/listview_alpha</item>
+        <item>@string/listview_stack_top</item>
+        <item>@string/listview_stack_bottom</item>
+        <item>@string/listview_unfold</item>
+        <item>@string/listview_fold</item>
+        <item>@string/listview_translate_left</item>
+        <item>@string/listview_translate_right</item>
+    </string-array>
+
+    <string-array name="listview_animation_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+   <!-- Listview animation cache -->
+    <string-array name="listview_cache_entries">
+        <item>@string/listview_cache_none</item>
+        <item>@string/listview_cache_anim</item>
+        <item>@string/listview_cache_scroll</item>
+        <item>@string/listview_cache_all</item>
+    </string-array>
+
+    <string-array name="listview_cache_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Listview Interpolator -->
+    <string-array name="listview_interpolator_entries">
+        <item>@string/listview_off</item>
+        <item>@string/listview_accelerate_interpolator</item>
+        <item>@string/listview_decelerate_interpolator</item>
+        <item>@string/listview_accelerate_decelerate_interpolator</item>
+        <item>@string/listview_anticipate_interpolator</item>
+        <item>@string/listview_overshoot_interpolator</item>
+        <item>@string/listview_anticipate_overshoot_interpolator</item>
+        <item>@string/listview_bounce_interpolator</item>
+        <item>@string/listview_cycle_interpolator</item>
+        <item>@string/listview_linear_interpolator</item>
+    </string-array>
+
+    <string-array name="listview_interpolator_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="anim_controls_entries">
+        <item>@string/animation_default</item>
+        <item>@string/animation_fade</item>
+        <item>@string/animation_slide_right</item>
+        <item>@string/animation_slide_left</item>
+        <item>@string/animation_slide_right_no_fade</item>
+        <item>@string/animation_slide_left_no_fade</item>
+        <item>@string/animation_slide_up</item>
+        <item>@string/animation_slide_down</item>
+        <item>@string/animation_translucent</item>
+        <item>@string/animation_grow_shrink</item>
+        <item>@string/animation_grow_shrink_center</item>
+        <item>@string/animation_grow_shrink_bottom</item>
+        <item>@string/animation_grow_shrink_left</item>
+        <item>@string/animation_grow_shrink_right</item>
+        <item>@string/animation_random</item>
+        </string-array>
+
+    <string-array name="anim_controls_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>-1</item>
     </string-array>
 </resources>

@@ -101,6 +101,10 @@ public class AppMultiSelectListPreference extends DialogPreference {
         persistStringSet(values);
     }
 
+    public void setClearValues() {
+        mValues.clear();
+    }
+
     /**
 * Retrieves the current value of the key.
 */

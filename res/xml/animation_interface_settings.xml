@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--  
+  Copyright (C) 2013 The OmniROM Project
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="interface_animation"
+        android:title="@string/interface_animation_title"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <ListPreference
+        android:key="system_power_crt_mode"
+        android:dialogTitle="@string/system_power_crt_mode_dialog_title"
+        android:title="@string/system_power_crt_mode_title"
+        android:entries="@array/entries_system_power_crt_mode"
+        android:entryValues="@array/values_system_power_crt_mode" />
+
+    <PreferenceScreen
+        android:key="interface_animation_system"
+        android:fragment="com.android.settings.mahdi.aokp.SystemAnimationInterfaceSettings"
+        android:title="@string/system_animation_title"
+        android:summary="@string/system_animation_summary" />
+
+    <PreferenceScreen
+        android:key="interface_animation_listview"
+        android:fragment="com.android.settings.mahdi.aokp.ListViewAnimationInterfaceSettings"
+        android:title="@string/listview_title"
+        android:summary="@string/listview_summary" />
+
+    <PreferenceScreen
+        android:key="interface_animation_scroll"
+        android:fragment="com.android.settings.mahdi.aokp.ScrollAnimationInterfaceSettings"
+        android:title="@string/scrolling_title"
+        android:summary="@string/scrolling_summary" />
+
+    <PreferenceScreen
+        android:key="interface_animation_keyboard"
+        android:fragment="com.android.settings.mahdi.aokp.KeyboardAnimationInterfaceSettings"
+        android:title="@string/ime_animation_title"
+        android:summary="@string/ime_animation_summary" />
+
+</PreferenceScreen>

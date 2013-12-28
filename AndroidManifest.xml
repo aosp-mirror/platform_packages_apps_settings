@@ -2023,6 +2023,21 @@
                 android:resource="@id/security_settings" />
         </activity>
 
+        <activity android:name="Settings$AnimationInterfaceSettingsActivity"
+                android:label="@string/interface_animation_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.aokp.AnimationInterfaceSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/interface_animation" />
+        </activity>
+
         <!-- Mahdi-Rom activities End -->
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
