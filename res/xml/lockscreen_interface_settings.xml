@@ -27,6 +27,13 @@
             android:summary="@string/screen_security_summary">                        
         </PreferenceScreen>
 
+	<PreferenceScreen
+            android:key="lockscreen_notifications"
+            android:fragment="com.android.settings.mahdi.lockscreennotifications.LockscreenNotifications"
+            android:title="@string/lockscreen_notifications"
+            android:summary="@string/lockscreen_notifications_summary">
+        </PreferenceScreen>
+
     </PreferenceCategory>
 
     <PreferenceCategory
