@@ -17,56 +17,56 @@
 */
 -->
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:paddingTop="8dip"
-    android:paddingBottom="8dip"
-    android:columnCount="3">
+    android:paddingBottom="8dip">
 
     <ImageView
         android:id="@+id/op_icon"
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
-        android:layout_column="0"
-        android:layout_row="0"
-        android:layout_rowSpan="2"
         android:layout_marginEnd="8dip"
         android:scaleType="centerInside"
         android:contentDescription="@null" />
 
-    <TextView
-        android:id="@+id/op_name"
-        android:layout_column="1"
-        android:layout_row="0"
-        android:layout_gravity="fill_horizontal"
-        android:layout_marginTop="2dip"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textAlignment="viewStart" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/op_time"
-        android:layout_column="1"
-        android:layout_row="1"
-        android:layout_gravity="fill_horizontal|top"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAlignment="viewStart" />
+        <TextView
+            android:id="@+id/op_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginTop="2dip"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/op_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal|top"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
 
     <Switch android:id="@+id/switchWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="8dip"
-        android:layout_column="2"
-        android:layout_row="0"
-        android:layout_rowSpan="2"
-        android:padding="8dip"
         android:focusable="false"
         android:clickable="true" />
 
-</GridLayout>
+</LinearLayout>
