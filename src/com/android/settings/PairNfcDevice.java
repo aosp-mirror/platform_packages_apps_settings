@@ -151,7 +151,7 @@ public class PairNfcDevice extends Activity {
             public void run() {
                 finish();
             }
-        }, 4000);
+        }, 1000);
     }
 
     private void setErrorMode(int errorMsgResourceId) {
