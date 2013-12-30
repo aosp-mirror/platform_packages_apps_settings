@@ -49,8 +49,8 @@ public class IconPicker {
     public static final String PACKAGE_NAME = "package_name";
 
     public static final int REQUEST_PICK_SYSTEM = 0;
-    public static final int REQUEST_PICK_GALLERY = 1;
-    public static final int REQUEST_PICK_ICON_PACK = 2;
+    public static final int REQUEST_PICK_ICON_PACK = 1;
+    public static final int REQUEST_PICK_GALLERY = 2;
 
     private Activity mParent;
     private Resources mResources;
