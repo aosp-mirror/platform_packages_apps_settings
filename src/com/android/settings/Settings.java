@@ -80,7 +80,6 @@ import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.mahdi.BatteryIconStyle;
 import com.android.settings.mahdi.DisplayRotation;
 import com.android.settings.mahdi.NavbarSettings;
 import com.android.settings.mahdi.QuietHours;
@@ -362,8 +361,7 @@ public class Settings extends PreferenceActivity
         KeyboardLayoutPickerFragment.class.getName(),
         BlacklistSettings.class.getName(),
 	ApnSettings.class.getName(),
-	QuietHours.class.getName(),
-        BatteryIconStyle.class.getName(),
+	QuietHours.class.getName(),        
         DisplayRotation.class.getName(),
         ProfilesSettings.class.getName(),
         ProfileConfig.class.getName(),
@@ -1170,8 +1168,7 @@ public class Settings extends PreferenceActivity
     public static class ApnSettingsActivity extends Settings { /* empty */ }
     public static class ApnEditorActivity extends Settings { /* empty */ }
     public static class CustomizationSettingsActivity extends Settings { /* empty */ }
-    public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
-    public static class BatteryIconStyleSettingsActivity extends Settings { /* empty */ }
+    public static class QuietHoursSettingsActivity extends Settings { /* empty */ }    
     public static class DisplayRotationSettingsActivity extends Settings { /* empty */ }
     public static class ProfilesSettingsActivity extends Settings { /* empty */ }
     public static class NavbarSettingsActivity extends Settings { /* empty */ }    
