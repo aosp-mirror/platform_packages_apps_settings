@@ -17,9 +17,13 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.Handler;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.android.settings.R;
 import com.google.android.collect.Lists;
@@ -31,28 +35,63 @@ import java.util.List;
  * Creates a percentage bar chart inside a preference.
  */
 public class UsageBarPreference extends Preference {
+
+    public interface OnRequestMediaRescanListener {
+        void onRequestMediaRescan();
+    }
+
+    private ImageView mRescanMedia = null;
+    private ProgressBar mRescanMediaWaiting = null;
     private PercentageBarChart mChart = null;
+
+    private boolean mAllowMediaScan;
+
+    private OnRequestMediaRescanListener mOnRequestMediaRescanListener;
 
     private final List<PercentageBarChart.Entry> mEntries = Lists.newArrayList();
 
+    private Handler mHandler;
+
     public UsageBarPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setLayoutResource(R.layout.preference_memoryusage);
+        init();
     }
 
     public UsageBarPreference(Context context) {
         super(context);
-        setLayoutResource(R.layout.preference_memoryusage);
+        init();
     }
 
     public UsageBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+    }
+
+    private void init() {
         setLayoutResource(R.layout.preference_memoryusage);
+        mHandler = new Handler();
+        mAllowMediaScan = false;
     }
 
     public void addEntry(int order, float percentage, int color) {
         mEntries.add(PercentageBarChart.createEntry(order, percentage, color));
         Collections.sort(mEntries);
+    }
+
+    protected void setOnRequestMediaRescanListener(OnRequestMediaRescanListener listener) {
+        mOnRequestMediaRescanListener = listener;
+    }
+
+    protected void setAllowMediaScan(boolean allow) {
+        mAllowMediaScan = allow;
+        notifyScanCompleted();
+    }
+
+    protected void notifyScanCompleted() {
+        if (mRescanMedia != null) {
+            mRescanMedia.setVisibility(mAllowMediaScan ? View.VISIBLE : View.INVISIBLE);
+            mRescanMediaWaiting.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -61,6 +100,27 @@ public class UsageBarPreference extends Preference {
 
         mChart = (PercentageBarChart) view.findViewById(R.id.percentage_bar_chart);
         mChart.setEntries(mEntries);
+
+        mRescanMediaWaiting = (ProgressBar) view.findViewById(R.id.memory_usage_rescan_media_waiting);
+
+        mRescanMedia = (ImageView) view.findViewById(R.id.memory_usage_rescan_media);
+        mRescanMedia.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnRequestMediaRescanListener != null) {
+                    mRescanMedia.setVisibility(View.GONE);
+                    mRescanMediaWaiting.setVisibility(View.VISIBLE);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mOnRequestMediaRescanListener.onRequestMediaRescan();
+                        }
+                    });
+                }
+            }
+        });
+
+        notifyScanCompleted();
     }
 
     public void commit() {
