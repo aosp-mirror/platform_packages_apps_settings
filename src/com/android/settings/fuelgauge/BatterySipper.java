@@ -132,10 +132,12 @@ public class BatterySipper implements Comparable<BatterySipper> {
         final String uidString = Integer.toString(uid);
         if (sUidCache.containsKey(uidString)) {
             UidToDetail utd = sUidCache.get(uidString);
-            defaultPackageName = utd.packageName;
-            name = utd.name;
-            icon = utd.icon;
-            return;
+            if (utd != null) {
+                defaultPackageName = utd.packageName;
+                name = utd.name;
+                icon = utd.icon;
+                return;
+            }
         }
         PackageManager pm = mContext.getPackageManager();
         String[] packages = pm.getPackagesForUid(uid);
