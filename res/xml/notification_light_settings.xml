@@ -25,6 +25,11 @@
             android:key="pulse_enabled"
             android:title="@string/notification_pulse_title" />
 
+        <CheckBoxPreference
+            android:key="screenon_enabled"
+            android:title="@string/notification_light_screenon_title"
+            android:defaultValue="false" />
+
         <com.android.settings.mahdi.notificationlight.ApplicationLightPreference
             android:key="default"
             android:title="@string/default_string"
