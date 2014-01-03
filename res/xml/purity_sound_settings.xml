@@ -31,6 +31,13 @@
         android:summary="@string/volbtn_music_controls_summary"
         android:persistent="false" />
 
+    <CheckBoxPreference
+        android:key="volume_keys_control_media_stream"
+        android:title="@string/volume_keys_control_media_stream"
+        android:summary="@string/volume_keys_control_media_stream_summary"
+        android:defaultValue="false"
+        android:persistent="false" />
+
     <PreferenceCategory
             android:title="@string/power_notifications_category_title"/>
 

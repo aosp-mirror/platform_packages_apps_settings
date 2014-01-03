@@ -51,6 +51,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_POWER_NOTIFICATIONS = "power_notifications";
     private static final String KEY_POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
     private static final String KEY_POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
+    private static final String KEY_VOL_MEDIA = "volume_keys_control_media_stream";
 
    // Request code for power notification ringtone picker
     private static final int REQUEST_CODE_POWER_NOTIFICATIONS_RINGTONE = 1;
@@ -63,6 +64,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mPowerSounds;
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
+    private CheckBoxPreference mVolumeKeysControlMedia;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,6 +121,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 mPowerSoundsRingtone.setSummary(ringtone.getTitle(getActivity()));
             }
         }
+
+        mVolumeKeysControlMedia = (CheckBoxPreference) findPreference(KEY_VOL_MEDIA);
+        mVolumeKeysControlMedia.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.VOLUME_KEYS_CONTROL_MEDIA_STREAM, 0) != 0);
+        mVolumeKeysControlMedia.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -166,6 +173,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     Settings.Global.POWER_NOTIFICATIONS_VIBRATE,
                     (Boolean) objValue ? 1 : 0);
 
+        }
+        if (KEY_VOL_MEDIA.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.VOLUME_KEYS_CONTROL_MEDIA_STREAM,
+                    (Boolean) objValue ? 1 : 0);
         }
         return true;
     }
