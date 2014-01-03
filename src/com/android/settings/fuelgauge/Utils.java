@@ -44,15 +44,15 @@ public class Utils {
         }
 
         int days = 0, hours = 0, minutes = 0;
-        if (seconds > SECONDS_PER_DAY) {
+        if (seconds >= SECONDS_PER_DAY) {
             days = seconds / SECONDS_PER_DAY;
             seconds -= days * SECONDS_PER_DAY;
         }
-        if (seconds > SECONDS_PER_HOUR) {
+        if (seconds >= SECONDS_PER_HOUR) {
             hours = seconds / SECONDS_PER_HOUR;
             seconds -= hours * SECONDS_PER_HOUR;
         }
-        if (seconds > SECONDS_PER_MINUTE) {
+        if (seconds >= SECONDS_PER_MINUTE) {
             minutes = seconds / SECONDS_PER_MINUTE;
             seconds -= minutes * SECONDS_PER_MINUTE;
         }
