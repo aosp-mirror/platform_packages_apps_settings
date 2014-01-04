@@ -39,6 +39,7 @@ import com.android.internal.util.mahdi.QSUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.mahdi.SeekBarPreference;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
@@ -48,6 +49,10 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
 
     private static final String TAG = "QuickSettingsTilesStyle";
 
+    private static final String PREF_TILES_PER_ROW =
+            "tiles_per_row";
+    private static final String PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE =
+            "tiles_per_row_duplicate_landscape";
     private static final String PREF_QUICK_TILES_BG_COLOR =
             "quick_tiles_bg_color";
     private static final String PREF_QUICK_TILES_BG_PRESSED_COLOR =
@@ -65,6 +70,8 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
 
     private static final int DLG_RESET = 0;
 
+    private ListPreference mTilesPerRow;
+    private CheckBoxPreference mDuplicateColumnsLandscape;
     private ColorPickerPreference mQuickTilesBgColor;
     private ColorPickerPreference mQuickTilesBgPressedColor;
     private ColorPickerPreference mQuickTilesTextColor;
@@ -158,6 +165,27 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
         mQsTileAlpha.setProperty(Settings.System.QUICK_TILES_BG_ALPHA);
         mQsTileAlpha.setOnPreferenceChangeListener(this);
 
+        mTilesPerRow = (ListPreference) prefs.findPreference(PREF_TILES_PER_ROW);
+        int tilesPerRow = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.QUICK_TILES_PER_ROW, 3);
+        mTilesPerRow.setValue(String.valueOf(tilesPerRow));
+        mTilesPerRow.setSummary(mTilesPerRow.getEntry());
+        mTilesPerRow.setOnPreferenceChangeListener(this);
+
+        mDuplicateColumnsLandscape =
+            (CheckBoxPreference) findPreference(PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE);
+        mDuplicateColumnsLandscape.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
+                Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE, 1) == 1);
+        mDuplicateColumnsLandscape.setOnPreferenceChangeListener(this);
+
+        PreferenceCategory additionalOptions =
+            (PreferenceCategory) findPreference(PREF_ADDITIONAL_OPTIONS);
+        if (!Utils.isPhone(getActivity())) {
+            additionalOptions.removePreference(
+                findPreference(PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE));
+        }
+
         setHasOptionsMenu(true);
         mCheckPreferences = true;
         return prefs;
@@ -186,7 +214,20 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
         if (!mCheckPreferences) {
             return false;
         }
-        if (preference == mQuickTilesBgColor) {
+        if (preference == mTilesPerRow) {
+            int index = mTilesPerRow.findIndexOfValue((String) newValue);
+            int value = Integer.valueOf((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.QUICK_TILES_PER_ROW,
+                    value);
+            mTilesPerRow.setSummary(mTilesPerRow.getEntries()[index]);
+            return true;
+        } else if (preference == mDuplicateColumnsLandscape) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE,
+                    (Boolean) newValue ? 1 : 0);
+            return true;
+        } else if (preference == mQuickTilesBgColor) {
             String hex = ColorPickerPreference.convertToARGB(
                     Integer.valueOf(String.valueOf(newValue)));
             preference.setSummary(hex);
@@ -278,5 +319,4 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
 
         }
     }
-
 }

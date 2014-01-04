@@ -21,10 +21,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +65,9 @@ public class QuickSettingsTiles extends Fragment {
     private TileAdapter mTileAdapter;
     private boolean mConfigRibbon;
 
+    private int mTileTextSize;
+    private int mTileTextPadding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mDragView = new DraggableGridView(getActivity());
@@ -88,17 +96,27 @@ public class QuickSettingsTiles extends Fragment {
                     FrameLayout.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL);
             mDragView.setLayoutParams(params);
         }
-        int cellHeight = getItemFromSystemUi("quick_settings_cell_height", "dimen");
-        if (cellHeight != 0) {
-            mDragView.setCellHeight(cellHeight);
-        }
         int cellGap = getItemFromSystemUi("quick_settings_cell_gap", "dimen");
         if (cellGap != 0) {
             mDragView.setCellGap(cellGap);
         }
-        int columnCount = getItemFromSystemUi("quick_settings_num_columns", "integer");
+        int columnCount = Settings.System.getIntForUser(getActivity().getContentResolver(),
+                Settings.System.QUICK_TILES_PER_ROW, 3,
+                UserHandle.USER_CURRENT);
+        // do not allow duplication on tablets or any device which do not have
+        // flipsettings
+        boolean duplicateOnLandScape = Settings.System.getIntForUser(
+                getActivity().getContentResolver(),
+                Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE,
+                1, UserHandle.USER_CURRENT) == 1
+                        && mSystemUiResources.getBoolean(mSystemUiResources.getIdentifier(
+                        "com.android.systemui:bool/config_hasFlipSettingsPanel", null, null))
+                        && isLandscape();
+
         if (columnCount != 0) {
-            mDragView.setColumnCount(columnCount);
+            mDragView.setColumnCount(duplicateOnLandScape ? (columnCount * 2) : columnCount);
+            mTileTextSize = mDragView.getTileTextSize(columnCount);
+            mTileTextPadding = mDragView.getTileTextPadding(columnCount);
         }
         mTileAdapter = new TileAdapter(getActivity(), mConfigRibbon);
         return mDragView;
@@ -147,7 +165,9 @@ public class QuickSettingsTiles extends Fragment {
             tileView = (View) mInflater.inflate(R.layout.quick_settings_tile_generic, null, false);
             final TextView name = (TextView) tileView.findViewById(R.id.text);
             final ImageView iv = (ImageView) tileView.findViewById(R.id.image);
-            name.setText(titleId);            
+            name.setText(titleId);
+            name.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTileTextSize);
+            name.setPadding(0, mTileTextPadding, 0, 0);            
             iv.setImageDrawable(getResources().getDrawable(iconRegId));
         } else {
             final boolean isUserTile =
@@ -164,13 +184,16 @@ public class QuickSettingsTiles extends Fragment {
                             ImageView iv = (ImageView) tileView.findViewById(R.id.user_imageview);
                             TextView tv = (TextView) tileView.findViewById(R.id.tile_textview);
                             tv.setText(titleId);
+                            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTileTextSize);
                             iv.setImageDrawable(d);
                         } else {
                             tileView = (View) mInflater.inflate(
                                     R.layout.quick_settings_tile_generic, null, false);
                             final TextView name = (TextView) tileView.findViewById(R.id.text);
                             final ImageView iv = (ImageView) tileView.findViewById(R.id.image);
-                            name.setText(titleId);                            
+                            name.setText(titleId);
+                            name.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTileTextSize);
+                            name.setPadding(0, mTileTextPadding, 0, 0);                           
                             iv.setImageDrawable(d);
                         }
                     } catch (Exception e) {
@@ -276,6 +299,13 @@ public class QuickSettingsTiles extends Fragment {
         });
         alert.setNegativeButton(R.string.cancel, null);
         alert.create().show();
+    }
+
+    private boolean isLandscape() {
+        final boolean isLandscape =
+            Resources.getSystem().getConfiguration().orientation
+                    == Configuration.ORIENTATION_LANDSCAPE;
+        return isLandscape;
     }
 
     private static class TileAdapter extends ArrayAdapter<String> {
