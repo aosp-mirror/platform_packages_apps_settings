@@ -145,7 +145,7 @@ public class LightSettingsDialog extends AlertDialog implements
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            mPulseSpeedOff.setEnabled(getPulseSpeedOn() != 1);
+            mPulseSpeedOff.setEnabled(mPulseSpeedOn.isEnabled() && getPulseSpeedOn() != 1);
         }
 
         @Override
