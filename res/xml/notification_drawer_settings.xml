@@ -63,6 +63,12 @@
          android:title="@string/notification_background_title"
          android:summary="@string/notification_background_summary" />
 
+    <CheckBoxPreference
+            android:key="custom_status_bar_header"
+            android:title="@string/custom_statusbar_header_title"
+            android:summary="@string/custom_statusbar_header_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
