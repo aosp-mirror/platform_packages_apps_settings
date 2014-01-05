@@ -70,6 +70,28 @@
     <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <permission
+        android:name="android.permission.REQUEST_SUPERUSER"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="android.permission.REPORT_SUPERUSER"
+        android:protectionLevel="signature" />
+
+    <permission-group
+        android:name="android.permission-group.SUPERUSER"
+        android:description="@string/superuser_description_more"
+        android:icon="@drawable/ic_action_permission"
+        android:label="@string/superuser"
+        android:priority="10000" />
+
+    <permission
+        android:name="android.permission.ACCESS_SUPERUSER"
+        android:description="@string/superuser_description_more"
+        android:icon="@drawable/ic_action_permission"
+        android:label="@string/superuser_description"
+        android:logo="@drawable/ic_action_permission"
+        android:permissionGroup="android.permission-group.SUPERUSER"
+        android:protectionLevel="dangerous" />
 
     <application android:label="@string/settings_label"
             android:icon="@mipmap/ic_launcher_settings"
@@ -78,6 +100,63 @@
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true">
+
+        <!-- Only system/su can open this activity -->
+        <!-- This activity will then call the MultitaskSuRequestActivity to create a new task stack -->
+        <activity
+            android:name="com.koushikdutta.superuser.RequestActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/superuser"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true"
+            android:permission="android.permission.REQUEST_SUPERUSER"
+            android:process=":superuser"
+            android:taskAffinity="com.android.settings.superuser"
+            android:theme="@style/RequestThemeDark" />
+        <!-- Only system/su can open this activity -->
+        <!-- This is activity is started in multiuser mode when the user invoking su -->
+        <!-- is not the device owner (user id 0). -->
+        <activity
+            android:name="com.koushikdutta.superuser.NotifyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/superuser"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true"
+            android:permission="android.permission.REQUEST_SUPERUSER"
+            android:process=":superuser"
+            android:taskAffinity="com.android.settings.superuser"
+            android:theme="@style/RequestThemeDark" />
+
+        <!-- Multiple instances of this activity can be running for multiple su requests -->
+        <activity
+            android:name="com.koushikdutta.superuser.MultitaskSuRequestActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:label="@string/request"
+            android:process=":superuser"
+            android:taskAffinity="com.android.settings.superuser"
+            android:theme="@style/RequestThemeDark" />
+
+        <receiver
+            android:name="com.koushikdutta.superuser.SuReceiver"
+            android:permission="android.permission.REPORT_SUPERUSER" />
+
+        <receiver
+            android:name="com.koushikdutta.superuser.PackageChangeReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
 
         <!-- Settings -->
 
@@ -1093,7 +1172,7 @@
             android:excludeFromRecents="true"
         />
 
-	<activity android:name="ChooseLockPatternSize" android:exported="false"/>
+        <activity android:name="ChooseLockPatternSize" android:exported="false"/>
 
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
@@ -1149,7 +1228,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.dir/telephony-carrier" />
             </intent-filter>
-	    <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.ApnEditor" />
         </activity>
 
@@ -1624,7 +1703,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" /> />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.CryptKeeperSettings" />

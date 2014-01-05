@@ -231,23 +231,12 @@
         android:title="@string/customization_settings_title"
         android:icon="@drawable/ic_settings_mahdi" />
 
-    <!-- SuperSU -->
-    <header
-        android:id="@+id/supersu_settings"
-        android:icon="@drawable/ic_settings_supersu"
-        android:title="@string/supersu_title">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="eu.chainfire.supersu"
-            android:targetClass="eu.chainfire.supersu.MainActivity" />
-    </header>
-
     <!-- Performance Controls -->
     <header
         android:id="@+id/performance_controls"
         android:fragment="com.brewcrewfoo.performance.activities.MainActivity"
         android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings" />    
+        android:title="@string/performance_settings" />
 
     <!-- Development -->
     <header
@@ -255,6 +244,13 @@
         android:fragment="com.android.settings.DevelopmentSettings"
         android:icon="@drawable/ic_settings_development"
         android:title="@string/development_settings_title" />
+
+    <!-- Superuser -->
+    <header
+        android:id="@+id/superuser"
+        android:fragment="com.koushikdutta.superuser.PolicyNativeFragment"
+        android:icon="@drawable/ic_action_permission"
+        android:title="@string/superuser" />
 
     <!-- About Device -->
     <header
