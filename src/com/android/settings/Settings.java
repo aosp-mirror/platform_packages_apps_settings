@@ -365,6 +365,7 @@ public class Settings extends PreferenceActivity
         CustomizationSettings.class.getName(),
         DisplayRotation.class.getName(),
         com.brewcrewfoo.performance.activities.MainActivity.class.getName(),
+        HomeSettings.class.getName(),
         ProfilesSettings.class.getName(),
         ProfileConfig.class.getName(),
         NavbarSettings.class.getName()        
