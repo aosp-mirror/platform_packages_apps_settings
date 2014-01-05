@@ -41,9 +41,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
     private static final String KEY_STATUS_BAR_CLOCK = "clock_style_pref";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    private static final String STATUS_BAR_TRAFFIC = "status_bar_traffic";
 
     private PreferenceScreen mClockStyle;
     private CheckBoxPreference mStatusBarBrightnessControl;
+    private CheckBoxPreference mStatusBarTraffic;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         addPreferencesFromResource(R.xml.status_bar);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+        ContentResolver resolver = getActivity().getContentResolver();
 
         // Start observing for changes on auto brightness
         StatusBarBrightnessChangedObserver statusBarBrightnessChangedObserver =
@@ -69,16 +72,33 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                             Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
         mStatusBarBrightnessControl.setOnPreferenceChangeListener(this);
 
+        mStatusBarTraffic = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC);
+        int intState = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, 0);
+        intState = setStatusBarTrafficSummary(intState);
+        mStatusBarTraffic.setChecked(intState > 0);
+        mStatusBarTraffic.setOnPreferenceChangeListener(this);
+
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mStatusBarBrightnessControl) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL,
-                    (Boolean) newValue ? 1 : 0);
-            return true;
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL,
+                    value ? 1 : 0);        
+        } else if (preference == mStatusBarTraffic) {
+
+            // Increment the state and then update the label
+            int intState = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, 0);
+            intState++;
+            intState = setStatusBarTrafficSummary(intState);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, intState);
+            if (intState > 1) {return false;}        
+        } else {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -134,4 +154,16 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         }
     }
 
+    private int setStatusBarTrafficSummary(int intState) {
+        // These states must match com.android.systemui.statusbar.policy.Traffic
+        if (intState == 1) {
+            mStatusBarTraffic.setSummary(R.string.show_network_speed_bits);
+        } else if (intState == 2) {
+            mStatusBarTraffic.setSummary(R.string.show_network_speed_bytes);
+        } else {
+            mStatusBarTraffic.setSummary(R.string.show_network_speed_summary);
+            return 0;
+        }
+        return intState;
+    }
 }

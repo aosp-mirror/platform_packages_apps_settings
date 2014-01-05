@@ -28,11 +28,11 @@
             android:summary="@string/status_bar_toggle_brightness_summary"
             android:defaultValue="false" />
 
-	<com.android.settings.mahdi.SystemSettingCheckBoxPreference
-	    android:key="status_bar_traffic"
-	    android:title="@string/show_network_speed"
-	    android:summary="@string/show_network_speed_summary"
-	    android:defaultValue="true" />
+	<CheckBoxPreference
+                android:key="status_bar_traffic"
+                android:title="@string/show_network_speed"
+                android:summary="@string/show_network_speed_summary"
+                android:persistent="false" />
 
         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
 	    android:key="double_tap_sleep_gesture"
