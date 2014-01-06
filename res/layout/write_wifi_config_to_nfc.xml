@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            style="@style/wifi_section">
+
+    <LinearLayout android:id="@+id/password_layout"
+                  style="@style/wifi_item"
+                  android:padding="8dip"
+                  android:orientation="vertical" >
+
+        <TextView
+                android:id="@+id/password_label"
+                android:layout_gravity="fill"
+                style="@style/wifi_item_label"
+                android:text="@string/wifi_password" />
+
+        <EditText android:id="@+id/password"
+                  style="@style/wifi_item_edit_content"
+                  android:singleLine="true"
+                  android:password="true" />
+
+        <TextView
+                style="@style/wifi_item_label" />
+
+        <CheckBox android:id="@+id/show_password"
+                  style="@style/wifi_item_content"
+                  android:textSize="14sp"
+                  android:text="@string/wifi_show_password" />
+
+    </LinearLayout>
+
+
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:padding="8dip"
+            android:visibility="gone"
+            style="@android:style/Widget.ProgressBar.Large" />
+
+</LinearLayout>

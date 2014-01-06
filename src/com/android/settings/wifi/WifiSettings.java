@@ -94,6 +94,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class WifiSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, Indexable  {
+
     private static final String TAG = "WifiSettings";
     private static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
@@ -104,12 +105,14 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
+    private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
 
     private static final int WIFI_DIALOG_ID = 1;
     private static final int WPS_PBC_DIALOG_ID = 2;
     private static final int WPS_PIN_DIALOG_ID = 3;
     private static final int WIFI_SKIPPED_DIALOG_ID = 4;
     private static final int WIFI_AND_MOBILE_SKIPPED_DIALOG_ID = 5;
+    private static final int WRITE_NFC_DIALOG_ID = 6;
 
     // Combo scans can take 5-6s to complete - set to 10s.
     private static final int WIFI_RESCAN_INTERVAL_MS = 10 * 1000;
@@ -141,6 +144,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private final AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private WifiDialog mDialog;
+    private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
     private TextView mEmptyView;
 
@@ -205,13 +209,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         // Set this flag early, as it's needed by getHelpResource(), which is called by super
         mSetupWizardMode = getActivity().getIntent().getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
-
         super.onCreate(icicle);
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
         if (mSetupWizardMode) {
             View view = inflater.inflate(R.layout.setup_preference, container, false);
             View other = view.findViewById(R.id.other_network);
@@ -471,6 +475,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.pause();
         }
+
         getActivity().unregisterReceiver(mReceiver);
         mScanner.pause();
     }
@@ -599,6 +604,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                     menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
                     menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
+
+                    if (mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {
+                        // Only allow writing of NFC tags for password-protected networks.
+                        menu.add(Menu.NONE, MENU_ID_WRITE_NFC, 0, "Write to NFC Tag");
+                    }
                 }
             }
         }
@@ -632,6 +642,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                 showDialog(mSelectedAccessPoint, true);
                 return true;
             }
+            case MENU_ID_WRITE_NFC:
+                showDialog(WRITE_NFC_DIALOG_ID);
+                return true;
+
         }
         return super.onContextItemSelected(item);
     }
@@ -681,7 +695,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                         mAccessPointSavedState = null;
                     }
                 }
-                // If it's still null, fine, it's for Add Network
+                // If it's null, fine, it's for Add Network
                 mSelectedAccessPoint = ap;
                 mDialog = new WifiDialog(getActivity(), this, ap, mDlgEdit);
                 return mDialog;
@@ -727,6 +741,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                                 }
                             })
                             .create();
+            case WRITE_NFC_DIALOG_ID:
+                mWifiToNfcDialog =new WriteWifiConfigToNfcDialog(
+                        getActivity(), mSelectedAccessPoint, mWifiManager);
+                return mWifiToNfcDialog;
 
         }
         return super.onCreateDialog(dialogId);
@@ -991,8 +1009,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 mRetry = 0;
                 Activity activity = getActivity();
                 if (activity != null) {
-                    Toast.makeText(activity, R.string.wifi_fail_to_scan,
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, R.string.wifi_fail_to_scan, Toast.LENGTH_LONG).show();
                 }
                 return;
             }
