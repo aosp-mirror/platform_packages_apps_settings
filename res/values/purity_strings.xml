@@ -115,10 +115,11 @@
    <!-- StatusBar Battery Settings -->
     <string name="battery_icon_title">Battery icon</string>
     <string name="status_bar_battery_title">Battery status style</string>
-    <string name="status_bar_style_icon">Icon</string>
+    <string name="status_bar_style_icon_portrait">Icon portrait</string>
+    <string name="status_bar_style_icon_landscape">Icon landscape</string>
+    <string name="status_bar_style_circle">Circle</string>
     <string name="status_bar_style_hidden">Hidden</string>
-    <string name="status_bar_battery_status_circle">Circle</string>
-    <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
+    <string name="status_bar_battery_show_percent_title">Show battery status percent</string>
 
     <!-- Screen off animation -->
     <string name="screen_off_animation">Screen-off animation</string>
@@ -203,6 +204,7 @@
     <string name="dynamic_tiles_note_summary">Dynamic tiles are not always visible and will only show up if triggered by a system event</string>
     <string name="title_dynamic_alarm">Alarm clock</string>
     <string name="title_dynamic_bugreport">Bug report</string>
+    <string name="title_dynamic_dock_battery">Dock battery</string>
     <string name="title_dynamic_ime">IME changer</string>
     <string name="title_dynamic_usbtether">USB Tether</string>
     <string name="title_dynamic_wifi">Wi-Fi display</string>
@@ -451,4 +453,12 @@
     <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
     <string name="custom_runtime_warning_title">Warning</string>
     <string name="custom_runtime_warning_message">ART is not supported by Purity. This setting is included for experimentation only and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_dock_ac">(DockAC)</string>
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_dock_usb">(DockUSB)</string>
+
+    <!-- Menu label for reset the battery stats -->
+    <string name="menu_stats_reset">Reset</string>
 </resources>

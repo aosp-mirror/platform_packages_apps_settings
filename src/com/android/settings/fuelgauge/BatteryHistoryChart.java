@@ -22,9 +22,11 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Typeface;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.os.BatteryStats.HistoryItem;
@@ -113,6 +115,9 @@ public class BatteryHistoryChart extends View {
     final Paint mBatteryGoodPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     final Paint mBatteryWarnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     final Paint mBatteryCriticalPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint mDockBatteryGoodPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint mDockBatteryWarnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint mDockBatteryCriticalPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     final Paint mChargingPaint = new Paint();
     final Paint mScreenOnPaint = new Paint();
     final Paint mGpsOnPaint = new Paint();
@@ -125,6 +130,9 @@ public class BatteryHistoryChart extends View {
     final Path mBatGoodPath = new Path();
     final Path mBatWarnPath = new Path();
     final Path mBatCriticalPath = new Path();
+    final Path mDockBatGoodPath = new Path();
+    final Path mDockBatWarnPath = new Path();
+    final Path mDockBatCriticalPath = new Path();
     final Path mChargingPath = new Path();
     final Path mScreenOnPath = new Path();
     final Path mGpsOnPath = new Path();
@@ -134,6 +142,7 @@ public class BatteryHistoryChart extends View {
     int mFontSize;
     
     BatteryStats mStats;
+    BatteryStats mDockStats;
     long mStatsPeriod;
     String mDurationString;
     String mTotalDurationString;
@@ -165,19 +174,28 @@ public class BatteryHistoryChart extends View {
     static final int PHONE_SIGNAL_X_MASK = CHART_DATA_X_MASK;
     static final int PHONE_SIGNAL_BIN_MASK = CHART_DATA_BIN_MASK;
     static final int PHONE_SIGNAL_BIN_SHIFT = CHART_DATA_BIN_SHIFT;
-    
+
     int mNumHist;
+    int mDockNumHist;
     long mHistStart;
     long mHistEnd;
+    long mDockHistStart;
+    long mDockHistEnd;
     int mBatLow;
     int mBatHigh;
     boolean mHaveWifi;
     boolean mHaveGps;
     boolean mHavePhoneSignal;
     
+    private final boolean mDockBatterySupported;
+
     public BatteryHistoryChart(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
+
+        BatteryManager mBatteryService = (BatteryManager) context.getSystemService(
+                Context.BATTERY_SERVICE);
+        mDockBatterySupported = mBatteryService.isDockBatterySupported();
+
         mBatteryBackgroundPaint.setARGB(255, 128, 128, 128);
         mBatteryBackgroundPaint.setStyle(Paint.Style.FILL);
         mBatteryGoodPaint.setARGB(128, 0, 255, 0);
@@ -186,6 +204,15 @@ public class BatteryHistoryChart extends View {
         mBatteryWarnPaint.setStyle(Paint.Style.STROKE);
         mBatteryCriticalPaint.setARGB(192, 255, 0, 0);
         mBatteryCriticalPaint.setStyle(Paint.Style.STROKE);
+        if (mDockBatterySupported) {
+            mDockBatteryGoodPaint = new Paint(mBatteryGoodPaint);
+            mDockBatteryGoodPaint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
+            mDockBatteryWarnPaint = new Paint(mBatteryWarnPaint);
+            mDockBatteryWarnPaint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
+            mDockBatteryCriticalPaint = new Paint(mBatteryCriticalPaint);
+            mDockBatteryCriticalPaint.setPathEffect(new DashPathEffect(new float[]{5, 5}, 0));
+        }
+
         mChargingPaint.setARGB(255, 0, 128, 0);
         mChargingPaint.setStyle(Paint.Style.STROKE);
         mScreenOnPaint.setStyle(Paint.Style.STROKE);
@@ -385,6 +412,35 @@ public class BatteryHistoryChart extends View {
         mTotalDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
     }
 
+    void setDockStats(BatteryStats stats) {
+        if (mDockBatterySupported) {
+            mDockStats = stats;
+
+            int pos = 0;
+            int lastInteresting = 0;
+            byte lastLevel = -1;
+            boolean first = true;
+            if (stats.startIteratingHistoryLocked()) {
+                final HistoryItem rec = new HistoryItem();
+                while (stats.getNextHistoryLocked(rec)) {
+                    pos++;
+                    if (rec.cmd == HistoryItem.CMD_UPDATE) {
+                        if (first) {
+                            first = false;
+                            mDockHistStart = rec.time;
+                        }
+                        if (rec.batteryLevel != lastLevel || pos == 1) {
+                            lastLevel = rec.batteryLevel;
+                        }
+                        lastInteresting = pos;
+                        mDockHistEnd = rec.time;
+                    }
+                }
+            }
+            mDockNumHist = lastInteresting;
+        }
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -464,6 +520,11 @@ public class BatteryHistoryChart extends View {
         mBatteryGoodPaint.setStrokeWidth(mThinLineWidth);
         mBatteryWarnPaint.setStrokeWidth(mThinLineWidth);
         mBatteryCriticalPaint.setStrokeWidth(mThinLineWidth);
+        if (mDockBatterySupported) {
+            mDockBatteryGoodPaint.setStrokeWidth(mThinLineWidth);
+            mDockBatteryWarnPaint.setStrokeWidth(mThinLineWidth);
+            mDockBatteryCriticalPaint.setStrokeWidth(mThinLineWidth);
+        }
         mChargingPaint.setStrokeWidth(mLineWidth);
         mScreenOnPaint.setStrokeWidth(mLineWidth);
         mGpsOnPaint.setStrokeWidth(mLineWidth);
@@ -498,15 +559,26 @@ public class BatteryHistoryChart extends View {
         mBatGoodPath.reset();
         mBatWarnPath.reset();
         mBatCriticalPath.reset();
+        if (mDockBatterySupported) {
+            mDockBatGoodPath.reset();
+            mDockBatWarnPath.reset();
+            mDockBatCriticalPath.reset();
+        }
         mScreenOnPath.reset();
         mGpsOnPath.reset();
         mWifiRunningPath.reset();
         mWakeLockPath.reset();
         mChargingPath.reset();
-        
-        final long timeStart = mHistStart;
-        final long timeChange = mHistEnd-mHistStart;
-        
+
+        long timeStart = mHistStart;
+        long timeChange = mHistEnd-mHistStart;
+        long timeEnd = mHistEnd;
+        if (mDockBatterySupported) {
+            timeStart = Math.min(timeStart, mDockHistStart) ;
+            timeChange = Math.max(timeChange, mDockHistEnd-mDockHistStart);
+            timeEnd = Math.max(timeEnd, mDockHistEnd);
+        }
+
         final int batLow = mBatLow;
         final int batChange = mBatHigh-mBatLow;
         
@@ -519,19 +591,20 @@ public class BatteryHistoryChart extends View {
         Path lastLinePath = null;
         boolean lastCharging = false, lastScreenOn = false, lastGpsOn = false;
         boolean lastWifiRunning = false, lastWakeLock = false;
-        final int N = mNumHist;
+        int N = mNumHist;
         if (mStats.startIteratingHistoryLocked()) {
             final HistoryItem rec = new HistoryItem();
+            Path path = mBatCriticalPath;
             while (mStats.getNextHistoryLocked(rec) && i < N) {
                 if (rec.cmd == BatteryStats.HistoryItem.CMD_UPDATE) {
-                    x = (int)(((rec.time-timeStart)*w)/timeChange);
+                    long time = (i == 0 && rec.time != timeStart) ? timeStart : rec.time;
+                    x = (int)(((time-timeStart)*w)/timeChange);
                     y = mLevelTop + levelh - ((rec.batteryLevel-batLow)*(levelh-1))/batChange;
 
                     if (lastX != x) {
                         // We have moved by at least a pixel.
                         if (lastY != y) {
                             // Don't plot changes within a pixel.
-                            Path path;
                             byte value = rec.batteryLevel;
                             if (value <= BATTERY_CRITICAL) path = mBatCriticalPath;
                             else if (value <= BATTERY_WARN) path = mBatWarnPath;
@@ -641,16 +714,103 @@ public class BatteryHistoryChart extends View {
                         lastCharging = lastScreenOn = lastGpsOn = lastWakeLock = false;
                     }
                 }
-                
+
                 i++;
             }
+
+            // Just fill the line to the end of the graph adding the last known state
+            if (rec.time != timeEnd) {
+                x = (int)((timeEnd*w)/timeChange);
+                path.lineTo(x, lastY);
+            }
         }
-        
+
         finishPaths(w, h, levelh, startX, lastY, curLevelPath, lastX,
                 lastCharging, lastScreenOn, lastGpsOn, lastWifiRunning,
                 lastWakeLock, lastLinePath);
+
+        // Now draw the dock battery stats
+        // We use the history start and end times from the normal battery
+        N = mDockNumHist;
+        x = 0; y = 0; startX = 0; lastX = -1; lastY = -1;
+        i = 0;
+        curLevelPath = null;
+        lastLinePath = null;
+        byte lastStatus = -1, lastLevel = -1;
+        if (mDockBatterySupported && mDockStats.startIteratingHistoryLocked()) {
+            final HistoryItem rec = new HistoryItem();
+            Path path = mDockBatCriticalPath;
+            while (mDockStats.getNextHistoryLocked(rec) && i < N) {
+                if (rec.cmd == BatteryStats.HistoryItem.CMD_UPDATE) {
+                    long time = (i == 0 && rec.time != timeStart) ? timeStart : rec.time;
+                    byte level = rec.batteryLevel;
+                    boolean skipPath = false;
+                    if (lastLevel != -1 && lastStatus == BatteryManager.BATTERY_STATUS_UNKNOWN) {
+                        level = lastLevel;
+                        skipPath = true;
+                    }
+
+                    x = (int)(((time-timeStart)*w)/timeChange);
+                    y = mLevelTop + levelh - ((level-batLow)*(levelh-1))/batChange;
+
+                    if (lastX != x) {
+                        // We have moved by at least a pixel.
+                        if (lastY != y) {
+                            // Don't plot changes within a pixel.
+                            byte value = level;
+                            if (value <= BATTERY_CRITICAL) path = mDockBatCriticalPath;
+                            else if (value <= BATTERY_WARN) path = mDockBatWarnPath;
+                            else path = mDockBatGoodPath;
+
+                            if (skipPath || rec.batteryStatus ==
+                                    BatteryManager.BATTERY_STATUS_UNKNOWN) {
+                                // Dock battery is not present or was not present
+                                path.moveTo(x, y);
+                            } else {
+                                if (path != lastLinePath) {
+                                    if (lastLinePath != null) {
+                                        lastLinePath.lineTo(x, y);
+                                    }
+                                    path.moveTo(x, y);
+                                    lastLinePath = path;
+                                } else {
+                                    path.lineTo(x, y);
+                                }
+                            }
+
+                            lastX = x;
+                            lastY = y;
+                        }
+                    }
+
+                } else if (rec.cmd != BatteryStats.HistoryItem.CMD_OVERFLOW) {
+                    if (curLevelPath != null) {
+                        lastX = lastY = -1;
+                        lastLinePath = null;
+                    }
+                }
+
+                if (rec.batteryStatus != BatteryManager.BATTERY_STATUS_UNKNOWN) {
+                    lastLevel = rec.batteryLevel;
+                }
+                lastStatus = rec.batteryStatus;
+                i++;
+            }
+
+            // Just fill the line to the end of the graph adding the last known state (only if
+            // the dock battery is present)
+            if (lastStatus != BatteryManager.BATTERY_STATUS_UNKNOWN && rec.time != timeEnd) {
+                byte value = rec.batteryLevel;
+                if (value <= BATTERY_CRITICAL) path = mDockBatCriticalPath;
+                else if (value <= BATTERY_WARN) path = mDockBatWarnPath;
+                else path = mDockBatGoodPath;
+
+                x = (int)((timeEnd*w)/timeChange);
+                path.lineTo(x, lastY);
+            }
+        }
     }
-    
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -683,6 +843,17 @@ public class BatteryHistoryChart extends View {
         }
         if (!mBatCriticalPath.isEmpty()) {
             canvas.drawPath(mBatCriticalPath, mBatteryCriticalPaint);
+        }
+        if (mDockBatterySupported) {
+            if (!mDockBatGoodPath.isEmpty()) {
+                canvas.drawPath(mDockBatGoodPath, mDockBatteryGoodPaint);
+            }
+            if (!mDockBatWarnPath.isEmpty()) {
+                canvas.drawPath(mDockBatWarnPath, mDockBatteryWarnPaint);
+            }
+            if (!mDockBatCriticalPath.isEmpty()) {
+                canvas.drawPath(mDockBatCriticalPath, mDockBatteryCriticalPaint);
+            }
         }
         if (mHavePhoneSignal) {
             int top = height-mPhoneSignalOffset - (mLineWidth/2);

@@ -410,6 +410,15 @@ public class Utils {
         return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
     }
 
+    public static boolean isDockBatteryPresent(Intent batteryChangedIntent) {
+        return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_DOCK_PRESENT, true);
+    }
+
+   public static boolean isDockBatteryPlugged(Intent batteryChangedIntent) {
+        if (!isDockBatteryPresent(batteryChangedIntent)) return false;
+        return batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_DOCK_PLUGGED, 0) != 0;
+    }
+
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
         int level = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
         int scale = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
@@ -419,13 +428,23 @@ public class Utils {
     public static String getBatteryStatus(Resources res, Intent batteryChangedIntent) {
         final Intent intent = batteryChangedIntent;
 
+        int dockPlugType = intent.getIntExtra(BatteryManager.EXTRA_DOCK_PLUGGED, 0);
         int plugType = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
         int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         String statusString;
         if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
             statusString = res.getString(R.string.battery_info_status_charging);
-            if (plugType > 0) {
+            if (isDockBatteryPresent(batteryChangedIntent) &&
+                    isDockBatteryPlugged(batteryChangedIntent) && dockPlugType > 0) {
+                int resId;
+                if (dockPlugType == BatteryManager.BATTERY_DOCK_PLUGGED_AC) {
+                    resId = R.string.battery_info_status_charging_dock_ac;
+                } else {
+                    resId = R.string.battery_info_status_charging_dock_usb;
+                }
+                statusString = statusString + " " + res.getString(resId);
+            } else if (plugType > 0) {
                 int resId;
                 if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
                     resId = R.string.battery_info_status_charging_ac;

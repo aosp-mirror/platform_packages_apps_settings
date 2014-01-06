@@ -123,12 +123,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements
         mScreenTimeoutMode.setOnPreferenceChangeListener(this);
 
         // Remove unsupported options
-/*        if (!QSUtils.deviceSupportsDockBattery(getActivity())) {
+        if (!QSUtils.deviceSupportsDockBattery(getActivity())) {
             Preference pref = findPreference(Settings.System.QS_DYNAMIC_DOCK_BATTERY);
             if (pref != null) {
                 mDynamicTiles.removePreference(pref);
             }
-        }*/
+        }
         if (!QSUtils.deviceSupportsImeSwitcher(getActivity())) {
             Preference pref = findPreference(Settings.System.QS_DYNAMIC_IME);
             if (pref != null) {
