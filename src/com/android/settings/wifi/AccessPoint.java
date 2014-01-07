@@ -60,7 +60,7 @@ class AccessPoint extends Preference {
     String ssid;
     String bssid;
     int security;
-    int networkId;
+    int networkId = -1;
     boolean wpsAvailable = false;
 
     PskType pskType = PskType.UNKNOWN;
@@ -68,7 +68,7 @@ class AccessPoint extends Preference {
     private WifiConfiguration mConfig;
     /* package */ScanResult mScanResult;
 
-    private int mRssi;
+    private int mRssi = Integer.MAX_VALUE;
     private WifiInfo mInfo;
     private DetailedState mState;
 
@@ -187,7 +187,6 @@ class AccessPoint extends Preference {
         bssid = config.BSSID;
         security = getSecurity(config);
         networkId = config.networkId;
-        mRssi = Integer.MAX_VALUE;
         mConfig = config;
     }
 
@@ -198,7 +197,6 @@ class AccessPoint extends Preference {
         wpsAvailable = security != SECURITY_EAP && result.capabilities.contains("WPS");
         if (security == SECURITY_PSK)
             pskType = getPskType(result);
-        networkId = -1;
         mRssi = result.level;
         mScanResult = result;
     }
@@ -276,6 +274,7 @@ class AccessPoint extends Preference {
             if (security == SECURITY_PSK) {
                 pskType = getPskType(result);
             }
+            mScanResult = result;
             refresh();
             return true;
         }
