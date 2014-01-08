@@ -33,6 +33,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
@@ -492,9 +493,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 if (device != null
                         && !device.isVirtual()
                         && device.isFullKeyboard()) {
-                    final String inputDeviceDescriptor = device.getDescriptor();
+                    final InputDeviceIdentifier identifier = device.getIdentifier();
                     final String keyboardLayoutDescriptor =
-                            mIm.getCurrentKeyboardLayoutForInputDevice(inputDeviceDescriptor);
+                            mIm.getCurrentKeyboardLayoutForInputDevice(identifier);
                     final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
                             mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 
@@ -508,7 +509,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                     pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                         @Override
                         public boolean onPreferenceClick(Preference preference) {
-                            showKeyboardLayoutDialog(inputDeviceDescriptor);
+                            showKeyboardLayoutDialog(identifier);
                             return true;
                         }
                     });
@@ -539,19 +540,19 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void showKeyboardLayoutDialog(String inputDeviceDescriptor) {
+    private void showKeyboardLayoutDialog(InputDeviceIdentifier inputDeviceIdentifier) {
         KeyboardLayoutDialogFragment fragment =
-                new KeyboardLayoutDialogFragment(inputDeviceDescriptor);
+                new KeyboardLayoutDialogFragment(inputDeviceIdentifier);
         fragment.setTargetFragment(this, 0);
         fragment.show(getActivity().getFragmentManager(), "keyboardLayout");
     }
 
     @Override
-    public void onSetupKeyboardLayouts(String inputDeviceDescriptor) {
+    public void onSetupKeyboardLayouts(InputDeviceIdentifier inputDeviceIdentifier) {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), KeyboardLayoutPickerActivity.class);
-        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_DESCRIPTOR,
-                inputDeviceDescriptor);
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                inputDeviceIdentifier);
         mIntentWaitingForResult = intent;
         startActivityForResult(intent, 0);
     }
@@ -561,10 +562,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         super.onActivityResult(requestCode, resultCode, data);
 
         if (mIntentWaitingForResult != null) {
-            String inputDeviceDescriptor = mIntentWaitingForResult.getStringExtra(
-                    KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_DESCRIPTOR);
+            InputDeviceIdentifier inputDeviceIdentifier = mIntentWaitingForResult
+                    .getParcelableExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
             mIntentWaitingForResult = null;
-            showKeyboardLayoutDialog(inputDeviceDescriptor);
+            showKeyboardLayoutDialog(inputDeviceIdentifier);
         }
     }
 

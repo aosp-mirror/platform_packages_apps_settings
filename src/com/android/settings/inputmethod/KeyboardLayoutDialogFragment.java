@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Resources;
+import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.hardware.input.InputManager.InputDeviceListener;
@@ -48,9 +49,9 @@ import java.util.Collections;
 
 public class KeyboardLayoutDialogFragment extends DialogFragment
         implements InputDeviceListener, LoaderCallbacks<KeyboardLayoutDialogFragment.Keyboards> {
-    private static final String KEY_INPUT_DEVICE_DESCRIPTOR = "inputDeviceDescriptor";
+    private static final String KEY_INPUT_DEVICE_IDENTIFIER = "inputDeviceIdentifier";
 
-    private String mInputDeviceDescriptor;
+    private InputDeviceIdentifier mInputDeviceIdentifier;
     private int mInputDeviceId = -1;
     private InputManager mIm;
     private KeyboardLayoutAdapter mAdapter;
@@ -58,8 +59,8 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
     public KeyboardLayoutDialogFragment() {
     }
 
-    public KeyboardLayoutDialogFragment(String inputDeviceDescriptor) {
-        mInputDeviceDescriptor = inputDeviceDescriptor;
+    public KeyboardLayoutDialogFragment(InputDeviceIdentifier inputDeviceIdentifier) {
+        mInputDeviceIdentifier = inputDeviceIdentifier;
     }
 
     @Override
@@ -76,7 +77,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mInputDeviceDescriptor = savedInstanceState.getString(KEY_INPUT_DEVICE_DESCRIPTOR);
+            mInputDeviceIdentifier = savedInstanceState.getParcelable(KEY_INPUT_DEVICE_IDENTIFIER);
         }
 
         getLoaderManager().initLoader(0, null, this);
@@ -85,7 +86,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(KEY_INPUT_DEVICE_DESCRIPTOR, mInputDeviceDescriptor);
+        outState.putParcelable(KEY_INPUT_DEVICE_IDENTIFIER, mInputDeviceIdentifier);
     }
 
     @Override
@@ -119,7 +120,8 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
 
         mIm.registerInputDeviceListener(this, null);
 
-        InputDevice inputDevice = mIm.getInputDeviceByDescriptor(mInputDeviceDescriptor);
+        InputDevice inputDevice =
+                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
         if (inputDevice == null) {
             dismiss();
             return;
@@ -143,7 +145,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
 
     private void onSetupLayoutsButtonClicked() {
         ((OnSetupKeyboardLayoutsListener)getTargetFragment()).onSetupKeyboardLayouts(
-                mInputDeviceDescriptor);
+                mInputDeviceIdentifier);
     }
 
     @Override
@@ -156,7 +158,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
         if (which >= 0 && which < mAdapter.getCount()) {
             KeyboardLayout keyboardLayout = mAdapter.getItem(which);
             if (keyboardLayout != null) {
-                mIm.setCurrentKeyboardLayoutForInputDevice(mInputDeviceDescriptor,
+                mIm.setCurrentKeyboardLayoutForInputDevice(mInputDeviceIdentifier,
                         keyboardLayout.getDescriptor());
             }
             dismiss();
@@ -165,7 +167,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
 
     @Override
     public Loader<Keyboards> onCreateLoader(int id, Bundle args) {
-        return new KeyboardLayoutLoader(getActivity().getBaseContext(), mInputDeviceDescriptor);
+        return new KeyboardLayoutLoader(getActivity().getBaseContext(), mInputDeviceIdentifier);
     }
 
     @Override
@@ -289,11 +291,11 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
     }
 
     private static final class KeyboardLayoutLoader extends AsyncTaskLoader<Keyboards> {
-        private final String mInputDeviceDescriptor;
+        private final InputDeviceIdentifier mInputDeviceIdentifier;
 
-        public KeyboardLayoutLoader(Context context, String inputDeviceDescriptor) {
+        public KeyboardLayoutLoader(Context context, InputDeviceIdentifier inputDeviceIdentifier) {
             super(context);
-            mInputDeviceDescriptor = inputDeviceDescriptor;
+            mInputDeviceIdentifier = inputDeviceIdentifier;
         }
 
         @Override
@@ -301,7 +303,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
             Keyboards keyboards = new Keyboards();
             InputManager im = (InputManager)getContext().getSystemService(Context.INPUT_SERVICE);
             String[] keyboardLayoutDescriptors = im.getKeyboardLayoutsForInputDevice(
-                    mInputDeviceDescriptor);
+                    mInputDeviceIdentifier);
             for (String keyboardLayoutDescriptor : keyboardLayoutDescriptors) {
                 KeyboardLayout keyboardLayout = im.getKeyboardLayout(keyboardLayoutDescriptor);
                 if (keyboardLayout != null) {
@@ -311,7 +313,7 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
             Collections.sort(keyboards.keyboardLayouts);
 
             String currentKeyboardLayoutDescriptor =
-                    im.getCurrentKeyboardLayoutForInputDevice(mInputDeviceDescriptor);
+                    im.getCurrentKeyboardLayoutForInputDevice(mInputDeviceIdentifier);
             if (currentKeyboardLayoutDescriptor != null) {
                 final int numKeyboardLayouts = keyboards.keyboardLayouts.size();
                 for (int i = 0; i < numKeyboardLayouts; i++) {
@@ -349,6 +351,6 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
     }
 
     public interface OnSetupKeyboardLayoutsListener {
-        public void onSetupKeyboardLayouts(String inputDeviceDescriptor);
+        public void onSetupKeyboardLayouts(InputDeviceIdentifier mInputDeviceIdentifier);
     }
 }
