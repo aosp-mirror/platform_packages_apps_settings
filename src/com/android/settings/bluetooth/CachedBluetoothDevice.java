@@ -335,7 +335,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                 final boolean successful = dev.removeBond();
                 if (successful) {
                     if (Utils.D) {
-                        mDevice.setAlias(null);
                         Log.d(TAG, "Command sent successfully:REMOVE_BOND " + describe(null));
                     }
                 } else if (Utils.V) {
