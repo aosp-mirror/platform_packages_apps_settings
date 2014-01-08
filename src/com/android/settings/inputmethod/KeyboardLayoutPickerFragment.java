@@ -20,6 +20,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.Context;
+import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.InputManager.InputDeviceListener;
 import android.hardware.input.KeyboardLayout;
@@ -35,7 +36,7 @@ import java.util.Map;
 
 public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
         implements InputDeviceListener {
-    private String mInputDeviceDescriptor;
+    private InputDeviceIdentifier mInputDeviceIdentifier;
     private int mInputDeviceId = -1;
     private InputManager mIm;
     private KeyboardLayout[] mKeyboardLayouts;
@@ -46,15 +47,15 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
      * Intent extra: The input device descriptor of the keyboard whose keyboard
      * layout is to be changed.
      */
-    public static final String EXTRA_INPUT_DEVICE_DESCRIPTOR = "input_device_descriptor";
+    public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mInputDeviceDescriptor = getActivity().getIntent().getStringExtra(
-                EXTRA_INPUT_DEVICE_DESCRIPTOR);
-        if (mInputDeviceDescriptor == null) {
+        mInputDeviceIdentifier = getActivity().getIntent().getParcelableExtra(
+                EXTRA_INPUT_DEVICE_IDENTIFIER);
+        if (mInputDeviceIdentifier == null) {
             getActivity().finish();
         }
 
@@ -70,7 +71,8 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
 
         mIm.registerInputDeviceListener(this, null);
 
-        InputDevice inputDevice = mIm.getInputDeviceByDescriptor(mInputDeviceDescriptor);
+        InputDevice inputDevice =
+                mIm.getInputDeviceByDescriptor(mInputDeviceIdentifier.getDescriptor());
         if (inputDevice == null) {
             getActivity().finish();
             return;
@@ -97,10 +99,10 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
             if (layout != null) {
                 boolean checked = checkboxPref.isChecked();
                 if (checked) {
-                    mIm.addKeyboardLayoutForInputDevice(mInputDeviceDescriptor,
+                    mIm.addKeyboardLayoutForInputDevice(mInputDeviceIdentifier,
                             layout.getDescriptor());
                 } else {
-                    mIm.removeKeyboardLayoutForInputDevice(mInputDeviceDescriptor,
+                    mIm.removeKeyboardLayoutForInputDevice(mInputDeviceIdentifier,
                             layout.getDescriptor());
                 }
                 return true;
@@ -143,7 +145,7 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
 
     private void updateCheckedState() {
         String[] enabledKeyboardLayouts = mIm.getKeyboardLayoutsForInputDevice(
-                mInputDeviceDescriptor);
+                mInputDeviceIdentifier);
         Arrays.sort(enabledKeyboardLayouts);
 
         for (Map.Entry<CheckBoxPreference, KeyboardLayout> entry : mPreferenceMap.entrySet()) {
