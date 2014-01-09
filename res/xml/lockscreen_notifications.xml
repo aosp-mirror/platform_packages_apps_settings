@@ -63,6 +63,13 @@
             android:dependency="lockscreen_notifications"
             android:summary="@string/dismiss_all_summary" />
 
+        <com.android.settings.mahdi.lsn.AppMultiSelectListPreference
+            android:key="excluded_apps"
+            android:persistent="false"
+            android:title="@string/excluded_apps_title"
+            android:dependency="lockscreen_notifications"
+            android:summary="@string/excluded_apps_summary" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/layout" >
@@ -74,7 +81,7 @@
             android:dependency="lockscreen_notifications"
             android:defaultValue="30" />
 
-        <com.android.settings.mahdi.lockscreennotifications.NumberPickerPreference
+        <com.android.settings.mahdi.lsn.NumberPickerPreference
             android:key="notifications_height"
             android:dialogMessage="@string/notifications_height"
             android:title="@string/notifications_height"

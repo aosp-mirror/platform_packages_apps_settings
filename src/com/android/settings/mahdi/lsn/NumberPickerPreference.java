@@ -3,7 +3,7 @@
 * Thanks to the original author!
 */
 
-package com.android.settings.mahdi.lockscreennotifications;
+package com.android.settings.mahdi.lsn;
 
 import android.content.Context;
 import android.content.res.TypedArray;
