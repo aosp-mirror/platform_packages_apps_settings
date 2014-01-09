@@ -81,6 +81,12 @@
             android:dependency="lockscreen_notifications"
             android:summary="@string/notifications_height_summary" />
 
+        <CheckBoxPreference
+            android:key="dynamic_width"
+            android:title="@string/dynamic_width"
+            android:dependency="lockscreen_notifications"
+            android:summary="@string/dynamic_width_summary" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/privacy" >
