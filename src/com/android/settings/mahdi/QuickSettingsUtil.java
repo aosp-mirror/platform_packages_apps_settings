@@ -25,7 +25,7 @@ import static com.android.internal.util.mahdi.QSConstants.TILE_BRIGHTNESS;
 import static com.android.internal.util.mahdi.QSConstants.TILE_CAMERA;
 import static com.android.internal.util.mahdi.QSConstants.TILE_DELIMITER;
 import static com.android.internal.util.mahdi.QSConstants.TILE_IMMERSIVEMODE;
-import static com.android.internal.util.mahdi.QSConstants.TILE_GPS;
+import static com.android.internal.util.mahdi.QSConstants.TILE_LOCATION;
 import static com.android.internal.util.mahdi.QSConstants.TILE_LOCKSCREEN;
 import static com.android.internal.util.mahdi.QSConstants.TILE_LTE;
 import static com.android.internal.util.mahdi.QSConstants.TILE_MOBILEDATA;
@@ -97,7 +97,7 @@ public class QuickSettingsUtil {
                 TILE_SLEEP, R.string.title_tile_power,
                 "com.android.systemui:drawable/ic_qs_power"));
         registerTile(new QuickSettingsUtil.TileInfo(
-                TILE_GPS, R.string.title_tile_gps,
+                TILE_LOCATION, R.string.title_tile_location,
                 "com.android.systemui:drawable/ic_qs_location_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_LOCKSCREEN, R.string.title_tile_lockscreen,
