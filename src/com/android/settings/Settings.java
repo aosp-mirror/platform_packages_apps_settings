@@ -111,10 +111,6 @@ public class Settings extends PreferenceActivity
         "com.android.settings.TOP_LEVEL_HEADER_ID";
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
-    private static final String META_DATA_KEY_PARENT_TITLE =
-        "com.android.settings.PARENT_FRAGMENT_TITLE";
-    private static final String META_DATA_KEY_PARENT_FRAGMENT_CLASS =
-        "com.android.settings.PARENT_FRAGMENT_CLASS";
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
@@ -129,7 +125,6 @@ public class Settings extends PreferenceActivity
     private int mTopLevelHeaderId;
     private Header mFirstHeader;
     private Header mCurrentHeader;
-    private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
 
     // Show only these settings for restricted users
@@ -217,22 +212,12 @@ public class Settings extends PreferenceActivity
         // Retrieve any saved state
         if (savedInstanceState != null) {
             mCurrentHeader = savedInstanceState.getParcelable(SAVE_KEY_CURRENT_HEADER);
-            mParentHeader = savedInstanceState.getParcelable(SAVE_KEY_PARENT_HEADER);
         }
 
         // If the current header was saved, switch to it
         if (savedInstanceState != null && mCurrentHeader != null) {
             //switchToHeaderLocal(mCurrentHeader);
             showBreadCrumbs(mCurrentHeader.title, null);
-        }
-
-        if (mParentHeader != null) {
-            setParentTitle(mParentHeader.title, null, new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switchToParent(mParentHeader.fragment);
-                }
-            });
         }
 
         // Override up navigation for multi-pane, since we handle it in the fragment breadcrumbs
@@ -249,9 +234,6 @@ public class Settings extends PreferenceActivity
         // Save the current fragment, if it is the same as originally launched
         if (mCurrentHeader != null) {
             outState.putParcelable(SAVE_KEY_CURRENT_HEADER, mCurrentHeader);
-        }
-        if (mParentHeader != null) {
-            outState.putParcelable(SAVE_KEY_PARENT_HEADER, mParentHeader);
         }
     }
 
@@ -376,7 +358,6 @@ public class Settings extends PreferenceActivity
     public void switchToHeader(Header header) {
         if (!mInLocalHeaderSwitch) {
             mCurrentHeader = null;
-            mParentHeader = null;
         }
         super.switchToHeader(header);
     }
@@ -401,11 +382,6 @@ public class Settings extends PreferenceActivity
 
                 switchToHeaderLocal(parentHeader);
                 highlightHeader(mTopLevelHeaderId);
-
-                mParentHeader = new Header();
-                mParentHeader.fragment
-                        = parentInfo.metaData.getString(META_DATA_KEY_PARENT_FRAGMENT_CLASS);
-                mParentHeader.title = parentInfo.metaData.getString(META_DATA_KEY_PARENT_TITLE);
             }
         } catch (NameNotFoundException nnfe) {
             Log.w(LOG_TAG, "Could not find parent activity : " + className);
@@ -733,17 +709,6 @@ public class Settings extends PreferenceActivity
             if (ai == null || ai.metaData == null) return;
             mTopLevelHeaderId = ai.metaData.getInt(META_DATA_KEY_HEADER_ID);
             mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
-
-            // Check if it has a parent specified and create a Header object
-            final int parentHeaderTitleRes = ai.metaData.getInt(META_DATA_KEY_PARENT_TITLE);
-            String parentFragmentClass = ai.metaData.getString(META_DATA_KEY_PARENT_FRAGMENT_CLASS);
-            if (parentFragmentClass != null) {
-                mParentHeader = new Header();
-                mParentHeader.fragment = parentFragmentClass;
-                if (parentHeaderTitleRes != 0) {
-                    mParentHeader.title = getResources().getString(parentHeaderTitleRes);
-                }
-            }
         } catch (NameNotFoundException nnfe) {
             // No recovery
         }

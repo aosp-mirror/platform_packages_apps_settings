@@ -206,10 +206,6 @@
                 android:value="com.android.settings.wifi.AdvancedWifiSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wifi_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wifi_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WifiSettingsActivity" />
         </activity>
 
         <activity android:name=".wifi.WifiInfo"
@@ -331,10 +327,6 @@
                 android:value="com.android.settings.TetherSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wireless_networks_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -347,10 +339,6 @@
                 android:value="com.android.settings.TetherSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wireless_networks_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity-alias>
 
         <activity android:name="Settings$WifiP2pSettingsActivity"
@@ -366,10 +354,6 @@
                 android:value="com.android.settings.wifi.p2p.WifiP2pSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wireless_networks_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
 
@@ -388,10 +372,6 @@
                 android:value="com.android.settings.vpn2.VpnSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wireless_networks_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity android:name="Settings$DateTimeSettingsActivity"
@@ -490,10 +470,6 @@
                 android:value="com.android.settings.inputmethod.SpellCheckersSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/language_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/language_keyboard_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
         </activity>
 
         <activity android:name=".inputmethod.InputMethodAndSubtypeEnablerActivity"
@@ -528,10 +504,6 @@
                 android:value="com.android.settings.inputmethod.UserDictionaryList" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/language_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/language_keyboard_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
         </activity>
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
@@ -557,10 +529,6 @@
                 android:value="com.android.settings.UserDictionarySettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/language_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/language_keyboard_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
         </activity-alias>
 
         <activity android:name="Settings$SoundSettingsActivity"
@@ -944,10 +912,6 @@
                 android:value="com.android.settings.DeviceAdminSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/security_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/security_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$SecuritySettingsActivity" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -959,10 +923,6 @@
                 android:value="com.android.settings.DeviceAdminSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/security_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/security_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$SecuritySettingsActivity" />
         </activity-alias>
 
         <activity android:name="DeviceAdminAdd"
@@ -1253,10 +1213,6 @@
                 android:value="com.android.settings.deviceinfo.UsbSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/storage_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/storage_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$StorageSettingsActivity" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -1268,10 +1224,6 @@
                 android:value="com.android.settings.deviceinfo.UsbSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/storage_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/storage_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$StorageSettingsActivity" />
         </activity-alias>
 
         <!-- Bluetooth stuff -->
