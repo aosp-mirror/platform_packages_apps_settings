@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -39,6 +40,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
     private static final String KEY_NOTIFICATIONS_HEIGHT = "notifications_height";
     private static final String KEY_PRIVACY_MODE = "privacy_mode";
     private static final String KEY_OFFSET_TOP = "offset_top";
+    private static final String KEY_CATEGORY_GENERAL = "category_general";
 
     private CheckBoxPreference mLockscreenNotifications;
     private CheckBoxPreference mPocketMode;
@@ -132,8 +134,9 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
 
         boolean hasProximitySensor = getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_PROXIMITY);
         if (!hasProximitySensor) {
-            prefs.removePreference(mPocketMode);
-            prefs.removePreference(mShowAlways);
+            PreferenceCategory general = (PreferenceCategory) prefs.findPreference(KEY_CATEGORY_GENERAL);
+            general.removePreference(mPocketMode);
+            general.removePreference(mShowAlways);
         }
     }
 
