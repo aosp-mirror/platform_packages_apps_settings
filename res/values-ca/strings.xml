@@ -113,7 +113,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visible per a tots els dispositius Bluetooth propers (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visible per a tots els dispositius Bluetooth propers"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Ocult per a altres dispositius Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Només visible per als dispositius sincronitzats"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Només visible per als dispositius emparellats"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Temps de visibilitat"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Bloqueja el marcatge per veu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Impedeix l\'ús del marcador Bluetooth quan la pantalla estigui bloquejada"</string>
@@ -448,15 +448,15 @@
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la visibilitat del dispositiu"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud d\'emparellament de Bluetooth"</string>
     <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu el PIN sol·licitat pel dispositiu:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya sol·licitada pel dispositiu:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN conté lletres o símbols"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"En general, 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Pot ser que també hagis d\'introduir aquest PIN a l\'altre dispositiu."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Pot ser que també hagis d\'introduir aquesta contrasenya a l\'altre dispositiu."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per emparellar amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assegura\'t que apareix aquesta contrasenya:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vols emparellar-lo amb aquest dispositiu?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per sincronitzar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu-hi:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> i, a continuació, prem la tecla de retorn."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronitza"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per sincronitzar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> en el dispositiu i, a continuació, prem la tecla de retorn."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Emparella"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancel·la"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut emparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -468,7 +468,7 @@
     <string name="bluetooth_search_for_devices" msgid="5957007154213560390">"Cerca dispositius"</string>
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"S\'està cercant..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Configuració del dispositiu"</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositius sincronitzats"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositius emparellats"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispositius disponibles"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connecta"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Desconnecta"</string>
@@ -493,7 +493,7 @@
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accés a Internet mitjançant <xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà de la compartició de la connexió a Internet de la tauleta."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà de la compartició de la connexió a Internet del telèfon."</string>
-    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositiu Bluetooth sincronitzat"</string>
+    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositiu Bluetooth emparellat"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connecta"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connecta\'t al dispositiu Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Perfils"</string>
@@ -1038,7 +1038,7 @@
     <string name="regulatory_information" msgid="5695464367088752150">"Informació de regulació"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Llicència"</string>
-    <string name="terms_title" msgid="7697580845616764642">"Condicions del servei"</string>
+    <string name="terms_title" msgid="7697580845616764642">"Termes i condicions"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Llicències de codi obert"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"S\'ha produït un problema en llegir les llicències."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"S\'està carregant…"</string>
@@ -2064,15 +2064,15 @@
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Selecciona una foto de la galeria"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="lock_settings_nfc_title" msgid="33998875572836425">"Configuració de bloqueig de pantalla de NFC"</string>
-    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Etiquetes sincronitzades"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Etiquetes emparellades"</string>
     <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Activat"</string>
-    <string name="start_nfc_pairing" msgid="5363319136364735698">"Sincronitza amb una etiqueta"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Emparella amb una etiqueta"</string>
     <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
-    <string name="pairing_button_title" msgid="7411638037556429744">"Sincronitza ara"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Emparella ara"</string>
     <string name="status_no_ring_detected" msgid="838954925249421062">"Posa l\'etiqueta plana en una taula i col·loca el telèfon a sobre."</string>
-    <string name="status_device_paired" msgid="4916932520416516526">"L\'etiqueta i el telèfon s\'han sincronitzat correctament. Llestos."</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"L\'etiqueta i el telèfon s\'han emparellat correctament. Llestos."</string>
     <string name="status_error_invalid_device" msgid="5045003971535647259">"L\'etiqueta que has proporcionat no es pot utilitzar per desbloquejar el telèfon."</string>
-    <string name="status_error_pairing_failed" msgid="8260473909085202868">"S\'ha produït un error amb la sincronització de l\'etiqueta. Torna-ho a provar."</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"S\'ha produït un error en emparellar l\'etiqueta. Torna-ho a provar."</string>
     <string name="enable_nfc" msgid="5234514241098808766">"L\'NFC no està activada i és necessària per desbloquejar la pantalla mitjançant NFC. Activa-la."</string>
     <string name="ok" msgid="3651563352754792958">"Configuració de NFC"</string>
 </resources>
