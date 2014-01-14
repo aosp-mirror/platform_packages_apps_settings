@@ -111,13 +111,8 @@ public class Settings extends PreferenceActivity
         "com.android.settings.TOP_LEVEL_HEADER_ID";
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
-
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
-
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
-    private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
-
-    static final int DIALOG_ONLY_ONE_HOME = 1;
 
     private static boolean sShowNoHomeNotice = false;
 
@@ -360,32 +355,6 @@ public class Settings extends PreferenceActivity
             mCurrentHeader = null;
         }
         super.switchToHeader(header);
-    }
-
-    /**
-     * Switch to parent fragment and store the grand parent's info
-     * @param className name of the activity wrapper for the parent fragment.
-     */
-    private void switchToParent(String className) {
-        final ComponentName cn = new ComponentName(this, className);
-        try {
-            final PackageManager pm = getPackageManager();
-            final ActivityInfo parentInfo = pm.getActivityInfo(cn, PackageManager.GET_META_DATA);
-
-            if (parentInfo != null && parentInfo.metaData != null) {
-                String fragmentClass = parentInfo.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
-                CharSequence fragmentTitle = parentInfo.loadLabel(pm);
-                Header parentHeader = new Header();
-                parentHeader.fragment = fragmentClass;
-                parentHeader.title = fragmentTitle;
-                mCurrentHeader = parentHeader;
-
-                switchToHeaderLocal(parentHeader);
-                highlightHeader(mTopLevelHeaderId);
-            }
-        } catch (NameNotFoundException nnfe) {
-            Log.w(LOG_TAG, "Could not find parent activity : " + className);
-        }
     }
 
     @Override
@@ -711,6 +680,7 @@ public class Settings extends PreferenceActivity
             mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
         } catch (NameNotFoundException nnfe) {
             // No recovery
+            Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());
         }
     }
 
@@ -756,8 +726,8 @@ public class Settings extends PreferenceActivity
             TextView title;
             TextView summary;
             Switch switch_;
-            ImageButton button_;
-            View divider_;
+            ImageButton button;
+            View divider;
         }
 
         private LayoutInflater mInflater;
@@ -849,8 +819,8 @@ public class Settings extends PreferenceActivity
                                 view.findViewById(com.android.internal.R.id.title);
                         holder.summary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
-                        holder.button_ = (ImageButton) view.findViewById(R.id.buttonWidget);
-                        holder.divider_ = view.findViewById(R.id.divider);
+                        holder.button = (ImageButton) view.findViewById(R.id.buttonWidget);
+                        holder.divider = view.findViewById(R.id.divider);
                         break;
 
                     case HEADER_TYPE_NORMAL:
@@ -890,16 +860,16 @@ public class Settings extends PreferenceActivity
                     if (header.id == R.id.security_settings) {
                         boolean hasCert = DevicePolicyManager.hasAnyCaCertsInstalled();
                         if (hasCert) {
-                            holder.button_.setVisibility(View.VISIBLE);
-                            holder.divider_.setVisibility(View.VISIBLE);
+                            holder.button.setVisibility(View.VISIBLE);
+                            holder.divider.setVisibility(View.VISIBLE);
                             boolean isManaged = mDevicePolicyManager.getDeviceOwner() != null;
                             if (isManaged) {
-                                holder.button_.setImageResource(R.drawable.ic_settings_about);
+                                holder.button.setImageResource(R.drawable.ic_settings_about);
                             } else {
-                                holder.button_.setImageResource(
+                                holder.button.setImageResource(
                                         android.R.drawable.stat_notify_error);
                             }
-                            holder.button_.setOnClickListener(new OnClickListener() {
+                            holder.button.setOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(
@@ -908,8 +878,8 @@ public class Settings extends PreferenceActivity
                                 }
                             });
                         } else {
-                            holder.button_.setVisibility(View.GONE);
-                            holder.divider_.setVisibility(View.GONE);
+                            holder.button.setVisibility(View.GONE);
+                            holder.divider.setVisibility(View.GONE);
                         }
                     }
                     updateCommonHeaderView(header, holder);
