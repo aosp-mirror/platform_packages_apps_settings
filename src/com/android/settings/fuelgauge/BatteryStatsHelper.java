@@ -89,8 +89,11 @@ public class BatteryStatsHelper {
     private long mStatsPeriod = 0;
     private double mMaxPower = 1;
     private double mTotalPower;
+    private double mTotalPowermAh;
     private double mWifiPower;
     private double mBluetoothPower;
+    private double mMinDrainedPower;
+    private double mMaxDrainedPower;
 
     // How much the apps together have left WIFI running.
     private long mAppWifiRunning;
@@ -304,6 +307,22 @@ public class BatteryStatsHelper {
                     sipper.wifiTxPackets,
                 };
             } break;
+            case UNACCOUNTED:
+            case OVERCOUNTED:
+            {
+                types = new int[] {
+                    R.string.usage_type_total_battery_capacity,
+                    R.string.usage_type_computed_power,
+                    R.string.usage_type_min_actual_power,
+                    R.string.usage_type_max_actual_power,
+                };
+                values = new double[] {
+                    mPowerProfile.getBatteryCapacity(),
+                    mTotalPowermAh,
+                    mMinDrainedPower,
+                    mMaxDrainedPower,
+                };
+            } break;
             default:
             {
                 types = new int[] {
@@ -341,8 +360,34 @@ public class BatteryStatsHelper {
         mUserSippers.clear();
         mUserPower.clear();
 
+        mMinDrainedPower = (mStats.getLowDischargeAmountSinceCharge()
+                * mPowerProfile.getBatteryCapacity()) / 100;
+        mMaxDrainedPower = (mStats.getHighDischargeAmountSinceCharge()
+                * mPowerProfile.getBatteryCapacity()) / 100;
+
         processAppUsage(includeZeroConsumption);
         processMiscUsage();
+
+        // We have been computing totals in seconds, convert to hours.
+        mTotalPowermAh = mTotalPower / 3600;
+
+        if (true || mStats.getLowDischargeAmountSinceCharge() > 10) {
+            if (mMinDrainedPower > mTotalPowermAh) {
+                double amount = mMinDrainedPower - mTotalPowermAh;
+                if (mMaxPower < amount) {
+                    mMaxPower = amount;
+                }
+                addEntryNoTotal(mActivity.getString(R.string.power_unaccounted),
+                        DrainType.UNACCOUNTED, 0, R.drawable.ic_power_system, amount * 3600);
+            } else if (mMaxDrainedPower < mTotalPowermAh) {
+                double amount = mTotalPowermAh - mMaxDrainedPower;
+                if (mMaxPower < amount) {
+                    mMaxPower = amount;
+                }
+                addEntryNoTotal(mActivity.getString(R.string.power_overcounted),
+                        DrainType.OVERCOUNTED, 0, R.drawable.ic_power_system, amount * 3600);
+            }
+        }
 
         Collections.sort(mUsageList);
 
@@ -807,6 +852,12 @@ public class BatteryStatsHelper {
 
     private BatterySipper addEntry(String label, DrainType drainType, long time, int iconId,
             double power) {
+        mTotalPower += power;
+        return addEntryNoTotal(label, drainType, time, iconId, power);
+    }
+
+    private BatterySipper addEntryNoTotal(String label, DrainType drainType, long time, int iconId,
+            double power) {
         if (power > mMaxPower) mMaxPower = power;
         mTotalPower += power;
         BatterySipper bs = new BatterySipper(mActivity, mRequestQueue, mHandler,
@@ -830,6 +881,14 @@ public class BatteryStatsHelper {
 
     public double getTotalPower() {
         return mTotalPower;
+    }
+
+    public double getMinDrainedPower() {
+        return mMinDrainedPower;
+    }
+
+    public double getMaxDrainedPower() {
+        return mMaxDrainedPower;
     }
 
     private void load() {

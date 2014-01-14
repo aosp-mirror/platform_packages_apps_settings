@@ -3604,6 +3604,10 @@
     <string name="power_idle" product="tablet">Tablet idle</string>
     <!-- Label for power consumed when Idle -->
     <string name="power_idle" product="default">Phone idle</string>
+    <!-- Label for power that we aren't able to account for -->
+    <string name="power_unaccounted">Unaccounted</string>
+    <!-- Label for power that we computed too much for -->
+    <string name="power_overcounted">Over-counted</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -3635,6 +3639,14 @@
     <string name="usage_type_on_time">Time on</string>
     <!-- Label for time that there was no cell coverage -->
     <string name="usage_type_no_coverage">Time without a signal</string>
+    <!-- Label for the total power capacity of the device's battery -->
+    <string name="usage_type_total_battery_capacity">Total battery capacity</string>
+    <!-- Label for amount of power use that was computed -->
+    <string name="usage_type_computed_power">Computed power</string>
+    <!-- Label for minimum amount of actual power use -->
+    <string name="usage_type_min_actual_power">Min real power</string>
+    <!-- Label for maximum amount of power use -->
+    <string name="usage_type_max_actual_power">Max real power</string>
     <!-- Label for force stop action -->
     <string name="battery_action_stop">Force stop</string>
     <!-- Label for app details action -->
@@ -3689,6 +3701,13 @@
 
     <!-- [CHAR LIMIT=50] Description for power consumed by users -->
     <string name="battery_desc_users">Battery used by user</string>
+
+    <!-- [CHAR LIMIT=50] Description for unaccounted power use -->
+    <string name="battery_desc_unaccounted">Unaccounted power use</string>
+    <!-- [CHAR LIMIT=50] Description for over-counted power use -->
+    <string name="battery_desc_overcounted">Over-counted power use</string>
+    <!-- Representation of a mAh value. [CHAR LIMIT=NONE] -->
+    <string name="mah"><xliff:g id="number" example="30">%d</xliff:g> mAh</string>
 
     <!-- Menu label for viewing battery usage since unplugged -->
     <string name="menu_stats_unplugged"><xliff:g id="unplugged">%1$s</xliff:g> since unplugged</string>
