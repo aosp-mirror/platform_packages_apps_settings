@@ -22,9 +22,15 @@
             android:fragment="com.android.settings.purity.NavBar"
             android:title="@string/navigation_bar_title" />
 
-            <PreferenceScreen
-                android:key="navbar_style_dimen_settings"
-                android:fragment="com.android.settings.purity.NavbarStyleDimenSettings"
-                android:title="@string/navbar_style_dimen_title" />
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+            android:key="navigation_bar_left"
+            android:title="@string/navigation_bar_left_title"
+            android:summary="@string/navigation_bar_left_summary"
+            android:defaultValue="false" />
+
+        <PreferenceScreen
+            android:key="navbar_style_dimen_settings"
+            android:fragment="com.android.settings.purity.NavbarStyleDimenSettings"
+            android:title="@string/navbar_style_dimen_title" />
 
 </PreferenceScreen>

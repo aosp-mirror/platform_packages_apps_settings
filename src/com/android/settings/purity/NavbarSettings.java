@@ -28,14 +28,18 @@ import android.provider.Settings;
 import com.android.internal.util.cm.DeviceUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.R;
+
 
 public class NavbarSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "NavBar";
     private static final String PREF_STYLE_DIMEN = "navbar_style_dimen_settings";
+    private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
 
     PreferenceScreen mStyleDimenPreference;
+    private CheckBoxPreference mNavigationBarLeftPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,11 @@ public class NavbarSettings extends SettingsPreferenceFragment implements OnPref
         PreferenceScreen prefs = getPreferenceScreen();
 
         mStyleDimenPreference = (PreferenceScreen) findPreference(PREF_STYLE_DIMEN);
-
+        mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
+        if (!Utils.isPhone(getActivity())) {
+            getPreferenceScreen().removePreference(mNavigationBarLeftPref);
+            mNavigationBarLeftPref = null;
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
