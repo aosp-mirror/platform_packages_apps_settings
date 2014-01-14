@@ -105,6 +105,10 @@
             android:title="@string/haptic_feedback_enable_title"
             android:defaultValue="true" />
 
+    <com.android.settings.mahdi.SeekBarPreference
+            android:key="vibration_duration"
+            android:title="@string/minimum_vibration_duration" />
+
     <CheckBoxPreference
             android:key="volume_adjust_sounds"
             android:title="@string/volume_adjust_sounds_enable_title"
