@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -40,7 +39,6 @@ import android.net.LinkProperties;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -48,23 +46,17 @@ import android.preference.PreferenceActivity.Header;
 import android.preference.PreferenceFrameLayout;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract.CommonDataKinds;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
-import com.android.settings.users.ProfileUpdateReceiver;
-
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;

@@ -16,10 +16,7 @@
 
 package com.android.settings;
 
-import android.app.Fragment;
 import android.util.Log;
-
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 
 /**
  * Stub class for showing sub-settings; we can't use the main Settings class
