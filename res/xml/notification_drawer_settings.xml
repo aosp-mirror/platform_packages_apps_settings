@@ -75,10 +75,12 @@
         android:key="options"
         android:title="@string/additional_options_title">
 
-        <CheckBoxPreference
-            android:key="notification_hide_carrier"
-            android:title="@string/notification_hide_carrier_title"
-            android:defaultValue="false" />
+        <ListPreference
+        android:key="notification_hide_labels"
+        android:title="@string/notification_hide_labels_title"
+        android:entries="@array/notification_hide_labels_entries"
+        android:entryValues="@array/notification_hide_labels_values"
+        android:persistent="false" />
 
     </PreferenceCategory>
 
