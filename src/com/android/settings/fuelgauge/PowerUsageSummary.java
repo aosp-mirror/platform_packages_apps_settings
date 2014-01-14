@@ -60,6 +60,8 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int MENU_HELP = Menu.FIRST + 2;
 
     private PreferenceGroup mAppListGroup;
+    private String mBatteryLevel;
+    private String mBatteryStatus;
     private Preference mBatteryStatusPref;
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
@@ -74,13 +76,8 @@ public class PowerUsageSummary extends PreferenceFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
-                String batteryLevel = com.android.settings.Utils.getBatteryPercentage(intent);
-                String batteryStatus = com.android.settings.Utils.getBatteryStatus(getResources(),
-                        intent);
-                String batterySummary = context.getResources().getString(
-                        R.string.power_usage_level_and_status, batteryLevel, batteryStatus);
-                mBatteryStatusPref.setTitle(batterySummary);
+            if (Intent.ACTION_BATTERY_CHANGED.equals(action)
+                    && updateBatteryStatus(intent)) {
                 mStatsHelper.clearStats();
                 refreshStats();
             }
@@ -107,8 +104,8 @@ public class PowerUsageSummary extends PreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(mBatteryInfoReceiver,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        updateBatteryStatus(getActivity().registerReceiver(mBatteryInfoReceiver,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
         refreshStats();
     }
 
@@ -194,12 +191,32 @@ public class PowerUsageSummary extends PreferenceFragment {
         mAppListGroup.addPreference(notAvailable);
     }
 
+    private boolean updateBatteryStatus(Intent intent) {
+        if (intent != null) {
+            String batteryLevel = com.android.settings.Utils.getBatteryPercentage(intent);
+            String batteryStatus = com.android.settings.Utils.getBatteryStatus(getResources(),
+                    intent);
+            if (!batteryLevel.equals(mBatteryLevel) || !batteryStatus.equals(mBatteryStatus)) {
+                mBatteryLevel = batteryLevel;
+                mBatteryStatus = batteryStatus;
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void refreshStats() {
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);
 
         mBatteryStatusPref.setOrder(-2);
+        if (mBatteryLevel != null && mBatteryStatus != null) {
+            String batterySummary = getActivity().getResources().getString(
+                    R.string.power_usage_level_and_status, mBatteryLevel, mBatteryStatus);
+            mBatteryStatusPref.setTitle(batterySummary);
+        }
         mAppListGroup.addPreference(mBatteryStatusPref);
+
         BatteryHistoryPreference hist = new BatteryHistoryPreference(
                 getActivity(), mStatsHelper.getStats());
         hist.setOrder(-1);

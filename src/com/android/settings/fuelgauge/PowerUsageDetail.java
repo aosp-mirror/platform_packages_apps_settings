@@ -67,7 +67,9 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         BLUETOOTH,
         SCREEN,
         APP,
-        USER
+        USER,
+        UNACCOUNTED,
+        OVERCOUNTED
     }
 
     // Note: Must match the sequence of the DrainType
@@ -80,6 +82,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         R.string.battery_desc_display,
         R.string.battery_desc_apps,
         R.string.battery_desc_users,
+        R.string.battery_desc_unaccounted,
+        R.string.battery_desc_overcounted,
     };
 
     public static final int ACTION_DISPLAY_SETTINGS = 1;
@@ -328,6 +332,12 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     case R.string.usage_type_no_coverage:
                         final int percentage = (int) Math.floor(mValues[i]);
                         value = getActivity().getString(R.string.percentage, percentage);
+                        break;
+                    case R.string.usage_type_total_battery_capacity:
+                    case R.string.usage_type_computed_power:
+                    case R.string.usage_type_min_actual_power:
+                    case R.string.usage_type_max_actual_power:
+                        value = getActivity().getString(R.string.mah, (long)(mValues[i]));
                         break;
                     case R.string.usage_type_gps:
                         mUsesGps = true;
