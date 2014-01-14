@@ -83,6 +83,13 @@
                     android:title="@string/navbar_can_move"
                     android:summary="@string/navbar_can_move_summary" />
 
+            <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+                    android:key="navigation_bar_left"
+                    android:title="@string/navigation_bar_left_title"
+                    android:summary="@string/navigation_bar_left_summary"
+                    android:defaultValue="false"
+                    android:dependency="enable_nav_bar" />
+
         </PreferenceCategory>
 
 </PreferenceScreen>
