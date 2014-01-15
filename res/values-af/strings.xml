@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Onbekende fout"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Koud"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Sigbaar vir alle nabye Bluetooth-toestelle (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Sigbaar vir alle Bluetooth-toestelle wat naby is"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nie sigbaar vir ander Bluetooth-toestelle nie"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Net sigbaar vir saamgebinde toestelle"</string>
+    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Aanvaar tans saambindingsversoeke (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Aanvaar tans saambindingsversoeke"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Aanvaar tans nie saambindingsversoeke nie"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Aanvaar tans nie saambindingsversoeke nie"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Sigbaarheid-tydperk"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sluit stembellery"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Voorkom die gebruik van die Bluetooth-beller wanneer die skerm gesluit is"</string>
@@ -129,6 +129,8 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ontkoppel?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Dit sal jou verbinding met &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; beëindig."</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Uitsaai"</string>
+    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"Aan"</string>
+    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"Af"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Dekativeer profiel?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Dit deaktiveer:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Gekoppel"</string>
@@ -155,13 +157,11 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"\'n Program wil jou foon sigbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"\'n Program wil jou tablet sigbaar maak vir ander Bluetooth-toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"\'n Program wil jou foon sigbaar maak vir ander Bluetooth-toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
-    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth-uitsaai aanskakel om met ander nabygeleë toestelle te kommunikeer. Jy kan dit later in Bluetooth-instellings verander."</string>
-    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth en Bluetooth-uitsaai aanskakel om met ander nabygeleë toestelle te kommunikeer. Jy kan dit later in Bluetooth-instellings verander."</string>
-    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wanneer hierdie kenmerk aangeskakel is, kan jou foon met ander nabygeleë toestelle kommunikeer.\n\nUitsaai gebruik laekrag-Bluetooth-seine."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"\'n Program wil Bluetooth aanskakel en jou tablet sigbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"\'n Program wil Bluetooth aanskakel en jou foon sigbaar maak vir ander toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"\'n Program wil Bluetooth aanskakel en jou tablet sigbaar maak vir ander toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"\'n Progam wil Bluetooth aanskakel en jou foon sigbaar maak vir ander toestelle. Jy kan dit later verander in Bluetooth-instellings."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth-uitsaai aanskakel om met ander nabygeleë toestelle te kommunikeer. Jy kan dit later in Bluetooth-instellings verander."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="1783727814076135171">"<xliff:g id="APP_NAME">%1$s</xliff:g> wil Bluetooth en Bluetooth-uitsaai aanskakel om met ander nabygeleë toestelle te kommunikeer. Jy kan dit later in Bluetooth-instellings verander."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wanneer hierdie kenmerk aangeskakel is, kan jou foon met ander nabygeleë toestelle kommunikeer.\n\nUitsaai gebruik laekrag-Bluetooth-seine."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Skakel tans Bluetooth af…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Skakel tans Bluetooth af…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Outokoppel"</string>
@@ -1511,6 +1511,8 @@
     <string name="power_phone" msgid="5392641106474567277">"Stemoproepe"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet ledig"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Foon ledig"</string>
+    <string name="power_unaccounted" msgid="4835429811853042257">"Onverklaar"</string>
+    <string name="power_overcounted" msgid="2762354976171358445">"Oorbereken"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU-totaal"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU-voorgrond"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Hou wakker"</string>
@@ -1526,6 +1528,10 @@
     <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"Tyd aan"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Tyd sonder \'n sein"</string>
+    <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Totale batterykapasiteit"</string>
+    <string name="usage_type_computed_power" msgid="3665248793473498804">"Berekende krag"</string>
+    <string name="usage_type_min_actual_power" msgid="4772874833688090017">"Min. ware krag"</string>
+    <string name="usage_type_max_actual_power" msgid="429012562553903697">"Maks. ware krag"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Dwing stop"</string>
     <string name="battery_action_app_details" msgid="7861051816778419018">"Programinligting"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Program-instellings"</string>
@@ -1549,6 +1555,9 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Kies batterybesparende modus"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Die program kan dalk instellings bied om batterygebruik te verminder"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Battery deur gebruiker gebruik"</string>
+    <string name="battery_desc_unaccounted" msgid="1653798876416893745">"Onverklaarde kragverbruik"</string>
+    <string name="battery_desc_overcounted" msgid="5481865509489228603">"Oorberekende kragverbruik"</string>
+    <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> sedert uitgeprop is"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Sedert laas uitgeprop vir <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Gebruikstotale"</string>
