@@ -446,6 +446,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             mBatteryPulse.setSummary(getString(R.string.disabled));
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mNotificationPulse) {
+            boolean value = mNotificationPulse.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
+                    value ? 1 : 0);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }    
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
