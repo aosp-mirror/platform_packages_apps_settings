@@ -30,7 +30,7 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * RequestPermissionHelperActivity asks the user whether to enable discovery.
+ * RequestPermissionHelperActivity asks the user whether to enable discovery or advertisement.
  * This is usually started by RequestPermissionActivity.
  */
 public class RequestPermissionHelperActivity extends AlertActivity implements
@@ -43,6 +43,9 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
     public static final String ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE =
         "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE";
 
+    public static final String ACTION_INTERNAL_REQUEST_BT_ON_AND_START_ADVERTISE =
+        "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_ON_AND_ADVERTISE";
+
     private LocalBluetoothAdapter mLocalAdapter;
 
     private int mTimeout;
@@ -50,6 +53,7 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
     // True if requesting BT to be turned on
     // False if requesting BT to be turned on + discoverable mode
     private boolean mEnableOnly;
+    private boolean mDiscovery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +79,15 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
 
         if (mEnableOnly) {
             p.mMessage = getString(R.string.bluetooth_ask_enablement);
-        } else {
+        } else if (mDiscovery) {
             if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
                 p.mMessage = getString(R.string.bluetooth_ask_enablement_and_lasting_discovery);
             } else {
                 p.mMessage = getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout);
             }
+        } else {
+            p.mMessage = getString(R.string.bluetooth_ask_enablement_and_start_broadcast,
+                    Utils.getCallingApp(this));
         }
 
         p.mPositiveButtonText = getString(R.string.allow);
@@ -138,9 +145,14 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
         } else if (intent != null
                 && intent.getAction().equals(ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE)) {
             mEnableOnly = false;
+            mDiscovery = true;
             // Value used for display purposes. Not range checking.
             mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
                     BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
+        } else if (intent != null
+              && intent.getAction().equals(ACTION_INTERNAL_REQUEST_BT_ON_AND_START_ADVERTISE)) {
+            mEnableOnly = false;
+            mDiscovery = false;
         } else {
             setResult(RESULT_CANCELED);
             return true;
