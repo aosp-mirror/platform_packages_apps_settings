@@ -25,7 +25,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -722,12 +721,12 @@ public class Settings extends PreferenceActivity
         private DevicePolicyManager mDevicePolicyManager;
 
         private static class HeaderViewHolder {
-            ImageView icon;
-            TextView title;
-            TextView summary;
-            Switch switch_;
-            ImageButton button;
-            View divider;
+            ImageView mIcon;
+            TextView mTitle;
+            TextView mSummary;
+            Switch mSwitch;
+            ImageButton mButton;
+            View mDivider;
         }
 
         private LayoutInflater mInflater;
@@ -797,40 +796,40 @@ public class Settings extends PreferenceActivity
                     case HEADER_TYPE_CATEGORY:
                         view = new TextView(getContext(), null,
                                 android.R.attr.listSeparatorTextViewStyle);
-                        holder.title = (TextView) view;
+                        holder.mTitle = (TextView) view;
                         break;
 
                     case HEADER_TYPE_SWITCH:
                         view = mInflater.inflate(R.layout.preference_header_switch_item, parent,
                                 false);
-                        holder.icon = (ImageView) view.findViewById(R.id.icon);
-                        holder.title = (TextView)
+                        holder.mIcon = (ImageView) view.findViewById(R.id.icon);
+                        holder.mTitle = (TextView)
                                 view.findViewById(com.android.internal.R.id.title);
-                        holder.summary = (TextView)
+                        holder.mSummary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
-                        holder.switch_ = (Switch) view.findViewById(R.id.switchWidget);
+                        holder.mSwitch = (Switch) view.findViewById(R.id.switchWidget);
                         break;
 
                     case HEADER_TYPE_BUTTON:
                         view = mInflater.inflate(R.layout.preference_header_button_item, parent,
                                 false);
-                        holder.icon = (ImageView) view.findViewById(R.id.icon);
-                        holder.title = (TextView)
+                        holder.mIcon = (ImageView) view.findViewById(R.id.icon);
+                        holder.mTitle = (TextView)
                                 view.findViewById(com.android.internal.R.id.title);
-                        holder.summary = (TextView)
+                        holder.mSummary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
-                        holder.button = (ImageButton) view.findViewById(R.id.buttonWidget);
-                        holder.divider = view.findViewById(R.id.divider);
+                        holder.mButton = (ImageButton) view.findViewById(R.id.buttonWidget);
+                        holder.mDivider = view.findViewById(R.id.divider);
                         break;
 
                     case HEADER_TYPE_NORMAL:
                         view = mInflater.inflate(
                                 R.layout.preference_header_item, parent,
                                 false);
-                        holder.icon = (ImageView) view.findViewById(R.id.icon);
-                        holder.title = (TextView)
+                        holder.mIcon = (ImageView) view.findViewById(R.id.icon);
+                        holder.mTitle = (TextView)
                                 view.findViewById(com.android.internal.R.id.title);
-                        holder.summary = (TextView)
+                        holder.mSummary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
                         break;
                 }
@@ -843,15 +842,15 @@ public class Settings extends PreferenceActivity
             // All view fields must be updated every time, because the view may be recycled
             switch (headerType) {
                 case HEADER_TYPE_CATEGORY:
-                    holder.title.setText(header.getTitle(getContext().getResources()));
+                    holder.mTitle.setText(header.getTitle(getContext().getResources()));
                     break;
 
                 case HEADER_TYPE_SWITCH:
                     // Would need a different treatment if the main menu had more switches
                     if (header.id == R.id.wifi_settings) {
-                        mWifiEnabler.setSwitch(holder.switch_);
+                        mWifiEnabler.setSwitch(holder.mSwitch);
                     } else {
-                        mBluetoothEnabler.setSwitch(holder.switch_);
+                        mBluetoothEnabler.setSwitch(holder.mSwitch);
                     }
                     updateCommonHeaderView(header, holder);
                     break;
@@ -860,16 +859,16 @@ public class Settings extends PreferenceActivity
                     if (header.id == R.id.security_settings) {
                         boolean hasCert = DevicePolicyManager.hasAnyCaCertsInstalled();
                         if (hasCert) {
-                            holder.button.setVisibility(View.VISIBLE);
-                            holder.divider.setVisibility(View.VISIBLE);
+                            holder.mButton.setVisibility(View.VISIBLE);
+                            holder.mDivider.setVisibility(View.VISIBLE);
                             boolean isManaged = mDevicePolicyManager.getDeviceOwner() != null;
                             if (isManaged) {
-                                holder.button.setImageResource(R.drawable.ic_settings_about);
+                                holder.mButton.setImageResource(R.drawable.ic_settings_about);
                             } else {
-                                holder.button.setImageResource(
+                                holder.mButton.setImageResource(
                                         android.R.drawable.stat_notify_error);
                             }
-                            holder.button.setOnClickListener(new OnClickListener() {
+                            holder.mButton.setOnClickListener(new OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(
@@ -878,8 +877,8 @@ public class Settings extends PreferenceActivity
                                 }
                             });
                         } else {
-                            holder.button.setVisibility(View.GONE);
-                            holder.divider.setVisibility(View.GONE);
+                            holder.mButton.setVisibility(View.GONE);
+                            holder.mDivider.setVisibility(View.GONE);
                         }
                     }
                     updateCommonHeaderView(header, holder);
@@ -901,25 +900,25 @@ public class Settings extends PreferenceActivity
                     Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
                     setHeaderIcon(holder, icon);
                 } else {
-                    holder.icon.setImageResource(header.iconRes);
+                    holder.mIcon.setImageResource(header.iconRes);
                 }
-                holder.title.setText(header.getTitle(getContext().getResources()));
+                holder.mTitle.setText(header.getTitle(getContext().getResources()));
                 CharSequence summary = header.getSummary(getContext().getResources());
                 if (!TextUtils.isEmpty(summary)) {
-                    holder.summary.setVisibility(View.VISIBLE);
-                    holder.summary.setText(summary);
+                    holder.mSummary.setVisibility(View.VISIBLE);
+                    holder.mSummary.setText(summary);
                 } else {
-                    holder.summary.setVisibility(View.GONE);
+                    holder.mSummary.setVisibility(View.GONE);
                 }
             }
 
         private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
-            ViewGroup.LayoutParams lp = holder.icon.getLayoutParams();
+            ViewGroup.LayoutParams lp = holder.mIcon.getLayoutParams();
             lp.width = getContext().getResources().getDimensionPixelSize(
                     R.dimen.header_icon_width);
             lp.height = lp.width;
-            holder.icon.setLayoutParams(lp);
-            holder.icon.setImageDrawable(icon);
+            holder.mIcon.setLayoutParams(lp);
+            holder.mIcon.setImageDrawable(icon);
         }
 
         public void resume() {
