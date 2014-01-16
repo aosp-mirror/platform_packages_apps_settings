@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Unbekannter Fehler"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Kalt"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Sichtbar für alle Bluetooth-Geräte in der Nähe (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Sichtbar für alle Bluetooth-Geräte in der Nähe"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Nicht sichtbar für andere Bluetooth-Geräte"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Nur sichtbar für Partnergeräte"</string>
+    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Pairing-Anfragen werden angenommen (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)."</string>
+    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Pairing-Anfragen werden angenommen."</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Pairing-Anfragen werden nicht angenommen."</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Pairing-Anfragen werden nicht angenommen."</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Sichtbarkeit einstellen"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sprachwahl sperren"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Verwendung des Bluetooth-Dialers bei gesperrtem Bildschirm verhindern"</string>
@@ -129,6 +129,8 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Verbindung trennen?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Hierdurch wird die Verbindung mit&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; getrennt."</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Übertragung"</string>
+    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"An"</string>
+    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"Aus"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profil deaktivieren?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Deaktiviert:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Von:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Verbunden"</string>
@@ -155,13 +157,11 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Eine App versucht, Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Eine App versucht, Ihr Tablet für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Eine App versucht, Ihr Telefon für andere Bluetooth-Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"Für <xliff:g id="APP_NAME">%1$s</xliff:g> soll die Bluetooth-Übertragung aktiviert werden, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"Für <xliff:g id="APP_NAME">%1$s</xliff:g> sollen Bluetooth und die Bluetooth-Übertragung aktiviert werden, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
-    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wenn diese Funktion aktiviert ist, kann Ihr Telefon mit anderen Geräten in der Nähe kommunizieren.\n\nFür die Übertragung werden stromsparende Bluetooth-Signale verwendet."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Eine App versucht, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Eine App versucht, Bluetooth zu aktivieren und Ihr Tablet für andere Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Eine App versucht, Bluetooth zu aktivieren und Ihr Telefon für andere Geräte sichtbar zu machen. Sie können diese Einstellung später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"Für <xliff:g id="APP_NAME">%1$s</xliff:g> soll die Bluetooth-Übertragung aktiviert werden, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="1783727814076135171">"Für <xliff:g id="APP_NAME">%1$s</xliff:g> sollen Bluetooth und die Bluetooth-Übertragung aktiviert werden, um mit anderen Geräten in der Nähe zu kommunizieren. Sie können dies später in den Bluetooth-Einstellungen ändern."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Wenn diese Funktion aktiviert ist, kann Ihr Telefon mit anderen Geräten in der Nähe kommunizieren.\n\nFür die Übertragung werden stromsparende Bluetooth-Signale verwendet."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Bluetooth wird aktiviert..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Bluetooth wird deaktiviert..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Automatische Verbindung"</string>
@@ -1512,6 +1512,8 @@
     <string name="power_phone" msgid="5392641106474567277">"Anrufe"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Ruhezustand"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Ruhezustand"</string>
+    <string name="power_unaccounted" msgid="4835429811853042257">"Nicht nachvollziehbar"</string>
+    <string name="power_overcounted" msgid="2762354976171358445">"Zu hoch berechnet"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU insgesamt"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU Vordergrund"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Aktiv lassen"</string>
@@ -1527,6 +1529,10 @@
     <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"Laufzeit"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Zeit ohne Signal"</string>
+    <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Akkuleistung insgesamt"</string>
+    <string name="usage_type_computed_power" msgid="3665248793473498804">"Berechneter Stromverbrauch"</string>
+    <string name="usage_type_min_actual_power" msgid="4772874833688090017">"Min. tatsächlicher Stromverbrauch"</string>
+    <string name="usage_type_max_actual_power" msgid="429012562553903697">"Max. tatsächlicher Stromverbrauch"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Beenden erzwingen"</string>
     <string name="battery_action_app_details" msgid="7861051816778419018">"App-Info"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"App-Einstellungen"</string>
@@ -1550,6 +1556,9 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Energiesparmodus auswählen"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Die App bietet unter Umständen Einstellungen für einen geringeren Akkuverbrauch."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Akkuverbrauch durch Nutzer"</string>
+    <string name="battery_desc_unaccounted" msgid="1653798876416893745">"Nicht nachvollziehbarer Stromverbrauch"</string>
+    <string name="battery_desc_overcounted" msgid="5481865509489228603">"Zu hoch berechneter Stromverbrauch"</string>
+    <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> seit dem Ausstecken"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Seit dem letzten Ausstecken für <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Verbrauch insgesamt"</string>
