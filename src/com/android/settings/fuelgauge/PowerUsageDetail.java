@@ -34,13 +34,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +49,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.util.FastPrintWriter;
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.WirelessSettings;
@@ -57,20 +60,11 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.wifi.WifiSettings;
 
-public class PowerUsageDetail extends Fragment implements Button.OnClickListener {
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 
-    enum DrainType {
-        IDLE,
-        CELL,
-        PHONE,
-        WIFI,
-        BLUETOOTH,
-        SCREEN,
-        APP,
-        USER,
-        UNACCOUNTED,
-        OVERCOUNTED
-    }
+public class PowerUsageDetail extends Fragment implements Button.OnClickListener {
 
     // Note: Must match the sequence of the DrainType
     private static int[] sDrainTypeDesciptions = new int[] {
@@ -85,6 +79,170 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         R.string.battery_desc_unaccounted,
         R.string.battery_desc_overcounted,
     };
+
+    public static void startBatteryDetailPage(
+            PreferenceActivity caller, BatteryStatsHelper helper, BatteryEntry entry,
+            boolean showLocationButton) {
+        // Initialize mStats if necessary.
+        helper.getStats();
+
+        Bundle args = new Bundle();
+        args.putString(PowerUsageDetail.EXTRA_TITLE, entry.name);
+        args.putInt(PowerUsageDetail.EXTRA_PERCENT, (int)
+                Math.ceil(entry.sipper.value * 100 / helper.getTotalPower()));
+        args.putInt(PowerUsageDetail.EXTRA_GAUGE, (int)
+                Math.ceil(entry.sipper.value * 100 / helper.getMaxPower()));
+        args.putLong(PowerUsageDetail.EXTRA_USAGE_DURATION, helper.getStatsPeriod());
+        args.putString(PowerUsageDetail.EXTRA_ICON_PACKAGE, entry.defaultPackageName);
+        args.putInt(PowerUsageDetail.EXTRA_ICON_ID, entry.iconId);
+        args.putDouble(PowerUsageDetail.EXTRA_NO_COVERAGE, entry.sipper.noCoveragePercent);
+        if (entry.sipper.uidObj != null) {
+            args.putInt(PowerUsageDetail.EXTRA_UID, entry.sipper.uidObj.getUid());
+        }
+        args.putSerializable(PowerUsageDetail.EXTRA_DRAIN_TYPE, entry.sipper.drainType);
+        args.putBoolean(PowerUsageDetail.EXTRA_SHOW_LOCATION_BUTTON, showLocationButton);
+
+        int[] types;
+        double[] values;
+        switch (entry.sipper.drainType) {
+            case APP:
+            case USER:
+            {
+                BatteryStats.Uid uid = entry.sipper.uidObj;
+                types = new int[] {
+                    R.string.usage_type_cpu,
+                    R.string.usage_type_cpu_foreground,
+                    R.string.usage_type_wake_lock,
+                    R.string.usage_type_gps,
+                    R.string.usage_type_wifi_running,
+                    R.string.usage_type_data_recv,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_wifi_recv,
+                    R.string.usage_type_data_wifi_send,
+                    R.string.usage_type_audio,
+                    R.string.usage_type_video,
+                };
+                values = new double[] {
+                    entry.sipper.cpuTime,
+                    entry.sipper.cpuFgTime,
+                    entry.sipper.wakeLockTime,
+                    entry.sipper.gpsTime,
+                    entry.sipper.wifiRunningTime,
+                    entry.sipper.mobileRxPackets,
+                    entry.sipper.mobileTxPackets,
+                    entry.sipper.wifiRxPackets,
+                    entry.sipper.wifiTxPackets,
+                    0,
+                    0
+                };
+
+                if (entry.sipper.drainType == BatterySipper.DrainType.APP) {
+                    Writer result = new StringWriter();
+                    PrintWriter printWriter = new FastPrintWriter(result, false, 1024);
+                    helper.getStats().dumpLocked(caller, printWriter, "", helper.getStatsType(),
+                            uid.getUid());
+                    printWriter.flush();
+                    args.putString(PowerUsageDetail.EXTRA_REPORT_DETAILS, result.toString());
+
+                    result = new StringWriter();
+                    printWriter = new FastPrintWriter(result, false, 1024);
+                    helper.getStats().dumpCheckinLocked(caller, printWriter, helper.getStatsType(),
+                            uid.getUid());
+                    printWriter.flush();
+                    args.putString(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS,
+                            result.toString());
+                }
+            }
+            break;
+            case CELL:
+            {
+                types = new int[] {
+                    R.string.usage_type_on_time,
+                    R.string.usage_type_no_coverage
+                };
+                values = new double[] {
+                    entry.sipper.usageTime,
+                    entry.sipper.noCoveragePercent
+                };
+            }
+            break;
+            case WIFI:
+            {
+                types = new int[] {
+                    R.string.usage_type_wifi_running,
+                    R.string.usage_type_cpu,
+                    R.string.usage_type_cpu_foreground,
+                    R.string.usage_type_wake_lock,
+                    R.string.usage_type_data_recv,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_wifi_recv,
+                    R.string.usage_type_data_wifi_send,
+                };
+                values = new double[] {
+                    entry.sipper.usageTime,
+                    entry.sipper.cpuTime,
+                    entry.sipper.cpuFgTime,
+                    entry.sipper.wakeLockTime,
+                    entry.sipper.mobileRxPackets,
+                    entry.sipper.mobileTxPackets,
+                    entry.sipper.wifiRxPackets,
+                    entry.sipper.wifiTxPackets,
+                };
+            } break;
+            case BLUETOOTH:
+            {
+                types = new int[] {
+                    R.string.usage_type_on_time,
+                    R.string.usage_type_cpu,
+                    R.string.usage_type_cpu_foreground,
+                    R.string.usage_type_wake_lock,
+                    R.string.usage_type_data_recv,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_wifi_recv,
+                    R.string.usage_type_data_wifi_send,
+                };
+                values = new double[] {
+                    entry.sipper.usageTime,
+                    entry.sipper.cpuTime,
+                    entry.sipper.cpuFgTime,
+                    entry.sipper.wakeLockTime,
+                    entry.sipper.mobileRxPackets,
+                    entry.sipper.mobileTxPackets,
+                    entry.sipper.wifiRxPackets,
+                    entry.sipper.wifiTxPackets,
+                };
+            } break;
+            case UNACCOUNTED:
+            case OVERCOUNTED:
+            {
+                types = new int[] {
+                    R.string.usage_type_total_battery_capacity,
+                    R.string.usage_type_computed_power,
+                    R.string.usage_type_min_actual_power,
+                    R.string.usage_type_max_actual_power,
+                };
+                values = new double[] {
+                    helper.getPowerProfile().getBatteryCapacity(),
+                    helper.getTotalPower(),
+                    helper.getMinDrainedPower(),
+                    helper.getMaxDrainedPower(),
+                };
+            } break;
+            default:
+            {
+                types = new int[] {
+                    R.string.usage_type_on_time
+                };
+                values = new double[] {
+                    entry.sipper.usageTime
+                };
+            }
+        }
+        args.putIntArray(PowerUsageDetail.EXTRA_DETAIL_TYPES, types);
+        args.putDoubleArray(PowerUsageDetail.EXTRA_DETAIL_VALUES, values);
+        caller.startPreferencePanel(PowerUsageDetail.class.getName(), args,
+                R.string.details_title, null, null, 0);
+    }
 
     public static final int ACTION_DISPLAY_SETTINGS = 1;
     public static final int ACTION_WIFI_SETTINGS = 2;
@@ -129,7 +287,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     private ViewGroup mDetailsParent;
     private ViewGroup mControlsParent;
     private long mStartTime;
-    private DrainType mDrainType;
+    private BatterySipper.DrainType mDrainType;
     private Drawable mAppIcon;
     private double mNoCoverage; // Percentage of time that there was no coverage
 
@@ -179,7 +337,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         final int gaugeValue = args.getInt(EXTRA_GAUGE, 1);
         mUsageSince = args.getInt(EXTRA_USAGE_SINCE, USAGE_SINCE_UNPLUGGED);
         mUid = args.getInt(EXTRA_UID, 0);
-        mDrainType = (DrainType) args.getSerializable(EXTRA_DRAIN_TYPE);
+        mDrainType = (BatterySipper.DrainType) args.getSerializable(EXTRA_DRAIN_TYPE);
         mNoCoverage = args.getDouble(EXTRA_NO_COVERAGE, 0);
         String iconPackage = args.getString(EXTRA_ICON_PACKAGE);
         int iconId = args.getInt(EXTRA_ICON_ID, 0);
