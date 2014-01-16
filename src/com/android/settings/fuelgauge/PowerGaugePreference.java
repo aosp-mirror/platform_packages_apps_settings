@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.os.BatterySipper;
 import com.android.settings.R;
 
 /**
@@ -31,11 +32,11 @@ import com.android.settings.R;
  * the left for the subsystem/app type.
  */
 public class PowerGaugePreference extends Preference {
-    private BatterySipper mInfo;
+    private BatteryEntry mInfo;
     private int mProgress;
     private CharSequence mProgressText;
 
-    public PowerGaugePreference(Context context, Drawable icon, BatterySipper info) {
+    public PowerGaugePreference(Context context, Drawable icon, BatteryEntry info) {
         super(context);
         setLayoutResource(R.layout.app_percentage_item);
         setIcon(icon != null ? icon : new ColorDrawable(0));
@@ -49,7 +50,7 @@ public class PowerGaugePreference extends Preference {
         notifyChanged();
     }
 
-    BatterySipper getInfo() {
+    BatteryEntry getInfo() {
         return mInfo;
     }
 

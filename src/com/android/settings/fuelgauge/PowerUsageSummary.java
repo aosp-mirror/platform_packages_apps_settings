@@ -26,6 +26,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -36,6 +38,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
@@ -58,6 +62,8 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
     private static final int MENU_HELP = Menu.FIRST + 2;
+
+    private UserManager mUm;
 
     private PreferenceGroup mAppListGroup;
     private String mBatteryLevel;
@@ -87,7 +93,8 @@ public class PowerUsageSummary extends PreferenceFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mStatsHelper = new BatteryStatsHelper(activity, mHandler);
+        mUm = (UserManager) activity.getSystemService(Context.USER_SERVICE);
+        mStatsHelper = new BatteryStatsHelper(activity);
     }
 
     @Override
@@ -111,8 +118,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     @Override
     public void onPause() {
-        mStatsHelper.pause();
-        mHandler.removeMessages(BatteryStatsHelper.MSG_UPDATE_NAME_ICON);
+        BatteryEntry.stopRequestQueue();
+        mHandler.removeMessages(BatteryEntry.MSG_UPDATE_NAME_ICON);
         getActivity().unregisterReceiver(mBatteryInfoReceiver);
         super.onPause();
     }
@@ -120,7 +127,10 @@ public class PowerUsageSummary extends PreferenceFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mStatsHelper.destroy();
+        if (getActivity().isChangingConfigurations()) {
+            mStatsHelper.storeState();
+            BatteryEntry.clearUidCache();
+        }
     }
 
     @Override
@@ -140,8 +150,9 @@ public class PowerUsageSummary extends PreferenceFragment {
             return false;
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
-        BatterySipper sipper = pgp.getInfo();
-        mStatsHelper.startBatteryDetailPage((PreferenceActivity) getActivity(), sipper, true);
+        BatteryEntry entry = pgp.getInfo();
+        PowerUsageDetail.startBatteryDetailPage((PreferenceActivity) getActivity(), mStatsHelper,
+                entry, true);
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -227,20 +238,22 @@ public class PowerUsageSummary extends PreferenceFragment {
             addNotAvailableMessage();
             return;
         }
-        mStatsHelper.refreshStats(false);
+        mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
-        for (BatterySipper sipper : usageList) {
-            if (sipper.getSortValue() < MIN_POWER_THRESHOLD) continue;
+        for (int i=0; i<usageList.size(); i++) {
+            BatterySipper sipper = usageList.get(i);
+            if ((sipper.value*60*60) < MIN_POWER_THRESHOLD) continue;
             final double percentOfTotal =
-                    ((sipper.getSortValue() / mStatsHelper.getTotalPower()) * 100);
+                    ((sipper.value / mStatsHelper.getTotalPower()) * 100);
             if (percentOfTotal < 1) continue;
+            BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
             PowerGaugePreference pref =
-                    new PowerGaugePreference(getActivity(), sipper.getIcon(), sipper);
+                    new PowerGaugePreference(getActivity(), entry.getIcon(), entry);
             final double percentOfMax =
-                    (sipper.getSortValue() * 100) / mStatsHelper.getMaxPower();
+                    (sipper.value * 100) / mStatsHelper.getMaxPower();
             sipper.percent = percentOfTotal;
-            pref.setTitle(sipper.name);
-            pref.setOrder(Integer.MAX_VALUE - (int) sipper.getSortValue()); // Invert the order
+            pref.setTitle(entry.getLabel());
+            pref.setOrder(i+1);
             pref.setPercent(percentOfMax, percentOfTotal);
             if (sipper.uidObj != null) {
                 pref.setKey(Integer.toString(sipper.uidObj.getUid()));
@@ -248,6 +261,8 @@ public class PowerUsageSummary extends PreferenceFragment {
             mAppListGroup.addPreference(pref);
             if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
         }
+
+        BatteryEntry.startRequestQueue();
     }
 
     Handler mHandler = new Handler() {
@@ -255,17 +270,17 @@ public class PowerUsageSummary extends PreferenceFragment {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case BatteryStatsHelper.MSG_UPDATE_NAME_ICON:
-                    BatterySipper bs = (BatterySipper) msg.obj;
+                case BatteryEntry.MSG_UPDATE_NAME_ICON:
+                    BatteryEntry entry = (BatteryEntry) msg.obj;
                     PowerGaugePreference pgp =
                             (PowerGaugePreference) findPreference(
-                                    Integer.toString(bs.uidObj.getUid()));
+                                    Integer.toString(entry.sipper.uidObj.getUid()));
                     if (pgp != null) {
-                        pgp.setIcon(bs.icon);
-                        pgp.setTitle(bs.name);
+                        pgp.setIcon(entry.icon);
+                        pgp.setTitle(entry.name);
                     }
                     break;
-                case BatteryStatsHelper.MSG_REPORT_FULLY_DRAWN:
+                case BatteryEntry.MSG_REPORT_FULLY_DRAWN:
                     Activity activity = getActivity();
                     if (activity != null) {
                         activity.reportFullyDrawn();
