@@ -136,8 +136,8 @@ public class BlacklistSettings extends ListFragment
             case R.id.blacklist_prefs:
                 PreferenceFragment prefs = new PreferenceFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(android.R.id.content, prefs);
-                ft.hide(this);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.replace(com.android.internal.R.id.prefs, prefs);
                 ft.addToBackStack(null);
                 ft.commitAllowingStateLoss();
                 return true;
