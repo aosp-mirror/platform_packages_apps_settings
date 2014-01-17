@@ -332,36 +332,36 @@
     <string name="auto_brightness_backlight">Brillo de pantalla (%)</string>
     <string name="auto_brightness_reset_dialog_title">¿Resetar niveles?</string>
     <string name="auto_brightness_reset_confirmation">Todos los niveles de brillo se restablecerán a sus valores predeterminados.</string>
-    <string name="auto_brightness_split_lux_format">Separación de posición (entre <xliff:g id="min">%1$d</xliff:g> y <xliff:g id="max">%2$d</xliff:g> lux)</string>
+    <string name="auto_brightness_split_lux_format">División de posición (entre <xliff:g id="min">%1$d</xliff:g> y <xliff:g id="max">%2$d</xliff:g> lux)</string>
     <string name="auto_brightness_level_options">Opciones de nivel de luz</string>
     <string name="auto_brightness_menu_edit">Editar</string>
-    <string name="auto_brightness_menu_split">Separación</string>
+    <string name="auto_brightness_menu_split">División</string>
     <string name="auto_brightness_menu_remove">Borrar</string>
     <string name="auto_brightness_preview">Vista previa</string>
     <string name="auto_brightness_preview_dialog_title">Curva de brillo de previsualización</string>
     <string name="auto_brightness_help_dialog_title">Ayuda</string>
     <string name="auto_brightness_help_text"><b>¿Cómo se calcula el brillo?</b>
 \n\n
-The brightness curve is calculated by performing a <i>cubic spline interpolation</i>
-on a given number of <i>control points</i>. It\'s not a \'bucket-type\' calculation where
-screen brightness will stay constant for a specific range of ambient brightness. That way,
-small changes in ambient brightness do not cause a large jump in screen brightness; however,
-it can be a little hard to predict the exact consequences of changing control points.\n
-To help with that, a preview of the calculated curve can be examined. Please note that the
-preview shows the curve in <i>logarithmic</i> scale, so that all control points can be shown
-distinctively. When using a linear scale, it wouldn\'t be possible to distinguish the tendentially
-more important control points in the lower range of ambient brightness.
+La curva de brillo se calcula mediante la realización de <i>cubic spline interpolation</i>
+en un número dado de <i>control points</i>. Esto no es un \'bucket-type\' calculation donde el
+brillo de la pantalla se mantendrá constante para un rango específico de luminosidad del entorno.De esta manera,
+pequeños cambios en la luminosidad del ambiente no causan un gran salto en el brillo de la pantalla, sin embargo, 
+que puede ser un poco difícil de predecir las consecuencias exactas de cambiar los puntos de control.\n
+Para ayudar, una vista previa de la curva calculada puede ser examinada. Tenga en cuenta que
+una vista previa muestra <i>logarithmic</i> escala, por lo que todos los puntos de control se pueden mostrar 
+distintitamente. Cuando se utiliza una escala lineal, no es posible distinguir la tendencia 
+más importantes de los puntos de control en el rango inferior de la luminosidad del entorno..
 \n\n
-<b>How to edit the brightness curve?</b>
+<b>¿Como se edita la curva de brillo?</b>
 \n\n
-Each line in the brightness list corresponds to one <i>control point</i> of the
-brightness curve. To edit the brightness level of the point, you can use the slider
-present in each line. The screen brightness will be changed accordingly while touching
-the slider to give a preview of the light level.\n
-Additional options are available by long-pressing a line. By selecting \'Edit\', you can
-both edit the ambient brightness level of the control point as well as manually input the
-desired screen brightness. Selecting \'Split\' allows you to to duplicate one line into
-two in order to insert additional control points. \'Remove\' deletes the selected line.
+Cada línea de la lista de brillo corresponde a <i>control point</i> de la
+curva de brillo. Para modificar el punto de nivel de brillo, se puede usar el control deslizante
+presente en cada linea. El brillo de la pantalla se cambiará en consecuencia mientras toca
+el control deslizante para darle una vista previa del nivel de luz.\n
+Las opciones adicionales están disponibles con pulsación larga de línea. Al sleccionar \'Editar\', tu puedes
+tanto editar el nivel de luminosidad del entorno del punto de control, así como introducir manualmente el
+brillo de la pantalla deseada. Seleccionando \'División\' le ​​permite duplicar una línea en 
+dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina linea seleccionada.
     </string>
 
     <string name="auto_brightness_sensitivity_title">Ajuste de sensibilidad</string>
@@ -799,10 +799,17 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Notification drawer settings  -->
     <string name="notification_drawer_title">Panel de notificaciones</string>
     <string name="notification_drawer_summary">Añade accesos directos, activa cinta de accesos de configuración rápida y más</string>
-    <string name="notification_hide_carrier_title">Ocultar etiqueta</string>
     <string name="notification_shortcuts_settings_title">Accesos directos</string>
     <string name="notification_shortcuts_settings_summary">Añadir accesos directos al panel de notificaciones</string>
 
+    <!-- Notification hide labels -->
+    <string name="notification_hide_labels_title">Ocultar etiqueta de notificación</string>
+    <string name="notification_hide_labels_disable">Mostrar todas las etiquetas</string>
+    <string name="notification_hide_labels_carrier">Ocultar cinta de etiquetas</string>
+    <string name="notification_hide_labels_wifi">Ocultar etiqueta WiFi</string>
+    <string name="notification_hide_labels_all">Ocultar todas las etiquetas</string>
+    <string name="notification_hide_labels_text">en el panel de notificaciones</string>
+	
     <!-- Navigation settings -->
     <string name="navigation_settings_options_title">Opciones de navegación</string>
     <string name="navigation_settings_category_title">Barra de navegación</string>
@@ -927,7 +934,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Network speed -->
     <string name="show_network_speed">Indicador de velocidad de la red</string>
     <string name="show_network_speed_summary">Mostrar velocidad de la red en la barra de estado</string>
-
+    <string name="show_network_speed_bits">Mostrar velocidad en bits/s</string>
+    <string name="show_network_speed_bytes">Mostrar velocidad en Bytes/s</string>
+	
     <!-- Screen recorder -->
     <string name="screen_recorder_title">Grabadora de pantalla</string>
     <string name="screen_recorder_summary">Ajustar configuración del grabador de pantalla</string>
@@ -981,6 +990,37 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lockscreen_use_widget_container_carousel_title">Activar carrusel</string>
     <string name="lockscreen_use_widget_container_carousel_summary">Utilice la animación carrusel al cambiar entre widgets de la pantalla de bloqueo</string>
 
+    <!-- Lockscreen Notifications -->
+    <!-- Categories --> 
+    <string name="general">General</string>
+    <string name="layout">Diseño</string>
+    <string name="privacy">Privacidad</string>
+
+    <string name="Lockscreen_notifications_header">Lockscreen Notifications</string>
+    <string name="lockscreen_notifications">Lockscreen notifications</string>
+    <string name="lockscreen_notifications_summary">Mostrar las notificaciones pendientes en la pantalla de bloqueo</string>
+    <string name="pocket_mode">Modo bolsillo</string>
+    <string name="pocket_mode_summary">Enciende la pantalla y muestra todas las notificaciones cuando el dispositivo se saca del bolsillo.Apaga la pantalla cuando el dispositivo se pone de nuevo en el bolsillo.</string>
+    <string name="show_always">Mostrar siempre</string>
+    <string name="show_always_summary">Siempre enciende la pantalla al sacar del bolsillo,incluso cuando no hay notificaciones pendientes</string>
+    <string name="hide_low_priority">Ocultar baja prioridad</string>
+    <string name="hide_low_priority_summary">Ocultar notificaciones de baja prioridad como Google now weather notifications</string>
+    <string name="hide_non_clearable">Ocultar no elimininables</string>
+    <string name="hide_non_clearable_summary">Ocultar notificaciones no eliminables</string>
+    <string name="dismiss_all">Permitir descartar todas las notificaciones </string>
+    <string name="dismiss_all_summary">Permitir descartar las notificaciones no eliminables.Estarán simplemente escondidas de la pantalla de bloqueo y no del panel de notificaciones.</string>
+    <string name="expanded_view">Vista notificación expandida</string>
+    <string name="expanded_view_summary">Mostrar notificaciones expandidas cuando sea posible</string>
+    <string name="force_expanded_view">Forzar vista expandida</string>
+    <string name="force_expanded_view_summary">Mostrar notificaciones expandidas por defecto.Usted todavía será capaz de cambiar entre visualización expandida y vista normal.</string>
+    <string name="wake_on_notification">Activación de notificación</string>
+    <string name="wake_on_notification_summary">Despertar dispositivo cuando se recibe una nueva notificación</string>
+    <string name="notifications_height">Recuento de notificaciones</string>
+    <string name="notifications_height_summary">Número de notificaciones que se muestran a la vez</string>
+    <string name="offset_top">Ajuste a la parte superior de la pantalla:</string>
+    <string name="privacy_mode">Modo de privacidad</string>
+    <string name="privacy_mode_summary">Desactiva las notificaciones mostradas y descartadas.De esta manera , sólo se mostrarán los iconos de las notificaciones.</string>
+	
     <!-- Lock Screen Shortcuts -->
     <string name="title_shortcuts">Accesos directos</string>
     <string name="lockscreen_target_info">Arrastre el control deslizante para asignar accesos directos</string>
@@ -1251,6 +1291,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="system_power_crt_mode_horizontal">Horizontal</string>
     <string name="system_power_crt_mode_vertical">Vertical</string>
     <string name="system_power_crt_mode_both">Ambos</string>
+	<string name="system_power_crt_mode_scale">Reducir proporcionalmente</string>
 
     <!-- Double tap to sleep -->
     <string name="double_tap_to_sleep">Dos toques para apagar</string>
@@ -1269,4 +1310,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="custom_statusbar_header_title">Cabecera del panel de notificación contextual</string>
     <string name="custom_statusbar_header_summary">Establece el fondo de la cabecera del panel de notificaciones para una imagen basada en la fecha y hora actuales</string>    
 
+	<!-- Minimum Vibration Duration -->
+	<string name="minimum_vibration_duration">Duración mínima de vibración</string>
+	
 </resources>
