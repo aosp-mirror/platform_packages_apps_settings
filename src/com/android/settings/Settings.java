@@ -170,7 +170,8 @@ public class Settings extends PreferenceActivity
             R.id.accessibility_settings,
             R.id.print_settings,
             R.id.nfc_payment_settings,
-            R.id.home_settings
+            R.id.home_settings,
+            R.id.privacy_settings_mahdi
     };
 
     private SharedPreferences mDevelopmentPreferences;
@@ -368,7 +369,8 @@ public class Settings extends PreferenceActivity
         HomeSettings.class.getName(),
         ProfilesSettings.class.getName(),
         ProfileConfig.class.getName(),
-        NavbarSettings.class.getName()        
+        NavbarSettings.class.getName(),
+        com.android.settings.mahdi.PrivacySettings.class.getName()        
     };
 
     @Override
