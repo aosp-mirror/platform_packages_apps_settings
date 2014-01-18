@@ -31,7 +31,6 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +44,7 @@ import android.widget.TextView;
 
 import com.android.settings.AccountPreference;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.location.LocationSettings;
 
@@ -146,7 +146,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private void startAccountSettings(AccountPreference acctPref) {
         Bundle args = new Bundle();
         args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, acctPref.getAccount());
-        ((PreferenceActivity) getActivity()).startPreferencePanel(
+        ((SettingsActivity) getActivity()).startPreferencePanel(
                 AccountSyncSettings.class.getCanonicalName(), args,
                 R.string.account_sync_settings_title, acctPref.getAccount().name,
                 this, REQUEST_SHOW_SYNC_SETTINGS);
@@ -368,7 +368,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            ((PreferenceActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(
                     mClass, null, mTitleRes, null, null, 0);
             // Hack: announce that the Google account preferences page is launching the location
             // settings

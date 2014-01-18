@@ -38,8 +38,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import android.preference.PreferenceActivity;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +52,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.FastPrintWriter;
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.WirelessSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -81,7 +80,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     };
 
     public static void startBatteryDetailPage(
-            PreferenceActivity caller, BatteryStatsHelper helper, BatteryEntry entry,
+            SettingsActivity caller, BatteryStatsHelper helper, BatteryEntry entry,
             boolean showLocationButton) {
         // Initialize mStats if necessary.
         helper.getStats();
@@ -400,8 +399,8 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
             mReportButton.setOnClickListener(this);
             
             // check if error reporting is enabled in secure settings
-            int enabled = Settings.Global.getInt(getActivity().getContentResolver(),
-                    Settings.Global.SEND_ACTION_APP_ERROR, 0);
+            int enabled = android.provider.Settings.Global.getInt(getActivity().getContentResolver(),
+                    android.provider.Settings.Global.SEND_ACTION_APP_ERROR, 0);
             if (enabled != 0) {
                 if (mPackages != null && mPackages.length > 0) {
                     try {
@@ -431,35 +430,35 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         Bundle args = new Bundle();
         args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackages[0]);
 
-        PreferenceActivity pa = (PreferenceActivity)getActivity();
-        pa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
                 R.string.application_info_label, null, null, 0);
     }
 
     private void doAction(int action) {
-        PreferenceActivity pa = (PreferenceActivity)getActivity();
+        SettingsActivity sa = (SettingsActivity)getActivity();
         switch (action) {
             case ACTION_DISPLAY_SETTINGS:
-                pa.startPreferencePanel(DisplaySettings.class.getName(), null,
+                sa.startPreferencePanel(DisplaySettings.class.getName(), null,
                         R.string.display_settings_title, null, null, 0);
                 break;
             case ACTION_WIFI_SETTINGS:
-                pa.startPreferencePanel(WifiSettings.class.getName(), null,
+                sa.startPreferencePanel(WifiSettings.class.getName(), null,
                         R.string.wifi_settings, null, null, 0);
                 break;
             case ACTION_BLUETOOTH_SETTINGS:
-                pa.startPreferencePanel(BluetoothSettings.class.getName(), null,
+                sa.startPreferencePanel(BluetoothSettings.class.getName(), null,
                         R.string.bluetooth_settings, null, null, 0);
                 break;
             case ACTION_WIRELESS_SETTINGS:
-                pa.startPreferencePanel(WirelessSettings.class.getName(), null,
+                sa.startPreferencePanel(WirelessSettings.class.getName(), null,
                         R.string.radio_controls_title, null, null, 0);
                 break;
             case ACTION_APP_DETAILS:
                 startApplicationDetailsActivity();
                 break;
             case ACTION_LOCATION_SETTINGS:
-                pa.startPreferencePanel(LocationSettings.class.getName(), null,
+                sa.startPreferencePanel(LocationSettings.class.getName(), null,
                         R.string.location_settings_title, null, null, 0);
                 break;
             case ACTION_FORCE_STOP:

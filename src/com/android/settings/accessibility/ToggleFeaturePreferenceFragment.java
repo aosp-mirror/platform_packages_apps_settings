@@ -23,7 +23,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.view.Gravity;
 import android.view.Menu;
@@ -35,6 +34,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 
 public abstract class ToggleFeaturePreferenceFragment
@@ -126,8 +126,8 @@ public abstract class ToggleFeaturePreferenceFragment
     }
 
     public void setTitle(String title) {
-        final PreferenceActivity activity = (PreferenceActivity) getActivity();
-        if (!activity.onIsMultiPane() || activity.onIsHidingHeaders()) {
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        if (!activity.onIsHidingHeaders()) {
             getActivity().setTitle(title);
         }
     }

@@ -42,7 +42,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity.Header;
 import android.preference.PreferenceFrameLayout;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract.CommonDataKinds;
@@ -238,7 +237,7 @@ public class Utils {
     }
 
     public static boolean updateHeaderToSpecificActivityFromMetaDataOrRemove(Context context,
-            List<Header> target, Header header) {
+            List<SettingsActivity.Header> target, SettingsActivity.Header header) {
 
         Intent intent = header.intent;
         if (intent != null) {

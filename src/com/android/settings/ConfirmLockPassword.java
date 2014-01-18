@@ -19,7 +19,6 @@ package com.android.settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -27,7 +26,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -36,13 +34,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class ConfirmLockPassword extends PreferenceActivity {
+public class ConfirmLockPassword extends SettingsActivity {
 
     @Override
     public Intent getIntent() {
@@ -65,7 +62,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
                 //WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_confirm_your_password_header);
-        showBreadCrumbs(msg, msg);
+        setTitle(msg);
     }
 
     public static class ConfirmLockPasswordFragment extends Fragment implements OnClickListener,
@@ -127,13 +124,12 @@ public class ConfirmLockPassword extends PreferenceActivity {
             mPasswordEntry.setInputType(isAlpha ? currentType
                     : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
 
-            // Update the breadcrumb (title) if this is embedded in a PreferenceActivity
-            if (activity instanceof PreferenceActivity) {
-                final PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+            if (activity instanceof SettingsActivity) {
+                final SettingsActivity sa = (SettingsActivity) activity;
                 int id = isAlpha ? R.string.lockpassword_confirm_your_password_header
                         : R.string.lockpassword_confirm_your_pin_header;
                 CharSequence title = getText(id);
-                preferenceActivity.showBreadCrumbs(title, title);
+                sa.setTitle(title);
             }
 
             return view;

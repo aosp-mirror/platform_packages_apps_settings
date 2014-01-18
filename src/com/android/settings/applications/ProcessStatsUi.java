@@ -25,7 +25,6 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -40,6 +39,7 @@ import com.android.internal.app.IProcessStats;
 import com.android.internal.app.ProcessMap;
 import com.android.internal.app.ProcessStats;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.Utils;
 
 import java.io.IOException;
@@ -192,7 +192,7 @@ public class ProcessStatsUi extends PreferenceFragment
         args.putBoolean(ProcessStatsDetail.EXTRA_USE_USS, mUseUss);
         args.putLong(ProcessStatsDetail.EXTRA_MAX_WEIGHT, mMaxWeight);
         args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, mTotalTime);
-        ((PreferenceActivity) getActivity()).startPreferencePanel(
+        ((SettingsActivity) getActivity()).startPreferencePanel(
                 ProcessStatsDetail.class.getName(), args, R.string.details_title, null, null, 0);
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);

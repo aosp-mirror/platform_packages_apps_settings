@@ -73,4 +73,9 @@
     <dimen name="captioning_preview_height">200dp</dimen>
 
     <dimen name="settings_side_margin">@*android:dimen/preference_fragment_padding_side</dimen>
+
+    <!-- Weight of the left pane in a multi-pane preference layout. -->
+    <integer name="preferences_left_pane_weight">4</integer>
+    <!-- Weight of the right pane in a multi-pane preference layout. So the split is 40:60 -->
+    <integer name="preferences_right_pane_weight">6</integer>
 </resources>

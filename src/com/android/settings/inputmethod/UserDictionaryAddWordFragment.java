@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
 
 import java.util.ArrayList;
@@ -137,8 +137,8 @@ public class UserDictionaryAddWordFragment extends Fragment
             final long id) {
         final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
         if (locale.isMoreLanguages()) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
-            preferenceActivity.startPreferenceFragment(new UserDictionaryLocalePicker(this), true);
+            SettingsActivity sa = (SettingsActivity)getActivity();
+            sa.startPreferenceFragment(new UserDictionaryLocalePicker(this), true);
         } else {
             mContents.updateLocale(locale.getLocaleString());
         }

@@ -20,6 +20,7 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.tts.TtsEnginePreference.RadioButtonGroupState;
 
@@ -30,9 +31,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
@@ -212,7 +211,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         // Set up the default rate.
         try {
-            mDefaultRate = Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
+            mDefaultRate = android.provider.Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
         } catch (SettingNotFoundException e) {
             // Default rate setting not found, initialize it
             mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
@@ -222,12 +221,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         mCurrentEngine = mTts.getCurrentEngine();
 
-        PreferenceActivity preferenceActivity = null;
-        if (getActivity() instanceof PreferenceActivity) {
-            preferenceActivity = (PreferenceActivity) getActivity();
+        SettingsActivity activity = null;
+        if (getActivity() instanceof SettingsActivity) {
+            activity = (SettingsActivity) getActivity();
         } else {
             throw new IllegalStateException("TextToSpeechSettings used outside a " +
-                    "PreferenceActivity");
+                    "Settings");
         }
 
         mEnginePreferenceCategory.removeAll();
@@ -235,7 +234,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         List<EngineInfo> engines = mEnginesHelper.getEngines();
         for (EngineInfo engine : engines) {
             TtsEnginePreference enginePref = new TtsEnginePreference(getActivity(), engine,
-                    this, preferenceActivity);
+                    this, activity);
             mEnginePreferenceCategory.addPreference(enginePref);
         }
 
@@ -422,7 +421,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             // Default rate
             mDefaultRate = Integer.parseInt((String) objValue);
             try {
-                Settings.Secure.putInt(getContentResolver(), TTS_DEFAULT_RATE, mDefaultRate);
+                android.provider.Settings.Secure.putInt(getContentResolver(),
+                        TTS_DEFAULT_RATE, mDefaultRate);
                 if (mTts != null) {
                     mTts.setSpeechRate(mDefaultRate / 100.0f);
                 }
@@ -565,7 +565,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             return;
         }
 
-        Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
+        android.provider.Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
 
         mAvailableStrLocals = data.getStringArrayListExtra(
             TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);

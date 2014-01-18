@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
@@ -31,8 +32,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -115,7 +114,7 @@ public class InputMethodPreference extends CheckBoxPreference {
                 @Override
                 public boolean onLongClick(View arg0) {
                     final Bundle bundle = new Bundle();
-                    bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
+                    bundle.putString(android.provider.Settings.EXTRA_INPUT_METHOD_ID, imiId);
                     startFragment(mFragment, InputMethodAndSubtypeEnabler.class.getName(),
                             0, bundle);
                     return true;
@@ -147,7 +146,7 @@ public class InputMethodPreference extends CheckBoxPreference {
                 @Override
                 public boolean onLongClick(View arg0) {
                     final Bundle bundle = new Bundle();
-                    bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
+                    bundle.putString(android.provider.Settings.EXTRA_INPUT_METHOD_ID, imiId);
                     startFragment(mFragment, InputMethodAndSubtypeEnabler.class.getName(),
                             0, bundle);
                     return true;
@@ -206,13 +205,12 @@ public class InputMethodPreference extends CheckBoxPreference {
 
     public static boolean startFragment(
             Fragment fragment, String fragmentClass, int requestCode, Bundle extras) {
-        if (fragment.getActivity() instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity)fragment.getActivity();
-            preferenceActivity.startPreferencePanel(fragmentClass, extras, 0, null, fragment,
-                    requestCode);
+        if (fragment.getActivity() instanceof SettingsActivity) {
+            SettingsActivity sa = (SettingsActivity) fragment.getActivity();
+            sa.startPreferencePanel(fragmentClass, extras, 0, null, fragment, requestCode);
             return true;
         } else {
-            Log.w(TAG, "Parent isn't PreferenceActivity, thus there's no way to launch the "
+            Log.w(TAG, "Parent isn't Settings, thus there's no way to launch the "
                     + "given Fragment (name: " + fragmentClass + ", requestCode: " + requestCode
                     + ")");
             return false;

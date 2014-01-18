@@ -192,9 +192,8 @@ public class UserDictionarySettings extends ListFragment {
         args.putString(UserDictionaryAddWordContents.EXTRA_WORD, editingWord);
         args.putString(UserDictionaryAddWordContents.EXTRA_SHORTCUT, editingShortcut);
         args.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mLocale);
-        android.preference.PreferenceActivity pa =
-                (android.preference.PreferenceActivity)getActivity();
-        pa.startPreferencePanel(
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.startPreferencePanel(
                 com.android.settings.inputmethod.UserDictionaryAddWordFragment.class.getName(),
                 args, R.string.user_dict_settings_add_dialog_title, null, null, 0);
     }

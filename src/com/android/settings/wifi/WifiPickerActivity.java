@@ -16,7 +16,6 @@
 package com.android.settings.wifi;
 
 import com.android.settings.ButtonBarHandler;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.Fragment;
@@ -54,8 +53,8 @@ public class WifiPickerActivity extends PreferenceActivity implements ButtonBarH
 
     /**
      * Almost dead copy of
-     * {@link PreferenceActivity#startWithFragment(String, Bundle, Fragment, int)}, except
-     * this has additional codes for button bar handling.
+     * {@link PreferenceActivity#startWithFragment(String, Bundle, Fragment, int)}, except this has
+     * additional codes for button bar handling.
      */
     @Override
     public void startWithFragment(String fragmentName, Bundle args,

@@ -22,7 +22,6 @@ import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 
 import static com.android.internal.widget.LockPatternView.DisplayMode;
 
@@ -30,7 +29,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +47,7 @@ import java.util.List;
  * - asks for confirmation / restart
  * - saves chosen password when confirmed
  */
-public class ChooseLockPattern extends PreferenceActivity {
+public class ChooseLockPattern extends SettingsActivity {
     /**
      * Used by the choose lock pattern wizard to indicate the wizard is
      * finished, and each activity in the wizard should finish.
@@ -80,7 +78,7 @@ public class ChooseLockPattern extends PreferenceActivity {
         // requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_choose_your_pattern_header);
-        showBreadCrumbs(msg, msg);
+        setTitle(msg);
     }
 
     @Override

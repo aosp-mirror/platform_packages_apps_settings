@@ -22,6 +22,13 @@
     <header android:id="@+id/wireless_section"
         android:title="@string/header_category_wireless_networks" />
 
+    <!-- Dashboard -->
+    <!--TODO: android:icon="@drawable/ic_settings_dashboard"-->
+    <header
+        android:id="@+id/dashboard"
+        android:fragment="com.android.settings.dashboard.DashboardSummary"
+        android:title="@string/dashboard_title" />
+
     <!-- Wifi -->
     <header
         android:id="@+id/wifi_settings"

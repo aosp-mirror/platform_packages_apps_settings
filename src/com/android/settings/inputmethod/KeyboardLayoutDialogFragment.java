@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import com.android.settings.R;
-import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 
 import android.app.AlertDialog;
 import android.app.Activity;
@@ -29,7 +28,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.res.Resources;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;

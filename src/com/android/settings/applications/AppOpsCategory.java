@@ -28,7 +28,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +39,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppOpsState.AppOpEntry;
 
 public class AppOpsCategory extends ListFragment implements
@@ -333,8 +333,8 @@ public class AppOpsCategory extends ListFragment implements
         Bundle args = new Bundle();
         args.putString(AppOpsDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
 
-        PreferenceActivity pa = (PreferenceActivity)getActivity();
-        pa.startPreferencePanel(AppOpsDetails.class.getName(), args,
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.startPreferencePanel(AppOpsDetails.class.getName(), args,
                 R.string.app_ops_settings, null, this, RESULT_APP_DETAILS);
     }
     

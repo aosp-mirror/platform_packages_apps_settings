@@ -22,12 +22,9 @@ import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -305,13 +302,13 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     public boolean startFragment(
             Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
-        if (getActivity() instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
-            preferenceActivity.startPreferencePanel(fragmentClass, extras,
+        if (getActivity() instanceof SettingsActivity) {
+            SettingsActivity sa = (SettingsActivity) getActivity();
+            sa.startPreferencePanel(fragmentClass, extras,
                     R.string.lock_settings_picker_title, null, caller, requestCode);
             return true;
         } else {
-            Log.w(TAG, "Parent isn't PreferenceActivity, thus there's no way to launch the "
+            Log.w(TAG, "Parent isn't Settings activity, thus there's no way to launch the "
                     + "given Fragment (name: " + fragmentClass + ", requestCode: " + requestCode
                     + ")");
             return false;

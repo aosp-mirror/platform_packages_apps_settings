@@ -17,23 +17,24 @@
 package com.android.settings.location;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.SettingInjectorService;
+import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,10 +68,48 @@ public class LocationSettings extends LocationSettingsBase
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final Activity activity = getActivity();
+
+        mSwitch = new Switch(activity);
+        final int padding = activity.getResources().getDimensionPixelSize(
+                R.dimen.action_bar_switch_padding);
+        mSwitch.setPaddingRelative(0, 0, padding, 0);
+        mSwitch.setOnCheckedChangeListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+
+        // Only show the master switch when we're not being used as Setup Wizard.
+        if (!activity.onIsHidingHeaders()) {
+            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                    ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_VERTICAL | Gravity.END));
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        if (!activity.onIsHidingHeaders()) {
+            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(null);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        mSwitch = new Switch(getActivity());
-        mSwitch.setOnCheckedChangeListener(this);
         mValidListener = true;
         createPreferenceHierarchy();
     }
@@ -101,7 +140,7 @@ public class LocationSettings extends LocationSettingsBase
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
-        final PreferenceActivity activity = (PreferenceActivity) getActivity();
+        final SettingsActivity activity = (SettingsActivity) getActivity();
         PreferenceScreen root = getPreferenceScreen();
         if (root != null) {
             root.removeAll();
@@ -138,22 +177,6 @@ public class LocationSettings extends LocationSettingsBase
         }
 
         addLocationServices(activity, root);
-
-        // Only show the master switch when we're not in multi-pane mode, and not being used as
-        // Setup Wizard.
-        if (activity.onIsHidingHeaders() || !activity.onIsMultiPane()) {
-            final int padding = activity.getResources().getDimensionPixelSize(
-                    R.dimen.action_bar_switch_padding);
-            mSwitch.setPaddingRelative(0, 0, padding, 0);
-            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                    ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_VERTICAL | Gravity.END));
-        }
-
-        setHasOptionsMenu(true);
 
         refreshLocationMode();
         return root;
@@ -202,16 +225,16 @@ public class LocationSettings extends LocationSettingsBase
     @Override
     public void onModeChanged(int mode, boolean restricted) {
         switch (mode) {
-            case Settings.Secure.LOCATION_MODE_OFF:
+            case android.provider.Settings.Secure.LOCATION_MODE_OFF:
                 mLocationMode.setSummary(R.string.location_mode_location_off_title);
                 break;
-            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
+            case android.provider.Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
                 mLocationMode.setSummary(R.string.location_mode_sensors_only_title);
                 break;
-            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
+            case android.provider.Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
                 mLocationMode.setSummary(R.string.location_mode_battery_saving_title);
                 break;
-            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
+            case android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
                 mLocationMode.setSummary(R.string.location_mode_high_accuracy_title);
                 break;
             default:
@@ -221,7 +244,7 @@ public class LocationSettings extends LocationSettingsBase
         // Restricted user can't change the location mode, so disable the master switch. But in some
         // corner cases, the location might still be enabled. In such case the master switch should
         // be disabled but checked.
-        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF);
+        boolean enabled = (mode != android.provider.Settings.Secure.LOCATION_MODE_OFF);
         mSwitch.setEnabled(!restricted);
         mLocationMode.setEnabled(enabled && !restricted);
         mCategoryRecentLocationRequests.setEnabled(enabled);
@@ -247,9 +270,9 @@ public class LocationSettings extends LocationSettingsBase
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
+            setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
         } else {
-            setLocationMode(Settings.Secure.LOCATION_MODE_OFF);
+            setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_OFF);
         }
     }
 }

@@ -19,8 +19,10 @@ package com.android.settings.wifi;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import android.preference.PreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.ActionBar;
@@ -49,9 +51,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -171,6 +171,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     // the action bar uses a different set of controls for Setup Wizard
     private boolean mSetupWizardMode;
+
+    private Switch mSwitch;
 
     /* End of "used in Wifi Setup context" */
 
@@ -383,33 +385,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         if (mSetupWizardMode) {
             getView().setSystemUiVisibility(
-//                    View.STATUS_BAR_DISABLE_BACK |
                     View.STATUS_BAR_DISABLE_HOME |
                     View.STATUS_BAR_DISABLE_RECENT |
                     View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
                     View.STATUS_BAR_DISABLE_CLOCK);
-        }
-
-        // On/off switch is hidden for Setup Wizard
-        if (!mSetupWizardMode) {
-            Switch actionBarSwitch = new Switch(activity);
-
-            if (activity instanceof PreferenceActivity) {
-                PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-                if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                    final int padding = activity.getResources().getDimensionPixelSize(
-                            R.dimen.action_bar_switch_padding);
-                    actionBarSwitch.setPaddingRelative(0, 0, padding, 0);
-                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                            ActionBar.DISPLAY_SHOW_CUSTOM);
-                    activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            Gravity.CENTER_VERTICAL | Gravity.END));
-                }
-            }
-
-            mWifiEnabler = new WifiEnabler(activity, actionBarSwitch);
         }
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
@@ -419,6 +398,53 @@ public class WifiSettings extends RestrictedSettingsFragment
             registerForContextMenu(getListView());
         }
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // On/off switch is hidden for Setup Wizard
+        if (!mSetupWizardMode) {
+            final Activity activity = getActivity();
+
+            mSwitch = new Switch(activity);
+
+            if (activity instanceof SettingsActivity) {
+                SettingsActivity sa = (SettingsActivity) activity;
+                if (!sa.onIsHidingHeaders()) {
+                    final int padding = activity.getResources().getDimensionPixelSize(
+                            R.dimen.action_bar_switch_padding);
+                    mSwitch.setPaddingRelative(0, 0, padding, 0);
+                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                            ActionBar.DISPLAY_SHOW_CUSTOM);
+                    activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            Gravity.CENTER_VERTICAL | Gravity.END));
+                }
+            }
+
+            mWifiEnabler = new WifiEnabler(activity, mSwitch);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Activity activity = getActivity();
+        boolean onIsHidingHeaders = true;
+        if (activity instanceof SettingsActivity){
+            SettingsActivity sa = (SettingsActivity) activity;
+            onIsHidingHeaders = sa.onIsHidingHeaders();
+        } else if (activity instanceof PreferenceActivity) {
+            PreferenceActivity pa = (PreferenceActivity) activity;
+            onIsHidingHeaders = pa.onIsHidingHeaders();
+        }
+        if (!onIsHidingHeaders) {
+            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(null);
+        }
     }
 
     @Override
@@ -512,8 +538,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 showDialog(WPS_PBC_DIALOG_ID);
                 return true;
             case MENU_ID_P2P:
-                if (getActivity() instanceof PreferenceActivity) {
-                    ((PreferenceActivity) getActivity()).startPreferencePanel(
+                if (getActivity() instanceof SettingsActivity) {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(
                             WifiP2pSettings.class.getCanonicalName(),
                             null,
                             R.string.wifi_p2p_settings_title, null,
@@ -536,8 +562,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 return true;
             case MENU_ID_ADVANCED:
-                if (getActivity() instanceof PreferenceActivity) {
-                    ((PreferenceActivity) getActivity()).startPreferencePanel(
+                if (getActivity() instanceof SettingsActivity) {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(
                             AdvancedWifiSettings.class.getCanonicalName(),
                             null,
                             R.string.wifi_advanced_titlebar, null,
@@ -743,12 +769,12 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void setOffMessage() {
         if (mEmptyView != null) {
             mEmptyView.setText(R.string.wifi_empty_list_wifi_off);
-            if (Settings.Global.getInt(getActivity().getContentResolver(),
-                    Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1) {
+            if (android.provider.Settings.Global.getInt(getActivity().getContentResolver(),
+                    android.provider.Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1) {
                 mEmptyView.append("\n\n");
                 int resId;
-                if (Settings.Secure.isLocationProviderEnabled(getActivity().getContentResolver(),
-                        LocationManager.NETWORK_PROVIDER)) {
+                if (android.provider.Settings.Secure.isLocationProviderEnabled(
+                        getActivity().getContentResolver(), LocationManager.NETWORK_PROVIDER)) {
                     resId = R.string.wifi_scan_notify_text_location_on;
                 } else {
                     resId = R.string.wifi_scan_notify_text_location_off;

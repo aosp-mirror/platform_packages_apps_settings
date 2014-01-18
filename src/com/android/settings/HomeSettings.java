@@ -23,7 +23,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -138,7 +137,7 @@ public class HomeSettings extends SettingsPreferenceFragment {
         if (mPrefs.size() < 2) {
             if (mShowNotice) {
                 mShowNotice = false;
-                Settings.requestHomeNotice();
+                SettingsActivity.requestHomeNotice();
             }
             finishFragment();
         }

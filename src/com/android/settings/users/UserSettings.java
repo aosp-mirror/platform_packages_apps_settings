@@ -47,7 +47,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
@@ -67,6 +66,7 @@ import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SelectableEditTextPreference;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 
 public class UserSettings extends RestrictedSettingsFragment
@@ -377,7 +377,7 @@ public class UserSettings extends RestrictedSettingsFragment
             Bundle extras = new Bundle();
             extras.putInt(RestrictedProfileSettings.EXTRA_USER_ID, userId);
             extras.putBoolean(RestrictedProfileSettings.EXTRA_NEW_USER, newUser);
-            ((PreferenceActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(
                     RestrictedProfileSettings.class.getName(),
                     extras, R.string.user_restrictions_title, null,
                     null, 0);
@@ -390,7 +390,7 @@ public class UserSettings extends RestrictedSettingsFragment
             int titleResId = info.id == UserHandle.USER_OWNER ? R.string.owner_info_settings_title
                     : (info.isRestricted() ? R.string.profile_info_settings_title
                             : R.string.user_info_settings_title);
-            ((PreferenceActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(
                     OwnerInfoSettings.class.getName(),
                     extras, titleResId, null, null, 0);
         }

@@ -15,13 +15,11 @@
  */
 package com.android.settings.inputmethod;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.preference.PreferenceActivity;
 
-import com.android.settings.ChooseLockPassword.ChooseLockPasswordFragment;
+import com.android.settings.SettingsActivity;
 
-public class InputMethodAndSubtypeEnablerActivity extends PreferenceActivity {
+public class InputMethodAndSubtypeEnablerActivity extends SettingsActivity {
     @Override
     public Intent getIntent() {
         final Intent modIntent = new Intent(super.getIntent());

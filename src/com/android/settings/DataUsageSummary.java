@@ -87,8 +87,6 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -548,8 +546,8 @@ public class DataUsageSummary extends Fragment {
                 return true;
             }
             case R.id.data_usage_menu_metered: {
-                final PreferenceActivity activity = (PreferenceActivity) getActivity();
-                activity.startPreferencePanel(DataUsageMeteredSettings.class.getCanonicalName(), null,
+                final SettingsActivity sa = (SettingsActivity) getActivity();
+                sa.startPreferencePanel(DataUsageMeteredSettings.class.getCanonicalName(), null,
                         R.string.data_usage_metered_title, null, this, 0);
                 return true;
             }
@@ -886,14 +884,16 @@ public class DataUsageSummary extends Fragment {
 
     private boolean getDataRoaming() {
         final ContentResolver resolver = getActivity().getContentResolver();
-        return Settings.Global.getInt(resolver, Settings.Global.DATA_ROAMING, 0) != 0;
+        return android.provider.Settings.Global.getInt(resolver,
+                android.provider.Settings.Global.DATA_ROAMING, 0) != 0;
     }
 
     private void setDataRoaming(boolean enabled) {
         // TODO: teach telephony DataConnectionTracker to watch and apply
         // updates when changed.
         final ContentResolver resolver = getActivity().getContentResolver();
-        Settings.Global.putInt(resolver, Settings.Global.DATA_ROAMING, enabled ? 1 : 0);
+        android.provider.Settings.Global.putInt(resolver,
+                android.provider.Settings.Global.DATA_ROAMING, enabled ? 1 : 0);
         mMenuDataRoaming.setChecked(enabled);
     }
 

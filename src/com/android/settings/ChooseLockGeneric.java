@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -28,7 +27,6 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
 import android.util.EventLog;
@@ -38,13 +36,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.ConfirmLockPattern.ConfirmLockPatternFragment;
 
 import java.util.List;
 
 import libcore.util.MutableBoolean;
 
-public class ChooseLockGeneric extends PreferenceActivity {
+public class ChooseLockGeneric extends SettingsActivity {
 
     @Override
     public Intent getIntent() {

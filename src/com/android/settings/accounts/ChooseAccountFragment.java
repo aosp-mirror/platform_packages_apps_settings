@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,12 +28,12 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import com.android.internal.util.CharSequences;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.google.android.collect.Maps;
 
 import java.util.ArrayList;
@@ -44,9 +45,9 @@ import java.util.Map;
 /**
  * Activity asking a user to select an account to be set up.
  */
-public class ChooseAccountActivity extends PreferenceActivity {
+public class ChooseAccountFragment extends SettingsPreferenceFragment {
 
-    private static final String TAG = "ChooseAccountActivity";
+    private static final String TAG = "ChooseAccountFragment";
     private String[] mAuthorities;
     private PreferenceGroup mAddAccountGroup;
     private final ArrayList<ProviderEntry> mProviderList = new ArrayList<ProviderEntry>();
@@ -76,14 +77,13 @@ public class ChooseAccountActivity extends PreferenceActivity {
     }
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        setContentView(R.layout.add_account_screen);
         addPreferencesFromResource(R.xml.add_account_settings);
-        mAuthorities = getIntent().getStringArrayExtra(
+        mAuthorities = getActivity().getIntent().getStringArrayExtra(
                 AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
-        String[] accountTypesFilter = getIntent().getStringArrayExtra(
+        String[] accountTypesFilter = getActivity().getIntent().getStringArrayExtra(
                 AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY);
         if (accountTypesFilter != null) {
             mAccountTypesFilter = new HashSet<String>();
@@ -100,7 +100,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
      * and update any UI that depends on AuthenticatorDescriptions in onAuthDescriptionsUpdated().
      */
     private void updateAuthDescriptions() {
-        mAuthDescs = AccountManager.get(this).getAuthenticatorTypes();
+        mAuthDescs = AccountManager.get(getActivity()).getAuthenticatorTypes();
         for (int i = 0; i < mAuthDescs.length; i++) {
             mTypeToAuthDescription.put(mAuthDescs[i].type, mAuthDescs[i]);
         }
@@ -148,7 +148,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
             for (ProviderEntry pref : mProviderList) {
                 Drawable drawable = getDrawableForType(pref.type);
                 ProviderPreference p =
-                        new ProviderPreference(this, pref.type, drawable, pref.name);
+                        new ProviderPreference(getActivity(), pref.type, drawable, pref.name);
                 mAddAccountGroup.addPreference(p);
             }
         } else {
@@ -160,7 +160,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
                 }
                 Log.v(TAG, "No providers found for authorities: " + auths);
             }
-            setResult(RESULT_CANCELED);
+            getActivity().setResult(Activity.RESULT_CANCELED);
             finish();
         }
     }
@@ -196,7 +196,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = createPackageContext(desc.packageName, 0);
+                Context authContext = getActivity().createPackageContext(desc.packageName, 0);
                 icon = authContext.getResources().getDrawable(desc.iconId);
             } catch (PackageManager.NameNotFoundException e) {
                 // TODO: place holder icon for missing account icons?
@@ -219,7 +219,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = createPackageContext(desc.packageName, 0);
+                Context authContext = getActivity().createPackageContext(desc.packageName, 0);
                 label = authContext.getResources().getText(desc.labelId);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "No label name for account type " + accountType);
@@ -245,7 +245,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
     private void finishWithAccountType(String accountType) {
         Intent intent = new Intent();
         intent.putExtra(AddAccountSettings.EXTRA_SELECTED_ACCOUNT, accountType);
-        setResult(RESULT_OK, intent);
+        getActivity().setResult(Activity.RESULT_OK, intent);
         finish();
     }
 }

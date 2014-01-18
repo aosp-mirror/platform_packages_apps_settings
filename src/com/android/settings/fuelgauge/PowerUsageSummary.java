@@ -29,7 +29,6 @@ import android.os.Parcel;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -43,6 +42,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 
 import java.util.List;
 
@@ -141,8 +141,8 @@ public class PowerUsageSummary extends PreferenceFragment {
             byte[] histData = hist.marshall();
             Bundle args = new Bundle();
             args.putByteArray(BatteryHistoryDetail.EXTRA_STATS, histData);
-            PreferenceActivity pa = (PreferenceActivity)getActivity();
-            pa.startPreferencePanel(BatteryHistoryDetail.class.getName(), args,
+            SettingsActivity sa = (SettingsActivity) getActivity();
+            sa.startPreferencePanel(BatteryHistoryDetail.class.getName(), args,
                     R.string.history_details_title, null, null, 0);
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -151,7 +151,7 @@ public class PowerUsageSummary extends PreferenceFragment {
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
-        PowerUsageDetail.startBatteryDetailPage((PreferenceActivity) getActivity(), mStatsHelper,
+        PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
                 entry, true);
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

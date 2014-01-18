@@ -38,6 +38,7 @@ import android.provider.MediaStore;
 import android.text.format.Formatter;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementDetails;
 import com.android.settings.deviceinfo.StorageMeasurement.MeasurementReceiver;
 import com.google.android.collect.Lists;
@@ -425,8 +426,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
             intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mVolume);
         } else if (pref == mItemApps) {
             intent = new Intent(Intent.ACTION_MANAGE_PACKAGE_STORAGE);
-            intent.setClass(getContext(),
-                    com.android.settings.Settings.ManageApplicationsActivity.class);
+            intent.setClass(getContext(), Settings.ManageApplicationsActivity.class);
         } else if (pref == mItemDownloads) {
             intent = new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS).putExtra(
                     DownloadManager.INTENT_EXTRAS_SORT_BY_SIZE, true);

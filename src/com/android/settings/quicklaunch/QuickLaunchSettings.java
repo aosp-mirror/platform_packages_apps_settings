@@ -16,6 +16,7 @@
 
 package com.android.settings.quicklaunch;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -27,7 +28,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Bookmarks;
@@ -40,6 +40,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.net.URISyntaxException;
 
@@ -49,7 +50,7 @@ import java.net.URISyntaxException;
  * Shows a list of possible shortcuts, the current application each is bound to,
  * and allows choosing a new bookmark for a shortcut.
  */
-public class QuickLaunchSettings extends PreferenceActivity implements
+public class QuickLaunchSettings extends SettingsPreferenceFragment implements
         AdapterView.OnItemLongClickListener, DialogInterface.OnClickListener {
 
     private static final String TAG = "QuickLaunchSettings";
@@ -91,7 +92,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     private static final String CLEAR_DIALOG_SHORTCUT = "CLEAR_DIALOG_SHORTCUT";
     
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
         addPreferencesFromResource(R.xml.quick_launch_settings);
@@ -100,27 +101,35 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         mShortcutToPreference = new SparseArray<ShortcutPreference>();
         mBookmarksObserver = new BookmarksObserver(mUiHandler);
         initShortcutPreferences();
-        mBookmarksCursor = managedQuery(Bookmarks.CONTENT_URI, sProjection, null, null);
+        mBookmarksCursor = getActivity().getContentResolver().query(Bookmarks.CONTENT_URI,
+                sProjection, null, null, null);
         getListView().setOnItemLongClickListener(this);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
+        mBookmarksCursor = getActivity().getContentResolver().query(Bookmarks.CONTENT_URI,
+                sProjection, null, null, null);
         getContentResolver().registerContentObserver(Bookmarks.CONTENT_URI, true,
                 mBookmarksObserver);
         refreshShortcuts();
     }
     
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         getContentResolver().unregisterContentObserver(mBookmarksObserver);
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
+    public void onStop() {
+        mBookmarksCursor.close();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle state) {
+        super.onActivityCreated(state);
         
         // Restore the clear dialog's info
         mClearDialogBookmarkTitle = state.getString(CLEAR_DIALOG_BOOKMARK_TITLE);
@@ -128,7 +137,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         
         // Save the clear dialog's info
@@ -137,12 +146,12 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id) {
         switch (id) {
             
             case DIALOG_CLEAR_SHORTCUT: {
                 // Create the dialog for clearing a shortcut
-                return new AlertDialog.Builder(this)
+                return new AlertDialog.Builder(getActivity())
                         .setTitle(getString(R.string.quick_launch_clear_dialog_title))
                         .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setMessage(getString(R.string.quick_launch_clear_dialog_message,
@@ -156,18 +165,6 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         return super.onCreateDialog(id);
     }
     
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        switch (id) {
-            
-            case DIALOG_CLEAR_SHORTCUT: {
-                AlertDialog alertDialog = (AlertDialog) dialog;
-                alertDialog.setMessage(getString(R.string.quick_launch_clear_dialog_message,
-                        mClearDialogShortcut, mClearDialogBookmarkTitle));
-            }
-        }
-    }
-
     private void showClearDialog(ShortcutPreference pref) {
 
         if (!pref.hasBookmark()) return;
@@ -197,7 +194,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
 
         // Open the screen to pick a bookmark for this shortcut
         ShortcutPreference pref = (ShortcutPreference) preference;
-        Intent intent = new Intent(this, BookmarkPicker.class);
+        Intent intent = new Intent(getActivity(), BookmarkPicker.class);
         intent.putExtra(BookmarkPicker.EXTRA_SHORTCUT, pref.getShortcut());
         startActivityForResult(intent, REQUEST_PICK_BOOKMARK);
         
@@ -214,8 +211,8 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
             return;
         }
 
@@ -253,7 +250,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     }
     
     private ShortcutPreference createPreference(char shortcut) {
-        ShortcutPreference pref = new ShortcutPreference(QuickLaunchSettings.this, shortcut);
+        ShortcutPreference pref = new ShortcutPreference(getActivity(), shortcut);
         mShortcutGroup.addPreference(pref);
         mShortcutToPreference.put(shortcut, pref);
         return pref;
@@ -303,7 +300,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
             if (shortcut == 0) continue;
             
             ShortcutPreference pref = getOrCreatePreference(shortcut);
-            CharSequence title = Bookmarks.getTitle(this, c);
+            CharSequence title = Bookmarks.getTitle(getActivity(), c);
 
             /*
              * The title retrieved from Bookmarks.getTitle() will be in

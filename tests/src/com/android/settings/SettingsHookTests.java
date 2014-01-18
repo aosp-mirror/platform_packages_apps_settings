@@ -16,20 +16,15 @@
 
 package com.android.settings;
 
+import com.android.settings.Settings;
 import com.android.settings.tests.Manufacturer;
 import com.android.settings.tests.Operator;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.List;

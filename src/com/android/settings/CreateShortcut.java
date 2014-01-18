@@ -19,7 +19,6 @@ package com.android.settings;
 import android.app.LauncherActivity;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 

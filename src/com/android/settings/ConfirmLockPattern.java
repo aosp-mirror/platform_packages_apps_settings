@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +40,7 @@ import java.util.List;
  * Sets an activity result of {@link Activity#RESULT_OK} when the user
  * successfully confirmed their pattern.
  */
-public class ConfirmLockPattern extends PreferenceActivity {
+public class ConfirmLockPattern extends SettingsActivity {
 
     /**
      * Names of {@link CharSequence} fields within the originating {@link Intent}
@@ -65,7 +64,7 @@ public class ConfirmLockPattern extends PreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_confirm_your_pattern_header);
-        showBreadCrumbs(msg, msg);
+        setTitle(msg);
     }
 
     @Override

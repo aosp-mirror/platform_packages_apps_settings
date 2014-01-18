@@ -29,7 +29,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
@@ -44,9 +43,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFrameLayout;
-import android.provider.Settings;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -72,6 +69,7 @@ import android.widget.TextView;
 import com.android.internal.app.IMediaContainerService;
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Settings.RunningServicesActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.applications.ApplicationsState.AppEntry;
@@ -844,7 +842,7 @@ public class ManageApplications extends Fragment implements
                 || className.endsWith(".StorageUse")) {
             mSortOrder = SORT_ORDER_SIZE;
             defaultListType = LIST_TYPE_ALL;
-        } else if (Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS.equals(action)) {
+        } else if (android.provider.Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS.equals(action)) {
             // Select the all-apps list, with the default sorting
             defaultListType = LIST_TYPE_ALL;
         }
@@ -1026,8 +1024,8 @@ public class ManageApplications extends Fragment implements
         Bundle args = new Bundle();
         args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
 
-        PreferenceActivity pa = (PreferenceActivity)getActivity();
-        pa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
                 R.string.application_info_label, null, this, INSTALLED_APP_DETAILS);
     }
     

@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -42,6 +41,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
@@ -58,16 +58,16 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
 
     private BluetoothEnabler mBluetoothEnabler;
-
     private BluetoothDiscoverableEnabler mDiscoverableEnabler;
 
     private PreferenceGroup mPairedDevicesCategory;
-
     private PreferenceGroup mAvailableDevicesCategory;
     private boolean mAvailableDevicesCategoryIsPresent;
+
     private boolean mActivityStarted;
 
     private TextView mEmptyView;
+    private Switch mSwitch;
 
     private final IntentFilter mIntentFilter;
 
@@ -103,32 +103,45 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
+
+        final Activity activity = getActivity();
+        final int padding = activity.getResources().getDimensionPixelSize(
+                R.dimen.action_bar_switch_padding);
+        mSwitch = new Switch(activity);
+        mSwitch.setPaddingRelative(0, 0, padding, 0);
+
+        mBluetoothEnabler = new BluetoothEnabler(activity, mSwitch);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+
+        if (!activity.onIsHidingHeaders()) {
+            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                    ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_VERTICAL | Gravity.END));
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        if (!activity.onIsHidingHeaders()) {
+            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(null);
+        }
     }
 
     @Override
     void addPreferencesForActivity() {
         addPreferencesFromResource(R.xml.bluetooth_settings);
-
-        Activity activity = getActivity();
-
-        Switch actionBarSwitch = new Switch(activity);
-
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPaddingRelative(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END));
-            }
-        }
-
-        mBluetoothEnabler = new BluetoothEnabler(activity, actionBarSwitch);
 
         setHasOptionsMenu(true);
     }
@@ -348,7 +361,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         public void onClick(View v) {
             if (isRestrictedAndNotPinProtected()) return;
 
-            ((PreferenceActivity) getActivity()).startPreferencePanel(
+            ((SettingsActivity) getActivity()).startPreferencePanel(
                     LocalDeviceProfilesSettings.class.getName(), null,
                     0, mLocalAdapter.getName(), null, 0);
         }
@@ -366,7 +379,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 Bundle args = new Bundle(1);
                 args.putParcelable(DeviceProfilesSettings.EXTRA_DEVICE, device.getDevice());
 
-                ((PreferenceActivity) getActivity()).startPreferencePanel(
+                ((SettingsActivity) getActivity()).startPreferencePanel(
                         DeviceProfilesSettings.class.getName(), args,
                         R.string.bluetooth_device_advanced_title, null, null, 0);
             } else {

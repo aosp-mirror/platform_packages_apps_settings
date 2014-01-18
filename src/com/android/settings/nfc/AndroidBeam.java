@@ -21,16 +21,14 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 
 public class AndroidBeam extends Fragment
         implements CompoundButton.OnCheckedChangeListener {
@@ -46,7 +44,7 @@ public class AndroidBeam extends Fragment
 
         mActionBarSwitch = new Switch(activity);
 
-        if (activity instanceof PreferenceActivity) {
+        if (activity instanceof SettingsActivity) {
             final int padding = activity.getResources().getDimensionPixelSize(
                     R.dimen.action_bar_switch_padding);
             mActionBarSwitch.setPaddingRelative(0, 0, padding, 0);

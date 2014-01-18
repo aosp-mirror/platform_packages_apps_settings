@@ -26,10 +26,10 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.applications.InstalledAppDetails;
 
 import java.util.ArrayList;
@@ -44,10 +44,10 @@ public class RecentLocationApps {
 
     private static final int RECENT_TIME_INTERVAL_MILLIS = 15 * 60 * 1000;
 
-    private final PreferenceActivity mActivity;
+    private final SettingsActivity mActivity;
     private final PackageManager mPackageManager;
 
-    public RecentLocationApps(PreferenceActivity activity) {
+    public RecentLocationApps(SettingsActivity activity) {
         mActivity = activity;
         mPackageManager = activity.getPackageManager();
     }

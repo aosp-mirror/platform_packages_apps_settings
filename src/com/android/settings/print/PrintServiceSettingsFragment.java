@@ -38,13 +38,11 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceActivity;
 import android.print.PrintManager;
 import android.print.PrinterDiscoverySession;
 import android.print.PrinterDiscoverySession.OnPrintersChangeListener;
 import android.print.PrinterId;
 import android.print.PrinterInfo;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -64,6 +62,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.print.PrintSettingsFragment.ToggleSwitch;
 import com.android.settings.print.PrintSettingsFragment.ToggleSwitch.OnBeforeCheckedChangeListener;
@@ -330,8 +329,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mToggleSwitch.setCheckedInternal(enabled);
 
         // Title.
-        PreferenceActivity activity = (PreferenceActivity) getActivity();
-        if (!activity.onIsMultiPane() || activity.onIsHidingHeaders()) {
+        SettingsActivity activity = (SettingsActivity) getActivity();
+        if (!activity.onIsHidingHeaders()) {
             mOldActivityTitle = getActivity().getTitle();
             String title = arguments.getString(PrintSettingsFragment.EXTRA_TITLE);
             getActivity().getActionBar().setTitle(title);
@@ -470,8 +469,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
 
         public void register(ContentResolver contentResolver) {
-            contentResolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.ENABLED_PRINT_SERVICES), false, this);
+            contentResolver.registerContentObserver(android.provider.Settings.Secure.getUriFor(
+                    android.provider.Settings.Secure.ENABLED_PRINT_SERVICES), false, this);
         }
 
         public void unregister(ContentResolver contentResolver) {

@@ -30,7 +30,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import android.preference.PreferenceActivity;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,7 +160,6 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
     }
 
     private void doAction(int action) {
-        PreferenceActivity pa = (PreferenceActivity)getActivity();
         switch (action) {
             case ACTION_FORCE_STOP:
                 killProcesses();

@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
@@ -45,7 +44,7 @@ import com.android.internal.telephony.TelephonyIntents;
  * these operations.
  *
  */
-public class IccLockSettings extends PreferenceActivity
+public class IccLockSettings extends SettingsPreferenceFragment
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
     private static final boolean DBG = true;
@@ -141,7 +140,7 @@ public class IccLockSettings extends PreferenceActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (Utils.isMonkeyRunning()) {
@@ -192,13 +191,13 @@ public class IccLockSettings extends PreferenceActivity
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         // ACTION_SIM_STATE_CHANGED is sticky, so we'll receive current state after this call,
         // which will call updatePreferences().
         final IntentFilter filter = new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED);
-        registerReceiver(mSimStateReceiver, filter);
+        getActivity().registerReceiver(mSimStateReceiver, filter);
 
         if (mDialogState != OFF_MODE) {
             showPinDialog();
@@ -209,13 +208,13 @@ public class IccLockSettings extends PreferenceActivity
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        unregisterReceiver(mSimStateReceiver);
+        getActivity().unregisterReceiver(mSimStateReceiver);
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle out) {
+    public void onSaveInstanceState(Bundle out) {
         // Need to store this state for slider open/close
         // There is one case where the dialog is popped up by the preference
         // framework. In that case, let the preference framework store the
@@ -359,8 +358,8 @@ public class IccLockSettings extends PreferenceActivity
         if (success) {
             mPinToggle.setChecked(mToState);
         } else {
-            Toast.makeText(this, getPinPasswordErrorMessage(attemptsRemaining), Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(getActivity(),
+                    getPinPasswordErrorMessage(attemptsRemaining), Toast.LENGTH_LONG).show();
         }
         mPinToggle.setEnabled(true);
         resetDialogState();
@@ -368,11 +367,11 @@ public class IccLockSettings extends PreferenceActivity
 
     private void iccPinChanged(boolean success, int attemptsRemaining) {
         if (!success) {
-            Toast.makeText(this, getPinPasswordErrorMessage(attemptsRemaining),
+            Toast.makeText(getActivity(), getPinPasswordErrorMessage(attemptsRemaining),
                     Toast.LENGTH_LONG)
                     .show();
         } else {
-            Toast.makeText(this, mRes.getString(R.string.sim_change_succeeded),
+            Toast.makeText(getActivity(), mRes.getString(R.string.sim_change_succeeded),
                     Toast.LENGTH_SHORT)
                     .show();
 

@@ -16,22 +16,20 @@
 
 package com.android.settings.accounts;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.preference.PreferenceActivity;
 
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.SettingsActivity;
 
 /**
  * Launcher activity for the SyncSettings fragment.
  *
  */
-public class SyncSettingsActivity extends PreferenceActivity {
+public class SyncSettingsActivity extends SettingsActivity {
     @Override
     public Intent getIntent() {
-        Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, SyncSettings.class.getName());
-        modIntent.putExtra(EXTRA_NO_HEADERS, true);
+        Intent modIntent = new Intent(getIntent());
+        modIntent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, SyncSettings.class.getName());
+        modIntent.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
         return modIntent;
     }
 
