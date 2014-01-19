@@ -28,6 +28,13 @@
             android:entryValues="@array/quick_pulldown_values"
             android:persistent="false" />
 
+        <ListPreference
+            android:key="smart_pulldown"
+            android:title="@string/smart_pulldown_title"
+            android:entries="@array/smart_pulldown_entries"
+            android:entryValues="@array/smart_pulldown_values"
+            android:persistent="false" />
+
         <com.android.settings.mahdi.SystemSettingCheckBoxPreference
             android:key="qs_collapse_panel"
             android:title="@string/title_collapse_panel"
