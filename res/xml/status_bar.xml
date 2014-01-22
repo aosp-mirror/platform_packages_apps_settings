@@ -39,6 +39,12 @@
     <PreferenceCategory
         android:title="@string/title_network_traffic">
 
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+	    android:key="status_bar_network_activity"
+	    android:title="@string/show_activity_indicators_on_status_bar_title"
+            android:summary="@string/show_activity_indicators_on_status_bar_summary"
+            android:defaultValue="false" />
+
 	<CheckBoxPreference
                 android:key="network_stats"
                 android:title="@string/status_bar_show_network_stats_title"
