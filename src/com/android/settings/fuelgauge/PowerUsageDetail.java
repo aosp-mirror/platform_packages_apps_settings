@@ -223,7 +223,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 };
                 values = new double[] {
                     helper.getPowerProfile().getBatteryCapacity(),
-                    helper.getTotalPower(),
+                    helper.getComputedPower(),
                     helper.getMinDrainedPower(),
                     helper.getMaxDrainedPower(),
                 };
