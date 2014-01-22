@@ -577,7 +577,7 @@ public class Settings extends PreferenceActivity
             // Ids are integers, so downcasting
             int id = (int) header.id;
             if (id == R.id.operator_settings || id == R.id.manufacturer_settings ||
-                    id == R.id.advanced_settings || id == R.id.superuser_settings) {
+                    id == R.id.advanced_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);		
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.

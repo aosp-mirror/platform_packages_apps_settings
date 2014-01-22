@@ -231,17 +231,6 @@
         android:title="@string/customization_settings_title"
         android:icon="@drawable/ic_settings_mahdi" />
 
-    <!-- SuperSU -->
-    <header
-        android:id="@+id/superuser_settings"
-        android:title="@string/superuser_settings_title"
-        android:icon="@drawable/ic_settings_superuser">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="eu.chainfire.supersu"
-            android:targetClass="eu.chainfire.supersu.MainActivity" />
-    </header>
-
     <!-- Performance Controls -->
     <header
         android:id="@+id/performance_controls"
