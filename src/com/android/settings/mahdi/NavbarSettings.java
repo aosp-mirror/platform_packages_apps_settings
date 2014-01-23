@@ -41,6 +41,7 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
     private static final String PREF_RING = "navbar_targets_settings";
     private static final String PREF_STYLE_DIMEN = "navbar_style_dimen_settings";
     private static final String PREF_NAVIGATION_BAR_CAN_MOVE = "navbar_can_move";
+    private static final String EMULATE_MENU_KEY = "emulate_menu_key";
 
     private int mNavBarMenuDisplayValue;
 
@@ -51,6 +52,7 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
     PreferenceScreen mButtonPreference;
     PreferenceScreen mRingPreference;
     PreferenceScreen mStyleDimenPreference;
+    CheckBoxPreference mEmulateMenuKey;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,11 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
                 DeviceUtils.isPhone(getActivity()) ? 1 : 0) == 0);
         mNavigationBarCanMove.setOnPreferenceChangeListener(this);
 
+        mEmulateMenuKey = (CheckBoxPreference) findPreference(EMULATE_MENU_KEY);
+        mEmulateMenuKey.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.EMULATE_MENU_KEY, 0) == 1);
+        mEmulateMenuKey.setOnPreferenceChangeListener(this);
+
         updateNavbarPreferences(enableNavigationBar);
     }
 
@@ -127,6 +134,11 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_CAN_MOVE,
                     ((Boolean) newValue) ? 0 : 1);
+            return true;
+        } else if (preference == mEmulateMenuKey) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.EMULATE_MENU_KEY,
+                    ((Boolean) newValue) ? 1 : 0);
             return true;
         }
         return false;

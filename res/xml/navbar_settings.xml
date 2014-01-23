@@ -57,6 +57,12 @@
                 android:key="advanced_cat"
                 android:title="@string/advanced_settings">
 
+            <CheckBoxPreference
+                    android:key="emulate_menu_key"
+                    android:title="@string/emulate_menu_key_title"
+                    android:summary="@string/emulate_menu_key_summary"
+                    android:persistent="false"/>
+
             <ListPreference
                     android:key="pref_navbar_menu_display"
                     android:entries="@array/pref_menu_display_entries"
