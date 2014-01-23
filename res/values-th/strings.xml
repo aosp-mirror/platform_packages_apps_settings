@@ -110,14 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"เย็น"</string>
     <string name="bluetooth" msgid="5549625000628014477">"บลูทูธ"</string>
-    <!-- no translation found for bluetooth_is_discoverable (3437013735920768864) -->
-    <skip />
-    <!-- no translation found for bluetooth_is_discoverable_always (6790327581899350931) -->
-    <skip />
-    <!-- no translation found for bluetooth_not_visible_to_other_devices (3712158328437385188) -->
-    <skip />
-    <!-- no translation found for bluetooth_only_visible_to_paired_devices (5700531401823649038) -->
-    <skip />
+    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"กำลังยอมรับคำขอจับคู่อุปกรณ์ (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"กำลังยอมรับคำขอจับคู่อุปกรณ์"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"ไม่ได้กำลังยอมรับคำขอจับคู่อุปกรณ์"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"ไม่ได้กำลังยอมรับคำขอจับคู่อุปกรณ์"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"ระยะหมดเวลาการมองเห็น"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ล็อกการโทรด้วยเสียง"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"ป้องกันการใช้โปรแกรมโทรออกผ่านบลูทูธเมื่อล็อกหน้าจอไว้"</string>
@@ -133,10 +129,8 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"ตัดการเชื่อมต่อหรือไม่"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"การดำเนินการนี้จะจบการเชื่อมต่อของคุณกับ:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"การแพร่สัญญาณ"</string>
-    <!-- no translation found for bluetooth_broadcasting_state_on (7018225104637987233) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcasting_state_off (2448855139691027345) -->
-    <skip />
+    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"เปิด"</string>
+    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"ปิด"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ปิดใช้งานโปรไฟล์หรือไม่"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"การดำเนินการนี้จะปิดใช้งาน:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;จาก:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"เชื่อมต่อแล้ว"</string>
@@ -166,8 +160,7 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"แอปพลิเคชันต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นสามารถมองเห็นแท็บเล็ตของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"แอปพลิเคชันต้องการเปิดบลูทูธและทำให้อุปกรณ์อื่นสามารถมองเห็นโทรศัพท์ของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> ต้องการเปิดการแพร่สัญญาณบลูทูธเพื่อสื่อสารกับอุปกรณ์อื่นที่อยู่ใกล้ คุณสามารถเปลี่ยนการตั้งค่านี้ภายหลังได้ในการตั้งค่าบลูทูธ"</string>
-    <!-- no translation found for bluetooth_ask_enablement_and_start_broadcast (1783727814076135171) -->
-    <skip />
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> ต้องการเปิดบลูทูธและการแพร่สัญญาณบลูทูธเพื่อสื่อสารกับอุปกรณ์อื่นที่อยู่ใกล้ คุณสามารถเปลี่ยนการตั้งค่านี้ภายหลังได้ในการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"เมื่อเปิดคุณลักษณะนี้ โทรศัพท์ของคุณจะสามารถสื่อสารกับอุปกรณ์อื่นๆ ที่อยู่ใกล้ได้\n\nการแพร่สัญญาณจะใช้สัญญาณบลูทูธที่ใช้พลังงานต่ำ"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"กำลังเปิดบลูทูธ..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"กำลังปิดบลูทูธ…"</string>

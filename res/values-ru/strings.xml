@@ -110,14 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Неизвестная ошибка"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Холодная"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_is_discoverable (3437013735920768864) -->
-    <skip />
-    <!-- no translation found for bluetooth_is_discoverable_always (6790327581899350931) -->
-    <skip />
-    <!-- no translation found for bluetooth_not_visible_to_other_devices (3712158328437385188) -->
-    <skip />
-    <!-- no translation found for bluetooth_only_visible_to_paired_devices (5700531401823649038) -->
-    <skip />
+    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Запросы на подключение принимаются (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Запросы на подключение принимаются"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Запросы на подключение не принимаются"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Запросы на подключение не принимаются"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Тайм-аут видимости"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Заблокировать голосовой набор"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Предотвратить использование телефона Bluetooth, когда экран заблокирован"</string>
@@ -133,10 +129,8 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Отключиться?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Произойдет разъединение с устройством &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Передача данных"</string>
-    <!-- no translation found for bluetooth_broadcasting_state_on (7018225104637987233) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcasting_state_off (2448855139691027345) -->
-    <skip />
+    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"ВКЛ"</string>
+    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"ВЫКЛ"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Отключить профиль?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Профиль&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;будет отключен от устройства&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Подключено"</string>
@@ -166,8 +160,7 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Одному из приложений требуется включить Bluetooth и сделать ваш планшетный ПК доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Одному из приложений требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> собирается включить Bluetooth, чтобы установить соединение с другими устройствами. Эту функцию можно в любой момент отключить в настройках Bluetooth."</string>
-    <!-- no translation found for bluetooth_ask_enablement_and_start_broadcast (1783727814076135171) -->
-    <skip />
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> собирается включить Bluetooth, чтобы установить соединение с другими устройствами. Эту функцию можно в любой момент отключить в настройках Bluetooth."</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Ваш телефон сможет устанавливать соединение с другими устройствами поблизости.\n\nПри передаче данных используется сигнал Bluetooth с низким энергопотреблением."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Включение Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Отключение Bluetooth..."</string>
@@ -1563,7 +1556,7 @@
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"В программе могут быть настройки режима энергосбережения"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Использование батареи пользователем"</string>
     <string name="battery_desc_unaccounted" msgid="1653798876416893745">"Неучтенное энергопотребление"</string>
-    <string name="battery_desc_overcounted" msgid="5481865509489228603">"Переучтенное энергопотребление"</string>
+    <string name="battery_desc_overcounted" msgid="5481865509489228603">"Преувеличенное энергопотребление"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мА·ч"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> с момента отключения от питания"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"С последнего отключения <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
