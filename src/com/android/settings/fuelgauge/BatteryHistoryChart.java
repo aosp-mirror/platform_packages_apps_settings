@@ -193,8 +193,8 @@ public class BatteryHistoryChart extends View {
         mWifiRunningPaint.setStyle(Paint.Style.STROKE);
         mWakeLockPaint.setStyle(Paint.Style.STROKE);
         mPhoneSignalChart.setColors(new int[] {
-                0x00000000, 0xffa00000, 0xffa0a000, 0xff808020,
-                0xff808040, 0xff808060, 0xff008000
+                0x00000000, 0xffa00000, 0xffa07000, 0xffa0a000,
+                0xff80a000, 0xff409000, 0xff008000
         });
         
         mTextPaint.density = getResources().getDisplayMetrics().density;
