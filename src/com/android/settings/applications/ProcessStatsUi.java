@@ -466,33 +466,36 @@ public class ProcessStatsUi extends PreferenceFragment
 
         final ProcessMap<ProcStatsEntry> entriesMap = new ProcessMap<ProcStatsEntry>();
         for (int ipkg=0, N=mStats.mPackages.getMap().size(); ipkg<N; ipkg++) {
-            final SparseArray<ProcessStats.PackageState> pkgUids
+            final SparseArray<SparseArray<ProcessStats.PackageState>> pkgUids
                     = mStats.mPackages.getMap().valueAt(ipkg);
             for (int iu=0; iu<pkgUids.size(); iu++) {
-                final ProcessStats.PackageState st = pkgUids.valueAt(iu);
-                for (int iproc=0; iproc<st.mProcesses.size(); iproc++) {
-                    final ProcessStats.ProcessState pkgProc = st.mProcesses.valueAt(iproc);
-                    final ProcessStats.ProcessState proc = mStats.mProcesses.get(pkgProc.mName,
-                            pkgProc.mUid);
-                    if (proc == null) {
-                        Log.w(TAG, "No process found for pkg " + st.mPackageName
-                                + "/" + st.mUid + " proc name " + pkgProc.mName);
-                        continue;
-                    }
-                    ProcStatsEntry ent = entriesMap.get(proc.mName, proc.mUid);
-                    if (ent == null) {
-                        ent = new ProcStatsEntry(proc, st.mPackageName, totals, mUseUss,
-                                mStatsType == MENU_TYPE_BACKGROUND);
-                        if (ent.mDuration > 0) {
-                            if (DEBUG) Log.d(TAG, "Adding proc " + proc.mName + "/"
-                                    + proc.mUid + ": time=" + makeDuration(ent.mDuration) + " ("
-                                    + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)"
-                                    + " pss=" + ent.mAvgPss);
-                            entriesMap.put(proc.mName, proc.mUid, ent);
-                            entries.add(ent);
+                final SparseArray<ProcessStats.PackageState> vpkgs = pkgUids.valueAt(iu);
+                for (int iv=0; iv<vpkgs.size(); iv++) {
+                    final ProcessStats.PackageState st = vpkgs.valueAt(iv);
+                    for (int iproc=0; iproc<st.mProcesses.size(); iproc++) {
+                        final ProcessStats.ProcessState pkgProc = st.mProcesses.valueAt(iproc);
+                        final ProcessStats.ProcessState proc = mStats.mProcesses.get(pkgProc.mName,
+                                pkgProc.mUid);
+                        if (proc == null) {
+                            Log.w(TAG, "No process found for pkg " + st.mPackageName
+                                    + "/" + st.mUid + " proc name " + pkgProc.mName);
+                            continue;
                         }
-                    }  else {
-                        ent.addPackage(st.mPackageName);
+                        ProcStatsEntry ent = entriesMap.get(proc.mName, proc.mUid);
+                        if (ent == null) {
+                            ent = new ProcStatsEntry(proc, st.mPackageName, totals, mUseUss,
+                                    mStatsType == MENU_TYPE_BACKGROUND);
+                            if (ent.mDuration > 0) {
+                                if (DEBUG) Log.d(TAG, "Adding proc " + proc.mName + "/"
+                                        + proc.mUid + ": time=" + makeDuration(ent.mDuration) + " ("
+                                        + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)"
+                                        + " pss=" + ent.mAvgPss);
+                                entriesMap.put(proc.mName, proc.mUid, ent);
+                                entries.add(ent);
+                            }
+                        }  else {
+                            ent.addPackage(st.mPackageName);
+                        }
                     }
                 }
             }
@@ -503,21 +506,25 @@ public class ProcessStatsUi extends PreferenceFragment
         // Add in service info.
         if (mStatsType == MENU_TYPE_BACKGROUND) {
             for (int ip=0, N=mStats.mPackages.getMap().size(); ip<N; ip++) {
-                SparseArray<ProcessStats.PackageState> uids = mStats.mPackages.getMap().valueAt(ip);
+                SparseArray<SparseArray<ProcessStats.PackageState>> uids
+                        = mStats.mPackages.getMap().valueAt(ip);
                 for (int iu=0; iu<uids.size(); iu++) {
-                    ProcessStats.PackageState ps = uids.valueAt(iu);
-                    for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
-                        ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
-                        if (ss.mProcessName != null) {
-                            ProcStatsEntry ent = entriesMap.get(ss.mProcessName, uids.keyAt(iu));
-                            if (ent != null) {
-                                if (DEBUG) Log.d(TAG, "Adding service " + ps.mPackageName
-                                        + "/" + ss.mName + "/" + uids.keyAt(iu) + " to proc "
-                                        + ss.mProcessName);
-                                ent.addService(ss);
-                            } else {
-                                Log.w(TAG, "No process " + ss.mProcessName + "/" + uids.keyAt(iu)
-                                        + " for service " + ss.mName);
+                    SparseArray<ProcessStats.PackageState> vpkgs = uids.valueAt(iu);
+                    for (int iv=0; iv<vpkgs.size(); iv++) {
+                        ProcessStats.PackageState ps = vpkgs.valueAt(iv);
+                        for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
+                            ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
+                            if (ss.mProcessName != null) {
+                                ProcStatsEntry ent = entriesMap.get(ss.mProcessName, uids.keyAt(iu));
+                                if (ent != null) {
+                                    if (DEBUG) Log.d(TAG, "Adding service " + ps.mPackageName
+                                            + "/" + ss.mName + "/" + uids.keyAt(iu) + " to proc "
+                                            + ss.mProcessName);
+                                    ent.addService(ss);
+                                } else {
+                                    Log.w(TAG, "No process " + ss.mProcessName + "/" + uids.keyAt(iu)
+                                            + " for service " + ss.mName);
+                                }
                             }
                         }
                     }
