@@ -23,6 +23,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.SparseArray;
 import com.android.internal.app.ProcessStats;
 
 import java.util.ArrayList;
@@ -109,22 +110,26 @@ public final class ProcStatsEntry implements Parcelable {
             // See if there is one significant package that was running here.
             ArrayList<ProcStatsEntry> subProcs = new ArrayList<ProcStatsEntry>();
             for (int ipkg=0; ipkg<mPackages.size(); ipkg++) {
-                ProcessStats.PackageState pkgState = stats.mPackages.get(mPackages.get(ipkg), mUid);
-                if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ", pkg "
-                        + mPackages.get(ipkg) + ":");
-                if (pkgState == null) {
-                    Log.w(TAG, "No package state found for " + mPackages.get(ipkg) + "/"
-                            + mUid + " in process " + mName);
-                    continue;
+                SparseArray<ProcessStats.PackageState> vpkgs
+                        = stats.mPackages.get(mPackages.get(ipkg), mUid);
+                for (int ivers=0;  ivers<vpkgs.size(); ivers++) {
+                    ProcessStats.PackageState pkgState = vpkgs.valueAt(ivers);
+                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ", pkg "
+                            + pkgState + ":");
+                    if (pkgState == null) {
+                        Log.w(TAG, "No package state found for " + mPackages.get(ipkg) + "/"
+                                + mUid + " in process " + mName);
+                        continue;
+                    }
+                    ProcessStats.ProcessState pkgProc = pkgState.mProcesses.get(mName);
+                    if (pkgProc == null) {
+                        Log.w(TAG, "No process " + mName + " found in package state "
+                                + mPackages.get(ipkg) + "/" + mUid);
+                        continue;
+                    }
+                    subProcs.add(new ProcStatsEntry(pkgProc, pkgState.mPackageName, totals, useUss,
+                            weightWithTime));
                 }
-                ProcessStats.ProcessState pkgProc = pkgState.mProcesses.get(mName);
-                if (pkgProc == null) {
-                    Log.w(TAG, "No process " + mName + " found in package state "
-                            + mPackages.get(ipkg) + "/" + mUid);
-                    continue;
-                }
-                subProcs.add(new ProcStatsEntry(pkgProc, pkgState.mPackageName, totals, useUss,
-                        weightWithTime));
             }
             if (subProcs.size() > 1) {
                 Collections.sort(subProcs, compare);
