@@ -171,7 +171,8 @@ public class Settings extends PreferenceActivity
             R.id.print_settings,
             R.id.nfc_payment_settings,
             R.id.home_settings,
-            R.id.privacy_settings_mahdi
+            R.id.privacy_settings_mahdi,
+            R.id.customization_settings
     };
 
     private SharedPreferences mDevelopmentPreferences;
