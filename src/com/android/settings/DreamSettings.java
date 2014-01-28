@@ -206,6 +206,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
                     public void onClick(DialogInterface dialog, int item) {
                         mBackend.setActivatedOnDock(item == 0 || item == 2);
                         mBackend.setActivatedOnSleep(item == 1 || item == 2);
+                        dialog.dismiss();
                     }
                 })
                 .create();
