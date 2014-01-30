@@ -1200,7 +1200,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                     mKeepScreenOn.isChecked() ?
-                    (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
+                    (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB |
+                        BatteryManager.BATTERY_PLUGGED_WIRELESS) : 0);
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
         } else if (preference == mAllowMockLocation) {
