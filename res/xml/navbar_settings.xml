@@ -15,7 +15,8 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
         <CheckBoxPreference
                 android:key="enable_nav_bar"
@@ -55,7 +56,7 @@
 
         <PreferenceCategory
                 android:key="advanced_cat"
-                android:title="@string/advanced_settings">
+                android:title="@string/advanced_settings" >
 
             <CheckBoxPreference
                     android:key="emulate_menu_key"
