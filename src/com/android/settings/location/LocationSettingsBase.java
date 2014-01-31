@@ -16,12 +16,11 @@
 
 package com.android.settings.location;
 
-import android.app.LoaderManager.LoaderCallbacks;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
+import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -33,8 +32,7 @@ import com.android.settings.SettingsPreferenceFragment;
  * A base class that listens to location settings change and modifies location
  * settings.
  */
-public abstract class LocationSettingsBase extends SettingsPreferenceFragment
-        implements LoaderCallbacks<Cursor> {
+public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "LocationSettingsBase";
     /** Broadcast intent action when the location mode is about to change. */
     private static final String MODE_CHANGING_ACTION =
@@ -42,8 +40,8 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
     private static final String CURRENT_MODE_KEY = "CURRENT_MODE";
     private static final String NEW_MODE_KEY = "NEW_MODE";
 
-    private static final int LOADER_ID_LOCATION_MODE = 1;
     private int mCurrentMode;
+    private BroadcastReceiver mReceiver;
 
     /**
      * Whether the fragment is actively running.
@@ -53,17 +51,33 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        getLoaderManager().initLoader(LOADER_ID_LOCATION_MODE, null, this);
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, "Received location mode change intent: " + intent);
+                }
+                refreshLocationMode();
+            }
+        };
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mActive = true;
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(LocationManager.MODE_CHANGED_ACTION);
+        getActivity().registerReceiver(mReceiver, filter);
     }
 
     @Override
     public void onPause() {
+        try {
+            getActivity().unregisterReceiver(mReceiver);
+        } catch (RuntimeException e) {
+            // Ignore exceptions caused by race condition
+        }
         super.onPause();
         mActive = false;
     }
@@ -103,29 +117,10 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
             int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
             mCurrentMode = mode;
+            if (Log.isLoggable(TAG, Log.INFO)) {
+                Log.i(TAG, "Location mode has been changed");
+            }
             onModeChanged(mode, isRestricted());
         }
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        switch (id) {
-            case LOADER_ID_LOCATION_MODE:
-                return new CursorLoader(getActivity(), Settings.Secure.CONTENT_URI, null,
-                        "(" + Settings.System.NAME + "=?)",
-                        new String[] { Settings.Secure.LOCATION_MODE }, null);
-            default:
-                return null;
-        }
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        refreshLocationMode();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // Nothing to do here.
     }
 }
