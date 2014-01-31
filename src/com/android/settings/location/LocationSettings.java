@@ -17,14 +17,11 @@
 package com.android.settings.location;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.LocationManager;
 import android.location.SettingInjectorService;
-import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
@@ -63,6 +60,7 @@ public class LocationSettings extends LocationSettingsBase
     private PreferenceCategory mCategoryRecentLocationRequests;
     /** Receives UPDATE_INTENT  */
     private BroadcastReceiver mReceiver;
+    private SettingsInjector injector;
 
     public LocationSettings() {
         mValidListener = false;
@@ -166,15 +164,12 @@ public class LocationSettings extends LocationSettingsBase
      * category if there are no injected settings.
      *
      * Reloads the settings whenever receives
-     * {@link SettingInjectorService#ACTION_INJECTED_SETTING_CHANGED}. As a safety measure,
-     * also reloads on {@link LocationManager#MODE_CHANGED_ACTION} to ensure the settings are
-     * up-to-date after mode changes even if an affected app doesn't send the setting changed
-     * broadcast.
+     * {@link SettingInjectorService#ACTION_INJECTED_SETTING_CHANGED}.
      */
     private void addLocationServices(Context context, PreferenceScreen root) {
         PreferenceCategory categoryLocationServices =
                 (PreferenceCategory) root.findPreference(KEY_LOCATION_SERVICES);
-        final SettingsInjector injector = new SettingsInjector(context);
+        injector = new SettingsInjector(context);
         List<Preference> locationServices = injector.getInjectedSettings();
 
         mReceiver = new BroadcastReceiver() {
@@ -189,7 +184,6 @@ public class LocationSettings extends LocationSettingsBase
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED);
-        filter.addAction(LocationManager.MODE_CHANGED_ACTION);
         context.registerReceiver(mReceiver, filter);
 
         if (locationServices.size() > 0) {
@@ -242,6 +236,9 @@ public class LocationSettings extends LocationSettingsBase
                 mSwitch.setOnCheckedChangeListener(this);
             }
         }
+        // As a safety measure, also reloads on location mode change to ensure the settings are
+        // up-to-date even if an affected app doesn't send the setting changed broadcast.
+        injector.reloadStatusMessages();
     }
 
     /**
