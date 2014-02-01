@@ -85,6 +85,7 @@ import com.android.settings.mahdi.CustomizationSettings;
 import com.android.settings.mahdi.DisplayRotation;
 import com.android.settings.mahdi.NavbarSettings;
 import com.android.settings.mahdi.QuietHours;
+import com.android.settings.mahdi.superuser.PolicyNativeFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
@@ -371,7 +372,8 @@ public class Settings extends PreferenceActivity
         ProfilesSettings.class.getName(),
         ProfileConfig.class.getName(),
         NavbarSettings.class.getName(),
-        com.android.settings.mahdi.PrivacySettings.class.getName()        
+        com.android.settings.mahdi.PrivacySettings.class.getName(),
+        com.android.settings.mahdi.superuser.PolicyNativeFragment.class.getName()       
     };
 
     @Override
