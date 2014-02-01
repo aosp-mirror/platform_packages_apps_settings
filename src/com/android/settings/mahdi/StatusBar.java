@@ -43,13 +43,9 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
     private static final String KEY_STATUS_BAR_CLOCK = "clock_style_pref";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-    private static final String NETWORK_STATS = "network_stats";
-    private static final String NETWORK_STATS_UPDATE_FREQUENCY = "network_stats_update_frequency";
 
     private PreferenceScreen mClockStyle;
     private CheckBoxPreference mStatusBarBrightnessControl;
-    private CheckBoxPreference mNetworkStats;
-    private SeekBarPreference mNetworkStatsUpdateFrequency;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,17 +72,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                             Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
         mStatusBarBrightnessControl.setOnPreferenceChangeListener(this);
 
-        mNetworkStats = (CheckBoxPreference) prefSet.findPreference(NETWORK_STATS);
-        mNetworkStats.setChecked(Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_STATS, 0) == 1);
-        mNetworkStats.setOnPreferenceChangeListener(this);
-
-        mNetworkStatsUpdateFrequency = (SeekBarPreference)
-                prefSet.findPreference(NETWORK_STATS_UPDATE_FREQUENCY);
-        mNetworkStatsUpdateFrequency.setValue(Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, 500));
-        mNetworkStatsUpdateFrequency.setOnPreferenceChangeListener(this);
-
     }
 
     @Override
@@ -96,20 +81,9 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             boolean value = (Boolean) objValue;
             Settings.System.putInt(resolver, Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL,
                     value ? 1 : 0);
-            return true;        
-        } else if (preference == mNetworkStats) {
-            boolean value = (Boolean) objValue;
-            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_NETWORK_STATS,
-                    value ? 1 : 0);
-        } else if (preference == mNetworkStatsUpdateFrequency) {
-            int i = Integer.valueOf((Integer) objValue);
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, i);
-            return true;
-        } else {
-            return false;
+            return true;            
         }
-        return true;
+        return false;
     }
 
     @Override

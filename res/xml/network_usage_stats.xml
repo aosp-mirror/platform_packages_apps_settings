@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/network_traffic_title">
+
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+	    android:key="status_bar_network_activity"
+	    android:title="@string/show_activity_indicators_on_status_bar_title"
+            android:summary="@string/show_activity_indicators_on_status_bar_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="status_bar_show_network_stats"
+            android:title="@string/status_bar_show_network_stats_title"
+            android:summary="@string/status_bar_show_network_stats_summary" 
+            android:defaultValue="false" />
+
+        <com.android.settings.mahdi.chameleonos.SeekBarPreference
+            android:key="network_stats_update_frequency"
+            android:title="@string/status_bar_network_stats_update_title"
+            android:summary="@string/status_bar_network_stats_update_summary"
+            android:max="2500"
+            settings:interval="50"
+            settings:min="250"
+            settings:unitsLeft=""
+            settings:unitsRight="ms"
+            android:persistent="false" />
+
+	<CheckBoxPreference
+            android:key="status_bar_network_hide"
+            android:title="@string/hide_network_speed"
+            android:summary="@string/hide_network_speed_summary"
+            android:defaultValue="false"
+            android:dependency="status_bar_show_network_stats" />
+
+	<net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="status_bar_network_color"
+            android:title="@string/status_bar_network_usage_color_style"
+            android:defaultValue="#ffffff" 
+	    android:dependency="status_bar_show_network_stats" />
+
+</PreferenceScreen>
