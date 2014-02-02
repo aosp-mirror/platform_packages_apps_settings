@@ -309,7 +309,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 additionalPrefs.removePreference(vibratePref);
             // hide the quick unlock if its not using PIN/password
             // as a primary lock screen or as a backup to biometric
-            } else {
+            } else if (!mLockPatternUtils.isLockPasswordEnabled()) {
                 additionalPrefs.removePreference(quickUnlockScreen);
             }
             
