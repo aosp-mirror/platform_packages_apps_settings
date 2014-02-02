@@ -21,7 +21,7 @@
     <string name="mod_version">Versión Mahdi Rom</string>
     <string name="mod_version_default">Desconocida</string>
     <!-- About phone screen, Build date of ROM -->
-    <string name="build_date">Build date</string>
+    <string name="build_date">Fecha de Build</string>
     <string name="build_date_default">2012-01-01-0000</string>
     <!-- About device screen, Cpu info. -->
     <string name="cpu_info">CPU</string>
@@ -48,11 +48,11 @@
     <string name="notification_light_voicemail_title">Voicemail</string>
     <string name="notification_light_choose_app">Elija la aplicación</string>
     <string name="notification_light_add">Añadir</string>
-    <string name="notification_light_screenon_title">Activar cuando la pantalla esté encendida</string>
+    <string name="notification_light_screenon_title">Activar con pantalla encendida</string>
 
     <!-- Notification light dialogs -->
     <string name="edit_light_settings">Editar la configuración de LED</string>
-    <string name="pulse_speed_title">Duración del impulso y la velocidad</string>
+    <string name="pulse_speed_title">Duración del parpadeo y velocidad</string>
     <string name="picker_arrow">→</string>
     <string name="default_time">Normal</string>
     <string name="custom_time">Personal</string>
@@ -77,16 +77,16 @@
 
     <!-- Battery light settings -->
     <string name="battery_light_title">LED de batería</string>
-    <string name="battery_low_pulse_title">Pulso si la batería es baja</string>
+    <string name="battery_low_pulse_title">Parpadeo si la batería es baja</string>
     <string name="battery_light_list_title">Colores durante la carga</string>
     <string name="battery_light_low_color_title">Batería baja</string>
     <string name="battery_light_medium_color_title">Media carga</string>
-    <string name="battery_light_full_color_title">Carga Completa</string>
+    <string name="battery_light_full_color_title">Carga completa</string>
 
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Menú de encendido</string> 
-    <string name="power_menu_summary">Ver o cambiar la lista de Menú de Encendido</string>
-    <string name="power_menu_reboot_title">Reiniciar menú</string>
+    <string name="power_menu_summary">Ver o cambiar la lista de menú de encendido</string>
+    <string name="power_menu_reboot_title">Menú de reinicio</string>
     <string name="power_menu_screenshot_title">Captura de pantalla</string>
     <string name="power_menu_screenrecord_title">Grabador de pantalla</string>
     <string name="power_menu_profiles_title">Selector de Perfiles</string>
@@ -259,10 +259,7 @@
     <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
     <string name="show_cpu_info_summary">Superposición de pantalla que muestra información actual de la CPU</string>
 
-    <!-- SuperSU  -->
-    <string name="superuser_settings_title">Superusuario</string>
-    
-    <string name="app_security_title">Seguridad App</string>
+	<string name="app_security_title">Seguridad App</string>
 
     <!-- Blacklist preferences -->
     <string name="blacklist_title">Lista negra</string>
@@ -284,7 +281,7 @@
     <string name="blacklist_summary_type_messages_only">mensajes</string>
     <string name="blacklist_summary_type_calls_and_messages">llamadas y mensajes</string>
     <string name="blacklist_regex_title">Usar comodines</string>
-    <string name="blacklist_regex_summary">Usar . como comodín y * para repetir. E.g. 123.* bloquea números empezados por 123 y .*123.* bloquea números que contienen 123</string>
+    <string name="blacklist_regex_summary">Usar . como comodín y * para repetir. Ejem. 123.* bloquea números empezados por 123 y .*123.* bloquea números que contienen 123</string>
     <string name="blacklist_policy_block_calls">Bloquear llamadas entrantes</string>
     <string name="blacklist_policy_block_messages">Bloqueo de mensajes entrantes</string>
 
@@ -305,7 +302,7 @@
 
     <string name="volume_adjust_sounds_enable_title">Volumen de ajuste de sonido</string>
     <string name="volume_adjust_sounds_enable_summary">Reproducir sonido al ajustar el volumen con teclas físicas</string>
-    <string name="link_volume_ringtones">Unir volúmenes de tono &amp; notificación</string>
+    <string name="link_volume_ringtones">Unir volúmenes de tono y notificación</string>
     <string name="volume_ring_only_description">Tono</string>
     <string name="volume_overlay_title">Estilo de panel de volumen</string>
 
@@ -376,7 +373,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="screen_security_title">Pantalla de bloqueo</string>
     <string name="screen_security_summary">Ver o cambiar la seguridad de bloqueo de pantalla</string>
     <string name="lock_screen_title">Pantalla de bloqueo</string>
-    <string name="lock_screen_summary">Cambiar aspecto de  la pantalla de bloqueo, añadir accesos directos y ajustar las opciones de widgets</string>
+    <string name="lock_screen_summary">Cambiar aspecto de pantalla de bloqueo,añadir accesos directos y ajustes de widgets</string>
     <string name="additional_options_title">Opciones adicionales</string>
     <string name="lock_before_unlock_title">Mostrar deslizador antes del desbloqueo seguro</string>
     <string name="lock_before_unlock_summary">Mostrar deslizador de pantalla de bloqueo antes del desbloqueo seguro</string>
@@ -440,9 +437,16 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="quick_pulldown_right">Derecha</string>
     <string name="title_collapse_panel">Panel de cierre automático</string>
     <string name="summary_collapse_panel">Cierre el panel de configuración rápida sobre toggle</string>
+	
+	<!-- QuickSettings: Smart Pulldown -->
+    <string name="smart_pulldown_title">Desplegable inteligente</string>
+    <string name="smart_pulldown_summary">Abrir configuración rápida cuando no haya %1$s notificationes presentes</string>
+    <string name="smart_pulldown_off">Apagado</string>
+    <string name="smart_pulldown_dismissable">Descartable</string>
+    <string name="smart_pulldown_persistent">Persistente</string>
 
     <string name="pref_network_mode_title">Modos de red</string>
-    <string name="pref_screentimeout_mode_title">Modos de tiempo de pantalla</string>
+    <string name="pref_screentimeout_mode_title">Modos de pantalla en espera</string>
     <string name="pref_ring_mode_title">Modos de sonido</string>
 
     <!-- Quick access ribbon -->
@@ -519,7 +523,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 
     <!-- Status bar | Clock -->
     <string name="status_bar_title">Barra de estado</string>
-    <string name="status_bar_summary">Cambiar opciones de la barra de estado, incluyendo estilos Batería y reloj</string>
+    <string name="status_bar_summary">Cambiar opciones de la barra de estado, incluyendo estilos batería y reloj</string>
     <string name="status_bar_style_title">Estilos</string>
 
     <string name="status_bar_clock">Reloj y fecha</string>
@@ -595,14 +599,14 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="privacy_guard_filter_does_not_match">No hay aplicaciones con permisos relevantes instaladas</string>
     <string name="privacy_guard_help_title">Ayuda</string>
     <string name="privacy_guard_reset_title">Resetear</string>
-    <string name="privacy_guard_help_text">En esta pantalla puede elegir para qué aplicaciones Privacy Guard debe activarse con un simple toque. Las aplicaciones seleccionadas no podrán acceder a sus datos personales, como contactos, mensajes y registros de llamadas. Pulsación larga abre pantalla de detalles sobre esa app.\n\nBy default built en apps no se muestran. Si desea mostrarlos, seleccione la opción correspondiente en el menú.</string>
-    <string name="privacy_guard_manager_show_system_apps">Mostrar built en apps</string>
+    <string name="privacy_guard_help_text">En esta pantalla puede elegir para qué aplicaciones Privacy Guard debe activarse con un simple toque. Las aplicaciones seleccionadas no podrán acceder a sus datos personales, como contactos, mensajes y registros de llamadas. Pulsación larga abre pantalla de detalles sobre esa app.\n\nPor defecto apps de sistema no se muestran. Si desea mostrarlos, seleccione la opción correspondiente en el menú.</string>
+    <string name="privacy_guard_manager_show_system_apps">Mostrar apps de sistema</string>
     <string name="privacy_guard_manager_filter_permissions">Filtro de permisos</string>
     <string name="privacy_guard_advanced_settings_title">Avanzado</string>
 
     <!-- Battery status on lock ring -->
     <string name="battery_around_lockscreen_ring">Nivel de la batería alrededor del anillo de bloqueo</string>
-    <string name="battery_around_lockscreen_ring_summary">Al presionar el anillo de bloqueo de pantalla mostrará el nivel de carga de la batería</string>
+    <string name="battery_around_lockscreen_ring_summary">El anillo de bloqueo de pantalla mostrará el nivel de carga de la batería</string>
 
     <!-- Setting checkbox summary for displaying USB debugging notification -->
     <string name="adb_notify">Notificar depuración de USB </string>
@@ -656,9 +660,9 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="pref_low_battery_warning_policy_dialog_title">Indique la advertencia de batería baja con</string>
     <string name="low_battery_warning_policy_popup_sound">Pop-up y sonido</string>
     <string name="low_battery_warning_policy_notif_sound">Notificación y sonido</string>
-    <string name="low_battery_warning_policy_popup">Sólo Pop-up</string>
-    <string name="low_battery_warning_policy_notif">Sólo Notificación</string>
-    <string name="low_battery_warning_policy_sound">Sólo Sonido</string>
+    <string name="low_battery_warning_policy_popup">Sólo pop-up</string>
+    <string name="low_battery_warning_policy_notif">Sólo notificación</string>
+    <string name="low_battery_warning_policy_sound">Sólo sonido</string>
     <string name="battery_prefs_title">Opciones</string>
     <string name="battery_stats_title">Estadísticas</string>
 
@@ -669,8 +673,8 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 
     <!-- Display : Rotation  -->
     <string name="display_rotation_title">Rotación</string>
-    <string name="display_rotation_enabled">Activar.</string>
-    <string name="display_rotation_disabled">Desactivar.</string>
+    <string name="display_rotation_enabled">Activada.</string>
+    <string name="display_rotation_disabled">Desactivada.</string>
     <string name="display_rotation_unit">grados</string>    
     <string name="display_lockscreen_rotation_title">Incluir pantalla de bloqueo</string>
     <string name="display_rotation_category_title">Modo de rotación</string>
@@ -717,7 +721,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="shortcut_action_max">Se ha alcanzado el tamaño máximo de entradas</string>
     <string name="shortcut_action_warning">Advertencia</string>
     <string name="shortcut_action_warning_message">No es posible borrar la última entrada</string>
-    <string name="shortcut_action_disable_message">Desactivar\nAñadir una entrada para activar esta función</string>
+    <string name="shortcut_action_disable_message">Desactivado\nAñadir una entrada para activar esta función</string>
     <string name="shortcut_image_not_valid">La aplicación elegida no regreso a un icono válido o no admite recorte de la imagen.Use otra aplicación</string>
     <string name="shortcut_duplicate_entry">La acción elegida no se puede añadir dos veces</string>
 
@@ -803,14 +807,14 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="notification_shortcuts_settings_summary">Añadir accesos directos al panel de notificaciones</string>
 
     <!-- Notification hide labels -->
-    <string name="notification_hide_labels_title">Ocultar etiqueta de notificación</string>
-    <string name="notification_hide_labels_disable">Mostrar todas las etiquetas</string>
-    <string name="notification_hide_labels_carrier">Ocultar cinta de etiquetas</string>
-    <string name="notification_hide_labels_wifi">Ocultar etiqueta WiFi</string>
-    <string name="notification_hide_labels_all">Ocultar todas las etiquetas</string>
-    <string name="notification_hide_labels_text">en el panel de notificaciones</string>
+	<string name="notification_hide_labels_title">Ocultar etiqueta de notificación</string>
+	<string name="notification_hide_labels_disable">Mostrar todas las etiquetas</string>
+	<string name="notification_hide_labels_carrier">Ocultar cinta de etiquetas</string>
+	<string name="notification_hide_labels_wifi">Ocultar etiqueta WiFi</string>
+	<string name="notification_hide_labels_all">Ocultar todas las etiquetas</string>
+	<string name="notification_hide_labels_text">en el panel de notificaciones</string>
 	
-    <!-- Navigation settings -->
+	<!-- Navigation settings -->
     <string name="navigation_settings_options_title">Opciones de navegación</string>
     <string name="navigation_settings_category_title">Barra de navegación</string>
     <string name="navigation_settings_title">Barra de navegación en pantalla</string>
@@ -932,12 +936,13 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="end_time_title">Final</string>
 
     <!-- Network speed -->
-    <string name="show_network_speed">Indicador de velocidad de la red</string>
-    <string name="show_network_speed_summary">Mostrar velocidad de la red en la barra de estado</string>
-    <string name="show_network_speed_bits">Mostrar velocidad en bits/s</string>
-    <string name="show_network_speed_bytes">Mostrar velocidad en Bytes/s</string>
-	
-    <!-- Screen recorder -->
+    <string name="title_network_traffic">Tráfico de red</string>
+    <string name="status_bar_show_network_stats_title">Indicador de tráfico de red</string>
+    <string name="status_bar_show_network_stats_summary">Mostrar velocidades de red en la barra de estado</string>
+    <string name="status_bar_network_stats_update_title">Frecuencia de actualización</string>
+    <string name="status_bar_network_stats_update_summary">¿Con qué frecuencia se actualiza el indicador?</string>
+
+	<!-- Screen recorder -->
     <string name="screen_recorder_title">Grabadora de pantalla</string>
     <string name="screen_recorder_summary">Ajustar configuración del grabador de pantalla</string>
     <string name="screen_recorder_video_dimensions_title">Tamaño del video</string>
@@ -990,7 +995,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="lockscreen_use_widget_container_carousel_title">Activar carrusel</string>
     <string name="lockscreen_use_widget_container_carousel_summary">Utilice la animación carrusel al cambiar entre widgets de la pantalla de bloqueo</string>
 
-    <!-- Lockscreen Notifications -->
+	<!-- Lockscreen Notifications -->
     <!-- Categories --> 
     <string name="general">General</string>
     <string name="layout">Diseño</string>
@@ -1020,8 +1025,12 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="offset_top">Ajuste a la parte superior de la pantalla:</string>
     <string name="privacy_mode">Modo de privacidad</string>
     <string name="privacy_mode_summary">Desactiva las notificaciones mostradas y descartadas.De esta manera , sólo se mostrarán los iconos de las notificaciones.</string>
-	
-    <!-- Lock Screen Shortcuts -->
+	<string name="dynamic_width">Ancho dinámico</string>
+    <string name="dynamic_width_summary">Establece el ancho de las notificaciones dinámicas, de modo que sólo utilizan el espacio que realmente necesitan</string>
+    <string name="excluded_apps_title">Aplicaciones excluidas</string>
+    <string name="excluded_apps_summary">Aplicaciones excluidas no aparecerán como notificaciones de pantalla de bloqueo</string>
+    
+	<!-- Lock Screen Shortcuts -->
     <string name="title_shortcuts">Accesos directos</string>
     <string name="lockscreen_target_info">Arrastre el control deslizante para asignar accesos directos</string>
     <string name="lockscreen_target_title">Accesos directos deslizantes</string>
@@ -1127,7 +1136,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="slide_lock_delay_10m">10 min</string>
     <string name="slide_lock_delay_30m">30 min</string>
 
-    <!-- Delete apn confirmation dialog message -->
+	<!-- Delete apn confirmation dialog message -->
     <string name="confirm_delete_apn">La APN se borrará.</string>
 
     <!-- Halo -->
@@ -1172,7 +1181,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="halo_msgbox_animation_title">Animación cuadro mensaje</string>
     <string name="halo_msgbox_animation_summary">Animación cuadro de mensaje de Halo para las notificaciones entrantes</string>
     <string name="halo_msgbox_animation_none">Ninguna</string>
-    <string name="halo_msgbox_animation_flip">Flip</string>
+    <string name="halo_msgbox_animation_flip">Voltear</string>
 
     <!-- Label for are-halo-notifications-allowed checkbox in app details [CHAR LIMIT=20] -->
     <string name="app_halo_label_black">Lista negra de HALO</string>
@@ -1180,7 +1189,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 
     <!--- Lock clock -->
     <string name="lock_clock_title">Widget de reloj</string>
-    <string name="lock_clock_summary">Ver o cambiar \'cLock\' Home y Lock screen widgets aparecerán</string>
+    <string name="lock_clock_summary">Ver o cambiar \'cLock\' se mostrarán los widgets de Inicio y pantalla de bloqueo</string>
 
     <!-- AOSP dummy strings -->
     <string name="experimental_webview"></string>
@@ -1231,7 +1240,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 
     <!-- Less Notification sounds -->
     <string name="notifications_category_title">Notificaciones</string>
-    <string name="less_notification_sounds_title">Sonidos de notificación menos frecuentes</string>
+    <string name="less_notification_sounds_title">Frecuencia de sonidos de notificación</string>
     <string name="less_notification_sounds_summary">Limite los sonidos de notificación de cada aplicación para sonar sólo una vez por cada período de tiempo establecido</string>
     <string name="less_notification_sounds_default">Comportamiento por defecto</string>
     <string name="less_notification_sounds_3s">3 seg</string>
@@ -1313,4 +1322,37 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 	<!-- Minimum Vibration Duration -->
 	<string name="minimum_vibration_duration">Duración mínima de vibración</string>
 	
+	<!-- Lock screen buttons -->
+    <string name="lockscreen_buttons_title">Acciones de los botones</string>
+    <string name="lockscreen_buttons_summary">Ver o cambiar acciones de los botones de bloqueo de pantalla</string>
+    <string name="lockscreen_long_press_back_title">Pulsación larga botón Atrás</string>
+    <string name="lockscreen_long_press_home_title">Pulsación larga botón Inicio</string>
+    <string name="lockscreen_long_press_menu_title">Pulsación larga botón Menú</string>
+    <string name="lockscreen_buttons_no_action">Ninguna acción</string>
+    <string name="lockscreen_buttons_flashlight">Linterna</string>
+    <string name="lockscreen_buttons_next">Siguiente canción</string>
+    <string name="lockscreen_buttons_previous">Anterior canción</string>
+    <string name="lockscreen_buttons_playpause">Reproducir/Pausar música</string>
+    <string name="lockscreen_buttons_toggle_sound">Toggle sonido</string>
+    <string name="lockscreen_buttons_sleep">Dormir</string>
+
+    <!-- Lock screen misc. settings -->
+    <string name="lockscreen_battery_status_title">Estado de la batería</string>
+    <string name="lockscreen_battery_status_charging">Sólo cuando carga</string>
+    <string name="lockscreen_battery_status_alwayson">Siempre on</string>
+    <string name="lockscreen_battery_status_alwaysoff">Siempre off</string>
+
+    <!-- Privacy Settings Header item -->
+    <string name="privacy_settings_mahdi_title">Privacidad</string>
+
+    <!-- Superuser header name -->
+    <string name="superuser">Superusuario</string>
+
+    <!-- Status Bar Activity Indicators -->
+    <string name="show_activity_indicators_on_status_bar_title">Indicador de actividad de red</string>
+    <string name="show_activity_indicators_on_status_bar_summary">Mostrar indicador de red en barra de estado</string>
+	
+	<!-- Emulate menu key -->
+    <string name="emulate_menu_key_title">Emular tecla de menú de hardware</string>
+    <string name="emulate_menu_key_summary">Al pulsar la tecla de menú en navbar se abrirá el menú overflow</string>	
 </resources>
