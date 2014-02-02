@@ -88,6 +88,10 @@
             android:dependency="lockscreen_notifications"
             android:summary="@string/notifications_height_summary" />
 
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="notification_color"
+            android:title="@string/notification_color" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/privacy" >
