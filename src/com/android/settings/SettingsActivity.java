@@ -924,7 +924,7 @@ public class SettingsActivity extends Activity
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
                                      CharSequence titleText, Fragment resultTo,
                                      int resultRequestCode) {
-        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, 0);
+        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, titleText);
     }
 
     /**
@@ -965,16 +965,16 @@ public class SettingsActivity extends Activity
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
      * @param resultTo Option fragment that should receive the result of
-     * the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request
-     * code in which to report the result.
-     * @param titleRes Resource ID of string to display for the title of
-     * this set of preferences.
-     * @param shortTitleRes Resource ID of string to display for the short title of
-     * this set of preferences.
+     *                 the activity launch.
+     * @param resultRequestCode If resultTo is non-null, this is the request code in which to
+     *                          report the result.
+     * @param titleRes Resource ID of string to display for the title of. If the Resource ID is a
+     *                 valid one then it will be used to get the title. Otherwise the titleText
+     *                 argument will be used as the title.
+     * @param titleText string to display for the title of.
      */
     private void startWithFragment(String fragmentName, Bundle args, Fragment resultTo,
-                                   int resultRequestCode, int titleRes, int shortTitleRes) {
+                                   int resultRequestCode, int titleRes, CharSequence titleText) {
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         if (resultTo != null) {
             f.setTargetFragment(resultTo, resultRequestCode);
@@ -985,10 +985,17 @@ public class SettingsActivity extends Activity
         transaction.addToBackStack(BACK_STACK_PREFS);
         transaction.commitAllowingStateLoss();
 
-        final CharSequence title = getText(titleRes);
-        final TitlePair pair = new TitlePair(titleRes, null);
+        final TitlePair pair;
+        final CharSequence cs;
+        if (titleRes != 0) {
+            pair = new TitlePair(titleRes, null);
+            cs = getText(titleRes);
+        } else {
+            pair = new TitlePair(0, titleText);
+            cs = titleText;
+        }
+        setTitle(cs);
         mTitleStack.add(pair);
-        setTitle(title);
     }
 
     /**
@@ -1583,7 +1590,7 @@ public class SettingsActivity extends Activity
     /**
      * Called when the user selects an item in the header list.  The default
      * implementation will call either
-     * {@link #startWithFragment(String, Bundle, Fragment, int, int, int)}
+     * {@link #startWithFragment(String, android.os.Bundle, android.app.Fragment, int, int, CharSequence)}
      * or {@link #switchToHeader(com.android.settings.SettingsActivity.Header, boolean)}
      * as appropriate.
      *
