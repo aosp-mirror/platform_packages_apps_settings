@@ -94,6 +94,8 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.indexer.Index;
+import com.android.settings.indexer.IndexableData;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -159,6 +161,8 @@ public class SettingsActivity extends Activity
      */
     public static final String EXTRA_NO_HEADERS = ":settings:no_headers";
 
+    public static final String BACK_STACK_PREFS = ":settings:prefs";
+
     // extras that allow any preference activity to be launched as part of a wizard
 
     // show Back and Next buttons? takes boolean parameter
@@ -179,8 +183,6 @@ public class SettingsActivity extends Activity
      * that fragment.
      */
     protected static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
-
-    private static final String BACK_STACK_PREFS = ":settings:prefs";
 
     private static final String META_DATA_KEY_HEADER_ID =
         "com.android.settings.TOP_LEVEL_HEADER_ID";
@@ -340,6 +342,71 @@ public class SettingsActivity extends Activity
         }
     };
 
+    /**
+     * Searchable data description.
+     *
+     * Known restriction: we are only searching (for now) the first level of Settings.
+     */
+    private static IndexableData[] INDEXABLE_DATA = new IndexableData[] {
+            new IndexableData(1, R.xml.wifi_settings,
+                    "com.android.settings.wifi.WifiSettings",
+                    R.drawable.ic_settings_wireless),
+            new IndexableData(2, R.xml.bluetooth_settings,
+                    "com.android.settings.bluetooth.BluetoothSettings",
+                    R.drawable.ic_settings_bluetooth2),
+            new IndexableData(3, R.xml.data_usage_metered_prefs,
+                    "com.android.settings.net.DataUsageMeteredSettings",
+                    R.drawable.ic_settings_data_usage),
+            new IndexableData(4, R.xml.wireless_settings,
+                    "com.android.settings.WirelessSettings",
+                    R.drawable.empty_icon),
+            new IndexableData(5, R.xml.home_selection,
+                    "com.android.settings.HomeSettings",
+                    R.drawable.ic_settings_home),
+            new IndexableData(6, R.xml.sound_settings,
+                    "com.android.settings.SoundSettings",
+                    R.drawable.ic_settings_sound),
+            new IndexableData(7, R.xml.display_settings,
+                    "com.android.settings.DisplaySettings",
+                    R.drawable.ic_settings_display),
+            new IndexableData(8, R.xml.device_info_memory,
+                    "com.android.settings.deviceinfo.Memory",
+                    R.drawable.ic_settings_storage),
+            new IndexableData(9, R.xml.power_usage_summary,
+                    "com.android.settings.fuelgauge.PowerUsageSummary",
+                    R.drawable.ic_settings_battery),
+            new IndexableData(10, R.xml.user_settings,
+                    "com.android.settings.users.UserSettings",
+                    R.drawable.ic_settings_multiuser),
+            new IndexableData(11, R.xml.location_settings,
+                    "com.android.settings.location.LocationSettings",
+                    R.drawable.ic_settings_location),
+            new IndexableData(12, R.xml.security_settings,
+                    "com.android.settings.SecuritySettings",
+                    R.drawable.ic_settings_security),
+            new IndexableData(13, R.xml.language_settings,
+                    "com.android.settings.inputmethod.InputMethodAndLanguageSettings",
+                    R.drawable.ic_settings_language),
+            new IndexableData(14, R.xml.privacy_settings,
+                    "com.android.settings.PrivacySettings",
+                    R.drawable.ic_settings_backup),
+            new IndexableData(15, R.xml.date_time_prefs,
+                    "com.android.settings.DateTimeSettings",
+                    R.drawable.ic_settings_date_time),
+            new IndexableData(16, R.xml.accessibility_settings,
+                    "com.android.settings.accessibility.AccessibilitySettings",
+                    R.drawable.ic_settings_accessibility),
+            new IndexableData(17, R.xml.print_settings,
+                    "com.android.settings.print.PrintSettingsFragment",
+                    com.android.internal.R.drawable.ic_print),
+            new IndexableData(18, R.xml.development_prefs,
+                    "com.android.settings.DevelopmentSettings",
+                    R.drawable.ic_settings_development),
+            new IndexableData(19, R.xml.device_info_settings,
+                    "com.android.settings.DeviceInfoSettings",
+                    R.drawable.ic_settings_about),
+    };
+
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
         // Override the fragment title for Wallpaper settings
@@ -463,6 +530,7 @@ public class SettingsActivity extends Activity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+        Index.getInstance(this).update();
     }
 
     @Override
@@ -478,6 +546,9 @@ public class SettingsActivity extends Activity
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
+
+        Index.getInstance(this).addIndexableData(INDEXABLE_DATA);
+        Index.getInstance(this).update();
 
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
