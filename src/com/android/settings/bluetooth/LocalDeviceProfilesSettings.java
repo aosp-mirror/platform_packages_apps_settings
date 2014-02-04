@@ -19,7 +19,6 @@ package com.android.settings.bluetooth;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -73,8 +72,6 @@ public final class LocalDeviceProfilesSettings extends SettingsPreferenceFragmen
         // preference can be updated when the timeout changes.
         mDiscoverableEnabler.setVisibilityPreference(mVisibilityPref);
 
-        PreferenceActivity mActivity = (PreferenceActivity)getActivity();
-        mActivity.showBreadCrumbs(mManager.getBluetoothAdapter().getName(), "");
         PreferenceScreen bluetoothBroadcast = (PreferenceScreen)findPreference(KEY_BROADCASTING);
         mAdvertisingEnabler = new BluetoothAdvertisingEnabler(getActivity(), bluetoothBroadcast);
         mManager.setBluetoothAdvertisingEnabler(mAdvertisingEnabler);
