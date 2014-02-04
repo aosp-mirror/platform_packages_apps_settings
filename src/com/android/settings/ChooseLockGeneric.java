@@ -226,20 +226,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int upgradeQuality(int quality, MutableBoolean allowBiometric) {
             quality = upgradeQualityForDPM(quality);
             quality = upgradeQualityForKeyStore(quality);
-            int encryptionQuality = upgradeQualityForEncryption(quality);
-            if (encryptionQuality > quality) {
-                //The first case checks whether biometric is allowed, prior to the user making
-                //their selection from the list
-                if (allowBiometric != null) {
-                    allowBiometric.value = quality <=
-                            DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK;
-                } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK) {
-                    //When the user has selected biometric we shouldn't change that due to
-                    //encryption
-                    return quality;
-                }
-            }
-            return encryptionQuality;
+            return quality;
         }
 
         private int upgradeQualityForDPM(int quality) {
@@ -247,27 +234,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             int minQuality = mDPM.getPasswordQuality(null);
             if (quality < minQuality) {
                 quality = minQuality;
-            }
-            return quality;
-        }
-
-        /**
-         * Mix in "encryption minimums" to any given quality value.  This prevents users
-         * from downgrading the pattern/pin/password to a level below the minimums.
-         *
-         * ASSUMPTION:  Setting quality is sufficient (e.g. minimum lengths will be set
-         * appropriately.)
-         */
-        private int upgradeQualityForEncryption(int quality) {
-            // Don't upgrade quality for secondary users. Encryption requirements don't apply.
-            if (!Process.myUserHandle().equals(UserHandle.OWNER)) return quality;
-            int encryptionStatus = mDPM.getStorageEncryptionStatus();
-            boolean encrypted = (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE)
-                    || (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVATING);
-            if (encrypted) {
-                if (quality < CryptKeeperSettings.MIN_PASSWORD_QUALITY) {
-                    quality = CryptKeeperSettings.MIN_PASSWORD_QUALITY;
-                }
             }
             return quality;
         }
