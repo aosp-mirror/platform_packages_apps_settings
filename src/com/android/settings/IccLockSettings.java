@@ -127,11 +127,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
     };
 
     // For top-level settings screen to query
-    static boolean isIccLockEnabled() {
-        return PhoneFactory.getDefaultPhone().getIccCard().getIccLockEnabled();
+    boolean isIccLockEnabled() {
+        return mPhone.getIccCard().getIccLockEnabled();
     }
 
-    static String getSummary(Context context) {
+    String getSummary(Context context) {
         Resources res = context.getResources();
         String summary = isIccLockEnabled()
                 ? res.getString(R.string.sim_lock_on)
@@ -181,7 +181,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
         // Don't need any changes to be remembered
         getPreferenceScreen().setPersistent(false);
 
+        PhoneFactory.makeDefaultPhone(getActivity());
         mPhone = PhoneFactory.getDefaultPhone();
+
         mRes = getResources();
         updatePreferences();
     }
