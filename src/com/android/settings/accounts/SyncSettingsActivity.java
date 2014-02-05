@@ -27,7 +27,7 @@ import com.android.settings.SettingsActivity;
 public class SyncSettingsActivity extends SettingsActivity {
     @Override
     public Intent getIntent() {
-        Intent modIntent = new Intent(getIntent());
+        Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, SyncSettings.class.getName());
         modIntent.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
         return modIntent;
