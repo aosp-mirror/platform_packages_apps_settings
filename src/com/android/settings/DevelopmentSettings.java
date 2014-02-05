@@ -141,6 +141,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final String PROCESS_STATS = "proc_stats";
+
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
 
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
@@ -201,6 +203,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private CheckBoxPreference mShowAllANRs;
 
+    private PreferenceScreen mProcessStats;
+
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
             = new ArrayList<CheckBoxPreference>();
@@ -246,6 +250,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 debugDebuggingCategory.removePreference(mClearAdbKeys);
             }
         }
+        mAllPrefs.add(mClearAdbKeys);
         mEnableTerminal = findAndInitCheckboxPref(ENABLE_TERMINAL);
         if (!isPackageInstalled(getActivity(), TERMINAL_APP_PACKAGE)) {
             debugDebuggingCategory.removePreference(mEnableTerminal);
@@ -305,6 +310,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
         mAllPrefs.add(mImmediatelyDestroyActivities);
         mResetCbPrefs.add(mImmediatelyDestroyActivities);
+
         mAppProcessLimit = addListPreference(APP_PROCESS_LIMIT_KEY);
 
         mShowAllANRs = (CheckBoxPreference) findPreference(
@@ -323,6 +329,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mAllPrefs.add(hdcpChecking);
             removePreferenceForProduction(hdcpChecking);
         }
+
+        mProcessStats = (PreferenceScreen) findPreference(PROCESS_STATS);
+        mAllPrefs.add(mProcessStats);
     }
 
     private ListPreference addListPreference(String prefKey) {
