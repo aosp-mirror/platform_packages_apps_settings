@@ -1220,13 +1220,6 @@
 
         <!-- Development settings -->
 
-        <activity android:name="DebugIntentSender" android:label="@string/debug_intent_sender_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
         <!-- DeviceInfo adds the user's requested build to stats upload.  -->
         <receiver android:name=".DeviceInfo$StatsReportReceiver">
             <intent-filter>
