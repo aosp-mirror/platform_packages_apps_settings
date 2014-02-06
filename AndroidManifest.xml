@@ -259,7 +259,7 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="ApnSettings"
+        <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:launchMode="singleTask"
@@ -270,7 +270,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ApnSettings" />
         </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".ApnSettings"
+                        android:label="@string/apn_settings"
+                        android:configChanges="orientation|keyboardHidden|screenSize"
+                        android:launchMode="singleTask"
+                        android:exported="true"
+                        android:targetActivity="Settings$ApnSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ApnSettings" />
+        </activity-alias>
 
         <activity android:name="Settings$BluetoothSettingsActivity"
                 android:uiOptions="splitActionBarWhenNarrow"
