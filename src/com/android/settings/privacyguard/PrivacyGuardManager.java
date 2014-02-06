@@ -238,12 +238,7 @@ public class PrivacyGuardManager extends Fragment
         if (mApps == null || mApps.isEmpty()) {
             return;
         }
-        // turn off privacy guard for all apps shown in the current list
-        for (AppInfo app : mApps) {
-            app.privacyGuardEnabled = false;
-        }
-        mAppOps.resetAllModes();
-        mAdapter.notifyDataSetChanged();
+        showResetDialog();
     }
 
     @Override
@@ -358,6 +353,38 @@ public class PrivacyGuardManager extends Fragment
     private void showHelp() {
         HelpDialogFragment fragment = new HelpDialogFragment();
         fragment.show(getFragmentManager(), "help_dialog");
+    }
+
+    private class ResetDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.privacy_guard_reset_title)
+                    .setMessage(R.string.privacy_guard_reset_text)
+                    .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // turn off privacy guard for all apps shown in the current list
+                                for (AppInfo app : mApps) {
+                                    app.privacyGuardEnabled = false;
+                                }
+                                mAppOps.resetAllModes();
+                                mAdapter.notifyDataSetChanged();
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing
+                        }
+                    })
+                    .create();
+        }
+    }
+
+    private void showResetDialog() {
+        ResetDialogFragment dialog = new ResetDialogFragment();
+        dialog.show(getFragmentManager(), "reset_dialog");
     }
 
     @Override
