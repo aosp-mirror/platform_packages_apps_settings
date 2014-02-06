@@ -296,6 +296,12 @@
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary"/>
 
+        <PreferenceScreen
+            android:id="@+id/wakelock_blocker"
+            android:layout="@layout/preference_wakelockblocker"
+            android:title="@string/wakelock_blocker"
+            android:fragment="com.android.settings.mahdi.WakeLockBlocker" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_LAN_category"

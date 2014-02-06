@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:gravity="center_vertical"
+    android:paddingEnd="?android:attr/scrollbarSize"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dip"
+            android:layout_marginBottom="6dip"
+            android:layout_weight="1">
+
+            <TextView android:id="@+id/wakelock_blocker_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:ellipsize="marquee"
+                android:text="@string/wakelock_blocker_title"
+                android:fadingEdge="horizontal" />
+
+            <TextView android:id="@+id/wakelock_blocker_title_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wakelock_blocker_title"
+                android:layout_alignStart="@id/wakelock_blocker_title"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?android:attr/textColorSecondary"
+                android:text="@string/wakelock_blocker_summary"
+                android:maxLines="4" />
+
+        </RelativeLayout>
+
+        <LinearLayout android:id="@+android:id/widget_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <Switch
+                android:id="@+id/wakelock_blocker_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dip"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/wakelock_list_header"
+        android:text="@string/wakelock_list_header"
+        style="?android:attr/listSeparatorTextViewStyle" />
+
+    <ListView
+            android:id="@+id/wakelock_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</LinearLayout>
