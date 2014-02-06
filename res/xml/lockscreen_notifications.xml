@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 OmniKang
+<!-- Copyright (C) 2013 AOSPAL
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@
             android:title="@string/offset_top"
             android:max="100"
             android:dependency="lockscreen_notifications"
-            android:defaultValue="30" />
+            android:defaultValue="45" />
 
         <com.android.settings.mahdi.lsn.NumberPickerPreference
             android:key="notifications_height"
@@ -87,12 +87,6 @@
             android:title="@string/notifications_height"
             android:dependency="lockscreen_notifications"
             android:summary="@string/notifications_height_summary" />
-
-        <CheckBoxPreference
-            android:key="dynamic_width"
-            android:title="@string/dynamic_width"
-            android:dependency="lockscreen_notifications"
-            android:summary="@string/dynamic_width_summary" />
 
     </PreferenceCategory>
     <PreferenceCategory
