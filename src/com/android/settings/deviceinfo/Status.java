@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
@@ -25,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -35,6 +35,7 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.telephony.CellBroadcastMessage;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
@@ -52,7 +53,6 @@ import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import java.lang.ref.WeakReference;
@@ -72,7 +72,7 @@ import java.lang.ref.WeakReference;
  * # XMPP/buzz/tickle status : TODO
  *
  */
-public class Status extends SettingsPreferenceFragment {
+public class Status extends PreferenceActivity {
 
     private static final String KEY_DATA_STATE = "data_state";
     private static final String KEY_SERVICE_STATE = "service_state";
@@ -163,8 +163,8 @@ public class Status extends SettingsPreferenceFragment {
     private static class MyHandler extends Handler {
         private WeakReference<Status> mStatus;
 
-        public MyHandler(Status status) {
-            mStatus = new WeakReference<Status>(status);
+        public MyHandler(Status activity) {
+            mStatus = new WeakReference<Status>(activity);
         }
 
         @Override
@@ -254,14 +254,14 @@ public class Status extends SettingsPreferenceFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
+    protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mHandler = new MyHandler(this);
 
-        mCM = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-        mTelephonyManager = (TelephonyManager)getSystemService(Activity.TELEPHONY_SERVICE);
-        mWifiManager = (WifiManager) getSystemService(Activity.WIFI_SERVICE);
+        mCM = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 
         addPreferencesFromResource(R.xml.device_info_status);
         mBatteryLevel = findPreference(KEY_BATTERY_LEVEL);
@@ -276,14 +276,13 @@ public class Status extends SettingsPreferenceFragment {
         mUnavailable = mRes.getString(R.string.status_unavailable);
 
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            PhoneFactory.makeDefaultPhone(getActivity());
             mPhone = PhoneFactory.getDefaultPhone();
         }
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
         mUptime = findPreference("up_time");
 
-        if (mPhone == null || Utils.isWifiOnly(getActivity())) {
+        if (mPhone == null || Utils.isWifiOnly(getApplicationContext())) {
             for (String key : PHONE_RELATED_ENTRIES) {
                 removePreferenceFromScreen(key);
             }
@@ -313,7 +312,7 @@ public class Status extends SettingsPreferenceFragment {
                 setSummaryText(KEY_IMEI, mPhone.getDeviceId());
 
                 setSummaryText(KEY_IMEI_SV,
-                        ((TelephonyManager) getSystemService(Activity.TELEPHONY_SERVICE))
+                        ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                             .getDeviceSoftwareVersion());
 
                 // device is not CDMA, do not display CDMA features
@@ -337,7 +336,7 @@ public class Status extends SettingsPreferenceFragment {
             // If formattedNumber is null or empty, it'll display as "Unknown".
             setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
 
-            mPhoneStateReceiver = new PhoneStateIntentReceiver(getActivity(), mHandler);
+            mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
             mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
             mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
 
@@ -369,39 +368,34 @@ public class Status extends SettingsPreferenceFragment {
         } else {
             removePreferenceFromScreen(KEY_SERIAL_NUMBER);
         }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
         // Make every pref on this screen copy its data to the clipboard on longpress.
         // Super convenient for capturing the IMEI, MAC addr, serial, etc.
         getListView().setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                                   int position, long id) {
-                        ListAdapter listAdapter = (ListAdapter) parent.getAdapter();
-                        Preference pref = (Preference) listAdapter.getItem(position);
+            new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view,
+                        int position, long id) {
+                    ListAdapter listAdapter = (ListAdapter) parent.getAdapter();
+                    Preference pref = (Preference) listAdapter.getItem(position);
 
-                        ClipboardManager cm = (ClipboardManager)
-                                getSystemService(Context.CLIPBOARD_SERVICE);
-                        cm.setText(pref.getSummary());
-                        Toast.makeText(
-                                getActivity(),
-                                com.android.internal.R.string.text_copied,
-                                Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                });
+                    ClipboardManager cm = (ClipboardManager)
+                            getSystemService(Context.CLIPBOARD_SERVICE);
+                    cm.setText(pref.getSummary());
+                    Toast.makeText(
+                        Status.this,
+                        com.android.internal.R.string.text_copied,
+                        Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
 
-        if (mPhone != null && !Utils.isWifiOnly(getActivity())) {
+        if (mPhone != null && !Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.registerIntent();
 
             updateSignalStrength();
@@ -410,17 +404,17 @@ public class Status extends SettingsPreferenceFragment {
             mTelephonyManager.listen(mPhoneStateListener,
                     PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
             if (mShowLatestAreaInfo) {
-                getActivity().registerReceiver(mAreaInfoReceiver, new IntentFilter(CB_AREA_INFO_RECEIVED_ACTION),
+                registerReceiver(mAreaInfoReceiver, new IntentFilter(CB_AREA_INFO_RECEIVED_ACTION),
                         CB_AREA_INFO_SENDER_PERMISSION, null);
                 // Ask CellBroadcastReceiver to broadcast the latest area info received
                 Intent getLatestIntent = new Intent(GET_LATEST_CB_AREA_INFO_ACTION);
-                getActivity().sendBroadcastAsUser(getLatestIntent, UserHandle.ALL,
+                sendBroadcastAsUser(getLatestIntent, UserHandle.ALL,
                         CB_AREA_INFO_SENDER_PERMISSION);
             }
         }
-        getActivity().registerReceiver(mConnectivityReceiver, mConnectivityIntentFilter,
-                android.Manifest.permission.CHANGE_NETWORK_STATE, null);
-        getActivity().registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        registerReceiver(mConnectivityReceiver, mConnectivityIntentFilter,
+                         android.Manifest.permission.CHANGE_NETWORK_STATE, null);
+        registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         mHandler.sendEmptyMessage(EVENT_UPDATE_STATS);
     }
 
@@ -428,15 +422,15 @@ public class Status extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
 
-        if (mPhone != null && !Utils.isWifiOnly(getActivity())) {
+        if (mPhone != null && !Utils.isWifiOnly(getApplicationContext())) {
             mPhoneStateReceiver.unregisterIntent();
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
         if (mShowLatestAreaInfo) {
-            getActivity().unregisterReceiver(mAreaInfoReceiver);
+            unregisterReceiver(mAreaInfoReceiver);
         }
-        getActivity().unregisterReceiver(mBatteryInfoReceiver);
-        getActivity().unregisterReceiver(mConnectivityReceiver);
+        unregisterReceiver(mBatteryInfoReceiver);
+        unregisterReceiver(mConnectivityReceiver);
         mHandler.removeMessages(EVENT_UPDATE_STATS);
     }
 

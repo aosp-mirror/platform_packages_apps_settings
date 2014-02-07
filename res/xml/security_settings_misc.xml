@@ -21,8 +21,10 @@
             android:persistent="false">
 
         <Preference android:title="@string/sim_lock_settings_category"
-                android:persistent="false"
-                android:fragment="com.android.settings.IccLockSettings">
+                android:persistent="false">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.IccLockSettings"/>
         </Preference>
     </PreferenceCategory>
 

@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ import com.android.internal.telephony.TelephonyIntents;
  * these operations.
  *
  */
-public class IccLockSettings extends SettingsPreferenceFragment
+public class IccLockSettings extends PreferenceActivity
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
     private static final boolean DBG = true;
@@ -127,11 +128,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
     };
 
     // For top-level settings screen to query
-    boolean isIccLockEnabled() {
-        return mPhone.getIccCard().getIccLockEnabled();
+    static boolean isIccLockEnabled() {
+        return PhoneFactory.getDefaultPhone().getIccCard().getIccLockEnabled();
     }
 
-    String getSummary(Context context) {
+    static String getSummary(Context context) {
         Resources res = context.getResources();
         String summary = isIccLockEnabled()
                 ? res.getString(R.string.sim_lock_on)
@@ -140,7 +141,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (Utils.isMonkeyRunning()) {
@@ -181,9 +182,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         // Don't need any changes to be remembered
         getPreferenceScreen().setPersistent(false);
 
-        PhoneFactory.makeDefaultPhone(getActivity());
         mPhone = PhoneFactory.getDefaultPhone();
-
         mRes = getResources();
         updatePreferences();
     }
@@ -193,13 +192,13 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
 
         // ACTION_SIM_STATE_CHANGED is sticky, so we'll receive current state after this call,
         // which will call updatePreferences().
         final IntentFilter filter = new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED);
-        getActivity().registerReceiver(mSimStateReceiver, filter);
+        registerReceiver(mSimStateReceiver, filter);
 
         if (mDialogState != OFF_MODE) {
             showPinDialog();
@@ -210,13 +209,13 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mSimStateReceiver);
+        unregisterReceiver(mSimStateReceiver);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle out) {
+    protected void onSaveInstanceState(Bundle out) {
         // Need to store this state for slider open/close
         // There is one case where the dialog is popped up by the preference
         // framework. In that case, let the preference framework store the
@@ -360,8 +359,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
         if (success) {
             mPinToggle.setChecked(mToState);
         } else {
-            Toast.makeText(getActivity(),
-                    getPinPasswordErrorMessage(attemptsRemaining), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getPinPasswordErrorMessage(attemptsRemaining), Toast.LENGTH_LONG)
+                    .show();
         }
         mPinToggle.setEnabled(true);
         resetDialogState();
@@ -369,11 +368,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
     private void iccPinChanged(boolean success, int attemptsRemaining) {
         if (!success) {
-            Toast.makeText(getActivity(), getPinPasswordErrorMessage(attemptsRemaining),
+            Toast.makeText(this, getPinPasswordErrorMessage(attemptsRemaining),
                     Toast.LENGTH_LONG)
                     .show();
         } else {
-            Toast.makeText(getActivity(), mRes.getString(R.string.sim_change_succeeded),
+            Toast.makeText(this, mRes.getString(R.string.sim_change_succeeded),
                     Toast.LENGTH_SHORT)
                     .show();
 
