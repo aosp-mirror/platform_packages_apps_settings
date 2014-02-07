@@ -67,6 +67,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
+    private static final String KEY_ENABLE_POWER_MENU = "lockscreen_enable_power_menu";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
@@ -97,8 +98,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     private CheckBoxPreference mShowPassword;
 
-    private CheckBoxPreference mQuickUnlockScreen;
-
     private KeyStore mKeyStore;
     private Preference mResetCredentials;
 
@@ -114,6 +113,9 @@ public class SecuritySettings extends RestrictedSettingsFragment
     public SecuritySettings() {
         super(null /* Don't ask for restrictions pin on creation. */);
     }
+
+    private CheckBoxPreference mQuickUnlockScreen;
+    private CheckBoxPreference mEnablePowerMenu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -202,6 +204,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (mLockAfter != null) {
             setupLockAfterPreference();
             updateLockAfterPreferenceSummary();
+        }
+
+        // Enable / disable power menu on lockscreen
+        mEnablePowerMenu = (CheckBoxPreference) findPreference(KEY_ENABLE_POWER_MENU);
+        if (mEnablePowerMenu != null) {
+            mEnablePowerMenu.setChecked(Settings.System.getInt(getContentResolver(),
+                   Settings.System.LOCKSCREEN_ENABLE_POWER_MENU, 1) == 1);
+            mEnablePowerMenu.setOnPreferenceChangeListener(this);
         }
 
         // biometric weak liveliness
@@ -598,6 +608,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
             updateLockAfterPreferenceSummary();
+        } else if (preference == mEnablePowerMenu) {
+            boolean newValue = (Boolean) value;
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_ENABLE_POWER_MENU, newValue ? 1 : 0);
         }
         return true;
     }
