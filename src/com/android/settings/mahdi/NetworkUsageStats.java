@@ -70,7 +70,7 @@ public class NetworkUsageStats extends SettingsPreferenceFragment implements OnP
 	mStatusBarNetworkColor = (ColorPickerPreference) prefSet.findPreference(STATUS_BAR_NETWORK_COLOR);
   	mStatusBarNetworkColor.setOnPreferenceChangeListener(this);
         int intColor = Settings.System.getInt(getActivity().getContentResolver(),
-                   Settings.System.STATUS_BAR_NETWORK_COLOR, 0xff000000);
+                   Settings.System.STATUS_BAR_NETWORK_COLOR, 0xffffffff);
         String hexColor = String.format("#%08x", (0xffffffff & intColor));
         mStatusBarNetworkColor.setSummary(hexColor);
         mStatusBarNetworkColor.setNewPreviewColor(intColor);

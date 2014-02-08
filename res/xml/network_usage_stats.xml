@@ -26,7 +26,8 @@
             settings:min="250"
             settings:unitsLeft=""
             settings:unitsRight="ms"
-            android:persistent="false" />
+            android:persistent="false"
+            android:dependency="status_bar_show_network_stats" />
 
 	<CheckBoxPreference
             android:key="status_bar_network_hide"
