@@ -61,7 +61,8 @@
                     android:key="emulate_menu_key"
                     android:title="@string/emulate_menu_key_title"
                     android:summary="@string/emulate_menu_key_summary"
-                    android:persistent="false"/>
+                    android:persistent="false"
+                    android:dependency="enable_nav_bar" />
 
             <ListPreference
                     android:key="pref_navbar_menu_display"
