@@ -34,7 +34,7 @@
     <string name="reset">Resetear</string>
     <string name="attention">Atención</string>
     <string name="default_string">Predeterminado</string>
-    <string name="enabled">Activar</string>
+    <string name="enabled">Activado</string>
     <string name="add">Añadir</string>  
 
     <!-- Display settings screen, notification light settings -->
@@ -147,11 +147,11 @@
     <string name="profile_connectionoverrides_title">Anular conexión</string>
     <string name="profile_volumeoverrides_title">Anular volumen</string>
     <string name="profile_vibratoroverrides_title">Anular vibración</string>
-    <string name="connection_state_disabled">Desactivar</string>
-    <string name="connection_state_enabled">Activar</string>
+    <string name="connection_state_disabled">Desactivado</string>
+    <string name="connection_state_enabled">Activado</string>
     <string name="volume_override_summary">Establecer en</string>
-    <string name="vibrator_state_disabled">Desactivar</string>
-    <string name="vibrator_state_enabled">Activar</string>
+    <string name="vibrator_state_disabled">Desactivado</string>
+    <string name="vibrator_state_enabled">Activado</string>
     <string name="vibrator_state_silent">Sólo en silencio</string>
 
     <!-- Menu item for managing profiles -->
@@ -373,7 +373,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="screen_security_title">Pantalla de bloqueo</string>
     <string name="screen_security_summary">Ver o cambiar la seguridad de bloqueo de pantalla</string>
     <string name="lock_screen_title">Pantalla de bloqueo</string>
-    <string name="lock_screen_summary">Cambiar aspecto de pantalla de bloqueo,añadir accesos directos y ajustes de widgets</string>
+    <string name="lock_screen_summary">Modificar pantalla de bloqueo, añadir accesos directos y ajustes de widgets</string>
     <string name="additional_options_title">Opciones adicionales</string>
     <string name="lock_before_unlock_title">Mostrar deslizador antes del desbloqueo seguro</string>
     <string name="lock_before_unlock_summary">Mostrar deslizador de pantalla de bloqueo antes del desbloqueo seguro</string>
@@ -599,6 +599,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="privacy_guard_filter_does_not_match">No hay aplicaciones con permisos relevantes instaladas</string>
     <string name="privacy_guard_help_title">Ayuda</string>
     <string name="privacy_guard_reset_title">Resetear</string>
+	<string name="privacy_guard_reset_text">¿Resetear permisos?</string>
     <string name="privacy_guard_help_text">En esta pantalla puede elegir para qué aplicaciones Privacy Guard debe activarse con un simple toque. Las aplicaciones seleccionadas no podrán acceder a sus datos personales, como contactos, mensajes y registros de llamadas. Pulsación larga abre pantalla de detalles sobre esa app.\n\nPor defecto apps de sistema no se muestran. Si desea mostrarlos, seleccione la opción correspondiente en el menú.</string>
     <string name="privacy_guard_manager_show_system_apps">Mostrar apps de sistema</string>
     <string name="privacy_guard_manager_filter_permissions">Filtro de permisos</string>
@@ -936,12 +937,22 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="end_time_title">Final</string>
 
     <!-- Network speed -->
-    <string name="title_network_traffic">Tráfico de red</string>
+    <string name="network_traffic_title">Tráfico de red</string>
+	<string name="network_traffic_summary">Ver o cambiar opciones de tráfico de red</string>
     <string name="status_bar_show_network_stats_title">Indicador de tráfico de red</string>
     <string name="status_bar_show_network_stats_summary">Mostrar velocidades de red en la barra de estado</string>
     <string name="status_bar_network_stats_update_title">Frecuencia de actualización</string>
     <string name="status_bar_network_stats_update_summary">¿Con qué frecuencia se actualiza el indicador?</string>
 
+	<!-- Network stats hide if there's no traffic -->
+    <string name="hide_network_speed">Ocultar cuando no hay tráfico</string>
+    <string name="hide_network_speed_summary">Ocultar indicador de estadísticas de la red cuando no hay tráfico</string>
+
+    <!-- Network stats custm colors -->
+    <string name="status_bar_network_usage_color_style">Estilo de color</string>
+    <string name="status_bar_network_usage_color_reset">Reestablecer color</string>
+    <string name="status_bar_network_usage_color_reset_message">Reestablecer color de estadísticas de red por defecto?</string>
+	
 	<!-- Screen recorder -->
     <string name="screen_recorder_title">Grabadora de pantalla</string>
     <string name="screen_recorder_summary">Ajustar configuración del grabador de pantalla</string>
@@ -1292,16 +1303,6 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="notif_wallpaper_alpha_title">Transparencia del fondo</string>
     <string name="notif_alpha_title">Transparencia de notificación</string>
 
-    <!-- Display : Animation options -->
-    <string name="display_category_animation_options_title">Opciones de animación</string>
-    <string name="system_power_crt_mode_title">Modo de animación CRT</string>
-    <string name="system_power_crt_mode_dialog_title">Mostrar animación CRT</string>
-    <string name="system_power_crt_mode_off">No mostrar</string>
-    <string name="system_power_crt_mode_horizontal">Horizontal</string>
-    <string name="system_power_crt_mode_vertical">Vertical</string>
-    <string name="system_power_crt_mode_both">Ambos</string>
-	<string name="system_power_crt_mode_scale">Reducir proporcionalmente</string>
-
     <!-- Double tap to sleep -->
     <string name="double_tap_to_sleep">Dos toques para apagar</string>
     <string name="double_tap_to_sleep_summary">Si esta opción está activada, usted puede poner en reposo el dispositivo pulsando dos veces la barra de estado</string>
@@ -1355,4 +1356,143 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 	<!-- Emulate menu key -->
     <string name="emulate_menu_key_title">Emular tecla de menú de hardware</string>
     <string name="emulate_menu_key_summary">Al pulsar la tecla de menú en navbar se abrirá el menú overflow</string>	
+	<!-- App ops -->
+    <string name="app_ops_summaries_bluetooth_change">cambio bluetooth</string>
+    <string name="app_ops_labels_bluetooth_change">cambio Bluetooth</string>
+    <string name="app_ops_summaries_data_change">cambio datos</string>
+    <string name="app_ops_labels_data_change">cambio Datos</string>
+    <string name="app_ops_summaries_alarm_wakeup">despertar</string>
+    <string name="app_ops_labels_alarm_wakeup">Despertar</string>
+    <string name="app_ops_summaries_auto_start">inicio automático</string>
+    <string name="app_ops_labels_auto_start">Inicio Automático</string>
+    <!-- App ops categories -->
+    <string name="app_ops_categories_bootup">Arranque</string>
+    <!-- App ops detail -->
+    <string name="app_ops_entry_summary"><xliff:g id="op">%1$s</xliff:g> (usado <xliff:g id="count">%2$s</xliff:g>)</string>
+    <string name="app_ops_allowed_count">Permitido <xliff:g id="count" example="2 times">%s</xliff:g></string>
+    <string name="app_ops_ignored_count">Denegado <xliff:g id="count" example="2 times">%s</xliff:g></string>
+    <string name="app_ops_both_count">Permitido <xliff:g id="count">%1$s</xliff:g>, denegado <xliff:g id="count">%2$s</xliff:g></string>
+    <plurals name="app_ops_count">
+        <item quantity="one">una vez</item>
+        <item quantity="other">%d veces</item>
+    </plurals>
+ 
+    <!-- App ops menu options -->
+    <string name="app_ops_show_user_apps">Mostrar apps de ususario</string>
+    <string name="app_ops_show_system_apps">Mostrar apps de sistema</string>
+    <string name="app_ops_reset_counters">Reestablecer contadores permitidos/denegados</string>
+    <string name="app_ops_reset_confirm_title">Confirmar contadores permitidos</string>
+    <string name="app_ops_reset_confirm_mesg">¿Seguro que desea poner a cero los contadores de AppOps?</string>	
+	
+	<!-- Screen off animation options -->
+    <string name="system_power_crt_mode_title">Modo de animación CRT</string>
+    <string name="system_power_crt_mode_dialog_title">Mostrar animación CRT</string>
+    <string name="system_power_crt_mode_off">No mostrar</string>
+    <string name="system_power_crt_mode_horizontal">Horizontal</string>
+    <string name="system_power_crt_mode_vertical">Vertical</string>
+    <string name="system_power_crt_mode_both">Ambos</string>
+	<string name="system_power_crt_mode_scale">Reducir proporcionalmente</string>
+
+    <!-- Animation Control -->
+    <string name="interface_animation_title">Control de animación</string>
+    <string name="interface_animation_summary">Elija animaciones alternativas para sistema, listview, scroll y teclado</string>
+
+    <!-- ListView animation -->
+    <string name="system_animation_title">Sistema</string>
+    <string name="system_animation_summary">Ver o cambiar animaciones de sistema</string>
+    <string name="listview_title">ListView</string>
+    <string name="listview_summary">Ver o cambiar animaciones listview</string>
+    <string name="listview_animation_title">Animaciones ListView</string>
+    <string name="listview_off">Apagado</string>
+    <string name="listview_wave_left">Onda (Izquierda)</string>
+    <string name="listview_wave_right">Onda (Derecha)</string>
+    <string name="listview_alpha">Alfa</string>
+    <string name="listview_scale">Escala</string>
+    <string name="listview_stack_top">Apilar (Arriba)</string>
+    <string name="listview_stack_bottom">Apilar (Abajo)</string>
+    <string name="listview_unfold">Desplegar</string>
+    <string name="listview_fold">Plegar</string>
+    <string name="listview_translate_left">Trasladar (Izquierda)</string>
+    <string name="listview_translate_right">Trasladar (Derecha)</string>
+    <string name="listview_duration_title">Duración ListView</string>
+    <string name="listview_cache_title">Caché persistente ListView</string>
+    <string name="listview_cache_none">Sin Caché</string>
+    <string name="listview_cache_anim">Animación Caché</string>
+    <string name="listview_cache_scroll">Scrolling Caché</string>
+    <string name="listview_cache_all">Animación y desplazamiento</string>
+    <string name="listview_blacklist_title">Apps excluidas</string>
+    <string name="listview_blacklist_summary">Evitar Apps de animación</string>
+    <string name="listview_test">Probar ListView</string>
+    <string name="listview_test_summary">Abrir diálogo de prueba con un ListView</string>
+    <string name="listview_test_instructions">Desplácese para ver los cambios</string>
+    <string name="listview_test_item">ListView Item</string>
+
+    <!-- ListView interpolator -->
+    <string name="listview_interpolator_title">ListView Interpolador</string>
+    <string name="listview_accelerate_interpolator">Acelerar</string>
+    <string name="listview_decelerate_interpolator">Desacelera</string>
+    <string name="listview_accelerate_decelerate_interpolator">Acelerar y Desacelerar</string>
+    <string name="listview_anticipate_interpolator">Anticipar</string>
+    <string name="listview_overshoot_interpolator">Sobrepasar</string>
+    <string name="listview_anticipate_overshoot_interpolator">Anticipar y Sobrepasar</string>
+    <string name="listview_bounce_interpolator">Rebote</string>
+    <string name="listview_cycle_interpolator">Ciclo</string>
+    <string name="listview_linear_interpolator">Lineal</string>
+
+    <!-- Animation Controls -->
+    <string name="animation_settings_reset_message">¿Restablecer todos los ajustes a los valores predeterminados de animación?</string>
+    <string name="animation_controls_title">Controles de animación</string>
+    <string name="activity_open_title">Abre Actividad de Animación en App</string>
+    <string name="activity_close_title">Cierra Actividad de Animación en App</string>
+    <string name="task_open_title">Lanzamiento de Animación en App</string>
+    <string name="task_close_title">Volver a Animación anterior</string>
+    <string name="task_move_to_front_title">Mover al principio animación</string>
+    <string name="task_move_to_back_title">Mover a anterior animación</string>
+    <string name="wallpaper_open_title">Volver a animación de pantalla de inicio</string>
+    <string name="wallpaper_close_title">Lanzamiento de Animación pantalla de inicio</string>
+    <string name="wallpaper_intra_open_title">Animación de abrir página de recientes</string>
+    <string name="wallpaper_intra_close_title">Animación de cerrar página de recientes</string>
+    <string name="animation_duration_title">Duración de animación</string>
+    <string name="animation_no_override_title">Evitar App que reemplace transición</string>
+    <string name="animation_no_override_summary_on">Prevenir apps que reemplacen transiciones.</string>
+    <string name="animation_no_override_summary_off">Apps pueden reemplazar las transiciones.</string>
+
+    <!-- Animation Strings -->
+    <string name="animation_default">Por defecto</string>
+    <string name="animation_fade">Fundido</string>
+    <string name="animation_slide_right">Deslizamiento derecha</string>
+    <string name="animation_slide_left">Deslizamiento izquierda</string>
+    <string name="animation_slide_right_no_fade">Deslizamiento derecha (sin desvanecimiento)</string>
+    <string name="animation_slide_left_no_fade">Deslizamiento izquierda (sin desvanecimiento)</string>
+    <string name="animation_slide_up">Deslizamiento abajo</string>
+    <string name="animation_slide_down">Deslizamiento arriba</string>
+    <string name="animation_translucent">Translúcido</string>
+    <string name="animation_grow_shrink">Crecer en (Arriba)</string>
+    <string name="animation_grow_shrink_center">Crecer en(Centro)</string>
+    <string name="animation_grow_shrink_bottom">Crecer en (Abajo)</string>
+    <string name="animation_grow_shrink_left">Crecer en (Izquierda)</string>
+    <string name="animation_grow_shrink_right">Crecer en (Derecha)</string>
+    <string name="animation_random">Aleatorio</string>
+
+    <!-- Scrolling Animation Controls -->
+    <string name="scrolling_title">Scrolling</string>
+    <string name="scrolling_summary">Ver o cambiar animación de scrolling</string>
+    <string name="animation_fling_velocity_title">Velocidad de lanzamiento</string>
+    <string name="animation_scroll_friction_title">Fricción de Scroll</string>
+    <string name="animation_overscroll_distance_title">Distancia Overscroll</string>
+    <string name="animation_overfling_distance_title">Distancia Overfling</string>
+    <string name="animation_duration_summary">Establecer duración</string>
+    <string name="animation_no_scroll_title">Personaliza scroll</string>
+    <string name="animation_no_scroll_summary_on">Activado</string>
+    <string name="animation_no_scroll_summary_off">Desactivado</string>
+
+    <!-- IME Animation Controls -->
+    <string name="ime_animation_title">Teclado</string>
+    <string name="ime_animation_summary">Ver o cambiar animaciones de teclado</string>
+    <string name="ime_animation_test_title">Prueba Animación de teclado aquí</string>
+    <string name="ime_enter_animation_title">Animación de entrada</string>
+    <string name="ime_exit_animation_title">Animación de salida</string>
+    <string name="ime_interpolator_title">Interpolador</string>
+    <string name="ime_duration_title">Duración de teclado</string>
 </resources>
+
