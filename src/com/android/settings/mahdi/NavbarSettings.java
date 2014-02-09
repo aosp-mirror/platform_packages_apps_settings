@@ -29,6 +29,7 @@ import com.android.internal.util.mahdi.DeviceUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 public class NavbarSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -40,8 +41,10 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
     private static final String PREF_BUTTON = "navbar_button_settings";
     private static final String PREF_RING = "navbar_targets_settings";
     private static final String PREF_STYLE_DIMEN = "navbar_style_dimen_settings";
+    private static final String CATEGORY_ADVANCED = "advanced_cat";
     private static final String PREF_NAVIGATION_BAR_CAN_MOVE = "navbar_can_move";
     private static final String EMULATE_MENU_KEY = "emulate_menu_key";
+    private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
 
     private int mNavBarMenuDisplayValue;
 
@@ -53,6 +56,7 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
     PreferenceScreen mRingPreference;
     PreferenceScreen mStyleDimenPreference;
     CheckBoxPreference mEmulateMenuKey;
+    CheckBoxPreference mNavigationBarLeftPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,7 +103,15 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
                 Settings.System.EMULATE_MENU_KEY, 0) == 1);
         mEmulateMenuKey.setOnPreferenceChangeListener(this);
 
+        mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
+
         updateNavbarPreferences(enableNavigationBar);
+
+        if (!Utils.isPhone(getActivity())) {
+            PreferenceCategory navCategory =
+                (PreferenceCategory) findPreference(CATEGORY_ADVANCED);
+            navCategory.removePreference(mNavigationBarLeftPref);
+        }
     }
 
     private void updateNavbarPreferences(boolean show) {
