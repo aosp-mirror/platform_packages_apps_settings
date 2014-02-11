@@ -131,8 +131,8 @@ public class SettingsActivity extends Activity
     private static final String LOG_TAG = "Settings";
 
     // Constants for state save/restore
-    private static final String HEADERS_TAG = ":settings:headers";
-    private static final String CUR_HEADER_TAG = ":settings:cur_header";
+    private static final String SAVE_KEY_HEADERS_TAG = ":settings:headers";
+    private static final String SAVE_KEY_CURRENT_HEADER_TAG = ":settings:cur_header";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -191,13 +191,12 @@ public class SettingsActivity extends Activity
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
-    private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
-
     private static boolean sShowNoHomeNotice = false;
 
     private String mFragmentClass;
     private int mTopLevelHeaderId;
     private Header mFirstHeader;
+    private Header mSelectedHeader;
     private Header mCurrentHeader;
 
     // Show only these settings for restricted users
@@ -312,7 +311,6 @@ public class SettingsActivity extends Activity
     };
 
     private final ArrayList<Header> mHeaders = new ArrayList<Header>();
-    private Header mCurHeader;
     private HeaderAdapter mHeaderAdapter;
 
     private class TitlePair extends Pair<Integer, CharSequence> {
@@ -338,8 +336,8 @@ public class SettingsActivity extends Activity
                     mHeaders.clear();
                     onBuildHeaders(mHeaders);
                     mHeaderAdapter.notifyDataSetChanged();
-                    if (mCurHeader != null) {
-                        Header mappedHeader = findBestMatchingHeader(mCurHeader, mHeaders);
+                    if (mCurrentHeader != null) {
+                        Header mappedHeader = findBestMatchingHeader(mCurrentHeader, mHeaders);
                         if (mappedHeader != null) {
                             setSelectedHeader(mappedHeader);
                         }
@@ -384,7 +382,7 @@ public class SettingsActivity extends Activity
             mDrawerToggle.onDrawerClosed(drawerView);
             // Cannot process clicks when the App is finishing
             if (isFinishing()) return;
-            onHeaderClick(mCurrentHeader);
+            onHeaderClick(mSelectedHeader);
         }
 
         @Override
@@ -406,26 +404,26 @@ public class SettingsActivity extends Activity
         }
     }
 
-    private Header findBestMatchingHeader(Header cur, ArrayList<Header> from) {
+    private Header findBestMatchingHeader(Header current, ArrayList<Header> from) {
         ArrayList<Header> matches = new ArrayList<Header>();
         for (int j=0; j<from.size(); j++) {
             Header oh = from.get(j);
-            if (cur == oh || (cur.id != HEADER_ID_UNDEFINED && cur.id == oh.id)) {
+            if (current == oh || (current.id != HEADER_ID_UNDEFINED && current.id == oh.id)) {
                 // Must be this one.
                 matches.clear();
                 matches.add(oh);
                 break;
             }
-            if (cur.fragment != null) {
-                if (cur.fragment.equals(oh.fragment)) {
+            if (current.fragment != null) {
+                if (current.fragment.equals(oh.fragment)) {
                     matches.add(oh);
                 }
-            } else if (cur.intent != null) {
-                if (cur.intent.equals(oh.intent)) {
+            } else if (current.intent != null) {
+                if (current.intent.equals(oh.intent)) {
                     matches.add(oh);
                 }
-            } else if (cur.title != null) {
-                if (cur.title.equals(oh.title)) {
+            } else if (current.title != null) {
+                if (current.title.equals(oh.title)) {
                     matches.add(oh);
                 }
             }
@@ -436,14 +434,14 @@ public class SettingsActivity extends Activity
         } else if (NM > 1) {
             for (int j=0; j<NM; j++) {
                 Header oh = matches.get(j);
-                if (cur.fragmentArguments != null &&
-                        cur.fragmentArguments.equals(oh.fragmentArguments)) {
+                if (current.fragmentArguments != null &&
+                        current.fragmentArguments.equals(oh.fragmentArguments)) {
                     return oh;
                 }
-                if (cur.extras != null && cur.extras.equals(oh.extras)) {
+                if (current.extras != null && current.extras.equals(oh.extras)) {
                     return oh;
                 }
-                if (cur.title != null && cur.title.equals(oh.title)) {
+                if (current.title != null && current.title.equals(oh.title)) {
                     return oh;
                 }
             }
@@ -530,10 +528,11 @@ public class SettingsActivity extends Activity
         if (savedInstanceState != null) {
             // We are restarting from a previous saved state; used that to
             // initialize, instead of starting fresh.
-            ArrayList<Header> headers = savedInstanceState.getParcelableArrayList(HEADERS_TAG);
+            ArrayList<Header> headers =
+                    savedInstanceState.getParcelableArrayList(SAVE_KEY_HEADERS_TAG);
             if (headers != null) {
                 mHeaders.addAll(headers);
-                int curHeader = savedInstanceState.getInt(CUR_HEADER_TAG,
+                int curHeader = savedInstanceState.getInt(SAVE_KEY_CURRENT_HEADER_TAG,
                         (int) HEADER_ID_UNDEFINED);
                 if (curHeader >= 0 && curHeader < mHeaders.size()) {
                     setSelectedHeader(mHeaders.get(curHeader));
@@ -627,11 +626,6 @@ public class SettingsActivity extends Activity
         if (!onIsHidingHeaders()) {
             highlightHeader(mTopLevelHeaderId);
         }
-
-        // Retrieve any saved state
-        if (savedInstanceState != null) {
-            mCurrentHeader = savedInstanceState.getParcelable(SAVE_KEY_CURRENT_HEADER);
-        }
     }
 
     @Override
@@ -674,18 +668,13 @@ public class SettingsActivity extends Activity
         super.onSaveInstanceState(outState);
 
         if (mHeaders.size() > 0) {
-            outState.putParcelableArrayList(HEADERS_TAG, mHeaders);
-            if (mCurHeader != null) {
-                int index = mHeaders.indexOf(mCurHeader);
+            outState.putParcelableArrayList(SAVE_KEY_HEADERS_TAG, mHeaders);
+            if (mCurrentHeader != null) {
+                int index = mHeaders.indexOf(mCurrentHeader);
                 if (index >= 0) {
-                    outState.putInt(CUR_HEADER_TAG, index);
+                    outState.putInt(SAVE_KEY_CURRENT_HEADER_TAG, index);
                 }
             }
-        }
-
-        // Save the current fragment, if it is the same as originally launched
-        if (mCurrentHeader != null) {
-            outState.putParcelable(SAVE_KEY_CURRENT_HEADER, mCurrentHeader);
         }
     }
 
@@ -754,7 +743,7 @@ public class SettingsActivity extends Activity
      * @param validate true means that the fragment's Header needs to be validated
      */
     private void switchToHeader(Header header, boolean validate) {
-        if (mCurHeader == header) {
+        if (mCurrentHeader == header) {
             // This is the header we are currently displaying.  Just make sure
             // to pop the stack up to its root state.
             getFragmentManager().popBackStack(BACK_STACK_PREFS,
@@ -779,7 +768,7 @@ public class SettingsActivity extends Activity
     }
 
     private void setSelectedHeader(Header header) {
-        mCurHeader = header;
+        mCurrentHeader = header;
         int index = mHeaders.indexOf(header);
         if (mDrawer != null) {
             if (index >= 0) {
@@ -797,7 +786,6 @@ public class SettingsActivity extends Activity
             header.fragment = fragmentClass;
             header.title = getTitle();
             header.fragmentArguments = getIntent().getExtras();
-            mCurrentHeader = header;
             return header;
         }
 
@@ -1589,7 +1577,7 @@ public class SettingsActivity extends Activity
         }
         Object item = mHeaderAdapter.getItem(position);
         if (item instanceof Header) {
-            mCurrentHeader = (Header) item;
+            mSelectedHeader = (Header) item;
         }
     }
 
