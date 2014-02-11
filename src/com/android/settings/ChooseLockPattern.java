@@ -331,6 +331,7 @@ public class ChooseLockPattern extends PreferenceActivity {
             mLockPatternView.setTactileFeedbackEnabled(
                     mChooseLockSettingsHelper.utils().isTactileFeedbackEnabled());
             mLockPatternView.setLockPatternSize(mPatternSize);
+            mLockPatternView.setLockPatternUtils(mChooseLockSettingsHelper.utils());
 
             mFooterText = (TextView) view.findViewById(R.id.footerText);
 
