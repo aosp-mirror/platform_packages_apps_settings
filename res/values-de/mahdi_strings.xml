@@ -21,7 +21,7 @@
     <string name="mod_version">Mahdi Rom Version</string>
     <string name="mod_version_default">Unbekannt</string>
     <!-- About phone screen, Build date of ROM -->
-    <string name="build_date">Build Datum</string>
+    <string name="build_date">Build-Datum</string>
     <string name="build_date_default">2012-01-01-0000</string>
     <!-- About device screen, Cpu info. -->
     <string name="cpu_info">CPU</string>
@@ -85,7 +85,7 @@
 
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Ein/Aus-Taste</string> 
-    <string name="power_menu_summary">Ein/Aus-Taste konfigurieren</string>
+    <string name="power_menu_summary">Konfiguration des Ein/Aus-Tastenmenüs</string>
     <string name="power_menu_reboot_title">Neustart-Menü</string>
     <string name="power_menu_screenshot_title">Bildschirmfoto</string>
     <string name="power_menu_screenrecord_title">Bildschirmrekorder</string>
@@ -307,7 +307,7 @@
     <string name="volume_overlay_title">Lautstärkeregler</string>
 
     <!-- Safe headset volume restore checkbox -->
-    <string name="safe_headset_volume_title">Headset-Lautstärkebegrenzung</string>
+    <string name="safe_headset_volume_title">Lautstärkenbegrenzung</string>
     <string name="safe_headset_volume_summary">Schützt vor zu hoher Lautstärke wenn Kopfhöhrer eingesteckt werden</string>
     <string name="safe_headset_volume_warning_dialog_text">Zu hohe Lautstärke kann das Gehöhr schädigen, Abschalten wird nicht empfohlen.</string>
 
@@ -382,7 +382,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
 
     <!-- Quick settings panel  -->
     <string name="quick_settings_panel_title">Schnelleinstellungen</string>
-    <string name="quick_settings_summary">Schnelleinstellungen konfigurieren, Anzahl der Kacheln und Reihenfolge ändern</string>
+    <string name="quick_settings_summary">Konfiguration der Schnelleinstellungen, Anzahl der Kacheln und Reihenfolge ändern</string>
     <string name="title_static_tiles">Statische Kacheln</string>
     <string name="tile_picker_title">Kacheln anordnen</string>
     <string name="tile_picker_summary">Kacheln auswählen oder ihre Reihenfolge ändern</string>
@@ -431,7 +431,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
 
     <string name="title_general">Allgemein</string>
     <string name="title_quick_pulldown">Schnelles Öffnen</string>
-    <string name="summary_quick_pulldown">Herunterziehen der Benachrichtigungsleiste am %1$s Rand öffnet die Schnelleinstellungen</string>
+    <string name="summary_quick_pulldown">Herunterziehen der Statusleiste am %1$s Rand öffnet die Schnelleinstellungen</string>
     <string name="quick_pulldown_summary_left">linken</string>
     <string name="quick_pulldown_summary_right">rechten</string>
     <string name="quick_pulldown_off">Deaktiviert</string>
@@ -490,13 +490,13 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="storage_rescan_media_complete">Suchvorgang wurde abgeschlossen</string>
 
     <!-- Category title for power sound notification specific Settings -->
-    <string name="power_notifications_category_title">Ladegerät-Ton</string>
+    <string name="power_notifications_category_title">Akustische Ladebenachrichtigung</string>
     <!-- Sound settings, power notifications enable/disable, setting check box label -->
     <string name="power_notifications_enable_title">Aktivieren</string>
     <!-- Sound settings, power notifications vibrate enable/disable, setting check box label -->
     <string name="power_notifications_vibrate_title">Vibrieren</string>
     <!-- Sound settings, power notifications ringtone selection, preference label -->
-    <string name="power_notifications_ringtone_title">Benachrichtigungston</string>
+    <string name="power_notifications_ringtone_title">Tonauswahl</string>
     <!-- Sound settings, power notifications label for ringtone == none -->
     <string name="power_notifications_ringtone_silent">Deaktiviert</string>
 
@@ -804,7 +804,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
 
     <!-- Notification drawer settings  -->
     <string name="notification_drawer_title">Benachrichtigungsanzeige</string>
-    <string name="notification_drawer_summary">Erstelle Verknüpfungen, aktiviere die Schnelleinstellungen und mehr</string>
+    <string name="notification_drawer_summary">Konfiguration der Benachrichtigungsanzeige, Verknüpfungen und der Schnellzugriffsleiste</string>
     <string name="notification_shortcuts_settings_title">App-Verküpfungen</string>
     <string name="notification_shortcuts_settings_summary">Füge der Benachrichtigungsanzeige App-Verknüfungen hinzu</string>
 
@@ -1302,16 +1302,6 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="notif_wallpaper_alpha_title">Hintergrundtransparenz</string>
     <string name="notif_alpha_title">Benachrichtigungstransparenz</string>
 
-    <!-- Display : Animation options -->
-    <string name="display_category_animation_options_title">Ausschaltanimation</string>
-    <string name="system_power_crt_mode_title">CRT Animation </string>
-    <string name="system_power_crt_mode_dialog_title">CRT Animation</string>
-    <string name="system_power_crt_mode_off">Nicht anzeigen</string>
-    <string name="system_power_crt_mode_horizontal">Horizontales zusammenfallen</string>
-    <string name="system_power_crt_mode_vertical">Vertikales zusammenfallen</string>
-    <string name="system_power_crt_mode_both">Ausrichtungsabhängiges zusammenfallen</string>
-    <string name="system_power_crt_mode_scale">Verkleinern</string>
-
     <!-- Double tap to sleep -->
     <string name="double_tap_to_sleep">Double-Tap-Schlafmodus</string>
     <string name="double_tap_to_sleep_summary">Ausschalten des Bildschirms durch doppeltes drücken auf die Statusleiste</string>
@@ -1365,20 +1355,145 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <!-- Emulate menu key -->
     <string name="emulate_menu_key_title">Hardware-Menütaste emulieren</string>
     <string name="emulate_menu_key_summary">Drücken der Menütaste in der Navigationsleiste emuliert eine Hardware-Menütaste</string>
-
-    <!-- App ops -->
-    <string name="app_ops_allowed">Erlaubt</string>
-    <string name="app_ops_ignored">Verweigert</string>
+	
+	<!-- App ops -->
     <string name="app_ops_summaries_bluetooth_change">Bluetooth ändern</string>
     <string name="app_ops_labels_bluetooth_change">Bluetooth ändern</string>
     <string name="app_ops_summaries_data_change">Mobile Daten ändern</string>
     <string name="app_ops_labels_data_change">Mobile Daten ändern</string>
     <string name="app_ops_summaries_alarm_wakeup">Ruhezustand ändern</string>
     <string name="app_ops_labels_alarm_wakeup">Ruhezustand ändern</string>
+    <string name="app_ops_summaries_auto_start">Autostart ändern</string>
+    <string name="app_ops_labels_auto_start">Autostart ändern</string>
+    <!-- App ops categories -->
+    <string name="app_ops_categories_bootup">Hochfahren</string>
+    <!-- App ops detail -->
+    <string name="app_ops_entry_summary"><xliff:g id="op">%1$s</xliff:g> (used <xliff:g id="count">%2$s</xliff:g>)</string>
+    <string name="app_ops_allowed_count">Erlaubt <xliff:g id="count" example="2 times">%s</xliff:g></string>
+    <string name="app_ops_ignored_count">Verweigert <xliff:g id="count" example="2 times">%s</xliff:g></string>
+    <string name="app_ops_both_count">Erlaubt <xliff:g id="count">%1$s</xliff:g>, verweigert <xliff:g id="count">%2$s</xliff:g></string>
+    <plurals name="app_ops_count">
+        <item quantity="one">Einmal</item>
+        <item quantity="other">%d mal</item>
+    </plurals>
+
+    <!-- App ops menu options -->
+    <string name="app_ops_allowed">Erlaubt</string>
+    <string name="app_ops_ignored">Verweigert</string>
     <string name="app_ops_show_user_apps">Benutzer-Apps anzeigen</string>
     <string name="app_ops_show_system_apps">System-Apps anzeigen</string>
     <string name="app_ops_reset_counters">Erlaubt/Verweigert-Zähler zurücksetzen</string>
     <string name="app_ops_reset_confirm_title">Zurücksetzen bestätigen</string>
     <string name="app_ops_reset_confirm_mesg">Sollen die Zähler zurückgesetzt werden?</string>
 
+    <!-- Screen off animation options -->
+    <string name="system_power_crt_mode_title">CRT Animation </string>
+    <string name="system_power_crt_mode_dialog_title">CRT Animation</string>
+    <string name="system_power_crt_mode_off">Nicht anzeigen</string>
+    <string name="system_power_crt_mode_horizontal">Horizontales zusammenfallen</string>
+    <string name="system_power_crt_mode_vertical">Vertikales zusammenfallen</string>
+    <string name="system_power_crt_mode_both">Ausrichtungsabhängiges zusammenfallen</string>
+    <string name="system_power_crt_mode_scale">Verkleinern</string>
+
+    <!-- Animation Control -->
+    <string name="interface_animation_title">Alternative Animationen</string>
+    <string name="interface_animation_summary">Konfiguration alternativer Bildschirm-Animationen</string>
+
+    <!-- ListView animation -->
+    <string name="system_animation_title">System</string>
+    <string name="system_animation_summary">Konfiguration der Systemanimationen</string>
+    <string name="listview_title">Listen</string>
+    <string name="listview_summary">Konfiguration der Listenanimationen</string>
+    <string name="listview_animation_title">Animation</string>
+    <string name="listview_off">Aus</string>
+    <string name="listview_wave_left">Welle (Links)</string>
+    <string name="listview_wave_right">Welle (Rechts)</string>
+    <string name="listview_alpha">Alpha</string>
+    <string name="listview_scale">Skalieren</string>
+    <string name="listview_stack_top">Stapel (Oben)</string>
+    <string name="listview_stack_bottom">Stapel (Unten)</string>
+    <string name="listview_unfold">Auffalten</string>
+    <string name="listview_fold">Falten</string>
+    <string name="listview_translate_left">Übersetzen (Links)</string>
+    <string name="listview_translate_right">Übersetzen (Rechts)</string>
+    <string name="listview_duration_title">Listendauer</string>
+    <string name="listview_cache_title">Zwischenspeicher</string>
+    <string name="listview_cache_none">Keiner</string>
+    <string name="listview_cache_anim">Animation</string>
+    <string name="listview_cache_scroll">Scrollen</string>
+    <string name="listview_cache_all">Animation &amp; Scrollen</string>
+    <string name="listview_blacklist_title">Apps ausschliessen</string>
+    <string name="listview_blacklist_summary">Apps von der Animation ausschliessen</string>
+    <string name="listview_test">Animation testen</string>
+    <string name="listview_test_summary">Öffnet einen Testdialog</string>
+    <string name="listview_test_instructions">Scrollen um die Änderungen zu überprüfen</string>
+    <string name="listview_test_item">Listen Eintrag</string>
+
+    <!-- ListView interpolator -->
+    <string name="listview_interpolator_title">Interpolator</string>
+    <string name="listview_accelerate_interpolator">Beschleunigen</string>
+    <string name="listview_decelerate_interpolator">Verlangsamen</string>
+    <string name="listview_accelerate_decelerate_interpolator">Beschleunigen und Verlangsamen</string>
+    <string name="listview_anticipate_interpolator">Vorhersehen</string>
+    <string name="listview_overshoot_interpolator">Überschwingen</string>
+    <string name="listview_anticipate_overshoot_interpolator">Vorhersehen und Überschwingen</string>
+    <string name="listview_bounce_interpolator">Hüpfen</string>
+    <string name="listview_cycle_interpolator">Kreis</string>
+    <string name="listview_linear_interpolator">Linear</string>
+
+    <!-- Animation Controls -->
+    <string name="animation_settings_reset_message">Alle Animationseinstellungen zurücksetzen?</string>
+    <string name="animation_controls_title">Alternative Animationen</string>
+    <string name="activity_open_title">In-App Aktivität öffnen</string>
+    <string name="activity_close_title">In-App Aktivität schliessen</string>
+    <string name="task_open_title">Start aus App</string>
+    <string name="task_close_title">Rückkehr zum vorherigen</string>
+    <string name="task_move_to_front_title">In den Vordergrund</string>
+    <string name="task_move_to_back_title">In den Hintergrund</string>
+    <string name="wallpaper_open_title">Zurück zum Homescreen</string>
+    <string name="wallpaper_close_title">Start vom Homescreen</string>
+    <string name="wallpaper_intra_open_title">Anwendungsverlauf öffnen</string>
+    <string name="wallpaper_intra_close_title">Anwendungsverlauf schliessen</string>
+    <string name="animation_duration_title">Animationsdauer</string>
+    <string name="animation_no_override_title">Apps berücksichtigen</string>
+    <string name="animation_no_override_summary_on">Apps können Animationsübergänge nicht ändern.</string>
+    <string name="animation_no_override_summary_off">Apps können Animationsübergänge ändern.</string>
+
+    <!-- Animation Strings -->
+    <string name="animation_default">Standard</string>
+    <string name="animation_fade">Ausblenden</string>
+    <string name="animation_slide_right">Slide in (Rechts)</string>
+    <string name="animation_slide_left">Slide in (Links)</string>
+    <string name="animation_slide_right_no_fade">Slide in (Rechts) (k. Ausblenden)</string>
+    <string name="animation_slide_left_no_fade">Slide in (Links) (k. Ausblenden)</string>
+    <string name="animation_slide_up">Slide in (Unten)</string>
+    <string name="animation_slide_down">Slide in (Oben)</string>
+    <string name="animation_translucent">Durchsichtig</string>
+    <string name="animation_grow_shrink">Zunehmend (Top)</string>
+    <string name="animation_grow_shrink_center">Zunehmend (Mitte)</string>
+    <string name="animation_grow_shrink_bottom">Zunehmend (Unten)</string>
+    <string name="animation_grow_shrink_left">Zunehmend (Links)</string>
+    <string name="animation_grow_shrink_right">Zunehmend (Rechts)</string>
+    <string name="animation_random">Zufällig</string>
+
+    <!-- Scrolling Animation Controls -->
+    <string name="scrolling_title">Scrollen</string>
+    <string name="scrolling_summary">Konfiguration der Scrollanimationen</string>
+    <string name="animation_fling_velocity_title">Scrollgeschwindigkeit</string>
+    <string name="animation_scroll_friction_title">Scrollfriktion</string>
+    <string name="animation_overscroll_distance_title">Überrollabstand</string>
+    <string name="animation_overfling_distance_title">Überflugabstand</string>
+    <string name="animation_duration_summary">Dauer festlegen</string>
+    <string name="animation_no_scroll_title">Benutzerdefiniertes Scrollen</string>
+    <string name="animation_no_scroll_summary_on">Aktiviert</string>
+    <string name="animation_no_scroll_summary_off">Deaktiviert</string>
+
+    <!-- IME Animation Controls -->
+    <string name="ime_animation_title">Tatstatur</string>
+    <string name="ime_animation_summary">Konfiguration der Tastaturanimationen</string>
+    <string name="ime_animation_test_title">Animation testen</string>
+    <string name="ime_enter_animation_title">Einblenden</string>
+    <string name="ime_exit_animation_title">Ausblenden</string>
+    <string name="ime_interpolator_title">Interpolator</string>
+    <string name="ime_duration_title">Animationsdauer</string>
 </resources>
