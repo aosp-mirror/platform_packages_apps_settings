@@ -19,17 +19,18 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 
 import android.os.Bundle;
-import com.android.settings.SettingsPreferenceFragment;
+import android.preference.PreferenceActivity;
 
 
 /**
  * Wifi information menu item on the diagnostic screen
  */
-public class WifiInfo extends SettingsPreferenceFragment {
+public class WifiInfo extends PreferenceActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.testing_wifi_settings);
     }
+
 }
