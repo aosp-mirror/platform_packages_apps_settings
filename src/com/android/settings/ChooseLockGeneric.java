@@ -27,6 +27,7 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
 import android.util.EventLog;
@@ -41,7 +42,7 @@ import java.util.List;
 
 import libcore.util.MutableBoolean;
 
-public class ChooseLockGeneric extends SettingsActivity {
+public class ChooseLockGeneric extends PreferenceActivity {
 
     @Override
     public Intent getIntent() {
