@@ -382,6 +382,8 @@ public class SettingsActivity extends Activity
         @Override
         public void onDrawerClosed(View drawerView) {
             mDrawerToggle.onDrawerClosed(drawerView);
+            // Cannot process clicks when the App is finishing
+            if (isFinishing()) return;
             onHeaderClick(mCurrentHeader);
         }
 
@@ -512,7 +514,6 @@ public class SettingsActivity extends Activity
             mActionBar.setHomeButtonEnabled(true);
 
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            mDrawerLayout.setDrawerListener(new DrawerListener());
 
             mDrawer = (ListView) findViewById(R.id.headers_drawer);
             mDrawer.setAdapter(mHeaderAdapter);
@@ -705,11 +706,15 @@ public class SettingsActivity extends Activity
         invalidateHeaders();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        mDrawerLayout.setDrawerListener(new DrawerListener());
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        mDrawerLayout.setDrawerListener(null);
 
         unregisterReceiver(mBatteryInfoReceiver);
 
