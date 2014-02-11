@@ -43,7 +43,7 @@ public class BatteryEntry {
     static final HashMap<String,UidToDetail> sUidCache = new HashMap<String,UidToDetail>();
 
     static final ArrayList<BatteryEntry> mRequestQueue = new ArrayList<BatteryEntry>();
-    static Handler mHandler;
+    static Handler sHandler;
 
     static private class NameAndIconLoader extends Thread {
         private boolean mAbort = false;
@@ -62,7 +62,9 @@ public class BatteryEntry {
                 BatteryEntry be;
                 synchronized (mRequestQueue) {
                     if (mRequestQueue.isEmpty() || mAbort) {
-                        mHandler.sendEmptyMessage(MSG_REPORT_FULLY_DRAWN);
+                        if (sHandler != null) {
+                            sHandler.sendEmptyMessage(MSG_REPORT_FULLY_DRAWN);
+                        }
                         mRequestQueue.clear();
                         return;
                     }
@@ -76,7 +78,7 @@ public class BatteryEntry {
     private static NameAndIconLoader mRequestThread;
 
     public static void startRequestQueue() {
-        if (mHandler != null) {
+        if (sHandler != null) {
             synchronized (mRequestQueue) {
                 if (!mRequestQueue.isEmpty()) {
                     if (mRequestThread != null) {
@@ -96,7 +98,7 @@ public class BatteryEntry {
             if (mRequestThread != null) {
                 mRequestThread.abort();
                 mRequestThread = null;
-                mHandler = null;
+                sHandler = null;
             }
         }
     }
@@ -120,7 +122,7 @@ public class BatteryEntry {
     }
 
     public BatteryEntry(Context context, Handler handler, UserManager um, BatterySipper sipper) {
-        mHandler = handler;
+        sHandler = handler;
         this.context = context;
         this.sipper = sipper;
         switch (sipper.drainType) {
@@ -221,7 +223,7 @@ public class BatteryEntry {
         } else {
             //name = packages[0];
         }
-        if (mHandler != null) {
+        if (sHandler != null) {
             synchronized (mRequestQueue) {
                 mRequestQueue.add(this);
             }
@@ -248,11 +250,8 @@ public class BatteryEntry {
         String[] packageLabels = new String[sipper.mPackages.length];
         System.arraycopy(sipper.mPackages, 0, packageLabels, 0, sipper.mPackages.length);
 
-        int preferredIndex = -1;
         // Convert package names to user-facing labels where possible
         for (int i = 0; i < packageLabels.length; i++) {
-            // Check if package matches preferred package
-            if (packageLabels[i].equals(name)) preferredIndex = i;
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(packageLabels[i], 0);
                 CharSequence label = ai.loadLabel(pm);
@@ -298,8 +297,8 @@ public class BatteryEntry {
         utd.icon = icon;
         utd.packageName = defaultPackageName;
         sUidCache.put(uidString, utd);
-        if (mHandler != null) {
-            mHandler.sendMessage(mHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
+        if (sHandler != null) {
+            sHandler.sendMessage(sHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
         }
     }
 }
