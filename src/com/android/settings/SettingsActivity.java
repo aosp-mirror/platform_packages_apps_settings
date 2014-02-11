@@ -70,6 +70,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -399,7 +400,7 @@ public class SettingsActivity extends Activity
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             mDrawerLayout.closeDrawer(mDrawer);
-            onListItemClick((ListView) parent, view, position, id);
+            onListItemClick((ListView)parent, view, position, id);
         }
     }
 
@@ -516,6 +517,7 @@ public class SettingsActivity extends Activity
             mDrawer = (ListView) findViewById(R.id.headers_drawer);
             mDrawer.setAdapter(mHeaderAdapter);
             mDrawer.setOnItemClickListener(new DrawerItemClickListener());
+            mDrawer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                     R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
@@ -538,23 +540,31 @@ public class SettingsActivity extends Activity
             }
 
         } else {
-            // We need to first to build the headers.
-            onBuildHeaders(mHeaders);
-
-            final CharSequence initialTitle = getTitle();
-
-            // If there are headers, get the initial fragment and push it first so that pressing
-            // BACK will always go to it before exiting the app
-            if (mHeaders.size() > 0) {
-                switchToHeader(mFirstHeader, false, true);
-            }
-
-            // Got to the initial fragment if one is specified
             if (initialFragment != null) {
-                final int initialTitleRes = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE, 0);
-                final Header h =
-                        onGetInitialHeader(initialTitle, initialTitleRes, initialArguments);
-                switchToHeader(h, false, false);
+                // If we are just showing a fragment, we want to run in
+                // new fragment mode, but don't need to compute and show
+                // the headers.
+                switchToHeader(initialFragment, initialArguments, true);
+
+                final int initialTitle = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE, 0);
+                if (initialTitle != 0) {
+                    setTitle(getText(initialTitle));
+                }
+            } else {
+                // We need to try to build the headers.
+                onBuildHeaders(mHeaders);
+
+                // If there are headers, then at this point we need to show
+                // them and, depending on the screen, we may also show in-line
+                // the currently selected preference fragment.
+                if (mHeaders.size() > 0) {
+                    if (initialFragment == null) {
+                        Header h = onGetInitialHeader();
+                        switchToHeader(h, false);
+                    } else {
+                        switchToHeader(initialFragment, initialArguments, false);
+                    }
+                }
             }
         }
 
@@ -625,7 +635,7 @@ public class SettingsActivity extends Activity
 
     @Override
     public void onBackStackChanged() {
-        final int count = getFragmentManager().getBackStackEntryCount();
+        final int count = getFragmentManager().getBackStackEntryCount() + 1;
         TitlePair pair = null;
         int last;
         while (mTitleStack.size() > count) {
@@ -647,9 +657,6 @@ public class SettingsActivity extends Activity
                     }
                     setTitle(title);
                 }
-            } else {
-                final String title = getResources().getString(R.string.settings_label);
-                setTitle(title);
             }
         }
     }
@@ -739,18 +746,20 @@ public class SettingsActivity extends Activity
      * preference fragment.
      *
      * @param header The new header to display.
-     * @param validate true means that the fragment's Header needs to be validated.
-     * @param initial true means that the fragment is the initial one.
+     * @param validate true means that the fragment's Header needs to be validated
      */
-    private void switchToHeader(Header header, boolean validate, boolean initial) {
-        if (mCurHeader != header) {
+    private void switchToHeader(Header header, boolean validate) {
+        if (mCurHeader == header) {
+            // This is the header we are currently displaying.  Just make sure
+            // to pop the stack up to its root state.
+            getFragmentManager().popBackStack(BACK_STACK_PREFS,
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } else {
+            mTitleStack.clear();
             if (header.fragment == null) {
                 throw new IllegalStateException("can't switch to header that has no fragment");
             }
-            getFragmentManager().popBackStackImmediate(BACK_STACK_PREFS,
-                    FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            mTitleStack.clear();
-            switchToHeaderInner(header.fragment, header.fragmentArguments, validate, !initial);
+            switchToHeaderInner(header.fragment, header.fragmentArguments, validate);
             setSelectedHeader(header);
             final CharSequence title;
             if (header.fragment.equals("com.android.settings.dashboard.DashboardSummary")) {
@@ -776,116 +785,44 @@ public class SettingsActivity extends Activity
         }
     }
 
-    public Header onGetInitialHeader(CharSequence title, int titleRes, Bundle args) {
+    public Header onGetInitialHeader() {
         String fragmentClass = getStartingFragmentClass(super.getIntent());
         if (fragmentClass != null) {
             Header header = new Header();
             header.fragment = fragmentClass;
-            header.title = title;
-            header.titleRes = titleRes;
-            header.fragmentArguments = args;
+            header.title = getTitle();
+            header.fragmentArguments = getIntent().getExtras();
             mCurrentHeader = header;
             return header;
         }
+
         return mFirstHeader;
     }
 
-    private void switchToHeaderInner(String fragmentName, Bundle args, boolean validate,
-            boolean addToBackStack) {
+    /**
+     * When in two-pane mode, switch the fragment pane to show the given
+     * preference fragment.
+     *
+     * @param fragmentName The name of the fragment to display.
+     * @param args Optional arguments to supply to the fragment.
+     * @param validate true means that the fragment's Header needs to be validated
+     */
+    private void switchToHeader(String fragmentName, Bundle args, boolean validate) {
+        setSelectedHeader(null);
+        switchToHeaderInner(fragmentName, args, validate);
+    }
+
+    private void switchToHeaderInner(String fragmentName, Bundle args, boolean validate) {
+        getFragmentManager().popBackStack(BACK_STACK_PREFS,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.prefs, f);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        if (addToBackStack) {
-            transaction.addToBackStack(BACK_STACK_PREFS);
-        }
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * Start a new fragment.
-     *
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param resultTo Option fragment that should receive the result of
-     *                 the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request code in which to
-     *                          report the result.
-     * @param titleRes Resource ID of string to display for the title of. If the Resource ID is a
-     *                 valid one then it will be used to get the title. Otherwise the titleText
-     *                 argument will be used as the title.
-     * @param titleText string to display for the title of.
-     */
-    private void startWithFragment(String fragmentName, Bundle args, Fragment resultTo,
-                                   int resultRequestCode, int titleRes, CharSequence titleText) {
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
-        if (resultTo != null) {
-            f.setTargetFragment(resultTo, resultRequestCode);
-        }
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.prefs, f);
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.addToBackStack(BACK_STACK_PREFS);
-        transaction.commitAllowingStateLoss();
-
-        final TitlePair pair;
-        final CharSequence cs;
-        if (titleRes != 0) {
-            pair = new TitlePair(titleRes, null);
-            cs = getText(titleRes);
-        } else {
-            pair = new TitlePair(0, titleText);
-            cs = titleText;
-        }
-        setTitle(cs);
-        mTitleStack.add(pair);
-    }
-
-    /**
-     * Start a new fragment containing a preference panel.  If the preferences
-     * are being displayed in multi-pane mode, the given fragment class will
-     * be instantiated and placed in the appropriate pane.  If running in
-     * single-pane mode, a new activity will be launched in which to show the
-     * fragment.
-     *
-     * @param fragmentClass Full name of the class implementing the fragment.
-     * @param args Any desired arguments to supply to the fragment.
-     * @param titleRes Optional resource identifier of the title of this
-     * fragment.
-     * @param titleText Optional text of the title of this fragment.
-     * @param resultTo Optional fragment that result data should be sent to.
-     * If non-null, resultTo.onActivityResult() will be called when this
-     * preference panel is done.  The launched panel must use
-     * {@link #finishPreferencePanel(Fragment, int, Intent)} when done.
-     * @param resultRequestCode If resultTo is non-null, this is the caller's
-     * request code to be received with the resut.
-     */
-    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
-                                     CharSequence titleText, Fragment resultTo,
-                                     int resultRequestCode) {
-        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, titleText);
-    }
-
-    /**
-     * Start a new fragment.
-     *
-     * @param fragment The fragment to start
-     * @param push If true, the current fragment will be pushed onto the back stack.  If false,
-     * the current fragment will be replaced.
-     */
-    public void startPreferenceFragment(Fragment fragment, boolean push) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.prefs, fragment);
-        if (push) {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(BACK_STACK_PREFS);
-        } else {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        }
         transaction.commitAllowingStateLoss();
     }
 
@@ -967,6 +904,31 @@ public class SettingsActivity extends Activity
     }
 
     /**
+     * Start a new fragment containing a preference panel.  If the preferences
+     * are being displayed in multi-pane mode, the given fragment class will
+     * be instantiated and placed in the appropriate pane.  If running in
+     * single-pane mode, a new activity will be launched in which to show the
+     * fragment.
+     *
+     * @param fragmentClass Full name of the class implementing the fragment.
+     * @param args Any desired arguments to supply to the fragment.
+     * @param titleRes Optional resource identifier of the title of this
+     * fragment.
+     * @param titleText Optional text of the title of this fragment.
+     * @param resultTo Optional fragment that result data should be sent to.
+     * If non-null, resultTo.onActivityResult() will be called when this
+     * preference panel is done.  The launched panel must use
+     * {@link #finishPreferencePanel(Fragment, int, Intent)} when done.
+     * @param resultRequestCode If resultTo is non-null, this is the caller's
+     * request code to be received with the resut.
+     */
+    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
+                                     CharSequence titleText, Fragment resultTo,
+                                     int resultRequestCode) {
+        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, titleText);
+    }
+
+    /**
      * Called by a preference panel fragment to finish itself.
      *
      * @param caller The fragment that is asking to be finished.
@@ -977,6 +939,64 @@ public class SettingsActivity extends Activity
      */
     public void finishPreferencePanel(Fragment caller, int resultCode, Intent resultData) {
         setResult(resultCode, resultData);
+    }
+
+    /**
+     * Start a new fragment.
+     *
+     * @param fragment The fragment to start
+     * @param push If true, the current fragment will be pushed onto the back stack.  If false,
+     * the current fragment will be replaced.
+     */
+    public void startPreferenceFragment(Fragment fragment, boolean push) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.prefs, fragment);
+        if (push) {
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(BACK_STACK_PREFS);
+        } else {
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        }
+        transaction.commitAllowingStateLoss();
+    }
+
+    /**
+     * Start a new fragment.
+     *
+     * @param fragmentName The name of the fragment to display.
+     * @param args Optional arguments to supply to the fragment.
+     * @param resultTo Option fragment that should receive the result of
+     *                 the activity launch.
+     * @param resultRequestCode If resultTo is non-null, this is the request code in which to
+     *                          report the result.
+     * @param titleRes Resource ID of string to display for the title of. If the Resource ID is a
+     *                 valid one then it will be used to get the title. Otherwise the titleText
+     *                 argument will be used as the title.
+     * @param titleText string to display for the title of.
+     */
+    private void startWithFragment(String fragmentName, Bundle args, Fragment resultTo,
+                                   int resultRequestCode, int titleRes, CharSequence titleText) {
+        Fragment f = Fragment.instantiate(this, fragmentName, args);
+        if (resultTo != null) {
+            f.setTargetFragment(resultTo, resultRequestCode);
+        }
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.prefs, f);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.addToBackStack(BACK_STACK_PREFS);
+        transaction.commitAllowingStateLoss();
+
+        final TitlePair pair;
+        final CharSequence cs;
+        if (titleRes != 0) {
+            pair = new TitlePair(titleRes, null);
+            cs = getText(titleRes);
+        } else {
+            pair = new TitlePair(0, titleText);
+            cs = titleText;
+        }
+        setTitle(cs);
+        mTitleStack.add(pair);
     }
 
     /**
@@ -1572,7 +1592,7 @@ public class SettingsActivity extends Activity
      * Called when the user selects an item in the header list.  The default
      * implementation will call either
      * {@link #startWithFragment(String, android.os.Bundle, android.app.Fragment, int, int, CharSequence)}
-     * or {@link #switchToHeader(com.android.settings.SettingsActivity.Header, boolean, boolean)}
+     * or {@link #switchToHeader(com.android.settings.SettingsActivity.Header, boolean)}
      * as appropriate.
      *
      * @param header The header that was selected.
@@ -1580,7 +1600,7 @@ public class SettingsActivity extends Activity
     private void onHeaderClick(Header header) {
         if (header == null) return;
         if (header.fragment != null) {
-            switchToHeader(header, false, false);
+            switchToHeader(header, false);
         } else if (header.intent != null) {
             startActivity(header.intent);
         }

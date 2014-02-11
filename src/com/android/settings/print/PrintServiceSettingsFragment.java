@@ -328,6 +328,14 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         final boolean enabled = arguments.getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
         mToggleSwitch.setCheckedInternal(enabled);
 
+        // Title.
+        SettingsActivity activity = (SettingsActivity) getActivity();
+        if (!activity.onIsHidingHeaders()) {
+            mOldActivityTitle = getActivity().getTitle();
+            String title = arguments.getString(PrintSettingsFragment.EXTRA_TITLE);
+            getActivity().getActionBar().setTitle(title);
+        }
+
         // Settings title and intent.
         String settingsTitle = arguments.getString(PrintSettingsFragment.EXTRA_SETTINGS_TITLE);
         String settingsComponentName = arguments.getString(
