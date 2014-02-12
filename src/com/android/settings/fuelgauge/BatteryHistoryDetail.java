@@ -47,7 +47,7 @@ public class BatteryHistoryDetail extends Fragment {
             parcel = Parcel.obtain();
             parcel.unmarshall(dockData, 0, dockData.length);
             parcel.setDataPosition(0);
-            mDockStats = com.android.internal.os.BatteryStatsImpl.CREATOR
+            mDockStats = com.android.internal.os.DockBatteryStatsImpl.CREATOR
                     .createFromParcel(parcel);
         }
     }
