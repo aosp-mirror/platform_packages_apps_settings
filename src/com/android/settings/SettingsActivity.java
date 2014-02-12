@@ -277,8 +277,7 @@ public class SettingsActivity extends Activity
             PaymentSettings.class.getName(),
             KeyboardLayoutPickerFragment.class.getName(),
             ChooseAccountFragment.class.getName(),
-            DashboardSummary.class.getName(),
-            ApnSettings.class.getName()
+            DashboardSummary.class.getName()
     };
 
     private SharedPreferences mDevelopmentPreferences;
