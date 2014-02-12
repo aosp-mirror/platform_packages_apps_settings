@@ -133,6 +133,7 @@ public class SettingsActivity extends Activity
     // Constants for state save/restore
     private static final String SAVE_KEY_HEADERS_TAG = ":settings:headers";
     private static final String SAVE_KEY_CURRENT_HEADER_TAG = ":settings:cur_header";
+    private static final String SAVE_KEY_TITLES_TAG = ":settings:titles";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -312,11 +313,35 @@ public class SettingsActivity extends Activity
     private final ArrayList<Header> mHeaders = new ArrayList<Header>();
     private HeaderAdapter mHeaderAdapter;
 
-    private class TitlePair extends Pair<Integer, CharSequence> {
+    static private class TitlePair extends Pair<Integer, CharSequence> implements Parcelable {
 
         public TitlePair(Integer first, CharSequence second) {
             super(first, second);
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(first);
+            TextUtils.writeToParcel(second, dest, flags);
+        }
+
+        TitlePair(Parcel in) {
+            super(in.readInt(), TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in));
+        }
+
+        public static final Creator<TitlePair> CREATOR = new Creator<TitlePair>() {
+            public TitlePair createFromParcel(Parcel source) {
+                return new TitlePair(source);
+            }
+            public TitlePair[] newArray(int size) {
+                return new TitlePair[size];
+            }
+        };
     }
 
     private final ArrayList<TitlePair> mTitleStack = new ArrayList<TitlePair>();
@@ -527,6 +552,18 @@ public class SettingsActivity extends Activity
         if (savedInstanceState != null) {
             // We are restarting from a previous saved state; used that to
             // initialize, instead of starting fresh.
+
+            ArrayList<TitlePair> titles =
+                    savedInstanceState.getParcelableArrayList(SAVE_KEY_TITLES_TAG);
+            if (titles != null) {
+                mTitleStack.addAll(titles);
+            }
+            final int lastTitle = mTitleStack.size() - 1;
+            if (lastTitle >= 0) {
+                final TitlePair last = mTitleStack.get(lastTitle);
+                setTitleFromPair(last);
+            }
+
             ArrayList<Header> headers =
                     savedInstanceState.getParcelableArrayList(SAVE_KEY_HEADERS_TAG);
             if (headers != null) {
@@ -642,17 +679,19 @@ public class SettingsActivity extends Activity
             if (size > 0) {
                 last = mTitleStack.size() - 1;
                 pair = mTitleStack.get(last);
-                if (pair != null) {
-                    final CharSequence title;
-                    if (pair.first > 0) {
-                        title = getText(pair.first);
-                    } else {
-                        title = pair.second;
-                    }
-                    setTitle(title);
-                }
+                setTitleFromPair(pair);
             }
         }
+    }
+
+    private void setTitleFromPair(TitlePair pair) {
+        final CharSequence title;
+        if (pair.first > 0) {
+            title = getText(pair.first);
+        } else {
+            title = pair.second;
+        }
+        setTitle(title);
     }
 
     /**
@@ -674,6 +713,10 @@ public class SettingsActivity extends Activity
                     outState.putInt(SAVE_KEY_CURRENT_HEADER_TAG, index);
                 }
             }
+        }
+
+        if (mTitleStack.size() > 0) {
+            outState.putParcelableList(SAVE_KEY_TITLES_TAG, mTitleStack);
         }
     }
 
