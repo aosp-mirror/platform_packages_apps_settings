@@ -405,8 +405,11 @@ public class SettingsActivity extends Activity
         public void onDrawerClosed(View drawerView) {
             mDrawerToggle.onDrawerClosed(drawerView);
             // Cannot process clicks when the App is finishing
-            if (isFinishing()) return;
-            onHeaderClick(mSelectedHeader);
+            if (isFinishing() || mSelectedHeader == null) {
+                return;
+            }
+            switchToHeader(mSelectedHeader, false);
+            mSelectedHeader = null;
         }
 
         @Override
@@ -594,12 +597,8 @@ public class SettingsActivity extends Activity
                 // them and, depending on the screen, we may also show in-line
                 // the currently selected preference fragment.
                 if (mHeaders.size() > 0) {
-                    if (initialFragment == null) {
-                        Header h = onGetInitialHeader();
-                        switchToHeader(h, false);
-                    } else {
-                        switchToHeader(initialFragment, initialArguments, false);
-                    }
+                    Header h = onGetInitialHeader();
+                    switchToHeader(h, false);
                 }
             }
         }
@@ -785,31 +784,54 @@ public class SettingsActivity extends Activity
      * @param validate true means that the fragment's Header needs to be validated
      */
     private void switchToHeader(Header header, boolean validate) {
-        if (mCurrentHeader == header) {
-            // This is the header we are currently displaying.  Just make sure
+        if (header == null) {
+            return;
+        }
+        if (header != null && mCurrentHeader != null && header.id == mCurrentHeader.id &&
+                header.id != R.id.account_add) {
+            // This is the header we are currently displaying (except "Add Account"). Just make sure
             // to pop the stack up to its root state.
             getFragmentManager().popBackStack(BACK_STACK_PREFS,
                     FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {
-            mTitleStack.clear();
-            if (header.fragment == null) {
-                throw new IllegalStateException("can't switch to header that has no fragment");
-            }
-            switchToHeaderInner(header.fragment, header.fragmentArguments, validate);
-            setSelectedHeader(header);
-            final CharSequence title;
-            if (header.fragment.equals("com.android.settings.dashboard.DashboardSummary")) {
-                title = getResources().getString(R.string.settings_label);
+            if (header.fragment != null) {
+                mTitleStack.clear();
+                switchToHeaderInner(header.fragment, header.fragmentArguments, validate);
+                setSelectedHeader(header);
+                final TitlePair pair = new TitlePair(0, getHeaderTitle(header));
+                mTitleStack.add(pair);
+                setTitle(pair.second);
+            } else if (header.intent != null) {
+                setSelectedHeader(header);
+                mTitleStack.clear();
+                startActivity(header.intent);
             } else {
-                title = header.getTitle(getResources());
+                throw new IllegalStateException(
+                        "Can't switch to header that has no Fragment nor Intent");
             }
-            final TitlePair pair = new TitlePair(0, title);
-            mTitleStack.add(pair);
-            setTitle(title);
         }
     }
 
+    private CharSequence getHeaderTitle(Header header) {
+        final CharSequence title;
+        if (header.fragment.equals(DashboardSummary.class.getName())) {
+            title = getResources().getString(R.string.settings_label);
+        } else {
+            title = header.getTitle(getResources());
+        }
+        return title;
+    }
+
     private void setSelectedHeader(Header header) {
+        if (header == null) {
+            mCurrentHeader = null;
+            return;
+        }
+        // Update selected Header into Drawer only if it is not "Add Account"
+        if (header.id == R.id.account_add) {
+            mDrawer.clearChoices();
+            return;
+        }
         mCurrentHeader = header;
         int index = mHeaders.indexOf(header);
         if (mDrawer != null) {
@@ -1620,24 +1642,6 @@ public class SettingsActivity extends Activity
         Object item = mHeaderAdapter.getItem(position);
         if (item instanceof Header) {
             mSelectedHeader = (Header) item;
-        }
-    }
-
-    /**
-     * Called when the user selects an item in the header list.  The default
-     * implementation will call either
-     * {@link #startWithFragment(String, android.os.Bundle, android.app.Fragment, int, int, CharSequence)}
-     * or {@link #switchToHeader(com.android.settings.SettingsActivity.Header, boolean)}
-     * as appropriate.
-     *
-     * @param header The header that was selected.
-     */
-    private void onHeaderClick(Header header) {
-        if (header == null) return;
-        if (header.fragment != null) {
-            switchToHeader(header, false);
-        } else if (header.intent != null) {
-            startActivity(header.intent);
         }
     }
 
