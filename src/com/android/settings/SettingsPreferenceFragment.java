@@ -144,7 +144,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
             Log.e(TAG, "Old dialog fragment not null!");
         }
         mDialogFragment = new SettingsDialogFragment(this, dialogId);
-        mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
+        mDialogFragment.show(getChildFragmentManager(), Integer.toString(dialogId));
     }
 
     public Dialog onCreateDialog(int dialogId) {
@@ -233,17 +233,15 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             if (savedInstanceState != null) {
                 mDialogId = savedInstanceState.getInt(KEY_DIALOG_ID, 0);
+                mParentFragment = getParentFragment();
                 int mParentFragmentId = savedInstanceState.getInt(KEY_PARENT_FRAGMENT_ID, -1);
-                if (mParentFragmentId > -1) {
-                    mParentFragment = getFragmentManager().findFragmentById(mParentFragmentId);
-                    if (!(mParentFragment instanceof DialogCreatable)) {
-                        throw new IllegalArgumentException(
-                                (mParentFragment != null
-                                        ? mParentFragment.getClass().getName()
-                                        : mParentFragmentId)
-                                + " must implement "
-                                + DialogCreatable.class.getName());
-                    }
+                if (!(mParentFragment instanceof DialogCreatable)) {
+                    throw new IllegalArgumentException(
+                            (mParentFragment != null
+                                    ? mParentFragment.getClass().getName()
+                                    : mParentFragmentId)
+                                    + " must implement "
+                                    + DialogCreatable.class.getName());
                 }
                 // This dialog fragment could be created from non-SettingsPreferenceFragment
                 if (mParentFragment instanceof SettingsPreferenceFragment) {
