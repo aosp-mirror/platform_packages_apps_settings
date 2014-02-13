@@ -40,6 +40,12 @@
             android:title="@string/title_collapse_panel"
             android:summary="@string/summary_collapse_panel" />
 
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="quick_settings_tiles_vibrate"
+            android:title="@string/haptic_qs_tiles_title"
+            android:summary="@string/haptic_qs_tiles_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
