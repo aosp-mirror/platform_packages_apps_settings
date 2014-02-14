@@ -34,6 +34,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.storage.IMountService;
+import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
@@ -60,6 +61,9 @@ import com.android.internal.statusbar.StatusBarIcon;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockPatternView;
+import com.android.internal.widget.LockPatternView.Cell;
 
 import java.util.List;
 
@@ -113,6 +117,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
     private EditText mPasswordEntry;
+    private LockPatternView mLockPatternView;
     /** Number of calls to {@link #notifyUser()} to ignore before notifying. */
     private int mNotificationCountdown = 0;
 
@@ -175,7 +180,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 final TextView status = (TextView) findViewById(R.id.status);
                 status.setText(R.string.try_again);
                 // Reenable the password entry
-                mPasswordEntry.setEnabled(true);
+                if (mPasswordEntry != null) {
+                    mPasswordEntry.setEnabled(true);
+                }
             }
         }
     }
@@ -354,7 +361,21 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
         } else if (mValidationComplete || isDebugView(FORCE_VIEW_PASSWORD)) {
-            setContentView(R.layout.crypt_keeper_password_entry);
+            final IMountService service = getMountService();
+            int type = StorageManager.CRYPT_TYPE_PASSWORD;
+            try {
+                type = service.getPasswordType();
+            } catch (Exception e) {
+                Log.e(TAG, "Error while getting type - showing default dialog" + e);
+            }
+
+            if(type == StorageManager.CRYPT_TYPE_PIN) {
+                setContentView(R.layout.crypt_keeper_pin_entry);
+            } else if (type == StorageManager.CRYPT_TYPE_PATTERN) {
+                setContentView(R.layout.crypt_keeper_pattern_entry);
+            } else {
+                setContentView(R.layout.crypt_keeper_password_entry);
+            }
             passwordEntryInit();
         } else if (!mValidationRequested) {
             // We're supposed to be encrypted, but no validation has been done.
@@ -503,14 +524,44 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
-    private void passwordEntryInit() {
+    protected LockPatternView.OnPatternListener mChooseNewLockPatternListener =
+            new LockPatternView.OnPatternListener() {
+
+            @Override
+            public void onPatternStart() {
+            }
+
+            @Override
+            public void onPatternCleared() {
+            }
+
+            @Override
+            public void onPatternDetected(List<LockPatternView.Cell> pattern) {
+                new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
+            }
+
+            @Override
+            public void onPatternCellAdded(List<Cell> pattern) {
+            }
+     };
+
+     private void passwordEntryInit() {
+        // Password/pin case
         mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
-        mPasswordEntry.setOnEditorActionListener(this);
-        mPasswordEntry.requestFocus();
-        // Become quiet when the user interacts with the Edit text screen.
-        mPasswordEntry.setOnKeyListener(this);
-        mPasswordEntry.setOnTouchListener(this);
-        mPasswordEntry.addTextChangedListener(this);
+        if (mPasswordEntry != null){
+            mPasswordEntry.setOnEditorActionListener(this);
+            mPasswordEntry.requestFocus();
+            // Become quiet when the user interacts with the Edit text screen.
+            mPasswordEntry.setOnKeyListener(this);
+            mPasswordEntry.setOnTouchListener(this);
+            mPasswordEntry.addTextChangedListener(this);
+        }
+
+        // Pattern case
+        mLockPatternView = (LockPatternView) findViewById(R.id.lockPattern);
+        if (mLockPatternView != null) {
+            mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
+        }
 
         // Disable the Emergency call button if the device has no voice telephone capability
         final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
