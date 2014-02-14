@@ -82,7 +82,7 @@ public final class LocalDeviceProfilesSettings extends SettingsPreferenceFragmen
         super.onResume();
         mManager.setForegroundActivity(getActivity());
         mAdvertisingEnabler.resume();
-        mDiscoverableEnabler.resume();
+        mDiscoverableEnabler.resume(getActivity());
     }
 
     @Override
