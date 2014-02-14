@@ -156,7 +156,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         super.onResume();
 
         if (mDiscoverableEnabler != null) {
-            mDiscoverableEnabler.resume();
+            mDiscoverableEnabler.resume(getActivity());
         }
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mLocalAdapter != null) {
@@ -262,9 +262,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
                 if (!isRestrictedAndNotPinProtected()) {
                     if (mDiscoverableEnabler == null) {
-                        mDiscoverableEnabler = new BluetoothDiscoverableEnabler(getActivity(),
-                                mLocalAdapter, mMyDevicePreference);
-                        mDiscoverableEnabler.resume();
+                        mDiscoverableEnabler = new BluetoothDiscoverableEnabler(mLocalAdapter,
+                                mMyDevicePreference);
+                        mDiscoverableEnabler.resume(getActivity());
                         LocalBluetoothManager.getInstance(getActivity()).setDiscoverableEnabler(
                                 mDiscoverableEnabler);
                     }

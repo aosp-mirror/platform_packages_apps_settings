@@ -57,7 +57,7 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
 
     static final int DEFAULT_DISCOVERABLE_TIMEOUT = DISCOVERABLE_TIMEOUT_TWO_MINUTES;
 
-    private final Context mContext;
+    private Context mContext;
     private final Handler mUiHandler;
     private final Preference mDiscoveryPreference;
     // Preference for visibility time out.  Not final as it needs to be set through setter.
@@ -91,9 +91,8 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         }
     };
 
-    BluetoothDiscoverableEnabler(Context context, LocalBluetoothAdapter adapter,
+    BluetoothDiscoverableEnabler(LocalBluetoothAdapter adapter,
             Preference discoveryPreference) {
-        mContext = context;
         mUiHandler = new Handler();
         mLocalAdapter = adapter;
         mDiscoveryPreference = discoveryPreference;
@@ -105,9 +104,13 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
         mVisibilityTimeoutPreference = visibilityPreference;
     }
 
-    public void resume() {
+    public void resume(Context context) {
         if (mLocalAdapter == null) {
             return;
+        }
+
+        if (mContext != context) {
+            mContext = context;
         }
 
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
