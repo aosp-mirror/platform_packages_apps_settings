@@ -732,7 +732,7 @@ public class SettingsActivity extends Activity
         mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
 
-        mHeaderAdapter.resume();
+        mHeaderAdapter.resume(this);
         invalidateHeaders();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -1624,9 +1624,9 @@ public class SettingsActivity extends Activity
             holder.mIcon.setImageDrawable(icon);
         }
 
-        public void resume() {
+        public void resume(Context context) {
             mWifiEnabler.resume();
-            mBluetoothEnabler.resume();
+            mBluetoothEnabler.resume(context);
         }
 
         public void pause() {

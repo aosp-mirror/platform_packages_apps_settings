@@ -35,7 +35,7 @@ import com.android.settings.WirelessSettings;
  * preference reflects the current state.
  */
 public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeListener {
-    private final Context mContext;
+    private Context mContext;
     private Switch mSwitch;
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
@@ -67,10 +67,14 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
 
-    public void resume() {
+    public void resume(Context context) {
         if (mLocalAdapter == null) {
             mSwitch.setEnabled(false);
             return;
+        }
+
+        if (mContext != context) {
+            mContext = context;
         }
 
         // Bluetooth state is not sticky, so set it manually
