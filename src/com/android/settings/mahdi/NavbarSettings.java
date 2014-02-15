@@ -111,6 +111,7 @@ public class NavbarSettings extends SettingsPreferenceFragment implements
             PreferenceCategory navCategory =
                 (PreferenceCategory) findPreference(CATEGORY_ADVANCED);
             navCategory.removePreference(mNavigationBarLeftPref);
+            navCategory.removePreference(mNavigationBarCanMove);
         }
     }
 
