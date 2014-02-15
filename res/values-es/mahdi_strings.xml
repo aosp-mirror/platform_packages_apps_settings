@@ -1040,7 +1040,8 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="dynamic_width_summary">Establece el ancho de las notificaciones dinámicas, de modo que sólo utilizan el espacio que realmente necesitan</string>
     <string name="excluded_apps_title">Aplicaciones excluidas</string>
     <string name="excluded_apps_summary">Aplicaciones excluidas no aparecerán como notificaciones de pantalla de bloqueo</string>
-    
+    <string name="notification_color">Color de fondo de notificación</string>
+	
 	<!-- Lock Screen Shortcuts -->
     <string name="title_shortcuts">Accesos directos</string>
     <string name="lockscreen_target_info">Arrastre el control deslizante para asignar accesos directos</string>
@@ -1212,7 +1213,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 
     <!--  development shortcut -->
     <string name="development_shortcut_title">Desarrollo de accesos directos</string>
-    <string name="development_shortcut_summary">Activar \'wipe data\' y \'force close\' opciones en área de notificaciones y lista de aplicaciones recientes</string>
+    <string name="development_shortcut_summary">Activar opciones \'wipe data\' y \'force close\' en área de notificaciones y lista de aplicaciones recientes</string>
 
     <!-- Recents panel menu -->
     <string name="recents_panel_settings_title">Panel de recientes</string>
@@ -1421,7 +1422,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="listview_cache_scroll">Scrolling Caché</string>
     <string name="listview_cache_all">Animación y desplazamiento</string>
     <string name="listview_blacklist_title">Apps excluidas</string>
-    <string name="listview_blacklist_summary">Evitar Apps de animación</string>
+    <string name="listview_blacklist_summary">Evitar animación de apps</string>
     <string name="listview_test">Probar ListView</string>
     <string name="listview_test_summary">Abrir diálogo de prueba con un ListView</string>
     <string name="listview_test_instructions">Desplácese para ver los cambios</string>
@@ -1442,16 +1443,16 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <!-- Animation Controls -->
     <string name="animation_settings_reset_message">¿Restablecer todos los ajustes a los valores predeterminados de animación?</string>
     <string name="animation_controls_title">Controles de animación</string>
-    <string name="activity_open_title">Abre Actividad de Animación en App</string>
-    <string name="activity_close_title">Cierra Actividad de Animación en App</string>
-    <string name="task_open_title">Lanzamiento de Animación en App</string>
-    <string name="task_close_title">Volver a Animación anterior</string>
-    <string name="task_move_to_front_title">Mover al principio animación</string>
-    <string name="task_move_to_back_title">Mover a anterior animación</string>
-    <string name="wallpaper_open_title">Volver a animación de pantalla de inicio</string>
-    <string name="wallpaper_close_title">Lanzamiento de Animación pantalla de inicio</string>
-    <string name="wallpaper_intra_open_title">Animación de abrir página de recientes</string>
-    <string name="wallpaper_intra_close_title">Animación de cerrar página de recientes</string>
+    <string name="activity_open_title">Animación abrir App</string>
+    <string name="activity_close_title">Animación cerrar App</string>
+    <string name="task_open_title">Animación lanzar desde App</string>
+    <string name="task_close_title">Animación volver a anterior</string>
+    <string name="task_move_to_front_title">Animación mover al principio</string>
+    <string name="task_move_to_back_title">Animación mover a anterior</string>
+    <string name="wallpaper_open_title">Animación volver pantalla de inicio</string>
+    <string name="wallpaper_close_title">Animación lanzar pantalla de inicio</string>
+    <string name="wallpaper_intra_open_title">Animación abrir página recientes</string>
+    <string name="wallpaper_intra_close_title">Animación cerrar página recientes</string>
     <string name="animation_duration_title">Duración de animación</string>
     <string name="animation_no_override_title">Evitar App que reemplace transición</string>
     <string name="animation_no_override_summary_on">Prevenir apps que reemplacen transiciones.</string>
@@ -1460,18 +1461,18 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <!-- Animation Strings -->
     <string name="animation_default">Por defecto</string>
     <string name="animation_fade">Fundido</string>
-    <string name="animation_slide_right">Deslizamiento derecha</string>
-    <string name="animation_slide_left">Deslizamiento izquierda</string>
-    <string name="animation_slide_right_no_fade">Deslizamiento derecha (sin desvanecimiento)</string>
-    <string name="animation_slide_left_no_fade">Deslizamiento izquierda (sin desvanecimiento)</string>
+    <string name="animation_slide_right">Desliza derecha</string>
+    <string name="animation_slide_left">Desliza izquierda</string>
+    <string name="animation_slide_right_no_fade">Desliza. derecha (sin desvanecer)</string>
+    <string name="animation_slide_left_no_fade">Desliza. izquierda (sin desvanecer)</string>
     <string name="animation_slide_up">Deslizamiento abajo</string>
     <string name="animation_slide_down">Deslizamiento arriba</string>
     <string name="animation_translucent">Translúcido</string>
-    <string name="animation_grow_shrink">Crecer en (Arriba)</string>
-    <string name="animation_grow_shrink_center">Crecer en(Centro)</string>
-    <string name="animation_grow_shrink_bottom">Crecer en (Abajo)</string>
-    <string name="animation_grow_shrink_left">Crecer en (Izquierda)</string>
-    <string name="animation_grow_shrink_right">Crecer en (Derecha)</string>
+    <string name="animation_grow_shrink">Crecer (Arriba)</string>
+    <string name="animation_grow_shrink_center">Crecer (Centro)</string>
+    <string name="animation_grow_shrink_bottom">Crecer (Abajo)</string>
+    <string name="animation_grow_shrink_left">Crecer (Izquierda)</string>
+    <string name="animation_grow_shrink_right">Crecer (Derecha)</string>
     <string name="animation_random">Aleatorio</string>
 
     <!-- Scrolling Animation Controls -->
