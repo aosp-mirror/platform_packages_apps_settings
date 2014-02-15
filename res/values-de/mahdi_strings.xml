@@ -107,7 +107,7 @@
     <string name="advanced_reboot_title">Erweitertes Neustartmenü</string>
     <string name="advanced_reboot_summary">Bei entsperrtem Bildschirm dem Neustartmenü Optionen für Neustart in Recovery und Bootloader hinzufügen.</string>
 
-   <!-- Profiles settings  -->
+    <!-- Profiles settings  -->
     <string name="profiles_settings_title">Profile</string>
     <string name="profiles_general_title">Allgemein</string>
     <string name="profiles_add">Hinzufügen</string>
@@ -515,7 +515,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Farbwähler</string>
-    <string name="press_color_to_apply">Zum Anwenden auf die gewünschte Farbe drücken</string>
+    <string name="press_color_to_apply">Zum Anwenden auf die gewünschte Farbe tippen</string>
     <string name="arrow_right">→</string>
     <string name="arrow_down">↓</string>
     <string name="hex">Hex:</string>
@@ -650,7 +650,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="increasing_ring_volume_notice">Hinweis:\nDa die Anfangslautstärke größer als die Klingeltonlautstärke ist, wird der Klingelton mit der Klingeltonlautstärke abgespielt.</string>
     <string name="increasing_ring_interval_title">Intervall ändern</string>
     <string name="increasing_ring_interval_eachring">Nach jedem Klingelton</string>
-    <string name="increasing_ring_interval_half_second">0.5 Sekunden</string>
+    <string name="increasing_ring_interval_half_second">0,5 Sekunden</string>
     <string name="increasing_ring_interval_1second">1 Sekunde</string>
     <string name="increasing_ring_interval_2seconds">2 Sekunden</string>
     <string name="increasing_ring_interval_3seconds">3 Sekunden</string>
@@ -1039,6 +1039,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="dynamic_width_summary">Setzt die Breite der Benachrichtigungen auf die tatsächlich benötigete Länge</string>
     <string name="excluded_apps_title">Ausgeschlossene Apps</string>
     <string name="excluded_apps_summary">Ausgewähle Applikationen werden von der Anzeige auf dem Locksreen ausgeschlossen</string>
+    <string name="notification_color">Farbe des Benachrichtigungshintergrunds</string>
 
     <!-- Lock Screen Shortcuts -->
     <string name="title_shortcuts">Sperrbildschirm-Anwendungen</string>
@@ -1304,7 +1305,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
 
     <!-- Double tap to sleep -->
     <string name="double_tap_to_sleep">Double-Tap-Schlafmodus</string>
-    <string name="double_tap_to_sleep_summary">Ausschalten des Bildschirms durch doppeltes drücken auf die Statusleiste</string>
+    <string name="double_tap_to_sleep_summary">Ausschalten des Bildschirms durch doppeltes Tippen auf die Statusleiste</string>
 
     <!-- Title for PreferenceScreen to change encryption password [CHAR LIMIT=22] -->
     <string name="change_crypt_password_title">Passwort ändern</string>
@@ -1355,8 +1356,8 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <!-- Emulate menu key -->
     <string name="emulate_menu_key_title">Hardware-Menütaste emulieren</string>
     <string name="emulate_menu_key_summary">Drücken der Menütaste in der Navigationsleiste emuliert eine Hardware-Menütaste</string>
-	
-	<!-- App ops -->
+
+    <!-- App ops -->
     <string name="app_ops_summaries_bluetooth_change">Bluetooth ändern</string>
     <string name="app_ops_labels_bluetooth_change">Bluetooth ändern</string>
     <string name="app_ops_summaries_data_change">Mobile Daten ändern</string>
@@ -1366,12 +1367,12 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="app_ops_summaries_auto_start">Autostart ändern</string>
     <string name="app_ops_labels_auto_start">Autostart ändern</string>
     <!-- App ops categories -->
-    <string name="app_ops_categories_bootup">Hochfahren</string>
+    <string name="app_ops_categories_bootup">Autostart</string>
     <!-- App ops detail -->
-    <string name="app_ops_entry_summary"><xliff:g id="op">%1$s</xliff:g> (used <xliff:g id="count">%2$s</xliff:g>)</string>
-    <string name="app_ops_allowed_count">Erlaubt <xliff:g id="count" example="2 times">%s</xliff:g></string>
-    <string name="app_ops_ignored_count">Verweigert <xliff:g id="count" example="2 times">%s</xliff:g></string>
-    <string name="app_ops_both_count">Erlaubt <xliff:g id="count">%1$s</xliff:g>, verweigert <xliff:g id="count">%2$s</xliff:g></string>
+    <string name="app_ops_entry_summary"><xliff:g id="op">%1$s</xliff:g> (<xliff:g id="count">%2$s</xliff:g> verwendet)</string>
+    <string name="app_ops_allowed_count"><xliff:g id="count" example="2 times">%s</xliff:g> erlaubt</string>
+    <string name="app_ops_ignored_count"><xliff:g id="count" example="2 times">%s</xliff:g> verweigert</string>
+    <string name="app_ops_both_count"><xliff:g id="count">%1$s</xliff:g> erlaubt, <xliff:g id="count">%2$s</xliff:g> verweigert</string>
     <plurals name="app_ops_count">
         <item quantity="one">Einmal</item>
         <item quantity="other">%d mal</item>
@@ -1464,8 +1465,8 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="animation_fade">Ausblenden</string>
     <string name="animation_slide_right">Slide in (Rechts)</string>
     <string name="animation_slide_left">Slide in (Links)</string>
-    <string name="animation_slide_right_no_fade">Slide in (Rechts) (k. Ausblenden)</string>
-    <string name="animation_slide_left_no_fade">Slide in (Links) (k. Ausblenden)</string>
+    <string name="animation_slide_right_no_fade">Slide in (k. Ausblenden Re.)</string>
+    <string name="animation_slide_left_no_fade">Slide in (k. Ausblenden Li.)</string>
     <string name="animation_slide_up">Slide in (Unten)</string>
     <string name="animation_slide_down">Slide in (Oben)</string>
     <string name="animation_translucent">Durchsichtig</string>
@@ -1483,7 +1484,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="animation_scroll_friction_title">Scrollfriktion</string>
     <string name="animation_overscroll_distance_title">Überrollabstand</string>
     <string name="animation_overfling_distance_title">Überflugabstand</string>
-    <string name="animation_duration_summary">Dauer festlegen</string>
+    <string name="animation_duration_summary">Wert festlegen</string>
     <string name="animation_no_scroll_title">Benutzerdefiniertes Scrollen</string>
     <string name="animation_no_scroll_summary_on">Aktiviert</string>
     <string name="animation_no_scroll_summary_off">Deaktiviert</string>
