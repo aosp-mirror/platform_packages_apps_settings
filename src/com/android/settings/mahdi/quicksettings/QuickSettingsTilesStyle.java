@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mahdi;
+package com.android.settings.mahdi.quicksettings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

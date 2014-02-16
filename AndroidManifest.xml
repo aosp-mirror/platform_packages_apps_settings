@@ -1840,7 +1840,6 @@
         <activity android:name=".mahdi.notificationlight.BatteryLightSettings" />
         <activity android:name=".mahdi.StatusBar" />
         <activity android:name=".mahdi.HardwareKeys" />
-        <activity android:name=".mahdi.QuickSettings" />
         <activity android:name=".mahdi.NotificationDrawerSettings" />
         <activity android:name=".mahdi.LockscreenTargets" />
         <activity android:name=".mahdi.lsn.LockscreenNotifications" />
@@ -1851,7 +1850,20 @@
                 android:excludeFromRecents="true"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
 
-        <activity android:name=".ApnEditor" />	
+        <activity android:name=".ApnEditor" />
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to quick tiles settings -->
+        <activity android:name="Settings$QuickSettingsTilesSettingsActivity"
+                android:label="@string/tile_picker_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.mahdi.quicksettings.QuickSettingsTiles" />
+        </activity>	
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to quite hours settings -->
         <activity android:name="Settings$QuietHoursSettingsActivity"

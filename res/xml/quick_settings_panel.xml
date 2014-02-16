@@ -50,7 +50,7 @@
             android:key="tile_picker"
             android:title="@string/tile_picker_title"
             android:summary="@string/tile_picker_summary"
-            android:fragment="com.android.settings.mahdi.QuickSettingsTiles" />
+            android:fragment="com.android.settings.mahdi.quicksettings.QuickSettingsTiles" />
 
         <MultiSelectListPreference
             android:key="pref_ring_mode"
@@ -82,7 +82,7 @@
 
         <PreferenceScreen
             android:key="quicksettings_tiles_style"
-            android:fragment="com.android.settings.mahdi.QuickSettingsTilesStyle"
+            android:fragment="com.android.settings.mahdi.quicksettings.QuickSettingsTilesStyle"
             android:title="@string/quicksettings_tiles_style"
             android:summary="@string/summary_quicksettings_tiles_style" />
 

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/textAppearanceSmall"
+        android:text="@string/custom_tile_dialog_text" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/icon"
+                    android:padding="5dp"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:scaleType="centerInside" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <Button
+                    android:id="@+id/action"
+                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <ImageButton
+                    android:id="@+id/reset"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_settings_backup"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/icon_two"
+                    android:padding="5dp"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:scaleType="centerInside" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <Button
+                    android:id="@+id/action_two"
+                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <ImageButton
+                    android:id="@+id/reset_two"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_settings_backup"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/icon_three"
+                    android:padding="5dp"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:scaleType="centerInside" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <Button
+                    android:id="@+id/action_three"
+                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <ImageButton
+                    android:id="@+id/reset_three"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_settings_backup"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/icon_four"
+                    android:padding="5dp"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:scaleType="centerInside" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <Button
+                    android:id="@+id/action_four"
+                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <ImageButton
+                    android:id="@+id/reset_four"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_settings_backup"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/icon_five"
+                    android:padding="5dp"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size"
+                    android:scaleType="centerInside" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <Button
+                    android:id="@+id/action_five"
+                    android:layout_width="match_parent"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:drawable/divider_horizontal_dark" />
+
+                <ImageButton
+                    android:id="@+id/reset_five"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_settings_backup"
+                    android:layout_width="@android:dimen/app_icon_size"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="@android:dimen/app_icon_size" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -44,14 +44,6 @@
             android:dependency="qs_quick_access"
             android:disableDependentsState="true" />
 
-        <PreferenceScreen
-            android:key="tile_picker"
-            android:title="@string/tile_picker_title"
-            android:summary="@string/tile_picker_summary"
-            android:dependency="qs_quick_access_linked"
-            android:fragment="com.android.settings.mahdi.QuickSettingsTiles" >
-            <extra android:name="config_ribbon" android:value="true" />
-        </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory

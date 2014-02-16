@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mahdi;
+package com.android.settings.mahdi.quicksettings;
 
 import static com.android.internal.util.mahdi.QSConstants.TILES_DEFAULT;
 import static com.android.internal.util.mahdi.QSConstants.TILE_AIRPLANE;
@@ -23,6 +23,10 @@ import static com.android.internal.util.mahdi.QSConstants.TILE_BATTERY;
 import static com.android.internal.util.mahdi.QSConstants.TILE_BLUETOOTH;
 import static com.android.internal.util.mahdi.QSConstants.TILE_BRIGHTNESS;
 import static com.android.internal.util.mahdi.QSConstants.TILE_CAMERA;
+import static com.android.internal.util.mahdi.QSConstants.TILE_CONTACT;
+import static com.android.internal.util.mahdi.QSConstants.TILE_CUSTOM;
+import static com.android.internal.util.mahdi.QSConstants.TILE_CUSTOM_KEY;
+import static com.android.internal.util.mahdi.QSConstants.TILE_CUSTOM_DELIMITER;
 import static com.android.internal.util.mahdi.QSConstants.TILE_DELIMITER;
 import static com.android.internal.util.mahdi.QSConstants.TILE_IMMERSIVEMODE;
 import static com.android.internal.util.mahdi.QSConstants.TILE_LOCATION;
@@ -57,8 +61,10 @@ import android.util.Log;
 
 import com.android.internal.telephony.Phone;
 import com.android.internal.util.mahdi.QSUtils;
+import com.android.internal.util.mahdi.DeviceUtils;
 import com.android.settings.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -90,6 +96,12 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                  TILE_CAMERA, R.string.title_tile_camera,
                 "com.android.systemui:drawable/ic_qs_camera"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_CONTACT, R.string.title_tile_contact,
+                "com.android.systemui:drawable/ic_qs_default_user"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_CUSTOM, R.string.title_tile_custom,
+                "com.android.systemui:drawable/ic_qs_settings"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_IMMERSIVEMODE, R.string.title_tile_immersive_mode,
                 "com.android.systemui:drawable/ic_qs_immersive_mode_on"));
@@ -280,27 +292,56 @@ public class QuickSettingsUtil {
         return ENABLED_TILES.containsKey(id);
     }
 
-    public static String getCurrentTiles(Context context, boolean isRibbon) {
+    public static String getCurrentTiles(Context context) {
         String tiles = Settings.System.getString(context.getContentResolver(),
-                isRibbon ? Settings.System.QUICK_SETTINGS_RIBBON_TILES
-                         : Settings.System.QUICK_SETTINGS_TILES);
+                Settings.System.QUICK_SETTINGS_TILES);
         if (tiles == null) {
             tiles = getDefaultTiles(context);
         }
         return tiles;
     }
 
-    public static void saveCurrentTiles(Context context, String tiles, boolean isRibbon) {
+    public static void saveCurrentTiles(Context context, String tiles) {
         Settings.System.putString(context.getContentResolver(),
-                isRibbon ? Settings.System.QUICK_SETTINGS_RIBBON_TILES
-                         : Settings.System.QUICK_SETTINGS_TILES, tiles);
+                Settings.System.QUICK_SETTINGS_TILES, tiles);
     }
 
-    public static void resetTiles(Context context, boolean isRibbon) {
-        String defaultTiles = getDefaultTiles(context);
+    public static void resetTiles(Context context) {
         Settings.System.putString(context.getContentResolver(),
-                isRibbon ? Settings.System.QUICK_SETTINGS_RIBBON_TILES
-                         : Settings.System.QUICK_SETTINGS_TILES, defaultTiles);
+                Settings.System.QUICK_SETTINGS_TILES, null);
+        Settings.System.putString(context.getContentResolver(),
+                Settings.System.CUSTOM_TOGGLE_EXTRAS, null);
+        Settings.System.putString(context.getContentResolver(),
+                Settings.System.CUSTOM_TOGGLE_ACTIONS, null);
+        Settings.System.putString(context.getContentResolver(),
+                Settings.System.TILE_CONTACT_ACTIONS, null);
+    }
+
+    public static void deleteCustomTile(Context context, String tileKey) {
+        String tileExtra = getCustomExtras(context,
+                Settings.System.CUSTOM_TOGGLE_EXTRAS, tileKey);
+        if (tileExtra != null) {
+            String[] getResolvedIcon = tileExtra.split(TILE_CUSTOM_DELIMITER);
+            if (getResolvedIcon.length > 2) {
+                deleteCustomIcon(getResolvedIcon[1]);
+            }
+        }
+        deleteActions(context,
+                Settings.System.CUSTOM_TOGGLE_EXTRAS, tileKey);
+        for (int i = 0; i < 5; i++) {
+            deleteCustomIcon(getActionsAtIndex(context, i, 2, tileKey));
+        }
+        deleteActions(context,
+                Settings.System.CUSTOM_TOGGLE_ACTIONS, tileKey);
+    }
+
+    private static void deleteCustomIcon(String file) {
+        if (file != null && !file.equals(" ")) {
+            File f = new File(file);
+            if (f != null && f.exists()) {
+                f.delete();
+            }
+        }
     }
 
     public static String mergeInNewTileString(String oldString, String newString) {
@@ -328,7 +369,7 @@ public class QuickSettingsUtil {
     }
 
     public static ArrayList<String> getTileListFromString(String tiles) {
-        return new ArrayList<String>(Arrays.asList(tiles.split("\\|")));
+        return new ArrayList<String>(Arrays.asList(tiles.split("\\" + TILE_DELIMITER)));
     }
 
     public static String getTileStringFromList(ArrayList<String> tiles) {
@@ -346,6 +387,224 @@ public class QuickSettingsUtil {
     public static String getDefaultTiles(Context context) {
         removeUnsupportedTiles(context);
         return TextUtils.join(TILE_DELIMITER, TILES_DEFAULT);
+    }
+
+    public static String getCustomExtras(Context context, String setting, String tileKey) {
+        ArrayList<String> array = getCustomArray(context, setting);
+        String action = null;
+        for (int i = 0; i < array.size(); i++) {
+            if (array.get(i) != null && array.get(i).contains(tileKey)) {
+                String[] split = array.get(i).split(TILE_CUSTOM_KEY);
+                action = split[0];
+            }
+        }
+        return action;
+    }
+
+    public static String getActionsAtIndex(
+            Context context, int index, int actionIndex, String tileKey) {
+        String actions = Settings.System.getString(
+                context.getContentResolver(),
+                Settings.System.CUSTOM_TOGGLE_ACTIONS);
+        String returnAction = null;
+        if (actions != null && actions.contains(tileKey)) {
+            for (String action : actions.split("\\|")) {
+                if (action.contains(tileKey) && action.endsWith(Integer.toString(index))) {
+                    String[] split = action.split(TILE_CUSTOM_KEY);
+                    String[] returned = split[0].split(TILE_CUSTOM_DELIMITER);
+                    returnAction = returned[actionIndex];
+                    if (returnAction.equals(" ")) {
+                        returnAction = null;
+                    }
+                }
+            }
+        }
+        return returnAction;
+    }
+
+    public static void deleteActions(Context context, String setting, String tileKey) {
+        ArrayList<String> array = getCustomArray(context, setting);
+        for (int i = 0; i < array.size(); i++) {
+            if (array.get(i) != null && array.get(i).contains(tileKey)) {
+                array.remove(i);
+            }
+        }
+        Settings.System.putString(
+                context.getContentResolver(), setting, getTileStringFromList(array));
+    }
+
+    public static ArrayList<String> getCustomArray(Context context, String setting) {
+        String actions = Settings.System.getString(
+                context.getContentResolver(), setting);
+        if (actions == null) {
+            ArrayList<String> list = new ArrayList<String>();
+            list.add(null);
+            return list;
+        } else {
+            return new ArrayList<String>(Arrays.asList(actions.split("\\" + TILE_DELIMITER)));
+        }
+    }
+
+    public static void saveCustomExtras(
+            Context context, String tileKey, String collapseMatch,
+            String icon, String name, String values, String resolver, String type) {
+        String setting = Settings.System.CUSTOM_TOGGLE_EXTRAS;
+        String oldSetting = getCustomExtras(context, setting, tileKey);
+        ArrayList<String> oldList = getCustomArray(context, setting);
+        ArrayList<String> newList = new ArrayList<String>();
+
+        String[] indexes = { " ", " ", " ", " ", " ", " " };
+
+        if (oldSetting != null) {
+            String[] returned = oldSetting.split(TILE_CUSTOM_DELIMITER);
+            if (returned.length == 6) {
+                indexes[0] = returned[0];
+                indexes[1] = returned[1];
+                indexes[2] = returned[2];
+                indexes[3] = returned[3];
+                indexes[4] = returned[4];
+                indexes[5] = returned[5];
+            } else {
+                indexes[0] = returned[0];
+            }
+        }
+
+        if (collapseMatch != null) {
+            indexes[0] = collapseMatch;
+        }
+        if (icon != null) {
+            deleteCustomIcon(indexes[1]);
+            indexes[1] = icon;
+        }
+        if (name != null) {
+            indexes[2] = name;
+        }
+        if (values != null) {
+            indexes[3] = values;
+        }
+        if (resolver != null) {
+            indexes[4] = resolver;
+        }
+        if (type != null) {
+            indexes[5] = type;
+        }
+
+        newList.add(
+                indexes[0] + TILE_CUSTOM_DELIMITER
+                + indexes[1] + TILE_CUSTOM_DELIMITER
+                + indexes[2] + TILE_CUSTOM_DELIMITER
+                + indexes[3] + TILE_CUSTOM_DELIMITER
+                + indexes[4] + TILE_CUSTOM_DELIMITER
+                + indexes[5] + TILE_CUSTOM_KEY
+                + tileKey);
+
+        for (String tile : oldList) {
+            if (tile != null && !tile.contains(tileKey)) {
+                newList.add(tile);
+            }
+        }
+
+        Settings.System.putString(
+                context.getContentResolver(), setting, getTileStringFromList(newList));
+    }
+
+    public static void saveExtras(
+            Context context, String action, String tilekey, String setting) {
+        String oldSetting = Settings.System.getString(
+                context.getContentResolver(), setting);
+        ArrayList<String> oldList = getCustomArray(context, setting);
+        ArrayList<String> newList = new ArrayList<String>();
+        newList.add(action + TILE_CUSTOM_KEY + tilekey);
+
+        for (String tile : oldList) {
+            if (tile != null && !tile.contains(tilekey)) {
+                newList.add(tile);
+            }
+        }
+
+        Settings.System.putString(
+                context.getContentResolver(),
+                Settings.System.TILE_CONTACT_ACTIONS,
+                getTileStringFromList(newList));
+    }
+
+    public static void saveCustomActions(
+            Context context, int index, int actionIndex, String action, String tileKey) {
+        String setting = Settings.System.CUSTOM_TOGGLE_ACTIONS;
+        String oldSetting = Settings.System.getString(
+                context.getContentResolver(), setting);
+        ArrayList<String> oldList = getCustomArray(context, setting);
+        ArrayList<String> newList = new ArrayList<String>();
+
+        String clickAction = " ";
+        String longAction = " ";
+        String icon = " ";
+
+        if (oldSetting != null && oldSetting.contains(tileKey)) {
+            for (String act : oldSetting.split("\\|")) {
+                if (act.contains(tileKey) && act.endsWith(Integer.toString(index))) {
+                    String[] split = act.split(TILE_CUSTOM_KEY);
+                    String[] returned = split[0].split(TILE_CUSTOM_DELIMITER);
+                    clickAction = returned[0];
+                    longAction = returned[1];
+                    icon = returned[2];
+                }
+            }
+        }
+
+        switch (actionIndex) {
+            case 0:
+                clickAction = action;
+                break;
+            case 1:
+                longAction = action;
+                break;
+            case 2:
+                icon = action;
+                break;
+        }
+
+        newList.add(clickAction
+                + TILE_CUSTOM_DELIMITER + longAction
+                + TILE_CUSTOM_DELIMITER + icon
+                + TILE_CUSTOM_KEY + tileKey + " " + Integer.toString(index));
+
+        for (String tile : oldList) {
+            if (tile != null) {
+                if (tile.contains(tileKey)) {
+                    if (!tile.endsWith(Integer.toString(index))) {
+                        newList.add(tile);
+                    }
+                } else {
+                    newList.add(tile);
+                }
+            }
+        }
+
+        Settings.System.putString(
+                context.getContentResolver(), setting, getTileStringFromList(newList));
+    }
+
+    public static void deleteCustomActions(Context context, int index, String tileKey) {
+        String setting = Settings.System.CUSTOM_TOGGLE_ACTIONS;
+        String oldSetting = Settings.System.getString(
+                context.getContentResolver(), setting);
+        ArrayList<String> oldList = getCustomArray(context, setting);
+        ArrayList<String> newList = new ArrayList<String>();
+
+        for (int i = 0; i < oldList.size(); i++) {
+            if (oldList.get(i).contains(tileKey)
+                    && oldList.get(i).endsWith(Integer.toString(index))) {
+                String[] split = oldList.get(i).split(TILE_CUSTOM_KEY);
+                String[] returned = split[0].split(TILE_CUSTOM_DELIMITER);
+                deleteCustomIcon(returned[2]);
+            } else {
+                newList.add(oldList.get(i));
+            }
+        }
+
+        Settings.System.putString(
+                context.getContentResolver(), setting, getTileStringFromList(newList));
     }
 
     public static class TileInfo {
@@ -372,3 +631,4 @@ public class QuickSettingsUtil {
         }
     }
 }
+

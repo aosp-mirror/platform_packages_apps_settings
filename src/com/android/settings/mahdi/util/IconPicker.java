@@ -69,6 +69,29 @@ public class IconPicker {
         mIconListener.iconPicked(requestCode, resultCode, data);
     }
 
+    public void pickGalleryWithSize(final int fragmentId, final File image, int size) {
+        Intent iconPackIntent = new Intent(ICON_ACTION);
+        ComponentName component = iconPackIntent.resolveActivity(mParent.getPackageManager());
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        intent.setType("image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("scale", true);
+        intent.putExtra("scaleUpIfNeeded", false);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", size);
+        intent.putExtra("outputY", size);
+        try {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(image));
+            intent.putExtra("return-data", false);
+            startFragmentOrActivityForResult(
+                    intent, REQUEST_PICK_GALLERY, fragmentId);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void pickIcon(final int fragmentId, final File image) {
         Intent iconPackIntent = new Intent(ICON_ACTION);
         ComponentName component = iconPackIntent.resolveActivity(mParent.getPackageManager());
@@ -125,23 +148,7 @@ public class IconPicker {
             });
             dialog.show();
         } else if (type == REQUEST_PICK_GALLERY) {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", false);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", 162);
-            intent.putExtra("outputY", 162);
-            try {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(image));
-                intent.putExtra("return-data", false);
-                startFragmentOrActivityForResult(intent, type, fragmentId);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
-            }
+            pickGalleryWithSize(fragmentId, image, 162);
         } else if (type == REQUEST_PICK_ICON_PACK) {
             Intent iconPackIntent = new Intent(ICON_ACTION);
             startFragmentOrActivityForResult(iconPackIntent, type, fragmentId);

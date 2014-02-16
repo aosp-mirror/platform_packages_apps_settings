@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.mahdi;
+package com.android.settings.mahdi.quicksettings;
 
 import java.util.Collections;
 import java.util.ArrayList;
