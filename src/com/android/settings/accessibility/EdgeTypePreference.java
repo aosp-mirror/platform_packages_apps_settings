@@ -34,7 +34,7 @@ public class EdgeTypePreference extends ListDialogPreference {
     private static final int DEFAULT_FOREGROUND_COLOR = Color.WHITE;
     private static final int DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT;
     private static final int DEFAULT_EDGE_COLOR = Color.BLACK;
-    private static final float DEFAULT_FONT_SIZE = 96f;
+    private static final float DEFAULT_FONT_SIZE = 32f;
 
     public EdgeTypePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,7 +57,9 @@ public class EdgeTypePreference extends ListDialogPreference {
 
         preview.setForegroundColor(DEFAULT_FOREGROUND_COLOR);
         preview.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
-        preview.setTextSize(DEFAULT_FONT_SIZE);
+
+        final float density = getContext().getResources().getDisplayMetrics().density;
+        preview.setTextSize(DEFAULT_FONT_SIZE * density);
 
         final int value = getValueAt(index);
         preview.setEdgeType(value);
