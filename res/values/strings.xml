@@ -4993,4 +4993,16 @@
     <string name="dashboard_title">Overview</string>
     <string name="dashboard_wip" translatable="false">Overview - work in progress\n\nUse the Drawer on the left to see the settings list</string>
 
+    <!-- Notifications on lockscreen -->
+    <!-- Label for checkbox controlling the contents of notifications shown on
+         the secure lockscreen [CHAR LIMIT=16] -->
+    <string name="lock_screen_notifications">Show notifications</string>
+    <!-- Summary for lock_screen_notifications: sensitive information will be
+         hidden or redacted from notifications shown on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_off">Sensitive notification contents will be hidden when locked</string>
+    <!-- Summary for lock_screen_notifications: all information will be
+         shown in notifications shown on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_on">All notification contents will be shown when locked</string>
 </resources>
