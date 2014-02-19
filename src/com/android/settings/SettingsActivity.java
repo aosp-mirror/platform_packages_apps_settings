@@ -226,7 +226,8 @@ public class SettingsActivity extends Activity
             R.id.accessibility_settings,
             R.id.print_settings,
             R.id.nfc_payment_settings,
-            R.id.home_settings
+            R.id.home_settings,
+            R.id.dashboard
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
