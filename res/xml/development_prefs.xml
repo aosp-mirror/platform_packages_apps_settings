@@ -135,6 +135,12 @@
             android:title="@string/pointer_location"
             android:summary="@string/pointer_location_summary"/>
 
+        <com.android.settings.mahdi.SystemSettingCheckBoxPreference
+            android:key="edge_service_for_gestures"
+            android:title="@string/edge_gesture_service_title"
+            android:summary="@string/edge_gesture_service_summary"
+            android:defaultValue="1"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_drawing_category"
