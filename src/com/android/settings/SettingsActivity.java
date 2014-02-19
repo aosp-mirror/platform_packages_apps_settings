@@ -789,8 +789,10 @@ public class SettingsActivity extends Activity
             return;
         }
         if (header != null && mCurrentHeader != null && header.id == mCurrentHeader.id &&
-                header.id != R.id.account_add) {
-            // This is the header we are currently displaying (except "Add Account"). Just make sure
+                header.id != R.id.account_add &&
+                !header.fragment.equals(ManageAccountsSettings.class.getName())) {
+            // This is the header we are currently displaying (except "Add Account" or
+            // "Corporate"/"Google" Account entries that share the same fragment). Just make sure
             // to pop the stack up to its root state.
             getFragmentManager().popBackStack(BACK_STACK_PREFS,
                     FragmentManager.POP_BACK_STACK_INCLUSIVE);
