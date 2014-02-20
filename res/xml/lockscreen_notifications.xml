@@ -90,7 +90,8 @@
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="notification_color"
-            android:title="@string/notification_color" />
+            android:title="@string/notification_color"
+            android:dependency="lockscreen_notifications" />
 
     </PreferenceCategory>
     <PreferenceCategory
