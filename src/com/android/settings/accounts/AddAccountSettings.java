@@ -143,7 +143,7 @@ public class AddAccountSettings extends Activity {
                 getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
         final String[] accountTypes =
                 getIntent().getStringArrayExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY);
-        final Intent intent = new Intent(this, Settings.ChooseAccountActivity.class);
+        final Intent intent = new Intent(this, ChooseAccountActivity.class);
         if (authorities != null) {
             intent.putExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY, authorities);
         }
