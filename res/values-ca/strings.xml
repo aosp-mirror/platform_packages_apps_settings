@@ -113,7 +113,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Visible per a tots els dispositius Bluetooth propers (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Visible per a tots els dispositius Bluetooth propers"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Ocult per a altres dispositius Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Només visible per als dispositius sincronitzats"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Només visible per als dispositius emparellats"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Temps de visibilitat"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Bloqueja el marcatge per veu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Impedeix l\'ús del marcador Bluetooth quan la pantalla estigui bloquejada"</string>
@@ -443,15 +443,15 @@
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestiona les connexions, defineix el nom i la visibilitat del dispositiu"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Sol·licitud d\'emparellament de Bluetooth"</string>
     <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu el PIN sol·licitat pel dispositiu:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya que requereix el dispositiu:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Per emparellar amb:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu la contrasenya sol·licitada pel dispositiu:"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"El PIN conté lletres o símbols"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"En general, 0000 o 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Pot ser que també hagis d\'introduir aquest PIN a l\'altre dispositiu."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="2798719004030279602">"Pot ser que també hagis d\'introduir aquesta contrasenya a l\'altre dispositiu."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Per emparellar amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assegura\'t que apareix aquesta contrasenya:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vols emparellar-lo amb aquest dispositiu?"</string>
-    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per sincronitzar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu-hi:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> i, a continuació, prem la tecla de retorn."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Sincronitza"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Per sincronitzar amb:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escriu <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> en el dispositiu i, a continuació, prem la tecla de retorn."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Emparella"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancel·la"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"No s\'ha pogut emparellar amb <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -463,7 +463,7 @@
     <string name="bluetooth_search_for_devices" msgid="5957007154213560390">"Cerca dispositius"</string>
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"S\'està cercant..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Configuració del dispositiu"</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositius sincronitzats"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositius emparellats"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispositius disponibles"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connecta"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Desconnecta"</string>
@@ -488,7 +488,7 @@
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accés a Internet mitjançant <xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà de la compartició de la connexió a Internet de la tauleta."</string>
     <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> es desconnectarà de la compartició de la connexió a Internet del telèfon."</string>
-    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositiu Bluetooth sincronitzat"</string>
+    <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Dispositiu Bluetooth emparellat"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connecta"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connecta\'t al dispositiu Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Perfils"</string>
@@ -1033,7 +1033,7 @@
     <string name="regulatory_information" msgid="5695464367088752150">"Informació de regulació"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Llicència"</string>
-    <string name="terms_title" msgid="7697580845616764642">"Condicions del servei"</string>
+    <string name="terms_title" msgid="7697580845616764642">"Termes i condicions"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Llicències de codi obert"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"S\'ha produït un problema en llegir les llicències."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"S\'està carregant…"</string>
@@ -1378,7 +1378,7 @@
     <string name="accessibility_system_title" msgid="7187919089874130484">"Sistema"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"Subtítols"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Gestos d\'ampliació"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Quan aquesta funció està activada, pots ampliar o allunyar si piques tres cops la pantalla.\n\nQuan ampliïs, pots fer el següent.\n"<ul><li>"Panoràmica: arrossega dos dits o més per la pantalla."</li>\n<li>"Ajustar el nivell de zoom: apropa dos o més dits o bé separa\'ls."</li></ul>\n\n"També pots ampliar de manera temporal el que tinguis a sota del dit si piques tres cops i mantens premut. En aquest estat ampliat, pots arrossegar el dit per explorar diverses parts de la pantalla. Aixeca el dit per tornar a l\'estat previ.\n\nNota: Pica tres cops per ampliar a tot arreu tret de la barra de navegació i el teclat."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Quan aquesta funció està activada, pots ampliar o allunyar la imatge fent tres tocs a la pantalla.\n\nAmb la imatge ampliada, pots fer les accions següents.\n"<ul><li>"Desplaçar la imatge: arrossega dos dits o més per la pantalla."</li>\n<li>"Ajustar el nivell de zoom: ajunta dos o més dits o bé separa\'ls."</li></ul>\n\n"També pots ampliar el contingut seleccionat de manera temporal fent tres tocs cops a la pantalla i mantenint-la premuda. Amb el contingut ampliat, pots arrossegar el dit per explorar diverses parts de la pantalla. Aixeca el dit per tornar a l\'estat anterior.\n\nNota: fes tres tocs a la pantalla per ampliar el contingut a tot arreu, tret de la barra de navegació i del teclat."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Drecera d\'accessibilitat"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"Activada"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"Desactiva"</string>
@@ -1465,7 +1465,7 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Ús de la bateria des que s\'ha desconnectat"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Ús de la bateria des que s\'ha restablert"</string>
-    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> usant bateria"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> utilitzant bateria"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> des de la desconnexió"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"S\'està carregant"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Pantalla activada"</string>
@@ -1887,7 +1887,7 @@
     <string name="data_usage_received_sent" msgid="5039699009276621757">"<xliff:g id="RECEIVED">%1$s</xliff:g> rebuts, <xliff:g id="SENT">%2$s</xliff:g> enviats"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: ús aproximat de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: ús aproximat de <xliff:g id="TOTAL">%1$s</xliff:g>, segons mesura la tauleta. És possible que l\'operador faci un recompte diferent de la utilització."</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: ús aproximat de <xliff:g id="TOTAL">%1$s</xliff:g>, segons mesura el telèfon. És possible que l\'operador faci un recompte diferent de la utilització."</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: ús aproximat de <xliff:g id="TOTAL">%1$s</xliff:g>, segons el telèfon. És possible que l\'operador faci un càlcul diferent de l\'ús de les dades."</string>
     <string name="data_usage_metered_title" msgid="6204750602856383278">"Zones de connexió mòbil"</string>
     <string name="data_usage_metered_body" msgid="4959032833706695848">"Selecciona les xarxes Wi-Fi que siguin zones Wi-Fi mòbils. Pot ser que algunes aplicacions tinguin restringit l\'ús d\'aquestes xarxes quan funcionen en segon pla. També és possible que les aplicacions avisin abans d\'utilitzar aquestes xarxes per a baixades grans."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"Xarxes mòbils"</string>
