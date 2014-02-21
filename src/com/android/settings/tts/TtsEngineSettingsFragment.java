@@ -158,12 +158,22 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == VOICE_DATA_INTEGRITY_CHECK) {
-            mVoiceDataDetails = data;
-            updateVoiceDetails();
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                updateVoiceDetails(data);
+            } else {
+                Log.e(TAG, "CheckVoiceData activity failed");
+            }
         }
     }
 
-    private void updateVoiceDetails() {
+    private void updateVoiceDetails(Intent data) {
+        if (data == null){
+            Log.e(TAG, "Engine failed voice data integrity check (null return)" +
+                    mTts.getCurrentEngine());
+            return;
+        }
+        mVoiceDataDetails = data;
+
         if (DBG) Log.d(TAG, "Parsing voice data details, data: " + mVoiceDataDetails.toUri(0));
 
         final ArrayList<String> available = mVoiceDataDetails.getStringArrayListExtra(
