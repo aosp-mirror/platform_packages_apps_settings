@@ -86,7 +86,6 @@ import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
-import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManageAccountsSettings;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
@@ -278,7 +277,6 @@ public class SettingsActivity extends Activity
             TrustedCredentialsSettings.class.getName(),
             PaymentSettings.class.getName(),
             KeyboardLayoutPickerFragment.class.getName(),
-            ChooseAccountFragment.class.getName(),
             DashboardSummary.class.getName()
     };
 
