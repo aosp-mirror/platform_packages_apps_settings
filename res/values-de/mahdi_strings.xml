@@ -36,6 +36,8 @@
     <string name="default_string">Voreinstellung</string>
     <string name="enabled">Aktiviert</string>
     <string name="add">Hinzufügen</string>  
+    <string name="reset_message">Auf Standardeinstellungen zurücksetzen?</string>
+    <string name="style_title">Stil</string>
 
     <!-- Display settings screen, notification light settings -->
     <string name="display_category_light_options_title">LED Einstellungen</string>
@@ -363,7 +365,7 @@ erlaubt die Duplizierung einer Zeile in eine zweite Zeile, um zusätzliche Stüt
 Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverlauf entfernt werden.
     </string>
 
-    <string name="auto_brightness_sensitivity_title">Regelungsträgheit</string>
+	<string name="auto_brightness_sensitivity_title">Regelungsträgheit</string>
     <string name="auto_brightness_sensitivity_verylow">Sehr niedrig</string>
     <string name="auto_brightness_sensitivity_low">Niedrig</string>
     <string name="auto_brightness_sensitivity_medium">Mittel</string>
@@ -418,6 +420,17 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="title_tile_network_speed">Netzwerk Geschwindigkeit</string>
     <string name="title_tile_music">Musik</string>
     <string name="title_tile_quick_record">Schnelle Aufnahme</string>
+    <string name="title_tile_contact">Kontakt</string>
+    <string name="title_tile_custom">Individualisierung</string>
+    <string name="custom_tile_dialog_text">Jede Aktion wird eine neue Funktion zu den Kacheln hinzuzufügen. Jeder Tip aktiviert die nächste Funktion. Langer Druck fügt eine weitere Funktion für langes Drücken hinzu. Wenn keine Tipp-Aktion festgelegt wurde wird das Symbol für langes Drücken gesetzt. Damit können sie Funktionen durch kurzes Tippen ändern und Aktionen durch langes Drücken starten.</string>
+    <string name="custom_tile_dialog_title">Aktionen</string>
+    <string name="custom_tile_dialog_extra_text">Erweiterte Kacheln festgestellt. Ihre Kacheln wird nun die angepassten Funktionen ändern. Sie können wahlweise ein Symbol und die Bezeichnung für die Funktion zuweisen, wenn diese nicht schon automatisch erkannt wird.</string>
+    <string name="custom_toggle_extras">Extras</string>
+    <string name="custom_toggle_collapse_check">Benachrichtigungsschattierung</string>
+    <string name="custom_toggle_match_state_check">Symbolübereinstimmung</string>
+    <string name="custom_tile_long_press">Langer Druck:</string>
+    <string name="custom_tile_null_warning">Zuerst muss eine Aktion festgelegt werden</string>
+    <string name="custom_tile_resolve_name">Unbekannt</string>
 
     <string name="title_dynamic_tiles">Dynamische Kacheln</string>
     <string name="dynamic_tiles_note_title">Hinweis</string>
@@ -447,9 +460,21 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="smart_pulldown_dismissable">keine löschbaren</string>
     <string name="smart_pulldown_persistent">keine dauerhaften</string>
 
-    <string name="pref_network_mode_title">Netzwerkmodi</string>
+    <!-- QuickSettings: Custom Tile -->
+    <string name="custom_tile_dialog_text">Jede Aktion wird eine neue Funktion zu den Kacheln hinzuzufügen. Jeder Tip aktiviert die nächste Funktion. Langer Druck fügt eine weitere Funktion für langes Drücken hinzu. Wenn keine Tipp-Aktion festgelegt wurde wird das Symbol für langes Drücken gesetzt. Damit können sie Funktionen durch kurzes Tippen ändern und Aktionen durch langes Drücken starten.</string>
+    <string name="custom_tile_dialog_title">Aktionen</string>
+    <string name="custom_toggle_extras">Extras</string>
+    <string name="custom_toggle_collapse_check">Benachrichtigungsschattierung</string>
+    <string name="custom_toggle_match_state_check">Symbolübereinstimmung</string>
+    <string name="custom_tile_long_press">Langer Druck:</string>
+    <string name="custom_tile_null_warning">Zuerst muss eine Aktion festgelegt werden</string>
+
+	<string name="pref_network_mode_title">Netzwerkmodi</string>
     <string name="pref_screentimeout_mode_title">Bildschirm-Timeout</string>
-    <string name="pref_ring_mode_title">Klingelmodi</string>
+    <string name="pref_ring_mode_title">Klingelmodi</string>	
+    <string name="pref_music_mode_title">Musikmodi</string>
+    <string name="music_tile_mode_background">Album anzeigen</string>
+    <string name="music_tile_mode_tracktitle">Titel anzeigen</string>
 
     <!-- Quick access ribbon -->
     <string name="category_quick_access">Schnellzugriffsleiste</string>
@@ -470,8 +495,15 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="quick_tiles_alpha_title">Hintergrundtransparenz</string>
     <string name="qs_style_reset_message">Alle Farben auf Standardwerte zurücksetzen?</string>
 
-    <!-- This exists as part of Power widget already, re-use them
-         If Power widget is removed, re-enable these -->
+    <!-- QuickSettings fliptiles -->
+    <string name="flip_qs_tiles_title">Drehbare Kacheln</string>
+    <string name="flip_qs_tiles_summary">Kacheln werden beim Drücken gedreht</string>
+
+    <!-- QuickSettings haptic feedback -->
+    <string name="haptic_qs_tiles_title">Beim Drücken vibrieren</string>
+    <string name="haptic_qs_tiles_summary">Vibration beim Drücken der Kacheln</string>
+
+    <!-- This exists as part of Power widget already, re-use them If Power widget is removed, re-enable these -->
     <string name="pref_ring_mode_title">Klingelmodi</string>
     <string name="pref_ring_mode_summary">Klingelmodi, zwischen denen umgeschaltet wird</string>
     <string name="cm_sound_mode_silent">Lautlos</string>
@@ -601,6 +633,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="privacy_guard_filter_does_not_match">Es sind keine Apps mit passenden Berechtigungen installiert</string>
     <string name="privacy_guard_help_title">Hilfe</string>
     <string name="privacy_guard_reset_title">Zurücksetzen</string>
+    <string name="privacy_guard_reset_text">Berechtigungen zurücksetzen?</string>	
     <string name="privacy_guard_help_text">An dieser Stelle kann der Datenschutz für einzelne Apps durch einfache Berührung ein- und ausgeschaltet werden. Ausgewählte Apps haben keinen Zugriff auf persönliche Daten wie Kontakte, Nachrichten oder das Anrufprotokoll. Langes Drücken auf einen Eintrag öffnet die Detailanzeige für diese App.\n\nStandardmäßig werden in das System integrierte Apps nicht angezeigt. Wenn diese angezeigt werden sollen, kann dies mit der entsprechenden Menü-Option ausgewählt werden.</string>
     <string name="privacy_guard_manager_show_system_apps">Integrierte Apps anzeigen</string>
     <string name="privacy_guard_manager_filter_permissions">Berechtigungsfilter</string>
@@ -713,6 +746,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="shortcut_action_ring_silent">Ton/Stumm</string>
     <string name="shortcut_action_ring_vib_silent">Ton/Vibration/Stumm</string>
     <string name="shortcut_action_torch">Taschenlampe</string>
+    <string name="shortcut_action_omniswitch">OmniSwitch</string>
     <string name="shortcut_action_longpress">Lange drücken:</string>
     <string name="shortcut_action_select_action_longpress">Aktion bei lange drücken:</string>
     <string name="shortcut_action_select_action">Aktion auswählen:</string>
@@ -791,10 +825,15 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Entsperren</string>
 
+    <string name="icon_picker_type">Symboltyp auswählen:</string>
+    <string name="icon_default">Standard</string>
+    <string name="icon_presets">Systemsymbole</string>
+    <string name="icon_custom">Gallerie</string>
+    <string name="icon_pack">Symbolsammlung</string>
+    <string name="icon_picker_choose_icon_title">Symbol auswählen</string>
     <string name="icon_color_mode_all_icons">Alle Symbole</string>
     <string name="icon_color_mode_system_icons">Systemsymbole</string>
     <string name="icon_color_mode_system_custom_icons">System- and Benutzersymbole</string>
-    <string name="icon_picker_choose_icon_title">Symbol auswählen</string>
     <string name="group_applications">Anwendungen</string>
     <string name="select_custom_app_title">Anwendung auswählen</string>
     <string name="shortcuts_color_title">Symbolfarbe</string>
@@ -846,6 +885,8 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="summary_pref_menu_display">Darstellung der Menütaste festlegen</string>
     <string name="navbar_enable_bar">Navigationsleiste aktivieren</string>
     <string name="navbar_enable_bar_summary">Aktiviere die Navigationsleiste</string>
+    <string name="navigation_bar_left_title">Linkshändermodus</string>
+    <string name="navigation_bar_left_summary">Navigationsleiste wird im Querformat auf der linken Bildschirmseite angezeigt</string>
     <string name="navigation_bar_height_title">Höhe der Navigationsleiste</string>
     <string name="navigation_bar_height_summary">Höhe der Navigationsleiste im Längsformat.</string>
     <string name="navigation_bar_height_landscape_title">Höhe der Navigationsleiste Querformat</string>
@@ -859,15 +900,10 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="navbar_targets_title">Schnellstart-Verknüpfungen</string>
     <string name="navbar_cat">Navigationsleiste</string>
     <string name="navbar_dimensions_reset_message">Alle Abmessungen auf Standard zurücksetzen?</string>
-    <string name="navbar_button_style_reset_message">Alle Optikeinstellungen auf Standard zurücksetzen?</string>
 
     <!-- Navigation bar button style -->
-    <string name="nav_bar_button_style">Optik</string>
     <string name="nav_bar_button_style_summary">Aussehen der Navigagationstasten festlegen</string>
     <string name="button_transparency_title">Tastentransparenz</string>
-    <string name="navigation_bar_icon_tint_title">Tastenfarbe</string>
-    <string name="nav_button_color_mode_title">Farbmodus</string>
-    <string name="nav_button_color_mode_dialog_title">Einfärben</string>
     <string name="nav_button_color_mode_summary">Navigationstasten-Farbmodus</string>
     <string name="navigation_bar_glow_tint_title">Hintergrundfarbe</string>
 
@@ -1192,7 +1228,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="halo_msgbox_animation_title">Nachrichtenbox Animation</string>
     <string name="halo_msgbox_animation_summary">Halo Nachrichtenbox Animation bei eingehenden Benachrichtigungen</string>
     <string name="halo_msgbox_animation_none">Aus</string>
-    <string name="halo_msgbox_animation_flip">Flip</string>
+    <string name="halo_msgbox_animation_flip">Drehen</string>
 
     <!-- Label for are-halo-notifications-allowed checkbox in app details [CHAR LIMIT=20] -->
     <string name="app_halo_label_black">Schwarzeliste von HALO</string>
@@ -1356,8 +1392,8 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <!-- Emulate menu key -->
     <string name="emulate_menu_key_title">Hardware-Menütaste emulieren</string>
     <string name="emulate_menu_key_summary">Drücken der Menütaste in der Navigationsleiste emuliert eine Hardware-Menütaste</string>
-
-    <!-- App ops -->
+	
+	<!-- App ops -->
     <string name="app_ops_summaries_bluetooth_change">Bluetooth ändern</string>
     <string name="app_ops_labels_bluetooth_change">Bluetooth ändern</string>
     <string name="app_ops_summaries_data_change">Mobile Daten ändern</string>
@@ -1379,8 +1415,6 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     </plurals>
 
     <!-- App ops menu options -->
-    <string name="app_ops_allowed">Erlaubt</string>
-    <string name="app_ops_ignored">Verweigert</string>
     <string name="app_ops_show_user_apps">Benutzer-Apps anzeigen</string>
     <string name="app_ops_show_system_apps">System-Apps anzeigen</string>
     <string name="app_ops_reset_counters">Erlaubt/Verweigert-Zähler zurücksetzen</string>
@@ -1497,4 +1531,12 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="ime_exit_animation_title">Ausblenden</string>
     <string name="ime_interpolator_title">Interpolator</string>
     <string name="ime_duration_title">Animationsdauer</string>
+
+    <!-- Chamber of Secrets -->
+    <string name="chamber_title">Kammer der Geheimnisse</string>
+    <string name="chamber_toast">Die Kammer der Geheimnisse wurde geöffnet</string>
+
+    <!-- EdgeGesture service -->
+    <string name="edge_gesture_service_title">Berührungen bei Gestensteuerung blockieren</string>
+    <string name="edge_gesture_service_summary">Berührungen der Navigations- und Statusleiste bei Gestensteuerung vor Apps verbergen</string>
 </resources>
