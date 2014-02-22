@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012-2013 The Mahdi-Rom Project
+<!-- Copyright (C) 2012-2014 The Mahdi-Rom Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -35,7 +35,9 @@
     <string name="attention">Atención</string>
     <string name="default_string">Predeterminado</string>
     <string name="enabled">Activado</string>
-    <string name="add">Añadir</string>  
+    <string name="add">Añadir</string>
+    <string name="reset_message">¿Reestablecer todas las entradas por defecto?</string>
+    <string name="style_title">Estilo</string>  
 
     <!-- Display settings screen, notification light settings -->
     <string name="display_category_light_options_title">Opciones de LED</string>
@@ -416,6 +418,17 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="title_tile_network_speed">Velocidad de red</string>
     <string name="title_tile_music">Música</string>
     <string name="title_tile_quick_record">Grabadora</string>
+    <string name="title_tile_contact">Contactos</string>
+    <string name="title_tile_custom">Personal</string>
+    <string name="custom_tile_dialog_text">Cada acción añadirá un nuevo estado de toggle.Cada clic cambia al siguiente estado.Pulsación larga para añadir acciones de pulsación larga.Si no existe la acción al clicar, el icono de pulsación larga será usado por el toggle.Esto le permite cambiar los estados haciendo clic e iniciar acciones de larga pulsación.</string>
+    <string name="custom_tile_dialog_title">Acciones de toggle Personal</string>
+    <string name="custom_tile_dialog_extra_text">Toggle avanzado detectado.Su toogle ahora cambiará de estado cuando se ajusta desde cualquier lugar.Opcionalmente puede introducir un icono y una etiqueta al toggle para cambiar si no reconoce el estado en el que está.</string>
+    <string name="custom_toggle_extras">Extras toggle Personal</string>
+    <string name="custom_toggle_collapse_check">Quitar notificación</string>
+    <string name="custom_toggle_match_state_check">Acción de clic coincide con el icono</string>
+    <string name="custom_tile_long_press">Pulsación larga:</string>
+    <string name="custom_tile_null_warning">Se debe establecer primero una acción</string>
+    <string name="custom_tile_resolve_name">Desconocido</string>
 
     <string name="title_dynamic_tiles">Toggles dinámicos</string>
     <string name="dynamic_tiles_note_title">Nota</string>
@@ -438,16 +451,28 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="title_collapse_panel">Panel de cierre automático</string>
     <string name="summary_collapse_panel">Cierre el panel de configuración rápida sobre toggle</string>
 	
-	<!-- QuickSettings: Smart Pulldown -->
+    <!-- QuickSettings: Smart Pulldown -->
     <string name="smart_pulldown_title">Desplegable inteligente</string>
     <string name="smart_pulldown_summary">Abrir configuración rápida cuando no haya %1$s notificationes presentes</string>
     <string name="smart_pulldown_off">Apagado</string>
     <string name="smart_pulldown_dismissable">Descartable</string>
     <string name="smart_pulldown_persistent">Persistente</string>
+	
+    <!-- QuickSettings: Custom Tile -->
+    <string name="custom_tile_dialog_text">Cada acción añadirá un nuevo estado de toggle.Cada clic cambia al siguiente estado.Pulsación larga para añadir acciones de pulsación larga.Si no existe la acción al clicar, el icono de pulsación larga será usado por el toggle.Esto le permite cambiar los estados haciendo clic e iniciar acciones de larga pulsación.</string>
+    <string name="custom_tile_dialog_title">Acciones de toggle Personal</string>
+    <string name="custom_toggle_extras">Extras toggle Personal</string>
+    <string name="custom_toggle_collapse_check">Quitar notificación</string>
+    <string name="custom_toggle_match_state_check">Acción de clic coincide con el icono</string>
+    <string name="custom_tile_long_press">Pulsación larga:</string>
+    <string name="custom_tile_null_warning">Se debe establecer primero una acción</string>>
 
     <string name="pref_network_mode_title">Modos de red</string>
     <string name="pref_screentimeout_mode_title">Modos de pantalla en espera</string>
     <string name="pref_ring_mode_title">Modos de sonido</string>
+	<string name="pref_music_mode_title">Modo música</string>
+    <string name="music_tile_mode_background">Mostrar carátula de álbum</string>
+    <string name="music_tile_mode_tracktitle">Mostrar título de la pista</string>
 
     <!-- Quick access ribbon -->
     <string name="category_quick_access">Cinta de accesos rápidos</string>
@@ -468,8 +493,16 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="quick_tiles_alpha_title">Transparencia del fondo de toggle</string>
     <string name="qs_style_reset_message">¿Resetear todos los colores por defecto?</string>
 
+    <!-- QuickSettings fliptiles -->
+    <string name="flip_qs_tiles_title">Voltear toggles</string>
+    <string name="flip_qs_tiles_summary">Voltear toggles con un toque</string>
+	
+    <!-- QuickSettings haptic feedback -->
+    <string name="haptic_qs_tiles_title">Vibrar al tocar</string>
+    <string name="haptic_qs_tiles_summary">Vibrar al tocar toggle</string>
+	
     <!-- This exists as part of Power widget already, re-use them
-         If Power widget is removed, re-enable these -->
+    If Power widget is removed, re-enable these -->
     <string name="pref_ring_mode_title">Modos de sonido</string>
     <string name="pref_ring_mode_summary">Ver o cambiar los modos de sonido del botón</string>
     <string name="cm_sound_mode_silent">Silencio</string>
@@ -712,6 +745,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="shortcut_action_ring_silent">Sonido/Silencio</string>
     <string name="shortcut_action_ring_vib_silent">Sonido/Vib/Silencio</string>
     <string name="shortcut_action_torch">Linterna</string>
+    <string name="shortcut_action_omniswitch">OmniSwitch</string>
     <string name="shortcut_action_longpress">Pulsación larga:</string>
     <string name="shortcut_action_select_action_longpress">Elija la acción pulsación larga:</string>
     <string name="shortcut_action_select_action">Elija acción:</string>
@@ -808,14 +842,14 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="notification_shortcuts_settings_summary">Añadir accesos directos al panel de notificaciones</string>
 
     <!-- Notification hide labels -->
-	<string name="notification_hide_labels_title">Ocultar etiqueta de notificación</string>
-	<string name="notification_hide_labels_disable">Mostrar todas las etiquetas</string>
-	<string name="notification_hide_labels_carrier">Ocultar cinta de etiquetas</string>
-	<string name="notification_hide_labels_wifi">Ocultar etiqueta WiFi</string>
-	<string name="notification_hide_labels_all">Ocultar todas las etiquetas</string>
-	<string name="notification_hide_labels_text">en el panel de notificaciones</string>
+    <string name="notification_hide_labels_title">Ocultar etiqueta de notificación</string>
+    <string name="notification_hide_labels_disable">Mostrar todas las etiquetas</string>
+    <string name="notification_hide_labels_carrier">Ocultar cinta de etiquetas</string>
+    <string name="notification_hide_labels_wifi">Ocultar etiqueta WiFi</string>
+    <string name="notification_hide_labels_all">Ocultar todas las etiquetas</string>
+    <string name="notification_hide_labels_text">en el panel de notificaciones</string>
 	
-	<!-- Navigation settings -->
+    <!-- Navigation settings -->
     <string name="navigation_settings_options_title">Opciones de navegación</string>
     <string name="navigation_settings_category_title">Barra de navegación</string>
     <string name="navigation_settings_title">Barra de navegación en pantalla</string>
@@ -845,6 +879,8 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="summary_pref_menu_display">¿Cómo y cuándo te gustaría que aparecieran los botones de menú?</string>
     <string name="navbar_enable_bar">Activar barra de navegación</string>
     <string name="navbar_enable_bar_summary">Habilitar barra de navegación</string>
+    <string name="navigation_bar_left_title">Modo zurdo</string>
+    <string name="navigation_bar_left_summary">Coloque la barra de navegación en el lado izquierdo de la pantalla en modo horizontal</string>
     <string name="navigation_bar_height_title">Altura de la barra de navegación</string>
     <string name="navigation_bar_height_summary">Altura de la barra de navegación en modo vertical.</string>
     <string name="navigation_bar_height_landscape_title">Altura de la barra de navegación en modo horizontal</string>
@@ -938,13 +974,13 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
 
     <!-- Network speed -->
     <string name="network_traffic_title">Tráfico de red</string>
-	<string name="network_traffic_summary">Ver o cambiar opciones de tráfico de red</string>
+    <string name="network_traffic_summary">Ver o cambiar opciones de tráfico de red</string>
     <string name="status_bar_show_network_stats_title">Indicador de tráfico de red</string>
     <string name="status_bar_show_network_stats_summary">Mostrar velocidades de red en la barra de estado</string>
     <string name="status_bar_network_stats_update_title">Frecuencia de actualización</string>
     <string name="status_bar_network_stats_update_summary">¿Con qué frecuencia se actualiza el indicador?</string>
 
-	<!-- Network stats hide if there's no traffic -->
+    <!-- Network stats hide if there's no traffic -->
     <string name="hide_network_speed">Ocultar cuando no hay tráfico</string>
     <string name="hide_network_speed_summary">Ocultar indicador de estadísticas de la red cuando no hay tráfico</string>
 
@@ -953,7 +989,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="status_bar_network_usage_color_reset">Reestablecer color</string>
     <string name="status_bar_network_usage_color_reset_message">Reestablecer color de estadísticas de red por defecto?</string>
 	
-	<!-- Screen recorder -->
+    <!-- Screen recorder -->
     <string name="screen_recorder_title">Grabadora de pantalla</string>
     <string name="screen_recorder_summary">Ajustar configuración del grabador de pantalla</string>
     <string name="screen_recorder_video_dimensions_title">Tamaño del video</string>
@@ -1006,7 +1042,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="lockscreen_use_widget_container_carousel_title">Activar carrusel</string>
     <string name="lockscreen_use_widget_container_carousel_summary">Utilice la animación carrusel al cambiar entre widgets de la pantalla de bloqueo</string>
 
-	<!-- Lockscreen Notifications -->
+    <!-- Lockscreen Notifications -->
     <!-- Categories --> 
     <string name="general">General</string>
     <string name="layout">Diseño</string>
@@ -1036,13 +1072,13 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="offset_top">Ajuste a la parte superior de la pantalla:</string>
     <string name="privacy_mode">Modo de privacidad</string>
     <string name="privacy_mode_summary">Desactiva las notificaciones mostradas y descartadas.De esta manera , sólo se mostrarán los iconos de las notificaciones.</string>
-	<string name="dynamic_width">Ancho dinámico</string>
+    <string name="dynamic_width">Ancho dinámico</string>
     <string name="dynamic_width_summary">Establece el ancho de las notificaciones dinámicas, de modo que sólo utilizan el espacio que realmente necesitan</string>
     <string name="excluded_apps_title">Aplicaciones excluidas</string>
     <string name="excluded_apps_summary">Aplicaciones excluidas no aparecerán como notificaciones de pantalla de bloqueo</string>
     <string name="notification_color">Color de fondo de notificación</string>
 	
-	<!-- Lock Screen Shortcuts -->
+    <!-- Lock Screen Shortcuts -->
     <string name="title_shortcuts">Accesos directos</string>
     <string name="lockscreen_target_info">Arrastre el control deslizante para asignar accesos directos</string>
     <string name="lockscreen_target_title">Accesos directos deslizantes</string>
@@ -1148,7 +1184,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="slide_lock_delay_10m">10 min</string>
     <string name="slide_lock_delay_30m">30 min</string>
 
-	<!-- Delete apn confirmation dialog message -->
+    <!-- Delete apn confirmation dialog message -->
     <string name="confirm_delete_apn">La APN se borrará.</string>
 
     <!-- Halo -->
@@ -1321,10 +1357,10 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="custom_statusbar_header_title">Cabecera del panel de notificación contextual</string>
     <string name="custom_statusbar_header_summary">Establece el fondo de la cabecera del panel de notificaciones para una imagen basada en la fecha y hora actuales</string>    
 
-	<!-- Minimum Vibration Duration -->
-	<string name="minimum_vibration_duration">Duración mínima de vibración</string>
+    <!-- Minimum Vibration Duration -->
+    <string name="minimum_vibration_duration">Duración mínima de vibración</string>
 	
-	<!-- Lock screen buttons -->
+    <!-- Lock screen buttons -->
     <string name="lockscreen_buttons_title">Acciones de los botones</string>
     <string name="lockscreen_buttons_summary">Ver o cambiar acciones de los botones de bloqueo de pantalla</string>
     <string name="lockscreen_long_press_back_title">Pulsación larga botón Atrás</string>
@@ -1354,10 +1390,10 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="show_activity_indicators_on_status_bar_title">Indicador de actividad de red</string>
     <string name="show_activity_indicators_on_status_bar_summary">Mostrar indicador de red en barra de estado</string>
 	
-	<!-- Emulate menu key -->
+    <!-- Emulate menu key -->
     <string name="emulate_menu_key_title">Emular tecla de menú de hardware</string>
     <string name="emulate_menu_key_summary">Al pulsar la tecla de menú en navbar se abrirá el menú overflow</string>	
-	<!-- App ops -->
+    <!-- App ops -->
     <string name="app_ops_summaries_bluetooth_change">cambio bluetooth</string>
     <string name="app_ops_labels_bluetooth_change">cambio Bluetooth</string>
     <string name="app_ops_summaries_data_change">cambio datos</string>
@@ -1385,7 +1421,7 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="app_ops_reset_confirm_title">Confirmar contadores permitidos</string>
     <string name="app_ops_reset_confirm_mesg">¿Seguro que desea poner a cero los contadores de AppOps?</string>	
 	
-	<!-- Screen off animation options -->
+    <!-- Screen off animation options -->
     <string name="system_power_crt_mode_title">Modo de animación CRT</string>
     <string name="system_power_crt_mode_dialog_title">Mostrar animación CRT</string>
     <string name="system_power_crt_mode_off">No mostrar</string>
@@ -1495,5 +1531,13 @@ dos con el fin de insertar puntos de control adicionales. \'Borrar\' elimina lin
     <string name="ime_exit_animation_title">Animación de salida</string>
     <string name="ime_interpolator_title">Interpolador</string>
     <string name="ime_duration_title">Duración de teclado</string>
+	
+    <!-- Chamber of Secrets -->
+    <string name="chamber_title">Cámara de secretos</string>
+    <string name="chamber_toast">La cámara de secretos se ha abierto</string>
+	
+    <!-- EdgeGesture service -->
+    <string name="edge_gesture_service_title">Bloquear gesto de toque de eventos</string>
+    <string name="edge_gesture_service_summary">No emitir gesto de toque de eventos en navbar y barra de estado</string>
 </resources>
 
