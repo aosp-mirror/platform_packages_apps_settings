@@ -31,7 +31,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.nfc.NfcUnlock;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
@@ -86,6 +85,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
+    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "toggle_lock_screen_notifications";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private PackageManager mPM;
@@ -110,6 +110,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mEnableKeyguardWidgets;
 
     private Preference mNotificationAccess;
+    private CheckBoxPreference mLockscreenNotifications;
 
     private boolean mIsPrimary;
 
@@ -355,7 +356,32 @@ public class SecuritySettings extends RestrictedSettingsFragment
             protectByRestrictions(mResetCredentials);
             protectByRestrictions(root.findPreference(KEY_CREDENTIALS_INSTALL));
         }
+
+        mLockscreenNotifications
+                = (CheckBoxPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
+        if (mLockscreenNotifications != null) {
+            if (!getDeviceLockscreenNotificationsEnabled()) {
+                final PreferenceGroup lockscreenCategory =
+                        (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
+                if (lockscreenCategory != null) {
+                    lockscreenCategory.removePreference(mLockscreenNotifications);
+                }
+            } else {
+                mLockscreenNotifications.setChecked(getLockscreenAllowPrivateNotifications());
+            }
+        }
+
         return root;
+    }
+
+    private boolean getDeviceLockscreenNotificationsEnabled() {
+        return 0 != Settings.Global.getInt(getContentResolver(),
+                Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0);
+    }
+
+    private boolean getLockscreenAllowPrivateNotifications() {
+        return 0 != Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0);
     }
 
     private int getNumEnabledNotificationListeners() {
@@ -591,6 +617,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
+        } else if (KEY_LOCK_SCREEN_NOTIFICATIONS.equals(key)) {
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
+                    mLockscreenNotifications.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
