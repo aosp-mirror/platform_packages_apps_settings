@@ -573,11 +573,6 @@ public class DataUsageSummary extends Fragment {
 
         TrafficStats.closeQuietly(mStatsSession);
 
-        if (this.isRemoving()) {
-            getFragmentManager()
-                    .popBackStack(TAG_APP_DETAILS, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-
         super.onDestroy();
     }
 
