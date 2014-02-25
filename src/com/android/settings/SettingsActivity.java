@@ -65,6 +65,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.util.Xml;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -519,7 +520,14 @@ public class SettingsActivity extends Activity
 
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mHeaderAdapter= new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper, dpm);
+
+        // As the Settings Theme is now Holo Light, the primary text color is "Black" ... but
+        // we want the text color of the Drawer items to be "White", so use the inverse Theme (Holo)
+        // for the Header adapter (and thus making the TextView appearance to have a white color.
+        Context headersContext = new ContextThemeWrapper(this,
+                com.android.internal.R.style.Theme_Holo);
+
+        mHeaderAdapter= new HeaderAdapter(headersContext, getHeaders(), mAuthenticatorHelper, dpm);
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -1438,8 +1446,6 @@ public class SettingsActivity extends Activity
         static int getHeaderType(Header header) {
             if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
-            } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings) {
-                return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.security_settings) {
                 return HEADER_TYPE_BUTTON;
             } else {
