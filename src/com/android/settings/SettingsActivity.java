@@ -521,13 +521,7 @@ public class SettingsActivity extends Activity
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        // As the Settings Theme is now Holo Light, the primary text color is "Black" ... but
-        // we want the text color of the Drawer items to be "White", so use the inverse Theme (Holo)
-        // for the Header adapter (and thus making the TextView appearance to have a white color.
-        Context headersContext = new ContextThemeWrapper(this,
-                com.android.internal.R.style.Theme_Holo);
-
-        mHeaderAdapter= new HeaderAdapter(headersContext, getHeaders(), mAuthenticatorHelper, dpm);
+        mHeaderAdapter= new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper, dpm);
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -1542,6 +1536,9 @@ public class SettingsActivity extends Activity
                         holder.mSummary = (TextView)
                                 view.findViewById(com.android.internal.R.id.summary);
                         break;
+                }
+                if (holder.mIcon != null) {
+                    holder.mIcon.setBackgroundResource(R.color.background_drawer_icon);
                 }
                 view.setTag(holder);
             } else {
