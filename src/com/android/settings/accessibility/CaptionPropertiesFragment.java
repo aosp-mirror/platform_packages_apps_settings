@@ -69,6 +69,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private CaptioningManager mCaptioningManager;
     private SubtitleView mPreviewText;
     private View mPreviewWindow;
+    private ToggleSwitch mToggleSwitch;
 
     // Standard options.
     private LocalePreference mLocale;
@@ -124,11 +125,36 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final boolean enabled = mCaptioningManager.isEnabled();
         mPreviewText = (SubtitleView) view.findViewById(R.id.preview_text);
+        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+
+        final Context context = view.getContext();
+        final int padding = context.getResources().getDimensionPixelSize(
+                R.dimen.action_bar_switch_padding);
+        mToggleSwitch = new ToggleSwitch(context);
+        mToggleSwitch.setPaddingRelative(0, 0, padding, 0);
+        mToggleSwitch.setCheckedInternal(enabled);
+
         mPreviewWindow = view.findViewById(R.id.preview_window);
 
-        installActionBarToggleSwitch();
+        getPreferenceScreen().setEnabled(enabled);
+
         refreshPreviewText();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        installActionBarToggleSwitch();
+    }
+
+    @Override
+    public void onPause() {
+        removeActionBarToggleSwitch();
+
+        super.onPause();
     }
 
     private void refreshPreviewText() {
@@ -176,37 +202,39 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         }
     }
 
-    private void installActionBarToggleSwitch() {
-        final Activity activity = getActivity();
-        final ToggleSwitch toggleSwitch = new ToggleSwitch(activity);
-
-        final int padding = getResources().getDimensionPixelSize(
-                R.dimen.action_bar_switch_padding);
-        toggleSwitch.setPaddingRelative(0, 0, padding, 0);
-
-        final ActionBar actionBar = activity.getActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM);
-
-        final ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END);
-        actionBar.setCustomView(toggleSwitch, params);
-
-        final boolean enabled = mCaptioningManager.isEnabled();
-        getPreferenceScreen().setEnabled(enabled);
-        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-        toggleSwitch.setCheckedInternal(enabled);
-        toggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
+    protected void onInstallActionBarToggleSwitch() {
+        mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
                 toggleSwitch.setCheckedInternal(checked);
                 Settings.Secure.putInt(getActivity().getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, checked ? 1 : 0);
                 getPreferenceScreen().setEnabled(checked);
-                mPreviewText.setVisibility(checked ? View.VISIBLE : View.INVISIBLE);
+                if (mPreviewText != null) {
+                    mPreviewText.setVisibility(checked ? View.VISIBLE : View.INVISIBLE);
+                }
                 return false;
             }
         });
+    }
+
+    private void installActionBarToggleSwitch() {
+        final ActionBar ab = getActivity().getActionBar();
+        final ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
+                        Gravity.CENTER_VERTICAL | Gravity.END);
+        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM);
+        ab.setCustomView(mToggleSwitch, params);
+
+        onInstallActionBarToggleSwitch();
+    }
+
+    private void removeActionBarToggleSwitch() {
+        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
+
+        final ActionBar ab = getActivity().getActionBar();
+        ab.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+        ab.setCustomView(null);
     }
 
     private void initializeAllPreferences() {
