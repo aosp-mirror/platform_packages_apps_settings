@@ -116,6 +116,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     R.string.usage_type_wifi_running,
                     R.string.usage_type_data_recv,
                     R.string.usage_type_data_send,
+                    R.string.usage_type_radio_active,
                     R.string.usage_type_data_wifi_recv,
                     R.string.usage_type_data_wifi_send,
                     R.string.usage_type_audio,
@@ -129,6 +130,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     entry.sipper.wifiRunningTime,
                     entry.sipper.mobileRxPackets,
                     entry.sipper.mobileTxPackets,
+                    entry.sipper.mobileActive,
                     entry.sipper.wifiRxPackets,
                     entry.sipper.wifiTxPackets,
                     0,
@@ -157,11 +159,13 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
             {
                 types = new int[] {
                     R.string.usage_type_on_time,
-                    R.string.usage_type_no_coverage
+                    R.string.usage_type_no_coverage,
+                    R.string.usage_type_radio_active,
                 };
                 values = new double[] {
                     entry.sipper.usageTime,
-                    entry.sipper.noCoveragePercent
+                    entry.sipper.noCoveragePercent,
+                    entry.sipper.mobileActive
                 };
             }
             break;
