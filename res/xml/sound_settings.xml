@@ -109,4 +109,13 @@
         android:title="@string/dock_sounds_enable_title"
         android:defaultValue="false" />
 
+    <com.android.settings.ZenModeListPreference
+            android:key="zen_mode"
+            android:persistent="false"
+            android:title="@string/title_zen_mode"
+            android:summary="@string/summary_zen_mode"
+            android:entries="@array/entries_zen_mode"
+            android:entryValues="@array/entryvalues_zen_mode"
+            android:dialogTitle="@string/dialog_title_zen_mode" />
+
 </PreferenceScreen>

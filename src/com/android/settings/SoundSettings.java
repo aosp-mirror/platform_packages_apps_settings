@@ -75,6 +75,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
+    private static final String KEY_ZEN_MODE = "zen_mode";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -101,6 +102,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDockSounds;
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
+    private ZenModeListPreference mZenModeListPreference;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -227,6 +229,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         };
 
         initDockSettings();
+
+        mZenModeListPreference = (ZenModeListPreference) findPreference(KEY_ZEN_MODE);
+        mZenModeListPreference.init();
     }
 
     @Override
