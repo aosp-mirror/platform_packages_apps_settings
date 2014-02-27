@@ -62,10 +62,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.Pair;
 import android.util.TypedValue;
 import android.util.Xml;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -200,6 +198,8 @@ public class SettingsActivity extends Activity
     private Header mSelectedHeader;
     private Header mCurrentHeader;
 
+    private CharSequence mInitialTitle;
+
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
             R.id.wireless_section,
@@ -314,39 +314,6 @@ public class SettingsActivity extends Activity
     private final ArrayList<Header> mHeaders = new ArrayList<Header>();
     private HeaderAdapter mHeaderAdapter;
 
-    static private class TitlePair extends Pair<Integer, CharSequence> implements Parcelable {
-
-        public TitlePair(Integer first, CharSequence second) {
-            super(first, second);
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(first);
-            TextUtils.writeToParcel(second, dest, flags);
-        }
-
-        TitlePair(Parcel in) {
-            super(in.readInt(), TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in));
-        }
-
-        public static final Creator<TitlePair> CREATOR = new Creator<TitlePair>() {
-            public TitlePair createFromParcel(Parcel source) {
-                return new TitlePair(source);
-            }
-            public TitlePair[] newArray(int size) {
-                return new TitlePair[size];
-            }
-        };
-    }
-
-    private final ArrayList<TitlePair> mTitleStack = new ArrayList<TitlePair>();
-
     private DrawerLayout mDrawerLayout;
     private ListView mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -409,7 +376,7 @@ public class SettingsActivity extends Activity
             if (isFinishing() || mSelectedHeader == null) {
                 return;
             }
-            switchToHeader(mSelectedHeader, false);
+            switchToHeader(mSelectedHeader, false, false);
             mSelectedHeader = null;
         }
 
@@ -557,17 +524,8 @@ public class SettingsActivity extends Activity
         if (savedInstanceState != null) {
             // We are restarting from a previous saved state; used that to
             // initialize, instead of starting fresh.
-
-            ArrayList<TitlePair> titles =
-                    savedInstanceState.getParcelableArrayList(SAVE_KEY_TITLES_TAG);
-            if (titles != null) {
-                mTitleStack.addAll(titles);
-            }
-            final int lastTitle = mTitleStack.size() - 1;
-            if (lastTitle >= 0) {
-                final TitlePair last = mTitleStack.get(lastTitle);
-                setTitleFromPair(last);
-            }
+            mInitialTitle = getTitle();
+            setTitleFromBackStack();
 
             ArrayList<Header> headers =
                     savedInstanceState.getParcelableArrayList(SAVE_KEY_HEADERS_TAG);
@@ -579,18 +537,15 @@ public class SettingsActivity extends Activity
                     setSelectedHeader(mHeaders.get(curHeader));
                 }
             }
-
         } else {
             if (initialFragment != null) {
                 // If we are just showing a fragment, we want to run in
                 // new fragment mode, but don't need to compute and show
                 // the headers.
-                switchToHeader(initialFragment, initialArguments, true);
+                final int initialTitleResId = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE, 0);
+                mInitialTitle = (initialTitleResId > 0) ? getText(initialTitleResId) : getTitle();
 
-                final int initialTitle = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE, 0);
-                if (initialTitle != 0) {
-                    setTitle(getText(initialTitle));
-                }
+                switchToHeader(initialFragment, initialArguments, true, mInitialTitle);
             } else {
                 // We need to try to build the headers.
                 onBuildHeaders(mHeaders);
@@ -600,7 +555,8 @@ public class SettingsActivity extends Activity
                 // the currently selected preference fragment.
                 if (mHeaders.size() > 0) {
                     Header h = onGetInitialHeader();
-                    switchToHeader(h, false);
+                    mInitialTitle = getHeaderTitle(h);
+                    switchToHeader(h, false, true);
                 }
             }
         }
@@ -667,32 +623,30 @@ public class SettingsActivity extends Activity
 
     @Override
     public void onBackStackChanged() {
-        final int count = getFragmentManager().getBackStackEntryCount() + 1;
-        TitlePair pair = null;
-        int last;
-        while (mTitleStack.size() > count) {
-            last = mTitleStack.size() - 1;
-            pair = mTitleStack.remove(last);
-        }
-        // Check if we go back
-        if (pair != null) {
-            int size = mTitleStack.size();
-            if (size > 0) {
-                last = mTitleStack.size() - 1;
-                pair = mTitleStack.get(last);
-                setTitleFromPair(pair);
-            }
-        }
+        setTitleFromBackStack();
     }
 
-    private void setTitleFromPair(TitlePair pair) {
-        final CharSequence title;
-        if (pair.first > 0) {
-            title = getText(pair.first);
-        } else {
-            title = pair.second;
+    private void setTitleFromBackStack() {
+        final int count = getFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            setTitle(mInitialTitle);
+            return;
         }
-        setTitle(title);
+        FragmentManager.BackStackEntry bse = getFragmentManager().getBackStackEntryAt(count - 1);
+        setTitleFromBackStackEntry(bse);
+    }
+
+    private void setTitleFromBackStackEntry(FragmentManager.BackStackEntry bse) {
+        final CharSequence title;
+        final int titleRes = bse.getBreadCrumbTitleRes();
+        if (titleRes > 0) {
+            title = getText(titleRes);
+        } else {
+            title = bse.getBreadCrumbTitle();
+        }
+        if (title != null) {
+            setTitle(title);
+        }
     }
 
     /**
@@ -714,10 +668,6 @@ public class SettingsActivity extends Activity
                     outState.putInt(SAVE_KEY_CURRENT_HEADER_TAG, index);
                 }
             }
-        }
-
-        if (mTitleStack.size() > 0) {
-            outState.putParcelableList(SAVE_KEY_TITLES_TAG, mTitleStack);
         }
     }
 
@@ -783,9 +733,10 @@ public class SettingsActivity extends Activity
      * preference fragment.
      *
      * @param header The new header to display.
-     * @param validate true means that the fragment's Header needs to be validated
+     * @param validate true means that the fragment's Header needs to be validated.
+     * @param initial true means that it is the initial Header.
      */
-    private void switchToHeader(Header header, boolean validate) {
+    private void switchToHeader(Header header, boolean validate, boolean initial) {
         if (header == null) {
             return;
         }
@@ -799,15 +750,11 @@ public class SettingsActivity extends Activity
                     FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {
             if (header.fragment != null) {
-                mTitleStack.clear();
-                switchToHeaderInner(header.fragment, header.fragmentArguments, validate);
+                switchToHeaderInner(header.fragment, header.fragmentArguments, validate, !initial,
+                        getHeaderTitle(header));
                 setSelectedHeader(header);
-                final TitlePair pair = new TitlePair(0, getHeaderTitle(header));
-                mTitleStack.add(pair);
-                setTitle(pair.second);
             } else if (header.intent != null) {
                 setSelectedHeader(header);
-                mTitleStack.clear();
                 startActivity(header.intent);
             } else {
                 throw new IllegalStateException(
@@ -861,19 +808,20 @@ public class SettingsActivity extends Activity
     }
 
     /**
-     * When in two-pane mode, switch the fragment pane to show the given
-     * preference fragment.
+     * Switch the fragment pane to show the given preference fragment.
      *
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
      * @param validate true means that the fragment's Header needs to be validated
      */
-    private void switchToHeader(String fragmentName, Bundle args, boolean validate) {
+    private void switchToHeader(String fragmentName, Bundle args, boolean validate,
+                                CharSequence title) {
         setSelectedHeader(null);
-        switchToHeaderInner(fragmentName, args, validate);
+        switchToHeaderInner(fragmentName, args, validate, false, title);
     }
 
-    private void switchToHeaderInner(String fragmentName, Bundle args, boolean validate) {
+    private void switchToHeaderInner(String fragmentName, Bundle args, boolean validate,
+                                     boolean addToBackStack, CharSequence title) {
         getFragmentManager().popBackStack(BACK_STACK_PREFS,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
         if (validate && !isValidFragment(fragmentName)) {
@@ -882,8 +830,14 @@ public class SettingsActivity extends Activity
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.replace(R.id.prefs, f);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        if (addToBackStack) {
+            transaction.addToBackStack(BACK_STACK_PREFS);
+        }
+        if (title != null) {
+            transaction.setBreadCrumbTitle(title);
+        }
         transaction.commitAllowingStateLoss();
     }
 
@@ -1037,6 +991,13 @@ public class SettingsActivity extends Activity
      */
     private void startWithFragment(String fragmentName, Bundle args, Fragment resultTo,
                                    int resultRequestCode, int titleRes, CharSequence titleText) {
+        final CharSequence cs;
+        if (titleRes != 0) {
+            cs = getText(titleRes);
+        } else {
+            cs = titleText;
+        }
+
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         if (resultTo != null) {
             f.setTargetFragment(resultTo, resultRequestCode);
@@ -1045,19 +1006,8 @@ public class SettingsActivity extends Activity
         transaction.replace(R.id.prefs, f);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.addToBackStack(BACK_STACK_PREFS);
+        transaction.setBreadCrumbTitle(cs);
         transaction.commitAllowingStateLoss();
-
-        final TitlePair pair;
-        final CharSequence cs;
-        if (titleRes != 0) {
-            pair = new TitlePair(titleRes, null);
-            cs = getText(titleRes);
-        } else {
-            pair = new TitlePair(0, titleText);
-            cs = titleText;
-        }
-        setTitle(cs);
-        mTitleStack.add(pair);
     }
 
     /**
