@@ -28,6 +28,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -41,6 +42,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -306,10 +308,9 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             removeDialog(DIALOG_TIMEPICKER);
             showDialog(DIALOG_TIMEPICKER);
         } else if (preference == mTime24Pref) {
-            final boolean is24Hour = ((CheckBoxPreference)mTime24Pref).isChecked();
-            set24Hour(is24Hour);
+            set24Hour(((CheckBoxPreference)mTime24Pref).isChecked());
             updateTimeAndDateDisplay(getActivity());
-            timeUpdated(is24Hour);
+            timeUpdated();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -320,9 +321,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         updateTimeAndDateDisplay(getActivity());
     }
 
-    private void timeUpdated(boolean is24Hour) {
+    private void timeUpdated() {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
-        timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, is24Hour);
         getActivity().sendBroadcast(timeChanged);
     }
 
