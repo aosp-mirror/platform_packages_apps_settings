@@ -278,7 +278,8 @@ public class SettingsActivity extends Activity
             TrustedCredentialsSettings.class.getName(),
             PaymentSettings.class.getName(),
             KeyboardLayoutPickerFragment.class.getName(),
-            DashboardSummary.class.getName()
+            DashboardSummary.class.getName(),
+            ZenModeSettings.class.getName()
     };
 
     private SharedPreferences mDevelopmentPreferences;

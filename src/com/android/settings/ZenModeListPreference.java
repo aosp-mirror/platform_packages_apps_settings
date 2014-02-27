@@ -25,18 +25,28 @@ import android.preference.Preference;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class ZenModeListPreference extends ListPreference {
     private static final String TAG = "ZenModeListPreference";
     private static final boolean DEBUG = false;
 
+    private final Context mContext;
     private final Handler mHandler = new Handler();
     private final ContentResolver mResolver;
+
+    private ImageView mConfigure;
+    private int mMode;
 
     public ZenModeListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (DEBUG) Log.d(TAG, "new ZenModeListPreference()");
+        mContext = context;
         mResolver = context.getContentResolver();
+        setWidgetLayoutResource(R.layout.preference_zen_mode);
     }
 
     public void init() {
@@ -55,10 +65,38 @@ public class ZenModeListPreference extends ListPreference {
                 false, new SettingsObserver());
     }
 
+    @Override
+    protected void onBindView(View view) {
+        if (DEBUG) Log.d(TAG, "onBindView");
+        super.onBindView(view);
+        mConfigure = (ImageView)view.findViewById(R.id.configure_zen_mode);
+        updateConfigureVisibility();
+        mConfigure.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (mMode != Settings.Global.ZEN_MODE_LIMITED) return;
+                if (mContext instanceof SettingsActivity) {
+                    SettingsActivity sa = (SettingsActivity)mContext;
+                    sa.startPreferencePanel(ZenModeSettings.class.getName(),
+                            null, R.string.zen_mode_settings_title, null, null, 0);
+                }
+            }
+        });
+    }
+
+    private void updateConfigureVisibility() {
+        if (mConfigure != null) {
+            final boolean limited = mMode == Settings.Global.ZEN_MODE_LIMITED;
+            mConfigure.setVisibility(limited ? View.VISIBLE : View.GONE);
+        }
+    }
+
     private void loadZenModeSetting(String reason) {
         if (DEBUG) Log.d(TAG, "loadZenModeSetting " + reason);
-        setValue(Integer.toString(Settings.Global.getInt(mResolver,
-                Settings.Global.ZEN_MODE, Settings.Global.ZEN_MODE_OFF)));
+        mMode = Settings.Global.getInt(mResolver,
+                Settings.Global.ZEN_MODE, Settings.Global.ZEN_MODE_OFF);
+        setValue(Integer.toString(mMode));
+        updateConfigureVisibility();
     }
 
     private boolean saveZenModeSetting(String value) {
