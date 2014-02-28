@@ -37,7 +37,6 @@ public final class LocalBluetoothManager {
     private Context mForegroundActivity;
 
     private BluetoothDiscoverableEnabler mDiscoverableEnabler;
-    private BluetoothAdvertisingEnabler mAdvertisingEnabler;
 
     private final LocalBluetoothAdapter mLocalAdapter;
 
@@ -69,14 +68,6 @@ public final class LocalBluetoothManager {
 
     public BluetoothDiscoverableEnabler getDiscoverableEnabler() {
         return mDiscoverableEnabler;
-    }
-
-    public void setBluetoothAdvertisingEnabler(BluetoothAdvertisingEnabler advertisingEnabler) {
-      this.mAdvertisingEnabler = advertisingEnabler;
-    }
-
-    public BluetoothAdvertisingEnabler getAdvertisingEnabler() {
-        return mAdvertisingEnabler;
     }
 
     private LocalBluetoothManager(LocalBluetoothAdapter adapter, Context context) {
