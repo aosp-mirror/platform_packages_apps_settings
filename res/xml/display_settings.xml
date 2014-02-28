@@ -53,6 +53,12 @@
             android:title="@string/notification_pulse_title"
             android:persistent="false" />
 
+        <CheckBoxPreference
+            android:key="heads_up"
+            android:title="@string/heads_up_enabled_title"
+            android:summary="@string/heads_up_enabled_summary"
+            android:persistent="false" />
+
         <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
