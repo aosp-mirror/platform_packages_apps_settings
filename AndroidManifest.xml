@@ -561,6 +561,23 @@
                 android:resource="@id/sound_settings" />
         </activity-alias>
 
+        <activity android:name="Settings$ZenModeSettingsActivity"
+                android:label="@string/zen_mode_settings_title"
+                android:exported="true"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.ZEN_MODE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.ZenModeSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/sound_settings" />
+        </activity>
+
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
                 android:taskAffinity=""
