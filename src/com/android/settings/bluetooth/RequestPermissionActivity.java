@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -26,22 +28,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.util.Log;
 
-import com.android.settings.R;
-
 /**
- * RequestPermissionActivity asks the user whether to enable bluetooth, discovery or advertisement.
- * This is usually started by an application wanted to start bluetooth, discovery or advertisement.
+ * RequestPermissionActivity asks the user whether to enable discovery. This is
+ * usually started by an application wanted to start bluetooth and or discovery
  */
 public class RequestPermissionActivity extends Activity implements
         DialogInterface.OnClickListener {
     // Command line to test this
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_ENABLE
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISCOVERABLE
-    // adb shell am start -a android.bluetooth.adapter.action.START_ADVERTISING
-    // adb shell am start -a android.bluetooth.adapter.action.STOP_ADVERTISING
 
     private static final String TAG = "RequestPermissionActivity";
 
@@ -52,11 +49,6 @@ public class RequestPermissionActivity extends Activity implements
     /* package */ static final int RESULT_BT_STARTING_OR_STARTED = -1000;
 
     private static final int REQUEST_CODE_START_BT = 1;
-
-    private static final int EXTRA_INTENT_NONE = 0;
-    private static final int EXTRA_INTENT_DISCOVERY = 1;
-    private static final int EXTRA_INTENT_START_ADVERTISING = 2;
-    private static final int EXTRA_INTENT_STOP_ADVERTISING = 3;
 
     private LocalBluetoothAdapter mLocalAdapter;
 
@@ -75,13 +67,9 @@ public class RequestPermissionActivity extends Activity implements
     // False if requesting BT to be turned on + discoverable mode
     private boolean mEnableOnly;
 
-    private int mExtraIntent = EXTRA_INTENT_NONE;
-
     private boolean mUserConfirmed;
 
     private AlertDialog mDialog;
-
-    private Context mContext;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
@@ -105,8 +93,6 @@ public class RequestPermissionActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mContext = getApplicationContext();
 
         // Note: initializes mLocalAdapter and returns true on error
         if (parseIntent()) {
@@ -139,45 +125,26 @@ public class RequestPermissionActivity extends Activity implements
                 intent.setClass(this, RequestPermissionHelperActivity.class);
                 if (mEnableOnly) {
                     intent.setAction(RequestPermissionHelperActivity.ACTION_INTERNAL_REQUEST_BT_ON);
-                } else if (mExtraIntent == EXTRA_INTENT_DISCOVERY) {
+                } else {
                     intent.setAction(RequestPermissionHelperActivity.
                             ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE);
                     intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, mTimeout);
-                } else if (mExtraIntent == EXTRA_INTENT_START_ADVERTISING) {
-                    intent.setAction(RequestPermissionHelperActivity.
-                        ACTION_INTERNAL_REQUEST_BT_ON_AND_START_ADVERTISE);
-                } else if (mExtraIntent == EXTRA_INTENT_STOP_ADVERTISING) {
-                    // Nothing to do.  Advertising cannot be in process with bluetooth disabled.
                 }
-
                 startActivityForResult(intent, REQUEST_CODE_START_BT);
                 mNeededToEnableBluetooth = true;
                 break;
             case BluetoothAdapter.STATE_ON:
-                if (needAskUserPermission()) {
-                    // Ask the user for permissions of bluetooth operations.
-                    createDialog();
-                } else {
-                    // No need to ask for permission, just proceed.
+                if (mEnableOnly) {
+                    // Nothing to do. Already enabled.
                     proceedAndFinish();
+                } else {
+                    // Ask the user about enabling discovery mode
+                    createDialog();
                 }
                 break;
             default:
                 Log.e(TAG, "Unknown adapter state: " + btState);
         }
-    }
-
-    private boolean needAskUserPermission() {
-        if (mEnableOnly) {
-            return false;
-        }
-        if (mExtraIntent == EXTRA_INTENT_STOP_ADVERTISING) {
-            return false;
-        }
-        if (mExtraIntent == EXTRA_INTENT_START_ADVERTISING) {
-            return !LocalBluetoothPreferences.isAdvertisingEnabled(mContext);
-        }
-        return true;
     }
 
     private void createDialog() {
@@ -188,7 +155,7 @@ public class RequestPermissionActivity extends Activity implements
             // to turn on BT
             builder.setMessage(getString(R.string.bluetooth_turning_on));
             builder.setCancelable(false);
-        } else if (mExtraIntent == EXTRA_INTENT_DISCOVERY) {
+        } else {
             // Ask the user whether to turn on discovery mode or not
             // For lasting discoverable mode there is a different message
             if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
@@ -198,11 +165,6 @@ public class RequestPermissionActivity extends Activity implements
                 builder.setMessage(
                         getString(R.string.bluetooth_ask_discovery, mTimeout));
             }
-            builder.setPositiveButton(getString(R.string.allow), this);
-            builder.setNegativeButton(getString(R.string.deny), this);
-        } else if (mExtraIntent == EXTRA_INTENT_START_ADVERTISING) {
-            builder.setMessage(getString(R.string.bluetooth_ask_start_broadcast,
-                    Utils.getCallingApp(this)));
             builder.setPositiveButton(getString(R.string.allow), this);
             builder.setNegativeButton(getString(R.string.deny), this);
         }
@@ -261,8 +223,7 @@ public class RequestPermissionActivity extends Activity implements
         if (mEnableOnly) {
             // BT enabled. Done
             returnCode = RESULT_OK;
-        } else if (mExtraIntent == EXTRA_INTENT_DISCOVERY
-            && mLocalAdapter.setScanMode(
+        } else if (mLocalAdapter.setScanMode(
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, mTimeout)) {
             // If already in discoverable mode, this will extend the timeout.
             long endTime = System.currentTimeMillis() + (long) mTimeout * 1000;
@@ -276,22 +237,6 @@ public class RequestPermissionActivity extends Activity implements
             if (returnCode < RESULT_FIRST_USER) {
                 returnCode = RESULT_FIRST_USER;
             }
-        } else if (mExtraIntent == EXTRA_INTENT_START_ADVERTISING) {
-            // Advertise allowed as user said yes.
-            LocalBluetoothPreferences.setAdvertisingEnabled(mContext, true);
-            if (mLocalAdapter.startAdvertising()) {
-                returnCode = RESULT_OK;
-                Intent intent = new Intent(BluetoothAdapter.ACTION_BLUETOOTH_ADVERTISING_STARTED);
-                mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
-            } else {
-                returnCode = RESULT_CANCELED;
-            }
-        } else if (mExtraIntent == EXTRA_INTENT_STOP_ADVERTISING
-            && mLocalAdapter.isAdvertising()
-            && mLocalAdapter.stopAdvertising()) {
-            Intent intent = new Intent(BluetoothAdapter.ACTION_BLUETOOTH_ADVERTISING_STOPPED);
-            mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
-            returnCode = RESULT_OK;
         } else {
             returnCode = RESULT_CANCELED;
         }
@@ -314,7 +259,6 @@ public class RequestPermissionActivity extends Activity implements
             mEnableOnly = true;
         } else if (intent != null
                 && intent.getAction().equals(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)) {
-            mExtraIntent = EXTRA_INTENT_DISCOVERY;
             mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
                     BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
 
@@ -323,12 +267,6 @@ public class RequestPermissionActivity extends Activity implements
             if (mTimeout < 0 || mTimeout > MAX_DISCOVERABLE_TIMEOUT) {
                 mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
             }
-        } else if (intent != null
-                && intent.getAction().equals(BluetoothAdapter.ACTION_START_ADVERTISING)) {
-            mExtraIntent = EXTRA_INTENT_START_ADVERTISING;
-        } else if (intent != null
-                && intent.getAction().equals(BluetoothAdapter.ACTION_STOP_ADVERTISING)) {
-            mExtraIntent = EXTRA_INTENT_STOP_ADVERTISING;
         } else {
             Log.e(TAG, "Error: this activity may be started only with intent "
                     + BluetoothAdapter.ACTION_REQUEST_ENABLE + " or "

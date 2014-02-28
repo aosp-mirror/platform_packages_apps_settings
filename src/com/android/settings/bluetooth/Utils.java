@@ -16,15 +16,11 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -105,19 +101,5 @@ final class Utils {
         } else {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    /**
-     * Get application name of the calling activity.  Returns empty string on errors.
-     */
-    static String getCallingApp(Activity activity) {
-        final PackageManager pm = activity.getApplicationContext().getPackageManager();
-        ApplicationInfo applicationInfo;
-        try {
-            applicationInfo = pm.getApplicationInfo(activity.getCallingPackage(), 0);
-        } catch (final NameNotFoundException e) {
-            applicationInfo = null;
-        }
-        return (applicationInfo == null) ? "" : pm.getApplicationLabel(applicationInfo).toString();
     }
 }
