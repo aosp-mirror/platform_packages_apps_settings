@@ -38,9 +38,6 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
-import com.android.internal.view.RotationPolicy;
-import com.android.settings.DreamSettings;
-
 import java.util.ArrayList;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
@@ -112,7 +109,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             updateHeadsUpMode(resolver);
             mHeadsUp.setOnPreferenceChangeListener(this);
             resolver.registerContentObserver(
-                    Settings.Global.getUriFor(Settings.Global.HEADS_UP),
+                    Settings.Global.getUriFor(Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED),
                     false, new ContentObserver(mHandler) {
                 @Override
                 public void onChange(boolean selfChange) {
@@ -255,11 +252,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private void updateHeadsUpMode(ContentResolver resolver) {
         mHeadsUp.setChecked(Settings.Global.HEADS_UP_ON == Settings.Global.getInt(resolver,
-                Settings.Global.HEADS_UP, Settings.Global.HEADS_UP_OFF));
+                Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED, Settings.Global.HEADS_UP_OFF));
     }
 
     private void setHeadsUpMode(ContentResolver resolver, boolean value) {
-        Settings.Global.putInt(resolver, Settings.Global.HEADS_UP,
+        Settings.Global.putInt(resolver, Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED,
                 value ? Settings.Global.HEADS_UP_ON : Settings.Global.HEADS_UP_OFF);
     }
 
