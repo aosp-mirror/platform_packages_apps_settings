@@ -45,8 +45,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.net.InetSocketAddress;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ProxySelector extends Fragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";
@@ -57,22 +55,6 @@ public class ProxySelector extends Fragment implements DialogCreatable {
     Button      mOKButton;
     Button      mClearButton;
     Button      mDefaultButton;
-
-    // Allows underscore char to supports proxies that do not
-    // follow the spec
-    private static final String HC = "a-zA-Z0-9\\_";
-
-    // Matches blank input, ips, and domain names
-    private static final String HOSTNAME_REGEXP =
-            "^$|^[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
-    private static final Pattern HOSTNAME_PATTERN;
-    private static final String EXCLUSION_REGEXP =
-            "$|^(\\*)?\\.?[" + HC + "]+(\\-[" + HC + "]+)*(\\.[" + HC + "]+(\\-[" + HC + "]+)*)*$";
-    private static final Pattern EXCLUSION_PATTERN;
-    static {
-        HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
-        EXCLUSION_PATTERN = Pattern.compile(EXCLUSION_REGEXP);
-    }
 
     private static final int ERROR_DIALOG_ID = 0;
 
@@ -203,35 +185,24 @@ public class ProxySelector extends Fragment implements DialogCreatable {
      * @return 0 on success, string resource ID on failure
      */
     public static int validate(String hostname, String port, String exclList) {
-        Matcher match = HOSTNAME_PATTERN.matcher(hostname);
-        String exclListArray[] = exclList.split(",");
-
-        if (!match.matches()) return R.string.proxy_error_invalid_host;
-
-        for (String excl : exclListArray) {
-            Matcher m = EXCLUSION_PATTERN.matcher(excl);
-            if (!m.matches()) return R.string.proxy_error_invalid_exclusion_list;
-        }
-
-        if (hostname.length() > 0 && port.length() == 0) {
-            return R.string.proxy_error_empty_port;
-        }
-
-        if (port.length() > 0) {
-            if (hostname.length() == 0) {
+        switch (Proxy.validate(hostname, port, exclList)) {
+            case Proxy.PROXY_VALID:
+                return 0;
+            case Proxy.PROXY_HOSTNAME_EMPTY:
                 return R.string.proxy_error_empty_host_set_port;
-            }
-            int portVal = -1;
-            try {
-                portVal = Integer.parseInt(port);
-            } catch (NumberFormatException ex) {
+            case Proxy.PROXY_HOSTNAME_INVALID:
+                return R.string.proxy_error_invalid_host;
+            case Proxy.PROXY_PORT_EMPTY:
+                return R.string.proxy_error_empty_port;
+            case Proxy.PROXY_PORT_INVALID:
                 return R.string.proxy_error_invalid_port;
-            }
-            if (portVal <= 0 || portVal > 0xFFFF) {
-                return R.string.proxy_error_invalid_port;
-            }
+            case Proxy.PROXY_EXCLLIST_INVALID:
+                return R.string.proxy_error_invalid_exclusion_list;
+            default:
+                // should neven happen
+                Log.e(TAG, "Unknown proxy settings error");
+                return -1;
         }
-        return 0;
     }
 
     /**
@@ -245,7 +216,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
         int port = 0;
 
         int result = validate(hostname, portStr, exclList);
-        if (result > 0) {
+        if (result != 0) {
             showDialog(ERROR_DIALOG_ID);
             return false;
         }
