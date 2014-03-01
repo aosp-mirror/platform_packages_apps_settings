@@ -151,7 +151,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         // resume BluetoothEnabler before calling super.onResume() so we don't get
         // any onDeviceAdded() callbacks before setting up view in updateContent()
         if (mBluetoothEnabler != null) {
-            mBluetoothEnabler.resume();
+            mBluetoothEnabler.resume(getActivity());
         }
         super.onResume();
 

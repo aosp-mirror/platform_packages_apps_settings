@@ -26,7 +26,7 @@ import com.android.settings.R;
  */
 final class BluetoothAdvertisingEnabler {
 
-    private final Context mContext;
+    private Context mContext;
     private final PreferenceScreen mBluetoothAdvertisingPreference;
 
     public BluetoothAdvertisingEnabler(Context context, PreferenceScreen bluetoothBroadcast) {
@@ -34,7 +34,10 @@ final class BluetoothAdvertisingEnabler {
         mBluetoothAdvertisingPreference = bluetoothBroadcast;
     }
 
-    public void resume() {
+    public void resume(Context context) {
+        if (mContext != context) {
+            mContext = context;
+        }
         boolean isBroadcastingEnable = LocalBluetoothPreferences.isAdvertisingEnabled(mContext);
         handleAdvertisingStateChange(isBroadcastingEnable);
     }

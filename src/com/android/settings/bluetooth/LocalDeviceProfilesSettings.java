@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -80,9 +81,10 @@ public final class LocalDeviceProfilesSettings extends SettingsPreferenceFragmen
     @Override
     public void onResume() {
         super.onResume();
-        mManager.setForegroundActivity(getActivity());
-        mAdvertisingEnabler.resume();
-        mDiscoverableEnabler.resume(getActivity());
+        final Activity activity = getActivity();
+        mManager.setForegroundActivity(activity);
+        mAdvertisingEnabler.resume(activity);
+        mDiscoverableEnabler.resume(activity);
     }
 
     @Override
