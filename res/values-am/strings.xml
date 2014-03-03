@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"ፀጥ ሲል ንዘር"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"ነባሪ የማሳወቂያ ድምጽ"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"የማሳወቂያ ብርሃን አሳይ"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"አሳዋቂ ማሳወቂያዎች"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"አስፈላጊ ማሳወቂያዎች ብቅ ይላሉ"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"የስልክ ጥሪ ድምፅ"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"ማሳወቂያ"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"ለማሳወቂያዎች የገቢ ጥሪ ድምፅን ተጠቀም"</string>
@@ -1096,7 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"የእርስዎ ጡባዊ እና የግል ውሂብ ካልታወቁ ምንጮች በሚመጡ መተግበሪያዎች ለጥቃት የተጋለጡ ናቸው። እነዚህን መተግበሪያዎች በመጠቀምዎ ሊከሰት በሚችለው የጡባዊዎ ጉዳት ወይም የውሂብ መጥፋት ሙሉ በሙሉ ሃላፊነቱን እርስዎ ብቻ ለመውሰድ ተስማምተዋል።"</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"የእርስዎ ስልክ እና የግል ውሂብ ከአልታወቁ ምንጭ መተግበሪያዎች ለሚደርሱ ጥቃቶች የተጋለጡ ናቸው። እነዚህን መተግበሪያዎች መጠቀም በመቀጠልዎ ለሚደርስ ማናቸውም ጉዳት ሆነ የውሂብ መጥፋት ሃላፊነቱን ሙሉ በሙሉ ለብቻዎ እንደሚወስዱ ተስማማተዋል።"</string>
     <string name="verify_applications" msgid="2959359554974828518">"መተግበሪያዎችን ያረጋግጡ"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"ሁሉንም መተግበሪያዎች በመደበኝነት ይፈትሹ እና አደጋ ሊያስከትሉ የሚችሉትን አይፍቀዱ ወይም ስለእነሱ ማስጠንቀቂያ ይስጡ"</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"የደህንነት ችግሮች ካሉ የመሣሪያ እንቅስቃሴን በመደበኝነት ተመልከት፣ እና ጉዳት ሊያስከት የሚችል ነገር ካለ ከልክል ወይም አስጠንቅቅ።"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"የላቁ ቅንብሮች"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"ተጨማሪ የቅንብሮች አማራጮች ያንቁ"</string>
     <string name="application_info_label" msgid="5736524913065714880">"የመተግበሪያ መረጃ"</string>
@@ -1511,8 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"የድምፅ ጥሪዎች"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"ስራ ፈትጡባዊ"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"ስልክ ሥራ የፈታበት"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"ያልታወቀ"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"ከመጠን በላይ የተቆጠረ"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU ጠቅላላ"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU ቅድመ ገፅ"</string>
@@ -1523,6 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"ስልክ"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"የሞባይል ጥቅሎች ተልከዋል"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"የሞባይል ጥቅሎች መጥተዋል"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"ገባሪ የሞባይል ሬዲዮ"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"የWi‑Fi ጥቅሎች ተልከዋል"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"የWi‑Fi ጥቅሎች መጥተዋል"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"ኦዲዮ"</string>
@@ -1556,8 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"የባትሪ ኃይል ቁጠባ ሁነታን ይምረጡ"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"መተግበሪያው የባትሪ ፍጆታን ለመቀነስ ቅንብሮችን ሊያቀርብ ይችላል"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"በተጠቃሚው ስራ ላይ የዋለው ባትሪ"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"ያልታወቀ የኃይል አጠቃቀም"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"ከመጠን በላይ የተቆጠረ የሃይል አጠቃቀም"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g>ከተነቀለ ጀምሮ"</string>
@@ -2092,4 +2093,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"ማሳወቂያዎችን አሳይ"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"ልዩ ጥንቃቄ የሚፈልጉ የማሳወቂያ ይዘቶች ሲቆለፍ ይደበቃሉ"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"ሁሉም የማሳወቂያ ይዘቶች ሲቆለፉ ይታያሉ"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"የዜን ሁነታ"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"የዜን ሁነታ"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"የዜን ሁነታን ያዋቅሩ"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"የተገደቡ ማቋረጦች"</string>
 </resources>

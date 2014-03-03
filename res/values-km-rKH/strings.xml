@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"ញ័រ​ពេល​ស្ងាត់"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"សំឡេង​ជូន​ដំណឹង​លំនាំដើម"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"ពន្លឺ​ជូន​ដំណឹង​ភ្លឺបភ្លែត"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"ទទួល​ការ​ជូនដំណឹង"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"ការ​ជូនដំណឹង​សំខាន់​នឹង​លេចឡើង"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"សំឡេង​រោទ៍"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"ការ​ជូន​ដំណឹង"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"ប្រើ​កម្រិត​សំឡេង​ហៅ​ចូល​សម្រាប់​ជូន​ដំណឹង"</string>
@@ -1096,7 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក និង​ទិន្នន័យ​ផ្ទាល់​ខ្លួន​ងាយ​រង​ការ​វាយប្រហារ​ដោយ​កម្មវិធី​ពី​ប្រភព​ដែល​មិន​ស្គាល់។ អ្នក​យល់ព្រម​ថា អ្នក​ទទួលខុសត្រូវ​រាល់​ការ​ខូចខាត​កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក ឬ​បាត់បង់​ទិន្នន័យ​ដែល​បណ្ដាល​មក​ពី​ការ​ប្រើ​កម្មវិធី​ទាំង​នេះ។"</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"ទូរស័ព្ទ និង​ទិន្នន័យ​ផ្ទាល់ខ្លួន​របស់​អ្នក​ងាយ​រង​​​​​ការ​វាយ​ប្រហារ​ដោយ​កម្មវិធី​ដែល​មិន​ស្គាល់​ប្រភព​ណាស់។ អ្នក​យល់ព្រម​ទទួលខុសត្រូវ​លើ​ការ​ខូច​ខាត​ទូរស័ព្ទ​របស់​អ្នក ឬ​បាត់បង់​ទិន្នន័យ​ដែល​បណ្ដាល​មក​ពី​ការ​ប្រើ​កម្មវិធី​ទាំង​នេះ។"</string>
     <string name="verify_applications" msgid="2959359554974828518">"ផ្ទៀងផ្ទាត់​កម្មវិធី"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"ពិនិត្យ​កម្មវិធី​ទាំង​អស់​យ៉ាង​ទៀងទាត់​ និង​មិន​អនុញ្ញាត​ ឬ​ព្រមាន​អំពី​កម្មវិធី​ទាំង​នោះ​ដែល​អាច​​បង្ក​គ្រោះថ្នាក់"</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"ពិនិត្យ​សកម្មភាព​ឧបករណ៍​យ៉ាង​ទៀងទាត់​ដើម្បី​សុវត្ថិភាព និង​ការពារ​ ឬ​ព្រមាន​អំពី​ការបំផ្លាញ​ដែល​គ្រោះថ្នាក់។"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"ការ​កំណត់​កម្រិត​ខ្ពស់"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"បើក​ជម្រើស​កំណត់​ច្រើន​ទៀត"</string>
     <string name="application_info_label" msgid="5736524913065714880">"ព័ត៌មាន​កម្មវិធី"</string>
@@ -1511,8 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"ការ​ហៅ​ជា​សំឡេង"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"កុំព្យូទ័រ​បន្ទះ​ទំនេរ"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"ទូរស័ព្ទ​ទំនេរ"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"មិន​ស្គាល់"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"លើស"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU សរុប"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"ផ្ទៃ​ខាង​មុខ CPU"</string>
@@ -1523,6 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"ទូរស័ព្ទ"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"​ផ្ញើ​កញ្ចប់​ព័ត៌មាន​ចល័ត"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"​ទទួល​កញ្ចប់​ព័ត៌មាន​ចល័ត"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"វិទ្យុ​ចល័ត​សកម្ម"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"ផ្ញើ​កញ្ចប់ព័ត៌មានតាមវ៉ាយហ្វាយ"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"​ទទួលកញ្ចប់ព័ត៌មានតាមវ៉ាយហ្វាយ"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"សំឡេង"</string>
@@ -1556,8 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"ជ្រើស​របៀប​សន្សំ​ថ្ម"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"កម្មវិធី​អាច​ផ្ដល់​ការ​កំណត់​ ដើម្បី​កាត់បន្ថយ​ការ​ប្រើ​ថ្ម"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"ថ្ម​បាន​ប្រើ​ដោយ​អ្នក​ប្រើ"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"មិន​ស្គាល់​ថាមពល​ប្រើប្រាស់"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"ការ​ប្រើ​ប្រាស់​ថាមពល​លើស"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> តាំង​ពី​បានដក"</string>
@@ -2092,4 +2093,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"បង្ហាញការជូនដំណឹង"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"នឹង​លាក់​មាតិកា​ជូនដំណឹង​សុវត្ថិភាព​ពេល​បាន​ចាក់សោ"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"នឹងបង្ហាញការជូនដំណឹងមាតិកា​ទាំងអស់​​ពេល​បាន​ចាក់សោ"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"របៀប Zen"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"របៀប Zen"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"កំណត់​រចនាសម្ព័ន្ធ​របៀប Zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"ការ​ផ្អាក​បាន​កំណត់"</string>
 </resources>
