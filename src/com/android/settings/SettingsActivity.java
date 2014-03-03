@@ -199,6 +199,7 @@ public class SettingsActivity extends Activity
     private Header mCurrentHeader;
 
     private CharSequence mInitialTitle;
+    private Header mInitialHeader;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -455,22 +456,18 @@ public class SettingsActivity extends Activity
         super.onPostCreate(savedInstanceState);
 
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        if (mDrawerToggle != null) {
-            mDrawerToggle.syncState();
-        }
+        mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (mDrawerToggle != null) {
-            mDrawerToggle.onConfigurationChanged(newConfig);
-        }
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle != null && mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -489,7 +486,7 @@ public class SettingsActivity extends Activity
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        mHeaderAdapter= new HeaderAdapter(this, getHeaders(), mAuthenticatorHelper, dpm);
+        mHeaderAdapter= new HeaderAdapter(this, mHeaders, mAuthenticatorHelper, dpm);
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -503,23 +500,17 @@ public class SettingsActivity extends Activity
         getFragmentManager().addOnBackStackChangedListener(this);
 
         mActionBar = getActionBar();
-        if (mActionBar != null) {
-            mActionBar.setDisplayHomeAsUpEnabled(true);
-            mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
 
-            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (ListView) findViewById(R.id.headers_drawer);
+        mDrawer.setAdapter(mHeaderAdapter);
+        mDrawer.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
 
-            mDrawer = (ListView) findViewById(R.id.headers_drawer);
-            mDrawer.setAdapter(mHeaderAdapter);
-            mDrawer.setOnItemClickListener(new DrawerItemClickListener());
-            mDrawer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-
-            mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                    R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
-        }
-
-        String initialFragment = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
-        Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
 
         if (savedInstanceState != null) {
             // We are restarting from a previous saved state; used that to
@@ -535,9 +526,16 @@ public class SettingsActivity extends Activity
                         (int) HEADER_ID_UNDEFINED);
                 if (curHeader >= 0 && curHeader < mHeaders.size()) {
                     setSelectedHeader(mHeaders.get(curHeader));
+                    mInitialHeader = mCurrentHeader;
                 }
             }
         } else {
+            String initialFragment = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+            Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+
+            // We need to build the Headers in all cases
+            onBuildHeaders(mHeaders);
+
             if (initialFragment != null) {
                 // If we are just showing a fragment, we want to run in
                 // new fragment mode, but don't need to compute and show
@@ -546,17 +544,16 @@ public class SettingsActivity extends Activity
                 mInitialTitle = (initialTitleResId > 0) ? getText(initialTitleResId) : getTitle();
 
                 switchToHeader(initialFragment, initialArguments, true, mInitialTitle);
+                setSelectedHeaderByFragmentName(initialFragment);
+                mInitialHeader = mCurrentHeader;
             } else {
-                // We need to try to build the headers.
-                onBuildHeaders(mHeaders);
-
                 // If there are headers, then at this point we need to show
                 // them and, depending on the screen, we may also show in-line
                 // the currently selected preference fragment.
                 if (mHeaders.size() > 0) {
-                    Header h = onGetInitialHeader();
-                    mInitialTitle = getHeaderTitle(h);
-                    switchToHeader(h, false, true);
+                    mInitialHeader = onGetInitialHeader();
+                    mInitialTitle = getHeaderTitle(mInitialHeader);
+                    switchToHeader(mInitialHeader, false, true);
                 }
             }
         }
@@ -621,6 +618,19 @@ public class SettingsActivity extends Activity
         }
     }
 
+    public Header onGetInitialHeader() {
+        String fragmentClass = getStartingFragmentClass(super.getIntent());
+        if (fragmentClass != null) {
+            Header header = new Header();
+            header.fragment = fragmentClass;
+            header.title = getTitle();
+            header.fragmentArguments = getIntent().getExtras();
+            return header;
+        }
+
+        return mFirstHeader;
+    }
+
     @Override
     public void onBackStackChanged() {
         setTitleFromBackStack();
@@ -647,13 +657,6 @@ public class SettingsActivity extends Activity
         if (title != null) {
             setTitle(title);
         }
-    }
-
-    /**
-     * Returns the Header list
-     */
-    private List<Header> getHeaders() {
-        return mHeaders;
     }
 
     @Override
@@ -716,9 +719,6 @@ public class SettingsActivity extends Activity
         }
     }
 
-    /**
-     * @hide
-     */
     protected boolean isValidFragment(String fragmentName) {
         // Almost all fragments are wrapped in this,
         // except for a few that have their own activities.
@@ -726,41 +726,6 @@ public class SettingsActivity extends Activity
             if (ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
         }
         return false;
-    }
-
-    /**
-     * When in two-pane mode, switch to the fragment pane to show the given
-     * preference fragment.
-     *
-     * @param header The new header to display.
-     * @param validate true means that the fragment's Header needs to be validated.
-     * @param initial true means that it is the initial Header.
-     */
-    private void switchToHeader(Header header, boolean validate, boolean initial) {
-        if (header == null) {
-            return;
-        }
-        if (header != null && mCurrentHeader != null && header.id == mCurrentHeader.id &&
-                header.id != R.id.account_add &&
-                !header.fragment.equals(ManageAccountsSettings.class.getName())) {
-            // This is the header we are currently displaying (except "Add Account" or
-            // "Corporate"/"Google" Account entries that share the same fragment). Just make sure
-            // to pop the stack up to its root state.
-            getFragmentManager().popBackStack(BACK_STACK_PREFS,
-                    FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        } else {
-            if (header.fragment != null) {
-                switchToHeaderInner(header.fragment, header.fragmentArguments, validate, !initial,
-                        getHeaderTitle(header));
-                setSelectedHeader(header);
-            } else if (header.intent != null) {
-                setSelectedHeader(header);
-                startActivity(header.intent);
-            } else {
-                throw new IllegalStateException(
-                        "Can't switch to header that has no Fragment nor Intent");
-            }
-        }
     }
 
     private CharSequence getHeaderTitle(Header header) {
@@ -771,6 +736,18 @@ public class SettingsActivity extends Activity
             title = header.getTitle(getResources());
         }
         return title;
+    }
+
+
+    private void setSelectedHeaderByFragmentName(String fragmentName) {
+        final int count = mHeaders.size();
+        for (int n = 0; n < count; n++) {
+            Header h = mHeaders.get(n);
+            if (h.fragment != null && h.fragment.equals(fragmentName)) {
+                setSelectedHeader(h);
+                return;
+            }
+        }
     }
 
     private void setSelectedHeader(Header header) {
@@ -785,34 +762,51 @@ public class SettingsActivity extends Activity
         }
         mCurrentHeader = header;
         int index = mHeaders.indexOf(header);
-        if (mDrawer != null) {
-            if (index >= 0) {
-                mDrawer.setItemChecked(index, true);
-            } else {
-                mDrawer.clearChoices();
-            }
+        if (index >= 0) {
+            mDrawer.setItemChecked(index, true);
+        } else {
+            mDrawer.clearChoices();
         }
     }
 
-    public Header onGetInitialHeader() {
-        String fragmentClass = getStartingFragmentClass(super.getIntent());
-        if (fragmentClass != null) {
-            Header header = new Header();
-            header.fragment = fragmentClass;
-            header.title = getTitle();
-            header.fragmentArguments = getIntent().getExtras();
-            return header;
+    /**
+     * When in two-pane mode, switch to the fragment pane to show the given
+     * preference fragment.
+     *
+     * @param header The new header to display.
+     * @param validate true means that the fragment's Header needs to be validated.
+     * @param initial true means that it is the initial Header.
+     */
+    private void switchToHeader(Header header, boolean validate, boolean initial) {
+        if (header == null) {
+            return;
         }
-
-        return mFirstHeader;
+        // For switching to another Header it should be a different one
+        if (mCurrentHeader == null || header.id != mCurrentHeader.id) {
+            if (header.fragment != null) {
+                boolean addToBackStack = !initial && header.id != mInitialHeader.id;
+                switchToHeaderInner(header.fragment, header.fragmentArguments, validate,
+                        addToBackStack, getHeaderTitle(header));
+                setSelectedHeader(header);
+            } else if (header.intent != null) {
+                setSelectedHeader(header);
+                startActivity(header.intent);
+            } else {
+                throw new IllegalStateException(
+                        "Can't switch to header that has no Fragment nor Intent");
+            }
+        }
     }
 
     /**
      * Switch the fragment pane to show the given preference fragment.
      *
+     * (used for initial fragment)
+     *
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
-     * @param validate true means that the fragment's Header needs to be validated
+     * @param validate true means that the fragment's Header needs to be validated.
+     * @param title The title of the fragment to display.
      */
     private void switchToHeader(String fragmentName, Bundle args, boolean validate,
                                 CharSequence title) {
@@ -820,6 +814,9 @@ public class SettingsActivity extends Activity
         switchToHeaderInner(fragmentName, args, validate, false, title);
     }
 
+    /**
+     * Switch to a specific Header with taking care of validation, Title and BackStack
+     */
     private void switchToHeaderInner(String fragmentName, Bundle args, boolean validate,
                                      boolean addToBackStack, CharSequence title) {
         getFragmentManager().popBackStack(BACK_STACK_PREFS,
@@ -1011,15 +1008,7 @@ public class SettingsActivity extends Activity
     }
 
     /**
-     * Called when the activity needs its list of headers build.  By
-     * implementing this and adding at least one item to the list, you
-     * will cause the activity to run in its modern fragment mode.  Note
-     * that this function may not always be called; for example, if the
-     * activity has been asked to display a particular fragment without
-     * the header list, there is no need to build the headers.
-     *
-     * <p>Typical implementations will use {@link #loadHeadersFromResource}
-     * to fill in the list from a resource.
+     * Called when the activity needs its list of headers build.
      *
      * @param headers The list in which to place the headers.
      */
