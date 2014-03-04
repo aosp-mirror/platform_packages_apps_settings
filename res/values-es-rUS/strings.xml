@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrar en modo silencioso"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Sonido de notificación predeterminado"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Luz de notificación"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"Notificaciones de advertencia"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"Notificaciones importantes emergentes"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Tono de llamada"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Notificación"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Utilizar el volumen de las llamadas entrantes para las notificaciones"</string>
@@ -1096,7 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Tu tablet y datos personales son más vulnerables a los ataques de aplicaciones de fuentes desconocidas. Aceptas que eres el único responsable de cualquier daño a tu tablet o pérdida de datos que puedan producirse por el uso de estas aplicaciones."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Tu dispositivo y datos personales son más vulnerables a los ataques de aplicaciones de fuentes desconocidas. Aceptas que eres el único responsable de cualquier daño a tu dispositivo o pérdida de datos que pueda producirse por el uso de estas aplicaciones."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Verificar aplicaciones"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"Comprueba las aplicaciones con regularidad e inhabilita las que puedan dañar el dispositivo o advierte sobre ellas."</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"Comprobar la actividad del dispositivo regularmente por problemas de seguridad, para evitar posibles daños o advertir sobre ellos."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Configuración avanzada"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activar más opciones de configuración"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Información de la aplicación"</string>
@@ -1511,8 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"Llamadas de voz"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet ausente"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Teléfono inactivo"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"Desconocida"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Sobrecalculada"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU total"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"Primer plano de la CPU"</string>
@@ -1523,6 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Teléfono"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"Paquetes móviles enviados"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"Paquetes móviles recibidos"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"Radio activada"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"Paquetes Wi‑Fi enviados"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"Paquetes Wi‑Fi recibidos"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
@@ -1556,8 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Selecciona el modo de ahorro de batería."</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"La aplicación podrá ofrecer una configuración para reducir el uso de la batería."</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Batería utilizada por el usuario"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"Consumo de energía desconocido"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Uso de potencia sobrecalculada"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que se desconectó"</string>
@@ -2092,4 +2093,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"Notificaciones"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Notificaciones personales ocultas al bloquear"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Notificaciones visibles al bloquear"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"Modo zen"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"Modo zen"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Configurar modo zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"Interrupciones limitadas"</string>
 </resources>

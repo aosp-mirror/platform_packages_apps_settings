@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibruoti, kai veikia tyliuoju režimu"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Numatytasis pranešimo garsas"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Pulsuojanti įspėjimo šviesa"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"Įspėjamieji pranešimai"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"Svarbūs pranešimai iššoks"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Skambėjimo tonas"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Įspėjimas"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Įspėjimams naudoti gaunamų skambučių garsumą"</string>
@@ -1096,7 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Planšetinis kompiuteris ir asmeniniai duomenys prastai apsaugoti nuo programų iš nežinomų šaltinių atakų. Sutinkate, kad tik jūs atsakote už visus planšetinio kompiuterio pažeidimus ar duomenų praradimą naudojant šias programas."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Telefonas ir asmeniniai duomenys prastai apsaugoti nuo programų iš nežinomų šaltinių atakų. Sutinkate, kad tik jūs atsakote už visus telefono pažeidimus ar duomenų praradimą naudojant šias programas."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Patvirtinti programas"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"Reguliariai tikrinkite visas programas ir išjunkite kenksmingas programas arba įspėkite apie jas"</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"Reguliariai tikrinti įrenginio veiklą, ar nėra saugos problemų, ir apsaugoti nuo žalos ar įspėti apie galimą žalą."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Išplėstiniai nustatymai"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Įgalinti daugiau nustatymų parinkčių"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Programos informacija"</string>
@@ -1511,8 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"Balso skambučiai"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Planšetinis kompiuteris neveikos būsenos"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefonas veikia laukimo režime"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"Nežinoma"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Per daug apskaičiuota"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Visas CPU laikas"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU aktyvusis langas"</string>
@@ -1523,6 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefonas"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"Mobiliojo ryšio paketai išsiųsti"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"Mobiliojo ryšio paketai gauti"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"Mobil. telefono radijas aktyvus"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"„Wi-Fi“ ryšio paketai išsiųsti"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"„Wi-Fi“ ryšio paketai gauti"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Garso įrašas"</string>
@@ -1556,8 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Pasirinkite akumuliatoriaus tausojimo režimą"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Programa gali pasiūlyti nustatymus, kad būtų išeikvojama mažiau akumuliatoriaus energijos"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Naudotojo sunaudota akumuliatoriaus energija"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"Nežinomas maitinimo naudojimas"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Per daug apskaičiuotos energijos naudojimas"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> po to, kai buvo ištrauktas iš lizdo"</string>
@@ -2092,4 +2093,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"Rodyti pranešim."</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Delik. praneš. turin. bus paslėpt., kai užrakinta"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Visas pranešimų turinys bus rodomas, kai užrakinta"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"„Zen“ režimas"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"„Zen“ režimas"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"„Zen“ režimo konfigūravimas"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"Ribotos pertraukos"</string>
 </resources>

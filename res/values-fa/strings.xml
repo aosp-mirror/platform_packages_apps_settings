@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"لرزش در حالت بی‌صدا"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"صدای اعلان پیش‌فرض"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"چراغ اعلان چشمک بزند"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"اعلان‌های پیش آگهی"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"اعلان‌های مهم نمایان خواهند شد"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"آهنگ زنگ"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"اعلان"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"استفاده از صدای تماس ورودی برای اعلان‌ها"</string>
@@ -1096,7 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"رایانهٔ لوحی و داده‌های شخصی شما بیشتر در معرض خطر حمله برنامه‌های منابع ناشناس هستند. شما موافقت می‌کنید که در قبال هر گونه آسیب وارده به رایانهٔ لوحی خود یا از دست دادن داده که در نتیجه استفاده از این برنامه‌ها روی دهد تنها خودتان مسئول هستید."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"گوشی و داده‌های شخصی شما بیشتر در معرض خطر حمله برنامه‌های منابع ناشناس هستند. شما موافقت می‌کنید که در قبال هر گونه آسیبی که در نتیجه استفاده از این برنامه‌ها به گوشی شما وارد شود فقط خودتان مسئول هستید."</string>
     <string name="verify_applications" msgid="2959359554974828518">"تأیید برنامه‌ها"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"همه برنامه‌ها به طور منظم بررسی می‌شوند و درباره آنهایی که ممکن است مضر باشند، هشدار داده می‌شود یا آن برنامه‌ها پذیرفته نمی‌شوند"</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"به طور منظم کارکرد دستگاه برای مشکلات امنیتی بررسی می‌شود و درباره آسیب‌های بالقوه هشدار داده شده یا از آنها جلوگیری می‌شود."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"تنظیمات پیشرفته"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"گزینه‌های تنظیمات بیشتری فعال شود"</string>
     <string name="application_info_label" msgid="5736524913065714880">"اطلاعات برنامه"</string>
@@ -1511,8 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"تماس‌های صوتی"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"رایانهٔ لوحی آماده به کار"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"حالت بلااستفاده تلفن"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"ناشناس"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"بیش از حد محاسبه شده"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"‏مقدار کل CPU"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"‏پیش زمینه CPU"</string>
@@ -1523,6 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"تلفن"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"بسته‌‌های تلفن همراه ارسال شد"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"بسته‌های تلفن همراه دریافت شد"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"رادیو سلولی فعال"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"‏بسته‌های Wi-Fi ارسال شد"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"‏بسته‌های Wi-Fi دریافت شد"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"صوتی"</string>
@@ -1556,8 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"انتخاب حالت صرفه‌جویی در مصرف باتری"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"این برنامه دارای تنظیماتی است که در میزان مصرف باتری صرفه‌جویی می‌کند"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"باتری استفاده شده توسط کاربر"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"استفاده از نیروی ناشناس"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"نیروی مصرفی بیش از حد محاسبه شده"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> میلی‌آمپرساعت"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> از زمان جدا کردن"</string>
@@ -2092,4 +2093,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"نمایش اعلان‌ها"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"در حالت قفل محتوای اعلان حساس پنهان خواهد شد"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"در حالت قفل همه محتوای اعلان نمایش داده می‌شود"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"‏حالت Zen"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"‏حالت Zen"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"‏پیکربندی حالت Zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"وقفه‌های محدود"</string>
 </resources>

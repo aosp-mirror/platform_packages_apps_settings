@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Idlidliza uma ithulile"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Umsindo wokwazisa ozenzakalelayo"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Ukukhanya kwesaziso sephalsi"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"Izaziso ezikwazisa ngokusha"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"Izaziso ezibalulekile zizovela"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Iringithoni"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Isaziso"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Sebenzisa ivolumu yocingo olungenayo yezaziso"</string>
@@ -1097,7 +1099,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"I-tablet kanye nemininingo yakho kusengozini yokuthi kuhlaselwe yizinhlelo zokusebenza ezivela kwimithombo eengaziwa. Uyavuma ukuthi uwena wedwa onesibophezelo sanoma yikuphi ukulimala kwe-tablet yakho noma ukulahleka kwemininingo okungabangelwa ukusetshenziswa kwalezi zinhlelo."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Iselula yakho kanye nemininingo yakho uqobo kusengozini yokuhlaselwa yizinhlelo zokusebenza ezivela kwimithombo engaziwa. Uyavuma ukuthi nguwe wedwa onesibophezelo sanoma yikuphi okulimele noma ukulahleka kwemininingo okungab umphumela wokusebenzisa lezi zinhlelo zokusebenza."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Qinisekisa izinhlelo zokusebenza"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"Hlola ngokuvamile zonke izinhlelo zokusebenza uphinde ungavumeli noma uxwayise mayelana nalezo ezingabangela ubungozi"</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"Ngokuvamile hlola umsebenzi wedivayisi ngezinkinga zokuphepha, uphinde uvimbele noma uxwayise mayelana nokungaba ubungozi."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Izilungiselelo ezithuthukisiwe"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Nima amandla izinketho eziphezulu zezilungiselelo"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Ulwazi lohlelo lokusebenza"</string>
@@ -1518,8 +1520,7 @@
     <string name="power_phone" msgid="5392641106474567277">"Amakholi ezwi"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Ithebhulethi ayenzi lutho"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Ifoni ayenzi lutho"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"Akwaziwa"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Okubalwe ngaphezulu"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Inani le-CPU"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"Ingaphambili le-CPU"</string>
@@ -1530,6 +1531,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Ifoni"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"Amaphakethe weselula athunyelwe"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"Amaphakethe weselula amukelwe"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"Irediyo yeselula iyasebenza"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"Amaphakethe we-Wi‑Fi athunyelwe"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"Amaphakethe we-Wi‑Fi amukelwe"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Umsindo"</string>
@@ -1563,8 +1565,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Khetha imodi yokulondoloza ibhethri"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Uhlelo lokusebenza lunganikeza izilungiselelo ukwehlisa ukusebenzisa ibhetri"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Ibhethri elisetshenziswe umsebenzisi"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"Ukusetshenziswa kwamandla okungaziwa"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Ukusetshenziswa kwamandla okubalwe ngaphezulu"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> kusukelwa kungaxhunyiwe"</string>
@@ -2099,4 +2100,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"Bonisa izaziso"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Okuqukethwe kwesaziso esinozwelo kuzofihlwa uma kukhiyiwe"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Konke okuqukethwe kwesaziso kuzoboniswa uma kukhiyiwe"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"Imodi ye-Zen"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"Imodi ye-Zen"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Lungiselela imodi ye-Zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"Iziphazamiso ezinomkhawulo"</string>
 </resources>

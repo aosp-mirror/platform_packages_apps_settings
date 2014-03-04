@@ -696,6 +696,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"اهتزاز عند تشغيل الوضع صامت"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"صوت الإشعار الافتراضي"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"ضوء الاشعار بالنبض"</string>
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"تنبيه بالإشعارات"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"ستظهر إشعارات مهمّة"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"نغمة الرنين"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"التنبيه"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"استخدام مستوى صوت المكالمة الواردة للإشعارات"</string>
@@ -1096,7 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"تكون بيانات جهازك اللوحي وبياناتك الشخصية أكثر عرضة للهجوم من خلال التطبيقات مجهولة المصادر. أنت توافق على أنك المسؤول الوحيد عن أي ضرر لجهازك اللوحي أو أي فقدان للبيانات ينتج عن استخدام هذه التطبيقات."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"تكون بيانات هاتفك وبياناتك الشخصية أكثر عرضة للهجوم من خلال التطبيقات مجهولة المصادر. أنت توافق على أنك المسؤول الوحيد عن أي ضرر لهاتفك أو أي فقدان للبيانات ينتج عن استخدام هذه التطبيقات."</string>
     <string name="verify_applications" msgid="2959359554974828518">"التحقق من التطبيقات"</string>
-    <string name="verify_applications_summary" msgid="2013363344093910880">"فحص كل التطبيقات بشكل منتظم وعدم السماح بتلك التي قد تسبب ضررًا أو التحذير بشأنها"</string>
+    <string name="verify_applications_summary" msgid="2791141629887492480">"يُرجى التحقق بانتظام من خلو أنشطة الجهاز من المشكلات المتعلقة بالأمان،  مع منع الأضرار المحتملة أو التحذير من وقوعها."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"الإعدادات المتقدمة"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"تمكين المزيد من خيارات الإعدادات."</string>
     <string name="application_info_label" msgid="5736524913065714880">"عن التطبيق"</string>
@@ -1511,8 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"المكالمات الصوتية"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"الجهاز اللوحي خامل"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"الهاتف خامل"</string>
-    <!-- no translation found for power_unaccounted (8066636609824407931) -->
-    <skip />
+    <string name="power_unaccounted" msgid="8066636609824407931">"غير معروفة"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"استخدام زائد عن الحد"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"‏إجمالي استخدام CPU"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"‏CPU في المقدمة"</string>
@@ -1523,6 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"الهاتف"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"حزم بيانات الجوَّال المرسلة"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"حزم بيانات الجوَّال المستلمة"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"الراديو الخلوي نشط"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"‏حزم بيانات Wi-Fi المرسلة"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"‏حزم بيانات Wi-Fi المستلمة"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"الصوت"</string>
@@ -1556,8 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"تحديد وضع توفير البطارية"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"قد يعرض التطبيق إعدادات لتقليل استخدام البطارية"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"البطارية التي يستهلكها المستخدم"</string>
-    <!-- no translation found for battery_desc_unaccounted (827801520179355764) -->
-    <skip />
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"استخدام غير معروف للطاقة"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"استخدام زائد عن الحد للطاقة"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> مللي أمبير في الساعة"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> منذ عدم التوصيل"</string>
@@ -2092,4 +2093,8 @@
     <string name="lock_screen_notifications" msgid="736030096980572317">"إظهار الإشعارات"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"سيتم إخفاء محتويات الإشعارات المهمة عند قفل الشاشة"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"سيتم عرض كل محتويات الإشعارات عند قفل الشاشة"</string>
+    <string name="title_zen_mode" msgid="2198277358422210424">"‏وضع Zen"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"‏وضع Zen"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"‏تهيئة وضع Zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"انقطاعات محدودة"</string>
 </resources>
