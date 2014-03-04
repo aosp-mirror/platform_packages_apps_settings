@@ -40,8 +40,6 @@ import com.android.settings.indexer.Index;
 
 public class DashboardSummary extends Fragment {
 
-    private static final String SAVE_KEY_QUERY = ":settings:query";
-
     private EditText mEditText;
     private ListView mListView;
 
@@ -88,26 +86,6 @@ public class DashboardSummary extends Fragment {
         super.onStart();
 
         updateSearchResults();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (outState != null) {
-            outState.putString(SAVE_KEY_QUERY, mEditText.getText().toString());
-        }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            final String query = savedInstanceState.getString(SAVE_KEY_QUERY);
-            if (query != null && !TextUtils.isEmpty(query)) {
-                mEditText.setText(query);
-            }
-        }
     }
 
     @Override
