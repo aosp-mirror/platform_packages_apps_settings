@@ -345,8 +345,8 @@ public class UserSettings extends RestrictedSettingsFragment
         UserHandle user = new UserHandle(userId);
         mUserManager.setUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, true, user);
         mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, user);
-        Secure.putStringForUser(getContentResolver(),
-                Secure.LOCATION_PROVIDERS_ALLOWED, "", userId);
+        Secure.putIntForUser(getContentResolver(),
+                Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, userId);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
                 UserSettings.USER_DRAWABLES[
                         userId % UserSettings.USER_DRAWABLES.length]);

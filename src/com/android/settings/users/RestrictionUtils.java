@@ -84,8 +84,8 @@ public class RestrictionUtils {
             userRestrictions.putBoolean(entry.getKey(), !entry.getSelectedState());
             if (entry.getKey().equals(UserManager.DISALLOW_SHARE_LOCATION)
                     && !entry.getSelectedState()) {
-                Secure.putStringForUser(context.getContentResolver(),
-                        Secure.LOCATION_PROVIDERS_ALLOWED, "", user.getIdentifier());
+                Secure.putIntForUser(context.getContentResolver(),
+                        Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, user.getIdentifier());
             }
         }
         um.setUserRestrictions(userRestrictions, user);
