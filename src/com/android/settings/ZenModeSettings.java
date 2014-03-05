@@ -125,7 +125,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment {
         private void addBuckets() {
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT);
-            BucketView callView = new BucketView(android.R.drawable.ic_menu_call, "Calls", 2,
+            BucketView callView = new BucketView(android.R.drawable.ic_menu_call, "Calls", 0,
                     "Block all", "Starred contacts only", "Allow all");
             addView(callView, lp);
             lp.topMargin = 4;
