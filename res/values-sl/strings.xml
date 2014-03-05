@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Neznana napaka"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Hladno"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Sprejemanje zahtev za seznanjanje (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Sprejemanje zahtev za seznanjanje"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Zahteve za seznanjanje se ne sprejemajo"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Zahteve za seznanjanje se ne sprejemajo"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Vidno vsem napravam Bluetooth v bližini (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Vidno vsem napravam Bluetooth v bližini"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Ni vidno drugim napravam Bluetooth"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Vidno samo seznanjenim napravam"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Časovna omejitev vidnosti"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Zakleni glasovno klicanje"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Prepreči uporabo telefona Bluetooth, kadar je zaslon zaklenjen"</string>
@@ -129,8 +129,6 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Želite prekiniti povezavo?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"S tem bo prekinjena povezava z napravo:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Oddajanje"</string>
-    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"Vklopljeno"</string>
-    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"Izklopljeno"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Želite onemogočiti profil?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"S tem boste onemogočili:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Povezava je vzpostavljena"</string>
@@ -157,11 +155,13 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Aplikacija želi, da lahko druge naprave Bluetooth vidijo vaš telefon toliko sekund: <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Aplikacija želi omogočiti, da lahko druge naprave Bluetooth vidijo vaš tablični računalnik. To lahko pozneje spremenite v nastavitvah Bluetooth."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Aplikacija želi omogočiti, da lahko druge naprave Bluetooth vidijo vaš telefon. To lahko pozneje spremenite v nastavitvah Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Aplikacija želi vklopiti Bluetooth in omogočiti, da lahko druge naprave vidijo vaš tablični računalnik. To lahko pozneje spremenite v nastavitvah Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Aplikacija želi vklopiti Bluetooth in omogočiti, da lahko druge naprave vidijo vaš telefon. To lahko pozneje spremenite v nastavitvah Bluetooth."</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> želi vklopiti oddajanje Bluetooth za komuniciranje z drugimi napravami v bližini. To lahko pozneje spremenite v nastavitvah za Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> želi vklopiti Bluetooth in oddajanje Bluetooth za komuniciranje z drugimi napravami v bližini. To lahko pozneje spremenite v nastavitvah za Bluetooth."</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Ko je ta funkcija vklopljena, lahko telefon komunicira z drugimi napravami v bližini.\n\nOddajanje uporablja signale Bluetooth majhne moči."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Aplikacija želi vklopiti Bluetooth in omogočiti, da lahko druge naprave vidijo vaš tablični računalnik toliko sekund: <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Aplikacija želi vklopiti Bluetooth in omogočiti, da lahko druge naprave vidijo vaš telefon toliko sekund: <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Aplikacija želi vklopiti Bluetooth in omogočiti, da lahko druge naprave vidijo vaš tablični računalnik. To lahko pozneje spremenite v nastavitvah Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Aplikacija želi vklopiti Bluetooth in omogočiti, da lahko druge naprave vidijo vaš telefon. To lahko pozneje spremenite v nastavitvah Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Vklop Bluetootha…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Izklop Bluetootha…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Samodejno poveži"</string>
@@ -478,7 +478,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Možnosti …"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Dodatno"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Dodatne nast. za Bluetooth"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Če si želite ogledati naprave, vklopite Bluetooth."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Ko je Bluetooth vklopljen, lahko vaša naprava komunicira z drugimi napravami Bluetooth v bližini."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Vzpostavi povezavo z ..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Zvok predstavnosti"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Zvok telefona"</string>
@@ -1017,7 +1017,6 @@
     <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Uporaba GPS-a, Wi-Fi-ja in mobilnih omrežij za določanje lokacije"</string>
     <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Uporaba Wi-Fi-ja in mobilnih omrežij za določanje lokacije"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Uporaba GPS-a za določanje lokacije"</string>
-    <string name="location_loading_injected_setting" msgid="4238574500081976654">"Prenašanje …"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Lokacija Wi-Fi-ja in mob. omr."</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Aplikacijam omogočite hitrejše določanje lokacije z Googlovo storitvijo za določanje lokacije. Anonimni podatki o lokaciji bodo zbrani in poslani Googlu."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Določanje lokacije z Wi‑Fi-jem"</string>
@@ -2090,6 +2089,8 @@
     <string name="drawer_open" msgid="132008699936863299">"Odpri predal za krmarjenje"</string>
     <string name="drawer_close" msgid="3329237203619660131">"Zapri predal za krmarjenje"</string>
     <string name="dashboard_title" msgid="821911564947991553">"Pregled"</string>
+    <string name="query_hint_text" msgid="7715244743022826977">"Kaj iščete?"</string>
+    <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi omrežna povezava"</string>
     <string name="lock_screen_notifications" msgid="736030096980572317">"Pokaži obvestila"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Ob zaklen. zaslonu bo skrita občut. vseb. obvestil"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Ob zaklen. zaslonu bo prikaz. vsa vsebina obvestil"</string>

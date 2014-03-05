@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Неизвестная ошибка"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Холодная"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Запросы на подключение принимаются (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Запросы на подключение принимаются"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Запросы на подключение не принимаются"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Запросы на подключение не принимаются"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Время видимости для устройств Bluetooth: <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Отображать для ближайших устройств Bluetooth"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Не отображать для других Bluetooth-устройств"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Доступно только для подключенных устройств"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Тайм-аут видимости"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Заблокировать голосовой набор"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Предотвратить использование телефона Bluetooth, когда экран заблокирован"</string>
@@ -129,8 +129,6 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Отключиться?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Произойдет разъединение с устройством &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Передача данных"</string>
-    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"ВКЛ"</string>
-    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"ВЫКЛ"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Отключить профиль?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Профиль&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;будет отключен от устройства&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Подключено"</string>
@@ -157,11 +155,13 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Одному из приложений требуется, чтобы ваш телефон был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Одному из приложений требуется сделать ваш планшетный ПК доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Одному из приложений требуется сделать ваш телефон доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Одному из приложений требуется включить Bluetooth и сделать ваш планшетный ПК доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Одному из приложений требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> собирается включить Bluetooth, чтобы установить соединение с другими устройствами. Эту функцию можно в любой момент отключить в настройках Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> собирается включить Bluetooth, чтобы установить соединение с другими устройствами. Эту функцию можно в любой момент отключить в настройках Bluetooth."</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Ваш телефон сможет устанавливать соединение с другими устройствами поблизости.\n\nПри передаче данных используется сигнал Bluetooth с низким энергопотреблением."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Одному из приложений требуется включить Bluetooth и сделать ваш планшетный ПК доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Одному из приложений требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Одному из приложений требуется включить Bluetooth и сделать ваш планшетный ПК доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Одному из приложений требуется включить Bluetooth и сделать ваш телефон доступным для поиска на других устройствах. Позже эти настройки можно будет изменить."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Включение Bluetooth..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Отключение Bluetooth..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Автоматическое подключение"</string>
@@ -478,7 +478,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Параметры..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Расширенные"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Расш. настройки Bluetooth"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Чтобы обнаружить устройства, включите Bluetooth."</string>
+    <!-- no translation found for bluetooth_empty_list_bluetooth_off (6351930724051893423) -->
+    <skip />
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Подключить к..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Профиль A2DP"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Профиль HSP/HFP"</string>
@@ -696,10 +697,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Виброзвонок без звука"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Звук уведомлений по умолчанию"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Индикатор событий"</string>
-    <!-- no translation found for heads_up_enabled_title (2038264257807516472) -->
-    <skip />
-    <!-- no translation found for heads_up_enabled_summary (2746343598416626372) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"Показывать важные оповещения"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"Показывать важные оповещения (всплыв. окна)"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Мелодия"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Уведомление"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Использовать этот уровень громкости также для уведомлений"</string>
@@ -1019,7 +1018,6 @@
     <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Использовать GPS, Wi‑Fi и мобильные сети для определения местоположения"</string>
     <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Использовать Wi‑Fi и мобильные сети для определения местоположения"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Использовать GPS для определения местоположения"</string>
-    <string name="location_loading_injected_setting" msgid="4238574500081976654">"Получение…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Разрешить отправлять анонимные геоданные и позволить приложениям определять ваше местоположение с помощью Wi-Fi и мобильных сетей"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"С помощью Wi-Fi"</string>
@@ -1100,8 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Ваши личные данные и данные планшетного ПК более уязвимы для атак приложений из неизвестных источников. Вы соглашаетесь с тем, что несете полную ответственность за любой ущерб, нанесенный планшетному ПК, и потерю данных, связанные с использованием этих приложений."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Ваши личные данные и данные телефона более уязвимы для атак приложений из неизвестных источников. Вы соглашаетесь с тем, что несете полную ответственность за любой ущерб, нанесенный телефону, и потерю данных, связанные с использованием этих приложений."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Проверять приложения"</string>
-    <!-- no translation found for verify_applications_summary (2791141629887492480) -->
-    <skip />
+    <string name="verify_applications_summary" msgid="2791141629887492480">"Регулярно проверять устройство на наличие проблем с безопасностью и предупреждать о приложениях, которые могут нанести вред, или отключать их"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Расширенные настройки"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Включить дополнительные настройки"</string>
     <string name="application_info_label" msgid="5736524913065714880">"О приложении"</string>
@@ -1561,7 +1558,7 @@
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Выберите режим экономии заряда батареи"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"В программе могут быть настройки режима энергосбережения"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Использование батареи пользователем"</string>
-    <string name="battery_desc_unaccounted" msgid="827801520179355764">"Неизвестный процент использования батареи"</string>
+    <string name="battery_desc_unaccounted" msgid="827801520179355764">"Неучтенное использование батареи"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Преувеличенное энергопотребление"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мА·ч"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> с момента отключения от питания"</string>
@@ -2095,13 +2092,13 @@
     <string name="drawer_open" msgid="132008699936863299">"Открыть панель навигации"</string>
     <string name="drawer_close" msgid="3329237203619660131">"Закрыть панель навигации"</string>
     <string name="dashboard_title" msgid="821911564947991553">"Обзор"</string>
+    <string name="query_hint_text" msgid="7715244743022826977">"Введите запрос"</string>
+    <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi сеть подключение"</string>
     <string name="lock_screen_notifications" msgid="736030096980572317">"Уведомления"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Не показывать конфиденциальные данные"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Показывать уведомления полностью"</string>
     <string name="title_zen_mode" msgid="2198277358422210424">"Режим дзен"</string>
     <string name="dialog_title_zen_mode" msgid="599852552499926409">"Режим дзен"</string>
-    <!-- no translation found for configure_zen_mode_description (7058922692542913706) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (3709821127278518021) -->
-    <skip />
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Настройка режима дзен"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"Ограниченное число прерываний"</string>
 </resources>

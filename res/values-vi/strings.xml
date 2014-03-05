@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Lỗi không xác định"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Không hoạt động"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Chấp nhận các yêu cầu ghép nối (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Chấp nhận các yêu cầu ghép nối"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Không chấp nhận các yêu cầu ghép nối"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Không chấp nhận các yêu cầu ghép nối"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Hiển thị với tất cả th.bị Bluetooth gần đó (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Hiển thị với tất cả các thiết bị Bluetooth gần đó"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Không hiển thị với các thiết bị Bluetooth khác"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Chỉ hiển thị với các thiết bị được ghép nối"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Hết thời gian hiển thị"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Khoá quay số bằng giọng nói"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Ngăn việc sử dụng trình quay số bluetooth khi màn hình bị khóa."</string>
@@ -129,8 +129,6 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ngắt kết nối?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Tác vụ này sẽ kết thúc kết nối của bạn với:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Phát sóng"</string>
-    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"Bật"</string>
-    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"Tắt"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vô hiệu hồ sơ?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Điều này sẽ vô hiệu:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Khỏi:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Đã kết nối"</string>
@@ -157,11 +155,13 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật phát sóng Bluetooth để giao tiếp với các thiết bị lân cận khác. Bạn có thể thay đổi thiết lập này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật Bluetooth và phát sóng Bluetooth để giao tiếp với các thiết bị lân cận khác. Bạn có thể thay đổi thiết lập này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Khi tính năng này được bật, điện thoại của bạn có thể giao tiếp với các thiết bị lân cận khác.\n\nPhát sóng sử dụng tín hiệu Bluetooth điện năng thấp."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Một ứng dụng muốn bật Bluetooth và đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Một ứng dụng muốn bật Bluetooth và đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Đang bật Bluetooth…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Đang tắt Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Tự động kết nối"</string>
@@ -478,7 +478,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Tùy chọn…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Nâng cao"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth nâng cao"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Để xem các thiết bị, hãy bật Bluetooth."</string>
+    <!-- no translation found for bluetooth_empty_list_bluetooth_off (6351930724051893423) -->
+    <skip />
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Kết nối với…"</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Âm thanh của phương tiện"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Âm thanh điện thoại"</string>
@@ -696,10 +697,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Rung khi im lặng"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Âm thanh thông báo mặc định"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Đèn thông báo dạng xung"</string>
-    <!-- no translation found for heads_up_enabled_title (2038264257807516472) -->
-    <skip />
-    <!-- no translation found for heads_up_enabled_summary (2746343598416626372) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"Thông báo lưu ý"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"Thông báo quan trọng sẽ bật lên"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Nhạc chuông"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Thông báo"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Sử dụng âm lượng cuộc gọi đến cho thông báo"</string>
@@ -1019,7 +1018,6 @@
     <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Sử dụng mạng GPS, Wi-Fi và di động để xác định vị trí"</string>
     <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Sử dụng mạng Wi-Fi và di động để xác định vị trí"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Sử dụng GPS để xác định vị trí của bạn"</string>
-    <string name="location_loading_injected_setting" msgid="4238574500081976654">"Đang truy xuất…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Vị trí Wi‑Fi và mạng di động"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Cho phép ứng dụng dùng DV vị trí của Google để ước đoán vị trí nhanh hơn. Dữ liệu vị trí ẩn danh sẽ được thu thập và gửi tới Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Vị trí được xác định bằng Wi‑Fi"</string>
@@ -1100,8 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Máy tính bảng và dữ liệu cá nhân của bạn dễ bị tấn công hơn bởi các ứng dụng từ nguồn không xác đinh. Bạn đồng ý rằng bạn tự chịu trách nhiệm cho mọi hỏng hóc đối với máy tính bảng của bạn hoặc mất mát dữ liệu có thể phát sinh do sử dụng những ứng dụng này."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Điện thoại và dữ liệu cá nhân của bạn dễ bị tấn công hơn bởi các ứng dụng từ nguồn không xác đinh. Bạn đồng ý rằng bạn tự chịu trách nhiệm cho mọi hỏng hóc đối với điện thoại của bạn hoặc mất mát dữ liệu có thể phát sinh do sử dụng những ứng dụng này."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Xác minh các ứng dụng"</string>
-    <!-- no translation found for verify_applications_summary (2791141629887492480) -->
-    <skip />
+    <string name="verify_applications_summary" msgid="2791141629887492480">"Thường xuyên kiểm tra hoạt động của thiết bị để phát hiện các sự cố bảo mật và ngăn chặn hoặc cảnh báo về nguy hại tiềm ẩn."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Cài đặt nâng cao"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Bật thêm tùy chọn cài đặt"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Thông tin về ứng dụng"</string>
@@ -2093,13 +2090,13 @@
     <string name="drawer_open" msgid="132008699936863299">"Mở ngăn điều hướng"</string>
     <string name="drawer_close" msgid="3329237203619660131">"Đóng ngăn điều hướng"</string>
     <string name="dashboard_title" msgid="821911564947991553">"Tổng quan"</string>
+    <string name="query_hint_text" msgid="7715244743022826977">"Bạn đang tìm kiếm gì?"</string>
+    <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi kết nối mạng"</string>
     <string name="lock_screen_notifications" msgid="736030096980572317">"Hiện thông báo"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Nội dung thông báo nhạy cảm sẽ được ẩn khi bị khóa"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Tất cả nội dung thông báo sẽ hiển thị khi bị khóa"</string>
     <string name="title_zen_mode" msgid="2198277358422210424">"Chế độ Zen"</string>
     <string name="dialog_title_zen_mode" msgid="599852552499926409">"Chế độ Zen"</string>
-    <!-- no translation found for configure_zen_mode_description (7058922692542913706) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (3709821127278518021) -->
-    <skip />
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Định cấu hình chế độ Zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"Gián đoạn hạn chế"</string>
 </resources>

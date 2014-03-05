@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"未知错误"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"电量低"</string>
     <string name="bluetooth" msgid="5549625000628014477">"蓝牙"</string>
-    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"目前接受配对请求（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"目前接受配对请求"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"目前不接受配对请求"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"目前不接受配对请求"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"附近所有蓝牙设备均可检测到此设备（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"附近所有蓝牙设备均可检测到此设备"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"其他蓝牙设备检测不到此设备"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"已配对的设备可检测到此设备"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"检测超时设置"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"锁定语音拨号"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"屏幕锁定时停止使用蓝牙拨号器"</string>
@@ -129,8 +129,6 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"断开连接？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"此操作将会断开您与以下设备的连接：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"广播"</string>
-    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"开启"</string>
-    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"关闭"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"要停用配置文件吗？"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"此操作将停用：&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"已连接"</string>
@@ -157,11 +155,13 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"某个应用想让其他蓝牙设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的手机。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"某个应用想让其他蓝牙设备检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"某个应用想让其他蓝牙设备检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"某个应用想要打开蓝牙，以便其他设备可检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"某个应用想要打开蓝牙，以便其他设备可检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”请求开启蓝牙广播功能，以便与附近的其他设备通信。稍后您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”请求开启蓝牙和蓝牙广播功能，以便与附近的其他设备通信。稍后您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"开启此功能后，您的手机就可以与附近的其他设备通信。\n\n广播功能会使用低电耗的蓝牙信号。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"某个应用想要打开蓝牙，以便其他设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的平板电脑。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"某个应用想要打开蓝牙，以便其他设备在 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒内可检测到您的手机。"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"某个应用想要打开蓝牙，以便其他设备可检测到您的平板电脑。之后，您可以在“蓝牙”设置中更改此设置。"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"某个应用想要打开蓝牙，以便其他设备可检测到您的手机。之后，您可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"正在打开蓝牙..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"正在关闭蓝牙…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"自动连接"</string>
@@ -478,7 +478,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"选项…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"高级"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"高级蓝牙设置"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"要搜索可用设备，请打开蓝牙功能。"</string>
+    <!-- no translation found for bluetooth_empty_list_bluetooth_off (6351930724051893423) -->
+    <skip />
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"连接到..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"媒体音频"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"手机音频"</string>
@@ -696,10 +697,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"静音时振动"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"默认通知提示音"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"收到通知时指示灯闪烁"</string>
-    <!-- no translation found for heads_up_enabled_title (2038264257807516472) -->
-    <skip />
-    <!-- no translation found for heads_up_enabled_summary (2746343598416626372) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"启用通知提醒"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"重要通知会自动弹出"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"铃声"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"将来电音量用作通知音量"</string>
@@ -1019,7 +1018,6 @@
     <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"使用 GPS、WLAN 和移动网络确定位置"</string>
     <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"使用 WLAN 和移动网络确定位置"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"使用 GPS 确定您的位置"</string>
-    <string name="location_loading_injected_setting" msgid="4238574500081976654">"正在检索…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"WLAN 和移动网络位置信息"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"允许应用使用 Google 位置服务更快地大致了解您所在的位置。系统将收集匿名位置数据并将其发送给 Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"通过 WLAN 确定位置"</string>
@@ -1100,8 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"您的平板电脑和个人数据更容易受到从未知来源获取的应用的攻击。对于因使用这些应用而造成的平板电脑损坏或数据丢失，您同意自行承担全部责任。"</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"您的手机和个人数据更容易受到从未知来源获取的应用的攻击。对于因使用这些应用而造成的手机损坏或数据丢失，您同意自行承担全部责任。"</string>
     <string name="verify_applications" msgid="2959359554974828518">"验证应用"</string>
-    <!-- no translation found for verify_applications_summary (2791141629887492480) -->
-    <skip />
+    <string name="verify_applications_summary" msgid="2791141629887492480">"定期检查设备活动是否存在安全问题，一旦发现存在潜在危害，则进行阻止或发出相关警告。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"高级设置"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"启用更多设置选项"</string>
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
@@ -2093,13 +2090,13 @@
     <string name="drawer_open" msgid="132008699936863299">"打开抽屉式导航栏"</string>
     <string name="drawer_close" msgid="3329237203619660131">"关闭抽屉式导航栏"</string>
     <string name="dashboard_title" msgid="821911564947991553">"概览"</string>
+    <string name="query_hint_text" msgid="7715244743022826977">"您要搜索什么？"</string>
+    <string name="keywords_wifi" msgid="8947676711698613374">"WLAN网络连接"</string>
     <string name="lock_screen_notifications" msgid="736030096980572317">"显示通知"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"屏幕锁定时，系统会隐藏敏感的通知内容"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"屏幕锁定时，系统会显示所有通知内容"</string>
     <string name="title_zen_mode" msgid="2198277358422210424">"禅境模式"</string>
     <string name="dialog_title_zen_mode" msgid="599852552499926409">"禅境模式"</string>
-    <!-- no translation found for configure_zen_mode_description (7058922692542913706) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (3709821127278518021) -->
-    <skip />
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"配置禅境模式"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"有限中断"</string>
 </resources>

@@ -112,10 +112,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"不明なエラー"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"低温"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"ペア設定リクエストの承認（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"ペア設定リクエストの承認"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"ペア設定リクエストの承認なし"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"ペア設定リクエストの承認なし"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"周辺のすべてのBluetoothデバイスに表示（<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>）"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"周辺のすべてのBluetoothデバイスに表示"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"他のBluetoothデバイスには非表示"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"ペア設定したデバイスにのみ表示"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"表示のタイムアウト"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ボイスダイヤルをロック"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"画面がロックされているときはBluetoothボイスダイヤルを使用しない"</string>
@@ -131,8 +131,6 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"切断しますか？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"この操作を行うと、次のデバイスとの接続が切断されます:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ブロードキャスト"</string>
-    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"ON"</string>
-    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"OFF"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"プロフィールを無効にしますか？"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"次のプロフィールが無効になります:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;対象デバイス:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"接続"</string>
@@ -159,11 +157,13 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"アプリが、<xliff:g id="TIMEOUT">%1$d</xliff:g>秒間他のBluetoothデバイスにこの携帯端末を表示しようとしています。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"アプリが他のBluetoothデバイスにこのタブレットを表示しようとしています。これは後からBluetoothの設定で変更できます。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"アプリが他のBluetoothデバイスにこの携帯端末を表示しようとしています。これは後からBluetoothの設定で変更できます。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"アプリがBluetoothをONにして他のデバイスにこのタブレットを表示しようとしています。これは後からBluetoothの設定で変更できます。"</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"アプリがBluetoothをONにして他のデバイスにこの携帯端末を表示しようとしています。これは後からBluetoothの設定で変更できます。"</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g>がBluetoothブロードキャストをONにして付近の他のデバイスと通信しようとしています。これは後からBluetoothの設定で変更できます。"</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g>がBluetoothとBluetoothブロードキャストをONにして付近の他のデバイスと通信しようとしています。これは後からBluetoothの設定で変更できます。"</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"この機能をONにすると、端末が付近の他のデバイスと通信できるようになります。\n\nブロードキャストでは省電力のBluetooth信号を使用します。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"アプリが、<xliff:g id="TIMEOUT">%1$d</xliff:g>秒間BluetoothをONにして他のデバイスにこのタブレットを表示しようとしています。"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"アプリが、<xliff:g id="TIMEOUT">%1$d</xliff:g>秒間BluetoothをONにして他のデバイスにこの携帯端末を表示しようとしています。"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"アプリがBluetoothをONにして他のデバイスにこのタブレットを表示しようとしています。これは後からBluetoothの設定で変更できます。"</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"アプリがBluetoothをONにして他のデバイスにこの携帯端末を表示しようとしています。これは後からBluetoothの設定で変更できます。"</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"BluetoothをONにしています..."</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"BluetoothをOFFにしています..."</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"自動接続"</string>
@@ -480,7 +480,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"オプション..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"詳細設定"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth詳細設定"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"デバイスを表示するにはBluetoothをON"</string>
+    <!-- no translation found for bluetooth_empty_list_bluetooth_off (6351930724051893423) -->
+    <skip />
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"接続先..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"メディアの音声"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"電話の音声"</string>
@@ -698,10 +699,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"マナーモード時のバイブレーション"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"デフォルトの通知音"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"光を点滅させて通知"</string>
-    <!-- no translation found for heads_up_enabled_title (2038264257807516472) -->
-    <skip />
-    <!-- no translation found for heads_up_enabled_summary (2746343598416626372) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"重要な通知"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"重要な通知がポップアップ表示されます"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"着信音"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音にも着信音量を適用"</string>
@@ -1021,7 +1020,6 @@
     <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"GPS、Wi‑Fi、モバイルネットワークで現在地を特定する"</string>
     <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Wi‑Fiとモバイルネットワークで現在地を特定する"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"GPSで現在地を特定する"</string>
-    <string name="location_loading_injected_setting" msgid="4238574500081976654">"取得しています…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fiで検出される現在地"</string>
@@ -1102,8 +1100,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"提供元不明のアプリからタブレットや個人データが攻撃を受ける可能性が高くなります。このようなアプリの使用により生じる可能性があるタブレットへの損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"提供元不明のアプリから携帯端末や個人データが攻撃を受ける可能性が高くなります。このようなアプリの使用により生じる可能性がある携帯端末への損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
     <string name="verify_applications" msgid="2959359554974828518">"アプリを確認する"</string>
-    <!-- no translation found for verify_applications_summary (2791141629887492480) -->
-    <skip />
+    <string name="verify_applications_summary" msgid="2791141629887492480">"セキュリティに関する問題がないか端末アクティビティを定期的に確認し、潜在的な損害を回避または警告します。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"詳細設定"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"詳細設定オプションを有効にする"</string>
     <string name="application_info_label" msgid="5736524913065714880">"アプリ情報"</string>
@@ -2099,13 +2096,13 @@
     <string name="drawer_open" msgid="132008699936863299">"ナビゲーションドロワーを開く"</string>
     <string name="drawer_close" msgid="3329237203619660131">"ナビゲーションドロワーを閉じる"</string>
     <string name="dashboard_title" msgid="821911564947991553">"概要"</string>
+    <string name="query_hint_text" msgid="7715244743022826977">"何をお探しですか？"</string>
+    <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi ネットワーク 接続"</string>
     <string name="lock_screen_notifications" msgid="736030096980572317">"通知を表示"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"ロック時にプライベートな通知の内容を非表示にします"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"ロック時にすべての通知の内容を表示します"</string>
     <string name="title_zen_mode" msgid="2198277358422210424">"Zenモード"</string>
     <string name="dialog_title_zen_mode" msgid="599852552499926409">"Zenモード"</string>
-    <!-- no translation found for configure_zen_mode_description (7058922692542913706) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (3709821127278518021) -->
-    <skip />
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Zenモードを設定"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"制限付き中断"</string>
 </resources>
