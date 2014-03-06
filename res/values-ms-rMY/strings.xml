@@ -110,10 +110,10 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Ralat tidak diketahui"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"Sejuk"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
-    <string name="bluetooth_is_discoverable" msgid="3437013735920768864">"Menerima permintaan berpasangan (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="6790327581899350931">"Menerima permintaan berpasangan"</string>
-    <string name="bluetooth_not_visible_to_other_devices" msgid="3712158328437385188">"Tidak menerima permintaan berpasangan"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="5700531401823649038">"Tidak menerima permintaan berpasangan"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Kelihatan kpd semua peranti Bluetooth berdekatan (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Kelihatan kpd semua peranti Bluetooth berdekatan"</string>
+    <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Tidak kelihatan kepada peranti Bluetooth lain"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Hanya kelihatan kepada peranti yg menjadi pasangan"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Tamat masa kebolehlihatan"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Kunci dailan suara"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Halang penggunaan pendail bluetooth apabila skrin dikunci"</string>
@@ -129,8 +129,6 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Putuskan sambungan?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Tindakan ini akan menamatkan sambungan anda dengan:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Penyiaran"</string>
-    <string name="bluetooth_broadcasting_state_on" msgid="7018225104637987233">"Dihidupkan"</string>
-    <string name="bluetooth_broadcasting_state_off" msgid="2448855139691027345">"Dimatikan"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Lumpuhkan profil?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Hal ini akan melumpuhkan:&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Dari:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_connected" msgid="6038755206916626419">"Bersambung"</string>
@@ -157,11 +155,13 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Satu apl ingin menjadikan telefon anda kelihatan kepada peranti Bluetooth lain untuk <xliff:g id="TIMEOUT">%1$d</xliff:g> saat."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Satu apl mahu menjadikan tablet anda kelihatan kepada peranti Bluetooth lain. Anda boleh menukar tetapan ini dalam tetapan Bluetooth kemudian."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"Satu apl mahu menjadikan telefon anda kelihatan kepada peranti Bluetooth lain. Anda boleh menukar tetapan ini dalam tetapan Bluetooth kemudian."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Satu apl mahu menghidupkan Bluetooth dan menjadikan tablet anda kelihatan kepada peranti lain. Anda boleh menukar tetapan ini dalam tetapan Bluetooth kemudian."</string>
-    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Satu apl mahu menghidupkan Bluetooth dan menjadikan telefon anda kelihatan kepada peranti lain. Anda boleh menukar tetapan ini dalam tetapan Bluetooth kemudian."</string>
     <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> mahu menghidupkan penyiaran Bluetooth untuk berkomunikasi dengan peranti lain yang berhampiran. Anda boleh menukar ini kemudian dalam tetapan Bluetooth."</string>
     <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> mahu menghidupkan Bluetooth dan penyiaran Bluetooth untuk berkomunikasi dengan peranti lain yang berhampiran. Anda boleh menukar ini kemudian dalam tetapan Bluetooth."</string>
     <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"Apabila ciri ini dihidupkan, telefon anda boleh berkomunikasi dengan peranti lain yang berhampiran.\n\nPenyiaran menggunakan isyarat Bluetooth kuasa rendah."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"Satu apl ingin menghidupkan Bluetooth dan menjadikan tablet anda kelihatan kepada peranti lain untuk <xliff:g id="TIMEOUT">%1$d</xliff:g> saat."</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"Satu apl ingin menghidupkan Bluetooth dan menjadikan telefon anda kelihatan kepada peranti lain untuk <xliff:g id="TIMEOUT">%1$d</xliff:g> saat."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"Satu apl mahu menghidupkan Bluetooth dan menjadikan tablet anda kelihatan kepada peranti lain. Anda boleh menukar tetapan ini dalam tetapan Bluetooth kemudian."</string>
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default" msgid="6671615712909139801">"Satu apl mahu menghidupkan Bluetooth dan menjadikan telefon anda kelihatan kepada peranti lain. Anda boleh menukar tetapan ini dalam tetapan Bluetooth kemudian."</string>
     <string name="bluetooth_turning_on" msgid="4850574877288036646">"Menghidupkan Bluetooth…"</string>
     <string name="bluetooth_turning_off" msgid="2337747302892025192">"Mematikan Bluetooth…"</string>
     <string name="bluetooth_auto_connect" msgid="40711424456733571">"Autosambung"</string>
@@ -478,7 +478,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Pilihan..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Lanjutan"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth Lanjutan"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Untuk melihat peranti, hidupkan Bluetooth."</string>
+    <!-- no translation found for bluetooth_empty_list_bluetooth_off (6351930724051893423) -->
+    <skip />
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Sambung ke..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Audio media"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Audio telefon"</string>
@@ -696,10 +697,8 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Getar apabila senyap"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Bunyi pemberitahuan lalai"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Lampu pemberitahuan denyutan"</string>
-    <!-- no translation found for heads_up_enabled_title (2038264257807516472) -->
-    <skip />
-    <!-- no translation found for heads_up_enabled_summary (2746343598416626372) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="2038264257807516472">"Pemberitahuan Songsang"</string>
+    <string name="heads_up_enabled_summary" msgid="2746343598416626372">"Pemberitahuan penting akan pop timbul"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Nada dering"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Pemberitahuan"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Gunakan kelantangan panggilan masuk untuk pemberitahuan"</string>
@@ -1019,7 +1018,6 @@
     <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Gunakan GPS, Wi-Fi dan rangkaian mudah alih untuk menentukan lokasi"</string>
     <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Gunakan Wi-Fi dan rangkaian mudah alih untuk menentukan lokasi"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Gunakan GPS untuk menentukan lokasi anda"</string>
-    <string name="location_loading_injected_setting" msgid="4238574500081976654">"Mengambil…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Lokasi Wi-Fi &amp; rangkaian mudah alih"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Biar apl guna perkhidmatan lokasi Google utk anggar lokasi lebih cepat. Data lokasi tanpa nama dikumpul dan dihantar kpd Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Lokasi ditentukan oleh Wi-Fi"</string>
@@ -1100,8 +1098,7 @@
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Tablet dan data peribadi anda lebih terdedah kepada serangan oleh aplikasi dari sumber yang tidak diketahui. Anda bersetuju bahawa anda bertanggungjawab sepenuhnya bagi apa-apa kerosakan kepada tablet atau kehilangan data yang mungkin berlaku akibat penggunaan aplikasi ini."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Telefon dan data peribadi anda lebih terdedah kepada serangan oleh aplikasi dari sumber yang tidak diketahui. Anda bersetuju bahawa anda bertanggungjawab sepenuhnya untuk apa-apa kerosakan kepada telefon anda atau kehilangan data yang mungkin berlaku akibat menggunakan aplikasi ini."</string>
     <string name="verify_applications" msgid="2959359554974828518">"Sahkan apl"</string>
-    <!-- no translation found for verify_applications_summary (2791141629887492480) -->
-    <skip />
+    <string name="verify_applications_summary" msgid="2791141629887492480">"Semak aktiviti peranti secara tetap untuk masalah keselamatan dan cegah atau beri amaran mengenai kemungkinan bahaya."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Tetapan terperinci"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Dayakan lebih banyak pilihan tetapan"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Maklumat aplikasi"</string>
@@ -1527,8 +1524,7 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"Paket mudah alih dihantar"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"Paket mudah alih diterima"</string>
-    <!-- no translation found for usage_type_radio_active (1732647857619420121) -->
-    <skip />
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"Radio mudah alih aktif"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"Paket Wi-Fi dihantar"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"Paket Wi-Fi diterima"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
@@ -2094,15 +2090,15 @@
     <string name="drawer_open" msgid="132008699936863299">"Buka laci navigasi"</string>
     <string name="drawer_close" msgid="3329237203619660131">"Tutup laci navigasi"</string>
     <string name="dashboard_title" msgid="821911564947991553">"Gambaran keseluruhan"</string>
+    <!-- no translation found for query_hint_text (7715244743022826977) -->
+    <skip />
+    <!-- no translation found for keywords_wifi (8947676711698613374) -->
+    <skip />
     <string name="lock_screen_notifications" msgid="736030096980572317">"Pemberitahuan"</string>
     <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"Kandungan sensitif disembunyikan apabila dikunci"</string>
     <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"Semua kandungan akan ditunjukkan apabila dikunci"</string>
-    <!-- no translation found for title_zen_mode (2198277358422210424) -->
-    <skip />
-    <!-- no translation found for dialog_title_zen_mode (599852552499926409) -->
-    <skip />
-    <!-- no translation found for configure_zen_mode_description (7058922692542913706) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (3709821127278518021) -->
-    <skip />
+    <string name="title_zen_mode" msgid="2198277358422210424">"Mod zen"</string>
+    <string name="dialog_title_zen_mode" msgid="599852552499926409">"Mod zen"</string>
+    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Konfigurasikan mod Zen"</string>
+    <string name="zen_mode_settings_title" msgid="3709821127278518021">"Gangguan Terhad"</string>
 </resources>
