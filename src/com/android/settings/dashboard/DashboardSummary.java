@@ -22,6 +22,9 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -65,6 +68,32 @@ public class DashboardSummary extends Fragment {
             } else if (cursor != null) {
                 cursor.close();
             }
+        }
+    }
+
+    /**
+     * A basic InputFilter for filtering query input (mainly because we are issuing SQL queries
+     * that need to be valid ones. So just accept Letters, Digits and Spaces.
+     */
+    private class QueryInputFilter implements InputFilter {
+
+        public QueryInputFilter() {
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest,
+                                   int dstart, int dend) {
+            SpannableStringBuilder sb = null;
+            for (int i = start; i < end; i++) {
+                char c = source.charAt(i);
+                if (!Character.isLetterOrDigit(c) && !Character.isSpaceChar(c)) {
+                    if (sb == null) {
+                        sb = new SpannableStringBuilder(source, start, end);
+                    }
+                    sb.delete(i, i + 1);
+                }
+            }
+            return sb;
         }
     }
 
@@ -139,6 +168,9 @@ public class DashboardSummary extends Fragment {
                 }
             }
         });
+
+        final InputFilter queryFilter = new QueryInputFilter();
+        mEditText.setFilters(new InputFilter[] { queryFilter });
 
         mListView = (ListView) view.findViewById(R.id.list_results);
         mListView.setAdapter(mAdapter);
