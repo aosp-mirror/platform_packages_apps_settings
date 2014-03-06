@@ -409,20 +409,26 @@ public class WifiSettings extends RestrictedSettingsFragment
             final Activity activity = getActivity();
 
             mSwitch = new Switch(activity);
+            boolean addSwitch = false;
 
             if (activity instanceof SettingsActivity) {
                 SettingsActivity sa = (SettingsActivity) activity;
-                if (!sa.onIsHidingHeaders()) {
-                    final int padding = activity.getResources().getDimensionPixelSize(
-                            R.dimen.action_bar_switch_padding);
-                    mSwitch.setPaddingRelative(0, 0, padding, 0);
-                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                            ActionBar.DISPLAY_SHOW_CUSTOM);
-                    activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            Gravity.CENTER_VERTICAL | Gravity.END));
-                }
+                addSwitch = !sa.onIsHidingHeaders();
+            } else if (activity instanceof WifiPickerActivity) {
+                PreferenceActivity pa = (PreferenceActivity) activity;
+                addSwitch = pa.onIsHidingHeaders();
+            }
+
+            if (addSwitch) {
+                final int padding = activity.getResources().getDimensionPixelSize(
+                        R.dimen.action_bar_switch_padding);
+                mSwitch.setPaddingRelative(0, 0, padding, 0);
+                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                        ActionBar.DISPLAY_SHOW_CUSTOM);
+                activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        ActionBar.LayoutParams.WRAP_CONTENT,
+                        Gravity.CENTER_VERTICAL | Gravity.END));
             }
 
             mWifiEnabler = new WifiEnabler(activity, mSwitch);
