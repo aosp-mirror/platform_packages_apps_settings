@@ -66,6 +66,12 @@ public class Index {
             IndexColumns.ICON
     };
 
+    private static final String[] MATCH_COLUMNS = {
+            IndexColumns.DATA_TITLE,
+            IndexColumns.DATA_SUMMARY,
+            IndexColumns.DATA_KEYWORDS
+    };
+
     private static final String EMPTY = "";
     private static final String NON_BREAKING_HYPHEN = "\u2011";
     private static final String HYPHEN = "-";
@@ -96,22 +102,20 @@ public class Index {
     }
 
     public Cursor search(String query) {
-        return getReadableDatabase().rawQuery(buildSQL(query), null);
+        final String sql = buildSQL(query);
+        Log.d(LOG_TAG, "Query: " + sql);
+        return getReadableDatabase().rawQuery(sql, null);
     }
 
     private String buildSQL(String query) {
         StringBuilder sb = new StringBuilder();
-        sb.append(buildSQLForColumn(query, IndexColumns.DATA_TITLE));
-        sb.append(" UNION ");
-        sb.append(buildSQLForColumn(query, IndexColumns.DATA_SUMMARY));
-        sb.append(" UNION ");
-        sb.append(buildSQLForColumn(query, IndexColumns.DATA_KEYWORDS));
+        sb.append(buildSQLForColumn(query, MATCH_COLUMNS));
         sb.append(" ORDER BY ");
         sb.append(IndexColumns.DATA_RANK);
         return sb.toString();
     }
 
-    private String buildSQLForColumn(String query, String columnName) {
+    private String buildSQLForColumn(String query, String[] columnNames) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT ");
         for (int n = 0; n < SELECT_COLUMNS.length; n++) {
@@ -123,19 +127,34 @@ public class Index {
         sb.append(" FROM ");
         sb.append(Tables.TABLE_PREFS_INDEX);
         sb.append(" WHERE ");
-        sb.append(buildWhereStringForColumn(query, columnName));
+        sb.append(buildWhereStringForColumns(query, columnNames));
 
         return sb.toString();
     }
 
-    private String buildWhereStringForColumn(String query, String columnName) {
-        final StringBuilder sb = new StringBuilder(columnName);
+    private String buildWhereStringForColumns(String query, String[] columnNames) {
+        final StringBuilder sb = new StringBuilder(Tables.TABLE_PREFS_INDEX);
         sb.append(" MATCH ");
-        DatabaseUtils.appendEscapedSQLString(sb, query + "*");
+        DatabaseUtils.appendEscapedSQLString(sb, buildMatchStringForColumns(query, columnNames));
         sb.append(" AND ");
         sb.append(IndexColumns.LOCALE);
         sb.append(" = ");
         DatabaseUtils.appendEscapedSQLString(sb, Locale.getDefault().toString());
+        return sb.toString();
+    }
+
+    private String buildMatchStringForColumns(String query, String[] columnNames) {
+        final String value = query + "*";
+        StringBuilder sb = new StringBuilder();
+        final int count = columnNames.length;
+        for (int n = 0; n < count; n++) {
+            sb.append(columnNames[n]);
+            sb.append(":");
+            sb.append(value);
+            if (n < count - 1) {
+                sb.append(" OR ");
+            }
+        }
         return sb.toString();
     }
 
@@ -271,9 +290,9 @@ public class Index {
                 // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
                 // hyphens.
                 inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                        fragmentTitle, iconResId, rank, keywords, "\u2011", "");
+                        fragmentTitle, iconResId, rank, keywords, NON_BREAKING_HYPHEN, EMPTY);
                 inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                        fragmentTitle, iconResId, rank, keywords, "\u2011", "-");
+                        fragmentTitle, iconResId, rank, keywords, NON_BREAKING_HYPHEN, HYPHEN);
 
                 while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                         && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
