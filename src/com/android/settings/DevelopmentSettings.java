@@ -94,7 +94,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
     private static final String SELECT_RUNTIME_KEY = "select_runtime";
-    private static final String SELECT_RUNTIME_PROPERTY = "persist.sys.dalvik.vm.lib";
+    private static final String SELECT_RUNTIME_PROPERTY = "persist.sys.dalvik.vm.lib.1";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
