@@ -703,6 +703,15 @@ public class SettingsActivity extends Activity
     }
 
     @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawer)) {
+            mDrawerLayout.closeDrawer(mDrawer);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     public void onBackStackChanged() {
         setTitleFromBackStack();
     }
