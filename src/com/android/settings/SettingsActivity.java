@@ -613,9 +613,9 @@ public class SettingsActivity extends Activity
                 // the headers.
                 final int initialTitleResId = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE, 0);
                 mInitialTitle = (initialTitleResId > 0) ? getText(initialTitleResId) : getTitle();
-
-                switchToHeader(initialFragment, initialArguments, true, mInitialTitle);
-                setSelectedHeaderByFragmentName(initialFragment);
+                setTitle(mInitialTitle);
+                switchToHeaderInner(initialFragment, initialArguments, true, false, mInitialTitle);
+                setSelectedHeaderByTopLevelId(mTopLevelHeaderId);
                 mInitialHeader = mCurrentHeader;
             } else {
                 // If there are headers, then at this point we need to show
@@ -800,6 +800,7 @@ public class SettingsActivity extends Activity
     }
 
     private CharSequence getHeaderTitle(Header header) {
+        if (header == null || header.fragment == null) return getTitle();
         final CharSequence title;
         if (header.fragment.equals(DashboardSummary.class.getName())) {
             title = getResources().getString(R.string.settings_label);
@@ -809,12 +810,11 @@ public class SettingsActivity extends Activity
         return title;
     }
 
-
-    private void setSelectedHeaderByFragmentName(String fragmentName) {
+    private void setSelectedHeaderByTopLevelId(int topLevelId) {
         final int count = mHeaders.size();
         for (int n = 0; n < count; n++) {
             Header h = mHeaders.get(n);
-            if (h.fragment != null && h.fragment.equals(fragmentName)) {
+            if (h.id == topLevelId) {
                 setSelectedHeader(h);
                 return;
             }
@@ -855,7 +855,16 @@ public class SettingsActivity extends Activity
         // For switching to another Header it should be a different one
         if (mCurrentHeader == null || header.id != mCurrentHeader.id) {
             if (header.fragment != null) {
-                boolean addToBackStack = !initial && header.id != mInitialHeader.id;
+                boolean addToBackStack;
+                if (initial) {
+                    addToBackStack = false;
+                } else {
+                    if (header.id != mInitialHeader.id) {
+                        addToBackStack = true;
+                    } else {
+                        addToBackStack = (mTopLevelHeaderId > 0);
+                    }
+                }
                 switchToHeaderInner(header.fragment, header.fragmentArguments, validate,
                         addToBackStack, getHeaderTitle(header));
                 setSelectedHeader(header);
