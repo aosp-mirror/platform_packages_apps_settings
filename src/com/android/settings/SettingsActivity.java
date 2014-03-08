@@ -615,7 +615,7 @@ public class SettingsActivity extends Activity
                 mInitialTitle = (initialTitleResId > 0) ? getText(initialTitleResId) : getTitle();
                 setTitle(mInitialTitle);
                 switchToHeaderInner(initialFragment, initialArguments, true, false, mInitialTitle);
-                setSelectedHeaderByTopLevelId(mTopLevelHeaderId);
+                setSelectedHeaderById(mTopLevelHeaderId);
                 mInitialHeader = mCurrentHeader;
             } else {
                 // If there are headers, then at this point we need to show
@@ -720,6 +720,7 @@ public class SettingsActivity extends Activity
         final int count = getFragmentManager().getBackStackEntryCount();
         if (count == 0) {
             setTitle(mInitialTitle);
+            setSelectedHeaderById(mInitialHeader.id);
             return;
         }
         FragmentManager.BackStackEntry bse = getFragmentManager().getBackStackEntryAt(count - 1);
@@ -819,17 +820,20 @@ public class SettingsActivity extends Activity
         return title;
     }
 
-    private void setSelectedHeaderByTopLevelId(int topLevelId) {
+    private void setSelectedHeaderById(long headerId) {
         final int count = mHeaders.size();
         for (int n = 0; n < count; n++) {
             Header h = mHeaders.get(n);
-            if (h.id == topLevelId) {
+            if (h.id == headerId) {
                 setSelectedHeader(h);
                 return;
             }
         }
     }
 
+    /**
+     * As the Headers can be rebuilt, their references can change, so use this method with caution!
+     */
     private void setSelectedHeader(Header header) {
         if (header == null) {
             mCurrentHeader = null;
@@ -846,6 +850,18 @@ public class SettingsActivity extends Activity
             mDrawer.setItemChecked(index, true);
         } else {
             mDrawer.clearChoices();
+        }
+    }
+
+    private void highlightHeader(int id) {
+        if (id != 0) {
+            Integer index = mHeaderIndexMap.get(id);
+            if (index != null) {
+                mDrawer.setItemChecked(index, true);
+                if (mDrawer.getVisibility() == View.VISIBLE) {
+                    mDrawer.smoothScrollToPosition(index);
+                }
+            }
         }
     }
 
@@ -948,18 +964,6 @@ public class SettingsActivity extends Activity
      */
     public boolean onIsHidingHeaders() {
         return getIntent().getBooleanExtra(EXTRA_NO_HEADERS, false);
-    }
-
-    private void highlightHeader(int id) {
-        if (id != 0) {
-            Integer index = mHeaderIndexMap.get(id);
-            if (index != null && mDrawer != null) {
-                mDrawer.setItemChecked(index, true);
-                if (mDrawer.getVisibility() == View.VISIBLE) {
-                    mDrawer.smoothScrollToPosition(index);
-                }
-            }
-        }
     }
 
     @Override
