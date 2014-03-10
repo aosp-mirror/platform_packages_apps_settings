@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 100;
+    private static final int DATABASE_VERSION = 101;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -39,7 +39,9 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String LOCALE = "locale";
         public static final String DATA_RANK = "data_rank";
         public static final String DATA_TITLE = "data_title";
+        public static final String DATA_TITLE_NORMALIZED = "data_title_normalized";
         public static final String DATA_SUMMARY = "data_summary";
+        public static final String DATA_SUMMARY_NORMALIZED = "data_summary_normalized";
         public static final String DATA_KEYWORDS = "data_keywords";
         public static final String FRAGMENT_NAME = "fragment_name";
         public static final String FRAGMENT_TITLE = "fragment_title";
@@ -60,7 +62,11 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     ", " +
                     IndexColumns.DATA_TITLE +
                     ", " +
+                    IndexColumns.DATA_TITLE_NORMALIZED +
+                    ", " +
                     IndexColumns.DATA_SUMMARY +
+                    ", " +
+                    IndexColumns.DATA_SUMMARY_NORMALIZED +
                     ", " +
                     IndexColumns.DATA_KEYWORDS +
                     ", " +
@@ -113,6 +119,13 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion > 100) {
+            Log.w(TAG, "Detected schema version 100. " +
+                    "Index needs to be rebuilt for schema version 101");
+            // We need to drop the tables and recreate them
+            dropTables(db);
+            bootstrapDB(db);
+        }
     }
 
     private String getBuildVersion(SQLiteDatabase db) {
@@ -144,8 +157,10 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
 
+        Log.i(TAG, "Using schema version: " + db.getVersion());
+
         if (!Build.VERSION.INCREMENTAL.equals(getBuildVersion(db))) {
-            Log.w(TAG, "Index needs to be rebuilt");
+            Log.w(TAG, "Index needs to be rebuilt as build-version is not the same");
             // We need to drop the tables and recreate them
             dropTables(db);
             bootstrapDB(db);

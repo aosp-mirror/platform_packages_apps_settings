@@ -68,7 +68,9 @@ public class Index {
 
     private static final String[] MATCH_COLUMNS = {
             IndexColumns.DATA_TITLE,
+            IndexColumns.DATA_TITLE_NORMALIZED,
             IndexColumns.DATA_SUMMARY,
+            IndexColumns.DATA_SUMMARY_NORMALIZED,
             IndexColumns.DATA_KEYWORDS
     };
 
@@ -280,8 +282,7 @@ public class Index {
 
                 final int outerDepth = parser.getDepth();
                 final AttributeSet attrs = Xml.asAttributeSet(parser);
-                final String fragmentTitle = getData(attrs,
-                        com.android.internal.R.styleable.Preference, com.android.internal.R.styleable.Preference_title);
+                final String fragmentTitle = getDataTitle(attrs);
 
                 String title = getDataTitle(attrs);
                 String summary = getDataSummary(attrs);
@@ -290,9 +291,7 @@ public class Index {
                 // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
                 // hyphens.
                 inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                        fragmentTitle, iconResId, rank, keywords, NON_BREAKING_HYPHEN, EMPTY);
-                inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                        fragmentTitle, iconResId, rank, keywords, NON_BREAKING_HYPHEN, HYPHEN);
+                        fragmentTitle, iconResId, rank, keywords);
 
                 while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                         && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
@@ -306,9 +305,7 @@ public class Index {
 
                     // Insert rows for the child nodes of PreferenceScreen
                     inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                            fragmentTitle, iconResId, rank, keywords, NON_BREAKING_HYPHEN, EMPTY);
-                    inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                            fragmentTitle, iconResId, rank, keywords, NON_BREAKING_HYPHEN, HYPHEN);
+                            fragmentTitle, iconResId, rank, keywords);
                 }
 
             } catch (XmlPullParserException e) {
@@ -322,37 +319,47 @@ public class Index {
 
         private void inserOneRowWithFilteredData(SQLiteDatabase database, String locale,
                 String title, String summary, String fragmentName, String fragmentTitle,
-                int iconResId, int rank, String keywords, String seq, String replacement) {
+                int iconResId, int rank, String keywords) {
 
             String updatedTitle;
-            String updateSummary;
-            if (title != null && title.contains(seq)) {
-                updatedTitle = title.replaceAll(seq, replacement);
-            } else {
-                updatedTitle = title;
+            if (title != null) {
+                updatedTitle = title.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
             }
-            if (summary != null && summary.contains(seq)) {
-                updateSummary = summary.replaceAll(seq, replacement);
-            } else {
-                updateSummary = summary;
+            else {
+                updatedTitle = EMPTY;
             }
+
+            String updatedSummary;
+            if (summary != null) {
+                updatedSummary = summary.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
+            } else {
+                updatedSummary = EMPTY;
+            }
+
+            String normalizedTitle = updatedTitle.replaceAll(HYPHEN, EMPTY);
+            String normalizedSummary = updatedSummary.replaceAll(HYPHEN, EMPTY);
+
             insertOneRow(database, locale,
-                    updatedTitle, updateSummary,
+                    updatedTitle, normalizedTitle, updatedSummary, normalizedSummary,
                     fragmentName, fragmentTitle, iconResId, rank, keywords);
         }
 
-        private void insertOneRow(SQLiteDatabase database, String locale, String title,
-                                  String summary, String fragmentName, String fragmentTitle,
+        private void insertOneRow(SQLiteDatabase database, String locale,
+                                  String updatedTitle, String normalizedTitle,
+                                  String updatedSummary, String normalizedSummary,
+                                  String fragmentName, String fragmentTitle,
                                   int iconResId, int rank, String keywords) {
 
-            if (TextUtils.isEmpty(title)) {
+            if (TextUtils.isEmpty(updatedTitle)) {
                 return;
             }
             ContentValues values = new ContentValues();
             values.put(IndexColumns.LOCALE, locale);
             values.put(IndexColumns.DATA_RANK, rank);
-            values.put(IndexColumns.DATA_TITLE, title);
-            values.put(IndexColumns.DATA_SUMMARY, summary);
+            values.put(IndexColumns.DATA_TITLE, updatedTitle);
+            values.put(IndexColumns.DATA_TITLE_NORMALIZED, normalizedTitle);
+            values.put(IndexColumns.DATA_SUMMARY, updatedSummary);
+            values.put(IndexColumns.DATA_SUMMARY_NORMALIZED, normalizedSummary);
             values.put(IndexColumns.DATA_KEYWORDS, keywords);
             values.put(IndexColumns.FRAGMENT_NAME, fragmentName);
             values.put(IndexColumns.FRAGMENT_TITLE, fragmentTitle);
