@@ -133,7 +133,6 @@ public class SettingsActivity extends Activity
     // Constants for state save/restore
     private static final String SAVE_KEY_HEADERS_TAG = ":settings:headers";
     private static final String SAVE_KEY_CURRENT_HEADER_TAG = ":settings:cur_header";
-    private static final String SAVE_KEY_TITLES_TAG = ":settings:titles";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -587,7 +586,6 @@ public class SettingsActivity extends Activity
             // We are restarting from a previous saved state; used that to
             // initialize, instead of starting fresh.
             mInitialTitle = getTitle();
-            setTitleFromBackStack();
 
             ArrayList<Header> headers =
                     savedInstanceState.getParcelableArrayList(SAVE_KEY_HEADERS_TAG);
@@ -599,6 +597,7 @@ public class SettingsActivity extends Activity
                     setSelectedHeader(mHeaders.get(curHeader));
                     mInitialHeader = mCurrentHeader;
                 }
+                setTitleFromBackStack();
             }
         } else {
             String initialFragment = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
@@ -713,18 +712,23 @@ public class SettingsActivity extends Activity
 
     @Override
     public void onBackStackChanged() {
-        setTitleFromBackStack();
+        if (setTitleFromBackStack() == 0) {
+            setSelectedHeaderById(mInitialHeader.id);
+        }
     }
 
-    private void setTitleFromBackStack() {
+    private int setTitleFromBackStack() {
         final int count = getFragmentManager().getBackStackEntryCount();
+
         if (count == 0) {
             setTitle(mInitialTitle);
-            setSelectedHeaderById(mInitialHeader.id);
-            return;
+            return 0;
         }
+
         FragmentManager.BackStackEntry bse = getFragmentManager().getBackStackEntryAt(count - 1);
         setTitleFromBackStackEntry(bse);
+
+        return count;
     }
 
     private void setTitleFromBackStackEntry(FragmentManager.BackStackEntry bse) {
