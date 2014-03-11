@@ -23,6 +23,9 @@ import android.preference.PreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.indexer.Indexable;
+import com.android.settings.indexer.IndexableData;
+import com.android.settings.indexer.IndexableRef;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.ActionBar;
@@ -90,7 +93,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * and menus.
  */
 public class WifiSettings extends RestrictedSettingsFragment
-        implements DialogInterface.OnClickListener  {
+        implements DialogInterface.OnClickListener, Indexable  {
     private static final String TAG = "WifiSettings";
     private static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
@@ -742,7 +745,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
                 // AccessPoints are automatically sorted with TreeSet.
-                final Collection<AccessPoint> accessPoints = constructAccessPoints();
+                final Collection<AccessPoint> accessPoints =
+                        constructAccessPoints(getActivity(), mWifiManager, mLastInfo, mLastState);
                 getPreferenceScreen().removeAll();
                 if(accessPoints.size() == 0) {
                     addMessagePreference(R.string.wifi_empty_list_wifi_on);
@@ -792,23 +796,26 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /** Returns sorted list of access points */
-    private List<AccessPoint> constructAccessPoints() {
+    private static List<AccessPoint> constructAccessPoints(Context context,
+            WifiManager wifiManager, WifiInfo lastInfo, DetailedState lastState) {
         ArrayList<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
         /** Lookup table to more quickly update AccessPoints by only considering objects with the
          * correct SSID.  Maps SSID -> List of AccessPoints with the given SSID.  */
         Multimap<String, AccessPoint> apMap = new Multimap<String, AccessPoint>();
 
-        final List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
+        final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
         if (configs != null) {
             for (WifiConfiguration config : configs) {
-                AccessPoint accessPoint = new AccessPoint(getActivity(), config);
-                accessPoint.update(mLastInfo, mLastState);
+                AccessPoint accessPoint = new AccessPoint(context, config);
+                if (lastInfo != null && lastState != null) {
+                    accessPoint.update(lastInfo, lastState);
+                }
                 accessPoints.add(accessPoint);
                 apMap.put(accessPoint.ssid, accessPoint);
             }
         }
 
-        final List<ScanResult> results = mWifiManager.getScanResults();
+        final List<ScanResult> results = wifiManager.getScanResults();
         if (results != null) {
             for (ScanResult result : results) {
                 // Ignore hidden and ad-hoc networks.
@@ -823,7 +830,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                         found = true;
                 }
                 if (!found) {
-                    AccessPoint accessPoint = new AccessPoint(getActivity(), result);
+                    AccessPoint accessPoint = new AccessPoint(context, result);
                     accessPoints.add(accessPoint);
                     apMap.put(accessPoint.ssid, accessPoint);
                 }
@@ -836,7 +843,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /** A restricted multimap for use in constructAccessPoints */
-    private class Multimap<K,V> {
+    private static class Multimap<K,V> {
         private final HashMap<K,List<V>> store = new HashMap<K,List<V>>();
         /** retrieve a non-null list of values with key K */
         List<V> getAll(K key) {
@@ -1152,4 +1159,38 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
+    public static final Indexable.IndexDataProvider INDEX_DATA_PROVIDER =
+        new Indexable.IndexDataProvider() {
+            @Override
+            public List<IndexableRef> getRefsToIndex(Context context) {
+                return null;
+            }
+
+            @Override
+            public List<IndexableData> getRawDataToIndex(Context context) {
+                final List<IndexableData> result = new ArrayList<IndexableData>();
+
+                // Add fragment title
+                IndexableData data = new IndexableData();
+                data.title = context.getResources().getString(R.string.wifi_settings);
+                data.fragmentTitle = context.getResources().getString(R.string.wifi_settings);
+                result.add(data);
+
+                // Add available Wi-Fi access points
+                WifiManager wifiManager =
+                        (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                final Collection<AccessPoint> accessPoints =
+                        constructAccessPoints(context, wifiManager, null, null);
+                for (AccessPoint accessPoint : accessPoints) {
+                    // We are indexing only the saved Wi-Fi networks.
+                    if (accessPoint.getConfig() == null) continue;
+                    data = new IndexableData();
+                    data.title = accessPoint.getTitle().toString();
+                    data.fragmentTitle = context.getResources().getString(R.string.wifi_settings);
+                    result.add(data);
+                }
+
+                return result;
+            }
+        };
 }
