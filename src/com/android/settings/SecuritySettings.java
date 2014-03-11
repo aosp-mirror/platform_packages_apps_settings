@@ -84,8 +84,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
-    private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
-    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "toggle_lock_screen_notifications";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private PackageManager mPM;
@@ -108,9 +106,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
     private CheckBoxPreference mEnableKeyguardWidgets;
-
-    private Preference mNotificationAccess;
-    private CheckBoxPreference mLockscreenNotifications;
 
     private boolean mIsPrimary;
 
@@ -330,26 +325,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
-        mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
-        if (mNotificationAccess != null) {
-            final int total = NotificationAccessSettings.getListenersCount(mPM);
-            if (total == 0) {
-                if (deviceAdminCategory != null) {
-                    deviceAdminCategory.removePreference(mNotificationAccess);
-                }
-            } else {
-                final int n = getNumEnabledNotificationListeners();
-                if (n == 0) {
-                    mNotificationAccess.setSummary(getResources().getString(
-                            R.string.manage_notification_access_summary_zero));
-                } else {
-                    mNotificationAccess.setSummary(String.format(getResources().getQuantityString(
-                            R.plurals.manage_notification_access_summary_nonzero,
-                            n, n)));
-                }
-            }
-        }
-
         if (shouldBePinProtected(RESTRICTIONS_PIN_SET)) {
             protectByRestrictions(mToggleAppInstallation);
             protectByRestrictions(mToggleVerifyApps);
@@ -357,39 +332,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
             protectByRestrictions(root.findPreference(KEY_CREDENTIALS_INSTALL));
         }
 
-        mLockscreenNotifications
-                = (CheckBoxPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
-        if (mLockscreenNotifications != null) {
-            if (!getDeviceLockscreenNotificationsEnabled()) {
-                final PreferenceGroup lockscreenCategory =
-                        (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
-                if (lockscreenCategory != null) {
-                    lockscreenCategory.removePreference(mLockscreenNotifications);
-                }
-            } else {
-                mLockscreenNotifications.setChecked(getLockscreenAllowPrivateNotifications());
-            }
-        }
-
         return root;
-    }
-
-    private boolean getDeviceLockscreenNotificationsEnabled() {
-        return 0 != Settings.Global.getInt(getContentResolver(),
-                Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0);
-    }
-
-    private boolean getLockscreenAllowPrivateNotifications() {
-        return 0 != Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0);
-    }
-
-    private int getNumEnabledNotificationListeners() {
-        final String flat = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS);
-        if (flat == null || "".equals(flat)) return 0;
-        final String[] components = flat.split(":");
-        return components.length;
     }
 
     private boolean isNonMarketAppsAllowed() {
@@ -617,10 +560,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
-        } else if (KEY_LOCK_SCREEN_NOTIFICATIONS.equals(key)) {
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                    mLockscreenNotifications.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

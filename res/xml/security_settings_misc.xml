@@ -59,12 +59,6 @@
                 android:summaryOn="@string/verify_applications_summary"
                 android:persistent="false" />
 
-        <Preference
-                android:key="manage_notification_access"
-                android:title="@string/manage_notification_access"
-                android:persistent="false"
-                android:fragment="com.android.settings.NotificationAccessSettings"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory android:key="credentials_management"

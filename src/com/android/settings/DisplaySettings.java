@@ -49,21 +49,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
-    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
-    private static final String KEY_HEADS_UP = "heads_up";
     private static final String KEY_SCREEN_SAVER = "screensaver";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private WarnedListPreference mFontSizePref;
-    private CheckBoxPreference mNotificationPulse;
 
     private final Configuration mCurConfig = new Configuration();
     private final Handler mHandler = new Handler();
 
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
-    private CheckBoxPreference mHeadsUp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,33 +86,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
-        mNotificationPulse = (CheckBoxPreference) findPreference(KEY_NOTIFICATION_PULSE);
-        if (mNotificationPulse != null
-                && getResources().getBoolean(
-                        com.android.internal.R.bool.config_intrusiveNotificationLed) == false) {
-            getPreferenceScreen().removePreference(mNotificationPulse);
-        } else {
-            try {
-                mNotificationPulse.setChecked(Settings.System.getInt(resolver,
-                        Settings.System.NOTIFICATION_LIGHT_PULSE) == 1);
-                mNotificationPulse.setOnPreferenceChangeListener(this);
-            } catch (SettingNotFoundException snfe) {
-                Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
-            }
-        }
-        mHeadsUp = (CheckBoxPreference) findPreference(KEY_HEADS_UP);
-        if (mHeadsUp != null) {
-            updateHeadsUpMode(resolver);
-            mHeadsUp.setOnPreferenceChangeListener(this);
-            resolver.registerContentObserver(
-                    Settings.Global.getUriFor(Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED),
-                    false, new ContentObserver(mHandler) {
-                @Override
-                public void onChange(boolean selfChange) {
-                    updateHeadsUpMode(resolver);
-                }
-            });
-        }
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -250,16 +219,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private void updateHeadsUpMode(ContentResolver resolver) {
-        mHeadsUp.setChecked(Settings.Global.HEADS_UP_ON == Settings.Global.getInt(resolver,
-                Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED, Settings.Global.HEADS_UP_OFF));
-    }
-
-    private void setHeadsUpMode(ContentResolver resolver, boolean value) {
-        Settings.Global.putInt(resolver, Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED,
-                value ? Settings.Global.HEADS_UP_ON : Settings.Global.HEADS_UP_OFF);
-    }
-
     public void writeFontSizePreference(Object objValue) {
         try {
             mCurConfig.fontScale = Float.parseFloat(objValue.toString());
@@ -271,18 +230,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mNotificationPulse) {
-            boolean value = mNotificationPulse.isChecked();
-            Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
-                    value ? 1 : 0);
-            return true;
-        }
-        if (preference == mHeadsUp) {
-            final boolean value = mHeadsUp.isChecked();
-            Log.d(TAG, "onPreferenceTreeClick mHeadsUp: " + value);
-            setHeadsUpMode(getContentResolver(), value);
-            return true;
-        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

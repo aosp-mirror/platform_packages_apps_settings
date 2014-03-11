@@ -5006,25 +5006,37 @@
 
     <!-- Notifications on lockscreen -->
     <!-- Label for checkbox controlling the contents of notifications shown on
-         the secure lockscreen [CHAR LIMIT=16] -->
-    <string name="lock_screen_notifications">Show notifications</string>
+         the secure lockscreen [CHAR LIMIT=25] -->
+    <string name="lock_screen_notifications">Show when locked</string>
     <!-- Summary for lock_screen_notifications: sensitive information will be
          hidden or redacted from notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_off">Sensitive notification contents will be hidden when locked</string>
+    <string name="lock_screen_notifications_summary_off">Sensitive notification contents will be hidden on the lock screen</string>
     <!-- Summary for lock_screen_notifications: all information will be
          shown in notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_on">All notification contents will be shown when locked</string>
+    <string name="lock_screen_notifications_summary_on">All notification contents will be shown on the lock screen</string>
 
     <!-- [CHAR LIMIT=30] Sound settings screen, setting option name to change zen mode -->
-    <string name="title_zen_mode">Zen mode</string>
-    <!-- [CHAR LIMIT=30] Sound settings screen, setting option summary displaying the currently selected zen mode -->
-    <string name="summary_zen_mode" translatable="false">%1$s</string>
-    <!-- [CHAR LIMIT=40] Sound settings screen, title of dialog for picking zen mode -->
-    <string name="dialog_title_zen_mode">Zen mode</string>
+    <string name="title_zen_mode">Limited interruptions</string>
     <!-- [CHAR LIMIT=30] Sound settings screen, description for configuring zen mode -->
-    <string name="configure_zen_mode_description">Configure Zen mode</string>
+    <string name="configure_zen_mode_description">Configure limited interruptions</string>
     <!-- [CHAR LIMIT=30] Zen mode settings screen, activity title -->
     <string name="zen_mode_settings_title">Limited Interruptions</string>
+
+    <!-- [CHAR LIMIT=20] Notifications settings header -->
+    <string name="notification_settings">Notifications</string>
+
+    <!-- [CHAR LIMIT=20] Notifications settings: General section header -->
+    <string name="notification_settings_general">General</string>
+
+    <!-- [CHAR LIMIT=20] Notifications settings: Security section header -->
+    <string name="notification_settings_security">Security</string>
+
+    <!-- [CHAR LIMIT=20] Notifications settings: Tweaks section header (eng
+         builds only) -->
+    <string name="notification_settings_tweaks">Tweaks</string>
+
+    <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
+    <string name="notification_settings_apps">Apps</string>
 </resources>
