@@ -77,7 +77,6 @@ public class LocationSettings extends LocationSettingsBase
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mSwitch.setPaddingRelative(0, 0, padding, 0);
-        mSwitch.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -112,6 +111,7 @@ public class LocationSettings extends LocationSettingsBase
         super.onResume();
         mValidListener = true;
         createPreferenceHierarchy();
+        mSwitch.setOnCheckedChangeListener(this);
     }
 
     @Override
