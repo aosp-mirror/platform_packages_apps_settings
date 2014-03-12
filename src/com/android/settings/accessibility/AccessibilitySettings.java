@@ -18,14 +18,8 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.ActivityManagerNative;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
@@ -33,7 +27,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -42,7 +35,6 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
-import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
@@ -68,19 +60,10 @@ import java.util.Set;
  */
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener {
-    private static final String LOG_TAG = "AccessibilitySettings";
-
-    private static final String DEFAULT_SCREENREADER_MARKET_LINK =
-            "market://search?q=pname:com.google.android.marvin.talkback";
 
     private static final float LARGE_FONT_SCALE = 1.3f;
 
-    private static final String SYSTEM_PROPERTY_MARKET_URL = "ro.screenreader.market";
-
     static final char ENABLED_ACCESSIBILITY_SERVICES_SEPARATOR = ':';
-
-    private static final String KEY_INSTALL_ACCESSIBILITY_SERVICE_OFFERED_ONCE =
-            "key_install_accessibility_service_offered_once";
 
     // Preference categories
     private static final String SERVICES_CATEGORY = "services_category";
@@ -124,9 +107,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // to generate the AccessibilityServiceInfo we need for proper
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
-
-    // Dialog IDs.
-    private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 1;
 
     // Auxiliary members.
     final static SimpleStringSplitter sStringColonSplitter =
