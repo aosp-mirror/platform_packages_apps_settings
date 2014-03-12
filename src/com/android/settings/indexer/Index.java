@@ -160,28 +160,28 @@ public class Index {
         return sb.toString();
     }
 
-    public void addIndexableData(IndexableData data) {
-        mDataToIndex.add(data);
-    }
-
     public void addIndexableData(IndexableData[] array) {
-        final int count = array.length;
-        for (int n = 0; n < count; n++) {
-            addIndexableData(array[n]);
+        synchronized (mDataToIndex) {
+            final int count = array.length;
+            for (int n = 0; n < count; n++) {
+                mDataToIndex.add(array[n]);
+            }
         }
     }
 
     public boolean update() {
-        final IndexTask task = new IndexTask();
-        task.execute();
-        try {
-            return task.get();
-        } catch (InterruptedException e) {
-            Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
-            return false;
-        } catch (ExecutionException e) {
-            Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
-            return false;
+        synchronized (mDataToIndex) {
+            final IndexTask task = new IndexTask();
+            task.execute(mDataToIndex);
+            try {
+                return task.get();
+            } catch (InterruptedException e) {
+                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
+                return false;
+            } catch (ExecutionException e) {
+                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
+                return false;
+            }
         }
     }
 
@@ -196,7 +196,7 @@ public class Index {
     /**
      * A private class for updating the Index database
      */
-    private class IndexTask extends AsyncTask<Void, Integer, Boolean> {
+    private class IndexTask extends AsyncTask<List<IndexableData>, Integer, Boolean> {
 
         @Override
         protected void onPreExecute() {
@@ -211,9 +211,13 @@ public class Index {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            final SQLiteDatabase database = getWritableDatabase();
+        protected Boolean doInBackground(List<IndexableData>... params) {
             boolean result = false;
+            final List<IndexableData> dataToIndex = params[0];
+            if (null == dataToIndex || dataToIndex.size() == 0) {
+                return result;
+            }
+            final SQLiteDatabase database = getWritableDatabase();
             final Locale locale = Locale.getDefault();
             final String localeStr = locale.toString();
             if (isLocaleAlreadyIndexed(database, locale)) {
