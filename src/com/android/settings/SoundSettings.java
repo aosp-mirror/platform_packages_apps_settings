@@ -75,7 +75,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
-    private static final String KEY_ZEN_MODE = "zen_mode";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -102,7 +101,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDockSounds;
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
-    private ZenModeListPreference mZenModeListPreference;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -229,9 +227,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         };
 
         initDockSettings();
-
-        mZenModeListPreference = (ZenModeListPreference) findPreference(KEY_ZEN_MODE);
-        mZenModeListPreference.init();
     }
 
     @Override
@@ -253,8 +248,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private void updateRingtoneName(int type, Preference preference, int msg) {
         if (preference == null) return;
-        Context context = getActivity();
-        if (context == null) return;
+        final CharSequence summary = updateRingtoneName(getActivity(), type);
+        if (summary == null) return;
+        mHandler.sendMessage(mHandler.obtainMessage(msg, summary));
+    }
+
+    public static CharSequence updateRingtoneName(Context context, int type) {
+        if (context == null) return null;
         Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(context, type);
         CharSequence summary = context.getString(com.android.internal.R.string.ringtone_unknown);
         // Is it a silent ringtone?
@@ -275,7 +275,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 // Unknown title for the ringtone
             }
         }
-        mHandler.sendMessage(mHandler.obtainMessage(msg, summary));
+        return summary;
     }
 
     private void lookupRingtoneNames() {

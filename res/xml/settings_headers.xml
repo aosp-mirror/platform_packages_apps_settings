@@ -89,6 +89,13 @@
         android:fragment="com.android.settings.DisplaySettings"
         android:title="@string/display_settings" />
 
+    <!-- Notifications -->
+    <header
+        android:id="@+id/notification_settings"
+        android:icon="@drawable/ic_settings_notifications"
+        android:fragment="com.android.settings.NotificationSettings"
+        android:title="@string/notification_settings" />
+
     <!-- Storage -->
     <header
         android:id="@+id/storage_settings"
