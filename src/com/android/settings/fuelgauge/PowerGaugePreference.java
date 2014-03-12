@@ -46,7 +46,7 @@ public class PowerGaugePreference extends Preference {
     public void setPercent(double percentOfMax, double percentOfTotal) {
         mProgress = (int) Math.ceil(percentOfMax);
         mProgressText = getContext().getResources().getString(
-                R.string.percentage, (int) Math.ceil(percentOfTotal));
+                R.string.percentage, (int) (percentOfTotal+.5));
         notifyChanged();
     }
 

@@ -238,14 +238,21 @@ public class PowerUsageSummary extends PreferenceFragment {
             addNotAvailableMessage();
             return;
         }
+        int dischargeAmount = mStatsType == BatteryStats.STATS_SINCE_CHARGED
+                ? mStatsHelper.getStats().getHighDischargeAmountSinceCharge()
+                : (mStatsHelper.getStats().getDischargeStartLevel()
+                        - mStatsHelper.getStats().getDischargeCurrentLevel());
+        if (dischargeAmount < 0) {
+            dischargeAmount = 0;
+        }
         mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
         for (int i=0; i<usageList.size(); i++) {
             BatterySipper sipper = usageList.get(i);
             if ((sipper.value*60*60) < MIN_POWER_THRESHOLD) continue;
             final double percentOfTotal =
-                    ((sipper.value / mStatsHelper.getTotalPower()) * 100);
-            if (percentOfTotal < 1) continue;
+                    ((sipper.value / mStatsHelper.getTotalPower()) * dischargeAmount);
+            if (((int)(percentOfTotal+.5)) < 1) continue;
             BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
             PowerGaugePreference pref =
                     new PowerGaugePreference(getActivity(), entry.getIcon(), entry);
