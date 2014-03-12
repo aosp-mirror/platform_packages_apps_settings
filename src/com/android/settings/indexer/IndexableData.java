@@ -16,17 +16,30 @@
 
 package com.android.settings.indexer;
 
+import java.util.Locale;
+
+/**
+ * Indexable Data.
+ *
+ * This is the raw data used by the Indexer and should match its data model.
+ *
+ * See {@link Indexable} and {@link IndexableRef}.
+ */
 public class IndexableData {
 
-    public int rank;
-    public int xmlResId;
-    public String fragmentName;
-    public int iconResId;
+    public Locale locale;
 
-    public IndexableData(int rank, int dataResId, String name, int iconResId) {
-        this.rank = rank;
-        this.xmlResId = dataResId;
-        this.fragmentName = name;
-        this.iconResId = iconResId;
+    public String title;
+    public String summary;
+    public String keywords;
+
+    public String intentAction;
+    public String intentTargetPackage;
+    public String intentTargetClass;
+
+    public String fragmentTitle;
+
+    public IndexableData() {
+        locale = Locale.getDefault();
     }
 }

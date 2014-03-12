@@ -34,6 +34,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -45,7 +46,7 @@ import static com.android.settings.indexer.IndexDatabaseHelper.IndexColumns;
 
 public class Index {
 
-    private static final String LOG_TAG = "Indexer";
+    private static final String LOG_TAG = "Index";
 
     // Those indices should match the indices of SELECT_COLUMNS !
     public static final int COLUMN_INDEX_TITLE = 1;
@@ -81,7 +82,8 @@ public class Index {
     private static Index sInstance;
 
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
-    private final List<IndexableData> mDataToIndex = new ArrayList<IndexableData>();
+
+    private final UpdateData mUpdateData = new UpdateData();
 
     private final Context mContext;
 
@@ -101,6 +103,42 @@ public class Index {
 
     public boolean isAvailable() {
         return mIsAvailable.get();
+    }
+
+    public void addIndexableData(IndexableRef[] array) {
+        synchronized (mUpdateData) {
+            final int count = array.length;
+            for (int n = 0; n < count; n++) {
+                mUpdateData.dataToAdd.add(array[n]);
+            }
+        }
+    }
+
+    public void deleteIndexableData(String[] array) {
+        synchronized (mUpdateData) {
+            final int count = array.length;
+            for (int n = 0; n < count; n++) {
+                mUpdateData.dataToDelete.add(array[n]);
+            }
+        }
+    }
+
+    public boolean update() {
+        synchronized (mUpdateData) {
+            final UpdateIndexTask task = new UpdateIndexTask();
+            task.execute(mUpdateData);
+            try {
+                final boolean result = task.get();
+                mUpdateData.clear();
+                return result;
+            } catch (InterruptedException e) {
+                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
+                return false;
+            } catch (ExecutionException e) {
+                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
+                return false;
+            }
+        }
     }
 
     public Cursor search(String query) {
@@ -160,31 +198,6 @@ public class Index {
         return sb.toString();
     }
 
-    public void addIndexableData(IndexableData[] array) {
-        synchronized (mDataToIndex) {
-            final int count = array.length;
-            for (int n = 0; n < count; n++) {
-                mDataToIndex.add(array[n]);
-            }
-        }
-    }
-
-    public boolean update() {
-        synchronized (mDataToIndex) {
-            final IndexTask task = new IndexTask();
-            task.execute(mDataToIndex);
-            try {
-                return task.get();
-            } catch (InterruptedException e) {
-                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
-                return false;
-            } catch (ExecutionException e) {
-                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
-                return false;
-            }
-        }
-    }
-
     private SQLiteDatabase getReadableDatabase() {
         return IndexDatabaseHelper.getInstance(mContext).getReadableDatabase();
     }
@@ -194,9 +207,27 @@ public class Index {
     }
 
     /**
+     * A private class to describe the update data for the Index database
+     */
+    private class UpdateData {
+        public List<IndexableRef> dataToAdd;
+        public List<String> dataToDelete;
+
+        public UpdateData() {
+            dataToAdd = new ArrayList<IndexableRef>();
+            dataToDelete = new ArrayList<String>();
+        }
+
+        public void clear() {
+            dataToAdd.clear();
+            dataToDelete.clear();
+        }
+    }
+
+    /**
      * A private class for updating the Index database
      */
-    private class IndexTask extends AsyncTask<List<IndexableData>, Integer, Boolean> {
+    private class UpdateIndexTask extends AsyncTask<UpdateData, Integer, Boolean> {
 
         @Override
         protected void onPreExecute() {
@@ -211,45 +242,123 @@ public class Index {
         }
 
         @Override
-        protected Boolean doInBackground(List<IndexableData>... params) {
+        protected Boolean doInBackground(UpdateData... params) {
             boolean result = false;
-            final List<IndexableData> dataToIndex = params[0];
-            if (null == dataToIndex || dataToIndex.size() == 0) {
-                return result;
-            }
+
+            final List<IndexableRef> dataToAdd = params[0].dataToAdd;
+            final List<String> dataToDelete = params[0].dataToDelete;
             final SQLiteDatabase database = getWritableDatabase();
-            final Locale locale = Locale.getDefault();
-            final String localeStr = locale.toString();
-            if (isLocaleAlreadyIndexed(database, locale)) {
-                Log.d(LOG_TAG, "Locale '" + localeStr + "' is already indexed");
-                return true;
-            }
-            final long current = System.currentTimeMillis();
+            final String localeStr = Locale.getDefault().toString();
+
             try {
                 database.beginTransaction();
-                final int count = mDataToIndex.size();
-                for (int n = 0; n < count; n++) {
-                    final IndexableData data = mDataToIndex.get(n);
-                    indexFromResource(database, locale, data.xmlResId, data.fragmentName,
-                            data.iconResId, data.rank);
+                if (dataToAdd.size() > 0) {
+                    processDataToAdd(database, localeStr, dataToAdd);
+                }
+                if (dataToDelete.size() > 0) {
+                    processDataToDelete(database, localeStr, dataToDelete);
                 }
                 database.setTransactionSuccessful();
                 result = true;
             } finally {
                 database.endTransaction();
             }
+            return result;
+        }
+
+        private boolean processDataToDelete(SQLiteDatabase database, String localeStr,
+                                         List<String> dataToDelete) {
+
+            boolean result = false;
+            final long current = System.currentTimeMillis();
+
+            final int count = dataToDelete.size();
+            for (int n = 0; n < count; n++) {
+                final String data = dataToDelete.get(n);
+                delete(database, data);
+            }
+
+            final long now = System.currentTimeMillis();
+            Log.d(LOG_TAG, "Deleting data for locale '" + localeStr + "' took " +
+                    (now - current) + " millis");
+            return result;
+        }
+
+        private boolean processDataToAdd(SQLiteDatabase database, String localeStr,
+                                         List<IndexableRef> dataToAdd) {
+            if (isLocaleAlreadyIndexed(database, localeStr)) {
+                Log.d(LOG_TAG, "Locale '" + localeStr + "' is already indexed");
+                return true;
+            }
+
+            boolean result = false;
+            final long current = System.currentTimeMillis();
+
+            final int count = dataToAdd.size();
+            for (int n = 0; n < count; n++) {
+                final IndexableRef ref = dataToAdd.get(n);
+                indexOneRef(database, localeStr, ref);
+            }
+
             final long now = System.currentTimeMillis();
             Log.d(LOG_TAG, "Indexing locale '" + localeStr + "' took " +
                     (now - current) + " millis");
             return result;
         }
 
-        private boolean isLocaleAlreadyIndexed(SQLiteDatabase database, Locale locale) {
+        private void indexOneRef(SQLiteDatabase database, String localeStr, IndexableRef ref) {
+            if (ref.xmlResId > 0) {
+                indexFromResource(database, localeStr, ref.xmlResId, ref.fragmentName,
+                        ref.iconResId, ref.rank);
+            } else if (!TextUtils.isEmpty(ref.fragmentName)) {
+                indexRawData(database, localeStr, ref);
+            }
+        }
+
+        private void indexRawData(SQLiteDatabase database, String localeStr, IndexableRef ref) {
+            try {
+                final Class<?> clazz = Class.forName(ref.fragmentName);
+                if (Indexable.class.isAssignableFrom(clazz)) {
+                    final Field f = clazz.getField("INDEX_DATA_PROVIDER");
+                    final Indexable.IndexDataProvider provider =
+                            (Indexable.IndexDataProvider) f.get(null);
+
+                    final List<IndexableData> data = provider.getRawDataToIndex(mContext);
+
+                    final int size = data.size();
+                    for (int i = 0; i < size; i++) {
+                        IndexableData raw = data.get(i);
+
+                        // Should be the same locale as the one we are processing
+                        if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+                            continue;
+                        }
+
+                        inserOneRowWithFilteredData(database, localeStr,
+                                raw.title,
+                                raw.summary,
+                                ref.fragmentName,
+                                raw.fragmentTitle,
+                                ref.iconResId,
+                                ref.rank,
+                                raw.keywords);
+                    }
+                }
+            } catch (ClassNotFoundException e) {
+                Log.e(LOG_TAG, "Cannot find class: " + ref.fragmentName, e);
+            } catch (NoSuchFieldException e) {
+                Log.e(LOG_TAG, "Cannot find field 'INDEX_DATA_PROVIDER'", e);
+            } catch (IllegalAccessException e) {
+                Log.e(LOG_TAG, "Illegal access to field 'INDEX_DATA_PROVIDER'", e);
+            }
+        }
+
+        private boolean isLocaleAlreadyIndexed(SQLiteDatabase database, String locale) {
             Cursor cursor = null;
             boolean result = false;
             final StringBuilder sb = new StringBuilder(IndexColumns.LOCALE);
             sb.append(" = ");
-            DatabaseUtils.appendEscapedSQLString(sb, locale.toString());
+            DatabaseUtils.appendEscapedSQLString(sb, locale);
             try {
                 // We care only for 1 row
                 cursor = database.query(Tables.TABLE_PREFS_INDEX, null,
@@ -264,10 +373,9 @@ public class Index {
             return result;
         }
 
-        private void indexFromResource(SQLiteDatabase database, Locale locale, int xmlResId,
+        private void indexFromResource(SQLiteDatabase database, String localeStr, int xmlResId,
                 String fragmentName, int iconResId, int rank) {
             XmlResourceParser parser = null;
-            final String localeStr = locale.toString();
             try {
                 parser = mContext.getResources().getXml(xmlResId);
 
@@ -371,6 +479,13 @@ public class Index {
             values.put(IndexColumns.ICON, iconResId);
 
             database.insertOrThrow(Tables.TABLE_PREFS_INDEX, null, values);
+        }
+
+        private int delete(SQLiteDatabase database, String title) {
+            final String whereClause = IndexColumns.DATA_TITLE + "=?";
+            final String[] whereArgs = new String[] { title };
+
+            return database.delete(Tables.TABLE_PREFS_INDEX, whereClause, whereArgs);
         }
 
         private String getDataTitle(AttributeSet attrs) {

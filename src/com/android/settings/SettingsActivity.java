@@ -95,7 +95,7 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.indexer.Index;
-import com.android.settings.indexer.IndexableData;
+import com.android.settings.indexer.IndexableRef;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -341,67 +341,72 @@ public class SettingsActivity extends Activity
         }
     };
 
+    private static int NO_DATA_RES_ID = 0;
+
     /**
-     * Searchable data description.
+     * Indexable data description.
      *
      * Known restriction: we are only searching (for now) the first level of Settings.
      */
-    private static IndexableData[] INDEXABLE_DATA = new IndexableData[] {
-            new IndexableData(1, R.xml.wifi_settings,
+    private static IndexableRef[] INDEXABLE_REFS = new IndexableRef[] {
+            new IndexableRef(1, NO_DATA_RES_ID,
                     "com.android.settings.wifi.WifiSettings",
                     R.drawable.ic_settings_wireless),
-            new IndexableData(2, R.xml.bluetooth_settings,
+            new IndexableRef(2, R.xml.bluetooth_settings,
                     "com.android.settings.bluetooth.BluetoothSettings",
                     R.drawable.ic_settings_bluetooth2),
-            new IndexableData(3, R.xml.data_usage_metered_prefs,
+            new IndexableRef(3, R.xml.data_usage_metered_prefs,
                     "com.android.settings.net.DataUsageMeteredSettings",
                     R.drawable.ic_settings_data_usage),
-            new IndexableData(4, R.xml.wireless_settings,
+            new IndexableRef(4, R.xml.wireless_settings,
                     "com.android.settings.WirelessSettings",
                     R.drawable.empty_icon),
-            new IndexableData(5, R.xml.home_selection,
+            new IndexableRef(5, R.xml.home_selection,
                     "com.android.settings.HomeSettings",
                     R.drawable.ic_settings_home),
-            new IndexableData(6, R.xml.sound_settings,
+            new IndexableRef(6, R.xml.sound_settings,
                     "com.android.settings.SoundSettings",
                     R.drawable.ic_settings_sound),
-            new IndexableData(7, R.xml.display_settings,
+            new IndexableRef(7, R.xml.display_settings,
                     "com.android.settings.DisplaySettings",
                     R.drawable.ic_settings_display),
-            new IndexableData(8, R.xml.device_info_memory,
+            new IndexableRef(7, NO_DATA_RES_ID,
+                    "com.android.settings.WallpaperTypeSettings",
+                    R.drawable.ic_settings_display),
+            new IndexableRef(8, R.xml.device_info_memory,
                     "com.android.settings.deviceinfo.Memory",
                     R.drawable.ic_settings_storage),
-            new IndexableData(9, R.xml.power_usage_summary,
+            new IndexableRef(9, R.xml.power_usage_summary,
                     "com.android.settings.fuelgauge.PowerUsageSummary",
                     R.drawable.ic_settings_battery),
-            new IndexableData(10, R.xml.user_settings,
+            new IndexableRef(10, R.xml.user_settings,
                     "com.android.settings.users.UserSettings",
                     R.drawable.ic_settings_multiuser),
-            new IndexableData(11, R.xml.location_settings,
+            new IndexableRef(11, R.xml.location_settings,
                     "com.android.settings.location.LocationSettings",
                     R.drawable.ic_settings_location),
-            new IndexableData(12, R.xml.security_settings,
+            new IndexableRef(12, R.xml.security_settings,
                     "com.android.settings.SecuritySettings",
                     R.drawable.ic_settings_security),
-            new IndexableData(13, R.xml.language_settings,
+            new IndexableRef(13, R.xml.language_settings,
                     "com.android.settings.inputmethod.InputMethodAndLanguageSettings",
                     R.drawable.ic_settings_language),
-            new IndexableData(14, R.xml.privacy_settings,
+            new IndexableRef(14, R.xml.privacy_settings,
                     "com.android.settings.PrivacySettings",
                     R.drawable.ic_settings_backup),
-            new IndexableData(15, R.xml.date_time_prefs,
+            new IndexableRef(15, R.xml.date_time_prefs,
                     "com.android.settings.DateTimeSettings",
                     R.drawable.ic_settings_date_time),
-            new IndexableData(16, R.xml.accessibility_settings,
+            new IndexableRef(16, R.xml.accessibility_settings,
                     "com.android.settings.accessibility.AccessibilitySettings",
                     R.drawable.ic_settings_accessibility),
-            new IndexableData(17, R.xml.print_settings,
+            new IndexableRef(17, R.xml.print_settings,
                     "com.android.settings.print.PrintSettingsFragment",
                     com.android.internal.R.drawable.ic_print),
-            new IndexableData(18, R.xml.development_prefs,
+            new IndexableRef(18, R.xml.development_prefs,
                     "com.android.settings.DevelopmentSettings",
                     R.drawable.ic_settings_development),
-            new IndexableData(19, R.xml.device_info_settings,
+            new IndexableRef(19, R.xml.device_info_settings,
                     "com.android.settings.DeviceInfoSettings",
                     R.drawable.ic_settings_about),
     };
@@ -546,7 +551,7 @@ public class SettingsActivity extends Activity
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
-        Index.getInstance(this).addIndexableData(INDEXABLE_DATA);
+        Index.getInstance(this).addIndexableData(INDEXABLE_REFS);
         Index.getInstance(this).update();
 
         mAuthenticatorHelper = new AuthenticatorHelper();
