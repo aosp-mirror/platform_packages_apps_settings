@@ -1148,10 +1148,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
             int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-            final Resources resources = getContext().getResources();
-            float titleHeight = resources.getFraction(R.dimen.setup_title_height, 1, 1);
-            float sideMargin = resources.getFraction(R.dimen.setup_border_width, 1, 1);
-            int bottom = resources.getDimensionPixelSize(R.dimen.setup_margin_bottom);
+            final Resources res = getContext().getResources();
+            float titleHeight = res.getFraction(R.dimen.setup_title_height, 1, 1);
+            float sideMargin = res.getFraction(R.dimen.setup_border_width, 1, 1);
+            int bottom = res.getDimensionPixelSize(R.dimen.setup_margin_bottom);
             setPaddingRelative(
                     (int) (parentWidth * sideMargin),
                     0,
@@ -1175,11 +1175,12 @@ public class WifiSettings extends RestrictedSettingsFragment
             @Override
             public List<IndexableData> getRawDataToIndex(Context context) {
                 final List<IndexableData> result = new ArrayList<IndexableData>();
+                final Resources res = context.getResources();
 
                 // Add fragment title
                 IndexableData data = new IndexableData();
-                data.title = context.getResources().getString(R.string.wifi_settings);
-                data.fragmentTitle = context.getResources().getString(R.string.wifi_settings);
+                data.title = res.getString(R.string.wifi_settings);
+                data.fragmentTitle = res.getString(R.string.wifi_settings);
                 result.add(data);
 
                 // Add available Wi-Fi access points
@@ -1192,7 +1193,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     if (accessPoint.getConfig() == null) continue;
                     data = new IndexableData();
                     data.title = accessPoint.getTitle().toString();
-                    data.fragmentTitle = context.getResources().getString(R.string.wifi_settings);
+                    data.fragmentTitle = res.getString(R.string.wifi_settings);
                     result.add(data);
                 }
 
