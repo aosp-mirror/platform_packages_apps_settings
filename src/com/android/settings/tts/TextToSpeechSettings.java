@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Set;
 
 public class TextToSpeechSettings extends SettingsPreferenceFragment implements
@@ -278,25 +279,32 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (mCurrentDefaultLocale == null || mAvailableStrLocals == null) {
             return false;
         }
-        int defaultAvailable = mTts.setLanguage(mCurrentDefaultLocale);
 
-        // Check if language is listed in CheckVoices Action result as available voice.
-        String defaultLocaleStr = mCurrentDefaultLocale.getISO3Language();
         boolean notInAvailableLangauges = true;
-        if (!TextUtils.isEmpty(mCurrentDefaultLocale.getISO3Country())) {
-            defaultLocaleStr += "-" + mCurrentDefaultLocale.getISO3Country();
-        }
-        if (!TextUtils.isEmpty(mCurrentDefaultLocale.getVariant())) {
-            defaultLocaleStr += "-" + mCurrentDefaultLocale.getVariant();
-        }
-
-        for (String loc : mAvailableStrLocals) {
-            if (loc.equalsIgnoreCase(defaultLocaleStr)) {
-              notInAvailableLangauges = false;
-              break;
+        try {
+            // Check if language is listed in CheckVoices Action result as available voice.
+            String defaultLocaleStr = mCurrentDefaultLocale.getISO3Language();
+            if (!TextUtils.isEmpty(mCurrentDefaultLocale.getISO3Country())) {
+                defaultLocaleStr += "-" + mCurrentDefaultLocale.getISO3Country();
             }
+            if (!TextUtils.isEmpty(mCurrentDefaultLocale.getVariant())) {
+                defaultLocaleStr += "-" + mCurrentDefaultLocale.getVariant();
+            }
+
+            for (String loc : mAvailableStrLocals) {
+                if (loc.equalsIgnoreCase(defaultLocaleStr)) {
+                  notInAvailableLangauges = false;
+                  break;
+                }
+            }
+        } catch (MissingResourceException e) {
+            if (DBG) Log.wtf(TAG, "MissingResourceException", e);
+            updateEngineStatus(R.string.tts_status_not_supported);
+            updateWidgetState(false);
+            return false;
         }
 
+        int defaultAvailable = mTts.setLanguage(mCurrentDefaultLocale);
         if (defaultAvailable == TextToSpeech.LANG_NOT_SUPPORTED ||
                 defaultAvailable == TextToSpeech.LANG_MISSING_DATA ||
                 notInAvailableLangauges) {
@@ -314,7 +322,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             return true;
         }
     }
-
 
     /**
      * Ask the current default engine to return a string of sample text to be
@@ -358,16 +365,21 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private String getDefaultSampleString() {
         if (mTts != null && mTts.getLanguage() != null) {
-            final String currentLang = mTts.getLanguage().getISO3Language();
-            String[] strings = getActivity().getResources().getStringArray(
-                    R.array.tts_demo_strings);
-            String[] langs = getActivity().getResources().getStringArray(
-                    R.array.tts_demo_string_langs);
+            try {
+                final String currentLang = mTts.getLanguage().getISO3Language();
+                String[] strings = getActivity().getResources().getStringArray(
+                        R.array.tts_demo_strings);
+                String[] langs = getActivity().getResources().getStringArray(
+                        R.array.tts_demo_string_langs);
 
-            for (int i = 0; i < strings.length; ++i) {
-                if (langs[i].equals(currentLang)) {
-                    return strings[i];
+                for (int i = 0; i < strings.length; ++i) {
+                    if (langs[i].equals(currentLang)) {
+                        return strings[i];
+                    }
                 }
+            } catch (MissingResourceException e) {
+                if (DBG) Log.wtf(TAG, "MissingResourceException", e);
+                // Ignore and fall back to default sample string
             }
         }
         return getString(R.string.tts_default_sample_string);
