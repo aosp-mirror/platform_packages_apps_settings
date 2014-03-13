@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.indexer;
+package com.android.settings.search;
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
 import java.util.List;
 
@@ -24,29 +25,32 @@ import java.util.List;
  * Interface for classes whose instances can provide data for indexing.
  *
  * Classes implementing the Indexable interface must have a static field called
- * <code>INDEX_DATA_PROVIDER</code>, which is an object implementing the
- * {@link Indexable.IndexDataProvider Indexable.IndexDataProvider} interface.
+ * <code>SEARCH_INDEX_DATA_PROVIDER</code>, which is an object implementing the
+ * {@link Indexable.SearchIndexProvider} interface.
  *
- * See {@link IndexableRef} and {@link IndexableData}.
+ * See {@link android.provider.SearchIndexableResource} and {@link SearchIndexableRaw}.
  *
  */
 public interface Indexable {
 
-    public interface IndexDataProvider {
+    public interface SearchIndexProvider {
         /**
-         * Return a list of references for indexing. See {@link IndexableRef}
+         * Return a list of references for indexing.
+         *
+         * See {@link android.provider.SearchIndexableResource}
          *
          * @param context the context
-         * @return a list of {@link IndexableRef} references. Can be null.
+         * @return a list of {@link android.provider.SearchIndexableResource} references.
+         *         Can be null.
          */
-        List<IndexableRef> getRefsToIndex(Context context);
+        List<SearchIndexableResource> getXmlResourcesToIndex(Context context);
 
         /**
-         * Return a list of raw data for indexing. See {@link IndexableData}
+         * Return a list of raw data for indexing. See {@link SearchIndexableRaw}
          *
          * @param context the context
-         * @return a list of {@link IndexableData} references. Can be null.
+         * @return a list of {@link SearchIndexableRaw} references. Can be null.
          */
-        List<IndexableData> getRawDataToIndex(Context context);
+        List<SearchIndexableRaw> getRawDataToIndex(Context context);
     }
 }

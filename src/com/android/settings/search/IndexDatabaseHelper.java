@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.indexer;
+package com.android.settings.search;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 101;
+    private static final int DATABASE_VERSION = 102;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -43,9 +43,11 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String DATA_SUMMARY = "data_summary";
         public static final String DATA_SUMMARY_NORMALIZED = "data_summary_normalized";
         public static final String DATA_KEYWORDS = "data_keywords";
-        public static final String FRAGMENT_NAME = "fragment_name";
-        public static final String FRAGMENT_TITLE = "fragment_title";
-        public static final String INTENT = "intent";
+        public static final String CLASS_NAME = "class_name";
+        public static final String SCREEN_TITLE = "screen_title";
+        public static final String INTENT_ACTION = "intent_action";
+        public static final String INTENT_TARGET_PACKAGE = "intent_target_package";
+        public static final String INTENT_TARGET_CLASS = "intent_target_class";
         public static final String ICON = "icon";
     }
 
@@ -70,13 +72,17 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     ", " +
                     IndexColumns.DATA_KEYWORDS +
                     ", " +
-                    IndexColumns.FRAGMENT_NAME +
+                    IndexColumns.SCREEN_TITLE +
                     ", " +
-                    IndexColumns.FRAGMENT_TITLE +
-                    ", " +
-                    IndexColumns.INTENT +
+                    IndexColumns.CLASS_NAME +
                     ", " +
                     IndexColumns.ICON +
+                    ", " +
+                    IndexColumns.INTENT_ACTION +
+                    ", " +
+                    IndexColumns.INTENT_TARGET_PACKAGE +
+                    ", " +
+                    IndexColumns.INTENT_TARGET_CLASS +
                     ");";
 
     private static final String CREATE_META_TABLE =
@@ -119,9 +125,9 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (newVersion > 100) {
-            Log.w(TAG, "Detected schema version 100. " +
-                    "Index needs to be rebuilt for schema version 101");
+        if (oldVersion == 100 || oldVersion == 101) {
+            Log.w(TAG, "Detected schema version 100 or 101. " +
+                    "Index needs to be rebuilt for schema version 102");
             // We need to drop the tables and recreate them
             dropTables(db);
             bootstrapDB(db);
