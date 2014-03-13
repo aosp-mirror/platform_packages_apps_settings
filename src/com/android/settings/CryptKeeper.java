@@ -599,11 +599,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
         // Asynchronously throw up the IME, since there are issues with requesting it to be shown
         // immediately.
-        mHandler.postDelayed(new Runnable() {
-            @Override public void run() {
-                imm.showSoftInputUnchecked(0, null);
-            }
-        }, 0);
+        if (mLockPatternView == null) {
+            mHandler.postDelayed(new Runnable() {
+                @Override public void run() {
+                    imm.showSoftInputUnchecked(0, null);
+                }
+            }, 0);
+        }
 
         updateEmergencyCallButtonState();
         // Notify the user in 120 seconds that we are waiting for him to enter the password.
