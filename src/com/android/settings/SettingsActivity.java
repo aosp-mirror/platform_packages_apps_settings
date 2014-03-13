@@ -1580,9 +1580,6 @@ public class SettingsActivity extends Activity
                                 view.findViewById(com.android.internal.R.id.summary);
                         break;
                 }
-                if (holder.mIcon != null) {
-                    holder.mIcon.setBackgroundResource(R.color.background_drawer_icon);
-                }
                 view.setTag(holder);
             } else {
                 view = convertView;
@@ -1650,7 +1647,18 @@ public class SettingsActivity extends Activity
                     Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
                     setHeaderIcon(holder, icon);
                 } else {
-                    holder.mIcon.setImageResource(header.iconRes);
+                    if (header.iconRes > 0) {
+                        holder.mIcon.setImageResource(header.iconRes);
+                    } else {
+                        holder.mIcon.setImageDrawable(null);
+                    }
+                }
+                if (holder.mIcon != null) {
+                    if (header.iconRes > 0) {
+                        holder.mIcon.setBackgroundResource(R.color.background_drawer_icon);
+                    } else {
+                        holder.mIcon.setBackground(null);
+                    }
                 }
                 holder.mTitle.setText(header.getTitle(getContext().getResources()));
                 CharSequence summary = header.getSummary(getContext().getResources());
