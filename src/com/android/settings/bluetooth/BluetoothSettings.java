@@ -26,11 +26,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -42,12 +44,19 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
  */
-public final class BluetoothSettings extends DeviceListPreferenceFragment {
+public final class BluetoothSettings extends DeviceListPreferenceFragment implements Indexable {
     private static final String TAG = "BluetoothSettings";
 
     private static final int MENU_ID_SCAN = Menu.FIRST;
@@ -410,4 +419,42 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     protected int getHelpResource() {
         return R.string.help_url_bluetooth;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new SearchIndexProvider() {
+
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context) {
+                    return null;
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context) {
+
+                    final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+
+                    final Resources res = context.getResources();
+
+                    // Add fragment title
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.bluetooth_settings);
+                    data.screenTitle = res.getString(R.string.bluetooth_settings);
+                    result.add(data);
+
+                    // Add cached paired BT devices
+                    LocalBluetoothManager lbtm = LocalBluetoothManager.getInstance(context);
+                    Set<BluetoothDevice> bondedDevices =
+                            lbtm.getBluetoothAdapter().getBondedDevices();
+
+                    for (BluetoothDevice device : bondedDevices) {
+                        data = new SearchIndexableRaw(context);
+                        data.title = device.getName();
+                        data.screenTitle = res.getString(R.string.bluetooth_settings);
+                        result.add(data);
+                    }
+
+                    return result;
+                }
+            };
+
 }
