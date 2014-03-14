@@ -33,4 +33,10 @@
             android:fragment="com.android.settings.purity.NavbarStyleDimenSettings"
             android:title="@string/navbar_style_dimen_title" />
 
+        <SeekBarPreference
+            android:key="navigation_button_glow_time"
+            android:title="@string/navigation_button_glow_time_title"
+            android:max="500"
+            android:defaultValue="500" />
+
 </PreferenceScreen>

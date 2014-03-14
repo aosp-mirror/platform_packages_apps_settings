@@ -16,13 +16,17 @@
 
 package com.android.settings.purity;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.SeekBarPreference;
 import android.provider.Settings;
 
 import com.android.internal.util.cm.DeviceUtils;
@@ -32,23 +36,29 @@ import com.android.settings.Utils;
 import com.android.settings.R;
 
 
-public class NavbarSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class NavbarSettings extends SettingsPreferenceFragment implements 
+        Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "NavBar";
     private static final String PREF_STYLE_DIMEN = "navbar_style_dimen_settings";
     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
+    private static final String NAVIGATION_BUTTON_GLOW_TIME = "navigation_button_glow_time";
 
     PreferenceScreen mStyleDimenPreference;
     private CheckBoxPreference mNavigationBarLeftPref;
+    private SeekBarPreference mNavigationButtonGlowTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.navbar_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+
+        mNavigationButtonGlowTime = (SeekBarPreference) findPreference(NAVIGATION_BUTTON_GLOW_TIME);
+        mNavigationButtonGlowTime.setProgress(Settings.System.getInt(getContentResolver(),
+                  Settings.System.NAVIGATION_BUTTON_GLOW_TIME, 500));
+        mNavigationButtonGlowTime.setOnPreferenceChangeListener(this);
 
         mStyleDimenPreference = (PreferenceScreen) findPreference(PREF_STYLE_DIMEN);
         mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
@@ -58,8 +68,15 @@ public class NavbarSettings extends SettingsPreferenceFragment implements OnPref
         }
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object value) {
+        if (preference == mNavigationButtonGlowTime) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.NAVIGATION_BUTTON_GLOW_TIME, (Integer)value);
+            return true;
+        }
+
+         return false;
     }
 
     private void updateNavbarPreferences(boolean show) {
