@@ -218,6 +218,22 @@ public class WifiConfigController implements TextWatcher,
             if (info != null && info.getLinkSpeed() != -1) {
                 addRow(group, R.string.wifi_speed, info.getLinkSpeed() + WifiInfo.LINK_SPEED_UNITS);
             }
+            if (info != null && info.getFrequency() != -1) {
+              // Since the frequency is defined on MHz, we need to simplify it
+              // to just 2.4GHz (regardless of the locale) or 5GHz.
+              int frequency = info.getFrequency();
+              String band = null;
+              if (frequency >= 2400 && frequency < 2500) {
+                band = "2.4GHz";
+              } else if (frequency >= 5000 && frequency < 6000) {
+                band = "5GHz";
+              } else {
+                Log.e(TAG, "Unexpected frequency " + frequency);
+              }
+              if (band != null) {
+                addRow(group, R.string.wifi_frequency, band);
+              }
+            }
 
             addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
 
