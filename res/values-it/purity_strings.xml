@@ -34,17 +34,17 @@
     <string name="status_bar_style_title">Stile</string>
     <string name="status_bar_clock">Orologio e data</string>
     <string name="status_bar_clock_title">Stile dell\'orologio e data</string>
-    <string name="clock_title_enable">Allineamento dell\'orologio</string>
+    <string name="clock_title_enable">Allineamento</string>
     <string name="clock_enabled">Attivato</string>
     <string name="clock_disabled">Disattivato</string>
-    <string name="clock_color_title">Colore dell\'orologio</string>
-    <string name="status_bar_show_clock_title">Mostra orologio</string>
+    <string name="clock_color_title">Colore</string>
+    <string name="status_bar_show_clock_title">Mostra</string>
     <string name="status_bar_am_pm_title">Stile AM/PM</string>
     <string name="status_bar_am_pm_info">orologio di 24 ore è abilitato</string>
     <string name="enable_clock_weekday">Giorno della settimana</string>
     <string name="enable_clock_weekday_summary">Giorno della settimana abbreviato prima dell\'ora</string>
-    <string name="right_clock">Orologio a destra</string>
-    <string name="center_clock">Orologio al centro</string>
+    <string name="right_clock">A destra</string>
+    <string name="center_clock">Al centro</string>
     <string name="dont_show">Non mostrare</string>
     <string name="clock_date_display">Data</string>
     <string name="clock_date_display_summary">Visualizzazione data personalizzata prima dell\'orologio</string>
@@ -78,10 +78,10 @@
     <string name="expanded_desktop_no_status_bar">Barra di stato nascosta</string>
     <string name="power_menu_airplane_title">Modalità aereo</string>
     <string name="power_menu_sound_title">Pannello suoni</string>
-    <string name="expanded_desktop_summary_status_bar">Con la barra di stato</string>
-    <string name="expanded_desktop_summary_no_status_bar">Senza barra di stato</string>
+    <string name="expanded_desktop_summary_status_bar">Barra di stato visibile</string>
+    <string name="expanded_desktop_summary_no_status_bar">Barra di stato nascosta</string>
     <string name="battery_icon_title">Batteria</string>
-    <string name="status_bar_battery_title">Stile icona della batteria</string>
+    <string name="status_bar_battery_title">Stile icona</string>
     <string name="status_bar_style_hidden">Nascosto</string>
     <string name="screen_off_animation">Animazione spegnimento display</string>
     <string name="safe_headset_volume_title">Volume sicurezza cuffie</string>
@@ -90,7 +90,7 @@
     <string name="lockscreen_maximize_widgets_title">Massimizza widget</string>
     <string name="lockscreen_maximize_widgets_summary">Mostra i widget massimizzati e lo sblocco minimizzato quando lo schermo viene acceso</string>
     <string name="navbar_settings_title">Barra di navigazione</string>
-    <string name="navbar_style_dimen_title">Dimensioni</string>
+    <string name="navbar_style_dimen_title">Altezza</string>
     <string name="navigation_bar_height">Selezione dpi</string>
     <string name="navigation_bar_height_0">0dp (nascosta)</string>
     <string name="navigation_bar_title">Pulsanti e disposizione</string>
@@ -348,4 +348,57 @@
     <string name="increasing_ring_interval_3seconds">3 secondi</string>
     <string name="increasing_ring_interval_5seconds">5 secondi</string>
     <string name="increasing_ring_interval_10seconds">10 secondi</string>
+    <string name="navigation_button_glow_time_title">Durata bagliore</string>
+    <string name="auto_brightness_setup_title">Luminosità automatica</string>
+    <string name="auto_brightness_adjustment_title">Regolazione luminosità</string>
+    <string name="auto_brightness_twilight_adjustment">Regolazione per alba e tramonto</string>
+    <string name="light_sensor_current_value">Valore attuale sensore luminosità: <xliff:g id="light_level">%d</xliff:g> lux</string>
+    <string name="auto_brightness_dialog_title">Livelli automatici di luminosità</string>
+    <string name="auto_brightness_level_format"><xliff:g id="level">%1$d</xliff:g> lux</string>
+    <string name="auto_brightness_last_level_format"><xliff:g id="level">%1$d</xliff:g> -\n\u221e lux</string>
+    <string name="auto_brightness_adjust_button">Regola</string>
+    <string name="auto_brightness_close_button">Chiudi</string>
+    <string name="auto_brightness_reset_button">Ripristina</string>
+    <string name="auto_brightness_split_dialog_title">Dividi livelli luminosità</string>
+    <string name="auto_brightness_level_dialog_title">Impostazioni luminosità</string>
+    <string name="auto_brightness_lux">Luminosità ambientale (lux)</string>
+    <string name="auto_brightness_backlight">Luminosità schermo (%)</string>
+    <string name="auto_brightness_reset_dialog_title">Ripristina livelli?</string>
+    <string name="auto_brightness_reset_confirmation">Tutti i livelli di luminosità saranno riportati ai rispettivi valori predefiniti.</string>
+    <string name="auto_brightness_split_lux_format">Dividi posizione (tra <xliff:g id="min">%1$d</xliff:g> e <xliff:g id="max">%2$d</xliff:g> lux)</string>
+    <string name="auto_brightness_level_options">Impostazioni livelli luminosità</string>
+    <string name="auto_brightness_menu_edit">Modifica</string>
+    <string name="auto_brightness_menu_split">Dividi</string>
+    <string name="auto_brightness_menu_remove">Rimuovi</string>
+    <string name="auto_brightness_preview">Anteprima</string>
+    <string name="auto_brightness_preview_dialog_title">Anteprima curva luminosità</string>
+    <string name="auto_brightness_help_dialog_title">Guida</string>
+    <string name="auto_brightness_help_text"><b>Come viene calcolata la luminosità?</b>
+\n\n
+La curva di luminosità viene calcolata eseguendo una <i>interpolazione spline di terzo grado</i>
+su un dato numero di <i>punti di controllo</i>. Non è un algoritmo che fa rimanere costante
+la luminosità dello schermo in determinati intervalli di luminosità ambientale. In questo modo,
+piccole variazioni di luce ambientale non causano grandi variazioni di luminosità dello schermo;
+tuttavia, può essere arduo predire le esatte conseguenze di una modifica nei punti di controllo.\n
+Per rimediare a questo, si può esaminare un\'anteprima della curva calcolata. Si noti che
+l\'anteprima mostra la curva in scala <i>logaritmica</i>, in modo che i punti di controllo
+possano essere visualizzati distintamente. Se si usasse una scala lineare, non sarebbe
+possibile distinguere i punti di controllo - tendenzialmente più importanti - nella gamma
+più bassa di luminosità ambientale.\n\n
+<b>Come modificare la curva di luminosità?</b>\n\n
+Ogni riga nella lista corrisponde ad un <i>punto di controllo</i> della curva di luminosità.
+Per modificare il livello di luminosità del punto, puoi usare il controllo a scorrimento
+presente in ciascuna riga. La luminosità dello schermo sarà variata in accordo con il valore
+del controllo a scorrimento per fornire un\'anteprima del livello di luminosità.\n
+Altre opzioni sono disponibili premendo a lungo una riga. Selezionando \'Modifica\', puoi modificare
+il livello di luce ambientale del punto di controllo, ed anche inserire manualmente il valore
+desiderato di luminosità dello schermo. Selezionando \'Dividi\' puoi dividere una riga, per
+inserire punti di controllo aggiuntivi. \'Rimuovi\' cancella la riga selezionata.
+    </string>
+    <string name="auto_brightness_sensitivity_title">Regolazione sensibilità</string>
+    <string name="auto_brightness_sensitivity_verylow">Molto bassa</string>
+    <string name="auto_brightness_sensitivity_low">Bassa</string>
+    <string name="auto_brightness_sensitivity_medium">Media</string>
+    <string name="auto_brightness_sensitivity_high">Alta</string>
+    <string name="auto_brightness_sensitivity_veryhigh">Molto alta</string>
 </resources>
