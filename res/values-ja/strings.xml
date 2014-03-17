@@ -606,6 +606,7 @@
     <string name="wifi_signal" msgid="5514120261628065287">"電波強度"</string>
     <string name="wifi_status" msgid="4824568012414605414">"接続状況"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"リンク速度"</string>
+    <string name="wifi_frequency" msgid="7791090119577812214">"周波数"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IPアドレス"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP方式"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"フェーズ2認証"</string>
@@ -998,7 +999,7 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"モバイルプラン"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"デフォルトのSMSアプリ"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMSアプリを変更しますか？"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"SMSアプリとして<xliff:g id="CURRENT_APP">%s</xliff:g>の代わりに<xliff:g id="NEW_APP">%s</xliff:g>を使用しますか？"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"SMSアプリとして<xliff:g id="CURRENT_APP">%2$s</xliff:g>の代わりに<xliff:g id="NEW_APP">%1$s</xliff:g>を使用しますか？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"SMSアプリとして<xliff:g id="NEW_APP">%s</xliff:g>を使用しますか？"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"不明なSIM事業者"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$sには既知のプロビジョニングウェブサイトがありません"</string>
@@ -1514,7 +1515,7 @@
     <string name="power_phone" msgid="5392641106474567277">"通話"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"アイドル状態"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"アイドル状態"</string>
-    <string name="power_unaccounted" msgid="8066636609824407931">"不明"</string>
+    <string name="power_unaccounted" msgid="709925017022660740">"その他"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"過剰算出"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU合計"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPUフォアグラウンド"</string>
@@ -2097,11 +2098,15 @@
     <string name="dashboard_title" msgid="821911564947991553">"概要"</string>
     <string name="query_hint_text" msgid="7715244743022826977">"何をお探しですか？"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi ネットワーク 接続"</string>
-    <string name="lock_screen_notifications" msgid="736030096980572317">"通知を表示"</string>
-    <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"ロック時にプライベートな通知の内容を非表示にします"</string>
-    <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"ロック時にすべての通知の内容を表示します"</string>
-    <string name="title_zen_mode" msgid="2198277358422210424">"Zenモード"</string>
-    <string name="dialog_title_zen_mode" msgid="599852552499926409">"Zenモード"</string>
-    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Zenモードを設定"</string>
+    <string name="lock_screen_notifications" msgid="6344441622889795466">"ロック時に表示"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="7971192950034108756">"プライベートな通知内容はロック画面に表示されません"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="6937529984940627146">"すべての通知内容がロック画面に表示されます"</string>
+    <string name="title_zen_mode" msgid="7354258284572459398">"制限付き中断"</string>
+    <string name="configure_zen_mode_description" msgid="1234159893107156388">"制限付き中断を設定"</string>
     <string name="zen_mode_settings_title" msgid="3709821127278518021">"制限付き中断"</string>
+    <string name="notification_settings" msgid="8342078884790733726">"通知"</string>
+    <string name="notification_settings_general" msgid="6144810019102260602">"全般"</string>
+    <string name="notification_settings_security" msgid="5096988798793488890">"セキュリティ"</string>
+    <string name="notification_settings_tweaks" msgid="659628355469765848">"Tweaks"</string>
+    <string name="notification_settings_apps" msgid="4911871909798584040">"アプリ"</string>
 </resources>

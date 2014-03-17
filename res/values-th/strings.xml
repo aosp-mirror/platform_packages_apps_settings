@@ -604,6 +604,7 @@
     <string name="wifi_signal" msgid="5514120261628065287">"ความแรงสัญญาณ"</string>
     <string name="wifi_status" msgid="4824568012414605414">"สถานะ"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"ความเร็วในการลิงก์"</string>
+    <string name="wifi_frequency" msgid="7791090119577812214">"ความถี่"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"ที่อยู่ IP"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"วิธีการ EAP"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"การตรวจสอบสิทธิ์เฟส 2"</string>
@@ -996,7 +997,7 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"แผนบริการอุปกรณ์เคลื่อนที่"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"แอป SMS ค่าเริ่มต้น"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"เปลี่ยนแอป SMS ไหม"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"ใช้ <xliff:g id="NEW_APP">%s</xliff:g> เป็นแอป SMS ของคุณแทน <xliff:g id="CURRENT_APP">%s</xliff:g> ไหม"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"ใช้ <xliff:g id="NEW_APP">%1$s</xliff:g> เป็นแอป SMS ของคุณแทน <xliff:g id="CURRENT_APP">%2$s</xliff:g> ไหม"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"ใช้ <xliff:g id="NEW_APP">%s</xliff:g> เป็นแอป SMS ของคุณไหม"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"ผู้ให้บริการซิมที่ไม่รู้จัก"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s ไม่มีเว็บไซต์การจัดสรรที่รู้จัก"</string>
@@ -1512,7 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"การโทรด้วยเสียง"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"ไม่มีการใช้งานแท็บเล็ต"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"ไม่มีการใช้งานโทรศัพท์"</string>
-    <string name="power_unaccounted" msgid="8066636609824407931">"ไม่รู้จัก"</string>
+    <string name="power_unaccounted" msgid="709925017022660740">"เบ็ดเตล็ด"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"คำนวณมากเกินไป"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU รวม"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"ส่วนหน้าของ CPU"</string>
@@ -2091,11 +2092,15 @@
     <string name="dashboard_title" msgid="821911564947991553">"ภาพรวม"</string>
     <string name="query_hint_text" msgid="7715244743022826977">"คุณมองหาสิ่งใดอยู่"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"การเชื่อมต่อเครือข่าย wifi wi-fi"</string>
-    <string name="lock_screen_notifications" msgid="736030096980572317">"แสดงการแจ้งเตือน"</string>
-    <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"เนื้อหาการแจ้งเตือนที่ละเอียดอ่อนจะถูกซ่อนไปเมื่อล็อก"</string>
-    <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"เนื้อหาการแจ้งเตือนทั้งหมดจะแสดงขึ้นเมื่อล็อก"</string>
-    <string name="title_zen_mode" msgid="2198277358422210424">"โหมด Zen"</string>
-    <string name="dialog_title_zen_mode" msgid="599852552499926409">"โหมด Zen"</string>
-    <string name="configure_zen_mode_description" msgid="7058922692542913706">"กำหนดค่าโหมด Zen"</string>
+    <string name="lock_screen_notifications" msgid="6344441622889795466">"แสดงเมื่อล็อก"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="7971192950034108756">"เนื้อหาการแจ้งเตือนที่ละเอียดอ่อนจะถูกซ่อนไม่ให้แสดงบนหน้าจอล็อก"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="6937529984940627146">"เนื้อหาการแจ้งเตือนทั้งหมดจะแสดงบนหน้าจอล็อก"</string>
+    <string name="title_zen_mode" msgid="7354258284572459398">"การรบกวนที่จำกัด"</string>
+    <string name="configure_zen_mode_description" msgid="1234159893107156388">"กำหนดค่าการรบกวนที่จำกัด"</string>
     <string name="zen_mode_settings_title" msgid="3709821127278518021">"การรบกวนที่จำกัด"</string>
+    <string name="notification_settings" msgid="8342078884790733726">"การแจ้งเตือน"</string>
+    <string name="notification_settings_general" msgid="6144810019102260602">"ทั่วไป"</string>
+    <string name="notification_settings_security" msgid="5096988798793488890">"ความปลอดภัย"</string>
+    <string name="notification_settings_tweaks" msgid="659628355469765848">"ปรับแต่ง"</string>
+    <string name="notification_settings_apps" msgid="4911871909798584040">"แอป"</string>
 </resources>

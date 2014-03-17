@@ -604,6 +604,7 @@
     <string name="wifi_signal" msgid="5514120261628065287">"Siła sygnału"</string>
     <string name="wifi_status" msgid="4824568012414605414">"Stan"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"Szybkość łącza"</string>
+    <string name="wifi_frequency" msgid="7791090119577812214">"Częstotliwość"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"Adres IP"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"Metoda EAP"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"Uwierzytelnianie w drugiej fazie"</string>
@@ -996,7 +997,7 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Taryfa komórkowa"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Domyślna aplikacja do SMS-ów"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Zmienić aplikację do SMS-ów?"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Używać <xliff:g id="NEW_APP">%s</xliff:g> zamiast <xliff:g id="CURRENT_APP">%s</xliff:g> jako aplikacji do SMS-ów?"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Używać <xliff:g id="NEW_APP">%1$s</xliff:g> zamiast <xliff:g id="CURRENT_APP">%2$s</xliff:g> jako aplikacji do SMS-ów?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Użyć <xliff:g id="NEW_APP">%s</xliff:g> jako aplikacji do SMS-ów?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Nieznany operator karty SIM"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s nie ma znanej witryny obsługi"</string>
@@ -1512,7 +1513,7 @@
     <string name="power_phone" msgid="5392641106474567277">"Połączenia głosowe"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet nieaktywny"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon nieaktywny"</string>
-    <string name="power_unaccounted" msgid="8066636609824407931">"Nieznane"</string>
+    <string name="power_unaccounted" msgid="709925017022660740">"Inne"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"Obliczone z nadmiarem"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU łącznie"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU (pierwszy plan)"</string>
@@ -2091,11 +2092,15 @@
     <string name="dashboard_title" msgid="821911564947991553">"Omówienie"</string>
     <string name="query_hint_text" msgid="7715244743022826977">"Czego szukasz?"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi połączenie internet"</string>
-    <string name="lock_screen_notifications" msgid="736030096980572317">"Pokaż powiadomienia"</string>
-    <string name="lock_screen_notifications_summary_off" msgid="3873689304488434778">"W trybie blokady treść poufna powiadomień będzie ukryta"</string>
-    <string name="lock_screen_notifications_summary_on" msgid="7770997162767814840">"W trybie blokady cała treść powiadomień będzie widoczna"</string>
-    <string name="title_zen_mode" msgid="2198277358422210424">"Tryb zen"</string>
-    <string name="dialog_title_zen_mode" msgid="599852552499926409">"Tryb zen"</string>
-    <string name="configure_zen_mode_description" msgid="7058922692542913706">"Skonfiguruj tryb zen"</string>
+    <string name="lock_screen_notifications" msgid="6344441622889795466">"Pokaż przy blokadzie"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="7971192950034108756">"Poufne informacje będą ukryte na ekranie blokady"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="6937529984940627146">"Cała treść będzie widoczna na ekranie blokady"</string>
+    <string name="title_zen_mode" msgid="7354258284572459398">"Nieliczne powiadomienia"</string>
+    <string name="configure_zen_mode_description" msgid="1234159893107156388">"Skonfiguruj nieliczne powiadomienia"</string>
     <string name="zen_mode_settings_title" msgid="3709821127278518021">"Nieliczne powiadomienia"</string>
+    <string name="notification_settings" msgid="8342078884790733726">"Powiadomienia"</string>
+    <string name="notification_settings_general" msgid="6144810019102260602">"Ogólne"</string>
+    <string name="notification_settings_security" msgid="5096988798793488890">"Zabezpieczenia"</string>
+    <string name="notification_settings_tweaks" msgid="659628355469765848">"Dodatkowe opcje"</string>
+    <string name="notification_settings_apps" msgid="4911871909798584040">"Aplikacje"</string>
 </resources>
