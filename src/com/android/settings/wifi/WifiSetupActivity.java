@@ -32,8 +32,11 @@ public class WifiSetupActivity extends WifiPickerActivity implements ButtonBarHa
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
         String themeName = getIntent().getStringExtra(EXTRA_THEME);
-        if (themeName != null && themeName.equalsIgnoreCase(THEME_HOLO_LIGHT)) {
+        if (THEME_HOLO_LIGHT.equalsIgnoreCase(themeName)) {
             resid = getResources().getIdentifier(RESOURCE_THEME_LIGHT, "style",
+                    getPackageName());
+        } else if (THEME_HOLO.equalsIgnoreCase(themeName)) {
+            resid = getResources().getIdentifier(RESOURCE_THEME_DARK, "style",
                     getPackageName());
         }
         super.onApplyThemeResource(theme, resid, first);
