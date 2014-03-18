@@ -37,4 +37,17 @@
         android:text="@string/enter_password"
         android:drawableLeft="@*android:drawable/ic_lock_idle_lock"
         />
+    <TextView
+        android:id="@+id/owner_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit ="marquee_forever"
+        android:scrollHorizontally="true"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
 </LinearLayout>
