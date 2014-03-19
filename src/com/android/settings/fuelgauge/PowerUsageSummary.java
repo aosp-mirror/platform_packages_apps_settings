@@ -152,7 +152,7 @@ public class PowerUsageSummary extends PreferenceFragment {
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
         PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
-                entry, true);
+                mStatsType, entry, true);
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -238,13 +238,7 @@ public class PowerUsageSummary extends PreferenceFragment {
             addNotAvailableMessage();
             return;
         }
-        int dischargeAmount = mStatsType == BatteryStats.STATS_SINCE_CHARGED
-                ? mStatsHelper.getStats().getHighDischargeAmountSinceCharge()
-                : (mStatsHelper.getStats().getDischargeStartLevel()
-                        - mStatsHelper.getStats().getDischargeCurrentLevel());
-        if (dischargeAmount < 0) {
-            dischargeAmount = 0;
-        }
+        final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(mStatsType);
         mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
         for (int i=0; i<usageList.size(); i++) {
