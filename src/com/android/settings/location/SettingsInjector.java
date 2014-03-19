@@ -254,8 +254,11 @@ class SettingsInjector {
         Drawable icon = pm.getDrawable(info.packageName, info.iconId, null);
         pref.setIcon(icon);
 
+        // Activity to start if they click on the preference. Must start in new task to ensure
+        // that "android.settings.LOCATION_SOURCE_SETTINGS" brings user back to Settings > Location.
         Intent settingIntent = new Intent();
         settingIntent.setClassName(info.packageName, info.settingsActivity);
+        settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         pref.setIntent(settingIntent);
 
         prefs.add(pref);
