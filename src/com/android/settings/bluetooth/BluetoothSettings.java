@@ -51,7 +51,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     private static final String TAG = "BluetoothSettings";
 
     private static final int MENU_ID_SCAN = Menu.FIRST;
-    private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 1;
+    private static final int MENU_ID_RENAME_DEVICE = Menu.FIRST + 1;
+    private static final int MENU_ID_VISIBILITY_TIMEOUT = Menu.FIRST + 2;
+    private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 3;
 
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
@@ -176,6 +178,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, textId)
                 .setEnabled(bluetoothIsEnabled && !isDiscovering)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(Menu.NONE, MENU_ID_RENAME_DEVICE, 0, R.string.bluetooth_rename_device)
+                .setEnabled(bluetoothIsEnabled)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(Menu.NONE, MENU_ID_VISIBILITY_TIMEOUT, 0, R.string.bluetooth_visibility_timeout)
+                .setEnabled(bluetoothIsEnabled)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_SHOW_RECEIVED, 0, R.string.bluetooth_show_received_files)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         super.onCreateOptionsMenu(menu, inflater);
@@ -188,6 +196,16 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
                 if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
                     startScanning();
                 }
+                return true;
+
+            case MENU_ID_RENAME_DEVICE:
+                new BluetoothNameDialogFragment().show(
+                        getFragmentManager(), "rename device");
+                return true;
+
+            case MENU_ID_VISIBILITY_TIMEOUT:
+                new BluetoothVisibilityTimeoutFragment().show(
+                        getFragmentManager(), "visibility timeout");
                 return true;
 
             case MENU_ID_SHOW_RECEIVED:
@@ -234,8 +252,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
 
                 // This device
                 if (mMyDevicePreference == null) {
-                    mMyDevicePreference = new BluetoothLocalDevicePreference(
-                            getActivity(), mLocalDeviceProfilesListener);
+                    mMyDevicePreference = new Preference(getActivity());
                 }
                 mMyDevicePreference.setTitle(mLocalAdapter.getName());
                 if (getResources().getBoolean(com.android.internal.R.bool.config_voice_capable)) {
@@ -343,19 +360,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
         updateContent(mLocalAdapter.getBluetoothState(), false);
     }
 
-    // Listener for local device profile fragment.
-    private final View.OnClickListener mLocalDeviceProfilesListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            if (isRestrictedAndNotPinProtected()) return;
-
-            ((PreferenceActivity) getActivity()).startPreferencePanel(
-                    LocalDeviceProfilesSettings.class.getName(), null,
-                    0, mLocalAdapter.getName(), null, 0);
-        }
-    };
-
-
-    private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
+   private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
         public void onClick(View v) {
             // User clicked on advanced options icon for a device in the list
             if (v.getTag() instanceof CachedBluetoothDevice) {
