@@ -118,23 +118,12 @@ public final class LocalBluetoothAdapter {
         return mAdapter.isDiscovering();
     }
 
-    boolean isAdvertising() {
-        return mAdapter.isAdvertising();
-    }
     boolean isEnabled() {
         return mAdapter.isEnabled();
     }
 
     void setDiscoverableTimeout(int timeout) {
         mAdapter.setDiscoverableTimeout(timeout);
-    }
-
-    boolean startAdvertising() {
-      return mAdapter.startAdvertising();
-    }
-
-    boolean stopAdvertising() {
-      return mAdapter.stopAdvertisting();
     }
 
     void setName(String name) {

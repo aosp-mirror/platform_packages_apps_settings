@@ -17,10 +17,8 @@
 package com.android.settings.bluetooth;
 
 import android.app.QueuedWork;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.util.Log;
 
@@ -48,10 +46,6 @@ final class LocalBluetoothPreferences {
 
     private static final String KEY_DISCOVERABLE_END_TIMESTAMP = "discoverable_end_timestamp";
 
-    private static final String KEY_ADVERTISEMENT_PREFERENCE = "bt_advertisement_perference";
-
-    private static final boolean DEFAULT_ADVERTISING_ENABLED = false;
-
     private LocalBluetoothPreferences() {
     }
 
@@ -62,17 +56,6 @@ final class LocalBluetoothPreferences {
     static long getDiscoverableEndTimestamp(Context context) {
         return getSharedPreferences(context).getLong(
                 KEY_DISCOVERABLE_END_TIMESTAMP, 0);
-    }
-
-    static boolean isAdvertisingEnabled(Context context) {
-        return getSharedPreferences(context).getBoolean(
-                KEY_ADVERTISEMENT_PREFERENCE, DEFAULT_ADVERTISING_ENABLED);
-    }
-
-    static void setAdvertisingEnabled(Context context, boolean advertisingEnabled) {
-        Editor preferenceEditor = getSharedPreferences(context).edit();
-        preferenceEditor.putBoolean(KEY_ADVERTISEMENT_PREFERENCE, advertisingEnabled);
-        preferenceEditor.apply();
     }
 
     static boolean shouldShowDialogInForeground(Context context,
