@@ -54,7 +54,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             new SearchIndexableResource(1, NO_DATA_RES_ID,
                     WifiSettings.class.getName(),
                     R.drawable.ic_settings_wireless),
-            new SearchIndexableResource(2, R.xml.bluetooth_settings,
+            new SearchIndexableResource(2, NO_DATA_RES_ID,
                     BluetoothSettings.class.getName(),
                     R.drawable.ic_settings_bluetooth2),
             new SearchIndexableResource(3, R.xml.data_usage_metered_prefs,

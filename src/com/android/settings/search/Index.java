@@ -183,9 +183,9 @@ public class Index {
                 SearchIndexablesContract.INDEXABLES_RAW_PATH);
     }
 
-    private void addIndexablesForXmlResourceUri(Context context, String packageName, Uri uri,
+    private void addIndexablesForXmlResourceUri(Context packageContext, String packageName, Uri uri,
             String[] projection) {
-        final ContentResolver resolver = context.getContentResolver();
+        final ContentResolver resolver = packageContext.getContentResolver();
 
         final Cursor cursor = resolver.query(uri, projection,
                 null, null, null);
@@ -209,7 +209,7 @@ public class Index {
                     final String targetPackage = cursor.getString(5);
                     final String targetClass = cursor.getString(6);
 
-                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    SearchIndexableResource sir = new SearchIndexableResource(packageContext);
                     sir.rank = rank;
                     sir.xmlResId = xmlResId;
                     sir.className = className;
@@ -227,9 +227,9 @@ public class Index {
         }
     }
 
-    private void addIndexablesForRawDataUri(Context context, String packageName, Uri uri,
+    private void addIndexablesForRawDataUri(Context packageContext, String packageName, Uri uri,
                                             String[] projection) {
-        final ContentResolver resolver = context.getContentResolver();
+        final ContentResolver resolver = packageContext.getContentResolver();
 
         final Cursor cursor = resolver.query(uri, projection,
                 null, null, null);
@@ -257,7 +257,7 @@ public class Index {
                     final String targetPackage = cursor.getString(8);
                     final String targetClass = cursor.getString(9);
 
-                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
                     data.rank = rank;
                     data.title = title;
                     data.summary = summary;
@@ -472,6 +472,7 @@ public class Index {
                         sir.xmlResId, sir.className, sir.iconResId, sir.rank,
                         sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass);
             } else if (!TextUtils.isEmpty(sir.className)) {
+                sir.context = mContext;
                 indexFromLocalProvider(database, localeStr, sir);
             }
         }
