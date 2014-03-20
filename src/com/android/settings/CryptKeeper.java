@@ -174,6 +174,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
             } else if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
+                if (mLockPatternView != null) {
+                    mLockPatternView.clearPattern();
+                }
                 mCooldown = COOL_DOWN_INTERVAL;
                 cooldown();
             } else {
@@ -182,6 +185,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 // Reenable the password entry
                 if (mPasswordEntry != null) {
                     mPasswordEntry.setEnabled(true);
+                }
+                if (mLockPatternView != null) {
+                    mLockPatternView.setEnabled(true);
                 }
             }
         }
@@ -373,6 +379,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 setContentView(R.layout.crypt_keeper_pin_entry);
             } else if (type == StorageManager.CRYPT_TYPE_PATTERN) {
                 setContentView(R.layout.crypt_keeper_pattern_entry);
+                setBackFunctionality(false);
             } else {
                 setContentView(R.layout.crypt_keeper_password_entry);
             }
@@ -498,8 +505,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         if (mCooldown <= 0) {
             // Re-enable the password entry and back presses.
-            mPasswordEntry.setEnabled(true);
-            setBackFunctionality(true);
+            if (mPasswordEntry != null) {
+                mPasswordEntry.setEnabled(true);
+                setBackFunctionality(true);
+            }
+            if (mLockPatternView != null) {
+                mLockPatternView.setEnabled(true);
+            }
             status.setText(R.string.enter_password);
         } else {
             CharSequence template = getText(R.string.crypt_keeper_cooldown);
@@ -537,6 +549,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
             @Override
             public void onPatternDetected(List<LockPatternView.Cell> pattern) {
+                mLockPatternView.setEnabled(false);
                 new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
             }
 
