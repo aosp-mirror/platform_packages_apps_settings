@@ -24,9 +24,9 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import com.android.settings.indexer.Indexable;
-import com.android.settings.indexer.IndexableData;
-import com.android.settings.indexer.IndexableRef;
+import android.provider.SearchIndexableResource;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,16 +64,16 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    public static final IndexDataProvider INDEX_DATA_PROVIDER =
-        new IndexDataProvider() {
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new SearchIndexProvider() {
             @Override
-            public List<IndexableRef> getRefsToIndex(Context context) {
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context) {
                 return null;
             }
 
             @Override
-            public List<IndexableData> getRawDataToIndex(Context context) {
-                final List<IndexableData> result = new ArrayList<IndexableData>();
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
 
                 final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
                 final PackageManager pm = context.getPackageManager();
@@ -82,17 +82,14 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
 
                 // Add indexable data for each of the matching activities
                 for (ResolveInfo info : rList) {
-                    Intent prefIntent = new Intent(intent);
-                    prefIntent.setComponent(new ComponentName(
-                            info.activityInfo.packageName, info.activityInfo.name));
                     CharSequence label = info.loadLabel(pm);
                     if (label == null) label = info.activityInfo.packageName;
 
-                    IndexableData data = new IndexableData();
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = label.toString();
-                    data.fragmentTitle = context.getResources().getString(
+                    data.screenTitle = context.getResources().getString(
                             R.string.wallpaper_settings_fragment_title);
-                    data.intentAction = intent.getAction();
+                    data.intentAction = Intent.ACTION_SET_WALLPAPER;
                     data.intentTargetPackage = info.activityInfo.packageName;
                     data.intentTargetClass = info.activityInfo.name;
                     result.add(data);

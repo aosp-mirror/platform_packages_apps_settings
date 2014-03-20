@@ -17,13 +17,19 @@
 package com.android.settings.dashboard;
 
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +42,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.indexer.Index;
+import com.android.settings.search.Index;
+
+import java.util.HashMap;
 
 public class DashboardSummary extends Fragment {
+
+    private static final String LOG_TAG = "DashboardSummary";
 
     private EditText mEditText;
     private ListView mListView;
@@ -124,13 +134,33 @@ public class DashboardSummary extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 closeSoftKeyboard();
+
                 final Cursor cursor = mAdapter.mCursor;
                 cursor.moveToPosition(position);
-                final String fragmentName = cursor.getString(Index.COLUMN_INDEX_FRAGMENT_NAME);
-                final String fragmentTitle = cursor.getString(Index.COLUMN_INDEX_FRAGMENT_TITLE);
 
-                ((SettingsActivity) getActivity()).startPreferencePanel(fragmentName, null, 0,
-                        fragmentTitle, null, 0);
+                final String className = cursor.getString(Index.COLUMN_INDEX_CLASS_NAME);
+                final String screenTitle = cursor.getString(Index.COLUMN_INDEX_SCREEN_TITLE);
+
+                final String action = cursor.getString(Index.COLUMN_INDEX_INTENT_ACTION);
+
+                if (TextUtils.isEmpty(action)) {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(className, null, 0,
+                            screenTitle, null, 0);
+                } else {
+                    final Intent intent = new Intent(action);
+
+                    final String targetPackage = cursor.getString(
+                            Index.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
+                    final String targetClass = cursor.getString(
+                            Index.COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS);
+                    if (!TextUtils.isEmpty(targetPackage) && !TextUtils.isEmpty(targetClass)) {
+                        final ComponentName component =
+                                new ComponentName(targetPackage, targetClass);
+                        intent.setComponent(component);
+                    }
+
+                    getActivity().startActivity(intent);
+                }
             }
         });
 
@@ -190,8 +220,10 @@ public class DashboardSummary extends Fragment {
         public String title;
         public String summary;
         public int iconResId;
+        public Context context;
 
-        public SearchResult(String title, String summary, int iconResId) {
+        public SearchResult(Context context, String title, String summary, int iconResId) {
+            this.context = context;
             this.title = title;
             this.summary = summary;
             this.iconResId = iconResId;
@@ -203,9 +235,12 @@ public class DashboardSummary extends Fragment {
         private Cursor mCursor;
         private LayoutInflater mInflater;
         private boolean mDataValid;
+        private Context mContext;
+        private HashMap<String, Context> mContextMap = new HashMap<String, Context>();
 
         public SearchResultsAdapter(Context context) {
-            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mContext = context;
+            mInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mDataValid = false;
         }
 
@@ -237,9 +272,29 @@ public class DashboardSummary extends Fragment {
                 final String title = mCursor.getString(Index.COLUMN_INDEX_TITLE);
                 final String summary = mCursor.getString(Index.COLUMN_INDEX_SUMMARY);
                 final String iconResStr = mCursor.getString(Index.COLUMN_INDEX_ICON);
-                final int iconResId =
-                        TextUtils.isEmpty(iconResStr) ? 0 : Integer.parseInt(iconResStr);
-                return new SearchResult(title, summary, iconResId);
+                final String className = mCursor.getString(
+                        Index.COLUMN_INDEX_CLASS_NAME);
+                final String packageName = mCursor.getString(
+                        Index.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
+
+                Context packageContext;
+                if (TextUtils.isEmpty(className) && !TextUtils.isEmpty(packageName)) {
+                    packageContext = mContextMap.get(packageName);
+                    if (packageContext == null) {
+                        try {
+                            packageContext = mContext.createPackageContext(packageName, 0);
+                        } catch (PackageManager.NameNotFoundException e) {
+                            Log.e(LOG_TAG, "Cannot create Context for package: " + packageName);
+                            return null;
+                        }
+                        mContextMap.put(packageName, packageContext);
+                    }
+                } else {
+                    packageContext = mContext;
+                }
+                final int iconResId = TextUtils.isEmpty(iconResStr) ?
+                        R.drawable.empty_icon : Integer.parseInt(iconResStr);
+                return new SearchResult(packageContext, title, summary, iconResId);
             }
             return null;
         }
@@ -278,7 +333,15 @@ public class DashboardSummary extends Fragment {
             textTitle.setText(result.title);
             textSummary.setText(result.summary);
             if (result.iconResId != R.drawable.empty_icon) {
-                imageView.setImageResource(result.iconResId);
+                final Context packageContext = result.context;
+                final Drawable drawable;
+                try {
+                    drawable = packageContext.getDrawable(result.iconResId);
+                    imageView.setImageDrawable(drawable);
+                } catch (Resources.NotFoundException nfe) {
+                    // Not much we can do except logging
+                    Log.e(LOG_TAG, "Cannot load Drawable for " + result.title);
+                }
                 imageView.setBackgroundResource(R.color.background_search_result_icon);
             } else {
                 imageView.setImageDrawable(null);

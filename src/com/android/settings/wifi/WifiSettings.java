@@ -20,12 +20,12 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.preference.PreferenceActivity;
+import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
-import com.android.settings.indexer.Indexable;
-import com.android.settings.indexer.IndexableData;
-import com.android.settings.indexer.IndexableRef;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.ActionBar;
@@ -1165,22 +1165,22 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
-    public static final Indexable.IndexDataProvider INDEX_DATA_PROVIDER =
-        new Indexable.IndexDataProvider() {
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new SearchIndexProvider() {
             @Override
-            public List<IndexableRef> getRefsToIndex(Context context) {
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context) {
                 return null;
             }
 
             @Override
-            public List<IndexableData> getRawDataToIndex(Context context) {
-                final List<IndexableData> result = new ArrayList<IndexableData>();
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
                 final Resources res = context.getResources();
 
                 // Add fragment title
-                IndexableData data = new IndexableData();
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
                 data.title = res.getString(R.string.wifi_settings);
-                data.fragmentTitle = res.getString(R.string.wifi_settings);
+                data.screenTitle = res.getString(R.string.wifi_settings);
                 result.add(data);
 
                 // Add available Wi-Fi access points
@@ -1191,9 +1191,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                 for (AccessPoint accessPoint : accessPoints) {
                     // We are indexing only the saved Wi-Fi networks.
                     if (accessPoint.getConfig() == null) continue;
-                    data = new IndexableData();
+                    data = new SearchIndexableRaw(context);
                     data.title = accessPoint.getTitle().toString();
-                    data.fragmentTitle = res.getString(R.string.wifi_settings);
+                    data.screenTitle = res.getString(R.string.wifi_settings);
                     result.add(data);
                 }
 

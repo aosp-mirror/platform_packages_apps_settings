@@ -14,32 +14,27 @@
  * limitations under the License.
  */
 
-package com.android.settings.indexer;
+package com.android.settings.search;
 
-import java.util.Locale;
+import android.content.Context;
+import android.provider.SearchIndexableData;
 
 /**
- * Indexable Data.
+ * Indexable raw data for Search.
  *
  * This is the raw data used by the Indexer and should match its data model.
  *
- * See {@link Indexable} and {@link IndexableRef}.
+ * See {@link Indexable} and {@link android.provider.SearchIndexableResource}.
  */
-public class IndexableData {
-
-    public Locale locale;
+public class SearchIndexableRaw extends SearchIndexableData {
 
     public String title;
     public String summary;
     public String keywords;
 
-    public String intentAction;
-    public String intentTargetPackage;
-    public String intentTargetClass;
+    public String screenTitle;
 
-    public String fragmentTitle;
-
-    public IndexableData() {
-        locale = Locale.getDefault();
+    public SearchIndexableRaw(Context context) {
+        super(context);
     }
 }

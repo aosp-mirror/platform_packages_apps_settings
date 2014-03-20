@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package com.android.settings.indexer;
+package com.android.settings.search;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.SearchIndexableData;
+import android.provider.SearchIndexableResource;
+import android.provider.SearchIndexablesContract;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -41,8 +49,8 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static com.android.settings.indexer.IndexDatabaseHelper.Tables;
-import static com.android.settings.indexer.IndexDatabaseHelper.IndexColumns;
+import static com.android.settings.search.IndexDatabaseHelper.Tables;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
 
 public class Index {
 
@@ -51,9 +59,12 @@ public class Index {
     // Those indices should match the indices of SELECT_COLUMNS !
     public static final int COLUMN_INDEX_TITLE = 1;
     public static final int COLUMN_INDEX_SUMMARY = 2;
-    public static final int COLUMN_INDEX_FRAGMENT_NAME = 4;
-    public static final int COLUMN_INDEX_FRAGMENT_TITLE = 5;
-    public static final int COLUMN_INDEX_ICON = 7;
+    public static final int COLUMN_INDEX_CLASS_NAME = 4;
+    public static final int COLUMN_INDEX_SCREEN_TITLE = 5;
+    public static final int COLUMN_INDEX_ICON = 6;
+    public static final int COLUMN_INDEX_INTENT_ACTION = 7;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 9;
 
     // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
     private static final String[] SELECT_COLUMNS = new String[] {
@@ -61,10 +72,12 @@ public class Index {
             IndexColumns.DATA_TITLE,
             IndexColumns.DATA_SUMMARY,
             IndexColumns.DATA_KEYWORDS,
-            IndexColumns.FRAGMENT_NAME,
-            IndexColumns.FRAGMENT_TITLE,
-            IndexColumns.INTENT,
-            IndexColumns.ICON
+            IndexColumns.CLASS_NAME,
+            IndexColumns.SCREEN_TITLE,
+            IndexColumns.ICON,
+            IndexColumns.INTENT_ACTION,
+            IndexColumns.INTENT_TARGET_PACKAGE,
+            IndexColumns.INTENT_TARGET_CLASS
     };
 
     private static final String[] MATCH_COLUMNS = {
@@ -105,7 +118,13 @@ public class Index {
         return mIsAvailable.get();
     }
 
-    public void addIndexableData(IndexableRef[] array) {
+    public void addIndexableData(SearchIndexableData data) {
+        synchronized (mUpdateData) {
+            mUpdateData.dataToAdd.add(data);
+        }
+    }
+
+    public void addIndexableData(SearchIndexableResource[] array) {
         synchronized (mUpdateData) {
             final int count = array.length;
             for (int n = 0; n < count; n++) {
@@ -124,6 +143,142 @@ public class Index {
     }
 
     public boolean update() {
+        final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
+        List<ResolveInfo> list =
+                mContext.getPackageManager().queryIntentContentProviders(intent, 0);
+
+        final int size = list.size();
+        for (int n = 0; n < size; n++) {
+            final ResolveInfo info = list.get(n);
+            final String authority = info.providerInfo.authority;
+            final String packageName = info.providerInfo.packageName;
+            final Context packageContext;
+            try {
+                packageContext = mContext.createPackageContext(packageName, 0);
+
+                final Uri uriForResources = buildUriForXmlResources(authority);
+                addIndexablesForXmlResourceUri(packageContext, packageName, uriForResources,
+                        SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS);
+
+                final Uri uriForRawData = buildUriForRawData(authority);
+                addIndexablesForRawDataUri(packageContext, packageName, uriForRawData,
+                        SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.w(LOG_TAG, "Could not create context for " + packageName + ": "
+                        + Log.getStackTraceString(e));
+                continue;
+            }
+        }
+
+        return updateInternal();
+    }
+
+    private static Uri buildUriForXmlResources(String authority) {
+        return Uri.parse("content://" + authority + "/" +
+                SearchIndexablesContract.INDEXABLES_XML_RES_PATH);
+    }
+
+    private static Uri buildUriForRawData(String authority) {
+        return Uri.parse("content://" + authority + "/" +
+                SearchIndexablesContract.INDEXABLES_RAW_PATH);
+    }
+
+    private void addIndexablesForXmlResourceUri(Context context, String packageName, Uri uri,
+            String[] projection) {
+        final ContentResolver resolver = context.getContentResolver();
+
+        final Cursor cursor = resolver.query(uri, projection,
+                null, null, null);
+
+        if (cursor == null) {
+            Log.w(LOG_TAG, "Cannot add index data for Uri: " + uri.toString());
+            return;
+        }
+
+        try {
+            final int count = cursor.getCount();
+            if (count > 0) {
+                while (cursor.moveToNext()) {
+                    final int rank = cursor.getInt(0);
+                    final int xmlResId = cursor.getInt(1);
+
+                    final String className = cursor.getString(2);
+                    final int iconResId = cursor.getInt(3);
+
+                    final String action = cursor.getString(4);
+                    final String targetPackage = cursor.getString(5);
+                    final String targetClass = cursor.getString(6);
+
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.rank = rank;
+                    sir.xmlResId = xmlResId;
+                    sir.className = className;
+                    sir.packageName = packageName;
+                    sir.iconResId = iconResId;
+                    sir.intentAction = action;
+                    sir.intentTargetPackage = targetPackage;
+                    sir.intentTargetClass = targetClass;
+
+                    addIndexableData(sir);
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+    }
+
+    private void addIndexablesForRawDataUri(Context context, String packageName, Uri uri,
+                                            String[] projection) {
+        final ContentResolver resolver = context.getContentResolver();
+
+        final Cursor cursor = resolver.query(uri, projection,
+                null, null, null);
+
+        if (cursor == null) {
+            Log.w(LOG_TAG, "Cannot add index data for Uri: " + uri.toString());
+            return;
+        }
+
+        try {
+            final int count = cursor.getCount();
+            if (count > 0) {
+                while (cursor.moveToNext()) {
+                    final int rank = cursor.getInt(0);
+                    final String title = cursor.getString(1);
+                    final String summary = cursor.getString(2);
+                    final String keywords = cursor.getString(3);
+
+                    final String screenTitle = cursor.getString(4);
+
+                    final String className = cursor.getString(5);
+                    final int iconResId = cursor.getInt(6);
+
+                    final String action = cursor.getString(7);
+                    final String targetPackage = cursor.getString(8);
+                    final String targetClass = cursor.getString(9);
+
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.rank = rank;
+                    data.title = title;
+                    data.summary = summary;
+                    data.keywords = keywords;
+                    data.screenTitle = screenTitle;
+                    data.className = className;
+                    data.packageName = packageName;
+                    data.iconResId = iconResId;
+                    data.intentAction = action;
+                    data.intentTargetPackage = targetPackage;
+                    data.intentTargetClass = targetClass;
+
+                    addIndexableData(data);
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+    }
+
+    private boolean updateInternal() {
         synchronized (mUpdateData) {
             final UpdateIndexTask task = new UpdateIndexTask();
             task.execute(mUpdateData);
@@ -210,11 +365,11 @@ public class Index {
      * A private class to describe the update data for the Index database
      */
     private class UpdateData {
-        public List<IndexableRef> dataToAdd;
+        public List<SearchIndexableData> dataToAdd;
         public List<String> dataToDelete;
 
         public UpdateData() {
-            dataToAdd = new ArrayList<IndexableRef>();
+            dataToAdd = new ArrayList<SearchIndexableData>();
             dataToDelete = new ArrayList<String>();
         }
 
@@ -245,7 +400,7 @@ public class Index {
         protected Boolean doInBackground(UpdateData... params) {
             boolean result = false;
 
-            final List<IndexableRef> dataToAdd = params[0].dataToAdd;
+            final List<SearchIndexableData> dataToAdd = params[0].dataToAdd;
             final List<String> dataToDelete = params[0].dataToDelete;
             final SQLiteDatabase database = getWritableDatabase();
             final String localeStr = Locale.getDefault().toString();
@@ -285,7 +440,7 @@ public class Index {
         }
 
         private boolean processDataToAdd(SQLiteDatabase database, String localeStr,
-                                         List<IndexableRef> dataToAdd) {
+                                         List<SearchIndexableData> dataToAdd) {
             if (isLocaleAlreadyIndexed(database, localeStr)) {
                 Log.d(LOG_TAG, "Locale '" + localeStr + "' is already indexed");
                 return true;
@@ -296,8 +451,12 @@ public class Index {
 
             final int count = dataToAdd.size();
             for (int n = 0; n < count; n++) {
-                final IndexableRef ref = dataToAdd.get(n);
-                indexOneRef(database, localeStr, ref);
+                final SearchIndexableData data = dataToAdd.get(n);
+                if (data instanceof SearchIndexableResource) {
+                    indexOneResource(database, localeStr, (SearchIndexableResource) data);
+                } else if (data instanceof SearchIndexableRaw) {
+                    indexOneRaw(database, localeStr, (SearchIndexableRaw) data);
+                }
             }
 
             final long now = System.currentTimeMillis();
@@ -306,51 +465,100 @@ public class Index {
             return result;
         }
 
-        private void indexOneRef(SQLiteDatabase database, String localeStr, IndexableRef ref) {
-            if (ref.xmlResId > 0) {
-                indexFromResource(database, localeStr, ref.xmlResId, ref.fragmentName,
-                        ref.iconResId, ref.rank);
-            } else if (!TextUtils.isEmpty(ref.fragmentName)) {
-                indexRawData(database, localeStr, ref);
+        private void indexOneResource(SQLiteDatabase database, String localeStr,
+                SearchIndexableResource sir) {
+            if (sir.xmlResId > 0) {
+                indexFromResource(sir.context, database, localeStr,
+                        sir.xmlResId, sir.className, sir.iconResId, sir.rank,
+                        sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass);
+            } else if (!TextUtils.isEmpty(sir.className)) {
+                indexFromLocalProvider(database, localeStr, sir);
             }
         }
 
-        private void indexRawData(SQLiteDatabase database, String localeStr, IndexableRef ref) {
+        private void indexFromLocalProvider(SQLiteDatabase database, String localeStr,
+                                            SearchIndexableResource sir) {
             try {
-                final Class<?> clazz = Class.forName(ref.fragmentName);
+                final Class<?> clazz = Class.forName(sir.className);
                 if (Indexable.class.isAssignableFrom(clazz)) {
-                    final Field f = clazz.getField("INDEX_DATA_PROVIDER");
-                    final Indexable.IndexDataProvider provider =
-                            (Indexable.IndexDataProvider) f.get(null);
+                    final Field f = clazz.getField("SEARCH_INDEX_DATA_PROVIDER");
+                    final Indexable.SearchIndexProvider provider =
+                            (Indexable.SearchIndexProvider) f.get(null);
 
-                    final List<IndexableData> data = provider.getRawDataToIndex(mContext);
+                    final List<SearchIndexableRaw> rawList =
+                            provider.getRawDataToIndex(sir.context);
+                    if (rawList != null) {
+                        final int rawSize = rawList.size();
+                        for (int i = 0; i < rawSize; i++) {
+                            SearchIndexableRaw raw = rawList.get(i);
 
-                    final int size = data.size();
-                    for (int i = 0; i < size; i++) {
-                        IndexableData raw = data.get(i);
+                            // Should be the same locale as the one we are processing
+                            if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+                                continue;
+                            }
 
-                        // Should be the same locale as the one we are processing
-                        if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
-                            continue;
+                            insertOneRowWithFilteredData(database, localeStr,
+                                    raw.title,
+                                    raw.summary,
+                                    sir.className,
+                                    raw.screenTitle,
+                                    sir.iconResId,
+                                    sir.rank,
+                                    raw.keywords,
+                                    raw.intentAction,
+                                    raw.intentTargetPackage,
+                                    raw.intentTargetClass
+                            );
                         }
+                    }
 
-                        inserOneRowWithFilteredData(database, localeStr,
-                                raw.title,
-                                raw.summary,
-                                ref.fragmentName,
-                                raw.fragmentTitle,
-                                ref.iconResId,
-                                ref.rank,
-                                raw.keywords);
+                    final List<SearchIndexableResource> resList =
+                            provider.getXmlResourcesToIndex(sir.context);
+                    if (resList != null) {
+                        final int resSize = resList.size();
+                        for (int i = 0; i < resSize; i++) {
+                            SearchIndexableResource item = resList.get(i);
+
+                            // Should be the same locale as the one we are processing
+                            if (!item.locale.toString().equalsIgnoreCase(localeStr)) {
+                                continue;
+                            }
+
+                            indexFromResource(sir.context, database, localeStr,
+                                    item.xmlResId, item.className, item.iconResId, item.rank,
+                                    item.intentAction, item.intentTargetPackage,
+                                    item.intentTargetClass);
+                        }
                     }
                 }
             } catch (ClassNotFoundException e) {
-                Log.e(LOG_TAG, "Cannot find class: " + ref.fragmentName, e);
+                Log.e(LOG_TAG, "Cannot find class: " + sir.className, e);
             } catch (NoSuchFieldException e) {
-                Log.e(LOG_TAG, "Cannot find field 'INDEX_DATA_PROVIDER'", e);
+                Log.e(LOG_TAG, "Cannot find field 'SEARCH_INDEX_DATA_PROVIDER'", e);
             } catch (IllegalAccessException e) {
-                Log.e(LOG_TAG, "Illegal access to field 'INDEX_DATA_PROVIDER'", e);
+                Log.e(LOG_TAG, "Illegal access to field 'SEARCH_INDEX_DATA_PROVIDER'", e);
             }
+        }
+
+        private void indexOneRaw(SQLiteDatabase database, String localeStr,
+                SearchIndexableRaw raw) {
+            // Should be the same locale as the one we are processing
+            if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+                return;
+            }
+
+            insertOneRowWithFilteredData(database, localeStr,
+                    raw.title,
+                    raw.summary,
+                    raw.className,
+                    raw.screenTitle,
+                    raw.iconResId,
+                    raw.rank,
+                    raw.keywords,
+                    raw.intentAction,
+                    raw.intentTargetPackage,
+                    raw.intentTargetClass
+            );
         }
 
         private boolean isLocaleAlreadyIndexed(SQLiteDatabase database, String locale) {
@@ -373,11 +581,13 @@ public class Index {
             return result;
         }
 
-        private void indexFromResource(SQLiteDatabase database, String localeStr, int xmlResId,
-                String fragmentName, int iconResId, int rank) {
+        private void indexFromResource(Context context, SQLiteDatabase database, String localeStr,
+                int xmlResId, String fragmentName, int iconResId, int rank,
+                String intentAction, String intentTargetPackage, String intentTargetClass) {
+
             XmlResourceParser parser = null;
             try {
-                parser = mContext.getResources().getXml(xmlResId);
+                parser = context.getResources().getXml(xmlResId);
 
                 int type;
                 while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
@@ -394,16 +604,17 @@ public class Index {
 
                 final int outerDepth = parser.getDepth();
                 final AttributeSet attrs = Xml.asAttributeSet(parser);
-                final String fragmentTitle = getDataTitle(attrs);
+                final String screenTitle = getDataTitle(context, attrs);
 
-                String title = getDataTitle(attrs);
-                String summary = getDataSummary(attrs);
-                String keywords = getDataKeywords(attrs);
+                String title = getDataTitle(context, attrs);
+                String summary = getDataSummary(context, attrs);
+                String keywords = getDataKeywords(context, attrs);
 
                 // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
                 // hyphens.
-                inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                        fragmentTitle, iconResId, rank, keywords);
+                insertOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
+                        screenTitle, iconResId, rank, keywords,
+                        intentAction, intentTargetPackage, intentTargetClass);
 
                 while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                         && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
@@ -411,13 +622,14 @@ public class Index {
                         continue;
                     }
 
-                    title = getDataTitle(attrs);
-                    summary = getDataSummary(attrs);
-                    keywords = getDataKeywords(attrs);
+                    title = getDataTitle(context, attrs);
+                    summary = getDataSummary(context, attrs);
+                    keywords = getDataKeywords(context, attrs);
 
                     // Insert rows for the child nodes of PreferenceScreen
-                    inserOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                            fragmentTitle, iconResId, rank, keywords);
+                    insertOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
+                            screenTitle, iconResId, rank, keywords,
+                            intentAction, intentTargetPackage, intentTargetClass);
                 }
 
             } catch (XmlPullParserException e) {
@@ -429,9 +641,10 @@ public class Index {
             }
         }
 
-        private void inserOneRowWithFilteredData(SQLiteDatabase database, String locale,
-                String title, String summary, String fragmentName, String fragmentTitle,
-                int iconResId, int rank, String keywords) {
+        private void insertOneRowWithFilteredData(SQLiteDatabase database, String locale,
+                String title, String summary, String className, String screenTitle,
+                int iconResId, int rank, String keywords,
+                String intentAction, String intentTargetPackage, String intentTargetClass) {
 
             String updatedTitle;
             if (title != null) {
@@ -453,14 +666,16 @@ public class Index {
 
             insertOneRow(database, locale,
                     updatedTitle, normalizedTitle, updatedSummary, normalizedSummary,
-                    fragmentName, fragmentTitle, iconResId, rank, keywords);
+                    className, screenTitle, iconResId, rank, keywords,
+                    intentAction, intentTargetPackage, intentTargetClass);
         }
 
         private void insertOneRow(SQLiteDatabase database, String locale,
-                                  String updatedTitle, String normalizedTitle,
-                                  String updatedSummary, String normalizedSummary,
-                                  String fragmentName, String fragmentTitle,
-                                  int iconResId, int rank, String keywords) {
+                String updatedTitle, String normalizedTitle,
+                String updatedSummary, String normalizedSummary,
+                String className, String screenTitle,
+                int iconResId, int rank, String keywords,
+                String intentAction, String intentTargetPackage, String intentTargetClass) {
 
             if (TextUtils.isEmpty(updatedTitle)) {
                 return;
@@ -473,9 +688,11 @@ public class Index {
             values.put(IndexColumns.DATA_SUMMARY, updatedSummary);
             values.put(IndexColumns.DATA_SUMMARY_NORMALIZED, normalizedSummary);
             values.put(IndexColumns.DATA_KEYWORDS, keywords);
-            values.put(IndexColumns.FRAGMENT_NAME, fragmentName);
-            values.put(IndexColumns.FRAGMENT_TITLE, fragmentTitle);
-            values.put(IndexColumns.INTENT, "");
+            values.put(IndexColumns.CLASS_NAME, className);
+            values.put(IndexColumns.SCREEN_TITLE, screenTitle);
+            values.put(IndexColumns.INTENT_ACTION, intentAction);
+            values.put(IndexColumns.INTENT_TARGET_PACKAGE, intentTargetPackage);
+            values.put(IndexColumns.INTENT_TARGET_CLASS, intentTargetClass);
             values.put(IndexColumns.ICON, iconResId);
 
             database.insertOrThrow(Tables.TABLE_PREFS_INDEX, null, values);
@@ -488,32 +705,32 @@ public class Index {
             return database.delete(Tables.TABLE_PREFS_INDEX, whereClause, whereArgs);
         }
 
-        private String getDataTitle(AttributeSet attrs) {
-            return getData(attrs,
+        private String getDataTitle(Context context, AttributeSet attrs) {
+            return getData(context, attrs,
                     com.android.internal.R.styleable.Preference,
                     com.android.internal.R.styleable.Preference_title);
         }
 
-        private String getDataSummary(AttributeSet attrs) {
-            return getData(attrs,
+        private String getDataSummary(Context context, AttributeSet attrs) {
+            return getData(context, attrs,
                     com.android.internal.R.styleable.Preference,
                     com.android.internal.R.styleable.Preference_summary);
         }
 
-        private String getDataKeywords(AttributeSet attrs) {
-            return getData(attrs,
+        private String getDataKeywords(Context context, AttributeSet attrs) {
+            return getData(context, attrs,
                     R.styleable.Preference,
                     R.styleable.Preference_keywords);
         }
 
-        private String getData(AttributeSet set, int[] attrs, int resId) {
-            final TypedArray sa = mContext.obtainStyledAttributes(set, attrs);
+        private String getData(Context context, AttributeSet set, int[] attrs, int resId) {
+            final TypedArray sa = context.obtainStyledAttributes(set, attrs);
             final TypedValue tv = sa.peekValue(resId);
 
             CharSequence data = null;
             if (tv != null && tv.type == TypedValue.TYPE_STRING) {
                 if (tv.resourceId != 0) {
-                    data = mContext.getText(tv.resourceId);
+                    data = context.getText(tv.resourceId);
                 } else {
                     data = tv.string;
                 }
