@@ -80,15 +80,16 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     };
 
     public static void startBatteryDetailPage(
-            SettingsActivity caller, BatteryStatsHelper helper, BatteryEntry entry,
+            SettingsActivity caller, BatteryStatsHelper helper, int statsType, BatteryEntry entry,
             boolean showLocationButton) {
         // Initialize mStats if necessary.
         helper.getStats();
 
+        final int dischargeAmount = helper.getStats().getDischargeAmount(statsType);
         Bundle args = new Bundle();
         args.putString(PowerUsageDetail.EXTRA_TITLE, entry.name);
         args.putInt(PowerUsageDetail.EXTRA_PERCENT, (int)
-                Math.ceil(entry.sipper.value * 100 / helper.getTotalPower()));
+                ((entry.sipper.value * dischargeAmount / helper.getTotalPower()) + .5));
         args.putInt(PowerUsageDetail.EXTRA_GAUGE, (int)
                 Math.ceil(entry.sipper.value * 100 / helper.getMaxPower()));
         args.putLong(PowerUsageDetail.EXTRA_USAGE_DURATION, helper.getStatsPeriod());
