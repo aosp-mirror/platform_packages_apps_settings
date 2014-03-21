@@ -42,76 +42,13 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.WifiSettings;
 
+import java.util.Collection;
+
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 
 public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     private static final String TAG = "SettingsSearchIndexablesProvider";
-
-    private static int NO_DATA_RES_ID = 0;
-
-    private static SearchIndexableResource[] INDEXABLE_REFS = new SearchIndexableResource[] {
-            new SearchIndexableResource(1, NO_DATA_RES_ID,
-                    WifiSettings.class.getName(),
-                    R.drawable.ic_settings_wireless),
-            new SearchIndexableResource(2, NO_DATA_RES_ID,
-                    BluetoothSettings.class.getName(),
-                    R.drawable.ic_settings_bluetooth2),
-            new SearchIndexableResource(3, R.xml.data_usage_metered_prefs,
-                    DataUsageMeteredSettings.class.getName(),
-                    R.drawable.ic_settings_data_usage),
-            new SearchIndexableResource(4, R.xml.wireless_settings,
-                    WirelessSettings.class.getName(),
-                    R.drawable.empty_icon),
-            new SearchIndexableResource(5, R.xml.home_selection,
-                    HomeSettings.class.getName(),
-                    R.drawable.ic_settings_home),
-            new SearchIndexableResource(6, R.xml.sound_settings,
-                    SoundSettings.class.getName(),
-                    R.drawable.ic_settings_sound),
-            new SearchIndexableResource(7, R.xml.display_settings,
-                    DisplaySettings.class.getName(),
-                    R.drawable.ic_settings_display),
-            new SearchIndexableResource(7, NO_DATA_RES_ID,
-                    WallpaperTypeSettings.class.getName(),
-                    R.drawable.ic_settings_display),
-            new SearchIndexableResource(8, R.xml.device_info_memory,
-                    Memory.class.getName(),
-                    R.drawable.ic_settings_storage),
-            new SearchIndexableResource(9, R.xml.power_usage_summary,
-                    PowerUsageSummary.class.getName(),
-                    R.drawable.ic_settings_battery),
-            new SearchIndexableResource(10, R.xml.user_settings,
-                    UserSettings.class.getName(),
-                    R.drawable.ic_settings_multiuser),
-            new SearchIndexableResource(11, R.xml.location_settings,
-                    LocationSettings.class.getName(),
-                    R.drawable.ic_settings_location),
-            new SearchIndexableResource(12, R.xml.security_settings,
-                    SecuritySettings.class.getName(),
-                    R.drawable.ic_settings_security),
-            new SearchIndexableResource(13, R.xml.language_settings,
-                    InputMethodAndLanguageSettings.class.getName(),
-                    R.drawable.ic_settings_language),
-            new SearchIndexableResource(14, R.xml.privacy_settings,
-                    PrivacySettings.class.getName(),
-                    R.drawable.ic_settings_backup),
-            new SearchIndexableResource(15, R.xml.date_time_prefs,
-                    DateTimeSettings.class.getName(),
-                    R.drawable.ic_settings_date_time),
-            new SearchIndexableResource(16, R.xml.accessibility_settings,
-                    AccessibilitySettings.class.getName(),
-                    R.drawable.ic_settings_accessibility),
-            new SearchIndexableResource(17, R.xml.print_settings,
-                    PrintSettingsFragment.class.getName(),
-                    com.android.internal.R.drawable.ic_print),
-            new SearchIndexableResource(18, R.xml.development_prefs,
-                    DevelopmentSettings.class.getName(),
-                    R.drawable.ic_settings_development),
-            new SearchIndexableResource(19, R.xml.device_info_settings,
-                    DeviceInfoSettings.class.getName(),
-                    R.drawable.ic_settings_about),
-    };
 
     @Override
     public boolean onCreate() {
@@ -121,13 +58,13 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @Override
     public Cursor queryXmlResources(String[] projection) {
         MatrixCursor cursor = new MatrixCursor(INDEXABLES_XML_RES_COLUMNS);
-        final int count = INDEXABLE_REFS.length;
-        for (int n = 0; n < count; n++) {
+        Collection<SearchIndexableResource> values = SearchIndexableResources.values();
+        for (SearchIndexableResource val : values) {
             Object[] ref = new Object[7];
-            ref[0] = INDEXABLE_REFS[n].rank;
-            ref[1] = INDEXABLE_REFS[n].xmlResId;
-            ref[2] = INDEXABLE_REFS[n].className;
-            ref[3] = INDEXABLE_REFS[n].iconResId;
+            ref[0] = val.rank;
+            ref[1] = val.xmlResId;
+            ref[2] = val.className;
+            ref[3] = val.iconResId;
             ref[4] = null; // intent action
             ref[5] = null; // intent target package
             ref[6] = null; // intent target class

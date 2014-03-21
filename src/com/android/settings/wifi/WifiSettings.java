@@ -1168,12 +1168,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new SearchIndexProvider() {
             @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context) {
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
                 return null;
             }
 
             @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context) {
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
                 final Resources res = context.getResources();
 

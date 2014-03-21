@@ -48,7 +48,6 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -421,40 +420,42 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new SearchIndexProvider() {
+        new SearchIndexProvider() {
 
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context) {
-                    return null;
-                }
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
+                return null;
+            }
 
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context) {
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
 
-                    final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
 
-                    final Resources res = context.getResources();
+                final Resources res = context.getResources();
 
-                    // Add fragment title
-                    SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.bluetooth_settings);
+                // Add fragment title
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.bluetooth_settings);
+                data.screenTitle = res.getString(R.string.bluetooth_settings);
+                result.add(data);
+
+                // Add cached paired BT devices
+                LocalBluetoothManager lbtm = LocalBluetoothManager.getInstance(context);
+                Set<BluetoothDevice> bondedDevices =
+                        lbtm.getBluetoothAdapter().getBondedDevices();
+
+                for (BluetoothDevice device : bondedDevices) {
+                    data = new SearchIndexableRaw(context);
+                    data.title = device.getName();
                     data.screenTitle = res.getString(R.string.bluetooth_settings);
+                    data.enabled = enabled;
                     result.add(data);
-
-                    // Add cached paired BT devices
-                    LocalBluetoothManager lbtm = LocalBluetoothManager.getInstance(context);
-                    Set<BluetoothDevice> bondedDevices =
-                            lbtm.getBluetoothAdapter().getBondedDevices();
-
-                    for (BluetoothDevice device : bondedDevices) {
-                        data = new SearchIndexableRaw(context);
-                        data.title = device.getName();
-                        data.screenTitle = res.getString(R.string.bluetooth_settings);
-                        result.add(data);
-                    }
-
-                    return result;
                 }
-            };
+
+                return result;
+            }
+        };
 
 }

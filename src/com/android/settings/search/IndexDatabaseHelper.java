@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 102;
+    private static final int DATABASE_VERSION = 103;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -36,6 +36,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public interface IndexColumns {
+        public static final String DOCID = "docid";
         public static final String LOCALE = "locale";
         public static final String DATA_RANK = "data_rank";
         public static final String DATA_TITLE = "data_title";
@@ -49,6 +50,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String INTENT_TARGET_PACKAGE = "intent_target_package";
         public static final String INTENT_TARGET_CLASS = "intent_target_class";
         public static final String ICON = "icon";
+        public static final String ENABLED = "enabled";
     }
 
     public interface MetaColumns {
@@ -83,6 +85,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.INTENT_TARGET_PACKAGE +
                     ", " +
                     IndexColumns.INTENT_TARGET_CLASS +
+                    ", " +
+                    IndexColumns.ENABLED +
                     ");";
 
     private static final String CREATE_META_TABLE =
@@ -125,9 +129,9 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 100 || oldVersion == 101) {
-            Log.w(TAG, "Detected schema version 100 or 101. " +
-                    "Index needs to be rebuilt for schema version 102");
+        if (oldVersion == 100 || oldVersion == 101 || oldVersion == 102) {
+            Log.w(TAG, "Detected schema version 100, 101 or 102. " +
+                    "Index needs to be rebuilt for schema version 103");
             // We need to drop the tables and recreate them
             dropTables(db);
             bootstrapDB(db);

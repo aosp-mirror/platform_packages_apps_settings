@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.WirelessSettings;
+import com.android.settings.search.Index;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
@@ -132,6 +133,7 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
             case BluetoothAdapter.STATE_ON:
                 setChecked(true);
                 mSwitch.setEnabled(true);
+                updateSearchIndex(true);
                 break;
             case BluetoothAdapter.STATE_TURNING_OFF:
                 mSwitch.setEnabled(false);
@@ -139,10 +141,12 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
             case BluetoothAdapter.STATE_OFF:
                 setChecked(false);
                 mSwitch.setEnabled(true);
+                updateSearchIndex(false);
                 break;
             default:
                 setChecked(false);
                 mSwitch.setEnabled(true);
+                updateSearchIndex(false);
         }
     }
 
@@ -158,5 +162,10 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
                 mSwitch.setOnCheckedChangeListener(this);
             }
         }
+    }
+
+    private void updateSearchIndex(boolean isBluetoothOn) {
+        Index.getInstance(mContext).updateFromClassNameResource(
+                BluetoothSettings.class.getName(), isBluetoothOn);
     }
 }
