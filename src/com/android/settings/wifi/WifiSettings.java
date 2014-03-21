@@ -1195,6 +1195,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     data = new SearchIndexableRaw(context);
                     data.title = accessPoint.getTitle().toString();
                     data.screenTitle = res.getString(R.string.wifi_settings);
+                    data.enabled = enabled;
                     result.add(data);
                 }
 

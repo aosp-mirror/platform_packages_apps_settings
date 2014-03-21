@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.WirelessSettings;
+import com.android.settings.search.Index;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -136,6 +137,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
             case WifiManager.WIFI_STATE_ENABLED:
                 setSwitchChecked(true);
                 mSwitch.setEnabled(true);
+                updateSearchIndex(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
                 mSwitch.setEnabled(false);
@@ -143,12 +145,18 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
             case WifiManager.WIFI_STATE_DISABLED:
                 setSwitchChecked(false);
                 mSwitch.setEnabled(true);
+                updateSearchIndex(false);
                 break;
             default:
                 setSwitchChecked(false);
                 mSwitch.setEnabled(true);
-                break;
+                updateSearchIndex(false);
         }
+    }
+
+    private void updateSearchIndex(boolean isWiFiOn) {
+        Index.getInstance(mContext).updateFromClassNameResource(
+                WifiSettings.class.getName(), isWiFiOn);
     }
 
     private void setSwitchChecked(boolean checked) {
