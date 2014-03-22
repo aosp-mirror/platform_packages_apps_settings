@@ -55,6 +55,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
+import com.android.settings.dashboard.Header;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -237,7 +238,7 @@ public class Utils {
     }
 
     public static boolean updateHeaderToSpecificActivityFromMetaDataOrRemove(Context context,
-            List<SettingsActivity.Header> target, SettingsActivity.Header header) {
+            List<Header> target, Header header) {
 
         Intent intent = header.intent;
         if (intent != null) {

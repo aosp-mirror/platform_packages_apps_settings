@@ -38,7 +38,7 @@ import com.android.settings.search.Index;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
-    private final Context mContext;
+    private Context mContext;
     private Switch mSwitch;
     private AtomicBoolean mConnected = new AtomicBoolean(false);
 
@@ -77,7 +77,8 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
         mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
     }
 
-    public void resume() {
+    public void resume(Context context) {
+        mContext = context;
         // Wi-Fi state is sticky, so just let the receiver update UI
         mContext.registerReceiver(mReceiver, mIntentFilter);
         mSwitch.setOnCheckedChangeListener(this);

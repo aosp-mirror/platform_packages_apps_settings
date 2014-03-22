@@ -14,21 +14,11 @@
      limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dashboard"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_gravity="center"
-                  android:orientation="vertical">
-
-        <ListView android:id="@id/android:list"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:background="@color/background_drawer" />
-
-    </LinearLayout>
-
-</FrameLayout>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search"
+        android:title="@string/search_menu"
+        android:icon="@*android:drawable/ic_search"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
+</menu>
