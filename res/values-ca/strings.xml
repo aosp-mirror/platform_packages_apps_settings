@@ -513,15 +513,15 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Com a telèfon amb altaveu"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per a música i contingut multimèdia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recorda la configuració"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Pantalla d\'emissió"</string>
-    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activació de la pantalla sense fil"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Emet a pantalla"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activa pantalla sense fil"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No s\'ha trobat cap dispositiu a prop."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"S\'està connectant"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Connectada"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"En ús"</string>
     <string name="wifi_display_status_not_available" msgid="5714978725794210102">"No disponible"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Mostra la configuració"</string>
-    <string name="wifi_display_options_title" msgid="5740656401635054838">"Opcions de la pantalla sense fils"</string>
+    <string name="wifi_display_options_title" msgid="5740656401635054838">"Opcions de la pantalla sense fil"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Oblida"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Fet"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Nom"</string>
@@ -1002,7 +1002,7 @@
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"Només dispositiu"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"Ubicació desactivada"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Sol·licituds d\'ubicació recents"</string>
-    <string name="location_no_recent_apps" msgid="2800907699722178041">"Cap aplicació ha sol·licitat la ubicació recentment"</string>
+    <string name="location_no_recent_apps" msgid="2800907699722178041">"Cap aplicació no ha sol·licitat la ubicació recentment"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Serveis d\'ubicació"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Ús de bateria elevat"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Ús de bateria reduït"</string>
@@ -1452,8 +1452,8 @@
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"S\'està imprimint <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"S\'està cancel·lant <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
-    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Error de la impressora <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
-    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Impressora bloquejada <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Error de la impressora: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Impressora ha bloquejat <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Es mostra el quadre de cerca"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"S\'ha amagat el quadre de cerca"</string>
   <plurals name="print_search_result_count_utterance">
@@ -1950,11 +1950,11 @@
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desactivat"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissiu"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"En aplicació"</string>
-    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"És possible que la xarxa estigui supervisada."</string>
+    <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"És possible que la xarxa estigui supervisada"</string>
     <string name="done_button" msgid="1991471253042622230">"Fet"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Supervisió de xarxa"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Aquest dispositiu està gestionat per:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nEl teu administrador pot fer un seguiment de la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nSi vols obtenir més informació, contacta amb l\'administrador."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Un tercer pot fer un seguiment de la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nHi ha una credencial de confiança instal·lada al teu dispositiu que ho fa possible."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Aquest dispositiu està gestionat per \n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nEl teu administrador pot supervisar l\'activitat de la xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nSi vols obtenir més informació, contacta amb l\'administrador."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Un tercer pot supervisar la teva activitat de xarxa, inclosos els correus electrònics, les aplicacions i els llocs web segurs.\n\nHi ha una credencial de confiança instal·lada al teu dispositiu que ho fa possible."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Comprova les credencials de confiança"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Usuaris"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Usuaris i perfils"</string>
@@ -2012,8 +2012,8 @@
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Més informació"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Cerca aplicacions"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Vols establir-ho com a preferència?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Vols fer servir sempre <xliff:g id="APP">%1$s</xliff:g> amb l\'opció de Toca i paga?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Vols que sempre es faci servir <xliff:g id="APP_0">%1$s</xliff:g> en lloc de <xliff:g id="APP_1">%2$s</xliff:g> quan utilitzis l\'opció de tocar i pagar?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Vols fer servir sempre <xliff:g id="APP">%1$s</xliff:g> amb la funció Toca i paga?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Vols que sempre es faci servir <xliff:g id="APP_0">%1$s</xliff:g> en lloc de <xliff:g id="APP_1">%2$s</xliff:g> amb la funció Toca i paga?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restriccions"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Suprimeix restriccions"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Canvia el PIN"</string>

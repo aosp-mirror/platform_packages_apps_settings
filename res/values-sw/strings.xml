@@ -113,7 +113,7 @@
     <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"Inaonekana kwa zote zilizokaribu na vifaa vya Bluetooth (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
     <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"Inaonekana kwa zote zilizokaribu na vifaa vya Bluetooth"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"Haionekani na vifaa vingine vyenye Bluetooth"</string>
-    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Inaonekana tu kwa vifaa vilivyolinganishwa"</string>
+    <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"Inaonekana na vifaa vilivyooanishwa pekee"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"Muda wa kuonekana"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Funga sauti ya upigaji simu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Zuia matumizi yakibonyezi cha bluetooth wakati skrini imefungwa"</string>
@@ -309,7 +309,7 @@
     <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Ukaguzi wa moja kwa moja"</string>
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Inahitaji kukopesa jicho inapofungua"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Funga kiotomatiki"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> baada ya kulala"</string>
+    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> baada ya kuingia katika hali tulivu"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Onyesha maelezo ya mmiliki skrini inapofunga"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Maelezo ya mmiliki"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Washa wijeti"</string>
@@ -374,7 +374,7 @@
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Hamna"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Slaidi"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Kufungua kwa Uso"</string>
-    <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Ruwaza"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Mchoro"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Nenosiri"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Lemaza kufungwa kwa skrini"</string>
@@ -455,7 +455,7 @@
     <string name="bluetooth_search_for_devices" msgid="5957007154213560390">"Tafuta vifaa"</string>
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"Inatafuta…"</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Mipangilio ya kifaa"</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Vifaa vilivyolinganishwa"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Vifaa vilivyooanishwa"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Vifaa vinavyopatikana"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Unganisha"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Tenganisha"</string>
@@ -465,7 +465,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Chaguo…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Mipangilio ya kina"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth mahiri"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetooth ikiwa imewashwa, kifaa chako kinaweza kuwasiliana na vifaa vingine vya Bluetooth vilivyo karibu."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetooth ikiwa imewashwa, kifaa chako kinaweza kuwasiliana na vifaa vingine vyenye Bluetooth vilivyo karibu."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Unganisha kwa..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Media ya sauti"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Sauti ya simu"</string>
@@ -912,7 +912,7 @@
     <string name="error_apn_empty" msgid="6056233831214537267">"APN haiwezi kuwa tupu."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"Sehemu ya MCC lazima iwe na nambari 3."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"Sehemu ya MNC lazima iwe na nambari 2 au 3."</string>
-    <string name="restore_default_apn" msgid="8178010218751639581">"Inarejeza mipangilio mbadala ya APN"</string>
+    <string name="restore_default_apn" msgid="8178010218751639581">"Inarejesha mipangilio mbadala ya APN"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Rudisha kwenye chaguo-msingi"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Kuweka upya kwa mipangilio mbadala ya APN kumekamilika"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Rejesha data ya mwanzo"</string>
@@ -1427,7 +1427,7 @@
     <string name="print_settings" msgid="4742428530112487843">"Kuchapisha"</string>
     <string name="print_settings_title" msgid="3685449667822217816">"Huduma za uchapishaji"</string>
     <string name="print_service_security_warning_title" msgid="2338435517408144841">"Ungependa kutumia <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Hati yako inaweza kupita kwenye seva moja au zaidi ikielekea kwenye printa."</string>
+    <string name="print_service_security_warning_summary" msgid="7567131958613064363">"Huenda hati yako ikapitia seva moja au zaidi ikielekea kwenye printa."</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Hakuna huduma zilizosakinishwa"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Hakuna printa zilizopatikana"</string>
     <string name="print_menu_item_settings" msgid="6591330373682227082">"Mipangilio"</string>
@@ -1441,12 +1441,12 @@
     <string name="print_service_disabled" msgid="7739452396114245222">"Huduma imezimwa"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Kazi za kuchapisha"</string>
     <string name="print_print_job" msgid="7563741676053287211">"Kazi ya kuchapisha"</string>
-    <string name="print_restart" msgid="8373999687329384202">"Anzisha upya"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Anza tena kuchapisha"</string>
     <string name="print_cancel" msgid="3621199386568672235">"Ghairi"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Inachapisha <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Inaghairi <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
-    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Hitilafu ya printa <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_failed_state_title_template" msgid="1436099128973357969">"Hitilafu kwenye printa <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Printa imezuiwa <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Kisanduku cha kutafutia kimeonyeshwa"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Kisanduku cha kutafutia kimefichwa"</string>
@@ -2001,12 +2001,12 @@
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Mpangilio huu unaathiri watumiaji wote kwenye simu hii."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Badilisha lugha"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"Badilisha ukubwa wa fonti"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Gusisha ulipe"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Gusisha ili ulipe"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Lipa kwa kugonga tu"</string>
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Pata maelezo zaidi"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Tafuta programu"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Ungependa kuweka kama mapendeleo yako?"</string>
-    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Ungependa kutumia <xliff:g id="APP">%1$s</xliff:g> unapogusisha ili ulipe?"</string>
+    <string name="nfc_payment_set_default" msgid="8961120988148253016">"Ungependa kutumia <xliff:g id="APP">%1$s</xliff:g> kila mara unapogusisha ili ulipe?"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="3803693771001226795">"Ungependa kutumia <xliff:g id="APP_0">%1$s</xliff:g> badala ya <xliff:g id="APP_1">%2$s</xliff:g> unapogusisha ili ulipe?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Vikwazo"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Ondoa vikwazo"</string>
