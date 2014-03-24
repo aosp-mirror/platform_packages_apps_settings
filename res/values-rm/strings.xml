@@ -161,6 +161,8 @@
     <skip />
     <!-- no translation found for bluetooth_disconnect_all_profiles (9148530542956217908) -->
     <skip />
+    <!-- no translation found for bluetooth_broadcasting (16583128958125247) -->
+    <skip />
     <!-- no translation found for bluetooth_disable_profile_title (5916643979709342557) -->
     <skip />
     <!-- no translation found for bluetooth_disable_profile_message (2895844842011809904) -->
@@ -169,6 +171,8 @@
     <!-- no translation found for bluetooth_connected_no_headset (2866994875046035609) -->
     <skip />
     <!-- no translation found for bluetooth_connected_no_a2dp (4576188601581440337) -->
+    <skip />
+    <!-- no translation found for bluetooth_connected_no_map (6504436917057479986) -->
     <skip />
     <!-- no translation found for bluetooth_connected_no_headset_no_a2dp (9195757766755553810) -->
     <skip />
@@ -202,6 +206,12 @@
     <skip />
     <!-- no translation found for bluetooth_ask_lasting_discovery (6487606808683607975) -->
     <skip />
+    <!-- no translation found for bluetooth_ask_start_broadcast (3535628155254187911) -->
+    <skip />
+    <!-- no translation found for bluetooth_ask_enablement_and_start_broadcast (1783727814076135171) -->
+    <skip />
+    <!-- no translation found for bluetooth_broadcasting_explaination (4249322115655011799) -->
+    <skip />
     <!-- no translation found for bluetooth_ask_enablement_and_discovery (3346529092809011149) -->
     <skip />
     <!-- no translation found for bluetooth_ask_enablement_and_discovery (4724094889807196118) -->
@@ -222,11 +232,17 @@
     <skip />
     <!-- no translation found for bluetooth_connection_dialog_text (8455427559949998023) -->
     <skip />
-    <!-- no translation found for bluetooth_phonebook_request (457033227379858269) -->
+    <!-- no translation found for bluetooth_phonebook_request (3951420080540915279) -->
     <skip />
     <!-- no translation found for bluetooth_pb_acceptance_dialog_text (6555508756987053866) -->
     <skip />
+    <!-- no translation found for bluetooth_remember_choice (6198284561603824931) -->
+    <skip />
     <!-- no translation found for bluetooth_pb_remember_choice (2901499974259177202) -->
+    <skip />
+    <!-- no translation found for bluetooth_map_request (4595727689513143902) -->
+    <skip />
+    <!-- no translation found for bluetooth_map_acceptance_dialog_text (8712508202081143737) -->
     <skip />
     <string name="date_and_time" msgid="4114084177056654663">"Parameters da data e da temp"</string>
     <!-- no translation found for choose_timezone (1362834506479536274) -->
@@ -242,7 +258,7 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Iniziar <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Conto:"</string>
-    <!-- no translation found for proxy_settings_title (5912878565897294401) -->
+    <!-- no translation found for proxy_settings_title (9049437837600320881) -->
     <skip />
     <string name="proxy_clear_text" msgid="5555400754952012657">"Stizzar"</string>
     <!-- no translation found for proxy_port_label (5655276502233453400) -->
@@ -269,6 +285,8 @@
     <!-- no translation found for proxy_error_invalid_port (2671425042711054494) -->
     <skip />
     <!-- no translation found for proxy_warning_limited_support (7229337138062837422) -->
+    <skip />
+    <!-- no translation found for proxy_url (2523518669129974654) -->
     <skip />
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Posiziun:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID vischin:"</string>
@@ -426,6 +444,10 @@
     <skip />
     <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
     <skip />
+    <!-- no translation found for security_enable_widgets_title (2754833397070967846) -->
+    <skip />
+    <!-- no translation found for security_enable_widgets_disabled_summary (1557090442377855233) -->
+    <skip />
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <!-- no translation found for owner_info_settings_edit_text_hint (4608681417960923911) -->
     <skip />
@@ -437,7 +459,7 @@
     <skip />
     <!-- no translation found for profile_info_settings_title (3518603215935346604) -->
     <skip />
-    <!-- no translation found for location_settings_title (4483843407328665068) -->
+    <!-- no translation found for location_settings_title (1369675479310751735) -->
     <skip />
     <!-- no translation found for security_settings_title (7945465324818485460) -->
     <skip />
@@ -686,6 +708,8 @@
     <skip />
     <!-- no translation found for bluetooth_profile_pan_nap (8429049285027482959) -->
     <skip />
+    <!-- no translation found for bluetooth_profile_map (5465271250454324383) -->
+    <skip />
     <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
     <skip />
     <!-- no translation found for bluetooth_disconnect_headset_profile (8635908811168780720) -->
@@ -710,6 +734,8 @@
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connectà cun ils parameters audio da las medias"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Connectà cun il sistem dad audio dal telefonin"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Connectà cun il server da transmissiun da datotecas"</string>
+    <!-- no translation found for bluetooth_map_profile_summary_connected (8191407438851351713) -->
+    <skip />
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Betg connectà cun il server da transmissiun da datotecas"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Connectà cun in apparat d\'endataziun"</string>
     <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
@@ -722,40 +748,28 @@
     <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utilisar per l\'input"</string>
     <!-- no translation found for bluetooth_pan_profile_summary_use_for (5664884523822068653) -->
     <skip />
+    <!-- no translation found for bluetooth_map_profile_summary_use_for (5154200119919927434) -->
+    <skip />
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Parameters da la basa"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Utilisar la basa per l\'audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Sco telefon ad autpledader"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per musica e multimedia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Memorisar ils parameters"</string>
-    <!-- no translation found for wifi_display_settings_title (564299108014609382) -->
+    <!-- no translation found for wifi_display_settings_title (2925465988657380522) -->
     <skip />
-    <!-- no translation found for wifi_display_settings_empty_list_wifi_display_off (1225626898926363100) -->
+    <!-- no translation found for wifi_display_enable_menu_item (4883036464138167674) -->
     <skip />
-    <!-- no translation found for wifi_display_settings_empty_list_wifi_display_disabled (1336244693183075466) -->
-    <skip />
-    <!-- no translation found for wifi_display_search_for_devices (5065526281193354502) -->
-    <skip />
-    <!-- no translation found for wifi_display_searching_for_devices (5172373825348672137) -->
-    <skip />
-    <!-- no translation found for wifi_display_no_devices_found (8180582698282377626) -->
-    <skip />
-    <!-- no translation found for wifi_display_paired_devices (7395326840730024303) -->
-    <skip />
-    <!-- no translation found for wifi_display_available_devices (4558314642853513487) -->
+    <!-- no translation found for wifi_display_no_devices_found (1382012407154143453) -->
     <skip />
     <!-- no translation found for wifi_display_status_connecting (5688608834000748607) -->
     <skip />
     <!-- no translation found for wifi_display_status_connected (8364125226376985558) -->
     <skip />
-    <!-- no translation found for wifi_display_status_available (1924167525172207067) -->
-    <skip />
     <!-- no translation found for wifi_display_status_in_use (8556830875615434792) -->
     <skip />
+    <!-- no translation found for wifi_display_status_not_available (5714978725794210102) -->
+    <skip />
     <!-- no translation found for wifi_display_details (7791118209992162698) -->
-    <skip />
-    <!-- no translation found for wifi_display_disconnect_title (1543715924639003599) -->
-    <skip />
-    <!-- no translation found for wifi_display_disconnect_text (4824860802264489088) -->
     <skip />
     <!-- no translation found for wifi_display_options_title (5740656401635054838) -->
     <skip />
@@ -764,12 +778,6 @@
     <!-- no translation found for wifi_display_options_done (5703116500357822557) -->
     <skip />
     <!-- no translation found for wifi_display_options_name (4756080222307467898) -->
-    <skip />
-    <!-- no translation found for wifi_display_summary_on (3695429596604962531) -->
-    <skip />
-    <!-- no translation found for wifi_display_summary_off (2445210133184740611) -->
-    <skip />
-    <!-- no translation found for wifi_display_summary_disabled (5318394806146587849) -->
     <skip />
     <!-- no translation found for nfc_quick_toggle_title (6769159366307299004) -->
     <skip />
@@ -1043,6 +1051,8 @@
     <!-- no translation found for wifi_tether_configure_subtext (7957547035983257748) -->
     <skip />
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <!-- no translation found for home_settings (212375129455718176) -->
+    <skip />
     <string name="display_settings_title" msgid="1708697328627382561">"Visur"</string>
     <!-- no translation found for sound_settings (5534671337768745343) -->
     <skip />
@@ -1192,6 +1202,12 @@
     <skip />
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Interrumper"</string>
+    <!-- no translation found for wrong_pin_code_pukked (4003655226832658066) -->
+    <skip />
+    <!-- no translation found for wrong_pin_code:one (4840607930166101114) -->
+    <!-- no translation found for wrong_pin_code:other (77103619544346451) -->
+    <!-- no translation found for pin_failed (1848423634948587645) -->
+    <skip />
     <!-- no translation found for device_info_settings (1119755927536987178) -->
     <skip />
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Status dal telefonin"</string>
@@ -1498,7 +1514,15 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vegn deconnectà dal tethering."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Agid"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Raits mobilas"</string>
-    <!-- no translation found for manage_mobile_plan_title (7588182101738043593) -->
+    <!-- no translation found for manage_mobile_plan_title (7630170375010107744) -->
+    <skip />
+    <!-- no translation found for sms_application_title (6134351177937015839) -->
+    <skip />
+    <!-- no translation found for sms_change_default_dialog_title (1958688831875804286) -->
+    <skip />
+    <!-- no translation found for sms_change_default_dialog_text (1522783933230274787) -->
+    <skip />
+    <!-- no translation found for sms_change_default_no_previous_dialog_text (602683880284921998) -->
     <skip />
     <!-- no translation found for mobile_unknown_sim_operator (9101230468757324260) -->
     <skip />
@@ -1509,6 +1533,36 @@
     <!-- no translation found for mobile_connect_to_internet (1733894125065249639) -->
     <skip />
     <string name="location_title" msgid="1029961368397484576">"Mes lieu"</string>
+    <!-- no translation found for location_mode_title (3982009713118421689) -->
+    <skip />
+    <!-- no translation found for location_mode_high_accuracy_title (8241802585110932849) -->
+    <skip />
+    <!-- no translation found for location_mode_battery_saving_title (711273645208158637) -->
+    <skip />
+    <!-- no translation found for location_mode_sensors_only_title (3040366132175435160) -->
+    <skip />
+    <!-- no translation found for location_mode_location_off_title (2829713015012529465) -->
+    <skip />
+    <!-- no translation found for location_category_recent_location_requests (1938721350424447421) -->
+    <skip />
+    <!-- no translation found for location_no_recent_apps (2800907699722178041) -->
+    <skip />
+    <!-- no translation found for location_category_location_services (7437150886946685979) -->
+    <skip />
+    <!-- no translation found for location_high_battery_use (517199943258508020) -->
+    <skip />
+    <!-- no translation found for location_low_battery_use (8602232529541903596) -->
+    <skip />
+    <!-- no translation found for location_mode_screen_title (4528716772270246542) -->
+    <skip />
+    <!-- no translation found for location_mode_high_accuracy_description (6418936349431602808) -->
+    <skip />
+    <!-- no translation found for location_mode_battery_saving_description (1728668969743485109) -->
+    <skip />
+    <!-- no translation found for location_mode_sensors_only_description (7178415350457794366) -->
+    <skip />
+    <!-- no translation found for location_loading_injected_setting (4238574500081976654) -->
+    <skip />
     <!-- no translation found for location_network_based (9134175479520582215) -->
     <skip />
     <!-- no translation found for location_neighborhood_level (5626515380188353712) -->
@@ -1576,15 +1630,18 @@
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Confermar il schema memorisà"</string>
     <!-- no translation found for lockpattern_need_to_unlock_wrong (4694973540770105678) -->
     <skip />
-    <!-- no translation found for lockpattern_recording_intro_header (2063630508212535241) -->
-    <skip />
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Dissegnai in schema da debloccaziun:"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Smatgar sin Menu per mussar l\'agid."</string>
-    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Prender davent il det sche Vus avais terminà."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Colliai almain <xliff:g id="NUMBER">%d</xliff:g> puncts. Empruvai anc ina giada:"</string>
-    <!-- no translation found for lockpattern_pattern_entered_header (8378617839439987962) -->
+    <!-- no translation found for lockpattern_recording_inprogress (6667844062721656773) -->
     <skip />
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Dissegnai danovamain il schema per confermar:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Voss nov schema da debloccaziun:"</string>
+    <!-- no translation found for lockpattern_recording_incorrect_too_short (1348234155120957561) -->
+    <skip />
+    <!-- no translation found for lockpattern_pattern_entered_header (4316818983675591604) -->
+    <skip />
+    <!-- no translation found for lockpattern_need_to_confirm (8054853451639221265) -->
+    <skip />
+    <!-- no translation found for lockpattern_pattern_confirmed_header (8455614172231880211) -->
+    <skip />
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confermar"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Registrar da nov"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Empruvar danovamain"</string>
@@ -1686,7 +1743,7 @@
     <skip />
     <!-- no translation found for reset_app_preferences_title (6093179367325336662) -->
     <skip />
-    <!-- no translation found for reset_app_preferences_desc (1118129530999596317) -->
+    <!-- no translation found for reset_app_preferences_desc (4822447731869201512) -->
     <skip />
     <!-- no translation found for reset_app_preferences_button (2559089511841281242) -->
     <skip />
@@ -2015,6 +2072,10 @@
     <skip />
     <!-- no translation found for select_runtime_warning_message (1937574953265648165) -->
     <skip />
+    <!-- no translation found for wifi_display_certification (8611569543791307533) -->
+    <skip />
+    <!-- no translation found for wifi_display_certification_summary (1155182309166746973) -->
+    <skip />
     <string name="allow_mock_location" msgid="2787962564578664888">"Posiziuns faussas"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permetter posiziuns faussas"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permetter da debugar USB?"</string>
@@ -2062,6 +2123,12 @@
     <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> m <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
     <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g> m <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
     <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
+    <!-- no translation found for battery_history_days_no_seconds (703063770554334710) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_no_seconds (663342892615646712) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_no_seconds (7780294302606853082) -->
+    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistica da l\'utilisaziun"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Datas statisticas"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Zavrar tenor:"</string>
@@ -2074,6 +2141,8 @@
     <!-- no translation found for accessibility_services_title (2592221829284342237) -->
     <skip />
     <!-- no translation found for accessibility_system_title (7187919089874130484) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_title (7589266662024836291) -->
     <skip />
     <!-- no translation found for accessibility_screen_magnification_title (7001782548715744981) -->
     <skip />
@@ -2107,6 +2176,58 @@
     <skip />
     <!-- no translation found for accessibility_feature_state_off (4172584906487070211) -->
     <skip />
+    <!-- no translation found for captioning_preview_title (1234015253497016890) -->
+    <skip />
+    <!-- no translation found for captioning_standard_options_title (3284211791180335844) -->
+    <skip />
+    <!-- no translation found for captioning_locale (4559155661018823503) -->
+    <skip />
+    <!-- no translation found for captioning_text_size (6737002449104466028) -->
+    <skip />
+    <!-- no translation found for captioning_preset (8939737196538429044) -->
+    <skip />
+    <!-- no translation found for captioning_custom_options_title (5067500939930322405) -->
+    <skip />
+    <!-- no translation found for captioning_background_color (9053011212948992570) -->
+    <skip />
+    <!-- no translation found for captioning_background_opacity (6029993616419971202) -->
+    <skip />
+    <!-- no translation found for captioning_foreground_color (85623486537640059) -->
+    <skip />
+    <!-- no translation found for captioning_foreground_opacity (4370967856995419788) -->
+    <skip />
+    <!-- no translation found for captioning_edge_color (3670094753735263238) -->
+    <skip />
+    <!-- no translation found for captioning_edge_type (5997247394951682154) -->
+    <skip />
+    <!-- no translation found for captioning_typeface (1826169240566563259) -->
+    <skip />
+    <!-- no translation found for captioning_preview_text (4067935959797375065) -->
+    <skip />
+    <!-- no translation found for captioning_preview_characters (7105909138497851769) -->
+    <skip />
+    <!-- no translation found for locale_default (2593883646136326969) -->
+    <skip />
+    <!-- no translation found for color_none (3475640044925814795) -->
+    <skip />
+    <!-- no translation found for color_white (8045195170201590239) -->
+    <skip />
+    <!-- no translation found for color_gray (9192312087142726313) -->
+    <skip />
+    <!-- no translation found for color_black (7517353520909872561) -->
+    <skip />
+    <!-- no translation found for color_red (4949354900304125428) -->
+    <skip />
+    <!-- no translation found for color_green (5537717328428845841) -->
+    <skip />
+    <!-- no translation found for color_blue (7731984529016953223) -->
+    <skip />
+    <!-- no translation found for color_cyan (7033027180641173211) -->
+    <skip />
+    <!-- no translation found for color_yellow (9112680561610873529) -->
+    <skip />
+    <!-- no translation found for color_magenta (5059212823607815549) -->
+    <skip />
     <!-- no translation found for enable_service_title (3061307612673835592) -->
     <skip />
     <!-- no translation found for capabilities_list_title (86713361724771971) -->
@@ -2131,15 +2252,15 @@
     <skip />
     <!-- no translation found for print_settings (4742428530112487843) -->
     <skip />
-    <!-- no translation found for print_settings_title (4911263339115736689) -->
-    <skip />
-    <!-- no translation found for print_services_title (1088097751249445946) -->
+    <!-- no translation found for print_settings_title (3685449667822217816) -->
     <skip />
     <!-- no translation found for print_service_security_warning_title (2338435517408144841) -->
     <skip />
-    <!-- no translation found for print_service_security_warning_summary (919299459931111450) -->
+    <!-- no translation found for print_service_security_warning_summary (7567131958613064363) -->
     <skip />
     <!-- no translation found for print_no_services_installed (8443039625463872294) -->
+    <skip />
+    <!-- no translation found for print_no_printers_found (989018646884973683) -->
     <skip />
     <!-- no translation found for print_menu_item_settings (6591330373682227082) -->
     <skip />
@@ -2149,6 +2270,40 @@
     <skip />
     <!-- no translation found for print_feature_state_off (7294876968403966040) -->
     <skip />
+    <!-- no translation found for print_menu_item_add_service (3811645167869797802) -->
+    <skip />
+    <!-- no translation found for print_menu_item_add_printer (8251218970577291032) -->
+    <skip />
+    <!-- no translation found for print_menu_item_search (7025589328240514553) -->
+    <skip />
+    <!-- no translation found for print_searching_for_printers (4680248496457576358) -->
+    <skip />
+    <!-- no translation found for print_service_disabled (7739452396114245222) -->
+    <skip />
+    <!-- no translation found for print_print_jobs (3582094777756968793) -->
+    <skip />
+    <!-- no translation found for print_print_job (7563741676053287211) -->
+    <skip />
+    <!-- no translation found for print_restart (8373999687329384202) -->
+    <skip />
+    <!-- no translation found for print_cancel (3621199386568672235) -->
+    <skip />
+    <!-- no translation found for print_job_summary (8472427347192930694) -->
+    <skip />
+    <!-- no translation found for print_printing_state_title_template (5736107667714582025) -->
+    <skip />
+    <!-- no translation found for print_cancelling_state_title_template (7102968925358219875) -->
+    <skip />
+    <!-- no translation found for print_failed_state_title_template (1436099128973357969) -->
+    <skip />
+    <!-- no translation found for print_blocked_state_title_template (9065391617425962424) -->
+    <skip />
+    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
+    <skip />
+    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
+    <skip />
+    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
+    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
     <!-- no translation found for power_usage_summary_title (7190304207330319919) -->
     <skip />
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumaders da l\'accu"</string>
@@ -2246,7 +2401,7 @@
     <skip />
     <!-- no translation found for battery_sugg_apps_info (6907588126789841231) -->
     <skip />
-    <!-- no translation found for battery_sugg_apps_gps (7287643439298561315) -->
+    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
     <skip />
     <!-- no translation found for battery_sugg_apps_settings (3974902365643634514) -->
     <skip />
@@ -2258,6 +2413,52 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Actualisar"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistem operativ Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Server multimedia"</string>
+    <!-- no translation found for process_stats_summary_title (1144688045609771677) -->
+    <skip />
+    <!-- no translation found for process_stats_summary (109387941605607762) -->
+    <skip />
+    <!-- no translation found for app_memory_use (7849258480392171939) -->
+    <skip />
+    <!-- no translation found for process_stats_total_duration (1869761515101180444) -->
+    <skip />
+    <!-- no translation found for process_stats_type_background (3934992858120683459) -->
+    <skip />
+    <!-- no translation found for process_stats_type_foreground (7713118254089580536) -->
+    <skip />
+    <!-- no translation found for process_stats_type_cached (6314925846944806511) -->
+    <skip />
+    <!-- no translation found for process_stats_memory_status (4251599550196193093) -->
+    <skip />
+    <!-- no translation found for process_stats_avg_ram_use (6972943528929394396) -->
+    <skip />
+    <!-- no translation found for process_stats_max_ram_use (3273876448926689261) -->
+    <skip />
+    <!-- no translation found for process_stats_run_time (6520628955709369115) -->
+    <skip />
+    <!-- no translation found for services_subtitle (4296402367067266425) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_duration (2323483592994720196) -->
+    <skip />
+    <!-- no translation found for menu_duration_3h (4714866438374738385) -->
+    <skip />
+    <!-- no translation found for menu_duration_6h (1940846763432184132) -->
+    <skip />
+    <!-- no translation found for menu_duration_12h (7890465404584356294) -->
+    <skip />
+    <!-- no translation found for menu_duration_1d (3393631127622285458) -->
+    <skip />
+    <!-- no translation found for menu_show_system (8864603400415567635) -->
+    <skip />
+    <!-- no translation found for menu_use_uss (467765290771543089) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type (4700209061072120948) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_background (2236161340134898852) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_foreground (2286182659954958586) -->
+    <skip />
+    <!-- no translation found for menu_proc_stats_type_cached (5084272779786820693) -->
+    <skip />
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Entrada &amp; sortida vocala"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Parameters da l\'entrada e da la sortida vocala"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Tschertga vocala"</string>
@@ -2300,6 +2501,18 @@
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"Quest modul da sintesa vocala è capabel da memorisar l\'entir text discurrì inclus datas persunalas sco pleds-clav e numers da cartas da credit. El deriva da l\'applicaziun <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>. Vulais Vus activar quest modul?"</string>
     <!-- no translation found for tts_engine_network_required (1190837151485314743) -->
     <skip />
+    <!-- no translation found for tts_default_sample_string (4040835213373086322) -->
+    <skip />
+    <!-- no translation found for tts_status_title (7268566550242584413) -->
+    <skip />
+    <!-- no translation found for tts_status_ok (1309762510278029765) -->
+    <skip />
+    <!-- no translation found for tts_status_requires_network (6042500821503226892) -->
+    <skip />
+    <!-- no translation found for tts_status_not_supported (4491154212762472495) -->
+    <skip />
+    <!-- no translation found for tts_status_checking (4983413982985913047) -->
+    <skip />
     <string name="tts_engines_section" msgid="7515470972378742429">"Moduls"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Parameters <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> è activà."</string>
@@ -2341,7 +2554,7 @@
     <skip />
     <!-- no translation found for gadget_bluetooth (8998572807378694410) -->
     <skip />
-    <!-- no translation found for gadget_gps (1558173602059236567) -->
+    <!-- no translation found for gadget_location (2974757497945178165) -->
     <skip />
     <!-- no translation found for gadget_sync (858895763714222152) -->
     <skip />
@@ -2600,9 +2813,7 @@
     <skip />
     <!-- no translation found for cant_sync_dialog_message (1938380442159016449) -->
     <skip />
-    <!-- no translation found for wimax_settings (1574837328738396794) -->
-    <skip />
-    <!-- no translation found for wimax_settings_summary (3207355006084135453) -->
+    <!-- no translation found for wimax_settings (2655139497028469039) -->
     <skip />
     <!-- no translation found for status_wimax_mac_address (8390791848661413416) -->
     <skip />
@@ -2684,6 +2895,10 @@
     <skip />
     <!-- no translation found for debug_layout_summary (2001775315258637682) -->
     <skip />
+    <!-- no translation found for force_rtl_layout_all_locales (2259906643093138978) -->
+    <skip />
+    <!-- no translation found for force_rtl_layout_all_locales_summary (9192797796616132534) -->
+    <skip />
     <!-- no translation found for show_cpu_usage (2389212910758076024) -->
     <skip />
     <!-- no translation found for show_cpu_usage_summary (2113341923988958266) -->
@@ -2719,10 +2934,6 @@
     <!-- no translation found for show_all_anrs (28462979638729082) -->
     <skip />
     <!-- no translation found for show_all_anrs_summary (641908614413544127) -->
-    <skip />
-    <!-- no translation found for experimental_webview (4492200819033780927) -->
-    <skip />
-    <!-- no translation found for experimental_webview_summary (3431620080869482446) -->
     <skip />
     <!-- no translation found for data_usage_summary_title (3804110657238092929) -->
     <skip />
@@ -2969,6 +3180,18 @@
     <skip />
     <!-- no translation found for selinux_status_enforcing (2252703756208463329) -->
     <skip />
+    <!-- no translation found for ssl_ca_cert_warning (2045866713601984673) -->
+    <skip />
+    <!-- no translation found for done_button (1991471253042622230) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_dialog_title (5339377665264149395) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_info_message (4583879256548819713) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_warning_message (8216218659139190498) -->
+    <skip />
+    <!-- no translation found for ssl_ca_cert_settings_button (8760495070836213605) -->
+    <skip />
     <!-- no translation found for user_settings_title (6151874007858148344) -->
     <skip />
     <!-- no translation found for user_list_title (7937158411137563543) -->
@@ -3059,6 +3282,10 @@
     <skip />
     <!-- no translation found for apps_with_restrictions_settings_button (3841347287916635821) -->
     <skip />
+    <!-- no translation found for home_app_uninstall_button (6808453012607962899) -->
+    <skip />
+    <!-- no translation found for only_one_home_message (3538846733750242759) -->
+    <skip />
     <!-- no translation found for global_change_warning (8045013389464294039) -->
     <skip />
     <!-- no translation found for global_change_warning (2461264421590324675) -->
@@ -3066,6 +3293,20 @@
     <!-- no translation found for global_locale_change_title (5956281361384221451) -->
     <skip />
     <!-- no translation found for global_font_change_title (1887126466191012035) -->
+    <skip />
+    <!-- no translation found for nfc_payment_settings_title (1807298287380821613) -->
+    <skip />
+    <!-- no translation found for nfc_payment_no_apps (2481080809791416010) -->
+    <skip />
+    <!-- no translation found for nfc_payment_learn_more (5583407773744324447) -->
+    <skip />
+    <!-- no translation found for nfc_payment_menu_item_add_service (2885947408068969081) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_label (7315817259485674542) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default (8961120988148253016) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (3803693771001226795) -->
     <skip />
     <!-- no translation found for restriction_settings_title (4233515503765879736) -->
     <skip />
@@ -3082,8 +3323,6 @@
     <!-- no translation found for user_picture_title (7297782792000291692) -->
     <skip />
     <!-- no translation found for cell_broadcast_settings (8415582011920085222) -->
-    <skip />
-    <!-- no translation found for cell_broadcast_settings_summary (3301339398950905913) -->
     <skip />
     <!-- no translation found for user_restrictions_title (7745810037152772035) -->
     <skip />
@@ -3111,7 +3350,7 @@
     <skip />
     <!-- no translation found for restriction_nfc_enable_summary (825331120501418592) -->
     <skip />
-    <!-- no translation found for restriction_location_enable_title (8134436816263688497) -->
+    <!-- no translation found for restriction_location_enable_title (5020268888245775164) -->
     <skip />
     <!-- no translation found for restriction_location_enable_summary (3489765572281788755) -->
     <skip />
