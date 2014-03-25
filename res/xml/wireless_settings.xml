@@ -23,9 +23,10 @@
         android:persistent="false"
         android:disableDependentsState="true" />
 
-    <com.android.settings.SmsListPreference
+    <com.android.settings.AppListPreference
         android:key="sms_application"
         android:title="@string/sms_application_title"
+        android:summary="%s"
         android:persistent="false" />
 
     <CheckBoxPreference

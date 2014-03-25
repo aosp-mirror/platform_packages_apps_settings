@@ -26,9 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.nfc.NfcAdapter;
@@ -85,7 +83,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
 
-    private SmsListPreference mSmsApplicationPreference;
+    private AppListPreference mSmsApplicationPreference;
 
     public WirelessSettings() {
         super(null);
@@ -174,23 +172,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void updateSmsApplicationSetting() {
-        log("updateSmsApplicationSetting:");
-        ComponentName appName = SmsApplication.getDefaultSmsApplication(getActivity(), true);
-        if (appName != null) {
-            String packageName = appName.getPackageName();
-
-            CharSequence[] values = mSmsApplicationPreference.getEntryValues();
-            for (int i = 0; i < values.length; i++) {
-                if (packageName.contentEquals(values[i])) {
-                    mSmsApplicationPreference.setValueIndex(i);
-                    mSmsApplicationPreference.setSummary(mSmsApplicationPreference.getEntries()[i]);
-                    break;
-                }
-            }
-        }
-    }
-
     private void initSmsApplicationSetting() {
         log("initSmsApplicationSetting:");
         Collection<SmsApplicationData> smsApplications =
@@ -198,25 +179,18 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
         // If the list is empty the dialog will be empty, but we will not crash.
         int count = smsApplications.size();
-        CharSequence[] entries = new CharSequence[count];
-        CharSequence[] entryValues = new CharSequence[count];
-        Drawable[] entryImages = new Drawable[count];
-
+        String[] packageNames = new String[count];
         int i = 0;
         for (SmsApplicationData smsApplicationData : smsApplications) {
-            entries[i] = smsApplicationData.mApplicationName;
-            entryValues[i] = smsApplicationData.mPackageName;
-            try {
-                entryImages[i] = mPm.getApplicationIcon(smsApplicationData.mPackageName);
-            } catch (NameNotFoundException e) {
-                entryImages[i] = mPm.getDefaultActivityIcon();
-            }
+            packageNames[i] = smsApplicationData.mPackageName;
             i++;
         }
-        mSmsApplicationPreference.setEntries(entries);
-        mSmsApplicationPreference.setEntryValues(entryValues);
-        mSmsApplicationPreference.setEntryDrawables(entryImages);
-        updateSmsApplicationSetting();
+        String defaultPackageName = null;
+        ComponentName appName = SmsApplication.getDefaultSmsApplication(getActivity(), true);
+        if (appName != null) {
+            defaultPackageName = appName.getPackageName();
+        }
+        mSmsApplicationPreference.setPackageNames(packageNames, defaultPackageName);
     }
 
     @Override
@@ -284,7 +258,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
 
-        mSmsApplicationPreference = (SmsListPreference) findPreference(KEY_SMS_APPLICATION);
+        mSmsApplicationPreference = (AppListPreference) findPreference(KEY_SMS_APPLICATION);
         mSmsApplicationPreference.setOnPreferenceChangeListener(this);
         initSmsApplicationSetting();
 
@@ -468,7 +442,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mSmsApplicationPreference && newValue != null) {
             SmsApplication.setDefaultApplication(newValue.toString(), getActivity());
-            updateSmsApplicationSetting();
             return true;
         }
         return false;
