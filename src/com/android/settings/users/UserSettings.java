@@ -128,6 +128,7 @@ public class UserSettings extends RestrictedSettingsFragment
     private int mAddedUserId = 0;
     private boolean mAddingUser;
     private boolean mProfileExists;
+    private boolean mEnabled = true;
 
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
@@ -184,6 +185,10 @@ public class UserSettings extends RestrictedSettingsFragment
         }
 
         mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        if (!mUserManager.supportsMultipleUsers() || Utils.isMonkeyRunning()) {
+            mEnabled = false;
+            return;
+        }
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
         mMePreference = new UserPreference(getActivity(), null, UserHandle.myUserId(),
@@ -209,6 +214,9 @@ public class UserSettings extends RestrictedSettingsFragment
     @Override
     public void onResume() {
         super.onResume();
+
+        if (!mEnabled) return;
+
         loadProfile();
         updateUserList();
     }
@@ -216,6 +224,9 @@ public class UserSettings extends RestrictedSettingsFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if (!mEnabled) return;
+
         getActivity().unregisterReceiver(mUserChangeReceiver);
     }
 
