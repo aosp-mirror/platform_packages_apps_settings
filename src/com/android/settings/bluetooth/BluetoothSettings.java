@@ -443,17 +443,20 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
                 // Add cached paired BT devices
                 LocalBluetoothManager lbtm = LocalBluetoothManager.getInstance(context);
-                Set<BluetoothDevice> bondedDevices =
-                        lbtm.getBluetoothAdapter().getBondedDevices();
+                // LocalBluetoothManager.getInstance can return null if the device does not
+                // support bluetooth (e.g. the emulator).
+                if (lbtm != null) {
+                    Set<BluetoothDevice> bondedDevices =
+                            lbtm.getBluetoothAdapter().getBondedDevices();
 
-                for (BluetoothDevice device : bondedDevices) {
-                    data = new SearchIndexableRaw(context);
-                    data.title = device.getName();
-                    data.screenTitle = res.getString(R.string.bluetooth_settings);
-                    data.enabled = enabled;
-                    result.add(data);
+                    for (BluetoothDevice device : bondedDevices) {
+                        data = new SearchIndexableRaw(context);
+                        data.title = device.getName();
+                        data.screenTitle = res.getString(R.string.bluetooth_settings);
+                        data.enabled = enabled;
+                        result.add(data);
+                    }
                 }
-
                 return result;
             }
         };
