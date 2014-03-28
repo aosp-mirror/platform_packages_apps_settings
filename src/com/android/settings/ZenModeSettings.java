@@ -16,13 +16,20 @@
 
 package com.android.settings;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings.Global;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -39,6 +46,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +54,69 @@ public class ZenModeSettings extends SettingsPreferenceFragment {
     private static final String TAG = "ZenModeSettings";
     private static final boolean DEBUG = false;
 
+    private final Handler mHandler = new Handler();
+    private final SettingsObserver mSettingsObserver = new SettingsObserver();
+
     private ZenModeConfigView mConfig;
+    private Switch mSwitch;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        final Activity activity = getActivity();
+        mSwitch = new Switch(activity);
+        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.END));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSettingsObserver.unregister();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateState();
+        mSettingsObserver.register();
+    }
+
+    private final class SettingsObserver extends ContentObserver {
+        private final Uri ZEN_MODE_URI = Global.getUriFor(Global.ZEN_MODE);
+
+        public SettingsObserver() {
+            super(mHandler);
+        }
+
+        public void register() {
+            getContentResolver().registerContentObserver(ZEN_MODE_URI, false, this);
+        }
+
+        public void unregister() {
+            getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (ZEN_MODE_URI.equals(uri)) {
+                updateState();
+            }
+        }
+    };
+
+    private void updateState() {
+        mSwitch.setOnCheckedChangeListener(null);
+        final boolean zenMode = Global.getInt(getContentResolver(),
+                Global.ZEN_MODE, Global.ZEN_MODE_OFF) != Global.ZEN_MODE_OFF;
+        mSwitch.setChecked(zenMode);
+        mSwitch.setOnCheckedChangeListener(mSwitchListener);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +135,19 @@ public class ZenModeSettings extends SettingsPreferenceFragment {
         super.onDestroyView();
         mConfig.resetBackground();
     }
+
+    private final OnCheckedChangeListener mSwitchListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
+                    Global.putInt(getContentResolver(), Global.ZEN_MODE, v);
+                }
+            });
+        }
+    };
 
     public static final class ZenModeConfigView extends LinearLayout {
         private static final Typeface LIGHT =
