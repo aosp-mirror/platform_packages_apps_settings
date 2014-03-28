@@ -115,6 +115,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String SHOW_SCREEN_UPDATES_KEY = "show_screen_updates";
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SIMULATE_COLOR_SPACE = "simulate_color_space";
+    private static final String USE_NUPLAYER_KEY = "use_nuplayer";
+    private static final String USE_NUPLAYER_PROPERTY = "persist.sys.media.use-nuplayer";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String FORCE_MSAA_KEY = "force_msaa";
@@ -197,6 +199,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
     private ListPreference mSimulateColorSpace;
+
+    private CheckBoxPreference mUseNuplayer;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
@@ -305,6 +309,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
+        mUseNuplayer = findAndInitCheckboxPref(USE_NUPLAYER_KEY);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -511,6 +516,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateForceRtlOptions();
         updateWifiDisplayCertificationOptions();
         updateSimulateColorSpace();
+        updateUseNuplayerOptions();
     }
 
     private void resetDangerousOptions() {
@@ -981,6 +987,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
     }
 
+    private void updateUseNuplayerOptions() {
+        updateCheckBox(mUseNuplayer, SystemProperties.getBoolean(USE_NUPLAYER_PROPERTY, false));
+    }
+
+    private void writeUseNuplayerOptions() {
+        SystemProperties.set(USE_NUPLAYER_PROPERTY, mUseNuplayer.isChecked() ? "true" : "false");
+        pokeSystemProperties();
+    }
+
     private void updateForceRtlOptions() {
         updateCheckBox(mForceRtlLayout, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0);
@@ -1291,6 +1306,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeForceRtlOptions();
         } else if (preference == mWifiDisplayCertification) {
             writeWifiDisplayCertificationOptions();
+        } else if (preference == mUseNuplayer) {
+            writeUseNuplayerOptions();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }

@@ -222,6 +222,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:key="media_category"
+            android:title="@string/media_category">
+
+        <CheckBoxPreference
+                android:key="use_nuplayer"
+                android:title="@string/use_nuplayer"
+                android:summary="@string/use_nuplayer_summary"/>
+
+    </PreferenceCategory>
+
     <PreferenceCategory android:key="debug_monitoring_category"
             android:title="@string/debug_monitoring_category">
 
