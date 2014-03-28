@@ -24,11 +24,10 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.SearchManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -38,17 +37,13 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.INetworkManagementService;
 import android.os.Message;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -57,28 +52,20 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
-import android.widget.TextView;
 
+import android.widget.SearchView;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -86,11 +73,15 @@ import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
-import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.dashboard.Header;
+import com.android.settings.dashboard.HeaderAdapter;
+import com.android.settings.dashboard.NoHomeDialogFragment;
+import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -109,7 +100,6 @@ import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
-import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import org.xmlpull.v1.XmlPullParser;
@@ -122,16 +112,22 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.android.settings.dashboard.Header.HEADER_ID_UNDEFINED;
+
 public class SettingsActivity extends Activity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
-        ButtonBarHandler, OnAccountsUpdateListener, FragmentManager.OnBackStackChangedListener {
+        ButtonBarHandler, OnAccountsUpdateListener, FragmentManager.OnBackStackChangedListener,
+        SearchView.OnQueryTextListener, SearchView.OnCloseListener,
+        MenuItem.OnActionExpandListener {
 
     private static final String LOG_TAG = "Settings";
 
     // Constants for state save/restore
-    private static final String SAVE_KEY_HEADERS_TAG = ":settings:headers";
-    private static final String SAVE_KEY_CURRENT_HEADER_TAG = ":settings:cur_header";
+    private static final String SAVE_KEY_HEADERS = ":settings:headers";
+    private static final String SAVE_KEY_CURRENT_HEADER = ":settings:cur_header";
+    private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
+    private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -180,7 +176,7 @@ public class SettingsActivity extends Activity
      * this extra can also be specify to supply the title to be shown for
      * that fragment.
      */
-    protected static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
+    public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
 
     private static final String META_DATA_KEY_HEADER_ID =
         "com.android.settings.TOP_LEVEL_HEADER_ID";
@@ -193,13 +189,10 @@ public class SettingsActivity extends Activity
     private static boolean sShowNoHomeNotice = false;
 
     private String mFragmentClass;
-    private int mTopLevelHeaderId;
-    private Header mFirstHeader;
     private Header mSelectedHeader;
     private Header mCurrentHeader;
 
     private CharSequence mInitialTitle;
-    private Header mInitialHeader;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -279,21 +272,18 @@ public class SettingsActivity extends Activity
             TrustedCredentialsSettings.class.getName(),
             PaymentSettings.class.getName(),
             KeyboardLayoutPickerFragment.class.getName(),
-            DashboardSummary.class.getName(),
-            ZenModeSettings.class.getName()
+            ZenModeSettings.class.getName(),
+            NotificationSettings.class.getName(),
+            ChooseLockPassword.ChooseLockPasswordFragment.class.getName(),
+            ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
+            InstalledAppDetails.class.getName()
     };
 
     private SharedPreferences mDevelopmentPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener mDevelopmentPreferencesListener;
 
-    // TODO: Update Call Settings based on airplane mode state.
-
-    protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
-
     private AuthenticatorHelper mAuthenticatorHelper;
     private boolean mListeningToAccountUpdates;
-
-    private Button mNextButton;
 
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -312,13 +302,20 @@ public class SettingsActivity extends Activity
         }
     };
 
+    private Button mNextButton;
+    private ActionBar mActionBar;
+
+    private SearchView mSearchView;
+    private MenuItem mSearchMenuItem;
+    private boolean mSearchMenuItemExpanded = false;
+    private boolean mIsShowingSearchResults = false;
+    private SearchResultsSummary mSearchResultsFragment;
+    private String mSearchQuery;
+
+    // Headers
+    protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
     private final ArrayList<Header> mHeaders = new ArrayList<Header>();
     private HeaderAdapter mHeaderAdapter;
-
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawer;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private ActionBar mActionBar;
 
     private static final int MSG_BUILD_HEADERS = 1;
     private Handler mHandler = new Handler() {
@@ -329,16 +326,12 @@ public class SettingsActivity extends Activity
                     mHeaders.clear();
                     onBuildHeaders(mHeaders);
                     mHeaderAdapter.notifyDataSetChanged();
-                    if (mCurrentHeader != null) {
-                        Header mappedHeader = findBestMatchingHeader(mCurrentHeader, mHeaders);
-                        if (mappedHeader != null) {
-                            setSelectedHeader(mappedHeader);
-                        }
-                    }
                 } break;
             }
         }
     };
+
+    private boolean mNeedToRevertToInitialFragment = false;
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
@@ -364,87 +357,6 @@ public class SettingsActivity extends Activity
         return false;
     }
 
-    private class DrawerListener implements DrawerLayout.DrawerListener {
-        @Override
-        public void onDrawerOpened(View drawerView) {
-            mDrawerToggle.onDrawerOpened(drawerView);
-        }
-
-        @Override
-        public void onDrawerClosed(View drawerView) {
-            mDrawerToggle.onDrawerClosed(drawerView);
-            // Cannot process clicks when the App is finishing
-            if (isFinishing() || mSelectedHeader == null) {
-                return;
-            }
-            switchToHeader(mSelectedHeader, false, false);
-            mSelectedHeader = null;
-        }
-
-        @Override
-        public void onDrawerSlide(View drawerView, float slideOffset) {
-            mDrawerToggle.onDrawerSlide(drawerView, slideOffset);
-        }
-
-        @Override
-        public void onDrawerStateChanged(int newState) {
-            mDrawerToggle.onDrawerStateChanged(newState);
-        }
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            mDrawerLayout.closeDrawer(mDrawer);
-            onListItemClick((ListView)parent, view, position, id);
-        }
-    }
-
-    private Header findBestMatchingHeader(Header current, ArrayList<Header> from) {
-        ArrayList<Header> matches = new ArrayList<Header>();
-        for (int j=0; j<from.size(); j++) {
-            Header oh = from.get(j);
-            if (current == oh || (current.id != HEADER_ID_UNDEFINED && current.id == oh.id)) {
-                // Must be this one.
-                matches.clear();
-                matches.add(oh);
-                break;
-            }
-            if (current.fragment != null) {
-                if (current.fragment.equals(oh.fragment)) {
-                    matches.add(oh);
-                }
-            } else if (current.intent != null) {
-                if (current.intent.equals(oh.intent)) {
-                    matches.add(oh);
-                }
-            } else if (current.title != null) {
-                if (current.title.equals(oh.title)) {
-                    matches.add(oh);
-                }
-            }
-        }
-        final int NM = matches.size();
-        if (NM == 1) {
-            return matches.get(0);
-        } else if (NM > 1) {
-            for (int j=0; j<NM; j++) {
-                Header oh = matches.get(j);
-                if (current.fragmentArguments != null &&
-                        current.fragmentArguments.equals(oh.fragmentArguments)) {
-                    return oh;
-                }
-                if (current.extras != null && current.extras.equals(oh.extras)) {
-                    return oh;
-                }
-                if (current.title != null && current.title.equals(oh.title)) {
-                    return oh;
-                }
-            }
-        }
-        return null;
-    }
-
     private void invalidateHeaders() {
         if (!mHandler.hasMessages(MSG_BUILD_HEADERS)) {
             mHandler.sendEmptyMessage(MSG_BUILD_HEADERS);
@@ -452,30 +364,48 @@ public class SettingsActivity extends Activity
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
         Index.getInstance(this).update();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+    protected void onStart() {
+        super.onStart();
+
+        if (mNeedToRevertToInitialFragment) {
+            revertToInitialFragment();
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+
+        // Cache the search query (can be overriden by the OnQueryTextListener)
+        final String query = mSearchQuery;
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnCloseListener(this);
+
+        mSearchMenuItem = menu.findItem(R.id.search);
+        mSearchMenuItem.setOnActionExpandListener(this);
+
+        if (mSearchMenuItemExpanded) {
+            mSearchMenuItem.expandActionView();
+        }
+        mSearchView.setQuery(query, true /* submit */);
+
+        return true;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedState) {
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
@@ -489,77 +419,66 @@ public class SettingsActivity extends Activity
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        mHeaderAdapter= new HeaderAdapter(this, mHeaders, mAuthenticatorHelper, dpm);
+        mHeaderAdapter = new HeaderAdapter(this, mHeaders, mAuthenticatorHelper, dpm);
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
 
         getMetaData();
 
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedState);
 
         setContentView(R.layout.settings_main);
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
-        mActionBar = getActionBar();
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
+        boolean displayHomeAsUpEnabled = true;
 
-        mDrawer = (ListView) findViewById(R.id.headers_drawer);
-        mDrawer.setAdapter(mHeaderAdapter);
-        mDrawer.setOnItemClickListener(new DrawerItemClickListener());
-        mDrawer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+        Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+        if (savedState != null) {
+            mSearchMenuItemExpanded = savedState.getBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED);
+            mSearchQuery = savedState.getString(SAVE_KEY_SEARCH_QUERY);
 
-        if (savedInstanceState != null) {
-            // We are restarting from a previous saved state; used that to
+                    // We are restarting from a previous saved state; used that to
             // initialize, instead of starting fresh.
             mInitialTitle = getTitle();
 
-            ArrayList<Header> headers =
-                    savedInstanceState.getParcelableArrayList(SAVE_KEY_HEADERS_TAG);
+            ArrayList<Header> headers = savedState.getParcelableArrayList(SAVE_KEY_HEADERS);
             if (headers != null) {
                 mHeaders.addAll(headers);
-                int curHeader = savedInstanceState.getInt(SAVE_KEY_CURRENT_HEADER_TAG,
-                        (int) HEADER_ID_UNDEFINED);
-                if (curHeader >= 0 && curHeader < mHeaders.size()) {
-                    setSelectedHeader(mHeaders.get(curHeader));
-                    mInitialHeader = mCurrentHeader;
-                }
                 setTitleFromBackStack();
             }
         } else {
-            String initialFragment = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
-            Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-
             // We need to build the Headers in all cases
             onBuildHeaders(mHeaders);
 
-            if (initialFragment != null) {
-                // If we are just showing a fragment, we want to run in
-                // new fragment mode, but don't need to compute and show
-                // the headers.
-                final int initialTitleResId = getIntent().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE, 0);
-                mInitialTitle = (initialTitleResId > 0) ? getText(initialTitleResId) : getTitle();
+            if (initialFragmentName != null) {
+                final ComponentName cn = getIntent().getComponent();
+                // No UP is we are launched thru a Settings shortcut
+                if (!cn.getClassName().equals(SubSettings.class.getName())) {
+                    displayHomeAsUpEnabled = false;
+                }
+                final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
+                mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
                 setTitle(mInitialTitle);
-                switchToHeaderInner(initialFragment, initialArguments, true, false, mInitialTitle);
-                setSelectedHeaderById(mTopLevelHeaderId);
-                mInitialHeader = mCurrentHeader;
+                switchToFragment( initialFragmentName, initialArguments, true, false,
+                        mInitialTitle, false);
             } else {
-                // If there are headers, then at this point we need to show
-                // them and, depending on the screen, we may also show in-line
-                // the currently selected preference fragment.
+                // No UP if we are displaying the Headers
+                displayHomeAsUpEnabled = false;
                 if (mHeaders.size() > 0) {
-                    mInitialHeader = onGetInitialHeader();
-                    mInitialTitle = getHeaderTitle(mInitialHeader);
-                    switchToHeader(mInitialHeader, false, true);
+                    mInitialTitle = getText(R.string.dashboard_title);
+                    switchToFragment(DashboardSummary.class.getName(), null, false, false,
+                            mInitialTitle, false);
                 }
             }
         }
+
+        mActionBar = getActionBar();
+        mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled);
 
         // see if we should show Back/Next buttons
         Intent intent = getIntent();
@@ -615,39 +534,11 @@ public class SettingsActivity extends Activity
                 }
             }
         }
-
-        if (!onIsHidingHeaders()) {
-            highlightHeader(mTopLevelHeaderId);
-        }
-    }
-
-    public Header onGetInitialHeader() {
-        String fragmentClass = getStartingFragmentClass(super.getIntent());
-        if (fragmentClass != null) {
-            Header header = new Header();
-            header.fragment = fragmentClass;
-            header.title = getTitle();
-            header.fragmentArguments = getIntent().getExtras();
-            return header;
-        }
-
-        return mFirstHeader;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(mDrawer)) {
-            mDrawerLayout.closeDrawer(mDrawer);
-            return;
-        }
-        super.onBackPressed();
     }
 
     @Override
     public void onBackStackChanged() {
-        if (setTitleFromBackStack() == 0) {
-            setSelectedHeaderById(mInitialHeader.id);
-        }
+        setTitleFromBackStack();
     }
 
     private int setTitleFromBackStack() {
@@ -682,14 +573,16 @@ public class SettingsActivity extends Activity
         super.onSaveInstanceState(outState);
 
         if (mHeaders.size() > 0) {
-            outState.putParcelableArrayList(SAVE_KEY_HEADERS_TAG, mHeaders);
+            outState.putParcelableArrayList(SAVE_KEY_HEADERS, mHeaders);
             if (mCurrentHeader != null) {
                 int index = mHeaders.indexOf(mCurrentHeader);
                 if (index >= 0) {
-                    outState.putInt(SAVE_KEY_CURRENT_HEADER_TAG, index);
+                    outState.putInt(SAVE_KEY_CURRENT_HEADER, index);
                 }
             }
         }
+        outState.putBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED, mSearchMenuItem.isActionViewExpanded());
+        outState.putString(SAVE_KEY_SEARCH_QUERY, mSearchView.getQuery().toString());
     }
 
     @Override
@@ -709,15 +602,11 @@ public class SettingsActivity extends Activity
         invalidateHeaders();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-
-        mDrawerLayout.setDrawerListener(new DrawerListener());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        mDrawerLayout.setDrawerListener(null);
 
         unregisterReceiver(mBatteryInfoReceiver);
 
@@ -746,133 +635,24 @@ public class SettingsActivity extends Activity
         return false;
     }
 
-    private CharSequence getHeaderTitle(Header header) {
-        if (header == null || header.fragment == null) return getTitle();
-        final CharSequence title;
-        if (header.fragment.equals(DashboardSummary.class.getName())) {
-            title = getResources().getString(R.string.settings_label);
-        } else {
-            title = header.getTitle(getResources());
-        }
-        return title;
-    }
-
-    private void setSelectedHeaderById(long headerId) {
-        final int count = mHeaders.size();
-        for (int n = 0; n < count; n++) {
-            Header h = mHeaders.get(n);
-            if (h.id == headerId) {
-                setSelectedHeader(h);
-                return;
-            }
-        }
-    }
-
-    /**
-     * As the Headers can be rebuilt, their references can change, so use this method with caution!
-     */
-    private void setSelectedHeader(Header header) {
-        if (header == null) {
-            mCurrentHeader = null;
-            return;
-        }
-        // Update selected Header into Drawer only if it is not "Add Account"
-        if (header.id == R.id.account_add) {
-            mDrawer.clearChoices();
-            return;
-        }
-        mCurrentHeader = header;
-        int index = mHeaders.indexOf(header);
-        if (index >= 0) {
-            mDrawer.setItemChecked(index, true);
-        } else {
-            mDrawer.clearChoices();
-        }
-    }
-
-    private void highlightHeader(int id) {
-        if (id != 0) {
-            Integer index = mHeaderIndexMap.get(id);
-            if (index != null) {
-                mDrawer.setItemChecked(index, true);
-                if (mDrawer.getVisibility() == View.VISIBLE) {
-                    mDrawer.smoothScrollToPosition(index);
-                }
-            }
-        }
-    }
-
     /**
      * When in two-pane mode, switch to the fragment pane to show the given
      * preference fragment.
      *
      * @param header The new header to display.
-     * @param validate true means that the fragment's Header needs to be validated.
-     * @param initial true means that it is the initial Header.
      */
-    private void switchToHeader(Header header, boolean validate, boolean initial) {
+    private void onHeaderClick(Header header) {
         if (header == null) {
             return;
         }
-        // For switching to another Header it should be a different one
-        if (mCurrentHeader == null || header.id != mCurrentHeader.id) {
-            if (header.fragment != null) {
-                boolean addToBackStack;
-                if (initial) {
-                    addToBackStack = false;
-                } else {
-                    if (header.id != mInitialHeader.id) {
-                        addToBackStack = true;
-                    } else {
-                        addToBackStack = (mTopLevelHeaderId > 0);
-                    }
-                }
-                switchToHeaderInner(header.fragment, header.fragmentArguments, validate,
-                        addToBackStack, getHeaderTitle(header));
-                setSelectedHeader(header);
-            } else if (header.intent != null) {
-                setSelectedHeader(header);
-                startActivity(header.intent);
-            } else {
-                throw new IllegalStateException(
-                        "Can't switch to header that has no Fragment nor Intent");
-            }
-        }
-    }
-
-    /**
-     * Switch to a specific Header with taking care of validation, Title and BackStack
-     */
-    private void switchToHeaderInner(String fragmentName, Bundle args, boolean validate,
-                                     boolean addToBackStack, CharSequence title) {
-        getFragmentManager().popBackStack(BACK_STACK_PREFS,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        if (validate && !isValidFragment(fragmentName)) {
-            throw new IllegalArgumentException("Invalid fragment for this activity: "
-                    + fragmentName);
-        }
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.prefs, f);
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        if (addToBackStack) {
-            transaction.addToBackStack(BACK_STACK_PREFS);
-        }
-        if (title != null) {
-            transaction.setBreadCrumbTitle(title);
-        }
-        transaction.commitAllowingStateLoss();
-    }
-
-    @Override
-    public void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-
-        // If it is not launched from history, then reset to top-level
-        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0) {
-            if (mDrawer != null) {
-                mDrawer.setSelectionFromTop(0, 0);
-            }
+        if (header.fragment != null) {
+            startWithFragment(header.fragment, header.fragmentArguments, null, 0,
+                    header.getTitle(getResources()));
+        } else if (header.intent != null) {
+            startActivity(header.intent);
+        } else {
+            throw new IllegalStateException(
+                    "Can't switch to header that has no Fragment nor Intent");
         }
     }
 
@@ -949,9 +729,8 @@ public class SettingsActivity extends Activity
      * request code to be received with the resut.
      */
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
-                                     CharSequence titleText, Fragment resultTo,
-                                     int resultRequestCode) {
-        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, titleText);
+            CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+        switchToFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, titleText);
     }
 
     /**
@@ -987,7 +766,7 @@ public class SettingsActivity extends Activity
     }
 
     /**
-     * Start a new fragment.
+     * Start a new fragment. Used by #startPreferencePanel.
      *
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
@@ -1000,8 +779,8 @@ public class SettingsActivity extends Activity
      *                 argument will be used as the title.
      * @param titleText string to display for the title of.
      */
-    private void startWithFragment(String fragmentName, Bundle args, Fragment resultTo,
-                                   int resultRequestCode, int titleRes, CharSequence titleText) {
+    private void switchToFragment(String fragmentName, Bundle args, Fragment resultTo,
+            int resultRequestCode, int titleRes, CharSequence titleText) {
         final CharSequence cs;
         if (titleRes != 0) {
             cs = getText(titleRes);
@@ -1019,6 +798,75 @@ public class SettingsActivity extends Activity
         transaction.addToBackStack(BACK_STACK_PREFS);
         transaction.setBreadCrumbTitle(cs);
         transaction.commitAllowingStateLoss();
+    }
+
+    /**
+     * Switch to a specific Fragment with taking care of validation, Title and BackStack
+     */
+    private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
+            boolean addToBackStack, CharSequence title, boolean withTransition) {
+        if (validate && !isValidFragment(fragmentName)) {
+            throw new IllegalArgumentException("Invalid fragment for this activity: "
+                    + fragmentName);
+        }
+        Fragment f = Fragment.instantiate(this, fragmentName, args);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.prefs, f);
+        if (withTransition) {
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        }
+        if (addToBackStack) {
+            transaction.addToBackStack(SettingsActivity.BACK_STACK_PREFS);
+        }
+        if (title != null) {
+            transaction.setBreadCrumbTitle(title);
+        }
+        transaction.commitAllowingStateLoss();
+        return f;
+    }
+
+    /**
+     * Start a new instance of this activity, showing only the given fragment.
+     * When launched in this mode, the given preference fragment will be instantiated and fill the
+     * entire activity.
+     *
+     * @param fragmentName The name of the fragment to display.
+     * @param args Optional arguments to supply to the fragment.
+     * @param resultTo Option fragment that should receive the result of
+     * the activity launch.
+     * @param resultRequestCode If resultTo is non-null, this is the request
+     * code in which to report the result.
+     * @param title String to display for the title of this set of preferences.
+     */
+    public void startWithFragment(String fragmentName, Bundle args,
+                                  Fragment resultTo, int resultRequestCode, CharSequence title) {
+        Intent intent = onBuildStartFragmentIntent(fragmentName, args, title);
+        if (resultTo == null) {
+            startActivity(intent);
+        } else {
+            resultTo.startActivityForResult(intent, resultRequestCode);
+        }
+    }
+
+    /**
+     * Build an Intent to launch a new activity showing the selected fragment.
+     * The implementation constructs an Intent that re-launches the current activity with the
+     * appropriate arguments to display the fragment.
+     *
+     * @param fragmentName The name of the fragment to display.
+     * @param args Optional arguments to supply to the fragment.
+     * @param title Optional title to show for this item.
+     * @return Returns an Intent that can be launched to display the given
+     * fragment.
+     */
+    public Intent onBuildStartFragmentIntent(String fragmentName, Bundle args, CharSequence title) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClass(this, SubSettings.class);
+        intent.putExtra(EXTRA_SHOW_FRAGMENT, fragmentName);
+        intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE, title);
+        intent.putExtra(EXTRA_NO_HEADERS, true);
+        return intent;
     }
 
     /**
@@ -1226,11 +1074,6 @@ public class SettingsActivity extends Activity
 
             // Increment if the current one wasn't removed by the Utils code.
             if (i < target.size() && target.get(i) == header) {
-                // Hold on to the first header, when we need to reset to the top-level
-                if (mFirstHeader == null &&
-                        HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY) {
-                    mFirstHeader = header;
-                }
                 mHeaderIndexMap.put(id, i);
                 i++;
             }
@@ -1336,7 +1179,6 @@ public class SettingsActivity extends Activity
             ActivityInfo ai = getPackageManager().getActivityInfo(getComponentName(),
                     PackageManager.GET_META_DATA);
             if (ai == null || ai.metaData == null) return;
-            mTopLevelHeaderId = ai.metaData.getInt(META_DATA_KEY_HEADER_ID);
             mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
         } catch (NameNotFoundException nnfe) {
             // No recovery
@@ -1353,261 +1195,19 @@ public class SettingsActivity extends Activity
         return mNextButton;
     }
 
-    public static class NoHomeDialogFragment extends DialogFragment {
-        public static void show(Activity parent) {
-            final NoHomeDialogFragment dialog = new NoHomeDialogFragment();
-            dialog.show(parent.getFragmentManager(), null);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.only_one_home_message)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .create();
-        }
+    public HeaderAdapter getHeaderAdapter() {
+        return mHeaderAdapter;
     }
 
-    private static class HeaderAdapter extends ArrayAdapter<Header> {
-        static final int HEADER_TYPE_CATEGORY = 0;
-        static final int HEADER_TYPE_NORMAL = 1;
-        static final int HEADER_TYPE_SWITCH = 2;
-        static final int HEADER_TYPE_BUTTON = 3;
-        private static final int HEADER_TYPE_COUNT = HEADER_TYPE_BUTTON + 1;
-
-        private final WifiEnabler mWifiEnabler;
-        private final BluetoothEnabler mBluetoothEnabler;
-        private AuthenticatorHelper mAuthHelper;
-        private DevicePolicyManager mDevicePolicyManager;
-
-        private static class HeaderViewHolder {
-            ImageView mIcon;
-            TextView mTitle;
-            TextView mSummary;
-            Switch mSwitch;
-            ImageButton mButton;
-            View mDivider;
-        }
-
-        private LayoutInflater mInflater;
-
-        static int getHeaderType(Header header) {
-            if (header.fragment == null && header.intent == null) {
-                return HEADER_TYPE_CATEGORY;
-            } else if (header.id == R.id.security_settings) {
-                return HEADER_TYPE_BUTTON;
-            } else {
-                return HEADER_TYPE_NORMAL;
-            }
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            Header header = getItem(position);
-            return getHeaderType(header);
-        }
-
-        @Override
-        public boolean areAllItemsEnabled() {
-            return false; // because of categories
-        }
-
-        @Override
-        public boolean isEnabled(int position) {
-            return getItemViewType(position) != HEADER_TYPE_CATEGORY;
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return HEADER_TYPE_COUNT;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        public HeaderAdapter(Context context, List<Header> objects,
-                AuthenticatorHelper authenticatorHelper, DevicePolicyManager dpm) {
-            super(context, 0, objects);
-
-            mAuthHelper = authenticatorHelper;
-            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            // Temp Switches provided as placeholder until the adapter replaces these with actual
-            // Switches inflated from their layouts. Must be done before adapter is set in super
-            mWifiEnabler = new WifiEnabler(context, new Switch(context));
-            mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
-            mDevicePolicyManager = dpm;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            HeaderViewHolder holder;
-            Header header = getItem(position);
-            int headerType = getHeaderType(header);
-            View view = null;
-
-            if (convertView == null) {
-                holder = new HeaderViewHolder();
-                switch (headerType) {
-                    case HEADER_TYPE_CATEGORY:
-                        view = new TextView(getContext(), null,
-                                android.R.attr.listSeparatorTextViewStyle);
-                        holder.mTitle = (TextView) view;
-                        break;
-
-                    case HEADER_TYPE_SWITCH:
-                        view = mInflater.inflate(R.layout.preference_header_switch_item, parent,
-                                false);
-                        holder.mIcon = (ImageView) view.findViewById(R.id.icon);
-                        holder.mTitle = (TextView)
-                                view.findViewById(com.android.internal.R.id.title);
-                        holder.mSummary = (TextView)
-                                view.findViewById(com.android.internal.R.id.summary);
-                        holder.mSwitch = (Switch) view.findViewById(R.id.switchWidget);
-                        break;
-
-                    case HEADER_TYPE_BUTTON:
-                        view = mInflater.inflate(R.layout.preference_header_button_item, parent,
-                                false);
-                        holder.mIcon = (ImageView) view.findViewById(R.id.icon);
-                        holder.mTitle = (TextView)
-                                view.findViewById(com.android.internal.R.id.title);
-                        holder.mSummary = (TextView)
-                                view.findViewById(com.android.internal.R.id.summary);
-                        holder.mButton = (ImageButton) view.findViewById(R.id.buttonWidget);
-                        holder.mDivider = view.findViewById(R.id.divider);
-                        break;
-
-                    case HEADER_TYPE_NORMAL:
-                        view = mInflater.inflate(
-                                R.layout.preference_header_item, parent,
-                                false);
-                        holder.mIcon = (ImageView) view.findViewById(R.id.icon);
-                        holder.mTitle = (TextView)
-                                view.findViewById(com.android.internal.R.id.title);
-                        holder.mSummary = (TextView)
-                                view.findViewById(com.android.internal.R.id.summary);
-                        break;
-                }
-                view.setTag(holder);
-            } else {
-                view = convertView;
-                holder = (HeaderViewHolder) view.getTag();
-            }
-
-            // All view fields must be updated every time, because the view may be recycled
-            switch (headerType) {
-                case HEADER_TYPE_CATEGORY:
-                    holder.mTitle.setText(header.getTitle(getContext().getResources()));
-                    break;
-
-                case HEADER_TYPE_SWITCH:
-                    // Would need a different treatment if the main menu had more switches
-                    if (header.id == R.id.wifi_settings) {
-                        mWifiEnabler.setSwitch(holder.mSwitch);
-                    } else {
-                        mBluetoothEnabler.setSwitch(holder.mSwitch);
-                    }
-                    updateCommonHeaderView(header, holder);
-                    break;
-
-                case HEADER_TYPE_BUTTON:
-                    if (header.id == R.id.security_settings) {
-                        boolean hasCert = DevicePolicyManager.hasAnyCaCertsInstalled();
-                        if (hasCert) {
-                            holder.mButton.setVisibility(View.VISIBLE);
-                            holder.mDivider.setVisibility(View.VISIBLE);
-                            boolean isManaged = mDevicePolicyManager.getDeviceOwner() != null;
-                            if (isManaged) {
-                                holder.mButton.setImageResource(R.drawable.ic_settings_about);
-                            } else {
-                                holder.mButton.setImageResource(
-                                        android.R.drawable.stat_notify_error);
-                            }
-                            holder.mButton.setOnClickListener(new OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(
-                                            android.provider.Settings.ACTION_MONITORING_CERT_INFO);
-                                    getContext().startActivity(intent);
-                                }
-                            });
-                        } else {
-                            holder.mButton.setVisibility(View.GONE);
-                            holder.mDivider.setVisibility(View.GONE);
-                        }
-                    }
-                    updateCommonHeaderView(header, holder);
-                    break;
-
-                case HEADER_TYPE_NORMAL:
-                    updateCommonHeaderView(header, holder);
-                    break;
-            }
-
-            return view;
-        }
-
-        private void updateCommonHeaderView(Header header, HeaderViewHolder holder) {
-                if (header.extras != null
-                        && header.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
-                    String accType = header.extras.getString(
-                            ManageAccountsSettings.KEY_ACCOUNT_TYPE);
-                    Drawable icon = mAuthHelper.getDrawableForType(getContext(), accType);
-                    setHeaderIcon(holder, icon);
-                } else {
-                    if (header.iconRes > 0) {
-                        holder.mIcon.setImageResource(header.iconRes);
-                    } else {
-                        holder.mIcon.setImageDrawable(null);
-                    }
-                }
-                if (holder.mIcon != null) {
-                    if (header.iconRes > 0) {
-                        holder.mIcon.setBackgroundResource(R.color.background_drawer_icon);
-                    } else {
-                        holder.mIcon.setBackground(null);
-                    }
-                }
-                holder.mTitle.setText(header.getTitle(getContext().getResources()));
-                CharSequence summary = header.getSummary(getContext().getResources());
-                if (!TextUtils.isEmpty(summary)) {
-                    holder.mSummary.setVisibility(View.VISIBLE);
-                    holder.mSummary.setText(summary);
-                } else {
-                    holder.mSummary.setVisibility(View.GONE);
-                }
-            }
-
-        private void setHeaderIcon(HeaderViewHolder holder, Drawable icon) {
-            ViewGroup.LayoutParams lp = holder.mIcon.getLayoutParams();
-            lp.width = getContext().getResources().getDimensionPixelSize(
-                    R.dimen.header_icon_width);
-            lp.height = lp.width;
-            holder.mIcon.setLayoutParams(lp);
-            holder.mIcon.setImageDrawable(icon);
-        }
-
-        public void resume(Context context) {
-            mWifiEnabler.resume();
-            mBluetoothEnabler.resume(context);
-        }
-
-        public void pause() {
-            mWifiEnabler.pause();
-            mBluetoothEnabler.pause();
-        }
-    }
-
-    private void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         if (!isResumed()) {
             return;
         }
         Object item = mHeaderAdapter.getItem(position);
         if (item instanceof Header) {
             mSelectedHeader = (Header) item;
+            onHeaderClick(mSelectedHeader);
+            revertToInitialFragment();
         }
     }
 
@@ -1628,156 +1228,68 @@ public class SettingsActivity extends Activity
         sShowNoHomeNotice = true;
     }
 
-    /**
-     * Default value for {@link Header#id Header.id} indicating that no
-     * identifier value is set.  All other values (including those below -1)
-     * are valid.
-     */
-    private static final long HEADER_ID_UNDEFINED = -1;
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        switchToSearchResultsFragmentIfNeeded();
+        mSearchQuery = query;
+        return mSearchResultsFragment.onQueryTextSubmit(query);
+    }
 
-    /**
-     * Description of a single Header item that the user can select.
-     */
-    static final class Header implements Parcelable {
-        /**
-         * Identifier for this header, to correlate with a new list when
-         * it is updated.  The default value is
-         * {@link SettingsActivity#HEADER_ID_UNDEFINED}, meaning no id.
-         * @attr ref android.R.styleable#PreferenceHeader_id
-         */
-        public long id = HEADER_ID_UNDEFINED;
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mSearchQuery = newText;
+        return false;
+    }
 
-        /**
-         * Resource ID of title of the header that is shown to the user.
-         * @attr ref android.R.styleable#PreferenceHeader_title
-         */
-        public int titleRes;
+    @Override
+    public boolean onClose() {
+        return false;
+    }
 
-        /**
-         * Title of the header that is shown to the user.
-         * @attr ref android.R.styleable#PreferenceHeader_title
-         */
-        public CharSequence title;
-
-        /**
-         * Resource ID of optional summary describing what this header controls.
-         * @attr ref android.R.styleable#PreferenceHeader_summary
-         */
-        public int summaryRes;
-
-        /**
-         * Optional summary describing what this header controls.
-         * @attr ref android.R.styleable#PreferenceHeader_summary
-         */
-        public CharSequence summary;
-
-        /**
-         * Optional icon resource to show for this header.
-         * @attr ref android.R.styleable#PreferenceHeader_icon
-         */
-        public int iconRes;
-
-        /**
-         * Full class name of the fragment to display when this header is
-         * selected.
-         * @attr ref android.R.styleable#PreferenceHeader_fragment
-         */
-        public String fragment;
-
-        /**
-         * Optional arguments to supply to the fragment when it is
-         * instantiated.
-         */
-        public Bundle fragmentArguments;
-
-        /**
-         * Intent to launch when the preference is selected.
-         */
-        public Intent intent;
-
-        /**
-         * Optional additional data for use by subclasses of the activity
-         */
-        public Bundle extras;
-
-        public Header() {
-            // Empty
-        }
-
-        /**
-         * Return the currently set title.  If {@link #titleRes} is set,
-         * this resource is loaded from <var>res</var> and returned.  Otherwise
-         * {@link #title} is returned.
-         */
-        public CharSequence getTitle(Resources res) {
-            if (titleRes != 0) {
-                return res.getText(titleRes);
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        if (item.getItemId() == mSearchMenuItem.getItemId()) {
+            if (mSearchResultsFragment == null) {
+                switchToSearchResultsFragmentIfNeeded();
             }
-            return title;
         }
+        return true;
+    }
 
-        /**
-         * Return the currently set summary.  If {@link #summaryRes} is set,
-         * this resource is loaded from <var>res</var> and returned.  Otherwise
-         * {@link #summary} is returned.
-         */
-        public CharSequence getSummary(Resources res) {
-            if (summaryRes != 0) {
-                return res.getText(summaryRes);
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        if (item.getItemId() == mSearchMenuItem.getItemId()) {
+            if (mIsShowingSearchResults) {
+                revertToInitialFragment();
             }
-            return summary;
         }
+        return true;
+    }
 
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeLong(id);
-            dest.writeInt(titleRes);
-            TextUtils.writeToParcel(title, dest, flags);
-            dest.writeInt(summaryRes);
-            TextUtils.writeToParcel(summary, dest, flags);
-            dest.writeInt(iconRes);
-            dest.writeString(fragment);
-            dest.writeBundle(fragmentArguments);
-            if (intent != null) {
-                dest.writeInt(1);
-                intent.writeToParcel(dest, flags);
+    private void switchToSearchResultsFragmentIfNeeded() {
+        if (!mIsShowingSearchResults) {
+            Fragment current = getFragmentManager().findFragmentById(R.id.prefs);
+            if (current != null && current instanceof SearchResultsSummary) {
+                mSearchResultsFragment = (SearchResultsSummary) current;
             } else {
-                dest.writeInt(0);
+                String title = getString(R.string.search_results_title);
+                mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
+                        SearchResultsSummary.class.getName(), null, false, true, title, true);
             }
-            dest.writeBundle(extras);
+            mIsShowingSearchResults = true;
         }
+    }
 
-        public void readFromParcel(Parcel in) {
-            id = in.readLong();
-            titleRes = in.readInt();
-            title = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
-            summaryRes = in.readInt();
-            summary = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
-            iconRes = in.readInt();
-            fragment = in.readString();
-            fragmentArguments = in.readBundle();
-            if (in.readInt() != 0) {
-                intent = Intent.CREATOR.createFromParcel(in);
-            }
-            extras = in.readBundle();
-        }
+    public void needToRevertToInitialFragment() {
+        mNeedToRevertToInitialFragment = true;
+    }
 
-        Header(Parcel in) {
-            readFromParcel(in);
-        }
-
-        public static final Creator<Header> CREATOR = new Creator<Header>() {
-            public Header createFromParcel(Parcel source) {
-                return new Header(source);
-            }
-            public Header[] newArray(int size) {
-                return new Header[size];
-            }
-        };
+    private void revertToInitialFragment() {
+        mNeedToRevertToInitialFragment = false;
+        getFragmentManager().popBackStack(SettingsActivity.BACK_STACK_PREFS,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        mSearchResultsFragment = null;
+        mIsShowingSearchResults = false;
+        mSearchMenuItem.collapseActionView();
     }
 }

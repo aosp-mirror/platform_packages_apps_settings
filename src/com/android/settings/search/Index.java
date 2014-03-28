@@ -96,7 +96,7 @@ public class Index {
     private static Index sInstance;
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
     private final UpdateData mDataToProcess = new UpdateData();
-    private final Context mContext;
+    private Context mContext;
 
     /**
      * A private class to describe the update data for the Index database
@@ -124,11 +124,17 @@ public class Index {
     public static Index getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new Index(context);
+        } else {
+            sInstance.setContext(context);
         }
         return sInstance;
     }
 
     public Index(Context context) {
+        mContext = context;
+    }
+
+    public void setContext(Context context) {
         mContext = context;
     }
 
@@ -674,6 +680,17 @@ public class Index {
         }
         return (data != null) ? data.toString() : null;
     }
+
+    private int getResId(Context context, AttributeSet set, int[] attrs, int resId) {
+        final TypedArray sa = context.obtainStyledAttributes(set, attrs);
+        final TypedValue tv = sa.peekValue(resId);
+
+        if (tv != null && tv.type == TypedValue.TYPE_STRING) {
+            return tv.resourceId;
+        } else {
+            return 0;
+        }
+   }
 
     /**
      * A private class for updating the Index database

@@ -129,7 +129,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
-        if (!activity.onIsHidingHeaders()) {
+        if (activity.onIsHidingHeaders()) {
             activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                     ActionBar.DISPLAY_SHOW_CUSTOM);
             activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
@@ -198,7 +198,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             R.string.bluetooth_search_for_devices;
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, textId)
                 .setEnabled(bluetoothIsEnabled && !isDiscovering)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_RENAME_DEVICE, 0, R.string.bluetooth_rename_device)
                 .setEnabled(bluetoothIsEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);

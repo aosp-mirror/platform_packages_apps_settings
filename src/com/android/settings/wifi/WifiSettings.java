@@ -416,7 +416,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
             if (activity instanceof SettingsActivity) {
                 SettingsActivity sa = (SettingsActivity) activity;
-                addSwitch = !sa.onIsHidingHeaders();
+                addSwitch = sa.onIsHidingHeaders();
             } else if (activity instanceof WifiPickerActivity) {
                 PreferenceActivity pa = (PreferenceActivity) activity;
                 addSwitch = pa.onIsHidingHeaders();
@@ -458,12 +458,13 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onResume() {
+        final Activity activity = getActivity();
         super.onResume();
         if (mWifiEnabler != null) {
-            mWifiEnabler.resume();
+            mWifiEnabler.resume(activity);
         }
 
-        getActivity().registerReceiver(mReceiver, mFilter);
+        activity.registerReceiver(mReceiver, mFilter);
         updateAccessPoints();
     }
 
@@ -497,11 +498,11 @@ public class WifiSettings extends RestrictedSettingsFragment
             menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
                     .setIcon(ta.getDrawable(1))
                     .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
                     .setIcon(ta.getDrawable(0))
                     .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
                     //.setIcon(R.drawable.ic_menu_scan_network)
                     .setEnabled(wifiIsEnabled)
