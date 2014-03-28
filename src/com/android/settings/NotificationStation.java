@@ -71,6 +71,10 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private INotificationListener.Stub mListener = new INotificationListener.Stub() {
         @Override
+        public void onListenerConnected(String[] notificationKeys) throws RemoteException {
+            // noop
+        }
+        @Override
         public void onNotificationPosted(StatusBarNotification notification) throws RemoteException {
             Log.v(TAG, "onNotificationPosted: " + notification);
             final Handler h = getListView().getHandler();
