@@ -70,6 +70,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
     private static final int MSG_UPDATE_SOUND_SUMMARY = 2;
 
+    private Context mContext;
     private PackageManager mPM;
 
     private Preference mNotificationSoundPreference;
@@ -77,13 +78,14 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mLockscreenNotifications;
     private CheckBoxPreference mHeadsUp;
     private CheckBoxPreference mNotificationPulse;
+    private PreferenceGroup mAppsPreference;
 
     private final Runnable mRingtoneLookupRunnable = new Runnable() {
         @Override
         public void run() {
             if (mNotificationSoundPreference != null) {
                 final CharSequence summary = SoundSettings.updateRingtoneName(
-                        getActivity(), RingtoneManager.TYPE_NOTIFICATION);
+                        mContext, RingtoneManager.TYPE_NOTIFICATION);
                 if (summary != null) {
                     mHandler.sendMessage(
                             mHandler.obtainMessage(MSG_UPDATE_SOUND_SUMMARY, summary));
@@ -154,27 +156,23 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
     private final Runnable mRefreshAppsListRunnable = new Runnable() {
         @Override
         public void run() {
-            final PreferenceScreen root = getPreferenceScreen();
-            final PreferenceGroup appsCategory = (PreferenceGroup)
-                    root.findPreference(KEY_APPS_CATEGORY);
-
-            appsCategory.removeAll();
-
             synchronized (mAppNotificationInfo) {
-                if (mAppNotificationInfo.size() == 0) {
-                    root.removePreference(appsCategory);
-                    return;
-                }
-
+                mAppsPreference.removeAll();
+                Preference p = getPreferenceScreen().findPreference(mAppsPreference.getKey());
                 final int N = mAppNotificationInfo.size();
+                if (N == 0 && p != null) {
+                    getPreferenceScreen().removePreference(p);
+                } else if (N > 0 && p == null) {
+                    getPreferenceScreen().addPreference(mAppsPreference);
+                }
                 for (int i = 0; i < N; i++) {
                     final AppNotificationInfo info = mAppNotificationInfo.get(i);
-                    Preference pref = new AppNotificationPreference(root.getContext());
+                    Preference pref = new AppNotificationPreference(mContext);
                     pref.setTitle(info.label);
                     pref.setIcon(info.icon);
                     pref.setIntent(new Intent(Intent.ACTION_MAIN)
                             .setClassName(info.pkg, info.name));
-                    appsCategory.addPreference(pref);
+                    mAppsPreference.addPreference(pref);
                 }
             }
         }
@@ -184,9 +182,10 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ContentResolver resolver = getActivity().getContentResolver();
+        mContext = getActivity();
+        final ContentResolver resolver = mContext.getContentResolver();
 
-        mPM = getActivity().getPackageManager();
+        mPM = mContext.getPackageManager();
 
         addPreferencesFromResource(R.xml.notification_settings);
 
@@ -248,6 +247,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
+        mAppsPreference = (PreferenceGroup) root.findPreference(KEY_APPS_CATEGORY);
+        root.removePreference(mAppsPreference);
     }
 
     @Override
