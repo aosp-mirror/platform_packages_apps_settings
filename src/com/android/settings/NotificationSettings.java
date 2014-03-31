@@ -58,7 +58,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
             = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_NOTIFICATION_PREFERENCES);
 
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
-    private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "toggle_lock_screen_notifications";
     private static final String KEY_HEADS_UP = "heads_up";
