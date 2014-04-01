@@ -58,40 +58,51 @@ public class Index {
 
     // Those indices should match the indices of SELECT_COLUMNS !
     public static final int COLUMN_INDEX_TITLE = 1;
-    public static final int COLUMN_INDEX_SUMMARY = 2;
-    public static final int COLUMN_INDEX_CLASS_NAME = 4;
-    public static final int COLUMN_INDEX_SCREEN_TITLE = 5;
-    public static final int COLUMN_INDEX_ICON = 6;
-    public static final int COLUMN_INDEX_INTENT_ACTION = 7;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 9;
-    public static final int COLUMN_INDEX_ENABLED = 10;
+    public static final int COLUMN_INDEX_SUMMARY_ON = 2;
+    public static final int COLUMN_INDEX_SUMMARY_OFF = 3;
+    public static final int COLUMN_INDEX_KEYWORDS = 4;
+    public static final int COLUMN_INDEX_CLASS_NAME = 5;
+    public static final int COLUMN_INDEX_SCREEN_TITLE = 6;
+    public static final int COLUMN_INDEX_ICON = 7;
+    public static final int COLUMN_INDEX_INTENT_ACTION = 8;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 9;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 10;
+    public static final int COLUMN_INDEX_ENABLED = 11;
 
     // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
     private static final String[] SELECT_COLUMNS = new String[] {
-            IndexColumns.DATA_RANK,
-            IndexColumns.DATA_TITLE,
-            IndexColumns.DATA_SUMMARY,
-            IndexColumns.DATA_KEYWORDS,
-            IndexColumns.CLASS_NAME,
-            IndexColumns.SCREEN_TITLE,
-            IndexColumns.ICON,
-            IndexColumns.INTENT_ACTION,
-            IndexColumns.INTENT_TARGET_PACKAGE,
-            IndexColumns.INTENT_TARGET_CLASS
+            IndexColumns.DATA_RANK,               // 0
+            IndexColumns.DATA_TITLE,              // 1
+            IndexColumns.DATA_SUMMARY_ON,         // 2
+            IndexColumns.DATA_SUMMARY_OFF,        // 3
+            IndexColumns.DATA_KEYWORDS,           // 4
+            IndexColumns.CLASS_NAME,              // 5
+            IndexColumns.SCREEN_TITLE,            // 6
+            IndexColumns.ICON,                    // 7
+            IndexColumns.INTENT_ACTION,           // 8
+            IndexColumns.INTENT_TARGET_PACKAGE,   // 9
+            IndexColumns.INTENT_TARGET_CLASS      // 10
     };
 
     private static final String[] MATCH_COLUMNS = {
             IndexColumns.DATA_TITLE,
             IndexColumns.DATA_TITLE_NORMALIZED,
-            IndexColumns.DATA_SUMMARY,
-            IndexColumns.DATA_SUMMARY_NORMALIZED,
+            IndexColumns.DATA_SUMMARY_ON,
+            IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
+            IndexColumns.DATA_SUMMARY_OFF,
+            IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
             IndexColumns.DATA_KEYWORDS
     };
 
     private static final String EMPTY = "";
     private static final String NON_BREAKING_HYPHEN = "\u2011";
     private static final String HYPHEN = "-";
+
+    private static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
+            "SEARCH_INDEX_DATA_PROVIDER";
+
+    private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
+    private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
 
     private static Index sInstance;
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
@@ -335,22 +346,24 @@ public class Index {
                 while (cursor.moveToNext()) {
                     final int rank = cursor.getInt(0);
                     final String title = cursor.getString(1);
-                    final String summary = cursor.getString(2);
-                    final String keywords = cursor.getString(3);
+                    final String summaryOn = cursor.getString(2);
+                    final String summaryOff = cursor.getString(3);
+                    final String keywords = cursor.getString(4);
 
-                    final String screenTitle = cursor.getString(4);
+                    final String screenTitle = cursor.getString(5);
 
-                    final String className = cursor.getString(5);
-                    final int iconResId = cursor.getInt(6);
+                    final String className = cursor.getString(6);
+                    final int iconResId = cursor.getInt(7);
 
-                    final String action = cursor.getString(7);
-                    final String targetPackage = cursor.getString(8);
-                    final String targetClass = cursor.getString(9);
+                    final String action = cursor.getString(8);
+                    final String targetPackage = cursor.getString(9);
+                    final String targetClass = cursor.getString(10);
 
                     SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
                     data.rank = rank;
                     data.title = title;
-                    data.summary = summary;
+                    data.summaryOn = summaryOn;
+                    data.summaryOff = summaryOff;
                     data.keywords = keywords;
                     data.screenTitle = screenTitle;
                     data.className = className;
@@ -458,7 +471,7 @@ public class Index {
             }
 
             String nodeName = parser.getName();
-            if (!"PreferenceScreen".equals(nodeName)) {
+            if (!NODE_NAME_PREFERENCE_SCREEN.equals(nodeName)) {
                 throw new RuntimeException(
                         "XML document must start with <PreferenceScreen> tag; found"
                                 + nodeName + " at " + parser.getPositionDescription());
@@ -474,7 +487,7 @@ public class Index {
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
-            updateOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
+            updateOneRowWithFilteredData(database, localeStr, title, summary, null, fragmentName,
                     screenTitle, iconResId, rank, keywords,
                     intentAction, intentTargetPackage, intentTargetClass, true);
 
@@ -484,14 +497,26 @@ public class Index {
                     continue;
                 }
 
+                nodeName = parser.getName();
+
                 title = getDataTitle(context, attrs);
-                summary = getDataSummary(context, attrs);
                 keywords = getDataKeywords(context, attrs);
 
-                // Insert rows for the child nodes of PreferenceScreen
-                updateOneRowWithFilteredData(database, localeStr, title, summary, fragmentName,
-                        screenTitle, iconResId, rank, keywords,
-                        intentAction, intentTargetPackage, intentTargetClass, true);
+                if (!nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
+                    summary = getDataSummary(context, attrs);
+
+                    // Insert rows for the child nodes of PreferenceScreen
+                    updateOneRowWithFilteredData(database, localeStr, title, summary, null,
+                            fragmentName, screenTitle, iconResId, rank, keywords,
+                            intentAction, intentTargetPackage, intentTargetClass, true);
+                } else {
+                    final String summaryOn = getDataSummaryOn(context, attrs);
+                    final String summaryOff = getDataSummaryOff(context, attrs);
+
+                    updateOneRowWithFilteredData(database, localeStr, title, summaryOn, summaryOff,
+                            fragmentName, screenTitle, iconResId, rank, keywords,
+                            intentAction, intentTargetPackage, intentTargetClass, true);
+                }
             }
 
         } catch (XmlPullParserException e) {
@@ -512,7 +537,8 @@ public class Index {
 
         updateOneRowWithFilteredData(database, localeStr,
                 raw.title,
-                raw.summary,
+                raw.summaryOn,
+                raw.summaryOff,
                 raw.className,
                 raw.screenTitle,
                 raw.iconResId,
@@ -529,7 +555,7 @@ public class Index {
         try {
             final Class<?> clazz = Class.forName(sir.className);
             if (Indexable.class.isAssignableFrom(clazz)) {
-                final Field f = clazz.getField("SEARCH_INDEX_DATA_PROVIDER");
+                final Field f = clazz.getField(FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
                 final Indexable.SearchIndexProvider provider =
                         (Indexable.SearchIndexProvider) f.get(null);
 
@@ -547,7 +573,8 @@ public class Index {
 
                         updateOneRowWithFilteredData(database, localeStr,
                                 raw.title,
-                                raw.summary,
+                                raw.summaryOn,
+                                raw.summaryOff,
                                 sir.className,
                                 raw.screenTitle,
                                 sir.iconResId,
@@ -582,14 +609,15 @@ public class Index {
         } catch (ClassNotFoundException e) {
             Log.e(LOG_TAG, "Cannot find class: " + sir.className, e);
         } catch (NoSuchFieldException e) {
-            Log.e(LOG_TAG, "Cannot find field 'SEARCH_INDEX_DATA_PROVIDER'", e);
+            Log.e(LOG_TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
         } catch (IllegalAccessException e) {
-            Log.e(LOG_TAG, "Illegal access to field 'SEARCH_INDEX_DATA_PROVIDER'", e);
+            Log.e(LOG_TAG,
+                    "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
         }
     }
 
     private void updateOneRowWithFilteredData(SQLiteDatabase database, String locale,
-            String title, String summary, String className, String screenTitle,
+            String title, String summaryOn, String summaryOff, String className, String screenTitle,
             int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled) {
@@ -602,27 +630,35 @@ public class Index {
             updatedTitle = EMPTY;
         }
 
-        String updatedSummary;
-        if (summary != null) {
-            updatedSummary = summary.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
+        String updatedSummaryOn;
+        if (summaryOn != null) {
+            updatedSummaryOn = summaryOn.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
         } else {
-            updatedSummary = EMPTY;
+            updatedSummaryOn = EMPTY;
+        }
+
+        String updatedSummaryOff;
+        if (summaryOff != null) {
+            updatedSummaryOff = summaryOff.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
+        } else {
+            updatedSummaryOff = EMPTY;
         }
 
         String normalizedTitle = updatedTitle.replaceAll(HYPHEN, EMPTY);
-        String normalizedSummary = updatedSummary.replaceAll(HYPHEN, EMPTY);
+        String normalizedSummaryOn = updatedSummaryOn.replaceAll(HYPHEN, EMPTY);
+        String normalizedSummaryOff = updatedSummaryOff.replaceAll(HYPHEN, EMPTY);
 
         updateOneRow(database, locale,
-                updatedTitle, normalizedTitle, updatedSummary, normalizedSummary,
-                className, screenTitle, iconResId, rank, keywords,
-                intentAction, intentTargetPackage, intentTargetClass, enabled);
+                updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
+                updatedSummaryOff, normalizedSummaryOff, className, screenTitle, iconResId,
+                rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled);
     }
 
     private void updateOneRow(SQLiteDatabase database, String locale,
             String updatedTitle, String normalizedTitle,
-            String updatedSummary, String normalizedSummary,
-            String className, String screenTitle,
-            int iconResId, int rank, String keywords,
+            String updatedSummaryOn, String normalizedSummaryOn,
+            String updatedSummaryOff, String normalizedSummaryOff, String className,
+            String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled) {
 
@@ -636,8 +672,10 @@ public class Index {
         values.put(IndexColumns.DATA_RANK, rank);
         values.put(IndexColumns.DATA_TITLE, updatedTitle);
         values.put(IndexColumns.DATA_TITLE_NORMALIZED, normalizedTitle);
-        values.put(IndexColumns.DATA_SUMMARY, updatedSummary);
-        values.put(IndexColumns.DATA_SUMMARY_NORMALIZED, normalizedSummary);
+        values.put(IndexColumns.DATA_SUMMARY_ON, updatedSummaryOn);
+        values.put(IndexColumns.DATA_SUMMARY_ON_NORMALIZED, normalizedSummaryOn);
+        values.put(IndexColumns.DATA_SUMMARY_OFF, updatedSummaryOff);
+        values.put(IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, normalizedSummaryOff);
         values.put(IndexColumns.DATA_KEYWORDS, keywords);
         values.put(IndexColumns.CLASS_NAME, className);
         values.put(IndexColumns.SCREEN_TITLE, screenTitle);
@@ -660,6 +698,18 @@ public class Index {
         return getData(context, attrs,
                 com.android.internal.R.styleable.Preference,
                 com.android.internal.R.styleable.Preference_summary);
+    }
+
+    private String getDataSummaryOn(Context context, AttributeSet attrs) {
+        return getData(context, attrs,
+                com.android.internal.R.styleable.CheckBoxPreference,
+                com.android.internal.R.styleable.CheckBoxPreference_summaryOn);
+    }
+
+    private String getDataSummaryOff(Context context, AttributeSet attrs) {
+        return getData(context, attrs,
+                com.android.internal.R.styleable.CheckBoxPreference,
+                com.android.internal.R.styleable.CheckBoxPreference_summaryOff);
     }
 
     private String getDataKeywords(Context context, AttributeSet attrs) {

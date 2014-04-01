@@ -195,14 +195,17 @@ public class SearchResultsSummary extends Fragment {
 
     private static class SearchResult {
         public String title;
-        public String summary;
+        public String summaryOn;
+        public String summaryOff;
         public int iconResId;
         public Context context;
 
-        public SearchResult(Context context, String title, String summary, int iconResId) {
+        public SearchResult(Context context, String title, String summaryOn, String summaryOff,
+                int iconResId) {
             this.context = context;
             this.title = title;
-            this.summary = summary;
+            this.summaryOn = summaryOn;
+            this.summaryOff = summaryOff;
             this.iconResId = iconResId;
         }
     }
@@ -247,7 +250,8 @@ public class SearchResultsSummary extends Fragment {
         public Object getItem(int position) {
             if (mDataValid && mCursor.moveToPosition(position)) {
                 final String title = mCursor.getString(Index.COLUMN_INDEX_TITLE);
-                final String summary = mCursor.getString(Index.COLUMN_INDEX_SUMMARY);
+                final String summaryOn = mCursor.getString(Index.COLUMN_INDEX_SUMMARY_ON);
+                final String summaryOff = mCursor.getString(Index.COLUMN_INDEX_SUMMARY_OFF);
                 final String iconResStr = mCursor.getString(Index.COLUMN_INDEX_ICON);
                 final String className = mCursor.getString(
                         Index.COLUMN_INDEX_CLASS_NAME);
@@ -271,7 +275,7 @@ public class SearchResultsSummary extends Fragment {
                 }
                 final int iconResId = TextUtils.isEmpty(iconResStr) ?
                         R.drawable.empty_icon : Integer.parseInt(iconResStr);
-                return new SearchResult(packageContext, title, summary, iconResId);
+                return new SearchResult(packageContext, title, summaryOn, summaryOff, iconResId);
             }
             return null;
         }
@@ -308,7 +312,12 @@ public class SearchResultsSummary extends Fragment {
             SearchResult result = (SearchResult) getItem(position);
 
             textTitle.setText(result.title);
-            textSummary.setText(result.summary);
+            final StringBuilder sb = new StringBuilder(result.summaryOn);
+            if (!TextUtils.isEmpty(result.summaryOff)) {
+                sb.append(" | ");
+                sb.append(result.summaryOff);
+            }
+            textSummary.setText(sb.toString());
             if (result.iconResId != R.drawable.empty_icon) {
                 final Context packageContext = result.context;
                 final Drawable drawable;

@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 103;
+    private static final int DATABASE_VERSION = 104;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -41,8 +41,10 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String DATA_RANK = "data_rank";
         public static final String DATA_TITLE = "data_title";
         public static final String DATA_TITLE_NORMALIZED = "data_title_normalized";
-        public static final String DATA_SUMMARY = "data_summary";
-        public static final String DATA_SUMMARY_NORMALIZED = "data_summary_normalized";
+        public static final String DATA_SUMMARY_ON = "data_summary_on";
+        public static final String DATA_SUMMARY_ON_NORMALIZED = "data_summary_on_normalized";
+        public static final String DATA_SUMMARY_OFF = "data_summary_off";
+        public static final String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
         public static final String DATA_KEYWORDS = "data_keywords";
         public static final String CLASS_NAME = "class_name";
         public static final String SCREEN_TITLE = "screen_title";
@@ -68,9 +70,13 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     ", " +
                     IndexColumns.DATA_TITLE_NORMALIZED +
                     ", " +
-                    IndexColumns.DATA_SUMMARY +
+                    IndexColumns.DATA_SUMMARY_ON +
                     ", " +
-                    IndexColumns.DATA_SUMMARY_NORMALIZED +
+                    IndexColumns.DATA_SUMMARY_ON_NORMALIZED +
+                    ", " +
+                    IndexColumns.DATA_SUMMARY_OFF +
+                    ", " +
+                    IndexColumns.DATA_SUMMARY_OFF_NORMALIZED +
                     ", " +
                     IndexColumns.DATA_KEYWORDS +
                     ", " +
@@ -129,9 +135,9 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 100 || oldVersion == 101 || oldVersion == 102) {
-            Log.w(TAG, "Detected schema version 100, 101 or 102. " +
-                    "Index needs to be rebuilt for schema version 103");
+        if (oldVersion == 100 || oldVersion == 101 || oldVersion == 102 || oldVersion == 103) {
+            Log.w(TAG, "Detected schema version 100, 101, 102 or 103. " +
+                    "Index needs to be rebuilt for schema version 104");
             // We need to drop the tables and recreate them
             dropTables(db);
             bootstrapDB(db);
