@@ -20,6 +20,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.database.ContentObserver;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -43,8 +45,13 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
-public class ZenModeSettings extends SettingsPreferenceFragment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "ZenModeSettings";
     private static final boolean DEBUG = false;
 
@@ -282,4 +289,74 @@ public class ZenModeSettings extends SettingsPreferenceFragment {
             }
         }
     }
+
+    // Enable indexing of searchable data
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new Indexable.SearchIndexProvider() {
+
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
+                return null;
+            }
+
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                final Resources res = context.getResources();
+
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.zen_mode_settings_title);
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "When on";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "Calls";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "Text & SMS Messages";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "Alarms & Timers";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "Other Interruptions";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "Automatically turn on";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "While driving";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "While in meetings";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = "During a set time period";
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
+
+                return result;
+            }
+        };
+
 }
