@@ -75,6 +75,13 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance">
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
     <style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
     </style>
