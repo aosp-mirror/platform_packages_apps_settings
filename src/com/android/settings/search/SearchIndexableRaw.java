@@ -29,7 +29,8 @@ import android.provider.SearchIndexableData;
 public class SearchIndexableRaw extends SearchIndexableData {
 
     public String title;
-    public String summary;
+    public String summaryOn;
+    public String summaryOff;
     public String keywords;
 
     public String screenTitle;

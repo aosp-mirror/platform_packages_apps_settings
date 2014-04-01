@@ -386,15 +386,12 @@ public class SettingsActivity extends Activity
         // Cache the search query (can be overriden by the OnQueryTextListener)
         final String query = mSearchQuery;
 
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        mSearchMenuItem = menu.findItem(R.id.search);
+        mSearchView = (SearchView) mSearchMenuItem.getActionView();
 
+        mSearchMenuItem.setOnActionExpandListener(this);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
-
-        mSearchMenuItem = menu.findItem(R.id.search);
-        mSearchMenuItem.setOnActionExpandListener(this);
 
         if (mSearchMenuItemExpanded) {
             mSearchMenuItem.expandActionView();
