@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Хостын талбар хоосон байгаа бол портын талбар хоосон байх шаардлагатай."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Таны оруулсан порт буруу байна."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP проксиг хөтөч ашиглаж байгаа боловч бусад апп-ууд ашиглахгүй байж магадгүй."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Байршил"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Хөрш CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Үүрийн мэдээлэл:"</string>
@@ -472,7 +473,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Сонголтууд..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Дэлгэрэнгүй"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Блютүүт дэлгэрэнгүй"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"Төхөөрөмжүүдийг харахын тулд Блютүүт асаана уу."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Блютүүтийг идэвхжүүлсэн үед таны төхөөрөмж ойролцоо байгаа Блютүүт төхөөрөмжүүдтэй холбогдох боломжтой болно."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Холбох…"</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Медиа аудио"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Утасны аудио"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Чанга яригч утсаар"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Хөгжим болон медианд зориулсан"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Тохиргоог сануулах"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"Утасгүй дэлгэц"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"Төхөөрөмжүүдийг харахын тулд утасгүй дэлгэцийг асаана уу."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"Wi-Fi хаалттай байгаа учир утасгүй дэлгэцийг идэвхгүйжүүлсэн."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"Дэлгэц хайх"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"Хайж байна..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"Ойролцоо утасгүй дэлгэц олдсонгүй."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"Хослуулсан дэлгэцүүд"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"Боломжит төхөөрөмжүүд"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Дамжуулах дэлгэц"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Утасгүй дэлгэцийг идэвхжүүлэх"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Ойролцоо төхөөрөмж олдсонгүй."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Холбогдож байна"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Холбогдсон"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"Боломжтой"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Ашиглаж байгаа"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Байхгүй"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Дэлгэцийн тохиргоо"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"Салгах уу?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"Энэ таныг дараах холболтоос салгах болно:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Утасгүй дэлгэцний тохируулга"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Мартах"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Дууссан"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Нэр"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"Идэвхтэй"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"Идэвхгүй"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"Идэвхгүйжүүлсэн"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Таблет өөр төхөөрөмжид хүрэх үед өгөгдөл солилцохыг зөвшөөрөх"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Утас өөр төхөөрөмжид хүрэх үед өгөгдөл солилцохыг зөвшөөрөх"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"SIM картын түгжигдсэн байдлыг өөрчлөх боломжгүй.\nБуруу PIN байж магадгүй."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Тийм"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Цуцлах"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"СИМ ПИН код буруу, та төхөөрөмжийн түгжээх тайлахын тулд өөрийн оператор компанитай холбоо барина уу."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"СИМ ПИН код буруу байна, танд мобайл оператор компанитай холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдсэн байна."</item>
+    <item quantity="other" msgid="77103619544346451">"СИМ ПИН код буруу байна, танд <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдлээ."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"СИМ ПИН ажиллуулах амжилтгүй боллоо!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Таблетын статус"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Утасны статус"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Системийн шинэчлэлтүүд"</string>
@@ -992,7 +989,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Мобайл төлбөрийн багц"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"Үндсэн SMS апп"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS апп-г өөрчлөх үү?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"Таны үндсэн SMS аппликешнээр <xliff:g id="CURRENT_APP">%s</xliff:g>-н оронд <xliff:g id="NEW_APP">%s</xliff:g>-г ашиглах уу?"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Таны үндсэн SMS аппликешнээр <xliff:g id="CURRENT_APP">%2$s</xliff:g>-н оронд <xliff:g id="NEW_APP">%1$s</xliff:g>-г ашиглах уу?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g>-г таны SMS апп-р ашиглах уу?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Тодорхойгүй SIM оператор"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s-д мэдэгдэж байгаа эрх зохицуулах вебсайт байхгүй байна"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIM карт оруулаад дахин эхлүүлнэ үү"</string>
@@ -1009,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Батерейны зарцуулалт өндөр"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Батерейны зарцуулалт бага"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Байршлын горим"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"Өөрийн байршлыг заахын тулд GPS ашиглах"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"Байршлыг тооцоолохын тулд Wi‑Fi болон мобайл сүлжээг ашиглах"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Өөрийн байршлыг тодорхойлохын тулд GPS ашиглах"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"Дуудаж байна…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi &amp; мобайл сүлжээний байршил"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Апп-уудад Google-н байршлын үйлчилгээ ашиглан таны байршлыг хурдан олохыг зөвшөөрөх. Нэргүй байршлын мэдээлэл цуглуулагдаж Google рүү илгээгдэх болно."</string>
@@ -1037,7 +1035,7 @@
     <string name="license_title" msgid="1990487604356037871">"Лиценз"</string>
     <string name="terms_title" msgid="7697580845616764642">"Ерөнхий нөхцлүүд"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Нээлттэй Эхийн Лиценз"</string>
-    <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Лицензүүдийг ачаалах явцад алдаа гарлаа."</string>
+    <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Лицензүүдийг ачааллах явцад алдаа гарлаа."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Ачаалж байна..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Аюулгүй байдлын мэдээлэл"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Аюулгүй байдлын мэдээлэл"</string>
@@ -1404,6 +1402,7 @@
     <string name="captioning_background_color" msgid="9053011212948992570">"Дэвсгэр өнгө"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"Дэвсгэрийн бүдэгрэлт"</string>
     <string name="captioning_foreground_color" msgid="85623486537640059">"Текстийн өнгө"</string>
+    <string name="captioning_foreground_opacity" msgid="4370967856995419788">"Текстийн тунгалаг байдал"</string>
     <string name="captioning_edge_color" msgid="3670094753735263238">"Хүрээний өнгө"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"Хүрээний төрөл"</string>
     <string name="captioning_typeface" msgid="1826169240566563259">"Фонтын бүлэг"</string>
@@ -1428,7 +1427,7 @@
     <string name="disable_service_message" msgid="2012273739481042318">"Тийм гэсэнд хүрвэл <xliff:g id="SERVICE">%1$s</xliff:g>-г зогсоох болно."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Үйлчилгээ суулгагдаагүй байна"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"Дэлгэцийн уншигч хэрэгтэй юу?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack нь сохор буюу хараа муутай хэрэглэгчдэд яриагаар хариу үйлдэл үзүүлдэг. Та үүнийг Андройд Захаас үнэгүйгээр суулгахыг хүсч байна уу?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack нь харааны бэрхшээлтэй буюу хараа муутай хэрэглэгчдэд яриагаар тусламж үзүүлдэг. Та үүнийг Андройд Маркетаас үнэгүйгээр суулгахыг хүсэж байна уу?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Тайлбар байхгүй."</string>
     <string name="settings_button" msgid="3006713718908152930">"Тохиргоо"</string>
     <string name="print_settings" msgid="4742428530112487843">"Хэвлэлт"</string>
@@ -1452,14 +1451,15 @@
     <string name="print_cancel" msgid="3621199386568672235">"Цуцлах"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Хэвлэж байна <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"Цуцлаж байна <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"Принтерийн алдаа <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Принтер хориглогдсон <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
-    <skip />
-    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
-    <skip />
-    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
-    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Хайлтын нүдийг гаргах"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Хайлтын нүдийг далдлах"</string>
+  <plurals name="print_search_result_count_utterance">
+    <item quantity="one" msgid="1322401991353603285">"<xliff:g id="COUNT">%1$s</xliff:g> принтер олдсон"</item>
+    <item quantity="other" msgid="460211409510874128">"<xliff:g id="COUNT">%1$s</xliff:g> принтер олдсон"</item>
+  </plurals>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"Зай"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Зайны цэнэг юунд ашиглагдсан вэ"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Зайны цэнэг зарцуулалтын өгөгдөл байхгүй байна."</string>
@@ -1527,8 +1527,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"Өөр блютүүт төхөөрөмж холбож үзнэ үү"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"Апп-н ашигласан зайны цэнэг"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"Апп-г зогсоох буюу устгах"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"Батерей хэмнэлтийн горимыг сонгох"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"Апп зайны ашиглалтыг багасгах тохиргоог санал болгож болно"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Хэрэглэгчийн зарцуулсан зай"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Салгаснаас хойш <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1828,8 +1827,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Далд процессын хязгаар"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Бүх ANRs харуулах"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Далд апп-уудад Апп Хариу Өгөхгүй байна гэснийг харуулах"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"Туршилтын ВэбХарах-г ашиглах"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"Апп-ууд хамгийн шинэхэн (туршилтын) WebView-г ашиглах болно"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Дата ашиглалт"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Дата ашиглалтын цикль"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Дата роуминг"</string>
@@ -1868,8 +1865,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Зөвхөн мобайл сүлжээ байгаа тохиолдолд энэ функц далд датанаас шалтгаалдаг апп-н ажиллагааг зогсоож болно.\n\nТа апп доторх тохиргооноос илүү тохиромжтой дата ашиглалтын хяналтыг олж болно."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="7086969103661420799">"Далд датаг хязгаарлах нь зөвхөн мобайл датаны хязгаарыг тохируулсны дараа боломжтой болно."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Өгөгдлийг автоматаар синк хийхийг асаах уу?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Таны вэб дээр өөрийн акаунтад оруулсан бүх өөрчлөлт таны таблет руу автоматаар хуулагдах болно.\n\nЗарим акаунт нь таны таблет дээр оруулсан аливаа өөрчлөлтийг мөн автоматаар вэб рүү хуулж болно. Google акаунт ийм маягаар ажилладаг.\n\nАкаунт тус бүрээр ямар төрлийн мэдээллийг синк хийхийг Тохиргоо &gt; Акаунт руу очиж сонгоно уу."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Таны вэб дээрээс акаунтдаа оруулсан бүх өөрчлөлт автоматаар таны утсанд хуулагдах болно.\n\nЗарим акаунт нь таны утсан дээрээс оруулсан өөрчлөлтийг вэб рүү автоматаар хуулж болно. Google акаунт ингэж ажилладаг.\n\nАкаунт бүрт ямар төрлийн мэдээллийг синк хийхийг Тохиргоо &gt; Акаунт дотроос сонгож болно."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Таны веб дээр өөрийн акаунтад оруулсан бүх өөрчлөлт таны таблет руу автоматаар хуулагдах болно.\n\nЗарим акаунт нь таны таблет дээр оруулсан аливаа өөрчлөлтийг мөн автоматаар веб рүү хуулж болно. Google акаунт ийм маягаар ажилладаг.\n\nАкаунт тус бүрээр ямар төрлийн мэдээллийг синк хийхийг Тохиргоо &gt; Акаунт руу очиж сонгоно уу."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Таны веб дээрээс акаунтдаа оруулсан бүх өөрчлөлт автоматаар таны утсанд хуулагдах болно.\n\nЗарим акаунт нь таны утсан дээрээс оруулсан өөрчлөлтийг веб рүү автоматаар хуулж болно. Google акаунт ингэж ажилладаг.\n\nАкаунт бүрт ямар төрлийн мэдээллийг синк хийхийг Тохиргоо &gt; Акаунт дотроос сонгож болно."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Автоматаар синк хийх өгөгдлийг унтраах уу?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Энэ нь дата болон зайны цэнэг ашиглалтыг хэмнэх боловч та сүүлийн үеийн мэдээллийг цуглуулахын тулд акаунт бүрийг гарааг синк хийх шаардлагатай болно. Мөн шинэчлэлт хийгдсэн үед танд мэдэгдэл ирэхгүй."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Ашиглалтын циклийг шинэчлэх огноо"</string>
@@ -1957,7 +1954,7 @@
     <string name="done_button" msgid="1991471253042622230">"Дууссан"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Сүлжээний хяналт"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Энэ төхөөрөмжийг \n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n удирдаж байна\nТанай админ имэйл, апп болон аюулгүй вебсайтууд гэх мэтийг оруулан таны сүлжээний үйл ажиллагааг хянах боломжтой.\n\nДэлгэрэнгүй мэдээллийг админтайгаа холбогдож авна уу."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"Гуравдагч талын этгээд таны сүлжээг хянаж байж болзошгүй\nүүнд имэйл, апп-ууд болон аюулгүй вебсайтууд багтана.\n\nТаны төхөөрөмж дээр суулгасан итгэмжлэгдсэн жуух энэ боломжоор хангаж байна."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"Гуравдагч талын этгээд таны имэйл, апп-ууд болон аюулгүй вебсайтууд гэх мэтийг оруулан таны сүлжээний үйл ажиллагааг хянах боломжтой.\n\nТаны төхөөрөмж дээр суулгасан итгэмжлэгдсэн жуухын тусламжтайгаар ингэх боломжтой."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"Итгэмжлэгдсэн жуухуудыг шалгах"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"Хэрэглэгчид"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Хэрэглэгчид &amp; профайлууд"</string>
@@ -2005,8 +2002,7 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Хязгаарлалттай аппликешнүүд"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Аппликешний тохиргоог дэлгэх"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"Энэ аппликешныг устгах"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"Таныг өөр нүүр аппликешн суулгах хүртэл Нүүр тохиргоо далдлагдах болно."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Энэ тохиргоо энэ таблетын бүх хэрэглэгчид хамаарна."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Энэ тохиргоо энэ утасны бүх хэрэглэгчид хамаарна."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Хэл солих"</string>

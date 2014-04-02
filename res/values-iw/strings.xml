@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"שדה היציאה חייב להיות ריק אם שדה המארח ריק."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"היציאה שהקלדת אינה חוקית."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"‏שרת ה-Proxy של HTTP נמצא בשימוש הדפדפן, אך אפליקציות אחרות לא יכולים להשתמש בו."</string>
+    <string name="proxy_url" msgid="2523518669129974654">"‏כתובת אתר של PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"מיקום:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"‏CID שכן:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"נתונים:"</string>
@@ -472,7 +473,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"אפשרויות..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"מתקדם"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"‏Bluetooth מתקדם"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"‏כדי לראות את המכשירים, הפעל Bluetooth."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"‏כשקישוריות ה-Bluetooth פועלת, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"התחבר אל…"</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"אודיו של מדיה"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"אודיו של טלפון"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"כטלפון דיבורית"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"עבור מוסיקה ומדיה"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"זכור הגדרות"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"צג אלחוטי"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"כדי לראות מכשירים, הפעל את הצג האלחוטי."</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"‏הצג האלחוטי מושבת מפני שה-Wi-Fi כבוי."</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"חפש צגים"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"מחפש…"</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"לא נמצאו צגים אלחוטיים קרובים."</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"צגים מותאמים"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"מכשירים זמינים"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"‏מסך Cast"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"‏הפעל תצוגת WiFi"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"לא נמצאו מכשירים בקרבת מקום."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"מתחבר"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"מחובר"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"זמין"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"בשימוש"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"לא זמין"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"הגדרות תצוגה"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"להתנתק?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"‏פעולה זו תסיים את החיבור עם:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"אפשרויות צג אלחוטי"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"שכח"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"סיום"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"שם"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"מופעל"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"כבוי"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"מושבת"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"אפשר חילופי מידע כאשר הטאבלט נוגע במכשיר אחר"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"אפשר החלפת נתונים כאשר הטלפון נוגע במכשיר אחר"</string>
@@ -681,13 +672,13 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"האם לבטל את ההזמנה?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"האם אתה רוצה לבטל את ההזמנה ליצירת קשר עם <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"לשכוח קבוצה זו?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"‏נקודה חמה ניידת של Wi-Fi"</string>
-    <string name="wifi_tether_starting" msgid="1322237938998639724">"מפעיל נקודה חמה…"</string>
-    <string name="wifi_tether_stopping" msgid="4835852171686388107">"מכבה נקודה חמה…"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> פעיל של נקודה חמה ניידת"</string>
-    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"‏שגיאה בנקודה חמה ניידת של Wi-Fi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"‏הגדר נקודה חמה של Wi-Fi"</string>
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"‏נקודה חמה ניידת של Wi-Fi ‏<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ‏<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"‏נקודה ניידת לשיתוף אינטרנט ב-Wi-Fi"</string>
+    <string name="wifi_tether_starting" msgid="1322237938998639724">"מפעיל נקודה לשיתוף אינטרנט…"</string>
+    <string name="wifi_tether_stopping" msgid="4835852171686388107">"מכבה נקודה לשיתוף אינטרנט…"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> פעיל בנקודה ניידת לשיתוף אינטרנט"</string>
+    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"‏שגיאה בנקודה ניידת לשיתוף אינטרנט ב-Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"‏הגדר נקודה לשיתוף אינטרנט דרך Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"‏נקודה ניידת לשיתוף אינטרנט ב-Wi-Fi ‏<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ‏<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="home_settings" msgid="212375129455718176">"דף הבית"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"תצוגה"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"‏לא ניתן לשנות את מצב הנעילה של כרטיס ה-SIM‏.\nכנראה שקוד ה-PIN שגוי."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"אישור"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ביטול"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"‏מספר PIN שגוי של כרטיס ה-SIM. עליך ליצור כעת קשר עם הספק על מנת לבטל את נעילת המכשיר."</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"‏מספר PIN שגוי של כרטיס ה-SIM. נותר לך ניסיון <xliff:g id="NUMBER">%d</xliff:g> נוסף לפני שיהיה עליך ליצור קשר עם הספק על מנת לבטל את נעילת המכשיר."</item>
+    <item quantity="other" msgid="77103619544346451">"‏מספר PIN שגוי של כרטיס ה-SIM. נותרו לך <xliff:g id="NUMBER">%d</xliff:g> ניסיונות נוספים."</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"‏פעולת מספר ה-PIN של כרטיס ה-SIM נכשלה!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"סטטוס טאבלט"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"מצב טלפון"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"עדכוני מערכת"</string>
@@ -963,19 +960,19 @@
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"‏עליך לשרטט את קו ביטול הנעילה כדי לאשר שברצונך למחוק את כרטיס ה-SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"הגדרות שיחה"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"הגדרת דואר קולי, העברת שיחות, שיחה ממתינה, זיהוי מתקשר"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"‏קשירת USB"</string>
-    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"נקודה חמה ניידת"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"‏קשירת Bluetooth"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"קשירה"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"קשירה ונקודה חמה ניידת"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"‏שיתוף אינטרנט דרך USB"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"נקודה לשיתוף אינטרנט"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"‏שיתוף אינטרנט דרך Bluetooth"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"שיתוף אינטרנט בין ניידים"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"נקודה לשיתוף אינטרנט"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"‏קשירת USB"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"‏שיתוף אינטרנט דרך USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"‏USB מחובר, סמן כדי לקשור"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"קשור"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"‏לא ניתן לשתף אינטרנט כאשר אחסון USB נמצא בשימוש"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"‏USB אינו מחובר"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"‏שגיאת קשירה של USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"‏קשירת Bluetooth"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"‏שגיאה בשיתוף אינטרנט דרך USB"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"‏שיתוף אינטרנט דרך Bluetooth"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"משתף את החיבור לאינטרנט של טאבלט זה"</string>
     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"משתף את החיבור לאינטרנט של טלפון זה"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"משתף את החיבור לאינטרנט של טאבלט זה עם מכשיר אחד"</string>
@@ -989,10 +986,10 @@
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"קשירת <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"עזרה"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"רשתות לנייד"</string>
-    <string name="manage_mobile_plan_title" msgid="7630170375010107744">"תוכנית לנייד"</string>
+    <string name="manage_mobile_plan_title" msgid="7630170375010107744">"תכנית לנייד"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"‏אפליקציית SMS המוגדרת כברירת מחדל"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"‏לשנות את אפליקציית ה-SMS?"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"‏האם להשתמש ב-<xliff:g id="NEW_APP">%s</xliff:g> במקום ב-<xliff:g id="CURRENT_APP">%s</xliff:g> כאפליקציית ה-SMS?"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"‏האם להשתמש ב-<xliff:g id="NEW_APP">%1$s</xliff:g> במקום ב-<xliff:g id="CURRENT_APP">%2$s</xliff:g> כאפליקציית ה-SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"‏האם להשתמש ב-<xliff:g id="NEW_APP">%s</xliff:g> כאפליקציית ה-SMS?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"‏ספק SIM לא מוכר"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"‏ל-%1$s אין אתר מוכר לניהול תצורה"</string>
@@ -1001,8 +998,8 @@
     <string name="location_title" msgid="1029961368397484576">"המיקום שלי"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"מצב"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"רמת דיוק גבוהה"</string>
-    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"חיסכון בעוצמת סוללה"</string>
-    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"במכשיר בלבד"</string>
+    <string name="location_mode_battery_saving_title" msgid="711273645208158637">"חיסכון בסוללה"</string>
+    <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"מכשיר בלבד"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"מיקום כבוי"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"בקשות של מיקומים אחרונים"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"אין אפליקציות שביקשו מיקום לאחרונה"</string>
@@ -1010,9 +1007,9 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"שימוש בסוללה מלאה"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"שימוש בסוללה חלשה"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"מצב מיקום"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"‏מיקום עם GPS‏, Wi-Fi ורשתות"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"‏מיקום עם Wi-Fi ורשתות לנייד"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"‏השתמש ב-GPS למיקום מדויק"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"‏השתמש ב-GPS‏, Wi-Fi ורשתות לנייד לקביעת המיקום"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"‏השתמש ב-Wi-Fi ורשתות לנייד לקביעת המיקום"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"‏השתמש ב-GPS לקביעת המיקום"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"מאחזר…"</string>
     <string name="location_network_based" msgid="9134175479520582215">"‏מיקום רשת Wi-Fi ורשת לנייד"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"‏אפשר לאפליקציות להשתמש בשירות המיקום של Google כדי להעריך את מיקומך מהר יותר. נתוני מיקום אנונימיים ייאספו ויישלחו אל Google."</string>
@@ -1405,6 +1402,7 @@
     <string name="captioning_background_color" msgid="9053011212948992570">"צבע הרקע"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"שקיפות הרקע"</string>
     <string name="captioning_foreground_color" msgid="85623486537640059">"צבע טקסט"</string>
+    <string name="captioning_foreground_opacity" msgid="4370967856995419788">"שקיפות טקסט"</string>
     <string name="captioning_edge_color" msgid="3670094753735263238">"צבע קצה"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"סוג קצה"</string>
     <string name="captioning_typeface" msgid="1826169240566563259">"משפחת גופנים"</string>
@@ -1453,6 +1451,7 @@
     <string name="print_cancel" msgid="3621199386568672235">"בטל"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"מדפיס את <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"מבטל את <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"שגיאת מדפסת ב-<xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"המדפסת חסמה את <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"תיבת החיפוש מוצגת"</string>
@@ -1528,7 +1527,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"‏נסה להתחבר למכשיר Bluetooth אחר"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"צריכת הסוללה על ידי אפליקציות"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"הפסק את האפליקציה או הסר אותה"</string>
-    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"בחר במצב חיסכון של חיי סוללה"</string>
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"בחר במצב חיסכון בסוללה"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"ייתכן שהאפליקציה מציעה הגדרות לצמצום צריכת הסוללה"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"סוללה בשימוש על ידי משתמש"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> מאז הניתוק"</string>
@@ -1828,8 +1827,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"מגבלה של תהליך ברקע"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏הצג את כל פריטי ה-ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"הצג תיבת דו-שיח של \'אפליקציה לא מגיבה\' עבור אפליקציות שפועלות ברקע"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"השתמש בתצוגת אתר ניסיונית"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"אפליקציות ישתמשו בתצוגת האתר החדשה ביותר (ביטא)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"שימוש בנתונים"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"מחזור שימוש בנתונים"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"נדידת נתונים"</string>
@@ -1837,7 +1834,7 @@
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"‏שימוש נפרד ב-4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="5056401102877964564">"‏הצג שימוש ב-Wi-Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"‏הצג את השימוש ב-Ethernet"</string>
-    <string name="data_usage_menu_metered" msgid="5056695223222541863">"נקודות חמות לנייד"</string>
+    <string name="data_usage_menu_metered" msgid="5056695223222541863">"נקודות לשיתוף אינטרנט"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"סנכרון אוטומטי של נתונים"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"שנה את הגדרת המחזור…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"היום בחודש שבו יש לאפס את מחזור השימוש בנתונים:"</string>
@@ -1892,11 +1889,11 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: נעשה שימוש בערך ב-<xliff:g id="TOTAL">%1$s</xliff:g>."</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g> : נעשה שימוש בערך ב-<xliff:g id="TOTAL">%1$s</xliff:g>, כפי שנמדד על ידי הטאבלט. ייתכן שספק השירות שלך יחשב את נפח העברת הנתונים בצורה אחרת."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g> : נעשה שימוש בערך ב-<xliff:g id="TOTAL">%1$s</xliff:g>, כפי שנמדד על ידי הטלפון. ייתכן שספק השירות שלך יחשב את נפח העברת הנתונים בצורה אחרת."</string>
-    <string name="data_usage_metered_title" msgid="6204750602856383278">"נקודות חמות לנייד"</string>
-    <string name="data_usage_metered_body" msgid="4959032833706695848">"‏בחר את רשתות ה-Wi-Fi שהן נקודות חמות לנייד. ניתן להגביל את השימוש שאפליקציות עושות ברשתות אלה כאשר הן פועלות ברקע. אפליקציות יכולות גם להציג אזהרה לפני שימוש ברשתות אלה לביצוע הורדות גדולות."</string>
+    <string name="data_usage_metered_title" msgid="6204750602856383278">"נקודות לשיתוף אינטרנט"</string>
+    <string name="data_usage_metered_body" msgid="4959032833706695848">"‏בחר את רשתות ה-Wi-Fi שהן נקודות לשיתוף אינטרנט. ניתן להגביל את השימוש שאפליקציות עושות ברשתות אלה כאשר הן פועלות ברקע. אפליקציות יכולות גם להציג אזהרה לפני שימוש ברשתות אלה לביצוע הורדות גדולות."</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"רשתות לנייד"</string>
     <string name="data_usage_metered_wifi" msgid="8540872226614404873">"‏רשתות Wi-Fi"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="5502020778468643732">"‏כדי לבחור נקודות חמות לנייד, הפעל את ה-Wi-Fi."</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="5502020778468643732">"‏כדי לבחור נקודות לשיתוף אינטרנט, הפעל את ה-Wi-Fi."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"שיחת חירום"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"חזור לשיחה"</string>
     <string name="vpn_name" msgid="4689699885361002297">"שם"</string>
@@ -1957,7 +1954,7 @@
     <string name="done_button" msgid="1991471253042622230">"בוצע"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"ניטור רשתות"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"המכשיר הזה מנוהל על ידי:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nמנהל המערכת יכול לנטר את הפעילות שלך ברשת, כולל דוא\"ל, אפליקציות ואתרים מאובטחים.\n\nלמידע נוסף, פנה אל מנהל המערכת."</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"צד שלישי יכול לנטר את הפעילות שלך\nברשת, כולל הודעות דוא\"ל, אפליקציות ואתרים מאובטחים.\n\nמצב זה מתאפשר על ידי פרטי כניסה מהימנים המותקנים במכשיר שלך."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"צד שלישי מסוגל לעקוב אחר הפעילות שלך ברשת, כולל הודעות דוא\"ל, אפליקציות ואתרים מאובטחים.\n\nאישור מהימן המותקן במכשיר מאפשר זאת."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"בדוק פרטי כניסה מהימנים"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"משתמשים"</string>
     <string name="user_list_title" msgid="7937158411137563543">"משתמשים ופרופילים"</string>
