@@ -432,6 +432,8 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Administration du périphérique"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administrateurs de l\'appareil"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Afficher ou désactiver les administrateurs de l\'appareil"</string>
+    <string name="manage_trust_agents" msgid="4629279457536987768">"Agents de confiance"</string>
+    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Afficher ou désactiver les agents de confiance"</string>
     <string name="manage_notification_access" msgid="5799781079264981979">"Accès aux notifications"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Les applications ne peuvent pas lire les notifications."</string>
   <plurals name="manage_notification_access_summary_nonzero">
@@ -1714,6 +1716,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Désactiver"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administrateurs de l\'appareil"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Aucun administrateur de périphérique disponible"</string>
+    <string name="no_trust_agents" msgid="7450273545568977523">"Aucun agent de confiance disponible"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Activer l\'administrateur du périphérique?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Activer"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrateur du périphérique"</string>
@@ -1819,8 +1822,7 @@
     <string name="debug_input_category" msgid="1811069939601180246">"Entrée"</string>
     <string name="debug_drawing_category" msgid="6755716469267367852">"Dessin"</string>
     <string name="debug_hw_drawing_category" msgid="6220174216912308658">"Accélération matérielle"</string>
-    <!-- no translation found for media_category (4388305075496848353) -->
-    <skip />
+    <string name="media_category" msgid="4388305075496848353">"Médias"</string>
     <string name="debug_monitoring_category" msgid="7640508148375798343">"Surveillance"</string>
     <string name="strict_mode" msgid="1938795874357830695">"Mode Strict activé"</string>
     <string name="strict_mode_summary" msgid="142834318897332338">"Afficher un cadre rouge si le thread principal reste occupé"</string>
@@ -1839,10 +1841,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Toujours utiliser le GPU pour la composition écran"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simuler esp. colorimétrique"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Enable OpenGL traces"</string>
-    <!-- no translation found for use_nuplayer (5699257393367904387) -->
-    <skip />
-    <!-- no translation found for use_nuplayer_summary (1991479067478516714) -->
-    <skip />
+    <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer (expérimental)"</string>
+    <string name="use_nuplayer_summary" msgid="1991479067478516714">"Utiliser NuPlayer au lieu d\'AwesomePlayer"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afficher les contours"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Afficher les limites, les marges de clip, etc."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Forcer orient. : g. à d."</string>
@@ -2095,14 +2095,10 @@
     <string name="status_error_pairing_failed" msgid="8260473909085202868">"Échec de l\'association avec la balise. Veuillez réessayer."</string>
     <string name="enable_nfc" msgid="5234514241098808766">"La CCP n\'est pas activée, mais elle est nécessaire pour le déverrouillage CCP. Veuillez l\'activer."</string>
     <string name="ok" msgid="3651563352754792958">"Paramètres CCP"</string>
-    <!-- no translation found for dashboard_title (5453710313046681820) -->
-    <skip />
-    <!-- no translation found for search_results_title (1796252422574886932) -->
-    <skip />
-    <!-- no translation found for search_menu (7053532283559077164) -->
-    <skip />
-    <!-- no translation found for query_hint_text (3350700807437473939) -->
-    <skip />
+    <string name="dashboard_title" msgid="5453710313046681820">"Paramètres"</string>
+    <string name="search_results_title" msgid="1796252422574886932">"Paramètres"</string>
+    <string name="search_menu" msgid="7053532283559077164">"Rechercher"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"Paramètres de recherche"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi connexion réseau wi-fi"</string>
     <string name="lock_screen_notifications" msgid="6344441622889795466">"Aff. si écran verrouillé"</string>
     <string name="lock_screen_notifications_summary_off" msgid="7971192950034108756">"Notif. sensibles masquées sur écran verrouillage"</string>
@@ -2115,6 +2111,5 @@
     <string name="notification_settings_security" msgid="5096988798793488890">"Sécurité"</string>
     <string name="notification_settings_tweaks" msgid="659628355469765848">"Ajustements"</string>
     <string name="notification_settings_apps" msgid="4911871909798584040">"Applications"</string>
-    <!-- no translation found for notification_app_settings_button (6685640230371477485) -->
-    <skip />
+    <string name="notification_app_settings_button" msgid="6685640230371477485">"Paramètres de notification"</string>
 </resources>
