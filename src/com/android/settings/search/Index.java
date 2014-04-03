@@ -60,14 +60,15 @@ public class Index {
     public static final int COLUMN_INDEX_TITLE = 1;
     public static final int COLUMN_INDEX_SUMMARY_ON = 2;
     public static final int COLUMN_INDEX_SUMMARY_OFF = 3;
-    public static final int COLUMN_INDEX_KEYWORDS = 4;
-    public static final int COLUMN_INDEX_CLASS_NAME = 5;
-    public static final int COLUMN_INDEX_SCREEN_TITLE = 6;
-    public static final int COLUMN_INDEX_ICON = 7;
-    public static final int COLUMN_INDEX_INTENT_ACTION = 8;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 9;
-    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 10;
-    public static final int COLUMN_INDEX_ENABLED = 11;
+    public static final int COLUMN_INDEX_ENTRIES = 4;
+    public static final int COLUMN_INDEX_KEYWORDS = 5;
+    public static final int COLUMN_INDEX_CLASS_NAME = 6;
+    public static final int COLUMN_INDEX_SCREEN_TITLE = 7;
+    public static final int COLUMN_INDEX_ICON = 8;
+    public static final int COLUMN_INDEX_INTENT_ACTION = 9;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 10;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 11;
+    public static final int COLUMN_INDEX_ENABLED = 12;
 
     // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
     private static final String[] SELECT_COLUMNS = new String[] {
@@ -75,13 +76,14 @@ public class Index {
             IndexColumns.DATA_TITLE,              // 1
             IndexColumns.DATA_SUMMARY_ON,         // 2
             IndexColumns.DATA_SUMMARY_OFF,        // 3
-            IndexColumns.DATA_KEYWORDS,           // 4
-            IndexColumns.CLASS_NAME,              // 5
-            IndexColumns.SCREEN_TITLE,            // 6
-            IndexColumns.ICON,                    // 7
-            IndexColumns.INTENT_ACTION,           // 8
-            IndexColumns.INTENT_TARGET_PACKAGE,   // 9
-            IndexColumns.INTENT_TARGET_CLASS      // 10
+            IndexColumns.DATA_ENTRIES,            // 4
+            IndexColumns.DATA_KEYWORDS,           // 5
+            IndexColumns.CLASS_NAME,              // 6
+            IndexColumns.SCREEN_TITLE,            // 7
+            IndexColumns.ICON,                    // 8
+            IndexColumns.INTENT_ACTION,           // 9
+            IndexColumns.INTENT_TARGET_PACKAGE,   // 10
+            IndexColumns.INTENT_TARGET_CLASS      // 11
     };
 
     private static final String[] MATCH_COLUMNS = {
@@ -91,6 +93,7 @@ public class Index {
             IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
             IndexColumns.DATA_SUMMARY_OFF,
             IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
+            IndexColumns.DATA_ENTRIES,
             IndexColumns.DATA_KEYWORDS
     };
 
@@ -103,6 +106,7 @@ public class Index {
 
     private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
+    private static final String NODE_NAME_LIST_PREFERENCE = "ListPreference";
 
     private static Index sInstance;
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
@@ -348,22 +352,24 @@ public class Index {
                     final String title = cursor.getString(1);
                     final String summaryOn = cursor.getString(2);
                     final String summaryOff = cursor.getString(3);
-                    final String keywords = cursor.getString(4);
+                    final String entries = cursor.getString(4);
+                    final String keywords = cursor.getString(5);
 
-                    final String screenTitle = cursor.getString(5);
+                    final String screenTitle = cursor.getString(6);
 
-                    final String className = cursor.getString(6);
-                    final int iconResId = cursor.getInt(7);
+                    final String className = cursor.getString(7);
+                    final int iconResId = cursor.getInt(8);
 
-                    final String action = cursor.getString(8);
-                    final String targetPackage = cursor.getString(9);
-                    final String targetClass = cursor.getString(10);
+                    final String action = cursor.getString(9);
+                    final String targetPackage = cursor.getString(10);
+                    final String targetClass = cursor.getString(11);
 
                     SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
                     data.rank = rank;
                     data.title = title;
                     data.summaryOn = summaryOn;
                     data.summaryOff = summaryOff;
+                    data.entries = entries;
                     data.keywords = keywords;
                     data.screenTitle = screenTitle;
                     data.className = className;
@@ -487,8 +493,8 @@ public class Index {
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
-            updateOneRowWithFilteredData(database, localeStr, title, summary, null, fragmentName,
-                    screenTitle, iconResId, rank, keywords,
+            updateOneRowWithFilteredData(database, localeStr, title, summary, null, null,
+                    fragmentName, screenTitle, iconResId, rank, keywords,
                     intentAction, intentTargetPackage, intentTargetClass, true);
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
@@ -505,16 +511,21 @@ public class Index {
                 if (!nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
                     summary = getDataSummary(context, attrs);
 
+                    String entries = null;
+                    if (nodeName.endsWith(NODE_NAME_LIST_PREFERENCE)) {
+                        entries = getDataEntries(context, attrs);
+                    }
+
                     // Insert rows for the child nodes of PreferenceScreen
-                    updateOneRowWithFilteredData(database, localeStr, title, summary, null,
+                    updateOneRowWithFilteredData(database, localeStr, title, summary, null, entries,
                             fragmentName, screenTitle, iconResId, rank, keywords,
                             intentAction, intentTargetPackage, intentTargetClass, true);
-                } else {
+                } else if (nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
                     final String summaryOn = getDataSummaryOn(context, attrs);
                     final String summaryOff = getDataSummaryOff(context, attrs);
 
                     updateOneRowWithFilteredData(database, localeStr, title, summaryOn, summaryOff,
-                            fragmentName, screenTitle, iconResId, rank, keywords,
+                            null, fragmentName, screenTitle, iconResId, rank, keywords,
                             intentAction, intentTargetPackage, intentTargetClass, true);
                 }
             }
@@ -539,6 +550,7 @@ public class Index {
                 raw.title,
                 raw.summaryOn,
                 raw.summaryOff,
+                raw.entries,
                 raw.className,
                 raw.screenTitle,
                 raw.iconResId,
@@ -575,6 +587,7 @@ public class Index {
                                 raw.title,
                                 raw.summaryOn,
                                 raw.summaryOff,
+                                raw.entries,
                                 sir.className,
                                 raw.screenTitle,
                                 sir.iconResId,
@@ -617,8 +630,8 @@ public class Index {
     }
 
     private void updateOneRowWithFilteredData(SQLiteDatabase database, String locale,
-            String title, String summaryOn, String summaryOff, String className, String screenTitle,
-            int iconResId, int rank, String keywords,
+            String title, String summaryOn, String summaryOff, String entries, String className,
+            String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled) {
 
@@ -650,14 +663,14 @@ public class Index {
 
         updateOneRow(database, locale,
                 updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
-                updatedSummaryOff, normalizedSummaryOff, className, screenTitle, iconResId,
+                updatedSummaryOff, normalizedSummaryOff, entries, className, screenTitle, iconResId,
                 rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled);
     }
 
     private void updateOneRow(SQLiteDatabase database, String locale,
             String updatedTitle, String normalizedTitle,
             String updatedSummaryOn, String normalizedSummaryOn,
-            String updatedSummaryOff, String normalizedSummaryOff, String className,
+            String updatedSummaryOff, String normalizedSummaryOff, String entries, String className,
             String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled) {
@@ -676,6 +689,7 @@ public class Index {
         values.put(IndexColumns.DATA_SUMMARY_ON_NORMALIZED, normalizedSummaryOn);
         values.put(IndexColumns.DATA_SUMMARY_OFF, updatedSummaryOff);
         values.put(IndexColumns.DATA_SUMMARY_OFF_NORMALIZED, normalizedSummaryOff);
+        values.put(IndexColumns.DATA_ENTRIES, entries);
         values.put(IndexColumns.DATA_KEYWORDS, keywords);
         values.put(IndexColumns.CLASS_NAME, className);
         values.put(IndexColumns.SCREEN_TITLE, screenTitle);
@@ -712,6 +726,12 @@ public class Index {
                 com.android.internal.R.styleable.CheckBoxPreference_summaryOff);
     }
 
+    private String getDataEntries(Context context, AttributeSet attrs) {
+        return getDataEntries(context, attrs,
+                com.android.internal.R.styleable.ListPreference,
+                com.android.internal.R.styleable.ListPreference_entries);
+    }
+
     private String getDataKeywords(Context context, AttributeSet attrs) {
         return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_keywords);
     }
@@ -729,6 +749,28 @@ public class Index {
             }
         }
         return (data != null) ? data.toString() : null;
+    }
+
+    private String getDataEntries(Context context, AttributeSet set, int[] attrs, int resId) {
+        final TypedArray sa = context.obtainStyledAttributes(set, attrs);
+        final TypedValue tv = sa.peekValue(resId);
+
+        String[] data = null;
+        if (tv != null && tv.type == TypedValue.TYPE_REFERENCE) {
+            if (tv.resourceId != 0) {
+                data = context.getResources().getStringArray(tv.resourceId);
+            }
+        }
+        final int count = (data == null ) ? 0 : data.length;
+        if (count == 0) {
+            return null;
+        }
+        final StringBuilder result = new StringBuilder();
+        for (int n = 0; n < count; n++) {
+            result.append(data[n]);
+            result.append(" ");
+        }
+        return result.toString();
     }
 
     private int getResId(Context context, AttributeSet set, int[] attrs, int resId) {

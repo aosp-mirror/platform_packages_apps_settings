@@ -197,15 +197,17 @@ public class SearchResultsSummary extends Fragment {
         public String title;
         public String summaryOn;
         public String summaryOff;
+        public String entries;
         public int iconResId;
         public Context context;
 
         public SearchResult(Context context, String title, String summaryOn, String summaryOff,
-                int iconResId) {
+                String entries, int iconResId) {
             this.context = context;
             this.title = title;
             this.summaryOn = summaryOn;
             this.summaryOff = summaryOff;
+            this.entries = entries;
             this.iconResId = iconResId;
         }
     }
@@ -217,6 +219,9 @@ public class SearchResultsSummary extends Fragment {
         private boolean mDataValid;
         private Context mContext;
         private HashMap<String, Context> mContextMap = new HashMap<String, Context>();
+
+        private static final String PERCENT_RECLACE = "%s";
+        private static final String DOLLAR_REPLACE = "$s";
 
         public SearchResultsAdapter(Context context) {
             mContext = context;
@@ -252,6 +257,7 @@ public class SearchResultsSummary extends Fragment {
                 final String title = mCursor.getString(Index.COLUMN_INDEX_TITLE);
                 final String summaryOn = mCursor.getString(Index.COLUMN_INDEX_SUMMARY_ON);
                 final String summaryOff = mCursor.getString(Index.COLUMN_INDEX_SUMMARY_OFF);
+                final String entries = mCursor.getString(Index.COLUMN_INDEX_ENTRIES);
                 final String iconResStr = mCursor.getString(Index.COLUMN_INDEX_ICON);
                 final String className = mCursor.getString(
                         Index.COLUMN_INDEX_CLASS_NAME);
@@ -273,9 +279,12 @@ public class SearchResultsSummary extends Fragment {
                 } else {
                     packageContext = mContext;
                 }
+
                 final int iconResId = TextUtils.isEmpty(iconResStr) ?
                         R.drawable.empty_icon : Integer.parseInt(iconResStr);
-                return new SearchResult(packageContext, title, summaryOn, summaryOff, iconResId);
+
+                return new SearchResult(packageContext, title, summaryOn, summaryOff,
+                        entries, iconResId);
             }
             return null;
         }
@@ -312,10 +321,26 @@ public class SearchResultsSummary extends Fragment {
             SearchResult result = (SearchResult) getItem(position);
 
             textTitle.setText(result.title);
-            final StringBuilder sb = new StringBuilder(result.summaryOn);
-            if (!TextUtils.isEmpty(result.summaryOff)) {
-                sb.append(" | ");
-                sb.append(result.summaryOff);
+
+            String summaryOn = result.summaryOn;
+            String summaryOff = result.summaryOff;
+            String entries = result.entries;
+
+            final StringBuilder sb = new StringBuilder();
+
+            if (!TextUtils.isEmpty(summaryOn) &&
+                    !summaryOn.contains(PERCENT_RECLACE) && !summaryOn.contains(DOLLAR_REPLACE)) {
+                sb.append(summaryOn);
+                if (!TextUtils.isEmpty(summaryOff) &&
+                        !summaryOff.contains(PERCENT_RECLACE) &&
+                        !summaryOff.contains(DOLLAR_REPLACE)) {
+                    sb.append(" \n ");
+                    sb.append(summaryOff);
+                }
+            }
+            if (!TextUtils.isEmpty(entries)) {
+                sb.append(" \n ");
+                sb.append(entries);
             }
             textSummary.setText(sb.toString());
             if (result.iconResId != R.drawable.empty_icon) {

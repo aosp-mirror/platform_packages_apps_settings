@@ -31,6 +31,7 @@ public class SearchIndexableRaw extends SearchIndexableData {
     public String title;
     public String summaryOn;
     public String summaryOff;
+    public String entries;
     public String keywords;
 
     public String screenTitle;
