@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 105;
+    private static final int DATABASE_VERSION = 106;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -46,6 +46,10 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String DATA_SUMMARY_OFF = "data_summary_off";
         public static final String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
         public static final String DATA_ENTRIES = "data_entries";
+        public static final String DATA_SWITCH_ON = "data_switch_on";
+        public static final String DATA_SWITCH_ON_NORMALIZED = "data_switch_on_normalized";
+        public static final String DATA_SWITCH_OFF = "data_switch_off";
+        public static final String DATA_SWITCH_OFF_NORMALIZED = "data_switch_off_normalized";
         public static final String DATA_KEYWORDS = "data_keywords";
         public static final String CLASS_NAME = "class_name";
         public static final String SCREEN_TITLE = "screen_title";
@@ -80,6 +84,14 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.DATA_SUMMARY_OFF_NORMALIZED +
                     ", " +
                     IndexColumns.DATA_ENTRIES +
+                    ", " +
+                    IndexColumns.DATA_SWITCH_ON +
+                    ", " +
+                    IndexColumns.DATA_SWITCH_ON_NORMALIZED +
+                    ", " +
+                    IndexColumns.DATA_SWITCH_OFF +
+                    ", " +
+                    IndexColumns.DATA_SWITCH_OFF_NORMALIZED +
                     ", " +
                     IndexColumns.DATA_KEYWORDS +
                     ", " +
@@ -153,7 +165,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 100 || oldVersion == 101 || oldVersion == 102 || oldVersion == 103) {
+        if (oldVersion < DATABASE_VERSION) {
             Log.w(TAG, "Detected schema version '" +  oldVersion + "'. " +
                     "Index needs to be rebuilt for schema version '" + newVersion + "'.");
             // We need to drop the tables and recreate them
