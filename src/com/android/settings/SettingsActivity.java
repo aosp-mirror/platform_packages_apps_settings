@@ -185,6 +185,8 @@ public class SettingsActivity extends Activity
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
+    private static final String EMPTY_QUERY = "";
+
     private static boolean sShowNoHomeNotice = false;
 
     private String mFragmentClass;
@@ -577,8 +579,17 @@ public class SettingsActivity extends Activity
                 }
             }
         }
-        outState.putBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED, mSearchMenuItem.isActionViewExpanded());
-        outState.putString(SAVE_KEY_SEARCH_QUERY, mSearchView.getQuery().toString());
+
+        // The option menus are created if the ActionBar is visible and they are also created
+        // asynchronously. If you launch Settings with an Intent action like
+        // android.intent.action.POWER_USAGE_SUMMARY and at the same time your device is locked
+        // thru a LockScreen, onCreateOptionsMenu() is not yet called and references to the search
+        // menu item and search view are null.
+        boolean isExpanded = (mSearchMenuItem != null) && mSearchMenuItem.isActionViewExpanded();
+        outState.putBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED, isExpanded);
+
+        String query = (mSearchView != null) ? mSearchView.getQuery().toString() : EMPTY_QUERY;
+        outState.putString(SAVE_KEY_SEARCH_QUERY, query);
     }
 
     @Override
