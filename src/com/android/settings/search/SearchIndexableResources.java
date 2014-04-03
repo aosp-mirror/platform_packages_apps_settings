@@ -22,7 +22,6 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
-import com.android.settings.NotificationAccessSettings;
 import com.android.settings.NotificationSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
@@ -44,7 +43,6 @@ import com.android.settings.wifi.WifiSettings;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public final class SearchIndexableResources {
 
@@ -139,7 +137,7 @@ public final class SearchIndexableResources {
 
         sResMap.put(Memory.class.getName(),
                 new SearchIndexableResource(RANK_MEMORY,
-                        R.xml.device_info_memory,
+                        NO_DATA_RES_ID,
                         Memory.class.getName(),
                         R.drawable.ic_settings_storage));
 

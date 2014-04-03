@@ -41,6 +41,7 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,6 +52,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -60,7 +63,7 @@ import java.util.List;
  * Panel showing storage usage on disk for known {@link StorageVolume} returned
  * by {@link StorageManager}. Calculates and displays usage of data types.
  */
-public class Memory extends SettingsPreferenceFragment {
+public class Memory extends SettingsPreferenceFragment implements Indexable{
     private static final String TAG = "MemorySettings";
 
     private static final String TAG_CONFIRM_CLEAR_CACHE = "confirmClearCache";
@@ -424,4 +427,85 @@ public class Memory extends SettingsPreferenceFragment {
             return builder.create();
         }
     }
+
+    /**
+     * Enable indexing of searchable data
+     */
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new SearchIndexProvider() {
+
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
+                return null;
+            }
+
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.storage_settings);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.internal_storage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                final StorageVolume[] storageVolumes = StorageManager.from(context).getVolumeList();
+                for (StorageVolume volume : storageVolumes) {
+                    if (!volume.isEmulated()) {
+                        data.title = volume.getDescription(context);
+                        data.screenTitle = context.getString(R.string.storage_settings);
+                        result.add(data);
+                    }
+                }
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_size);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_available);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_apps_usage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_dcim_usage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_music_usage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_downloads_usage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_media_cache_usage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                data = new SearchIndexableRaw(context);
+                data.title = context.getString(R.string.memory_media_misc_usage);
+                data.screenTitle = context.getString(R.string.storage_settings);
+                result.add(data);
+
+                return result;
+            }
+        };
+
 }
