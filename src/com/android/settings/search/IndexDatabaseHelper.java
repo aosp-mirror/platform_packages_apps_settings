@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 104;
+    private static final int DATABASE_VERSION = 105;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -45,6 +45,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String DATA_SUMMARY_ON_NORMALIZED = "data_summary_on_normalized";
         public static final String DATA_SUMMARY_OFF = "data_summary_off";
         public static final String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
+        public static final String DATA_ENTRIES = "data_entries";
         public static final String DATA_KEYWORDS = "data_keywords";
         public static final String CLASS_NAME = "class_name";
         public static final String SCREEN_TITLE = "screen_title";
@@ -77,6 +78,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.DATA_SUMMARY_OFF +
                     ", " +
                     IndexColumns.DATA_SUMMARY_OFF_NORMALIZED +
+                    ", " +
+                    IndexColumns.DATA_ENTRIES +
                     ", " +
                     IndexColumns.DATA_KEYWORDS +
                     ", " +
