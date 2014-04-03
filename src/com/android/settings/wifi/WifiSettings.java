@@ -412,12 +412,9 @@ public class WifiSettings extends RestrictedSettingsFragment
             final Activity activity = getActivity();
 
             mSwitch = new Switch(activity);
-            boolean addSwitch = false;
+            boolean addSwitch = true;
 
-            if (activity instanceof SettingsActivity) {
-                SettingsActivity sa = (SettingsActivity) activity;
-                addSwitch = sa.onIsHidingHeaders();
-            } else if (activity instanceof WifiPickerActivity) {
+            if (activity instanceof WifiPickerActivity) {
                 PreferenceActivity pa = (PreferenceActivity) activity;
                 addSwitch = pa.onIsHidingHeaders();
             }
