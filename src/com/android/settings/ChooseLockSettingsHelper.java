@@ -25,6 +25,7 @@ import android.content.Intent;
 
 public final class ChooseLockSettingsHelper {
 
+    static final String EXTRA_KEY_TYPE = "type";
     static final String EXTRA_KEY_PASSWORD = "password";
 
     private LockPatternUtils mLockPatternUtils;

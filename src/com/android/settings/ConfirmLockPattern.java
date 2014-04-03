@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -266,6 +267,8 @@ public class ConfirmLockPattern extends SettingsActivity {
                 if (mLockPatternUtils.checkPattern(pattern)) {
 
                     Intent intent = new Intent();
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                    StorageManager.CRYPT_TYPE_PATTERN);
                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
                                     LockPatternUtils.patternToString(pattern));
 
