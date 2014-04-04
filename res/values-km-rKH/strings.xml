@@ -199,6 +199,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"វាល​ច្រក​ត្រូវ​តែ​ទទេ បើ​វាល​ម៉ាស៊ីន​ទទេ។"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"ច្រក​ដែល​អ្នក​បាន​បញ្ចូល​មិន​ត្រឹមត្រូវ។"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"ប្រូកស៊ី HTTP ត្រូវ​បាន​ប្រើ​ដោយ​កម្មវិធី​អ៊ីនធឺណិត ប៉ុន្តែ​អាច​មិន​ត្រូវ​បាន​ប្រើ​ដោយ​កម្មវិធី​ផ្សេង។"</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"ទីតាំង៖"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID នៅ​ជិត៖"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"ព័ត៌មាន​ចល័ត៖"</string>
@@ -388,7 +389,7 @@
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"ពាក្យ​សម្ងាត់​ត្រូវ​តែ​តិច​ជាង <xliff:g id="NUMBER">%d</xliff:g> តួអក្សរ។"</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"កូដ PIN ត្រូវ​តែ​​​មាន​លេខ​តិច​ជាង <xliff:g id="NUMBER">%d</xliff:g> ។"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"កូដ PIN ត្រូវ​តែ​មាន​លេខ​ ០-៩ ។"</string>
-    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"អ្នក​គ្រប់គ្រង​ឧបករណ៍​មិន​អនុញ្ញាត​ឲ្យ​ប្រើ​កូដ PIN បច្ចុប្បន្ន​ទេ។"</string>
+    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"កម្មវិធី​គ្រប់គ្រង​ឧបករណ៍​​មិន​អនុញ្ញាត​ឲ្យ​ប្រើ​កូដ PIN បច្ចុប្បន្ន​ទេ។"</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"ពាក្យ​សម្ងាត់​មាន​តួអក្សរ​មិន​ត្រឹមត្រូវ។"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"ពាក្យ​សម្ងាត់​ត្រូវ​តែ​មាន​យ៉ាង​ហោច​ណាស់​តួអក្សរ​មួយ។"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"ពាក្យ​សម្ងាត់​ត្រូវ​តែ​មាន​លេខ​​យ៉ាង​ហោច​ណាស់​មួយ។"</string>
@@ -472,7 +473,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"ជម្រើស..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"កម្រិត​ខ្ពស់"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"ប៊្លូធូស​កម្រិត​ខ្ពស់"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="4793562956642282639">"ដើម្បី​មើល​ឧបករណ៍ បើក​ប៊្លូធូស។"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"នៅពេលបានបើកប៊្លូធូសឧបករណ៍របស់អ្នកអាចទាក់ទងជាមួយឧបករណ៍ប៊្លូធូសនៅក្បែរ​ផ្សេងៗទៀតបាន។"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"តភ្ជាប់​ជា​មួយ…"</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"សំឡេង​មេឌៀ"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"សំឡេង​ទូរស័ព្ទ"</string>
@@ -512,28 +513,18 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"ជា​​អូប៉ាល័រ​ទូរស័ព្ទ"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"សម្រាប់​តន្ត្រី និង​មេឌៀ"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"ចងចាំ​ការ​កំណត់"</string>
-    <string name="wifi_display_settings_title" msgid="564299108014609382">"ការ​បង្ហាញ​ឥត​ខ្សែ"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_off" msgid="1225626898926363100">"ដើម្បី​មើល​ឧបករណ៍ បើក​ការ​បង្ហាញ​បណ្ដាញ​ឥត​ខ្សែ។"</string>
-    <string name="wifi_display_settings_empty_list_wifi_display_disabled" msgid="1336244693183075466">"បាន​បិទ​ការ​បង្ហាញ​បណ្ដាញ​ឥត​ខ្សែ ព្រោះ​បាន​បិទ​វ៉ាយហ្វាយ។"</string>
-    <string name="wifi_display_search_for_devices" msgid="5065526281193354502">"ស្វែងរក​ការ​បង្ហាញ"</string>
-    <string name="wifi_display_searching_for_devices" msgid="5172373825348672137">"កំពុង​​ស្វែងរក..."</string>
-    <string name="wifi_display_no_devices_found" msgid="8180582698282377626">"រក​មិន​ឃើញ​ការ​បង្ហាញ​បណ្ដាញ​ឥត​ខ្សែ​នៅ​ជិត​នេះ​ទេ"</string>
-    <string name="wifi_display_paired_devices" msgid="7395326840730024303">"បង្ហាញ​ឧបករណ៍​បាន​ផ្គូផ្គង"</string>
-    <string name="wifi_display_available_devices" msgid="4558314642853513487">"ឧបករណ៍​អាច​ប្រើ​បាន"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"ចាត់​ថ្នាក់​អេក្រង់"</string>
+    <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"បើក​ការ​បង្ហាញ​ឥត​ខ្សែ"</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"រក​មិន​ឃើញ​ឧបករណ៍​ដែល​នៅ​ក្បែរ"</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"តភ្ជាប់"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"បាន​តភ្ជាប់"</string>
-    <string name="wifi_display_status_available" msgid="1924167525172207067">"អាច​​ប្រើ​បាន"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"កំពុង​ប្រើ"</string>
+    <string name="wifi_display_status_not_available" msgid="5714978725794210102">"មិន​អាច​ប្រើ​បាន"</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"កំណត់​ការ​បង្ហាញ"</string>
-    <string name="wifi_display_disconnect_title" msgid="1543715924639003599">"ផ្ដាច់?"</string>
-    <string name="wifi_display_disconnect_text" msgid="4824860802264489088">"វា​នឹង​បញ្ចប់​ការ​តភ្ជាប់​របស់​អ្នក​​ជា​មួយ៖&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"ជម្រើស​បង្ហាញ​បណ្ដាញ​ឥតខ្សែ"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"ភ្លេច"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"រួចរាល់"</string>
     <string name="wifi_display_options_name" msgid="4756080222307467898">"ឈ្មោះ"</string>
-    <string name="wifi_display_summary_on" msgid="3695429596604962531">"បើក"</string>
-    <string name="wifi_display_summary_off" msgid="2445210133184740611">"បិទ"</string>
-    <string name="wifi_display_summary_disabled" msgid="5318394806146587849">"បិទ"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"ឲ្យ​ប្ដូរ​ទិន្នន័យ​ ពេល​កុំព្យូទ័រ​បន្ទះ​ប៉ះ​ឧបករណ៍​ផ្សេង"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"ឲ្យ​ប្ដូរ​ទិន្នន័យ​ពេល​ទូរស័ព្ទ​ប៉ះ​ឧបករណ៍​ផ្សេង"</string>
@@ -546,14 +537,14 @@
     <string name="nsd_quick_toggle_title" msgid="3125572815278848258">"រ​ក​ឃើញ​សេវាកម្ម​បណ្ដាញ"</string>
     <string name="nsd_quick_toggle_summary" msgid="155692215972781276">"ឲ្យ​កម្មវិធី​លើ​ឧបករណ៍​ផ្សេង​រក​មើល​កម្មវិធី​លើ​ឧបករណ៍​នេះ"</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"វ៉ាយហ្វាយ"</string>
-    <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"បើក Wi‑Fi"</string>
+    <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"បើក​វ៉ាយហ្វាយ"</string>
     <string name="wifi_settings" msgid="29722149822540994">"វ៉ាយហ្វាយ"</string>
     <string name="wifi_settings_category" msgid="8719175790520448014">"ការកំណត់​វ៉ាយហ្វាយ"</string>
-    <string name="wifi_settings_title" msgid="3103415012485692233">"Wi‑Fi"</string>
+    <string name="wifi_settings_title" msgid="3103415012485692233">"វ៉ាយហ្វាយ"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"រៀបចំ &amp; គ្រប់គ្រង​ចំណុច​ចូល​ដំណើរការ​ឥត​ខ្សែ"</string>
-    <string name="wifi_setup_wizard_title" msgid="8242230950011819054">"ជ្រើស Wi‑Fi"</string>
-    <string name="wifi_starting" msgid="6732377932749942954">"កំពុង​បើក Wi‑Fi…"</string>
-    <string name="wifi_stopping" msgid="8952524572499500804">"កំពុង​បើក Wi‑Fi…"</string>
+    <string name="wifi_setup_wizard_title" msgid="8242230950011819054">"ជ្រើស​វ៉ាយហ្វាយ"</string>
+    <string name="wifi_starting" msgid="6732377932749942954">"កំពុង​បើក​វ៉ាយហ្វាយ..."</string>
+    <string name="wifi_stopping" msgid="8952524572499500804">"កំពុង​បិទ​វ៉ាយហ្វាយ..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"កំហុស"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"ពេល​ជិះ​យន្ត"</string>
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"មិន​អាច​វិភាគ​រក​បណ្ដាញ"</string>
@@ -561,7 +552,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"ជូន​ដំណឹង​ខ្ញុំ ពេល​​មាន​បណ្ដាញ"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"ជៀសវាង​ការ​តភ្ជាប់​ដែល​ខ្សោយ"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"កុំ​ប្រើ​បណ្ដាញ​វ៉ាយហ្វាយ លុះ​ត្រា​វា​មាន​ការ​តភ្ជាប់​អ៊ីនធឺណិត​ល្អ"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"វិភាគ​រក​ពេល​មាន​ជា​និច្ច"</string>
+    <string name="wifi_scan_always_available" msgid="3470564139944368030">"វិភាគ​រក​​គ្រប់ពេល"</string>
     <string name="wifi_scan_always_available_summary" msgid="7768204638882691453">"ឲ្យ​សេវាកម្ម Google និង​កម្មវិធី​ផ្សេងៗ​វិភាគ​រក​បណ្ដាញ ទោះបី​បិទ​វ៉ាយហ្វាយ​ក៏ដោយ"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ដំឡើង​វិញ្ញាបនបត្រ"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"ដើម្បី​បង្កើន​ភាព​ត្រឹមត្រូវ​ទីតាំង និង​សម្រាប់​គោលបំណង​ផ្សេងៗ Google និង​កម្មវិធី​ផ្សេង​អាច​វិភាគ​រក​បណ្ដាញ​ដែល​នៅ​ជិត​ៗ សូម្បី​តែ​បិទ​វ៉ាយហ្វាយ​ក៏​ដោយ។ បើ​អ្នក​មិន​ចង់​​ឲ្យ​កើត​ឡើង ចូល​ទៅ​កម្រិត​ខ្ពស់ &gt; វិភាគ​រ​ក​ជា​និច្ច​ពេល​អាច​ប្រើ​បាន។"</string>
@@ -569,7 +560,7 @@
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"កុំ​បង្ហាញ​ម្ដង​ទៀត"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"បើក​វ៉ាយហ្វាយ​​អំឡុង​ពេល​ដេក"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"មាន​បញ្ហា​ក្នុង​ការ​ប្ដូរ​ការ​កំណត់"</string>
-    <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"ធ្វើ​ឲ្យ​ Wi‑Fi ប្រសើរ​ឡើង"</string>
+    <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"ធ្វើ​ឲ្យ​វ៉ាយហ្វាយ​ប្រសើរ​ឡើង"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"បង្រួម​ការ​ប្រើ​ថ្ម​អប្បបរមា​ពេល​បើក​វ៉ាយហ្វាយ"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"បន្ថែម​បណ្ដាញ"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"បណ្ដាញ​វ៉ាយហ្វាយ"</string>
@@ -582,9 +573,9 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"តភ្ជាប់បណ្ដាញ"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"ភ្លេច​បណ្ដាញ"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"កែ​បណ្ដាញ"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"ដើម្បី​មើល​បណ្ដាញ​​ដែល​មាន បើក Wi‑Fi ។"</string>
+    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"ដើម្បី​មើល​បណ្ដាញ​ដែល​មាន​ បើក​វ៉ាយហ្វាយ។"</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"កំពុង​ស្វែងរក​បណ្ដាញ​វ៉ាយហ្វាយ…"</string>
-    <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"អ្នក​មិន​មាន​សិទ្ធី ដើម្បី​ប្ដូរ​បណ្ដាញ Wi‑Fi ទេ។"</string>
+    <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"អ្នក​មិន​មាន​សិទ្ធិ​ដើម្បី​ប្ដូរ​បណ្ដាញ​វ៉ាយហ្វាយ​ទេ។"</string>
     <string name="wifi_other_network" msgid="1048006316504242214">"បណ្ដាញ​ផ្សេង..."</string>
     <string name="wifi_more" msgid="3195296805089107950">"ច្រើន​ទៀត"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"រៀបចំ​ស្វ័យ​ប្រវត្តិ (WPS)"</string>
@@ -595,7 +586,7 @@
     <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"ចុច​ប៊ូតុង​រៀបចំ​ការពារ​វ៉ាយហ្វាយ​លើ​រ៉ោតទ័រ​របស់​អ្នក។ វា​អាច​ហៅ​ថា \"WPS\" ឬ​មាន​និមិត្តសញ្ញា​នេះ៖"</string>
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"បញ្ចូល​កូដ pin <xliff:g id="NUMBER">%1$s</xliff:g> លើ​រ៉ោតទ័រ​​វ៉ាយហ្វាយ​របស់​អ្នក។ ការ​រៀបចំ​អាច​ចំណាយ​ពេល​ពីរ​នាទី​ដើម្បី​បញ្ចប់។"</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS ជោគជ័យ។ កំពុង​តភ្ជាប់​បណ្ដាញ…"</string>
-    <string name="wifi_wps_connected" msgid="7153432445748931183">"បាន​តភ្ជាប់​ទៅ​បណ្ដាញ Wi‑Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
+    <string name="wifi_wps_connected" msgid="7153432445748931183">"បាន​តភ្ជាប់​ទៅ​បណ្ដាញ​វ៉ាយហ្វាយ <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_wps_in_progress" msgid="3372311348221357944">"WPS កំពុង​ដំណើរ​ការ​ហើយ វា​អាច​ប្រើ​ពេល២នាទី ដើម្បី​បញ្ចប់"</string>
     <string name="wifi_wps_failed_generic" msgid="5668775022238832527">"WPS បរាជ័យ។ សូម​ព្យាយាម​ម្ដងទៀត​ក្នុង​រយៈ​ពេល​ពីរ ឬ​បី​នាទី។"</string>
     <string name="wifi_wps_failed_wep" msgid="2702820087105284461">"មិន​បាន​គាំទ្រ ការកំណត់​សុវត្ថិភាព​​រ៉ោតទ័រ​​​ឥត​ខ្សែ (WEP)"</string>
@@ -624,7 +615,7 @@
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"បាន​បិទ"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"បាន​រារាំង​ការ​តភ្ជាប់​អ៊ីនធឺណិត​មិន​ល្អ"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"បញ្ហា​ក្នុង​ការ​ផ្ទៀងផ្ទាត់"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"មិន​នៅ​ក្នុង​ជួរ"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"មិន​នៅ​ក្នុង​តំបន់"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS អាច​ប្រើ​បាន"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (មាន WPS)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"មាន​សុវត្ថិភាព​ជា​មួយ <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
@@ -646,11 +637,11 @@
     <string name="wifi_skipped_message" product="default" msgid="1192848364146401759">"ការ​ព្រមាន៖ អ្នក​អាច​ត្រូវ​គិត​ថ្លៃ​សេវាកម្ម​ទិន្នន័យ​ដោយ​ក្រុមហ៊ុន​បញ្ជូន​បន្ថែម។\n\nការ​រៀបចំ​ទូរស័ព្ទ​អាច​ទាមទារ​សកម្មភាព​បណ្ដាញ​សំខាន់។"</string>
     <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="6161024589991810940">"ការ​ព្រមាន៖ លុះ​ត្រា​តែ​អ្នកមាន​ការ​តភ្ជាប់​អ៊ីនធឺណិត ទើប​កុំព្យូទ័រ​បន្ទះ​អាច​ផ្ទៀងផ្ទាត់​ថា​កម្មវិធី​របស់​អ្នក​ទាន់​សម័យ​ដែរ​ឬទេ។"</string>
     <string name="wifi_and_mobile_skipped_message" product="default" msgid="3773473163264984767">"ការ​ព្រមាន៖ ទូរស័ព្ទ​របស់​អ្នក​នឹង​មិន​អាច​ផ្ទៀងផ្ទាត់​ថា​កម្មវិធី​របស់​អ្នក​ទាន់​សម័យ​នោះ​ទេ លុះ​ត្រា​តែ​អ្នក​មាន​ការ​តភ្ជាប់​អ៊ីនធឺណិត។"</string>
-    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"កុំព្យូទ័រ​បន្ទះ​មិន​អាច​តភ្ជាប់​ទៅ​បណ្ដាញ Wi‑Fi នេះ​បាន​ទេ។"</string>
+    <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"កុំព្យូទ័រ​បន្ទះ​មិន​អាច​​ភ្ជាប់​ទៅ​បណ្ដាញ​វ៉ាយហ្វាយ​នេះ​បាន​ទេ។"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"ទូរស័ព្ទ​មិន​អាច​តភ្ជាប់​ទៅ​បណ្ដាញ​វ៉ាយហ្វាយ​នេះ"</string>
-    <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Wi‑Fi កម្រិត​ខ្ពស់"</string>
-    <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"ក្រុម​ហ្វ្រេកង់ WiFi"</string>
-    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"បញ្ជាក់​ជួរ​ប្រេកង់​នៃ​ប្រតិបត្តិ​ការ"</string>
+    <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"វ៉ាយហ្វាយ​កម្រិត​ខ្ពស់"</string>
+    <string name="wifi_setting_frequency_band_title" msgid="3655327399028584656">"ក្រុម​ហ្វ្រេកង់​វ៉ាយហ្វាយ"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"បញ្ជាក់​តំបន់​ប្រេកង់​នៃ​ប្រតិបត្តិការ"</string>
     <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"មាន​បញ្ហា​ក្នុង​ការ​កំណត់​ក្រុម​ប្រេកង់។"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"អាសយដ្ឋាន MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"អាសយដ្ឋាន IP"</string>
@@ -665,7 +656,7 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"ច្រក​ចេញ​ចូល"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"ប្រវែង​បុព្វបទ​បណ្ដាញ"</string>
-    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"Wi‑Fi ផ្ទាល់"</string>
+    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"វ៉ាយហ្វាយ​ផ្ទាល់"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"ព័ត៌មាន​ឧបករណ៍"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"ចងចាំ​ការ​តភ្ជាប់​នេះ"</string>
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"ស្វែងរក​ឧបករណ៍"</string>
@@ -681,13 +672,13 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"បោះបង់​ការ​អញ្ជើញ?"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"តើ​អ្នក​ចង់​បោះបង់​ការ​អញ្ជើញ​ឲ្យ​តភ្ជាប់​ជា​មួយ <xliff:g id="PEER_NAME">%1$s</xliff:g>?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"បំភ្លេច​ក្រុម​នេះ?"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Wi‑Fi hotspot ចល័ត"</string>
-    <string name="wifi_tether_starting" msgid="1322237938998639724">"កំពុង​បើក hotspot…"</string>
-    <string name="wifi_tether_stopping" msgid="4835852171686388107">"កំពុង​បិទ hotspot…"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> ចល័ត​សកម្ម"</string>
-    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"កំហុស​វ៉ាយហ្វាយ hotspot ចល័ត"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"រៀបចំ​ hotspot វ៉ាយហ្វាយ"</string>
-    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> hotspot វ៉ាយហ្វាយ​ចល័ត"</string>
+    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"វ៉ាយហ្វាយ​ហតស្ពត​ចល័ត"</string>
+    <string name="wifi_tether_starting" msgid="1322237938998639724">"កំពុង​បើក​ហតស្ពត..."</string>
+    <string name="wifi_tether_stopping" msgid="4835852171686388107">"កំពុង​បិទ​ហតស្ពត..."</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"ហតស្ពត​ចល័ត <xliff:g id="NETWORK_SSID">%1$s</xliff:g> សកម្ម"</string>
+    <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"កំហុស​វ៉ាយហ្វាយ​ហតស្ពត​ចល័ត"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"រៀប​វ៉ាយហ្វាយ​ហតស្ពត"</string>
+    <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> វ៉ាយហ្វាយ​ហតស្ពត​ចល័ត"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="home_settings" msgid="212375129455718176">"ដើម"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"បង្ហាញ"</string>
@@ -756,7 +747,7 @@
     <string name="screensaver_settings_title" msgid="3349790120327233241">"ស្រមើ​ស្រមៃ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"ពេល​ភ្ជាប់ ឬ​ដេក និង​បញ្ចូល​ថ្ម"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"ទាំង​ពីរ"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"ពេល​បញ្ចូល​ថ្មី"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"ពេលបញ្ចូលថ្ម"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"ពេល​បាន​ភ្ជាប់"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"បិទ"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="3857507943322777651">"ដើម្បី​ពិនិត្យ​អ្វី​កើត​ឡើង​ពេល​​បាន​ភ្ជាប់​ទូរស័ព្ទ និង/ឬ​ដេក បើក​ស្រមើ​ស្រមៃ។"</string>
@@ -789,6 +780,12 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"មិន​អាច​ប្ដូរ​ស្ថានភាព​ការ​ចាក់​សោ​ស៊ីម​កាត។\nប្រហែល​ជា​កូដ​ PIN មិន​ត្រឹមត្រូវ។"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"យល់​ព្រម"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"បោះ​បង់"</string>
+    <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"លេខ​កូដ PIN ស៊ីម​មិន​ត្រឹមត្រូវ អ្នក​ត្រូវ​​ទាក់ទង​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក​ឥឡូវ​នេះ​ដើម្បី​ដោះ​សោ​ឧបករណ៍​របស់​អ្នក។"</string>
+  <plurals name="wrong_pin_code">
+    <item quantity="one" msgid="4840607930166101114">"លេខ​កូដ PIN ស៊ីម​មិន​ត្រឹមត្រូវ, អ្នក​​មាន​ <xliff:g id="NUMBER">%d</xliff:g> ការ​ព្យាយាម​ដែល​នៅ​សល់​​​​មុន​ពេល​ដែល​អ្នក​ត្រូវ​​ទាក់ទង​​ក្រុមហ៊ុន​បញ្ជូន​​ដើម្បី​ដោះ​សោ​ឧបករណ៍​របស់​អ្នក។"</item>
+    <item quantity="other" msgid="77103619544346451">"លេខ​កូដ PIN ស៊ីម​មិន​ត្រឹមត្រូវ, អ្នក​មាន <xliff:g id="NUMBER">%d</xliff:g> ការ​ប៉ុនប៉ង​ដែល​នៅ​សល់។"</item>
+  </plurals>
+    <string name="pin_failed" msgid="1848423634948587645">"បាន​បរាជ័យ​ក្នុង​ការ​ប្រតិបត្តិ​​លេខ​កូដ PIN ស៊ីម!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"ស្ថានភាព​កុំព្យូទ័រ​បន្ទះ"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"ស្ថានភាព​ទូរស័ព្ទ"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"បច្ចុប្បន្នភាព​ប្រព័ន្ធ"</string>
@@ -823,7 +820,7 @@
     <string name="status_signal_strength" msgid="3732655254188304547">"កម្លាំង​សញ្ញា"</string>
     <string name="status_roaming" msgid="2638800467430913403">"រ៉ូមីង"</string>
     <string name="status_operator" msgid="2274875196954742087">"បណ្ដាញ"</string>
-    <string name="status_wifi_mac_address" msgid="2202206684020765378">"អាសយដ្ឋាន Wi‑Fi MAC"</string>
+    <string name="status_wifi_mac_address" msgid="2202206684020765378">"អាសយដ្ឋាន​ MAC វ៉ាយហ្វាយ"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"អាសយដ្ឋាន​ប៊្លូធូស"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"លេខ​ស៊េរី"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"មិន​មាន"</string>
@@ -964,10 +961,10 @@
     <string name="call_settings_title" msgid="5188713413939232801">"កំណត់​ការ​ហៅ"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"រៀបចំ​សារ​ជា​សំឡេង បញ្ជូន​ការ​ហៅ​បន្ត រង់ចាំ​ការ​ហៅ លេខ​សម្គាល់​អ្នក​ហៅ"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"ការ​ភ្ជាប់​យូអេសប៊ី"</string>
-    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"hotspot ចល័ត"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"ហតស្ពត​ចល័ត"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"ការ​ភ្ជាប់ប៊្លូធូស"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"ការ​ភ្ជាប់"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"ការ​ភ្ជាប់ &amp; hotspot ចល័ត"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"ការ​ភ្ជាប់ &amp; ហតស្ពត​ចល័ត"</string>
     <string name="usb_title" msgid="7483344855356312510">"យូអេសប៊ី"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"ការ​ភ្ជាប់​តាម​យូអេសប៊ី"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"បាន​តភ្ជាប់​តាម​យូអេសប៊ី ពិនិត្យ​ដើម្បី​ភ្ជាប់"</string>
@@ -992,7 +989,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"ផែនការ​ទិន្នន័យ​ចល័ត"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"កម្មវិធី​ផ្ញើ​សារ SMS ​លំនាំ​ដើម"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"ប្ដូរ​កម្មវិធី​សារ SMS?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8183679628429465443">"ប្រើ <xliff:g id="NEW_APP">%s</xliff:g> ជំនួស​ឱ្យ <xliff:g id="CURRENT_APP">%s</xliff:g> ជា​កម្មវិធី​ផ្ញើ​សារ SMS របស់​អ្នក​?"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"ប្រើ <xliff:g id="NEW_APP">%1$s</xliff:g> ជំនួស​ឲ្យ <xliff:g id="CURRENT_APP">%2$s</xliff:g> ជា​កម្មវិធី​សារ SMS របស់​អ្នក?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"ប្រើ <xliff:g id="NEW_APP">%s</xliff:g> ជា​កម្មវិធី​សារ SMS របស់​អ្នក?"</string>
     <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"មិន​ស្គាល់​​ប្រតិបត្តិ​ករ​​ស៊ីមកាត"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s គ្មាន​តំបន់​បណ្ដាញ​ដែល​ផ្ដល់​បាន​​ស្គាល់"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"សូម​បញ្ចូល​ស៊ីមកាត និង​ចាប់ផ្ដើម​ឡើង​វិញ"</string>
@@ -1006,12 +1004,12 @@
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"សំណើ​ទីតាំង​ថ្មី"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"បច្ចុប្បន្ន​គ្មាន​កម្មវិធី​បាន​ស្នើ​ទីតាំង"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"សេវាកម្ម​ទីតាំង"</string>
-    <string name="location_high_battery_use" msgid="517199943258508020">"ការ​ប្រើ​ប្រាស់​ថ្ម​​​ខ្លាំង"</string>
-    <string name="location_low_battery_use" msgid="8602232529541903596">"ការ​ប្រើប្រាស់​ជិត​អស់​ថ្ម"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"ប្រើ​ថ្ម​ច្រើន"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"​ប្រើ​ថ្ម​តិច"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"របៀបកំណត់​ទីតាំង"</string>
-    <string name="location_mode_high_accuracy_description" msgid="8640231702873607191">"ប្រើ GPS, ហ្វាយវ៉ាយ និង​​បណ្ដាញ​​ចល័ត​ដើម្បី​ប៉ាន់ស្មាន​ទីតាំង"</string>
-    <string name="location_mode_battery_saving_description" msgid="7110846007772128971">"ប្រើ​ហ្វាយវ៉ាយ ​និង​​បណ្ដាញ​​ចល័ត ​ដើម្បី​​ប៉ាន់ស្មាន​​ទីតាំង"</string>
-    <string name="location_mode_sensors_only_description" msgid="3103917665724654860">"ប្រើ GPS ដើម្បី​ដៅ​ទីតាំង​របស់​អ្នក"</string>
+    <string name="location_mode_high_accuracy_description" msgid="6418936349431602808">"ប្រើជីភីអេស, ហ្វាយវ៉ាយ និង​​បណ្ដាញ​​ចល័ត​ដើម្បី​កំណត់​ទីតាំង"</string>
+    <string name="location_mode_battery_saving_description" msgid="1728668969743485109">"ប្រើ​ហ្វាយវ៉ាយ ​និង​​បណ្ដាញ​​ចល័ត​ដើម្បី​​កំណត់​​ទីតាំង"</string>
+    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"ប្រើ​ជីភីអេស ដើម្បី​កំណត់​ទីតាំង​របស់​អ្នក"</string>
     <string name="location_loading_injected_setting" msgid="4238574500081976654">"កំពុង​ទៅ​យក..."</string>
     <string name="location_network_based" msgid="9134175479520582215">"វ៉ាយហ្វាយ &amp; ទីតាំង​បណ្ដាញ​ចល័ត"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ឲ្យ​កម្មវិធី​ប្រើ​សេវាកម្ម​ទីតាំង​របស់ Google ដើម្បី​ស្មាន​ទីតាំង​របស់​អ្នក​កាន់តែ​លឿន។ ទិន្នន័យ​ទីតាំង​អនាមិក​នឹង​ត្រូវ​បាន​ប្រមូល​ រួច​ផ្ញើ​ទៅ Google ។"</string>
@@ -1404,6 +1402,7 @@
     <string name="captioning_background_color" msgid="9053011212948992570">"ពណ៌​ផ្ទៃ​ខាងក្រោយ"</string>
     <string name="captioning_background_opacity" msgid="6029993616419971202">"ភាព​ស្រអាប់​ផ្ទៃ​ខាងក្រោយ"</string>
     <string name="captioning_foreground_color" msgid="85623486537640059">"ពណ៌​អត្ថបទ"</string>
+    <string name="captioning_foreground_opacity" msgid="4370967856995419788">"ភាព​ស្រអាប់​អត្ថបទ"</string>
     <string name="captioning_edge_color" msgid="3670094753735263238">"ពណ៌​គែម"</string>
     <string name="captioning_edge_type" msgid="5997247394951682154">"ប្រភេទ​គែម"</string>
     <string name="captioning_typeface" msgid="1826169240566563259">"ក្រុម​ពុម្ពអក្សរ"</string>
@@ -1428,7 +1427,7 @@
     <string name="disable_service_message" msgid="2012273739481042318">"ការ​ប៉ះ​យល់ព្រម នឹង​បញ្ឈប់ <xliff:g id="SERVICE">%1$s</xliff:g> ។"</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"គ្មាន​សេវាកម្ម​បាន​ដំឡើង"</string>
     <string name="accessibility_service_no_apps_title" msgid="5124097563864109821">"ត្រូវការ​កម្មវិធី​អាន​​អេក្រង់?"</string>
-    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"សម្ដី​ត្រឡប់​ផ្ដល់​មតិ​ជា​សំឡេង ដើម្បី​ជួយ​មនុស្ស​ពិការ​ភ្នែក ឬ​ខ្សោយ​ផ្នែក។ តើ​អ្នក​ចង់​ដំឡើង​វា​ពី​ឃ្លាំង​កម្មវិធី Android?"</string>
+    <string name="accessibility_service_no_apps_message" msgid="7751662416377046539">"TalkBack ​ផ្ដល់​មតិ​ជា​សំឡេង ដើម្បី​ជួយ​មនុស្ស​ពិការ​ភ្នែក ឬ​ខ្សោយ​ផ្នែក។ តើ​អ្នក​ចង់​ដំឡើង​វា​ពី​ឃ្លាំង​កម្មវិធី Android?"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"គ្មាន​ការ​ពណ៌នា​បាន​ផ្ដល់។"</string>
     <string name="settings_button" msgid="3006713718908152930">"ការ​កំណត់"</string>
     <string name="print_settings" msgid="4742428530112487843">"ការ​បោះពុម្ព"</string>
@@ -1452,21 +1451,22 @@
     <string name="print_cancel" msgid="3621199386568672235">"បោះបង់"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"កំពុង​​បោះពុម្ព <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
+    <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"ការ​បោះបង់ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_failed_state_title_template" msgid="1436099128973357969">"កំហុស​​ម៉ាស៊ីន​បោះពុម្ព <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"បាន​ទប់ស្កាត់​ម៉ាស៊ីន​បោះពុម្ព <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for print_search_box_shown_utterance (7730361832020726951) -->
-    <skip />
-    <!-- no translation found for print_search_box_hidden_utterance (7980832833405818400) -->
-    <skip />
-    <!-- no translation found for print_search_result_count_utterance:one (1322401991353603285) -->
-    <!-- no translation found for print_search_result_count_utterance:other (460211409510874128) -->
+    <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"បាន​បង្ហាញ​ប្រ​អប់​ស្វែងរក"</string>
+    <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"បាន​លាក់​ប្រអប់​ស្វែងរក"</string>
+  <plurals name="print_search_result_count_utterance">
+    <item quantity="one" msgid="1322401991353603285">"រក​ឃើញ​ម៉ាស៊ីន​បោះពុម្ព <xliff:g id="COUNT">%1$s</xliff:g>"</item>
+    <item quantity="other" msgid="460211409510874128">"រក​ឃើញ​ម៉ាស៊ីន​បោះពុម្ព <xliff:g id="COUNT">%1$s</xliff:g>"</item>
+  </plurals>
     <string name="power_usage_summary_title" msgid="7190304207330319919">"ថ្ម"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"អ្វី​​ដែល​កំពុង​​ប្រើ​ថ្ម"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"មិន​មាន​ទិន្នន័យ​ការ​ប្រើ​ថ្ម"</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"ថ្ម​ដែល​បាន​ប្រើ​តាំង​ពី​លែង​បញ្ចូល"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"ថ្មី​ប្រើ​តាំង​ពី​ពេល​កំណត់​ឡើង​វិញ"</string>
-    <string name="battery_stats_on_battery" msgid="4970762168505236033">"បានប្រើថ្មអស់ <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"បាន​ប្រើ​ថ្ម​អស់​រយៈពេល <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> តាំង​ពី​បាន​ដក"</string>
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"បញ្ចូល​ថ្ម"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"បើក​អេក្រង់"</string>
@@ -1496,7 +1496,7 @@
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"ផ្ទៃ​ខាង​មុខ CPU"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"មិន​ដេក"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <string name="usage_type_wifi_running" msgid="3134357198266380400">"Wi‑Fi កំពុង​ដំណើរ​ការ"</string>
+    <string name="usage_type_wifi_running" msgid="3134357198266380400">"វ៉ាយហ្វាយ​កំពុង​ដំណើរការ"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"កុំព្យូទ័រ​បន្ទះ"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"ទូរស័ព្ទ"</string>
     <string name="usage_type_data_send" msgid="3875198715268918671">"បាន​ផ្ញើ​ទិន្នន័យ​ចល័ត"</string>
@@ -1520,15 +1520,14 @@
     <string name="battery_sugg_radio" msgid="8211336978326295047">"ប្ដូរ​ទៅ​របៀប​ពេល​ជិះ​យន្តហោះ ដើម្បី​សន្សំ​ថាមពល​ក្នុង​តំបន់​ដែល​គ្មាន​សេវា។"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"ថ្ម​បាន​ប្រើ​ដោយ​ការ​បង្ហាញ និង​ពន្លឺ"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"កាត់​បន្ថយ​ពន្លឺ​អេក្រង់ និង/ឬ​ពេល​សម្រាក​អេក្រង់"</string>
-    <string name="battery_desc_wifi" msgid="2375567464707394131">"ថ្ម​ប្រើ​ដោយ Wi‑Fi"</string>
+    <string name="battery_desc_wifi" msgid="2375567464707394131">"ថ្មប្រើ​ដោយ​វ៉ាយហ្វាយ"</string>
     <string name="battery_sugg_wifi" msgid="3355461362094706957">"បិទ​វ៉ាយ​ហ្វាយ​​ពេល​មិន​ប្រើ​ ឬ​​​មិន​មាន"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"ថ្ម​បាន​ប្រើ​ដោយ​ប៊្លូធូស"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="1942935021750897422">"បិទ​ប៊្លូធូស​ពេល​អ្នក​មិន​ប្រើ"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"ព្យាយាម​តភ្ជាប់​​ទៅ​ឧបករណ៍​ប៊្លូធូស​ផ្សេង"</string>
     <string name="battery_desc_apps" msgid="8530418792605735226">"ថ្ម​បាន​ប្រើ​ដោយ​កម្មវិធី"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"បញ្ឈប់ ឬ​លុប​កម្មវិធី"</string>
-    <!-- no translation found for battery_sugg_apps_gps (5959067516281866135) -->
-    <skip />
+    <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"ជ្រើស​របៀប​សន្សំ​ថ្ម"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"កម្មវិធី​អាច​ផ្ដល់​ការ​កំណត់​ ដើម្បី​កាត់បន្ថយ​ការ​ប្រើ​ថ្ម"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"ថ្ម​បាន​ប្រើ​ដោយ​អ្នក​ប្រើ"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> តាំង​ពី​បានដក"</string>
@@ -1616,7 +1615,7 @@
     <string name="tts_engine_preference_section_title" msgid="448294500990971413">"ម៉ាស៊ីន​ដែល​ពេញ​ចិត្ត"</string>
     <string name="tts_general_section_title" msgid="4402572014604490502">"ទូទៅ"</string>
     <string name="gadget_title" msgid="5519037532720577836">"ពិនិត្យ​ថាមពល"</string>
-    <string name="gadget_toggle_wifi" msgid="319262861956544493">"ធ្វើ​បច្ចុប្បន្នភាព​ការ​កំណត់ Wi‑Fi"</string>
+    <string name="gadget_toggle_wifi" msgid="319262861956544493">"ធ្វើ​បច្ចុប្បន្នភាព​ការ​កំណត់​វ៉ាយហ្វាយ"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"ធ្វើ​បច្ចុប្បន្នភាព​ការ​កំណត់​ប៊្លូធូស"</string>
     <string name="gadget_state_template" msgid="5156935629902649932">"<xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="gadget_state_on" msgid="6909119593004937688">"បើក"</string>
@@ -1678,15 +1677,15 @@
     <string name="local_backup_password_toast_confirmation_mismatch" msgid="3495167398824569524">"ពាក្យ​សម្ងាត់​ថ្មី និង​ការ​បញ្ជាក់​​មិន​ដូច​គ្នា"</string>
     <string name="local_backup_password_toast_validation_failure" msgid="5646377234895626531">"បរាជ័យ​ក្នុង​ការ​កំណត់​ពាក្យ​សម្ងាត់​បម្រុងទុក"</string>
     <string name="backup_erase_dialog_title" msgid="1027640829482174106"></string>
-    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"បញ្ឈប់​ការ​បម្រុង​ទុក​ពាក្យ​សម្ងាត់ Wi‑Fi , ចំណាំ, ការ​កំណត់​ផ្សេងៗ, និង​ទិន្នន័យ​កម្មវិធី​របស់​អ្នក រួម​ទាំង​លុប​ច្បាប់​ចម្លង​ទាំងអស់​លើ​ម៉ាស៊ីន​មេ Google?"</string>
+    <string name="backup_erase_dialog_message" msgid="5221011285568343155">"បញ្ឈប់​ការ​បម្រុង​ទុក​ពាក្យ​សម្ងាត់​វ៉ាយហ្វាយ, ចំណាំ, ការ​កំណត់​ផ្សេងៗ, និង​ទិន្នន័យ​កម្មវិធី​របស់​អ្នក រួម​ទាំង​លុប​ច្បាប់​ចម្លង​ទាំងអស់​លើ​ម៉ាស៊ីន​មេ Google?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"កំណត់​ការ​គ្រប់គ្រង​ឧបករណ៍"</string>
-    <string name="active_device_admin_msg" msgid="6930903262612422111">"អ្នក​គ្រប់គ្រង​ឧបករណ៍"</string>
+    <string name="active_device_admin_msg" msgid="6930903262612422111">"កម្មវិធី​គ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"ធ្វើ​ឲ្យ​អសកម្ម"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"អ្នក​គ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="no_device_admins" msgid="702695100241728775">"គ្មាន​អ្នក​គ្រប់គ្រង​ឧបករណ៍"</string>
-    <string name="add_device_admin_msg" msgid="6246742476064507965">"ធ្វើ​ឲ្យ​អ្នក​គ្រប់គ្រង​ឧបករណ៍​សកម្ម?"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"ធ្វើ​ឲ្យ​កម្មវិធី​គ្រប់គ្រង​ឧបករណ៍សកម្ម?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"ធ្វើ​ឲ្យ​សកម្ម"</string>
-    <string name="device_admin_add_title" msgid="7705551449705676363">"អ្នក​គ្រប់គ្រង​ឧបករណ៍"</string>
+    <string name="device_admin_add_title" msgid="7705551449705676363">"កម្មវិធី​គ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"ការ​ធ្វើ​ឲ្យ​អ្នក​គ្រប់គ្រង​នេះ​សកម្ម​នឹង​អនុញ្ញាត​ឲ្យ​កម្មវិធី <xliff:g id="APP_NAME">%1$s</xliff:g> អនុវត្ត​ប្រតិបត្តិការ​ដូច​ខាង​ក្រោម៖"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"អ្នក​គ្រប់គ្រង​នេះ​សកម្ម និង​អនុញ្ញាត​ឲ្យ​កម្មវិធី <xliff:g id="APP_NAME">%1$s</xliff:g> អនុវត្ត​ប្រតិបត្តិការ​ដូច​ខាង​ក្រោម៖"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"គ្មាន​ចំណង​ជើង"</string>
@@ -1721,7 +1720,7 @@
     <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"មិន​គាំទ្រ EAP ។"</string>
     <string name="wifi_setup_eap_not_supported" msgid="1955087534276570962">"អ្នក​មិន​អាច​កំណត់​រចនាសម្ព័ន្ធ​ការ​តភ្ជាប់​វ៉ាយហ្វាយ EAP អំឡុង​ពេល​រៀបចំ។ បន្ទាប់​ពី​រៀបចំ អ្នក​អាច​ធ្វើ​បាន​ក្នុង​ការ​កំណត់​ &gt; ឥត​ខ្សែ &amp; បណ្ដាញ។"</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"ការ​តភ្ជាប់​អាច​ចំណាយ​ពេល​ពីរ ឬ​បី​នាទី…"</string>
-    <string name="wifi_setup_description_connected" msgid="736032046548460779">"ប៉ះ "<b>"បន្ទាប់"</b>" ដើម្បី​បន្ត​ការ​រៀបចំ។\n\nប៉ះ "<b>"ថយក្រោយ"</b>" ដើម្បី​តភ្ជាប់​​បណ្ដាញ Wi‑Fi ផ្សេង។"</string>
+    <string name="wifi_setup_description_connected" msgid="736032046548460779">"ប៉ះ "<b>"បន្ទាប់"</b>" ដើម្បី​បន្ត​ការ​រៀបចំ។\n\nប៉ះ "<b>"ថយក្រោយ"</b>" ដើម្បី​តភ្ជាប់​​បណ្ដាញ​វ៉ាយហ្វាយ​ផ្សេង។"</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"បាន​បើក​ការ​ធ្វើ​សម​កាល​កម្ម"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"បាន​បិទ​ការ​ធ្វើ​សម​កាល​កម្ម"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"កំហុស​ការ​ធ្វើ​សម​កាល​កម្ម។"</string>
@@ -1828,16 +1827,14 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"ដែន​កំណត់​ដំណើរការ​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"បង្ហាញ ANRs ទាំងអស់"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"បង្ហាញ​ប្រអប់​កម្មវិធី​មិន​ឆ្លើយតប​សម្រាប់​កម្មវិធី​ផ្ទៃ​ខាង​ក្រោយ"</string>
-    <string name="experimental_webview" msgid="4492200819033780927">"ប្រើ WebView ពិសោធន៍"</string>
-    <string name="experimental_webview_summary" msgid="3431620080869482446">"កម្មវិធី​នឹង​ប្រើ​​ WebView (beta) ថ្មី​បំផុត"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ការ​ប្រើ​ទិន្នន័យ"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"ខួប​​ប្រើ​ទិន្នន័យ"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"ការ​រ៉ូមីង​ទិន្នន័យ"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"ដាក់កម្រិត​ទិន្នន័យ​ផ្ទៃ​ខាង​ក្រោយ"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"បំបែក​ការ​ប្រើ 4G"</string>
-    <string name="data_usage_menu_show_wifi" msgid="5056401102877964564">"បង្ហាញ​ការ​ប្រើ Wi‑Fi"</string>
+    <string name="data_usage_menu_show_wifi" msgid="5056401102877964564">"បង្ហាញ​ការ​ប្រើ​វ៉ាយហ្វាយ"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"បង្ហាញ​ការ​ប្រើអ៊ីសឺរណិត"</string>
-    <string name="data_usage_menu_metered" msgid="5056695223222541863">"hotspots ចល័ត"</string>
+    <string name="data_usage_menu_metered" msgid="5056695223222541863">"ហតស្ពត​ចល័ត"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"ធ្វើ​សម​កាល​កម្ម​ទិន្នន័យ​ស្វ័យ​ប្រវត្តិ"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"ប្ដូរ​ខួប…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"ថ្ងៃ​នៃ​ខែ​ត្រូវ​កំណត់​ខួប​ប្រើ​ទិន្នន័យ​ឡើង​វិញ៖"</string>
@@ -1871,7 +1868,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"ការ​ផ្លាស់ប្ដូរ​ដែល​អ្នក​ធ្វើ​លើ​គណនី​របស់​អ្នក​លើ​បណ្ដាញ​នឹង​ត្រូវ​បាន​ចម្លង​ទៅ​កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក​ដោយ​ស្វ័យ​ប្រវត្តិ។\n\nគណនី​មួយ​ចំនួន​ក៏​ចម្លង​ និង​ប្ដូរ​ដោយ​ស្វ័យប្រវត្តិ​នូវ​អ្វី​ដែល​អ្នក​ធ្វើ​​ក្នុង​កុំព្យូទ័រ​បន្ទះ​ទៅ​បណ្ដាញ។ គណនី Google ដំណើរការ​តាម​វិធី​នេះ។\n\nដើម្បី​ជ្រើស​​ព័ត៌មាន​ណាមួយ​ត្រូវ​ធ្វើ​សម​កាល​កម្ម​ជា​មួយ​គណនី​នីមួយៗ ចូល​ការកំណត់ &gt; គណនី។"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"ការ​ផ្លាស់ប្ដូរ​ដែល​អ្នក​ធ្វើ​លើ​គណនី​របស់​អ្នក​លើ​បណ្ដាញ នឹង​ត្រូវ​បាន​ចម្លង​ទៅ​ទូរស័ព្ទ​របស់​អ្នក​ដោយ​ស្វ័យ​ប្រវត្តិ។\n\nគណនី​មួយ​ចំនួន​ក៏​អាច​ចម្លង​ដោយ​ស្វ័យ​ប្រវត្តិ​ចំពោះ​ការ​ផ្លាស់ប្ដូរ​ដែល​អ្នក​ធ្វើ​លើ​ទូរស័ព្ទ​ទៅ​បណ្ដាញ​​ផង​ដែរ​។ គណនី Google ដំណើរការ​តាម​វិធី​នេះ។\n\nដើម្បី​ជ្រើស​ប្រភេទ​ព័ត៌មាន​ណាមួយ​​ ដើម្បី​ធ្វើ​សម​កាល​កម្ម​ក្នុង​គណនី​នីមួយៗ ចូល​ទៅ​ការ​កំណត់ &gt; គណនី។"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"បិទ​ការ​ធ្វើ​សម​កាល​កម្ម​ទិន្នន័យ​ស្វ័យ​ប្រវត្តិ?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"វា​នឹង​សន្សំ​ការ​ប្រើ​ទិន្នន័យ និង​ថ្ម ប៉ុន្តែ​អ្នក​ត្រូវ​តែ​ធ្វើ​សម​កាល​កម្ម​គណនី​នីមួយៗ​ដោយ​ដៃ ដើម្បី​ប្រមូល​​ព័ត៌មាន​ថ្មីៗ។ អ្នក​នឹង​មិន​ទទួល​ការ​ជូន​ដំណឹង​ពេល​មាន​បច្ចុប្បន្នភាព​​ទេ។"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"វា​នឹង​សន្សំ​ការ​ប្រើ​ទិន្នន័យ និង​ថ្ម ប៉ុន្តែ​អ្នក​ត្រូវ​តែ​ធ្វើ​សម​កាល​កម្ម​គណនី​នីមួយៗ​ដោយ​ខ្លួនឯង ដើម្បី​ប្រមូល​​ព័ត៌មាន​ថ្មីៗ។ អ្នក​នឹង​មិន​ទទួល​ការ​ជូន​ដំណឹង​ពេល​មាន​បច្ចុប្បន្នភាព​​ទេ។"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"កាលបរិច្ឆេទ​កំណត់​ខួប​​ប្រើ​ឡើង​វិញ"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"កាលបរិច្ឆេទ​នៃ​ខែ​នីមួយៗ៖"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"ការ​កំណត់"</string>
@@ -1881,8 +1878,8 @@
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="3893348029612821262">"ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​នឹង​ត្រូវ​បាន​បិទ​ពេល​ដល់​ដែន​កំណត់​បាន​បញ្ជាក់។\n\nព្រោះ​ថា​ការ​ប្រើ​ទិន្នន័យ​ត្រូវ​បាន​វាស់​ដោយ​កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក ហើយ​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក​អាច​គិត​​ថ្លៃ​សេវាកម្ម​​ខុស​គ្នា គិត​អំពី​ការ​ប្រើ​ដែន​កំណត់​បម្រុង​ទុក។"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="7962145861903746827">"ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​នឹង​ត្រូវ​បាន​បិទ​ពេល​ដល់​ដែន​កំណត់។\n\nព្រោះថា​ការ​ប្រើ​ទិន្នន័យ​ត្រូវ​បាន​វាស់​ដោយ​ទូរស័ព្ទ​របស់​អ្នក ហើយ​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក​អាច​គិត​ថ្លៃ​សេវាកម្ម​ការ​ប្រើប្រាស់​ខុស​គ្នា គិត​ពី​ការ​ប្រើ​ដែន​កំណត់​បម្រុង​ទុក។"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"ដាក់កម្រិត​ទិន្នន័យ​ផ្ទៃ​​ខាង​ក្រោយ?"</string>
-    <string name="data_usage_restrict_background" msgid="8447934953579275363">"បើ​អ្នក​ដាក់​កម្រិត​ទិន្នន័យ​ចល័ត​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ កម្មវិធី និង​សេវាកម្ម​មួយ​ចំនួន​នឹង​មិន​ដំណើរការ​ទេ លុះ​ត្រា​តែ​អ្នក​បាន​តភ្ជាប់​បណ្ដាញ Wi‑Fi ។"</string>
-    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7132639594296036143">"បើ​អ្នក​ដាក់​កម្រិត​ទិន្នន័យ​ចល័ត​ផ្ទៃ​ខាង​ក្រោយ កម្មវិធី និង​សេវាកម្ម​មួយ​ចំនួន​នឹង​មិន​ដំណើរ​ការ​ លុះ​ត្រា​តែ​អ្នក​បាន​តភ្ជាប់​បណ្ដាញ Wi‑Fi ។\n\nការ​កំណត់​នេះ​ប៉ះពាល់​ដល់​អ្នក​ប្រើ​ទាំងអស់​លើ​កុំព្យូទ័រ​បន្ទះ​នេះ។"</string>
+    <string name="data_usage_restrict_background" msgid="8447934953579275363">"បើ​អ្នក​ដាក់​កម្រិត​ទិន្នន័យ​ចល័ត​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ កម្មវិធី និង​សេវាកម្ម​មួយ​ចំនួន​នឹង​មិន​ដំណើរការ​ទេ លុះ​ត្រា​តែ​អ្នក​បាន​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ។"</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="7132639594296036143">"បើ​អ្នក​ដាក់​កម្រិត​ទិន្នន័យ​ចល័ត​ផ្ទៃ​ខាង​ក្រោយ កម្មវិធី និង​សេវាកម្ម​មួយ​ចំនួន​នឹង​មិន​ដំណើរ​ការ​ លុះ​ត្រា​តែ​អ្នក​បាន​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ។\n\nការ​កំណត់​នេះ​ប៉ះពាល់​ដល់​អ្នក​ប្រើ​ទាំងអស់​លើ​កុំព្យូទ័រ​បន្ទះ​នេះ។"</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="2642864376010074543">"បើ​អ្នក​ដាក់​កម្រិត​ទិន្នន័យ​ចល័ត​ផ្ទៃ​ខាង​ក្រោយ កម្មវិធី និង​សេវាកម្ម​មួយ​ចំនួន​នឹង​មិន​ដំណើរការ​ទេ​ លុះ​ត្រា​តែ​អ្នក​តភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ។\n\nការ​កំណត់​នេះ​ប៉ះពាល់​អ្នក​ប្រើ​​ទាំងអស់​លើ​ទូរស័ព្ទ​នេះ។"</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ការ​ព្រមាន"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ដែន​កំណត់"</font></string>
@@ -1892,11 +1889,11 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g> ៖ បាន​ប្រើ​ប្រហែល <xliff:g id="TOTAL">%1$s</xliff:g> ។"</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: បាន​ប្រើ​ប្រហែល <xliff:g id="TOTAL">%1$s</xliff:g> ដូច​បាន​វាស់​ដោយ​កុំព្យូទ័រ​បន្ទះ​របស់​អ្នក។ ការ​គិត​ថ្លៃ​​សេវាកម្ម​ប្រើ​ទិន្នន័យ​នៃ​ក្រុមហ៊ុន​​បញ្ជូន​របស់​អ្នក​អាច​ខុស​គ្នា។"</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g> ៖ បាន​ប្រើ​ប្រហែល <xliff:g id="TOTAL">%1$s</xliff:g> ដូច​បា​ន​វាស់​ដោយ​ទូរស័ព្ទ​របស់​អ្នក។ ការ​គិត​ការ​ប្រើ​ទិន្នន័យ​នៃ​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក​អាច​ខុស​គ្នា។"</string>
-    <string name="data_usage_metered_title" msgid="6204750602856383278">"hotspots ចល័ត"</string>
-    <string name="data_usage_metered_body" msgid="4959032833706695848">"ជ្រើស​បណ្ដាញ​វ៉ាយហ្វាយ​ដែល​ជា​ hotspots ចល័ត។ កម្មវិធី​អាច​ត្រូវ​បាន​ដាក់​កម្រិត​មិន​ឲ្យ​ប្រើ​បណ្ដាញ​ទាំង​នេះ​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ។ កម្មវិធី​ក៏​អាច​ព្រមាន​ផង​ដែរ​មុន​នឹង​ប្រើ​បណ្ដាញ​សម្រាប់​ការ​ទាញ​យក​ធំៗ។"</string>
+    <string name="data_usage_metered_title" msgid="6204750602856383278">"ហតស្ពត​ចល័ត"</string>
+    <string name="data_usage_metered_body" msgid="4959032833706695848">"ជ្រើស​បណ្ដាញ​វ៉ាយហ្វាយ​ដែល​ជា​ហតស្ពត​ចល័ត។ កម្មវិធី​អាច​ត្រូវ​បាន​ដាក់​កម្រិត​មិន​ឲ្យ​ប្រើ​បណ្ដាញ​ទាំង​នេះ​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ។ កម្មវិធី​ក៏​អាច​ព្រមាន​ផង​ដែរ​មុន​នឹង​ប្រើ​បណ្ដាញ​សម្រាប់​ការ​ទាញ​យក​ធំៗ។"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"បណ្ដាញ​ចល័ត"</string>
-    <string name="data_usage_metered_wifi" msgid="8540872226614404873">"បណ្ដាញ Wi‑Fi"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="5502020778468643732">"ដើម្បី​ជ្រើស​ hotspots ចល័ត បើក Wi‑Fi ។"</string>
+    <string name="data_usage_metered_wifi" msgid="8540872226614404873">"បណ្ដាញ​វ៉ាយហ្វាយ"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="5502020778468643732">"ដើម្បីជ្រើស​ហតស្ពត​ចល័ត សូម​បើក​វ៉ាយហ្វាយ។"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"ការ​ហៅ​​ពេល​អាសន្ន"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"ត្រឡប់​​ទៅ​ការ​ហៅ"</string>
     <string name="vpn_name" msgid="4689699885361002297">"ឈ្មោះ"</string>
@@ -1956,8 +1953,8 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"បណ្ដាញ​អាច​ត្រូវ​បាន​តាមដាន"</string>
     <string name="done_button" msgid="1991471253042622230">"រួចរាល់"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"ការ​ត្រួតពិនិត្យ​បណ្ដាញ"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"ឧបករណ៍​នេះ​ត្រូវ​បាន​គ្រប់គ្រង​ដោយ៖ \n <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> \n \n អ្នក​គ្រប់គ្រង​របស់​អ្នក​មាន​សមត្ថភាព​ក្នុង​ការ​ត្រួតពិនិត្យ​សកម្មភាព​បណ្ដាញ​របស់​អ្នក ​រួម​បញ្ចូល​ទាំង​អ៊ីមែល​ កម្មវិធី​និង​គេហ​ទំព័រ​ដែល​មាន​សុវត្ថិភាព​។ \n \n សម្រាប់​ព័ត៌មាន​បន្ថែម​សូម​ទាក់ទង​អ្នក​គ្រប់គ្រង​របស់​អ្នក​។"</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8212122519110935512">"ភាគី​ទី​បី​អាច​​ពិនិត្យ​សកម្មភាព \n បណ្ដាញ​របស់​អ្នក​រួមមាន អ៊ីមែល កម្មវិធី និង​​តំបន់បណ្ដាញ​ដែល​មាន​សុវត្ថិភាព។\n\n ​ការដែលដំឡើង​អត្តសញ្ញាណ​ដែល​ទុក​ចិត្ត​លើ​​ឧបករណ៍​របស់​អ្នក​បង្កជាហេតុដូចនេះ។"</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"ឧបករណ៍​នេះ​ត្រូវ​បាន​គ្រប់គ្រង​ដោយ៖ \n <xliff:g id="MANAGING_DOMAIN">%s</xliff:g> \n \n អ្នក​គ្រប់គ្រង​របស់​អ្នក​មាន​សមត្ថភាព​ក្នុង​ការ​ត្រួតពិនិត្យ​សកម្មភាព​បណ្ដាញ​របស់​អ្នក ​រួម​បញ្ចូល​ទាំង​អ៊ីមែល​, កម្មវិធី​និង​គេហ​ទំព័រ​ដែល​មាន​សុវត្ថិភាព​។ \n \n សម្រាប់​ព័ត៌មាន​បន្ថែម​សូម​ទាក់ទង​អ្នក​គ្រប់គ្រង​របស់​អ្នក​។"</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"ភាគី​ទីបី​មាន​សមត្ថភាព​គ្រប់គ្រង​សកម្មភាព​បណ្ដាញ​របស់​អ្នក រួម​មាន​អ៊ីមែល កម្មវិធី និង​សុវត្ថិភាព​តំបន់បណ្ដាញ។ \n \n ព័ត៌មាន​សម្ងាត់​ដែល​ទុកចិត្ត​ត្រូវ​បាន​ដំឡើង​នៅ​លើ​ឧបករណ៍​របស់​អ្នក​ដើម្បី​ឲ្យ​វា​​អាច​ធ្វើ​បាន។"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"ពិនិត្យ​​​អត្តសញ្ញាណ​ដែលបាន​​​ទុកចិត្ត"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"អ្នកប្រើ"</string>
     <string name="user_list_title" msgid="7937158411137563543">"អ្នកប្រើ &amp; ប្រវត្តិរូប"</string>
@@ -2005,14 +2002,13 @@
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"កម្មវិធី​មាន​ការ​ដាក់កម្រិត"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ពង្រីក​ការ​កំណត់​សម្រាប់​កម្មវិធី"</string>
     <string name="home_app_uninstall_button" msgid="6808453012607962899">"លុប​កម្មវិធី​នេះ"</string>
-    <!-- no translation found for only_one_home_message (3538846733750242759) -->
-    <skip />
+    <string name="only_one_home_message" msgid="3538846733750242759">"ការ​កំណត់​ទំព័រ​ដើម​នឹង​ត្រូវ​បាន​លាក់​រហូត​ទាល់តែ​អ្នក​ដំឡើង​កម្មវិធី​​ដើម​មួយ​ផ្សេង​ទៀត​។"</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"ការកំណត់​នេះ​ប៉ះពាល់​ដល់​អ្នក​ប្រើ​ទាំងអស់​លើ​កុំព្យូទ័រ​បន្ទះ​នេះ។"</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"ការ​កំណត់​នេះ​ប៉ះពាល់​ដល់​អ្នក​ប្រើ​ទាំងអស់​លើ​ទូរស័ព្ទ​នេះ។"</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"ប្ដូរ​ភាសា"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"ប្ដូរ​ទំហំ​ពុម្ពអក្សរ"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"ប៉ះ &amp; បង់​ប្រាក់"</string>
-    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"បង់​ជាមួយ​នឹង​គ្រាន់​តែ​​ប៉ះ"</string>
+    <string name="nfc_payment_no_apps" msgid="2481080809791416010">"បង់​​ប្រាក់​ដោយ​​គ្រាន់​តែ​​ប៉ះ"</string>
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"ស្វែងយល់​បន្ថែម"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"រក​កម្មវិធី"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"កំណត់​ជា​ចំណូលចិត្ត​របស់​អ្នក?"</string>
