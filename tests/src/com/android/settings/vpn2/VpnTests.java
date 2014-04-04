@@ -89,6 +89,7 @@ public class VpnTests extends InstrumentationTestCase {
     private static final String TAG = "VpnTests";
     /* Maximum time to wait for VPN connection */
     private static final long MAX_CONNECTION_TIME = 5 * 60 * 1000;
+    private static final long VPN_STAY_TIME = 60 * 1000;
     private static final int MAX_DISCONNECTION_TRIES = 3;
     private static final String EXTERNAL_SERVER =
             "http://ip2country.sourceforge.net/ip2c.php?format=JSON";
@@ -147,6 +148,12 @@ public class VpnTests extends InstrumentationTestCase {
         }
         // Create CertInstallerHelper to initialize the keystore
         mCertHelper = new CertInstallerHelper();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        sleep(VPN_STAY_TIME);
+        super.tearDown();
     }
 
     private void printVpnProfile(VpnProfile profile) {
