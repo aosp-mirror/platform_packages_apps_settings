@@ -314,8 +314,6 @@ public class UserSettings extends RestrictedSettingsFragment
         if (requestCode == REQUEST_CHOOSE_LOCK) {
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
-            } else {
-                showDialog(DIALOG_NEED_LOCKSCREEN);
             }
         }
     }
