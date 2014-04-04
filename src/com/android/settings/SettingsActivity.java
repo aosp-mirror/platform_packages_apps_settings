@@ -126,6 +126,7 @@ public class SettingsActivity extends Activity
     private static final String SAVE_KEY_HEADERS = ":settings:headers";
     private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
     private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
+    private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -300,6 +301,7 @@ public class SettingsActivity extends Activity
 
     private Button mNextButton;
     private ActionBar mActionBar;
+    private boolean mDisplayHomeAsUpEnabled;
 
     private SearchView mSearchView;
     private MenuItem mSearchMenuItem;
@@ -425,7 +427,7 @@ public class SettingsActivity extends Activity
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
-        boolean displayHomeAsUpEnabled = true;
+        mDisplayHomeAsUpEnabled = true;
 
         String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
         Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
@@ -443,6 +445,8 @@ public class SettingsActivity extends Activity
                 mHeaders.addAll(headers);
                 setTitleFromBackStack();
             }
+
+            mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
         } else {
             // We need to build the Headers in all cases
             onBuildHeaders(mHeaders);
@@ -451,7 +455,7 @@ public class SettingsActivity extends Activity
                 final ComponentName cn = getIntent().getComponent();
                 // No UP is we are launched thru a Settings shortcut
                 if (!cn.getClassName().equals(SubSettings.class.getName())) {
-                    displayHomeAsUpEnabled = false;
+                    mDisplayHomeAsUpEnabled = false;
                 }
                 final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
                 mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
@@ -460,7 +464,7 @@ public class SettingsActivity extends Activity
                         mInitialTitle, false);
             } else {
                 // No UP if we are displaying the Headers
-                displayHomeAsUpEnabled = false;
+                mDisplayHomeAsUpEnabled = false;
                 if (mHeaders.size() > 0) {
                     mInitialTitle = getText(R.string.dashboard_title);
                     switchToFragment(DashboardSummary.class.getName(), null, false, false,
@@ -471,7 +475,7 @@ public class SettingsActivity extends Activity
 
         mActionBar = getActionBar();
         mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled);
+        mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
 
         // see if we should show Back/Next buttons
         Intent intent = getIntent();
@@ -568,6 +572,8 @@ public class SettingsActivity extends Activity
         if (mHeaders.size() > 0) {
             outState.putParcelableArrayList(SAVE_KEY_HEADERS, mHeaders);
         }
+
+        outState.putBoolean(SAVE_KEY_SHOW_HOME_AS_UP, mDisplayHomeAsUpEnabled);
 
         // The option menus are created if the ActionBar is visible and they are also created
         // asynchronously. If you launch Settings with an Intent action like
