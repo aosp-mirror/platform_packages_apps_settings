@@ -124,7 +124,6 @@ public class SettingsActivity extends Activity
 
     // Constants for state save/restore
     private static final String SAVE_KEY_HEADERS = ":settings:headers";
-    private static final String SAVE_KEY_CURRENT_HEADER = ":settings:cur_header";
     private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
     private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
 
@@ -177,9 +176,6 @@ public class SettingsActivity extends Activity
      */
     public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
 
-    private static final String META_DATA_KEY_HEADER_ID =
-        "com.android.settings.TOP_LEVEL_HEADER_ID";
-
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
 
@@ -191,7 +187,6 @@ public class SettingsActivity extends Activity
 
     private String mFragmentClass;
     private Header mSelectedHeader;
-    private Header mCurrentHeader;
 
     private CharSequence mInitialTitle;
 
@@ -572,12 +567,6 @@ public class SettingsActivity extends Activity
 
         if (mHeaders.size() > 0) {
             outState.putParcelableArrayList(SAVE_KEY_HEADERS, mHeaders);
-            if (mCurrentHeader != null) {
-                int index = mHeaders.indexOf(mCurrentHeader);
-                if (index >= 0) {
-                    outState.putInt(SAVE_KEY_CURRENT_HEADER, index);
-                }
-            }
         }
 
         // The option menus are created if the ActionBar is visible and they are also created
