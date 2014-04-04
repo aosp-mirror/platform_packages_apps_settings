@@ -647,8 +647,9 @@ public class SettingsActivity extends Activity
      * preference fragment.
      *
      * @param header The new header to display.
+     * @param position The position of the Header in the list.
      */
-    private void onHeaderClick(Header header) {
+    private void onHeaderClick(Header header, int position) {
         if (header == null) {
             return;
         }
@@ -658,6 +659,9 @@ public class SettingsActivity extends Activity
         } else if (header.intent != null) {
             startActivity(header.intent);
         } else {
+            String title = header.getTitle(getResources()).toString();
+            Log.e(LOG_TAG, "Can't switch to header that has no Fragment nor Intent. Title: " +
+                            title + " Position: " + position);
             throw new IllegalStateException(
                     "Can't switch to header that has no Fragment nor Intent");
         }
@@ -1213,7 +1217,7 @@ public class SettingsActivity extends Activity
         Object item = mHeaderAdapter.getItem(position);
         if (item instanceof Header) {
             mSelectedHeader = (Header) item;
-            onHeaderClick(mSelectedHeader);
+            onHeaderClick(mSelectedHeader, position);
             revertToInitialFragment();
         }
     }
