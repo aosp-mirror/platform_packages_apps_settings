@@ -306,7 +306,6 @@ public class SettingsActivity extends Activity
     private SearchView mSearchView;
     private MenuItem mSearchMenuItem;
     private boolean mSearchMenuItemExpanded = false;
-    private boolean mIsShowingSearchResults = false;
     private SearchResultsSummary mSearchResultsFragment;
     private String mSearchQuery;
 
@@ -1257,9 +1256,7 @@ public class SettingsActivity extends Activity
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
         if (item.getItemId() == mSearchMenuItem.getItemId()) {
-            if (mSearchResultsFragment == null) {
-                switchToSearchResultsFragmentIfNeeded();
-            }
+            switchToSearchResultsFragmentIfNeeded();
         }
         return true;
     }
@@ -1267,7 +1264,7 @@ public class SettingsActivity extends Activity
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
         if (item.getItemId() == mSearchMenuItem.getItemId()) {
-            if (mIsShowingSearchResults) {
+            if (mSearchMenuItemExpanded) {
                 revertToInitialFragment();
             }
         }
@@ -1275,17 +1272,18 @@ public class SettingsActivity extends Activity
     }
 
     private void switchToSearchResultsFragmentIfNeeded() {
-        if (!mIsShowingSearchResults) {
-            Fragment current = getFragmentManager().findFragmentById(R.id.prefs);
-            if (current != null && current instanceof SearchResultsSummary) {
-                mSearchResultsFragment = (SearchResultsSummary) current;
-            } else {
-                String title = getString(R.string.search_results_title);
-                mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
-                        SearchResultsSummary.class.getName(), null, false, true, title, true);
-            }
-            mIsShowingSearchResults = true;
+        if (mSearchResultsFragment != null) {
+            return;
         }
+        Fragment current = getFragmentManager().findFragmentById(R.id.prefs);
+        if (current != null && current instanceof SearchResultsSummary) {
+            mSearchResultsFragment = (SearchResultsSummary) current;
+        } else {
+            String title = getString(R.string.search_results_title);
+            mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
+                    SearchResultsSummary.class.getName(), null, false, true, title, true);
+        }
+        mSearchMenuItemExpanded = true;
     }
 
     public void needToRevertToInitialFragment() {
@@ -1294,10 +1292,10 @@ public class SettingsActivity extends Activity
 
     private void revertToInitialFragment() {
         mNeedToRevertToInitialFragment = false;
-        getFragmentManager().popBackStack(SettingsActivity.BACK_STACK_PREFS,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mSearchResultsFragment = null;
-        mIsShowingSearchResults = false;
+        mSearchMenuItemExpanded = false;
+        getFragmentManager().popBackStackImmediate(SettingsActivity.BACK_STACK_PREFS,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mSearchMenuItem.collapseActionView();
     }
 }
