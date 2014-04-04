@@ -433,12 +433,14 @@ public class SettingsActivity extends Activity
         Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
 
         if (savedState != null) {
+            // We are restarting from a previous saved state; used that to initialize, instead
+            // of starting fresh.
             mSearchMenuItemExpanded = savedState.getBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED);
             mSearchQuery = savedState.getString(SAVE_KEY_SEARCH_QUERY);
 
-                    // We are restarting from a previous saved state; used that to
-            // initialize, instead of starting fresh.
-            mInitialTitle = getTitle();
+            final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
+            mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
+            setTitle(mInitialTitle);
 
             ArrayList<Header> headers = savedState.getParcelableArrayList(SAVE_KEY_HEADERS);
             if (headers != null) {
