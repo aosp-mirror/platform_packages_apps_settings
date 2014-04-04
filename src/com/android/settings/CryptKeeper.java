@@ -367,23 +367,39 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
         } else if (mValidationComplete || isDebugView(FORCE_VIEW_PASSWORD)) {
-            final IMountService service = getMountService();
-            int type = StorageManager.CRYPT_TYPE_PASSWORD;
-            try {
-                type = service.getPasswordType();
-            } catch (Exception e) {
-                Log.e(TAG, "Error while getting type - showing default dialog" + e);
-            }
+            new AsyncTask<Void, Void, Void>() {
+                int type = StorageManager.CRYPT_TYPE_PASSWORD;
+                String owner_info;
 
-            if(type == StorageManager.CRYPT_TYPE_PIN) {
-                setContentView(R.layout.crypt_keeper_pin_entry);
-            } else if (type == StorageManager.CRYPT_TYPE_PATTERN) {
-                setContentView(R.layout.crypt_keeper_pattern_entry);
-                setBackFunctionality(false);
-            } else {
-                setContentView(R.layout.crypt_keeper_password_entry);
-            }
-            passwordEntryInit();
+                @Override
+                public Void doInBackground(Void... v) {
+                    try {
+                        final IMountService service = getMountService();
+                        type = service.getPasswordType();
+                        owner_info = service.getField("OwnerInfo");
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error calling mount service " + e);
+                    }
+
+                    return null;
+                }
+
+                @Override
+                public void onPostExecute(java.lang.Void v) {
+                    if(type == StorageManager.CRYPT_TYPE_PIN) {
+                        setContentView(R.layout.crypt_keeper_pin_entry);
+                    } else if (type == StorageManager.CRYPT_TYPE_PATTERN) {
+                        setContentView(R.layout.crypt_keeper_pattern_entry);
+                        setBackFunctionality(false);
+                    } else {
+                        setContentView(R.layout.crypt_keeper_password_entry);
+                    }
+
+                    final TextView status = (TextView) findViewById(R.id.owner_info);
+                    status.setText(owner_info);
+                    passwordEntryInit();
+                }
+            }.execute();
         } else if (!mValidationRequested) {
             // We're supposed to be encrypted, but no validation has been done.
             new ValidationTask().execute((Void[]) null);
