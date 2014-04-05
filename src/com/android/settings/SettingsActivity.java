@@ -737,7 +737,13 @@ public class SettingsActivity extends Activity
      */
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
             CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-        switchToFragment(fragmentClass, args, resultTo, resultRequestCode, titleRes, titleText);
+        String title;
+        if (titleRes > 0) {
+            title = getString(titleRes);
+        } else {
+            title = titleText.toString();
+        }
+        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, title);
     }
 
     /**
@@ -769,41 +775,6 @@ public class SettingsActivity extends Activity
         } else {
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         }
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * Start a new fragment. Used by #startPreferencePanel.
-     *
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param resultTo Option fragment that should receive the result of
-     *                 the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request code in which to
-     *                          report the result.
-     * @param titleRes Resource ID of string to display for the title of. If the Resource ID is a
-     *                 valid one then it will be used to get the title. Otherwise the titleText
-     *                 argument will be used as the title.
-     * @param titleText string to display for the title of.
-     */
-    private void switchToFragment(String fragmentName, Bundle args, Fragment resultTo,
-            int resultRequestCode, int titleRes, CharSequence titleText) {
-        final CharSequence cs;
-        if (titleRes != 0) {
-            cs = getText(titleRes);
-        } else {
-            cs = titleText;
-        }
-
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
-        if (resultTo != null) {
-            f.setTargetFragment(resultTo, resultRequestCode);
-        }
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.prefs, f);
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.addToBackStack(BACK_STACK_PREFS);
-        transaction.setBreadCrumbTitle(cs);
         transaction.commitAllowingStateLoss();
     }
 
