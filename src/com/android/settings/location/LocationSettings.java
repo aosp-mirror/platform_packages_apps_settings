@@ -86,24 +86,20 @@ public class LocationSettings extends LocationSettingsBase
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         // Only show the master switch when we're not being used as Setup Wizard.
-        if (!activity.onIsHidingHeaders()) {
-            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                    ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_VERTICAL | Gravity.END));
-        }
+        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.END));
     }
 
     @Override
     public void onStop() {
         super.onStop();
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        if (!activity.onIsHidingHeaders()) {
-            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(null);
-        }
+        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(null);
     }
 
     @Override
