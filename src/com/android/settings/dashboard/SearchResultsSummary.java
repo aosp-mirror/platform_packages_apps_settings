@@ -109,15 +109,18 @@ public class SearchResultsSummary extends Fragment {
 
                 final String className = cursor.getString(Index.COLUMN_INDEX_CLASS_NAME);
                 final String screenTitle = cursor.getString(Index.COLUMN_INDEX_SCREEN_TITLE);
-
                 final String action = cursor.getString(Index.COLUMN_INDEX_INTENT_ACTION);
+                final String key = cursor.getString(Index.COLUMN_INDEX_KEY);
 
                 final SettingsActivity sa = (SettingsActivity) getActivity();
 
                 sa.needToRevertToInitialFragment();
 
                 if (TextUtils.isEmpty(action)) {
-                    sa.startWithFragment(className, null, null, 0, screenTitle);
+                    Bundle args = new Bundle();
+                    args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
+
+                    sa.startWithFragment(className, args, null, 0, screenTitle);
                 } else {
                     final Intent intent = new Intent(action);
 
@@ -130,6 +133,7 @@ public class SearchResultsSummary extends Fragment {
                                 new ComponentName(targetPackage, targetClass);
                         intent.setComponent(component);
                     }
+                    intent.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
 
                     sa.startActivity(intent);
                 }
@@ -194,21 +198,23 @@ public class SearchResultsSummary extends Fragment {
     }
 
     private static class SearchResult {
+        public Context context;
         public String title;
         public String summaryOn;
         public String summaryOff;
         public String entries;
         public int iconResId;
-        public Context context;
+        public String key;
 
         public SearchResult(Context context, String title, String summaryOn, String summaryOff,
-                String entries, int iconResId) {
+                            String entries, int iconResId, String key) {
             this.context = context;
             this.title = title;
             this.summaryOn = summaryOn;
             this.summaryOff = summaryOff;
             this.entries = entries;
             this.iconResId = iconResId;
+            this.key = key;
         }
     }
 
@@ -263,6 +269,8 @@ public class SearchResultsSummary extends Fragment {
                         Index.COLUMN_INDEX_CLASS_NAME);
                 final String packageName = mCursor.getString(
                         Index.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
+                final String key = mCursor.getString(
+                        Index.COLUMN_INDEX_KEY);
 
                 Context packageContext;
                 if (TextUtils.isEmpty(className) && !TextUtils.isEmpty(packageName)) {
@@ -284,7 +292,7 @@ public class SearchResultsSummary extends Fragment {
                         R.drawable.empty_icon : Integer.parseInt(iconResStr);
 
                 return new SearchResult(packageContext, title, summaryOn, summaryOff,
-                        entries, iconResId);
+                        entries, iconResId, key);
             }
             return null;
         }

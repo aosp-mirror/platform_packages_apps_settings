@@ -26,12 +26,15 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceGroup;
+import android.preference.PreferenceGroupAdapter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ListAdapter;
 
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
@@ -41,6 +44,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private static final String TAG = "SettingsPreferenceFragment";
 
     private static final int MENU_HELP = Menu.FIRST + 100;
+    private static final int HIGHLIGHT_DURATION_MILLIS = 750;
 
     private SettingsDialogFragment mDialogFragment;
 
@@ -66,6 +70,47 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         if (!TextUtils.isEmpty(mHelpUrl)) {
             setHasOptionsMenu(true);
         }
+
+        final Bundle args = getArguments();
+        if (args != null) {
+            final String key = args.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
+            final int position = findPositionFromKey(getPreferenceScreen(), key);
+            if (position >= 0) {
+                final ListAdapter adapter = getListView().getAdapter();
+                if (adapter instanceof PreferenceGroupAdapter) {
+                    ((PreferenceGroupAdapter) adapter).setActivated(position);
+
+                    getListView().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((PreferenceGroupAdapter) adapter).setActivated(-1);
+                            ((PreferenceGroupAdapter) adapter).notifyDataSetChanged();
+                        }
+                    }, HIGHLIGHT_DURATION_MILLIS);
+                }
+            }
+        }
+    }
+
+    private int findPositionFromKey(PreferenceGroup group, String key) {
+        if (group != null) {
+            int count = group.getPreferenceCount();
+            for (int n = 0; n < count; n++) {
+                final Preference preference = group.getPreference(n);
+                final String preferenceKey = preference.getKey();
+                if (preferenceKey != null && preferenceKey.equals(key)) {
+                    return n;
+                }
+                if (preference instanceof PreferenceGroup) {
+                    PreferenceGroup nestedGroup = (PreferenceGroup) preference;
+                    final int nestedPosition = findPositionFromKey(nestedGroup, key);
+                    if (nestedPosition >= 0) {
+                        return n + 1 + nestedPosition;
+                    }
+                }
+            }
+        }
+        return -1;
     }
 
     protected void removePreference(String key) {

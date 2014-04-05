@@ -71,6 +71,7 @@ public class Index {
     public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 12;
     public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 13;
     public static final int COLUMN_INDEX_ENABLED = 14;
+    public static final int COLUMN_INDEX_KEY = 15;
 
     // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
     private static final String[] SELECT_COLUMNS = new String[] {
@@ -87,7 +88,9 @@ public class Index {
             IndexColumns.ICON,                    // 10
             IndexColumns.INTENT_ACTION,           // 11
             IndexColumns.INTENT_TARGET_PACKAGE,   // 12
-            IndexColumns.INTENT_TARGET_CLASS      // 13
+            IndexColumns.INTENT_TARGET_CLASS,     // 13
+            IndexColumns.ENABLED,                 // 14
+            IndexColumns.DATA_KEY_REF             // 15
     };
 
     private static final String[] MATCH_COLUMNS = {
@@ -375,6 +378,8 @@ public class Index {
                     final String targetPackage = cursor.getString(12);
                     final String targetClass = cursor.getString(13);
 
+                    final String key = cursor.getString(15);
+
                     SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
                     data.rank = rank;
                     data.title = title;
@@ -391,6 +396,7 @@ public class Index {
                     data.intentAction = action;
                     data.intentTargetPackage = targetPackage;
                     data.intentTargetClass = targetClass;
+                    data.key = key;
 
                     addIndexableData(data);
                 }
@@ -503,12 +509,13 @@ public class Index {
             String title = getDataTitle(context, attrs);
             String summary = getDataSummary(context, attrs);
             String keywords = getDataKeywords(context, attrs);
+            String key = getDataKey(context, attrs);
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
             updateOneRowWithFilteredData(database, localeStr, title, summary, null, null,
-                    null, null, fragmentName, screenTitle, iconResId, rank, keywords,
-                    intentAction, intentTargetPackage, intentTargetClass, true);
+                    null, null, fragmentName, screenTitle, iconResId, rank,
+                    keywords, intentAction, intentTargetPackage, intentTargetClass, true, key);
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
@@ -520,6 +527,7 @@ public class Index {
 
                 title = getDataTitle(context, attrs);
                 keywords = getDataKeywords(context, attrs);
+                key = getDataKey(context, attrs);
 
                 if (!nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
                     summary = getDataSummary(context, attrs);
@@ -537,15 +545,17 @@ public class Index {
 
                     // Insert rows for the child nodes of PreferenceScreen
                     updateOneRowWithFilteredData(database, localeStr, title, summary, null, entries,
-                            switchOn, switchOff, fragmentName, screenTitle, iconResId, rank, keywords,
-                            intentAction, intentTargetPackage, intentTargetClass, true);
-                } else if (nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
+                            switchOn, switchOff, fragmentName, screenTitle, iconResId, rank,
+                            keywords, intentAction, intentTargetPackage, intentTargetClass,
+                            true, key);
+                } else {
                     final String summaryOn = getDataSummaryOn(context, attrs);
                     final String summaryOff = getDataSummaryOff(context, attrs);
 
                     updateOneRowWithFilteredData(database, localeStr, title, summaryOn, summaryOff,
-                            null, null, null, fragmentName, screenTitle, iconResId, rank, keywords,
-                            intentAction, intentTargetPackage, intentTargetClass, true);
+                            null, null, null, fragmentName, screenTitle, iconResId, rank,
+                            keywords, intentAction, intentTargetPackage, intentTargetClass,
+                            true, key);
                 }
             }
 
@@ -580,7 +590,8 @@ public class Index {
                 raw.intentAction,
                 raw.intentTargetPackage,
                 raw.intentTargetClass,
-                raw.enabled);
+                raw.enabled,
+                raw.key);
     }
 
     private void indexFromLocalProvider(SQLiteDatabase database, String localeStr,
@@ -619,7 +630,8 @@ public class Index {
                                 raw.intentAction,
                                 raw.intentTargetPackage,
                                 raw.intentTargetClass,
-                                raw.enabled);
+                                raw.enabled,
+                                raw.key);
                     }
                 }
 
@@ -657,7 +669,7 @@ public class Index {
             String switchOn, String switchOff, String className,
             String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
-            boolean enabled) {
+            boolean enabled, String key) {
 
         String updatedTitle;
         if (title != null) {
@@ -706,7 +718,7 @@ public class Index {
                 updatedSummaryOff, normalizedSummaryOff, entries,
                 updatedSwitchOn, normalizedSwitchOn, updatedSwitchOff, normalizedSwitchOff,
                 className, screenTitle, iconResId,
-                rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled);
+                rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled, key);
     }
 
     private void updateOneRow(SQLiteDatabase database, String locale,
@@ -717,7 +729,7 @@ public class Index {
             String updatedSwitchOff, String normalizedSwitchOff,
             String className, String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
-            boolean enabled) {
+            boolean enabled, String key) {
 
         if (TextUtils.isEmpty(updatedTitle)) {
             return;
@@ -746,8 +758,15 @@ public class Index {
         values.put(IndexColumns.INTENT_TARGET_CLASS, intentTargetClass);
         values.put(IndexColumns.ICON, iconResId);
         values.put(IndexColumns.ENABLED, enabled);
+        values.put(IndexColumns.DATA_KEY_REF, key);
 
         database.replaceOrThrow(Tables.TABLE_PREFS_INDEX, null, values);
+    }
+
+    private String getDataKey(Context context, AttributeSet attrs) {
+        return getData(context, attrs,
+                com.android.internal.R.styleable.Preference,
+                com.android.internal.R.styleable.Preference_key);
     }
 
     private String getDataTitle(Context context, AttributeSet attrs) {

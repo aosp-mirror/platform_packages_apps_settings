@@ -146,6 +146,11 @@ public class SettingsActivity extends Activity
     public static final String EXTRA_SHOW_FRAGMENT_ARGUMENTS = ":settings:show_fragment_args";
 
     /**
+     * Fragment "key" argument passed thru {@link #EXTRA_SHOW_FRAGMENT_ARGUMENTS}
+     */
+    public static final String EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key";
+
+    /**
      * When starting this activity, the invoking Intent can contain this extra
      * boolean that the header list should not be displayed.  This is most often
      * used in conjunction with {@link #EXTRA_SHOW_FRAGMENT} to launch
@@ -461,6 +466,7 @@ public class SettingsActivity extends Activity
                 final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
                 mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
                 setTitle(mInitialTitle);
+
                 switchToFragment( initialFragmentName, initialArguments, true, false,
                         mInitialTitle, false);
             } else {

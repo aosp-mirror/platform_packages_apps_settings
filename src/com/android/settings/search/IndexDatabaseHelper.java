@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 106;
+    private static final int DATABASE_VERSION = 107;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
@@ -58,6 +58,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         public static final String INTENT_TARGET_CLASS = "intent_target_class";
         public static final String ICON = "icon";
         public static final String ENABLED = "enabled";
+        public static final String DATA_KEY_REF = "data_key_reference";
     }
 
     public interface MetaColumns {
@@ -108,6 +109,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.INTENT_TARGET_CLASS +
                     ", " +
                     IndexColumns.ENABLED +
+                    ", " +
+                    IndexColumns.DATA_KEY_REF +
                     ");";
 
     private static final String CREATE_META_TABLE =
