@@ -740,8 +740,11 @@ public class SettingsActivity extends Activity
         String title;
         if (titleRes > 0) {
             title = getString(titleRes);
-        } else {
+        } else if (titleText != null) {
             title = titleText.toString();
+        } else {
+            // There not much we can do in that case
+            title = "";
         }
         startWithFragment(fragmentClass, args, resultTo, resultRequestCode, title);
     }
