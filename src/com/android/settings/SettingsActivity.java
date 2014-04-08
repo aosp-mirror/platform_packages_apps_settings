@@ -660,12 +660,6 @@ public class SettingsActivity extends Activity
                     header.getTitle(getResources()));
         } else if (header.intent != null) {
             startActivity(header.intent);
-        } else {
-            String title = header.getTitle(getResources()).toString();
-            Log.e(LOG_TAG, "Can't switch to header that has no Fragment nor Intent. Title: " +
-                            title + " Position: " + position);
-            throw new IllegalStateException(
-                    "Can't switch to header that has no Fragment nor Intent");
         }
     }
 
