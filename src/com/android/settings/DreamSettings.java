@@ -82,7 +82,8 @@ public class DreamSettings extends SettingsPreferenceFragment {
     public void onCreate(Bundle icicle) {
         logd("onCreate(%s)", icicle);
         super.onCreate(icicle);
-        Activity activity = getActivity();
+
+        final Activity activity = getActivity();
 
         mBackend = new DreamBackend(activity);
         mSwitch = new Switch(activity);
@@ -99,18 +100,28 @@ public class DreamSettings extends SettingsPreferenceFragment {
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mSwitch.setPaddingRelative(0, 0, padding, 0);
-        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END));
 
         setHasOptionsMenu(true);
     }
 
     @Override
+    public void onStart() {
+        logd("onStart()");
+        super.onStart();
+
+        final ActionBar actionBar = getActivity().getActionBar();
+
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(mSwitch, new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.END));
+    }
+
+    @Override
     public void onDestroyView() {
+        logd("onDestroyView()");
         getActivity().getActionBar().setCustomView(null);
         super.onDestroyView();
     }
@@ -121,7 +132,6 @@ public class DreamSettings extends SettingsPreferenceFragment {
         super.onActivityCreated(savedInstanceState);
 
         ListView listView = getListView();
-
         listView.setItemsCanFocus(true);
 
         TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
