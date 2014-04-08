@@ -17,27 +17,27 @@
 package com.android.settings.search;
 
 import android.provider.SearchIndexableResource;
+
 import com.android.settings.DataUsageSummary;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
-import com.android.settings.NotificationSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
 import com.android.settings.SecuritySettings;
 import com.android.settings.SoundSettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
-import com.android.settings.ZenModeSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.net.DataUsageMeteredSettings;
+import com.android.settings.notification.NotificationSettings;
+import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.WifiSettings;

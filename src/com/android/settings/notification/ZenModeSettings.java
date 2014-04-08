@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.notification;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.database.ContentObserver;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -28,6 +28,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -45,6 +46,9 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import com.android.settings.search.BaseSearchIndexProvider;
+
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 

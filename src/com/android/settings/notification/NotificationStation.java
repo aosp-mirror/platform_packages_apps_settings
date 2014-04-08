@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.notification;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.ComponentName;
-import android.service.notification.INotificationListener;
 import android.app.INotificationManager;
 import android.app.Notification;
-import android.service.notification.StatusBarNotification;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -37,6 +35,8 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.service.notification.INotificationListener;
+import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +47,9 @@ import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -1767,9 +1767,7 @@
     <!-- Sound settings screen, notification light repeat pulsing title -->
     <string name="notification_pulse_title">Pulse notification light</string>
     <!-- Display settings screen, notification popups are enabled [CHAR LIMIT=30] -->
-    <string name="heads_up_enabled_title">Heads Up Notifications</string>
-    <!-- Display settings screen, notification popups are explained [CHAR LIMIT=45]-->
-    <string name="heads_up_enabled_summary">Important notifications will pop up</string>
+    <string name="heads_up_enabled_title">Pop up if high priority</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the incoming call volume -->
     <string name="incoming_call_volume_title">Ringtone</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the notification volume -->
@@ -5027,38 +5025,31 @@
     <!-- Notifications on lockscreen -->
     <!-- Label for checkbox controlling the contents of notifications shown on
          the secure lockscreen [CHAR LIMIT=25] -->
-    <string name="lock_screen_notifications">Show when locked</string>
+    <string name="lock_screen_notifications">Show on lock screen</string>
     <!-- Summary for lock_screen_notifications: sensitive information will be
          hidden or redacted from notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_off">Sensitive notification contents will be hidden on the lock screen</string>
+    <string name="lock_screen_notifications_summary_off">Unless content is sensitive</string>
     <!-- Summary for lock_screen_notifications: all information will be
          shown in notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_on">All notification contents will be shown on the lock screen</string>
+    <string name="lock_screen_notifications_summary_on">All notifications</string>
 
-    <!-- [CHAR LIMIT=30] Sound settings screen, setting option name to change zen mode -->
-    <string name="title_zen_mode">Limited interruptions</string>
-    <!-- [CHAR LIMIT=30] Sound settings screen, description for configuring zen mode -->
-    <string name="configure_zen_mode_description">Configure limited interruptions</string>
+    <!-- [CHAR LIMIT=30] Notification settings screen, setting option name -->
+    <string name="title_zen_mode">Do not disturb</string>
+
     <!-- [CHAR LIMIT=30] Zen mode settings screen, activity title -->
-    <string name="zen_mode_settings_title">Limited Interruptions</string>
+    <string name="zen_mode_settings_title">Do not disturb</string>
 
     <!-- [CHAR LIMIT=20] Notifications settings header -->
     <string name="notification_settings">Notifications</string>
-
-    <!-- [CHAR LIMIT=20] Notifications settings: General section header -->
-    <string name="notification_settings_general">General</string>
-
-    <!-- [CHAR LIMIT=20] Notifications settings: Security section header -->
-    <string name="notification_settings_security">Security</string>
 
     <!-- [CHAR LIMIT=20] Notifications settings: Tweaks section header (eng
          builds only) -->
     <string name="notification_settings_tweaks">Tweaks</string>
 
     <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
-    <string name="notification_settings_apps">Apps</string>
+    <string name="notification_settings_apps_title">App notifications</string>
 
     <!-- [CHAR LIMIT=NONE] Content description for per-app notification
          settings button -->
@@ -5081,5 +5072,21 @@
     <!-- Text displayed when tag is not writable -->
     <string name="status_tag_not_writable">NFC tag is not writable. Please use a different tag.</string>
 
+    <!-- Option title for the default sound, context based on screen -->
+    <string name="default_sound">Default sound</string>
 
+    <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
+    <string name="loading_notification_apps">Loading apps...</string>
+
+    <!-- [CHAR LIMIT=40] Notification settings: App notifications screen title -->
+    <string name="app_notifications_title">App notifications</string>
+
+    <!-- [CHAR LIMIT=30] Notification settings: App notifications dialog show option -->
+    <string name="app_notifications_dialog_show">Show notifications</string>
+
+    <!-- [CHAR LIMIT=30] Notification settings: App notifications dialog priority option -->
+    <string name="app_notifications_dialog_priority">High priority</string>
+
+    <!-- [CHAR LIMIT=20] Notification settings: App notifications dialog dismiss button caption -->
+    <string name="app_notifications_dialog_done">Done</string>
 </resources>

@@ -19,67 +19,44 @@
         android:key="notification_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceCategory
-            android:key="category_general"
-            android:title="@string/notification_settings_general">
+    <com.android.settings.DefaultRingtonePreference
+            android:key="notification_sound"
+            android:title="@string/default_sound"
+            android:dialogTitle="@string/notification_sound_dialog_title"
+            android:persistent="false"
+            android:ringtoneType="notification" />
 
-        <com.android.settings.DefaultRingtonePreference
-                android:key="notification_sound"
-                android:title="@string/notification_sound_title"
-                android:dialogTitle="@string/notification_sound_dialog_title"
-                android:persistent="false"
-                android:ringtoneType="notification" />
+    <CheckBoxPreference
+            android:key="notification_pulse"
+            android:title="@string/notification_pulse_title"
+            android:persistent="false" />
 
-        <CheckBoxPreference
-                android:key="notification_pulse"
-                android:title="@string/notification_pulse_title"
-                android:persistent="false" />
+    <CheckBoxPreference
+            android:key="heads_up"
+            android:title="@string/heads_up_enabled_title"
+            android:persistent="false" />
 
-        <CheckBoxPreference
-                android:key="heads_up"
-                android:title="@string/heads_up_enabled_title"
-                android:summary="@string/heads_up_enabled_summary"
-                android:persistent="false" />
+    <CheckBoxPreference
+            android:key="toggle_lock_screen_notifications"
+            android:title="@string/lock_screen_notifications"
+            android:summaryOff="@string/lock_screen_notifications_summary_off"
+            android:summaryOn="@string/lock_screen_notifications_summary_on"
+            android:persistent="false" />
 
-        <PreferenceScreen
-                android:key="zen_mode"
-                android:title="@string/title_zen_mode"
-                android:fragment="com.android.settings.ZenModeSettings" />
+    <PreferenceScreen
+            android:key="configure"
+            android:title="@string/notification_settings_apps_title"
+            android:fragment="com.android.settings.notification.AppNotificationSettings" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="category_security"
-            android:title="@string/notification_settings_security">
-
-        <CheckBoxPreference
-                android:key="toggle_lock_screen_notifications"
-                android:title="@string/lock_screen_notifications"
-                android:summaryOff="@string/lock_screen_notifications_summary_off"
-                android:summaryOn="@string/lock_screen_notifications_summary_on"
-                android:persistent="false" />
-
-        <Preference
-                android:key="manage_notification_access"
-                android:title="@string/manage_notification_access"
-                android:persistent="false"
-                android:fragment="com.android.settings.NotificationAccessSettings"/>
-
-    </PreferenceCategory>
-
-<!--
-    <PreferenceCategory
-            android:key="category_tweaks"
-            android:title="@string/notification_settings_tweaks"/>
+    <PreferenceScreen
+            android:key="zen_mode"
+            android:title="@string/title_zen_mode"
+            android:fragment="com.android.settings.notification.ZenModeSettings" />
 
     <Preference
-            android:title="Coming soon"
-            />
--->
-
-    <PreferenceCategory
-            android:key="category_apps"
-            android:title="@string/notification_settings_apps">
-    </PreferenceCategory>
+            android:key="manage_notification_access"
+            android:title="@string/manage_notification_access"
+            android:persistent="false"
+            android:fragment="com.android.settings.notification.NotificationAccessSettings" />
 
 </PreferenceScreen>

@@ -14,57 +14,40 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
-import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.TwoStatePreference;
 import android.provider.Settings;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SoundSettings;
 
 public class NotificationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, OnPreferenceClickListener {
     private static final String TAG = "NotificationSettings";
 
-    private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
-            = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_NOTIFICATION_PREFERENCES);
-
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
-    private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
-    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "toggle_lock_screen_notifications";
-    private static final String KEY_HEADS_UP = "heads_up";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final String KEY_HEADS_UP = "heads_up";
+    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "toggle_lock_screen_notifications";
+    private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
 
-    private static final String KEY_SECURITY_CATEGORY = "category_security";
-    private static final String KEY_APPS_CATEGORY = "category_apps";
     private static final String KEY_TWEAKS_CATEGORY = "category_tweaks"; // power toys, eng only
 
     private static final int MSG_UPDATE_SOUND_SUMMARY = 2;
@@ -74,10 +57,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
     private Preference mNotificationSoundPreference;
     private Preference mNotificationAccess;
-    private CheckBoxPreference mLockscreenNotifications;
-    private CheckBoxPreference mHeadsUp;
-    private CheckBoxPreference mNotificationPulse;
-    private PreferenceGroup mAppsPreference;
+    private TwoStatePreference mLockscreenNotifications;
+    private TwoStatePreference mHeadsUp;
+    private TwoStatePreference mNotificationPulse;
 
     private final Runnable mRingtoneLookupRunnable = new Runnable() {
         @Override
@@ -104,80 +86,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         }
     };
 
-    private final ArrayList<AppNotificationInfo> mAppNotificationInfo
-            = new ArrayList<AppNotificationInfo>();
-    private final HashSet<String> mAppNotificationInfoPackages = new HashSet<String>();
-    private final Comparator<AppNotificationInfo> mAppComparator = new Comparator<AppNotificationInfo>() {
-        private final Collator sCollator = Collator.getInstance();
-        @Override
-        public int compare(AppNotificationInfo lhs, AppNotificationInfo rhs) {
-            return sCollator.compare(lhs.label, rhs.label);
-        }
-    };
-
-    private final Runnable mCollectAppsRunnable = new Runnable() {
-        @Override
-        public void run() {
-            synchronized (mAppNotificationInfo) {
-                mAppNotificationInfo.clear();
-                mAppNotificationInfoPackages.clear();
-
-                final PackageManager pm = getPackageManager();
-
-                final List<ResolveInfo> resolveInfos = pm.queryIntentActivities(APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
-                        PackageManager.MATCH_DEFAULT_ONLY);
-
-                for (ResolveInfo ri : resolveInfos) {
-                    final ActivityInfo activityInfo = ri.activityInfo;
-                    final ApplicationInfo appInfo = activityInfo.applicationInfo;
-                    if (mAppNotificationInfoPackages.contains(activityInfo.packageName)) {
-                        Log.v(TAG, "Ignoring duplicate notification preference activity ("
-                                + activityInfo.name + ") for package "
-                                + activityInfo.packageName);
-                        continue;
-                    }
-                    final AppNotificationInfo info = new AppNotificationInfo();
-                    mAppNotificationInfoPackages.add(activityInfo.packageName);
-
-                    info.label = appInfo.loadLabel(pm);
-                    info.icon = appInfo.loadIcon(pm);
-                    info.name = activityInfo.name;
-                    info.pkg = activityInfo.packageName;
-                    mAppNotificationInfo.add(info);
-                }
-
-                Collections.sort(mAppNotificationInfo, mAppComparator);
-                mHandler.post(mRefreshAppsListRunnable);
-            }
-        }
-    };
-
-    private final Runnable mRefreshAppsListRunnable = new Runnable() {
-        @Override
-        public void run() {
-            synchronized (mAppNotificationInfo) {
-                mAppsPreference.removeAll();
-                Preference p = getPreferenceScreen().findPreference(mAppsPreference.getKey());
-                final int N = mAppNotificationInfo.size();
-                if (N == 0 && p != null) {
-                    getPreferenceScreen().removePreference(p);
-                } else if (N > 0 && p == null) {
-                    getPreferenceScreen().addPreference(mAppsPreference);
-                }
-                for (int i = 0; i < N; i++) {
-                    final AppNotificationInfo info = mAppNotificationInfo.get(i);
-                    Preference pref = new AppNotificationPreference(mContext);
-                    pref.setTitle(info.label);
-                    pref.setIcon(info.icon);
-                    pref.setIntent(new Intent(Intent.ACTION_MAIN)
-                            .setClassName(info.pkg, info.name));
-                    mAppsPreference.addPreference(pref);
-                }
-            }
-        }
-    };
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,8 +97,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.notification_settings);
 
         final PreferenceScreen root = getPreferenceScreen();
-        final PreferenceGroup securityCategory = (PreferenceGroup)
-                root.findPreference(KEY_SECURITY_CATEGORY);
 
         PreferenceGroup tweaksCategory = (PreferenceGroup)
                 root.findPreference(KEY_TWEAKS_CATEGORY);
@@ -207,18 +113,16 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         refreshNotificationListeners();
 
         mLockscreenNotifications
-                = (CheckBoxPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
+                = (TwoStatePreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
         if (mLockscreenNotifications != null) {
             if (!getDeviceLockscreenNotificationsEnabled()) {
-                if (securityCategory != null) {
-                    securityCategory.removePreference(mLockscreenNotifications);
-                }
+                root.removePreference(mLockscreenNotifications);
             } else {
                 mLockscreenNotifications.setChecked(getLockscreenAllowPrivateNotifications());
             }
         }
 
-        mHeadsUp = (CheckBoxPreference) findPreference(KEY_HEADS_UP);
+        mHeadsUp = (TwoStatePreference) findPreference(KEY_HEADS_UP);
         if (mHeadsUp != null) {
             updateHeadsUpMode(resolver);
             mHeadsUp.setOnPreferenceChangeListener(this);
@@ -231,7 +135,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
                 }
             });
         }
-        mNotificationPulse = (CheckBoxPreference) findPreference(KEY_NOTIFICATION_PULSE);
+        mNotificationPulse = (TwoStatePreference) findPreference(KEY_NOTIFICATION_PULSE);
 
         if (mNotificationPulse != null
                 && getResources().getBoolean(
@@ -246,8 +150,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
-        mAppsPreference = (PreferenceGroup) root.findPreference(KEY_APPS_CATEGORY);
-        root.removePreference(mAppsPreference);
     }
 
     @Override
@@ -256,11 +158,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
         refreshNotificationListeners();
         lookupRingtoneNames();
-        loadAppsList();
-    }
-
-    private void loadAppsList() {
-        AsyncTask.execute(mCollectAppsRunnable);
     }
 
     @Override
@@ -330,14 +227,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
     private void refreshNotificationListeners() {
         if (mNotificationAccess != null) {
-            final PreferenceGroup securityCategory
-                    = (PreferenceGroup) getPreferenceScreen().findPreference(KEY_SECURITY_CATEGORY);
-
             final int total = NotificationAccessSettings.getListenersCount(mPM);
             if (total == 0) {
-                if (securityCategory != null) {
-                    securityCategory.removePreference(mNotificationAccess);
-                }
+                getPreferenceScreen().removePreference(mNotificationAccess);
             } else {
                 final int n = getNumEnabledNotificationListeners();
                 if (n == 0) {
@@ -356,57 +248,5 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
     private void lookupRingtoneNames() {
         new Thread(mRingtoneLookupRunnable).start();
-    }
-
-    // === Per-app notification settings row ==
-
-    private static class AppNotificationPreference extends Preference {
-        private Intent mIntent;
-
-        public AppNotificationPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-            super(context, attrs, defStyleAttr, defStyleRes);
-
-            setLayoutResource(R.layout.notification_app);
-        }
-
-        public AppNotificationPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-            this(context, attrs, defStyleAttr, 0);
-        }
-
-        public AppNotificationPreference(Context context, AttributeSet attrs) {
-            this(context, attrs, 0);
-        }
-
-        public AppNotificationPreference(Context context) {
-            this(context, null);
-        }
-
-        public void setIntent(Intent intent) {
-            mIntent = intent;
-        }
-
-        @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
-
-            ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
-            icon.setImageDrawable(getIcon());
-            TextView title = (TextView) view.findViewById(android.R.id.title);
-            title.setText(getTitle());
-            ImageView settingsButton = (ImageView) view.findViewById(android.R.id.button2);
-            settingsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getContext().startActivity(mIntent);
-                }
-            });
-        }
-    }
-
-    private static class AppNotificationInfo {
-        public Drawable icon;
-        public CharSequence label;
-        public String name;
-        public String pkg;
     }
 }

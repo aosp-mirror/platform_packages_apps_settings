@@ -18,67 +18,76 @@
     android:layout_height="wrap_content" >
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:id="@android:id/button1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/divider"
-        >
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toStartOf="@+id/settings_divider"
+        android:background="?android:attr/listChoiceBackgroundIndicator" >
 
         <ImageView
             android:id="@android:id/icon"
-            android:layout_width="@android:dimen/app_icon_size"
-            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_width="@dimen/notification_app_icon_size"
+            android:layout_height="@dimen/notification_app_icon_size"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginTop="10dp"
             android:contentDescription="@null"
-            android:maxHeight="@android:dimen/app_icon_size"
-            android:maxWidth="@android:dimen/app_icon_size"
-            android:scaleType="fitCenter" />
+            android:scaleType="center" />
+
+        <ImageView
+            android:id="@android:id/icon1"
+            android:layout_width="@dimen/notification_app_icon_badge_size"
+            android:layout_height="@dimen/notification_app_icon_badge_size"
+            android:layout_marginLeft="@dimen/notification_app_icon_badge_margin"
+            android:layout_marginTop="@dimen/notification_app_icon_badge_margin"
+            android:background="#bb8b0000"
+            android:contentDescription="@null" />
+
+        <ImageView
+            android:id="@android:id/icon2"
+            android:layout_width="@dimen/notification_app_icon_badge_size"
+            android:layout_height="@dimen/notification_app_icon_badge_size"
+            android:layout_alignBottom="@android:id/icon"
+            android:layout_alignEnd="@android:id/icon"
+            android:layout_marginBottom="@dimen/notification_app_icon_badge_margin"
+            android:layout_marginEnd="@dimen/notification_app_icon_badge_margin"
+            android:background="#bb006400"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@android:id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@android:id/button1"
             android:layout_toEndOf="@android:id/icon"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textAlignment="viewStart"
-            android:labelFor="@android:id/button2" />
-
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
-    <!-- Divider -->
-
-    <ImageView
-        android:id="@id/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <View
+        android:id="@+id/settings_divider"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/notification_app_settings_divider_height"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@android:id/button2"
-        android:contentDescription="@null"
-        android:src="@drawable/nav_divider" />
-
-    <!-- Settings icon -->
+        android:background="?android:attr/listDivider" />
 
     <ImageView
         android:id="@android:id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@android:id/widget_frame"
+        android:layout_width="@dimen/notification_app_icon_size"
+        android:layout_height="@dimen/notification_app_icon_size"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@android:id/widget_frame"
         android:layout_centerVertical="true"
-        android:layout_margin="0dip"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="?android:attr/listChoiceBackgroundIndicator"
         android:contentDescription="@string/notification_app_settings_button"
-        android:padding="8dip"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_bt_config" />
+        android:scaleType="center"
+        android:src="@drawable/ic_settings_generic" />
+
+    <View
+        android:id="@+id/row_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/listDivider" />
 
 </RelativeLayout>
