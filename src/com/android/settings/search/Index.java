@@ -49,6 +49,28 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_RANK;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_TITLE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_ON;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_OFF;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ENTRIES;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEYWORDS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SCREEN_TITLE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_CLASS_NAME;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ICON_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_ACTION;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_CLASS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEY;
+
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RANK;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_ACTION;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS;
+
 import static com.android.settings.search.IndexDatabaseHelper.Tables;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
 
@@ -309,15 +331,17 @@ public class Index {
             final int count = cursor.getCount();
             if (count > 0) {
                 while (cursor.moveToNext()) {
-                    final int rank = cursor.getInt(0);
-                    final int xmlResId = cursor.getInt(1);
+                    final int rank = cursor.getInt(COLUMN_INDEX_XML_RES_RANK);
+                    final int xmlResId = cursor.getInt(COLUMN_INDEX_XML_RES_RESID);
 
-                    final String className = cursor.getString(2);
-                    final int iconResId = cursor.getInt(3);
+                    final String className = cursor.getString(COLUMN_INDEX_XML_RES_CLASS_NAME);
+                    final int iconResId = cursor.getInt(COLUMN_INDEX_XML_RES_ICON_RESID);
 
-                    final String action = cursor.getString(4);
-                    final String targetPackage = cursor.getString(5);
-                    final String targetClass = cursor.getString(6);
+                    final String action = cursor.getString(COLUMN_INDEX_XML_RES_INTENT_ACTION);
+                    final String targetPackage = cursor.getString(
+                            COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE);
+                    final String targetClass = cursor.getString(
+                            COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS);
 
                     SearchIndexableResource sir = new SearchIndexableResource(packageContext);
                     sir.rank = rank;
@@ -353,23 +377,25 @@ public class Index {
             final int count = cursor.getCount();
             if (count > 0) {
                 while (cursor.moveToNext()) {
-                    final int rank = cursor.getInt(0);
-                    final String title = cursor.getString(1);
-                    final String summaryOn = cursor.getString(2);
-                    final String summaryOff = cursor.getString(3);
-                    final String entries = cursor.getString(4);
-                    final String keywords = cursor.getString(7);
+                    final int rank = cursor.getInt(COLUMN_INDEX_RAW_RANK);
+                    final String title = cursor.getString(COLUMN_INDEX_RAW_TITLE);
+                    final String summaryOn = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_ON);
+                    final String summaryOff = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_OFF);
+                    final String entries = cursor.getString(COLUMN_INDEX_RAW_ENTRIES);
+                    final String keywords = cursor.getString(COLUMN_INDEX_RAW_KEYWORDS);
 
-                    final String screenTitle = cursor.getString(8);
+                    final String screenTitle = cursor.getString(COLUMN_INDEX_RAW_SCREEN_TITLE);
 
-                    final String className = cursor.getString(9);
-                    final int iconResId = cursor.getInt(10);
+                    final String className = cursor.getString(COLUMN_INDEX_RAW_CLASS_NAME);
+                    final int iconResId = cursor.getInt(COLUMN_INDEX_RAW_ICON_RESID);
 
-                    final String action = cursor.getString(11);
-                    final String targetPackage = cursor.getString(12);
-                    final String targetClass = cursor.getString(13);
+                    final String action = cursor.getString(COLUMN_INDEX_RAW_INTENT_ACTION);
+                    final String targetPackage = cursor.getString(
+                            COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE);
+                    final String targetClass = cursor.getString(
+                            COLUMN_INDEX_RAW_INTENT_TARGET_CLASS);
 
-                    final String key = cursor.getString(15);
+                    final String key = cursor.getString(COLUMN_INDEX_RAW_KEY);
 
                     SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
                     data.rank = rank;
