@@ -32,8 +32,6 @@ public class SearchIndexableRaw extends SearchIndexableData {
     public String summaryOn;
     public String summaryOff;
     public String entries;
-    public String switchOn;
-    public String switchOff;
     public String keywords;
 
     public String screenTitle;
