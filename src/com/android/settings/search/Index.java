@@ -20,6 +20,8 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
@@ -221,12 +223,54 @@ public class Index {
         final int size = list.size();
         for (int n = 0; n < size; n++) {
             final ResolveInfo info = list.get(n);
+            if (!isWellKnownProvider(info)) {
+                continue;
+            }
             final String authority = info.providerInfo.authority;
             final String packageName = info.providerInfo.packageName;
             addIndexablesFromRemoteProvider(packageName, authority);
         }
 
         return updateInternal();
+    }
+
+    /**
+     * Only allow a "well known" SearchIndexablesProvider. The provider should:
+     *
+     * - have read/write {@link android.Manifest.permission#READ_SEARCH_INDEXABLES}
+     * - be from a privileged package
+     */
+    private boolean isWellKnownProvider(ResolveInfo info) {
+        final String authority = info.providerInfo.authority;
+        final String packageName = info.providerInfo.applicationInfo.packageName;
+
+        if (TextUtils.isEmpty(authority) || TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+
+        final String readPermission = info.providerInfo.readPermission;
+        final String writePermission = info.providerInfo.writePermission;
+
+        if (TextUtils.isEmpty(readPermission) || TextUtils.isEmpty(writePermission)) {
+            return false;
+        }
+
+        if (!android.Manifest.permission.READ_SEARCH_INDEXABLES.equals(readPermission) ||
+            !android.Manifest.permission.READ_SEARCH_INDEXABLES.equals(writePermission)) {
+            return false;
+        }
+
+        return isPrivilegedPackage(packageName);
+    }
+
+    private boolean isPrivilegedPackage(String packageName) {
+        final PackageManager pm = mContext.getPackageManager();
+        try {
+            PackageInfo packInfo = pm.getPackageInfo(packageName, 0);
+            return ((packInfo.applicationInfo.flags & ApplicationInfo.FLAG_PRIVILEGED) != 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     public boolean updateFromRemoteProvider(String packageName, String authority) {
