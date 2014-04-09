@@ -62,7 +62,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.print.PrintSettingsFragment.ToggleSwitch;
 import com.android.settings.print.PrintSettingsFragment.ToggleSwitch.OnBeforeCheckedChangeListener;
@@ -160,8 +159,14 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        setupActionBarToggleSwitch(getActivity(), mToggleSwitch);
+    }
+
+    @Override
     public void onDestroyView() {
-        getActivity().getActionBar().setCustomView(null);
+        removeActionBarToggleSwitch(getActivity());
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
@@ -289,7 +294,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mPrintersAdapter = new PrintersAdapter();
         mPrintersAdapter.registerDataSetObserver(mDataObserver);
 
-        mToggleSwitch = createAndAddActionBarToggleSwitch(getActivity());
+        mToggleSwitch = createActionBarToggleSwitch(getActivity());
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
@@ -440,18 +445,25 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 
-    private ToggleSwitch createAndAddActionBarToggleSwitch(Activity activity) {
+    private ToggleSwitch createActionBarToggleSwitch(Activity activity) {
         ToggleSwitch toggleSwitch = new ToggleSwitch(activity);
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         toggleSwitch.setPaddingRelative(0, 0, padding, 0);
+        return toggleSwitch;
+    }
+
+    private void setupActionBarToggleSwitch(Activity activity, ToggleSwitch toggleSwitch) {
         activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                 ActionBar.DISPLAY_SHOW_CUSTOM);
         activity.getActionBar().setCustomView(toggleSwitch,
                 new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT,
                         Gravity.CENTER_VERTICAL | Gravity.END));
-        return toggleSwitch;
+    }
+
+    private void removeActionBarToggleSwitch(Activity activity) {
+        activity.getActionBar().setCustomView(null);
     }
 
     private static abstract class SettingsContentObserver extends ContentObserver {
