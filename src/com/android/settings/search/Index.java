@@ -239,8 +239,9 @@ public class Index {
         return result;
     }
 
-    private boolean updateFromSearchIndexableData(SearchIndexableData data) {
+    public boolean updateFromSearchIndexableData(SearchIndexableData data) {
         addIndexableData(data);
+        mDataToProcess.forceUpdate = true;
         return updateInternal();
     }
 

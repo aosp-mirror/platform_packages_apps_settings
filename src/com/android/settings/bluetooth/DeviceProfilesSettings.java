@@ -38,6 +38,8 @@ import android.widget.Button;
 import android.text.Editable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.Index;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.HashMap;
 
@@ -230,6 +232,14 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         if (key.equals(KEY_UNPAIR)) {
             unpairDevice();
             finish();
+            final Context context = preference.getContext();
+
+            SearchIndexableRaw data = new SearchIndexableRaw(context);
+            data.title = mCachedDevice.getName();
+            data.screenTitle = context.getResources().getString(R.string.bluetooth_settings);
+            data.enabled = false;
+
+            Index.getInstance(context).updateFromSearchIndexableData(data);
             return true;
         }
 

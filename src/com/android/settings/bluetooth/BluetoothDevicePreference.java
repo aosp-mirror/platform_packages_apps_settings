@@ -35,6 +35,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settings.search.Index;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.List;
 
@@ -209,6 +211,15 @@ public final class BluetoothDevicePreference extends Preference implements
         if (!mCachedDevice.startPairing()) {
             Utils.showError(getContext(), mCachedDevice.getName(),
                     R.string.bluetooth_pairing_error_message);
+        } else {
+            final Context context = getContext();
+
+            SearchIndexableRaw data = new SearchIndexableRaw(context);
+            data.title = mCachedDevice.getName();
+            data.screenTitle = context.getResources().getString(R.string.bluetooth_settings);
+            data.enabled = true;
+
+            Index.getInstance(context).updateFromSearchIndexableData(data);
         }
     }
 
