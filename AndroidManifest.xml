@@ -128,7 +128,6 @@
         <!-- Top-level settings -->
 
         <activity android:name="Settings$WifiSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity=""
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -148,7 +147,6 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".wifi.WifiSettings"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity="com.android.settings"
                 android:label="@string/wifi_settings"
                 android:targetActivity="Settings$WifiSettingsActivity"
@@ -161,7 +159,6 @@
         </activity-alias>
 
         <activity android:name=".wifi.WifiPickerActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
             <intent-filter>
@@ -172,7 +169,6 @@
         </activity>
 
         <activity android:name=".wifi.WifiSetupActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:theme="@style/SetupWizardWifiTheme"
                 android:label="@string/wifi_setup_wizard_title"
                 android:icon="@drawable/empty_icon"
@@ -185,7 +181,6 @@
         </activity>
 
         <activity android:name=".wifi.WifiSettingsForSetupWizardXL"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:theme="@android:style/Theme.Holo.NoActionBar"
                 android:screenOrientation="behind"
                 android:clearTaskOnLaunch="true"
@@ -273,7 +268,6 @@
         </activity>
 
         <activity android:name="Settings$BluetoothSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/bluetooth_settings_title"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
@@ -292,7 +286,6 @@
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".bluetooth.BluetoothSettings"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/bluetooth_settings_title"
                 android:targetActivity="Settings$BluetoothSettingsActivity"
                 android:exported="true"
@@ -304,7 +297,6 @@
         </activity-alias>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
                 android:label="@string/device_picker"
                 android:clearTaskOnLaunch="true">
@@ -343,7 +335,6 @@
         </activity-alias>
 
         <activity android:name="Settings$WifiP2pSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
@@ -805,7 +796,6 @@
         -->
 
         <activity android:name="Settings$LocationSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
@@ -1616,7 +1606,6 @@
         </activity>
 
         <activity android:name="Settings$DreamSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/screensaver_settings_title"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
@@ -1633,7 +1622,6 @@
         </activity>
 
         <activity android:name="Settings$UserSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/user_settings_title"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
@@ -1649,7 +1637,6 @@
         </activity>
 
         <activity android:name="Settings$PaymentSettingsActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/nfc_payment_settings_title"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
