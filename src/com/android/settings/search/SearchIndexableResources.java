@@ -17,6 +17,7 @@
 package com.android.settings.search;
 
 import android.provider.SearchIndexableResource;
+import com.android.settings.DataUsageSummary;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -87,10 +88,10 @@ public final class SearchIndexableResources {
                         BluetoothSettings.class.getName(),
                         R.drawable.ic_settings_bluetooth2));
 
-        sResMap.put(DataUsageMeteredSettings.class.getName(),
+        sResMap.put(DataUsageSummary.class.getName(),
                 new SearchIndexableResource(RANK_DATA_USAGE,
-                        R.xml.data_usage_metered_prefs,
-                        DataUsageMeteredSettings.class.getName(),
+                        NO_DATA_RES_ID,
+                        DataUsageSummary.class.getName(),
                         R.drawable.ic_settings_data_usage));
 
         sResMap.put(WirelessSettings.class.getName(),
