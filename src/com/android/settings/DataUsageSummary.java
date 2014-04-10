@@ -53,7 +53,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
@@ -692,7 +691,6 @@ public class DataUsageSummary extends Fragment {
             mListView.setVisibility(View.VISIBLE);
         }
 
-        final boolean tabChanged = !currentTab.equals(mCurrentTab);
         mCurrentTab = currentTab;
 
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
@@ -700,7 +698,6 @@ public class DataUsageSummary extends Fragment {
         mDataEnabledView.setVisibility(isOwner ? View.VISIBLE : View.GONE);
 
         // TODO: remove mobile tabs when SIM isn't ready
-        final TelephonyManager tele = TelephonyManager.from(context);
 
         if (TAB_MOBILE.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
