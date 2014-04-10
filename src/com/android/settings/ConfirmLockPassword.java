@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.os.storage.StorageManager;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -168,6 +169,9 @@ public class ConfirmLockPassword extends SettingsActivity {
             if (mLockPatternUtils.checkPassword(pin)) {
 
                 Intent intent = new Intent();
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
+                                         : StorageManager.CRYPT_TYPE_PIN);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
 
                 getActivity().setResult(RESULT_OK, intent);

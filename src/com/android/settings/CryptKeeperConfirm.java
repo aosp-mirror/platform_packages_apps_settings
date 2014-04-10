@@ -72,7 +72,7 @@ public class CryptKeeperConfirm extends Fragment {
                     IMountService mountService = IMountService.Stub.asInterface(service);
                     try {
                         Bundle args = getIntent().getExtras();
-                        mountService.encryptStorage(args.getString("password"));
+                        mountService.encryptStorage(args.getInt("type", -1), args.getString("password"));
                     } catch (Exception e) {
                         Log.e("CryptKeeper", "Error while encrypting...", e);
                     }
