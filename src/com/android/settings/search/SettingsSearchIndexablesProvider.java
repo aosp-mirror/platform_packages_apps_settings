@@ -23,6 +23,14 @@ import android.provider.SearchIndexablesProvider;
 
 import java.util.Collection;
 
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RANK;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_ACTION;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS;
+
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 
@@ -40,13 +48,13 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         Collection<SearchIndexableResource> values = SearchIndexableResources.values();
         for (SearchIndexableResource val : values) {
             Object[] ref = new Object[7];
-            ref[0] = val.rank;
-            ref[1] = val.xmlResId;
-            ref[2] = val.className;
-            ref[3] = val.iconResId;
-            ref[4] = null; // intent action
-            ref[5] = null; // intent target package
-            ref[6] = null; // intent target class
+            ref[COLUMN_INDEX_XML_RES_RANK] = val.rank;
+            ref[COLUMN_INDEX_XML_RES_RESID] = val.xmlResId;
+            ref[COLUMN_INDEX_XML_RES_CLASS_NAME] = val.className;
+            ref[COLUMN_INDEX_XML_RES_ICON_RESID] = val.iconResId;
+            ref[COLUMN_INDEX_XML_RES_INTENT_ACTION] = null; // intent action
+            ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE] = null; // intent target package
+            ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS] = null; // intent target class
             cursor.addRow(ref);
         }
         return cursor;
