@@ -86,6 +86,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.Preference;
+import android.provider.SearchIndexableResource;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -133,6 +134,8 @@ import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.net.UidDetail;
 import com.android.settings.net.UidDetailProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.PieChartView;
@@ -149,7 +152,7 @@ import java.util.Locale;
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
  */
-public class DataUsageSummary extends Fragment {
+public class DataUsageSummary extends Fragment implements Indexable {
     private static final String TAG = "DataUsage";
     private static final boolean LOGD = false;
 
@@ -2380,4 +2383,51 @@ public class DataUsageSummary extends Fragment {
         summary.setVisibility(View.VISIBLE);
         summary.setText(string);
     }
+
+    /**
+     * For search
+     */
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new SearchIndexProvider() {
+
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
+                return null;
+            }
+
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+
+                final Resources res = context.getResources();
+
+                // Add fragment title
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_summary_title);
+                data.screenTitle = res.getString(R.string.data_usage_summary_title);
+                result.add(data);
+
+                // Mobile data
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_enable_mobile);
+                data.screenTitle = res.getString(R.string.data_usage_summary_title);
+                result.add(data);
+
+                // Set mobile data limit
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_disable_mobile_limit);
+                data.screenTitle = res.getString(R.string.data_usage_summary_title);
+                result.add(data);
+
+                // Data usage cycke
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_cycle);
+                data.screenTitle = res.getString(R.string.data_usage_summary_title);
+                result.add(data);
+
+                return result;
+            }
+        };
+
 }
