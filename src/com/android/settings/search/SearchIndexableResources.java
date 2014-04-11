@@ -47,7 +47,7 @@ import java.util.HashMap;
 
 public final class SearchIndexableResources {
 
-    private static int NO_DATA_RES_ID = 0;
+    public static int NO_DATA_RES_ID = 0;
 
     private static final int RANK_WIFI = 1;
     private static final int RANK_BT = 2;
