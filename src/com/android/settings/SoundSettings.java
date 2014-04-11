@@ -47,11 +47,14 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SoundSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "SoundSettings";
 
     private static final int DIALOG_NOT_DOCKED = 1;
@@ -446,5 +449,23 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         ab.setPositiveButton(android.R.string.ok, null);
         return ab.create();
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final List<String> keys = new ArrayList<String>();
+
+                int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
+
+                if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
+                    // device is not CDMA, do not display CDMA emergency_tone
+                    keys.add(KEY_EMERGENCY_TONE);
+                }
+
+                return keys;
+            }
+        };
+
 }
 

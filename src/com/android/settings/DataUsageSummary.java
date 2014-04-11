@@ -86,7 +86,6 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.Preference;
-import android.provider.SearchIndexableResource;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -134,6 +133,7 @@ import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.net.SummaryForAllUidLoader;
 import com.android.settings.net.UidDetail;
 import com.android.settings.net.UidDetailProvider;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.ChartDataUsageView;
@@ -2388,14 +2388,7 @@ public class DataUsageSummary extends Fragment implements Indexable {
      * For search
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new SearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                return null;
-            }
-
+        new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();

@@ -52,6 +52,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.google.android.collect.Lists;
@@ -432,14 +433,7 @@ public class Memory extends SettingsPreferenceFragment implements Indexable{
      * Enable indexing of searchable data
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new SearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                return null;
-            }
-
+        new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();

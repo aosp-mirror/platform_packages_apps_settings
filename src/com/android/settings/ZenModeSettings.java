@@ -28,7 +28,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -45,6 +44,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
@@ -292,14 +292,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
     // Enable indexing of searchable data
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new Indexable.SearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                return null;
-            }
-
+        new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();

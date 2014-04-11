@@ -32,7 +32,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -44,6 +43,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
@@ -418,14 +418,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new SearchIndexProvider() {
-
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                    Context context, boolean enabled) {
-                return null;
-            }
-
+        new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
 
