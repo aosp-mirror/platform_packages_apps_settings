@@ -751,8 +751,13 @@ public class Index {
                     continue;
                 }
 
+                final int itemIconResId = (item.iconResId == 0) ? iconResId : item.iconResId;
+                final int itemRank = (item.rank == 0) ? rank : item.rank;
+                String itemClassName = (TextUtils.isEmpty(item.className))
+                        ? className : item.className;
+
                 indexFromResource(context, database, localeStr,
-                        item.xmlResId, item.className, item.iconResId, item.rank,
+                        item.xmlResId, itemClassName, itemIconResId, itemRank,
                         item.intentAction, item.intentTargetPackage,
                         item.intentTargetClass, doNotIndexKeys);
             }
