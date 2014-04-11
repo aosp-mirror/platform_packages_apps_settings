@@ -530,7 +530,7 @@ public class Index {
 
     private void indexOneResource(SQLiteDatabase database, String localeStr,
                                   SearchIndexableResource sir) {
-        if (sir.xmlResId > 0) {
+        if (sir.xmlResId > SearchIndexableResources.NO_DATA_RES_ID) {
             indexFromResource(sir.context, database, localeStr,
                     sir.xmlResId, sir.className, sir.iconResId, sir.rank,
                     sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass);
@@ -646,71 +646,79 @@ public class Index {
                 raw.key);
     }
 
-    private void indexFromLocalProvider(SQLiteDatabase database, String localeStr,
-                                        SearchIndexableResource sir) {
+    private Indexable.SearchIndexProvider getSearchIndexProvider(String className) {
         try {
-            final Class<?> clazz = Class.forName(sir.className);
+            final Class<?> clazz = Class.forName(className);
             if (Indexable.class.isAssignableFrom(clazz)) {
                 final Field f = clazz.getField(FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
-                final Indexable.SearchIndexProvider provider =
-                        (Indexable.SearchIndexProvider) f.get(null);
-
-                final List<SearchIndexableRaw> rawList =
-                        provider.getRawDataToIndex(sir.context, sir.enabled);
-                if (rawList != null) {
-                    final int rawSize = rawList.size();
-                    for (int i = 0; i < rawSize; i++) {
-                        SearchIndexableRaw raw = rawList.get(i);
-
-                        // Should be the same locale as the one we are processing
-                        if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
-                            continue;
-                        }
-
-                        updateOneRowWithFilteredData(database, localeStr,
-                                raw.title,
-                                raw.summaryOn,
-                                raw.summaryOff,
-                                raw.entries,
-                                sir.className,
-                                raw.screenTitle,
-                                sir.iconResId,
-                                sir.rank,
-                                raw.keywords,
-                                raw.intentAction,
-                                raw.intentTargetPackage,
-                                raw.intentTargetClass,
-                                raw.enabled,
-                                raw.key);
-                    }
-                }
-
-                final List<SearchIndexableResource> resList =
-                        provider.getXmlResourcesToIndex(sir.context, sir.enabled);
-                if (resList != null) {
-                    final int resSize = resList.size();
-                    for (int i = 0; i < resSize; i++) {
-                        SearchIndexableResource item = resList.get(i);
-
-                        // Should be the same locale as the one we are processing
-                        if (!item.locale.toString().equalsIgnoreCase(localeStr)) {
-                            continue;
-                        }
-
-                        indexFromResource(sir.context, database, localeStr,
-                                item.xmlResId, item.className, item.iconResId, item.rank,
-                                item.intentAction, item.intentTargetPackage,
-                                item.intentTargetClass);
-                    }
-                }
+                return (Indexable.SearchIndexProvider) f.get(null);
             }
         } catch (ClassNotFoundException e) {
-            Log.e(LOG_TAG, "Cannot find class: " + sir.className, e);
+            Log.e(LOG_TAG, "Cannot find class: " + className, e);
         } catch (NoSuchFieldException e) {
             Log.e(LOG_TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
         } catch (IllegalAccessException e) {
             Log.e(LOG_TAG,
                     "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
+        }
+        return null;
+    }
+
+    private void indexFromLocalProvider(SQLiteDatabase database, String localeStr,
+                                        SearchIndexableResource sir) {
+        final Indexable.SearchIndexProvider provider = getSearchIndexProvider(sir.className);
+        if (provider == null) {
+            Log.w(LOG_TAG, "Cannot find provider: " + sir.className);
+            return;
+        }
+
+        final List<SearchIndexableRaw> rawList =
+                provider.getRawDataToIndex(sir.context, sir.enabled);
+        if (rawList != null) {
+            final int rawSize = rawList.size();
+            for (int i = 0; i < rawSize; i++) {
+                SearchIndexableRaw raw = rawList.get(i);
+
+                // Should be the same locale as the one we are processing
+                if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+                    continue;
+                }
+
+                updateOneRowWithFilteredData(database, localeStr,
+                        raw.title,
+                        raw.summaryOn,
+                        raw.summaryOff,
+                        raw.entries,
+                        sir.className,
+                        raw.screenTitle,
+                        sir.iconResId,
+                        sir.rank,
+                        raw.keywords,
+                        raw.intentAction,
+                        raw.intentTargetPackage,
+                        raw.intentTargetClass,
+                        raw.enabled,
+                        raw.key);
+            }
+        }
+
+        final List<SearchIndexableResource> resList =
+                provider.getXmlResourcesToIndex(sir.context, sir.enabled);
+        if (resList != null) {
+            final int resSize = resList.size();
+            for (int i = 0; i < resSize; i++) {
+                SearchIndexableResource item = resList.get(i);
+
+                // Should be the same locale as the one we are processing
+                if (!item.locale.toString().equalsIgnoreCase(localeStr)) {
+                    continue;
+                }
+
+                indexFromResource(sir.context, database, localeStr,
+                        item.xmlResId, item.className, item.iconResId, item.rank,
+                        item.intentAction, item.intentTargetPackage,
+                        item.intentTargetClass);
+            }
         }
     }
 
