@@ -40,6 +40,7 @@ import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
 import android.printservice.PrintServiceInfo;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -49,6 +50,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -56,6 +58,9 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -64,7 +69,8 @@ import java.util.List;
 /**
  * Fragment with the top level print settings.
  */
-public class PrintSettingsFragment extends SettingsPreferenceFragment implements DialogCreatable {
+public class PrintSettingsFragment extends SettingsPreferenceFragment
+        implements DialogCreatable, Indexable {
 
     static final char ENABLED_PRINT_SERVICES_SEPARATOR = ':';
 
@@ -119,7 +125,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
 
         mActivePrintJobsCategory = (PreferenceCategory) findPreference(
                 PRINT_JOBS_CATEGORY);
-        mPrintServicesCategory= (PreferenceCategory) findPreference(
+        mPrintServicesCategory = (PreferenceCategory) findPreference(
                 PRINT_SERVICES_CATEGORY);
         getPreferenceScreen().removePreference(mActivePrintJobsCategory);
 
@@ -153,7 +159,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
         if (!TextUtils.isEmpty(searchUri)) {
             MenuItem menuItem = menu.add(R.string.print_menu_item_add_service);
             menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            menuItem.setIntent(new Intent(Intent.ACTION_VIEW,Uri.parse(searchUri)));
+            menuItem.setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri)));
         }
     }
 
@@ -162,7 +168,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
         super.onViewCreated(view, savedInstanceState);
         ViewGroup contentRoot = (ViewGroup) getListView().getParent();
         View emptyView = getActivity().getLayoutInflater().inflate(
-                    R.layout.empty_print_state, contentRoot, false);
+                R.layout.empty_print_state, contentRoot, false);
         TextView textView = (TextView) emptyView.findViewById(R.id.message);
         textView.setText(R.string.print_no_services_installed);
         contentRoot.addView(emptyView);
@@ -272,7 +278,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
     private class SettingsPackageMonitor extends PackageMonitor {
         @Override
         public void onPackageAdded(String packageName, int uid) {
-           mHandler.obtainMessage().sendToTarget();
+            mHandler.obtainMessage().sendToTarget();
         }
 
         @Override
@@ -443,7 +449,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
 
         private static final boolean DEBUG = false;
 
-        private List <PrintJobInfo> mPrintJobs = new ArrayList<PrintJobInfo>();
+        private List<PrintJobInfo> mPrintJobs = new ArrayList<PrintJobInfo>();
 
         private final PrintManager mPrintManager;
 
@@ -453,7 +459,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
             super(context);
             mPrintManager = ((PrintManager) context.getSystemService(
                     Context.PRINT_SERVICE)).getGlobalPrintManagerForUser(
-                            ActivityManager.getCurrentUser());
+                        ActivityManager.getCurrentUser());
         }
 
         @Override
@@ -544,4 +550,43 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment implements
             return false;
         }
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
+
+            PackageManager packageManager = context.getPackageManager();
+            PrintManager printManager = (PrintManager) context.getSystemService(
+                    Context.PRINT_SERVICE);
+
+            String screenTitle = context.getResources().getString(R.string.print_settings_title);
+
+            // Indexing all services, reagardles if enabled.
+            List<PrintServiceInfo> services = printManager.getInstalledPrintServices();
+            final int serviceCount = services.size();
+            for (int i = 0; i < serviceCount; i++) {
+                PrintServiceInfo service = services.get(i);
+                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
+                indexable.summaryOn = context.getString(R.string.print_feature_state_on);
+                indexable.summaryOff = context.getString(R.string.print_feature_state_off);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            return indexables;
+        }
+
+        @Override
+        public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                boolean enabled) {
+            List<SearchIndexableResource> indexables = new ArrayList<SearchIndexableResource>();
+            SearchIndexableResource indexable = new SearchIndexableResource(context);
+            indexable.xmlResId = R.xml.print_settings;
+            indexables.add(indexable);
+            return indexables;
+        }
+    };
 }
