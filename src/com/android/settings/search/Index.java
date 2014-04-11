@@ -46,6 +46,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -135,6 +136,8 @@ public class Index {
     private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
     private static final String NODE_NAME_LIST_PREFERENCE = "ListPreference";
+
+    private static final List<String> EMPTY_LIST = Collections.<String>emptyList();
 
     private static Index sInstance;
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
@@ -530,19 +533,35 @@ public class Index {
 
     private void indexOneResource(SQLiteDatabase database, String localeStr,
                                   SearchIndexableResource sir) {
+
+        if (sir == null) {
+            Log.e(LOG_TAG, "Cannot index a null resource!");
+            return;
+        }
+
+        // Will be non null only for a Local provider
+        final Indexable.SearchIndexProvider provider =
+                TextUtils.isEmpty(sir.className) ? null : getSearchIndexProvider(sir.className);
+
         if (sir.xmlResId > SearchIndexableResources.NO_DATA_RES_ID) {
+            List<String> doNotIndexKeys = EMPTY_LIST;
+            if (provider != null) {
+                doNotIndexKeys = provider.getNonIndexableKeys(sir.context);
+            }
             indexFromResource(sir.context, database, localeStr,
                     sir.xmlResId, sir.className, sir.iconResId, sir.rank,
-                    sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass);
+                    sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass,
+                    doNotIndexKeys);
         } else if (!TextUtils.isEmpty(sir.className)) {
-            sir.context = mContext;
-            indexFromLocalProvider(database, localeStr, sir);
+            indexFromLocalProvider(mContext, database, localeStr, provider, sir.className,
+                    sir.iconResId, sir.rank, sir.enabled);
         }
     }
 
     private void indexFromResource(Context context, SQLiteDatabase database, String localeStr,
-            int xmlResId, String fragmentName, int iconResId, int rank,
-            String intentAction, String intentTargetPackage, String intentTargetClass) {
+           int xmlResId, String fragmentName, int iconResId, int rank,
+           String intentAction, String intentTargetPackage, String intentTargetClass,
+           List<String> doNotIndexKeys) {
 
         XmlResourceParser parser = null;
         try {
@@ -563,18 +582,26 @@ public class Index {
 
             final int outerDepth = parser.getDepth();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
+
             final String screenTitle = getDataTitle(context, attrs);
 
-            String title = getDataTitle(context, attrs);
-            String summary = getDataSummary(context, attrs);
-            String keywords = getDataKeywords(context, attrs);
             String key = getDataKey(context, attrs);
+
+            String title;
+            String summary;
+            String keywords;
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
-            updateOneRowWithFilteredData(database, localeStr, title, summary, null, null,
-                    fragmentName, screenTitle, iconResId, rank,
-                    keywords, intentAction, intentTargetPackage, intentTargetClass, true, key);
+            if (!doNotIndexKeys.contains(key)) {
+                title = getDataTitle(context, attrs);
+                summary = getDataSummary(context, attrs);
+                keywords = getDataKeywords(context, attrs);
+
+                updateOneRowWithFilteredData(database, localeStr, title, summary, null, null,
+                        fragmentName, screenTitle, iconResId, rank,
+                        keywords, intentAction, intentTargetPackage, intentTargetClass, true, key);
+            }
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
@@ -584,9 +611,13 @@ public class Index {
 
                 nodeName = parser.getName();
 
+                key = getDataKey(context, attrs);
+                if (doNotIndexKeys.contains(key)) {
+                    continue;
+                }
+
                 title = getDataTitle(context, attrs);
                 keywords = getDataKeywords(context, attrs);
-                key = getDataKey(context, attrs);
 
                 if (!nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
                     summary = getDataSummary(context, attrs);
@@ -664,16 +695,18 @@ public class Index {
         return null;
     }
 
-    private void indexFromLocalProvider(SQLiteDatabase database, String localeStr,
-                                        SearchIndexableResource sir) {
-        final Indexable.SearchIndexProvider provider = getSearchIndexProvider(sir.className);
+    private void indexFromLocalProvider(Context context, SQLiteDatabase database, String localeStr,
+                Indexable.SearchIndexProvider provider, String className, int iconResId, int rank,
+                boolean enabled) {
+
         if (provider == null) {
-            Log.w(LOG_TAG, "Cannot find provider: " + sir.className);
+            Log.w(LOG_TAG, "Cannot find provider: " + className);
             return;
         }
 
-        final List<SearchIndexableRaw> rawList =
-                provider.getRawDataToIndex(sir.context, sir.enabled);
+        final List<String> doNotIndexKeys = provider.getNonIndexableKeys(context);
+        final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(context, enabled);
+
         if (rawList != null) {
             final int rawSize = rawList.size();
             for (int i = 0; i < rawSize; i++) {
@@ -684,15 +717,19 @@ public class Index {
                     continue;
                 }
 
+                if (doNotIndexKeys.contains(raw.key)) {
+                    continue;
+                }
+
                 updateOneRowWithFilteredData(database, localeStr,
                         raw.title,
                         raw.summaryOn,
                         raw.summaryOff,
                         raw.entries,
-                        sir.className,
+                        className,
                         raw.screenTitle,
-                        sir.iconResId,
-                        sir.rank,
+                        iconResId,
+                        rank,
                         raw.keywords,
                         raw.intentAction,
                         raw.intentTargetPackage,
@@ -703,7 +740,7 @@ public class Index {
         }
 
         final List<SearchIndexableResource> resList =
-                provider.getXmlResourcesToIndex(sir.context, sir.enabled);
+                provider.getXmlResourcesToIndex(context, enabled);
         if (resList != null) {
             final int resSize = resList.size();
             for (int i = 0; i < resSize; i++) {
@@ -714,10 +751,10 @@ public class Index {
                     continue;
                 }
 
-                indexFromResource(sir.context, database, localeStr,
+                indexFromResource(context, database, localeStr,
                         item.xmlResId, item.className, item.iconResId, item.rank,
                         item.intentAction, item.intentTargetPackage,
-                        item.intentTargetClass);
+                        item.intentTargetClass, doNotIndexKeys);
             }
         }
     }

@@ -57,5 +57,13 @@ public interface Indexable {
          * @return a list of {@link SearchIndexableRaw} references. Can be null.
          */
         List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled);
+
+        /**
+         * Return a list of data keys that cannot be indexed. See {@link SearchIndexableRaw}
+         *
+         * @param context the context.
+         * @return a list of {@link SearchIndexableRaw} references. Can be null.
+         */
+        List<String> getNonIndexableKeys(Context context);
     }
 }
