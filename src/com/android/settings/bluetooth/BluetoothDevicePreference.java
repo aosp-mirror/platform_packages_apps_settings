@@ -215,8 +215,10 @@ public final class BluetoothDevicePreference extends Preference implements
             final Context context = getContext();
 
             SearchIndexableRaw data = new SearchIndexableRaw(context);
+            data.className = BluetoothSettings.class.getName();
             data.title = mCachedDevice.getName();
             data.screenTitle = context.getResources().getString(R.string.bluetooth_settings);
+            data.iconResId = R.drawable.ic_settings_bluetooth2;
             data.enabled = true;
 
             Index.getInstance(context).updateFromSearchIndexableData(data);
