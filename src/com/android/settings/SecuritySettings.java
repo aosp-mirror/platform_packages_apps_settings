@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.nfc.NfcUnlock;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -39,21 +40,27 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.android.settings.search.SearchIndexableResources.RANK_SECURITY;
 
 /**
  * Gesture lock pattern settings.
  */
 public class SecuritySettings extends RestrictedSettingsFragment
-        implements OnPreferenceChangeListener, DialogInterface.OnClickListener {
+        implements OnPreferenceChangeListener, DialogInterface.OnClickListener, Indexable {
     static final String TAG = "SecuritySettings";
 
     // Lock Settings
@@ -86,7 +93,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
-    private PackageManager mPM;
     private DevicePolicyManager mDPM;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -119,38 +125,30 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
         mLockPatternUtils = new LockPatternUtils(getActivity());
 
-        mPM = getActivity().getPackageManager();
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
     }
 
-    private PreferenceScreen createPreferenceHierarchy() {
-        PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
-        addPreferencesFromResource(R.xml.security_settings);
-        root = getPreferenceScreen();
-
-        // Add options for lock/unlock screen
+    private static int getResIdForLockUnlockScreen(Context context,
+            LockPatternUtils lockPatternUtils) {
         int resid = 0;
-        if (!mLockPatternUtils.isSecure()) {
+        if (!lockPatternUtils.isSecure()) {
             // if there are multiple users, disable "None" setting
-            UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+            UserManager mUm = (UserManager) context. getSystemService(Context.USER_SERVICE);
             List<UserInfo> users = mUm.getUsers(true);
             final boolean singleUser = users.size() == 1;
 
-            if (singleUser && mLockPatternUtils.isLockScreenDisabled()) {
+            if (singleUser && lockPatternUtils.isLockScreenDisabled()) {
                 resid = R.xml.security_settings_lockscreen;
             } else {
                 resid = R.xml.security_settings_chooser;
             }
-        } else if (mLockPatternUtils.usingBiometricWeak() &&
-                mLockPatternUtils.isBiometricWeakInstalled()) {
+        } else if (lockPatternUtils.usingBiometricWeak() &&
+                lockPatternUtils.isBiometricWeakInstalled()) {
             resid = R.xml.security_settings_biometric_weak;
         } else {
-            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+            switch (lockPatternUtils.getKeyguardStoredPasswordQuality()) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     resid = R.xml.security_settings_pattern;
                     break;
@@ -164,8 +162,26 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     break;
             }
         }
-        addPreferencesFromResource(resid);
+        return resid;
+    }
 
+    /**
+     * Important!
+     *
+     * Dont forget to update the SecuritySearchIndexProvider if you are doing any change in the
+     * logic or adding/removing preferences here.
+     */
+    private PreferenceScreen createPreferenceHierarchy() {
+        PreferenceScreen root = getPreferenceScreen();
+        if (root != null) {
+            root.removeAll();
+        }
+        addPreferencesFromResource(R.xml.security_settings);
+        root = getPreferenceScreen();
+
+        // Add options for lock/unlock screen
+        final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils);
+        addPreferencesFromResource(resid);
 
         // Add options for device encryption
         mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
@@ -619,4 +635,155 @@ public class SecuritySettings extends RestrictedSettingsFragment
         intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
         startActivity(intent);
     }
+
+    /**
+     * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
+     */
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new SecuritySearchIndexProvider();
+
+    static private class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
+
+        boolean mIsPrimary;
+
+        public SecuritySearchIndexProvider() {
+            super();
+
+            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+        }
+
+        @Override
+        public List<SearchIndexableResource> getXmlResourcesToIndex(
+                Context context, boolean enabled) {
+
+            List<SearchIndexableResource> result = new ArrayList<SearchIndexableResource>();
+
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            // Add options for lock/unlock screen
+            int resId = getResIdForLockUnlockScreen(context, lockPatternUtils);
+
+            SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = resId;
+            result.add(sir);
+
+            if (mIsPrimary) {
+                DevicePolicyManager dpm = (DevicePolicyManager)
+                        context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+                switch (dpm.getStorageEncryptionStatus()) {
+                    case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
+                        // The device is currently encrypted.
+                        resId = R.xml.security_settings_encrypted;
+                        break;
+                    case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
+                        // This device supports encryption but isn't encrypted.
+                        resId = R.xml.security_settings_unencrypted;
+                        break;
+                }
+
+                sir = new SearchIndexableResource(context);
+                sir.xmlResId = resId;
+                result.add(sir);
+            }
+
+            // Append the rest of the settings
+            sir = new SearchIndexableResource(context);
+            sir.xmlResId = R.xml.security_settings_misc;
+            result.add(sir);
+
+            return result;
+        }
+
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+            final Resources res = context.getResources();
+
+            final String screenTitle = res.getString(R.string.security_settings_title);
+
+            SearchIndexableRaw data;
+
+            if (!mIsPrimary) {
+                int resId = (UserManager.get(context).isLinkedUser()) ?
+                        R.string.profile_info_settings_title : R.string.user_info_settings_title;
+
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(resId);
+                data.screenTitle = screenTitle;
+                result.add(data);
+            }
+
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+
+            if (!ActivityManager.isLowRamDeviceStatic()
+                    && !lockPatternUtils.isLockScreenDisabled()) {
+                DevicePolicyManager dpm = (DevicePolicyManager)
+                        context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+
+                final boolean disabled = (0 != (dpm.getKeyguardDisabledFeatures(null)
+                        & DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL));
+
+                if (disabled) {
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.security_enable_widgets_disabled_summary);
+                    data.screenTitle = screenTitle;
+                    result.add(data);
+                }
+            }
+
+            // Credential storage
+            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+
+            if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+                KeyStore keyStore = KeyStore.getInstance();
+
+                final int storageSummaryRes = keyStore.isHardwareBacked() ?
+                        R.string.credential_storage_type_hardware :
+                        R.string.credential_storage_type_software;
+
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(storageSummaryRes);
+                data.screenTitle = screenTitle;
+                result.add(data);
+            }
+
+            return result;
+        }
+
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            final List<String> keys = new ArrayList<String>();
+
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            // Add options for lock/unlock screen
+            int resId = getResIdForLockUnlockScreen(context, lockPatternUtils);
+
+            // don't display visible pattern if biometric and backup is not pattern
+            if (resId == R.xml.security_settings_biometric_weak &&
+                    lockPatternUtils.getKeyguardStoredPasswordQuality() !=
+                            DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+                keys.add(KEY_VISIBLE_PATTERN);
+            }
+
+            // Do not display SIM lock for devices without an Icc card
+            TelephonyManager tm = TelephonyManager.getDefault();
+            if (!mIsPrimary || !tm.hasIccCard()) {
+                keys.add(KEY_SIM_LOCK);
+            }
+
+            if (ActivityManager.isLowRamDeviceStatic()
+                    || lockPatternUtils.isLockScreenDisabled()) {
+                // Widgets take a lot of RAM, so disable them on low-memory devices
+                keys.add(KEY_ENABLE_WIDGETS);
+            }
+
+            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+                keys.add(KEY_CREDENTIALS_MANAGER);
+            }
+
+            return keys;
+        }
+    }
+
 }
