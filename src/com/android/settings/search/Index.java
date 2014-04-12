@@ -47,11 +47,14 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_RANK;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_TITLE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_ON;
@@ -150,16 +153,20 @@ public class Index {
     private class UpdateData {
         public List<SearchIndexableData> dataToUpdate;
         public List<String> dataToDelete;
+        public Map<String, List<String>> nonIndexableKeys;
+
         public boolean forceUpdate = false;
 
         public UpdateData() {
             dataToUpdate = new ArrayList<SearchIndexableData>();
             dataToDelete = new ArrayList<String>();
+            nonIndexableKeys = new HashMap<String, List<String>>();
         }
 
         public void clear() {
             dataToUpdate.clear();
             dataToDelete.clear();
+            nonIndexableKeys.clear();
             forceUpdate = false;
         }
     }
@@ -194,6 +201,94 @@ public class Index {
         return getReadableDatabase().rawQuery(sql, null);
     }
 
+    public boolean update() {
+        final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
+        List<ResolveInfo> list =
+                mContext.getPackageManager().queryIntentContentProviders(intent, 0);
+
+        final int size = list.size();
+        for (int n = 0; n < size; n++) {
+            final ResolveInfo info = list.get(n);
+            if (!isWellKnownProvider(info)) {
+                continue;
+            }
+            final String authority = info.providerInfo.authority;
+            final String packageName = info.providerInfo.packageName;
+
+            addIndexablesFromRemoteProvider(packageName, authority);
+            addNonIndexablesKeysFromRemoteProvider(packageName, authority);
+        }
+
+        return updateInternal();
+    }
+
+    private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
+        try {
+            final Context packageContext = mContext.createPackageContext(packageName, 0);
+
+            final Uri uriForResources = buildUriForXmlResources(authority);
+            addIndexablesForXmlResourceUri(packageContext, packageName, uriForResources,
+                    SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS);
+
+            final Uri uriForRawData = buildUriForRawData(authority);
+            addIndexablesForRawDataUri(packageContext, packageName, uriForRawData,
+                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(LOG_TAG, "Could not create context for " + packageName + ": "
+                    + Log.getStackTraceString(e));
+            return false;
+        }
+    }
+
+    private void addNonIndexablesKeysFromRemoteProvider(String packageName,
+                                                        String authority) {
+        final List<String> keys =
+                getNonIndexablesKeysFromRemoteProvider(packageName, authority);
+        addNonIndexableKeys(packageName, keys);
+    }
+
+    private List<String> getNonIndexablesKeysFromRemoteProvider(String packageName,
+                                                                String authority) {
+        try {
+            final Context packageContext = mContext.createPackageContext(packageName, 0);
+
+            final Uri uriForNonIndexableKeys = buildUriForNonIndexableKeys(authority);
+            return getNonIndexablesKeys(packageContext, uriForNonIndexableKeys,
+                    SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(LOG_TAG, "Could not create context for " + packageName + ": "
+                    + Log.getStackTraceString(e));
+            return EMPTY_LIST;
+        }
+    }
+
+    private List<String> getNonIndexablesKeys(Context packageContext, Uri uri,
+                                              String[] projection) {
+
+        final ContentResolver resolver = packageContext.getContentResolver();
+        final Cursor cursor = resolver.query(uri, projection, null, null, null);
+
+        if (cursor == null) {
+            Log.w(LOG_TAG, "Cannot add index data for Uri: " + uri.toString());
+            return EMPTY_LIST;
+        }
+
+        List<String> result = new ArrayList<String>();
+        try {
+            final int count = cursor.getCount();
+            if (count > 0) {
+                while (cursor.moveToNext()) {
+                    final String key = cursor.getString(COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE);
+                    result.add(key);
+                }
+            }
+            return result;
+        } finally {
+            cursor.close();
+        }
+    }
+
     public void addIndexableData(SearchIndexableData data) {
         synchronized (mDataToProcess) {
             mDataToProcess.dataToUpdate.add(data);
@@ -218,23 +313,10 @@ public class Index {
         }
     }
 
-    public boolean update() {
-        final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
-        List<ResolveInfo> list =
-                mContext.getPackageManager().queryIntentContentProviders(intent, 0);
-
-        final int size = list.size();
-        for (int n = 0; n < size; n++) {
-            final ResolveInfo info = list.get(n);
-            if (!isWellKnownProvider(info)) {
-                continue;
-            }
-            final String authority = info.providerInfo.authority;
-            final String packageName = info.providerInfo.packageName;
-            addIndexablesFromRemoteProvider(packageName, authority);
+    public void addNonIndexableKeys(String authority, List<String> keys) {
+        synchronized (mDataToProcess) {
+            mDataToProcess.nonIndexableKeys.put(authority, keys);
         }
-
-        return updateInternal();
     }
 
     /**
@@ -314,26 +396,6 @@ public class Index {
         return IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
     }
 
-    private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
-        final Context packageContext;
-        try {
-            packageContext = mContext.createPackageContext(packageName, 0);
-
-            final Uri uriForResources = buildUriForXmlResources(authority);
-            addIndexablesForXmlResourceUri(packageContext, packageName, uriForResources,
-                    SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS);
-
-            final Uri uriForRawData = buildUriForRawData(authority);
-            addIndexablesForRawDataUri(packageContext, packageName, uriForRawData,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w(LOG_TAG, "Could not create context for " + packageName + ": "
-                    + Log.getStackTraceString(e));
-            return false;
-        }
-    }
-
     private static Uri buildUriForXmlResources(String authority) {
         return Uri.parse("content://" + authority + "/" +
                 SearchIndexablesContract.INDEXABLES_XML_RES_PATH);
@@ -342,6 +404,11 @@ public class Index {
     private static Uri buildUriForRawData(String authority) {
         return Uri.parse("content://" + authority + "/" +
                 SearchIndexablesContract.INDEXABLES_RAW_PATH);
+    }
+
+    private static Uri buildUriForNonIndexableKeys(String authority) {
+        return Uri.parse("content://" + authority + "/" +
+                SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
     }
 
     private boolean updateInternal() {
@@ -366,8 +433,7 @@ public class Index {
             Uri uri, String[] projection) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
-        final Cursor cursor = resolver.query(uri, projection,
-                null, null, null);
+        final Cursor cursor = resolver.query(uri, projection, null, null, null);
 
         if (cursor == null) {
             Log.w(LOG_TAG, "Cannot add index data for Uri: " + uri.toString());
@@ -412,8 +478,7 @@ public class Index {
             Uri uri, String[] projection) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
-        final Cursor cursor = resolver.query(uri, projection,
-                null, null, null);
+        final Cursor cursor = resolver.query(uri, projection, null, null, null);
 
         if (cursor == null) {
             Log.w(LOG_TAG, "Cannot add index data for Uri: " + uri.toString());
@@ -523,16 +588,40 @@ public class Index {
     }
 
     private void indexOneSearchIndexableData(SQLiteDatabase database, String localeStr,
-                                             SearchIndexableData data) {
+            SearchIndexableData data, Map<String, List<String>> nonIndexableKeys) {
         if (data instanceof SearchIndexableResource) {
-            indexOneResource(database, localeStr, (SearchIndexableResource) data);
+            indexOneResource(database, localeStr, (SearchIndexableResource) data, nonIndexableKeys);
         } else if (data instanceof SearchIndexableRaw) {
             indexOneRaw(database, localeStr, (SearchIndexableRaw) data);
         }
     }
 
+    private void indexOneRaw(SQLiteDatabase database, String localeStr,
+                             SearchIndexableRaw raw) {
+        // Should be the same locale as the one we are processing
+        if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
+            return;
+        }
+
+        updateOneRowWithFilteredData(database, localeStr,
+                raw.title,
+                raw.summaryOn,
+                raw.summaryOff,
+                raw.entries,
+                raw.className,
+                raw.screenTitle,
+                raw.iconResId,
+                raw.rank,
+                raw.keywords,
+                raw.intentAction,
+                raw.intentTargetPackage,
+                raw.intentTargetClass,
+                raw.enabled,
+                raw.key);
+    }
+
     private void indexOneResource(SQLiteDatabase database, String localeStr,
-                                  SearchIndexableResource sir) {
+            SearchIndexableResource sir, Map<String, List<String>> nonIndexableKeysFromResource) {
 
         if (sir == null) {
             Log.e(LOG_TAG, "Cannot index a null resource!");
@@ -543,25 +632,51 @@ public class Index {
         final Indexable.SearchIndexProvider provider =
                 TextUtils.isEmpty(sir.className) ? null : getSearchIndexProvider(sir.className);
 
+        List<String> nonIndexableKeys = new ArrayList<String>();
+
         if (sir.xmlResId > SearchIndexableResources.NO_DATA_RES_ID) {
-            List<String> doNotIndexKeys = EMPTY_LIST;
-            if (provider != null) {
-                doNotIndexKeys = provider.getNonIndexableKeys(sir.context);
+            List<String> resNonIndxableKeys = nonIndexableKeysFromResource.get(sir.packageName);
+            if (resNonIndxableKeys != null && resNonIndxableKeys.size() > 0) {
+                nonIndexableKeys.addAll(resNonIndxableKeys);
             }
             indexFromResource(sir.context, database, localeStr,
                     sir.xmlResId, sir.className, sir.iconResId, sir.rank,
                     sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass,
-                    doNotIndexKeys);
+                    nonIndexableKeys);
         } else if (!TextUtils.isEmpty(sir.className)) {
+            if (provider != null) {
+                List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(sir.context);
+                if (providerNonIndexableKeys != null && providerNonIndexableKeys.size() > 0) {
+                    nonIndexableKeys.addAll(providerNonIndexableKeys);
+                }
+            }
             indexFromLocalProvider(mContext, database, localeStr, provider, sir.className,
-                    sir.iconResId, sir.rank, sir.enabled);
+                    sir.iconResId, sir.rank, sir.enabled, nonIndexableKeys);
         }
+    }
+
+    private Indexable.SearchIndexProvider getSearchIndexProvider(String className) {
+        try {
+            final Class<?> clazz = Class.forName(className);
+            if (Indexable.class.isAssignableFrom(clazz)) {
+                final Field f = clazz.getField(FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
+                return (Indexable.SearchIndexProvider) f.get(null);
+            }
+        } catch (ClassNotFoundException e) {
+            Log.e(LOG_TAG, "Cannot find class: " + className, e);
+        } catch (NoSuchFieldException e) {
+            Log.e(LOG_TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
+        } catch (IllegalAccessException e) {
+            Log.e(LOG_TAG,
+                    "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
+        }
+        return null;
     }
 
     private void indexFromResource(Context context, SQLiteDatabase database, String localeStr,
            int xmlResId, String fragmentName, int iconResId, int rank,
            String intentAction, String intentTargetPackage, String intentTargetClass,
-           List<String> doNotIndexKeys) {
+           List<String> nonIndexableKeys) {
 
         XmlResourceParser parser = null;
         try {
@@ -593,7 +708,7 @@ public class Index {
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
-            if (!doNotIndexKeys.contains(key)) {
+            if (!nonIndexableKeys.contains(key)) {
                 title = getDataTitle(context, attrs);
                 summary = getDataSummary(context, attrs);
                 keywords = getDataKeywords(context, attrs);
@@ -612,7 +727,7 @@ public class Index {
                 nodeName = parser.getName();
 
                 key = getDataKey(context, attrs);
-                if (doNotIndexKeys.contains(key)) {
+                if (nonIndexableKeys.contains(key)) {
                     continue;
                 }
 
@@ -653,58 +768,15 @@ public class Index {
         }
     }
 
-    private void indexOneRaw(SQLiteDatabase database, String localeStr,
-                             SearchIndexableRaw raw) {
-        // Should be the same locale as the one we are processing
-        if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
-            return;
-        }
-
-        updateOneRowWithFilteredData(database, localeStr,
-                raw.title,
-                raw.summaryOn,
-                raw.summaryOff,
-                raw.entries,
-                raw.className,
-                raw.screenTitle,
-                raw.iconResId,
-                raw.rank,
-                raw.keywords,
-                raw.intentAction,
-                raw.intentTargetPackage,
-                raw.intentTargetClass,
-                raw.enabled,
-                raw.key);
-    }
-
-    private Indexable.SearchIndexProvider getSearchIndexProvider(String className) {
-        try {
-            final Class<?> clazz = Class.forName(className);
-            if (Indexable.class.isAssignableFrom(clazz)) {
-                final Field f = clazz.getField(FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
-                return (Indexable.SearchIndexProvider) f.get(null);
-            }
-        } catch (ClassNotFoundException e) {
-            Log.e(LOG_TAG, "Cannot find class: " + className, e);
-        } catch (NoSuchFieldException e) {
-            Log.e(LOG_TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
-        } catch (IllegalAccessException e) {
-            Log.e(LOG_TAG,
-                    "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
-        }
-        return null;
-    }
-
     private void indexFromLocalProvider(Context context, SQLiteDatabase database, String localeStr,
-                Indexable.SearchIndexProvider provider, String className, int iconResId, int rank,
-                boolean enabled) {
+            Indexable.SearchIndexProvider provider, String className, int iconResId, int rank,
+            boolean enabled, List<String> nonIndexableKeys) {
 
         if (provider == null) {
             Log.w(LOG_TAG, "Cannot find provider: " + className);
             return;
         }
 
-        final List<String> doNotIndexKeys = provider.getNonIndexableKeys(context);
         final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(context, enabled);
 
         if (rawList != null) {
@@ -717,7 +789,7 @@ public class Index {
                     continue;
                 }
 
-                if (doNotIndexKeys.contains(raw.key)) {
+                if (nonIndexableKeys.contains(raw.key)) {
                     continue;
                 }
 
@@ -759,7 +831,7 @@ public class Index {
                 indexFromResource(context, database, localeStr,
                         item.xmlResId, itemClassName, itemIconResId, itemRank,
                         item.intentAction, item.intentTargetPackage,
-                        item.intentTargetClass, doNotIndexKeys);
+                        item.intentTargetClass, nonIndexableKeys);
             }
         }
     }
@@ -951,14 +1023,18 @@ public class Index {
 
             final List<SearchIndexableData> dataToUpdate = params[0].dataToUpdate;
             final List<String> dataToDelete = params[0].dataToDelete;
+            final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
+
             final boolean forceUpdate = params[0].forceUpdate;
+
             final SQLiteDatabase database = getWritableDatabase();
             final String localeStr = Locale.getDefault().toString();
 
             try {
                 database.beginTransaction();
                 if (dataToUpdate.size() > 0) {
-                    processDataToUpdate(database, localeStr, dataToUpdate, forceUpdate);
+                    processDataToUpdate(database, localeStr, dataToUpdate, nonIndexableKeys,
+                            forceUpdate);
                 }
                 if (dataToDelete.size() > 0) {
                     processDataToDelete(database, localeStr, dataToDelete);
@@ -972,7 +1048,8 @@ public class Index {
         }
 
         private boolean processDataToUpdate(SQLiteDatabase database, String localeStr,
-                List<SearchIndexableData> dataToUpdate, boolean forceUpdate) {
+                List<SearchIndexableData> dataToUpdate, Map<String, List<String>> nonIndexableKeys,
+                boolean forceUpdate) {
 
             if (!forceUpdate && isLocaleAlreadyIndexed(database, localeStr)) {
                 Log.d(LOG_TAG, "Locale '" + localeStr + "' is already indexed");
@@ -985,7 +1062,7 @@ public class Index {
             final int count = dataToUpdate.size();
             for (int n = 0; n < count; n++) {
                 final SearchIndexableData data = dataToUpdate.get(n);
-                indexOneSearchIndexableData(database, localeStr, data);
+                indexOneSearchIndexableData(database, localeStr, data, nonIndexableKeys);
             }
 
             final long now = System.currentTimeMillis();

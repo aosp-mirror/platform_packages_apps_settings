@@ -408,7 +408,6 @@ public class SettingsActivity extends Activity
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-
         Index.getInstance(this).update();
 
         mAuthenticatorHelper = new AuthenticatorHelper();
