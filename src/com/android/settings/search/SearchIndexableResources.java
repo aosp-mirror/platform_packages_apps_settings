@@ -49,27 +49,27 @@ public final class SearchIndexableResources {
 
     public static int NO_DATA_RES_ID = 0;
 
-    private static final int RANK_WIFI = 1;
-    private static final int RANK_BT = 2;
-    private static final int RANK_DATA_USAGE = 3;
-    private static final int RANK_WIRELESS = 4;
-    private static final int RANK_HOME = 5;
-    private static final int RANK_SOUND = 6;
-    private static final int RANK_DISPLAY = 7;
-    private static final int RANK_WALLPAPER = 7;
-    private static final int RANK_NOTIFICATIONS = 8;
-    private static final int RANK_MEMORY = 9;
-    private static final int RANK_POWER_USAGE = 10;
-    private static final int RANK_USERS = 11;
-    private static final int RANK_LOCATION = 12;
-    private static final int RANK_SECURITY = 13;
-    private static final int RANK_IME = 14;
-    private static final int RANK_PRIVACY = 15;
-    private static final int RANK_DATE_TIME = 16;
-    private static final int RANK_ACCESSIBILITY = 17;
-    private static final int RANK_PRINTING = 18;
-    private static final int RANK_DEVELOPEMENT = 19;
-    private static final int RANK_DEVICE_INFO = 20;
+    public static final int RANK_WIFI = 1;
+    public static final int RANK_BT = 2;
+    public static final int RANK_DATA_USAGE = 3;
+    public static final int RANK_WIRELESS = 4;
+    public static final int RANK_HOME = 5;
+    public static final int RANK_SOUND = 6;
+    public static final int RANK_DISPLAY = 7;
+    public static final int RANK_WALLPAPER = 7;
+    public static final int RANK_NOTIFICATIONS = 8;
+    public static final int RANK_MEMORY = 9;
+    public static final int RANK_POWER_USAGE = 10;
+    public static final int RANK_USERS = 11;
+    public static final int RANK_LOCATION = 12;
+    public static final int RANK_SECURITY = 13;
+    public static final int RANK_IME = 14;
+    public static final int RANK_PRIVACY = 15;
+    public static final int RANK_DATE_TIME = 16;
+    public static final int RANK_ACCESSIBILITY = 17;
+    public static final int RANK_PRINTING = 18;
+    public static final int RANK_DEVELOPEMENT = 19;
+    public static final int RANK_DEVICE_INFO = 20;
 
     private static HashMap<String, SearchIndexableResource> sResMap =
             new HashMap<String, SearchIndexableResource>();
@@ -162,7 +162,7 @@ public final class SearchIndexableResources {
 
         sResMap.put(SecuritySettings.class.getName(),
                 new SearchIndexableResource(RANK_SECURITY,
-                        R.xml.security_settings,
+                        NO_DATA_RES_ID,
                         SecuritySettings.class.getName(),
                         R.drawable.ic_settings_security));
 
