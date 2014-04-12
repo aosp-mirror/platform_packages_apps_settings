@@ -20,6 +20,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.ActivityManagerNative;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
@@ -32,6 +33,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
@@ -48,7 +50,11 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +65,7 @@ import java.util.Set;
  * Activity with the accessibility settings.
  */
 public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, Indexable {
 
     private static final float LARGE_FONT_SCALE = 1.3f;
 
@@ -570,4 +576,45 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             installedServices.add(installedService);
         }
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
+
+            PackageManager packageManager = context.getPackageManager();
+            AccessibilityManager accessibilityManager = (AccessibilityManager)
+                    context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+
+            String screenTitle = context.getResources().getString(
+                    R.string.accessibility_services_title);
+
+            // Indexing all services, reagardles if enabled.
+            List<AccessibilityServiceInfo> services = accessibilityManager
+                    .getInstalledAccessibilityServiceList();
+            final int serviceCount = services.size();
+            for (int i = 0; i < serviceCount; i++) {
+                AccessibilityServiceInfo service = services.get(i);
+                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
+                indexable.summaryOn = context.getString(R.string.accessibility_feature_state_on);
+                indexable.summaryOff = context.getString(R.string.accessibility_feature_state_off);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            return indexables;
+        }
+
+        @Override
+        public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+               boolean enabled) {
+            List<SearchIndexableResource> indexables = new ArrayList<SearchIndexableResource>();
+            SearchIndexableResource indexable = new SearchIndexableResource(context);
+            indexable.xmlResId = R.xml.accessibility_settings;
+            indexables.add(indexable);
+            return indexables;
+        }
+    };
 }

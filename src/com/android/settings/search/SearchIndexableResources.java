@@ -186,7 +186,7 @@ public final class SearchIndexableResources {
 
         sResMap.put(AccessibilitySettings.class.getName(),
                 new SearchIndexableResource(RANK_ACCESSIBILITY,
-                        R.xml.accessibility_settings,
+                        NO_DATA_RES_ID,
                         AccessibilitySettings.class.getName(),
                         R.drawable.ic_settings_accessibility));
 
