@@ -166,6 +166,6 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
 
     private void updateSearchIndex(boolean isBluetoothOn) {
         Index.getInstance(mContext).updateFromClassNameResource(
-                BluetoothSettings.class.getName(), isBluetoothOn);
+                BluetoothSettings.class.getName(), false, isBluetoothOn);
     }
 }

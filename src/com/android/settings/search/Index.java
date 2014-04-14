@@ -362,7 +362,17 @@ public class Index {
         return updateInternal();
     }
 
-    public boolean updateFromClassNameResource(String className, boolean includeInSearchResults) {
+    /**
+     * Update the Index for a specific class name resources
+     *
+     * @param className the class name (typically a fragment name).
+     * @param rebuild true means that you want to delete the data from the Index first.
+     * @param includeInSearchResults true means that you want the bit "enabled" set so that the
+     *                               data will be seen included into the search results
+     * @return true of the Index update has been successful.
+     */
+    public boolean updateFromClassNameResource(String className, boolean rebuild,
+            boolean includeInSearchResults) {
         if (className == null) {
             throw new IllegalArgumentException("class name cannot be null!");
         }
@@ -372,6 +382,9 @@ public class Index {
             return false;
         }
         res.enabled = includeInSearchResults;
+        if (rebuild) {
+            deleteIndexableData(res);
+        }
         addIndexableData(res);
         mDataToProcess.forceUpdate = true;
         boolean result = updateInternal();
@@ -1029,12 +1042,12 @@ public class Index {
 
             try {
                 database.beginTransaction();
+                if (dataToDelete.size() > 0) {
+                    processDataToDelete(database, localeStr, dataToDelete);
+                }
                 if (dataToUpdate.size() > 0) {
                     processDataToUpdate(database, localeStr, dataToUpdate, nonIndexableKeys,
                             forceUpdate);
-                }
-                if (dataToDelete.size() > 0) {
-                    processDataToDelete(database, localeStr, dataToDelete);
                 }
                 database.setTransactionSuccessful();
                 result = true;

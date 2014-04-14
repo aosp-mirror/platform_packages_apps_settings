@@ -20,12 +20,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.ContentObserver;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -157,7 +155,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
 
     private void updateSearchIndex(boolean isWiFiOn) {
         Index.getInstance(mContext).updateFromClassNameResource(
-                WifiSettings.class.getName(), isWiFiOn);
+                WifiSettings.class.getName(), false, isWiFiOn);
     }
 
     private void setSwitchChecked(boolean checked) {
