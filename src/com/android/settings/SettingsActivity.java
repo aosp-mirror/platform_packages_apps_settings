@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import android.accessibilityservice.AccessibilityService;
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
@@ -42,6 +44,7 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.INetworkManagementService;
+import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -51,6 +54,10 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.print.PrintManager;
+import android.printservice.PrintService;
+import android.printservice.PrintServiceInfo;
+import android.provider.SearchIndexableData;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -61,10 +68,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.ListView;
 
 import android.widget.SearchView;
+import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -94,6 +103,7 @@ import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -109,6 +119,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.android.settings.dashboard.Header.HEADER_ID_UNDEFINED;
@@ -303,6 +314,9 @@ public class SettingsActivity extends Activity
             }
         }
     };
+
+    private final DynamicIndexablePackageMonitor mDynamicIndexablePackageMonitor =
+            new DynamicIndexablePackageMonitor();
 
     private Button mNextButton;
     private ActionBar mActionBar;
@@ -610,6 +624,8 @@ public class SettingsActivity extends Activity
         invalidateHeaders();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        mDynamicIndexablePackageMonitor.register(this);
     }
 
     @Override
@@ -624,6 +640,8 @@ public class SettingsActivity extends Activity
                 mDevelopmentPreferencesListener);
 
         mDevelopmentPreferencesListener = null;
+
+        mDynamicIndexablePackageMonitor.unregister();
     }
 
     @Override
@@ -1270,5 +1288,146 @@ public class SettingsActivity extends Activity
         getFragmentManager().popBackStackImmediate(SettingsActivity.BACK_STACK_PREFS,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mSearchMenuItem.collapseActionView();
+    }
+
+    private static final class DynamicIndexablePackageMonitor extends PackageMonitor {
+        private static final Intent ACCESSIBILITY_SERVICE_INTENT =
+                new Intent(AccessibilityService.SERVICE_INTERFACE);
+
+        private static final Intent PRINT_SERVICE_INTENT =
+                new Intent(PrintService.SERVICE_INTERFACE);
+
+        private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
+
+        private static final int MSG_PACKAGE_AVAILABLE = 1;
+        private static final int MSG_PACKAGE_UNAVAILABLE = 2;
+
+        private final List<String> mAccessibilityServices = new ArrayList<String>();
+        private final List<String> mPrintServices = new ArrayList<String>();
+
+        private final Handler mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case MSG_PACKAGE_AVAILABLE: {
+                        String packageName = (String) msg.obj;
+                        handlePackageAvailable(packageName);
+                    } break;
+
+                    case MSG_PACKAGE_UNAVAILABLE: {
+                        String packageName = (String) msg.obj;
+                        handlePackageUnavailable(packageName);
+                    } break;
+                }
+            }
+        };
+
+        private Context mContext;
+
+        public void register(Context context) {
+            mContext = context;
+
+            // Cache accessibility service packages to know when they go away.
+            AccessibilityManager accessibilityManager = (AccessibilityManager)
+                    mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
+            List<AccessibilityServiceInfo> accessibilityServices = accessibilityManager
+                    .getInstalledAccessibilityServiceList();
+            final int accessibilityServiceCount = accessibilityServices.size();
+            for (int i = 0; i < accessibilityServiceCount; i++) {
+                AccessibilityServiceInfo accessibilityService = accessibilityServices.get(i);
+                mAccessibilityServices.add(accessibilityService.getResolveInfo()
+                        .serviceInfo.packageName);
+            }
+
+            // Cache print service packages to know when they go away.
+            PrintManager printManager = (PrintManager)
+                    mContext.getSystemService(Context.PRINT_SERVICE);
+            List<PrintServiceInfo> printServices = printManager.getInstalledPrintServices();
+            final int serviceCount = printServices.size();
+            for (int i = 0; i < serviceCount; i++) {
+                PrintServiceInfo printService = printServices.get(i);
+                mPrintServices.add(printService.getResolveInfo()
+                        .serviceInfo.packageName);
+            }
+
+            register(context, Looper.getMainLooper(), UserHandle.CURRENT, false);
+        }
+
+        public void unregister() {
+            super.unregister();
+            mAccessibilityServices.clear();
+            mPrintServices.clear();
+        }
+
+        // Covers installed, appeared external storage with the package, upgraded.
+        @Override
+        public void onPackageAppeared(String packageName, int uid) {
+            postMessage(MSG_PACKAGE_AVAILABLE, packageName);
+        }
+
+        // Covers uninstalled, removed external storage with the package.
+        @Override
+        public void onPackageDisappeared(String packageName, int uid) {
+            postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
+        }
+
+        // Covers enabled, disabled.
+        @Override
+        public void onPackageModified(String packageName) {
+            super.onPackageModified(packageName);
+            final int state = mContext.getPackageManager().getApplicationEnabledSetting(
+                    packageName);
+            if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+                    || state ==  PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                postMessage(MSG_PACKAGE_AVAILABLE, packageName);
+            } else {
+                postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
+            }
+        }
+
+        private void postMessage(int what, String packageName) {
+            Message message = mHandler.obtainMessage(what, packageName);
+            mHandler.sendMessageDelayed(message, DELAY_PROCESS_PACKAGE_CHANGE);
+        }
+
+        private void handlePackageAvailable(String packageName) {
+            if (!mAccessibilityServices.contains(packageName)) {
+                Intent intent = ACCESSIBILITY_SERVICE_INTENT;
+                intent.setPackage(packageName);
+                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                    mAccessibilityServices.add(packageName);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            AccessibilitySettings.class.getName(), false, true);
+                }
+                intent.setPackage(null);
+            }
+
+            if (!mPrintServices.contains(packageName)) {
+                Intent intent = PRINT_SERVICE_INTENT;
+                intent.setPackage(packageName);
+                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                    mPrintServices.add(packageName);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            PrintSettingsFragment.class.getName(), false, true);
+                }
+                intent.setPackage(null);
+            }
+        }
+
+        private void handlePackageUnavailable(String packageName) {
+            final int accessibilityIndex = mAccessibilityServices.indexOf(packageName);
+            if (accessibilityIndex >= 0) {
+                mAccessibilityServices.remove(accessibilityIndex);
+                Index.getInstance(mContext).updateFromClassNameResource(
+                        AccessibilitySettings.class.getName(), true, true);
+            }
+
+            final int printIndex = mPrintServices.indexOf(packageName);
+            if (printIndex >= 0) {
+                mPrintServices.remove(printIndex);
+                Index.getInstance(mContext).updateFromClassNameResource(
+                        PrintSettingsFragment.class.getName(), true, true);
+            }
+        }
     }
 }
