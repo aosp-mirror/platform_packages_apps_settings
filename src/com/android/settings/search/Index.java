@@ -152,14 +152,14 @@ public class Index {
      */
     private class UpdateData {
         public List<SearchIndexableData> dataToUpdate;
-        public List<String> dataToDelete;
+        public List<SearchIndexableData> dataToDelete;
         public Map<String, List<String>> nonIndexableKeys;
 
         public boolean forceUpdate = false;
 
         public UpdateData() {
             dataToUpdate = new ArrayList<SearchIndexableData>();
-            dataToDelete = new ArrayList<String>();
+            dataToDelete = new ArrayList<SearchIndexableData>();
             nonIndexableKeys = new HashMap<String, List<String>>();
         }
 
@@ -304,12 +304,9 @@ public class Index {
         }
     }
 
-    public void deleteIndexableData(String[] array) {
+    public void deleteIndexableData(SearchIndexableData data) {
         synchronized (mDataToProcess) {
-            final int count = array.length;
-            for (int n = 0; n < count; n++) {
-                mDataToProcess.dataToDelete.add(array[n]);
-            }
+            mDataToProcess.dataToDelete.add(data);
         }
     }
 
@@ -1022,7 +1019,7 @@ public class Index {
             boolean result = false;
 
             final List<SearchIndexableData> dataToUpdate = params[0].dataToUpdate;
-            final List<String> dataToDelete = params[0].dataToDelete;
+            final List<SearchIndexableData> dataToDelete = params[0].dataToDelete;
             final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
 
             final boolean forceUpdate = params[0].forceUpdate;
@@ -1072,15 +1069,27 @@ public class Index {
         }
 
         private boolean processDataToDelete(SQLiteDatabase database, String localeStr,
-                                            List<String> dataToDelete) {
+                List<SearchIndexableData> dataToDelete) {
 
             boolean result = false;
             final long current = System.currentTimeMillis();
 
             final int count = dataToDelete.size();
             for (int n = 0; n < count; n++) {
-                final String data = dataToDelete.get(n);
-                delete(database, data);
+                final SearchIndexableData data = dataToDelete.get(n);
+                if (data == null) {
+                    continue;
+                }
+                if (!TextUtils.isEmpty(data.className)) {
+                    delete(database, IndexColumns.CLASS_NAME, data.className);
+                } else  {
+                    if (data instanceof SearchIndexableRaw) {
+                        final SearchIndexableRaw raw = (SearchIndexableRaw) data;
+                        if (!TextUtils.isEmpty(raw.title)) {
+                            delete(database, IndexColumns.DATA_TITLE, raw.title);
+                        }
+                    }
+                }
             }
 
             final long now = System.currentTimeMillis();
@@ -1089,9 +1098,9 @@ public class Index {
             return result;
         }
 
-        private int delete(SQLiteDatabase database, String title) {
-            final String whereClause = IndexColumns.DATA_TITLE + "=?";
-            final String[] whereArgs = new String[] { title };
+        private int delete(SQLiteDatabase database, String columName, String value) {
+            final String whereClause = columName + "=?";
+            final String[] whereArgs = new String[] { value };
 
             return database.delete(Tables.TABLE_PREFS_INDEX, whereClause, whereArgs);
         }
