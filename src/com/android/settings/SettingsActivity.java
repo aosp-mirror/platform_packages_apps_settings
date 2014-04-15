@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import android.accessibilityservice.AccessibilityService;
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
@@ -40,14 +38,10 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.database.ContentObserver;
-import android.hardware.input.InputManager;
-import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.INetworkManagementService;
-import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -57,10 +51,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.print.PrintManager;
-import android.printservice.PrintService;
-import android.printservice.PrintServiceInfo;
-import android.provider.UserDictionary;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -71,14 +61,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.accessibility.AccessibilityManager;
-import android.view.inputmethod.InputMethodInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ListView;
 
 import android.widget.SearchView;
-import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -98,6 +84,7 @@ import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
@@ -108,7 +95,6 @@ import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -1292,225 +1278,5 @@ public class SettingsActivity extends Activity
         getFragmentManager().popBackStackImmediate(SettingsActivity.BACK_STACK_PREFS,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
         mSearchMenuItem.collapseActionView();
-    }
-
-    private static final class DynamicIndexableContentMonitor extends PackageMonitor implements
-            InputManager.InputDeviceListener {
-
-        private static final Intent ACCESSIBILITY_SERVICE_INTENT =
-                new Intent(AccessibilityService.SERVICE_INTERFACE);
-
-        private static final Intent PRINT_SERVICE_INTENT =
-                new Intent(PrintService.SERVICE_INTERFACE);
-
-        private static final Intent IME_SERVICE_INTENT =
-                new Intent("android.view.InputMethod");
-
-        private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
-
-        private static final int MSG_PACKAGE_AVAILABLE = 1;
-        private static final int MSG_PACKAGE_UNAVAILABLE = 2;
-
-        private final List<String> mAccessibilityServices = new ArrayList<String>();
-        private final List<String> mPrintServices = new ArrayList<String>();
-        private final List<String> mImeServices = new ArrayList<String>();
-
-        private final Handler mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case MSG_PACKAGE_AVAILABLE: {
-                        String packageName = (String) msg.obj;
-                        handlePackageAvailable(packageName);
-                    } break;
-
-                    case MSG_PACKAGE_UNAVAILABLE: {
-                        String packageName = (String) msg.obj;
-                        handlePackageUnavailable(packageName);
-                    } break;
-                }
-            }
-        };
-
-        private final ContentObserver mContentObserver = new MyContentObserver(mHandler);
-
-        private Context mContext;
-
-        public void register(Context context) {
-            mContext = context;
-
-            // Cache accessibility service packages to know when they go away.
-            AccessibilityManager accessibilityManager = (AccessibilityManager)
-                    mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
-            List<AccessibilityServiceInfo> accessibilityServices = accessibilityManager
-                    .getInstalledAccessibilityServiceList();
-            final int accessibilityServiceCount = accessibilityServices.size();
-            for (int i = 0; i < accessibilityServiceCount; i++) {
-                AccessibilityServiceInfo accessibilityService = accessibilityServices.get(i);
-                mAccessibilityServices.add(accessibilityService.getResolveInfo()
-                        .serviceInfo.packageName);
-            }
-
-            // Cache print service packages to know when they go away.
-            PrintManager printManager = (PrintManager)
-                    mContext.getSystemService(Context.PRINT_SERVICE);
-            List<PrintServiceInfo> printServices = printManager.getInstalledPrintServices();
-            final int serviceCount = printServices.size();
-            for (int i = 0; i < serviceCount; i++) {
-                PrintServiceInfo printService = printServices.get(i);
-                mPrintServices.add(printService.getResolveInfo()
-                        .serviceInfo.packageName);
-            }
-
-            // Cache IME service packages to know when they go away.
-            InputMethodManager imeManager = (InputMethodManager)
-                    mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            List<InputMethodInfo> inputMethods = imeManager.getInputMethodList();
-            final int inputMethodCount = inputMethods.size();
-            for (int i = 0; i < inputMethodCount; i++) {
-                InputMethodInfo inputMethod = inputMethods.get(i);
-                mImeServices.add(inputMethod.getServiceInfo().packageName);
-            }
-
-            // Watch for related content URIs.
-            mContext.getContentResolver().registerContentObserver(
-                    UserDictionary.Words.CONTENT_URI, true, mContentObserver);
-
-            // Watch for input device changes.
-            InputManager inputManager = (InputManager) context.getSystemService(
-                    Context.INPUT_SERVICE);
-            inputManager.registerInputDeviceListener(this, mHandler);
-
-            // Start tracking packages.
-            register(context, Looper.getMainLooper(), UserHandle.CURRENT, false);
-        }
-
-        public void unregister() {
-            super.unregister();
-
-            InputManager inputManager = (InputManager) mContext.getSystemService(
-                    Context.INPUT_SERVICE);
-            inputManager.unregisterInputDeviceListener(this);
-
-            mContext.getContentResolver().unregisterContentObserver(mContentObserver);
-
-            mAccessibilityServices.clear();
-            mPrintServices.clear();
-            mImeServices.clear();
-        }
-
-        // Covers installed, appeared external storage with the package, upgraded.
-        @Override
-        public void onPackageAppeared(String packageName, int uid) {
-            postMessage(MSG_PACKAGE_AVAILABLE, packageName);
-        }
-
-        // Covers uninstalled, removed external storage with the package.
-        @Override
-        public void onPackageDisappeared(String packageName, int uid) {
-            postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
-        }
-
-        // Covers enabled, disabled.
-        @Override
-        public void onPackageModified(String packageName) {
-            super.onPackageModified(packageName);
-            final int state = mContext.getPackageManager().getApplicationEnabledSetting(
-                    packageName);
-            if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-                    || state ==  PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-                postMessage(MSG_PACKAGE_AVAILABLE, packageName);
-            } else {
-                postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
-            }
-        }
-
-        @Override
-        public void onInputDeviceAdded(int deviceId) {
-            Index.getInstance(mContext).updateFromClassNameResource(
-                    InputMethodAndLanguageSettings.class.getName(), false, true);
-        }
-
-        @Override
-        public void onInputDeviceRemoved(int deviceId) {
-            onInputDeviceChanged(deviceId);
-        }
-
-        @Override
-        public void onInputDeviceChanged(int deviceId) {
-            Index.getInstance(mContext).updateFromClassNameResource(
-                    InputMethodAndLanguageSettings.class.getName(), true, true);
-        }
-
-        private void postMessage(int what, String packageName) {
-            Message message = mHandler.obtainMessage(what, packageName);
-            mHandler.sendMessageDelayed(message, DELAY_PROCESS_PACKAGE_CHANGE);
-        }
-
-        private void handlePackageAvailable(String packageName) {
-            if (!mAccessibilityServices.contains(packageName)) {
-                Intent intent = ACCESSIBILITY_SERVICE_INTENT;
-                intent.setPackage(packageName);
-                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
-                    mAccessibilityServices.add(packageName);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            AccessibilitySettings.class.getName(), false, true);
-                }
-                intent.setPackage(null);
-            }
-
-            if (!mPrintServices.contains(packageName)) {
-                Intent intent = PRINT_SERVICE_INTENT;
-                intent.setPackage(packageName);
-                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
-                    mPrintServices.add(packageName);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            PrintSettingsFragment.class.getName(), false, true);
-                }
-                intent.setPackage(null);
-            }
-
-            if (!mImeServices.contains(packageName)) {
-                Intent intent = IME_SERVICE_INTENT;
-                intent.setPackage(packageName);
-                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
-                    mImeServices.add(packageName);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            InputMethodAndLanguageSettings.class.getName(), false, true);
-                }
-                intent.setPackage(null);
-            }
-        }
-
-        private void handlePackageUnavailable(String packageName) {
-            final int accessibilityIndex = mAccessibilityServices.indexOf(packageName);
-            if (accessibilityIndex >= 0) {
-                mAccessibilityServices.remove(accessibilityIndex);
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        AccessibilitySettings.class.getName(), true, true);
-            }
-
-            final int printIndex = mPrintServices.indexOf(packageName);
-            if (printIndex >= 0) {
-                mPrintServices.remove(printIndex);
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        PrintSettingsFragment.class.getName(), true, true);
-            }
-        }
-
-        private final class MyContentObserver extends ContentObserver {
-
-            public MyContentObserver(Handler handler) {
-                super(handler);
-            }
-
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            InputMethodAndLanguageSettings.class.getName(), true, true);
-                }
-            };
-        }
     }
 }
