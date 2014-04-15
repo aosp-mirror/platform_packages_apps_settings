@@ -63,7 +63,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
 
     @Override
     public Cursor queryRawData(String[] projection) {
-        Cursor result = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
+        MatrixCursor result = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
         return result;
     }
 
