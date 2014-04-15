@@ -72,22 +72,27 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         mLocale = locale;
     }
 
-    public static TreeSet<String> getUserDictionaryLocalesSet(Activity activity) {
-        @SuppressWarnings("deprecation")
-        final Cursor cursor = activity.managedQuery(UserDictionary.Words.CONTENT_URI,
-                new String[] { UserDictionary.Words.LOCALE },
+    public static TreeSet<String> getUserDictionaryLocalesSet(Context context) {
+        final Cursor cursor = context.getContentResolver().query(
+                UserDictionary.Words.CONTENT_URI, new String[] { UserDictionary.Words.LOCALE },
                 null, null, null);
         final TreeSet<String> localeSet = new TreeSet<String>();
         if (null == cursor) {
             // The user dictionary service is not present or disabled. Return null.
             return null;
-        } else if (cursor.moveToFirst()) {
-            final int columnIndex = cursor.getColumnIndex(UserDictionary.Words.LOCALE);
-            do {
-                final String locale = cursor.getString(columnIndex);
-                localeSet.add(null != locale ? locale : "");
-            } while (cursor.moveToNext());
         }
+        try {
+            if (cursor.moveToFirst()) {
+                final int columnIndex = cursor.getColumnIndex(UserDictionary.Words.LOCALE);
+                do {
+                    final String locale = cursor.getString(columnIndex);
+                    localeSet.add(null != locale ? locale : "");
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            cursor.close();
+        }
+
         // CAVEAT: Keep this for consistency of the implementation between Keyboard and Settings
         // if (!UserDictionarySettings.IS_SHORTCUT_API_SUPPORTED) {
         //     // For ICS, we need to show "For all languages" in case that the keyboard locale
@@ -96,7 +101,7 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
         // }
 
         final InputMethodManager imm =
-                (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         final List<InputMethodInfo> imis = imm.getEnabledInputMethodList();
         for (final InputMethodInfo imi : imis) {
             final List<InputMethodSubtype> subtypes =

@@ -23,6 +23,9 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.Utils;
 import com.android.settings.VoiceInputOutputSettings;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -30,6 +33,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -47,10 +51,13 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.System;
+import android.speech.RecognitionService;
+import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
@@ -60,7 +67,7 @@ import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener,
-        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
+        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
 
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
@@ -242,34 +249,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         if (!mIsOnlyImeSettings) {
             if (mLanguagePref != null) {
-                Configuration conf = getResources().getConfiguration();
-                String language = conf.locale.getLanguage();
-                String localeString;
-                // TODO: This is not an accurate way to display the locale, as it is
-                // just working around the fact that we support limited dialects
-                // and want to pretend that the language is valid for all locales.
-                // We need a way to support languages that aren't tied to a particular
-                // locale instead of hiding the locale qualifier.
-                if (language.equals("zz")) {
-                    String country = conf.locale.getCountry();
-                    if (country.equals("ZZ")) {
-                        localeString = "[Developer] Accented English (zz_ZZ)";
-                    } else if (country.equals("ZY")) {
-                        localeString = "[Developer] Fake Bi-Directional (zz_ZY)";
-                    } else {
-                        localeString = "";
-                    }
-                } else if (hasOnlyOneLanguageInstance(language,
-                        Resources.getSystem().getAssets().getLocales())) {
-                    localeString = conf.locale.getDisplayLanguage(conf.locale);
-                } else {
-                    localeString = conf.locale.getDisplayName(conf.locale);
-                }
-                if (localeString.length() > 1) {
-                    localeString = Character.toUpperCase(localeString.charAt(0))
-                            + localeString.substring(1);
-                    mLanguagePref.setSummary(localeString);
-                }
+                String localeName = getLocaleName(getResources());
+                mLanguagePref.setSummary(localeName);
             }
 
             updateUserDictionaryPreference(findPreference(KEY_USER_DICTIONARY_SETTINGS));
@@ -361,7 +342,40 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
-    private boolean hasOnlyOneLanguageInstance(String languageCode, String[] locales) {
+    private static String getLocaleName(Resources resources) {
+        Configuration conf = resources.getConfiguration();
+        String language = conf.locale.getLanguage();
+        String localeName;
+        // TODO: This is not an accurate way to display the locale, as it is
+        // just working around the fact that we support limited dialects
+        // and want to pretend that the language is valid for all locales.
+        // We need a way to support languages that aren't tied to a particular
+        // locale instead of hiding the locale qualifier.
+        if (language.equals("zz")) {
+            String country = conf.locale.getCountry();
+            if (country.equals("ZZ")) {
+                localeName = "[Developer] Accented English (zz_ZZ)";
+            } else if (country.equals("ZY")) {
+                localeName = "[Developer] Fake Bi-Directional (zz_ZY)";
+            } else {
+                localeName = "";
+            }
+        } else if (hasOnlyOneLanguageInstance(language,
+                Resources.getSystem().getAssets().getLocales())) {
+            localeName = conf.locale.getDisplayLanguage(conf.locale);
+        } else {
+            localeName = conf.locale.getDisplayName(conf.locale);
+        }
+
+        if (localeName.length() > 1) {
+            localeName = Character.toUpperCase(localeName.charAt(0))
+                    + localeName.substring(1);
+        }
+
+        return localeName;
+    }
+
+    private static boolean hasOnlyOneLanguageInstance(String languageCode, String[] locales) {
         int count = 0;
         for (String localeCode : locales) {
             if (localeCode.length() > 2
@@ -582,7 +596,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
     }
 
-    private boolean haveInputDeviceWithVibrator() {
+    private static boolean haveInputDeviceWithVibrator() {
         final int[] devices = InputDevice.getDeviceIds();
         for (int i = 0; i < devices.length; i++) {
             InputDevice device = InputDevice.getDevice(devices[i]);
@@ -617,4 +631,225 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mContext.getContentResolver().unregisterContentObserver(this);
         }
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
+
+            Resources resources = context.getResources();
+            String screenTitle = context.getString(R.string.language_keyboard_settings_title);
+
+            // Locale picker.
+            if (context.getAssets().getLocales().length > 1) {
+                String localeName = getLocaleName(resources);
+                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.title = context.getString(R.string.phone_language);
+                indexable.summaryOn = localeName;
+                indexable.summaryOff = localeName;
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            // Spell checker.
+            SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+            indexable.title = context.getString(R.string.spellcheckers_settings_title);
+            indexable.screenTitle = screenTitle;
+            indexables.add(indexable);
+
+            // User dictionary.
+            if (UserDictionaryList.getUserDictionaryLocalesSet(context) != null) {
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = context.getString(R.string.user_dict_settings_title);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            // Keyboard settings.
+            indexable = new SearchIndexableRaw(context);
+            indexable.title = context.getString(R.string.keyboard_settings_category);
+            indexable.screenTitle = screenTitle;
+            indexables.add(indexable);
+
+            InputMethodSettingValuesWrapper immValues = InputMethodSettingValuesWrapper
+                    .getInstance(context);
+            immValues.refreshAllInputMethodAndSubtypes();
+
+            // Current IME.
+            String currImeName = immValues.getCurrentInputMethodName(context).toString();
+            indexable = new SearchIndexableRaw(context);
+            indexable.title = context.getString(R.string.current_input_method);
+            indexable.summaryOn = currImeName;
+            indexable.summaryOff = currImeName;
+            indexable.screenTitle = screenTitle;
+            indexables.add(indexable);
+
+            InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
+
+            // All other IMEs.
+            List<InputMethodInfo> inputMethods = immValues.getInputMethodList();
+            final int inputMethodCount = (inputMethods == null ? 0 : inputMethods.size());
+            for (int i = 0; i < inputMethodCount; ++i) {
+                InputMethodInfo inputMethod = inputMethods.get(i);
+
+                StringBuilder builder = new StringBuilder();
+                List<InputMethodSubtype> subtypes = inputMethodManager
+                        .getEnabledInputMethodSubtypeList(inputMethod, true);
+                final int subtypeCount = subtypes.size();
+                for (int j = 0; j < subtypeCount; j++) {
+                    InputMethodSubtype subtype = subtypes.get(j);
+                    if (builder.length() > 0) {
+                        builder.append(',');
+                    }
+                    CharSequence subtypeLabel = subtype.getDisplayName(context,
+                            inputMethod.getPackageName(), inputMethod.getServiceInfo()
+                                    .applicationInfo);
+                    builder.append(subtypeLabel);
+                }
+                String summary = builder.toString();
+
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = inputMethod.loadLabel(context.getPackageManager()).toString();
+                indexable.summaryOn = summary;
+                indexable.summaryOff = summary;
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            // Hard keyboards
+            InputManager inputManager = (InputManager) context.getSystemService(
+                    Context.INPUT_SERVICE);
+            if (resources.getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY) {
+                boolean hasHardKeyboards = false;
+
+                final int[] devices = InputDevice.getDeviceIds();
+                for (int i = 0; i < devices.length; i++) {
+                    InputDevice device = InputDevice.getDevice(devices[i]);
+                    if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
+                        continue;
+                    }
+
+                    hasHardKeyboards = true;
+
+                    InputDeviceIdentifier identifier = device.getIdentifier();
+                    String keyboardLayoutDescriptor =
+                            inputManager.getCurrentKeyboardLayoutForInputDevice(identifier);
+                    KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
+                            inputManager.getKeyboardLayout(keyboardLayoutDescriptor) : null;
+
+                    String summary;
+                    if (keyboardLayout != null) {
+                        summary = keyboardLayout.toString();
+                    } else {
+                        summary = context.getString(R.string.keyboard_layout_default_label);
+                    }
+
+                    indexable = new SearchIndexableRaw(context);
+                    indexable.title = device.getName();
+                    indexable.summaryOn = summary;
+                    indexable.summaryOff = summary;
+                    indexable.screenTitle = screenTitle;
+                    indexables.add(indexable);
+                }
+
+                if (hasHardKeyboards) {
+                    // Hard keyboard category.
+                    indexable = new SearchIndexableRaw(context);
+                    indexable.title = context.getString(
+                            R.string.builtin_keyboard_settings_title);
+                    indexable.screenTitle = screenTitle;
+                    indexables.add(indexable);
+
+                    // Auto replace.
+                    indexable = new SearchIndexableRaw(context);
+                    indexable.title = context.getString(R.string.auto_replace);
+                    indexable.summaryOn = context.getString(R.string.auto_replace_summary);
+                    indexable.summaryOff = context.getString(R.string.auto_replace_summary);
+                    indexable.screenTitle = screenTitle;
+                    indexables.add(indexable);
+
+                    // Auto caps.
+                    indexable = new SearchIndexableRaw(context);
+                    indexable.title = context.getString(R.string.auto_caps);
+                    indexable.summaryOn = context.getString(R.string.auto_caps_summary);
+                    indexable.summaryOff = context.getString(R.string.auto_caps_summary);
+                    indexable.screenTitle = screenTitle;
+                    indexables.add(indexable);
+
+                    // Auto punctuate.
+                    indexable = new SearchIndexableRaw(context);
+                    indexable.title = context.getString(R.string.auto_punctuate);
+                    indexable.summaryOn = context.getString(R.string.auto_punctuate_summary);
+                    indexable.summaryOff = context.getString(R.string.auto_punctuate_summary);
+                    indexable.screenTitle = screenTitle;
+                    indexables.add(indexable);
+                }
+            }
+
+            // Voice recognizers.
+            List<ResolveInfo> recognizers = context.getPackageManager()
+                    .queryIntentServices(new Intent(RecognitionService.SERVICE_INTERFACE),
+                            PackageManager.GET_META_DATA);
+
+            final int recognizerCount = recognizers.size();
+
+            // Recognizer settings.
+            if (recognizerCount > 0) {
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = context.getString(R.string.recognizer_settings_title);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            if (recognizerCount > 1) {
+                // Recognizer chooser.
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = context.getString(R.string.recognizer_title);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            for (int i = 0; i < recognizerCount; i++) {
+                ResolveInfo recognizer = recognizers.get(i);
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = recognizer.loadLabel(context.getPackageManager()).toString();
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            // Text-to-speech.
+            TtsEngines ttsEngines = new TtsEngines(context);
+            if (!ttsEngines.getEngines().isEmpty()) {
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = context.getString(R.string.tts_settings_title);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            // Pointer settings.
+            indexable = new SearchIndexableRaw(context);
+            indexable.title = context.getString(R.string.pointer_settings_category);
+            indexable.screenTitle = screenTitle;
+            indexables.add(indexable);
+
+            indexable = new SearchIndexableRaw(context);
+            indexable.title = context.getString(R.string.pointer_speed);
+            indexable.screenTitle = screenTitle;
+            indexables.add(indexable);
+
+            // Game controllers.
+            if (haveInputDeviceWithVibrator()) {
+                indexable = new SearchIndexableRaw(context);
+                indexable.title = context.getString(R.string.vibrate_input_devices);
+                indexable.summaryOn = context.getString(R.string.vibrate_input_devices_summary);
+                indexable.summaryOff = context.getString(R.string.vibrate_input_devices_summary);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            return indexables;
+        }
+    };
 }

@@ -168,7 +168,7 @@ public final class SearchIndexableResources {
 
         sResMap.put(InputMethodAndLanguageSettings.class.getName(),
                 new SearchIndexableResource(RANK_IME,
-                        R.xml.language_settings,
+                        NO_DATA_RES_ID,
                         InputMethodAndLanguageSettings.class.getName(),
                         R.drawable.ic_settings_language));
 

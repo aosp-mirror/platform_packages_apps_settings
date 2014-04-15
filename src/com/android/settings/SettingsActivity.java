@@ -40,6 +40,9 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.database.ContentObserver;
+import android.hardware.input.InputManager;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,7 +60,7 @@ import android.preference.PreferenceScreen;
 import android.print.PrintManager;
 import android.printservice.PrintService;
 import android.printservice.PrintServiceInfo;
-import android.provider.SearchIndexableData;
+import android.provider.UserDictionary;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -69,6 +72,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.accessibility.AccessibilityManager;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -119,7 +124,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.android.settings.dashboard.Header.HEADER_ID_UNDEFINED;
@@ -315,8 +319,8 @@ public class SettingsActivity extends Activity
         }
     };
 
-    private final DynamicIndexablePackageMonitor mDynamicIndexablePackageMonitor =
-            new DynamicIndexablePackageMonitor();
+    private final DynamicIndexableContentMonitor mDynamicIndexableContentMonitor =
+            new DynamicIndexableContentMonitor();
 
     private Button mNextButton;
     private ActionBar mActionBar;
@@ -625,7 +629,7 @@ public class SettingsActivity extends Activity
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-        mDynamicIndexablePackageMonitor.register(this);
+        mDynamicIndexableContentMonitor.register(this);
     }
 
     @Override
@@ -641,7 +645,7 @@ public class SettingsActivity extends Activity
 
         mDevelopmentPreferencesListener = null;
 
-        mDynamicIndexablePackageMonitor.unregister();
+        mDynamicIndexableContentMonitor.unregister();
     }
 
     @Override
@@ -1290,12 +1294,17 @@ public class SettingsActivity extends Activity
         mSearchMenuItem.collapseActionView();
     }
 
-    private static final class DynamicIndexablePackageMonitor extends PackageMonitor {
+    private static final class DynamicIndexableContentMonitor extends PackageMonitor implements
+            InputManager.InputDeviceListener {
+
         private static final Intent ACCESSIBILITY_SERVICE_INTENT =
                 new Intent(AccessibilityService.SERVICE_INTERFACE);
 
         private static final Intent PRINT_SERVICE_INTENT =
                 new Intent(PrintService.SERVICE_INTERFACE);
+
+        private static final Intent IME_SERVICE_INTENT =
+                new Intent("android.view.InputMethod");
 
         private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
 
@@ -1304,6 +1313,7 @@ public class SettingsActivity extends Activity
 
         private final List<String> mAccessibilityServices = new ArrayList<String>();
         private final List<String> mPrintServices = new ArrayList<String>();
+        private final List<String> mImeServices = new ArrayList<String>();
 
         private final Handler mHandler = new Handler() {
             @Override
@@ -1321,6 +1331,8 @@ public class SettingsActivity extends Activity
                 }
             }
         };
+
+        private final ContentObserver mContentObserver = new MyContentObserver(mHandler);
 
         private Context mContext;
 
@@ -1350,13 +1362,41 @@ public class SettingsActivity extends Activity
                         .serviceInfo.packageName);
             }
 
+            // Cache IME service packages to know when they go away.
+            InputMethodManager imeManager = (InputMethodManager)
+                    mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            List<InputMethodInfo> inputMethods = imeManager.getInputMethodList();
+            final int inputMethodCount = inputMethods.size();
+            for (int i = 0; i < inputMethodCount; i++) {
+                InputMethodInfo inputMethod = inputMethods.get(i);
+                mImeServices.add(inputMethod.getServiceInfo().packageName);
+            }
+
+            // Watch for related content URIs.
+            mContext.getContentResolver().registerContentObserver(
+                    UserDictionary.Words.CONTENT_URI, true, mContentObserver);
+
+            // Watch for input device changes.
+            InputManager inputManager = (InputManager) context.getSystemService(
+                    Context.INPUT_SERVICE);
+            inputManager.registerInputDeviceListener(this, mHandler);
+
+            // Start tracking packages.
             register(context, Looper.getMainLooper(), UserHandle.CURRENT, false);
         }
 
         public void unregister() {
             super.unregister();
+
+            InputManager inputManager = (InputManager) mContext.getSystemService(
+                    Context.INPUT_SERVICE);
+            inputManager.unregisterInputDeviceListener(this);
+
+            mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+
             mAccessibilityServices.clear();
             mPrintServices.clear();
+            mImeServices.clear();
         }
 
         // Covers installed, appeared external storage with the package, upgraded.
@@ -1383,6 +1423,23 @@ public class SettingsActivity extends Activity
             } else {
                 postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
             }
+        }
+
+        @Override
+        public void onInputDeviceAdded(int deviceId) {
+            Index.getInstance(mContext).updateFromClassNameResource(
+                    InputMethodAndLanguageSettings.class.getName(), false, true);
+        }
+
+        @Override
+        public void onInputDeviceRemoved(int deviceId) {
+            onInputDeviceChanged(deviceId);
+        }
+
+        @Override
+        public void onInputDeviceChanged(int deviceId) {
+            Index.getInstance(mContext).updateFromClassNameResource(
+                    InputMethodAndLanguageSettings.class.getName(), true, true);
         }
 
         private void postMessage(int what, String packageName) {
@@ -1412,6 +1469,17 @@ public class SettingsActivity extends Activity
                 }
                 intent.setPackage(null);
             }
+
+            if (!mImeServices.contains(packageName)) {
+                Intent intent = IME_SERVICE_INTENT;
+                intent.setPackage(packageName);
+                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                    mImeServices.add(packageName);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            InputMethodAndLanguageSettings.class.getName(), false, true);
+                }
+                intent.setPackage(null);
+            }
         }
 
         private void handlePackageUnavailable(String packageName) {
@@ -1428,6 +1496,21 @@ public class SettingsActivity extends Activity
                 Index.getInstance(mContext).updateFromClassNameResource(
                         PrintSettingsFragment.class.getName(), true, true);
             }
+        }
+
+        private final class MyContentObserver extends ContentObserver {
+
+            public MyContentObserver(Handler handler) {
+                super(handler);
+            }
+
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            InputMethodAndLanguageSettings.class.getName(), true, true);
+                }
+            };
         }
     }
 }
