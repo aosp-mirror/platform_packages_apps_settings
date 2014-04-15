@@ -342,12 +342,18 @@ public class SearchResultsSummary extends Fragment {
                     !summaryOn.contains(PERCENT_RECLACE) && !summaryOn.contains(DOLLAR_REPLACE)) {
                 sb.append(summaryOn);
                 sb.append(ELLIPSIS);
-            }
-            if (!TextUtils.isEmpty(entries)) {
-                sb.append(" \n ");
-                sb.append(entries);
+            } else if (!TextUtils.isEmpty(entries)) {
+                final int index  = entries.indexOf(Index.ENTRIES_SEPARATOR);
+                if (index > 0) {
+                    final String firstEntriesValue = entries.substring(0, index);
+                    sb.append(firstEntriesValue);
+                } else {
+                    sb.append(entries);
+                }
+                sb.append(ELLIPSIS);
             }
             textSummary.setText(sb.toString());
+
             if (result.iconResId != R.drawable.empty_icon) {
                 final Context packageContext = result.context;
                 final Drawable drawable;

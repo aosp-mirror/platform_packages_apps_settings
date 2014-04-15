@@ -100,6 +100,8 @@ public class Index {
     public static final int COLUMN_INDEX_ENABLED = 12;
     public static final int COLUMN_INDEX_KEY = 13;
 
+    public static final String ENTRIES_SEPARATOR = "|";
+
     // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
     private static final String[] SELECT_COLUMNS = new String[] {
             IndexColumns.DATA_RANK,               // 0
@@ -994,7 +996,7 @@ public class Index {
         final StringBuilder result = new StringBuilder();
         for (int n = 0; n < count; n++) {
             result.append(data[n]);
-            result.append(" ");
+            result.append(ENTRIES_SEPARATOR);
         }
         return result.toString();
     }
