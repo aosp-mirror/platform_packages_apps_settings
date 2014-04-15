@@ -46,10 +46,13 @@ public class SearchResultsSummary extends Fragment {
 
     private static final String LOG_TAG = "SearchResultsSummary";
 
+    private static char ELLIPSIS = '\u2026';
+
     private ListView mListView;
 
     private SearchResultsAdapter mAdapter;
     private UpdateSearchResultsTask mUpdateSearchResultsTask;
+
 
     /**
      * A basic AsyncTask for updating the query results cursor
@@ -331,7 +334,6 @@ public class SearchResultsSummary extends Fragment {
             textTitle.setText(result.title);
 
             String summaryOn = result.summaryOn;
-            String summaryOff = result.summaryOff;
             String entries = result.entries;
 
             final StringBuilder sb = new StringBuilder();
@@ -339,12 +341,7 @@ public class SearchResultsSummary extends Fragment {
             if (!TextUtils.isEmpty(summaryOn) &&
                     !summaryOn.contains(PERCENT_RECLACE) && !summaryOn.contains(DOLLAR_REPLACE)) {
                 sb.append(summaryOn);
-                if (!TextUtils.isEmpty(summaryOff) &&
-                        !summaryOff.contains(PERCENT_RECLACE) &&
-                        !summaryOff.contains(DOLLAR_REPLACE)) {
-                    sb.append(" \n ");
-                    sb.append(summaryOff);
-                }
+                sb.append(ELLIPSIS);
             }
             if (!TextUtils.isEmpty(entries)) {
                 sb.append(" \n ");
