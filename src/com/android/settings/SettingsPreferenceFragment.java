@@ -23,10 +23,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceGroupAdapter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +36,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
@@ -44,7 +46,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private static final String TAG = "SettingsPreferenceFragment";
 
     private static final int MENU_HELP = Menu.FIRST + 100;
-    private static final int HIGHLIGHT_DURATION_MILLIS = 750;
+    private static final int HIGHLIGHT_DURATION_MILLIS = 300;
+
+    private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
     private SettingsDialogFragment mDialogFragment;
 
@@ -53,15 +57,28 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     // Cache the content resolver for async callbacks
     private ContentResolver mContentResolver;
 
+    private boolean mPreferenceHighlighted = false;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        if (icicle != null) {
+            mPreferenceHighlighted = icicle.getBoolean(SAVE_HIGHLIGHTED_KEY);
+        }
 
         // Prepare help url and enable menu if necessary
         int helpResource = getHelpResource();
         if (helpResource != 0) {
             mHelpUrl = getResources().getString(helpResource);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean(SAVE_HIGHLIGHTED_KEY, mPreferenceHighlighted);
     }
 
     @Override
@@ -74,39 +91,64 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         final Bundle args = getArguments();
         if (args != null) {
             final String key = args.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
-            final int position = findPositionFromKey(getPreferenceScreen(), key);
-            if (position >= 0) {
-                final ListAdapter adapter = getListView().getAdapter();
-                if (adapter instanceof PreferenceGroupAdapter) {
-                    ((PreferenceGroupAdapter) adapter).setActivated(position);
-
-                    getListView().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ((PreferenceGroupAdapter) adapter).setActivated(-1);
-                            ((PreferenceGroupAdapter) adapter).notifyDataSetChanged();
-                        }
-                    }, HIGHLIGHT_DURATION_MILLIS);
-                }
+            if (hasListView() && !TextUtils.isEmpty(key)) {
+                highlightPreference(key);
             }
         }
     }
 
-    private int findPositionFromKey(PreferenceGroup group, String key) {
-        if (group != null) {
-            int count = group.getPreferenceCount();
-            for (int n = 0; n < count; n++) {
-                final Preference preference = group.getPreference(n);
+    private void highlightPreference(String key) {
+        final int position = findPositionFromKey(key);
+        if (position >= 0) {
+            final ListView listView = getListView();
+            final ListAdapter adapter = listView.getAdapter();
+
+            if (adapter instanceof PreferenceGroupAdapter) {
+                final Drawable drawable = getHighlightDrawable();
+                ((PreferenceGroupAdapter) adapter).setHighlightedDrawable(drawable);
+                ((PreferenceGroupAdapter) adapter).setHighlighted(position);
+
+                listView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listView.setSelection(position);
+                        if (!mPreferenceHighlighted) {
+                            listView.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    final int centerX = listView.getWidth() / 2;
+                                    final int centerY = listView.getChildAt(0).getHeight() / 2;
+                                    drawable.setHotspot(0, centerX, centerY);
+                                    drawable.clearHotspots();
+                                    ((PreferenceGroupAdapter) adapter).setHighlighted(-1);
+                                }
+                            }, HIGHLIGHT_DURATION_MILLIS);
+
+                            mPreferenceHighlighted = true;
+                        }
+                    }
+                });
+            }
+        }
+
+    }
+
+    private Drawable getHighlightDrawable() {
+        final int[] attrs = new int[] { android.R.attr.selectableItemBackground };
+        TypedArray ta = getActivity().getTheme().obtainStyledAttributes(attrs);
+        return ta.getDrawable(0);
+    }
+
+    private int findPositionFromKey(String key) {
+        final ListAdapter adapter = getListView().getAdapter();
+        final int count = adapter.getCount();
+        for (int n = 0; n < count; n++) {
+            Object item = adapter.getItem(n);
+            if (item instanceof Preference) {
+                Preference preference = (Preference) item;
                 final String preferenceKey = preference.getKey();
                 if (preferenceKey != null && preferenceKey.equals(key)) {
                     return n;
-                }
-                if (preference instanceof PreferenceGroup) {
-                    PreferenceGroup nestedGroup = (PreferenceGroup) preference;
-                    final int nestedPosition = findPositionFromKey(nestedGroup, key);
-                    if (nestedPosition >= 0) {
-                        return n + 1 + nestedPosition;
-                    }
                 }
             }
         }
