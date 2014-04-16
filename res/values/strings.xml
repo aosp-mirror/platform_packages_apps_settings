@@ -1494,6 +1494,8 @@
     <!-- Substring of wifi status for wifi with authentication.  This version is for when the
          string is not first in the list (lowercase in english) -->
     <string name="wifi_secured_second_item">, secured with <xliff:g id="wifi_security_short">%1$s</xliff:g></string>
+    <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR LIMIT=150] -->
+    <string name="wifi_wps_nfc_enter_password">Enter your network password.</string>
 
     <!-- Do not translate.  Concise terminology for wifi with WEP security -->
     <string name="wifi_security_short_wep">WEP</string>
@@ -5059,4 +5061,23 @@
     <!-- [CHAR LIMIT=NONE] Content description for per-app notification
          settings button -->
     <string name="notification_app_settings_button">Notification settings</string>
+
+    <!-- NFC WiFi pairing/setup strings-->
+
+    <!-- Write NFC tag for WiFi pairing/setup title -->
+    <string name="setup_wifi_nfc_tag">Set up WiFi NFC Tag</string>
+    <!-- Text for button to confirm writing tag -->
+    <string name="write_tag">Write</string>
+    <!-- Text to inform the user to tap a tag to complete the setup process -->
+    <string name="status_awaiting_tap">Tap a tag to write...</string>
+    <!-- Text to inform the user that the network key entered was incorrect -->
+    <string name="status_invalid_password">Invalid password, try again.</string>
+    <!-- Text displayed when tag successfully writen -->
+    <string name="status_write_success">Success!</string>
+    <!-- Text displayed in error cases (failure to write to tag) -->
+    <string name="status_failed_to_write">Unable to write data to NFC tag. If the problem persists, try a different tag</string>
+    <!-- Text displayed when tag is not writable -->
+    <string name="status_tag_not_writable">NFC tag is not writable. Please use a different tag.</string>
+
+
 </resources>
