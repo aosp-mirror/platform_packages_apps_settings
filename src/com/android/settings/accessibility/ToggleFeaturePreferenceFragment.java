@@ -88,11 +88,14 @@ public abstract class ToggleFeaturePreferenceFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final Context context = view.getContext();
+        final Context context = getActivity().getActionBar().getThemedContext();
         final int padding = context.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mToggleSwitch = new ToggleSwitch(context);
         mToggleSwitch.setPaddingRelative(0, 0, padding, 0);
+        mToggleSwitch.setLayoutParams(new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.END));
 
         onProcessArguments(getArguments());
     }
@@ -127,11 +130,8 @@ public abstract class ToggleFeaturePreferenceFragment
 
     private void installActionBarToggleSwitch() {
         final ActionBar ab = getActivity().getActionBar();
-        final ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END);
         ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM);
-        ab.setCustomView(mToggleSwitch, params);
+        ab.setCustomView(mToggleSwitch);
 
         onInstallActionBarToggleSwitch();
     }

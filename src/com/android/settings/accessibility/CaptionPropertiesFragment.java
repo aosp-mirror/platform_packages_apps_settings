@@ -129,11 +129,14 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mPreviewText = (SubtitleView) view.findViewById(R.id.preview_text);
         mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
 
-        final Context context = view.getContext();
+        final Context context = getActivity().getActionBar().getThemedContext();
         final int padding = context.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mToggleSwitch = new ToggleSwitch(context);
         mToggleSwitch.setPaddingRelative(0, 0, padding, 0);
+        mToggleSwitch.setLayoutParams(new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_VERTICAL | Gravity.END));
         mToggleSwitch.setCheckedInternal(enabled);
 
         mPreviewWindow = view.findViewById(R.id.preview_window);
@@ -220,11 +223,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
     private void installActionBarToggleSwitch() {
         final ActionBar ab = getActivity().getActionBar();
-        final ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END);
         ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM);
-        ab.setCustomView(mToggleSwitch, params);
+        ab.setCustomView(mToggleSwitch);
 
         onInstallActionBarToggleSwitch();
     }
