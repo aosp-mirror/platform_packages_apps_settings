@@ -151,6 +151,11 @@ public class SearchResultsSummary extends Fragment {
         return true;
     }
 
+    public boolean onQueryTextChange(String query) {
+        updateSearchResults(query);
+        return true;
+    }
+
     public boolean onClose() {
         clearResults();
         return false;
