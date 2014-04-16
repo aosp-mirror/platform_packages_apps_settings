@@ -32,6 +32,7 @@ import android.os.Message;
 import android.os.SystemProperties;
 import android.telephony.CellInfo;
 import android.telephony.CellLocation;
+import android.telephony.DataConnectionRealTimeInfo;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
@@ -103,6 +104,7 @@ public class RadioInfo extends Activity {
     private TextView mLocation;
     private TextView mNeighboringCids;
     private TextView mCellInfo;
+    private TextView mDcRtInfoTv;
     private TextView resets;
     private TextView attempts;
     private TextView successes;
@@ -170,6 +172,12 @@ public class RadioInfo extends Activity {
         public void onCellInfoChanged(List<CellInfo> arrayCi) {
             log("onCellInfoChanged: arrayCi=" + arrayCi);
             updateCellInfoTv(arrayCi);
+        }
+
+        @Override
+        public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo) {
+            log("onDataConnectionRealTimeInfoChanged: dcRtInfo=" + dcRtInfo);
+            updateDcRtInfoTv(dcRtInfo);
         }
     };
 
@@ -264,6 +272,7 @@ public class RadioInfo extends Activity {
         mLocation = (TextView) findViewById(R.id.location);
         mNeighboringCids = (TextView) findViewById(R.id.neighboring);
         mCellInfo = (TextView) findViewById(R.id.cellinfo);
+        mDcRtInfoTv = (TextView) findViewById(R.id.dcrtinfo);
 
         resets = (TextView) findViewById(R.id.resets);
         attempts = (TextView) findViewById(R.id.attempts);
@@ -366,7 +375,8 @@ public class RadioInfo extends Activity {
                 | PhoneStateListener.LISTEN_CELL_LOCATION
                 | PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR
                 | PhoneStateListener.LISTEN_CALL_FORWARDING_INDICATOR
-                | PhoneStateListener.LISTEN_CELL_INFO);
+                | PhoneStateListener.LISTEN_CELL_INFO
+                | PhoneStateListener.LISTEN_DATA_CONNECTION_REAL_TIME_INFO);
     }
 
     @Override
@@ -539,6 +549,10 @@ public class RadioInfo extends Activity {
             }
         }
         mCellInfo.setText(value.toString());
+    }
+
+    private final void updateDcRtInfoTv(DataConnectionRealTimeInfo dcRtInfo) {
+        mDcRtInfoTv.setText(dcRtInfo.toString());
     }
 
     private final void

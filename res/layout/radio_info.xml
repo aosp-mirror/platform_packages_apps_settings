@@ -91,6 +91,13 @@
             <TextView android:id="@+id/cellinfo" style="@style/info_value" />
         </LinearLayout>
 
+        <!-- DcRtInfo - DataConnectionRealTimeInfo -->
+        <LinearLayout style="@style/entry_layout">
+            <TextView android:text="@string/radio_info_dcrtinfo_label"
+                      style="@style/info_label" />
+            <TextView android:id="@+id/dcrtinfo" style="@style/info_value" />
+        </LinearLayout>
+
         <!-- Roaming -->
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_roaming_label" style="@style/info_label" />
