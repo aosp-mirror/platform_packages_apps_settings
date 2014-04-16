@@ -616,6 +616,10 @@ public class SettingsActivity extends Activity
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         mDynamicIndexableContentMonitor.register(this);
+
+        if(!TextUtils.isEmpty(mSearchQuery)) {
+            onQueryTextSubmit(mSearchQuery);
+        }
     }
 
     @Override
@@ -1226,7 +1230,10 @@ public class SettingsActivity extends Activity
     @Override
     public boolean onQueryTextChange(String newText) {
         mSearchQuery = newText;
-        return false;
+        if (TextUtils.isEmpty(newText) && mSearchResultsFragment == null) {
+            return false;
+        }
+        return mSearchResultsFragment.onQueryTextChange(newText);
     }
 
     @Override
