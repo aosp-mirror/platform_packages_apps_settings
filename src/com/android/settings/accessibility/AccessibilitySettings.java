@@ -596,6 +596,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             final int serviceCount = services.size();
             for (int i = 0; i < serviceCount; i++) {
                 AccessibilityServiceInfo service = services.get(i);
+                if (service == null || service.getResolveInfo() == null) {
+                    continue;
+                }
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
                 indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
                 indexable.summaryOn = context.getString(R.string.accessibility_feature_state_on);
