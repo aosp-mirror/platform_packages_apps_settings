@@ -1670,6 +1670,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ActiveNetworkScorerDialog"
+                  android:label="@string/network_scorer_application"
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.Holo.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.net.scoring.CHANGE_ACTIVE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
        <activity android:name=".PairNfcDevice"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$SecuritySettingsActivity"
