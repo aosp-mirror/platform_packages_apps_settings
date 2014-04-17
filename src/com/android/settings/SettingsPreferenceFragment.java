@@ -138,14 +138,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     private int findPositionFromKey(String key) {
         final ListAdapter adapter = getListView().getAdapter();
-        final int count = adapter.getCount();
-        for (int n = 0; n < count; n++) {
-            Object item = adapter.getItem(n);
-            if (item instanceof Preference) {
-                Preference preference = (Preference) item;
-                final String preferenceKey = preference.getKey();
-                if (preferenceKey != null && preferenceKey.equals(key)) {
-                    return n;
+        if (adapter != null) {
+            final int count = adapter.getCount();
+            for (int n = 0; n < count; n++) {
+                Object item = adapter.getItem(n);
+                if (item instanceof Preference) {
+                    Preference preference = (Preference) item;
+                    final String preferenceKey = preference.getKey();
+                    if (preferenceKey != null && preferenceKey.equals(key)) {
+                        return n;
+                    }
                 }
             }
         }
