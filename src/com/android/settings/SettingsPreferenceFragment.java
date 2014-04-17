@@ -23,7 +23,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -134,9 +133,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     }
 
     private Drawable getHighlightDrawable() {
-        final int[] attrs = new int[] { android.R.attr.selectableItemBackground };
-        TypedArray ta = getActivity().getTheme().obtainStyledAttributes(attrs);
-        return ta.getDrawable(0);
+        return getResources().getDrawable(R.drawable.preference_highlight);
     }
 
     private int findPositionFromKey(String key) {
