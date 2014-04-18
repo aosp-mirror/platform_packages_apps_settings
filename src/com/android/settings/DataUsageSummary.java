@@ -152,7 +152,7 @@ import java.util.Locale;
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
  */
-public class DataUsageSummary extends Fragment implements Indexable {
+public class DataUsageSummary extends HighlightingFragment implements Indexable {
     private static final String TAG = "DataUsage";
     private static final boolean LOGD = false;
 
@@ -351,6 +351,7 @@ public class DataUsageSummary extends Fragment implements Indexable {
 
             mDataEnabled = new Switch(inflater.getContext());
             mDataEnabledView = inflatePreference(inflater, mNetworkSwitches, mDataEnabled);
+            mDataEnabledView.setTag("data_usage_enable_mobile");
             mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
             mNetworkSwitches.addView(mDataEnabledView);
 
@@ -358,6 +359,7 @@ public class DataUsageSummary extends Fragment implements Indexable {
             mDisableAtLimit.setClickable(false);
             mDisableAtLimit.setFocusable(false);
             mDisableAtLimitView = inflatePreference(inflater, mNetworkSwitches, mDisableAtLimit);
+            mDisableAtLimitView.setTag("data_usage_disable_mobile_limit");
             mDisableAtLimitView.setClickable(true);
             mDisableAtLimitView.setFocusable(true);
             mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
@@ -366,6 +368,7 @@ public class DataUsageSummary extends Fragment implements Indexable {
 
         // bind cycle dropdown
         mCycleView = mHeader.findViewById(R.id.cycles);
+        mCycleView.setTag("data_usage_cycle");
         mCycleSpinner = (Spinner) mCycleView.findViewById(R.id.cycles_spinner);
         mCycleAdapter = new CycleAdapter(context);
         mCycleSpinner.setAdapter(mCycleAdapter);
@@ -409,8 +412,8 @@ public class DataUsageSummary extends Fragment implements Indexable {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
 
         // pick default tab based on incoming intent
         final Intent intent = getActivity().getIntent();
@@ -419,6 +422,18 @@ public class DataUsageSummary extends Fragment implements Indexable {
         // this kicks off chain reaction which creates tabs, binds the body to
         // selected network, and binds chart, cycles and detail list.
         updateTabs();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getView().post(new Runnable() {
+            @Override
+            public void run() {
+                highlightViewIfNeeded();
+            }
+        });
 
         // kick off background task to update stats
         new AsyncTask<Void, Void, Void>() {
@@ -1729,6 +1744,7 @@ public class DataUsageSummary extends Fragment implements Indexable {
 
             final View view = dialogInflater.inflate(R.layout.data_usage_cycle_editor, null, false);
             final NumberPicker cycleDayPicker = (NumberPicker) view.findViewById(R.id.cycle_day);
+            cycleDayPicker.setTag("data_usage_cycle");
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final int cycleDay = editor.getPolicyCycleDay(template);
@@ -2403,18 +2419,21 @@ public class DataUsageSummary extends Fragment implements Indexable {
 
                 // Mobile data
                 data = new SearchIndexableRaw(context);
+                data.key = "data_usage_enable_mobile";
                 data.title = res.getString(R.string.data_usage_enable_mobile);
                 data.screenTitle = res.getString(R.string.data_usage_summary_title);
                 result.add(data);
 
                 // Set mobile data limit
                 data = new SearchIndexableRaw(context);
+                data.key = "data_usage_disable_mobile_limit";
                 data.title = res.getString(R.string.data_usage_disable_mobile_limit);
                 data.screenTitle = res.getString(R.string.data_usage_summary_title);
                 result.add(data);
 
-                // Data usage cycke
+                // Data usage cycle
                 data = new SearchIndexableRaw(context);
+                data.key = "data_usage_cycle";
                 data.title = res.getString(R.string.data_usage_cycle);
                 data.screenTitle = res.getString(R.string.data_usage_summary_title);
                 result.add(data);

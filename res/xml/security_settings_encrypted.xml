@@ -18,13 +18,13 @@
 
     <PreferenceCategory
         android:key="security_category"
-        android:title="@string/crypt_keeper_settings_title"
-    >
+        android:title="@string/crypt_keeper_settings_title">
+
         <Preference
             style="?android:preferenceInformationStyle"
+            android:key="crypt_keeper_encrypt_title"
             android:title="@string/crypt_keeper_encrypt_title"
-            android:summary="@string/crypt_keeper_encrypted_summary"
-        />
+            android:summary="@string/crypt_keeper_encrypted_summary"/>
 
     </PreferenceCategory>
 
