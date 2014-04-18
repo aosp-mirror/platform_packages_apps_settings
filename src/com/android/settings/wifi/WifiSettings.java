@@ -415,7 +415,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (!mSetupWizardMode) {
             final Activity activity = getActivity();
 
-            mSwitch = new Switch(activity);
+            mSwitch = new Switch(activity.getActionBar().getThemedContext());
             boolean addSwitch = true;
 
             if (activity instanceof WifiPickerActivity) {
