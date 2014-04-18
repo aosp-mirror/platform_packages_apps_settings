@@ -50,7 +50,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -71,8 +70,6 @@ import java.util.List;
  */
 public class PrintSettingsFragment extends SettingsPreferenceFragment
         implements DialogCreatable, Indexable {
-
-    static final char ENABLED_PRINT_SERVICES_SEPARATOR = ':';
 
     private static final int LOADER_ID_PRINT_JOBS_LOADER = 1;
 

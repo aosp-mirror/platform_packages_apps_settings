@@ -117,7 +117,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         final Activity activity = getActivity();
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
-        mSwitch = new Switch(activity);
+        mSwitch = new Switch(activity.getActionBar().getThemedContext());
         mSwitch.setPaddingRelative(0, 0, padding, 0);
 
         mBluetoothEnabler = new BluetoothEnabler(activity, mSwitch);

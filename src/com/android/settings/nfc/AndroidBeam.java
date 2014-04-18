@@ -42,7 +42,7 @@ public class AndroidBeam extends Fragment
         super.onCreate(savedInstanceState);
         Activity activity = getActivity();
 
-        mActionBarSwitch = new Switch(activity);
+        mActionBarSwitch = new Switch(activity.getActionBar().getThemedContext());
 
         if (activity instanceof SettingsActivity) {
             final int padding = activity.getResources().getDimensionPixelSize(

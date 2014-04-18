@@ -86,7 +86,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
 
         mBackend = new DreamBackend(activity);
-        mSwitch = new Switch(activity);
+        mSwitch = new Switch(activity.getActionBar().getThemedContext());
         mSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

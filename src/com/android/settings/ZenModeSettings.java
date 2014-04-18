@@ -67,7 +67,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mActivity = getActivity();
-        mSwitch = new Switch(mActivity);
+        mSwitch = new Switch(mActivity.getActionBar().getThemedContext());
         final int p = getResources().getDimensionPixelSize(R.dimen.content_margin_left);
         mSwitch.setPadding(0, 0, p, 0);
         setHasOptionsMenu(true);

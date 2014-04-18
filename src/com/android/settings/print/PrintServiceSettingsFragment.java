@@ -294,7 +294,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mPrintersAdapter = new PrintersAdapter();
         mPrintersAdapter.registerDataSetObserver(mDataObserver);
 
-        mToggleSwitch = createActionBarToggleSwitch(getActivity());
+        mToggleSwitch = createActionBarToggleSwitch(getActivity().getActionBar().getThemedContext());
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
@@ -445,9 +445,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 
-    private ToggleSwitch createActionBarToggleSwitch(Activity activity) {
-        ToggleSwitch toggleSwitch = new ToggleSwitch(activity);
-        final int padding = activity.getResources().getDimensionPixelSize(
+    private ToggleSwitch createActionBarToggleSwitch(Context context) {
+        ToggleSwitch toggleSwitch = new ToggleSwitch(context);
+        final int padding = context.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         toggleSwitch.setPaddingRelative(0, 0, padding, 0);
         return toggleSwitch;

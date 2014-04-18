@@ -368,7 +368,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         super.onActivityCreated(savedInstanceState);
 
         final Activity activity = getActivity();
-        mEnabledSwitch = new Switch(activity);
+        mEnabledSwitch = new Switch(activity.getActionBar().getThemedContext());
 
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);

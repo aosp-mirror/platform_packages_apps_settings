@@ -73,7 +73,7 @@ public class LocationSettings extends LocationSettingsBase
 
         final Activity activity = getActivity();
 
-        mSwitch = new Switch(activity);
+        mSwitch = new Switch(activity.getActionBar().getThemedContext());
         final int padding = activity.getResources().getDimensionPixelSize(
                 R.dimen.action_bar_switch_padding);
         mSwitch.setPaddingRelative(0, 0, padding, 0);
