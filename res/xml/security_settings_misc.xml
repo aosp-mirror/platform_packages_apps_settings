@@ -20,7 +20,8 @@
             android:title="@string/sim_lock_settings_title"
             android:persistent="false">
 
-        <Preference android:title="@string/sim_lock_settings_category"
+        <Preference android:key="sim_lock_settings"
+                android:title="@string/sim_lock_settings_category"
                 android:persistent="false">
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="com.android.settings"
@@ -40,25 +41,25 @@
             android:title="@string/device_admin_title"
             android:persistent="false">
 
-        <Preference android:title="@string/manage_device_admin"
+        <Preference android:key="manage_device_admin"
+                android:title="@string/manage_device_admin"
                 android:summary="@string/manage_device_admin_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
-        <Preference android:title="@string/manage_trust_agents"
+        <Preference android:key="manage_trust_agents"
+                    android:title="@string/manage_trust_agents"
                     android:summary="@string/manage_trust_agents_summary"
                     android:persistent="false"
                     android:fragment="com.android.settings.TrustAgentSettings"/>
 
-        <CheckBoxPreference
-                android:key="toggle_install_applications"
+        <CheckBoxPreference android:key="toggle_install_applications"
                 android:title="@string/install_applications"
                 android:summaryOff="@string/install_unknown_applications"
                 android:summaryOn="@string/install_unknown_applications"
                 android:persistent="false" />
 
-        <CheckBoxPreference
-                android:key="toggle_verify_applications"
+        <CheckBoxPreference android:key="toggle_verify_applications"
                 android:title="@string/verify_applications"
                 android:summaryOff="@string/verify_applications_summary"
                 android:summaryOn="@string/verify_applications_summary"
@@ -74,7 +75,8 @@
                 style="?android:attr/preferenceInformationStyle"
                 android:persistent="false" />
 
-        <Preference android:title="@string/trusted_credentials"
+        <Preference android:key="trusted_credentials"
+                android:title="@string/trusted_credentials"
                 android:summary="@string/trusted_credentials_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.TrustedCredentialsSettings"/>
@@ -88,7 +90,7 @@
                     android:targetClass="com.android.certinstaller.CertInstallerMain"/>
         </Preference>
 
-        <Preference android:key="reset_credentials"
+        <Preference android:key="credentials_reset"
                 android:title="@string/credentials_reset"
                 android:summary="@string/credentials_reset_summary"
                 android:persistent="false">

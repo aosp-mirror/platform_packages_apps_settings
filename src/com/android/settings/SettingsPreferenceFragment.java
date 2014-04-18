@@ -33,6 +33,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -45,7 +47,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private static final String TAG = "SettingsPreferenceFragment";
 
     private static final int MENU_HELP = Menu.FIRST + 100;
-    private static final int HIGHLIGHT_DURATION_MILLIS = 300;
+    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 300;
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
@@ -56,6 +58,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     // Cache the content resolver for async callbacks
     private ContentResolver mContentResolver;
 
+    private String mPreferenceKey;
     private boolean mPreferenceHighlighted = false;
 
     @Override
@@ -89,69 +92,126 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
         final Bundle args = getArguments();
         if (args != null) {
-            final String key = args.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
-            if (hasListView() && !TextUtils.isEmpty(key)) {
-                highlightPreference(key);
-            }
+            mPreferenceKey = args.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
+            highlightPreferenceIfNeeded();
         }
     }
 
-    private void highlightPreference(String key) {
-        final int position = findPositionFromKey(key);
-        if (position >= 0) {
-            final ListView listView = getListView();
-            final ListAdapter adapter = listView.getAdapter();
+    @Override
+    protected void onBindPreferences() {
+        highlightPreferenceIfNeeded();
+    }
 
-            if (adapter instanceof PreferenceGroupAdapter) {
-                final Drawable drawable = getHighlightDrawable();
-                ((PreferenceGroupAdapter) adapter).setHighlightedDrawable(drawable);
-                ((PreferenceGroupAdapter) adapter).setHighlighted(position);
-
-                listView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listView.setSelection(position);
-                        if (!mPreferenceHighlighted) {
-                            listView.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    final int centerX = listView.getWidth() / 2;
-                                    final int centerY = listView.getChildAt(0).getHeight() / 2;
-                                    drawable.setHotspot(0, centerX, centerY);
-                                    drawable.clearHotspots();
-                                    ((PreferenceGroupAdapter) adapter).setHighlighted(-1);
-                                }
-                            }, HIGHLIGHT_DURATION_MILLIS);
-
-                            mPreferenceHighlighted = true;
-                        }
-                    }
-                });
-            }
+    public void highlightPreferenceIfNeeded() {
+        if (!mPreferenceHighlighted &&!TextUtils.isEmpty(mPreferenceKey)) {
+            highlightPreference(mPreferenceKey);
         }
-
     }
 
     private Drawable getHighlightDrawable() {
         return getResources().getDrawable(R.drawable.preference_highlight);
     }
 
-    private int findPositionFromKey(String key) {
-        final ListAdapter adapter = getListView().getAdapter();
-        if (adapter != null) {
-            final int count = adapter.getCount();
-            for (int n = 0; n < count; n++) {
-                Object item = adapter.getItem(n);
-                if (item instanceof Preference) {
-                    Preference preference = (Preference) item;
-                    final String preferenceKey = preference.getKey();
-                    if (preferenceKey != null && preferenceKey.equals(key)) {
-                        return n;
-                    }
+    /**
+     * Return a valid ListView position or -1 if none is found
+     */
+    private int canUseListViewForHighLighting(String key) {
+        if (!hasListView()) {
+            return -1;
+        }
+
+        ListView listView = getListView();
+        ListAdapter adapter = listView.getAdapter();
+
+        if (adapter != null && adapter instanceof PreferenceGroupAdapter) {
+            return findListPositionFromKey(adapter, key);
+        }
+
+        return -1;
+    }
+
+    private void highlightPreference(String key) {
+        final Drawable highlight = getHighlightDrawable();
+
+        final int position = canUseListViewForHighLighting(key);
+        if (position >= 0) {
+            final ListView listView = getListView();
+            final ListAdapter adapter = listView.getAdapter();
+
+            ((PreferenceGroupAdapter) adapter).setHighlightedDrawable(highlight);
+            ((PreferenceGroupAdapter) adapter).setHighlighted(position);
+
+            listView.post(new Runnable() {
+                @Override
+                public void run() {
+                    listView.setSelection(position);
+                    listView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            final int centerX = listView.getWidth() / 2;
+                            final int centerY = listView.getChildAt(0).getHeight() / 2;
+                            highlight.setHotspot(0, centerX, centerY);
+                            highlight.clearHotspots();
+                            ((PreferenceGroupAdapter) adapter).setHighlighted(-1);
+                        }
+                    }, DELAY_HIGHLIGHT_DURATION_MILLIS);
+
+                    mPreferenceHighlighted = true;
+                }
+            });
+        } else {
+            // Try locating the Preference View thru its tag
+            View preferenceView = findPreferenceViewForKey(getView(), key);
+            if (preferenceView != null ) {
+                preferenceView.setBackground(highlight);
+                final int centerX = preferenceView.getWidth() / 2;
+                final int centerY = preferenceView.getHeight() / 2;
+                highlight.setHotspot(0, centerX, centerY);
+                highlight.clearHotspots();
+            }
+        }
+    }
+
+    private int findListPositionFromKey(ListAdapter adapter, String key) {
+        final int count = adapter.getCount();
+        for (int n = 0; n < count; n++) {
+            final Object item = adapter.getItem(n);
+            if (item instanceof Preference) {
+                Preference preference = (Preference) item;
+                final String preferenceKey = preference.getKey();
+                if (preferenceKey != null && preferenceKey.equals(key)) {
+                    return n;
                 }
             }
         }
         return -1;
+    }
+
+    private View findPreferenceViewForKey(View root, String key) {
+        if (checkTag(root, key)) {
+            return root;
+        }
+        if (root instanceof ViewGroup) {
+            final ViewGroup group = (ViewGroup) root;
+            final int count = group.getChildCount();
+            for (int n = 0; n < count; n++) {
+                final View child = group.getChildAt(n);
+                final View view = findPreferenceViewForKey(child, key);
+                if (view != null) {
+                    return view;
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean checkTag(View view, String key) {
+        final Object tag = view.getTag();
+        if (tag == null || !(tag instanceof String)) {
+            return false;
+        }
+        final String prefKey = (String) tag;
+        return (!TextUtils.isEmpty(prefKey) && prefKey.equals(key));
     }
 
     protected void removePreference(String key) {

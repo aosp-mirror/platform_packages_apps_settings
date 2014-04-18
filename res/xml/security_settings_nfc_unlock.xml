@@ -16,27 +16,28 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
- <PreferenceCategory
-        android:key="security_category"
-        android:title="@string/lock_settings_nfc_title">
+    <PreferenceCategory
+            android:key="security_category"
+            android:title="@string/lock_settings_nfc_title">
+
     <CheckBoxPreference
-        android:key="nfc_unlock_enabled"
-        android:title="@string/nfc_unlock_enabled"
-        android:persistent="false" />
+            android:key="nfc_unlock_enabled"
+            android:title="@string/nfc_unlock_enabled"
+            android:persistent="false" />
 
     <Preference
-        android:title="@string/start_nfc_pairing"
-        android:key="nfc_pairing"
-        android:persistent="false"
-        android:dependency="nfc_unlock_enabled" >
-        <intent android:action="android.settings.PAIR_NFC_DEVICE"/>
+            android:key="nfc_pairing"
+            android:title="@string/start_nfc_pairing"
+            android:persistent="false"
+            android:dependency="nfc_unlock_enabled" >
+            <intent android:action="android.settings.PAIR_NFC_DEVICE"/>
     </Preference>
-  </PreferenceCategory>
 
-  <PreferenceCategory
-          android:key="nfc_unlock_tags_category"
-          android:title="@string/nfc_unlock_paired_tags_title">
+    </PreferenceCategory>
 
-  </PreferenceCategory>
+        <PreferenceCategory
+            android:key="nfc_unlock_tags_category"
+            android:title="@string/nfc_unlock_paired_tags_title">
+        </PreferenceCategory>
 
 </PreferenceScreen>
