@@ -181,6 +181,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";
     private static final String TAG_APP_DETAILS = "appDetails";
 
+    private static final String DATA_USAGE_ENABLE_MOBILE_KEY = "data_usage_enable_mobile";
+    private static final String DATA_USAGE_DISABLE_MOBILE_LIMIT_KEY =
+            "data_usage_disable_mobile_limit";
+    private static final String DATA_USAGE_CYCLE_KEY = "data_usage_cycle";
+
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
 
@@ -351,7 +356,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
             mDataEnabled = new Switch(inflater.getContext());
             mDataEnabledView = inflatePreference(inflater, mNetworkSwitches, mDataEnabled);
-            mDataEnabledView.setTag("data_usage_enable_mobile");
+            mDataEnabledView.setTag(DATA_USAGE_ENABLE_MOBILE_KEY);
             mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
             mNetworkSwitches.addView(mDataEnabledView);
 
@@ -359,7 +364,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mDisableAtLimit.setClickable(false);
             mDisableAtLimit.setFocusable(false);
             mDisableAtLimitView = inflatePreference(inflater, mNetworkSwitches, mDisableAtLimit);
-            mDisableAtLimitView.setTag("data_usage_disable_mobile_limit");
+            mDisableAtLimitView.setTag(DATA_USAGE_DISABLE_MOBILE_LIMIT_KEY);
             mDisableAtLimitView.setClickable(true);
             mDisableAtLimitView.setFocusable(true);
             mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
@@ -368,7 +373,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         // bind cycle dropdown
         mCycleView = mHeader.findViewById(R.id.cycles);
-        mCycleView.setTag("data_usage_cycle");
+        mCycleView.setTag(DATA_USAGE_CYCLE_KEY);
         mCycleSpinner = (Spinner) mCycleView.findViewById(R.id.cycles_spinner);
         mCycleAdapter = new CycleAdapter(context);
         mCycleSpinner.setAdapter(mCycleAdapter);
@@ -1744,7 +1749,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
             final View view = dialogInflater.inflate(R.layout.data_usage_cycle_editor, null, false);
             final NumberPicker cycleDayPicker = (NumberPicker) view.findViewById(R.id.cycle_day);
-            cycleDayPicker.setTag("data_usage_cycle");
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final int cycleDay = editor.getPolicyCycleDay(template);
@@ -2419,21 +2423,21 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
                 // Mobile data
                 data = new SearchIndexableRaw(context);
-                data.key = "data_usage_enable_mobile";
+                data.key = DATA_USAGE_ENABLE_MOBILE_KEY;
                 data.title = res.getString(R.string.data_usage_enable_mobile);
                 data.screenTitle = res.getString(R.string.data_usage_summary_title);
                 result.add(data);
 
                 // Set mobile data limit
                 data = new SearchIndexableRaw(context);
-                data.key = "data_usage_disable_mobile_limit";
+                data.key = DATA_USAGE_DISABLE_MOBILE_LIMIT_KEY;
                 data.title = res.getString(R.string.data_usage_disable_mobile_limit);
                 data.screenTitle = res.getString(R.string.data_usage_summary_title);
                 result.add(data);
 
                 // Data usage cycle
                 data = new SearchIndexableRaw(context);
-                data.key = "data_usage_cycle";
+                data.key = DATA_USAGE_CYCLE_KEY;
                 data.title = res.getString(R.string.data_usage_cycle);
                 data.screenTitle = res.getString(R.string.data_usage_summary_title);
                 result.add(data);
