@@ -558,7 +558,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             PrintManager printManager = (PrintManager) context.getSystemService(
                     Context.PRINT_SERVICE);
 
-            String screenTitle = context.getResources().getString(R.string.print_settings_title);
+            String screenTitle = context.getResources().getString(R.string.print_settings);
 
             // Indexing all services, reagardles if enabled.
             List<PrintServiceInfo> services = printManager.getInstalledPrintServices();
