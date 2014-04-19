@@ -565,7 +565,13 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             final int serviceCount = services.size();
             for (int i = 0; i < serviceCount; i++) {
                 PrintServiceInfo service = services.get(i);
+
+                ComponentName componentName = new ComponentName(
+                        service.getResolveInfo().serviceInfo.packageName,
+                        service.getResolveInfo().serviceInfo.name);
+
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.key = componentName.flattenToString();
                 indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
                 indexable.summaryOn = context.getString(R.string.print_feature_state_on);
                 indexable.summaryOff = context.getString(R.string.print_feature_state_off);
