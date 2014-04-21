@@ -62,6 +62,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private String mPreferenceKey;
     private boolean mPreferenceHighlighted = false;
 
+    private boolean mIsDataSetObserverRegistered = false;
     private DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
         public void onChanged() {
@@ -112,14 +113,20 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     @Override
     protected void onBindPreferences() {
-        getPreferenceScreen().getRootAdapter().registerDataSetObserver(mDataSetObserver);
+        if (!mIsDataSetObserverRegistered) {
+            getPreferenceScreen().getRootAdapter().registerDataSetObserver(mDataSetObserver);
+            mIsDataSetObserverRegistered = true;
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        getPreferenceScreen().getRootAdapter().unregisterDataSetObserver(mDataSetObserver);
+        if (mIsDataSetObserverRegistered) {
+            getPreferenceScreen().getRootAdapter().unregisterDataSetObserver(mDataSetObserver);
+            mIsDataSetObserverRegistered = false;
+        }
     }
 
     public void highlightPreferenceIfNeeded() {
