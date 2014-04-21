@@ -761,8 +761,12 @@ public class Index {
                             keywords, intentAction, intentTargetPackage, intentTargetClass,
                             true, key);
                 } else {
-                    final String summaryOn = getDataSummaryOn(context, attrs);
-                    final String summaryOff = getDataSummaryOff(context, attrs);
+                    String summaryOn = getDataSummaryOn(context, attrs);
+                    String summaryOff = getDataSummaryOff(context, attrs);
+
+                    if (TextUtils.isEmpty(summaryOn) && TextUtils.isEmpty(summaryOff)) {
+                        summaryOn = getDataSummary(context, attrs);
+                    }
 
                     updateOneRowWithFilteredData(database, localeStr, title, summaryOn, summaryOff,
                             null, fragmentName, screenTitle, iconResId, rank,
