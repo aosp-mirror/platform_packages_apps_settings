@@ -21,6 +21,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -41,6 +43,22 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
+
+    private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
+    private static final int EVENT_UPDATE_INDEX = 0;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case EVENT_UPDATE_INDEX:
+                    final boolean isBluetoothOn = msg.getData().getBoolean(EVENT_DATA_IS_BT_ON);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            BluetoothSettings.class.getName(), true, isBluetoothOn);
+                    break;
+            }
+        }
+    };
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -165,7 +183,11 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
     }
 
     private void updateSearchIndex(boolean isBluetoothOn) {
-        Index.getInstance(mContext).updateFromClassNameResource(
-                BluetoothSettings.class.getName(), false, isBluetoothOn);
+        mHandler.removeMessages(EVENT_UPDATE_INDEX);
+
+        Message msg = new Message();
+        msg.what = EVENT_UPDATE_INDEX;
+        msg.getData().putBoolean(EVENT_DATA_IS_BT_ON, isBluetoothOn);
+        mHandler.sendMessage(msg);
     }
 }
