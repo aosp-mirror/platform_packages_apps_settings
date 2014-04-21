@@ -23,6 +23,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -47,7 +48,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private static final String TAG = "SettingsPreferenceFragment";
 
     private static final int MENU_HELP = Menu.FIRST + 100;
-    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 300;
+    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 400;
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
@@ -60,6 +61,18 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     private String mPreferenceKey;
     private boolean mPreferenceHighlighted = false;
+
+    private DataSetObserver mDataSetObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            highlightPreferenceIfNeeded();
+        }
+
+        @Override
+        public void onInvalidated() {
+            highlightPreferenceIfNeeded();
+        }
+    };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -99,11 +112,18 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     @Override
     protected void onBindPreferences() {
-        highlightPreferenceIfNeeded();
+        getPreferenceScreen().getRootAdapter().registerDataSetObserver(mDataSetObserver);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        getPreferenceScreen().getRootAdapter().unregisterDataSetObserver(mDataSetObserver);
     }
 
     public void highlightPreferenceIfNeeded() {
-        if (!mPreferenceHighlighted &&!TextUtils.isEmpty(mPreferenceKey)) {
+        if (isAdded() && !mPreferenceHighlighted &&!TextUtils.isEmpty(mPreferenceKey)) {
             highlightPreference(mPreferenceKey);
         }
     }
