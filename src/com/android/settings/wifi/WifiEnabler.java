@@ -24,6 +24,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -60,6 +62,22 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
                         WifiManager.EXTRA_NETWORK_INFO);
                 mConnected.set(info.isConnected());
                 handleStateChanged(info.getDetailedState());
+            }
+        }
+    };
+
+    private static final String EVENT_DATA_IS_WIFI_ON = "is_wifi_on";
+    private static final int EVENT_UPDATE_INDEX = 0;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case EVENT_UPDATE_INDEX:
+                    final boolean isWiFiOn = msg.getData().getBoolean(EVENT_DATA_IS_WIFI_ON);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            WifiSettings.class.getName(), false, isWiFiOn);
+                    break;
             }
         }
     };
@@ -154,8 +172,12 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
     }
 
     private void updateSearchIndex(boolean isWiFiOn) {
-        Index.getInstance(mContext).updateFromClassNameResource(
-                WifiSettings.class.getName(), false, isWiFiOn);
+        mHandler.removeMessages(EVENT_UPDATE_INDEX);
+
+        Message msg = new Message();
+        msg.what = EVENT_UPDATE_INDEX;
+        msg.getData().putBoolean(EVENT_DATA_IS_WIFI_ON, isWiFiOn);
+        mHandler.sendMessage(msg);
     }
 
     private void setSwitchChecked(boolean checked) {
