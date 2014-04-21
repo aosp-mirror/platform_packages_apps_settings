@@ -28,7 +28,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 110;
+    private static final int DATABASE_VERSION = 111;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";

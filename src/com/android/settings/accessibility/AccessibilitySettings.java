@@ -590,7 +590,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             String screenTitle = context.getResources().getString(
                     R.string.accessibility_services_title);
 
-            // Indexing all services, reagardles if enabled.
+            // Indexing all services, regardless if enabled.
             List<AccessibilityServiceInfo> services = accessibilityManager
                     .getInstalledAccessibilityServiceList();
             final int serviceCount = services.size();
@@ -599,7 +599,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 if (service == null || service.getResolveInfo() == null) {
                     continue;
                 }
+
+                ServiceInfo serviceInfo = service.getResolveInfo().serviceInfo;
+                ComponentName componentName = new ComponentName(serviceInfo.packageName,
+                        serviceInfo.name);
+
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.key = componentName.flattenToString();
                 indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
                 indexable.summaryOn = context.getString(R.string.accessibility_feature_state_on);
                 indexable.summaryOff = context.getString(R.string.accessibility_feature_state_off);

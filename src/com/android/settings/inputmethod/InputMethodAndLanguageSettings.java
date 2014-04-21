@@ -16,6 +16,8 @@
 
 package com.android.settings.inputmethod;
 
+import android.content.ComponentName;
+import android.content.pm.ServiceInfo;
 import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 import com.android.settings.Settings.SpellCheckersSettingsActivity;
@@ -645,6 +647,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             if (context.getAssets().getLocales().length > 1) {
                 String localeName = getLocaleName(resources);
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.key = "phone_language";
                 indexable.title = context.getString(R.string.phone_language);
                 indexable.summaryOn = localeName;
                 indexable.summaryOff = localeName;
@@ -654,6 +657,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Spell checker.
             SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+            indexable.key = "spellcheckers_settings";
             indexable.title = context.getString(R.string.spellcheckers_settings_title);
             indexable.screenTitle = screenTitle;
             indexables.add(indexable);
@@ -661,6 +665,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // User dictionary.
             if (UserDictionaryList.getUserDictionaryLocalesSet(context) != null) {
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = "user_dict_settings";
                 indexable.title = context.getString(R.string.user_dict_settings_title);
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
@@ -668,6 +673,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Keyboard settings.
             indexable = new SearchIndexableRaw(context);
+            indexable.key = "keyboard_settings";
             indexable.title = context.getString(R.string.keyboard_settings_category);
             indexable.screenTitle = screenTitle;
             indexables.add(indexable);
@@ -679,6 +685,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // Current IME.
             String currImeName = immValues.getCurrentInputMethodName(context).toString();
             indexable = new SearchIndexableRaw(context);
+            indexable.key = "current_input_method";
             indexable.title = context.getString(R.string.current_input_method);
             indexable.summaryOn = currImeName;
             indexable.summaryOff = currImeName;
@@ -710,7 +717,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 }
                 String summary = builder.toString();
 
+                ServiceInfo serviceInfo = inputMethod.getServiceInfo();
+                ComponentName componentName = new ComponentName(serviceInfo.packageName,
+                        serviceInfo.name);
+
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = componentName.flattenToString();
                 indexable.title = inputMethod.loadLabel(context.getPackageManager()).toString();
                 indexable.summaryOn = summary;
                 indexable.summaryOff = summary;
@@ -747,6 +759,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                     }
 
                     indexable = new SearchIndexableRaw(context);
+                    indexable.key = device.getName();
                     indexable.title = device.getName();
                     indexable.summaryOn = summary;
                     indexable.summaryOff = summary;
@@ -757,6 +770,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 if (hasHardKeyboards) {
                     // Hard keyboard category.
                     indexable = new SearchIndexableRaw(context);
+                    indexable.key = "builtin_keyboard_settings";
                     indexable.title = context.getString(
                             R.string.builtin_keyboard_settings_title);
                     indexable.screenTitle = screenTitle;
@@ -764,6 +778,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
                     // Auto replace.
                     indexable = new SearchIndexableRaw(context);
+                    indexable.key = "auto_replace";
                     indexable.title = context.getString(R.string.auto_replace);
                     indexable.summaryOn = context.getString(R.string.auto_replace_summary);
                     indexable.summaryOff = context.getString(R.string.auto_replace_summary);
@@ -772,6 +787,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
                     // Auto caps.
                     indexable = new SearchIndexableRaw(context);
+                    indexable.key = "auto_caps";
                     indexable.title = context.getString(R.string.auto_caps);
                     indexable.summaryOn = context.getString(R.string.auto_caps_summary);
                     indexable.summaryOff = context.getString(R.string.auto_caps_summary);
@@ -780,6 +796,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
                     // Auto punctuate.
                     indexable = new SearchIndexableRaw(context);
+                    indexable.key = "auto_punctuate";
                     indexable.title = context.getString(R.string.auto_punctuate);
                     indexable.summaryOn = context.getString(R.string.auto_punctuate_summary);
                     indexable.summaryOff = context.getString(R.string.auto_punctuate_summary);
@@ -798,6 +815,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // Recognizer settings.
             if (recognizerCount > 0) {
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = "recognizer_settings";
                 indexable.title = context.getString(R.string.recognizer_settings_title);
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
@@ -806,6 +824,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             if (recognizerCount > 1) {
                 // Recognizer chooser.
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = "recognizer_title";
                 indexable.title = context.getString(R.string.recognizer_title);
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
@@ -813,7 +832,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             for (int i = 0; i < recognizerCount; i++) {
                 ResolveInfo recognizer = recognizers.get(i);
+
+                ServiceInfo serviceInfo = recognizer.serviceInfo;
+                ComponentName componentName = new ComponentName(serviceInfo.packageName,
+                        serviceInfo.name);
+
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = componentName.flattenToString();
                 indexable.title = recognizer.loadLabel(context.getPackageManager()).toString();
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
@@ -823,6 +848,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             TtsEngines ttsEngines = new TtsEngines(context);
             if (!ttsEngines.getEngines().isEmpty()) {
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = "tts_settings";
                 indexable.title = context.getString(R.string.tts_settings_title);
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
@@ -830,11 +856,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Pointer settings.
             indexable = new SearchIndexableRaw(context);
+            indexable.key = "pointer_settings_category";
             indexable.title = context.getString(R.string.pointer_settings_category);
             indexable.screenTitle = screenTitle;
             indexables.add(indexable);
 
             indexable = new SearchIndexableRaw(context);
+            indexable.key = "pointer_speed";
             indexable.title = context.getString(R.string.pointer_speed);
             indexable.screenTitle = screenTitle;
             indexables.add(indexable);
@@ -842,6 +870,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // Game controllers.
             if (haveInputDeviceWithVibrator()) {
                 indexable = new SearchIndexableRaw(context);
+                indexable.key = "vibrate_input_devices";
                 indexable.title = context.getString(R.string.vibrate_input_devices);
                 indexable.summaryOn = context.getString(R.string.vibrate_input_devices_summary);
                 indexable.summaryOff = context.getString(R.string.vibrate_input_devices_summary);
