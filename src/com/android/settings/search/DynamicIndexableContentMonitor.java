@@ -21,6 +21,8 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.database.ContentObserver;
 import android.hardware.input.InputManager;
 import android.net.Uri;
@@ -105,8 +107,11 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         final int accessibilityServiceCount = accessibilityServices.size();
         for (int i = 0; i < accessibilityServiceCount; i++) {
             AccessibilityServiceInfo accessibilityService = accessibilityServices.get(i);
-            mAccessibilityServices.add(accessibilityService.getResolveInfo()
-                    .serviceInfo.packageName);
+            ResolveInfo resolveInfo = accessibilityService.getResolveInfo();
+            if (resolveInfo == null || resolveInfo.serviceInfo == null) {
+                continue;
+            }
+            mAccessibilityServices.add(resolveInfo.serviceInfo.packageName);
         }
 
         // Cache print service packages to know when they go away.
@@ -116,8 +121,11 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         final int serviceCount = printServices.size();
         for (int i = 0; i < serviceCount; i++) {
             PrintServiceInfo printService = printServices.get(i);
-            mPrintServices.add(printService.getResolveInfo()
-                    .serviceInfo.packageName);
+            ResolveInfo resolveInfo = printService.getResolveInfo();
+            if (resolveInfo == null || resolveInfo.serviceInfo == null) {
+                continue;
+            }
+            mPrintServices.add(resolveInfo.serviceInfo.packageName);
         }
 
         // Cache IME service packages to know when they go away.
@@ -127,7 +135,9 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         final int inputMethodCount = inputMethods.size();
         for (int i = 0; i < inputMethodCount; i++) {
             InputMethodInfo inputMethod = inputMethods.get(i);
-            mImeServices.add(inputMethod.getServiceInfo().packageName);
+            ServiceInfo serviceInfo = inputMethod.getServiceInfo();
+            if (serviceInfo == null) continue;
+            mImeServices.add(serviceInfo.packageName);
         }
 
         // Watch for related content URIs.
