@@ -262,14 +262,4 @@ public class HeaderAdapter extends ArrayAdapter<Header> {
         holder.mIcon.setLayoutParams(lp);
         holder.mIcon.setImageDrawable(icon);
     }
-
-    public void resume(Context context) {
-        mWifiEnabler.resume(context);
-        mBluetoothEnabler.resume(context);
-    }
-
-    public void pause() {
-        mWifiEnabler.pause();
-        mBluetoothEnabler.pause();
-    }
 }

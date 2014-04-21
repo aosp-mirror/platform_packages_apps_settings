@@ -614,7 +614,6 @@ public class SettingsActivity extends Activity
         mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
 
-        mHeaderAdapter.resume(this);
         invalidateHeaders();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -631,8 +630,6 @@ public class SettingsActivity extends Activity
         super.onPause();
 
         unregisterReceiver(mBatteryInfoReceiver);
-
-        mHeaderAdapter.pause();
 
         mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
