@@ -76,7 +76,7 @@ public class WifiEnabler implements CompoundButton.OnCheckedChangeListener  {
                 case EVENT_UPDATE_INDEX:
                     final boolean isWiFiOn = msg.getData().getBoolean(EVENT_DATA_IS_WIFI_ON);
                     Index.getInstance(mContext).updateFromClassNameResource(
-                            WifiSettings.class.getName(), false, isWiFiOn);
+                            WifiSettings.class.getName(), true, isWiFiOn);
                     break;
             }
         }
