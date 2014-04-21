@@ -417,12 +417,6 @@ public class SettingsActivity extends Activity
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
-        final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
-
-        if (initialFragmentName == null) {
-            Index.getInstance(this).update();
-        }
-
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, null);
@@ -444,6 +438,13 @@ public class SettingsActivity extends Activity
         getFragmentManager().addOnBackStackChangedListener(this);
 
         mDisplayHomeAsUpEnabled = true;
+
+        // Getting Intent properties can only be done after the super.onCreate(...)
+        final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+
+        if (initialFragmentName == null) {
+            Index.getInstance(this).update();
+        }
 
         if (savedState != null) {
             // We are restarting from a previous saved state; used that to initialize, instead
@@ -477,7 +478,6 @@ public class SettingsActivity extends Activity
                 setTitle(mInitialTitle);
 
                 Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-
                 switchToFragment( initialFragmentName, initialArguments, true, false,
                         mInitialTitle, false);
             } else {
