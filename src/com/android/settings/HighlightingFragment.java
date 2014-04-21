@@ -27,7 +27,7 @@ public class HighlightingFragment extends Fragment {
 
     private static final String TAG = "HighlightSettingsFragment";
 
-    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 300;
+    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 400;
     private static final String SAVE_HIGHLIGHTED_KEY = "android:view_highlighted";
 
     private String mViewKey;
