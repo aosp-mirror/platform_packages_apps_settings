@@ -58,7 +58,7 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;;
+import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
 import java.text.DateFormat;
