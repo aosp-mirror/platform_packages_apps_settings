@@ -176,13 +176,13 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private void onPreferenceToggled(String preferenceKey, boolean enabled) {
         ComponentName service = ComponentName.unflattenFromString(preferenceKey);
-        List<ComponentName> services = SettingsUtils.readEnabledPrintServices(getActivity());
+        List<ComponentName> services = PrintSettingsUtils.readEnabledPrintServices(getActivity());
         if (enabled) {
             services.add(service);
         } else {
             services.remove(service);
         }
-        SettingsUtils.writeEnabledPrintServices(getActivity(), services);
+        PrintSettingsUtils.writeEnabledPrintServices(getActivity(), services);
     }
 
     @Override
@@ -278,7 +278,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     private void updateUiForServiceState() {
-        List<ComponentName> services = SettingsUtils.readEnabledPrintServices(getActivity());
+        List<ComponentName> services = PrintSettingsUtils.readEnabledPrintServices(getActivity());
         mServiceEnabled = services.contains(mComponentName);
         if (mServiceEnabled) {
             mToggleSwitch.setCheckedInternal(true);

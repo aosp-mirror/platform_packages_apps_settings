@@ -181,7 +181,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             mPrintServicesCategory.removeAll();
         }
 
-        List<ComponentName> enabledServices = SettingsUtils
+        List<ComponentName> enabledServices = PrintSettingsUtils
                 .readEnabledPrintServices(getActivity());
 
         List<ResolveInfo> installedServices = getActivity().getPackageManager()

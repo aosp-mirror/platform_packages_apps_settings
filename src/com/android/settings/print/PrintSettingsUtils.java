@@ -26,11 +26,11 @@ import java.util.ArrayList;import java.util.List;
 /**
  * Helper methods for reading and writing to print settings.
  */
-public class SettingsUtils {
+public class PrintSettingsUtils {
 
     private static final char ENABLED_PRINT_SERVICES_SEPARATOR = ':';
 
-    private SettingsUtils() {
+    private PrintSettingsUtils() {
         /* do nothing */
     }
 
