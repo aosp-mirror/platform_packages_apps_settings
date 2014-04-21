@@ -399,6 +399,10 @@ public class SettingsActivity extends Activity
         mSearchMenuItem = menu.findItem(R.id.search);
         mSearchView = (SearchView) mSearchMenuItem.getActionView();
 
+        if (mSearchMenuItem == null || mSearchView == null) {
+            return false;
+        }
+
         mSearchMenuItem.setOnActionExpandListener(this);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
@@ -1289,6 +1293,8 @@ public class SettingsActivity extends Activity
         mSearchMenuItemExpanded = false;
         getFragmentManager().popBackStackImmediate(SettingsActivity.BACK_STACK_PREFS,
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        mSearchMenuItem.collapseActionView();
+        if (mSearchMenuItem != null) {
+            mSearchMenuItem.collapseActionView();
+        }
     }
 }
