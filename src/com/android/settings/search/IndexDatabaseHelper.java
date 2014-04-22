@@ -28,11 +28,12 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 111;
+    private static final int DATABASE_VERSION = 112;
 
     public interface Tables {
         public static final String TABLE_PREFS_INDEX = "prefs_index";
         public static final String TABLE_META_INDEX = "meta_index";
+        public static final String TABLE_SAVED_QUERIES = "saved_queries";
     }
 
     public interface IndexColumns {
@@ -59,6 +60,11 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     public interface MetaColumns {
         public static final String BUILD = "build";
+    }
+
+    public interface SavedQueriesColums  {
+        public static final String QUERY = "query";
+        public static final String TIME_STAMP = "timestamp";
     }
 
     private static final String CREATE_INDEX_TABLE =
@@ -107,6 +113,14 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     MetaColumns.BUILD + " VARCHAR(32) NOT NULL" +
                     ")";
 
+    private static final String CREATE_SAVED_QUERIES_TABLE =
+            "CREATE TABLE " + Tables.TABLE_SAVED_QUERIES +
+                    "(" +
+                    SavedQueriesColums.QUERY + " VARCHAR(64) NOT NULL" +
+                    ", " +
+                    SavedQueriesColums.TIME_STAMP + " INTEGER" +
+                    ")";
+
     private static final String INSERT_BUILD_VERSION =
             "INSERT INTO " + Tables.TABLE_META_INDEX +
                     " VALUES ('" + Build.VERSION.INCREMENTAL + "');";
@@ -135,6 +149,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private void bootstrapDB(SQLiteDatabase db) {
         db.execSQL(CREATE_INDEX_TABLE);
         db.execSQL(CREATE_META_TABLE);
+        db.execSQL(CREATE_SAVED_QUERIES_TABLE);
         db.execSQL(INSERT_BUILD_VERSION);
         Log.i(TAG, "Bootstrapped database");
     }
@@ -200,5 +215,6 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private void dropTables(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_META_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_PREFS_INDEX);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SAVED_QUERIES);
     }
 }

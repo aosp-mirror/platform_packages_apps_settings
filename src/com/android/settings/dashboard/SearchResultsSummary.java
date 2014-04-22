@@ -18,14 +18,17 @@ package com.android.settings.dashboard;
 
 import android.app.Fragment;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,8 +42,13 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.search.Index;
+import com.android.settings.search.IndexDatabaseHelper;
 
+import java.util.Date;
 import java.util.HashMap;
+
+import static com.android.settings.search.IndexDatabaseHelper.SavedQueriesColums;
+import static com.android.settings.search.IndexDatabaseHelper.Tables;
 
 public class SearchResultsSummary extends Fragment {
 
@@ -53,6 +61,10 @@ public class SearchResultsSummary extends Fragment {
     private SearchResultsAdapter mAdapter;
     private UpdateSearchResultsTask mUpdateSearchResultsTask;
 
+    private String mQuery;
+    private SaveSearchQueryTask mSaveSearchQueryTask;
+
+    private static long MAX_SAVED_SEARCH_QUERY = 5;
 
     /**
      * A basic AsyncTask for updating the query results cursor
@@ -70,6 +82,41 @@ public class SearchResultsSummary extends Fragment {
             } else if (cursor != null) {
                 cursor.close();
             }
+        }
+    }
+
+    /**
+     * A basic AsynTask for saving the Search query into the database
+     */
+    private class SaveSearchQueryTask extends AsyncTask<String, Void, Long> {
+
+        @Override
+        protected Long doInBackground(String... params) {
+            final long now = new Date().getTime();
+
+            final ContentValues values = new ContentValues();
+            values.put(SavedQueriesColums.QUERY, params[0]);
+            values.put(SavedQueriesColums.TIME_STAMP, now);
+
+            SQLiteDatabase database = IndexDatabaseHelper.getInstance(
+                    getActivity()).getWritableDatabase();
+
+            long lastInsertedRowId = -1;
+            try {
+                lastInsertedRowId =
+                        database.insert(Tables.TABLE_SAVED_QUERIES, null, values);
+
+                final long delta = lastInsertedRowId - MAX_SAVED_SEARCH_QUERY;
+                if (delta > 0) {
+                    int count = database.delete(Tables.TABLE_SAVED_QUERIES, "rowId <= ?",
+                            new String[] { Long.toString(delta) });
+                    Log.d(LOG_TAG, "Deleted '" + count + "' saved Search query(ies)");
+                }
+            } catch (Exception e) {
+                Log.d(LOG_TAG, "Cannot update saved Search queries", e);
+            }
+
+            return lastInsertedRowId;
         }
     }
 
@@ -140,10 +187,23 @@ public class SearchResultsSummary extends Fragment {
 
                     sa.startActivity(intent);
                 }
+
+                saveQueryToDatabase();
             }
         });
 
         return view;
+    }
+
+    private void saveQueryToDatabase() {
+        if (mSaveSearchQueryTask != null) {
+            mSaveSearchQueryTask.cancel(false);
+            mSaveSearchQueryTask = null;
+        }
+        if (!TextUtils.isEmpty(mQuery)) {
+            mSaveSearchQueryTask = new SaveSearchQueryTask();
+            mSaveSearchQueryTask.execute(mQuery);
+        }
     }
 
     public boolean onQueryTextSubmit(String query) {
@@ -196,12 +256,12 @@ public class SearchResultsSummary extends Fragment {
             mUpdateSearchResultsTask.cancel(false);
             mUpdateSearchResultsTask = null;
         }
-        final String query = getFilteredQueryString(cs);
-        if (TextUtils.isEmpty(query)) {
+        mQuery = getFilteredQueryString(cs);
+        if (TextUtils.isEmpty(mQuery)) {
             setCursor(null);
         } else {
             mUpdateSearchResultsTask = new UpdateSearchResultsTask();
-            mUpdateSearchResultsTask.execute(query);
+            mUpdateSearchResultsTask.execute(mQuery);
         }
     }
 
