@@ -18,63 +18,234 @@ package com.android.settings.notification;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.INotificationManager;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.ServiceManager;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings.Global;
-import android.provider.SearchIndexableResource;
+import android.service.notification.ZenModeConfig;
+import android.text.format.DateFormat;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import com.android.settings.search.BaseSearchIndexProvider;
+import android.widget.TimePicker;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "ZenModeSettings";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
+
+    private static final String KEY_GENERAL = "general";
+    private static final String KEY_CALLS = "phone_calls";
+    private static final String KEY_MESSAGES = "messages";
+
+    private static final String KEY_AUTOMATIC = "automatic";
+    private static final String KEY_WHEN = "when";
 
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
-    private ZenModeConfigView mConfig;
     private Switch mSwitch;
     private Activity mActivity;
+    private Context mContext;
     private MenuItem mSearch;
+    private ZenModeConfig mConfig;
+    private boolean mDisableListeners;
+    private SwitchPreference mCalls;
+    private SwitchPreference mMessages;
+    private DropDownPreference mStarred;
+    private DropDownPreference mWhen;
+    private TimePickerPreference mStart;
+    private TimePickerPreference mEnd;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mActivity = getActivity();
+        mContext = mActivity = getActivity();
         mSwitch = new Switch(mActivity.getActionBar().getThemedContext());
-        final int p = getResources().getDimensionPixelSize(R.dimen.content_margin_left);
+        final Resources res = mContext.getResources();
+        final int p = res.getDimensionPixelSize(R.dimen.content_margin_left);
         mSwitch.setPadding(0, 0, p, 0);
         setHasOptionsMenu(true);
+
+        addPreferencesFromResource(R.xml.zen_mode_settings);
+        final PreferenceScreen root = getPreferenceScreen();
+
+        mConfig = getZenModeConfig();
+        if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
+
+        final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
+
+        mCalls = (SwitchPreference) root.findPreference(KEY_CALLS);
+        mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                if (val == mConfig.allowCalls) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + val);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowCalls = val;
+                return setZenModeConfig(newConfig);
+            }
+        });
+
+        mMessages = (SwitchPreference) root.findPreference(KEY_MESSAGES);
+        mMessages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                if (val == mConfig.allowMessages) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange allowMessages=" + val);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowMessages = val;
+                return setZenModeConfig(newConfig);
+            }
+        });
+
+        mStarred = new DropDownPreference(mContext);
+        mStarred.setEnabled(false);
+        mStarred.setTitle(R.string.zen_mode_from);
+        mStarred.addItem(R.string.zen_mode_from_anyone);
+        mStarred.addItem(R.string.zen_mode_from_starred);
+        mStarred.addItem(R.string.zen_mode_from_contacts);
+        general.addPreference(mStarred);
+
+        final Preference alarmInfo = new Preference(mContext) {
+            @Override
+            public View getView(View convertView, ViewGroup parent) {
+                final TextView tv = new TextView(mContext);
+                tv.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.ITALIC));
+                tv.setPadding(p, p, p, p);
+                tv.setText(R.string.zen_mode_alarm_info);
+                return tv;
+            }
+        };
+        alarmInfo.setPersistent(false);
+        alarmInfo.setSelectable(false);
+        general.addPreference(alarmInfo);
+
+        final PreferenceCategory auto = (PreferenceCategory) root.findPreference(KEY_AUTOMATIC);
+
+        mWhen = new DropDownPreference(mContext);
+        mWhen.setKey(KEY_WHEN);
+        mWhen.setTitle(R.string.zen_mode_when);
+        mWhen.addItem(R.string.zen_mode_when_never);
+        mWhen.addItem(R.string.zen_mode_when_every_night);
+        mWhen.addItem(R.string.zen_mode_when_weeknights);
+        mWhen.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos) {
+                if (mDisableListeners) return true;
+                final String mode = pos == 1 ? ZenModeConfig.SLEEP_MODE_NIGHTS :
+                    pos == 2 ? ZenModeConfig.SLEEP_MODE_WEEKNIGHTS : null;
+                if (Objects.equals(mode, mConfig.sleepMode)) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange sleepMode=" + mode);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.sleepMode = mode;
+                return setZenModeConfig(newConfig);
+            }
+        });
+        auto.addPreference(mWhen);
+
+        final FragmentManager mgr = getFragmentManager();
+
+        mStart = new TimePickerPreference(mContext, mgr);
+        mStart.setTitle(R.string.zen_mode_start_time);
+        mStart.setCallback(new TimePickerPreference.Callback() {
+            @Override
+            public boolean onSetTime(int hour, int minute) {
+                if (mDisableListeners) return true;
+                if (!ZenModeConfig.isValidHour(hour)) return false;
+                if (!ZenModeConfig.isValidMinute(minute)) return false;
+                if (hour == mConfig.sleepStartHour && minute == mConfig.sleepStartMinute) {
+                    return true;
+                }
+                if (DEBUG) Log.d(TAG, "onPrefChange sleepStart h=" + hour + " m=" + minute);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.sleepStartHour = hour;
+                newConfig.sleepStartMinute = minute;
+                return setZenModeConfig(newConfig);
+            }
+        });
+        auto.addPreference(mStart);
+
+        mEnd = new TimePickerPreference(mContext, mgr);
+        mEnd.setTitle(R.string.zen_mode_end_time);
+        mEnd.setSummaryFormat(R.string.zen_mode_end_time_summary_format);
+        mEnd.setCallback(new TimePickerPreference.Callback() {
+            @Override
+            public boolean onSetTime(int hour, int minute) {
+                if (mDisableListeners) return true;
+                if (!ZenModeConfig.isValidHour(hour)) return false;
+                if (!ZenModeConfig.isValidMinute(minute)) return false;
+                if (hour == mConfig.sleepEndHour && minute == mConfig.sleepEndMinute) {
+                    return true;
+                }
+                if (DEBUG) Log.d(TAG, "onPrefChange sleepEnd h=" + hour + " m=" + minute);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.sleepEndHour = hour;
+                newConfig.sleepEndMinute = minute;
+                return setZenModeConfig(newConfig);
+            }
+        });
+        auto.addPreference(mEnd);
+
+        mStart.setDependency(mWhen.getKey());
+        mEnd.setDependency(mWhen.getKey());
+
+        updateControls();
+    }
+
+    private void updateControls() {
+        mDisableListeners = true;
+        mCalls.setChecked(mConfig.allowCalls);
+        mMessages.setChecked(mConfig.allowMessages);
+        mStarred.setSelectedItem(0);
+        mWhen.setSelectedItem(
+                ZenModeConfig.SLEEP_MODE_NIGHTS.equals(mConfig.sleepMode) ? 1 :
+                ZenModeConfig.SLEEP_MODE_WEEKNIGHTS.equals(mConfig.sleepMode) ? 2 : 0);
+        mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
+        mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
+        mDisableListeners = false;
     }
 
     @Override
@@ -87,7 +258,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     @Override
     public void onResume() {
         super.onResume();
-        updateState();
+        updateZenMode();
         mSettingsObserver.register();
         mActivity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                 ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -106,31 +277,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         if (mSearch != null) mSearch.setVisible(true);
     }
 
-    private final class SettingsObserver extends ContentObserver {
-        private final Uri ZEN_MODE_URI = Global.getUriFor(Global.ZEN_MODE);
-
-        public SettingsObserver() {
-            super(mHandler);
-        }
-
-        public void register() {
-            getContentResolver().registerContentObserver(ZEN_MODE_URI, false, this);
-        }
-
-        public void unregister() {
-            getContentResolver().unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (ZEN_MODE_URI.equals(uri)) {
-                updateState();
-            }
-        }
-    };
-
-    private void updateState() {
+    private void updateZenMode() {
         mSwitch.setOnCheckedChangeListener(null);
         final boolean zenMode = Global.getInt(getContentResolver(),
                 Global.ZEN_MODE, Global.ZEN_MODE_OFF) != Global.ZEN_MODE_OFF;
@@ -138,22 +285,38 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mSwitch.setOnCheckedChangeListener(mSwitchListener);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final Context context = getActivity();
-        final ScrollView sv = new ScrollView(context);
-        sv.setVerticalScrollBarEnabled(false);
-        sv.setHorizontalScrollBarEnabled(false);
-        mConfig = new ZenModeConfigView(context);
-        sv.addView(mConfig);
-        return sv;
+    private void updateZenModeConfig() {
+        final ZenModeConfig config = getZenModeConfig();
+        if (Objects.equals(config, mConfig)) return;
+        if (DEBUG) Log.d(TAG, "updateZenModeConfig");
+        updateControls();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mConfig.resetBackground();
+    private ZenModeConfig getZenModeConfig() {
+        final INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        try {
+            return nm.getZenModeConfig();
+        } catch (Exception e) {
+           Log.w(TAG, "Error calling NoMan", e);
+           return new ZenModeConfig();
+        }
+    }
+
+    private boolean setZenModeConfig(ZenModeConfig config) {
+        final INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        try {
+            final boolean success = nm.setZenModeConfig(config);
+            if (success) {
+                mConfig = config;
+                if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
+            }
+            return success;
+        } catch (Exception e) {
+           Log.w(TAG, "Error calling NoMan", e);
+           return false;
+        }
     }
 
     private final OnCheckedChangeListener mSwitchListener = new OnCheckedChangeListener() {
@@ -169,191 +332,210 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
     };
 
-    public static final class ZenModeConfigView extends LinearLayout {
-        private static final Typeface LIGHT =
-                Typeface.create("sans-serif-light", Typeface.NORMAL);
-        private static final int BG_COLOR = 0xffe7e8e9;
-        private final Context mContext;
-
-        private Drawable mOldBackground;
-
-        public ZenModeConfigView(Context context) {
-            super(context);
-            mContext = context;
-            setOrientation(VERTICAL);
-
-            int p = getResources().getDimensionPixelSize(R.dimen.content_margin_left);
-            TextView tv = addHeader("When on");
-            tv.setPadding(0, p / 2, 0, p / 4);
-            addBuckets();
-            tv = addHeader("Automatically turn on");
-            tv.setPadding(0, p / 2, 0, p / 4);
-            addTriggers();
-        }
-
-        @Override
-        protected void onAttachedToWindow() {
-            super.onAttachedToWindow();
-            mOldBackground = getParentView().getBackground();
-            if (DEBUG) Log.d(TAG, "onAttachedToWindow mOldBackground=" + mOldBackground);
-            getParentView().setBackgroundColor(BG_COLOR);
-        }
-
-        public void resetBackground() {
-            if (DEBUG) Log.d(TAG, "resetBackground");
-            getParentView().setBackground(mOldBackground);
-        }
-
-        private View getParentView() {
-            return (View)getParent().getParent();
-        }
-
-        private TextView addHeader(String text) {
-            TextView tv = new TextView(mContext);
-            tv.setTypeface(LIGHT);
-            tv.setTextColor(0x7f000000);
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tv.getTextSize() * 1.5f);
-            tv.setText(text);
-            addView(tv);
-            return tv;
-        }
-
-        private void addTriggers() {
-            addView(new TriggerView("Never"));
-        }
-
-        private void addBuckets() {
-            LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT);
-            BucketView callView = new BucketView("Phone calls", 0,
-                    "Block all", "Block all except...", "Allow all");
-            addView(callView, lp);
-            lp.topMargin = 4;
-            BucketView msgView = new BucketView("Texts, SMS, & other calls", 0,
-                    "Block all", "Block all except...", "Allow all");
-            addView(msgView, lp);
-            BucketView alarmView = new BucketView("Alarms & timers", 2,
-                    "Block all", "Block all except...", "Allow all");
-            addView(alarmView, lp);
-            BucketView otherView = new BucketView("Other interruptions", 0,
-                    "Block all", "Block all except...", "Allow all");
-            addView(otherView, lp);
-        }
-
-        private class BucketView extends RelativeLayout {
-            public BucketView(String category, int defaultValue, String... values) {
-                super(ZenModeConfigView.this.mContext);
-
-                setBackgroundColor(0xffffffff);
-                final int p = getResources().getDimensionPixelSize(R.dimen.content_margin_left);
-                final int lm = p * 3 / 4;
-                TextView title = new TextView(mContext);
-                title.setId(android.R.id.title);
-                title.setTextColor(0xff000000);
-                title.setTypeface(LIGHT);
-                title.setText(category);
-                title.setTextSize(TypedValue.COMPLEX_UNIT_PX, title.getTextSize() * 1.5f);
-                LayoutParams lp =
-                        new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                lp.topMargin = p / 2;
-                lp.leftMargin = lm;
-                addView(title, lp);
-
-                TextView subtitle = new TextView(mContext);
-                subtitle.setTextColor(0xff000000);
-                subtitle.setTypeface(LIGHT);
-                subtitle.setText(values[defaultValue]);
-                lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                lp.addRule(BELOW, title.getId());
-                lp.leftMargin = lm;
-                lp.bottomMargin = p / 2;
-                addView(subtitle, lp);
-            }
-        }
-
-        private class TriggerView extends RelativeLayout {
-            public TriggerView(String text) {
-                super(ZenModeConfigView.this.mContext);
-
-                setBackgroundColor(0xffffffff);
-                final int p = getResources().getDimensionPixelSize(R.dimen.content_margin_left);
-
-                final TextView tv = new TextView(mContext);
-                tv.setText(text);
-                tv.setTypeface(LIGHT);
-                tv.setTextColor(0xff000000);
-                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, tv.getTextSize() * 1.5f);
-                LayoutParams lp =
-                        new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                lp.addRule(CENTER_VERTICAL);
-                lp.bottomMargin = p / 2;
-                lp.topMargin = p / 2;
-                lp.leftMargin = p * 3 / 4;
-                addView(tv, lp);
-            }
-        }
-    }
-
     // Enable indexing of searchable data
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                final Resources res = context.getResources();
-
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.zen_mode_settings_title);
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "When on";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "Calls";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "Text & SMS Messages";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "Alarms & Timers";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "Other Interruptions";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "Automatically turn on";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "While driving";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "While in meetings";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = "During a set time period";
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
-
+                add(result, context, R.string.zen_mode_settings_title);
+                add(result, context, R.string.zen_mode_general_category);
+                add(result, context, R.string.zen_mode_phone_calls);
+                add(result, context, R.string.zen_mode_messages);
+                add(result, context, R.string.zen_mode_automatic_category);
+                add(result, context, R.string.zen_mode_when);
+                add(result, context, R.string.zen_mode_start_time);
+                add(result, context, R.string.zen_mode_end_time);
                 return result;
+            }
+
+            private void add(List<SearchIndexableRaw> result, Context context, int title) {
+                final Resources res = context.getResources();
+                final SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(title);
+                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                result.add(data);
             }
         };
 
+    private final class SettingsObserver extends ContentObserver {
+        private final Uri ZEN_MODE_URI = Global.getUriFor(Global.ZEN_MODE);
+        private final Uri ZEN_MODE_CONFIG_ETAG_URI = Global.getUriFor(Global.ZEN_MODE_CONFIG_ETAG);
+
+        public SettingsObserver() {
+            super(mHandler);
+        }
+
+        public void register() {
+            getContentResolver().registerContentObserver(ZEN_MODE_URI, false, this);
+            getContentResolver().registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this);
+        }
+
+        public void unregister() {
+            getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (ZEN_MODE_URI.equals(uri)) {
+                updateZenMode();
+            }
+            if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
+                updateZenModeConfig();
+            }
+        }
+    }
+
+    private static class TimePickerPreference extends Preference {
+        private final Context mContext;
+
+        private int mSummaryFormat;
+        private int mHourOfDay;
+        private int mMinute;
+        private Callback mCallback;
+
+        public TimePickerPreference(Context context, final FragmentManager mgr) {
+            super(context);
+            mContext = context;
+            setPersistent(false);
+            setOnPreferenceClickListener(new OnPreferenceClickListener(){
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    final TimePickerFragment frag = new TimePickerFragment();
+                    frag.pref = TimePickerPreference.this;
+                    frag.show(mgr, TimePickerPreference.class.getName());
+                    return true;
+                }
+            });
+        }
+
+        public void setCallback(Callback callback) {
+            mCallback = callback;
+        }
+
+        public void setSummaryFormat(int resId) {
+            mSummaryFormat = resId;
+            updateSummary();
+        }
+
+        public void setTime(int hourOfDay, int minute) {
+            if (mCallback != null && !mCallback.onSetTime(hourOfDay, minute)) return;
+            mHourOfDay = hourOfDay;
+            mMinute = minute;
+            updateSummary();
+        }
+
+        private void updateSummary() {
+            final Calendar c = Calendar.getInstance();
+            c.set(Calendar.HOUR_OF_DAY, mHourOfDay);
+            c.set(Calendar.MINUTE, mMinute);
+            String time = DateFormat.getTimeFormat(mContext).format(c.getTime());
+            if (mSummaryFormat != 0) {
+                time = mContext.getResources().getString(mSummaryFormat, time);
+            }
+            setSummary(time);
+        }
+
+        public static class TimePickerFragment extends DialogFragment implements
+                TimePickerDialog.OnTimeSetListener {
+            public TimePickerPreference pref;
+
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                final boolean usePref = pref != null && pref.mHourOfDay >= 0 && pref.mMinute >= 0;
+                final Calendar c = Calendar.getInstance();
+                final int hour = usePref ? pref.mHourOfDay : c.get(Calendar.HOUR_OF_DAY);
+                final int minute = usePref ? pref.mMinute : c.get(Calendar.MINUTE);
+                return new TimePickerDialog(getActivity(), this, hour, minute,
+                        DateFormat.is24HourFormat(getActivity()));
+            }
+
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if (pref != null) {
+                    pref.setTime(hourOfDay, minute);
+                }
+            }
+        }
+
+        public interface Callback {
+            boolean onSetTime(int hour, int minute);
+        }
+    }
+
+    private static class DropDownPreference extends Preference {
+        private final Context mContext;
+        private final ArrayAdapter<String> mAdapter;
+        private final Spinner mSpinner;
+
+        private Callback mCallback;
+
+        public DropDownPreference(Context context) {
+            super(context);
+            mContext = context;
+            mAdapter = new ArrayAdapter<String>(mContext,
+                    android.R.layout.simple_spinner_dropdown_item);
+
+            mSpinner = new Spinner(mContext);
+            mSpinner.setDropDownWidth(mContext.getResources()
+                    .getDimensionPixelSize(R.dimen.zen_mode_dropdown_width));
+            mSpinner.setVisibility(View.INVISIBLE);
+            mSpinner.setAdapter(mAdapter);
+            mSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+                    setSelectedItem(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // noop
+                }
+            });
+            setPersistent(false);
+            setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    mSpinner.performClick();
+                    return true;
+                }
+            });
+        }
+
+        public void setCallback(Callback callback) {
+            mCallback = callback;
+        }
+
+        public void setSelectedItem(int position) {
+            if (mCallback != null && !mCallback.onItemSelected(position)) {
+                return;
+            }
+            mSpinner.setSelection(position);
+            setSummary(mAdapter.getItem(position));
+            final boolean disableDependents = position == 0;
+            notifyDependencyChange(disableDependents);
+        }
+
+        public void addItem(int resId) {
+            mAdapter.add(mContext.getResources().getString(resId));
+        }
+
+        @Override
+        protected void onBindView(View view) {
+            super.onBindView(view);
+            if (view.equals(mSpinner.getParent())) return;
+            if (mSpinner.getParent() != null) {
+                ((ViewGroup)mSpinner.getParent()).removeView(mSpinner);
+            }
+            final ViewGroup vg = (ViewGroup)view;
+            vg.addView(mSpinner, 0);
+            final ViewGroup.LayoutParams lp = mSpinner.getLayoutParams();
+            lp.width = 0;
+            mSpinner.setLayoutParams(lp);
+        }
+
+        public interface Callback {
+            boolean onItemSelected(int pos);
+        }
+    }
 }
