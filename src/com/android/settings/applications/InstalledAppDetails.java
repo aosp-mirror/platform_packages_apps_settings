@@ -366,11 +366,28 @@ public class InstalledAppDetails extends Fragment
                 mUninstallButton.setText(R.string.uninstall_text);
             }
         }
-        // If this is a device admin, it can't be uninstall or disabled.
+        // If this is a device admin, it can't be uninstalled or disabled.
         // We do this here so the text of the button is still set correctly.
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             enabled = false;
         }
+
+        // If this is the default (or only) home app, suppress uninstall (even if
+        // we still think it should be allowed for other reasons)
+        if (enabled && mHomePackages.contains(mPackageInfo.packageName)) {
+            ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
+            ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
+            if (currentDefaultHome == null) {
+                // No preferred default, so permit uninstall only when
+                // there is more than one candidate
+                enabled = (mHomePackages.size() > 1);
+            } else {
+                // There is an explicit default home app -- forbid uninstall of
+                // that one, but permit it for installed-but-inactive ones.
+                enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
+            }
+        }
+
         mUninstallButton.setEnabled(enabled);
         if (enabled) {
             // Register listener
