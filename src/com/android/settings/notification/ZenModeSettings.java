@@ -47,12 +47,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -144,6 +140,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStarred = new DropDownPreference(mContext);
         mStarred.setEnabled(false);
         mStarred.setTitle(R.string.zen_mode_from);
+        mStarred.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
         mStarred.addItem(R.string.zen_mode_from_anyone);
         mStarred.addItem(R.string.zen_mode_from_starred);
         mStarred.addItem(R.string.zen_mode_from_contacts);
@@ -168,6 +165,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mWhen = new DropDownPreference(mContext);
         mWhen.setKey(KEY_WHEN);
         mWhen.setTitle(R.string.zen_mode_when);
+        mWhen.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
         mWhen.addItem(R.string.zen_mode_when_never);
         mWhen.addItem(R.string.zen_mode_when_every_night);
         mWhen.addItem(R.string.zen_mode_when_weeknights);
@@ -460,82 +458,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
         public interface Callback {
             boolean onSetTime(int hour, int minute);
-        }
-    }
-
-    private static class DropDownPreference extends Preference {
-        private final Context mContext;
-        private final ArrayAdapter<String> mAdapter;
-        private final Spinner mSpinner;
-
-        private Callback mCallback;
-
-        public DropDownPreference(Context context) {
-            super(context);
-            mContext = context;
-            mAdapter = new ArrayAdapter<String>(mContext,
-                    android.R.layout.simple_spinner_dropdown_item);
-
-            mSpinner = new Spinner(mContext);
-            mSpinner.setDropDownWidth(mContext.getResources()
-                    .getDimensionPixelSize(R.dimen.zen_mode_dropdown_width));
-            mSpinner.setVisibility(View.INVISIBLE);
-            mSpinner.setAdapter(mAdapter);
-            mSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-                    setSelectedItem(position);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    // noop
-                }
-            });
-            setPersistent(false);
-            setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    mSpinner.performClick();
-                    return true;
-                }
-            });
-        }
-
-        public void setCallback(Callback callback) {
-            mCallback = callback;
-        }
-
-        public void setSelectedItem(int position) {
-            if (mCallback != null && !mCallback.onItemSelected(position)) {
-                return;
-            }
-            mSpinner.setSelection(position);
-            setSummary(mAdapter.getItem(position));
-            final boolean disableDependents = position == 0;
-            notifyDependencyChange(disableDependents);
-        }
-
-        public void addItem(int resId) {
-            mAdapter.add(mContext.getResources().getString(resId));
-        }
-
-        @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
-            if (view.equals(mSpinner.getParent())) return;
-            if (mSpinner.getParent() != null) {
-                ((ViewGroup)mSpinner.getParent()).removeView(mSpinner);
-            }
-            final ViewGroup vg = (ViewGroup)view;
-            vg.addView(mSpinner, 0);
-            final ViewGroup.LayoutParams lp = mSpinner.getLayoutParams();
-            lp.width = 0;
-            mSpinner.setLayoutParams(lp);
-        }
-
-        public interface Callback {
-            boolean onItemSelected(int pos);
         }
     }
 }

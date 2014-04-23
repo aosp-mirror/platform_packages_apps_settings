@@ -57,7 +57,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
     private Preference mNotificationSoundPreference;
     private Preference mNotificationAccess;
-    private TwoStatePreference mLockscreenNotifications;
+    private DropDownPreference mLockscreenNotifications;
     private TwoStatePreference mHeadsUp;
     private TwoStatePreference mNotificationPulse;
 
@@ -113,12 +113,24 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         refreshNotificationListeners();
 
         mLockscreenNotifications
-                = (TwoStatePreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
+                = (DropDownPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
         if (mLockscreenNotifications != null) {
             if (!getDeviceLockscreenNotificationsEnabled()) {
                 root.removePreference(mLockscreenNotifications);
             } else {
-                mLockscreenNotifications.setChecked(getLockscreenAllowPrivateNotifications());
+                mLockscreenNotifications.addItem(R.string.lock_screen_notifications_summary_show);
+                mLockscreenNotifications.addItem(R.string.lock_screen_notifications_summary_hide);
+                final int pos = getLockscreenAllowPrivateNotifications() ? 0 : 1;
+                mLockscreenNotifications.setSelectedItem(pos);
+                mLockscreenNotifications.setCallback(new DropDownPreference.Callback() {
+                    @Override
+                    public boolean onItemSelected(int pos) {
+                        final int val = pos == 0 ? 1 : 0;
+                        Settings.Secure.putInt(getContentResolver(),
+                                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, val);
+                        return true;
+                    }
+                });
             }
         }
 
@@ -164,11 +176,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
 
-        if (KEY_LOCK_SCREEN_NOTIFICATIONS.equals(key)) {
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                    mLockscreenNotifications.isChecked() ? 1 : 0);
-        } else if (KEY_HEADS_UP.equals(key)) {
+        if (KEY_HEADS_UP.equals(key)) {
             setHeadsUpMode(getContentResolver(), mHeadsUp.isChecked());
         } else if (KEY_NOTIFICATION_PULSE.equals(key)) {
             Settings.System.putInt(getContentResolver(),

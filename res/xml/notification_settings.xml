@@ -36,11 +36,9 @@
             android:title="@string/heads_up_enabled_title"
             android:persistent="false" />
 
-    <CheckBoxPreference
+    <com.android.settings.notification.DropDownPreference
             android:key="toggle_lock_screen_notifications"
             android:title="@string/lock_screen_notifications"
-            android:summaryOff="@string/lock_screen_notifications_summary_off"
-            android:summaryOn="@string/lock_screen_notifications_summary_on"
             android:persistent="false" />
 
     <PreferenceScreen
