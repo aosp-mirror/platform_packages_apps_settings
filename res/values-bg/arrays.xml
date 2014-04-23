@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"сила на звука за Bluetooth"</item>
     <item msgid="2029227495214047094">"оставяне в будно състояние"</item>
     <item msgid="26109888160231211">"наблюдение на местоположението"</item>
+    <item msgid="5753382310468855812">"наблюдение на заявките за местоположение, изразходващи много енергия"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Местоположение"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"Публикуване на известие"</item>
     <item msgid="4282477730595931828">"Местоположение"</item>
     <item msgid="4891423912898525905">"Обаждане по телефона"</item>
-    <item msgid="626463821668200388">"Получаване на SMS/MMS"</item>
-    <item msgid="1237538540368797101">"Изпращане на SMS/MMS"</item>
+    <item msgid="2623604824935968113">"Четене на SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Писане на SMS/MMS"</item>
     <item msgid="3986142739951490025">"Получаване на SMS/MMS"</item>
     <item msgid="3984213795861739778">"Получаване на SMS/MMS"</item>
     <item msgid="3656243523752472788">"Получаване на SMS/MMS"</item>
     <item msgid="8105802370238551510">"Получаване на SMS/MMS"</item>
     <item msgid="1407766984645388488">"Изпращане на SMS/MMS"</item>
-    <item msgid="1530132603376027248">"Получаване на SMS/MMS"</item>
-    <item msgid="1188256962149204607">"Изпращане на SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Четене на SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Писане на SMS/MMS"</item>
     <item msgid="4218544235221631789">"Промяна на настройките"</item>
     <item msgid="736541391767350377">"Рисуване върху елемент"</item>
     <item msgid="5530815681721654194">"Достъп до известията"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"Сила на звука за Bluetooth"</item>
     <item msgid="4665183401128289653">"Оставяне в будно състояние"</item>
     <item msgid="8584357129746649222">"Местоположение"</item>
+    <item msgid="7669257279311110599">"Местоположение"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Кратко"</item>
     <item msgid="2560532955514699713">"Средно"</item>
     <item msgid="2372711992605524591">"Продължително"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Стандартни"</item>
+    <item msgid="1016452621833735880">"Безсерифни"</item>
+    <item msgid="2496277987934654454">"Безсерифни сбити"</item>
+    <item msgid="4406003087391086325">"Серифни"</item>
+    <item msgid="1558362802170124073">"Непропорционални"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Много малък"</item>
+    <item msgid="6781094565687692782">"Малък"</item>
+    <item msgid="8222123259497646551">"Нормален"</item>
+    <item msgid="5813217276778560466">"Голям"</item>
+    <item msgid="9044232017390975191">"Много голям"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Без"</item>
+    <item msgid="1352974708028506778">"Контур"</item>
+    <item msgid="5850876295428722675">"Падаща сянка"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Бяло върху черно"</item>
+    <item msgid="4589278788192525675">"Черно върху бяло"</item>
+    <item msgid="1309255027325660115">"Жълто върху черно"</item>
+    <item msgid="2985943780939258562">"Жълто върху синьо"</item>
+    <item msgid="7520438652121629055">"Персонализирано"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Няма"</item>
     <item msgid="688482401508173818">"720 x 480 mdpi"</item>
-    <item msgid="1725473474827398815">"1 280 x 720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1 920 x 1 080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1 280 x 720 tvdpi и 1 920 x 1 080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720 x 480 mdpi (защитено)"</item>
+    <item msgid="8181151155909301030">"1280 x 720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280 x 720 tvdpi (защитено)"</item>
+    <item msgid="8910371271391940941">"1920 x 1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920 x 1080 xhdpi (защитено)"</item>
+    <item msgid="1937752114395156918">"1280 x 720 tvdpi и 1920 x 1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Без"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"Изключено"</item>
     <item msgid="7688197031296835369">"Области за преизчертаване: Показв."</item>
-    <item msgid="8332661909019981149">"Брояч на преизчертаване: Показване"</item>
+    <item msgid="2290859360633824369">"Показване на областите за деутеранопия"</item>
+    <item msgid="3448087929560624983">"Показване на брояча на преизчертаване"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Стандартно ограничение"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"Да се пита"</item>
     <item msgid="5077768429488260031">"Никога да не се разрешава"</item>
     <item msgid="1417929597727989746">"Винаги да се разрешава"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"нормално"</item>
+    <item msgid="4517779899383204000">"средно"</item>
+    <item msgid="406385694840950802">"лошо"</item>
+    <item msgid="4212263919458209842">"критично"</item>
   </string-array>
 </resources>

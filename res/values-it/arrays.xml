@@ -198,7 +198,7 @@
     <item msgid="8673874894887358090">"Manuale"</item>
   </string-array>
   <string-array name="emergency_tone_entries">
-    <item msgid="5165439859689033665">"Disattiva"</item>
+    <item msgid="5165439859689033665">"OFF"</item>
     <item msgid="3165868966179561687">"Avviso"</item>
     <item msgid="6038758039030476855">"Vibrazione"</item>
   </string-array>
@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"volume bluetooth"</item>
     <item msgid="2029227495214047094">"mantieni attivo"</item>
     <item msgid="26109888160231211">"monitora posizione"</item>
+    <item msgid="5753382310468855812">"monitora localizzazione a consumo elevato"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Posizione"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"Pubblicazione notifica"</item>
     <item msgid="4282477730595931828">"Posizione"</item>
     <item msgid="4891423912898525905">"Chiamate telefono"</item>
-    <item msgid="626463821668200388">"Ricezione SMS/MMS"</item>
-    <item msgid="1237538540368797101">"Invio SMS/MMS"</item>
+    <item msgid="2623604824935968113">"Lettura di SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Scrittura di SMS/MMS"</item>
     <item msgid="3986142739951490025">"Ricezione SMS/MMS"</item>
     <item msgid="3984213795861739778">"Ricezione SMS/MMS"</item>
     <item msgid="3656243523752472788">"Ricezione SMS/MMS"</item>
     <item msgid="8105802370238551510">"Ricezione SMS/MMS"</item>
     <item msgid="1407766984645388488">"Invio SMS/MMS"</item>
-    <item msgid="1530132603376027248">"Ricezione SMS/MMS"</item>
-    <item msgid="1188256962149204607">"Invio SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Lettura di SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Scrittura di SMS/MMS"</item>
     <item msgid="4218544235221631789">"Modifica delle impostazioni"</item>
     <item msgid="736541391767350377">"Traccia in alto"</item>
     <item msgid="5530815681721654194">"Accesso a notifiche"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"Volume Bluetooth"</item>
     <item msgid="4665183401128289653">"Mantieni attivo"</item>
     <item msgid="8584357129746649222">"Posizione"</item>
+    <item msgid="7669257279311110599">"Geolocalizzazione"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Breve"</item>
     <item msgid="2560532955514699713">"Medio"</item>
     <item msgid="2372711992605524591">"Lungo"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Predefinito"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Molto piccole"</item>
+    <item msgid="6781094565687692782">"Piccole"</item>
+    <item msgid="8222123259497646551">"Medie"</item>
+    <item msgid="5813217276778560466">"Grandi"</item>
+    <item msgid="9044232017390975191">"Molto grandi"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Nessuno"</item>
+    <item msgid="1352974708028506778">"Contorno"</item>
+    <item msgid="5850876295428722675">"Ombreggiatura"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Bianco su nero"</item>
+    <item msgid="4589278788192525675">"Nero su bianco"</item>
+    <item msgid="1309255027325660115">"Giallo su nero"</item>
+    <item msgid="2985943780939258562">"Giallo su blu"</item>
+    <item msgid="7520438652121629055">"Personalizzato"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Nessuno"</item>
     <item msgid="688482401508173818">"720 x 480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280 x 720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920 x 1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280 x 720 tvdpi e 1920 x 1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720 x 480 mdpi (opzione sicura)"</item>
+    <item msgid="8181151155909301030">"1280 x 720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280 x 720 tvdpi (opzione sicura)"</item>
+    <item msgid="8910371271391940941">"1920 x 1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920 x 1080 xhdpi (opzione sicura)"</item>
+    <item msgid="1937752114395156918">"1280 x 720 tvdpi, 1920 x 1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Nessuna"</item>
@@ -390,20 +427,21 @@
     <item msgid="1340692776955662664">"Stack di chiamate su glGetError"</item>
   </string-array>
   <string-array name="show_non_rect_clip_entries">
-    <item msgid="993742912147090253">"Off"</item>
+    <item msgid="993742912147090253">"OFF"</item>
     <item msgid="675719912558941285">"Area ritaglio non rettangolare blu"</item>
     <item msgid="1064373276095698656">"Evidenzia cmd disegno test in verde"</item>
   </string-array>
   <string-array name="track_frame_time_entries">
-    <item msgid="2193584639058893150">"Non attivo"</item>
+    <item msgid="2193584639058893150">"OFF"</item>
     <item msgid="2751513398307949636">"Su schermo sotto forma di barre"</item>
     <item msgid="8272260411216018353">"Su schermo sotto forma di linee"</item>
     <item msgid="120512413928262547">"In adb shell dumpsys gfxinfo"</item>
   </string-array>
   <string-array name="debug_hw_overdraw_entries">
-    <item msgid="8190572633763871652">"Off"</item>
+    <item msgid="8190572633763871652">"OFF"</item>
     <item msgid="7688197031296835369">"Mostra aree overdraw"</item>
-    <item msgid="8332661909019981149">"Mostra contatore overdraw"</item>
+    <item msgid="2290859360633824369">"Mostra aree con deuteranomalia"</item>
+    <item msgid="3448087929560624983">"Mostra contatore overdraw"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Limite standard"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"Chiedi"</item>
     <item msgid="5077768429488260031">"Non consentire mai"</item>
     <item msgid="1417929597727989746">"Consenti sempre"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"normale"</item>
+    <item msgid="4517779899383204000">"medio"</item>
+    <item msgid="406385694840950802">"basso"</item>
+    <item msgid="4212263919458209842">"critico"</item>
   </string-array>
 </resources>

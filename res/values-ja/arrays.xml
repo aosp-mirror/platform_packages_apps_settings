@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"Bluetoothの音量"</item>
     <item msgid="2029227495214047094">"スリープモードにしない"</item>
     <item msgid="26109888160231211">"場所を監視"</item>
+    <item msgid="5753382310468855812">"高精度の現在地情報を監視"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"位置情報"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"通知の投稿"</item>
     <item msgid="4282477730595931828">"位置情報"</item>
     <item msgid="4891423912898525905">"通話の発信"</item>
-    <item msgid="626463821668200388">"SMS/MMSの受信"</item>
-    <item msgid="1237538540368797101">"SMS/MMSの送信"</item>
+    <item msgid="2623604824935968113">"SMS/MMSの読み取り"</item>
+    <item msgid="4420177125221176306">"SMS/MMSの書き込み"</item>
     <item msgid="3986142739951490025">"SMS/MMSの受信"</item>
     <item msgid="3984213795861739778">"SMS/MMSの受信"</item>
     <item msgid="3656243523752472788">"SMS/MMSの受信"</item>
     <item msgid="8105802370238551510">"SMS/MMSの受信"</item>
     <item msgid="1407766984645388488">"SMS/MMSの送信"</item>
-    <item msgid="1530132603376027248">"SMS/MMSの受信"</item>
-    <item msgid="1188256962149204607">"SMS/MMSの送信"</item>
+    <item msgid="3527273606643794973">"SMS/MMSの読み取り"</item>
+    <item msgid="4370895547001583812">"SMS/MMSの書き込み"</item>
     <item msgid="4218544235221631789">"設定の変更"</item>
     <item msgid="736541391767350377">"上部に描画"</item>
     <item msgid="5530815681721654194">"通知へのアクセス"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"Bluetoothの音量"</item>
     <item msgid="4665183401128289653">"スリープモードにしない"</item>
     <item msgid="8584357129746649222">"場所"</item>
+    <item msgid="7669257279311110599">"現在地"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"短め"</item>
     <item msgid="2560532955514699713">"中"</item>
     <item msgid="2372711992605524591">"長め"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"デフォルト"</item>
+    <item msgid="1016452621833735880">"Sans Serif"</item>
+    <item msgid="2496277987934654454">"Sans Serif Condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"固定幅"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"極小"</item>
+    <item msgid="6781094565687692782">"小"</item>
+    <item msgid="8222123259497646551">"標準"</item>
+    <item msgid="5813217276778560466">"大"</item>
+    <item msgid="9044232017390975191">"極大"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"なし"</item>
+    <item msgid="1352974708028506778">"アウトライン"</item>
+    <item msgid="5850876295428722675">"ドロップシャドウ"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"黒地に白"</item>
+    <item msgid="4589278788192525675">"白地に黒"</item>
+    <item msgid="1309255027325660115">"黒地に黄色"</item>
+    <item msgid="2985943780939258562">"青地に黄色"</item>
+    <item msgid="7520438652121629055">"カスタム"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"なし"</item>
     <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280x720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920x1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280x720 tvdpiと1920x1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi（セキュア）"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi（セキュア）"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi（セキュア）"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpiと1920x1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"なし"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"OFF"</item>
     <item msgid="7688197031296835369">"オーバードロー領域の表示"</item>
-    <item msgid="8332661909019981149">"オーバードローカウンタの表示"</item>
+    <item msgid="2290859360633824369">"第二色弱の方向けの領域の表示"</item>
+    <item msgid="3448087929560624983">"オーバードローカウンタの表示"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"標準の上限"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"確認する"</item>
     <item msgid="5077768429488260031">"許可しない"</item>
     <item msgid="1417929597727989746">"常に許可する"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"標準"</item>
+    <item msgid="4517779899383204000">"やや不足"</item>
+    <item msgid="406385694840950802">"かなり不足"</item>
+    <item msgid="4212263919458209842">"残りわずか"</item>
   </string-array>
 </resources>

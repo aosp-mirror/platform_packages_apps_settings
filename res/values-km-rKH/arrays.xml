@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"អាមេរិក"</item>
+    <item msgid="3005562397632768392">"អឺរ៉ុប"</item>
+    <item msgid="5696915123093701218">"អាហ្រ្វិក"</item>
+    <item msgid="4439789052790868249">"អាស៊ី"</item>
+    <item msgid="956915953069815961">"អូស្ត្រាលី"</item>
+    <item msgid="5345178126174698955">"ប៉ាស៊ីហ្វិក"</item>
+    <item msgid="8392017019801393511">"ទាំងអស់"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"១៥ វិនាទី"</item>
+    <item msgid="8881760709354815449">"៣០ វិនាទី"</item>
+    <item msgid="7589406073232279088">"១ នាទី"</item>
+    <item msgid="7001195990902244174">"២ នាទី"</item>
+    <item msgid="7489864775127957179">"៥ នាទី"</item>
+    <item msgid="2314124409517439288">"១០ នាទី"</item>
+    <item msgid="6864027152847611413">"៣០ នាទី"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"កុំ"</item>
+    <item msgid="2194151041885903260">"១៥ វិនាទី"</item>
+    <item msgid="5892295237131074341">"៣០ វិនាទី"</item>
+    <item msgid="3538441365970038213">"១ នាទី"</item>
+    <item msgid="412343871668955639">"២ នាទី"</item>
+    <item msgid="5076853889688991690">"៥ នាទី"</item>
+    <item msgid="1903860996174927898">"១០ នាទី"</item>
+    <item msgid="6415509612413178727">"៣០ នាទី"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"ភ្លាម​ៗ"</item>
+    <item msgid="6736512735606834431">"៥ វិនាទី"</item>
+    <item msgid="8044619388267891375">"១៥ វិនាទី"</item>
+    <item msgid="1822002388249545488">"៣០ វិនាទី"</item>
+    <item msgid="8538071621211916519">"១ នាទី"</item>
+    <item msgid="5663439580228932882">"២ នាទី"</item>
+    <item msgid="49888496216106852">"៥ នាទី"</item>
+    <item msgid="9002737361305019353">"១០ នាទី"</item>
+    <item msgid="4322676235684793329">"៣០ នាទី"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"តូច"</item>
+    <item msgid="1932071435506638315">"ធម្មតា"</item>
+    <item msgid="38373998008112077">"ធំ"</item>
+    <item msgid="7786168277516233536">"ធំ​សម្បើម"</item>
+  </string-array>
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"យឺត​ណាស់"</item>
+    <item msgid="2361722960903353554">"យឺត"</item>
+    <item msgid="1145554631248513562">"ធម្មតា"</item>
+    <item msgid="7553665153391107454">"លឿន"</item>
+    <item msgid="1370673569131070146">"លឿន​ជាង"</item>
+    <item msgid="4648206845228970803">"លឿន​ណាស់"</item>
+    <item msgid="4977949754169483251">"រហ័ស"</item>
+    <item msgid="6106302964845503577">"រហ័ស​ណាស់"</item>
+    <item msgid="6800277205640837264">"លឿន​បំផុត"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"ទាប​ណាស់"</item>
+    <item msgid="2692137425242433765">"ទាប"</item>
+    <item msgid="3332408460740717754">"ធម្មតា"</item>
+    <item msgid="4907380534957572531">"ខ្ពស់"</item>
+    <item msgid="4699640516390840297">"ខ្ពស់​ណាស់"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"កំពុង​វិភាគ​រក…"</item>
+    <item msgid="8513729475867537913">"កំពុង​ត​ភ្ជាប់​…"</item>
+    <item msgid="515055375277271756">"កំពុង​ផ្ទៀងផ្ទាត់..."</item>
+    <item msgid="1943354004029184381">"កំពុង​ទទួល​អាសយដ្ឋាន IP…"</item>
+    <item msgid="4221763391123233270">"បាន​តភ្ជាប់"</item>
+    <item msgid="624838831631122137">"បាន​ពន្យារ​ពេល"</item>
+    <item msgid="7979680559596111948">"កំពុង​ផ្ដាច់…"</item>
+    <item msgid="1634960474403853625">"បាន​ផ្ដាច់"</item>
+    <item msgid="746097431216080650">"មិន​ជោគជ័យ"</item>
+    <item msgid="6367044185730295334">"បាន​ទប់​ស្កាត់"</item>
+    <item msgid="503942654197908005">"ជៀសវាង​ការ​តភ្ជាប់​ដែល​ខ្សោយ​ជា​បណ្ដោះ​អាសន្ន"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"កំពុង​វិភាគ​រក…"</item>
+    <item msgid="355508996603873860">"កំពុង​តភ្ជាប់​ទៅ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="554971459996405634">"កំពុង​ផ្ទៀងផ្ទាត់​ជា​មួយ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="7928343808033020343">"កំពុង​យក​អាសយដ្ឋាន IP ពី <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="8937994881315223448">"បាន​តភ្ជាប់​ទៅ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"បាន​ផ្អាក"</item>
+    <item msgid="7698638434317271902">"កំពុង​ផ្ដាច់​ពីរ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="197508606402264311">"បាន​ផ្ដាច់"</item>
+    <item msgid="8578370891960825148">"មិន​ជោគជ័យ"</item>
+    <item msgid="5660739516542454527">"បាន​ទប់ស្កាត់"</item>
+    <item msgid="1805837518286731242">"ជៀសវាង​ការ​តភ្ជាប់​​ខ្សោយ​ជា​បណ្ដោះអាសន្ន"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"ប៊ូតុង​ចុច"</item>
+    <item msgid="1624323946324499595">"កូដ PIN ពី​ឧបករណ៍"</item>
+    <item msgid="5366790421523328066">"កូដ PIN ពី​ឧបករណ៍​នេះ"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"បាន​តភ្ជាប់"</item>
+    <item msgid="3189211552661432651">"បាន​​អញ្ជើញ"</item>
+    <item msgid="3206450250360237549">"បរាជ័យ"</item>
+    <item msgid="7785896708926971207">"មាន"</item>
+    <item msgid="2330782789550628803">"ក្រៅ​តំបន់"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"២ នាទី"</item>
+    <item msgid="8675215713017289017">"៥ នាទី"</item>
+    <item msgid="477015974247590543">"១ ម៉ោង"</item>
+    <item msgid="5198271470953124739">"កុំ​អស់​ពេល"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"ខ្សោយ"</item>
+    <item msgid="5615082285463430971">"មធ្យម"</item>
+    <item msgid="3565079809875324621">"ល្អ"</item>
+    <item msgid="5702329417707689835">"ល្អ​ណាស់"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries">
+    <item msgid="3269131034472904310">"ជា​និច្ច"</item>
+    <item msgid="844721238536786870">"តែ​ពេល​ដោតប៉ុណ្ណោះ"</item>
+    <item msgid="2990218920631468642">"កុំ (បង្កើន​ការ​ប្រើទិន្នន័យ)"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries_wifi_only">
+    <item msgid="2124319326282651391">"ជា​និច្ច"</item>
+    <item msgid="7433294150916905997">"តែ​ពេល​ដោត"</item>
+    <item msgid="1390404486722375028">"កុំ"</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="624340809384223320">"ស្វ័យប្រវត្តិ"</item>
+    <item msgid="6670588712989942178">"តែ ៥ ជីកាហឺត"</item>
+    <item msgid="2715516524973207876">"តែ 2.4 GHz ប៉ុណ្ណោះ"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"ពេលវេលា​ប្រើ"</item>
+    <item msgid="3703676222230317933">"ចំនួន​ចាប់ផ្ដើម"</item>
+    <item msgid="2502754479975776899">"ឈ្មោះ​កម្មវិធី"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"គ្មាន"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"គ្មាន"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"ថេរ"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"គ្មាន"</item>
+    <item msgid="8673874894887358090">"ដោយ​ដៃ"</item>
+  </string-array>
+  <string-array name="emergency_tone_entries">
+    <item msgid="5165439859689033665">"បិទ"</item>
+    <item msgid="3165868966179561687">"ជូន​ដំណឹង"</item>
+    <item msgid="6038758039030476855">"ញ័រ"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"គ្មាន"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP ឬ CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"មិន​បាន​បញ្ជាក់"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"គ្មាន"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"ឧបករណ៍​ផ្ទុក​ខាង​ក្នុង"</item>
+    <item msgid="3738430123799803530">"កាត​អេសឌី​​ដែល​អាច​ដក​បាន"</item>
+    <item msgid="4498124044785815005">"ឲ្យ​ប្រព័ន្ធ​សម្រេចចិត្ត"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"ទី​តាំង"</item>
+    <item msgid="255608127647030286">"ផ្ទាល់ខ្លួន"</item>
+    <item msgid="4588829735729884491">"ការ​ផ្ញើ​សារ"</item>
+    <item msgid="886742181977884584">"មេឌៀ"</item>
+    <item msgid="7924928667052300589">"ឧបករណ៍"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"ទីតាំង​មិន​ល្អ"</item>
+    <item msgid="5789673140227507995">"ទីតាំង​ល្អ"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"ញ័រ"</item>
+    <item msgid="3434165993711230924">"អាន​ទំនាក់ទំនង"</item>
+    <item msgid="616161687718081936">"កែ​ទំនាក់ទំនង"</item>
+    <item msgid="7638002295329050091">"អាន​​បញ្ជី​​ហៅ"</item>
+    <item msgid="6546959730920410907">"កែ​កំណត់​ហេតុ​ហៅ"</item>
+    <item msgid="446877710771379667">"អាន​ប្រតិទិន"</item>
+    <item msgid="7674458294386319722">"កែ​ប្រតិទិន"</item>
+    <item msgid="8281201165558093009">"វិភាគ​រក វ៉ាយហ្វាយ"</item>
+    <item msgid="8694611243479480497">"ការ​ជូនដំណឹង"</item>
+    <item msgid="7776439107987345446">"វិភាគ​រក​ក្រុម"</item>
+    <item msgid="514615766544675057">"ហៅ​ទូរស័ព្ទ"</item>
+    <item msgid="8181415497109310680">"អាន​សារ SMS"</item>
+    <item msgid="6816551144382117307">"សរសេរ SMS"</item>
+    <item msgid="4600463921908905030">"ទទួល SMS"</item>
+    <item msgid="5958926493289432745">"ទទួល​សារ SMS ពេល​អាសន្ន"</item>
+    <item msgid="4945269495221089540">"ទទួល MMS"</item>
+    <item msgid="5570472453573929087">"ទទួល WAP push"</item>
+    <item msgid="7125408150230860501">"ផ្ញើ​សារ SMS"</item>
+    <item msgid="7080337936612188061">"អាន​សារ SMS ICC"</item>
+    <item msgid="587124103118495063">"សរសេរ ICC SMS"</item>
+    <item msgid="2320577158869025503">"កែ​ការ​កំណត់"</item>
+    <item msgid="1545733463471924009">"គូរ​នៅ​ផ្នែក​ខាង​លើ"</item>
+    <item msgid="3609046903962454582">"ចូល​មើល​ការ​ជូន​ដំណឹង"</item>
+    <item msgid="4671646036128214513">"ម៉ាស៊ីន​ថត"</item>
+    <item msgid="1097324338692486211">"ថត​សំឡេង"</item>
+    <item msgid="5031552983987798163">"ចាក់​អូឌីយ៉ូ"</item>
+    <item msgid="8374996688066472414">"អាន​ក្ដារតម្បៀតខ្ទាស់"</item>
+    <item msgid="3045529469061083747">"កែ​ក្ដារតម្បៀតខ្ទាស់"</item>
+    <item msgid="5124443975763747838">"ប៊ូតុង​មេឌៀ"</item>
+    <item msgid="4547883971364273343">"ការ​ផ្ដោត​សំឡេង"</item>
+    <item msgid="2603878814882344450">"កម្រិត​សំឡេង​មេ"</item>
+    <item msgid="7136963238377062018">"កម្រិត​សំឡេង"</item>
+    <item msgid="4270236897655923007">"កម្រិត​សំឡេង​រោទ៍"</item>
+    <item msgid="6325739889222559394">"កម្រិត​សំឡេង​មេឌៀ"</item>
+    <item msgid="5762123934816216821">"កម្រិត​សំឡេង​រោទ៍"</item>
+    <item msgid="785049718065337473">"កម្រិត​សំឡេង​ការ​ជូន​ដំណឹង"</item>
+    <item msgid="6700305533746877052">"កម្រិត​សំឡេង​ប៊្លូធូស"</item>
+    <item msgid="2029227495214047094">"មិន​ដេក"</item>
+    <item msgid="26109888160231211">"តាមដាន​ទីតាំង"</item>
+    <item msgid="5753382310468855812">"​ពិនិត្យ​ទីតាំង​ថាមពល​​ខ្ពស់"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"ទី​តាំង"</item>
+    <item msgid="8677040780775113033">"ទី​តាំង"</item>
+    <item msgid="1660743989948992916">"ទី​តាំង"</item>
+    <item msgid="8791172739860195290">"ញ័រ"</item>
+    <item msgid="383413555642128046">"អាន​ទំនាក់ទំនង"</item>
+    <item msgid="3654594895269697313">"កែ​ទំនាក់ទំនង"</item>
+    <item msgid="7928393476362362538">"អាន​កំណត់ហេតុ​ហៅ"</item>
+    <item msgid="6248591205254641116">"កែ​បញ្ជី​ហៅ"</item>
+    <item msgid="6093344633066170692">"អាន​ប្រតិទិន"</item>
+    <item msgid="1334886368750347692">"កែ​ប្រតិទិន"</item>
+    <item msgid="1638204101698708656">"ទី​តាំង"</item>
+    <item msgid="2154671955760380322">"ប្រកាស​ការ​ជូន​ដំណឹង"</item>
+    <item msgid="4282477730595931828">"ទី​តាំង"</item>
+    <item msgid="4891423912898525905">"ហៅ​ទូរស័ព្ទ"</item>
+    <item msgid="2623604824935968113">"អាន​សារ SMS/MMS"</item>
+    <item msgid="4420177125221176306">"សរសេរ​សារ SMS/MMS"</item>
+    <item msgid="3986142739951490025">"ទទួល SMS/MMS"</item>
+    <item msgid="3984213795861739778">"ទទួល SMS/MMS"</item>
+    <item msgid="3656243523752472788">"ទទួល SMS/MMS"</item>
+    <item msgid="8105802370238551510">"ទទួល SMS/MMS"</item>
+    <item msgid="1407766984645388488">"ផ្ញើ SMS/MMS"</item>
+    <item msgid="3527273606643794973">"អាន​សារ SMS/MMS"</item>
+    <item msgid="4370895547001583812">"សរសេរ​សារ SMS/MMS"</item>
+    <item msgid="4218544235221631789">"កែ​ការ​កំណត់"</item>
+    <item msgid="736541391767350377">"គូរ​​​ខាង​លើ"</item>
+    <item msgid="5530815681721654194">"​ជូន​ដំណឹង​ចូល​ដំណើរការ"</item>
+    <item msgid="781213371706962767">"ម៉ាស៊ីន​ថត"</item>
+    <item msgid="1720492593061838172">"ថត​សំឡេង"</item>
+    <item msgid="3493046322001257041">"ចាក់អូឌីយ៉ូ"</item>
+    <item msgid="136815868796597058">"អាន​ក្ដារតម្បៀតខ្ទាស់"</item>
+    <item msgid="5238692940326972503">"កែ​ក្ដារតម្បៀតខ្ទាស់"</item>
+    <item msgid="5753789168376302997">"ប៊ូតុង​មេឌៀ"</item>
+    <item msgid="3265262911688671938">"ការ​ផ្ដោត​សំឡេង"</item>
+    <item msgid="2098976479485046797">"កម្រិត​សំឡេង​មេ"</item>
+    <item msgid="5660213838861789350">"កម្រិត​សំឡេង"</item>
+    <item msgid="7983336752371254444">"កម្រិត​សំឡេង​រោទ៍"</item>
+    <item msgid="7878027809189330917">"កម្រិត​សំឡេង​មេឌៀ"</item>
+    <item msgid="7260546305036218513">"កម្រិត​សំឡេង​រោទ៍"</item>
+    <item msgid="9103719301075748925">"កម្រិត​សំឡេង​ការ​ជូន​ដំណឹង"</item>
+    <item msgid="7025966722295861512">"កម្រិត​សំឡេង​ប៊្លូធូស"</item>
+    <item msgid="4665183401128289653">"មិន​ដេក"</item>
+    <item msgid="8584357129746649222">"ទី​តាំង"</item>
+    <item msgid="7669257279311110599">"ទី​តាំង"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"ខ្លី"</item>
+    <item msgid="2560532955514699713">"មធ្យម"</item>
+    <item msgid="2372711992605524591">"វែង"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"លំនាំដើម"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"តូច​ណាស់"</item>
+    <item msgid="6781094565687692782">"តូច"</item>
+    <item msgid="8222123259497646551">"ធម្មតា"</item>
+    <item msgid="5813217276778560466">"ធំ"</item>
+    <item msgid="9044232017390975191">"ធំ​ណាស់"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"គ្មាន"</item>
+    <item msgid="1352974708028506778">"គ្រោង"</item>
+    <item msgid="5850876295428722675">"ទម្លាក់​ស្រមោល"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"២៥%"</item>
+    <item msgid="2367156416247936773">"៥០%"</item>
+    <item msgid="5395560410107149298">"៧៥%"</item>
+    <item msgid="8342334626783983353">"១០០%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"ពណ៌ស​លើ​ពណ៌ខ្មៅ"</item>
+    <item msgid="4589278788192525675">"ពណ៌ខ្មៅ​លើ​ពណ៌ស"</item>
+    <item msgid="1309255027325660115">"ពណ៌លឿង​​លើ​​ពណ៌ខ្មៅ"</item>
+    <item msgid="2985943780939258562">"ពណ៌លឿង​លើ​ពណ៌ខៀវ"</item>
+    <item msgid="7520438652121629055">"តាម​តម្រូវ​ការ"</item>
+  </string-array>
+  <string-array name="select_runtime_titles">
+    <item msgid="3574453009229338122">"Dalvik"</item>
+    <item msgid="8978402910750533864">"ART"</item>
+    <item msgid="7839859333977894115">"ART (កែ​កំហុស)"</item>
+  </string-array>
+  <string-array name="select_runtime_summaries">
+    <item msgid="6412880178297884701">"ប្រើ Dalvik"</item>
+    <item msgid="5131846588686178907">"ប្រើ ART"</item>
+    <item msgid="4530003713865319928">"ប្រើ​ការ​បង្កើត​កែ​កំហុស ART"</item>
+  </string-array>
+  <string-array name="hdcp_checking_titles">
+    <item msgid="441827799230089869">"កុំ​ពិនិត្យមើល"</item>
+    <item msgid="6042769699089883931">"ពិនិត្យ​តែ​មាតិកា DRM"</item>
+    <item msgid="9174900380056846820">"ពិនិត្យ​ជា​និច្ច"</item>
+  </string-array>
+  <string-array name="hdcp_checking_summaries">
+    <item msgid="505558545611516707">"កុំ​ប្រើ​ការ​ពិនិត្យ HDCP"</item>
+    <item msgid="3878793616631049349">"ប្រើ​ការ​ពិនិត្យ HDCP សម្រាប់​តែ​មាតិកា DRM ប៉ុណ្ណោះ"</item>
+    <item msgid="45075631231212732">"ប្រើ​ការ​ពិនិត្យ HDCP ជា​និច្ច"</item>
+  </string-array>
+  <string-array name="window_animation_scale_entries">
+    <item msgid="8134156599370824081">"បិទ​ចលនា"</item>
+    <item msgid="6624864048416710414">"មាត្រដ្ឋាន​ចលនា .5x"</item>
+    <item msgid="2219332261255416635">"មាត្រដ្ឋាន​ចលនា 1x"</item>
+    <item msgid="3544428804137048509">"មាត្រដ្ឋាន​ចលនា 1.5x"</item>
+    <item msgid="3110710404225974514">"មាត្រដ្ឋាន​ចលនា 2x"</item>
+    <item msgid="4402738611528318731">"មាត្រដ្ឋាន​ចលនា 5x"</item>
+    <item msgid="6189539267968330656">"មាត្រដ្ឋាន​ចលនា 10x"</item>
+  </string-array>
+  <string-array name="transition_animation_scale_entries">
+    <item msgid="8464255836173039442">"បិទ​ចលនា"</item>
+    <item msgid="3375781541913316411">"មាត្រដ្ឋាន​ចលនា .5x"</item>
+    <item msgid="1991041427801869945">"មាត្រដ្ឋាន​ចលនា 1x"</item>
+    <item msgid="4012689927622382874">"មាត្រដ្ឋាន​ចលនា 1.5x"</item>
+    <item msgid="3289156759925947169">"មាត្រដ្ឋាន​ចលនា 2x"</item>
+    <item msgid="7705857441213621835">"មាត្រដ្ឋាន​ចលនា 5x"</item>
+    <item msgid="6660750935954853365">"មាត្រដ្ឋាន​ចលនា 10x"</item>
+  </string-array>
+  <string-array name="animator_duration_scale_entries">
+    <item msgid="6039901060648228241">"បិទ​ចលនា"</item>
+    <item msgid="1138649021950863198">"មាត្រដ្ឋាន​ចលនា .5x"</item>
+    <item msgid="4394388961370833040">"មាត្រដ្ឋាន​ចលនា 1x"</item>
+    <item msgid="8125427921655194973">"មាត្រដ្ឋាន​ចលនា 1.5x"</item>
+    <item msgid="3334024790739189573">"មាត្រដ្ឋាន​ចលនា 2x"</item>
+    <item msgid="3170120558236848008">"មាត្រដ្ឋាន​ចលនា 5x"</item>
+    <item msgid="1069584980746680398">"មាត្រដ្ឋាន​ចលនា 10x"</item>
+  </string-array>
+  <string-array name="overlay_display_devices_entries">
+    <item msgid="1606809880904982133">"គ្មាន"</item>
+    <item msgid="688482401508173818">"720x480 mdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (មាន​សុវត្ថិភាព​)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (មាន​សុវត្ថិភាព)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (មាន​សុវត្ថិភាព)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi និង 1920x1080 xhdpi"</item>
+  </string-array>
+  <string-array name="enable_opengl_traces_entries">
+    <item msgid="3191973083884253830">"គ្មាន"</item>
+    <item msgid="9089630089455370183">"Logcat"</item>
+    <item msgid="5397807424362304288">"Systrace (ក្រាហ្វិក)"</item>
+    <item msgid="1340692776955662664">"លំដាប់​ហៅ​លើ glGetError"</item>
+  </string-array>
+  <string-array name="show_non_rect_clip_entries">
+    <item msgid="993742912147090253">"បិទ"</item>
+    <item msgid="675719912558941285">"គូរ​តំបន់​កាត់​មិនមែន​រាង​ចតុកោណ​ជា​ពណ៌​ខៀវ"</item>
+    <item msgid="1064373276095698656">"រំលេច​ពាក្យ​បញ្ជា​គូរ​បាន​សាកល្បង​ជា​ពណ៌​បៃតង"</item>
+  </string-array>
+  <string-array name="track_frame_time_entries">
+    <item msgid="2193584639058893150">"បិទ"</item>
+    <item msgid="2751513398307949636">"លើ​អេក្រង់​ជា​របារ"</item>
+    <item msgid="8272260411216018353">"លើ​អេក្រង់​ជា​បន្ទាត់"</item>
+    <item msgid="120512413928262547">"ក្នុង adb shell dumpsys gfxinfo"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"បិទ"</item>
+    <item msgid="7688197031296835369">"បង្ហាញ​តំបន់​​ដែល​លើស"</item>
+    <item msgid="2290859360633824369">"បង្ហាញ​តំបន់​សម្រាប់ Deuteranomaly"</item>
+    <item msgid="3448087929560624983">"បង្ហាញ​ចំនួន​ដែល​លើស"</item>
+  </string-array>
+  <string-array name="app_process_limit_entries">
+    <item msgid="3401625457385943795">"ដែន​កំណត់​ស្តង់ដារ"</item>
+    <item msgid="4071574792028999443">"គ្មាន​ដំណើរការ​​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ"</item>
+    <item msgid="4810006996171705398">"ជិត ១ ដំណើរការ"</item>
+    <item msgid="8586370216857360863">"ដំណើរការ​ច្រើន​បំផុត​ ២"</item>
+    <item msgid="836593137872605381">"ដំណើរ​ការ​ច្រើន​បំផុត ៣"</item>
+    <item msgid="7899496259191969307">"ជិត ៤​ ដំណើរ​ការ"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"L2TP/IPSec VPN ជា​មួយ​សោ​ចែករំលែក​ជាមុន"</item>
+    <item msgid="4725504331295252103">"L2TP/IPSec VPN ជា​មួយ​វិញ្ញាបនបត្រ"</item>
+    <item msgid="7526551163264034377">"IPSec VPN ជា​មួយ​សោ​ចែករំលែក​ជាមុន និង​ការ​ផ្ទៀងផ្ទាត់ Xauth"</item>
+    <item msgid="8064740940687465039">"IPSec VPN ជា​មួយ​ការ​ផ្ទៀងផ្ទាត់​វិញ្ញាបនបត្រ និង Xauth"</item>
+    <item msgid="4946199982372391490">"IPSec VPN ជា​មួយ​វិញ្ញាបនបត្រ និង​ការ​ផ្ទៀងផ្ទាត់​ឆ្លង"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"បាន​ផ្ដាច់"</item>
+    <item msgid="6692305604213080515">"កំពុង​​ចាប់ផ្ដើម…"</item>
+    <item msgid="8001704909356800092">"កំពុង​ត​ភ្ជាប់​…"</item>
+    <item msgid="4039737283841672166">"បាន​តភ្ជាប់"</item>
+    <item msgid="4042143101664725090">"អស់​​ពេល"</item>
+    <item msgid="7664124146786465092">"មិន​ជោគជ័យ"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"សួរ"</item>
+    <item msgid="5077768429488260031">"កុំ​អនុញ្ញាត"</item>
+    <item msgid="1417929597727989746">"អនុញ្ញាត​ជា​និច្ច"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"ធម្មតា"</item>
+    <item msgid="4517779899383204000">"សម្របសម្រួល"</item>
+    <item msgid="406385694840950802">"ទាប"</item>
+    <item msgid="4212263919458209842">"សំខាន់"</item>
+  </string-array>
+</resources>

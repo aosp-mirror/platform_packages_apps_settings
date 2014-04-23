@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"Ամերիկա"</item>
+    <item msgid="3005562397632768392">"Եվրոպա"</item>
+    <item msgid="5696915123093701218">"Աֆրիկա"</item>
+    <item msgid="4439789052790868249">"Ասիա"</item>
+    <item msgid="956915953069815961">"Ավստրալիա"</item>
+    <item msgid="5345178126174698955">"Խաղաղօվկիանոսյան"</item>
+    <item msgid="8392017019801393511">"Բոլորը"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 վայրկյան"</item>
+    <item msgid="8881760709354815449">"30 վայրկյան"</item>
+    <item msgid="7589406073232279088">"1 րոպե"</item>
+    <item msgid="7001195990902244174">"2 րոպե"</item>
+    <item msgid="7489864775127957179">"5 րոպե"</item>
+    <item msgid="2314124409517439288">"10 րոպե"</item>
+    <item msgid="6864027152847611413">"30 րոպե"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"Երբեք"</item>
+    <item msgid="2194151041885903260">"15 վայրկյան"</item>
+    <item msgid="5892295237131074341">"30 վայրկյան"</item>
+    <item msgid="3538441365970038213">"1 րոպե"</item>
+    <item msgid="412343871668955639">"2 րոպե"</item>
+    <item msgid="5076853889688991690">"5 րոպե"</item>
+    <item msgid="1903860996174927898">"10 րոպե"</item>
+    <item msgid="6415509612413178727">"30 րոպե"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"Անմիջապես"</item>
+    <item msgid="6736512735606834431">"5 վայրկյան"</item>
+    <item msgid="8044619388267891375">"15 վայրկյան"</item>
+    <item msgid="1822002388249545488">"30 վայրկյան"</item>
+    <item msgid="8538071621211916519">"1 րոպե"</item>
+    <item msgid="5663439580228932882">"2 րոպե"</item>
+    <item msgid="49888496216106852">"5 րոպե"</item>
+    <item msgid="9002737361305019353">"10 րոպե"</item>
+    <item msgid="4322676235684793329">"30 րոպե"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"Փոքր"</item>
+    <item msgid="1932071435506638315">"Սովորական"</item>
+    <item msgid="38373998008112077">"Մեծ"</item>
+    <item msgid="7786168277516233536">"Վիթխարի"</item>
+  </string-array>
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"Շատ դանդաղ"</item>
+    <item msgid="2361722960903353554">"Դանդաղ"</item>
+    <item msgid="1145554631248513562">"Սովորական"</item>
+    <item msgid="7553665153391107454">"Արագ"</item>
+    <item msgid="1370673569131070146">"Ավելի արագ"</item>
+    <item msgid="4648206845228970803">"Շատ արագ"</item>
+    <item msgid="4977949754169483251">"Սրընթաց"</item>
+    <item msgid="6106302964845503577">"Չափազանց արագ"</item>
+    <item msgid="6800277205640837264">"Ամենաարագ"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"Շատ ցածր"</item>
+    <item msgid="2692137425242433765">"Ցածր"</item>
+    <item msgid="3332408460740717754">"Սովորական"</item>
+    <item msgid="4907380534957572531">"Բարձր"</item>
+    <item msgid="4699640516390840297">"Շատ բարձր"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Սկանավորում…"</item>
+    <item msgid="8513729475867537913">"Միանում է..."</item>
+    <item msgid="515055375277271756">"Նույնականացում…"</item>
+    <item msgid="1943354004029184381">"IP հասցեն գտնվում է...."</item>
+    <item msgid="4221763391123233270">"Միացված է"</item>
+    <item msgid="624838831631122137">"Կասեցված է"</item>
+    <item msgid="7979680559596111948">"Անջատվում է…"</item>
+    <item msgid="1634960474403853625">"Անջատված է"</item>
+    <item msgid="746097431216080650">"Անհաջող"</item>
+    <item msgid="6367044185730295334">"Արգելափակված"</item>
+    <item msgid="503942654197908005">"Ժամանակավորապես խուսափելով թույլ կապից"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Սկանավորում...."</item>
+    <item msgid="355508996603873860">"Միանում է <xliff:g id="NETWORK_NAME">%1$s</xliff:g>-ին…"</item>
+    <item msgid="554971459996405634">"Նույնականացում <xliff:g id="NETWORK_NAME">%1$s</xliff:g>-ի հետ…"</item>
+    <item msgid="7928343808033020343">"IP հասցեի ստացում <xliff:g id="NETWORK_NAME">%1$s</xliff:g>-ից…"</item>
+    <item msgid="8937994881315223448">"Միացված է <xliff:g id="NETWORK_NAME">%1$s</xliff:g>-ին"</item>
+    <item msgid="1330262655415760617">"Անջատված"</item>
+    <item msgid="7698638434317271902">"Անջատվում է <xliff:g id="NETWORK_NAME">%1$s</xliff:g>-ից…"</item>
+    <item msgid="197508606402264311">"Անջատված"</item>
+    <item msgid="8578370891960825148">"Անհաջող"</item>
+    <item msgid="5660739516542454527">"Արգելափակված"</item>
+    <item msgid="1805837518286731242">"Վատ ցանցից ժամանակավոր խուսափում"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"Սեղմման կոճակ"</item>
+    <item msgid="1624323946324499595">"Հավասարազոր սարքի PIN-ը"</item>
+    <item msgid="5366790421523328066">"PIN-ը այս սարքից"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"Միացված է"</item>
+    <item msgid="3189211552661432651">"Հրավիրված է"</item>
+    <item msgid="3206450250360237549">"Անհաջող"</item>
+    <item msgid="7785896708926971207">"Հասանելի"</item>
+    <item msgid="2330782789550628803">"Ընդգրկույթից դուրս"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"2 րոպե"</item>
+    <item msgid="8675215713017289017">"5 րոպե"</item>
+    <item msgid="477015974247590543">"1 ժամ"</item>
+    <item msgid="5198271470953124739">"Ժամանակի սպառումը բացառել"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"Թույլ"</item>
+    <item msgid="5615082285463430971">"Բավարար"</item>
+    <item msgid="3565079809875324621">"Լավ"</item>
+    <item msgid="5702329417707689835">"Հիանալի"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries">
+    <item msgid="3269131034472904310">"Միշտ"</item>
+    <item msgid="844721238536786870">"Միայն երբ միացված է"</item>
+    <item msgid="2990218920631468642">"Երբեք (մեծացնում է տվյալների օգտագործումը)"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries_wifi_only">
+    <item msgid="2124319326282651391">"Միշտ"</item>
+    <item msgid="7433294150916905997">"Միայն երբ միացված է"</item>
+    <item msgid="1390404486722375028">"Երբեք"</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="624340809384223320">"Ինքնաշխատ"</item>
+    <item msgid="6670588712989942178">"Միայն 5 ԳՀց"</item>
+    <item msgid="2715516524973207876">"միայն 2.4 ԳՀց"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"Օգտագործման ժամանակը"</item>
+    <item msgid="3703676222230317933">"Գործարկումների թիվը"</item>
+    <item msgid="2502754479975776899">"Ծրագրի անունը"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"Ոչ մեկը"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"Ոչ մեկը"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"Ստատիկ"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"Ոչ մեկը"</item>
+    <item msgid="8673874894887358090">"Ձեռքով"</item>
+  </string-array>
+  <string-array name="emergency_tone_entries">
+    <item msgid="5165439859689033665">"Անջատել"</item>
+    <item msgid="3165868966179561687">"Ահազանգ"</item>
+    <item msgid="6038758039030476855">"Թրթռալ"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"Ոչ մեկը"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP կամ CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"Տարբերակված չէ"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"Ոչ մեկը"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"Սարքի ներքին պահոց"</item>
+    <item msgid="3738430123799803530">"Շարժական SD քարտ"</item>
+    <item msgid="4498124044785815005">"Թույլատրել համակարգը որոշի"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"Տեղադրություն"</item>
+    <item msgid="255608127647030286">"Անձնական"</item>
+    <item msgid="4588829735729884491">"Հաղորդակցում"</item>
+    <item msgid="886742181977884584">"Մեդիա"</item>
+    <item msgid="7924928667052300589">"Սարք"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"հենակետային տեղանք"</item>
+    <item msgid="5789673140227507995">"ճշգրիտ տեղադրություն"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"թրթռալ"</item>
+    <item msgid="3434165993711230924">"տեսնել կոնտակտների ցանկը"</item>
+    <item msgid="616161687718081936">"փոփոխել կոնտակտների ցանկը"</item>
+    <item msgid="7638002295329050091">"տեսնել զանգերի մատյանը"</item>
+    <item msgid="6546959730920410907">"փոփոխել զանգերի մատյանը"</item>
+    <item msgid="446877710771379667">"կարդալ օրացույցը"</item>
+    <item msgid="7674458294386319722">"փոփոխել օրացույցը"</item>
+    <item msgid="8281201165558093009">"wi-fi սկանավորում"</item>
+    <item msgid="8694611243479480497">"ծանուցում"</item>
+    <item msgid="7776439107987345446">"բջջային սկանավորում"</item>
+    <item msgid="514615766544675057">"Հեռախոսահամար"</item>
+    <item msgid="8181415497109310680">"կարդալ SMS-ը"</item>
+    <item msgid="6816551144382117307">"գրել SMS"</item>
+    <item msgid="4600463921908905030">"ստանալ SMS"</item>
+    <item msgid="5958926493289432745">"ստանալ արտակարգ իրավիճակների SMS-ներ"</item>
+    <item msgid="4945269495221089540">"ստանալ MMS"</item>
+    <item msgid="5570472453573929087">"ստանալ WAP սեղմում"</item>
+    <item msgid="7125408150230860501">"ուղարկել SMS"</item>
+    <item msgid="7080337936612188061">"կարդալ ICC SMS"</item>
+    <item msgid="587124103118495063">"գրել ICC SMS"</item>
+    <item msgid="2320577158869025503">"փոփոխել կարգավորումները"</item>
+    <item msgid="1545733463471924009">"պատկերել վերին մասում"</item>
+    <item msgid="3609046903962454582">"մուտք գործել ծանուցումներ"</item>
+    <item msgid="4671646036128214513">"ֆոտոխցիկ"</item>
+    <item msgid="1097324338692486211">"ձայնագրել ձայնանյութ"</item>
+    <item msgid="5031552983987798163">"նվագարկել ձայնանյութը"</item>
+    <item msgid="8374996688066472414">"կարդալ սեղմատախտակը"</item>
+    <item msgid="3045529469061083747">"փոփոխել սեղմատախտակը"</item>
+    <item msgid="5124443975763747838">"մեդիա կոճակներ"</item>
+    <item msgid="4547883971364273343">"աուդիո ֆոկուս"</item>
+    <item msgid="2603878814882344450">"ձայնի հիմնական բարձրություն"</item>
+    <item msgid="7136963238377062018">"ձայնի բարձրություն"</item>
+    <item msgid="4270236897655923007">"զանգի բարձրություն"</item>
+    <item msgid="6325739889222559394">"մեդիանյութերի ձայնի բարձրություն"</item>
+    <item msgid="5762123934816216821">"զարթուցիչի ձայնի բարձրություն"</item>
+    <item msgid="785049718065337473">"ծանուցման ձայնի բարձրություն"</item>
+    <item msgid="6700305533746877052">"bluetooth-ի ձայնի բարձրություն"</item>
+    <item msgid="2029227495214047094">"արթուն պահել"</item>
+    <item msgid="26109888160231211">"վերահսկել տեղադրությունը"</item>
+    <item msgid="5753382310468855812">"մշտադիտարկել էներգատար տեղանքները"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"Տեղակայում"</item>
+    <item msgid="8677040780775113033">"Տեղադրություն"</item>
+    <item msgid="1660743989948992916">"Տեղադրություն"</item>
+    <item msgid="8791172739860195290">"Թրթռալ"</item>
+    <item msgid="383413555642128046">"Տեսնել կոնտակտները"</item>
+    <item msgid="3654594895269697313">"Փոփոխել կոնտակտները"</item>
+    <item msgid="7928393476362362538">"Տեսնել զանգերի մատյանը"</item>
+    <item msgid="6248591205254641116">"Փոփոխել զանգերի մատյանը"</item>
+    <item msgid="6093344633066170692">"Տեսնել օրացույցը"</item>
+    <item msgid="1334886368750347692">"Փոփոխել օրացույցը"</item>
+    <item msgid="1638204101698708656">"Տեղադրություն"</item>
+    <item msgid="2154671955760380322">"Փակցնել ծանուցում"</item>
+    <item msgid="4282477730595931828">"Տեղադրություն"</item>
+    <item msgid="4891423912898525905">"Հեռախոս"</item>
+    <item msgid="2623604824935968113">"Կարդալ SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Գրել SMS/MMS"</item>
+    <item msgid="3986142739951490025">"Ստանալ SMS/MMS"</item>
+    <item msgid="3984213795861739778">"Ստանալ SMS/MMS"</item>
+    <item msgid="3656243523752472788">"Ստանալ SMS/MMS"</item>
+    <item msgid="8105802370238551510">"Ստանալ SMS/MMS"</item>
+    <item msgid="1407766984645388488">"Ուղարկել SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Կարդալ SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Գրել SMS/MMS"</item>
+    <item msgid="4218544235221631789">"Փոփոխել կարգավորումները"</item>
+    <item msgid="736541391767350377">"Պատկերել վերևի մասում"</item>
+    <item msgid="5530815681721654194">"Մուտք գործել ծանուցումներ"</item>
+    <item msgid="781213371706962767">"Ֆոտոխցիկ"</item>
+    <item msgid="1720492593061838172">"Ձայնագրել ձայնանյութ"</item>
+    <item msgid="3493046322001257041">"Նվագարկել ձայնանյութը"</item>
+    <item msgid="136815868796597058">"Կարդալ սեղմատախտակը"</item>
+    <item msgid="5238692940326972503">"Փոփոխել սեղմատախտակը"</item>
+    <item msgid="5753789168376302997">"Մեդիա կոճակներ"</item>
+    <item msgid="3265262911688671938">"Աուդիո ֆոկուս"</item>
+    <item msgid="2098976479485046797">"Ձայնի հիմնական բարձրություն"</item>
+    <item msgid="5660213838861789350">"Ձայնի բարձրություն"</item>
+    <item msgid="7983336752371254444">"Զանգի բարձրություն"</item>
+    <item msgid="7878027809189330917">"Մեդիանյութերի ձայնի բարձրություն"</item>
+    <item msgid="7260546305036218513">"Զարթուցիչի ձայնի բարձրություն"</item>
+    <item msgid="9103719301075748925">"Ծանուցման ձայնի բարձրություն"</item>
+    <item msgid="7025966722295861512">"Bluetooth-ի ձայնի բարձրություն"</item>
+    <item msgid="4665183401128289653">"Արթուն պահել"</item>
+    <item msgid="8584357129746649222">"Տեղադրություն"</item>
+    <item msgid="7669257279311110599">"Տեղադրություն"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"Կարճաժամկետ"</item>
+    <item msgid="2560532955514699713">"Միջին"</item>
+    <item msgid="2372711992605524591">"Երկար"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Լռելյայն"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif խտացրած"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Շատ փոքր"</item>
+    <item msgid="6781094565687692782">"Փոքր"</item>
+    <item msgid="8222123259497646551">"Սովորական"</item>
+    <item msgid="5813217276778560466">"Մեծ"</item>
+    <item msgid="9044232017390975191">"Շատ մեծ"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Ոչինչ"</item>
+    <item msgid="1352974708028506778">"Ուրվագիծ"</item>
+    <item msgid="5850876295428722675">"Ստվեր"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Սպիտակը սևի վրա"</item>
+    <item msgid="4589278788192525675">"Սևը սպիտակի վրա"</item>
+    <item msgid="1309255027325660115">"Դեղինը սևի վրա"</item>
+    <item msgid="2985943780939258562">"Դեղինը կապույտի վրա"</item>
+    <item msgid="7520438652121629055">"Հատուկ"</item>
+  </string-array>
+  <string-array name="select_runtime_titles">
+    <item msgid="3574453009229338122">"Dalvik"</item>
+    <item msgid="8978402910750533864">"ART"</item>
+    <item msgid="7839859333977894115">"ART (վրիպազերծում)"</item>
+  </string-array>
+  <string-array name="select_runtime_summaries">
+    <item msgid="6412880178297884701">"Օգտագործել Dalvik"</item>
+    <item msgid="5131846588686178907">"Օգտագործել ART"</item>
+    <item msgid="4530003713865319928">"Օգտագործել ART վրիպազերծման ծրագրատարբերակը"</item>
+  </string-array>
+  <string-array name="hdcp_checking_titles">
+    <item msgid="441827799230089869">"Երբեք չստուգել"</item>
+    <item msgid="6042769699089883931">"Ստուգել միայն DRM բովանդակությունը"</item>
+    <item msgid="9174900380056846820">"Միշտ ստուգել"</item>
+  </string-array>
+  <string-array name="hdcp_checking_summaries">
+    <item msgid="505558545611516707">"Երբեք չօգտագործել HDCP ստուգումը"</item>
+    <item msgid="3878793616631049349">"Օգտագործել HDCP-ը` միայն DRM-ի բովանդակությունը ստուգելու համար"</item>
+    <item msgid="45075631231212732">"Միշտ օգտագործել HDCP ստուգումը"</item>
+  </string-array>
+  <string-array name="window_animation_scale_entries">
+    <item msgid="8134156599370824081">"Անջատել շարժապատկերը"</item>
+    <item msgid="6624864048416710414">"Շարժապատկերի սանդղակը` .5x"</item>
+    <item msgid="2219332261255416635">"Շարժապատկերի սանդղակը` 1x"</item>
+    <item msgid="3544428804137048509">"Շարժապատկերի սանդղակը` 1.5x"</item>
+    <item msgid="3110710404225974514">"Շարժապատկերի սանդղակը` 2x"</item>
+    <item msgid="4402738611528318731">"Շարժապատկերի սանդղակը` 5x"</item>
+    <item msgid="6189539267968330656">"Շարժապատկերի սանդղակը` 10x"</item>
+  </string-array>
+  <string-array name="transition_animation_scale_entries">
+    <item msgid="8464255836173039442">"Անջատել շարժապատկերը"</item>
+    <item msgid="3375781541913316411">"Շարժապատկերի սանդղակը` .5x"</item>
+    <item msgid="1991041427801869945">"Շարժապատկերի սանդղակը` 1x"</item>
+    <item msgid="4012689927622382874">"Շարժապատկերի սանդղակը` 1.5x"</item>
+    <item msgid="3289156759925947169">"Շարժապատկերի սանդղակը` 2x"</item>
+    <item msgid="7705857441213621835">"Շարժապատկերի սանդղակը` 5x"</item>
+    <item msgid="6660750935954853365">"Շարժապատկերի սանդղակը` 10x"</item>
+  </string-array>
+  <string-array name="animator_duration_scale_entries">
+    <item msgid="6039901060648228241">"Անջատել շարժապատկերը"</item>
+    <item msgid="1138649021950863198">"Շարժապատկերի սանդղակը .5x"</item>
+    <item msgid="4394388961370833040">"Շարժապատկերի սանդղակը` 1x"</item>
+    <item msgid="8125427921655194973">"Շարժապատկերի սանդղակը 1.5x"</item>
+    <item msgid="3334024790739189573">"Շարժապատկերի սանդղակը` 2x"</item>
+    <item msgid="3170120558236848008">"Շարժանկարի սանդղակը` 5x"</item>
+    <item msgid="1069584980746680398">"Շարժապատկերի սանդղակը` 10x"</item>
+  </string-array>
+  <string-array name="overlay_display_devices_entries">
+    <item msgid="1606809880904982133">"Ոչ մեկը"</item>
+    <item msgid="688482401508173818">"720x480 mdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (անվտանգ)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (անվտանգ)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (անվտանգ)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi և 1920x1080 xhdpi"</item>
+  </string-array>
+  <string-array name="enable_opengl_traces_entries">
+    <item msgid="3191973083884253830">"Ոչ մեկը"</item>
+    <item msgid="9089630089455370183">"Logcat"</item>
+    <item msgid="5397807424362304288">"Համակարգային հետագիծ (գծապատկերներ)"</item>
+    <item msgid="1340692776955662664">"Կանչել glGetError-ի կույտը"</item>
+  </string-array>
+  <string-array name="show_non_rect_clip_entries">
+    <item msgid="993742912147090253">"Անջատված"</item>
+    <item msgid="675719912558941285">"Ներկել ոչ ուղղանկյունային կտրվածքի տարածքը կապույտով"</item>
+    <item msgid="1064373276095698656">"Փորձարկված թեստի գունանշումը կանաչով"</item>
+  </string-array>
+  <string-array name="track_frame_time_entries">
+    <item msgid="2193584639058893150">"Անջատել"</item>
+    <item msgid="2751513398307949636">"Էկրանի վրա որպես գոտիներ"</item>
+    <item msgid="8272260411216018353">"Էկրանի վրա որպես գծեր"</item>
+    <item msgid="120512413928262547">"adb shell dumpsys gfxinfo-ում"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"Անջատված է"</item>
+    <item msgid="7688197031296835369">"Ցույց տալ գերազանցված հատվածները"</item>
+    <item msgid="2290859360633824369">"Ցույց տալ դալտոնիզմի ոլորտները"</item>
+    <item msgid="3448087929560624983">"Ցույց տալ գերազանցման հաշվիչը"</item>
+  </string-array>
+  <string-array name="app_process_limit_entries">
+    <item msgid="3401625457385943795">"Սովորական սահման"</item>
+    <item msgid="4071574792028999443">"Հետնաշերտում գործողություններ չկան"</item>
+    <item msgid="4810006996171705398">"Առավելագույնը 1 գործընթաց"</item>
+    <item msgid="8586370216857360863">"Առավելագույնը 2 գործընթաց"</item>
+    <item msgid="836593137872605381">"Առավելագույնը 3  գործընթաց"</item>
+    <item msgid="7899496259191969307">"Ամենաշատը 4 գործընթաց"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"L2TP/IPSec VPN նախորոշված ստեղներով"</item>
+    <item msgid="4725504331295252103">"L2TP/IPSec VPN վկայագրերով"</item>
+    <item msgid="7526551163264034377">"IPSec VPN նախորոշված ստեղներով և Xauth նույնականացմամբ"</item>
+    <item msgid="8064740940687465039">"IPSec VPN վկայականներով և Xauth նույնականացմամբ"</item>
+    <item msgid="4946199982372391490">"IPSec VPN վկայագրերով և խառնածին նույնականացմամբ"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"Անջատված"</item>
+    <item msgid="6692305604213080515">"Նախապատրաստվում է..."</item>
+    <item msgid="8001704909356800092">"Միանում է..."</item>
+    <item msgid="4039737283841672166">"Միացված է"</item>
+    <item msgid="4042143101664725090">"Ժամանակի սպառում"</item>
+    <item msgid="7664124146786465092">"Անհաջող"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"Հարցնել"</item>
+    <item msgid="5077768429488260031">"Երբեք չթույլատրել"</item>
+    <item msgid="1417929597727989746">"Միշտ թույլատրել"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"նորմալ"</item>
+    <item msgid="4517779899383204000">"չափավոր"</item>
+    <item msgid="406385694840950802">"ցածր"</item>
+    <item msgid="4212263919458209842">"կրիտիկական"</item>
+  </string-array>
+</resources>

@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"藍牙音量"</item>
     <item msgid="2029227495214047094">"停用休眠"</item>
     <item msgid="26109888160231211">"監控位置"</item>
+    <item msgid="5753382310468855812">"監控高耗電定位功能"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"位置"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"發佈通知"</item>
     <item msgid="4282477730595931828">"位置"</item>
     <item msgid="4891423912898525905">"撥打電話"</item>
-    <item msgid="626463821668200388">"接收 SMS/MMS"</item>
-    <item msgid="1237538540368797101">"傳送 SMS/MMS"</item>
+    <item msgid="2623604824935968113">"讀取簡訊/MMS"</item>
+    <item msgid="4420177125221176306">"寫入簡訊/MMS"</item>
     <item msgid="3986142739951490025">"接收 SMS/MMS"</item>
     <item msgid="3984213795861739778">"接收 SMS/MMS"</item>
     <item msgid="3656243523752472788">"接收 SMS/MMS"</item>
     <item msgid="8105802370238551510">"接收 SMS/MMS"</item>
-    <item msgid="1407766984645388488">"傳送 SMS/MMS"</item>
-    <item msgid="1530132603376027248">"接收 SMS/MMS"</item>
-    <item msgid="1188256962149204607">"傳送 SMS/MMS"</item>
+    <item msgid="1407766984645388488">"傳送文字/多媒體訊息"</item>
+    <item msgid="3527273606643794973">"讀取簡訊/MMS"</item>
+    <item msgid="4370895547001583812">"寫入簡訊/MMS"</item>
     <item msgid="4218544235221631789">"修改設定"</item>
     <item msgid="736541391767350377">"在最上層繪圖"</item>
     <item msgid="5530815681721654194">"存取通知"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"藍牙音量"</item>
     <item msgid="4665183401128289653">"停用休眠"</item>
     <item msgid="8584357129746649222">"定位"</item>
+    <item msgid="7669257279311110599">"定位"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"短"</item>
     <item msgid="2560532955514699713">"中"</item>
     <item msgid="2372711992605524591">"長"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"預設"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"等寬"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"非常小"</item>
+    <item msgid="6781094565687692782">"小"</item>
+    <item msgid="8222123259497646551">"普通"</item>
+    <item msgid="5813217276778560466">"大"</item>
+    <item msgid="9044232017390975191">"非常大"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"無"</item>
+    <item msgid="1352974708028506778">"外框"</item>
+    <item msgid="5850876295428722675">"陰影"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"黑底白字"</item>
+    <item msgid="4589278788192525675">"白底黑字"</item>
+    <item msgid="1309255027325660115">"黑底黃字"</item>
+    <item msgid="2985943780939258562">"藍底黃字"</item>
+    <item msgid="7520438652121629055">"自訂"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"無"</item>
     <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280x720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920x1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280x720 tvdpi 和 1920x1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (安全)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (安全)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (安全)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi 和 1920x1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"無"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"關閉"</item>
     <item msgid="7688197031296835369">"顯示透支區域"</item>
-    <item msgid="8332661909019981149">"顯示透支計數器"</item>
+    <item msgid="2290859360633824369">"顯示綠色弱視區域"</item>
+    <item msgid="3448087929560624983">"顯示透支計數器"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"標準限制"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"詢問"</item>
     <item msgid="5077768429488260031">"一律不允許"</item>
     <item msgid="1417929597727989746">"一律允許"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"一般"</item>
+    <item msgid="4517779899383204000">"中"</item>
+    <item msgid="406385694840950802">"低"</item>
+    <item msgid="4212263919458209842">"嚴重不足"</item>
   </string-array>
 </resources>

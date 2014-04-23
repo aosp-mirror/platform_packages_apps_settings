@@ -143,7 +143,7 @@
     <item msgid="8151962652413645395">"2 minuts"</item>
     <item msgid="8675215713017289017">"5 minuts"</item>
     <item msgid="477015974247590543">"1 hora"</item>
-    <item msgid="5198271470953124739">"Sense temps d\'espera"</item>
+    <item msgid="5198271470953124739">"Sempre visible"</item>
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Dolenta"</item>
@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"volum del Bluetooth"</item>
     <item msgid="2029227495214047094">"actiu"</item>
     <item msgid="26109888160231211">"supervisa la ubicació"</item>
+    <item msgid="5753382310468855812">"fes un seguiment de la precisió de la ubicació"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Ubicació"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"Notificació de la publicació"</item>
     <item msgid="4282477730595931828">"Ubicació"</item>
     <item msgid="4891423912898525905">"Trucada de telèfon"</item>
-    <item msgid="626463821668200388">"Rep SMS/MMS"</item>
-    <item msgid="1237538540368797101">"Envia SMS/MMS"</item>
+    <item msgid="2623604824935968113">"Llegeix l\'SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Escriu un SMS/MMS"</item>
     <item msgid="3986142739951490025">"Rep SMS/MMS"</item>
     <item msgid="3984213795861739778">"Rep SMS/MMS"</item>
     <item msgid="3656243523752472788">"Rep SMS/MMS"</item>
     <item msgid="8105802370238551510">"Rep SMS/MMS"</item>
     <item msgid="1407766984645388488">"Envia SMS/MMS"</item>
-    <item msgid="1530132603376027248">"Rep SMS/MMS"</item>
-    <item msgid="1188256962149204607">"Envia SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Llegeix l\'SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Escriu un SMS/MMS"</item>
     <item msgid="4218544235221631789">"Modifica la configuració"</item>
     <item msgid="736541391767350377">"Dibuixa a sobre"</item>
     <item msgid="5530815681721654194">"Accedeix a les notificacions"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"Volum de Bluetooth"</item>
     <item msgid="4665183401128289653">"Actiu"</item>
     <item msgid="8584357129746649222">"Ubicació"</item>
+    <item msgid="7669257279311110599">"Ubicació"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Curt"</item>
     <item msgid="2560532955514699713">"Mitjà"</item>
     <item msgid="2372711992605524591">"Llarg"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Predeterminat"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensada"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monoespaiada"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Molt petit"</item>
+    <item msgid="6781094565687692782">"Petit"</item>
+    <item msgid="8222123259497646551">"Normal"</item>
+    <item msgid="5813217276778560466">"Gran"</item>
+    <item msgid="9044232017390975191">"Molt gran"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Cap"</item>
+    <item msgid="1352974708028506778">"Contorn"</item>
+    <item msgid="5850876295428722675">"Ombra"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Blanc sobre negre"</item>
+    <item msgid="4589278788192525675">"Negre sobre blanc"</item>
+    <item msgid="1309255027325660115">"Groc sobre negre"</item>
+    <item msgid="2985943780939258562">"Groc sobre blau"</item>
+    <item msgid="7520438652121629055">"Personalitzat"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Cap"</item>
     <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280x720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920x1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280x720 tvdpi i 1920x1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (segur)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (segur)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (segur)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi i 1920x1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Cap"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"Desactiva"</item>
     <item msgid="7688197031296835369">"Mostra les àrees modificades"</item>
-    <item msgid="8332661909019981149">"Mostra comptador modificacions"</item>
+    <item msgid="2290859360633824369">"Mostra les àrees de deuteranomalia"</item>
+    <item msgid="3448087929560624983">"Mostra el comptador de modificacions"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Límit estàndard"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"Pregunta-ho"</item>
     <item msgid="5077768429488260031">"No permetis mai"</item>
     <item msgid="1417929597727989746">"Permet sempre"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"normal"</item>
+    <item msgid="4517779899383204000">"moderada"</item>
+    <item msgid="406385694840950802">"baixa"</item>
+    <item msgid="4212263919458209842">"molt baixa"</item>
   </string-array>
 </resources>

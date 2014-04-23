@@ -194,7 +194,7 @@
     <item msgid="628395202971532382">"Static"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"Niciunul"</item>
+    <item msgid="4473276491748503377">"Niciuna"</item>
     <item msgid="8673874894887358090">"Manual"</item>
   </string-array>
   <string-array name="emergency_tone_entries">
@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"volumul Bluetooth"</item>
     <item msgid="2029227495214047094">"mențineți activ"</item>
     <item msgid="26109888160231211">"monitorizarea locației"</item>
+    <item msgid="5753382310468855812">"monitorizarea localizării cu consum ridicat de energie"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Locație"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"Postează o notificare"</item>
     <item msgid="4282477730595931828">"Locație"</item>
     <item msgid="4891423912898525905">"Apelează un telefon"</item>
-    <item msgid="626463821668200388">"Primește mesaje SMS/MMS"</item>
-    <item msgid="1237538540368797101">"Trimite mesaje SMS/MMS"</item>
+    <item msgid="2623604824935968113">"Citiți mesaje SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Scrieți mesaje SMS/MMS"</item>
     <item msgid="3986142739951490025">"Primește mesaje SMS/MMS"</item>
     <item msgid="3984213795861739778">"Primește mesaje SMS/MMS"</item>
     <item msgid="3656243523752472788">"Primește mesaje SMS/MMS"</item>
     <item msgid="8105802370238551510">"Primește mesaje SMS/MMS"</item>
     <item msgid="1407766984645388488">"Trimite mesaje SMS/MMS"</item>
-    <item msgid="1530132603376027248">"Primește mesaje SMS/MMS"</item>
-    <item msgid="1188256962149204607">"Trimite mesaje SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Citiți mesaje SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Scrieți mesaje SMS/MMS"</item>
     <item msgid="4218544235221631789">"Modifică setările"</item>
     <item msgid="736541391767350377">"Desenează deasupra"</item>
     <item msgid="5530815681721654194">"Accesează notificări"</item>
@@ -321,13 +322,46 @@
     <item msgid="7260546305036218513">"Volum alarmă"</item>
     <item msgid="9103719301075748925">"Volum notificări"</item>
     <item msgid="7025966722295861512">"Volum Bluetooth"</item>
-    <item msgid="4665183401128289653">"Mențineți activ"</item>
+    <item msgid="4665183401128289653">"Păstrare în activitate"</item>
     <item msgid="8584357129746649222">"Locație"</item>
+    <item msgid="7669257279311110599">"Locație"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Scurtă"</item>
     <item msgid="2560532955514699713">"Medie"</item>
     <item msgid="2372711992605524591">"Lungă"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Prestabilit"</item>
+    <item msgid="1016452621833735880">"Sans Serif"</item>
+    <item msgid="2496277987934654454">"Sans Serif condensat"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Cu un singur spațiu"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Foarte mic"</item>
+    <item msgid="6781094565687692782">"Mic"</item>
+    <item msgid="8222123259497646551">"Normal"</item>
+    <item msgid="5813217276778560466">"Mare"</item>
+    <item msgid="9044232017390975191">"Foarte mare"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Niciunul"</item>
+    <item msgid="1352974708028506778">"Contur"</item>
+    <item msgid="5850876295428722675">"Umbră"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Alb pe negru"</item>
+    <item msgid="4589278788192525675">"Negru pe alb"</item>
+    <item msgid="1309255027325660115">"Galben pe negru"</item>
+    <item msgid="2985943780939258562">"Galben pe albastru"</item>
+    <item msgid="7520438652121629055">"Personalizat"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -340,14 +374,14 @@
     <item msgid="4530003713865319928">"Utilizați ART, versiunea de depanare"</item>
   </string-array>
   <string-array name="hdcp_checking_titles">
-    <item msgid="441827799230089869">"Nu verificaţi niciodată"</item>
-    <item msgid="6042769699089883931">"Verificaţi doar pentru conţinut DRM"</item>
-    <item msgid="9174900380056846820">"Verificaţi întotdeauna"</item>
+    <item msgid="441827799230089869">"Nu verifica niciodată"</item>
+    <item msgid="6042769699089883931">"Verifică doar pentru conţinut DRM"</item>
+    <item msgid="9174900380056846820">"Verifică întotdeauna"</item>
   </string-array>
   <string-array name="hdcp_checking_summaries">
-    <item msgid="505558545611516707">"Nu utilizaţi niciodată verificarea HDCP"</item>
-    <item msgid="3878793616631049349">"Utilizaţi verificarea HDCP numai pentru conţinut DRM"</item>
-    <item msgid="45075631231212732">"Utilizaţi întotdeauna verificarea HDCP"</item>
+    <item msgid="505558545611516707">"Nu utiliza niciodată verificarea HDCP"</item>
+    <item msgid="3878793616631049349">"Utilizează verificarea HDCP numai pentru conținut DRM"</item>
+    <item msgid="45075631231212732">"Utilizează întotdeauna verificarea HDCP"</item>
   </string-array>
   <string-array name="window_animation_scale_entries">
     <item msgid="8134156599370824081">"Animaţie dezactivată"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Niciuna"</item>
     <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280x720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920x1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280x720 tvdpi şi 1920x1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (securizat)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (securizat)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (securizat)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi şi 1920x1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Niciuna"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"Dezactivată"</item>
     <item msgid="7688197031296835369">"Afișați zonele cu suprapunere"</item>
-    <item msgid="8332661909019981149">"Afișați contorul de suprapunere"</item>
+    <item msgid="2290859360633824369">"Afișați zonele de deuteranomalie"</item>
+    <item msgid="3448087929560624983">"Afișați contorul de suprapunere"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Limita standard"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"Întrebaţi"</item>
     <item msgid="5077768429488260031">"Nu permiteţi niciodată"</item>
     <item msgid="1417929597727989746">"Permiteţi întotdeauna"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"normală"</item>
+    <item msgid="4517779899383204000">"medie"</item>
+    <item msgid="406385694840950802">"redusă"</item>
+    <item msgid="4212263919458209842">"critică"</item>
   </string-array>
 </resources>

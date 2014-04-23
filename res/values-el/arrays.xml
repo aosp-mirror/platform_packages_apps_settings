@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"ένταση ήχου Bluetooth"</item>
     <item msgid="2029227495214047094">"διατήρηση λειτουργίας"</item>
     <item msgid="26109888160231211">"παρακολούθηση τοποθεσίας"</item>
+    <item msgid="5753382310468855812">"παρακολούθηση θέσης υψηλής ισχύος"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Τοποθεσία"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"Δημοσίευση ειδοποίησης"</item>
     <item msgid="4282477730595931828">"Τοποθεσία"</item>
     <item msgid="4891423912898525905">"Κλήση τηλεφώνου"</item>
-    <item msgid="626463821668200388">"Λήψη SMS/MMS"</item>
-    <item msgid="1237538540368797101">"Αποστολή SMS/MMS"</item>
+    <item msgid="2623604824935968113">"Ανάγνωση SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Σύνταξη SMS/MMS"</item>
     <item msgid="3986142739951490025">"Λήψη SMS/MMS"</item>
     <item msgid="3984213795861739778">"Λήψη SMS/MMS"</item>
     <item msgid="3656243523752472788">"Λήψη SMS/MMS"</item>
     <item msgid="8105802370238551510">"Λήψη SMS/MMS"</item>
     <item msgid="1407766984645388488">"Αποστολή SMS/MMS"</item>
-    <item msgid="1530132603376027248">"Λήψη SMS/MMS"</item>
-    <item msgid="1188256962149204607">"Αποστολή SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Ανάγνωση SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Σύνταξη SMS/MMS"</item>
     <item msgid="4218544235221631789">"Τροποποίηση ρυθμίσεων"</item>
     <item msgid="736541391767350377">"Μεταφορά στην κορυφή"</item>
     <item msgid="5530815681721654194">"Πρόσβαση στις ειδοποιήσεις"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"Ένταση ήχου Bluetooth"</item>
     <item msgid="4665183401128289653">"Διατήρηση λειτουργίας"</item>
     <item msgid="8584357129746649222">"Τοποθεσία"</item>
+    <item msgid="7669257279311110599">"Τοποθεσία"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Σύντομο"</item>
     <item msgid="2560532955514699713">"Μεσαία"</item>
     <item msgid="2372711992605524591">"Παρατεταμένο"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Προεπιλογή"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Πολύ μικρό"</item>
+    <item msgid="6781094565687692782">"Μικρό"</item>
+    <item msgid="8222123259497646551">"Κανονικό"</item>
+    <item msgid="5813217276778560466">"Μεγάλο"</item>
+    <item msgid="9044232017390975191">"Πολύ μεγάλο"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Κανένα"</item>
+    <item msgid="1352974708028506778">"Περίγραμμα"</item>
+    <item msgid="5850876295428722675">"Αναπτυσσόμενη σκιά"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Λευκό σε μαύρο"</item>
+    <item msgid="4589278788192525675">"Μαύρο σε λευκό"</item>
+    <item msgid="1309255027325660115">"Κίτρινο σε μαύρο"</item>
+    <item msgid="2985943780939258562">"Κίτρινο σε μπλε"</item>
+    <item msgid="7520438652121629055">"Προσαρμοσμένο"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Καμία"</item>
     <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280x720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920x1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280x720 tvdpi και 1920x1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (ασφαλές)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (ασφαλές)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (ασφαλές)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi και 1920x1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Τίποτα"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"Ανενεργές"</item>
     <item msgid="7688197031296835369">"Εμφάνιση περιοχών υπέρβασης"</item>
-    <item msgid="8332661909019981149">"Εμφάνιση μετρητή υπέρβασης"</item>
+    <item msgid="2290859360633824369">"Εμφάνιση περιοχών για Deuteranomaly"</item>
+    <item msgid="3448087929560624983">"Εμφάνιση μετρητή υπέρβασης"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Τυπικό όριο"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"Ερώτηση"</item>
     <item msgid="5077768429488260031">"Να μην επιτρέπεται ποτέ"</item>
     <item msgid="1417929597727989746">"Να επιτρέπεται πάντα"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"κανονική"</item>
+    <item msgid="4517779899383204000">"μέτρια"</item>
+    <item msgid="406385694840950802">"χαμηλή"</item>
+    <item msgid="4212263919458209842">"κρίσιμη"</item>
   </string-array>
 </resources>

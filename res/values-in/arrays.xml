@@ -194,7 +194,7 @@
     <item msgid="628395202971532382">"Statik"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4473276491748503377">"Tak Satu Pun"</item>
+    <item msgid="4473276491748503377">"Tidak Ada"</item>
     <item msgid="8673874894887358090">"Manual"</item>
   </string-array>
   <string-array name="emergency_tone_entries">
@@ -279,6 +279,7 @@
     <item msgid="6700305533746877052">"volume bluetooth"</item>
     <item msgid="2029227495214047094">"tetap aktif"</item>
     <item msgid="26109888160231211">"monitor lokasi"</item>
+    <item msgid="5753382310468855812">"memantau lokasi berdaya tinggi"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Lokasi"</item>
@@ -295,15 +296,15 @@
     <item msgid="2154671955760380322">"Pemberitahuan pos"</item>
     <item msgid="4282477730595931828">"Lokasi"</item>
     <item msgid="4891423912898525905">"Telepon"</item>
-    <item msgid="626463821668200388">"Terima SMS/MMS"</item>
-    <item msgid="1237538540368797101">"Kirim SMS/MMS"</item>
+    <item msgid="2623604824935968113">"Baca SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Tulis SMS/MMS"</item>
     <item msgid="3986142739951490025">"Terima SMS/MMS"</item>
     <item msgid="3984213795861739778">"Terima SMS/MMS"</item>
     <item msgid="3656243523752472788">"Terima SMS/MMS"</item>
     <item msgid="8105802370238551510">"Terima SMS/MMS"</item>
     <item msgid="1407766984645388488">"Kirim SMS/MMS"</item>
-    <item msgid="1530132603376027248">"Terima SMS/MMS"</item>
-    <item msgid="1188256962149204607">"Kirim SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Baca SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Tulis SMS/MMS"</item>
     <item msgid="4218544235221631789">"Ubah setelan"</item>
     <item msgid="736541391767350377">"Gambar di atas"</item>
     <item msgid="5530815681721654194">"Akses pemberitahuan"</item>
@@ -323,11 +324,44 @@
     <item msgid="7025966722295861512">"Volume bluetooth"</item>
     <item msgid="4665183401128289653">"Tetap aktif"</item>
     <item msgid="8584357129746649222">"Lokasi"</item>
+    <item msgid="7669257279311110599">"Lokasi"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Singkat"</item>
     <item msgid="2560532955514699713">"Sedang"</item>
     <item msgid="2372711992605524591">"Lama"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Default"</item>
+    <item msgid="1016452621833735880">"Sans-serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif condensed"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Sangat kecil"</item>
+    <item msgid="6781094565687692782">"Kecil"</item>
+    <item msgid="8222123259497646551">"Normal"</item>
+    <item msgid="5813217276778560466">"Besar"</item>
+    <item msgid="9044232017390975191">"Sangat besar"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="6022616153255438487">"Tidak ada"</item>
+    <item msgid="1352974708028506778">"Garis batas"</item>
+    <item msgid="5850876295428722675">"Bayangan jatuh"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="1630625150404038035">"Putih berlatar hitam"</item>
+    <item msgid="4589278788192525675">"Hitam berlatar putih"</item>
+    <item msgid="1309255027325660115">"Kuning berlatar hitam"</item>
+    <item msgid="2985943780939258562">"Kuning berlatar biru"</item>
+    <item msgid="7520438652121629055">"Khusus"</item>
   </string-array>
   <string-array name="select_runtime_titles">
     <item msgid="3574453009229338122">"Dalvik"</item>
@@ -379,9 +413,12 @@
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Tidak ada"</item>
     <item msgid="688482401508173818">"720x480 mdpi"</item>
-    <item msgid="1725473474827398815">"1280x720 tvdpi"</item>
-    <item msgid="6813511923592083251">"1920x1080 xhdpi"</item>
-    <item msgid="3646519549495410112">"1280x720 tvdpi and 1920x1080 xhdpi"</item>
+    <item msgid="6027541158956821790">"720x480 mdpi (aman)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (aman)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (aman)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi dan 1920x1080 xhdpi"</item>
   </string-array>
   <string-array name="enable_opengl_traces_entries">
     <item msgid="3191973083884253830">"Tidak ada"</item>
@@ -403,7 +440,8 @@
   <string-array name="debug_hw_overdraw_entries">
     <item msgid="8190572633763871652">"Nonaktif"</item>
     <item msgid="7688197031296835369">"Tampilkan area overdraw"</item>
-    <item msgid="8332661909019981149">"Lihat penghitung overdraw"</item>
+    <item msgid="2290859360633824369">"Tampilkan area untuk Buta Warna"</item>
+    <item msgid="3448087929560624983">"Lihat penghitung overdraw"</item>
   </string-array>
   <string-array name="app_process_limit_entries">
     <item msgid="3401625457385943795">"Batas standar"</item>
@@ -433,5 +471,11 @@
     <item msgid="7389829271787670252">"Tanya"</item>
     <item msgid="5077768429488260031">"Jangan pernah izinkan"</item>
     <item msgid="1417929597727989746">"Selalu izinkan"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"normal"</item>
+    <item msgid="4517779899383204000">"menengah"</item>
+    <item msgid="406385694840950802">"rendah"</item>
+    <item msgid="4212263919458209842">"kritis"</item>
   </string-array>
 </resources>
