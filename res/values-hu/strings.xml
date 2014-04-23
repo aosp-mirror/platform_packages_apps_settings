@@ -701,8 +701,7 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Rezgés néma üzemmódban"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Alapértelmezett értesítési hang"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Villogó értesítő fény"</string>
-    <!-- no translation found for heads_up_enabled_title (1031078221910921622) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="1031078221910921622">"A magas prioritású jelenjen meg"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Csengőhang"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Értesítés"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Bejövő hívások hangerejének használata az értesítéseknél"</string>
@@ -1849,6 +1848,8 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Kliphatárok, margók stb. megjelenítése."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Elrendezés jobbról balra"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Elrendezés jobbról balra minden nyelvnél"</string>
+    <string name="low_power_mode" msgid="8400119155107987979">"Alacsony energia mód"</string>
+    <string name="low_power_mode_summary" msgid="8895619424568660204">"Energiatakarékos beállítások engedélyezése"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"CPU-használat mutatása"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Képernyőfedvény a jelenlegi CPU-használattal"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"GPU-megjelenítés"</string>
@@ -2102,20 +2103,14 @@
     <string name="search_menu" msgid="7053532283559077164">"Keresés"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Keresési beállítások"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi, wi-fi hálózati kapcsolat"</string>
-    <!-- no translation found for lock_screen_notifications (1785930071975221150) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_off (2477642360263652408) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_on (7897541882520048340) -->
-    <skip />
-    <!-- no translation found for title_zen_mode (4587203077066257425) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (2689740350895257590) -->
-    <skip />
+    <string name="lock_screen_notifications" msgid="1785930071975221150">"Lezárási képernyőn"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="2477642360263652408">"Kivéve, ha a tartalom bizalmas"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="7897541882520048340">"Összes értesítés"</string>
+    <string name="title_zen_mode" msgid="4587203077066257425">"Ne zavarjanak"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Ne zavarjanak"</string>
     <string name="notification_settings" msgid="8342078884790733726">"Értesítések"</string>
     <string name="notification_settings_tweaks" msgid="659628355469765848">"Trükkök"</string>
-    <!-- no translation found for notification_settings_apps_title (1125354590652967250) -->
-    <skip />
+    <string name="notification_settings_apps_title" msgid="1125354590652967250">"Alkalmazásértesítések"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Értesítési beállítások"</string>
     <string name="setup_wifi_nfc_tag" msgid="654375687941126332">"Wi-Fi- és NFC-címke beállítása"</string>
     <string name="write_tag" msgid="8571858602896222537">"Írás"</string>
@@ -2124,16 +2119,26 @@
     <string name="status_write_success" msgid="5228419086308251169">"Sikerült!"</string>
     <string name="status_failed_to_write" msgid="8072752734686294718">"Nem sikerült írni az NFC-címkére. Ha a probléma továbbra is fennáll, próbálkozzon egy másik címkével"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Az NFC-címke nem írható. Használjon egy másik címkét."</string>
-    <!-- no translation found for default_sound (8821684447333687810) -->
-    <skip />
-    <!-- no translation found for loading_notification_apps (5031818677010335895) -->
-    <skip />
-    <!-- no translation found for app_notifications_title (5810577805218003760) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_show (6912410502091785846) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_priority (2692156022435161791) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_done (3484067728568791014) -->
-    <skip />
+    <string name="default_sound" msgid="8821684447333687810">"Alapértelmezett hang"</string>
+    <string name="loading_notification_apps" msgid="5031818677010335895">"Alkalmazások betöltése…"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Alkalmazásértesítések"</string>
+    <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Értesítések megjelenítése"</string>
+    <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"Magas prioritás"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Kész"</string>
+    <string name="zen_mode_general_category" msgid="8665291516524965729">"Bekapcsolva korlátozza a megszakításokat erre:"</string>
+    <string name="zen_mode_automatic_category" msgid="7178632613181667490">"Automatikusan bekapcsol alvó üzemmódban"</string>
+    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Telefonhívások"</string>
+    <string name="zen_mode_messages" msgid="5886440273537510894">"Üzenetek"</string>
+    <string name="zen_mode_from" msgid="1777739391289980762">"Kezdet"</string>
+    <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Bárki"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Csak ismerősök"</string>
+    <string name="zen_mode_from_starred" msgid="2168651127340381533">"Csak a csillagozott ismerősök"</string>
+    <string name="zen_mode_alarm_info" msgid="6618710483408892326">"Hallani fogja a riasztást és időzítőt „Ne zavarjanak” módban"</string>
+    <string name="zen_mode_when" msgid="208441657907932773">"Időpont"</string>
+    <string name="zen_mode_when_never" msgid="8809494351918405602">"Soha"</string>
+    <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Minden este"</string>
+    <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Hétköznap este"</string>
+    <string name="zen_mode_start_time" msgid="8102602297273744441">"Kezdés ideje"</string>
+    <string name="zen_mode_end_time" msgid="8774327885892705505">"Befejezés ideje"</string>
+    <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> a következő napon"</string>
 </resources>

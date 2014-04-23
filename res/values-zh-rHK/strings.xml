@@ -701,8 +701,7 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"靜音時震動"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"預設通知音效"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"閃爍燈光通知"</string>
-    <!-- no translation found for heads_up_enabled_title (1031078221910921622) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="1031078221910921622">"彈出顯示高度優先的通知"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"鈴聲"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音量與來電音量相同"</string>
@@ -1853,6 +1852,8 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"顯示剪輯範圍、邊界等"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"強制使用從右至左的版面配置方向"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"強制將所有語言代碼的畫面配置方向改為從右至左"</string>
+    <string name="low_power_mode" msgid="8400119155107987979">"低耗電量模式"</string>
+    <string name="low_power_mode_summary" msgid="8895619424568660204">"啟用節約電池用量設定"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"顯示 CPU 使用量"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"在屏幕上重疊顯示目前的 CPU 使用量"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"強制使用 GPU 轉譯"</string>
@@ -2104,20 +2105,14 @@
     <string name="search_menu" msgid="7053532283559077164">"搜尋"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"搜尋設定"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"WiFi Wi-Fi 網絡連線"</string>
-    <!-- no translation found for lock_screen_notifications (1785930071975221150) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_off (2477642360263652408) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_on (7897541882520048340) -->
-    <skip />
-    <!-- no translation found for title_zen_mode (4587203077066257425) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (2689740350895257590) -->
-    <skip />
+    <string name="lock_screen_notifications" msgid="1785930071975221150">"在上鎖畫面上顯示"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="2477642360263652408">"敏感內容除外"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="7897541882520048340">"所有通知"</string>
+    <string name="title_zen_mode" msgid="4587203077066257425">"請勿干擾"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"請勿干擾"</string>
     <string name="notification_settings" msgid="8342078884790733726">"通知"</string>
     <string name="notification_settings_tweaks" msgid="659628355469765848">"調整"</string>
-    <!-- no translation found for notification_settings_apps_title (1125354590652967250) -->
-    <skip />
+    <string name="notification_settings_apps_title" msgid="1125354590652967250">"應用程式通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知設定"</string>
     <string name="setup_wifi_nfc_tag" msgid="654375687941126332">"設定 Wi-Fi NFC 標籤"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
@@ -2126,16 +2121,26 @@
     <string name="status_write_success" msgid="5228419086308251169">"大功告成！"</string>
     <string name="status_failed_to_write" msgid="8072752734686294718">"無法將資料寫入 NFC 標籤。如果問題仍然持續，請嘗試使用其他標籤"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"無法寫入 NFC 標籤，請使用其他標籤。"</string>
-    <!-- no translation found for default_sound (8821684447333687810) -->
-    <skip />
-    <!-- no translation found for loading_notification_apps (5031818677010335895) -->
-    <skip />
-    <!-- no translation found for app_notifications_title (5810577805218003760) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_show (6912410502091785846) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_priority (2692156022435161791) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_done (3484067728568791014) -->
-    <skip />
+    <string name="default_sound" msgid="8821684447333687810">"預設音效"</string>
+    <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式…"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"應用程式通知"</string>
+    <string name="app_notifications_dialog_show" msgid="6912410502091785846">"顯示通知"</string>
+    <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"高度優先"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"完成"</string>
+    <string name="zen_mode_general_category" msgid="8665291516524965729">"開啟時，限制干擾時段："</string>
+    <string name="zen_mode_automatic_category" msgid="7178632613181667490">"休眠時自動開啟"</string>
+    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"通話"</string>
+    <string name="zen_mode_messages" msgid="5886440273537510894">"訊息"</string>
+    <string name="zen_mode_from" msgid="1777739391289980762">"由"</string>
+    <string name="zen_mode_from_anyone" msgid="1180865188673992959">"所有人"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"只限聯絡人"</string>
+    <string name="zen_mode_from_starred" msgid="2168651127340381533">"只限已加星號的聯絡人"</string>
+    <string name="zen_mode_alarm_info" msgid="6618710483408892326">"「請勿打擾」一律會播放鬧鐘和計時器音效"</string>
+    <string name="zen_mode_when" msgid="208441657907932773">"時間"</string>
+    <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
+    <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每天晚上"</string>
+    <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"星期一至星期五晚"</string>
+    <string name="zen_mode_start_time" msgid="8102602297273744441">"開始時間"</string>
+    <string name="zen_mode_end_time" msgid="8774327885892705505">"完結時間"</string>
+    <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"下一天 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
 </resources>
