@@ -55,6 +55,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
+import com.android.settings.dashboard.DashboardCategory;
+import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.dashboard.Header;
 
 import java.io.IOException;
@@ -293,6 +295,66 @@ public class Utils {
 
         // Did not find a matching activity, so remove the preference
         target.remove(header);
+
+        return false;
+    }
+
+    public static boolean updateTileToSpecificActivityFromMetaDataOrRemove(Context context,
+            DashboardCategory target, DashboardTile tile) {
+
+        Intent intent = tile.intent;
+        if (intent != null) {
+            // Find the activity that is in the system image
+            PackageManager pm = context.getPackageManager();
+            List<ResolveInfo> list = pm.queryIntentActivities(intent, PackageManager.GET_META_DATA);
+            int listSize = list.size();
+            for (int i = 0; i < listSize; i++) {
+                ResolveInfo resolveInfo = list.get(i);
+                if ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)
+                        != 0) {
+                    Drawable icon = null;
+                    String title = null;
+                    String summary = null;
+
+                    // Get the activity's meta-data
+                    try {
+                        Resources res = pm.getResourcesForApplication(
+                                resolveInfo.activityInfo.packageName);
+                        Bundle metaData = resolveInfo.activityInfo.metaData;
+
+                        if (res != null && metaData != null) {
+                            icon = res.getDrawable(metaData.getInt(META_DATA_PREFERENCE_ICON));
+                            title = res.getString(metaData.getInt(META_DATA_PREFERENCE_TITLE));
+                            summary = res.getString(metaData.getInt(META_DATA_PREFERENCE_SUMMARY));
+                        }
+                    } catch (NameNotFoundException e) {
+                        // Ignore
+                    } catch (NotFoundException e) {
+                        // Ignore
+                    }
+
+                    // Set the preference title to the activity's label if no
+                    // meta-data is found
+                    if (TextUtils.isEmpty(title)) {
+                        title = resolveInfo.loadLabel(pm).toString();
+                    }
+
+                    // Set icon, title and summary for the preference
+                    // TODO:
+                    //tile.icon = icon;
+                    tile.title = title;
+                    tile.summary = summary;
+                    // Replace the intent with this specific activity
+                    tile.intent = new Intent().setClassName(resolveInfo.activityInfo.packageName,
+                            resolveInfo.activityInfo.name);
+
+                    return true;
+                }
+            }
+        }
+
+        // Did not find a matching activity, so remove the preference
+        target.removeTile(tile);
 
         return false;
     }
