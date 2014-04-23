@@ -1280,6 +1280,7 @@ public class SettingsActivity extends Activity
             mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
                     SearchResultsSummary.class.getName(), null, false, true, title, true);
         }
+        mSearchResultsFragment.setSearchView(mSearchView);
         mSearchMenuItemExpanded = true;
     }
 
