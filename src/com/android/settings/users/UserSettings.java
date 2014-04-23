@@ -639,11 +639,23 @@ public class UserSettings extends RestrictedSettingsFragment
                 pref.setTitle(user.name);
             }
             if (!isInitialized(user)) {
-                pref.setSummary(user.isRestricted()
-                        ? R.string.user_summary_restricted_not_set_up
-                        : R.string.user_summary_not_set_up);
+                if (user.isRestricted()) {
+                    pref.setSummary(R.string.user_summary_restricted_not_set_up);
+                } else if (user.isManagedProfile()) {
+                    pref.setSummary(R.string.user_summary_managed_profile_not_set_up);
+                } else {
+                    pref.setSummary(R.string.user_summary_not_set_up);
+                }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
+            } else if (user.isManagedProfile()) {
+                DevicePolicyManager dpm = (DevicePolicyManager)
+                            getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+                if (dpm.isProfileEnabled(user.id)) {
+                    pref.setSummary(R.string.user_summary_managed_profile);
+                } else {
+                    pref.setSummary(R.string.user_summary_managed_profile_not_enabled);
+                }
             }
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
