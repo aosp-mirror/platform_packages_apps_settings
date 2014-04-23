@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -131,6 +132,11 @@ public class Index {
             IndexColumns.DATA_KEYWORDS
     };
 
+    // Max number of saved search queries (who will be used for proposing suggestions)
+    private static long MAX_SAVED_SEARCH_QUERY = 64;
+    // Max number of proposed suggestions
+    private static final int MAX_PROPOSED_SUGGESTIONS = 5;
+
     private static final String EMPTY = "";
     private static final String NON_BREAKING_HYPHEN = "\u2011";
     private static final String HYPHEN = "-";
@@ -143,6 +149,7 @@ public class Index {
     private static final String NODE_NAME_LIST_PREFERENCE = "ListPreference";
 
     private static final List<String> EMPTY_LIST = Collections.<String>emptyList();
+
 
     private static Index sInstance;
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
@@ -198,9 +205,55 @@ public class Index {
     }
 
     public Cursor search(String query) {
-        final String sql = buildSQL(query);
-        Log.d(LOG_TAG, "Query: " + sql);
+        final String sql = buildSearchSQL(query);
+        Log.d(LOG_TAG, "Search query: " + sql);
         return getReadableDatabase().rawQuery(sql, null);
+    }
+
+    public Cursor getSuggestions(String query) {
+        final String sql = buildSuggestionsSQL(query);
+        Log.d(LOG_TAG, "Suggestions query: " + sql);
+        return getReadableDatabase().rawQuery(sql, null);
+    }
+
+    private String buildSuggestionsSQL(String query) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("SELECT ");
+        sb.append(IndexDatabaseHelper.SavedQueriesColums.QUERY);
+        sb.append(" FROM ");
+        sb.append(Tables.TABLE_SAVED_QUERIES);
+
+        if (TextUtils.isEmpty(query)) {
+            sb.append(" ORDER BY rowId DESC");
+        } else {
+            sb.append(" WHERE ");
+            sb.append(IndexDatabaseHelper.SavedQueriesColums.QUERY);
+            sb.append(" LIKE ");
+            sb.append("'");
+            sb.append(query);
+            sb.append("%");
+            sb.append("'");
+        }
+
+        sb.append(" LIMIT ");
+        sb.append(MAX_PROPOSED_SUGGESTIONS);
+
+        return sb.toString();
+    }
+
+    public long addSavedQuery(String query){
+        final SaveSearchQueryTask task = new SaveSearchQueryTask();
+        task.execute(query);
+        try {
+            return task.get();
+        } catch (InterruptedException e) {
+            Log.e(LOG_TAG, "Cannot insert saved query: " + query, e);
+            return -1 ;
+        } catch (ExecutionException e) {
+            Log.e(LOG_TAG, "Cannot insert saved query: " + query, e);
+            return -1;
+        }
     }
 
     public boolean update() {
@@ -432,10 +485,10 @@ public class Index {
                 mDataToProcess.clear();
                 return result;
             } catch (InterruptedException e) {
-                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
+                Log.e(LOG_TAG, "Cannot update index", e);
                 return false;
             } catch (ExecutionException e) {
-                Log.e(LOG_TAG, "Cannot update index: " + e.getMessage());
+                Log.e(LOG_TAG, "Cannot update index", e);
                 return false;
             }
         }
@@ -545,15 +598,15 @@ public class Index {
         }
     }
 
-    private String buildSQL(String query) {
+    private String buildSearchSQL(String query) {
         StringBuilder sb = new StringBuilder();
-        sb.append(buildSQLForColumn(query, MATCH_COLUMNS));
+        sb.append(buildSearchSQLForColumn(query, MATCH_COLUMNS));
         sb.append(" ORDER BY ");
         sb.append(IndexColumns.DATA_RANK);
         return sb.toString();
     }
 
-    private String buildSQLForColumn(String query, String[] columnNames) {
+    private String buildSearchSQLForColumn(String query, String[] columnNames) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT ");
         for (int n = 0; n < SELECT_COLUMNS.length; n++) {
@@ -565,15 +618,16 @@ public class Index {
         sb.append(" FROM ");
         sb.append(Tables.TABLE_PREFS_INDEX);
         sb.append(" WHERE ");
-        sb.append(buildWhereStringForColumns(query, columnNames));
+        sb.append(buildSearchWhereStringForColumns(query, columnNames));
 
         return sb.toString();
     }
 
-    private String buildWhereStringForColumns(String query, String[] columnNames) {
+    private String buildSearchWhereStringForColumns(String query, String[] columnNames) {
         final StringBuilder sb = new StringBuilder(Tables.TABLE_PREFS_INDEX);
         sb.append(" MATCH ");
-        DatabaseUtils.appendEscapedSQLString(sb, buildMatchStringForColumns(query, columnNames));
+        DatabaseUtils.appendEscapedSQLString(sb,
+                buildSearchMatchStringForColumns(query, columnNames));
         sb.append(" AND ");
         sb.append(IndexColumns.LOCALE);
         sb.append(" = ");
@@ -584,7 +638,7 @@ public class Index {
         return sb.toString();
     }
 
-    private String buildMatchStringForColumns(String query, String[] columnNames) {
+    private String buildSearchMatchStringForColumns(String query, String[] columnNames) {
         final String value = query + "*";
         StringBuilder sb = new StringBuilder();
         final int count = columnNames.length;
@@ -1142,6 +1196,40 @@ public class Index {
                 }
             }
             return result;
+        }
+    }
+
+    /**
+     * A basic AsynTask for saving a Search query into the database
+     */
+    private class SaveSearchQueryTask extends AsyncTask<String, Void, Long> {
+
+        @Override
+        protected Long doInBackground(String... params) {
+            final long now = new Date().getTime();
+
+            final ContentValues values = new ContentValues();
+            values.put(IndexDatabaseHelper.SavedQueriesColums.QUERY, params[0]);
+            values.put(IndexDatabaseHelper.SavedQueriesColums.TIME_STAMP, now);
+
+            final SQLiteDatabase database = getWritableDatabase();
+
+            long lastInsertedRowId = -1;
+            try {
+                lastInsertedRowId =
+                        database.replaceOrThrow(Tables.TABLE_SAVED_QUERIES, null, values);
+
+                final long delta = lastInsertedRowId - MAX_SAVED_SEARCH_QUERY;
+                if (delta > 0) {
+                    int count = database.delete(Tables.TABLE_SAVED_QUERIES, "rowId <= ?",
+                            new String[] { Long.toString(delta) });
+                    Log.d(LOG_TAG, "Deleted '" + count + "' saved Search query(ies)");
+                }
+            } catch (Exception e) {
+                Log.d(LOG_TAG, "Cannot update saved Search queries", e);
+            }
+
+            return lastInsertedRowId;
         }
     }
 }
