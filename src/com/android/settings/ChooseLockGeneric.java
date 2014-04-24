@@ -32,6 +32,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
 import android.util.EventLog;
+import android.util.MutableBoolean;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ConfirmLockPattern.ConfirmLockPatternFragment;
 
 import java.util.List;
-
-import libcore.util.MutableBoolean;
 
 public class ChooseLockGeneric extends PreferenceActivity {
 
