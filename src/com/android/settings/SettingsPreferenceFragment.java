@@ -113,16 +113,24 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     @Override
     protected void onBindPreferences() {
+        registerObserverIfNeeded();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        unregisterObserverIfNeeded();
+    }
+
+    public void registerObserverIfNeeded() {
         if (!mIsDataSetObserverRegistered) {
             getPreferenceScreen().getRootAdapter().registerDataSetObserver(mDataSetObserver);
             mIsDataSetObserverRegistered = true;
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
+    public void unregisterObserverIfNeeded() {
         if (mIsDataSetObserverRegistered) {
             getPreferenceScreen().getRootAdapter().unregisterDataSetObserver(mDataSetObserver);
             mIsDataSetObserverRegistered = false;
