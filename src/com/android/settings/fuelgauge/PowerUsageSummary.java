@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,7 +58,6 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final String TAG = "PowerUsageSummary";
 
     private static final String KEY_APP_LIST = "app_list";
-    private static final String KEY_BATTERY_STATUS = "battery_status";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
@@ -68,7 +68,6 @@ public class PowerUsageSummary extends PreferenceFragment {
     private PreferenceGroup mAppListGroup;
     private String mBatteryLevel;
     private String mBatteryStatus;
-    private Preference mBatteryStatusPref;
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -94,7 +93,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mUm = (UserManager) activity.getSystemService(Context.USER_SERVICE);
-        mStatsHelper = new BatteryStatsHelper(activity);
+        mStatsHelper = new BatteryStatsHelper(activity, true);
     }
 
     @Override
@@ -104,7 +103,6 @@ public class PowerUsageSummary extends PreferenceFragment {
 
         addPreferencesFromResource(R.xml.power_usage_summary);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
-        mBatteryStatusPref = mAppListGroup.findPreference(KEY_BATTERY_STATUS);
         setHasOptionsMenu(true);
     }
 
@@ -141,6 +139,8 @@ public class PowerUsageSummary extends PreferenceFragment {
             byte[] histData = hist.marshall();
             Bundle args = new Bundle();
             args.putByteArray(BatteryHistoryDetail.EXTRA_STATS, histData);
+            args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST,
+                    mStatsHelper.getBatteryBroadcast());
             SettingsActivity sa = (SettingsActivity) getActivity();
             sa.startPreferencePanel(BatteryHistoryDetail.class.getName(), args,
                     R.string.history_details_title, null, null, 0);
@@ -220,16 +220,10 @@ public class PowerUsageSummary extends PreferenceFragment {
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);
 
-        mBatteryStatusPref.setOrder(-2);
-        if (mBatteryLevel != null && mBatteryStatus != null) {
-            String batterySummary = getActivity().getResources().getString(
-                    R.string.power_usage_level_and_status, mBatteryLevel, mBatteryStatus);
-            mBatteryStatusPref.setTitle(batterySummary);
-        }
-        mAppListGroup.addPreference(mBatteryStatusPref);
+        mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
 
         BatteryHistoryPreference hist = new BatteryHistoryPreference(
-                getActivity(), mStatsHelper.getStats());
+                getActivity(), mStatsHelper.getStats(), mStatsHelper.getBatteryBroadcast());
         hist.setOrder(-1);
         mAppListGroup.addPreference(hist);
 
@@ -239,7 +233,6 @@ public class PowerUsageSummary extends PreferenceFragment {
             return;
         }
         final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(mStatsType);
-        mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
         for (int i=0; i<usageList.size(); i++) {
             BatterySipper sipper = usageList.get(i);
