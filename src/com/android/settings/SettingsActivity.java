@@ -76,7 +76,9 @@ import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.dashboard.Header;
 import com.android.settings.dashboard.HeaderAdapter;
 import com.android.settings.dashboard.NoHomeDialogFragment;
@@ -323,9 +325,10 @@ public class SettingsActivity extends Activity
     private String mSearchQuery;
 
     // Headers
-    protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
     private final ArrayList<Header> mHeaders = new ArrayList<Header>();
     private HeaderAdapter mHeaderAdapter;
+
+    private List<DashboardCategory> mCategories = new ArrayList<DashboardCategory>();
 
     private static final int MSG_BUILD_HEADERS = 1;
     private Handler mHandler = new Handler() {
@@ -999,7 +1002,6 @@ public class SettingsActivity extends Activity
         int i = 0;
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        mHeaderIndexMap.clear();
         while (i < target.size()) {
             Header header = target.get(i);
             // Ids are integers, so downcasting
@@ -1075,7 +1077,6 @@ public class SettingsActivity extends Activity
 
             // Increment if the current one wasn't removed by the Utils code.
             if (i < target.size() && target.get(i) == header) {
-                mHeaderIndexMap.put(id, i);
                 i++;
             }
         }
@@ -1173,6 +1174,351 @@ public class SettingsActivity extends Activity
 
         sp.edit().putBoolean(HomeSettings.HOME_PREFS_DO_SHOW, true).apply();
         return true;
+    }
+
+    /**
+     * Called when the activity needs its list of categories/tiles build.
+     *
+     * @param categories The list in which to place the tiles categories.
+     */
+    private void onBuildDashboardCategories(List<DashboardCategory> categories) {
+        loadCategoriesFromResource(R.xml.dashboard_categories, categories);
+        updateTilesList(categories);
+    }
+
+    /**
+     * Parse the given XML file as a categories description, adding each
+     * parsed categories and tiles into the target list.
+     *
+     * @param resid The XML resource to load and parse.
+     * @param target The list in which the parsed categories and tiles should be placed.
+     */
+    private void loadCategoriesFromResource(int resid, List<DashboardCategory> target) {
+        XmlResourceParser parser = null;
+        try {
+            parser = getResources().getXml(resid);
+            AttributeSet attrs = Xml.asAttributeSet(parser);
+
+            int type;
+            while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
+                    && type != XmlPullParser.START_TAG) {
+                // Parse next until start tag is found
+            }
+
+            String nodeName = parser.getName();
+            if (!"dashboard-categories".equals(nodeName)) {
+                throw new RuntimeException(
+                        "XML document must start with <preference-categories> tag; found"
+                                + nodeName + " at " + parser.getPositionDescription());
+            }
+
+            Bundle curBundle = null;
+
+            final int outerDepth = parser.getDepth();
+            while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
+                    && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
+                if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
+                    continue;
+                }
+
+                nodeName = parser.getName();
+                if ("dashboard-category".equals(nodeName)) {
+                    DashboardCategory category = new DashboardCategory();
+
+                    TypedArray sa = obtainStyledAttributes(
+                            attrs, com.android.internal.R.styleable.PreferenceHeader);
+                    category.id = sa.getResourceId(
+                            com.android.internal.R.styleable.PreferenceHeader_id,
+                            (int)DashboardCategory.CAT_ID_UNDEFINED);
+
+                    TypedValue tv = sa.peekValue(
+                            com.android.internal.R.styleable.PreferenceHeader_title);
+                    if (tv != null && tv.type == TypedValue.TYPE_STRING) {
+                        if (tv.resourceId != 0) {
+                            category.titleRes = tv.resourceId;
+                        } else {
+                            category.title = tv.string;
+                        }
+                    }
+                    sa.recycle();
+
+                    final int innerDepth = parser.getDepth();
+                    while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
+                            && (type != XmlPullParser.END_TAG || parser.getDepth() > innerDepth)) {
+                        if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
+                            continue;
+                        }
+
+                        String innerNodeName = parser.getName();
+                        if (innerNodeName.equals("dashboard-tile")) {
+                            DashboardTile tile = new DashboardTile();
+
+                            sa = obtainStyledAttributes(
+                                    attrs, com.android.internal.R.styleable.PreferenceHeader);
+                            tile.id = sa.getResourceId(
+                                    com.android.internal.R.styleable.PreferenceHeader_id,
+                                    (int)HEADER_ID_UNDEFINED);
+                            tv = sa.peekValue(
+                                    com.android.internal.R.styleable.PreferenceHeader_title);
+                            if (tv != null && tv.type == TypedValue.TYPE_STRING) {
+                                if (tv.resourceId != 0) {
+                                    tile.titleRes = tv.resourceId;
+                                } else {
+                                    tile.title = tv.string;
+                                }
+                            }
+                            tv = sa.peekValue(
+                                    com.android.internal.R.styleable.PreferenceHeader_summary);
+                            if (tv != null && tv.type == TypedValue.TYPE_STRING) {
+                                if (tv.resourceId != 0) {
+                                    tile.summaryRes = tv.resourceId;
+                                } else {
+                                    tile.summary = tv.string;
+                                }
+                            }
+                            tile.iconRes = sa.getResourceId(
+                                    com.android.internal.R.styleable.PreferenceHeader_icon, 0);
+                            tile.fragment = sa.getString(
+                                    com.android.internal.R.styleable.PreferenceHeader_fragment);
+                            sa.recycle();
+
+                            if (curBundle == null) {
+                                curBundle = new Bundle();
+                            }
+
+                            final int innerDepth2 = parser.getDepth();
+                            while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
+                                    && (type != XmlPullParser.END_TAG || parser.getDepth() > innerDepth2)) {
+                                if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
+                                    continue;
+                                }
+
+                                String innerNodeName2 = parser.getName();
+                                if (innerNodeName2.equals("extra")) {
+                                    getResources().parseBundleExtra("extra", attrs, curBundle);
+                                    XmlUtils.skipCurrentTag(parser);
+
+                                } else if (innerNodeName2.equals("intent")) {
+                                    tile.intent = Intent.parseIntent(getResources(), parser, attrs);
+
+                                } else {
+                                    XmlUtils.skipCurrentTag(parser);
+                                }
+                            }
+
+                            if (curBundle.size() > 0) {
+                                tile.fragmentArguments = curBundle;
+                                curBundle = null;
+                            }
+
+                            category.addTile(tile);
+
+                        } else {
+                            XmlUtils.skipCurrentTag(parser);
+                        }
+                    }
+
+                    target.add(category);
+                } else {
+                    XmlUtils.skipCurrentTag(parser);
+                }
+            }
+
+        } catch (XmlPullParserException e) {
+            throw new RuntimeException("Error parsing categories", e);
+        } catch (IOException e) {
+            throw new RuntimeException("Error parsing categories", e);
+        } finally {
+            if (parser != null) parser.close();
+        }
+    }
+
+    private void updateTilesList(List<DashboardCategory> target) {
+        final boolean showDev = mDevelopmentPreferences.getBoolean(
+                DevelopmentSettings.PREF_SHOW,
+                android.os.Build.TYPE.equals("eng"));
+
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+
+        final int size = target.size();
+        for (int i = 0; i < size; i++) {
+
+            DashboardCategory category = target.get(i);
+
+            // Ids are integers, so downcasting is ok
+            int id = (int) category.id;
+            if (id == R.id.account_settings) {
+                insertAccountsTiles(category);
+                continue;
+            }
+            int n = category.getTilesCount() - 1;
+            while (n >= 0) {
+
+                DashboardTile tile = category.getTile(n);
+
+                id = (int) tile.id;
+                if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
+                    Utils.updateTileToSpecificActivityFromMetaDataOrRemove(this, category, tile);
+                } else if (id == R.id.wifi_settings) {
+                    // Remove WiFi Settings if WiFi service is not available.
+                    if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
+                        category.removeTile(n);
+                    }
+                } else if (id == R.id.bluetooth_settings) {
+                    // Remove Bluetooth Settings if Bluetooth service is not available.
+                    if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
+                        category.removeTile(n);
+                    }
+                } else if (id == R.id.data_usage_settings) {
+                    // Remove data usage when kernel module not enabled
+                    final INetworkManagementService netManager = INetworkManagementService.Stub
+                            .asInterface(ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
+                    try {
+                        if (!netManager.isBandwidthControlEnabled()) {
+                            category.removeTile(n);
+                        }
+                    } catch (RemoteException e) {
+                        // ignored
+                    }
+                } else if (id == R.id.battery_settings) {
+                    // Remove battery settings when battery is not available. (e.g. TV)
+
+                    if (!mBatteryPresent) {
+                        category.removeTile(n);
+                    }
+                } else if (id == R.id.home_settings) {
+                    if (!updateHomeSettingTiles(tile)) {
+                        category.removeTile(n);
+                    }
+                } else if (id == R.id.user_settings) {
+                    if (!UserHandle.MU_ENABLED
+                            || !UserManager.supportsMultipleUsers()
+                            || Utils.isMonkeyRunning()) {
+                        category.removeTile(n);
+                    }
+                } else if (id == R.id.nfc_payment_settings) {
+                    if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
+                        category.removeTile(n);
+                    } else {
+                        // Only show if NFC is on and we have the HCE feature
+                        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+                        if (!adapter.isEnabled() || !getPackageManager().hasSystemFeature(
+                                PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
+                            category.removeTile(n);
+                        }
+                    }
+                } else if (id == R.id.development_settings) {
+                    if (!showDev) {
+                        category.removeTile(n);
+                    }
+                } else if (id == R.id.account_add) {
+                    if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+                        category.removeTile(n);
+                    }
+                }
+
+                if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
+                        && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
+                    category.removeTile(n);
+                }
+
+                n--;
+            }
+        }
+    }
+
+    private boolean updateHomeSettingTiles(DashboardTile tile) {
+        // Once we decide to show Home settings, keep showing it forever
+        SharedPreferences sp = getSharedPreferences(HomeSettings.HOME_PREFS, Context.MODE_PRIVATE);
+        if (sp.getBoolean(HomeSettings.HOME_PREFS_DO_SHOW, false)) {
+            return true;
+        }
+
+        try {
+            final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
+            getPackageManager().getHomeActivities(homeApps);
+            if (homeApps.size() < 2) {
+                // When there's only one available home app, omit this settings
+                // category entirely at the top level UI.  If the user just
+                // uninstalled the penultimate home app candidiate, we also
+                // now tell them about why they aren't seeing 'Home' in the list.
+                if (sShowNoHomeNotice) {
+                    sShowNoHomeNotice = false;
+                    NoHomeDialogFragment.show(this);
+                }
+                return false;
+            } else {
+                // Okay, we're allowing the Home settings category.  Tell it, when
+                // invoked via this front door, that we'll need to be told about the
+                // case when the user uninstalls all but one home app.
+                if (tile.fragmentArguments == null) {
+                    tile.fragmentArguments = new Bundle();
+                }
+                tile.fragmentArguments.putBoolean(HomeSettings.HOME_SHOW_NOTICE, true);
+            }
+        } catch (Exception e) {
+            // Can't look up the home activity; bail on configuring the icon
+            Log.w(LOG_TAG, "Problem looking up home activity!", e);
+        }
+
+        sp.edit().putBoolean(HomeSettings.HOME_PREFS_DO_SHOW, true).apply();
+        return true;
+    }
+
+    private void insertAccountsTiles(DashboardCategory target) {
+        String[] accountTypes = mAuthenticatorHelper.getEnabledAccountTypes();
+        List<DashboardTile> dashboardTiles = new ArrayList<DashboardTile>(accountTypes.length);
+        for (String accountType : accountTypes) {
+            CharSequence label = mAuthenticatorHelper.getLabelForType(this, accountType);
+            if (label == null) {
+                continue;
+            }
+
+            Account[] accounts = AccountManager.get(this).getAccountsByType(accountType);
+            boolean skipToAccount = accounts.length == 1
+                    && !mAuthenticatorHelper.hasAccountPreferences(accountType);
+            DashboardTile accountTile = new DashboardTile();
+            accountTile.title = label;
+            if (accountTile.extras == null) {
+                accountTile.extras = new Bundle();
+            }
+            if (skipToAccount) {
+                accountTile.fragment = AccountSyncSettings.class.getName();
+                accountTile.fragmentArguments = new Bundle();
+                // Need this for the icon
+                accountTile.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
+                accountTile.extras.putParcelable(AccountSyncSettings.ACCOUNT_KEY, accounts[0]);
+                accountTile.fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
+                        accounts[0]);
+            } else {
+                accountTile.fragment = ManageAccountsSettings.class.getName();
+                accountTile.fragmentArguments = new Bundle();
+                accountTile.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
+                accountTile.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE,
+                        accountType);
+                accountTile.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
+                        label.toString());
+            }
+            dashboardTiles.add(accountTile);
+            mAuthenticatorHelper.preloadDrawableForType(this, accountType);
+        }
+
+        // Sort by label
+        Collections.sort(dashboardTiles, new Comparator<DashboardTile>() {
+            @Override
+            public int compare(DashboardTile t1, DashboardTile t2) {
+                return t1.title.toString().compareTo(t2.title.toString());
+            }
+        });
+        int index = 0;
+        for (DashboardTile tile : dashboardTiles) {
+            target.addTile(index, tile);
+            index++;
+        }
+        if (!mListeningToAccountUpdates) {
+            AccountManager.get(this).addOnAccountsUpdatedListener(this, null, true);
+            mListeningToAccountUpdates = true;
+        }
     }
 
     private void getMetaData() {
