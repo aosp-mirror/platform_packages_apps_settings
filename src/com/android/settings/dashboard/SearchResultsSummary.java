@@ -18,13 +18,11 @@ package com.android.settings.dashboard;
 
 import android.app.Fragment;
 import android.content.ComponentName;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,14 +39,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.search.Index;
-import com.android.settings.search.IndexDatabaseHelper;
 
-import java.util.Date;
 import java.util.HashMap;
-
-import static com.android.settings.search.IndexDatabaseHelper.SavedQueriesColums;
-import static com.android.settings.search.IndexDatabaseHelper.Tables;
 
 public class SearchResultsSummary extends Fragment {
 
@@ -164,14 +158,13 @@ public class SearchResultsSummary extends Fragment {
                 final String key = cursor.getString(Index.COLUMN_INDEX_KEY);
 
                 final SettingsActivity sa = (SettingsActivity) getActivity();
-
                 sa.needToRevertToInitialFragment();
 
                 if (TextUtils.isEmpty(action)) {
                     Bundle args = new Bundle();
                     args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
 
-                    sa.startWithFragment(className, args, null, 0, screenTitle);
+                    Utils.startWithFragment(sa, className, args, null, 0, screenTitle);
                 } else {
                     final Intent intent = new Intent(action);
 
@@ -588,7 +581,7 @@ public class SearchResultsSummary extends Fragment {
                     // Not much we can do except logging
                     Log.e(LOG_TAG, "Cannot load Drawable for " + result.title);
                 }
-                imageView.setBackgroundResource(R.color.background_search_result_icon);
+                imageView.setBackgroundResource(R.color.temporary_background_icon);
             } else {
                 imageView.setImageDrawable(null);
                 imageView.setBackgroundResource(R.drawable.empty_icon);

@@ -141,7 +141,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
             // device is not CDMA, do not display CDMA emergency_tone
-            getPreferenceScreen().removePreference(findPreference(KEY_EMERGENCY_TONE));
+            Preference pref = findPreference(KEY_EMERGENCY_TONE);
+            if (pref != null) {
+                getPreferenceScreen().removePreference(pref);
+            }
         }
 
         if (!getResources().getBoolean(R.bool.has_silent_mode)) {
@@ -150,7 +153,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         if (getResources().getBoolean(com.android.internal.R.bool.config_useFixedVolume)) {
             // device with fixed volume policy, do not display volumes submenu
-            getPreferenceScreen().removePreference(findPreference(KEY_RING_VOLUME));
+            Preference pref = findPreference(KEY_RING_VOLUME);
+            if (pref != null) {
+                getPreferenceScreen().removePreference(pref);
+            }
         }
 
         mVibrateWhenRinging = (CheckBoxPreference) findPreference(KEY_VIBRATE);

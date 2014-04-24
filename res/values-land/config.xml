@@ -14,21 +14,9 @@
      limitations under the License.
 -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dashboard"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp"
-    android:scrollbarStyle="outsideOverlay"
-    android:background="@color/dashboard_background_color">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-        <LinearLayout
-                android:id="@+id/dashboard_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical"
-                />
+    <!-- Dashboard number of columns -->
+    <integer name="dashboard_num_columns">2</integer>
 
-</ScrollView>
+</resources>

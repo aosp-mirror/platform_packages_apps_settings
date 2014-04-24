@@ -24,7 +24,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -62,7 +61,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 
 import android.widget.SearchView;
 import com.android.internal.util.ArrayUtils;
@@ -80,7 +78,6 @@ import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.dashboard.Header;
-import com.android.settings.dashboard.HeaderAdapter;
 import com.android.settings.dashboard.NoHomeDialogFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
@@ -115,7 +112,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.android.settings.dashboard.Header.HEADER_ID_UNDEFINED;
@@ -130,7 +126,7 @@ public class SettingsActivity extends Activity
     private static final String LOG_TAG = "Settings";
 
     // Constants for state save/restore
-    private static final String SAVE_KEY_HEADERS = ":settings:headers";
+    private static final String SAVE_KEY_CATEGORIES = ":settings:categories";
     private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
     private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
     private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
@@ -199,7 +195,6 @@ public class SettingsActivity extends Activity
     private static boolean sShowNoHomeNotice = false;
 
     private String mFragmentClass;
-    private Header mSelectedHeader;
 
     private CharSequence mInitialTitle;
 
@@ -305,7 +300,7 @@ public class SettingsActivity extends Activity
 
                 if (mBatteryPresent != batteryPresent) {
                     mBatteryPresent = batteryPresent;
-                    invalidateHeaders();
+                    invalidateCategories();
                 }
             }
         }
@@ -324,27 +319,35 @@ public class SettingsActivity extends Activity
     private SearchResultsSummary mSearchResultsFragment;
     private String mSearchQuery;
 
-    // Headers
-    private final ArrayList<Header> mHeaders = new ArrayList<Header>();
-    private HeaderAdapter mHeaderAdapter;
+    // Categories
+    private ArrayList<DashboardCategory> mCategories = new ArrayList<DashboardCategory>();
+    private boolean mNeedToRebuildCategories;
 
-    private List<DashboardCategory> mCategories = new ArrayList<DashboardCategory>();
-
-    private static final int MSG_BUILD_HEADERS = 1;
+    private static final int MSG_BUILD_CATEGORIES = 1;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case MSG_BUILD_HEADERS: {
-                    mHeaders.clear();
-                    onBuildHeaders(mHeaders);
-                    mHeaderAdapter.notifyDataSetChanged();
+                case MSG_BUILD_CATEGORIES: {
+                    buildDashboardCategories(mCategories);
                 } break;
             }
         }
     };
 
     private boolean mNeedToRevertToInitialFragment = false;
+
+    public AuthenticatorHelper getAuthenticatorHelper() {
+        return mAuthenticatorHelper;
+    }
+
+    public List<DashboardCategory> getDashboardCategories() {
+        if (mNeedToRebuildCategories) {
+            buildDashboardCategories(mCategories);
+            mNeedToRebuildCategories = false;
+        }
+        return mCategories;
+    }
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
@@ -370,9 +373,9 @@ public class SettingsActivity extends Activity
         return false;
     }
 
-    private void invalidateHeaders() {
-        if (!mHandler.hasMessages(MSG_BUILD_HEADERS)) {
-            mHandler.sendEmptyMessage(MSG_BUILD_HEADERS);
+    private void invalidateCategories() {
+        if (!mHandler.hasMessages(MSG_BUILD_CATEGORIES)) {
+            mHandler.sendEmptyMessage(MSG_BUILD_CATEGORIES);
         }
     }
 
@@ -428,11 +431,6 @@ public class SettingsActivity extends Activity
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, null);
 
-        DevicePolicyManager dpm =
-                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-
-        mHeaderAdapter = new HeaderAdapter(this, mHeaders, mAuthenticatorHelper, dpm);
-
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
 
@@ -463,16 +461,17 @@ public class SettingsActivity extends Activity
             mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
             setTitle(mInitialTitle);
 
-            ArrayList<Header> headers = savedState.getParcelableArrayList(SAVE_KEY_HEADERS);
-            if (headers != null) {
-                mHeaders.addAll(headers);
+            ArrayList<DashboardCategory> categories =
+                    savedState.getParcelableArrayList(SAVE_KEY_CATEGORIES);
+            if (categories != null) {
+                mCategories.addAll(categories);
                 setTitleFromBackStack();
             }
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
         } else {
-            // We need to build the Headers in all cases
-            onBuildHeaders(mHeaders);
+            // We need to build the Categories in all cases
+            buildDashboardCategories(mCategories);
 
             if (initialFragmentName != null) {
                 final ComponentName cn = getIntent().getComponent();
@@ -490,7 +489,7 @@ public class SettingsActivity extends Activity
             } else {
                 // No UP if we are displaying the Headers
                 mDisplayHomeAsUpEnabled = false;
-                if (mHeaders.size() > 0) {
+                if (mCategories.size() > 0) {
                     mInitialTitle = getText(R.string.dashboard_title);
                     switchToFragment(DashboardSummary.class.getName(), null, false, false,
                             mInitialTitle, false);
@@ -594,8 +593,8 @@ public class SettingsActivity extends Activity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (mHeaders.size() > 0) {
-            outState.putParcelableArrayList(SAVE_KEY_HEADERS, mHeaders);
+        if (mCategories.size() > 0) {
+            outState.putParcelableArrayList(SAVE_KEY_CATEGORIES, mCategories);
         }
 
         outState.putBoolean(SAVE_KEY_SHOW_HOME_AS_UP, mDisplayHomeAsUpEnabled);
@@ -619,13 +618,13 @@ public class SettingsActivity extends Activity
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                invalidateHeaders();
+                invalidateCategories();
             }
         };
         mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
 
-        invalidateHeaders();
+        invalidateCategories();
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
@@ -679,7 +678,7 @@ public class SettingsActivity extends Activity
             return;
         }
         if (header.fragment != null) {
-            startWithFragment(header.fragment, header.fragmentArguments, null, 0,
+            Utils.startWithFragment(this, header.fragment, header.fragmentArguments, null, 0,
                     header.getTitle(getResources()));
         } else if (header.intent != null) {
             startActivity(header.intent);
@@ -769,7 +768,7 @@ public class SettingsActivity extends Activity
             // There not much we can do in that case
             title = "";
         }
-        startWithFragment(fragmentClass, args, resultTo, resultRequestCode, title);
+        Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode, title);
     }
 
     /**
@@ -829,359 +828,17 @@ public class SettingsActivity extends Activity
         return f;
     }
 
-    /**
-     * Start a new instance of this activity, showing only the given fragment.
-     * When launched in this mode, the given preference fragment will be instantiated and fill the
-     * entire activity.
-     *
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param resultTo Option fragment that should receive the result of
-     * the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request
-     * code in which to report the result.
-     * @param title String to display for the title of this set of preferences.
-     */
-    public void startWithFragment(String fragmentName, Bundle args,
-                                  Fragment resultTo, int resultRequestCode, CharSequence title) {
-        Intent intent = onBuildStartFragmentIntent(fragmentName, args, title);
-        if (resultTo == null) {
-            startActivity(intent);
-        } else {
-            resultTo.startActivityForResult(intent, resultRequestCode);
-        }
+    public void setNeedToRebuildCategories(boolean need) {
+        mNeedToRebuildCategories = need;
     }
 
     /**
-     * Build an Intent to launch a new activity showing the selected fragment.
-     * The implementation constructs an Intent that re-launches the current activity with the
-     * appropriate arguments to display the fragment.
-     *
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param title Optional title to show for this item.
-     * @return Returns an Intent that can be launched to display the given
-     * fragment.
-     */
-    public Intent onBuildStartFragmentIntent(String fragmentName, Bundle args, CharSequence title) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClass(this, SubSettings.class);
-        intent.putExtra(EXTRA_SHOW_FRAGMENT, fragmentName);
-        intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE, title);
-        intent.putExtra(EXTRA_NO_HEADERS, true);
-        return intent;
-    }
-
-    /**
-     * Called when the activity needs its list of headers build.
-     *
-     * @param headers The list in which to place the headers.
-     */
-    private void onBuildHeaders(List<Header> headers) {
-        loadHeadersFromResource(R.xml.settings_headers, headers);
-        updateHeaderList(headers);
-    }
-
-    /**
-     * Parse the given XML file as a header description, adding each
-     * parsed Header into the target list.
-     *
-     * @param resid The XML resource to load and parse.
-     * @param target The list in which the parsed headers should be placed.
-     */
-    private void loadHeadersFromResource(int resid, List<Header> target) {
-        XmlResourceParser parser = null;
-        try {
-            parser = getResources().getXml(resid);
-            AttributeSet attrs = Xml.asAttributeSet(parser);
-
-            int type;
-            while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
-                    && type != XmlPullParser.START_TAG) {
-                // Parse next until start tag is found
-            }
-
-            String nodeName = parser.getName();
-            if (!"preference-headers".equals(nodeName)) {
-                throw new RuntimeException(
-                        "XML document must start with <preference-headers> tag; found"
-                                + nodeName + " at " + parser.getPositionDescription());
-            }
-
-            Bundle curBundle = null;
-
-            final int outerDepth = parser.getDepth();
-            while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
-                    && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
-                if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
-                    continue;
-                }
-
-                nodeName = parser.getName();
-                if ("header".equals(nodeName)) {
-                    Header header = new Header();
-
-                    TypedArray sa = obtainStyledAttributes(
-                            attrs, com.android.internal.R.styleable.PreferenceHeader);
-                    header.id = sa.getResourceId(
-                            com.android.internal.R.styleable.PreferenceHeader_id,
-                            (int)HEADER_ID_UNDEFINED);
-                    TypedValue tv = sa.peekValue(
-                            com.android.internal.R.styleable.PreferenceHeader_title);
-                    if (tv != null && tv.type == TypedValue.TYPE_STRING) {
-                        if (tv.resourceId != 0) {
-                            header.titleRes = tv.resourceId;
-                        } else {
-                            header.title = tv.string;
-                        }
-                    }
-                    tv = sa.peekValue(
-                            com.android.internal.R.styleable.PreferenceHeader_summary);
-                    if (tv != null && tv.type == TypedValue.TYPE_STRING) {
-                        if (tv.resourceId != 0) {
-                            header.summaryRes = tv.resourceId;
-                        } else {
-                            header.summary = tv.string;
-                        }
-                    }
-                    header.iconRes = sa.getResourceId(
-                            com.android.internal.R.styleable.PreferenceHeader_icon, 0);
-                    header.fragment = sa.getString(
-                            com.android.internal.R.styleable.PreferenceHeader_fragment);
-                    sa.recycle();
-
-                    if (curBundle == null) {
-                        curBundle = new Bundle();
-                    }
-
-                    final int innerDepth = parser.getDepth();
-                    while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
-                            && (type != XmlPullParser.END_TAG || parser.getDepth() > innerDepth)) {
-                        if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
-                            continue;
-                        }
-
-                        String innerNodeName = parser.getName();
-                        if (innerNodeName.equals("extra")) {
-                            getResources().parseBundleExtra("extra", attrs, curBundle);
-                            XmlUtils.skipCurrentTag(parser);
-
-                        } else if (innerNodeName.equals("intent")) {
-                            header.intent = Intent.parseIntent(getResources(), parser, attrs);
-
-                        } else {
-                            XmlUtils.skipCurrentTag(parser);
-                        }
-                    }
-
-                    if (curBundle.size() > 0) {
-                        header.fragmentArguments = curBundle;
-                        curBundle = null;
-                    }
-
-                    target.add(header);
-                } else {
-                    XmlUtils.skipCurrentTag(parser);
-                }
-            }
-
-        } catch (XmlPullParserException e) {
-            throw new RuntimeException("Error parsing headers", e);
-        } catch (IOException e) {
-            throw new RuntimeException("Error parsing headers", e);
-        } finally {
-            if (parser != null) parser.close();
-        }
-    }
-
-    private void updateHeaderList(List<Header> target) {
-        final boolean showDev = mDevelopmentPreferences.getBoolean(
-                DevelopmentSettings.PREF_SHOW,
-                android.os.Build.TYPE.equals("eng"));
-        int i = 0;
-
-        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        while (i < target.size()) {
-            Header header = target.get(i);
-            // Ids are integers, so downcasting
-            int id = (int) header.id;
-            if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
-                Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
-            } else if (id == R.id.wifi_settings) {
-                // Remove WiFi Settings if WiFi service is not available.
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.bluetooth_settings) {
-                // Remove Bluetooth Settings if Bluetooth service is not available.
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.data_usage_settings) {
-                // Remove data usage when kernel module not enabled
-                final INetworkManagementService netManager = INetworkManagementService.Stub
-                        .asInterface(ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
-                try {
-                    if (!netManager.isBandwidthControlEnabled()) {
-                        target.remove(i);
-                    }
-                } catch (RemoteException e) {
-                    // ignored
-                }
-            } else if (id == R.id.battery_settings) {
-                // Remove battery settings when battery is not available. (e.g. TV)
-
-                if (!mBatteryPresent) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.account_settings) {
-                int headerIndex = i + 1;
-                i = insertAccountsHeaders(target, headerIndex);
-            } else if (id == R.id.home_settings) {
-                if (!updateHomeSettingHeaders(header)) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.user_settings) {
-                if (!UserHandle.MU_ENABLED
-                        || !UserManager.supportsMultipleUsers()
-                        || Utils.isMonkeyRunning()) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.nfc_payment_settings) {
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
-                    target.remove(i);
-                } else {
-                    // Only show if NFC is on and we have the HCE feature
-                    NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
-                    if (!adapter.isEnabled() || !getPackageManager().hasSystemFeature(
-                            PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
-                        target.remove(i);
-                    }
-                }
-            } else if (id == R.id.development_settings) {
-                if (!showDev) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.account_add) {
-                if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
-                    target.remove(i);
-                }
-            }
-
-            if (i < target.size() && target.get(i) == header
-                    && UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
-                    && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
-                target.remove(i);
-            }
-
-            // Increment if the current one wasn't removed by the Utils code.
-            if (i < target.size() && target.get(i) == header) {
-                i++;
-            }
-        }
-    }
-
-    private int insertAccountsHeaders(List<Header> target, int headerIndex) {
-        String[] accountTypes = mAuthenticatorHelper.getEnabledAccountTypes();
-        List<Header> accountHeaders = new ArrayList<Header>(accountTypes.length);
-        for (String accountType : accountTypes) {
-            CharSequence label = mAuthenticatorHelper.getLabelForType(this, accountType);
-            if (label == null) {
-                continue;
-            }
-
-            Account[] accounts = AccountManager.get(this).getAccountsByType(accountType);
-            boolean skipToAccount = accounts.length == 1
-                    && !mAuthenticatorHelper.hasAccountPreferences(accountType);
-            Header accHeader = new Header();
-            accHeader.title = label;
-            if (accHeader.extras == null) {
-                accHeader.extras = new Bundle();
-            }
-            if (skipToAccount) {
-                accHeader.fragment = AccountSyncSettings.class.getName();
-                accHeader.fragmentArguments = new Bundle();
-                // Need this for the icon
-                accHeader.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
-                accHeader.extras.putParcelable(AccountSyncSettings.ACCOUNT_KEY, accounts[0]);
-                accHeader.fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
-                        accounts[0]);
-            } else {
-                accHeader.fragment = ManageAccountsSettings.class.getName();
-                accHeader.fragmentArguments = new Bundle();
-                accHeader.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
-                accHeader.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE,
-                        accountType);
-                    accHeader.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
-                            label.toString());
-            }
-            accountHeaders.add(accHeader);
-            mAuthenticatorHelper.preloadDrawableForType(this, accountType);
-        }
-
-        // Sort by label
-        Collections.sort(accountHeaders, new Comparator<Header>() {
-            @Override
-            public int compare(Header h1, Header h2) {
-                return h1.title.toString().compareTo(h2.title.toString());
-            }
-        });
-
-        for (Header header : accountHeaders) {
-            target.add(headerIndex++, header);
-        }
-        if (!mListeningToAccountUpdates) {
-            AccountManager.get(this).addOnAccountsUpdatedListener(this, null, true);
-            mListeningToAccountUpdates = true;
-        }
-        return headerIndex;
-    }
-
-    private boolean updateHomeSettingHeaders(Header header) {
-        // Once we decide to show Home settings, keep showing it forever
-        SharedPreferences sp = getSharedPreferences(HomeSettings.HOME_PREFS, Context.MODE_PRIVATE);
-        if (sp.getBoolean(HomeSettings.HOME_PREFS_DO_SHOW, false)) {
-            return true;
-        }
-
-        try {
-            final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
-            getPackageManager().getHomeActivities(homeApps);
-            if (homeApps.size() < 2) {
-                // When there's only one available home app, omit this settings
-                // category entirely at the top level UI.  If the user just
-                // uninstalled the penultimate home app candidiate, we also
-                // now tell them about why they aren't seeing 'Home' in the list.
-                if (sShowNoHomeNotice) {
-                    sShowNoHomeNotice = false;
-                    NoHomeDialogFragment.show(this);
-                }
-                return false;
-            } else {
-                // Okay, we're allowing the Home settings category.  Tell it, when
-                // invoked via this front door, that we'll need to be told about the
-                // case when the user uninstalls all but one home app.
-                if (header.fragmentArguments == null) {
-                    header.fragmentArguments = new Bundle();
-                }
-                header.fragmentArguments.putBoolean(HomeSettings.HOME_SHOW_NOTICE, true);
-            }
-        } catch (Exception e) {
-            // Can't look up the home activity; bail on configuring the icon
-            Log.w(LOG_TAG, "Problem looking up home activity!", e);
-        }
-
-        sp.edit().putBoolean(HomeSettings.HOME_PREFS_DO_SHOW, true).apply();
-        return true;
-    }
-
-    /**
-     * Called when the activity needs its list of categories/tiles build.
+     * Called when the activity needs its list of categories/tiles built.
      *
      * @param categories The list in which to place the tiles categories.
      */
-    private void onBuildDashboardCategories(List<DashboardCategory> categories) {
+    private void buildDashboardCategories(List<DashboardCategory> categories) {
+        mCategories.clear();
         loadCategoriesFromResource(R.xml.dashboard_categories, categories);
         updateTilesList(categories);
     }
@@ -1542,22 +1199,6 @@ public class SettingsActivity extends Activity
         return mNextButton;
     }
 
-    public HeaderAdapter getHeaderAdapter() {
-        return mHeaderAdapter;
-    }
-
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        if (!isResumed()) {
-            return;
-        }
-        Object item = mHeaderAdapter.getItem(position);
-        if (item instanceof Header) {
-            mSelectedHeader = (Header) item;
-            onHeaderClick(mSelectedHeader, position);
-            revertToInitialFragment();
-        }
-    }
-
     @Override
     public boolean shouldUpRecreateTask(Intent targetIntent) {
         return super.shouldUpRecreateTask(new Intent(this, SettingsActivity.class));
@@ -1568,7 +1209,7 @@ public class SettingsActivity extends Activity
         // TODO: watch for package upgrades to invalidate cache; see 7206643
         mAuthenticatorHelper.updateAuthDescriptions(this);
         mAuthenticatorHelper.onAccountsUpdated(this, accounts);
-        invalidateHeaders();
+        invalidateCategories();
     }
 
     public static void requestHomeNotice() {

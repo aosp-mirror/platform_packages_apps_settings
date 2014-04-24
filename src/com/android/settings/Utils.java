@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -654,5 +655,52 @@ public class Utils {
     public static boolean hasMultipleUsers(Context context) {
         return ((UserManager) context.getSystemService(Context.USER_SERVICE))
                 .getUsers().size() > 1;
+    }
+
+    /**
+     * Start a new instance of the activity, showing only the given fragment.
+     * When launched in this mode, the given preference fragment will be instantiated and fill the
+     * entire activity.
+     *
+     * @param context The context.
+     * @param fragmentName The name of the fragment to display.
+     * @param args Optional arguments to supply to the fragment.
+     * @param resultTo Option fragment that should receive the result of
+     * the activity launch.
+     * @param resultRequestCode If resultTo is non-null, this is the request
+     * code in which to report the result.
+     * @param title String to display for the title of this set of preferences.
+     */
+    public static void startWithFragment(Context context, String fragmentName, Bundle args,
+            Fragment resultTo, int resultRequestCode, CharSequence title) {
+        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, title);
+        if (resultTo == null) {
+            context.startActivity(intent);
+        } else {
+            resultTo.startActivityForResult(intent, resultRequestCode);
+        }
+    }
+
+    /**
+     * Build an Intent to launch a new activity showing the selected fragment.
+     * The implementation constructs an Intent that re-launches the current activity with the
+     * appropriate arguments to display the fragment.
+     *
+     * @param context The Context.
+     * @param fragmentName The name of the fragment to display.
+     * @param args Optional arguments to supply to the fragment.
+     * @param title Optional title to show for this item.
+     * @return Returns an Intent that can be launched to display the given
+     * fragment.
+     */
+    public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
+            Bundle args, CharSequence title) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClass(context, SubSettings.class);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
+        intent.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
+        return intent;
     }
 }
