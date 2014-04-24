@@ -701,8 +701,7 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"ញ័រ​ពេល​ស្ងាត់"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"សំឡេង​ជូន​ដំណឹង​លំនាំដើម"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"ពន្លឺ​ជូន​ដំណឹង​ភ្លឺបភ្លែត"</string>
-    <!-- no translation found for heads_up_enabled_title (1031078221910921622) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="1031078221910921622">"លេចឡើង​ ​បើ​អាទិភាព​ខ្ពស់"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"សំឡេង​រោទ៍"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"ការ​ជូន​ដំណឹង"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"ប្រើ​កម្រិត​សំឡេង​ហៅ​ចូល​សម្រាប់​ជូន​ដំណឹង"</string>
@@ -1849,6 +1848,8 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"បង្ហាញ​ការ​ភ្ជាប់​អត្ថបទ​សម្រង់ រឹម ។ល។"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"បង្ខំ​ទិស​ប្លង់ RTL"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"បង្ខំ​ទិស​ប្លង់​អេក្រង់​ទៅកាន់ RTL សម្រាប់​មូលដ្ឋាន​ទាំងអស់"</string>
+    <string name="low_power_mode" msgid="8400119155107987979">"របៀប​ប្រើ​ថ្ម​តិច"</string>
+    <string name="low_power_mode_summary" msgid="8895619424568660204">"បើក​ការ​កំណត់​សន្សំ​ថ្ម"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"បង្ហាញ​​ការ​ប្រើ CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"អេក្រង់​ត្រួត​គ្នា​បង្ហាញ​​ការ​ប្រើ CPU បច្ចុប្បន្ន"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"បង្ខំ​ឲ្យ​បង្ហាញ GPU"</string>
@@ -2100,20 +2101,14 @@
     <string name="search_menu" msgid="7053532283559077164">"ស្វែងរក"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"កំណត់​ការ​​ស្វែងរក"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"ការ​ភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ"</string>
-    <!-- no translation found for lock_screen_notifications (1785930071975221150) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_off (2477642360263652408) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_on (7897541882520048340) -->
-    <skip />
-    <!-- no translation found for title_zen_mode (4587203077066257425) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (2689740350895257590) -->
-    <skip />
+    <string name="lock_screen_notifications" msgid="1785930071975221150">"បង្ហាញនៅលើអេក្រង់ជាប់​សោ"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="2477642360263652408">"លុះ​ត្រា​តែ​មាតិកា​ត្រឹមត្រូវ"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="7897541882520048340">"ការ​ជូន​ដំណឹង​ទាំងអស់"</string>
+    <string name="title_zen_mode" msgid="4587203077066257425">"កុំ​រំខាន"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"កុំ​រំខាន"</string>
     <string name="notification_settings" msgid="8342078884790733726">"ការ​ជូនដំណឹង"</string>
     <string name="notification_settings_tweaks" msgid="659628355469765848">"កែប្រែ"</string>
-    <!-- no translation found for notification_settings_apps_title (1125354590652967250) -->
-    <skip />
+    <string name="notification_settings_apps_title" msgid="1125354590652967250">"ការជូន​ដំណឹងកម្មវិធី"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"​កំណត់​ការ​ជូនដំណឹង"</string>
     <string name="setup_wifi_nfc_tag" msgid="654375687941126332">"រៀប​ចំ​ស្លាក​អិនអេហ្វស៊ី​វ៉ាយហ្វាយ"</string>
     <string name="write_tag" msgid="8571858602896222537">"សរសេរ"</string>
@@ -2122,16 +2117,26 @@
     <string name="status_write_success" msgid="5228419086308251169">"ជោគជ័យ!"</string>
     <string name="status_failed_to_write" msgid="8072752734686294718">"មិន​អាច​សរសេរ​ទិន្នន័យ​ទៅ​ស្លាក​អិនអេហ្វស៊ី។ បើ​នៅតែ​មាន​បញ្ហា​ សាកល្បង​​ស្លាក​ផ្សេង"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"ស្លាក​អិនអេហ្វ​ស៊ី​មិន​អាច​សរសេរ​បាន។ សូម​ប្រើ​ស្លាក​ផ្សេង។"</string>
-    <!-- no translation found for default_sound (8821684447333687810) -->
-    <skip />
-    <!-- no translation found for loading_notification_apps (5031818677010335895) -->
-    <skip />
-    <!-- no translation found for app_notifications_title (5810577805218003760) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_show (6912410502091785846) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_priority (2692156022435161791) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_done (3484067728568791014) -->
-    <skip />
+    <string name="default_sound" msgid="8821684447333687810">"សំឡេង​លំនាំ​ដើម"</string>
+    <string name="loading_notification_apps" msgid="5031818677010335895">"កំពុង​ផ្ទុក​កម្មវិធី..."</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"ការ​ជូន​ដំណឹង​កម្មវិធី"</string>
+    <string name="app_notifications_dialog_show" msgid="6912410502091785846">"បង្ហាញ​ការ​ជូនដំណឹង"</string>
+    <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"អាទិភាព​ខ្ពស់"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"រួចរាល់"</string>
+    <string name="zen_mode_general_category" msgid="8665291516524965729">"នៅ​ពេល​បើក កំណត់​ការ​បញ្ឈប់​ទៅ"</string>
+    <string name="zen_mode_automatic_category" msgid="7178632613181667490">"បើក​ស្វ័យ​ប្រវត្តិ​សម្រាប់​ដេក"</string>
+    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"ហៅ​ទូរស័ព្ទ"</string>
+    <string name="zen_mode_messages" msgid="5886440273537510894">"សារ"</string>
+    <string name="zen_mode_from" msgid="1777739391289980762">"ពី"</string>
+    <string name="zen_mode_from_anyone" msgid="1180865188673992959">"អ្នក​ណា​ម្នាក់"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"តែ​ទំនាក់ទំនង​​ប៉ុណ្ណោះ"</string>
+    <string name="zen_mode_from_starred" msgid="2168651127340381533">"តែទំនាក់ទំនងមានផ្កាយប៉ុណ្ណោះ"</string>
+    <string name="zen_mode_alarm_info" msgid="6618710483408892326">"អ្នកនឹងឮសំឡេងរោទ៍ និងកម្មវិធីកំណត់ម៉ោងក្នុងរបៀបកុំរំខាន"</string>
+    <string name="zen_mode_when" msgid="208441657907932773">"ពេលវេលា"</string>
+    <string name="zen_mode_when_never" msgid="8809494351918405602">"កុំ"</string>
+    <string name="zen_mode_when_every_night" msgid="3122486110091921009">"រាល់​យប់"</string>
+    <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"យប់​សប្ដាហ៍​ធ្វើការ"</string>
+    <string name="zen_mode_start_time" msgid="8102602297273744441">"ម៉ោង​ចាប់ផ្ដើម"</string>
+    <string name="zen_mode_end_time" msgid="8774327885892705505">"ម៉ោង​បញ្ចប់"</string>
+    <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ថ្ងៃ​បន្ទាប់"</string>
 </resources>

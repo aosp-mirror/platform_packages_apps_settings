@@ -701,8 +701,7 @@
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Idlidliza uma ithulile"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Umsindo wokwazisa ozenzakalelayo"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Ukukhanya kwesaziso sephalsi"</string>
-    <!-- no translation found for heads_up_enabled_title (1031078221910921622) -->
-    <skip />
+    <string name="heads_up_enabled_title" msgid="1031078221910921622">"Vela uma kubalulekile"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Iringithoni"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Isaziso"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Sebenzisa ivolumu yocingo olungenayo yezaziso"</string>
@@ -1856,6 +1855,8 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Bonisa imikhawulo, imiphetho, njll, yesiqeshana."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Phoqelela isikhombisi-ndlela sesakhiwo se-RTL"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Phoqelela isikhombisi-ndlela sesikrini ku-RTL kuzo zonke izifunda"</string>
+    <string name="low_power_mode" msgid="8400119155107987979">"Imodi Yamandla Aphansi"</string>
+    <string name="low_power_mode_summary" msgid="8895619424568660204">"Nika amandla izilungiselelo zokulondoloza ibhethri"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Bonisa ukusebenzisa i-CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Imbondela yesikrini ibonisa ukusetshenziswa kwe-CPU okwamanje"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Phoqa ukunikeza i-GPU"</string>
@@ -2107,20 +2108,14 @@
     <string name="search_menu" msgid="7053532283559077164">"Sesha"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"Izilungiselelo zokusesha"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"ukuxhumeka kwenethiwekhi ye-wi-fi"</string>
-    <!-- no translation found for lock_screen_notifications (1785930071975221150) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_off (2477642360263652408) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifications_summary_on (7897541882520048340) -->
-    <skip />
-    <!-- no translation found for title_zen_mode (4587203077066257425) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_title (2689740350895257590) -->
-    <skip />
+    <string name="lock_screen_notifications" msgid="1785930071975221150">"Bonisa kusikrini sokukhiya"</string>
+    <string name="lock_screen_notifications_summary_off" msgid="2477642360263652408">"Ngaphandle kwalapho okuqukethwe kuzwela"</string>
+    <string name="lock_screen_notifications_summary_on" msgid="7897541882520048340">"Zonke izaziso"</string>
+    <string name="title_zen_mode" msgid="4587203077066257425">"Ungaphazamisi"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Ungaphazamisi"</string>
     <string name="notification_settings" msgid="8342078884790733726">"Izaziso"</string>
     <string name="notification_settings_tweaks" msgid="659628355469765848">"Amathwikhi"</string>
-    <!-- no translation found for notification_settings_apps_title (1125354590652967250) -->
-    <skip />
+    <string name="notification_settings_apps_title" msgid="1125354590652967250">"Izaziso zohlelo lokusebenza"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Izilungiselelo zesaziso"</string>
     <string name="setup_wifi_nfc_tag" msgid="654375687941126332">"Setha umaki wei-WiFi NFC"</string>
     <string name="write_tag" msgid="8571858602896222537">"Bhala"</string>
@@ -2129,16 +2124,26 @@
     <string name="status_write_success" msgid="5228419086308251169">"Impumelelo!"</string>
     <string name="status_failed_to_write" msgid="8072752734686294718">"Ayikwazi ukubhala idatha kumaki we-NFC. Uma inkinga iqhubeka, zama umaki owehlukile"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Umaki we-NFC akabhaleki. Sicela usebenzise umaki owehlukile."</string>
-    <!-- no translation found for default_sound (8821684447333687810) -->
-    <skip />
-    <!-- no translation found for loading_notification_apps (5031818677010335895) -->
-    <skip />
-    <!-- no translation found for app_notifications_title (5810577805218003760) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_show (6912410502091785846) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_priority (2692156022435161791) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_done (3484067728568791014) -->
-    <skip />
+    <string name="default_sound" msgid="8821684447333687810">"Umsindo owufica ukhona"</string>
+    <string name="loading_notification_apps" msgid="5031818677010335895">"Ilayisha izinhlelo zokusebenza..."</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Izaziso zohlelo lokusebenza"</string>
+    <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Bonisa izaziso"</string>
+    <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"Okubaluleke kakhulu"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Kwenziwe"</string>
+    <string name="zen_mode_general_category" msgid="8665291516524965729">"Uma ivuliwe, khawulela iziphazamiso ku-"</string>
+    <string name="zen_mode_automatic_category" msgid="7178632613181667490">"Yivule ngokuzenzakalela ekulaleni"</string>
+    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Amakholi efoni"</string>
+    <string name="zen_mode_messages" msgid="5886440273537510894">"Imilayezo"</string>
+    <string name="zen_mode_from" msgid="1777739391289980762">"Isuka ku-"</string>
+    <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Noma ubani"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Oxhumana nabo kuphela"</string>
+    <string name="zen_mode_from_starred" msgid="2168651127340381533">"Oxhumana nabo abafakwe izinkanyezi kuphela"</string>
+    <string name="zen_mode_alarm_info" msgid="6618710483408892326">"Uzohlala uzwa ama-alamu nezinto zesikhathi Ekungaphazamisini"</string>
+    <string name="zen_mode_when" msgid="208441657907932773">"Nini"</string>
+    <string name="zen_mode_when_never" msgid="8809494351918405602">"Akusoze"</string>
+    <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Njalo ngobusuku"</string>
+    <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Ubusuku baphakathi neviki"</string>
+    <string name="zen_mode_start_time" msgid="8102602297273744441">"Isikhathi sokuqala"</string>
+    <string name="zen_mode_end_time" msgid="8774327885892705505">"Isikhathi sokugcina"</string>
+    <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> usuku olulandelayo"</string>
 </resources>
