@@ -22,7 +22,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -48,7 +50,7 @@ import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 import java.util.List;
 
 public class PaymentSettings extends SettingsPreferenceFragment implements
-        OnClickListener {
+        OnClickListener, OnPreferenceChangeListener {
     public static final String TAG = "PaymentSettings";
     private LayoutInflater mInflater;
     private PaymentBackend mPaymentBackend;
@@ -67,6 +69,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     public void refresh() {
         PreferenceManager manager = getPreferenceManager();
         PreferenceScreen screen = manager.createPreferenceScreen(getActivity());
+
         // Get all payment services
         List<PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
@@ -92,6 +95,13 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             emptyImage.setVisibility(View.VISIBLE);
             getListView().setVisibility(View.GONE);
         } else {
+            CheckBoxPreference foreground = new CheckBoxPreference(getActivity());
+            boolean foregroundMode = mPaymentBackend.isForegroundMode();
+            foreground.setPersistent(false);
+            foreground.setTitle(getString(R.string.nfc_payment_favor_foreground));
+            foreground.setChecked(foregroundMode);
+            foreground.setOnPreferenceChangeListener(this);
+            screen.addPreference(foreground);
             emptyText.setVisibility(View.GONE);
             learnMore.setVisibility(View.GONE);
             emptyImage.setVisibility(View.GONE);
@@ -207,14 +217,25 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
         protected void onBindView(View view) {
             super.onBindView(view);
 
-            view.setOnClickListener(listener);
-            view.setTag(appInfo);
-
             RadioButton radioButton = (RadioButton) view.findViewById(android.R.id.button1);
             radioButton.setChecked(appInfo.isDefault);
+            radioButton.setOnClickListener(listener);
+            radioButton.setTag(appInfo);
 
             ImageView banner = (ImageView) view.findViewById(R.id.banner);
             banner.setImageDrawable(appInfo.banner);
+            banner.setOnClickListener(listener);
+            banner.setTag(appInfo);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference instanceof CheckBoxPreference) {
+            mPaymentBackend.setForegroundMode(((Boolean) newValue).booleanValue());
+            return true;
+        } else {
+            return false;
         }
     }
 }

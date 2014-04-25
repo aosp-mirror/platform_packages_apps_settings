@@ -24,6 +24,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +73,20 @@ public class PaymentBackend {
         }
 
         return appInfos;
+    }
+
+    boolean isForegroundMode() {
+        try {
+            return Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.NFC_PAYMENT_FOREGROUND) != 0;
+        } catch (SettingNotFoundException e) {
+            return false;
+        }
+    }
+
+    void setForegroundMode(boolean foreground) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0) ;
     }
 
     ComponentName getDefaultPaymentApp() {

@@ -19,14 +19,7 @@ package com.android.settings.nfc;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
-import android.nfc.cardemulation.HostApduService;
-import android.nfc.cardemulation.OffHostApduService;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -35,10 +28,7 @@ import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 public final class PaymentDefaultDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
