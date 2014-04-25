@@ -16,13 +16,15 @@
 
 <com.android.settings.fuelgauge.BatteryHistoryChart
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res/com.android.settings"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:minHeight="128dp"
     android:gravity="center_vertical"
     android:id="@+android:id/battery_history_chart"
     android:paddingEnd="?android:attr/scrollbarSize"
     android:textAppearance="?android:attr/textAppearanceMedium"
+    app:headerAppearance="?android:attr/textAppearanceMedium"
     android:shadowRadius="4"
     android:shadowColor="?android:attr/colorBackground"
     android:shadowDx="2"

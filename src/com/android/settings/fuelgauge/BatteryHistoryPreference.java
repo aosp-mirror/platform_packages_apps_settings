@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.preference.Preference;
@@ -33,12 +34,14 @@ import com.android.settings.R;
  */
 public class BatteryHistoryPreference extends Preference {
 
-    private BatteryStats mStats;
+    final private BatteryStats mStats;
+    final private Intent mBatteryBroadcast;
 
-    public BatteryHistoryPreference(Context context, BatteryStats stats) {
+    public BatteryHistoryPreference(Context context, BatteryStats stats, Intent batteryBroadcast) {
         super(context);
         setLayoutResource(R.layout.preference_batteryhistory);
         mStats = stats;
+        mBatteryBroadcast = batteryBroadcast;
     }
 
     BatteryStats getStats() {
@@ -51,6 +54,6 @@ public class BatteryHistoryPreference extends Preference {
 
         BatteryHistoryChart chart = (BatteryHistoryChart)view.findViewById(
                 R.id.battery_history_chart);
-        chart.setStats(mStats);
+        chart.setStats(mStats, mBatteryBroadcast);
     }
 }

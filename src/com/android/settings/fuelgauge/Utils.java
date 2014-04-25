@@ -81,4 +81,45 @@ public class Utils {
         }
         return sb.toString();
     }
+
+    /**
+     * Returns elapsed time for the given millis, in the following format:
+     * 2d 5h; will include at most two units, can go down to seconds precision.
+     * @param context the application context
+     * @param millis the elapsed time in milli seconds
+     * @return the formatted elapsed time
+     */
+    public static String formatShortElapsedTime(Context context, double millis) {
+        int seconds = (int) Math.floor(millis / 1000);
+
+        int days = 0, hours = 0, minutes = 0;
+        if (seconds >= SECONDS_PER_DAY) {
+            days = seconds / SECONDS_PER_DAY;
+            seconds -= days * SECONDS_PER_DAY;
+        }
+        if (seconds >= SECONDS_PER_HOUR) {
+            hours = seconds / SECONDS_PER_HOUR;
+            seconds -= hours * SECONDS_PER_HOUR;
+        }
+        if (seconds >= SECONDS_PER_MINUTE) {
+            minutes = seconds / SECONDS_PER_MINUTE;
+            seconds -= minutes * SECONDS_PER_MINUTE;
+        }
+        if (days >= 4) {
+            return context.getString(R.string.battery_history_days_only, days);
+        } else if (days > 0) {
+            return context.getString(R.string.battery_history_days_and_hours, days, hours);
+        } else if (hours >= 12) {
+            return context.getString(R.string.battery_history_hours_only, hours);
+        } else if (hours > 0) {
+            return context.getString(R.string.battery_history_hours_and_minutes, hours, minutes);
+        } else if (minutes >= 10) {
+            return context.getString(R.string.battery_history_minutes_only, minutes);
+        } else if (minutes > 0) {
+            return context.getString(R.string.battery_history_minutes_and_seconds, minutes,
+                    seconds);
+        } else {
+            return context.getString(R.string.battery_history_seconds, seconds);
+        }
+    }
 }

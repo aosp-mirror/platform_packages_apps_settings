@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import android.content.Intent;
+import android.os.BatteryManager;
 import com.android.settings.R;
 
 import android.content.Context;
@@ -120,7 +122,8 @@ public class BatteryHistoryChart extends View {
     final Paint mCpuRunningPaint = new Paint();
     final ChartData mPhoneSignalChart = new ChartData();
     final TextPaint mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
-    
+    final TextPaint mHeaderTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+
     final Path mBatLevelPath = new Path();
     final Path mBatGoodPath = new Path();
     final Path mBatWarnPath = new Path();
@@ -131,12 +134,13 @@ public class BatteryHistoryChart extends View {
     final Path mWifiRunningPath = new Path();
     final Path mCpuRunningPath = new Path();
     
-    int mFontSize;
-    
     BatteryStats mStats;
+    Intent mBatteryBroadcast;
     long mStatsPeriod;
     String mDurationString;
-    String mTotalDurationString;
+    String mChargeLabelString;
+    String mChargeDurationString;
+    String mDrainString;
     String mChargingLabel;
     String mScreenOnLabel;
     String mGpsOnLabel;
@@ -146,8 +150,12 @@ public class BatteryHistoryChart extends View {
     
     int mTextAscent;
     int mTextDescent;
+    int mHeaderTextAscent;
+    int mHeaderTextDescent;
     int mDurationStringWidth;
-    int mTotalDurationStringWidth;
+    int mChargeLabelStringWidth;
+    int mChargeDurationStringWidth;
+    int mDrainStringWidth;
 
     boolean mLargeMode;
 
@@ -174,7 +182,96 @@ public class BatteryHistoryChart extends View {
     boolean mHaveWifi;
     boolean mHaveGps;
     boolean mHavePhoneSignal;
-    
+
+    static class TextAttrs {
+        ColorStateList textColor = null;
+        int textSize = 15;
+        int typefaceIndex = -1;
+        int styleIndex = -1;
+
+        void retrieve(Context context, TypedArray from, int index) {
+            TypedArray appearance = null;
+            int ap = from.getResourceId(index, -1);
+            if (ap != -1) {
+                appearance = context.obtainStyledAttributes(ap,
+                                    com.android.internal.R.styleable.TextAppearance);
+            }
+            if (appearance != null) {
+                int n = appearance.getIndexCount();
+                for (int i = 0; i < n; i++) {
+                    int attr = appearance.getIndex(i);
+
+                    switch (attr) {
+                    case com.android.internal.R.styleable.TextAppearance_textColor:
+                        textColor = appearance.getColorStateList(attr);
+                        break;
+
+                    case com.android.internal.R.styleable.TextAppearance_textSize:
+                        textSize = appearance.getDimensionPixelSize(attr, textSize);
+                        break;
+
+                    case com.android.internal.R.styleable.TextAppearance_typeface:
+                        typefaceIndex = appearance.getInt(attr, -1);
+                        break;
+
+                    case com.android.internal.R.styleable.TextAppearance_textStyle:
+                        styleIndex = appearance.getInt(attr, -1);
+                        break;
+                    }
+                }
+
+                appearance.recycle();
+            }
+        }
+
+        void apply(Context context, TextPaint paint) {
+            paint.density = context.getResources().getDisplayMetrics().density;
+            paint.setCompatibilityScaling(
+                    context.getResources().getCompatibilityInfo().applicationScale);
+
+            paint.setColor(textColor.getDefaultColor());
+            paint.setTextSize(textSize);
+
+            Typeface tf = null;
+            switch (typefaceIndex) {
+                case SANS:
+                    tf = Typeface.SANS_SERIF;
+                    break;
+
+                case SERIF:
+                    tf = Typeface.SERIF;
+                    break;
+
+                case MONOSPACE:
+                    tf = Typeface.MONOSPACE;
+                    break;
+            }
+
+            setTypeface(paint, tf, styleIndex);
+        }
+
+        public void setTypeface(TextPaint paint, Typeface tf, int style) {
+            if (style > 0) {
+                if (tf == null) {
+                    tf = Typeface.defaultFromStyle(style);
+                } else {
+                    tf = Typeface.create(tf, style);
+                }
+
+                paint.setTypeface(tf);
+                // now compute what (if any) algorithmic styling is needed
+                int typefaceStyle = tf != null ? tf.getStyle() : 0;
+                int need = style & ~typefaceStyle;
+                paint.setFakeBoldText((need & Typeface.BOLD) != 0);
+                paint.setTextSkewX((need & Typeface.ITALIC) != 0 ? -0.25f : 0);
+            } else {
+                paint.setFakeBoldText(false);
+                paint.setTextSkewX(0);
+                paint.setTypeface(tf);
+            }
+        }
+    }
+
     public BatteryHistoryChart(Context context, AttributeSet attrs) {
         super(context, attrs);
         
@@ -197,53 +294,15 @@ public class BatteryHistoryChart extends View {
                 0xff80a000, 0xff409000, 0xff008000
         });
         
-        mTextPaint.density = getResources().getDisplayMetrics().density;
-        mTextPaint.setCompatibilityScaling(
-                getResources().getCompatibilityInfo().applicationScale);
-        
         TypedArray a =
             context.obtainStyledAttributes(
                 attrs, R.styleable.BatteryHistoryChart, 0, 0);
-        
-        ColorStateList textColor = null;
-        int textSize = 15;
-        int typefaceIndex = -1;
-        int styleIndex = -1;
-        
-        TypedArray appearance = null;
-        int ap = a.getResourceId(R.styleable.BatteryHistoryChart_android_textAppearance, -1);
-        if (ap != -1) {
-            appearance = context.obtainStyledAttributes(ap,
-                                com.android.internal.R.styleable.
-                                TextAppearance);
-        }
-        if (appearance != null) {
-            int n = appearance.getIndexCount();
-            for (int i = 0; i < n; i++) {
-                int attr = appearance.getIndex(i);
 
-                switch (attr) {
-                case com.android.internal.R.styleable.TextAppearance_textColor:
-                    textColor = appearance.getColorStateList(attr);
-                    break;
+        final TextAttrs mainTextAttrs = new TextAttrs();
+        final TextAttrs headTextAttrs = new TextAttrs();
+        mainTextAttrs.retrieve(context, a, R.styleable.BatteryHistoryChart_android_textAppearance);
+        headTextAttrs.retrieve(context, a, R.styleable.BatteryHistoryChart_headerAppearance);
 
-                case com.android.internal.R.styleable.TextAppearance_textSize:
-                    textSize = appearance.getDimensionPixelSize(attr, textSize);
-                    break;
-
-                case com.android.internal.R.styleable.TextAppearance_typeface:
-                    typefaceIndex = appearance.getInt(attr, -1);
-                    break;
-
-                case com.android.internal.R.styleable.TextAppearance_textStyle:
-                    styleIndex = appearance.getInt(attr, -1);
-                    break;
-                }
-            }
-
-            appearance.recycle();
-        }
-        
         int shadowcolor = 0;
         float dx=0, dy=0, r=0;
         
@@ -269,80 +328,47 @@ public class BatteryHistoryChart extends View {
                     break;
 
                 case R.styleable.BatteryHistoryChart_android_textColor:
-                    textColor = a.getColorStateList(attr);
+                    mainTextAttrs.textColor = a.getColorStateList(attr);
+                    headTextAttrs.textColor = a.getColorStateList(attr);
                     break;
 
                 case R.styleable.BatteryHistoryChart_android_textSize:
-                    textSize = a.getDimensionPixelSize(attr, textSize);
+                    mainTextAttrs.textSize = a.getDimensionPixelSize(attr, mainTextAttrs.textSize);
+                    headTextAttrs.textSize = a.getDimensionPixelSize(attr, headTextAttrs.textSize);
                     break;
 
                 case R.styleable.BatteryHistoryChart_android_typeface:
-                    typefaceIndex = a.getInt(attr, typefaceIndex);
+                    mainTextAttrs.typefaceIndex = a.getInt(attr, mainTextAttrs.typefaceIndex);
+                    headTextAttrs.typefaceIndex = a.getInt(attr, headTextAttrs.typefaceIndex);
                     break;
 
                 case R.styleable.BatteryHistoryChart_android_textStyle:
-                    styleIndex = a.getInt(attr, styleIndex);
+                    mainTextAttrs.styleIndex = a.getInt(attr, mainTextAttrs.styleIndex);
+                    headTextAttrs.styleIndex = a.getInt(attr, headTextAttrs.styleIndex);
                     break;
             }
         }
         
         a.recycle();
         
-        mTextPaint.setColor(textColor.getDefaultColor());
-        mTextPaint.setTextSize(textSize);
-        
-        Typeface tf = null;
-        switch (typefaceIndex) {
-            case SANS:
-                tf = Typeface.SANS_SERIF;
-                break;
+        mainTextAttrs.apply(context, mTextPaint);
+        headTextAttrs.apply(context, mHeaderTextPaint);
 
-            case SERIF:
-                tf = Typeface.SERIF;
-                break;
-
-            case MONOSPACE:
-                tf = Typeface.MONOSPACE;
-                break;
-        }
-        
-        setTypeface(tf, styleIndex);
-        
         if (shadowcolor != 0) {
             mTextPaint.setShadowLayer(r, dx, dy, shadowcolor);
+            mHeaderTextPaint.setShadowLayer(r, dx, dy, shadowcolor);
         }
     }
     
-    public void setTypeface(Typeface tf, int style) {
-        if (style > 0) {
-            if (tf == null) {
-                tf = Typeface.defaultFromStyle(style);
-            } else {
-                tf = Typeface.create(tf, style);
-            }
-
-            mTextPaint.setTypeface(tf);
-            // now compute what (if any) algorithmic styling is needed
-            int typefaceStyle = tf != null ? tf.getStyle() : 0;
-            int need = style & ~typefaceStyle;
-            mTextPaint.setFakeBoldText((need & Typeface.BOLD) != 0);
-            mTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? -0.25f : 0);
-        } else {
-            mTextPaint.setFakeBoldText(false);
-            mTextPaint.setTextSkewX(0);
-            mTextPaint.setTypeface(tf);
-        }
-    }
-    
-    void setStats(BatteryStats stats) {
+    void setStats(BatteryStats stats, Intent broadcast) {
         mStats = stats;
-        
-        long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000,
+        mBatteryBroadcast = broadcast;
+
+        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+
+        long uSecTime = mStats.computeBatteryRealtime(elapsedRealtimeUs,
                 BatteryStats.STATS_SINCE_CHARGED);
         mStatsPeriod = uSecTime;
-        String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000, true);
-        mDurationString = getContext().getString(R.string.battery_stats_on_battery,
-                durationString);
         mChargingLabel = getContext().getString(R.string.battery_stats_charging_label);
         mScreenOnLabel = getContext().getString(R.string.battery_stats_screen_on_label);
         mGpsOnLabel = getContext().getString(R.string.battery_stats_gps_on_label);
@@ -382,16 +408,42 @@ public class BatteryHistoryChart extends View {
             mHavePhoneSignal = true;
         }
         if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
-        mTotalDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
+
+        //String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000, true);
+        //mDurationString = getContext().getString(R.string.battery_stats_on_battery,
+        //        durationString);
+        mDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
+        mDrainString = com.android.settings.Utils.getBatteryPercentage(mBatteryBroadcast);
+        mChargeLabelString = com.android.settings.Utils.getBatteryStatus(getResources(),
+                mBatteryBroadcast);
+        final long drainTime = mStats.computeBatteryTimeRemaining(elapsedRealtimeUs);
+        final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);
+        final int status = mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
+        if (drainTime > 0) {
+            String timeString = Utils.formatShortElapsedTime(getContext(),drainTime / 1000);
+            mChargeDurationString = getContext().getResources().getString(
+                    R.string.power_discharge_remaining, timeString);
+        } else if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
+            String timeString = Utils.formatShortElapsedTime(getContext(), chargeTime / 1000);
+            mChargeDurationString = getContext().getResources().getString(
+                    R.string.power_charge_remaining, timeString);
+        } else {
+            mChargeDurationString = "";
+        }
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mDurationStringWidth = (int)mTextPaint.measureText(mDurationString);
-        mTotalDurationStringWidth = (int)mTextPaint.measureText(mTotalDurationString);
+        mDrainStringWidth = (int)mHeaderTextPaint.measureText(mDrainString);
+        mChargeLabelStringWidth = (int)mHeaderTextPaint.measureText(mChargeLabelString);
+        mChargeDurationStringWidth = (int)mHeaderTextPaint.measureText(mChargeDurationString);
         mTextAscent = (int)mTextPaint.ascent();
         mTextDescent = (int)mTextPaint.descent();
+        mHeaderTextAscent = (int)mHeaderTextPaint.ascent();
+        mHeaderTextDescent = (int)mHeaderTextPaint.descent();
     }
 
     void finishPaths(int w, int h, int levelh, int startX, int y, Path curLevelPath,
@@ -434,9 +486,10 @@ public class BatteryHistoryChart extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         
         int textHeight = mTextDescent - mTextAscent;
+        int headerTextHeight = mHeaderTextDescent - mHeaderTextAscent;
         mThinLineWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 2, getResources().getDisplayMetrics());
-        if (h > (textHeight*6)) {
+        if (h > (textHeight*12)) {
             mLargeMode = true;
             if (h > (textHeight*15)) {
                 // Plenty of room for the chart.
@@ -445,7 +498,7 @@ public class BatteryHistoryChart extends View {
                 // Compress lines to make more room for chart.
                 mLineWidth = textHeight/3;
             }
-            mLevelTop = textHeight + mLineWidth;
+            mLevelTop = headerTextHeight*2 + mLineWidth;
             mScreenOnPaint.setARGB(255, 32, 64, 255);
             mGpsOnPaint.setARGB(255, 32, 64, 255);
             mWifiRunningPaint.setARGB(255, 32, 64, 255);
@@ -453,7 +506,7 @@ public class BatteryHistoryChart extends View {
         } else {
             mLargeMode = false;
             mLineWidth = mThinLineWidth;
-            mLevelTop = 0;
+            mLevelTop = headerTextHeight*2 + mLineWidth;
             mScreenOnPaint.setARGB(255, 0, 0, 255);
             mGpsOnPaint.setARGB(255, 0, 0, 255);
             mWifiRunningPaint.setARGB(255, 0, 0, 255);
@@ -659,22 +712,35 @@ public class BatteryHistoryChart extends View {
         final int height = getHeight();
         final boolean layoutRtl = isLayoutRtl();
         final int textStartX = layoutRtl ? width : 0;
-        mTextPaint.setTextAlign(layoutRtl ? Paint.Align.RIGHT : Paint.Align.LEFT);
+        final int textEndX = layoutRtl ? 0 : width;
+        final Paint.Align textAlignLeft = layoutRtl ? Paint.Align.RIGHT : Paint.Align.LEFT;
+        final Paint.Align textAlignRight = layoutRtl ? Paint.Align.LEFT : Paint.Align.RIGHT;
+        mTextPaint.setTextAlign(textAlignLeft);
 
         canvas.drawPath(mBatLevelPath, mBatteryBackgroundPaint);
+        int durationHalfWidth = mDurationStringWidth / 2;
+        if (layoutRtl) durationHalfWidth = -durationHalfWidth;
         if (mLargeMode) {
-            int durationHalfWidth = mTotalDurationStringWidth / 2;
-            if (layoutRtl) durationHalfWidth = -durationHalfWidth;
-            canvas.drawText(mDurationString, textStartX, -mTextAscent + (mLineWidth / 2),
-                    mTextPaint);
-            canvas.drawText(mTotalDurationString, (width / 2) - durationHalfWidth,
+            canvas.drawText(mDurationString, (width / 2) - durationHalfWidth,
                     mLevelBottom - mTextAscent + mThinLineWidth, mTextPaint);
         } else {
-            int durationHalfWidth = mDurationStringWidth / 2;
-            if (layoutRtl) durationHalfWidth = -durationHalfWidth;
             canvas.drawText(mDurationString, (width / 2) - durationHalfWidth,
-                    (height / 2) - ((mTextDescent - mTextAscent) / 2) - mTextAscent, mTextPaint);
+                    mLevelTop + ((height-mLevelTop) / 2) - ((mTextDescent - mTextAscent) / 2)
+                            - mTextAscent, mTextPaint);
         }
+
+        int headerTop = mLevelTop/2 + (mHeaderTextDescent-mHeaderTextAscent)/2;
+        mHeaderTextPaint.setTextAlign(textAlignLeft);
+        canvas.drawText(mChargeLabelString, textStartX, headerTop, mHeaderTextPaint);
+        durationHalfWidth = mChargeDurationStringWidth / 2;
+        if (layoutRtl) durationHalfWidth = -durationHalfWidth;
+        int headerCenter = ((width-mChargeDurationStringWidth-mDrainStringWidth)/2)
+                + (layoutRtl ? mDrainStringWidth : mChargeLabelStringWidth);
+        canvas.drawText(mChargeDurationString, headerCenter - durationHalfWidth, headerTop,
+                mHeaderTextPaint);
+        mHeaderTextPaint.setTextAlign(textAlignRight);
+        canvas.drawText(mDrainString, textEndX, headerTop, mHeaderTextPaint);
+
         if (!mBatGoodPath.isEmpty()) {
             canvas.drawPath(mBatGoodPath, mBatteryGoodPaint);
         }
