@@ -94,7 +94,8 @@ public class AppListPreference extends ListPreference {
             if (appInfo != null) {
                 applicationNames[index] = appInfo.loadLabel(pm);
                 mEntryDrawables[index] = appInfo.loadIcon(pm);
-                if (appInfo.packageName.contentEquals(defaultPackageName)) {
+                if (defaultPackageName != null &&
+                        appInfo.packageName.contentEquals(defaultPackageName)) {
                     selectedIndex = index;
                 }
                 index++;
