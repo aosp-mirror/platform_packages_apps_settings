@@ -16,12 +16,14 @@
 
 package com.android.settings.notification;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.INotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Typeface;
@@ -80,6 +82,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private DropDownPreference mWhen;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
+    private AlertDialog mDialog;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -292,6 +295,46 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
+    protected void putZenModeSetting(int value) {
+        Global.putInt(getContentResolver(), Global.ZEN_MODE, value);
+    }
+
+    protected ZenModeConditionSelection newConditionSelection() {
+        return new ZenModeConditionSelection(mContext);
+    }
+
+    private final Runnable mHideDialog = new Runnable() {
+        @Override
+        public void run() {
+            if (mDialog != null) {
+                mDialog.dismiss();
+                mDialog = null;
+            }
+        }
+    };
+
+    private final Runnable mShowDialog = new Runnable() {
+        @Override
+        public void run() {
+            mDialog = new AlertDialog.Builder(mContext)
+                    .setTitle(R.string.zen_mode_settings_title)
+                    .setView(newConditionSelection())
+                    .setNegativeButton(R.string.dlg_cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            putZenModeSetting(Global.ZEN_MODE_OFF);
+                        }
+                    })
+                    .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // noop
+                        }
+                    })
+                    .show();
+        }
+    };
+
     private final OnPreferenceChangeListener mSwitchListener = new OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -300,7 +343,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 @Override
                 public void run() {
                     final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
-                    Global.putInt(getContentResolver(), Global.ZEN_MODE, v);
+                    putZenModeSetting(v);
+                    mHandler.post(isChecked ? mShowDialog : mHideDialog);
                 }
             });
             return true;
