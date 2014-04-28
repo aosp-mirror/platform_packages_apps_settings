@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -41,15 +39,8 @@ import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -68,6 +59,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String TAG = "ZenModeSettings";
     private static final boolean DEBUG = true;
 
+    private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_GENERAL = "general";
     private static final String KEY_CALLS = "phone_calls";
     private static final String KEY_MESSAGES = "messages";
@@ -78,10 +70,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
-    private Switch mSwitch;
-    private Activity mActivity;
+    private SwitchPreference mSwitch;
     private Context mContext;
-    private MenuItem mSearch;
     private ZenModeConfig mConfig;
     private boolean mDisableListeners;
     private SwitchPreference mCalls;
@@ -94,18 +84,17 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mContext = mActivity = getActivity();
-        mSwitch = new Switch(mActivity.getActionBar().getThemedContext());
+        mContext = getActivity();
         final Resources res = mContext.getResources();
         final int p = res.getDimensionPixelSize(R.dimen.content_margin_left);
-        mSwitch.setPadding(0, 0, p, 0);
-        setHasOptionsMenu(true);
 
         addPreferencesFromResource(R.xml.zen_mode_settings);
         final PreferenceScreen root = getPreferenceScreen();
 
         mConfig = getZenModeConfig();
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
+
+        mSwitch = (SwitchPreference) root.findPreference(KEY_ZEN_MODE);
 
         final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
 
@@ -166,9 +155,9 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mWhen.setKey(KEY_WHEN);
         mWhen.setTitle(R.string.zen_mode_when);
         mWhen.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
-        mWhen.addItem(R.string.zen_mode_when_never);
         mWhen.addItem(R.string.zen_mode_when_every_night);
         mWhen.addItem(R.string.zen_mode_when_weeknights);
+        mWhen.addItem(R.string.zen_mode_when_never);
         mWhen.setCallback(new DropDownPreference.Callback() {
             @Override
             public boolean onItemSelected(int pos) {
@@ -230,6 +219,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStart.setDependency(mWhen.getKey());
         mEnd.setDependency(mWhen.getKey());
 
+        updateZenMode();
         updateControls();
     }
 
@@ -247,40 +237,25 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        mSearch = menu.findItem(R.id.search);
-        if (mSearch != null) mSearch.setVisible(false);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         updateZenMode();
         mSettingsObserver.register();
-        mActivity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        mActivity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END));
-        if (mSearch != null) mSearch.setVisible(false);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mSettingsObserver.unregister();
-        mActivity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-        if (mSearch != null) mSearch.setVisible(true);
     }
 
     private void updateZenMode() {
-        mSwitch.setOnCheckedChangeListener(null);
+        mSwitch.setOnPreferenceChangeListener(null);
         final boolean zenMode = Global.getInt(getContentResolver(),
                 Global.ZEN_MODE, Global.ZEN_MODE_OFF) != Global.ZEN_MODE_OFF;
         mSwitch.setChecked(zenMode);
-        mSwitch.setOnCheckedChangeListener(mSwitchListener);
+        mSwitch.setTitle(zenMode ? R.string.zen_mode_option_on : R.string.zen_mode_option_off);
+        mSwitch.setOnPreferenceChangeListener(mSwitchListener);
     }
 
     private void updateZenModeConfig() {
@@ -317,9 +292,10 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    private final OnCheckedChangeListener mSwitchListener = new OnCheckedChangeListener() {
+    private final OnPreferenceChangeListener mSwitchListener = new OnPreferenceChangeListener() {
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            final boolean isChecked = (Boolean) newValue;
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -327,6 +303,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                     Global.putInt(getContentResolver(), Global.ZEN_MODE, v);
                 }
             });
+            return true;
         }
     };
 
