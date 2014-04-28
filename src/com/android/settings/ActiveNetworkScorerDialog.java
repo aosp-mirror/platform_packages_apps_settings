@@ -94,7 +94,7 @@ public final class ActiveNetworkScorerDialog extends AlertActivity implements
             }
             newName = pm.getApplicationInfo(mNewPackageName, 0).loadLabel(pm);
         } catch (NameNotFoundException e) {
-            Log.e(TAG, "Unable to look up package info for scorers", e);
+            Log.e(TAG, "Unable to find package info for scorers", e);
             return false;
         }
 
