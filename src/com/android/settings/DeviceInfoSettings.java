@@ -28,6 +28,7 @@ import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -152,9 +153,14 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         removePreferenceIfBoolFalse(KEY_UPDATE_SETTING,
                 R.bool.config_additional_system_update_setting_enable);
 
-        // Remove regulatory information if not enabled.
-        removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,
-                R.bool.config_show_regulatory_info);
+        // Remove regulatory information if none present.
+        final Intent intent = new Intent(Settings.ACTION_SHOW_REGULATORY_INFO);
+        if (getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
+            Preference pref = findPreference(KEY_REGULATORY_INFO);
+            if (pref != null) {
+                getPreferenceScreen().removePreference(pref);
+            }
+        }
     }
 
     @Override
