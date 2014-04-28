@@ -73,6 +73,16 @@
 
         <!-- entries, entryValues, and defaultValue will be populated programmatically. -->
         <ListPreference
+                android:key="voice_interactor"
+                android:title="@string/voice_interactor_title"
+                android:dialogTitle="@string/voice_interactor_title" />
+
+        <!-- An intent for this preference will be populated programmatically. -->
+        <PreferenceScreen android:key="voice_interactor_settings"
+                android:title="@string/voice_interactor_settings_title" />
+
+        <!-- entries, entryValues, and defaultValue will be populated programmatically. -->
+        <ListPreference
                 android:key="recognizer"
                 android:title="@string/recognizer_title"
                 android:dialogTitle="@string/recognizer_title" />
