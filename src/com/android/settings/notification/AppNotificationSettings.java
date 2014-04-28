@@ -114,6 +114,12 @@ public class AppNotificationSettings extends ListFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mListViewState = null;  // you're dead to me
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         loadAppsList();
