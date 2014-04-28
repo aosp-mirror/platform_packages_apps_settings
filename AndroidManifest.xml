@@ -1728,7 +1728,7 @@
                   android:label="@string/regulatory_information"
                   android:taskAffinity=""
                   android:excludeFromRecents="true">
-            <intent-filter>
+            <intent-filter android:priority="50">
                 <action android:name="android.settings.SHOW_REGULATORY_INFO" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
