@@ -649,8 +649,7 @@ public class UserSettings extends RestrictedSettingsFragment
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
             } else if (user.isManagedProfile()) {
-                // TODO: Change this to use the new flag
-                if (true) {
+                if (user.isEnabled()) {
                     pref.setSummary(R.string.user_summary_managed_profile);
                 } else {
                     pref.setSummary(R.string.user_summary_managed_profile_not_enabled);
