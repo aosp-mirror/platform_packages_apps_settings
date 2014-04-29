@@ -17,7 +17,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:fragment="com.android.settings.accessibility.ToggleCaptioningPreferenceFragment"
+    android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
     android:key="captioning_preference_screen"
     android:title="@string/accessibility_captioning_title" >
 
@@ -58,6 +58,10 @@
             android:key="captioning_foreground_color"
             android:persistent="false"
             android:title="@string/captioning_foreground_color" />
+        <com.android.settings.accessibility.ColorPreference
+            android:key="captioning_foreground_opacity"
+            android:persistent="false"
+            android:title="@string/captioning_foreground_opacity" />
 
         <com.android.settings.accessibility.EdgeTypePreference
             android:key="captioning_edge_type"

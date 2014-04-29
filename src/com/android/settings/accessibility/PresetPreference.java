@@ -51,7 +51,7 @@ public class PresetPreference extends ListDialogPreference {
     protected void onBindListItem(View view, int index) {
         final SubtitleView previewText = (SubtitleView) view.findViewById(R.id.preview);
         final int value = getValueAt(index);
-        ToggleCaptioningPreferenceFragment.applyCaptionProperties(
+        CaptionPropertiesFragment.applyCaptionProperties(
                 mCaptioningManager, previewText, value);
 
         previewText.setTextSize(DEFAULT_FONT_SIZE);
