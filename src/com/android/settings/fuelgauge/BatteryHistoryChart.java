@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.text.format.Formatter;
 import com.android.settings.R;
 
 import android.content.Context;
@@ -413,24 +414,36 @@ public class BatteryHistoryChart extends View {
         //mDurationString = getContext().getString(R.string.battery_stats_on_battery,
         //        durationString);
         mDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
-        mDrainString = com.android.settings.Utils.getBatteryPercentage(mBatteryBroadcast);
-        mChargeLabelString = com.android.settings.Utils.getBatteryStatus(getResources(),
-                mBatteryBroadcast);
-        final long drainTime = mStats.computeBatteryTimeRemaining(elapsedRealtimeUs);
-        final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);
+        int batteryLevel = com.android.settings.Utils.getBatteryLevel(mBatteryBroadcast);
         final int status = mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
-        if (drainTime > 0) {
-            String timeString = Utils.formatShortElapsedTime(getContext(),drainTime / 1000);
-            mChargeDurationString = getContext().getResources().getString(
-                    R.string.power_discharge_remaining, timeString);
-        } else if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
-            String timeString = Utils.formatShortElapsedTime(getContext(), chargeTime / 1000);
-            mChargeDurationString = getContext().getResources().getString(
-                    R.string.power_charge_remaining, timeString);
+        if (status == BatteryManager.BATTERY_STATUS_DISCHARGING) {
+            final long drainTime = mStats.computeBatteryTimeRemaining(elapsedRealtimeUs);
+            if (drainTime > 0) {
+                String timeString = Formatter.formatShortElapsedTime(getContext(),
+                        drainTime / 1000);
+                mChargeLabelString = getContext().getResources().getString(
+                        R.string.power_discharging_duration, batteryLevel, timeString);
+            } else {
+                mChargeLabelString = getContext().getResources().getString(
+                        R.string.power_discharging, batteryLevel);
+            }
         } else {
-            mChargeDurationString = "";
+            final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);
+            final String statusLabel = com.android.settings.Utils.getBatteryStatus(getResources(),
+                    mBatteryBroadcast);
+            if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
+                String timeString = Formatter.formatShortElapsedTime(getContext(),
+                        chargeTime / 1000);
+                mChargeLabelString = getContext().getResources().getString(
+                        R.string.power_charging_duration, batteryLevel, statusLabel, timeString);
+            } else {
+                mChargeLabelString = getContext().getResources().getString(
+                        R.string.power_charging, batteryLevel, statusLabel);
+            }
         }
+        mDrainString = "";
+        mChargeDurationString = "";
     }
 
     @Override
