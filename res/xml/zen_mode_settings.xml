@@ -42,9 +42,21 @@
             android:switchTextOn=""
             android:title="@string/zen_mode_messages" />
     </PreferenceCategory>
+
     <PreferenceCategory
         android:key="automatic"
         android:layout="@layout/zen_mode_section"
         android:title="@string/zen_mode_automatic_category" />
+
+    <PreferenceCategory
+        android:key="security"
+        android:layout="@layout/zen_mode_section"
+        android:title="@string/zen_mode_security_category" >
+        <Preference
+                android:key="manage_condition_providers"
+                android:title="@string/manage_condition_providers"
+                android:persistent="false"
+                android:fragment="com.android.settings.notification.ConditionProviderSettings" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -1705,6 +1705,21 @@
                        android:resource="@id/security_settings" />
         </activity>
 
+        <activity android:name="Settings$ConditionProviderSettingsActivity"
+                  android:label="@string/manage_condition_providers"
+                  android:taskAffinity=""
+                  android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.ConditionProviderSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                       android:resource="@id/notification_settings" />
+        </activity>
+
         <activity android:name="Settings$NotificationSettingsActivity"
                 android:label="@string/notification_settings"
                 android:exported="true"

@@ -1059,6 +1059,32 @@
         to dismiss these notifications or touch action buttons within them.
     </string>
 
+    <!-- Title of preference to manage condition providers -->
+    <string name="manage_condition_providers">Condition providers</string>
+
+    <!-- Summary of preference to manage condition providers, when none are enabled -->
+    <string name="manage_condition_providers_summary_zero">No apps provide conditions</string>
+
+    <!-- Summary of preference to manage condition providers, when one or more are enabled -->
+    <plurals name="manage_condition_providers_summary_nonzero">
+        <item quantity="one">%d app provides conditions</item>
+        <item quantity="other">%d apps provide conditions</item>
+    </plurals>
+
+    <!-- String to show in the list of condition providers, when none is installed -->
+    <string name="no_condition_providers">No condition providers are installed.</string>
+
+    <!-- Title for a warning message about security implications of enabling a condition
+          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="condition_provider_security_warning_title">Enable
+         <xliff:g id="service" example="ConditionProvider">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a condition
+          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="condition_provider_security_warning_summary">
+        <xliff:g id="condition_provider_name">%1$s</xliff:g> will be able to
+        add exit conditions to Do not disturb mode.
+    </string>
+
     <!-- Bluetooth settings -->
     <!-- Bluetooth settings check box title on Main Settings screen -->
     <string name="bluetooth_quick_toggle_title">Bluetooth</string>
@@ -5156,7 +5182,7 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Master switch option title, on -->
     <string name="zen_mode_option_on">On</string>
 
-     <!-- [CHAR LIMIT=30] Zen mode settings: Exit condition selection dialog, default option -->
+    <!-- [CHAR LIMIT=30] Zen mode settings: Exit condition selection dialog, default option -->
     <string name="zen_mode_default_option">Until you turn this off</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: General category text -->
@@ -5165,7 +5191,10 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Automatic category text -->
     <string name="zen_mode_automatic_category">At night</string>
 
-     <!-- [CHAR LIMIT=20] Zen mode settings: Phone calls option -->
+    <!-- [CHAR LIMIT=40] Zen mode settings: Security category text -->
+    <string name="zen_mode_security_category">Security</string>
+
+    <!-- [CHAR LIMIT=20] Zen mode settings: Phone calls option -->
     <string name="zen_mode_phone_calls">Phone calls</string>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
