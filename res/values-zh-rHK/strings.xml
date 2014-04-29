@@ -1376,6 +1376,18 @@
     <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> 天 <xliff:g id="HOURS">%2$d</xliff:g> 小時 <xliff:g id="MINUTES">%3$d</xliff:g> 分鐘"</string>
     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> 小時 <xliff:g id="MINUTES">%2$d</xliff:g> 分鐘"</string>
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> 分鐘"</string>
+    <!-- no translation found for battery_history_days_only (8595159122172759790) -->
+    <skip />
+    <!-- no translation found for battery_history_days_and_hours (8407895804334206997) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_only (2851607436766324295) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_and_minutes (7800634924664632526) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_only (8701052569464348801) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_and_seconds (8317408340268489174) -->
+    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"用量統計資料"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"用量統計資料"</string>
     <string name="display_order_text" msgid="8592776965827565271">"排序依據："</string>
@@ -1488,6 +1500,10 @@
     <string name="power_usage_summary" msgid="7237084831082848168">"查看正在消耗電力的功能"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"沒有電池用量資料。"</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
+    <!-- no translation found for power_discharge_remaining (4925678997049911808) -->
+    <skip />
+    <!-- no translation found for power_charge_remaining (6132074970943913135) -->
+    <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重設後的電池使用狀況"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"電池電力剩餘時間：<xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -2005,10 +2021,13 @@
     <string name="user_list_title" msgid="7937158411137563543">"用戶和個人檔案"</string>
     <string name="user_add_user_menu" msgid="3154537325132012954">"新增用戶或個人檔案"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"限制存取的個人檔案"</string>
+    <string name="user_summary_managed_profile" msgid="5729429961989469287">"受管理的設定檔"</string>
+    <string name="user_summary_managed_profile_not_enabled" msgid="7236288236345533775">"受管理的設定檔 (目前並非使用中)"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"建立限制存取的個人檔案前，您必須先設定上鎖畫面來保護您的應用程式和個人資料。"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"設定上鎖畫面"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"未設定"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"未設定 - 限制存取的個人檔案"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"未設定 - 受管理的設定檔"</string>
     <string name="user_owner" msgid="3879126011135546571">"擁有者"</string>
     <string name="user_you" msgid="1639158809315025986">"您 (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"暱稱"</string>
@@ -2104,10 +2123,12 @@
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
     <string name="search_menu" msgid="7053532283559077164">"搜尋"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"搜尋設定"</string>
+    <string name="search_recents_queries_label" msgid="2128811638532309069">"最近的搜尋查詢"</string>
+    <string name="search_results_label" msgid="4163304782363526148">"搜尋結果"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"WiFi Wi-Fi 網絡連線"</string>
-    <string name="lock_screen_notifications" msgid="1785930071975221150">"在上鎖畫面上顯示"</string>
-    <string name="lock_screen_notifications_summary_off" msgid="2477642360263652408">"敏感內容除外"</string>
-    <string name="lock_screen_notifications_summary_on" msgid="7897541882520048340">"所有通知"</string>
+    <string name="lock_screen_notifications" msgid="654679491031356676">"當裝置上鎖時"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隱藏敏感通知內容"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"顯示所有通知內容"</string>
     <string name="title_zen_mode" msgid="4587203077066257425">"請勿干擾"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"請勿干擾"</string>
     <string name="notification_settings" msgid="8342078884790733726">"通知"</string>
@@ -2127,16 +2148,24 @@
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"顯示通知"</string>
     <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"高度優先"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"完成"</string>
-    <string name="zen_mode_general_category" msgid="8665291516524965729">"開啟時，限制干擾時段："</string>
-    <string name="zen_mode_automatic_category" msgid="7178632613181667490">"休眠時自動開啟"</string>
+    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
+    <skip />
+    <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
+    <skip />
+    <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
+    <skip />
+    <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
+    <skip />
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"通話"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"訊息"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"由"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"只限聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"只限已加星號的聯絡人"</string>
-    <string name="zen_mode_alarm_info" msgid="6618710483408892326">"「請勿打擾」一律會播放鬧鐘和計時器音效"</string>
-    <string name="zen_mode_when" msgid="208441657907932773">"時間"</string>
+    <!-- no translation found for zen_mode_alarm_info (6945011895169327837) -->
+    <skip />
+    <!-- no translation found for zen_mode_when (2767193283311106373) -->
+    <skip />
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每天晚上"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"星期一至星期五晚"</string>

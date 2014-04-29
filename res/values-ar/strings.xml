@@ -1376,6 +1376,18 @@
     <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> يوم <xliff:g id="HOURS">%2$d</xliff:g> ساعة <xliff:g id="MINUTES">%3$d</xliff:g> دقيقة"</string>
     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g>ساعة <xliff:g id="MINUTES">%2$d</xliff:g>دقيقة"</string>
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> دقيقة"</string>
+    <!-- no translation found for battery_history_days_only (8595159122172759790) -->
+    <skip />
+    <!-- no translation found for battery_history_days_and_hours (8407895804334206997) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_only (2851607436766324295) -->
+    <skip />
+    <!-- no translation found for battery_history_hours_and_minutes (7800634924664632526) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_only (8701052569464348801) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes_and_seconds (8317408340268489174) -->
+    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"إحصاءات الاستخدام"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"إحصاءات الاستخدام"</string>
     <string name="display_order_text" msgid="8592776965827565271">"تصنيف بحسب:"</string>
@@ -1488,6 +1500,10 @@
     <string name="power_usage_summary" msgid="7237084831082848168">"ما الذي كان يستخدم البطارية"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"بيانات استخدام البطارية غير متاحة."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
+    <!-- no translation found for power_discharge_remaining (4925678997049911808) -->
+    <skip />
+    <!-- no translation found for power_charge_remaining (6132074970943913135) -->
+    <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"استخدام البطارية عند فصل الطاقة"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"استخدام البطارية منذ إعادة التعيين"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> على البطارية"</string>
@@ -2001,10 +2017,13 @@
     <string name="user_list_title" msgid="7937158411137563543">"المستخدمون والملفات الشخصية"</string>
     <string name="user_add_user_menu" msgid="3154537325132012954">"إضافة مستخدم أو ملف شخصي"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"ملف شخصي محظور"</string>
+    <string name="user_summary_managed_profile" msgid="5729429961989469287">"ملف شخصي مُدار"</string>
+    <string name="user_summary_managed_profile_not_enabled" msgid="7236288236345533775">"ملف شخصي مُدار (غير نشط حاليًا)"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"قبل أن تتمكن من إنشاء ملف شخصي مقيد، يلزمك إعداد تأمين للشاشة لحماية تطبيقاتك وبياناتك الشخصية."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"تعيين التأمين"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"لم يتم الإعداد."</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"لا يُمكن الإعداد - الملف الشخصي محظور"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"ملف شخصي مُدار - بدون إعداد"</string>
     <string name="user_owner" msgid="3879126011135546571">"المالك"</string>
     <string name="user_you" msgid="1639158809315025986">"أنت (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"اللقب"</string>
@@ -2100,10 +2119,12 @@
     <string name="search_results_title" msgid="1796252422574886932">"الإعدادات"</string>
     <string name="search_menu" msgid="7053532283559077164">"بحث"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"إعدادات البحث"</string>
+    <string name="search_recents_queries_label" msgid="2128811638532309069">"عمليات البحث التي تمت مؤخرًا"</string>
+    <string name="search_results_label" msgid="4163304782363526148">"النتائج"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"‏اتصال شبكة واي فاي wi-fi"</string>
-    <string name="lock_screen_notifications" msgid="1785930071975221150">"تظهر على شاشة التأمين"</string>
-    <string name="lock_screen_notifications_summary_off" msgid="2477642360263652408">"ما لم يكن المحتوى مهمًا"</string>
-    <string name="lock_screen_notifications_summary_on" msgid="7897541882520048340">"جميع الإشعارات"</string>
+    <string name="lock_screen_notifications" msgid="654679491031356676">"عند قفل الجهاز"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"إخفاء المحتوى المهم للإشعارات"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"عرض كل محتوى الإشعارات"</string>
     <string name="title_zen_mode" msgid="4587203077066257425">"الرجاء عدم الإزعاج"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"الرجاء عدم الإزعاج"</string>
     <string name="notification_settings" msgid="8342078884790733726">"الإشعارات"</string>
@@ -2123,16 +2144,24 @@
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"إظهار الإشعارات"</string>
     <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"أولوية عالية"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"تم"</string>
-    <string name="zen_mode_general_category" msgid="8665291516524965729">"عند التشغيل، يجب ألا تزيد الانقطاعات عن"</string>
-    <string name="zen_mode_automatic_category" msgid="7178632613181667490">"تشغيل وضع السكون تلقائيًا"</string>
+    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
+    <skip />
+    <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
+    <skip />
+    <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
+    <skip />
+    <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
+    <skip />
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"مكالمات هاتفية"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"الرسائل"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"من"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"أي شخص"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"جهات الاتصال فقط"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"جهات الاتصال المميزة بنجمة فقط"</string>
-    <string name="zen_mode_alarm_info" msgid="6618710483408892326">"ستستمع دائمًا إلى تنبيهات وموقتات في وضع الرجاء عدم الإزعاج"</string>
-    <string name="zen_mode_when" msgid="208441657907932773">"متى"</string>
+    <!-- no translation found for zen_mode_alarm_info (6945011895169327837) -->
+    <skip />
+    <!-- no translation found for zen_mode_when (2767193283311106373) -->
+    <skip />
     <string name="zen_mode_when_never" msgid="8809494351918405602">"مطلقًا"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"كل ليلة"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"ليالي الأسبوع"</string>
