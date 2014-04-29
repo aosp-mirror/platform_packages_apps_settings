@@ -3279,27 +3279,6 @@
     <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
     <string name="battery_history_minutes_no_seconds"><xliff:g id="minutes">%1$d</xliff:g>m</string>
 
-    <!-- [CHAR LIMIT=20] Used to show an amount of time in the form "d days" in BatteryHistory -->
-    <string name="battery_history_days_only"><xliff:g id="days">%1$d</xliff:g>d</string>
-
-    <!-- [CHAR LIMIT=20] Used to show an amount of time in the form "d days, h hours" in BatteryHistory -->
-    <string name="battery_history_days_and_hours"><xliff:g id="days">%1$d</xliff:g>d
-        <xliff:g id="hours">%2$d</xliff:g>h</string>
-
-    <!-- [CHAR LIMIT=20] Used to show an amount of time in the form "h hours" in BatteryHistory -->
-    <string name="battery_history_hours_only"><xliff:g id="hours">%1$d</xliff:g>h</string>
-
-    <!-- [CHAR LIMIT=20] Used to show an amount of time in the form "h hours, m minutes" in BatteryHistory -->
-    <string name="battery_history_hours_and_minutes"><xliff:g id="hours">%1$d</xliff:g>h
-        <xliff:g id="minutes">%2$d</xliff:g>m</string>
-
-    <!-- [CHAR LIMIT=20] Used to show an amount of time in the form "m minutes" in BatteryHistory -->
-    <string name="battery_history_minutes_only"><xliff:g id="minutes">%1$d</xliff:g>m</string>
-
-    <!-- [CHAR LIMIT=20] Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_minutes_and_seconds"><xliff:g id="minutes">%1$d</xliff:g>m
-        <xliff:g id="seconds">%2$d</xliff:g>s</string>
-
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
 
@@ -3590,6 +3569,18 @@
     <string name="power_discharge_remaining"><xliff:g id="remain">%1$s</xliff:g> remaining</string>
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when discharging -->
+    <string name="power_discharging"><xliff:g id="level">%1$d</xliff:g>%%</string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when discharging with duration -->
+    <string name="power_discharging_duration"><xliff:g id="level">%1$d</xliff:g>%%
+            - approx. <xliff:g id="time">%2$s</xliff:g> left</string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when charging -->
+    <string name="power_charging"><xliff:g id="level">%1$d</xliff:g>%% -
+            <xliff:g id="state">%2$s</xliff:g></string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
+    <string name="power_charging_duration"><xliff:g id="level">%1$d</xliff:g>%% -
+            <xliff:g id="state">%2$s</xliff:g>
+            (<xliff:g id="time">%3$s</xliff:g> until full)</string>
     <!-- Battery usage since unplugged -->
     <string name="battery_since_unplugged">Battery use since unplugged</string>
     <!-- Battery usage since user reset the stats -->
