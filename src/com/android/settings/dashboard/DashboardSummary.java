@@ -127,8 +127,8 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
 
         AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
     }
