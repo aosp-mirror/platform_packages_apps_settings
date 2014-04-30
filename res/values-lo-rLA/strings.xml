@@ -444,6 +444,18 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"ບໍ່ໄດ້ຕິດຕັ້ງໂຕຟັງການແຈ້ງເຕືອນ."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"ເປີດໃຊ້ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ຈະສາມາດອ່ານທຸກການແຈ້ງເຕືອນທີ່ມາຈາກລະບົບ ຫຼືແອັບຯໃດໆກໍຕາມທີ່ມີຕິດຕັ້ງຢູ່ ເຊິ່ງອາດຮວມເຖິງຂໍ້ມູນສ່ວນໂຕ ເຊັ່ນ: ລາຍຊື່ຜູ່ຕິດຕໍ່ ແລະຂໍ້ຄວາມທີ່ສົ່ງຫາທ່ານ. ມັນຍັງສາມາດປິດການແຈ້ງເຕືອນເຫຼົ່ານີ້ ຫຼືແຕະປຸ່ມເຮັດວຽກທີ່ຢູ່ພາຍໃນນັ້ນໄດ້ນຳ."</string>
+    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
+    <skip />
+    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
+    <skip />
+    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
+    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
+    <!-- no translation found for no_condition_providers (6183782892066424125) -->
+    <skip />
+    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
+    <skip />
+    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
+    <skip />
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"ເປີດໃຊ້ Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1376,18 +1388,6 @@
     <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g>ມ <xliff:g id="HOURS">%2$d</xliff:g>ຊ <xliff:g id="MINUTES">%3$d</xliff:g>ນ"</string>
     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g>ຊ <xliff:g id="MINUTES">%2$d</xliff:g>ນ"</string>
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g>ນ"</string>
-    <!-- no translation found for battery_history_days_only (8595159122172759790) -->
-    <skip />
-    <!-- no translation found for battery_history_days_and_hours (8407895804334206997) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_only (2851607436766324295) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_and_minutes (7800634924664632526) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_only (8701052569464348801) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_and_seconds (8317408340268489174) -->
-    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"ສະຖິຕິການນຳໃຊ້"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"ສະຖິຕິການນຳໃຊ້"</string>
     <string name="display_order_text" msgid="8592776965827565271">"ຮຽງຕາມ:"</string>
@@ -1504,6 +1504,14 @@
     <skip />
     <!-- no translation found for power_charge_remaining (6132074970943913135) -->
     <skip />
+    <!-- no translation found for power_discharging (6023874912674684056) -->
+    <skip />
+    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
+    <skip />
+    <!-- no translation found for power_charging (712751285832976915) -->
+    <skip />
+    <!-- no translation found for power_charging_duration (1076204146651267327) -->
+    <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"ການນຳໃຊ້ແບັດເຕີຣີຕັ້ງແຕ່ຖອດສາຍສາກ"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"ການໃຊ້ແບັດເຕີຣີນັບຈາກການຣີເຊັດ"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"ໃຊ້ແບັດເຕີຣີມາ <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1614,6 +1622,10 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"ຊອກຫາດ້ວຍສຽງ"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"ແປ້ນພິມ Android"</string>
     <string name="voice_category" msgid="1430370497125803904">"ການ​​ເວົ້າ"</string>
+    <string name="voice_interactor_title" msgid="4591706322348912721">"ການປ້ອນ​ຂໍ້ມູນ​ດ້ວຍສຽງ"</string>
+    <string name="voice_interactor_settings_title" msgid="448041804591022360">"ການປ້ອນ​ຂໍ້ມູນ​ດ້ວຍສຽງ"</string>
+    <string name="voice_interactor_settings_summary" msgid="8574288425783919649">"ການ​ຕັ້ງຄ່າ​ສຳລັບ \'<xliff:g id="INTERACTOR_NAME">%s</xliff:g>\'"</string>
+    <string name="no_voice_interactor" msgid="2775603669036981812">"ບໍ່ມີ"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"ໂປຣແກຣມຈື່ສຽງ"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"ການຊອກຫາດ້ວຍສຽງ"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"ການຕັ້ງຄ່າສຳລັບ \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
@@ -2144,13 +2156,12 @@
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"ສະແດງການແຈ້ງເຕືອນ"</string>
     <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"ຄວາມ​ສຳ​ຄັນ​ສູງ"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"ແລ້ວໆ"</string>
-    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
-    <skip />
-    <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
-    <skip />
-    <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
+    <string name="zen_mode_option_off" msgid="7812737562592973403">"ປິດ"</string>
+    <string name="zen_mode_option_on" msgid="6914392434474823822">"ເປີດ"</string>
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"ຈົນກວ່າ​ທ່ານ​ຈະ​ປິດ"</string>
+    <string name="zen_mode_general_category" msgid="4816396530154508930">"ບລັອກ​ທຸກ​ການ​ລົບ​ກວນ​ຍົກ​ເວັ້ນ"</string>
+    <string name="zen_mode_automatic_category" msgid="2168130971038236488">"ໃນ​ຕອນ​ກາງ​ຄືນ"</string>
+    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
     <skip />
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"ການໂທ"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"ຂໍ້​ຄວາມ"</string>
@@ -2158,10 +2169,8 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"ທຸກຄົນ"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"ສະ​ເພາະ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"ສະເພາະ​ລາຍຊື່​ຜູ່ຕິດຕໍ່​ຕິດດາວ"</string>
-    <!-- no translation found for zen_mode_alarm_info (6945011895169327837) -->
-    <skip />
-    <!-- no translation found for zen_mode_when (2767193283311106373) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="6945011895169327837">"ໂມງປຸກ ແລະ​ໂມງນັບ​ຖອຍ​ຫຼັງ​ຈະ​ບໍ່​ຖືກ​ບລັອກ"</string>
+    <string name="zen_mode_when" msgid="2767193283311106373">"ເປີດ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"ບໍ່ໃຊ້"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"ທຸກ​ທ່ຽງ​ຄືນ"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"ຄືນ​ວັນ​ຈັນຫາ​ສຸກ"</string>

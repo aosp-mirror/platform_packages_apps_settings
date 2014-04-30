@@ -444,6 +444,18 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Tiada pendengar pemberitahuan dipasang."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Dayakan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> akan dapat membaca semua pemberitahuan yang disiarkan oleh sistem atau mana-mana apl yang dipasang, yang mungkin termasuk maklumat peribadi seperti nama kenalan dan teks dalam mesej yang dihantar kepada anda. Pendengar juga akan dapat mengetepikan pemberitahuan ini atau menyentuh butang tindakan dalam pemberitahuan itu."</string>
+    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
+    <skip />
+    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
+    <skip />
+    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
+    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
+    <!-- no translation found for no_condition_providers (6183782892066424125) -->
+    <skip />
+    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
+    <skip />
+    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
+    <skip />
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Hidupkan Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1376,18 +1388,6 @@
     <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g>h <xliff:g id="HOURS">%2$d</xliff:g>j <xliff:g id="MINUTES">%3$d</xliff:g>m"</string>
     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g>j <xliff:g id="MINUTES">%2$d</xliff:g>m"</string>
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> m"</string>
-    <!-- no translation found for battery_history_days_only (8595159122172759790) -->
-    <skip />
-    <!-- no translation found for battery_history_days_and_hours (8407895804334206997) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_only (2851607436766324295) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_and_minutes (7800634924664632526) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_only (8701052569464348801) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_and_seconds (8317408340268489174) -->
-    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistik penggunaan"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Statistik penggunaan"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Isih mengikut:"</string>
@@ -1504,6 +1504,14 @@
     <skip />
     <!-- no translation found for power_charge_remaining (6132074970943913135) -->
     <skip />
+    <!-- no translation found for power_discharging (6023874912674684056) -->
+    <skip />
+    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
+    <skip />
+    <!-- no translation found for power_charging (712751285832976915) -->
+    <skip />
+    <!-- no translation found for power_charging_duration (1076204146651267327) -->
+    <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"Bateri digunakan sejak palam dicabut"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Kegunaan bateri sejak ditetapkan semula"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> semasa menggunakan bateri"</string>
@@ -1614,6 +1622,14 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Carian suara"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Papan kekunci Android"</string>
     <string name="voice_category" msgid="1430370497125803904">"Pertuturan"</string>
+    <!-- no translation found for voice_interactor_title (4591706322348912721) -->
+    <skip />
+    <!-- no translation found for voice_interactor_settings_title (448041804591022360) -->
+    <skip />
+    <!-- no translation found for voice_interactor_settings_summary (8574288425783919649) -->
+    <skip />
+    <!-- no translation found for no_voice_interactor (2775603669036981812) -->
+    <skip />
     <string name="recognizer_title" msgid="3231385184559054457">"Pengecam suara"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"Carian Suara"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Tetapan untuk \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
@@ -2017,16 +2033,13 @@
     <string name="user_list_title" msgid="7937158411137563543">"Pengguna &amp; profil"</string>
     <string name="user_add_user_menu" msgid="3154537325132012954">"Tambah pengguna atau profil"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Profil terhad"</string>
-    <!-- no translation found for user_summary_managed_profile (5729429961989469287) -->
-    <skip />
-    <!-- no translation found for user_summary_managed_profile_not_enabled (7236288236345533775) -->
-    <skip />
+    <string name="user_summary_managed_profile" msgid="5729429961989469287">"Profil yang diuruskan"</string>
+    <string name="user_summary_managed_profile_not_enabled" msgid="7236288236345533775">"Profil yang diuruskan (kini tidak aktif)"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Sebelum anda boleh membuat profil yang terhad, anda perlu menyediakan kunci skrin untuk melindungi apl dan data peribadi anda."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Tetapkan kunci"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Tidak disediakan"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Tidak disediakan - Profil terhad"</string>
-    <!-- no translation found for user_summary_managed_profile_not_set_up (8571841525128790750) -->
-    <skip />
+    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"Tidak disediakan - Profil yang diuruskan"</string>
     <string name="user_owner" msgid="3879126011135546571">"Pemilik"</string>
     <string name="user_you" msgid="1639158809315025986">"Anda (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Nama samaran"</string>
@@ -2151,9 +2164,13 @@
     <skip />
     <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
     <skip />
+    <!-- no translation found for zen_mode_default_option (6940069025071935243) -->
+    <skip />
     <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
     <skip />
     <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
+    <skip />
+    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
     <skip />
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Panggilan telefon"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Mesej"</string>
