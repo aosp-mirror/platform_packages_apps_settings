@@ -24,6 +24,7 @@ import android.app.INotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Typeface;
@@ -37,6 +38,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
@@ -69,11 +71,15 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_AUTOMATIC = "automatic";
     private static final String KEY_WHEN = "when";
 
+    private static final String KEY_SECURITY = "security";
+    private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
+
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     private SwitchPreference mSwitch;
     private Context mContext;
+    private PackageManager mPM;
     private ZenModeConfig mConfig;
     private boolean mDisableListeners;
     private SwitchPreference mCalls;
@@ -82,12 +88,15 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private DropDownPreference mWhen;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
+    private PreferenceCategory mSecurityCategory;
+    private Preference mConditionProviders;
     private AlertDialog mDialog;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mContext = getActivity();
+        mPM = mContext.getPackageManager();
         final Resources res = mContext.getResources();
         final int p = res.getDimensionPixelSize(R.dimen.content_margin_left);
 
@@ -222,6 +231,10 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStart.setDependency(mWhen.getKey());
         mEnd.setDependency(mWhen.getKey());
 
+        mSecurityCategory = (PreferenceCategory) findPreference(KEY_SECURITY);
+        mConditionProviders = findPreference(KEY_CONDITION_PROVIDERS);
+        refreshConditionProviders();
+
         updateZenMode();
         updateControls();
     }
@@ -239,9 +252,28 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mDisableListeners = false;
     }
 
+    private void refreshConditionProviders() {
+        if (mConditionProviders != null) {
+            final int total = ConditionProviderSettings.getProviderCount(mPM);
+            if (total == 0) {
+                getPreferenceScreen().removePreference(mSecurityCategory);
+            } else {
+                final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
+                if (n == 0) {
+                    mConditionProviders.setSummary(getResources().getString(
+                            R.string.manage_condition_providers_summary_zero));
+                } else {
+                    mConditionProviders.setSummary(String.format(getResources().getQuantityString(
+                            R.plurals.manage_condition_providers_summary_nonzero,
+                            n, n)));
+                }
+            }
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();
+        refreshConditionProviders();
         updateZenMode();
         mSettingsObserver.register();
     }
@@ -344,7 +376,10 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 public void run() {
                     final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
                     putZenModeSetting(v);
-                    mHandler.post(isChecked ? mShowDialog : mHideDialog);
+                    final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
+                    if (n > 0) {
+                        mHandler.post(isChecked ? mShowDialog : mHideDialog);
+                    }
                 }
             });
             return true;
