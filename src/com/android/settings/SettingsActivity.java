@@ -1077,7 +1077,8 @@ public class SettingsActivity extends Activity
                 }
 
                 if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
-                        && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
+                        && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)
+                        && n < category.getTilesCount()) {
                     category.removeTile(n);
                 }
 
