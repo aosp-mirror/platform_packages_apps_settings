@@ -24,6 +24,7 @@ import android.app.INotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -35,11 +36,12 @@ import android.os.Handler;
 import android.os.ServiceManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
-import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.service.notification.Condition;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -71,7 +73,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_AUTOMATIC = "automatic";
     private static final String KEY_WHEN = "when";
 
-    private static final String KEY_SECURITY = "security";
+    private static final String KEY_AUTOMATION = "automation";
+    private static final String KEY_ENTRY = "entry";
     private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
 
     private final Handler mHandler = new Handler();
@@ -88,7 +91,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private DropDownPreference mWhen;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
-    private PreferenceCategory mSecurityCategory;
+    private PreferenceCategory mAutomationCategory;
+    private Preference mEntry;
     private Preference mConditionProviders;
     private AlertDialog mDialog;
 
@@ -231,9 +235,27 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStart.setDependency(mWhen.getKey());
         mEnd.setDependency(mWhen.getKey());
 
-        mSecurityCategory = (PreferenceCategory) findPreference(KEY_SECURITY);
+        mAutomationCategory = (PreferenceCategory) findPreference(KEY_AUTOMATION);
+        mEntry = findPreference(KEY_ENTRY);
+        mEntry.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                new AlertDialog.Builder(mContext)
+                    .setTitle(R.string.zen_mode_entry_conditions_title)
+                    .setView(new ZenModeAutomaticConditionSelection(mContext))
+                    .setOnDismissListener(new OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            refreshAutomationSection();
+                        }
+                    })
+                    .setPositiveButton(R.string.dlg_ok, null)
+                    .show();
+                return true;
+            }
+        });
         mConditionProviders = findPreference(KEY_CONDITION_PROVIDERS);
-        refreshConditionProviders();
+        refreshAutomationSection();
 
         updateZenMode();
         updateControls();
@@ -252,11 +274,11 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mDisableListeners = false;
     }
 
-    private void refreshConditionProviders() {
+    private void refreshAutomationSection() {
         if (mConditionProviders != null) {
             final int total = ConditionProviderSettings.getProviderCount(mPM);
             if (total == 0) {
-                getPreferenceScreen().removePreference(mSecurityCategory);
+                getPreferenceScreen().removePreference(mAutomationCategory);
             } else {
                 final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
                 if (n == 0) {
@@ -267,13 +289,41 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                             R.plurals.manage_condition_providers_summary_nonzero,
                             n, n)));
                 }
+                final String entrySummary = getEntryConditionSummary();
+                if (n == 0 || entrySummary == null) {
+                    mEntry.setSummary(R.string.zen_mode_entry_conditions_summary_none);
+                } else {
+                    mEntry.setSummary(entrySummary);
+                }
             }
         }
     }
+
+    private String getEntryConditionSummary() {
+        final INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        try {
+            final Condition[] automatic = nm.getAutomaticZenModeConditions();
+            if (automatic == null || automatic.length == 0) {
+                return null;
+            }
+            final String divider = getString(R.string.zen_mode_entry_conditions_summary_divider);
+            final StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < automatic.length; i++) {
+                if (i > 0) sb.append(divider);
+                sb.append(automatic[i].caption);
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling getAutomaticZenModeConditions", e);
+            return null;
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        refreshConditionProviders();
+        refreshAutomationSection();
         updateZenMode();
         mSettingsObserver.register();
     }

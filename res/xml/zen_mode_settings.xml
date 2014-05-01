@@ -49,9 +49,13 @@
         android:title="@string/zen_mode_automatic_category" />
 
     <PreferenceCategory
-        android:key="security"
+        android:key="automation"
         android:layout="@layout/zen_mode_section"
-        android:title="@string/zen_mode_security_category" >
+        android:title="@string/zen_mode_automation_category" >
+        <Preference
+            android:key="entry"
+            android:title="@string/zen_mode_entry_conditions_title"
+            android:persistent="false" />
         <Preference
                 android:key="manage_condition_providers"
                 android:title="@string/manage_condition_providers"
