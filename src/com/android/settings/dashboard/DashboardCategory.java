@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -127,4 +128,18 @@ public class DashboardCategory implements Parcelable {
             tiles.add(tile);
         }
     }
+
+    DashboardCategory(Parcel in) {
+        readFromParcel(in);
+    }
+
+    public static final Creator<DashboardCategory> CREATOR = new Creator<DashboardCategory>() {
+        public DashboardCategory createFromParcel(Parcel source) {
+            return new DashboardCategory(source);
+        }
+
+        public DashboardCategory[] newArray(int size) {
+            return new DashboardCategory[size];
+        }
+    };
 }
