@@ -19,8 +19,14 @@ package com.android.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.RemoteException;
 import android.os.SELinux;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -29,19 +35,20 @@ import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeviceInfoSettings extends RestrictedSettingsFragment {
 
     private static final String LOG_TAG = "DeviceInfoSettings";
-
     private static final String FILENAME_PROC_VERSION = "/proc/version";
     private static final String FILENAME_MSV = "/sys/board_properties/soc/msv";
 
@@ -64,6 +71,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
+    private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -118,6 +126,11 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         // Remove Baseband version if wifi-only device
         if (Utils.isWifiOnly(getActivity())) {
             getPreferenceScreen().removePreference(findPreference(KEY_BASEBAND_VERSION));
+        }
+
+        // Dont show feedback option if there is no reporter.
+        if (TextUtils.isEmpty(getFeedbackReporterPackage(getActivity()))) {
+            getPreferenceScreen().removePreference(findPreference(KEY_DEVICE_FEEDBACK));
         }
 
         /*
@@ -226,6 +239,8 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                         Toast.LENGTH_LONG);
                 mDevHitToast.show();
             }
+        } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
+            sendFeedback();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -269,6 +284,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         } catch (RuntimeException e) {
             // No recovery
         }
+    }
+
+    private void sendFeedback() {
+        String reporterPackage = getFeedbackReporterPackage(getActivity());
+        if (TextUtils.isEmpty(reporterPackage)) {
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_BUG_REPORT);
+        intent.setPackage(reporterPackage);
+        startActivityForResult(intent, 0);
     }
 
     /**
@@ -347,4 +372,40 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         }
         return "";
     }
+
+    private static String getFeedbackReporterPackage(Context context) {
+        String feedbackReporter =
+                context.getResources().getString(R.string.oem_preferred_feedback_reporter);
+        if (TextUtils.isEmpty(feedbackReporter)) {
+            // Reporter not configured. Return.
+            return feedbackReporter;
+        }
+        // Additional checks to ensure the reporter is on system image, and reporter is
+        // configured to listen to the intent. Otherwise, dont show the "send feedback" option.
+        Intent intent = new Intent(Intent.ACTION_BUG_REPORT);
+
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> resolvedPackages =
+                pm.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER);
+        for (ResolveInfo info : resolvedPackages) {
+            if (info.activityInfo != null) {
+                if (!TextUtils.isEmpty(info.activityInfo.packageName)) {
+                    try {
+                        ApplicationInfo ai = pm.getApplicationInfo(info.activityInfo.packageName, 0);
+                        if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                            // Package is on the system image
+                            if (TextUtils.equals(
+                                        info.activityInfo.packageName, feedbackReporter)) {
+                                return feedbackReporter;
+                            }
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                         // No need to do anything here.
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
+

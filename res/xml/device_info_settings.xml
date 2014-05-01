@@ -95,6 +95,11 @@
             <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
         </PreferenceScreen>
 
+        <!-- Feedback on the device -->
+        <PreferenceScreen android:key="device_feedback"
+                android:title="@string/device_feedback">
+        </PreferenceScreen>
+
         <!-- Device hardware model -->
         <Preference android:key="device_model" 
                 style="?android:preferenceInformationStyle"
