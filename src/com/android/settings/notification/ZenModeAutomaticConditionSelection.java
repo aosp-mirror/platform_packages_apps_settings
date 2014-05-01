@@ -26,53 +26,85 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.service.notification.Condition;
 import android.service.notification.IConditionListener;
+import android.util.ArraySet;
 import android.util.Log;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.LinearLayout;
 
 import com.android.settings.R;
 
-public class ZenModeConditionSelection extends RadioGroup {
-    private static final String TAG = "ZenModeConditionSelection";
+public class ZenModeAutomaticConditionSelection extends LinearLayout {
+    private static final String TAG = "ZenModeAutomaticConditionSelection";
     private static final boolean DEBUG = true;
 
     private final INotificationManager mNoMan;
     private final H mHandler = new H();
     private final Context mContext;
+    private final ArraySet<Uri> mSelectedConditions = new ArraySet<Uri>();
 
-    public ZenModeConditionSelection(Context context) {
+    public ZenModeAutomaticConditionSelection(Context context) {
         super(context);
         mContext = context;
+        setOrientation(VERTICAL);
         setLayoutTransition(new LayoutTransition());
         final int p = mContext.getResources().getDimensionPixelSize(R.dimen.content_margin_left);
         setPadding(p, p, p, 0);
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-        final RadioButton b = newRadioButton(null);
-        b.setText(R.string.zen_mode_default_option);
-        b.setChecked(true);
+        refreshSelectedConditions();
     }
 
-    private RadioButton newRadioButton(Object tag) {
-        final RadioButton button = new RadioButton(mContext);
+    private void refreshSelectedConditions() {
+        try {
+            final Condition[] automatic = mNoMan.getAutomaticZenModeConditions();
+            mSelectedConditions.clear();
+            if (automatic != null) {
+                for (Condition c : automatic) {
+                    mSelectedConditions.add(c.id);
+                }
+            }
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error calling getAutomaticZenModeConditions", e);
+        }
+    }
+
+    private CheckBox newCheckBox(Object tag) {
+        final CheckBox button = new CheckBox(mContext);
         button.setTag(tag);
         button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    handleSubscribe((Uri)button.getTag());
-                }
+                 setSelectedCondition((Uri)button.getTag(), isChecked);
             }
         });
         addView(button);
         return button;
     }
 
+    private void setSelectedCondition(Uri conditionId, boolean selected) {
+        if (DEBUG) Log.d(TAG, "setSelectedCondition conditionId=" + conditionId
+                + " selected=" + selected);
+        if (selected) {
+            mSelectedConditions.add(conditionId);
+        } else {
+            mSelectedConditions.remove(conditionId);
+        }
+        final Uri[] automatic = new Uri[mSelectedConditions.size()];
+        for (int i = 0; i < automatic.length; i++) {
+            automatic[i] = mSelectedConditions.valueAt(i);
+        }
+        try {
+            mNoMan.setAutomaticZenModeConditions(automatic);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error calling setAutomaticZenModeConditions", e);
+        }
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        requestZenModeConditions(Condition.FLAG_RELEVANT_NOW);
+        requestZenModeConditions(Condition.FLAG_RELEVANT_ALWAYS);
     }
 
     @Override
@@ -86,31 +118,23 @@ public class ZenModeConditionSelection extends RadioGroup {
         try {
             mNoMan.requestZenModeConditions(mListener, relevance);
         } catch (RemoteException e) {
-            // noop
+            Log.w(TAG, "Error calling requestZenModeConditions", e);
         }
     }
 
     protected void handleConditions(Condition[] conditions) {
         for (final Condition c : conditions) {
-            RadioButton v = (RadioButton) findViewWithTag(c.id);
-            if (c.state == Condition.STATE_TRUE || c.state == Condition.STATE_UNKNOWN) {
+            CheckBox v = (CheckBox) findViewWithTag(c.id);
+            if (c.state != Condition.STATE_ERROR) {
                 if (v == null) {
-                    v = newRadioButton(c.id);
+                    v = newCheckBox(c.id);
                 }
             }
             if (v != null) {
                 v.setText(c.caption);
-                v.setEnabled(c.state == Condition.STATE_TRUE);
+                v.setEnabled(c.state != Condition.STATE_ERROR);
+                v.setChecked(mSelectedConditions.contains(c.id));
             }
-        }
-    }
-
-    protected void handleSubscribe(Uri id) {
-        if (DEBUG) Log.d(TAG, "handleSubscribe " + id);
-        try {
-            mNoMan.setZenModeCondition(id);
-        } catch (RemoteException e) {
-            // noop
         }
     }
 
