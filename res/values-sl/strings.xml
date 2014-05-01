@@ -444,6 +444,18 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Ni nameščenih poslušalcev obvestil."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Želite omogočiti <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Poslušalec <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bo lahko bral vsa obvestila, ki jih objavi sistem ali katera koli nameščena aplikacija, kar lahko vključuje osebne podatke, kot so imena stikov in besedilo sporočil, poslanih vam. Lahko bo tudi opustil ta obvestila ali se dotikal interaktivnih gumbov v njih."</string>
+    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
+    <skip />
+    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
+    <skip />
+    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
+    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
+    <!-- no translation found for no_condition_providers (6183782892066424125) -->
+    <skip />
+    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
+    <skip />
+    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
+    <skip />
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Vklopi Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1376,18 +1388,6 @@
     <string name="battery_history_days_no_seconds" msgid="703063770554334710">"<xliff:g id="DAYS">%1$d</xliff:g> d <xliff:g id="HOURS">%2$d</xliff:g> h <xliff:g id="MINUTES">%3$d</xliff:g> min"</string>
     <string name="battery_history_hours_no_seconds" msgid="663342892615646712">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
     <string name="battery_history_minutes_no_seconds" msgid="7780294302606853082">"<xliff:g id="MINUTES">%1$d</xliff:g> min"</string>
-    <!-- no translation found for battery_history_days_only (8595159122172759790) -->
-    <skip />
-    <!-- no translation found for battery_history_days_and_hours (8407895804334206997) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_only (2851607436766324295) -->
-    <skip />
-    <!-- no translation found for battery_history_hours_and_minutes (7800634924664632526) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_only (8701052569464348801) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes_and_seconds (8317408340268489174) -->
-    <skip />
     <string name="usage_stats_label" msgid="5890846333487083609">"Statistika uporabe"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Statistika uporabe"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Razvrsti po:"</string>
@@ -1500,9 +1500,15 @@
     <string name="power_usage_summary" msgid="7237084831082848168">"Kaj porablja energijo baterije"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Podatki o porabi baterije niso na voljo."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
-    <!-- no translation found for power_discharge_remaining (4925678997049911808) -->
+    <string name="power_discharge_remaining" msgid="4925678997049911808">"Preostali čas: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
+    <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do napolnjenosti"</string>
+    <!-- no translation found for power_discharging (6023874912674684056) -->
     <skip />
-    <!-- no translation found for power_charge_remaining (6132074970943913135) -->
+    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
+    <skip />
+    <!-- no translation found for power_charging (712751285832976915) -->
+    <skip />
+    <!-- no translation found for power_charging_duration (1076204146651267327) -->
     <skip />
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uporaba baterije po odklopu"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Uporaba baterije od ponastavitve"</string>
@@ -1614,6 +1620,10 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Glasovno iskanje"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Tipkovnica Android"</string>
     <string name="voice_category" msgid="1430370497125803904">"Govor"</string>
+    <string name="voice_interactor_title" msgid="4591706322348912721">"Glasovni vnos"</string>
+    <string name="voice_interactor_settings_title" msgid="448041804591022360">"Glasovni vnos"</string>
+    <string name="voice_interactor_settings_summary" msgid="8574288425783919649">"Nastavitve za »<xliff:g id="INTERACTOR_NAME">%s</xliff:g>«"</string>
+    <string name="no_voice_interactor" msgid="2775603669036981812">"Brez"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Prepoznavalnik govora"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"Glasovno iskanje"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Nastavitve za »<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>«"</string>
@@ -2144,13 +2154,12 @@
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Pokaži obvestila"</string>
     <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"Zelo pomembno"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Končano"</string>
-    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
-    <skip />
-    <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
-    <skip />
-    <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
+    <string name="zen_mode_option_off" msgid="7812737562592973403">"Izklopljeno"</string>
+    <string name="zen_mode_option_on" msgid="6914392434474823822">"Vklopljeno"</string>
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"Dokler tega ne izklopite"</string>
+    <string name="zen_mode_general_category" msgid="4816396530154508930">"Blokiraj vse prekinitve, razen"</string>
+    <string name="zen_mode_automatic_category" msgid="2168130971038236488">"Ponoči"</string>
+    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
     <skip />
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Telefonski klici"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Sporočila"</string>
@@ -2158,10 +2167,8 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Vsi"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Samo stiki"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Stiki, označeni z zvezdico"</string>
-    <!-- no translation found for zen_mode_alarm_info (6945011895169327837) -->
-    <skip />
-    <!-- no translation found for zen_mode_when (2767193283311106373) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="6945011895169327837">"Alarmi in časovniki se nikoli ne blokirajo"</string>
+    <string name="zen_mode_when" msgid="2767193283311106373">"Samodejni vklop"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nikoli"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Vsako noč"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Noči med tednom"</string>
