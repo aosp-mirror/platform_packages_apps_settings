@@ -22,23 +22,23 @@ import android.os.ServiceManager;
 import android.view.IWindowManager;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.AnimationScalePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class WindowAnimationScalePreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+        Preference.OnPreferenceClickListener, PreferenceControllerMixin {
 
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
 
     @VisibleForTesting
     static final int WINDOW_ANIMATION_SCALE_SELECTOR = 0;
     @VisibleForTesting
-    static final float DEFAULT_VALUE = 1;
+    static final float DEFAULT_VALUE = 0.8f;
 
     private final IWindowManager mWindowManager;
     private final String[] mListValues;
@@ -89,19 +89,18 @@ public class WindowAnimationScalePreferenceController extends
     private void updateAnimationScaleValue() {
         try {
             final float scale = mWindowManager.getAnimationScale(WINDOW_ANIMATION_SCALE_SELECTOR);
-            int index = 0; // default
-            for (int i = 0; i < mListValues.length; i++) {
-                float val = Float.parseFloat(mListValues[i]);
-                if (scale <= val) {
-                    index = i;
-                    break;
-                }
-            }
-            final ListPreference listPreference = (ListPreference) mPreference;
-            listPreference.setValue(mListValues[index]);
-            listPreference.setSummary(mListSummaries[index]);
+            final AnimationScalePreference windowPreference = (AnimationScalePreference) mPreference;
+            windowPreference.setOnPreferenceClickListener(this);
+            windowPreference.setScale(scale);
+
         } catch (RemoteException e) {
             // intentional no-op
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        ((AnimationScalePreference) preference).click();
+        return false;
     }
 }
