@@ -99,7 +99,7 @@ public class ZenModeConditionSelection extends RadioGroup {
                 }
             }
             if (v != null) {
-                v.setText(c.caption);
+                v.setText(c.summary);
                 v.setEnabled(c.state == Condition.STATE_TRUE);
             }
         }

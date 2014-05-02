@@ -131,7 +131,7 @@ public class ZenModeAutomaticConditionSelection extends LinearLayout {
                 }
             }
             if (v != null) {
-                v.setText(c.caption);
+                v.setText(c.summary);
                 v.setEnabled(c.state != Condition.STATE_ERROR);
                 v.setChecked(mSelectedConditions.contains(c.id));
             }
