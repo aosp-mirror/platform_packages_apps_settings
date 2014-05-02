@@ -95,6 +95,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private Preference mEntry;
     private Preference mConditionProviders;
     private AlertDialog mDialog;
+    private boolean mIgnoreNext;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -111,6 +112,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
 
         mSwitch = (SwitchPreference) root.findPreference(KEY_ZEN_MODE);
+        mSwitch.setOnPreferenceChangeListener(mSwitchListener);
 
         final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
 
@@ -146,9 +148,9 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStarred.setEnabled(false);
         mStarred.setTitle(R.string.zen_mode_from);
         mStarred.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
-        mStarred.addItem(R.string.zen_mode_from_anyone);
-        mStarred.addItem(R.string.zen_mode_from_starred);
-        mStarred.addItem(R.string.zen_mode_from_contacts);
+        mStarred.addItem(R.string.zen_mode_from_anyone, null);
+        mStarred.addItem(R.string.zen_mode_from_starred, null);
+        mStarred.addItem(R.string.zen_mode_from_contacts, null);
         general.addPreference(mStarred);
 
         final Preference alarmInfo = new Preference(mContext) {
@@ -171,15 +173,14 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mWhen.setKey(KEY_WHEN);
         mWhen.setTitle(R.string.zen_mode_when);
         mWhen.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
-        mWhen.addItem(R.string.zen_mode_when_every_night);
-        mWhen.addItem(R.string.zen_mode_when_weeknights);
-        mWhen.addItem(R.string.zen_mode_when_never);
+        mWhen.addItem(R.string.zen_mode_when_every_night, ZenModeConfig.SLEEP_MODE_NIGHTS);
+        mWhen.addItem(R.string.zen_mode_when_weeknights, ZenModeConfig.SLEEP_MODE_WEEKNIGHTS);
+        mWhen.addItem(R.string.zen_mode_when_never, null);
         mWhen.setCallback(new DropDownPreference.Callback() {
             @Override
-            public boolean onItemSelected(int pos) {
+            public boolean onItemSelected(int pos, Object value) {
                 if (mDisableListeners) return true;
-                final String mode = pos == 1 ? ZenModeConfig.SLEEP_MODE_NIGHTS :
-                    pos == 2 ? ZenModeConfig.SLEEP_MODE_WEEKNIGHTS : null;
+                final String mode = (String) value;
                 if (Objects.equals(mode, mConfig.sleepMode)) return true;
                 if (DEBUG) Log.d(TAG, "onPrefChange sleepMode=" + mode);
                 final ZenModeConfig newConfig = mConfig.copy();
@@ -210,6 +211,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             }
         });
         auto.addPreference(mStart);
+        mStart.setDependency(mWhen.getKey());
 
         mEnd = new TimePickerPreference(mContext, mgr);
         mEnd.setTitle(R.string.zen_mode_end_time);
@@ -231,8 +233,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             }
         });
         auto.addPreference(mEnd);
-
-        mStart.setDependency(mWhen.getKey());
         mEnd.setDependency(mWhen.getKey());
 
         mAutomationCategory = (PreferenceCategory) findPreference(KEY_AUTOMATION);
@@ -255,7 +255,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             }
         });
         mConditionProviders = findPreference(KEY_CONDITION_PROVIDERS);
-        refreshAutomationSection();
 
         updateZenMode();
         updateControls();
@@ -266,12 +265,11 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mCalls.setChecked(mConfig.allowCalls);
         mMessages.setChecked(mConfig.allowMessages);
         mStarred.setSelectedItem(0);
-        mWhen.setSelectedItem(
-                ZenModeConfig.SLEEP_MODE_NIGHTS.equals(mConfig.sleepMode) ? 1 :
-                ZenModeConfig.SLEEP_MODE_WEEKNIGHTS.equals(mConfig.sleepMode) ? 2 : 0);
+        mWhen.setSelectedValue(mConfig.sleepMode);
         mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
         mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
         mDisableListeners = false;
+        refreshAutomationSection();
     }
 
     private void refreshAutomationSection() {
@@ -323,7 +321,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     @Override
     public void onResume() {
         super.onResume();
-        refreshAutomationSection();
+        updateControls();
         updateZenMode();
         mSettingsObserver.register();
     }
@@ -335,18 +333,20 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     }
 
     private void updateZenMode() {
-        mSwitch.setOnPreferenceChangeListener(null);
         final boolean zenMode = Global.getInt(getContentResolver(),
                 Global.ZEN_MODE, Global.ZEN_MODE_OFF) != Global.ZEN_MODE_OFF;
-        mSwitch.setChecked(zenMode);
+        if (mSwitch.isChecked() != zenMode) {
+            mSwitch.setChecked(zenMode);
+            mIgnoreNext = true;
+        }
         mSwitch.setTitle(zenMode ? R.string.zen_mode_option_on : R.string.zen_mode_option_off);
-        mSwitch.setOnPreferenceChangeListener(mSwitchListener);
     }
 
     private void updateZenModeConfig() {
         final ZenModeConfig config = getZenModeConfig();
         if (Objects.equals(config, mConfig)) return;
-        if (DEBUG) Log.d(TAG, "updateZenModeConfig");
+        mConfig = config;
+        if (DEBUG) Log.d(TAG, "updateZenModeConfig mConfig=" + mConfig);
         updateControls();
     }
 
@@ -421,6 +421,12 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             final boolean isChecked = (Boolean) newValue;
+            if (DEBUG) Log.d(TAG, "onPreferenceChange isChecked=" + isChecked
+                    + " mIgnoreNext=" + mIgnoreNext);
+            if (mIgnoreNext) {
+                mIgnoreNext = false;
+                return true;
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {

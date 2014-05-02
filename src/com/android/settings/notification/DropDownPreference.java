@@ -26,10 +26,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import java.util.ArrayList;
+
 public class DropDownPreference extends Preference {
     private final Context mContext;
     private final ArrayAdapter<String> mAdapter;
     private final Spinner mSpinner;
+    private final ArrayList<Object> mValues = new ArrayList<Object>();
 
     private Callback mCallback;
 
@@ -77,17 +80,26 @@ public class DropDownPreference extends Preference {
     }
 
     public void setSelectedItem(int position) {
-        if (mCallback != null && !mCallback.onItemSelected(position)) {
+        final Object value = mValues.get(position);
+        if (mCallback != null && !mCallback.onItemSelected(position, value)) {
             return;
         }
         mSpinner.setSelection(position);
         setSummary(mAdapter.getItem(position));
-        final boolean disableDependents = position == 0;
+        final boolean disableDependents = value == null;
         notifyDependencyChange(disableDependents);
     }
 
-    public void addItem(int resId) {
+    public void setSelectedValue(Object value) {
+        final int i = mValues.indexOf(value);
+        if (i > -1) {
+            setSelectedItem(i);
+        }
+    }
+
+    public void addItem(int resId, Object value) {
         mAdapter.add(mContext.getResources().getString(resId));
+        mValues.add(value);
     }
 
     @Override
@@ -105,6 +117,6 @@ public class DropDownPreference extends Preference {
     }
 
     public interface Callback {
-        boolean onItemSelected(int pos);
+        boolean onItemSelected(int pos, Object value);
     }
 }

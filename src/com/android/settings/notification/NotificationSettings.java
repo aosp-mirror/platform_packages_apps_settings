@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.media.RingtoneManager;
@@ -57,7 +56,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
 
     private Preference mNotificationSoundPreference;
     private Preference mNotificationAccess;
-    private DropDownPreference mLockscreenNotifications;
+    private DropDownPreference mLockscreen;
     private TwoStatePreference mHeadsUp;
     private TwoStatePreference mNotificationPulse;
 
@@ -112,20 +111,19 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
 
-        mLockscreenNotifications
-                = (DropDownPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
-        if (mLockscreenNotifications != null) {
+        mLockscreen = (DropDownPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
+        if (mLockscreen != null) {
             if (!getDeviceLockscreenNotificationsEnabled()) {
-                root.removePreference(mLockscreenNotifications);
+                root.removePreference(mLockscreen);
             } else {
-                mLockscreenNotifications.addItem(R.string.lock_screen_notifications_summary_show);
-                mLockscreenNotifications.addItem(R.string.lock_screen_notifications_summary_hide);
-                final int pos = getLockscreenAllowPrivateNotifications() ? 0 : 1;
-                mLockscreenNotifications.setSelectedItem(pos);
-                mLockscreenNotifications.setCallback(new DropDownPreference.Callback() {
+                mLockscreen.addItem(R.string.lock_screen_notifications_summary_show, 1);
+                mLockscreen.addItem(R.string.lock_screen_notifications_summary_hide, 0);
+                final int val = getLockscreenAllowPrivateNotifications() ? 1 : 0;
+                mLockscreen.setSelectedValue(val);
+                mLockscreen.setCallback(new DropDownPreference.Callback() {
                     @Override
-                    public boolean onItemSelected(int pos) {
-                        final int val = pos == 0 ? 1 : 0;
+                    public boolean onItemSelected(int pos, Object value) {
+                        final int val = (Integer) value;
                         Settings.Secure.putInt(getContentResolver(),
                                 Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, val);
                         return true;
