@@ -4,9 +4,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,9 +32,9 @@
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
     </PreferenceScreen>
 
-    <CheckBoxPreference 
-        android:key="keep_screen_on" 
-        android:title="@string/keep_screen_on" 
+    <CheckBoxPreference
+        android:key="keep_screen_on"
+        android:title="@string/keep_screen_on"
         android:summary="@string/keep_screen_on_summary"/>
 
     <ListPreference
@@ -286,6 +286,10 @@
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary"/>
 
+        <CheckBoxPreference
+            android:key="webview_data_reduction_proxy"
+            android:title="@string/webview_data_reduction_proxy"
+            android:summary="@string/webview_data_reduction_proxy_summary"/>
      </PreferenceCategory>
 
 </PreferenceScreen>

@@ -60,6 +60,7 @@ import android.view.HardwareRenderer;
 import android.view.IWindowManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -144,6 +145,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final String WEBVIEW_DATA_REDUCTION_PROXY_KEY = "webview_data_reduction_proxy";
+
     private static final String PROCESS_STATS = "proc_stats";
 
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
@@ -208,6 +211,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
+
+    private CheckBoxPreference mWebViewDataReductionProxy;
 
     private PreferenceScreen mProcessStats;
 
@@ -340,6 +345,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         mProcessStats = (PreferenceScreen) findPreference(PROCESS_STATS);
         mAllPrefs.add(mProcessStats);
+
+        mWebViewDataReductionProxy = findAndInitCheckboxPref(WEBVIEW_DATA_REDUCTION_PROXY_KEY);
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -515,6 +522,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
+        updateWebViewDataReductionProxyOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
@@ -1193,6 +1201,20 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
+    private void writeWebViewDataReductionProxyOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY,
+                mWebViewDataReductionProxy.isChecked() ? 1 : 0);
+        Intent intent = new Intent(WebView.DATA_REDUCTION_PROXY_SETTING_CHANGED);
+        getActivity().sendBroadcast(intent);
+    }
+
+    private void updateWebViewDataReductionProxyOptions() {
+        updateCheckBox(mWebViewDataReductionProxy, Settings.Secure.getInt(
+            getActivity().getContentResolver(),
+            Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY, 0) != 0);
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == mEnabledSwitch) {
@@ -1309,6 +1331,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeImmediatelyDestroyActivitiesOptions();
         } else if (preference == mShowAllANRs) {
             writeShowAllANRsOptions();
+        } else if (preference == mWebViewDataReductionProxy) {
+            writeWebViewDataReductionProxyOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
         } else if (preference == mForceMsaa) {
