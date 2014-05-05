@@ -444,18 +444,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Keine Benachrichtigungs-Listener installiert"</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> aktivieren?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> darf alle Benachrichtigungen lesen, die vom System oder einer installierten App gesendet werden. Darin können personenbezogene Daten wie Kontaktnamen oder Inhalte der an Sie gesendeten Nachrichten enthalten sein. Der Listener kann diese Benachrichtigungen außerdem schließen oder Schaltflächen in den Benachrichtigungen betätigen."</string>
-    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
-    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
-    <!-- no translation found for no_condition_providers (6183782892066424125) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
-    <skip />
+    <string name="manage_condition_providers" msgid="3039306415273606730">"Bedingungsanbieter"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Keine der Apps enthalten Bedingungen."</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"%d App enthält Bedingungen"</item>
+    <item quantity="other" msgid="358057362115673258">"%d Apps enthalten Bedingungen"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"Es sind keine Bedingungsanbieter installiert."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> aktivieren?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> kann Ausstiegsbedingungen zum Modus \"Nicht stören\" hinzufügen."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bluetooth aktivieren"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1503,14 +1500,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Noch <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Verbleibende Ladezeit: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <!-- no translation found for power_charging (712751285832976915) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (1076204146651267327) -->
-    <skip />
+    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – noch etwa <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g> (voll in <xliff:g id="TIME">%3$s</xliff:g>)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akkuverbrauch seit dem Ausstecken"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akkuverbrauch seit dem Zurücksetzen"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> mit Akku"</string>
@@ -1925,7 +1918,7 @@
     <string name="data_usage_enable_mobile" msgid="986782622560157977">"Mobiler Datenverkehr"</string>
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-/3G-Daten"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G-Daten"</string>
-    <string name="data_usage_app_settings" msgid="8430240158135453271">"App-Einstellungen anzeigen"</string>
+    <string name="data_usage_app_settings" msgid="8430240158135453271">"App-Einstellungen ansehen"</string>
     <string name="data_usage_app_restrict_background" msgid="9149728936265100841">"Hintergrunddaten beschränken"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="518658001418490405">"Hintergrunddaten in Mobilfunknetzen deaktivieren und sofern verfügbar andere als Mobilfunknetze verwenden"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="7401927377070755054">"Legen Sie zur Beschränkung der App-Hintergrunddaten zuerst ein Mobildatenlimit fest."</string>
@@ -2160,8 +2153,10 @@
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Bis zur Deaktivierung"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"Alle Unterbrechungen blockieren, außer:"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"Nachts"</string>
-    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
-    <skip />
+    <string name="zen_mode_automation_category" msgid="4175437418329803902">"Sonstige Automatisierung"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Automatisch aktivieren"</string>
+    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Nie"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Telefonanrufe"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Nachrichten"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"Von"</string>
@@ -2176,4 +2171,5 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Startzeit"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Endzeit"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"Am nächsten Tag um <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"Feedback zu diesem Gerät senden"</string>
 </resources>

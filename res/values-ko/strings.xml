@@ -444,18 +444,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"알림 수신기가 설치되지 않았습니다."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>이(가) 시스템 또는 설치된 앱이 게시하는 모든 알림(연락처 이름 및 수신된 이메일 텍스트와 같은 개인정보가 포함될 수 있음)을 읽을 수 있습니다. 또한 이러한 알림을 닫거나 알림 내에 있는 작업 버튼을 터치할 수도 있습니다."</string>
-    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
-    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
-    <!-- no translation found for no_condition_providers (6183782892066424125) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
-    <skip />
+    <string name="manage_condition_providers" msgid="3039306415273606730">"조건 제공자"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"조건을 제공하는 앱이 없음"</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"%d개의 앱이 조건을 제공"</item>
+    <item quantity="other" msgid="358057362115673258">"%d개의 앱이 조건을 제공"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"조건 제공자가 설치되지 않았습니다."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하도록 설정하시겠습니까?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>은(는) 알림 일시중지 모드에 종료 조건을 추가할 수 있습니다."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"블루투스"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"블루투스 켜기"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"블루투스"</string>
@@ -1502,14 +1499,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> 남음"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> 후 완충"</string>
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <!-- no translation found for power_charging (712751285832976915) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (1076204146651267327) -->
-    <skip />
+    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - 대략 <xliff:g id="TIME">%2$s</xliff:g> 남음"</string>
+    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>(<xliff:g id="TIME">%3$s</xliff:g> 후 완충)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"플러그를 뽑은 이후 배터리 전원 사용"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"초기화 이후 배터리 사용"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"배터리 사용 시간: <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -2159,8 +2152,10 @@
     <string name="zen_mode_default_option" msgid="6940069025071935243">"이 기능을 사용 중지할 때까지"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"다음을 제외한 모든 방해요소 차단:"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"밤에"</string>
-    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
-    <skip />
+    <string name="zen_mode_automation_category" msgid="4175437418329803902">"기타 자동화"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"자동 사용 설정"</string>
+    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"사용 안함"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"전화 통화"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"메시지"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"발신자"</string>
@@ -2175,4 +2170,5 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"시작 시간"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"종료 시간"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"다음 날 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"이 기기에 대한 의견 보내기"</string>
 </resources>
