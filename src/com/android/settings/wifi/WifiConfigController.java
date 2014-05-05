@@ -24,7 +24,7 @@ import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.NetworkInfo.DetailedState;
 import android.net.NetworkUtils;
-import android.net.ProxyProperties;
+import android.net.ProxyInfo;
 import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
@@ -483,7 +483,7 @@ public class WifiConfigController implements TextWatcher,
                 result = R.string.proxy_error_invalid_port;
             }
             if (result == 0) {
-                ProxyProperties proxyProperties= new ProxyProperties(host, port, exclusionList);
+                ProxyInfo proxyProperties= new ProxyInfo(host, port, exclusionList);
                 mLinkProperties.setHttpProxy(proxyProperties);
             } else {
                 return false;
@@ -822,11 +822,11 @@ public class WifiConfigController implements TextWatcher,
                 mProxyExclusionListView.addTextChangedListener(this);
             }
             if (config != null) {
-                ProxyProperties proxyProperties = config.linkProperties.getHttpProxy();
+                ProxyInfo proxyProperties = config.linkProperties.getHttpProxy();
                 if (proxyProperties != null) {
                     mProxyHostView.setText(proxyProperties.getHost());
                     mProxyPortView.setText(Integer.toString(proxyProperties.getPort()));
-                    mProxyExclusionListView.setText(proxyProperties.getExclusionList());
+                    mProxyExclusionListView.setText(proxyProperties.getExclusionListAsString());
                 }
             }
         } else {
