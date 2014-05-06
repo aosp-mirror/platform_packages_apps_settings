@@ -1206,7 +1206,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY,
                 mWebViewDataReductionProxy.isChecked() ? 1 : 0);
         Intent intent = new Intent(WebView.DATA_REDUCTION_PROXY_SETTING_CHANGED);
-        getActivity().sendBroadcast(intent);
+        // Broadcast to all apps running as current user.
+        getActivity().sendBroadcastAsUser(intent, UserHandle.CURRENT);
     }
 
     private void updateWebViewDataReductionProxyOptions() {
