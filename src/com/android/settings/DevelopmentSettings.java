@@ -213,6 +213,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
     private ListPreference mSimulateColorSpace;
+    private ListPreference mLogdSize;
 
     private CheckBoxPreference mUseNuplayer;
 
