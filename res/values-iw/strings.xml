@@ -444,18 +444,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"לא מותקנים מאזינים להתראות."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"האם להפעיל את <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> יוכל לקרוא את כל ההתראות שפורסמו על ידי המערכת או על ידי אפליקציה מותקנת כלשהי, והדבר עשוי לכלול מידע אישי כמו שמות אנשי קשר ואת הטקסט בהודעות שנשלחו אליך. הוא יוכל גם לסגור את ההתראות האלה או להשתמש בלחצני פעולה בתוכן."</string>
-    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
-    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
-    <!-- no translation found for no_condition_providers (6183782892066424125) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
-    <skip />
+    <string name="manage_condition_providers" msgid="3039306415273606730">"ספקי תנאים"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"אין אפליקציות המספקות תנאים"</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"‏אפליקציה %d מספקת תנאים"</item>
+    <item quantity="other" msgid="358057362115673258">"‏%d אפליקציות מספקות תנאים"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"לא מותקנים ספקי תנאים."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"האם להפעיל את <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> יוכל להוסיף תנאי יציאה למצב \'נא לא להפריע\'."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"‏הפעל את Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1502,14 +1499,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"נותרו <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> לסיום הטעינה"</string>
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <!-- no translation found for power_charging (712751285832976915) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (1076204146651267327) -->
-    <skip />
+    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - נותרו בקירוב <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% ‏- <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% ‏- <xliff:g id="STATE">%2$s</xliff:g>‏ (<xliff:g id="TIME">%3$s</xliff:g> עד למילוי)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"צריכת סוללה מאז הניתוק"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"צריכת סוללה מאז האיפוס"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"פועל על סוללה <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -2159,8 +2152,10 @@
     <string name="zen_mode_default_option" msgid="6940069025071935243">"עד שתכבה"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"חסום את כל ההפרעות, מלבד"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"בלילה"</string>
-    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
-    <skip />
+    <string name="zen_mode_automation_category" msgid="4175437418329803902">"אוטומציה אחרת"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"הפעל אוטומטית"</string>
+    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"אף פעם"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"שיחות טלפון"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"הודעות"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"מ-"</string>
@@ -2175,4 +2170,5 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"שעת התחלה"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"שעת סיום"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> למחרת"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"שלח משוב על המכשיר הזה"</string>
 </resources>

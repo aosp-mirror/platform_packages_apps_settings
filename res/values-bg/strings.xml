@@ -444,18 +444,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Няма инсталирани слушатели на известия."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Да се активира ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ще може да чете всички известия, публикувани от системата или инсталирано приложение, които може да включват лична информация, като имена за връзка и текста на изпратените до вас съобщения. Също така ще може да отхвърля тези известия или да докосва бутоните за действие в тях."</string>
-    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
-    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
-    <!-- no translation found for no_condition_providers (6183782892066424125) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
-    <skip />
+    <string name="manage_condition_providers" msgid="3039306415273606730">"Доставчици на условия"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Няма приложения, които предоставят условия"</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"%d приложение предоставя условия"</item>
+    <item quantity="other" msgid="358057362115673258">"%d приложения предоставят условия"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"Няма инсталирани доставчици на условия."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Да се активира ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> ще може да добавя условия за изход към режима „Не ме безпокойте“."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Включване на Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1502,14 +1499,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Остава: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> до зареждане"</string>
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <!-- no translation found for power_charging (712751285832976915) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (1076204146651267327) -->
-    <skip />
+    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – приблизително оставащо време: <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g> до пълно зареждане)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Употреба на батерията след изключването"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Употреба на батерията след рестартирането"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> на батерия"</string>
@@ -1620,14 +1613,10 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Гласово търсене"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Клавиатура на Android"</string>
     <string name="voice_category" msgid="1430370497125803904">"Говор"</string>
-    <!-- no translation found for voice_interactor_title (4591706322348912721) -->
-    <skip />
-    <!-- no translation found for voice_interactor_settings_title (448041804591022360) -->
-    <skip />
-    <!-- no translation found for voice_interactor_settings_summary (8574288425783919649) -->
-    <skip />
-    <!-- no translation found for no_voice_interactor (2775603669036981812) -->
-    <skip />
+    <string name="voice_interactor_title" msgid="4591706322348912721">"Гласово въвеждане"</string>
+    <string name="voice_interactor_settings_title" msgid="448041804591022360">"Гласово въвеждане"</string>
+    <string name="voice_interactor_settings_summary" msgid="8574288425783919649">"Настройки за „<xliff:g id="INTERACTOR_NAME">%s</xliff:g>“"</string>
+    <string name="no_voice_interactor" msgid="2775603669036981812">"Няма"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Разпознаване на глас"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"Гласово търсене"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Настройки за „<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>“"</string>
@@ -2158,32 +2147,28 @@
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Показване на известията"</string>
     <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"Висок приоритет"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Готово"</string>
-    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
-    <skip />
-    <!-- no translation found for zen_mode_default_option (6940069025071935243) -->
-    <skip />
-    <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
-    <skip />
-    <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
-    <skip />
-    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
-    <skip />
+    <string name="zen_mode_option_off" msgid="7812737562592973403">"Изключено"</string>
+    <string name="zen_mode_option_on" msgid="6914392434474823822">"Включено"</string>
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"Докато не изключите това"</string>
+    <string name="zen_mode_general_category" msgid="4816396530154508930">"Блокиране на всички прекъсвания освен"</string>
+    <string name="zen_mode_automatic_category" msgid="2168130971038236488">"През нощта"</string>
+    <string name="zen_mode_automation_category" msgid="4175437418329803902">"Друго автоматизиране"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Автоматично включване"</string>
+    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Никога"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Телефонни обаждания"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Съобщения"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"От"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Всички"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Само контактите"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Само контактите със звезда"</string>
-    <!-- no translation found for zen_mode_alarm_info (6945011895169327837) -->
-    <skip />
-    <!-- no translation found for zen_mode_when (2767193283311106373) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="6945011895169327837">"Будилниците и таймерите никога не се блокират"</string>
+    <string name="zen_mode_when" msgid="2767193283311106373">"Авт. включване"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Никога"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Всяка вечер"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Делничните вечери"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Начален час"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Краен час"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> на следващия ден"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"Изпращане на отзиви за устройството"</string>
 </resources>

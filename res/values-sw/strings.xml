@@ -436,18 +436,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Hakuna visikilizaji vya arifa vilivyosakinishwa."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Je, unataka kuwezesha <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> itaweza kusoma arifa zote zilizochapishwa na mfumo au programu yoyote iliyosakinishwa, inayoweza kujumuisha maelezo ya binafsi kama vile majina ya anwani na maandishi ya ujumbe uliotumwa kwako. Pia itaweza kukataa arifa hizi au kugusa vitufe vya kutenda ndani yake."</string>
-    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
-    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
-    <!-- no translation found for no_condition_providers (6183782892066424125) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
-    <skip />
+    <string name="manage_condition_providers" msgid="3039306415273606730">"Vitoa masharti"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Hakuna programu za kutoa masharti"</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"%d programu hutoa masharti"</item>
+    <item quantity="other" msgid="358057362115673258">"%d programu zinatoa masharti"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"Hakuna vitoa masharti vilivyosanikishwa."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Je, ungependa kuwasha <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> itaweza kuongeza au kuondoa masharti katika hali ya Usinisumbue."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Washa Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1495,15 +1492,11 @@
     <string name="power_usage_not_available" msgid="3214000535532434353">"Data ya matumizi ya betri haipatikani."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Imesalia <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
-    <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> ichaji"</string>
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <!-- no translation found for power_charging (712751285832976915) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (1076204146651267327) -->
-    <skip />
+    <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> chaji ijae"</string>
+    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - imesalia takribani <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g> hadi ijae)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utumizi wa betri tangu kuchopolewa"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Utumiaji wa betri tangu iliposetiwa upya"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"Chaji itadumu <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1614,14 +1607,10 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Tafuta kwa kutamka"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Baobonye la Android"</string>
     <string name="voice_category" msgid="1430370497125803904">"Usemi"</string>
-    <!-- no translation found for voice_interactor_title (4591706322348912721) -->
-    <skip />
-    <!-- no translation found for voice_interactor_settings_title (448041804591022360) -->
-    <skip />
-    <!-- no translation found for voice_interactor_settings_summary (8574288425783919649) -->
-    <skip />
-    <!-- no translation found for no_voice_interactor (2775603669036981812) -->
-    <skip />
+    <string name="voice_interactor_title" msgid="4591706322348912721">"Kuweka data kwa kutamka"</string>
+    <string name="voice_interactor_settings_title" msgid="448041804591022360">"Kuweka data kwa kutamka"</string>
+    <string name="voice_interactor_settings_summary" msgid="8574288425783919649">"Mipangilio ya \'<xliff:g id="INTERACTOR_NAME">%s</xliff:g>\'"</string>
+    <string name="no_voice_interactor" msgid="2775603669036981812">"Hamna"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Kitambulizi cha sauti"</string>
     <string name="recognizer_settings_title" msgid="432493301215113154">"Tafuta kwa kuzungumza"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Mipangilio ya\"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
@@ -2152,32 +2141,28 @@
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Onyesha arifa"</string>
     <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"Kipaumbele cha kwanza"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Imemaliza"</string>
-    <!-- no translation found for zen_mode_option_off (7812737562592973403) -->
-    <skip />
-    <!-- no translation found for zen_mode_option_on (6914392434474823822) -->
-    <skip />
-    <!-- no translation found for zen_mode_default_option (6940069025071935243) -->
-    <skip />
-    <!-- no translation found for zen_mode_general_category (4816396530154508930) -->
-    <skip />
-    <!-- no translation found for zen_mode_automatic_category (2168130971038236488) -->
-    <skip />
-    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
-    <skip />
+    <string name="zen_mode_option_off" msgid="7812737562592973403">"Kimezimwa"</string>
+    <string name="zen_mode_option_on" msgid="6914392434474823822">"Washa"</string>
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"Hadi utakapozima hili"</string>
+    <string name="zen_mode_general_category" msgid="4816396530154508930">"Zuia usumbufu wote isipokuwa"</string>
+    <string name="zen_mode_automatic_category" msgid="2168130971038236488">"Wakati wa usiku"</string>
+    <string name="zen_mode_automation_category" msgid="4175437418329803902">"Ujumbe mwingine wa kiotomatiki"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Washa kiotomatiki"</string>
+    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Katu"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Simu"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Barua pepe"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"Kuanzia"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Mtu yeyote"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Ninaowasiliana nao pekee"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Waliowekewa nyota pekee kati ya ninaowasiliana nao"</string>
-    <!-- no translation found for zen_mode_alarm_info (6945011895169327837) -->
-    <skip />
-    <!-- no translation found for zen_mode_when (2767193283311106373) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="6945011895169327837">"Kengele na vipima muda huwa havizuiliwi"</string>
+    <string name="zen_mode_when" msgid="2767193283311106373">"Washa kiotomatiki"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Katu"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Kila usiku"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Usiku wa siku za wiki"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Wakati wa Kuanza"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Wakati wa kuisha"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> siku inayofuata"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"Tuma maoni kuhusu kifaa hiki"</string>
 </resources>

@@ -444,18 +444,15 @@
     <string name="no_notification_listeners" msgid="2767405417723149879">"Không có trình xử lý thông báo nào được cài đặt."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Bật <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc tất cả thông báo được đăng bởi hệ thống hoặc bất kỳ ứng dụng đã cài đặt nào. Thông báo đó có thể bao gồm thông tin cá nhân như tên liên hệ và văn bản thông báo được gửi tới bạn. Trình xử lý cũng sẽ có thể loại bỏ những thông báo này hoặc chạm vào nút tác vụ trong các thông báo đó."</string>
-    <!-- no translation found for manage_condition_providers (3039306415273606730) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_zero (3760902189574984100) -->
-    <skip />
-    <!-- no translation found for manage_condition_providers_summary_nonzero:one (7871716594997778198) -->
-    <!-- no translation found for manage_condition_providers_summary_nonzero:other (358057362115673258) -->
-    <!-- no translation found for no_condition_providers (6183782892066424125) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_title (5834347345913614926) -->
-    <skip />
-    <!-- no translation found for condition_provider_security_warning_summary (640037330610551763) -->
-    <skip />
+    <string name="manage_condition_providers" msgid="3039306415273606730">"Trình cung cấp điều kiện"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Không có ứng dụng nào cung cấp điều kiện"</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"%d ứng dụng cung cấp điều kiện"</item>
+    <item quantity="other" msgid="358057362115673258">"%d ứng dụng cung cấp điều kiện"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"Không có trình cung cấp điều kiện nào được cài đặt."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Bật <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> có thể thêm điều kiện thoát vào chế độ Không làm phiền."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bật Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -1502,14 +1499,10 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> còn lại"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> để tính phí"</string>
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <!-- no translation found for power_charging (712751285832976915) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (1076204146651267327) -->
-    <skip />
+    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - còn khoảng <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g> cho đến khi đầy)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Sử dụng pin từ khi tháo đầu cắm"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Sử dụng pin từ khi đặt lại"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> trong thời lượng pin"</string>
@@ -2159,8 +2152,10 @@
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Cho đến khi bạn tắt tính năng này"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"Chặn tất cả các gián đoạn ngoại trừ"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"Vào ban đêm"</string>
-    <!-- no translation found for zen_mode_security_category (4174530964480149620) -->
-    <skip />
+    <string name="zen_mode_automation_category" msgid="4175437418329803902">"Tự động hóa khác"</string>
+    <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Tự động bật"</string>
+    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Không bao giờ"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Cuộc gọi điện thoại"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Tin nhắn"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"Từ"</string>
@@ -2175,4 +2170,5 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Thời gian bắt đầu"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Thời gian kết thúc"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ngày hôm sau"</string>
+    <string name="device_feedback" msgid="3238056036766293294">"Gửi phản hồi về thiết bị này"</string>
 </resources>
