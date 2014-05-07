@@ -28,7 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Proxy;
-import android.net.ProxyProperties;
+import android.net.ProxyInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Selection;
@@ -149,11 +149,11 @@ public class ProxySelector extends Fragment implements DialogCreatable {
         ConnectivityManager cm =
                 (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        ProxyProperties proxy = cm.getGlobalProxy();
+        ProxyInfo proxy = cm.getGlobalProxy();
         if (proxy != null) {
             hostname = proxy.getHost();
             port = proxy.getPort();
-            exclList = proxy.getExclusionList();
+            exclList = proxy.getExclusionListAsList();
         }
 
         if (hostname == null) {
@@ -229,7 +229,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
                 return false;
             }
         }
-        ProxyProperties p = new ProxyProperties(hostname, port, exclList);
+        ProxyInfo p = new ProxyInfo(hostname, port, exclList);
         // FIXME: The best solution would be to make a better UI that would
         // disable editing of the text boxes if the user chooses to use the
         // default settings. i.e. checking a box to always use the default
