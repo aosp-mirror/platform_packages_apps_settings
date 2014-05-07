@@ -153,7 +153,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
         if (proxy != null) {
             hostname = proxy.getHost();
             port = proxy.getPort();
-            exclList = proxy.getExclusionListAsList();
+            exclList = proxy.getExclusionListAsString();
         }
 
         if (hostname == null) {
