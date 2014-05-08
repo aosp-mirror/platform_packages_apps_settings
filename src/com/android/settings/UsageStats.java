@@ -1,5 +1,3 @@
-
-
 /**
  * Copyright (C) 2007 The Android Open Source Project
  *
@@ -28,7 +26,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.android.internal.os.PkgUsageStats;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -60,28 +57,34 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
     private UsageStatsAdapter mAdapter;
     private PackageManager mPm;
     
-    public static class AppNameComparator implements Comparator<PkgUsageStats> {
+    public static class AppNameComparator
+            implements Comparator<android.app.UsageStats.PackageStats> {
         Map<String, CharSequence> mAppLabelList;
         AppNameComparator(Map<String, CharSequence> appList) {
             mAppLabelList = appList;
         }
-        public final int compare(PkgUsageStats a, PkgUsageStats b) {
-            String alabel = mAppLabelList.get(a.packageName).toString();
-            String blabel = mAppLabelList.get(b.packageName).toString();
+        public final int compare(android.app.UsageStats.PackageStats a,
+                android.app.UsageStats.PackageStats b) {
+            String alabel = mAppLabelList.get(a.getPackageName()).toString();
+            String blabel = mAppLabelList.get(b.getPackageName()).toString();
             return alabel.compareTo(blabel);
         }
     }
     
-    public static class LaunchCountComparator implements Comparator<PkgUsageStats> {
-        public final int compare(PkgUsageStats a, PkgUsageStats b) {
+    public static class LaunchCountComparator
+            implements Comparator<android.app.UsageStats.PackageStats> {
+        public final int compare(android.app.UsageStats.PackageStats a,
+                android.app.UsageStats.PackageStats b) {
             // return by descending order
-            return b.launchCount - a.launchCount;
+            return b.getLaunchCount() - a.getLaunchCount();
         }
     }
     
-    public static class UsageTimeComparator implements Comparator<PkgUsageStats> {
-        public final int compare(PkgUsageStats a, PkgUsageStats b) {
-            long ret = a.usageTime-b.usageTime;
+    public static class UsageTimeComparator
+            implements Comparator<android.app.UsageStats.PackageStats> {
+        public final int compare(android.app.UsageStats.PackageStats a,
+                android.app.UsageStats.PackageStats b) {
+            long ret = a.getUsageTime(0)-b.getUsageTime(0);
             if (ret == 0) {
                 return 0;
             }
@@ -106,18 +109,18 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
         private static final int _DISPLAY_ORDER_APP_NAME = 2;
         
         private int mDisplayOrder = _DISPLAY_ORDER_USAGE_TIME;
-        private List<PkgUsageStats> mUsageStats;
+        private List<android.app.UsageStats.PackageStats> mUsageStats;
         private LaunchCountComparator mLaunchCountComparator;
         private UsageTimeComparator mUsageTimeComparator;
         private AppNameComparator mAppLabelComparator;
         private HashMap<String, CharSequence> mAppLabelMap;
         
         UsageStatsAdapter() {
-            mUsageStats = new ArrayList<PkgUsageStats>();
+            mUsageStats = new ArrayList<android.app.UsageStats.PackageStats>();
             mAppLabelMap = new HashMap<String, CharSequence>();
-            PkgUsageStats[] stats;
+            android.app.UsageStats.PackageStats[] stats;
             try {
-                stats = mUsageStatsService.getAllPkgUsageStats();
+                stats = mUsageStatsService.getAllPkgUsageStats(getPackageName());
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed initializing usage stats service");
                 return;
@@ -125,17 +128,17 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
            if (stats == null) {
                return;
            }
-           for (PkgUsageStats ps : stats) {
+           for (android.app.UsageStats.PackageStats ps : stats) {
                mUsageStats.add(ps);
                // load application labels for each application
                CharSequence label;
                try {
-                   ApplicationInfo appInfo = mPm.getApplicationInfo(ps.packageName, 0);
+                   ApplicationInfo appInfo = mPm.getApplicationInfo(ps.getPackageName(), 0);
                    label = appInfo.loadLabel(mPm);
                 } catch (NameNotFoundException e) {
-                    label = ps.packageName;
+                    label = ps.getPackageName();
                 }
-                mAppLabelMap.put(ps.packageName, label);
+                mAppLabelMap.put(ps.getPackageName(), label);
            }
            // Sort list
            mLaunchCountComparator = new LaunchCountComparator();
@@ -180,12 +183,12 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
             }
 
             // Bind the data efficiently with the holder
-            PkgUsageStats pkgStats = mUsageStats.get(position);
+            android.app.UsageStats.PackageStats pkgStats = mUsageStats.get(position);
             if (pkgStats != null) {
-                CharSequence label = mAppLabelMap.get(pkgStats.packageName);
+                CharSequence label = mAppLabelMap.get(pkgStats.getPackageName());
                 holder.pkgName.setText(label);
-                holder.launchCount.setText(String.valueOf(pkgStats.launchCount));
-                holder.usageTime.setText(String.valueOf(pkgStats.usageTime)+" ms");
+                holder.launchCount.setText(String.valueOf(pkgStats.getLaunchCount()));
+                holder.usageTime.setText(String.valueOf(pkgStats.getUsageTime(0))+" ms");
             } else {
                 Log.w(TAG, "No usage stats info for package:" + position);
             }
