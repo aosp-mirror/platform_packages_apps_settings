@@ -31,6 +31,7 @@ import android.os.SELinux;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -46,7 +47,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DeviceInfoSettings extends RestrictedSettingsFragment {
+public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
     private static final String LOG_TAG = "DeviceInfoSettings";
     private static final String FILENAME_PROC_VERSION = "/proc/version";
@@ -79,19 +80,11 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     int mDevHitCountdown;
     Toast mDevHitToast;
 
-    public DeviceInfoSettings() {
-        super(null /* Don't PIN protect the entire screen */);
-    }
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.device_info_settings);
-
-        // We only call ensurePinRestrictedPreference() when mDevHitCountdown == 0.
-        // This will keep us from entering developer mode without a PIN.
-        protectByRestrictions(KEY_BUILD_NUMBER);
 
         setStringSummary(KEY_FIRMWARE_VERSION, Build.VERSION.RELEASE);
         findPreference(KEY_FIRMWARE_VERSION).setEnabled(true);
@@ -204,12 +197,10 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
             // Don't enable developer options for secondary users.
             if (UserHandle.myUserId() != UserHandle.USER_OWNER) return true;
 
+            final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+            if (um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
+
             if (mDevHitCountdown > 0) {
-                if (mDevHitCountdown == 1) {
-                    if (super.ensurePinRestrictedPreference(preference)) {
-                        return true;
-                    }
-                }
                 mDevHitCountdown--;
                 if (mDevHitCountdown == 0) {
                     getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,

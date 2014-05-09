@@ -46,6 +46,7 @@ import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -75,7 +76,7 @@ import java.util.List;
 /*
  * Displays preferences for application developers.
  */
-public class DevelopmentSettings extends RestrictedSettingsFragment
+public class DevelopmentSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "DevelopmentSettings";
@@ -160,6 +161,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
+    private UserManager mUm;
 
     private Switch mEnabledSwitch;
     private boolean mLastEnabledState;
@@ -230,10 +232,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private boolean mUnavailable;
 
-    public DevelopmentSettings() {
-        super(RESTRICTIONS_PIN_SET);
-    }
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -242,8 +240,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
-        if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER) {
+        if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER
+                || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;

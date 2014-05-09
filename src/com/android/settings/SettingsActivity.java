@@ -1067,7 +1067,8 @@ public class SettingsActivity extends Activity
                         }
                     }
                 } else if (id == R.id.development_settings) {
-                    if (!showDev) {
+                    if (!showDev || um.hasUserRestriction(
+                            UserManager.DISALLOW_DEBUGGING_FEATURES)) {
                         category.removeTile(n);
                     }
                 } else if (id == R.id.account_add) {
