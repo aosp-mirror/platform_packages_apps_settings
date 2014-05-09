@@ -500,8 +500,8 @@ public class SettingsActivity extends Activity
         }
 
         mActionBar = getActionBar();
-        mActionBar.setHomeButtonEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
+        mActionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
 
         // see if we should show Back/Next buttons
         Intent intent = getIntent();
