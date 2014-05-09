@@ -29,8 +29,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.TextUtils;
@@ -45,6 +47,7 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.net.LegacyVpnInfo;
@@ -80,13 +83,24 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private Handler mUpdater;
     private LegacyVpnInfo mInfo;
+    private UserManager mUm;
 
     // The key of the profile for the current ContextMenu.
     private String mSelectedKey;
 
+    private boolean mUnavailable;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
+
+        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
+            mUnavailable = true;
+            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            return;
+        }
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.vpn_settings2);
@@ -156,6 +170,15 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     public void onResume() {
         super.onResume();
 
+        if (mUnavailable) {
+            TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
+            getListView().setEmptyView(emptyView);
+            if (emptyView != null) {
+                emptyView.setText(R.string.vpn_settings_not_available);
+            }
+            return;
+        }
+
         final boolean pickLockdown = getActivity()
                 .getIntent().getBooleanExtra(EXTRA_PICK_LOCKDOWN, false);
         if (pickLockdown) {
@@ -213,6 +236,10 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     @Override
     public void onPause() {
         super.onPause();
+
+        if (mUnavailable) {
+            return;
+        }
 
         // Hide the dialog if there is one.
         if (mDialog != null) {

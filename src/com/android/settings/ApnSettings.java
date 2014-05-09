@@ -32,6 +32,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
@@ -83,9 +84,13 @@ public class ApnSettings extends PreferenceActivity implements
     private RestoreApnProcessHandler mRestoreApnProcessHandler;
     private HandlerThread mRestoreDefaultApnThread;
 
+    private UserManager mUm;
+
     private String mSelectedKey;
 
     private IntentFilter mMobileStateFilter;
+
+    private boolean mUnavailable;
 
     private final BroadcastReceiver mMobileStateReceiver = new BroadcastReceiver() {
         @Override
@@ -119,6 +124,14 @@ public class ApnSettings extends PreferenceActivity implements
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
+            mUnavailable = true;
+            setContentView(R.layout.apn_disallowed_preference_screen);
+            return;
+        }
+
         addPreferencesFromResource(R.xml.apn_settings);
         getListView().setItemsCanFocus(true);
 
@@ -129,6 +142,10 @@ public class ApnSettings extends PreferenceActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (mUnavailable) {
+            return;
+        }
 
         registerReceiver(mMobileStateReceiver, mMobileStateFilter);
 
@@ -142,6 +159,10 @@ public class ApnSettings extends PreferenceActivity implements
     @Override
     protected void onPause() {
         super.onPause();
+
+        if (mUnavailable) {
+            return;
+        }
 
         unregisterReceiver(mMobileStateReceiver);
     }

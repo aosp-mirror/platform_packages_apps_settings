@@ -33,6 +33,7 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -79,6 +80,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
     private PackageManager mPm;
+    private UserManager mUm;
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
@@ -244,6 +246,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mTm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         mPm = getPackageManager();
+        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
@@ -289,10 +292,11 @@ public class WirelessSettings extends RestrictedSettingsFragment
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
-        if (isSecondaryUser) { // Disable VPN
+        // Disable VPN.
+        if (isSecondaryUser || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_VPN)) {
             removePreference(KEY_VPN_SETTINGS);
         }
-        protectByRestrictions(KEY_VPN_SETTINGS);
+
         // Manually set dependencies for Bluetooth when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_BLUETOOTH)) {
             // No bluetooth-dependent items in the list. Code kept in case one is added later.
@@ -312,8 +316,10 @@ public class WirelessSettings extends RestrictedSettingsFragment
             mNfcEnabler = null;
         }
 
-        // Remove Mobile Network Settings and Manage Mobile Plan if it's a wifi-only device.
-        if (isSecondaryUser || Utils.isWifiOnly(getActivity())) {
+        // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
+        // if it's a wifi-only device, or if the settings are restricted.
+        if (isSecondaryUser || Utils.isWifiOnly(getActivity())
+                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
@@ -327,8 +333,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
                 removePreference(KEY_MANAGE_MOBILE_PLAN);
             }
         }
-        protectByRestrictions(KEY_MOBILE_NETWORK_SETTINGS);
-        protectByRestrictions(KEY_MANAGE_MOBILE_PLAN);
 
         // Remove SMS Application if the device does not support SMS
         if (!isSmsSupported()) {
@@ -351,13 +355,13 @@ public class WirelessSettings extends RestrictedSettingsFragment
         // Disable Tethering if it's not allowed or if it's a wifi-only device
         ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (isSecondaryUser || !cm.isTetheringSupported()) {
+        if (isSecondaryUser || !cm.isTetheringSupported()
+                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(Utils.getTetheringLabel(cm));
         }
-        protectByRestrictions(KEY_TETHER_SETTINGS);
 
         // Enable link to CMAS app settings depending on the value in config.xml.
         boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
@@ -372,12 +376,12 @@ public class WirelessSettings extends RestrictedSettingsFragment
         } catch (IllegalArgumentException ignored) {
             isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
         }
-        if (isSecondaryUser || !isCellBroadcastAppLinkEnabled) {
+        if (isSecondaryUser || !isCellBroadcastAppLinkEnabled
+                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_CELL_BROADCASTS)) {
             PreferenceScreen root = getPreferenceScreen();
             Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
             if (ps != null) root.removePreference(ps);
         }
-        protectByRestrictions(KEY_CELL_BROADCAST_SETTINGS);
     }
 
     @Override

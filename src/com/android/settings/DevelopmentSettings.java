@@ -465,6 +465,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
 
+        if (mUnavailable) {
+            return;
+        }
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
     }
