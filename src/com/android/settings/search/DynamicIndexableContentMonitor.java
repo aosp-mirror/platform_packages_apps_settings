@@ -74,9 +74,14 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         }
     };
 
-    private final ContentObserver mContentObserver = new MyContentObserver(mHandler);
+    private final ContentObserver mUserDictionaryContentObserver =
+            new UserDictionaryContentObserver(mHandler);
 
     private Context mContext;
+
+    private boolean mHasFeturePrinting;
+
+    private boolean mHasFetureIme;
 
     private static Intent getAccessibilityServiceIntent(String packageName) {
         final Intent intent = new Intent(AccessibilityService.SERVICE_INTERFACE);
@@ -99,6 +104,11 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
     public void register(Context context) {
         mContext = context;
 
+        mHasFeturePrinting = mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_PRINTING);
+        mHasFetureIme = mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_INPUT_METHODS);
+
         // Cache accessibility service packages to know when they go away.
         AccessibilityManager accessibilityManager = (AccessibilityManager)
                 mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
@@ -114,35 +124,39 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             mAccessibilityServices.add(resolveInfo.serviceInfo.packageName);
         }
 
-        // Cache print service packages to know when they go away.
-        PrintManager printManager = (PrintManager)
-                mContext.getSystemService(Context.PRINT_SERVICE);
-        List<PrintServiceInfo> printServices = printManager.getInstalledPrintServices();
-        final int serviceCount = printServices.size();
-        for (int i = 0; i < serviceCount; i++) {
-            PrintServiceInfo printService = printServices.get(i);
-            ResolveInfo resolveInfo = printService.getResolveInfo();
-            if (resolveInfo == null || resolveInfo.serviceInfo == null) {
-                continue;
+        if (mHasFeturePrinting) {
+            // Cache print service packages to know when they go away.
+            PrintManager printManager = (PrintManager)
+                    mContext.getSystemService(Context.PRINT_SERVICE);
+            List<PrintServiceInfo> printServices = printManager.getInstalledPrintServices();
+            final int serviceCount = printServices.size();
+            for (int i = 0; i < serviceCount; i++) {
+                PrintServiceInfo printService = printServices.get(i);
+                ResolveInfo resolveInfo = printService.getResolveInfo();
+                if (resolveInfo == null || resolveInfo.serviceInfo == null) {
+                    continue;
+                }
+                mPrintServices.add(resolveInfo.serviceInfo.packageName);
             }
-            mPrintServices.add(resolveInfo.serviceInfo.packageName);
         }
 
         // Cache IME service packages to know when they go away.
-        InputMethodManager imeManager = (InputMethodManager)
-                mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        List<InputMethodInfo> inputMethods = imeManager.getInputMethodList();
-        final int inputMethodCount = inputMethods.size();
-        for (int i = 0; i < inputMethodCount; i++) {
-            InputMethodInfo inputMethod = inputMethods.get(i);
-            ServiceInfo serviceInfo = inputMethod.getServiceInfo();
-            if (serviceInfo == null) continue;
-            mImeServices.add(serviceInfo.packageName);
-        }
+        if (mHasFetureIme) {
+            InputMethodManager imeManager = (InputMethodManager)
+                    mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            List<InputMethodInfo> inputMethods = imeManager.getInputMethodList();
+            final int inputMethodCount = inputMethods.size();
+            for (int i = 0; i < inputMethodCount; i++) {
+                InputMethodInfo inputMethod = inputMethods.get(i);
+                ServiceInfo serviceInfo = inputMethod.getServiceInfo();
+                if (serviceInfo == null) continue;
+                mImeServices.add(serviceInfo.packageName);
+            }
 
-        // Watch for related content URIs.
-        mContext.getContentResolver().registerContentObserver(
-                UserDictionary.Words.CONTENT_URI, true, mContentObserver);
+            // Watch for related content URIs.
+            mContext.getContentResolver().registerContentObserver(
+                    UserDictionary.Words.CONTENT_URI, true, mUserDictionaryContentObserver);
+        }
 
         // Watch for input device changes.
         InputManager inputManager = (InputManager) context.getSystemService(
@@ -160,7 +174,10 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
                 Context.INPUT_SERVICE);
         inputManager.unregisterInputDeviceListener(this);
 
-        mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+        if (mHasFetureIme) {
+            mContext.getContentResolver().unregisterContentObserver(
+                    mUserDictionaryContentObserver);
+        }
 
         mAccessibilityServices.clear();
         mPrintServices.clear();
@@ -225,21 +242,25 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             }
         }
 
-        if (!mPrintServices.contains(packageName)) {
-            final Intent intent = getPrintServiceIntent(packageName);
-            if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
-                mPrintServices.add(packageName);
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        PrintSettingsFragment.class.getName(), false, true);
+        if (mHasFeturePrinting) {
+            if (!mPrintServices.contains(packageName)) {
+                final Intent intent = getPrintServiceIntent(packageName);
+                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                    mPrintServices.add(packageName);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            PrintSettingsFragment.class.getName(), false, true);
+                }
             }
         }
 
-        if (!mImeServices.contains(packageName)) {
-            Intent intent = getIMEServiceIntent(packageName);
-            if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
-                mImeServices.add(packageName);
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        InputMethodAndLanguageSettings.class.getName(), false, true);
+        if (mHasFetureIme) {
+            if (!mImeServices.contains(packageName)) {
+                Intent intent = getIMEServiceIntent(packageName);
+                if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
+                    mImeServices.add(packageName);
+                    Index.getInstance(mContext).updateFromClassNameResource(
+                            InputMethodAndLanguageSettings.class.getName(), false, true);
+                }
             }
         }
     }
@@ -252,24 +273,28 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
                     AccessibilitySettings.class.getName(), true, true);
         }
 
-        final int printIndex = mPrintServices.indexOf(packageName);
-        if (printIndex >= 0) {
-            mPrintServices.remove(printIndex);
-            Index.getInstance(mContext).updateFromClassNameResource(
-                    PrintSettingsFragment.class.getName(), true, true);
+        if (mHasFeturePrinting) {
+            final int printIndex = mPrintServices.indexOf(packageName);
+            if (printIndex >= 0) {
+                mPrintServices.remove(printIndex);
+                Index.getInstance(mContext).updateFromClassNameResource(
+                        PrintSettingsFragment.class.getName(), true, true);
+            }
         }
 
-        final int imeIndex = mImeServices.indexOf(packageName);
-        if (imeIndex >= 0) {
-            mImeServices.remove(imeIndex);
-            Index.getInstance(mContext).updateFromClassNameResource(
-                    InputMethodAndLanguageSettings.class.getName(), true, true);
+        if (mHasFetureIme) {
+            final int imeIndex = mImeServices.indexOf(packageName);
+            if (imeIndex >= 0) {
+                mImeServices.remove(imeIndex);
+                Index.getInstance(mContext).updateFromClassNameResource(
+                        InputMethodAndLanguageSettings.class.getName(), true, true);
+            }
         }
     }
 
-    private final class MyContentObserver extends ContentObserver {
+    private final class UserDictionaryContentObserver extends ContentObserver {
 
-        public MyContentObserver(Handler handler) {
+        public UserDictionaryContentObserver(Handler handler) {
             super(handler);
         }
 
