@@ -53,6 +53,8 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
         mStatusTextView = (TextView) view.findViewById(R.id.status);
 
         setOnClickListener(this);
+        setBackgroundResource(R.drawable.dashboard_tile_background);
+        setFocusable(true);
     }
 
     public TextView getTitleTextView() {
