@@ -41,6 +41,7 @@ import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
+import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -58,6 +59,8 @@ import java.util.List;
 public class SecuritySettings extends RestrictedSettingsFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener, Indexable {
     static final String TAG = "SecuritySettings";
+    private static final Intent TRUST_AGENT_INTENT =
+            new Intent(TrustAgentService.SERVICE_INTERFACE);
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
@@ -74,6 +77,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
+    private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -86,6 +90,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
+    private static final String KEY_TRUST_AGENT = "trust_agent";
 
     private DevicePolicyManager mDPM;
 
@@ -161,7 +166,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     /**
      * Important!
      *
-     * Dont forget to update the SecuritySearchIndexProvider if you are doing any change in the
+     * Don't forget to update the SecuritySearchIndexProvider if you are doing any change in the
      * logic or adding/removing preferences here.
      */
     private PreferenceScreen createPreferenceHierarchy() {
@@ -270,7 +275,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
         }
 
         // Application install
-        PreferenceGroup deviceAdminCategory= (PreferenceGroup)
+        PreferenceGroup deviceAdminCategory = (PreferenceGroup)
                 root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
         mToggleAppInstallation = (CheckBoxPreference) findPreference(
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
@@ -301,6 +306,36 @@ public class SecuritySettings extends RestrictedSettingsFragment
             protectByRestrictions(mToggleVerifyApps);
             protectByRestrictions(mResetCredentials);
             protectByRestrictions(root.findPreference(KEY_CREDENTIALS_INSTALL));
+        }
+
+        // Trust Agent preferences
+        PreferenceGroup securityCategory = (PreferenceGroup)
+                root.findPreference(KEY_SECURITY_CATEGORY);
+        if (securityCategory != null) {
+            PackageManager pm = getPackageManager();
+            List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
+                    PackageManager.GET_META_DATA);
+            for (ResolveInfo resolveInfo : resolveInfos) {
+                if (resolveInfo.serviceInfo == null) continue;
+                TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
+                        TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
+                if (trustAgentComponentInfo.componentName == null ||
+                        trustAgentComponentInfo.title == null ||
+                        trustAgentComponentInfo.title == "") continue;
+                Preference trustAgentPreference =
+                        new Preference(securityCategory.getContext());
+                trustAgentPreference.setKey(KEY_TRUST_AGENT);
+                trustAgentPreference.setTitle(trustAgentComponentInfo.title);
+                trustAgentPreference.setSummary(trustAgentComponentInfo.summary);
+                // Create intent for this preference.
+                Intent intent = new Intent();
+                intent.setComponent(trustAgentComponentInfo.componentName);
+                intent.setAction(Intent.ACTION_MAIN);
+                trustAgentPreference.setIntent(intent);
+                // Add preference to the settings menu.
+                securityCategory.addPreference(trustAgentPreference);
+                break; // Only render the first one.
+            }
         }
 
         return root;
@@ -522,6 +557,13 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
+        } else if (KEY_TRUST_AGENT.equals(key)) {
+            ChooseLockSettingsHelper helper =
+                    new ChooseLockSettingsHelper(this.getActivity(), this);
+            if (!helper.launchConfirmationActivity(CHANGE_TRUST_AGENT_SETTINGS, null, null)) {
+                // If this returns false, it means no password confirmation is required.
+                startActivity(preference.getIntent());
+            }
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -552,6 +594,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
             // is called by grabbing the value from lockPatternUtils.  We can't set it here
             // because mBiometricWeakLiveliness could be null
             return;
+        } else if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
+            Preference preference = getPreferenceScreen().findPreference(KEY_TRUST_AGENT);
+            if (preference != null) {
+                Intent intent = preference.getIntent();
+                if (intent != null) {
+                    startActivity(intent);
+                }
+            }
         }
         createPreferenceHierarchy();
     }
