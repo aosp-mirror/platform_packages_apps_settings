@@ -57,7 +57,7 @@
     </style>
 
 
-    <style name="TextAppearance" parent="android:TextAppearance">
+    <style name="TextAppearance" parent="android:TextAppearance.Quantum">
     </style>
 
     <style name="TextAppearance.info_label">
@@ -75,7 +75,7 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance">
+    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Quantum">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textStyle">bold</item>
@@ -86,7 +86,7 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="Theme.CreateShortCut" parent="android:Theme.Holo.DialogWhenLarge">
+    <style name="Theme.CreateShortCut" parent="android:Theme.Quantum.Light.DialogWhenLarge">
     </style>
 
     <style name="PreferenceHeaderPanelSinglePane">
@@ -205,18 +205,18 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Holo.NoActionBar">
+    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Quantum.Light.NoActionBar">
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Holo.SegmentedButton">
+    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Widget.Quantum.Light.SegmentedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:weightSum">2</item>
         <item name="android:dividerPadding">8dip</item>
     </style>
 
-    <style name="SecurityPreferenceButton" parent="@android:style/Widget.Holo.Button.Borderless">
+    <style name="SecurityPreferenceButton" parent="@android:style/Widget.Quantum.Light.Button.Borderless">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
@@ -242,11 +242,11 @@
         <item name="android:widgetLayout">@layout/preference_inputmethod_widget</item>
     </style>
 
-    <style name="TextAppearance.Switch" parent="@*android:style/TextAppearance.Holo.Widget.Switch">
+    <style name="TextAppearance.Switch" parent="@*android:style/TextAppearance.Quantum.Widget.Switch">
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.DeviceDefault.Small">
+    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Quantum.Small">
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>

@@ -21,40 +21,40 @@
     <attr name="setup_divider_color" format="reference" />
     <attr name="wifi_signal" format="reference" />
 
-    <style name="SetupWizardWifiTheme" parent="android:Theme.Holo.NoActionBar">
+    <style name="SetupWizardWifiTheme" parent="android:Theme.Quantum.NoActionBar">
         <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="android:alertDialogTheme">@style/Theme.WifiDialog</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
     </style>
 
-    <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Holo.Light.NoActionBar">
+    <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Quantum.Light.NoActionBar">
         <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="android:alertDialogTheme">@style/Theme.Light.WifiDialog</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_light</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
 
-    <style name="Theme.WifiDialog" parent="@*android:style/Theme.Holo.Dialog.Alert">
+    <style name="Theme.WifiDialog" parent="@*android:style/Theme.Quantum.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
     </style>
 
-    <style name="Theme.Light.WifiDialog" parent="@*android:style/Theme.Holo.Light.Dialog.Alert">
+    <style name="Theme.Light.WifiDialog" parent="@*android:style/Theme.Quantum.Light.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_light</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
