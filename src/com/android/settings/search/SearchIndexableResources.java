@@ -40,6 +40,7 @@ import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
+import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.Collection;
@@ -80,6 +81,12 @@ public final class SearchIndexableResources {
                 new SearchIndexableResource(RANK_WIFI,
                         NO_DATA_RES_ID,
                         WifiSettings.class.getName(),
+                        R.drawable.ic_settings_wireless));
+
+        sResMap.put(WifiSettings.class.getName(),
+                new SearchIndexableResource(RANK_WIFI,
+                        R.xml.wifi_advanced_settings,
+                        AdvancedWifiSettings.class.getName(),
                         R.drawable.ic_settings_wireless));
 
         sResMap.put(BluetoothSettings.class.getName(),
