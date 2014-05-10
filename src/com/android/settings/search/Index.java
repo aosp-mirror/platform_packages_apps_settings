@@ -436,6 +436,7 @@ public class Index {
             Log.e(LOG_TAG, "Cannot find SearchIndexableResources for class name: " + className);
             return false;
         }
+        res.context = mContext;
         res.enabled = includeInSearchResults;
         if (rebuild) {
             deleteIndexableData(res);
