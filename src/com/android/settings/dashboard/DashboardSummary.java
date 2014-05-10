@@ -46,6 +46,7 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     private ViewGroup mContainer;
     private ViewGroup mDashboard;
     private AuthenticatorHelper mAuthHelper;
+    private boolean mAccountListenerAdded;
 
     private static final int MSG_BUILD_CATEGORIES = 1;
     private Handler mHandler = new Handler() {
@@ -123,14 +124,20 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     public void onStart() {
         super.onStart();
 
-        AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, false);
+        if (!mAccountListenerAdded) {
+            AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, false);
+            mAccountListenerAdded = true;
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
+        if (mAccountListenerAdded) {
+            AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
+            mAccountListenerAdded = false;
+        }
     }
 
     private void updateTileView(Context context, Resources res, DashboardTile tile,
