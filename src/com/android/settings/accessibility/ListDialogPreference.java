@@ -82,6 +82,10 @@ public abstract class ListDialogPreference extends DialogPreference {
      */
     public void setValues(int[] values) {
         mEntryValues = values;
+
+        if (mValueSet && mValueIndex == AbsListView.INVALID_POSITION) {
+            mValueIndex = getIndexForValue(mValue);
+        }
     }
 
     /**
@@ -172,10 +176,12 @@ public abstract class ListDialogPreference extends DialogPreference {
      */
     protected int getIndexForValue(int value) {
         final int[] values = mEntryValues;
-        final int count = values.length;
-        for (int i = 0; i < count; i++) {
-            if (values[i] == value) {
-                return i;
+        if (values != null) {
+            final int count = values.length;
+            for (int i = 0; i < count; i++) {
+                if (values[i] == value) {
+                    return i;
+                }
             }
         }
 
