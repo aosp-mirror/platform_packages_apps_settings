@@ -36,6 +36,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.INotificationListener;
+import android.service.notification.NotificationOrderUpdate;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,11 +75,12 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private INotificationListener.Stub mListener = new INotificationListener.Stub() {
         @Override
-        public void onListenerConnected(String[] notificationKeys) throws RemoteException {
+        public void onListenerConnected(NotificationOrderUpdate update) throws RemoteException {
             // noop
         }
         @Override
-        public void onNotificationPosted(StatusBarNotification notification) throws RemoteException {
+        public void onNotificationPosted(StatusBarNotification notification,
+                NotificationOrderUpdate update) throws RemoteException {
             Log.v(TAG, "onNotificationPosted: " + notification);
             final Handler h = getListView().getHandler();
             h.removeCallbacks(mRefreshListRunnable);
@@ -86,10 +88,16 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
 
         @Override
-        public void onNotificationRemoved(StatusBarNotification notification) throws RemoteException {
+        public void onNotificationRemoved(StatusBarNotification notification,
+                NotificationOrderUpdate update) throws RemoteException {
             final Handler h = getListView().getHandler();
             h.removeCallbacks(mRefreshListRunnable);
             h.postDelayed(mRefreshListRunnable, 100);
+        }
+
+        @Override
+        public void onNotificationOrderUpdate(NotificationOrderUpdate update)
+                throws RemoteException {
         }
     };
 
