@@ -64,7 +64,6 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     private TextToSpeech mTts;
 
     private int mSelectedLocaleIndex = -1;
-    private int mSystemLocaleIndex = -1;
 
     private final TextToSpeech.OnInitListener mTtsInitListener = new TextToSpeech.OnInitListener() {
         @Override
@@ -201,8 +200,10 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
             mLocalePreference.setEnabled(false);
             return;
         }
-        String currentLocale = mEnginesHelper.getLocalePrefForEngine(
-                getEngineName());
+        String currentLocale = "";
+        if (!mEnginesHelper.isLocaleSetToDefaultForEngine(getEngineName())) {
+            currentLocale = mEnginesHelper.getLocalePrefForEngine(getEngineName());
+        }
 
         ArrayList<Pair<String, String>> entryPairs =
                 new ArrayList<Pair<String, String>>(availableLangs.size());
@@ -231,20 +232,18 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
             }
         });
 
-        String defaultLocaleStr = mEnginesHelper.getDefaultLocale();
-
         // Get two arrays out of one of pairs
-        mSelectedLocaleIndex = -1;
-        mSystemLocaleIndex = -1;
-        CharSequence[] entries = new CharSequence[availableLangs.size()];
-        CharSequence[] entryValues = new CharSequence[availableLangs.size()];
-        int i = 0;
+        mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
+        CharSequence[] entries = new CharSequence[availableLangs.size()+1];
+        CharSequence[] entryValues = new CharSequence[availableLangs.size()+1];
+
+        entries[0] = getActivity().getString(R.string.tts_lang_use_system);
+        entryValues[0] = "";
+
+        int i = 1;
         for (Pair<String, String> entry : entryPairs) {
             if (entry.second.equalsIgnoreCase(currentLocale)) {
                 mSelectedLocaleIndex = i;
-            }
-            if (entry.second.equalsIgnoreCase(defaultLocaleStr)) {
-                mSystemLocaleIndex = i;
             }
             entries[i] = entry.first;
             entryValues[i++] = entry.second;
@@ -322,17 +321,17 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mLocalePreference.setSummary(mLocalePreference.getEntries()[selectedLocaleIndex]);
         mSelectedLocaleIndex = selectedLocaleIndex;
 
-        if (mSelectedLocaleIndex == mSystemLocaleIndex) {
-            // Use empty locale, it will default to the system language
-            mEnginesHelper.updateLocalePrefForEngine(getEngineName(), "");
-        } else {
-            mEnginesHelper.updateLocalePrefForEngine(getEngineName(), locale);
-        }
+        mEnginesHelper.updateLocalePrefForEngine(getEngineName(), locale);
 
         if (getEngineName().equals(mTts.getCurrentEngine())) {
-            String[] localeArray = TtsEngines.parseLocalePref(locale);
-            if (localeArray != null) {
-                mTts.setLanguage(new Locale(localeArray[0], localeArray[1], localeArray[2]));
+            if (!locale.isEmpty()) {
+                String[] localeArray = TtsEngines.parseLocalePref(locale);
+                if (localeArray != null) {
+                    mTts.setLanguage(new Locale(localeArray[0], localeArray[1], localeArray[2]));
+                }
+            } else {
+                // Empty locale means "use system default"
+                mTts.setLanguage(Locale.getDefault());
             }
         }
     }
