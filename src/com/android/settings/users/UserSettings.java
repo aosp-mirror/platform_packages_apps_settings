@@ -129,6 +129,7 @@ public class UserSettings extends RestrictedSettingsFragment
     private boolean mAddingUser;
     private boolean mProfileExists;
     private boolean mEnabled = true;
+    private boolean mCanAddRestrictedProfile = true;
 
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
@@ -183,15 +184,16 @@ public class UserSettings extends RestrictedSettingsFragment
                 mRemovingUserId = icicle.getInt(SAVE_REMOVING_USER);
             }
         }
-
-        mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        final Context context = getActivity();
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         if (!mUserManager.supportsMultipleUsers() || Utils.isMonkeyRunning()) {
             mEnabled = false;
             return;
         }
+
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
-        mMePreference = new UserPreference(getActivity(), null, UserHandle.myUserId(),
+        mMePreference = new UserPreference(context, null, UserHandle.myUserId(),
                 mUserManager.isLinkedUser() ? null : this, null);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
@@ -199,9 +201,16 @@ public class UserSettings extends RestrictedSettingsFragment
             mMePreference.setSummary(R.string.user_owner);
         }
         mAddUser = findPreference(KEY_ADD_USER);
-        mAddUser.setOnPreferenceClickListener(this);
         if (!mIsOwner || UserManager.getMaxSupportedUsers() < 2) {
             removePreference(KEY_ADD_USER);
+        } else {
+            mAddUser.setOnPreferenceClickListener(this);
+            DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
+                    Context.DEVICE_POLICY_SERVICE);
+            if (dpm.getDeviceOwner() != null) {
+                mCanAddRestrictedProfile = false;
+                mAddUser.setTitle(R.string.user_add_user_menu);
+            }
         }
         loadProfile();
         setHasOptionsMenu(true);
@@ -771,7 +780,13 @@ public class UserSettings extends RestrictedSettingsFragment
                 }
             }
         } else if (pref == mAddUser) {
-            showDialog(DIALOG_CHOOSE_USER_TYPE);
+            // If we allow both types, show a picker, otherwise directly go to
+            // flow for full user.
+            if (mCanAddRestrictedProfile) {
+                showDialog(DIALOG_CHOOSE_USER_TYPE);
+            } else {
+                onAddUserClicked(USER_TYPE_USER);
+            }
         }
         return false;
     }
