@@ -35,13 +35,10 @@ import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeList
 public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION;
     private static final String QUICK_SETTING_ENABLED =
             Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_QUICK_SETTING_ENABLED;
-    private static final int DEFAULT_TYPE = AccessibilityManager.INVERSION_STANDARD;
 
     private CheckBoxPreference mEnableQuickSetting;
-    private ListPreference mType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +47,6 @@ public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFr
         addPreferencesFromResource(R.xml.accessibility_inversion_settings);
 
         mEnableQuickSetting = (CheckBoxPreference) findPreference("enable_quick_setting");
-        mType = (ListPreference) findPreference("type");
 
         initPreferences();
     }
@@ -65,8 +61,6 @@ public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFr
         if (preference == mEnableQuickSetting) {
             Settings.Secure.putInt(
                     getContentResolver(), QUICK_SETTING_ENABLED, ((Boolean) newValue) ? 1 : 0);
-        } else if (preference == mType) {
-            Settings.Secure.putInt(getContentResolver(), TYPE, Integer.parseInt((String) newValue));
         }
 
         return true;
@@ -97,9 +91,5 @@ public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFr
         mEnableQuickSetting.setChecked(
                 Settings.Secure.getInt(getContentResolver(), QUICK_SETTING_ENABLED, 0) == 1);
         mEnableQuickSetting.setOnPreferenceChangeListener(this);
-
-        mType.setValue(
-                Integer.toString(Settings.Secure.getInt(getContentResolver(), TYPE, DEFAULT_TYPE)));
-        mType.setOnPreferenceChangeListener(this);
     }
 }

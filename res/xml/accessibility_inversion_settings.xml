@@ -22,12 +22,4 @@
         android:persistent="false"
         android:title="@string/enable_quick_setting" />
 
-    <ListPreference
-        android:entries="@array/inversion_type_entries"
-        android:entryValues="@array/inversion_type_values"
-        android:key="type"
-        android:persistent="false"
-        android:summary="%s"
-        android:title="@string/inversion_type" />
-
 </PreferenceScreen>

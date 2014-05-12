@@ -525,8 +525,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 mDisplayMagnificationPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED,
                 mDisplayInversionPreferenceScreen);
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_CONTRAST_ENABLED,
-                mDisplayContrastPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
