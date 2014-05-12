@@ -987,21 +987,6 @@
                 android:resource="@id/accessibility_settings" />
         </activity>
 
-        <activity android:name="Settings$AccessibilityContrastSettingsActivity"
-                android:label="@string/accessibility_display_contrast_preference_title"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$AccessibilitySettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.ACCESSIBILITY_CONTRAST_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ToggleContrastPreferenceFragment" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/accessibility_settings" />
-        </activity>
-
         <activity android:name="Settings$AccessibilityDaltonizerSettingsActivity"
                 android:label="@string/accessibility_display_daltonizer_preference_title"
                 android:taskAffinity="com.android.settings"
