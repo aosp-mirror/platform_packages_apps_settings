@@ -52,6 +52,10 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     private static final String KEY_ENGINE_SETTINGS = "tts_engine_settings";
     private static final String KEY_INSTALL_DATA = "tts_install_data";
 
+    private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
+    private static final String STATE_KEY_LOCALE_ENTRY_VALUES= "locale_entry_values";
+    private static final String STATE_KEY_LOCALE_VALUE = "locale_value";
+
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
 
     private TtsEngines mEnginesHelper;
@@ -120,10 +124,26 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
             mEngineSettingsPreference.setEnabled(false);
         }
         mInstallVoicesPreference.setEnabled(false);
-        mLocalePreference.setEnabled(false);
 
-        mLocalePreference.setEntries(new CharSequence[0]);
-        mLocalePreference.setEntryValues(new CharSequence[0]);
+        if (savedInstanceState == null) {
+            mLocalePreference.setEnabled(false);
+            mLocalePreference.setEntries(new CharSequence[0]);
+            mLocalePreference.setEntryValues(new CharSequence[0]);
+        } else {
+            // Repopulate mLocalePreference with saved state. Will be updated later with
+            // up-to-date values when checkTtsData() calls back with results.
+            final CharSequence[] entries =
+                    savedInstanceState.getCharSequenceArray(STATE_KEY_LOCALE_ENTRIES);
+            final CharSequence[] entryValues =
+                    savedInstanceState.getCharSequenceArray(STATE_KEY_LOCALE_ENTRY_VALUES);
+            final CharSequence value =
+                    savedInstanceState.getCharSequence(STATE_KEY_LOCALE_VALUE);
+
+            mLocalePreference.setEntries(entries);
+            mLocalePreference.setEntryValues(entryValues);
+            mLocalePreference.setValue(value.toString());
+            mLocalePreference.setEnabled(entries.length > 0);
+        }
 
         mVoiceDataDetails = getArguments().getParcelable(TtsEnginePreference.FRAGMENT_ARGS_VOICES);
 
@@ -142,6 +162,19 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         getActivity().unregisterReceiver(mLanguagesChangedReceiver);
         mTts.shutdown();
         super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save the mLocalePreference values, so we can repopulate it with entries.
+        outState.putCharSequenceArray(STATE_KEY_LOCALE_ENTRIES,
+                mLocalePreference.getEntries());
+        outState.putCharSequenceArray(STATE_KEY_LOCALE_ENTRY_VALUES,
+                mLocalePreference.getEntryValues());
+        outState.putCharSequence(STATE_KEY_LOCALE_VALUE,
+                mLocalePreference.getValue());
     }
 
     private final void checkTtsData() {
