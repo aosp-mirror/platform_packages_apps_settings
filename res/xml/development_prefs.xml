@@ -105,6 +105,14 @@
             android:key="wifi_display_certification"
             android:title="@string/wifi_display_certification"
             android:summary="@string/wifi_display_certification_summary"/>
+
+        <ListPreference
+            android:key="select_logd_size"
+            android:title="@string/select_logd_size_title"
+            android:dialogTitle="@string/select_logd_size_dialog_title"
+            android:entries="@array/select_logd_size_titles"
+            android:entryValues="@array/select_logd_size_values" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_input_category"
