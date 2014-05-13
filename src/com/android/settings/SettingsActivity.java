@@ -153,15 +153,6 @@ public class SettingsActivity extends Activity
      */
     public static final String EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key";
 
-    /**
-     * When starting this activity, the invoking Intent can contain this extra
-     * boolean that the header list should not be displayed.  This is most often
-     * used in conjunction with {@link #EXTRA_SHOW_FRAGMENT} to launch
-     * the activity to display a specific fragment that the user has navigated
-     * to.
-     */
-    public static final String EXTRA_NO_HEADERS = ":settings:no_headers";
-
     public static final String BACK_STACK_PREFS = ":settings:prefs";
 
     // extras that allow any preference activity to be launched as part of a wizard
@@ -668,17 +659,6 @@ public class SettingsActivity extends Activity
             if (ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
         }
         return false;
-    }
-
-    /**
-     * Called to determine whether the header list should be hidden.
-     * The default implementation returns the
-     * value given in {@link #EXTRA_NO_HEADERS} or false if it is not supplied.
-     * This is set to false, for example, when the activity is being re-launched
-     * to show a particular preference activity.
-     */
-    public boolean onIsHidingHeaders() {
-        return getIntent().getBooleanExtra(EXTRA_NO_HEADERS, false);
     }
 
     @Override

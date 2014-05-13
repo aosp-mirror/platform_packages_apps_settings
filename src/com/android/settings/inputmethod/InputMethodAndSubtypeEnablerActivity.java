@@ -25,7 +25,6 @@ public class InputMethodAndSubtypeEnablerActivity extends SettingsActivity {
         final Intent modIntent = new Intent(super.getIntent());
         if (!modIntent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, InputMethodAndSubtypeEnabler.class.getName());
-            modIntent.putExtra(EXTRA_NO_HEADERS, true);
         }
         return modIntent;
     }

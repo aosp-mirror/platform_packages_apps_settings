@@ -29,7 +29,6 @@ public class SyncSettingsActivity extends SettingsActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, SyncSettings.class.getName());
-        modIntent.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
         return modIntent;
     }
 

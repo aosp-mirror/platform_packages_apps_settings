@@ -555,7 +555,6 @@ public class Utils {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
-        intent.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
         return intent;
     }
 }

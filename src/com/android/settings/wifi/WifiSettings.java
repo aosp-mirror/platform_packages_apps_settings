@@ -416,24 +416,17 @@ public class WifiSettings extends RestrictedSettingsFragment
             final Activity activity = getActivity();
 
             mSwitch = new Switch(activity.getActionBar().getThemedContext());
-            boolean addSwitch = true;
 
-            if (activity instanceof WifiPickerActivity) {
-                PreferenceActivity pa = (PreferenceActivity) activity;
-                addSwitch = pa.onIsHidingHeaders();
-            }
+            final int padding = activity.getResources().getDimensionPixelSize(
+                    R.dimen.action_bar_switch_padding);
+            mSwitch.setPaddingRelative(0, 0, padding, 0);
 
-            if (addSwitch) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                mSwitch.setPaddingRelative(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END));
-            }
+            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                    ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_VERTICAL | Gravity.END));
 
             mWifiEnabler = new WifiEnabler(activity, mSwitch);
         }
@@ -442,19 +435,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onStop() {
         super.onStop();
-        Activity activity = getActivity();
-        boolean onIsHidingHeaders = true;
-        if (activity instanceof SettingsActivity){
-            SettingsActivity sa = (SettingsActivity) activity;
-            onIsHidingHeaders = sa.onIsHidingHeaders();
-        } else if (activity instanceof PreferenceActivity) {
-            PreferenceActivity pa = (PreferenceActivity) activity;
-            onIsHidingHeaders = pa.onIsHidingHeaders();
-        }
-        if (!onIsHidingHeaders) {
-            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(null);
-        }
+        final Activity activity = getActivity();
+        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(null);
     }
 
     @Override

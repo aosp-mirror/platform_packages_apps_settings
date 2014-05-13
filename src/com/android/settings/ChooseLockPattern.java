@@ -63,7 +63,6 @@ public class ChooseLockPattern extends SettingsActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPatternFragment.class.getName());
-        modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
     }
 

@@ -141,10 +141,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     public void onStop() {
         super.onStop();
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        if (!activity.onIsHidingHeaders()) {
-            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(null);
-        }
+        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+        activity.getActionBar().setCustomView(null);
     }
 
     @Override
