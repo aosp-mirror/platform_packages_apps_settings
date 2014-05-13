@@ -22,6 +22,12 @@
                 android:title="@string/brightness"
                 android:persistent="false"/>
 
+        <CheckBoxPreference
+                android:key="auto_brightness"
+                android:title="@string/auto_brightness_title"
+                android:summary="@string/auto_brightness_summary"
+                android:persistent="false" />
+
         <PreferenceScreen
                 android:key="wallpaper"
                 android:title="@string/wallpaper_settings_title"
