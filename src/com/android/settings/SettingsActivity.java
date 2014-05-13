@@ -304,6 +304,8 @@ public class SettingsActivity extends Activity
     private ActionBar mActionBar;
     private boolean mDisplayHomeAsUpEnabled;
 
+    private boolean mIsShowingDashboard;
+
     private SearchView mSearchView;
     private MenuItem mSearchMenuItem;
     private boolean mSearchMenuItemExpanded = false;
@@ -387,6 +389,11 @@ public class SettingsActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Only show the Search menu on the main screen (Dashboard)
+        if (!mIsShowingDashboard) {
+            return true;
+        }
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
 
@@ -442,7 +449,9 @@ public class SettingsActivity extends Activity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        if (initialFragmentName == null) {
+        mIsShowingDashboard = (initialFragmentName == null);
+
+        if (mIsShowingDashboard) {
             Index.getInstance(this).update();
         }
 
@@ -468,7 +477,7 @@ public class SettingsActivity extends Activity
             // We need to build the Categories in all cases
             buildDashboardCategories(mCategories);
 
-            if (initialFragmentName != null) {
+            if (!mIsShowingDashboard) {
                 final ComponentName cn = getIntent().getComponent();
                 // No UP is we are launched thru a Settings shortcut
                 if (!cn.getClassName().equals(SubSettings.class.getName())) {
