@@ -146,9 +146,7 @@ public abstract class ToggleFeaturePreferenceFragment
 
     public void setTitle(String title) {
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        if (!activity.onIsHidingHeaders()) {
-            getActivity().setTitle(title);
-        }
+        getActivity().setTitle(title);
     }
 
     protected void onProcessArguments(Bundle arguments) {

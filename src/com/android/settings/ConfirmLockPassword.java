@@ -48,7 +48,6 @@ public class ConfirmLockPassword extends SettingsActivity {
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ConfirmLockPasswordFragment.class.getName());
-        modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
     }
 
