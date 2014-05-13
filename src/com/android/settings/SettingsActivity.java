@@ -410,6 +410,10 @@ public class SettingsActivity extends Activity
             return false;
         }
 
+        if (mSearchResultsFragment != null) {
+            mSearchResultsFragment.setSearchView(mSearchView);
+        }
+
         mSearchMenuItem.setOnActionExpandListener(this);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnCloseListener(this);
