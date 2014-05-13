@@ -1069,6 +1069,12 @@ public class SettingsActivity extends Activity
                             category.removeTile(n);
                         }
                     }
+                } else if (id == R.id.print_settings) {
+                    boolean hasPrintingSupport = getPackageManager().hasSystemFeature(
+                            PackageManager.FEATURE_PRINTING);
+                    if (!hasPrintingSupport) {
+                        category.removeTile(n);
+                    }
                 } else if (id == R.id.development_settings) {
                     if (!showDev || um.hasUserRestriction(
                             UserManager.DISALLOW_DEBUGGING_FEATURES)) {
