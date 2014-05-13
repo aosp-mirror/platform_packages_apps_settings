@@ -51,6 +51,8 @@ public class SearchResultsSummary extends Fragment {
     private static final String EMPTY_QUERY = "";
     private static char ELLIPSIS = '\u2026';
 
+    private static final String SAVE_KEY_SHOW_ONLY_RESULTS = ":settings:show_only_results";
+
     private SearchView mSearchView;
 
     private ListView mResultsListView;
@@ -65,6 +67,8 @@ public class SearchResultsSummary extends Fragment {
     private ViewGroup mLayoutResults;
 
     private String mQuery;
+
+    private boolean mShowOnlyResults;
 
     /**
      * A basic AsyncTask for updating the query results cursor
@@ -110,6 +114,17 @@ public class SearchResultsSummary extends Fragment {
 
         mResultsAdapter = new SearchResultsAdapter(getActivity());
         mSuggestionsAdapter = new SuggestionsAdapter(getActivity());
+
+        if (savedInstanceState != null) {
+            mShowOnlyResults = savedInstanceState.getBoolean(SAVE_KEY_SHOW_ONLY_RESULTS);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean(SAVE_KEY_SHOW_ONLY_RESULTS, mShowOnlyResults);
     }
 
     @Override
@@ -197,6 +212,7 @@ public class SearchResultsSummary extends Fragment {
                 mQuery = cursor.getString(0);
                 mSearchView.setQuery(mQuery, false);
                 setSuggestionsVisibility(false);
+                mShowOnlyResults = true;
             }
         });
 
@@ -207,7 +223,9 @@ public class SearchResultsSummary extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        showSomeSuggestions();
+        if (!mShowOnlyResults) {
+            showSomeSuggestions();
+        }
     }
 
     public void setSearchView(SearchView searchView) {
@@ -232,13 +250,30 @@ public class SearchResultsSummary extends Fragment {
 
     public boolean onQueryTextSubmit(String query) {
         mQuery = getFilteredQueryString(query);
+        setSuggestionsVisibility(!mShowOnlyResults);
         updateSearchResults();
         return true;
     }
 
     public boolean onQueryTextChange(String query) {
-        mQuery = getFilteredQueryString(query);
-        updateSuggestions();
+        final String newQuery = getFilteredQueryString(query);
+
+        boolean isNewQuery;
+        if (!TextUtils.isEmpty(mQuery)) {
+            isNewQuery = !mQuery.equals(query);
+        } else {
+            isNewQuery = !TextUtils.isEmpty(query);
+        }
+
+        mQuery = newQuery;
+
+        if (isNewQuery) {
+            mShowOnlyResults = false;
+        }
+        if (!mShowOnlyResults) {
+            updateSuggestions();
+        }
+
         updateSearchResults();
         return true;
     }
