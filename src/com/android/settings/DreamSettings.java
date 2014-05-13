@@ -150,7 +150,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
         // create "start" action
         MenuItem start = createMenuItem(menu, R.string.screensaver_settings_dream_start,
-                MenuItem.SHOW_AS_ACTION_ALWAYS,
+                MenuItem.SHOW_AS_ACTION_NEVER,
                 isEnabled, new Runnable(){
                     @Override
                     public void run() {
@@ -160,7 +160,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
         // create "when to dream" overflow menu item
         MenuItem whenToDream = createMenuItem(menu,
                 R.string.screensaver_settings_when_to_dream,
-                MenuItem.SHOW_AS_ACTION_IF_ROOM,
+                MenuItem.SHOW_AS_ACTION_NEVER,
                 isEnabled,
                 new Runnable() {
                     @Override
