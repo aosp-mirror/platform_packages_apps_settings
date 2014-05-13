@@ -77,7 +77,6 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.DashboardTile;
-import com.android.settings.dashboard.Header;
 import com.android.settings.dashboard.NoHomeDialogFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
@@ -115,7 +114,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.android.settings.dashboard.Header.HEADER_ID_UNDEFINED;
+import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
 
 public class SettingsActivity extends Activity
         implements PreferenceManager.OnPreferenceTreeClickListener,
@@ -492,7 +491,7 @@ public class SettingsActivity extends Activity
                 switchToFragment( initialFragmentName, initialArguments, true, false,
                         mInitialTitle, false);
             } else {
-                // No UP if we are displaying the Headers
+                // No UP if we are displaying the main Dashboard
                 mDisplayHomeAsUpEnabled = false;
                 if (mCategories.size() > 0) {
                     mInitialTitle = getText(R.string.dashboard_title);
@@ -669,25 +668,6 @@ public class SettingsActivity extends Activity
             if (ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
         }
         return false;
-    }
-
-    /**
-     * When in two-pane mode, switch to the fragment pane to show the given
-     * preference fragment.
-     *
-     * @param header The new header to display.
-     * @param position The position of the Header in the list.
-     */
-    private void onHeaderClick(Header header, int position) {
-        if (header == null) {
-            return;
-        }
-        if (header.fragment != null) {
-            Utils.startWithFragment(this, header.fragment, header.fragmentArguments, null, 0,
-                    header.getTitle(getResources()));
-        } else if (header.intent != null) {
-            startActivity(header.intent);
-        }
     }
 
     /**
@@ -919,7 +899,7 @@ public class SettingsActivity extends Activity
                                     attrs, com.android.internal.R.styleable.PreferenceHeader);
                             tile.id = sa.getResourceId(
                                     com.android.internal.R.styleable.PreferenceHeader_id,
-                                    (int)HEADER_ID_UNDEFINED);
+                                    (int)TILE_ID_UNDEFINED);
                             tv = sa.peekValue(
                                     com.android.internal.R.styleable.PreferenceHeader_title);
                             if (tv != null && tv.type == TypedValue.TYPE_STRING) {
