@@ -27,6 +27,12 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent">
 
+        <com.android.settings.widget.SwitchBar android:id="@+id/switch_bar"
+                  android:layout_height="?android:attr/actionBarSize"
+                  android:layout_width="match_parent"
+                  android:background="@color/switch_bar_background_color"
+                  android:theme="@android:style/Theme.Quantum" />
+
         <FrameLayout
                 android:id="@+id/prefs"
                 android:layout_width="match_parent"
@@ -49,6 +55,7 @@
                 android:layout_alignParentStart="true"
                 android:text="@*android:string/back_button_label"
                 />
+
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"

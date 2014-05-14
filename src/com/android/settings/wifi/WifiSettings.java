@@ -19,13 +19,13 @@ package com.android.settings.wifi;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
-import android.preference.PreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.widget.SwitchBar;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.ActionBar;
@@ -179,7 +179,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     // the action bar uses a different set of controls for Setup Wizard
     private boolean mSetupWizardMode;
 
-    private Switch mSwitch;
+    private SwitchBar mSwitchBar;
 
     /* End of "used in Wifi Setup context" */
 
@@ -413,32 +413,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         // On/off switch is hidden for Setup Wizard
         if (!mSetupWizardMode) {
-            final Activity activity = getActivity();
+            final SettingsActivity activity = (SettingsActivity) getActivity();
 
-            mSwitch = new Switch(activity.getActionBar().getThemedContext());
-
-            final int padding = activity.getResources().getDimensionPixelSize(
-                    R.dimen.action_bar_switch_padding);
-            mSwitch.setPaddingRelative(0, 0, padding, 0);
-
-            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                    ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_VERTICAL | Gravity.END));
-
-            mWifiEnabler = new WifiEnabler(activity, mSwitch);
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (!mSetupWizardMode) {
-            final Activity activity = getActivity();
-            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(null);
+            mSwitchBar = activity.getSwitchBar();
+            mWifiEnabler = new WifiEnabler(activity, mSwitchBar);
         }
     }
 

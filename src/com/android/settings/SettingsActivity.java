@@ -102,6 +102,7 @@ import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
+import com.android.settings.widget.SwitchBar;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
@@ -300,8 +301,10 @@ public class SettingsActivity extends Activity
     private final DynamicIndexableContentMonitor mDynamicIndexableContentMonitor =
             new DynamicIndexableContentMonitor();
 
-    private Button mNextButton;
     private ActionBar mActionBar;
+    private SwitchBar mSwitchBar;
+
+    private Button mNextButton;
     private boolean mDisplayHomeAsUpEnabled;
 
     private boolean mIsShowingDashboard;
@@ -329,6 +332,10 @@ public class SettingsActivity extends Activity
     };
 
     private boolean mNeedToRevertToInitialFragment = false;
+
+    public SwitchBar getSwitchBar() {
+        return mSwitchBar;
+    }
 
     public AuthenticatorHelper getAuthenticatorHelper() {
         return mAuthenticatorHelper;
@@ -389,11 +396,6 @@ public class SettingsActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Only show the Search menu on the main screen (Dashboard)
-        if (!mIsShowingDashboard) {
-            return true;
-        }
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
 
@@ -504,6 +506,8 @@ public class SettingsActivity extends Activity
         mActionBar = getActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
         mActionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
+
+        mSwitchBar = (SwitchBar) findViewById(R.id.switch_bar);
 
         // see if we should show Back/Next buttons
         Intent intent = getIntent();
@@ -1245,9 +1249,11 @@ public class SettingsActivity extends Activity
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
+            final boolean isShowingSwitchBar = mSwitchBar.isShowing();
             String title = getString(R.string.search_results_title);
             mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
-                    SearchResultsSummary.class.getName(), null, false, true, title, true);
+                    SearchResultsSummary.class.getName(), null, false, true, title,
+                    !isShowingSwitchBar);
         }
         mSearchResultsFragment.setSearchView(mSearchView);
         mSearchMenuItemExpanded = true;
