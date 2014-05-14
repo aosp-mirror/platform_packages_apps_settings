@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.ActivityManagerNative;
@@ -25,7 +28,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -35,7 +37,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_SCREEN_SAVER = "screensaver";
+    private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -60,6 +62,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
+    private CheckBoxPreference mAutoBrightnessPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
+
+        boolean automaticBrightnessAvailable = getResources().getBoolean(
+                com.android.internal.R.bool.config_automatic_brightness_available);
+        if (automaticBrightnessAvailable) {
+            mAutoBrightnessPreference = (CheckBoxPreference) findPreference(KEY_AUTO_BRIGHTNESS);
+            mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_AUTO_BRIGHTNESS);
+        }
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -189,7 +201,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-
         updateState();
     }
 
@@ -210,6 +221,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private void updateState() {
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
+
+        // Update auto brightness if it is available.
+        if (mAutoBrightnessPreference != null) {
+            int brightnessMode = Settings.System.getInt(getContentResolver(),
+                    SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL);
+            mAutoBrightnessPreference.setChecked(brightnessMode != SCREEN_BRIGHTNESS_MODE_MANUAL);
+        }
     }
 
     private void updateScreenSaverSummary() {
@@ -248,7 +266,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
         }
-
+        if (preference == mAutoBrightnessPreference) {
+            boolean auto = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), SCREEN_BRIGHTNESS_MODE,
+                    auto ? SCREEN_BRIGHTNESS_MODE_AUTOMATIC : SCREEN_BRIGHTNESS_MODE_MANUAL);
+        }
         return true;
     }
 
