@@ -435,9 +435,11 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onStop() {
         super.onStop();
-        final Activity activity = getActivity();
-        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(null);
+        if (!mSetupWizardMode) {
+            final Activity activity = getActivity();
+            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(null);
+        }
     }
 
     @Override
