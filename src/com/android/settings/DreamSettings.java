@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,7 +26,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,8 +37,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -48,10 +44,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.DreamBackend.DreamInfo;
+import com.android.settings.widget.SwitchBar;
 
 import java.util.List;
 
-public class DreamSettings extends SettingsPreferenceFragment {
+public class DreamSettings extends SettingsPreferenceFragment implements
+        SwitchBar.OnSwitchChangeListener {
     private static final String TAG = DreamSettings.class.getSimpleName();
     static final boolean DEBUG = false;
     private static final int DIALOG_WHEN_TO_DREAM = 1;
@@ -62,6 +60,7 @@ public class DreamSettings extends SettingsPreferenceFragment {
     private Context mContext;
     private DreamBackend mBackend;
     private DreamInfoAdapter mAdapter;
+    private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private MenuItem[] mMenuItemsWhenEnabled;
     private boolean mRefreshing;
@@ -83,46 +82,37 @@ public class DreamSettings extends SettingsPreferenceFragment {
         logd("onCreate(%s)", icicle);
         super.onCreate(icicle);
 
-        final Activity activity = getActivity();
+        final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mBackend = new DreamBackend(activity);
-        mSwitch = new Switch(activity.getActionBar().getThemedContext());
-        mSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!mRefreshing) {
-                    mBackend.setEnabled(isChecked);
-                    refreshFromBackend();
-                }
-            }
-        });
 
-        final int padding = activity.getResources().getDimensionPixelSize(
-                R.dimen.action_bar_switch_padding);
-        mSwitch.setPaddingRelative(0, 0, padding, 0);
+        mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitch = mSwitchBar.getSwitch();
 
         setHasOptionsMenu(true);
+    }
+
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (!mRefreshing) {
+            mBackend.setEnabled(isChecked);
+            refreshFromBackend();
+        }
     }
 
     @Override
     public void onStart() {
         logd("onStart()");
         super.onStart();
-
-        final ActionBar actionBar = getActivity().getActionBar();
-
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(mSwitch, new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END));
     }
 
     @Override
     public void onDestroyView() {
         logd("onDestroyView()");
-        getActivity().getActionBar().setCustomView(null);
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
         super.onDestroyView();
     }
 
@@ -140,6 +130,8 @@ public class DreamSettings extends SettingsPreferenceFragment {
 
         mAdapter = new DreamInfoAdapter(mContext);
         listView.setAdapter(mAdapter);
+
+        mSwitchBar.show();
     }
 
     @Override
