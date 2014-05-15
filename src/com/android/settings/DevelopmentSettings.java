@@ -66,6 +66,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.settings.widget.SwitchBar;
 import dalvik.system.VMRuntime;
 
 import java.io.File;
@@ -78,7 +79,7 @@ import java.util.List;
  */
 public class DevelopmentSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
-                OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
+                OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener {
     private static final String TAG = "DevelopmentSettings";
 
     /**
@@ -163,6 +164,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private DevicePolicyManager mDpm;
     private UserManager mUm;
 
+    private SwitchBar mSwitchBar;
     private Switch mEnabledSwitch;
     private boolean mLastEnabledState;
     private boolean mHaveDebugSettings;
@@ -377,37 +379,27 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final Activity activity = getActivity();
-        mEnabledSwitch = new Switch(activity.getActionBar().getThemedContext());
+        final SettingsActivity activity = (SettingsActivity) getActivity();
 
-        final int padding = activity.getResources().getDimensionPixelSize(
-                R.dimen.action_bar_switch_padding);
-        mEnabledSwitch.setPaddingRelative(0, 0, padding, 0);
+        mSwitchBar = activity.getSwitchBar();
+        mEnabledSwitch = mSwitchBar.getSwitch();
         if (mUnavailable) {
             mEnabledSwitch.setEnabled(false);
             return;
         }
-        mEnabledSwitch.setOnCheckedChangeListener(this);
+        mSwitchBar.addOnSwitchChangeListener(this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        final Activity activity = getActivity();
-        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(mEnabledSwitch, new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END));
+        mSwitchBar.show();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        final Activity activity = getActivity();
-        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(null);
+        mSwitchBar.hide();
     }
 
     private boolean removePreferenceForProduction(Preference preference) {
@@ -1217,28 +1209,29 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (buttonView == mEnabledSwitch) {
-            if (isChecked != mLastEnabledState) {
-                if (isChecked) {
-                    mDialogClicked = false;
-                    if (mEnableDialog != null) dismissDialogs();
-                    mEnableDialog = new AlertDialog.Builder(getActivity()).setMessage(
-                            getActivity().getResources().getString(
-                                    R.string.dev_settings_warning_message))
-                            .setTitle(R.string.dev_settings_warning_title)
-                            .setIconAttribute(android.R.attr.alertDialogIcon)
-                            .setPositiveButton(android.R.string.yes, this)
-                            .setNegativeButton(android.R.string.no, this)
-                            .show();
-                    mEnableDialog.setOnDismissListener(this);
-                } else {
-                    resetDangerousOptions();
-                    Settings.Global.putInt(getActivity().getContentResolver(),
-                            Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
-                    mLastEnabledState = isChecked;
-                    setPrefsEnabledState(mLastEnabledState);
-                }
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (switchView != mEnabledSwitch) {
+            return;
+        }
+        if (isChecked != mLastEnabledState) {
+            if (isChecked) {
+                mDialogClicked = false;
+                if (mEnableDialog != null) dismissDialogs();
+                mEnableDialog = new AlertDialog.Builder(getActivity()).setMessage(
+                        getActivity().getResources().getString(
+                                R.string.dev_settings_warning_message))
+                        .setTitle(R.string.dev_settings_warning_title)
+                        .setIconAttribute(android.R.attr.alertDialogIcon)
+                        .setPositiveButton(android.R.string.yes, this)
+                        .setNegativeButton(android.R.string.no, this)
+                        .show();
+                mEnableDialog.setOnDismissListener(this);
+            } else {
+                resetDangerousOptions();
+                Settings.Global.putInt(getActivity().getContentResolver(),
+                        Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+                mLastEnabledState = isChecked;
+                setPrefsEnabledState(mLastEnabledState);
             }
         }
     }
