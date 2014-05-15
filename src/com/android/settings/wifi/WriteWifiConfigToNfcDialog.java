@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2014 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings.wifi;
 
 import android.app.Activity;
@@ -39,6 +55,8 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
     private static final String TAG = WriteWifiConfigToNfcDialog.class.getName().toString();
     private static final String PASSWORD_FORMAT = "102700%s%s";
+    private static final int HEX_RADIX = 16;
+    private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     private final PowerManager.WakeLock mWakeLock;
 
@@ -58,12 +76,13 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     WriteWifiConfigToNfcDialog(Context context, AccessPoint accessPoint,
             WifiManager wifiManager) {
         super(context);
-        this.mContext = context;
-        this.mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
+
+        mContext = context;
+        mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
-        this.mAccessPoint = accessPoint;
-        this.mOnTextChangedHandler = new Handler();
-        this.mWifiManager = wifiManager;
+        mAccessPoint = accessPoint;
+        mOnTextChangedHandler = new Handler();
+        mWifiManager = wifiManager;
     }
 
     @Override
@@ -105,9 +124,9 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
                 = mWifiManager.getWpsNfcConfigurationToken(mAccessPoint.networkId);
         String passwordHex = byteArrayToHexString(password.getBytes());
 
-        String passwordLength = password.length() >= 16
-                ? "" + Character.forDigit(password.length(), 16)
-                : "0" + Character.forDigit(password.length(), 16);
+        String passwordLength = password.length() >= HEX_RADIX
+                ? "" + Character.forDigit(password.length(), HEX_RADIX)
+                : "0" + Character.forDigit(password.length(), HEX_RADIX);
 
         passwordHex = String.format(PASSWORD_FORMAT, passwordLength, passwordHex).toUpperCase();
 
@@ -166,11 +185,11 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
                     setViewText(mCancelButton, com.android.internal.R.string.done_label);
                 } catch (IOException e) {
                     setViewText(mLabelView, R.string.status_failed_to_write);
-                    Log.e(TAG, "Unable to write WiFi config to NFC tag.", e);
+                    Log.e(TAG, "Unable to write Wi-Fi config to NFC tag.", e);
                     return;
                 } catch (FormatException e) {
                     setViewText(mLabelView, R.string.status_failed_to_write);
-                    Log.e(TAG, "Unable to write WiFi config to NFC tag.", e);
+                    Log.e(TAG, "Unable to write Wi-Fi config to NFC tag.", e);
                     return;
                 }
             } else {
@@ -239,14 +258,13 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         byte[] data = new byte[len / 2];
 
         for (int i = 0; i < len; i += 2) {
-            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-                    + Character.digit(s.charAt(i + 1), 16));
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), HEX_RADIX) << 4)
+                    + Character.digit(s.charAt(i + 1), HEX_RADIX));
         }
 
         return data;
     }
 
-    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
     private static String byteArrayToHexString(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for ( int j = 0; j < bytes.length; j++ ) {
@@ -259,6 +277,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
     @Override
     public void afterTextChanged(Editable s) {}
 }

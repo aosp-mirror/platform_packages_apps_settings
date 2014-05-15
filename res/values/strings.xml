@@ -1417,6 +1417,8 @@
     <string name="wifi_menu_forget">Forget network</string>
     <!-- Menu option to modify a Wi-Fi network configuration -->
     <string name="wifi_menu_modify">Modify network</string>
+    <!-- Menu option to write a Wi-Fi configuration token to an NFC tag [CHAR_LIMIT=30]-->
+    <string name="wifi_menu_write_to_nfc">Write to NFC tag</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is off and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_off">To see available networks, turn Wi\u2011Fi on.</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
@@ -1522,8 +1524,8 @@
     <!-- Substring of wifi status for wifi with authentication.  This version is for when the
          string is not first in the list (lowercase in english) -->
     <string name="wifi_secured_second_item">, secured with <xliff:g id="wifi_security_short">%1$s</xliff:g></string>
-    <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR LIMIT=150] -->
-    <string name="wifi_wps_nfc_enter_password">Enter your network password.</string>
+    <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR_LIMIT=40] -->
+    <string name="wifi_wps_nfc_enter_password">Enter your network password</string>
 
     <!-- Do not translate.  Concise terminology for wifi with WEP security -->
     <string name="wifi_security_short_wep">WEP</string>
@@ -5138,10 +5140,10 @@
          settings button -->
     <string name="notification_app_settings_button">Notification settings</string>
 
-    <!-- NFC WiFi pairing/setup strings-->
+    <!-- NFC Wi-Fi pairing/setup strings-->
 
-    <!-- Write NFC tag for WiFi pairing/setup title -->
-    <string name="setup_wifi_nfc_tag">Set up WiFi NFC Tag</string>
+    <!-- Write NFC tag for Wi-Fi pairing/setup title [CHAR_LIMIT=30]-->
+    <string name="setup_wifi_nfc_tag">Set up Wi-Fi NFC Tag</string>
     <!-- Text for button to confirm writing tag -->
     <string name="write_tag">Write</string>
     <!-- Text to inform the user to tap a tag to complete the setup process -->
