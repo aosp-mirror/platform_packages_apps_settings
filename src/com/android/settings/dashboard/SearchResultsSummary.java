@@ -616,7 +616,6 @@ public class SearchResultsSummary extends Fragment {
                     // Not much we can do except logging
                     Log.e(LOG_TAG, "Cannot load Drawable for " + result.title);
                 }
-                imageView.setBackgroundResource(R.color.temporary_background_icon);
             } else {
                 imageView.setImageDrawable(null);
                 imageView.setBackgroundResource(R.drawable.empty_icon);

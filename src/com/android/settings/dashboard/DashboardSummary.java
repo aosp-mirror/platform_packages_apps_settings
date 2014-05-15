@@ -157,7 +157,6 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
         }
         if (tileIcon != null) {
             if (tile.iconRes > 0) {
-                tileIcon.setBackgroundResource(R.color.temporary_background_icon);
             } else {
                 tileIcon.setBackground(null);
             }
