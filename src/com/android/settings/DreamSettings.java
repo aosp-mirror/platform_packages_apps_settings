@@ -87,7 +87,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         mBackend = new DreamBackend(activity);
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.addOnSwitchChangeListener(this);
         mSwitch = mSwitchBar.getSwitch();
 
         setHasOptionsMenu(true);
@@ -111,8 +110,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
     @Override
     public void onDestroyView() {
         logd("onDestroyView()");
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         super.onDestroyView();
     }
 
@@ -130,8 +127,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
         mAdapter = new DreamInfoAdapter(mContext);
         listView.setAdapter(mAdapter);
-
-        mSwitchBar.show();
     }
 
     @Override
@@ -217,7 +212,11 @@ public class DreamSettings extends SettingsPreferenceFragment implements
     public void onPause() {
         logd("onPause()");
         super.onPause();
+
         mContext.unregisterReceiver(mPackageReceiver);
+
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     @Override
@@ -234,6 +233,9 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
         filter.addDataScheme(PACKAGE_SCHEME);
         mContext.registerReceiver(mPackageReceiver , filter);
+
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
     }
 
     public static int getSummaryResource(Context context) {
