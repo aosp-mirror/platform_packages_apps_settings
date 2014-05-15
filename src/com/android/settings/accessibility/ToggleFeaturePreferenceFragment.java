@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,6 +36,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.ToggleSwitch;
 
 public abstract class ToggleFeaturePreferenceFragment
         extends SettingsPreferenceFragment {

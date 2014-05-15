@@ -37,7 +37,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeListener;
+import com.android.settings.widget.ToggleSwitch;
+import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 import java.util.Collections;
 import java.util.HashSet;

@@ -18,7 +18,8 @@ package com.android.settings.accessibility;
 
 import android.provider.Settings;
 
-import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeListener;
+import com.android.settings.widget.ToggleSwitch;
+import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 public class ToggleGlobalGesturePreferenceFragment
         extends ToggleFeaturePreferenceFragment {

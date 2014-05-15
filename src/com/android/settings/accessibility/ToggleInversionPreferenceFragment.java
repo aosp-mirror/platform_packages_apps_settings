@@ -16,21 +16,15 @@
 
 package com.android.settings.accessibility;
 
-import android.accessibilityservice.AccessibilityService;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.preference.SeekBarPreference;
 import android.provider.Settings;
 import android.view.View;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements Preference.OnPreferenceChangeListener {
