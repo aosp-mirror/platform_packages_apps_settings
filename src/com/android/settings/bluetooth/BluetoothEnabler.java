@@ -31,15 +31,17 @@ import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.WirelessSettings;
 import com.android.settings.search.Index;
+import com.android.settings.widget.SwitchBar;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
  * preference. It turns on/off Bluetooth and ensures the summary of the
  * preference reflects the current state.
  */
-public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeListener {
+public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener {
     private Context mContext;
     private Switch mSwitch;
+    private SwitchBar mSwitchBar;
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
@@ -70,9 +72,10 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         }
     };
 
-    public BluetoothEnabler(Context context, Switch switch_) {
+    public BluetoothEnabler(Context context, SwitchBar switchBar) {
         mContext = context;
-        mSwitch = switch_;
+        mSwitchBar = switchBar;
+        mSwitch = switchBar.getSwitch();
         mValidListener = false;
 
         LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
@@ -100,7 +103,8 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         handleStateChanged(mLocalAdapter.getBluetoothState());
 
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        mSwitch.setOnCheckedChangeListener(this);
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
         mValidListener = true;
     }
 
@@ -110,37 +114,9 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         }
 
         mContext.unregisterReceiver(mReceiver);
-        mSwitch.setOnCheckedChangeListener(null);
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
         mValidListener = false;
-    }
-
-    public void setSwitch(Switch switch_) {
-        if (mSwitch == switch_) return;
-        mSwitch.setOnCheckedChangeListener(null);
-        mSwitch = switch_;
-        mSwitch.setOnCheckedChangeListener(mValidListener ? this : null);
-
-        int bluetoothState = BluetoothAdapter.STATE_OFF;
-        if (mLocalAdapter != null) bluetoothState = mLocalAdapter.getBluetoothState();
-        boolean isOn = bluetoothState == BluetoothAdapter.STATE_ON;
-        boolean isOff = bluetoothState == BluetoothAdapter.STATE_OFF;
-        setChecked(isOn);
-        mSwitch.setEnabled(isOn || isOff);
-    }
-
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        // Show toast message if Bluetooth is not allowed in airplane mode
-        if (isChecked &&
-                !WirelessSettings.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
-            Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
-            // Reset switch to off
-            buttonView.setChecked(false);
-        }
-
-        if (mLocalAdapter != null) {
-            mLocalAdapter.setBluetoothEnabled(isChecked);
-        }
-        mSwitch.setEnabled(false);
     }
 
     void handleStateChanged(int state) {
@@ -173,11 +149,11 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
             // set listener to null, so onCheckedChanged won't be called
             // if the checked status on Switch isn't changed by user click
             if (mValidListener) {
-                mSwitch.setOnCheckedChangeListener(null);
+                mSwitchBar.removeOnSwitchChangeListener(this);
             }
             mSwitch.setChecked(isChecked);
             if (mValidListener) {
-                mSwitch.setOnCheckedChangeListener(this);
+                mSwitchBar.addOnSwitchChangeListener(this);
             }
         }
     }
@@ -189,5 +165,21 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         msg.what = EVENT_UPDATE_INDEX;
         msg.getData().putBoolean(EVENT_DATA_IS_BT_ON, isBluetoothOn);
         mHandler.sendMessage(msg);
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        // Show toast message if Bluetooth is not allowed in airplane mode
+        if (isChecked &&
+                !WirelessSettings.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
+            Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
+            // Reset switch to off
+            switchView.setChecked(false);
+        }
+
+        if (mLocalAdapter != null) {
+            mLocalAdapter.setBluetoothEnabled(isChecked);
+        }
+        mSwitch.setEnabled(false);
     }
 }

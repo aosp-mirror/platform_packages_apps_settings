@@ -46,6 +46,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.widget.SwitchBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private boolean mActivityStarted;
 
     private TextView mEmptyView;
-    private Switch mSwitch;
+    private SwitchBar mSwitchBar;
 
     private final IntentFilter mIntentFilter;
 
@@ -114,35 +115,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
 
-        final Activity activity = getActivity();
-        final int padding = activity.getResources().getDimensionPixelSize(
-                R.dimen.action_bar_switch_padding);
-        mSwitch = new Switch(activity.getActionBar().getThemedContext());
-        mSwitch.setPaddingRelative(0, 0, padding, 0);
-
-        mBluetoothEnabler = new BluetoothEnabler(activity, mSwitch);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
         final SettingsActivity activity = (SettingsActivity) getActivity();
+        mSwitchBar = activity.getSwitchBar();
 
-        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(mSwitch, new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END));
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(null);
+        mBluetoothEnabler = new BluetoothEnabler(activity, mSwitchBar);
     }
 
     @Override
