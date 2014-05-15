@@ -570,7 +570,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                     if (mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {
                         // Only allow writing of NFC tags for password-protected networks.
-                        menu.add(Menu.NONE, MENU_ID_WRITE_NFC, 0, "Write to NFC Tag");
+                        menu.add(Menu.NONE, MENU_ID_WRITE_NFC, 0, R.string.wifi_menu_write_to_nfc);
                     }
                 }
             }
@@ -705,9 +705,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                             })
                             .create();
             case WRITE_NFC_DIALOG_ID:
-                mWifiToNfcDialog =new WriteWifiConfigToNfcDialog(
-                        getActivity(), mSelectedAccessPoint, mWifiManager);
-                return mWifiToNfcDialog;
+                if (mSelectedAccessPoint != null) {
+                    mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
+                            getActivity(), mSelectedAccessPoint, mWifiManager);
+                    return mWifiToNfcDialog;
+                }
 
         }
         return super.onCreateDialog(dialogId);
