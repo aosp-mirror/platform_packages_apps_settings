@@ -16,88 +16,75 @@
 
 package com.android.settings.nfc;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.widget.SwitchBar;
 
 public class AndroidBeam extends Fragment
-        implements CompoundButton.OnCheckedChangeListener {
+        implements SwitchBar.OnSwitchChangeListener {
     private View mView;
     private NfcAdapter mNfcAdapter;
-    private Switch mActionBarSwitch;
+    private SwitchBar mSwitchBar;
+    private Switch mSwitch;
     private CharSequence mOldActivityTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Activity activity = getActivity();
 
-        mActionBarSwitch = new Switch(activity.getActionBar().getThemedContext());
+        SettingsActivity activity = (SettingsActivity) getActivity();
 
-        if (activity instanceof SettingsActivity) {
-            final int padding = activity.getResources().getDimensionPixelSize(
-                    R.dimen.action_bar_switch_padding);
-            mActionBarSwitch.setPaddingRelative(0, 0, padding, 0);
-            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                    ActionBar.DISPLAY_SHOW_CUSTOM);
-            activity.getActionBar().setCustomView(mActionBarSwitch, new ActionBar.LayoutParams(
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    ActionBar.LayoutParams.WRAP_CONTENT,
-                    Gravity.CENTER_VERTICAL | Gravity.END));
-            mOldActivityTitle = activity.getActionBar().getTitle();
-            activity.getActionBar().setTitle(R.string.android_beam_settings_title);
-        }
-
-        mActionBarSwitch.setOnCheckedChangeListener(this);
+        mOldActivityTitle = activity.getActionBar().getTitle();
+        activity.getActionBar().setTitle(R.string.android_beam_settings_title);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-        mActionBarSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
+
+        mSwitchBar = activity.getSwitchBar();
+        mSwitch = mSwitchBar.getSwitch();
+        mSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.android_beam, container, false);
-        initView(mView);
+
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
+        mSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
+
         return mView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getActivity().getActionBar().setCustomView(null);
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
     }
 
-    private void initView(View view) {
-        mActionBarSwitch.setOnCheckedChangeListener(this);
-        mActionBarSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
-    }
-
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean desiredState) {
+    public void onSwitchChanged(Switch switchView, boolean desiredState) {
         boolean success = false;
-        mActionBarSwitch.setEnabled(false);
+        mSwitch.setEnabled(false);
         if (desiredState) {
             success = mNfcAdapter.enableNdefPush();
         } else {
             success = mNfcAdapter.disableNdefPush();
         }
         if (success) {
-            mActionBarSwitch.setChecked(desiredState);
+            mSwitch.setChecked(desiredState);
         }
-        mActionBarSwitch.setEnabled(true);
+        mSwitch.setEnabled(true);
     }
 }
