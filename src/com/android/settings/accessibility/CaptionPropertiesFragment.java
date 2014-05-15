@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
@@ -41,7 +40,8 @@ import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
-import com.android.settings.accessibility.ToggleSwitch.OnBeforeCheckedChangeListener;
+import com.android.settings.widget.ToggleSwitch;
+import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 import java.util.Locale;
 
