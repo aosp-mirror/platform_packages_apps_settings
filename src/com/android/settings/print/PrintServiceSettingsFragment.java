@@ -16,7 +16,6 @@
 
 package com.android.settings.print;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -45,7 +44,6 @@ import android.print.PrinterId;
 import android.print.PrinterInfo;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,30 +51,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.print.PrintSettingsFragment.ToggleSwitch;
-import com.android.settings.print.PrintSettingsFragment.ToggleSwitch.OnBeforeCheckedChangeListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.ToggleSwitch;
+
 /**
  * Fragment with print service settings.
  */
 public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener {
+        implements DialogInterface.OnClickListener, SwitchBar.OnSwitchChangeListener {
 
     private static final int LOADER_ID_PRINTERS_LOADER = 1;
 
@@ -112,6 +111,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     };
 
+    private SwitchBar mSwitchBar;
     private ToggleSwitch mToggleSwitch;
 
     private String mPreferenceKey;
@@ -161,16 +161,17 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onStart() {
         super.onStart();
-        setupActionBarToggleSwitch(getActivity(), mToggleSwitch);
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
     }
 
     @Override
     public void onDestroyView() {
-        removeActionBarToggleSwitch(getActivity());
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
         super.onDestroyView();
     }
 
@@ -294,8 +295,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mPrintersAdapter = new PrintersAdapter();
         mPrintersAdapter.registerDataSetObserver(mDataObserver);
 
-        mToggleSwitch = createActionBarToggleSwitch(getActivity().getActionBar().getThemedContext());
-        mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+
+        mSwitchBar = activity.getSwitchBar();
+
+        mToggleSwitch = mSwitchBar.getSwitch();
+        mToggleSwitch.setOnBeforeCheckedChangeListener(new ToggleSwitch.OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
                 if (checked) {
@@ -312,15 +317,15 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                 return false;
             }
         });
-        mToggleSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                updateEmptyView();
-            }
-        });
 
         getListView().setSelector(new ColorDrawable(Color.TRANSPARENT));
         getListView().setAdapter(mPrintersAdapter);
+    }
+
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        updateEmptyView();
     }
 
     private void updateUiForArguments() {
@@ -443,27 +448,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         } else {
             menu.removeItem(R.id.print_menu_item_search);
         }
-    }
-
-    private ToggleSwitch createActionBarToggleSwitch(Context context) {
-        ToggleSwitch toggleSwitch = new ToggleSwitch(context);
-        final int padding = context.getResources().getDimensionPixelSize(
-                R.dimen.action_bar_switch_padding);
-        toggleSwitch.setPaddingRelative(0, 0, padding, 0);
-        return toggleSwitch;
-    }
-
-    private void setupActionBarToggleSwitch(Activity activity, ToggleSwitch toggleSwitch) {
-        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM);
-        activity.getActionBar().setCustomView(toggleSwitch,
-                new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.END));
-    }
-
-    private void removeActionBarToggleSwitch(Activity activity) {
-        activity.getActionBar().setCustomView(null);
     }
 
     private static abstract class SettingsContentObserver extends ContentObserver {

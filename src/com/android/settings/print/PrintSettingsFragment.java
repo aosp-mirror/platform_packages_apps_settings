@@ -50,7 +50,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
@@ -291,36 +290,6 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         @Override
         public void onPackageRemoved(String packageName, int uid) {
             mHandler.obtainMessage().sendToTarget();
-        }
-    }
-
-    public static class ToggleSwitch extends Switch {
-
-        private OnBeforeCheckedChangeListener mOnBeforeListener;
-
-        public static interface OnBeforeCheckedChangeListener {
-            public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked);
-        }
-
-        public ToggleSwitch(Context context) {
-            super(context);
-        }
-
-        public void setOnBeforeCheckedChangeListener(OnBeforeCheckedChangeListener listener) {
-            mOnBeforeListener = listener;
-        }
-
-        @Override
-        public void setChecked(boolean checked) {
-            if (mOnBeforeListener != null
-                    && mOnBeforeListener.onBeforeCheckedChanged(this, checked)) {
-                return;
-            }
-            super.setChecked(checked);
-        }
-
-        public void setCheckedInternal(boolean checked) {
-            super.setChecked(checked);
         }
     }
 
