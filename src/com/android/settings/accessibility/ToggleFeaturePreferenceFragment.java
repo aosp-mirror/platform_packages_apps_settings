@@ -16,15 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,11 +33,13 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 
 public abstract class ToggleFeaturePreferenceFragment
         extends SettingsPreferenceFragment {
 
+    protected SwitchBar mSwitchBar;
     protected ToggleSwitch mToggleSwitch;
 
     protected String mPreferenceKey;
@@ -88,14 +87,9 @@ public abstract class ToggleFeaturePreferenceFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final Context context = getActivity().getActionBar().getThemedContext();
-        final int padding = context.getResources().getDimensionPixelSize(
-                R.dimen.action_bar_switch_padding);
-        mToggleSwitch = new ToggleSwitch(context);
-        mToggleSwitch.setPaddingRelative(0, 0, padding, 0);
-        mToggleSwitch.setLayoutParams(new ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,
-                Gravity.CENTER_VERTICAL | Gravity.END));
+        SettingsActivity activity = (SettingsActivity) getActivity();
+        mSwitchBar = activity.getSwitchBar();
+        mToggleSwitch = mSwitchBar.getSwitch();
 
         onProcessArguments(getArguments());
     }
@@ -124,28 +118,26 @@ public abstract class ToggleFeaturePreferenceFragment
         menuItem.setIntent(mSettingsIntent);
     }
 
-    protected void onInstallActionBarToggleSwitch() {
+    protected void onInstallSwitchBarToggleSwitch() {
         // Implement this to set a checked listener.
     }
 
-    private void installActionBarToggleSwitch() {
-        final ActionBar ab = getActivity().getActionBar();
-        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM, ActionBar.DISPLAY_SHOW_CUSTOM);
-        ab.setCustomView(mToggleSwitch);
+    protected void onRemoveSwitchBarToggleSwitch() {
+        // Implement this to reset a checked listener.
+    }
 
-        onInstallActionBarToggleSwitch();
+    private void installActionBarToggleSwitch() {
+        mSwitchBar.show();
+        onInstallSwitchBarToggleSwitch();
     }
 
     private void removeActionBarToggleSwitch() {
         mToggleSwitch.setOnBeforeCheckedChangeListener(null);
-
-        final ActionBar ab = getActivity().getActionBar();
-        ab.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
-        ab.setCustomView(null);
+        onRemoveSwitchBarToggleSwitch();
+        mSwitchBar.hide();
     }
 
     public void setTitle(String title) {
-        final SettingsActivity activity = (SettingsActivity) getActivity();
         getActivity().setTitle(title);
     }
 

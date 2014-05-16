@@ -281,8 +281,8 @@ public class ToggleAccessibilityServicePreferenceFragment
     }
 
     @Override
-    protected void onInstallActionBarToggleSwitch() {
-        super.onInstallActionBarToggleSwitch();
+    protected void onInstallSwitchBarToggleSwitch() {
+        super.onInstallSwitchBarToggleSwitch();
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
                 @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {

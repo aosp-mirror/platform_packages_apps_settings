@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
 
-    private Switch mSwitch;
+    private ToggleSwitch mSwitch;
     private TextView mTextView;
 
     private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
@@ -69,7 +69,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mTextView = (TextView) findViewById(R.id.switch_text);
         mTextView.setText(R.string.switch_off_text);
 
-        mSwitch = (Switch) findViewById(R.id.switch_widget);
+        mSwitch = (ToggleSwitch) findViewById(R.id.switch_widget);
         mSwitch.setOnCheckedChangeListener(this);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
@@ -86,7 +86,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         setVisibility(View.GONE);
     }
 
-    public Switch getSwitch() {
+    public ToggleSwitch getSwitch() {
         return mSwitch;
     }
 

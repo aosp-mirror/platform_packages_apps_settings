@@ -17,9 +17,11 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.widget.Switch;
 
 public class ToggleSwitch extends Switch {
+
     private ToggleSwitch.OnBeforeCheckedChangeListener mOnBeforeListener;
 
     public static interface OnBeforeCheckedChangeListener {
@@ -28,6 +30,18 @@ public class ToggleSwitch extends Switch {
 
     public ToggleSwitch(Context context) {
         super(context);
+    }
+
+    public ToggleSwitch(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ToggleSwitch(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public ToggleSwitch(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     public void setOnBeforeCheckedChangeListener(OnBeforeCheckedChangeListener listener) {
