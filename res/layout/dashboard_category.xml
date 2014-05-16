@@ -22,9 +22,10 @@
 
     <TextView android:id="@+id/category_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dashboard_category_title_height"
             android:singleLine="true"
             android:ellipsize="marquee"
+            android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textAlignment="viewStart"
             />
