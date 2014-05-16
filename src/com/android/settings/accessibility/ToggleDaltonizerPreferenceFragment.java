@@ -23,13 +23,13 @@ import android.preference.Preference;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import android.widget.Switch;
 import com.android.settings.R;
+import com.android.settings.widget.SwitchBar;
 
 public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener {
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
     private static final String QUICK_SETTING_ENABLED =
@@ -77,17 +77,18 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     @Override
-    protected void onInstallActionBarToggleSwitch() {
-        super.onInstallActionBarToggleSwitch();
+    protected void onInstallSwitchBarToggleSwitch() {
+        super.onInstallSwitchBarToggleSwitch();
 
         mToggleSwitch.setCheckedInternal(
                 Settings.Secure.getInt(getContentResolver(), ENABLED, 0) == 1);
-        mToggleSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton button, boolean checked) {
-                onPreferenceToggled(mPreferenceKey, checked);
-            }
-        });
+        mSwitchBar.addOnSwitchChangeListener(this);
+    }
+
+    @Override
+    protected void onRemoveSwitchBarToggleSwitch() {
+        super.onRemoveSwitchBarToggleSwitch();
+        mSwitchBar.removeOnSwitchChangeListener(this);
     }
 
     private void initPreferences() {
@@ -105,5 +106,10 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
             mType.setSummary(getString(R.string.daltonizer_type_overridden,
                     getString(R.string.simulate_color_space)));
         }
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        onPreferenceToggled(mPreferenceKey, isChecked);
     }
 }

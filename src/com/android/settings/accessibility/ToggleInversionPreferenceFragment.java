@@ -21,13 +21,13 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.provider.Settings;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import android.widget.Switch;
 import com.android.settings.R;
+import com.android.settings.widget.SwitchBar;
 
 public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener {
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private static final String QUICK_SETTING_ENABLED =
             Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_QUICK_SETTING_ENABLED;
@@ -68,22 +68,28 @@ public class ToggleInversionPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
-    protected void onInstallActionBarToggleSwitch() {
-        super.onInstallActionBarToggleSwitch();
+    protected void onInstallSwitchBarToggleSwitch() {
+        super.onInstallSwitchBarToggleSwitch();
 
         mToggleSwitch.setCheckedInternal(
                 Settings.Secure.getInt(getContentResolver(), ENABLED, 0) == 1);
-        mToggleSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton button, boolean checked) {
-                onPreferenceToggled(mPreferenceKey, checked);
-            }
-        });
+        mSwitchBar.addOnSwitchChangeListener(this);
+    }
+
+    @Override
+    protected void onRemoveSwitchBarToggleSwitch() {
+        super.onRemoveSwitchBarToggleSwitch();
+        mSwitchBar.removeOnSwitchChangeListener(this);
     }
 
     private void initPreferences() {
         mEnableQuickSetting.setChecked(
                 Settings.Secure.getInt(getContentResolver(), QUICK_SETTING_ENABLED, 0) == 1);
         mEnableQuickSetting.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        onPreferenceToggled(mPreferenceKey, isChecked);
     }
 }
