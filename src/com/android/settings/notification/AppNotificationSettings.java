@@ -29,11 +29,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.PathShape;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +54,9 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AppNotificationSettings extends ListFragment {
+public class AppNotificationSettings extends ListFragment implements Indexable {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = true;
 
@@ -187,6 +187,9 @@ public class AppNotificationSettings extends ListFragment {
         final TextView title = (TextView) layout.findViewById(android.R.id.title);
         title.setText(row.label);
         final CheckBox showBox = (CheckBox) layout.findViewById(android.R.id.button1);
+        final CheckBox priBox = (CheckBox) layout.findViewById(android.R.id.button2);
+        final CheckBox senBox = (CheckBox) layout.findViewById(android.R.id.button3);
+
         showBox.setChecked(!row.banned);
         final OnCheckedChangeListener showListener = new OnCheckedChangeListener() {
             @Override
@@ -195,6 +198,8 @@ public class AppNotificationSettings extends ListFragment {
                 if (success) {
                     row.banned = !isChecked;
                     mAdapter.bindView(v, row, true /*animate*/);
+                    priBox.setEnabled(!row.banned);
+                    senBox.setEnabled(!row.banned);
                 } else {
                     showBox.setOnCheckedChangeListener(null);
                     showBox.setChecked(!isChecked);
@@ -203,6 +208,44 @@ public class AppNotificationSettings extends ListFragment {
             }
         };
         showBox.setOnCheckedChangeListener(showListener);
+
+        priBox.setChecked(row.priority);
+        final OnCheckedChangeListener priListener = new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                boolean success = mBackend.setHighPriority(row.pkg, row.uid, isChecked);
+                if (success) {
+                    row.priority = isChecked;
+                    mAdapter.bindView(v, row, true /*animate*/);
+                } else {
+                    priBox.setOnCheckedChangeListener(null);
+                    priBox.setChecked(!isChecked);
+                    priBox.setOnCheckedChangeListener(this);
+                }
+            }
+        };
+        priBox.setOnCheckedChangeListener(priListener);
+
+        senBox.setChecked(row.sensitive);
+        final OnCheckedChangeListener senListener = new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                boolean success = mBackend.setSensitive(row.pkg, row.uid, isChecked);
+                if (success) {
+                    row.sensitive = isChecked;
+                    mAdapter.bindView(v, row, true /*animate*/);
+                } else {
+                    senBox.setOnCheckedChangeListener(null);
+                    senBox.setChecked(!isChecked);
+                    senBox.setOnCheckedChangeListener(this);
+                }
+            }
+        };
+        senBox.setOnCheckedChangeListener(senListener);
+
+        priBox.setEnabled(!row.banned);
+        senBox.setEnabled(!row.banned);
+
         final AlertDialog d = new AlertDialog.Builder(mContext)
             .setView(layout)
             .setPositiveButton(R.string.app_notifications_dialog_done, null)
@@ -214,48 +257,16 @@ public class AppNotificationSettings extends ListFragment {
         ViewGroup row;
         ViewGroup appButton;
         ImageView icon;
-        ImageView banBadge;
-        ImageView priBadge;
         TextView title;
+        TextView subtitle;
         View settingsDivider;
         ImageView settingsButton;
         View rowDivider;
     }
 
     private class NotificationAppAdapter extends ArrayAdapter<Row> implements SectionIndexer {
-        private final ShapeDrawable mBanShape, mPriShape;
-
         public NotificationAppAdapter(Context context) {
             super(context, 0, 0);
-            final int s = context.getResources()
-                    .getDimensionPixelSize(R.dimen.notification_app_icon_badge_size);
-            mBanShape = shape(banPath(s), s);
-            mPriShape = shape(priPath(s), s);
-        }
-
-        private ShapeDrawable shape(Path path, int s) {
-            final ShapeDrawable sd = new ShapeDrawable(new PathShape(path, s, s));
-            sd.getPaint().setStyle(Paint.Style.STROKE);
-            sd.getPaint().setColor(0xffffffff);
-            sd.getPaint().setStrokeWidth(s / 12);
-            sd.setIntrinsicWidth(s);
-            sd.setIntrinsicHeight(s);
-            return sd;
-        }
-
-        private Path banPath(int s) {
-            final Path p = new Path();
-            final int d = s / 5;
-            p.moveTo(d, d); p.lineTo(s - d, s - d);
-            p.moveTo(d, s - d); p.lineTo(s - d, d);
-            return p;
-        }
-
-        private Path priPath(int s) {
-            final Path p = new Path();
-            final int d = s / 5;
-            p.moveTo(s / 2, d); p.lineTo(s / 2, s - d);
-            return p;
         }
 
         @Override
@@ -302,11 +313,8 @@ public class AppNotificationSettings extends ListFragment {
             vh.appButton = (ViewGroup) v.findViewById(android.R.id.button1);
             vh.appButton.setLayoutTransition(new LayoutTransition());
             vh.icon = (ImageView) v.findViewById(android.R.id.icon);
-            vh.banBadge = (ImageView) v.findViewById(android.R.id.icon1);
-            vh.banBadge.setImageDrawable(mBanShape);
-            vh.priBadge = (ImageView) v.findViewById(android.R.id.icon2);
-            vh.priBadge.setImageDrawable(mPriShape);
             vh.title = (TextView) v.findViewById(android.R.id.title);
+            vh.subtitle = (TextView) v.findViewById(android.R.id.text1);
             vh.settingsDivider = v.findViewById(R.id.settings_divider);
             vh.settingsButton = (ImageView) v.findViewById(android.R.id.button2);
             vh.rowDivider = v.findViewById(R.id.row_divider);
@@ -326,6 +334,7 @@ public class AppNotificationSettings extends ListFragment {
 
         public void bindView(final View view, Row r, boolean animate) {
             if (!(r instanceof AppRow)) {
+                // it's a section row
                 TextView tv = (TextView)view;
                 tv.setText(r.section);
                 return;
@@ -343,9 +352,10 @@ public class AppNotificationSettings extends ListFragment {
             });
             enableLayoutTransitions(vh.appButton, animate);
             vh.icon.setImageDrawable(row.icon);
-            vh.banBadge.setVisibility(row.banned ? View.VISIBLE : View.GONE);
-            vh.priBadge.setVisibility(row.priority ? View.VISIBLE : View.GONE);
             vh.title.setText(row.label);
+            final String sub = getSubtitle(row);
+            vh.subtitle.setText(sub);
+            vh.subtitle.setVisibility(!sub.isEmpty() ? View.VISIBLE : View.GONE);
             final boolean showSettings = !row.banned && row.settingsIntent != null;
             vh.settingsDivider.setVisibility(showSettings ? View.VISIBLE : View.GONE);
             vh.settingsButton.setVisibility(showSettings ? View.VISIBLE : View.GONE);
@@ -357,6 +367,17 @@ public class AppNotificationSettings extends ListFragment {
                     }
                 }
             });
+        }
+
+        private String getSubtitle(AppRow row) {
+            if (row.banned) return mContext.getString(R.string.app_notification_row_banned);
+            if (!row.priority && !row.sensitive) return "";
+            final String priString = mContext.getString(R.string.app_notification_row_priority);
+            final String senString = mContext.getString(R.string.app_notification_row_sensitive);
+            if (row.priority != row.sensitive) {
+                return row.priority ? priString : senString;
+            }
+            return priString + mContext.getString(R.string.summary_divider_text) + senString;
         }
 
         @Override
@@ -396,7 +417,8 @@ public class AppNotificationSettings extends ListFragment {
         public Intent settingsIntent;
         public boolean banned;
         public boolean priority;
-        public boolean first;
+        public boolean sensitive;
+        public boolean first;  // first app in section
     }
 
     private static final Comparator<AppRow> mRowComparator = new Comparator<AppRow>() {
@@ -435,6 +457,7 @@ public class AppNotificationSettings extends ListFragment {
                     row.icon = pkg.applicationInfo.loadIcon(pm);
                     row.banned = mBackend.getNotificationsBanned(row.pkg, row.uid);
                     row.priority = mBackend.getHighPriority(row.pkg, row.uid);
+                    row.sensitive = mBackend.getSensitive(row.pkg, row.uid);
                     mRows.put(row.pkg, row);
                 }
                 // collect config activities
@@ -552,5 +575,38 @@ public class AppNotificationSettings extends ListFragment {
             // TODO save high-pri state to NoMan
             return true;
         }
+
+        public boolean getSensitive(String pkg, int uid) {
+            // TODO get visibility state from NoMan
+            return false;
+        }
+
+        public boolean setSensitive(String pkg, int uid, boolean sensitive) {
+            // TODO save visibility state to NoMan
+            return true;
+        }
     }
+
+    // === Indexing ===
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                add(result, context, R.string.app_notifications_title);
+                add(result, context, R.string.app_notifications_dialog_show);
+                add(result, context, R.string.app_notifications_dialog_priority);
+                add(result, context, R.string.app_notifications_dialog_visibility);
+                return result;
+            }
+
+            private void add(List<SearchIndexableRaw> result, Context context, int title) {
+                final Resources res = context.getResources();
+                final SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(title);
+                data.screenTitle = res.getString(R.string.app_notifications_title);
+                result.add(data);
+            }
+        };
 }

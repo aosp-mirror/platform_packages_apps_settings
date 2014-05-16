@@ -16,209 +16,212 @@
 
 package com.android.settings.notification;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.media.AudioManager;
 import android.media.RingtoneManager;
-import android.os.Build;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceGroup;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
+import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SoundSettings;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
-public class NotificationSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, OnPreferenceClickListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotificationSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "NotificationSettings";
 
-    private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
-    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
-    private static final String KEY_HEADS_UP = "heads_up";
-    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "toggle_lock_screen_notifications";
+    private static final String KEY_MEDIA_VOLUME = "media_volume";
+    private static final String KEY_ALARM_VOLUME = "alarm_volume";
+    private static final String KEY_RING_VOLUME = "ring_volume";
+    private static final String KEY_RINGER_MODE = "ringer_mode";
+    private static final String KEY_PHONE_RINGTONE = "ringtone";
+    private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
+    private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
 
-    private static final String KEY_TWEAKS_CATEGORY = "category_tweaks"; // power toys, eng only
+    private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
-    private static final int MSG_UPDATE_SOUND_SUMMARY = 2;
+    private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
+    private final H mHandler = new H();
+    private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     private Context mContext;
     private PackageManager mPM;
 
-    private Preference mNotificationSoundPreference;
+    private DropDownPreference mRingerMode;
+    private Preference mPhoneRingtonePreference;
+    private Preference mNotificationRingtonePreference;
+    private TwoStatePreference mVibrateWhenRinging;
     private Preference mNotificationAccess;
-    private DropDownPreference mLockscreen;
-    private TwoStatePreference mHeadsUp;
-    private TwoStatePreference mNotificationPulse;
-
-    private final Runnable mRingtoneLookupRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (mNotificationSoundPreference != null) {
-                final CharSequence summary = SoundSettings.updateRingtoneName(
-                        mContext, RingtoneManager.TYPE_NOTIFICATION);
-                if (summary != null) {
-                    mHandler.sendMessage(
-                            mHandler.obtainMessage(MSG_UPDATE_SOUND_SUMMARY, summary));
-                }
-            }
-        }
-    };
-
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_SOUND_SUMMARY:
-                    mNotificationSoundPreference.setSummary((CharSequence) msg.obj);
-                    break;
-            }
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        final ContentResolver resolver = mContext.getContentResolver();
-
         mPM = mContext.getPackageManager();
 
         addPreferencesFromResource(R.xml.notification_settings);
 
         final PreferenceScreen root = getPreferenceScreen();
-
-        PreferenceGroup tweaksCategory = (PreferenceGroup)
-                root.findPreference(KEY_TWEAKS_CATEGORY);
-
-        if (tweaksCategory != null
-                && !(Build.TYPE.equals("eng") || Build.TYPE.equals("userdebug"))) {
-            root.removePreference(tweaksCategory);
-            tweaksCategory = null;
-        }
-
-        mNotificationSoundPreference = findPreference(KEY_NOTIFICATION_SOUND);
+        initVolumePreference(KEY_MEDIA_VOLUME, AudioManager.STREAM_MUSIC);
+        initVolumePreference(KEY_ALARM_VOLUME, AudioManager.STREAM_ALARM);
+        initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING);
+        initRingerMode(root);
+        initRingtones(root);
+        initVibrateWhenRinging(root);
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
-
-        mLockscreen = (DropDownPreference) root.findPreference(KEY_LOCK_SCREEN_NOTIFICATIONS);
-        if (mLockscreen != null) {
-            if (!getDeviceLockscreenNotificationsEnabled()) {
-                root.removePreference(mLockscreen);
-            } else {
-                mLockscreen.addItem(R.string.lock_screen_notifications_summary_show, 1);
-                mLockscreen.addItem(R.string.lock_screen_notifications_summary_hide, 0);
-                final int val = getLockscreenAllowPrivateNotifications() ? 1 : 0;
-                mLockscreen.setSelectedValue(val);
-                mLockscreen.setCallback(new DropDownPreference.Callback() {
-                    @Override
-                    public boolean onItemSelected(int pos, Object value) {
-                        final int val = (Integer) value;
-                        Settings.Secure.putInt(getContentResolver(),
-                                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, val);
-                        return true;
-                    }
-                });
-            }
-        }
-
-        mHeadsUp = (TwoStatePreference) findPreference(KEY_HEADS_UP);
-        if (mHeadsUp != null) {
-            updateHeadsUpMode(resolver);
-            mHeadsUp.setOnPreferenceChangeListener(this);
-            resolver.registerContentObserver(
-                    Settings.Global.getUriFor(Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED),
-                    false, new ContentObserver(mHandler) {
-                @Override
-                public void onChange(boolean selfChange) {
-                    updateHeadsUpMode(resolver);
-                }
-            });
-        }
-        mNotificationPulse = (TwoStatePreference) findPreference(KEY_NOTIFICATION_PULSE);
-
-        if (mNotificationPulse != null
-                && getResources().getBoolean(
-                com.android.internal.R.bool.config_intrusiveNotificationLed) == false) {
-            getPreferenceScreen().removePreference(mNotificationPulse);
-        } else {
-            try {
-                mNotificationPulse.setChecked(Settings.System.getInt(resolver,
-                        Settings.System.NOTIFICATION_LIGHT_PULSE) == 1);
-                mNotificationPulse.setOnPreferenceChangeListener(this);
-            } catch (Settings.SettingNotFoundException snfe) {
-                Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
-            }
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         refreshNotificationListeners();
         lookupRingtoneNames();
+        final IntentFilter filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
+        mContext.registerReceiver(mReceiver, filter);
+        mSettingsObserver.register(true);
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        final String key = preference.getKey();
+    public void onPause() {
+        super.onPause();
+        mVolumeCallback.stopSample();
+        mContext.unregisterReceiver(mReceiver);
+        mSettingsObserver.register(false);
+    }
 
-        if (KEY_HEADS_UP.equals(key)) {
-            setHeadsUpMode(getContentResolver(), mHeadsUp.isChecked());
-        } else if (KEY_NOTIFICATION_PULSE.equals(key)) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.NOTIFICATION_LIGHT_PULSE,
-                    mNotificationPulse.isChecked() ? 1 : 0);
-        } else {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
+    // === Volumes ===
+
+    private void initVolumePreference(String key, int stream) {
+        final VolumeSeekBarPreference volumePref = (VolumeSeekBarPreference) findPreference(key);
+        volumePref.setStream(stream);
+        volumePref.setCallback(mVolumeCallback);
+    }
+
+    private final class VolumePreferenceCallback implements VolumeSeekBarPreference.Callback {
+        private SeekBarVolumizer mCurrent;
+
+        @Override
+        public void onSampleStarting(SeekBarVolumizer sbv) {
+            if (mCurrent != null && mCurrent != sbv) {
+                mCurrent.stopSample();
+            }
+            mCurrent = sbv;
+            if (mCurrent != null) {
+                mHandler.removeMessages(H.STOP_SAMPLE);
+                mHandler.sendEmptyMessageDelayed(H.STOP_SAMPLE, SAMPLE_CUTOFF);
+            }
         }
 
-        return true;
+        public void stopSample() {
+            if (mCurrent != null) {
+                mCurrent.stopSample();
+            }
+        }
+    };
+
+    // === Ringer mode ===
+
+    private void initRingerMode(PreferenceScreen root) {
+        mRingerMode = (DropDownPreference) root.findPreference(KEY_RINGER_MODE);
+        if (mRingerMode == null) return;
+        final AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mRingerMode.addItem(R.string.ringer_mode_audible, AudioManager.RINGER_MODE_NORMAL);
+        mRingerMode.addItem(R.string.ringer_mode_vibrate, AudioManager.RINGER_MODE_VIBRATE);
+        mRingerMode.addItem(R.string.ringer_mode_silent, AudioManager.RINGER_MODE_SILENT);
+        updateRingerMode();
+        mRingerMode.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos, Object value) {
+                final int val = (Integer) value;
+                am.setRingerMode(val);
+                return true;
+            }
+        });
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        return true;
+    private void updateRingerMode() {
+        final AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mRingerMode.setSelectedValue(am.getRingerMode());
     }
 
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        return false;
+    // === Phone & notification ringtone ===
+
+    private void initRingtones(PreferenceScreen root) {
+        mPhoneRingtonePreference = root.findPreference(KEY_PHONE_RINGTONE);
+        mNotificationRingtonePreference = root.findPreference(KEY_NOTIFICATION_RINGTONE);
     }
 
-    // === Heads-up notifications ===
-
-    private void updateHeadsUpMode(ContentResolver resolver) {
-        mHeadsUp.setChecked(Settings.Global.HEADS_UP_ON == Settings.Global.getInt(resolver,
-                Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED, Settings.Global.HEADS_UP_OFF));
+    private void lookupRingtoneNames() {
+        AsyncTask.execute(mLookupRingtoneNames);
     }
 
-    private void setHeadsUpMode(ContentResolver resolver, boolean value) {
-        Settings.Global.putInt(resolver, Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED,
-                value ? Settings.Global.HEADS_UP_ON : Settings.Global.HEADS_UP_OFF);
+    private final Runnable mLookupRingtoneNames = new Runnable() {
+        @Override
+        public void run() {
+            if (mPhoneRingtonePreference != null) {
+                final CharSequence summary = SoundSettings.updateRingtoneName(
+                        mContext, RingtoneManager.TYPE_RINGTONE);
+                if (summary != null) {
+                    mHandler.obtainMessage(H.UPDATE_PHONE_RINGTONE, summary).sendToTarget();
+                }
+            }
+            if (mNotificationRingtonePreference != null) {
+                final CharSequence summary = SoundSettings.updateRingtoneName(
+                        mContext, RingtoneManager.TYPE_NOTIFICATION);
+                if (summary != null) {
+                    mHandler.obtainMessage(H.UPDATE_NOTIFICATION_RINGTONE, summary).sendToTarget();
+                }
+            }
+        }
+    };
+
+    // === Vibrate when ringing ===
+
+    private void initVibrateWhenRinging(PreferenceScreen root) {
+        mVibrateWhenRinging = (TwoStatePreference) findPreference(KEY_VIBRATE_WHEN_RINGING);
+        if (mVibrateWhenRinging == null) return;
+        mVibrateWhenRinging.setPersistent(false);
+        updateVibrateWhenRinging();
+        mVibrateWhenRinging.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean val = (Boolean) newValue;
+                return Settings.System.putInt(getContentResolver(),
+                        Settings.System.VIBRATE_WHEN_RINGING,
+                        val ? 1 : 0);
+            }
+        });
     }
 
-    // === Lockscreen (public / private) notifications ===
-
-    private boolean getDeviceLockscreenNotificationsEnabled() {
-        return 0 != Settings.Global.getInt(getContentResolver(),
-                Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0);
-    }
-
-    private boolean getLockscreenAllowPrivateNotifications() {
-        return 0 != Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0);
+    private void updateVibrateWhenRinging() {
+        if (mVibrateWhenRinging == null) return;
+        mVibrateWhenRinging.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.VIBRATE_WHEN_RINGING, 0) != 0);
     }
 
     // === Notification listeners ===
@@ -242,9 +245,92 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    // === Ringtone ===
+    // === Indexing ===
 
-    private void lookupRingtoneNames() {
-        new Thread(mRingtoneLookupRunnable).start();
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                add(result, context, R.string.notification_settings);
+                add(result, context, R.string.media_volume_option_title);
+                add(result, context, R.string.alarm_volume_option_title);
+                add(result, context, R.string.ring_volume_option_title);
+                add(result, context, R.string.ringer_mode_title);
+                add(result, context, R.string.ringtone_title);
+                add(result, context, R.string.vibrate_when_ringing_title);
+                add(result, context, R.string.manage_notification_access_title);
+                return result;
+            }
+
+            private void add(List<SearchIndexableRaw> result, Context context, int title) {
+                final Resources res = context.getResources();
+                final SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(title);
+                data.screenTitle = res.getString(R.string.notification_settings);
+                result.add(data);
+            }
+        };
+
+    // === Callbacks ===
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (AudioManager.RINGER_MODE_CHANGED_ACTION.equals(intent.getAction())) {
+                updateRingerMode();
+            }
+        }
+    };
+
+    private final class SettingsObserver extends ContentObserver {
+        private final Uri VIBRATE_WHEN_RINGING_URI =
+                Settings.System.getUriFor(Settings.System.VIBRATE_WHEN_RINGING);
+
+        public SettingsObserver() {
+            super(mHandler);
+        }
+
+        public void register(boolean register) {
+            final ContentResolver cr = getContentResolver();
+            if (register) {
+                cr.registerContentObserver(VIBRATE_WHEN_RINGING_URI, false, this);
+            } else {
+                cr.unregisterContentObserver(this);
+            }
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (VIBRATE_WHEN_RINGING_URI.equals(uri)) {
+                updateVibrateWhenRinging();
+            }
+        }
+    }
+
+    private final class H extends Handler {
+        private static final int UPDATE_PHONE_RINGTONE = 1;
+        private static final int UPDATE_NOTIFICATION_RINGTONE = 2;
+        private static final int STOP_SAMPLE = 3;
+
+        private H() {
+            super(Looper.getMainLooper());
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPDATE_PHONE_RINGTONE:
+                    mPhoneRingtonePreference.setSummary((CharSequence) msg.obj);
+                    break;
+                case UPDATE_NOTIFICATION_RINGTONE:
+                    mNotificationRingtonePreference.setSummary((CharSequence) msg.obj);
+                    break;
+                case STOP_SAMPLE:
+                    mVolumeCallback.stopSample();
+                    break;
+            }
+        }
     }
 }

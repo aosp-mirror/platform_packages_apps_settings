@@ -34,6 +34,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.SeekBarVolumizer;
 import android.preference.VolumePreference;
 import android.provider.Settings;
 import android.provider.Settings.System;
@@ -173,10 +174,10 @@ public class RingerVolumePreference extends VolumePreference {
             mSeekBars[i] = seekBar;
             if (SEEKBAR_TYPE[i] == AudioManager.STREAM_MUSIC) {
                 mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
-                        SEEKBAR_TYPE[i], getMediaVolumeUri(getContext()));
+                        SEEKBAR_TYPE[i], getMediaVolumeUri(getContext()), this);
             } else {
                 mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
-                        SEEKBAR_TYPE[i]);
+                        SEEKBAR_TYPE[i], null, this);
             }
         }
 
@@ -275,7 +276,7 @@ public class RingerVolumePreference extends VolumePreference {
     }
 
     @Override
-    protected void onSampleStarting(SeekBarVolumizer volumizer) {
+    public void onSampleStarting(SeekBarVolumizer volumizer) {
         super.onSampleStarting(volumizer);
         for (SeekBarVolumizer vol : mSeekBarVolumizer) {
             if (vol != null && vol != volumizer) vol.stopSample();

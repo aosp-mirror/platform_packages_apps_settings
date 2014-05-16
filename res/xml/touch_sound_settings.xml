@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/touch_sound_settings"
+        android:key="touch_sound_settings"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <!-- Dial pad tones -->
+    <SwitchPreference
+            android:key="dial_pad_tones"
+            android:title="@string/dial_pad_tones_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
+    <!-- Screen locking / unlocking -->
+    <SwitchPreference
+            android:key="screen_locking_sounds"
+            android:title="@string/screen_locking_sounds_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
+    <!-- Other touch sounds -->
+    <SwitchPreference
+            android:key="other_touch_sounds"
+            android:title="@string/other_touch_sounds_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
+    <!-- Vibrate on touch -->
+    <SwitchPreference
+            android:key="vibrate_on_touch"
+            android:title="@string/vibrate_on_touch_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
+</PreferenceScreen>

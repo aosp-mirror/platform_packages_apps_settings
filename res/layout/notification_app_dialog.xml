@@ -44,4 +44,22 @@
         android:text="@string/app_notifications_dialog_show"
         android:textAppearance="?android:attr/textAppearanceListItem" />
 
+    <CheckBox
+        android:id="@android:id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/notification_app_icon_size"
+        android:layout_below="@android:id/button1"
+        android:layout_marginStart="@dimen/content_margin_left"
+        android:text="@string/app_notifications_dialog_priority"
+        android:textAppearance="?android:attr/textAppearanceListItem" />
+
+    <CheckBox
+        android:id="@android:id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/notification_app_icon_size"
+        android:layout_below="@android:id/button2"
+        android:layout_marginStart="@dimen/content_margin_left"
+        android:text="@string/app_notifications_dialog_visibility"
+        android:textAppearance="?android:attr/textAppearanceListItem" />
+
 </RelativeLayout>

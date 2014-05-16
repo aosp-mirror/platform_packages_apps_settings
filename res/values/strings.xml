@@ -1028,63 +1028,6 @@
     <!-- Summary of preference to manage device policies -->
     <string name="manage_trust_agents_summary">View or deactivate trust agents</string>
 
-    <!-- Notification access settings (part of Security) -->
-
-    <!-- Title of preference to manage notification listeners -->
-    <string name="manage_notification_access">Notification access</string>
-
-    <!-- Summary of preference to manage notification listeners, when none are enabled -->
-    <string name="manage_notification_access_summary_zero">Apps cannot read notifications</string>
-
-    <!-- Summary of preference to manage notification listeners, when one or more are enabled
-         and are therefore able to read the user's notifications -->
-    <plurals name="manage_notification_access_summary_nonzero">
-        <item quantity="one">%d app can read notifications</item>
-        <item quantity="other">%d apps can read notifications</item>
-    </plurals>
-
-    <!-- String to show in the list of notification listeners, when none is installed -->
-    <string name="no_notification_listeners">No notification listeners are installed.</string>
-
-    <!-- Title for a warning message about security implications of enabling a notification
-          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
-    <string name="notification_listener_security_warning_title">Enable
-         <xliff:g id="service" example="NotificationReader">%1$s</xliff:g>?</string>
-    <!-- Summary for a warning message about security implications of enabling a notification
-          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
-    <string name="notification_listener_security_warning_summary">
-        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to
-        read all notifications posted by the system or any installed app, which may include personal
-        information such as contact names and the text of messages sent to you. It will also be able
-        to dismiss these notifications or touch action buttons within them.
-    </string>
-
-    <!-- Title of preference to manage condition providers -->
-    <string name="manage_condition_providers">Condition providers</string>
-
-    <!-- Summary of preference to manage condition providers, when none are enabled -->
-    <string name="manage_condition_providers_summary_zero">No apps provide conditions</string>
-
-    <!-- Summary of preference to manage condition providers, when one or more are enabled -->
-    <plurals name="manage_condition_providers_summary_nonzero">
-        <item quantity="one">%d app provides conditions</item>
-        <item quantity="other">%d apps provide conditions</item>
-    </plurals>
-
-    <!-- String to show in the list of condition providers, when none is installed -->
-    <string name="no_condition_providers">No condition providers are installed.</string>
-
-    <!-- Title for a warning message about security implications of enabling a condition
-          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
-    <string name="condition_provider_security_warning_title">Enable
-         <xliff:g id="service" example="ConditionProvider">%1$s</xliff:g>?</string>
-    <!-- Summary for a warning message about security implications of enabling a condition
-          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
-    <string name="condition_provider_security_warning_summary">
-        <xliff:g id="condition_provider_name">%1$s</xliff:g> will be able to
-        add exit conditions to Do not disturb mode.
-    </string>
-
     <!-- Bluetooth settings -->
     <!-- Bluetooth settings check box title on Main Settings screen -->
     <string name="bluetooth_quick_toggle_title">Bluetooth</string>
@@ -1778,8 +1721,6 @@
     <string name="display_settings_title">Display</string>
     <!-- Sound settings screen heading -->
     <string name="sound_settings">Sound</string>
-    <!-- Sound settings screen, setting option name to pick ringtone (a list dialog comes up)-->
-    <string name="ringtone_title">Phone ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="ringtone_summary">""</string>
     <!-- Sound settings screen, volume title -->
@@ -1792,8 +1733,6 @@
     <string name="vibrate_in_silent_title">Vibrate when silent</string>
     <!-- Sound settings screen, setting option name -->
     <string name="notification_sound_title">Default notification sound</string>
-    <!-- Sound settings screen, notification light repeat pulsing title -->
-    <string name="notification_pulse_title">Pulse notification light</string>
     <!-- Display settings screen, notification popups are enabled [CHAR LIMIT=30] -->
     <string name="heads_up_enabled_title">Pop up if high priority</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the incoming call volume -->
@@ -1839,9 +1778,6 @@
     <string name="volume_notification_mute">Mute notifications</string>
     <!-- Image description for alarm volume mute button. -->
     <string name="volume_alarm_mute">Mute alarms</string>
-    <!-- Sound settings screen, setting option name checkbox. About vibration setting
-         during incoming calls. [CHAR LIMIT=30] -->
-    <string name="vibrate_when_ringing_title">Vibrate when ringing</string>
 
     <!-- Dock settings title, top level -->
     <string name="dock_settings">Dock</string>
@@ -5110,39 +5046,6 @@
     <!--Search Keywords-->
     <string name="keywords_wifi">wifi wi-fi network connection</string>
 
-    <!-- Notifications on lockscreen -->
-    <!-- Label for checkbox controlling the contents of notifications shown on
-         the secure lockscreen [CHAR LIMIT=25] -->
-    <string name="lock_screen_notifications">When device is locked</string>
-    <!-- Summary for lock_screen_notifications: sensitive information will be
-         hidden or redacted from notifications shown on a secure lock screen
-         [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_hide">Hide sensitive notification content</string>
-    <!-- Summary for lock_screen_notifications: all information will be
-         shown in notifications shown on a secure lock screen
-         [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_show">Show all notification content</string>
-
-    <!-- [CHAR LIMIT=30] Notification settings screen, setting option name -->
-    <string name="title_zen_mode">Do not disturb</string>
-
-    <!-- [CHAR LIMIT=30] Zen mode settings screen, activity title -->
-    <string name="zen_mode_settings_title">Do not disturb</string>
-
-    <!-- [CHAR LIMIT=20] Notifications settings header -->
-    <string name="notification_settings">Notifications</string>
-
-    <!-- [CHAR LIMIT=20] Notifications settings: Tweaks section header (eng
-         builds only) -->
-    <string name="notification_settings_tweaks">Tweaks</string>
-
-    <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
-    <string name="notification_settings_apps_title">App notifications</string>
-
-    <!-- [CHAR LIMIT=NONE] Content description for per-app notification
-         settings button -->
-    <string name="notification_app_settings_button">Notification settings</string>
-
     <!-- NFC Wi-Fi pairing/setup strings-->
 
     <!-- Write NFC tag for Wi-Fi pairing/setup title [CHAR_LIMIT=30]-->
@@ -5163,17 +5066,170 @@
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
 
+
+    <!-- Sounds and Notifications -->
+
+    <!-- Sounds & notifications: Settings header. [CHAR LIMIT=20] -->
+    <string name="notification_settings">Sounds &amp; Notifications</string>
+
+    <!-- Sounds & notifications: Title for the option managing media volume. [CHAR LIMIT=NONE] -->
+    <string name="media_volume_option_title">Media volume</string>
+
+    <!-- Sounds & notifications: Title for the option managing alarm volume. [CHAR LIMIT=NONE] -->
+    <string name="alarm_volume_option_title">Alarm volume</string>
+
+    <!-- Sounds & notifications: Title for the option managing ringer volume. [CHAR LIMIT=NONE] -->
+    <string name="ring_volume_option_title">Ring volume</string>
+
+    <!-- Sounds & notifications: Title for the Do not disturb option and associated settings page. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_settings_title">Do not disturb</string>
+
+    <!-- Sounds & notifications: Title for the ringer mode option. [CHAR LIMIT=NONE] -->
+    <string name="ringer_mode_title">When calls and notifications arrive</string>
+
+    <!-- Sounds & notifications: Value for the ringer mode option when audible. [CHAR LIMIT=NONE] -->
+    <string name="ringer_mode_audible">Ring</string>
+
+    <!-- Sounds & notifications: Value for the ringer mode option when vibrate. [CHAR LIMIT=NONE] -->
+    <string name="ringer_mode_vibrate">Vibrate instead of ringing</string>
+
+    <!-- Sounds & notifications: Value for the ringer mode option when silent. [CHAR LIMIT=NONE] -->
+    <string name="ringer_mode_silent">Don\'t ring or vibrate</string>
+
+    <!-- Sounds & notifications: Title for the option defining the phone ringtone. [CHAR LIMIT=NONE] -->
+    <string name="ringtone_title">Phone ringtone</string>
+
+    <!-- Sounds & notifications: Title for the option defining the default notification ringtone. [CHAR LIMIT=NONE] -->
+    <string name="notification_ringtone_title">Default notification ringtone</string>
+
+    <!-- Sounds & notifications: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=NONE] -->
+    <string name="vibrate_when_ringing_title">Vibrate when ringing</string>
+
+    <!-- Sounds & notifications: Title for the showing notifications option and associated settings page. [CHAR LIMIT=NONE] -->
+    <string name="notification_display_settings">Showing notifications</string>
+
+    <!-- Sounds & notifications > Showing notifications: Title for the pulse notification light option. [CHAR LIMIT=NONE] -->
+    <string name="notification_pulse_title">Pulse notification light</string>
+
+    <!-- Sounds & notifications > Showing notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_notifications_title">When device is locked</string>
+
+    <!-- Sounds & notifications > Showing notifications: Value for lockscreen notifications:  all information will be
+         shown in notifications shown on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_show">Show all notification content</string>
+
+    <!-- Sounds & notifications > Showing notifications: Value for lockscreen notifications: sensitive information will be
+         hidden or redacted from notifications shown on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_hide">Hide sensitive notification content</string>
+
+    <!-- Sounds & notifications > Showing notifications: Value for lockscreen notifications: notifications will not appear on a secure lock screen
+         [CHAR LIMIT=50] -->
+    <string name="lock_screen_notifications_summary_disable">Don\'t show notifications at all</string>
+
+    <!-- Sounds & notifications > Showing notifications: Title for the option managing notification display in zen mode. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_notifications_title">When do not disturb is on</string>
+
+    <!-- Sounds & notifications > Showing notifications: Value for zen mode notifications: notifications will be suppressed in zen mode [CHAR LIMIT=50] -->
+    <string name="zen_mode_notifications_summary_hide">Hide new notifications from the list</string>
+
+    <!-- Sounds & notifications > Showing notifications: Value for zen mode notifications: notifications will be displayed in zen mode [CHAR LIMIT=50] -->
+    <string name="zen_mode_notifications_summary_show">Show all notifications in the list</string>
+
+    <!-- Sounds & notifications > Showing notifications: Title for the option managing notifications per application. [CHAR LIMIT=NONE] -->
+    <string name="app_notifications_title">App notifications</string>
+
+    <!-- Sounds & notifications: Title for the touch sounds option and associated settings page. [CHAR LIMIT=NONE] -->
+    <string name="touch_sound_settings">Touch sounds</string>
+
+    <!-- Sounds & notifications > Touch sounds: Title for the option enabling touch sounds for dial pad tones. [CHAR LIMIT=NONE] -->
+    <string name="dial_pad_tones_title">Dial pad tones</string>
+
+    <!-- Sounds & notifications > Touch sounds: Title for the option enabling touch sounds for screen locking and unlocking. [CHAR LIMIT=NONE] -->
+    <string name="screen_locking_sounds_title">Screen locking &amp; unlocking</string>
+
+    <!-- Sounds & notifications > Touch sounds: Title for the option enabling other touch sounds. [CHAR LIMIT=NONE] -->
+    <string name="other_touch_sounds_title">Other touch sounds</string>
+
+    <!-- Sounds & notifications > Touch sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=NONE] -->
+    <string name="vibrate_on_touch_title">Vibrate on touch</string>
+
+    <!-- Sounds & notifications: Title for managing notification listeners option. [CHAR LIMIT=NONE] -->
+    <string name="manage_notification_access_title">Notification access</string>
+
+    <!-- Summary of preference to manage notification listeners, when none are enabled -->
+    <string name="manage_notification_access_summary_zero">Apps cannot read notifications</string>
+
+    <!-- Summary of preference to manage notification listeners, when one or more are enabled
+         and are therefore able to read the user's notifications -->
+    <plurals name="manage_notification_access_summary_nonzero">
+        <item quantity="one">%d app can read notifications</item>
+        <item quantity="other">%d apps can read notifications</item>
+    </plurals>
+
+    <!-- String to show in the list of notification listeners, when none is installed -->
+    <string name="no_notification_listeners">No notification listeners are installed.</string>
+
+    <!-- Title for a warning message about security implications of enabling a notification
+          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_listener_security_warning_title">Enable
+         <xliff:g id="service" example="NotificationReader">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a notification
+          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_listener_security_warning_summary">
+        <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to
+        read all notifications posted by the system or any installed app, which may include personal
+        information such as contact names and the text of messages sent to you. It will also be able
+        to dismiss these notifications or touch action buttons within them.
+    </string>
+
+    <!-- Title of preference to manage condition providers -->
+    <string name="manage_condition_providers">Condition providers</string>
+
+    <!-- Summary of preference to manage condition providers, when none are enabled -->
+    <string name="manage_condition_providers_summary_zero">No apps provide conditions</string>
+
+    <!-- Summary of preference to manage condition providers, when one or more are enabled -->
+    <plurals name="manage_condition_providers_summary_nonzero">
+        <item quantity="one">%d app provides conditions</item>
+        <item quantity="other">%d apps provide conditions</item>
+    </plurals>
+
+    <!-- String to show in the list of condition providers, when none is installed -->
+    <string name="no_condition_providers">No condition providers are installed.</string>
+
+    <!-- Title for a warning message about security implications of enabling a condition
+          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="condition_provider_security_warning_title">Enable
+         <xliff:g id="service" example="ConditionProvider">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a condition
+          provider, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="condition_provider_security_warning_summary">
+        <xliff:g id="condition_provider_name">%1$s</xliff:g> will be able to
+        add exit conditions to Do not disturb mode.
+    </string>
+
     <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
     <string name="loading_notification_apps">Loading apps...</string>
 
-    <!-- [CHAR LIMIT=40] Notification settings: App notifications screen title -->
-    <string name="app_notifications_title">App notifications</string>
-
-    <!-- [CHAR LIMIT=30] Notification settings: App notifications dialog show option -->
+    <!-- [CHAR LIMIT=NONE] Notification settings: App notifications dialog show option -->
     <string name="app_notifications_dialog_show">Show notifications</string>
 
-    <!-- [CHAR LIMIT=30] Notification settings: App notifications dialog priority option -->
-    <string name="app_notifications_dialog_priority">High priority</string>
+    <!-- [CHAR LIMIT=NONE] Notification settings: App notifications dialog priority option -->
+    <string name="app_notifications_dialog_priority">Display at the top of the list</string>
+
+    <!-- [CHAR LIMIT=NONE] Notification settings: App notifications dialog visibility option -->
+    <string name="app_notifications_dialog_visibility">Hide sensitive content when device is locked</string>
+
+    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
+    <string name="app_notification_row_banned">Blocked</string>
+
+    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when high priority -->
+    <string name="app_notification_row_priority">Top of list</string>
+
+    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when sensitive -->
+    <string name="app_notification_row_sensitive">Sensitive</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications dialog dismiss button caption -->
     <string name="app_notifications_dialog_done">Done</string>
@@ -5193,8 +5249,8 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Entry conditions option: title -->
     <string name="zen_mode_entry_conditions_title">Automatically turn on</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Entry conditions option: summary condition divider -->
-    <string name="zen_mode_entry_conditions_summary_divider">, </string>
+    <!-- [CHAR LIMIT=40] General divider text when concatenating multiple items in a text summary -->
+    <string name="summary_divider_text">, </string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Entry conditions option: value when blank -->
     <string name="zen_mode_entry_conditions_summary_none">Never</string>
@@ -5240,6 +5296,14 @@
 
     <!-- [CHAR LIMIT=20] Zen mode settings: End time option: Summary text value format -->
     <string name="zen_mode_end_time_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
+
+    <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
+    <string name="notification_settings_apps_title">App notifications</string>
+
+    <!-- [CHAR LIMIT=NONE] Content description for per-app notification
+         settings button -->
+    <string name="notification_app_settings_button">Notification settings</string>
+
 
    <!-- [CHAR LIMIT=35] Feedback on the device -->
    <string name="device_feedback">Send feedback about this device</string>

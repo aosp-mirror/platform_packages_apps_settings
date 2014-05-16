@@ -329,7 +329,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             if (automatic == null || automatic.length == 0) {
                 return null;
             }
-            final String divider = getString(R.string.zen_mode_entry_conditions_summary_divider);
+            final String divider = getString(R.string.summary_divider_text);
             final StringBuilder sb = new StringBuilder();
             for (int i = 0; i < automatic.length; i++) {
                 if (i > 0) sb.append(divider);

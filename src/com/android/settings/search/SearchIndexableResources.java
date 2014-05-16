@@ -36,7 +36,10 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.NotificationDisplaySettings;
 import com.android.settings.notification.NotificationSettings;
+import com.android.settings.notification.TouchSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
@@ -137,10 +140,28 @@ public final class SearchIndexableResources {
                         NotificationSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
+        sResMap.put(NotificationDisplaySettings.class.getName(),
+                new SearchIndexableResource(RANK_NOTIFICATIONS,
+                        R.xml.notification_display_settings,
+                        NotificationDisplaySettings.class.getName(),
+                        R.drawable.ic_settings_notifications));
+
+        sResMap.put(TouchSoundSettings.class.getName(),
+                new SearchIndexableResource(RANK_NOTIFICATIONS,
+                        R.xml.touch_sound_settings,
+                        TouchSoundSettings.class.getName(),
+                        R.drawable.ic_settings_notifications));
+
         sResMap.put(ZenModeSettings.class.getName(),
                 new SearchIndexableResource(RANK_NOTIFICATIONS,
                         NO_DATA_RES_ID,
                         ZenModeSettings.class.getName(),
+                        R.drawable.ic_settings_notifications));
+
+        sResMap.put(AppNotificationSettings.class.getName(),
+                new SearchIndexableResource(RANK_NOTIFICATIONS,
+                        NO_DATA_RES_ID,
+                        AppNotificationSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
         sResMap.put(Memory.class.getName(),

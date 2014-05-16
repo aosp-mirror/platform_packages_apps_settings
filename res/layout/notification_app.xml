@@ -33,26 +33,6 @@
             android:contentDescription="@null"
             android:scaleType="center" />
 
-        <ImageView
-            android:id="@android:id/icon1"
-            android:layout_width="@dimen/notification_app_icon_badge_size"
-            android:layout_height="@dimen/notification_app_icon_badge_size"
-            android:layout_marginLeft="@dimen/notification_app_icon_badge_margin"
-            android:layout_marginTop="@dimen/notification_app_icon_badge_margin"
-            android:background="#bb8b0000"
-            android:contentDescription="@null" />
-
-        <ImageView
-            android:id="@android:id/icon2"
-            android:layout_width="@dimen/notification_app_icon_badge_size"
-            android:layout_height="@dimen/notification_app_icon_badge_size"
-            android:layout_alignBottom="@android:id/icon"
-            android:layout_alignEnd="@android:id/icon"
-            android:layout_marginBottom="@dimen/notification_app_icon_badge_margin"
-            android:layout_marginEnd="@dimen/notification_app_icon_badge_margin"
-            android:background="#bb006400"
-            android:contentDescription="@null" />
-
         <TextView
             android:id="@android:id/title"
             android:layout_width="match_parent"
@@ -62,6 +42,18 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textAlignment="viewStart"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@android:id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/notification_app_icon_size"
+            android:layout_toEndOf="@android:id/icon"
+            android:gravity="bottom"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            android:textColor="#888"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
