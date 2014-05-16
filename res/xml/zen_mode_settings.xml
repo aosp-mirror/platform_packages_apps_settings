@@ -19,15 +19,9 @@
     android:key="zen_mode_settings"
     android:title="@string/zen_mode_settings_title" >
 
-    <SwitchPreference
-        android:key="zen_mode"
-        android:persistent="false"
-        android:switchTextOff=""
-        android:switchTextOn="" />
-
     <PreferenceCategory
         android:key="general"
-        android:layout="@layout/zen_mode_section"
+        android:layout="@layout/zen_mode_section_first"
         android:title="@string/zen_mode_general_category" >
         <SwitchPreference
             android:key="phone_calls"

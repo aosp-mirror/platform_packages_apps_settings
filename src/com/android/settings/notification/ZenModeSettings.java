@@ -47,25 +47,28 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.widget.SwitchBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable {
+public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable,
+        SwitchBar.OnSwitchChangeListener {
     private static final String TAG = "ZenModeSettings";
     private static final boolean DEBUG = true;
 
-    private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_GENERAL = "general";
     private static final String KEY_CALLS = "phone_calls";
     private static final String KEY_MESSAGES = "messages";
@@ -80,7 +83,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
-    private SwitchPreference mSwitch;
+    private SwitchBar mSwitchBar;
+    private Switch mSwitch;
     private Context mContext;
     private PackageManager mPM;
     private ZenModeConfig mConfig;
@@ -98,6 +102,26 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private boolean mIgnoreNext;
 
     @Override
+    public void onSwitchChanged(Switch switchView, final boolean isChecked) {
+        if (DEBUG) Log.d(TAG, "onPreferenceChange isChecked=" + isChecked
+                + " mIgnoreNext=" + mIgnoreNext);
+        if (mIgnoreNext) {
+            mIgnoreNext = false;
+        }
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
+                putZenModeSetting(v);
+                final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
+                if (n > 0) {
+                    mHandler.post(isChecked ? mShowDialog : mHideDialog);
+                }
+            }
+        });
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mContext = getActivity();
@@ -111,8 +135,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mConfig = getZenModeConfig();
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
 
-        mSwitch = (SwitchPreference) root.findPreference(KEY_ZEN_MODE);
-        mSwitch.setOnPreferenceChangeListener(mSwitchListener);
+        mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
+        mSwitch = mSwitchBar.getSwitch();
 
         final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
 
@@ -324,12 +348,16 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         updateControls();
         updateZenMode();
         mSettingsObserver.register();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mSettingsObserver.unregister();
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     private void updateZenMode() {
@@ -339,7 +367,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             mSwitch.setChecked(zenMode);
             mIgnoreNext = true;
         }
-        mSwitch.setTitle(zenMode ? R.string.zen_mode_option_on : R.string.zen_mode_option_off);
     }
 
     private void updateZenModeConfig() {
@@ -414,31 +441,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                         }
                     })
                     .show();
-        }
-    };
-
-    private final OnPreferenceChangeListener mSwitchListener = new OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object newValue) {
-            final boolean isChecked = (Boolean) newValue;
-            if (DEBUG) Log.d(TAG, "onPreferenceChange isChecked=" + isChecked
-                    + " mIgnoreNext=" + mIgnoreNext);
-            if (mIgnoreNext) {
-                mIgnoreNext = false;
-                return true;
-            }
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
-                    putZenModeSetting(v);
-                    final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
-                    if (n > 0) {
-                        mHandler.post(isChecked ? mShowDialog : mHideDialog);
-                    }
-                }
-            });
-            return true;
         }
     };
 
