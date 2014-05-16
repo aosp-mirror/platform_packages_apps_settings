@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.app.AppOpsManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
