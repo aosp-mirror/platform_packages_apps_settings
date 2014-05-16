@@ -59,7 +59,7 @@
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
 
-    <style name="Theme.Settings" parent="@android:style/Theme.Quantum.Light">
+    <style name="Theme.Settings" parent="@android:style/Theme.Quantum.Light.DarkActionBar">
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
         <item name="@*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>
@@ -71,22 +71,11 @@
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
 
-        <item name="android:actionBarTheme">@style/Theme.Settings.ActionBar.Quantum</item>
-
         <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <item name="android:colorPrimaryLight">@color/quantum_blue_grey_100</item>
-        <item name="android:colorPrimaryDark">@color/quantum_blue_grey_700</item>
-        <item name="android:colorAccent">@color/quantum_orange_A200</item>
-    </style>
-
-    <style name="Theme.Settings.ActionBar.Quantum" parent="@android:style/Theme.Quantum">
-        <!--Set the background color-->
-        <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <!--Set the activated state color for the on/off switches-->
-        <item name="android:colorControlActivated">?android:attr/colorControlNormal</item>
-        <!--Other colors-->
-        <item name="android:colorPrimaryLight">@color/quantum_blue_grey_100</item>
-        <item name="android:colorPrimaryDark">@color/quantum_blue_grey_700</item>
+        <!-- Used by the bouncing effect for ListView and ScrollView -->
+        <item name="android:colorPrimaryLight">@color/actionbar_background_color</item>
+        <!-- Used by the StatusBar and NavBar -->
+        <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
         <item name="android:colorAccent">@color/quantum_orange_A200</item>
     </style>
 
