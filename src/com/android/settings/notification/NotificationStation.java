@@ -35,8 +35,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.service.notification.INotificationListener;
-import android.service.notification.NotificationOrderUpdate;
+import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,14 +72,13 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
     };
 
-    private INotificationListener.Stub mListener = new INotificationListener.Stub() {
+    private NotificationListenerService mListener = new NotificationListenerService() {
         @Override
-        public void onListenerConnected(NotificationOrderUpdate update) throws RemoteException {
+        public void onListenerConnected(String[] notificationKeys) {
             // noop
         }
         @Override
-        public void onNotificationPosted(StatusBarNotification notification,
-                NotificationOrderUpdate update) throws RemoteException {
+        public void onNotificationPosted(StatusBarNotification notification) {
             Log.v(TAG, "onNotificationPosted: " + notification);
             final Handler h = getListView().getHandler();
             h.removeCallbacks(mRefreshListRunnable);
@@ -88,16 +86,10 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
 
         @Override
-        public void onNotificationRemoved(StatusBarNotification notification,
-                NotificationOrderUpdate update) throws RemoteException {
+        public void onNotificationRemoved(StatusBarNotification notification) {
             final Handler h = getListView().getHandler();
             h.removeCallbacks(mRefreshListRunnable);
             h.postDelayed(mRefreshListRunnable, 100);
-        }
-
-        @Override
-        public void onNotificationOrderUpdate(NotificationOrderUpdate update)
-                throws RemoteException {
         }
     };
 
@@ -122,13 +114,21 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
-            mNoMan.registerListener(mListener,
-                    new ComponentName(mContext.getPackageName(),
-                            this.getClass().getCanonicalName()),
-                    ActivityManager.getCurrentUser());
+            mListener.registerAsSystemService(new ComponentName(mContext.getPackageName(),
+                    this.getClass().getCanonicalName()), ActivityManager.getCurrentUser());
         } catch (RemoteException e) {
             // well, that didn't work out
         }
+    }
+
+    @Override
+    public void onDetach() {
+        try {
+            mListener.unregisterAsSystemService();
+        } catch (RemoteException e) {
+            // well, that didn't work out
+        }
+        super.onDetach();
     }
 
     @Override
