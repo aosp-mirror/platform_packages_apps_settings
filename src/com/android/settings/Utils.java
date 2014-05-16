@@ -312,18 +312,17 @@ public class Utils {
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         String statusString;
         if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
-            statusString = res.getString(R.string.battery_info_status_charging);
-            if (plugType > 0) {
-                int resId;
-                if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
-                    resId = R.string.battery_info_status_charging_ac;
-                } else if (plugType == BatteryManager.BATTERY_PLUGGED_USB) {
-                    resId = R.string.battery_info_status_charging_usb;
-                } else {
-                    resId = R.string.battery_info_status_charging_wireless;
-                }
-                statusString = statusString + " " + res.getString(resId);
+            int resId;
+            if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
+                resId = R.string.battery_info_status_charging_ac;
+            } else if (plugType == BatteryManager.BATTERY_PLUGGED_USB) {
+                resId = R.string.battery_info_status_charging_usb;
+            } else if (plugType == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                resId = R.string.battery_info_status_charging_wireless;
+            } else {
+                resId = R.string.battery_info_status_charging;
             }
+            statusString = res.getString(resId);
         } else if (status == BatteryManager.BATTERY_STATUS_DISCHARGING) {
             statusString = res.getString(R.string.battery_info_status_discharging);
         } else if (status == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {

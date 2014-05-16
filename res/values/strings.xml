@@ -185,14 +185,14 @@
 
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_unknown">Unknown</string>
-    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <!-- [CHAR_LIMIT=20] Battery use screen.  Battery status shown in chart label when charging from an unknown source.  -->
     <string name="battery_info_status_charging">Charging</string>
-    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="battery_info_status_charging_ac">(AC)</string>
-    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="battery_info_status_charging_usb">(USB)</string>
-    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="battery_info_status_charging_wireless">(wireless)</string>
+    <!-- [CHAR_LIMIT=20] Battery use screen.  Battery status shown in chart label when charging on AC.  -->
+    <string name="battery_info_status_charging_ac">Charging on AC</string>
+    <!-- [CHAR_LIMIT=20] Battery use screen.  Battery status shown in chart label when charging over USB.  -->
+    <string name="battery_info_status_charging_usb">Charging over USB</string>
+    <!-- [CHAR_LIMIT=20] Battery use screen.  Battery status shown in chart label when charging over a wireless connection.  -->
+    <string name="battery_info_status_charging_wireless">Charging wirelessly</string>
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_discharging">Not charging</string>
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -3551,6 +3551,16 @@
     <string name="battery_stats_phone_signal_label">Mobile network signal</string>
     <!-- Battery usage during last unplugged period -->
     <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
+    <!-- [CHAR_LIMIT=5] Label for an hour time when using 24 hour mode -->
+    <string name="battery_stats_hour_24_label"><xliff:g id="time">%1$d</xliff:g>:00</string>
+    <!-- [CHAR_LIMIT=5] Label for an hour time when using 12 hour mode in the AM -->
+    <string name="battery_stats_hour_am_label"><xliff:g id="time">%1$d</xliff:g> AM</string>
+    <!-- [CHAR_LIMIT=5] Label for an hour time when using 12 hour mode in the PM -->
+    <string name="battery_stats_hour_pm_label"><xliff:g id="time">%1$d</xliff:g> PM</string>
+    <!-- [CHAR_LIMIT=3] Label for date of day and month (not year) when the day is shown first -->
+    <string name="battery_stats_date_day_first_label"><xliff:g id="day">%1$d</xliff:g>/<xliff:g id="month">%2$d</xliff:g></string>
+    <!-- [CHAR_LIMIT=3] Label for date of day and month (not year) when the month is shown first -->
+    <string name="battery_stats_date_month_first_label"><xliff:g id="month">%2$d</xliff:g>/<xliff:g id="day">%1$d</xliff:g></string>
     <!-- CPU awake time title -->
     <string name="awake">Device awake time</string>
     <!-- Wifi on time -->
