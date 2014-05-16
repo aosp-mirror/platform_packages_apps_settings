@@ -20,6 +20,9 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.IpConfiguration;
+import android.net.IpConfiguration.IpAssignment;
+import android.net.IpConfiguration.ProxySettings;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.NetworkInfo.DetailedState;
@@ -28,9 +31,7 @@ import android.net.ProxyInfo;
 import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
-import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
-import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
@@ -240,27 +241,27 @@ public class WifiConfigController implements TextWatcher,
             boolean showAdvancedFields = false;
             if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
                 WifiConfiguration config = mAccessPoint.getConfig();
-                if (config.ipAssignment == IpAssignment.STATIC) {
+                if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
                 } else {
                     mIpSettingsSpinner.setSelection(DHCP);
                 }
                 //Display IP addresses
-                for(InetAddress a : config.linkProperties.getAddresses()) {
+                for(InetAddress a : config.getLinkProperties().getAddresses()) {
                     addRow(group, R.string.wifi_ip_address, a.getHostAddress());
                 }
 
 
-                if (config.proxySettings == ProxySettings.STATIC) {
+                if (config.getProxySettings() == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
                     showAdvancedFields = true;
-                } else if (config.proxySettings == ProxySettings.PAC) {
+                } else if (config.getProxySettings() == ProxySettings.PAC) {
                     mProxySettingsSpinner.setVisibility(View.GONE);
                     TextView textView = (TextView)mView.findViewById(R.id.proxy_pac_info);
                     textView.setVisibility(View.VISIBLE);
                     textView.setText(context.getString(R.string.proxy_url) +
-                            config.linkProperties.getHttpProxy().getPacFileUrl());
+                            config.getLinkProperties().getHttpProxy().getPacFileUrl());
                     showAdvancedFields = true;
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
@@ -446,9 +447,8 @@ public class WifiConfigController implements TextWatcher,
                 return null;
         }
 
-        config.proxySettings = mProxySettings;
-        config.ipAssignment = mIpAssignment;
-        config.linkProperties = new LinkProperties(mLinkProperties);
+        config.setIpConfiguration(
+                new IpConfiguration(mIpAssignment, mProxySettings, mLinkProperties));
 
         return config;
     }
@@ -772,7 +772,7 @@ public class WifiConfigController implements TextWatcher,
                 mDns2View.addTextChangedListener(this);
             }
             if (config != null) {
-                LinkProperties linkProperties = config.linkProperties;
+                LinkProperties linkProperties = config.getLinkProperties();
                 Iterator<LinkAddress> iterator = linkProperties.getLinkAddresses().iterator();
                 if (iterator.hasNext()) {
                     LinkAddress linkAddress = iterator.next();
@@ -822,7 +822,7 @@ public class WifiConfigController implements TextWatcher,
                 mProxyExclusionListView.addTextChangedListener(this);
             }
             if (config != null) {
-                ProxyInfo proxyProperties = config.linkProperties.getHttpProxy();
+                ProxyInfo proxyProperties = config.getLinkProperties().getHttpProxy();
                 if (proxyProperties != null) {
                     mProxyHostView.setText(proxyProperties.getHost());
                     mProxyPortView.setText(Integer.toString(proxyProperties.getPort()));
