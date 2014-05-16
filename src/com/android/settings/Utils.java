@@ -518,7 +518,7 @@ public class Utils {
      * entire activity.
      *
      * @param context The context.
-     * @param fragmentName The name of the fragment to display.
+     * @param fragmentClass The class name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
      * @param resultTo Option fragment that should receive the result of
      * the activity launch.
@@ -526,9 +526,9 @@ public class Utils {
      * code in which to report the result.
      * @param title String to display for the title of this set of preferences.
      */
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
+    public static void startWithFragment(Context context, String fragmentClass, Bundle args,
             Fragment resultTo, int resultRequestCode, CharSequence title) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, title);
+        Intent intent = onBuildStartFragmentIntent(context, fragmentClass, args, title);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -542,17 +542,17 @@ public class Utils {
      * appropriate arguments to display the fragment.
      *
      * @param context The Context.
-     * @param fragmentName The name of the fragment to display.
+     * @param fragmentClass The class name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
      * @param title Optional title to show for this item.
      * @return Returns an Intent that can be launched to display the given
      * fragment.
      */
-    public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
+    public static Intent onBuildStartFragmentIntent(Context context, String fragmentClass,
             Bundle args, CharSequence title) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(context, SubSettings.class);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentClass);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
         return intent;
