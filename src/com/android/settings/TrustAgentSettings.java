@@ -158,8 +158,8 @@ public class TrustAgentSettings extends ListFragment implements View.OnClickList
                     && type != XmlPullParser.START_TAG) {
             }
             String nodeName = parser.getName();
-            if (!"trust_agent".equals(nodeName)) {
-                Slog.w(TAG, "Meta-data does not start with trust_agent tag");
+            if (!"trust-agent".equals(nodeName)) {
+                Slog.w(TAG, "Meta-data does not start with trust-agent tag");
                 return null;
             }
             TypedArray sa = res
