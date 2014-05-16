@@ -387,19 +387,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mEnabledSwitch.setEnabled(false);
             return;
         }
-        mSwitchBar.addOnSwitchChangeListener(this);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mSwitchBar.show();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mSwitchBar.hide();
     }
 
     private boolean removePreferenceForProduction(Preference preference) {
@@ -464,6 +451,17 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mEnabledSwitch.setChecked(mLastEnabledState);
             setPrefsEnabledState(mLastEnabledState);
         }
+
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     void updateCheckBox(CheckBoxPreference checkBox, boolean value) {
