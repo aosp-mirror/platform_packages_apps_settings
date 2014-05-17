@@ -16,7 +16,6 @@
 package com.android.settings.wifi;
 
 import com.android.settings.ButtonBarHandler;
-import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.Fragment;
@@ -25,7 +24,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.widget.Button;
 
-public class WifiPickerActivity extends SettingsActivity implements ButtonBarHandler {
+public class WifiPickerActivity extends PreferenceActivity implements ButtonBarHandler {
 
     // Same as what are in PreferenceActivity as private.
     private static final String EXTRA_PREFS_SHOW_BUTTON_BAR = "extra_prefs_show_button_bar";
@@ -40,6 +39,7 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
         if (!modIntent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, WifiSettings.class.getName());
         }
+        modIntent.putExtra(EXTRA_NO_HEADERS, true);
         return modIntent;
     }
 
@@ -52,14 +52,18 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
     }
 
     /**
-     * Add additional codes for button bar handling.
+     * Almost dead copy of
+     * {@link PreferenceActivity#startWithFragment(String, Bundle, Fragment, int)}, except this has
+     * additional codes for button bar handling.
      */
-    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
-        CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+    @Override
+    public void startWithFragment(String fragmentName, Bundle args,
+            Fragment resultTo, int resultRequestCode) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(this, getClass());
-        intent.putExtra(EXTRA_SHOW_FRAGMENT, fragmentClass);
+        intent.putExtra(EXTRA_SHOW_FRAGMENT, fragmentName);
         intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        intent.putExtra(EXTRA_NO_HEADERS, true);
 
         final Intent orgIntent = getIntent();
         if (orgIntent.hasExtra(EXTRA_PREFS_SHOW_BUTTON_BAR)) {
@@ -83,8 +87,11 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
                     orgIntent.getBooleanExtra(EXTRA_WIFI_SHOW_MENUS, true));
         }
 
-        super.startPreferencePanel(fragmentClass, args, titleRes, titleText, resultTo,
-                resultRequestCode);
+        if (resultTo == null) {
+            startActivity(intent);
+        } else {
+            resultTo.startActivityForResult(intent, resultRequestCode);
+        }
     }
 
     @Override
