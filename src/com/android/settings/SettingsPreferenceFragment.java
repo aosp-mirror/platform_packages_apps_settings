@@ -183,10 +183,12 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                     listView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            final int centerX = listView.getWidth() / 2;
-                            final int centerY = listView.getChildAt(0).getHeight() / 2;
-                            highlight.setHotspot(0, centerX, centerY);
-                            highlight.clearHotspots();
+                            final View v = listView.getChildAt(0);
+                            final int centerX = v.getWidth() / 2;
+                            final int centerY = v.getHeight() / 2;
+                            highlight.setHotspot(centerX, centerY);
+                            v.setPressed(true);
+                            v.setPressed(false);
                             ((PreferenceGroupAdapter) adapter).setHighlighted(-1);
                         }
                     }, DELAY_HIGHLIGHT_DURATION_MILLIS);
@@ -201,8 +203,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                 preferenceView.setBackground(highlight);
                 final int centerX = preferenceView.getWidth() / 2;
                 final int centerY = preferenceView.getHeight() / 2;
-                highlight.setHotspot(0, centerX, centerY);
-                highlight.clearHotspots();
+                highlight.setHotspot(centerX, centerY);
+                preferenceView.setPressed(true);
+                preferenceView.setPressed(false);
             }
         }
     }

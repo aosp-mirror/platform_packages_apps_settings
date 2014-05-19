@@ -83,8 +83,9 @@ public class HighlightingFragment extends Fragment {
                 public void run() {
                     final int centerX = view.getWidth() / 2;
                     final int centerY = view.getHeight() / 2;
-                    highlight.setHotspot(0, centerX, centerY);
-                    highlight.clearHotspots();
+                    highlight.setHotspot(centerX, centerY);
+                    view.setPressed(true);
+                    view.setPressed(false);
                 }
             }, DELAY_HIGHLIGHT_DURATION_MILLIS);
 
