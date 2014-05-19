@@ -388,9 +388,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 public void onPostExecute(java.lang.Void v) {
                     if(type == StorageManager.CRYPT_TYPE_PIN) {
                         setContentView(R.layout.crypt_keeper_pin_entry);
+                        ((TextView)findViewById(R.id.status)).setText(R.string.enter_pin);
                     } else if (type == StorageManager.CRYPT_TYPE_PATTERN) {
                         setContentView(R.layout.crypt_keeper_pattern_entry);
                         setBackFunctionality(false);
+                        ((TextView)findViewById(R.id.status)).setText(R.string.enter_pattern);
                     } else {
                         setContentView(R.layout.crypt_keeper_password_entry);
                     }

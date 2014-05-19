@@ -737,35 +737,27 @@
     <!-- Title of the preferences item to control encryption -->
     <string name="crypt_keeper_encrypt_title" product="default">Encrypt phone</string>
 
-    <!-- Summary of the preferences item to control encryption, when encryption is inactive -->
-    <string name="crypt_keeper_encrypt_summary" product="tablet">
-    Require a numeric PIN or password to decrypt your tablet each time you
-    power it on</string>
-    <!-- Summary of the preferences item to control encryption, when encryption is inactive -->
-    <string name="crypt_keeper_encrypt_summary" product="default">
-    Require a numeric PIN or password to decrypt your phone each time you
-    power it on</string>
     <!-- Summary of the preferences item to control encryption, when encryption is active -->
     <string name="crypt_keeper_encrypted_summary">Encrypted</string>
 
     <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="tablet">
     You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. Once you encrypt your tablet, you need to type a numeric PIN
-    or password to decrypt it each time you power it on. You can\'t decrypt your tablet
-    except by performing a factory data reset, erasing all your data.\n\nEncryption takes
-    an hour or more. You must start with a charged battery and keep your tablet plugged in
-    until encryption is complete. If you interrupt the encryption process, you will lose
-    some or all of your data.</string>
+    media, and other files. After you encrypt your tablet, assuming you\’ve set up a screen lock
+    (that is, a pattern or numeric PIN or password), you\'ll need to unlock the screen to decrypt
+    the tablet every time you power it on. The only other way to decrypt is to perform a factory
+    data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with
+    a charged battery and keep your tablet plugged in throughout the process. If you interrupt,
+    you\’ll lose some or all of your data</string>
     <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="default">
     You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. Once you encrypt your phone, you need to type a numeric PIN or
-    password to decrypt it each time you power it on. You can\'t decrypt your phone
-    except by performing a factory data reset, erasing all your data.\n\nEncryption takes
-    an hour or more. You must start with a charged battery and keep your phone plugged in
-    until encryption is complete. If you interrupt the encryption process, you will lose
-    some or all of your data.</string>
+    media, and other files. After you encrypt your phone, assuming you’ve set up a screen lock
+    (that is, a pattern or numeric PIN or password), you\'ll need to unlock the screen to decrypt
+    the phone every time you power it on. The only other way to decrypt is to perform a factory
+    data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with
+    a charged battery and keep your phone plugged in throughout the process. If you interrupt,
+    you\’ll lose some or all of your data.</string>
 
     <!-- Button text to start encryption process -->
     <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
@@ -4302,6 +4294,10 @@
     <string name="status_wimax_mac_address">4G MAC address</string>
     <!-- This is displayed to the user when the device needs to be decrypted -->
     <string name="enter_password">Type password to decrypt storage</string>
+    <!-- Informational text on the pin entry screen prompting the user for their pin -->
+    <string name="enter_pin">Enter your PIN to decrypt storage</string>
+    <!-- Informational text on the pattern entry screen prompting the user for their pattern -->
+    <string name="enter_pattern">Draw your pattern to decrypt storage</string>
     <!-- This is displayed when the password is entered incorrectly -->
     <string name="try_again">Try again.</string>
 
