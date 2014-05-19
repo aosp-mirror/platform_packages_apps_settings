@@ -18,8 +18,8 @@
     android:id="@+id/dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp"
+    android:paddingStart="@*android:dimen/preference_fragment_padding_side"
+    android:paddingEnd="@*android:dimen/preference_fragment_padding_side"
     android:scrollbarStyle="outsideOverlay"
     android:background="@color/dashboard_background_color">
 
