@@ -120,6 +120,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private LockPatternView mLockPatternView;
     /** Number of calls to {@link #notifyUser()} to ignore before notifying. */
     private int mNotificationCountdown = 0;
+    /** Number of calls to {@link #notifyUser()} before we release the wakelock */
+    private int mReleaseWakeLockCountdown = 0;
 
     /**
      * Used to propagate state through configuration changes (e.g. screen rotation)
@@ -287,6 +289,14 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // Notify the user again in 5 seconds.
         mHandler.removeMessages(MESSAGE_NOTIFY);
         mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 5 * 1000);
+
+        if (mWakeLock.isHeld()) {
+            if (mReleaseWakeLockCountdown > 0) {
+                --mReleaseWakeLockCountdown;
+            } else {
+                mWakeLock.release();
+            }
+        }
     }
 
     /**
@@ -626,8 +636,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (pm != null) {
                 mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
                 mWakeLock.acquire();
+                // Keep awake for 10 minutes - if the user hasn't been alerted by then
+                // best not to just drain their battery
+                mReleaseWakeLockCountdown = 96; // 96 * 5 + 120 = 600
             }
         }
+
         // Asynchronously throw up the IME, since there are issues with requesting it to be shown
         // immediately.
         if (mLockPatternView == null) {
