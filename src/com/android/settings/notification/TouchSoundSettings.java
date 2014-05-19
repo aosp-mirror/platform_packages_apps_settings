@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -27,23 +26,14 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.provider.Settings.System;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TouchSoundSettings extends SettingsPreferenceFragment implements Indexable {
+public class TouchSoundSettings extends SettingsPreferenceFragment {
     private static final String TAG = "TouchSoundSettings";
 
     private static final String KEY_DIAL_PAD_TONES = "dial_pad_tones";
@@ -144,30 +134,6 @@ public class TouchSoundSettings extends SettingsPreferenceFragment implements In
             mPref.setChecked(System.getInt(getContentResolver(), mSetting, 1) != 0);
         }
     }
-
-    // === Indexing ===
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                add(result, context, R.string.touch_sound_settings);
-                add(result, context, R.string.dial_pad_tones_title);
-                add(result, context, R.string.screen_locking_sounds_title);
-                add(result, context, R.string.other_touch_sounds_title);
-                add(result, context, R.string.vibrate_on_touch_title);
-                return result;
-            }
-
-            private void add(List<SearchIndexableRaw> result, Context context, int title) {
-                final Resources res = context.getResources();
-                final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(title);
-                data.screenTitle = res.getString(R.string.touch_sound_settings);
-                result.add(data);
-            }
-        };
 
     // === Callbacks ===
 

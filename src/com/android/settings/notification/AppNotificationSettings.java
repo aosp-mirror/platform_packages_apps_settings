@@ -29,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,9 +53,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -64,7 +60,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AppNotificationSettings extends ListFragment implements Indexable {
+/** Just a sectioned list of installed applications, nothing else to index **/
+public class AppNotificationSettings extends ListFragment {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = true;
 
@@ -586,27 +583,4 @@ public class AppNotificationSettings extends ListFragment implements Indexable {
             return true;
         }
     }
-
-    // === Indexing ===
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                add(result, context, R.string.app_notifications_title);
-                add(result, context, R.string.app_notifications_dialog_show);
-                add(result, context, R.string.app_notifications_dialog_priority);
-                add(result, context, R.string.app_notifications_dialog_visibility);
-                return result;
-            }
-
-            private void add(List<SearchIndexableRaw> result, Context context, int title) {
-                final Resources res = context.getResources();
-                final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(title);
-                data.screenTitle = res.getString(R.string.app_notifications_title);
-                result.add(data);
-            }
-        };
 }

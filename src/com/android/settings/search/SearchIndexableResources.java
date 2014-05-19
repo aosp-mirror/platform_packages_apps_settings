@@ -36,7 +36,6 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationDisplaySettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.TouchSoundSettings;
@@ -156,12 +155,6 @@ public final class SearchIndexableResources {
                 new SearchIndexableResource(RANK_NOTIFICATIONS,
                         NO_DATA_RES_ID,
                         ZenModeSettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(AppNotificationSettings.class.getName(),
-                new SearchIndexableResource(RANK_NOTIFICATIONS,
-                        NO_DATA_RES_ID,
-                        AppNotificationSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
         sResMap.put(Memory.class.getName(),

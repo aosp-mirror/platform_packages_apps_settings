@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
@@ -42,14 +41,8 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SoundSettings;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NotificationSettings extends SettingsPreferenceFragment implements Indexable {
+public class NotificationSettings extends SettingsPreferenceFragment {
     private static final String TAG = "NotificationSettings";
 
     private static final String KEY_MEDIA_VOLUME = "media_volume";
@@ -244,33 +237,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             }
         }
     }
-
-    // === Indexing ===
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                add(result, context, R.string.notification_settings);
-                add(result, context, R.string.media_volume_option_title);
-                add(result, context, R.string.alarm_volume_option_title);
-                add(result, context, R.string.ring_volume_option_title);
-                add(result, context, R.string.ringer_mode_title);
-                add(result, context, R.string.ringtone_title);
-                add(result, context, R.string.vibrate_when_ringing_title);
-                add(result, context, R.string.manage_notification_access_title);
-                return result;
-            }
-
-            private void add(List<SearchIndexableRaw> result, Context context, int title) {
-                final Resources res = context.getResources();
-                final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(title);
-                data.screenTitle = res.getString(R.string.notification_settings);
-                result.add(data);
-            }
-        };
 
     // === Callbacks ===
 

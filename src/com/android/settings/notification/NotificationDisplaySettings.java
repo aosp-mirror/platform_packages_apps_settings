@@ -17,15 +17,12 @@
 package com.android.settings.notification;
 
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
@@ -33,14 +30,8 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NotificationDisplaySettings extends SettingsPreferenceFragment implements Indexable {
+public class NotificationDisplaySettings extends SettingsPreferenceFragment {
     private static final String TAG = "NotificationDisplaySettings";
 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
@@ -182,29 +173,6 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment impl
         mZenModeNotifications.setSelectedValue(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.DISPLAY_INTERCEPTED_NOTIFICATIONS, 0));
     }
-
-    // === Indexing ===
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                add(result, context, R.string.notification_display_settings);
-                add(result, context, R.string.notification_pulse_title);
-                add(result, context, R.string.lock_screen_notifications_title);
-                add(result, context, R.string.zen_mode_notifications_title);
-                return result;
-            }
-
-            private void add(List<SearchIndexableRaw> result, Context context, int title) {
-                final Resources res = context.getResources();
-                final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(title);
-                data.screenTitle = res.getString(R.string.notification_display_settings);
-                result.add(data);
-            }
-        };
 
     // === Callbacks ===
 

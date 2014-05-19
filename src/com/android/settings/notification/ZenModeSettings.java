@@ -45,6 +45,7 @@ import android.service.notification.Condition;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
@@ -75,10 +76,28 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
     private static final String KEY_AUTOMATIC = "automatic";
     private static final String KEY_WHEN = "when";
+    private static final String KEY_START_TIME = "start_time";
+    private static final String KEY_END_TIME = "end_time";
 
     private static final String KEY_AUTOMATION = "automation";
     private static final String KEY_ENTRY = "entry";
     private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
+
+    private static final SparseArray<String> ALL_KEY_TITLES = allKeyTitles();
+
+    private static SparseArray<String> allKeyTitles() {
+        final SparseArray<String> rt = new SparseArray<String>();
+        rt.put(R.string.zen_mode_general_category, KEY_GENERAL);
+        rt.put(R.string.zen_mode_phone_calls, KEY_CALLS);
+        rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
+        rt.put(R.string.zen_mode_automatic_category, KEY_AUTOMATIC);
+        rt.put(R.string.zen_mode_when, KEY_WHEN);
+        rt.put(R.string.zen_mode_start_time, KEY_START_TIME);
+        rt.put(R.string.zen_mode_end_time, KEY_END_TIME);
+        rt.put(R.string.zen_mode_automation_category, KEY_AUTOMATION);
+        rt.put(R.string.manage_condition_providers, KEY_CONDITION_PROVIDERS);
+        return rt;
+    }
 
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
@@ -217,6 +236,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         final FragmentManager mgr = getFragmentManager();
 
         mStart = new TimePickerPreference(mContext, mgr);
+        mStart.setKey(KEY_START_TIME);
         mStart.setTitle(R.string.zen_mode_start_time);
         mStart.setCallback(new TimePickerPreference.Callback() {
             @Override
@@ -238,6 +258,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStart.setDependency(mWhen.getKey());
 
         mEnd = new TimePickerPreference(mContext, mgr);
+        mEnd.setKey(KEY_END_TIME);
         mEnd.setTitle(R.string.zen_mode_end_time);
         mEnd.setSummaryFormat(R.string.zen_mode_end_time_summary_format);
         mEnd.setCallback(new TimePickerPreference.Callback() {
@@ -449,24 +470,17 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                add(result, context, R.string.zen_mode_settings_title);
-                add(result, context, R.string.zen_mode_general_category);
-                add(result, context, R.string.zen_mode_phone_calls);
-                add(result, context, R.string.zen_mode_messages);
-                add(result, context, R.string.zen_mode_automatic_category);
-                add(result, context, R.string.zen_mode_when);
-                add(result, context, R.string.zen_mode_start_time);
-                add(result, context, R.string.zen_mode_end_time);
-                return result;
-            }
-
-            private void add(List<SearchIndexableRaw> result, Context context, int title) {
+                final int N = ALL_KEY_TITLES.size();
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>(N);
                 final Resources res = context.getResources();
-                final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(title);
-                data.screenTitle = res.getString(R.string.zen_mode_settings_title);
-                result.add(data);
+                for (int i = 0; i < N; i++) {
+                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.key = ALL_KEY_TITLES.valueAt(i);
+                    data.title = res.getString(ALL_KEY_TITLES.keyAt(i));
+                    data.screenTitle = res.getString(R.string.zen_mode_settings_title);
+                    result.add(data);
+                }
+                return result;
             }
         };
 
