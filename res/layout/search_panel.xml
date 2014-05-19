@@ -17,7 +17,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dashboard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingStart="@*android:dimen/preference_fragment_padding_side"
+        android:paddingEnd="@*android:dimen/preference_fragment_padding_side"
+        android:background="@color/dashboard_background_color">
 
     <LinearLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,23 +34,19 @@
                 android:orientation="vertical">
 
             <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
+                      android:layout_height="@dimen/dashboard_category_title_height"
                       android:singleLine="true"
                       android:ellipsize="marquee"
-                      android:fadingEdge="horizontal"
+                      android:gravity="center_vertical"
                       android:textAppearance="?android:attr/textAppearanceMedium"
-                      android:text="@string/search_recents_queries_label"/>
+                      android:textAlignment="viewStart"
+                      android:text="@string/search_recents_queries_label"
+                    />
 
             <ListView android:id="@+id/list_suggestions"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            <ImageView android:src="?android:attr/dividerHorizontal"
-                       android:layout_width="fill_parent"
-                       android:layout_height="wrap_content"
-                       android:scaleType="fitXY"
-                       android:paddingBottom="2dp"
-                       android:paddingTop="2dp" />
+                    android:layout_height="match_parent"
+                    />
 
         </LinearLayout>
 
@@ -56,15 +55,17 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:orientation="vertical"
-                android:layout_weight="1" >
+                android:layout_weight="1">
 
             <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
+                      android:layout_height="@dimen/dashboard_category_title_height"
                       android:singleLine="true"
                       android:ellipsize="marquee"
-                      android:fadingEdge="horizontal"
+                      android:gravity="center_vertical"
                       android:textAppearance="?android:attr/textAppearanceMedium"
-                      android:text="@string/search_results_label"/>
+                      android:textAlignment="viewStart"
+                      android:text="@string/search_results_label"
+                    />
 
             <ListView android:id="@+id/list_results"
                     android:layout_width="match_parent"
