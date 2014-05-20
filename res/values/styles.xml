@@ -258,7 +258,15 @@
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 
-    <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Quantum.Medium">
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Quantum.Medium">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Quantum.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Switch" parent="TextAppearance.Medium">
+    </style>
+
 </resources>
