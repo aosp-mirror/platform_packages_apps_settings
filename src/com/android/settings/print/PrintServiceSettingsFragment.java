@@ -143,12 +143,16 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mSettingsContentObserver.register(getContentResolver());
         updateEmptyView();
         updateUiForServiceState();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
     }
 
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     @Override
@@ -159,19 +163,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
-    }
-
-    @Override
     public void onDestroyView() {
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         super.onDestroyView();
     }
 
