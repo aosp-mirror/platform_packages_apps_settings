@@ -477,9 +477,6 @@ public class SettingsActivity extends Activity
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
         } else {
-            // We need to build the Categories in all cases
-            buildDashboardCategories(mCategories);
-
             if (!mIsShowingDashboard) {
                 final ComponentName cn = getIntent().getComponent();
                 // No UP is we are launched thru a Settings shortcut
@@ -494,6 +491,9 @@ public class SettingsActivity extends Activity
                 switchToFragment( initialFragmentName, initialArguments, true, false,
                         mInitialTitle, false);
             } else {
+                // We need to build the Categories in all cases
+                buildDashboardCategories(mCategories);
+
                 // No UP if we are displaying the main Dashboard
                 mDisplayHomeAsUpEnabled = false;
                 if (mCategories.size() > 0) {
@@ -634,8 +634,6 @@ public class SettingsActivity extends Activity
         mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
 
-        invalidateCategories();
-
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         mDynamicIndexableContentMonitor.register(this);
@@ -651,17 +649,17 @@ public class SettingsActivity extends Activity
 
         unregisterReceiver(mBatteryInfoReceiver);
 
-        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
-                mDevelopmentPreferencesListener);
-
-        mDevelopmentPreferencesListener = null;
-
         mDynamicIndexableContentMonitor.unregister();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
+                mDevelopmentPreferencesListener);
+        mDevelopmentPreferencesListener = null;
+
         if (mListeningToAccountUpdates) {
             AccountManager.get(this).removeOnAccountsUpdatedListener(this);
         }
