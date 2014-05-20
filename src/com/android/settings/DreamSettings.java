@@ -82,16 +82,10 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         logd("onCreate(%s)", icicle);
         super.onCreate(icicle);
 
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-
-        mBackend = new DreamBackend(activity);
-
-        mSwitchBar = activity.getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
+        mBackend = new DreamBackend(getActivity());
 
         setHasOptionsMenu(true);
     }
-
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
@@ -127,6 +121,10 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
         mAdapter = new DreamInfoAdapter(mContext);
         listView.setAdapter(mAdapter);
+
+        final SettingsActivity sa = (SettingsActivity) getActivity();
+        mSwitchBar = sa.getSwitchBar();
+        mSwitch = mSwitchBar.getSwitch();
     }
 
     @Override
