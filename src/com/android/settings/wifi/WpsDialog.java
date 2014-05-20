@@ -27,7 +27,6 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -45,6 +44,8 @@ import com.android.settings.R;
 public class WpsDialog extends AlertDialog {
 
     private final static String TAG = "WpsDialog";
+    private static final String DIALOG_STATE = "android:dialogState";
+    private static final String DIALOG_MSG_STRING = "android:dialogMsg";
 
     private View mView;
     private TextView mTextView;
@@ -64,6 +65,7 @@ public class WpsDialog extends AlertDialog {
 
     private Context mContext;
     private Handler mHandler = new Handler();
+    private String mMsgString = "";
 
     private enum DialogState {
         WPS_INIT,
@@ -128,6 +130,25 @@ public class WpsDialog extends AlertDialog {
                 handleEvent(context, intent);
             }
         };
+        setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public Bundle onSaveInstanceState () {
+        Bundle bundle  = super.onSaveInstanceState();
+        bundle.putString(DIALOG_STATE, mDialogState.toString());
+        bundle.putString(DIALOG_MSG_STRING, mMsgString.toString());
+        return bundle;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            super.onRestoreInstanceState(savedInstanceState);
+            DialogState dialogState = mDialogState.valueOf(savedInstanceState.getString(DIALOG_STATE));
+            String msg = savedInstanceState.getString(DIALOG_MSG_STRING);
+            updateDialog(dialogState, msg);
+        }
     }
 
     @Override
@@ -207,6 +228,7 @@ public class WpsDialog extends AlertDialog {
             return;
         }
         mDialogState = state;
+        mMsgString = msg;
 
         mHandler.post(new Runnable() {
                 @Override
