@@ -513,25 +513,25 @@ public class SettingsActivity extends Activity
         Intent intent = getIntent();
         if (intent.getBooleanExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)) {
 
-            View buttonBar = findViewById(com.android.internal.R.id.button_bar);
+            View buttonBar = findViewById(R.id.button_bar);
             if (buttonBar != null) {
                 buttonBar.setVisibility(View.VISIBLE);
 
-                Button backButton = (Button)findViewById(com.android.internal.R.id.back_button);
+                Button backButton = (Button)findViewById(R.id.back_button);
                 backButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
                         setResult(RESULT_CANCELED);
                         finish();
                     }
                 });
-                Button skipButton = (Button)findViewById(com.android.internal.R.id.skip_button);
+                Button skipButton = (Button)findViewById(R.id.skip_button);
                 skipButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
                         setResult(RESULT_OK);
                         finish();
                     }
                 });
-                mNextButton = (Button)findViewById(com.android.internal.R.id.next_button);
+                mNextButton = (Button)findViewById(R.id.next_button);
                 mNextButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
                         setResult(RESULT_OK);

@@ -24,8 +24,9 @@
 
     <LinearLayout
             android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_height="0px"
+            android:layout_width="match_parent"
+            android:layout_weight="1">
 
         <com.android.settings.widget.SwitchBar android:id="@+id/switch_bar"
                   android:layout_height="?android:attr/actionBarSize"
@@ -37,7 +38,6 @@
                 android:id="@+id/prefs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 />
 
     </LinearLayout>
