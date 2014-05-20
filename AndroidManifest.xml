@@ -1665,16 +1665,6 @@
             </intent-filter>
         </activity>
 
-       <activity android:name=".PairNfcDevice"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$SecuritySettingsActivity"
-                android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.settings.PAIR_NFC_DEVICE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$NotificationAccessSettingsActivity"
                   android:label="@string/manage_notification_access"
                   android:taskAffinity=""
