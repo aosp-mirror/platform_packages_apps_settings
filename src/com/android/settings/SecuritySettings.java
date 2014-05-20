@@ -20,7 +20,6 @@ package com.android.settings;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -30,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.nfc.NfcUnlock;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -54,8 +52,6 @@ import com.android.settings.search.SearchIndexableRaw;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.settings.search.SearchIndexableResources.RANK_SECURITY;
-
 /**
  * Gesture lock pattern settings.
  */
@@ -65,7 +61,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
-    private static final String KEY_NFC_UNLOCK_SET_OR_CHANGE = "nfc_unlock_set_or_change";
     private static final String KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING =
             "biometric_weak_improve_matching";
     private static final String KEY_BIOMETRIC_WEAK_LIVELINESS = "biometric_weak_liveliness";
@@ -235,19 +230,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     root.findPreference(KEY_SECURITY_CATEGORY);
             if (securityCategory != null && mVisiblePattern != null) {
                 securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
-            }
-        }
-
-        // don't display NFC unlock settings if the prop is not enabled
-        if (!NfcUnlock.getPropertyEnabled()) {
-            PreferenceGroup securityCategory =
-                    (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
-
-            if (securityCategory != null) {
-                Preference preference = root.findPreference(KEY_NFC_UNLOCK_SET_OR_CHANGE);
-                if (preference != null) {
-                    securityCategory.removePreference(preference);
-                }
             }
         }
 
@@ -489,9 +471,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
-                    SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
-        } else if (KEY_NFC_UNLOCK_SET_OR_CHANGE.equals(key)) {
-            startFragment(this, "com.android.settings.NfcLockFragment",
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING.equals(key)) {
             ChooseLockSettingsHelper helper =
