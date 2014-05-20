@@ -1217,9 +1217,16 @@ public class Index {
 
             long lastInsertedRowId = -1;
             try {
-                lastInsertedRowId =
-                        database.replaceOrThrow(Tables.TABLE_SAVED_QUERIES, null, values);
+                // First, delete all saved queries that are the same
+                database.delete(Tables.TABLE_SAVED_QUERIES,
+                        IndexDatabaseHelper.SavedQueriesColums.QUERY + " = ?",
+                        new String[] { params[0] });
 
+                // Second, insert the saved query
+                lastInsertedRowId =
+                        database.insertOrThrow(Tables.TABLE_SAVED_QUERIES, null, values);
+
+                // Last, remove "old" saved queries
                 final long delta = lastInsertedRowId - MAX_SAVED_SEARCH_QUERY;
                 if (delta > 0) {
                     int count = database.delete(Tables.TABLE_SAVED_QUERIES, "rowId <= ?",
