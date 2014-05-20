@@ -505,9 +505,10 @@ public class SettingsActivity extends Activity
         }
 
         mActionBar = getActionBar();
-        mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
-        mActionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
-
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
+            mActionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
+        }
         mSwitchBar = (SwitchBar) findViewById(R.id.switch_bar);
 
         // see if we should show Back/Next buttons
@@ -1250,7 +1251,8 @@ public class SettingsActivity extends Activity
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
-            final boolean isShowingSwitchBar = mSwitchBar.isShowing();
+            final boolean isShowingSwitchBar =
+                    (mSwitchBar != null) ? mSwitchBar.isShowing() : false;
             String title = getString(R.string.search_results_title);
             mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
                     SearchResultsSummary.class.getName(), null, false, true, title,
