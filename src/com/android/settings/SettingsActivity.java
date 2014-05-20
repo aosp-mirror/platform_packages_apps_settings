@@ -470,6 +470,7 @@ public class SettingsActivity extends Activity
             ArrayList<DashboardCategory> categories =
                     savedState.getParcelableArrayList(SAVE_KEY_CATEGORIES);
             if (categories != null) {
+                mCategories.clear();
                 mCategories.addAll(categories);
                 setTitleFromBackStack();
             }
@@ -816,7 +817,7 @@ public class SettingsActivity extends Activity
      * @param categories The list in which to place the tiles categories.
      */
     private void buildDashboardCategories(List<DashboardCategory> categories) {
-        mCategories.clear();
+        categories.clear();
         loadCategoriesFromResource(R.xml.dashboard_categories, categories);
         updateTilesList(categories);
     }

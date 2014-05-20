@@ -75,8 +75,6 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
 
         mAuthHelper = ((SettingsActivity) context).getAuthenticatorHelper();
 
-        rebuildUI(getActivity());
-
         return rootView;
     }
 
@@ -121,13 +119,15 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
 
         if (!mAccountListenerAdded) {
             AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, false);
             mAccountListenerAdded = true;
         }
+
+        rebuildCategories();
     }
 
     @Override
