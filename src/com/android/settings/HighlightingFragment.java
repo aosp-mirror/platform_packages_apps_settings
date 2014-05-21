@@ -67,7 +67,7 @@ public class HighlightingFragment extends Fragment {
     }
 
     private Drawable getHighlightDrawable() {
-        return getResources().getDrawable(R.drawable.preference_highlight);
+        return getActivity().getDrawable(R.drawable.preference_highlight);
     }
 
     private void highlightView(String key) {
