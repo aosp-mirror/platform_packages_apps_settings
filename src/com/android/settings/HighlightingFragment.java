@@ -32,6 +32,7 @@ public class HighlightingFragment extends Fragment {
 
     private String mViewKey;
     private boolean mViewHighlighted = false;
+    private Drawable mHighlightDrawable;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -67,7 +68,10 @@ public class HighlightingFragment extends Fragment {
     }
 
     private Drawable getHighlightDrawable() {
-        return getActivity().getDrawable(R.drawable.preference_highlight);
+        if (mHighlightDrawable == null) {
+            mHighlightDrawable = getActivity().getDrawable(R.drawable.preference_highlight);
+        }
+        return mHighlightDrawable;
     }
 
     private void highlightView(String key) {
