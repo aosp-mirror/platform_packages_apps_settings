@@ -61,6 +61,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     private String mPreferenceKey;
     private boolean mPreferenceHighlighted = false;
+    private Drawable mHighlightDrawable;
 
     private boolean mIsDataSetObserverRegistered = false;
     private DataSetObserver mDataSetObserver = new DataSetObserver() {
@@ -103,6 +104,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         if (!TextUtils.isEmpty(mHelpUrl)) {
             setHasOptionsMenu(true);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         final Bundle args = getArguments();
         if (args != null) {
@@ -144,7 +150,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     }
 
     private Drawable getHighlightDrawable() {
-        return getActivity().getDrawable(R.drawable.preference_highlight);
+        if (mHighlightDrawable == null) {
+            mHighlightDrawable = getActivity().getDrawable(R.drawable.preference_highlight);
+        }
+        return mHighlightDrawable;
     }
 
     /**
@@ -170,6 +179,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
         final int position = canUseListViewForHighLighting(key);
         if (position >= 0) {
+            mPreferenceHighlighted = true;
+
             final ListView listView = getListView();
             final ListAdapter adapter = listView.getAdapter();
 
@@ -189,17 +200,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                             highlight.setHotspot(centerX, centerY);
                             v.setPressed(true);
                             v.setPressed(false);
-                            ((PreferenceGroupAdapter) adapter).setHighlighted(-1);
                         }
                     }, DELAY_HIGHLIGHT_DURATION_MILLIS);
-
-                    mPreferenceHighlighted = true;
                 }
             });
         } else {
             // Try locating the Preference View thru its tag
             View preferenceView = findPreferenceViewForKey(getView(), key);
             if (preferenceView != null ) {
+                mPreferenceHighlighted = true;
+
                 preferenceView.setBackground(highlight);
                 final int centerX = preferenceView.getWidth() / 2;
                 final int centerY = preferenceView.getHeight() / 2;
