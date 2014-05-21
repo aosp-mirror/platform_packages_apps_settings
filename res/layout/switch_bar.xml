@@ -23,7 +23,7 @@
               android:layout_height="wrap_content"
               android:layout_width="0dp"
               android:layout_weight="1"
-              android:paddingStart="32dp"
+              android:paddingStart="@dimen/switchbar_padding_start"
               android:layout_gravity="center_vertical"
               android:textAppearance="@style/TextAppearance.Switch"
               android:textAlignment="viewStart" />
@@ -32,6 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingEnd="32dp" />
+            android:paddingEnd="@dimen/switchbar_padding_end" />
 </merge>
 
