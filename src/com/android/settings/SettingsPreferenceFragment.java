@@ -144,7 +144,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     }
 
     private Drawable getHighlightDrawable() {
-        return getResources().getDrawable(R.drawable.preference_highlight);
+        return getActivity().getDrawable(R.drawable.preference_highlight);
     }
 
     /**
