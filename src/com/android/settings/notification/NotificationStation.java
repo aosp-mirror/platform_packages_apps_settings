@@ -74,10 +74,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private NotificationListenerService mListener = new NotificationListenerService() {
         @Override
-        public void onListenerConnected(String[] notificationKeys) {
-            // noop
-        }
-        @Override
         public void onNotificationPosted(StatusBarNotification notification) {
             Log.v(TAG, "onNotificationPosted: " + notification);
             final Handler h = getListView().getHandler();
