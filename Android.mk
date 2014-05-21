@@ -21,4 +21,6 @@ LOCAL_AAPT_FLAGS += -c zz_ZZ
 include $(BUILD_PACKAGE)
 
 # Use the folloing include to make our test apk.
+ifeq (,$(ONE_SHOT_MAKEFILE))
 include $(call all-makefiles-under,$(LOCAL_PATH))
+endif
