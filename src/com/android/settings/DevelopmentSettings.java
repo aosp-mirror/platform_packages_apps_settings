@@ -34,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.hardware.usb.IUsbManager;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
@@ -138,6 +139,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
+    private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
@@ -163,6 +165,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
     private UserManager mUm;
+    private WifiManager mWifiManager;
 
     private SwitchBar mSwitchBar;
     private Switch mEnabledSwitch;
@@ -185,6 +188,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mWaitForDebugger;
     private CheckBoxPreference mVerifyAppsOverUsb;
     private CheckBoxPreference mWifiDisplayCertification;
+    private CheckBoxPreference mWifiVerboseLogging;
 
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
@@ -243,6 +247,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+
+        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER
                 || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
@@ -313,6 +319,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mForceRtlLayout = findAndInitCheckboxPref(FORCE_RTL_LAYOUT_KEY);
         mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
         mWifiDisplayCertification = findAndInitCheckboxPref(WIFI_DISPLAY_CERTIFICATION_KEY);
+        mWifiVerboseLogging = findAndInitCheckboxPref(WIFI_VERBOSE_LOGGING_KEY);
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
@@ -517,6 +524,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateBugreportOptions();
         updateForceRtlOptions();
         updateWifiDisplayCertificationOptions();
+        updateWifiVerboseLoggingOptions();
         updateSimulateColorSpace();
         updateUseNuplayerOptions();
     }
@@ -1023,6 +1031,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mWifiDisplayCertification.isChecked() ? 1 : 0);
     }
 
+    private void updateWifiVerboseLoggingOptions() {
+        boolean enabled = mWifiManager.getVerboseLoggingLevel() > 0;
+        updateCheckBox(mWifiVerboseLogging, enabled);
+    }
+
+    private void writeWifiVerboseLoggingOptions() {
+        mWifiManager.enableVerboseLogging(mWifiVerboseLogging.isChecked() ? 1 : 0);
+    }
+
     private void updateLowPowerModeOptions() {
         updateCheckBox(mLowPowerMode, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.LOW_POWER_MODE, 0) != 0);
@@ -1339,6 +1356,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeForceRtlOptions();
         } else if (preference == mWifiDisplayCertification) {
             writeWifiDisplayCertificationOptions();
+        } else if (preference == mWifiVerboseLogging) {
+            writeWifiVerboseLoggingOptions();
         } else if (preference == mUseNuplayer) {
             writeUseNuplayerOptions();
         } else {
