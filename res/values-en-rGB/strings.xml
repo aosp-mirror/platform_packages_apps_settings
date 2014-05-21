@@ -28,10 +28,10 @@
   </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"You are now a developer!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"No need, you are already a developer."</string>
-    <string name="header_category_wireless_networks" msgid="4944823405420438623">"WIRELESS &amp; NETWORKS"</string>
-    <string name="header_category_device" msgid="5781174212691167553">"DEVICE"</string>
-    <string name="header_category_personal" msgid="6225932173498802187">"PERSONAL"</string>
-    <string name="header_category_system" msgid="2073558547468647128">"SYSTEM"</string>
+    <string name="header_category_wireless_networks" msgid="7617195369015536614">"Wireless &amp; Networks"</string>
+    <string name="header_category_device" msgid="4544026001618307754">"Device"</string>
+    <string name="header_category_personal" msgid="3310195187905720823">"Personal"</string>
+    <string name="header_category_system" msgid="2816866961183068977">"System"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Turn on radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Turn off radio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Turn on SMS over IMS"</string>
@@ -332,11 +332,9 @@
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Encryption"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Encrypt tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Encrypt phone"</string>
-    <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Require a numerical PIN or password to decrypt your tablet each time that you turn it on"</string>
-    <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Require a numerical PIN or password to decrypt your phone each time that you turn it on"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Encrypted"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="3839235202103924154">"You can encrypt your accounts, settings, downloaded apps and their data, media and other files. Once you encrypt your tablet, you need to type a numeric PIN or password to decrypt it each time you switch it on. You can only decrypt your tablet by performing a factory data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with a charged battery and keep your tablet plugged in until encryption is complete. If you interrupt the encryption process, you will lose some or all of your data."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="7663118199519229502">"You can encrypt your accounts, settings, downloaded apps and their data, media and other files. Once you encrypt your phone, you need to type a numeric PIN or password to decrypt it each time you switch it on. You can\'t decrypt your phone except by performing a factory data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with a charged battery and keep your phone plugged in until encryption is complete. If you interrupt the encryption process, you will lose some or all of your data."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"You can encrypt your accounts, settings, downloaded apps and their data, media and other files. After you encrypt your tablet, assuming that you\'ve set up a screen lock (that is, a pattern or numeric PIN or password), you\'ll need to unlock the screen to decrypt the tablet every time you power it on. The only other way to decrypt is to perform a factory data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with a charged battery and keep your tablet plugged in throughout the process. If you interrupt, you\'ll lose some or all of your data"</string>
+    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"You can encrypt your accounts, settings, downloaded apps and their data, media and other files. After you encrypt your phone, assuming that you\'ve set up a screen lock (that is, a pattern or numeric PIN or password), you\'ll need to unlock the screen to decrypt the phone every time you power it on. The only other way to decrypt is to perform a factory data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with a charged battery and keep your phone plugged in throughout the process. If you interrupt, you\'ll lose some or all of your data."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Encrypt tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Encrypt phone"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Please charge your battery and try again."</string>
@@ -435,24 +433,6 @@
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"View or deactivate device administrators"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Trust agents"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"View or deactivate trust agents"</string>
-    <string name="manage_notification_access" msgid="5799781079264981979">"Notification access"</string>
-    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps cannot read notifications"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d app can read notifications"</item>
-    <item quantity="other" msgid="980049191810249052">"%d apps can read notifications"</item>
-  </plurals>
-    <string name="no_notification_listeners" msgid="2767405417723149879">"No notification listeners are installed."</string>
-    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Enable <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> will be able to read all notifications posted by the system or any installed app, which may include personal information such as contact names and the text of messages sent to you. It will also be able to dismiss these notifications or touch action buttons within them."</string>
-    <string name="manage_condition_providers" msgid="3039306415273606730">"Condition providers"</string>
-    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"No apps provide conditions"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d app provides conditions"</item>
-    <item quantity="other" msgid="358057362115673258">"%d apps provide conditions"</item>
-  </plurals>
-    <string name="no_condition_providers" msgid="6183782892066424125">"No condition providers are installed."</string>
-    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Enable <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> will be able to add exit conditions to Do not disturb mode."</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Turn on Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -590,6 +570,8 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Connect to network"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Forget network"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modify network"</string>
+    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
+    <skip />
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"To see available networks, turn Wi‑Fi on."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Searching for Wi‑Fi networks…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"You don\'t have permission to change the Wi‑Fi network."</string>
@@ -638,7 +620,8 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS available)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Secured with <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", secured with <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_wps_nfc_enter_password" msgid="2860076442481710770">"Enter your network password."</string>
+    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
+    <skip />
     <string name="wifi_security_none" msgid="7985461072596594400">"None"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"To improve location accuracy and for other purposes, <xliff:g id="APP_NAME">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Allow"</string>
@@ -702,14 +685,12 @@
     <string name="home_settings" msgid="212375129455718176">"Home"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Sound"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Phone ringtone"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumes"</string>
     <string name="musicfx_title" msgid="3415566786340790345">"Music effects"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Ringer volume"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrate when silent"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"Default notification sound"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulse notification light"</string>
     <string name="heads_up_enabled_title" msgid="1031078221910921622">"Pop up if high priority"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Ringtone"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Notification"</string>
@@ -732,7 +713,6 @@
     <string name="volume_media_mute" msgid="3399059928695998166">"Mute music &amp; other media"</string>
     <string name="volume_notification_mute" msgid="7955193480006444159">"Mute notifications"</string>
     <string name="volume_alarm_mute" msgid="4452239420351035936">"Mute alarms"</string>
-    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrate when ringing"</string>
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Dock settings"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
@@ -758,8 +738,13 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Switch orientation automatically when rotating phone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Switch orientation automatically when rotating tablet"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Switch orientation automatically when rotating phone"</string>
-    <string name="brightness" msgid="2354961343555249270">"Brightness"</string>
+    <!-- no translation found for brightness (8480105032417444275) -->
+    <skip />
     <string name="brightness_summary" msgid="838917350127550703">"Adjust the brightness of the screen"</string>
+    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
+    <skip />
+    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Sleep"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
@@ -1343,8 +1328,10 @@
     <string name="enable_adb" msgid="7982306934419797485">"USB debugging"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode when USB is connected"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Revoke USB debugging authorisations"</string>
-    <string name="bugreport_in_power" msgid="4548816486587403971">"Power menu bug reports"</string>
-    <string name="bugreport_in_power_summary" msgid="5764234382355067053">"Include option in power menu for taking a bug report"</string>
+    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
+    <skip />
+    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
+    <skip />
     <string name="keep_screen_on" msgid="1146389631208760344">"Stay awake"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Screen will never sleep while charging"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Enable Bluetooth HCI snoop log"</string>
@@ -1820,6 +1807,8 @@
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC address"</string>
     <string name="enter_password" msgid="4131758584074246224">"Type password to decrypt storage"</string>
+    <string name="enter_pin" msgid="286221169871526876">"Enter your PIN to decrypt storage"</string>
+    <string name="enter_pattern" msgid="5707838886272453608">"Draw your pattern to decrypt storage"</string>
     <string name="try_again" msgid="4272075051293936921">"Try again."</string>
     <string name="delete" msgid="4219243412325163003">"Delete"</string>
     <string name="misc_files" msgid="6720680815969643497">"Misc. files"</string>
@@ -2072,6 +2061,7 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"Change font size"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tap &amp; pay"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Pay with just a tap"</string>
+    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"Favour foreground app"</string>
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"Learn more"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"Find apps"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Set as your preference?"</string>
@@ -2125,16 +2115,8 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Recent searches"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Results"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi Wi-Fi network connection"</string>
-    <string name="lock_screen_notifications" msgid="654679491031356676">"When device is locked"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
-    <string name="title_zen_mode" msgid="4587203077066257425">"Do not disturb"</string>
-    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Do not disturb"</string>
-    <string name="notification_settings" msgid="8342078884790733726">"Notifications"</string>
-    <string name="notification_settings_tweaks" msgid="659628355469765848">"Tweaks"</string>
-    <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
-    <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
-    <string name="setup_wifi_nfc_tag" msgid="654375687941126332">"Set up Wi-Fi NFC Tag"</string>
+    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
+    <skip />
     <string name="write_tag" msgid="8571858602896222537">"Write"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tap a tag to write..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Invalid password, try again."</string>
@@ -2142,19 +2124,65 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Unable to write data to NFC tag. If the problem persists, try a different tag"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC tag is not writeable. Please use a different tag."</string>
     <string name="default_sound" msgid="8821684447333687810">"Default sound"</string>
-    <string name="loading_notification_apps" msgid="5031818677010335895">"Loading apps..."</string>
+    <string name="notification_settings" msgid="7558043253996992936">"Sounds &amp; Notifications"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Media volume"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarm volume"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Ring volume"</string>
+    <string name="zen_mode_settings_title" msgid="2689740350895257590">"Do not disturb"</string>
+    <string name="ringer_mode_title" msgid="7489457312298627735">"When calls and notifications arrive"</string>
+    <string name="ringer_mode_audible" msgid="4196661772746371017">"Ring"</string>
+    <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Vibrate instead of ringing"</string>
+    <string name="ringer_mode_silent" msgid="4812605852723880795">"Don\'t ring or vibrate"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"Phone ringtone"</string>
+    <string name="notification_ringtone_title" msgid="3361201340352664272">"Default notification ringtone"</string>
+    <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Vibrate when ringing"</string>
+    <string name="notification_display_settings" msgid="2274556854544572598">"Showing notifications"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulse notification light"</string>
+    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"When device is locked"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Don\'t show notifications at all"</string>
+    <string name="zen_mode_notifications_title" msgid="8216258729654184425">"When do not disturb is on"</string>
+    <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Hide new notifications from the list"</string>
+    <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Show all notifications in the list"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"App notifications"</string>
+    <string name="touch_sound_settings" msgid="8861737295513989009">"Touch sounds"</string>
+    <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
+    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"Screen locking &amp; unlocking"</string>
+    <string name="other_touch_sounds_title" msgid="1692523628776677916">"Other touch sounds"</string>
+    <string name="vibrate_on_touch_title" msgid="674710566941697253">"Vibrate on touch"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"Notification access"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps cannot read notifications"</string>
+  <plurals name="manage_notification_access_summary_nonzero">
+    <item quantity="one" msgid="8344183614159211585">"%d app can read notifications"</item>
+    <item quantity="other" msgid="980049191810249052">"%d apps can read notifications"</item>
+  </plurals>
+    <string name="no_notification_listeners" msgid="2767405417723149879">"No notification listeners are installed."</string>
+    <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Enable <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> will be able to read all notifications posted by the system or any installed app, which may include personal information such as contact names and the text of messages sent to you. It will also be able to dismiss these notifications or touch action buttons within them."</string>
+    <string name="manage_condition_providers" msgid="3039306415273606730">"Condition providers"</string>
+    <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"No apps provide conditions"</string>
+  <plurals name="manage_condition_providers_summary_nonzero">
+    <item quantity="one" msgid="7871716594997778198">"%d app provides conditions"</item>
+    <item quantity="other" msgid="358057362115673258">"%d apps provide conditions"</item>
+  </plurals>
+    <string name="no_condition_providers" msgid="6183782892066424125">"No condition providers are installed."</string>
+    <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Enable <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> will be able to add exit conditions to Do not disturb mode."</string>
+    <string name="loading_notification_apps" msgid="5031818677010335895">"Loading apps..."</string>
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Show notifications"</string>
-    <string name="app_notifications_dialog_priority" msgid="2692156022435161791">"High priority"</string>
+    <string name="app_notifications_dialog_priority" msgid="3025242591043646494">"Display at the top of the list"</string>
+    <string name="app_notifications_dialog_visibility" msgid="2983683711202708107">"Hide sensitive content when device is locked"</string>
+    <string name="app_notification_row_banned" msgid="5983655258784814773">"Blocked"</string>
+    <string name="app_notification_row_priority" msgid="7597101427045166499">"Top of list"</string>
+    <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitive"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Finished"</string>
-    <string name="zen_mode_option_off" msgid="7812737562592973403">"Off"</string>
-    <string name="zen_mode_option_on" msgid="6914392434474823822">"On"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Until you turn this off"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"Block all interruptions except"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"At night"</string>
     <string name="zen_mode_automation_category" msgid="4175437418329803902">"Other automation"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Automatically turn on"</string>
-    <string name="zen_mode_entry_conditions_summary_divider" msgid="7956558495698961343">","</string>
+    <string name="summary_divider_text" msgid="3087735442599707533">","</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Never"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Phone calls"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messages"</string>
@@ -2170,5 +2198,11 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Start time"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"End time"</string>
     <string name="zen_mode_end_time_summary_format" msgid="1941585278888784451">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> next day"</string>
+    <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
+    <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
+    <!-- no translation found for switch_on_text (1124106706920572386) -->
+    <skip />
+    <!-- no translation found for switch_off_text (1139356348100829659) -->
+    <skip />
 </resources>
