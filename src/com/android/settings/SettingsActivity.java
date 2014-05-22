@@ -329,7 +329,9 @@ public class SettingsActivity extends Activity
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_BUILD_CATEGORIES: {
-                    buildDashboardCategories(mCategories);
+                    if(mNeedToRebuildCategories) {
+                        buildDashboardCategories(mCategories);
+                    }
                 } break;
             }
         }
@@ -346,7 +348,7 @@ public class SettingsActivity extends Activity
     }
 
     public List<DashboardCategory> getDashboardCategories() {
-        if (mNeedToRebuildCategories) {
+        if (mNeedToRebuildCategories || mCategories.size() == 0) {
             buildDashboardCategories(mCategories);
             mNeedToRebuildCategories = false;
         }
@@ -497,16 +499,11 @@ public class SettingsActivity extends Activity
                 switchToFragment( initialFragmentName, initialArguments, true, false,
                         mInitialTitle, false);
             } else {
-                // We need to build the Categories in all cases
-                buildDashboardCategories(mCategories);
-
                 // No UP if we are displaying the main Dashboard
                 mDisplayHomeAsUpEnabled = false;
-                if (mCategories.size() > 0) {
-                    mInitialTitle = getText(R.string.dashboard_title);
-                    switchToFragment(DashboardSummary.class.getName(), null, false, false,
-                            mInitialTitle, false);
-                }
+                mInitialTitle = getText(R.string.dashboard_title);
+                switchToFragment(DashboardSummary.class.getName(), null, false, false,
+                        mInitialTitle, false);
             }
         }
 
