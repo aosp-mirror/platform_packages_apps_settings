@@ -29,6 +29,7 @@ import android.net.NetworkInfo.DetailedState;
 import android.net.NetworkUtils;
 import android.net.ProxyInfo;
 import android.net.RouteInfo;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
@@ -105,6 +106,7 @@ public class WifiConfigController implements TextWatcher,
     /* These values come from "wifi_proxy_settings" resource array */
     public static final int PROXY_NONE = 0;
     public static final int PROXY_STATIC = 1;
+    public static final int PROXY_PAC = 2;
 
     /* These values come from "wifi_eap_method" resource array */
     public static final int WIFI_EAP_METHOD_PEAP = 0;
@@ -130,6 +132,7 @@ public class WifiConfigController implements TextWatcher,
     private TextView mProxyHostView;
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
+    private TextView mProxyPacView;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
@@ -257,11 +260,7 @@ public class WifiConfigController implements TextWatcher,
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
                     showAdvancedFields = true;
                 } else if (config.getProxySettings() == ProxySettings.PAC) {
-                    mProxySettingsSpinner.setVisibility(View.GONE);
-                    TextView textView = (TextView)mView.findViewById(R.id.proxy_pac_info);
-                    textView.setVisibility(View.VISIBLE);
-                    textView.setText(context.getString(R.string.proxy_url) +
-                            config.getLinkProperties().getHttpProxy().getPacFileUrl());
+                    mProxySettingsSpinner.setSelection(PROXY_PAC);
                     showAdvancedFields = true;
                 } else {
                     mProxySettingsSpinner.setSelection(PROXY_NONE);
@@ -466,11 +465,10 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-        mProxySettings = (mProxySettingsSpinner != null &&
-                mProxySettingsSpinner.getSelectedItemPosition() == PROXY_STATIC) ?
-                ProxySettings.STATIC : ProxySettings.NONE;
-
-        if (mProxySettings == ProxySettings.STATIC && mProxyHostView != null) {
+        final int selectedPosition = mProxySettingsSpinner.getSelectedItemPosition();
+        mProxySettings = ProxySettings.NONE;
+        if (selectedPosition == PROXY_STATIC && mProxyHostView != null) {
+            mProxySettings = ProxySettings.STATIC;
             String host = mProxyHostView.getText().toString();
             String portStr = mProxyPortView.getText().toString();
             String exclusionList = mProxyExclusionListView.getText().toString();
@@ -488,6 +486,18 @@ public class WifiConfigController implements TextWatcher,
             } else {
                 return false;
             }
+        } else if (selectedPosition == PROXY_PAC && mProxyPacView != null) {
+            mProxySettings = ProxySettings.PAC;
+            CharSequence uriSequence = mProxyPacView.getText();
+            if (TextUtils.isEmpty(uriSequence)) {
+                return false;
+            }
+            Uri uri = Uri.parse(uriSequence.toString());
+            if (uri == null) {
+                return false;
+            }
+            ProxyInfo proxyInfo = new ProxyInfo(uri);
+            mLinkProperties.setHttpProxy(proxyInfo);
         }
         return true;
     }
@@ -811,8 +821,9 @@ public class WifiConfigController implements TextWatcher,
         }
 
         if (mProxySettingsSpinner.getSelectedItemPosition() == PROXY_STATIC) {
-            mView.findViewById(R.id.proxy_warning_limited_support).setVisibility(View.VISIBLE);
-            mView.findViewById(R.id.proxy_fields).setVisibility(View.VISIBLE);
+            setVisibility(R.id.proxy_warning_limited_support, View.VISIBLE);
+            setVisibility(R.id.proxy_fields, View.VISIBLE);
+            setVisibility(R.id.proxy_pac_field, View.GONE);
             if (mProxyHostView == null) {
                 mProxyHostView = (TextView) mView.findViewById(R.id.proxy_hostname);
                 mProxyHostView.addTextChangedListener(this);
@@ -829,13 +840,34 @@ public class WifiConfigController implements TextWatcher,
                     mProxyExclusionListView.setText(proxyProperties.getExclusionListAsString());
                 }
             }
+        } else if (mProxySettingsSpinner.getSelectedItemPosition() == PROXY_PAC) {
+            setVisibility(R.id.proxy_warning_limited_support, View.GONE);
+            setVisibility(R.id.proxy_fields, View.GONE);
+            setVisibility(R.id.proxy_pac_field, View.VISIBLE);
+
+            if (mProxyPacView == null) {
+                mProxyPacView = (TextView) mView.findViewById(R.id.proxy_pac);
+                mProxyPacView.addTextChangedListener(this);
+            }
+            if (config != null) {
+                ProxyInfo proxyInfo = config.getLinkProperties().getHttpProxy();
+                if (proxyInfo != null) {
+                    mProxyPacView.setText(proxyInfo.getPacFileUrl().toString());
+                }
+            }
         } else {
-            mView.findViewById(R.id.proxy_warning_limited_support).setVisibility(View.GONE);
-            mView.findViewById(R.id.proxy_fields).setVisibility(View.GONE);
+            setVisibility(R.id.proxy_warning_limited_support, View.GONE);
+            setVisibility(R.id.proxy_fields, View.GONE);
+            setVisibility(R.id.proxy_pac_field, View.GONE);
         }
     }
 
-
+    private void setVisibility(int id, int visibility) {
+        final View v = mView.findViewById(id);
+        if (v != null) {
+            v.setVisibility(visibility);
+        }
+    }
 
     private void loadCertificates(Spinner spinner, String prefix) {
         final Context context = mConfigUi.getContext();

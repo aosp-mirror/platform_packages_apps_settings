@@ -445,8 +445,10 @@
     <!-- HTTP proxy settings. Warning message about limited application support [CHAR LIMIT=100]-->
     <string name="proxy_warning_limited_support">The HTTP proxy is used by the browser but may not be used by the other apps.</string>
 
-    <!-- HTTP proxy settings. Title for Proxy-Auto Config URL.  [CHAR LIMIT=NONE]-->
-    <string name="proxy_url">"PAC URL: "</string>
+    <!-- HTTP proxy settings. Title for Proxy-Auto Config URL.  [CHAR LIMIT=25] -->
+    <string name="proxy_url_title">"PAC URL: "</string>
+    <!-- HTTP proxy settings. Hint for Proxy-Auto Config URL. -->
+    <string name="proxy_url_hint" translatable="false">https://www.example.com/proxy.pac</string>
 
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_signal_location_label">Location:</string>
