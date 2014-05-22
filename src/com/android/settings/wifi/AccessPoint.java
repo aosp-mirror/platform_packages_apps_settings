@@ -28,8 +28,12 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
+
+import java.util.Map;
+
 
 class AccessPoint extends Preference {
     static final String TAG = "Settings.AccessPoint";
@@ -73,6 +77,21 @@ class AccessPoint extends Preference {
 
     private WifiInfo mInfo;
     private DetailedState mState;
+
+    private static final int VISIBILITY_MAX_AGE_IN_MILLI = 1000000;
+    private static final int VISIBILITY_OUTDATED_AGE_IN_MILLI = 20000;
+    private static final int LOWER_FREQ_24GHZ = 2400;
+    private static final int HIGHER_FREQ_24GHZ = 2500;
+    private static final int LOWER_FREQ_5GHZ = 4900;
+    private static final int HIGHER_FREQ_5GHZ = 5900;
+    private static final int SECOND_TO_MILLI = 1000;
+
+    /** Experiemental: we should be able to show the user the list of BSSIDs and bands
+     *  for that SSID.
+     *  For now this data is used only with Verbose Logging so as to show the band and number
+     *  of BSSIDs on which that network is seen.
+     */
+    public LruCache<String, ScanResult> scanResultCache;
 
     static int getSecurity(WifiConfiguration config) {
         if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
@@ -201,6 +220,9 @@ class AccessPoint extends Preference {
             pskType = getPskType(result);
         mRssi = result.level;
         mScanResult = result;
+        if (result.seen > mSeen) {
+            mSeen = result.seen;
+        }
     }
 
     @Override
@@ -267,6 +289,13 @@ class AccessPoint extends Preference {
         if (result.seen > mSeen) {
             mSeen = result.seen;
         }
+        if (WifiSettings.mVerboseLogging > 0) {
+            if (scanResultCache == null) {
+                scanResultCache = new LruCache<String, ScanResult>(32);
+            }
+            scanResultCache.put(result.BSSID, result);
+        }
+
         if (ssid.equals(result.SSID) && security == getSecurity(result)) {
             if (WifiManager.compareSignalLevel(result.level, mRssi) > 0) {
                 int oldLevel = getLevel();
@@ -340,25 +369,84 @@ class AccessPoint extends Preference {
 
     /** visibility status of the WifiConfiguration
      * @return RSSI and update indicator
-     * TODO: indicate both 2.4 and 5GHz RSSI as well as number of results
+     * TODO: use a string formatter
      * ["rssi 5Ghz", "num results on 5GHz" / "rssi 5Ghz", "num results on 5GHz"]
      * For instance [-40,5/-30,2]
      */
     private String getVisibilityStatus() {
-        String visibility ;
+        StringBuilder visibility = new StringBuilder();
+
         long now = System.currentTimeMillis();
         long age = (now - mSeen);
-        if (age < 1000000) {
+        if (age < VISIBILITY_MAX_AGE_IN_MILLI) {
             //show age in seconds, in the form xx
-            visibility = Long.toString((age / 1000) % 1000);
+            visibility.append(Long.toString((age / SECOND_TO_MILLI) % SECOND_TO_MILLI));
         } else {
             //not seen for more than 1000 seconds
-            visibility = "!";
+            visibility.append("!");
         }
-        if (mRssi != Integer.MAX_VALUE) {
-            visibility = visibility + ", " + Integer.toString(mRssi);
+
+        if (scanResultCache != null) {
+            int rssi5 = WifiConfiguration.INVALID_RSSI;
+            int rssi24 = WifiConfiguration.INVALID_RSSI;
+            int num5 = 0;
+            int num24 = 0;
+            Map<String, ScanResult> list = scanResultCache.snapshot();
+            for (ScanResult result : list.values()) {
+                if (result.seen == 0)
+                    continue;
+
+                if (result.frequency > LOWER_FREQ_5GHZ
+                        && result.frequency < HIGHER_FREQ_5GHZ) {
+                    //strictly speaking: [4915, 5825]
+                    //number of known BSSID on 5GHz band
+                    num5 = num5 + 1;
+                } else if (result.frequency > LOWER_FREQ_24GHZ
+                        && result.frequency < HIGHER_FREQ_24GHZ) {
+                    //strictly speaking: [2412, 2482]
+                    //number of known BSSID on 2.4Ghz band
+                    num24 = num24 + 1;
+                }
+
+                //ignore results seen, older than 20 seconds
+                if (now - result.seen > VISIBILITY_OUTDATED_AGE_IN_MILLI) continue;
+
+                if (result.frequency > LOWER_FREQ_5GHZ
+                        &&result.frequency < HIGHER_FREQ_5GHZ) {
+                    if (result.level > rssi5) {
+                        rssi5 = result.level;
+                    }
+                } else if (result.frequency > LOWER_FREQ_24GHZ
+                        && result.frequency < HIGHER_FREQ_24GHZ) {
+                    if (result.level > rssi24) {
+                        rssi24 = result.level;
+                    }
+                }
+            }
+            visibility.append(" [");
+            if (num24 > 0 || rssi24 > WifiConfiguration.INVALID_RSSI) {
+                visibility.append(Integer.toString(rssi24));
+                visibility.append(",");
+                visibility.append(Integer.toString(num24));
+            }
+            visibility.append(";");
+            if (num5 > 0 || rssi5 > WifiConfiguration.INVALID_RSSI) {
+                visibility.append(Integer.toString(rssi5));
+                visibility.append(",");
+                visibility.append(Integer.toString(num5));
+            }
+            visibility.append("]");
+        } else {
+            if (mRssi != Integer.MAX_VALUE) {
+                visibility.append(", ");
+                visibility.append(Integer.toString(mRssi));
+                if (mScanResult != null) {
+                    visibility.append(", ");
+                    visibility.append(Integer.toString(mScanResult.frequency));
+                }
+            }
         }
-        return visibility;
+        return visibility.toString();
     }
 
     /** Updates the title and summary; may indirectly call notifyChanged()  */

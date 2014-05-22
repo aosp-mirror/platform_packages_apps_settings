@@ -178,6 +178,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private SwitchBar mSwitchBar;
 
+    /** verbose logging flag. this flag is set thru developer debugging options
+     * and used so as to assist with in-the-field WiFi connectivity debugging  */
+    public static int mVerboseLogging = 0;
+
     /* End of "used in Wifi Setup context" */
 
     public WifiSettings() {
@@ -712,8 +716,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         return super.onCreateDialog(dialogId);
     }
 
-    /** verbose logging flag is set only thru developer debugging options */
-    public static int mVerboseLogging = 0;
     /**
      * Shows the latest access points available with supplimental information like
      * the strength of network and the security for it.
@@ -728,7 +730,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         final int wifiState = mWifiManager.getWifiState();
 
-        //check if verbose logging has been turned on or off
+        //when we update the screen, check if verbose logging has been turned on or off
         mVerboseLogging = mWifiManager.getVerboseLoggingLevel();
 
         switch (wifiState) {
