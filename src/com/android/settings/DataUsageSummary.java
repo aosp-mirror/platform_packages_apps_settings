@@ -192,7 +192,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private INetworkManagementService mNetworkService;
     private INetworkStatsService mStatsService;
     private NetworkPolicyManager mPolicyManager;
-    private ConnectivityManager mConnService;
+    private TelephonyManager mTelephonyManager;
+
 
     private INetworkStatsSession mStatsSession;
 
@@ -274,7 +275,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         mPolicyManager = NetworkPolicyManager.from(context);
-        mConnService = ConnectivityManager.from(context);
+        mTelephonyManager = TelephonyManager.from(context);
 
         mPrefs = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
@@ -872,13 +873,13 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             // TODO: deprecate and remove this once enabled flag is on policy
             return mMobileDataEnabled;
         } else {
-            return mConnService.getMobileDataEnabled();
+            return mTelephonyManager.getDataEnabled();
         }
     }
 
     private void setMobileDataEnabled(boolean enabled) {
         if (LOGD) Log.d(TAG, "setMobileDataEnabled()");
-        mConnService.setMobileDataEnabled(enabled);
+        mTelephonyManager.setDataEnabled(enabled);
         mMobileDataEnabled = enabled;
         updatePolicy(false);
     }
