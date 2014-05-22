@@ -49,12 +49,12 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     private AuthenticatorHelper mAuthHelper;
     private boolean mAccountListenerAdded;
 
-    private static final int MSG_BUILD_CATEGORIES = 1;
+    private static final int MSG_REBUILD_UI = 1;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case MSG_BUILD_CATEGORIES: {
+                case MSG_REBUILD_UI: {
                     final Context context = getActivity();
                     rebuildUI(context);
                 } break;
@@ -80,6 +80,11 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     }
 
     private void rebuildUI(Context context) {
+        if (!isAdded()) {
+            Log.w(LOG_TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
+            return;
+        }
+
         long start = System.currentTimeMillis();
         final Resources res = getResources();
 
@@ -131,7 +136,7 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
             mAccountListenerAdded = true;
         }
 
-        rebuildCategories();
+        sendRebuildUI();
     }
 
     @Override
@@ -176,9 +181,9 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
         }
     }
 
-    private void rebuildCategories() {
-        if (!mHandler.hasMessages(MSG_BUILD_CATEGORIES)) {
-            mHandler.sendEmptyMessage(MSG_BUILD_CATEGORIES);
+    private void sendRebuildUI() {
+        if (!mHandler.hasMessages(MSG_REBUILD_UI)) {
+            mHandler.sendEmptyMessage(MSG_REBUILD_UI);
         }
     }
 
@@ -186,6 +191,6 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     public void onAccountsUpdated(Account[] accounts) {
         final SettingsActivity sa = (SettingsActivity) getActivity();
         sa.setNeedToRebuildCategories(true);
-        rebuildCategories();
+        sendRebuildUI();
     }
 }
