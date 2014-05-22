@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     }
 
     private void rebuildUI(Context context) {
+        long start = System.currentTimeMillis();
         final Resources res = getResources();
 
         mDashboard.removeAllViews();
@@ -116,6 +118,8 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
             // Add the category
             mDashboard.addView(categoryView);
         }
+        long delta = System.currentTimeMillis() - start;
+        Log.d(LOG_TAG, "rebuildUI took: " + delta + " ms");
     }
 
     @Override
