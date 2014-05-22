@@ -712,6 +712,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         return super.onCreateDialog(dialogId);
     }
 
+    /** verbose logging flag is set only thru developer debugging options */
+    public static int mVerboseLogging = 0;
     /**
      * Shows the latest access points available with supplimental information like
      * the strength of network and the security for it.
@@ -725,6 +727,9 @@ public class WifiSettings extends RestrictedSettingsFragment
             return;
         }
         final int wifiState = mWifiManager.getWifiState();
+
+        //check if verbose logging has been turned on or off
+        mVerboseLogging = mWifiManager.getVerboseLoggingLevel();
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:

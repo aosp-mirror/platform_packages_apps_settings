@@ -69,6 +69,8 @@ class AccessPoint extends Preference {
     /* package */ScanResult mScanResult;
 
     private int mRssi = Integer.MAX_VALUE;
+    private long mSeen = 0;
+
     private WifiInfo mInfo;
     private DetailedState mState;
 
@@ -262,6 +264,9 @@ class AccessPoint extends Preference {
     }
 
     boolean update(ScanResult result) {
+        if (result.seen > mSeen) {
+            mSeen = result.seen;
+        }
         if (ssid.equals(result.SSID) && security == getSecurity(result)) {
             if (WifiManager.compareSignalLevel(result.level, mRssi) > 0) {
                 int oldLevel = getLevel();
@@ -333,29 +338,57 @@ class AccessPoint extends Preference {
         return "\"" + string + "\"";
     }
 
+    /** visibility status of the WifiConfiguration
+     * @return RSSI and update indicator
+     * TODO: indicate both 2.4 and 5GHz RSSI as well as number of results
+     * ["rssi 5Ghz", "num results on 5GHz" / "rssi 5Ghz", "num results on 5GHz"]
+     * For instance [-40,5/-30,2]
+     */
+    private String getVisibilityStatus() {
+        String visibility ;
+        long now = System.currentTimeMillis();
+        long age = (now - mSeen);
+        if (age < 1000000) {
+            //show age in seconds, in the form xx
+            visibility = Long.toString((age / 1000) % 1000);
+        } else {
+            //not seen for more than 1000 seconds
+            visibility = "!";
+        }
+        if (mRssi != Integer.MAX_VALUE) {
+            visibility = visibility + ", " + Integer.toString(mRssi);
+        }
+        return visibility;
+    }
+
     /** Updates the title and summary; may indirectly call notifyChanged()  */
     private void refresh() {
         setTitle(ssid);
+        StringBuilder summary = new StringBuilder();
 
         Context context = getContext();
-        if (mConfig != null && mConfig.status == WifiConfiguration.Status.DISABLED) {
-            switch (mConfig.disableReason) {
-                case WifiConfiguration.DISABLED_AUTH_FAILURE:
-                    setSummary(context.getString(R.string.wifi_disabled_password_failure));
-                    break;
-                case WifiConfiguration.DISABLED_DHCP_FAILURE:
-                case WifiConfiguration.DISABLED_DNS_FAILURE:
-                    setSummary(context.getString(R.string.wifi_disabled_network_failure));
-                    break;
-                case WifiConfiguration.DISABLED_UNKNOWN_REASON:
-                    setSummary(context.getString(R.string.wifi_disabled_generic));
+        if (mConfig != null && (mConfig.status == WifiConfiguration.Status.DISABLED
+                || mConfig.autoJoinStatus != WifiConfiguration.AUTO_JOIN_ENABLED)) {
+            if (mConfig.autoJoinStatus != WifiConfiguration.AUTO_JOIN_ENABLED) {
+                summary.append(context.getString(R.string.wifi_disabled_password_failure));
+            } else {
+                switch (mConfig.disableReason) {
+                    case WifiConfiguration.DISABLED_AUTH_FAILURE:
+                        summary.append(context.getString(R.string.wifi_disabled_password_failure));
+                        break;
+                    case WifiConfiguration.DISABLED_DHCP_FAILURE:
+                    case WifiConfiguration.DISABLED_DNS_FAILURE:
+                        summary.append(context.getString(R.string.wifi_disabled_network_failure));
+                        break;
+                    case WifiConfiguration.DISABLED_UNKNOWN_REASON:
+                        summary.append(context.getString(R.string.wifi_disabled_generic));
+                }
             }
         } else if (mRssi == Integer.MAX_VALUE) { // Wifi out of range
-            setSummary(context.getString(R.string.wifi_not_in_range));
+            summary.append(context.getString(R.string.wifi_not_in_range));
         } else if (mState != null) { // This is the active connection
-            setSummary(Summary.get(context, mState));
+            summary.append(Summary.get(context, mState));
         } else { // In range, not disabled.
-            StringBuilder summary = new StringBuilder();
             if (mConfig != null) { // Is saved network
                 summary.append(context.getString(R.string.wifi_remembered));
             }
@@ -377,8 +410,13 @@ class AccessPoint extends Preference {
                     summary.append(context.getString(R.string.wifi_wps_available_second_item));
                 }
             }
-            setSummary(summary.toString());
         }
+        if (WifiSettings.mVerboseLogging > 0) {
+            //add RSSI/band information for this config, what was seen up to 6 seconds ago
+            //verbose WiFi Logging is only turned on thru developers settings
+            summary.append(" " + getVisibilityStatus());
+        }
+        setSummary(summary.toString());
     }
 
     /**
