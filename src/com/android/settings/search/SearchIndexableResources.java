@@ -215,7 +215,7 @@ public final class SearchIndexableResources {
                 new SearchIndexableResource(RANK_PRINTING,
                         NO_DATA_RES_ID,
                         PrintSettingsFragment.class.getName(),
-                        com.android.internal.R.drawable.ic_print));
+                        R.drawable.ic_settings_print));
 
         sResMap.put(DevelopmentSettings.class.getName(),
                 new SearchIndexableResource(RANK_DEVELOPEMENT,
