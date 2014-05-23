@@ -1209,7 +1209,7 @@ public class SettingsActivity extends Activity
     @Override
     public boolean onQueryTextChange(String newText) {
         mSearchQuery = newText;
-        if (TextUtils.isEmpty(newText) || mSearchResultsFragment == null) {
+        if (mSearchResultsFragment == null) {
             return false;
         }
         return mSearchResultsFragment.onQueryTextChange(newText);

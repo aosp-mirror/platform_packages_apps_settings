@@ -51,7 +51,7 @@ public class SearchResultsSummary extends Fragment {
     private static final String EMPTY_QUERY = "";
     private static char ELLIPSIS = '\u2026';
 
-    private static final String SAVE_KEY_SHOW_ONLY_RESULTS = ":settings:show_only_results";
+    private static final String SAVE_KEY_SHOW_RESULTS = ":settings:show_results";
 
     private SearchView mSearchView;
 
@@ -68,7 +68,7 @@ public class SearchResultsSummary extends Fragment {
 
     private String mQuery;
 
-    private boolean mShowOnlyResults;
+    private boolean mShowResults;
 
     /**
      * A basic AsyncTask for updating the query results cursor
@@ -83,6 +83,7 @@ public class SearchResultsSummary extends Fragment {
         protected void onPostExecute(Cursor cursor) {
             if (!isCancelled()) {
                 setResultsCursor(cursor);
+                setResultsVisibility(cursor.getCount() > 0);
             } else if (cursor != null) {
                 cursor.close();
             }
@@ -102,6 +103,7 @@ public class SearchResultsSummary extends Fragment {
         protected void onPostExecute(Cursor cursor) {
             if (!isCancelled()) {
                 setSuggestionsCursor(cursor);
+                setSuggestionsVisibility(cursor.getCount() > 0);
             } else if (cursor != null) {
                 cursor.close();
             }
@@ -116,7 +118,7 @@ public class SearchResultsSummary extends Fragment {
         mSuggestionsAdapter = new SuggestionsAdapter(getActivity());
 
         if (savedInstanceState != null) {
-            mShowOnlyResults = savedInstanceState.getBoolean(SAVE_KEY_SHOW_ONLY_RESULTS);
+            mShowResults = savedInstanceState.getBoolean(SAVE_KEY_SHOW_RESULTS);
         }
     }
 
@@ -124,7 +126,7 @@ public class SearchResultsSummary extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putBoolean(SAVE_KEY_SHOW_ONLY_RESULTS, mShowOnlyResults);
+        outState.putBoolean(SAVE_KEY_SHOW_RESULTS, mShowResults);
     }
 
     @Override
@@ -209,10 +211,9 @@ public class SearchResultsSummary extends Fragment {
                 final Cursor cursor = mSuggestionsAdapter.mCursor;
                 cursor.moveToPosition(position);
 
+                mShowResults = true;
                 mQuery = cursor.getString(0);
                 mSearchView.setQuery(mQuery, false);
-                setSuggestionsVisibility(false);
-                mShowOnlyResults = true;
             }
         });
 
@@ -220,10 +221,10 @@ public class SearchResultsSummary extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onResume() {
+        super.onResume();
 
-        if (!mShowOnlyResults) {
+        if (!mShowResults) {
             showSomeSuggestions();
         }
     }
@@ -250,31 +251,28 @@ public class SearchResultsSummary extends Fragment {
 
     public boolean onQueryTextSubmit(String query) {
         mQuery = getFilteredQueryString(query);
-        setSuggestionsVisibility(!mShowOnlyResults);
+        mShowResults = true;
+        setSuggestionsVisibility(false);
         updateSearchResults();
+        saveQueryToDatabase();
         return true;
     }
 
     public boolean onQueryTextChange(String query) {
         final String newQuery = getFilteredQueryString(query);
 
-        boolean isNewQuery;
-        if (!TextUtils.isEmpty(mQuery)) {
-            isNewQuery = !mQuery.equals(query);
-        } else {
-            isNewQuery = !TextUtils.isEmpty(query);
-        }
-
         mQuery = newQuery;
 
-        if (isNewQuery) {
-            mShowOnlyResults = false;
-        }
-        if (!mShowOnlyResults) {
+        if (TextUtils.isEmpty(mQuery)) {
+            mShowResults = false;
+            setResultsVisibility(false);
             updateSuggestions();
+        } else {
+            mShowResults = true;
+            setSuggestionsVisibility(false);
+            updateSearchResults();
         }
 
-        updateSearchResults();
         return true;
     }
 
@@ -335,30 +333,33 @@ public class SearchResultsSummary extends Fragment {
         return filtered.toString();
     }
 
-    private void updateSuggestions() {
+    private void clearAllTasks() {
+        if (mUpdateSearchResultsTask != null) {
+            mUpdateSearchResultsTask.cancel(false);
+            mUpdateSearchResultsTask = null;
+        }
         if (mUpdateSuggestionsTask != null) {
             mUpdateSuggestionsTask.cancel(false);
             mUpdateSuggestionsTask = null;
         }
+    }
+
+    private void updateSuggestions() {
+        clearAllTasks();
         if (mQuery == null) {
             setSuggestionsCursor(null);
         } else {
-            setSuggestionsVisibility(true);
             mUpdateSuggestionsTask = new UpdateSuggestionsTask();
             mUpdateSuggestionsTask.execute(mQuery);
         }
     }
 
     private void updateSearchResults() {
-        if (mUpdateSearchResultsTask != null) {
-            mUpdateSearchResultsTask.cancel(false);
-            mUpdateSearchResultsTask = null;
-        }
+        clearAllTasks();
         if (TextUtils.isEmpty(mQuery)) {
             setResultsVisibility(false);
             setResultsCursor(null);
         } else {
-            setResultsVisibility(true);
             mUpdateSearchResultsTask = new UpdateSearchResultsTask();
             mUpdateSearchResultsTask.execute(mQuery);
         }
