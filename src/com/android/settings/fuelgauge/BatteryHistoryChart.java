@@ -661,6 +661,13 @@ public class BatteryHistoryChart extends View {
             return;
         }
 
+        if (mLastWidth == 0 || mLastHeight == 0) {
+            return;
+        }
+
+        mLastWidth = w;
+        mLastHeight = h;
+
         int textHeight = mTextDescent - mTextAscent;
         int headerTextHeight = mHeaderTextDescent - mHeaderTextAscent;
         if (h > (textHeight*12)) {
@@ -736,10 +743,17 @@ public class BatteryHistoryChart extends View {
         mCpuRunningPath.reset();
         mChargingPath.reset();
 
+        mTimeLabels.clear();
+        mDateLabels.clear();
+
         final long walltimeStart = mStartWallTime;
         final long walltimeChange = mEndWallTime-walltimeStart;
         long curWalltime = 0;
         long lastRealtime = 0;
+
+        if (walltimeChange == 0) {
+            return;
+        }
 
         final int batLow = mBatLow;
         final int batChange = mBatHigh-mBatLow;
@@ -924,7 +938,6 @@ public class BatteryHistoryChart extends View {
         }
 
         // Create the time labels at the bottom.
-        mTimeLabels.clear();
         boolean is24hr = is24Hour();
         Calendar calStart = Calendar.getInstance();
         calStart.setTimeInMillis(mStartWallTime);
@@ -957,7 +970,6 @@ public class BatteryHistoryChart extends View {
         }
 
         // Create the date labels if the chart includes multiple days
-        mDateLabels.clear();
         if (calStart.get(Calendar.DAY_OF_YEAR) != calEnd.get(Calendar.DAY_OF_YEAR) ||
                 calStart.get(Calendar.YEAR) != calEnd.get(Calendar.YEAR)) {
             boolean isDayFirst = isDayFirst();

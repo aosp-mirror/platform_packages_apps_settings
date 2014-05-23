@@ -82,8 +82,9 @@ public class PowerUsageSummary extends PreferenceFragment {
             String action = intent.getAction();
             if (Intent.ACTION_BATTERY_CHANGED.equals(action)
                     && updateBatteryStatus(intent)) {
-                mStatsHelper.clearStats();
-                refreshStats();
+                if (!mHandler.hasMessages(MSG_REFRESH_STATS)) {
+                    mHandler.sendEmptyMessageDelayed(MSG_REFRESH_STATS, 500);
+                }
             }
         }
     };
@@ -110,6 +111,10 @@ public class PowerUsageSummary extends PreferenceFragment {
         super.onResume();
         updateBatteryStatus(getActivity().registerReceiver(mBatteryInfoReceiver,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
+        if (mHandler.hasMessages(MSG_REFRESH_STATS)) {
+            mHandler.removeMessages(MSG_REFRESH_STATS);
+            mStatsHelper.clearStats();
+        }
         refreshStats();
     }
 
@@ -119,6 +124,12 @@ public class PowerUsageSummary extends PreferenceFragment {
         mHandler.removeMessages(BatteryEntry.MSG_UPDATE_NAME_ICON);
         getActivity().unregisterReceiver(mBatteryInfoReceiver);
         super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mHandler.removeMessages(MSG_REFRESH_STATS);
     }
 
     @Override
@@ -189,6 +200,7 @@ public class PowerUsageSummary extends PreferenceFragment {
             case MENU_STATS_REFRESH:
                 mStatsHelper.clearStats();
                 refreshStats();
+                mHandler.removeMessages(MSG_REFRESH_STATS);
                 return true;
             default:
                 return false;
@@ -258,6 +270,8 @@ public class PowerUsageSummary extends PreferenceFragment {
         BatteryEntry.startRequestQueue();
     }
 
+    static final int MSG_REFRESH_STATS = 100;
+
     Handler mHandler = new Handler() {
 
         @Override
@@ -279,6 +293,9 @@ public class PowerUsageSummary extends PreferenceFragment {
                         activity.reportFullyDrawn();
                     }
                     break;
+                case MSG_REFRESH_STATS:
+                    mStatsHelper.clearStats();
+                    refreshStats();
             }
             super.handleMessage(msg);
         }
