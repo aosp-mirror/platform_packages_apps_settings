@@ -16,21 +16,22 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false" android:state_checked="true">
-        <nine-patch android:src="@*android:drawable/switch_on_qntm_alpha"
+        <bitmap android:src="@*android:drawable/btn_switch_to_off_qntm_000"
                     android:tint="?android:attr/colorControlNormal"
                     android:alpha="?android:attr/disabledAlpha" />
     </item>
     <item android:state_enabled="false">
-        <nine-patch android:src="@*android:drawable/switch_off_qntm_alpha"
+        <bitmap android:src="@*android:drawable/btn_switch_to_on_qntm_000"
                     android:tint="?android:attr/colorControlNormal"
                     android:alpha="?android:attr/disabledAlpha" />
     </item>
     <item android:state_checked="true">
-        <nine-patch android:src="@*android:drawable/switch_on_qntm_alpha"
+        <bitmap android:src="@*android:drawable/btn_switch_to_off_qntm_000"
                     android:tint="@color/switch_accent_color" />
     </item>
     <item>
-        <nine-patch android:src="@*android:drawable/switch_off_qntm_alpha"
+        <bitmap android:src="@*android:drawable/btn_switch_to_on_qntm_000"
                     android:tint="?android:attr/colorControlNormal" />
     </item>
 </selector>
+
