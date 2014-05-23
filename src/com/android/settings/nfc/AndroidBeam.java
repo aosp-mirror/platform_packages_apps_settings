@@ -16,6 +16,7 @@
 
 package com.android.settings.nfc;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -39,16 +40,12 @@ public class AndroidBeam extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SettingsActivity activity = (SettingsActivity) getActivity();
+        final ActionBar actionBar = getActivity().getActionBar();
 
-        mOldActivityTitle = activity.getActionBar().getTitle();
-        activity.getActionBar().setTitle(R.string.android_beam_settings_title);
+        mOldActivityTitle = actionBar.getTitle();
+        actionBar.setTitle(R.string.android_beam_settings_title);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
-
-        mSwitchBar = activity.getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
-        mSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
     }
 
     @Override
@@ -56,18 +53,39 @@ public class AndroidBeam extends Fragment
             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.android_beam, container, false);
 
+        return mView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        SettingsActivity activity = (SettingsActivity) getActivity();
+
+        mSwitchBar = activity.getSwitchBar();
+        mSwitch = mSwitchBar.getSwitch();
+        mSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
-        mSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
+    }
 
-        return mView;
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
