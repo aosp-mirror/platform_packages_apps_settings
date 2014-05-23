@@ -21,22 +21,28 @@ import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.content.Intent;
 
+import java.lang.Class;
+
 public class WifiPickerActivity extends SettingsActivity implements ButtonBarHandler {
 
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         if (!modIntent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, WifiSettings.class.getName());
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getWifiSettingsClass().getName());
         }
         return modIntent;
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if (WifiSettings.class.getName().equals(fragmentName)
+        if (getWifiSettingsClass().getName().equals(fragmentName)
                 || WifiP2pSettings.class.getName().equals(fragmentName)
                 || AdvancedWifiSettings.class.getName().equals(fragmentName)) return true;
         return false;
+    }
+
+    /* package */ Class getWifiSettingsClass() {
+        return WifiSettings.class;
     }
 }

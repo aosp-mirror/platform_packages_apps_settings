@@ -19,6 +19,8 @@ import com.android.settings.ButtonBarHandler;
 
 import android.content.res.Resources;
 
+import java.lang.Class;
+
 public class WifiSetupActivity extends WifiPickerActivity implements ButtonBarHandler {
     // Extra containing the resource name of the theme to be used
     private static final String EXTRA_THEME = "theme";
@@ -40,5 +42,10 @@ public class WifiSetupActivity extends WifiPickerActivity implements ButtonBarHa
                     getPackageName());
         }
         super.onApplyThemeResource(theme, resid, first);
+    }
+
+    @Override
+    /* package */ Class getWifiSettingsClass() {
+        return WifiSettingsForSetupWizard.class;
     }
 }
