@@ -141,8 +141,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mContext = getActivity();
         mPM = mContext.getPackageManager();
         final Resources res = mContext.getResources();
