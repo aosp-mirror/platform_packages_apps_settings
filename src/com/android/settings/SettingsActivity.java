@@ -51,6 +51,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -60,6 +61,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.widget.SearchView;
@@ -309,6 +311,8 @@ public class SettingsActivity extends Activity
 
     private boolean mIsShowingDashboard;
 
+    private ViewGroup mContent;
+
     private SearchView mSearchView;
     private MenuItem mSearchMenuItem;
     private boolean mSearchMenuItemExpanded = false;
@@ -445,6 +449,8 @@ public class SettingsActivity extends Activity
         super.onCreate(savedState);
 
         setContentView(R.layout.settings_main);
+
+        mContent = (ViewGroup) findViewById(R.id.prefs);
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
@@ -791,7 +797,7 @@ public class SettingsActivity extends Activity
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.prefs, f);
         if (withTransition) {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            TransitionManager.beginDelayedTransition(mContent);
         }
         if (addToBackStack) {
             transaction.addToBackStack(SettingsActivity.BACK_STACK_PREFS);
@@ -800,6 +806,7 @@ public class SettingsActivity extends Activity
             transaction.setBreadCrumbTitle(title);
         }
         transaction.commitAllowingStateLoss();
+        getFragmentManager().executePendingTransactions();
         return f;
     }
 
@@ -1246,12 +1253,10 @@ public class SettingsActivity extends Activity
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
-            final boolean isShowingSwitchBar =
-                    (mSwitchBar != null) ? mSwitchBar.isShowing() : false;
             String title = getString(R.string.search_results_title);
             mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
                     SearchResultsSummary.class.getName(), null, false, true, title,
-                    !isShowingSwitchBar);
+                    true);
         }
         mSearchResultsFragment.setSearchView(mSearchView);
         mSearchMenuItemExpanded = true;
