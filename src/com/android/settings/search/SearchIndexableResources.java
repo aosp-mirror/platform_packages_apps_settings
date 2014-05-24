@@ -18,6 +18,7 @@ package com.android.settings.search;
 
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.ChooseLockGeneric;
 import com.android.settings.DataUsageSummary;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
@@ -185,6 +186,12 @@ public final class SearchIndexableResources {
                 new SearchIndexableResource(RANK_SECURITY,
                         NO_DATA_RES_ID,
                         SecuritySettings.class.getName(),
+                        R.drawable.ic_settings_security));
+
+        sResMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
+                new SearchIndexableResource(RANK_SECURITY,
+                        R.xml.security_settings_picker,
+                        ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
                         R.drawable.ic_settings_security));
 
         sResMap.put(InputMethodAndLanguageSettings.class.getName(),
