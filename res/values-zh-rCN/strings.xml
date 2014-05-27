@@ -28,10 +28,14 @@
   </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"您现在处于开发者模式！"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"您已处于开发者模式，无需进行此操作。"</string>
-    <string name="header_category_wireless_networks" msgid="7617195369015536614">"无线和网络"</string>
-    <string name="header_category_device" msgid="4544026001618307754">"设备"</string>
-    <string name="header_category_personal" msgid="3310195187905720823">"个人"</string>
-    <string name="header_category_system" msgid="2816866961183068977">"系统"</string>
+    <!-- no translation found for header_category_wireless_networks (7617195369015536614) -->
+    <skip />
+    <!-- no translation found for header_category_device (4544026001618307754) -->
+    <skip />
+    <!-- no translation found for header_category_personal (3310195187905720823) -->
+    <skip />
+    <!-- no translation found for header_category_system (2816866961183068977) -->
+    <skip />
     <string name="turn_on_radio" msgid="8706561489788373676">"打开无线通信"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"关闭无线通信"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"启用通过 IMS 发送短信的功能"</string>
@@ -90,9 +94,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"屏幕开启时间："</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"未知"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"正在充电"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"正在通过交流电源充电"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"正在通过USB充电"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"正在进行无线充电"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"（交流电）"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"（无线）"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"未在充电"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"未在充电"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"电量充足"</string>
@@ -203,8 +207,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"如果主机字段为空，则端口字段必须为空。"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"您键入的端口无效。"</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"浏览器会使用 HTTP 代理，但其他应用可能不会使用。"</string>
-    <!-- no translation found for proxy_url_title (7185282894936042359) -->
-    <skip />
+    <string name="proxy_url" msgid="2523518669129974654">"PAC 网址： "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"地点："</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"相邻的 CID："</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"小区信息："</string>
@@ -318,6 +321,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"机主信息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"启用小部件"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"已被管理员停用"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC 解锁"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"输入要在锁定屏幕上显示的文字"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"在锁定屏幕上显示用户信息"</string>
@@ -333,8 +337,10 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"加密平板电脑"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"加密手机"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"已加密"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"您可以对自己的帐户、设置、下载的应用及其数据、媒体和其他文件进行加密。加密平板电脑后，如果您设置了屏幕锁定（即图案、数字PIN码或密码），那么您必须在每次开机时解锁屏幕，才能将平板电脑解密。除此之外，唯一的解密方法就是恢复出厂设置，但这会清除您所有的数据。\n\n加密过程至少需要1个小时的时间。在开始加密之前，您必须先将电池充满电，并让平板电脑在整个加密过程中保持电源接通状态。如果加密过程出现中断，您将丢失部分或所有数据。"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"您可以对自己的帐户、设置、下载的应用及其数据、媒体和其他文件进行加密。加密手机后，如果您设置了屏幕锁定（即图案、数字PIN码或密码），那么您必须在每次开机时解锁屏幕，才能将手机解密。除此之外，唯一的解密方法就是恢复出厂设置，但这会清除您所有的数据。\n\n加密过程至少需要1个小时的时间。在开始加密之前，您必须先将电池充满电，并让手机在整个加密过程中保持电源接通状态。如果加密过程出现中断，您将丢失部分或所有数据。"</string>
+    <!-- no translation found for crypt_keeper_desc (7966195172468864148) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_desc (9182896617884899822) -->
+    <skip />
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"加密平板电脑"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"加密手机"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"请为电池充电，然后重试。"</string>
@@ -996,7 +1002,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"要更改短信应用吗？"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"要使用“<xliff:g id="NEW_APP">%1$s</xliff:g>”（取代“<xliff:g id="CURRENT_APP">%2$s</xliff:g>”）作为您的短信应用吗？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"要使用“<xliff:g id="NEW_APP">%s</xliff:g>”作为您的短信应用吗？"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"未知的SIM卡运营商"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"未知的 SIM 运营商"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s没有已知的配置网站"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"请插入 SIM 卡，然后重新启动"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"请连接到互联网"</string>
@@ -1340,11 +1346,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"选择运行环境"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"要重新启动以将运行环境从“<xliff:g id="OLD">%1$s</xliff:g>”改为“<xliff:g id="NEW">%2$s</xliff:g>”吗？"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"无线显示认证"</string>
-    <!-- no translation found for wifi_verbose_logging (4770164061102202747) -->
-    <skip />
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"显示无线显示认证选项"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (4393610458474552685) -->
-    <skip />
     <string name="allow_mock_location" msgid="2787962564578664888">"允许模拟位置"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"允许模拟位置"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"是否允许 USB 调试？"</string>
@@ -1502,11 +1504,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"移动网络信号"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"上午<xliff:g id="TIME">%1$d</xliff:g>"</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"下午<xliff:g id="TIME">%1$d</xliff:g>"</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"设备唤醒时间"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"WLAN 开启时间"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"WLAN 开启时间"</string>
@@ -1816,8 +1813,10 @@
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC 地址"</string>
     <string name="enter_password" msgid="4131758584074246224">"键入密码以解密存储设备"</string>
-    <string name="enter_pin" msgid="286221169871526876">"输入您的PIN码即可解密存储设备"</string>
-    <string name="enter_pattern" msgid="5707838886272453608">"绘制您的解锁图案即可解密存储设备"</string>
+    <!-- no translation found for enter_pin (286221169871526876) -->
+    <skip />
+    <!-- no translation found for enter_pattern (5707838886272453608) -->
+    <skip />
     <string name="try_again" msgid="4272075051293936921">"请重试。"</string>
     <string name="delete" msgid="4219243412325163003">"删除"</string>
     <string name="misc_files" msgid="6720680815969643497">"其他文件"</string>
@@ -2070,7 +2069,8 @@
     <string name="global_font_change_title" msgid="1887126466191012035">"更改字体大小"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"触碰付款"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"轻轻一碰，即可付款"</string>
-    <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"前台应用优先"</string>
+    <!-- no translation found for nfc_payment_favor_foreground (8881893980929835838) -->
+    <skip />
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"了解详情"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"查找应用"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
@@ -2105,6 +2105,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"拍照"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"从图库中选择照片"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"NFC屏幕锁定设置"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"配对的标签"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"已启用"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"与标签配对"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"立即配对"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"请将标签平放在桌子上，然后将手机放在标签上"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"标签和手机已成功配对，大功告成了！"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"无法使用相应标签为您的手机解锁"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"与您的标签配对失败，请重试"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"NFC解锁功能需要使用NFC，但NFC尚未启用。请启用NFC。"</string>
+    <string name="ok" msgid="3651563352754792958">"NFC设置"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"设置"</string>
     <string name="search_results_title" msgid="1796252422574886932">"设置"</string>
     <string name="search_menu" msgid="7053532283559077164">"搜索"</string>
@@ -2121,34 +2133,55 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"无法将数据写入NFC标签。如果该问题一直存在，请尝试使用其他标签"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"无法将数据写入NFC标签，请使用其他标签。"</string>
     <string name="default_sound" msgid="8821684447333687810">"默认铃声"</string>
-    <string name="notification_settings" msgid="7558043253996992936">"提示音与通知"</string>
-    <string name="media_volume_option_title" msgid="2811531786073003825">"媒体音量"</string>
-    <string name="alarm_volume_option_title" msgid="8219324421222242421">"闹钟音量"</string>
-    <string name="ring_volume_option_title" msgid="6767101703671248309">"铃声音量"</string>
+    <!-- no translation found for notification_settings (7558043253996992936) -->
+    <skip />
+    <!-- no translation found for media_volume_option_title (2811531786073003825) -->
+    <skip />
+    <!-- no translation found for alarm_volume_option_title (8219324421222242421) -->
+    <skip />
+    <!-- no translation found for ring_volume_option_title (6767101703671248309) -->
+    <skip />
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"勿扰"</string>
-    <string name="ringer_mode_title" msgid="7489457312298627735">"收到来电和通知时"</string>
-    <string name="ringer_mode_audible" msgid="4196661772746371017">"响铃"</string>
-    <string name="ringer_mode_vibrate" msgid="3381276665087695839">"振动而不响铃"</string>
-    <string name="ringer_mode_silent" msgid="4812605852723880795">"既不响铃也不振动"</string>
+    <!-- no translation found for ringer_mode_title (7489457312298627735) -->
+    <skip />
+    <!-- no translation found for ringer_mode_audible (4196661772746371017) -->
+    <skip />
+    <!-- no translation found for ringer_mode_vibrate (3381276665087695839) -->
+    <skip />
+    <!-- no translation found for ringer_mode_silent (4812605852723880795) -->
+    <skip />
     <string name="ringtone_title" msgid="5379026328015343686">"手机铃声"</string>
-    <string name="notification_ringtone_title" msgid="3361201340352664272">"默认通知铃声"</string>
+    <!-- no translation found for notification_ringtone_title (3361201340352664272) -->
+    <skip />
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"响铃时振动"</string>
-    <string name="notification_display_settings" msgid="2274556854544572598">"显示通知"</string>
+    <!-- no translation found for notification_display_settings (2274556854544572598) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1247988024534030629">"收到通知时指示灯闪烁"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"设备锁定时"</string>
+    <!-- no translation found for lock_screen_notifications_title (9118805570775519455) -->
+    <skip />
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隐藏敏感通知内容"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"完全不显示通知"</string>
-    <string name="zen_mode_notifications_title" msgid="8216258729654184425">"开启勿扰模式时"</string>
-    <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"在列表中隐藏新通知"</string>
-    <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"在列表中显示所有通知"</string>
+    <!-- no translation found for lock_screen_notifications_summary_disable (3001013816427963576) -->
+    <skip />
+    <!-- no translation found for zen_mode_notifications_title (8216258729654184425) -->
+    <skip />
+    <!-- no translation found for zen_mode_notifications_summary_hide (1442445640095117354) -->
+    <skip />
+    <!-- no translation found for zen_mode_notifications_summary_show (4043422218595387460) -->
+    <skip />
     <string name="app_notifications_title" msgid="5810577805218003760">"应用通知"</string>
-    <string name="touch_sound_settings" msgid="8861737295513989009">"触摸提示音"</string>
-    <string name="dial_pad_tones_title" msgid="1999293510400911558">"拨号键盘音效"</string>
-    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"屏幕锁定和解锁"</string>
-    <string name="other_touch_sounds_title" msgid="1692523628776677916">"其他触摸提示音"</string>
-    <string name="vibrate_on_touch_title" msgid="674710566941697253">"触摸时振动"</string>
-    <string name="manage_notification_access_title" msgid="7510080164564944891">"通知使用权"</string>
+    <!-- no translation found for touch_sound_settings (8861737295513989009) -->
+    <skip />
+    <!-- no translation found for dial_pad_tones_title (1999293510400911558) -->
+    <skip />
+    <!-- no translation found for screen_locking_sounds_title (3214032809403683539) -->
+    <skip />
+    <!-- no translation found for other_touch_sounds_title (1692523628776677916) -->
+    <skip />
+    <!-- no translation found for vibrate_on_touch_title (674710566941697253) -->
+    <skip />
+    <!-- no translation found for manage_notification_access_title (7510080164564944891) -->
+    <skip />
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"应用无法读取通知"</string>
   <plurals name="manage_notification_access_summary_nonzero">
     <item quantity="one" msgid="8344183614159211585">"%d个应用可以读取通知"</item>
@@ -2168,18 +2201,24 @@
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"“<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>”将可为勿扰模式添加退出条件。"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在加载应用…"</string>
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"显示通知"</string>
-    <string name="app_notifications_dialog_priority" msgid="3025242591043646494">"显示在通知列表顶部"</string>
-    <string name="app_notifications_dialog_visibility" msgid="2983683711202708107">"敏感通知不会在设备锁定时显示"</string>
-    <string name="app_notification_row_banned" msgid="5983655258784814773">"屏蔽"</string>
-    <string name="app_notification_row_priority" msgid="7597101427045166499">"优先"</string>
-    <string name="app_notification_row_sensitive" msgid="1809610030432329940">"敏感"</string>
+    <!-- no translation found for app_notifications_dialog_priority (3025242591043646494) -->
+    <skip />
+    <!-- no translation found for app_notifications_dialog_visibility (2983683711202708107) -->
+    <skip />
+    <!-- no translation found for app_notification_row_banned (5983655258784814773) -->
+    <skip />
+    <!-- no translation found for app_notification_row_priority (7597101427045166499) -->
+    <skip />
+    <!-- no translation found for app_notification_row_sensitive (1809610030432329940) -->
+    <skip />
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"完成"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"直到您将其关闭"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"只允许以下这些人和通讯类型打扰我"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"夜间"</string>
     <string name="zen_mode_automation_category" msgid="4175437418329803902">"其他自动化设置"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"自动开启"</string>
-    <string name="summary_divider_text" msgid="3087735442599707533">"、"</string>
+    <!-- no translation found for summary_divider_text (3087735442599707533) -->
+    <skip />
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"一律不"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"电话"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"消息"</string>
