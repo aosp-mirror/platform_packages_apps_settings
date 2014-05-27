@@ -162,6 +162,15 @@
                 android:icon="@drawable/ic_settings_security"
                 />
 
+        <!-- Account -->
+        <!-- TODO: add accounts icon -->
+        <dashboard-tile
+                android:id="@+id/account_settings"
+                android:title="@string/account_settings_title"
+                android:fragment="com.android.settings.accounts.AccountSettings"
+                android:icon="@null"
+                />
+
         <!-- Language -->
         <dashboard-tile
                 android:id="@+id/language_settings"
