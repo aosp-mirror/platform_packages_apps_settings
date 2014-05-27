@@ -34,7 +34,6 @@ import com.android.settings.R;
 public class VolumeSeekBarPreference extends SeekBarPreference
         implements PreferenceManager.OnActivityStopListener {
     private static final String TAG = "VolumeSeekBarPreference";
-
     private final Context mContext;
 
     private int mStream;
@@ -82,7 +81,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference
             }
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
-        mVolumizer = new SeekBarVolumizer(mContext, seekBar, mStream, sampleUri, sbvc);
+        if (mVolumizer == null) {
+            mVolumizer = new SeekBarVolumizer(mContext, mStream, sampleUri, sbvc);
+        }
+        mVolumizer.setSeekBar(mSeekBar);
     }
 
     private Uri getMediaVolumeUri() {
