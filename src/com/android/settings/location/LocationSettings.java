@@ -53,7 +53,6 @@ public class LocationSettings extends LocationSettingsBase
     private static final String KEY_LOCATION_SERVICES = "location_services";
 
     private SwitchBar mSwitchBar;
-    private Switch mSwitch;
     private boolean mValidListener;
     private Preference mLocationMode;
     private PreferenceCategory mCategoryRecentLocationRequests;
@@ -72,7 +71,6 @@ public class LocationSettings extends LocationSettingsBase
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
     }
 
     @Override
@@ -221,16 +219,16 @@ public class LocationSettings extends LocationSettingsBase
         // corner cases, the location might still be enabled. In such case the master switch should
         // be disabled but checked.
         boolean enabled = (mode != android.provider.Settings.Secure.LOCATION_MODE_OFF);
-        mSwitch.setEnabled(!restricted);
+        mSwitchBar.setSwitchEnabled(!restricted);
         mLocationMode.setEnabled(enabled && !restricted);
         mCategoryRecentLocationRequests.setEnabled(enabled);
 
-        if (enabled != mSwitch.isChecked()) {
+        if (enabled != mSwitchBar.isSwitchChecked()) {
             // set listener to null so that that code below doesn't trigger onCheckedChanged()
             if (mValidListener) {
                 mSwitchBar.removeOnSwitchChangeListener(this);
             }
-            mSwitch.setChecked(enabled);
+            mSwitchBar.setSwitchChecked(enabled);
             if (mValidListener) {
                 mSwitchBar.addOnSwitchChangeListener(this);
             }

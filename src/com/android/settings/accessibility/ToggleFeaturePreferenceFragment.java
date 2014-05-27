@@ -40,7 +40,6 @@ public abstract class ToggleFeaturePreferenceFragment
         extends SettingsPreferenceFragment {
 
     protected SwitchBar mSwitchBar;
-    protected ToggleSwitch mToggleSwitch;
 
     protected String mPreferenceKey;
     protected Preference mSummaryPreference;
@@ -89,7 +88,6 @@ public abstract class ToggleFeaturePreferenceFragment
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
-        mToggleSwitch = mSwitchBar.getSwitch();
 
         onProcessArguments(getArguments());
     }
@@ -132,7 +130,7 @@ public abstract class ToggleFeaturePreferenceFragment
     }
 
     private void removeActionBarToggleSwitch() {
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
+        mSwitchBar.setSwitchOnBeforeCheckedChangeListener(null);
         onRemoveSwitchBarToggleSwitch();
         mSwitchBar.hide();
     }
@@ -153,7 +151,7 @@ public abstract class ToggleFeaturePreferenceFragment
         // Enabled.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
             final boolean enabled = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-            mToggleSwitch.setCheckedInternal(enabled);
+            mSwitchBar.setSwitchChecked(enabled);
         }
 
         // Title.

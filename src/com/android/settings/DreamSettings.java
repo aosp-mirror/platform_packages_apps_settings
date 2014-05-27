@@ -61,7 +61,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
     private DreamBackend mBackend;
     private DreamInfoAdapter mAdapter;
     private SwitchBar mSwitchBar;
-    private Switch mSwitch;
     private MenuItem[] mMenuItemsWhenEnabled;
     private boolean mRefreshing;
 
@@ -124,7 +123,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
         final SettingsActivity sa = (SettingsActivity) getActivity();
         mSwitchBar = sa.getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
     }
 
     @Override
@@ -263,8 +261,8 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         logd("refreshFromBackend()");
         mRefreshing = true;
         boolean dreamsEnabled = mBackend.isEnabled();
-        if (mSwitch.isChecked() != dreamsEnabled)
-            mSwitch.setChecked(dreamsEnabled);
+        if (mSwitchBar.isSwitchChecked() != dreamsEnabled)
+            mSwitchBar.setSwitchChecked(dreamsEnabled);
 
         mAdapter.clear();
         if (dreamsEnabled) {
