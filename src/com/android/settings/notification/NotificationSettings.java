@@ -36,18 +36,28 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SoundSettings;
+import com.android.settings.Utils;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.Indexable.SearchIndexProvider;
 
-public class NotificationSettings extends SettingsPreferenceFragment {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class NotificationSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "NotificationSettings";
 
     private static final String KEY_MEDIA_VOLUME = "media_volume";
     private static final String KEY_ALARM_VOLUME = "alarm_volume";
     private static final String KEY_RING_VOLUME = "ring_volume";
+    private static final String KEY_NOTIFICATION_VOLUME = "notification_volume";
     private static final String KEY_RINGER_MODE = "ringer_mode";
     private static final String KEY_PHONE_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
@@ -62,6 +72,7 @@ public class NotificationSettings extends SettingsPreferenceFragment {
 
     private Context mContext;
     private PackageManager mPM;
+    private boolean mVoiceCapable;
 
     private DropDownPreference mRingerMode;
     private Preference mPhoneRingtonePreference;
@@ -74,13 +85,19 @@ public class NotificationSettings extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         mPM = mContext.getPackageManager();
-
+        mVoiceCapable = Utils.isVoiceCapable(mContext);
         addPreferencesFromResource(R.xml.notification_settings);
 
         final PreferenceScreen root = getPreferenceScreen();
         initVolumePreference(KEY_MEDIA_VOLUME, AudioManager.STREAM_MUSIC);
         initVolumePreference(KEY_ALARM_VOLUME, AudioManager.STREAM_ALARM);
-        initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING);
+        if (mVoiceCapable) {
+            initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING);
+            removePreference(KEY_NOTIFICATION_VOLUME);
+        } else {
+            initVolumePreference(KEY_NOTIFICATION_VOLUME, AudioManager.STREAM_NOTIFICATION);
+            removePreference(KEY_RING_VOLUME);
+        }
         initRingerMode(root);
         initRingtones(root);
         initVibrateWhenRinging(root);
@@ -142,6 +159,9 @@ public class NotificationSettings extends SettingsPreferenceFragment {
     private void initRingerMode(PreferenceScreen root) {
         mRingerMode = (DropDownPreference) root.findPreference(KEY_RINGER_MODE);
         if (mRingerMode == null) return;
+        if (!mVoiceCapable) {
+            mRingerMode.setTitle(R.string.ringer_mode_title_novoice);
+        }
         final AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mRingerMode.addItem(R.string.ringer_mode_audible, AudioManager.RINGER_MODE_NORMAL);
         mRingerMode.addItem(R.string.ringer_mode_vibrate, AudioManager.RINGER_MODE_VIBRATE);
@@ -166,6 +186,10 @@ public class NotificationSettings extends SettingsPreferenceFragment {
 
     private void initRingtones(PreferenceScreen root) {
         mPhoneRingtonePreference = root.findPreference(KEY_PHONE_RINGTONE);
+        if (mPhoneRingtonePreference != null && !mVoiceCapable) {
+            root.removePreference(mPhoneRingtonePreference);
+            mPhoneRingtonePreference = null;
+        }
         mNotificationRingtonePreference = root.findPreference(KEY_NOTIFICATION_RINGTONE);
     }
 
@@ -196,8 +220,13 @@ public class NotificationSettings extends SettingsPreferenceFragment {
     // === Vibrate when ringing ===
 
     private void initVibrateWhenRinging(PreferenceScreen root) {
-        mVibrateWhenRinging = (TwoStatePreference) findPreference(KEY_VIBRATE_WHEN_RINGING);
+        mVibrateWhenRinging = (TwoStatePreference) root.findPreference(KEY_VIBRATE_WHEN_RINGING);
         if (mVibrateWhenRinging == null) return;
+        if (!mVoiceCapable) {
+            root.removePreference(mVibrateWhenRinging);
+            mVibrateWhenRinging = null;
+            return;
+        }
         mVibrateWhenRinging.setPersistent(false);
         updateVibrateWhenRinging();
         mVibrateWhenRinging.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -299,4 +328,29 @@ public class NotificationSettings extends SettingsPreferenceFragment {
             }
         }
     }
+
+    // === Indexing ===
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+
+        public List<SearchIndexableResource> getXmlResourcesToIndex(
+                Context context, boolean enabled) {
+            final SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = R.xml.notification_settings;
+            return Arrays.asList(sir);
+        }
+
+        public List<String> getNonIndexableKeys(Context context) {
+            final ArrayList<String> rt = new ArrayList<String>();
+            if (Utils.isVoiceCapable(context)) {
+                rt.add(KEY_NOTIFICATION_VOLUME);
+            } else {
+                rt.add(KEY_RING_VOLUME);
+                rt.add(KEY_PHONE_RINGTONE);
+                rt.add(KEY_VIBRATE_WHEN_RINGING);
+            }
+            return rt;
+        }
+    };
 }

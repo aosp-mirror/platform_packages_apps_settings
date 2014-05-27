@@ -136,7 +136,7 @@ public final class SearchIndexableResources {
 
         sResMap.put(NotificationSettings.class.getName(),
                 new SearchIndexableResource(RANK_NOTIFICATIONS,
-                        R.xml.notification_settings,
+                        NO_DATA_RES_ID,
                         NotificationSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
