@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Време укључивања екрана:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Непознато"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Пуњење"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Пуњење преко пуњача"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Пуњење преко USB-а"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Бежично пуњење"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(бежично)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Не пуни се"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Не пуни се"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Пуно"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Поље за порт мора да буде празно ако је поље за назив хоста празно."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Унели сте неважећи порт."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Прегледач користи HTTP прокси, али друге апликације не могу да га користе."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Локација:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Суседни ИД клијента:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Информације о ћелији:"</string>
@@ -317,6 +317,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Власник информација"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Омогући виџете"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Онемогућио је администратор"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC откључавање"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Унесите текст за приказ на екрану за закључавање"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Прикажи информације о кориснику на закљ. екрану"</string>
@@ -569,7 +570,8 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Повежи са мрежом"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Заборави мрежу"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Измени мрежу"</string>
-    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Пиши у NFC ознаку"</string>
+    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
+    <skip />
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Да бисте видели доступне мреже, укључите Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Тражење Wi-Fi мрежа..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"Немате дозволу да мењате Wi‑Fi мрежу."</string>
@@ -618,7 +620,8 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS је доступан)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Обезбеђено помоћу <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", обезбеђено помоћу <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Унесите лозинку за мрежу"</string>
+    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
+    <skip />
     <string name="wifi_security_none" msgid="7985461072596594400">"Ништа"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Због побољшања прецизности локације и у друге сврхе, <xliff:g id="APP_NAME">%1$s</xliff:g> жели да укључи скенирање мреже чак и када је Wi-Fi искључен.\n\nЖелите ли да дозволите ово за све апликације које желе да скенирају?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Дозволи"</string>
@@ -735,10 +738,13 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Аутоматска промена положаја приликом ротације телефона"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Промени положај аутоматски приликом ротирања таблета"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Аутоматска промена положаја приликом ротације телефона"</string>
-    <string name="brightness" msgid="8480105032417444275">"Ниво осветљености"</string>
+    <!-- no translation found for brightness (8480105032417444275) -->
+    <skip />
     <string name="brightness_summary" msgid="838917350127550703">"Прилагођавање осветљености екрана"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Прилагодљива осветљеност"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Оптимизује ниво осветљености према доступном светлу"</string>
+    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
+    <skip />
+    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Спавај"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивности"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Позадина"</string>
@@ -990,7 +996,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Желите ли да промените апликацију за SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Желите ли да користите <xliff:g id="NEW_APP">%1$s</xliff:g> уместо <xliff:g id="CURRENT_APP">%2$s</xliff:g> као апликацију за SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Желите ли да користите <xliff:g id="NEW_APP">%s</xliff:g> као апликацију за SMS?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Непознати SIM оператер"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Непознати SIM оператер"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s нема познатих веб-сајтова за доделу"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Убаците SIM картицу и рестартујте"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Повежите се са интернетом"</string>
@@ -1322,8 +1328,10 @@
     <string name="enable_adb" msgid="7982306934419797485">"Отклањање USB грешака"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Режим отклањања грешака када је USB повезан"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Опозивање одобрења за уклањање USB грешака"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Пречица за извештај о грешкама"</string>
-    <string name="bugreport_in_power_summary" msgid="3245617665067320992">"Приказује дугме у Брзим подешавањима за прављење извештаја о грешкама"</string>
+    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
+    <skip />
+    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
+    <skip />
     <string name="keep_screen_on" msgid="1146389631208760344">"Не закључавај"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Екран неће бити у режиму спавања током пуњења"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Омогући snoop евиденцију за Bluetooth HCI"</string>
@@ -1332,9 +1340,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Избор времена извршавања"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Желите ли да поново покренете уређај да бисте променили време извршавања из <xliff:g id="OLD">%1$s</xliff:g> у <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Сертификација бежичног екрана"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Омогући опширно пријављивање преко WiFi-ја"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Приказ опција за сертификацију бежичног екрана"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Повећај ниво пријављивања преко Wifi-ја, прикажи према SSID RSSI у WiFi Picker-у"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Дозволи лажне локације"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Дозволи лажне локације"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Дозволи отклањање USB грешака?"</string>
@@ -1492,11 +1498,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Сигнал мобилне мреже"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> AM"</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> PM"</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>.<xliff:g id="MONTH">%2$d</xliff:g>."</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="DAY">%1$d</xliff:g>.<xliff:g id="MONTH">%2$d</xliff:g>."</string>
     <string name="awake" msgid="387122265874485088">"Време буђења уређаја"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi на време"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi на време"</string>
@@ -2095,6 +2096,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Сними слику"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Изабери слику из Галерије"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Подешавања закључавања екрана за NFC"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Упарене ознаке"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Омогућено је"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Упари помоћу ознаке"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Упари одмах"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Поставите ознаку равно на сто и поставите телефон преко ње"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"Ознака и телефон су упарени, завршили сте!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"Ова ознака не може да се користи за откључавање телефона"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Упаривање са ознаком није успело, покушајте поново"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"Нисте омогућили NFC, а он је обавезан за NFC откључавање. Укључите NFC."</string>
+    <string name="ok" msgid="3651563352754792958">"NFC подешавања"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Подешавања"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Подешавања"</string>
     <string name="search_menu" msgid="7053532283559077164">"Претражите"</string>
@@ -2102,7 +2115,8 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Недавне претраге"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Резултати"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi мрежа веза"</string>
-    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Подесите Wi-Fi NFC ознаку"</string>
+    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
+    <skip />
     <string name="write_tag" msgid="8571858602896222537">"Напиши"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Додирните ознаку да бисте писали..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Лозинка је неважећа. Покушајте поново."</string>
@@ -2187,6 +2201,8 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Обавешт. апликација"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Подешавања обавештења"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Шаљи повратне информације о уређају"</string>
-    <string name="switch_on_text" msgid="1124106706920572386">"Укључи"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Искључи"</string>
+    <!-- no translation found for switch_on_text (1124106706920572386) -->
+    <skip />
+    <!-- no translation found for switch_off_text (1139356348100829659) -->
+    <skip />
 </resources>
