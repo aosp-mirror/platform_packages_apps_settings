@@ -173,11 +173,13 @@ public class RingerVolumePreference extends VolumePreference {
             SeekBar seekBar = (SeekBar) view.findViewById(SEEKBAR_ID[i]);
             mSeekBars[i] = seekBar;
             if (SEEKBAR_TYPE[i] == AudioManager.STREAM_MUSIC) {
-                mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
+                mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(),
                         SEEKBAR_TYPE[i], getMediaVolumeUri(getContext()), this);
+                mSeekBarVolumizer[i].setSeekBar(seekBar);
             } else {
-                mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
+                mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(),
                         SEEKBAR_TYPE[i], null, this);
+                mSeekBarVolumizer[i].setSeekBar(seekBar);
             }
         }
 
