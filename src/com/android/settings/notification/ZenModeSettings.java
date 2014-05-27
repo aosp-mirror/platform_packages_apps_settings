@@ -55,6 +55,7 @@ import android.widget.TimePicker;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -83,12 +84,12 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_ENTRY = "entry";
     private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
 
-    private static final SparseArray<String> ALL_KEY_TITLES = allKeyTitles();
-
-    private static SparseArray<String> allKeyTitles() {
+    private static SparseArray<String> allKeyTitles(Context context) {
         final SparseArray<String> rt = new SparseArray<String>();
         rt.put(R.string.zen_mode_general_category, KEY_GENERAL);
-        rt.put(R.string.zen_mode_phone_calls, KEY_CALLS);
+        if (Utils.isVoiceCapable(context)) {
+            rt.put(R.string.zen_mode_phone_calls, KEY_CALLS);
+        }
         rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
         rt.put(R.string.zen_mode_automatic_category, KEY_AUTOMATIC);
         rt.put(R.string.zen_mode_when, KEY_WHEN);
@@ -159,21 +160,26 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
         final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
 
-        mCalls = (SwitchPreference) root.findPreference(KEY_CALLS);
-        mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (mDisableListeners) return true;
-                final boolean val = (Boolean) newValue;
-                if (val == mConfig.allowCalls) return true;
-                if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + val);
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.allowCalls = val;
-                return setZenModeConfig(newConfig);
-            }
-        });
+        mCalls = (SwitchPreference) general.findPreference(KEY_CALLS);
+        if (Utils.isVoiceCapable(mContext)) {
+            mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (mDisableListeners) return true;
+                    final boolean val = (Boolean) newValue;
+                    if (val == mConfig.allowCalls) return true;
+                    if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + val);
+                    final ZenModeConfig newConfig = mConfig.copy();
+                    newConfig.allowCalls = val;
+                    return setZenModeConfig(newConfig);
+                }
+            });
+        } else {
+            general.removePreference(mCalls);
+            mCalls = null;
+        }
 
-        mMessages = (SwitchPreference) root.findPreference(KEY_MESSAGES);
+        mMessages = (SwitchPreference) general.findPreference(KEY_MESSAGES);
         mMessages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -307,7 +313,9 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
     private void updateControls() {
         mDisableListeners = true;
-        mCalls.setChecked(mConfig.allowCalls);
+        if (mCalls != null) {
+            mCalls.setChecked(mConfig.allowCalls);
+        }
         mMessages.setChecked(mConfig.allowMessages);
         mStarred.setSelectedItem(0);
         mWhen.setSelectedValue(mConfig.sleepMode);
@@ -470,17 +478,26 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final int N = ALL_KEY_TITLES.size();
+                final SparseArray<String> keyTitles = allKeyTitles(context);
+                final int N = keyTitles.size();
                 final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>(N);
                 final Resources res = context.getResources();
                 for (int i = 0; i < N; i++) {
                     final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.key = ALL_KEY_TITLES.valueAt(i);
-                    data.title = res.getString(ALL_KEY_TITLES.keyAt(i));
+                    data.key = keyTitles.valueAt(i);
+                    data.title = res.getString(keyTitles.keyAt(i));
                     data.screenTitle = res.getString(R.string.zen_mode_settings_title);
                     result.add(data);
                 }
                 return result;
+            }
+
+            public List<String> getNonIndexableKeys(Context context) {
+                final ArrayList<String> rt = new ArrayList<String>();
+                if (!Utils.isVoiceCapable(context)) {
+                    rt.add(KEY_CALLS);
+                }
+                return rt;
             }
         };
 
