@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Hora d\'activació de la pantalla:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Desconegut"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"S\'està carregant"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Càrrega: corr. alt."</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Càrrega per USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Càrrega sense fils"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(CA)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(sense fil)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"No s\'està carregant"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"No s\'està carregant"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Plena"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"El camp del port ha de ser buit si el camp de l\'amfitrió és buit."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"El port que has escrit no és vàlid."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"El navegador utilitza un servidor intermediari HTTP, però pot ser que la resta d\'aplicacions no."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"URL de PAC: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"URL de PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Ubicació:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID veí:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Informació mòbil:"</string>
@@ -317,6 +317,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Informació de propietari"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activa els widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Opció desactivada per l\'administrador"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"Desbloqueig de NFC"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Escriu el text que vulguis mostrar a la pantalla de bloqueig"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostra info. de l\'usuari a la pantalla de bloqueig"</string>
@@ -569,7 +570,8 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Connecta\'t a la xarxa"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Esborra la xarxa"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modifica la xarxa"</string>
-    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Escriu a l\'etiqueta de NFC"</string>
+    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
+    <skip />
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Per veure les xarxes disponibles, activa la Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"S\'estan cercant xarxes Wi-Fi..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"No tens permís per canviar la xarxa Wi‑Fi."</string>
@@ -618,7 +620,8 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponible)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Protegida amb <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", protegida amb <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Introdueix la contrasenya de la xarxa."</string>
+    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
+    <skip />
     <string name="wifi_security_none" msgid="7985461072596594400">"Cap"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Per millorar la precisió de la ubicació i per a altres finalitats, <xliff:g id="APP_NAME">%1$s</xliff:g> vol activar la cerca de xarxes tot i que la connexió Wi-Fi estigui desactivada.\n\nVols permetre-ho per a totes les aplicacions que vulguin cercar xarxes?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Permet"</string>
@@ -735,10 +738,13 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Canvia d\'orientació automàticament en girar el telèfon"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Canvia l\'orientació automàticament en girar la tauleta"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Canvia d\'orientació automàticament en girar el telèfon"</string>
-    <string name="brightness" msgid="8480105032417444275">"Nivell de brillantor"</string>
+    <!-- no translation found for brightness (8480105032417444275) -->
+    <skip />
     <string name="brightness_summary" msgid="838917350127550703">"Ajusta la brillantor de la pantalla"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Brillantor adaptable"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimitza el nivell de brillantor per adaptar-lo a la llum disponible."</string>
+    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
+    <skip />
+    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Repòs"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Fons de pantalla"</string>
@@ -990,7 +996,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vols canviar l\'aplicació per a SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vols fer servir <xliff:g id="NEW_APP">%1$s</xliff:g> en lloc de <xliff:g id="CURRENT_APP">%2$s</xliff:g> com a aplicació per als SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vols fer servir <xliff:g id="NEW_APP">%s</xliff:g> com a aplicació per als SMS?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operador de SIM desconegut"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Operador de SIM desconegut"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s no té cap lloc web d\'administració conegut"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insereix la targeta SIM i reinicia"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Connecta a Internet"</string>
@@ -1322,8 +1328,10 @@
     <string name="enable_adb" msgid="7982306934419797485">"Depuració USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Activa el mode de depuració quan el dispositiu estigui connectat per USB"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Revoca autoritzacions depuració USB"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Drecera per als informes d\'errors"</string>
-    <string name="bugreport_in_power_summary" msgid="3245617665067320992">"Mostra un botó a la configuració ràpida per crear un informe d\'errors."</string>
+    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
+    <skip />
+    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
+    <skip />
     <string name="keep_screen_on" msgid="1146389631208760344">"Pantalla activa"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"La pantalla no entra mai en mode de repòs si el dispositiu està carregant-se"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Activa el registre de cerca HCI de Bluetooth"</string>
@@ -1332,9 +1340,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Selecciona temps d\'execució"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Vols tornar a iniciar per canviar el temps d\'execució de <xliff:g id="OLD">%1$s</xliff:g> a <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificació de pantalla sense fil"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Activa el registre detallat de la Wi-Fi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra les opcions de certificació de pantalla sense fil"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Augmenta nivell de registre de Wi-Fi; mostra l\'RSSI per SSID al selector Wi-Fi"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Ubicacions simulades"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permet les ubicacions simulades"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Voleu permetre la depuració USB?"</string>
@@ -1492,11 +1498,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Senyal de xarxa mòbil"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> a.m."</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> p.m."</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"Temps d\'activació del dispositiu"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi a temps"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi a temps"</string>
@@ -2095,6 +2096,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Fes una foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Selecciona una foto de la galeria"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Configuració de bloqueig de pantalla de NFC"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Etiquetes emparellades"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Activat"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Emparella amb una etiqueta"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Emparella ara"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Posa l\'etiqueta plana en una taula i col·loca el telèfon a sobre."</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"L\'etiqueta i el telèfon s\'han emparellat correctament. Llestos."</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"L\'etiqueta que has proporcionat no es pot utilitzar per desbloquejar el telèfon."</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"S\'ha produït un error en emparellar l\'etiqueta. Torna-ho a provar."</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"L\'NFC no està activada i és necessària per desbloquejar la pantalla mitjançant NFC. Activa-la."</string>
+    <string name="ok" msgid="3651563352754792958">"Configuració de NFC"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Configuració"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Configuració"</string>
     <string name="search_menu" msgid="7053532283559077164">"Cerca"</string>
@@ -2102,7 +2115,8 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Cerques recents"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Resultats"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"connexió xarxa wifi wi-fi"</string>
-    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configura l\'etiqueta de NFC per a Wi-Fi"</string>
+    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
+    <skip />
     <string name="write_tag" msgid="8571858602896222537">"Escriu-hi"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toca una etiqueta per escriure..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"La contrasenya no és vàlida. Torna-ho a provar."</string>
@@ -2114,10 +2128,8 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volum de multimèdia"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volum de l\'alarma"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volum del to"</string>
-    <string name="notification_volume_option_title" msgid="6064656124416882130">"Volum de notificació"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"No molesteu"</string>
     <string name="ringer_mode_title" msgid="7489457312298627735">"Quan les trucades i notificacions es reben"</string>
-    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"Quan arribin les notificacions"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"Trucada"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Vibra en lloc de sonar"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"Sense so ni vibració"</string>
@@ -2189,6 +2201,8 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notificacions de l\'aplicació"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Configuració de les notificacions"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Comentaris sobre aquest dispositiu"</string>
-    <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
+    <!-- no translation found for switch_on_text (1124106706920572386) -->
+    <skip />
+    <!-- no translation found for switch_off_text (1139356348100829659) -->
+    <skip />
 </resources>

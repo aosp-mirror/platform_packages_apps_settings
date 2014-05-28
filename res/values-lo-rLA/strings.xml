@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"ເວລາເປີດໜ້າຈໍ:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"ບໍ່ຮູ້ຈັກ"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"ກຳລັງສາກໄຟ"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"ກຳ​​ລັງ​ສາກ​ຜ່ານ​ໝໍ້​ໄຟ"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"ກຳ​ລັງ​ສາກ​ຜ່ານ USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"ກຳ​ລັງ​ສາກ​ໄຮ້​ສາຍ"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC​)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB​)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(ໄຮ້ສາຍ)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"ບໍ່ໄດ້ສາກໄຟ"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"ບໍ່ໄດ້ສາກໄຟ"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"ເຕັມ"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"ຊ່ອງຂໍ້ມູນພອດຈະຕ້ອງປ່ອຍຫວ່າງໄວ້ ຫາກວ່າຊ່ອງ host ຫວ່າງຢູ່."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"ພອດທີ່ທ່ານລະບຸນັ້ນບໍ່ຖືກຕ້ອງ."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP proxy ນີ້ຖືກໃຊ້ໂດຍໂປຣແກຣມທ່ອງເວັບແລ້ວ ແລະບໍ່ອາດໃຊ້ກັບແອັບຯອື່ນໄດ້."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"ສະຖານທີ່:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID ໃກ້ຄຽງ:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"ຂໍ້ມູນ cell:"</string>
@@ -317,6 +317,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"ຂໍ້ມູນເຈົ້າຂອງເຄື່ອງ"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ເປີດນຳໃຊ້ວິດເຈັດ"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"ຖືກປິດນຳໃຊ້ໂດຍຜູ່ເບິ່ງແຍງລະບົບ"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC ປົດລັອກ"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"ພິມຂໍ້ຄວາມເພື່ອສະແດງຜົນໃນໜ້າຈໍລັອກ"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"ສະແດງຂໍ້ມູນຜູ່ໃຊ້ໃນໜ້າຈໍລັອກ"</string>
@@ -370,7 +371,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"ຄວາມປອດໄພລະດັບປານກາງຫາສູງ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"ລະຫັດຜ່ານ"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"ຄວາມ​ປອດ​ໄພ​ສູງ"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"ຄວາມ​ປອດ​ໄພ​ສູງ​"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"ຖືກປິດການນຳໃຊ້ໂດຍຜູ່ເບິ່ງແຍງລະບົບ, ນະໂຍບາຍການເຂົ້າລະຫັດ ຫຼືບ່ອນເກັບຂໍ້ມູນຮັບຮອງ"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ບໍ່ໃຊ້"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"ເລື່ອນ"</string>
@@ -621,7 +622,7 @@
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ໃສ່​ລະຫັດ​ເຄືອ​ຂ່າຍ​ຂອງ​ທ່ານ"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"ບໍ່ໃຊ້"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"ເພື່ອປັບປຸງຄວາມຖືກຕ້ອງຂອງສະຖານທີ່ ແລະເພື່ອຈຸດປະສົງອື່ນໆ, <xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເປີດນຳໃຊ້ການສະແກນເຄືອຂ່າຍ ເຖິງແມ່ນວ່າ Wi-Fi ຈະປິດກໍຕາມ.\n\nອະນຸຍາດການດຳເນີນການນີ້ ໃຫ້ກັບທຸກແອັບຯທີ່ຕ້ອງການສະແກນບໍ່?"</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"ອະ​ນຸ​ຍາດ"</string>
+    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"ອະ​ນຸ​ຍາດ​"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"ປະ​ຕິ​ເສດ"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"ເຊື່ອມຕໍ່"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"ລົ້ມເຫລວໃນການເຊື່ອມຕໍ່ເຄືອຂ່າຍ"</string>
@@ -990,7 +991,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"ປ່ຽນແອັບຯສົ່ງ SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"ໃຊ້ <xliff:g id="NEW_APP">%1$s</xliff:g> ແທນ <xliff:g id="CURRENT_APP">%2$s</xliff:g> ໃຫ້ເປັນແອັບຯ SMS ຂອງທ່ານ?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"ໃຊ້ <xliff:g id="NEW_APP">%s</xliff:g> ເປັນແອັບຯ SMS ຂອງທ່ານ?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"​ຜູ່​ໃຫ້​ບໍ​ລິ​ການ SIM ທີ່ບໍ່​ຮູ້​ຈັກ"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"ບໍ່ຮູ້ຈັກຜູ່ໃຫ້ບໍລິການ SIM ນີ້"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s ບໍ່ມີເວັບໄຊການຈັດສັນ ທີ່ລະບົບຮູ້ຈັກ"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"ກະ​ລຸ​ນາ​ໃສ່​ຊິມກາດ ​ແລະເປີດເຄື່ອງຄືນໃໝ່"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"ກະ​ລຸ​ນາ​ເຊື່ອມ​ຕໍ່​ກັບ​ອິນ​ເຕີ​ເນັດ"</string>
@@ -1332,9 +1333,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"ເລືອກຣັນທາມ"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"ເປີດເຄື່ອງຄືນໃໝ່ເພື່ອປ່ຽນຣັນທາມຈາກ <xliff:g id="OLD">%1$s</xliff:g> ເປັນ <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"ສະແດງການຮັບຮອງຂອງລະບົບໄຮ້ສາຍ"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"ເປີດ​ການ​ບັນທຶກ WiFi Verbose"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"ສະແດງໂຕເລືອກສຳລັບການສະແດງການຮັບຮອງລະບົບໄຮ້ສາຍ"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"ເພີ່ມ​ລະດັບ​ການ​ບັນທຶກ Wifi, ສະແດງ​ຕໍ່ SSID RSSI ໃນ​ໂຕເລືອກ WiFi"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"ອະນຸຍາດໃຫ້ຈຳລອງຕຳແໜ່ງ"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"ອະນຸຍາດໃຫ້ຈຳລອງຕຳແໜ່ງ"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"ອະນຸຍາດໃຫ້ດີບັ໊ກຜ່ານ USB?"</string>
@@ -1462,7 +1461,7 @@
     <string name="print_print_jobs" msgid="3582094777756968793">"ວຽກ​ພິມ"</string>
     <string name="print_print_job" msgid="7563741676053287211">"ວຽກ​ພິມ"</string>
     <string name="print_restart" msgid="8373999687329384202">"ປິດເປີດໃໝ່"</string>
-    <string name="print_cancel" msgid="3621199386568672235">"ຍົກ​ເລີກ"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"ຍົກ​ເລີກ​"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"ກຳລັງພິມ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"ກຳລັງຍົກເລີກ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
@@ -1492,11 +1491,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"ສັນຍານເຄືອຂ່າຍມືຖື"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> ​ກ່ອນ​ທ່ຽງ"</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> ຫຼັງ​ທ່ຽງ"</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"ເວລາການເຮັດວຽກຂອງອຸປະກອນ"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"ເວລາເປີດໃຊ້ Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"ໄລຍະເວລາການໃຊ້ Wi-Fi"</string>
@@ -2095,6 +2089,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"ຖ່າຍຮູບ"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"ເລືອກຮູບຈາກແກເລີຣີ"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"ການຕັ້ງຄ່າລັອກໜ້າຈໍ NFC"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"ແທັກທີ່ຈັບຄູ່ແລ້ວ"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"ເປີດໃຊ້ແລ້ວ"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"ຈັບຄູ່ກັບແທັກໃດນຶ່ງ"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"ຈັບຄູ່ດຽວນີ້"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"ຕັ້ງແທັກໃຫ້ພຽງຢູ່ເທິງໂຕະ ແລ້ວ ວາງໂທລະສັບໄວ້ເທິງ"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"ແທັກ ແລະ ໂທລະສັບ ຈັບຄູ່ກັນແລ້ວ, ທ່ານເຮັດສຳເລັດແລ້ວ!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"ແທັກທີ່ໃຫ້ມາບໍ່ສາມາດໃຊ້ເພື່ອປົດລັອກໂທລະສັບຂອງທ່ານໄດ້"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"ການຈັບຄູ່ກັບແທັກຂອງທ່ານລົ້ມເຫຼວ, ກະລຸນາລອງໃໝ່ອີກເທື່ອນຶ່ງ"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"ບໍ່ໄດ້ເປີດນຳໃຊ້ NFC ແລະ ມັນຈຳເປັນສຳລັບການປົດລັອກ NFC. ກະລຸນາເປີດ NFC ກ່ອນ."</string>
+    <string name="ok" msgid="3651563352754792958">"ການຕັ້ງຄ່າ NFC"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"ການ​ຕັ້ງ​ຄ່າ"</string>
     <string name="search_results_title" msgid="1796252422574886932">"​ການ​ຕັ້ງ​ຄ່າ"</string>
     <string name="search_menu" msgid="7053532283559077164">"ຊອກຫາ"</string>
@@ -2114,10 +2120,8 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"​ລະ​ດັບ​ສຽງ​ມີ​ເດຍ"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"ລະ​ດັບ​ສຽງ​ໂມງ​ປຸກ"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"​ລະ​ດັບ​ສຽງ​ໂທ​ລະ​ສັບ"</string>
-    <string name="notification_volume_option_title" msgid="6064656124416882130">"ລະ​ດັບ​ສຽງ​ແຈ້ງ​ເຕືອນ"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"ຫ້າມລົບກວນ"</string>
     <string name="ringer_mode_title" msgid="7489457312298627735">"​ເມື່ອ​ມີ​ການ​ໂທ ຫຼື​ການ​ແຈ້ງ​ເຕືອນ​ເຂົ້າ​ມາ"</string>
-    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"ເມື່ອ​ມີ​ການ​ແຈ້ງ​ເຕືອນ​ເຂົ້າ​ມາ"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"​ເຕືອນ​ດ້ວຍ​ສຽງ"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"​ສັ່ນ​ເຕືອນ​ແທນ​​ສຽງ"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"​ບໍ່​ຕ້ອງ​ເຕືອນ​ດ້ວຍ​ສຽງ ຫຼື​ການ​ສັ່ນ"</string>
@@ -2165,8 +2169,8 @@
     <string name="app_notification_row_priority" msgid="7597101427045166499">"​ສຳ​ຄັນ​ທີ່​ສຸດ"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"​ລະ​ອຽດ​​ອ່ອນ"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"ແລ້ວໆ"</string>
-    <string name="zen_mode_default_option" msgid="6940069025071935243">"ຈົນກວ່າ​ທ່ານ​ຈະ​ປິດ"</string>
-    <string name="zen_mode_general_category" msgid="4816396530154508930">"ບລັອກ​ທຸກ​ການ​ລົບ​ກວນ​ຍົກ​ເວັ້ນ"</string>
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"ຈົນກວ່າ​ທ່ານ​ຈະ​ປິດ​"</string>
+    <string name="zen_mode_general_category" msgid="4816396530154508930">"ບລັອກ​ທຸກ​ການ​ລົບ​ກວນ​ຍົກ​ເວັ້ນ​"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"ໃນ​ຕອນ​ກາງ​ຄືນ"</string>
     <string name="zen_mode_automation_category" msgid="4175437418329803902">"ລະ​ບົບ​ອັດ​ຕະ​ໂນ​ມັດ​ອື່ນໆ"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"ເປີດ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ"</string>
