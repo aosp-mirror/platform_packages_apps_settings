@@ -168,7 +168,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private WifiManager mWifiManager;
 
     private SwitchBar mSwitchBar;
-    private Switch mEnabledSwitch;
     private boolean mLastEnabledState;
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
@@ -389,9 +388,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-        mEnabledSwitch = mSwitchBar.getSwitch();
         if (mUnavailable) {
-            mEnabledSwitch.setEnabled(false);
+            mSwitchBar.setSwitchEnabled(false);
             return;
         }
     }
@@ -444,7 +442,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         final ContentResolver cr = getActivity().getContentResolver();
         mLastEnabledState = Settings.Global.getInt(cr,
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
-        mEnabledSwitch.setChecked(mLastEnabledState);
+        mSwitchBar.setSwitchChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
 
         if (mHaveDebugSettings && !mLastEnabledState) {
@@ -455,7 +453,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
             mLastEnabledState = true;
-            mEnabledSwitch.setChecked(mLastEnabledState);
+            mSwitchBar.setSwitchChecked(mLastEnabledState);
             setPrefsEnabledState(mLastEnabledState);
         }
 
@@ -1225,9 +1223,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (switchView != mEnabledSwitch) {
-            return;
-        }
         if (isChecked != mLastEnabledState) {
             if (isChecked) {
                 mDialogClicked = false;
@@ -1482,7 +1477,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 setPrefsEnabledState(mLastEnabledState);
             } else {
                 // Reset the toggle
-                mEnabledSwitch.setChecked(false);
+                mSwitchBar.setSwitchChecked(false);
             }
         }
     }
@@ -1496,7 +1491,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mAdbDialog = null;
         } else if (dialog == mEnableDialog) {
             if (!mDialogClicked) {
-                mEnabledSwitch.setChecked(false);
+                mSwitchBar.setSwitchChecked(false);
             }
             mEnableDialog = null;
         }

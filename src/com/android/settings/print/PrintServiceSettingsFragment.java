@@ -112,7 +112,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     };
 
     private SwitchBar mSwitchBar;
-    private ToggleSwitch mToggleSwitch;
 
     private String mPreferenceKey;
 
@@ -209,13 +208,13 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
                 checked = true;
-                mToggleSwitch.setCheckedInternal(checked);
+                mSwitchBar.setSwitchChecked(checked);
                 getArguments().putBoolean(PrintSettingsFragment.EXTRA_CHECKED, checked);
                 onPreferenceToggled(mPreferenceKey, checked);
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
                 checked = false;
-                mToggleSwitch.setCheckedInternal(checked);
+                mSwitchBar.setSwitchChecked(checked);
                 getArguments().putBoolean(PrintSettingsFragment.EXTRA_CHECKED, checked);
                 onPreferenceToggled(mPreferenceKey, checked);
                 break;
@@ -228,7 +227,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         ListView listView = getListView();
         ViewGroup contentRoot = (ViewGroup) listView.getParent();
         View emptyView = listView.getEmptyView();
-        if (!mToggleSwitch.isChecked()) {
+        if (!mSwitchBar.isSwitchChecked()) {
             if (emptyView != null && emptyView.getId() != R.id.empty_print_state) {
                 contentRoot.removeView(emptyView);
                 emptyView = null;
@@ -277,10 +276,10 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         List<ComponentName> services = PrintSettingsUtils.readEnabledPrintServices(getActivity());
         mServiceEnabled = services.contains(mComponentName);
         if (mServiceEnabled) {
-            mToggleSwitch.setCheckedInternal(true);
+            mSwitchBar.setSwitchChecked(true);
             mPrintersAdapter.enable();
         } else {
-            mToggleSwitch.setCheckedInternal(false);
+            mSwitchBar.setSwitchChecked(false);
             mPrintersAdapter.disable();
         }
         getActivity().invalidateOptionsMenu();
@@ -293,14 +292,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-
-        mToggleSwitch = mSwitchBar.getSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(new ToggleSwitch.OnBeforeCheckedChangeListener() {
+        mSwitchBar.setSwitchOnBeforeCheckedChangeListener(new ToggleSwitch.OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
                 if (checked) {
                     if (!TextUtils.isEmpty(mEnableWarningMessage)) {
-                        toggleSwitch.setCheckedInternal(false);
+                        mSwitchBar.setSwitchChecked(false);
                         getArguments().putBoolean(PrintSettingsFragment.EXTRA_CHECKED, false);
                         showDialog(DIALOG_ID_ENABLE_WARNING);
                         return true;
@@ -331,7 +328,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         // Enabled.
         final boolean enabled = arguments.getBoolean(PrintSettingsFragment.EXTRA_CHECKED);
-        mToggleSwitch.setCheckedInternal(enabled);
+        mSwitchBar.setSwitchChecked(enabled);
 
         // Settings title and intent.
         String settingsTitle = arguments.getString(PrintSettingsFragment.EXTRA_SETTINGS_TITLE);

@@ -84,10 +84,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
         // Default is hide
         setVisibility(View.GONE);
-    }
-
-    public ToggleSwitch getSwitch() {
-        return mSwitch;
+        mSwitch.setVisibility(View.GONE);
     }
 
     public void show() {
@@ -124,5 +121,40 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             throw new IllegalStateException("Cannot remove OnSwitchChangeListener");
         }
         mSwitchChangeListeners.remove(listener);
+    }
+
+    public void setSwitchOnBeforeCheckedChangeListener(
+            ToggleSwitch.OnBeforeCheckedChangeListener listener) {
+        mSwitch.setOnBeforeCheckedChangeListener(listener);
+    }
+
+    public void setSwitchChecked(boolean checked) {
+        setSwitchChecked(checked, false);
+    }
+
+    public void setSwitchChecked(boolean checked, boolean checkBefore) {
+        if (checkBefore) {
+            ToggleSwitch.OnBeforeCheckedChangeListener listener =
+                    mSwitch.getOnBeforeCheckedChangeListener();
+            if (listener != null && listener.onBeforeCheckedChanged(mSwitch, checked)) {
+                return;
+            }
+
+        }
+        mSwitch.setCheckedInternal(checked);
+        if (mSwitch.getVisibility() == View.GONE) {
+            mSwitch.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setSwitchEnabled(boolean enabled) {
+        mSwitch.setEnabled(enabled);
+        if (mSwitch.getVisibility() == View.GONE) {
+            mSwitch.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public boolean isSwitchChecked() {
+        return mSwitch.isChecked();
     }
 }
