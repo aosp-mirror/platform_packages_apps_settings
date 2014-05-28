@@ -27,6 +27,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -88,6 +89,11 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         mContext = context;
         mSwitchBar = switchBar;
         mSwitch = switchBar.getSwitch();
+        // This is a trick: as the Wi-Fi initial state is asynchronously coming from the
+        // BroadcastReceiver we cannot have the Switch visible at first otherwise you will notice
+        // its state change later on. So start it as VIEW.GONE and make it View.VISIBLE later
+        // when its state is defined.
+        mSwitch.setVisibility(View.GONE);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
@@ -133,6 +139,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
                 mSwitch.setEnabled(true);
                 updateSearchIndex(false);
         }
+        mSwitch.setVisibility(View.VISIBLE);
     }
 
     private void updateSearchIndex(boolean isWiFiOn) {
