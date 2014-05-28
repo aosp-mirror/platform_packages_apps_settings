@@ -40,7 +40,6 @@ public class Settings extends SettingsActivity {
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
-    public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceInfoSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -90,7 +89,7 @@ public class Settings extends SettingsActivity {
     public static class NotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class TouchSoundSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class OtherSoundSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
 }
