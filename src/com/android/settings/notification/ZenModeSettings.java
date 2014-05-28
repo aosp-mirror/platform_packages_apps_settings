@@ -74,6 +74,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_GENERAL = "general";
     private static final String KEY_CALLS = "phone_calls";
     private static final String KEY_MESSAGES = "messages";
+    private static final String KEY_STARRED = "starred";
 
     private static final String KEY_AUTOMATIC = "automatic";
     private static final String KEY_WHEN = "when";
@@ -91,6 +92,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             rt.put(R.string.zen_mode_phone_calls, KEY_CALLS);
         }
         rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
+        rt.put(R.string.zen_mode_from_starred, KEY_STARRED);
         rt.put(R.string.zen_mode_automatic_category, KEY_AUTOMATIC);
         rt.put(R.string.zen_mode_when, KEY_WHEN);
         rt.put(R.string.zen_mode_start_time, KEY_START_TIME);
@@ -194,12 +196,25 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         });
 
         mStarred = new DropDownPreference(mContext);
-        mStarred.setEnabled(false);
+        mStarred.setKey(KEY_STARRED);
         mStarred.setTitle(R.string.zen_mode_from);
         mStarred.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
-        mStarred.addItem(R.string.zen_mode_from_anyone, null);
-        mStarred.addItem(R.string.zen_mode_from_starred, null);
-        mStarred.addItem(R.string.zen_mode_from_contacts, null);
+        mStarred.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
+        mStarred.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
+        mStarred.addItem(R.string.zen_mode_from_contacts, ZenModeConfig.SOURCE_CONTACT);
+        mStarred.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos, Object newValue) {
+                if (mDisableListeners) return true;
+                final int val = (Integer) newValue;
+                if (val == mConfig.allowFrom) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange allowFrom=" +
+                        ZenModeConfig.sourceToString(val));
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowFrom = val;
+                return setZenModeConfig(newConfig);
+            }
+        });
         general.addPreference(mStarred);
 
         final Preference alarmInfo = new Preference(mContext) {
@@ -317,7 +332,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             mCalls.setChecked(mConfig.allowCalls);
         }
         mMessages.setChecked(mConfig.allowMessages);
-        mStarred.setSelectedItem(0);
+        mStarred.setSelectedValue(mConfig.allowFrom);
         mWhen.setSelectedValue(mConfig.sleepMode);
         mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
         mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
