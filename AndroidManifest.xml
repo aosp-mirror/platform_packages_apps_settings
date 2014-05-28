@@ -523,35 +523,6 @@
                 android:resource="@id/language_settings" />
         </activity-alias>
 
-        <activity android:name="Settings$SoundSettingsActivity"
-                android:label="@string/sound_settings"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.SOUND_SETTINGS" />
-                <action android:name="android.settings.SOUND_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.SoundSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/sound_settings" />
-        </activity>
-
-        <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias android:name="SoundSettings"
-                android:label="@string/sound_settings"
-                android:exported="true"
-                android:targetActivity="Settings$SoundSettingsActivity">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.SoundSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/sound_settings" />
-        </activity-alias>
-
         <activity android:name="Settings$ZenModeSettingsActivity"
                 android:label="@string/zen_mode_settings_title"
                 android:exported="true"
@@ -1712,6 +1683,37 @@
                 android:resource="@id/notification_settings" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="Settings$SoundSettingsActivity"
+                android:label="@string/notification_settings"
+                android:taskAffinity=""
+                android:excludeFromRecents="true"
+                android:targetActivity="Settings$NotificationSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.SOUND_SETTINGS" />
+                <action android:name="android.settings.SOUND_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.notification.NotificationSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/notification_settings" />
+        </activity-alias>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="SoundSettings"
+                android:label="@string/notification_settings"
+                android:exported="true"
+                android:targetActivity="Settings$NotificationSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.notification.NotificationSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/notification_settings" />
+        </activity-alias>
+
         <activity android:name="Settings$NotificationDisplaySettingsActivity"
                 android:label="@string/notification_display_settings"
                 android:exported="true"
@@ -1728,18 +1730,18 @@
                 android:resource="@id/notification_settings" />
         </activity>
 
-        <activity android:name="Settings$TouchSoundSettingsActivity"
-                android:label="@string/touch_sound_settings"
+        <activity android:name="Settings$OtherSoundSettingsActivity"
+                android:label="@string/other_sound_settings"
                 android:exported="true"
                 android:taskAffinity=""
                 android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_TOUCH_SOUND_SETTINGS" />
+                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.TouchSoundSettings" />
+                android:value="com.android.settings.notification.OtherSoundSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/notification_settings" />
         </activity>

@@ -28,7 +28,6 @@ import com.android.settings.HomeSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
 import com.android.settings.SecuritySettings;
-import com.android.settings.SoundSettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -39,7 +38,7 @@ import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.notification.NotificationDisplaySettings;
 import com.android.settings.notification.NotificationSettings;
-import com.android.settings.notification.TouchSoundSettings;
+import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
@@ -58,7 +57,6 @@ public final class SearchIndexableResources {
     public static final int RANK_DATA_USAGE = 3;
     public static final int RANK_WIRELESS = 4;
     public static final int RANK_HOME = 5;
-    public static final int RANK_SOUND = 6;
     public static final int RANK_DISPLAY = 7;
     public static final int RANK_WALLPAPER = 7;
     public static final int RANK_NOTIFICATIONS = 8;
@@ -116,12 +114,6 @@ public final class SearchIndexableResources {
                         HomeSettings.class.getName(),
                         R.drawable.ic_settings_home));
 
-        sResMap.put(SoundSettings.class.getName(),
-                new SearchIndexableResource(RANK_SOUND,
-                        R.xml.sound_settings,
-                        SoundSettings.class.getName(),
-                        R.drawable.ic_settings_sound));
-
         sResMap.put(DisplaySettings.class.getName(),
                 new SearchIndexableResource(RANK_DISPLAY,
                         R.xml.display_settings,
@@ -146,10 +138,10 @@ public final class SearchIndexableResources {
                         NotificationDisplaySettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
-        sResMap.put(TouchSoundSettings.class.getName(),
+        sResMap.put(OtherSoundSettings.class.getName(),
                 new SearchIndexableResource(RANK_NOTIFICATIONS,
-                        R.xml.touch_sound_settings,
-                        TouchSoundSettings.class.getName(),
+                        NO_DATA_RES_ID,
+                        OtherSoundSettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
         sResMap.put(ZenModeSettings.class.getName(),

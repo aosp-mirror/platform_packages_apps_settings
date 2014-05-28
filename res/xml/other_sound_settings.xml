@@ -15,8 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/touch_sound_settings"
-        android:key="touch_sound_settings"
+        android:title="@string/other_sound_settings"
+        android:key="other_sound_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <!-- Dial pad tones -->
@@ -27,7 +27,7 @@
             android:switchTextOn=""
             android:persistent="false" />
 
-    <!-- Screen locking / unlocking -->
+    <!-- Screen locking sounds -->
     <SwitchPreference
             android:key="screen_locking_sounds"
             android:title="@string/screen_locking_sounds_title"
@@ -35,10 +35,18 @@
             android:switchTextOn=""
             android:persistent="false" />
 
-    <!-- Other touch sounds -->
+    <!-- Docking sounds -->
     <SwitchPreference
-            android:key="other_touch_sounds"
-            android:title="@string/other_touch_sounds_title"
+            android:key="docking_sounds"
+            android:title="@string/docking_sounds_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
+    <!-- Touch sounds -->
+    <SwitchPreference
+            android:key="touch_sounds"
+            android:title="@string/touch_sounds_title"
             android:switchTextOff=""
             android:switchTextOn=""
             android:persistent="false" />
@@ -49,6 +57,18 @@
             android:title="@string/vibrate_on_touch_title"
             android:switchTextOff=""
             android:switchTextOn=""
+            android:persistent="false" />
+
+    <!-- Dock speaker plays -->
+    <com.android.settings.notification.DropDownPreference
+            android:key="dock_audio_media"
+            android:title="@string/dock_audio_media_title"
+            android:persistent="false" />
+
+    <!-- Emergency tone -->
+    <com.android.settings.notification.DropDownPreference
+            android:key="emergency_tone"
+            android:title="@string/emergency_tone_title"
             android:persistent="false" />
 
 </PreferenceScreen>

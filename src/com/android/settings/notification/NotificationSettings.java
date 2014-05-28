@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -36,16 +38,15 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
+import android.provider.MediaStore;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.SoundSettings;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.Indexable.SearchIndexProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -201,14 +202,14 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         @Override
         public void run() {
             if (mPhoneRingtonePreference != null) {
-                final CharSequence summary = SoundSettings.updateRingtoneName(
+                final CharSequence summary = updateRingtoneName(
                         mContext, RingtoneManager.TYPE_RINGTONE);
                 if (summary != null) {
                     mHandler.obtainMessage(H.UPDATE_PHONE_RINGTONE, summary).sendToTarget();
                 }
             }
             if (mNotificationRingtonePreference != null) {
-                final CharSequence summary = SoundSettings.updateRingtoneName(
+                final CharSequence summary = updateRingtoneName(
                         mContext, RingtoneManager.TYPE_NOTIFICATION);
                 if (summary != null) {
                     mHandler.obtainMessage(H.UPDATE_NOTIFICATION_RINGTONE, summary).sendToTarget();
@@ -216,6 +217,35 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             }
         }
     };
+
+    private static CharSequence updateRingtoneName(Context context, int type) {
+        if (context == null) return null;
+        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(context, type);
+        CharSequence summary = context.getString(com.android.internal.R.string.ringtone_unknown);
+        // Is it a silent ringtone?
+        if (ringtoneUri == null) {
+            summary = context.getString(com.android.internal.R.string.ringtone_silent);
+        } else {
+            // Fetch the ringtone title from the media provider
+            Cursor cursor = null;
+            try {
+                cursor = context.getContentResolver().query(ringtoneUri,
+                        new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
+                if (cursor != null) {
+                    if (cursor.moveToFirst()) {
+                        summary = cursor.getString(0);
+                    }
+                }
+            } catch (SQLiteException sqle) {
+                // Unknown title for the ringtone
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+        return summary;
+    }
 
     // === Vibrate when ringing ===
 
