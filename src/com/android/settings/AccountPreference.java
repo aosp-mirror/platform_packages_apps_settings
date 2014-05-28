@@ -140,6 +140,8 @@ public class AccountPreference extends Preference {
                 return getContext().getString(R.string.accessibility_sync_disabled);
             case SYNC_ERROR:
                 return getContext().getString(R.string.accessibility_sync_error);
+            case SYNC_IN_PROGRESS:
+                return getContext().getString(R.string.accessibility_sync_in_progress);
             default:
                 Log.e(TAG, "Unknown sync status: " + status);
                 return getContext().getString(R.string.accessibility_sync_error);
