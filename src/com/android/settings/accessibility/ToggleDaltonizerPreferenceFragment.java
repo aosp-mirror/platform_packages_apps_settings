@@ -80,7 +80,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     protected void onInstallSwitchBarToggleSwitch() {
         super.onInstallSwitchBarToggleSwitch();
 
-        mSwitchBar.setSwitchChecked(
+        mToggleSwitch.setCheckedInternal(
                 Settings.Secure.getInt(getContentResolver(), ENABLED, 0) == 1);
         mSwitchBar.addOnSwitchChangeListener(this);
     }

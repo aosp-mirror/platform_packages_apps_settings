@@ -70,6 +70,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private SubtitleView mPreviewText;
     private View mPreviewWindow;
     private SwitchBar mSwitchBar;
+    private ToggleSwitch mToggleSwitch;
 
     // Standard options.
     private LocalePreference mLocale;
@@ -131,7 +132,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.setSwitchChecked(enabled);
+        mToggleSwitch = mSwitchBar.getSwitch();
+        mToggleSwitch.setCheckedInternal(enabled);
 
         mPreviewWindow = view.findViewById(R.id.preview_window);
 
@@ -198,10 +200,10 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     }
 
     protected void onInstallSwitchBarToggleSwitch() {
-        mSwitchBar.setSwitchOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
+        mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
-                mSwitchBar.setSwitchChecked(checked);
+                toggleSwitch.setCheckedInternal(checked);
                 Settings.Secure.putInt(getActivity().getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, checked ? 1 : 0);
                 getPreferenceScreen().setEnabled(checked);
@@ -220,7 +222,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
     private void removeSwitchBarToggleSwitch() {
         mSwitchBar.hide();
-        mSwitchBar.setSwitchOnBeforeCheckedChangeListener(null);
+        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
     }
 
     private void initializeAllPreferences() {

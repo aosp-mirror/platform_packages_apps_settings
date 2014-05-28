@@ -27,6 +27,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     private Context mContext;
+    private Switch mSwitch;
     private SwitchBar mSwitchBar;
     private AtomicBoolean mConnected = new AtomicBoolean(false);
 
@@ -85,6 +87,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     public WifiEnabler(Context context, SwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
+        mSwitch = switchBar.getSwitch();
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
@@ -110,24 +113,24 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     private void handleWifiStateChanged(int state) {
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
-                mSwitchBar.setSwitchEnabled(false);
+                mSwitch.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_ENABLED:
                 setSwitchChecked(true);
-                mSwitchBar.setSwitchEnabled(true);
+                mSwitch.setEnabled(true);
                 updateSearchIndex(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
-                mSwitchBar.setSwitchEnabled(false);
+                mSwitch.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_DISABLED:
                 setSwitchChecked(false);
-                mSwitchBar.setSwitchEnabled(true);
+                mSwitch.setEnabled(true);
                 updateSearchIndex(false);
                 break;
             default:
                 setSwitchChecked(false);
-                mSwitchBar.setSwitchEnabled(true);
+                mSwitch.setEnabled(true);
                 updateSearchIndex(false);
         }
     }
@@ -142,9 +145,9 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     }
 
     private void setSwitchChecked(boolean checked) {
-        if (checked != mSwitchBar.isSwitchChecked()) {
+        if (checked != mSwitch.isChecked()) {
             mStateMachineEvent = true;
-            mSwitchBar.setSwitchChecked(checked);
+            mSwitch.setChecked(checked);
             mStateMachineEvent = false;
         }
     }
@@ -186,10 +189,10 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
             mWifiManager.setWifiApEnabled(null, false);
         }
 
-        mSwitchBar.setSwitchEnabled(false);
+        mSwitch.setEnabled(false);
         if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error
-            mSwitchBar.setSwitchEnabled(true);
+            mSwitch.setEnabled(true);
             Toast.makeText(mContext, R.string.wifi_error, Toast.LENGTH_SHORT).show();
         }
     }

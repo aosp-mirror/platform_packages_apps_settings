@@ -40,6 +40,7 @@ import com.android.settings.widget.SwitchBar;
  */
 public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener {
     private Context mContext;
+    private Switch mSwitch;
     private SwitchBar mSwitchBar;
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
@@ -74,13 +75,14 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
     public BluetoothEnabler(Context context, SwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
+        mSwitch = switchBar.getSwitch();
         mValidListener = false;
 
         LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
         if (manager == null) {
             // Bluetooth is not supported
             mLocalAdapter = null;
-            mSwitchBar.setSwitchEnabled(false);
+            mSwitch.setEnabled(false);
         } else {
             mLocalAdapter = manager.getBluetoothAdapter();
         }
@@ -89,7 +91,7 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
 
     public void resume(Context context) {
         if (mLocalAdapter == null) {
-            mSwitchBar.setSwitchEnabled(false);
+            mSwitch.setEnabled(false);
             return;
         }
 
@@ -120,36 +122,36 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
     void handleStateChanged(int state) {
         switch (state) {
             case BluetoothAdapter.STATE_TURNING_ON:
-                mSwitchBar.setSwitchEnabled(false);
+                mSwitch.setEnabled(false);
                 break;
             case BluetoothAdapter.STATE_ON:
                 setChecked(true);
-                mSwitchBar.setSwitchEnabled(true);
+                mSwitch.setEnabled(true);
                 updateSearchIndex(true);
                 break;
             case BluetoothAdapter.STATE_TURNING_OFF:
-                mSwitchBar.setSwitchEnabled(false);
+                mSwitch.setEnabled(false);
                 break;
             case BluetoothAdapter.STATE_OFF:
                 setChecked(false);
-                mSwitchBar.setSwitchEnabled(true);
+                mSwitch.setEnabled(true);
                 updateSearchIndex(false);
                 break;
             default:
                 setChecked(false);
-                mSwitchBar.setSwitchEnabled(true);
+                mSwitch.setEnabled(true);
                 updateSearchIndex(false);
         }
     }
 
     private void setChecked(boolean isChecked) {
-        if (isChecked != mSwitchBar.isSwitchChecked()) {
+        if (isChecked != mSwitch.isChecked()) {
             // set listener to null, so onCheckedChanged won't be called
             // if the checked status on Switch isn't changed by user click
             if (mValidListener) {
                 mSwitchBar.removeOnSwitchChangeListener(this);
             }
-            mSwitchBar.setSwitchChecked(isChecked);
+            mSwitch.setChecked(isChecked);
             if (mValidListener) {
                 mSwitchBar.addOnSwitchChangeListener(this);
             }
@@ -178,6 +180,6 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         if (mLocalAdapter != null) {
             mLocalAdapter.setBluetoothEnabled(isChecked);
         }
-        mSwitchBar.setSwitchEnabled(false);
+        mSwitch.setEnabled(false);
     }
 }

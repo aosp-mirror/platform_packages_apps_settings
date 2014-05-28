@@ -48,10 +48,6 @@ public class ToggleSwitch extends Switch {
         mOnBeforeListener = listener;
     }
 
-    public OnBeforeCheckedChangeListener getOnBeforeCheckedChangeListener() {
-        return mOnBeforeListener;
-    }
-
     @Override
     public void setChecked(boolean checked) {
         if (mOnBeforeListener != null
