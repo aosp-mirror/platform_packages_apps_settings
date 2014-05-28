@@ -45,6 +45,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -54,6 +55,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_RANK;
@@ -150,8 +152,11 @@ public class Index {
 
     private static final List<String> EMPTY_LIST = Collections.<String>emptyList();
 
-
     private static Index sInstance;
+
+    private static final Pattern REMOVE_DIACRITICALS_PATTERN
+            = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
     private final UpdateData mDataToProcess = new UpdateData();
     private Context mContext;
@@ -914,13 +919,13 @@ public class Index {
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled, String key) {
 
-        String updatedTitle = normalizeHyphen(title);
-        String updatedSummaryOn = normalizeHyphen(summaryOn);
-        String updatedSummaryOff = normalizeHyphen(summaryOff);
+        final String updatedTitle = normalizeHyphen(title);
+        final String updatedSummaryOn = normalizeHyphen(summaryOn);
+        final String updatedSummaryOff = normalizeHyphen(summaryOff);
 
-        String normalizedTitle = normalizeString(updatedTitle);
-        String normalizedSummaryOn = normalizeString(updatedSummaryOn);
-        String normalizedSummaryOff = normalizeString(updatedSummaryOff);
+        final String normalizedTitle = normalizeString(updatedTitle);
+        final String normalizedSummaryOn = normalizeString(updatedSummaryOn);
+        final String normalizedSummaryOff = normalizeString(updatedSummaryOff);
 
         updateOneRow(database, locale,
                 updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
@@ -934,7 +939,10 @@ public class Index {
     }
 
     private static String normalizeString(String input) {
-        return (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
+        final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
+        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
+
+        return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
     }
 
     private void updateOneRow(SQLiteDatabase database, String locale,
