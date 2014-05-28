@@ -914,37 +914,27 @@ public class Index {
             String intentAction, String intentTargetPackage, String intentTargetClass,
             boolean enabled, String key) {
 
-        String updatedTitle;
-        if (title != null) {
-            updatedTitle = title.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
-        }
-        else {
-            updatedTitle = EMPTY;
-        }
+        String updatedTitle = normalizeHyphen(title);
+        String updatedSummaryOn = normalizeHyphen(summaryOn);
+        String updatedSummaryOff = normalizeHyphen(summaryOff);
 
-        String updatedSummaryOn;
-        if (summaryOn != null) {
-            updatedSummaryOn = summaryOn.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
-        } else {
-            updatedSummaryOn = EMPTY;
-        }
-
-        String updatedSummaryOff;
-        if (summaryOff != null) {
-            updatedSummaryOff = summaryOff.replaceAll(NON_BREAKING_HYPHEN, HYPHEN);
-        } else {
-            updatedSummaryOff = EMPTY;
-        }
-
-        String normalizedTitle = updatedTitle.replaceAll(HYPHEN, EMPTY);
-        String normalizedSummaryOn = updatedSummaryOn.replaceAll(HYPHEN, EMPTY);
-        String normalizedSummaryOff = updatedSummaryOff.replaceAll(HYPHEN, EMPTY);
+        String normalizedTitle = normalizeString(updatedTitle);
+        String normalizedSummaryOn = normalizeString(updatedSummaryOn);
+        String normalizedSummaryOff = normalizeString(updatedSummaryOff);
 
         updateOneRow(database, locale,
                 updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
                 updatedSummaryOff, normalizedSummaryOff, entries,
                 className, screenTitle, iconResId,
                 rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled, key);
+    }
+
+    private static String normalizeHyphen(String input) {
+        return (input != null) ? input.replaceAll(NON_BREAKING_HYPHEN, HYPHEN) : EMPTY;
+    }
+
+    private static String normalizeString(String input) {
+        return (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
     }
 
     private void updateOneRow(SQLiteDatabase database, String locale,
