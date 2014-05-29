@@ -409,6 +409,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
                     final TextView status = (TextView) findViewById(R.id.owner_info);
                     status.setText(owner_info);
+                    status.setSelected(true);
                     passwordEntryInit();
                 }
             }.execute();
