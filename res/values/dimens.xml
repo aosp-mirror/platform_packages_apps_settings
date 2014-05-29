@@ -94,8 +94,11 @@
     <dimen name="dashboard_category_title_height">48dp</dimen>
 
     <!-- SwitchBar padding start -->
-    <dimen name="switchbar_padding_start">72dp</dimen>
-    <!-- SwitchBar padding emd -->
-    <dimen name="switchbar_padding_end">@*android:dimen/preference_fragment_padding_side</dimen>
+    <dimen name="switchbar_padding_start">84dp</dimen>
+    <!-- SwitchBar padding end. Should be 2 x @*android:dimen/preference_fragment_padding_side -->
+    <dimen name="switchbar_padding_end">32dp</dimen>
+
+    <!-- ActionBar contentInsetStart -->
+    <dimen name="actionbar_contentInsetStart">84dp</dimen>
 
 </resources>

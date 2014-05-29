@@ -89,6 +89,12 @@
         <!-- Used by the StatusBar and NavBar -->
         <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
         <item name="android:colorAccent">@color/quantum_orange_A200</item>
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+    </style>
+
+    <style name="Theme.ActionBar" parent="@android:style/Widget.Quantum.Light.ActionBar.Solid">
+        <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
 </resources>
