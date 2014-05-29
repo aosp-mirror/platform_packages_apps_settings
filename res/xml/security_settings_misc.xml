@@ -47,12 +47,6 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
-        <Preference android:key="manage_trust_agents"
-                    android:title="@string/manage_trust_agents"
-                    android:summary="@string/manage_trust_agents_summary"
-                    android:persistent="false"
-                    android:fragment="com.android.settings.TrustAgentSettings"/>
-
         <CheckBoxPreference android:key="toggle_install_applications"
                 android:title="@string/install_applications"
                 android:summaryOff="@string/install_unknown_applications"
@@ -64,7 +58,6 @@
                 android:summaryOff="@string/verify_applications_summary"
                 android:summaryOn="@string/verify_applications_summary"
                 android:persistent="false" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:key="credentials_management"
@@ -98,5 +91,15 @@
                     android:targetPackage="com.android.settings"
                     android:targetClass="com.android.settings.CredentialStorage"/>
         </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="advanced_security"
+            android:title="@string/advanced_security_title"
+            android:persistent="false">
+        <Preference android:key="manage_trust_agents"
+                android:title="@string/manage_trust_agents"
+                android:summary="@string/manage_trust_agents_summary"
+                android:persistent="false"
+                android:fragment="com.android.settings.AdvancedSecuritySettings"/>
     </PreferenceCategory>
 </PreferenceScreen>
