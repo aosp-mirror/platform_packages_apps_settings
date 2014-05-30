@@ -279,15 +279,17 @@ public class Index {
 
     private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
         try {
+            final int baseRank = Ranking.getBaseRankForAuthority(authority);
+
             final Context packageContext = mContext.createPackageContext(packageName, 0);
 
             final Uri uriForResources = buildUriForXmlResources(authority);
             addIndexablesForXmlResourceUri(packageContext, packageName, uriForResources,
-                    SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS);
+                    SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS, baseRank);
 
             final Uri uriForRawData = buildUriForRawData(authority);
             addIndexablesForRawDataUri(packageContext, packageName, uriForRawData,
-                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS);
+                    SearchIndexablesContract.INDEXABLES_RAW_COLUMNS, baseRank);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(LOG_TAG, "Could not create context for " + packageName + ": "
@@ -496,7 +498,7 @@ public class Index {
     }
 
     private void addIndexablesForXmlResourceUri(Context packageContext, String packageName,
-            Uri uri, String[] projection) {
+                                                Uri uri, String[] projection, int baseRank) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
         final Cursor cursor = resolver.query(uri, projection, null, null, null);
@@ -510,7 +512,9 @@ public class Index {
             final int count = cursor.getCount();
             if (count > 0) {
                 while (cursor.moveToNext()) {
-                    final int rank = cursor.getInt(COLUMN_INDEX_XML_RES_RANK);
+                    final int providerRank = cursor.getInt(COLUMN_INDEX_XML_RES_RANK);
+                    final int rank = (providerRank > 0) ? baseRank + providerRank : baseRank;
+
                     final int xmlResId = cursor.getInt(COLUMN_INDEX_XML_RES_RESID);
 
                     final String className = cursor.getString(COLUMN_INDEX_XML_RES_CLASS_NAME);
@@ -541,7 +545,7 @@ public class Index {
     }
 
     private void addIndexablesForRawDataUri(Context packageContext, String packageName,
-            Uri uri, String[] projection) {
+                                            Uri uri, String[] projection, int baseRank) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
         final Cursor cursor = resolver.query(uri, projection, null, null, null);
@@ -555,7 +559,9 @@ public class Index {
             final int count = cursor.getCount();
             if (count > 0) {
                 while (cursor.moveToNext()) {
-                    final int rank = cursor.getInt(COLUMN_INDEX_RAW_RANK);
+                    final int providerRank = cursor.getInt(COLUMN_INDEX_RAW_RANK);
+                    final int rank = (providerRank > 0) ? baseRank + providerRank : baseRank;
+
                     final String title = cursor.getString(COLUMN_INDEX_RAW_TITLE);
                     final String summaryOn = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_ON);
                     final String summaryOff = cursor.getString(COLUMN_INDEX_RAW_SUMMARY_OFF);
