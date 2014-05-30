@@ -233,34 +233,25 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
             mLocalePreference.setEnabled(false);
             return;
         }
-        String currentLocale = "";
+        Locale currentLocale = null;
         if (!mEnginesHelper.isLocaleSetToDefaultForEngine(getEngineName())) {
             currentLocale = mEnginesHelper.getLocalePrefForEngine(getEngineName());
         }
 
-        ArrayList<Pair<String, String>> entryPairs =
-                new ArrayList<Pair<String, String>>(availableLangs.size());
+        ArrayList<Pair<String, Locale>> entryPairs =
+                new ArrayList<Pair<String, Locale>>(availableLangs.size());
         for (int i = 0; i < availableLangs.size(); i++) {
-            String[] langCountryVariant = availableLangs.get(i).split("-");
-            Locale loc = null;
-            if (langCountryVariant.length == 1){
-                loc = new Locale(langCountryVariant[0]);
-            } else if (langCountryVariant.length == 2){
-                loc = new Locale(langCountryVariant[0], langCountryVariant[1]);
-            } else if (langCountryVariant.length == 3){
-                loc = new Locale(langCountryVariant[0], langCountryVariant[1],
-                                 langCountryVariant[2]);
-            }
-            if (loc != null){
-                entryPairs.add(new Pair<String, String>(
-                        loc.getDisplayName(), availableLangs.get(i)));
+            Locale locale = mEnginesHelper.parseLocaleString(availableLangs.get(i));
+            if (locale != null){
+                entryPairs.add(new Pair<String, Locale>(
+                        locale.getDisplayName(), locale));
             }
         }
 
         // Sort it
-        Collections.sort(entryPairs, new Comparator<Pair<String, String>>() {
+        Collections.sort(entryPairs, new Comparator<Pair<String, Locale>>() {
             @Override
-            public int compare(Pair<String, String> lhs, Pair<String, String> rhs) {
+            public int compare(Pair<String, Locale> lhs, Pair<String, Locale> rhs) {
                 return lhs.first.compareToIgnoreCase(rhs.first);
             }
         });
@@ -274,12 +265,12 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         entryValues[0] = "";
 
         int i = 1;
-        for (Pair<String, String> entry : entryPairs) {
-            if (entry.second.equalsIgnoreCase(currentLocale)) {
+        for (Pair<String, Locale> entry : entryPairs) {
+            if (entry.second.equals(currentLocale)) {
                 mSelectedLocaleIndex = i;
             }
             entries[i] = entry.first;
-            entryValues[i++] = entry.second;
+            entryValues[i++] = entry.second.toString();
         }
 
         mLocalePreference.setEntries(entries);
@@ -332,16 +323,19 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mLocalePreference) {
-            updateLanguageTo((String) newValue);
+            String localeString = (String) newValue;
+            updateLanguageTo((!TextUtils.isEmpty(localeString) ?
+                    mEnginesHelper.parseLocaleString(localeString) : null));
             return true;
         }
         return false;
     }
 
-    private void updateLanguageTo(String locale) {
+    private void updateLanguageTo(Locale locale) {
         int selectedLocaleIndex = -1;
+        String localeString = (locale != null) ? locale.toString() : "";
         for (int i=0; i < mLocalePreference.getEntryValues().length; i++) {
-            if (locale.equalsIgnoreCase(mLocalePreference.getEntryValues()[i].toString())) {
+            if (localeString.equalsIgnoreCase(mLocalePreference.getEntryValues()[i].toString())) {
                 selectedLocaleIndex = i;
                 break;
             }
@@ -357,15 +351,8 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         mEnginesHelper.updateLocalePrefForEngine(getEngineName(), locale);
 
         if (getEngineName().equals(mTts.getCurrentEngine())) {
-            if (!locale.isEmpty()) {
-                String[] localeArray = TtsEngines.parseLocalePref(locale);
-                if (localeArray != null) {
-                    mTts.setLanguage(new Locale(localeArray[0], localeArray[1], localeArray[2]));
-                }
-            } else {
-                // Empty locale means "use system default"
-                mTts.setLanguage(Locale.getDefault());
-            }
+            // Null locale means "use system default"
+            mTts.setLanguage((locale != null) ? locale : Locale.getDefault());
         }
     }
 
