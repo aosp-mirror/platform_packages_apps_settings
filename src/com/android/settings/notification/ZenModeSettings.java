@@ -281,7 +281,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mEnd = new TimePickerPreference(mContext, mgr);
         mEnd.setKey(KEY_END_TIME);
         mEnd.setTitle(R.string.zen_mode_end_time);
-        mEnd.setSummaryFormat(R.string.zen_mode_end_time_summary_format);
         mEnd.setCallback(new TimePickerPreference.Callback() {
             @Override
             public boolean onSetTime(int hour, int minute) {
@@ -326,6 +325,13 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         updateControls();
     }
 
+    private void updateEndSummary() {
+        final int startMin = 60 * mConfig.sleepStartHour + mConfig.sleepStartMinute;
+        final int endMin = 60 * mConfig.sleepEndHour + mConfig.sleepEndMinute;
+        final boolean nextDay = startMin >= endMin;
+        mEnd.setSummaryFormat(nextDay ? R.string.zen_mode_end_time_summary_format : 0);
+    }
+
     private void updateControls() {
         mDisableListeners = true;
         if (mCalls != null) {
@@ -338,6 +344,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
         mDisableListeners = false;
         refreshAutomationSection();
+        updateEndSummary();
     }
 
     private void refreshAutomationSection() {
@@ -440,6 +447,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             if (success) {
                 mConfig = config;
                 if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
+                updateEndSummary();
             }
             return success;
         } catch (Exception e) {
