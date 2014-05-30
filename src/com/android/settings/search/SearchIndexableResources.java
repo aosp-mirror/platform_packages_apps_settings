@@ -219,7 +219,7 @@ public final class SearchIndexableResources {
         sResMap.put(DeviceInfoSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(DeviceInfoSettings.class.getName()),
-                        R.xml.device_info_settings,
+                        NO_DATA_RES_ID,
                         DeviceInfoSettings.class.getName(),
                         R.drawable.ic_settings_about));
     }

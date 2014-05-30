@@ -498,7 +498,7 @@ public class Index {
     }
 
     private void addIndexablesForXmlResourceUri(Context packageContext, String packageName,
-                                                Uri uri, String[] projection, int baseRank) {
+            Uri uri, String[] projection, int baseRank) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
         final Cursor cursor = resolver.query(uri, projection, null, null, null);
@@ -545,7 +545,7 @@ public class Index {
     }
 
     private void addIndexablesForRawDataUri(Context packageContext, String packageName,
-                                            Uri uri, String[] projection, int baseRank) {
+            Uri uri, String[] projection, int baseRank) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
         final Cursor cursor = resolver.query(uri, projection, null, null, null);
