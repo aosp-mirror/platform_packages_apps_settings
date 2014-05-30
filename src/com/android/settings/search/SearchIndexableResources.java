@@ -176,7 +176,9 @@ public final class SearchIndexableResources {
                         R.drawable.ic_settings_security));
 
         sResMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
-                new SearchIndexableResource(RANK_SECURITY,
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(
+                                ChooseLockGeneric.ChooseLockGenericFragment.class.getName()),
                         R.xml.security_settings_picker,
                         ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
                         R.drawable.ic_settings_security));
