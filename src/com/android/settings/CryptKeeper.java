@@ -58,7 +58,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.widget.LockPatternUtils;
@@ -606,8 +605,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
 
         // Disable the Emergency call button if the device has no voice telephone capability
-        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (!tm.isVoiceCapable()) {
+        if (!getTelephonyManager().isVoiceCapable()) {
             final View emergencyCall = findViewById(R.id.emergencyCallButton);
             if (emergencyCall != null) {
                 Log.d(TAG, "Removing the emergency Call button");
@@ -761,7 +759,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      */
     private final void setAirplaneModeIfNecessary() {
         final boolean isLteDevice =
-                TelephonyManager.getDefault().getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
+                getTelephonyManager().getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
         if (!isLteDevice) {
             Log.d(TAG, "Going into airplane mode.");
             Settings.Global.putInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
@@ -797,7 +795,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return;
         }
 
-        final int newState = TelephonyManager.getDefault().getCallState();
+        final int newState = getTelephonyManager().getCallState();
         int textId;
         if (newState == TelephonyManager.CALL_STATE_OFFHOOK) {
             // Show "return to call" text and show phone icon
@@ -817,29 +815,24 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void takeEmergencyCallAction() {
-        if (TelephonyManager.getDefault().getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) {
-            resumeCall();
+        TelephonyManager telephonyManager = getTelephonyManager();
+        if (telephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) {
+            telephonyManager.showCallScreen();
         } else {
             launchEmergencyDialer();
         }
     }
 
-    private void resumeCall() {
-        final ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-        if (phone != null) {
-            try {
-                phone.showCallScreen();
-            } catch (RemoteException e) {
-                Log.e(TAG, "Error calling ITelephony service: " + e);
-            }
-        }
-    }
 
     private void launchEmergencyDialer() {
         final Intent intent = new Intent(ACTION_EMERGENCY_DIAL);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         startActivity(intent);
+    }
+
+    private TelephonyManager getTelephonyManager() {
+        return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     /**
