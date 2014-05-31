@@ -14,7 +14,9 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/lock_settings_picker_title"
+        android:key="lock_settings_picker">
 
     <PreferenceScreen
             android:key="unlock_set_off"

@@ -16,6 +16,7 @@
 
 package com.android.settings.search;
 
+import com.android.settings.ChooseLockGeneric;
 import com.android.settings.DataUsageSummary;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
@@ -108,6 +109,7 @@ public final class Ranking {
         sRankMap.put(LocationSettings.class.getName(), RANK_LOCATION);
 
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);
+        sRankMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(), RANK_SECURITY);
 
         sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);
 
