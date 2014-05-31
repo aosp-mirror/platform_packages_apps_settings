@@ -43,6 +43,12 @@
         <attr name="android:shadowRadius" />
         <!-- Text color, typeface, size, and style of header. -->
         <attr name="headerAppearance" format="reference" />
+        <!-- Primary color of chart. -->
+        <attr name="barPrimaryColor" format="color|reference" />
+        <!-- Color of predicted future use part of chart. -->
+        <attr name="barPredictionColor" format="color|reference" />
+        <!-- Minimum height of the chart itself. -->
+        <attr name="chartMinHeight" format="dimension|reference" />
     </declare-styleable>
 
     <declare-styleable name="PercentageBarChart">

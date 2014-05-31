@@ -45,16 +45,16 @@
 
     <TextView
         android:id="@android:id/text1"
-        android:layout_marginStart="8dip"
+        android:layout_marginStart="6dip"
         android:layout_marginTop="2dip"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ProgressBar
         android:id="@android:id/progress"
-        android:layout_height="12dip"
+        android:layout_height="8dip"
         android:layout_columnSpan="2"
         android:layout_gravity="fill_horizontal|top"
-        android:layout_marginTop="4dip"
+        android:layout_marginTop="8dip"
         android:max="100"
         android:progressDrawable="@drawable/data_usage_bar"
         style="?android:attr/progressBarStyleHorizontal" />
@@ -64,7 +64,7 @@
         android:layout_width="0dip"
         android:layout_gravity="fill_horizontal|top"
         android:layout_columnSpan="2"
-        android:layout_marginTop="4dip"
+        android:layout_marginTop="6dip"
         android:visibility="gone"
         android:maxLines="2"
         android:textAppearance="?android:attr/textAppearanceSmall" />
