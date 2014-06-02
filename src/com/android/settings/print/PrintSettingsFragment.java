@@ -154,7 +154,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                 Settings.Secure.PRINT_SERVICE_SEARCH_URI);
         if (!TextUtils.isEmpty(searchUri)) {
             MenuItem menuItem = menu.add(R.string.print_menu_item_add_service);
-            menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
             menuItem.setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(searchUri)));
         }
     }
