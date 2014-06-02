@@ -1513,7 +1513,8 @@
                   android:excludeFromRecents="true"
                   android:theme="@android:style/Theme.Quantum.Light.NoActionBar"
                   android:configChanges="keyboard|keyboardHidden|uiMode"
-                  android:windowSoftInputMode="adjustResize">
+                  android:windowSoftInputMode="adjustResize"
+                  android:screenOrientation="nosensor">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
