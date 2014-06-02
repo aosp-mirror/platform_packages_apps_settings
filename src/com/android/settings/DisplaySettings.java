@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
@@ -36,13 +39,15 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, OnPreferenceClickListener {
+        Preference.OnPreferenceChangeListener, OnPreferenceClickListener, Indexable {
     private static final String TAG = "DisplaySettings";
 
     /** If there is no setting in the provider, use this. */
@@ -90,14 +95,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
 
-        boolean automaticBrightnessAvailable = getResources().getBoolean(
-                com.android.internal.R.bool.config_automatic_brightness_available);
-        if (automaticBrightnessAvailable) {
+        if (isAutomaticBrightnessAvailable(getResources())) {
             mAutoBrightnessPreference = (CheckBoxPreference) findPreference(KEY_AUTO_BRIGHTNESS);
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_AUTO_BRIGHTNESS);
         }
+    }
+
+    private static boolean isAutomaticBrightnessAvailable(Resources res) {
+        return res.getBoolean(com.android.internal.R.bool.config_automatic_brightness_available);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -286,4 +293,28 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return false;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result = new ArrayList<>(1);
+
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.display_settings;
+                    result.add(sir);
+
+                    return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    ArrayList<String> nonIndexableKeys = new ArrayList<>(1);
+                    if (!isAutomaticBrightnessAvailable(context.getResources())) {
+                        nonIndexableKeys.add(KEY_AUTO_BRIGHTNESS);
+                    }
+                    return nonIndexableKeys;
+                }
+            };
 }
