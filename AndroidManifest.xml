@@ -169,6 +169,7 @@
         </activity>
 
         <activity android:name=".wifi.WifiSetupActivity"
+                android:taskAffinity="com.android.wizard"
                 android:theme="@style/SetupWizardWifiTheme"
                 android:label="@string/wifi_setup_wizard_title"
                 android:icon="@drawable/empty_icon"
