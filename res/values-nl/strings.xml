@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Tijd scherm AAN:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Onbekend"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Opladen"</string>
-    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
-    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
-    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(draadloos)"</string>
+    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Opladen via netvoeding"</string>
+    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Opladen via USB"</string>
+    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Draadloos opladen"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Wordt niet opgeladen"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Wordt niet opgeladen"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Volledig"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Het poortveld moet leeg zijn als het hostveld leeg is."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"De poort die u heeft ingevoerd, is ongeldig."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"De HTTP-proxy wordt gebruikt door de browser, maar mag niet worden gebruikt door de andere apps."</string>
-    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
+    <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Locatie:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Naburige CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Celinfo:"</string>
@@ -276,7 +276,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Instellingen"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Snelkoppeling voor instellingen"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Vliegmodus"</string>
-    <string name="radio_controls_title" msgid="6889937359495515769">"Meer…"</string>
+    <string name="radio_controls_title" msgid="5364843879587669966">"NFC en meer"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Draadloos en netwerken"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Wifi, Bluetooth, vliegmodus, mobiele netwerken en VPN\'s beheren"</string>
     <string name="roaming" msgid="3596055926335478572">"Gegevensroaming"</string>
@@ -317,7 +317,6 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Eigenaarsgegevens"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Widgets inschakelen"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Uitgeschakeld door beheerder"</string>
-    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC-ontgrendeling"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Typ tekst voor weergave op vergrendeld scherm"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Gebruikersgegevens weergeven op vergrendeld scherm"</string>
@@ -570,8 +569,7 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Verbinding maken met netwerk"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Netwerk vergeten"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Netwerk aanpassen"</string>
-    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
-    <skip />
+    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Schrijven naar NFC-tag"</string>
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Schakel wifi in om beschikbare netwerken te zien."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Wifi-netwerken zoeken…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"U heeft geen toestemming om het wifi-netwerk te wijzigen."</string>
@@ -620,8 +618,7 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS beschikbaar)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Beveiligd met <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", beveiligd met <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
-    <skip />
+    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Geef uw netwerkwachtwoord op"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Geen"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Om de locatieprecisie te verbeteren en voor andere doeleinden, wil <xliff:g id="APP_NAME">%1$s</xliff:g> de netwerkscan inschakelen, zelfs als wifi is uitgeschakeld.\n\nDit toestaan voor alle apps die willen scannen?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Toestaan"</string>
@@ -738,13 +735,10 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Stand automatisch wijzigen als tablet wordt gedraaid"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
-    <!-- no translation found for brightness (8480105032417444275) -->
-    <skip />
+    <string name="brightness" msgid="8480105032417444275">"Helderheidsniveau"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
-    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
-    <skip />
-    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
-    <skip />
+    <string name="auto_brightness_title" msgid="6341042882350279391">"Aanpasbare helderheid"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Helderheidsniveau optimaliseren voor beschikbaar licht"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Slaapstand"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inactiviteit"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Achtergrond"</string>
@@ -996,7 +990,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Sms-app wijzigen?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Wilt u <xliff:g id="NEW_APP">%1$s</xliff:g> als uw sms-app gebruiken in plaats van <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Wilt u <xliff:g id="NEW_APP">%s</xliff:g> gebruiken als uw sms-app?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Onbekende simprovider"</string>
+    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Onbekende simkaartprovider"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s heeft geen bekende website voor provisioning"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Plaats een simkaart en start het apparaat opnieuw"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Maak verbinding met internet"</string>
@@ -1328,10 +1322,8 @@
     <string name="enable_adb" msgid="7982306934419797485">"USB-foutopsporing"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Foutopsporingsmodus bij USB-verbinding"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Autorisatie voor USB-foutopsporing intrekken"</string>
-    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
-    <skip />
-    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
-    <skip />
+    <string name="bugreport_in_power" msgid="7923901846375587241">"Snelkoppeling naar foutenrapport"</string>
+    <string name="bugreport_in_power_summary" msgid="3245617665067320992">"Een knop in Snelle instellingen weergeven om een foutenrapport te maken"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Stand-by"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Scherm gaat nooit uit tijdens het opladen"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Snoop-logbestand voor Bluetooth-HCI inschakelen"</string>
@@ -1340,7 +1332,9 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Runtime selecteren"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Opnieuw opstarten om runtime te wijzigen van <xliff:g id="OLD">%1$s</xliff:g> in <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificering van draadloze weergave"</string>
+    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Uitgebreide wifi-logboekregistratie aan"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Opties weergeven voor certificering van draadloze weergave"</string>
+    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Wifi-logboekregistratieniveau verhogen, weergeven per SSID RSSI in wifi-kiezer"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Neplocaties toestaan"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB-foutopsporing toestaan?"</string>
@@ -1498,6 +1492,11 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Signaal mobiel netwerk"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
+    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
+    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> a.m."</string>
+    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> p.m."</string>
+    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
+    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"Stand-bytijd apparaat"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wifi op tijd"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wifi op tijd"</string>
@@ -1678,6 +1677,7 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Alle certificaten verwijderen"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Vertrouwde id-gegevens"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Vertrouwde CA-certificaten weergeven"</string>
+    <string name="advanced_security_title" msgid="2434776238010578865">"Geavanceerd"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Opslagtype"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Ondersteund door hardware"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Alleen software"</string>
@@ -1761,6 +1761,7 @@
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"Raak "<b>"Volgende"</b>" aan om door te gaan met de configuratie.\n\nRaak "<b>"Terug"</b>" aan om verbinding te maken met een ander wifi-netwerk."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Synchronisatie is ingeschakeld"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Synchroniseren uitgeschakeld"</string>
+    <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Nu synchroniseren"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Synchronisatiefout."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Synchroniseren mislukt"</string>
     <string name="sync_active" msgid="8476943765960863040">"Synchronisatie actief"</string>
@@ -2096,18 +2097,6 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Foto maken"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Foto kiezen in Galerij"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
-    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Instellingen voor NFC-schermvergrendeling"</string>
-    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Gekoppelde tags"</string>
-    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Ingeschakeld"</string>
-    <string name="start_nfc_pairing" msgid="5363319136364735698">"Koppelen aan een tag"</string>
-    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
-    <string name="pairing_button_title" msgid="7411638037556429744">"Nu koppelen"</string>
-    <string name="status_no_ring_detected" msgid="838954925249421062">"Leg de tag vlak op een tafel neer en leg de telefoon erop"</string>
-    <string name="status_device_paired" msgid="4916932520416516526">"Tag en telefoon zijn gekoppeld. U bent klaar."</string>
-    <string name="status_error_invalid_device" msgid="5045003971535647259">"De geleverde tag kan niet worden gebruikt om uw telefoon te ontgrendelen"</string>
-    <string name="status_error_pairing_failed" msgid="8260473909085202868">"De koppeling met uw tag is mislukt, probeer het opnieuw"</string>
-    <string name="enable_nfc" msgid="5234514241098808766">"NFC is niet ingeschakeld en is vereist voor NFC-ontgrendeling. Schakel NFC in."</string>
-    <string name="ok" msgid="3651563352754792958">"NFC-instellingen"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Instellingen"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Instellingen"</string>
     <string name="search_menu" msgid="7053532283559077164">"Zoeken"</string>
@@ -2115,8 +2104,7 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Recente zoekopdrachten"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Resultaten"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi netwerk verbinding"</string>
-    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
-    <skip />
+    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wifi NFC-tag instellen"</string>
     <string name="write_tag" msgid="8571858602896222537">"Schrijven"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tik op een tag om te schrijven..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Ongeldig wachtwoord. Probeer het opnieuw."</string>
@@ -2128,8 +2116,10 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"Mediavolume"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarmvolume"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Beltoonvolume"</string>
+    <string name="notification_volume_option_title" msgid="6064656124416882130">"Meldingsvolume"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Niet storen"</string>
     <string name="ringer_mode_title" msgid="7489457312298627735">"Bij inkomende oproepen en meldingen"</string>
+    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"Bij inkomende meldingen"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"Bellen"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Trillen in plaats van bellen"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"Niet bellen of trillen"</string>
@@ -2146,11 +2136,18 @@
     <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Nieuwe meldingen verbergen in de lijst"</string>
     <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Alle meldingen weergeven in de lijst"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"App-meldingen"</string>
-    <string name="touch_sound_settings" msgid="8861737295513989009">"Aanraakgeluiden"</string>
+    <string name="other_sound_settings" msgid="3151004537006844718">"Andere geluiden"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Toetsenbloktonen"</string>
-    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"Schermvergrendeling en -ontgrendeling"</string>
-    <string name="other_touch_sounds_title" msgid="1692523628776677916">"Andere aanraakgeluiden"</string>
+    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Geluid v. schermvergrendeling"</string>
+    <string name="docking_sounds_title" msgid="155236288949940607">"Dockinggeluiden"</string>
+    <string name="touch_sounds_title" msgid="5326587106892390176">"Aanraakgeluiden"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"Trillen bij aanraking"</string>
+    <string name="dock_audio_media_title" msgid="1346838179626123900">"Afspelen op dockluidspreker"</string>
+    <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Alle audio"</string>
+    <string name="dock_audio_media_enabled" msgid="667849382924908673">"Alleen media-audio"</string>
+    <string name="emergency_tone_silent" msgid="1067515631635824291">"Stil"</string>
+    <string name="emergency_tone_alert" msgid="8941852695428130667">"Waarschuwing"</string>
+    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Trillen"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Toegang tot meldingen"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps kunnen geen meldingen lezen"</string>
   <plurals name="manage_notification_access_summary_nonzero">
@@ -2201,8 +2198,6 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App-meldingen"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Instellingen voor meldingen"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Feedback sturen over dit apparaat"</string>
-    <!-- no translation found for switch_on_text (1124106706920572386) -->
-    <skip />
-    <!-- no translation found for switch_off_text (1139356348100829659) -->
-    <skip />
+    <string name="switch_on_text" msgid="1124106706920572386">"Aan"</string>
+    <string name="switch_off_text" msgid="1139356348100829659">"Uit"</string>
 </resources>
