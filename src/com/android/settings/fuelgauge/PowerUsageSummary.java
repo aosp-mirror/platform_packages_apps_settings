@@ -64,6 +64,7 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private UserManager mUm;
 
+    private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mAppListGroup;
     private String mBatteryLevel;
     private String mBatteryStatus;
@@ -210,6 +211,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     private void addNotAvailableMessage() {
         Preference notAvailable = new Preference(getActivity());
         notAvailable.setTitle(R.string.power_usage_not_available);
+        mHistPref.setHideLabels(true);
         mAppListGroup.addPreference(notAvailable);
     }
 
@@ -233,16 +235,17 @@ public class PowerUsageSummary extends PreferenceFragment {
 
         mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
 
-        BatteryHistoryPreference hist = new BatteryHistoryPreference(
+        mHistPref = new BatteryHistoryPreference(
                 getActivity(), mStatsHelper.getStats(), mStatsHelper.getBatteryBroadcast());
-        hist.setOrder(-1);
-        mAppListGroup.addPreference(hist);
+        mHistPref.setOrder(-1);
+        mAppListGroup.addPreference(mHistPref);
 
         if (mStatsHelper.getPowerProfile().getAveragePower(
                 PowerProfile.POWER_SCREEN_FULL) < 10) {
             addNotAvailableMessage();
             return;
         }
+        boolean addedSome = false;
         final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(mStatsType);
         List<BatterySipper> usageList = mStatsHelper.getUsageList();
         for (int i=0; i<usageList.size(); i++) {
@@ -263,8 +266,12 @@ public class PowerUsageSummary extends PreferenceFragment {
             if (sipper.uidObj != null) {
                 pref.setKey(Integer.toString(sipper.uidObj.getUid()));
             }
+            addedSome = true;
             mAppListGroup.addPreference(pref);
             if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
+        }
+        if (!addedSome) {
+            addNotAvailableMessage();
         }
 
         BatteryEntry.startRequestQueue();
