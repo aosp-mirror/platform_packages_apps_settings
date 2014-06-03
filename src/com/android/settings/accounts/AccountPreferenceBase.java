@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.android.settings.SettingsPreferenceFragment;
+
 import com.google.android.collect.Maps;
 
 import android.accounts.Account;
@@ -35,12 +36,14 @@ import android.content.SyncAdapterType;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 
 class AccountPreferenceBase extends SettingsPreferenceFragment
         implements OnAccountsUpdateListener {
@@ -147,8 +150,19 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
             try {
                 desc = mAuthenticatorHelper.getAccountTypeDescription(accountType);
                 if (desc != null && desc.accountPreferencesId != 0) {
-                    Context authContext = getActivity().createPackageContext(desc.packageName, 0);
-                    prefs = getPreferenceManager().inflateFromResource(authContext,
+                    // Load the context of the target package, then apply the
+                    // base Settings theme (no references to local resources)
+                    // and create a context theme wrapper so that we get the
+                    // correct text colors. Control colors will still be wrong,
+                    // but there's not much we can do about it since we can't
+                    // reference local color resources.
+                    final Context targetCtx = getActivity().createPackageContext(
+                            desc.packageName, 0);
+                    final Theme baseTheme = getResources().newTheme();
+                    baseTheme.applyStyle(com.android.settings.R.style.Theme_SettingsBase, true);
+                    final Context themedCtx = new ContextThemeWrapper(targetCtx, 0);
+                    themedCtx.getTheme().setTo(baseTheme);
+                    prefs = getPreferenceManager().inflateFromResource(themedCtx,
                             desc.accountPreferencesId, parent);
                 }
             } catch (PackageManager.NameNotFoundException e) {

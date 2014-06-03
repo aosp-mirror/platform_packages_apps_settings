@@ -71,7 +71,10 @@
         <item name="android:colorAccent">@color/quantum_orange_A200</item>
     </style>
 
-    <style name="Theme.Settings" parent="@android:style/Theme.Quantum.Light.DarkActionBar">
+    <!-- Theme with no local references, used by AccountPreferenceBase. -->
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.Quantum.Light.DarkActionBar" />
+
+    <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
         <item name="@*android:preferenceListStyle">@style/PreferenceHeaderListSinglePane</item>
