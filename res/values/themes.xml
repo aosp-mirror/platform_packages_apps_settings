@@ -75,15 +75,12 @@
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
 
         <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <!-- Used by the bouncing effect for ListView and ScrollView -->
-        <item name="android:colorPrimaryLight">@color/actionbar_background_color</item>
         <!-- Used by the StatusBar and NavBar -->
         <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
-        <item name="android:colorAccent">@color/quantum_orange_A200</item>
+        <!-- Redefine control activited color for progress bars and the like -->
+        <item name="android:colorAccent">@color/quantum_accent_color_light</item>
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
-        <!-- Redefine control activited color for progress bars and the like -->
-        <item name="android:colorControlActivated">@color/quantum_accent_color_light</item>
     </style>
 
     <style name="Theme.ActionBar" parent="@android:style/Widget.Quantum.Light.ActionBar.Solid">
@@ -92,15 +89,12 @@
 
     <style name="Theme.DialogWhenLarge" parent="android:style/Theme.Quantum.Light.DialogWhenLarge">
         <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <!-- Used by the bouncing effect for ListView and ScrollView -->
-        <item name="android:colorPrimaryLight">@color/actionbar_background_color</item>
         <!-- Used by the StatusBar and NavBar -->
         <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
-        <item name="android:colorAccent">@color/quantum_orange_A200</item>
+        <!-- Redefine control activited color for progress bars and the like -->
+        <item name="android:colorAccent">@color/quantum_accent_color_light</item>
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
-        <!-- Redefine control activited color for progress bars and the like -->
-        <item name="android:colorControlActivated">@color/quantum_accent_color_light</item>
     </style>
 
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
