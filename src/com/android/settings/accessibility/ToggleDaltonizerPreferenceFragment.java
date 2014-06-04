@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.provider.Settings;
@@ -32,11 +31,8 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         implements Preference.OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener {
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
-    private static final String QUICK_SETTING_ENABLED =
-            Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_QUICK_SETTING_ENABLED;
     private static final int DEFAULT_TYPE = AccessibilityManager.DALTONIZER_CORRECT_DEUTERANOMALY;
 
-    private CheckBoxPreference mEnableQuickSetting;
     private ListPreference mType;
 
     @Override
@@ -45,7 +41,6 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
         addPreferencesFromResource(R.xml.accessibility_daltonizer_settings);
 
-        mEnableQuickSetting = (CheckBoxPreference) findPreference("enable_quick_setting");
         mType = (ListPreference) findPreference("type");
 
         initPreferences();
@@ -58,10 +53,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mEnableQuickSetting) {
-            Settings.Secure.putInt(
-                    getContentResolver(), QUICK_SETTING_ENABLED, ((Boolean) newValue) ? 1 : 0);
-        } else if (preference == mType) {
+        if (preference == mType) {
             Settings.Secure.putInt(getContentResolver(), TYPE, Integer.parseInt((String) newValue));
             preference.setSummary("%s");
         }
@@ -92,10 +84,6 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     private void initPreferences() {
-        mEnableQuickSetting.setChecked(
-                Settings.Secure.getInt(getContentResolver(), QUICK_SETTING_ENABLED, 0) == 1);
-        mEnableQuickSetting.setOnPreferenceChangeListener(this);
-
         final String value = Integer.toString(
                 Settings.Secure.getInt(getContentResolver(), TYPE, DEFAULT_TYPE));
         mType.setValue(value);

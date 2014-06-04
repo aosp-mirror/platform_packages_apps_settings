@@ -17,11 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/accessibility_display_daltonizer_preference_title" >
 
-    <CheckBoxPreference
-        android:key="enable_quick_setting"
-        android:persistent="false"
-        android:title="@string/enable_quick_setting" />
-
     <ListPreference
         android:entries="@array/daltonizer_type_entries"
         android:entryValues="@array/daltonizer_type_values"
