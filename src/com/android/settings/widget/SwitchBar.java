@@ -20,6 +20,7 @@ import android.content.Context;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -31,7 +32,8 @@ import com.android.settings.R;
 
 import java.util.ArrayList;
 
-public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
+public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener,
+        View.OnClickListener {
 
     private ToggleSwitch mSwitch;
     private TextView mTextView;
@@ -82,6 +84,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mSwitch.setTrackResource(R.drawable.switch_track);
         mSwitch.setThumbResource(R.drawable.switch_inner);
 
+        setOnClickListener(this);
+
         // Default is hide
         setVisibility(View.GONE);
     }
@@ -105,11 +109,21 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onClick(View v) {
+        final boolean isChecked = !mSwitch.isChecked();
+        mSwitch.setChecked(isChecked);
+    }
+
+    public void propagateChecked(boolean isChecked) {
         final int count = mSwitchChangeListeners.size();
         for (int n = 0; n < count; n++) {
-            mSwitchChangeListeners.get(n).onSwitchChanged(mSwitch,isChecked);
+            mSwitchChangeListeners.get(n).onSwitchChanged(mSwitch, isChecked);
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        propagateChecked(isChecked);
     }
 
     public void addOnSwitchChangeListener(OnSwitchChangeListener listener) {
