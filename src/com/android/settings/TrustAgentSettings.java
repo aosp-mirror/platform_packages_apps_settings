@@ -21,6 +21,7 @@ import com.android.internal.widget.LockPatternUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.Manifest;
 import android.app.ListFragment;
 import android.content.ComponentName;
 import android.content.Context;
@@ -36,6 +37,7 @@ import android.service.trust.TrustAgentService;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
 import android.view.LayoutInflater;
@@ -54,6 +56,8 @@ public class TrustAgentSettings extends ListFragment implements View.OnClickList
 
     private static final String SERVICE_INTERFACE = TrustAgentService.SERVICE_INTERFACE;
     private static final String TRUST_AGENT_META_DATA = TrustAgentService.TRUST_AGENT_META_DATA;
+
+    private static final String PERMISSION_PROVIDE_AGENT = Manifest.permission.PROVIDE_TRUST_AGENT;
 
 
     private final ArraySet<ComponentName> mActiveAgents = new ArraySet<ComponentName>();
@@ -121,6 +125,15 @@ public class TrustAgentSettings extends ListFragment implements View.OnClickList
 
         for (ResolveInfo resolveInfo : resolveInfos) {
             if (resolveInfo.serviceInfo == null) continue;
+
+            String packageName = resolveInfo.serviceInfo.packageName;
+            if (pm.checkPermission(PERMISSION_PROVIDE_AGENT, packageName)
+                    != PackageManager.PERMISSION_GRANTED) {
+                Log.w(TAG, "Skipping agent because package " + packageName
+                        + " does not have permission " + PERMISSION_PROVIDE_AGENT + ".");
+                continue;
+            }
+
             ComponentName name = getComponentName(resolveInfo);
             if (!mAvailableAgents.containsKey(name)) {
                 AgentInfo agentInfo = new AgentInfo();
