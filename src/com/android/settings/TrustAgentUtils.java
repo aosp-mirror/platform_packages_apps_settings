@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import com.android.internal.Manifest;
+
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -24,6 +26,7 @@ import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.service.trust.TrustAgentService;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
 
@@ -36,6 +39,21 @@ public class TrustAgentUtils {
     static final String TAG = "TrustAgentUtils";
 
     private static final String TRUST_AGENT_META_DATA = TrustAgentService.TRUST_AGENT_META_DATA;
+    private static final String PERMISSION_PROVIDE_AGENT = Manifest.permission.PROVIDE_TRUST_AGENT;
+
+    /**
+     * @return true, if the service in resolveInfo has the permission to provide a trust agent.
+     */
+    public static boolean checkProvidePermission(ResolveInfo resolveInfo, PackageManager pm) {
+        String packageName = resolveInfo.serviceInfo.packageName;
+        if (pm.checkPermission(PERMISSION_PROVIDE_AGENT, packageName)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.w(TAG, "Skipping agent because package " + packageName
+                    + " does not have permission " + PERMISSION_PROVIDE_AGENT + ".");
+            return false;
+        }
+        return true;
+    }
 
     public static class TrustAgentComponentInfo {
         ComponentName componentName;
