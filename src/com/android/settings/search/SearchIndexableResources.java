@@ -101,7 +101,7 @@ public final class SearchIndexableResources {
         sResMap.put(DisplaySettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(DisplaySettings.class.getName()),
-                        R.xml.display_settings,
+                        NO_DATA_RES_ID,
                         DisplaySettings.class.getName(),
                         R.drawable.ic_settings_display));
 
