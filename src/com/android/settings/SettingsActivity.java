@@ -127,7 +127,8 @@ public class SettingsActivity extends Activity
         PreferenceFragment.OnPreferenceStartFragmentCallback,
         ButtonBarHandler, OnAccountsUpdateListener, FragmentManager.OnBackStackChangedListener,
         SearchView.OnQueryTextListener, SearchView.OnCloseListener,
-        MenuItem.OnActionExpandListener {
+        MenuItem.OnActionExpandListener,
+        AuthenticatorHelper.OnAccountsUpdateListener {
 
     private static final String LOG_TAG = "Settings";
 
@@ -466,10 +467,13 @@ public class SettingsActivity extends Activity
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-
-        mAuthenticatorHelper = new AuthenticatorHelper();
+        // TODO: Delete accounts tile once we have the new screen working
+        // See: http://b/15815948
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+        mAuthenticatorHelper = new AuthenticatorHelper(
+                this, UserHandle.getCallingUserHandle(), um, this);
         mAuthenticatorHelper.updateAuthDescriptions(this);
-        mAuthenticatorHelper.onAccountsUpdated(this, null);
+        mAuthenticatorHelper.onAccountsUpdated(null);
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -1263,7 +1267,11 @@ public class SettingsActivity extends Activity
     public void onAccountsUpdated(Account[] accounts) {
         // TODO: watch for package upgrades to invalidate cache; see 7206643
         mAuthenticatorHelper.updateAuthDescriptions(this);
-        mAuthenticatorHelper.onAccountsUpdated(this, accounts);
+        invalidateCategories();
+    }
+
+    @Override
+    public void onAccountsUpdate(UserHandle userHandle) {
         invalidateCategories();
     }
 

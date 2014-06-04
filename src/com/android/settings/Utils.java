@@ -56,12 +56,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
+
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -578,5 +580,32 @@ public final class Utils {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, isShortcut);
         return intent;
+    }
+
+    /**
+     * Returns the managed profile of the current user or null if none found.
+     */
+    public static UserHandle getManagedProfile(UserManager userManager) {
+        List<UserHandle> userProfiles = userManager.getUserProfiles();
+        final int count = userProfiles.size();
+        for (int i = 0; i < count; i++) {
+            final UserHandle profile = userProfiles.get(i);
+            if (profile.getIdentifier() == userManager.getUserHandle()) {
+                continue;
+            }
+            final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
+            if (userInfo.isManagedProfile()) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns true if the current profile is a managed one.
+     */
+    public static boolean isManagedProfile(UserManager userManager) {
+        UserInfo currentUser = userManager.getUserInfo(userManager.getUserHandle());
+        return currentUser.isManagedProfile();
     }
 }

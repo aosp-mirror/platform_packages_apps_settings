@@ -16,13 +16,15 @@
 
 package com.android.settings.accounts;
 
+import com.google.android.collect.Lists;
+import com.google.android.collect.Maps;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
@@ -34,6 +36,7 @@ import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -51,8 +54,6 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -193,10 +194,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public void onResume() {
-        final Activity activity = getActivity();
-        AccountManager.get(activity).addOnAccountsUpdatedListener(this, null, false);
+        mAuthenticatorHelper.listenToAccountUpdates();
         updateAuthDescriptions();
-        onAccountsUpdated(AccountManager.get(activity).getAccounts());
+        onAccountsUpdate(UserHandle.getCallingUserHandle());
 
         super.onResume();
     }
@@ -204,7 +204,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onPause() {
         super.onPause();
-        AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
+        mAuthenticatorHelper.stopListeningToAccountUpdates();
     }
 
     private void addSyncStateCheckBox(Account account, String authority) {
@@ -436,10 +436,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     }
 
     @Override
-    public void onAccountsUpdated(Account[] accounts) {
-        super.onAccountsUpdated(accounts);
-        mAccounts = accounts;
-        updateAccountCheckboxes(accounts);
+    public void onAccountsUpdate(final UserHandle userHandle) {
+        super.onAccountsUpdate(userHandle);
+        mAccounts = AccountManager.get(getActivity()).getAccounts();
+        updateAccountCheckboxes(mAccounts);
         onSyncStateUpdated();
     }
 

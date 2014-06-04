@@ -16,19 +16,9 @@
 
 package com.android.settings.accounts;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.android.settings.SettingsPreferenceFragment;
-
 import com.google.android.collect.Maps;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
-import android.accounts.OnAccountsUpdateListener;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -40,28 +30,47 @@ import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 
+import com.android.settings.SettingsPreferenceFragment;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
 class AccountPreferenceBase extends SettingsPreferenceFragment
-        implements OnAccountsUpdateListener {
+        implements AuthenticatorHelper.OnAccountsUpdateListener {
 
     protected static final String TAG = "AccountSettings";
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";
     private final Handler mHandler = new Handler();
+    private UserManager mUm;
     private Object mStatusChangeListenerHandle;
     private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
-    private AuthenticatorHelper mAuthenticatorHelper = new AuthenticatorHelper();
+    protected AuthenticatorHelper mAuthenticatorHelper;
     private java.text.DateFormat mDateFormat;
     private java.text.DateFormat mTimeFormat;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        // TODO: This needs to handle different users, get the user id from the intent
+        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+        mAuthenticatorHelper = new AuthenticatorHelper(
+                getActivity(), UserHandle.getCallingUserHandle(), mUm, this);
+    }
 
     /**
      * Overload to handle account updates.
      */
-    public void onAccountsUpdated(Account[] accounts) {
+    @Override
+    public void onAccountsUpdate(UserHandle userHandle) {
 
     }
 

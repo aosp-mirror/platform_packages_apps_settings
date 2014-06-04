@@ -19,27 +19,58 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthenticatorHelper {
-
+/**
+ * Helper class for monitoring accounts on the device for a given user.
+ *
+ * Classes using this helper should implement {@link OnAccountsUpdateListener}.
+ * {@link OnAccountsUpdateListener#onAccountsUpdate(UserHandle)} will then be
+ * called once accounts get updated. For setting up listening for account
+ * updates, {@link #listenToAccountUpdates()} and
+ * {@link #stopListeningToAccountUpdates()} should be used.
+ */
+final public class AuthenticatorHelper extends BroadcastReceiver {
     private static final String TAG = "AuthenticatorHelper";
+
     private Map<String, AuthenticatorDescription> mTypeToAuthDescription
             = new HashMap<String, AuthenticatorDescription>();
     private AuthenticatorDescription[] mAuthDescs;
     private ArrayList<String> mEnabledAccountTypes = new ArrayList<String>();
     private Map<String, Drawable> mAccTypeIconCache = new HashMap<String, Drawable>();
 
-    public AuthenticatorHelper() {
+    private final UserHandle mUserHandle;
+    private final UserManager mUm;
+    private final Context mContext;
+    private final OnAccountsUpdateListener mListener;
+    private boolean mListeningToAccountUpdates;
+
+    public interface OnAccountsUpdateListener {
+        void onAccountsUpdate(UserHandle userHandle);
+    }
+
+    public AuthenticatorHelper(Context context, UserHandle userHandle, UserManager userManager,
+            OnAccountsUpdateListener listener) {
+        mContext = context;
+        mUm = userManager;
+        mUserHandle = userHandle;
+        mListener = listener;
+        // This guarantees that the helper is ready to use once constructed
+        onAccountsUpdated(null);
     }
 
     public String[] getEnabledAccountTypes() {
@@ -72,7 +103,8 @@ public class AuthenticatorHelper {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
                 Context authContext = context.createPackageContext(desc.packageName, 0);
-                icon = authContext.getResources().getDrawable(desc.iconId);
+                icon = mUm.getBadgedDrawableForUser(
+                        authContext.getResources().getDrawable(desc.iconId), mUserHandle);
                 synchronized (mAccTypeIconCache) {
                     mAccTypeIconCache.put(accountType, icon);
                 }
@@ -112,22 +144,10 @@ public class AuthenticatorHelper {
      * and update any UI that depends on AuthenticatorDescriptions in onAuthDescriptionsUpdated().
      */
     public void updateAuthDescriptions(Context context) {
-        mAuthDescs = AccountManager.get(context).getAuthenticatorTypes();
+        mAuthDescs = AccountManager.get(context)
+                .getAuthenticatorTypesAsUser(mUserHandle.getIdentifier());
         for (int i = 0; i < mAuthDescs.length; i++) {
             mTypeToAuthDescription.put(mAuthDescs[i].type, mAuthDescs[i]);
-        }
-    }
-
-    public void onAccountsUpdated(Context context, Account[] accounts) {
-        if (accounts == null) {
-            accounts = AccountManager.get(context).getAccounts();
-        }
-        mEnabledAccountTypes.clear();
-        mAccTypeIconCache.clear();
-        for (Account account: accounts) {
-            if (!mEnabledAccountTypes.contains(account.type)) {
-                mEnabledAccountTypes.add(account.type);
-            }
         }
     }
 
@@ -147,5 +167,51 @@ public class AuthenticatorHelper {
             }
         }
         return false;
+    }
+
+    public void onAccountsUpdated(Account[] accounts) {
+        // TODO: Revert to non-public once no longer needed in SettingsActivity
+        // See http://b/15819268
+        updateAuthDescriptions(mContext);
+        if (accounts == null) {
+            accounts = AccountManager.get(mContext).getAccounts();
+        }
+        mEnabledAccountTypes.clear();
+        mAccTypeIconCache.clear();
+        for (int i = 0; i < accounts.length; i++) {
+            final Account account = accounts[i];
+            if (!mEnabledAccountTypes.contains(account.type)) {
+                mEnabledAccountTypes.add(account.type);
+            }
+        }
+        if (mListeningToAccountUpdates) {
+            mListener.onAccountsUpdate(mUserHandle);
+        }
+    }
+
+    @Override
+    public void onReceive(final Context context, final Intent intent) {
+        final Account[] accounts = AccountManager.get(mContext)
+                .getAccountsAsUser(mUserHandle.getIdentifier());
+        onAccountsUpdated(accounts);
+    }
+
+    public void listenToAccountUpdates() {
+        if (!mListeningToAccountUpdates) {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(AccountManager.LOGIN_ACCOUNTS_CHANGED_ACTION);
+            // At disk full, certain actions are blocked (such as writing the accounts to storage).
+            // It is useful to also listen for recovery from disk full to avoid bugs.
+            intentFilter.addAction(Intent.ACTION_DEVICE_STORAGE_OK);
+            mContext.registerReceiverAsUser(this, mUserHandle, intentFilter, null, null);
+            mListeningToAccountUpdates = true;
+        }
+    }
+
+    public void stopListeningToAccountUpdates() {
+        if (mListeningToAccountUpdates) {
+            mContext.unregisterReceiver(this);
+            mListeningToAccountUpdates = false;
+        }
     }
 }

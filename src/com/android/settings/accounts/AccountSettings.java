@@ -19,11 +19,17 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
+import android.util.SparseArray;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
@@ -33,16 +39,17 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * Settings screen for the account types on the device.
  * This shows all account types available for personal and work profiles.
  */
 public class AccountSettings extends SettingsPreferenceFragment
-        implements OnAccountsUpdateListener, OnPreferenceClickListener {
+        implements AuthenticatorHelper.OnAccountsUpdateListener,
+        OnPreferenceClickListener {
     public static final String TAG = "AccountSettings";
 
     private static final String KEY_ACCOUNT = "account";
@@ -51,128 +58,183 @@ public class AccountSettings extends SettingsPreferenceFragment
     private static final String KEY_CATEGORY_PERSONAL = "account_personal";
     private static final String KEY_ADD_ACCOUNT_PERSONAL = "add_account_personal";
     private static final String KEY_CATEGORY_WORK = "account_work";
+    private static final String KEY_ADD_ACCOUNT_WORK = "add_account_work";
 
-    private AuthenticatorHelper mAuthenticatorHelper;
-    private boolean mListeningToAccountUpdates;
-
-    private PreferenceGroup mAccountTypesForUser;
-    private Preference mAddAccountForUser;
+    private static final String ADD_ACCOUNT_ACTION = "android.settings.ADD_ACCOUNT_SETTINGS";
 
     private UserManager mUm;
+    private SparseArray<ProfileData> mProfiles;
+    private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver;
+
+    /**
+     * Holds data related to the accounts belonging to one profile.
+     */
+    private static class ProfileData {
+        /**
+         * The preference that displays the accounts.
+         */
+        public PreferenceGroup preferenceGroup;
+        /**
+         * The preference that displays the add account button.
+         */
+        public Preference addAccountPreference;
+        /**
+         * The user handle of the user that these accounts belong to.
+         */
+        public UserHandle userHandle;
+        /**
+         * The {@link AuthenticatorHelper} that holds accounts data for this profile.
+         */
+        public AuthenticatorHelper authenticatorHelper;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+        mProfiles = new SparseArray<ProfileData>(2);
+        updateUi();
+    }
 
-        mAuthenticatorHelper = new AuthenticatorHelper();
-        mAuthenticatorHelper.updateAuthDescriptions(getActivity());
-        mAuthenticatorHelper.onAccountsUpdated(getActivity(), null);
-
+    void updateUi() {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.account_settings);
 
         if(mUm.isLinkedUser()) {
             // Restricted user or similar
-            // TODO: Do we disallow modifying accounts for restricted profiles?
-            mAccountTypesForUser = (PreferenceGroup) findPreference(KEY_ACCOUNT);
-            if (mUm.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
-                removePreference(KEY_ADD_ACCOUNT);
-            } else {
-                mAddAccountForUser = findPreference(KEY_ADD_ACCOUNT);
-                mAddAccountForUser.setOnPreferenceClickListener(this);
-            }
-            removePreference(KEY_CATEGORY_PERSONAL);
-            removePreference(KEY_CATEGORY_WORK);
+            updateSingleProfileUi();
         } else {
-            mAccountTypesForUser = (PreferenceGroup) findPreference(KEY_CATEGORY_PERSONAL);
-            mAddAccountForUser = findPreference(KEY_ADD_ACCOUNT_PERSONAL);
-            mAddAccountForUser.setOnPreferenceClickListener(this);
-
-            // TODO: Show the work accounts also
-            // TODO: Handle the case where there is only one account
-            removePreference(KEY_CATEGORY_WORK);
-            removePreference(KEY_ADD_ACCOUNT);
+            if (Utils.isManagedProfile(mUm)) {
+                // This should not happen
+                Log.w(TAG, "We should not be showing settings for a managed profile");
+                updateSingleProfileUi();
+            }
+            final UserHandle currentProfile = UserHandle.getCallingUserHandle();
+            final UserHandle managedProfile = Utils.getManagedProfile(mUm);
+            if (managedProfile == null) {
+                updateSingleProfileUi();
+            } else {
+                updateProfileUi(currentProfile,
+                        KEY_CATEGORY_PERSONAL, KEY_ADD_ACCOUNT_PERSONAL, new ArrayList<String>());
+                final ArrayList<String> unusedPreferences = new ArrayList<String>(1);
+                unusedPreferences.add(KEY_ADD_ACCOUNT);
+                updateProfileUi(managedProfile,
+                        KEY_CATEGORY_WORK, KEY_ADD_ACCOUNT_WORK, unusedPreferences);
+                mManagedProfileBroadcastReceiver = new ManagedProfileBroadcastReceiver();
+                mManagedProfileBroadcastReceiver.register(getActivity());
+            }
         }
-        updateAccountTypes(mAccountTypesForUser);
+        final int count = mProfiles.size();
+        for (int i = 0; i < count; i++) {
+            updateAccountTypes(mProfiles.valueAt(i));
+        }
+    }
+
+    private void updateSingleProfileUi() {
+        final ArrayList<String> unusedPreferences = new ArrayList<String>(2);
+        unusedPreferences.add(KEY_CATEGORY_PERSONAL);
+        unusedPreferences.add(KEY_CATEGORY_WORK);
+        updateProfileUi(UserHandle.getCallingUserHandle(), KEY_ACCOUNT, KEY_ADD_ACCOUNT,
+                unusedPreferences);
+    }
+
+    private void updateProfileUi(UserHandle userHandle, String categoryKey, String addAccountKey,
+            ArrayList<String> unusedPreferences) {
+        final int count = unusedPreferences.size();
+        for (int i = 0; i < count; i++) {
+            removePreference(unusedPreferences.get(i));
+        }
+        final ProfileData profileData = new ProfileData();
+        profileData.preferenceGroup = (PreferenceGroup) findPreference(categoryKey);
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+            removePreference(addAccountKey);
+        } else {
+            profileData.addAccountPreference = findPreference(addAccountKey);
+            profileData.addAccountPreference.setOnPreferenceClickListener(this);
+        }
+        profileData.userHandle = userHandle;
+        profileData.authenticatorHelper = new AuthenticatorHelper(
+                getActivity(), userHandle, mUm, this);
+        mProfiles.put(userHandle.getIdentifier(), profileData);
+
+        profileData.authenticatorHelper.listenToAccountUpdates();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopListeningToAccountUpdates();
+        cleanUp();
+    }
+
+    void cleanUp() {
+        if (mManagedProfileBroadcastReceiver != null) {
+            mManagedProfileBroadcastReceiver.unregister(getActivity());
+        }
+        final int count = mProfiles.size();
+        for (int i = 0; i < count; i++) {
+            mProfiles.valueAt(i).authenticatorHelper.stopListeningToAccountUpdates();
+        }
     }
 
     @Override
-    public void onAccountsUpdated(Account[] accounts) {
-        // TODO: watch for package upgrades to invalidate cache; see 7206643
-        mAuthenticatorHelper.updateAuthDescriptions(getActivity());
-        mAuthenticatorHelper.onAccountsUpdated(getActivity(), accounts);
-        listenToAccountUpdates();
-        updateAccountTypes(mAccountTypesForUser);
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        // Check the preference
-        if (preference == mAddAccountForUser) {
-            Intent intent = new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
-            startActivity(intent);
-            return true;
-        }
-        return false;
-    }
-
-    private void updateAccountTypes(PreferenceGroup preferenceGroup) {
-        preferenceGroup.removeAll();
-        preferenceGroup.setOrderingAsAdded(true);
-        for (AccountPreference preference : getAccountTypePreferences()) {
-            preferenceGroup.addPreference(preference);
-        }
-        if (mAddAccountForUser != null) {
-            preferenceGroup.addPreference(mAddAccountForUser);
+    public void onAccountsUpdate(UserHandle userHandle) {
+        final ProfileData profileData = mProfiles.get(userHandle.getIdentifier());
+        if (profileData != null) {
+            updateAccountTypes(profileData);
+        } else {
+            Log.w(TAG, "Missing Settings screen for: " + userHandle.getIdentifier());
         }
     }
 
-    private List<AccountPreference> getAccountTypePreferences() {
-        String[] accountTypes = mAuthenticatorHelper.getEnabledAccountTypes();
-        List<AccountPreference> accountTypePreferences =
+    private void updateAccountTypes(ProfileData profileData) {
+        profileData.preferenceGroup.removeAll();
+        final ArrayList<AccountPreference> preferences = getAccountTypePreferences(
+                profileData.authenticatorHelper);
+        final int count = preferences.size();
+        for (int i = 0; i < count; i++) {
+            profileData.preferenceGroup.addPreference(preferences.get(i));
+        }
+        if (profileData.addAccountPreference != null) {
+            profileData.preferenceGroup.addPreference(profileData.addAccountPreference);
+        }
+    }
+
+    private ArrayList<AccountPreference> getAccountTypePreferences(AuthenticatorHelper helper) {
+        final String[] accountTypes = helper.getEnabledAccountTypes();
+        final ArrayList<AccountPreference> accountTypePreferences =
                 new ArrayList<AccountPreference>(accountTypes.length);
-        for (String accountType : accountTypes) {
-            CharSequence label = mAuthenticatorHelper.getLabelForType(getActivity(), accountType);
+
+        for (int i = 0; i < accountTypes.length; i++) {
+            final String accountType = accountTypes[i];
+            final CharSequence label = helper.getLabelForType(getActivity(), accountType);
             if (label == null) {
                 continue;
             }
 
-            Account[] accounts = AccountManager.get(getActivity()).getAccountsByType(accountType);
-            boolean skipToAccount = accounts.length == 1
-                    && !mAuthenticatorHelper.hasAccountPreferences(accountType);
+            final Account[] accounts = AccountManager.get(getActivity())
+                    .getAccountsByType(accountType);
+            final boolean skipToAccount = accounts.length == 1
+                    && !helper.hasAccountPreferences(accountType);
 
             if (skipToAccount) {
-                Bundle fragmentArguments = new Bundle();
+                final Bundle fragmentArguments = new Bundle();
                 fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
                         accounts[0]);
 
-                accountTypePreferences.add(new AccountPreference(
-                        getActivity(),
-                        label,
-                        accountType,
-                        AccountSyncSettings.class.getName(),
-                        fragmentArguments));
+                accountTypePreferences.add(new AccountPreference(getActivity(), label,
+                        AccountSyncSettings.class.getName(), fragmentArguments,
+                        helper.getDrawableForType(getActivity(), accountType)));
             } else {
-                Bundle fragmentArguments = new Bundle();
+                final Bundle fragmentArguments = new Bundle();
                 fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
                 fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
                         label.toString());
 
-                accountTypePreferences.add(new AccountPreference(
-                        getActivity(),
-                        label,
-                        accountType,
-                        ManageAccountsSettings.class.getName(),
-                        fragmentArguments));
+                accountTypePreferences.add(new AccountPreference(getActivity(), label,
+                        ManageAccountsSettings.class.getName(), fragmentArguments,
+                        helper.getDrawableForType(getActivity(), accountType)));
             }
-            mAuthenticatorHelper.preloadDrawableForType(getActivity(), accountType);
+            helper.preloadDrawableForType(getActivity(), accountType);
         }
         // Sort by label
         Collections.sort(accountTypePreferences, new Comparator<AccountPreference>() {
@@ -184,18 +246,20 @@ public class AccountSettings extends SettingsPreferenceFragment
         return accountTypePreferences;
     }
 
-    private void listenToAccountUpdates() {
-        if (!mListeningToAccountUpdates) {
-            AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, true);
-            mListeningToAccountUpdates = true;
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        // Check the preference
+        final int count = mProfiles.size();
+        for (int i = 0; i < count; i++) {
+            ProfileData profileData = mProfiles.valueAt(i);
+            if (preference == profileData.addAccountPreference) {
+                Intent intent = new Intent(ADD_ACCOUNT_ACTION);
+                intent.putExtra(Intent.EXTRA_USER_HANDLE, profileData.userHandle);
+                startActivity(intent);
+                return true;
+            }
         }
-    }
-
-    private void stopListeningToAccountUpdates() {
-        if (mListeningToAccountUpdates) {
-            AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
-            mListeningToAccountUpdates = false;
-        }
+        return false;
     }
 
     private class AccountPreference extends Preference implements OnPreferenceClickListener {
@@ -218,18 +282,16 @@ public class AccountSettings extends SettingsPreferenceFragment
          */
         private final Bundle mFragmentArguments;
 
-
-        public AccountPreference(Context context, CharSequence title,
-                String accountType, String fragment, Bundle fragmentArguments) {
+        public AccountPreference(Context context, CharSequence title, String fragment,
+                Bundle fragmentArguments, Drawable icon) {
             super(context);
             mTitle = title;
             mFragment = fragment;
             mFragmentArguments = fragmentArguments;
             setWidgetLayoutResource(R.layout.account_type_preference);
 
-            Drawable drawable = mAuthenticatorHelper.getDrawableForType(context, accountType);
             setTitle(title);
-            setIcon(drawable);
+            setIcon(icon);
 
             setOnPreferenceClickListener(this);
         }
@@ -242,6 +304,39 @@ public class AccountSettings extends SettingsPreferenceFragment
                 return true;
             }
             return false;
+        }
+    }
+
+    private class ManagedProfileBroadcastReceiver extends BroadcastReceiver {
+        private boolean listeningToManagedProfileEvents;
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)
+                    || intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
+                Log.v(TAG, "Received broadcast: " + intent.getAction());
+                cleanUp();
+                updateUi();
+                return;
+            }
+            Log.w(TAG, "Cannot handle received broadcast: " + intent.getAction());
+        }
+
+        public void register(Context context) {
+            if (!listeningToManagedProfileEvents) {
+                IntentFilter intentFilter = new IntentFilter();
+                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_REMOVED);
+                intentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_ADDED);
+                context.registerReceiver(this, intentFilter);
+                listeningToManagedProfileEvents = true;
+            }
+        }
+
+        public void unregister(Context context) {
+            if (listeningToManagedProfileEvents) {
+                context.unregisterReceiver(this);
+                listeningToManagedProfileEvents = false;
+            }
         }
     }
     // TODO Implement a {@link SearchIndexProvider} to allow Indexing and Search of account types
