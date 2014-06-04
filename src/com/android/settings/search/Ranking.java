@@ -30,6 +30,7 @@ import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.Memory;
+import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
@@ -103,6 +104,7 @@ public final class Ranking {
         sRankMap.put(Memory.class.getName(), RANK_MEMORY);
 
         sRankMap.put(PowerUsageSummary.class.getName(), RANK_POWER_USAGE);
+        sRankMap.put(BatterySaverSettings.class.getName(), RANK_POWER_USAGE);
 
         sRankMap.put(UserSettings.class.getName(), RANK_USERS);
 
