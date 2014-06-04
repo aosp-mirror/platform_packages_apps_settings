@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Χρόνος οθόνης ενεργοποιημένος:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Άγνωστο"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Φόρτιση"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Φόρτιση με AC"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Φόρτιση μέσω USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Ασύρματη φόρτιση"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(ασύρματο)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Δεν φορτίζει"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Δεν φορτίζει"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Πλήρης"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Το πεδίο θύρας θα πρέπει να είναι κενό αν το πεδίο κεντρικού υπολογιστή είναι κενό."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Η θύρα που πληκτρολογήσατε δεν είναι έγκυρη."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Ο διακομιστής μεσολάβησης ΗΤΤΡ χρησιμοποιείται απο το πρόγραμμα περιήγησης, αλλά δεν πρέπει να χρησιμοποιείται από άλλες εφαρμογές."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"Διεύθυνση URL PAC: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"Διεύθυνση URL PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Τοποθεσία:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Γειτονικά CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Πληροφορίες κελιού:"</string>
@@ -276,7 +276,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Ρυθμίσεις"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Συντόμευση ρυθμίσεων"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Λειτουργία πτήσης"</string>
-    <string name="radio_controls_title" msgid="5364843879587669966">"ΕΚΠ και ακόμα περισσότερα"</string>
+    <string name="radio_controls_title" msgid="6889937359495515769">"Περισσότερα ..."</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Ασύρματο και δίκτυα"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Διαχείριση Wi-Fi, Bluetooth, λειτουργίας πτήσης, δίκτυα κινητής τηλεφωνίας και VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"Περιαγωγή δεδομένων"</string>
@@ -317,6 +317,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Στοιχεία κατόχου"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Ενεργ.γραφ.στοιχείων"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Απενεργοποιήθηκε από το διαχειριστή"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"Ξεκλείδωμα ΕΚΠ"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Εισάγετε κείμενο για εμφάνιση σε οθόνη κλειδώματος"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Εμφάνιση πληροφοριών χρήστη στην οθόνη κλειδώματος"</string>
@@ -569,7 +570,8 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Σύνδεση στο δίκτυο"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Διαγραφή δικτύου από τη μνήμη"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Τροποποίηση δικτύου"</string>
-    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Εγγραφή στην ετικέτα ΕΚΠ"</string>
+    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
+    <skip />
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Για διαθέσιμα δίκτυα, ενεργοποιήστε το Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Αναζήτηση για δίκτυα Wi-Fi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"Δεν έχετε άδεια για αλλαγή του δικτύου Wi-Fi."</string>
@@ -618,7 +620,8 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Διαθέσιμο WPS)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Ασφαλισμένα με <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", ασφαλισμένο με <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Εισαγάγετε κωδικό πρόσβασης δικτύου"</string>
+    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
+    <skip />
     <string name="wifi_security_none" msgid="7985461072596594400">"Καμία"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Για τη βελτίωση της ακρίβειας της τοποθεσίας σας και για άλλους σκοπούς, η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> επιθυμεί να ενεργοποιήσει τη σάρωση δικτύων, ακόμη και όταν το Wi-Fi είναι απενεργοποιημένο.\n\nΝα επιτρέπεται αυτή η ενέργεια για όλες τις εφαρμογές που επιθυμούν σάρωση;"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Να επιτραπεί"</string>
@@ -735,10 +738,13 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Αυτόματη εναλλαγή προσανατολισμού κατά την περιστροφή του τηλεφώνου"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Αυτόματη εναλλαγή προσανατολισμού κατά την περιστροφή του tablet"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Αυτόματη εναλλαγή προσανατολισμού κατά την περιστροφή του τηλεφώνου"</string>
-    <string name="brightness" msgid="8480105032417444275">"Επίπεδο φωτεινότητας"</string>
+    <!-- no translation found for brightness (8480105032417444275) -->
+    <skip />
     <string name="brightness_summary" msgid="838917350127550703">"Ρύθμιση της φωτεινότητας της οθόνης"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Προσαρμοστική φωτεινότητα"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Βελτιστοποίηση του επιπέδου φωτεινότητας για το διαθέσιμο φως"</string>
+    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
+    <skip />
+    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Απουσία δραστηριότητας"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Μετά από <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> αδράνειας"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Ταπετσαρία"</string>
@@ -990,7 +996,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Αλλαγή εφαρμογής SMS;"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Χρήση του <xliff:g id="NEW_APP">%1$s</xliff:g> αντί του <xliff:g id="CURRENT_APP">%2$s</xliff:g> ως εφαρμογή SMS;"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Χρήση του <xliff:g id="NEW_APP">%s</xliff:g> ως εφαρμογή SMS;"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Κάρτα SIM άγνωστης εταιρείας κινητής τηλεφωνίας"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Άγνωστος τελεστής SIM"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s δεν διαθέτει γνωστό ιστότοπο παροχής"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Εισαγάγετε την κάρτα SIM και κάντε επανεκκίνηση"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Συνδεθείτε στο διαδίκτυο"</string>
@@ -1322,8 +1328,10 @@
     <string name="enable_adb" msgid="7982306934419797485">"Εντοπισμός σφαλμάτων USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Λειτουργία εντοπισμού σφαλμάτων όταν το USB είναι συνδεδεμένο"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Ανάκληση εξουσιοδοτήσεων εντοπισμού σφαλμάτων USB"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Συντόμευση αναφοράς σφαλμάτων"</string>
-    <string name="bugreport_in_power_summary" msgid="3245617665067320992">"Εμφάνιση κουμπιού \"Γρήγορες ρυθμίσεις\" για τη λήψη αναφοράς σφαλμάτων"</string>
+    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
+    <skip />
+    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
+    <skip />
     <string name="keep_screen_on" msgid="1146389631208760344">"Παραμονή σε κανονική κατάσταση λειτουργίας"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Η οθόνη δεν θα μεταβαίνει ποτέ σε κατάσταση αδράνειας κατά τη φόρτιση"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Ενεργοποίηση αρχείου καταγραφής παρακολούθησης Bluetooth HCI"</string>
@@ -1332,9 +1340,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Επιλογή χρόνου εκτέλεσης"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Να γίνει επανεκκίνηση για την αλλαγή του χρόνου εκτέλεσης από <xliff:g id="OLD">%1$s</xliff:g> σε <xliff:g id="NEW">%2$s</xliff:g>;"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Πιστοποίηση ασύρματης οθόνης"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Ενεργοπ. λεπτομερούς καταγραφής Wi-Fi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Εμφάνιση επιλογών για πιστοποίηση ασύρματης οθόνης"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Αυξήστε το επίπεδο καταγραφής Wi-Fi, ως SSID RSSI στο εργαλείο επιλογής Wi-Fi"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Να επιτρέπονται ψευδείς τοποθεσίες"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Να επιτρέπονται ψευδείς τοποθεσίες"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Να επιτρέπεται ο εντοπισμός σφαλμάτων USB;"</string>
@@ -1492,11 +1498,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Σήμα δικτύου κιν. τηλεφ."</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> π.μ."</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> μ.μ."</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"Χρόνος ενεργοποίησης της συσκευής"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi στην ώρα του"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi στην ώρα του"</string>
@@ -1677,7 +1678,6 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Κατάργηση όλων των πιστοποιητικών"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Αξιόπιστα διαπιστευτήρια"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Προβολή αξιόπιστων πιστοποιητικών CA"</string>
-    <string name="advanced_security_title" msgid="2434776238010578865">"Για προχωρημένους"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Τύπος αποθήκευσης"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Με υποστήριξη εξοπλισμού"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Μόνο λογισμικό"</string>
@@ -1761,7 +1761,6 @@
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"Αγγίξτε το στοιχείο "<b>"Επόμενο"</b>" για να συνεχίσετε την εγκατάσταση.\n\nΑγγίξτε το στοιχείο "<b>"Πίσω"</b>"για να συνδεθείτε σε διαφορετικό δίκτυο Wi-Fi."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Ενεργοποιημένος συγχρονισμός"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Συγχρονισμός είναι απενεργοποιημένος"</string>
-    <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Συγχρονισμός τώρα"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Σφάλμα συγχρονισμού."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Ο συγχρονισμός απέτυχε"</string>
     <string name="sync_active" msgid="8476943765960863040">"Ενεργοποίηση συγχρονισμού"</string>
@@ -2097,6 +2096,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Λήψη φωτογραφίας"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Επιλογή φωτογραφιών από τη Συλλογή"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Ρυθμίσεις κλειδώματος οθόνης ΕΚΠ"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Συζευγμένα τσιπ"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Ενεργοποιημένο"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Συζευγμένο με ετικέτα"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Σύζευξη τώρα"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Τοποθετήστε το τσιπ επίπεδα στο τραπέζι και τοποθετήστε το τηλέφωνο από πάνω"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"Έγινε επιτυχής σύζευξη τσιπ και τηλεφώνου. Είστε έτοιμοι!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"Το τσιπ που παρέχεται δεν μπορεί να χρησιμοποιηθεί για το ξεκλείδωμα του τηλεφώνου σας"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Η σύζευξη με το τσιπ σας απέτυχε. Δοκιμάστε ξανά"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"Το ΕΚΠ δεν είναι ενεργοποιημένο και απαιτείται για το ξεκλείδωμα του ΕΚΠ. Ενεργοποιήστε το ΕΚΠ."</string>
+    <string name="ok" msgid="3651563352754792958">"Ρυθμίσεις ΕΚΠ"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Ρυθμίσεις"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Ρυθμίσεις"</string>
     <string name="search_menu" msgid="7053532283559077164">"Αναζήτηση"</string>
@@ -2104,7 +2115,8 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Πρόσφατες αναζητήσεις"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Αποτελέσματα"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi σύνδεση δικτύου"</string>
-    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Ρύθμιση ετικέτας ΕΚΠ Wi-Fi"</string>
+    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
+    <skip />
     <string name="write_tag" msgid="8571858602896222537">"Εγγραφή"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Αγγίξτε μια ετικέτα για εγγραφή…"</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Μη έγκυρος κωδικός πρόσβασης, δοκιμάστε ξανά."</string>
@@ -2116,10 +2128,8 @@
     <string name="media_volume_option_title" msgid="2811531786073003825">"Ένταση ήχου πολυμέσων"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Ένταση ήχου ξυπνητηριού"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Ένταση ήχου κλήσης"</string>
-    <string name="notification_volume_option_title" msgid="6064656124416882130">"Ένταση ήχου ειδοποίησης"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Μην ενοχλείτε"</string>
     <string name="ringer_mode_title" msgid="7489457312298627735">"Κατά τη λήψη κλήσεων και ειδοποιήσεων"</string>
-    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"Κατά την άφιξη ειδοποιήσεων"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"Ήχος κλήσης"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Δόνηση αντί για ήχο κλήσης"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"Χωρίς ήχο κλήσης ή δόνηση"</string>
@@ -2136,18 +2146,11 @@
     <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Απόκρυψη νέων ειδοποιήσεων από τη λίστα"</string>
     <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Εμφάνιση όλων των ειδοποιήσεων στη λίστα"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Ειδοποιήσεις εφαρμογών"</string>
-    <string name="other_sound_settings" msgid="3151004537006844718">"Άλλοι ήχοι"</string>
+    <string name="touch_sound_settings" msgid="8861737295513989009">"Ήχοι αφής"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Ήχοι πληκτρολογίου κλήσης"</string>
-    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ήχοι κλειδώματος οθόνης"</string>
-    <string name="docking_sounds_title" msgid="155236288949940607">"Ήχοι σύνδεσης"</string>
-    <string name="touch_sounds_title" msgid="5326587106892390176">"Ήχοι αφής"</string>
+    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"Κλείδωμα και ξεκλείδωμα οθόνης"</string>
+    <string name="other_touch_sounds_title" msgid="1692523628776677916">"Άλλοι ήχοι αφής"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"Δόνηση κατά την αφή"</string>
-    <string name="dock_audio_media_title" msgid="1346838179626123900">"Αναπαραγωγή σύνδεσης ηχείου"</string>
-    <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Όλοι οι ήχοι"</string>
-    <string name="dock_audio_media_enabled" msgid="667849382924908673">"Μόνο ο ήχος μέσων"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"Σίγαση"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"Προειδοποίηση"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Δόνηση"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Πρόσβαση σε ειδοποιήσεις"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Οι εφαρμογές δεν μπορούν να διαβάσουν ειδοποιήσεις"</string>
   <plurals name="manage_notification_access_summary_nonzero">
@@ -2198,6 +2201,8 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Ειδοποιήσεις εφαρμ."</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Ρυθμίσεις ειδοποιήσεων"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Αποστολή σχολίων για τη συσκευή"</string>
-    <string name="switch_on_text" msgid="1124106706920572386">"Ενεργό"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Ανενεργό"</string>
+    <!-- no translation found for switch_on_text (1124106706920572386) -->
+    <skip />
+    <!-- no translation found for switch_off_text (1139356348100829659) -->
+    <skip />
 </resources>
