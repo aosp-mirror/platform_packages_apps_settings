@@ -109,6 +109,7 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
 
         for (ResolveInfo resolveInfo : resolveInfos) {
             if (resolveInfo.serviceInfo == null) continue;
+            if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
             ComponentName name = TrustAgentUtils.getComponentName(resolveInfo);
             if (!mAvailableAgents.containsKey(name)) {
                 AgentInfo agentInfo = new AgentInfo();

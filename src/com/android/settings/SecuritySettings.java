@@ -317,6 +317,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     PackageManager.GET_META_DATA);
             for (ResolveInfo resolveInfo : resolveInfos) {
                 if (resolveInfo.serviceInfo == null) continue;
+                if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
                 TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
                         TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
                 if (trustAgentComponentInfo.componentName == null ||
