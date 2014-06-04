@@ -740,7 +740,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                     }
                 });
             }
-            mDiscoverySession.startPrinterDisovery(null);
+            mDiscoverySession.startPrinterDiscovery(null);
         }
     }
 }
