@@ -3539,8 +3539,18 @@
             <xliff:g id="state">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
     <string name="power_charging_duration"><xliff:g id="level">%1$d</xliff:g>%% -
-            <xliff:g id="state">%2$s</xliff:g>
-            (<xliff:g id="time">%3$s</xliff:g> until full)</string>
+            <xliff:g id="time">%2$s</xliff:g> until full</string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
+    <string name="power_charging_duration_ac"><xliff:g id="level">%1$d</xliff:g>%% -
+            <xliff:g id="time">%2$s</xliff:g> until full on AC</string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
+    <string name="power_charging_duration_usb"><xliff:g id="level">%1$d</xliff:g>%% -
+            <xliff:g id="time">%2$s</xliff:g> until full over USB</string>
+    <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
+    <string name="power_charging_duration_wireless"><xliff:g id="level">%1$d</xliff:g>%% -
+            <xliff:g id="time">%2$s</xliff:g> until full from wireless</string>
+    <!-- [CHAR_LIMIT=40] Label for list of apps using battery in power use UI -->
+    <string name="power_usage_list_summary">Use since last full charge</string>
     <!-- Battery usage since unplugged -->
     <string name="battery_since_unplugged">Battery use since unplugged</string>
     <!-- Battery usage since user reset the stats -->

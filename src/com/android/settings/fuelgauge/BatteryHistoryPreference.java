@@ -37,6 +37,9 @@ public class BatteryHistoryPreference extends Preference {
     final private BatteryStats mStats;
     final private Intent mBatteryBroadcast;
 
+    private boolean mHideLabels;
+    private View mLabelHeader;
+
     public BatteryHistoryPreference(Context context, BatteryStats stats, Intent batteryBroadcast) {
         super(context);
         setLayoutResource(R.layout.preference_batteryhistory);
@@ -48,6 +51,15 @@ public class BatteryHistoryPreference extends Preference {
         return mStats;
     }
 
+    public void setHideLabels(boolean hide) {
+        if (mHideLabels != hide) {
+            mHideLabels = hide;
+            if (mLabelHeader != null) {
+                mLabelHeader.setVisibility(hide ? View.GONE : View.VISIBLE);
+            }
+        }
+    }
+
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
@@ -55,5 +67,7 @@ public class BatteryHistoryPreference extends Preference {
         BatteryHistoryChart chart = (BatteryHistoryChart)view.findViewById(
                 R.id.battery_history_chart);
         chart.setStats(mStats, mBatteryBroadcast);
+        mLabelHeader = view.findViewById(R.id.labelsHeader);
+        mLabelHeader.setVisibility(mHideLabels ? View.GONE : View.VISIBLE);
     }
 }

@@ -117,9 +117,6 @@ public class BatteryHistoryChart extends View {
     static final int SERIF = 2;
     static final int MONOSPACE = 3;
 
-    static final int BATTERY_WARN = 29;
-    static final int BATTERY_CRITICAL = 14;
-    
     // First value if for phone off; first value is "scanning"; following values
     // are battery stats signal strength buckets.
     static final int NUM_PHONE_SIGNALS = 7;
@@ -167,7 +164,13 @@ public class BatteryHistoryChart extends View {
     String mWifiRunningLabel;
     String mCpuRunningLabel;
     String mPhoneSignalLabel;
-    
+
+    int mChartMinHeight;
+    int mHeaderHeight;
+
+    int mBatteryWarnLevel;
+    int mBatteryCriticalLevel;
+
     int mTextAscent;
     int mTextDescent;
     int mHeaderTextAscent;
@@ -352,19 +355,24 @@ public class BatteryHistoryChart extends View {
 
     public BatteryHistoryChart(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
+
+        mBatteryWarnLevel = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_lowBatteryWarningLevel);
+        mBatteryCriticalLevel = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_criticalBatteryWarningLevel);
+
         mThinLineWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 2, getResources().getDisplayMetrics());
 
-        mBatteryBackgroundPaint.setColor(0xff263238);
+        mBatteryBackgroundPaint.setColor(0xFF009688);
         mBatteryBackgroundPaint.setStyle(Paint.Style.FILL);
-        mBatteryGoodPaint.setARGB(128, 0, 255, 0);
+        mBatteryGoodPaint.setARGB(128, 0, 128, 0);
         mBatteryGoodPaint.setStyle(Paint.Style.STROKE);
-        mBatteryWarnPaint.setARGB(128, 255, 255, 0);
+        mBatteryWarnPaint.setARGB(128, 128, 128, 0);
         mBatteryWarnPaint.setStyle(Paint.Style.STROKE);
-        mBatteryCriticalPaint.setARGB(192, 255, 0, 0);
+        mBatteryCriticalPaint.setARGB(192, 128, 0, 0);
         mBatteryCriticalPaint.setStyle(Paint.Style.STROKE);
-        mTimeRemainPaint.setColor(0xffA5B1B7);
+        mTimeRemainPaint.setColor(0xFFCED7BB);
         mTimeRemainPaint.setStyle(Paint.Style.FILL);
         mChargingPaint.setARGB(255, 0, 128, 0);
         mChargingPaint.setStyle(Paint.Style.STROKE);
@@ -430,6 +438,18 @@ public class BatteryHistoryChart extends View {
                 case R.styleable.BatteryHistoryChart_android_textStyle:
                     mainTextAttrs.styleIndex = a.getInt(attr, mainTextAttrs.styleIndex);
                     headTextAttrs.styleIndex = a.getInt(attr, headTextAttrs.styleIndex);
+                    break;
+
+                case R.styleable.BatteryHistoryChart_barPrimaryColor:
+                    mBatteryBackgroundPaint.setColor(a.getInt(attr, 0));
+                    break;
+
+                case R.styleable.BatteryHistoryChart_barPredictionColor:
+                    mTimeRemainPaint.setColor(a.getInt(attr, 0));
+                    break;
+
+                case R.styleable.BatteryHistoryChart_chartMinHeight:
+                    mChartMinHeight = a.getDimensionPixelSize(attr, 0);
                     break;
             }
         }
@@ -502,8 +522,19 @@ public class BatteryHistoryChart extends View {
                 remainingTimeUs = chargeTime;
                 String timeString = Formatter.formatShortElapsedTime(getContext(),
                         chargeTime / 1000);
+                int plugType = mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                int resId;
+                if (plugType == BatteryManager.BATTERY_PLUGGED_AC) {
+                    resId = R.string.power_charging_duration_ac;
+                } else if (plugType == BatteryManager.BATTERY_PLUGGED_USB) {
+                    resId = R.string.power_charging_duration_usb;
+                } else if (plugType == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                    resId = R.string.power_charging_duration_wireless;
+                } else {
+                    resId = R.string.power_charging_duration;
+                }
                 mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_charging_duration, batteryLevel, statusLabel, timeString);
+                        resId, batteryLevel, timeString);
             } else {
                 mChargeLabelString = getContext().getResources().getString(
                         R.string.power_charging, batteryLevel, statusLabel);
@@ -562,19 +593,12 @@ public class BatteryHistoryChart extends View {
             mHavePhoneSignal = true;
         }
         if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
-
-        //String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000, true);
-        //mDurationString = getContext().getString(R.string.battery_stats_on_battery,
-        //        durationString);
-        mDurationString = Utils.formatElapsedTime(getContext(), mHistEnd - mHistStart, true);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mMaxPercentLabelStringWidth = (int)mTextPaint.measureText(mMaxPercentLabelString);
         mMinPercentLabelStringWidth = (int)mTextPaint.measureText(mMinPercentLabelString);
-        mDurationStringWidth = (int)mTextPaint.measureText(mDurationString);
         mDrainStringWidth = (int)mHeaderTextPaint.measureText(mDrainString);
         mChargeLabelStringWidth = (int)mHeaderTextPaint.measureText(mChargeLabelString);
         mChargeDurationStringWidth = (int)mHeaderTextPaint.measureText(mChargeDurationString);
@@ -582,6 +606,10 @@ public class BatteryHistoryChart extends View {
         mTextDescent = (int)mTextPaint.descent();
         mHeaderTextAscent = (int)mHeaderTextPaint.ascent();
         mHeaderTextDescent = (int)mHeaderTextPaint.descent();
+        int headerTextHeight = mHeaderTextDescent - mHeaderTextAscent;
+        mHeaderHeight = headerTextHeight*2 - mTextAscent;
+        setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+                getDefaultSize(mChartMinHeight+mHeaderHeight, heightMeasureSpec));
     }
 
     void finishPaths(int w, int h, int levelh, int startX, int y, Path curLevelPath,
@@ -669,8 +697,7 @@ public class BatteryHistoryChart extends View {
         mLastHeight = h;
 
         int textHeight = mTextDescent - mTextAscent;
-        int headerTextHeight = mHeaderTextDescent - mHeaderTextAscent;
-        if (h > (textHeight*12)) {
+        if (h > ((textHeight*10)+mChartMinHeight)) {
             mLargeMode = true;
             if (h > (textHeight*15)) {
                 // Plenty of room for the chart.
@@ -693,7 +720,7 @@ public class BatteryHistoryChart extends View {
         }
         if (mLineWidth <= 0) mLineWidth = 1;
 
-        mLevelTop = headerTextHeight*2 - mTextAscent;
+        mLevelTop = mHeaderHeight;
         mLevelLeft = mMaxPercentLabelStringWidth + mThinLineWidth*3;
         mLevelRight = w;
         int levelWidth = mLevelRight-mLevelLeft;
@@ -798,17 +825,19 @@ public class BatteryHistoryChart extends View {
                             // Don't plot changes within a pixel.
                             Path path;
                             byte value = rec.batteryLevel;
-                            if (value <= BATTERY_CRITICAL) path = mBatCriticalPath;
-                            else if (value <= BATTERY_WARN) path = mBatWarnPath;
-                            else path = mBatGoodPath;
+                            if (value <= mBatteryCriticalLevel) path = mBatCriticalPath;
+                            else if (value <= mBatteryWarnLevel) path = mBatWarnPath;
+                            else path = null; //mBatGoodPath;
 
                             if (path != lastLinePath) {
                                 if (lastLinePath != null) {
                                     lastLinePath.lineTo(x, y);
                                 }
-                                path.moveTo(x, y);
+                                if (path != null) {
+                                    path.moveTo(x, y);
+                                }
                                 lastLinePath = path;
-                            } else {
+                            } else if (path != null) {
                                 path.lineTo(x, y);
                             }
 
@@ -937,54 +966,67 @@ public class BatteryHistoryChart extends View {
             mTimeRemainPath.close();
         }
 
-        // Create the time labels at the bottom.
-        boolean is24hr = is24Hour();
-        Calendar calStart = Calendar.getInstance();
-        calStart.setTimeInMillis(mStartWallTime);
-        calStart.set(Calendar.MILLISECOND, 0);
-        calStart.set(Calendar.SECOND, 0);
-        calStart.set(Calendar.MINUTE, 0);
-        long startRoundTime = calStart.getTimeInMillis();
-        if (startRoundTime < mStartWallTime) {
-            calStart.set(Calendar.HOUR_OF_DAY, calStart.get(Calendar.HOUR_OF_DAY)+1);
-            startRoundTime = calStart.getTimeInMillis();
-        }
-        Calendar calEnd = Calendar.getInstance();
-        calEnd.setTimeInMillis(mEndWallTime);
-        calEnd.set(Calendar.MILLISECOND, 0);
-        calEnd.set(Calendar.SECOND, 0);
-        calEnd.set(Calendar.MINUTE, 0);
-        long endRoundTime = calEnd.getTimeInMillis();
-        if (startRoundTime < endRoundTime) {
-            addTimeLabel(calStart, mLevelLeft, mLevelRight, is24hr);
-            Calendar calMid = Calendar.getInstance();
-            calMid.setTimeInMillis(mStartWallTime+((mEndWallTime-mStartWallTime)/2));
-            calMid.set(Calendar.MILLISECOND, 0);
-            calMid.set(Calendar.SECOND, 0);
-            calMid.set(Calendar.MINUTE, 0);
-            long calMidMillis = calMid.getTimeInMillis();
-            if (calMidMillis > startRoundTime && calMidMillis < endRoundTime) {
-                addTimeLabel(calMid, mLevelLeft, mLevelRight, is24hr);
-            }
-            addTimeLabel(calEnd, mLevelLeft, mLevelRight, is24hr);
-        }
-
-        // Create the date labels if the chart includes multiple days
-        if (calStart.get(Calendar.DAY_OF_YEAR) != calEnd.get(Calendar.DAY_OF_YEAR) ||
-                calStart.get(Calendar.YEAR) != calEnd.get(Calendar.YEAR)) {
-            boolean isDayFirst = isDayFirst();
-            calStart.set(Calendar.HOUR_OF_DAY, 0);
-            startRoundTime = calStart.getTimeInMillis();
+        if (mStartWallTime > 0) {
+            // Create the time labels at the bottom.
+            boolean is24hr = is24Hour();
+            Calendar calStart = Calendar.getInstance();
+            calStart.setTimeInMillis(mStartWallTime);
+            calStart.set(Calendar.MILLISECOND, 0);
+            calStart.set(Calendar.SECOND, 0);
+            calStart.set(Calendar.MINUTE, 0);
+            long startRoundTime = calStart.getTimeInMillis();
             if (startRoundTime < mStartWallTime) {
-                calStart.set(Calendar.DAY_OF_YEAR, calStart.get(Calendar.DAY_OF_YEAR) + 1);
+                calStart.set(Calendar.HOUR_OF_DAY, calStart.get(Calendar.HOUR_OF_DAY)+1);
                 startRoundTime = calStart.getTimeInMillis();
             }
-            calEnd.set(Calendar.HOUR_OF_DAY, 0);
-            endRoundTime = calEnd.getTimeInMillis();
+            Calendar calEnd = Calendar.getInstance();
+            calEnd.setTimeInMillis(mEndWallTime);
+            calEnd.set(Calendar.MILLISECOND, 0);
+            calEnd.set(Calendar.SECOND, 0);
+            calEnd.set(Calendar.MINUTE, 0);
+            long endRoundTime = calEnd.getTimeInMillis();
             if (startRoundTime < endRoundTime) {
-                addDateLabel(calStart, mLevelLeft, mLevelRight, isDayFirst);
+                addTimeLabel(calStart, mLevelLeft, mLevelRight, is24hr);
+                Calendar calMid = Calendar.getInstance();
+                calMid.setTimeInMillis(mStartWallTime+((mEndWallTime-mStartWallTime)/2));
+                calMid.set(Calendar.MILLISECOND, 0);
+                calMid.set(Calendar.SECOND, 0);
+                calMid.set(Calendar.MINUTE, 0);
+                long calMidMillis = calMid.getTimeInMillis();
+                if (calMidMillis > startRoundTime && calMidMillis < endRoundTime) {
+                    addTimeLabel(calMid, mLevelLeft, mLevelRight, is24hr);
+                }
+                addTimeLabel(calEnd, mLevelLeft, mLevelRight, is24hr);
             }
-            addDateLabel(calEnd, mLevelLeft, mLevelRight, isDayFirst);
+
+            // Create the date labels if the chart includes multiple days
+            if (calStart.get(Calendar.DAY_OF_YEAR) != calEnd.get(Calendar.DAY_OF_YEAR) ||
+                    calStart.get(Calendar.YEAR) != calEnd.get(Calendar.YEAR)) {
+                boolean isDayFirst = isDayFirst();
+                calStart.set(Calendar.HOUR_OF_DAY, 0);
+                startRoundTime = calStart.getTimeInMillis();
+                if (startRoundTime < mStartWallTime) {
+                    calStart.set(Calendar.DAY_OF_YEAR, calStart.get(Calendar.DAY_OF_YEAR) + 1);
+                    startRoundTime = calStart.getTimeInMillis();
+                }
+                calEnd.set(Calendar.HOUR_OF_DAY, 0);
+                endRoundTime = calEnd.getTimeInMillis();
+                if (startRoundTime < endRoundTime) {
+                    addDateLabel(calStart, mLevelLeft, mLevelRight, isDayFirst);
+                }
+                addDateLabel(calEnd, mLevelLeft, mLevelRight, isDayFirst);
+            }
+        }
+
+        if (mTimeLabels.size() < 2) {
+            // If there are fewer than 2 time labels, then they are useless.  Just
+            // show an axis label giving the entire duration.
+            mDurationString = Formatter.formatShortElapsedTime(getContext(),
+                    mEndWallTime - mStartWallTime);
+            mDurationStringWidth = (int)mTextPaint.measureText(mDurationString);
+        } else {
+            mDurationString = null;
+            mDurationStringWidth = 0;
         }
     }
 
@@ -1031,9 +1073,7 @@ public class BatteryHistoryChart extends View {
             if (DEBUG) Log.d(TAG, "Drawing time remain path.");
             canvas.drawPath(mTimeRemainPath, mTimeRemainPaint);
         }
-        int durationHalfWidth = mDurationStringWidth / 2;
-        if (layoutRtl) durationHalfWidth = -durationHalfWidth;
-        if (mTimeLabels.size() > 0) {
+        if (mTimeLabels.size() > 1) {
             int y = mLevelBottom - mTextAscent + (mThinLineWidth*4);
             int ytick = mLevelBottom+mThinLineWidth+(mThinLineWidth/2);
             mTextPaint.setTextAlign(Paint.Align.LEFT);
@@ -1072,31 +1112,24 @@ public class BatteryHistoryChart extends View {
                     canvas.drawLine(label.x, ytick, label.x, ytick+mThinLineWidth, mTextPaint);
                 }
             }
-        }
-
-        if (false) {
-            // Old code for printing label.
-            mTextPaint.setTextAlign(textAlignLeft);
-            if (mLargeMode) {
-                canvas.drawText(mDurationString, (width / 2) - durationHalfWidth,
-                        mLevelBottom - mTextAscent + mThinLineWidth, mTextPaint);
-            } else {
-                canvas.drawText(mDurationString, (width / 2) - durationHalfWidth,
-                        mLevelTop + ((height-mLevelTop) / 2) - ((mTextDescent - mTextAscent) / 2)
-                                - mTextAscent, mTextPaint);
-            }
+        } else if (mDurationString != null) {
+            int y = mLevelBottom - mTextAscent + (mThinLineWidth*4);
+            mTextPaint.setTextAlign(Paint.Align.LEFT);
+            canvas.drawText(mDurationString,
+                    mLevelLeft + (mLevelRight-mLevelLeft)/2 - mDurationStringWidth/2,
+                    y, mTextPaint);
         }
 
         int headerTop = -mHeaderTextAscent + (mHeaderTextDescent-mHeaderTextAscent)/3;
         mHeaderTextPaint.setTextAlign(textAlignLeft);
         if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mChargeLabelString);
         canvas.drawText(mChargeLabelString, textStartX, headerTop, mHeaderTextPaint);
-        durationHalfWidth = mChargeDurationStringWidth / 2;
-        if (layoutRtl) durationHalfWidth = -durationHalfWidth;
+        int stringHalfWidth = mChargeDurationStringWidth / 2;
+        if (layoutRtl) stringHalfWidth = -stringHalfWidth;
         int headerCenter = ((width-mChargeDurationStringWidth-mDrainStringWidth)/2)
                 + (layoutRtl ? mDrainStringWidth : mChargeLabelStringWidth);
         if (DEBUG) Log.d(TAG, "Drawing charge duration string: " + mChargeDurationString);
-        canvas.drawText(mChargeDurationString, headerCenter - durationHalfWidth, headerTop,
+        canvas.drawText(mChargeDurationString, headerCenter - stringHalfWidth, headerTop,
                 mHeaderTextPaint);
         mHeaderTextPaint.setTextAlign(textAlignRight);
         if (DEBUG) Log.d(TAG, "Drawing drain string: " + mDrainString);
@@ -1181,7 +1214,7 @@ public class BatteryHistoryChart extends View {
         canvas.drawText(mMinPercentLabelString,
                 mMaxPercentLabelStringWidth-mMinPercentLabelStringWidth,
                 mLevelBottom - mThinLineWidth, mTextPaint);
-        canvas.drawLine(0, mLevelBottom+mThinLineWidth, width,
+        canvas.drawLine(mLevelLeft/2, mLevelBottom+mThinLineWidth, width,
                 mLevelBottom+mThinLineWidth, mTextPaint);
 
         if (mDateLabels.size() > 0) {
