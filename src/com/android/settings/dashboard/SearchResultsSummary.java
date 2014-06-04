@@ -580,19 +580,18 @@ public class SearchResultsSummary extends Fragment {
             } else {
                 view = convertView;
             }
+
             textTitle = (TextView) view.findViewById(R.id.title);
             textSummary = (TextView) view.findViewById(R.id.summary);
             imageView = (ImageView) view.findViewById(R.id.icon);
 
-            SearchResult result = (SearchResult) getItem(position);
-
+            final SearchResult result = (SearchResult) getItem(position);
             textTitle.setText(result.title);
 
-            String summaryOn = result.summaryOn;
-            String entries = result.entries;
+            final String summaryOn = result.summaryOn;
+            final String entries = result.entries;
 
             final StringBuilder sb = new StringBuilder();
-
             if (!TextUtils.isEmpty(summaryOn) &&
                     !summaryOn.contains(PERCENT_RECLACE) && !summaryOn.contains(DOLLAR_REPLACE)) {
                 sb.append(summaryOn);
@@ -607,7 +606,13 @@ public class SearchResultsSummary extends Fragment {
                 }
                 sb.append(ELLIPSIS);
             }
-            textSummary.setText(sb.toString());
+
+            if (TextUtils.isEmpty(sb)) {
+                textSummary.setVisibility(View.GONE);
+            } else {
+                textSummary.setText(sb.toString());
+                textSummary.setVisibility(View.VISIBLE);
+            }
 
             if (result.iconResId != R.drawable.empty_icon) {
                 final Context packageContext = result.context;
