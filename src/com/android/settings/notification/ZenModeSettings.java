@@ -70,6 +70,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         SwitchBar.OnSwitchChangeListener {
     private static final String TAG = "ZenModeSettings";
     private static final boolean DEBUG = true;
+    private static final boolean SHOW_CONDITION_DIALOG = false;
 
     private static final String KEY_GENERAL = "general";
     private static final String KEY_CALLS = "phone_calls";
@@ -136,7 +137,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
                 putZenModeSetting(v);
                 final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
-                if (n > 0) {
+                if (SHOW_CONDITION_DIALOG && n > 0) {
                     mHandler.post(isChecked ? mShowDialog : mHideDialog);
                 }
             }
