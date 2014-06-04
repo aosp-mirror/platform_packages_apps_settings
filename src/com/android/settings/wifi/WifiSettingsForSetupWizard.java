@@ -104,6 +104,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                         WifiManager.EXTRA_NETWORK_INFO);
                 changeNextButtonState(info.isConnected());
                 if (mAutoFinishOnConnection && info.isConnected()) {
+                    Log.d(TAG, "mReceiver.onReceive context=" + context + " intent=" + intent);
                     finishOrNext(Activity.RESULT_OK);
                 }
             }
@@ -202,7 +203,12 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         // first if we're supposed to finish once we have a connection
         mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
 
-        if (mAutoFinishOnConnection) {
+        /*
+         * When entering with a savedInstanceState, we may be returning from a later activity in the
+         * setup flow. It's not clear yet if there are other possible circumstances. It's not
+         * appropriate to refire our activity results, so we skip that here.
+         */
+        if (mAutoFinishOnConnection && null == savedInstanceState) {
             // Hide the next button
             if (hasNextButton()) {
                 getNextButton().setVisibility(View.GONE);
@@ -212,6 +218,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                     activity.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null
                     && connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                Log.d(TAG, "onActivityCreated Auto-finishing");
                 finishOrNext(Activity.RESULT_OK);
                 return;
             }
