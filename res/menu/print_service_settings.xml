@@ -18,9 +18,8 @@
     <item
         android:id="@+id/print_menu_item_search"
         android:title="@string/print_menu_item_search"
-        android:icon="@*android:drawable/ic_menu_search_holo_dark"
         android:actionViewClass="android.widget.SearchView"
-        android:showAsAction="ifRoom|collapseActionView"
+        android:showAsAction="never|collapseActionView"
         android:imeOptions="actionSearch">
     </item>
     <item
