@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import com.android.internal.Manifest;
-
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -39,7 +37,7 @@ public class TrustAgentUtils {
     static final String TAG = "TrustAgentUtils";
 
     private static final String TRUST_AGENT_META_DATA = TrustAgentService.TRUST_AGENT_META_DATA;
-    private static final String PERMISSION_PROVIDE_AGENT = Manifest.permission.PROVIDE_TRUST_AGENT;
+    private static final String PERMISSION_PROVIDE_AGENT = android.Manifest.permission.PROVIDE_TRUST_AGENT;
 
     /**
      * @return true, if the service in resolveInfo has the permission to provide a trust agent.
