@@ -87,6 +87,9 @@
     <dimen name="notification_app_settings_divider_height">48dp</dimen>
     <dimen name="zen_mode_dropdown_width">160dp</dimen>
 
+    <!-- ActionBar contentInsetStart -->
+    <dimen name="actionbar_contentInsetStart">16dp</dimen>
+
     <!-- Dashboard padding between each tiles within the layout -->
     <dimen name="dashboard_cell_gap">1dp</dimen>
 
@@ -98,15 +101,19 @@
     <dimen name="dashboard_category_title_height">48dp</dimen>
 
     <!-- Dashboard category title padding start -->
-    <dimen name="dashboard_category_title_padding_start">12dp</dimen>
+    <dimen name="dashboard_category_title_padding_start">16dp</dimen>
+
+    <!-- Dashboard tile minimum height -->
+    <dimen name="dashboard_tile_minimum_height">72dp</dimen>
+
+    <!-- Dashboard image tile padding start / end -->
+    <dimen name="dashboard_tile_image_margin_start">16dp</dimen>
+    <dimen name="dashboard_tile_image_margin_end">32dp</dimen>
 
     <!-- SwitchBar padding start -->
-    <dimen name="switchbar_padding_start">68dp</dimen>
-    <!-- SwitchBar padding end. Should be 2 x @*android:dimen/preference_fragment_padding_side -->
-    <dimen name="switchbar_padding_end">32dp</dimen>
-
-    <!-- ActionBar contentInsetStart -->
-    <dimen name="actionbar_contentInsetStart">68dp</dimen>
+    <dimen name="switchbar_padding_start">16dp</dimen>
+    <!-- SwitchBar padding end. Should be n x @*android:dimen/preference_fragment_padding_side -->
+    <dimen name="switchbar_padding_end">16dp</dimen>
 
     <!-- Search Results padding in its container -->
     <dimen name="search_results_padding_start">1dp</dimen>
