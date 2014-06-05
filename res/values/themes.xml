@@ -83,6 +83,12 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
+
+        <!-- LockPatternView colors -->
+        <item name="@*android:regularColor">@color/lock_pattern_view_regular_color</item>
+        <item name="@*android:successColor">@color/lock_pattern_view_success_color</item>
+        <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
+
     </style>
 
     <style name="Theme.ActionBar" parent="@android:style/Widget.Quantum.Light.ActionBar.Solid">
