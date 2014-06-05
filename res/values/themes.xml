@@ -59,8 +59,18 @@
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
 
-    <!-- Theme with no local references, used by AccountPreferenceBase. -->
-    <style name="Theme.SettingsBase" parent="@android:style/Theme.Quantum.Light.DarkActionBar" />
+    <!-- Theme with no local references, used by AccountPreferenceBase where we have to inflate
+         layouts against a remote context using our local theme colors. Due to the implementation
+         details of Theme, we can't reference any local resources and MUST instead use the values
+         directly. So use #ff263238 instead of @color/theme_primary and so on. -->
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.Quantum.Light.DarkActionBar">
+        <!-- Should match @color/theme_primary. -->
+        <item name="android:colorPrimary">#ff263238</item>
+        <!-- Should match @color/theme_primary_dark. -->
+        <item name="android:colorPrimaryDark">#ff263238</item>
+        <!-- Should match @color/theme_accent. -->
+        <item name="android:colorAccent">#ff009688</item>
+    </style>
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
@@ -74,11 +84,6 @@
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
 
-        <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <!-- Used by the StatusBar and NavBar -->
-        <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
-        <!-- Redefine control activited color for progress bars and the like -->
-        <item name="android:colorAccent">@color/quantum_accent_color_light</item>
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
@@ -96,11 +101,13 @@
     </style>
 
     <style name="Theme.DialogWhenLarge" parent="android:style/Theme.Quantum.Light.DialogWhenLarge">
-        <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <!-- Used by the StatusBar and NavBar -->
-        <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
-        <!-- Redefine control activited color for progress bars and the like -->
-        <item name="android:colorAccent">@color/quantum_accent_color_light</item>
+        <!-- Used by the ActionBar -->
+        <item name="android:colorPrimary">@color/theme_primary</item>
+        <!-- Used by the StatusBar -->
+        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
+        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
+        <item name="android:colorAccent">@color/theme_accent</item>
+
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
@@ -113,11 +120,13 @@
     <style name="Theme.AlertDialog" parent="@*android:style/Theme.Quantum.Light.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
 
-        <item name="android:colorPrimary">@color/actionbar_background_color</item>
-        <!-- Used by the StatusBar and NavBar -->
-        <item name="android:colorPrimaryDark">@color/actionbar_background_color</item>
-        <!-- Redefine control activited color for progress bars and the like -->
-        <item name="android:colorAccent">@color/quantum_accent_color_light</item>
+        <!-- Used by the ActionBar -->
+        <item name="android:colorPrimary">@color/theme_primary</item>
+        <!-- Used by the StatusBar -->
+        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
+        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
+        <item name="android:colorAccent">@color/theme_accent</item>
+
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
