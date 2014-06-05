@@ -736,6 +736,7 @@
 
     <!-- Titles for captioning character edge type preference. [CHAR LIMIT=35] -->
     <string-array name="captioning_edge_type_selector_titles">
+        <item>Default</item>
         <item>None</item>
         <item>Outline</item>
         <item>Drop shadow</item>
@@ -745,6 +746,7 @@
 
     <!-- Values for captioning character edge type preference. -->
     <integer-array name="captioning_edge_type_selector_values" translatable="false" >
+        <item>-1</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -754,6 +756,7 @@
 
     <!-- Titles for captioning color preference. -->
     <string-array name="captioning_color_selector_titles" translatable="false" >
+        <item>@string/color_unspecified</item>
         <item>@string/color_white</item>
         <item>@string/color_black</item>
         <item>@string/color_red</item>
@@ -766,6 +769,7 @@
 
     <!-- Values for captioning color preference. -->
     <integer-array name="captioning_color_selector_values" translatable="false" >
+        <item>0x00000100</item>
         <item>0xFFFFFFFF</item>
         <item>0xFF000000</item>
         <item>0xFFFF0000</item>
@@ -850,6 +854,7 @@
 
     <!-- Titles for captioning text style preset preference. [CHAR LIMIT=35] -->
     <string-array name="captioning_preset_selector_titles" >
+        <item>Use app defaults</item>
         <item>White on black</item>
         <item>Black on white</item>
         <item>Yellow on black</item>
@@ -859,6 +864,7 @@
 
     <!-- Values for captioning text style preset preference. -->
     <integer-array name="captioning_preset_selector_values" translatable="false" >
+        <item>4</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>

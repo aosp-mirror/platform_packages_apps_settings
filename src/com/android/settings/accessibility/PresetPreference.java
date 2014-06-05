@@ -49,10 +49,11 @@ public class PresetPreference extends ListDialogPreference {
 
     @Override
     protected void onBindListItem(View view, int index) {
+        final View previewViewport = view.findViewById(R.id.preview_viewport);
         final SubtitleView previewText = (SubtitleView) view.findViewById(R.id.preview);
         final int value = getValueAt(index);
         CaptionPropertiesFragment.applyCaptionProperties(
-                mCaptioningManager, previewText, value);
+                mCaptioningManager, previewText, previewViewport, value);
 
         final float density = getContext().getResources().getDisplayMetrics().density;
         previewText.setTextSize(DEFAULT_FONT_SIZE * density);
