@@ -40,6 +40,7 @@ import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -508,23 +509,40 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return;
         }
 
-        int progress = 0;
+        // Get status as percentage first
+        CharSequence status = getText(R.string.crypt_keeper_setup_description);
+        int percent = 0;
         try {
             // Force a 50% progress state when debugging the view.
-            progress = isDebugView() ? 50 : Integer.parseInt(state);
+            percent = isDebugView() ? 50 : Integer.parseInt(state);
         } catch (Exception e) {
             Log.w(TAG, "Error parsing progress: " + e.toString());
         }
+        String progress = Integer.toString(percent);
 
-        final CharSequence status = getText(R.string.crypt_keeper_setup_description);
+        // Now try to get status as time remaining and replace as appropriate
         Log.v(TAG, "Encryption progress: " + progress);
+        try {
+            final String timeProperty = SystemProperties.get("vold.encrypt_time_remaining");
+            int time = Integer.parseInt(timeProperty);
+            if (time >= 0) {
+                // Round up to multiple of 10 - this way display is less jerky
+                time = (time + 9) / 10 * 10;
+                progress = DateUtils.formatElapsedTime(time);
+                status = getText(R.string.crypt_keeper_setup_time_remaining);
+            }
+        } catch (Exception e) {
+            // Will happen if no time etc - show percentage
+        }
+
         final TextView tv = (TextView) findViewById(R.id.status);
         if (tv != null) {
-            tv.setText(TextUtils.expandTemplate(status, Integer.toString(progress)));
+            tv.setText(TextUtils.expandTemplate(status, progress));
         }
-        // Check the progress every 5 seconds
+
+        // Check the progress every 1 seconds
         mHandler.removeMessages(MESSAGE_UPDATE_PROGRESS);
-        mHandler.sendEmptyMessageDelayed(MESSAGE_UPDATE_PROGRESS, 5000);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_UPDATE_PROGRESS, 1000);
     }
 
     /** Disable password input for a while to force the user to waste time between retries */
