@@ -60,7 +60,7 @@ public class ColorPreference extends ListDialogPreference {
 
     @Override
     public boolean shouldDisableDependents() {
-        return getValue() == Color.TRANSPARENT || super.shouldDisableDependents();
+        return Color.alpha(getValue()) == 0 || super.shouldDisableDependents();
     }
 
     @Override

@@ -29,6 +29,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.accessibility.CaptioningManager;
@@ -64,11 +65,13 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private static final String PREF_PRESET = "captioning_preset";
     private static final String PREF_CUSTOM = "custom";
 
-    private static final float DEFAULT_FONT_SIZE = 48f;
+    /** WebVtt specifies line height as 5.3% of the viewport height. */
+    private static final float LINE_HEIGHT_RATIO = 0.0533f;
 
     private CaptioningManager mCaptioningManager;
     private SubtitleView mPreviewText;
     private View mPreviewWindow;
+    private View mPreviewViewport;
     private SwitchBar mSwitchBar;
     private ToggleSwitch mToggleSwitch;
 
@@ -130,12 +133,20 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mPreviewText = (SubtitleView) view.findViewById(R.id.preview_text);
         mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
 
+        mPreviewWindow = view.findViewById(R.id.preview_window);
+        mPreviewViewport = view.findViewById(R.id.preview_viewport);
+        mPreviewViewport.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                refreshPreviewText();
+            }
+        });
+
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
         mToggleSwitch = mSwitchBar.getSwitch();
         mToggleSwitch.setCheckedInternal(enabled);
-
-        mPreviewWindow = view.findViewById(R.id.preview_window);
 
         getPreferenceScreen().setEnabled(enabled);
 
@@ -164,7 +175,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         final SubtitleView preview = mPreviewText;
         if (preview != null) {
             final int styleId = mCaptioningManager.getRawUserStyle();
-            applyCaptionProperties(mCaptioningManager, preview, styleId);
+            applyCaptionProperties(mCaptioningManager, preview, mPreviewViewport, styleId);
 
             final Locale locale = mCaptioningManager.getLocale();
             if (locale != null) {
@@ -176,18 +187,29 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
             }
 
             final CaptionStyle style = mCaptioningManager.getUserStyle();
-            mPreviewWindow.setBackgroundColor(style.windowColor);
+            if (style.hasWindowColor()) {
+                mPreviewWindow.setBackgroundColor(style.windowColor);
+            } else {
+                final CaptionStyle defStyle = CaptionStyle.DEFAULT;
+                mPreviewWindow.setBackgroundColor(defStyle.windowColor);
+            }
         }
     }
 
-    public static void applyCaptionProperties(
-            CaptioningManager manager, SubtitleView previewText, int styleId) {
+    public static void applyCaptionProperties(CaptioningManager manager, SubtitleView previewText,
+            View previewWindow, int styleId) {
         previewText.setStyle(styleId);
 
         final Context context = previewText.getContext();
         final ContentResolver cr = context.getContentResolver();
         final float fontScale = manager.getFontScale();
-        previewText.setTextSize(fontScale * DEFAULT_FONT_SIZE);
+        if (previewWindow != null) {
+            previewText.setTextSize(previewWindow.getHeight() * LINE_HEIGHT_RATIO * fontScale);
+        } else {
+            final float textSize = context.getResources().getDimension(
+                    R.dimen.caption_preview_text_size);
+            previewText.setTextSize(textSize * fontScale);
+        }
 
         final Locale locale = manager.getLocale();
         if (locale != null) {
@@ -341,7 +363,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         final int opacityValue = opacity.getValue();
         final int value;
         if (Color.alpha(colorValue) == 0) {
-            value = Color.alpha(opacityValue);
+            value = colorValue & 0x00FFFF00 | Color.alpha(opacityValue);
         } else {
             value = colorValue & 0x00FFFFFF | opacityValue & 0xFF000000;
         }
