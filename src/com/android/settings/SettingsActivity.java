@@ -469,7 +469,7 @@ public class SettingsActivity extends Activity
         mIsShowingDashboard = (initialFragmentName == null);
 
         if (mIsShowingDashboard) {
-            Index.getInstance(this).update();
+            Index.getInstance(getApplicationContext()).update();
         }
 
         if (savedState != null) {

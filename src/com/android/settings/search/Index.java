@@ -137,6 +137,8 @@ public class Index {
     // Max number of proposed suggestions
     private static final int MAX_PROPOSED_SUGGESTIONS = 5;
 
+    private static final String BASE_AUTHORITY = "com.android.settings";
+
     private static final String EMPTY = "";
     private static final String NON_BREAKING_HYPHEN = "\u2011";
     private static final String HYPHEN = "-";
@@ -150,11 +152,11 @@ public class Index {
 
     private static final List<String> EMPTY_LIST = Collections.<String>emptyList();
 
-
     private static Index sInstance;
     private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
     private final UpdateData mDataToProcess = new UpdateData();
     private Context mContext;
+    private final String mBaseAuthority;
 
     /**
      * A private class to describe the update data for the Index database
@@ -185,15 +187,16 @@ public class Index {
      */
     public static Index getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new Index(context);
+            sInstance = new Index(context, BASE_AUTHORITY);
         } else {
             sInstance.setContext(context);
         }
         return sInstance;
     }
 
-    public Index(Context context) {
+    public Index(Context context, String baseAuthority) {
         mContext = context;
+        mBaseAuthority = baseAuthority;
     }
 
     public void setContext(Context context) {
@@ -281,14 +284,15 @@ public class Index {
         try {
             final int baseRank = Ranking.getBaseRankForAuthority(authority);
 
-            final Context packageContext = mContext.createPackageContext(packageName, 0);
+            final Context context = mBaseAuthority.equals(authority) ?
+                    mContext : mContext.createPackageContext(packageName, 0);
 
             final Uri uriForResources = buildUriForXmlResources(authority);
-            addIndexablesForXmlResourceUri(packageContext, packageName, uriForResources,
+            addIndexablesForXmlResourceUri(context, packageName, uriForResources,
                     SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS, baseRank);
 
             final Uri uriForRawData = buildUriForRawData(authority);
-            addIndexablesForRawDataUri(packageContext, packageName, uriForRawData,
+            addIndexablesForRawDataUri(context, packageName, uriForRawData,
                     SearchIndexablesContract.INDEXABLES_RAW_COLUMNS, baseRank);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
@@ -1139,7 +1143,12 @@ public class Index {
             final int count = dataToUpdate.size();
             for (int n = 0; n < count; n++) {
                 final SearchIndexableData data = dataToUpdate.get(n);
-                indexOneSearchIndexableData(database, localeStr, data, nonIndexableKeys);
+                try {
+                    indexOneSearchIndexableData(database, localeStr, data, nonIndexableKeys);
+                } catch (Exception e) {
+                    Log.e(LOG_TAG,
+                            "Cannot index: " + data.className + " for locale: " + localeStr, e);
+                }
             }
 
             final long now = System.currentTimeMillis();

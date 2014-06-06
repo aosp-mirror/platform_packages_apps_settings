@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -37,6 +38,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -47,11 +49,16 @@ import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class WirelessSettings extends RestrictedSettingsFragment
-        implements OnPreferenceChangeListener {
+        implements OnPreferenceChangeListener, Indexable {
     private static final String TAG = "WirelessSettings";
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
@@ -270,7 +277,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
         //enable/disable wimax depending on the value in config.xml
-        boolean isWimaxEnabled = !isSecondaryUser && this.getResources().getBoolean(
+        final boolean isWimaxEnabled = !isSecondaryUser && this.getResources().getBoolean(
                 com.android.internal.R.bool.config_wimaxEnabled);
         if (!isWimaxEnabled) {
             PreferenceScreen root = getPreferenceScreen();
@@ -304,7 +311,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
             findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
-        // Remove NFC if its not available
+        // Remove NFC if not available
         mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         if (mNfcAdapter == null) {
             getPreferenceScreen().removePreference(nfc);
@@ -319,7 +326,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
         // Remove Mobile Network Settings and Manage Mobile Plan
         // if config_show_mobile_plan sets false.
-        boolean isMobilePlanEnabled = this.getResources().getBoolean(
+        final boolean isMobilePlanEnabled = this.getResources().getBoolean(
                 R.bool.config_show_mobile_plan);
         if (!isMobilePlanEnabled) {
             Preference pref = findPreference(KEY_MANAGE_MOBILE_PLAN);
@@ -342,14 +349,14 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
-        DevicePolicyManager mDPM = (DevicePolicyManager)
+        final DevicePolicyManager mDPM = (DevicePolicyManager)
                 activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         // proxy UI disabled until we have better app support
         getPreferenceScreen().removePreference(mGlobalProxy);
         mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
 
         // Disable Tethering if it's not allowed or if it's a wifi-only device
-        ConnectivityManager cm =
+        final ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (isSecondaryUser || !cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
@@ -446,4 +453,103 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
         return false;
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(
+                    Context context, boolean enabled) {
+                SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.wireless_settings;
+                return Arrays.asList(sir);
+            }
+
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final ArrayList<String> result = new ArrayList<String>();
+
+                result.add(KEY_TOGGLE_NSD);
+
+                final boolean isSecondaryUser = UserHandle.myUserId() != UserHandle.USER_OWNER;
+                final boolean isWimaxEnabled = !isSecondaryUser && context.getResources().getBoolean(
+                        com.android.internal.R.bool.config_wimaxEnabled);
+                if (!isWimaxEnabled) {
+                    result.add(KEY_WIMAX_SETTINGS);
+                }
+
+                if (isSecondaryUser) { // Disable VPN
+                    result.add(KEY_VPN_SETTINGS);
+                }
+
+                // Remove NFC if not available
+                final NfcManager manager = (NfcManager) context.getSystemService(Context.NFC_SERVICE);
+                if (manager != null) {
+                    NfcAdapter adapter = manager.getDefaultAdapter();
+                    if (adapter == null) {
+                        result.add(KEY_TOGGLE_NFC);
+                        result.add(KEY_ANDROID_BEAM_SETTINGS);
+                    }
+                }
+
+                // Remove Mobile Network Settings and Manage Mobile Plan if it's a wifi-only device.
+                if (isSecondaryUser || Utils.isWifiOnly(context)) {
+                    result.add(KEY_MOBILE_NETWORK_SETTINGS);
+                    result.add(KEY_MANAGE_MOBILE_PLAN);
+                }
+
+                // Remove Mobile Network Settings and Manage Mobile Plan
+                // if config_show_mobile_plan sets false.
+                final boolean isMobilePlanEnabled = context.getResources().getBoolean(
+                        R.bool.config_show_mobile_plan);
+                if (!isMobilePlanEnabled) {
+                    result.add(KEY_MANAGE_MOBILE_PLAN);
+                }
+
+                // Remove SMS Application if the device does not support SMS
+                TelephonyManager tm =
+                        (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                if (!tm.isSmsCapable()) {
+                    result.add(KEY_SMS_APPLICATION);
+                }
+
+                final PackageManager pm = context.getPackageManager();
+
+                // Remove Airplane Mode settings if it's a stationary device such as a TV.
+                if (pm.hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
+                    result.add(KEY_TOGGLE_AIRPLANE);
+                }
+
+                // proxy UI disabled until we have better app support
+                result.add(KEY_PROXY_SETTINGS);
+
+                // Disable Tethering if it's not allowed or if it's a wifi-only device
+                ConnectivityManager cm =
+                        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (isSecondaryUser || !cm.isTetheringSupported()) {
+                    result.add(KEY_TETHER_SETTINGS);
+                }
+
+                // Enable link to CMAS app settings depending on the value in config.xml.
+                boolean isCellBroadcastAppLinkEnabled = context.getResources().getBoolean(
+                        com.android.internal.R.bool.config_cellBroadcastAppLinks);
+                try {
+                    if (isCellBroadcastAppLinkEnabled) {
+                        if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                                == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                            isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+                        }
+                    }
+                } catch (IllegalArgumentException ignored) {
+                    isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
+                }
+                if (isSecondaryUser || !isCellBroadcastAppLinkEnabled) {
+                    result.add(KEY_CELL_BROADCAST_SETTINGS);
+                }
+
+                return result;
+            }
+        };
 }
