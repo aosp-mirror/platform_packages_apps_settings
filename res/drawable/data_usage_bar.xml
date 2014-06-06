@@ -16,18 +16,18 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
-        <nine-patch android:src="@*android:drawable/progress_qntm_alpha"
-            android:tint="@color/quantum_empty_color_light" />
+        <nine-patch android:src="@*android:drawable/progress_mtrl_alpha"
+            android:tint="@color/material_empty_color_light" />
     </item>
     <item android:id="@android:id/secondaryProgress">
         <scale android:scaleWidth="100%">
-            <nine-patch android:src="@*android:drawable/progress_qntm_alpha"
+            <nine-patch android:src="@*android:drawable/progress_mtrl_alpha"
                 android:tint="?android:attr/colorControlActivated" />
         </scale>
     </item>
     <item android:id="@android:id/progress">
         <scale android:scaleWidth="100%">
-            <nine-patch android:src="@*android:drawable/progress_primary_qntm_alpha"
+            <nine-patch android:src="@*android:drawable/progress_primary_mtrl_alpha"
                 android:tint="?android:attr/colorControlActivated" />
         </scale>
     </item>

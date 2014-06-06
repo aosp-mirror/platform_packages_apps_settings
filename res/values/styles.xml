@@ -57,7 +57,7 @@
     </style>
 
 
-    <style name="TextAppearance" parent="android:TextAppearance.Quantum">
+    <style name="TextAppearance" parent="android:TextAppearance.Material">
     </style>
 
     <style name="TextAppearance.info_label">
@@ -75,7 +75,7 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Quantum">
+    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Material">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textStyle">bold</item>
@@ -202,18 +202,18 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Quantum.Light.NoActionBar">
+    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Widget.Quantum.Light.SegmentedButton">
+    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Widget.Material.Light.SegmentedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:weightSum">2</item>
         <item name="android:dividerPadding">8dip</item>
     </style>
 
-    <style name="SecurityPreferenceButton" parent="@android:style/Widget.Quantum.Light.Button.Borderless">
+    <style name="SecurityPreferenceButton" parent="@android:style/Widget.Material.Light.Button.Borderless">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
@@ -239,7 +239,7 @@
         <item name="android:widgetLayout">@layout/preference_inputmethod_widget</item>
     </style>
 
-    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Quantum.Small">
+    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Small">
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -255,23 +255,23 @@
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 
-    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Quantum.Medium">
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium">
     </style>
 
-    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Quantum.Small">
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small">
     </style>
 
     <style name="TextAppearance.Switch" parent="TextAppearance.Medium">
     </style>
 
-    <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Quantum.Small">
+    <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Small">
         <item name="android:textColor">#FF009688</item>
     </style>
 
-    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Quantum.Medium">
+    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Medium">
     </style>
 
-    <style name="TextAppearance.TileSubTitle" parent="@android:style/TextAppearance.Quantum.Small">
+    <style name="TextAppearance.TileSubTitle" parent="@android:style/TextAppearance.Material.Small">
     </style>
 
     <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle">
