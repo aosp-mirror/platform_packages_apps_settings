@@ -186,7 +186,9 @@ public class UserSettings extends RestrictedSettingsFragment
         }
         final Context context = getActivity();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        if (!mUserManager.supportsMultipleUsers() || Utils.isMonkeyRunning()) {
+        boolean hasMultipleUsers = mUserManager.getUserCount() > 1;
+        if ((!UserManager.supportsMultipleUsers() && !hasMultipleUsers)
+                || Utils.isMonkeyRunning()) {
             mEnabled = false;
             return;
         }
@@ -201,7 +203,8 @@ public class UserSettings extends RestrictedSettingsFragment
             mMePreference.setSummary(R.string.user_owner);
         }
         mAddUser = findPreference(KEY_ADD_USER);
-        if (!mIsOwner || UserManager.getMaxSupportedUsers() < 2) {
+        if (!mIsOwner || UserManager.getMaxSupportedUsers() < 2
+                || !UserManager.supportsMultipleUsers()) {
             removePreference(KEY_ADD_USER);
         } else {
             mAddUser.setOnPreferenceClickListener(this);
