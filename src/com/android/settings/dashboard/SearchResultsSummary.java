@@ -572,7 +572,6 @@ public class SearchResultsSummary extends Fragment {
 
             View view;
             TextView textTitle;
-            TextView textSummary;
             ImageView imageView;
 
             if (convertView == null) {
@@ -582,37 +581,10 @@ public class SearchResultsSummary extends Fragment {
             }
 
             textTitle = (TextView) view.findViewById(R.id.title);
-            textSummary = (TextView) view.findViewById(R.id.summary);
             imageView = (ImageView) view.findViewById(R.id.icon);
 
             final SearchResult result = (SearchResult) getItem(position);
             textTitle.setText(result.title);
-
-            final String summaryOn = result.summaryOn;
-            final String entries = result.entries;
-
-            final StringBuilder sb = new StringBuilder();
-            if (!TextUtils.isEmpty(summaryOn) &&
-                    !summaryOn.contains(PERCENT_RECLACE) && !summaryOn.contains(DOLLAR_REPLACE)) {
-                sb.append(summaryOn);
-                sb.append(ELLIPSIS);
-            } else if (!TextUtils.isEmpty(entries)) {
-                final int index  = entries.indexOf(Index.ENTRIES_SEPARATOR);
-                if (index > 0) {
-                    final String firstEntriesValue = entries.substring(0, index);
-                    sb.append(firstEntriesValue);
-                } else {
-                    sb.append(entries);
-                }
-                sb.append(ELLIPSIS);
-            }
-
-            if (TextUtils.isEmpty(sb)) {
-                textSummary.setVisibility(View.GONE);
-            } else {
-                textSummary.setText(sb.toString());
-                textSummary.setVisibility(View.VISIBLE);
-            }
 
             if (result.iconResId != R.drawable.empty_icon) {
                 final Context packageContext = result.context;
