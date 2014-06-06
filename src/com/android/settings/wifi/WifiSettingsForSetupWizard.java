@@ -17,11 +17,8 @@
 package com.android.settings.wifi;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
@@ -63,24 +60,8 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     // this boolean extra specifies whether to auto finish when connection is established
     private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
 
-    // this boolean extra shows a custom button that we can control
-    protected static final String EXTRA_SHOW_CUSTOM_BUTTON = "wifi_show_custom_button";
-
     // show a text regarding data charges when wifi connection is required during setup wizard
     protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
-
-    // this boolean extra is set if we are being invoked by the Setup Wizard
-    private static final String EXTRA_IS_FIRST_RUN = "firstRun";
-
-    // Activity result when pressing the Skip button
-    private static final int RESULT_SKIP = Activity.RESULT_FIRST_USER;
-
-    // From WizardManager (must match constants maintained there)
-    private static final String ACTION_NEXT = "com.android.wizard.NEXT";
-    private static final String EXTRA_SCRIPT_URI = "scriptUri";
-    private static final String EXTRA_ACTION_ID = "actionId";
-    private static final String EXTRA_RESULT_CODE = "com.android.setupwizard.ResultCode";
-    private static final int NEXT_REQUEST = 10000;
 
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
@@ -105,7 +86,8 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 changeNextButtonState(info.isConnected());
                 if (mAutoFinishOnConnection && info.isConnected()) {
                     Log.d(TAG, "mReceiver.onReceive context=" + context + " intent=" + intent);
-                    finishOrNext(Activity.RESULT_OK);
+                    WifiSetupActivity activity = (WifiSetupActivity) getActivity();
+                    activity.finishOrNext(Activity.RESULT_OK);
                 }
             }
         };
@@ -150,36 +132,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         }
 
         final Intent intent = getActivity().getIntent();
-        if (intent.getBooleanExtra(EXTRA_SHOW_CUSTOM_BUTTON, false)) {
-            view.findViewById(R.id.button_bar).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.back_button).setVisibility(View.INVISIBLE);
-            view.findViewById(R.id.skip_button).setVisibility(View.INVISIBLE);
-            view.findViewById(R.id.next_button).setVisibility(View.INVISIBLE);
-
-            Button customButton = (Button) view.findViewById(R.id.custom_button);
-            customButton.setVisibility(View.VISIBLE);
-            customButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean isConnected = false;
-                    Activity activity = getActivity();
-                    final ConnectivityManager connectivity = (ConnectivityManager)
-                            activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    if (connectivity != null) {
-                        final NetworkInfo info = connectivity.getActiveNetworkInfo();
-                        isConnected = (info != null) && info.isConnected();
-                    }
-                    if (isConnected) {
-                        // Warn of possible data charges
-                        showDialog(WIFI_SKIPPED_DIALOG_ID);
-                    } else {
-                        // Warn of lack of updates
-                        showDialog(WIFI_AND_MOBILE_SKIPPED_DIALOG_ID);
-                    }
-                }
-            });
-        }
-
         if (intent.getBooleanExtra(EXTRA_SHOW_WIFI_REQUIRED_INFO, false)) {
             view.findViewById(R.id.wifi_required_info).setVisibility(View.VISIBLE);
         }
@@ -197,30 +149,32 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
                 View.STATUS_BAR_DISABLE_CLOCK);
 
-        final Activity activity = getActivity();
+        final WifiSetupActivity activity = (WifiSetupActivity) getActivity();
         final Intent intent = activity.getIntent();
 
         // first if we're supposed to finish once we have a connection
         mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
 
-        /*
-         * When entering with a savedInstanceState, we may be returning from a later activity in the
-         * setup flow. It's not clear yet if there are other possible circumstances. It's not
-         * appropriate to refire our activity results, so we skip that here.
-         */
-        if (mAutoFinishOnConnection && null == savedInstanceState) {
+        if (mAutoFinishOnConnection) {
             // Hide the next button
             if (hasNextButton()) {
                 getNextButton().setVisibility(View.GONE);
             }
 
-            final ConnectivityManager connectivity = (ConnectivityManager)
-                    activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivity != null
-                    && connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
-                Log.d(TAG, "onActivityCreated Auto-finishing");
-                finishOrNext(Activity.RESULT_OK);
-                return;
+            /*
+             * When entering with a savedInstanceState, we may be returning from a later activity in
+             * the setup flow. It's not clear yet if there are other possible circumstances. It's
+             * not appropriate to refire our activity results, so we skip that here.
+             */
+            if (savedInstanceState == null) {
+                final ConnectivityManager connectivity = (ConnectivityManager)
+                        activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivity != null &&
+                        connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                    Log.d(TAG, "onActivityCreated Auto-finishing");
+                    activity.finishOrNext(Activity.RESULT_OK);
+                    return;
+                }
             }
         }
 
@@ -242,49 +196,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case WIFI_SKIPPED_DIALOG_ID:
-                return new AlertDialog.Builder(getActivity())
-                            .setMessage(R.string.wifi_skipped_message)
-                            .setCancelable(false)
-                            .setNegativeButton(R.string.wifi_skip_anyway,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    finishOrNext(RESULT_SKIP);
-                                }
-                            })
-                            .setPositiveButton(R.string.wifi_dont_skip,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                }
-                            })
-                            .create();
-            case WIFI_AND_MOBILE_SKIPPED_DIALOG_ID:
-                return new AlertDialog.Builder(getActivity())
-                            .setMessage(R.string.wifi_and_mobile_skipped_message)
-                            .setCancelable(false)
-                            .setNegativeButton(R.string.wifi_skip_anyway,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    finishOrNext(RESULT_SKIP);
-                                }
-                            })
-                            .setPositiveButton(R.string.wifi_dont_skip,
-                                    new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                }
-                            })
-                            .create();
-        }
-        return super.onCreateDialog(dialogId);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         getActivity().registerReceiver(mReceiver, mFilter);
@@ -294,24 +205,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mReceiver);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_CANCELED) {
-            // Before returning to the settings panel, forget any current access point so it will
-            // not attempt to automatically reconnect and advance
-            // FIXME: when coming back, it would be better to keep the current connection and
-            // override the auto-advance feature
-            final WifiInfo info = mWifiManager.getConnectionInfo();
-            if (null != info) {
-                int netId = info.getNetworkId();
-                if (netId != WifiConfiguration.INVALID_NETWORK_ID) {
-                    mWifiManager.forget(netId, null);
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -358,40 +251,5 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         if (mEnableNextOnConnection && hasNextButton()) {
             getNextButton().setEnabled(enabled);
         }
-    }
-
-    /**
-     * Complete this activity and return the results to the caller. If using WizardManager, this
-     * will invoke the next scripted action; otherwise, we simply finish.
-     */
-    private void finishOrNext(int resultCode) {
-        Log.d(TAG, "finishOrNext resultCode=" + resultCode
-                + " isUsingWizardManager=" + isUsingWizardManager());
-        if (isUsingWizardManager()) {
-            sendResultsToSetupWizard(resultCode);
-        } else {
-            Activity activity = getActivity();
-            activity.setResult(resultCode);
-            activity.finish();
-        }
-    }
-
-    private boolean isUsingWizardManager() {
-        return getActivity().getIntent().hasExtra(EXTRA_SCRIPT_URI);
-    }
-
-    /**
-     * Send the results of this activity to WizardManager, which will then send out the next
-     * scripted activity. WizardManager does not actually return an activity result, but if we
-     * invoke WizardManager without requesting a result, the framework will choose not to issue a
-     * call to onActivityResult with RESULT_CANCELED when navigating backward.
-     */
-    private void sendResultsToSetupWizard(int resultCode) {
-        final Intent intent = getActivity().getIntent();
-        final Intent nextIntent = new Intent(ACTION_NEXT);
-        nextIntent.putExtra(EXTRA_SCRIPT_URI, intent.getStringExtra(EXTRA_SCRIPT_URI));
-        nextIntent.putExtra(EXTRA_ACTION_ID, intent.getStringExtra(EXTRA_ACTION_ID));
-        nextIntent.putExtra(EXTRA_RESULT_CODE, resultCode);
-        startActivityForResult(nextIntent, NEXT_REQUEST);
     }
 }

@@ -20,6 +20,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.content.Intent;
+import android.preference.PreferenceFragment;
 
 import java.lang.Class;
 
@@ -36,13 +37,13 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if (getWifiSettingsClass().getName().equals(fragmentName)
+        if (WifiSettings.class.getName().equals(fragmentName)
                 || WifiP2pSettings.class.getName().equals(fragmentName)
                 || AdvancedWifiSettings.class.getName().equals(fragmentName)) return true;
         return false;
     }
 
-    /* package */ Class getWifiSettingsClass() {
+    /* package */ Class<? extends PreferenceFragment> getWifiSettingsClass() {
         return WifiSettings.class;
     }
 }
