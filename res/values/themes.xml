@@ -21,40 +21,40 @@
     <attr name="setup_divider_color" format="reference" />
     <attr name="wifi_signal" format="reference" />
 
-    <style name="SetupWizardWifiTheme" parent="android:Theme.Quantum.NoActionBar">
+    <style name="SetupWizardWifiTheme" parent="android:Theme.Material.NoActionBar">
         <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="android:alertDialogTheme">@style/Theme.WifiDialog</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
     </style>
 
-    <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Quantum.Light.NoActionBar">
+    <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="android:alertDialogTheme">@style/Theme.Light.WifiDialog</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
 
-    <style name="Theme.WifiDialog" parent="@*android:style/Theme.Quantum.Dialog.Alert">
+    <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
     </style>
 
-    <style name="Theme.Light.WifiDialog" parent="@*android:style/Theme.Quantum.Light.Dialog.Alert">
+    <style name="Theme.Light.WifiDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
-        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_quantum</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
     </style>
@@ -63,7 +63,7 @@
          layouts against a remote context using our local theme colors. Due to the implementation
          details of Theme, we can't reference any local resources and MUST instead use the values
          directly. So use #ff263238 instead of @color/theme_primary and so on. -->
-    <style name="Theme.SettingsBase" parent="@android:style/Theme.Quantum.Light.DarkActionBar">
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Light.DarkActionBar">
         <!-- Should match @color/theme_primary. -->
         <item name="android:colorPrimary">#ff263238</item>
         <!-- Should match @color/theme_primary_dark. -->
@@ -96,11 +96,11 @@
 
     </style>
 
-    <style name="Theme.ActionBar" parent="@android:style/Widget.Quantum.Light.ActionBar.Solid">
+    <style name="Theme.ActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
-    <style name="Theme.DialogWhenLarge" parent="android:style/Theme.Quantum.Light.DialogWhenLarge">
+    <style name="Theme.DialogWhenLarge" parent="android:style/Theme.Material.Light.DialogWhenLarge">
         <!-- Used by the ActionBar -->
         <item name="android:colorPrimary">@color/theme_primary</item>
         <!-- Used by the StatusBar -->
@@ -114,10 +114,10 @@
 
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
         <item name="android:actionBarWidgetTheme">@null</item>
-        <item name="android:actionBarTheme">@android:style/ThemeOverlay.Quantum.Dark.ActionBar</item>
+        <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
     </style>
 
-    <style name="Theme.AlertDialog" parent="@*android:style/Theme.Quantum.Light.Dialog.Alert">
+    <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
 
         <!-- Used by the ActionBar -->
