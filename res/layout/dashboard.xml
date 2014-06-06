@@ -20,6 +20,7 @@
     android:layout_height="match_parent"
     android:paddingStart="@dimen/dashboard_padding_start"
     android:paddingEnd="@dimen/dashboard_padding_end"
+    android:paddingBottom="@dimen/dashboard_padding_bottom"
     android:scrollbarStyle="outsideOverlay"
     android:background="@color/dashboard_background_color">
 
@@ -27,7 +28,6 @@
                 android:id="@+id/dashboard_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="12dp"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 />
