@@ -133,6 +133,7 @@ public class SettingsActivity extends Activity
     private static final String SAVE_KEY_SEARCH_MENU_EXPANDED = ":settings:search_menu_expanded";
     private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
     private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
+    private static final String SAVE_KEY_SHOW_SEARCH = ":settings:show_search";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -306,7 +307,9 @@ public class SettingsActivity extends Activity
     private SwitchBar mSwitchBar;
 
     private Button mNextButton;
+
     private boolean mDisplayHomeAsUpEnabled;
+    private boolean mDisplaySearch;
 
     private boolean mIsShowingDashboard;
 
@@ -401,6 +404,10 @@ public class SettingsActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mDisplaySearch) {
+            return false;
+        }
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
 
@@ -454,6 +461,7 @@ public class SettingsActivity extends Activity
         getFragmentManager().addOnBackStackChangedListener(this);
 
         mDisplayHomeAsUpEnabled = true;
+        mDisplaySearch = true;
 
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
@@ -483,12 +491,14 @@ public class SettingsActivity extends Activity
             }
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
+            mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
         } else {
             if (!mIsShowingDashboard) {
                 final ComponentName cn = getIntent().getComponent();
-                // No UP is we are launched thru a Settings shortcut
+                // No UP nor Search is shown we are launched thru a Settings "shortcut"
                 if (!cn.getClassName().equals(SubSettings.class.getName())) {
                     mDisplayHomeAsUpEnabled = false;
+                    mDisplaySearch = false;
                 }
                 final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
                 mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
@@ -610,17 +620,20 @@ public class SettingsActivity extends Activity
         }
 
         outState.putBoolean(SAVE_KEY_SHOW_HOME_AS_UP, mDisplayHomeAsUpEnabled);
+        outState.putBoolean(SAVE_KEY_SHOW_SEARCH, mDisplaySearch);
 
-        // The option menus are created if the ActionBar is visible and they are also created
-        // asynchronously. If you launch Settings with an Intent action like
-        // android.intent.action.POWER_USAGE_SUMMARY and at the same time your device is locked
-        // thru a LockScreen, onCreateOptionsMenu() is not yet called and references to the search
-        // menu item and search view are null.
-        boolean isExpanded = (mSearchMenuItem != null) && mSearchMenuItem.isActionViewExpanded();
-        outState.putBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED, isExpanded);
+        if (mDisplaySearch) {
+            // The option menus are created if the ActionBar is visible and they are also created
+            // asynchronously. If you launch Settings with an Intent action like
+            // android.intent.action.POWER_USAGE_SUMMARY and at the same time your device is locked
+            // thru a LockScreen, onCreateOptionsMenu() is not yet called and references to the search
+            // menu item and search view are null.
+            boolean isExpanded = (mSearchMenuItem != null) && mSearchMenuItem.isActionViewExpanded();
+            outState.putBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED, isExpanded);
 
-        String query = (mSearchView != null) ? mSearchView.getQuery().toString() : EMPTY_QUERY;
-        outState.putString(SAVE_KEY_SEARCH_QUERY, query);
+            String query = (mSearchView != null) ? mSearchView.getQuery().toString() : EMPTY_QUERY;
+            outState.putString(SAVE_KEY_SEARCH_QUERY, query);
+        }
     }
 
     @Override
@@ -641,7 +654,7 @@ public class SettingsActivity extends Activity
 
         mDynamicIndexableContentMonitor.register(this);
 
-        if(!TextUtils.isEmpty(mSearchQuery)) {
+        if(mDisplaySearch && !TextUtils.isEmpty(mSearchQuery)) {
             onQueryTextSubmit(mSearchQuery);
         }
     }
