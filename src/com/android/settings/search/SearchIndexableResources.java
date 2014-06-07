@@ -87,9 +87,9 @@ public final class SearchIndexableResources {
         sResMap.put(WirelessSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(WirelessSettings.class.getName()),
-                        R.xml.wireless_settings,
+                        NO_DATA_RES_ID,
                         WirelessSettings.class.getName(),
-                        R.drawable.empty_icon));
+                        R.drawable.ic_settings_more));
 
         sResMap.put(HomeSettings.class.getName(),
                 new SearchIndexableResource(
