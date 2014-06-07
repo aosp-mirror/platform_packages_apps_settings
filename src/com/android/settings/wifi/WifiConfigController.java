@@ -551,7 +551,7 @@ public class WifiConfigController implements TextWatcher,
             } catch (IllegalArgumentException e) {
                 return R.string.wifi_ip_settings_invalid_dns;
             }
-            linkProperties.addDns(dnsAddr);
+            linkProperties.addDnsServer(dnsAddr);
         }
 
         if (mDns2View.length() > 0) {
@@ -561,7 +561,7 @@ public class WifiConfigController implements TextWatcher,
             } catch (IllegalArgumentException e) {
                 return R.string.wifi_ip_settings_invalid_dns;
             }
-            linkProperties.addDns(dnsAddr);
+            linkProperties.addDnsServer(dnsAddr);
         }
         return 0;
     }
@@ -788,7 +788,7 @@ public class WifiConfigController implements TextWatcher,
                     }
                 }
 
-                Iterator<InetAddress> dnsIterator = linkProperties.getDnses().iterator();
+                Iterator<InetAddress> dnsIterator = linkProperties.getDnsServers().iterator();
                 if (dnsIterator.hasNext()) {
                     mDns1View.setText(dnsIterator.next().getHostAddress());
                 }
