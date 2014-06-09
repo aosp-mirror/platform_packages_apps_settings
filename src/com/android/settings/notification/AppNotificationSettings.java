@@ -65,6 +65,17 @@ public class AppNotificationSettings extends ListFragment {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = true;
 
+    /**
+     * Show a checkbox in the per-app notification control dialog to allow the user
+     * to promote this app's notifications to higher priority.
+     */
+    private static final boolean ENABLE_APP_NOTIFICATION_PRIORITY_OPTION = false;
+    /**
+     * Show a checkbox in the per-app notification control dialog to allow the user to
+     * selectively redact this app's notifications on the lockscreen.
+     */
+    private static final boolean ENABLE_APP_NOTIFICATION_PRIVACY_OPTION = false;
+
     private static final String SECTION_BEFORE_A = "*";
     private static final String SECTION_AFTER_Z = "**";
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
@@ -186,6 +197,14 @@ public class AppNotificationSettings extends ListFragment {
         final CheckBox showBox = (CheckBox) layout.findViewById(android.R.id.button1);
         final CheckBox priBox = (CheckBox) layout.findViewById(android.R.id.button2);
         final CheckBox senBox = (CheckBox) layout.findViewById(android.R.id.button3);
+
+        if (!ENABLE_APP_NOTIFICATION_PRIORITY_OPTION) {
+            priBox.setVisibility(View.GONE);
+        }
+
+        if (!ENABLE_APP_NOTIFICATION_PRIVACY_OPTION) {
+            senBox.setVisibility(View.GONE);
+        }
 
         showBox.setChecked(!row.banned);
         final OnCheckedChangeListener showListener = new OnCheckedChangeListener() {
