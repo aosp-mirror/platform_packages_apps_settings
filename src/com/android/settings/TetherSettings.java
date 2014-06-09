@@ -47,6 +47,7 @@ import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -92,6 +93,7 @@ public class TetherSettings extends SettingsPreferenceFragment
     private WifiApDialog mDialog;
     private WifiManager mWifiManager;
     private WifiConfiguration mWifiConfig = null;
+    private UserManager mUm;
 
     private boolean mUsbConnected;
     private boolean mMassStorageActive;
@@ -110,10 +112,20 @@ public class TetherSettings extends SettingsPreferenceFragment
     private String[] mProvisionApp;
     private static final int PROVISION_REQUEST = 0;
 
+    private boolean mUnavailable;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.tether_prefs);
+
+        mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING)) {
+            mUnavailable = true;
+            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
+            return;
+        }
 
         final Activity activity = getActivity();
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -264,6 +276,15 @@ public class TetherSettings extends SettingsPreferenceFragment
     public void onStart() {
         super.onStart();
 
+        if (mUnavailable) {
+            TextView emptyView = (TextView) getView().findViewById(android.R.id.empty);
+            getListView().setEmptyView(emptyView);
+            if (emptyView != null) {
+                emptyView.setText(R.string.tethering_settings_not_available);
+            }
+            return;
+        }
+
         final Activity activity = getActivity();
 
         mMassStorageActive = Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
@@ -297,6 +318,10 @@ public class TetherSettings extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
+
+        if (mUnavailable) {
+            return;
+        }
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTetherChangeReceiver = null;
         if (mWifiApEnabler != null) {
