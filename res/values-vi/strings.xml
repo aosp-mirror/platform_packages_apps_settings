@@ -28,14 +28,10 @@
   </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Bạn đã là nhà phát triển!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Không cần, bạn đã là nhà phát triển."</string>
-    <!-- no translation found for header_category_wireless_networks (7617195369015536614) -->
-    <skip />
-    <!-- no translation found for header_category_device (4544026001618307754) -->
-    <skip />
-    <!-- no translation found for header_category_personal (3310195187905720823) -->
-    <skip />
-    <!-- no translation found for header_category_system (2816866961183068977) -->
-    <skip />
+    <string name="header_category_wireless_networks" msgid="7617195369015536614">"Không dây và mạng"</string>
+    <string name="header_category_device" msgid="4544026001618307754">"Thiết bị"</string>
+    <string name="header_category_personal" msgid="3310195187905720823">"Cá nhân"</string>
+    <string name="header_category_system" msgid="2816866961183068977">"Hệ thống"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Bật radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Tắt radio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Bật SMS qua IMS"</string>
@@ -94,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Thời gian màn hình BẬT:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Không xác định"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Đang sạc"</string>
-    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
-    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
-    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(không dây)"</string>
+    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Sạc trên AC"</string>
+    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Sạc qua USB"</string>
+    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Sạc không dây"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Hiện không sạc"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Hiện không sạc"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Đầy"</string>
@@ -280,7 +276,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Cài đặt"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Lối tắt cài đặt"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Chế độ trên máy bay"</string>
-    <string name="radio_controls_title" msgid="6889937359495515769">"Thêm…"</string>
+    <string name="radio_controls_title" msgid="5364843879587669966">"NFC và hơn thế nữa"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Không dây &amp; mạng"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Quản lý Wi-Fi, Bluetooth, chế độ trên máy bay, mạng di động và VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"Chuyển vùng dữ liệu"</string>
@@ -321,7 +317,6 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Thông tin chủ sở hữu"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Bật tiện ích con"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Bị tắt bởi quản trị viên"</string>
-    <string name="nfc_unlock_title" msgid="8827035651970841825">"Mở khóa NFC"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Nhập văn bản để hiển thị trên màn hình khóa"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Hiển thị thông tin người dùng trên màn hình khóa"</string>
@@ -337,10 +332,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Mã hóa máy tính bảng"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Mã hóa điện thoại"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Đã mã hóa"</string>
-    <!-- no translation found for crypt_keeper_desc (7966195172468864148) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_desc (9182896617884899822) -->
-    <skip />
+    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"Bạn có thể mã hóa tài khoản, cài đặt, ứng dụng đã tải xuống và dữ liệu ứng dụng, phương tiện cũng như các tệp khác của mình. Sau khi mã hóa máy tính bảng, giả định rằng bạn đã thiết lập khóa màn hình (tức là một hình hay mã PIN hoặc mật khẩu dạng số), bạn cần phải mở khóa màn hình để giải mã máy tính bảng mỗi khi bật lên. Cách duy nhất khác là đặt lại về dữ liệu gốc, thao tác này sẽ xóa tất cả dữ liệu của bạn.\n\nQuá trình mã hóa mất ít nhất một giờ. Bạn phải bắt đầu bằng việc sạc pin và cắm máy tính bảng cho đến khi quá trình mã hóa hoàn tất. Nếu làm gián đoạn quá trình mã hóa, bạn sẽ mất một vài hoặc tất cả dữ liệu của mình"</string>
+    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"Bạn có thể mã hóa tài khoản, cài đặt, ứng dụng đã tải xuống và dữ liệu ứng dụng, phương tiện cũng như các tệp khác của mình. Sau khi mã hóa điện thoại, giả định rằng bạn đã thiết lập khóa màn hình (tức là một hình hay mã PIN hoặc mật khẩu dạng số), bạn cần phải mở khóa màn hình để giải mã điện thoại mỗi khi bật lên. Cách duy nhất khác là đặt lại về dữ liệu gốc, thao tác này sẽ xóa tất cả dữ liệu của bạn.\n\nQuá trình mã hóa mất ít nhất một giờ. Bạn phải bắt đầu bằng việc sạc pin và cắm điện thoại cho đến khi quá trình mã hóa hoàn tất. Nếu làm gián đoạn quá trình mã hóa, bạn sẽ mất một vài hoặc tất cả dữ liệu của mình."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Mã hóa máy tính bảng"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Mã hóa điện thoại"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Vui lòng sạc pin và thử lại."</string>
@@ -576,8 +569,7 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Kết nối tới mạng"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Quên mạng"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Sửa đổi mạng"</string>
-    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
-    <skip />
+    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Ghi vào thẻ NFC"</string>
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Để xem các mạng khả dụng, hãy bật Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Đang tìm kiếm mạng Wi‑Fi..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"Bạn không có quyền thay đổi mạng Wi‑Fi."</string>
@@ -626,8 +618,7 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Có WPS)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Được bảo mật bằng <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", được bảo mật bằng <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
-    <skip />
+    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Nhập mật khẩu mạng của bạn"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Không"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, <xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật tính năng quét mạng ngay cả khi Wi-Fi đang tắt.\n\nCho phép cài đặt này đối với tất cả ứng dụng muốn quét?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Cho phép"</string>
@@ -744,13 +735,10 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Tự động chuyển hướng khi xoay điện thoại"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Tự động chuyển hướng khi xoay máy tính bảng"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Tự động chuyển hướng khi xoay điện thoại"</string>
-    <!-- no translation found for brightness (8480105032417444275) -->
-    <skip />
+    <string name="brightness" msgid="8480105032417444275">"Độ sáng"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Điều chỉnh độ sáng của màn hình"</string>
-    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
-    <skip />
-    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
-    <skip />
+    <string name="auto_brightness_title" msgid="6341042882350279391">"Độ sáng thích nghi"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Tối ưu hóa độ sáng cho ánh sáng có sẵn"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Thời gian sáng"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Sau khi không hoạt động <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Hình nền"</string>
@@ -1002,7 +990,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Thay đổi ứng dụng SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Sử dụng <xliff:g id="NEW_APP">%1$s</xliff:g> thay vì <xliff:g id="CURRENT_APP">%2$s</xliff:g> làm ứng dụng SMS của bạn?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Sử dụng <xliff:g id="NEW_APP">%s</xliff:g> làm ứng dụng SMS của bạn?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Nhà cung cấp SIM không xác định"</string>
+    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Nhà cung cấp dịch vụ SIM không xác định"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s không có trang web cấp phép xác định"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Vui lòng lắp thẻ SIM và khởi động lại"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Vui lòng kết nối internet"</string>
@@ -1334,10 +1322,8 @@
     <string name="enable_adb" msgid="7982306934419797485">"Gỡ lỗi USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Chế độ gỡ lỗi khi USB được kết nối"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Thu hồi ủy quyền gỡ lỗi USB"</string>
-    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
-    <skip />
-    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
-    <skip />
+    <string name="bugreport_in_power" msgid="7923901846375587241">"Phím tắt báo cáo lỗi"</string>
+    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Hiển thị nút trong menu nguồn để thêm báo cáo lỗi"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Không khóa màn hình"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Màn hình sẽ không bao giờ chuyển sang chế độ nghỉ khi sạc"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Bật nhật ký theo dõi HCI Bluetooth"</string>
@@ -1346,6 +1332,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Chọn thời gian chạy"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Khởi động lại để thay đổi thời gian chạy từ <xliff:g id="OLD">%1$s</xliff:g> sang <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Chứng nhận hiển thị không dây"</string>
+    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Bật ghi nhật ký chi tiết WiFi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Hiển thị tùy chọn chứng nhận hiển thị không dây"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Cho phép vị trí mô phỏng"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Cho phép vị trí mô phỏng"</string>
@@ -1437,6 +1424,7 @@
     <string name="captioning_preview_text" msgid="4067935959797375065">"Phụ đề sẽ trông như thế này"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"Mặc định"</string>
+    <string name="color_unspecified" msgid="5179683785413568326">"Mặc định"</string>
     <string name="color_none" msgid="3475640044925814795">"Không có"</string>
     <string name="color_white" msgid="8045195170201590239">"Trắng"</string>
     <string name="color_gray" msgid="9192312087142726313">"Xám"</string>
@@ -1491,7 +1479,11 @@
     <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - còn khoảng <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g> cho đến khi đầy)"</string>
+    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> cho đến khi đầy"</string>
+    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> cho đến khi đầy trên AC"</string>
+    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> cho đến khi đầy qua USB"</string>
+    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> cho đến khi đầy từ không dây"</string>
+    <string name="power_usage_list_summary" msgid="2409288197839512482">"Sử dụng kể từ lần sạc đầy cuối cùng"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Sử dụng pin từ khi tháo đầu cắm"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Sử dụng pin từ khi đặt lại"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> trong thời lượng pin"</string>
@@ -1504,6 +1496,11 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Tín hiệu mạng di động"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
+    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
+    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> SA"</string>
+    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> CH"</string>
+    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
+    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"Thời gian thức của thiết bị"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Thời gian bật Wi-Fi"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Thời gian bật Wi‑Fi"</string>
@@ -1734,7 +1731,7 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Quản trị viên này hoạt động và cho phép ứng dụng <xliff:g id="APP_NAME">%1$s</xliff:g> thực hiện các tác vụ sau:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Không có tiêu đề"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Chung"</string>
-    <string name="sound_category_notification_title" msgid="3502115998790286943">"Thông báo"</string>
+    <string name="notification_log_title" msgid="3766148588239398464">"Nhật ký thông báo"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Nhạc chuông và rung khi gọi"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Hệ thống"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"Thiết lập Wi‑Fi"</string>
@@ -1813,10 +1810,8 @@
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Địa chỉ MAC 4G"</string>
     <string name="enter_password" msgid="4131758584074246224">"Nhập mật khẩu để giải mã bộ nhớ"</string>
-    <!-- no translation found for enter_pin (286221169871526876) -->
-    <skip />
-    <!-- no translation found for enter_pattern (5707838886272453608) -->
-    <skip />
+    <string name="enter_pin" msgid="286221169871526876">"Nhập mã PIN để giải mã bộ nhớ"</string>
+    <string name="enter_pattern" msgid="5707838886272453608">"Vẽ hình để giải mã bộ nhớ"</string>
     <string name="try_again" msgid="4272075051293936921">"Thử lại."</string>
     <string name="delete" msgid="4219243412325163003">"Xóa"</string>
     <string name="misc_files" msgid="6720680815969643497">"Tệp khác"</string>
@@ -2104,18 +2099,6 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Chụp ảnh"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Chọn ảnh từ Thư viện"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
-    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Cài đặt khóa màn hình NFC"</string>
-    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Thẻ được ghép nối"</string>
-    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Đã bật"</string>
-    <string name="start_nfc_pairing" msgid="5363319136364735698">"Ghép nối với thẻ"</string>
-    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
-    <string name="pairing_button_title" msgid="7411638037556429744">"Ghép nối bây giờ"</string>
-    <string name="status_no_ring_detected" msgid="838954925249421062">"Đặt thẻ bằng phẳng lên bàn và đặt điện thoại lên trên"</string>
-    <string name="status_device_paired" msgid="4916932520416516526">"Đã ghép nối thẻ và điện thoại thành công, bạn đã hoàn tất!"</string>
-    <string name="status_error_invalid_device" msgid="5045003971535647259">"Không thể sử dụng thẻ đã cung cấp để mở khóa điện thoại của bạn"</string>
-    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Không ghép nối với thẻ của bạn được, hãy thử lại"</string>
-    <string name="enable_nfc" msgid="5234514241098808766">"NFC chưa được bật và cần có để Mở khóa NFC. Hãy bật NFC."</string>
-    <string name="ok" msgid="3651563352754792958">"Cài đặt NFC"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Cài đặt"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Cài đặt"</string>
     <string name="search_menu" msgid="7053532283559077164">"Tìm kiếm"</string>
@@ -2123,8 +2106,7 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Tìm kiếm gần đây"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Kết quả"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi kết nối mạng"</string>
-    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
-    <skip />
+    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Thiết lập thẻ NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Ghi"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Nhấn vào một thẻ để ghi..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Mật khẩu không hợp lệ, hãy thử lại."</string>
@@ -2132,55 +2114,43 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Không thể ghi dữ liệu vào thẻ NFC. Nếu sự cố tiếp diễn, hãy thử một thẻ khác"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Thẻ NFC không thể ghi được. Vui lòng sử dụng một thẻ khác."</string>
     <string name="default_sound" msgid="8821684447333687810">"Âm thanh mặc định"</string>
-    <!-- no translation found for notification_settings (7558043253996992936) -->
-    <skip />
-    <!-- no translation found for media_volume_option_title (2811531786073003825) -->
-    <skip />
-    <!-- no translation found for alarm_volume_option_title (8219324421222242421) -->
-    <skip />
-    <!-- no translation found for ring_volume_option_title (6767101703671248309) -->
-    <skip />
+    <string name="notification_settings" msgid="4117833036535910061">"Âm thanh &amp; thông báo"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Âm lượng phương tiện"</string>
+    <string name="alarm_volume_option_title" msgid="8219324421222242421">"Âm lượng báo thức"</string>
+    <string name="ring_volume_option_title" msgid="6767101703671248309">"Âm lượng chuông"</string>
+    <string name="notification_volume_option_title" msgid="6064656124416882130">"Âm lượng thông báo"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Đừng làm phiền"</string>
-    <!-- no translation found for ringer_mode_title (7489457312298627735) -->
-    <skip />
-    <!-- no translation found for ringer_mode_audible (4196661772746371017) -->
-    <skip />
-    <!-- no translation found for ringer_mode_vibrate (3381276665087695839) -->
-    <skip />
-    <!-- no translation found for ringer_mode_silent (4812605852723880795) -->
-    <skip />
+    <string name="ringer_mode_title" msgid="7489457312298627735">"Khi cuộc gọi và thông báo đến"</string>
+    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"Khi thông báo đến"</string>
+    <string name="ringer_mode_audible" msgid="4196661772746371017">"Đổ chuông"</string>
+    <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Rung thay vì đổ chuông"</string>
+    <string name="ringer_mode_silent" msgid="4812605852723880795">"Không đổ chuông hoặc rung"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Nhạc chuông điện thoại"</string>
-    <!-- no translation found for notification_ringtone_title (3361201340352664272) -->
-    <skip />
+    <string name="notification_ringtone_title" msgid="3361201340352664272">"Nhạc chuông thông báo mặc định"</string>
     <string name="vibrate_when_ringing_title" msgid="3885857358303178029">"Rung khi đổ chuông"</string>
-    <!-- no translation found for notification_display_settings (2274556854544572598) -->
-    <skip />
+    <string name="notification_display_settings" msgid="2274556854544572598">"Hiển thị thông báo"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Đèn thông báo dạng xung"</string>
-    <!-- no translation found for lock_screen_notifications_title (9118805570775519455) -->
-    <skip />
+    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Khi khóa thiết bị"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Hiển thị tất cả nội dung thông báo"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ẩn nội dung thông báo nhạy cảm"</string>
-    <!-- no translation found for lock_screen_notifications_summary_disable (3001013816427963576) -->
-    <skip />
-    <!-- no translation found for zen_mode_notifications_title (8216258729654184425) -->
-    <skip />
-    <!-- no translation found for zen_mode_notifications_summary_hide (1442445640095117354) -->
-    <skip />
-    <!-- no translation found for zen_mode_notifications_summary_show (4043422218595387460) -->
-    <skip />
+    <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Không hiển thị thông báo nào"</string>
+    <string name="zen_mode_notifications_title" msgid="8216258729654184425">"Khi đang bật chế độ không làm phiền"</string>
+    <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Ẩn thông báo mới khỏi danh sách"</string>
+    <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Hiển thị tất cả thông báo trong danh sách"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Thông báo ứng dụng"</string>
-    <!-- no translation found for touch_sound_settings (8861737295513989009) -->
-    <skip />
-    <!-- no translation found for dial_pad_tones_title (1999293510400911558) -->
-    <skip />
-    <!-- no translation found for screen_locking_sounds_title (3214032809403683539) -->
-    <skip />
-    <!-- no translation found for other_touch_sounds_title (1692523628776677916) -->
-    <skip />
-    <!-- no translation found for vibrate_on_touch_title (674710566941697253) -->
-    <skip />
-    <!-- no translation found for manage_notification_access_title (7510080164564944891) -->
-    <skip />
+    <string name="other_sound_settings" msgid="3151004537006844718">"Âm thanh khác"</string>
+    <string name="dial_pad_tones_title" msgid="1999293510400911558">"Âm bàn phím số"</string>
+    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Âm thanh khóa màn hình"</string>
+    <string name="docking_sounds_title" msgid="155236288949940607">"Âm đế kết nối"</string>
+    <string name="touch_sounds_title" msgid="5326587106892390176">"Âm chạm"</string>
+    <string name="vibrate_on_touch_title" msgid="674710566941697253">"Rung khi chạm"</string>
+    <string name="dock_audio_media_title" msgid="1346838179626123900">"Phát âm đế kết nối"</string>
+    <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Tất cả âm thanh"</string>
+    <string name="dock_audio_media_enabled" msgid="667849382924908673">"Chỉ âm thanh phương tiện"</string>
+    <string name="emergency_tone_silent" msgid="1067515631635824291">"Im lặng"</string>
+    <string name="emergency_tone_alert" msgid="8941852695428130667">"Thông báo"</string>
+    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Rung"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"Quyền quy cập thông báo"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Ứng dụng không thể đọc thông báo"</string>
   <plurals name="manage_notification_access_summary_nonzero">
     <item quantity="one" msgid="8344183614159211585">"%d ứng dụng có thể đọc thông báo"</item>
@@ -2200,24 +2170,18 @@
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> có thể thêm điều kiện thoát vào chế độ Không làm phiền."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Đang tải ứng dụng..."</string>
     <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Hiện thông báo"</string>
-    <!-- no translation found for app_notifications_dialog_priority (3025242591043646494) -->
-    <skip />
-    <!-- no translation found for app_notifications_dialog_visibility (2983683711202708107) -->
-    <skip />
-    <!-- no translation found for app_notification_row_banned (5983655258784814773) -->
-    <skip />
-    <!-- no translation found for app_notification_row_priority (7597101427045166499) -->
-    <skip />
-    <!-- no translation found for app_notification_row_sensitive (1809610030432329940) -->
-    <skip />
+    <string name="app_notifications_dialog_priority" msgid="3025242591043646494">"Hiển thị ở đầu danh sách"</string>
+    <string name="app_notifications_dialog_visibility" msgid="2983683711202708107">"Ẩn nội dung nhạy cảm khi khóa thiết bị"</string>
+    <string name="app_notification_row_banned" msgid="5983655258784814773">"Bị chặn"</string>
+    <string name="app_notification_row_priority" msgid="7597101427045166499">"Đầu danh sách"</string>
+    <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Nhạy cảm"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Xong"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Cho đến khi bạn tắt tính năng này"</string>
     <string name="zen_mode_general_category" msgid="4816396530154508930">"Chặn tất cả các gián đoạn ngoại trừ"</string>
     <string name="zen_mode_automatic_category" msgid="2168130971038236488">"Vào ban đêm"</string>
     <string name="zen_mode_automation_category" msgid="4175437418329803902">"Tự động hóa khác"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Tự động bật"</string>
-    <!-- no translation found for summary_divider_text (3087735442599707533) -->
-    <skip />
+    <string name="summary_divider_text" msgid="3087735442599707533">","</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Không bao giờ"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Cuộc gọi điện thoại"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Tin nhắn"</string>
@@ -2236,8 +2200,6 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Thông báo ứng dụng"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Cài đặt thông báo"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Gửi phản hồi về thiết bị này"</string>
-    <!-- no translation found for switch_on_text (1124106706920572386) -->
-    <skip />
-    <!-- no translation found for switch_off_text (1139356348100829659) -->
-    <skip />
+    <string name="switch_on_text" msgid="1124106706920572386">"Bật"</string>
+    <string name="switch_off_text" msgid="1139356348100829659">"Tắt"</string>
 </resources>
