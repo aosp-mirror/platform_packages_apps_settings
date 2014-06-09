@@ -519,15 +519,16 @@ public class Utils {
      * @param context The context.
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
-     * @param resultTo Option fragment that should receive the result of
-     * the activity launch.
-     * @param resultRequestCode If resultTo is non-null, this is the request
-     * code in which to report the result.
+     * @param resultTo Option fragment that should receive the result of the activity launch.
+     * @param resultRequestCode If resultTo is non-null, this is the request code in which
+     *                          to report the result.
+     * @param titleResId resource id for the String to display for the title of this set
+     *                   of preferences.
      * @param title String to display for the title of this set of preferences.
      */
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, CharSequence title) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, title);
+            Fragment resultTo, int resultRequestCode, int titleResId, CharSequence title) {
+        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResId, title);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -543,16 +544,18 @@ public class Utils {
      * @param context The Context.
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
+     * @param titleResId Optional title resource id to show for this item.
      * @param title Optional title to show for this item.
      * @return Returns an Intent that can be launched to display the given
      * fragment.
      */
     public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
-            Bundle args, CharSequence title) {
+            Bundle args, int titleResId, CharSequence title) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(context, SubSettings.class);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
         return intent;
     }
