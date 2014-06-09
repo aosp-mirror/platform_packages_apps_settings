@@ -299,7 +299,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    ArrayList<SearchIndexableResource> result = new ArrayList<>(1);
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
 
                     SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.display_settings;
@@ -310,11 +311,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    ArrayList<String> nonIndexableKeys = new ArrayList<>(1);
-                    if (!isAutomaticBrightnessAvailable(context.getResources())) {
-                        nonIndexableKeys.add(KEY_AUTO_BRIGHTNESS);
+                    ArrayList<String> result = new ArrayList<String>();
+                    if (!context.getResources().getBoolean(
+                            com.android.internal.R.bool.config_dreamsSupported)) {
+                        result.add(KEY_SCREEN_SAVER);
                     }
-                    return nonIndexableKeys;
+                    if (!isAutomaticBrightnessAvailable(context.getResources())) {
+                        result.add(KEY_AUTO_BRIGHTNESS);
+                    }
+                    return result;
                 }
             };
 }
