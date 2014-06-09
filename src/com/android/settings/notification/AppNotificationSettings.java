@@ -20,6 +20,7 @@ import android.animation.LayoutTransition;
 import android.app.AlertDialog;
 import android.app.INotificationManager;
 import android.app.ListFragment;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -68,7 +69,8 @@ public class AppNotificationSettings extends ListFragment {
     private static final String SECTION_BEFORE_A = "*";
     private static final String SECTION_AFTER_Z = "**";
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
-            = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_NOTIFICATION_PREFERENCES);
+            = new Intent(Intent.ACTION_MAIN)
+                .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
 
     private final Handler mHandler = new Handler();
     private final ArrayMap<String, AppRow> mRows = new ArrayMap<String, AppRow>();
