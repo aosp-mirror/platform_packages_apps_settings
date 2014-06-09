@@ -368,7 +368,7 @@ class AccessPoint extends Preference {
     }
 
     /** visibility status of the WifiConfiguration
-     * @return RSSI and update indicator
+     * @return autojoin debugging information
      * TODO: use a string formatter
      * ["rssi 5Ghz", "num results on 5GHz" / "rssi 5Ghz", "num results on 5GHz"]
      * For instance [-40,5/-30,2]
@@ -380,10 +380,20 @@ class AccessPoint extends Preference {
         long age = (now - mSeen);
         if (age < VISIBILITY_MAX_AGE_IN_MILLI) {
             //show age in seconds, in the form xx
-            visibility.append(Long.toString((age / SECOND_TO_MILLI) % SECOND_TO_MILLI));
+            visibility.append(Long.toString((age / SECOND_TO_MILLI) % SECOND_TO_MILLI))
+                    .append("s");
         } else {
             //not seen for more than 1000 seconds
             visibility.append("!");
+        }
+
+        if (mInfo != null) {
+            visibility.append(" sc=").append(Integer.toString(mInfo.score));
+            visibility.append(" ");
+            visibility.append(String.format("tx=%.1f,", mInfo.txSuccessRate));
+            visibility.append(String.format("%.1f,", mInfo.txRetriesRate));
+            visibility.append(String.format("%.1f ", mInfo.txBadRate));
+            visibility.append(String.format("rx=%.1f", mInfo.rxSuccessRate));
         }
 
         if (scanResultCache != null) {
@@ -438,7 +448,7 @@ class AccessPoint extends Preference {
             visibility.append("]");
         } else {
             if (mRssi != Integer.MAX_VALUE) {
-                visibility.append(", ");
+                visibility.append(", ss=");
                 visibility.append(Integer.toString(mRssi));
                 if (mScanResult != null) {
                     visibility.append(", ");
@@ -446,6 +456,7 @@ class AccessPoint extends Preference {
                 }
             }
         }
+
         return visibility.toString();
     }
 
@@ -455,9 +466,12 @@ class AccessPoint extends Preference {
         StringBuilder summary = new StringBuilder();
 
         Context context = getContext();
-        if (mConfig != null && (mConfig.status == WifiConfiguration.Status.DISABLED
-                || mConfig.autoJoinStatus != WifiConfiguration.AUTO_JOIN_ENABLED)) {
-            if (mConfig.autoJoinStatus != WifiConfiguration.AUTO_JOIN_ENABLED) {
+
+        if (mState != null) { // This is the active connection
+            summary.append(Summary.get(context, mState));
+        } else if (mConfig != null && (mConfig.status == WifiConfiguration.Status.DISABLED
+               || mConfig.autoJoinStatus >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE)) {
+            if (mConfig.autoJoinStatus >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE) {
                 summary.append(context.getString(R.string.wifi_disabled_password_failure));
             } else {
                 switch (mConfig.disableReason) {
@@ -474,8 +488,6 @@ class AccessPoint extends Preference {
             }
         } else if (mRssi == Integer.MAX_VALUE) { // Wifi out of range
             summary.append(context.getString(R.string.wifi_not_in_range));
-        } else if (mState != null) { // This is the active connection
-            summary.append(Summary.get(context, mState));
         } else { // In range, not disabled.
             if (mConfig != null) { // Is saved network
                 summary.append(context.getString(R.string.wifi_remembered));
@@ -503,6 +515,21 @@ class AccessPoint extends Preference {
             //add RSSI/band information for this config, what was seen up to 6 seconds ago
             //verbose WiFi Logging is only turned on thru developers settings
             summary.append(" " + getVisibilityStatus());
+            if (mConfig != null && mConfig.autoJoinStatus > 0) {
+                summary.append(" (" + mConfig.autoJoinStatus);
+                if (mConfig.blackListTimestamp > 0) {
+                    long now = System.currentTimeMillis();
+                    long diff = (now - mConfig.blackListTimestamp)/1000;
+                    long sec = diff%60; //seconds
+                    long min = (diff/60)%60; //minutes
+                    long hour = (min/60)%60; //hours
+                    summary.append(", ");
+                    if (hour > 0) summary.append(Long.toString(hour) + "h ");
+                    summary.append( Long.toString(min) + "m ");
+                    summary.append( Long.toString(sec) + "s ");
+                }
+                summary.append(")");
+            }
         }
         setSummary(summary.toString());
     }
