@@ -238,7 +238,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         public boolean onPreferenceClick(Preference preference) {
             if (mFragment != null) {
                 Utils.startWithFragment(
-                        getContext(), mFragment, mFragmentArguments, null, 0, mTitle);
+                        getContext(), mFragment, mFragmentArguments, null, 0, 0, mTitle);
                 return true;
             }
             return false;
