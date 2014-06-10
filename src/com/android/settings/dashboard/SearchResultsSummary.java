@@ -181,7 +181,7 @@ public class SearchResultsSummary extends Fragment {
                     Bundle args = new Bundle();
                     args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
 
-                    Utils.startWithFragment(sa, className, args, null, 0, screenTitle);
+                    Utils.startWithFragment(sa, className, args, null, 0, -1, screenTitle);
                 } else {
                     final Intent intent = new Intent(action);
 

@@ -175,10 +175,11 @@ public class SettingsActivity extends Activity
 
     /**
      * When starting this activity and using {@link #EXTRA_SHOW_FRAGMENT},
-     * this extra can also be specify to supply the title to be shown for
+     * those extra can also be specify to supply the title or title res id to be shown for
      * that fragment.
      */
     public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
+    public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID = ":settings:show_fragment_title_resid";
 
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
@@ -192,6 +193,7 @@ public class SettingsActivity extends Activity
     private String mFragmentClass;
 
     private CharSequence mInitialTitle;
+    private int mInitialTitleResId;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -478,9 +480,7 @@ public class SettingsActivity extends Activity
             mSearchMenuItemExpanded = savedState.getBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED);
             mSearchQuery = savedState.getString(SAVE_KEY_SEARCH_QUERY);
 
-            final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
-            mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
-            setTitle(mInitialTitle);
+            setTitleFromIntent(getIntent());
 
             ArrayList<DashboardCategory> categories =
                     savedState.getParcelableArrayList(SAVE_KEY_CATEGORIES);
@@ -500,19 +500,17 @@ public class SettingsActivity extends Activity
                     mDisplayHomeAsUpEnabled = false;
                     mDisplaySearch = false;
                 }
-                final String initialTitle = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
-                mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
-                setTitle(mInitialTitle);
+                setTitleFromIntent(getIntent());
 
                 Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-                switchToFragment( initialFragmentName, initialArguments, true, false,
-                        mInitialTitle, false);
+                switchToFragment(initialFragmentName, initialArguments, true, false,
+                        mInitialTitleResId, mInitialTitle, false);
             } else {
                 // No UP if we are displaying the main Dashboard
                 mDisplayHomeAsUpEnabled = false;
-                mInitialTitle = getText(R.string.dashboard_title);
+                mInitialTitleResId = R.string.dashboard_title;
                 switchToFragment(DashboardSummary.class.getName(), null, false, false,
-                        mInitialTitle, false);
+                        mInitialTitleResId, mInitialTitle, false);
             }
         }
 
@@ -579,6 +577,20 @@ public class SettingsActivity extends Activity
         }
     }
 
+    private void setTitleFromIntent(Intent intent) {
+        final int initialTitleResId = intent.getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1);
+        if (initialTitleResId > 0) {
+            mInitialTitle = null;
+            mInitialTitleResId = initialTitleResId;
+            setTitle(mInitialTitleResId);
+        } else {
+            mInitialTitleResId = -1;
+            final String initialTitle = intent.getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
+            mInitialTitle = (initialTitle != null) ? initialTitle : getTitle();
+            setTitle(mInitialTitle);
+        }
+    }
+
     @Override
     public void onBackStackChanged() {
         setTitleFromBackStack();
@@ -588,7 +600,11 @@ public class SettingsActivity extends Activity
         final int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            setTitle(mInitialTitle);
+            if (mInitialTitleResId > 0) {
+                setTitle(mInitialTitleResId);
+            } else {
+                setTitle(mInitialTitle);
+            }
             return 0;
         }
 
@@ -753,16 +769,17 @@ public class SettingsActivity extends Activity
      */
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
             CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-        String title;
-        if (titleRes > 0) {
-            title = getString(titleRes);
-        } else if (titleText != null) {
-            title = titleText.toString();
-        } else {
-            // There not much we can do in that case
-            title = "";
+        String title = null;
+        if (titleRes < 0) {
+            if (titleText != null) {
+                title = titleText.toString();
+            } else {
+                // There not much we can do in that case
+                title = "";
+            }
         }
-        Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode, title);
+        Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode,
+                titleRes, title);
     }
 
     /**
@@ -801,7 +818,7 @@ public class SettingsActivity extends Activity
      * Switch to a specific Fragment with taking care of validation, Title and BackStack
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
-            boolean addToBackStack, CharSequence title, boolean withTransition) {
+            boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
@@ -815,7 +832,9 @@ public class SettingsActivity extends Activity
         if (addToBackStack) {
             transaction.addToBackStack(SettingsActivity.BACK_STACK_PREFS);
         }
-        if (title != null) {
+        if (titleResId > 0) {
+            transaction.setBreadCrumbTitle(titleResId);
+        } else if (title != null) {
             transaction.setBreadCrumbTitle(title);
         }
         transaction.commitAllowingStateLoss();
@@ -1270,10 +1289,9 @@ public class SettingsActivity extends Activity
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
-            String title = getString(R.string.search_results_title);
             mSearchResultsFragment = (SearchResultsSummary) switchToFragment(
-                    SearchResultsSummary.class.getName(), null, false, true, title,
-                    true);
+                    SearchResultsSummary.class.getName(), null, false, true,
+                    R.string.search_results_title, null, true);
         }
         mSearchResultsFragment.setSearchView(mSearchView);
         mSearchMenuItemExpanded = true;

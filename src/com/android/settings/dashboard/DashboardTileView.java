@@ -85,7 +85,7 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
     public void onClick(View v) {
         if (mTile.fragment != null) {
             Utils.startWithFragment(getContext(), mTile.fragment, mTile.fragmentArguments, null, 0,
-                    mTile.getTitle(getResources()));
+                    mTile.titleRes, mTile.getTitle(getResources()));
         } else if (mTile.intent != null) {
             getContext().startActivity(mTile.intent);
         }
