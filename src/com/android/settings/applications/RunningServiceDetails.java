@@ -583,7 +583,6 @@ public class RunningServiceDetails extends Fragment
                     
                     return new AlertDialog.Builder(getActivity())
                             .setTitle(getActivity().getString(R.string.runningservicedetails_stop_dlg_title))
-                            .setIconAttribute(android.R.attr.alertDialogIcon)
                             .setMessage(getActivity().getString(R.string.runningservicedetails_stop_dlg_text))
                             .setPositiveButton(R.string.dlg_ok,
                                     new DialogInterface.OnClickListener() {

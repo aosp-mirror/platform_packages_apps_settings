@@ -1236,7 +1236,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                         getActivity().getResources().getString(
                                 R.string.dev_settings_warning_message))
                         .setTitle(R.string.dev_settings_warning_title)
-                        .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setPositiveButton(android.R.string.yes, this)
                         .setNegativeButton(android.R.string.no, this)
                         .show();
@@ -1277,7 +1276,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mAdbDialog = new AlertDialog.Builder(getActivity()).setMessage(
                         getActivity().getResources().getString(R.string.adb_warning_message))
                         .setTitle(R.string.adb_warning_title)
-                        .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setPositiveButton(android.R.string.yes, this)
                         .setNegativeButton(android.R.string.no, this)
                         .show();

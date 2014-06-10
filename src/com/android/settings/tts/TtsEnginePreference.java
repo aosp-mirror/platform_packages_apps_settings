@@ -198,13 +198,12 @@ public class TtsEnginePreference extends Preference {
         Log.i(TAG, "Displaying data alert for :" + mEngineInfo.name);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(android.R.string.dialog_alert_title);
-        builder.setIconAttribute(android.R.attr.alertDialogIcon);
-        builder.setMessage(getContext().getString(
-                R.string.tts_engine_security_warning, mEngineInfo.label));
-        builder.setCancelable(true);
-        builder.setPositiveButton(android.R.string.ok, positiveOnClickListener);
-        builder.setNegativeButton(android.R.string.cancel, negativeOnClickListener);
+        builder.setTitle(android.R.string.dialog_alert_title)
+                .setMessage(getContext().getString(
+                        R.string.tts_engine_security_warning, mEngineInfo.label))
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, positiveOnClickListener)
+                .setNegativeButton(android.R.string.cancel, negativeOnClickListener);
 
         AlertDialog dialog = builder.create();
         dialog.show();

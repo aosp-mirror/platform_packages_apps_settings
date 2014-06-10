@@ -202,7 +202,6 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
 
             mEditUserInfoDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.profile_info_settings_title)
-                .setIconAttribute(R.drawable.ic_settings_multiuser)
                 .setView(content)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
