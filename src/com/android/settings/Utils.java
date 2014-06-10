@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,6 +41,8 @@ import android.net.LinkProperties;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -52,6 +55,7 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -63,13 +67,12 @@ import com.android.settings.dashboard.DashboardTile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
 public final class Utils {
-
+    private static final String TAG = "Settings";
     /**
      * Set the preference's title to the matching activity's label.
      */
@@ -608,4 +611,29 @@ public final class Utils {
         UserInfo currentUser = userManager.getUserInfo(userManager.getUserHandle());
         return currentUser.isManagedProfile();
     }
+
+    /**
+     * Returns the {@link UserHandle} of the profile that a settings screen should refer to.
+     *
+     * <p> This takes into account the id of the user that triggered the settings screen.
+     */
+   public static UserHandle getProfileToDisplay(IActivityManager am, IBinder activityToken,
+           Bundle arguments) {
+       int currentUser = UserHandle.getCallingUserId();
+       // Check to see if it was called from a different user
+       try {
+           int launchedFromUser = UserHandle.getUserId(am.getLaunchedFromUid(activityToken));
+           if (launchedFromUser != currentUser) {
+               // This is a forwarded intent
+               return new UserHandle(launchedFromUser);
+           }
+       } catch (RemoteException e) {
+           // Should not happen
+           Log.v(TAG, "Could not get launching user.");
+       }
+       // TODO: Check fragment arguments. See: http://b/15466880
+
+       // Default to current profile
+       return new UserHandle(currentUser);
+   }
 }

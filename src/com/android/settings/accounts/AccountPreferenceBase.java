@@ -20,6 +20,7 @@ import com.google.android.collect.Maps;
 
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
+import android.app.ActivityManagerNative;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncAdapterType;
@@ -38,6 +39,7 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,23 +49,28 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
 
     protected static final String TAG = "AccountSettings";
+
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";
+
     private final Handler mHandler = new Handler();
+
     private UserManager mUm;
     private Object mStatusChangeListenerHandle;
     private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
     protected AuthenticatorHelper mAuthenticatorHelper;
+    protected UserHandle mUserHandle;
+
     private java.text.DateFormat mDateFormat;
     private java.text.DateFormat mTimeFormat;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        // TODO: This needs to handle different users, get the user id from the intent
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-        mAuthenticatorHelper = new AuthenticatorHelper(
-                getActivity(), UserHandle.getCallingUserHandle(), mUm, this);
+        mUserHandle = Utils.getProfileToDisplay(ActivityManagerNative.getDefault(),
+                getActivity().getActivityToken(), icicle);
+        mAuthenticatorHelper = new AuthenticatorHelper(getActivity(), mUserHandle, mUm, this);
     }
 
     /**

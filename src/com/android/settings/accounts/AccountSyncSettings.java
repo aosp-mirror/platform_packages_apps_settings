@@ -181,9 +181,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         Bundle arguments = getArguments();
         if (arguments == null) {
             Log.e(TAG, "No arguments provided when starting intent. ACCOUNT_KEY needed.");
+            finish();
             return;
         }
-
         mAccount = (Account) arguments.getParcelable(ACCOUNT_KEY);
         if (mAccount != null) {
             if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "Got account: " + mAccount);
@@ -211,7 +211,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         SyncStateCheckBoxPreference item =
                 new SyncStateCheckBoxPreference(getActivity(), account, authority);
         item.setPersistent(false);
-        final ProviderInfo providerInfo = getPackageManager().resolveContentProvider(authority, 0);
+        final ProviderInfo providerInfo = getPackageManager().resolveContentProviderAsUser(
+                authority, 0, mUserHandle.getIdentifier());
         if (providerInfo == null) {
             return;
         }
@@ -235,7 +236,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
-
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         if (!um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
             MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
@@ -255,7 +255,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        boolean syncActive = ContentResolver.getCurrentSync() != null;
+        // Note that this also counts accounts that are not currently displayed
+        boolean syncActive = ContentResolver.getCurrentSyncsAsUser(
+                mUserHandle.getIdentifier()).isEmpty();
         menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
     }
@@ -344,9 +346,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         if (flag) {
             Bundle extras = new Bundle();
             extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-            ContentResolver.requestSync(account, authority, extras);
+            ContentResolver.requestSyncAsUser(account, authority, mUserHandle.getIdentifier(),
+                    extras);
         } else {
-            ContentResolver.cancelSync(account, authority);
+            ContentResolver.cancelSyncAsUser(account, authority, mUserHandle.getIdentifier());
         }
     }
 
@@ -368,7 +371,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private void setFeedsState() {
         // iterate over all the preferences, setting the state properly for each
         Date date = new Date();
-        List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncs();
+        final int userId = mUserHandle.getIdentifier();
+        List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncsAsUser(userId);
         boolean syncIsFailing = false;
 
         // Refresh the sync status checkboxes - some syncs may have become active.
@@ -384,8 +388,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
 
-            SyncStatusInfo status = ContentResolver.getSyncStatus(account, authority);
-            boolean syncEnabled = ContentResolver.getSyncAutomatically(account, authority);
+            SyncStatusInfo status = ContentResolver.getSyncStatusAsUser(account, authority, userId);
+            boolean syncEnabled = ContentResolver.getSyncAutomaticallyAsUser(account, authority,
+                    userId);
             boolean authorityIsPending = status == null ? false : status.pending;
             boolean initialSync = status == null ? false : status.initialize;
 
@@ -415,7 +420,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             } else {
                 syncPref.setSummary("");
             }
-            int syncState = ContentResolver.getIsSyncable(account, authority);
+            int syncState = ContentResolver.getIsSyncableAsUser(account, authority, userId);
 
             syncPref.setActive(activelySyncing && (syncState >= 0) &&
                     !initialSync);
@@ -425,7 +430,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             syncPref.setFailed(lastSyncFailed);
             ConnectivityManager connManager =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            final boolean masterSyncAutomatically = ContentResolver.getMasterSyncAutomatically();
+            final boolean masterSyncAutomatically =
+                    ContentResolver.getMasterSyncAutomaticallyAsUser(userId);
             final boolean backgroundDataEnabled = connManager.getBackgroundDataSetting();
             final boolean oneTimeSyncMode = !masterSyncAutomatically || !backgroundDataEnabled;
             syncPref.setOneTimeSyncMode(oneTimeSyncMode);
@@ -438,7 +444,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onAccountsUpdate(final UserHandle userHandle) {
         super.onAccountsUpdate(userHandle);
-        mAccounts = AccountManager.get(getActivity()).getAccounts();
+        mAccounts = AccountManager.get(getActivity()).getAccountsAsUser(
+                mUserHandle.getIdentifier());
         updateAccountCheckboxes(mAccounts);
         onSyncStateUpdated();
     }
@@ -446,7 +453,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private void updateAccountCheckboxes(Account[] accounts) {
         mInvisibleAdapters.clear();
 
-        SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypes();
+       SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
+                mUserHandle.getIdentifier());
         HashMap<String, ArrayList<String>> accountTypeToAuthorities =
             Maps.newHashMap();
         for (int i = 0, n = syncAdapters.length; i < n; i++) {
@@ -484,7 +492,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 for (int j = 0, m = authorities.size(); j < m; j++) {
                     final String authority = authorities.get(j);
                     // We could check services here....
-                    int syncState = ContentResolver.getIsSyncable(account, authority);
+                    int syncState = ContentResolver.getIsSyncableAsUser(account, authority,
+                            mUserHandle.getIdentifier());
                     if (Log.isLoggable(TAG, Log.VERBOSE)) {
                         Log.d(TAG, "  found authority " + authority + " " + syncState);
                     }
