@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Дэлгэцний асаалттай цаг:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Тодорхойгүй"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Цэнэглэж байна"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"AC-р цэнэглэж байна"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"USB-р цэнэглэж байна"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Кабльгүйгээр цэнэглэж байна"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(утасгүй)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Цэнэглэхгүй байна"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Цэнэглэхгүй байна"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Дүүрэн"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Хостын талбар хоосон байгаа бол портын талбар хоосон байх шаардлагатай."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Таны оруулсан порт буруу байна."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP проксиг хөтөч ашиглаж байгаа боловч бусад апп-ууд ашиглахгүй байж магадгүй."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Байршил"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Хөрш CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"Үүрийн мэдээлэл:"</string>
@@ -276,7 +276,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Тохиргоо"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Тохиргооны товчилбор"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Нислэгийн горим"</string>
-    <string name="radio_controls_title" msgid="5364843879587669966">"NFC &amp; дэлгэрэнгүй"</string>
+    <string name="radio_controls_title" msgid="6889937359495515769">"Бусад…"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Утасгүй &amp; сүлжээ"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Wi-Fi, блютүүт , нислэгийн горим, мобайл сүлжээнүүд, &amp; VPNs-г удирдах"</string>
     <string name="roaming" msgid="3596055926335478572">"Дата роуминг"</string>
@@ -317,6 +317,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Эзэмшигчийн мэдээлэл"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Хэрэгсэл идэвхжүүлэх"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Админ идэвхгүй болгосон"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC тайлах"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Түгжих дэлгэцэн дээр харуулах текстийг оруулна уу"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Дэлгэц түгжигдэхэд хэрэглэгчийн мэдээллийг харуулах"</string>
@@ -324,7 +325,6 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Дэлгэц түгжигдэхэд профайлын мэдээллийг харуулах"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Профайлын мэдээлэл"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Байршил"</string>
-    <string name="account_settings_title" msgid="626177544686329806">"Акаунт"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Аюулгүй байдал"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Миний Байршил, дэлгэц тайлах, SIM картны түгжээ, жуухны сангийн түгжээг тохируулах"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Миний Байршил, дэлгэц тайлах, жуухын сангийн түгжээ зэргийг тохируулах"</string>
@@ -728,8 +728,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Таблетыг док-д суурилуулах буюу салгах үед дуу тоглуулахгүй"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Утсыг док-д суурилуулах буюу салгах үед дуу тоглуулахгүй"</string>
     <string name="account_settings" msgid="6403589284618783461">"Акаунт"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Хувийн"</string>
-    <string name="category_work" msgid="8699184680584175622">"Ажил"</string>
     <string name="search_settings" msgid="1910951467596035063">"Хайх"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Хайлтын тохиргоо болон түүхийг удирдах"</string>
     <string name="display_settings" msgid="7965901687241669598">"Дэлгэц"</string>
@@ -993,7 +991,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS апп-г өөрчлөх үү?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Таны үндсэн SMS аппликешнээр <xliff:g id="CURRENT_APP">%2$s</xliff:g>-н оронд <xliff:g id="NEW_APP">%1$s</xliff:g>-г ашиглах уу?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g>-г таны SMS апп-р ашиглах уу?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Тодорхойгүй SIM оператор"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Тодорхойгүй SIM оператор"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s-д мэдэгдэж байгаа эрх зохицуулах вебсайт байхгүй байна"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIM карт оруулаад дахин эхлүүлнэ үү"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Интернэтэд холбогдоно уу"</string>
@@ -1326,7 +1324,7 @@
     <string name="enable_adb_summary" msgid="4881186971746056635">"USB холбодсон үеийн согог засах горим"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"USB дебагын зөвшөөрлийг хураах"</string>
     <string name="bugreport_in_power" msgid="7923901846375587241">"Согог мэдээлэх товчлол"</string>
-    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Цэсэнд согогийн репорт авахад зориулсан товчийг харуулах"</string>
+    <string name="bugreport_in_power_summary" msgid="3245617665067320992">"Согог мэдээлэхэд зориулсан товчийг Шуурхай тохиргоо дотор харуулах"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Идэвхтэй байлгах"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Цэнэглэж байх үед дэлгэц хэзээ ч амрахгүй"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Блютүүт HCI снүүп логыг идэвхжүүлэх"</string>
@@ -1335,9 +1333,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Ажиллах цагийг сонгоно уу"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Ажиллах цагийг <xliff:g id="OLD">%1$s</xliff:g>-с <xliff:g id="NEW">%2$s</xliff:g> рүү өөрчлөхийн тулд дахин асаах уу?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Утасгүй дэлгэцийн сертификат"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"WiFi Verbose логийг идэвхжүүлэх"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Утасгүй дэлгэцийн сертификатын сонголтыг харуулах"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Wifi логийн түвшинг нэмэгдүүлж, WiFi сонгогч доторх SSID-д ногдох RSSI-г харуулах"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Хуурамч байршлыг зөвшөөрөх"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Хуурамч байршлыг зөвшөөрөх"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB дебаг хийхийг зөвшөөрөх үү?"</string>
@@ -1428,7 +1424,6 @@
     <string name="captioning_preview_text" msgid="4067935959797375065">"Титрүүд дараахтай адил харагдана"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"Үндсэн"</string>
-    <string name="color_unspecified" msgid="5179683785413568326">"Үндсэн"</string>
     <string name="color_none" msgid="3475640044925814795">"Хоосон"</string>
     <string name="color_white" msgid="8045195170201590239">"Цагаан"</string>
     <string name="color_gray" msgid="9192312087142726313">"Саарал"</string>
@@ -1483,11 +1478,7 @@
     <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - ойролц. <xliff:g id="TIME">%2$s</xliff:g> үлдсэн"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - дүүргэхэд <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - AC-р дүүргэхэд <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - USB-р дүүргэхэд <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - утасгүй цэнэглэгчээр дүүргэтэл <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"Сүүлийн бүрэн цэнэглэлтээс хойшхи ашиглалт"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g> (дүүрэхэд <xliff:g id="TIME">%3$s</xliff:g> үлдсэн)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Салгаснаас хойшхи зайны ашиглалт"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Дахин ачаалснаас хойшхи зайны ашиглалт"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> зайгаар"</string>
@@ -1500,11 +1491,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Мобайл сүлжээний сигнал"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> ҮӨ"</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> ҮХ"</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"Төхөөрөмжийн идэвхтэй байх хугацаа"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi цагтаа"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi цагтаа"</string>
@@ -1685,7 +1671,6 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Бүх сертификатыг устгах"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Итгэмжлэгдсэн жуухууд"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Итгэлтэй CA сертификатуудыг харуулах"</string>
-    <string name="advanced_security_title" msgid="2434776238010578865">"Дэлгэрэнгүй"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Хадгалалтын сангийн төрөл"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Техник хангамжаар дэмжигдсэн"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Зөвхөн програм"</string>
@@ -1736,7 +1721,7 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Энэ администратор идэвхтэй байгаа бөгөөд <xliff:g id="APP_NAME">%1$s</xliff:g> апп-д дараах үйлдлүүдийг хийхийг зөвшөөрсөн:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Гарчиггүй"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Ерөнхий"</string>
-    <string name="notification_log_title" msgid="3766148588239398464">"Мэдэгдлийн лог"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"Мэдэгдэл"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Дуудлагын хонхны ая &amp; чичиргээ"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Систем"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"Wi‑Fi суулгах"</string>
@@ -1769,7 +1754,6 @@
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"Тохируулгыг үргэлжлүүлэхийн тулд "<b>"Дараагийн"</b>" гэсэнд хүрнэ үү.\n\nӨөр  Wi‑Fi сүлжээнд холбогдохын тулд "<b>"Буцах"</b>" гэсэнд хүрнэ үү."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Синк идэвхжсэн"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Синк идэвхгүйжсэн"</string>
-    <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Одоо синк хийж байна"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Синкийн алдаа."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Синк амжилтгүй"</string>
     <string name="sync_active" msgid="8476943765960863040">"Синк идэвхжүүлсэн"</string>
@@ -2105,6 +2089,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Зураг авах"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Галерейгаас зураг сонгох"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"NFC дэлгэцийн түгжээний тохиргоо"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Хосолсон таг-ууд"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Идэвхжүүлсэн"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Таг-тай хослуулах"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Одоо хослуулах"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Таг-г ширээн дээр хэвтээгээр байрлуулж дээр нь утсаа тавьна уу"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"Таг болон утас амжилттай хосолсон!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"Өгөгдсөн таг-г таны утасны түгжээг тайлахад ашиглах боломжгүй"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Таны таг-тай хослуулах амжилтгүй боллоо, дахин оролдоно уу"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"NFC түгжээг тайлахад шаардлагатай NFC идэвхжээгүй байна. NFC-г асаана уу."</string>
+    <string name="ok" msgid="3651563352754792958">"NFC Тохиргоо"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Тохиргоо"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Тохиргоо"</string>
     <string name="search_menu" msgid="7053532283559077164">"Хайх"</string>
@@ -2120,14 +2116,12 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Датаг NFC тагь руу бичих боломжгүй. Асуудал хэвээр байвал өөр тагь ашиглаж үзнэ үү"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC тагь дээр бичих боломжгүй. Өөр тагь ашиглана уу."</string>
     <string name="default_sound" msgid="8821684447333687810">"Үндсэн дуу"</string>
-    <string name="notification_settings" msgid="4117833036535910061">"Ая &amp; Мэдэгдэл"</string>
+    <string name="notification_settings" msgid="7558043253996992936">"Ая &amp; Мэдэгдэл"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Медиа дууны хэмжээ"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Сэрүүлгийн дууны хэмжээ"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Хонхны дууны хэмжээ"</string>
-    <string name="notification_volume_option_title" msgid="6064656124416882130">"Мэдэгдлийн дууны хэмжээ"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Бүү саад бол"</string>
     <string name="ringer_mode_title" msgid="7489457312298627735">"Дуудлага болон мэдэгдэл ирэх үед"</string>
-    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"Мэдэгдэл ирэх үед"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"Хонхны ая"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Хонхны оронд чичиргээ"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"Хонхгүй эсхүл чичиргээгүй"</string>
@@ -2144,18 +2138,11 @@
     <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Жагсаалтаас шинэ мэдэгдлийг нуух"</string>
     <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Жагсаалтын бүх мэдэгдлийг харуулах"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Aпп мэдэгдлүүд"</string>
-    <string name="other_sound_settings" msgid="3151004537006844718">"Бусад ая"</string>
+    <string name="touch_sound_settings" msgid="8861737295513989009">"Хүрэлтийн дуунууд"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Диалпадын ая"</string>
-    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Дэлгэц түгжих ая"</string>
-    <string name="docking_sounds_title" msgid="155236288949940607">"Док-н ая"</string>
-    <string name="touch_sounds_title" msgid="5326587106892390176">"Хүрэлтийн ая"</string>
+    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"Дэлгэц түгжих &amp; түгжээс тайлах"</string>
+    <string name="other_touch_sounds_title" msgid="1692523628776677916">"Бусад мэдрэгчийн ая"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"Хүрэлтэнд чичрэх"</string>
-    <string name="dock_audio_media_title" msgid="1346838179626123900">"Док чанга яригчаар тоглуулах"</string>
-    <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Бүх аудио"</string>
-    <string name="dock_audio_media_enabled" msgid="667849382924908673">"Зөвхөн медиа аудио"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"Чимээгүй"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"Сэрэмжлүүлэг"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Чичиргээ"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Мэдэгдлийн хандалт"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Апп-ууд мэдэгдлийг уншиж чадахгүй"</string>
   <plurals name="manage_notification_access_summary_nonzero">
