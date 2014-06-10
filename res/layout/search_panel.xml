@@ -33,17 +33,6 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="@dimen/dashboard_category_title_height"
-                      android:paddingStart="@dimen/search_title_padding_start"
-                      android:singleLine="true"
-                      android:ellipsize="marquee"
-                      android:gravity="center_vertical"
-                      android:textAppearance="@style/TextAppearance.RecentsTitle"
-                      android:textAlignment="viewStart"
-                      android:text="@string/search_recents_queries_label"
-                    />
-
             <ListView android:id="@+id/list_suggestions"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -57,17 +46,6 @@
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 android:layout_weight="1">
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="@dimen/dashboard_category_title_height"
-                      android:paddingStart="@dimen/search_title_padding_start"
-                      android:singleLine="true"
-                      android:ellipsize="marquee"
-                      android:gravity="center_vertical"
-                      android:textAppearance="@style/TextAppearance.ResultTitle"
-                      android:textAlignment="viewStart"
-                      android:text="@string/search_results_label"
-                    />
 
             <ListView android:id="@+id/list_results"
                     android:layout_width="match_parent"
