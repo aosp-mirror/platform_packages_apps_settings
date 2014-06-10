@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Screen ON time:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Unknown"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Charging"</string>
-    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"Charging on AC"</string>
-    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"Charging over USB"</string>
-    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"Charging wirelessly"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(wireless)"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Not charging"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Not charging"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Full"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"The port field must be empty if the host field is empty."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"The port that you typed is not valid."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"The HTTP proxy is used by the browser but may not be used by the other apps."</string>
-    <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"PAC URL: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Location:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Neighbouring CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -276,7 +276,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Settings"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Settings shortcut"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Aeroplane mode"</string>
-    <string name="radio_controls_title" msgid="5364843879587669966">"NFC &amp; more"</string>
+    <string name="radio_controls_title" msgid="6889937359495515769">"More…"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Wireless &amp; networks"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Manage Wi‑Fi, Bluetooth, aeroplane mode, mobile networks, &amp; VPNs"</string>
     <string name="roaming" msgid="3596055926335478572">"Data roaming"</string>
@@ -317,6 +317,7 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Owner info"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Enable widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Disabled by administrator"</string>
+    <string name="nfc_unlock_title" msgid="8827035651970841825">"NFC unlock"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Type text to display on the lock screen"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Show user info on lock screen"</string>
@@ -324,7 +325,6 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Show profile info on lock screen"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Profile info"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Location"</string>
-    <string name="account_settings_title" msgid="626177544686329806">"Accounts"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Security"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Set My Location, screen unlock, SIM card lock, credential storage lock"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Set My Location, screen unlock, credential storage lock"</string>
@@ -570,7 +570,8 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Connect to network"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Forget network"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modify network"</string>
-    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Write to NFC tag"</string>
+    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
+    <skip />
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"To see available networks, turn Wi‑Fi on."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Searching for Wi‑Fi networks…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"You don\'t have permission to change the Wi‑Fi network."</string>
@@ -619,7 +620,8 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS available)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Secured with <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", secured with <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Enter your network password"</string>
+    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
+    <skip />
     <string name="wifi_security_none" msgid="7985461072596594400">"None"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"To improve location accuracy and for other purposes, <xliff:g id="APP_NAME">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Allow"</string>
@@ -728,8 +730,6 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Don\'t play sound when inserting or removing tablet from dock"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Don\'t play sound when inserting or removing phone from dock"</string>
     <string name="account_settings" msgid="6403589284618783461">"Accounts"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Personal"</string>
-    <string name="category_work" msgid="8699184680584175622">"Work"</string>
     <string name="search_settings" msgid="1910951467596035063">"Search"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Manage search settings and history"</string>
     <string name="display_settings" msgid="7965901687241669598">"Display"</string>
@@ -738,10 +738,13 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Switch orientation automatically when rotating phone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Switch orientation automatically when rotating tablet"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Switch orientation automatically when rotating phone"</string>
-    <string name="brightness" msgid="8480105032417444275">"Brightness level"</string>
+    <!-- no translation found for brightness (8480105032417444275) -->
+    <skip />
     <string name="brightness_summary" msgid="838917350127550703">"Adjust the brightness of the screen"</string>
-    <string name="auto_brightness_title" msgid="6341042882350279391">"Adaptive brightness"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimise brightness level for available light"</string>
+    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
+    <skip />
+    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
+    <skip />
     <string name="screen_timeout" msgid="4351334843529712571">"Sleep"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
@@ -993,7 +996,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Change SMS app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> as your SMS app?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Use <xliff:g id="NEW_APP">%s</xliff:g> as your SMS app?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Unknown SIM operator"</string>
+    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Unknown SIM operator"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s has no known provisioning website"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Please insert SIM card and restart"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Please connect to the internet"</string>
@@ -1325,8 +1328,10 @@
     <string name="enable_adb" msgid="7982306934419797485">"USB debugging"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode when USB is connected"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Revoke USB debugging authorisations"</string>
-    <string name="bugreport_in_power" msgid="7923901846375587241">"Bug report shortcut"</string>
-    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Show a button in the power menu for taking a bug report"</string>
+    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
+    <skip />
+    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
+    <skip />
     <string name="keep_screen_on" msgid="1146389631208760344">"Stay awake"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Screen will never sleep while charging"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Enable Bluetooth HCI snoop log"</string>
@@ -1335,9 +1340,7 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Select runtime"</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Reboot to change runtime from <xliff:g id="OLD">%1$s</xliff:g> to <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Wireless display certification"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Enable Wi-Fi Verbose Logging"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Show options for wireless display certification"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Increase Wi-Fi logging level, show per SSID RSSI in Wi-Fi Picker"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Allow mock locations"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Allow mock locations"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Allow USB debugging?"</string>
@@ -1428,7 +1431,6 @@
     <string name="captioning_preview_text" msgid="4067935959797375065">"Captions will look like this"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"Default"</string>
-    <string name="color_unspecified" msgid="5179683785413568326">"Default"</string>
     <string name="color_none" msgid="3475640044925814795">"None"</string>
     <string name="color_white" msgid="8045195170201590239">"White"</string>
     <string name="color_gray" msgid="9192312087142726313">"Grey"</string>
@@ -1483,11 +1485,7 @@
     <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – approx. <xliff:g id="TIME">%2$s</xliff:g> left"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> until full"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> until full on AC"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> until full over USB"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> until full from wireless"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"Use since last full charge"</string>
+    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g> until full)"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Battery use since unplugged"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Battery use since reset"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> on battery"</string>
@@ -1500,11 +1498,6 @@
     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Mobile network signal"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <string name="battery_stats_hour_24_label" msgid="206767955462982310">"<xliff:g id="TIME">%1$d</xliff:g>:00"</string>
-    <string name="battery_stats_hour_am_label" msgid="8996438390134927921">"<xliff:g id="TIME">%1$d</xliff:g> a.m."</string>
-    <string name="battery_stats_hour_pm_label" msgid="2092425426204059915">"<xliff:g id="TIME">%1$d</xliff:g> p.m."</string>
-    <string name="battery_stats_date_day_first_label" msgid="2416879783432101481">"<xliff:g id="DAY">%1$d</xliff:g>/<xliff:g id="MONTH">%2$d</xliff:g>"</string>
-    <string name="battery_stats_date_month_first_label" msgid="669925700794858190">"<xliff:g id="MONTH">%2$d</xliff:g>/<xliff:g id="DAY">%1$d</xliff:g>"</string>
     <string name="awake" msgid="387122265874485088">"Device awake time"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi‑Fi on time"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi‑Fi on time"</string>
@@ -1685,7 +1678,6 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Remove all certificates"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Trusted credentials"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Display trusted CA certificates"</string>
-    <string name="advanced_security_title" msgid="2434776238010578865">"Advanced"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Storage type"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardware-backed"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Software only"</string>
@@ -1736,7 +1728,7 @@
     <string name="device_admin_status" msgid="4252975713178851910">"This administrator is active and allows the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Untitled"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
-    <string name="notification_log_title" msgid="3766148588239398464">"Notification log"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"Notifications"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Call ringtone &amp; vibrate"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"System"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"Wi‑Fi setup"</string>
@@ -1769,7 +1761,6 @@
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"Touch "<b>"Next"</b>" to continue with setup.\n\nTouch "<b>"Back"</b>" to connect to a different Wi‑Fi network."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Sync enabled"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sync disabled"</string>
-    <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"Syncing now"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Sync error..."</string>
     <string name="sync_failed" msgid="1696499856374109647">"Sync failed"</string>
     <string name="sync_active" msgid="8476943765960863040">"Sync active"</string>
@@ -2105,6 +2096,18 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Take photo"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Choose photo from Gallery"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
+    <string name="lock_settings_nfc_title" msgid="33998875572836425">"NFC Screen Lock Settings"</string>
+    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Paired Tags"</string>
+    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Enabled"</string>
+    <string name="start_nfc_pairing" msgid="5363319136364735698">"Pair with a tag"</string>
+    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
+    <string name="pairing_button_title" msgid="7411638037556429744">"Pair now"</string>
+    <string name="status_no_ring_detected" msgid="838954925249421062">"Put the tag flat on a table and place the phone on top"</string>
+    <string name="status_device_paired" msgid="4916932520416516526">"Tag and phone successfully paired, you\'ve finished!"</string>
+    <string name="status_error_invalid_device" msgid="5045003971535647259">"The tag provided cannot be used to unlock your phone"</string>
+    <string name="status_error_pairing_failed" msgid="8260473909085202868">"The pairing with your tag failed, please try again"</string>
+    <string name="enable_nfc" msgid="5234514241098808766">"NFC is not enabled and is required for NFC Unlock. Please turn on NFC."</string>
+    <string name="ok" msgid="3651563352754792958">"NFC Settings"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Settings"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Settings"</string>
     <string name="search_menu" msgid="7053532283559077164">"Search"</string>
@@ -2112,7 +2115,8 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Recent searches"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Results"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi Wi-Fi network connection"</string>
-    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Set up Wi-Fi NFC Tag"</string>
+    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
+    <skip />
     <string name="write_tag" msgid="8571858602896222537">"Write"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tap a tag to write..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Invalid password, try again."</string>
@@ -2120,14 +2124,12 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Unable to write data to NFC tag. If the problem persists, try a different tag"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC tag is not writeable. Please use a different tag."</string>
     <string name="default_sound" msgid="8821684447333687810">"Default sound"</string>
-    <string name="notification_settings" msgid="4117833036535910061">"Sound &amp; Notifications"</string>
+    <string name="notification_settings" msgid="7558043253996992936">"Sounds &amp; Notifications"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Media volume"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Alarm volume"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Ring volume"</string>
-    <string name="notification_volume_option_title" msgid="6064656124416882130">"Notification volume"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Do not disturb"</string>
     <string name="ringer_mode_title" msgid="7489457312298627735">"When calls and notifications arrive"</string>
-    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"When notifications arrive"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"Ring"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Vibrate instead of ringing"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"Don\'t ring or vibrate"</string>
@@ -2144,18 +2146,11 @@
     <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Hide new notifications from the list"</string>
     <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Show all notifications in the list"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"App notifications"</string>
-    <string name="other_sound_settings" msgid="3151004537006844718">"Other sounds"</string>
+    <string name="touch_sound_settings" msgid="8861737295513989009">"Touch sounds"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
-    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Screen locking sounds"</string>
-    <string name="docking_sounds_title" msgid="155236288949940607">"Docking sounds"</string>
-    <string name="touch_sounds_title" msgid="5326587106892390176">"Touch sounds"</string>
+    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"Screen locking &amp; unlocking"</string>
+    <string name="other_touch_sounds_title" msgid="1692523628776677916">"Other touch sounds"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"Vibrate on touch"</string>
-    <string name="dock_audio_media_title" msgid="1346838179626123900">"Dock speaker plays"</string>
-    <string name="dock_audio_media_disabled" msgid="3430953622491538080">"All audio"</string>
-    <string name="dock_audio_media_enabled" msgid="667849382924908673">"Media audio only"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"Silent"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"Alert"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrate"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Notification access"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps cannot read notifications"</string>
   <plurals name="manage_notification_access_summary_nonzero">
@@ -2206,6 +2201,8 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
-    <string name="switch_on_text" msgid="1124106706920572386">"On"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Off"</string>
+    <!-- no translation found for switch_on_text (1124106706920572386) -->
+    <skip />
+    <!-- no translation found for switch_off_text (1139356348100829659) -->
+    <skip />
 </resources>
