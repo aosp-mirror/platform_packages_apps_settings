@@ -166,6 +166,9 @@ public class SearchResultsSummary extends Fragment {
         mResultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // We have a header, so we need to decrement the position by one
+                position--;
+
                 final Cursor cursor = mResultsAdapter.mCursor;
                 cursor.moveToPosition(position);
 
@@ -202,12 +205,17 @@ public class SearchResultsSummary extends Fragment {
                 saveQueryToDatabase();
             }
         });
+        mResultsListView.addHeaderView(
+                LayoutInflater.from(getActivity()).inflate(
+                R.layout.search_panel_results_header, mResultsListView, false));
 
         mSuggestionsListView = (ListView) view.findViewById(R.id.list_suggestions);
         mSuggestionsListView.setAdapter(mSuggestionsAdapter);
         mSuggestionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // We have a header, so we need to decrement the position by one
+                position--;
                 final Cursor cursor = mSuggestionsAdapter.mCursor;
                 cursor.moveToPosition(position);
 
@@ -216,6 +224,9 @@ public class SearchResultsSummary extends Fragment {
                 mSearchView.setQuery(mQuery, false);
             }
         });
+        mSuggestionsListView.addHeaderView(
+                LayoutInflater.from(getActivity()).inflate(
+                        R.layout.search_panel_suggestions_header, mSuggestionsListView, false));
 
         return view;
     }
