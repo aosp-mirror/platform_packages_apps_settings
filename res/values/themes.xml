@@ -127,6 +127,13 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
 
+    <style name="Theme.CryptKeeper" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <!-- LockPatternView colors -->
+        <item name="@*android:regularColor">@color/lock_pattern_view_regular_color</item>
+        <item name="@*android:successColor">@color/lock_pattern_view_success_color</item>
+        <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
+    </style>
+
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
         <item name="android:actionBarWidgetTheme">@null</item>
         <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
