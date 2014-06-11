@@ -106,7 +106,6 @@ public abstract class ManagedServiceSettings extends ListFragment {
             return new AlertDialog.Builder(getActivity())
                     .setMessage(summary)
                     .setTitle(title)
-                    .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setCancelable(true)
                     .setPositiveButton(android.R.string.ok,
                             new DialogInterface.OnClickListener() {

@@ -265,7 +265,6 @@ public class InputMethodPreference extends CheckBoxPreference {
         }
         mDialog = (new AlertDialog.Builder(mFragment.getActivity()))
                 .setTitle(android.R.string.dialog_alert_title)
-                .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {

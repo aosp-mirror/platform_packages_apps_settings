@@ -195,7 +195,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
         return new AlertDialog.Builder(getActivity())
                 .setTitle(title)
-                .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setMessage(message)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, this)

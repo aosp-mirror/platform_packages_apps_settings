@@ -482,11 +482,10 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private void displayNetworkAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(android.R.string.dialog_alert_title);
-        builder.setIconAttribute(android.R.attr.alertDialogIcon);
-        builder.setMessage(getActivity().getString(R.string.tts_engine_network_required));
-        builder.setCancelable(false);
-        builder.setPositiveButton(android.R.string.ok, null);
+        builder.setTitle(android.R.string.dialog_alert_title)
+                .setMessage(getActivity().getString(R.string.tts_engine_network_required))
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.ok, null);
 
         AlertDialog dialog = builder.create();
         dialog.show();

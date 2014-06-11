@@ -163,7 +163,6 @@ public class ToggleAccessibilityServicePreferenceFragment
                 AlertDialog ad = new AlertDialog.Builder(getActivity())
                         .setTitle(getString(R.string.enable_service_title,
                                 info.getResolveInfo().loadLabel(getPackageManager())))
-                        .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setView(createEnableDialogContentView(info))
                         .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, this)
@@ -182,7 +181,6 @@ public class ToggleAccessibilityServicePreferenceFragment
                 return new AlertDialog.Builder(getActivity())
                         .setTitle(getString(R.string.disable_service_title,
                                 info.getResolveInfo().loadLabel(getPackageManager())))
-                        .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setMessage(getString(R.string.disable_service_message,
                                 info.getResolveInfo().loadLabel(getPackageManager())))
                         .setCancelable(true)
