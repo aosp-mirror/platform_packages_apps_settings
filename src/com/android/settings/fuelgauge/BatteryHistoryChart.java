@@ -201,10 +201,7 @@ public class BatteryHistoryChart extends View {
     int mLevelBottom;
     int mLevelLeft;
     int mLevelRight;
-    static final int PHONE_SIGNAL_X_MASK = CHART_DATA_X_MASK;
-    static final int PHONE_SIGNAL_BIN_MASK = CHART_DATA_BIN_MASK;
-    static final int PHONE_SIGNAL_BIN_SHIFT = CHART_DATA_BIN_SHIFT;
-    
+
     int mNumHist;
     long mHistStart;
     long mHistDataEnd;
@@ -360,18 +357,22 @@ public class BatteryHistoryChart extends View {
         mBatteryCriticalPaint.setStyle(Paint.Style.STROKE);
         mTimeRemainPaint.setColor(0xFFCED7BB);
         mTimeRemainPaint.setStyle(Paint.Style.FILL);
-        mChargingPaint.setARGB(255, 0, 128, 0);
         mChargingPaint.setStyle(Paint.Style.STROKE);
         mScreenOnPaint.setStyle(Paint.Style.STROKE);
         mGpsOnPaint.setStyle(Paint.Style.STROKE);
         mWifiRunningPaint.setStyle(Paint.Style.STROKE);
         mCpuRunningPaint.setStyle(Paint.Style.STROKE);
         mPhoneSignalChart.setColors(new int[] {
-                0x00000000, 0xffa00000, 0xffa07000, 0xffa0a000,
-                0xff80a000, 0xff409000, 0xff008000
+                0x00000000, 0xffc43828, 0xffe54918, 0xfff47b00,
+                0xfffabf2c, 0xff679e37, 0xff0a7f42
         });
         mDebugRectPaint.setARGB(255, 255, 0, 0);
         mDebugRectPaint.setStyle(Paint.Style.STROKE);
+        mScreenOnPaint.setColor(0xFF009688);
+        mGpsOnPaint.setColor(0xFF009688);
+        mWifiRunningPaint.setColor(0xFF009688);
+        mCpuRunningPaint.setColor(0xFF009688);
+        mChargingPaint.setColor(0xFF009688);
 
         TypedArray a =
             context.obtainStyledAttributes(
@@ -428,6 +429,11 @@ public class BatteryHistoryChart extends View {
 
                 case R.styleable.BatteryHistoryChart_barPrimaryColor:
                     mBatteryBackgroundPaint.setColor(a.getInt(attr, 0));
+                    mScreenOnPaint.setColor(a.getInt(attr, 0));
+                    mGpsOnPaint.setColor(a.getInt(attr, 0));
+                    mWifiRunningPaint.setColor(a.getInt(attr, 0));
+                    mCpuRunningPaint.setColor(a.getInt(attr, 0));
+                    mChargingPaint.setColor(a.getInt(attr, 0));
                     break;
 
                 case R.styleable.BatteryHistoryChart_barPredictionColor:
@@ -692,17 +698,9 @@ public class BatteryHistoryChart extends View {
                 // Compress lines to make more room for chart.
                 mLineWidth = textHeight/3;
             }
-            mScreenOnPaint.setARGB(255, 32, 64, 255);
-            mGpsOnPaint.setARGB(255, 32, 64, 255);
-            mWifiRunningPaint.setARGB(255, 32, 64, 255);
-            mCpuRunningPaint.setARGB(255, 32, 64, 255);
         } else {
             mLargeMode = false;
             mLineWidth = mThinLineWidth;
-            mScreenOnPaint.setARGB(255, 0, 0, 255);
-            mGpsOnPaint.setARGB(255, 0, 0, 255);
-            mWifiRunningPaint.setARGB(255, 0, 0, 255);
-            mCpuRunningPaint.setARGB(255, 0, 0, 255);
         }
         if (mLineWidth <= 0) mLineWidth = 1;
 
