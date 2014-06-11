@@ -469,7 +469,8 @@ class AccessPoint extends Preference {
 
         if (mState != null) { // This is the active connection
             summary.append(Summary.get(context, mState));
-        } else if (mConfig != null && (mConfig.status == WifiConfiguration.Status.DISABLED
+        } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
+                mConfig.disableReason != WifiConfiguration.DISABLED_UNKNOWN_REASON)
                || mConfig.autoJoinStatus >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE)) {
             if (mConfig.autoJoinStatus >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE) {
                 summary.append(context.getString(R.string.wifi_disabled_password_failure));
@@ -483,6 +484,8 @@ class AccessPoint extends Preference {
                         summary.append(context.getString(R.string.wifi_disabled_network_failure));
                         break;
                     case WifiConfiguration.DISABLED_UNKNOWN_REASON:
+                        //this state is not useful anymore as auto-join may attempt joining
+                        //those networks
                         summary.append(context.getString(R.string.wifi_disabled_generic));
                 }
             }
