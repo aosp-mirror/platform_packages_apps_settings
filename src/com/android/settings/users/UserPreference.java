@@ -58,11 +58,13 @@ public class UserPreference extends Preference {
 
     @Override
     protected void onBindView(View view) {
+        UserManager um = (UserManager) getContext().getSystemService(Context.USER_SERVICE);
         View deleteDividerView = view.findViewById(R.id.divider_delete);
         View manageDividerView = view.findViewById(R.id.divider_manage);
         View deleteView = view.findViewById(R.id.trash_user);
         if (deleteView != null) {
-            if (mDeleteClickListener != null) {
+            if (mDeleteClickListener != null
+                    && !um.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER)) {
                 deleteView.setOnClickListener(mDeleteClickListener);
                 deleteView.setTag(this);
             } else {
