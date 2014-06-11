@@ -130,8 +130,7 @@
         <activity android:name="Settings$WifiSettingsActivity"
                 android:taskAffinity=""
                 android:label="@string/wifi_settings"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:excludeFromRecents="true">
+                android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_SETTINGS" />
@@ -269,8 +268,7 @@
 
         <activity android:name="Settings$BluetoothSettingsActivity"
                 android:label="@string/bluetooth_settings_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
@@ -308,8 +306,7 @@
 
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -351,8 +348,7 @@
 
         <activity android:name="Settings$VpnSettingsActivity"
                 android:label="@string/vpn_settings_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -368,8 +364,7 @@
 
         <activity android:name="Settings$DateTimeSettingsActivity"
                 android:label="@string/date_and_time"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DATE_SETTINGS" />
@@ -526,8 +521,7 @@
         <activity android:name="Settings$ZenModeSettingsActivity"
                 android:label="@string/zen_mode_settings_title"
                 android:exported="true"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
@@ -542,8 +536,7 @@
 
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
@@ -607,8 +600,7 @@
 
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
@@ -736,8 +728,7 @@
         <activity android:name="Settings$NotificationStationActivity"
                 android:theme="@android:style/Theme.DeviceDefault"
                 android:label="@string/notification_log_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -751,7 +742,6 @@
         <activity android:name="Settings$AppOpsSummaryActivity"
                 android:label="@string/app_ops_settings"
                 android:taskAffinity=""
-                android:excludeFromRecents="true"
                 android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -770,8 +760,7 @@
         <activity android:name="Settings$LocationSettingsActivity"
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
@@ -806,8 +795,7 @@
         <activity android:name="MonitoringCertInfoActivity"
                 android:label="@string/ssl_ca_cert_dialog_title"
                 android:theme="@style/Transparent"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.MONITORING_CERT_INFO" />
@@ -817,8 +805,7 @@
 
         <activity android:name="Settings$TrustedCredentialsSettingsActivity"
                 android:label="@string/trusted_credentials"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.TRUSTED_CREDENTIALS" />
@@ -929,8 +916,7 @@
         <activity android:name="Settings$AccessibilitySettingsActivity"
                 android:label="@string/accessibility_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
@@ -1307,8 +1293,7 @@
 
         <activity android:name="Settings$WifiDisplaySettingsActivity"
                 android:label="@string/wifi_display_settings_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_DISPLAY_SETTINGS" />
@@ -1436,8 +1421,7 @@
 
         <activity android:name="Settings$PowerUsageSummaryActivity"
                 android:label="@string/power_usage_summary_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
@@ -1463,8 +1447,7 @@
 
         <activity android:name="Settings$BatterySaverSettingsActivity"
                 android:label="@string/battery_saver"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
@@ -1565,8 +1548,7 @@
 
         <activity android:name="Settings$DataUsageSummaryActivity"
                 android:label="@string/data_usage_summary_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1580,8 +1562,7 @@
 
         <activity android:name="Settings$DreamSettingsActivity"
                 android:label="@string/screensaver_settings_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DREAM_SETTINGS" />
@@ -1596,8 +1577,7 @@
 
         <activity android:name="Settings$UserSettingsActivity"
                 android:label="@string/user_settings_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.USER_SETTINGS" />
@@ -1611,8 +1591,7 @@
 
         <activity android:name="Settings$PaymentSettingsActivity"
                 android:label="@string/nfc_payment_settings_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.NFC_PAYMENT_SETTINGS" />
@@ -1655,8 +1634,7 @@
 
         <activity android:name="Settings$NotificationAccessSettingsActivity"
                   android:label="@string/manage_notification_access"
-                  android:taskAffinity=""
-                  android:excludeFromRecents="true">
+                  android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS" />
@@ -1670,8 +1648,7 @@
 
         <activity android:name="Settings$ConditionProviderSettingsActivity"
                   android:label="@string/manage_condition_providers"
-                  android:taskAffinity=""
-                  android:excludeFromRecents="true">
+                  android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
@@ -1686,8 +1663,7 @@
         <activity android:name="Settings$NotificationSettingsActivity"
                 android:label="@string/notification_settings"
                 android:exported="true"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.NOTIFICATION_SETTINGS" />
@@ -1704,7 +1680,6 @@
         <activity-alias android:name="Settings$SoundSettingsActivity"
                 android:label="@string/notification_settings"
                 android:taskAffinity=""
-                android:excludeFromRecents="true"
                 android:targetActivity="Settings$NotificationSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1733,8 +1708,7 @@
         <activity android:name="Settings$NotificationDisplaySettingsActivity"
                 android:label="@string/notification_display_settings"
                 android:exported="true"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACTION_NOTIFICATION_DISPLAY_SETTINGS" />
@@ -1749,8 +1723,7 @@
         <activity android:name="Settings$OtherSoundSettingsActivity"
                 android:label="@string/other_sound_settings"
                 android:exported="true"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
@@ -1765,8 +1738,7 @@
         <activity android:name="Settings$AppNotificationSettingsActivity"
                 android:label="@string/app_notifications_title"
                 android:exported="true"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACTION_APP_NOTIFICATION_SETTINGS" />
@@ -1782,7 +1754,6 @@
         <activity android:name="RegulatoryInfoDisplayActivity"
                   android:label="@string/regulatory_information"
                   android:taskAffinity=""
-                  android:excludeFromRecents="true"
                   android:enabled="@bool/config_show_regulatory_info">
             <intent-filter>
                 <action android:name="android.settings.SHOW_REGULATORY_INFO" />
