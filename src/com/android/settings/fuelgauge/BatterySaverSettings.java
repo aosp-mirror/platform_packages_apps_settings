@@ -59,7 +59,9 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
         updateSwitchBar();
         mTriggerPref = new SettingPref(SettingPref.TYPE_GLOBAL, KEY_TURN_ON_AUTOMATICALLY,
-                Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0,
+                Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+                mContext.getResources().getInteger(
+                        com.android.internal.R.integer.config_lowBatteryWarningLevel),
                 getResources().getIntArray(R.array.battery_saver_trigger_values)) {
             @Override
             protected String getCaption(Resources res, int value) {
@@ -103,6 +105,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         mSettingsObserver.setListening(false);
         if (mSwitchBarListenerAdded) {
             mSwitchBar.removeOnSwitchChangeListener(this);
+            mSwitchBarListenerAdded = false;
         }
         mSwitchBar.hide();
     }
