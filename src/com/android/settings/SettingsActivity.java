@@ -459,6 +459,20 @@ public class SettingsActivity extends Activity
 
         super.onCreate(savedState);
 
+        // Getting Intent properties can only be done after the super.onCreate(...)
+        final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+
+        mIsShowingDashboard = (initialFragmentName == null);
+
+        final ComponentName cn = getIntent().getComponent();
+        final boolean isShortcut = !cn.getClassName().equals(SubSettings.class.getName());
+
+        // If this is a subsettings (but not a Shortcut) then apply the correct theme for
+        // the ActionBar content inset
+        if (!mIsShowingDashboard && !isShortcut) {
+            setTheme(R.style.Theme_SubSettings);
+        }
+
         setContentView(R.layout.settings_main);
 
         mContent = (ViewGroup) findViewById(R.id.prefs);
@@ -467,11 +481,6 @@ public class SettingsActivity extends Activity
 
         mDisplayHomeAsUpEnabled = true;
         mDisplaySearch = true;
-
-        // Getting Intent properties can only be done after the super.onCreate(...)
-        final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
-
-        mIsShowingDashboard = (initialFragmentName == null);
 
         if (mIsShowingDashboard) {
             Index.getInstance(getApplicationContext()).update();
@@ -497,9 +506,8 @@ public class SettingsActivity extends Activity
             mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
         } else {
             if (!mIsShowingDashboard) {
-                final ComponentName cn = getIntent().getComponent();
                 // No UP nor Search is shown we are launched thru a Settings "shortcut"
-                if (!cn.getClassName().equals(SubSettings.class.getName())) {
+                if (isShortcut) {
                     mDisplayHomeAsUpEnabled = false;
                     mDisplaySearch = false;
                 }
