@@ -84,6 +84,9 @@
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
 
+        <item name="switchBarMarginStart">@dimen/switchbar_margin_start</item>
+        <item name="switchBarMarginEnd">@dimen/switchbar_margin_end</item>
+
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
@@ -98,6 +101,18 @@
 
     <style name="Theme.ActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+    </style>
+
+    <style name="Theme.SubSettings" parent="Theme.Settings">
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Theme.SubSettingsActionBar</item>
+
+        <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
+        <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
+    </style>
+
+    <style name="Theme.SubSettingsActionBar" parent="Theme.ActionBar">
+        <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
     <style name="Theme.DialogWhenLarge" parent="android:style/Theme.Material.Light.DialogWhenLarge">
