@@ -45,6 +45,7 @@ import libcore.icu.LocaleData;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class BatteryHistoryChart extends View {
     static final boolean DEBUG = false;
@@ -315,22 +316,11 @@ public class BatteryHistoryChart extends View {
         final String label;
         final int width;
 
-        TimeLabel(Context context, TextPaint paint, int x, Calendar cal, boolean use24hr) {
+        TimeLabel(TextPaint paint, int x, Calendar cal, boolean use24hr) {
             this.x = x;
-            if (use24hr) {
-                label = context.getString(R.string.battery_stats_hour_24_label,
-                        cal.get(Calendar.HOUR_OF_DAY));
-            } else {
-                int hour = cal.get(Calendar.HOUR);
-                if (hour == 0) {
-                    hour = 12;
-                }
-                if (cal.get(Calendar.AM_PM) == Calendar.AM) {
-                    label = context.getString(R.string.battery_stats_hour_am_label, hour);
-                } else {
-                    label = context.getString(R.string.battery_stats_hour_pm_label, hour);
-                }
-            }
+            final String bestFormat = DateFormat.getBestDateTimePattern(
+                    Locale.getDefault(), use24hr ? "km" : "ha");
+            label = DateFormat.format(bestFormat, cal).toString();
             width = (int)paint.measureText(label);
         }
     }
@@ -340,15 +330,11 @@ public class BatteryHistoryChart extends View {
         final String label;
         final int width;
 
-        DateLabel(Context context, TextPaint paint, int x, Calendar cal, boolean dayFirst) {
+        DateLabel(TextPaint paint, int x, Calendar cal, boolean dayFirst) {
             this.x = x;
-            if (dayFirst) {
-                label = context.getString(R.string.battery_stats_date_day_first_label,
-                        cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH));
-            } else {
-                label = context.getString(R.string.battery_stats_date_month_first_label,
-                        cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH));
-            }
+            final String bestFormat = DateFormat.getBestDateTimePattern(
+                    Locale.getDefault(), dayFirst ? "dM" : "Md");
+            label = DateFormat.format(bestFormat, cal).toString();
             width = (int)paint.measureText(label);
         }
     }
@@ -1033,7 +1019,7 @@ public class BatteryHistoryChart extends View {
     void addTimeLabel(Calendar cal, int levelLeft, int levelRight, boolean is24hr) {
         final long walltimeStart = mStartWallTime;
         final long walltimeChange = mEndWallTime-walltimeStart;
-        mTimeLabels.add(new TimeLabel(getContext(), mTextPaint,
+        mTimeLabels.add(new TimeLabel(mTextPaint,
                 levelLeft + (int)(((cal.getTimeInMillis()-walltimeStart)*(levelRight-levelLeft))
                         / walltimeChange),
                 cal, is24hr));
@@ -1042,7 +1028,7 @@ public class BatteryHistoryChart extends View {
     void addDateLabel(Calendar cal, int levelLeft, int levelRight, boolean isDayFirst) {
         final long walltimeStart = mStartWallTime;
         final long walltimeChange = mEndWallTime-walltimeStart;
-        mDateLabels.add(new DateLabel(getContext(), mTextPaint,
+        mDateLabels.add(new DateLabel(mTextPaint,
                 levelLeft + (int)(((cal.getTimeInMillis()-walltimeStart)*(levelRight-levelLeft))
                         / walltimeChange),
                 cal, isDayFirst));
