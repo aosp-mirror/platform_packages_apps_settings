@@ -54,7 +54,6 @@ public class MasterClear extends Fragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
-    private static final int PIN_REQUEST = 56;
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
 
@@ -62,7 +61,6 @@ public class MasterClear extends Fragment {
     private Button mInitiateButton;
     private View mExternalStorageContainer;
     private CheckBox mExternalStorage;
-    private boolean mPinConfirmed;
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}
@@ -78,25 +76,11 @@ public class MasterClear extends Fragment {
                         res.getText(R.string.master_clear_gesture_explanation));
     }
 
-    private boolean runRestrictionsChallenge() {
-        if (UserManager.get(getActivity()).hasRestrictionsChallenge()) {
-            startActivityForResult(
-                    new Intent(Intent.ACTION_RESTRICTIONS_CHALLENGE), PIN_REQUEST);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PIN_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                mPinConfirmed = true;
-            }
-            return;
-        } else if (requestCode != KEYGUARD_REQUEST) {
+        if (requestCode != KEYGUARD_REQUEST) {
             return;
         }
 
@@ -125,10 +109,6 @@ public class MasterClear extends Fragment {
     private final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
 
         public void onClick(View v) {
-            mPinConfirmed = false;
-            if (runRestrictionsChallenge()) {
-                return;
-            }
             if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                 showFinalConfirmation();
             }
@@ -254,22 +234,14 @@ public class MasterClear extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (UserManager.get(getActivity()).hasUserRestriction(
+                UserManager.DISALLOW_FACTORY_RESET)) {
+            return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
+        }
+
         mContentView = inflater.inflate(R.layout.master_clear, null);
 
         establishInitialState();
         return mContentView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // If this is the second step after restrictions pin challenge
-        if (mPinConfirmed) {
-            mPinConfirmed = false;
-            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
-                showFinalConfirmation();
-            }
-        }
     }
 }
