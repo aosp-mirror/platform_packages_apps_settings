@@ -122,7 +122,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String USE_NUPLAYER_KEY = "use_nuplayer";
     private static final String USE_NUPLAYER_PROPERTY = "persist.sys.media.use-nuplayer";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
-    private static final String LOW_POWER_MODE_KEY = "low_power_mode";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String FORCE_MSAA_KEY = "force_msaa";
     private static final String TRACK_FRAME_TIME_KEY = "track_frame_time";
@@ -196,7 +195,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mShowScreenUpdates;
     private CheckBoxPreference mDisableOverlays;
     private CheckBoxPreference mShowCpuUsage;
-    private CheckBoxPreference mLowPowerMode;
     private CheckBoxPreference mForceHardwareUi;
     private CheckBoxPreference mForceMsaa;
     private CheckBoxPreference mShowHwScreenUpdates;
@@ -308,7 +306,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mShowScreenUpdates = findAndInitCheckboxPref(SHOW_SCREEN_UPDATES_KEY);
         mDisableOverlays = findAndInitCheckboxPref(DISABLE_OVERLAYS_KEY);
         mShowCpuUsage = findAndInitCheckboxPref(SHOW_CPU_USAGE_KEY);
-        mLowPowerMode = findAndInitCheckboxPref(LOW_POWER_MODE_KEY);
         mForceHardwareUi = findAndInitCheckboxPref(FORCE_HARDWARE_UI_KEY);
         mForceMsaa = findAndInitCheckboxPref(FORCE_MSAA_KEY);
         mTrackFrameTime = addListPreference(TRACK_FRAME_TIME_KEY);
@@ -507,7 +504,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateShowTouchesOptions();
         updateFlingerOptions();
         updateCpuUsageOptions();
-        updateLowPowerModeOptions();
         updateHardwareUiOptions();
         updateMsaaOptions();
         updateTrackFrameTimeOptions();
@@ -1043,20 +1039,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiManager.enableVerboseLogging(mWifiVerboseLogging.isChecked() ? 1 : 0);
     }
 
-    private void updateLowPowerModeOptions() {
-        updateCheckBox(mLowPowerMode, Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.LOW_POWER_MODE, 0) != 0);
-    }
-
     private void updateCpuUsageOptions() {
         updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
-    }
-
-    private void writeLowPowerModeOptions() {
-        boolean value = mLowPowerMode.isChecked();
-        Settings.Global.putInt(getActivity().getContentResolver(),
-                Settings.Global.LOW_POWER_MODE, value ? 1 : 0);
     }
 
     private void writeCpuUsageOptions() {
@@ -1333,8 +1318,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeShowUpdatesOption();
         } else if (preference == mDisableOverlays) {
             writeDisableOverlaysOption();
-        } else if (preference == mLowPowerMode) {
-            writeLowPowerModeOptions();
         } else if (preference == mShowCpuUsage) {
             writeCpuUsageOptions();
         } else if (preference == mImmediatelyDestroyActivities) {

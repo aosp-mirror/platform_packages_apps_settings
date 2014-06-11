@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.preference.Preference;
 import android.preference.TwoStatePreference;
@@ -55,7 +56,7 @@ public class SettingPref {
         return true;
     }
 
-    protected int getResId(Context context, int value) {
+    protected String getCaption(Resources res, int value) {
         throw new UnsupportedOperationException();
     }
 
@@ -71,7 +72,7 @@ public class SettingPref {
         } else if (p instanceof DropDownPreference) {
             mDropDown = (DropDownPreference) p;
             for (int value : mValues) {
-                mDropDown.addItem(getResId(context, value), value);
+                mDropDown.addItem(getCaption(context.getResources(), value), value);
             }
         }
         update(context);

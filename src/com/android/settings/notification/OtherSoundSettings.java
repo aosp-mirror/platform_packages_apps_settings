@@ -21,6 +21,7 @@ import static com.android.settings.notification.SettingPref.TYPE_SYSTEM;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -114,10 +115,15 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
         }
 
         @Override
-        protected int getResId(Context context, int value) {
-            if (value == DOCK_AUDIO_MEDIA_DISABLED) return R.string.dock_audio_media_disabled;
-            if (value == DOCK_AUDIO_MEDIA_ENABLED) return R.string.dock_audio_media_enabled;
-            throw new IllegalArgumentException();
+        protected String getCaption(Resources res, int value) {
+            switch(value) {
+                case DOCK_AUDIO_MEDIA_DISABLED:
+                    return res.getString(R.string.dock_audio_media_disabled);
+                case DOCK_AUDIO_MEDIA_ENABLED:
+                    return res.getString(R.string.dock_audio_media_enabled);
+                default:
+                    throw new IllegalArgumentException();
+            }
         }
     };
 
@@ -131,11 +137,17 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
         }
 
         @Override
-        protected int getResId(Context context, int value) {
-            if (value == EMERGENCY_TONE_SILENT) return R.string.emergency_tone_silent;
-            if (value == EMERGENCY_TONE_ALERT) return R.string.emergency_tone_alert;
-            if (value == EMERGENCY_TONE_VIBRATE) return R.string.emergency_tone_vibrate;
-            throw new IllegalArgumentException();
+        protected String getCaption(Resources res, int value) {
+            switch(value) {
+                case EMERGENCY_TONE_SILENT:
+                    return res.getString(R.string.emergency_tone_silent);
+                case EMERGENCY_TONE_ALERT:
+                    return res.getString(R.string.emergency_tone_alert);
+                case EMERGENCY_TONE_VIBRATE:
+                    return res.getString(R.string.emergency_tone_vibrate);
+                default:
+                    throw new IllegalArgumentException();
+            }
         }
     };
 

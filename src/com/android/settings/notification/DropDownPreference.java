@@ -97,8 +97,12 @@ public class DropDownPreference extends Preference {
         }
     }
 
-    public void addItem(int resId, Object value) {
-        mAdapter.add(mContext.getResources().getString(resId));
+    public void addItem(int captionResid, Object value) {
+        addItem(mContext.getResources().getString(captionResid), value);
+    }
+
+    public void addItem(String caption, Object value) {
+        mAdapter.add(caption);
         mValues.add(value);
     }
 

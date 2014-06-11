@@ -60,7 +60,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
-    private static final int MENU_HELP = Menu.FIRST + 2;
+    private static final int MENU_BATTERY_SAVER = Menu.FIRST + 2;
+    private static final int MENU_HELP = Menu.FIRST + 3;
 
     private UserManager mUm;
 
@@ -180,6 +181,9 @@ public class PowerUsageSummary extends PreferenceFragment {
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
+        MenuItem batterySaver = menu.add(0, MENU_BATTERY_SAVER, 0, R.string.battery_saver);
+        batterySaver.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
             final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
@@ -202,6 +206,11 @@ public class PowerUsageSummary extends PreferenceFragment {
                 mStatsHelper.clearStats();
                 refreshStats();
                 mHandler.removeMessages(MSG_REFRESH_STATS);
+                return true;
+            case MENU_BATTERY_SAVER:
+                final SettingsActivity sa = (SettingsActivity) getActivity();
+                sa.startPreferencePanel(BatterySaverSettings.class.getName(), null,
+                        R.string.battery_saver, null, null, 0);
                 return true;
             default:
                 return false;
