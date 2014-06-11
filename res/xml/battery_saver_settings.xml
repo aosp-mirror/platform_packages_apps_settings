@@ -18,6 +18,14 @@
         android:title="@string/battery_saver"
         android:key="battery_saver">
 
+    <!-- Always on -->
+    <SwitchPreference
+            android:key="always_on"
+            android:title="@string/battery_saver_always_on_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
     <!-- Turn on automatically -->
     <com.android.settings.notification.DropDownPreference
             android:key="turn_on_automatically"
