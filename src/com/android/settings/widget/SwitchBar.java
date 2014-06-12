@@ -17,10 +17,11 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -72,12 +73,11 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mTextView.setText(R.string.switch_off_text);
 
         mSwitch = (ToggleSwitch) findViewById(R.id.switch_widget);
-        mSwitch.setOnCheckedChangeListener(this);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
             public void onSwitchChanged(Switch switchView, boolean isChecked) {
-                mTextView.setText(isChecked ? R.string.switch_on_text : R.string.switch_off_text);
+                setTextViewLabel(isChecked);
             }
         });
 
@@ -90,18 +90,41 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         setVisibility(View.GONE);
     }
 
-    public ToggleSwitch getSwitch() {
+    public void setTextViewLabel(boolean isChecked) {
+        mTextView.setText(isChecked ? R.string.switch_on_text : R.string.switch_off_text);
+    }
+
+    public void setChecked(boolean checked) {
+        setTextViewLabel(checked);
+        mSwitch.setChecked(checked);
+    }
+
+    public boolean isChecked() {
+        return mSwitch.isChecked();
+    }
+
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        mTextView.setEnabled(enabled);
+        mSwitch.setEnabled(false);
+    }
+
+    public final ToggleSwitch getSwitch() {
         return mSwitch;
     }
 
     public void show() {
-        TransitionManager.beginDelayedTransition((ViewGroup) getParent());
-        setVisibility(View.VISIBLE);
+        if (!isShowing()) {
+            setVisibility(View.VISIBLE);
+            mSwitch.setOnCheckedChangeListener(this);
+        }
     }
 
     public void hide() {
-        TransitionManager.beginDelayedTransition((ViewGroup) getParent());
-        setVisibility(View.GONE);
+        if (isShowing()) {
+            setVisibility(View.GONE);
+            mSwitch.setOnCheckedChangeListener(null);
+        }
     }
 
     public boolean isShowing() {
@@ -138,5 +161,70 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             throw new IllegalStateException("Cannot remove OnSwitchChangeListener");
         }
         mSwitchChangeListeners.remove(listener);
+    }
+
+    static class SavedState extends BaseSavedState {
+        boolean checked;
+        boolean visible;
+
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        /**
+         * Constructor called from {@link #CREATOR}
+         */
+        private SavedState(Parcel in) {
+            super(in);
+            checked = (Boolean)in.readValue(null);
+            visible = (Boolean)in.readValue(null);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeValue(checked);
+            out.writeValue(visible);
+        }
+
+        @Override
+        public String toString() {
+            return "SwitchBar.SavedState{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + " checked=" + checked
+                    + " visible=" + visible + "}";
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+
+        SavedState ss = new SavedState(superState);
+        ss.checked = mSwitch.isChecked();
+        ss.visible = isShowing();
+        return ss;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        SavedState ss = (SavedState) state;
+
+        super.onRestoreInstanceState(ss.getSuperState());
+        mSwitch.setChecked(ss.checked);
+        setTextViewLabel(ss.checked);
+        setVisibility(ss.visible ? View.VISIBLE : View.GONE);
+        requestLayout();
     }
 }

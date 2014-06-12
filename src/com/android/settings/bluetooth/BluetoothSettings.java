@@ -119,6 +119,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         mSwitchBar = activity.getSwitchBar();
 
         mBluetoothEnabler = new BluetoothEnabler(activity, mSwitchBar);
+        mBluetoothEnabler.setupSwitchBar();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mBluetoothEnabler.teardownSwitchBar();
     }
 
     @Override

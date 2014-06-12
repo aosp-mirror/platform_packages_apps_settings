@@ -89,6 +89,16 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
 
+    public void setupSwitchBar() {
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
+    }
+
+    public void teardownSwitchBar() {
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
+    }
+
     public void resume(Context context) {
         if (mLocalAdapter == null) {
             mSwitch.setEnabled(false);
@@ -103,8 +113,6 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         handleStateChanged(mLocalAdapter.getBluetoothState());
 
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
         mValidListener = true;
     }
 
@@ -114,8 +122,6 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         }
 
         mContext.unregisterReceiver(mReceiver);
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         mValidListener = false;
     }
 

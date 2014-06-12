@@ -33,7 +33,6 @@ public class AndroidBeam extends Fragment
     private View mView;
     private NfcAdapter mNfcAdapter;
     private SwitchBar mSwitchBar;
-    private Switch mSwitch;
     private CharSequence mOldActivityTitle;
 
     @Override
@@ -63,24 +62,9 @@ public class AndroidBeam extends Fragment
         SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
-        mSwitch.setChecked(mNfcAdapter.isNdefPushEnabled());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
+        mSwitchBar.setChecked(mNfcAdapter.isNdefPushEnabled());
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
     }
 
     @Override
@@ -89,20 +73,22 @@ public class AndroidBeam extends Fragment
         if (mOldActivityTitle != null) {
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean desiredState) {
         boolean success = false;
-        mSwitch.setEnabled(false);
+        mSwitchBar.setEnabled(false);
         if (desiredState) {
             success = mNfcAdapter.enableNdefPush();
         } else {
             success = mNfcAdapter.disableNdefPush();
         }
         if (success) {
-            mSwitch.setChecked(desiredState);
+            mSwitchBar.setChecked(desiredState);
         }
-        mSwitch.setEnabled(true);
+        mSwitchBar.setEnabled(true);
     }
 }

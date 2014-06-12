@@ -73,6 +73,16 @@ public class LocationSettings extends LocationSettingsBase
 
         mSwitchBar = activity.getSwitchBar();
         mSwitch = mSwitchBar.getSwitch();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     @Override
@@ -84,8 +94,6 @@ public class LocationSettings extends LocationSettingsBase
     public void onResume() {
         super.onResume();
         createPreferenceHierarchy();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
         mValidListener = true;
     }
 
@@ -97,8 +105,6 @@ public class LocationSettings extends LocationSettingsBase
             // Ignore exceptions caused by race condition
         }
         super.onPause();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         mValidListener = false;
     }
 
