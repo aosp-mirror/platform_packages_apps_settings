@@ -96,18 +96,24 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
         mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
     }
 
-    public void resume(Context context) {
-        mContext = context;
-        // Wi-Fi state is sticky, so just let the receiver update UI
-        mContext.registerReceiver(mReceiver, mIntentFilter);
+    public void setupSwitchBar() {
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
     }
 
-    public void pause() {
-        mContext.unregisterReceiver(mReceiver);
+    public void teardownSwitchBar() {
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
+    }
+
+    public void resume(Context context) {
+        mContext = context;
+        // Wi-Fi state is sticky, so just let the receiver update UI
+        mContext.registerReceiver(mReceiver, mIntentFilter);
+    }
+
+    public void pause() {
+        mContext.unregisterReceiver(mReceiver);
     }
 
     private void handleWifiStateChanged(int state) {

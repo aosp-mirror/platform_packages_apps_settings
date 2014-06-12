@@ -107,7 +107,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     private SwitchBar mSwitchBar;
-    private Switch mSwitch;
     private Context mContext;
     private PackageManager mPM;
     private ZenModeConfig mConfig;
@@ -159,7 +158,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
 
         mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
 
         final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
 
@@ -400,14 +400,17 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         updateControls();
         updateZenMode();
         mSettingsObserver.register();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mSettingsObserver.unregister();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
     }
@@ -415,8 +418,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private void updateZenMode() {
         final boolean zenMode = Global.getInt(getContentResolver(),
                 Global.ZEN_MODE, Global.ZEN_MODE_OFF) != Global.ZEN_MODE_OFF;
-        if (mSwitch.isChecked() != zenMode) {
-            mSwitch.setChecked(zenMode);
+        if (mSwitchBar.isChecked() != zenMode) {
+            mSwitchBar.setChecked(zenMode);
             mIgnoreNext = true;
         }
     }

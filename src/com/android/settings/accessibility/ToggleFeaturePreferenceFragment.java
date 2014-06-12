@@ -95,17 +95,17 @@ public abstract class ToggleFeaturePreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         installActionBarToggleSwitch();
     }
 
     @Override
-    public void onPause() {
-        removeActionBarToggleSwitch();
+    public void onDestroyView() {
+        super.onDestroyView();
 
-        super.onPause();
+        removeActionBarToggleSwitch();
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);

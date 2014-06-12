@@ -405,6 +405,15 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mWifiEnabler != null) {
+            mWifiEnabler.teardownSwitchBar();
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
@@ -414,6 +423,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
             mSwitchBar = activity.getSwitchBar();
             mWifiEnabler = new WifiEnabler(activity, mSwitchBar);
+            mWifiEnabler.setupSwitchBar();
         }
     }
 
