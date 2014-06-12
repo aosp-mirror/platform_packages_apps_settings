@@ -19,6 +19,7 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -47,6 +48,8 @@ class AccessPoint extends Preference {
         R.attr.state_encrypted
     };
     private static final int[] STATE_NONE = {};
+
+    private static int[] wifi_signal_attributes = { R.attr.wifi_signal };
 
     /** These values are matched in string arrays -- changes must be kept in sync */
     static final int SECURITY_NONE = 0;
@@ -163,21 +166,18 @@ class AccessPoint extends Preference {
 
     AccessPoint(Context context, WifiConfiguration config) {
         super(context);
-        setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         loadConfig(config);
         refresh();
     }
 
     AccessPoint(Context context, ScanResult result) {
         super(context);
-        setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         loadResult(result);
         refresh();
     }
 
     AccessPoint(Context context, Bundle savedState) {
         super(context);
-        setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
 
         mConfig = savedState.getParcelable(KEY_CONFIG);
         if (mConfig != null) {
@@ -228,17 +228,27 @@ class AccessPoint extends Preference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-        ImageView signal = (ImageView) view.findViewById(R.id.signal);
-        if (mRssi == Integer.MAX_VALUE) {
-            signal.setImageDrawable(null);
+        updateIcon(getLevel());
+        notifyChanged();
+    }
+
+    protected void updateIcon(int level) {
+        if (level == -1) {
+            setIcon(null);
         } else {
-            signal.setImageLevel(getLevel());
-            signal.setImageDrawable(getContext().getTheme().obtainStyledAttributes(
-                    new int[] {R.attr.wifi_signal}).getDrawable(0));
-            signal.setImageState((security != SECURITY_NONE) ?
-                    STATE_SECURED : STATE_NONE, true);
+            Drawable drawable = getIcon();
+
+            if (drawable == null) {
+                drawable = getContext().getTheme().obtainStyledAttributes(
+                        wifi_signal_attributes).getDrawable(0);
+                setIcon(drawable);
+            }
+
+            drawable.setLevel(level);
+            drawable.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
         }
     }
+
 
     @Override
     public int compareTo(Preference preference) {
@@ -252,6 +262,7 @@ class AccessPoint extends Preference {
 
         // Reachable one goes before unreachable one.
         if (mRssi != Integer.MAX_VALUE && other.mRssi == Integer.MAX_VALUE) return -1;
+        if (mRssi == Integer.MAX_VALUE && other.mRssi != Integer.MAX_VALUE) return 1;
         if (mRssi == Integer.MAX_VALUE && other.mRssi != Integer.MAX_VALUE) return 1;
 
         // Configured one goes before unconfigured one.
@@ -463,6 +474,8 @@ class AccessPoint extends Preference {
     /** Updates the title and summary; may indirectly call notifyChanged()  */
     private void refresh() {
         setTitle(ssid);
+        updateIcon(getLevel());
+
         StringBuilder summary = new StringBuilder();
 
         Context context = getContext();
