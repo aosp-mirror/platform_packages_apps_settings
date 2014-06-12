@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -26,6 +27,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Process;
+import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyChain.KeyChainConnection;
 import android.security.KeyChain;
@@ -38,8 +40,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.internal.widget.LockPatternUtils;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 
@@ -119,16 +121,20 @@ public final class CredentialStorage extends Activity {
 
         Intent intent = getIntent();
         String action = intent.getAction();
-
-        if (ACTION_RESET.equals(action)) {
-            new ResetDialog();
-        } else {
-            if (ACTION_INSTALL.equals(action)
-                    && "com.android.certinstaller".equals(getCallingPackage())) {
-                mInstallBundle = intent.getExtras();
+        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        if (!userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+            if (ACTION_RESET.equals(action)) {
+                new ResetDialog();
+            } else {
+                if (ACTION_INSTALL.equals(action)
+                        && "com.android.certinstaller".equals(getCallingPackage())) {
+                    mInstallBundle = intent.getExtras();
+                }
+                // ACTION_UNLOCK also handled here in addition to ACTION_INSTALL
+                handleUnlockOrInstall();
             }
-            // ACTION_UNLOCK also handled here in addition to ACTION_INSTALL
-            handleUnlockOrInstall();
+        } else {
+            finish();
         }
     }
 
