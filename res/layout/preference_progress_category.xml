@@ -22,7 +22,8 @@
 
     <!-- This text view has the style of the list separator text view without the background and padding. -->
     <TextView
-        style="?android:attr/listSeparatorTextViewStyle"
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textColor="?android:attr/colorAccent"
         android:background="@null"
         android:id="@+android:id/title"
         android:paddingStart="0dp"
