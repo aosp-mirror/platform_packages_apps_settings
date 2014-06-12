@@ -63,14 +63,7 @@
          layouts against a remote context using our local theme colors. Due to the implementation
          details of Theme, we can't reference any local resources and MUST instead use the values
          directly. So use #ff263238 instead of @color/theme_primary and so on. -->
-    <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Light.DarkActionBar">
-        <!-- Should match @color/theme_primary. -->
-        <item name="android:colorPrimary">#ff263238</item>
-        <!-- Should match @color/theme_primary_dark. -->
-        <item name="android:colorPrimaryDark">#ff263238</item>
-        <!-- Should match @color/theme_accent. -->
-        <item name="android:colorAccent">#ff009688</item>
-    </style>
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.Material.Settings" />
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
@@ -115,7 +108,7 @@
         <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
-    <style name="Theme.DialogWhenLarge" parent="android:style/Theme.Material.Light.DialogWhenLarge">
+    <style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.Light.DialogWhenLarge">
         <!-- Used by the ActionBar -->
         <item name="android:colorPrimary">@color/theme_primary</item>
         <!-- Used by the StatusBar -->
