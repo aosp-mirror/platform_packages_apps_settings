@@ -22,6 +22,7 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,6 +44,7 @@ import android.provider.Settings;
 import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -315,27 +317,30 @@ public class SecuritySettings extends RestrictedSettingsFragment
             PackageManager pm = getPackageManager();
             List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
                     PackageManager.GET_META_DATA);
-            for (ResolveInfo resolveInfo : resolveInfos) {
-                if (resolveInfo.serviceInfo == null) continue;
-                if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
-                TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
-                        TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
-                if (trustAgentComponentInfo.componentName == null ||
-                        trustAgentComponentInfo.title == null ||
-                        trustAgentComponentInfo.title == "") continue;
-                Preference trustAgentPreference =
-                        new Preference(securityCategory.getContext());
-                trustAgentPreference.setKey(KEY_TRUST_AGENT);
-                trustAgentPreference.setTitle(trustAgentComponentInfo.title);
-                trustAgentPreference.setSummary(trustAgentComponentInfo.summary);
-                // Create intent for this preference.
-                Intent intent = new Intent();
-                intent.setComponent(trustAgentComponentInfo.componentName);
-                intent.setAction(Intent.ACTION_MAIN);
-                trustAgentPreference.setIntent(intent);
-                // Add preference to the settings menu.
-                securityCategory.addPreference(trustAgentPreference);
-                break; // Only render the first one.
+            List<ComponentName> enabledTrustAgents = mLockPatternUtils.getEnabledTrustAgents();
+            if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
+                for (ResolveInfo resolveInfo : resolveInfos) {
+                    if (resolveInfo.serviceInfo == null) continue;
+                    if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
+                    TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
+                            TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
+                    if (trustAgentComponentInfo.componentName == null ||
+                            !enabledTrustAgents.contains(trustAgentComponentInfo.componentName) ||
+                            TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
+                    Preference trustAgentPreference =
+                            new Preference(securityCategory.getContext());
+                    trustAgentPreference.setKey(KEY_TRUST_AGENT);
+                    trustAgentPreference.setTitle(trustAgentComponentInfo.title);
+                    trustAgentPreference.setSummary(trustAgentComponentInfo.summary);
+                    // Create intent for this preference.
+                    Intent intent = new Intent();
+                    intent.setComponent(trustAgentComponentInfo.componentName);
+                    intent.setAction(Intent.ACTION_MAIN);
+                    trustAgentPreference.setIntent(intent);
+                    // Add preference to the settings menu.
+                    securityCategory.addPreference(trustAgentPreference);
+                    break; // Only render the first one.
+                }
             }
         }
 
