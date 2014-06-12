@@ -142,27 +142,30 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
                 refreshPreviewText();
             }
         });
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final boolean enabled = mCaptioningManager.isEnabled();
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setTextViewLabel(enabled);
         mToggleSwitch = mSwitchBar.getSwitch();
         mToggleSwitch.setCheckedInternal(enabled);
 
         getPreferenceScreen().setEnabled(enabled);
 
         refreshPreviewText();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
         installSwitchBarToggleSwitch();
     }
 
     @Override
-    public void onPause() {
+    public void onDestroyView() {
+        super.onDestroyView();
         removeSwitchBarToggleSwitch();
-        super.onPause();
     }
 
     private void refreshPreviewText() {

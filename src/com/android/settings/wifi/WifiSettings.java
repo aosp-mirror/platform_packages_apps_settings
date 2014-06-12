@@ -136,8 +136,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
 
-    private SwitchBar mSwitchBar;
-
     /** verbose logging flag. this flag is set thru developer debugging options
      * and used so as to assist with in-the-field WiFi connectivity debugging  */
     public static int mVerboseLogging = 0;
@@ -230,6 +228,15 @@ public class WifiSettings extends RestrictedSettingsFragment
         getListView().setEmptyView(mEmptyView);
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mWifiEnabler != null) {
+            mWifiEnabler.teardownSwitchBar();
+        }
     }
 
     @Override

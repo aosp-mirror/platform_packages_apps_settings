@@ -61,7 +61,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
     private DreamBackend mBackend;
     private DreamInfoAdapter mAdapter;
     private SwitchBar mSwitchBar;
-    private Switch mSwitch;
     private MenuItem[] mMenuItemsWhenEnabled;
     private boolean mRefreshing;
 
@@ -105,6 +104,9 @@ public class DreamSettings extends SettingsPreferenceFragment implements
     public void onDestroyView() {
         logd("onDestroyView()");
         super.onDestroyView();
+
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     @Override
@@ -124,7 +126,8 @@ public class DreamSettings extends SettingsPreferenceFragment implements
 
         final SettingsActivity sa = (SettingsActivity) getActivity();
         mSwitchBar = sa.getSwitchBar();
-        mSwitch = mSwitchBar.getSwitch();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
     }
 
     @Override
@@ -212,9 +215,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         super.onPause();
 
         mContext.unregisterReceiver(mPackageReceiver);
-
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
     }
 
     @Override
@@ -231,9 +231,6 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
         filter.addDataScheme(PACKAGE_SCHEME);
         mContext.registerReceiver(mPackageReceiver , filter);
-
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
     }
 
     public static int getSummaryResource(Context context) {
@@ -263,8 +260,8 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         logd("refreshFromBackend()");
         mRefreshing = true;
         boolean dreamsEnabled = mBackend.isEnabled();
-        if (mSwitch.isChecked() != dreamsEnabled)
-            mSwitch.setChecked(dreamsEnabled);
+        if (mSwitchBar.isChecked() != dreamsEnabled)
+            mSwitchBar.setChecked(dreamsEnabled);
 
         mAdapter.clear();
         if (dreamsEnabled) {

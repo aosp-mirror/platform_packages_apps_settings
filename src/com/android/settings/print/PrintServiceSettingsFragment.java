@@ -143,16 +143,12 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         mSettingsContentObserver.register(getContentResolver());
         updateEmptyView();
         updateUiForServiceState();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
     }
 
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
     }
 
     @Override
@@ -168,6 +164,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
             getActivity().getActionBar().setTitle(mOldActivityTitle);
         }
         super.onDestroyView();
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
     }
 
     private void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -292,6 +290,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
 
         mToggleSwitch = mSwitchBar.getSwitch();
         mToggleSwitch.setOnBeforeCheckedChangeListener(new ToggleSwitch.OnBeforeCheckedChangeListener() {
