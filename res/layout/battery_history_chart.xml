@@ -14,22 +14,29 @@
      limitations under the License.
 -->
 
-<com.android.settings.fuelgauge.BatteryHistoryChart
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res/com.android.settings"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:id="@+android:id/battery_history_chart"
-    android:paddingEnd="?android:attr/scrollbarSize"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:textColor="#ff000000"
-    app:headerAppearance="?android:attr/textAppearanceMedium"
-    android:shadowRadius="4"
-    android:shadowColor="?android:attr/colorBackground"
-    android:shadowDx="2"
-    android:shadowDy="2"
-    app:barPrimaryColor="?android:attr/colorControlActivated"
-    app:barPredictionColor="@color/material_empty_color_light"
-    app:chartMinHeight="@dimen/battery_history_chart_height">
-</com.android.settings.fuelgauge.BatteryHistoryChart>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+
+    <com.android.settings.fuelgauge.BatteryHistoryChart
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res/com.android.settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:id="@+android:id/battery_history_chart"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ff000000"
+        app:headerAppearance="?android:attr/textAppearanceMedium"
+        android:shadowRadius="4"
+        android:shadowColor="?android:attr/colorBackground"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        app:barPrimaryColor="?android:attr/colorControlActivated"
+        app:barPredictionColor="@color/material_empty_color_light"
+        app:chartMinHeight="@dimen/battery_history_chart_height">
+    </com.android.settings.fuelgauge.BatteryHistoryChart>
+
+</FrameLayout>
