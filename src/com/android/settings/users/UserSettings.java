@@ -64,12 +64,12 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SelectableEditTextPreference;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-public class UserSettings extends RestrictedSettingsFragment
+public class UserSettings extends SettingsPreferenceFragment
         implements OnPreferenceClickListener, OnClickListener, DialogInterface.OnDismissListener,
         Preference.OnPreferenceChangeListener {
 
@@ -136,10 +136,6 @@ public class UserSettings extends RestrictedSettingsFragment
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
 
-    public UserSettings() {
-        super(RestrictedSettingsFragment.RESTRICTIONS_PIN_SET);
-    }
-
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -204,7 +200,8 @@ public class UserSettings extends RestrictedSettingsFragment
         }
         mAddUser = findPreference(KEY_ADD_USER);
         if (!mIsOwner || UserManager.getMaxSupportedUsers() < 2
-                || !UserManager.supportsMultipleUsers()) {
+                || !UserManager.supportsMultipleUsers()
+                || mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
             removePreference(KEY_ADD_USER);
         } else {
             mAddUser.setOnPreferenceClickListener(this);
