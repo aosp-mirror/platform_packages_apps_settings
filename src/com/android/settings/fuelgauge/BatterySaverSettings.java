@@ -41,13 +41,15 @@ public class BatterySaverSettings extends SettingsPreferenceFragment {
     private final SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
     private Context mContext;
+    private boolean mCreated;
     private SettingPref mAlwaysOnPref;
     private SettingPref mTriggerPref;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        if (mCreated) return;
+        mCreated = true;
         addPreferencesFromResource(R.xml.battery_saver_settings);
 
         mContext = getActivity();
