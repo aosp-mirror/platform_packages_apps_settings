@@ -65,6 +65,8 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 
+import static com.android.internal.widget.LockPatternView.DisplayMode;
+
 import java.util.List;
 
 /**
@@ -123,6 +125,15 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     /** Number of calls to {@link #notifyUser()} before we release the wakelock */
     private int mReleaseWakeLockCountdown = 0;
 
+    // how long we wait to clear a wrong pattern
+    private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 1500;
+
+    private Runnable mClearPatternRunnable = new Runnable() {
+        public void run() {
+            mLockPatternView.clearPattern();
+        }
+    };
+
     /**
      * Used to propagate state through configuration changes (e.g. screen rotation)
      */
@@ -175,21 +186,29 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
-            } else if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
-                if (mLockPatternView != null) {
-                    mLockPatternView.clearPattern();
-                }
-                mCooldown = COOL_DOWN_INTERVAL;
-                cooldown();
             } else {
-                final TextView status = (TextView) findViewById(R.id.status);
-                status.setText(R.string.try_again);
-                // Reenable the password entry
-                if (mPasswordEntry != null) {
-                    mPasswordEntry.setEnabled(true);
-                }
+                // Wrong entry. Handle pattern case.
                 if (mLockPatternView != null) {
-                    mLockPatternView.setEnabled(true);
+                    mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+                    mLockPatternView.removeCallbacks(mClearPatternRunnable);
+                    mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
+                }
+                if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
+                    mCooldown = COOL_DOWN_INTERVAL;
+                    cooldown();
+                } else {
+                    final TextView status = (TextView) findViewById(R.id.status);
+                    status.setText(R.string.try_again);
+                    if (mLockPatternView != null) {
+                        mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+                    }
+                    // Reenable the password entry
+                    if (mPasswordEntry != null) {
+                        mPasswordEntry.setEnabled(true);
+                    }
+                    if (mLockPatternView != null) {
+                        mLockPatternView.setEnabled(true);
+                    }
                 }
             }
         }
@@ -583,25 +602,26 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     protected LockPatternView.OnPatternListener mChooseNewLockPatternListener =
-            new LockPatternView.OnPatternListener() {
+        new LockPatternView.OnPatternListener() {
 
-            @Override
-            public void onPatternStart() {
-            }
+        @Override
+        public void onPatternStart() {
+            mLockPatternView.removeCallbacks(mClearPatternRunnable);
+        }
 
-            @Override
-            public void onPatternCleared() {
-            }
+        @Override
+        public void onPatternCleared() {
+        }
 
-            @Override
-            public void onPatternDetected(List<LockPatternView.Cell> pattern) {
-                mLockPatternView.setEnabled(false);
-                new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
-            }
+        @Override
+        public void onPatternDetected(List<LockPatternView.Cell> pattern) {
+            mLockPatternView.setEnabled(false);
+            new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
+        }
 
-            @Override
-            public void onPatternCellAdded(List<Cell> pattern) {
-            }
+        @Override
+        public void onPatternCellAdded(List<Cell> pattern) {
+        }
      };
 
      private void passwordEntryInit() {
