@@ -130,6 +130,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
+    private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
+    private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
+    private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
@@ -185,6 +188,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mDebugLayout;
     private CheckBoxPreference mForceRtlLayout;
     private ListPreference mDebugHwOverdraw;
+    private ListPreference mLogdSize;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
     private ListPreference mWindowAnimationScale;
@@ -291,6 +295,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mForceRtlLayout = findAndInitCheckboxPref(FORCE_RTL_LAYOUT_KEY);
         mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
         mWifiDisplayCertification = findAndInitCheckboxPref(WIFI_DISPLAY_CERTIFICATION_KEY);
+        mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
+
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
@@ -496,6 +502,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
+        updateLogdSizeValues();
         updateWifiDisplayCertificationOptions();
     }
 
@@ -509,6 +516,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
         }
         resetDebuggerOptions();
+        writeLogdSizeOption(null);
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -958,6 +966,43 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mWifiDisplayCertification.isChecked() ? 1 : 0);
     }
 
+    private void updateLogdSizeValues() {
+        if (mLogdSize != null) {
+            String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
+            if (currentValue == null) {
+                currentValue = SystemProperties.get(SELECT_LOGD_DEFAULT_SIZE_PROPERTY);
+                if (currentValue == null) {
+                    currentValue = "256K";
+                }
+            }
+            String[] values = getResources().getStringArray(R.array.select_logd_size_values);
+            String[] titles = getResources().getStringArray(R.array.select_logd_size_titles);
+            String[] summaries = getResources().getStringArray(R.array.select_logd_size_summaries);
+            int index = 1; // punt to second entry if not found
+            for (int i = 0; i < values.length; i++) {
+                if (currentValue.equals(values[i])
+                        || currentValue.equals(titles[i])) {
+                    index = i;
+                    break;
+                }
+            }
+            mLogdSize.setValue(values[index]);
+            mLogdSize.setSummary(summaries[index]);
+            mLogdSize.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    private void writeLogdSizeOption(Object newValue) {
+        SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, newValue.toString());
+        pokeSystemProperties();
+        try {
+            Process p = Runtime.getRuntime().exec("logcat -b all -G " + newValue.toString());
+            int status = p.waitFor();
+        } catch (Exception e) {
+        }
+        updateLogdSizeValues();
+    }
+
     private void updateCpuUsageOptions() {
         updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
@@ -1283,6 +1328,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
             updateHdcpValues();
             pokeSystemProperties();
+            return true;
+        } else if (preference == mLogdSize) {
+            writeLogdSizeOption(newValue);
             return true;
         } else if (preference == mWindowAnimationScale) {
             writeAnimationScaleOption(0, mWindowAnimationScale, newValue);
