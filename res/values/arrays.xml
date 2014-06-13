@@ -895,6 +895,33 @@
         <item>Use ART debug build</item>
     </string-array>
 
+    <!-- Titles for logd limit size selection preference. [CHAR LIMIT=14] -->
+    <string-array name="select_logd_size_titles">
+        <item>64K</item>
+        <item>256K</item>
+        <item>1M</item>
+        <item>4M</item>
+        <item>16M</item>
+    </string-array>
+
+    <!-- Values for logd limit size selection preference. -->
+    <string-array name="select_logd_size_values" translatable="false" >
+        <item>65536</item>
+        <item>262144</item>
+        <item>1048576</item>
+        <item>4194304</item>
+        <item>16777216</item>
+    </string-array>
+
+    <!-- Summaries for logd limit size selection preference. [CHAR LIMIT=19]-->
+    <string-array name="select_logd_size_summaries" >
+        <item>64K per log buffer</item>
+        <item>256K per log buffer</item>
+        <item>1M per log buffer</item>
+        <item>4M per log buffer</item>
+        <item>16M per log buffer</item>
+    </string-array>
+
     <!-- Titles for HDCP checking preference. [CHAR LIMIT=35] -->
     <string-array name="hdcp_checking_titles">
         <item>Never check</item>
