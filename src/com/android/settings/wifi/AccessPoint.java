@@ -530,6 +530,9 @@ class AccessPoint extends Preference {
         if (WifiSettings.mVerboseLogging > 0) {
             //add RSSI/band information for this config, what was seen up to 6 seconds ago
             //verbose WiFi Logging is only turned on thru developers settings
+            if (mInfo != null && mState != null) { // This is the active connection
+                summary.append(" (f=" + Integer.toString(mInfo.getFrequency()) + ")");
+            }
             summary.append(" " + getVisibilityStatus());
             if (mConfig != null && mConfig.autoJoinStatus > 0) {
                 summary.append(" (" + mConfig.autoJoinStatus);
