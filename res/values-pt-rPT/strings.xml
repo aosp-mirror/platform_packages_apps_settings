@@ -90,9 +90,9 @@
     <string name="battery_info_screen_on" msgid="376277447175613889">"Tempo de activação do ecrã:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"Desconhecido"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"A carregar"</string>
-    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(CA)"</string>
-    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
-    <string name="battery_info_status_charging_wireless" msgid="1822125795446772771">"(sem fios)"</string>
+    <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"A carregar por CA"</string>
+    <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"A carregar por USB"</string>
+    <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"A carregar sem fios"</string>
     <string name="battery_info_status_discharging" msgid="310932812698268588">"Não está a carregar"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Não está a carregar"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Completo"</string>
@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"O campo referente à porta tem de estar vazio se o campo do anfitrião estiver vazio."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"A porta introduzida não é válida."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"O proxy HTTP é utilizado pelo navegador, mas não pode ser utilizado por outras aplicações."</string>
-    <string name="proxy_url" msgid="2523518669129974654">"URL de PAC: "</string>
+    <string name="proxy_url_title" msgid="7185282894936042359">"URL do PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Local:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID vizinho"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -276,7 +276,7 @@
     <string name="settings_label_launcher" msgid="8344735489639482340">"Definições"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Atalho das definições"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Modo de voo"</string>
-    <string name="radio_controls_title" msgid="6889937359495515769">"Mais..."</string>
+    <string name="radio_controls_title" msgid="5364843879587669966">"NFC e mais"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Redes sem fios e outras"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Gerir Wi-Fi, Bluetooth, modo de avião, redes móveis e VPNs"</string>
     <string name="roaming" msgid="3596055926335478572">"Roaming de dados"</string>
@@ -317,7 +317,6 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Info do proprietário"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Ativar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Desativados pelo administrador"</string>
-    <string name="nfc_unlock_title" msgid="8827035651970841825">"Desbloqueio de NFC"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Introduzir texto a apresentar no ecrã de bloqueio"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostrar info. utilizador no ecrã de bloqueio"</string>
@@ -325,6 +324,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostrar informação do perfil no ecrã de bloqueio"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informação do perfil"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Localização"</string>
+    <string name="account_settings_title" msgid="626177544686329806">"Contas"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"Segurança"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Definir A minha localização, desbloqueio do ecrã, bloqueio do cartão SIM, bloqueio do armazenamento de credenciais"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Definir O meu local, desbloqueio do ecrã, bloqueio do armazenamento de credenciais"</string>
@@ -333,8 +333,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Encriptar tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Encriptar telefone"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Encriptado"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"Pode encriptar contas, definições, aplicações transferidas e os respetivos dados, ficheiros multimédia e outros. Depois de encriptar o seu tablet, assumindo que configurou um bloqueio de ecrã (ou seja, um padrão ou PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o tablet sempre que o ligar. A outra única forma de desencriptar é efetuar uma reposição de dados de fábrica, apagando todos os seus dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com uma bateria carregada e manter o tablet ligado durante o processo. Se interromper, irá perder alguns ou todos os seus dados."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"Pode encriptar contas, definições, aplicações transferidas e os respetivos dados, ficheiros multimédia e outros. Depois de encriptar o seu telemóvel, assumindo que configurou um bloqueio de ecrã (ou seja, um padrão ou PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o telemóvel sempre que o ligar. A outra única forma de desencriptar é efetuar uma reposição de dados de fábrica, apagando todos os seus dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com uma bateria carregada e manter o telemóvel ligado durante o processo. Se interromper, irá perder alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"Pode encriptar contas, definições, aplicações transferidas e os respetivos dados, ficheiros multimédia e outros. Depois de encriptar o seu tablet, partindo do princípio que configurou um bloqueio de ecrã (ou seja, um padrão ou PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o tablet sempre que o ligar. A outra única forma de desencriptar é efetuar uma reposição de dados de fábrica, apagando todos os seus dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com uma bateria carregada e manter o tablet ligado durante o processo. Se interromper, irá perder alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"Pode encriptar contas, definições, aplicações transferidas e os respetivos dados, ficheiros multimédia e outros. Depois de encriptar o seu telemóvel, partindo do princípio que configurou um bloqueio de ecrã (ou seja, um padrão ou PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o telemóvel sempre que o ligar. A outra única forma de desencriptar é efetuar uma reposição de dados de fábrica, apagando todos os seus dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com uma bateria carregada e manter o telemóvel ligado durante o processo. Se interromper, irá perder alguns ou todos os seus dados."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Encriptar tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Encriptar telefone"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Carregue a bateria e tente novamente."</string>
@@ -570,8 +570,7 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Ligar a uma rede"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Esquecer rede"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modificar rede"</string>
-    <!-- no translation found for wifi_menu_write_to_nfc (7692881642188240324) -->
-    <skip />
+    <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Escrever na etiqueta NFC"</string>
     <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Para ver as redes disponíveis, ligue o Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"A pesquisar redes Wi-Fi..."</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"Não tem autorização para alterar a rede Wi‑Fi."</string>
@@ -620,8 +619,7 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponível)"</string>
     <string name="wifi_secured_first_item" msgid="4072076186051083451">"Protegido por <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_secured_second_item" msgid="1326000076939056265">", protegido por <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <!-- no translation found for wifi_wps_nfc_enter_password (2288214226916117159) -->
-    <skip />
+    <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Introduzir a palavra-passe da rede"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Nenhuma"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Para melhorar a precisão da localização e para outros fins, <xliff:g id="APP_NAME">%1$s</xliff:g> pretende ativar a verificação de redes, mesmo quando o Wi-Fi está desativado.\n\nPermitir esta opção para todas as aplicações que pretenderem verificar?"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Permitir"</string>
@@ -730,6 +728,8 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Não reproduzir som ao inserir ou remover o tablet da estação de ancoragem"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Não reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
     <string name="account_settings" msgid="6403589284618783461">"Contas"</string>
+    <string name="category_personal" msgid="1299663247844969448">"Pessoal"</string>
+    <string name="category_work" msgid="8699184680584175622">"Trabalho"</string>
     <string name="search_settings" msgid="1910951467596035063">"Pesquisar"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Gerir definições e histórico de pesquisa"</string>
     <string name="display_settings" msgid="7965901687241669598">"Ecrã"</string>
@@ -738,13 +738,10 @@
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Mudar orientação automaticamente ao rodar o telefone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Mudar orientação automaticamente ao rodar o tablet"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Mudar orientação automaticamente ao rodar o telefone"</string>
-    <!-- no translation found for brightness (8480105032417444275) -->
-    <skip />
+    <string name="brightness" msgid="8480105032417444275">"Nível de luminosidade"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ajustar o brilho do ecrã"</string>
-    <!-- no translation found for auto_brightness_title (6341042882350279391) -->
-    <skip />
-    <!-- no translation found for auto_brightness_summary (1799041158760605375) -->
-    <skip />
+    <string name="auto_brightness_title" msgid="6341042882350279391">"Luminosidade adaptável"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Otimizar o nível de luminosidade de acordo com a luz disponível"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Suspensão"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Imagem de fundo"</string>
@@ -996,7 +993,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Alterar aplicação de SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Utilizar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como a aplicação de SMS predefinida?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Utilizar <xliff:g id="NEW_APP">%s</xliff:g> como a aplicação de SMS predefinida?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="9101230468757324260">"Operador de cartão SIM desconhecido"</string>
+    <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operador SIM desconhecido"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"A %1$s não possui um Website de gestão conhecido"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insira o cartão SIM e reinicie"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Ligue-se à Internet"</string>
@@ -1325,13 +1322,14 @@
     <string name="development_settings_title" msgid="215179176067683667">"Opções de programador"</string>
     <string name="development_settings_summary" msgid="1815795401632854041">"Definir opções de desenvolvimento da aplicação"</string>
     <string name="development_settings_not_available" msgid="4308569041701535607">"As opções de programador não estão disponíveis para este utilizador"</string>
+    <string name="vpn_settings_not_available" msgid="956841430176985598">"As definições de VPN não estão disponíveis para este utilizador"</string>
+    <string name="tethering_settings_not_available" msgid="6765770438438291012">"As definições de ligação via telemóvel não estão disponíveis para este utilizador"</string>
+    <string name="apn_settings_not_available" msgid="7873729032165324000">"As definições de Nome do Ponto de Acesso não estão disponíveis para este utilizador"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depuração USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Modo de depuração com USB ligado"</string>
     <string name="clear_adb_keys" msgid="4038889221503122743">"Revogar autorizações de depur. USB"</string>
-    <!-- no translation found for bugreport_in_power (7923901846375587241) -->
-    <skip />
-    <!-- no translation found for bugreport_in_power_summary (3245617665067320992) -->
-    <skip />
+    <string name="bugreport_in_power" msgid="7923901846375587241">"Atalho para relatório de erros"</string>
+    <string name="bugreport_in_power_summary" msgid="1778455732762984579">"Mostrar um botão no menu ligar/desligar para criar um relatório de erro"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Manter ativo"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"O ecrã nunca entrará em suspensão durante o carregamento"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Ativar registo de monit. Bluetooth HCI"</string>
@@ -1340,7 +1338,9 @@
     <string name="select_runtime_dialog_title" msgid="5314872813037493958">"Selecionar tempo exec."</string>
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Reiniciar para alterar o tempo de execução de <xliff:g id="OLD">%1$s</xliff:g> para <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificação de display sem fios"</string>
+    <string name="wifi_verbose_logging" msgid="4770164061102202747">"Ativar o registo detalhado de Wi-Fi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostrar opções da certificação de display sem fios"</string>
+    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Aumentar nível de reg. de Wi-Fi, mostrar por SSID RSSI no selecionador de Wi-Fi"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir locais fictícios"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permitir depuração USB?"</string>
@@ -1431,6 +1431,7 @@
     <string name="captioning_preview_text" msgid="4067935959797375065">"As legendas terão este aspeto"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"Predefinição"</string>
+    <string name="color_unspecified" msgid="5179683785413568326">"Predefinição"</string>
     <string name="color_none" msgid="3475640044925814795">"Nenhuma"</string>
     <string name="color_white" msgid="8045195170201590239">"Branco"</string>
     <string name="color_gray" msgid="9192312087142726313">"Cinzento"</string>
@@ -1485,7 +1486,11 @@
     <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – resta(m) aprox. <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="1076204146651267327">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g> (<xliff:g id="TIME">%3$s</xliff:g> até completa)"</string>
+    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> até ficar completa"</string>
+    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> até ficar completa através de CA"</string>
+    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> até ficar completa através de USB"</string>
+    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> até ficar compl. por rede s/ fios"</string>
+    <string name="power_usage_list_summary" msgid="2409288197839512482">"Utilização desde a última carga completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Bateria utilizada desde que foi desligado"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Bateria utilizada desde a reposição"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> em bateria"</string>
@@ -1568,6 +1573,12 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Atualizar"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"SO Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"Poupança de bateria"</string>
+    <string name="battery_saver_always_on_title" msgid="5204387375575431936">"Sempre ligada"</string>
+    <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Ligar automaticamente"</string>
+    <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nunca"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"a %1$d%% de bateria"</string>
+    <string name="battery_saver_description" msgid="8859033102348703807">"Para ajudar a aumentar a duração da bateria, a Poupança de bateria reduzirá o desempenho do seu dispositivo.\n\nA Poupança de bateria será desativada assim que o dispositivo for ligado à corrente elétrica."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Estatísticas de peritos acerca dos processos em execução"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Utilização da memória"</string>
@@ -1678,6 +1689,7 @@
     <string name="credentials_reset_summary" msgid="3369361230171260282">"Remover todos os certificados"</string>
     <string name="trusted_credentials" msgid="4266945289534242402">"Credenciais fiáveis"</string>
     <string name="trusted_credentials_summary" msgid="6735221351155686632">"Mostrar certificados da AC fiáveis"</string>
+    <string name="advanced_security_title" msgid="2434776238010578865">"Avançadas"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"Tipo de armazenamento"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Suportado por hardware"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Apenas software"</string>
@@ -1728,7 +1740,7 @@
     <string name="device_admin_status" msgid="4252975713178851910">"Este administrador está ativo e permite que a aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> efetue as seguintes operações:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sem título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Geral"</string>
-    <string name="sound_category_notification_title" msgid="3502115998790286943">"Notificações"</string>
+    <string name="notification_log_title" msgid="3766148588239398464">"Registo de notificações"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="1543777228646645163">"Toque e vibração das chamadas"</string>
     <string name="sound_category_system_title" msgid="1480844520622721141">"Sistema"</string>
     <string name="wifi_setup_title" msgid="2970260757780025029">"Configuração Wi-Fi"</string>
@@ -1761,6 +1773,7 @@
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"Toque em "<b>"Seguinte"</b>" para continuar a configuração.\n\nToque em "<b>"Anterior"</b>" para ligar a uma rede Wi‑Fi diferente."</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"Sincronização ativada"</string>
     <string name="accessibility_sync_disabled" msgid="1741194106479011384">"Sincronização desativada"</string>
+    <string name="accessibility_sync_in_progress" msgid="4501160520879902723">"A sincronizar agora"</string>
     <string name="accessibility_sync_error" msgid="8703299118794272041">"Erro de sincronização"</string>
     <string name="sync_failed" msgid="1696499856374109647">"A sincronização falhou"</string>
     <string name="sync_active" msgid="8476943765960863040">"Sincronização ativa"</string>
@@ -1807,7 +1820,7 @@
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Endereço MAC de 4G"</string>
     <string name="enter_password" msgid="4131758584074246224">"Introduzir palavra-passe para desencriptar armazenamento"</string>
-    <string name="enter_pin" msgid="286221169871526876">"Introduzir o PIN para desencriptar o armazenamento"</string>
+    <string name="enter_pin" msgid="286221169871526876">"Introduza o PIN para desencriptar o armazenamento"</string>
     <string name="enter_pattern" msgid="5707838886272453608">"Desenhar o padrão para desencriptar o armazenamento"</string>
     <string name="try_again" msgid="4272075051293936921">"Tente novamente."</string>
     <string name="delete" msgid="4219243412325163003">"Eliminar"</string>
@@ -2096,18 +2109,6 @@
     <string name="user_image_take_photo" msgid="1280274310152803669">"Tirar fotografia"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Escolher fotografia da Galeria"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
-    <string name="lock_settings_nfc_title" msgid="33998875572836425">"Definições de bloqueio de ecrã por NFC"</string>
-    <string name="nfc_unlock_paired_tags_title" msgid="3837232675294949824">"Etiquetas sincronizadas"</string>
-    <string name="nfc_unlock_enabled" msgid="7306199149460932989">"Ativado"</string>
-    <string name="start_nfc_pairing" msgid="5363319136364735698">"Sincronizar com uma etiqueta"</string>
-    <string name="title_activity_nfc_pairing" msgid="6821817665260628279">"NfcPairingActivity"</string>
-    <string name="pairing_button_title" msgid="7411638037556429744">"Sincronizar agora"</string>
-    <string name="status_no_ring_detected" msgid="838954925249421062">"Estique a etiqueta em cima de uma mesa e coloque o telemóvel por cima"</string>
-    <string name="status_device_paired" msgid="4916932520416516526">"Etiqueta e telemóvel sincronizados com êxito. Tudo pronto!"</string>
-    <string name="status_error_invalid_device" msgid="5045003971535647259">"A etiqueta fornecida não pode ser utilizada para desbloquear o telemóvel"</string>
-    <string name="status_error_pairing_failed" msgid="8260473909085202868">"Falha ao sincronizar com a etiqueta. Tente novamente."</string>
-    <string name="enable_nfc" msgid="5234514241098808766">"O NFC não está ativado e é necessário para o desbloqueio por NFC. Ative o NFC."</string>
-    <string name="ok" msgid="3651563352754792958">"Definições de NFC"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Definições"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Definições"</string>
     <string name="search_menu" msgid="7053532283559077164">"Pesquisar"</string>
@@ -2115,8 +2116,7 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Pesquisas recentes"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Resultados"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"ligação a rede Wi-Fi"</string>
-    <!-- no translation found for setup_wifi_nfc_tag (9028353016222911016) -->
-    <skip />
+    <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Config. etiqueta NFC p/ Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escrever"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toque numa etiqueta para escrever..."</string>
     <string name="status_invalid_password" msgid="2575271864572897406">"Palavra-passe inválida, tente novamente."</string>
@@ -2124,12 +2124,14 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Não é possível escrever dados na etiqueta NFC. Caso o problema persista, experimente uma etiqueta diferente"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"A etiqueta NFC não é gravável. Utilize uma etiqueta diferente."</string>
     <string name="default_sound" msgid="8821684447333687810">"Som predefinido"</string>
-    <string name="notification_settings" msgid="7558043253996992936">"Sons e notificações"</string>
+    <string name="notification_settings" msgid="4117833036535910061">"Som e notificações"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volume de multimédia"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume do alarme"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume do toque"</string>
+    <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume de notificações"</string>
     <string name="zen_mode_settings_title" msgid="2689740350895257590">"Não incomodar"</string>
-    <string name="ringer_mode_title" msgid="7489457312298627735">"Quando entram chamadas e notificações"</string>
+    <string name="ringer_mode_title" msgid="7489457312298627735">"Quando chegam chamadas e notificações"</string>
+    <string name="ringer_mode_title_novoice" msgid="4628028304587795604">"Quando chegam notificações"</string>
     <string name="ringer_mode_audible" msgid="4196661772746371017">"Tocar"</string>
     <string name="ringer_mode_vibrate" msgid="3381276665087695839">"Vibrar em vez de tocar"</string>
     <string name="ringer_mode_silent" msgid="4812605852723880795">"Não tocar nem vibrar"</string>
@@ -2146,11 +2148,18 @@
     <string name="zen_mode_notifications_summary_hide" msgid="1442445640095117354">"Ocultar novas notificações a partir da lista"</string>
     <string name="zen_mode_notifications_summary_show" msgid="4043422218595387460">"Mostrar todas as notificações na lista"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notificações da aplicação"</string>
-    <string name="touch_sound_settings" msgid="8861737295513989009">"Sons de toque"</string>
+    <string name="other_sound_settings" msgid="3151004537006844718">"Outros sons"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Sons do teclado"</string>
-    <string name="screen_locking_sounds_title" msgid="3214032809403683539">"Bloqueio e desbloqueio do ecrã"</string>
-    <string name="other_touch_sounds_title" msgid="1692523628776677916">"Outros sons de toque"</string>
+    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons de bloqueio de ecrã"</string>
+    <string name="docking_sounds_title" msgid="155236288949940607">"Sons da estação de ancoragem"</string>
+    <string name="touch_sounds_title" msgid="5326587106892390176">"Sons de toque"</string>
     <string name="vibrate_on_touch_title" msgid="674710566941697253">"Vibrar ao tocar"</string>
+    <string name="dock_audio_media_title" msgid="1346838179626123900">"Repr. da col. da est. de anc."</string>
+    <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Todo o áudio"</string>
+    <string name="dock_audio_media_enabled" msgid="667849382924908673">"Apenas áudio multimédia"</string>
+    <string name="emergency_tone_silent" msgid="1067515631635824291">"Silencioso"</string>
+    <string name="emergency_tone_alert" msgid="8941852695428130667">"Alerta"</string>
+    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrar"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acesso a notificações"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"As aplicações não conseguem ler notificações"</string>
   <plurals name="manage_notification_access_summary_nonzero">
@@ -2201,8 +2210,6 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Not. da aplicação"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Definições de notificações"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Enviar comentários do dispositivo"</string>
-    <!-- no translation found for switch_on_text (1124106706920572386) -->
-    <skip />
-    <!-- no translation found for switch_off_text (1139356348100829659) -->
-    <skip />
+    <string name="switch_on_text" msgid="1124106706920572386">"Ativado"</string>
+    <string name="switch_off_text" msgid="1139356348100829659">"Desativado"</string>
 </resources>
