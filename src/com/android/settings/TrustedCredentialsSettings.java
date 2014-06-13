@@ -47,6 +47,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
+
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -170,6 +171,10 @@ public class TrustedCredentialsSettings extends Fragment {
 
     @Override public View onCreateView(
             LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+            return inflater.inflate(R.layout.credentials_disallowed_preference_screen,
+                    parent, false);
+        }
         mTabHost = (TabHost) inflater.inflate(R.layout.trusted_credentials, parent, false);
         mTabHost.setup();
         addTab(Tab.SYSTEM);

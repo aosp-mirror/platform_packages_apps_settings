@@ -58,7 +58,7 @@ import java.util.List;
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends RestrictedSettingsFragment
+public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener, Indexable {
     static final String TAG = "SecuritySettings";
     private static final Intent TRUST_AGENT_INTENT =
@@ -114,10 +114,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mPowerButtonInstantlyLocks;
 
     private boolean mIsPrimary;
-
-    public SecuritySettings() {
-        super(null /* Don't ask for restrictions pin on creation. */);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -274,6 +270,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
         } else {
             removePreference(KEY_CREDENTIALS_MANAGER);
+            removePreference(KEY_CREDENTIALS_INSTALL);
         }
 
         // Application install
@@ -282,9 +279,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
         mToggleAppInstallation = (CheckBoxPreference) findPreference(
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
-
         // Side loading of apps.
         mToggleAppInstallation.setEnabled(mIsPrimary);
+        if (um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES)
+                || um.hasUserRestriction(UserManager.DISALLOW_INSTALL_APPS)) {
+            mToggleAppInstallation.setEnabled(false);
+        }
 
         // Package verification, only visible to primary user and if enabled
         mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
@@ -302,12 +302,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 mToggleVerifyApps.setEnabled(false);
             }
         }
-
-        if (shouldBePinProtected(RESTRICTIONS_PIN_SET)) {
-            protectByRestrictions(mToggleAppInstallation);
-            protectByRestrictions(mToggleVerifyApps);
-            protectByRestrictions(mResetCredentials);
-            protectByRestrictions(root.findPreference(KEY_CREDENTIALS_INSTALL));
+        if (um.hasUserRestriction(UserManager.ENSURE_VERIFY_APPS)) {
+            mToggleVerifyApps.setEnabled(false);
         }
 
         // Trust Agent preferences
@@ -504,9 +500,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (ensurePinRestrictedPreference(preference)) {
-            return true;
-        }
         final String key = preference.getKey();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
