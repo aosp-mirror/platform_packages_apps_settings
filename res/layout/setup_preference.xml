@@ -72,7 +72,6 @@
         </RelativeLayout>
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/title_area"
@@ -148,52 +147,6 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/button_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:visibility="gone" >
-
-                <Button
-                    android:id="@+id/back_button"
-                    android:layout_width="150dip"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_margin="5dip"
-                    android:text="@string/wifi_setup_back" />
-
-                <Button
-                    android:id="@+id/custom_button"
-                    android:layout_width="150dip"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="5dip"
-                    android:text="@string/wifi_setup_skip" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:orientation="horizontal" >
-
-                    <Button
-                        android:id="@+id/skip_button"
-                        android:layout_width="150dip"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dip"
-                        android:text="@string/wifi_setup_skip"
-                        android:visibility="gone" />
-
-                    <Button
-                        android:id="@+id/next_button"
-                        android:layout_width="150dip"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dip"
-                        android:text="@string/wifi_setup_next"
-                        android:visibility="gone" />
-                    </LinearLayout>
-            </RelativeLayout>
         </LinearLayout>
     </view>
     <fragment android:name="com.android.setupwizard.navigationbar.SetupWizardNavBar"

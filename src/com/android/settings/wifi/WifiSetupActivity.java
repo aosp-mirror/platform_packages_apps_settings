@@ -45,9 +45,6 @@ public class WifiSetupActivity extends WifiPickerActivity
     private static final String EXTRA_ALLOW_SKIP = "allowSkip";
     private static final String EXTRA_USE_IMMERSIVE_MODE = "useImmersiveMode";
 
-    // this boolean extra shows a custom button that we can control
-    protected static final String EXTRA_SHOW_CUSTOM_BUTTON = "wifi_show_custom_button";
-
     // Extra containing the resource name of the theme to be used
     private static final String EXTRA_THEME = "theme";
     private static final String THEME_HOLO = "holo";
@@ -152,7 +149,6 @@ public class WifiSetupActivity extends WifiPickerActivity
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        getIntent().putExtra(EXTRA_SHOW_CUSTOM_BUTTON, false);
         bar.getNextButton().setText(R.string.skip_label);
 
         if (!getIntent().getBooleanExtra(EXTRA_ALLOW_SKIP, true)) {
