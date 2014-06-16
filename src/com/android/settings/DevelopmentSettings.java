@@ -358,6 +358,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mAllPrefs.add(mProcessStats);
 
         mWebViewDataReductionProxy = findAndInitCheckboxPref(WEBVIEW_DATA_REDUCTION_PROXY_KEY);
+        String key = Settings.Global.getString(getActivity().getContentResolver(),
+                Settings.Global.WEBVIEW_DATA_REDUCTION_PROXY_KEY);
+        // Make it not selectable if the key is not available for some reason.
+        mWebViewDataReductionProxy.setSelectable(key != null && !key.isEmpty());
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -1250,8 +1254,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void updateWebViewDataReductionProxyOptions() {
         updateCheckBox(mWebViewDataReductionProxy, Settings.Secure.getInt(
-            getActivity().getContentResolver(),
-            Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY, 0) != 0);
+                getActivity().getContentResolver(),
+                Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY, 0) != 0);
     }
 
     @Override
