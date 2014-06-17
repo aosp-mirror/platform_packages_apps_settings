@@ -150,6 +150,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int RESULT_DEBUG_APP = 1000;
 
+    private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
+
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
@@ -993,12 +995,16 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void writeLogdSizeOption(Object newValue) {
-        SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, newValue.toString());
+        final String size = (newValue != null) ?
+                newValue.toString() : DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES;
+        SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, size);
         pokeSystemProperties();
         try {
-            Process p = Runtime.getRuntime().exec("logcat -b all -G " + newValue.toString());
-            int status = p.waitFor();
+            Process p = Runtime.getRuntime().exec("logcat -b all -G " + size);
+            p.waitFor();
+            Log.i(TAG, "Logcat ring buffer sizes set to: " + size);
         } catch (Exception e) {
+            Log.w(TAG, "Cannot set logcat ring buffer sizes", e);
         }
         updateLogdSizeValues();
     }
