@@ -22,8 +22,26 @@ import com.android.settings.R;
 import android.content.Context;
 import android.util.AttributeSet;
 
+/**
+ * A Bluetooth discovery progress category
+ */
 public class BluetoothProgressCategory extends ProgressCategory {
+    public BluetoothProgressCategory(Context context) {
+        this(context, null);
+    }
+
     public BluetoothProgressCategory(Context context, AttributeSet attrs) {
-        super(context, attrs, R.string.bluetooth_no_devices_found);
+        this(context, attrs, 0);
+    }
+
+    public BluetoothProgressCategory(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public BluetoothProgressCategory(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+
+        setEmptyTextRes(R.string.bluetooth_no_devices_found);
     }
 }

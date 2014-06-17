@@ -18,7 +18,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="?android:attr/listSeparatorTextViewStyle"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" >
 
     <!-- This text view has the style of the list separator text view without the background and padding. -->
     <TextView

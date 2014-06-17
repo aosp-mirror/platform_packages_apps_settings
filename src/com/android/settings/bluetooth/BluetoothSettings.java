@@ -292,7 +292,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
                 // Available devices category
                 if (mAvailableDevicesCategory == null) {
-                    mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity(), null);
+                    mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity());
                 } else {
                     mAvailableDevicesCategory.removeAll();
                 }
