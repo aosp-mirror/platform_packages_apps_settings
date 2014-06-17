@@ -35,18 +35,21 @@ public class UsageBarPreference extends Preference {
 
     private final List<PercentageBarChart.Entry> mEntries = Lists.newArrayList();
 
-    public UsageBarPreference(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        setLayoutResource(R.layout.preference_memoryusage);
-    }
-
     public UsageBarPreference(Context context) {
-        super(context);
-        setLayoutResource(R.layout.preference_memoryusage);
+        this(context, null);
     }
 
     public UsageBarPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public UsageBarPreference(Context context, AttributeSet attrs, int defStyle) {
+        this(context, attrs, defStyle, 0);
+    }
+
+    public UsageBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.preference_memoryusage);
     }
 
