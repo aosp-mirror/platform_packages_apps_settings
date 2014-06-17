@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
@@ -57,13 +56,11 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.webkit.WebView;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -162,6 +159,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
     private static final int RESULT_DEBUG_APP = 1000;
+
+    private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
@@ -1072,12 +1071,16 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void writeLogdSizeOption(Object newValue) {
-        SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, newValue.toString());
+        final String size = (newValue != null) ?
+                newValue.toString() : DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES;
+        SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, size);
         pokeSystemProperties();
         try {
-            Process p = Runtime.getRuntime().exec("logcat -b all -G " + newValue.toString());
-            int status = p.waitFor();
+            Process p = Runtime.getRuntime().exec("logcat -b all -G " + size);
+            p.waitFor();
+            Log.i(TAG, "Logcat ring buffer sizes set to: " + size);
         } catch (Exception e) {
+            Log.w(TAG, "Cannot set logcat ring buffer sizes", e);
         }
         updateLogdSizeValues();
     }
