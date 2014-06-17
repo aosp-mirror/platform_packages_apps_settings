@@ -34,16 +34,27 @@ import com.android.settings.R;
 public class VolumeSeekBarPreference extends SeekBarPreference
         implements PreferenceManager.OnActivityStopListener {
     private static final String TAG = "VolumeSeekBarPreference";
-    private final Context mContext;
 
     private int mStream;
     private SeekBar mSeekBar;
     private SeekBarVolumizer mVolumizer;
     private Callback mCallback;
 
+    public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
     public VolumeSeekBarPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        mContext = context;
+        this(context, attrs, 0);
+    }
+
+    public VolumeSeekBarPreference(Context context) {
+        this(context, null);
     }
 
     public void setStream(int stream) {
@@ -82,14 +93,14 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
         if (mVolumizer == null) {
-            mVolumizer = new SeekBarVolumizer(mContext, mStream, sampleUri, sbvc);
+            mVolumizer = new SeekBarVolumizer(getContext(), mStream, sampleUri, sbvc);
         }
         mVolumizer.setSeekBar(mSeekBar);
     }
 
     private Uri getMediaVolumeUri() {
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
-                + mContext.getPackageName()
+                + getContext().getPackageName()
                 + "/" + R.raw.media_volume);
     }
 
