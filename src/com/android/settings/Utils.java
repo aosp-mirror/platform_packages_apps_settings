@@ -66,7 +66,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-public class Utils {
+public final class Utils {
 
     /**
      * Set the preference's title to the matching activity's label.

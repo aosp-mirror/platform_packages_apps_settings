@@ -37,6 +37,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.NotificationDisplaySettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
@@ -83,6 +84,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(DataUsageSummary.class.getName()),
                         NO_DATA_RES_ID,
                         DataUsageSummary.class.getName(),
+                        R.drawable.ic_settings_data_usage));
+
+        sResMap.put(DataUsageMeteredSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(DataUsageMeteredSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        DataUsageMeteredSettings.class.getName(),
                         R.drawable.ic_settings_data_usage));
 
         sResMap.put(WirelessSettings.class.getName(),

@@ -22,6 +22,7 @@ import static com.android.settings.DataUsageSummary.hasReadyMobileRadio;
 import static com.android.settings.DataUsageSummary.hasWifiRadio;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
@@ -31,15 +32,23 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.provider.SearchIndexableResource;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Panel to configure {@link NetworkPolicy#metered} for networks.
  */
-public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
+public class DataUsageMeteredSettings extends SettingsPreferenceFragment implements Indexable {
 
     private static final boolean SHOW_MOBILE_CATEGORY = false;
 
@@ -141,4 +150,82 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment {
             }
         }
     }
+
+    /**
+     * For search
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                final Resources res = context.getResources();
+
+                // Add fragment title
+                SearchIndexableRaw data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_menu_metered);
+                data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                result.add(data);
+
+                // Body
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_metered_body);
+                data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                result.add(data);
+
+                if (SHOW_MOBILE_CATEGORY && hasReadyMobileRadio(context)) {
+                    // Mobile networks category
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.data_usage_metered_mobile);
+                    data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                    result.add(data);
+
+                    final TelephonyManager tele = TelephonyManager.from(context);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = tele.getNetworkOperatorName();
+                    data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                    result.add(data);
+                }
+
+                // Wi-Fi networks category
+                data = new SearchIndexableRaw(context);
+                data.title = res.getString(R.string.data_usage_metered_wifi);
+                data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                result.add(data);
+
+                final WifiManager wifiManager =
+                        (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                if (hasWifiRadio(context) && wifiManager.isWifiEnabled()) {
+                    for (WifiConfiguration config : wifiManager.getConfiguredNetworks()) {
+                        if (config.SSID != null) {
+                            final String networkId = config.SSID;
+
+                            data = new SearchIndexableRaw(context);
+                            data.title = removeDoubleQuotes(networkId);
+                            data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                            result.add(data);
+                        }
+                    }
+                } else {
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.data_usage_metered_wifi_disabled);
+                    data.screenTitle = res.getString(R.string.data_usage_menu_metered);
+                    result.add(data);
+                }
+
+                return result;
+            }
+
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final ArrayList<String> result = new ArrayList<String>();
+                if (!SHOW_MOBILE_CATEGORY || !hasReadyMobileRadio(context)) {
+                    result.add("mobile");
+                }
+
+                return result;
+            }
+        };
+
 }

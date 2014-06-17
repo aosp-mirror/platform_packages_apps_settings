@@ -34,6 +34,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.NotificationDisplaySettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
@@ -81,50 +82,71 @@ public final class Ranking {
     private static HashMap<String, Integer> sBaseRankMap = new HashMap<String, Integer>();
 
     static {
+        // Wi-Fi
         sRankMap.put(WifiSettings.class.getName(), RANK_WIFI);
         sRankMap.put(AdvancedWifiSettings.class.getName(), RANK_WIFI);
 
+        // BT
         sRankMap.put(BluetoothSettings.class.getName(), RANK_BT);
 
+        // DataUsage
         sRankMap.put(DataUsageSummary.class.getName(), RANK_DATA_USAGE);
+        sRankMap.put(DataUsageMeteredSettings.class.getName(), RANK_DATA_USAGE);
 
+        // Other wireless settinfs
         sRankMap.put(WirelessSettings.class.getName(), RANK_WIRELESS);
 
+        // Home
         sRankMap.put(HomeSettings.class.getName(), RANK_HOME);
 
+        // Display
         sRankMap.put(DisplaySettings.class.getName(), RANK_DISPLAY);
 
+        // Wallpapers
         sRankMap.put(WallpaperTypeSettings.class.getName(), RANK_WALLPAPER);
 
+        // Notifications
         sRankMap.put(NotificationSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(NotificationDisplaySettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(OtherSoundSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModeSettings.class.getName(), RANK_NOTIFICATIONS);
 
+        // Memory
         sRankMap.put(Memory.class.getName(), RANK_MEMORY);
 
+        // Battery
         sRankMap.put(PowerUsageSummary.class.getName(), RANK_POWER_USAGE);
         sRankMap.put(BatterySaverSettings.class.getName(), RANK_POWER_USAGE);
 
+        // Users
         sRankMap.put(UserSettings.class.getName(), RANK_USERS);
 
+        // Location
         sRankMap.put(LocationSettings.class.getName(), RANK_LOCATION);
 
+        // Security
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);
         sRankMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(), RANK_SECURITY);
 
+        // IMEs
         sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);
 
+        // Privacy
         sRankMap.put(PrivacySettings.class.getName(), RANK_PRIVACY);
 
+        // Date / Time
         sRankMap.put(DateTimeSettings.class.getName(), RANK_DATE_TIME);
 
+        // Accessibility
         sRankMap.put(AccessibilitySettings.class.getName(), RANK_ACCESSIBILITY);
 
+        // Print
         sRankMap.put(PrintSettingsFragment.class.getName(), RANK_PRINTING);
 
+        // Development
         sRankMap.put(DevelopmentSettings.class.getName(), RANK_DEVELOPEMENT);
 
+        // Device infos
         sRankMap.put(DeviceInfoSettings.class.getName(), RANK_DEVICE_INFO);
 
         sBaseRankMap.put("com.android.settings", 0);
