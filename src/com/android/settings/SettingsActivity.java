@@ -118,6 +118,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
 
@@ -182,6 +183,7 @@ public class SettingsActivity extends Activity
      */
     public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
     public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID = ":settings:show_fragment_title_resid";
+    public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT = ":settings:show_fragment_as_shortcut";
 
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
@@ -317,6 +319,7 @@ public class SettingsActivity extends Activity
     private boolean mDisplaySearch;
 
     private boolean mIsShowingDashboard;
+    private boolean mIsShortcut;
 
     private ViewGroup mContent;
 
@@ -442,10 +445,21 @@ public class SettingsActivity extends Activity
         return true;
     }
 
+    private static boolean isShortCutIntent(final Intent intent) {
+        Set<String> categories = intent.getCategories();
+        return (categories != null) && categories.contains("com.android.settings.SHORTCUT");
+    }
+
     @Override
     protected void onCreate(Bundle savedState) {
-        if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
-            getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
+        super.onCreate(savedState);
+
+        // Should happen before any call to getIntent()
+        getMetaData();
+
+        final Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
+            getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
         mAuthenticatorHelper = new AuthenticatorHelper();
@@ -455,21 +469,20 @@ public class SettingsActivity extends Activity
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
 
-        getMetaData();
-
-        super.onCreate(savedState);
-
         // Getting Intent properties can only be done after the super.onCreate(...)
-        final String initialFragmentName = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+        final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        mIsShowingDashboard = (initialFragmentName == null);
+        mIsShortcut = isShortCutIntent(intent) ||
+                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, false);
+
+        mIsShowingDashboard = (initialFragmentName == null) && !mIsShortcut;
 
         final ComponentName cn = getIntent().getComponent();
-        final boolean isShortcut = !cn.getClassName().equals(SubSettings.class.getName());
+        final boolean isSubSettings = cn.getClassName().equals(SubSettings.class.getName());
 
-        // If this is a subsettings (but not a Shortcut) then apply the correct theme for
-        // the ActionBar content inset
-        if (!mIsShowingDashboard && !isShortcut) {
+        // If this is a sub settings or not the main Dashboard and not a Shortcut then apply the
+        // correct theme for the ActionBar content inset
+        if (isSubSettings || (!mIsShowingDashboard && !mIsShortcut)) {
             setTheme(R.style.Theme_SubSettings);
         }
 
@@ -492,7 +505,7 @@ public class SettingsActivity extends Activity
             mSearchMenuItemExpanded = savedState.getBoolean(SAVE_KEY_SEARCH_MENU_EXPANDED);
             mSearchQuery = savedState.getString(SAVE_KEY_SEARCH_QUERY);
 
-            setTitleFromIntent(getIntent());
+            setTitleFromIntent(intent);
 
             ArrayList<DashboardCategory> categories =
                     savedState.getParcelableArrayList(SAVE_KEY_CATEGORIES);
@@ -506,14 +519,15 @@ public class SettingsActivity extends Activity
             mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
         } else {
             if (!mIsShowingDashboard) {
-                // No UP nor Search is shown we are launched thru a Settings "shortcut"
-                if (isShortcut) {
-                    mDisplayHomeAsUpEnabled = false;
+                // Search is shown we are launched thru a Settings "shortcut". UP will be shown
+                // only if it is a sub settings
+                if (mIsShortcut) {
+                    mDisplayHomeAsUpEnabled = isSubSettings;
                     mDisplaySearch = false;
                 }
-                setTitleFromIntent(getIntent());
+                setTitleFromIntent(intent);
 
-                Bundle initialArguments = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+                Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
                 switchToFragment(initialFragmentName, initialArguments, true, false,
                         mInitialTitleResId, mInitialTitle, false);
             } else {
@@ -533,7 +547,6 @@ public class SettingsActivity extends Activity
         mSwitchBar = (SwitchBar) findViewById(R.id.switch_bar);
 
         // see if we should show Back/Next buttons
-        Intent intent = getIntent();
         if (intent.getBooleanExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false)) {
 
             View buttonBar = findViewById(R.id.button_bar);
@@ -790,7 +803,7 @@ public class SettingsActivity extends Activity
             }
         }
         Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode,
-                titleRes, title);
+                titleRes, title, mIsShortcut);
     }
 
     /**
