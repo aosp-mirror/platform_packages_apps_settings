@@ -528,7 +528,15 @@ public class Utils {
      */
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, int titleResId, CharSequence title) {
-        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResId, title);
+        startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
+                titleResId, title, false /* not a shortcut */);
+    }
+
+    public static void startWithFragment(Context context, String fragmentName, Bundle args,
+            Fragment resultTo, int resultRequestCode, int titleResId, CharSequence title,
+            boolean isShortcut) {
+        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResId,
+                title, isShortcut);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -541,22 +549,25 @@ public class Utils {
      * The implementation constructs an Intent that re-launches the current activity with the
      * appropriate arguments to display the fragment.
      *
+     *
      * @param context The Context.
      * @param fragmentName The name of the fragment to display.
      * @param args Optional arguments to supply to the fragment.
      * @param titleResId Optional title resource id to show for this item.
      * @param title Optional title to show for this item.
+     * @param isShortcut  tell if this is a Launcher Shortcut or not
      * @return Returns an Intent that can be launched to display the given
      * fragment.
      */
     public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
-            Bundle args, int titleResId, CharSequence title) {
+            Bundle args, int titleResId, CharSequence title, boolean isShortcut) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(context, SubSettings.class);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, isShortcut);
         return intent;
     }
 }
