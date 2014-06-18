@@ -189,6 +189,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
 
+    private static final int FOREGROUND_BYTES_COLOR = 0xff009688;
+    private static final int DEFAULT_BYTES_COLOR = 0xffced7db;
+
     private INetworkManagementService mNetworkService;
     private INetworkStatsService mStatsService;
     private NetworkPolicyManager mPolicyManager;
@@ -1176,8 +1179,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mAppPieChart.setOriginAngle(175);
 
             mAppPieChart.removeAllSlices();
-            mAppPieChart.addSlice(foregroundBytes, Color.parseColor("#d88d3a"));
-            mAppPieChart.addSlice(defaultBytes, Color.parseColor("#666666"));
+            mAppPieChart.addSlice(foregroundBytes, FOREGROUND_BYTES_COLOR);
+            mAppPieChart.addSlice(defaultBytes, DEFAULT_BYTES_COLOR);
 
             mAppPieChart.generatePath();
 
