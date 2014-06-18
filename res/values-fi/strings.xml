@@ -347,10 +347,8 @@
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Salaus käynnissä"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Odota, tablet-laitetta salataan. <xliff:g id="PERCENT">^1</xliff:g> % valmiina."</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Odota, puhelinta salataan. <xliff:g id="PERCENT">^1</xliff:g> % valmiina."</string>
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1655047311546745695) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1862964662304683072) -->
-    <skip />
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Odota, tablet-laitteesi salataan. Aikaa jäljellä: <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Odota, puhelimesi salataan. Aikaa jäljellä: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Yritä uudelleen <xliff:g id="DELAY">^1</xliff:g> sekunnin kuluttua."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Kirjoita salasana"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Salaus epäonnistui"</string>
@@ -997,6 +995,10 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vaihdetaanko tekstiviestisovellus?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Valitaanko tekstiviestisovellukseksi <xliff:g id="NEW_APP">%1$s</xliff:g> sovelluksen <xliff:g id="CURRENT_APP">%2$s</xliff:g> sijaan?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Käytetäänkö tekstiviestisovellusta <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
+    <!-- no translation found for phone_application_title (8232758172983316224) -->
+    <skip />
+    <!-- no translation found for phone_change_default_dialog_title (4972594589432598468) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Tuntematon SIM-operaattori"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Ei tunnettua käyttäjien hallintasivustoa: %1$s"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Aseta SIM-kortti ja käynnistä uudelleen"</string>
@@ -1345,10 +1347,8 @@
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"Käytä Wi-Fin laajennettua lokikirjausta"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Näytä langattoman näytön sertifiointiin liittyvät asetukset"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Nosta Wi-Fi-lokitasoa, näytä kunkin SSID:n signaalin vahvuus Wi-Fi-valitsimessa"</string>
-    <!-- no translation found for select_logd_size_title (7433137108348553508) -->
-    <skip />
-    <!-- no translation found for select_logd_size_dialog_title (1206769310236476760) -->
-    <skip />
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Lokipuskurien koot"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Valitse puskurikohtaiset lokikoot"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Salli sijaintien imitointi"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Salli sijaintien imitointi"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Sallitaanko USB-vianetsintä?"</string>
@@ -1717,8 +1717,7 @@
     <string name="credential_storage_type" msgid="8629968543494001364">"Tallennustilan tyyppi"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Laitteiston tukema"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Vain ohjelmisto"</string>
-    <!-- no translation found for credentials_settings_not_available (7968275634486624215) -->
-    <skip />
+    <string name="credentials_settings_not_available" msgid="7968275634486624215">"Kirjautumistunnukset eivät ole tämän käyttäjän käytettävissä"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Piirrä lukituksenpoistokuvio"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Vahvista kirjautumistunnuksien asennus piirtämällä lukituksenpoistokuviosi."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1892,8 +1891,6 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Näytä leikkeiden rajat, marginaalit jne."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Pakota RTL-ulkoasun suunta"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Pakota kaikkien kielten näytön ulkoasun suunnaksi RTL"</string>
-    <string name="low_power_mode" msgid="8400119155107987979">"Virransäästötila"</string>
-    <string name="low_power_mode_summary" msgid="8895619424568660204">"Ota virransäästöasetukset käyttöön"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Näytä suorittimen käyttö"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Näytön peittokuva näyttää nykyisen suoritinkäytön"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Pakota GPU-hahmonnus"</string>

@@ -347,10 +347,8 @@
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Шифровање"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Сачекајте да се таблет шифрује. Довршено је <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Сачекајте да се телефон шифрује. Довршено је <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1655047311546745695) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1862964662304683072) -->
-    <skip />
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Сачекајте док се таблет шифрује. Преостало време: <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Сачекајте док се телефон шифрује. Преостало време: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Покушајте поново за <xliff:g id="DELAY">^1</xliff:g> секунди."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Унесите лозинку"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Шифровање није успело"</string>
@@ -997,6 +995,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Желите ли да промените апликацију за SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Желите ли да користите <xliff:g id="NEW_APP">%1$s</xliff:g> уместо <xliff:g id="CURRENT_APP">%2$s</xliff:g> као апликацију за SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Желите ли да користите <xliff:g id="NEW_APP">%s</xliff:g> као апликацију за SMS?"</string>
+    <string name="phone_application_title" msgid="8232758172983316224">"Подразумевана апликација за телефон"</string>
+    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"Променити подраз. апл. за телефон?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Непознати SIM оператер"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s нема познатих веб-сајтова за доделу"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Убаците SIM картицу и рестартујте"</string>
@@ -1345,10 +1345,8 @@
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"Омогући опширно пријављивање преко WiFi-ја"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Приказ опција за сертификацију бежичног екрана"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Повећај ниво пријављивања преко Wifi-ја, прикажи према SSID RSSI у WiFi Picker-у"</string>
-    <!-- no translation found for select_logd_size_title (7433137108348553508) -->
-    <skip />
-    <!-- no translation found for select_logd_size_dialog_title (1206769310236476760) -->
-    <skip />
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Величине бафера података у програму за евидентирање"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Изаберите величине по баферу евиденције"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Дозволи лажне локације"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Дозволи лажне локације"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Дозволи отклањање USB грешака?"</string>
@@ -1586,7 +1584,7 @@
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Аутоматски укључи"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Никада"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"на %1$d%% батерије"</string>
-    <string name="battery_saver_description" msgid="8859033102348703807">"Да би продужила век трајања батерије, Штедња батерије ће умањити перформансе уређаја.\n\nШтедња батерије ће се искључити када укључите уређај."</string>
+    <string name="battery_saver_description" msgid="8859033102348703807">"Да би продужила век трајања батерије, Штедња батерије умањује перформансе уређаја.\n\nШтедња батерије ће се искључити када прикључите уређај на напајање."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Статистика процеса"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Штреберска статистика о активним процесима"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Искоришћеност меморије"</string>
@@ -1701,8 +1699,7 @@
     <string name="credential_storage_type" msgid="8629968543494001364">"Тип складишног простора"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Подржан хардвером"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Само софтверски"</string>
-    <!-- no translation found for credentials_settings_not_available (7968275634486624215) -->
-    <skip />
+    <string name="credentials_settings_not_available" msgid="7968275634486624215">"Акредитиви нису доступни за овог корисника"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Нацртајте шаблон за откључавање"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Потребно је да нацртате шаблон за откључавање да бисте потврдили инсталацију акредитива."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1876,8 +1873,6 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Прикажи границе клипа, маргине итд."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Наметни смер распореда здесна налево"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Наметни смер распореда екрана здесна налево за све локалитете"</string>
-    <string name="low_power_mode" msgid="8400119155107987979">"Режим ниског напајања"</string>
-    <string name="low_power_mode_summary" msgid="8895619424568660204">"Омогући подешавања уштеде батерије"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Прик. употребу процесора"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Постав. елемент са тренутном употребом процесора"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Принудни приказ пом. GPU"</string>

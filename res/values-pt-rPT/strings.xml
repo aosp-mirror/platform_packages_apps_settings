@@ -347,10 +347,8 @@
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Encriptação"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Aguarde enquanto o tablet está a ser encriptado. <xliff:g id="PERCENT">^1</xliff:g>% concluído."</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Aguarde enquanto o telemóvel está a ser encriptado. <xliff:g id="PERCENT">^1</xliff:g>% concluído."</string>
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1655047311546745695) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1862964662304683072) -->
-    <skip />
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Aguarde enquanto o tablet está a ser encriptado. Tempo restante: <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Aguarde enquanto o telemóvel está a ser encriptado. Tempo restante: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Tente novamente dentro de <xliff:g id="DELAY">^1</xliff:g> segundos."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Introduza a palavra-passe"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Encriptação sem êxito"</string>
@@ -997,6 +995,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Alterar aplicação de SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Utilizar <xliff:g id="NEW_APP">%1$s</xliff:g> em vez de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como a aplicação de SMS predefinida?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Utilizar <xliff:g id="NEW_APP">%s</xliff:g> como a aplicação de SMS predefinida?"</string>
+    <string name="phone_application_title" msgid="8232758172983316224">"Aplicação de telefone predefinida"</string>
+    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"Alterar aplicação tlf. predefinida?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operador SIM desconhecido"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"A %1$s não possui um Website de gestão conhecido"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insira o cartão SIM e reinicie"</string>
@@ -1345,10 +1345,8 @@
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"Ativar o registo detalhado de Wi-Fi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostrar opções da certificação de display sem fios"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Aumentar nível de reg. de Wi-Fi, mostrar por SSID RSSI no selecionador de Wi-Fi"</string>
-    <!-- no translation found for select_logd_size_title (7433137108348553508) -->
-    <skip />
-    <!-- no translation found for select_logd_size_dialog_title (1206769310236476760) -->
-    <skip />
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Tamanhos da memória intermédia do registo"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Selec. tam. reg. p/ mem. int. reg."</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir locais fictícios"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permitir depuração USB?"</string>
@@ -1585,7 +1583,7 @@
     <string name="battery_saver_always_on_title" msgid="5204387375575431936">"Sempre ligada"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Ligar automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nunca"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"a %1$d%% de bateria"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"com %1$d%% de bateria"</string>
     <string name="battery_saver_description" msgid="8859033102348703807">"Para ajudar a aumentar a duração da bateria, a Poupança de bateria reduzirá o desempenho do seu dispositivo.\n\nA Poupança de bateria será desativada assim que o dispositivo for ligado à corrente elétrica."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Estatísticas de peritos acerca dos processos em execução"</string>
@@ -1701,8 +1699,7 @@
     <string name="credential_storage_type" msgid="8629968543494001364">"Tipo de armazenamento"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Suportado por hardware"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Apenas software"</string>
-    <!-- no translation found for credentials_settings_not_available (7968275634486624215) -->
-    <skip />
+    <string name="credentials_settings_not_available" msgid="7968275634486624215">"As credenciais não estão disponíveis para este utilizador"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Desenhe a sua sequência de desbloqueio"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"É necessário desenhar a sequência de desbloqueio para confirmar a instalação de credenciais."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1876,8 +1873,6 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Apresentar limites de clipes, margens, etc."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Forçar dir. do esq. RTL"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Forçar dir. do esq. do ecrã p. RTL tds os locais"</string>
-    <string name="low_power_mode" msgid="8400119155107987979">"Modo de baixo consumo"</string>
-    <string name="low_power_mode_summary" msgid="8895619424568660204">"Ativar definições de poupança de bateria"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Mostrar utilização da CPU"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Sobrep. de ecrã que mostra a utiliz. atual da CPU"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Forçar composição GPU"</string>

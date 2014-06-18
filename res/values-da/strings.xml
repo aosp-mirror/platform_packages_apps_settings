@@ -193,11 +193,11 @@
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Gendan standarder"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Udført"</string>
-    <string name="proxy_hostname_label" msgid="8490171412999373362">"Proxyens værtsnavn"</string>
+    <string name="proxy_hostname_label" msgid="8490171412999373362">"Proxyens hostname"</string>
     <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Bemærk"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
-    <string name="proxy_error_invalid_host" msgid="8052095511862922213">"Det indtastede værtsnavn er ikke gyldigt."</string>
+    <string name="proxy_error_invalid_host" msgid="8052095511862922213">"Det indtastede hostname er ikke gyldigt."</string>
     <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"Den indtastede udeladelsesliste er ikke korrekt formateret. Indtast en kommasepareret liste over udeladte domæner."</string>
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"Du skal udfylde portfeltet."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Portfeltet skal være tomt, hvis værtsfeltet er tomt."</string>
@@ -229,7 +229,7 @@
     <string name="radio_info_network_type_label" msgid="3706382548257257987">"Netværkstype:"</string>
     <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"Angiv den foretrukne netværkstype"</string>
     <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"Ping-IpAdr.:"</string>
-    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"Ping-værtsnavn(www.google.com):"</string>
+    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"Ping-hostname(www.google.com):"</string>
     <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTP-klienttest:"</string>
     <string name="ping_test_label" msgid="7255376471490860631">"Kør ping-test"</string>
     <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
@@ -995,6 +995,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vil du skifte sms-app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vil du bruge <xliff:g id="NEW_APP">%1$s</xliff:g> i stedet for <xliff:g id="CURRENT_APP">%2$s</xliff:g> som din standardapp til sms?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vil du bruge <xliff:g id="NEW_APP">%s</xliff:g> som din sms-app?"</string>
+    <string name="phone_application_title" msgid="8232758172983316224">"Standardapp til opkald"</string>
+    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"Vil du skifte standardappen til opkald?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"SIM fra ukendt mobilselskab"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s har intet kendt website til provisionering"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Indsæt SIM-kort, og genstart"</string>
@@ -1871,8 +1873,6 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Vis grænser for klip, margener osv."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Tving læsning mod venstre"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Tving til højre mod venstre-layout for alle sprog"</string>
-    <string name="low_power_mode" msgid="8400119155107987979">"Strømbesparelse"</string>
-    <string name="low_power_mode_summary" msgid="8895619424568660204">"Indstillinger for aktivering af strømbesparelse"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Vis CPU-forbrug"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Skærmoverlejring viser det aktuelle CPU-forbrug"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Tving gengivelse af GPU"</string>
