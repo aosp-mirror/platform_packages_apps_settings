@@ -18,12 +18,10 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.ComponentName;
-import android.service.notification.INotificationListener;
 import android.app.INotificationManager;
 import android.app.Notification;
-import android.service.notification.StatusBarNotification;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -37,6 +35,9 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.service.notification.INotificationListener;
+import android.service.notification.IStatusBarNotificationHolder;
+import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,15 +76,17 @@ public class NotificationStation extends SettingsPreferenceFragment {
             // noop
         }
         @Override
-        public void onNotificationPosted(StatusBarNotification notification) throws RemoteException {
-            Log.v(TAG, "onNotificationPosted: " + notification);
+        public void onNotificationPosted(IStatusBarNotificationHolder sbnHolder)
+                throws RemoteException {
+            Log.v(TAG, "onNotificationPosted: " + sbnHolder.get());
             final Handler h = getListView().getHandler();
             h.removeCallbacks(mRefreshListRunnable);
             h.postDelayed(mRefreshListRunnable, 100);
         }
 
         @Override
-        public void onNotificationRemoved(StatusBarNotification notification) throws RemoteException {
+        public void onNotificationRemoved(IStatusBarNotificationHolder sbnHolder)
+                throws RemoteException {
             final Handler h = getListView().getHandler();
             h.removeCallbacks(mRefreshListRunnable);
             h.postDelayed(mRefreshListRunnable, 100);
