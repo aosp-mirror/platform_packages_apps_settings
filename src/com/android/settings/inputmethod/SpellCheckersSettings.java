@@ -90,7 +90,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         for (int i = 0; i < mEnabledScis.length; ++i) {
             final SpellCheckerInfo sci = mEnabledScis[i];
             final SingleSpellCheckerPreference scPref = new SingleSpellCheckerPreference(
-                    this, null, sci, mTsm);
+                    this, sci, mTsm);
             mSpellCheckers.add(scPref);
             scPref.setTitle(sci.loadLabel(pm));
             scPref.setSelected(mCurrentSci != null && mCurrentSci.getId().equals(sci.getId()));
