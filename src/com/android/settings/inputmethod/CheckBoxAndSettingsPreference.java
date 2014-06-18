@@ -37,8 +37,22 @@ public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
     private ImageView mSettingsButton;
     private Intent mSettingsIntent;
 
+    public CheckBoxAndSettingsPreference(Context context) {
+        this(context, null);
+    }
+
     public CheckBoxAndSettingsPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public CheckBoxAndSettingsPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public CheckBoxAndSettingsPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+
         setLayoutResource(R.layout.preference_inputmethod);
         setWidgetLayoutResource(R.layout.preference_inputmethod_widget);
     }

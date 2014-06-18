@@ -21,10 +21,24 @@ import android.util.AttributeSet;
 import android.view.textservice.TextServicesManager;
 
 public class SpellCheckersPreference extends CheckBoxAndSettingsPreference {
-    private final TextServicesManager mTsm;
+    private TextServicesManager mTsm;
+
+    public SpellCheckersPreference(Context context) {
+        this(context, null);
+    }
 
     public SpellCheckersPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public SpellCheckersPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public SpellCheckersPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+
         mTsm = (TextServicesManager) context.getSystemService(
                 Context.TEXT_SERVICES_MANAGER_SERVICE);
         setChecked(mTsm.isSpellCheckerEnabled());
