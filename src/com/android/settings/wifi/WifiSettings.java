@@ -442,7 +442,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the user is not allowed to configure wifi, do not show the menu.
-        if (isRestrictedAndNotPinProtected()) return;
+        if (isUiRestricted()) return;
 
         addOptionsMenuItems(menu);
         super.onCreateOptionsMenu(menu, inflater);
@@ -491,7 +491,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // If the user is not allowed to configure wifi, do not handle menu selections.
-        if (isRestrictedAndNotPinProtected()) return false;
+        if (isUiRestricted()) return false;
 
         switch (item.getItemId()) {
             case MENU_ID_WPS_PBC:
@@ -686,7 +686,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
 
-        if (isRestrictedAndNotPinProtected()) {
+        if (isUiRestricted()) {
             addMessagePreference(R.string.wifi_empty_list_user_restricted);
             return;
         }
