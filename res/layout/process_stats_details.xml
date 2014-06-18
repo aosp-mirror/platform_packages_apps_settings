@@ -31,46 +31,54 @@
 
         <include layout="@layout/app_percentage_item" />
 
-        <!-- Force stop and report buttons -->
         <LinearLayout
-            android:id="@+id/two_buttons_panel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="6dip"
-            android:orientation="vertical">
-            <include
-                layout="@layout/two_buttons_panel"/>
-        </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:orientation="vertical">
 
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/details_subtitle" />
+            <!-- Force stop and report buttons -->
+            <LinearLayout
+                    android:id="@+id/two_buttons_panel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="6dip"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="6dip"
-            android:orientation="vertical">
+                <include layout="@layout/two_buttons_panel"/>
+            </LinearLayout>
 
-            <!-- Insert detail items here -->
+            <TextView
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="@string/details_subtitle" />
 
-        </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/services_subtitle" />
+                <!-- Insert detail items here -->
 
-        <LinearLayout
-            android:id="@+id/services"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="6dip"
-            android:orientation="vertical">
+            </LinearLayout>
 
-            <!-- Insert service items here -->
+            <TextView
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="@string/services_subtitle" />
+
+            <LinearLayout
+                    android:id="@+id/services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <!-- Insert service items here -->
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

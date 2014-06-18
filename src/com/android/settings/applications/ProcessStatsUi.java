@@ -579,7 +579,8 @@ public class ProcessStatsUi extends PreferenceFragment
                         + " time=" + percentOfTime);
                 continue;
             }
-            ProcessStatsPreference pref = new ProcessStatsPreference(getActivity(), null, proc);
+            ProcessStatsPreference pref = new ProcessStatsPreference(getActivity());
+            pref.init(null, proc);
             proc.evaluateTargetPackage(pm, mStats, totals, sEntryCompare, mUseUss,
                     mStatsType == MENU_TYPE_BACKGROUND);
             proc.retrieveUiData(pm);
