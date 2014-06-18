@@ -133,10 +133,10 @@ public final class BluetoothDevicePreference extends Preference implements
 
         if (mCachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
             ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
+
             if (deviceDetails != null) {
                 deviceDetails.setOnClickListener(this);
                 deviceDetails.setTag(mCachedDevice);
-                deviceDetails.setAlpha(isEnabled() ? 255 : sDimAlpha);
             }
         }
 
