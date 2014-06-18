@@ -18,8 +18,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical">
+
     <LinearLayout
         android:id="@+id/tts_engine_pref"
         android:layout_width="wrap_content"
@@ -29,15 +32,15 @@
         android:clickable="true"
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground">
+
         <RadioButton
             android:id="@+id/tts_engine_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dip"
-            android:layout_marginEnd="4dip"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:clickable="true" />
+
         <RelativeLayout
             android:id="@+id/tts_engine_pref_text"
             android:layout_width="wrap_content"
@@ -47,6 +50,7 @@
             android:layout_marginTop="6dip"
             android:layout_marginBottom="6dip"
             android:layout_weight="1">
+
             <TextView
                 android:id="@android:id/title"
                 android:layout_width="wrap_content"
@@ -55,6 +59,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"/>
+
             <TextView
                 android:id="@android:id/summary"
                 android:layout_width="wrap_content"
@@ -66,14 +71,18 @@
                 android:textSize="13sp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:maxLines="4" />
+
         </RelativeLayout>
+
     </LinearLayout>
+
     <View
         android:layout_width="2dip"
         android:layout_height="match_parent"
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:background="@android:drawable/divider_horizontal_dark" />
+
     <ImageView
         android:id="@+id/tts_engine_settings"
         android:layout_width="wrap_content"
@@ -86,4 +95,5 @@
         android:clickable="true"
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground" />
+
 </LinearLayout>
