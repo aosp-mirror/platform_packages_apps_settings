@@ -39,6 +39,34 @@ import java.util.Map;
 class AccessPoint extends Preference {
     static final String TAG = "Settings.AccessPoint";
 
+    /**
+     * Lower bound on the 2.4 GHz (802.11b/g/n) WLAN channels
+     */
+    public static final int LOWER_FREQ_24GHZ = 2400;
+
+    /**
+     * Upper bound on the 2.4 GHz (802.11b/g/n) WLAN channels
+     */
+    public static final int HIGHER_FREQ_24GHZ = 2500;
+
+    /**
+     * Lower bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
+     */
+    public static final int LOWER_FREQ_5GHZ = 4900;
+
+    /**
+     * Upper bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
+     */
+    public static final int HIGHER_FREQ_5GHZ = 5900;
+
+    /** Experimental: we should be able to show the user the list of BSSIDs and bands
+     *  for that SSID.
+     *  For now this data is used only with Verbose Logging so as to show the band and number
+     *  of BSSIDs on which that network is seen.
+     */
+    public LruCache<String, ScanResult> mScanResultCache;
+
+
     private static final String KEY_DETAILEDSTATE = "key_detailedstate";
     private static final String KEY_WIFIINFO = "key_wifiinfo";
     private static final String KEY_SCANRESULT = "key_scanresult";
@@ -83,18 +111,7 @@ class AccessPoint extends Preference {
 
     private static final int VISIBILITY_MAX_AGE_IN_MILLI = 1000000;
     private static final int VISIBILITY_OUTDATED_AGE_IN_MILLI = 20000;
-    private static final int LOWER_FREQ_24GHZ = 2400;
-    private static final int HIGHER_FREQ_24GHZ = 2500;
-    private static final int LOWER_FREQ_5GHZ = 4900;
-    private static final int HIGHER_FREQ_5GHZ = 5900;
     private static final int SECOND_TO_MILLI = 1000;
-
-    /** Experiemental: we should be able to show the user the list of BSSIDs and bands
-     *  for that SSID.
-     *  For now this data is used only with Verbose Logging so as to show the band and number
-     *  of BSSIDs on which that network is seen.
-     */
-    public LruCache<String, ScanResult> scanResultCache;
 
     static int getSecurity(WifiConfiguration config) {
         if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
@@ -302,10 +319,10 @@ class AccessPoint extends Preference {
             mSeen = result.seen;
         }
         if (WifiSettings.mVerboseLogging > 0) {
-            if (scanResultCache == null) {
-                scanResultCache = new LruCache<String, ScanResult>(32);
+            if (mScanResultCache == null) {
+                mScanResultCache = new LruCache<String, ScanResult>(32);
             }
-            scanResultCache.put(result.BSSID, result);
+            mScanResultCache.put(result.BSSID, result);
         }
 
         if (ssid.equals(result.SSID) && security == getSecurity(result)) {
@@ -408,12 +425,12 @@ class AccessPoint extends Preference {
             visibility.append(String.format("rx=%.1f", mInfo.rxSuccessRate));
         }
 
-        if (scanResultCache != null) {
+        if (mScanResultCache != null) {
             int rssi5 = WifiConfiguration.INVALID_RSSI;
             int rssi24 = WifiConfiguration.INVALID_RSSI;
             int num5 = 0;
             int num24 = 0;
-            Map<String, ScanResult> list = scanResultCache.snapshot();
+            Map<String, ScanResult> list = mScanResultCache.snapshot();
             for (ScanResult result : list.values()) {
                 if (result.seen == 0)
                     continue;
@@ -517,16 +534,8 @@ class AccessPoint extends Preference {
                 } else {
                     securityStrFormat = context.getString(R.string.wifi_secured_second_item);
                 }
-                summary.append(String.format(securityStrFormat, getSecurityString(true)));
             }
 
-            if (mConfig == null && wpsAvailable) { // Only list WPS available for unsaved networks
-                if (summary.length() == 0) {
-                    summary.append(context.getString(R.string.wifi_wps_available_first_item));
-                } else {
-                    summary.append(context.getString(R.string.wifi_wps_available_second_item));
-                }
-            }
         }
         if (WifiSettings.mVerboseLogging > 0) {
             //add RSSI/band information for this config, what was seen up to 6 seconds ago

@@ -22,10 +22,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -50,6 +52,8 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_POOR_NETWORK_DETECTION = "wifi_poor_network_detection";
     private static final String KEY_SCAN_ALWAYS_AVAILABLE = "wifi_scan_always_available";
     private static final String KEY_INSTALL_CREDENTIALS = "install_credentials";
+    private static final String KEY_WIFI_DIRECT = "wifi_direct";
+    private static final String KEY_WPS_PUSH = "wps_push_button";
     private static final String KEY_SUSPEND_OPTIMIZATIONS = "suspend_optimizations";
 
     private WifiManager mWifiManager;
@@ -121,12 +125,27 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         scanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
                     Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
 
-        Intent intent=new Intent(Credentials.INSTALL_AS_USER_ACTION);
+        Intent intent = new Intent(Credentials.INSTALL_AS_USER_ACTION);
         intent.setClassName("com.android.certinstaller",
                 "com.android.certinstaller.CertInstallerMain");
         intent.putExtra(Credentials.EXTRA_INSTALL_AS_UID, android.os.Process.WIFI_UID);
         Preference pref = findPreference(KEY_INSTALL_CREDENTIALS);
         pref.setIntent(intent);
+
+        Intent wifiDirectIntent = new Intent(getActivity(),
+                com.android.settings.Settings.WifiP2pSettingsActivity.class);
+        Preference wifiDirectPref = findPreference(KEY_WIFI_DIRECT);
+        wifiDirectPref.setIntent(wifiDirectIntent);
+
+        // WpsDialog: Create the dialog like WifiSettings does.
+        Preference wpsPushPref = findPreference(KEY_WPS_PUSH);
+        wpsPushPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                public boolean onPreferenceClick(Preference arg0) {
+                    WpsDialog wpsDialog = new WpsDialog(getActivity(), WpsInfo.PBC);
+                    wpsDialog.show();
+                    return true;
+                }
+        });
 
         CheckBoxPreference suspendOptimizations =
             (CheckBoxPreference) findPreference(KEY_SUSPEND_OPTIMIZATIONS);

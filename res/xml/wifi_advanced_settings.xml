@@ -58,6 +58,16 @@
             android:title="@string/wifi_install_credentials"
             android:persistent="false" />
 
+    <Preference
+            android:key="wifi_direct"
+            android:title="@string/wifi_menu_p2p"
+            android:persistent="false" />
+
+    <Preference
+            android:key="wps_push_button"
+            android:title="@string/wifi_menu_wps_pbc"
+            android:persistent="false" />
+
     <CheckBoxPreference
             android:key="suspend_optimizations"
             android:title="@string/wifi_suspend_optimizations"

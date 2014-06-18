@@ -317,10 +317,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
         TypedArray ta = getActivity().getTheme().obtainStyledAttributes(
                 new int[] {R.attr.ic_menu_add, R.attr.ic_wps});
-        menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                .setIcon(ta.getDrawable(1))
-                .setEnabled(wifiIsEnabled)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
                 .setIcon(ta.getDrawable(0))
                 .setEnabled(wifiIsEnabled)
@@ -332,11 +328,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         menu.add(Menu.NONE, MENU_ID_WPS_PIN, 0, R.string.wifi_menu_wps_pin)
                 .setEnabled(wifiIsEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        if (mP2pSupported) {
-            menu.add(Menu.NONE, MENU_ID_P2P, 0, R.string.wifi_menu_p2p)
-                    .setEnabled(wifiIsEnabled)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        }
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                 //.setIcon(android.R.drawable.ic_menu_manage)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -579,6 +570,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void setOffMessage() {
         if (mEmptyView != null) {
+            mEmptyView.setCompoundDrawablesWithIntrinsicBounds(0,
+                    R.drawable.ic_wifi_emptystate, 0, 0);
             mEmptyView.setText(R.string.wifi_empty_list_wifi_off);
             if (android.provider.Settings.Global.getInt(getActivity().getContentResolver(),
                     android.provider.Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1) {

@@ -69,35 +69,11 @@ import java.util.Iterator;
  */
 public class WifiConfigController implements TextWatcher,
        AdapterView.OnItemSelectedListener, OnCheckedChangeListener {
+    private static final String TAG = "WifiConfigController";
+
     private final WifiConfigUiBase mConfigUi;
     private final View mView;
     private final AccessPoint mAccessPoint;
-
-    private boolean mEdit;
-
-    private TextView mSsidView;
-
-    // e.g. AccessPoint.SECURITY_NONE
-    private int mAccessPointSecurity;
-    private TextView mPasswordView;
-
-    private String unspecifiedCert = "unspecified";
-    private static final int unspecifiedCertIndex = 0;
-
-    /* Phase2 methods supported by PEAP are limited */
-    private final ArrayAdapter<String> PHASE2_PEAP_ADAPTER;
-    /* Full list of phase2 methods */
-    private final ArrayAdapter<String> PHASE2_FULL_ADAPTER;
-
-    private Spinner mSecuritySpinner;
-    private Spinner mEapMethodSpinner;
-    private Spinner mEapCaCertSpinner;
-    private Spinner mPhase2Spinner;
-    // Associated with mPhase2Spinner, one of PHASE2_FULL_ADAPTER or PHASE2_PEAP_ADAPTER
-    private ArrayAdapter<String> mPhase2Adapter;
-    private Spinner mEapUserCertSpinner;
-    private TextView mEapIdentityView;
-    private TextView mEapAnonymousView;
 
     /* This value comes from "wifi_ip_settings" resource array */
     private static final int DHCP = 0;
@@ -119,7 +95,32 @@ public class WifiConfigController implements TextWatcher,
     public static final int WIFI_PEAP_PHASE2_MSCHAPV2 	= 1;
     public static final int WIFI_PEAP_PHASE2_GTC        = 2;
 
-    private static final String TAG = "WifiConfigController";
+    /* Phase2 methods supported by PEAP are limited */
+    private final ArrayAdapter<String> PHASE2_PEAP_ADAPTER;
+    /* Full list of phase2 methods */
+    private final ArrayAdapter<String> PHASE2_FULL_ADAPTER;
+
+    // True when this instance is used in SetupWizard XL context.
+    private final boolean mInXlSetupWizard;
+
+    private final Handler mTextViewChangedHandler;
+
+    // e.g. AccessPoint.SECURITY_NONE
+    private int mAccessPointSecurity;
+    private TextView mPasswordView;
+
+    private String unspecifiedCert = "unspecified";
+    private static final int unspecifiedCertIndex = 0;
+
+    private Spinner mSecuritySpinner;
+    private Spinner mEapMethodSpinner;
+    private Spinner mEapCaCertSpinner;
+    private Spinner mPhase2Spinner;
+    // Associated with mPhase2Spinner, one of PHASE2_FULL_ADAPTER or PHASE2_PEAP_ADAPTER
+    private ArrayAdapter<String> mPhase2Adapter;
+    private Spinner mEapUserCertSpinner;
+    private TextView mEapIdentityView;
+    private TextView mEapAnonymousView;
 
     private Spinner mIpSettingsSpinner;
     private TextView mIpAddressView;
@@ -138,10 +139,11 @@ public class WifiConfigController implements TextWatcher,
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
     private LinkProperties mLinkProperties = new LinkProperties();
 
-    // True when this instance is used in SetupWizard XL context.
-    private final boolean mInXlSetupWizard;
+    private String[] mLevels;
+    private boolean mEdit;
+    private TextView mSsidView;
 
-    private final Handler mTextViewChangedHandler;
+    private Context mContext;
 
     public WifiConfigController(
             WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit) {
@@ -155,20 +157,21 @@ public class WifiConfigController implements TextWatcher,
         mEdit = edit;
 
         mTextViewChangedHandler = new Handler();
-        final Context context = mConfigUi.getContext();
-        final Resources resources = context.getResources();
+        mContext = mConfigUi.getContext();
+        final Resources res = mContext.getResources();
 
+        mLevels = res.getStringArray(R.array.wifi_signal);
         PHASE2_PEAP_ADAPTER = new ArrayAdapter<String>(
-            context, android.R.layout.simple_spinner_item,
-            context.getResources().getStringArray(R.array.wifi_peap_phase2_entries));
+            mContext, android.R.layout.simple_spinner_item,
+            res.getStringArray(R.array.wifi_peap_phase2_entries));
         PHASE2_PEAP_ADAPTER.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         PHASE2_FULL_ADAPTER = new ArrayAdapter<String>(
-                context, android.R.layout.simple_spinner_item,
-                context.getResources().getStringArray(R.array.wifi_phase2_entries));
+                mContext, android.R.layout.simple_spinner_item,
+                res.getStringArray(R.array.wifi_phase2_entries));
         PHASE2_FULL_ADAPTER.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        unspecifiedCert = context.getString(R.string.wifi_unspecified);
+        unspecifiedCert = mContext.getString(R.string.wifi_unspecified);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
@@ -186,9 +189,9 @@ public class WifiConfigController implements TextWatcher,
                 mView.findViewById(R.id.type_security).setVisibility(View.VISIBLE);
                 // We want custom layout. The content must be same as the other cases.
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
                         R.layout.wifi_setup_custom_list_item_1, android.R.id.text1,
-                        context.getResources().getStringArray(R.array.wifi_security_no_eap));
+                        res.getStringArray(R.array.wifi_security_no_eap));
                 mSecuritySpinner.setAdapter(adapter);
             } else {
                 mView.findViewById(R.id.type).setVisibility(View.VISIBLE);
@@ -201,45 +204,11 @@ public class WifiConfigController implements TextWatcher,
                     .setOnCheckedChangeListener(this);
 
 
-            mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
+            mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
         } else {
             mConfigUi.setTitle(mAccessPoint.ssid);
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
-
-            DetailedState state = mAccessPoint.getState();
-            if (state != null) {
-                addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(), state));
-            }
-
-            int level = mAccessPoint.getLevel();
-            if (level != -1) {
-                String[] signal = resources.getStringArray(R.array.wifi_signal);
-                addRow(group, R.string.wifi_signal, signal[level]);
-            }
-
-            WifiInfo info = mAccessPoint.getInfo();
-            if (info != null && info.getLinkSpeed() != -1) {
-                addRow(group, R.string.wifi_speed, info.getLinkSpeed() + WifiInfo.LINK_SPEED_UNITS);
-            }
-            if (info != null && info.getFrequency() != -1) {
-              // Since the frequency is defined on MHz, we need to simplify it
-              // to just 2.4GHz (regardless of the locale) or 5GHz.
-              int frequency = info.getFrequency();
-              String band = null;
-              if (frequency >= 2400 && frequency < 2500) {
-                band = "2.4GHz";
-              } else if (frequency >= 5000 && frequency < 6000) {
-                band = "5GHz";
-              } else {
-                Log.e(TAG, "Unexpected frequency " + frequency);
-              }
-              if (band != null) {
-                addRow(group, R.string.wifi_frequency, band);
-              }
-            }
-
-            addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
 
             boolean showAdvancedFields = false;
             if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
@@ -281,21 +250,62 @@ public class WifiConfigController implements TextWatcher,
             }
 
             if (mEdit) {
-                mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
+                mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
             } else {
-                if (state == null && level != -1) {
-                    mConfigUi.setSubmitButton(context.getString(R.string.wifi_connect));
+                final DetailedState state = mAccessPoint.getState();
+                final String signalLevel = getSignalString();
+
+                if (state == null && signalLevel != null) {
+                    mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
+                    if (state != null) {
+                        addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(),
+                                state));
+                    }
+
+                    if (signalLevel != null) {
+                        addRow(group, R.string.wifi_signal, signalLevel);
+                    }
+
+                    WifiInfo info = mAccessPoint.getInfo();
+                    if (info != null && info.getLinkSpeed() != -1) {
+                        addRow(group, R.string.wifi_speed, info.getLinkSpeed()
+                                + WifiInfo.LINK_SPEED_UNITS);
+                    }
+
+                    if (info != null && info.getFrequency() != -1) {
+                        final int frequency = info.getFrequency();
+                        String band = null;
+
+                        if (frequency >= AccessPoint.LOWER_FREQ_24GHZ
+                                && frequency < AccessPoint.HIGHER_FREQ_24GHZ) {
+                            band = res.getString(R.string.wifi_band_24ghz);
+                        } else if (frequency >= AccessPoint.LOWER_FREQ_5GHZ
+                                && frequency < AccessPoint.HIGHER_FREQ_5GHZ) {
+                            band = res.getString(R.string.wifi_band_5ghz);
+                        } else {
+                            Log.e(TAG, "Unexpected frequency " + frequency);
+                        }
+                        if (band != null) {
+                            addRow(group, R.string.wifi_frequency, band);
+                        }
+                    }
+
+                    addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
                 if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
-                    mConfigUi.setForgetButton(context.getString(R.string.wifi_forget));
+                    mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }
         }
 
 
-        mConfigUi.setCancelButton(context.getString(R.string.wifi_cancel));
+        if (mEdit || (mAccessPoint.getState() == null && mAccessPoint.getLevel() != -1)){
+            mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
+        }else{
+            mConfigUi.setCancelButton(res.getString(R.string.wifi_display_options_done));
+        }
         if (mConfigUi.getSubmitButton() != null) {
             enableSubmitIfAppropriate();
         }
@@ -306,6 +316,12 @@ public class WifiConfigController implements TextWatcher,
         ((TextView) row.findViewById(R.id.name)).setText(name);
         ((TextView) row.findViewById(R.id.value)).setText(value);
         group.addView(row);
+    }
+
+    private String getSignalString(){
+        final int level = mAccessPoint.getLevel();
+
+        return (level > -1 && level < mLevels.length) ? mLevels[level] : null;
     }
 
     /* show submit button if password, ip and proxy settings are valid */
