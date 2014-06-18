@@ -16,9 +16,9 @@ import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 public class LinearColorBar extends LinearLayout {
-    static final int LEFT_COLOR = 0xff0099cc;
-    static final int MIDDLE_COLOR = 0xff0099cc;
-    static final int RIGHT_COLOR = 0xff888888;
+    static final int LEFT_COLOR = 0xff009688;
+    static final int MIDDLE_COLOR = 0xff009688;
+    static final int RIGHT_COLOR = 0xffced7db;
     static final int GRAY_COLOR = 0xff555555;
     static final int WHITE_COLOR = 0xffffffff;
 
