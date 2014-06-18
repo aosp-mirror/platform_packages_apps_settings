@@ -19,13 +19,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:minHeight="@dimen/battery_history_chart_height">
+
     <include layout="@layout/battery_history_chart" />
+
     <TextView android:id="@+id/labelsHeader"
               android:layout_width="match_parent"
               android:layout_height="48dp"
               android:textAppearance="?android:attr/textAppearanceMedium"
               android:textSize="14sp"
               android:textColor="?android:attr/colorControlActivated"
-              android:gravity="left|center_vertical"
-              android:text="@string/power_usage_list_summary" />
+              android:gravity="start|center_vertical"
+              android:text="@string/power_usage_list_summary"
+              android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+              android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" />
+
 </LinearLayout>
