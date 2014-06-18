@@ -17,7 +17,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
-        android:paddingEnd="?android:attr/scrollbarSize">
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+
     <com.android.settings.applications.LinearColorBar
         android:id="@+id/linear_color_bar"
         android:layout_width="match_parent"
@@ -31,4 +33,5 @@
         android:shadowDx="2"
         android:shadowDy="2">
     </com.android.settings.applications.LinearColorBar>
+
 </FrameLayout>

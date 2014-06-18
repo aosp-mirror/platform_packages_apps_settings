@@ -18,6 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <!--Label for the item-->
     <TextView
         android:id="@+id/label"
@@ -31,8 +32,8 @@
         android:layout_toStartOf="@+id/value"
         android:layout_marginBottom="4dip"
         android:layout_marginTop="4dip"
-        android:layout_marginStart="4dip"
         android:layout_marginEnd="4dip"/>
+
     <TextView
         android:id="@+id/value"
         android:layout_width="wrap_content"
@@ -42,6 +43,6 @@
         android:textStyle="normal"
         android:singleLine="true"
         android:layout_marginBottom="4dip"
-        android:layout_marginTop="4dip"
-        android:layout_marginEnd="10dip"/>
+        android:layout_marginTop="4dip" />
+
 </RelativeLayout>

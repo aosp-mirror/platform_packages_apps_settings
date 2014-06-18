@@ -25,6 +25,8 @@
         android:id="@+id/all_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:paddingTop="5dip"
         android:paddingBottom="5dip"
         android:orientation="vertical">
@@ -33,61 +35,62 @@
 
         <!-- Force stop and report buttons -->
         <LinearLayout
-            android:id="@+id/two_buttons_panel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="6dip"
-            android:orientation="vertical">
+                android:id="@+id/two_buttons_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dip"
+                android:orientation="vertical">
             <include
-                layout="@layout/two_buttons_panel"/>
+                    layout="@layout/two_buttons_panel"/>
         </LinearLayout>
-                    
+
         <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/details_subtitle" />
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:text="@string/details_subtitle" />
 
         <LinearLayout
-            android:id="@+id/details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="6dip"
-            android:orientation="vertical">
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="6dip"
+                android:orientation="vertical">
 
             <!-- Insert detail items here -->
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/controls"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:id="@+id/controls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <TextView
-                android:id="@+id/controls_title"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:layout_marginTop="6dip"
-                android:text="@string/controls_subtitle" />
+                    android:id="@+id/controls_title"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_marginTop="6dip"
+                    android:text="@string/controls_subtitle" />
 
             <!-- Controls go here ... -->
 
         </LinearLayout>
-                    
+
         <TextView
-            android:id="@+id/packages_section_title"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_marginTop="6dip"
-            android:text="@string/packages_subtitle" />
+                android:id="@+id/packages_section_title"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_marginTop="6dip"
+                android:text="@string/packages_subtitle" />
 
         <LinearLayout
-            android:id="@+id/packages_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="6dip"
-            android:orientation="vertical">
+                android:id="@+id/packages_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="6dip"
+                android:orientation="vertical">
 
             <!-- Insert detail items here -->
 
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

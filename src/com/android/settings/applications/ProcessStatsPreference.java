@@ -21,20 +21,37 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.text.format.Formatter;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.settings.R;
 
 public class ProcessStatsPreference extends Preference {
-    private final ProcStatsEntry mEntry;
+    private ProcStatsEntry mEntry;
     private int mProgress;
     private CharSequence mProgressText;
 
-    public ProcessStatsPreference(Context context, Drawable icon, ProcStatsEntry entry) {
-        super(context);
-        mEntry = entry;
+    public ProcessStatsPreference(Context context) {
+        this(context, null);
+    }
+
+    public ProcessStatsPreference(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ProcessStatsPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public ProcessStatsPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.app_percentage_item);
+    }
+
+    public void init(Drawable icon, ProcStatsEntry entry) {
+        mEntry = entry;
         setIcon(icon != null ? icon : new ColorDrawable(0));
     }
 
