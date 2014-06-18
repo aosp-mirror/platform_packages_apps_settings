@@ -18,8 +18,11 @@
     android:id="@+id/pref_all"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical">
+
     <LinearLayout
         android:id="@+id/pref_left_button"
         android:layout_width="wrap_content"
@@ -29,12 +32,14 @@
         android:clickable="true"
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground">
+
         <RadioButton
             android:id="@+id/pref_radio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,6 +47,7 @@
             android:layout_marginTop="6dip"
             android:layout_marginBottom="6dip"
             android:layout_weight="1">
+
             <TextView
                 android:id="@+android:id/title"
                 android:layout_width="wrap_content"
@@ -50,6 +56,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal" />
+
             <TextView
                 android:id="@android:id/summary"
                 android:layout_width="wrap_content"
@@ -61,8 +68,11 @@
                 android:textSize="13sp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:maxLines="4" />
+
         </RelativeLayout>
+
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/pref_right_button1"
         android:layout_width="wrap_content"
@@ -72,12 +82,14 @@
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/spellchecker_quick_settings" >
+
         <View
             android:layout_width="2dip"
             android:layout_height="match_parent"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
             android:background="@android:drawable/divider_horizontal_dark" />
+
         <ImageView
             android:layout_width="40dip"
             android:layout_height="fill_parent"
@@ -86,7 +98,9 @@
             android:src="@drawable/ic_sysbar_quicksettings"
             android:layout_gravity="center"
             android:contentDescription="@string/spellchecker_quick_settings" />
+
     </LinearLayout>
+
     <View
         android:id="@+id/pref_right_separator2"
         android:layout_width="2dip"
@@ -94,6 +108,7 @@
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:background="@android:drawable/divider_horizontal_dark" />
+
     <ImageView
         android:id="@+id/pref_right_button2"
         android:layout_width="40dip"
@@ -106,4 +121,5 @@
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/spellchecker_language" />
+
 </LinearLayout>

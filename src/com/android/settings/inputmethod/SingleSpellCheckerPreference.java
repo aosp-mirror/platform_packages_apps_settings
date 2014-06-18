@@ -57,8 +57,8 @@ public class SingleSpellCheckerPreference extends Preference {
     private Intent mSettingsIntent;
     private boolean mSelected;
 
-    public SingleSpellCheckerPreference(SpellCheckersSettings fragment, Intent settingsIntent,
-            SpellCheckerInfo sci, TextServicesManager tsm) {
+    public SingleSpellCheckerPreference(SpellCheckersSettings fragment, SpellCheckerInfo sci,
+            TextServicesManager tsm) {
         super(fragment.getActivity(), null, 0);
         mFragment = fragment;
         mRes = fragment.getActivity().getResources();
