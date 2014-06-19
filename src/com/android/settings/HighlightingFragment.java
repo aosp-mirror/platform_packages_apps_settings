@@ -116,7 +116,7 @@ public class HighlightingFragment extends Fragment {
     }
 
     private boolean checkTag(View view, String key) {
-        final Object tag = view.getTag(R.id.preference_highlight_key);
+        final Object tag = view.getTag();
         if (tag == null || !(tag instanceof String)) {
             return false;
         }
