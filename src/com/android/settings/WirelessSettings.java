@@ -41,7 +41,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.telecomm.PhoneApplication;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -75,7 +74,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
-    private static final String KEY_PHONE_APPLICATION = "phone_application";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -95,7 +93,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
 
     private AppListPreference mSmsApplicationPreference;
-    private AppListPreference mDialerApplicationPreference;
 
     public WirelessSettings() {
         super(null);
@@ -205,24 +202,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
         mSmsApplicationPreference.setPackageNames(packageNames, defaultPackageName);
     }
 
-    private void initDialerApplicationSetting() {
-        log("initDialerApplicationSetting:");
-        final List<ComponentName> dialers =
-                PhoneApplication.getInstalledPhoneApplications(getActivity());
-
-        final int count = dialers.size();
-        final String[] packageNames = new String[count];
-        for (int i = 0; i < count; i++) {
-            packageNames[i] = dialers.get(i).getPackageName();
-        }
-        String defaultPackageName = null;
-        final ComponentName appName = PhoneApplication.getDefaultPhoneApplication(getActivity());
-        if (appName != null) {
-            defaultPackageName = appName.getPackageName();
-        }
-        mDialerApplicationPreference.setPackageNames(packageNames, defaultPackageName);
-    }
-
     @Override
     public Dialog onCreateDialog(int dialogId) {
         log("onCreateDialog: dialogId=" + dialogId);
@@ -263,10 +242,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
         return mTm.isSmsCapable();
     }
 
-    private boolean isVoiceCapable() {
-        return mTm.isVoiceCapable();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -296,10 +271,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
         mSmsApplicationPreference = (AppListPreference) findPreference(KEY_SMS_APPLICATION);
         mSmsApplicationPreference.setOnPreferenceChangeListener(this);
         initSmsApplicationSetting();
-
-        mDialerApplicationPreference = (AppListPreference) findPreference(KEY_PHONE_APPLICATION);
-        mDialerApplicationPreference.setOnPreferenceChangeListener(this);
-        initDialerApplicationSetting();
 
         // Remove NSD checkbox by default
         getPreferenceScreen().removePreference(nsd);
@@ -373,11 +344,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
         // Remove SMS Application if the device does not support SMS
         if (!isSmsSupported()) {
             removePreference(KEY_SMS_APPLICATION);
-        }
-
-        // Remove Dialer setting if the device does not support voice
-        if (!isVoiceCapable()) {
-            removePreference(KEY_PHONE_APPLICATION);
         }
 
         // Remove Airplane Mode settings if it's a stationary device such as a TV.
@@ -488,9 +454,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
         if (preference == mSmsApplicationPreference && newValue != null) {
             SmsApplication.setDefaultApplication(newValue.toString(), getActivity());
             return true;
-        } else if (preference == mDialerApplicationPreference && newValue != null) {
-            PhoneApplication.setDefaultPhoneApplication(newValue.toString(), getActivity());
-            return true;
         }
         return false;
     }
@@ -550,15 +513,10 @@ public class WirelessSettings extends RestrictedSettingsFragment
                 }
 
                 // Remove SMS Application if the device does not support SMS
-                final TelephonyManager tm =
+                TelephonyManager tm =
                         (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 if (!tm.isSmsCapable()) {
                     result.add(KEY_SMS_APPLICATION);
-                }
-
-                // Remove Phone Application if the device is not voice capable
-                if (!tm.isVoiceCapable()) {
-                    result.add(KEY_PHONE_APPLICATION);
                 }
 
                 final PackageManager pm = context.getPackageManager();
@@ -572,8 +530,8 @@ public class WirelessSettings extends RestrictedSettingsFragment
                 result.add(KEY_PROXY_SETTINGS);
 
                 // Disable Tethering if it's not allowed or if it's a wifi-only device
-                final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
-                        Context.CONNECTIVITY_SERVICE);
+                ConnectivityManager cm =
+                        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 if (isSecondaryUser || !cm.isTetheringSupported()) {
                     result.add(KEY_TETHER_SETTINGS);
                 }
