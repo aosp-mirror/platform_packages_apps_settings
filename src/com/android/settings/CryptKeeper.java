@@ -209,6 +209,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                         final InputMethodManager imm = (InputMethodManager) getSystemService(
                                                   Context.INPUT_METHOD_SERVICE);
                         imm.showSoftInput(mPasswordEntry, 0);
+                        setBackFunctionality(true);
                     }
                     if (mLockPatternView != null) {
                         mLockPatternView.setEnabled(true);
