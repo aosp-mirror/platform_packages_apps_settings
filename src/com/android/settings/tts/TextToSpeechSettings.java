@@ -268,7 +268,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             return;
         }
 
-        mCurrentDefaultLocale = defaultLocale;
+        // ISO-3166 alpha 3 country codes are out of spec. If we won't normalize,
+        // we may end up with English (USA)and German (DEU).
+        mCurrentDefaultLocale = mEnginesHelper.parseLocaleString(defaultLocale.toString());
 
         int defaultAvailable = mTts.setLanguage(defaultLocale);
         if (evaluateDefaultLocale()) {
