@@ -126,6 +126,7 @@ public class InstalledAppDetails extends Fragment
     private CheckBox mAskCompatibilityCB;
     private CheckBox mEnableCompatibilityCB;
     private boolean mCanClearData = true;
+    private boolean mAppControlRestricted = false;
     private TextView mAppVersion;
     private TextView mTotalSize;
     private TextView mAppSize;
@@ -264,6 +265,10 @@ public class InstalledAppDetails extends Fragment
             }
             mClearDataButton.setOnClickListener(this);
         }
+
+        if (mAppControlRestricted) {
+            mClearDataButton.setEnabled(false);
+        }
     }
 
     private CharSequence getMoveErrMsg(int errCode) {
@@ -303,7 +308,7 @@ public class InstalledAppDetails extends Fragment
             mCanBeOnSdCardChecker.init();
             moveDisable = !mCanBeOnSdCardChecker.check(mAppEntry.info);
         }
-        if (moveDisable) {
+        if (moveDisable || mAppControlRestricted) {
             mMoveAppButton.setEnabled(false);
         } else {
             mMoveAppButton.setOnClickListener(this);
@@ -386,6 +391,10 @@ public class InstalledAppDetails extends Fragment
                 // that one, but permit it for installed-but-inactive ones.
                 enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
             }
+        }
+
+        if (mAppControlRestricted) {
+            enabled = false;
         }
 
         mUninstallButton.setEnabled(enabled);
@@ -580,6 +589,7 @@ public class InstalledAppDetails extends Fragment
     public void onResume() {
         super.onResume();
         
+        mAppControlRestricted = mUserManager.hasUserRestriction(UserManager.DISALLOW_APPS_CONTROL);
         mSession.resume();
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
@@ -1008,6 +1018,10 @@ public class InstalledAppDetails extends Fragment
                 mClearCacheButton.setOnClickListener(this);
             }
         }
+        if (mAppControlRestricted) {
+            mClearCacheButton.setEnabled(false);
+            mClearDataButton.setEnabled(false);
+        }
     }
     
     /*
@@ -1261,8 +1275,12 @@ public class InstalledAppDetails extends Fragment
     };
 
     private void updateForceStopButton(boolean enabled) {
-        mForceStopButton.setEnabled(enabled);
-        mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+        if (mAppControlRestricted) {
+            mForceStopButton.setEnabled(false);
+        } else {
+            mForceStopButton.setEnabled(enabled);
+            mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+        }
     }
     
     private void checkForceStop() {
