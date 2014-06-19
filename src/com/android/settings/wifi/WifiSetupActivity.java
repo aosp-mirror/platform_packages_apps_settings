@@ -185,7 +185,7 @@ public class WifiSetupActivity extends WifiPickerActivity
         }
     }
 
-    private static class WifiSkipDialog extends DialogFragment {
+    public static class WifiSkipDialog extends DialogFragment {
         public static WifiSkipDialog newInstance(int messageRes) {
             final Bundle args = new Bundle();
             args.putInt("messageRes", messageRes);
