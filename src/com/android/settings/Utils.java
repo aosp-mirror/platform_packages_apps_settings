@@ -79,6 +79,15 @@ public final class Utils {
     public static final float DISABLED_ALPHA = 0.4f;
 
     /**
+     * Color spectrum to use to indicate badness.  0 is completely transparent (no data),
+     * 1 is most bad (red), the last value is least bad (green).
+     */
+    public static final int[] BADNESS_COLORS = new int[] {
+            0x00000000, 0xffc43828, 0xffe54918, 0xfff47b00,
+            0xfffabf2c, 0xff679e37, 0xff0a7f42
+    };
+
+    /**
      * Name of the meta-data item that should be set in the AndroidManifest.xml
      * to specify the icon that should be displayed for the preference.
      */

@@ -112,6 +112,15 @@ public class ProcessStatsUi extends PreferenceFragment
     long mMaxWeight;
     long mTotalTime;
 
+    long[] mMemTimes = new long[ProcessStats.ADJ_MEM_FACTOR_COUNT];
+    double[] mMemStateWeights = new double[ProcessStats.STATE_COUNT];
+    double mMemCachedWeight;
+    double mMemFreeWeight;
+    double mMemZRamWeight;
+    double mMemKernelWeight;
+    double mMemNativeWeight;
+    double mMemTotalWeight;
+
     // The actual duration value to use for each duration option.  Note these
     // are lower than the actual duration, since our durations are computed in
     // batches of 3 hours so we want to allow the time we use to be slightly
@@ -182,6 +191,24 @@ public class ProcessStatsUi extends PreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference instanceof LinearColorPreference) {
+            Bundle args = new Bundle();
+            args.putLongArray(ProcessStatsMemDetail.EXTRA_MEM_TIMES, mMemTimes);
+            args.putDoubleArray(ProcessStatsMemDetail.EXTRA_MEM_STATE_WEIGHTS, mMemStateWeights);
+            args.putDouble(ProcessStatsMemDetail.EXTRA_MEM_CACHED_WEIGHT, mMemCachedWeight);
+            args.putDouble(ProcessStatsMemDetail.EXTRA_MEM_FREE_WEIGHT, mMemFreeWeight);
+            args.putDouble(ProcessStatsMemDetail.EXTRA_MEM_ZRAM_WEIGHT, mMemZRamWeight);
+            args.putDouble(ProcessStatsMemDetail.EXTRA_MEM_KERNEL_WEIGHT, mMemKernelWeight);
+            args.putDouble(ProcessStatsMemDetail.EXTRA_MEM_NATIVE_WEIGHT, mMemNativeWeight);
+            args.putDouble(ProcessStatsMemDetail.EXTRA_MEM_TOTAL_WEIGHT, mMemTotalWeight);
+            args.putBoolean(ProcessStatsMemDetail.EXTRA_USE_USS, mUseUss);
+            args.putLong(ProcessStatsMemDetail.EXTRA_TOTAL_TIME, mTotalTime);
+            ((SettingsActivity) getActivity()).startPreferencePanel(
+                    ProcessStatsMemDetail.class.getName(), args, R.string.mem_details_title,
+                    null, null, 0);
+            return true;
+        }
+
         if (!(preference instanceof ProcessStatsPreference)) {
             return false;
         }
@@ -408,11 +435,13 @@ public class ProcessStatsUi extends PreferenceFragment
                 mStats.mMemFactor, mStats.mStartTime, now);
         if (DEBUG) Log.d(TAG, "Total time of stats: " + makeDuration(mTotalTime));
 
-        long[] memTimes = new long[ProcessStats.ADJ_MEM_FACTOR_COUNT];
+        for (int i=0; i<mMemTimes.length; i++) {
+            mMemTimes[i] = 0;
+        }
         for (int iscreen=0; iscreen<ProcessStats.ADJ_COUNT; iscreen+=ProcessStats.ADJ_SCREEN_MOD) {
             for (int imem=0; imem<ProcessStats.ADJ_MEM_FACTOR_COUNT; imem++) {
                 int state = imem+iscreen;
-                memTimes[imem] += mStats.mMemFactorDurations[state];
+                mMemTimes[imem] += mStats.mMemFactorDurations[state];
             }
         }
 
@@ -421,31 +450,89 @@ public class ProcessStatsUi extends PreferenceFragment
 
         LinearColorPreference colors = new LinearColorPreference(getActivity());
         colors.setOrder(-1);
-        colors.setOnRegionTappedListener(this);
         switch (mMemRegion) {
             case LinearColorBar.REGION_RED:
-                colors.setColoredRegions(LinearColorBar.REGION_RED);
-                memTotalTime = memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL];
+                memTotalTime = mMemTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL];
                 memStates = RED_MEM_STATES;
                 break;
             case LinearColorBar.REGION_YELLOW:
-                colors.setColoredRegions(LinearColorBar.REGION_RED
-                        | LinearColorBar.REGION_YELLOW);
-                memTotalTime = memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL]
-                        + memTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
-                        + memTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE];
+                memTotalTime = mMemTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL]
+                        + mMemTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
+                        + mMemTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE];
                 memStates = YELLOW_MEM_STATES;
                 break;
             default:
-                colors.setColoredRegions(LinearColorBar.REGION_ALL);
                 memTotalTime = mTotalTime;
                 memStates = ProcessStats.ALL_MEM_ADJ;
                 break;
         }
-        colors.setRatios(memTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL] / (float)mTotalTime,
-                (memTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
-                        + memTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]) / (float)mTotalTime,
-                memTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL] / (float)mTotalTime);
+        colors.setColoredRegions(LinearColorBar.REGION_RED);
+
+        // Compute memory badness for chart color.
+        int[] badColors = com.android.settings.Utils.BADNESS_COLORS;
+        long timeGood = mMemTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL];
+        timeGood += (mMemTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]*2)/3;
+        timeGood += mMemTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]/3;
+        float memBadness = ((float)timeGood)/mTotalTime;
+        int badnessColor = badColors[1 + Math.round(memBadness*(badColors.length-2))];
+        colors.setColors(badnessColor, badnessColor, badnessColor);
+
+        ProcessStats.TotalMemoryUseCollection totalMem = new ProcessStats.TotalMemoryUseCollection(
+                ProcessStats.ALL_SCREEN_ADJ, memStates);
+        mStats.computeTotalMemoryUse(totalMem, now);
+        double freeWeight = totalMem.sysMemFreeWeight + totalMem.sysMemCachedWeight;
+        double usedWeight = totalMem.sysMemKernelWeight + totalMem.sysMemKernelWeight
+                + totalMem.sysMemZRamWeight;
+        mMemCachedWeight = totalMem.sysMemCachedWeight;
+        mMemFreeWeight = totalMem.sysMemFreeWeight;
+        mMemZRamWeight = totalMem.sysMemZRamWeight;
+        mMemKernelWeight = totalMem.sysMemKernelWeight;
+        mMemNativeWeight = totalMem.sysMemNativeWeight;
+        for (int i=0; i<ProcessStats.STATE_COUNT; i++) {
+            if (i == ProcessStats.STATE_SERVICE_RESTARTING) {
+                // These don't really run.
+                mMemStateWeights[i] = 0;
+            } else {
+                mMemStateWeights[i] = totalMem.processStateWeight[i];
+                if (i >= ProcessStats.STATE_HOME) {
+                    freeWeight += totalMem.processStateWeight[i];
+                } else {
+                    usedWeight += totalMem.processStateWeight[i];
+                }
+            }
+        }
+        mMemTotalWeight = freeWeight + usedWeight;
+        float usedRatio = (float)(usedWeight/(freeWeight+usedWeight));
+        colors.setRatios(usedRatio, 0, 1-usedRatio);
+
+        if (false) {
+            colors.setOnRegionTappedListener(this);
+            switch (mMemRegion) {
+                case LinearColorBar.REGION_RED:
+                    colors.setColoredRegions(LinearColorBar.REGION_RED);
+                    memTotalTime = mMemTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL];
+                    memStates = RED_MEM_STATES;
+                    break;
+                case LinearColorBar.REGION_YELLOW:
+                    colors.setColoredRegions(LinearColorBar.REGION_RED
+                            | LinearColorBar.REGION_YELLOW);
+                    memTotalTime = mMemTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL]
+                            + mMemTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
+                            + mMemTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE];
+                    memStates = YELLOW_MEM_STATES;
+                    break;
+                default:
+                    colors.setColoredRegions(LinearColorBar.REGION_ALL);
+                    memTotalTime = mTotalTime;
+                    memStates = ProcessStats.ALL_MEM_ADJ;
+                    break;
+            }
+            colors.setRatios(mMemTimes[ProcessStats.ADJ_MEM_FACTOR_CRITICAL] / (float)mTotalTime,
+                    (mMemTimes[ProcessStats.ADJ_MEM_FACTOR_LOW]
+                            + mMemTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]) / (float)mTotalTime,
+                    mMemTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL] / (float)mTotalTime);
+        }
+
         mAppListGroup.addPreference(colors);
 
         ProcessStats.ProcessDataCollection totals = new ProcessStats.ProcessDataCollection(

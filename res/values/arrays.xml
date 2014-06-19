@@ -1256,4 +1256,30 @@
         <item>15</item>
         <item>20</item>
     </integer-array>
+
+    <!-- Process stats memory use details: labels for memory states -->
+    <string-array name="proc_stats_memory_states" >
+        <item>Normal</item>
+        <item>Moderate</item>
+        <item>Low</item>
+        <item>Critical</item>
+    </string-array>
+
+    <!-- Process stats memory use details: labels for process -->
+    <string-array name="proc_stats_process_states" >
+        <item>Persistent</item>
+        <item>Top activity</item>
+        <item>Important (foreground)</item>
+        <item>Important (background)</item>
+        <item>Backup</item>
+        <item>Heavy weight</item>
+        <item>Service (running)</item>
+        <item>Service (restarting)</item>
+        <item>Receiver</item>
+        <item>Home</item>
+        <item>Last activity</item>
+        <item>Cached (activity)</item>
+        <item>Cached (activity client)</item>
+        <item>Cached (empty)</item>
+    </string-array>
 </resources>

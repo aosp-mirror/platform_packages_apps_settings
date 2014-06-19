@@ -362,10 +362,7 @@ public class BatteryHistoryChart extends View {
         mGpsOnPaint.setStyle(Paint.Style.STROKE);
         mWifiRunningPaint.setStyle(Paint.Style.STROKE);
         mCpuRunningPaint.setStyle(Paint.Style.STROKE);
-        mPhoneSignalChart.setColors(new int[] {
-                0x00000000, 0xffc43828, 0xffe54918, 0xfff47b00,
-                0xfffabf2c, 0xff679e37, 0xff0a7f42
-        });
+        mPhoneSignalChart.setColors(com.android.settings.Utils.BADNESS_COLORS);
         mDebugRectPaint.setARGB(255, 255, 0, 0);
         mDebugRectPaint.setStyle(Paint.Style.STROKE);
         mScreenOnPaint.setColor(0xFF009688);
