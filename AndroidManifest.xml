@@ -1624,16 +1624,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PhoneDefaultDialog"
-                  android:label="@string/phone_application_title"
-                  android:excludeFromRecents="true"
-                  android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
-                <action android:name="android.telecomm.ACTION_CHANGE_DEFAULT_PHONE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".ActiveNetworkScorerDialog"
                   android:label="@string/network_scorer_application"
                   android:excludeFromRecents="true"
