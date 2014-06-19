@@ -23,6 +23,7 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
+import com.android.settings.LockToAppSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
@@ -127,6 +128,7 @@ public final class Ranking {
         // Security
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);
         sRankMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(), RANK_SECURITY);
+        sRankMap.put(LockToAppSettings.class.getName(), RANK_SECURITY);
 
         // IMEs
         sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);

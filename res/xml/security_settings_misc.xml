@@ -102,4 +102,10 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.AdvancedSecuritySettings"/>
     </PreferenceCategory>
+
+    <PreferenceScreen
+        android:key="lock_to_app_settings"
+        android:fragment="com.android.settings.LockToAppSettings"
+        android:title="@string/lock_to_app_title"/>
+
 </PreferenceScreen>
