@@ -204,6 +204,19 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                     }, DELAY_HIGHLIGHT_DURATION_MILLIS);
                 }
             });
+        } else {
+            // Try locating the Preference View thru its tag
+            View preferenceView = findPreferenceViewForKey(getView(), key);
+            if (preferenceView != null ) {
+                mPreferenceHighlighted = true;
+
+                preferenceView.setBackground(highlight);
+                final int centerX = preferenceView.getWidth() / 2;
+                final int centerY = preferenceView.getHeight() / 2;
+                highlight.setHotspot(centerX, centerY);
+                preferenceView.setPressed(true);
+                preferenceView.setPressed(false);
+            }
         }
     }
 
@@ -220,6 +233,33 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
             }
         }
         return -1;
+    }
+
+    private View findPreferenceViewForKey(View root, String key) {
+        if (checkTag(root, key)) {
+            return root;
+        }
+        if (root instanceof ViewGroup) {
+            final ViewGroup group = (ViewGroup) root;
+            final int count = group.getChildCount();
+            for (int n = 0; n < count; n++) {
+                final View child = group.getChildAt(n);
+                final View view = findPreferenceViewForKey(child, key);
+                if (view != null) {
+                    return view;
+                }
+            }
+        }
+        return null;
+    }
+
+    private boolean checkTag(View view, String key) {
+        final Object tag = view.getTag();
+        if (tag == null || !(tag instanceof String)) {
+            return false;
+        }
+        final String prefKey = (String) tag;
+        return (!TextUtils.isEmpty(prefKey) && prefKey.equals(key));
     }
 
     protected void removePreference(String key) {

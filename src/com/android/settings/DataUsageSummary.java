@@ -360,8 +360,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
             mDataEnabled = new Switch(inflater.getContext());
             mDataEnabledView = inflatePreference(inflater, mNetworkSwitches, mDataEnabled);
-            mDataEnabledView.setTag(R.id.preference_highlight_key,
-                    DATA_USAGE_ENABLE_MOBILE_KEY);
+            mDataEnabledView.setTag(DATA_USAGE_ENABLE_MOBILE_KEY);
             mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
             mNetworkSwitches.addView(mDataEnabledView);
 
@@ -369,8 +368,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mDisableAtLimit.setClickable(false);
             mDisableAtLimit.setFocusable(false);
             mDisableAtLimitView = inflatePreference(inflater, mNetworkSwitches, mDisableAtLimit);
-            mDisableAtLimitView.setTag(R.id.preference_highlight_key,
-                    DATA_USAGE_DISABLE_MOBILE_LIMIT_KEY);
+            mDisableAtLimitView.setTag(DATA_USAGE_DISABLE_MOBILE_LIMIT_KEY);
             mDisableAtLimitView.setClickable(true);
             mDisableAtLimitView.setFocusable(true);
             mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
@@ -379,7 +377,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         // bind cycle dropdown
         mCycleView = mHeader.findViewById(R.id.cycles);
-        mCycleView.setTag(R.id.preference_highlight_key, DATA_USAGE_CYCLE_KEY);
+        mCycleView.setTag(DATA_USAGE_CYCLE_KEY);
         mCycleSpinner = (Spinner) mCycleView.findViewById(R.id.cycles_spinner);
         mCycleAdapter = new CycleAdapter(context);
         mCycleSpinner.setAdapter(mCycleAdapter);
