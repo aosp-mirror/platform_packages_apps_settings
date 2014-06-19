@@ -347,10 +347,8 @@
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Krypterar"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"Vänta medan surfplattan krypteras. <xliff:g id="PERCENT">^1</xliff:g> % klart."</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Vänta medan mobilen krypteras. <xliff:g id="PERCENT">^1</xliff:g> % klart."</string>
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1655047311546745695) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_time_remaining (1862964662304683072) -->
-    <skip />
+    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Vänta tills surfplattan har krypterats. Återstående tid: <xliff:g id="DURATION">^1</xliff:g>"</string>
+    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Vänta tills mobilen har krypterats. Återstående tid: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Försök igen om <xliff:g id="DELAY">^1</xliff:g> sekunder."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Ange ditt lösenord"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Krypteringen misslyckades"</string>
@@ -997,6 +995,8 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vill du byta sms-app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vill du använda <xliff:g id="NEW_APP">%1$s</xliff:g> som sms-app i stället för <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vill du använda <xliff:g id="NEW_APP">%s</xliff:g> som sms-app?"</string>
+    <string name="phone_application_title" msgid="8232758172983316224">"Standardtelefonapp"</string>
+    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"Vill du byta standardtelefonapp?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Okänd SIM-operatör"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s har ingen känd administrationswebbplats"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"För in SIM-kortet och starta om"</string>
@@ -1345,10 +1345,8 @@
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"Aktivera utförlig loggning för Wi-Fi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Visa certifieringsalternativ för Wi-Fi-skärmdelning"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Utöka loggningsnivån för Wi-Fi och visa per SSID RSSI i Wi-Fi-väljaren"</string>
-    <!-- no translation found for select_logd_size_title (7433137108348553508) -->
-    <skip />
-    <!-- no translation found for select_logd_size_dialog_title (1206769310236476760) -->
-    <skip />
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Buffertstorlekar för logg"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Välj loggstorlekar per loggbuffert"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Tillåt skenplatser"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillåt skenplatser"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Ska USB-felsökning tillåtas?"</string>
@@ -1701,8 +1699,7 @@
     <string name="credential_storage_type" msgid="8629968543494001364">"Lagringstyp"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Maskinvarustöd"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Endast programvara"</string>
-    <!-- no translation found for credentials_settings_not_available (7968275634486624215) -->
-    <skip />
+    <string name="credentials_settings_not_available" msgid="7968275634486624215">"Användaruppgifter är inte tillgängliga för den här användaren"</string>
     <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Rita ditt grafiska lösenord"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Du måste rita ditt grafiska lösenord för att bekräfta uppgifterna."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
@@ -1876,8 +1873,6 @@
     <string name="debug_layout_summary" msgid="2001775315258637682">"Visa gränser för videoklipp, marginaler m.m."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Tvinga fram RTL-layout"</string>
     <string name="force_rtl_layout_all_locales_summary" msgid="9192797796616132534">"Tvinga fram RTL-skärmlayout (hö–vä) för alla språk"</string>
-    <string name="low_power_mode" msgid="8400119155107987979">"Energisparläge"</string>
-    <string name="low_power_mode_summary" msgid="8895619424568660204">"Aktivera inställningar för energisparläge"</string>
     <string name="show_cpu_usage" msgid="2389212910758076024">"Visa CPU-användning"</string>
     <string name="show_cpu_usage_summary" msgid="2113341923988958266">"Överlägg på skärmen med aktuell CPU-användning"</string>
     <string name="force_hw_ui" msgid="6426383462520888732">"Framtvinga GPU-rendering"</string>
