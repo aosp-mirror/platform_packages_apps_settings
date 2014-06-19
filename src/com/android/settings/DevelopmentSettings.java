@@ -136,6 +136,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
+    private static final String WIFI_AGGRESSIVE_HANDOVER_KEY = "wifi_aggressive_handover";
+    private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
     private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
     private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
     private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
@@ -189,6 +191,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mVerifyAppsOverUsb;
     private CheckBoxPreference mWifiDisplayCertification;
     private CheckBoxPreference mWifiVerboseLogging;
+    private CheckBoxPreference mWifiAggressiveHandover;
+    private CheckBoxPreference mWifiAllowScansWithTraffic;
 
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
@@ -319,6 +323,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mDebugHwOverdraw = addListPreference(DEBUG_HW_OVERDRAW_KEY);
         mWifiDisplayCertification = findAndInitCheckboxPref(WIFI_DISPLAY_CERTIFICATION_KEY);
         mWifiVerboseLogging = findAndInitCheckboxPref(WIFI_VERBOSE_LOGGING_KEY);
+        mWifiAggressiveHandover = findAndInitCheckboxPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
+        mWifiAllowScansWithTraffic = findAndInitCheckboxPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
@@ -534,6 +540,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateLogdSizeValues();
         updateWifiDisplayCertificationOptions();
         updateWifiVerboseLoggingOptions();
+        updateWifiAggressiveHandoverOptions();
+        updateWifiAllowScansWithTrafficOptions();
         updateSimulateColorSpace();
         updateUseNuplayerOptions();
     }
@@ -1050,6 +1058,24 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiManager.enableVerboseLogging(mWifiVerboseLogging.isChecked() ? 1 : 0);
     }
 
+    private void updateWifiAggressiveHandoverOptions() {
+        boolean enabled = mWifiManager.getAggressiveHandover() > 0;
+        updateCheckBox(mWifiAggressiveHandover, enabled);
+    }
+
+    private void writeWifiAggressiveHandoverOptions() {
+        mWifiManager.enableAggressiveHandover(mWifiAggressiveHandover.isChecked() ? 1 : 0);
+    }
+
+    private void updateWifiAllowScansWithTrafficOptions() {
+        boolean enabled = mWifiManager.getAllowScansWithTraffic() > 0;
+        updateCheckBox(mWifiAllowScansWithTraffic, enabled);
+    }
+
+    private void writeWifiAllowScansWithTrafficOptions() {
+        mWifiManager.setAllowScansWithTraffic(mWifiAllowScansWithTraffic.isChecked() ? 1 : 0);
+    }
+
     private void updateLogdSizeValues() {
         if (mLogdSize != null) {
             String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
@@ -1394,6 +1420,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeWifiDisplayCertificationOptions();
         } else if (preference == mWifiVerboseLogging) {
             writeWifiVerboseLoggingOptions();
+        } else if (preference == mWifiAggressiveHandover) {
+            writeWifiAggressiveHandoverOptions();
+        } else if (preference == mWifiAllowScansWithTraffic) {
+            writeWifiAllowScansWithTrafficOptions();
         } else if (preference == mUseNuplayer) {
             writeUseNuplayerOptions();
         } else {
