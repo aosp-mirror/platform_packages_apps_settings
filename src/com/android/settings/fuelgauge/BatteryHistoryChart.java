@@ -545,6 +545,7 @@ public class BatteryHistoryChart extends View {
         long lastWallTime = 0;
         long lastRealtime = 0;
         int aggrStates = 0;
+        int aggrStates2 = 0;
         boolean first = true;
         if (stats.startIteratingHistoryLocked()) {
             final HistoryItem rec = new HistoryItem();
@@ -569,6 +570,7 @@ public class BatteryHistoryChart extends View {
                     lastInteresting = pos;
                     mHistDataEnd = rec.time;
                     aggrStates |= rec.states;
+                    aggrStates2 |= rec.states2;
                 }
             }
         }
@@ -577,7 +579,10 @@ public class BatteryHistoryChart extends View {
         mEndWallTime = mEndDataWallTime + (remainingTimeUs/1000);
         mNumHist = lastInteresting;
         mHaveGps = (aggrStates&HistoryItem.STATE_GPS_ON_FLAG) != 0;
-        mHaveWifi = (aggrStates&HistoryItem.STATE_WIFI_RUNNING_FLAG) != 0;
+        mHaveWifi = (aggrStates2&HistoryItem.STATE2_WIFI_RUNNING_FLAG) != 0
+                || (aggrStates&(HistoryItem.STATE_WIFI_FULL_LOCK_FLAG
+                        |HistoryItem.STATE_WIFI_MULTICAST_ON_FLAG
+                        |HistoryItem.STATE_WIFI_SCAN_FLAG)) != 0;
         if (!com.android.settings.Utils.isWifiOnly(getContext())) {
             mHavePhoneSignal = true;
         }
@@ -774,7 +779,8 @@ public class BatteryHistoryChart extends View {
         Path curLevelPath = null;
         Path lastLinePath = null;
         boolean lastCharging = false, lastScreenOn = false, lastGpsOn = false;
-        boolean lastWifiRunning = false, lastCpuRunning = false;
+        boolean lastWifiRunning = false, lastWifiSupplRunning = false, lastCpuRunning = false;
+        int lastWifiSupplState = BatteryStats.WIFI_SUPPL_STATE_INVALID;
         final int N = mNumHist;
         if (mStats.startIteratingHistoryLocked()) {
             final HistoryItem rec = new HistoryItem();
@@ -868,8 +874,33 @@ public class BatteryHistoryChart extends View {
                             lastGpsOn = gpsOn;
                         }
 
-                        final boolean wifiRunning =
-                            (rec.states&HistoryItem.STATE_WIFI_RUNNING_FLAG) != 0;
+                        final int wifiSupplState =
+                            ((rec.states2&HistoryItem.STATE2_WIFI_SUPPL_STATE_MASK)
+                                    >> HistoryItem.STATE2_WIFI_SUPPL_STATE_SHIFT);
+                        boolean wifiRunning;
+                        if (lastWifiSupplState != wifiSupplState) {
+                            lastWifiSupplState = wifiSupplState;
+                            switch (wifiSupplState) {
+                                case BatteryStats.WIFI_SUPPL_STATE_DISCONNECTED:
+                                case BatteryStats.WIFI_SUPPL_STATE_DORMANT:
+                                case BatteryStats.WIFI_SUPPL_STATE_INACTIVE:
+                                case BatteryStats.WIFI_SUPPL_STATE_INTERFACE_DISABLED:
+                                case BatteryStats.WIFI_SUPPL_STATE_INVALID:
+                                case BatteryStats.WIFI_SUPPL_STATE_UNINITIALIZED:
+                                    wifiRunning = lastWifiSupplRunning = false;
+                                    break;
+                                default:
+                                    wifiRunning = lastWifiSupplRunning = true;
+                                    break;
+                            }
+                        } else {
+                            wifiRunning = lastWifiSupplRunning;
+                        }
+                        if ((rec.states&(HistoryItem.STATE_WIFI_FULL_LOCK_FLAG
+                                |HistoryItem.STATE_WIFI_MULTICAST_ON_FLAG
+                                |HistoryItem.STATE_WIFI_SCAN_FLAG)) != 0) {
+                            wifiRunning = true;
+                        }
                         if (wifiRunning != lastWifiRunning) {
                             if (wifiRunning) {
                                 mWifiRunningPath.moveTo(x, h-mWifiRunningOffset);
@@ -899,8 +930,8 @@ public class BatteryHistoryChart extends View {
                             } else if ((rec.states&HistoryItem.STATE_PHONE_SCANNING_FLAG) != 0) {
                                 bin = 1;
                             } else {
-                                bin = (rec.states&HistoryItem.STATE_SIGNAL_STRENGTH_MASK)
-                                        >> HistoryItem.STATE_SIGNAL_STRENGTH_SHIFT;
+                                bin = (rec.states&HistoryItem.STATE_PHONE_SIGNAL_STRENGTH_MASK)
+                                        >> HistoryItem.STATE_PHONE_SIGNAL_STRENGTH_SHIFT;
                                 bin += 2;
                             }
                             mPhoneSignalChart.addTick(x, bin);
