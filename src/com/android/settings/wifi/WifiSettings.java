@@ -39,6 +39,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
@@ -96,8 +97,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int WIFI_DIALOG_ID = 1;
     /* package */ static final int WPS_PBC_DIALOG_ID = 2;
     private static final int WPS_PIN_DIALOG_ID = 3;
-    /* package */ static final int WIFI_SKIPPED_DIALOG_ID = 4;
-    /* package */ static final int WIFI_AND_MOBILE_SKIPPED_DIALOG_ID = 5;
     private static final int WRITE_NFC_DIALOG_ID = 6;
 
     // Combo scans can take 5-6s to complete - set to 10s.
@@ -130,6 +129,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
     private TextView mEmptyView;
+
+    // this boolean extra specifies whether to disable the Next button when not connected. Used by
+    // account creation outside of setup wizard.
+    private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+
+    // should Next button only be enabled when we have a connection?
+    private boolean mEnableNextOnConnection;
 
     // Save the dialog details
     private boolean mDlgEdit;
@@ -220,6 +226,23 @@ public class WifiSettings extends RestrictedSettingsFragment
                 && savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
             mDlgEdit = savedInstanceState.getBoolean(SAVE_DIALOG_EDIT_MODE);
             mAccessPointSavedState = savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+        }
+
+        // if we're supposed to enable/disable the Next button based on our current connection
+        // state, start it off in the right state
+        Intent intent = getActivity().getIntent();
+        mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
+
+        if (mEnableNextOnConnection) {
+            if (hasNextButton()) {
+                final ConnectivityManager connectivity = (ConnectivityManager)
+                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivity != null) {
+                    NetworkInfo info = connectivity.getNetworkInfo(
+                            ConnectivityManager.TYPE_WIFI);
+                    changeNextButtonState(info.isConnected());
+                }
+            }
         }
 
         addPreferencesFromResource(R.xml.wifi_settings);
@@ -675,6 +698,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);
             mConnected.set(info.isConnected());
+            changeNextButtonState(info.isConnected());
             updateAccessPoints();
             updateConnectionState(info.getDetailedState());
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
@@ -770,6 +794,18 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
+    /**
+     * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
+     * Wifi setup screens, not in usual wifi settings screen.
+     *
+     * @param enabled true when the device is connected to a wifi network.
+     */
+    private void changeNextButtonState(boolean enabled) {
+        if (mEnableNextOnConnection && hasNextButton()) {
+            getNextButton().setEnabled(enabled);
+        }
+    }
+
     @Override
     public void onClick(DialogInterface dialogInterface, int button) {
         if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
@@ -822,6 +858,9 @@ public class WifiSettings extends RestrictedSettingsFragment
             mScanner.resume();
         }
         updateAccessPoints();
+
+        // We need to rename/replace "Next" button in wifi setup context.
+        changeNextButtonState(false);
     }
 
     /**

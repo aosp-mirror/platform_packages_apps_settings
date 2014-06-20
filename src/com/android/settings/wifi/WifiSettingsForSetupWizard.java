@@ -54,17 +54,11 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
 
     /* Used in Wifi Setup context */
 
-    // this boolean extra specifies whether to disable the Next button when not connected
-    private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
-
     // this boolean extra specifies whether to auto finish when connection is established
     private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
 
     // show a text regarding data charges when wifi connection is required during setup wizard
     protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
-
-    // should Next button only be enabled when we have a connection?
-    private boolean mEnableNextOnConnection;
 
     // should activity finish once we have a connection?
     private boolean mAutoFinishOnConnection;
@@ -83,7 +77,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             public void onReceive(Context context, Intent intent) {
                 NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                         WifiManager.EXTRA_NETWORK_INFO);
-                changeNextButtonState(info.isConnected());
                 if (mAutoFinishOnConnection && info.isConnected()) {
                     Log.d(TAG, "mReceiver.onReceive context=" + context + " intent=" + intent);
                     WifiSetupActivity activity = (WifiSetupActivity) getActivity();
@@ -177,22 +170,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 }
             }
         }
-
-        // if we're supposed to enable/disable the Next button based on our current connection
-        // state, start it off in the right state
-        mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
-
-        if (mEnableNextOnConnection) {
-            if (hasNextButton()) {
-                final ConnectivityManager connectivity = (ConnectivityManager)
-                        activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (connectivity != null) {
-                    NetworkInfo info = connectivity.getNetworkInfo(
-                            ConnectivityManager.TYPE_WIFI);
-                    changeNextButtonState(info.isConnected());
-                }
-            }
-        }
     }
 
     @Override
@@ -233,23 +210,4 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         ta.recycle();
     }
 
-    @Override
-    /* package */ void forget() {
-        super.forget();
-
-        // We need to rename/replace "Next" button in wifi setup context.
-        changeNextButtonState(false);
-    }
-
-    /**
-     * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
-     * Wifi setup screens, not in usual wifi settings screen.
-     *
-     * @param enabled true when the device is connected to a wifi network.
-     */
-    private void changeNextButtonState(boolean enabled) {
-        if (mEnableNextOnConnection && hasNextButton()) {
-            getNextButton().setEnabled(enabled);
-        }
-    }
 }
