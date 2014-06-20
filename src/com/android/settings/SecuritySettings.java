@@ -321,7 +321,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
                             TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
                     if (trustAgentComponentInfo.componentName == null ||
-                            !enabledTrustAgents.contains(trustAgentComponentInfo.componentName) ||
+                            !enabledTrustAgents.contains(
+                                    TrustAgentUtils.getComponentName(resolveInfo)) ||
                             TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
                     Preference trustAgentPreference =
                             new Preference(securityCategory.getContext());
