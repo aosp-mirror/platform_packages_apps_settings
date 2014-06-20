@@ -207,7 +207,8 @@ public class SearchResultsSummary extends Fragment {
         });
         mResultsListView.addHeaderView(
                 LayoutInflater.from(getActivity()).inflate(
-                R.layout.search_panel_results_header, mResultsListView, false));
+                        R.layout.search_panel_results_header, mResultsListView, false),
+                null, false);
 
         mSuggestionsListView = (ListView) view.findViewById(R.id.list_suggestions);
         mSuggestionsListView.setAdapter(mSuggestionsAdapter);
@@ -231,7 +232,8 @@ public class SearchResultsSummary extends Fragment {
         });
         mSuggestionsListView.addHeaderView(
                 LayoutInflater.from(getActivity()).inflate(
-                        R.layout.search_panel_suggestions_header, mSuggestionsListView, false));
+                        R.layout.search_panel_suggestions_header, mSuggestionsListView, false),
+                null, false);
 
         return view;
     }

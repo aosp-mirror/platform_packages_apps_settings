@@ -25,14 +25,18 @@ import com.android.settings.R;
 
 public class DashboardContainerView extends ViewGroup {
 
+    private float mCellGapX;
+    private float mCellGapY;
+
+    private int mNumRows;
     private int mNumColumns;
-    private float mCellGap;
 
     public DashboardContainerView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         final Resources res = context.getResources();
-        mCellGap = res.getDimension(R.dimen.dashboard_cell_gap);
+        mCellGapX = res.getDimension(R.dimen.dashboard_cell_gap_x);
+        mCellGapY = res.getDimension(R.dimen.dashboard_cell_gap_y);
         mNumColumns = res.getInteger(R.integer.dashboard_num_columns);
     }
 
@@ -40,7 +44,7 @@ public class DashboardContainerView extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int width = MeasureSpec.getSize(widthMeasureSpec);
         final int availableWidth = (int) (width - getPaddingLeft() - getPaddingRight() -
-                (mNumColumns - 1) * mCellGap);
+                (mNumColumns - 1) * mCellGapX);
         float cellWidth = (float) Math.ceil(((float) availableWidth) / mNumColumns);
         final int N = getChildCount();
 
@@ -55,7 +59,7 @@ public class DashboardContainerView extends ViewGroup {
 
             ViewGroup.LayoutParams lp = v.getLayoutParams();
             int colSpan = v.getColumnSpan();
-            lp.width = (int) ((colSpan * cellWidth) + (colSpan - 1) * mCellGap);
+            lp.width = (int) ((colSpan * cellWidth) + (colSpan - 1) * mCellGapX);
 
             // Measure the child
             int newWidthSpec = getChildMeasureSpec(widthMeasureSpec, 0, lp.width);
@@ -72,8 +76,8 @@ public class DashboardContainerView extends ViewGroup {
             cursor += colSpan;
         }
 
-        final int numRows = (int) Math.ceil((float) cursor / mNumColumns);
-        final int newHeight = (int) ((numRows * cellHeight) + ((numRows - 1) * mCellGap)) +
+        mNumRows = (int) Math.ceil((float) cursor / mNumColumns);
+        final int newHeight = (int) ((mNumRows * cellHeight) + ((mNumRows - 1) * mCellGapY)) +
                 getPaddingTop() + getPaddingBottom();
 
         setMeasuredDimension(width, newHeight);
@@ -104,10 +108,14 @@ public class DashboardContainerView extends ViewGroup {
 
             int row = cursor / mNumColumns;
 
+            if (row == mNumRows - 1) {
+                child.setDividerVisibility(false);
+            }
+
             // Push the item to the next row if it can't fit on this one
             if ((col + colSpan) > mNumColumns) {
                 x = getPaddingStart();
-                y += childHeight + mCellGap;
+                y += childHeight + mCellGapY;
                 row++;
             }
 
@@ -124,10 +132,10 @@ public class DashboardContainerView extends ViewGroup {
             // reach the end of the row
             cursor += child.getColumnSpan();
             if (cursor < (((row + 1) * mNumColumns))) {
-                x += childWidth + mCellGap;
+                x += childWidth + mCellGapX;
             } else {
                 x = getPaddingStart();
-                y += childHeight + mCellGap;
+                y += childHeight + mCellGapY;
             }
         }
     }

@@ -34,6 +34,7 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
     private ImageView mImageView;
     private TextView mTitleTextView;
     private TextView mStatusTextView;
+    private View mDivider;
 
     private int mColSpan = DEFAULT_COL_SPAN;
 
@@ -51,6 +52,7 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
         mImageView = (ImageView) view.findViewById(R.id.icon);
         mTitleTextView = (TextView) view.findViewById(R.id.title);
         mStatusTextView = (TextView) view.findViewById(R.id.status);
+        mDivider = view.findViewById(R.id.tile_divider);
 
         setOnClickListener(this);
         setBackgroundResource(R.drawable.dashboard_tile_background);
@@ -71,6 +73,10 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
 
     public void setTile(DashboardTile tile) {
         mTile = tile;
+    }
+
+    public void setDividerVisibility(boolean visible) {
+        mDivider.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     void setColumnSpan(int span) {

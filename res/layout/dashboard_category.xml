@@ -18,12 +18,15 @@
         android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:layout_marginBottom="8dip"
+        android:elevation="@dimen/dashboard_category_elevation">
 
     <TextView android:id="@+id/category_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dashboard_category_title_height"
-            android:layout_marginStart="@dimen/dashboard_category_title_margin_start"
+            android:paddingStart="@dimen/dashboard_category_title_margin_start"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:gravity="center_vertical"

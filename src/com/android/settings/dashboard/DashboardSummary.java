@@ -44,7 +44,6 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     private static final String LOG_TAG = "DashboardSummary";
 
     private LayoutInflater mLayoutInflater;
-    private ViewGroup mContainer;
     private ViewGroup mDashboard;
     private AuthenticatorHelper mAuthHelper;
     private boolean mAccountListenerAdded;
@@ -69,7 +68,6 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
         final Context context = getActivity();
 
         mLayoutInflater = inflater;
-        mContainer = container;
 
         final View rootView = inflater.inflate(R.layout.dashboard, container, false);
         mDashboard = (ViewGroup) rootView.findViewById(R.id.dashboard_container);
@@ -98,7 +96,7 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
         for (int n = 0; n < count; n++) {
             DashboardCategory category = categories.get(n);
 
-            View categoryView = mLayoutInflater.inflate(R.layout.dashboard_category, mContainer,
+            View categoryView = mLayoutInflater.inflate(R.layout.dashboard_category, mDashboard,
                     false);
 
             TextView categoryLabel = (TextView) categoryView.findViewById(R.id.category_title);
