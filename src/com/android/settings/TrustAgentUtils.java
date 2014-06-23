@@ -43,8 +43,6 @@ public class TrustAgentUtils {
      * @return true, if the service in resolveInfo has the permission to provide a trust agent.
      */
     public static boolean checkProvidePermission(ResolveInfo resolveInfo, PackageManager pm) {
-        // STOPSHIP Reenable this check once the GMS Core prebuild library has the permission.
-        /*
         String packageName = resolveInfo.serviceInfo.packageName;
         if (pm.checkPermission(PERMISSION_PROVIDE_AGENT, packageName)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -52,7 +50,6 @@ public class TrustAgentUtils {
                     + " does not have permission " + PERMISSION_PROVIDE_AGENT + ".");
             return false;
         }
-        */
         return true;
     }
 
