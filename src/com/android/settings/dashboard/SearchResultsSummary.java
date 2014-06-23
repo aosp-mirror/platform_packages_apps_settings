@@ -169,6 +169,12 @@ public class SearchResultsSummary extends Fragment {
                 // We have a header, so we need to decrement the position by one
                 position--;
 
+                // Some Monkeys could create a case where they were probably clicking on the
+                // List Header and thus the position passed was "0" and then by decrement was "-1"
+                if (position < 0) {
+                    return;
+                }
+
                 final Cursor cursor = mResultsAdapter.mCursor;
                 cursor.moveToPosition(position);
 
