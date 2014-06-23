@@ -995,8 +995,6 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Thay đổi ứng dụng SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Sử dụng <xliff:g id="NEW_APP">%1$s</xliff:g> thay vì <xliff:g id="CURRENT_APP">%2$s</xliff:g> làm ứng dụng SMS của bạn?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Sử dụng <xliff:g id="NEW_APP">%s</xliff:g> làm ứng dụng SMS của bạn?"</string>
-    <string name="phone_application_title" msgid="8232758172983316224">"Ứng dụng điện thoại mặc định"</string>
-    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"Đổi ứng dụng điện thoại mặc định?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Nhà cung cấp dịch vụ SIM không xác định"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s không có trang web cấp phép xác định"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Vui lòng lắp thẻ SIM và khởi động lại"</string>
@@ -1343,8 +1341,12 @@
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Khởi động lại để thay đổi thời gian chạy từ <xliff:g id="OLD">%1$s</xliff:g> sang <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Chứng nhận hiển thị không dây"</string>
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"Bật ghi nhật ký chi tiết WiFi"</string>
+    <string name="wifi_aggressive_handover" msgid="5398429853675035444">"Chuyển vùng wifi tích cực sang mạng di động"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="1390236299223668977">"Luôn cho phép quét chuyển vùng Wifi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Hiển thị tùy chọn chứng nhận hiển thị không dây"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Tăng mức ghi nhật ký Wifi, hiển thị mỗi SSID RSSI trong bộ chọn WiFi"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="1000996694927825958">"Khi được bật, Wifi sẽ tích cực hơn trong việc chuyển vùng kết nối dữ liệu sang mạng di động khi tín hiệu Wifi yếu"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="4586928675773406679">"Cho phép/Không cho phép quét chuyển vùng Wifi dựa trên lưu lượng truy cập dữ liệu có tại giao diện"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Kích cỡ tải trình ghi"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Chọn k.cỡ Trình ghi/lần tải n.ký"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Cho phép vị trí mô phỏng"</string>
@@ -1598,6 +1600,15 @@
     <string name="process_stats_run_time" msgid="6520628955709369115">"Thời gian chạy"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Dịch vụ"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Thời lượng"</string>
+    <string name="mem_details_title" msgid="6548392825497290498">"Chi tiết bộ nhớ"</string>
+    <string name="mem_state_subtitle" msgid="2407238869781011933">"Trạng thái bộ nhớ"</string>
+    <string name="mem_use_subtitle" msgid="7319468770222422412">"Mức sử dụng bộ nhớ"</string>
+    <string name="mem_use_kernel_type" msgid="8698327165935012484">"Kernel"</string>
+    <string name="mem_use_native_type" msgid="5976704902328347400">"Gốc"</string>
+    <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"Bộ nhớ cache Kernel"</string>
+    <string name="mem_use_zram_type" msgid="9087217476795358232">"Hoán đổi ZRam"</string>
+    <string name="mem_use_free_type" msgid="717708548454880840">"Miễn phí"</string>
+    <string name="mem_use_total" msgid="6308786055749777934">"Tổng số"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 giờ"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 giờ"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 giờ"</string>

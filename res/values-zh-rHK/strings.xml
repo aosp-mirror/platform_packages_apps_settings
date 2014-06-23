@@ -995,8 +995,6 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"變更短訊應用程式？"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"改用「<xliff:g id="NEW_APP">%1$s</xliff:g>」為您的短訊應用程式，以取代「<xliff:g id="CURRENT_APP">%2$s</xliff:g>」？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」為您的短訊應用程式？"</string>
-    <string name="phone_application_title" msgid="8232758172983316224">"預設電話應用程式"</string>
-    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"變更預設電話應用程式？"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"未知的 SIM 流動網絡供應商"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s 沒有提供任何已知的網站"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"請插入 SIM 卡，並重新啟動裝置"</string>
@@ -1343,8 +1341,12 @@
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"要重新啟動裝置，將執行階段從 <xliff:g id="OLD">%1$s</xliff:g> 變更為 <xliff:g id="NEW">%2$s</xliff:g> 嗎？"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"無線螢幕分享認證"</string>
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"啟用 Wi-Fi 詳細記錄功能"</string>
+    <string name="wifi_aggressive_handover" msgid="5398429853675035444">"加強 WiFi 至流動數據轉換"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="1390236299223668977">"一律允許 WiFi 漫遊掃描"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"顯示無線螢幕分享認證的選項"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"提升 Wi-Fi 記錄功能等級 (在「Wi-Fi 挑選器」中根據 SSID RSSI 顯示)"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="1000996694927825958">"啟用時，WiFi 連線在訊號不穩的情況下會更積極轉換成流動數據連線"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="4586928675773406679">"根據介面中目前的數據流量允許/禁止 WiFi 漫遊掃描"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"記錄器緩衝區空間"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"選取每個記錄緩衝區的記錄器空間"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"允許模擬位置"</string>
@@ -1598,6 +1600,15 @@
     <string name="process_stats_run_time" msgid="6520628955709369115">"執行時間"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"服務"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"持續時間"</string>
+    <string name="mem_details_title" msgid="6548392825497290498">"記憶體詳細資料"</string>
+    <string name="mem_state_subtitle" msgid="2407238869781011933">"記憶體狀態"</string>
+    <string name="mem_use_subtitle" msgid="7319468770222422412">"記憶體用量"</string>
+    <string name="mem_use_kernel_type" msgid="8698327165935012484">"核心"</string>
+    <string name="mem_use_native_type" msgid="5976704902328347400">"本機"</string>
+    <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"核心快取"</string>
+    <string name="mem_use_zram_type" msgid="9087217476795358232">"ZRam 切換"</string>
+    <string name="mem_use_free_type" msgid="717708548454880840">"可用"</string>
+    <string name="mem_use_total" msgid="6308786055749777934">"總計"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 小時"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 小時"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 小時"</string>

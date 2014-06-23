@@ -995,8 +995,6 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS एप्लिकेशन बदलें?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"आपके SMS ऐप्स के रूप में <xliff:g id="CURRENT_APP">%2$s</xliff:g> के बजाय <xliff:g id="NEW_APP">%1$s</xliff:g> का उपयोग करें?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"आपके SMS ऐप्स के रूप में <xliff:g id="NEW_APP">%s</xliff:g> का उपयोग करें?"</string>
-    <string name="phone_application_title" msgid="8232758172983316224">"डिफ़ॉल्ट फ़ोन ऐप्स"</string>
-    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"डिफ़ॉल्ट फ़ोन ऐप्स बदलें?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"अज्ञात SIM ऑपरेटर"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s की कोई भी ज्ञात प्रावधान वेबसाइट नहीं है"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"कृपया SIM कार्ड डालें और पुन: प्रारंभ करें"</string>
@@ -1343,8 +1341,12 @@
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"रनटाइम को <xliff:g id="OLD">%1$s</xliff:g> से <xliff:g id="NEW">%2$s</xliff:g> में बदलने के लिए रीबूट करें?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"वायरलेस दिखाई देने के लिए प्रमाणन"</string>
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"WiFi वर्बोस लॉगिंग सक्षम करें"</string>
+    <string name="wifi_aggressive_handover" msgid="5398429853675035444">"WiFi से सेल्यूलर पर बलपूर्वक हस्तांतरण"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="1390236299223668977">"हमेशा Wifi रोम स्कैन करने दें"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"वायरलेस दिखाई देने के लिए प्रमाणन विकल्प दिखाएं"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Wifi लॉगिंग का स्तर बढ़ाएं, WiFi पिकर में प्रति SSID RSSI दिखाएं"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="1000996694927825958">"इसके सक्षम होने पर, जब Wifi संकेत कमज़ोर हों तो Wifi, डेटा कनेक्शन को सेल्यूलर पर अधिक बलपूर्वक भेजेगा"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="4586928675773406679">"इंटरफ़ेस पर वर्तमान में मौजूद डेटा ट्रैफ़िक के आधार पर Wifi रोम स्कैन करने देता/नहीं देता है"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"लॉगर बफ़र आकार"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"प्रति लॉग बफ़र लॉगर आकार चुनें"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"कृत्रिम स्‍थानों को अनुमति दें"</string>
@@ -1598,6 +1600,15 @@
     <string name="process_stats_run_time" msgid="6520628955709369115">"रन टाइम"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"सेवाएं"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"अवधि"</string>
+    <string name="mem_details_title" msgid="6548392825497290498">"स्मृति का विवरण"</string>
+    <string name="mem_state_subtitle" msgid="2407238869781011933">"स्मृति की स्थितियां"</string>
+    <string name="mem_use_subtitle" msgid="7319468770222422412">"स्मृति उपयोग"</string>
+    <string name="mem_use_kernel_type" msgid="8698327165935012484">"कर्नल"</string>
+    <string name="mem_use_native_type" msgid="5976704902328347400">"स्थानीय"</string>
+    <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"कर्नल संचय"</string>
+    <string name="mem_use_zram_type" msgid="9087217476795358232">"ZRam स्वैप"</string>
+    <string name="mem_use_free_type" msgid="717708548454880840">"नि:शुल्क"</string>
+    <string name="mem_use_total" msgid="6308786055749777934">"कुल"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 घंटे"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 घंटे"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 घंटे"</string>

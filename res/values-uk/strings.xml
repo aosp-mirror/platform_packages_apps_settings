@@ -995,8 +995,6 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Змінити програму для SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Використовувати для SMS програму <xliff:g id="NEW_APP">%1$s</xliff:g> замість <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Використовувати для SMS програму <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
-    <string name="phone_application_title" msgid="8232758172983316224">"Телефонний додаток за умовчанням"</string>
-    <string name="phone_change_default_dialog_title" msgid="4972594589432598468">"Змінити додаток за умовчанням?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Невідомий оператор SIM-карти"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s не має веб-сайту для мобільних"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Вставте SIM-карту та перезапустіть"</string>
@@ -1343,8 +1341,12 @@
     <string name="select_runtime_warning_message" msgid="1937574953265648165">"Перезавантажити, щоб змінити робочий цикл із <xliff:g id="OLD">%1$s</xliff:g> на <xliff:g id="NEW">%2$s</xliff:g>?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Сертифікація бездротового екрана"</string>
     <string name="wifi_verbose_logging" msgid="4770164061102202747">"Увімкнути докладну реєстрацію Wi-Fi"</string>
+    <string name="wifi_aggressive_handover" msgid="5398429853675035444">"Перемик. сигнал із Wi-Fi на моб. мережу"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="1390236299223668977">"Завжди дозволяти Wi-Fi шукати роумінг"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Показати параметри сертифікації бездротового екрана"</string>
     <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"Збільшити рівень реєстрації Wi-Fi, показувати за RSSI SSID під час вибору Wi-Fi"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="1000996694927825958">"Примусово перемикатися на мобільну мережу, коли сигнал Wi-Fi слабкий"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="4586928675773406679">"Дозволити чи заборонити Wi-Fi шукати роумінг на основі обсягу трафіку даних в інтерфейсі"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Розміри буфера журналу"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Виберіть розміри буфера журналу"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Фіктивні місцезнаходження"</string>
@@ -1598,6 +1600,15 @@
     <string name="process_stats_run_time" msgid="6520628955709369115">"Час виконання"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Служби"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Тривалість"</string>
+    <string name="mem_details_title" msgid="6548392825497290498">"Деталі пам’яті"</string>
+    <string name="mem_state_subtitle" msgid="2407238869781011933">"Стани пам’яті"</string>
+    <string name="mem_use_subtitle" msgid="7319468770222422412">"Використання пам’яті"</string>
+    <string name="mem_use_kernel_type" msgid="8698327165935012484">"Ядро"</string>
+    <string name="mem_use_native_type" msgid="5976704902328347400">"Рідні процеси"</string>
+    <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"Кеші ядра"</string>
+    <string name="mem_use_zram_type" msgid="9087217476795358232">"Заміна модуля ZRam"</string>
+    <string name="mem_use_free_type" msgid="717708548454880840">"Безкоштовно"</string>
+    <string name="mem_use_total" msgid="6308786055749777934">"Усього"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 години"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 годин"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 годин"</string>
