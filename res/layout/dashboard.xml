@@ -19,6 +19,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarStyle="outsideOverlay"
+    android:paddingStart="@dimen/dashboard_side_margin"
+    android:paddingEnd="@dimen/dashboard_side_margin"
+    android:clipToPadding="false"
     android:background="@color/dashboard_background_color">
 
         <LinearLayout
