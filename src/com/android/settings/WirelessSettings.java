@@ -58,7 +58,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class WirelessSettings extends RestrictedSettingsFragment
+public class WirelessSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, Indexable {
     private static final String TAG = "WirelessSettings";
 
@@ -94,9 +94,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
     private AppListPreference mSmsApplicationPreference;
 
-    public WirelessSettings() {
-        super(null);
-    }
     /**
      * Invoked on each preference click in this hierarchy, overrides
      * PreferenceFragment's implementation.  Used to make sure we track the
@@ -104,9 +101,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (ensurePinRestrictedPreference(preference)) {
-            return true;
-        }
         log("onPreferenceTreeClick: preference=" + preference);
         if (preference == mAirplaneModePreference && Boolean.parseBoolean(
                 SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
@@ -282,7 +276,8 @@ public class WirelessSettings extends RestrictedSettingsFragment
         //enable/disable wimax depending on the value in config.xml
         final boolean isWimaxEnabled = !isSecondaryUser && this.getResources().getBoolean(
                 com.android.internal.R.bool.config_wimaxEnabled);
-        if (!isWimaxEnabled) {
+        if (!isWimaxEnabled
+                || mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
             PreferenceScreen root = getPreferenceScreen();
             Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
             if (ps != null) root.removePreference(ps);
@@ -293,7 +288,6 @@ public class WirelessSettings extends RestrictedSettingsFragment
                 ps.setDependency(KEY_TOGGLE_AIRPLANE);
             }
         }
-        protectByRestrictions(KEY_WIMAX_SETTINGS);
 
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
@@ -477,10 +471,12 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
                 result.add(KEY_TOGGLE_NSD);
 
+                final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
                 final boolean isSecondaryUser = UserHandle.myUserId() != UserHandle.USER_OWNER;
                 final boolean isWimaxEnabled = !isSecondaryUser && context.getResources().getBoolean(
                         com.android.internal.R.bool.config_wimaxEnabled);
-                if (!isWimaxEnabled) {
+                if (!isWimaxEnabled
+                        || um.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
                     result.add(KEY_WIMAX_SETTINGS);
                 }
 
