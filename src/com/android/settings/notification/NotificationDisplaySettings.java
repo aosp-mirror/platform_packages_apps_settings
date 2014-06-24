@@ -36,14 +36,12 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment {
 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
-    private static final String KEY_ZEN_MODE_NOTIFICATIONS = "zen_mode_notifications";
 
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
     private TwoStatePreference mNotificationPulse;
     private DropDownPreference mLockscreen;
-    private DropDownPreference mZenModeNotifications;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,6 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment {
         final PreferenceScreen root = getPreferenceScreen();
         initPulse(root);
         initLockscreenNotifications(root);
-        initZenModeNotifications(root);
     }
 
     @Override
@@ -148,32 +145,6 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment {
                 Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
-    // === Zen mode notifications ===
-
-    private void initZenModeNotifications(PreferenceScreen parent) {
-        mZenModeNotifications = (DropDownPreference)
-                parent.findPreference(KEY_ZEN_MODE_NOTIFICATIONS);
-        if (mZenModeNotifications == null) return;
-        mZenModeNotifications.addItem(R.string.zen_mode_notifications_summary_hide, 0);
-        mZenModeNotifications.addItem(R.string.zen_mode_notifications_summary_show, 1);
-        updateZenModeNotifications();
-        mZenModeNotifications.setCallback(new DropDownPreference.Callback() {
-            @Override
-            public boolean onItemSelected(int pos, Object value) {
-                final int val = (Integer) value;
-                Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.DISPLAY_INTERCEPTED_NOTIFICATIONS, val);
-                return true;
-            }
-        });
-    }
-
-    private void updateZenModeNotifications() {
-        if (mZenModeNotifications == null) return;
-        mZenModeNotifications.setSelectedValue(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.DISPLAY_INTERCEPTED_NOTIFICATIONS, 0));
-    }
-
     // === Callbacks ===
 
     private final class SettingsObserver extends ContentObserver {
@@ -183,8 +154,6 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment {
                 Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS);
         private final Uri LOCK_SCREEN_SHOW_URI =
                 Settings.Global.getUriFor(Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS);
-        private final Uri DISPLAY_INTERCEPTED_NOTIFICATIONS_URI =
-                Settings.Secure.getUriFor(Settings.Secure.DISPLAY_INTERCEPTED_NOTIFICATIONS);
 
         public SettingsObserver() {
             super(mHandler);
@@ -196,7 +165,6 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment {
                 cr.registerContentObserver(NOTIFICATION_LIGHT_PULSE_URI, false, this);
                 cr.registerContentObserver(LOCK_SCREEN_PRIVATE_URI, false, this);
                 cr.registerContentObserver(LOCK_SCREEN_SHOW_URI, false, this);
-                cr.registerContentObserver(DISPLAY_INTERCEPTED_NOTIFICATIONS_URI, false, this);
             } else {
                 cr.unregisterContentObserver(this);
             }
@@ -210,9 +178,6 @@ public class NotificationDisplaySettings extends SettingsPreferenceFragment {
             }
             if (LOCK_SCREEN_PRIVATE_URI.equals(uri) || LOCK_SCREEN_SHOW_URI.equals(uri)) {
                 updateLockscreenNotifications();
-            }
-            if (DISPLAY_INTERCEPTED_NOTIFICATIONS_URI.equals(uri)) {
-                updateZenModeNotifications();
             }
         }
     }
