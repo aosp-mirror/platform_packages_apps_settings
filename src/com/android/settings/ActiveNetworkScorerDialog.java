@@ -19,17 +19,15 @@ package com.android.settings;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppManager;
+import android.net.NetworkScorerAppManager.NetworkScorerAppData;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
-import com.android.settings.R;
 
 /**
  * Dialog to allow a user to select a new network scorer.
@@ -71,13 +69,14 @@ public final class ActiveNetworkScorerDialog extends AlertActivity implements
     }
 
     private boolean buildDialog() {
-        if (!NetworkScorerAppManager.isPackageValidScorer(this, mNewPackageName)) {
+        NetworkScorerAppData newScorer = NetworkScorerAppManager.getScorer(this, mNewPackageName);
+        if (newScorer == null) {
             Log.e(TAG, "New package " + mNewPackageName + " is not a valid scorer.");
             return false;
         }
 
-        String oldPackageName = NetworkScorerAppManager.getActiveScorer(this);
-        if (TextUtils.equals(oldPackageName, mNewPackageName)) {
+        NetworkScorerAppData oldScorer = NetworkScorerAppManager.getActiveScorer(this);
+        if (oldScorer != null && TextUtils.equals(oldScorer.mPackageName, mNewPackageName)) {
             Log.i(TAG, "New package " + mNewPackageName + " is already the active scorer.");
             // Set RESULT_OK to indicate to the caller that the "switch" was successful.
             setResult(RESULT_OK);
@@ -85,24 +84,12 @@ public final class ActiveNetworkScorerDialog extends AlertActivity implements
         }
 
         // Compose dialog.
-        PackageManager pm = getPackageManager();
-        CharSequence oldName = null;
-        CharSequence newName;
-        try {
-            if (oldPackageName != null) {
-                oldName = pm.getApplicationInfo(oldPackageName, 0).loadLabel(pm);
-            }
-            newName = pm.getApplicationInfo(mNewPackageName, 0).loadLabel(pm);
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "Unable to find package info for scorers", e);
-            return false;
-        }
-
+        CharSequence newName = newScorer.mScorerName;
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getString(R.string.network_scorer_change_active_dialog_title);
-        if (oldPackageName != null) {
+        if (oldScorer != null) {
             p.mMessage = getString(R.string.network_scorer_change_active_dialog_text, newName,
-                    oldName);
+                    oldScorer.mScorerName);
         } else {
             p.mMessage = getString(R.string.network_scorer_change_active_no_previous_dialog_text,
                     newName);
