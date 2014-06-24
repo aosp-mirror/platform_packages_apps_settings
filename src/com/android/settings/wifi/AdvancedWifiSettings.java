@@ -54,6 +54,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_INSTALL_CREDENTIALS = "install_credentials";
     private static final String KEY_WIFI_DIRECT = "wifi_direct";
     private static final String KEY_WPS_PUSH = "wps_push_button";
+    private static final String KEY_WPS_PIN = "wps_pin_entry";
     private static final String KEY_SUSPEND_OPTIMIZATIONS = "suspend_optimizations";
 
     private WifiManager mWifiManager;
@@ -142,6 +143,16 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         wpsPushPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 public boolean onPreferenceClick(Preference arg0) {
                     WpsDialog wpsDialog = new WpsDialog(getActivity(), WpsInfo.PBC);
+                    wpsDialog.show();
+                    return true;
+                }
+        });
+
+        // WpsDialog: Create the dialog like WifiSettings does.
+        Preference wpsPinPref = findPreference(KEY_WPS_PIN);
+        wpsPinPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+                public boolean onPreferenceClick(Preference arg0) {
+                    WpsDialog wpsDialog = new WpsDialog(getActivity(), WpsInfo.DISPLAY);
                     wpsDialog.show();
                     return true;
                 }
@@ -275,11 +286,13 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
         wifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress
                 : getActivity().getString(R.string.status_unavailable));
+        wifiMacAddressPref.setSelectable(false);
 
         Preference wifiIpAddressPref = findPreference(KEY_CURRENT_IP_ADDRESS);
         String ipAddress = Utils.getWifiIpAddresses(getActivity());
         wifiIpAddressPref.setSummary(ipAddress == null ?
                 getActivity().getString(R.string.status_unavailable) : ipAddress);
+        wifiIpAddressPref.setSelectable(false);
     }
 
 }

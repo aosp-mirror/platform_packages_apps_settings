@@ -205,6 +205,22 @@
                 android:resource="@id/wifi_settings" />
         </activity>
 
+        <activity android:name="Settings$SavedAccessPointsSettingsActivity"
+                android:taskAffinity="com.android.settings"
+                android:label="@string/wifi_saved_access_points_label"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:parentActivityName="Settings$WifiSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.WIFI_IF_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.SavedAccessPointsSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wifi_settings" />
+        </activity>
+
         <activity android:name=".wifi.WifiInfo"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
                 android:taskAffinity="com.android.settings"

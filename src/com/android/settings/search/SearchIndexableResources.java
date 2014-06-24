@@ -45,6 +45,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
+import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.Collection;
@@ -70,6 +71,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(AdvancedWifiSettings.class.getName()),
                         R.xml.wifi_advanced_settings,
                         AdvancedWifiSettings.class.getName(),
+                        R.drawable.ic_settings_wireless));
+
+        sResMap.put(SavedAccessPointsWifiSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(SavedAccessPointsWifiSettings.class.getName()),
+                        R.xml.wifi_display_saved_access_points,
+                        SavedAccessPointsWifiSettings.class.getName(),
                         R.drawable.ic_settings_wireless));
 
         sResMap.put(BluetoothSettings.class.getName(),

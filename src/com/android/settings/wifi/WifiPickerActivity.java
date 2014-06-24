@@ -39,6 +39,7 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
     protected boolean isValidFragment(String fragmentName) {
         if (WifiSettings.class.getName().equals(fragmentName)
                 || WifiP2pSettings.class.getName().equals(fragmentName)
+                || SavedAccessPointsWifiSettings.class.getName().equals(fragmentName)
                 || AdvancedWifiSettings.class.getName().equals(fragmentName)) return true;
         return false;
     }

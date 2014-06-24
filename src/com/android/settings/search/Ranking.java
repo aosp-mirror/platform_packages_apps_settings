@@ -42,6 +42,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
+import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.HashMap;
@@ -85,6 +86,7 @@ public final class Ranking {
         // Wi-Fi
         sRankMap.put(WifiSettings.class.getName(), RANK_WIFI);
         sRankMap.put(AdvancedWifiSettings.class.getName(), RANK_WIFI);
+        sRankMap.put(SavedAccessPointsWifiSettings.class.getName(), RANK_WIFI);
 
         // BT
         sRankMap.put(BluetoothSettings.class.getName(), RANK_BT);

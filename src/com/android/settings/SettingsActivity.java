@@ -107,6 +107,7 @@ import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.wifi.AdvancedWifiSettings;
+import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
@@ -234,6 +235,7 @@ public class SettingsActivity extends Activity
             WirelessSettings.class.getName(),
             WifiSettings.class.getName(),
             AdvancedWifiSettings.class.getName(),
+            SavedAccessPointsWifiSettings.class.getName(),
             BluetoothSettings.class.getName(),
             TetherSettings.class.getName(),
             WifiP2pSettings.class.getName(),

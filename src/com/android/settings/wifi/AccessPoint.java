@@ -32,6 +32,7 @@ import android.util.Log;
 import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Map;
 
@@ -59,7 +60,8 @@ class AccessPoint extends Preference {
      */
     public static final int HIGHER_FREQ_5GHZ = 5900;
 
-    /** Experimental: we should be able to show the user the list of BSSIDs and bands
+    /**
+     * Experimental: we should be able to show the user the list of BSSIDs and bands
      *  for that SSID.
      *  For now this data is used only with Verbose Logging so as to show the band and number
      *  of BSSIDs on which that network is seen.
@@ -79,7 +81,9 @@ class AccessPoint extends Preference {
 
     private static int[] wifi_signal_attributes = { R.attr.wifi_signal };
 
-    /** These values are matched in string arrays -- changes must be kept in sync */
+    /**
+     * These values are matched in string arrays -- changes must be kept in sync
+     */
     static final int SECURITY_NONE = 0;
     static final int SECURITY_WEP = 1;
     static final int SECURITY_PSK = 2;
@@ -97,6 +101,7 @@ class AccessPoint extends Preference {
     int security;
     int networkId = -1;
     boolean wpsAvailable = false;
+    boolean showSummary = true;
 
     PskType pskType = PskType.UNKNOWN;
 
@@ -246,6 +251,11 @@ class AccessPoint extends Preference {
     protected void onBindView(View view) {
         super.onBindView(view);
         updateIcon(getLevel(), getContext());
+
+        final TextView summaryView = (TextView) view.findViewById(
+                com.android.internal.R.id.summary);
+        summaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
+
         notifyChanged();
     }
 
@@ -396,7 +406,18 @@ class AccessPoint extends Preference {
         return "\"" + string + "\"";
     }
 
-    /** visibility status of the WifiConfiguration
+    /**
+     * Shows or Hides the Summary of an AccessPoint.
+     *
+     * @param showSummary true will show the summary, false will hide the summary
+     */
+    public void setShowSummary(boolean showSummary){
+        this.showSummary = showSummary;
+    }
+
+    /**
+     * Returns the visibility status of the WifiConfiguration.
+     *
      * @return autojoin debugging information
      * TODO: use a string formatter
      * ["rssi 5Ghz", "num results on 5GHz" / "rssi 5Ghz", "num results on 5GHz"]
@@ -489,7 +510,9 @@ class AccessPoint extends Preference {
         return visibility.toString();
     }
 
-    /** Updates the title and summary; may indirectly call notifyChanged()  */
+    /**
+     * Updates the title and summary; may indirectly call notifyChanged().
+     */
     private void refresh() {
         setTitle(ssid);
 

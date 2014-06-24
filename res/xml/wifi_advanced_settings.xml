@@ -68,20 +68,25 @@
             android:title="@string/wifi_menu_wps_pbc"
             android:persistent="false" />
 
+    <Preference
+            android:key="wps_pin_entry"
+            android:title="@string/wifi_menu_wps_pin"
+            android:persistent="false" />
+
     <CheckBoxPreference
             android:key="suspend_optimizations"
             android:title="@string/wifi_suspend_optimizations"
             android:summary="@string/wifi_suspend_optimizations_summary"
             android:persistent="false" />
-    
-    <Preference android:key="mac_address" 
-        style="?android:attr/preferenceInformationStyle" 
-        android:title="@string/wifi_advanced_mac_address_title"
-        />
-    
-    <Preference android:key="current_ip_address"
-        style="?android:attr/preferenceInformationStyle"
-        android:title="@string/wifi_advanced_ip_address_title"
-        />
+
+    <Preference
+            android:key="mac_address"
+            android:title="@string/wifi_advanced_mac_address_title"
+            android:layout="@layout/wifi_advance_layout" />
+
+    <Preference
+            android:key="current_ip_address"
+            android:title="@string/wifi_advanced_ip_address_title"
+            android:layout="@layout/wifi_advance_layout" />
 
 </PreferenceScreen>   
