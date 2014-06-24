@@ -136,14 +136,14 @@ public class ProcessStatsMemDetail extends Fragment {
         addMemUseDetailsItem(mMemUseParent,
                 getResources().getText(R.string.mem_use_kernel_type), mMemKernelWeight);
         addMemUseDetailsItem(mMemUseParent,
+                getResources().getText(R.string.mem_use_zram_type), mMemZRamWeight);
+        addMemUseDetailsItem(mMemUseParent,
                 getResources().getText(R.string.mem_use_native_type), mMemNativeWeight);
         for (int i=0; i<ProcessStats.STATE_COUNT; i++) {
             addMemUseDetailsItem(mMemUseParent, labels[i], mMemStateWeights[i]);
         }
         addMemUseDetailsItem(mMemUseParent,
                 getResources().getText(R.string.mem_use_kernel_cache_type), mMemCachedWeight);
-        addMemUseDetailsItem(mMemUseParent,
-                getResources().getText(R.string.mem_use_zram_type), mMemZRamWeight);
         addMemUseDetailsItem(mMemUseParent,
                 getResources().getText(R.string.mem_use_free_type), mMemFreeWeight);
         addMemUseDetailsItem(mMemUseParent,

@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TimeUtils;
@@ -38,6 +40,7 @@ import android.view.SubMenu;
 import com.android.internal.app.IProcessStats;
 import com.android.internal.app.ProcessMap;
 import com.android.internal.app.ProcessStats;
+import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.Utils;
@@ -481,8 +484,9 @@ public class ProcessStatsUi extends PreferenceFragment
                 ProcessStats.ALL_SCREEN_ADJ, memStates);
         mStats.computeTotalMemoryUse(totalMem, now);
         double freeWeight = totalMem.sysMemFreeWeight + totalMem.sysMemCachedWeight;
-        double usedWeight = totalMem.sysMemKernelWeight + totalMem.sysMemKernelWeight
+        double usedWeight = totalMem.sysMemKernelWeight + totalMem.sysMemNativeWeight
                 + totalMem.sysMemZRamWeight;
+        double backgroundWeight = 0, persBackgroundWeight = 0;
         mMemCachedWeight = totalMem.sysMemCachedWeight;
         mMemFreeWeight = totalMem.sysMemFreeWeight;
         mMemZRamWeight = totalMem.sysMemZRamWeight;
@@ -499,10 +503,66 @@ public class ProcessStatsUi extends PreferenceFragment
                 } else {
                     usedWeight += totalMem.processStateWeight[i];
                 }
+                if (i >= ProcessStats.STATE_IMPORTANT_FOREGROUND) {
+                    backgroundWeight += totalMem.processStateWeight[i];
+                    persBackgroundWeight += totalMem.processStateWeight[i];
+                }
+                if (i == ProcessStats.STATE_PERSISTENT) {
+                    persBackgroundWeight += totalMem.processStateWeight[i];
+                }
             }
         }
+        if (DEBUG) {
+            Log.i(TAG, "Used RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)((usedWeight * 1024) / memTotalTime)));
+            Log.i(TAG, "Free RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)((freeWeight * 1024) / memTotalTime)));
+            Log.i(TAG, "Total RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)(((freeWeight+usedWeight) * 1024) / memTotalTime)));
+            Log.i(TAG, "Background+Cached RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)((backgroundWeight * 1024) / memTotalTime)));
+        }
         mMemTotalWeight = freeWeight + usedWeight;
-        float usedRatio = (float)(usedWeight/(freeWeight+usedWeight));
+
+        // For computing the ratio to show, we want to count the baseline cached RAM we
+        // need (at which point we start killing processes) as used RAM, so that if we
+        // reach the point of thrashing due to no RAM for any background processes we
+        // report that as RAM being full.  To do this, we need to first convert the weights
+        // back to actual RAM...  and since the RAM values we compute here won't exactly
+        // match the real physical RAM, scale those to the actual physical RAM.  No problem!
+        double usedRam = (usedWeight*1024)/memTotalTime;
+        double freeRam = (freeWeight*1024)/memTotalTime;
+        double totalRam = usedRam + freeRam;
+        MemInfoReader memReader = new MemInfoReader();
+        memReader.readMemInfo();
+        double realTotalRam = memReader.getTotalSize();
+        double totalScale = realTotalRam / totalRam;
+        double realUsedRam = usedRam * totalScale;
+        double realFreeRam = freeRam * totalScale;
+        if (DEBUG) {
+            Log.i(TAG, "Scaled Used RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)realUsedRam));
+            Log.i(TAG, "Scaled Free RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)realFreeRam));
+        }
+        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
+        ((ActivityManager)getActivity().getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(
+                memInfo);
+        if (memInfo.hiddenAppThreshold >= realFreeRam) {
+            realUsedRam = realFreeRam;
+            realFreeRam = 0;
+        } else {
+            realUsedRam += memInfo.hiddenAppThreshold;
+            realFreeRam -= memInfo.hiddenAppThreshold;
+        }
+        if (DEBUG) {
+            Log.i(TAG, "Adj Scaled Used RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)realUsedRam));
+            Log.i(TAG, "Adj Scaled Free RAM: " + Formatter.formatShortFileSize(getActivity(),
+                    (long)realFreeRam));
+        }
+
+        float usedRatio = (float)(realUsedRam/(realFreeRam+realUsedRam));
         colors.setRatios(usedRatio, 0, 1-usedRatio);
 
         if (false) {
@@ -653,13 +713,24 @@ public class ProcessStatsUi extends PreferenceFragment
                 maxWeight = proc.mWeight;
             }
         }
-        mMaxWeight = maxWeight;
+        if (mStatsType == MENU_TYPE_BACKGROUND) {
+            mMaxWeight = (long)(mShowSystem ? persBackgroundWeight : backgroundWeight);
+            if (mMaxWeight < maxWeight) {
+                mMaxWeight = maxWeight;
+            }
+            if (DEBUG) {
+                Log.i(TAG, "Bar max RAM: " + Formatter.formatShortFileSize(getActivity(),
+                        (mMaxWeight * 1024) / memTotalTime));
+            }
+        } else {
+            mMaxWeight = maxWeight;
+        }
 
         if (DEBUG) Log.d(TAG, "-------------------- BUILDING UI");
 
         for (int i=0, N=(entries != null ? entries.size() : 0); i<N; i++) {
             ProcStatsEntry proc = entries.get(i);
-            final double percentOfWeight = (((double)proc.mWeight) / maxWeight) * 100;
+            final double percentOfWeight = (((double)proc.mWeight) / mMaxWeight) * 100;
             final double percentOfTime = (((double)proc.mDuration) / memTotalTime) * 100;
             if (percentOfWeight < 1 && percentOfTime < 33) {
                 if (DEBUG) Log.d(TAG, "Skipping " + proc.mName + " weight=" + percentOfWeight
@@ -678,6 +749,16 @@ public class ProcessStatsUi extends PreferenceFragment
             pref.setOrder(i);
             pref.setPercent(percentOfWeight, percentOfTime);
             mAppListGroup.addPreference(pref);
+            if (mStatsType == MENU_TYPE_BACKGROUND) {
+                if (DEBUG) {
+                    Log.i(TAG, "App " + proc.mUiLabel + ": weightedRam="
+                            + Formatter.formatShortFileSize(getActivity(),
+                                    (proc.mWeight * 1024) / memTotalTime)
+                            + ", avgRam=" + Formatter.formatShortFileSize(getActivity(),
+                                    (proc.mAvgPss*1024)));
+                }
+
+            }
             if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) {
                 if (DEBUG) Log.d(TAG, "Done with UI, hit item limit!");
                 break;
