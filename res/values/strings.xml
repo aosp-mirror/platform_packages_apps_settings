@@ -696,6 +696,8 @@
     <string name="lock_after_timeout">Automatically lock</string>
     <!-- Security settings screen, setting option summary to change screen timeout -->
     <string name="lock_after_timeout_summary"><xliff:g id="timeout_string">%1$s</xliff:g> after sleep</string>
+    <!-- Security settings screen, setting option summary to change screen timeout, with additional explanation-->
+    <string name="lock_after_timeout_summary_with_exception"><xliff:g id="timeout_string">%1$s</xliff:g> after sleep, except when kept unlocked by <xliff:g id="trust_agent_name">%2$s</xliff:g></string>
     <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
     <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
@@ -2578,6 +2580,8 @@
     <string name="lockpattern_settings_enable_tactile_feedback_title">Vibrate on touch</string>
     <!-- Security & location settings screen, setting check box title. This controls whether the device locks immediately when the power button is pressed. [CHAR LIMIT=28]-->
     <string name="lockpattern_settings_enable_power_button_instantly_locks">Power button instantly locks</string>
+    <!-- Security & location settings screen, setting optional summary when a trust agent is enabled-->
+    <string name="lockpattern_settings_power_button_instantly_locks_summary">Except when kept unlocked by <xliff:g id="trust_agent_name">%1$s</xliff:g></string>
     <!-- Security & location settings screen, setting option name when user has never set an unlock pattern -->
     <string name="lockpattern_settings_choose_lock_pattern">Set unlock pattern</string>
     <!-- Security & location settings screen, setting option name when user has previously set an unlock pattern and wants to change to a new pattern -->

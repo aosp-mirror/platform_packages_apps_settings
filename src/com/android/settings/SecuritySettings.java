@@ -115,6 +115,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private boolean mIsPrimary;
 
+    private Preference mClickedTrustAgentPreference;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,6 +209,41 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
+        // Trust Agent preferences
+        PreferenceGroup securityCategory = (PreferenceGroup)
+                root.findPreference(KEY_SECURITY_CATEGORY);
+        if (securityCategory != null) {
+            PackageManager pm = getPackageManager();
+            List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
+                    PackageManager.GET_META_DATA);
+            List<ComponentName> enabledTrustAgents = mLockPatternUtils.getEnabledTrustAgents();
+            if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
+                for (ResolveInfo resolveInfo : resolveInfos) {
+                    if (resolveInfo.serviceInfo == null) continue;
+                    if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
+                    TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
+                            TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
+                    if (trustAgentComponentInfo.componentName == null ||
+                            !enabledTrustAgents.contains(
+                                    TrustAgentUtils.getComponentName(resolveInfo)) ||
+                            TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
+                    Preference trustAgentPreference =
+                            new Preference(securityCategory.getContext());
+                    trustAgentPreference.setKey(KEY_TRUST_AGENT);
+                    trustAgentPreference.setTitle(trustAgentComponentInfo.title);
+                    trustAgentPreference.setSummary(trustAgentComponentInfo.summary);
+                    // Create intent for this preference.
+                    Intent intent = new Intent();
+                    intent.setComponent(trustAgentComponentInfo.componentName);
+                    intent.setAction(Intent.ACTION_MAIN);
+                    trustAgentPreference.setIntent(intent);
+                    // Add preference to the settings menu.
+                    securityCategory.addPreference(trustAgentPreference);
+                    break; // Only render the first one.
+                }
+            }
+        }
+
         // lock after preference
         mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
         if (mLockAfter != null) {
@@ -224,13 +261,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // lock instantly on power key press
         mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
                 KEY_POWER_INSTANTLY_LOCKS);
+        Preference trustAgentPreference = root.findPreference(KEY_TRUST_AGENT);
+        if (mPowerButtonInstantlyLocks != null &&
+                trustAgentPreference != null &&
+                trustAgentPreference.getTitle().length() > 0) {
+            mPowerButtonInstantlyLocks.setSummary(getString(
+                    R.string.lockpattern_settings_power_button_instantly_locks_summary,
+                    trustAgentPreference.getTitle()));
+        }
 
         // don't display visible pattern if biometric and backup is not pattern
         if (resid == R.xml.security_settings_biometric_weak &&
                 mLockPatternUtils.getKeyguardStoredPasswordQuality() !=
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-            PreferenceGroup securityCategory = (PreferenceGroup)
-                    root.findPreference(KEY_SECURITY_CATEGORY);
             if (securityCategory != null && mVisiblePattern != null) {
                 securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
             }
@@ -306,41 +349,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
         if (um.hasUserRestriction(UserManager.ENSURE_VERIFY_APPS)) {
             mToggleVerifyApps.setEnabled(false);
-        }
-
-        // Trust Agent preferences
-        PreferenceGroup securityCategory = (PreferenceGroup)
-                root.findPreference(KEY_SECURITY_CATEGORY);
-        if (securityCategory != null) {
-            PackageManager pm = getPackageManager();
-            List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
-                    PackageManager.GET_META_DATA);
-            List<ComponentName> enabledTrustAgents = mLockPatternUtils.getEnabledTrustAgents();
-            if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
-                for (ResolveInfo resolveInfo : resolveInfos) {
-                    if (resolveInfo.serviceInfo == null) continue;
-                    if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
-                    TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
-                            TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
-                    if (trustAgentComponentInfo.componentName == null ||
-                            !enabledTrustAgents.contains(
-                                    TrustAgentUtils.getComponentName(resolveInfo)) ||
-                            TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
-                    Preference trustAgentPreference =
-                            new Preference(securityCategory.getContext());
-                    trustAgentPreference.setKey(KEY_TRUST_AGENT);
-                    trustAgentPreference.setTitle(trustAgentComponentInfo.title);
-                    trustAgentPreference.setSummary(trustAgentComponentInfo.summary);
-                    // Create intent for this preference.
-                    Intent intent = new Intent();
-                    intent.setComponent(trustAgentComponentInfo.componentName);
-                    intent.setAction(Intent.ACTION_MAIN);
-                    trustAgentPreference.setIntent(intent);
-                    // Add preference to the settings menu.
-                    securityCategory.addPreference(trustAgentPreference);
-                    break; // Only render the first one.
-                }
-            }
         }
 
         return root;
@@ -439,7 +447,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 best = i;
             }
         }
-        mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
+
+        Preference preference = getPreferenceScreen().findPreference(KEY_TRUST_AGENT);
+        if (preference != null && preference.getTitle().length() > 0) {
+            mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary_with_exception,
+                    entries[best], preference.getTitle()));
+        } else {
+            mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
+        }
     }
 
     private void disableUnusableTimeouts(long maxTimeout) {
@@ -562,9 +577,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
-            if (!helper.launchConfirmationActivity(CHANGE_TRUST_AGENT_SETTINGS, null, null)) {
+            mClickedTrustAgentPreference = preference;
+            if (!helper.launchConfirmationActivity(CHANGE_TRUST_AGENT_SETTINGS, null, null) &&
+                preference.getIntent() != null) {
                 // If this returns false, it means no password confirmation is required.
                 startActivity(preference.getIntent());
+                mClickedTrustAgentPreference = null;
             }
         } else {
             // If we didn't handle it, let preferences handle it.
@@ -597,12 +615,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // because mBiometricWeakLiveliness could be null
             return;
         } else if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
-            Preference preference = getPreferenceScreen().findPreference(KEY_TRUST_AGENT);
-            if (preference != null) {
-                Intent intent = preference.getIntent();
+            if (mClickedTrustAgentPreference != null) {
+                Intent intent = mClickedTrustAgentPreference.getIntent();
                 if (intent != null) {
                     startActivity(intent);
                 }
+                mClickedTrustAgentPreference = null;
             }
         }
         createPreferenceHierarchy();
