@@ -751,7 +751,7 @@ public class SettingsActivity extends Activity
                 args = new Bundle();
             }
             args.putParcelable("intent", superIntent);
-            modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, superIntent.getExtras());
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
             return modIntent;
         }
         return superIntent;
