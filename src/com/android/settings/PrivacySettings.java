@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -43,6 +44,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
     private static final String CONFIGURE_ACCOUNT = "configure_account";
+    private static final String PERSONAL_DATA_CATEGORY = "personal_data_category";
     private IBackupManager mBackupManager;
     private CheckBoxPreference mBackup;
     private CheckBoxPreference mAutoRestore;
@@ -64,6 +66,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_DATA);
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
         mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
+
+        if (UserManager.get(getActivity()).hasUserRestriction(
+                UserManager.DISALLOW_FACTORY_RESET)) {
+            screen.removePreference(findPreference(PERSONAL_DATA_CATEGORY));
+        }
 
         // Vendor specific
         if (getActivity().getPackageManager().
