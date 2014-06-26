@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.os.BatterySipper;
 import com.android.settings.R;
 
 /**
