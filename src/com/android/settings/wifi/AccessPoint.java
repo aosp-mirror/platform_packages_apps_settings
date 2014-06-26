@@ -228,27 +228,28 @@ class AccessPoint extends Preference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
-        updateIcon(getLevel());
+        updateIcon(getLevel(), getContext());
         notifyChanged();
     }
 
-    protected void updateIcon(int level) {
+    protected void updateIcon(int level, Context context) {
         if (level == -1) {
             setIcon(null);
         } else {
             Drawable drawable = getIcon();
 
             if (drawable == null) {
-                drawable = getContext().getTheme().obtainStyledAttributes(
+                drawable = context.getTheme().obtainStyledAttributes(
                         wifi_signal_attributes).getDrawable(0);
                 setIcon(drawable);
             }
 
-            drawable.setLevel(level);
-            drawable.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
+            if (drawable != null) {
+                drawable.setLevel(level);
+                drawable.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
+            }
         }
     }
-
 
     @Override
     public int compareTo(Preference preference) {
@@ -474,11 +475,11 @@ class AccessPoint extends Preference {
     /** Updates the title and summary; may indirectly call notifyChanged()  */
     private void refresh() {
         setTitle(ssid);
-        updateIcon(getLevel());
+
+        final Context context = getContext();
+        updateIcon(getLevel(), context);
 
         StringBuilder summary = new StringBuilder();
-
-        Context context = getContext();
 
         if (mState != null) { // This is the active connection
             summary.append(Summary.get(context, mState));
