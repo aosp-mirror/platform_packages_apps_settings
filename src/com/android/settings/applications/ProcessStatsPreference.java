@@ -47,7 +47,7 @@ public class ProcessStatsPreference extends Preference {
     public ProcessStatsPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.app_percentage_item);
+        setLayoutResource(R.layout.preference_app_percentage);
     }
 
     public void init(Drawable icon, ProcStatsEntry entry) {

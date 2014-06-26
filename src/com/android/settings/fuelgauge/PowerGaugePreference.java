@@ -37,7 +37,7 @@ public class PowerGaugePreference extends Preference {
 
     public PowerGaugePreference(Context context, Drawable icon, BatteryEntry info) {
         super(context);
-        setLayoutResource(R.layout.app_percentage_item);
+        setLayoutResource(R.layout.preference_app_percentage);
         setIcon(icon != null ? icon : new ColorDrawable(0));
         mInfo = info;
     }
