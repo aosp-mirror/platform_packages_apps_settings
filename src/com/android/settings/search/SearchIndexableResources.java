@@ -65,7 +65,7 @@ public final class SearchIndexableResources {
                         WifiSettings.class.getName(),
                         R.drawable.ic_settings_wireless));
 
-        sResMap.put(WifiSettings.class.getName(),
+        sResMap.put(AdvancedWifiSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(AdvancedWifiSettings.class.getName()),
                         R.xml.wifi_advanced_settings,
