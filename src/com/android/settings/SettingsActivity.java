@@ -794,7 +794,7 @@ public class SettingsActivity extends Activity
      * preference panel is done.  The launched panel must use
      * {@link #finishPreferencePanel(Fragment, int, Intent)} when done.
      * @param resultRequestCode If resultTo is non-null, this is the caller's
-     * request code to be received with the resut.
+     * request code to be received with the result.
      */
     public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
             CharSequence titleText, Fragment resultTo, int resultRequestCode) {
@@ -822,6 +822,7 @@ public class SettingsActivity extends Activity
      */
     public void finishPreferencePanel(Fragment caller, int resultCode, Intent resultData) {
         setResult(resultCode, resultData);
+        finish();
     }
 
     /**
