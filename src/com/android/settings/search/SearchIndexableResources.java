@@ -25,6 +25,7 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
+import com.android.settings.LockToAppSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
 import com.android.settings.SecuritySettings;
@@ -197,6 +198,13 @@ public final class SearchIndexableResources {
                                 ChooseLockGeneric.ChooseLockGenericFragment.class.getName()),
                         R.xml.security_settings_picker,
                         ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
+                        R.drawable.ic_settings_security));
+
+        sResMap.put(LockToAppSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(LockToAppSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        LockToAppSettings.class.getName(),
                         R.drawable.ic_settings_security));
 
         sResMap.put(InputMethodAndLanguageSettings.class.getName(),
