@@ -16,14 +16,13 @@
 
 package com.android.settings.accounts;
 
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.OnAccountsUpdateListener;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -39,13 +38,17 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+
+import static android.content.Intent.EXTRA_USER;
 
 /**
  * Settings screen for the account types on the device.
  * This shows all account types available for personal and work profiles.
+ *
+ * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
+ * which the action needs to be performed is different to the one the Settings App will run in.
  */
 public class AccountSettings extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener,
@@ -146,7 +149,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         }
         final ProfileData profileData = new ProfileData();
         profileData.preferenceGroup = (PreferenceGroup) findPreference(categoryKey);
-        if (mUm.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+        if (mUm.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, userHandle)) {
             removePreference(addAccountKey);
         } else {
             profileData.addAccountPreference = findPreference(addAccountKey);
@@ -189,7 +192,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     private void updateAccountTypes(ProfileData profileData) {
         profileData.preferenceGroup.removeAll();
         final ArrayList<AccountPreference> preferences = getAccountTypePreferences(
-                profileData.authenticatorHelper);
+                profileData.authenticatorHelper, profileData.userHandle);
         final int count = preferences.size();
         for (int i = 0; i < count; i++) {
             profileData.preferenceGroup.addPreference(preferences.get(i));
@@ -199,7 +202,8 @@ public class AccountSettings extends SettingsPreferenceFragment
         }
     }
 
-    private ArrayList<AccountPreference> getAccountTypePreferences(AuthenticatorHelper helper) {
+    private ArrayList<AccountPreference> getAccountTypePreferences(AuthenticatorHelper helper,
+            UserHandle userHandle) {
         final String[] accountTypes = helper.getEnabledAccountTypes();
         final ArrayList<AccountPreference> accountTypePreferences =
                 new ArrayList<AccountPreference>(accountTypes.length);
@@ -212,7 +216,7 @@ public class AccountSettings extends SettingsPreferenceFragment
             }
 
             final Account[] accounts = AccountManager.get(getActivity())
-                    .getAccountsByType(accountType);
+                    .getAccountsByTypeAsUser(accountType, userHandle);
             final boolean skipToAccount = accounts.length == 1
                     && !helper.hasAccountPreferences(accountType);
 
@@ -220,6 +224,7 @@ public class AccountSettings extends SettingsPreferenceFragment
                 final Bundle fragmentArguments = new Bundle();
                 fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
                         accounts[0]);
+                fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
                 accountTypePreferences.add(new AccountPreference(getActivity(), label,
                         AccountSyncSettings.class.getName(), fragmentArguments,
@@ -229,6 +234,7 @@ public class AccountSettings extends SettingsPreferenceFragment
                 fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
                 fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
                         label.toString());
+                fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
                 accountTypePreferences.add(new AccountPreference(getActivity(), label,
                         ManageAccountsSettings.class.getName(), fragmentArguments,
@@ -254,7 +260,7 @@ public class AccountSettings extends SettingsPreferenceFragment
             ProfileData profileData = mProfiles.valueAt(i);
             if (preference == profileData.addAccountPreference) {
                 Intent intent = new Intent(ADD_ACCOUNT_ACTION);
-                intent.putExtra(Intent.EXTRA_USER_HANDLE, profileData.userHandle);
+                intent.putExtra(EXTRA_USER, profileData.userHandle);
                 startActivity(intent);
                 return true;
             }

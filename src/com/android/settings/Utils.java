@@ -16,7 +16,11 @@
 
 package com.android.settings;
 
+import static android.content.Intent.EXTRA_USER;
+
+import android.annotation.Nullable;
 import android.app.ActivityManager;
+import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -61,6 +65,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
+
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
 
@@ -73,6 +78,7 @@ import java.util.Locale;
 
 public final class Utils {
     private static final String TAG = "Settings";
+
     /**
      * Set the preference's title to the matching activity's label.
      */
@@ -109,6 +115,8 @@ public final class Utils {
      * to specify the summary text that should be displayed for the preference.
      */
     private static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
+
+    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -613,28 +621,100 @@ public final class Utils {
     }
 
     /**
-     * Returns the {@link UserHandle} of the profile that a settings screen should refer to.
+     * Returns the target user for a Settings activity.
      *
-     * <p> This takes into account the id of the user that triggered the settings screen.
+     * The target user can be either the current user, the user that launched this activity or
+     * the user contained as an extra in the arguments or intent extras.
+     *
+     * Note: This is secure in the sense that it only returns a target user different to the current
+     * one if the app launching this activity is the Settings app itself, running in the same user
+     * or in one that is in the same profile group, or if the user id is provided by the system.
      */
-   public static UserHandle getProfileToDisplay(IActivityManager am, IBinder activityToken,
-           Bundle arguments) {
-       int currentUser = UserHandle.getCallingUserId();
-       // Check to see if it was called from a different user
+    public static UserHandle getSecureTargetUser(IBinder activityToken,
+           UserManager um, @Nullable Bundle arguments, @Nullable Bundle intentExtras) {
+        UserHandle currentUser = new UserHandle(UserHandle.myUserId());
+        IActivityManager am = ActivityManagerNative.getDefault();
+        try {
+            String launchedFromPackage = am.getLaunchedFromPackage(activityToken);
+            boolean launchedFromSettingsApp = SETTINGS_PACKAGE_NAME.equals(launchedFromPackage);
+
+            UserHandle launchedFromUser = new UserHandle(UserHandle.getUserId(
+                    am.getLaunchedFromUid(activityToken)));
+            if (launchedFromUser != null && !launchedFromUser.equals(currentUser)) {
+                // Check it's secure
+                if (isProfileOf(um, launchedFromUser)) {
+                    return launchedFromUser;
+                }
+            }
+            UserHandle extrasUser = intentExtras != null
+                    ? (UserHandle) intentExtras.getParcelable(EXTRA_USER) : null;
+            if (extrasUser != null && !extrasUser.equals(currentUser)) {
+                // Check it's secure
+                if (launchedFromSettingsApp && isProfileOf(um, extrasUser)) {
+                    return extrasUser;
+                }
+            }
+            UserHandle argumentsUser = arguments != null
+                    ? (UserHandle) arguments.getParcelable(EXTRA_USER) : null;
+            if (argumentsUser != null && !argumentsUser.equals(currentUser)) {
+                // Check it's secure
+                if (launchedFromSettingsApp && isProfileOf(um, argumentsUser)) {
+                    return argumentsUser;
+                }
+            }
+        } catch (RemoteException e) {
+            // Should not happen
+            Log.v(TAG, "Could not talk to activity manager.", e);
+        }
+        return currentUser;
+   }
+
+    /**
+     * Returns the target user for a Settings activity.
+     *
+     * The target user can be either the current user, the user that launched this activity or
+     * the user contained as an extra in the arguments or intent extras.
+     *
+     * You should use {@link #getSecureTargetUser(IBinder, UserManager, Bundle, Bundle)} if
+     * possible.
+     *
+     * @see #getInsecureTargetUser(IBinder, Bundle, Bundle)
+     */
+   public static UserHandle getInsecureTargetUser(IBinder activityToken, @Nullable Bundle arguments,
+           @Nullable Bundle intentExtras) {
+       UserHandle currentUser = new UserHandle(UserHandle.myUserId());
+       IActivityManager am = ActivityManagerNative.getDefault();
        try {
-           int launchedFromUser = UserHandle.getUserId(am.getLaunchedFromUid(activityToken));
-           if (launchedFromUser != currentUser) {
-               // This is a forwarded intent
-               return new UserHandle(launchedFromUser);
+           UserHandle launchedFromUser = new UserHandle(UserHandle.getUserId(
+                   am.getLaunchedFromUid(activityToken)));
+           if (launchedFromUser != null && !launchedFromUser.equals(currentUser)) {
+               return launchedFromUser;
+           }
+           UserHandle extrasUser = intentExtras != null
+                   ? (UserHandle) intentExtras.getParcelable(EXTRA_USER) : null;
+           if (extrasUser != null && !extrasUser.equals(currentUser)) {
+               return extrasUser;
+           }
+           UserHandle argumentsUser = arguments != null
+                   ? (UserHandle) arguments.getParcelable(EXTRA_USER) : null;
+           if (argumentsUser != null && !argumentsUser.equals(currentUser)) {
+               return argumentsUser;
            }
        } catch (RemoteException e) {
            // Should not happen
-           Log.v(TAG, "Could not get launching user.");
+           Log.v(TAG, "Could not talk to activity manager.", e);
+           return null;
        }
-       // TODO: Check fragment arguments. See: http://b/15466880
+       return currentUser;
+   }
 
-       // Default to current profile
-       return new UserHandle(currentUser);
+   /**
+    * Returns true if the user provided is in the same profiles group as the current user.
+    */
+   private static boolean isProfileOf(UserManager um, UserHandle otherUser) {
+       if (um == null || otherUser == null) return false;
+       return (UserHandle.myUserId() == otherUser.getIdentifier())
+               || um.getUserProfiles().contains(otherUser);
    }
 
     /**

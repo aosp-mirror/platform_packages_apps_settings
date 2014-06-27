@@ -22,22 +22,25 @@ import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
+import android.app.ActivityManagerNative;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.Utils;
 
 import java.io.IOException;
 
+import static android.content.Intent.EXTRA_USER;
+
 /**
- * Entry point Actiivty for account setup. Works as follows
+ * Entry point Activity for account setup. Works as follows
  *
  * 1) When the other Activities launch this Activity, it launches {@link ChooseAccountActivity}
  *    without showing anything.
@@ -50,6 +53,9 @@ import java.io.IOException;
  * currently delegate the work to the other Activity. When we let this Activity do that work, users
  * would see the list of account types when leaving this Activity, since the UI is already ready
  * when returning from each account setup, which doesn't look good.
+ *
+ * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
+ * which the action needs to be performed is different to the one the Settings App will run in.
  */
 public class AddAccountSettings extends Activity {
     /**
@@ -90,6 +96,7 @@ public class AddAccountSettings extends Activity {
                     addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
                     addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS,
                             Utils.hasMultipleUsers(AddAccountSettings.this));
+                    addAccountOptions.putParcelable(EXTRA_USER, mUserHandle);
                     intent.putExtras(addAccountOptions);
                     startActivityForResult(intent, ADD_ACCOUNT_REQUEST);
                 } else {
@@ -116,6 +123,7 @@ public class AddAccountSettings extends Activity {
     };
 
     private boolean mAddAccountCalled = false;
+    private UserHandle mUserHandle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,7 +135,9 @@ public class AddAccountSettings extends Activity {
         }
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+        mUserHandle = Utils.getSecureTargetUser(getActivityToken(), um, null /* arguments */,
+                getIntent().getExtras());
+        if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle)) {
             // We aren't allowed to add an account.
             Toast.makeText(this, R.string.user_cannot_add_accounts_message, Toast.LENGTH_LONG)
                     .show();
@@ -150,6 +160,7 @@ public class AddAccountSettings extends Activity {
         if (accountTypes != null) {
             intent.putExtra(AccountPreferenceBase.ACCOUNT_TYPES_FILTER_KEY, accountTypes);
         }
+        intent.putExtra(EXTRA_USER, mUserHandle);
         startActivityForResult(intent, CHOOSE_ACCOUNT_REQUEST);
     }
 
@@ -188,6 +199,14 @@ public class AddAccountSettings extends Activity {
         mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(), 0);
         addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
         addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS, Utils.hasMultipleUsers(this));
+        // TODO: We need an API to add an account to a different user. See: http://b/15466880
+        int userId = mUserHandle.getIdentifier();
+        int callingUserId = UserHandle.getCallingUserId();
+        if (userId != callingUserId) {
+            Log.w(TAG, "Cannot add an account for user " + userId + " from " + callingUserId + ".");
+            finish();
+            return;
+        }
         AccountManager.get(this).addAccount(
                 accountType,
                 null, /* authTokenType */
