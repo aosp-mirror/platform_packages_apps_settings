@@ -19,11 +19,9 @@ package com.android.settings.widget;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
@@ -73,6 +71,9 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         mTextView.setText(R.string.switch_off_text);
 
         mSwitch = (ToggleSwitch) findViewById(R.id.switch_widget);
+        // Prevent onSaveInstanceState() to be called as we are managing the state of the Switch
+        // on our own
+        mSwitch.setSaveEnabled(false);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
@@ -134,7 +135,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     @Override
     public void onClick(View v) {
         final boolean isChecked = !mSwitch.isChecked();
-        mSwitch.setChecked(isChecked);
+        setChecked(isChecked);
     }
 
     public void propagateChecked(boolean isChecked) {
@@ -222,9 +223,12 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         SavedState ss = (SavedState) state;
 
         super.onRestoreInstanceState(ss.getSuperState());
-        mSwitch.setChecked(ss.checked);
+
+        mSwitch.setCheckedInternal(ss.checked);
         setTextViewLabel(ss.checked);
         setVisibility(ss.visible ? View.VISIBLE : View.GONE);
+        mSwitch.setOnCheckedChangeListener(ss.visible ? this : null);
+
         requestLayout();
     }
 }
