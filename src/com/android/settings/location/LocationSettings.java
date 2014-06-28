@@ -227,7 +227,9 @@ public class LocationSettings extends LocationSettingsBase
         // corner cases, the location might still be enabled. In such case the master switch should
         // be disabled but checked.
         boolean enabled = (mode != android.provider.Settings.Secure.LOCATION_MODE_OFF);
-        mSwitch.setEnabled(!restricted);
+        // Disable the whole switch bar instead of the switch itself. If we disabled the switch
+        // only, it would be re-enabled again if the switch bar is not disabled.
+        mSwitchBar.setEnabled(!restricted);
         mLocationMode.setEnabled(enabled && !restricted);
         mCategoryRecentLocationRequests.setEnabled(enabled);
 
