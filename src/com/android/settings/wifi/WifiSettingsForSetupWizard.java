@@ -34,8 +34,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.TextView;
 
 import com.android.settings.R;
 
@@ -88,7 +90,16 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.setup_preference, container, false);
-        final View other = view.findViewById(R.id.other_network);
+
+        final ListView list = (ListView) view.findViewById(android.R.id.list);
+        final View title = view.findViewById(R.id.title);
+        if (title == null) {
+            final View header = inflater.inflate(R.layout.setup_wizard_header, list, false);
+            list.addHeaderView(header);
+        }
+
+        final View other = inflater.inflate(R.layout.setup_wifi_add_network, list, false);
+        list.addFooterView(other, null, true);
         other.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,29 +108,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 }
             }
         });
-        final ImageButton b = (ImageButton) view.findViewById(R.id.more);
-        if (b != null) {
-            b.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mWifiManager.isWifiEnabled()) {
-                        PopupMenu pm = new PopupMenu(inflater.getContext(), b);
-                        pm.inflate(R.menu.wifi_setup);
-                        pm.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                if (R.id.wifi_wps == item.getItemId()) {
-                                    showDialog(WPS_PBC_DIALOG_ID);
-                                    return true;
-                                }
-                                return false;
-                            }
-                        });
-                        pm.show();
-                    }
-                }
-            });
-        }
 
         final Intent intent = getActivity().getIntent();
         if (intent.getBooleanExtra(EXTRA_SHOW_WIFI_REQUIRED_INFO, false)) {
@@ -206,5 +194,4 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         ta.recycle();
     }
-
 }
