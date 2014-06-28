@@ -153,7 +153,7 @@ public abstract class ToggleFeaturePreferenceFragment
         // Enabled.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
             final boolean enabled = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-            mToggleSwitch.setCheckedInternal(enabled);
+            mSwitchBar.setCheckedInternal(enabled);
         }
 
         // Title.

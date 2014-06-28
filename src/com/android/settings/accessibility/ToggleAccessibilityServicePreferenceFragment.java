@@ -58,7 +58,7 @@ public class ToggleAccessibilityServicePreferenceFragment
                     String settingValue = Settings.Secure.getString(getContentResolver(),
                             Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
                     final boolean enabled = settingValue.contains(mComponentName.flattenToString());
-                    mToggleSwitch.setCheckedInternal(enabled);
+                    mSwitchBar.setCheckedInternal(enabled);
                 }
             };
 
@@ -263,13 +263,13 @@ public class ToggleAccessibilityServicePreferenceFragment
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
                 checked = (mShownDialogId == DIALOG_ID_ENABLE_WARNING);
-                mToggleSwitch.setCheckedInternal(checked);
+                mSwitchBar.setCheckedInternal(checked);
                 getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, checked);
                 onPreferenceToggled(mPreferenceKey, checked);
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
                 checked = (mShownDialogId == DIALOG_ID_DISABLE_WARNING);
-                mToggleSwitch.setCheckedInternal(checked);
+                mSwitchBar.setCheckedInternal(checked);
                 getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, checked);
                 onPreferenceToggled(mPreferenceKey, checked);
                 break;
@@ -285,11 +285,11 @@ public class ToggleAccessibilityServicePreferenceFragment
                 @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
                 if (checked) {
-                    toggleSwitch.setCheckedInternal(false);
+                    mSwitchBar.setCheckedInternal(false);
                     getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
                     showDialog(DIALOG_ID_ENABLE_WARNING);
                 } else {
-                    toggleSwitch.setCheckedInternal(true);
+                    mSwitchBar.setCheckedInternal(true);
                     getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, true);
                     showDialog(DIALOG_ID_DISABLE_WARNING);
                 }

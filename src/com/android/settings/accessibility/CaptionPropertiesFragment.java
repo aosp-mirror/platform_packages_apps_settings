@@ -151,9 +151,8 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         final boolean enabled = mCaptioningManager.isEnabled();
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.setTextViewLabel(enabled);
+        mSwitchBar.setCheckedInternal(enabled);
         mToggleSwitch = mSwitchBar.getSwitch();
-        mToggleSwitch.setCheckedInternal(enabled);
 
         getPreferenceScreen().setEnabled(enabled);
 
@@ -228,7 +227,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
             @Override
             public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
-                toggleSwitch.setCheckedInternal(checked);
+                mSwitchBar.setCheckedInternal(checked);
                 Settings.Secure.putInt(getActivity().getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, checked ? 1 : 0);
                 getPreferenceScreen().setEnabled(checked);
