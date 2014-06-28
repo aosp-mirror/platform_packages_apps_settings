@@ -273,9 +273,10 @@
     <item msgid="5762123934816216821">"የማንቂያ ድምፅ መጠን"</item>
     <item msgid="785049718065337473">"የማሳወቂያ ድምጽ መጠን"</item>
     <item msgid="6700305533746877052">"የብሉቱዝ ድምፅ መጠን"</item>
-    <item msgid="2029227495214047094">"እንደነቃ አቆይ"</item>
-    <item msgid="26109888160231211">"አካባቢን ይቆጣጠሩ"</item>
-    <item msgid="5753382310468855812">"የከፍተኛ ኃይል አካባቢ ተከታተል"</item>
+    <item msgid="3810969981743709839">"የማይክሮፎን ድምጽ ዝጋ/አትዝጋ"</item>
+    <item msgid="2627903914574908209">"እንደነቃ አቆይ"</item>
+    <item msgid="1395372654968157578">"አካባቢን ተቆጣጠር"</item>
+    <item msgid="3238451051299611853">"የከፍተኛ ኃይል አካባቢ ተከታተል"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"አካባቢ"</item>
@@ -318,9 +319,10 @@
     <item msgid="7260546305036218513">"የማንቂያ ድምፅ መጠን"</item>
     <item msgid="9103719301075748925">"የማሳወቂያ ድምጽ መጠን"</item>
     <item msgid="7025966722295861512">"የብሉቱዝ ድምፅ መጠን"</item>
-    <item msgid="4665183401128289653">"እንደነቃ አቆይ"</item>
-    <item msgid="8584357129746649222">"አካባቢ"</item>
+    <item msgid="2265317984004577529">"የማይክሮፎን ድምጽ ዝጋ/አትዝጋ"</item>
+    <item msgid="3646325683886507917">"እንደነቃ አቆይ"</item>
     <item msgid="7669257279311110599">"አካባቢ"</item>
+    <item msgid="7745724368696313169">"አካባቢ"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"አጭር"</item>
@@ -365,16 +367,6 @@
     <item msgid="1495307195241623402">"ቢጫ በጥቁር ላይ"</item>
     <item msgid="6039700130994371612">"ቢጫ በሰማያዊ ላይ"</item>
     <item msgid="7169235156349580064">"ብጁ"</item>
-  </string-array>
-  <string-array name="select_runtime_titles">
-    <item msgid="3574453009229338122">"Dalvik"</item>
-    <item msgid="8978402910750533864">"ART"</item>
-    <item msgid="7839859333977894115">"ART (ስህተት አርም)"</item>
-  </string-array>
-  <string-array name="select_runtime_summaries">
-    <item msgid="6412880178297884701">"Dalvik ይጠቀሙ"</item>
-    <item msgid="5131846588686178907">"ART ይጠቀሙ"</item>
-    <item msgid="4530003713865319928">"ART ስህተት የማረም ግንባታ ይጠቀሙ"</item>
   </string-array>
   <string-array name="select_logd_size_titles">
     <item msgid="3100534874529240291">"64 ኪባ"</item>
@@ -498,22 +490,26 @@
     <item msgid="5656544177755411222">"የተገደቡ ማቋረጦች"</item>
     <item msgid="8735337502532332056">"ዜሮ ማቋረጦች"</item>
   </string-array>
-    <!-- no translation found for proc_stats_memory_states:0 (8845855295876909468) -->
-    <!-- no translation found for proc_stats_memory_states:1 (866544120205026771) -->
-    <!-- no translation found for proc_stats_memory_states:2 (7851902244436886890) -->
-    <!-- no translation found for proc_stats_memory_states:3 (3022922196817563960) -->
-    <!-- no translation found for proc_stats_process_states:0 (5069825997142785829) -->
-    <!-- no translation found for proc_stats_process_states:1 (5779398140277006695) -->
-    <!-- no translation found for proc_stats_process_states:2 (1439598363694578255) -->
-    <!-- no translation found for proc_stats_process_states:3 (3396458970745718652) -->
-    <!-- no translation found for proc_stats_process_states:4 (5214825238247511992) -->
-    <!-- no translation found for proc_stats_process_states:5 (311372689168254967) -->
-    <!-- no translation found for proc_stats_process_states:6 (7438189122367820362) -->
-    <!-- no translation found for proc_stats_process_states:7 (918687422516982498) -->
-    <!-- no translation found for proc_stats_process_states:8 (6807727069641853029) -->
-    <!-- no translation found for proc_stats_process_states:9 (6782857406100845127) -->
-    <!-- no translation found for proc_stats_process_states:10 (2860945127596974299) -->
-    <!-- no translation found for proc_stats_process_states:11 (8610560843693675830) -->
-    <!-- no translation found for proc_stats_process_states:12 (4338089220026248848) -->
-    <!-- no translation found for proc_stats_process_states:13 (6652164677254579050) -->
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"መደበኛ"</item>
+    <item msgid="866544120205026771">"መጠነኛ"</item>
+    <item msgid="7851902244436886890">"ዝቅ ያለ"</item>
+    <item msgid="3022922196817563960">"አሳሳቢ"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"የሚጸና"</item>
+    <item msgid="5779398140277006695">"ከፍተኛ እንቅስቃሴ"</item>
+    <item msgid="1439598363694578255">"አስፈላጊ (ከፊት)"</item>
+    <item msgid="3396458970745718652">"አስፈላጊ (ከጀርባ)"</item>
+    <item msgid="5214825238247511992">"ምትኬ ስራ"</item>
+    <item msgid="311372689168254967">"ከባድ ስራ"</item>
+    <item msgid="7438189122367820362">"አገልግሎት (እያሄዱ ያለ)"</item>
+    <item msgid="918687422516982498">"አገልግሎት (ዳግም በማስጀመር ላይ)"</item>
+    <item msgid="6807727069641853029">"ተቀባይ"</item>
+    <item msgid="6782857406100845127">"መነሻ"</item>
+    <item msgid="2860945127596974299">"የመጨረሻ እንቅስቃሴ"</item>
+    <item msgid="8610560843693675830">"የተሸጎጠ (እንቅስቃሴ)"</item>
+    <item msgid="4338089220026248848">"የተሸጎጠ (የእንቅስቃሴ ደንበኛ)"</item>
+    <item msgid="6652164677254579050">"የተሸጎጠ (ባዶ)"</item>
+  </string-array>
 </resources>

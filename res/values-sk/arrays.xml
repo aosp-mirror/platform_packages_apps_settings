@@ -273,9 +273,10 @@
     <item msgid="5762123934816216821">"hlasitosť budíka"</item>
     <item msgid="785049718065337473">"hlasitosť upozornení"</item>
     <item msgid="6700305533746877052">"hlasitosť bluetooth"</item>
-    <item msgid="2029227495214047094">"zakázať režim spánku"</item>
-    <item msgid="26109888160231211">"sledovať polohu"</item>
-    <item msgid="5753382310468855812">"sledovanie polohy s vysokým výkonnom"</item>
+    <item msgid="3810969981743709839">"stlmenie alebo zrušenie stlmenia mikrofónu"</item>
+    <item msgid="2627903914574908209">"zakázanie režimu spánku"</item>
+    <item msgid="1395372654968157578">"sledovanie polohy"</item>
+    <item msgid="3238451051299611853">"sledovanie polohy s vysokým výkonnom"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Poloha"</item>
@@ -318,9 +319,10 @@
     <item msgid="7260546305036218513">"Hlasitosť budíka"</item>
     <item msgid="9103719301075748925">"Hlasitosť upozornení"</item>
     <item msgid="7025966722295861512">"Hlasitosť zariadenia Bluetooth"</item>
-    <item msgid="4665183401128289653">"Zakázať režim spánku"</item>
-    <item msgid="8584357129746649222">"Poloha"</item>
+    <item msgid="2265317984004577529">"Stlmenie alebo zrušenie stlmenia mikrofónu"</item>
+    <item msgid="3646325683886507917">"Zakázanie režimu spánku"</item>
     <item msgid="7669257279311110599">"Poloha"</item>
+    <item msgid="7745724368696313169">"Poloha"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Krátka"</item>
@@ -365,16 +367,6 @@
     <item msgid="1495307195241623402">"Žlté na čiernom"</item>
     <item msgid="6039700130994371612">"Žlté na modrom"</item>
     <item msgid="7169235156349580064">"Vlastné"</item>
-  </string-array>
-  <string-array name="select_runtime_titles">
-    <item msgid="3574453009229338122">"Dalvik"</item>
-    <item msgid="8978402910750533864">"ART"</item>
-    <item msgid="7839859333977894115">"ART (ladenie)"</item>
-  </string-array>
-  <string-array name="select_runtime_summaries">
-    <item msgid="6412880178297884701">"Použiť nástroj Dalvik"</item>
-    <item msgid="5131846588686178907">"Použiť nástroj ART"</item>
-    <item msgid="4530003713865319928">"Použiť zostavu na ladenie programu ART"</item>
   </string-array>
   <string-array name="select_logd_size_titles">
     <item msgid="3100534874529240291">"64 kB"</item>
@@ -498,22 +490,26 @@
     <item msgid="5656544177755411222">"Obmedzený počet prerušení"</item>
     <item msgid="8735337502532332056">"Žiadne prerušenia"</item>
   </string-array>
-    <!-- no translation found for proc_stats_memory_states:0 (8845855295876909468) -->
-    <!-- no translation found for proc_stats_memory_states:1 (866544120205026771) -->
-    <!-- no translation found for proc_stats_memory_states:2 (7851902244436886890) -->
-    <!-- no translation found for proc_stats_memory_states:3 (3022922196817563960) -->
-    <!-- no translation found for proc_stats_process_states:0 (5069825997142785829) -->
-    <!-- no translation found for proc_stats_process_states:1 (5779398140277006695) -->
-    <!-- no translation found for proc_stats_process_states:2 (1439598363694578255) -->
-    <!-- no translation found for proc_stats_process_states:3 (3396458970745718652) -->
-    <!-- no translation found for proc_stats_process_states:4 (5214825238247511992) -->
-    <!-- no translation found for proc_stats_process_states:5 (311372689168254967) -->
-    <!-- no translation found for proc_stats_process_states:6 (7438189122367820362) -->
-    <!-- no translation found for proc_stats_process_states:7 (918687422516982498) -->
-    <!-- no translation found for proc_stats_process_states:8 (6807727069641853029) -->
-    <!-- no translation found for proc_stats_process_states:9 (6782857406100845127) -->
-    <!-- no translation found for proc_stats_process_states:10 (2860945127596974299) -->
-    <!-- no translation found for proc_stats_process_states:11 (8610560843693675830) -->
-    <!-- no translation found for proc_stats_process_states:12 (4338089220026248848) -->
-    <!-- no translation found for proc_stats_process_states:13 (6652164677254579050) -->
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"Normálny"</item>
+    <item msgid="866544120205026771">"Stredný"</item>
+    <item msgid="7851902244436886890">"Nízky"</item>
+    <item msgid="3022922196817563960">"Kritický"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"Pretrvávajúci"</item>
+    <item msgid="5779398140277006695">"Najčastejšia aktivita"</item>
+    <item msgid="1439598363694578255">"Dôležitý (v popredí)"</item>
+    <item msgid="3396458970745718652">"Dôležitý (v pozadí)"</item>
+    <item msgid="5214825238247511992">"Záloha"</item>
+    <item msgid="311372689168254967">"Vysoké vyťaženie"</item>
+    <item msgid="7438189122367820362">"Služba (spustená)"</item>
+    <item msgid="918687422516982498">"Služba (reštartuje sa)"</item>
+    <item msgid="6807727069641853029">"Prijímač"</item>
+    <item msgid="6782857406100845127">"Plocha"</item>
+    <item msgid="2860945127596974299">"Posledná aktivita"</item>
+    <item msgid="8610560843693675830">"Vo vyrovnávacej pamäti (aktivita)"</item>
+    <item msgid="4338089220026248848">"Vo vyrovnávacej pamäti (klient aktivity)"</item>
+    <item msgid="6652164677254579050">"Vo vyrovnávacej pamäti (prázdne)"</item>
+  </string-array>
 </resources>

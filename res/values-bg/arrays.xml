@@ -273,9 +273,10 @@
     <item msgid="5762123934816216821">"сила на звука на будилника"</item>
     <item msgid="785049718065337473">"сила на звука за известия"</item>
     <item msgid="6700305533746877052">"сила на звука за Bluetooth"</item>
-    <item msgid="2029227495214047094">"оставяне в будно състояние"</item>
-    <item msgid="26109888160231211">"наблюдение на местоположението"</item>
-    <item msgid="5753382310468855812">"наблюдение на заявките за местоположение, изразходващи много енергия"</item>
+    <item msgid="3810969981743709839">"заглушаване/включване на микрофона"</item>
+    <item msgid="2627903914574908209">"оставяне в будно състояние"</item>
+    <item msgid="1395372654968157578">"наблюдение на местоположението"</item>
+    <item msgid="3238451051299611853">"наблюдение на заявките за местоположение, изразходващи много енергия"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Местоположение"</item>
@@ -318,9 +319,10 @@
     <item msgid="7260546305036218513">"Сила на звука на будилника"</item>
     <item msgid="9103719301075748925">"Сила на звука при известие"</item>
     <item msgid="7025966722295861512">"Сила на звука за Bluetooth"</item>
-    <item msgid="4665183401128289653">"Оставяне в будно състояние"</item>
-    <item msgid="8584357129746649222">"Местоположение"</item>
+    <item msgid="2265317984004577529">"Заглушаване/включване на микрофона"</item>
+    <item msgid="3646325683886507917">"Оставяне в будно състояние"</item>
     <item msgid="7669257279311110599">"Местоположение"</item>
+    <item msgid="7745724368696313169">"Местоположение"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Кратко"</item>
@@ -365,16 +367,6 @@
     <item msgid="1495307195241623402">"Жълто върху черно"</item>
     <item msgid="6039700130994371612">"Жълто върху синьо"</item>
     <item msgid="7169235156349580064">"Персонализирано"</item>
-  </string-array>
-  <string-array name="select_runtime_titles">
-    <item msgid="3574453009229338122">"Dalvik"</item>
-    <item msgid="8978402910750533864">"ART"</item>
-    <item msgid="7839859333977894115">"ART (отстраняване на грешки)"</item>
-  </string-array>
-  <string-array name="select_runtime_summaries">
-    <item msgid="6412880178297884701">"Използване на Dalvik"</item>
-    <item msgid="5131846588686178907">"Използване на ART"</item>
-    <item msgid="4530003713865319928">"Използване на версията на ART за отстраняване на грешки"</item>
   </string-array>
   <string-array name="select_logd_size_titles">
     <item msgid="3100534874529240291">"64 КБ"</item>
@@ -498,22 +490,26 @@
     <item msgid="5656544177755411222">"Ограничени прекъсвания"</item>
     <item msgid="8735337502532332056">"Нула прекъсвания"</item>
   </string-array>
-    <!-- no translation found for proc_stats_memory_states:0 (8845855295876909468) -->
-    <!-- no translation found for proc_stats_memory_states:1 (866544120205026771) -->
-    <!-- no translation found for proc_stats_memory_states:2 (7851902244436886890) -->
-    <!-- no translation found for proc_stats_memory_states:3 (3022922196817563960) -->
-    <!-- no translation found for proc_stats_process_states:0 (5069825997142785829) -->
-    <!-- no translation found for proc_stats_process_states:1 (5779398140277006695) -->
-    <!-- no translation found for proc_stats_process_states:2 (1439598363694578255) -->
-    <!-- no translation found for proc_stats_process_states:3 (3396458970745718652) -->
-    <!-- no translation found for proc_stats_process_states:4 (5214825238247511992) -->
-    <!-- no translation found for proc_stats_process_states:5 (311372689168254967) -->
-    <!-- no translation found for proc_stats_process_states:6 (7438189122367820362) -->
-    <!-- no translation found for proc_stats_process_states:7 (918687422516982498) -->
-    <!-- no translation found for proc_stats_process_states:8 (6807727069641853029) -->
-    <!-- no translation found for proc_stats_process_states:9 (6782857406100845127) -->
-    <!-- no translation found for proc_stats_process_states:10 (2860945127596974299) -->
-    <!-- no translation found for proc_stats_process_states:11 (8610560843693675830) -->
-    <!-- no translation found for proc_stats_process_states:12 (4338089220026248848) -->
-    <!-- no translation found for proc_stats_process_states:13 (6652164677254579050) -->
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"Нормално"</item>
+    <item msgid="866544120205026771">"Средно"</item>
+    <item msgid="7851902244436886890">"Лошо"</item>
+    <item msgid="3022922196817563960">"Критичнo"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"Постоянно"</item>
+    <item msgid="5779398140277006695">"Водеща активност"</item>
+    <item msgid="1439598363694578255">"Важно (на преден план)"</item>
+    <item msgid="3396458970745718652">"Важно (на заден план)"</item>
+    <item msgid="5214825238247511992">"Резервно копие"</item>
+    <item msgid="311372689168254967">"Голямо натоварване"</item>
+    <item msgid="7438189122367820362">"Услуга (изпълнява се)"</item>
+    <item msgid="918687422516982498">"Услуга (рестартира се)"</item>
+    <item msgid="6807727069641853029">"Приемник"</item>
+    <item msgid="6782857406100845127">"Начален екран"</item>
+    <item msgid="2860945127596974299">"Последна активност"</item>
+    <item msgid="8610560843693675830">"Кеширано (активност)"</item>
+    <item msgid="4338089220026248848">"Кеширано (клиентска програма за активността)"</item>
+    <item msgid="6652164677254579050">"Кеширано (празно)"</item>
+  </string-array>
 </resources>
