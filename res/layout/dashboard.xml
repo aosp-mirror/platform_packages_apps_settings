@@ -19,8 +19,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarStyle="outsideOverlay"
-    android:paddingStart="@dimen/dashboard_side_margin"
-    android:paddingEnd="@dimen/dashboard_side_margin"
     android:clipToPadding="false"
     android:background="@color/dashboard_background_color">
 
@@ -28,11 +26,11 @@
                 android:id="@+id/dashboard_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
                 android:paddingStart="@dimen/dashboard_padding_start"
                 android:paddingEnd="@dimen/dashboard_padding_end"
                 android:paddingTop="@dimen/dashboard_padding_top"
                 android:paddingBottom="@dimen/dashboard_padding_bottom"
-                android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 />
 
