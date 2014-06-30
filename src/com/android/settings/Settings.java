@@ -28,6 +28,7 @@ public class Settings extends SettingsActivity {
     */
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WirelessSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }

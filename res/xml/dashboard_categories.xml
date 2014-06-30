@@ -38,6 +38,14 @@
                 android:icon="@drawable/ic_settings_bluetooth2"
                 />
 
+        <!-- SIM Cards -->
+        <dashboard-tile
+                android:id="@+id/sim_settings"
+                android:title="@string/sim_settings_title"
+                android:fragment="com.android.settings.sim.SimSettings"
+                android:icon="@drawable/ic_sim_sd"
+                />
+
         <!-- Data Usage -->
         <dashboard-tile
                 android:id="@+id/data_usage_settings"
