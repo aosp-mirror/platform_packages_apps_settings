@@ -451,9 +451,11 @@ public class SettingsActivity extends Activity
         return (categories != null) && categories.contains("com.android.settings.SHORTCUT");
     }
 
-    private static boolean isAppInfoIntent(final Intent intent) {
+    private static boolean isLikeShortCutIntent(final Intent intent) {
         String action = intent.getAction();
-        return (action != null) && action.equals("android.settings.APPLICATION_DETAILS_SETTINGS");
+        return (action != null) &&
+               (action.equals("android.settings.APPLICATION_DETAILS_SETTINGS") ||
+                action.equals("android.settings.SYNC_SETTINGS")) ;
     }
 
     @Override
@@ -481,7 +483,7 @@ public class SettingsActivity extends Activity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        mIsShortcut = isShortCutIntent(intent) || isAppInfoIntent(intent) ||
+        mIsShortcut = isShortCutIntent(intent) || isLikeShortCutIntent(intent) ||
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, false);
 
         mIsShowingDashboard = (initialFragmentName == null) && !mIsShortcut;
