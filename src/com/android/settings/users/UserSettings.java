@@ -135,6 +135,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private UserManager mUserManager;
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
+    private boolean mIsGuest;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -189,9 +190,12 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
 
+        final int myUserId = UserHandle.myUserId();
+        mIsGuest = mUserManager.getUserInfo(myUserId).isGuest();
+
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
-        mMePreference = new UserPreference(context, null, UserHandle.myUserId(),
+        mMePreference = new UserPreference(context, null, myUserId,
                 mUserManager.isLinkedUser() ? null : this, null);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
@@ -207,7 +211,10 @@ public class UserSettings extends SettingsPreferenceFragment
             mAddUser.setOnPreferenceClickListener(this);
             DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                     Context.DEVICE_POLICY_SERVICE);
-            if (dpm.getDeviceOwner() != null) {
+            // No restricted profiles for tablets with a device owner, or
+            // phones.
+            if (dpm.getDeviceOwner() != null
+                    || Utils.isVoiceCapable(context)) {
                 mCanAddRestrictedProfile = false;
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
@@ -216,7 +223,7 @@ public class UserSettings extends SettingsPreferenceFragment
         setHasOptionsMenu(true);
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
-        getActivity().registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
+        context.registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null,
                 mHandler);
     }
 
@@ -390,6 +397,14 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onManageUserClicked(int userId, boolean newUser) {
+        if (userId == UserPreference.USERID_GUEST_DEFAULTS) {
+            Bundle extras = new Bundle();
+            extras.putBoolean(UserDetailsSettings.EXTRA_USER_GUEST, true);
+            ((SettingsActivity) getActivity()).startPreferencePanel(
+                    UserDetailsSettings.class.getName(),
+                    extras, R.string.user_guest, null, null, 0);
+            return;
+        }
         UserInfo info = mUserManager.getUserInfo(userId);
         if (info.isRestricted() && mIsOwner) {
             Bundle extras = new Bundle();
@@ -411,6 +426,12 @@ public class UserSettings extends SettingsPreferenceFragment
             ((SettingsActivity) getActivity()).startPreferencePanel(
                     OwnerInfoSettings.class.getName(),
                     extras, titleResId, null, null, 0);
+        } else if (mIsOwner) {
+            Bundle extras = new Bundle();
+            extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);
+            ((SettingsActivity) getActivity()).startPreferencePanel(
+                    UserDetailsSettings.class.getName(),
+                    extras, -1, info.name, null, 0);
         }
     }
 
@@ -436,25 +457,14 @@ public class UserSettings extends SettingsPreferenceFragment
         if (context == null) return null;
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE: {
-                Dialog dlg = new AlertDialog.Builder(getActivity())
-                    .setTitle(UserHandle.myUserId() == mRemovingUserId
-                            ? R.string.user_confirm_remove_self_title
-                            : (mUserManager.getUserInfo(mRemovingUserId).isRestricted()
-                                    ? R.string.user_profile_confirm_remove_title
-                                    : R.string.user_confirm_remove_title))
-                    .setMessage(UserHandle.myUserId() == mRemovingUserId
-                            ? R.string.user_confirm_remove_self_message
-                            : (mUserManager.getUserInfo(mRemovingUserId).isRestricted()
-                                    ? R.string.user_profile_confirm_remove_message
-                                    : R.string.user_confirm_remove_message))
-                    .setPositiveButton(R.string.user_delete_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                removeUserNow();
-                            }
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .create();
+                Dialog dlg =
+                        RemoveUserUtil.createConfirmationDialog(getActivity(), mRemovingUserId,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        removeUserNow();
+                                    }
+                                }
+                        );
                 return dlg;
             }
             case DIALOG_USER_CANNOT_MANAGE:
@@ -625,20 +635,38 @@ public class UserSettings extends SettingsPreferenceFragment
     private void updateUserList() {
         if (getActivity() == null) return;
         List<UserInfo> users = mUserManager.getUsers(true);
+        final Context context = getActivity();
 
         mUserListCategory.removeAll();
         mUserListCategory.setOrderingAsAdded(false);
         mUserListCategory.addPreference(mMePreference);
 
+        final boolean voiceCapable = Utils.isVoiceCapable(context);
         final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
         for (UserInfo user : users) {
             Preference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
+            } else if (user.isGuest()) {
+                // Skip over Guest. We add generic Guest settings after this loop
+                continue;
             } else {
-                pref = new UserPreference(getActivity(), null, user.id,
-                        mIsOwner && user.isRestricted() ? this : null,
-                        mIsOwner ? this : null);
+                // With Telephony:
+                //   Secondary user: Settings
+                //   Guest: Settings
+                //   Restricted Profile: There is no Restricted Profile
+                // Without Telephony:
+                //   Secondary user: Delete
+                //   Guest: Nothing
+                //   Restricted Profile: Settings
+                final boolean showSettings = mIsOwner && (voiceCapable || user.isRestricted());
+                final boolean showDelete = mIsOwner
+                        && (!voiceCapable && !user.isRestricted() && !user.isGuest());
+                pref = new UserPreference(context, null, user.id,
+                        showSettings ? this : null,
+                        showDelete ? this : null);
+                //mIsOwner && user.isRestricted() ? this : null,
+                //mIsOwner ? this : null);
                 pref.setOnPreferenceClickListener(this);
                 pref.setKey("id=" + user.id);
                 mUserListCategory.addPreference(pref);
@@ -682,6 +710,17 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setIcon(encircle(R.drawable.avatar_default_1));
             mUserListCategory.addPreference(pref);
         }
+
+        if (!mIsGuest) {
+            // Add a virtual Guest user for guest defaults
+            Preference pref = new UserPreference(getActivity(), null,
+                    UserPreference.USERID_GUEST_DEFAULTS, mIsOwner ? this : null, null);
+            pref.setTitle(R.string.user_guest);
+            pref.setIcon(encircle(R.drawable.ic_settings_accounts));
+            pref.setOnPreferenceClickListener(this);
+            mUserListCategory.addPreference(pref);
+        }
+
         getActivity().invalidateOptionsMenu();
 
         // Load the icons
@@ -767,16 +806,16 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         } else if (pref instanceof UserPreference) {
             int userId = ((UserPreference) pref).getUserId();
-            // Get the latest status of the user
-            UserInfo user = mUserManager.getUserInfo(userId);
-            if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-                showDialog(DIALOG_USER_CANNOT_MANAGE);
+            if (userId == UserPreference.USERID_GUEST_DEFAULTS) {
+                createAndSwitchToGuestUser();
             } else {
+                // Get the latest status of the user
+                UserInfo user = mUserManager.getUserInfo(userId);
                 if (!isInitialized(user)) {
                     mHandler.sendMessage(mHandler.obtainMessage(
                             MESSAGE_SETUP_USER, user.id, user.serialNumber));
-                } else if (user.isRestricted()) {
-                    onManageUserClicked(user.id, false);
+                } else if (!user.isManagedProfile()) {
+                    switchUserNow(userId);
                 }
             }
         } else if (pref == mAddUser) {
@@ -789,6 +828,22 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
         return false;
+    }
+
+    private void createAndSwitchToGuestUser() {
+        List<UserInfo> users = mUserManager.getUsers();
+        for (UserInfo user : users) {
+            if (user.isGuest()) {
+                switchUserNow(user.id);
+                return;
+            }
+        }
+        // No guest user. Create one.
+        UserInfo guestUser = mUserManager.createGuest(getActivity(),
+                    getResources().getString(R.string.user_guest));
+        if (guestUser != null) {
+            switchUserNow(guestUser.id);
+        }
     }
 
     private boolean isInitialized(UserInfo user) {

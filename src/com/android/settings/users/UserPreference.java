@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 public class UserPreference extends Preference {
 
     public static final int USERID_UNKNOWN = -10;
+    public static final int USERID_GUEST_DEFAULTS = -11;
 
     private OnClickListener mDeleteClickListener;
     private OnClickListener mSettingsClickListener;
@@ -92,7 +93,11 @@ public class UserPreference extends Preference {
         if (mUserId == UserHandle.myUserId()) return Integer.MIN_VALUE;
         if (mSerialNumber < 0) {
             // If the userId is unknown
-            if (mUserId == USERID_UNKNOWN) return Integer.MAX_VALUE;
+            if (mUserId == USERID_UNKNOWN) {
+                return Integer.MAX_VALUE;
+            } else if (mUserId == USERID_GUEST_DEFAULTS) {
+                return Integer.MAX_VALUE - 1;
+            }
             mSerialNumber = ((UserManager) getContext().getSystemService(Context.USER_SERVICE))
                     .getUserSerialNumber(mUserId);
             if (mSerialNumber < 0) return mUserId;

@@ -101,7 +101,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
             mHeaderView.setOnClickListener(this);
             mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
             mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
-            getListView().setFastScrollEnabled(true);
+            //getListView().setFastScrollEnabled(true);
         }
         // This is going to bind the preferences.
         super.onActivityCreated(savedInstanceState);

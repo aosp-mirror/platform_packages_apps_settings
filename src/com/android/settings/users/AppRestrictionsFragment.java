@@ -683,7 +683,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             app.masterEntry.activityName));
                 }
                 p.setKey(getKeyForPackage(packageName));
-                p.setSettingsEnabled(hasSettings || isSettingsApp);
+                p.setSettingsEnabled((hasSettings || isSettingsApp) && app.masterEntry == null);
                 p.setPersistent(false);
                 p.setOnPreferenceChangeListener(this);
                 p.setOnPreferenceClickListener(this);
@@ -702,7 +702,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     // Get and populate the defaults, since the user is not going to be
                     // able to toggle this app ON (it's ON by default and immutable).
                     // Only do this for restricted profiles, not single-user restrictions
-                    if (hasSettings) {
+                    // Also don't do this for slave icons
+                    if (hasSettings && app.masterEntry == null) {
                         requestRestrictionsForApp(packageName, p, false);
                     }
                 } else if (!mNewUser && isAppEnabledForUser(pi)) {
