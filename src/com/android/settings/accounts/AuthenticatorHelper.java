@@ -102,7 +102,8 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = context.createPackageContext(desc.packageName, 0);
+                Context authContext = context.createPackageContextAsUser(desc.packageName, 0,
+                        mUserHandle);
                 icon = mUm.getBadgedDrawableForUser(
                         authContext.getResources().getDrawable(desc.iconId), mUserHandle);
                 synchronized (mAccTypeIconCache) {
@@ -128,7 +129,8 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         if (mTypeToAuthDescription.containsKey(accountType)) {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = context.createPackageContext(desc.packageName, 0);
+                Context authContext = context.createPackageContextAsUser(desc.packageName, 0,
+                        mUserHandle);
                 label = authContext.getResources().getText(desc.labelId);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "No label name for account type " + accountType);
