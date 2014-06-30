@@ -66,12 +66,6 @@ public class TrustedCredentialsSettings extends Fragment {
 
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
 
-    private static final int REQUEST_PIN_CHALLENGE = 12309;
-    // If the restriction PIN is entered correctly.
-    private boolean mChallengeSucceeded;
-    private boolean mChallengeRequested;
-
-
     private enum Tab {
         SYSTEM("system",
                R.string.trusted_credentials_system_tab,
@@ -171,10 +165,6 @@ public class TrustedCredentialsSettings extends Fragment {
 
     @Override public View onCreateView(
             LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-            return inflater.inflate(R.layout.credentials_disallowed_preference_screen,
-                    parent, false);
-        }
         mTabHost = (TabHost) inflater.inflate(R.layout.trusted_credentials, parent, false);
         mTabHost.setup();
         addTab(Tab.SYSTEM);
@@ -413,21 +403,17 @@ public class TrustedCredentialsSettings extends Fragment {
         });
         final Dialog certDialog = builder.create();
 
-        View view = views.get(0);
-        ViewGroup body = (ViewGroup) view.findViewById(com.android.internal.R.id.body);
+        ViewGroup body = (ViewGroup) container.findViewById(com.android.internal.R.id.body);
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         Button removeButton = (Button) inflater.inflate(R.layout.trusted_credential_details,
                                                         body,
                                                         false);
-        body.addView(removeButton);
+        if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+            body.addView(removeButton);
+        }
         removeButton.setText(certHolder.mTab.getButtonLabel(certHolder));
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                if (mUserManager.hasRestrictionsChallenge() && !mChallengeSucceeded) {
-                    ensurePin();
-                    return;
-                }
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setMessage(certHolder.mTab.getButtonConfirmation(certHolder));
                 builder.setPositiveButton(
@@ -472,35 +458,6 @@ public class TrustedCredentialsSettings extends Fragment {
         views.add(sslCert.inflateCertificateView(getActivity()));
         titles.add(sslCert.getIssuedTo().getCName());
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_PIN_CHALLENGE) {
-            mChallengeRequested = false;
-            if (resultCode == Activity.RESULT_OK) {
-                mChallengeSucceeded = true;
-            }
-            return;
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void ensurePin() {
-        if (!mChallengeSucceeded) {
-            final UserManager um = UserManager.get(getActivity());
-            if (!mChallengeRequested) {
-                if (um.hasRestrictionsChallenge()) {
-                    Intent requestPin =
-                            new Intent(Intent.ACTION_RESTRICTIONS_CHALLENGE);
-                    startActivityForResult(requestPin, REQUEST_PIN_CHALLENGE);
-                    mChallengeRequested = true;
-                }
-            }
-        }
-        mChallengeSucceeded = false;
-    }
-
 
     private class AliasOperation extends AsyncTask<Void, Void, Boolean> {
         private final CertHolder mCertHolder;
