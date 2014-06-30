@@ -47,6 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.Objects;
 import java.util.Set;
 
 public class TextToSpeechSettings extends SettingsPreferenceFragment implements
@@ -104,7 +105,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private TextToSpeech mTts = null;
     private TtsEngines mEnginesHelper = null;
 
-    private String mSampleText = "";
+    private String mSampleText = null;
 
     /**
      * Default locale used by selected TTS engine, null if not connected to any engine.
@@ -270,10 +271,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         // ISO-3166 alpha 3 country codes are out of spec. If we won't normalize,
         // we may end up with English (USA)and German (DEU).
+        final Locale oldDefaultLocale = mCurrentDefaultLocale;
         mCurrentDefaultLocale = mEnginesHelper.parseLocaleString(defaultLocale.toString());
+        if (!Objects.equals(oldDefaultLocale, mCurrentDefaultLocale)) {
+            mSampleText = null;
+        }
 
         int defaultAvailable = mTts.setLanguage(defaultLocale);
-        if (evaluateDefaultLocale()) {
+        if (evaluateDefaultLocale() && mSampleText == null) {
             getSampleText();
         }
     }
