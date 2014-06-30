@@ -948,6 +948,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"يلزمك رسم نقش إلغاء التأمين لتأكيد إعادة الضبط بحسب بيانات المصنع."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"‏لم يتم تنفيذ إعادة التعيين نظرًا لعدم توفر خدمة System Clear."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"هل تريد إعادة الضبط؟"</string>
+    <string name="master_clear_not_available" msgid="1000370707967468909">"لا تتوفر إمكانية إعادة تعيين إعدادات المصنع لهذا المستخدم"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"‏محو وحدة تخزين USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"‏محو بطاقة SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"‏محو كل البيانات في وحدة تخزين USB."</string>
@@ -1337,13 +1338,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"تمكين سجل تطفل بواجهة وحدة تحكم المضيف عبر بلوتوث"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"التقاط حزم واجهة وحدة تحكم المضيف في ملف عبر بلوتوث"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"شهادة عرض شاشة لاسلكي"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"‏تمكين تسجيل WiFi المطوّل"</string>
-    <string name="wifi_aggressive_handover" msgid="5398429853675035444">"‏تسليم حاد WiFi إلى خلوي"</string>
-    <string name="wifi_allow_scan_with_traffic" msgid="1390236299223668977">"‏السماح دائمًا بعمليات فحص تجوال WiFi"</string>
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"‏تمكين تسجيل Wi‑Fi Verbose"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"‏تسليم Wi-Fi حاد إلى خلوي"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"‏السماح دائمًا بعمليات فحص Wi-Fi للتجوال"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"عرض خيارات شهادة عرض شاشة لاسلكي"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"‏زيادة مستوى تسجيل Wifi، والعرض لكل SSID RSSI في منتقي WiFi"</string>
-    <string name="wifi_aggressive_handover_summary" msgid="1000996694927825958">"‏عند تمكينه، سيكون WiFi أكثر حدة في تسليم اتصال البيانات إلى الشبكة الخلوية، وذلك عندما تكون إشارة WiFi منخفضة"</string>
-    <string name="wifi_allow_scan_with_traffic_summary" msgid="4586928675773406679">"‏السماح/عدم السماح بعمليات فحص تجوال WiFi بناءً على مقدار حركة مرور البيانات الموجودة في الواجهة"</string>
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"‏زيادة مستوى تسجيل Wi-Fi، وعرض لكل SSID RSSI في منتقي Wi-Fi"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"‏عند تمكينه، سيكون Wi-Fi أكثر حدة في تسليم اتصال البيانات إلى الشبكة الخلوية، وذلك عندما تكون إشارة WiFi منخفضة"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"‏السماح/عدم السماح بعمليات فحص Wi-Fi للتجوال بناءً على حجم حركة البيانات في الواجهة"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"أحجام ذاكرة التخزين المؤقت للتسجيل"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"حدد أحجامًا أكبر لكل ذاكرة تخزين مؤقت للتسجيل"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"السماح بمواقع وهمية"</string>
@@ -2222,4 +2223,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"إرسال تعليقات حول هذا الجهاز"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"تشغيل"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"إيقاف"</string>
+    <string name="lock_to_app_title" msgid="2966052366275458439">"Lock-to-app"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"‏توفر ميزة Lock-to-app إمكانية قفل الشاشة في تطبيق واحد.\n\n\nلتشغيل ميزة Lock-to-app"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		 شغِّل الإعداد"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		 شغِّل التطبيق الذي تريده"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		 اضغط مع الاستمرار على زر التطبيقات الأخيرة $"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"استخدام قفل الشاشة"</string>
 </resources>

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"আমেরিকা"</item>
+    <item msgid="3005562397632768392">"ইউরোপ"</item>
+    <item msgid="5696915123093701218">"আফ্রিকা"</item>
+    <item msgid="4439789052790868249">"এশিয়া"</item>
+    <item msgid="956915953069815961">"অস্ট্রেলিয়া"</item>
+    <item msgid="5345178126174698955">"পেসিফিক"</item>
+    <item msgid="8392017019801393511">"সমস্ত"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"১৫ সেকেন্ড"</item>
+    <item msgid="8881760709354815449">"৩০ সেকেন্ড"</item>
+    <item msgid="7589406073232279088">"১ মিনিট"</item>
+    <item msgid="7001195990902244174">"২ মিনিট"</item>
+    <item msgid="7489864775127957179">"৫ মিনিট"</item>
+    <item msgid="2314124409517439288">"১০ মিনিট"</item>
+    <item msgid="6864027152847611413">"৩০ মিনিট"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"কখনই নয়"</item>
+    <item msgid="2194151041885903260">"১৫ সেকেন্ড"</item>
+    <item msgid="5892295237131074341">"৩০ সেকেন্ড"</item>
+    <item msgid="3538441365970038213">"১ মিনিট"</item>
+    <item msgid="412343871668955639">"২ মিনিট"</item>
+    <item msgid="5076853889688991690">"৫ মিনিট"</item>
+    <item msgid="1903860996174927898">"১০ মিনিট"</item>
+    <item msgid="6415509612413178727">"৩০ মিনিট"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"অবিলম্বে"</item>
+    <item msgid="6736512735606834431">"৫ সেকেন্ড"</item>
+    <item msgid="8044619388267891375">"১৫ সেকেন্ড"</item>
+    <item msgid="1822002388249545488">"৩০ সেকেন্ড"</item>
+    <item msgid="8538071621211916519">"১ মিনিট"</item>
+    <item msgid="5663439580228932882">"২ মিনিট"</item>
+    <item msgid="49888496216106852">"৫ মিনিট"</item>
+    <item msgid="9002737361305019353">"১০ মিনিট"</item>
+    <item msgid="4322676235684793329">"৩০ মিনিট"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"ক্ষুদ্র"</item>
+    <item msgid="1932071435506638315">"স্বাভাবিক"</item>
+    <item msgid="38373998008112077">"বৃহত্‍"</item>
+    <item msgid="7786168277516233536">"বিশাল"</item>
+  </string-array>
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"অত্যন্ত ধীরে"</item>
+    <item msgid="2361722960903353554">"ধীর"</item>
+    <item msgid="1145554631248513562">"স্বাভাবিক"</item>
+    <item msgid="7553665153391107454">"দ্রুত"</item>
+    <item msgid="1370673569131070146">"দ্রুত"</item>
+    <item msgid="4648206845228970803">"খুব দ্রুত"</item>
+    <item msgid="4977949754169483251">"রেপিড"</item>
+    <item msgid="6106302964845503577">"অত্যন্ত রেপিড"</item>
+    <item msgid="6800277205640837264">"দ্রুততম"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"খুব কম"</item>
+    <item msgid="2692137425242433765">"নিম্ন"</item>
+    <item msgid="3332408460740717754">"সাধারণ"</item>
+    <item msgid="4907380534957572531">"উচ্চ"</item>
+    <item msgid="4699640516390840297">"খুব বেশি"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"স্ক্যান করা হচ্ছে…"</item>
+    <item msgid="8513729475867537913">"সংযুক্ত হচ্ছে..."</item>
+    <item msgid="515055375277271756">"প্রমাণীকরণ হচ্ছে..."</item>
+    <item msgid="1943354004029184381">"IP ঠিকানা প্রাপ্ত করা হচ্ছে..."</item>
+    <item msgid="4221763391123233270">"সংযুক্ত হয়েছে"</item>
+    <item msgid="624838831631122137">"স্থগিত করা হয়েছে"</item>
+    <item msgid="7979680559596111948">"সংযোগ বিচ্ছিন্ন হচ্ছে..."</item>
+    <item msgid="1634960474403853625">"সংযোগ বিচ্ছিন্ন করা হয়েছে"</item>
+    <item msgid="746097431216080650">"অসফল"</item>
+    <item msgid="6367044185730295334">"ব্লক করা"</item>
+    <item msgid="503942654197908005">"সাময়িকরূপে দুর্বল সংযোগ এড়ানো হচ্ছে"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"স্ক্যান করা হচ্ছে…"</item>
+    <item msgid="355508996603873860">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> এর সাথে সংযুক্ত হচ্ছে…"</item>
+    <item msgid="554971459996405634">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> দিয়ে প্রমাণীকরণ করা হচ্ছে..."</item>
+    <item msgid="7928343808033020343">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> থেকে IP ঠিকানা জানা হচ্ছে…"</item>
+    <item msgid="8937994881315223448">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> তে সংযুক্ত হয়েছে"</item>
+    <item msgid="1330262655415760617">"স্থগিত করা হয়েছে"</item>
+    <item msgid="7698638434317271902">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> থেকে সংযোগ বিচ্ছিন্ন হচ্ছে…"</item>
+    <item msgid="197508606402264311">"সংযোগ বিচ্ছিন্ন করা হয়েছে"</item>
+    <item msgid="8578370891960825148">"অসফল"</item>
+    <item msgid="5660739516542454527">"অবরুদ্ধ"</item>
+    <item msgid="1805837518286731242">"সাময়িকরূপে দুর্বল সংযোগ এড়ানো হচ্ছে"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"পুশ বোতাম"</item>
+    <item msgid="1624323946324499595">"যুক্ত করা ডিভাইস থেকে PIN"</item>
+    <item msgid="5366790421523328066">"এই ডিভাইস থেকে PIN"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"সংযুক্ত হয়েছে"</item>
+    <item msgid="3189211552661432651">"আমন্ত্রিত"</item>
+    <item msgid="3206450250360237549">"অসফল"</item>
+    <item msgid="7785896708926971207">"উপলব্ধ"</item>
+    <item msgid="2330782789550628803">"পরিষেবার বাইরে"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"২ মিনিট"</item>
+    <item msgid="8675215713017289017">"৫ মিনিট"</item>
+    <item msgid="477015974247590543">"১ ঘন্টা"</item>
+    <item msgid="5198271470953124739">"কখনই সময় শেষ হবে না"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"নিম্নমানের"</item>
+    <item msgid="5615082285463430971">"ভালো"</item>
+    <item msgid="3565079809875324621">"ভালো"</item>
+    <item msgid="5702329417707689835">"অসাধারণ"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries">
+    <item msgid="3269131034472904310">"সবসময়"</item>
+    <item msgid="844721238536786870">"কেবলমাত্র যখন প্লাগ ইন তখন"</item>
+    <item msgid="2990218920631468642">"কখনই নয় (বেশি ডেটা ব্যবহৃত হয়)"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries_wifi_only">
+    <item msgid="2124319326282651391">"সবসময়"</item>
+    <item msgid="7433294150916905997">"কেবলমাত্র যখন প্লাগ ইন তখন"</item>
+    <item msgid="1390404486722375028">"কখনই নয়"</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="624340809384223320">"স্বতঃ"</item>
+    <item msgid="6670588712989942178">"কেবলমাত্র ৫ GHz"</item>
+    <item msgid="2715516524973207876">"কেবলমাত্র ২.৪ GHz"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"ব্যবহারের সময়"</item>
+    <item msgid="3703676222230317933">"লঞ্চ গণনা"</item>
+    <item msgid="2502754479975776899">"অ্যাপ্লিকেশান নাম"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"কোনো কিছুই নয়"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"কোনো কিছুই নয়"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"স্থির"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"কোনো কিছুই নয়"</item>
+    <item msgid="8673874894887358090">"ম্যানুয়াল"</item>
+    <item msgid="168893341855953140">"প্রক্সি স্বতঃ-কনফিগারেশন"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"কোনো কিছুই নয়"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP বা CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1770285336669531300">"LTE"</item>
+    <item msgid="3044323519470167625">"eHRPD"</item>
+    <item msgid="6848428671997893147">"অনির্দিষ্ট"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"কোনো কিছুই নয়"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"অভ্যন্তরীণ ডিভাইসের সঞ্চয়স্থান"</item>
+    <item msgid="3738430123799803530">"অপসারণযোগ্য SD কার্ড"</item>
+    <item msgid="4498124044785815005">"সিস্টেমকে সিদ্ধান্ত নিতে দিন"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"অবস্থান"</item>
+    <item msgid="255608127647030286">"ব্যক্তিগত"</item>
+    <item msgid="4588829735729884491">"বার্তাপ্রেরণ"</item>
+    <item msgid="886742181977884584">"মাধ্যম"</item>
+    <item msgid="7924928667052300589">"ডিভাইস"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"অনির্দিষ্ট অবস্থান"</item>
+    <item msgid="5789673140227507995">"সূক্ষ্ম অবস্থান"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"কম্পন"</item>
+    <item msgid="3434165993711230924">"পরিচিতিগুলি পড়ুন"</item>
+    <item msgid="616161687718081936">"পরিচিতি পরিবর্তন করুন"</item>
+    <item msgid="7638002295329050091">"কল লগ পড়ুন"</item>
+    <item msgid="6546959730920410907">"কল লগ পরিবর্তন করুন"</item>
+    <item msgid="446877710771379667">"ক্যালেন্ডার পড়ুন"</item>
+    <item msgid="7674458294386319722">"ক্যালেন্ডারে পরিবর্তন করুন"</item>
+    <item msgid="8281201165558093009">"wi-fi স্ক্যান"</item>
+    <item msgid="8694611243479480497">"বিজ্ঞপ্তি"</item>
+    <item msgid="7776439107987345446">"সেল স্ক্যান"</item>
+    <item msgid="514615766544675057">"ফোন করুন"</item>
+    <item msgid="8181415497109310680">"SMS পড়ুন"</item>
+    <item msgid="6816551144382117307">"SMS লিখুন"</item>
+    <item msgid="4600463921908905030">"SMS পান"</item>
+    <item msgid="5958926493289432745">"জরুরী SMS পান"</item>
+    <item msgid="4945269495221089540">"MMS পান"</item>
+    <item msgid="5570472453573929087">"WAP পুশ পান"</item>
+    <item msgid="7125408150230860501">"SMS পাঠান"</item>
+    <item msgid="7080337936612188061">"ICC SMS পড়ুন"</item>
+    <item msgid="587124103118495063">"ICC SMS লিখুন"</item>
+    <item msgid="2320577158869025503">"সেটিংস সংশোধন করুন"</item>
+    <item msgid="1545733463471924009">"উপরে অঙ্কন করুন"</item>
+    <item msgid="3609046903962454582">"বিজ্ঞপ্তিগুলি অ্যাক্সেস করুন"</item>
+    <item msgid="4671646036128214513">"ক্যামেরা"</item>
+    <item msgid="1097324338692486211">"অডিও রেকর্ড করুন"</item>
+    <item msgid="5031552983987798163">"অডিও প্লে করুন"</item>
+    <item msgid="8374996688066472414">"ক্লিপবোর্ড পড়ুন"</item>
+    <item msgid="3045529469061083747">"ক্লিপবোর্ড সংশোধন করুন"</item>
+    <item msgid="5124443975763747838">"মিডিয়া বোতাম"</item>
+    <item msgid="4547883971364273343">"অডিও ফোকাস করুন"</item>
+    <item msgid="2603878814882344450">"মাস্টার ভলিউম"</item>
+    <item msgid="7136963238377062018">"ভয়েস ভলিউম"</item>
+    <item msgid="4270236897655923007">"রিং ভলিউম"</item>
+    <item msgid="6325739889222559394">"মিডিয়া ভলিউম"</item>
+    <item msgid="5762123934816216821">"অ্যালার্মের ভলিউম"</item>
+    <item msgid="785049718065337473">"বিজ্ঞপ্তির ভলিউম"</item>
+    <item msgid="6700305533746877052">"Bluetooth এর ভলিউম"</item>
+    <item msgid="3810969981743709839">"মাইক্রোফোন নিঃশব্দ/সশব্দ করুন"</item>
+    <item msgid="2627903914574908209">"জাগ্রত রাখুন"</item>
+    <item msgid="1395372654968157578">"অবস্থান নিরীক্ষণ করুন"</item>
+    <item msgid="3238451051299611853">"উচ্চ পাওয়ার যুক্ত অবস্থান নিরীক্ষণ করুন"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"অবস্থান"</item>
+    <item msgid="8677040780775113033">"অবস্থান"</item>
+    <item msgid="1660743989948992916">"অবস্থান"</item>
+    <item msgid="8791172739860195290">"কম্পন"</item>
+    <item msgid="383413555642128046">"পরিচিতিগুলি পড়ুন"</item>
+    <item msgid="3654594895269697313">"পরিচিতি পরিবর্তন করুন"</item>
+    <item msgid="7928393476362362538">"কল লগ পড়ুন"</item>
+    <item msgid="6248591205254641116">"কল লগ পরিবর্তন করুন"</item>
+    <item msgid="6093344633066170692">"ক্যালেন্ডার পড়ুন"</item>
+    <item msgid="1334886368750347692">"ক্যালেন্ডারে পরিবর্তন করুন"</item>
+    <item msgid="1638204101698708656">"অবস্থান"</item>
+    <item msgid="2154671955760380322">"বিজ্ঞপ্তি পোস্ট করুন"</item>
+    <item msgid="4282477730595931828">"অবস্থান"</item>
+    <item msgid="4891423912898525905">"ফোন করুন"</item>
+    <item msgid="2623604824935968113">"SMS/MMS পড়ুন"</item>
+    <item msgid="4420177125221176306">"SMS/MMS লিখুন"</item>
+    <item msgid="3986142739951490025">"SMS/MMS পান"</item>
+    <item msgid="3984213795861739778">"SMS/MMS পান"</item>
+    <item msgid="3656243523752472788">"SMS/MMS পান"</item>
+    <item msgid="8105802370238551510">"SMS/MMS পান"</item>
+    <item msgid="1407766984645388488">"SMS/MMS পাঠান"</item>
+    <item msgid="3527273606643794973">"SMS/MMS পড়ুন"</item>
+    <item msgid="4370895547001583812">"SMS/MMS লিখুন"</item>
+    <item msgid="4218544235221631789">"সেটিংস সংশোধন করুন"</item>
+    <item msgid="736541391767350377">"উপরে অঙ্কন করুন"</item>
+    <item msgid="5530815681721654194">"বিজ্ঞপ্তিগুলি অ্যাক্সেস করুন"</item>
+    <item msgid="781213371706962767">"ক্যামেরা"</item>
+    <item msgid="1720492593061838172">"অডিও রেকর্ড করুন"</item>
+    <item msgid="3493046322001257041">"অডিও প্লে করুন"</item>
+    <item msgid="136815868796597058">"ক্লিপবোর্ড পড়ুন"</item>
+    <item msgid="5238692940326972503">"ক্লিপবোর্ড সংশোধন করুন"</item>
+    <item msgid="5753789168376302997">"মিডিয়া বোতাম"</item>
+    <item msgid="3265262911688671938">"অডিও ফোকাস"</item>
+    <item msgid="2098976479485046797">"মাস্টার ভলিউম"</item>
+    <item msgid="5660213838861789350">"ভয়েস ভলিউম"</item>
+    <item msgid="7983336752371254444">"রিং ভলিউম"</item>
+    <item msgid="7878027809189330917">"মিডিয়া ভলিউম"</item>
+    <item msgid="7260546305036218513">"অ্যালার্মের ভলিউম"</item>
+    <item msgid="9103719301075748925">"বিজ্ঞপ্তির ভলিউম"</item>
+    <item msgid="7025966722295861512">"Bluetooth এর ভলিউম"</item>
+    <item msgid="2265317984004577529">"মাইক্রোফোন নিঃশব্দ/সশব্দ করুন"</item>
+    <item msgid="3646325683886507917">"জাগ্রত রাখুন"</item>
+    <item msgid="7669257279311110599">"অবস্থান"</item>
+    <item msgid="7745724368696313169">"স্থান"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"স্বল্প"</item>
+    <item msgid="2560532955514699713">"মাঝারি"</item>
+    <item msgid="2372711992605524591">"দীর্ঘ"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"ডিফল্ট"</item>
+    <item msgid="1016452621833735880">"Sans Serif"</item>
+    <item msgid="2496277987934654454">"Sans-serif ঘনীভূত"</item>
+    <item msgid="4406003087391086325">"Serif"</item>
+    <item msgid="1558362802170124073">"Monospace"</item>
+    <item msgid="6857338041963571301">"Casual"</item>
+    <item msgid="961716102408512888">"Cursive"</item>
+    <item msgid="784581717183349567">"Small Capitals"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"অতি ক্ষুদ্র"</item>
+    <item msgid="6781094565687692782">"ক্ষুদ্র"</item>
+    <item msgid="8222123259497646551">"Normal"</item>
+    <item msgid="5813217276778560466">"বৃহত্‍"</item>
+    <item msgid="9044232017390975191">"খুব বড়"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="4733815704128258753">"ডিফল্ট"</item>
+    <item msgid="3217099060748617005">"কোনো কিছুই নয়"</item>
+    <item msgid="7467615139904599420">"রূপরেখা"</item>
+    <item msgid="5623165557468608975">"ড্রপ শ্যাডো"</item>
+    <item msgid="8088451174058214588">"ওঠানো"</item>
+    <item msgid="3821418743395480313">"চাপা"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"২৫%"</item>
+    <item msgid="2367156416247936773">"৫০%"</item>
+    <item msgid="5395560410107149298">"৭৫%"</item>
+    <item msgid="8342334626783983353">"১০০%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="7009918361545506251">"অ্যাপের ডিফল্টগুলি ব্যবহার করুন"</item>
+    <item msgid="1770533843436933500">"কালোর উপর সাদা"</item>
+    <item msgid="758587126802411846">"সাদার উপর কালো"</item>
+    <item msgid="1495307195241623402">"কালোর উপর হলুদ"</item>
+    <item msgid="6039700130994371612">"নীলের উপর হলুদ"</item>
+    <item msgid="7169235156349580064">"কাস্টম"</item>
+  </string-array>
+  <string-array name="select_logd_size_titles">
+    <item msgid="3100534874529240291">"৬৪০০০"</item>
+    <item msgid="505611754508988476">"২৫৬০০০"</item>
+    <item msgid="6361286924268716397">"১০০০০০০"</item>
+    <item msgid="6405203239560695266">"৪০০০০০০"</item>
+    <item msgid="3025431211013424097">"১৬০০০০০০"</item>
+  </string-array>
+  <string-array name="select_logd_size_summaries">
+    <item msgid="7346595473588765019">"লগ বাফার প্রতি 64K"</item>
+    <item msgid="2822309747675758628">"লগ বাফার প্রতি 256K"</item>
+    <item msgid="6699306198357496731">"লগ বাফার প্রতি 1M"</item>
+    <item msgid="5748528643937500349">"লগ বাফার প্রতি 4M"</item>
+    <item msgid="1978629051085111592">"লগ বাফার প্রতি 16M"</item>
+  </string-array>
+  <string-array name="hdcp_checking_titles">
+    <item msgid="441827799230089869">"কখনই চেক করবেন না"</item>
+    <item msgid="6042769699089883931">"শুধুমাত্র DRM সামগ্রীর জন্য HDCP চেক করুন"</item>
+    <item msgid="9174900380056846820">"সর্বদা চেক করুন"</item>
+  </string-array>
+  <string-array name="hdcp_checking_summaries">
+    <item msgid="505558545611516707">"HDCP পরীক্ষণ কখনও ব্যবহার করবেন না"</item>
+    <item msgid="3878793616631049349">"শুধুমাত্র DRM সামগ্রীর জন্য HDCP চেক করা ব্যবহার করুন"</item>
+    <item msgid="45075631231212732">"সর্বদা HDCP পরীক্ষণ ব্যবহার করুন"</item>
+  </string-array>
+  <string-array name="window_animation_scale_entries">
+    <item msgid="8134156599370824081">"অ্যানিমেশন বন্ধ করুন"</item>
+    <item msgid="6624864048416710414">"অ্যানিমেশন স্কেল .৫x"</item>
+    <item msgid="2219332261255416635">"অ্যানিমেশন স্কেল ১x"</item>
+    <item msgid="3544428804137048509">"অ্যানিমেশন স্কেল ১.৫x"</item>
+    <item msgid="3110710404225974514">"অ্যানিমেশন স্কেল ২x"</item>
+    <item msgid="4402738611528318731">"অ্যানিমেশন স্কেল ৫x"</item>
+    <item msgid="6189539267968330656">"অ্যানিমেশন স্কেল ১০x"</item>
+  </string-array>
+  <string-array name="transition_animation_scale_entries">
+    <item msgid="8464255836173039442">"অ্যানিমেশন বন্ধ করুন"</item>
+    <item msgid="3375781541913316411">"অ্যানিমেশন স্কেল .৫x"</item>
+    <item msgid="1991041427801869945">"অ্যানিমেশন স্কেল ১x"</item>
+    <item msgid="4012689927622382874">"অ্যানিমেশন স্কেল ১.৫x"</item>
+    <item msgid="3289156759925947169">"অ্যানিমেশন স্কেল ২x"</item>
+    <item msgid="7705857441213621835">"অ্যানিমেশন স্কেল ৫x"</item>
+    <item msgid="6660750935954853365">"অ্যানিমেশন স্কেল ১০x"</item>
+  </string-array>
+  <string-array name="animator_duration_scale_entries">
+    <item msgid="6039901060648228241">"অ্যানিমেশন বন্ধ করুন"</item>
+    <item msgid="1138649021950863198">"অ্যানিমেশন স্কেল .৫x"</item>
+    <item msgid="4394388961370833040">"অ্যানিমেশন স্কেল ১x"</item>
+    <item msgid="8125427921655194973">"অ্যানিমেশন স্কেল ১.৫x"</item>
+    <item msgid="3334024790739189573">"অ্যানিমেশন স্কেল ২x"</item>
+    <item msgid="3170120558236848008">"অ্যানিমেশন স্কেল 5x"</item>
+    <item msgid="1069584980746680398">"অ্যানিমেশন স্কেল ১০x"</item>
+  </string-array>
+  <string-array name="overlay_display_devices_entries">
+    <item msgid="1606809880904982133">"কোনো কিছুই নয়"</item>
+    <item msgid="688482401508173818">"720x480 mdpi"</item>
+    <item msgid="6027541158956821790">"720x480 MDPI (নিরাপদ)"</item>
+    <item msgid="8181151155909301030">"1280x720 tvdpi"</item>
+    <item msgid="2920655562462493148">"1280x720 tvdpi (নিরাপদ)"</item>
+    <item msgid="8910371271391940941">"1920x1080 xhdpi"</item>
+    <item msgid="4171600481380800455">"1920x1080 xhdpi (নিরাপদ)"</item>
+    <item msgid="1937752114395156918">"1280x720 tvdpi এবং 1920x1080 xhdpi"</item>
+  </string-array>
+  <string-array name="enable_opengl_traces_entries">
+    <item msgid="3191973083884253830">"কোনো কিছুই নয়"</item>
+    <item msgid="9089630089455370183">"Logcat"</item>
+    <item msgid="5397807424362304288">"Systrace (গ্রাফিক্স)"</item>
+    <item msgid="1340692776955662664">"glGetError উপরে স্ট্যাক কল করুন"</item>
+  </string-array>
+  <string-array name="show_non_rect_clip_entries">
+    <item msgid="993742912147090253">"বন্ধ করুন"</item>
+    <item msgid="675719912558941285">"নীল বঙের অ-আয়তক্ষেত্রাকার ক্লিপ অঞ্চল অঙ্কন করুন"</item>
+    <item msgid="1064373276095698656">"সবুজ রঙে অঙ্কন করা পরীক্ষিত কমান্ডগুলি হাইলাইট করুন"</item>
+  </string-array>
+  <string-array name="track_frame_time_entries">
+    <item msgid="2193584639058893150">"বন্ধ করুন"</item>
+    <item msgid="2751513398307949636">"দন্ড হিসাবে স্ক্রীনে"</item>
+    <item msgid="1851438178120770973">"adb shell dumpsys gfxinfo এ"</item>
+  </string-array>
+  <string-array name="debug_hw_overdraw_entries">
+    <item msgid="8190572633763871652">"বন্ধ করুন"</item>
+    <item msgid="7688197031296835369">"অতিবর্ণনা এলাকা দেখান"</item>
+    <item msgid="2290859360633824369">"বর্ণান্ধতার জন্য এলাকা দেখান"</item>
+  </string-array>
+  <string-array name="app_process_limit_entries">
+    <item msgid="3401625457385943795">"মানক সীমা"</item>
+    <item msgid="4071574792028999443">"কোন ব্যাকগ্রাউন্ড প্রক্রিয়া নেই"</item>
+    <item msgid="4810006996171705398">"১টি প্রক্রিয়ার বেশি নয়"</item>
+    <item msgid="8586370216857360863">"২টি প্রক্রিয়ার বেশী নয়"</item>
+    <item msgid="836593137872605381">"৩টি প্রক্রিয়ার বেশি নয়"</item>
+    <item msgid="7899496259191969307">"৪টি প্রক্রিয়ার বেশি নয়"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"আগে থেকে ভাগ করা কীগুলির সাথে L2TP/IPSec VPN"</item>
+    <item msgid="4725504331295252103">"শংসাপত্রগুলির সাথে L2TP/IPSec VPN"</item>
+    <item msgid="7526551163264034377">"আগে থেকে ভাগ করা কীগুলি এবং Xauth প্রমাণীকরণের সাথে IPSec VPN"</item>
+    <item msgid="8064740940687465039">"শংসাপত্রগুলি এবং Xauth প্রমাণীকরণের সাথে IPSec VPN"</item>
+    <item msgid="4946199982372391490">"শংসাপত্রগুলি এবং হাইব্রীড প্রমাণীকরণের সাথে IPSec VPN"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"সংযোগ বিচ্ছিন্ন"</item>
+    <item msgid="6692305604213080515">"আরম্ভ হচ্ছে..."</item>
+    <item msgid="8001704909356800092">"সংযুক্ত হচ্ছে..."</item>
+    <item msgid="4039737283841672166">"সংযুক্ত হয়েছে"</item>
+    <item msgid="4042143101664725090">"সময়সীমা সমাপ্ত"</item>
+    <item msgid="7664124146786465092">"অসফল"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"জিজ্ঞাসা করুন"</item>
+    <item msgid="5077768429488260031">"কখনো অনুমতি দেবেন না"</item>
+    <item msgid="1417929597727989746">"সর্বদা অনুমতি দিন"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="7088762389498381203">"সাধারণ"</item>
+    <item msgid="4517779899383204000">"নিয়ন্ত্রণ করুন"</item>
+    <item msgid="406385694840950802">"নিম্ন"</item>
+    <item msgid="4212263919458209842">"জটিল"</item>
+  </string-array>
+  <string-array name="entries_zen_mode">
+    <item msgid="816404936744485190">"বন্ধ করুন"</item>
+    <item msgid="5656544177755411222">"সীমিত বাধা"</item>
+    <item msgid="8735337502532332056">"শূন্য বাধা"</item>
+  </string-array>
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"স্বাভাবিক"</item>
+    <item msgid="866544120205026771">"মাঝারি"</item>
+    <item msgid="7851902244436886890">"কম"</item>
+    <item msgid="3022922196817563960">"জটিল"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"ক্রমাগত"</item>
+    <item msgid="5779398140277006695">"শীর্ষ কার্যকলাপ"</item>
+    <item msgid="1439598363694578255">"গুরুত্বপূর্ণ (পুরোভাগে)"</item>
+    <item msgid="3396458970745718652">"গুরুত্বপূর্ণ (পশ্চাদপট)"</item>
+    <item msgid="5214825238247511992">"ব্যাকআপ"</item>
+    <item msgid="311372689168254967">"হেভি ওয়েট"</item>
+    <item msgid="7438189122367820362">"পরিষেবা (চলমান)"</item>
+    <item msgid="918687422516982498">"পরিষেবা (পুনরায় চালু হচ্ছে)"</item>
+    <item msgid="6807727069641853029">"রিসিভার"</item>
+    <item msgid="6782857406100845127">"হোম"</item>
+    <item msgid="2860945127596974299">"সর্বশেষ কার্যকলাপ"</item>
+    <item msgid="8610560843693675830">"ব্যবহৃত ক্যাশে (কার্যকলাপ)"</item>
+    <item msgid="4338089220026248848">"ব্যবহৃত ক্যাশে (কার্যকলাপ ক্লায়েন্ট)"</item>
+    <item msgid="6652164677254579050">"ব্যবহৃত ক্যাশে (খালি)"</item>
+  </string-array>
+</resources>

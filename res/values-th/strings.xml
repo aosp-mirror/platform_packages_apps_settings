@@ -948,6 +948,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"คุณต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"ไม่มีการรีเซ็ตเนื่องจากบริการล้างข้อมูลระบบไม่พร้อมใช้งาน"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"รีเซ็ตหรือไม่"</string>
+    <string name="master_clear_not_available" msgid="1000370707967468909">"การรีเซ็ตเป็นค่าจากโรงงานไม่สามารถใช้ได้สำหรับผู้ใช้รายนี้"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"ลบที่เก็บข้อมูล USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"ลบการ์ด SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"ลบข้อมูลทั้งหมดในที่เก็บข้อมูล USB"</string>
@@ -1337,13 +1338,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"เปิดใช้งานบันทึกสอดแนมบลูทูธ HCI"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"บันทึกแพ็คเก็ตบลูทูธ HCI ทั้งหมดในไฟล์"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"การรับรองการแสดงผลแบบไร้สาย"</string>
-    <string name="wifi_verbose_logging" msgid="4770164061102202747">"เปิดใช้การบันทึกรายละเอียด WiFi"</string>
-    <string name="wifi_aggressive_handover" msgid="5398429853675035444">"เปลี่ยนการเชื่อมต่อจาก Wi-Fi เป็นเครือข่ายมือถือเมื่อสัญญานอ่อน"</string>
-    <string name="wifi_allow_scan_with_traffic" msgid="1390236299223668977">"ใช้การสแกน Wi-Fi ข้ามเครือข่ายเสมอ"</string>
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"เปิดใช้การบันทึกรายละเอียด Wi-Fi"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"สลับ Wi‑Fi เป็นมือถือเมื่อสัญญาณอ่อน"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"ใช้การสแกน Wi-Fi ข้ามเครือข่ายเสมอ"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"แสดงตัวเลือกสำหรับการรับรองการแสดงผล แบบไร้สาย"</string>
-    <string name="wifi_verbose_logging_summary" msgid="4393610458474552685">"เพิ่มระดับการบันทึก WiFi แสดงตาม SSID RSSI ในเครื่องมือเลือก WiFi"</string>
-    <string name="wifi_aggressive_handover_summary" msgid="1000996694927825958">"เมื่อเปิดใช้แล้ว Wi-Fi จะเปลี่ยนการเชื่อมต่อข้อมูลไปยังเครือข่ายมือถือในทันทีที่พบสัญญาณ Wi-Fi อ่อน"</string>
-    <string name="wifi_allow_scan_with_traffic_summary" msgid="4586928675773406679">"อนุญาต/ไม่อนุญาตการสแกน Wi-Fi ข้ามเครือข่าย ตามปริมาณข้อมูลการเข้าชมที่ปรากฏในอินเทอร์เฟซ"</string>
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"เพิ่มระดับการบันทึก Wi‑Fi, แสดงต่อ SSID RSSI ในตัวเลือก Wi‑Fi"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"เมื่อเปิดใช้แล้ว Wi-Fi จะส่งผ่านการเชื่อมต่อข้อมูลไปยังเครือข่ายมือถือในทันทีที่พบสัญญาณ Wi-Fi อ่อน"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"อนุญาต/ไม่อนุญาตการสแกน Wi-Fi ข้ามเครือข่าย ตามปริมาณข้อมูลการเข้าชมที่ปรากฏในอินเทอร์เฟซ"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"ขนาดบัฟเฟอร์ของ Logger"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"เลือกขนาด Logger ต่อบัฟเฟอร์ไฟล์บันทึก"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"อนุญาตให้จำลองตำแหน่ง"</string>
@@ -2222,4 +2223,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"ส่งความคิดเห็นเกี่ยวกับอุปกรณ์นี้"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"เปิด"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"ปิด"</string>
+    <string name="lock_to_app_title" msgid="2966052366275458439">"การล็อกแอป"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"การล็อกแอปจะล็อกการแสดงไว้ในแอปเดียว\n\n\nหากต้องการเริ่มการล็อกแอป"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		เปิดการตั้งค่า"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		เริ่มแอปที่ต้องการ"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		กดปุ่มแอปล่าสุด $ ค้างไว้"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"ใช้การล็อกหน้าจอ"</string>
 </resources>
