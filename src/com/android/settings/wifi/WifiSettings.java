@@ -25,7 +25,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.widget.SwitchBar;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.Activity;
@@ -366,7 +365,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                             R.string.wifi_p2p_settings_title, null,
                             this, 0);
                 } else {
-                    startFragment(this, WifiP2pSettings.class.getCanonicalName(), -1, null);
+                    startFragment(this, WifiP2pSettings.class.getCanonicalName(),
+                            R.string.wifi_p2p_settings_title, -1, null);
                 }
                 return true;
             case MENU_ID_WPS_PIN:
@@ -390,7 +390,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                             R.string.wifi_advanced_titlebar, null,
                             this, 0);
                 } else {
-                    startFragment(this, AdvancedWifiSettings.class.getCanonicalName(), -1, null);
+                    startFragment(this, AdvancedWifiSettings.class.getCanonicalName(),
+                            R.string.wifi_advanced_titlebar, -1, null);
                 }
                 return true;
         }

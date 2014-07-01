@@ -41,7 +41,6 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -193,11 +192,10 @@ public class Memory extends SettingsPreferenceFragment implements Indexable{
                 if (getActivity() instanceof SettingsActivity) {
                     ((SettingsActivity) getActivity()).startPreferencePanel(
                             UsbSettings.class.getCanonicalName(),
-                            null,
-                            R.string.storage_title_usb, null,
-                            this, 0);
+                            null, R.string.storage_title_usb, null, this, 0);
                 } else {
-                    startFragment(this, UsbSettings.class.getCanonicalName(), -1, null);
+                    startFragment(this, UsbSettings.class.getCanonicalName(),
+                            R.string.storage_title_usb, -1, null);
                 }
                 return true;
         }

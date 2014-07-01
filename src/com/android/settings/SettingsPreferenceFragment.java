@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -27,6 +28,7 @@ import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroupAdapter;
 import android.text.TextUtils;
@@ -35,7 +37,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -452,19 +453,23 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         getActivity().onBackPressed();
     }
 
-    public boolean startFragment(
-            Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
-        if (getActivity() instanceof SettingsActivity) {
-            SettingsActivity sa = (SettingsActivity) getActivity();
-            sa.startPreferencePanel(fragmentClass, extras,
-                    R.string.lock_settings_picker_title, null, caller, requestCode);
+    public boolean startFragment(Fragment caller, String fragmentClass, int titleRes,
+            int requestCode, Bundle extras) {
+        final Activity activity = getActivity();
+        if (activity instanceof SettingsActivity) {
+            SettingsActivity sa = (SettingsActivity) activity;
+            sa.startPreferencePanel(fragmentClass, extras, titleRes, null, caller, requestCode);
+            return true;
+        } else if (activity instanceof PreferenceActivity) {
+            PreferenceActivity sa = (PreferenceActivity) activity;
+            sa.startPreferencePanel(fragmentClass, extras, titleRes, null, caller, requestCode);
             return true;
         } else {
-            Log.w(TAG, "Parent isn't Settings activity, thus there's no way to launch the "
-                    + "given Fragment (name: " + fragmentClass + ", requestCode: " + requestCode
-                    + ")");
+            Log.w(TAG,
+                    "Parent isn't SettingsActivity nor PreferenceActivity, thus there's no way to "
+                    + "launch the given Fragment (name: " + fragmentClass
+                    + ", requestCode: " + requestCode + ")");
             return false;
         }
     }
-
 }
