@@ -560,13 +560,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         switch (item.getItemId()) {
             case MENU_ID_CONNECT: {
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                    mWifiManager.connect(mSelectedAccessPoint.networkId,
-                            mConnectListener);
+                    connect(mSelectedAccessPoint.networkId);
                 } else if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
-                    mWifiManager.connect(mSelectedAccessPoint.getConfig(),
-                            mConnectListener);
+                    connect(mSelectedAccessPoint.getConfig());
                 } else {
                     showDialog(mSelectedAccessPoint, true);
                 }
@@ -600,7 +598,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     savedNetworksExist = true;
                     getActivity().invalidateOptionsMenu();
                 }
-                mWifiManager.connect(mSelectedAccessPoint.getConfig(), mConnectListener);
+                connect(mSelectedAccessPoint.getConfig());
             } else {
                 showDialog(mSelectedAccessPoint, false);
             }
@@ -930,8 +928,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (config == null) {
             if (mSelectedAccessPoint != null
                     && mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                mWifiManager.connect(mSelectedAccessPoint.networkId,
-                        mConnectListener);
+                connect(mSelectedAccessPoint.networkId);
             }
         } else if (config.networkId != INVALID_NETWORK_ID) {
             if (mSelectedAccessPoint != null) {
@@ -941,7 +938,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (configController.isEdit()) {
                 mWifiManager.save(config, mSaveListener);
             } else {
-                mWifiManager.connect(config, mConnectListener);
+                connect(config);
             }
         }
 
@@ -967,6 +964,14 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         // We need to rename/replace "Next" button in wifi setup context.
         changeNextButtonState(false);
+    }
+
+    protected void connect(final WifiConfiguration config) {
+        mWifiManager.connect(config, mConnectListener);
+    }
+
+    protected void connect(final int networkId) {
+        mWifiManager.connect(networkId, mConnectListener);
     }
 
     /**
