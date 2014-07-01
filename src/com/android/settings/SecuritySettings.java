@@ -699,7 +699,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             final String screenTitle = res.getString(R.string.security_settings_title);
 
-            SearchIndexableRaw data;
+            SearchIndexableRaw data = new SearchIndexableRaw(context);
+            data.title = screenTitle;
+            data.screenTitle = screenTitle;
+            result.add(data);
 
             if (!mIsPrimary) {
                 int resId = (UserManager.get(context).isLinkedUser()) ?
