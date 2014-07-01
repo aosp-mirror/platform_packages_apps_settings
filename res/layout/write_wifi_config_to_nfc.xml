@@ -25,29 +25,37 @@
 
         <TextView
                 android:id="@+id/password_label"
-                android:layout_gravity="fill"
-                style="@style/wifi_item_label"
+                style="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dip"
                 android:text="@string/wifi_password" />
 
         <EditText android:id="@+id/password"
-                  style="@style/wifi_item_edit_content"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
                   android:singleLine="true"
-                  android:password="true" />
-
+                  android:password="true"
+                  android:maxLength="63"
+                  android:imeOptions="flagForceAscii" />
         <TextView
-                style="@style/wifi_item_label" />
+                style="@style/wifi_item_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         <CheckBox android:id="@+id/show_password"
                   style="@style/wifi_item_content"
                   android:textSize="14sp"
-                  android:text="@string/wifi_show_password" />
+                  android:text="@string/wifi_show_password"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content" />
 
     </LinearLayout>
 
 
     <ProgressBar
             android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:padding="8dip"
