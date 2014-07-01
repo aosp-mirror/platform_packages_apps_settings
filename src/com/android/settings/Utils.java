@@ -18,12 +18,14 @@ package com.android.settings;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -61,6 +63,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import com.android.settings.R.string;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
 
@@ -636,4 +639,35 @@ public final class Utils {
        // Default to current profile
        return new UserHandle(currentUser);
    }
+
+    /**
+     * Creates a dialog to confirm with the user if it's ok to remove the user
+     * and delete all the data.
+     *
+     * @param context a Context object
+     * @param removingUserId The userId of the user to remove
+     * @param onConfirmListener Callback object for positive action
+     * @return the created Dialog
+     */
+    public static Dialog createRemoveConfirmationDialog(Context context, int removingUserId,
+            DialogInterface.OnClickListener onConfirmListener) {
+        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        UserInfo userInfo = um.getUserInfo(removingUserId);
+        Dialog dlg = new AlertDialog.Builder(context)
+                .setTitle(UserHandle.myUserId() == removingUserId
+                    ? R.string.user_confirm_remove_self_title
+                    : (userInfo.isRestricted()
+                        ? R.string.user_profile_confirm_remove_title
+                        : R.string.user_confirm_remove_title))
+                .setMessage(UserHandle.myUserId() == removingUserId
+                    ? R.string.user_confirm_remove_self_message
+                    : (userInfo.isRestricted()
+                        ? R.string.user_profile_confirm_remove_message
+                        : R.string.user_confirm_remove_message))
+                .setPositiveButton(R.string.user_delete_button,
+                        onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+        return dlg;
+    }
 }

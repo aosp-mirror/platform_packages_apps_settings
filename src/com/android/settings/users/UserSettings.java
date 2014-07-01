@@ -211,10 +211,8 @@ public class UserSettings extends SettingsPreferenceFragment
             mAddUser.setOnPreferenceClickListener(this);
             DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                     Context.DEVICE_POLICY_SERVICE);
-            // No restricted profiles for tablets with a device owner, or
-            // phones.
-            if (dpm.getDeviceOwner() != null
-                    || Utils.isVoiceCapable(context)) {
+            // No restricted profiles for tablets with a device owner, or phones.
+            if (dpm.getDeviceOwner() != null || Utils.isVoiceCapable(context)) {
                 mCanAddRestrictedProfile = false;
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
@@ -431,7 +429,11 @@ public class UserSettings extends SettingsPreferenceFragment
             extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);
             ((SettingsActivity) getActivity()).startPreferencePanel(
                     UserDetailsSettings.class.getName(),
-                    extras, -1, info.name, null, 0);
+                    extras,
+                    -1, /* No title res id */
+                    info.name, /* title */
+                    null, /* resultTo */
+                    0 /* resultRequestCode */);
         }
     }
 
@@ -458,7 +460,7 @@ public class UserSettings extends SettingsPreferenceFragment
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE: {
                 Dialog dlg =
-                        RemoveUserUtil.createConfirmationDialog(getActivity(), mRemovingUserId,
+                        Utils.createRemoveConfirmationDialog(getActivity(), mRemovingUserId,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         removeUserNow();
@@ -665,8 +667,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref = new UserPreference(context, null, user.id,
                         showSettings ? this : null,
                         showDelete ? this : null);
-                //mIsOwner && user.isRestricted() ? this : null,
-                //mIsOwner ? this : null);
                 pref.setOnPreferenceClickListener(this);
                 pref.setKey("id=" + user.id);
                 mUserListCategory.addPreference(pref);
