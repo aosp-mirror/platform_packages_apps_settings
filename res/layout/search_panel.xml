@@ -17,10 +17,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dashboard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/search_panel_padding_start"
-        android:paddingEnd="@dimen/search_panel_padding_end"
-        android:background="@color/dashboard_background_color">
+        android:layout_height="match_parent">
 
     <LinearLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,14 +28,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical"
-                android:elevation="@dimen/search_panel_elevation">
+                android:orientation="vertical">
 
+            <!-- Padding is included in the background -->
             <ListView android:id="@+id/list_suggestions"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/white"
+                    android:paddingStart="@dimen/dashboard_padding_start"
+                    android:paddingEnd="@dimen/dashboard_padding_end"
+                    android:paddingTop="@dimen/dashboard_padding_top"
+                    android:paddingBottom="@dimen/dashboard_padding_bottom"
+                    android:scrollbarStyle="outsideOverlay"
                     android:headerDividersEnabled="false"
+                    android:background="@drawable/search_panel_list_background"
+                    android:elevation="@dimen/search_panel_elevation"
                     />
 
         </LinearLayout>
@@ -50,11 +53,18 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
 
+            <!-- Padding is included in the background -->
             <ListView android:id="@+id/list_results"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/white"
+                    android:paddingStart="@dimen/dashboard_padding_start"
+                    android:paddingEnd="@dimen/dashboard_padding_end"
+                    android:paddingTop="@dimen/dashboard_padding_top"
+                    android:paddingBottom="@dimen/dashboard_padding_bottom"
+                    android:scrollbarStyle="outsideOverlay"
                     android:headerDividersEnabled="false"
+                    android:background="@drawable/search_panel_list_background"
+                    android:elevation="@dimen/search_panel_elevation"
                     />
 
         </LinearLayout>
