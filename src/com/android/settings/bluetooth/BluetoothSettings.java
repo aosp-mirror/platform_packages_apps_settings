@@ -18,8 +18,6 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -33,12 +31,10 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -63,6 +59,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private static final int MENU_ID_RENAME_DEVICE = Menu.FIRST + 1;
     private static final int MENU_ID_VISIBILITY_TIMEOUT = Menu.FIRST + 2;
     private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 3;
+    private static final int MENU_ID_MESSAGE_ACCESS = Menu.FIRST + 4;
 
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
@@ -187,6 +184,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_SHOW_RECEIVED, 0, R.string.bluetooth_show_received_files)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        // Message Access API is still not finished, once completed we undo this check.
+        // Bug 16232864
+        if (android.os.SystemProperties.get("show_bluetooth_message_access").equals("true")){
+            menu.add(Menu.NONE, MENU_ID_MESSAGE_ACCESS, 0, R.string.bluetooth_show_message_access)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -212,6 +215,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case MENU_ID_SHOW_RECEIVED:
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
                 getActivity().sendBroadcast(intent);
+                return true;
+
+            case MENU_ID_MESSAGE_ACCESS:
+                if (getActivity() instanceof SettingsActivity) {
+                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                            MessageAccessSettings.class.getCanonicalName(), null,
+                            R.string.bluetooth_show_message_access, null, this, 0);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -355,6 +366,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         getActivity().invalidateOptionsMenu();
     }
 
+    @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
         setDeviceListGroup(getPreferenceScreen());
         removeAllDevices();
@@ -433,5 +445,4 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 return result;
             }
         };
-
 }

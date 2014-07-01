@@ -33,6 +33,7 @@ import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.bluetooth.MessageAccessSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -85,6 +86,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(BluetoothSettings.class.getName()),
                         NO_DATA_RES_ID,
                         BluetoothSettings.class.getName(),
+                        R.drawable.ic_settings_bluetooth2));
+
+        sResMap.put(MessageAccessSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(MessageAccessSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        MessageAccessSettings.class.getName(),
                         R.drawable.ic_settings_bluetooth2));
 
         sResMap.put(DataUsageSummary.class.getName(),
