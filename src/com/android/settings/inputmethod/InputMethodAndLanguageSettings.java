@@ -235,7 +235,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                                 targetFragment = UserDictionaryList.class;
                             }
                             startFragment(InputMethodAndLanguageSettings.this,
-                                    targetFragment.getCanonicalName(), -1, extras);
+                                    targetFragment.getCanonicalName(), -1, -1, extras);
                             return true;
                         }
                     });
