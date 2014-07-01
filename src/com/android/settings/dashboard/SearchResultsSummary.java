@@ -473,8 +473,6 @@ public class SearchResultsSummary extends Fragment {
             SuggestionItem item = (SuggestionItem) getItem(position);
             query.setText(item.query);
 
-            view.setBackgroundResource(R.drawable.dashboard_tile_background);
-
             return view;
         }
     }
@@ -624,8 +622,6 @@ public class SearchResultsSummary extends Fragment {
                 imageView.setImageDrawable(null);
                 imageView.setBackgroundResource(R.drawable.empty_icon);
             }
-
-            view.setBackgroundResource(R.drawable.dashboard_tile_background);
 
             return view;
         }
