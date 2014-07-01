@@ -528,8 +528,12 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                     Context.PRINT_SERVICE);
 
             String screenTitle = context.getResources().getString(R.string.print_settings);
+            SearchIndexableRaw data = new SearchIndexableRaw(context);
+            data.title = screenTitle;
+            data.screenTitle = screenTitle;
+            indexables.add(data);
 
-            // Indexing all services, reagardles if enabled.
+            // Indexing all services, regardless if enabled.
             List<PrintServiceInfo> services = printManager.getInstalledPrintServices();
             final int serviceCount = services.size();
             for (int i = 0; i < serviceCount; i++) {
@@ -539,13 +543,13 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                         service.getResolveInfo().serviceInfo.packageName,
                         service.getResolveInfo().serviceInfo.name);
 
-                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
-                indexable.key = componentName.flattenToString();
-                indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
-                indexable.summaryOn = context.getString(R.string.print_feature_state_on);
-                indexable.summaryOff = context.getString(R.string.print_feature_state_off);
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
+                data = new SearchIndexableRaw(context);
+                data.key = componentName.flattenToString();
+                data.title = service.getResolveInfo().loadLabel(packageManager).toString();
+                data.summaryOn = context.getString(R.string.print_feature_state_on);
+                data.summaryOff = context.getString(R.string.print_feature_state_off);
+                data.screenTitle = screenTitle;
+                indexables.add(data);
             }
 
             return indexables;
