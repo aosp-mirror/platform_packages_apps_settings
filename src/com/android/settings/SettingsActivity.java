@@ -285,6 +285,11 @@ public class SettingsActivity extends Activity
             BatterySaverSettings.class.getName(),
     };
 
+
+    private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
+            "android.settings.APPLICATION_DETAILS_SETTINGS"
+    };
+
     private SharedPreferences mDevelopmentPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener mDevelopmentPreferencesListener;
 
@@ -453,9 +458,13 @@ public class SettingsActivity extends Activity
 
     private static boolean isLikeShortCutIntent(final Intent intent) {
         String action = intent.getAction();
-        return (action != null) &&
-               (action.equals("android.settings.APPLICATION_DETAILS_SETTINGS") ||
-                action.equals("android.settings.SYNC_SETTINGS")) ;
+        if (action == null) {
+            return false;
+        }
+        for (int i = 0; i < LIKE_SHORTCUT_INTENT_ACTION_ARRAY.length; i++) {
+            if (LIKE_SHORTCUT_INTENT_ACTION_ARRAY[i].equals(action)) return true;
+        }
+        return false;
     }
 
     @Override
@@ -486,14 +495,16 @@ public class SettingsActivity extends Activity
         mIsShortcut = isShortCutIntent(intent) || isLikeShortCutIntent(intent) ||
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, false);
 
-        mIsShowingDashboard = (initialFragmentName == null) && !mIsShortcut;
-
         final ComponentName cn = getIntent().getComponent();
-        final boolean isSubSettings = cn.getClassName().equals(SubSettings.class.getName());
+        final String className = cn.getClassName();
 
-        // If this is a sub settings or not the main Dashboard and not a Shortcut then apply the
-        // correct theme for the ActionBar content inset
-        if (isSubSettings || (!mIsShowingDashboard && !mIsShortcut)) {
+        mIsShowingDashboard = className.equals(Settings.class.getName());
+        final boolean isSubSettings = className.equals(SubSettings.class.getName());
+
+        // If this is a sub settings or not the main Dashboard and not a Shortcut and not initial
+        // Fragment then apply the correct theme for the ActionBar content inset
+        if (isSubSettings ||
+                (!mIsShowingDashboard && !mIsShortcut && (initialFragmentName == null))) {
             setTheme(R.style.Theme_SubSettings);
         }
 
@@ -502,9 +513,6 @@ public class SettingsActivity extends Activity
         mContent = (ViewGroup) findViewById(R.id.prefs);
 
         getFragmentManager().addOnBackStackChangedListener(this);
-
-        mDisplayHomeAsUpEnabled = true;
-        mDisplaySearch = true;
 
         if (mIsShowingDashboard) {
             Index.getInstance(getApplicationContext()).update();
@@ -535,6 +543,9 @@ public class SettingsActivity extends Activity
                 if (mIsShortcut) {
                     mDisplayHomeAsUpEnabled = isSubSettings;
                     mDisplaySearch = false;
+                } else if (isSubSettings) {
+                    mDisplayHomeAsUpEnabled = true;
+                    mDisplaySearch = true;
                 }
                 setTitleFromIntent(intent);
 
@@ -542,8 +553,10 @@ public class SettingsActivity extends Activity
                 switchToFragment(initialFragmentName, initialArguments, true, false,
                         mInitialTitleResId, mInitialTitle, false);
             } else {
-                // No UP if we are displaying the main Dashboard
+                // No UP affordance if we are displaying the main Dashboard
                 mDisplayHomeAsUpEnabled = false;
+                // Show Search affordance
+                mDisplaySearch = true;
                 mInitialTitleResId = R.string.dashboard_title;
                 switchToFragment(DashboardSummary.class.getName(), null, false, false,
                         mInitialTitleResId, mInitialTitle, false);
