@@ -682,16 +682,6 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name=".users.AppRestrictionsFragment$Activity"
-                android:label="@string/application_info_label"
-                android:exported="true"
-                android:taskAffinity="">
-            <intent-filter>
-                <action android:name="com.android.settings.APP_RESTRICTIONS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
                 android:label="@string/runningservices_settings_title"
