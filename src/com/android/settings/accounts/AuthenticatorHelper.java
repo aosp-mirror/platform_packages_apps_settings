@@ -174,7 +174,7 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         // See http://b/15819268
         updateAuthDescriptions(mContext);
         if (accounts == null) {
-            accounts = AccountManager.get(mContext).getAccounts();
+            accounts = AccountManager.get(mContext).getAccountsAsUser(mUserHandle.getIdentifier());
         }
         mEnabledAccountTypes.clear();
         mAccTypeIconCache.clear();

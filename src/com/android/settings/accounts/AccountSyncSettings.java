@@ -284,7 +284,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             SyncStateCheckBoxPreference syncPref = (SyncStateCheckBoxPreference) preference;
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
-            boolean syncAutomatically = ContentResolver.getSyncAutomatically(account, authority);
+            final int userId = mUserHandle.getIdentifier();
+            boolean syncAutomatically = ContentResolver.getSyncAutomaticallyAsUser(account,
+                    authority, userId);
             if (syncPref.isOneTimeSyncMode()) {
                 requestOrCancelSync(account, authority, true);
             } else {
@@ -292,11 +294,11 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 boolean oldSyncState = syncAutomatically;
                 if (syncOn != oldSyncState) {
                     // if we're enabling sync, this will request a sync as well
-                    ContentResolver.setSyncAutomatically(account, authority, syncOn);
+                    ContentResolver.setSyncAutomaticallyAsUser(account, authority, syncOn, userId);
                     // if the master sync switch is off, the request above will
                     // get dropped.  when the user clicks on this toggle,
                     // we want to force the sync, however.
-                    if (!ContentResolver.getMasterSyncAutomatically() || !syncOn) {
+                    if (!ContentResolver.getMasterSyncAutomaticallyAsUser(userId) || !syncOn) {
                         requestOrCancelSync(account, authority, syncOn);
                     }
                 }
