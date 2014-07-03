@@ -22,12 +22,13 @@
     <item android:id="@android:id/secondaryProgress">
         <scale android:scaleWidth="100%">
             <nine-patch android:src="@*android:drawable/progress_mtrl_alpha"
-                android:tint="?android:attr/colorControlActivated" />
+                android:tint="?android:attr/colorControlActivated"
+                android:alpha="0.5" />
         </scale>
     </item>
     <item android:id="@android:id/progress">
         <scale android:scaleWidth="100%">
-            <nine-patch android:src="@*android:drawable/progress_primary_mtrl_alpha"
+            <nine-patch android:src="@*android:drawable/progress_mtrl_alpha"
                 android:tint="?android:attr/colorControlActivated" />
         </scale>
     </item>
