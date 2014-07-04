@@ -16,9 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,6 +28,9 @@ import android.util.Log;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
 
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
 import java.util.ArrayList;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
@@ -42,19 +42,20 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     private SpellCheckerInfo mCurrentSci;
     private SpellCheckerInfo[] mEnabledScis;
     private TextServicesManager mTsm;
-    private final ArrayList<SingleSpellCheckerPreference> mSpellCheckers =
-            new ArrayList<SingleSpellCheckerPreference>();
+    private final ArrayList<SingleSpellCheckerPreference> mSpellCheckers = new ArrayList<>();
 
     @Override
-    public void onCreate(Bundle icicle) {
+    public void onCreate(final Bundle icicle) {
         super.onCreate(icicle);
         mTsm = (TextServicesManager) getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE);
         addPreferencesFromResource(R.xml.spellchecker_prefs);
         updateScreen();
     }
 
+    // Override the behavior of {@link PreferenceFragment}.
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+    public boolean onPreferenceTreeClick(final PreferenceScreen screen,
+            final Preference preference) {
         return false;
     }
 
@@ -64,28 +65,18 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         updateScreen();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        saveState();
-    }
-
-    private void saveState() {
-        SpellCheckerUtils.setCurrentSpellChecker(mTsm, mCurrentSci);
-    }
-
     private void updateScreen() {
         getPreferenceScreen().removeAll();
         updateEnabledSpellCheckers();
     }
 
     private void updateEnabledSpellCheckers() {
-        final PackageManager pm = getPackageManager();
-        mCurrentSci = SpellCheckerUtils.getCurrentSpellChecker(mTsm);
-        mEnabledScis = SpellCheckerUtils.getEnabledSpellCheckers(mTsm);
+        mCurrentSci = mTsm.getCurrentSpellChecker();
+        mEnabledScis = mTsm.getEnabledSpellCheckers();
         if (mCurrentSci == null || mEnabledScis == null) {
             return;
         }
+        final PackageManager pm = getPackageManager();
         mSpellCheckers.clear();
         for (int i = 0; i < mEnabledScis.length; ++i) {
             final SpellCheckerInfo sci = mEnabledScis[i];
@@ -99,18 +90,15 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceClick(Preference pref) {
-        SingleSpellCheckerPreference targetScp = null;
-        for (SingleSpellCheckerPreference scp : mSpellCheckers) {
+    public boolean onPreferenceClick(final Preference pref) {
+        for (final SingleSpellCheckerPreference scp : mSpellCheckers) {
             if (pref.equals(scp)) {
-                targetScp = scp;
-            }
-        }
-        if (targetScp != null) {
-            if (!isSystemApp(targetScp.getSpellCheckerInfo())) {
-                showSecurityWarnDialog(targetScp);
-            } else {
-                changeCurrentSpellChecker(targetScp);
+                if (isSystemApp(scp.getSpellCheckerInfo())) {
+                    changeCurrentSpellChecker(scp);
+                } else {
+                    showSecurityWarnDialog(scp);
+                }
+                return true;
             }
         }
         return true;
@@ -120,39 +108,36 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
-        mDialog = (new AlertDialog.Builder(getActivity()))
-                .setTitle(android.R.string.dialog_alert_title)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        changeCurrentSpellChecker(scp);
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .create();
-        mDialog.setMessage(getResources().getString(R.string.spellchecker_security_warning,
-                scp.getSpellCheckerInfo().getServiceInfo().applicationInfo.loadLabel(
-                        getActivity().getPackageManager())));
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(android.R.string.dialog_alert_title);
+        final PackageManager pm = getPackageManager();
+        builder.setMessage(getString(R.string.spellchecker_security_warning,
+                scp.getSpellCheckerInfo().getServiceInfo().applicationInfo.loadLabel(pm)));
+        builder.setCancelable(true);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                changeCurrentSpellChecker(scp);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+            }
+        });
+        mDialog = builder.create();
         mDialog.show();
     }
 
-    private void changeCurrentSpellChecker(SingleSpellCheckerPreference scp) {
+    private void changeCurrentSpellChecker(final SingleSpellCheckerPreference scp) {
         mTsm.setCurrentSpellChecker(scp.getSpellCheckerInfo());
         if (DBG) {
-            Log.d(TAG, "Current spell check is "
-                        + SpellCheckerUtils.getCurrentSpellChecker(mTsm).getId());
+            Log.d(TAG, "Current spell check is " + mTsm.getCurrentSpellChecker().getId());
         }
         updateScreen();
     }
 
-    private static boolean isSystemApp(SpellCheckerInfo sci) {
+    private static boolean isSystemApp(final SpellCheckerInfo sci) {
         return (sci.getServiceInfo().applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 }
