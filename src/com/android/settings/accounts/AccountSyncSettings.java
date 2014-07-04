@@ -93,7 +93,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                         // TODO: We need an API to remove an account from a different user.
                         // See: http://b/15466880
                         AccountManager.get(AccountSyncSettings.this.getActivity())
-                                .removeAccount(mAccount,
+                                .removeAccountAsUser(mAccount,
                                 new AccountManagerCallback<Boolean>() {
                             @Override
                             public void run(AccountManagerFuture<Boolean> future) {
@@ -120,7 +120,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                                     finish();
                                 }
                             }
-                        }, null);
+                        }, null, mUserHandle);
                     }
                 })
                 .create();
