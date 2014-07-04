@@ -171,9 +171,7 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         return false;
     }
 
-    public void onAccountsUpdated(Account[] accounts) {
-        // TODO: Revert to non-public once no longer needed in SettingsActivity
-        // See http://b/15819268
+    void onAccountsUpdated(Account[] accounts) {
         updateAuthDescriptions(mContext);
         if (accounts == null) {
             accounts = AccountManager.get(mContext).getAccountsAsUser(mUserHandle.getIdentifier());
@@ -193,6 +191,7 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
+        // TODO: watch for package upgrades to invalidate cache; see http://b/7206643
         final Account[] accounts = AccountManager.get(mContext)
                 .getAccountsAsUser(mUserHandle.getIdentifier());
         onAccountsUpdated(accounts);

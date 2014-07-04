@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.OnAccountsUpdateListener;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -70,8 +67,6 @@ import com.android.internal.util.XmlUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accounts.AccountSyncSettings;
-import com.android.settings.accounts.AuthenticatorHelper;
-import com.android.settings.accounts.ManageAccountsSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
@@ -117,8 +112,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -127,10 +120,9 @@ import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
 public class SettingsActivity extends Activity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
-        ButtonBarHandler, OnAccountsUpdateListener, FragmentManager.OnBackStackChangedListener,
+        ButtonBarHandler, FragmentManager.OnBackStackChangedListener,
         SearchView.OnQueryTextListener, SearchView.OnCloseListener,
-        MenuItem.OnActionExpandListener,
-        AuthenticatorHelper.OnAccountsUpdateListener {
+        MenuItem.OnActionExpandListener {
 
     private static final String LOG_TAG = "Settings";
 
@@ -221,7 +213,6 @@ public class SettingsActivity extends Activity
             R.id.language_settings,
             R.id.user_settings,
             R.id.account_settings,
-            R.id.account_add,
             R.id.system_section,
             R.id.date_time_settings,
             R.id.about_settings,
@@ -275,7 +266,6 @@ public class SettingsActivity extends Activity
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
             ConditionProviderSettings.class.getName(),
-            ManageAccountsSettings.class.getName(),
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
@@ -296,9 +286,6 @@ public class SettingsActivity extends Activity
 
     private SharedPreferences mDevelopmentPreferences;
     private SharedPreferences.OnSharedPreferenceChangeListener mDevelopmentPreferencesListener;
-
-    private AuthenticatorHelper mAuthenticatorHelper;
-    private boolean mListeningToAccountUpdates;
 
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -361,10 +348,6 @@ public class SettingsActivity extends Activity
 
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
-    }
-
-    public AuthenticatorHelper getAuthenticatorHelper() {
-        return mAuthenticatorHelper;
     }
 
     public List<DashboardCategory> getDashboardCategories() {
@@ -482,13 +465,6 @@ public class SettingsActivity extends Activity
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
-        // TODO: Delete accounts tile once we have the new screen working
-        // See: http://b/15815948
-        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        mAuthenticatorHelper = new AuthenticatorHelper(
-                this, UserHandle.getCallingUserHandle(), um, this);
-        mAuthenticatorHelper.updateAuthDescriptions(this);
-        mAuthenticatorHelper.onAccountsUpdated(null);
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -743,10 +719,6 @@ public class SettingsActivity extends Activity
         mDevelopmentPreferences.unregisterOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
         mDevelopmentPreferencesListener = null;
-
-        if (mListeningToAccountUpdates) {
-            AccountManager.get(this).removeOnAccountsUpdatedListener(this);
-        }
     }
 
     protected boolean isValidFragment(String fragmentName) {
@@ -1071,10 +1043,6 @@ public class SettingsActivity extends Activity
 
             // Ids are integers, so downcasting is ok
             int id = (int) category.id;
-            if (id == R.id.account_settings) {
-                insertAccountsTiles(category);
-                continue;
-            }
             int n = category.getTilesCount() - 1;
             while (n >= 0) {
 
@@ -1146,10 +1114,6 @@ public class SettingsActivity extends Activity
                             UserManager.DISALLOW_DEBUGGING_FEATURES)) {
                         category.removeTile(n);
                     }
-                } else if (id == R.id.account_add) {
-                    if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
-                        category.removeTile(n);
-                    }
                 }
 
                 if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
@@ -1201,62 +1165,6 @@ public class SettingsActivity extends Activity
         return true;
     }
 
-    private void insertAccountsTiles(DashboardCategory target) {
-        String[] accountTypes = mAuthenticatorHelper.getEnabledAccountTypes();
-        List<DashboardTile> dashboardTiles = new ArrayList<DashboardTile>(accountTypes.length);
-        for (String accountType : accountTypes) {
-            CharSequence label = mAuthenticatorHelper.getLabelForType(this, accountType);
-            if (label == null) {
-                continue;
-            }
-
-            Account[] accounts = AccountManager.get(this).getAccountsByType(accountType);
-            boolean skipToAccount = accounts.length == 1
-                    && !mAuthenticatorHelper.hasAccountPreferences(accountType);
-            DashboardTile accountTile = new DashboardTile();
-            accountTile.title = label;
-            if (accountTile.extras == null) {
-                accountTile.extras = new Bundle();
-            }
-            if (skipToAccount) {
-                accountTile.fragment = AccountSyncSettings.class.getName();
-                accountTile.fragmentArguments = new Bundle();
-                // Need this for the icon
-                accountTile.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
-                accountTile.extras.putParcelable(AccountSyncSettings.ACCOUNT_KEY, accounts[0]);
-                accountTile.fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
-                        accounts[0]);
-            } else {
-                accountTile.fragment = ManageAccountsSettings.class.getName();
-                accountTile.fragmentArguments = new Bundle();
-                accountTile.extras.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
-                accountTile.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE,
-                        accountType);
-                accountTile.fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_LABEL,
-                        label.toString());
-            }
-            dashboardTiles.add(accountTile);
-            mAuthenticatorHelper.preloadDrawableForType(this, accountType);
-        }
-
-        // Sort by label
-        Collections.sort(dashboardTiles, new Comparator<DashboardTile>() {
-            @Override
-            public int compare(DashboardTile t1, DashboardTile t2) {
-                return t1.title.toString().compareTo(t2.title.toString());
-            }
-        });
-        int index = 0;
-        for (DashboardTile tile : dashboardTiles) {
-            target.addTile(index, tile);
-            index++;
-        }
-        if (!mListeningToAccountUpdates) {
-            AccountManager.get(this).addOnAccountsUpdatedListener(this, null, true);
-            mListeningToAccountUpdates = true;
-        }
-    }
-
     private void getMetaData() {
         try {
             ActivityInfo ai = getPackageManager().getActivityInfo(getComponentName(),
@@ -1281,18 +1189,6 @@ public class SettingsActivity extends Activity
     @Override
     public boolean shouldUpRecreateTask(Intent targetIntent) {
         return super.shouldUpRecreateTask(new Intent(this, SettingsActivity.class));
-    }
-
-    @Override
-    public void onAccountsUpdated(Account[] accounts) {
-        // TODO: watch for package upgrades to invalidate cache; see 7206643
-        mAuthenticatorHelper.updateAuthDescriptions(this);
-        invalidateCategories();
-    }
-
-    @Override
-    public void onAccountsUpdate(UserHandle userHandle) {
-        invalidateCategories();
     }
 
     public static void requestHomeNotice() {
