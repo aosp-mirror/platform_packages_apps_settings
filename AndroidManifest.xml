@@ -1698,21 +1698,6 @@
                 android:resource="@id/notification_settings" />
         </activity-alias>
 
-        <activity android:name="Settings$NotificationDisplaySettingsActivity"
-                android:label="@string/notification_display_settings"
-                android:exported="true"
-                android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_NOTIFICATION_DISPLAY_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.NotificationDisplaySettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/notification_settings" />
-        </activity>
-
         <activity android:name="Settings$OtherSoundSettingsActivity"
                 android:label="@string/other_sound_settings"
                 android:exported="true"

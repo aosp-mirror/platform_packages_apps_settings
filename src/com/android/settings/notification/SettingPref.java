@@ -60,7 +60,7 @@ public class SettingPref {
         throw new UnsupportedOperationException();
     }
 
-    public void init(SettingsPreferenceFragment settings) {
+    public Preference init(SettingsPreferenceFragment settings) {
         final Context context = settings.getActivity();
         Preference p = settings.getPreferenceScreen().findPreference(mKey);
         if (p != null && !isApplicable(context)) {
@@ -84,14 +84,18 @@ public class SettingPref {
                     return true;
                 }
             });
-        } else if (mDropDown != null) {
+            return mTwoState;
+        }
+        if (mDropDown != null) {
             mDropDown.setCallback(new DropDownPreference.Callback() {
                 @Override
                 public boolean onItemSelected(int pos, Object value) {
                     return setSetting(context, (Integer) value);
                 }
             });
+            return mDropDown;
         }
+        return null;
     }
 
     protected boolean setSetting(Context context, int value) {

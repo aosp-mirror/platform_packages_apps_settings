@@ -353,7 +353,7 @@ public class AppNotificationSettings extends ListFragment {
         public void bindView(final View view, Row r, boolean animate) {
             if (!(r instanceof AppRow)) {
                 // it's a section row
-                TextView tv = (TextView)view;
+                final TextView tv = (TextView)view.findViewById(android.R.id.title);
                 tv.setText(r.section);
                 return;
             }
