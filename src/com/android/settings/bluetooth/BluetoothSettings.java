@@ -57,16 +57,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_RENAME_DEVICE = Menu.FIRST + 1;
-    private static final int MENU_ID_VISIBILITY_TIMEOUT = Menu.FIRST + 2;
-    private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 3;
-    private static final int MENU_ID_MESSAGE_ACCESS = Menu.FIRST + 4;
+    private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 2;
+    private static final int MENU_ID_MESSAGE_ACCESS = Menu.FIRST + 3;
 
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
 
     private BluetoothEnabler mBluetoothEnabler;
-    private BluetoothDiscoverableEnabler mDiscoverableEnabler;
 
     private PreferenceGroup mPairedDevicesCategory;
     private PreferenceGroup mAvailableDevicesCategory;
@@ -142,13 +140,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
         super.onResume();
 
-        if (mDiscoverableEnabler != null) {
-            mDiscoverableEnabler.resume(getActivity());
-        }
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mLocalAdapter != null) {
             updateContent(mLocalAdapter.getBluetoothState(), mActivityStarted);
         }
+
+        // Make the device visible to other devices.
+        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
 
     @Override
@@ -158,9 +156,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             mBluetoothEnabler.pause();
         }
         getActivity().unregisterReceiver(mReceiver);
-        if (mDiscoverableEnabler != null) {
-            mDiscoverableEnabler.pause();
-        }
+
+        // Make the device only visible to connected devices.
+        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
     }
 
     @Override
@@ -177,9 +175,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 .setEnabled(bluetoothIsEnabled && !isDiscovering)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_RENAME_DEVICE, 0, R.string.bluetooth_rename_device)
-                .setEnabled(bluetoothIsEnabled)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        menu.add(Menu.NONE, MENU_ID_VISIBILITY_TIMEOUT, 0, R.string.bluetooth_visibility_timeout)
                 .setEnabled(bluetoothIsEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_SHOW_RECEIVED, 0, R.string.bluetooth_show_received_files)
@@ -205,11 +200,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case MENU_ID_RENAME_DEVICE:
                 new BluetoothNameDialogFragment().show(
                         getFragmentManager(), "rename device");
-                return true;
-
-            case MENU_ID_VISIBILITY_TIMEOUT:
-                new BluetoothVisibilityTimeoutFragment().show(
-                        getFragmentManager(), "visibility timeout");
                 return true;
 
             case MENU_ID_SHOW_RECEIVED:
@@ -262,30 +252,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 preferenceScreen.setOrderingAsAdded(true);
                 mDevicePreferenceMap.clear();
 
-                // This device
-                if (mMyDevicePreference == null) {
-                    mMyDevicePreference = new Preference(getActivity());
-                }
-                mMyDevicePreference.setTitle(mLocalAdapter.getName());
-                if (getResources().getBoolean(com.android.internal.R.bool.config_voice_capable)) {
-                    mMyDevicePreference.setIcon(R.drawable.ic_bt_cellphone);    // for phones
-                } else {
-                    mMyDevicePreference.setIcon(R.drawable.ic_bt_laptop);   // for tablets, etc.
-                }
-                mMyDevicePreference.setPersistent(false);
-                mMyDevicePreference.setEnabled(true);
-                preferenceScreen.addPreference(mMyDevicePreference);
-
-                if (!isRestrictedAndNotPinProtected()) {
-                    if (mDiscoverableEnabler == null) {
-                        mDiscoverableEnabler = new BluetoothDiscoverableEnabler(mLocalAdapter,
-                                mMyDevicePreference);
-                        mDiscoverableEnabler.resume(getActivity());
-                        LocalBluetoothManager.getInstance(getActivity()).setDiscoverableEnabler(
-                                mDiscoverableEnabler);
-                    }
-                }
-
                 // Paired devices category
                 if (mPairedDevicesCategory == null) {
                     mPairedDevicesCategory = new PreferenceCategory(getActivity());
@@ -297,13 +263,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                         BluetoothDeviceFilter.BONDED_DEVICE_FILTER);
                 int numberOfPairedDevices = mPairedDevicesCategory.getPreferenceCount();
 
-                if (mDiscoverableEnabler != null) {
-                    mDiscoverableEnabler.setNumberOfPairedDevices(numberOfPairedDevices);
-                }
-
                 // Available devices category
                 if (mAvailableDevicesCategory == null) {
                     mAvailableDevicesCategory = new BluetoothProgressCategory(getActivity());
+                    mAvailableDevicesCategory.setSelectable(false);
                 } else {
                     mAvailableDevicesCategory.removeAll();
                 }
@@ -331,6 +294,16 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                         }
                     }
                 }
+
+                if (mMyDevicePreference == null) {
+                    mMyDevicePreference = new Preference(getActivity());
+                }
+                mMyDevicePreference.setSummary(getResources().getString(
+                            R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
+                mMyDevicePreference.setSelectable(false);
+                mMyDevicePreference.setEnabled(false);
+                preferenceScreen.addPreference(mMyDevicePreference);
+
                 getActivity().invalidateOptionsMenu();
                 return; // not break
 
