@@ -25,7 +25,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -37,10 +36,12 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
+import android.net.NetworkScoreManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
@@ -59,7 +60,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +85,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, Indexable  {
 
     private static final String TAG = "WifiSettings";
+
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
     private static final int MENU_ID_SAVED_NETWORK = Menu.FIRST + 2;
@@ -92,6 +96,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
     private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
+
+    private static final String KEY_ASSISTANT_DISMISS_TIME = "wifi_assistant_dismiss_time";
+    private static final String KEY_ASSISTANT_START_TIME = "wifi_assistant_start_time";
+
+    private static final long MILI_SECONDS_30_DAYS = 30L * 24L * 60L * 60L * 1000L;
+    private static final long MILI_SECONDS_90_DAYS = MILI_SECONDS_30_DAYS * 3L;
+    private static final long MILI_SECONDS_180_DAYS = MILI_SECONDS_90_DAYS * 2L;
 
     public static final int WIFI_DIALOG_ID = 1;
     /* package */ static final int WPS_PBC_DIALOG_ID = 2;
@@ -142,12 +153,112 @@ public class WifiSettings extends RestrictedSettingsFragment
     private boolean mDlgEdit;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
+    private Preference mWifiAssistant;
 
     /** verbose logging flag. this flag is set thru developer debugging options
      * and used so as to assist with in-the-field WiFi connectivity debugging  */
     public static int mVerboseLogging = 0;
 
     /* End of "used in Wifi Setup context" */
+
+    /** Holds the Wifi Assistant Card. */
+    private static class WifiAssistantPreference extends Preference {
+        final WifiSettings mWifiSettings;
+
+        public WifiAssistantPreference(WifiSettings wifiSettings) {
+            super(wifiSettings.getActivity());
+            mWifiSettings = wifiSettings;
+            setLayoutResource(R.layout.wifi_assistant_card);
+        }
+
+        @Override
+        public void onBindView(View view) {
+            super.onBindView(view);
+            final Preference pref = this;
+            Button setup = (Button)view.findViewById(R.id.setup);
+            Button noThanks = (Button)view.findViewById(R.id.no_thanks_button);
+
+            if (setup != null && noThanks != null) {
+                setup.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(NetworkScoreManager.ACTION_CHANGE_ACTIVE);
+                        intent.putExtra(NetworkScoreManager.EXTRA_PACKAGE_NAME, "wifi-assistant");
+                        mWifiSettings.startActivity(intent);
+                        mWifiSettings.setWifiAssistantTimeout();
+                        mWifiSettings.getPreferenceScreen().removePreference(pref);
+                    }
+                });
+
+                noThanks.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mWifiSettings.setWifiAssistantTimeout();
+                        mWifiSettings.getPreferenceScreen().removePreference(pref);
+                    }
+                });
+            }
+        }
+    }
+
+    /** A restricted multimap for use in constructAccessPoints */
+    private static class Multimap<K,V> {
+        private final HashMap<K,List<V>> store = new HashMap<K,List<V>>();
+        /** retrieve a non-null list of values with key K */
+        List<V> getAll(K key) {
+            List<V> values = store.get(key);
+            return values != null ? values : Collections.<V>emptyList();
+        }
+
+        void put(K key, V val) {
+            List<V> curVals = store.get(key);
+            if (curVals == null) {
+                curVals = new ArrayList<V>(3);
+                store.put(key, curVals);
+            }
+            curVals.add(val);
+        }
+    }
+
+    private static class Scanner extends Handler {
+        private int mRetry = 0;
+        private WifiSettings mWifiSettings = null;
+
+        Scanner(WifiSettings wifiSettings) {
+            mWifiSettings = wifiSettings;
+        }
+
+        void resume() {
+            if (!hasMessages(0)) {
+                sendEmptyMessage(0);
+            }
+        }
+
+        void forceScan() {
+            removeMessages(0);
+            sendEmptyMessage(0);
+        }
+
+        void pause() {
+            mRetry = 0;
+            removeMessages(0);
+        }
+
+        @Override
+        public void handleMessage(Message message) {
+            if (mWifiSettings.mWifiManager.startScan()) {
+                mRetry = 0;
+            } else if (++mRetry >= 3) {
+                mRetry = 0;
+                Activity activity = mWifiSettings.getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, R.string.wifi_fail_to_scan, Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+            sendEmptyMessageDelayed(0, WIFI_RESCAN_INTERVAL_MS);
+        }
+    }
 
     public WifiSettings() {
         super(DISALLOW_CONFIG_WIFI);
@@ -168,7 +279,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         };
 
-        mScanner = new Scanner();
+        mScanner = new Scanner(this);
     }
 
     @Override
@@ -248,6 +359,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         addPreferencesFromResource(R.xml.wifi_settings);
 
+        mWifiAssistant = new WifiAssistantPreference(this);
+
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
         registerForContextMenu(getListView());
@@ -322,7 +435,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 .setIcon(ta.getDrawable(0))
                 .setEnabled(wifiIsEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        if (savedNetworksExist){
+        if (savedNetworksExist) {
             menu.add(Menu.NONE, MENU_ID_SAVED_NETWORK, 0, R.string.wifi_saved_access_points_label)
                     .setIcon(ta.getDrawable(0))
                     .setEnabled(wifiIsEnabled)
@@ -483,7 +596,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE &&
                     mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
-                if (!savedNetworksExist){
+                if (!savedNetworksExist) {
                     savedNetworksExist = true;
                     getActivity().invalidateOptionsMenu();
                 }
@@ -566,9 +679,14 @@ public class WifiSettings extends RestrictedSettingsFragment
                 final Collection<AccessPoint> accessPoints =
                         constructAccessPoints(getActivity(), mWifiManager, mLastInfo, mLastState);
                 getPreferenceScreen().removeAll();
-                if(accessPoints.size() == 0) {
+                if (accessPoints.size() == 0) {
                     addMessagePreference(R.string.wifi_empty_list_wifi_on);
                 }
+
+                if (showWifiAssistantCard()) {
+                    getPreferenceScreen().addPreference(mWifiAssistant);
+                }
+
                 for (AccessPoint accessPoint : accessPoints) {
                     getPreferenceScreen().addPreference(accessPoint);
                 }
@@ -586,6 +704,34 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setOffMessage();
                 break;
         }
+    }
+
+    private boolean showWifiAssistantCard() {
+        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+        long lastTimeoutEndTime = sharedPreferences.getLong(KEY_ASSISTANT_START_TIME, 0);
+        long dismissTime = sharedPreferences.getLong(KEY_ASSISTANT_DISMISS_TIME, 0);
+
+        return ((System.currentTimeMillis() - lastTimeoutEndTime) > dismissTime);
+    }
+
+    private void setWifiAssistantTimeout() {
+        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        long dismissTime = sharedPreferences.getLong(KEY_ASSISTANT_DISMISS_TIME, 0);
+
+        if (dismissTime == 0) {
+            dismissTime = MILI_SECONDS_30_DAYS;
+        } else if (dismissTime == MILI_SECONDS_30_DAYS) {
+            dismissTime = MILI_SECONDS_90_DAYS;
+        } else if (dismissTime == MILI_SECONDS_90_DAYS) {
+            dismissTime = MILI_SECONDS_180_DAYS;
+        } else if (dismissTime == MILI_SECONDS_180_DAYS) {
+            dismissTime = java.lang.Long.MAX_VALUE;
+        }
+
+        editor.putLong(KEY_ASSISTANT_DISMISS_TIME, dismissTime);
+        editor.putLong(KEY_ASSISTANT_START_TIME, System.currentTimeMillis());
+        editor.apply();
     }
 
     private void setOffMessage() {
@@ -661,25 +807,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         // Pre-sort accessPoints to speed preference insertion
         Collections.sort(accessPoints);
         return accessPoints;
-    }
-
-    /** A restricted multimap for use in constructAccessPoints */
-    private static class Multimap<K,V> {
-        private final HashMap<K,List<V>> store = new HashMap<K,List<V>>();
-        /** retrieve a non-null list of values with key K */
-        List<V> getAll(K key) {
-            List<V> values = store.get(key);
-            return values != null ? values : Collections.<V>emptyList();
-        }
-
-        void put(K key, V val) {
-            List<V> curVals = store.get(key);
-            if (curVals == null) {
-                curVals = new ArrayList<V>(3);
-                store.put(key, curVals);
-            }
-            curVals.add(val);
-        }
     }
 
     private void handleEvent(Context context, Intent intent) {
@@ -771,41 +898,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         mLastInfo = null;
         mLastState = null;
         mScanner.pause();
-    }
-
-    private class Scanner extends Handler {
-        private int mRetry = 0;
-
-        void resume() {
-            if (!hasMessages(0)) {
-                sendEmptyMessage(0);
-            }
-        }
-
-        void forceScan() {
-            removeMessages(0);
-            sendEmptyMessage(0);
-        }
-
-        void pause() {
-            mRetry = 0;
-            removeMessages(0);
-        }
-
-        @Override
-        public void handleMessage(Message message) {
-            if (mWifiManager.startScan()) {
-                mRetry = 0;
-            } else if (++mRetry >= 3) {
-                mRetry = 0;
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity, R.string.wifi_fail_to_scan, Toast.LENGTH_LONG).show();
-                }
-                return;
-            }
-            sendEmptyMessageDelayed(0, WIFI_RESCAN_INTERVAL_MS);
-        }
     }
 
     /**
