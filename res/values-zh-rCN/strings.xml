@@ -165,7 +165,7 @@
     <string name="bluetooth_connection_notif_message" msgid="3687933246423942977">"触摸可连接到“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”。"</string>
     <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"要连接到“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”吗？"</string>
     <string name="bluetooth_phonebook_request" msgid="3951420080540915279">"电话簿权限申请"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s想访问您的联系人信息和通话记录。要向%2$s授予访问权限吗？"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="6555508756987053866">"%1$s想要使用您的通讯录和通话记录。要向%2$s授予权限吗？"</string>
     <string name="bluetooth_remember_choice" msgid="6198284561603824931">"不要再询问"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"下次不再询问"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"消息权限申请"</string>
@@ -194,7 +194,7 @@
     <string name="proxy_error" msgid="8926675299638611451">"注意"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"确定"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"您键入的主机名无效。"</string>
-    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"您键入的排除列表的格式不正确。请键入以逗号分隔的排除域列表。"</string>
+    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"您输入的排除列表格式有误。请输入以逗号分隔的排除网域列表。"</string>
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"您需要填写端口字段。"</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"如果主机字段为空，则端口字段必须为空。"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"您键入的端口无效。"</string>
@@ -389,7 +389,7 @@
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"密码必须少于 <xliff:g id="NUMBER">%d</xliff:g> 个字符。"</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN 必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数。"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN 只能包含 0-9 的数字。"</string>
-    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"设备管理员不允许使用最近用过的 PIN。"</string>
+    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"设备管理器不允许使用最近用过的PIN码。"</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"密码包含非法字符。"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"密码必须包含至少 1 个字母。"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"密码必须包含至少 1 个数字。"</string>
@@ -418,7 +418,7 @@
     <item quantity="one" msgid="4594051152085925921">"密码必须包含至少 1 个非字母字符。"</item>
     <item quantity="other" msgid="3952508584649046404">"密码必须包含至少 %d 个非字母字符。"</item>
   </plurals>
-    <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理员不允许使用最近用过的密码。"</string>
+    <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理器不允许使用最近用过的密码。"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"取消"</string>
@@ -427,7 +427,7 @@
     <string name="device_admin_title" msgid="3562216873644263804">"设备管理"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"设备管理器"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"查看或停用设备管理器"</string>
-    <string name="manage_notification_access" msgid="5799781079264981979">"通知读取权限"</string>
+    <string name="manage_notification_access" msgid="5799781079264981979">"通知使用权"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"应用无法读取通知"</string>
   <plurals name="manage_notification_access_summary_nonzero">
     <item quantity="one" msgid="8344183614159211585">"%d个应用可以读取通知"</item>
@@ -960,19 +960,19 @@
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"您需要绘制解锁图案以确认要清空 SD 卡。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通话设置"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"设置语音信箱、来电转接、来电等待和本机号码显示"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB 共享网络"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB网络共享"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"便携式热点"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"蓝牙共享网络"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"蓝牙网络共享"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"网络共享"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"网络共享与便携式热点"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 共享网络"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB网络共享"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB 已连接，选中以共享网络"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"已共享网络"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"使用 USB 存储设备时无法共享网络"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB 未连接"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB 共享网络出错"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙共享网络"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB网络共享出错"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙网络共享"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"共享该平板电脑的互联网连接"</string>
     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"共享该手机的互联网连接"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"将该平板电脑的互联网连接与 1 台设备共享"</string>
@@ -1039,7 +1039,7 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"正在加载..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"安全信息"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全信息"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="232523852222964470">"您没有数据连接。要立即查看此信息，请通过已联网的任意计算机访问 %s。"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="232523852222964470">"您没有数据连接。要立即查看此信息，请使用联网的计算机访问%s。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"正在加载..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"选择您的密码"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"选择您的图案"</string>
@@ -1172,7 +1172,7 @@
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"使用此应用可能会产生费用："</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"发送付费短信"</string>
     <string name="computing_size" msgid="1599186977475211186">"正在计算..."</string>
-    <string name="invalid_size_value" msgid="7563537715280712285">"无法计算包的大小。"</string>
+    <string name="invalid_size_value" msgid="7563537715280712285">"无法计算软件包的大小。"</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"未安装任何第三方应用。"</string>
     <string name="version_text" msgid="9189073826278676425">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"移动"</string>
@@ -1639,8 +1639,8 @@
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"从 SD 卡安装证书"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"清除凭据"</string>
     <string name="credentials_reset_summary" msgid="3369361230171260282">"删除所有证书"</string>
-    <string name="trusted_credentials" msgid="4266945289534242402">"受信任的凭据"</string>
-    <string name="trusted_credentials_summary" msgid="6735221351155686632">"显示受信任的 CA 证书"</string>
+    <string name="trusted_credentials" msgid="4266945289534242402">"信任的凭据"</string>
+    <string name="trusted_credentials_summary" msgid="6735221351155686632">"显示信任的CA证书"</string>
     <string name="credential_storage_type" msgid="8629968543494001364">"存储类型"</string>
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"硬件支持"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"仅限软件"</string>
@@ -1753,14 +1753,14 @@
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"数据与同步"</string>
     <string name="preference_change_password_title" msgid="8955581790270130056">"更改密码"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"帐户设置"</string>
-    <string name="remove_account_label" msgid="5921986026504804119">"删除帐户"</string>
+    <string name="remove_account_label" msgid="5921986026504804119">"移除帐户"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"添加帐户"</string>
     <string name="finish_button_label" msgid="481587707657751116">"完成"</string>
-    <string name="really_remove_account_title" msgid="8800653398717172460">"要删除帐户吗？"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"删除该帐户会从平板电脑中删除所有相关的邮件、联系人以及其他数据。"</string>
-    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"删除该帐户会从手机中删除所有相关的邮件、联系人以及其它数据。"</string>
-    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"某些应用需要使用此帐户。您只有将平板电脑重置为出厂默认设置（此操作会删除您的所有个人数据），才能删除此帐户。您可以通过“设置”&gt;“备份和重置 ”执行此操作。"</string>
-    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"某些应用需要使用此帐户。您只有将手机重置为出厂默认设置（此操作会删除您的所有个人数据），才能删除此帐户。您可以通过“设置”&gt;“备份和重置”执行此操作。"</string>
+    <string name="really_remove_account_title" msgid="8800653398717172460">"要移除帐户吗？"</string>
+    <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"移除该帐户会从平板电脑中删除所有相关的邮件、联系人以及其他数据。"</string>
+    <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"移除该帐户会从手机中删除所有相关的邮件、联系人以及其它数据。"</string>
+    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"某些应用需要使用此帐户。您只有将平板电脑重置为出厂默认设置（此操作会删除您的所有个人数据），才能移除此帐户。您可以通过“设置”&gt;“备份和重置 ”执行此操作。"</string>
+    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"某些应用需要使用此帐户。您只有将手机重置为出厂默认设置（此操作会删除您的所有个人数据），才能移除此帐户。您可以通过“设置”&gt;“备份和重置”执行此操作。"</string>
     <string name="provider_label" msgid="7724593781904508866">"推送订阅"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
@@ -1907,7 +1907,7 @@
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA 证书"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec 服务器证书"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"显示高级选项"</string>
-    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS 搜索域"</string>
+    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS搜索网域"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS 服务器（例如 8.8.8.8）"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"转发路线（例如 10.0.0.0/8）"</string>
     <string name="vpn_username" msgid="1863901629860867849">"用户名"</string>
@@ -1953,9 +1953,9 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"网络可能会受到监控"</string>
     <string name="done_button" msgid="1991471253042622230">"完成"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"网络监控"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"此设备由以下企业域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理员可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如要了解详情，请与您的管理员联系。"</string>
-    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如果您在设备上安装受信任的凭据，就可能出现这种情况。"</string>
-    <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"查看受信任的凭据"</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"此设备由以下网域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理员可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如要了解详情，请与您的管理员联系。"</string>
+    <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
+    <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"查看信任的凭据"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"用户"</string>
     <string name="user_list_title" msgid="7937158411137563543">"用户和个人资料"</string>
     <string name="user_add_user_menu" msgid="3154537325132012954">"添加用户或个人资料"</string>
