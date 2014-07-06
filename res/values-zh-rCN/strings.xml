@@ -174,7 +174,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"下次不再询问"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"消息权限申请"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"“%1$s”想要查看您的消息。要向“%2$s”授予权限吗？"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"日期和时间设置"</string>
+    <!-- no translation found for date_and_time (9062980487860757694) -->
+    <skip />
     <string name="choose_timezone" msgid="1362834506479536274">"选择时区"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"所在区域 (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"预览:"</string>
@@ -198,7 +199,7 @@
     <string name="proxy_error" msgid="8926675299638611451">"注意"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"确定"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"您键入的主机名无效。"</string>
-    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"您键入的排除列表的格式不正确。请键入以逗号分隔的排除域列表。"</string>
+    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"您输入的排除列表格式有误。请输入以逗号分隔的排除网域列表。"</string>
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"您需要填写端口字段。"</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"如果主机字段为空，则端口字段必须为空。"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"您键入的端口无效。"</string>
@@ -313,6 +314,8 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"解锁时需要眨眼"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
+    <!-- no translation found for lock_after_timeout_summary_with_exception (5579064842797188409) -->
+    <skip />
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"在锁定屏幕上显示机主信息"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"机主信息"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"启用小部件"</string>
@@ -395,7 +398,7 @@
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"密码必须少于 <xliff:g id="NUMBER">%d</xliff:g> 个字符。"</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN 必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数。"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN 只能包含 0-9 的数字。"</string>
-    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"设备管理员不允许使用最近用过的 PIN。"</string>
+    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"设备管理器不允许使用最近用过的PIN码。"</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"密码包含非法字符。"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"密码必须包含至少 1 个字母。"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"密码必须包含至少 1 个数字。"</string>
@@ -424,7 +427,7 @@
     <item quantity="one" msgid="4594051152085925921">"密码必须包含至少 1 个非字母字符。"</item>
     <item quantity="other" msgid="3952508584649046404">"密码必须包含至少 %d 个非字母字符。"</item>
   </plurals>
-    <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理员不允许使用最近用过的密码。"</string>
+    <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理器不允许使用最近用过的密码。"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"取消"</string>
@@ -948,8 +951,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"您需要绘制解锁图案以确认要恢复出厂设置。"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"“系统清除”服务不可用，因此未执行重置操作。"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"要重置吗？"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"此用户无权恢复出厂设置"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"格式化 USB 存储设备"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"格式化 SD 卡"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"清除 USB 存储设备中的全部数据"</string>
@@ -1080,6 +1082,8 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"显示图案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"触摸时振动"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"电源按钮即时锁定"</string>
+    <!-- no translation found for lockpattern_settings_power_button_instantly_locks_summary (8196258755143711694) -->
+    <skip />
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"设置解锁图案"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"更改解锁图案"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"如何绘制解锁图案"</string>
@@ -1177,7 +1181,7 @@
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"使用此应用可能会产生费用："</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"发送付费短信"</string>
     <string name="computing_size" msgid="1599186977475211186">"正在计算..."</string>
-    <string name="invalid_size_value" msgid="7563537715280712285">"无法计算包的大小。"</string>
+    <string name="invalid_size_value" msgid="7563537715280712285">"无法计算软件包的大小。"</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"未安装任何第三方应用。"</string>
     <string name="version_text" msgid="9189073826278676425">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"移动"</string>
@@ -1339,19 +1343,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"启用蓝牙 HCI 信息收集日志"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"捕获单个文件中的所有蓝牙 HCI 包"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"无线显示认证"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"启用WLAN详细日志记录功能"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"主动从WLAN网络切换到移动数据网络"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"一律允许WLAN漫游扫描"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"显示无线显示认证选项"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"提升WLAN日志记录级别（在WLAN选择器中显示每个SSID的RSSI）"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"开启此设置后，系统会在WLAN信号较弱时，主动将网络模式从WLAN网络切换到移动数据网络"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"根据接口中目前的数据流量允许/禁止WLAN漫游扫描"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"日志记录器缓冲区大小"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"选择每个日志缓冲区的日志记录器大小"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"允许模拟位置"</string>
@@ -1989,7 +1987,7 @@
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA 证书"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec 服务器证书"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"显示高级选项"</string>
-    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS 搜索域"</string>
+    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS搜索网域"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS 服务器（例如 8.8.8.8）"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"转发路线（例如 10.0.0.0/8）"</string>
     <string name="vpn_username" msgid="1863901629860867849">"用户名"</string>
@@ -2035,7 +2033,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"网络可能会受到监控"</string>
     <string name="done_button" msgid="1991471253042622230">"完成"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"网络监控"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"此设备由以下企业域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理员可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如要了解详情，请与您的管理员联系。"</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"此设备由以下网域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理员可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如要了解详情，请与您的管理员联系。"</string>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"查看信任的凭据"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"用户"</string>
@@ -2084,6 +2082,14 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"正在添加新用户…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"删除用户"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"删除"</string>
+    <!-- no translation found for user_guest (8475274842845401871) -->
+    <skip />
+    <!-- no translation found for user_enable_calling (8658361356494445631) -->
+    <skip />
+    <!-- no translation found for user_enable_calling_sms (1198756620982093854) -->
+    <skip />
+    <!-- no translation found for user_remove_user (6490483480937295389) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"允许应用和内容"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"展开应用设置"</string>
@@ -2230,16 +2236,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"发送有关此设备的反馈"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"开启"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"关闭"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"单应用模式"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"“单应用模式”功能会锁定屏幕，使其只显示一个应用。\n\n\n如何启动单应用模式"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		开启该设置"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		启动您要使用的应用"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		按住“最近用过的应用”按钮 $"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"锁定屏幕"</string>
 </resources>

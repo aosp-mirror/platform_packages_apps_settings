@@ -174,7 +174,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"फिर से न पूछें"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"संदेश एक्सेस अनुरोध"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s आपके संदेशों को एक्सेस करना चाहता है. %2$s पर एक्सेस दें?"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"दिनांक और समय सेटिंग"</string>
+    <!-- no translation found for date_and_time (9062980487860757694) -->
+    <skip />
     <string name="choose_timezone" msgid="1362834506479536274">"समय क्षेत्र चुनें"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"क्षेत्रीय (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"पूर्वावलोकन:"</string>
@@ -313,6 +314,7 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"अनलॉक करते समय आंख झपकाने की आवश्‍यकता है"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"अपने आप लॉक करें"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> निष्क्रियता के बाद"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"निष्क्रिय होने के बाद <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> के द्वारा अनलॉक रखे जाने पर स्वीकार करें"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"लॉक स्‍क्रीन पर अपनी जानकारी दिखाएं"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"अपनी जानकारी"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"विजेट सक्षम करें"</string>
@@ -948,8 +950,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"आपको फ़ैक्टरी डेटा रीसेट की पुष्टि करने के लिए अपना अनलॉक आकार बनाना होगा."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"सिस्‍टम साफ़ करें सेवा उपलब्‍ध न होने के कारण कोई रीसेट निष्‍पादित नहीं किया गया था."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"रीसेट करें?"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"इस उपयोगकर्ता के लिए फ़ैक्टरी रीसेट उपलब्ध नहीं है"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB संग्रहण मिटाएं"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD कार्ड मिटाएं"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB संग्रहण का सभी डेटा मिटाएं"</string>
@@ -993,8 +994,8 @@
     <string name="tethering_help_button_text" msgid="656117495547173630">"सहायता"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"मोबाइल नेटवर्क"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"मोबाइल प्लान"</string>
-    <string name="sms_application_title" msgid="6134351177937015839">"डिफ़ॉल्ट SMS एप्लिकेशन"</string>
-    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS एप्लिकेशन बदलें?"</string>
+    <string name="sms_application_title" msgid="6134351177937015839">"डिफ़ॉल्ट SMS ऐप्लिकेशन"</string>
+    <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS ऐप्लिकेशन बदलें?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"आपके SMS ऐप्स के रूप में <xliff:g id="CURRENT_APP">%2$s</xliff:g> के बजाय <xliff:g id="NEW_APP">%1$s</xliff:g> का उपयोग करें?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"आपके SMS ऐप्स के रूप में <xliff:g id="NEW_APP">%s</xliff:g> का उपयोग करें?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"अज्ञात SIM ऑपरेटर"</string>
@@ -1080,6 +1081,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"पैटर्न दिखाई दे"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"स्‍पर्श पर कंपन करें"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"पॉवर बटन तुरंत लॉक होता है"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> के द्वारा अनलॉक रखने पर स्वीकार करें"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"अनलॉक आकार सेट करें"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"अनलॉक आकार बदलें"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"अनलॉक आकार कैसे आरेखित करें"</string>
@@ -1339,19 +1341,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Bluetooth HCI स्‍नूप लॉग सक्षम करें"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"फ़ाइल के सभी Bluetooth HCI पैकेट कैप्‍चर करें"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"वायरलेस दिखाई देने के लिए प्रमाणन"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"Wi‑Fi वर्बोस प्रवेश सक्षम करें"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi‑Fi से सेल्यूलर पर बलपूर्वक हस्तांतरण"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"हमेशा Wi‑Fi रोम स्कैन करने दें"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"वायरलेस दिखाई देने के लिए प्रमाणन विकल्प दिखाएं"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Wi‑Fi प्रवेश स्तर बढ़ाएं, Wi‑Fi पिकर में प्रति SSID RSSI दिखाएं"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"इसके सक्षम होने पर, जब Wi‑Fi संकेत कमज़ोर हों तो Wi‑Fi, डेटा कनेक्शन को सेल्यूलर पर अधिक बलपूर्वक भेजेगा"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"इंटरफ़ेस पर वर्तमान में मौजूद डेटा ट्रैफ़िक के आधार पर Wi‑Fi रोम स्कैन करने देता/नहीं देता है"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"लॉगर बफ़र आकार"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"प्रति लॉग बफ़र लॉगर आकार चुनें"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"कृत्रिम स्‍थानों को अनुमति दें"</string>
@@ -1595,7 +1591,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"प्रोसेस के आंकड़े"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"चल रही प्रक्रिया के बारे में आकंड़े"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"स्मृति उपयोग"</string>
-    <string name="process_stats_total_duration" msgid="1869761515101180444">"<xliff:g id="TIME">%2$s</xliff:g> में <xliff:g id="TYPE">%1$s</xliff:g> एप्लिकेशन"</string>
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"<xliff:g id="TIME">%2$s</xliff:g> में <xliff:g id="TYPE">%1$s</xliff:g> ऐप्लिकेशन"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"पृष्ठभूमि"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"अग्रभूमि"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"संचित"</string>
@@ -2035,7 +2031,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"नेटवर्क को मॉनीटर किया जा सकता है"</string>
     <string name="done_button" msgid="1991471253042622230">"पूर्ण"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"नेटवर्क मॉनिटरिंग"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"यह उपकरण इसके द्वारा प्रबंधित है:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nआपका व्यवस्थापक, ईमेल, एप्लिकेशन, और सुरक्षित वेबसाइटों सहित, आपकी नेटवर्क गतिविधि को मॉनीटर करने में सक्षम है.\n\nअधिक जानकारी के लिए, अपने व्यवस्थापक से संपर्क करें."</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"यह उपकरण इसके द्वारा प्रबंधित है:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nआपका व्यवस्थापक, ईमेल, ऐप्लिकेशन, और सुरक्षित वेबसाइटों सहित, आपकी नेटवर्क गतिविधि को मॉनीटर करने में सक्षम है.\n\nअधिक जानकारी के लिए, अपने व्यवस्थापक से संपर्क करें."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"एक तृतीय पक्ष ईमेल, ऐप्स और सुरक्षित वेबसाइटों सहित आपकी नेटवर्क गतिविधि को मॉनीटर करने में सक्षम है.\n\nआपके उपकरण पर इंस्टॉल किए गए एक विश्वसनीय क्रेंडेशियल के कारण ऐसा संभव हो रहा है."</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"विश्वसनीय क्रेडेंशियल की जांच करें"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"उपयोगकर्ता"</string>
@@ -2084,11 +2080,19 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"नया उपयोगकर्ता जोड़ रहा है…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"उपयोगकर्ता हटाएं"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"हटाएं"</string>
+    <!-- no translation found for user_guest (8475274842845401871) -->
+    <skip />
+    <!-- no translation found for user_enable_calling (8658361356494445631) -->
+    <skip />
+    <!-- no translation found for user_enable_calling_sms (1198756620982093854) -->
+    <skip />
+    <!-- no translation found for user_remove_user (6490483480937295389) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"ऐप्स  और सामग्री की अनुमति दें"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"प्रतिबंधों वाले ऐप्स"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ऐप्स  सेटिंग विस्तृत करें"</string>
-    <string name="home_app_uninstall_button" msgid="6808453012607962899">"इस एप्लिकेशन को अनइंस्टॉल करें"</string>
-    <string name="only_one_home_message" msgid="3538846733750242759">"होम सेटिंग तब तक छुपी रहेंगी, जब तक कि आप दूसरा होम एप्लिकेशन इंस्टॉल नहीं कर लेते."</string>
+    <string name="home_app_uninstall_button" msgid="6808453012607962899">"इस ऐप्लिकेशन को अनइंस्टॉल करें"</string>
+    <string name="only_one_home_message" msgid="3538846733750242759">"होम सेटिंग तब तक छुपी रहेंगी, जब तक कि आप दूसरा होम ऐप्लिकेशन इंस्टॉल नहीं कर लेते."</string>
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"यह सेटिंग इस टेबलेट के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"यह सेटिंग इस फ़ोन के सभी उपयोगकर्ताओं को प्रभावित करती है."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"भाषा बदलें"</string>
@@ -2230,16 +2234,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"इस उपकरण के बारे में फ़ीडबैक भेजें"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"चालू"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"बंद"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"ऐप्स-पर-लॉक करें"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"ऐप्स-पर-लॉक करें एक ऐप्स में प्रदर्शन को लॉक करता है.\n\n\nऐप्स-पर-लॉक-करें को प्रारंभ करने के लिए"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		सेटिंग चालू करें"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		अपना इच्छित ऐप्स प्रारंभ करें"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		हाल ही के ऐप्स बटन $ को दबाकर रखें"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"स्क्रीन लॉक का उपयोग करें"</string>
 </resources>

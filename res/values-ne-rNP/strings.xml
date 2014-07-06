@@ -174,7 +174,7 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"फेरि नसोध्नुहोस्"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"सन्देश पहुँच अनुरोध"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s तपाईँको सन्देशमा पहुँच चाहन्छ। %2$s मा पहुँच दिने हो?"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"मिति र समय सेटिङहरू"</string>
+    <string name="date_and_time" msgid="9062980487860757694">"मिति र समय"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"समय क्षेत्र चयन गर्नुहोस्"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"क्षेत्रीय ( <xliff:g id="DATE">%s</xliff:g> )"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"पूर्वावलोकन:"</string>
@@ -313,6 +313,8 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"अनलक गर्दा आँखा झिम्काउन आवश्यक हुन्छ"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"स्वतः लक गर्नुहोस्"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> सुतेपछि"</string>
+    <!-- no translation found for lock_after_timeout_summary_with_exception (5579064842797188409) -->
+    <skip />
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"लक स्क्रिनमा मालिकका बारे जानकारी देखाउनुहोस्"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"मालिकको जानकारी"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"विजेटहरू सक्षम पार्नुहोस्"</string>
@@ -948,8 +950,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"तपाईँको एउटा फ्याक्ट्रि डेटा पुनःसेट पुष्टि गर्नको लागि तपाईँले अनलक ढाँचा बनाउनु पर्छ।"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"कुनै पुनःसेट हुन सकेन किनभने सिस्टम क्लिएर सेवा उपलब्ध छैन।"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"पुनःसेट गर्ने हो?"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"यस प्रयोगकर्ताको लागि कारखाना पुनःसेट गर्ने उपलब्ध छैन"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB भण्डारण मेटाउनुहोस्"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD कार्ड मेटाउनुहोस्"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB भण्डारणमा भएका सम्पूर्ण डेटा मेटाउँछ"</string>
@@ -1080,6 +1081,8 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"ढाँचालाई देख्न मिल्ने बनाउनुहोस्"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"छुँदा भाइब्रेट हुने"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"पावर बटनले तुरुन्त लक गर्दछ"</string>
+    <!-- no translation found for lockpattern_settings_power_button_instantly_locks_summary (8196258755143711694) -->
+    <skip />
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"अनलक ढाँचा सेट गर्नुहोस्"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"अनलक ढाँचा बदल्नुहोस्"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"अनलक ढाँचा कसरी कोर्ने?"</string>
@@ -1339,19 +1342,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"ब्लुटुथ HCI snoop लग सक्षम पार्नुहोस्"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"सम्पूर्ण ब्लुटुथ HCI प्याकेटहरू एक फाइलमा कैद गर्नुहोस्"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"ताररहित प्रदर्शन प्रमाणीकरण"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"वाइफाइ वर्बोज लग सक्षम पार्नुहोस्"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"सेलुलर समायोजनका लागि आक्रामक वाइफाइ"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"वाइफाइ घुम्ने स्क्यान गर्न सधैँ अनुमति दिनुहोस्"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"ताररहित प्रदर्शन प्रमाणीकरणका लागि विकल्पहरू देखाउनुहोस्"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"वाइफाइ लग स्तर बढाउनुहोस्, वाइफाइ चयनकर्तामा प्रति SSID RSSI देखाइन्छ"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"वाइफाइ संकेत कम हुँदा, सक्षम जब गरिन्छ, वाइफाइ सेलुलर लागि डेटा जडान सुम्पनामा बढी आक्रामक हुनेछ"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"वाइफाइ घुम्ने स्क्यान इन्टरफेसमा रहेको डेटा यातायातको मात्रामा आधारित अनुमति दिनुहोस्/नदिनुहोस्"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"लगर बफर आकारहरू"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"लग बफर प्रति लगर आकार चयन गर्नुहोस्"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"नक्कली स्थानहरूलाई अनुमति दिनुहोस्"</string>
@@ -2086,6 +2083,10 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"नयाँ प्रयोगकर्ता थप गरिँदै..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"प्रयोगकर्ता मेटाउनुहोस्"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"मेट्नुहोस्"</string>
+    <string name="user_guest" msgid="8475274842845401871">"अतिथि"</string>
+    <string name="user_enable_calling" msgid="8658361356494445631">"फोन कल सक्षम गर्ने?"</string>
+    <string name="user_enable_calling_sms" msgid="1198756620982093854">"फोन र एसएमएस सक्षम गर्ने?"</string>
+    <string name="user_remove_user" msgid="6490483480937295389">"प्रयोगकर्ता हटाउनुहोस्"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"अनुप्रयोगहरू र सामग्री अनुमति दिनुहोस्"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"प्रतिबन्धको साथ अनुप्रयोगहरू"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"अनुप्रयोगको लागि सेटिङहरू विस्तार गर्नुहोस्"</string>
@@ -2232,16 +2233,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"उपकरण बारेमा प्रतिक्रिया पठाउनुहोस्"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"खुल्ला गर्नुहोस्"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"बन्द गर्नुहोस्"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"अनुप्रयोग लक गर्न"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"अनुप्रयोग लक गर्नेले एकल अनुप्रयोगमा प्रदर्शन गर्न रोक्छ।\n\n\nअनुप्रयोग लक गर्ने सुरु गर्न"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"१		सेटिङ सक्रिय पार्नुहोस्"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"२		तपाईँले चाहनु भएको अनुप्रयोग सुरु गर्नुहोस्"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"३		हालैका अनुप्रयोगहरूको बटन $ थिच्नुहोस् र समाउनुहोस्"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"स्क्रिन लक प्रयोग गर्नुहोस्"</string>
 </resources>

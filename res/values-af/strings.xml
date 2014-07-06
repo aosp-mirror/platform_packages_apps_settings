@@ -174,7 +174,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Moenie weer vra nie"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Boodskaptoegangversoek"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s wil toegang tot jou boodskappe verkry. Gee toegang aan %2$s?"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"Datum- en tydinstellings"</string>
+    <!-- no translation found for date_and_time (9062980487860757694) -->
+    <skip />
     <string name="choose_timezone" msgid="1362834506479536274">"Kies tydsone"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Volgens streek (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Voorskou:"</string>
@@ -313,6 +314,7 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Vereis oogknip tydens ontsluiting"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Sluit outomaties"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> na sluimer"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> na slaap, behalwe as <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> dit ontsluit hou"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Wys eienaarinligting op sluitskerm"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Eienaar se inligting"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktiveer legstukke"</string>
@@ -948,8 +950,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Jy moet jou ontsluitpatroon teken om \'n fabrieksterugstelling te bevestig."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Omdat die Stelsel Skoonmaak-diens nie beskikbaar was nie, is geen terugstel gedoen nie."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Stel terug?"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"Fabriekterugstelling is nie vir hierdie gebruiker beskikbaar nie"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Vee USB-berging uit"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Vee SD-kaart uit"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Vee alle data in USB-berging uit"</string>
@@ -1080,6 +1081,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Maak patroon sigbaar"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Vibreer by aanraking"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Kragknoppie sluit onmiddellik"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Behalwe as <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> dit ontsluit hou"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Stel ontsluitpatroon"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Verander ontsluitpatroon"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Hoe om \'n ontsluitpatroon te teken"</string>
@@ -1339,19 +1341,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Aktiveer Bluetooth HCI-loerloglêer"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Vang alle Bluetooth HCI-pakette in \'n lêer vas"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Draadlose skermsertifisering"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"Aktiveer Wi-Fi-woordryke aanmelding"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressiewe Wi-Fi na selfoon-oordrag"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Laat altyd Wi-Fi-swerfskanderings toe"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Wys opsies vir draadlose skermsertifisering"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Verhoog Wi-Fi-aantekeningvlak, wys per SSID RSSI in Wi‑Fi-kieser"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Wanneer dit geaktiveer is, sal Wi-Fi meer aggressief wees om die dataverbinding na selfoon oor te dra wanneer die Wi-Fi-sein swak is"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Laat toe of verbied Wi-Fi-swerfskanderings op grond van die hoeveelheid dataverkeer wat op die koppelvlak teenwoordig is"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Loggerbuffer se groottes"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Kies loggergroottes per logbuffer"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Laat skynliggings toe"</string>
@@ -2084,6 +2080,14 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"Voeg tans nuwe gebruiker by..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Vee gebruiker uit"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Vee uit"</string>
+    <!-- no translation found for user_guest (8475274842845401871) -->
+    <skip />
+    <!-- no translation found for user_enable_calling (8658361356494445631) -->
+    <skip />
+    <!-- no translation found for user_enable_calling_sms (1198756620982093854) -->
+    <skip />
+    <!-- no translation found for user_remove_user (6490483480937295389) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Laat programme en inhoud toe"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Programme met beperkings"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Brei instellings vir program uit"</string>
@@ -2230,16 +2234,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"Stuur terugvoer oor hierdie toestel"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Aan"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Af"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"Sluit-na-program"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"Sluit-na-program sluit die skerm in \'n enkele program.\n\n\nOm sluit-na-program te begin"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		Skakel die instelling aan"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		Begin die program wat jy soek"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		Druk en hou die onlangse programme-knoppie $"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"Gebruik skermslot"</string>
 </resources>

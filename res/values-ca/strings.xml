@@ -174,7 +174,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"No m\'ho tornis a preguntar"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Sol·licitud d\'accés al missatge"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vol accedir als teus missatges. Vols donar-li accés a %2$s?"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"Configuració de data i hora"</string>
+    <!-- no translation found for date_and_time (9062980487860757694) -->
+    <skip />
     <string name="choose_timezone" msgid="1362834506479536274">"Selecció de la zona horària"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Regional (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Previsualitza:"</string>
@@ -313,6 +314,7 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Requereix parpelleig d\'ulls en desbloquejar"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloqueja automàticament"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> després d\'entrar en repòs"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> després del repòs, excepte quan l\'agent <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> el mantingui desbloquejat"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Mostra informació del propietari a la pantalla de bloqueig"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Informació de propietari"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Activa els widgets"</string>
@@ -948,8 +950,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Has de dibuixar el teu patró de desbloqueig per confirmar el restabliment de dades de fàbrica."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"No s\'ha restablert perquè el servei d\'esborrament del sistema no està disponible."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Restablir?"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"El restabliment de fàbrica no està disponible per a aquest usuari."</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Esborra l\'emmagatzematge USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Esborra la targeta SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Esborra totes les dades de l\'emmagatzematge USB"</string>
@@ -1080,6 +1081,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Mostra el patró"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Vibrar en tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bloqueja en engegar"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Excepte quan l\'agent <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> el mantingui desbloquejat"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Defineix el patró de desbloqueig"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Canvia el patró de desbloqueig"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Com dibuixar un patró de desbloqueig"</string>
@@ -1339,19 +1341,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Activa el registre de cerca HCI de Bluetooth"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Captura tots els paquets HCI de Bluetooth en un fitxer"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificació de pantalla sense fil"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"Activa el registre detallat de la Wi‑Fi"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Traspàs agressiu de Wi-Fi a dades mòbils"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Permet sempre les anàlisis d\'itinerància de la Wi-Fi"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra les opcions de certificació de pantalla sense fil"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Augmenta nivell de registre Wi‑Fi i mostra\'l per SSID RSSI al Selector de Wi‑Fi."</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Si s\'activa, la Wi-Fi serà més agressiva per traspassar la connexió de dades al mode mòbil quan la senyal de Wi-Fi sigui feble."</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Permet o impedeix les anàlisis d\'itinerància de la Wi-Fi en funció de la quantitat de trànsit de dades que hi hagi a la interfície."</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Mides de la memòria cau del registrador"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Selecc. mides registr. per memòria"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Ubicacions simulades"</string>
@@ -2084,6 +2080,14 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"S\'està afegint un usuari nou..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Suprimeix l\'usuari"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Suprimeix"</string>
+    <!-- no translation found for user_guest (8475274842845401871) -->
+    <skip />
+    <!-- no translation found for user_enable_calling (8658361356494445631) -->
+    <skip />
+    <!-- no translation found for user_enable_calling_sms (1198756620982093854) -->
+    <skip />
+    <!-- no translation found for user_remove_user (6490483480937295389) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Permet aplicacions i contingut"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicacions amb restriccions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Desplega configuració aplicació"</string>
@@ -2230,16 +2234,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"Comentaris sobre aquest dispositiu"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"Bloqueig d\'aplicació"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"Bloqueig d\'aplicació bloqueja la pantalla d\'una única aplicació.\n\n\nPer iniciar Bloqueig d\'aplicació"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		Activa el paràmetre"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		Inicia l\'aplicació que vulguis"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		Mantén premut el botó Aplicacions recents $"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"Utilitza bloqueig de pantalla"</string>
 </resources>

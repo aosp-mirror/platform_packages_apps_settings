@@ -174,7 +174,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"دوبارہ مت پوچھیں"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"پیغام تک رسائی کی درخواست"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"‏%1$s آپ کے پیغامات تک رسائی حاصل کرنا چاہتا ہے۔ ‎%2$s کو رسائی دیں؟"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"تاریخ اور وقت کی ترتیبات"</string>
+    <!-- no translation found for date_and_time (9062980487860757694) -->
+    <skip />
     <string name="choose_timezone" msgid="1362834506479536274">"ٹائم زون منتخب کریں"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"علاقائی (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"پیش منظر:"</string>
@@ -313,6 +314,7 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"غیر مقفل کرتے وقت آنکھ کی جھپکی درکار ہوتی ہے"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"خود کار طور پر مقفل کریں"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> سلیپ وضع کے بعد"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"سلیپ وضع میں بھیجنے کے بعد <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>، سوائے اس وقت جب <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> نے غیر مقفل رکھا ہو"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"مقفل اسکرین پر مالک کی معلومات دکھائیں"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"مالک کی معلومات"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ویجیٹس کو فعال کریں"</string>
@@ -948,8 +950,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"آپ کو ایک فیکٹری ڈیٹا ری سیٹ کی توثیق کرنے کیلئے اپنا غیر مقفل کرنے کا پیٹرن ڈرا کرنے کی ضرورت ہے۔"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"کوئی ری سیٹ انجام نہیں دیا گیا کیونکہ سسٹم صاف کریں سروس دستیاب نہیں ہے۔"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"دوبارہ ترتیب دیں؟"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"اس صارف کیلئے فیکٹری ری سیٹ دستیاب نہیں ہے"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"‏USB اسٹوریج کو حذف کریں"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"‏SD کارڈ حذف کریں"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"‏USB سٹوریج میں سبھی ڈیٹا حذف کر دیتا ہے"</string>
@@ -1080,6 +1081,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"پیٹرن کو مرئی بنائیں"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"ٹچ کرنے پر وائبریٹ کریں"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"پاور بٹن فورا مقفل کردیتا ہے"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"سوائے اس وقت جب <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> نے غیر مقفل رکھا ہو"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"غیر مقفل کرنے کا پیٹرن سیٹ کریں"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"غیر مقفل کرنے کا پیٹرن تبدیل کریں"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"غیر مقفل کرنے کا پیٹرن ڈرا کرنے کا طریقہ"</string>
@@ -1339,19 +1341,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"‏بلوٹوتھ HCI کا جاسوسی لاگ فعال کریں"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"‏سبھی بلوٹوتھ HCI کے پیکٹس ایک فائل میں قید کریں"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"وائرلیس ڈسپلے سرٹیفیکیشن"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"‏Wi‑Fi وربوس لاگنگ فعال کریں"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"‏جارحانہ Wi‑Fi سے سیلولر ہینڈ اوور"</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"‏ہمیشہ Wi‑Fi روم اسکینز کی اجازت دیں"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"وائرلیس ڈسپلے سرٹیفیکیشن کیلئے اختیارات دکھائیں"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"‏Wi‑Fi لاگنگ لیول میں اضافہ کریں، Wi‑Fi منتخب کنندہ میں فی SSID RSSI دکھائیں"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"‏فعال ہونے پر، جب Wi‑Fi سگنل کمزور ہوگا تو Wi‑Fi سیلولر پر ڈیٹا کنکشن بھیجنے کیلئے مزید جارحانہ کاروائی کرے گا۔"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"‏انٹرفیس پر موجود ڈیٹا ٹریفک کی مقدار کی بنیاد پر Wi‑Fi روم اسکینز کی اجازت دیں/اجازت نہ دیں"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"لاگر بفر کے سائز"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"فی لاگ بفر لاگر کے سائز منتخب کریں"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"فرضی مقامات کی اجازت دیں"</string>
@@ -2084,6 +2080,14 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"نیا صارف شامل ہو رہا ہے…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"صارف کو حذف کریں"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"حذف کریں"</string>
+    <!-- no translation found for user_guest (8475274842845401871) -->
+    <skip />
+    <!-- no translation found for user_enable_calling (8658361356494445631) -->
+    <skip />
+    <!-- no translation found for user_enable_calling_sms (1198756620982093854) -->
+    <skip />
+    <!-- no translation found for user_remove_user (6490483480937295389) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"ایپس اور مواد کی اجازت دیں"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"پابندیوں والی ایپلیکیشنز"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"ایپ کیلئے ترتیبات پھیلائیں"</string>
@@ -2230,16 +2234,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"اس آلہ کے بارے میں تاثرات بھیجیں"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"آن"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"آف"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"لاک ٹو ایپ"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"لاک ٹو ایپ کسی واحد ایپ میں ڈسپلے کو مقفل کر دیتی ہے۔\n\n\nلاک ٹو ایپ شروع کرنے کیلئے"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"‏1‎‎		 ترتیب کو آن کریں"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2 اپنی پسند کی ایک ایپ شروع کریں"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3	 موجودہ ایپس بٹن $ کو دبائیں اور دبا کر رکھیں"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"اسکرین لاک استعمال کریں"</string>
 </resources>

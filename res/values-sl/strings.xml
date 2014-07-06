@@ -174,7 +174,8 @@
     <string name="bluetooth_pb_remember_choice" msgid="2901499974259177202">"Ne vprašaj me več"</string>
     <string name="bluetooth_map_request" msgid="4595727689513143902">"Zahteva za dostop do sporočil"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s želi dostopati do vaših sporočil. Želite omogočiti dostop za %2$s?"</string>
-    <string name="date_and_time" msgid="4114084177056654663">"Datum in nastavitve"</string>
+    <!-- no translation found for date_and_time (9062980487860757694) -->
+    <skip />
     <string name="choose_timezone" msgid="1362834506479536274">"Izberite časovni pas"</string>
     <string name="normal_date_format" msgid="7636406984925498359">"Območni (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Predogled:"</string>
@@ -313,6 +314,7 @@
     <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Pri odklepanju zahtevaj pomežik z očmi"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Samodejno zaklepanje"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po stanju pripravljenosti"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po stanju pripravljenosti, razen ko <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> poskrbi, da ostane odklenjen"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Prikaži lastnikove podatke na zaklenjenem zaslonu"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Lastnikovi podatki"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Omogoči pripomočke"</string>
@@ -948,8 +950,7 @@
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Če želite potrditi ponastavitev na tovarniške nastavitve, morate narisati vzorec za odklepanje."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Ponastavitev ni opravljena, ker storitev System Clear ni na voljo."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Želite ponastaviti?"</string>
-    <!-- no translation found for master_clear_not_available (1000370707967468909) -->
-    <skip />
+    <string name="master_clear_not_available" msgid="1000370707967468909">"Ponastavitev na tovarniške nastavitve ni na voljo za tega uporabnika"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Izbriši pomnilnik USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Izbriši kartico SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Izbriše vse podatke na pomnilniku USB"</string>
@@ -1080,6 +1081,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Vzorec je viden"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Vibrira na dotik"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Zaklepanje ob vklopu"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Razen ko <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> poskrbi, da ostane odklenjen"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Nastavi vzorec za odklepanje"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Spremeni vzorec za odklepanje"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Kako narisati vzorec za odklepanje"</string>
@@ -1339,19 +1341,13 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Omogoči dnevnik vohljanja Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Zajemi vse pakete Bluetooth HCI v datoteko"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Potrdilo brezžičnega zaslona"</string>
-    <!-- no translation found for wifi_verbose_logging (4203729756047242344) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover (9194078645887480917) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic (3601853081178265786) -->
-    <skip />
+    <string name="wifi_verbose_logging" msgid="4203729756047242344">"Omogoči podrob. zapis. dnevnika za Wi-Fi"</string>
+    <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Odločen prehod iz Wi-Fi-ja v mobil. omr."</string>
+    <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Vedno omogoči iskanje omrežij Wi-Fi za gostovanje"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Pokaži možnosti za potrdilo brezžičnega zaslona"</string>
-    <!-- no translation found for wifi_verbose_logging_summary (6615071616111731958) -->
-    <skip />
-    <!-- no translation found for wifi_aggressive_handover_summary (6328455667642570371) -->
-    <skip />
-    <!-- no translation found for wifi_allow_scan_with_traffic_summary (2575101424972686310) -->
-    <skip />
+    <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Povečaj raven zapis. dnev. za Wi-Fi; v izbir. Wi‑Fi-ja pokaži glede na SSID RSSI"</string>
+    <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Če je ta možnost omogočena, Wi-Fi odločneje preda podatkovno povezavo mobilnemu omrežju, ko je signal Wi-Fi šibek"</string>
+    <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Omogoči/onemogoči iskanje omrežij Wi-Fi za gostovanje glede na količino podatkovnega prometa pri vmesniku"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Velikosti medpomnilnikov zapisovalnika dnevnika"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Velik. zap. dnev. za medpom. dnev."</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Dovoli lažne lokacije"</string>
@@ -2084,6 +2080,14 @@
     <string name="user_adding_new_user" msgid="1521674650874241407">"Dodajanje novega uporabnika ..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Izbriši uporabnika"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Izbriši"</string>
+    <!-- no translation found for user_guest (8475274842845401871) -->
+    <skip />
+    <!-- no translation found for user_enable_calling (8658361356494445631) -->
+    <skip />
+    <!-- no translation found for user_enable_calling_sms (1198756620982093854) -->
+    <skip />
+    <!-- no translation found for user_remove_user (6490483480937295389) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"Omogočanje aplikacij in vsebine"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplikacije z omejitvami"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Dodatne nastavitve za aplikacijo"</string>
@@ -2230,16 +2234,10 @@
     <string name="device_feedback" msgid="3238056036766293294">"Pošlji povratne info. o tej napravi"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Vklopljeno"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Izklopljeno"</string>
-    <!-- no translation found for lock_to_app_title (2966052366275458439) -->
-    <skip />
-    <!-- no translation found for lock_to_app_description (940612654387118249) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step1 (8126363676900160932) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step2 (7841961567673998260) -->
-    <skip />
-    <!-- no translation found for lock_to_app_start_step3 (3734648361183082870) -->
-    <skip />
-    <!-- no translation found for lock_to_app_screen_lock (6335248561395462340) -->
-    <skip />
+    <string name="lock_to_app_title" msgid="2966052366275458439">"Zaklepanje v aplikacijo"</string>
+    <string name="lock_to_app_description" msgid="940612654387118249">"Zaklepanje v aplikacijo zaklene zaslon v eni aplikaciji.\n\n\nČe želite zagnati zaklepanje v aplikacijo"</string>
+    <string name="lock_to_app_start_step1" msgid="8126363676900160932">"1		Vklopite nastavitev"</string>
+    <string name="lock_to_app_start_step2" msgid="7841961567673998260">"2		Zaženite želeno aplikacijo"</string>
+    <string name="lock_to_app_start_step3" msgid="3734648361183082870">"3		Pritisnite in pridržite gumb za nedavne aplikacije $"</string>
+    <string name="lock_to_app_screen_lock" msgid="6335248561395462340">"Uporaba zaklepanja zaslona"</string>
 </resources>
