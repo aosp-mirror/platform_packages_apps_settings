@@ -198,7 +198,7 @@
     <string name="proxy_error" msgid="8926675299638611451">"注意"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"确定"</string>
     <string name="proxy_error_invalid_host" msgid="8052095511862922213">"您键入的主机名无效。"</string>
-    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"您键入的排除列表的格式不正确。请键入以逗号分隔的排除域列表。"</string>
+    <string name="proxy_error_invalid_exclusion_list" msgid="6467799485443290961">"您输入的排除列表格式有误。请输入以逗号分隔的排除网域列表。"</string>
     <string name="proxy_error_empty_port" msgid="5539106187558215246">"您需要填写端口字段。"</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"如果主机字段为空，则端口字段必须为空。"</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"您键入的端口无效。"</string>
@@ -393,7 +393,7 @@
     <string name="lockpassword_password_too_long" msgid="7016906583950201704">"密码必须少于 <xliff:g id="NUMBER">%d</xliff:g> 个字符。"</string>
     <string name="lockpassword_pin_too_long" msgid="6419879099090294052">"PIN 必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数。"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="1079053457942945709">"PIN 只能包含 0-9 的数字。"</string>
-    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"设备管理员不允许使用最近用过的 PIN。"</string>
+    <string name="lockpassword_pin_recently_used" msgid="7909781183925861119">"设备管理器不允许使用最近用过的PIN码。"</string>
     <string name="lockpassword_illegal_character" msgid="8742901630116866738">"密码包含非法字符。"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"密码必须包含至少 1 个字母。"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"密码必须包含至少 1 个数字。"</string>
@@ -422,7 +422,7 @@
     <item quantity="one" msgid="4594051152085925921">"密码必须包含至少 1 个非字母字符。"</item>
     <item quantity="other" msgid="3952508584649046404">"密码必须包含至少 %d 个非字母字符。"</item>
   </plurals>
-    <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理员不允许使用最近用过的密码。"</string>
+    <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理器不允许使用最近用过的密码。"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"取消"</string>
@@ -1176,7 +1176,7 @@
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"使用此应用可能会产生费用："</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"发送付费短信"</string>
     <string name="computing_size" msgid="1599186977475211186">"正在计算..."</string>
-    <string name="invalid_size_value" msgid="7563537715280712285">"无法计算包的大小。"</string>
+    <string name="invalid_size_value" msgid="7563537715280712285">"无法计算软件包的大小。"</string>
     <string name="empty_list_msg" msgid="5993162337235907160">"未安装任何第三方应用。"</string>
     <string name="version_text" msgid="9189073826278676425">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"移动"</string>
@@ -1911,7 +1911,7 @@
     <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA 证书"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec 服务器证书"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"显示高级选项"</string>
-    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS 搜索域"</string>
+    <string name="vpn_search_domains" msgid="5391995501541199624">"DNS搜索网域"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS 服务器（例如 8.8.8.8）"</string>
     <string name="vpn_routes" msgid="3818655448226312232">"转发路线（例如 10.0.0.0/8）"</string>
     <string name="vpn_username" msgid="1863901629860867849">"用户名"</string>
@@ -1957,7 +1957,7 @@
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"网络可能会受到监控"</string>
     <string name="done_button" msgid="1991471253042622230">"完成"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"网络监控"</string>
-    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"此设备由以下企业域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理员可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如要了解详情，请与您的管理员联系。"</string>
+    <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"此设备由以下网域管理：\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\n您的管理员可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n如要了解详情，请与您的管理员联系。"</string>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"第三方可以监控您的网络活动，包括收发电子邮件、使用应用和浏览安全网站。\n\n出现这种情况的原因是您在设备上安装了信任的凭据。"</string>
     <string name="ssl_ca_cert_settings_button" msgid="8760495070836213605">"查看信任的凭据"</string>
     <string name="user_settings_title" msgid="6151874007858148344">"用户"</string>
