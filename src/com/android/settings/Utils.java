@@ -18,14 +18,12 @@ package com.android.settings;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -55,6 +53,7 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
+import android.service.persistentdata.PersistentDataBlockManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -62,8 +61,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
-
-import com.android.settings.R.string;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
 
@@ -669,5 +666,24 @@ public final class Utils {
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
         return dlg;
+    }
+
+    /**
+     * Returns whether or not this device is able to be OEM unlocked.
+     */
+    static boolean isOemUnlockEnabled(Context context) {
+        PersistentDataBlockManager manager =(PersistentDataBlockManager)
+                context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+        return manager.getOemUnlockEnabled();
+    }
+
+    /**
+     * Allows enabling or disabling OEM unlock on this device. OEM unlocked
+     * devices allow users to flash other OSes to them.
+     */
+    static void setOemUnlockEnabled(Context context, boolean enabled) {
+        PersistentDataBlockManager manager =(PersistentDataBlockManager)
+                context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+        manager.setOemUnlockEnabled(enabled);
     }
 }

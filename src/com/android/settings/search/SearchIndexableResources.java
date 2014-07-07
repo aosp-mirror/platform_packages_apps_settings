@@ -245,7 +245,7 @@ public final class SearchIndexableResources {
         sResMap.put(DevelopmentSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(DevelopmentSettings.class.getName()),
-                        R.xml.development_prefs,
+                        NO_DATA_RES_ID,
                         DevelopmentSettings.class.getName(),
                         R.drawable.ic_settings_development));
 

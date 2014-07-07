@@ -26,7 +26,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -40,7 +39,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
-import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
@@ -53,6 +51,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,11 +63,13 @@ import android.webkit.WebView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import dalvik.system.VMRuntime;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -77,7 +78,7 @@ import java.util.List;
  */
 public class DevelopmentSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
-                OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener {
+                OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
     private static final String TAG = "DevelopmentSettings";
 
     /**
@@ -95,6 +96,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
+    private static final String ENABLE_OEM_UNLOCK = "oem_unlock_enable";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
@@ -160,6 +162,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final int RESULT_DEBUG_APP = 1000;
 
+    private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
+
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
     private IWindowManager mWindowManager;
@@ -180,9 +184,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mBtHciSnoopLog;
+    private CheckBoxPreference mEnableOemUnlock;
     private CheckBoxPreference mAllowMockLocation;
-    private PreferenceScreen mPassword;
 
+    private PreferenceScreen mPassword;
     private String mDebugApp;
     private Preference mDebugAppPref;
     private CheckBoxPreference mWaitForDebugger;
@@ -190,8 +195,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mWifiDisplayCertification;
     private CheckBoxPreference mWifiVerboseLogging;
     private CheckBoxPreference mWifiAggressiveHandover;
-    private CheckBoxPreference mWifiAllowScansWithTraffic;
 
+    private CheckBoxPreference mWifiAllowScansWithTraffic;
     private CheckBoxPreference mStrictMode;
     private CheckBoxPreference mPointerLocation;
     private CheckBoxPreference mShowTouches;
@@ -213,11 +218,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
+
     private ListPreference mSimulateColorSpace;
 
     private CheckBoxPreference mUseNuplayer;
-
     private CheckBoxPreference mImmediatelyDestroyActivities;
+
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
@@ -225,19 +231,18 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mWebViewDataReductionProxy;
 
     private PreferenceScreen mProcessStats;
-
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
+
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
             = new ArrayList<CheckBoxPreference>();
 
     private final HashSet<Preference> mDisabledPrefs = new HashSet<Preference>();
-
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
     private Dialog mEnableDialog;
     private Dialog mAdbDialog;
-    private Dialog mAdbKeysDialog;
 
+    private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
 
     @Override
@@ -282,9 +287,14 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitCheckboxPref(BT_HCI_SNOOP_LOG);
+        mEnableOemUnlock = findAndInitCheckboxPref(ENABLE_OEM_UNLOCK);
+        if (!showEnableOemUnlockPreference()) {
+            removePreference(mEnableOemUnlock);
+        }
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
+
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
@@ -500,6 +510,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateCheckBox(mBtHciSnoopLog, Settings.Secure.getInt(cr,
                 Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
+        updateCheckBox(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
@@ -672,6 +683,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private boolean showVerifierSetting() {
         return Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
+    }
+
+    private static boolean showEnableOemUnlockPreference() {
+        return !SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("");
     }
 
     private void updateBugreportOptions() {
@@ -1317,9 +1332,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                     mKeepScreenOn.isChecked() ?
-                    (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
+                            (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
+        } else if (preference == mEnableOemUnlock) {
+            Utils.setOemUnlockEnabled(getActivity(), mEnableOemUnlock.isChecked());
         } else if (preference == mAllowMockLocation) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
@@ -1535,4 +1552,27 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             return false;
         }
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.development_prefs;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = new ArrayList<String>();
+                    if (!showEnableOemUnlockPreference()) {
+                        keys.add(ENABLE_OEM_UNLOCK);
+                    }
+                    return keys;
+                }
+            };
 }
