@@ -19,85 +19,102 @@
         android:key="notification_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <!-- Media volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-            android:key="media_volume"
-            android:icon="@*android:drawable/ic_audio_vol"
-            android:title="@string/media_volume_option_title" />
+    <PreferenceCategory
+        android:key="sound"
+        android:title="@string/sound_settings" >
 
-    <!-- Alarm volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-            android:key="alarm_volume"
-            android:icon="@*android:drawable/ic_audio_alarm"
-            android:title="@string/alarm_volume_option_title" />
+        <!-- Media volume -->
+        <com.android.settings.notification.VolumeSeekBarPreference
+                android:key="media_volume"
+                android:icon="@*android:drawable/ic_audio_vol"
+                android:title="@string/media_volume_option_title" />
 
-    <!-- Ring volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-            android:key="ring_volume"
-            android:icon="@*android:drawable/ic_audio_ring_notif"
-            android:title="@string/ring_volume_option_title" />
+        <!-- Alarm volume -->
+        <com.android.settings.notification.VolumeSeekBarPreference
+                android:key="alarm_volume"
+                android:icon="@*android:drawable/ic_audio_alarm"
+                android:title="@string/alarm_volume_option_title" />
 
-    <!-- Notification volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-            android:key="notification_volume"
-            android:icon="@*android:drawable/ic_audio_ring_notif"
-            android:title="@string/notification_volume_option_title" />
+        <!-- Ring volume -->
+        <com.android.settings.notification.VolumeSeekBarPreference
+                android:key="ring_volume"
+                android:icon="@*android:drawable/ic_audio_ring_notif"
+                android:title="@string/ring_volume_option_title" />
 
-    <!-- Do not disturb -->
-    <PreferenceScreen
-            android:key="zen_mode"
-            android:title="@string/zen_mode_settings_title"
-            android:fragment="com.android.settings.notification.ZenModeSettings" />
+        <!-- Notification volume -->
+        <com.android.settings.notification.VolumeSeekBarPreference
+                android:key="notification_volume"
+                android:icon="@*android:drawable/ic_audio_ring_notif"
+                android:title="@string/notification_volume_option_title" />
 
-    <!-- When calls and notifications arrive -->
-    <com.android.settings.notification.DropDownPreference
-            android:key="ringer_mode"
-            android:title="@string/ringer_mode_title"
-            android:persistent="false" />
+        <!-- Also vibrate for calls -->
+        <SwitchPreference
+                android:key="vibrate_when_ringing"
+                android:title="@string/vibrate_when_ringing_title"
+                android:persistent="false" />
 
-    <!-- Phone ringtone -->
-    <com.android.settings.DefaultRingtonePreference
-            android:key="ringtone"
-            android:title="@string/ringtone_title"
-            android:dialogTitle="@string/ringtone_title"
-            android:persistent="false"
-            android:ringtoneType="ringtone" />
+        <!-- Interruptions -->
+        <PreferenceScreen
+                android:key="zen_mode"
+                android:title="@string/zen_mode_settings_title"
+                android:fragment="com.android.settings.notification.ZenModeSettings" />
 
-    <!-- Default notification ringtone -->
-    <com.android.settings.DefaultRingtonePreference
-            android:key="notification_ringtone"
-            android:title="@string/notification_ringtone_title"
-            android:dialogTitle="@string/notification_ringtone_title"
-            android:persistent="false"
-            android:ringtoneType="notification" />
+        <!-- Phone ringtone -->
+        <com.android.settings.DefaultRingtonePreference
+                android:key="ringtone"
+                android:title="@string/ringtone_title"
+                android:dialogTitle="@string/ringtone_title"
+                android:persistent="false"
+                android:ringtoneType="ringtone" />
 
-    <!-- Vibrate when ringing -->
-    <SwitchPreference
-            android:key="vibrate_when_ringing"
-            android:title="@string/vibrate_when_ringing_title"
-            android:switchTextOff=""
-            android:switchTextOn=""
-            android:persistent="false" />
+        <!-- Default notification ringtone -->
+        <com.android.settings.DefaultRingtonePreference
+                android:key="notification_ringtone"
+                android:title="@string/notification_ringtone_title"
+                android:dialogTitle="@string/notification_ringtone_title"
+                android:persistent="false"
+                android:ringtoneType="notification" />
 
-    <!-- Showing notifications -->
-    <Preference
-            android:key="showing_notifications"
-            android:title="@string/notification_display_settings"
-            android:persistent="false"
-            android:fragment="com.android.settings.notification.NotificationDisplaySettings" />
+        <!-- Other sounds -->
+        <Preference
+                android:key="other_sounds"
+                android:title="@string/other_sound_settings"
+                android:persistent="false"
+                android:fragment="com.android.settings.notification.OtherSoundSettings" />
 
-    <!-- Touch sounds -->
-    <Preference
-            android:key="other_sounds"
-            android:title="@string/other_sound_settings"
-            android:persistent="false"
-            android:fragment="com.android.settings.notification.OtherSoundSettings" />
+    </PreferenceCategory>
 
-    <!-- Notification access -->
-    <Preference
-            android:key="manage_notification_access"
-            android:title="@string/manage_notification_access_title"
-            android:persistent="false"
-            android:fragment="com.android.settings.notification.NotificationAccessSettings" />
+    <PreferenceCategory
+        android:key="notification"
+        android:title="@string/notification_section_header" >
+
+        <!-- Pulse notification light -->
+        <SwitchPreference
+                android:key="notification_pulse"
+                android:title="@string/notification_pulse_title"
+                android:switchTextOff=""
+                android:switchTextOn=""
+                android:persistent="false" />
+
+         <!-- When device is locked -->
+        <com.android.settings.notification.DropDownPreference
+                android:key="lock_screen_notifications"
+                android:title="@string/lock_screen_notifications_title"
+                android:persistent="false" />
+
+        <!-- App notifications -->
+        <PreferenceScreen
+                android:key="app_notifications"
+                android:title="@string/app_notifications_title"
+                android:fragment="com.android.settings.notification.AppNotificationSettings" />
+
+        <!-- Notification access -->
+        <Preference
+                android:key="manage_notification_access"
+                android:title="@string/manage_notification_access_title"
+                android:persistent="false"
+                android:fragment="com.android.settings.notification.NotificationAccessSettings" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

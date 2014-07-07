@@ -88,7 +88,6 @@ public class Settings extends SettingsActivity {
     public static class PrintJobSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class NotificationDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class OtherSoundSettingsActivity extends SettingsActivity { /* empty */ }
 

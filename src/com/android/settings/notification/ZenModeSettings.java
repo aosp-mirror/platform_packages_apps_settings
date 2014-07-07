@@ -30,7 +30,6 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ServiceManager;
@@ -48,37 +47,34 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.widget.SwitchBar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable,
-        SwitchBar.OnSwitchChangeListener {
+public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "ZenModeSettings";
     private static final boolean DEBUG = true;
-    private static final boolean SHOW_CONDITION_DIALOG = false;
 
-    private static final String KEY_GENERAL = "general";
+    private static final String KEY_ZEN_MODE = "zen_mode";
+    private static final String KEY_IMPORTANT = "important";
     private static final String KEY_CALLS = "phone_calls";
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_STARRED = "starred";
 
-    private static final String KEY_AUTOMATIC = "automatic";
-    private static final String KEY_WHEN = "when";
+    private static final String KEY_DOWNTIME = "downtime";
+    private static final String KEY_DAYS = "days";
     private static final String KEY_START_TIME = "start_time";
     private static final String KEY_END_TIME = "end_time";
 
@@ -86,16 +82,36 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_ENTRY = "entry";
     private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
 
+    private static final SettingPref PREF_ZEN_MODE = new SettingPref(SettingPref.TYPE_GLOBAL,
+            KEY_ZEN_MODE, Global.ZEN_MODE, Global.ZEN_MODE_OFF, Global.ZEN_MODE_OFF,
+            Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, Global.ZEN_MODE_NO_INTERRUPTIONS) {
+        protected String getCaption(Resources res, int value) {
+            switch (value) {
+                case Global.ZEN_MODE_NO_INTERRUPTIONS:
+                    return res.getString(R.string.zen_mode_option_no_interruptions);
+                case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
+                    return res.getString(R.string.zen_mode_option_important_interruptions);
+                default:
+                    return res.getString(R.string.zen_mode_option_off);
+            }
+        }
+    };
+
+    private static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("EEE");
+
     private static SparseArray<String> allKeyTitles(Context context) {
         final SparseArray<String> rt = new SparseArray<String>();
-        rt.put(R.string.zen_mode_general_category, KEY_GENERAL);
+        rt.put(R.string.zen_mode_important_category, KEY_IMPORTANT);
         if (Utils.isVoiceCapable(context)) {
             rt.put(R.string.zen_mode_phone_calls, KEY_CALLS);
+            rt.put(R.string.zen_mode_option_title, KEY_ZEN_MODE);
+        } else {
+            rt.put(R.string.zen_mode_option_title_novoice, KEY_ZEN_MODE);
         }
         rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
         rt.put(R.string.zen_mode_from_starred, KEY_STARRED);
-        rt.put(R.string.zen_mode_automatic_category, KEY_AUTOMATIC);
-        rt.put(R.string.zen_mode_when, KEY_WHEN);
+        rt.put(R.string.zen_mode_downtime_category, KEY_DOWNTIME);
+        rt.put(R.string.zen_mode_downtime_days, KEY_DAYS);
         rt.put(R.string.zen_mode_start_time, KEY_START_TIME);
         rt.put(R.string.zen_mode_end_time, KEY_END_TIME);
         rt.put(R.string.zen_mode_automation_category, KEY_AUTOMATION);
@@ -106,7 +122,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
 
-    private SwitchBar mSwitchBar;
     private Context mContext;
     private PackageManager mPM;
     private ZenModeConfig mConfig;
@@ -114,42 +129,20 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private SwitchPreference mCalls;
     private SwitchPreference mMessages;
     private DropDownPreference mStarred;
-    private DropDownPreference mWhen;
+    private Preference mDays;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
     private PreferenceCategory mAutomationCategory;
     private Preference mEntry;
     private Preference mConditionProviders;
-    private AlertDialog mDialog;
-    private boolean mIgnoreNext;
 
     @Override
-    public void onSwitchChanged(Switch switchView, final boolean isChecked) {
-        if (DEBUG) Log.d(TAG, "onPreferenceChange isChecked=" + isChecked
-                + " mIgnoreNext=" + mIgnoreNext);
-        if (mIgnoreNext) {
-            mIgnoreNext = false;
-        }
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                final int v = isChecked ? Global.ZEN_MODE_ON : Global.ZEN_MODE_OFF;
-                putZenModeSetting(v);
-                final int n = ConditionProviderSettings.getEnabledProviderCount(mContext);
-                if (SHOW_CONDITION_DIALOG && n > 0) {
-                    mHandler.post(isChecked ? mShowDialog : mHideDialog);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mContext = getActivity();
         mPM = mContext.getPackageManager();
         final Resources res = mContext.getResources();
-        final int p = res.getDimensionPixelSize(R.dimen.content_margin_left);
+        final int padding = res.getDimensionPixelSize(R.dimen.content_margin_left);
 
         addPreferencesFromResource(R.xml.zen_mode_settings);
         final PreferenceScreen root = getPreferenceScreen();
@@ -157,13 +150,15 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mConfig = getZenModeConfig();
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
 
-        mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.show();
+        final Preference zenMode = PREF_ZEN_MODE.init(this);
+        if (!Utils.isVoiceCapable(mContext)) {
+            zenMode.setTitle(R.string.zen_mode_option_title_novoice);
+        }
 
-        final PreferenceCategory general = (PreferenceCategory) root.findPreference(KEY_GENERAL);
+        final PreferenceCategory important =
+                (PreferenceCategory) root.findPreference(KEY_IMPORTANT);
 
-        mCalls = (SwitchPreference) general.findPreference(KEY_CALLS);
+        mCalls = (SwitchPreference) important.findPreference(KEY_CALLS);
         if (Utils.isVoiceCapable(mContext)) {
             mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
@@ -178,11 +173,11 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 }
             });
         } else {
-            general.removePreference(mCalls);
+            important.removePreference(mCalls);
             mCalls = null;
         }
 
-        mMessages = (SwitchPreference) general.findPreference(KEY_MESSAGES);
+        mMessages = (SwitchPreference) important.findPreference(KEY_MESSAGES);
         mMessages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -216,44 +211,52 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 return setZenModeConfig(newConfig);
             }
         });
-        general.addPreference(mStarred);
+        important.addPreference(mStarred);
 
         final Preference alarmInfo = new Preference(mContext) {
             @Override
             public View getView(View convertView, ViewGroup parent) {
                 final TextView tv = new TextView(mContext);
                 tv.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.ITALIC));
-                tv.setPadding(p, p, p, p);
+                tv.setPadding(padding, padding, padding, padding);
                 tv.setText(R.string.zen_mode_alarm_info);
                 return tv;
             }
         };
         alarmInfo.setPersistent(false);
         alarmInfo.setSelectable(false);
-        general.addPreference(alarmInfo);
+        important.addPreference(alarmInfo);
 
-        final PreferenceCategory auto = (PreferenceCategory) root.findPreference(KEY_AUTOMATIC);
+        final PreferenceCategory downtime = (PreferenceCategory) root.findPreference(KEY_DOWNTIME);
 
-        mWhen = new DropDownPreference(mContext);
-        mWhen.setKey(KEY_WHEN);
-        mWhen.setTitle(R.string.zen_mode_when);
-        mWhen.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
-        mWhen.addItem(R.string.zen_mode_when_every_night, ZenModeConfig.SLEEP_MODE_NIGHTS);
-        mWhen.addItem(R.string.zen_mode_when_weeknights, ZenModeConfig.SLEEP_MODE_WEEKNIGHTS);
-        mWhen.addItem(R.string.zen_mode_when_never, null);
-        mWhen.setCallback(new DropDownPreference.Callback() {
+        mDays = downtime.findPreference(KEY_DAYS);
+        mDays.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
-            public boolean onItemSelected(int pos, Object value) {
-                if (mDisableListeners) return true;
-                final String mode = (String) value;
-                if (Objects.equals(mode, mConfig.sleepMode)) return true;
-                if (DEBUG) Log.d(TAG, "onPrefChange sleepMode=" + mode);
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.sleepMode = mode;
-                return setZenModeConfig(newConfig);
+            public boolean onPreferenceClick(Preference preference) {
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.zen_mode_downtime_days)
+                        .setView(new ZenModeDowntimeDaysSelection(mContext, mConfig.sleepMode) {
+                              @Override
+                              protected void onChanged(String mode) {
+                                  if (mDisableListeners) return;
+                                  if (Objects.equals(mode, mConfig.sleepMode)) return;
+                                  if (DEBUG) Log.d(TAG, "days.onChanged sleepMode=" + mode);
+                                  final ZenModeConfig newConfig = mConfig.copy();
+                                  newConfig.sleepMode = mode;
+                                  setZenModeConfig(newConfig);
+                              }
+                        })
+                        .setOnDismissListener(new OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                updateDays();
+                            }
+                        })
+                        .setPositiveButton(R.string.done_button, null)
+                        .show();
+                return true;
             }
         });
-        auto.addPreference(mWhen);
 
         final FragmentManager mgr = getFragmentManager();
 
@@ -276,8 +279,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 return setZenModeConfig(newConfig);
             }
         });
-        auto.addPreference(mStart);
-        mStart.setDependency(mWhen.getKey());
+        downtime.addPreference(mStart);
+        mStart.setDependency(mDays.getKey());
 
         mEnd = new TimePickerPreference(mContext, mgr);
         mEnd.setKey(KEY_END_TIME);
@@ -298,8 +301,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 return setZenModeConfig(newConfig);
             }
         });
-        auto.addPreference(mEnd);
-        mEnd.setDependency(mWhen.getKey());
+        downtime.addPreference(mEnd);
+        mEnd.setDependency(mDays.getKey());
 
         mAutomationCategory = (PreferenceCategory) findPreference(KEY_AUTOMATION);
         mEntry = findPreference(KEY_ENTRY);
@@ -322,8 +325,37 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         });
         mConditionProviders = findPreference(KEY_CONDITION_PROVIDERS);
 
-        updateZenMode();
         updateControls();
+    }
+
+    private void updateDays() {
+        if (mConfig != null) {
+            final int[] days = ZenModeConfig.tryParseDays(mConfig.sleepMode);
+            if (days != null && days.length != 0) {
+                final StringBuilder sb = new StringBuilder();
+                final Calendar c = Calendar.getInstance();
+                for (int i = 0; i < ZenModeConfig.ALL_DAYS.length; i++) {
+                    final int day = ZenModeConfig.ALL_DAYS[i];
+                    for (int j = 0; j < days.length; j++) {
+                        if (day == days[j]) {
+                            c.set(Calendar.DAY_OF_WEEK, day);
+                            if (sb.length() > 0) {
+                                sb.append(mContext.getString(R.string.summary_divider_text));
+                            }
+                            sb.append(DAY_FORMAT.format(c.getTime()));
+                            break;
+                        }
+                    }
+                }
+                if (sb.length() > 0) {
+                    mDays.setSummary(sb);
+                    mDays.notifyDependencyChange(false);
+                    return;
+                }
+            }
+        }
+        mDays.setSummary(R.string.zen_mode_downtime_days_none);
+        mDays.notifyDependencyChange(true);
     }
 
     private void updateEndSummary() {
@@ -340,7 +372,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
         mMessages.setChecked(mConfig.allowMessages);
         mStarred.setSelectedValue(mConfig.allowFrom);
-        mWhen.setSelectedValue(mConfig.sleepMode);
+        updateDays();
         mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
         mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
         mDisableListeners = false;
@@ -398,7 +430,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     public void onResume() {
         super.onResume();
         updateControls();
-        updateZenMode();
         mSettingsObserver.register();
     }
 
@@ -406,22 +437,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     public void onPause() {
         super.onPause();
         mSettingsObserver.unregister();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
-    }
-
-    private void updateZenMode() {
-        final boolean zenMode = Global.getInt(getContentResolver(),
-                Global.ZEN_MODE, Global.ZEN_MODE_OFF) != Global.ZEN_MODE_OFF;
-        if (mSwitchBar.isChecked() != zenMode) {
-            mSwitchBar.setChecked(zenMode);
-            mIgnoreNext = true;
-        }
     }
 
     private void updateZenModeConfig() {
@@ -467,38 +482,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     protected ZenModeConditionSelection newConditionSelection() {
         return new ZenModeConditionSelection(mContext);
     }
-
-    private final Runnable mHideDialog = new Runnable() {
-        @Override
-        public void run() {
-            if (mDialog != null) {
-                mDialog.dismiss();
-                mDialog = null;
-            }
-        }
-    };
-
-    private final Runnable mShowDialog = new Runnable() {
-        @Override
-        public void run() {
-            mDialog = new AlertDialog.Builder(mContext)
-                    .setTitle(R.string.zen_mode_settings_title)
-                    .setView(newConditionSelection())
-                    .setNegativeButton(R.string.dlg_cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            putZenModeSetting(Global.ZEN_MODE_OFF);
-                        }
-                    })
-                    .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // noop
-                        }
-                    })
-                    .show();
-        }
-    };
 
     // Enable indexing of searchable data
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -549,7 +532,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
             if (ZEN_MODE_URI.equals(uri)) {
-                updateZenMode();
+                PREF_ZEN_MODE.update(mContext);
             }
             if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
                 updateZenModeConfig();

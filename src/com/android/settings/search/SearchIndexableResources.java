@@ -39,7 +39,6 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
-import com.android.settings.notification.NotificationDisplaySettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
@@ -127,13 +126,6 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(NotificationSettings.class.getName()),
                         NO_DATA_RES_ID,
                         NotificationSettings.class.getName(),
-                        R.drawable.ic_settings_notifications));
-
-        sResMap.put(NotificationDisplaySettings.class.getName(),
-                new SearchIndexableResource(
-                        Ranking.getRankForClassName(NotificationDisplaySettings.class.getName()),
-                        R.xml.notification_display_settings,
-                        NotificationDisplaySettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
         sResMap.put(OtherSoundSettings.class.getName(),
