@@ -35,6 +35,8 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.storage.IMountService;
 import android.os.storage.StorageManager;
+
+import android.phone.PhoneManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
@@ -858,9 +860,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return;
         }
 
-        final int newState = getTelephonyManager().getCallState();
         int textId;
-        if (newState == TelephonyManager.CALL_STATE_OFFHOOK) {
+        if (getPhoneManager().isInAPhoneCall()) {
             // Show "return to call" text and show phone icon
             textId = R.string.cryptkeeper_return_to_call;
             final int phoneCallIcon = R.drawable.stat_sys_phone_call;
@@ -878,9 +879,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void takeEmergencyCallAction() {
-        TelephonyManager telephonyManager = getTelephonyManager();
-        if (telephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) {
-            telephonyManager.showCallScreen();
+        PhoneManager phoneManager = getPhoneManager();
+        if (phoneManager.isInAPhoneCall()) {
+            phoneManager.showCallScreen(false /* showDialpad */);
         } else {
             launchEmergencyDialer();
         }
@@ -897,6 +898,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     private TelephonyManager getTelephonyManager() {
         return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+    }
+
+    private PhoneManager getPhoneManager() {
+        return (PhoneManager) getSystemService(Context.PHONE_SERVICE);
     }
 
     /**
