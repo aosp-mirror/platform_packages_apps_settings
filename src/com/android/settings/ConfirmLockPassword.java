@@ -44,6 +44,9 @@ import android.widget.TextView.OnEditorActionListener;
 
 public class ConfirmLockPassword extends SettingsActivity {
 
+    public static class InternalActivity extends ConfirmLockPassword {
+    }
+
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
@@ -168,10 +171,12 @@ public class ConfirmLockPassword extends SettingsActivity {
             if (mLockPatternUtils.checkPassword(pin)) {
 
                 Intent intent = new Intent();
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
-                                         : StorageManager.CRYPT_TYPE_PIN);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
+                if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                    mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
+                                             : StorageManager.CRYPT_TYPE_PIN);
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
+                }
 
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();

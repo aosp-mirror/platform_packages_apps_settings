@@ -1007,6 +1007,15 @@
         <activity android:name="ConfirmLockPassword"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
+        <!-- Note this must not be exported since it returns the password in the intent -->
+        <activity android:name="ConfirmLockPattern$InternalActivity"
+            android:exported="false"/>
+
+        <!-- Note this must not be exported since it returns the password in the intent -->
+        <activity android:name="ConfirmLockPassword$InternalActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+
         <activity android:name="ChooseLockGeneric"
             android:label="@string/lockpassword_choose_lock_generic_header"
             android:excludeFromRecents="true" >
