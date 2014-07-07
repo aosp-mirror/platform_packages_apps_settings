@@ -328,7 +328,7 @@ public class Status extends PreferenceActivity {
                 }
             }
 
-            String rawNumber = mPhone.getLine1Number();  // may be null or empty
+            String rawNumber = mTelephonyManager.getLine1Number();  // may be null or empty
             String formattedNumber = null;
             if (!TextUtils.isEmpty(rawNumber)) {
                 formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
