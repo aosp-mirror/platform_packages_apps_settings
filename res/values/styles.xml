@@ -127,6 +127,10 @@
     <style name="SettingsPreferenceHeaderList" parent="@*android:style/PreferenceHeaderList">
     </style>
 
+    <style name="PreferenceFragmentStyle" parent="@*android:style/PreferenceFragment">
+        <item name="android:layout">@layout/preference_list_fragment</item>
+    </style>
+
     <style name="VertDivider">
         <item name="android:layout_width">@dimen/vert_divider_width</item>
         <item name="android:layout_height">fill_parent</item>
