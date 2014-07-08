@@ -451,10 +451,14 @@ class AccessPoint extends Preference {
             int rssi24 = WifiConfiguration.INVALID_RSSI;
             int num5 = 0;
             int num24 = 0;
+            int numBlackListed = 0;
             Map<String, ScanResult> list = mScanResultCache.snapshot();
             for (ScanResult result : list.values()) {
                 if (result.seen == 0)
                     continue;
+
+                if (result.status != ScanResult.ENABLED)
+                    numBlackListed++;
 
                 if (result.frequency > LOWER_FREQ_5GHZ
                         && result.frequency < HIGHER_FREQ_5GHZ) {
@@ -495,6 +499,8 @@ class AccessPoint extends Preference {
                 visibility.append(",");
                 visibility.append(Integer.toString(num5));
             }
+            if (numBlackListed > 0)
+                visibility.append("!");
             visibility.append("]");
         } else {
             if (mRssi != Integer.MAX_VALUE) {
