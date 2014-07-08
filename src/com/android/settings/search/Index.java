@@ -28,6 +28,7 @@ import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -123,9 +124,12 @@ public class Index {
             IndexColumns.DATA_KEY_REF             // 13
     };
 
-    private static final String[] MATCH_COLUMNS = {
+    private static final String[] MATCH_COLUMNS_PRIMARY = {
             IndexColumns.DATA_TITLE,
-            IndexColumns.DATA_TITLE_NORMALIZED,
+            IndexColumns.DATA_TITLE_NORMALIZED
+    };
+
+    private static final String[] MATCH_COLUMNS_SECONDARY = {
             IndexColumns.DATA_SUMMARY_ON,
             IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
             IndexColumns.DATA_SUMMARY_OFF,
@@ -214,9 +218,24 @@ public class Index {
     }
 
     public Cursor search(String query) {
-        final String sql = buildSearchSQL(query);
-        Log.d(LOG_TAG, "Search query: " + sql);
-        return getReadableDatabase().rawQuery(sql, null);
+        final SQLiteDatabase database = getReadableDatabase();
+        final Cursor[] cursors = new Cursor[2];
+
+        final String primarySql = buildSearchSQL(query, MATCH_COLUMNS_PRIMARY, true);
+        Log.d(LOG_TAG, "Search primary query: " + primarySql);
+        cursors[0] = database.rawQuery(primarySql, null);
+
+        // We need to use an EXCEPT operator as negate MATCH queries do not work.
+        StringBuilder sql = new StringBuilder(
+                buildSearchSQL(query, MATCH_COLUMNS_SECONDARY, false));
+        sql.append(" EXCEPT ");
+        sql.append(primarySql);
+
+        final String secondarySql = sql.toString();
+        Log.d(LOG_TAG, "Search secondary query: " + secondarySql);
+        cursors[1] = database.rawQuery(secondarySql, null);
+
+        return new MergeCursor(cursors);
     }
 
     public Cursor getSuggestions(String query) {
@@ -422,7 +441,7 @@ public class Index {
         }
     }
 
-    public boolean updateFromRemoteProvider(String packageName, String authority) {
+    private boolean updateFromRemoteProvider(String packageName, String authority) {
         if (!addIndexablesFromRemoteProvider(packageName, authority)) {
             return false;
         }
@@ -615,11 +634,13 @@ public class Index {
         }
     }
 
-    private String buildSearchSQL(String query) {
+    private String buildSearchSQL(String query, String[] colums, boolean withOrderBy) {
         StringBuilder sb = new StringBuilder();
-        sb.append(buildSearchSQLForColumn(query, MATCH_COLUMNS));
-        sb.append(" ORDER BY ");
-        sb.append(IndexColumns.DATA_RANK);
+        sb.append(buildSearchSQLForColumn(query, colums));
+        if (withOrderBy) {
+            sb.append(" ORDER BY ");
+            sb.append(IndexColumns.DATA_RANK);
+        }
         return sb.toString();
     }
 
@@ -1215,7 +1236,7 @@ public class Index {
     }
 
     /**
-     * A basic AsynTask for saving a Search query into the database
+     * A basic AsyncTask for saving a Search query into the database
      */
     private class SaveSearchQueryTask extends AsyncTask<String, Void, Long> {
 
