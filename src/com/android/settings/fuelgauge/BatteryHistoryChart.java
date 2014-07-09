@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.DashPathEffect;
 import android.os.BatteryManager;
 import android.provider.Settings;
@@ -219,6 +220,9 @@ public class BatteryHistoryChart extends View {
     final ArrayList<TimeLabel> mTimeLabels = new ArrayList<TimeLabel>();
     final ArrayList<DateLabel> mDateLabels = new ArrayList<DateLabel>();
 
+    Bitmap mBitmap;
+    Canvas mCanvas;
+
     static class TextAttrs {
         ColorStateList textColor = null;
         int textSize = 15;
@@ -338,6 +342,8 @@ public class BatteryHistoryChart extends View {
 
     public BatteryHistoryChart(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        if (DEBUG) Log.d(TAG, "New BatteryHistoryChart!");
 
         mBatteryWarnLevel = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_lowBatteryWarningLevel);
@@ -467,6 +473,8 @@ public class BatteryHistoryChart extends View {
     void setStats(BatteryStats stats, Intent broadcast) {
         mStats = stats;
         mBatteryBroadcast = broadcast;
+
+        if (DEBUG) Log.d(TAG, "Setting stats...");
 
         final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
 
@@ -687,8 +695,12 @@ public class BatteryHistoryChart extends View {
             return;
         }
 
+        if (DEBUG) Log.d(TAG, "Rebuilding chart for: " + w + "x" + h);
+
         mLastWidth = w;
         mLastHeight = h;
+        mBitmap = null;
+        mCanvas = null;
 
         int textHeight = mTextDescent - mTextAscent;
         if (h > ((textHeight*10)+mChartMinHeight)) {
@@ -1025,6 +1037,13 @@ public class BatteryHistoryChart extends View {
                 endRoundTime = calEnd.getTimeInMillis();
                 if (startRoundTime < endRoundTime) {
                     addDateLabel(calStart, mLevelLeft, mLevelRight, isDayFirst);
+                    Calendar calMid = Calendar.getInstance();
+                    calMid.setTimeInMillis(startRoundTime + ((endRoundTime - startRoundTime) / 2));
+                    calMid.set(Calendar.HOUR_OF_DAY, 0);
+                    long calMidMillis = calMid.getTimeInMillis();
+                    if (calMidMillis > startRoundTime && calMidMillis < endRoundTime) {
+                        addDateLabel(calMid, mLevelLeft, mLevelRight, isDayFirst);
+                    }
                 }
                 addDateLabel(calEnd, mLevelLeft, mLevelRight, isDayFirst);
             }
@@ -1067,8 +1086,27 @@ public class BatteryHistoryChart extends View {
         final int width = getWidth();
         final int height = getHeight();
 
-        if (DEBUG) Log.d(TAG, "onDraw: " + width + "x" + height);
+        //buildBitmap(width, height);
 
+        if (DEBUG) Log.d(TAG, "onDraw: " + width + "x" + height);
+        //canvas.drawBitmap(mBitmap, 0, 0, null);
+        drawChart(canvas, width, height);
+    }
+
+    void buildBitmap(int width, int height) {
+        if (mBitmap != null && width == mBitmap.getWidth() && height == mBitmap.getHeight()) {
+            return;
+        }
+
+        if (DEBUG) Log.d(TAG, "buildBitmap: " + width + "x" + height);
+
+        mBitmap = Bitmap.createBitmap(getResources().getDisplayMetrics(), width, height,
+                Bitmap.Config.ARGB_8888);
+        mCanvas = new Canvas(mBitmap);
+        drawChart(mCanvas, width, height);
+    }
+
+    void drawChart(Canvas canvas, int width, int height) {
         final boolean layoutRtl = isLayoutRtl();
         final int textStartX = layoutRtl ? width : 0;
         final int textEndX = layoutRtl ? 0 : width;
