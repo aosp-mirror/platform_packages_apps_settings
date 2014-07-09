@@ -40,7 +40,6 @@ import android.view.inputmethod.InputMethodSubtype;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -50,9 +49,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     private AlertDialog mDialog = null;
     private boolean mHaveHardKeyboard;
     final private HashMap<String, List<Preference>> mInputMethodAndSubtypePrefsMap =
-            new HashMap<String, List<Preference>>();
-    final private HashMap<String, CheckBoxPreference> mSubtypeAutoSelectionCBMap =
-            new HashMap<String, CheckBoxPreference>();
+            new HashMap<>();
+    final private HashMap<String, CheckBoxPreference> mSubtypeAutoSelectionCBMap = new HashMap<>();
     private InputMethodManager mImm;
     private List<InputMethodInfo> mInputMethodProperties;
     private String mInputMethodId;
@@ -256,7 +254,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
             boolean isAutoSubtype = false;
             CharSequence autoSubtypeLabel = null;
-            final ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
+            final ArrayList<Preference> subtypePreferences = new ArrayList<>();
             if (subtypeCount > 0) {
                 for (int j = 0; j < subtypeCount; ++j) {
                     final InputMethodSubtype subtype = imi.getSubtypeAt(j);

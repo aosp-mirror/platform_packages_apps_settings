@@ -70,7 +70,6 @@ import java.util.TreeSet;
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
-
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
@@ -92,10 +91,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private PreferenceCategory mHardKeyboardCategory;
     private PreferenceCategory mGameControllerCategory;
     private Preference mLanguagePref;
-    private final ArrayList<InputMethodPreference> mInputMethodPreferenceList =
-            new ArrayList<InputMethodPreference>();
-    private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList =
-            new ArrayList<PreferenceScreen>();
+    private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
+    private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList = new ArrayList<>();
     private InputManager mIm;
     private InputMethodManager mImm;
     private boolean mIsOnlyImeSettings;
@@ -467,7 +464,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             final CharSequence curIme =
                     mInputMethodSettingValues.getCurrentInputMethodName(context);
             if (!TextUtils.isEmpty(curIme)) {
-                synchronized(this) {
+                synchronized (this) {
                     curPref.setSummary(curIme);
                 }
             }
@@ -488,8 +485,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         }
 
         // Add a check box for enabling/disabling IME
-        final InputMethodPreference pref =
-                new InputMethodPreference(this, intent, mImm, imi);
+        final InputMethodPreference pref = new InputMethodPreference(this, intent, mImm, imi);
         pref.setKey(imi.getId());
         pref.setTitle(label);
         return pref;
@@ -557,8 +553,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     }
 
     private void showKeyboardLayoutDialog(InputDeviceIdentifier inputDeviceIdentifier) {
-        KeyboardLayoutDialogFragment fragment =
-                new KeyboardLayoutDialogFragment(inputDeviceIdentifier);
+        KeyboardLayoutDialogFragment fragment = new KeyboardLayoutDialogFragment(
+                inputDeviceIdentifier);
         fragment.setTargetFragment(this, 0);
         fragment.show(getActivity().getFragmentManager(), "keyboardLayout");
     }
@@ -638,7 +634,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             new BaseSearchIndexProvider() {
         @Override
         public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
+            List<SearchIndexableRaw> indexables = new ArrayList<>();
 
             Resources resources = context.getResources();
             String screenTitle = context.getString(R.string.language_keyboard_settings_title);

@@ -20,19 +20,19 @@ import android.content.Intent;
 import com.android.settings.SettingsActivity;
 
 public class InputMethodAndSubtypeEnablerActivity extends SettingsActivity {
+    private static final String FRAGMENT_NAME = InputMethodAndSubtypeEnabler.class.getName();
+
     @Override
     public Intent getIntent() {
         final Intent modIntent = new Intent(super.getIntent());
         if (!modIntent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, InputMethodAndSubtypeEnabler.class.getName());
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, FRAGMENT_NAME);
         }
         return modIntent;
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if (InputMethodAndSubtypeEnabler.class.getName().equals(fragmentName)) return true;
-        return false;
+        return FRAGMENT_NAME.equals(fragmentName);
     }
-
 }

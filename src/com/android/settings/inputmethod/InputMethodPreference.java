@@ -47,7 +47,8 @@ import android.widget.Toast;
 import java.text.Collator;
 import java.util.List;
 
-public class InputMethodPreference extends CheckBoxPreference {
+// TODO: Make this non-persistent.
+class InputMethodPreference extends CheckBoxPreference {
     private static final String TAG = InputMethodPreference.class.getSimpleName();
     private final SettingsPreferenceFragment mFragment;
     private final InputMethodInfo mImi;
@@ -84,7 +85,7 @@ public class InputMethodPreference extends CheckBoxPreference {
 
     public InputMethodPreference(SettingsPreferenceFragment fragment, Intent settingsIntent,
             InputMethodManager imm, InputMethodInfo imi) {
-        super(fragment.getActivity(), null, R.style.InputMethodPreferenceStyle);
+        super(fragment.getActivity());
         setLayoutResource(R.layout.preference_inputmethod);
         setWidgetLayoutResource(R.layout.preference_inputmethod_widget);
         mFragment = fragment;
