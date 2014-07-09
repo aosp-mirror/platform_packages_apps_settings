@@ -29,7 +29,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CheckBoxAndSettingsPreference extends CheckBoxPreference {
+// TODO: Make this non-persistent.
+class CheckBoxAndSettingsPreference extends CheckBoxPreference {
 
     private SettingsPreferenceFragment mFragment;
     private TextView mTitleText;

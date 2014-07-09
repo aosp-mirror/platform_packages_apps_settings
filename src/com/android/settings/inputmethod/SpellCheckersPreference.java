@@ -20,7 +20,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.textservice.TextServicesManager;
 
-public class SpellCheckersPreference extends CheckBoxAndSettingsPreference {
+// TODO: Make this non-persistent.
+class SpellCheckersPreference extends CheckBoxAndSettingsPreference {
     private TextServicesManager mTsm;
 
     public SpellCheckersPreference(Context context) {

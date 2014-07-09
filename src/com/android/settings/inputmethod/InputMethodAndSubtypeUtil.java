@@ -35,7 +35,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class InputMethodAndSubtypeUtil {
+// TODO: Consolidate this with {@link InputMethodSettingValuesWrapper}.
+class InputMethodAndSubtypeUtil {
 
     private static final boolean DEBUG = false;
     static final String TAG = "InputMethdAndSubtypeUtil";
@@ -50,8 +51,8 @@ public class InputMethodAndSubtypeUtil {
     private static final TextUtils.SimpleStringSplitter sStringInputMethodSubtypeSplitter
             = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SUBTYPE_SEPARATER);
 
-    private static void buildEnabledInputMethodsString(
-            StringBuilder builder, String imi, HashSet<String> subtypes) {
+    private static void buildEnabledInputMethodsString(StringBuilder builder, String imi,
+            HashSet<String> subtypes) {
         builder.append(imi);
         // Inputmethod and subtypes are saved in the settings as follows:
         // ime0;subtype0;subtype1:ime1;subtype0:ime2:ime3;subtype0;subtype1
@@ -60,8 +61,8 @@ public class InputMethodAndSubtypeUtil {
         }
     }
 
-    public static void buildInputMethodsAndSubtypesString(
-            StringBuilder builder, HashMap<String, HashSet<String>> imsList) {
+    private static void buildInputMethodsAndSubtypesString(StringBuilder builder,
+            HashMap<String, HashSet<String>> imsList) {
         boolean needsAppendSeparator = false;
         for (String imi: imsList.keySet()) {
             if (needsAppendSeparator) {
@@ -73,8 +74,8 @@ public class InputMethodAndSubtypeUtil {
         }
     }
 
-    public static void buildDisabledSystemInputMethods(
-            StringBuilder builder, HashSet<String> imes) {
+    private static void buildDisabledSystemInputMethods(StringBuilder builder,
+            HashSet<String> imes) {
         boolean needsAppendSeparator = false;
         for (String ime: imes) {
             if (needsAppendSeparator) {
@@ -108,8 +109,7 @@ public class InputMethodAndSubtypeUtil {
             ContentResolver resolver) {
         final String enabledInputMethodsStr = Settings.Secure.getString(
                 resolver, Settings.Secure.ENABLED_INPUT_METHODS);
-        HashMap<String, HashSet<String>> imsList
-                = new HashMap<String, HashSet<String>>();
+        HashMap<String, HashSet<String>> imsList = new HashMap<>();
         if (DEBUG) {
             Log.d(TAG, "--- Load enabled input methods: " + enabledInputMethodsStr);
         }
@@ -122,7 +122,7 @@ public class InputMethodAndSubtypeUtil {
             String nextImsStr = sStringInputMethodSplitter.next();
             sStringInputMethodSubtypeSplitter.setString(nextImsStr);
             if (sStringInputMethodSubtypeSplitter.hasNext()) {
-                HashSet<String> subtypeHashes = new HashSet<String>();
+                HashSet<String> subtypeHashes = new HashSet<>();
                 // The first element is ime id.
                 String imeId = sStringInputMethodSubtypeSplitter.next();
                 while (sStringInputMethodSubtypeSplitter.hasNext()) {
@@ -135,7 +135,7 @@ public class InputMethodAndSubtypeUtil {
     }
 
     private static HashSet<String> getDisabledSystemIMEs(ContentResolver resolver) {
-        HashSet<String> set = new HashSet<String>();
+        HashSet<String> set = new HashSet<>();
         String disabledIMEsStr = Settings.Secure.getString(
                 resolver, Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS);
         if (TextUtils.isEmpty(disabledIMEsStr)) {
@@ -148,7 +148,7 @@ public class InputMethodAndSubtypeUtil {
         return set;
     }
 
-    public static void saveInputMethodSubtypeList(SettingsPreferenceFragment context,
+    static void saveInputMethodSubtypeList(SettingsPreferenceFragment context,
             ContentResolver resolver, List<InputMethodInfo> inputMethodInfos,
             boolean hasHardKeyboard) {
         String currentInputMethodId = Settings.Secure.getString(resolver,
@@ -158,7 +158,6 @@ public class InputMethodAndSubtypeUtil {
                 getEnabledInputMethodsAndSubtypeList(resolver);
         HashSet<String> disabledSystemIMEs = getDisabledSystemIMEs(resolver);
 
-        final int imiCount = inputMethodInfos.size();
         boolean needsToResetSelectedSubtype = false;
         for (InputMethodInfo imi : inputMethodInfos) {
             final String imiId = imi.getId();
@@ -273,9 +272,8 @@ public class InputMethodAndSubtypeUtil {
                 currentInputMethodId != null ? currentInputMethodId : "");
     }
 
-    public static void loadInputMethodSubtypeList(
-            SettingsPreferenceFragment context, ContentResolver resolver,
-            List<InputMethodInfo> inputMethodInfos,
+    static void loadInputMethodSubtypeList(SettingsPreferenceFragment context,
+            ContentResolver resolver, List<InputMethodInfo> inputMethodInfos,
             final Map<String, List<Preference>> inputMethodPrefsMap) {
         HashMap<String, HashSet<String>> enabledSubtypes =
                 getEnabledInputMethodsAndSubtypeList(resolver);
@@ -298,7 +296,7 @@ public class InputMethodAndSubtypeUtil {
         updateSubtypesPreferenceChecked(context, inputMethodInfos, enabledSubtypes);
     }
 
-    public static void setSubtypesPreferenceEnabled(SettingsPreferenceFragment context,
+    static void setSubtypesPreferenceEnabled(SettingsPreferenceFragment context,
             List<InputMethodInfo> inputMethodProperties, String id, boolean enabled) {
         PreferenceScreen preferenceScreen = context.getPreferenceScreen();
         for (InputMethodInfo imi : inputMethodProperties) {
@@ -316,7 +314,7 @@ public class InputMethodAndSubtypeUtil {
         }
     }
 
-    public static void updateSubtypesPreferenceChecked(SettingsPreferenceFragment context,
+    private static void updateSubtypesPreferenceChecked(SettingsPreferenceFragment context,
             List<InputMethodInfo> inputMethodProperties,
             HashMap<String, HashSet<String>> enabledSubtypes) {
         PreferenceScreen preferenceScreen = context.getPreferenceScreen();

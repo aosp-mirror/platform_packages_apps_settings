@@ -34,10 +34,10 @@ import android.view.textservice.SpellCheckerSubtype;
 import android.view.textservice.TextServicesManager;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class SingleSpellCheckerPreference extends Preference {
+// TODO: Make this non-persistent.
+class SingleSpellCheckerPreference extends Preference {
     private static final String TAG = SingleSpellCheckerPreference.class.getSimpleName();
     private static final boolean DBG = false;
 
@@ -47,8 +47,6 @@ public class SingleSpellCheckerPreference extends Preference {
     private final Resources mRes;
     private final TextServicesManager mTsm;
     private AlertDialog mDialog = null;
-    private TextView mTitleText;
-    private TextView mSummaryText;
     private View mPrefAll;
     private RadioButton mRadioButton;
     private View mPrefLeftButton;
@@ -88,8 +86,6 @@ public class SingleSpellCheckerPreference extends Preference {
                         onLeftButtonClicked(arg0);
                     }
                 });
-        mTitleText = (TextView)view.findViewById(android.R.id.title);
-        mSummaryText = (TextView)view.findViewById(android.R.id.summary);
         mSubtypeButton = (ImageView)view.findViewById(R.id.pref_right_button2);
         mSubtypeButton.setOnClickListener(
                 new OnClickListener() {
