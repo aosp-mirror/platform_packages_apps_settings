@@ -16,26 +16,15 @@
 
 package com.android.settings.inputmethod;
 
-import android.content.ComponentName;
-import android.content.pm.ServiceInfo;
-import com.android.settings.R;
-import com.android.settings.Settings.KeyboardLayoutPickerActivity;
-import com.android.settings.Settings.SpellCheckersSettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.UserDictionarySettings;
-import com.android.settings.Utils;
-import com.android.settings.VoiceInputOutputSettings;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
-
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -47,7 +36,6 @@ import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -60,17 +48,33 @@ import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
-import android.widget.BaseAdapter;
 
+import com.android.settings.R;
+import com.android.settings.Settings.KeyboardLayoutPickerActivity;
+import com.android.settings.Settings.SpellCheckersSettingsActivity;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SubSettings;
+import com.android.settings.UserDictionarySettings;
+import com.android.settings.Utils;
+import com.android.settings.VoiceInputOutputSettings;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener,
-        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
+        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable,
+        InputMethodPreference.onSavePreferenceListener {
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
+    private static final String KEY_CHOOSE_INPUT_METHODS = "choose_input_methods";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
@@ -95,23 +99,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList = new ArrayList<>();
     private InputManager mIm;
     private InputMethodManager mImm;
-    private boolean mIsOnlyImeSettings;
+    private boolean mShowsOnlyFullImeAndKeyboardList;
     private Handler mHandler;
     private SettingsObserver mSettingsObserver;
     private Intent mIntentWaitingForResult;
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
-
-    private final OnPreferenceChangeListener mOnImePreferenceChangedListener =
-            new OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference arg0, Object arg1) {
-                    InputMethodSettingValuesWrapper.getInstance(
-                            arg0.getContext()).refreshAllInputMethodAndSubtypes();
-                    ((BaseAdapter)getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
-                    updateInputMethodPreferenceViews();
-                    return true;
-                }
-            };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -119,13 +111,17 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.language_settings);
 
+        final Activity activity = getActivity();
+        mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(activity);
+
         try {
             mDefaultInputMethodSelectorVisibility = Integer.valueOf(
                     getString(R.string.input_method_selector_visibility_default_value));
         } catch (NumberFormatException e) {
         }
 
-        if (getActivity().getAssets().getLocales().length == 1) {
+        if (activity.getAssets().getLocales().length == 1) {
             // No "Select language" pref if there's only one system locale available.
             getPreferenceScreen().removePreference(findPreference(KEY_PHONE_LANGUAGE));
         } else {
@@ -149,45 +145,42 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 "game_controller_settings_category");
 
         // Filter out irrelevant features if invoked from IME settings button.
-        mIsOnlyImeSettings = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
-                getActivity().getIntent().getAction());
-        getActivity().getIntent().setAction(null);
-        if (mIsOnlyImeSettings) {
+        mShowsOnlyFullImeAndKeyboardList = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
+                activity.getIntent().getAction());
+        activity.getIntent().setAction(null);
+        if (mShowsOnlyFullImeAndKeyboardList) {
             getPreferenceScreen().removeAll();
             getPreferenceScreen().addPreference(mHardKeyboardCategory);
             if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
                 getPreferenceScreen().addPreference(mShowInputMethodSelectorPref);
             }
+            mKeyboardSettingsCategory.removeAll();
             getPreferenceScreen().addPreference(mKeyboardSettingsCategory);
-        }
-
-        // Build IME preference category.
-        mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(getActivity());
-
-        mKeyboardSettingsCategory.removeAll();
-        if (!mIsOnlyImeSettings) {
-            final PreferenceScreen currentIme = new PreferenceScreen(getActivity(), null);
-            currentIme.setKey(KEY_CURRENT_INPUT_METHOD);
-            currentIme.setTitle(getResources().getString(R.string.current_input_method));
-            mKeyboardSettingsCategory.addPreference(currentIme);
+        } else {
+            final Preference pref = findPreference(KEY_CHOOSE_INPUT_METHODS);
+            final Intent intent = new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS);
+            intent.setClass(activity, SubSettings.class);
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, getClass().getName());
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
+                    R.string.choose_input_methods);
+            pref.setIntent(intent);
         }
 
         // Build hard keyboard and game controller preference categories.
-        mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
+        mIm = (InputManager)activity.getSystemService(Context.INPUT_SERVICE);
         updateInputDevices();
 
         // Spell Checker
-        final Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClass(getActivity(), SpellCheckersSettingsActivity.class);
         final SpellCheckersPreference scp = ((SpellCheckersPreference)findPreference(
                 "spellcheckers_settings"));
         if (scp != null) {
+            final Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setClass(activity, SpellCheckersSettingsActivity.class);
             scp.setFragmentIntent(this, intent);
         }
 
         mHandler = new Handler();
-        mSettingsObserver = new SettingsObserver(mHandler, getActivity());
+        mSettingsObserver = new SettingsObserver(mHandler, activity);
     }
 
     private void updateInputMethodSelectorSummary(int value) {
@@ -246,7 +239,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mSettingsObserver.resume();
         mIm.registerInputDeviceListener(this, null);
 
-        if (!mIsOnlyImeSettings) {
+        if (!mShowsOnlyFullImeAndKeyboardList) {
             if (mLanguagePref != null) {
                 String localeName = getLocaleName(getResources());
                 mLanguagePref.setSummary(localeName);
@@ -419,31 +412,33 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private void updateInputMethodPreferenceViews() {
         synchronized (mInputMethodPreferenceList) {
             // Clear existing "InputMethodPreference"s
-            for (final InputMethodPreference imp : mInputMethodPreferenceList) {
-                mKeyboardSettingsCategory.removePreference(imp);
+            for (final InputMethodPreference pref : mInputMethodPreferenceList) {
+                mKeyboardSettingsCategory.removePreference(pref);
             }
             mInputMethodPreferenceList.clear();
-            final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+            final Context context = getActivity();
+            final List<InputMethodInfo> imis = mShowsOnlyFullImeAndKeyboardList
+                    ? mInputMethodSettingValues.getInputMethodList()
+                    : mImm.getEnabledInputMethodList();
             final int N = (imis == null ? 0 : imis.size());
             for (int i = 0; i < N; ++i) {
                 final InputMethodInfo imi = imis.get(i);
-                final InputMethodPreference pref = getInputMethodPreference(imi);
-                pref.setOnImePreferenceChangeListener(mOnImePreferenceChangedListener);
+                final InputMethodPreference pref = new InputMethodPreference(
+                        context, imi, mShowsOnlyFullImeAndKeyboardList /* hasSwitch */, this);
                 mInputMethodPreferenceList.add(pref);
             }
-
-            if (!mInputMethodPreferenceList.isEmpty()) {
-                Collections.sort(mInputMethodPreferenceList);
-                for (int i = 0; i < N; ++i) {
-                    mKeyboardSettingsCategory.addPreference(mInputMethodPreferenceList.get(i));
+            final Collator collator = Collator.getInstance();
+            Collections.sort(mInputMethodPreferenceList, new Comparator<InputMethodPreference>() {
+                @Override
+                public int compare(InputMethodPreference lhs, InputMethodPreference rhs) {
+                    return lhs.compareTo(rhs, collator);
                 }
-            }
-
-            // update views status
-            for (Preference pref : mInputMethodPreferenceList) {
-                if (pref instanceof InputMethodPreference) {
-                    ((InputMethodPreference) pref).updatePreferenceViews();
-                }
+            });
+            for (int i = 0; i < N; ++i) {
+                final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
+                mKeyboardSettingsCategory.addPreference(pref);
+                InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
+                pref.updatePreferenceViews();
             }
         }
         updateCurrentImeName();
@@ -454,6 +449,19 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
                 this, getContentResolver(),
                 mInputMethodSettingValues.getInputMethodList(), null);
+    }
+
+    @Override
+    public void onSaveInputMethodPreference(final InputMethodPreference pref) {
+        final boolean hasHardwareKeyboard = getResources().getConfiguration().keyboard
+                == Configuration.KEYBOARD_QWERTY;
+        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
+                mImm.getInputMethodList(), hasHardwareKeyboard);
+        // Update input method settings and preference list.
+        mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
+        for (final InputMethodPreference p : mInputMethodPreferenceList) {
+            p.updatePreferenceViews();
+        }
     }
 
     private void updateCurrentImeName() {
@@ -469,26 +477,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 }
             }
         }
-    }
-
-    private InputMethodPreference getInputMethodPreference(InputMethodInfo imi) {
-        final PackageManager pm = getPackageManager();
-        final CharSequence label = imi.loadLabel(pm);
-        // IME settings
-        final Intent intent;
-        final String settingsActivity = imi.getSettingsActivity();
-        if (!TextUtils.isEmpty(settingsActivity)) {
-            intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClassName(imi.getPackageName(), settingsActivity);
-        } else {
-            intent = null;
-        }
-
-        // Add a check box for enabling/disabling IME
-        final InputMethodPreference pref = new InputMethodPreference(this, intent, mImm, imi);
-        pref.setKey(imi.getId());
-        pref.setTitle(label);
-        return pref;
     }
 
     private void updateInputDevices() {
@@ -643,7 +631,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             if (context.getAssets().getLocales().length > 1) {
                 String localeName = getLocaleName(resources);
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
-                indexable.key = "phone_language";
+                indexable.key = KEY_PHONE_LANGUAGE;
                 indexable.title = context.getString(R.string.phone_language);
                 indexable.summaryOn = localeName;
                 indexable.summaryOff = localeName;
@@ -681,7 +669,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // Current IME.
             String currImeName = immValues.getCurrentInputMethodName(context).toString();
             indexable = new SearchIndexableRaw(context);
-            indexable.key = "current_input_method";
+            indexable.key = KEY_CURRENT_INPUT_METHOD;
             indexable.title = context.getString(R.string.current_input_method);
             indexable.summaryOn = currImeName;
             indexable.summaryOff = currImeName;

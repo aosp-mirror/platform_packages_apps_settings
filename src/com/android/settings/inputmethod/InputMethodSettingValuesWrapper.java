@@ -169,7 +169,7 @@ class InputMethodSettingValuesWrapper {
         return count;
     }
 
-    private boolean isEnabledImi(InputMethodInfo imi) {
+    boolean isEnabledImi(InputMethodInfo imi) {
         final List<InputMethodInfo> enabledImis;
         synchronized (mMethodMap) {
             enabledImis = mSettings.getEnabledInputMethodListLocked();

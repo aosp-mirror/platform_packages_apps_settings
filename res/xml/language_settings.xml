@@ -32,10 +32,17 @@
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title" />
 
-    <PreferenceCategory android:key="keyboard_settings_category"
+    <PreferenceCategory
+            android:key="keyboard_settings_category"
             android:title="@string/keyboard_settings_category">
-        <PreferenceScreen android:key="current_input_method"
+        <!-- An intent for this preference will be populated programmatically. -->
+        <PreferenceScreen
+                android:key="choose_input_methods"
+                android:title="@string/choose_input_methods" />
+        <PreferenceScreen
+                android:key="current_input_method"
                 android:title="@string/current_input_method" />
+        <!-- Enabled input method list will be populated programmatically here. -->
     </PreferenceCategory>
 
     <PreferenceCategory

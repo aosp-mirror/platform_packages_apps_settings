@@ -16,19 +16,21 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.internal.inputmethod.InputMethodUtils;
-import com.android.settings.SettingsPreferenceFragment;
-
 import android.content.ContentResolver;
+import android.content.SharedPreferences;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
+import com.android.internal.inputmethod.InputMethodUtils;
+import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -163,10 +165,10 @@ class InputMethodAndSubtypeUtil {
             final String imiId = imi.getId();
             Preference pref = context.findPreference(imiId);
             if (pref == null) continue;
-            // In the Configure input method screen or in the subtype enabler screen.
-            // pref is instance of CheckBoxPreference in the Configure input method screen.
-            final boolean isImeChecked = (pref instanceof CheckBoxPreference) ?
-                    ((CheckBoxPreference) pref).isChecked()
+            // In the choose input method screen or in the subtype enabler screen,
+            // <code>pref</code> is an instance of TwoStatePreference.
+            final boolean isImeChecked = (pref instanceof TwoStatePreference) ?
+                    ((TwoStatePreference) pref).isChecked()
                     : enabledIMEAndSubtypesMap.containsKey(imiId);
             final boolean isCurrentInputMethod = imiId.equals(currentInputMethodId);
             final boolean systemIme = InputMethodUtils.isSystemIme(imi);
@@ -336,6 +338,17 @@ class InputMethodAndSubtypeUtil {
                     pref.setChecked(enabledSubtypesSet.contains(hashCode));
                 }
             }
+        }
+    }
+
+    static void removeUnnecessaryNonPersistentPreference(final Preference pref) {
+        final String key = pref.getKey();
+        if (pref.isPersistent() || key == null) {
+            return;
+        }
+        final SharedPreferences prefs = pref.getSharedPreferences();
+        if (prefs != null && prefs.contains(key)) {
+            prefs.edit().remove(key).apply();
         }
     }
 }
