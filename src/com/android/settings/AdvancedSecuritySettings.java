@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.service.trust.TrustAgentService;
 import android.util.ArrayMap;
@@ -34,7 +33,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -52,9 +50,7 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
 
     public static final class AgentInfo {
         CharSequence label;
-        Drawable icon;
         ComponentName component; // service that implements ITrustAgent
-        ComponentName settings; // setting to launch to modify agent.
 
         @Override
         public boolean equals(Object other) {
@@ -114,11 +110,7 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
             if (!mAvailableAgents.containsKey(name)) {
                 AgentInfo agentInfo = new AgentInfo();
                 agentInfo.label = resolveInfo.loadLabel(pm);
-                agentInfo.icon = resolveInfo.loadIcon(pm);
                 agentInfo.component = name;
-                TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
-                        TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
-                agentInfo.settings = trustAgentComponentInfo.componentName;
                 mAvailableAgents.put(name, agentInfo);
             }
         }
@@ -128,16 +120,8 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
     @Override
     public void onClick(View view) {
         ViewHolder h = (ViewHolder) view.getTag();
-        AgentInfo agentInfo = h.agentInfo;
 
-        if (view.getId() == R.id.settings) {
-            if (agentInfo.settings != null) {
-                Intent intent = new Intent();
-                intent.setComponent(agentInfo.settings);
-                intent.setAction("TODO");
-                startActivity(intent);
-            }
-        } else if (view.getId() == R.id.clickable) {
+        if (view.getId() == R.id.clickable) {
             boolean wasActive = mActiveAgents.contains(h.agentInfo.component);
             loadActiveAgents();
             if (!wasActive) {
@@ -163,13 +147,11 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
     }
 
     static class ViewHolder {
-        ImageView icon;
         TextView name;
         CheckBox checkbox;
         TextView description;
         AgentInfo agentInfo;
         View clickable;
-        View settings;
     }
 
     class AgentListAdapter extends BaseAdapter {
@@ -218,16 +200,12 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
         public View newView(ViewGroup parent) {
             View v = mInflater.inflate(R.layout.trust_agent_item, parent, false);
             ViewHolder h = new ViewHolder();
-            h.icon = (ImageView)v.findViewById(R.id.icon);
             h.name = (TextView)v.findViewById(R.id.name);
             h.checkbox = (CheckBox)v.findViewById(R.id.checkbox);
             h.clickable = v.findViewById(R.id.clickable);
             h.clickable.setOnClickListener(AdvancedSecuritySettings.this);
             h.description = (TextView)v.findViewById(R.id.description);
-            h.settings = v.findViewById(R.id.settings);
-            h.settings.setOnClickListener(AdvancedSecuritySettings.this);
             v.setTag(h);
-            h.settings.setTag(h);
             h.clickable.setTag(h);
             return v;
         }
@@ -238,7 +216,6 @@ public class AdvancedSecuritySettings extends ListFragment implements View.OnCli
             vh.name.setText(item.label);
             vh.checkbox.setChecked(mActiveAgents.contains(item.component));
             vh.agentInfo = item;
-            vh.settings.setVisibility(item.settings != null ? View.VISIBLE : View.INVISIBLE);
         }
     }
 }

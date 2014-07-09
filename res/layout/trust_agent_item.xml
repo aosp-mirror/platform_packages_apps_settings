@@ -67,21 +67,4 @@
                     android:maxLines="4"/>
         </RelativeLayout>
     </LinearLayout>
-    <View
-            android:layout_width="2dip"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dip"
-            android:layout_marginBottom="5dip"
-            android:background="@android:drawable/divider_horizontal_dark"/>
-    <ImageView
-            android:id="@+id/settings"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:paddingStart="15dip"
-            android:src="@drawable/ic_sysbar_quicksettings"
-            android:contentDescription="@string/input_method_settings_button"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?android:attr/selectableItemBackground"/>
 </LinearLayout>
