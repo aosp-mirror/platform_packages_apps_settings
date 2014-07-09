@@ -34,6 +34,7 @@ import com.android.settings.Utils;
  * Settings screen for configuring a specific user. It can contain user restrictions
  * and deletion controls. It is shown when you tap on the settings icon in the
  * user management (UserSettings) screen.
+ *
  * Arguments to this fragment must include the userId of the user (in EXTRA_USER_ID) for whom
  * to display controls, or should contain the EXTRA_USER_GUEST = true.
  */
@@ -130,7 +131,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (context == null) return null;
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE: {
-                Dialog dlg = RemoveUserUtil.createConfirmationDialog(getActivity(), mUserInfo.id,
+                Dialog dlg = Utils.createRemoveConfirmationDialog(getActivity(), mUserInfo.id,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 removeUser();
