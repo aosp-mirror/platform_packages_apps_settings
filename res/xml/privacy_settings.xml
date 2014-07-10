@@ -15,16 +15,19 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/privacy_settings_title">
 
     <PreferenceCategory android:key="backup_category"
             android:title="@string/backup_section_title">
+
         <!-- Backup settings -->
         <CheckBoxPreference
                 android:key="backup_data"
                 android:title="@string/backup_data_title"
                 android:summary="@string/backup_data_summary"
                 android:persistent="false" />
+
         <PreferenceScreen
                 android:key="configure_account"
                 android:title="@string/backup_configure_account_title"
@@ -33,20 +36,25 @@
             <!-- the Intent declared here is always overwritten by a real one -->
             <intent android:action="dummy" />
         </PreferenceScreen>
+
         <CheckBoxPreference
                 android:key="auto_restore"
                 android:title="@string/auto_restore_title"
                 android:summary="@string/auto_restore_summary"
                 android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="personal_data_category"
             android:title="@string/personal_data_section_title">
+
         <!-- Factory reset -->
         <PreferenceScreen
             android:title="@string/master_clear_title"
             android:summary="@string/master_clear_summary"
+            settings:keywords="@string/keywords_factory_data_reset"
             android:fragment="com.android.settings.MasterClear" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

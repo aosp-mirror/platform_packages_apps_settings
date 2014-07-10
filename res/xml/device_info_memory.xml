@@ -15,7 +15,9 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/storage_settings">
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/storage_settings"
+        settings:keywords="@string/keywords_storage">
 
 <!-- Preference categories are dynamically created based on the list of available storage volumes -->
 

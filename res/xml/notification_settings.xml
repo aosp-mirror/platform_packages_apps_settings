@@ -15,9 +15,10 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/notification_settings"
         android:key="notification_settings"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+        settings:keywords="@string/keywords_sounds_and_notifications">
 
     <PreferenceCategory
         android:key="sound"
@@ -57,6 +58,7 @@
         <PreferenceScreen
                 android:key="zen_mode"
                 android:title="@string/zen_mode_settings_title"
+                settings:keywords="@string/keywords_sounds_and_notifications_interruptions"
                 android:fragment="com.android.settings.notification.ZenModeSettings" />
 
         <!-- Phone ringtone -->

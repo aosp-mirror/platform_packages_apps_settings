@@ -128,7 +128,8 @@ public class Index {
 
     private static final String[] MATCH_COLUMNS_PRIMARY = {
             IndexColumns.DATA_TITLE,
-            IndexColumns.DATA_TITLE_NORMALIZED
+            IndexColumns.DATA_TITLE_NORMALIZED,
+            IndexColumns.DATA_KEYWORDS
     };
 
     private static final String[] MATCH_COLUMNS_SECONDARY = {
@@ -136,8 +137,7 @@ public class Index {
             IndexColumns.DATA_SUMMARY_ON_NORMALIZED,
             IndexColumns.DATA_SUMMARY_OFF,
             IndexColumns.DATA_SUMMARY_OFF_NORMALIZED,
-            IndexColumns.DATA_ENTRIES,
-            IndexColumns.DATA_KEYWORDS
+            IndexColumns.DATA_ENTRIES
     };
 
     // Max number of saved search queries (who will be used for proposing suggestions)
