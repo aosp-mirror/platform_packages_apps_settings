@@ -290,6 +290,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mEnableOemUnlock = findAndInitCheckboxPref(ENABLE_OEM_UNLOCK);
         if (!showEnableOemUnlockPreference()) {
             removePreference(mEnableOemUnlock);
+            mEnableOemUnlock = null;
         }
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
@@ -510,7 +511,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateCheckBox(mBtHciSnoopLog, Settings.Secure.getInt(cr,
                 Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
-        updateCheckBox(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
+        if (mEnableOemUnlock != null) {
+            updateCheckBox(mEnableOemUnlock, Utils.isOemUnlockEnabled(getActivity()));
+        }
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
