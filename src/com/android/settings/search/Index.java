@@ -72,6 +72,7 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_CLASS;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEY;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_USER_ID;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RANK;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
@@ -103,6 +104,7 @@ public class Index {
     public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 11;
     public static final int COLUMN_INDEX_ENABLED = 12;
     public static final int COLUMN_INDEX_KEY = 13;
+    public static final int COLUMN_INDEX_USER_ID = 14;
 
     public static final String ENTRIES_SEPARATOR = "|";
 
@@ -609,6 +611,7 @@ public class Index {
                             COLUMN_INDEX_RAW_INTENT_TARGET_CLASS);
 
                     final String key = cursor.getString(COLUMN_INDEX_RAW_KEY);
+                    final int userId = cursor.getInt(COLUMN_INDEX_RAW_USER_ID);
 
                     SearchIndexableRaw data = new SearchIndexableRaw(packageContext);
                     data.rank = rank;
@@ -625,6 +628,7 @@ public class Index {
                     data.intentTargetPackage = targetPackage;
                     data.intentTargetClass = targetClass;
                     data.key = key;
+                    data.userId = userId;
 
                     addIndexableData(data);
                 }
