@@ -721,7 +721,8 @@ public class Index {
                 raw.intentTargetPackage,
                 raw.intentTargetClass,
                 raw.enabled,
-                raw.key);
+                raw.key,
+                raw.userId);
     }
 
     private void indexOneResource(SQLiteDatabase database, String localeStr,
@@ -819,7 +820,8 @@ public class Index {
 
                 updateOneRowWithFilteredData(database, localeStr, title, summary, null, null,
                         fragmentName, screenTitle, iconResId, rank,
-                        keywords, intentAction, intentTargetPackage, intentTargetClass, true, key);
+                        keywords, intentAction, intentTargetPackage, intentTargetClass, true,
+                        key, -1 /* default user id */);
             }
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
@@ -851,7 +853,7 @@ public class Index {
                     updateOneRowWithFilteredData(database, localeStr, title, summary, null, entries,
                             fragmentName, screenTitle, iconResId, rank,
                             keywords, intentAction, intentTargetPackage, intentTargetClass,
-                            true, key);
+                            true, key, -1 /* default user id */);
                 } else {
                     String summaryOn = getDataSummaryOn(context, attrs);
                     String summaryOff = getDataSummaryOff(context, attrs);
@@ -863,7 +865,7 @@ public class Index {
                     updateOneRowWithFilteredData(database, localeStr, title, summaryOn, summaryOff,
                             null, fragmentName, screenTitle, iconResId, rank,
                             keywords, intentAction, intentTargetPackage, intentTargetClass,
-                            true, key);
+                            true, key, -1 /* default user id */);
                 }
             }
 
@@ -915,7 +917,8 @@ public class Index {
                         raw.intentTargetPackage,
                         raw.intentTargetClass,
                         raw.enabled,
-                        raw.key);
+                        raw.key,
+                        raw.userId);
             }
         }
 
@@ -949,7 +952,7 @@ public class Index {
             String className,
             String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
-            boolean enabled, String key) {
+            boolean enabled, String key, int userId) {
 
         final String updatedTitle = normalizeHyphen(title);
         final String updatedSummaryOn = normalizeHyphen(summaryOn);
@@ -963,7 +966,8 @@ public class Index {
                 updatedTitle, normalizedTitle, updatedSummaryOn, normalizedSummaryOn,
                 updatedSummaryOff, normalizedSummaryOff, entries,
                 className, screenTitle, iconResId,
-                rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled, key);
+                rank, keywords, intentAction, intentTargetPackage, intentTargetClass, enabled,
+                key, userId);
     }
 
     private static String normalizeHyphen(String input) {
@@ -983,7 +987,7 @@ public class Index {
             String updatedSummaryOff, String normalizedSummaryOff, String entries,
             String className, String screenTitle, int iconResId, int rank, String keywords,
             String intentAction, String intentTargetPackage, String intentTargetClass,
-            boolean enabled, String key) {
+            boolean enabled, String key, int userId) {
 
         if (TextUtils.isEmpty(updatedTitle)) {
             return;
@@ -1009,6 +1013,7 @@ public class Index {
         values.put(IndexColumns.ICON, iconResId);
         values.put(IndexColumns.ENABLED, enabled);
         values.put(IndexColumns.DATA_KEY_REF, key);
+        values.put(IndexColumns.USER_ID, userId);
 
         database.replaceOrThrow(Tables.TABLE_PREFS_INDEX, null, values);
     }
