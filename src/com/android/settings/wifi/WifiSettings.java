@@ -940,6 +940,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 SearchIndexableRaw data = new SearchIndexableRaw(context);
                 data.title = res.getString(R.string.wifi_settings);
                 data.screenTitle = res.getString(R.string.wifi_settings);
+                data.keywords = res.getString(R.string.keywords_wifi);
                 result.add(data);
 
                 // Add available Wi-Fi access points

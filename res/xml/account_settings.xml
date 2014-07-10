@@ -15,8 +15,10 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:key="account"
-        android:title="@string/account_settings_title">
+        android:title="@string/account_settings_title"
+        settings:keywords="@string/keywords_accounts">
 
         <Preference
             android:key="add_account"

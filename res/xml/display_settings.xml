@@ -15,23 +15,27 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/display_settings"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+        settings:keywords="@string/keywords_display">
 
         <com.android.settings.BrightnessPreference
                 android:key="brightness"
                 android:title="@string/brightness"
+                settings:keywords="@string/keywords_display_brightness_level"
                 android:persistent="false"/>
 
         <CheckBoxPreference
                 android:key="auto_brightness"
                 android:title="@string/auto_brightness_title"
+                settings:keywords="@string/keywords_display_auto_brightness"
                 android:summary="@string/auto_brightness_summary"
                 android:persistent="false" />
 
         <PreferenceScreen
                 android:key="wallpaper"
                 android:title="@string/wallpaper_settings_title"
+                settings:keywords="@string/keywords_display_wallpaper"
                 android:fragment="com.android.settings.WallpaperTypeSettings" />
 
         <ListPreference
@@ -50,6 +54,7 @@
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
+                settings:keywords="@string/keywords_display_font_size"
                 android:summary="@string/summary_font_size"
                 android:entries="@array/entries_font_size"
                 android:entryValues="@array/entryvalues_font_size"
@@ -58,6 +63,7 @@
         <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
+                settings:keywords="@string/keywords_display_cast_screen"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
 
 </PreferenceScreen>

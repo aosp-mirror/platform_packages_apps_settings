@@ -15,7 +15,9 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/radio_controls_title">
+                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="wireless_settings"
+        android:key="@string/radio_controls_title">
 
     <CheckBoxPreference
         android:key="toggle_airplane"
@@ -26,6 +28,7 @@
     <com.android.settings.AppListPreference
         android:key="sms_application"
         android:title="@string/sms_application_title"
+        settings:keywords="@string/keywords_more_default_sms_app"
         android:summary="%s"
         android:persistent="false" />
 
@@ -53,6 +56,7 @@
     <PreferenceScreen
         android:key="mobile_network_settings"
         android:title="@string/network_settings_title"
+        settings:keywords="@string/keywords_more_mobile_networks"
         android:dependency="toggle_airplane">
         <intent
             android:action="android.intent.action.MAIN"
