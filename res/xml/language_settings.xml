@@ -25,10 +25,14 @@
             android:fragment="com.android.settings.LocalePicker"
             />
 
-    <com.android.settings.inputmethod.SpellCheckersPreference
+    <!-- Spell checker preference title, summary and fragment will be set programmatically. -->
+    <!-- Note: Mark this as persistent="false" to remove unnecessarily saved shared preference.
+         See: InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference. -->
+    <PreferenceScreen
             android:key="spellcheckers_settings"
             android:title="@string/spellcheckers_settings_title"
             settings:keywords="@string/keywords_spell_checker"
+            android:persistent="false"
             />
 
     <!-- User dictionary preference title and fragment will be set programmatically. -->

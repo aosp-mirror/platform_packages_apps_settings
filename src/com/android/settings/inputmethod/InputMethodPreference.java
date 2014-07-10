@@ -51,7 +51,7 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
     private static final String TAG = InputMethodPreference.class.getSimpleName();
     private static final String EMPTY_TEXT = "";
 
-    interface onSavePreferenceListener {
+    interface OnSavePreferenceListener {
         /**
          * Called when this preference needs to be saved its state.
          *
@@ -66,7 +66,7 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
 
     private final InputMethodInfo mImi;
     private final boolean mHasPriorityInSorting;
-    private final onSavePreferenceListener mOnSaveListener;
+    private final OnSavePreferenceListener mOnSaveListener;
     private final InputMethodSettingValuesWrapper mInputMethodSettingValues;
 
     private AlertDialog mDialog = null;
@@ -82,7 +82,7 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
      *     to save the state to shared preference.
      */
     InputMethodPreference(final Context context, final InputMethodInfo imi,
-            final boolean isImeEnabler, final onSavePreferenceListener onSaveListener) {
+            final boolean isImeEnabler, final OnSavePreferenceListener onSaveListener) {
         super(context);
         setPersistent(false);
         mImi = imi;

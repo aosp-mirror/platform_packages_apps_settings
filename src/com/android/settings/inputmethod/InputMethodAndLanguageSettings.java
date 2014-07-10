@@ -48,10 +48,11 @@ import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
+import android.view.textservice.SpellCheckerInfo;
+import android.view.textservice.TextServicesManager;
 
 import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
-import com.android.settings.Settings.SpellCheckersSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
@@ -72,7 +73,8 @@ import java.util.TreeSet;
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable,
-        InputMethodPreference.onSavePreferenceListener {
+        InputMethodPreference.OnSavePreferenceListener {
+    private static final String KEY_SPELL_CHECKERS = "spellcheckers_settings";
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CHOOSE_INPUT_METHODS = "choose_input_methods";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
@@ -171,12 +173,17 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         updateInputDevices();
 
         // Spell Checker
-        final SpellCheckersPreference scp = ((SpellCheckersPreference)findPreference(
-                "spellcheckers_settings"));
-        if (scp != null) {
+        final Preference spellChecker = findPreference(KEY_SPELL_CHECKERS);
+        if (spellChecker != null) {
+            // Note: KEY_SPELL_CHECKERS preference is marked as persistent="false" in XML.
+            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(spellChecker);
             final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClass(activity, SpellCheckersSettingsActivity.class);
-            scp.setFragmentIntent(this, intent);
+            intent.setClass(activity, SubSettings.class);
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT,
+                    SpellCheckersSettings.class.getName());
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
+                    R.string.spellcheckers_settings_title);
+            spellChecker.setIntent(intent);
         }
 
         mHandler = new Handler();
@@ -238,6 +245,18 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         mSettingsObserver.resume();
         mIm.registerInputDeviceListener(this, null);
+
+        final Preference spellChecker = findPreference(KEY_SPELL_CHECKERS);
+        if (spellChecker != null) {
+            final TextServicesManager tsm = (TextServicesManager) getSystemService(
+                    Context.TEXT_SERVICES_MANAGER_SERVICE);
+            if (tsm.isSpellCheckerEnabled()) {
+                final SpellCheckerInfo sci = tsm.getCurrentSpellChecker();
+                spellChecker.setSummary(sci.loadLabel(getPackageManager()));
+            } else {
+                spellChecker.setSummary(R.string.switch_off_text);
+            }
+        }
 
         if (!mShowsOnlyFullImeAndKeyboardList) {
             if (mLanguagePref != null) {
@@ -641,7 +660,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
             // Spell checker.
             SearchIndexableRaw indexable = new SearchIndexableRaw(context);
-            indexable.key = "spellcheckers_settings";
+            indexable.key = KEY_SPELL_CHECKERS;
             indexable.title = context.getString(R.string.spellcheckers_settings_title);
             indexable.screenTitle = screenTitle;
             indexables.add(indexable);
