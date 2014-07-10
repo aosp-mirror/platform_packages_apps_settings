@@ -151,6 +151,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     resid = R.xml.security_settings_pattern;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     resid = R.xml.security_settings_pin;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:

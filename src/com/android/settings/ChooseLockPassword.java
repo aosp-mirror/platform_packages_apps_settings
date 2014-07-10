@@ -329,10 +329,18 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
             }
             if (DevicePolicyManager.PASSWORD_QUALITY_NUMERIC == mRequestedQuality
-                    && (letters > 0 || symbols > 0)) {
-                // This shouldn't be possible unless user finds some way to bring up
-                // soft keyboard
-                return getString(R.string.lockpassword_pin_contains_non_digits);
+                    || DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX == mRequestedQuality) {
+                if (letters > 0 || symbols > 0) {
+                    // This shouldn't be possible unless user finds some way to bring up
+                    // soft keyboard
+                    return getString(R.string.lockpassword_pin_contains_non_digits);
+                }
+                // Check for repeated characters or sequences (e.g. '1234', '0000', '2468')
+                final int sequence = LockPatternUtils.maxLengthSequence(password);
+                if (DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX == mRequestedQuality
+                        && sequence > LockPatternUtils.MAX_ALLOWED_SEQUENCE) {
+                    return getString(R.string.lockpassword_pin_no_sequential_digits);
+                }
             } else if (DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mRequestedQuality) {
                 if (letters < mPasswordMinLetters) {
                     return String.format(getResources().getQuantityString(
@@ -375,6 +383,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 return getString(mIsAlphaMode ? R.string.lockpassword_password_recently_used
                         : R.string.lockpassword_pin_recently_used);
             }
+
             return null;
         }
 
