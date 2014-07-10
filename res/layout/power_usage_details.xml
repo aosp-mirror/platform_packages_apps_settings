@@ -75,6 +75,21 @@
 
         </LinearLayout>
 
+        <LinearLayout
+                android:id="@+id/messages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/messages_title"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_marginTop="6dip" />
+
+            <!-- Messages go here ... -->
+
+        </LinearLayout>
+
         <TextView
                 android:id="@+id/packages_section_title"
                 style="?android:attr/listSeparatorTextViewStyle"

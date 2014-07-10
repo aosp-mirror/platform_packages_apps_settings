@@ -72,6 +72,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         R.string.battery_desc_voice,
         R.string.battery_desc_wifi,
         R.string.battery_desc_bluetooth,
+        R.string.battery_desc_flashlight,
         R.string.battery_desc_display,
         R.string.battery_desc_apps,
         R.string.battery_desc_users,
@@ -217,18 +218,28 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 };
             } break;
             case UNACCOUNTED:
-            case OVERCOUNTED:
             {
                 types = new int[] {
                     R.string.usage_type_total_battery_capacity,
                     R.string.usage_type_computed_power,
-                    R.string.usage_type_min_actual_power,
-                    R.string.usage_type_max_actual_power,
+                    R.string.usage_type_actual_power,
                 };
                 values = new double[] {
                     helper.getPowerProfile().getBatteryCapacity(),
                     helper.getComputedPower(),
                     helper.getMinDrainedPower(),
+                };
+            } break;
+            case OVERCOUNTED:
+            {
+                types = new int[] {
+                    R.string.usage_type_total_battery_capacity,
+                    R.string.usage_type_computed_power,
+                    R.string.usage_type_actual_power,
+                };
+                values = new double[] {
+                    helper.getPowerProfile().getBatteryCapacity(),
+                    helper.getComputedPower(),
                     helper.getMaxDrainedPower(),
                 };
             } break;
@@ -290,6 +301,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     private Button mReportButton;
     private ViewGroup mDetailsParent;
     private ViewGroup mControlsParent;
+    private ViewGroup mMessagesParent;
     private long mStartTime;
     private BatterySipper.DrainType mDrainType;
     private Drawable mAppIcon;
@@ -390,10 +402,12 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
 
         mDetailsParent = (ViewGroup)mRootView.findViewById(R.id.details);
         mControlsParent = (ViewGroup)mRootView.findViewById(R.id.controls);
+        mMessagesParent = (ViewGroup)mRootView.findViewById(R.id.messages);
 
         fillDetailsSection();
         fillPackagesSection(mUid);
         fillControlsSection(mUid);
+        fillMessagesSection(mUid);
         
         if (mUid >= Process.FIRST_APPLICATION_UID) {
             mForceStopButton.setText(R.string.force_stop);
@@ -497,8 +511,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                         break;
                     case R.string.usage_type_total_battery_capacity:
                     case R.string.usage_type_computed_power:
-                    case R.string.usage_type_min_actual_power:
-                    case R.string.usage_type_max_actual_power:
+                    case R.string.usage_type_actual_power:
                         value = getActivity().getString(R.string.mah, (long)(mValues[i]));
                         break;
                     case R.string.usage_type_gps:
@@ -589,6 +602,28 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         summaryView.setText(res.getString(summary));
         actionButton.setOnClickListener(this);
         actionButton.setTag(new Integer(action));
+    }
+
+    private void fillMessagesSection(int uid) {
+        boolean removeHeader = true;
+        switch (mDrainType) {
+            case UNACCOUNTED:
+                addMessage(R.string.battery_msg_unaccounted);
+                removeHeader = false;
+                break;
+        }
+        if (removeHeader) {
+            mMessagesParent.setVisibility(View.GONE);
+        }
+    }
+
+    private void addMessage(int message) {
+        final Resources res = getResources();
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View item = inflater.inflate(R.layout.power_usage_message_item, null);
+        mMessagesParent.addView(item);
+        TextView messageView = (TextView) item.findViewById(R.id.message);
+        messageView.setText(res.getText(message));
     }
 
     private void removePackagesSection() {
@@ -703,8 +738,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 //if (ai.icon != 0) {
                 //    icon = ai.loadIcon(pm);
                 //}
-                ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_package_item,
-                        null);
+                View item = inflater.inflate(R.layout.power_usage_package_item, null);
                 packagesParent.addView(item);
                 TextView labelView = (TextView) item.findViewById(R.id.label);
                 labelView.setText(mPackages[i]);

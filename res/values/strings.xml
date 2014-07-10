@@ -3876,12 +3876,11 @@
     <string name="usage_type_no_coverage">Time without a signal</string>
     <!-- Label for the total power capacity of the device's battery -->
     <string name="usage_type_total_battery_capacity">Total battery capacity</string>
-    <!-- Label for amount of power use that was computed -->
-    <string name="usage_type_computed_power">Computed power</string>
-    <!-- Label for minimum amount of actual power use -->
-    <string name="usage_type_min_actual_power">Min real power</string>
-    <!-- Label for maximum amount of power use -->
-    <string name="usage_type_max_actual_power">Max real power</string>
+    <!-- [CHAR_LIMIT=NONE] Label for amount of power use that was computed -->
+    <string name="usage_type_computed_power">Computed power use</string>
+    <!-- [CHAR_LIMIT=NONE] Label for amount of power use that was actually observed (though
+         the change in battery level) -->
+    <string name="usage_type_actual_power">Observed power use</string>
     <!-- Label for force stop action -->
     <string name="battery_action_stop">Force stop</string>
     <!-- Label for app details action -->
@@ -3907,6 +3906,9 @@
     <string name="battery_desc_radio">Battery used by cell radio</string>
     <!-- Suggestion to switch to airplane mode to save power -->
     <string name="battery_sugg_radio">Switch to airplane mode to save power in areas with no cell coverage</string>
+
+    <!-- [CHAR_LIMIT=NONE] Description for power consumed by the flashlight -->
+    <string name="battery_desc_flashlight">Battery used by the flashlight</string>
 
     <!-- Description for power consumed by display -->
     <string name="battery_desc_display">Battery used by the display and backlight</string>
@@ -3938,7 +3940,12 @@
     <string name="battery_desc_users">Battery used by user</string>
 
     <!-- [CHAR LIMIT=50] Description for unaccounted power use -->
-    <string name="battery_desc_unaccounted">Unknown power use</string>
+    <string name="battery_desc_unaccounted">Miscellaneous power use</string>
+    <!-- [CHAR LIMIT=NONE] Description for unaccounted power use -->
+    <string name="battery_msg_unaccounted">Battery use is an approximation of power
+        use and does not include every source of battery drain.  Miscellaneous is the difference
+        between the computed approximate power use and the actual drain observed on the
+        battery.</string>
     <!-- [CHAR LIMIT=50] Description for over-counted power use -->
     <string name="battery_desc_overcounted">Over-counted power use</string>
     <!-- Representation of a mAh value. [CHAR LIMIT=NONE] -->
