@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothUuid;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
@@ -102,6 +103,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     // See mConnectAttempted
     private static final long MAX_UUID_DELAY_FOR_AUTO_CONNECT = 5000;
+    private static final long MAX_HOGP_DELAY_FOR_AUTO_CONNECT = 30000;
 
     /** Auto-connect after pairing only if locally initiated. */
     private boolean mConnectAfterPairing;
@@ -523,9 +525,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
      */
     void onUuidChanged() {
         updateProfiles();
+        ParcelUuid[] uuids = mDevice.getUuids();
+        long timeout = MAX_UUID_DELAY_FOR_AUTO_CONNECT;
 
         if (DEBUG) {
-            Log.e(TAG, "onUuidChanged: Time since last connect"
+            Log.d(TAG, "onUuidChanged: Time since last connect"
                     + (SystemClock.elapsedRealtime() - mConnectAttempted));
         }
 
@@ -533,9 +537,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
          * If a connect was attempted earlier without any UUID, we will do the
          * connect now.
          */
+        if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Hogp)) {
+            timeout = MAX_HOGP_DELAY_FOR_AUTO_CONNECT;
+        }
         if (!mProfiles.isEmpty()
-                && (mConnectAttempted + MAX_UUID_DELAY_FOR_AUTO_CONNECT) > SystemClock
-                        .elapsedRealtime()) {
+                && (mConnectAttempted + timeout) > SystemClock.elapsedRealtime()) {
             connectWithoutResettingTimer(false);
         }
         dispatchAttributesChanged();
