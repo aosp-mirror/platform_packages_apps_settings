@@ -45,6 +45,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
@@ -72,8 +74,10 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
-    private static final int MIN_POWER_THRESHOLD = 5;
+    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
     private static final int MAX_ITEMS_TO_LIST = 10;
+    private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
+    private static final int SECONDS_IN_HOUR = 60 * 60;
 
     private BatteryStatsHelper mStatsHelper;
 
@@ -241,43 +245,52 @@ public class PowerUsageSummary extends PreferenceFragment {
     private void refreshStats() {
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);
-
-        mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, UserHandle.myUserId());
-
-        mHistPref = new BatteryHistoryPreference(
-                getActivity(), mStatsHelper.getStats(), mStatsHelper.getBatteryBroadcast());
+        mHistPref = new BatteryHistoryPreference(getActivity(), mStatsHelper.getStats(),
+                mStatsHelper.getBatteryBroadcast());
         mHistPref.setOrder(-1);
         mAppListGroup.addPreference(mHistPref);
-
-        if (mStatsHelper.getPowerProfile().getAveragePower(
-                PowerProfile.POWER_SCREEN_FULL) < 10) {
-            addNotAvailableMessage();
-            return;
-        }
         boolean addedSome = false;
-        final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(mStatsType);
-        List<BatterySipper> usageList = mStatsHelper.getUsageList();
-        for (int i=0; i<usageList.size(); i++) {
-            BatterySipper sipper = usageList.get(i);
-            if ((sipper.value*60*60) < MIN_POWER_THRESHOLD) continue;
-            final double percentOfTotal =
-                    ((sipper.value / mStatsHelper.getTotalPower()) * dischargeAmount);
-            if (((int)(percentOfTotal+.5)) < 1) continue;
-            BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
-            PowerGaugePreference pref =
-                    new PowerGaugePreference(getActivity(), entry.getIcon(), entry);
-            final double percentOfMax =
-                    (sipper.value * 100) / mStatsHelper.getMaxPower();
-            sipper.percent = percentOfTotal;
-            pref.setTitle(entry.getLabel());
-            pref.setOrder(i+1);
-            pref.setPercent(percentOfMax, percentOfTotal);
-            if (sipper.uidObj != null) {
-                pref.setKey(Integer.toString(sipper.uidObj.getUid()));
+
+        PowerProfile powerProfile = mStatsHelper.getPowerProfile();
+        final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
+        if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP) {
+            final List<UserHandle> profiles = mUm.getUserProfiles();
+
+            mStatsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, profiles);
+
+            final List<BatterySipper> usageList = mStatsHelper.getUsageList();
+
+            final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(mStatsType);
+            final int numSippers = usageList.size();
+            for (int i = 0; i < numSippers; i++) {
+                final BatterySipper sipper = usageList.get(i);
+                if ((sipper.value * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP) {
+                    continue;
+                }
+                final double percentOfTotal =
+                        ((sipper.value / mStatsHelper.getTotalPower()) * dischargeAmount);
+                if (((int) (percentOfTotal + .5)) < 1) {
+                    continue;
+                }
+                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(sipper.getUid()));
+                final BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
+                final PowerGaugePreference pref = new PowerGaugePreference(getActivity(),
+                        mUm.getBadgedDrawableForUser(entry.getIcon(), userHandle), entry);
+
+                final double percentOfMax = (sipper.value * 100) / mStatsHelper.getMaxPower();
+                sipper.percent = percentOfTotal;
+                pref.setTitle(entry.getLabel());
+                pref.setOrder(i + 1);
+                pref.setPercent(percentOfMax, percentOfTotal);
+                if (sipper.uidObj != null) {
+                    pref.setKey(Integer.toString(sipper.uidObj.getUid()));
+                }
+                addedSome = true;
+                mAppListGroup.addPreference(pref);
+                if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST + 1)) {
+                    break;
+                }
             }
-            addedSome = true;
-            mAppListGroup.addPreference(pref);
-            if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
         }
         if (!addedSome) {
             addNotAvailableMessage();
