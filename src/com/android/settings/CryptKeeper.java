@@ -148,22 +148,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
-    /**
-     * Activity used to fade the screen to black after the password is entered.
-     */
-    public static class FadeToBlack extends Activity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.crypt_keeper_blank);
-        }
-        /** Ignore all back events. */
-        @Override
-        public void onBackPressed() {
-            return;
-        }
-    }
-
     private class DecryptTask extends AsyncTask<String, Void, Integer> {
         @Override
         protected Integer doInBackground(String... params) {
@@ -179,13 +163,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         @Override
         protected void onPostExecute(Integer failedAttempts) {
             if (failedAttempts == 0) {
-                // The password was entered successfully. Start the Blank activity
-                // so this activity animates to black before the devices starts. Note
-                // It has 1 second to complete the animation or it will be frozen
-                // until the boot animation comes back up.
-                Intent intent = new Intent(CryptKeeper.this, FadeToBlack.class);
-                finish();
-                startActivity(intent);
+                // The password was entered successfully. Simply do nothing
+                // and wait for the service restart to switch to surfacefligner
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
@@ -862,14 +841,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         int textId;
         if (getPhoneManager().isInAPhoneCall()) {
-            // Show "return to call" text and show phone icon
+            // Show "return to call"
             textId = R.string.cryptkeeper_return_to_call;
-            final int phoneCallIcon = R.drawable.stat_sys_phone_call;
-            emergencyCall.setCompoundDrawablesWithIntrinsicBounds(phoneCallIcon, 0, 0, 0);
         } else {
             textId = R.string.cryptkeeper_emergency_call;
-            final int emergencyIcon = R.drawable.ic_emergency;
-            emergencyCall.setCompoundDrawablesWithIntrinsicBounds(emergencyIcon, 0, 0, 0);
         }
         emergencyCall.setText(textId);
     }
