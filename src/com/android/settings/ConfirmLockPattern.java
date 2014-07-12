@@ -43,6 +43,9 @@ import java.util.List;
  */
 public class ConfirmLockPattern extends SettingsActivity {
 
+    public static class InternalActivity extends ConfirmLockPattern {
+    }
+
     /**
      * Names of {@link CharSequence} fields within the originating {@link Intent}
      * that are used to configure the keyguard confirmation view's labeling.
@@ -266,10 +269,12 @@ public class ConfirmLockPattern extends SettingsActivity {
                 if (mLockPatternUtils.checkPattern(pattern)) {
 
                     Intent intent = new Intent();
-                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                    StorageManager.CRYPT_TYPE_PATTERN);
-                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                                    LockPatternUtils.patternToString(pattern));
+                    if (getActivity() instanceof ConfirmLockPattern.InternalActivity) {
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
+                                        StorageManager.CRYPT_TYPE_PATTERN);
+                        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                        LockPatternUtils.patternToString(pattern));
+                    }
 
                     getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
