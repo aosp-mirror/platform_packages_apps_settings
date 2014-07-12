@@ -21,8 +21,13 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodSubtype;
+
+import com.android.internal.inputmethod.InputMethodUtils;
 
 import java.text.Collator;
+import java.util.Locale;
 
 /**
  * Input method subtype preference.
@@ -37,16 +42,23 @@ class InputMethodSubtypePreference extends CheckBoxPreference {
     private final boolean mIsSystemLanguage;
     private final Collator mCollator;
 
-    public InputMethodSubtypePreference(
-            Context context, String subtypeLocale, String systemLocale, Collator collator) {
+    public InputMethodSubtypePreference(final Context context, final InputMethodSubtype subtype,
+            final InputMethodInfo imi, final Collator collator) {
         super(context);
-        if (TextUtils.isEmpty(subtypeLocale)) {
+        setKey(imi.getId() + subtype.hashCode());
+        final CharSequence subtypeLabel = subtype.getDisplayName(context,
+                imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+        setTitle(subtypeLabel);
+        final String subtypeLocaleString = subtype.getLocale();
+        if (TextUtils.isEmpty(subtypeLocaleString)) {
             mIsSystemLocale = false;
             mIsSystemLanguage = false;
         } else {
-            mIsSystemLocale = subtypeLocale.equals(systemLocale);
+            final Locale systemLocale = context.getResources().getConfiguration().locale;
+            mIsSystemLocale = subtypeLocaleString.equals(systemLocale.toString());
             mIsSystemLanguage = mIsSystemLocale
-                    || subtypeLocale.startsWith(systemLocale.substring(0, 2));
+                    || InputMethodUtils.getLanguageFromLocaleString(subtypeLocaleString)
+                            .equals(systemLocale.getLanguage());
         }
         mCollator = collator;
     }

@@ -267,7 +267,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                         }
                     } else {
                         final CheckBoxPreference chkbxPref = new InputMethodSubtypePreference(
-                                context, subtype.getLocale(), mSystemLocale, mCollator);
+                                context, subtype, imi, mCollator);
                         chkbxPref.setKey(imiId + subtype.hashCode());
                         chkbxPref.setTitle(subtypeLabel);
                         subtypePreferences.add(chkbxPref);
