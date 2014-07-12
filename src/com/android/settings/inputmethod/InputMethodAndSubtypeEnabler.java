@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
-    private static final String TAG =InputMethodAndSubtypeEnabler.class.getSimpleName();
+    private static final String TAG = InputMethodAndSubtypeEnabler.class.getSimpleName();
     private AlertDialog mDialog = null;
     private boolean mHaveHardKeyboard;
     final private HashMap<String, List<Preference>> mInputMethodAndSubtypePrefsMap =
@@ -266,7 +266,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                             autoSubtypeLabel = subtypeLabel;
                         }
                     } else {
-                        final CheckBoxPreference chkbxPref = new SubtypeCheckBoxPreference(
+                        final CheckBoxPreference chkbxPref = new InputMethodSubtypePreference(
                                 context, subtype.getLocale(), mSystemLocale, mCollator);
                         chkbxPref.setKey(imiId + subtype.hashCode());
                         chkbxPref.setTitle(subtypeLabel);
@@ -373,59 +373,5 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             setSubtypeAutoSelectionEnabled(imiId, isNoSubtypesExplicitlySelected(imiId));
         }
         setCheckedImplicitlyEnabledSubtypes(null);
-    }
-
-    private static class SubtypeCheckBoxPreference extends CheckBoxPreference {
-        private final boolean mIsSystemLocale;
-        private final boolean mIsSystemLanguage;
-        private final Collator mCollator;
-
-        public SubtypeCheckBoxPreference(
-                Context context, String subtypeLocale, String systemLocale, Collator collator) {
-            super(context);
-            if (TextUtils.isEmpty(subtypeLocale)) {
-                mIsSystemLocale = false;
-                mIsSystemLanguage = false;
-            } else {
-                mIsSystemLocale = subtypeLocale.equals(systemLocale);
-                mIsSystemLanguage = mIsSystemLocale
-                        || subtypeLocale.startsWith(systemLocale.substring(0, 2));
-            }
-            mCollator = collator;
-        }
-
-        @Override
-        public int compareTo(Preference p) {
-            if (p instanceof SubtypeCheckBoxPreference) {
-                final SubtypeCheckBoxPreference pref = ((SubtypeCheckBoxPreference)p);
-                final CharSequence t0 = getTitle();
-                final CharSequence t1 = pref.getTitle();
-                if (TextUtils.equals(t0, t1)) {
-                    return 0;
-                }
-                if (mIsSystemLocale) {
-                    return -1;
-                }
-                if (pref.mIsSystemLocale) {
-                    return 1;
-                }
-                if (mIsSystemLanguage) {
-                    return -1;
-                }
-                if (pref.mIsSystemLanguage) {
-                    return 1;
-                }
-                if (TextUtils.isEmpty(t0)) {
-                    return 1;
-                }
-                if (TextUtils.isEmpty(t1)) {
-                    return -1;
-                }
-                return mCollator.compare(t0.toString(), t1.toString());
-            } else {
-                Log.w(TAG, "Illegal preference type.");
-                return super.compareTo(p);
-            }
-        }
     }
 }
