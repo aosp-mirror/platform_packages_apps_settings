@@ -16,10 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.internal.inputmethod.InputMethodUtils;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,12 +33,16 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
+import com.android.internal.inputmethod.InputMethodUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     private static final String TAG = InputMethodAndSubtypeEnabler.class.getSimpleName();
@@ -52,11 +52,10 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             new HashMap<>();
     final private HashMap<String, CheckBoxPreference> mSubtypeAutoSelectionCBMap = new HashMap<>();
     private InputMethodManager mImm;
+    // TODO: Change mInputMethodProperties to Map
     private List<InputMethodInfo> mInputMethodProperties;
     private String mInputMethodId;
     private String mTitle;
-    private String mSystemLocale = "";
-    private Collator mCollator = Collator.getInstance();
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -87,10 +86,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             }
         }
 
-        final Locale locale = config.locale;
-        mSystemLocale = locale.toString();
-        mCollator = Collator.getInstance(locale);
-        onCreateIMM();
+        mInputMethodProperties = mImm.getInputMethodList();
         setPreferenceScreen(createPreferenceHierarchy());
     }
 
@@ -211,21 +207,13 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         }
     }
 
-    private void onCreateIMM() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-
-        // TODO: Change mInputMethodProperties to Map
-        mInputMethodProperties = imm.getInputMethodList();
-    }
-
     private PreferenceScreen createPreferenceHierarchy() {
         // Root
         final PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
         final Context context = getActivity();
 
-        int N = (mInputMethodProperties == null ? 0 : mInputMethodProperties.size());
-
+        final Collator collator = Collator.getInstance();
+        final int N = (mInputMethodProperties == null ? 0 : mInputMethodProperties.size());
         for (int i = 0; i < N; ++i) {
             final InputMethodInfo imi = mInputMethodProperties.get(i);
             final int subtypeCount = imi.getSubtypeCount();
@@ -267,13 +255,21 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                         }
                     } else {
                         final CheckBoxPreference chkbxPref = new InputMethodSubtypePreference(
-                                context, subtype, imi, mCollator);
+                                context, subtype, imi);
                         chkbxPref.setKey(imiId + subtype.hashCode());
                         chkbxPref.setTitle(subtypeLabel);
                         subtypePreferences.add(chkbxPref);
                     }
                 }
-                Collections.sort(subtypePreferences);
+                Collections.sort(subtypePreferences, new Comparator<Preference>() {
+                    @Override
+                    public int compare(Preference lhs, Preference rhs) {
+                        if (lhs instanceof InputMethodSubtypePreference) {
+                            return ((InputMethodSubtypePreference)lhs).compareTo(rhs, collator);
+                        }
+                        return lhs.compareTo(rhs);
+                    }
+                });
                 for (int j = 0; j < subtypePreferences.size(); ++j) {
                     activeInputMethodsCategory.addPreference(subtypePreferences.get(j));
                 }

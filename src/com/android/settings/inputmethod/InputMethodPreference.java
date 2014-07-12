@@ -231,6 +231,9 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
     }
 
     int compareTo(final InputMethodPreference rhs, final Collator collator) {
+        if (this == rhs) {
+            return 0;
+        }
         if (mHasPriorityInSorting == rhs.mHasPriorityInSorting) {
             final CharSequence t0 = getTitle();
             final CharSequence t1 = rhs.getTitle();

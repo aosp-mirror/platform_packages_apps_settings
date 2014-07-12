@@ -20,7 +20,6 @@ import android.content.Context;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 
@@ -36,14 +35,11 @@ import java.util.Locale;
  */
 //TODO: Make this non-persistent.
 class InputMethodSubtypePreference extends CheckBoxPreference {
-    private static final String TAG = InputMethodSubtypePreference.class.getSimpleName();
-
     private final boolean mIsSystemLocale;
     private final boolean mIsSystemLanguage;
-    private final Collator mCollator;
 
-    public InputMethodSubtypePreference(final Context context, final InputMethodSubtype subtype,
-            final InputMethodInfo imi, final Collator collator) {
+    InputMethodSubtypePreference(final Context context, final InputMethodSubtype subtype,
+            final InputMethodInfo imi) {
         super(context);
         setKey(imi.getId() + subtype.hashCode());
         final CharSequence subtypeLabel = subtype.getDisplayName(context,
@@ -60,15 +56,16 @@ class InputMethodSubtypePreference extends CheckBoxPreference {
                     || InputMethodUtils.getLanguageFromLocaleString(subtypeLocaleString)
                             .equals(systemLocale.getLanguage());
         }
-        mCollator = collator;
     }
 
-    @Override
-    public int compareTo(Preference p) {
-        if (p instanceof InputMethodSubtypePreference) {
-            final InputMethodSubtypePreference pref = ((InputMethodSubtypePreference)p);
+    int compareTo(final Preference rhs, final Collator collator) {
+        if (this == rhs) {
+            return 0;
+        }
+        if (rhs instanceof InputMethodSubtypePreference) {
+            final InputMethodSubtypePreference pref = (InputMethodSubtypePreference) rhs;
             final CharSequence t0 = getTitle();
-            final CharSequence t1 = pref.getTitle();
+            final CharSequence t1 = rhs.getTitle();
             if (TextUtils.equals(t0, t1)) {
                 return 0;
             }
@@ -90,9 +87,8 @@ class InputMethodSubtypePreference extends CheckBoxPreference {
             if (TextUtils.isEmpty(t1)) {
                 return -1;
             }
-            return mCollator.compare(t0.toString(), t1.toString());
+            return collator.compare(t0.toString(), t1.toString());
         }
-        Log.w(TAG, "Illegal preference type.");
-        return super.compareTo(p);
+        return super.compareTo(rhs);
     }
 }
