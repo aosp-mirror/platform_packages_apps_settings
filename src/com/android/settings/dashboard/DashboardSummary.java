@@ -16,13 +16,9 @@
 
 package com.android.settings.dashboard;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.OnAccountsUpdateListener;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,18 +31,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.accounts.AuthenticatorHelper;
-import com.android.settings.accounts.ManageAccountsSettings;
 
 import java.util.List;
 
-public class DashboardSummary extends Fragment implements OnAccountsUpdateListener {
+public class DashboardSummary extends Fragment {
     private static final String LOG_TAG = "DashboardSummary";
 
     private LayoutInflater mLayoutInflater;
     private ViewGroup mDashboard;
-    private AuthenticatorHelper mAuthHelper;
-    private boolean mAccountListenerAdded;
 
     private static final int MSG_REBUILD_UI = 1;
     private Handler mHandler = new Handler() {
@@ -71,8 +63,6 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
 
         final View rootView = inflater.inflate(R.layout.dashboard, container, false);
         mDashboard = (ViewGroup) rootView.findViewById(R.id.dashboard_container);
-
-        mAuthHelper = ((SettingsActivity) context).getAuthenticatorHelper();
 
         return rootView;
     }
@@ -129,45 +119,19 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
     public void onResume() {
         super.onResume();
 
-        if (!mAccountListenerAdded) {
-            AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, false);
-            mAccountListenerAdded = true;
-        }
-
         sendRebuildUI();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        if (mAccountListenerAdded) {
-            AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
-            mAccountListenerAdded = false;
-        }
     }
 
     private void updateTileView(Context context, Resources res, DashboardTile tile,
             ImageView tileIcon, TextView tileTextView, TextView statusTextView) {
 
-        if (tile.extras != null
-                && tile.extras.containsKey(ManageAccountsSettings.KEY_ACCOUNT_TYPE)) {
-            String accType = tile.extras.getString(ManageAccountsSettings.KEY_ACCOUNT_TYPE);
-            Drawable drawable = mAuthHelper.getDrawableForType(context, accType);
-            tileIcon.setImageDrawable(drawable);
+        if (tile.iconRes > 0) {
+            tileIcon.setImageResource(tile.iconRes);
         } else {
-            if (tile.iconRes > 0) {
-                tileIcon.setImageResource(tile.iconRes);
-            } else {
-                tileIcon.setImageDrawable(null);
-            }
+            tileIcon.setImageDrawable(null);
+            tileIcon.setBackground(null);
         }
-        if (tileIcon != null) {
-            if (tile.iconRes > 0) {
-            } else {
-                tileIcon.setBackground(null);
-            }
-        }
+
         tileTextView.setText(tile.getTitle(res));
 
         CharSequence summary = tile.getSummary(res);
@@ -183,12 +147,5 @@ public class DashboardSummary extends Fragment implements OnAccountsUpdateListen
         if (!mHandler.hasMessages(MSG_REBUILD_UI)) {
             mHandler.sendEmptyMessage(MSG_REBUILD_UI);
         }
-    }
-
-    @Override
-    public void onAccountsUpdated(Account[] accounts) {
-        final SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.setNeedToRebuildCategories(true);
-        sendRebuildUI();
     }
 }

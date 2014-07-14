@@ -188,20 +188,6 @@
 
     </dashboard-category>
 
-    <!--  ACCOUNTS section -->
-    <dashboard-category
-            android:id="@+id/account_settings"
-            android:title="@string/account_settings" >
-
-        <dashboard-tile
-                android:id="@+id/account_add"
-                android:title="@string/add_account_label"
-                android:icon="@drawable/ic_menu_add_dark">
-            <intent android:action="android.settings.ADD_ACCOUNT_SETTINGS"/>
-        </dashboard-tile>
-
-    </dashboard-category>
-
     <!-- SYSTEM -->
     <dashboard-category
         android:id="@+id/system_section"
