@@ -51,7 +51,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     private InputMethodManager mImm;
     // TODO: Change mInputMethodInfoList to Map
     private List<InputMethodInfo> mInputMethodInfoList;
-    private String mInputMethodId;
     private Collator mCollator;
     private AlertDialog mDialog = null;
 
@@ -66,12 +65,22 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         // single Activity (see InputMethodAndSubtypeEnablerActivity). It should be available
         // from a preference argument when the preference is launched as a part of the other
         // Activity (like a right pane of 2-pane Settings app)
-        mInputMethodId = getStringExtraFromIntentOrArguments(
+        final String targetImi = getStringExtraFromIntentOrArguments(
                 android.provider.Settings.EXTRA_INPUT_METHOD_ID);
 
         mInputMethodInfoList = mImm.getInputMethodList();
         mCollator = Collator.getInstance();
-        setPreferenceScreen(createPreferenceHierarchy());
+
+        final PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
+        final int imiCount = mInputMethodInfoList.size();
+        for (int index = 0; index < imiCount; ++index) {
+            final InputMethodInfo imi = mInputMethodInfoList.get(index);
+            // Add subtype preferences of this IME when it is specified or no IME is specified.
+            if (imi.getId().equals(targetImi) || TextUtils.isEmpty(targetImi)) {
+                addInputMethodSubtypePreferences(imi, root);
+            }
+        }
+        setPreferenceScreen(root);
     }
 
     private String getStringExtraFromIntentOrArguments(final String name) {
@@ -114,74 +123,78 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                 mInputMethodInfoList, mHaveHardKeyboard);
     }
 
+    // TODO: Stop overriding this method. Instead start using {@link OnPreferenceChangedListener}.
     @Override
     public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
             final Preference preference) {
+        if (!(preference instanceof CheckBoxPreference)) {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+        final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
 
-        if (preference instanceof CheckBoxPreference) {
-            final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-
-            for (final String imiId : mAutoSelectionPrefsMap.keySet()) {
-                if (mAutoSelectionPrefsMap.get(imiId) == chkPref) {
-                    // We look for the first preference item in subtype enabler.
-                    // The first item is used for turning on/off subtype auto selection.
-                    // We are in the subtype enabler and trying selecting subtypes automatically.
-                    setAutoSelectionSubtypesEnabled(imiId, chkPref.isChecked());
-                    return super.onPreferenceTreeClick(preferenceScreen, preference);
-                }
-            }
-
-            final String id = chkPref.getKey();
-            if (chkPref.isChecked()) {
-                final InputMethodInfo imi = getInputMethodInfoById(id);
-                if (imi == null) {
-                    return super.onPreferenceTreeClick(preferenceScreen, preference);
-                }
-                if (InputMethodUtils.isSystemIme(imi)) {
-                    InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
-                            this, mInputMethodInfoList, id, true);
-                    // This is a built-in IME, so no need to warn.
-                    return super.onPreferenceTreeClick(preferenceScreen, preference);
-                }
-                chkPref.setChecked(false);
-                if (mDialog == null) {
-                    mDialog = (new AlertDialog.Builder(getActivity()))
-                            .setTitle(android.R.string.dialog_alert_title)
-                            .setCancelable(true)
-                            .setPositiveButton(android.R.string.ok,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            chkPref.setChecked(true);
-                                            InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
-                                                    InputMethodAndSubtypeEnabler.this,
-                                                    mInputMethodInfoList, id, true);
-                                        }
-
-                            })
-                            .setNegativeButton(android.R.string.cancel,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-
-                            })
-                            .create();
-                } else {
-                    if (mDialog.isShowing()) {
-                        mDialog.dismiss();
-                    }
-                }
-                mDialog.setMessage(getResources().getString(
-                        R.string.ime_security_warning,
-                        imi.getServiceInfo().applicationInfo.loadLabel(getPackageManager())));
-                mDialog.show();
-            } else {
-                InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
-                        this, mInputMethodInfoList, id, false);
-                updateAutoSelectionPreferences();
+        for (final String imiId : mAutoSelectionPrefsMap.keySet()) {
+            if (mAutoSelectionPrefsMap.get(imiId) == chkPref) {
+                // We look for the first preference item in subtype enabler. The first item is used
+                // for turning on/off subtype auto selection. We are in the subtype enabler and
+                // trying selecting subtypes automatically.
+                setAutoSelectionSubtypesEnabled(imiId, chkPref.isChecked());
+                return super.onPreferenceTreeClick(preferenceScreen, preference);
             }
         }
+
+        final String id = chkPref.getKey();
+        // Turns off a subtype.
+        if (!chkPref.isChecked()) {
+            // TODO: Because no preference on this screen has {@link InputMethodInfo} id as a key,
+            // the following setSubtypesPreferenceEnabled call is effectively no-operation and
+            // can be removed.
+            InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
+                    this, mInputMethodInfoList, id, false);
+            updateAutoSelectionPreferences();
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+
+        // Turns on a subtype.
+        final InputMethodInfo imi = getInputMethodInfoById(id);
+        // TODO: Because no preference on this screen has {@link InputMethodInfo} id as a key,
+        // <code>imi</code> is always null and the following code can be removed.
+        if (imi == null) {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+        // Turns on a system IME's subtype.
+        if (InputMethodUtils.isSystemIme(imi)) {
+            InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
+                    this, mInputMethodInfoList, id, true);
+            // This is a built-in IME, so no need to warn.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+        // Turns on a 3rd party IME's subtype.
+        // Turns off a subtype before showing a security warning dialog.
+        chkPref.setChecked(false);
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(android.R.string.dialog_alert_title);
+        final CharSequence label = imi.getServiceInfo().applicationInfo
+                .loadLabel(getPackageManager());
+        builder.setMessage(getString(R.string.ime_security_warning, label));
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                // The user explicitly enable the subtype.
+                chkPref.setChecked(true);
+                InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
+                        InputMethodAndSubtypeEnabler.this, mInputMethodInfoList, id, true);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {}
+        });
+        mDialog = builder.create();
+        mDialog.show();
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -205,78 +218,66 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         }
     }
 
-    private PreferenceScreen createPreferenceHierarchy() {
-        // Root
-        final PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
+    private void addInputMethodSubtypePreferences(final InputMethodInfo imi,
+            final PreferenceScreen root) {
         final Context context = getActivity();
+        final int subtypeCount = imi.getSubtypeCount();
+        if (subtypeCount <= 1) {
+            return;
+        }
+        final String imiId = imi.getId();
+        final PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(context);
+        root.addPreference(keyboardSettingsCategory);
+        final PackageManager pm = getPackageManager();
+        final CharSequence label = imi.loadLabel(pm);
 
-        final int imiCount = (mInputMethodInfoList == null ? 0 : mInputMethodInfoList.size());
-        for (int imiIndex = 0; imiIndex < imiCount; ++imiIndex) {
-            final InputMethodInfo imi = mInputMethodInfoList.get(imiIndex);
-            final int subtypeCount = imi.getSubtypeCount();
-            if (subtypeCount <= 1) {
-                continue;
-            }
-            final String imiId = imi.getId();
-            // Add this subtype to the list when no IME is specified or when the IME of this
-            // subtype is the specified IME.
-            if (!TextUtils.isEmpty(mInputMethodId) && !mInputMethodId.equals(imiId)) {
-                continue;
-            }
-            final PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(context);
-            root.addPreference(keyboardSettingsCategory);
-            final PackageManager pm = getPackageManager();
-            final CharSequence label = imi.loadLabel(pm);
+        keyboardSettingsCategory.setTitle(label);
+        keyboardSettingsCategory.setKey(imiId);
+        // TODO: Use toggle Preference if images are ready.
+        final CheckBoxPreference autoSelectionPref = new CheckBoxPreference(context);
+        mAutoSelectionPrefsMap.put(imiId, autoSelectionPref);
+        keyboardSettingsCategory.addPreference(autoSelectionPref);
 
-            keyboardSettingsCategory.setTitle(label);
-            keyboardSettingsCategory.setKey(imiId);
-            // TODO: Use toggle Preference if images are ready.
-            final CheckBoxPreference autoSelectionPref = new CheckBoxPreference(context);
-            mAutoSelectionPrefsMap.put(imiId, autoSelectionPref);
-            keyboardSettingsCategory.addPreference(autoSelectionPref);
+        final PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(context);
+        activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
+        root.addPreference(activeInputMethodsCategory);
 
-            final PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(context);
-            activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
-            root.addPreference(activeInputMethodsCategory);
-
-            CharSequence autoSubtypeLabel = null;
-            final ArrayList<Preference> subtypePreferences = new ArrayList<>();
-            for (int index = 0; index < subtypeCount; ++index) {
-                final InputMethodSubtype subtype = imi.getSubtypeAt(index);
-                if (subtype.overridesImplicitlyEnabledSubtype()) {
-                    if (autoSubtypeLabel == null) {
-                        autoSubtypeLabel = subtype.getDisplayName(context,
-                                imi.getPackageName(), imi.getServiceInfo().applicationInfo);
-                    }
-                } else {
-                    final Preference subtypePref = new InputMethodSubtypePreference(
-                            context, subtype, imi);
-                    subtypePreferences.add(subtypePref);
+        CharSequence autoSubtypeLabel = null;
+        final ArrayList<Preference> subtypePreferences = new ArrayList<>();
+        for (int index = 0; index < subtypeCount; ++index) {
+            final InputMethodSubtype subtype = imi.getSubtypeAt(index);
+            if (subtype.overridesImplicitlyEnabledSubtype()) {
+                if (autoSubtypeLabel == null) {
+                    autoSubtypeLabel = subtype.getDisplayName(
+                            context, imi.getPackageName(), imi.getServiceInfo().applicationInfo);
                 }
-            }
-            Collections.sort(subtypePreferences, new Comparator<Preference>() {
-                @Override
-                public int compare(final Preference lhs, final Preference rhs) {
-                    if (lhs instanceof InputMethodSubtypePreference) {
-                        return ((InputMethodSubtypePreference)lhs).compareTo(rhs, mCollator);
-                    }
-                    return lhs.compareTo(rhs);
-                }
-            });
-            final int prefCount = subtypePreferences.size();
-            for (int index = 0; index < prefCount; ++index) {
-                final Preference pref = subtypePreferences.get(index);
-                activeInputMethodsCategory.addPreference(pref);
-            }
-            mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
-            if (TextUtils.isEmpty(autoSubtypeLabel)) {
-                autoSelectionPref.setTitle(
-                        R.string.use_system_language_to_select_input_method_subtypes);
             } else {
-                autoSelectionPref.setTitle(autoSubtypeLabel);
+                final Preference subtypePref = new InputMethodSubtypePreference(
+                        context, subtype, imi);
+                subtypePreferences.add(subtypePref);
             }
         }
-        return root;
+        Collections.sort(subtypePreferences, new Comparator<Preference>() {
+            @Override
+            public int compare(final Preference lhs, final Preference rhs) {
+                if (lhs instanceof InputMethodSubtypePreference) {
+                    return ((InputMethodSubtypePreference) lhs).compareTo(rhs, mCollator);
+                }
+                return lhs.compareTo(rhs);
+            }
+        });
+        final int prefCount = subtypePreferences.size();
+        for (int index = 0; index < prefCount; ++index) {
+            final Preference pref = subtypePreferences.get(index);
+            activeInputMethodsCategory.addPreference(pref);
+        }
+        mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
+        if (TextUtils.isEmpty(autoSubtypeLabel)) {
+            autoSelectionPref.setTitle(
+                    R.string.use_system_language_to_select_input_method_subtypes);
+        } else {
+            autoSelectionPref.setTitle(autoSubtypeLabel);
+        }
     }
 
     private boolean isNoSubtypesExplicitlySelected(final String imiId) {
@@ -319,34 +320,38 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         // When targetImiId is null, apply to all subtypes of all IMEs
         for (final InputMethodInfo imi : mInputMethodInfoList) {
             final String imiId = imi.getId();
-            if (targetImiId != null && !targetImiId.equals(imiId)) {
-                continue;
-            }
             final CheckBoxPreference autoSelectionPref = mAutoSelectionPrefsMap.get(imiId);
             // No need to update implicitly enabled subtypes when the user has unchecked the
             // "subtype auto selection".
             if (autoSelectionPref == null || !autoSelectionPref.isChecked()) {
                 continue;
             }
-            final List<Preference> subtypePrefs = mInputMethodAndSubtypePrefsMap.get(imiId);
-            final List<InputMethodSubtype> implicitlyEnabledSubtypes =
-                    mImm.getEnabledInputMethodSubtypeList(imi, true);
-            if (subtypePrefs == null || implicitlyEnabledSubtypes == null) {
+            if (imiId.equals(targetImiId) || targetImiId == null) {
+                updateImplicitlyEnabledSubtypesOf(imi, check);
+            }
+        }
+    }
+
+    private void updateImplicitlyEnabledSubtypesOf(final InputMethodInfo imi, final boolean check) {
+        final String imiId = imi.getId();
+        final List<Preference> subtypePrefs = mInputMethodAndSubtypePrefsMap.get(imiId);
+        final List<InputMethodSubtype> implicitlyEnabledSubtypes =
+                mImm.getEnabledInputMethodSubtypeList(imi, true);
+        if (subtypePrefs == null || implicitlyEnabledSubtypes == null) {
+            return;
+        }
+        for (final Preference pref : subtypePrefs) {
+            if (!(pref instanceof CheckBoxPreference)) {
                 continue;
             }
-            for (final Preference pref : subtypePrefs) {
-                if (!(pref instanceof CheckBoxPreference)) {
-                    continue;
-                }
-                final CheckBoxPreference subtypePref = (CheckBoxPreference)pref;
-                subtypePref.setChecked(false);
-                if (check) {
-                    for (final InputMethodSubtype subtype : implicitlyEnabledSubtypes) {
-                        String implicitlyEnabledSubtypePrefKey = imiId + subtype.hashCode();
-                        if (subtypePref.getKey().equals(implicitlyEnabledSubtypePrefKey)) {
-                            subtypePref.setChecked(true);
-                            break;
-                        }
+            final CheckBoxPreference subtypePref = (CheckBoxPreference)pref;
+            subtypePref.setChecked(false);
+            if (check) {
+                for (final InputMethodSubtype subtype : implicitlyEnabledSubtypes) {
+                    final String implicitlyEnabledSubtypePrefKey = imiId + subtype.hashCode();
+                    if (subtypePref.getKey().equals(implicitlyEnabledSubtypePrefKey)) {
+                        subtypePref.setChecked(true);
+                        break;
                     }
                 }
             }
