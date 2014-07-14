@@ -620,7 +620,7 @@
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
-    <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
+    <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, cellular networks, &amp; VPNs</string>
 
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Data roaming</string>
@@ -1389,7 +1389,7 @@
     <!-- Wi-Fi settings. wps menu title [CHAR LIMIT=25]-->
     <string name="wifi_setup_wps">Automatic setup (WPS)</string>
     <!-- Message informing that wifi is required during setup [CHAR LIMIT=NONE] -->
-    <string name="wifi_required_info_text">To complete setup, your tablet needs access to Wi\u2011Fi. After setup, you can switch between mobile data and Wi\u2011Fi.</string>
+    <string name="wifi_required_info_text">To complete setup, your tablet needs access to Wi\u2011Fi. After setup, you can switch between cellular data and Wi\u2011Fi.</string>
 
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options -->
@@ -2021,11 +2021,11 @@
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
     <string name="status_icc_id">ICCID</string>
     <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
-    <string name="status_network_type">Mobile network type</string>
+    <string name="status_network_type">Cellular network type</string>
     <!-- About phone, status item title for the latest area info cell broadcast received (Brazil only). -->
     <string name="status_latest_area_info">Operator info</string>
     <!-- About phone, status item title. The status of data access.  For example, the value may be "Connected" -->
-    <string name="status_data_state">Mobile network state</string>
+    <string name="status_data_state">Cellular network state</string>
     <!-- About phone, status item title. The status of whether we have service.  for example, the value may be "In service" -->
     <string name="status_service_state">Service state</string>
     <!-- About phone, status item title. The  current cell tower signal strength -->
@@ -2391,7 +2391,7 @@
     <string name="tethering_help_button_text">Help</string>
 
     <!-- Wireless controls, item title to go into the network settings -->
-    <string name="network_settings_title">Mobile networks</string>
+    <string name="network_settings_title">Cellular networks</string>
 
     <!-- Mobile plan [CHAR LIMIT=35]-->
     <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
@@ -2446,14 +2446,14 @@
     <!-- [CHAR LIMIT=30] Location mode screen, screen title -->
     <string name="location_mode_screen_title">Location mode</string>
     <!-- [CHAR LIMIT=130] Location mode screen, description for high accuracy mode -->
-    <string name="location_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, and mobile networks to determine location </string>
+    <string name="location_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, and cellular networks to determine location </string>
     <!-- [CHAR LIMIT=130] Location mode screen, description for battery saving mode -->
-    <string name="location_mode_battery_saving_description">Use Wi\u2011Fi and mobile networks to determine location</string>
+    <string name="location_mode_battery_saving_description">Use Wi\u2011Fi and cellular networks to determine location</string>
     <!-- [CHAR LIMIT=130] Location mode screen, description for sensors only mode -->
     <string name="location_mode_sensors_only_description">Use GPS to determine your location</string>
 
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
-    <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
+    <string name="location_network_based">Wi\u2011Fi &amp; cellular network location</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
     <string name="location_neighborhood_level">Let apps use Google\'s location service to estimate your location faster. Anonymous location data will be collected and sent to Google.</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary when Use wireless networks check box is selected, for wifi-only devices -->
@@ -3619,7 +3619,7 @@
     <!-- [CHAR LIMIT=25] Label for battery stats wake lock state graph -->
     <string name="battery_stats_wake_lock_label">Awake</string>
     <!-- [CHAR LIMIT=25] Label for battery stats phone signal strength graph -->
-    <string name="battery_stats_phone_signal_label">Mobile network signal</string>
+    <string name="battery_stats_phone_signal_label">Cellular network signal</string>
     <!-- Battery usage during last unplugged period -->
     <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
     <!-- CPU awake time title -->
@@ -4616,9 +4616,9 @@
     <string name="data_usage_app_restricted">restricted</string>
 
     <!-- Body of dialog shown to request confirmation that mobile data will be disabled. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_disable_mobile">Disable mobile data?</string>
+    <string name="data_usage_disable_mobile">Turn off cellular data?</string>
     <!-- Checkbox label that will disable mobile network data connection when user-defined limit is reached. [CHAR LIMIT=26] -->
-    <string name="data_usage_disable_mobile_limit">Set mobile data limit</string>
+    <string name="data_usage_disable_mobile_limit">Set cellular data limit</string>
     <!-- Checkbox label that will disable 4G network data connection when user-defined limit is reached. [CHAR LIMIT=26] -->
     <string name="data_usage_disable_4g_limit">Set 4G data limit</string>
     <!-- Checkbox label that will disable 2G-3G network data connection when user-defined limit is reached. [CHAR LIMIT=26] -->
@@ -4631,19 +4631,19 @@
     <!-- Tab title for showing Ethernet data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_ethernet">Ethernet</string>
     <!-- Tab title for showing combined mobile data usage. [CHAR LIMIT=10] -->
-    <string name="data_usage_tab_mobile">Mobile</string>
+    <string name="data_usage_tab_mobile">Cellular</string>
     <!-- Tab title for showing 4G data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_4g">4G</string>
     <!-- Tab title for showing 2G and 3G data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_3g">2G-3G</string>
 
     <!-- Title shown when current operation applies to mobile networks. [CHAR LIMIT=10] -->
-    <string name="data_usage_list_mobile">Mobile</string>
+    <string name="data_usage_list_mobile">Cellular</string>
     <!-- Title shown when current operation applies to no networks. [CHAR LIMIT=10] -->
     <string name="data_usage_list_none">None</string>
 
     <!-- Toggle switch title for enabling all mobile data network connections. [CHAR LIMIT=32] -->
-    <string name="data_usage_enable_mobile">Mobile data</string>
+    <string name="data_usage_enable_mobile">Cellular data</string>
     <!-- Toggle switch title for enabling 2G and 3G data network connections. [CHAR LIMIT=32] -->
     <string name="data_usage_enable_3g">2G-3G data</string>
     <!-- Toggle switch title for enabling 4G data network connection. [CHAR LIMIT=32] -->
@@ -4654,15 +4654,15 @@
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
     <string name="data_usage_app_restrict_background">Restrict background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary">Disable background data on mobile networks. Non-mobile networks will be used if available.</string>
+    <string name="data_usage_app_restrict_background_summary">Disable background data on cellular networks. Non-cellular networks will be used if available.</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a mobile data limit.</string>
+    <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a cellular data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
     <string name="data_usage_app_restrict_dialog_title">Restrict background data?</string>
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
+    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only cellular networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
     <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\'ve set a mobile data limit.</string>
+    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\'ve set a cellular data limit.</string>
     <!--  Title of dialog shown when user enables global auto sync [CHAR LIMIT=32] -->
     <string name="data_usage_auto_sync_on_dialog_title">Turn auto-sync data on?</string>
     <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
@@ -4689,18 +4689,18 @@
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_mobile" product="tablet">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider using a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet">Your tablet will turn off cellular data once it reaches the limit you set.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider setting a conservative limit.</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_mobile" product="default">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider using a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="default">Your phone will turn off cellular data once it reaches the limit you set.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider setting a conservative limit.</string>
 
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_restrict_background_title">Restrict background data?</string>
     <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background">If you restrict background mobile data, some apps and services won\'t work unless you\'re connected to a Wi\u2011Fi network.</string>
+    <string name="data_usage_restrict_background">If you restrict background cellular data, some apps and services won\'t work unless you\'re connected to Wi\u2011Fi.</string>
     <!-- Body of dialog shown before user restricts background data usage. This is for multiuser tablets. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background mobile data, some apps and services won\'t work unless you\'re connected to a Wi\u2011Fi network.\n\nThis setting affects all users on this tablet.</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background cellular data, some apps and services won\'t work unless you\'re connected to Wi\u2011Fi.\n\nThis setting affects all users on this tablet.</string>
     <!-- Body of dialog shown before user restricts background data usage. This is for multiuser phones. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background mobile data, some apps and services won\'t work unless you\'re connected to a Wi\u2011Fi network.\n\nThis setting affects all users on this phone.</string>
+    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background cellular data, some apps and services won\'t work unless you\'re connected to Wi\u2011Fi.\n\nThis setting affects all users on this phone.</string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="21"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>
@@ -4726,7 +4726,7 @@
     <!-- Dialog body for selecting paid networks. [CHAR LIMIT=NONE] -->
     <string name="data_usage_metered_body">Select the Wi\u2011Fi networks which are mobile hotspots.  Apps can be restricted from using these networks when in the background.  Apps may also warn before using these networks for large downloads.</string>
     <!-- Header for list of mobile networks. [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_mobile">Mobile networks</string>
+    <string name="data_usage_metered_mobile">Cellular networks</string>
     <!-- Header for list of Wi-Fi networks. [CHAR LIMIT=32] -->
     <string name="data_usage_metered_wifi">Wi\u2011Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
