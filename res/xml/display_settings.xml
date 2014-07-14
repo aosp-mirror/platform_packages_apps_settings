@@ -19,11 +19,12 @@
         android:title="@string/display_settings"
         settings:keywords="@string/keywords_display">
 
-        <com.android.settings.BrightnessPreference
+        <PreferenceScreen
                 android:key="brightness"
                 android:title="@string/brightness"
-                settings:keywords="@string/keywords_display_brightness_level"
-                android:persistent="false"/>
+                settings:keywords="@string/keywords_display_brightness_level">
+            <intent android:action="android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
+        </PreferenceScreen>
 
         <CheckBoxPreference
                 android:key="auto_brightness"
