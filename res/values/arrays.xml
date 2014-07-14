@@ -374,8 +374,8 @@
         <item>Always</item>
         <!-- Keep Wi-Fi on when screen turns off and plugged in.  When on battery, go to sleep when screen turns off. -->
         <item>Only when plugged in</item>
-        <!-- Do not keep Wi-Fi on when screen turns off. -->
-        <item>Never (increases data usage)</item>
+        <!-- Do not keep Wi-Fi on when screen turns off.  [CHAR LIMIT=40] -->
+        <item>Never</item>
     </string-array>
 
     <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. Used when
@@ -400,10 +400,26 @@
         <item>0</item>
     </string-array>
 
+    <!-- Data Usage settings. Range of data usage. -->
+    <string-array name="data_usage_data_range">
+        <!-- Last 30 days [CHAR LIMIT=25]-->
+        <item>Last 30 days</item>
+        <!-- Set usage cycle [CHAR LIMIT=25]-->
+        <item>Set usage cycle...</item>
+    </string-array>
+
+    <!-- Sim Cards display numbers. Range of data usage. -->
+    <string-array name="data_usage_data_range">
+        <!-- Last 4 digits [CHAR LIMIT=40]-->
+        <item>Last 4 digits</item>
+        <!-- First 4 digits [CHAR LIMIT=40]-->
+        <item>First 4 digits</item>
+    </string-array>
+
     <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi frequency band. -->
     <string-array name="wifi_frequency_band_entries">
         <!-- Operation on both 2.4 GHz and 5 GHz [CHAR LIMIT=25]-->
-        <item>Auto</item>
+        <item>Automatic</item>
         <!-- Operation on 5 GHz alone [CHAR LIMIT=25]-->
         <item>5 GHz only</item>
         <!-- Operation on 2.4 GHz alone [CHAR LIMIT=25]-->

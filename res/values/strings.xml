@@ -45,10 +45,14 @@
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
     <string name="header_category_wireless_networks">Wireless &amp; networks</string>
+    <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
+    <string name="header_category_connections">Connections</string>
     <!-- Settings main menu category heading. Device (Sound, display, battery, applications...). [CHAR LIMIT=40] -->
     <string name="header_category_device">Device</string>
     <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
     <string name="header_category_personal">Personal</string>
+    <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
+    <string name="header_category_access">Access</string>
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
 
@@ -267,6 +271,8 @@
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=50] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is now visible to nearby devices.</string>
+    <!-- Bluetooth Visibility discoonect question.  Asks the user if they wish to disconnect a paired bluetooth device.  [CHAR LIMIT=50] -->
+    <string name="bluetooth_is_disconnect_question">Disconnect <xliff:g id="device_name">%1$s</xliff:g>?</string>
     <!-- Bluetooth broadcasting settings, option to enable/disable broadcasting -->
     <string name="bluetooth_broadcasting">Broadcasting</string>
     <!-- Bluetooth settings.  Dialog title to disable a single profile of a device. [CHAR LIMIT=40] -->
@@ -604,8 +610,26 @@
     <!-- NEW STUFF -->
     <!-- ======================================================================================= -->
 
-    <!-- Button label for generic cancel action -->
+    <!-- Button label for generic cancel action [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
+
+    <!-- Button label for generic cancel action in all caps [CHAR LIMIT=20] -->
+    <string name="cancel_all_caps">CANCEL</string>
+
+    <!-- Button label for generic continue action in all caps [CHAR LIMIT=20] -->
+    <string name="continue_all_caps">CONTINUE</string>
+
+    <!-- Button label for generic OK action [CHAR LIMIT=20] -->
+    <string name="okay">OK</string>
+
+    <!-- Button label for generic YES action [CHAR LIMIT=20] -->
+    <string name="okay">YES</string>
+
+    <!-- Button label for generic NO action [CHAR LIMIT=20] -->
+    <string name="okay">NO</string>
+
+    <!-- Button label for generic FORGET action [CHAR LIMIT=20] -->
+    <string name="forget">FORGET</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -622,6 +646,12 @@
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, cellular networks, &amp; VPNs</string>
 
+    <!-- check box cellular data title [CHAR LIMIT=30]-->
+    <string name="cellular_data_title">Cellular data</string>
+    <!-- check box cellular data summary [CHAR LIMIT=40]-->
+    <string name="cellular_data_summary">Allow data usage over cellular network</string>
+    <!-- check box to allow data usage when roaming [CHAR LIMIT=30]-->
+    <string name="allow_data_usage_title">Allow data usage when roaming</string>
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Data roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is selected -->
@@ -668,14 +698,24 @@
     <!-- Date & time setting screen setting option summary text when Automatic time zone check box is clear
         [CHAR LIMIT=100] -->
     <string name="zone_auto_summaryOff">Use network-provided time zone</string>
+    <!-- Date & time setting screen setting check box title [CHAR LIMIT=30] -->
+    <string name="date_time_24hour_title">24\u2011hour format</string>
     <!-- Date & time setting screen setting check box title -->
     <string name="date_time_24hour">Use 24-hour format</string>
+    <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
+    <string name="date_time_set_time_title">Time</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_time">Set time</string>
+    <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
+    <string name="date_time_set_timezone_title">Time zone</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_timezone">Select time zone</string>
+    <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
+    <string name="date_time_set_date_title">Date</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_date">Set date</string>
+    <!-- Date & time setting screen setting option title.  This setting allows the user to choose how the date should be displayed in apps (what ordering for month and day, etc.)  [CHAR LIMIT=30] -->
+    <string name="date_time_date_format_title">Date format</string>
     <!-- Date & time setting screen setting option title.  This setting allows the user to choose how the date should be displayed in apps (what ordering for month and day, etc.) -->
     <string name="date_time_date_format">Choose date format</string>
     <!-- Menu item on Select time zone screen -->
@@ -724,6 +764,8 @@
     <string name="show_profile_info_on_lockscreen_label">Show profile info on lock screen</string>
     <!-- Text shown for title of profile info setting [CHAR LIMIT=20]-->
     <string name="profile_info_settings_title">Profile info</string>
+    <!-- Main Settings screen setting option title for the item to take you to the Accounts screen [CHAR LIMIT=22] -->
+    <string name="Accounts_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the location screen -->
     <string name="location_settings_title">Location</string>
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
@@ -1084,6 +1126,8 @@
 
     <!-- Button text for accepting an incoming pairing request. [CHAR LIMIT=20] -->
     <string name="bluetooth_pairing_accept">Pair</string>
+    <!-- Button text for accepting an incoming pairing request in all caps. [CHAR LIMIT=20] -->
+    <string name="bluetooth_pairing_accept_all_caps">PAIR</string>
     <!-- Button text for declining an incoming pairing request. [CHAR LIMIT=20] -->
     <string name="bluetooth_pairing_decline">Cancel</string>
 
@@ -1110,12 +1154,32 @@
     <string name="bluetooth_searching_for_devices">Searching\u2026</string>
     <!-- Bluetooth settings: The sub heading for device settings. [CHAR LIMIT=30] -->
     <string name="bluetooth_preference_device_settings">Device settings</string>
+    <!-- Bluetooth settings: Paired dialog title [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_paired_dialog_title">Paired device</string>
+    <!-- Bluetooth settings: Name label [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_paired_dialog_name_label">Name</string>
+    <!-- Bluetooth settings: Use for label [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_paired_dialog_use_label">Use for</string>
+    <!-- Bluetooth settings: Checkbox label for enable/disable internet connection.  [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_paired_dialog_internet_option">Internet connection</string>
+    <!-- Bluetooth settings: Checkbox label for enable/disable keyboard connection.  [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_paired_dialog_keyboard_option">Keyboard</string>
+    <!-- Bluetooth settings: pairing dialog title.  [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_dialog_title">Pair with this device?</string>
+    <!-- Bluetooth settings: share phone book title.  [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_dialog_sharing_phonebook_title">Share phone book?</string>
+    <!-- Bluetooth settings: Message informing user that a bluetooth wants to access contant and call history.  [CHAR LIMIT=100] -->
+    <string name="bluetooth_pairing_dialog_contants_request"><xliff:g id="device_name">%1$s</xliff:g> wants to access your contacts and call history.</string>
+    <!-- Bluetooth settings: paring permission message.  [CHAR LIMIT=100] -->
+    <string name="bluetooth_pairing_dialog_paring_request"><xliff:g id="device_name">%1$s</xliff:g> wants to pair with Bluetooth.</string>
     <!-- Bluetooth settings: The sub heading for devices which have already been paired with this device. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_devices">Paired devices</string>
     <!-- Bluetooth settings: The sub heading for messaging accesses. [CHAR LIMIT=50] -->
     <string name="bluetooth_message_access">Paired devices can view messages from</string>
     <!-- Bluetooth settings: The sub heading for available devices during and after scanning. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_found_devices">Available devices</string>
+    <!-- Bluetooth settings: The message displayed if no Bluetooth devices were found. [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_no_found_devices">No devices available</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
     <string name="bluetooth_device_context_connect">Connect</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will disconnect from all profiles on the device. -->
@@ -1224,6 +1288,47 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
+    <!-- Wifi Assistant title string.  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_setup">Wi\u2011Fi Assistant</string>
+    <!-- Wifi Assistant No, thanks string.  Text to say no to wifi assistant. [CHAR LIMIT=20] -->
+    <string name="wifi_assistant_no_thanks">NO, THANKS</string>
+    <!-- Wifi Assistant setup string.  Text to say yes to wifi assistant and begin setup. [CHAR LIMIT=20] -->
+    <string name="wifi_assistant_setup">SET UP</string>
+    <!-- Wifi Assistant card message.  [CHAR LIMIT=200] -->
+    <string name="wifi_assistant_card_message">Automatically connect to available networks with a Wi\u2011Fi Assistant.</string>
+    <!-- Wifi Assistant title.  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_title">Wi\u2011Fi Assistant</string>
+    <!-- Wifi Assistant title message.  First piece of text on the Wifi Assistant setup wizard.  [CHAR LIMIT=200] -->
+    <string name="wifi_assistant_title_message">Google Wi\u2011Fi Assistant automatically connects you to the best available Wi\u2011Fi</string>
+    <!-- Wifi Assistant explanation message.  Explains what wifi assistant does to the android phone.  [CHAR LIMIT=200] -->
+    <string name="wifi_assistant_explanation_message">Google Wi\u2011Fi Assistant detects the networks available to you and connects your device to the one with the best speed and reliability.</string>
+    <!-- Wifi Assistant vpn message.  Explains to the user that Google may use/provide a secure VPN connecte to Google's servers.  [CHAR LIMIT=100] -->
+    <string name="wifi_assistant_vpn_message">To help protect your data, Google Wi\u2011Fi Assistant may provide a secure VPN connection through Google servers.</string>
+    <!-- Wifi Assistant No, thanks string.  Text to say no to wifi assistant. [CHAR LIMIT=20] -->
+    <string name="wifi_assistant_activity_no_thanks">No, thanks</string>
+    <!-- Wifi Assistant Yes string.  Text to say yes to wifi assistant. [CHAR LIMIT=20] -->
+    <string name="wifi_assistant_activity_yes">YES, I\'M IN</string>
+    <!-- Wifi Assistant Dialog title.  [CHAR LIMIT=30] -->
+    <string name="wifi_assistant_dialog_title">Connection Request</string>
+    <!-- Wifi Assistant Dialog message.  Explains what monitor may occur with wifi-assistant [CHAR LIMIT=100] -->
+    <string name="wifi_assistant_dialog_message">Wi\u2011Fi Assistant" wants to set up a VPN connection that allows it to monitor network traffic.  Only accept if you trust the source.</string>
+    <!-- Wifi Assistant Dialog message. Notice of the icon that will appear when wifi assistant is on.  [CHAR LIMIT=100] -->
+    <string name="wifi_assistant_dialog_notice">appears at the top of your screen when VPN is active.</string>
+    <!-- Wifi Assistant dialog accept.  [CHAR LIMIT=20] -->
+    <string name="wifi_assistant_accept">ACCEPT</string>
+    <!-- Wifi Assistant dialog deny.  [CHAR LIMIT=20] -->
+    <string name="wifi_assistant_deny">DENY</string>
+    <!-- Wifi Assistant Network Monitoring titile.  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_network_title">Network monitoring</string>
+    <!-- Wifi Assistant permission accepted message.  [CHAR LIMIT=100] -->
+    <string name="wifi_assistant_permission_accepted">You gave “Google Wi\u2011Fi Assistant” permission to set up a VPN connection. That means this app can monitor network traffic.</string>
+    <!-- Wifi Assistant open app button text.  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_open_app">OPEN APP</string>
+    <!-- Wifi Assistant change wi-fi assistant title.  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_change_title">Change Wi\u2011Fi assistant?</string>
+    <!-- Wifi Assistant request message.  This message asks the user if it is okay for a 3rd party app to mana wi-fi assistant (instead of Google's wi-fi assistant). CHAR LIMIT=100] -->
+    <string name="wifi_assistant_change_message">Use <xliff:g id="third_party">%1$s</xliff:g> instead of <xliff:g id="google_wifi">%2$s</xliff:g> to manage your network connections?</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast screen</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
@@ -1328,16 +1433,28 @@
     <string name="wifi_fail_to_scan">Can\'t scan for networks</string>
     <!-- Checkbox title for option to notify user when open networks are nearby -->
     <string name="wifi_notify_open_networks">Network notification</string>
-    <!-- Checkbox summary for option to notify user when open networks are nearby -->
-    <string name="wifi_notify_open_networks_summary">Notify me when an open network is available</string>
+    <!-- Checkbox summary for option to notify user when open networks are nearby [CHAR LIMIT=60]-->
+    <string name="wifi_notify_open_networks_summary">Notify whenever a public network is available</string>
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection_summary">Don\'t use a Wi\u2011Fi network unless it has a good Internet connection</string>
+    <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
+    <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good Internet connection</string>
     <!-- Checkbox title for option to scan always available setting -->
     <string name="wifi_scan_always_available">Scanning always available</string>
+    <!-- Checkbox title for option to scan always available setting [CHAR LIMIT=60] -->
+    <string name="wifi_scan_always_available_title">Always allow scanning</string>
     <!-- Checkbox summary for option to toggle scan always available setting -->
-    <string name="wifi_scan_always_available_summary">Let Google\'s location service and other apps scan for networks, even when Wi-Fi is off</string>
+    <string name="wifi_scan_always_available_summary">Let Google\'s location service and other apps scan for networks, even when Wi\u2011Fi is off</string>
+    <!-- Checkbox title for option to Automatically manage Wi\u2011Fi  [CHAR LIMIT=40] -->
+    <string name="wifi_automatically_manage_title">Automatically manage Wi\u2011Fi</string>
+    <!-- Checkbox summary for option to Automatically manage Wi\u2011Fi  [CHAR LIMIT=100] -->
+    <string name="wifi_automatically_manage_summary">Let a Wi\u2011Fi assistant manager your Wi\u2011Fi connection</string>
+    <!-- Checkbox title for option for Wi\u2011Fi Assistant  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_setting_title">Wi\u2011Fi assistant</string>
+    <!-- Checkbox summary for option for Wi\u2011Fi Assistant  [CHAR LIMIT=40] -->
+    <string name="wifi_assistant_setting_summary">Google Wi\u2011Fi Assistant</string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <string name="wifi_scan_notify_text_location_on">To improve location accuracy and for other purposes, Google and other apps may scan for nearby networks, even when Wi-Fi is off. If you don\'t want this to happen, go to Advanced &gt; Scanning always available.</string>
@@ -1346,12 +1463,20 @@
     <string name="wifi_scan_notify_remember_choice">Don\'t show again</string>
     <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? -->
     <string name="wifi_setting_sleep_policy_title">Keep Wi\u2011Fi on during sleep</string>
+    <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? [CHAR LIMIT=30] -->
+    <string name="wifi_setting_on_during_sleep_title">Wi\u2011Fi on during sleep</string>
     <!-- Generic error message when the sleep policy could not be set. -->
     <string name="wifi_setting_sleep_policy_error">There was a problem changing the setting</string>
+    <!-- Checkbox title for option to toggle suspend power optimizations [CHAR LIMIT=30]-->
+    <string name="wifi_suspend_efficiency">Wi\u2011FI optimization</string>
+    <!-- Checkbox title for option to toggle suspend power optimizations [CHAR LIMIT=30] -->
+    <string name="wifi_suspend_efficiency_title">Improve efficiency</string>
     <!-- Checkbox title for option to toggle suspend power optimizations -->
     <string name="wifi_suspend_optimizations">Wi\u2011Fi optimization</string>
     <!-- Checkbox summary for option to toggle suspend power optimizations -->
     <string name="wifi_suspend_optimizations_summary">Minimize battery usage when Wi\u2011Fi is on</string>
+    <!-- Checkbox summary for option to toggle suspend power optimizations [CHAR LIMIT=30] -->
+    <string name="wifi_limit_optimizations_summary">Limit battery used by Wi\u2011Fi</string>
     <!-- Action bar text message to manually add a wifi network [CHAR LIMIT=20]-->
     <string name="wifi_add_network">Add network</string>
     <!-- Header for the list of wifi networks-->
@@ -1392,8 +1517,8 @@
     <string name="wifi_required_info_text">To complete setup, your tablet needs access to Wi\u2011Fi. After setup, you can switch between cellular data and Wi\u2011Fi.</string>
 
     <!-- Dialog for Access Points --> <skip />
-    <!-- Label to show/hide advanced options -->
-    <string name="wifi_show_advanced">Show advanced options</string>
+    <!-- Label to show/hide advanced options [CHAR LIMIT=40] -->
+    <string name="wifi_show_advanced">Advanced options</string>
     <!-- Title for the WPS setup dialog [CHAR LIMIT=50] -->
     <string name="wifi_wps_setup_title">Wi\u2011Fi Protected Setup</string>
     <!-- Message in WPS dialog at start up [CHAR LIMIT=150] -->
@@ -1514,8 +1639,17 @@
     <string name="wifi_security_eap">802.1x EAP</string>
 
     <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
+    <!-- Message informing the user how to turn off  [CHAR LIMIT=200] -->
+    <string name="wifi_scan_always_turnoff_message">To thurn this off, go to Advanced in the overflow menu.</string>
     <string name="wifi_scan_always_confirm_allow">Allow</string>
     <string name="wifi_scan_always_confirm_deny">Deny</string>
+
+    <!-- Dialog label to sign in to a Hotspot. [CHAR LIMIT=50]-->
+    <string name="wifi_hotspot_title">Sign in to connect?</string>
+    <!-- Dialog message to sign in to a Hotspot. [CHAR LIMIT=50]-->
+    <string name="wifi_hotspot_message"><xliff:g id="app_name">%1$s</xliff:g> requires you to sign in online before you connect to the network.</string>
+    <!-- Wifi settings button to connect in to a Hotspot. [CHAR LIMIT=50]-->
+    <string name="wifi_hotspot_connect">CONNECT</string>
 
     <!-- Button label to connect to a Wi-Fi network -->
     <string name="wifi_connect">Connect</string>
@@ -1634,6 +1768,10 @@
     <!-- Wifi AP settings-->
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off -->
     <string name="wifi_tether_checkbox_text">Portable Wi\u2011Fi hotspot</string>
+    <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
+    <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
+    <!-- Label for Wifi tether checkbox summary. Toggles Access Point on/off  [CHAR LIMIT=40] -->
+    <string name="wifi_hotspot_checkbox_text_summary">Use cellular connection to provide Wi\u2011Fi network</string>
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
     <!-- Summary text when turning hotspot off -->
@@ -1644,6 +1782,10 @@
     <string name="wifi_tether_failed_subtext">Portable Wi\u2011Fi hotspot error</string>
     <!-- Used to open the ssid and security dialog for Wifi Access Point -->
     <string name="wifi_tether_configure_ap_text">Set up Wi\u2011Fi hotspot</string>
+    <!-- Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=30]-->
+    <string name="wifi_hotspot_configure_ap_text">Wi\u2011Fi hotspot setup</string>
+    <!-- Summary Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=40] -->
+    <string name="wifi_hotspot_configure_ap_text">AndroidAP WPA2 PSK portable Wi\u2011Fi hotspot</string>
     <!-- Subtext on configuration preference to indicate SSID and security chosen -->
     <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> portable Wi\u2011Fi hotspot</string>
     <!-- Default access point SSID used for tethering -->
@@ -1857,6 +1999,8 @@
     <string name="accelerometer_summary_off" product="default">Switch orientation automatically when rotating phone</string>
     <!-- Sound & display settings screen, setting option name to change brightness level -->
     <string name="brightness">Brightness level</string>
+    <!-- Sound & display settings screen, setting option name to change brightness level [CHAR LIMIT=30] -->
+    <string name="brightness_title">Brightness</string>
     <!-- Sound & display settings screen, setting option summary to change brightness level -->
     <string name="brightness_summary">Adjust the brightness of the screen</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
@@ -1865,6 +2009,8 @@
     <string name="auto_brightness_summary">Optimize brightness level for available light</string>
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Sleep</string>
+    <!-- Sound & display settings screen, setting option name to change screen timeout [CHAR LIMIT=30] -->
+    <string name="screen_timeout_title">Screen turns off</string>
     <!-- Sound & display settings screen, setting option summary to change screen timeout -->
     <string name="screen_timeout_summary">After <xliff:g id="timeout_description">%1$s</xliff:g> of inactivity</string>
     <!-- Wallpaper settings title [CHAR LIMIT=30] -->
@@ -1900,88 +2046,91 @@
     <!-- [CHAR LIMIT=40] Sound & display settings screen, title of dialog for picking font size -->
     <string name="dialog_title_font_size">Font size</string>
 
-    <!-- SIM lock settings title -->
+    <!-- SIM lock settings title  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings">SIM card lock settings</string>
-    <!-- Security & location settings screen, setting option name -->
+    <!-- Security & location settings screen, setting option name  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings_category">Set up SIM card lock</string>
-    <!-- Security & location settings screen, section heading for settings related to sim card locking -->
+    <!-- Security & location settings screen, section heading for settings related to sim card locking  [CHAR LIMIT=40] -->
     <string name="sim_lock_settings_title">SIM card lock</string>
-    <!-- SIM card lock settings screen, setting check box label -->
+    <!-- SIM card lock settings screen, setting check box label  [CHAR LIMIT=40] -->
     <string name="sim_pin_toggle">Lock SIM card</string>
-    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected -->
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected  [CHAR LIMIT=40] -->
     <string name="sim_lock_on" product="tablet">Require PIN to use tablet</string>
-    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected -->
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected  [CHAR LIMIT=40] -->
     <string name="sim_lock_on" product="default">Require PIN to use phone</string>
-    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear -->
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear  [CHAR LIMIT=40] -->
     <string name="sim_lock_off" product="tablet">Require PIN to use tablet</string>
-    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear -->
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear  [CHAR LIMIT=40] -->
     <string name="sim_lock_off" product="default">Require PIN to use phone</string>
-    <!-- SIM card lock settings screen, setting option name to change the SIM PIN -->
+    <!-- SIM card lock settings screen, setting option name to change the SIM PIN  [CHAR LIMIT=40] -->
     <string name="sim_pin_change">Change SIM PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_enter_pin">SIM PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_enable_sim_lock">Lock SIM card</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_disable_sim_lock">Unlock SIM card</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_enter_old">Old SIM PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_enter_new">New SIM PIN</string>
-    <string name="sim_reenter_new">Re-type new PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
+    <!-- SIM card lock settings screen, Re-type new PIN.  [CHAR LIMIT=40] -->
+    <string name="sim_reenter_new">Re\u2011type new PIN</string>
+    <!-- SIM card lock settings screen, SIM PIN dialog message instruction  [CHAR LIMIT=40] -->
     <string name="sim_change_pin">SIM PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message when wrong PIN is entered -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message when wrong PIN is entered  [CHAR LIMIT=40] -->
     <string name="sim_bad_pin">Incorrect PIN</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message when PINs don't match -->
+    <!-- SIM card lock settings screen, SIM PIN dialog message when PINs don't match  [CHAR LIMIT=40] -->
     <string name="sim_pins_dont_match">PINs don\'t match</string>
-    <!-- SIM card lock settings screen, toast after not entering correct SIM PIN -->
+    <!-- SIM card lock settings screen, toast after not entering correct SIM PIN  [CHAR LIMIT=40] -->
     <string name="sim_change_failed">Can\'t change PIN.\nPossibly incorrect PIN.</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog message when the entered PIN is correct-->
+    <!-- SIM card lock settings screen, SIM PIN dialog message when the entered PIN is correct [CHAR LIMIT=40] -->
     <string name="sim_change_succeeded">SIM PIN changed successfully</string>
-    <!-- SIM card lock settings screen, toast after not entering correct SIM PIN -->
+    <!-- SIM card lock settings screen, toast after not entering correct SIM PIN [CHAR LIMIT=40] -->
     <string name="sim_lock_failed">Can\'t change SIM card lock state.\nPossibly incorrect PIN.</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog button labels: -->
+    <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_ok">OK</string>
-    <!-- SIM card lock settings screen, SIM PIN dialog button labels: -->
+    <!-- SIM card lock settings screen, SIM PIN dialog button labels: [CHAR LIMIT=40] -->
     <string name="sim_enter_cancel">Cancel</string>
+    <!-- Multiple SIMs found title.  [CHAR LIMIT=40] -->
+    <string name="sim_multi_sims_title">Multiple SIMs found</string>
+    <!-- Multiple SIMs found summary.  [CHAR LIMIT=100] -->
+    <string name="sim_multi_sims_summary">Choose the SIM you prefer for cellular data.</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
-         Displayed in a dialog box.  -->
+         Displayed in a dialog box.  [CHAR LIMIT=100] -->
     <string name="wrong_pin_code_pukked">Incorrect SIM PIN code you must now contact your carrier to unlock your device.</string>
-    <!-- Instructions telling the user that they entered the wrong SIM PIN while trying
-         to unlock the keyguard.  Displayed in a dialog box.  -->
+    <!-- Instructions telling the user that they entered the wrong SIM PIN while trying to unlock the keyguard.  Displayed in a dialog box.  [CHAR LIMIT=100] -->
     <plurals name="wrong_pin_code">
         <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
         <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
     </plurals>
-    <!-- Instructions telling the user that the operation to unlock the keyguard
-         with SIM PIN failed. Displayed in one line in a large font.  -->
+    <!-- Instructions telling the user that the operation to unlock the keyguard with SIM PIN failed. Displayed in one line in a large font.  [CHAR LIMIT=40] -->
     <string name="pin_failed">SIM PIN operation failed!</string>
 
-    <!-- Advanced (used for diagnostics) device info activity title -->
+    <!-- Advanced (used for diagnostics) device info activity title [CHAR LIMIT=40] -->
     <string name="device_info_settings" product="tablet">Tablet status</string>
-    <!-- Advanced (used for diagnostics) device info activity title -->
+    <!-- Advanced (used for diagnostics) device info activity title [CHAR LIMIT=40] -->
     <string name="device_info_settings" product="default">Phone status</string>
 
-    <!-- About phone screen, list item title.  Takes the user to the screen for seeing and installing system updates. -->
+    <!-- About phone screen, list item title.  Takes the user to the screen for seeing and installing system updates. [CHAR LIMIT=40] -->
     <string name="system_update_settings_list_item_title">System updates</string>
-    <!-- About phone screen, list item summary.  Takes the user to the screen for seeing and installing system updates. -->
+    <!-- About phone screen, list item summary.  Takes the user to the screen for seeing and installing system updates. [CHAR LIMIT=40] -->
     <string name="system_update_settings_list_item_summary">""</string>
 
-    <!-- About phone screen, status item label -->
+    <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="firmware_version">Android version</string>
-    <!-- About phone screen, status item label-->
+    <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_number">Model number</string>
-    <!-- About phone screen, fcc equipment id label-->
+    <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
     <string name="fcc_equipment_id">Equipment ID</string>
-    <!-- About phone screen,  setting option name-->
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="baseband_version">Baseband version</string>
-    <!-- About phone screen,  setting option name-->
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="kernel_version">Kernel version</string>
-    <!-- About phone screen,  setting option name-->
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="build_number">Build number</string>
-    <!-- About phone screen,  setting option name-->
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="selinux_status">SELinux status</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
@@ -2255,6 +2404,8 @@
     <string name="restore_default_apn_completed">Reset default APN settings completed.</string>
 
     <!-- Master Clear -->
+    <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading [CHAR LIMIT=30] -->
+    <string name="device_reset_title">Reset device</string>
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
@@ -2358,6 +2509,8 @@
     <string name="usb_tethering_storage_active_subtext">Can\'t tether when USB storage is in use</string>
     <!-- USB unavailable subtext - shown when USB is not connected -->
     <string name="usb_tethering_unavailable_subtext">USB not connected</string>
+    <!-- USB unavailable subtext - shown when USB is not connected -->
+    <string name="usb_tethering_turnon_subtext">Connect to turn on</string>
     <!-- USB errored subtext - shown when USB is broken for some reason -->
     <string name="usb_tethering_errored_subtext">USB tethering error</string>
 
@@ -2376,6 +2529,8 @@
     <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\'s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
     <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
     <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\'s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
+    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\'s Internet connection</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
     <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\'s Internet connection</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
@@ -2623,6 +2778,10 @@
     <string name="applications_settings_header">App settings</string>
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  -->
     <string name="install_applications">Unknown sources</string>
+    <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  [CHAR LIMIT=30] -->
+    <string name="install_applications_title">Allow all app sources</string>
+    <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  [CHAR LIMIT=65] -->
+    <string name="install_unknown_applications_title">Lets you install apps from sources other than Google Play</string>
     <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  -->
     <string name="install_unknown_applications">Allow installation of apps from unknown sources</string>
     <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
@@ -4134,6 +4293,8 @@
     <string name="backup_configure_account_title">Backup account</string>
     <!-- Default summary text of the "Configure backup account" setting [CHAR LIMIT=80]-->
     <string name="backup_configure_account_default_summary">No account is currently storing backed up data</string>
+    <!-- Auto-restore menu title [CHAR LIMIT=30] -->
+    <string name="include_app_data_title">Include app data</string>
     <!-- Auto-restore menu title -->
     <string name="auto_restore_title">Automatic restore</string>
     <!-- Summary text of the "automatic restore" setting -->
@@ -4584,6 +4745,18 @@
 
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
+    <!-- Activity title for Appk data usage summary. [CHAR LIMIT=25] -->
+    <string name="data_usage_app_summary_title">App data usage</string>
+    <!-- Message about carrier data accounting.  [CHAR LIMIT=100] -->
+    <string name="data_usage_accounting">Carrier data accounting may differ from your device.</string>
+    <!-- Title for app usage. [CHAR LIMIT=40] -->
+    <string name="data_usage_app">App usage</string>
+    <!-- Title for app usage. [CHAR LIMIT=40] -->
+    <string name="data_usage_app_info_label">APP INFO</string>
+    <!-- Title for cellular data usage. [CHAR LIMIT=40] -->
+    <string name="data_usage_cellular_data">Cellular data</string>
+    <!-- Title for setting data limit. [CHAR LIMIT=40] -->
+    <string name="data_usage_data_limit">Set data limit</string>
     <!-- Title for option to pick visible time range from a list available usage periods. [CHAR LIMIT=25] -->
     <string name="data_usage_cycle">Data usage cycle</string>
     <!-- Title for checkbox menu option to enable mobile data when roaming. [CHAR LIMIT=26] -->
@@ -4593,7 +4766,7 @@
     <!-- Title for checkbox menu option to show 4G mobile data usage separate from other mobile data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_split_4g">Separate 4G usage</string>
     <!-- Title for checkbox menu option to show Wi-Fi data usage. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_show_wifi">Show Wi\u2011Fi usage</string>
+    <string name="data_usage_menu_show_wifi">Show Wi\u2011Fi</string>
     <!-- Title for checkbox menu option to show Ethernet data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_show_ethernet">Show Ethernet usage</string>
     <!-- Title for menu option to configure metered networks. [CHAR LIMIT=26] -->
@@ -4649,12 +4822,16 @@
     <!-- Toggle switch title for enabling 4G data network connection. [CHAR LIMIT=32] -->
     <string name="data_usage_enable_4g">4G data</string>
 
+    <!-- Data Usage Foreground label.  [CHAR LIMIT=40] -->
+    <string name="data_usage_forground_label">Foreground:</string>
+    <!-- Data Usage Background label.  [CHAR LIMIT=40] -->
+    <string name="data_usage_forground_label">Background:</string>
     <!-- Button title for launching application-specific data usage settings. [CHAR LIMIT=32] -->
     <string name="data_usage_app_settings">View app settings</string>
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
-    <string name="data_usage_app_restrict_background">Restrict background data</string>
+    <string name="data_usage_app_restrict_background">Restrict app background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
-    <string name="data_usage_app_restrict_background_summary">Disable background data on cellular networks. Non-cellular networks will be used if available.</string>
+    <string name="data_usage_app_restrict_background_summary">Disable background data on cellular networks.</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=64] -->
     <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a cellular data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
@@ -5002,6 +5179,8 @@
 
     <!-- NFC payment settings --><skip/>
     <string name="nfc_payment_settings_title">Tap &amp; pay</string>
+    <!-- Google Wallet label.  [CHAR LIMIT=40] --><skip/>
+    <string name="google_wallet">Google Wallet</string>
     <!-- String shown when there are no NFC payment applications installed -->
     <string name="nfc_payment_no_apps">Pay with just a tap</string>
     <!-- String shown before a checkbox, allowing the user to indicate that he wants foreground apps
@@ -5010,6 +5189,8 @@
     <!-- String shown when there are no NFC payment applications installed, clickable, pointing to
          a website to learn more-->
     <string name="nfc_payment_learn_more">Learn more</string>
+    <!-- NFC More... title.  [CHAR LIMIT=40] -->
+    <string name="nfc_more_title">More...</string>
     <string name="nfc_payment_menu_item_add_service">Find apps</string>
     <!-- Label for the dialog that is shown when the user is asked to set a
          preferred payment application -->
@@ -5030,7 +5211,7 @@
 
     <!--  Help URLs for some screens. Not specified here. Specified in product overlays --><skip/>
     <!-- Help menu label [CHAR LIMIT=20] -->
-    <string name="help_label">Help</string>
+    <string name="help_label">Help &amp; feedback</string>
     <!-- Help URL, WiFi [DO NOT TRANSLATE] -->
     <string name="help_url_wifi" translatable="false"></string>
     <!-- Help URL, Bluetooth [DO NOT TRANSLATE] -->
@@ -5071,8 +5252,37 @@
     <!-- User picture title [CHAR LIMIT=30] -->
     <string name="user_picture_title">Photo ID</string>
 
-    <!-- Cell Broadcast settings title [CHAR LIMIT=50] -->
-    <string name="cell_broadcast_settings">Cell broadcasts</string>
+    <!-- Extreme threats title.  [CHAR LIMIT=30] -->
+    <string name="extreme_threats_title">Extreme threats</string>
+    <!-- Extreme threats summary.  [CHAR LIMIT=60] -->
+    <string name="extreme_threats_summary">Receive alerts for extreme threats to life and property</string>
+    <!-- Severe threats title.  [CHAR LIMIT=30] -->
+    <string name="severe_threats_title">Severe threats</string>
+    <!-- Extreme threats summary.  [CHAR LIMIT=60] -->
+    <string name="severe_threats_summary">Receive alerts for severe threats to life and property</string>
+    <!-- Amber alerts title.  [CHAR LIMIT=30] -->
+    <string name="amber_alerts_title">AMBER alerts</string>
+    <!-- Amber alerts summary.  [CHAR LIMIT=60] -->
+    <string name="amber_alerts_summary">Receive bulletins about child abductions</string>
+    <!-- repeat title.  [CHAR LIMIT=30] -->
+    <string name="repeat_title">Repeat</string>
+
+    <!-- Cell Broadcast settings title.  [CHAR LIMIT=50] -->
+    <string name="cell_broadcast_settings">Emergency broadcasts</string>
+    <!-- Network operators settings title.  [CHAR LIMIT=50] -->
+    <string name="network_operators_settings">Network operators</string>
+    <!-- Access point names title.  [CHAR LIMIT=50] -->
+    <string name="access_point_names">Access point names</string>
+    <!-- Enhaced 4G LTE Mode title.  [CHAR LIMIT=50] -->
+    <string name="enhanced_4g_lte_mode_title">Enhanced 4G LTE Mode</string>
+    <!-- Enhaced 4G LTE Mode summary.  [CHAR LIMIT=100] -->
+    <string name="enhanced_4g_lte_mode_summary">Use LTE data to enhance voice and communications (Recommended)</string>
+    <!-- Preferred network type title.  [CHAR LIMIT=50] -->
+    <string name="preferred_network_type_title">Preferred network type</string>
+    <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
+    <string name="preferred_network_type_summary">LTE (recommended)</string>
+    <!-- Work SIM title.  [CHAR LIMIT=50] -->
+    <string name="work_sim_title">Work SIM</string>
 
     <!-- User app limits screen title [CHAR LIMIT=35] -->
     <string name="user_restrictions_title">Application and content restrictions</string>
@@ -5098,6 +5308,8 @@
     <!-- Restrictions title for allowing NFC transfers [CHAR LIMIT=35] -->
     <string name="restriction_nfc_enable_title">NFC</string>
     <!-- Restrictions summary for allowing NFC transfers (tablet) [CHAR LIMIT=100] -->
+    <string name="restriction_nfc_enable_summary_config">Allow data exchange when this <xliff:g id="device_name">%1$s</xliff:g> touches another NFC device</string>
+    <!-- Restrictions summary for allowing NFC transfers (tablet) [CHAR LIMIT=100] -->
     <string name="restriction_nfc_enable_summary" product="tablet">Allow data exchange when the tablet touches another device</string>
     <!-- Restrictions summary for allowing NFC transfers (phone) [CHAR LIMIT=100] -->
     <string name="restriction_nfc_enable_summary" product="default">Allow data exchange when the phone touches another device</string>
@@ -5120,6 +5332,70 @@
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
+
+    <!-- Title for SIM card settings during Setup Wizard.  [CHAR LIMIT=40] -->
+    <string name="sim_setup_wizard_title">SIM cards</string>
+    <!-- Title for SIM settings title settings during Setup Wizard.  [CHAR LIMIT=40] -->
+    <string name="sim_settings_title">SIM cards</string>
+    <!-- Message that SIM cards have changed.  [CHAR LIMIT=40] -->
+    <string name="sim_cards_changed_message">SIM cards have changed</string>
+    <!-- Message smmary that SIM cards have changed.  [CHAR LIMIT=60] -->
+    <string name="sim_cards_changed_message_summary">Touch to set activities</string>
+    <!-- Message that Cellular data is unavailable.  [CHAR LIMIT=40] -->
+    <string name="sim_cellular_data_unavailable">Cellular data is unavailable</string>
+    <!-- Message summary that Cellular data is unavailable.  [CHAR LIMIT=60] -->
+    <string name="sim_cellular_data_unavailable_summary">Touch to select a data SIM</string>
+    <!-- Checkbox to always use for calles.  [CHAR LIMIT=40] -->
+    <string name="sim_calls_always_use">Always use this for calls</string>
+    <!-- Title for selecting a SIM card.  [CHAR LIMIT=40] -->
+    <string name="sim_select_card">Select a SIM card</string>
+    <!-- Label for a numbered SIM card.  [CHAR LIMIT=40] -->
+    <string name="sim_card_number_title">SIM <xliff:g id="card_number">%1$d</xliff:g></string>
+    <!-- Name label of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_editor_name">SIM name</string>
+    <!-- Title label of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_editor_title">SIM card</string>
+    <!-- Carrier label of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_editor_carrier">Carrier</string>
+    <!-- Number label of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_editor_number">Number</string>
+    <!-- Color label of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_editor_color">SIM color</string>
+    <!-- Display label numbers of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_editor_num_format">Display numbers</string>
+    <!-- Select label Title of Sim Editor.  [CHAR LIMIT=40] -->
+    <string name="sim_card_select_title">Select SIM card</string>
+    <!-- Orange label.  [CHAR LIMIT=40] -->
+    <string name="color_orange">Orange</string>
+    <!-- Purple label.  [CHAR LIMIT=40] -->
+    <string name="color_purple">Purple</string>
+    <!-- Message informing the user that no SIM card is inserted  [CHAR LIMIT=60] -->
+    <string name="sim_no_inserted_msg">No SIM cards inserted</string>
+    <!-- SIM status title  [CHAR LIMIT=40] -->
+    <string name="sim_status_title">SIM status</string>
+    <!-- SIM status summary [CHAR LIMIT=60] -->
+    <string name="sim_status_summary">SIM related information</string>
+    <!-- Title for call back. [CHAR LIMIT=60] -->
+    <string name="sim_call_back_title">Call back from default SIM</string>
+    <!-- Title for outgoing back. [CHAR LIMIT=60] -->
+    <string name="sim_outgoing_call_title">SIM for outgoing calls</string>
+    <!-- Title for other call settings. [CHAR LIMIT=60] -->
+    <string name="sim_other_call_settings">Other call settings</string>
+    <!-- Preferred Network offload title.  [CHAR LIMIT=25] -->
+    <string name="preferred_network_offload_title">Preferred network Offload</string>
+    <!-- Preferred Network offload Header.  [CHAR LIMIT=25] -->
+    <string name="preferred_network_offload_header">Disable Network Name Broadcast</string>
+    <!-- Preferred Network offload Footer.  [CHAR LIMIT=100] -->
+    <string name="preferred_network_offload_footer">Disable Network Name Broadcast protects from third parties getting access to your network information.</string>
+    <!-- Preferred Network offload Popup.  [CHAR LIMIT=100] -->
+    <string name="preferred_network_offload_popup">Disabling Network Name Broadcast will prevent automatic connection to hidden networks.</string>
+
+    <!-- This is a divider in the SIM cards preferences that is the header of various settings where the user chooses which SIM to use for phone calls, data, and SMS messages [CHAR LIMIT=50] -->
+    <string name="sim_pref_divider">Activities</string>
+    <!-- When a user chooses this "Ask first" preference for the SIM to use for phone calls, they'll be prompted to choose a SIM every time they initiate a call [CHAR LIMIT=50] -->
+    <string name="sim_calls_ask_first_prefs_title">Ask first</string>
+    <!-- When a SIM preference hasn't been selected yet, this string is displayed as the pref summary until the user chooses a SIM subscription from the preference list [CHAR LIMIT=50] -->
+    <string name="sim_selection_required_pref">Selection required</string>
 
     <!--Dashboard strings-->
     <!-- Text to describe the dashboard fragment title [CHAR LIMIT=16] -->
