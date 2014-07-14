@@ -17,7 +17,6 @@
 package com.android.settings.accounts;
 
 import com.google.android.collect.Lists;
-import com.google.android.collect.Maps;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -59,7 +58,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class AccountSyncSettings extends AccountPreferenceBase {
@@ -76,9 +74,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private ImageView mProviderIcon;
     private TextView mErrorInfoView;
     private Account mAccount;
-    // List of all accounts, updated when accounts are added/removed
-    // We need to re-scan the accounts on sync events, in case sync state changes.
-    private Account[] mAccounts;
     private ArrayList<SyncStateCheckBoxPreference> mCheckBoxes =
                 new ArrayList<SyncStateCheckBoxPreference>();
     private ArrayList<SyncAdapterType> mInvisibleAdapters = Lists.newArrayList();
@@ -185,11 +180,16 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             return;
         }
         mAccount = (Account) arguments.getParcelable(ACCOUNT_KEY);
-        if (mAccount != null) {
-            if (Log.isLoggable(TAG, Log.VERBOSE)) Log.v(TAG, "Got account: " + mAccount);
-            mUserId.setText(mAccount.name);
-            mProviderId.setText(mAccount.type);
+        if (!accountExists(mAccount)) {
+            Log.e(TAG, "Account provided does not exist: " + mAccount);
+            finish();
+            return;
         }
+        if (Log.isLoggable(TAG, Log.VERBOSE)) {
+          Log.v(TAG, "Got account: " + mAccount);
+        }
+        mUserId.setText(mAccount.name);
+        mProviderId.setText(mAccount.type);
     }
 
     @Override
@@ -336,10 +336,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         // plus whatever the system needs to sync, e.g., invisible sync adapters
         if (mAccount != null) {
             for (SyncAdapterType syncAdapter : mInvisibleAdapters) {
-                // invisible sync adapters' account type should be same as current account type
-                if (syncAdapter.accountType.equals(mAccount.type)) {
-                    requestOrCancelSync(mAccount, syncAdapter.authority, startSync);
-                }
+                  requestOrCancelSync(mAccount, syncAdapter.authority, startSync);
             }
         }
     }
@@ -378,7 +375,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         boolean syncIsFailing = false;
 
         // Refresh the sync status checkboxes - some syncs may have become active.
-        updateAccountCheckboxes(mAccounts);
+        updateAccountCheckboxes();
 
         for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
             Preference pref = getPreferenceScreen().getPreference(i);
@@ -446,29 +443,42 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onAccountsUpdate(final UserHandle userHandle) {
         super.onAccountsUpdate(userHandle);
-        mAccounts = AccountManager.get(getActivity()).getAccountsAsUser(
-                mUserHandle.getIdentifier());
-        updateAccountCheckboxes(mAccounts);
+        if (!accountExists(mAccount)) {
+            // The account was deleted
+            finish();
+            return;
+        }
+        updateAccountCheckboxes();
         onSyncStateUpdated();
     }
 
-    private void updateAccountCheckboxes(Account[] accounts) {
+    private boolean accountExists(Account account) {
+        if (account == null) return false;
+
+        Account[] accounts = AccountManager.get(getActivity()).getAccountsByTypeAsUser(
+                account.type, mUserHandle);
+        final int count = accounts.length;
+        for (int i = 0; i < count; i++) {
+            if (accounts[i].equals(account)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateAccountCheckboxes() {
         mInvisibleAdapters.clear();
 
-       SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
+        SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
                 mUserHandle.getIdentifier());
-        HashMap<String, ArrayList<String>> accountTypeToAuthorities =
-            Maps.newHashMap();
+        ArrayList<String> authorities = new ArrayList<String>();
         for (int i = 0, n = syncAdapters.length; i < n; i++) {
             final SyncAdapterType sa = syncAdapters[i];
+            // Only keep track of sync adapters for this account
+            if (!sa.accountType.equals(mAccount.type)) continue;
             if (sa.isUserVisible()) {
-                ArrayList<String> authorities = accountTypeToAuthorities.get(sa.accountType);
-                if (authorities == null) {
-                    authorities = new ArrayList<String>();
-                    accountTypeToAuthorities.put(sa.accountType, authorities);
-                }
                 if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "onAccountUpdated: added authority " + sa.authority
+                    Log.d(TAG, "updateAccountCheckboxes: added authority " + sa.authority
                             + " to accountType " + sa.accountType);
                 }
                 authorities.add(sa.authority);
@@ -484,25 +494,19 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         }
         mCheckBoxes.clear();
 
-        for (int i = 0, n = accounts.length; i < n; i++) {
-            final Account account = accounts[i];
+        if (Log.isLoggable(TAG, Log.VERBOSE)) {
+            Log.d(TAG, "looking for sync adapters that match account " + mAccount);
+        }
+        for (int j = 0, m = authorities.size(); j < m; j++) {
+            final String authority = authorities.get(j);
+            // We could check services here....
+            int syncState = ContentResolver.getIsSyncableAsUser(mAccount, authority,
+                    mUserHandle.getIdentifier());
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                Log.d(TAG, "looking for sync adapters that match account " + account);
+                Log.d(TAG, "  found authority " + authority + " " + syncState);
             }
-            final ArrayList<String> authorities = accountTypeToAuthorities.get(account.type);
-            if (authorities != null && (mAccount == null || mAccount.equals(account))) {
-                for (int j = 0, m = authorities.size(); j < m; j++) {
-                    final String authority = authorities.get(j);
-                    // We could check services here....
-                    int syncState = ContentResolver.getIsSyncableAsUser(account, authority,
-                            mUserHandle.getIdentifier());
-                    if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                        Log.d(TAG, "  found authority " + authority + " " + syncState);
-                    }
-                    if (syncState > 0) {
-                        addSyncStateCheckBox(account, authority);
-                    }
-                }
+            if (syncState > 0) {
+                addSyncStateCheckBox(mAccount, authority);
             }
         }
 
