@@ -35,6 +35,7 @@
         <item name="switchBarMarginStart">0dip</item>
         <item name="switchBarMarginEnd">0dip</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
+        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
     </style>
 
     <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
@@ -51,6 +52,7 @@
         <item name="switchBarMarginStart">0dip</item>
         <item name="switchBarMarginEnd">0dip</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
+        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
     </style>
 
     <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">
@@ -94,6 +96,7 @@
 
         <item name="switchBarMarginStart">@dimen/switchbar_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_margin_end</item>
+        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
@@ -161,4 +164,9 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
 
+    <style name="Theme.NotificationStation" parent="@android:style/Theme.Material">
+        <item name="switchBarMarginStart">0dip</item>
+        <item name="switchBarMarginEnd">0dip</item>
+        <item name="dashboardBackgroundColor">@android:color/transparent</item>
+    </style>
 </resources>
