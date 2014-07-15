@@ -1002,6 +1002,16 @@
         <!-- Second and third-level settings -->
 
         <!-- Lock screen settings -->
+        <activity android:name="ConfirmDeviceCredentialActivity"
+            android:exported="true">
+            <!-- Use high-priority to prevent an installed activity from masquerading as this one. -->
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.CONFIRM_DEVICE_CREDENTIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity android:name="ConfirmLockPattern"/>
 
         <activity android:name="ConfirmLockPassword"
