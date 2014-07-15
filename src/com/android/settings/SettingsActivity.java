@@ -239,6 +239,7 @@ public class SettingsActivity extends Activity
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
+            HomeSettings.class.getName(),
             DisplaySettings.class.getName(),
             DeviceInfoSettings.class.getName(),
             ManageApplications.class.getName(),
