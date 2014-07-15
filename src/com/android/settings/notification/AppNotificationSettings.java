@@ -70,7 +70,7 @@ public class AppNotificationSettings extends ListFragment {
      * Show a checkbox in the per-app notification control dialog to allow the user
      * to promote this app's notifications to higher priority.
      */
-    private static final boolean ENABLE_APP_NOTIFICATION_PRIORITY_OPTION = false;
+    private static final boolean ENABLE_APP_NOTIFICATION_PRIORITY_OPTION = true;
     /**
      * Show a checkbox in the per-app notification control dialog to allow the user to
      * selectively redact this app's notifications on the lockscreen.
@@ -585,13 +585,27 @@ public class AppNotificationSettings extends ListFragment {
         }
 
         public boolean getHighPriority(String pkg, int uid) {
-            // TODO get high-pri state from NoMan
-            return false;
+            INotificationManager nm = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            try {
+                return nm.getPackagePriority(pkg, uid) == Notification.PRIORITY_MAX;
+            } catch (Exception e) {
+                Log.w(TAG, "Error calling NoMan", e);
+                return false;
+            }
         }
 
-        public boolean setHighPriority(String pkg, int uid, boolean priority) {
-            // TODO save high-pri state to NoMan
-            return true;
+        public boolean setHighPriority(String pkg, int uid, boolean highPriority) {
+            INotificationManager nm = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            try {
+                nm.setPackagePriority(pkg, uid,
+                        highPriority ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
+                return true;
+            } catch (Exception e) {
+                Log.w(TAG, "Error calling NoMan", e);
+                return false;
+            }
         }
 
         public boolean getSensitive(String pkg, int uid) {
