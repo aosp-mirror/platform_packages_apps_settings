@@ -82,6 +82,15 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
+    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
+        <item name="android:textSize">36sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">flagForceAscii|actionDone</item>
+    </style>
+
     <style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
     </style>

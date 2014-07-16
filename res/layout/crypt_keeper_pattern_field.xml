@@ -20,11 +20,11 @@
 <!-- Contents of the password entry field for CryptKeeper. Comes with an IME
      switcher, if necessary. Assumed to be in a horizontal LinearLayout. -->
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
+
    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:background="@color/lock_pattern_background"
-   />
+       android:background="@color/lock_pattern_background" />
 
    <ImageView android:id="@+id/switch_ime_button"
        android:layout_width="wrap_content"
@@ -32,9 +32,9 @@
        android:src="@drawable/ic_lockscreen_ime"
        android:clickable="true"
        android:contentDescription="@string/crypt_keeper_switch_input_method"
-       android:padding="8dip"
+       android:padding="@dimen/crypt_keeper_edit_text_ime_padding"
        android:layout_gravity="center"
        android:background="?android:attr/selectableItemBackground"
-       android:visibility="gone"
-   />
+       android:visibility="gone" />
+
 </merge>
