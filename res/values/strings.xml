@@ -646,11 +646,15 @@
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, cellular networks, &amp; VPNs</string>
 
-    <!-- check box cellular data title [CHAR LIMIT=30]-->
+    <!-- check box cellular data title [CHAR LIMIT=30] -->
     <string name="cellular_data_title">Cellular data</string>
-    <!-- check box cellular data summary [CHAR LIMIT=40]-->
+    <!-- check box Calls title [CHAR LIMIT=30] -->
+    <string name="calls_title">Calls</string>
+    <!-- check box SMS Messges title [CHAR LIMIT=30] -->
+    <string name="sms_messages_title">SMS Messages</string>
+    <!-- check box cellular data summary [CHAR LIMIT=40] -->
     <string name="cellular_data_summary">Allow data usage over cellular network</string>
-    <!-- check box to allow data usage when roaming [CHAR LIMIT=30]-->
+    <!-- check box to allow data usage when roaming [CHAR LIMIT=30] -->
     <string name="allow_data_usage_title">Allow data usage when roaming</string>
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Data roaming</string>
@@ -1164,6 +1168,8 @@
     <string name="bluetooth_preference_paired_dialog_internet_option">Internet connection</string>
     <!-- Bluetooth settings: Checkbox label for enable/disable keyboard connection.  [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_dialog_keyboard_option">Keyboard</string>
+    <!-- Bluetooth settings: Checkbox label for enable/disable contacts connection.  [CHAR LIMIT=40] -->
+    <string name="bluetooth_preference_paired_dialog_contacts_option">Contacts and call history</string>
     <!-- Bluetooth settings: pairing dialog title.  [CHAR LIMIT=40] -->
     <string name="bluetooth_pairing_dialog_title">Pair with this device?</string>
     <!-- Bluetooth settings: share phone book title.  [CHAR LIMIT=40] -->
@@ -1171,7 +1177,7 @@
     <!-- Bluetooth settings: Message informing user that a bluetooth wants to access contant and call history.  [CHAR LIMIT=100] -->
     <string name="bluetooth_pairing_dialog_contants_request"><xliff:g id="device_name">%1$s</xliff:g> wants to access your contacts and call history.</string>
     <!-- Bluetooth settings: paring permission message.  [CHAR LIMIT=100] -->
-    <string name="bluetooth_pairing_dialog_paring_request"><xliff:g id="device_name">%1$s</xliff:g> wants to pair with Bluetooth.</string>
+    <string name="bluetooth_pairing_dialog_paring_request"><xliff:g id="device_name">%1$s</xliff:g> wants to pair with Bluetooth. When connected, it will have access to your contacts and call history.</string>
     <!-- Bluetooth settings: The sub heading for devices which have already been paired with this device. [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_devices">Paired devices</string>
     <!-- Bluetooth settings: The sub heading for messaging accesses. [CHAR LIMIT=50] -->
