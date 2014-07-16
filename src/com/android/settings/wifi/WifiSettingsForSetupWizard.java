@@ -95,7 +95,7 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         final View title = view.findViewById(R.id.title);
         if (title == null) {
             final View header = inflater.inflate(R.layout.setup_wizard_header, list, false);
-            list.addHeaderView(header);
+            list.addHeaderView(header, null, false);
         }
 
         final View other = inflater.inflate(R.layout.setup_wifi_add_network, list, false);
