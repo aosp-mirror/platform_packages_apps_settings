@@ -37,7 +37,7 @@ import com.android.internal.app.AlertController;
  */
 public final class ActiveNetworkScorerDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
-    private static final String TAG = "ActiveNetworkScorerDialog";
+    private static final String TAG = "ActiveNetScorerDlg";
 
     private String mNewPackageName;
 
