@@ -16,10 +16,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical"
-    android:scrollbars="vertical" >
+    android:scrollbars="vertical"
+    android:background="@android:color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +29,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
             <View
                 android:paddingTop="53dip"
