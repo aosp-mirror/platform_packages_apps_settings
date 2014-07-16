@@ -54,16 +54,12 @@ public class LocationSettings extends LocationSettingsBase
 
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
-    private boolean mValidListener;
+    private boolean mValidListener = false;
     private Preference mLocationMode;
     private PreferenceCategory mCategoryRecentLocationRequests;
     /** Receives UPDATE_INTENT  */
     private BroadcastReceiver mReceiver;
     private SettingsInjector injector;
-
-    public LocationSettings() {
-        mValidListener = false;
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -79,21 +75,17 @@ public class LocationSettings extends LocationSettingsBase
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         mSwitchBar.hide();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         createPreferenceHierarchy();
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mValidListener = true;
+        if (!mValidListener) {
+            mSwitchBar.addOnSwitchChangeListener(this);
+            mValidListener = true;
+        }
     }
 
     @Override
@@ -102,10 +94,15 @@ public class LocationSettings extends LocationSettingsBase
             getActivity().unregisterReceiver(mReceiver);
         } catch (RuntimeException e) {
             // Ignore exceptions caused by race condition
+            if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                Log.v(TAG, "Swallowing " + e);
+            }
+        }
+        if (mValidListener) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+            mValidListener = false;
         }
         super.onPause();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mValidListener = false;
     }
 
     private void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
