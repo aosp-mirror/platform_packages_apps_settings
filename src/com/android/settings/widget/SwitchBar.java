@@ -17,11 +17,14 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
@@ -34,12 +37,6 @@ import java.util.ArrayList;
 public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener,
         View.OnClickListener {
 
-    private ToggleSwitch mSwitch;
-    private TextView mTextView;
-
-    private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
-            new ArrayList<OnSwitchChangeListener>();
-
     public static interface OnSwitchChangeListener {
         /**
          * Called when the checked state of the Switch has changed.
@@ -49,6 +46,15 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
          */
         void onSwitchChanged(Switch switchView, boolean isChecked);
     }
+
+    private ToggleSwitch mSwitch;
+    private TextView mTextView;
+
+    private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
+            new ArrayList<OnSwitchChangeListener>();
+
+    private static int[] MARGIN_ATTRIBUTES = {
+            R.attr.switchBarMarginStart, R.attr.switchBarMarginEnd};
 
     public SwitchBar(Context context) {
         this(context, null);
@@ -67,13 +73,22 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
         LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
 
+        final TypedArray a = context.obtainStyledAttributes(attrs, MARGIN_ATTRIBUTES);
+        int switchBarMarginStart = (int) a.getDimension(0, 0);
+        int switchBarMarginEnd = (int) a.getDimension(1, 0);
+        a.recycle();
+
         mTextView = (TextView) findViewById(R.id.switch_text);
         mTextView.setText(R.string.switch_off_text);
+        ViewGroup.MarginLayoutParams lp = (MarginLayoutParams) mTextView.getLayoutParams();
+        lp.setMarginStart(switchBarMarginStart);
 
         mSwitch = (ToggleSwitch) findViewById(R.id.switch_widget);
         // Prevent onSaveInstanceState() to be called as we are managing the state of the Switch
         // on our own
         mSwitch.setSaveEnabled(false);
+        lp = (MarginLayoutParams) mSwitch.getLayoutParams();
+        lp.setMarginEnd(switchBarMarginEnd);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
