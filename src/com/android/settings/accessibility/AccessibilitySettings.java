@@ -78,6 +78,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // Preferences
     private static final String TOGGLE_LARGE_TEXT_PREFERENCE =
             "toggle_large_text_preference";
+    private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
+            "toggle_high_text_contrast_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
             "toggle_power_button_ends_call_preference";
     private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
@@ -182,6 +184,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private PreferenceCategory mSystemsCategory;
 
     private CheckBoxPreference mToggleLargeTextPreference;
+    private CheckBoxPreference mToggleHighTextContrastPreference;
     private CheckBoxPreference mTogglePowerButtonEndsCallPreference;
     private CheckBoxPreference mToggleLockScreenRotationPreference;
     private CheckBoxPreference mToggleSpeakPasswordPreference;
@@ -246,6 +249,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (mToggleLargeTextPreference == preference) {
             handleToggleLargeTextPreferenceClick();
             return true;
+        } else if (mToggleHighTextContrastPreference == preference) {
+            handleToggleTextContrastPreferenceClick();
+            return true;
         } else if (mTogglePowerButtonEndsCallPreference == preference) {
             handleTogglePowerButtonEndsCallPreferenceClick();
             return true;
@@ -272,6 +278,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } catch (RemoteException re) {
             /* ignore */
         }
+    }
+
+    private void handleToggleTextContrastPreferenceClick() {
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED,
+                (mToggleHighTextContrastPreference.isChecked() ? 1 : 0));
     }
 
     private void handleTogglePowerButtonEndsCallPreferenceClick() {
@@ -324,6 +336,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Large text.
         mToggleLargeTextPreference =
                 (CheckBoxPreference) findPreference(TOGGLE_LARGE_TEXT_PREFERENCE);
+
+        // Text contrast.
+        mToggleHighTextContrastPreference =
+                (CheckBoxPreference) findPreference(TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE);
 
         // Power button ends calls.
         mTogglePowerButtonEndsCallPreference =
@@ -492,6 +508,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             /* ignore */
         }
         mToggleLargeTextPreference.setChecked(mCurConfig.fontScale == LARGE_FONT_SCALE);
+
+        mToggleHighTextContrastPreference.setChecked(
+                AccessibilityManager.getInstance(getActivity()).isHighTextContrastEnabled());
 
         // Power button ends calls.
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
