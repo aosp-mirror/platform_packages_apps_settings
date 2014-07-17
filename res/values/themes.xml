@@ -97,6 +97,7 @@
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
+        <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
         <!-- LockPatternView colors -->
@@ -104,6 +105,9 @@
         <item name="@*android:successColor">@color/lock_pattern_view_success_color</item>
         <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
 
+        <!-- For the TimePicker -->
+        <item name="@android:timePickerDialogTheme">@style/Theme.TimePicker</item>
+        <item name="@android:timePickerStyle">@style/Theme.TimePickerStyle</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
@@ -178,6 +182,22 @@
         <item name="switchBarMarginEnd">0dip</item>
 
         <item name="dashboardBackgroundColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.TimePicker" parent="@*android:style/Theme.Material.Light.Dialog.TimePicker">
+        <!-- Used by the ActionBar -->
+        <item name="android:colorPrimary">@color/theme_primary</item>
+        <!-- Used by the StatusBar -->
+        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
+        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
+        <item name="android:colorAccent">@color/theme_accent</item>
+
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+    </style>
+
+    <style name="Theme.TimePickerStyle" parent="@*android:style/Widget.Material.Light.TimePicker">
+        <item name="@android:numbersBackgroundColor">@android:color/white</item>
     </style>
 
 </resources>
