@@ -103,14 +103,14 @@ public class AppOpsState {
                     AppOpsManager.OP_WIFI_SCAN,
                     AppOpsManager.OP_NEIGHBORING_CELLS,
                     AppOpsManager.OP_MONITOR_LOCATION,
-                    AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION},
+                    AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION },
             new boolean[] { true,
                     true,
                     false,
                     false,
                     false,
                     false,
-                    false}
+                    false }
             );
 
     public static final OpsTemplate PERSONAL_TEMPLATE = new OpsTemplate(
@@ -189,13 +189,15 @@ public class AppOpsState {
                     AppOpsManager.OP_CALL_PHONE,
                     AppOpsManager.OP_WRITE_SETTINGS,
                     AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                    AppOpsManager.OP_WAKE_LOCK },
+                    AppOpsManager.OP_WAKE_LOCK,
+                    AppOpsManager.OP_PROJECT_MEDIA },
             new boolean[] { false,
                     true,
                     true,
                     true,
                     true,
-                    true,  }
+                    true,
+                    false, }
             );
 
     public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
