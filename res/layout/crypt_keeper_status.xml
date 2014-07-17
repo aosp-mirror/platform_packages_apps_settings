@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 **
-** Copyright 2011, The Android Open Source Project
+** Copyright 2014, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License")
 ** you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
->
+    android:layout_gravity="center_horizontal">
+
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
@@ -33,11 +33,10 @@
         android:layout_marginStart="8dip"
         android:layout_marginEnd="8dip"
         android:textSize="18sp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/enter_password"
-        android:drawableLeft="@*android:drawable/ic_lock_idle_lock"
-        android:layout_gravity="center_horizontal"
-        />
+        android:layout_gravity="center_horizontal" />
+
     <TextView
         android:id="@+id/owner_info"
         android:layout_width="match_parent"
@@ -49,6 +48,6 @@
         android:ellipsize="marquee"
         android:marqueeRepeatLimit ="marquee_forever"
         android:textSize="16sp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </LinearLayout>
