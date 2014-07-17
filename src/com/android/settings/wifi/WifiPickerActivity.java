@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+import com.android.settings.R;
 
 import android.content.Intent;
 import android.preference.PreferenceFragment;
@@ -31,6 +32,7 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
         Intent modIntent = new Intent(super.getIntent());
         if (!modIntent.hasExtra(EXTRA_SHOW_FRAGMENT)) {
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getWifiSettingsClass().getName());
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.wifi_select_network);
         }
         return modIntent;
     }
