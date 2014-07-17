@@ -19,13 +19,6 @@ package com.android.settings.wifi;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
-import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.SettingsActivity;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -33,15 +26,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.NetworkScoreManager;
+import android.net.NetworkScorerAppManager;
+import android.net.NetworkScorerAppManager.NetworkScorerAppData;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
@@ -66,6 +61,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.settings.R;
+import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.SettingsActivity;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -85,6 +87,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         implements DialogInterface.OnClickListener, Indexable  {
 
     private static final String TAG = "WifiSettings";
+
+    private static final int REQUEST_ENABLE_WIFI_ASSISTANT = 1;
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
@@ -153,7 +157,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private boolean mDlgEdit;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
-    private Preference mWifiAssistant;
+    private Preference mWifiAssistantPreference;
+    private NetworkScorerAppData mWifiAssistantApp;
 
     /** verbose logging flag. this flag is set thru developer debugging options
      * and used so as to assist with in-the-field WiFi connectivity debugging  */
@@ -162,19 +167,15 @@ public class WifiSettings extends RestrictedSettingsFragment
     /* End of "used in Wifi Setup context" */
 
     /** Holds the Wifi Assistant Card. */
-    private static class WifiAssistantPreference extends Preference {
-        final WifiSettings mWifiSettings;
-
-        public WifiAssistantPreference(WifiSettings wifiSettings) {
-            super(wifiSettings.getActivity());
-            mWifiSettings = wifiSettings;
+    private class WifiAssistantPreference extends Preference {
+        public WifiAssistantPreference() {
+            super(getActivity());
             setLayoutResource(R.layout.wifi_assistant_card);
         }
 
         @Override
         public void onBindView(View view) {
             super.onBindView(view);
-            final Preference pref = this;
             Button setup = (Button)view.findViewById(R.id.setup);
             Button noThanks = (Button)view.findViewById(R.id.no_thanks_button);
 
@@ -182,19 +183,29 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setup.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(NetworkScoreManager.ACTION_CHANGE_ACTIVE);
-                        intent.putExtra(NetworkScoreManager.EXTRA_PACKAGE_NAME, "wifi-assistant");
-                        mWifiSettings.startActivity(intent);
-                        mWifiSettings.setWifiAssistantTimeout();
-                        mWifiSettings.getPreferenceScreen().removePreference(pref);
+                        Intent intent = new Intent();
+                        if (mWifiAssistantApp.mConfigurationActivityClassName != null) {
+                            // App has a custom configuration activity; launch that.
+                            // This custom activity will be responsible for launching the system
+                            // dialog.
+                            intent.setClassName(mWifiAssistantApp.mPackageName,
+                                    mWifiAssistantApp.mConfigurationActivityClassName);
+                        } else {
+                            // Fall back on the system dialog.
+                            intent.setAction(NetworkScoreManager.ACTION_CHANGE_ACTIVE);
+                            intent.putExtra(NetworkScoreManager.EXTRA_PACKAGE_NAME,
+                                    mWifiAssistantApp.mPackageName);
+                        }
+                        startActivityForResult(intent, REQUEST_ENABLE_WIFI_ASSISTANT);
                     }
                 });
 
                 noThanks.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mWifiSettings.setWifiAssistantTimeout();
-                        mWifiSettings.getPreferenceScreen().removePreference(pref);
+                        setWifiAssistantTimeout();
+                        getPreferenceScreen().removePreference(WifiAssistantPreference.this);
+                        mWifiAssistantApp = null;
                     }
                 });
             }
@@ -359,12 +370,25 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         addPreferencesFromResource(R.xml.wifi_settings);
 
-        mWifiAssistant = new WifiAssistantPreference(this);
+        prepareWifiAssistantCard();
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        if (requestCode == REQUEST_ENABLE_WIFI_ASSISTANT) {
+            if (resultCode == Activity.RESULT_OK) {
+                setWifiAssistantTimeout();
+                getPreferenceScreen().removePreference(mWifiAssistantPreference);
+                mWifiAssistantApp = null;
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, resultData);
+        }
     }
 
     @Override
@@ -683,8 +707,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                     addMessagePreference(R.string.wifi_empty_list_wifi_on);
                 }
 
-                if (showWifiAssistantCard()) {
-                    getPreferenceScreen().addPreference(mWifiAssistant);
+                if (mWifiAssistantApp != null) {
+                    getPreferenceScreen().addPreference(mWifiAssistantPreference);
                 }
 
                 for (AccessPoint accessPoint : accessPoints) {
@@ -706,12 +730,34 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
-    private boolean showWifiAssistantCard() {
+    private boolean prepareWifiAssistantCard() {
+        if (mWifiAssistantPreference != null) {
+            mWifiAssistantPreference = new WifiAssistantPreference();
+        }
+
+        if (NetworkScorerAppManager.getActiveScorer(getActivity()) != null) {
+            // A scorer is already enabled; don't show the card.
+            return false;
+        }
+
+        Collection<NetworkScorerAppData> scorers =
+                NetworkScorerAppManager.getAllValidScorers(getActivity());
+        if (scorers.isEmpty()) {
+            // No scorers are available to enable; don't show the card.
+            return false;
+        }
+
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
         long lastTimeoutEndTime = sharedPreferences.getLong(KEY_ASSISTANT_START_TIME, 0);
         long dismissTime = sharedPreferences.getLong(KEY_ASSISTANT_DISMISS_TIME, 0);
 
-        return ((System.currentTimeMillis() - lastTimeoutEndTime) > dismissTime);
+        boolean shouldShow = ((System.currentTimeMillis() - lastTimeoutEndTime) > dismissTime);
+        if (shouldShow) {
+            // TODO: b/13780935 - Implement proper scorer selection. Rather than pick the first
+            // scorer on the system, we should allow the user to select one.
+            mWifiAssistantApp = scorers.iterator().next();
+        }
+        return shouldShow;
     }
 
     private void setWifiAssistantTimeout() {
