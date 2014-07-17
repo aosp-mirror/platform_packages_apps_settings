@@ -18,7 +18,6 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.OnAccountsUpdateListener;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -30,7 +29,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,10 +52,13 @@ import com.android.settings.location.LocationSettings;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
+
+import static android.content.Intent.EXTRA_USER;
 
 /** Manages settings for Google Account. */
 public class ManageAccountsSettings extends AccountPreferenceBase
-        implements OnAccountsUpdateListener {
+        implements AuthenticatorHelper.OnAccountsUpdateListener {
     private static final String ACCOUNT_KEY = "account"; // to pass to auth settings
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ACCOUNT_LABEL = "account_label";
@@ -92,8 +96,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onStart() {
         super.onStart();
-        Activity activity = getActivity();
-        AccountManager.get(activity).addOnAccountsUpdatedListener(this, null, true);
+        mAuthenticatorHelper.listenToAccountUpdates();
     }
 
     @Override
@@ -122,13 +125,14 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             getActivity().setTitle(args.getString(KEY_ACCOUNT_LABEL));
         }
         updateAuthDescriptions();
+        showAccountsIfNeeded();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         final Activity activity = getActivity();
-        AccountManager.get(activity).removeOnAccountsUpdatedListener(this);
+        mAuthenticatorHelper.stopListeningToAccountUpdates();
         activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
         activity.getActionBar().setCustomView(null);
     }
@@ -146,6 +150,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private void startAccountSettings(AccountPreference acctPref) {
         Bundle args = new Bundle();
         args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, acctPref.getAccount());
+        args.putParcelable(EXTRA_USER, mUserHandle);
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 AccountSyncSettings.class.getCanonicalName(), args,
                 R.string.account_sync_settings_title, acctPref.getAccount().name,
@@ -166,7 +171,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        boolean syncActive = ContentResolver.getCurrentSync() != null;
+        boolean syncActive = ContentResolver.getCurrentSyncsAsUser(
+                mUserHandle.getIdentifier()).isEmpty();
         menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive && mFirstAccount != null);
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive && mFirstAccount != null);
     }
@@ -185,7 +191,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     private void requestOrCancelSyncForAccounts(boolean sync) {
-        SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypes();
+        final int userId = mUserHandle.getIdentifier();
+        SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(userId);
         Bundle extras = new Bundle();
         extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         int count = getPreferenceScreen().getPreferenceCount();
@@ -198,11 +205,13 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 for (int j = 0; j < syncAdapters.length; j++) {
                     SyncAdapterType sa = syncAdapters[j];
                     if (syncAdapters[j].accountType.equals(mAccountType)
-                            && ContentResolver.getSyncAutomatically(account, sa.authority)) {
+                            && ContentResolver.getSyncAutomaticallyAsUser(account, sa.authority,
+                                    userId)) {
                         if (sync) {
-                            ContentResolver.requestSync(account, sa.authority, extras);
+                            ContentResolver.requestSyncAsUser(account, sa.authority, userId,
+                                    extras);
                         } else {
-                            ContentResolver.cancelSync(account, sa.authority);
+                            ContentResolver.cancelSyncAsUser(account, sa.authority, userId);
                         }
                     }
                 }
@@ -212,17 +221,23 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     protected void onSyncStateUpdated() {
+        showSyncState();
+    }
+
+    private void showSyncState() {
         // Catch any delayed delivery of update messages
         if (getActivity() == null) return;
 
+        final int userId = mUserHandle.getIdentifier();
+
         // iterate over all the preferences, setting the state properly for each
-        SyncInfo currentSync = ContentResolver.getCurrentSync();
+        List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncsAsUser(userId);
 
         boolean anySyncFailed = false; // true if sync on any account failed
         Date date = new Date();
 
         // only track userfacing sync adapters when deciding if account is synced or not
-        final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypes();
+        final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(userId);
         HashSet<String> userFacing = new HashSet<String>();
         for (int k = 0, n = syncAdapters.length; k < n; k++) {
             final SyncAdapterType sa = syncAdapters[k];
@@ -245,15 +260,11 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             boolean syncingNow = false;
             if (authorities != null) {
                 for (String authority : authorities) {
-                    SyncStatusInfo status = ContentResolver.getSyncStatus(account, authority);
-                    boolean syncEnabled = ContentResolver.getSyncAutomatically(account, authority)
-                            && ContentResolver.getMasterSyncAutomatically()
-                            && (ContentResolver.getIsSyncable(account, authority) > 0);
+                    SyncStatusInfo status = ContentResolver.getSyncStatusAsUser(account, authority,
+                            userId);
+                    boolean syncEnabled = isSyncEnabled(userId, account, authority);
                     boolean authorityIsPending = ContentResolver.isSyncPending(account, authority);
-                    boolean activelySyncing = currentSync != null
-                            && currentSync.authority.equals(authority)
-                            && new Account(currentSync.account.name, currentSync.account.type)
-                                    .equals(account);
+                    boolean activelySyncing = isSyncing(currentSyncs, account, authority);
                     boolean lastSyncFailed = status != null
                             && syncEnabled
                             && status.lastFailureTime != 0
@@ -299,9 +310,34 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         mErrorInfoView.setVisibility(anySyncFailed ? View.VISIBLE : View.GONE);
     }
 
+
+    private boolean isSyncing(List<SyncInfo> currentSyncs, Account account, String authority) {
+        final int count = currentSyncs.size();
+        for (int i = 0; i < count;  i++) {
+            SyncInfo syncInfo = currentSyncs.get(i);
+            if (syncInfo.account.equals(account) && syncInfo.authority.equals(authority)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isSyncEnabled(int userId, Account account, String authority) {
+        return ContentResolver.getSyncAutomaticallyAsUser(account, authority, userId)
+                && ContentResolver.getMasterSyncAutomaticallyAsUser(userId)
+                && (ContentResolver.getIsSyncableAsUser(account, authority, userId) > 0);
+    }
+
     @Override
-    public void onAccountsUpdated(Account[] accounts) {
+    public void onAccountsUpdate(UserHandle userHandle) {
+        showAccountsIfNeeded();
+        onSyncStateUpdated();
+    }
+
+    private void showAccountsIfNeeded() {
         if (getActivity() == null) return;
+        Account[] accounts = AccountManager.get(getActivity()).getAccountsAsUser(
+                mUserHandle.getIdentifier());
         getPreferenceScreen().removeAll();
         mFirstAccount = null;
         addPreferencesFromResource(R.xml.manage_accounts_settings);
@@ -341,7 +377,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
             settingsTop.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getActivity().startActivity(settingsTop);
         }
-        onSyncStateUpdated();
     }
 
     private void addAuthenticatorSettings() {
@@ -415,13 +450,22 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                             LocationSettings.class.getName(),
                             R.string.location_settings_title));
                 } else {
-                    ResolveInfo ri = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                    ResolveInfo ri = pm.resolveActivityAsUser(intent,
+                            PackageManager.MATCH_DEFAULT_ONLY, mUserHandle.getIdentifier());
                     if (ri == null) {
                         prefs.removePreference(pref);
                         continue;
                     } else {
                         intent.putExtra(ACCOUNT_KEY, mFirstAccount);
                         intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                            @Override
+                            public boolean onPreferenceClick(Preference preference) {
+                                getActivity().startActivityAsUser(preference.getIntent(),
+                                        mUserHandle);
+                                return true;
+                            }
+                        });
                     }
                 }
             }

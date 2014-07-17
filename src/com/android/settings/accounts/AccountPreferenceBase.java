@@ -138,7 +138,8 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     public ArrayList<String> getAuthoritiesForAccountType(String type) {
         if (mAccountTypeToAuthorities == null) {
             mAccountTypeToAuthorities = Maps.newHashMap();
-            SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypes();
+            SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
+                    mUserHandle.getIdentifier());
             for (int i = 0, n = syncAdapters.length; i < n; i++) {
                 final SyncAdapterType sa = syncAdapters[i];
                 ArrayList<String> authorities = mAccountTypeToAuthorities.get(sa.accountType);
