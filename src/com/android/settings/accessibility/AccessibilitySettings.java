@@ -510,7 +510,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mToggleLargeTextPreference.setChecked(mCurConfig.fontScale == LARGE_FONT_SCALE);
 
         mToggleHighTextContrastPreference.setChecked(
-                AccessibilityManager.getInstance(getActivity()).isHighTextContrastEnabled());
+                Settings.Secure.getInt(getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
 
         // Power button ends calls.
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
