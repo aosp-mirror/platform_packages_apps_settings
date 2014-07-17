@@ -141,6 +141,8 @@
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+
+        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
     </style>
 
     <style name="Theme.CryptKeeper" parent="@android:style/Theme.Material.Light.NoActionBar">
@@ -153,6 +155,8 @@
     <style name="Theme.SubSettingsDialogWhenLarge" parent="Theme.DialogWhenLarge">
         <item name="android:actionBarWidgetTheme">@null</item>
         <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
+
+        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
@@ -172,6 +176,8 @@
     <style name="Theme.NotificationStation" parent="@android:style/Theme.Material">
         <item name="switchBarMarginStart">0dip</item>
         <item name="switchBarMarginEnd">0dip</item>
+
         <item name="dashboardBackgroundColor">@android:color/transparent</item>
     </style>
+
 </resources>
