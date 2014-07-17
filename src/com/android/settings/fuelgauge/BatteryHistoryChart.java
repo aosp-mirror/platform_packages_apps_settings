@@ -154,6 +154,7 @@ public class BatteryHistoryChart extends View {
     BatteryStats mStats;
     Intent mBatteryBroadcast;
     long mStatsPeriod;
+    int mBatteryLevel;
     String mMaxPercentLabelString;
     String mMinPercentLabelString;
     String mDurationString;
@@ -493,7 +494,7 @@ public class BatteryHistoryChart extends View {
         mMinPercentLabelString = getContext().getResources().getString(
                 R.string.percentage, 0);
 
-        int batteryLevel = com.android.settings.Utils.getBatteryLevel(mBatteryBroadcast);
+        mBatteryLevel = com.android.settings.Utils.getBatteryLevel(mBatteryBroadcast);
         long remainingTimeUs = 0;
         mDischarging = true;
         if (mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) {
@@ -503,10 +504,10 @@ public class BatteryHistoryChart extends View {
                 String timeString = Formatter.formatShortElapsedTime(getContext(),
                         drainTime / 1000);
                 mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_discharging_duration, batteryLevel, timeString);
+                        R.string.power_discharging_duration, mBatteryLevel, timeString);
             } else {
                 mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_discharging, batteryLevel);
+                        R.string.power_discharging, mBatteryLevel);
             }
         } else {
             final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);
@@ -531,10 +532,10 @@ public class BatteryHistoryChart extends View {
                     resId = R.string.power_charging_duration;
                 }
                 mChargeLabelString = getContext().getResources().getString(
-                        resId, batteryLevel, timeString);
+                        resId, mBatteryLevel, timeString);
             } else {
                 mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_charging, batteryLevel, statusLabel);
+                        R.string.power_charging, mBatteryLevel, statusLabel);
             }
         }
         mDrainString = "";
@@ -772,13 +773,10 @@ public class BatteryHistoryChart extends View {
         mDateLabels.clear();
 
         final long walltimeStart = mStartWallTime;
-        final long walltimeChange = mEndWallTime-walltimeStart;
+        final long walltimeChange = mEndWallTime > walltimeStart
+                ? (mEndWallTime-walltimeStart) : 1;
         long curWalltime = 0;
         long lastRealtime = 0;
-
-        if (walltimeChange == 0) {
-            return;
-        }
 
         final int batLow = mBatLow;
         final int batChange = mBatHigh-mBatLow;
@@ -967,8 +965,26 @@ public class BatteryHistoryChart extends View {
             }
         }
 
-        // Figure out where the actual data ends on the screen.
-        x = mLevelLeft + (int)(((mEndDataWallTime-walltimeStart)*levelWidth)/walltimeChange);
+        if (lastY < 0 || lastX < 0) {
+            // Didn't get any data...
+            x = lastX = mLevelLeft;
+            y = lastY = mLevelTop + levelh - ((mBatteryLevel-batLow)*(levelh-1))/batChange;
+            Path path;
+            byte value = (byte)mBatteryLevel;
+            if (value <= mBatteryCriticalLevel) path = mBatCriticalPath;
+            else if (value <= mBatteryWarnLevel) path = mBatWarnPath;
+            else path = null; //mBatGoodPath;
+            if (path != null) {
+                path.moveTo(x, y);
+                lastLinePath = path;
+            }
+            mBatLevelPath.moveTo(x, y);
+            curLevelPath = mBatLevelPath;
+            x = w;
+        } else {
+            // Figure out where the actual data ends on the screen.
+            x = mLevelLeft + (int)(((mEndDataWallTime-walltimeStart)*levelWidth)/walltimeChange);
+        }
 
         finishPaths(x, h, levelh, startX, lastY, curLevelPath, lastX,
                 lastCharging, lastScreenOn, lastGpsOn, lastWifiRunning,
