@@ -83,8 +83,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 throw new RuntimeException("Arguments to this fragment must contain the user id");
             }
             mUserInfo = mUserManager.getUserInfo(userId);
-            mPhonePref.setChecked(!mUserManager.hasUserRestriction(UserManager.DISALLOW_TELEPHONY,
-                    new UserHandle(userId)));
+            mPhonePref.setChecked(!mUserManager.hasUserRestriction(
+                    UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
             mRemoveUserPref.setOnPreferenceClickListener(this);
         } else {
             // These are not for an existing user, just general Guest settings.
@@ -93,7 +93,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mPhonePref.setTitle(R.string.user_enable_calling);
             mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
             mPhonePref.setChecked(
-                    !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_TELEPHONY));
+                    !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
         }
         mPhonePref.setOnPreferenceChangeListener(this);
     }
@@ -114,13 +114,18 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (mGuestUser) {
             // TODO: Show confirmation dialog: b/15761405
-            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_TELEPHONY,
+            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS,
                     !((Boolean) newValue));
+            // SMS is always disabled for guest
+            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
             mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
         } else {
             // TODO: Show confirmation dialog: b/15761405
-            mUserManager.setUserRestriction(UserManager.DISALLOW_TELEPHONY, !((Boolean) newValue),
-                    new UserHandle(mUserInfo.id));
+            UserHandle userHandle = new UserHandle(mUserInfo.id);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
+                    !((Boolean) newValue), userHandle);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS,
+                    !((Boolean) newValue), userHandle);
         }
         return true;
     }
