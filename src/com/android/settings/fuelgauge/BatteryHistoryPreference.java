@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.preference.Preference;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class BatteryHistoryPreference extends Preference {
 
     private boolean mHideLabels;
     private View mLabelHeader;
+    private BatteryHistoryChart mChart;
 
     public BatteryHistoryPreference(Context context, BatteryStats stats, Intent batteryBroadcast) {
         super(context);
@@ -66,7 +68,21 @@ public class BatteryHistoryPreference extends Preference {
 
         BatteryHistoryChart chart = (BatteryHistoryChart)view.findViewById(
                 R.id.battery_history_chart);
-        chart.setStats(mStats, mBatteryBroadcast);
+        if (mChart == null) {
+            // First time: use and initialize this chart.
+            chart.setStats(mStats, mBatteryBroadcast);
+            mChart = chart;
+        } else {
+            // All future times: forget the newly inflated chart, re-use the
+            // already initialized chart from last time.
+            ViewGroup parent = (ViewGroup)chart.getParent();
+            int index = parent.indexOfChild(chart);
+            parent.removeViewAt(index);
+            if (mChart.getParent() != null) {
+                ((ViewGroup)mChart.getParent()).removeView(mChart);
+            }
+            parent.addView(mChart, index);
+        }
         mLabelHeader = view.findViewById(R.id.labelsHeader);
         mLabelHeader.setVisibility(mHideLabels ? View.GONE : View.VISIBLE);
     }
