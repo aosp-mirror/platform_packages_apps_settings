@@ -1,4 +1,5 @@
 /*
+
  * Copyright (C) 2008 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,7 @@ import com.google.android.collect.Maps;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
+import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncAdapterType;
@@ -68,9 +70,10 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-        mUserHandle = Utils.getProfileToDisplay(ActivityManagerNative.getDefault(),
-                getActivity().getActivityToken(), icicle);
-        mAuthenticatorHelper = new AuthenticatorHelper(getActivity(), mUserHandle, mUm, this);
+        final Activity activity = getActivity();
+        mUserHandle = Utils.getSecureTargetUser(activity.getActivityToken(), mUm, getArguments(),
+                activity.getIntent().getExtras());
+        mAuthenticatorHelper = new AuthenticatorHelper(activity, mUserHandle, mUm, this);
     }
 
     /**
@@ -172,8 +175,8 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
                     // correct text colors. Control colors will still be wrong,
                     // but there's not much we can do about it since we can't
                     // reference local color resources.
-                    final Context targetCtx = getActivity().createPackageContext(
-                            desc.packageName, 0);
+                    final Context targetCtx = getActivity().createPackageContextAsUser(
+                            desc.packageName, 0, mUserHandle);
                     final Theme baseTheme = getResources().newTheme();
                     baseTheme.applyStyle(com.android.settings.R.style.Theme_SettingsBase, true);
                     final Context themedCtx = new ContextThemeWrapper(targetCtx, 0);

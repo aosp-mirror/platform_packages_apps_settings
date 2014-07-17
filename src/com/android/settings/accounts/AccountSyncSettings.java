@@ -90,6 +90,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // TODO: We need an API to remove an account from a different user.
+                        // See: http://b/15466880
                         AccountManager.get(AccountSyncSettings.this.getActivity())
                                 .removeAccount(mAccount,
                                 new AccountManagerCallback<Boolean>() {
