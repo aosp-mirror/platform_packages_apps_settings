@@ -54,8 +54,9 @@ public class MessageAccessSettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserHandle = Utils.getProfileToDisplay(ActivityManagerNative.getDefault(),
-                getActivity().getActivityToken(), savedInstanceState);
+
+        // TODO: Define behavior for managed profile. See: http://b/16287773
+        mUserHandle = new UserHandle(UserHandle.myUserId());
 
         addPreferencesFromResource(R.xml.bluetooth_message_access);
     }
