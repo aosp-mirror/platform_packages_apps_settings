@@ -476,7 +476,7 @@ public class SettingsActivity extends Activity
         mIsShortcut = isShortCutIntent(intent) || isLikeShortCutIntent(intent) ||
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, false);
 
-        final ComponentName cn = getIntent().getComponent();
+        final ComponentName cn = intent.getComponent();
         final String className = cn.getClassName();
 
         mIsShowingDashboard = className.equals(Settings.class.getName());
