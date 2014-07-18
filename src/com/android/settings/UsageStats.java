@@ -16,23 +16,24 @@
 
 package com.android.settings;
 
-import com.android.internal.app.IUsageStats;
-import com.android.settings.R;
 import android.app.Activity;
+import android.app.usage.PackageUsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
+
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import android.text.format.DateUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,116 +49,109 @@ import android.widget.AdapterView.OnItemSelectedListener;
  * Activity to display package usage statistics.
  */
 public class UsageStats extends Activity implements OnItemSelectedListener {
-    private static final String TAG="UsageStatsActivity";
+    private static final String TAG = "UsageStatsActivity";
     private static final boolean localLOGV = false;
-    private Spinner mTypeSpinner;
-    private ListView mListView;
-    private IUsageStats mUsageStatsService;
+    private UsageStatsManager mUsageStatsManager;
     private LayoutInflater mInflater;
     private UsageStatsAdapter mAdapter;
     private PackageManager mPm;
     
-    public static class AppNameComparator
-            implements Comparator<android.app.UsageStats.PackageStats> {
-        Map<String, CharSequence> mAppLabelList;
-        AppNameComparator(Map<String, CharSequence> appList) {
+    public static class AppNameComparator implements Comparator<PackageUsageStats> {
+        private Map<String, String> mAppLabelList;
+
+        AppNameComparator(Map<String, String> appList) {
             mAppLabelList = appList;
         }
-        public final int compare(android.app.UsageStats.PackageStats a,
-                android.app.UsageStats.PackageStats b) {
-            String alabel = mAppLabelList.get(a.getPackageName()).toString();
-            String blabel = mAppLabelList.get(b.getPackageName()).toString();
+
+        @Override
+        public final int compare(PackageUsageStats a, PackageUsageStats b) {
+            String alabel = mAppLabelList.get(a.getPackageName());
+            String blabel = mAppLabelList.get(b.getPackageName());
             return alabel.compareTo(blabel);
         }
     }
-    
-    public static class LaunchCountComparator
-            implements Comparator<android.app.UsageStats.PackageStats> {
-        public final int compare(android.app.UsageStats.PackageStats a,
-                android.app.UsageStats.PackageStats b) {
+
+    public static class LastTimeUsedComparator implements Comparator<PackageUsageStats> {
+        @Override
+        public final int compare(PackageUsageStats a, PackageUsageStats b) {
             // return by descending order
-            return b.getLaunchCount() - a.getLaunchCount();
+            return (int)(b.getLastTimeUsed() - a.getLastTimeUsed());
         }
     }
     
-    public static class UsageTimeComparator
-            implements Comparator<android.app.UsageStats.PackageStats> {
-        public final int compare(android.app.UsageStats.PackageStats a,
-                android.app.UsageStats.PackageStats b) {
-            long ret = a.getUsageTime(0)-b.getUsageTime(0);
-            if (ret == 0) {
-                return 0;
-            }
-            if (ret < 0) {
-                return 1;
-            }
-            return -1;
+    public static class UsageTimeComparator implements Comparator<PackageUsageStats> {
+        @Override
+        public final int compare(PackageUsageStats a, PackageUsageStats b) {
+            return (int)(b.getTotalTimeSpent() - a.getTotalTimeSpent());
         }
     }
     
-     // View Holder used when displaying views
+    // View Holder used when displaying views
     static class AppViewHolder {
         TextView pkgName;
-        TextView launchCount;
+        TextView lastTimeUsed;
         TextView usageTime;
     }
     
     class UsageStatsAdapter extends BaseAdapter {
          // Constants defining order for display order
         private static final int _DISPLAY_ORDER_USAGE_TIME = 0;
-        private static final int _DISPLAY_ORDER_LAUNCH_COUNT = 1;
+        private static final int _DISPLAY_ORDER_LAST_TIME_USED = 1;
         private static final int _DISPLAY_ORDER_APP_NAME = 2;
         
         private int mDisplayOrder = _DISPLAY_ORDER_USAGE_TIME;
-        private List<android.app.UsageStats.PackageStats> mUsageStats;
-        private LaunchCountComparator mLaunchCountComparator;
-        private UsageTimeComparator mUsageTimeComparator;
+        private LastTimeUsedComparator mLastTimeUsedComparator = new LastTimeUsedComparator();
+        private UsageTimeComparator mUsageTimeComparator = new UsageTimeComparator();
         private AppNameComparator mAppLabelComparator;
-        private HashMap<String, CharSequence> mAppLabelMap;
-        
+        private final ArrayMap<String, String> mAppLabelMap = new ArrayMap<>();
+        private final ArrayList<PackageUsageStats> mPackageStats = new ArrayList<>();
+
         UsageStatsAdapter() {
-            mUsageStats = new ArrayList<android.app.UsageStats.PackageStats>();
-            mAppLabelMap = new HashMap<String, CharSequence>();
-            android.app.UsageStats.PackageStats[] stats;
-            try {
-                stats = mUsageStatsService.getAllPkgUsageStats(getPackageName());
-            } catch (RemoteException e) {
-                Log.e(TAG, "Failed initializing usage stats service");
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_YEAR, -5);
+
+            final android.app.usage.UsageStats stats =
+                    mUsageStatsManager.getRecentStatsSince(cal.getTimeInMillis());
+            if (stats == null) {
                 return;
             }
-           if (stats == null) {
-               return;
-           }
-           for (android.app.UsageStats.PackageStats ps : stats) {
-               mUsageStats.add(ps);
-               // load application labels for each application
-               CharSequence label;
-               try {
-                   ApplicationInfo appInfo = mPm.getApplicationInfo(ps.getPackageName(), 0);
-                   label = appInfo.loadLabel(mPm);
+
+            final int pkgCount = stats.getPackageCount();
+            for (int i = 0; i < pkgCount; i++) {
+                final PackageUsageStats pkgStats = stats.getPackage(i);
+
+                // load application labels for each application
+                try {
+                    ApplicationInfo appInfo = mPm.getApplicationInfo(pkgStats.getPackageName(), 0);
+                    String label = appInfo.loadLabel(mPm).toString();
+                    mAppLabelMap.put(pkgStats.getPackageName(), label);
+                    mPackageStats.add(pkgStats);
                 } catch (NameNotFoundException e) {
-                    label = ps.getPackageName();
+                    // This package may be gone.
                 }
-                mAppLabelMap.put(ps.getPackageName(), label);
            }
+
            // Sort list
-           mLaunchCountComparator = new LaunchCountComparator();
-           mUsageTimeComparator = new UsageTimeComparator();
            mAppLabelComparator = new AppNameComparator(mAppLabelMap);
            sortList();
         }
+
+        @Override
         public int getCount() {
-            return mUsageStats.size();
+            return mPackageStats.size();
         }
 
+        @Override
         public Object getItem(int position) {
-            return mUsageStats.get(position);
+            return mPackageStats.get(position);
         }
 
+        @Override
         public long getItemId(int position) {
             return position;
         }
 
+        @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // A ViewHolder keeps references to children views to avoid unneccessary calls
             // to findViewById() on each row.
@@ -173,7 +167,7 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
                 // we want to bind data to.
                 holder = new AppViewHolder();
                 holder.pkgName = (TextView) convertView.findViewById(R.id.package_name);
-                holder.launchCount = (TextView) convertView.findViewById(R.id.launch_count);
+                holder.lastTimeUsed = (TextView) convertView.findViewById(R.id.last_time_used);
                 holder.usageTime = (TextView) convertView.findViewById(R.id.usage_time);
                 convertView.setTag(holder);
             } else {
@@ -183,12 +177,14 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
             }
 
             // Bind the data efficiently with the holder
-            android.app.UsageStats.PackageStats pkgStats = mUsageStats.get(position);
+            PackageUsageStats pkgStats = mPackageStats.get(position);
             if (pkgStats != null) {
-                CharSequence label = mAppLabelMap.get(pkgStats.getPackageName());
+                String label = mAppLabelMap.get(pkgStats.getPackageName());
                 holder.pkgName.setText(label);
-                holder.launchCount.setText(String.valueOf(pkgStats.getLaunchCount()));
-                holder.usageTime.setText(String.valueOf(pkgStats.getUsageTime(0))+" ms");
+                holder.lastTimeUsed.setText(DateUtils.formatSameDayTime(pkgStats.getLastTimeUsed(),
+                        System.currentTimeMillis(), DateFormat.MEDIUM, DateFormat.MEDIUM));
+                holder.usageTime.setText(
+                        DateUtils.formatElapsedTime(pkgStats.getTotalTimeSpent() / 1000));
             } else {
                 Log.w(TAG, "No usage stats info for package:" + position);
             }
@@ -206,45 +202,42 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
         private void sortList() {
             if (mDisplayOrder == _DISPLAY_ORDER_USAGE_TIME) {
                 if (localLOGV) Log.i(TAG, "Sorting by usage time");
-                Collections.sort(mUsageStats, mUsageTimeComparator);
-            } else if (mDisplayOrder == _DISPLAY_ORDER_LAUNCH_COUNT) {
-                if (localLOGV) Log.i(TAG, "Sorting launch count");
-                Collections.sort(mUsageStats, mLaunchCountComparator);
+                Collections.sort(mPackageStats, mUsageTimeComparator);
+            } else if (mDisplayOrder == _DISPLAY_ORDER_LAST_TIME_USED) {
+                if (localLOGV) Log.i(TAG, "Sorting by last time used");
+                Collections.sort(mPackageStats, mLastTimeUsedComparator);
             } else if (mDisplayOrder == _DISPLAY_ORDER_APP_NAME) {
                 if (localLOGV) Log.i(TAG, "Sorting by application name");
-                Collections.sort(mUsageStats, mAppLabelComparator);
+                Collections.sort(mPackageStats, mAppLabelComparator);
             }
             notifyDataSetChanged();
         }
     }
 
     /** Called when the activity is first created. */
+    @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mUsageStatsService = IUsageStats.Stub.asInterface(ServiceManager.getService("usagestats"));
-        if (mUsageStatsService == null) {
-            Log.e(TAG, "Failed to retrieve usagestats service");
-            return;
-        }
+        setContentView(R.layout.usage_stats);
+
+        mUsageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mPm = getPackageManager();
+
+        Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
+        typeSpinner.setOnItemSelectedListener(this);
         
-        setContentView(R.layout.usage_stats);
-        mTypeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-        mTypeSpinner.setOnItemSelectedListener(this);
-        
-        mListView = (ListView) findViewById(R.id.pkg_list);
-        // Initialize the inflater
-        
+        ListView listView = (ListView) findViewById(R.id.pkg_list);
         mAdapter = new UsageStatsAdapter();
-        mListView.setAdapter(mAdapter);
+        listView.setAdapter(mAdapter);
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int position,
-            long id) {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mAdapter.sortList(position);
     }
 
+    @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // do nothing
     }
