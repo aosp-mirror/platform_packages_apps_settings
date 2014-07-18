@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import android.content.Context;
+import android.service.persistentdata.PersistentDataBlockManager;
 import com.android.internal.os.storage.ExternalStorageFormatter;
 import com.android.internal.widget.LockPatternUtils;
 
@@ -57,6 +59,13 @@ public class MasterClearConfirm extends Fragment {
         public void onClick(View v) {
             if (Utils.isMonkeyRunning()) {
                 return;
+            }
+
+            PersistentDataBlockManager pdbManager = (PersistentDataBlockManager)
+                    getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+
+            if (pdbManager != null) {
+                pdbManager.wipe();
             }
 
             if (mEraseSdCard) {
