@@ -16,17 +16,10 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.TypedArray;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,39 +44,8 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
 
     private static final String TAG = "WifiSettingsForSetupWizard";
 
-    /* Used in Wifi Setup context */
-
-    // this boolean extra specifies whether to auto finish when connection is established
-    private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
-
     // show a text regarding data charges when wifi connection is required during setup wizard
     protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
-
-    // should activity finish once we have a connection?
-    private boolean mAutoFinishOnConnection;
-
-    private final IntentFilter mFilter;
-    private final BroadcastReceiver mReceiver;
-
-    public WifiSettingsForSetupWizard() {
-        super();
-
-        mFilter = new IntentFilter();
-        mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-
-        mReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
-                        WifiManager.EXTRA_NETWORK_INFO);
-                if (mAutoFinishOnConnection && info.isConnected()) {
-                    Log.d(TAG, "mReceiver.onReceive context=" + context + " intent=" + intent);
-                    WifiSetupActivity activity = (WifiSetupActivity) getActivity();
-                    activity.finishOrNext(Activity.RESULT_OK);
-                }
-            }
-        };
-    }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -127,46 +89,9 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
                 View.STATUS_BAR_DISABLE_CLOCK);
 
-        final WifiSetupActivity activity = (WifiSetupActivity) getActivity();
-        final Intent intent = activity.getIntent();
-
-        // first if we're supposed to finish once we have a connection
-        mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
-
-        if (mAutoFinishOnConnection) {
-            // Hide the next button
-            if (hasNextButton()) {
-                getNextButton().setVisibility(View.GONE);
-            }
-
-            /*
-             * When entering with a savedInstanceState, we may be returning from a later activity in
-             * the setup flow. It's not clear yet if there are other possible circumstances. It's
-             * not appropriate to refire our activity results, so we skip that here.
-             */
-            if (savedInstanceState == null) {
-                final ConnectivityManager connectivity = (ConnectivityManager)
-                        activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (connectivity != null &&
-                        connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
-                    Log.d(TAG, "onActivityCreated Auto-finishing");
-                    activity.finishOrNext(Activity.RESULT_OK);
-                    return;
-                }
-            }
+        if (hasNextButton()) {
+            getNextButton().setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().registerReceiver(mReceiver, mFilter);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -193,5 +118,19 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
                 .setEnabled(wifiIsEnabled)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         ta.recycle();
+    }
+
+    @Override
+    protected void connect(final WifiConfiguration config) {
+        WifiSetupActivity activity = (WifiSetupActivity) getActivity();
+        activity.networkSelected();
+        super.connect(config);
+    }
+
+    @Override
+    protected void connect(final int networkId) {
+        WifiSetupActivity activity = (WifiSetupActivity) getActivity();
+        activity.networkSelected();
+        super.connect(networkId);
     }
 }

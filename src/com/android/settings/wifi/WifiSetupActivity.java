@@ -19,15 +19,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -45,6 +45,13 @@ public class WifiSetupActivity extends WifiPickerActivity
     private static final String EXTRA_ALLOW_SKIP = "allowSkip";
     private static final String EXTRA_USE_IMMERSIVE_MODE = "useImmersiveMode";
 
+    // this boolean extra specifies whether to auto finish when connection is established
+    private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
+
+    // Whether auto finish is suspended until user connects to an access point
+    private static final String EXTRA_REQUIRE_USER_NETWORK_SELECTION =
+            "wifi_require_user_network_selection";
+
     // Extra containing the resource name of the theme to be used
     private static final String EXTRA_THEME = "theme";
     private static final String THEME_HOLO = "holo";
@@ -61,6 +68,85 @@ public class WifiSetupActivity extends WifiPickerActivity
     private static final String EXTRA_ACTION_ID = "actionId";
     private static final String EXTRA_RESULT_CODE = "com.android.setupwizard.ResultCode";
     private static final int NEXT_REQUEST = 10000;
+
+    // Whether we allow skipping without a valid network connection
+    private boolean mAllowSkip = true;
+    // Whether to auto finish when the user selected a network and successfully connected
+    private boolean mAutoFinishOnConnection;
+    // Whether the user connected to a network. This excludes the auto-connecting by the system.
+    private boolean mUserSelectedNetwork;
+    // Whether the device is connected to WiFi
+    private boolean mWifiConnected;
+
+    private SetupWizardNavBar mNavigationBar;
+
+    private final IntentFilter mFilter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
+                    WifiManager.EXTRA_NETWORK_INFO);
+            refreshConnectionState(info.isConnected());
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        final Intent intent = getIntent();
+
+        mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
+        mAllowSkip = intent.getBooleanExtra(EXTRA_ALLOW_SKIP, true);
+        // Behave like the user already selected a network if we do not require selection
+        mUserSelectedNetwork = !intent.getBooleanExtra(EXTRA_REQUIRE_USER_NETWORK_SELECTION, false);
+
+        refreshConnectionState();
+    }
+
+    private void refreshConnectionState() {
+        final ConnectivityManager connectivity = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        boolean connected = connectivity != null &&
+                connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+        refreshConnectionState(connected);
+    }
+
+    private void refreshConnectionState(boolean connected) {
+        mWifiConnected = connected;
+        if (connected) {
+            if (mAutoFinishOnConnection && mUserSelectedNetwork) {
+                Log.d(TAG, "Auto-finishing with connection");
+                finishOrNext(Activity.RESULT_OK);
+            }
+            if (mNavigationBar != null) {
+                mNavigationBar.getNextButton().setText(R.string.setup_wizard_next_button_label);
+                mNavigationBar.getNextButton().setEnabled(true);
+            }
+        } else {
+            if (mNavigationBar != null) {
+                mNavigationBar.getNextButton().setText(R.string.skip_label);
+                mNavigationBar.getNextButton().setEnabled(mAllowSkip);
+            }
+        }
+    }
+
+    /* package */ void networkSelected() {
+        Log.d(TAG, "Network selected by user");
+        mUserSelectedNetwork = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(mReceiver, mFilter);
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(mReceiver);
+        super.onPause();
+    }
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
@@ -86,22 +172,12 @@ public class WifiSetupActivity extends WifiPickerActivity
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_CANCELED) {
-            // Before returning to the settings panel, forget any current access point so it will
-            // not attempt to automatically reconnect and advance
-            // FIXME: when coming back, it would be better to keep the current connection and
-            // override the auto-advance feature
-            final WifiManager wifiManager = (WifiManager)(getSystemService(Context.WIFI_SERVICE));
-            if (wifiManager != null) {
-                final WifiInfo info = wifiManager.getConnectionInfo();
-                if (info != null) {
-                    int netId = info.getNetworkId();
-                    if (netId != WifiConfiguration.INVALID_NETWORK_ID) {
-                        wifiManager.forget(netId, null);
-                    }
-                }
-            }
+            Log.d(TAG, "Back into WifiSetupActivity. Requiring user selection.");
+            // Require a user selection before we auto advance again. Or the user can press the
+            // next button if there is a valid WiFi connection.
+            mUserSelectedNetwork = false;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -142,6 +218,7 @@ public class WifiSetupActivity extends WifiPickerActivity
 
     @Override
     public void onNavigationBarCreated(final SetupWizardNavBar bar) {
+        mNavigationBar = bar;
         final boolean useImmersiveMode =
                 getIntent().getBooleanExtra(EXTRA_USE_IMMERSIVE_MODE, false);
         bar.setUseImmersiveMode(useImmersiveMode);
@@ -149,11 +226,7 @@ public class WifiSetupActivity extends WifiPickerActivity
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        bar.getNextButton().setText(R.string.skip_label);
-
-        if (!getIntent().getBooleanExtra(EXTRA_ALLOW_SKIP, true)) {
-            bar.getNextButton().setEnabled(false);
-        }
+        refreshConnectionState();
     }
 
     @Override
@@ -163,22 +236,29 @@ public class WifiSetupActivity extends WifiPickerActivity
 
     @Override
     public void onNavigateNext() {
-        boolean isConnected = false;
+        if (mWifiConnected) {
+            finishOrNext(RESULT_OK);
+        } else {
+            // Warn of possible data charges if there is a network connection, or lack of updates
+            // if there is none.
+            final int message = isNetworkConnected() ? R.string.wifi_skipped_message :
+                    R.string.wifi_and_mobile_skipped_message;
+            WifiSkipDialog.newInstance(message).show(getFragmentManager(), "dialog");
+        }
+    }
+
+    /**
+     * @return True if there is a valid network connection, whether it is via WiFi, mobile data or
+     *         other means.
+     */
+    private boolean isNetworkConnected() {
         final ConnectivityManager connectivity = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            final NetworkInfo info = connectivity.getActiveNetworkInfo();
-            isConnected = (info != null) && info.isConnected();
+        if (connectivity == null) {
+            return false;
         }
-        if (isConnected) {
-            // Warn of possible data charges
-            WifiSkipDialog.newInstance(R.string.wifi_skipped_message)
-                    .show(getFragmentManager(), "dialog");
-        } else {
-            // Warn of lack of updates
-            WifiSkipDialog.newInstance(R.string.wifi_and_mobile_skipped_message)
-                    .show(getFragmentManager(), "dialog");
-        }
+        final NetworkInfo info = connectivity.getActiveNetworkInfo();
+        return info != null && info.isConnected();
     }
 
     public static class WifiSkipDialog extends DialogFragment {
