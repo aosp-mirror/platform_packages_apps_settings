@@ -312,7 +312,9 @@ public class PowerUsageSummary extends PreferenceFragment {
                             (PowerGaugePreference) findPreference(
                                     Integer.toString(entry.sipper.uidObj.getUid()));
                     if (pgp != null) {
-                        pgp.setIcon(entry.icon);
+                        final int userId = UserHandle.getUserId(entry.sipper.getUid());
+                        final UserHandle userHandle = new UserHandle(userId);
+                        pgp.setIcon(mUm.getBadgedDrawableForUser(entry.getIcon(), userHandle));
                         pgp.setTitle(entry.name);
                     }
                     break;
