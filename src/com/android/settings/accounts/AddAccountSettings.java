@@ -98,7 +98,7 @@ public class AddAccountSettings extends Activity {
                             Utils.hasMultipleUsers(AddAccountSettings.this));
                     addAccountOptions.putParcelable(EXTRA_USER, mUserHandle);
                     intent.putExtras(addAccountOptions);
-                    startActivityForResult(intent, ADD_ACCOUNT_REQUEST);
+                    startActivityForResultAsUser(intent, ADD_ACCOUNT_REQUEST, mUserHandle);
                 } else {
                     setResult(RESULT_OK);
                     if (mPendingIntent != null) {
@@ -199,22 +199,15 @@ public class AddAccountSettings extends Activity {
         mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(), 0);
         addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
         addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS, Utils.hasMultipleUsers(this));
-        // TODO: We need an API to add an account to a different user. See: http://b/15466880
-        int userId = mUserHandle.getIdentifier();
-        int callingUserId = UserHandle.getCallingUserId();
-        if (userId != callingUserId) {
-            Log.w(TAG, "Cannot add an account for user " + userId + " from " + callingUserId + ".");
-            finish();
-            return;
-        }
-        AccountManager.get(this).addAccount(
+        AccountManager.get(this).addAccountAsUser(
                 accountType,
                 null, /* authTokenType */
                 null, /* requiredFeatures */
                 addAccountOptions,
                 null,
                 mCallback,
-                null /* handler */);
+                null /* handler */,
+                mUserHandle);
         mAddAccountCalled  = true;
     }
 }
