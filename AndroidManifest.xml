@@ -1839,25 +1839,30 @@
                 android:resource="@id/notification_settings" />
         </activity>
 
-        <activity android:name="Settings$AppNotificationSettingsActivity"
+        <!-- Show apps for which application-level notification settings are applicable -->
+        <activity android:name="Settings$NotificationAppListActivity"
                 android:label="@string/app_notifications_title"
                 android:exported="true"
                 android:taskAffinity="">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.AppNotificationSettings" />
+                android:value="com.android.settings.notification.NotificationAppList" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/notification_settings" />
         </activity>
 
-        <activity android:name=".notification.AppNotificationDialog"
-                android:theme="@style/Theme.AlertDialog"
-                android:launchMode="singleTop"
+        <!-- Show application-level notification settings (app passed in as extras) -->
+        <activity android:name="Settings$AppNotificationSettingsActivity"
+                android:label="@string/app_notifications_title"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APP_NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.notification.AppNotificationSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/notification_settings" />
         </activity>
 
         <!-- Show regulatory info (from settings item or dialing "*#07#") -->
