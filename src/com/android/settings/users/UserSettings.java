@@ -37,6 +37,7 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -93,6 +94,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_USER_CANNOT_MANAGE = 5;
     private static final int DIALOG_CHOOSE_USER_TYPE = 6;
     private static final int DIALOG_NEED_LOCKSCREEN = 7;
+    private static final int DIALOG_CONFIRM_EXIT_GUEST = 8;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_SETUP_USER = 2;
@@ -107,15 +109,17 @@ public class UserSettings extends SettingsPreferenceFragment
             "key_add_user_long_message_displayed";
 
     static final int[] USER_DRAWABLES = {
-        R.drawable.avatar_default_1,
-        R.drawable.avatar_default_2,
-        R.drawable.avatar_default_3,
-        R.drawable.avatar_default_4,
-        R.drawable.avatar_default_5,
-        R.drawable.avatar_default_6,
-        R.drawable.avatar_default_7,
-        R.drawable.avatar_default_8
+        R.drawable.ic_avatar_default_1,
+        R.drawable.ic_avatar_default_2,
+        R.drawable.ic_avatar_default_3,
+        R.drawable.ic_avatar_default_4,
+        R.drawable.ic_avatar_default_5,
+        R.drawable.ic_avatar_default_6,
+        R.drawable.ic_avatar_default_7,
+        R.drawable.ic_avatar_default_8
     };
+
+    private static final int GUEST_DRAWABLE_ID = R.drawable.ic_avatar_guest;
 
     private static final String KEY_TITLE = "title";
     private static final String KEY_SUMMARY = "summary";
@@ -136,6 +140,11 @@ public class UserSettings extends SettingsPreferenceFragment
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
     private boolean mIsGuest;
+
+    // A place to cache the generated guest avatar
+    private Drawable mGuestDrawable;
+    // A place to cache the generated default avatar
+    private Drawable mDefaultAvatarDrawable;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -195,8 +204,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
-        mMePreference = new UserPreference(context, null, myUserId,
-                mUserManager.isLinkedUser() ? null : this, null);
+        mMePreference = new UserPreference(context, null /* attrs */, myUserId,
+                mUserManager.isLinkedUser() || mIsGuest ? null : this /* settings icon handler */,
+                null /* delete icon handler */);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
         if (mIsOwner) {
@@ -275,8 +285,18 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    /**
+     * Loads profile information for the current user.
+     */
     private void loadProfile() {
         mProfileExists = false;
+        if (mIsGuest) {
+            // No need to load profile information
+            mMePreference.setIcon(getEncircledGuestDrawable());
+            mMePreference.setTitle(R.string.user_exit_guest_title);
+            return;
+        }
+
         new AsyncTask<Void, Void, String>() {
             @Override
             protected void onPostExecute(String result) {
@@ -370,9 +390,8 @@ public class UserSettings extends SettingsPreferenceFragment
         mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, user);
         Secure.putIntForUser(getContentResolver(),
                 Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, userId);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                UserSettings.USER_DRAWABLES[
-                        userId % UserSettings.USER_DRAWABLES.length]);
+        Bitmap bitmap = createBitmapFromDrawable(
+                USER_DRAWABLES[userId % UserSettings.USER_DRAWABLES.length]);
         mUserManager.setUserIcon(userId, bitmap);
         // Add shared accounts
         AccountManager am = AccountManager.get(getActivity());
@@ -383,6 +402,15 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
         return newUserInfo;
+    }
+
+    private Bitmap createBitmapFromDrawable(int resId) {
+        Drawable icon = getResources().getDrawable(resId);
+        icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(icon.getIntrinsicWidth(), icon.getIntrinsicHeight(),
+                Bitmap.Config.ARGB_8888);
+        icon.draw(new Canvas(bitmap));
+        return bitmap;
     }
 
     private UserInfo createTrustedUser() {
@@ -567,6 +595,21 @@ public class UserSettings extends SettingsPreferenceFragment
                         .create();
                 return dlg;
             }
+            case DIALOG_CONFIRM_EXIT_GUEST: {
+                Dialog dlg = new AlertDialog.Builder(context)
+                        .setTitle(R.string.user_exit_guest_confirm_title)
+                        .setMessage(R.string.user_exit_guest_confirm_message)
+                        .setPositiveButton(android.R.string.yes,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        exitGuest();
+                                    }
+                                })
+                        .setNegativeButton(android.R.string.no, null)
+                        .create();
+                return dlg;
+            }
             default:
                 return null;
         }
@@ -634,6 +677,17 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    /**
+     * Erase the current user (guest) and switch to another user.
+     */
+    private void exitGuest() {
+        // Just to be safe
+        if (!mIsGuest) {
+            return;
+        }
+        removeThisUser();
+    }
+
     private void updateUserList() {
         if (getActivity() == null) return;
         List<UserInfo> users = mUserManager.getUsers(true);
@@ -695,7 +749,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
                     missingIcons.add(user.id);
-                    pref.setIcon(encircle(R.drawable.avatar_default_1));
+                    pref.setIcon(getEncircledDefaultAvatar());
                 } else {
                     setPhotoId(pref, user);
                 }
@@ -707,7 +761,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
-            pref.setIcon(encircle(R.drawable.avatar_default_1));
+            pref.setIcon(getEncircledDefaultAvatar());
             mUserListCategory.addPreference(pref);
         }
 
@@ -716,7 +770,7 @@ public class UserSettings extends SettingsPreferenceFragment
             Preference pref = new UserPreference(getActivity(), null,
                     UserPreference.USERID_GUEST_DEFAULTS, mIsOwner ? this : null, null);
             pref.setTitle(R.string.user_guest);
-            pref.setIcon(encircle(R.drawable.ic_settings_accounts));
+            pref.setIcon(getEncircledGuestDrawable());
             pref.setOnPreferenceClickListener(this);
             mUserListCategory.addPreference(pref);
         }
@@ -765,9 +819,24 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void assignDefaultPhoto(UserInfo user) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                USER_DRAWABLES[user.id % USER_DRAWABLES.length]);
+        Bitmap bitmap = createBitmapFromDrawable(
+                USER_DRAWABLES[user.id % UserSettings.USER_DRAWABLES.length]);
         mUserManager.setUserIcon(user.id, bitmap);
+    }
+
+    private Drawable getEncircledGuestDrawable() {
+        if (mGuestDrawable == null) {
+            mGuestDrawable = encircle(createBitmapFromDrawable(GUEST_DRAWABLE_ID));
+        }
+        return mGuestDrawable;
+    }
+
+    private Drawable getEncircledDefaultAvatar() {
+        if (mDefaultAvatarDrawable == null) {
+            mDefaultAvatarDrawable =
+                    encircle(createBitmapFromDrawable(R.drawable.ic_avatar_default_1));
+        }
+        return mDefaultAvatarDrawable;
     }
 
     private void setPhotoId(Preference pref, UserInfo user) {
@@ -786,6 +855,10 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
+            if (mIsGuest) {
+                showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                return true;
+            }
             Intent editProfile;
             if (!mProfileExists) {
                 editProfile = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
