@@ -17,7 +17,6 @@
 package com.android.settings.users;
 
 import android.app.Activity;
-import android.app.AppGlobals;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -57,13 +56,13 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;
