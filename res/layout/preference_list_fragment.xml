@@ -36,8 +36,6 @@
               android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle"
               android:clipToPadding="false"
               android:drawSelectorOnTop="false"
-              android:cacheColorHint="@android:color/white"
-              android:background="@drawable/preference_list_fragment_background"
               android:elevation="@dimen/dashboard_category_elevation"
               android:scrollbarAlwaysDrawVerticalTrack="true" />
 
@@ -82,6 +80,8 @@
                     android:text="@*android:string/next_button_label"
                     />
         </LinearLayout>
+
     </RelativeLayout>
+
 </LinearLayout>
 
