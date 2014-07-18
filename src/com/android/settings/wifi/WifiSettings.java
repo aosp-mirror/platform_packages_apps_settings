@@ -733,6 +733,10 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiAssistantPreference = new WifiAssistantPreference();
         }
 
+        if (getActivity() instanceof WifiPickerActivity) {
+            return false;
+        }
+
         if (NetworkScorerAppManager.getActiveScorer(getActivity()) != null) {
             // A scorer is already enabled; don't show the card.
             return false;
