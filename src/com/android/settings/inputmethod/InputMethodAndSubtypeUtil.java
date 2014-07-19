@@ -274,21 +274,21 @@ class InputMethodAndSubtypeUtil {
                 currentInputMethodId != null ? currentInputMethodId : "");
     }
 
-    static void loadInputMethodSubtypeList(SettingsPreferenceFragment context,
-            ContentResolver resolver, List<InputMethodInfo> inputMethodInfos,
+    static void loadInputMethodSubtypeList(final SettingsPreferenceFragment context,
+            final ContentResolver resolver, final List<InputMethodInfo> inputMethodInfos,
             final Map<String, List<Preference>> inputMethodPrefsMap) {
-        HashMap<String, HashSet<String>> enabledSubtypes =
+        final HashMap<String, HashSet<String>> enabledSubtypes =
                 getEnabledInputMethodsAndSubtypeList(resolver);
 
-        for (InputMethodInfo imi : inputMethodInfos) {
+        for (final InputMethodInfo imi : inputMethodInfos) {
             final String imiId = imi.getId();
-            Preference pref = context.findPreference(imiId);
-            if (pref != null && pref instanceof CheckBoxPreference) {
-                CheckBoxPreference checkBoxPreference = (CheckBoxPreference) pref;
-                boolean isEnabled = enabledSubtypes.containsKey(imiId);
+            final Preference pref = context.findPreference(imiId);
+            if (pref instanceof CheckBoxPreference) {
+                final CheckBoxPreference checkBoxPreference = (CheckBoxPreference) pref;
+                final boolean isEnabled = enabledSubtypes.containsKey(imiId);
                 checkBoxPreference.setChecked(isEnabled);
                 if (inputMethodPrefsMap != null) {
-                    for (Preference childPref: inputMethodPrefsMap.get(imiId)) {
+                    for (final Preference childPref: inputMethodPrefsMap.get(imiId)) {
                         childPref.setEnabled(isEnabled);
                     }
                 }
@@ -298,16 +298,17 @@ class InputMethodAndSubtypeUtil {
         updateSubtypesPreferenceChecked(context, inputMethodInfos, enabledSubtypes);
     }
 
-    static void setSubtypesPreferenceEnabled(SettingsPreferenceFragment context,
-            List<InputMethodInfo> inputMethodProperties, String id, boolean enabled) {
-        PreferenceScreen preferenceScreen = context.getPreferenceScreen();
-        for (InputMethodInfo imi : inputMethodProperties) {
+    static void setSubtypesPreferenceEnabled(final SettingsPreferenceFragment context,
+            final List<InputMethodInfo> inputMethodProperties, final String id,
+            final boolean enabled) {
+        final PreferenceScreen preferenceScreen = context.getPreferenceScreen();
+        for (final InputMethodInfo imi : inputMethodProperties) {
             if (id.equals(imi.getId())) {
                 final int subtypeCount = imi.getSubtypeCount();
                 for (int i = 0; i < subtypeCount; ++i) {
-                    InputMethodSubtype subtype = imi.getSubtypeAt(i);
-                    CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen.findPreference(
-                            id + subtype.hashCode());
+                    final InputMethodSubtype subtype = imi.getSubtypeAt(i);
+                    final CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen
+                            .findPreference(id + subtype.hashCode());
                     if (pref != null) {
                         pref.setEnabled(enabled);
                     }
@@ -316,24 +317,27 @@ class InputMethodAndSubtypeUtil {
         }
     }
 
-    private static void updateSubtypesPreferenceChecked(SettingsPreferenceFragment context,
-            List<InputMethodInfo> inputMethodProperties,
-            HashMap<String, HashSet<String>> enabledSubtypes) {
-        PreferenceScreen preferenceScreen = context.getPreferenceScreen();
-        for (InputMethodInfo imi : inputMethodProperties) {
-            String id = imi.getId();
-            if (!enabledSubtypes.containsKey(id)) break;
+    private static void updateSubtypesPreferenceChecked(final SettingsPreferenceFragment context,
+            final List<InputMethodInfo> inputMethodProperties,
+            final HashMap<String, HashSet<String>> enabledSubtypes) {
+        final PreferenceScreen preferenceScreen = context.getPreferenceScreen();
+        for (final InputMethodInfo imi : inputMethodProperties) {
+            final String id = imi.getId();
+            if (!enabledSubtypes.containsKey(id)) {
+                // There is no need to enable/disable subtypes of disabled IMEs.
+                continue;
+            }
             final HashSet<String> enabledSubtypesSet = enabledSubtypes.get(id);
             final int subtypeCount = imi.getSubtypeCount();
             for (int i = 0; i < subtypeCount; ++i) {
-                InputMethodSubtype subtype = imi.getSubtypeAt(i);
-                String hashCode = String.valueOf(subtype.hashCode());
+                final InputMethodSubtype subtype = imi.getSubtypeAt(i);
+                final String hashCode = String.valueOf(subtype.hashCode());
                 if (DEBUG) {
                     Log.d(TAG, "--- Set checked state: " + "id" + ", " + hashCode + ", "
                             + enabledSubtypesSet.contains(hashCode));
                 }
-                CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen.findPreference(
-                        id + hashCode);
+                final CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen
+                        .findPreference(id + hashCode);
                 if (pref != null) {
                     pref.setChecked(enabledSubtypesSet.contains(hashCode));
                 }

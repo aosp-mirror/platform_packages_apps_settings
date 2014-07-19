@@ -33,7 +33,6 @@ import java.util.Locale;
  *
  * This preference represents a subtype of an IME. It is used to enable or disable the subtype.
  */
-//TODO: Make this non-persistent.
 class InputMethodSubtypePreference extends CheckBoxPreference {
     private final boolean mIsSystemLocale;
     private final boolean mIsSystemLanguage;
@@ -41,6 +40,7 @@ class InputMethodSubtypePreference extends CheckBoxPreference {
     InputMethodSubtypePreference(final Context context, final InputMethodSubtype subtype,
             final InputMethodInfo imi) {
         super(context);
+        setPersistent(false);
         setKey(imi.getId() + subtype.hashCode());
         final CharSequence subtypeLabel = subtype.getDisplayName(context,
                 imi.getPackageName(), imi.getServiceInfo().applicationInfo);
