@@ -365,16 +365,20 @@ public final class Utils {
     public static void prepareCustomPreferencesList(
             ViewGroup parent, View child, View list, boolean ignoreSidePadding) {
         final boolean movePadding = list.getScrollBarStyle() == View.SCROLLBARS_OUTSIDE_OVERLAY;
-        if (movePadding && parent instanceof PreferenceFrameLayout) {
-            ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
-
+        if (movePadding) {
             final Resources res = list.getResources();
             final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
-            final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
-            list.setPaddingRelative(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
+            if (parent instanceof PreferenceFrameLayout) {
+                ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
+
+                final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
+                list.setPaddingRelative(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
+            } else {
+                list.setPaddingRelative(paddingSide, 0, paddingSide, paddingBottom);
+            }
         }
     }
 
