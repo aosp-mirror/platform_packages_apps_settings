@@ -270,6 +270,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         for (int index = 0; index < prefCount; ++index) {
             final Preference pref = subtypePreferences.get(index);
             activeInputMethodsCategory.addPreference(pref);
+            InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
         }
         mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
         if (TextUtils.isEmpty(autoSubtypeLabel)) {
