@@ -489,9 +489,10 @@ public class SettingsActivity extends Activity
             setTheme(R.style.Theme_SubSettings);
         }
 
-        setContentView(R.layout.settings_main);
+        setContentView(mIsShowingDashboard ?
+                R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
 
-        mContent = (ViewGroup) findViewById(R.id.prefs);
+        mContent = (ViewGroup) findViewById(R.id.main_content);
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
@@ -830,7 +831,7 @@ public class SettingsActivity extends Activity
      */
     public void startPreferenceFragment(Fragment fragment, boolean push) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.prefs, fragment);
+        transaction.replace(R.id.main_content, fragment);
         if (push) {
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(BACK_STACK_PREFS);
@@ -851,7 +852,7 @@ public class SettingsActivity extends Activity
         }
         Fragment f = Fragment.instantiate(this, fragmentName, args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.prefs, f);
+        transaction.replace(R.id.main_content, f);
         if (withTransition) {
             TransitionManager.beginDelayedTransition(mContent);
         }
@@ -1239,7 +1240,7 @@ public class SettingsActivity extends Activity
         if (mSearchResultsFragment != null) {
             return;
         }
-        Fragment current = getFragmentManager().findFragmentById(R.id.prefs);
+        Fragment current = getFragmentManager().findFragmentById(R.id.main_content);
         if (current != null && current instanceof SearchResultsSummary) {
             mSearchResultsFragment = (SearchResultsSummary) current;
         } else {
