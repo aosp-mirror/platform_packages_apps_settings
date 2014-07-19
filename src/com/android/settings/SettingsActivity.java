@@ -482,11 +482,16 @@ public class SettingsActivity extends Activity
         mIsShowingDashboard = className.equals(Settings.class.getName());
         final boolean isSubSettings = className.equals(SubSettings.class.getName());
 
-        // If this is a sub settings or not the main Dashboard and not a Shortcut and not initial
-        // Fragment then apply the correct theme for the ActionBar content inset
+        // If this is a sub settings or not the main Dashboard and not a Shortcut and an initial
+        // Fragment then apply the SubSettings theme for the ActionBar content insets
         if (isSubSettings ||
-                (!mIsShowingDashboard && !mIsShortcut && (initialFragmentName == null))) {
-            setTheme(R.style.Theme_SubSettings);
+                (!mIsShowingDashboard && !mIsShortcut && (initialFragmentName != null))) {
+            // Check also that we are not a Theme Dialog as we don't want to override them
+            final int themeResId = getThemeResId();
+            if (themeResId != R.style.Theme_DialogWhenLarge &&
+                    themeResId != R.style.Theme_SubSettingsDialogWhenLarge) {
+                setTheme(R.style.Theme_SubSettings);
+            }
         }
 
         setContentView(mIsShowingDashboard ?
