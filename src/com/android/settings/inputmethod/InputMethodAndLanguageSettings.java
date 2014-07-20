@@ -149,7 +149,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         // Filter out irrelevant features if invoked from IME settings button.
         mShowsOnlyFullImeAndKeyboardList = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
                 activity.getIntent().getAction());
-        activity.getIntent().setAction(null);
         if (mShowsOnlyFullImeAndKeyboardList) {
             getPreferenceScreen().removeAll();
             getPreferenceScreen().addPreference(mHardKeyboardCategory);
