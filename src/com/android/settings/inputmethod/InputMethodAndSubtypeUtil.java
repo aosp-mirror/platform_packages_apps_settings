@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.content.ContentResolver;
 import android.content.SharedPreferences;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
@@ -186,12 +185,12 @@ class InputMethodAndSubtypeUtil {
                 for (int i = 0; i < subtypeCount; ++i) {
                     InputMethodSubtype subtype = imi.getSubtypeAt(i);
                     final String subtypeHashCodeStr = String.valueOf(subtype.hashCode());
-                    CheckBoxPreference subtypePref = (CheckBoxPreference) context.findPreference(
-                            imiId + subtypeHashCodeStr);
+                    final TwoStatePreference subtypePref = (TwoStatePreference) context
+                            .findPreference(imiId + subtypeHashCodeStr);
                     // In the Configure input method screen which does not have subtype preferences.
                     if (subtypePref == null) continue;
                     if (!subtypePrefFound) {
-                        // Once subtype checkbox is found, subtypeSet needs to be cleared.
+                        // Once subtype preference is found, subtypeSet needs to be cleared.
                         // Because of system change, hashCode value could have been changed.
                         subtypesSet.clear();
                         // If selected subtype preference is disabled, needs to reset.
@@ -283,10 +282,10 @@ class InputMethodAndSubtypeUtil {
         for (final InputMethodInfo imi : inputMethodInfos) {
             final String imiId = imi.getId();
             final Preference pref = context.findPreference(imiId);
-            if (pref instanceof CheckBoxPreference) {
-                final CheckBoxPreference checkBoxPreference = (CheckBoxPreference) pref;
+            if (pref instanceof TwoStatePreference) {
+                final TwoStatePreference subtypePref = (TwoStatePreference) pref;
                 final boolean isEnabled = enabledSubtypes.containsKey(imiId);
-                checkBoxPreference.setChecked(isEnabled);
+                subtypePref.setChecked(isEnabled);
                 if (inputMethodPrefsMap != null) {
                     for (final Preference childPref: inputMethodPrefsMap.get(imiId)) {
                         childPref.setEnabled(isEnabled);
@@ -307,7 +306,7 @@ class InputMethodAndSubtypeUtil {
                 final int subtypeCount = imi.getSubtypeCount();
                 for (int i = 0; i < subtypeCount; ++i) {
                     final InputMethodSubtype subtype = imi.getSubtypeAt(i);
-                    final CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen
+                    final TwoStatePreference pref = (TwoStatePreference) preferenceScreen
                             .findPreference(id + subtype.hashCode());
                     if (pref != null) {
                         pref.setEnabled(enabled);
@@ -336,7 +335,7 @@ class InputMethodAndSubtypeUtil {
                     Log.d(TAG, "--- Set checked state: " + "id" + ", " + hashCode + ", "
                             + enabledSubtypesSet.contains(hashCode));
                 }
-                final CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen
+                final TwoStatePreference pref = (TwoStatePreference) preferenceScreen
                         .findPreference(id + hashCode);
                 if (pref != null) {
                     pref.setChecked(enabledSubtypesSet.contains(hashCode));

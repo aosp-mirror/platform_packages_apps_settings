@@ -17,7 +17,6 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
@@ -33,7 +32,7 @@ import java.util.Locale;
  *
  * This preference represents a subtype of an IME. It is used to enable or disable the subtype.
  */
-class InputMethodSubtypePreference extends CheckBoxPreference {
+class InputMethodSubtypePreference extends SwitchWithNoTextPreference {
     private final boolean mIsSystemLocale;
     private final boolean mIsSystemLanguage;
 
