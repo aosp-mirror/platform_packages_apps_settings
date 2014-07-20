@@ -29,12 +29,10 @@
     <string name="show_dev_on" msgid="1110711554982716293">"您现在处于开发者模式！"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"您已处于开发者模式，无需进行此操作。"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"无线和网络"</string>
-    <!-- no translation found for header_category_connections (6471513040815680662) -->
-    <skip />
+    <string name="header_category_connections" msgid="6471513040815680662">"连接"</string>
     <string name="header_category_device" msgid="4544026001618307754">"设备"</string>
     <string name="header_category_personal" msgid="3310195187905720823">"个人"</string>
-    <!-- no translation found for header_category_access (7580499097416970962) -->
-    <skip />
+    <string name="header_category_access" msgid="7580499097416970962">"访问权限"</string>
     <string name="header_category_system" msgid="2816866961183068977">"系统"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"打开无线通信"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"关闭无线通信"</string>
@@ -133,8 +131,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"断开连接？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"此操作将会断开您与以下设备的连接：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"附近的设备现可检测到<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
-    <!-- no translation found for bluetooth_is_disconnect_question (5334933802445256306) -->
-    <skip />
+    <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接？"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"广播"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"要停用配置文件吗？"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"此操作将停用：&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
@@ -281,36 +278,28 @@
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD 卡"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"代理设置"</string>
     <string name="cancel" msgid="6859253417269739139">"取消"</string>
-    <!-- no translation found for cancel_all_caps (3183966387632229461) -->
-    <skip />
-    <!-- no translation found for continue_all_caps (5152713914673789893) -->
-    <skip />
-    <!-- no translation found for okay (1997666393121016642) -->
-    <skip />
+    <string name="cancel_all_caps" msgid="3183966387632229461">"取消"</string>
+    <string name="continue_all_caps" msgid="5152713914673789893">"继续"</string>
+    <string name="okay" msgid="1997666393121016642">"确定"</string>
     <!-- no translation found for yes_all_caps (5454685069075197457) -->
     <skip />
     <!-- no translation found for no_all_caps (3242375449351298529) -->
     <skip />
-    <!-- no translation found for forget (7267115980248732932) -->
-    <skip />
+    <string name="forget" msgid="7267115980248732932">"不保存"</string>
     <string name="settings_label" msgid="1626402585530130914">"设置"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"设置"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"设置快捷方式"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"飞行模式"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"更多"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"无线和网络"</string>
-    <!-- no translation found for radio_controls_summary (2837395036275123133) -->
-    <skip />
-    <!-- no translation found for cellular_data_title (2525947635539415202) -->
-    <skip />
+    <string name="radio_controls_summary" msgid="2837395036275123133">"管理WLAN、蓝牙、飞行模式、移动数据网络和VPN"</string>
+    <string name="cellular_data_title" msgid="2525947635539415202">"移动数据网络"</string>
     <!-- no translation found for calls_title (3544471959217176768) -->
     <skip />
     <!-- no translation found for sms_messages_title (3188611825992624879) -->
     <skip />
-    <!-- no translation found for cellular_data_summary (4575500999626276446) -->
-    <skip />
-    <!-- no translation found for allow_data_usage_title (2238205944729213062) -->
-    <skip />
+    <string name="cellular_data_summary" msgid="4575500999626276446">"允许通过移动数据网络使用数据"</string>
+    <string name="allow_data_usage_title" msgid="2238205944729213062">"允许漫游时使用数据流量"</string>
     <string name="roaming" msgid="3596055926335478572">"移动数据网络漫游"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"漫游时连接到移动数据网络服务"</string>
     <string name="roaming_disable" msgid="1295279574370898378">"漫游时连接到移动数据网络服务"</string>
@@ -331,20 +320,15 @@
     <string name="zone_auto" msgid="334783869352026648">"自动确定时区"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"使用网络提供的时区"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"使用网络提供的时区"</string>
-    <!-- no translation found for date_time_24hour_title (3203537578602803850) -->
-    <skip />
+    <string name="date_time_24hour_title" msgid="3203537578602803850">"24小时制"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"使用 24 小时格式"</string>
-    <!-- no translation found for date_time_set_time_title (6296795651349047016) -->
-    <skip />
+    <string name="date_time_set_time_title" msgid="6296795651349047016">"时间"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"设置时间"</string>
-    <!-- no translation found for date_time_set_timezone_title (3047322337368233197) -->
-    <skip />
+    <string name="date_time_set_timezone_title" msgid="3047322337368233197">"时区"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"选择时区"</string>
-    <!-- no translation found for date_time_set_date_title (6928286765325608604) -->
-    <skip />
+    <string name="date_time_set_date_title" msgid="6928286765325608604">"日期"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"设置日期"</string>
-    <!-- no translation found for date_time_date_format_title (3976171711988766411) -->
-    <skip />
+    <string name="date_time_date_format_title" msgid="3976171711988766411">"日期格式"</string>
     <string name="date_time_date_format" msgid="6951498879879281102">"选择日期格式"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"按字母顺序排序"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"按时区排序"</string>
@@ -366,8 +350,7 @@
     <string name="user_info_settings_title" msgid="1195015434996724736">"用户信息"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"在锁定屏幕上显示个人资料信息"</string>
     <string name="profile_info_settings_title" msgid="3518603215935346604">"个人资料信息"</string>
-    <!-- no translation found for Accounts_settings_title (1643879107901699406) -->
-    <skip />
+    <string name="Accounts_settings_title" msgid="1643879107901699406">"帐户"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"位置信息"</string>
     <string name="account_settings_title" msgid="626177544686329806">"帐户"</string>
     <string name="security_settings_title" msgid="7945465324818485460">"安全"</string>
@@ -497,8 +480,7 @@
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要与此设备配对吗？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"要与 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请在该设备上键入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然后按回车键。"</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"配对"</string>
-    <!-- no translation found for bluetooth_pairing_accept_all_caps (6061699265220789149) -->
-    <skip />
+    <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"配对"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"取消"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"无法与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”进行配对。"</string>
@@ -510,31 +492,22 @@
     <string name="bluetooth_search_for_devices" msgid="2754007356491461674">"刷新"</string>
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"正在搜索..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"设备设置"</string>
-    <!-- no translation found for bluetooth_preference_paired_dialog_title (8875124878198774180) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_paired_dialog_name_label (8111146086595617285) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_paired_dialog_use_label (8547827103286093381) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_paired_dialog_internet_option (7112953286863428412) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_paired_dialog_keyboard_option (2271954176947879628) -->
-    <skip />
+    <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"已配对的设备"</string>
+    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"名称"</string>
+    <string name="bluetooth_preference_paired_dialog_use_label" msgid="8547827103286093381">"用于"</string>
+    <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"互联网连接"</string>
+    <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"键盘"</string>
     <!-- no translation found for bluetooth_preference_paired_dialog_contacts_option (7747163316331917594) -->
     <skip />
-    <!-- no translation found for bluetooth_pairing_dialog_title (1417255032435317301) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_dialog_sharing_phonebook_title (7664141669886358618) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_dialog_contants_request (5531109163573611348) -->
-    <skip />
+    <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"与此设备配对？"</string>
+    <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"共享电话簿？"</string>
+    <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>想要使用您的通讯录和通话记录。"</string>
     <!-- no translation found for bluetooth_pairing_dialog_paring_request (8451248193517851958) -->
     <skip />
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"已配对的设备"</string>
     <string name="bluetooth_message_access" msgid="1698228719102461095">"配对设备可查看以下帐户的消息："</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"可用设备"</string>
-    <!-- no translation found for bluetooth_preference_no_found_devices (7594339669961811591) -->
-    <skip />
+    <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"未找到任何设备"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"连接"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开网络共享"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"配对和连接"</string>
@@ -585,46 +558,25 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
     <!-- no translation found for wifi_assistant_intro_setup (4605105515416995110) -->
     <skip />
-    <!-- no translation found for wifi_assistant_title (2553267316621598101) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_no_thanks (2776983751990143934) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_setup (3772423650475730906) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_card_message (107811647784658536) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_title (2553267316621598101) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_title_message (1270518944209872345) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_explanation_message (4242611602422534795) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_vpn_message (5474437939154729312) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_activity_no_thanks (611984000647643330) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_activity_yes (529603077646719710) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_dialog_title (9130141448000161787) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_dialog_message (6483823815004886979) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_dialog_notice (7459835068779476953) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_accept (7669587061174451722) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_deny (7052767926493128944) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_network_title (5870092585963985624) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_permission_accepted (577392827888043634) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_open_app (4803044899535675063) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_change_title (5328722306907867503) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_change_message (5460174513121389422) -->
-    <skip />
+    <string name="wifi_assistant_no_thanks" msgid="2776983751990143934">"不用了"</string>
+    <string name="wifi_assistant_setup" msgid="3772423650475730906">"设置"</string>
+    <string name="wifi_assistant_card_message" msgid="107811647784658536">"通过WLAN Assistant自动连接到可用网络。"</string>
+    <string name="wifi_assistant_title" msgid="2553267316621598101">"WLAN Assistant"</string>
+    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google WLAN Assistant会自动将您的设备连接到可用的最佳WLAN网络"</string>
+    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google WLAN Assistant会检测您可用的网络，并会将您的设备连接到速度和稳定性最佳的网络。"</string>
+    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"为了保护您的数据，Google WLAN Assistant会通过Google服务器提供安全的VPN连接。"</string>
+    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"不用了"</string>
+    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"立即启用"</string>
+    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"连接请求"</string>
+    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"WLAN Assistant想要设置一个可供其监控网络流量的VPN连接。仅在您信任来源时接受此请求。"</string>
+    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"在VPN处于活动状态时显示在您屏幕的顶部。"</string>
+    <string name="wifi_assistant_accept" msgid="7669587061174451722">"接受"</string>
+    <string name="wifi_assistant_deny" msgid="7052767926493128944">"拒绝"</string>
+    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"网络监控"</string>
+    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"您已授权Google WLAN Assistant设置VPN连接。这意味着，此应用可以监控网络流量。"</string>
+    <string name="wifi_assistant_open_app" msgid="4803044899535675063">"打开应用"</string>
+    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"更改WLAN Assistant？"</string>
+    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"使用<xliff:g id="THIRD_PARTY">%1$s</xliff:g>（而非<xliff:g id="GOOGLE_WIFI">%2$s</xliff:g>）管理网络连接？"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"投射屏幕"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"启用无线显示"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"未在附近找到设备。"</string>
@@ -663,39 +615,29 @@
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"正处于飞行模式下"</string>
     <string name="wifi_fail_to_scan" msgid="1265540342578081461">"扫描不到网络"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"网络通知"</string>
-    <!-- no translation found for wifi_notify_open_networks_summary (3716818008370391253) -->
-    <skip />
+    <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"有可用的公共网络时通知我"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"避开状况不佳的网络"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"仅在 WLAN 互联网连接状况良好时使用 WLAN 网络"</string>
-    <!-- no translation found for wifi_avoid_poor_network_detection_summary (4674423884870027498) -->
-    <skip />
+    <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"仅使用互联网连接情况良好的网络"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"随时都可扫描"</string>
-    <!-- no translation found for wifi_scan_always_available_title (1518769058260729007) -->
-    <skip />
-    <!-- no translation found for wifi_scan_always_available_summary (5442775583708315387) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_manage_title (6249976570008992746) -->
-    <skip />
+    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"始终允许扫描网络"</string>
+    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允许Google的位置信息服务和其他应用扫描网络（即使WLAN已关闭）"</string>
+    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"自动管理WLAN"</string>
     <!-- no translation found for wifi_automatically_manage_summary (6514058937939695429) -->
     <skip />
-    <!-- no translation found for wifi_assistant_setting_title (7891352922976664256) -->
-    <skip />
-    <!-- no translation found for wifi_assistant_setting_summary (8436161813951180466) -->
-    <skip />
+    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"WLAN Assistant"</string>
+    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google WLAN Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安装证书"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"为了提高位置信息精确度以及其他目的，Google 和其他应用可扫描附近的网络（在关闭了 WLAN 时也可进行扫描）。如果您不希望应用这么做，请进入“高级”&gt;“随时都可扫描”进行设置。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"应用可扫描附近的网络（在关闭了 WLAN 时也可进行扫描）。如果您不希望应用这么做，请进入“高级”&gt;“随时都可扫描”进行设置。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"不再显示"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"在休眠状态下保持 WLAN 网络连接"</string>
-    <!-- no translation found for wifi_setting_on_during_sleep_title (8308975500029751565) -->
-    <skip />
+    <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"在休眠状态下保持WLAN连接"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"更改设置时出现问题"</string>
-    <!-- no translation found for wifi_suspend_efficiency_title (2338325886934703895) -->
-    <skip />
+    <string name="wifi_suspend_efficiency_title" msgid="2338325886934703895">"提高能效"</string>
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"WLAN 优化"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"开启 WLAN 时尽可能节约电池用量"</string>
-    <!-- no translation found for wifi_limit_optimizations_summary (9000801068363468950) -->
-    <skip />
+    <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"限制WLAN耗电量"</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"添加网络"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"WLAN 网络"</string>
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按钮"</string>
@@ -714,10 +656,8 @@
     <string name="wifi_other_network" msgid="1484433183857764750">"添加其他网络"</string>
     <string name="wifi_more" msgid="3195296805089107950">"更多"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自动设置 (WPS)"</string>
-    <!-- no translation found for wifi_required_info_text (7442238187557620087) -->
-    <skip />
-    <!-- no translation found for wifi_show_advanced (3409422789616520979) -->
-    <skip />
+    <string name="wifi_required_info_text" msgid="7442238187557620087">"要完成设置，您的平板电脑必须连接到WLAN网络。设置完毕后，您将可以在移动数据网络和WLAN网络之间切换。"</string>
+    <string name="wifi_show_advanced" msgid="3409422789616520979">"高级选项"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"WLAN 保护设置"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"正在启动 WPS..."</string>
     <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"请按下您路由器上的 WLAN 保护设置按钮，它可能会标为“WPS”或包含此符号："</string>
@@ -765,12 +705,9 @@
     <skip />
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"允许"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"拒绝"</string>
-    <!-- no translation found for wifi_hotspot_title (7726205804813286950) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_message (3673833421453455747) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_connect (5065506390164939225) -->
-    <skip />
+    <string name="wifi_hotspot_title" msgid="7726205804813286950">"登录以进行连接？"</string>
+    <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g>要求您必须先在线登录热点，然后才能连接到网络。"</string>
+    <string name="wifi_hotspot_connect" msgid="5065506390164939225">"连接"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"连接"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"无法连接网络"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"取消保存"</string>
@@ -832,17 +769,14 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"要取消连接<xliff:g id="PEER_NAME">%1$s</xliff:g>的邀请吗？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"取消保存此群组？"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"便携式 WLAN 热点"</string>
-    <!-- no translation found for wifi_hotspot_checkbox_text (7763495093333664887) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_checkbox_text_summary (3800646230853724318) -->
-    <skip />
+    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WLAN热点"</string>
+    <string name="wifi_hotspot_checkbox_text_summary" msgid="3800646230853724318">"使用移动数据网络连接提供WLAN网络"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"正在打开热点..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"正在关闭热点..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"便携式热点 <xliff:g id="NETWORK_SSID">%1$s</xliff:g> 已启用"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"便携式 WLAN 热点错误"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"设置 WLAN 热点"</string>
-    <!-- no translation found for wifi_hotspot_configure_ap_text (5478614731464220432) -->
-    <skip />
+    <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"WLAN热点设置"</string>
     <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5618031116920832182) -->
     <skip />
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>便携式 WLAN 热点"</string>
@@ -906,14 +840,12 @@
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"旋转平板电脑时自动切换浏览模式"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"旋转手机时自动改变显示方向"</string>
     <string name="brightness" msgid="8480105032417444275">"亮度"</string>
-    <!-- no translation found for brightness_title (5746272622112982836) -->
-    <skip />
+    <string name="brightness_title" msgid="5746272622112982836">"亮度"</string>
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自动调节亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"根据环境光线情况优化亮度"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
-    <!-- no translation found for screen_timeout_title (5130038655092628247) -->
-    <skip />
+    <string name="screen_timeout_title" msgid="5130038655092628247">"屏幕关闭"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"无操作 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁纸"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"选择壁纸来源"</string>
@@ -944,8 +876,7 @@
     <string name="sim_disable_sim_lock" msgid="7664729528754784824">"解锁 SIM 卡"</string>
     <string name="sim_enter_old" msgid="6074196344494634348">"旧 SIM 卡 PIN"</string>
     <string name="sim_enter_new" msgid="8742727032729243562">"新 SIM 卡 PIN"</string>
-    <!-- no translation found for sim_reenter_new (6523819386793546888) -->
-    <skip />
+    <string name="sim_reenter_new" msgid="6523819386793546888">"重新输入新的PIN码"</string>
     <string name="sim_change_pin" msgid="7328607264898359112">"SIM 卡 PIN"</string>
     <string name="sim_bad_pin" msgid="2345230873496357977">"PIN 不正确"</string>
     <string name="sim_pins_dont_match" msgid="8449681619822460312">"PIN 不匹配"</string>
@@ -954,10 +885,8 @@
     <string name="sim_lock_failed" msgid="5651596916127873626">"无法更改 SIM 卡锁定状态。\nPIN 可能不正确。"</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"确定"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"取消"</string>
-    <!-- no translation found for sim_multi_sims_title (9159427879911231239) -->
-    <skip />
-    <!-- no translation found for sim_multi_sims_summary (7018740080801483990) -->
-    <skip />
+    <string name="sim_multi_sims_title" msgid="9159427879911231239">"找到多张SIM卡"</string>
+    <string name="sim_multi_sims_summary" msgid="7018740080801483990">"选择您想在连入移动数据网络时用的SIM卡。"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM 卡 PIN 码不正确，您现在必须联系运营商为您解锁设备。"</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"SIM 卡 PIN 码不正确，您还有<xliff:g id="NUMBER">%d</xliff:g>次尝试机会。如果仍然失败，则必须联系运营商帮您解锁设备。"</item>
@@ -991,11 +920,9 @@
     <string name="status_prl_version" msgid="1007470446618081441">"PRL 版本"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
-    <!-- no translation found for status_network_type (952552009117455166) -->
-    <skip />
+    <string name="status_network_type" msgid="952552009117455166">"移动数据网络类型"</string>
     <string name="status_latest_area_info" msgid="7222470836568238054">"运营商信息"</string>
-    <!-- no translation found for status_data_state (4578972321533789767) -->
-    <skip />
+    <string name="status_data_state" msgid="4578972321533789767">"移动数据网络状态"</string>
     <string name="status_service_state" msgid="2323931627519429503">"服务状态"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"信号强度"</string>
     <string name="status_roaming" msgid="2638800467430913403">"漫游"</string>
@@ -1103,8 +1030,7 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"正在恢复默认 APN 设置。"</string>
     <string name="menu_restore" msgid="8260067415075573273">"重置为默认设置"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"重置默认 APN 设置已完成。"</string>
-    <!-- no translation found for device_reset_title (2384019005638768076) -->
-    <skip />
+    <string name="device_reset_title" msgid="2384019005638768076">"重置设备"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"恢复出厂设置"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"清除平板电脑上的所有数据"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"清除手机上的所有数据"</string>
@@ -1150,12 +1076,11 @@
     <string name="tether_settings_title_all" msgid="8356136101061143841">"网络共享与便携式热点"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB网络共享"</string>
-    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB 已连接，选中以共享网络"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"已连接USB，选中即可共享网络"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"已共享网络"</string>
-    <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"使用 USB 存储设备时无法共享网络"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="5210094834194907094">"使用USB存储设备时无法共享网络"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB 未连接"</string>
-    <!-- no translation found for usb_tethering_turnon_subtext (4748616058219273033) -->
-    <skip />
+    <string name="usb_tethering_turnon_subtext" msgid="4748616058219273033">"连接即可开启"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB网络共享出错"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙网络共享"</string>
     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"共享该平板电脑的互联网连接"</string>
@@ -1164,16 +1089,14 @@
     <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"将该手机的互联网连接与 1 台设备共享"</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"将该平板电脑的互联网连接与 <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> 台设备共享"</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"将该手机的互联网连接与 <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> 台设备共享"</string>
-    <!-- no translation found for bluetooth_tethering_off_subtext_config (1790242032929221788) -->
-    <skip />
+    <string name="bluetooth_tethering_off_subtext_config" msgid="1790242032929221788">"共享此<xliff:g id="DEVICE_NAME">%1$d</xliff:g>的互联网连接"</string>
     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"不共享该平板电脑的互联网连接"</string>
     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"不共享该手机的互联网连接"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"未共享网络"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"无法与 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 台以上的设备共享网络。"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"即将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的网络共享。"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"帮助"</string>
-    <!-- no translation found for network_settings_title (4871233236744292831) -->
-    <skip />
+    <string name="network_settings_title" msgid="4871233236744292831">"移动数据网络"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"手机套餐"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"默认短信应用"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"要更改短信应用吗？"</string>
@@ -1195,13 +1118,10 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"高电耗"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"低电耗"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"位置信息模式"</string>
-    <!-- no translation found for location_mode_high_accuracy_description (5349014493087338351) -->
-    <skip />
-    <!-- no translation found for location_mode_battery_saving_description (7581657383062066461) -->
-    <skip />
+    <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"使用GPS、WLAN和移动数据网络确定位置"</string>
+    <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"使用WLAN和移动数据网络确定位置"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"使用 GPS 确定您的位置"</string>
-    <!-- no translation found for location_network_based (6010456018401296590) -->
-    <skip />
+    <string name="location_network_based" msgid="6010456018401296590">"WLAN和移动数据网络位置信息"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"允许应用使用Google位置信息服务更快地大致了解您所在的位置。系统将收集匿名位置数据并将其发送给Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"通过 WLAN 确定位置"</string>
     <string name="location_gps" msgid="8392461023569708478">"GPS 卫星定位"</string>
@@ -1278,10 +1198,8 @@
     <string name="applications_settings_summary" msgid="6683465446264515367">"管理应用、设置快速启动快捷方式"</string>
     <string name="applications_settings_header" msgid="1014813055054356646">"应用设置"</string>
     <string name="install_applications" msgid="4872012136210802181">"未知来源"</string>
-    <!-- no translation found for install_applications_title (4987712352256508946) -->
-    <skip />
-    <!-- no translation found for install_unknown_applications_title (663831043139080992) -->
-    <skip />
+    <string name="install_applications_title" msgid="4987712352256508946">"允许所有应用来源"</string>
+    <string name="install_unknown_applications_title" msgid="663831043139080992">"允许您安装来自Google Play以外来源的应用"</string>
     <string name="install_unknown_applications" msgid="176855644862942064">"允许安装来自未知来源的应用"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"您的平板电脑和个人数据更容易受到从未知来源获取的应用的攻击。对于因使用这些应用而造成的平板电脑损坏或数据丢失，您同意自行承担全部责任。"</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"您的手机和个人数据更容易受到从未知来源获取的应用的攻击。对于因使用这些应用而造成的手机损坏或数据丢失，您同意自行承担全部责任。"</string>
@@ -1576,7 +1494,8 @@
     <string name="testing_usage_stats" msgid="7823048598893937339">"使用情况统计数据"</string>
     <string name="display_order_text" msgid="8592776965827565271">"排序方式："</string>
     <string name="app_name_label" msgid="5440362857006046193">"应用"</string>
-    <string name="launch_count_label" msgid="4019444833263957024">"次数"</string>
+    <!-- no translation found for last_time_used_label (8459441968795479307) -->
+    <skip />
     <string name="usage_time_label" msgid="295954901452833058">"使用时间"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"辅助功能"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"辅助功能设置"</string>
@@ -1702,8 +1621,7 @@
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS开启"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"WLAN"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"唤醒"</string>
-    <!-- no translation found for battery_stats_phone_signal_label (3537569115723850618) -->
-    <skip />
+    <string name="battery_stats_phone_signal_label" msgid="3537569115723850618">"移动数据网络信号"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"设备唤醒时间"</string>
@@ -1937,8 +1855,7 @@
     <string name="backup_data_summary" msgid="708773323451655666">"将应用数据、WLAN 密码和其他设置备份到 Google 服务器"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"备份帐户"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"目前没有帐户存储备份数据"</string>
-    <!-- no translation found for include_app_data_title (2829970132260278394) -->
-    <skip />
+    <string name="include_app_data_title" msgid="2829970132260278394">"包括应用数据"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"自动还原"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"重新安装某个应用后，系统会还原已经备份的设置和数据"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"桌面备份密码"</string>
@@ -2109,24 +2026,17 @@
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"节省WebView网络流量"</string>
     <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"通过将Google压缩服务器用作WebView连接代理，节省网络流量（实验性功能）"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"流量使用情况"</string>
-    <!-- no translation found for data_usage_app_summary_title (4147258989837459172) -->
-    <skip />
-    <!-- no translation found for data_usage_accounting (7170028915873577387) -->
-    <skip />
-    <!-- no translation found for data_usage_app (4970478397515423303) -->
-    <skip />
-    <!-- no translation found for data_usage_app_info_label (3409931235687866706) -->
-    <skip />
-    <!-- no translation found for data_usage_cellular_data (4859424346276043677) -->
-    <skip />
-    <!-- no translation found for data_usage_data_limit (1193930999713192703) -->
-    <skip />
+    <string name="data_usage_app_summary_title" msgid="4147258989837459172">"应用数据使用量"</string>
+    <string name="data_usage_accounting" msgid="7170028915873577387">"运营商的数据计算方式可能与您设备的计算方式有所不同。"</string>
+    <string name="data_usage_app" msgid="4970478397515423303">"应用使用情况"</string>
+    <string name="data_usage_app_info_label" msgid="3409931235687866706">"应用信息"</string>
+    <string name="data_usage_cellular_data" msgid="4859424346276043677">"移动数据网络"</string>
+    <string name="data_usage_data_limit" msgid="1193930999713192703">"设置数据流量上限"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"流量使用周期"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"移动数据网络漫游"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"限制后台流量"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"单独显示 4G 流量"</string>
-    <!-- no translation found for data_usage_menu_show_wifi (2296217964873872571) -->
-    <skip />
+    <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"显示WLAN数据使用量"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"显示以太网使用情况"</string>
     <string name="data_usage_menu_metered" msgid="5056695223222541863">"移动热点"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"自动同步数据"</string>
@@ -2136,42 +2046,31 @@
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"前台"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"后台"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"受限"</string>
-    <!-- no translation found for data_usage_disable_mobile (2613595056882494652) -->
-    <skip />
-    <!-- no translation found for data_usage_disable_mobile_limit (3934211003105066167) -->
-    <skip />
+    <string name="data_usage_disable_mobile" msgid="2613595056882494652">"关闭移动数据网络？"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="3934211003105066167">"设置移动数据网络流量上限"</string>
     <string name="data_usage_disable_4g_limit" msgid="6233554774946681175">"设置 4G 数据流量限制"</string>
     <string name="data_usage_disable_3g_limit" msgid="2558557840444266906">"设置 2G-3G 数据流量限制"</string>
     <string name="data_usage_disable_wifi_limit" msgid="1394901415264660888">"设置 WLAN 数据流量上限"</string>
     <string name="data_usage_tab_wifi" msgid="481146038146585749">"WLAN"</string>
     <string name="data_usage_tab_ethernet" msgid="7298064366282319911">"以太网"</string>
-    <!-- no translation found for data_usage_tab_mobile (2084466270343460491) -->
-    <skip />
+    <string name="data_usage_tab_mobile" msgid="2084466270343460491">"移动数据网络"</string>
     <string name="data_usage_tab_4g" msgid="1301978716067512235">"4G"</string>
     <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G-3G"</string>
-    <!-- no translation found for data_usage_list_mobile (7219011330831181312) -->
-    <skip />
+    <string name="data_usage_list_mobile" msgid="7219011330831181312">"移动数据网络"</string>
     <string name="data_usage_list_none" msgid="3933892774251050735">"无"</string>
-    <!-- no translation found for data_usage_enable_mobile (5900650720568852325) -->
-    <skip />
+    <string name="data_usage_enable_mobile" msgid="5900650720568852325">"移动数据网络"</string>
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-3G 数据"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G 数据"</string>
-    <!-- no translation found for data_usage_forground_label (7654319010655983591) -->
-    <skip />
-    <!-- no translation found for data_usage_forground_label (4334131631594418568) -->
+    <string name="data_usage_forground_label" msgid="7654319010655983591">"前台："</string>
+    <!-- no translation found for data_usage_background_label (2722008379947694926) -->
     <skip />
     <string name="data_usage_app_settings" msgid="8430240158135453271">"查看应用设置"</string>
-    <!-- no translation found for data_usage_app_restrict_background (7510046552380574925) -->
-    <skip />
-    <!-- no translation found for data_usage_app_restrict_background_summary (3720075732277934106) -->
-    <skip />
-    <!-- no translation found for data_usage_app_restrict_background_summary_disabled (1446565717342917727) -->
-    <skip />
+    <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"限制应用后台数据"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"禁止通过移动数据网络使用后台数据。"</string>
+    <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"要限制此应用使用后台数据，请先设置移动数据网络流量上限。"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"限制后台数据？"</string>
-    <!-- no translation found for data_usage_app_restrict_dialog (5871168521456832764) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_denied_dialog (4674085030810350875) -->
-    <skip />
+    <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"在只有移动数据网络可用的情况下，此功能可能会导致需要使用后台数据的应用停止运行。\n\n您可以在应用的设置中找到更多适当的流量使用控制选项。"</string>
+    <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"您必须设置移动数据网络流量上限才能限制后台数据使用量。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"要打开自动同步数据功能吗？"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"您在网络上对您的帐户进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐户还可以将您在平板电脑上进行的所有更改自动同步到网络上。这就是 Google 帐户的精彩之处。\n\n要选择每个帐户中要同步哪些类型的信息，请转到“设置 &gt; 帐户”。"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"您在网络上对您的帐户进行的所有更改都会自动同步到您的手机。\n\n有些帐户还可以将您在手机上进行的所有更改自动同步到网络上。这就是 Google 帐户的精彩之处。\n\n要选择每个帐户中要同步哪些类型的信息，请转到“设置 &gt; 帐户”。"</string>
@@ -2183,17 +2082,12 @@
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"设置流量使用量警告"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"设置数据使用限制"</string>
     <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"正在限制数据使用量"</string>
-    <!-- no translation found for data_usage_limit_dialog_mobile (5788774061143636263) -->
-    <skip />
-    <!-- no translation found for data_usage_limit_dialog_mobile (3511301596446820549) -->
-    <skip />
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5788774061143636263">"当您的平板电脑达到所设置的数据流量上限时，便会关闭移动数据网络。\n\n由于数据使用量是由您的平板电脑计算的，而您的运营商计算数据使用量的方式可能有所不同，因此请考虑设置一个保守的上限值。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="3511301596446820549">"当您的手机达到所设置的数据流量上限时，便会关闭移动数据网络。\n\n由于数据使用量是由您的手机计算的，而您的运营商计算数据使用量的方式可能有所不同，因此请考虑设置一个保守的上限值。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"限制后台数据？"</string>
-    <!-- no translation found for data_usage_restrict_background (8210134218644196511) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (3262993384666280985) -->
-    <skip />
-    <!-- no translation found for data_usage_restrict_background_multiuser (4352615206362479722) -->
-    <skip />
+    <string name="data_usage_restrict_background" msgid="8210134218644196511">"如果您限制后台移动网络数据使用量，则您必须连接到WLAN网络，部分应用和服务才会正常运行。"</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="3262993384666280985">"如果您限制后台移动网络数据使用量，则您必须连接到WLAN网络，部分应用和服务才会正常运行。\n\n此设置会影响这台平板电脑上的所有用户。"</string>
+    <string name="data_usage_restrict_background_multiuser" product="default" msgid="4352615206362479722">"如果您限制后台移动网络数据使用量，则您必须连接到WLAN网络，部分应用和服务才会正常运行。\n\n此设置会影响这部手机上的所有用户。"</string>
     <string name="data_usage_sweep_warning" msgid="6387081852568846982"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"警告"</font></string>
     <string name="data_usage_sweep_limit" msgid="860566507375933039"><font size="21">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"限制"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="614263770923231598">"已删除的应用"</string>
@@ -2204,8 +2098,7 @@
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用约 <xliff:g id="TOTAL">%1$s</xliff:g>，由您的手机计算得出。您的运营商对于流量的计算方法可能有所不同。"</string>
     <string name="data_usage_metered_title" msgid="6204750602856383278">"移动热点"</string>
     <string name="data_usage_metered_body" msgid="4959032833706695848">"选择属于移动热点的 WLAN 网络。这样可限制应用在后台使用这些网络。应用在使用这些网络下载较大的文件时，还可能会发出警告。"</string>
-    <!-- no translation found for data_usage_metered_mobile (2326986339431119372) -->
-    <skip />
+    <string name="data_usage_metered_mobile" msgid="2326986339431119372">"移动数据网络"</string>
     <string name="data_usage_metered_wifi" msgid="8540872226614404873">"WLAN 网络"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="5502020778468643732">"要选择移动热点，请打开 WLAN。"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"紧急呼救"</string>
@@ -2317,6 +2210,12 @@
     <string name="user_delete_user_description" msgid="3158592592118767056">"删除用户"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"删除"</string>
     <string name="user_guest" msgid="8475274842845401871">"访客"</string>
+    <!-- no translation found for user_exit_guest_title (45738573948463472) -->
+    <skip />
+    <!-- no translation found for user_exit_guest_confirm_title (2512294416196448006) -->
+    <skip />
+    <!-- no translation found for user_exit_guest_confirm_message (3338292192386196163) -->
+    <skip />
     <string name="user_enable_calling" msgid="8658361356494445631">"要开启通话功能吗？"</string>
     <string name="user_enable_calling_sms" msgid="1198756620982093854">"要开启通话和短信功能吗？"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"移除用户"</string>
@@ -2330,13 +2229,11 @@
     <string name="global_locale_change_title" msgid="5956281361384221451">"更改语言"</string>
     <string name="global_font_change_title" msgid="1887126466191012035">"更改字体大小"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"触碰付款"</string>
-    <!-- no translation found for google_wallet (9122936252378589227) -->
-    <skip />
+    <string name="google_wallet" msgid="9122936252378589227">"Google电子钱包"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"轻轻一碰，即可付款"</string>
     <string name="nfc_payment_favor_foreground" msgid="8881893980929835838">"前台应用优先"</string>
     <string name="nfc_payment_learn_more" msgid="5583407773744324447">"了解详情"</string>
-    <!-- no translation found for nfc_more_title (815910943655133280) -->
-    <skip />
+    <string name="nfc_more_title" msgid="815910943655133280">"更多…"</string>
     <string name="nfc_payment_menu_item_add_service" msgid="2885947408068969081">"查找应用"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
     <string name="nfc_payment_set_default" msgid="8961120988148253016">"触碰付款时一律使用“<xliff:g id="APP">%1$s</xliff:g>”吗？"</string>
@@ -2345,48 +2242,28 @@
     <string name="restriction_menu_reset" msgid="2067644523489568173">"取消限制"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改 PIN 码"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"显示通知"</string>
-    <!-- no translation found for help_label (6886837949306318591) -->
-    <skip />
+    <string name="help_label" msgid="6886837949306318591">"帮助和反馈"</string>
     <string name="user_account_title" msgid="1127193807312271167">"内容帐户"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"照片 ID"</string>
-    <!-- no translation found for extreme_threats_title (6549541803542968699) -->
-    <skip />
-    <!-- no translation found for extreme_threats_summary (8777860706500920667) -->
-    <skip />
-    <!-- no translation found for severe_threats_title (8362676353803170963) -->
-    <skip />
-    <!-- no translation found for severe_threats_summary (8848126509420177320) -->
-    <skip />
-    <!-- no translation found for amber_alerts_title (2772220337031146529) -->
-    <skip />
-    <!-- no translation found for amber_alerts_summary (4312984614037904489) -->
-    <skip />
-    <!-- no translation found for repeat_title (6473587828597786996) -->
-    <skip />
-    <!-- no translation found for call_manager_enable_title (7718226115535784017) -->
-    <skip />
-    <!-- no translation found for call_manager_enable_summary (8458447798019519240) -->
-    <skip />
-    <!-- no translation found for call_manager_title (4479949569744516457) -->
-    <skip />
-    <!-- no translation found for call_manager_summary (9080932881688238022) -->
-    <skip />
-    <!-- no translation found for cell_broadcast_settings (2451014351355183338) -->
-    <skip />
-    <!-- no translation found for network_operators_settings (2583178259504630435) -->
-    <skip />
-    <!-- no translation found for access_point_names (1381602020438634481) -->
-    <skip />
-    <!-- no translation found for enhanced_4g_lte_mode_title (5808043757309522392) -->
-    <skip />
-    <!-- no translation found for enhanced_4g_lte_mode_summary (1376589643017218924) -->
-    <skip />
-    <!-- no translation found for preferred_network_type_title (3431041717309776341) -->
-    <skip />
-    <!-- no translation found for preferred_network_type_summary (6564884693884755019) -->
-    <skip />
-    <!-- no translation found for work_sim_title (4843322164662606891) -->
-    <skip />
+    <string name="extreme_threats_title" msgid="6549541803542968699">"极端威胁"</string>
+    <string name="extreme_threats_summary" msgid="8777860706500920667">"接收有关生命和财产极端威胁的警报"</string>
+    <string name="severe_threats_title" msgid="8362676353803170963">"严重威胁"</string>
+    <string name="severe_threats_summary" msgid="8848126509420177320">"接收有关生命和财产严重威胁的警报"</string>
+    <string name="amber_alerts_title" msgid="2772220337031146529">"安珀警报"</string>
+    <string name="amber_alerts_summary" msgid="4312984614037904489">"接收关于拐卖儿童的公告"</string>
+    <string name="repeat_title" msgid="6473587828597786996">"重复"</string>
+    <string name="call_manager_enable_title" msgid="7718226115535784017">"启用通话管理器"</string>
+    <string name="call_manager_enable_summary" msgid="8458447798019519240">"允许此服务管理您的通话方式。"</string>
+    <string name="call_manager_title" msgid="4479949569744516457">"通话管理器"</string>
+    <string name="call_manager_summary" msgid="9080932881688238022">"环聊"</string>
+    <string name="cell_broadcast_settings" msgid="2451014351355183338">"紧急广播"</string>
+    <string name="network_operators_settings" msgid="2583178259504630435">"网络运营商"</string>
+    <string name="access_point_names" msgid="1381602020438634481">"接入点名称(APN)"</string>
+    <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"增强型4G LTE模式"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1376589643017218924">"使用LTE数据服务提升语音和通信质量（建议）"</string>
+    <string name="preferred_network_type_title" msgid="3431041717309776341">"首选网络类型"</string>
+    <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE（建议）"</string>
+    <string name="work_sim_title" msgid="4843322164662606891">"工作用SIM卡"</string>
     <string name="user_restrictions_title" msgid="7745810037152772035">"应用和内容限制"</string>
     <string name="user_rename" msgid="8523499513614655279">"重命名"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"设置应用限制"</string>
@@ -2398,8 +2275,7 @@
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"蓝牙"</string>
     <string name="restriction_bluetooth_config_summary" msgid="8372319681287562506">"允许修改蓝牙配对和设置"</string>
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
-    <!-- no translation found for restriction_nfc_enable_summary_config (3232480757215851738) -->
-    <skip />
+    <string name="restriction_nfc_enable_summary_config" msgid="3232480757215851738">"允许在此<xliff:g id="DEVICE_NAME">%1$s</xliff:g>与其他NFC设备触碰时交换数据"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"允许在平板电脑与其他设备触碰时交换数据"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"允许在手机与其他设备触碰时交换数据"</string>
     <string name="restriction_location_enable_title" msgid="5020268888245775164">"位置信息"</string>
@@ -2411,55 +2287,33 @@
     <string name="user_image_choose_photo" msgid="7940990613897477057">"从图库中选择照片"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM卡"</string>
-    <!-- no translation found for sim_settings_title (6822745211458959756) -->
-    <skip />
-    <!-- no translation found for sim_cards_changed_message (7900721153345139783) -->
-    <skip />
-    <!-- no translation found for sim_cards_changed_message_summary (5452545583546944683) -->
-    <skip />
-    <!-- no translation found for sim_cellular_data_unavailable (9018555543451203035) -->
-    <skip />
-    <!-- no translation found for sim_cellular_data_unavailable_summary (3654805961942166428) -->
-    <skip />
-    <!-- no translation found for sim_calls_always_use (7936774751250119715) -->
-    <skip />
-    <!-- no translation found for sim_select_card (211285163525563293) -->
-    <skip />
-    <!-- no translation found for sim_card_number_title (7845379943474336488) -->
-    <skip />
-    <!-- no translation found for sim_editor_name (1722945976676142029) -->
-    <skip />
-    <!-- no translation found for sim_editor_title (6364331907415443358) -->
-    <skip />
-    <!-- no translation found for sim_editor_carrier (5684523444677746573) -->
-    <skip />
-    <!-- no translation found for sim_editor_number (6705955651035440667) -->
-    <skip />
-    <!-- no translation found for sim_editor_color (2542605938562414355) -->
-    <skip />
-    <!-- no translation found for sim_editor_num_format (4681231191387098783) -->
-    <skip />
+    <string name="sim_settings_title" msgid="6822745211458959756">"SIM卡"</string>
+    <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM卡已更换"</string>
+    <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"触摸即可设置活动"</string>
+    <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"无法使用移动数据网络"</string>
+    <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"触摸即可选择上网用的SIM卡"</string>
+    <string name="sim_calls_always_use" msgid="7936774751250119715">"一律使用这张卡进行通话"</string>
+    <string name="sim_select_card" msgid="211285163525563293">"选择SIM卡"</string>
+    <string name="sim_card_number_title" msgid="7845379943474336488">"SIM卡号：<xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
+    <string name="sim_editor_name" msgid="1722945976676142029">"SIM卡名称"</string>
+    <string name="sim_editor_title" msgid="6364331907415443358">"SIM卡"</string>
+    <string name="sim_editor_carrier" msgid="5684523444677746573">"运营商"</string>
+    <string name="sim_editor_number" msgid="6705955651035440667">"号码"</string>
+    <string name="sim_editor_color" msgid="2542605938562414355">"SIM卡颜色"</string>
+    <string name="sim_editor_num_format" msgid="4681231191387098783">"显示号码"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"选择SIM卡"</string>
     <string name="color_orange" msgid="4417567658855022517">"橙色"</string>
     <string name="color_purple" msgid="3888532466427762504">"紫色"</string>
-    <!-- no translation found for sim_no_inserted_msg (210316755353227087) -->
-    <skip />
+    <string name="sim_no_inserted_msg" msgid="210316755353227087">"尚未插入SIM卡"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"SIM卡状态"</string>
     <string name="sim_status_summary" msgid="4934558018015161369">"SIM卡相关信息"</string>
-    <!-- no translation found for sim_call_back_title (5181549885999280334) -->
-    <skip />
-    <!-- no translation found for sim_outgoing_call_title (1019763076116874255) -->
-    <skip />
-    <!-- no translation found for sim_other_call_settings (8247802316114482477) -->
-    <skip />
-    <!-- no translation found for preferred_network_offload_title (1605829724169550275) -->
-    <skip />
-    <!-- no translation found for preferred_network_offload_header (2321173571529106767) -->
-    <skip />
-    <!-- no translation found for preferred_network_offload_footer (5857279426054744020) -->
-    <skip />
-    <!-- no translation found for preferred_network_offload_popup (2252915199889604600) -->
-    <skip />
+    <string name="sim_call_back_title" msgid="5181549885999280334">"通过默认SIM卡回电"</string>
+    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"用于外拨电话的SIM卡"</string>
+    <string name="sim_other_call_settings" msgid="8247802316114482477">"其他通话设置"</string>
+    <string name="preferred_network_offload_title" msgid="1605829724169550275">"首选网络卸载(Preferred Network Offload)"</string>
+    <string name="preferred_network_offload_header" msgid="2321173571529106767">"停用网络名称广播"</string>
+    <string name="preferred_network_offload_footer" msgid="5857279426054744020">"停用网络名称广播可防止第三方获取您的网络信息。"</string>
+    <string name="preferred_network_offload_popup" msgid="2252915199889604600">"停用网络名称广播可防止设备自动连接到隐藏的网络。"</string>
     <string name="sim_pref_divider" msgid="4194064766764348209">"活动信息"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"先询问"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"必须选择"</string>

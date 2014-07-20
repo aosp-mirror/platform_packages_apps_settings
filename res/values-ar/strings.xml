@@ -281,10 +281,8 @@
     <string name="cancel_all_caps" msgid="3183966387632229461">"إلغاء"</string>
     <string name="continue_all_caps" msgid="5152713914673789893">"متابعة"</string>
     <string name="okay" msgid="1997666393121016642">"موافق"</string>
-    <!-- no translation found for yes_all_caps (5454685069075197457) -->
-    <skip />
-    <!-- no translation found for no_all_caps (3242375449351298529) -->
-    <skip />
+    <string name="yes_all_caps" msgid="5454685069075197457">"نعم"</string>
+    <string name="no_all_caps" msgid="3242375449351298529">"لا"</string>
     <string name="forget" msgid="7267115980248732932">"حذف"</string>
     <string name="settings_label" msgid="1626402585530130914">"الإعدادات"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"الإعدادات"</string>
@@ -554,7 +552,6 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"تذكّر الإعدادات"</string>
     <!-- no translation found for wifi_assistant_intro_setup (4605105515416995110) -->
     <skip />
-    <string name="wifi_assistant_title" msgid="2553267316621598101">"‏تطبيق مساعد Wi‑Fi"</string>
     <string name="wifi_assistant_no_thanks" msgid="2776983751990143934">"لا، شكرًا"</string>
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"الإعداد"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"‏الاتصال تلقائيًا بالشبكات المتوفرة باستخدام تطبيق مساعد Wi‑Fi."</string>
@@ -698,8 +695,7 @@
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"أدخل كلمة مرور الشبكة"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"لا شيء"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"‏لتحسين مستوى دقة تحديد الموقع ولأغراض أخرى، يحتاج <xliff:g id="APP_NAME">%1$s</xliff:g> إلى تشغيل البحث عن الشبكات، حتى مع إيقاف Wi-Fi.\n\nهل تريد السماح بذلك لجميع التطبيقات التي تحتاج إلى فحص؟"</string>
-    <!-- no translation found for wifi_scan_always_turnoff_message (5538901671131941043) -->
-    <skip />
+    <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"لتعطيل هذا، يمكنك الانتقال إلى \"متقدم\" في القائمة الكاملة."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"سماح"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"رفض"</string>
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"هل تريد تسجيل الدخول للاتصال؟"</string>
@@ -714,21 +710,14 @@
     <string name="wifi_cancel" msgid="6763568902542968964">"إلغاء"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"تخطي على أية حال"</string>
     <string name="wifi_dont_skip" msgid="7350341524881124808">"عدم التخطي"</string>
-    <!-- no translation found for wifi_skipped_message (6761689889733331124) -->
-    <skip />
-    <!-- no translation found for wifi_skipped_message (1385490367826852775) -->
-    <skip />
-    <!-- no translation found for wifi_skipped_message (6084295135297772350) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (2393880108322835846) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1707391993265558787) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1556858507920033022) -->
-    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"‏تحذير: عند تخطي Wi-Fi، لن يستخدم جهازك اللوحي سوى بيانات الجهاز الخلوي مع عمليات التنزيل والتحميل المبدئية. لتجنب  تحصيل رسوم بيانات، يمكنك الاتصال بشبكة Wi-Fi."</string>
+    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"‏تحذير: عند تخطي Wi-Fi، لن يستخدم جهازك سوى بيانات الجهاز الخلوي مع عمليات التنزيل والتحميل المبدئية. لتجنب  تحصيل رسوم بيانات، يمكنك الاتصال بشبكة Wi-Fi."</string>
+    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"‏تحذير: عند تخطي Wi-Fi، لن يستخدم هاتفك سوى بيانات الجهاز الخلوي مع عمليات التنزيل والتحميل المبدئية. لتجنب  تحصيل رسوم بيانات، يمكنك الاتصال بشبكة Wi-Fi."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="2393880108322835846">"‏تحذير: عند تخطي Wi-Fi، لن يتوفر اتصال بالإنترنت في جهازك اللوحي لاستخدامه لتنفيذ أية عمليات تنزيل أو تحميل مبدئية."</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1707391993265558787">"‏تحذير: عند تخطي Wi-Fi، لن يتوفر اتصال بالإنترنت في جهازك لاستخدامه لتنفيذ أية عمليات تنزيل أو تحميل مبدئية."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="1556858507920033022">"‏تحذير: عند تخطي Wi-Fi، لن يتوفر اتصال بالإنترنت في هاتفك لاستخدامه لتنفيذ أية عمليات تنزيل أو تحميل مبدئية."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"‏لم يتمكن الجهاز اللوحي من الاتصال بشبكة Wi-Fi هذه."</string>
-    <!-- no translation found for wifi_connect_failed_message (8870885845666880869) -->
-    <skip />
+    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"‏تعذر على الجهاز الاتصال بشبكة Wi-Fi هذه."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"‏لم يتمكن الهاتف من الاتصال بشبكة Wi-Fi هذه."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"الشبكات المحفوظة"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"‏إعدادات Wi-Fi المتقدمة"</string>
@@ -774,8 +763,7 @@
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"‏خطأ في نقطة اتصال Wi-Fi المحمولة"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"‏إعداد نقطة اتصال Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"‏إعداد نقطة اتصال Wi‑Fi"</string>
-    <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5618031116920832182) -->
-    <skip />
+    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"‏نقطة اتصال Wi‑Fi المتنقلة عبر AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"‏نقطة اتصال إعداد نقطة اتصال Wi-Fi المحمولة <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="home_settings" msgid="212375129455718176">"الشاشة الرئيسية"</string>
@@ -1491,7 +1479,7 @@
     <string name="testing_usage_stats" msgid="7823048598893937339">"إحصاءات الاستخدام"</string>
     <string name="display_order_text" msgid="8592776965827565271">"تصنيف بحسب:"</string>
     <string name="app_name_label" msgid="5440362857006046193">"التطبيق"</string>
-    <string name="launch_count_label" msgid="4019444833263957024">"عدد"</string>
+    <string name="last_time_used_label" msgid="8459441968795479307">"آخر مرة تم استخدامه"</string>
     <string name="usage_time_label" msgid="295954901452833058">"وقت الاستخدام"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"إمكانية الدخول"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"إعدادات إمكانية الدخول"</string>
@@ -2058,7 +2046,8 @@
     <string name="data_usage_enable_3g" msgid="6304006671869578254">"بيانات الجيل الثاني والثالث"</string>
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"بيانات شبكة الجيل الرابع"</string>
     <string name="data_usage_forground_label" msgid="7654319010655983591">"البيانات الأمامية:"</string>
-    <string name="data_usage_forground_label" msgid="4334131631594418568">"الخلفية:"</string>
+    <!-- no translation found for data_usage_background_label (2722008379947694926) -->
+    <skip />
     <string name="data_usage_app_settings" msgid="8430240158135453271">"عرض إعدادات التطبيق"</string>
     <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"تقييد بيانات الخلفية للتطبيق"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"تعطيل بيانات الخلفية على شبكات الهاتف الجوّال."</string>
@@ -2205,6 +2194,9 @@
     <string name="user_delete_user_description" msgid="3158592592118767056">"حذف مستخدم"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"حذف"</string>
     <string name="user_guest" msgid="8475274842845401871">"مدعو"</string>
+    <string name="user_exit_guest_title" msgid="45738573948463472">"الخروج من وضع الضيف"</string>
+    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"هل تريد الخروج من جلسة الضيف؟"</string>
+    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"سيؤدي إنهاء جلسة الضيف إلى إزالة البيانات المحلية."</string>
     <string name="user_enable_calling" msgid="8658361356494445631">"هل تريد تمكين مكالمات الهاتف؟"</string>
     <string name="user_enable_calling_sms" msgid="1198756620982093854">"‏هل تريد تمكين مكالمات الهاتف والرسائل القصيرة SMS؟"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"إزالة المستخدم"</string>

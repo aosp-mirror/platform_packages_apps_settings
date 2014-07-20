@@ -161,16 +161,20 @@
     <item msgid="7433294150916905997">"충전 중인 경우에만"</item>
     <item msgid="1390404486722375028">"안함"</item>
   </string-array>
-    <!-- no translation found for data_usage_data_range:0 (5013973108901348144) -->
-    <!-- no translation found for data_usage_data_range:1 (6600989128423965319) -->
-    <!-- no translation found for sim_card_data_range:0 (676666889014650266) -->
-    <!-- no translation found for sim_card_data_range:1 (7841762954785375718) -->
-    <!-- no translation found for wifi_frequency_band_entries:0 (1013988753804838790) -->
-  <string-array name="usage_stats_display_order_types">
-    <item msgid="2100172576767439288">"사용 시간"</item>
-    <item msgid="3703676222230317933">"계수 시작"</item>
-    <item msgid="2502754479975776899">"앱 이름"</item>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"최근 30일"</item>
+    <item msgid="6600989128423965319">"사용 주기 설정..."</item>
   </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"마지막 4자리 숫자"</item>
+    <item msgid="7841762954785375718">"처음 4자리 숫자"</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="1013988753804838790">"자동"</item>
+    <item msgid="6670588712989942178">"5GHz 전용"</item>
+    <item msgid="2715516524973207876">"2.4GHz 전용"</item>
+  </string-array>
+    <!-- no translation found for usage_stats_display_order_types:1 (4796160515314745154) -->
   <string-array name="wifi_eap_entries">
     <item msgid="8615575908717909498">"PEAP"</item>
     <item msgid="8667872640594311615">"TLS"</item>
@@ -232,98 +236,12 @@
     <item msgid="886742181977884584">"미디어"</item>
     <item msgid="7924928667052300589">"기기"</item>
   </string-array>
-  <string-array name="app_ops_summaries">
-    <item msgid="4979188868761515915">"대략적 위치"</item>
-    <item msgid="5789673140227507995">"세부 위치"</item>
-    <item msgid="1061584358377390581">"GPS"</item>
-    <item msgid="5387405117297558954">"진동"</item>
-    <item msgid="3434165993711230924">"주소록 읽기"</item>
-    <item msgid="616161687718081936">"주소록 수정"</item>
-    <item msgid="7638002295329050091">"통화 기록 읽기"</item>
-    <item msgid="6546959730920410907">"통화 기록 수정"</item>
-    <item msgid="446877710771379667">"캘린더 읽기"</item>
-    <item msgid="7674458294386319722">"캘린더 수정"</item>
-    <item msgid="8281201165558093009">"Wi-Fi 검색"</item>
-    <item msgid="8694611243479480497">"알림"</item>
-    <item msgid="7776439107987345446">"셀 검색"</item>
-    <item msgid="514615766544675057">"전화 걸기"</item>
-    <item msgid="8181415497109310680">"SMS 읽기"</item>
-    <item msgid="6816551144382117307">"SMS 작성하기"</item>
-    <item msgid="4600463921908905030">"SMS 수신"</item>
-    <item msgid="5958926493289432745">"긴급 SMS 수신"</item>
-    <item msgid="4945269495221089540">"MMS 수신"</item>
-    <item msgid="5570472453573929087">"WAP PUSH 수신"</item>
-    <item msgid="7125408150230860501">"SMS 보내기"</item>
-    <item msgid="7080337936612188061">"ICC SMS 읽기"</item>
-    <item msgid="587124103118495063">"ICC SMS 작성하기"</item>
-    <item msgid="2320577158869025503">"설정 수정"</item>
-    <item msgid="1545733463471924009">"위에 그림"</item>
-    <item msgid="3609046903962454582">"액세스 알림"</item>
-    <item msgid="4671646036128214513">"카메라"</item>
-    <item msgid="1097324338692486211">"오디오 녹음"</item>
-    <item msgid="5031552983987798163">"오디오 재생"</item>
-    <item msgid="8374996688066472414">"클립보드 읽기"</item>
-    <item msgid="3045529469061083747">"클립보드 수정"</item>
-    <item msgid="5124443975763747838">"미디어 버튼"</item>
-    <item msgid="4547883971364273343">"오디오 포커스"</item>
-    <item msgid="2603878814882344450">"마스터 볼륨"</item>
-    <item msgid="7136963238377062018">"음성 볼륨"</item>
-    <item msgid="4270236897655923007">"벨소리 볼륨"</item>
-    <item msgid="6325739889222559394">"미디어 볼륨"</item>
-    <item msgid="5762123934816216821">"알람 볼륨"</item>
-    <item msgid="785049718065337473">"알림 볼륨"</item>
-    <item msgid="6700305533746877052">"블루투스 볼륨"</item>
-    <item msgid="3810969981743709839">"마이크 음소거/음소거 해제"</item>
-    <item msgid="2627903914574908209">"켜진 상태로 유지"</item>
-    <item msgid="1395372654968157578">"위치 모니터링"</item>
-    <item msgid="3238451051299611853">"고전력 위치 모니터링"</item>
-  </string-array>
-  <string-array name="app_ops_labels">
-    <item msgid="6602854600289714121">"위치"</item>
-    <item msgid="8677040780775113033">"위치"</item>
-    <item msgid="1660743989948992916">"위치"</item>
-    <item msgid="8791172739860195290">"진동"</item>
-    <item msgid="383413555642128046">"주소록 읽기"</item>
-    <item msgid="3654594895269697313">"주소록 수정"</item>
-    <item msgid="7928393476362362538">"통화 기록 읽기"</item>
-    <item msgid="6248591205254641116">"통화 기록 수정"</item>
-    <item msgid="6093344633066170692">"캘린더 읽기"</item>
-    <item msgid="1334886368750347692">"캘린더 수정"</item>
-    <item msgid="1638204101698708656">"위치"</item>
-    <item msgid="2154671955760380322">"소식 알림"</item>
-    <item msgid="4282477730595931828">"위치"</item>
-    <item msgid="4891423912898525905">"전화 걸기"</item>
-    <item msgid="2623604824935968113">"SMS/MMS 읽기"</item>
-    <item msgid="4420177125221176306">"SMS/MMS 쓰기"</item>
-    <item msgid="3986142739951490025">"SMS/MMS 수신"</item>
-    <item msgid="3984213795861739778">"SMS/MMS 수신"</item>
-    <item msgid="3656243523752472788">"SMS/MMS 수신"</item>
-    <item msgid="8105802370238551510">"SMS/MMS 수신"</item>
-    <item msgid="1407766984645388488">"SMS/MMS 전송"</item>
-    <item msgid="3527273606643794973">"SMS/MMS 읽기"</item>
-    <item msgid="4370895547001583812">"SMS/MMS 쓰기"</item>
-    <item msgid="4218544235221631789">"설정 수정"</item>
-    <item msgid="736541391767350377">"위에 그림"</item>
-    <item msgid="5530815681721654194">"액세스 알림"</item>
-    <item msgid="781213371706962767">"카메라"</item>
-    <item msgid="1720492593061838172">"오디오 녹음"</item>
-    <item msgid="3493046322001257041">"오디오 재생"</item>
-    <item msgid="136815868796597058">"클립보드 읽기"</item>
-    <item msgid="5238692940326972503">"클립보드 수정"</item>
-    <item msgid="5753789168376302997">"미디어 버튼"</item>
-    <item msgid="3265262911688671938">"오디오 포커스"</item>
-    <item msgid="2098976479485046797">"마스터 볼륨"</item>
-    <item msgid="5660213838861789350">"음성 볼륨"</item>
-    <item msgid="7983336752371254444">"벨소리 볼륨"</item>
-    <item msgid="7878027809189330917">"미디어 볼륨"</item>
-    <item msgid="7260546305036218513">"알람 볼륨"</item>
-    <item msgid="9103719301075748925">"알림 볼륨"</item>
-    <item msgid="7025966722295861512">"블루투스 볼륨"</item>
-    <item msgid="2265317984004577529">"마이크 음소거/음소거 해제"</item>
-    <item msgid="3646325683886507917">"켜진 상태로 유지"</item>
-    <item msgid="7669257279311110599">"위치"</item>
-    <item msgid="7745724368696313169">"위치"</item>
-  </string-array>
+    <!-- no translation found for app_ops_summaries:43 (3356591542543137332) -->
+    <!-- no translation found for app_ops_summaries:44 (3073734345226842233) -->
+    <!-- no translation found for app_ops_summaries:45 (1148142988678569310) -->
+    <!-- no translation found for app_ops_labels:43 (3459320345690097795) -->
+    <!-- no translation found for app_ops_labels:44 (1312534577834048535) -->
+    <!-- no translation found for app_ops_labels:45 (5906017727368097853) -->
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"짧게"</item>
     <item msgid="2560532955514699713">"보통"</item>

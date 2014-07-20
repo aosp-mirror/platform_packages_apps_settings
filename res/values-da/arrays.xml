@@ -90,7 +90,7 @@
     <item msgid="515055375277271756">"Godkender..."</item>
     <item msgid="1943354004029184381">"Henter IP-adresse…"</item>
     <item msgid="4221763391123233270">"Tilsluttet"</item>
-    <item msgid="624838831631122137">"Midlertidigt standset"</item>
+    <item msgid="624838831631122137">"Sat på pause"</item>
     <item msgid="7979680559596111948">"Afbryder ..."</item>
     <item msgid="1634960474403853625">"Afbrudt"</item>
     <item msgid="746097431216080650">"Mislykkedes"</item>
@@ -104,7 +104,7 @@
     <item msgid="554971459996405634">"Godkender med <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
     <item msgid="7928343808033020343">"Henter IP-adresse fra <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
     <item msgid="8937994881315223448">"Forbundet til <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
-    <item msgid="1330262655415760617">"Midlertidigt standset"</item>
+    <item msgid="1330262655415760617">"Sat på pause"</item>
     <item msgid="7698638434317271902">"Afbryder fra <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
     <item msgid="197508606402264311">"Afbrudt"</item>
     <item msgid="8578370891960825148">"Mislykkedes"</item>
@@ -161,16 +161,20 @@
     <item msgid="7433294150916905997">"Kun når tilsluttet strøm"</item>
     <item msgid="1390404486722375028">"Aldrig"</item>
   </string-array>
-    <!-- no translation found for data_usage_data_range:0 (5013973108901348144) -->
-    <!-- no translation found for data_usage_data_range:1 (6600989128423965319) -->
-    <!-- no translation found for sim_card_data_range:0 (676666889014650266) -->
-    <!-- no translation found for sim_card_data_range:1 (7841762954785375718) -->
-    <!-- no translation found for wifi_frequency_band_entries:0 (1013988753804838790) -->
-  <string-array name="usage_stats_display_order_types">
-    <item msgid="2100172576767439288">"Brugstid"</item>
-    <item msgid="3703676222230317933">"Start optælling"</item>
-    <item msgid="2502754479975776899">"Navn på app"</item>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"De seneste 30 dage"</item>
+    <item msgid="6600989128423965319">"Angiv cyklus for brug..."</item>
   </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"De sidste fire cifre"</item>
+    <item msgid="7841762954785375718">"De første fire cifre"</item>
+  </string-array>
+  <string-array name="wifi_frequency_band_entries">
+    <item msgid="1013988753804838790">"Automatisk"</item>
+    <item msgid="6670588712989942178">"Kun 5 GHz"</item>
+    <item msgid="2715516524973207876">"Kun 2,4 GHz"</item>
+  </string-array>
+    <!-- no translation found for usage_stats_display_order_types:1 (4796160515314745154) -->
   <string-array name="wifi_eap_entries">
     <item msgid="8615575908717909498">"PEAP"</item>
     <item msgid="8667872640594311615">"TLS"</item>
@@ -273,10 +277,12 @@
     <item msgid="5762123934816216821">"alarmlydstyrke"</item>
     <item msgid="785049718065337473">"lydstyrke for underretninger"</item>
     <item msgid="6700305533746877052">"lydstyrke for bluetooth"</item>
-    <item msgid="3810969981743709839">"slå mikrofonlyd til/fra"</item>
-    <item msgid="2627903914574908209">"hold aktiv"</item>
-    <item msgid="1395372654968157578">"overvåg placering"</item>
-    <item msgid="3238451051299611853">"overvåg placering med højt strømforbrug"</item>
+    <item msgid="2029227495214047094">"hold aktiv"</item>
+    <item msgid="26109888160231211">"overvåg placering"</item>
+    <item msgid="5753382310468855812">"overvåg placering med højt strømforbrug"</item>
+    <item msgid="3356591542543137332">"hent brugsstatistik"</item>
+    <item msgid="3073734345226842233">"slå mikrofonlyd til/fra"</item>
+    <item msgid="1148142988678569310">"medieprojektion"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Placering"</item>
@@ -319,10 +325,12 @@
     <item msgid="7260546305036218513">"Alarmlydstyrke"</item>
     <item msgid="9103719301075748925">"Lydstyrke for underretninger"</item>
     <item msgid="7025966722295861512">"Lydstyrke for bluetooth"</item>
-    <item msgid="2265317984004577529">"Slå mikrofonlyd til/fra"</item>
-    <item msgid="3646325683886507917">"Hold aktiv"</item>
+    <item msgid="4665183401128289653">"Hold aktiv"</item>
+    <item msgid="8584357129746649222">"Placering"</item>
     <item msgid="7669257279311110599">"Placering"</item>
-    <item msgid="7745724368696313169">"Placering"</item>
+    <item msgid="3459320345690097795">"Hent brugsstatistik"</item>
+    <item msgid="1312534577834048535">"Slå mikrofonlyd til/fra"</item>
+    <item msgid="5906017727368097853">"Medieprojektion"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Kort"</item>
