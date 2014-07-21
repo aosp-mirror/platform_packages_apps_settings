@@ -60,7 +60,7 @@ public abstract class ManagedServiceSettings extends ListFragment {
     private ContentResolver mCR;
 
     private final HashSet<ComponentName> mEnabledServices = new HashSet<ComponentName>();
-    private ServiceListAdapter mList;
+    private ServiceListAdapter mListAdapter;
 
     abstract protected Config getConfig();
 
@@ -130,7 +130,7 @@ public abstract class ManagedServiceSettings extends ListFragment {
 
         mPM = getActivity().getPackageManager();
         mCR = getActivity().getContentResolver();
-        mList = new ServiceListAdapter(getActivity());
+        mListAdapter = new ServiceListAdapter(getActivity());
     }
 
     @Override
@@ -200,10 +200,10 @@ public abstract class ManagedServiceSettings extends ListFragment {
     private void updateList() {
         loadEnabledServices();
 
-        getServices(mConfig, mList, mPM);
-        mList.sort(new PackageItemInfo.DisplayNameComparator(mPM));
+        getServices(mConfig, mListAdapter, mPM);
+        mListAdapter.sort(new PackageItemInfo.DisplayNameComparator(mPM));
 
-        getListView().setAdapter(mList);
+        getListView().setAdapter(mListAdapter);
     }
 
     protected static int getEnabledServicesCount(Config config, Context context) {
@@ -255,7 +255,7 @@ public abstract class ManagedServiceSettings extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        ServiceInfo info = mList.getItem(position);
+        ServiceInfo info = mListAdapter.getItem(position);
         final ComponentName cn = new ComponentName(info.packageName, info.name);
         if (mEnabledServices.contains(cn)) {
             // the simple version: disabling
