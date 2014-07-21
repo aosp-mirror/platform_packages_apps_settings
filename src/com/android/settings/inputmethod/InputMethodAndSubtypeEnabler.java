@@ -16,9 +16,7 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -32,7 +30,6 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
-import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -52,7 +49,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     // TODO: Change mInputMethodInfoList to Map
     private List<InputMethodInfo> mInputMethodInfoList;
     private Collator mCollator;
-    private AlertDialog mDialog = null;
 
     @Override
     public void onCreate(final Bundle icicle) {
@@ -142,80 +138,13 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             }
         }
 
-        final String id = chkPref.getKey();
         // Turns off a subtype.
         if (!chkPref.isChecked()) {
-            // TODO: Because no preference on this screen has {@link InputMethodInfo} id as a key,
-            // the following setSubtypesPreferenceEnabled call is effectively no-operation and
-            // can be removed.
-            InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
-                    this, mInputMethodInfoList, id, false);
             updateAutoSelectionPreferences();
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
-        // Turns on a subtype.
-        final InputMethodInfo imi = getInputMethodInfoById(id);
-        // TODO: Because no preference on this screen has {@link InputMethodInfo} id as a key,
-        // <code>imi</code> is always null and the following code can be removed.
-        if (imi == null) {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
-        }
-        // Turns on a system IME's subtype.
-        if (InputMethodUtils.isSystemIme(imi)) {
-            InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
-                    this, mInputMethodInfoList, id, true);
-            // This is a built-in IME, so no need to warn.
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
-        }
-        // Turns on a 3rd party IME's subtype.
-        // Turns off a subtype before showing a security warning dialog.
-        chkPref.setChecked(false);
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
-        }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(true);
-        builder.setTitle(android.R.string.dialog_alert_title);
-        final CharSequence label = imi.getServiceInfo().applicationInfo
-                .loadLabel(getPackageManager());
-        builder.setMessage(getString(R.string.ime_security_warning, label));
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                // The user explicitly enable the subtype.
-                chkPref.setChecked(true);
-                InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
-                        InputMethodAndSubtypeEnabler.this, mInputMethodInfoList, id, true);
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {}
-        });
-        mDialog = builder.create();
-        mDialog.show();
         return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    private InputMethodInfo getInputMethodInfoById(final String imiId) {
-        final int imiCount = mInputMethodInfoList.size();
-        for (int index = 0; index < imiCount; ++index) {
-            final InputMethodInfo imi = mInputMethodInfoList.get(index);
-            if (imi.getId().equals(imiId)) {
-                return imi;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mDialog != null) {
-            mDialog.dismiss();
-            mDialog = null;
-        }
     }
 
     private void addInputMethodSubtypePreferences(final InputMethodInfo imi,
