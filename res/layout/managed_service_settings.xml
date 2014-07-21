@@ -18,19 +18,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1">
+
         <ListView android:id="@android:id/list"
                 android:layout_width="match_parent" 
                 android:layout_height="match_parent"
+                android:paddingStart="@dimen/settings_side_margin"
+                android:paddingEnd="@dimen/settings_side_margin"
                 android:drawSelectorOnTop="false"
-                android:fastScrollEnabled="true" />
+                android:fastScrollEnabled="true"
+                android:scrollbarStyle="outsideInset" />
+
         <TextView android:id="@android:id/empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </FrameLayout>
+
 </LinearLayout>
