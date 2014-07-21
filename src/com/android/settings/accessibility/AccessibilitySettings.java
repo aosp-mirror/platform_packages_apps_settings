@@ -33,6 +33,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -80,6 +81,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_large_text_preference";
     private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
             "toggle_high_text_contrast_preference";
+    private static final String TOGGLE_INVERSION_PREFERENCE =
+            "toggle_inversion_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
             "toggle_power_button_ends_call_preference";
     private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
@@ -94,10 +97,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "screen_magnification_preference_screen";
-    private static final String DISPLAY_CONTRAST_PREFERENCE_SCREEN =
-            "contrast_preference_screen";
-    private static final String DISPLAY_INVERSION_PREFERENCE_SCREEN =
-            "inversion_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference_screen";
 
@@ -193,9 +192,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mCaptioningPreferenceScreen;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
     private PreferenceScreen mGlobalGesturePreferenceScreen;
-    private PreferenceScreen mDisplayInversionPreferenceScreen;
-    private PreferenceScreen mDisplayContrastPreferenceScreen;
     private PreferenceScreen mDisplayDaltonizerPreferenceScreen;
+    private SwitchPreference mToggleInversionPreference;
 
     private int mLongPressTimeoutDefault;
 
@@ -233,15 +231,26 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mSelectLongPressTimeoutPreference) {
-            String stringValue = (String) newValue;
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
-            mSelectLongPressTimeoutPreference.setSummary(
-                    mLongPressTimeoutValuetoTitleMap.get(stringValue));
+        if (mSelectLongPressTimeoutPreference == preference) {
+            handleLongPressTimeoutPreferenceChange((String) newValue);
+            return true;
+        } else if (mToggleInversionPreference == preference) {
+            handleToggleInversionPreferenceChange((Boolean) newValue);
             return true;
         }
         return false;
+    }
+
+    private void handleLongPressTimeoutPreferenceChange(String stringValue) {
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
+        mSelectLongPressTimeoutPreference.setSummary(
+                mLongPressTimeoutValuetoTitleMap.get(stringValue));
+    }
+
+    private void handleToggleInversionPreferenceChange(boolean checked) {
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, (checked ? 1 : 0));
     }
 
     @Override
@@ -262,7 +271,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             handleToggleSpeakPasswordPreferenceClick();
             return true;
         } else if (mGlobalGesturePreferenceScreen == preference) {
-            handleTogglEnableAccessibilityGesturePreferenceClick();
+            handleToggleEnableAccessibilityGesturePreferenceClick();
             return true;
         } else if (mDisplayMagnificationPreferenceScreen == preference) {
             handleDisplayMagnificationPreferenceScreenClick();
@@ -305,7 +314,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 mToggleSpeakPasswordPreference.isChecked() ? 1 : 0);
     }
 
-    private void handleTogglEnableAccessibilityGesturePreferenceClick() {
+    private void handleToggleEnableAccessibilityGesturePreferenceClick() {
         Bundle extras = mGlobalGesturePreferenceScreen.getExtras();
         extras.putString(EXTRA_TITLE, getString(
                 R.string.accessibility_global_gesture_preference_title));
@@ -340,6 +349,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Text contrast.
         mToggleHighTextContrastPreference =
                 (CheckBoxPreference) findPreference(TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE);
+
+        // Display inversion.
+        mToggleInversionPreference = (SwitchPreference) findPreference(TOGGLE_INVERSION_PREFERENCE);
+        mToggleInversionPreference.setOnPreferenceChangeListener(this);
 
         // Power button ends calls.
         mTogglePowerButtonEndsCallPreference =
@@ -385,10 +398,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
 
         // Display color adjustments.
-        mDisplayContrastPreferenceScreen = (PreferenceScreen) findPreference(
-                DISPLAY_CONTRAST_PREFERENCE_SCREEN);
-        mDisplayInversionPreferenceScreen = (PreferenceScreen) findPreference(
-                DISPLAY_INVERSION_PREFERENCE_SCREEN);
         mDisplayDaltonizerPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
 
@@ -513,6 +522,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
 
+        // If the quick setting is enabled, the preference MUST be enabled.
+        mToggleInversionPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, 0) == 1);
+
         // Power button ends calls.
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
                 && Utils.isVoiceCapable(getActivity())) {
@@ -543,8 +556,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
                 mDisplayMagnificationPreferenceScreen);
-        updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED,
-                mDisplayInversionPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
