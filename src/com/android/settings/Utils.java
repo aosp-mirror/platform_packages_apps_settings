@@ -390,6 +390,15 @@ public final class Utils {
         }
     }
 
+    public static void forceCustomPadding(View view) {
+        final Resources res = view.getResources();
+        final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
+        final int paddingBottom = res.getDimensionPixelSize(
+                com.android.internal.R.dimen.preference_fragment_padding_bottom);
+
+        view.setPaddingRelative(paddingSide, 0, paddingSide, paddingBottom);
+    }
+
     /**
      * Return string resource that best describes combination of tethering
      * options available on this device.
