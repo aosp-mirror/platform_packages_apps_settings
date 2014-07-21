@@ -297,7 +297,6 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     private void installVoiceData() {
         if (TextUtils.isEmpty(getEngineName())) return;
         Intent intent = new Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setPackage(getEngineName());
         try {
             Log.v(TAG, "Installing voice data: " + intent.toUri(0));
