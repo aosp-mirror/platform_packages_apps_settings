@@ -33,7 +33,7 @@
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_dark</item>
-        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
+        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
     <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
@@ -48,7 +48,7 @@
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
-        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
+        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
     <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">
@@ -92,7 +92,7 @@
 
         <item name="switchBarTheme">@style/Theme.SwitchBar.Settings</item>
 
-        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
+        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
@@ -146,7 +146,7 @@
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
-        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
+        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
     <style name="Theme.CryptKeeper" parent="@android:style/Theme.Material.NoActionBar">
@@ -164,7 +164,7 @@
         <item name="android:actionBarWidgetTheme">@null</item>
         <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
 
-        <item name="dashboardBackgroundColor">@color/dashboard_background_color</item>
+        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
@@ -185,7 +185,7 @@
         <item name="switchBarMarginStart">0dip</item>
         <item name="switchBarMarginEnd">0dip</item>
 
-        <item name="dashboardBackgroundColor">@android:color/transparent</item>
+        <item name="preferenceBackgroundColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.TimePicker" parent="@*android:style/Theme.Material.Light.Dialog.TimePicker">
