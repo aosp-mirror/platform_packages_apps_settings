@@ -452,17 +452,19 @@ public class InstalledAppDetails extends Fragment
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.installed_app_details, container, false);
-        Utils.prepareCustomPreferencesList(container, view, view, false);
+
+        final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
+        Utils.forceCustomPadding(allDetails);
 
         mRootView = view;
         mComputingStr = getActivity().getText(R.string.computing_size);
         
         // Set default values on sizes
-        mTotalSize = (TextView)view.findViewById(R.id.total_size_text);
-        mAppSize = (TextView)view.findViewById(R.id.application_size_text);
-        mDataSize = (TextView)view.findViewById(R.id.data_size_text);
-        mExternalCodeSize = (TextView)view.findViewById(R.id.external_code_size_text);
-        mExternalDataSize = (TextView)view.findViewById(R.id.external_data_size_text);
+        mTotalSize = (TextView) view.findViewById(R.id.total_size_text);
+        mAppSize = (TextView) view.findViewById(R.id.application_size_text);
+        mDataSize = (TextView) view.findViewById(R.id.data_size_text);
+        mExternalCodeSize = (TextView) view.findViewById(R.id.external_code_size_text);
+        mExternalDataSize = (TextView) view.findViewById(R.id.external_data_size_text);
 
         if (Environment.isExternalStorageEmulated()) {
             ((View)mExternalCodeSize.getParent()).setVisibility(View.GONE);
@@ -473,13 +475,13 @@ public class InstalledAppDetails extends Fragment
         View btnPanel = view.findViewById(R.id.control_buttons_panel);
         mForceStopButton = (Button) btnPanel.findViewById(R.id.left_button);
         mForceStopButton.setText(R.string.force_stop);
-        mUninstallButton = (Button)btnPanel.findViewById(R.id.right_button);
+        mUninstallButton = (Button) btnPanel.findViewById(R.id.right_button);
         mForceStopButton.setEnabled(false);
         
         // Get More Control button panel
         mMoreControlButtons = view.findViewById(R.id.more_control_buttons_panel);
         mMoreControlButtons.findViewById(R.id.left_button).setVisibility(View.INVISIBLE);
-        mSpecialDisableButton = (Button)mMoreControlButtons.findViewById(R.id.right_button);
+        mSpecialDisableButton = (Button) mMoreControlButtons.findViewById(R.id.right_button);
         mMoreControlButtons.setVisibility(View.GONE);
         
         // Initialize clear data and move install location buttons
@@ -491,12 +493,12 @@ public class InstalledAppDetails extends Fragment
         mCacheSize = (TextView) view.findViewById(R.id.cache_size_text);
         mClearCacheButton = (Button) view.findViewById(R.id.clear_cache_button);
 
-        mActivitiesButton = (Button)view.findViewById(R.id.clear_activities_button);
+        mActivitiesButton = (Button) view.findViewById(R.id.clear_activities_button);
         
         // Screen compatibility control
         mScreenCompatSection = view.findViewById(R.id.screen_compatibility_section);
-        mAskCompatibilityCB = (CheckBox)view.findViewById(R.id.ask_compatibility_cb);
-        mEnableCompatibilityCB = (CheckBox)view.findViewById(R.id.enable_compatibility_cb);
+        mAskCompatibilityCB = (CheckBox) view.findViewById(R.id.ask_compatibility_cb);
+        mEnableCompatibilityCB = (CheckBox) view.findViewById(R.id.enable_compatibility_cb);
         
         mNotificationSwitch = (CompoundButton) view.findViewById(R.id.notification_switch);
 
