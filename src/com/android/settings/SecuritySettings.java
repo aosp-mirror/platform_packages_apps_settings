@@ -17,8 +17,6 @@
 package com.android.settings;
 
 
-import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
@@ -41,6 +39,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
@@ -54,6 +53,8 @@ import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 /**
  * Gesture lock pattern settings.
@@ -93,6 +94,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String KEY_TRUST_AGENT = "trust_agent";
+    private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
 
     private DevicePolicyManager mDPM;
 
@@ -295,6 +297,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
                                  TelephonyManager.SIM_STATE_UNKNOWN)) {
                 root.findPreference(KEY_SIM_LOCK).setEnabled(false);
             }
+        }
+        try {
+            if (Settings.System.getInt(getContentResolver(), Settings.System.LOCK_TO_APP_ENABLED)
+                    != 0) {
+                root.findPreference(KEY_SCREEN_PINNING).setSummary(
+                        getResources().getString(R.string.switch_on_text));
+            }
+        } catch (SettingNotFoundException e) {
+            Log.w(TAG, "No Lock-to-app enabled setting", e);
         }
 
         // Show password
