@@ -386,12 +386,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         Log.d(TAG, "Installing " + packageName);
                     }
                 }
-                if (info != null && (info.flags&ApplicationInfo.FLAG_BLOCKED) != 0
+                if (info != null && (info.flags&ApplicationInfo.FLAG_HIDDEN) != 0
                         && (info.flags&ApplicationInfo.FLAG_INSTALLED) != 0) {
                     disableUiForPackage(packageName);
-                    mIPm.setApplicationBlockedSettingAsUser(packageName, false, userId);
+                    mIPm.setApplicationHiddenSettingAsUser(packageName, false, userId);
                     if (DEBUG) {
-                        Log.d(TAG, "Unblocking " + packageName);
+                        Log.d(TAG, "Unhiding " + packageName);
                     }
                 }
             } catch (RemoteException re) {
@@ -409,9 +409,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         }
                     } else {
                         disableUiForPackage(packageName);
-                        mIPm.setApplicationBlockedSettingAsUser(packageName, true, userId);
+                        mIPm.setApplicationHiddenSettingAsUser(packageName, true, userId);
                         if (DEBUG) {
-                            Log.d(TAG, "Blocking " + packageName);
+                            Log.d(TAG, "Hiding " + packageName);
                         }
                     }
                 }
@@ -653,9 +653,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private boolean isAppEnabledForUser(PackageInfo pi) {
         if (pi == null) return false;
         final int flags = pi.applicationInfo.flags;
-        // Return true if it is installed and not blocked
+        // Return true if it is installed and not hidden
         return ((flags&ApplicationInfo.FLAG_INSTALLED) != 0
-                && (flags&ApplicationInfo.FLAG_BLOCKED) == 0);
+                && (flags&ApplicationInfo.FLAG_HIDDEN) == 0);
     }
 
     private void populateApps() {
