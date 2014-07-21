@@ -33,10 +33,12 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroupAdapter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -77,6 +79,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         }
     };
 
+    private ViewGroup mPinnedHeaderFrameLayout;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -90,6 +94,24 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         if (helpResource != 0) {
             mHelpUrl = getResources().getString(helpResource);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View root = super.onCreateView(inflater, container, savedInstanceState);
+        mPinnedHeaderFrameLayout = (ViewGroup) root.findViewById(R.id.pinned_header);
+        return root;
+    }
+
+    public void setPinnedHeaderView(View pinnedHeader) {
+        mPinnedHeaderFrameLayout.addView(pinnedHeader);
+        mPinnedHeaderFrameLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void clearPinnedHeaderView() {
+        mPinnedHeaderFrameLayout.removeAllViews();
+        mPinnedHeaderFrameLayout.setVisibility(View.GONE);
     }
 
     @Override

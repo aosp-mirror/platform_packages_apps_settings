@@ -42,10 +42,8 @@ import android.provider.MediaStore;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -97,7 +95,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment {
         if (mHeaderView == null) {
             mHeaderView = LayoutInflater.from(getActivity()).inflate(
                     R.layout.user_info_header, null);
-            ((ViewGroup) getListView().getParent()).addView(mHeaderView, 0);
+            setPinnedHeaderView(mHeaderView);
             mHeaderView.setOnClickListener(this);
             mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
             mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
