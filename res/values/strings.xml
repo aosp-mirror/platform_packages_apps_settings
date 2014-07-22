@@ -4784,20 +4784,31 @@
     <string name="data_usage_data_limit">Set data limit</string>
     <!-- Title for option to pick visible time range from a list available usage periods. [CHAR LIMIT=25] -->
     <string name="data_usage_cycle">Data usage cycle</string>
-    <!-- Title for checkbox menu option to enable mobile data when roaming. [CHAR LIMIT=26] -->
+    <!-- Title for menu option to enable mobile data when roaming. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_roaming">Data roaming</string>
-    <!-- Title for checkbox menu option to restrict background data usage. [CHAR LIMIT=26] -->
+    <!-- Title for menu option to restrict background data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_restrict_background">Restrict background data</string>
-    <!-- Title for checkbox menu option to show 4G mobile data usage separate from other mobile data usage. [CHAR LIMIT=26] -->
+    <!-- Title for menu option to allow background data usage. [CHAR LIMIT=26] -->
+    <string name="data_usage_menu_allow_background">Allow background data</string>
+    <!-- Title for menu option to show 4G mobile data usage separate from other mobile data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_split_4g">Separate 4G usage</string>
-    <!-- Title for checkbox menu option to show Wi-Fi data usage. [CHAR LIMIT=26] -->
+    <!-- Title for menu option to show Wi-Fi data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_show_wifi">Show Wi\u2011Fi</string>
-    <!-- Title for checkbox menu option to show Ethernet data usage. [CHAR LIMIT=26] -->
+    <!-- Title for menu option to hide Wi-Fi data usage. [CHAR LIMIT=26] -->
+    <string name="data_usage_menu_hide_wifi">Hide Wi\u2011Fi</string>
+    <!-- Title for menu option to show Ethernet data usage. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_show_ethernet">Show Ethernet usage</string>
+    <!-- Title for menu option to hide Ethernet data usage. [CHAR LIMIT=26] -->
+    <string name="data_usage_menu_hide_ethernet">Hide Ethernet usage</string>
     <!-- Title for menu option to configure metered networks. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_metered">Mobile hotspots</string>
-    <!--  Title for menu option to enable global auto-sync of account data -->
+    <string name="data_usage_menu_metered">Network restrictions</string>
+    <!-- Title for menu option to enable global auto-sync of account data -->
     <string name="data_usage_menu_auto_sync">Auto-sync data</string>
+    <!-- Title for menu option to show details for all SIM cards. [CHAR LIMIT=26] -->
+    <string name="data_usage_menu_sim_cards">SIM cards</string>
+    <!-- Title for menu option to show details for all cellular networks. [CHAR LIMIT=26] -->
+    <string name="data_usage_menu_cellular_networks">Cellular networks</string>
+
     <!--  Title for menu option to enable global auto-sync of personal account data [CHAR LIMIT=30] -->
     <string name="account_settings_menu_auto_sync">Auto-sync data</string>
     <!--  Title for menu option to enable global auto-sync of personal account data [CHAR LIMIT=30] -->
@@ -4858,7 +4869,7 @@
     <!-- Data Usage Background label.  [CHAR LIMIT=40] -->
     <string name="data_usage_background_label">Background:</string>
     <!-- Button title for launching application-specific data usage settings. [CHAR LIMIT=32] -->
-    <string name="data_usage_app_settings">View app settings</string>
+    <string name="data_usage_app_settings">App settings</string>
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=40] -->
     <string name="data_usage_app_restrict_background">Restrict app background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
@@ -4930,15 +4941,18 @@
     <string name="data_usage_total_during_range_mobile" product="default"><xliff:g id="range" example="Jul 1 - Jul 31">%2$s</xliff:g>: about <xliff:g id="total" example="128KB">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ.</string>
 
     <!-- Dialog title for selecting metered networks. [CHAR LIMIT=25] -->
-    <string name="data_usage_metered_title">Mobile hotspots</string>
+    <string name="data_usage_metered_title">Network restrictions</string>
     <!-- Dialog body for selecting paid networks. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_metered_body">Select the Wi\u2011Fi networks which are mobile hotspots.  Apps can be restricted from using these networks when in the background.  Apps may also warn before using these networks for large downloads.</string>
+    <string name="data_usage_metered_body">Metered networks are treated like cellular when background data is restricted. Apps may warn before using these networks for large downloads.</string>
     <!-- Header for list of mobile networks. [CHAR LIMIT=32] -->
     <string name="data_usage_metered_mobile">Cellular networks</string>
     <!-- Header for list of Wi-Fi networks. [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_wifi">Wi\u2011Fi networks</string>
+    <string name="data_usage_metered_wifi">Metered Wi\u2011Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
-    <string name="data_usage_metered_wifi_disabled">To select mobile hotspots, turn Wi\u2011Fi on.</string>
+    <string name="data_usage_metered_wifi_disabled">To select metered networks, turn Wi\u2011Fi on.</string>
+
+    <!-- Disclaimer string for data usage measured by device. [CHAR LIMIT=80] -->
+    <string name="data_usage_disclaimer">Carrier data accounting may differ from your device.</string>
 
     <!-- Button at the bottom of the CryptKeeper screen to make an emergency call. -->
     <string name="cryptkeeper_emergency_call">Emergency call</string>

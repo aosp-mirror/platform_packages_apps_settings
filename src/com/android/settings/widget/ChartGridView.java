@@ -19,21 +19,24 @@ package com.android.settings.widget;
 import static com.android.settings.DataUsageSummary.formatDateRange;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
+
+import java.util.Locale;
 
 /**
  * Background of {@link ChartView} that renders grid lines as requested by
@@ -47,10 +50,13 @@ public class ChartGridView extends View {
     private Drawable mPrimary;
     private Drawable mSecondary;
     private Drawable mBorder;
+
+    private int mLabelSize;
     private int mLabelColor;
 
-    private Layout mLayoutStart;
-    private Layout mLayoutEnd;
+    private Layout mLabelStart;
+    private Layout mLabelMid;
+    private Layout mLabelEnd;
 
     public ChartGridView(Context context) {
         this(context, null, 0);
@@ -71,7 +77,17 @@ public class ChartGridView extends View {
         mPrimary = a.getDrawable(R.styleable.ChartGridView_primaryDrawable);
         mSecondary = a.getDrawable(R.styleable.ChartGridView_secondaryDrawable);
         mBorder = a.getDrawable(R.styleable.ChartGridView_borderDrawable);
-        mLabelColor = a.getColor(R.styleable.ChartGridView_labelColor, Color.RED);
+
+        final int taId = a.getResourceId(R.styleable.ChartGridView_android_textAppearance, -1);
+        final TypedArray ta = context.obtainStyledAttributes(taId,
+                com.android.internal.R.styleable.TextAppearance);
+        mLabelSize = ta.getDimensionPixelSize(
+                com.android.internal.R.styleable.TextAppearance_textSize, 0);
+        ta.recycle();
+
+        final ColorStateList labelColor = a.getColorStateList(
+                R.styleable.ChartGridView_android_textColor);
+        mLabelColor = labelColor.getDefaultColor();
 
         a.recycle();
     }
@@ -83,71 +99,83 @@ public class ChartGridView extends View {
 
     void setBounds(long start, long end) {
         final Context context = getContext();
-        mLayoutStart = makeLayout(formatDateRange(context, start, start));
-        mLayoutEnd = makeLayout(formatDateRange(context, end, end));
+        final long mid = (start + end) / 2;
+        mLabelStart = makeLabel(formatDateRange(context, start, start));
+        mLabelMid = makeLabel(formatDateRange(context, mid, mid));
+        mLabelEnd = makeLabel(formatDateRange(context, end, end));
         invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         final int width = getWidth();
-        final int height = getHeight();
+        final int height = getHeight() - getPaddingBottom();
 
         final Drawable secondary = mSecondary;
-        final int secondaryHeight = mSecondary.getIntrinsicHeight();
+        if (secondary != null) {
+            final int secondaryHeight = secondary.getIntrinsicHeight();
 
-        final float[] vertTicks = mVert.getTickPoints();
-        for (float y : vertTicks) {
-            final int bottom = (int) Math.min(y + secondaryHeight, height);
-            secondary.setBounds(0, (int) y, width, bottom);
-            secondary.draw(canvas);
+            final float[] vertTicks = mVert.getTickPoints();
+            for (float y : vertTicks) {
+                final int bottom = (int) Math.min(y + secondaryHeight, height);
+                secondary.setBounds(0, (int) y, width, bottom);
+                secondary.draw(canvas);
+            }
         }
 
         final Drawable primary = mPrimary;
-        final int primaryWidth = mPrimary.getIntrinsicWidth();
-        final int primaryHeight = mPrimary.getIntrinsicHeight();
+        if (primary != null) {
+            final int primaryWidth = primary.getIntrinsicWidth();
+            final int primaryHeight = primary.getIntrinsicHeight();
 
-        final float[] horizTicks = mHoriz.getTickPoints();
-        for (float x : horizTicks) {
-            final int right = (int) Math.min(x + primaryWidth, width);
-            primary.setBounds((int) x, 0, right, height);
-            primary.draw(canvas);
+            final float[] horizTicks = mHoriz.getTickPoints();
+            for (float x : horizTicks) {
+                final int right = (int) Math.min(x + primaryWidth, width);
+                primary.setBounds((int) x, 0, right, height);
+                primary.draw(canvas);
+            }
         }
 
         mBorder.setBounds(0, 0, width, height);
         mBorder.draw(canvas);
 
-        final int padding = mLayoutStart != null ? mLayoutStart.getHeight() / 8 : 0;
+        final int padding = mLabelStart != null ? mLabelStart.getHeight() / 8 : 0;
 
-        final Layout start = mLayoutStart;
+        final Layout start = mLabelStart;
         if (start != null) {
-            canvas.save();
+            final int saveCount = canvas.save();
             canvas.translate(0, height + padding);
             start.draw(canvas);
-            canvas.restore();
+            canvas.restoreToCount(saveCount);
         }
 
-        final Layout end = mLayoutEnd;
+        final Layout mid = mLabelMid;
+        if (mid != null) {
+            final int saveCount = canvas.save();
+            canvas.translate((width - mid.getWidth()) / 2, height + padding);
+            mid.draw(canvas);
+            canvas.restoreToCount(saveCount);
+        }
+
+        final Layout end = mLabelEnd;
         if (end != null) {
-            canvas.save();
+            final int saveCount = canvas.save();
             canvas.translate(width - end.getWidth(), height + padding);
             end.draw(canvas);
-            canvas.restore();
+            canvas.restoreToCount(saveCount);
         }
     }
 
-    private Layout makeLayout(CharSequence text) {
+    private Layout makeLabel(CharSequence text) {
         final Resources res = getResources();
         final TextPaint paint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         paint.density = res.getDisplayMetrics().density;
         paint.setCompatibilityScaling(res.getCompatibilityInfo().applicationScale);
         paint.setColor(mLabelColor);
-        paint.setTextSize(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, res.getDisplayMetrics()));
+        paint.setTextSize(mLabelSize);
 
         return new StaticLayout(text, paint,
                 (int) Math.ceil(Layout.getDesiredWidth(text, paint)),
                 Layout.Alignment.ALIGN_NORMAL, 1.f, 0, true);
     }
-
 }
