@@ -18,14 +18,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingTop="8dip"
-    android:paddingBottom="8dip"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp"
     android:columnCount="3">
 
     <ImageView
         android:id="@android:id/icon"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:scaleType="fitXY"
         android:layout_rowSpan="3"
@@ -39,21 +39,23 @@
         android:layout_marginTop="2dip"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="viewStart" />
 
     <TextView
         android:id="@android:id/text1"
         android:layout_marginStart="6dip"
         android:layout_marginTop="2dip"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:textColor="?android:attr/textColorSecondary" />
 
     <ProgressBar
         android:id="@android:id/progress"
-        android:layout_height="8dip"
+        android:layout_height="wrap_content"
         android:layout_columnSpan="2"
         android:layout_gravity="fill_horizontal|top"
-        android:layout_marginTop="8dip"
+        android:layout_marginTop="4dip"
         android:max="100"
         android:progressDrawable="@drawable/data_usage_bar"
         style="?android:attr/progressBarStyleHorizontal" />

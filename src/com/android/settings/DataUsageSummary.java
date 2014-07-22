@@ -55,6 +55,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -63,6 +64,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -107,9 +109,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -138,7 +137,6 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
-import com.android.settings.widget.PieChartView;
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
@@ -170,7 +168,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static final String TAB_ETHERNET = "ethernet";
 
     private static final String TAG_CONFIRM_DATA_DISABLE = "confirmDataDisable";
-    private static final String TAG_CONFIRM_DATA_ROAMING = "confirmDataRoaming";
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
     private static final String TAG_WARNING_EDITOR = "warningEditor";
@@ -189,14 +186,10 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
 
-    private static final int FOREGROUND_BYTES_COLOR = 0xff009688;
-    private static final int DEFAULT_BYTES_COLOR = 0xffced7db;
-
     private INetworkManagementService mNetworkService;
     private INetworkStatsService mStatsService;
     private NetworkPolicyManager mPolicyManager;
     private TelephonyManager mTelephonyManager;
-
 
     private INetworkStatsSession mStatsSession;
 
@@ -219,29 +212,33 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
     private ViewGroup mNetworkSwitchesContainer;
     private LinearLayout mNetworkSwitches;
+    private boolean mDataEnabledSupported;
     private Switch mDataEnabled;
     private View mDataEnabledView;
-    private CheckBox mDisableAtLimit;
+    private boolean mDisableAtLimitSupported;
+    private Switch mDisableAtLimit;
     private View mDisableAtLimitView;
 
     private View mCycleView;
     private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
+    private TextView mCycleSummary;
 
     private ChartDataUsageView mChart;
-    private TextView mUsageSummary;
+    private View mDisclaimer;
     private TextView mEmpty;
+    private View mStupidPadding;
 
     private View mAppDetail;
     private ImageView mAppIcon;
     private ViewGroup mAppTitles;
-    private PieChartView mAppPieChart;
+    private TextView mAppTotal;
     private TextView mAppForeground;
     private TextView mAppBackground;
     private Button mAppSettings;
 
     private LinearLayout mAppSwitches;
-    private CheckBox mAppRestrict;
+    private Switch mAppRestrict;
     private View mAppRestrictView;
 
     private boolean mShowWifi = false;
@@ -259,9 +256,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private String mCurrentTab = null;
     private String mIntentTab = null;
 
-    private MenuItem mMenuDataRoaming;
     private MenuItem mMenuRestrictBackground;
-    private MenuItem mMenuAutoSync;
+    private MenuItem mMenuShowWifi;
+    private MenuItem mMenuShowEthernet;
+    private MenuItem mMenuSimCards;
+    private MenuItem mMenuCellularNetworks;
 
     /** Flag used to ignore listeners during binding. */
     private boolean mBinding;
@@ -359,13 +358,17 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mNetworkSwitches = (LinearLayout) mHeader.findViewById(R.id.network_switches);
 
             mDataEnabled = new Switch(inflater.getContext());
+            mDataEnabled.setClickable(false);
+            mDataEnabled.setFocusable(false);
             mDataEnabledView = inflatePreference(inflater, mNetworkSwitches, mDataEnabled);
             mDataEnabledView.setTag(R.id.preference_highlight_key,
                     DATA_USAGE_ENABLE_MOBILE_KEY);
-            mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
+            mDataEnabledView.setClickable(true);
+            mDataEnabledView.setFocusable(true);
+            mDataEnabledView.setOnClickListener(mDataEnabledListener);
             mNetworkSwitches.addView(mDataEnabledView);
 
-            mDisableAtLimit = new CheckBox(inflater.getContext());
+            mDisableAtLimit = new Switch(inflater.getContext());
             mDisableAtLimit.setClickable(false);
             mDisableAtLimit.setFocusable(false);
             mDisableAtLimitView = inflatePreference(inflater, mNetworkSwitches, mDisableAtLimit);
@@ -375,15 +378,16 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mDisableAtLimitView.setFocusable(true);
             mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
             mNetworkSwitches.addView(mDisableAtLimitView);
-        }
 
-        // bind cycle dropdown
-        mCycleView = mHeader.findViewById(R.id.cycles);
-        mCycleView.setTag(R.id.preference_highlight_key, DATA_USAGE_CYCLE_KEY);
-        mCycleSpinner = (Spinner) mCycleView.findViewById(R.id.cycles_spinner);
-        mCycleAdapter = new CycleAdapter(context);
-        mCycleSpinner.setAdapter(mCycleAdapter);
-        mCycleSpinner.setOnItemSelectedListener(mCycleListener);
+            mCycleView = inflater.inflate(R.layout.data_usage_cycles, mNetworkSwitches, false);
+            mCycleView.setTag(R.id.preference_highlight_key, DATA_USAGE_CYCLE_KEY);
+            mCycleSpinner = (Spinner) mCycleView.findViewById(R.id.cycles_spinner);
+            mCycleAdapter = new CycleAdapter(context);
+            mCycleSpinner.setAdapter(mCycleAdapter);
+            mCycleSpinner.setOnItemSelectedListener(mCycleListener);
+            mCycleSummary = (TextView) mCycleView.findViewById(R.id.cycle_summary);
+            mNetworkSwitches.addView(mCycleView);
+        }
 
         mChart = (ChartDataUsageView) mHeader.findViewById(R.id.chart);
         mChart.setListener(mChartListener);
@@ -394,7 +398,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mAppDetail = mHeader.findViewById(R.id.app_detail);
             mAppIcon = (ImageView) mAppDetail.findViewById(R.id.app_icon);
             mAppTitles = (ViewGroup) mAppDetail.findViewById(R.id.app_titles);
-            mAppPieChart = (PieChartView) mAppDetail.findViewById(R.id.app_pie_chart);
             mAppForeground = (TextView) mAppDetail.findViewById(R.id.app_foreground);
             mAppBackground = (TextView) mAppDetail.findViewById(R.id.app_background);
             mAppSwitches = (LinearLayout) mAppDetail.findViewById(R.id.app_switches);
@@ -402,7 +405,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mAppSettings = (Button) mAppDetail.findViewById(R.id.app_settings);
             mAppSettings.setOnClickListener(mAppSettingsListener);
 
-            mAppRestrict = new CheckBox(inflater.getContext());
+            mAppRestrict = new Switch(inflater.getContext());
             mAppRestrict.setClickable(false);
             mAppRestrict.setFocusable(false);
             mAppRestrictView = inflatePreference(inflater, mAppSwitches, mAppRestrict);
@@ -412,8 +415,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mAppSwitches.addView(mAppRestrictView);
         }
 
-        mUsageSummary = (TextView) mHeader.findViewById(R.id.usage_summary);
+        mDisclaimer = mHeader.findViewById(R.id.disclaimer);
         mEmpty = (TextView) mHeader.findViewById(android.R.id.empty);
+        mStupidPadding = mHeader.findViewById(R.id.stupid_padding);
 
         mAdapter = new DataUsageAdapter(mUidDetailProvider, mInsetSide);
         mListView.setOnItemClickListener(mListListener);
@@ -480,45 +484,41 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final boolean appDetailMode = isAppDetailMode();
         final boolean isOwner = ActivityManager.getCurrentUser() == UserHandle.USER_OWNER;
 
-        mMenuDataRoaming = menu.findItem(R.id.data_usage_menu_roaming);
-        mMenuDataRoaming.setVisible(hasReadyMobileRadio(context) && !appDetailMode);
-        mMenuDataRoaming.setChecked(getDataRoaming());
+        mMenuShowWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
+        // TODO: Define behavior of this sync button. See: http://b/16076571
+        if (hasWifiRadio(context) && hasReadyMobileRadio(context)) {
+            mMenuShowWifi.setVisible(!appDetailMode);
+        } else {
+            mMenuShowWifi.setVisible(false);
+        }
+
+        mMenuShowEthernet = menu.findItem(R.id.data_usage_menu_show_ethernet);
+        if (hasEthernet(context) && hasReadyMobileRadio(context)) {
+            mMenuShowEthernet.setVisible(!appDetailMode);
+        } else {
+            mMenuShowEthernet.setVisible(false);
+        }
 
         mMenuRestrictBackground = menu.findItem(R.id.data_usage_menu_restrict_background);
         mMenuRestrictBackground.setVisible(
                 hasReadyMobileRadio(context) && isOwner && !appDetailMode);
-        mMenuRestrictBackground.setChecked(mPolicyManager.getRestrictBackground());
-
-        // TODO: Define behavior of this sync button. See: http://b/16076571
-        mMenuAutoSync = menu.findItem(R.id.data_usage_menu_auto_sync);
-        mMenuAutoSync.setChecked(ContentResolver.getMasterSyncAutomatically());
-        mMenuAutoSync.setVisible(!appDetailMode);
-
-        final MenuItem split4g = menu.findItem(R.id.data_usage_menu_split_4g);
-        split4g.setVisible(hasReadyMobile4gRadio(context) && isOwner && !appDetailMode);
-        split4g.setChecked(isMobilePolicySplit());
-
-        final MenuItem showWifi = menu.findItem(R.id.data_usage_menu_show_wifi);
-        if (hasWifiRadio(context) && hasReadyMobileRadio(context)) {
-            showWifi.setVisible(!appDetailMode);
-            showWifi.setChecked(mShowWifi);
-        } else {
-            showWifi.setVisible(false);
-        }
-
-        final MenuItem showEthernet = menu.findItem(R.id.data_usage_menu_show_ethernet);
-        if (hasEthernet(context) && hasReadyMobileRadio(context)) {
-            showEthernet.setVisible(!appDetailMode);
-            showEthernet.setChecked(mShowEthernet);
-        } else {
-            showEthernet.setVisible(false);
-        }
 
         final MenuItem metered = menu.findItem(R.id.data_usage_menu_metered);
         if (hasReadyMobileRadio(context) || hasWifiRadio(context)) {
             metered.setVisible(!appDetailMode);
         } else {
             metered.setVisible(false);
+        }
+
+        // TODO: show when multiple sims available
+        mMenuSimCards = menu.findItem(R.id.data_usage_menu_sim_cards);
+        mMenuSimCards.setVisible(false);
+
+        mMenuCellularNetworks = menu.findItem(R.id.data_usage_menu_cellular_networks);
+        if (hasReadyMobileRadio(context)) {
+            mMenuCellularNetworks.setVisible(!appDetailMode);
+        } else {
+            mMenuCellularNetworks.setVisible(false);
         }
 
         final MenuItem help = menu.findItem(R.id.data_usage_menu_help);
@@ -528,23 +528,35 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         } else {
             help.setVisible(false);
         }
+
+        updateMenuTitles();
+    }
+
+    private void updateMenuTitles() {
+        if (mPolicyManager.getRestrictBackground()) {
+            mMenuRestrictBackground.setTitle(R.string.data_usage_menu_allow_background);
+        } else {
+            mMenuRestrictBackground.setTitle(R.string.data_usage_menu_restrict_background);
+        }
+
+        if (mShowWifi) {
+            mMenuShowWifi.setTitle(R.string.data_usage_menu_hide_wifi);
+        } else {
+            mMenuShowWifi.setTitle(R.string.data_usage_menu_show_wifi);
+        }
+
+        if (mShowEthernet) {
+            mMenuShowEthernet.setTitle(R.string.data_usage_menu_hide_ethernet);
+        } else {
+            mMenuShowEthernet.setTitle(R.string.data_usage_menu_show_ethernet);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.data_usage_menu_roaming: {
-                final boolean dataRoaming = !item.isChecked();
-                if (dataRoaming) {
-                    ConfirmDataRoamingFragment.show(this);
-                } else {
-                    // no confirmation to disable roaming
-                    setDataRoaming(false);
-                }
-                return true;
-            }
             case R.id.data_usage_menu_restrict_background: {
-                final boolean restrictBackground = !item.isChecked();
+                final boolean restrictBackground = !mPolicyManager.getRestrictBackground();
                 if (restrictBackground) {
                     ConfirmRestrictFragment.show(this);
                 } else {
@@ -553,39 +565,35 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 }
                 return true;
             }
-            case R.id.data_usage_menu_split_4g: {
-                final boolean mobileSplit = !item.isChecked();
-                setMobilePolicySplit(mobileSplit);
-                item.setChecked(isMobilePolicySplit());
-                updateTabs();
-                return true;
-            }
             case R.id.data_usage_menu_show_wifi: {
-                mShowWifi = !item.isChecked();
+                mShowWifi = !mShowWifi;
                 mPrefs.edit().putBoolean(PREF_SHOW_WIFI, mShowWifi).apply();
-                item.setChecked(mShowWifi);
+                updateMenuTitles();
                 updateTabs();
                 return true;
             }
             case R.id.data_usage_menu_show_ethernet: {
-                mShowEthernet = !item.isChecked();
+                mShowEthernet = !mShowEthernet;
                 mPrefs.edit().putBoolean(PREF_SHOW_ETHERNET, mShowEthernet).apply();
-                item.setChecked(mShowEthernet);
+                updateMenuTitles();
                 updateTabs();
+                return true;
+            }
+            case R.id.data_usage_menu_sim_cards: {
+                // TODO: hook up to sim cards
+                return true;
+            }
+            case R.id.data_usage_menu_cellular_networks: {
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(new ComponentName("com.android.phone",
+                        "com.android.phone.MobileNetworkSettings"));
+                startActivity(intent);
                 return true;
             }
             case R.id.data_usage_menu_metered: {
                 final SettingsActivity sa = (SettingsActivity) getActivity();
                 sa.startPreferencePanel(DataUsageMeteredSettings.class.getCanonicalName(), null,
                         R.string.data_usage_metered_title, null, this, 0);
-                return true;
-            }
-            case R.id.data_usage_menu_auto_sync: {
-                if (ActivityManager.isUserAMonkey()) {
-                    Log.d("SyncState", "ignoring monkey's attempt to flip global sync state");
-                } else {
-                    ConfirmAutoSyncChangeFragment.show(this, !item.isChecked());
-                }
                 return true;
             }
         }
@@ -725,7 +733,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
-        mDataEnabledView.setVisibility(isOwner ? View.VISIBLE : View.GONE);
+        mDataEnabledSupported = isOwner;
+        mDisableAtLimitSupported = true;
 
         // TODO: remove mobile tabs when SIM isn't ready
 
@@ -748,14 +757,14 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         } else if (TAB_WIFI.equals(currentTab)) {
             // wifi doesn't have any controls
-            mDataEnabledView.setVisibility(View.GONE);
-            mDisableAtLimitView.setVisibility(View.GONE);
+            mDataEnabledSupported = false;
+            mDisableAtLimitSupported = false;
             mTemplate = buildTemplateWifiWildcard();
 
         } else if (TAB_ETHERNET.equals(currentTab)) {
             // ethernet doesn't have any controls
-            mDataEnabledView.setVisibility(View.GONE);
-            mDisableAtLimitView.setVisibility(View.GONE);
+            mDataEnabledSupported = false;
+            mDisableAtLimitSupported = false;
             mTemplate = buildTemplateEthernet();
 
         } else {
@@ -808,12 +817,25 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mAppIcon.setImageDrawable(detail.icon);
 
         mAppTitles.removeAllViews();
+
+        View title = null;
         if (detail.detailLabels != null) {
             for (CharSequence label : detail.detailLabels) {
-                mAppTitles.addView(inflateAppTitle(inflater, mAppTitles, label));
+                title = inflater.inflate(R.layout.data_usage_app_title, mAppTitles, false);
+                ((TextView) title.findViewById(R.id.app_title)).setText(label);
+                mAppTitles.addView(title);
             }
         } else {
-            mAppTitles.addView(inflateAppTitle(inflater, mAppTitles, detail.label));
+            title = inflater.inflate(R.layout.data_usage_app_title, mAppTitles, false);
+            ((TextView) title.findViewById(R.id.app_title)).setText(detail.label);
+            mAppTitles.addView(title);
+        }
+
+        // Remember last slot for summary
+        if (title != null) {
+            mAppTotal = (TextView) title.findViewById(R.id.app_summary);
+        } else {
+            mAppTotal = null;
         }
 
         // enable settings button when package provides it
@@ -904,24 +926,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
     }
 
-    private boolean getDataRoaming() {
-        final ContentResolver resolver = getActivity().getContentResolver();
-        return android.provider.Settings.Global.getInt(resolver,
-                android.provider.Settings.Global.DATA_ROAMING, 0) != 0;
-    }
-
-    private void setDataRoaming(boolean enabled) {
-        // TODO: teach telephony DataConnectionTracker to watch and apply
-        // updates when changed.
-        final ContentResolver resolver = getActivity().getContentResolver();
-        android.provider.Settings.Global.putInt(resolver,
-                android.provider.Settings.Global.DATA_ROAMING, enabled ? 1 : 0);
-        mMenuDataRoaming.setChecked(enabled);
-    }
-
     public void setRestrictBackground(boolean restrictBackground) {
         mPolicyManager.setRestrictBackground(restrictBackground);
-        mMenuRestrictBackground.setChecked(restrictBackground);
+        updateMenuTitles();
     }
 
     private boolean getAppRestrictBackground() {
@@ -943,10 +950,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
      * current {@link #mTemplate}.
      */
     private void updatePolicy(boolean refreshCycle) {
+        boolean dataEnabledVisible = mDataEnabledSupported;
+        boolean disableAtLimitVisible = mDisableAtLimitSupported;
+
         if (isAppDetailMode()) {
-            mNetworkSwitches.setVisibility(View.GONE);
-        } else {
-            mNetworkSwitches.setVisibility(View.VISIBLE);
+            dataEnabledVisible = false;
+            disableAtLimitVisible = false;
         }
 
         // TODO: move enabled state directly into policy
@@ -958,7 +967,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
         if (isNetworkPolicyModifiable(policy)) {
-            mDisableAtLimitView.setVisibility(View.VISIBLE);
             mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
             if (!isAppDetailMode()) {
                 mChart.bindNetworkPolicy(policy);
@@ -966,9 +974,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         } else {
             // controls are disabled; don't bind warning/limit sweeps
-            mDisableAtLimitView.setVisibility(View.GONE);
+            disableAtLimitVisible = false;
             mChart.bindNetworkPolicy(null);
         }
+
+        mDataEnabledView.setVisibility(dataEnabledVisible ? View.VISIBLE : View.GONE);
+        mDisableAtLimitView.setVisibility(disableAtLimitVisible ? View.VISIBLE : View.GONE);
 
         if (refreshCycle) {
             // generate cycle list based on policy and available history
@@ -1049,12 +1060,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
     }
 
-    private OnCheckedChangeListener mDataEnabledListener = new OnCheckedChangeListener() {
+    private View.OnClickListener mDataEnabledListener = new View.OnClickListener() {
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        public void onClick(View v) {
             if (mBinding) return;
 
-            final boolean dataEnabled = isChecked;
+            final boolean dataEnabled = !mDataEnabled.isChecked();
             final String currentTab = mCurrentTab;
             if (TAB_MOBILE.equals(currentTab)) {
                 if (dataEnabled) {
@@ -1178,15 +1189,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             final long defaultBytes = entry.rxBytes + entry.txBytes;
             entry = mChartData.detailForeground.getValues(start, end, now, entry);
             final long foregroundBytes = entry.rxBytes + entry.txBytes;
+            final long totalBytes = defaultBytes + foregroundBytes;
 
-            mAppPieChart.setOriginAngle(175);
-
-            mAppPieChart.removeAllSlices();
-            mAppPieChart.addSlice(foregroundBytes, FOREGROUND_BYTES_COLOR);
-            mAppPieChart.addSlice(defaultBytes, DEFAULT_BYTES_COLOR);
-
-            mAppPieChart.generatePath();
-
+            if (mAppTotal != null) {
+                mAppTotal.setText(Formatter.formatFileSize(context, totalBytes));
+            }
             mAppBackground.setText(Formatter.formatFileSize(context, defaultBytes));
             mAppForeground.setText(Formatter.formatFileSize(context, foregroundBytes));
 
@@ -1195,10 +1202,14 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
             getLoaderManager().destroyLoader(LOADER_SUMMARY);
 
+            mCycleSummary.setVisibility(View.GONE);
+
         } else {
             if (mChartData != null) {
                 entry = mChartData.network.getValues(start, end, now, null);
             }
+
+            mCycleSummary.setVisibility(View.VISIBLE);
 
             // kick off loader for detailed stats
             getLoaderManager().restartLoader(LOADER_SUMMARY,
@@ -1207,17 +1218,18 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         final long totalBytes = entry != null ? entry.rxBytes + entry.txBytes : 0;
         final String totalPhrase = Formatter.formatFileSize(context, totalBytes);
-        final String rangePhrase = formatDateRange(context, start, end);
+        mCycleSummary.setText(totalPhrase);
 
-        final int summaryRes;
         if (TAB_MOBILE.equals(mCurrentTab) || TAB_3G.equals(mCurrentTab)
                 || TAB_4G.equals(mCurrentTab)) {
-            summaryRes = R.string.data_usage_total_during_range_mobile;
+            if (isAppDetailMode()) {
+                mDisclaimer.setVisibility(View.GONE);
+            } else {
+                mDisclaimer.setVisibility(View.VISIBLE);
+            }
         } else {
-            summaryRes = R.string.data_usage_total_during_range;
+            mDisclaimer.setVisibility(View.GONE);
         }
-
-        mUsageSummary.setText(getString(summaryRes, totalPhrase, rangePhrase));
 
         // initial layout is finished above, ensure we have transitions
         ensureLayoutTransitions();
@@ -1278,6 +1290,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         private void updateEmptyVisible() {
             final boolean isEmpty = mAdapter.isEmpty() && !isAppDetailMode();
             mEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+            mStupidPadding.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         }
     };
 
@@ -1308,12 +1321,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     }
 
     private DataUsageChartListener mChartListener = new DataUsageChartListener() {
-        @Override
-        public void onInspectRangeChanged() {
-            if (LOGD) Log.d(TAG, "onInspectRangeChanged()");
-            updateDetailData();
-        }
-
         @Override
         public void onWarningChanged() {
             setPolicyWarningBytes(mChart.getWarningBytes());
@@ -1404,8 +1411,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         private final CycleChangeItem mChangeItem;
 
         public CycleAdapter(Context context) {
-            super(context, android.R.layout.simple_spinner_item);
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            super(context, R.layout.data_usage_cycle_item);
+            setDropDownViewResource(R.layout.data_usage_cycle_item_dropdown);
             mChangeItem = new CycleChangeItem(context);
         }
 
@@ -1447,10 +1454,20 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     }
 
     public static class AppItem implements Comparable<AppItem>, Parcelable {
+        public static final int CATEGORY_USER = 0;
+        public static final int CATEGORY_APP_TITLE = 1;
+        public static final int CATEGORY_APP = 2;
+
         public final int key;
         public boolean restricted;
+        public int category;
+
         public SparseBooleanArray uids = new SparseBooleanArray();
         public long total;
+
+        public AppItem() {
+            this.key = 0;
+        }
 
         public AppItem(int key) {
             this.key = key;
@@ -1480,7 +1497,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         @Override
         public int compareTo(AppItem another) {
-            return Long.compare(another.total, total);
+            int comparison = Integer.compare(another.category, category);
+            if (comparison == 0) {
+                comparison = Long.compare(another.total, total);
+            }
+            return comparison;
         }
 
         public static final Creator<AppItem> CREATOR = new Creator<AppItem>() {
@@ -1516,9 +1537,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
          */
         public void bindStats(NetworkStats stats, int[] restrictedUids) {
             mItems.clear();
+            mLargest = 0;
 
             final int currentUserId = ActivityManager.getCurrentUser();
             final SparseArray<AppItem> knownItems = new SparseArray<AppItem>();
+            boolean hasApps = false;
 
             NetworkStats.Entry entry = null;
             final int size = stats != null ? stats.size() : 0;
@@ -1548,6 +1571,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 }
                 item.addUid(uid);
                 item.total += entry.rxBytes + entry.txBytes;
+                if (item.total > mLargest) {
+                    mLargest = item.total;
+                }
             }
 
             for (int uid : restrictedUids) {
@@ -1564,8 +1590,14 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 item.restricted = true;
             }
 
+            hasApps = !mItems.isEmpty();
+            if (hasApps) {
+                final AppItem title = new AppItem();
+                title.category = AppItem.CATEGORY_APP_TITLE;
+                mItems.add(title);
+            }
+
             Collections.sort(mItems);
-            mLargest = (mItems.size() > 0) ? mItems.get(0).total : 0;
             notifyDataSetChanged();
         }
 
@@ -1585,36 +1617,72 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.data_usage_item, parent, false);
+        public int getViewTypeCount() {
+            return 2;
+        }
 
-                if (mInsetSide > 0) {
-                    convertView.setPaddingRelative(mInsetSide, 0, mInsetSide, 0);
-                }
-            }
-
-            final Context context = parent.getContext();
-
-            final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
-            final ProgressBar progress = (ProgressBar) convertView.findViewById(
-                    android.R.id.progress);
-
-            // kick off async load of app details
+        @Override
+        public int getItemViewType(int position) {
             final AppItem item = mItems.get(position);
-            UidDetailTask.bindView(mProvider, item, convertView);
-
-            if (item.restricted && item.total <= 0) {
-                text1.setText(R.string.data_usage_app_restricted);
-                progress.setVisibility(View.GONE);
+            if (item.category == AppItem.CATEGORY_APP_TITLE) {
+                return 1;
             } else {
-                text1.setText(Formatter.formatFileSize(context, item.total));
-                progress.setVisibility(View.VISIBLE);
+                return 0;
             }
+        }
 
-            final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
-            progress.setProgress(percentTotal);
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            return getItemViewType(position) == 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final AppItem item = mItems.get(position);
+            if (getItemViewType(position) == 1) {
+                if (convertView == null) {
+                    convertView = inflateCategoryHeader(LayoutInflater.from(parent.getContext()),
+                            parent);
+                }
+
+                final TextView title = (TextView) convertView.findViewById(android.R.id.title);
+                title.setText(R.string.data_usage_app);
+
+            } else {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.data_usage_item, parent, false);
+
+                    if (mInsetSide > 0) {
+                        convertView.setPaddingRelative(mInsetSide, 0, mInsetSide, 0);
+                    }
+                }
+
+                final Context context = parent.getContext();
+
+                final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
+                final ProgressBar progress = (ProgressBar) convertView.findViewById(
+                        android.R.id.progress);
+
+                // kick off async load of app details
+                UidDetailTask.bindView(mProvider, item, convertView);
+
+                if (item.restricted && item.total <= 0) {
+                    text1.setText(R.string.data_usage_app_restricted);
+                    progress.setVisibility(View.GONE);
+                } else {
+                    text1.setText(Formatter.formatFileSize(context, item.total));
+                    progress.setVisibility(View.VISIBLE);
+                }
+
+                final int percentTotal = mLargest != 0 ? (int) (item.total * 100 / mLargest) : 0;
+                progress.setProgress(percentTotal);
+            }
 
             return convertView;
         }
@@ -1639,7 +1707,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             final FragmentTransaction ft = parent.getFragmentManager().beginTransaction();
             ft.add(fragment, TAG_APP_DETAILS);
             ft.addToBackStack(TAG_APP_DETAILS);
-            ft.setBreadCrumbTitle(label);
+            ft.setBreadCrumbTitle(
+                    parent.getResources().getString(R.string.data_usage_app_summary_title));
             ft.commitAllowingStateLoss();
         }
 
@@ -1937,46 +2006,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                     if (target != null) {
                         // TODO: extend to modify policy enabled flag.
                         target.setMobileDataEnabled(false);
-                    }
-                }
-            });
-            builder.setNegativeButton(android.R.string.cancel, null);
-
-            return builder.create();
-        }
-    }
-
-    /**
-     * Dialog to request user confirmation before setting
-     * {@link android.provider.Settings.Global#DATA_ROAMING}.
-     */
-    public static class ConfirmDataRoamingFragment extends DialogFragment {
-        public static void show(DataUsageSummary parent) {
-            if (!parent.isAdded()) return;
-
-            final ConfirmDataRoamingFragment dialog = new ConfirmDataRoamingFragment();
-            dialog.setTargetFragment(parent, 0);
-            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_DATA_ROAMING);
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Context context = getActivity();
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(R.string.roaming_reenable_title);
-            if (Utils.hasMultipleUsers(context)) {
-                builder.setMessage(R.string.roaming_warning_multiuser);
-            } else {
-                builder.setMessage(R.string.roaming_warning);
-            }
-
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
-                    if (target != null) {
-                        target.setDataRoaming(true);
                     }
                 }
             });
@@ -2308,12 +2337,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         return view;
     }
 
-    private static View inflateAppTitle(
-            LayoutInflater inflater, ViewGroup root, CharSequence label) {
-        final TextView view = (TextView) inflater.inflate(
-                R.layout.data_usage_app_title, root, false);
-        view.setText(label);
-        return view;
+    private static View inflateCategoryHeader(LayoutInflater inflater, ViewGroup root) {
+        final TypedArray a = inflater.getContext().obtainStyledAttributes(null,
+                com.android.internal.R.styleable.Preference,
+                com.android.internal.R.attr.preferenceCategoryStyle, 0);
+        final int resId = a.getResourceId(com.android.internal.R.styleable.Preference_layout, 0);
+        return inflater.inflate(resId, root, false);
     }
 
     /**
