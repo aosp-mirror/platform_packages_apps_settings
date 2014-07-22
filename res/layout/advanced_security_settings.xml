@@ -15,31 +15,23 @@
   ~ limitations under the License
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/settings_side_margin"
+        android:paddingEnd="@dimen/settings_side_margin">
 
-    <FrameLayout
+    <ListView android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:drawSelectorOnTop="false"
+            android:fastScrollEnabled="true" />
 
-        <ListView android:id="@android:id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawSelectorOnTop="false"
-                android:fastScrollEnabled="true" />
+    <TextView android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_trust_agents"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView android:id="@android:id/empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/no_trust_agents"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </FrameLayout>
-
-</LinearLayout>
+</FrameLayout>
