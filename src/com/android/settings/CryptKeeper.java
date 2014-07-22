@@ -21,7 +21,9 @@ import android.app.StatusBarManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources.NotFoundException;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -337,6 +339,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // home in the situation where we need to decrypt the device
             finish();
             return;
+        }
+
+        try {
+            if (getResources().getBoolean(R.bool.crypt_keeper_allow_rotation)) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+            }
+        } catch (NotFoundException e) {
         }
 
         // Disable the status bar, but do NOT disable back because the user needs a way to go
