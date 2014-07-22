@@ -53,6 +53,7 @@ import android.widget.RelativeLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
+import com.android.settings.PinnedHeaderListFragment;
 import com.android.settings.R;
 
 import java.text.Collator;
@@ -62,7 +63,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /** Just a sectioned list of installed applications, nothing else to index **/
-public class AppNotificationSettings extends ListFragment {
+public class AppNotificationSettings extends PinnedHeaderListFragment {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = true;
 
