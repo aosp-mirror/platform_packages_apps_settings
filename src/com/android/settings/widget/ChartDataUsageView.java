@@ -50,18 +50,17 @@ public class ChartDataUsageView extends ChartView {
     private static final int MSG_UPDATE_AXIS = 100;
     private static final long DELAY_MILLIS = 250;
 
-    private static final boolean LIMIT_SWEEPS_TO_VALID_DATA = false;
-
     private ChartGridView mGrid;
     private ChartNetworkSeriesView mSeries;
     private ChartNetworkSeriesView mDetailSeries;
 
     private NetworkStatsHistory mHistory;
 
-    private ChartSweepView mSweepLeft;
-    private ChartSweepView mSweepRight;
     private ChartSweepView mSweepWarning;
     private ChartSweepView mSweepLimit;
+
+    private long mInspectStart;
+    private long mInspectEnd;
 
     private Handler mHandler;
 
@@ -69,7 +68,6 @@ public class ChartDataUsageView extends ChartView {
     private long mVertMax;
 
     public interface DataUsageChartListener {
-        public void onInspectRangeChanged();
         public void onWarningChanged();
         public void onLimitChanged();
         public void requestWarningEdit();
@@ -112,43 +110,27 @@ public class ChartDataUsageView extends ChartView {
         mDetailSeries = (ChartNetworkSeriesView) findViewById(R.id.detail_series);
         mDetailSeries.setVisibility(View.GONE);
 
-        mSweepLeft = (ChartSweepView) findViewById(R.id.sweep_left);
-        mSweepRight = (ChartSweepView) findViewById(R.id.sweep_right);
         mSweepLimit = (ChartSweepView) findViewById(R.id.sweep_limit);
         mSweepWarning = (ChartSweepView) findViewById(R.id.sweep_warning);
 
         // prevent sweeps from crossing each other
-        mSweepLeft.setValidRangeDynamic(null, mSweepRight);
-        mSweepRight.setValidRangeDynamic(mSweepLeft, null);
         mSweepWarning.setValidRangeDynamic(null, mSweepLimit);
         mSweepLimit.setValidRangeDynamic(mSweepWarning, null);
 
         // mark neighbors for checking touch events against
-        mSweepLeft.setNeighbors(mSweepRight);
-        mSweepRight.setNeighbors(mSweepLeft);
-        mSweepLimit.setNeighbors(mSweepWarning, mSweepLeft, mSweepRight);
-        mSweepWarning.setNeighbors(mSweepLimit, mSweepLeft, mSweepRight);
+        mSweepLimit.setNeighbors(mSweepWarning);
+        mSweepWarning.setNeighbors(mSweepLimit);
 
-        mSweepLeft.addOnSweepListener(mHorizListener);
-        mSweepRight.addOnSweepListener(mHorizListener);
         mSweepWarning.addOnSweepListener(mVertListener);
         mSweepLimit.addOnSweepListener(mVertListener);
 
         mSweepWarning.setDragInterval(5 * MB_IN_BYTES);
         mSweepLimit.setDragInterval(5 * MB_IN_BYTES);
 
-        // TODO: make time sweeps adjustable through dpad
-        mSweepLeft.setClickable(false);
-        mSweepLeft.setFocusable(false);
-        mSweepRight.setClickable(false);
-        mSweepRight.setFocusable(false);
-
         // tell everyone about our axis
         mGrid.init(mHoriz, mVert);
         mSeries.init(mHoriz, mVert);
         mDetailSeries.init(mHoriz, mVert);
-        mSweepLeft.init(mHoriz);
-        mSweepRight.init(mHoriz);
         mSweepWarning.init(mVert);
         mSweepLimit.init(mVert);
 
@@ -194,7 +176,7 @@ public class ChartDataUsageView extends ChartView {
             mSweepLimit.setEnabled(true);
             mSweepLimit.setValue(policy.limitBytes);
         } else {
-            mSweepLimit.setVisibility(View.VISIBLE);
+            mSweepLimit.setVisibility(View.INVISIBLE);
             mSweepLimit.setEnabled(false);
             mSweepLimit.setValue(-1);
         }
@@ -295,23 +277,6 @@ public class ChartDataUsageView extends ChartView {
         mSeries.setEstimateVisible(estimateVisible);
     }
 
-    private OnSweepListener mHorizListener = new OnSweepListener() {
-        @Override
-        public void onSweep(ChartSweepView sweep, boolean sweepDone) {
-            updatePrimaryRange();
-
-            // update detail list only when done sweeping
-            if (sweepDone && mListener != null) {
-                mListener.onInspectRangeChanged();
-            }
-        }
-
-        @Override
-        public void requestEdit(ChartSweepView sweep) {
-            // ignored
-        }
-    };
-
     private void sendUpdateAxisDelayed(ChartSweepView sweep, boolean force) {
         if (force || !mHandler.hasMessages(MSG_UPDATE_AXIS, sweep)) {
             mHandler.sendMessageDelayed(
@@ -369,11 +334,11 @@ public class ChartDataUsageView extends ChartView {
     }
 
     public long getInspectStart() {
-        return mSweepLeft.getValue();
+        return mInspectStart;
     }
 
     public long getInspectEnd() {
-        return mSweepRight.getValue();
+        return mInspectEnd;
     }
 
     public long getWarningBytes() {
@@ -382,14 +347,6 @@ public class ChartDataUsageView extends ChartView {
 
     public long getLimitBytes() {
         return mSweepLimit.getLabelValue();
-    }
-
-    private long getHistoryStart() {
-        return mHistory != null ? mHistory.getStart() : Long.MAX_VALUE;
-    }
-
-    private long getHistoryEnd() {
-        return mHistory != null ? mHistory.getEnd() : Long.MIN_VALUE;
     }
 
     /**
@@ -403,30 +360,8 @@ public class ChartDataUsageView extends ChartView {
         mSeries.setBounds(visibleStart, visibleEnd);
         mDetailSeries.setBounds(visibleStart, visibleEnd);
 
-        final long historyStart = getHistoryStart();
-        final long historyEnd = getHistoryEnd();
-
-        final long validStart = historyStart == Long.MAX_VALUE ? visibleStart
-                : Math.max(visibleStart, historyStart);
-        final long validEnd = historyEnd == Long.MIN_VALUE ? visibleEnd
-                : Math.min(visibleEnd, historyEnd);
-
-        if (LIMIT_SWEEPS_TO_VALID_DATA) {
-            // prevent time sweeps from leaving valid data
-            mSweepLeft.setValidRange(validStart, validEnd);
-            mSweepRight.setValidRange(validStart, validEnd);
-        } else {
-            mSweepLeft.setValidRange(visibleStart, visibleEnd);
-            mSweepRight.setValidRange(visibleStart, visibleEnd);
-        }
-
-        // default sweeps to last week of data
-        final long halfRange = (visibleEnd + visibleStart) / 2;
-        final long sweepMax = validEnd;
-        final long sweepMin = Math.max(visibleStart, (sweepMax - DateUtils.WEEK_IN_MILLIS));
-
-        mSweepLeft.setValue(sweepMin);
-        mSweepRight.setValue(sweepMax);
+        mInspectStart = visibleStart;
+        mInspectEnd = visibleEnd;
 
         requestLayout();
         if (changed) {
@@ -440,15 +375,11 @@ public class ChartDataUsageView extends ChartView {
     }
 
     private void updatePrimaryRange() {
-        final long left = mSweepLeft.getValue();
-        final long right = mSweepRight.getValue();
-
         // prefer showing primary range on detail series, when available
         if (mDetailSeries.getVisibility() == View.VISIBLE) {
-            mDetailSeries.setPrimaryRange(left, right);
-            mSeries.setPrimaryRange(0, 0);
+            mSeries.setSecondary(true);
         } else {
-            mSeries.setPrimaryRange(left, right);
+            mSeries.setSecondary(false);
         }
     }
 

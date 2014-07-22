@@ -19,9 +19,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+    android:clipToPadding="false">
 
     <FrameLayout
         android:id="@+id/network_switches_container"
@@ -36,29 +34,39 @@
             android:divider="?android:attr/listDivider" />
     </FrameLayout>
 
-    <include layout="@layout/data_usage_cycles" />
     <include layout="@layout/data_usage_chart" />
 
     <TextView
-        android:id="@+id/usage_summary"
+        android:id="@+id/disclaimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/data_usage_disclaimer"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textColor="?android:attr/textColorSecondary"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:paddingTop="8dp"
+        android:paddingBottom="0dp" />
 
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:visibility="gone"
+        android:text="@string/data_usage_empty"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textColor="?android:attr/textColorSecondary"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:paddingBottom="8dip"
-        android:text="@string/data_usage_empty"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:paddingTop="4dp"
+        android:paddingBottom="0dp" />
+
+    <View
+        android:id="@+id/stupid_padding"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <include layout="@layout/data_usage_detail" />
 

@@ -14,10 +14,6 @@
      limitations under the License.
 -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:enterFadeDuration="@android:integer/config_mediumAnimTime"
-    android:exitFadeDuration="@android:integer/config_mediumAnimTime">
-
-    <item android:state_activated="true" android:state_enabled="true" android:drawable="@drawable/data_sweep_limit_activated" />
-    <item android:drawable="@drawable/data_sweep_limit_default" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/data_sweep_limit_activated" />
 </selector>

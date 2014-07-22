@@ -75,19 +75,22 @@
         <attr name="labelSize" format="dimension" />
         <attr name="labelTemplate" format="reference" />
         <attr name="labelColor" format="color" />
+        <attr name="safeRegion" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="ChartGridView">
         <attr name="primaryDrawable" format="reference" />
         <attr name="secondaryDrawable" format="reference" />
         <attr name="borderDrawable" format="reference" />
-        <attr name="labelColor" />
+        <attr name="android:textColor" />
+        <attr name="android:textAppearance" />
     </declare-styleable>
 
     <declare-styleable name="ChartNetworkSeriesView">
         <attr name="strokeColor" format="color" />
         <attr name="fillColor" format="color" />
         <attr name="fillColorSecondary" format="color" />
+        <attr name="safeRegion" />
     </declare-styleable>
 
     <attr name="apnPreferenceStyle" format="reference" />

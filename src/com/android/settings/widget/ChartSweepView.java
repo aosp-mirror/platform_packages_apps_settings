@@ -58,6 +58,7 @@ public class ChartSweepView extends View {
 
     private Rect mMargins = new Rect();
     private float mNeighborMargin;
+    private int mSafeRegion;
 
     private int mFollowAxis;
 
@@ -125,6 +126,7 @@ public class ChartSweepView extends View {
         setSweepDrawable(a.getDrawable(R.styleable.ChartSweepView_sweepDrawable));
         setFollowAxis(a.getInt(R.styleable.ChartSweepView_followAxis, -1));
         setNeighborMargin(a.getDimensionPixelSize(R.styleable.ChartSweepView_neighborMargin, 0));
+        setSafeRegion(a.getDimensionPixelSize(R.styleable.ChartSweepView_safeRegion, 0));
 
         setLabelMinSize(a.getDimensionPixelSize(R.styleable.ChartSweepView_labelSize, 0));
         setLabelTemplate(a.getResourceId(R.styleable.ChartSweepView_labelTemplate, 0));
@@ -259,7 +261,6 @@ public class ChartSweepView extends View {
             paint.density = getResources().getDisplayMetrics().density;
             paint.setCompatibilityScaling(getResources().getCompatibilityInfo().applicationScale);
             paint.setColor(mLabelColor);
-            paint.setShadowLayer(4 * paint.density, 0, 0, Color.BLACK);
 
             mLabelTemplate = new SpannableStringBuilder(template);
             mLabelLayout = new DynamicLayout(
@@ -381,6 +382,10 @@ public class ChartSweepView extends View {
 
     public void setNeighborMargin(float neighborMargin) {
         mNeighborMargin = neighborMargin;
+    }
+
+    public void setSafeRegion(int safeRegion) {
+        mSafeRegion = safeRegion;
     }
 
     /**
@@ -709,7 +714,7 @@ public class ChartSweepView extends View {
                 mLabelLayout.draw(canvas);
             }
             canvas.restoreToCount(count);
-            labelSize = (int) mLabelSize;
+            labelSize = (int) mLabelSize + mSafeRegion;
         } else {
             labelSize = 0;
         }
