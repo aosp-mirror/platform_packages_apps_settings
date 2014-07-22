@@ -20,15 +20,19 @@
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:gravity="center_vertical">
+
     <LinearLayout
             android:id="@+id/clickable"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
             android:gravity="center_vertical"
             android:clickable="true"
             android:focusable="true"
             android:background="?android:attr/selectableItemBackground">
+
         <CheckBox
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/checkbox"
@@ -37,6 +41,7 @@
                 android:layout_gravity="center"
                 android:focusable="false"
                 android:clickable="false"/>
+
         <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,6 +49,7 @@
                 android:layout_marginTop="6dip"
                 android:layout_marginBottom="6dip"
                 android:layout_weight="1">
+
             <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
@@ -52,6 +58,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"/>
+
             <TextView
                     android:id="@+id/description"
                     android:layout_width="wrap_content"
@@ -65,6 +72,9 @@
                     android:textColor="?android:attr/textColorSecondary"
                     android:focusable="false"
                     android:maxLines="4"/>
+
         </RelativeLayout>
+
     </LinearLayout>
+
 </LinearLayout>
