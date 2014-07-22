@@ -23,6 +23,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -40,7 +41,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
+public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment
+        implements OnPreferenceChangeListener {
     private boolean mHaveHardKeyboard;
     private final HashMap<String, List<Preference>> mInputMethodAndSubtypePrefsMap =
             new HashMap<>();
@@ -119,32 +121,34 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                 mInputMethodInfoList, mHaveHardKeyboard);
     }
 
-    // TODO: Stop overriding this method. Instead start using {@link OnPreferenceChangedListener}.
     @Override
-    public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
-            final Preference preference) {
-        if (!(preference instanceof CheckBoxPreference)) {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
+    public boolean onPreferenceChange(final Preference pref, final Object newValue) {
+        if (!(newValue instanceof Boolean)) {
+            return true; // Invoke default behavior.
         }
-        final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-
+        final boolean isChecking = (Boolean) newValue;
         for (final String imiId : mAutoSelectionPrefsMap.keySet()) {
-            if (mAutoSelectionPrefsMap.get(imiId) == chkPref) {
-                // We look for the first preference item in subtype enabler. The first item is used
-                // for turning on/off subtype auto selection. We are in the subtype enabler and
-                // trying selecting subtypes automatically.
-                setAutoSelectionSubtypesEnabled(imiId, chkPref.isChecked());
-                return super.onPreferenceTreeClick(preferenceScreen, preference);
+            // An auto select subtype preference is changing.
+            if (mAutoSelectionPrefsMap.get(imiId) == pref) {
+                final CheckBoxPreference autoSelectionPref = (CheckBoxPreference) pref;
+                autoSelectionPref.setChecked(isChecking);
+                // Enable or disable subtypes depending on the auto selection preference.
+                setAutoSelectionSubtypesEnabled(imiId, autoSelectionPref.isChecked());
+                return false;
             }
         }
-
-        // Turns off a subtype.
-        if (!chkPref.isChecked()) {
-            updateAutoSelectionPreferences();
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        // A subtype preference is changing.
+        if (pref instanceof InputMethodSubtypePreference) {
+            final InputMethodSubtypePreference subtypePref = (InputMethodSubtypePreference) pref;
+            subtypePref.setChecked(isChecking);
+            if (!subtypePref.isChecked()) {
+                // It takes care of the case where no subtypes are explicitly enabled then the auto
+                // selection preference is going to be checked.
+                updateAutoSelectionPreferences();
+            }
+            return false;
         }
-
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return true; // Invoke default behavior.
     }
 
     private void addInputMethodSubtypePreferences(final InputMethodInfo imi,
@@ -166,6 +170,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         final CheckBoxPreference autoSelectionPref = new CheckBoxPreference(context);
         mAutoSelectionPrefsMap.put(imiId, autoSelectionPref);
         keyboardSettingsCategory.addPreference(autoSelectionPref);
+        autoSelectionPref.setOnPreferenceChangeListener(this);
 
         final PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(context);
         activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
@@ -199,6 +204,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         for (int index = 0; index < prefCount; ++index) {
             final Preference pref = subtypePreferences.get(index);
             activeInputMethodsCategory.addPreference(pref);
+            pref.setOnPreferenceChangeListener(this);
             InputMethodAndSubtypeUtil.removeUnnecessaryNonPersistentPreference(pref);
         }
         mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
