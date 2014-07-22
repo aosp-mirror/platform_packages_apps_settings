@@ -22,6 +22,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -38,6 +39,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.System;
@@ -67,6 +69,8 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -80,6 +84,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
+    private static final String KEY_PREVIOUSLY_ENABLED_SUBTYPES = "previously_enabled_subtypes";
     // false: on ICS or later
     private static final boolean SHOW_INPUT_METHOD_SWITCHER_SETTINGS = false;
 
@@ -471,15 +476,70 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSaveInputMethodPreference(final InputMethodPreference pref) {
+        final InputMethodInfo imi = pref.getInputMethodInfo();
+        if (!pref.isChecked()) {
+            // An IME is being disabled. Save enabled subtypes of the IME to shared preference to be
+            // able to re-enable these subtypes when the IME gets re-enabled.
+            saveEnabledSubtypesOf(imi);
+        }
         final boolean hasHardwareKeyboard = getResources().getConfiguration().keyboard
                 == Configuration.KEYBOARD_QWERTY;
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
                 mImm.getInputMethodList(), hasHardwareKeyboard);
         // Update input method settings and preference list.
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
+        if (pref.isChecked()) {
+            // An IME is being enabled. Load the previously enabled subtypes from shared preference
+            // and enable these subtypes.
+            restorePreviouslyEnabledSubtypesOf(imi);
+        }
         for (final InputMethodPreference p : mInputMethodPreferenceList) {
             p.updatePreferenceViews();
         }
+    }
+
+    private void saveEnabledSubtypesOf(final InputMethodInfo imi) {
+        final HashSet<String> enabledSubtypeIdSet = new HashSet<>();
+        final List<InputMethodSubtype> enabledSubtypes = mImm.getEnabledInputMethodSubtypeList(
+                imi, true /* allowsImplicitlySelectedSubtypes */);
+        for (final InputMethodSubtype subtype : enabledSubtypes) {
+            final String subtypeId = Integer.toString(subtype.hashCode());
+            enabledSubtypeIdSet.add(subtypeId);
+        }
+        final HashMap<String, HashSet<String>> imeToEnabledSubtypeIdsMap =
+                loadPreviouslyEnabledSubtypeIdsMap();
+        final String imiId = imi.getId();
+        imeToEnabledSubtypeIdsMap.put(imiId, enabledSubtypeIdSet);
+        savePreviouslyEnabledSubtypeIdsMap(imeToEnabledSubtypeIdsMap);
+    }
+
+    private void restorePreviouslyEnabledSubtypesOf(final InputMethodInfo imi) {
+        final HashMap<String, HashSet<String>> imeToEnabledSubtypeIdsMap =
+                loadPreviouslyEnabledSubtypeIdsMap();
+        final String imiId = imi.getId();
+        final HashSet<String> enabledSubtypeIdSet = imeToEnabledSubtypeIdsMap.remove(imiId);
+        if (enabledSubtypeIdSet == null) {
+            return;
+        }
+        savePreviouslyEnabledSubtypeIdsMap(imeToEnabledSubtypeIdsMap);
+        InputMethodAndSubtypeUtil.enableInputMethodSubtypesOf(
+                getContentResolver(), imiId, enabledSubtypeIdSet);
+    }
+
+    private HashMap<String, HashSet<String>> loadPreviouslyEnabledSubtypeIdsMap() {
+        final Context context = getActivity();
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        final String imesAndSubtypesString = prefs.getString(KEY_PREVIOUSLY_ENABLED_SUBTYPES, null);
+        return InputMethodAndSubtypeUtil.parseInputMethodsAndSubtypesString(imesAndSubtypesString);
+    }
+
+    private void savePreviouslyEnabledSubtypeIdsMap(
+            final HashMap<String, HashSet<String>> subtypesMap) {
+        final Context context = getActivity();
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        final String imesAndSubtypesString = InputMethodAndSubtypeUtil
+                .buildInputMethodsAndSubtypesString(subtypesMap);
+        prefs.edit().putString(KEY_PREVIOUSLY_ENABLED_SUBTYPES, imesAndSubtypesString).apply();
     }
 
     private void updateCurrentImeName() {
