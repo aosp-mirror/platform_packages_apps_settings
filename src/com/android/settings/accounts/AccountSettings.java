@@ -19,7 +19,9 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,7 +31,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 
@@ -54,7 +60,6 @@ public class AccountSettings extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener,
         OnPreferenceClickListener {
     public static final String TAG = "AccountSettings";
-
     private static final String KEY_ACCOUNT = "account";
     private static final String KEY_ADD_ACCOUNT = "add_account";
 
@@ -68,6 +73,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     private UserManager mUm;
     private SparseArray<ProfileData> mProfiles;
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver;
+    private boolean mIsSingleProfileUi = true;
 
     /**
      * Holds data related to the accounts belonging to one profile.
@@ -97,6 +103,50 @@ public class AccountSettings extends SettingsPreferenceFragment
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
         mProfiles = new SparseArray<ProfileData>(2);
         updateUi();
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.account_settings, menu);
+        final UserHandle currentProfile = UserHandle.getCallingUserHandle();
+        if (mIsSingleProfileUi) {
+            menu.findItem(R.id.account_settings_menu_auto_sync)
+                    .setVisible(true)
+                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(currentProfile));
+            menu.removeItem(R.id.account_settings_menu_auto_sync_personal);
+            menu.removeItem(R.id.account_settings_menu_auto_sync_work);
+        } else {
+            final UserHandle managedProfile = Utils.getManagedProfile(mUm);
+
+            menu.findItem(R.id.account_settings_menu_auto_sync_personal)
+                    .setVisible(true)
+                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(currentProfile));
+            menu.findItem(R.id.account_settings_menu_auto_sync_work)
+                    .setVisible(true)
+                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(managedProfile));
+            menu.removeItem(R.id.account_settings_menu_auto_sync);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        final UserHandle currentProfile = UserHandle.getCallingUserHandle();
+        if (mIsSingleProfileUi) {
+            menu.findItem(R.id.account_settings_menu_auto_sync)
+                    .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
+                            currentProfile.getIdentifier()));
+        } else {
+            final UserHandle managedProfile = Utils.getManagedProfile(mUm);
+
+            menu.findItem(R.id.account_settings_menu_auto_sync_personal)
+                    .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
+                            currentProfile.getIdentifier()));
+            menu.findItem(R.id.account_settings_menu_auto_sync_work)
+                    .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
+                            managedProfile.getIdentifier()));
+            }
     }
 
     void updateUi() {
@@ -117,12 +167,13 @@ public class AccountSettings extends SettingsPreferenceFragment
             if (managedProfile == null) {
                 updateSingleProfileUi();
             } else {
-                updateProfileUi(currentProfile,
-                        KEY_CATEGORY_PERSONAL, KEY_ADD_ACCOUNT_PERSONAL, new ArrayList<String>());
-                final ArrayList<String> unusedPreferences = new ArrayList<String>(1);
+                mIsSingleProfileUi = false;
+                updateProfileUi(currentProfile, KEY_CATEGORY_PERSONAL, KEY_ADD_ACCOUNT_PERSONAL,
+                        new ArrayList<String>());
+                final ArrayList<String> unusedPreferences = new ArrayList<String>(2);
                 unusedPreferences.add(KEY_ADD_ACCOUNT);
-                updateProfileUi(managedProfile,
-                        KEY_CATEGORY_WORK, KEY_ADD_ACCOUNT_WORK, unusedPreferences);
+                updateProfileUi(managedProfile, KEY_CATEGORY_WORK, KEY_ADD_ACCOUNT_WORK,
+                        unusedPreferences);
                 mManagedProfileBroadcastReceiver = new ManagedProfileBroadcastReceiver();
                 mManagedProfileBroadcastReceiver.register(getActivity());
             }
@@ -141,8 +192,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                 unusedPreferences);
     }
 
-    private void updateProfileUi(UserHandle userHandle, String categoryKey, String addAccountKey,
-            ArrayList<String> unusedPreferences) {
+    private void updateProfileUi(final UserHandle userHandle, String categoryKey,
+            String addAccountKey, ArrayList<String> unusedPreferences) {
         final int count = unusedPreferences.size();
         for (int i = 0; i < count; i++) {
             removePreference(unusedPreferences.get(i));
@@ -343,6 +394,28 @@ public class AccountSettings extends SettingsPreferenceFragment
                 context.unregisterReceiver(this);
                 listeningToManagedProfileEvents = false;
             }
+        }
+    }
+
+    private class MasterSyncStateClickListener implements MenuItem.OnMenuItemClickListener {
+        private final UserHandle mUserHandle;
+
+        public MasterSyncStateClickListener(UserHandle userHandle) {
+            mUserHandle = userHandle;
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            // TODO: Add confirmation dialogs. See: http://b/16076571
+            if (ActivityManager.isUserAMonkey()) {
+                Log.d(TAG, "ignoring monkey's attempt to flip sync state");
+            } else {
+                boolean newSyncState = !item.isChecked();
+                item.setChecked(newSyncState);
+                ContentResolver.setMasterSyncAutomaticallyAsUser(newSyncState,
+                        mUserHandle.getIdentifier());
+            }
+            return true;
         }
     }
     // TODO Implement a {@link SearchIndexProvider} to allow Indexing and Search of account types
