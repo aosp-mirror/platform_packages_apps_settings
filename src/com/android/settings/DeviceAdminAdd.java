@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.AppOpsManager;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
@@ -51,7 +52,6 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class DeviceAdminAdd extends Activity {
@@ -66,6 +66,7 @@ public class DeviceAdminAdd extends Activity {
     Handler mHandler;
 
     DevicePolicyManager mDPM;
+    AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
     CharSequence mAddMsgText;
 
@@ -85,6 +86,9 @@ public class DeviceAdminAdd extends Activity {
 
     boolean mAdding;
     boolean mRefreshing;
+    boolean mWaitingForRemoveMsg;
+    int mCurSysAppOpMode;
+    int mCurToastAppOpMode;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -93,6 +97,7 @@ public class DeviceAdminAdd extends Activity {
         mHandler = new Handler(getMainLooper());
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mAppOps = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
 
         if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
             Log.w(TAG, "Cannot start ADD_DEVICE_ADMIN as a new task");
@@ -235,13 +240,14 @@ public class DeviceAdminAdd extends Activity {
                         }
                     }
                     finish();
-                } else {
+                } else if (!mWaitingForRemoveMsg) {
                     try {
                         // Don't allow the admin to put a dialog up in front
                         // of us while we interact with the user.
                         ActivityManagerNative.getDefault().stopAppSwitches();
                     } catch (RemoteException e) {
                     }
+                    mWaitingForRemoveMsg = true;
                     mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
                             new RemoteCallback(mHandler) {
                         @Override
@@ -250,30 +256,70 @@ public class DeviceAdminAdd extends Activity {
                                     ? bundle.getCharSequence(
                                             DeviceAdminReceiver.EXTRA_DISABLE_WARNING)
                                     : null;
-                            if (msg == null) {
-                                try {
-                                    ActivityManagerNative.getDefault().resumeAppSwitches();
-                                } catch (RemoteException e) {
-                                }
-                                mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
-                                finish();
-                            } else {
-                                Bundle args = new Bundle();
-                                args.putCharSequence(
-                                        DeviceAdminReceiver.EXTRA_DISABLE_WARNING, msg);
-                                showDialog(DIALOG_WARNING, args);
-                            }
+                            continueRemoveAction(msg);
                         }
                     });
+                    // Don't want to wait too long.
+                    getWindow().getDecorView().getHandler().postDelayed(new Runnable() {
+                        @Override public void run() {
+                            continueRemoveAction(null);
+                        }
+                    }, 2*1000);
                 }
             }
         });
+    }
+
+    void continueRemoveAction(CharSequence msg) {
+        if (!mWaitingForRemoveMsg) {
+            return;
+        }
+        mWaitingForRemoveMsg = false;
+        if (msg == null) {
+            try {
+                ActivityManagerNative.getDefault().resumeAppSwitches();
+            } catch (RemoteException e) {
+            }
+            mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
+            finish();
+        } else {
+            try {
+                // Continue preventing anything from coming in front.
+                ActivityManagerNative.getDefault().stopAppSwitches();
+            } catch (RemoteException e) {
+            }
+            Bundle args = new Bundle();
+            args.putCharSequence(
+                    DeviceAdminReceiver.EXTRA_DISABLE_WARNING, msg);
+            showDialog(DIALOG_WARNING, args);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         updateInterface();
+        // As long as we are running, don't let this admin overlay stuff on top of the screen.
+        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
+        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
+        mCurSysAppOpMode = mAppOps.checkOp(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg);
+        mCurToastAppOpMode = mAppOps.checkOp(AppOpsManager.OP_TOAST_WINDOW, uid, pkg);
+        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
+        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // As long as we are running, don't let this admin overlay stuff on top of the screen.
+        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
+        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
+        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, mCurSysAppOpMode);
+        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, mCurToastAppOpMode);
+        try {
+            ActivityManagerNative.getDefault().resumeAppSwitches();
+        } catch (RemoteException e) {
+        }
     }
 
     @Override
@@ -287,6 +333,10 @@ public class DeviceAdminAdd extends Activity {
                 builder.setPositiveButton(R.string.dlg_ok,
                         new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            ActivityManagerNative.getDefault().resumeAppSwitches();
+                        } catch (RemoteException e) {
+                        }
                         mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
                         finish();
                     }
