@@ -253,7 +253,6 @@ public class SettingsActivity extends Activity
             DeviceAdminSettings.class.getName(),
             AccessibilitySettings.class.getName(),
             CaptionPropertiesFragment.class.getName(),
-            com.android.settings.accessibility.ToggleInversionPreferenceFragment.class.getName(),
             com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
             Memory.class.getName(),
