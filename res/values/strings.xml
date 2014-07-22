@@ -4061,24 +4061,28 @@
     <string name="keyboard_settings_title">Android keyboard</string>
     <!-- Title for the 'voice input' category of voice input/output settings -->
     <string name="voice_category">Speech</string>
-    <!-- Title for the voice interactor setting in voice input/output settings -->
-    <string name="voice_interactor_title">Voice input</string>
-    <!-- Title for the link to settings for the chosen voice interactor in voice input/output
-         settings -->
-    <string name="voice_interactor_settings_title">Voice input</string>
-    <!-- Summary for the link to settings for the chosen voice interactor in voice input/output
-         settings.  Would say something like, e.g., "Settings for 'Google'". -->
-    <string name="voice_interactor_settings_summary">Settings for
-        \'<xliff:g id="interactor_name">%s</xliff:g>\'</string>
-    <!-- Label to show for no voice interactor selector -->
-    <string name="no_voice_interactor">None</string>
-    <!-- Title for the voice recognizer setting in voice input/output settings -->
-    <string name="recognizer_title">Voice recognizer</string>
-    <!-- Title for the link to settings for the chosen voice recognizer in voice input/output settings -->
-    <string name="recognizer_settings_title">Voice Search</string>
-    <!-- Summary for the link to settings for the chosen voice recognizer in voice input/output settings.
-         Would say something like, e.g., "Settings for 'Google'". -->
-    <string name="recognizer_settings_summary">Settings for \'<xliff:g id="recognizer_name">%s</xliff:g>\'</string>
+
+    <!-- Voice input settings --><skip />
+    <!-- [CHAR_LIMIT=NONE] Name of the settings item to open the voice input settings. -->
+    <string name="voice_input_settings">Voice input settings</string>
+    <!-- [CHAR_LIMIT=NONE] Title of the screen of the voice input settings -->
+    <string name="voice_input_settings_title">Voice input</string>
+    <!-- [CHAR LIMIT=50] The text for the settings section in which users select
+         a voice interaction or recognition service to use. -->
+    <string name="voice_service_preference_section_title">Voice input services</string>
+    <!-- [CHAR LIMIT=NONE] The summary text for the voice service preference that is
+         a full voice interaction service. -->
+    <string name="voice_interactor_preference_summary">Full voice interaction</string>
+    <!-- [CHAR LIMIT=NONE] The summary text for the voice service preference that is
+         a simple voice recognition service. -->
+    <string name="voice_recognizer_preference_summary">Simple voice recognition</string>
+    <!-- [CHAR_LIMIT=NONE] Warning message about security implications of enabling a
+         voice interaction service, displayed as a dialog
+         message when the user selects to enable a service. -->
+    <string name="voice_interaction_security_warning">This voice input service will be able to
+        control all voice enabled applications on your behalf.
+        It comes from the <xliff:g id="voice_input_service_app_name">%s</xliff:g> application.
+        Enable the use of this service?</string>
 
     <!-- Text-To-Speech (TTS) settings --><skip />
     <!-- Name of the TTS package as listed by the package manager. -->
@@ -5462,6 +5466,7 @@
     <string name="keywords_storage">space disk hard drive</string>
     <string name="keywords_battery">power</string>
     <string name="keywords_spell_checker">spelling</string>
+    <string name="keywords_voice_input">recognizer input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset</string>
     <string name="keywords_text_to_speech_output">rate language default speak speaking</string>
     <string name="keywords_date_and_time">clock</string>
     <string name="keywords_factory_data_reset">wipe delete</string>
@@ -5474,7 +5479,6 @@
     <string name="keywords_accounts">account</string>
     <string name="keywords_users">restriction restrict restricted</string>
     <string name="keywords_keyboard_and_ime">text correction correct sound vibrate auto language gesture suggest suggestion theme offensive word type emoji</string>
-    <string name="keywords_search_voice">language hands-free hand free recognition offensive word audio history bluetooth headset</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
