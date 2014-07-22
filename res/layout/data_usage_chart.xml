@@ -14,65 +14,48 @@
      limitations under the License.
 -->
 
+<!-- NOTE: this explicitly uses right/left padding, since the
+     graph isn't swapped in RTL languages -->
 <com.android.settings.widget.ChartDataUsageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:id="@+id/chart"
     android:layout_width="match_parent"
     android:layout_height="@dimen/data_usage_chart_height"
-    android:layout_marginStart="-16dip"
-    android:layout_marginEnd="-16dip"
-    android:layout_marginBottom="-32dip"
-    android:paddingStart="24dip"
-    android:paddingEnd="24dip"
-    android:paddingTop="16dip"
-    android:paddingBottom="48dip"
-    settings:optimalWidth="@dimen/data_usage_chart_optimalWidth"
-    settings:optimalWidthWeight="0.4">
+    android:paddingLeft="?android:attr/listPreferredItemPaddingStart"
+    android:paddingRight="40dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="24dp">
 
     <com.android.settings.widget.ChartGridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
-        settings:primaryDrawable="@drawable/data_grid_primary"
-        settings:secondaryDrawable="@drawable/data_grid_secondary"
-        settings:borderDrawable="@drawable/data_grid_border"
-        settings:labelColor="@android:color/holo_blue_light" />
+        android:paddingBottom="24dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textAppearance="@android:style/TextAppearance.Material.Caption"
+        settings:borderDrawable="@drawable/data_grid_border" />
 
     <com.android.settings.widget.ChartNetworkSeriesView
         android:id="@+id/series"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
-        settings:strokeColor="@android:color/holo_blue_light"
-        settings:fillColor="#c033b5e5"
-        settings:fillColorSecondary="#6633b5e5" />
+        settings:strokeColor="#00000000"
+        settings:fillColor="#ff009688"
+        settings:fillColorSecondary="#ff80cbc4"
+        settings:safeRegion="3dp" />
 
     <com.android.settings.widget.ChartNetworkSeriesView
         android:id="@+id/detail_series"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
-        settings:strokeColor="@color/theme_accent"
-        settings:fillColor="#c0ba7f3e"
-        settings:fillColorSecondary="#60ba7f3e" />
-
-    <com.android.settings.widget.ChartSweepView
-        android:id="@+id/sweep_left"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        settings:sweepDrawable="@drawable/data_sweep_left"
-        settings:followAxis="horizontal"
-        settings:neighborMargin="5dip" />
-
-    <com.android.settings.widget.ChartSweepView
-        android:id="@+id/sweep_right"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        settings:sweepDrawable="@drawable/data_sweep_right"
-        settings:followAxis="horizontal"
-        settings:neighborMargin="5dip" />
+        settings:strokeColor="#00000000"
+        settings:fillColor="#ff009688"
+        settings:fillColorSecondary="#ff009688"
+        settings:safeRegion="3dp" />
 
     <com.android.settings.widget.ChartSweepView
         android:id="@+id/sweep_warning"
@@ -84,7 +67,8 @@
         settings:neighborMargin="5dip"
         settings:labelSize="60dip"
         settings:labelTemplate="@string/data_usage_sweep_warning"
-        settings:labelColor="#f7931d" />
+        settings:labelColor="#ff37474f"
+        settings:safeRegion="4dp" />
 
     <com.android.settings.widget.ChartSweepView
         android:id="@+id/sweep_limit"
@@ -96,6 +80,7 @@
         settings:neighborMargin="5dip"
         settings:labelSize="60dip"
         settings:labelTemplate="@string/data_usage_sweep_limit"
-        settings:labelColor="#c01a2c" />
+        settings:labelColor="#fff4511e"
+        settings:safeRegion="4dp" />
 
 </com.android.settings.widget.ChartDataUsageView>

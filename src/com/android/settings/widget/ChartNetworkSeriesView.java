@@ -60,17 +60,17 @@ public class ChartNetworkSeriesView extends View {
     private Path mPathFill;
     private Path mPathEstimate;
 
+    private int mSafeRegion;
+
     private long mStart;
     private long mEnd;
-
-    private long mPrimaryLeft;
-    private long mPrimaryRight;
 
     /** Series will be extended to reach this end time. */
     private long mEndTime = Long.MIN_VALUE;
 
     private boolean mPathValid = false;
     private boolean mEstimateVisible = false;
+    private boolean mSecondary = false;
 
     private long mMax;
     private long mMaxEstimate;
@@ -93,8 +93,11 @@ public class ChartNetworkSeriesView extends View {
         final int fill = a.getColor(R.styleable.ChartNetworkSeriesView_fillColor, Color.RED);
         final int fillSecondary = a.getColor(
                 R.styleable.ChartNetworkSeriesView_fillColorSecondary, Color.RED);
+        final int safeRegion = a.getDimensionPixelSize(
+                R.styleable.ChartNetworkSeriesView_safeRegion, 0);
 
         setChartColor(stroke, fill, fillSecondary);
+        setSafeRegion(safeRegion);
         setWillNotDraw(false);
 
         a.recycle();
@@ -134,6 +137,10 @@ public class ChartNetworkSeriesView extends View {
         mPaintEstimate.setPathEffect(new DashPathEffect(new float[] { 10, 10 }, 1));
     }
 
+    public void setSafeRegion(int safeRegion) {
+        mSafeRegion = safeRegion;
+    }
+
     public void bindNetworkStats(NetworkStatsHistory stats) {
         mStats = stats;
         invalidatePath();
@@ -145,14 +152,8 @@ public class ChartNetworkSeriesView extends View {
         mEnd = end;
     }
 
-    /**
-     * Set the range to paint with {@link #mPaintFill}, leaving the remaining
-     * area to be painted with {@link #mPaintFillSecondary}.
-     */
-    public void setPrimaryRange(long left, long right) {
-        mPrimaryLeft = left;
-        mPrimaryRight = right;
-        invalidate();
+    public void setSecondary(boolean secondary) {
+        mSecondary = secondary;
     }
 
     public void invalidatePath() {
@@ -322,9 +323,6 @@ public class ChartNetworkSeriesView extends View {
             generatePath();
         }
 
-        final float primaryLeftPoint = mHoriz.convertToPoint(mPrimaryLeft);
-        final float primaryRightPoint = mHoriz.convertToPoint(mPrimaryRight);
-
         if (mEstimateVisible) {
             save = canvas.save();
             canvas.clipRect(0, 0, getWidth(), getHeight());
@@ -332,21 +330,11 @@ public class ChartNetworkSeriesView extends View {
             canvas.restoreToCount(save);
         }
 
-        save = canvas.save();
-        canvas.clipRect(0, 0, primaryLeftPoint, getHeight());
-        canvas.drawPath(mPathFill, mPaintFillSecondary);
-        canvas.restoreToCount(save);
+        final Paint paintFill = mSecondary ? mPaintFillSecondary : mPaintFill;
 
         save = canvas.save();
-        canvas.clipRect(primaryRightPoint, 0, getWidth(), getHeight());
-        canvas.drawPath(mPathFill, mPaintFillSecondary);
+        canvas.clipRect(mSafeRegion, 0, getWidth(), getHeight() - mSafeRegion);
+        canvas.drawPath(mPathFill, paintFill);
         canvas.restoreToCount(save);
-
-        save = canvas.save();
-        canvas.clipRect(primaryLeftPoint, 0, primaryRightPoint, getHeight());
-        canvas.drawPath(mPathFill, mPaintFill);
-        canvas.drawPath(mPathStroke, mPaintStroke);
-        canvas.restoreToCount(save);
-
     }
 }

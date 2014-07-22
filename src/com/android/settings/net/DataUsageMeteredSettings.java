@@ -29,10 +29,9 @@ import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.provider.SearchIndexableResource;
+import android.preference.SwitchPreference;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
@@ -42,7 +41,6 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -117,7 +115,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         return pref;
     }
 
-    private class MeteredPreference extends CheckBoxPreference {
+    private class MeteredPreference extends SwitchPreference {
         private final NetworkTemplate mTemplate;
         private boolean mBinding;
 

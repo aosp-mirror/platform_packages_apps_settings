@@ -14,10 +14,24 @@
      limitations under the License.
 -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:singleLine="true"
-    android:ellipsize="marquee"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textAlignment="viewStart" />
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textAlignment="viewStart" />
+    <TextView
+        android:id="@+id/app_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textAlignment="viewEnd" />
+</LinearLayout>

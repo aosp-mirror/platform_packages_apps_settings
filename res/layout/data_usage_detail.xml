@@ -18,6 +18,7 @@
     android:id="@+id/app_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="4dp"
     android:orientation="vertical"
     android:visibility="gone">
 
@@ -26,82 +27,107 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
         android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:layout_marginBottom="16dip"
         android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_marginEnd="8dip"
+            android:scaleType="centerInside"
+            android:contentDescription="@null" />
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginTop="8dip"
-            android:layout_marginEnd="8dip"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/app_icon"
-                android:layout_width="48dip"
-                android:layout_height="48dip"
-                android:scaleType="centerInside"
-                android:contentDescription="@null" />
 
             <LinearLayout
                 android:id="@+id/app_titles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dip"
                 android:orientation="vertical"
+                android:paddingBottom="4dip"
                 android:textAlignment="viewStart" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dip"
-                android:textColor="@color/theme_accent"
-                android:text="@string/data_usage_label_foreground"
-                android:textAlignment="viewStart" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:text="@string/data_usage_label_foreground"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAlignment="viewStart" />
+                <TextView
+                    android:id="@+id/app_foreground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAlignment="viewEnd" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/app_foreground"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/theme_accent"
-                android:textAlignment="viewStart" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dip"
-                android:text="@string/data_usage_label_background"
-                android:textAlignment="viewStart" />
-
-            <TextView
-                android:id="@+id/app_background"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewStart" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:text="@string/data_usage_label_background"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAlignment="viewStart" />
+                <TextView
+                    android:id="@+id/app_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAlignment="viewEnd" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <com.android.settings.widget.PieChartView
-            android:id="@+id/app_pie_chart"
-            android:layout_width="160dip"
-            android:layout_height="160dip" />
-
     </LinearLayout>
 
-    <Button
-        android:id="@+id/app_settings"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
         android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:layout_marginTop="16dip"
         android:layout_marginBottom="16dip"
-        android:text="@string/data_usage_app_settings" />
+        android:orientation="horizontal">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+        <Button
+            android:id="@+id/app_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/data_usage_app_settings" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/app_switches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:showDividers="beginning|middle"
+        android:divider="?android:attr/listDivider" />
 
 </LinearLayout>

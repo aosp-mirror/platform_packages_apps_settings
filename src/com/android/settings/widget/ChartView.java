@@ -112,11 +112,17 @@ public class ChartView extends FrameLayout {
 
             parentRect.set(mContent);
 
-            if (child instanceof ChartNetworkSeriesView || child instanceof ChartGridView) {
+            if (child instanceof ChartNetworkSeriesView) {
                 // series are always laid out to fill entire graph area
                 // TODO: handle scrolling for series larger than content area
                 Gravity.apply(params.gravity, width, height, parentRect, childRect);
                 child.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
+
+            } else if (child instanceof ChartGridView) {
+                // Grid uses some extra room for labels
+                Gravity.apply(params.gravity, width, height, parentRect, childRect);
+                child.layout(childRect.left, childRect.top, childRect.right,
+                        childRect.bottom + child.getPaddingBottom());
 
             } else if (child instanceof ChartSweepView) {
                 layoutSweep((ChartSweepView) child, parentRect, childRect);
@@ -154,5 +160,4 @@ public class ChartView extends FrameLayout {
                     parentRect, childRect);
         }
     }
-
 }
