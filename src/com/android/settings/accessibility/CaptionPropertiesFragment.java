@@ -206,7 +206,10 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         final ContentResolver cr = context.getContentResolver();
         final float fontScale = manager.getFontScale();
         if (previewWindow != null) {
-            previewText.setTextSize(previewWindow.getHeight() * LINE_HEIGHT_RATIO * fontScale);
+            // Assume the viewport is clipped with a 16:9 aspect ratio.
+            final float virtualHeight = Math.max(9 * previewWindow.getWidth(),
+                    16 * previewWindow.getHeight()) / 16.0f;
+            previewText.setTextSize(virtualHeight * LINE_HEIGHT_RATIO * fontScale);
         } else {
             final float textSize = context.getResources().getDimension(
                     R.dimen.caption_preview_text_size);
