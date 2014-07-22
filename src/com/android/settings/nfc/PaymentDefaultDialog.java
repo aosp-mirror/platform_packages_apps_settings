@@ -34,6 +34,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
 
     public static final String TAG = "PaymentDefaultDialog";
+    private static final int PAYMENT_APP_MAX_CAPTION_LENGTH = 40;
 
     private PaymentBackend mBackend;
     private ComponentName mNewDefault;
@@ -109,12 +110,14 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         p.mTitle = getString(R.string.nfc_payment_set_default_label);
         if (defaultPaymentApp == null) {
             String formatString = getString(R.string.nfc_payment_set_default);
-            String msg = String.format(formatString, requestedPaymentApp.caption);
+            String msg = String.format(formatString,
+                    sanitizePaymentAppCaption(requestedPaymentApp.caption.toString()));
             p.mMessage = msg;
         } else {
             String formatString = getString(R.string.nfc_payment_set_default_instead_of);
-            String msg = String.format(formatString, requestedPaymentApp.caption,
-                    defaultPaymentApp.caption);
+            String msg = String.format(formatString,
+                    sanitizePaymentAppCaption(requestedPaymentApp.caption.toString()),
+                    sanitizePaymentAppCaption(defaultPaymentApp.caption.toString()));
             p.mMessage = msg;
         }
         p.mPositiveButtonText = getString(R.string.yes);
@@ -124,6 +127,17 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         setupAlert();
 
         return true;
+    }
+
+    private String sanitizePaymentAppCaption(String input) {
+        String sanitizedString = input.replace('\n', ' ').replace('\r', ' ').trim();
+
+
+        if (sanitizedString.length() > PAYMENT_APP_MAX_CAPTION_LENGTH) {
+            return sanitizedString.substring(0, PAYMENT_APP_MAX_CAPTION_LENGTH);
+        }
+
+        return sanitizedString;
     }
 
 }
