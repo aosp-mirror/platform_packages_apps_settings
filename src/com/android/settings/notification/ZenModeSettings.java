@@ -28,7 +28,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.ContentObserver;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,9 +44,6 @@ import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.SparseArray;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.android.settings.R;
@@ -72,6 +68,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_CALLS = "phone_calls";
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_STARRED = "starred";
+    private static final String KEY_ALARM_INFO = "alarm_info";
 
     private static final String KEY_DOWNTIME = "downtime";
     private static final String KEY_DAYS = "days";
@@ -110,6 +107,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
         rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
         rt.put(R.string.zen_mode_from_starred, KEY_STARRED);
+        rt.put(R.string.zen_mode_alarm_info, KEY_ALARM_INFO);
         rt.put(R.string.zen_mode_downtime_category, KEY_DOWNTIME);
         rt.put(R.string.zen_mode_downtime_days, KEY_DAYS);
         rt.put(R.string.zen_mode_start_time, KEY_START_TIME);
@@ -141,8 +139,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         mPM = mContext.getPackageManager();
-        final Resources res = mContext.getResources();
-        final int padding = res.getDimensionPixelSize(R.dimen.content_margin_left);
 
         addPreferencesFromResource(R.xml.zen_mode_settings);
         final PreferenceScreen root = getPreferenceScreen();
@@ -157,6 +153,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
         final PreferenceCategory important =
                 (PreferenceCategory) root.findPreference(KEY_IMPORTANT);
+        final Preference alarmInfo = important.findPreference(KEY_ALARM_INFO);
+        important.removePreference(alarmInfo);
 
         mCalls = (SwitchPreference) important.findPreference(KEY_CALLS);
         if (Utils.isVoiceCapable(mContext)) {
@@ -213,18 +211,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         });
         important.addPreference(mStarred);
 
-        final Preference alarmInfo = new Preference(mContext) {
-            @Override
-            public View getView(View convertView, ViewGroup parent) {
-                final TextView tv = new TextView(mContext);
-                tv.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.ITALIC));
-                tv.setPadding(padding, padding, padding, padding);
-                tv.setText(R.string.zen_mode_alarm_info);
-                return tv;
-            }
-        };
-        alarmInfo.setPersistent(false);
-        alarmInfo.setSelectable(false);
         important.addPreference(alarmInfo);
 
         final PreferenceCategory downtime = (PreferenceCategory) root.findPreference(KEY_DOWNTIME);

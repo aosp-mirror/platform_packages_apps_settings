@@ -31,17 +31,25 @@
 
         <SwitchPreference
             android:key="phone_calls"
+            android:title="@string/zen_mode_phone_calls"
             android:persistent="false"
             android:switchTextOff=""
-            android:switchTextOn=""
-            android:title="@string/zen_mode_phone_calls" />
+            android:switchTextOn="" />
 
         <SwitchPreference
             android:key="messages"
+            android:title="@string/zen_mode_messages"
             android:persistent="false"
             android:switchTextOff=""
-            android:switchTextOn=""
-            android:title="@string/zen_mode_messages" />
+            android:switchTextOn="" />
+
+        <Preference
+            android:key="alarm_info"
+            android:title=""
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/colorForegroundInverse"
+            android:selectable="false"
+            android:summary="@string/zen_mode_alarm_info" />
 
     </PreferenceCategory>
 
