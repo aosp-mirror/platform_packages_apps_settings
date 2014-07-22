@@ -281,10 +281,8 @@
     <string name="cancel_all_caps" msgid="3183966387632229461">"ANNULER"</string>
     <string name="continue_all_caps" msgid="5152713914673789893">"CONTINUER"</string>
     <string name="okay" msgid="1997666393121016642">"OK"</string>
-    <!-- no translation found for yes_all_caps (5454685069075197457) -->
-    <skip />
-    <!-- no translation found for no_all_caps (3242375449351298529) -->
-    <skip />
+    <string name="yes_all_caps" msgid="5454685069075197457">"OUI"</string>
+    <string name="no_all_caps" msgid="3242375449351298529">"NON"</string>
     <string name="forget" msgid="7267115980248732932">"SUPPRIMER"</string>
     <string name="settings_label" msgid="1626402585530130914">"Paramètres"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Paramètres"</string>
@@ -694,8 +692,7 @@
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Entrez votre mot de passe réseau"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Aucun"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Pour améliorer la précision de la position et à d\'autres fins, <xliff:g id="APP_NAME">%1$s</xliff:g> souhaite activer la recherche de réseaux, même lorsque le Wi-Fi est désactivé.\n\nDonner cette autorisation à toutes les applications souhaitant activer la recherche de réseaux?"</string>
-    <!-- no translation found for wifi_scan_always_turnoff_message (5538901671131941043) -->
-    <skip />
+    <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Pour désactiver cette option, sélectionnez « Paramètres avancés » dans le menu à développer."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Autoriser"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Refuser"</string>
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Se connecter au point d\'accès pour la connexion?"</string>
@@ -710,21 +707,14 @@
     <string name="wifi_cancel" msgid="6763568902542968964">"Annuler"</string>
     <string name="wifi_skip_anyway" msgid="6965361454438011190">"Ignorer quand même"</string>
     <string name="wifi_dont_skip" msgid="7350341524881124808">"Ne pas ignorer"</string>
-    <!-- no translation found for wifi_skipped_message (6761689889733331124) -->
-    <skip />
-    <!-- no translation found for wifi_skipped_message (1385490367826852775) -->
-    <skip />
-    <!-- no translation found for wifi_skipped_message (6084295135297772350) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (2393880108322835846) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1707391993265558787) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1556858507920033022) -->
-    <skip />
+    <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"AVERTISSEMENT : Si vous ne configurez pas le Wi-Fi, votre tablette n\'utilisera que les données cellulaires pour les mises à jour et les téléchargements initiaux. Connectez-vous au Wi-Fi afin d\'éviter d\'éventuels frais liés à la consommation de données."</string>
+    <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"AVERTISSEMENT : Si vous ne configurez pas le Wi-Fi, votre appareil n\'utilisera que les données cellulaires pour les mises à jour et les téléchargements initiaux. Connectez-vous au Wi-Fi afin d\'éviter d\'éventuels frais liés à la consommation de données."</string>
+    <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"AVERTISSEMENT : Si vous ne configurez pas le Wi-Fi, votre téléphone n\'utilisera que les données cellulaires pour les mises à jour et les téléchargements initiaux. Connectez-vous au Wi-Fi afin d\'éviter d\'éventuels frais liés à la consommation de données."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="2393880108322835846">"AVERTISSEMENT : Si vous ne configurez pas le Wi-Fi, votre tablette ne disposera d\'aucune connexion Internet pour les mises à jour ou les téléchargements initiaux."</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1707391993265558787">"AVERTISSEMENT : Si vous ne configurez pas le Wi-Fi, votre appareil ne disposera d\'aucune connexion Internet pour les mises à jour ou les téléchargements initiaux."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="1556858507920033022">"AVERTISSEMENT : Si vous ne configurez pas le Wi-Fi, votre téléphone ne disposera d\'aucune connexion Internet pour les mises à jour ou les téléchargements initiaux."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Connexion impossible de la tablette à ce réseau Wi-Fi."</string>
-    <!-- no translation found for wifi_connect_failed_message (8870885845666880869) -->
-    <skip />
+    <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Impossible de connecter l\'appareil à ce réseau Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Connexion impossible du téléphone à ce réseau Wi-Fi."</string>
     <string name="wifi_saved_access_points_titlebar" msgid="2996149477240134064">"Réseaux enregistrés"</string>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Paramètres Wi-Fi avancés"</string>
@@ -770,8 +760,7 @@
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Erreur liée au point d\'accès Wi-Fi mobile."</string>
     <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurer le point d\'accès Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Configuration point accès Wi‑Fi"</string>
-    <!-- no translation found for wifi_hotspot_configure_ap_text_summary (5618031116920832182) -->
-    <skip />
+    <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Point acc. Wi‑Fi port. AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Point d\'accès Wi-Fi mobile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="home_settings" msgid="212375129455718176">"Accueil"</string>
