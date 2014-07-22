@@ -97,9 +97,6 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
             }
         });
 
-        mSwitch.setTrackResource(R.drawable.switch_track);
-        mSwitch.setThumbResource(R.drawable.switch_inner);
-
         setOnClickListener(this);
 
         // Default is hide

@@ -204,4 +204,10 @@
         <item name="@android:numbersBackgroundColor">@android:color/white</item>
     </style>
 
+    <!-- Used to color the switch bar controls -->
+    <style name="ThemeOverlay.SwitchBar" parent="@android:style/ThemeOverlay">
+        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
+        <item name="android:colorAccent">@color/switch_accent_color</item>
+    </style>
+
 </resources>
