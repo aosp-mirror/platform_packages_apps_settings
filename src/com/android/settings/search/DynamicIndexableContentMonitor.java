@@ -78,10 +78,8 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             new UserDictionaryContentObserver(mHandler);
 
     private Context mContext;
-
-    private boolean mHasFeturePrinting;
-
-    private boolean mHasFetureIme;
+    private boolean mHasFeaturePrinting;
+    private boolean mHasFeatureIme;
 
     private static Intent getAccessibilityServiceIntent(String packageName) {
         final Intent intent = new Intent(AccessibilityService.SERVICE_INTERFACE);
@@ -104,9 +102,9 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
     public void register(Context context) {
         mContext = context;
 
-        mHasFeturePrinting = mContext.getPackageManager().hasSystemFeature(
+        mHasFeaturePrinting = mContext.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_PRINTING);
-        mHasFetureIme = mContext.getPackageManager().hasSystemFeature(
+        mHasFeatureIme = mContext.getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_INPUT_METHODS);
 
         // Cache accessibility service packages to know when they go away.
@@ -124,7 +122,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             mAccessibilityServices.add(resolveInfo.serviceInfo.packageName);
         }
 
-        if (mHasFeturePrinting) {
+        if (mHasFeaturePrinting) {
             // Cache print service packages to know when they go away.
             PrintManager printManager = (PrintManager)
                     mContext.getSystemService(Context.PRINT_SERVICE);
@@ -141,7 +139,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         }
 
         // Cache IME service packages to know when they go away.
-        if (mHasFetureIme) {
+        if (mHasFeatureIme) {
             InputMethodManager imeManager = (InputMethodManager)
                     mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
             List<InputMethodInfo> inputMethods = imeManager.getInputMethodList();
@@ -174,7 +172,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
                 Context.INPUT_SERVICE);
         inputManager.unregisterInputDeviceListener(this);
 
-        if (mHasFetureIme) {
+        if (mHasFeatureIme) {
             mContext.getContentResolver().unregisterContentObserver(
                     mUserDictionaryContentObserver);
         }
@@ -242,7 +240,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             }
         }
 
-        if (mHasFeturePrinting) {
+        if (mHasFeaturePrinting) {
             if (!mPrintServices.contains(packageName)) {
                 final Intent intent = getPrintServiceIntent(packageName);
                 if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
@@ -253,7 +251,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             }
         }
 
-        if (mHasFetureIme) {
+        if (mHasFeatureIme) {
             if (!mImeServices.contains(packageName)) {
                 Intent intent = getIMEServiceIntent(packageName);
                 if (!mContext.getPackageManager().queryIntentServices(intent, 0).isEmpty()) {
@@ -273,7 +271,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
                     AccessibilitySettings.class.getName(), true, true);
         }
 
-        if (mHasFeturePrinting) {
+        if (mHasFeaturePrinting) {
             final int printIndex = mPrintServices.indexOf(packageName);
             if (printIndex >= 0) {
                 mPrintServices.remove(printIndex);
@@ -282,7 +280,7 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
             }
         }
 
-        if (mHasFetureIme) {
+        if (mHasFeatureIme) {
             final int imeIndex = mImeServices.indexOf(packageName);
             if (imeIndex >= 0) {
                 mImeServices.remove(imeIndex);

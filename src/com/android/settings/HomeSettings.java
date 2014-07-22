@@ -17,17 +17,21 @@
 package com.android.settings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -37,13 +41,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
-public class HomeSettings extends SettingsPreferenceFragment {
+public class HomeSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "HomeSettings";
 
     static final int REQUESTING_UNINSTALL = 10;
@@ -289,4 +297,59 @@ public class HomeSettings extends SettingsPreferenceFragment {
             }
         }
     }
+
+    /**
+     * For search
+     */
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+
+                final PackageManager pm = context.getPackageManager();
+                final ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
+                pm.getHomeActivities(homeActivities);
+
+                final SharedPreferences sp = context.getSharedPreferences(
+                        HomeSettings.HOME_PREFS, Context.MODE_PRIVATE);
+                final boolean doShowHome = sp.getBoolean(HomeSettings.HOME_PREFS_DO_SHOW, false);
+
+                // We index Home Launchers only if there are more than one or if we are showing the
+                // Home tile into the Dashboard
+                if (homeActivities.size() > 1 || doShowHome) {
+                    final Resources res = context.getResources();
+
+                    // Add fragment title
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.home_settings);
+                    data.screenTitle = res.getString(R.string.home_settings);
+                    data.keywords = res.getString(R.string.keywords_home);
+                    result.add(data);
+
+                    for (int i = 0; i < homeActivities.size(); i++) {
+                        final ResolveInfo resolveInfo = homeActivities.get(i);
+                        final ActivityInfo activityInfo = resolveInfo.activityInfo;
+
+                        CharSequence name;
+                        try {
+                            name = activityInfo.loadLabel(pm);
+                            if (TextUtils.isEmpty(name)) {
+                                continue;
+                            }
+                        } catch (Exception e) {
+                            Log.v(TAG, "Problem dealing with Home " + activityInfo.name, e);
+                            continue;
+                        }
+
+                        data = new SearchIndexableRaw(context);
+                        data.title = name.toString();
+                        data.screenTitle = res.getString(R.string.home_settings);
+                        result.add(data);
+                    }
+                }
+
+                return result;
+            }
+        };
 }

@@ -118,7 +118,7 @@ public final class SearchIndexableResources {
         sResMap.put(HomeSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(HomeSettings.class.getName()),
-                        R.xml.home_selection,
+                        NO_DATA_RES_ID,
                         HomeSettings.class.getName(),
                         R.drawable.ic_settings_home));
 
