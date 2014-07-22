@@ -489,7 +489,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 hasReadyMobileRadio(context) && isOwner && !appDetailMode);
         mMenuRestrictBackground.setChecked(mPolicyManager.getRestrictBackground());
 
-        // TODO: Define behavior of this sync button. See: http://b/16076571
         mMenuAutoSync = menu.findItem(R.id.data_usage_menu_auto_sync);
         mMenuAutoSync.setChecked(ContentResolver.getMasterSyncAutomatically());
         mMenuAutoSync.setVisible(!appDetailMode);
