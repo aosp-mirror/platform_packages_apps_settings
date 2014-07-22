@@ -1834,5 +1834,19 @@
             </intent-filter>
         </provider>
 
+        <receiver android:name=".search.HomePackageReceiver"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 </manifest>
