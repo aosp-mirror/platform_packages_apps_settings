@@ -148,27 +148,30 @@ public class UidDetailProvider {
         final String[] packageNames = pm.getPackagesForUid(uid);
         final int length = packageNames != null ? packageNames.length : 0;
         try {
+            final UserHandle userHandle = new UserHandle(UserHandle.getUserId(uid));
             if (length == 1) {
                 final ApplicationInfo info = pm.getApplicationInfo(packageNames[0], 0);
                 detail.label = info.loadLabel(pm).toString();
-                detail.icon = um.getBadgedDrawableForUser(info.loadIcon(pm),
-                        new UserHandle(UserHandle.getUserId(uid)));
+                detail.icon = um.getBadgedDrawableForUser(info.loadIcon(pm), userHandle);
             } else if (length > 1) {
                 detail.detailLabels = new CharSequence[length];
+                detail.detailContentDescriptions = new CharSequence[length];
                 for (int i = 0; i < length; i++) {
                     final String packageName = packageNames[i];
                     final PackageInfo packageInfo = pm.getPackageInfo(packageName, 0);
                     final ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
 
                     detail.detailLabels[i] = appInfo.loadLabel(pm).toString();
+                    detail.detailContentDescriptions[i] = um.getBadgedLabelForUser(
+                            detail.detailLabels[i], userHandle);
                     if (packageInfo.sharedUserLabel != 0) {
                         detail.label = pm.getText(packageName, packageInfo.sharedUserLabel,
                                 packageInfo.applicationInfo).toString();
-                        detail.icon = um.getBadgedDrawableForUser(appInfo.loadIcon(pm),
-                                new UserHandle(UserHandle.getUserId(uid)));
+                        detail.icon = um.getBadgedDrawableForUser(appInfo.loadIcon(pm), userHandle);
                     }
                 }
             }
+            detail.contentDescription = um.getBadgedLabelForUser(detail.label, userHandle);
         } catch (NameNotFoundException e) {
         }
 

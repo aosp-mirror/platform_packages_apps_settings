@@ -819,14 +819,21 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         View title = null;
         if (detail.detailLabels != null) {
-            for (CharSequence label : detail.detailLabels) {
+            final int n = detail.detailLabels.length;
+            for (int i = 0; i < n; ++i) {
+                CharSequence label = detail.detailLabels[i];
+                CharSequence contentDescription = detail.detailContentDescriptions[i];
                 title = inflater.inflate(R.layout.data_usage_app_title, mAppTitles, false);
-                ((TextView) title.findViewById(R.id.app_title)).setText(label);
+                TextView appTitle = (TextView) title.findViewById(R.id.app_title);
+                appTitle.setText(label);
+                appTitle.setContentDescription(contentDescription);
                 mAppTitles.addView(title);
             }
         } else {
             title = inflater.inflate(R.layout.data_usage_app_title, mAppTitles, false);
-            ((TextView) title.findViewById(R.id.app_title)).setText(detail.label);
+            TextView appTitle = (TextView) title.findViewById(R.id.app_title);
+            appTitle.setText(detail.label);
+            appTitle.setContentDescription(detail.contentDescription);
             mAppTitles.addView(title);
         }
 
@@ -2222,6 +2229,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             if (detail != null) {
                 icon.setImageDrawable(detail.icon);
                 title.setText(detail.label);
+                title.setContentDescription(detail.contentDescription);
             } else {
                 icon.setImageDrawable(null);
                 title.setText(null);
