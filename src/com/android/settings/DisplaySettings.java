@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
@@ -31,14 +32,15 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.RemoteException;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
@@ -56,6 +58,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_SCREEN_SAVER = "screensaver";
+    private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
@@ -63,11 +66,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private WarnedListPreference mFontSizePref;
 
     private final Configuration mCurConfig = new Configuration();
-    private final Handler mHandler = new Handler();
 
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
-    private CheckBoxPreference mAutoBrightnessPreference;
+    private SwitchPreference mLiftToWakePreference;
+    private SwitchPreference mAutoBrightnessPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,11 +99,23 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceClickListener(this);
 
         if (isAutomaticBrightnessAvailable(getResources())) {
-            mAutoBrightnessPreference = (CheckBoxPreference) findPreference(KEY_AUTO_BRIGHTNESS);
+            mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_AUTO_BRIGHTNESS);
         }
+
+        if (isLiftToWakeAvailable(getActivity())) {
+            mLiftToWakePreference = (SwitchPreference) findPreference(KEY_LIFT_TO_WAKE);
+            mLiftToWakePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_LIFT_TO_WAKE);
+        }
+    }
+
+    private static boolean isLiftToWakeAvailable(Context context) {
+        SensorManager sensors = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        return sensors != null && sensors.getDefaultSensor(Sensor.TYPE_WAKE_GESTURE) != null;
     }
 
     private static boolean isAutomaticBrightnessAvailable(Resources res) {
@@ -235,6 +250,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL);
             mAutoBrightnessPreference.setChecked(brightnessMode != SCREEN_BRIGHTNESS_MODE_MANUAL);
         }
+
+        // Update lift-to-wake if it is available.
+        if (mLiftToWakePreference != null) {
+            int value = Settings.Secure.getInt(getContentResolver(), WAKE_GESTURE_ENABLED, 0);
+            mLiftToWakePreference.setChecked(value != 0);
+        }
     }
 
     private void updateScreenSaverSummary() {
@@ -278,6 +299,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), SCREEN_BRIGHTNESS_MODE,
                     auto ? SCREEN_BRIGHTNESS_MODE_AUTOMATIC : SCREEN_BRIGHTNESS_MODE_MANUAL);
         }
+        if (preference == mLiftToWakePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), WAKE_GESTURE_ENABLED, value ? 1 : 0);
+        }
         return true;
     }
 
@@ -318,6 +343,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     }
                     if (!isAutomaticBrightnessAvailable(context.getResources())) {
                         result.add(KEY_AUTO_BRIGHTNESS);
+                    }
+                    if (!isLiftToWakeAvailable(context)) {
+                        result.add(KEY_LIFT_TO_WAKE);
                     }
                     return result;
                 }
