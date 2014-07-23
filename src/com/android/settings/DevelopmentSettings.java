@@ -565,6 +565,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
+        // Only poke the color space setting if we control it.
+        if (usingDevelopmentColorSpace()) {
+            writeSimulateColorSpace(-1);
+        }
         writeOverlayDisplayDevicesOptions(null);
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
@@ -964,6 +968,27 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mSimulateColorSpace.setValue(
                     Integer.toString(AccessibilityManager.DALTONIZER_DISABLED));
         }
+    }
+
+    /**
+     * @return <code>true</code> if the color space preference is currently
+     *         controlled by development settings
+     */
+    private boolean usingDevelopmentColorSpace() {
+        final ContentResolver cr = getContentResolver();
+        final boolean enabled = Settings.Secure.getInt(
+                cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, 0) != 0;
+        if (enabled) {
+            final String mode = Integer.toString(Settings.Secure.getInt(
+                    cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
+                    AccessibilityManager.DALTONIZER_DISABLED));
+            final int index = mSimulateColorSpace.findIndexOfValue(mode);
+            if (index >= 0) {
+                // We're using a mode controlled by developer preferences.
+                return true;
+            }
+        }
+        return false;
     }
 
     private void writeSimulateColorSpace(Object value) {
