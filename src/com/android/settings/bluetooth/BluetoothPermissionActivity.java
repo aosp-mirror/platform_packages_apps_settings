@@ -117,7 +117,6 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     private void showDialog(String title, int requestType)
     {
         final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = title;
         if(DEBUG) Log.i(TAG, "showDialog() Request type: " + mRequestType + " this: " + this);
         switch(requestType)
