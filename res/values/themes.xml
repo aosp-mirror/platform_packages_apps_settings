@@ -88,14 +88,13 @@
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_light</item>
 
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
         <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
 
         <item name="switchBarTheme">@style/Theme.SwitchBar.Settings</item>
 
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
-
-        <!-- Redefine the ActionBar style for contentInsetStart -->
-        <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
@@ -174,8 +173,9 @@
     </style>
 
     <style name="Theme.NotificationStation" parent="@android:style/Theme.Material">
-        <item name="switchBarMarginStart">0dip</item>
-        <item name="switchBarMarginEnd">0dip</item>
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
+        <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
 
         <item name="preferenceBackgroundColor">@android:color/transparent</item>
     </style>
