@@ -165,15 +165,10 @@ public class Index {
     private static final Pattern REMOVE_DIACRITICALS_PATTERN
             = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 
-    private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
-    private final UpdateData mDataToProcess = new UpdateData();
-    private Context mContext;
-    private final String mBaseAuthority;
-
     /**
      * A private class to describe the update data for the Index database
      */
-    private class UpdateData {
+    private static class UpdateData {
         public List<SearchIndexableData> dataToUpdate;
         public List<SearchIndexableData> dataToDelete;
         public Map<String, List<String>> nonIndexableKeys;
@@ -193,6 +188,11 @@ public class Index {
             forceUpdate = false;
         }
     }
+
+    private final AtomicBoolean mIsAvailable = new AtomicBoolean(false);
+    private final UpdateData mDataToProcess = new UpdateData();
+    private Context mContext;
+    private final String mBaseAuthority;
 
     /**
      * A basic singleton
