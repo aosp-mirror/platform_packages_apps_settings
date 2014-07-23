@@ -268,6 +268,8 @@
     <string name="bluetooth_disconnect_title">Disconnect?</string>
     <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disconnect_all_profiles">This will end your connection with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b></string>
+    <!-- Bluetooth Settings. text displayed when user has restriction DISALLOW_CONFIG_BLUETOOTH [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_empty_list_user_restricted">You don\'t have permission to change Bluetooth settings.</string>
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=50] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is now visible to nearby devices.</string>
@@ -5791,6 +5793,9 @@
 
     <!-- Full package name of OEM preferred device feedback reporter [DO NOT TRANSLATE] -->
     <string name="oem_preferred_feedback_reporter" translatable="false"></string>
+
+    <!-- PIN entry dialog title for entering the administrator PIN [CHAR LIMIT=none] -->
+    <string name="restr_pin_enter_admin_pin">Enter administrator PIN</string>
 
     <!-- Switch On/Off  -->
     <string name="switch_on_text">On</string>
