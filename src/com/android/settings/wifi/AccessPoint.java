@@ -566,6 +566,12 @@ class AccessPoint extends Preference {
             }
 
         }
+
+        // This is a workaround, see bug report...
+        if (summary.length() < 1) {
+            summary.append("   ");
+        }
+
         if (WifiSettings.mVerboseLogging > 0) {
             //add RSSI/band information for this config, what was seen up to 6 seconds ago
             //verbose WiFi Logging is only turned on thru developers settings
@@ -589,6 +595,7 @@ class AccessPoint extends Preference {
                 summary.append(")");
             }
         }
+
         setSummary(summary.toString());
     }
 
