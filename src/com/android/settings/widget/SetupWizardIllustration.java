@@ -22,49 +22,51 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 
-/*
- * Copied from com.google.android.setupwizard.util.SetupWizardHeader
- */
-public class SetupWizardHeader extends FrameLayout {
+import com.android.settings.R;
 
-    // Size the baseline grid in pixels
+/**
+ * Class to draw the illustration of setup wizard. The aspectRatio attribute determines the aspect
+ * ratio of the top padding, which is leaving space for the illustration. Draws an illustration
+ * (foreground) to fit the width of the view and fills the rest with the background.
+ *
+ * Copied from com.google.android.setupwizard.util.SetupWizardIllustration
+ */
+public class SetupWizardIllustration extends FrameLayout {
+
+    private static final String TAG = "SetupWizardIllustration";
+
+    // Size of the baseline grid in pixels
     private float mBaselineGridSize;
     private Drawable mBackground;
     private Drawable mForeground;
-    private int mForegroundHeight;
+    private int mForegroundHeight = 0;
     private float mScale = 1.0f;
+    private float mAspectRatio = 0.0f;
 
-    public SetupWizardHeader(Context context) {
-        super(context);
-        init();
+    public SetupWizardIllustration(Context context) {
+        this(context, null);
     }
 
-    public SetupWizardHeader(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initFromAttributes(context, attrs);
+    public SetupWizardIllustration(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public SetupWizardHeader(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initFromAttributes(context, attrs);
+    public SetupWizardIllustration(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
     }
 
-    public SetupWizardHeader(Context context, AttributeSet attrs, int defStyleAttr,
-                             int defStyleRes) {
+    public SetupWizardIllustration(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initFromAttributes(context, attrs);
-    }
-
-    private void initFromAttributes(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs,
-                new int[] { android.R.attr.foreground });
-        setForeground(a.getDrawable(0));
-        init();
-    }
-
-    protected void init() {
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs,
+                    R.styleable.SetupWizardIllustration, 0, 0);
+            mAspectRatio = a.getFloat(R.styleable.SetupWizardIllustration_aspectRatio, 0.0f);
+            a.recycle();
+        }
         // Number of pixels of the 8dp baseline grid as defined in material design specs
         mBaselineGridSize = getResources().getDisplayMetrics().density * 8;
         setWillNotDraw(false);
@@ -83,15 +85,19 @@ public class SetupWizardHeader extends FrameLayout {
      * Sets the drawable used as the illustration. THe drawable is expected to have intrinsic
      * width and height defined and will be scaled to fit the width of the view.
      */
+    @Override
     public void setForeground(Drawable foreground) {
         mForeground = foreground;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int illustrationHeight = MeasureSpec.getSize(widthMeasureSpec) / 2;
-        illustrationHeight -= illustrationHeight % mBaselineGridSize;
-        setPadding(0, illustrationHeight, 0, 0);
+        if (mAspectRatio != 0.0f) {
+            int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+            int illustrationHeight = (int) (parentWidth / mAspectRatio);
+            illustrationHeight -= illustrationHeight % mBaselineGridSize;
+            setPaddingRelative(0, illustrationHeight, 0, 0);
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -100,16 +106,25 @@ public class SetupWizardHeader extends FrameLayout {
         final int layoutWidth = right - left;
         final int layoutHeight = bottom - top;
         if (mForeground != null) {
-            // Scale the foreground to fill the width of the view
-            mScale = layoutWidth / (float) mForeground.getIntrinsicWidth();
-            mForegroundHeight = (int) (mForeground.getIntrinsicHeight() * mScale);
-            mForeground.setBounds(0, 0, layoutWidth, mForegroundHeight);
+            final float intrinsicWidth = mForeground.getIntrinsicWidth();
+            final float intrinsicHeight = mForeground.getIntrinsicHeight();
+            if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
+                Log.e(TAG, "Foreground drawable intrinsic size must be defined and positive");
+                mForeground = null;
+                mForegroundHeight = 0;
+                mScale = 1.0f;
+            } else {
+                // Scale the foreground to fill the width of the view
+                mScale = layoutWidth / intrinsicWidth;
+                mForegroundHeight = (int) (intrinsicHeight * mScale);
+                mForeground.setBounds(0, 0, layoutWidth, mForegroundHeight);
+            }
         }
         if (mBackground != null) {
             // Scale the bounds by mScale to compensate for the scale done to the canvas before
             // drawing.
-            mBackground.setBounds(0, 0, (int) (layoutWidth / mScale),
-                    (int) ((layoutHeight - mForegroundHeight) / mScale));
+            mBackground.setBounds(0, 0, (int) Math.ceil(layoutWidth / mScale),
+                    (int) Math.ceil((layoutHeight - mForegroundHeight) / mScale));
         }
         super.onLayout(changed, left, top, right, bottom);
     }
@@ -117,19 +132,20 @@ public class SetupWizardHeader extends FrameLayout {
     @Override
     public void onDraw(Canvas canvas) {
         if (mBackground != null) {
+            canvas.save();
             // Draw the background filling parts not covered by the illustration
-            int saveCount = canvas.save();
             canvas.translate(0, mForegroundHeight);
             // Scale the background so its size matches the foreground
             canvas.scale(mScale, mScale, 0, 0);
             mBackground.draw(canvas);
-            canvas.restoreToCount(saveCount);
+            canvas.restore();
         }
         if (mForeground != null) {
+            canvas.save();
             // Draw the illustration
             mForeground.draw(canvas);
+            canvas.restore();
         }
         super.onDraw(canvas);
     }
 }
-
