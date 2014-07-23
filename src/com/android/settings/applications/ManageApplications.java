@@ -199,10 +199,10 @@ public class ManageApplications extends Fragment implements
         // Custom view used to display running processes
         private RunningProcessesView mRunningProcessesView;
         
-        private LinearColorBar mColorBar;
-        private TextView mStorageChartLabel;
-        private TextView mUsedStorageText;
-        private TextView mFreeStorageText;
+        //private LinearColorBar mColorBar;
+        //private TextView mStorageChartLabel;
+        //private TextView mUsedStorageText;
+        //private TextView mFreeStorageText;
         private long mFreeStorage = 0, mAppStorage = 0, mTotalStorage = 0;
         private long mLastUsedStorage, mLastAppStorage, mLastFreeStorage;
 
@@ -263,17 +263,17 @@ public class ManageApplications extends Fragment implements
                 mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter);
                 mListView.setAdapter(mApplications);
                 mListView.setRecyclerListener(mApplications);
-                mColorBar = (LinearColorBar)mListContainer.findViewById(R.id.storage_color_bar);
-                mStorageChartLabel = (TextView)mListContainer.findViewById(R.id.storageChartLabel);
-                mUsedStorageText = (TextView)mListContainer.findViewById(R.id.usedStorageText);
-                mFreeStorageText = (TextView)mListContainer.findViewById(R.id.freeStorageText);
+                //mColorBar = (LinearColorBar)mListContainer.findViewById(R.id.storage_color_bar);
+                //mStorageChartLabel = (TextView)mListContainer.findViewById(R.id.storageChartLabel);
+                //mUsedStorageText = (TextView)mListContainer.findViewById(R.id.usedStorageText);
+                //mFreeStorageText = (TextView)mListContainer.findViewById(R.id.freeStorageText);
                 Utils.prepareCustomPreferencesList(contentParent, contentChild, mListView, false);
                 if (mFilter == FILTER_APPS_SDCARD) {
-                    mStorageChartLabel.setText(mOwner.getActivity().getText(
-                            R.string.sd_card_storage));
+                    //mStorageChartLabel.setText(mOwner.getActivity().getText(
+                    //        R.string.sd_card_storage));
                 } else {
-                    mStorageChartLabel.setText(mOwner.getActivity().getText(
-                            R.string.internal_storage));
+                    //mStorageChartLabel.setText(mOwner.getActivity().getText(
+                    //        R.string.internal_storage));
                 }
                 applyCurrentStorage();
             }
@@ -389,6 +389,7 @@ public class ManageApplications extends Fragment implements
             if (mRootView == null) {
                 return;
             }
+            /*
             if (mTotalStorage > 0) {
                 BidiFormatter bidiFormatter = BidiFormatter.getInstance();
                 mColorBar.setRatios((mTotalStorage-mFreeStorage-mAppStorage)/(float)mTotalStorage,
@@ -419,6 +420,7 @@ public class ManageApplications extends Fragment implements
                     mFreeStorageText.setText("");
                 }
             }
+            */
         }
 
         @Override
