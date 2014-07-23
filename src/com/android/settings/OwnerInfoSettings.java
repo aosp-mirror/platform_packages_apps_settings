@@ -60,18 +60,11 @@ public class OwnerInfoSettings extends Fragment {
         mView = inflater.inflate(R.layout.ownerinfo, container, false);
         mUserId = UserHandle.myUserId();
         mLockPatternUtils = new LockPatternUtils(getActivity());
-        initView(mView);
+        initView();
         return mView;
     }
 
-    private void initView(View view) {
-        final ContentResolver res = getActivity().getContentResolver();
-        String info = mLockPatternUtils.getOwnerInfo(mUserId);
-        boolean enabled = mLockPatternUtils.isOwnerInfoEnabled();
-        mCheckbox = (CheckBox) mView.findViewById(R.id.show_owner_info_on_lockscreen_checkbox);
-        mOwnerInfo = (EditText) mView.findViewById(R.id.owner_info_edit_text);
-        mOwnerInfo.setText(info);
-        mOwnerInfo.setEnabled(enabled);
+    private void initView() {
         mNickname = (EditText) mView.findViewById(R.id.owner_info_nickname);
         if (!mShowNickname) {
             mNickname.setVisibility(View.GONE);
@@ -79,6 +72,10 @@ public class OwnerInfoSettings extends Fragment {
             mNickname.setText(UserManager.get(getActivity()).getUserName());
             mNickname.setSelected(true);
         }
+
+        final boolean enabled = mLockPatternUtils.isOwnerInfoEnabled();
+
+        mCheckbox = (CheckBox) mView.findViewById(R.id.show_owner_info_on_lockscreen_checkbox);
         mCheckbox.setChecked(enabled);
         if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
             if (UserManager.get(getActivity()).isLinkedUser()) {
@@ -93,6 +90,14 @@ public class OwnerInfoSettings extends Fragment {
                 mOwnerInfo.setEnabled(isChecked); // disable text field if not enabled
             }
         });
+
+        String info = mLockPatternUtils.getOwnerInfo(mUserId);
+
+        mOwnerInfo = (EditText) mView.findViewById(R.id.owner_info_edit_text);
+        mOwnerInfo.setEnabled(enabled);
+        if (!TextUtils.isEmpty(info)) {
+            mOwnerInfo.setText(info);
+        }
     }
 
     @Override
@@ -102,7 +107,6 @@ public class OwnerInfoSettings extends Fragment {
     }
 
     void saveChanges() {
-        ContentResolver res = getActivity().getContentResolver();
         String info = mOwnerInfo.getText().toString();
         mLockPatternUtils.setOwnerInfo(info, mUserId);
         if (mShowNickname) {
@@ -114,5 +118,4 @@ public class OwnerInfoSettings extends Fragment {
             }
         }
     }
-
 }
