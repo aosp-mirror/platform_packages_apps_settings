@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.content.res.Resources;
 import android.text.BidiFormatter;
 import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
@@ -71,9 +72,11 @@ public class RunningProcessesView extends FrameLayout
     RunningState.BaseItem mCurSelected;
     
     ListView mListView;
+    View mHeader;
     ServiceListAdapter mAdapter;
     LinearColorBar mColorBar;
     TextView mBackgroundProcessText;
+    TextView mAppsProcessText;
     TextView mForegroundProcessText;
     
     int mLastNumBackgroundProcesses = -1;
@@ -316,7 +319,7 @@ public class RunningProcessesView extends FrameLayout
 
     void refreshUi(boolean dataChanged) {
         if (dataChanged) {
-            ServiceListAdapter adapter = (ServiceListAdapter)(mListView.getAdapter());
+            ServiceListAdapter adapter = mAdapter;
             adapter.refreshItems();
             adapter.notifyDataSetChanged();
         }
@@ -338,38 +341,35 @@ public class RunningProcessesView extends FrameLayout
         synchronized (mState.mLock) {
             if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses
                     || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory
+                    || mLastNumForegroundProcesses != mState.mNumForegroundProcesses
+                    || mLastForegroundProcessMemory != mState.mForegroundProcessMemory
+                    || mLastNumServiceProcesses != mState.mNumServiceProcesses
+                    || mLastServiceProcessMemory != mState.mServiceProcessMemory
                     || mLastAvailMemory != availMem) {
                 mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
                 mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
+                mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
+                mLastServiceProcessMemory = mState.mServiceProcessMemory;
                 mLastAvailMemory = availMem;
                 long freeMem = mLastAvailMemory + mLastBackgroundProcessMemory;
                 BidiFormatter bidiFormatter = BidiFormatter.getInstance();
                 String sizeStr = bidiFormatter.unicodeWrap(
                         Formatter.formatShortFileSize(getContext(), freeMem));
                 mBackgroundProcessText.setText(getResources().getString(
-                        R.string.service_background_processes, sizeStr));
+                        R.string.running_processes_header_ram, sizeStr));
                 sizeStr = bidiFormatter.unicodeWrap(
                         Formatter.formatShortFileSize(getContext(),
-                                mMemInfoReader.getTotalSize() - freeMem));
+                                mLastForegroundProcessMemory + mLastServiceProcessMemory));
+                mAppsProcessText.setText(getResources().getString(
+                        R.string.running_processes_header_ram, sizeStr));
+                sizeStr = bidiFormatter.unicodeWrap(
+                        Formatter.formatShortFileSize(getContext(),
+                                mMemInfoReader.getTotalSize() - freeMem
+                                - mLastForegroundProcessMemory - mLastServiceProcessMemory));
                 mForegroundProcessText.setText(getResources().getString(
-                        R.string.service_foreground_processes, sizeStr));
+                        R.string.running_processes_header_ram, sizeStr));
             }
-            if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses
-                    || mLastForegroundProcessMemory != mState.mForegroundProcessMemory
-                    || mLastNumServiceProcesses != mState.mNumServiceProcesses
-                    || mLastServiceProcessMemory != mState.mServiceProcessMemory) {
-                mLastNumForegroundProcesses = mState.mNumForegroundProcesses;
-                mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
-                mLastNumServiceProcesses = mState.mNumServiceProcesses;
-                mLastServiceProcessMemory = mState.mServiceProcessMemory;
-                /*
-                String sizeStr = Formatter.formatShortFileSize(getContext(),
-                        mLastForegroundProcessMemory + mLastServiceProcessMemory);
-                mForegroundProcessText.setText(getResources().getString(
-                        R.string.service_foreground_processes, sizeStr));
-                */
-            }
-            
+
             float totalMem = mMemInfoReader.getTotalSize();
             float totalShownMem = availMem + mLastBackgroundProcessMemory
                     + mLastServiceProcessMemory;
@@ -428,27 +428,16 @@ public class RunningProcessesView extends FrameLayout
         mListView.setRecyclerListener(this);
         mAdapter = new ServiceListAdapter(mState);
         mListView.setAdapter(mAdapter);
-        mColorBar = (LinearColorBar)findViewById(R.id.color_bar);
-        mBackgroundProcessText = (TextView)findViewById(R.id.backgroundText);
-        mBackgroundProcessText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAdapter.setShowBackground(true);
-                if (mOwner != null) {
-                    mOwner.getActivity().invalidateOptionsMenu();
-                }
-            }
-        });
-        mForegroundProcessText = (TextView)findViewById(R.id.foregroundText);
-        mForegroundProcessText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAdapter.setShowBackground(false);
-                if (mOwner != null) {
-                    mOwner.getActivity().invalidateOptionsMenu();
-                }
-            }
-        });
+        mHeader = inflater.inflate(R.layout.running_processes_header, null);
+        mListView.addHeaderView(mHeader);
+        mColorBar = (LinearColorBar)mHeader.findViewById(R.id.color_bar);
+        Resources res = getResources();
+        mColorBar.setColors(res.getColor(R.color.running_processes_system_ram),
+                res.getColor(R.color.running_processes_apps_ram),
+                res.getColor(R.color.running_processes_free_ram));
+        mBackgroundProcessText = (TextView)mHeader.findViewById(R.id.freeSize);
+        mAppsProcessText = (TextView)mHeader.findViewById(R.id.appsSize);
+        mForegroundProcessText = (TextView)mHeader.findViewById(R.id.systemSize);
 
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         mAm.getMemoryInfo(memInfo);
