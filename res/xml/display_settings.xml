@@ -25,7 +25,7 @@
                 settings:keywords="@string/keywords_display_brightness_level"
                 android:persistent="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:key="auto_brightness"
                 android:title="@string/auto_brightness_title"
                 settings:keywords="@string/keywords_display_auto_brightness"
@@ -50,6 +50,11 @@
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
+
+        <SwitchPreference
+                android:key="lift_to_wake"
+                android:title="@string/lift_to_wake_title"
+                android:persistent="false" />
 
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
