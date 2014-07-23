@@ -3096,6 +3096,28 @@
     <!-- Descriptive text of a running process: plural process, plural service. -->
     <string name="running_processes_item_description_p_p"><xliff:g id="numprocess">%1$d</xliff:g>
         processes and <xliff:g id="numservices">%2$d</xliff:g> services</string>
+    <!-- [CHAR LIMIT=NONE] Top title of the header of the running processes/services list. -->
+    <string name="running_processes_header_title">Device memory</string>
+    <!-- [CHAR LIMIT=NONE] Bottom test of the header leading in to the running
+         processes/services list. -->
+    <string name="running_processes_header_footer">App RAM usage</string>
+    <!-- [CHAR LIMIT=20] Running processes/services header: prefix for line showing RAM
+         used by system. -->
+    <string name="running_processes_header_system_prefix">System</string>
+    <!-- [CHAR LIMIT=20] Running processes/services header: prefix for line showing RAM
+         used by apps. -->
+    <string name="running_processes_header_apps_prefix">Apps</string>
+    <!-- [CHAR LIMIT=20] Running processes/services header: prefix for line showing RAM
+         that is free. -->
+    <string name="running_processes_header_free_prefix">Free</string>
+    <!-- [CHAR LIMIT=20] Running processes/services header: prefix for line showing total RAM
+         used by everything. -->
+    <string name="running_processes_header_used_prefix">Used</string>
+    <!-- [CHAR LIMIT=20] Running processes/services header: prefix for line showing portion
+         of free RAM that is used by cached apps. -->
+    <string name="running_processes_header_cached_prefix">Cached</string>
+    <!-- [CHAR_LIMIT=20] Running processes/services header: formatter for RAM use amount. -->
+    <string name="running_processes_header_ram"><xliff:g id="ram">%1$s</xliff:g> of RAM</string>
 
     <!-- Details about an application's running services. -->
     <string name="runningservicedetails_settings_title">Running app</string>
