@@ -48,6 +48,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -141,6 +142,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         super.onActivityCreated(savedInstanceState);
 
         ListView listView = getListView();
+        Utils.forceCustomPadding(listView);
 
         mAdapter = new NotificationHistoryAdapter(mContext);
         listView.setAdapter(mAdapter);
