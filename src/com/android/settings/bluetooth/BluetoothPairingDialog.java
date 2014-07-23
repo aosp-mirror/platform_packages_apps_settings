@@ -161,7 +161,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
     private void createUserEntryDialog(CachedBluetoothDeviceManager deviceManager) {
         final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createPinEntryView(deviceManager.getName(mDevice));
         p.mPositiveButtonText = getString(android.R.string.ok);
@@ -252,7 +251,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
     private void createConfirmationDialog(CachedBluetoothDeviceManager deviceManager) {
         final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createView(deviceManager);
         p.mPositiveButtonText = getString(R.string.bluetooth_pairing_accept);
@@ -264,7 +262,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
     private void createConsentDialog(CachedBluetoothDeviceManager deviceManager) {
         final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createView(deviceManager);
         p.mPositiveButtonText = getString(R.string.bluetooth_pairing_accept);
@@ -277,7 +274,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
     private void createDisplayPasskeyOrPinDialog(
             CachedBluetoothDeviceManager deviceManager) {
         final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createView(deviceManager);
         p.mNegativeButtonText = getString(android.R.string.cancel);
