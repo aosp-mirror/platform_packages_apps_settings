@@ -358,12 +358,17 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
         mMessages.setChecked(mConfig.allowMessages);
         mStarred.setSelectedValue(mConfig.allowFrom);
+        updateStarredEnabled();
         updateDays();
         mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
         mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
         mDisableListeners = false;
         refreshAutomationSection();
         updateEndSummary();
+    }
+
+    private void updateStarredEnabled() {
+        mStarred.setEnabled(mConfig.allowCalls || mConfig.allowMessages);
     }
 
     private void refreshAutomationSection() {
@@ -453,6 +458,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 mConfig = config;
                 if (DEBUG) Log.d(TAG, "Saved mConfig=" + mConfig);
                 updateEndSummary();
+                updateStarredEnabled();
             }
             return success;
         } catch (Exception e) {
