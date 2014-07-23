@@ -135,6 +135,7 @@ public class SettingsActivity extends Activity
     private static final String SAVE_KEY_SEARCH_QUERY = ":settings:search_query";
     private static final String SAVE_KEY_SHOW_HOME_AS_UP = ":settings:show_home_as_up";
     private static final String SAVE_KEY_SHOW_SEARCH = ":settings:show_search";
+    private static final String SAVE_KEY_HOME_ACTIVITIES_COUNT = ":settings:home_activities_count";
 
     /**
      * When starting this activity, the invoking Intent can contain this extra
@@ -350,6 +351,7 @@ public class SettingsActivity extends Activity
     };
 
     private boolean mNeedToRevertToInitialFragment = false;
+    private int mHomeActivitiesCount = 1;
 
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
@@ -527,6 +529,8 @@ public class SettingsActivity extends Activity
 
             mDisplayHomeAsUpEnabled = savedState.getBoolean(SAVE_KEY_SHOW_HOME_AS_UP);
             mDisplaySearch = savedState.getBoolean(SAVE_KEY_SHOW_SEARCH);
+            mHomeActivitiesCount = savedState.getInt(SAVE_KEY_HOME_ACTIVITIES_COUNT,
+                    1 /* one home activity by default */);
         } else {
             if (!mIsShowingDashboard) {
                 // Search is shown we are launched thru a Settings "shortcut". UP will be shown
@@ -614,6 +618,14 @@ public class SettingsActivity extends Activity
                 }
             }
         }
+
+        mHomeActivitiesCount = getHomeActivitiesCount();
+    }
+
+    private int getHomeActivitiesCount() {
+        final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
+        getPackageManager().getHomeActivities(homeApps);
+        return homeApps.size();
     }
 
     private void setTitleFromIntent(Intent intent) {
@@ -689,11 +701,20 @@ public class SettingsActivity extends Activity
             String query = (mSearchView != null) ? mSearchView.getQuery().toString() : EMPTY_QUERY;
             outState.putString(SAVE_KEY_SEARCH_QUERY, query);
         }
+
+        outState.putInt(SAVE_KEY_HOME_ACTIVITIES_COUNT, mHomeActivitiesCount);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        final int newHomeActivityCount = getHomeActivitiesCount();
+        if (newHomeActivityCount != mHomeActivitiesCount) {
+            mHomeActivitiesCount = newHomeActivityCount;
+            setNeedToRebuildCategories(true);
+            invalidateCategories();
+        }
 
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -1146,9 +1167,7 @@ public class SettingsActivity extends Activity
         }
 
         try {
-            final ArrayList<ResolveInfo> homeApps = new ArrayList<ResolveInfo>();
-            getPackageManager().getHomeActivities(homeApps);
-            if (homeApps.size() < 2) {
+            if (mHomeActivitiesCount < 2) {
                 // When there's only one available home app, omit this settings
                 // category entirely at the top level UI.  If the user just
                 // uninstalled the penultimate home app candidiate, we also
