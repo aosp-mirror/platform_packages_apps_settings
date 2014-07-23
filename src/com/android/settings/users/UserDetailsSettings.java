@@ -95,6 +95,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mPhonePref.setChecked(
                     !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
         }
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER)) {
+            removePreference(KEY_REMOVE_USER);
+        }
         mPhonePref.setOnPreferenceChangeListener(this);
     }
 
