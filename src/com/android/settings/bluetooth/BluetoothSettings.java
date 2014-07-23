@@ -140,6 +140,13 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
         super.onResume();
 
+        if (isUiRestricted()) {
+            setDeviceListGroup(getPreferenceScreen());
+            removeAllDevices();
+            mEmptyView.setText(R.string.bluetooth_empty_list_user_restricted);
+            return;
+        }
+
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mLocalAdapter != null) {
             updateContent(mLocalAdapter.getBluetoothState(), mActivityStarted);
@@ -155,6 +162,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         if (mBluetoothEnabler != null) {
             mBluetoothEnabler.pause();
         }
+
+        if (isUiRestricted()) {
+            return;
+        }
+
         getActivity().unregisterReceiver(mReceiver);
 
         // Make the device only visible to connected devices.
@@ -165,7 +177,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (mLocalAdapter == null) return;
         // If the user is not allowed to configure bluetooth, do not show the menu.
-        if (isRestrictedAndNotPinProtected()) return;
+        if (isUiRestricted()) return;
 
         boolean bluetoothIsEnabled = mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON;
         boolean isDiscovering = mLocalAdapter.isDiscovering();
@@ -219,7 +231,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     private void startScanning() {
-        if (isRestrictedAndNotPinProtected()) return;
+        if (isUiRestricted()) return;
         if (!mAvailableDevicesCategoryIsPresent) {
             getPreferenceScreen().addPreference(mAvailableDevicesCategory);
         }
@@ -252,6 +264,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 preferenceScreen.setOrderingAsAdded(true);
                 mDevicePreferenceMap.clear();
 
+                if (isUiRestricted()) {
+                    messageId = R.string.bluetooth_empty_list_user_restricted;
+                    break;
+                }
+
                 // Paired devices category
                 if (mPairedDevicesCategory == null) {
                     mPairedDevicesCategory = new PreferenceCategory(getActivity());
@@ -270,11 +287,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 } else {
                     mAvailableDevicesCategory.removeAll();
                 }
-                if (!isRestrictedAndNotPinProtected()) {
-                    addDeviceCategory(mAvailableDevicesCategory,
-                            R.string.bluetooth_preference_found_devices,
-                            BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
-                }
+                addDeviceCategory(mAvailableDevicesCategory,
+                        R.string.bluetooth_preference_found_devices,
+                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
                 int numberOfAvailableDevices = mAvailableDevicesCategory.getPreferenceCount();
                 mAvailableDevicesCategoryIsPresent = true;
 
@@ -313,6 +328,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
             case BluetoothAdapter.STATE_OFF:
                 messageId = R.string.bluetooth_empty_list_bluetooth_off;
+                if (isUiRestricted()) {
+                    messageId = R.string.bluetooth_empty_list_user_restricted;
+                }
                 break;
 
             case BluetoothAdapter.STATE_TURNING_ON:
@@ -323,7 +341,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         setDeviceListGroup(preferenceScreen);
         removeAllDevices();
         mEmptyView.setText(messageId);
-        getActivity().invalidateOptionsMenu();
+        if (!isUiRestricted()) {
+            getActivity().invalidateOptionsMenu();
+        }
     }
 
     @Override
@@ -336,7 +356,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     public void onScanningStateChanged(boolean started) {
         super.onScanningStateChanged(started);
         // Update options' enabled state
-        getActivity().invalidateOptionsMenu();
+        if (getActivity() != null) {
+            getActivity().invalidateOptionsMenu();
+        }
     }
 
     @Override
@@ -350,7 +372,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         public void onClick(View v) {
             // User clicked on advanced options icon for a device in the list
             if (v.getTag() instanceof CachedBluetoothDevice) {
-                if (isRestrictedAndNotPinProtected()) return;
+                if (isUiRestricted()) return;
 
                 CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
 
