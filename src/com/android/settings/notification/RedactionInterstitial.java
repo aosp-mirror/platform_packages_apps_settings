@@ -79,8 +79,8 @@ public class RedactionInterstitial extends SettingsActivity {
         }
 
         private void loadFromSettings() {
-            final boolean enabled = Settings.Global.getInt(getContentResolver(),
-                        Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
+            final boolean enabled = Settings.Secure.getInt(getContentResolver(),
+                        Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
             final boolean show = Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
             mShowAllButton.setChecked(enabled && show);
@@ -95,8 +95,8 @@ public class RedactionInterstitial extends SettingsActivity {
 
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
-            Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
         }
     }
 }
