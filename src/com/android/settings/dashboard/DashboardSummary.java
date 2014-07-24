@@ -74,7 +74,6 @@ public class DashboardSummary extends Fragment {
         filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
         filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
         filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
-        filter.addCategory(Intent.CATEGORY_HOME);
         filter.addDataScheme("package");
         getActivity().registerReceiver(mHomePackageReceiver, filter);
     }

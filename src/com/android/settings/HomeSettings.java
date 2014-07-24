@@ -222,7 +222,6 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
         filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
         filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
-        filter.addCategory(Intent.CATEGORY_HOME);
         filter.addDataScheme("package");
         getActivity().registerReceiver(mHomePackageReceiver, filter);
 
