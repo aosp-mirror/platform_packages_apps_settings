@@ -32,7 +32,6 @@ import android.util.SparseArray;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.users.UserUtils;
 
 /**
  * Return details about a specific UID, handling special cases like
@@ -121,7 +120,7 @@ public class UidDetailProvider {
             final UserInfo info = um.getUserInfo(userHandle);
             if (info != null) {
                 detail.label = res.getString(R.string.running_process_item_user_label, info.name);
-                detail.icon = UserUtils.getUserIcon(mContext, um, info, res);
+                detail.icon = Utils.getUserIcon(mContext, um, info);
                 return detail;
             }
         }
