@@ -1159,7 +1159,8 @@
         </activity>
 
         <activity android:name="Settings$QuickLaunchSettingsActivity"
-                android:label="@string/quick_launch_title">
+                android:label="@string/quick_launch_title"
+                android:theme="@style/Theme.SubSettingsDialogWhenLarge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.QUICK_LAUNCH_SETTINGS" />
@@ -1173,7 +1174,9 @@
                        android:value="true" />
         </activity>
 
-        <activity android:name=".quicklaunch.BookmarkPicker" android:label="@string/quick_launch_title">
+        <activity android:name=".quicklaunch.BookmarkPicker"
+                  android:label="@string/quick_launch_title"
+                  android:theme="@style/Theme.SubSettingsDialogWhenLarge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
