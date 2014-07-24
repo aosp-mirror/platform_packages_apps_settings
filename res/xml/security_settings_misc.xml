@@ -120,6 +120,11 @@
                 android:summary="@string/switch_off_text"
                 android:fragment="com.android.settings.ScreenPinningSettings"/>
 
+        <Preference android:key="usage_access"
+                    android:title="@string/usage_access_title"
+                    android:summary="@string/usage_access_summary"
+                    android:fragment="com.android.settings.UsageAccessSettings"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
