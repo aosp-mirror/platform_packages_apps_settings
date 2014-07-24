@@ -1158,8 +1158,7 @@
             </intent-filter>
         </activity>
 
-        <!-- TODO: Test this once Settings stops crashing for this intent -->
-        <activity android:name=".quicklaunch.QuickLaunchSettings"
+        <activity android:name="Settings$QuickLaunchSettingsActivity"
                 android:label="@string/quick_launch_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1168,8 +1167,10 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.quicklaunch.QuickLaunchSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
+                       android:value="true" />
         </activity>
 
         <activity android:name=".quicklaunch.BookmarkPicker" android:label="@string/quick_launch_title">
