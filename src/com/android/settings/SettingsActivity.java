@@ -84,6 +84,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
+import com.android.settings.quicklaunch.QuickLaunchSettings;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
@@ -283,7 +284,8 @@ public class SettingsActivity extends Activity
             InstalledAppDetails.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
-            OtherSoundSettings.class.getName()
+            OtherSoundSettings.class.getName(),
+            QuickLaunchSettings.class.getName()
     };
 
 
