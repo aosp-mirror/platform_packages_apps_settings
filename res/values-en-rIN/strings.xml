@@ -130,6 +130,8 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Rename"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Disconnect?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"This will end your connection with:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <!-- no translation found for bluetooth_empty_list_user_restricted (1185354873716211496) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is now visible to nearby devices."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Disconnect <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Broadcasting"</string>
@@ -842,6 +844,8 @@
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Start now"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Settings"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatic brightness"</string>
+    <!-- no translation found for lift_to_wake_title (4555378006856277635) -->
+    <skip />
     <string name="title_font_size" msgid="4405544325522105222">"Font size"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Font size"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM card lock settings"</string>
@@ -1317,6 +1321,22 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processes and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processes and <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
+    <!-- no translation found for running_processes_header_title (6588371727640789560) -->
+    <skip />
+    <!-- no translation found for running_processes_header_footer (723908176275428442) -->
+    <skip />
+    <!-- no translation found for running_processes_header_system_prefix (6104153299581682047) -->
+    <skip />
+    <!-- no translation found for running_processes_header_apps_prefix (5787594452716832727) -->
+    <skip />
+    <!-- no translation found for running_processes_header_free_prefix (4620613031737078415) -->
+    <skip />
+    <!-- no translation found for running_processes_header_used_prefix (5924288703085123978) -->
+    <skip />
+    <!-- no translation found for running_processes_header_cached_prefix (7950853188089434987) -->
+    <skip />
+    <!-- no translation found for running_processes_header_ram (996092388884426817) -->
+    <skip />
     <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Running app"</string>
     <string name="no_services" msgid="7133900764462288263">"Not active"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Services"</string>
@@ -1719,13 +1739,12 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Voice search"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android keyboard"</string>
     <string name="voice_category" msgid="1430370497125803904">"Speech"</string>
-    <string name="voice_interactor_title" msgid="4591706322348912721">"Voice input"</string>
-    <string name="voice_interactor_settings_title" msgid="448041804591022360">"Voice input"</string>
-    <string name="voice_interactor_settings_summary" msgid="8574288425783919649">"Settings for \'<xliff:g id="INTERACTOR_NAME">%s</xliff:g>\'"</string>
-    <string name="no_voice_interactor" msgid="2775603669036981812">"None"</string>
-    <string name="recognizer_title" msgid="3231385184559054457">"Voice recogniser"</string>
-    <string name="recognizer_settings_title" msgid="432493301215113154">"Voice Search"</string>
-    <string name="recognizer_settings_summary" msgid="4472287934134546902">"Settings for \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
+    <string name="voice_input_settings" msgid="1099937800539324567">"Voice input settings"</string>
+    <string name="voice_input_settings_title" msgid="2676028028084981891">"Voice input"</string>
+    <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Voice input services"</string>
+    <string name="voice_interactor_preference_summary" msgid="5995613396290979463">"Full voice interaction"</string>
+    <string name="voice_recognizer_preference_summary" msgid="878040238053901752">"Simple voice recognition"</string>
+    <string name="voice_interaction_security_warning" msgid="1272774555442633823">"This voice input service will be able to control all voice enabled applications on your behalf. It comes from the <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> application. Enable the use of this service?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Text-to-speech settings"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Text-to-speech output"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Always use my settings"</string>
@@ -2010,11 +2029,19 @@
     <string name="data_usage_cycle" msgid="5652529796195787949">"Data usage cycle"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Data roaming"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restrict background data"</string>
+    <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Allow background data"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Separate 4G usage"</string>
     <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"Show Wi‑Fi"</string>
+    <string name="data_usage_menu_hide_wifi" msgid="7290056718050186769">"Hide Wi‑Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Show Ethernet usage"</string>
-    <string name="data_usage_menu_metered" msgid="5056695223222541863">"Mobile hotspots"</string>
+    <string name="data_usage_menu_hide_ethernet" msgid="3326702187179943681">"Hide Ethernet usage"</string>
+    <string name="data_usage_menu_metered" msgid="6235119991372755026">"Network restrictions"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Auto-sync data"</string>
+    <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM cards"</string>
+    <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Mobile networks"</string>
+    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Auto-sync data"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Auto-sync personal data"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Auto-sync work data"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Change cycle…"</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Day of month to reset data usage cycle:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"No apps used data during this period."</string>
@@ -2038,7 +2065,7 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G data"</string>
     <string name="data_usage_forground_label" msgid="7654319010655983591">"Foreground:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"Background:"</string>
-    <string name="data_usage_app_settings" msgid="8430240158135453271">"View app settings"</string>
+    <string name="data_usage_app_settings" msgid="2279171379771253165">"App settings"</string>
     <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Restrict app background data"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Disable background data on mobile networks."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"To restrict background data for this app, first set a mobile data limit."</string>
@@ -2070,11 +2097,12 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used."</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your tablet. Your carrier\'s data usage accounting may differ."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: about <xliff:g id="TOTAL">%1$s</xliff:g> used, as measured by your phone. Your carrier\'s data usage accounting may differ."</string>
-    <string name="data_usage_metered_title" msgid="6204750602856383278">"Mobile hotspots"</string>
-    <string name="data_usage_metered_body" msgid="4959032833706695848">"Select the Wi‑Fi networks which are mobile hotspots. Apps can be restricted from using these networks when in the background. Apps may also warn before using these networks for large downloads."</string>
+    <string name="data_usage_metered_title" msgid="7383175371006596441">"Network restrictions"</string>
+    <string name="data_usage_metered_body" msgid="3262343834446126044">"Metered networks are treated like cellular when background data is restricted. Apps may warn before using these networks for large downloads."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Mobile networks"</string>
-    <string name="data_usage_metered_wifi" msgid="8540872226614404873">"Wi‑Fi networks"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="5502020778468643732">"To select mobile hotspots, turn Wi‑Fi on."</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Metered Wi‑Fi networks"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"To select metered networks, turn Wi‑Fi on."</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"Operator data accounting may differ from your device."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Emergency call"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Return to call"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Name"</string>
@@ -2132,7 +2160,7 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Enforcing"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Network may be monitored"</string>
-    <string name="done_button" msgid="1991471253042622230">"Finished"</string>
+    <string name="done_button" msgid="1991471253042622230">"Done"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Network monitoring"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"This device is managed by:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nYour administrator is capable of monitoring your network activity, including emails, apps and secure websites.\n\nFor more information, contact your administrator."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"A third party is capable of monitoring your network activity, including emails, apps and secure websites.\n\nA trusted credential installed on your device is making this possible."</string>
@@ -2297,6 +2325,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi Wi-Fi network connection"</string>
     <string name="keywords_more_default_sms_app" msgid="2744404159003574745">"text message"</string>
     <string name="keywords_more_mobile_networks" msgid="7813380887358745769">"mobile operator wireless"</string>
+    <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"screen touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="8636451602230815191">"dim screen touchscreen"</string>
     <string name="keywords_display_auto_brightness" msgid="8070218600502753102">"dim screen touchscreen"</string>
@@ -2306,6 +2335,7 @@
     <string name="keywords_storage" msgid="7007275853993419928">"space disk hard drive"</string>
     <string name="keywords_battery" msgid="3992479295298655138">"power"</string>
     <string name="keywords_spell_checker" msgid="4509482591225399210">"spelling"</string>
+    <string name="keywords_voice_input" msgid="3519547605812413860">"recogniser input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset"</string>
     <string name="keywords_text_to_speech_output" msgid="8207889472282225512">"rate language default speak speaking"</string>
     <string name="keywords_date_and_time" msgid="7666950126499155141">"clock"</string>
     <string name="keywords_factory_data_reset" msgid="3693730656843989732">"wipe delete"</string>
@@ -2318,7 +2348,6 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
     <string name="keywords_users" msgid="4673901601478559100">"restriction restrict restricted"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"text correction correct sound vibrate auto language gesture suggest suggestion theme offensive word type emoji"</string>
-    <string name="keywords_search_voice" msgid="7846565354884391922">"language hands-free hand free recognition offensive word audio history bluetooth headset"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Set up Wi-Fi NFC Tag"</string>
     <string name="write_tag" msgid="8571858602896222537">"Write"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tap a tag to write..."</string>
@@ -2385,7 +2414,7 @@
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blocked"</string>
     <string name="app_notification_row_priority" msgid="7597101427045166499">"Top of list"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitive"</string>
-    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Finished"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Done"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Until you turn this off"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Priority interruptions"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Downtime (priority interruptions only)"</string>
@@ -2393,7 +2422,7 @@
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"None"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automation"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Automatically turn on"</string>
-    <string name="summary_divider_text" msgid="3087735442599707533">","</string>
+    <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Never"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Phone calls"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messages"</string>
@@ -2401,7 +2430,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Anyone"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Contacts only"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Starred contacts only"</string>
-    <string name="zen_mode_alarm_info" msgid="873843266868347052">"Alarms and timers are always priority interruptions"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"Alarms are always priority interruptions"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Automatically turn on"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Never"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Every night"</string>
@@ -2412,6 +2441,10 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
+    <!-- no translation found for restr_pin_enter_admin_pin (2451187374960131018) -->
+    <skip />
     <string name="switch_on_text" msgid="1124106706920572386">"On"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Off"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Screen pinning"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"When this setting is turned on, you can put the device in a state that keeps the current screen in view.\n\nTo pin a screen:\n\n1. Turn this setting on.\n\n2. Open an app.\n\n3. Touch the Recents button.\n\n4. Touch the pin icon."</string>
 </resources>
