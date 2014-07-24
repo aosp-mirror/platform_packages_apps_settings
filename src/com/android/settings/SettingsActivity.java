@@ -303,7 +303,7 @@ public class SettingsActivity extends Activity
 
                 if (mBatteryPresent != batteryPresent) {
                     mBatteryPresent = batteryPresent;
-                    invalidateCategories();
+                    invalidateCategories(true);
                 }
             }
         }
@@ -333,15 +333,16 @@ public class SettingsActivity extends Activity
 
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<DashboardCategory>();
-    private boolean mNeedToRebuildCategories;
 
+    private static final String MSG_DATA_FORCE_REFRESH = "msg_data_force_refresh";
     private static final int MSG_BUILD_CATEGORIES = 1;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_BUILD_CATEGORIES: {
-                    if(mNeedToRebuildCategories) {
+                    final boolean forceRefresh = msg.getData().getBoolean(MSG_DATA_FORCE_REFRESH);
+                    if (forceRefresh) {
                         buildDashboardCategories(mCategories);
                     }
                 } break;
@@ -356,10 +357,9 @@ public class SettingsActivity extends Activity
         return mSwitchBar;
     }
 
-    public List<DashboardCategory> getDashboardCategories() {
-        if (mNeedToRebuildCategories || mCategories.size() == 0) {
+    public List<DashboardCategory> getDashboardCategories(boolean forceRefresh) {
+        if (forceRefresh || mCategories.size() == 0) {
             buildDashboardCategories(mCategories);
-            mNeedToRebuildCategories = false;
         }
         return mCategories;
     }
@@ -388,9 +388,11 @@ public class SettingsActivity extends Activity
         return false;
     }
 
-    private void invalidateCategories() {
+    private void invalidateCategories(boolean forceRefresh) {
         if (!mHandler.hasMessages(MSG_BUILD_CATEGORIES)) {
-            mHandler.sendEmptyMessage(MSG_BUILD_CATEGORIES);
+            Message msg = new Message();
+            msg.what = MSG_BUILD_CATEGORIES;
+            msg.getData().putBoolean(MSG_DATA_FORCE_REFRESH, forceRefresh);
         }
     }
 
@@ -711,15 +713,13 @@ public class SettingsActivity extends Activity
         final int newHomeActivityCount = getHomeActivitiesCount();
         if (newHomeActivityCount != mHomeActivitiesCount) {
             mHomeActivitiesCount = newHomeActivityCount;
-            setNeedToRebuildCategories(true);
-            invalidateCategories();
+            invalidateCategories(true);
         }
 
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                setNeedToRebuildCategories(true);
-                invalidateCategories();
+                invalidateCategories(true);
             }
         };
         mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
@@ -739,7 +739,6 @@ public class SettingsActivity extends Activity
         super.onPause();
 
         unregisterReceiver(mBatteryInfoReceiver);
-
         mDynamicIndexableContentMonitor.unregister();
     }
 
@@ -896,10 +895,6 @@ public class SettingsActivity extends Activity
         transaction.commitAllowingStateLoss();
         getFragmentManager().executePendingTransactions();
         return f;
-    }
-
-    public void setNeedToRebuildCategories(boolean need) {
-        mNeedToRebuildCategories = need;
     }
 
     /**
@@ -1166,6 +1161,7 @@ public class SettingsActivity extends Activity
         }
 
         try {
+            mHomeActivitiesCount = getHomeActivitiesCount();
             if (mHomeActivitiesCount < 2) {
                 // When there's only one available home app, omit this settings
                 // category entirely at the top level UI.  If the user just
