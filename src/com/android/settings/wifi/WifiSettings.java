@@ -729,7 +729,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private boolean prepareWifiAssistantCard() {
-        if (mWifiAssistantPreference != null) {
+        if (mWifiAssistantPreference == null) {
             mWifiAssistantPreference = new WifiAssistantPreference();
         }
 
