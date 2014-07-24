@@ -44,6 +44,7 @@ import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
@@ -87,6 +88,13 @@ public final class SearchIndexableResources {
                         NO_DATA_RES_ID,
                         BluetoothSettings.class.getName(),
                         R.drawable.ic_settings_bluetooth2));
+
+        sResMap.put(SimSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(SimSettings.class.getName()),
+                        R.xml.sim_settings,
+                        SimSettings.class.getName(),
+                        R.drawable.ic_sim_sd));
 
         sResMap.put(MessageAccessSettings.class.getName(),
                 new SearchIndexableResource(

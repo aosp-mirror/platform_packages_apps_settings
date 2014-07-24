@@ -100,6 +100,7 @@ import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.sim.SimSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -204,6 +205,7 @@ public class SettingsActivity extends Activity
             R.id.wifi_settings,
             R.id.bluetooth_settings,
             R.id.data_usage_settings,
+            R.id.sim_settings,
             R.id.wireless_settings,
             R.id.device_section,
             R.id.notification_settings,
@@ -234,6 +236,7 @@ public class SettingsActivity extends Activity
             SavedAccessPointsWifiSettings.class.getName(),
             BluetoothSettings.class.getName(),
             MessageAccessSettings.class.getName(),
+            SimSettings.class.getName(),
             TetherSettings.class.getName(),
             WifiP2pSettings.class.getName(),
             VpnSettings.class.getName(),
@@ -1034,7 +1037,10 @@ public class SettingsActivity extends Activity
                                 curBundle = null;
                             }
 
-                            category.addTile(tile);
+                            // Show the SIM Cards setting if there are more than 2 SIMs installed.
+                            if(tile.id != R.id.sim_settings || SimSettings.showSimCardScreen(this)){
+                                category.addTile(tile);
+                            }
 
                         } else {
                             XmlUtils.skipCurrentTag(parser);
