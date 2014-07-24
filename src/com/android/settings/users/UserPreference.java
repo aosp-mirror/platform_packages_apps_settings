@@ -16,7 +16,6 @@
 
 package com.android.settings.users;
 
-import com.android.internal.util.CharSequences;
 import com.android.settings.R;
 
 import android.content.Context;
@@ -36,8 +35,6 @@ public class UserPreference extends Preference {
     private OnClickListener mSettingsClickListener;
     private int mSerialNumber = -1;
     private int mUserId = USERID_UNKNOWN;
-    private boolean mRestricted;
-    private boolean mSelf;
     static final int SETTINGS_ID = R.id.manage_user;
     static final int DELETE_ID = R.id.trash_user;
 
