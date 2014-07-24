@@ -164,7 +164,7 @@ public class CryptKeeperSettings extends Fragment {
 
         return helper.launchConfirmationActivity(request,
                 res.getText(R.string.master_clear_gesture_prompt),
-                res.getText(R.string.master_clear_gesture_explanation),
+                res.getText(R.string.crypt_keeper_confirm_encrypt),
                 true);
     }
 
