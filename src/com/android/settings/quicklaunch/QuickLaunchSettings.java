@@ -103,7 +103,6 @@ public class QuickLaunchSettings extends SettingsPreferenceFragment implements
         initShortcutPreferences();
         mBookmarksCursor = getActivity().getContentResolver().query(Bookmarks.CONTENT_URI,
                 sProjection, null, null, null);
-        getListView().setOnItemLongClickListener(this);
     }
 
     @Override
@@ -124,16 +123,21 @@ public class QuickLaunchSettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onStop() {
+        super.onStop();
         mBookmarksCursor.close();
     }
 
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        
-        // Restore the clear dialog's info
-        mClearDialogBookmarkTitle = state.getString(CLEAR_DIALOG_BOOKMARK_TITLE);
-        mClearDialogShortcut = (char) state.getInt(CLEAR_DIALOG_SHORTCUT, 0);
+
+        getListView().setOnItemLongClickListener(this);
+
+        if (state != null) {
+            // Restore the clear dialog's info
+            mClearDialogBookmarkTitle = state.getString(CLEAR_DIALOG_BOOKMARK_TITLE);
+            mClearDialogShortcut = (char) state.getInt(CLEAR_DIALOG_SHORTCUT, 0);
+        }
     }
 
     @Override
