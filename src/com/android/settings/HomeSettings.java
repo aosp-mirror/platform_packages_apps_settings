@@ -48,6 +48,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
@@ -61,14 +62,23 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
 
     public static final String HOME_SHOW_NOTICE = "show";
 
-    PreferenceGroup mPrefGroup;
+    private class HomePackageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            buildHomeActivitiesList();
+            Index.getInstance(context).updateFromClassNameResource(
+                    HomeSettings.class.getName(), true, true);
+        }
+    }
 
-    PackageManager mPm;
-    ComponentName[] mHomeComponentSet;
-    ArrayList<HomeAppPreference> mPrefs;
-    HomeAppPreference mCurrentHome = null;
-    final IntentFilter mHomeFilter;
-    boolean mShowNotice;
+    private PreferenceGroup mPrefGroup;
+    private PackageManager mPm;
+    private ComponentName[] mHomeComponentSet;
+    private ArrayList<HomeAppPreference> mPrefs;
+    private HomeAppPreference mCurrentHome = null;
+    private final IntentFilter mHomeFilter;
+    private boolean mShowNotice;
+    private HomePackageReceiver mHomePackageReceiver = new HomePackageReceiver();
 
     public HomeSettings() {
         mHomeFilter = new IntentFilter(Intent.ACTION_MAIN);
@@ -151,7 +161,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         }
     }
 
-    void buildHomeActivitiesList() {
+    private void buildHomeActivitiesList() {
         ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
         ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
 
@@ -207,10 +217,26 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
     @Override
     public void onResume() {
         super.onResume();
+
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+        filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+        filter.addCategory(Intent.CATEGORY_HOME);
+        filter.addCategory(Intent.CATEGORY_LAUNCHER);
+        filter.addDataScheme("package");
+        getActivity().registerReceiver(mHomePackageReceiver, filter);
+
         buildHomeActivitiesList();
     }
 
-    class HomeAppPreference extends Preference {
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mHomePackageReceiver);
+    }
+
+    private class HomeAppPreference extends Preference {
         ComponentName activityName;
         int index;
         HomeSettings fragment;

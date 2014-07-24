@@ -17,7 +17,10 @@
 package com.android.settings.dashboard;
 
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,11 +56,40 @@ public class DashboardSummary extends Fragment {
         }
     };
 
+    private class HomePackageReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            rebuildUI(context);
+        }
+    }
+    private HomePackageReceiver mHomePackageReceiver = new HomePackageReceiver();
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        sendRebuildUI();
+
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+        filter.addAction(Intent.ACTION_PACKAGE_REPLACED);
+        filter.addCategory(Intent.CATEGORY_HOME);
+        filter.addCategory(Intent.CATEGORY_LAUNCHER);
+        filter.addDataScheme("package");
+        getActivity().registerReceiver(mHomePackageReceiver, filter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        getActivity().unregisterReceiver(mHomePackageReceiver);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final Context context = getActivity();
 
         mLayoutInflater = inflater;
 
@@ -79,7 +111,7 @@ public class DashboardSummary extends Fragment {
         mDashboard.removeAllViews();
 
         List<DashboardCategory> categories =
-                ((SettingsActivity) context).getDashboardCategories();
+                ((SettingsActivity) context).getDashboardCategories(true);
 
         final int count = categories.size();
 
@@ -113,13 +145,6 @@ public class DashboardSummary extends Fragment {
         }
         long delta = System.currentTimeMillis() - start;
         Log.d(LOG_TAG, "rebuildUI took: " + delta + " ms");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        sendRebuildUI();
     }
 
     private void updateTileView(Context context, Resources res, DashboardTile tile,
