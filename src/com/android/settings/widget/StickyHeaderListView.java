@@ -28,10 +28,10 @@ import android.view.WindowInsets;
 import android.widget.ListView;
 
 /**
- * This class provides sticky header functionality in a list view, to use with SetupWizardHeader.
- * To use this, add a header tagged with "sticky", or a header tagged with "stickyContainer" and
- * one of its child tagged as "sticky". The sticky container will be draw when the sticky element
- * hits the top of the view.
+ * This class provides sticky header functionality in a list view, to use with
+ * SetupWizardIllustration. To use this, add a header tagged with "sticky", or a header tagged with
+ * "stickyContainer" and one of its child tagged as "sticky". The sticky container will be drawn
+ * when the sticky element hits the top of the view.
  *
  * There are a few things to note:
  * 1. The two supported scenarios are StickyHeaderListView -> Header (stickyContainer) -> sticky,
@@ -41,7 +41,7 @@ import android.widget.ListView;
  * 3. If fitsSystemWindows is true, then this will offset the sticking position by the height of
  *    the system decorations at the top of the screen.
  *
- * @see com.google.android.setupwizard.util.SetupWizardHeader
+ * @see SetupWizardIllustration
  * @see com.google.android.setupwizard.util.StickyHeaderScrollView
  *
  * Copied from com.google.android.setupwizard.util.StickyHeaderListView

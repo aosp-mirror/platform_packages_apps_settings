@@ -15,14 +15,16 @@
      limitations under the License.
 -->
 
-<com.android.settings.widget.SetupWizardHeader
+<com.android.settings.widget.SetupWizardIllustration
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:id="@+id/title_area"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/grass"
     android:foreground="@drawable/illustration_wifi"
-    android:tag="stickyContainer">
+    android:tag="stickyContainer"
+    settings:aspectRatio="2.0">
 
     <TextView
         android:id="@+id/title"
@@ -32,4 +34,4 @@
         android:tag="sticky"
         android:text="@string/wifi_setup_wizard_title"/>
 
-</com.android.settings.widget.SetupWizardHeader>
+</com.android.settings.widget.SetupWizardIllustration>
