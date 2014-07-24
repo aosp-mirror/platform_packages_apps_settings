@@ -239,7 +239,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        if (!um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
+        if (!um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle)) {
             MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
                     getString(R.string.remove_account_label))
                     .setIcon(R.drawable.ic_menu_delete_holo_dark);
