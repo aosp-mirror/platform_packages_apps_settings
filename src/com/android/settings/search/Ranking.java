@@ -41,6 +41,7 @@ import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
@@ -55,24 +56,25 @@ public final class Ranking {
 
     public static final int RANK_WIFI = 1;
     public static final int RANK_BT = 2;
-    public static final int RANK_DATA_USAGE = 3;
-    public static final int RANK_WIRELESS = 4;
-    public static final int RANK_HOME = 5;
-    public static final int RANK_DISPLAY = 6;
-    public static final int RANK_WALLPAPER = 7;
-    public static final int RANK_NOTIFICATIONS = 8;
-    public static final int RANK_MEMORY = 9;
-    public static final int RANK_POWER_USAGE = 10;
-    public static final int RANK_USERS = 11;
-    public static final int RANK_LOCATION = 12;
-    public static final int RANK_SECURITY = 13;
-    public static final int RANK_IME = 14;
-    public static final int RANK_PRIVACY = 15;
-    public static final int RANK_DATE_TIME = 16;
-    public static final int RANK_ACCESSIBILITY = 17;
-    public static final int RANK_PRINTING = 18;
-    public static final int RANK_DEVELOPEMENT = 19;
-    public static final int RANK_DEVICE_INFO = 20;
+    public static final int RANK_SIM = 3;
+    public static final int RANK_DATA_USAGE = 4;
+    public static final int RANK_WIRELESS = 5;
+    public static final int RANK_HOME = 6;
+    public static final int RANK_DISPLAY = 7;
+    public static final int RANK_WALLPAPER = 8;
+    public static final int RANK_NOTIFICATIONS = 9;
+    public static final int RANK_MEMORY = 10;
+    public static final int RANK_POWER_USAGE = 11;
+    public static final int RANK_USERS = 12;
+    public static final int RANK_LOCATION = 13;
+    public static final int RANK_SECURITY = 14;
+    public static final int RANK_IME = 15;
+    public static final int RANK_PRIVACY = 16;
+    public static final int RANK_DATE_TIME = 17;
+    public static final int RANK_ACCESSIBILITY = 18;
+    public static final int RANK_PRINTING = 19;
+    public static final int RANK_DEVELOPEMENT = 20;
+    public static final int RANK_DEVICE_INFO = 21;
 
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;
@@ -92,6 +94,9 @@ public final class Ranking {
         // BT
         sRankMap.put(BluetoothSettings.class.getName(), RANK_BT);
         sRankMap.put(MessageAccessSettings.class.getName(), RANK_BT);
+
+        // SIM Cards
+        sRankMap.put(SimSettings.class.getName(), RANK_SIM);
 
         // DataUsage
         sRankMap.put(DataUsageSummary.class.getName(), RANK_DATA_USAGE);

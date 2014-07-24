@@ -106,6 +106,11 @@ public class DropDownPreference extends Preference {
         mValues.add(value);
     }
 
+    public void clearItems(){
+        mAdapter.clear();
+        mValues.clear();
+    }
+
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
