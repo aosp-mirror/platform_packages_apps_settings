@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -70,9 +71,18 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+/**
+ * Screen that manages the list of users on the device.
+ * Guest user is an always visible entry, even if the guest is not currently
+ * active/created. It is meant for controlling properties of a guest user.
+ *
+ * The first one is always the current user.
+ * Owner is the primary user.
+ */
 public class UserSettings extends SettingsPreferenceFragment
         implements OnPreferenceClickListener, OnClickListener, DialogInterface.OnDismissListener,
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener,
+        EditUserInfoController.OnContentChangedCallback {
 
     private static final String TAG = "UserSettings";
 
@@ -95,6 +105,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CHOOSE_USER_TYPE = 6;
     private static final int DIALOG_NEED_LOCKSCREEN = 7;
     private static final int DIALOG_CONFIRM_EXIT_GUEST = 8;
+    private static final int DIALOG_USER_PROFILE_EDITOR = 9;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_SETUP_USER = 2;
@@ -140,6 +151,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
     private boolean mIsOwner = UserHandle.myUserId() == UserHandle.USER_OWNER;
     private boolean mIsGuest;
+
+    private EditUserInfoController mEditUserInfoController =
+            new EditUserInfoController();
 
     // A place to cache the generated guest avatar
     private Drawable mGuestDrawable;
@@ -189,6 +203,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (icicle.containsKey(SAVE_REMOVING_USER)) {
                 mRemovingUserId = icicle.getInt(SAVE_REMOVING_USER);
             }
+            mEditUserInfoController.onRestoreInstanceState(icicle);
         }
         final Context context = getActivity();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -205,7 +220,7 @@ public class UserSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
         mMePreference = new UserPreference(context, null /* attrs */, myUserId,
-                mUserManager.isLinkedUser() || mIsGuest ? null : this /* settings icon handler */,
+                null /* settings icon handler */,
                 null /* delete icon handler */);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
@@ -257,9 +272,15 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
+        mEditUserInfoController.onSaveInstanceState(outState);
         outState.putInt(SAVE_ADDING_USER, mAddedUserId);
         outState.putInt(SAVE_REMOVING_USER, mRemovingUserId);
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        mEditUserInfoController.startingActivityForResult();
+        super.startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -349,6 +370,8 @@ public class UserSettings extends SettingsPreferenceFragment
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
             }
+        } else {
+            mEditUserInfoController.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -610,6 +633,16 @@ public class UserSettings extends SettingsPreferenceFragment
                         .create();
                 return dlg;
             }
+            case DIALOG_USER_PROFILE_EDITOR: {
+                Dialog dlg = mEditUserInfoController.createDialog(
+                        (Fragment) this,
+                        mMePreference.getIcon(),
+                        mMePreference.getTitle(),
+                        R.string.profile_info_settings_title,
+                        this /* callback */,
+                        android.os.Process.myUserHandle());
+                return dlg;
+            }
             default:
                 return null;
         }
@@ -859,23 +892,11 @@ public class UserSettings extends SettingsPreferenceFragment
                 showDialog(DIALOG_CONFIRM_EXIT_GUEST);
                 return true;
             }
-            Intent editProfile;
-            if (!mProfileExists) {
-                editProfile = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI);
-                // TODO: Make this a proper API
-                editProfile.putExtra("newLocalProfile", true);
-            } else {
-                editProfile = new Intent(Intent.ACTION_EDIT, ContactsContract.Profile.CONTENT_URI);
-            }
-            // To make sure that it returns back here when done
-            // TODO: Make this a proper API
-            editProfile.putExtra("finishActivityOnSaveCompleted", true);
-
             // If this is a limited user, launch the user info settings instead of profile editor
             if (mUserManager.isLinkedUser()) {
                 onManageUserClicked(UserHandle.myUserId(), false);
             } else {
-                startActivity(editProfile);
+                showDialog(DIALOG_USER_PROFILE_EDITOR);
             }
         } else if (pref instanceof UserPreference) {
             int userId = ((UserPreference) pref).getUserId();
@@ -973,5 +994,15 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public int getHelpResource() {
         return R.string.help_url_users;
+    }
+
+    @Override
+    public void onPhotoChanged(Drawable photo) {
+        mMePreference.setIcon(photo);
+    }
+
+    @Override
+    public void onLabelChanged(CharSequence label) {
+        mMePreference.setTitle(label);
     }
 }
