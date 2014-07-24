@@ -89,7 +89,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_RESET_CREDENTIALS = "credentials_reset";
     private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
-    private static final String KEY_TOGGLE_VERIFY_APPLICATIONS = "toggle_verify_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
@@ -112,7 +111,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private CheckBoxPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
-    private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
 
     private boolean mIsPrimary;
@@ -343,26 +341,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mToggleAppInstallation.setEnabled(false);
         }
 
-        // Package verification, only visible to primary user and if enabled
-        mToggleVerifyApps = (CheckBoxPreference) findPreference(KEY_TOGGLE_VERIFY_APPLICATIONS);
-        if (mIsPrimary && showVerifierSetting()) {
-            if (isVerifierInstalled()) {
-                mToggleVerifyApps.setChecked(isVerifyAppsEnabled());
-            } else {
-                mToggleVerifyApps.setChecked(false);
-                mToggleVerifyApps.setEnabled(false);
-            }
-        } else {
-            if (deviceAdminCategory != null) {
-                deviceAdminCategory.removePreference(mToggleVerifyApps);
-            } else {
-                mToggleVerifyApps.setEnabled(false);
-            }
-        }
-        if (um.hasUserRestriction(UserManager.ENSURE_VERIFY_APPS)) {
-            mToggleVerifyApps.setEnabled(false);
-        }
-
         return root;
     }
 
@@ -379,25 +357,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Change the system setting
         Settings.Global.putInt(getContentResolver(), Settings.Global.INSTALL_NON_MARKET_APPS,
                                 enabled ? 1 : 0);
-    }
-
-    private boolean isVerifyAppsEnabled() {
-        return Settings.Global.getInt(getContentResolver(),
-                                      Settings.Global.PACKAGE_VERIFIER_ENABLE, 1) > 0;
-    }
-
-    private boolean isVerifierInstalled() {
-        final PackageManager pm = getPackageManager();
-        final Intent verification = new Intent(Intent.ACTION_PACKAGE_NEEDS_VERIFICATION);
-        verification.setType(PACKAGE_MIME_TYPE);
-        verification.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(verification, 0);
-        return (receivers.size() > 0) ? true : false;
-    }
-
-    private boolean showVerifierSetting() {
-        return Settings.Global.getInt(getContentResolver(),
-                                      Settings.Global.PACKAGE_VERIFIER_SETTING_VISIBLE, 1) > 0;
     }
 
     private void warnAppInstallation() {
@@ -583,9 +542,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 setNonMarketAppsAllowed(false);
             }
-        } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
-            Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
-                    mToggleVerifyApps.isChecked() ? 1 : 0);
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
