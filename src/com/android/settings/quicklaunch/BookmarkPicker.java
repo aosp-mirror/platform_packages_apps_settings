@@ -97,7 +97,7 @@ public class BookmarkPicker extends ListActivity implements SimpleAdapter.ViewBi
 
         updateListAndAdapter();
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, DISPLAY_MODE_LAUNCH, 0, R.string.quick_launch_display_mode_applications)
