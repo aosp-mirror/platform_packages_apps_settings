@@ -182,7 +182,17 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     cooldown();
                 } else {
                     final TextView status = (TextView) findViewById(R.id.status);
-                    status.setText(R.string.try_again);
+
+                    int remainingAttempts = MAX_FAILED_ATTEMPTS - failedAttempts;
+                    if (remainingAttempts < COOL_DOWN_ATTEMPTS) {
+                        CharSequence warningTemplate = getText(R.string.crypt_keeper_warn_wipe);
+                        CharSequence warning = TextUtils.expandTemplate(warningTemplate,
+                                                                        Integer.toString(remainingAttempts));
+                        status.setText(warning);
+                    } else {
+                        status.setText(R.string.try_again);
+                    }
+
                     if (mLockPatternView != null) {
                         mLockPatternView.setDisplayMode(DisplayMode.Wrong);
                     }
