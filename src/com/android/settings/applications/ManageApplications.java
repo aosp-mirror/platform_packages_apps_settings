@@ -43,12 +43,12 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
+import android.provider.Settings;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.text.BidiFormatter;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,18 +60,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Spinner;
 
 import com.android.internal.app.IMediaContainerService;
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.UserSpinnerAdapter;
 import com.android.settings.Settings.RunningServicesActivity;
 import com.android.settings.Settings.StorageUseActivity;
+import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.deviceinfo.StorageMeasurement;
 import com.android.settings.Utils;
@@ -134,7 +137,7 @@ interface AppClickListener {
  */
 public class ManageApplications extends Fragment implements
         AppClickListener, DialogInterface.OnClickListener,
-        DialogInterface.OnDismissListener {
+        DialogInterface.OnDismissListener, OnItemSelectedListener  {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
@@ -194,6 +197,8 @@ public class ManageApplications extends Fragment implements
 
         private View mListContainer;
 
+        private ViewGroup mPinnedHeader;
+
         // ListView used to display list
         private ListView mListView;
         // Custom view used to display running processes
@@ -245,6 +250,14 @@ public class ManageApplications extends Fragment implements
             mRootView = inflater.inflate(mListType == LIST_TYPE_RUNNING
                     ? R.layout.manage_applications_running
                     : R.layout.manage_applications_apps, null);
+            mPinnedHeader = (ViewGroup) mRootView.findViewById(R.id.pinned_header);
+            if (mOwner.mProfileSpinnerAdapter != null) {
+                Spinner spinner = (Spinner) inflater.inflate(R.layout.spinner_view, null);
+                spinner.setAdapter(mOwner.mProfileSpinnerAdapter);
+                spinner.setOnItemSelectedListener(mOwner);
+                mPinnedHeader.addView(spinner);
+                mPinnedHeader.setVisibility(View.VISIBLE);
+            }
             mLoadingContainer = mRootView.findViewById(R.id.loading_container);
             mLoadingContainer.setVisibility(View.VISIBLE);
             mListContainer = mRootView.findViewById(R.id.list_container);
@@ -468,6 +481,8 @@ public class ManageApplications extends Fragment implements
     private ViewGroup mContentContainer;
     private View mRootView;
     private ViewPager mViewPager;
+    private UserSpinnerAdapter mProfileSpinnerAdapter;
+    private Context mContext;
 
     AlertDialog mResetDialog;
 
@@ -830,13 +845,14 @@ public class ManageApplications extends Fragment implements
             mActive.remove(view);
         }
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
 
+        mContext = getActivity();
         mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
         Intent intent = getActivity().getIntent();
         String action = intent.getAction();
@@ -903,6 +919,22 @@ public class ManageApplications extends Fragment implements
         mTabs.add(tab);
 
         mNumTabs = mTabs.size();
+
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        List<UserHandle> userProfiles = um.getUserProfiles();
+        if (userProfiles.size() >= 2) {
+
+            UserHandle myUserHandle = new UserHandle(UserHandle.myUserId());
+            userProfiles.remove(myUserHandle);
+            userProfiles.add(0, myUserHandle);
+            ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
+            final int count = userProfiles.size();
+            for (int i = 0; i < count; i++) {
+                userDetails.add(new UserDetails(userProfiles.get(i), um, mContext));
+            }
+            // TODO: Factor out spinner creation in a method in Utils class. See: http://b/16645615
+            mProfileSpinnerAdapter = new UserSpinnerAdapter(mContext, userDetails);
+        }
     }
 
 
@@ -1009,6 +1041,23 @@ public class ManageApplications extends Fragment implements
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
             mApplicationsState.requestSize(mCurrentPkgName);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
+        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
+            // TODO: Factor out intent starting in a method in Utils class. See: http://b/16645615
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivityAsUser(intent, selectedUser);
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Nothing to do
     }
 
     private void updateNumTabs() {
