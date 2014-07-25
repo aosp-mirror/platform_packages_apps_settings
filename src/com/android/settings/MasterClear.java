@@ -77,9 +77,8 @@ public class MasterClear extends Fragment {
      */
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
-        return new ChooseLockSettingsHelper(getActivity(), this)
-                .launchConfirmationActivity(request, null,
-                        res.getText(R.string.master_clear_gesture_explanation));
+        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(request,
+                null, res.getText(R.string.master_clear_gesture_explanation));
     }
 
     @Override
@@ -100,11 +99,10 @@ public class MasterClear extends Fragment {
     }
 
     private void showFinalConfirmation() {
-        Preference preference = new Preference(getActivity());
-        preference.setFragment(MasterClearConfirm.class.getName());
-        preference.setTitle(R.string.master_clear_confirm_title);
-        preference.getExtras().putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        ((SettingsActivity) getActivity()).onPreferenceStartFragment(null, preference);
+        Bundle args = new Bundle();
+        args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
+        ((SettingsActivity) getActivity()).startPreferencePanel(MasterClearConfirm.class.getName(),
+                args, R.string.master_clear_confirm_title, null, null, 0);
     }
 
     /**
