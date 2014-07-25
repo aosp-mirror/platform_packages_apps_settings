@@ -63,7 +63,7 @@ import java.util.List;
  * Panel showing storage usage on disk for known {@link StorageVolume} returned
  * by {@link StorageManager}. Calculates and displays usage of data types.
  */
-public class Memory extends SettingsPreferenceFragment implements Indexable{
+public class Memory extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "MemorySettings";
 
     private static final String TAG_CONFIRM_CLEAR_CACHE = "confirmClearCache";

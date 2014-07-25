@@ -729,6 +729,21 @@ public class Index {
                 raw.userId);
     }
 
+    private static boolean isIndexableClass(final Class<?> clazz) {
+        return (clazz != null) && Indexable.class.isAssignableFrom(clazz);
+    }
+
+    private static Class<?> getIndexableClass(String className) {
+        final Class<?> clazz;
+        try {
+            clazz = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            Log.d(LOG_TAG, "Cannot find class: " + className);
+            return null;
+        }
+        return isIndexableClass(clazz) ? clazz : null;
+    }
+
     private void indexOneResource(SQLiteDatabase database, String localeStr,
             SearchIndexableResource sir, Map<String, List<String>> nonIndexableKeysFromResource) {
 
@@ -737,47 +752,62 @@ public class Index {
             return;
         }
 
-        // Will be non null only for a Local provider
-        final Indexable.SearchIndexProvider provider =
-                TextUtils.isEmpty(sir.className) ? null : getSearchIndexProvider(sir.className);
-
-        List<String> nonIndexableKeys = new ArrayList<String>();
+        final List<String> nonIndexableKeys = new ArrayList<String>();
 
         if (sir.xmlResId > SearchIndexableResources.NO_DATA_RES_ID) {
             List<String> resNonIndxableKeys = nonIndexableKeysFromResource.get(sir.packageName);
             if (resNonIndxableKeys != null && resNonIndxableKeys.size() > 0) {
                 nonIndexableKeys.addAll(resNonIndxableKeys);
             }
+
             indexFromResource(sir.context, database, localeStr,
                     sir.xmlResId, sir.className, sir.iconResId, sir.rank,
                     sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass,
                     nonIndexableKeys);
-        } else if (!TextUtils.isEmpty(sir.className)) {
+        } else {
+            if (TextUtils.isEmpty(sir.className)) {
+                Log.w(LOG_TAG, "Cannot index an empty Search Provider name!");
+                return;
+            }
+
+            final Class<?> clazz = getIndexableClass(sir.className);
+            if (clazz == null) {
+                Log.d(LOG_TAG, "SearchIndexableResource '" + sir.className +
+                        "' should implement the " + Indexable.class.getName() + " interface!");
+                return;
+            }
+
+            // Will be non null only for a Local provider implementing a
+            // SEARCH_INDEX_DATA_PROVIDER field
+            final Indexable.SearchIndexProvider provider = getSearchIndexProvider(clazz);
             if (provider != null) {
                 List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(sir.context);
                 if (providerNonIndexableKeys != null && providerNonIndexableKeys.size() > 0) {
                     nonIndexableKeys.addAll(providerNonIndexableKeys);
                 }
+
+                indexFromProvider(mContext, database, localeStr, provider, sir.className,
+                        sir.iconResId, sir.rank, sir.enabled, nonIndexableKeys);
             }
-            indexFromLocalProvider(mContext, database, localeStr, provider, sir.className,
-                    sir.iconResId, sir.rank, sir.enabled, nonIndexableKeys);
         }
     }
 
-    private Indexable.SearchIndexProvider getSearchIndexProvider(String className) {
+    private Indexable.SearchIndexProvider getSearchIndexProvider(final Class<?> clazz) {
         try {
-            final Class<?> clazz = Class.forName(className);
-            if (Indexable.class.isAssignableFrom(clazz)) {
-                final Field f = clazz.getField(FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
-                return (Indexable.SearchIndexProvider) f.get(null);
-            }
-        } catch (ClassNotFoundException e) {
-            Log.e(LOG_TAG, "Cannot find class: " + className, e);
+            final Field f = clazz.getField(FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
+            return (Indexable.SearchIndexProvider) f.get(null);
         } catch (NoSuchFieldException e) {
-            Log.e(LOG_TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
+            Log.d(LOG_TAG, "Cannot find field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+        } catch (SecurityException se) {
+            Log.d(LOG_TAG,
+                    "Security exception for field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         } catch (IllegalAccessException e) {
-            Log.e(LOG_TAG,
-                    "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'", e);
+            Log.d(LOG_TAG,
+                    "Illegal access to field '" + FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
+        } catch (IllegalArgumentException e) {
+            Log.d(LOG_TAG,
+                    "Illegal argument when accessing field '" +
+                            FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER + "'");
         }
         return null;
     }
@@ -882,7 +912,7 @@ public class Index {
         }
     }
 
-    private void indexFromLocalProvider(Context context, SQLiteDatabase database, String localeStr,
+    private void indexFromProvider(Context context, SQLiteDatabase database, String localeStr,
             Indexable.SearchIndexProvider provider, String className, int iconResId, int rank,
             boolean enabled, List<String> nonIndexableKeys) {
 
