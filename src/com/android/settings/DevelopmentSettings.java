@@ -1586,9 +1586,22 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
+
+                private boolean isShowingDeveloperOptions(Context context) {
+                    return context.getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                            Context.MODE_PRIVATE).getBoolean(
+                                    DevelopmentSettings.PREF_SHOW,
+                                    android.os.Build.TYPE.equals("eng"));
+                }
+
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
+
+                    if (!isShowingDeveloperOptions(context)) {
+                        return null;
+                    }
+
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.development_prefs;
                     return Arrays.asList(sir);
@@ -1596,6 +1609,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
+                    if (!isShowingDeveloperOptions(context)) {
+                        return null;
+                    }
+
                     final List<String> keys = new ArrayList<String>();
                     if (!showEnableOemUnlockPreference()) {
                         keys.add(ENABLE_OEM_UNLOCK);
