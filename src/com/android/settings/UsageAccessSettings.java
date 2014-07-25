@@ -148,6 +148,11 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
                     continue;
                 }
 
+                if (packageOp.getUid() != pe.packageInfo.applicationInfo.uid) {
+                    // This AppOp does not belong to this user.
+                    continue;
+                }
+
                 if (packageOp.getOps().size() < 1) {
                     Log.w(TAG, "No AppOps permission exists for package "
                             + packageOp.getPackageName());
@@ -294,9 +299,13 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
 
         final int newMode = (Boolean) newValue ?
                 AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED;
-        mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS, pe.packageInfo.applicationInfo.uid,
-                packageName, newMode);
-        pe.appOpMode = newMode;
+
+        // Check if we need to do any work.
+        if (pe.appOpMode != newMode) {
+            mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS,
+                    pe.packageInfo.applicationInfo.uid, packageName, newMode);
+            pe.appOpMode = newMode;
+        }
         return true;
     }
 
