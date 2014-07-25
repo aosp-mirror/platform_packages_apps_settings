@@ -50,8 +50,6 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
 import android.provider.Settings.Secure;
 import android.util.Log;
 import android.util.SparseArray;
@@ -142,7 +140,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
-    private boolean mProfileExists;
     private boolean mEnabled = true;
     private boolean mCanAddRestrictedProfile = true;
 
@@ -310,7 +307,6 @@ public class UserSettings extends SettingsPreferenceFragment
      * Loads profile information for the current user.
      */
     private void loadProfile() {
-        mProfileExists = false;
         if (mIsGuest) {
             // No need to load profile information
             mMePreference.setIcon(getEncircledGuestDrawable());
@@ -330,11 +326,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (user.iconPath == null || user.iconPath.equals("")) {
                     assignProfilePhoto(user);
                 }
-                String profileName = getProfileName();
-                if (profileName == null) {
-                    profileName = user.name;
-                }
-                return profileName;
+                return user.name;
             }
         }.execute();
     }
@@ -841,14 +833,6 @@ public class UserSettings extends SettingsPreferenceFragment
         if (!Utils.copyMeProfilePhoto(getActivity(), user)) {
             assignDefaultPhoto(user);
         }
-    }
-
-    private String getProfileName() {
-        String name = Utils.getMeProfileName(getActivity(), true);
-        if (name != null) {
-            mProfileExists = true;
-        }
-        return name;
     }
 
     private void assignDefaultPhoto(UserInfo user) {
