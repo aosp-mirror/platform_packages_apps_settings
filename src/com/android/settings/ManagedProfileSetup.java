@@ -76,5 +76,5 @@ public class ManagedProfileSetup extends BroadcastReceiver {
         ComponentName settingsComponentName = new ComponentName(context, Settings.class);
         pm.setComponentEnabledSetting(settingsComponentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-        }
+    }
 }
