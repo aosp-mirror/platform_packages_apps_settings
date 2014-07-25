@@ -390,9 +390,6 @@
     <!-- Bluetooth message permission Alert Activity text [CHAR LIMIT=none] -->
     <string name="bluetooth_map_acceptance_dialog_text">%1$s wants to access your messages. Give access to %2$s?</string>
 
-
-
-
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
     <!-- The title of the activity to pick a time zone. -->
@@ -1175,8 +1172,6 @@
     <string name="bluetooth_preference_paired_dialog_title">Paired device</string>
     <!-- Bluetooth settings: Name label [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_dialog_name_label">Name</string>
-    <!-- Bluetooth settings: Use for label [CHAR LIMIT=40] -->
-    <string name="bluetooth_preference_paired_dialog_use_label">Use for</string>
     <!-- Bluetooth settings: Checkbox label for enable/disable internet connection.  [CHAR LIMIT=40] -->
     <string name="bluetooth_preference_paired_dialog_internet_option">Internet connection</string>
     <!-- Bluetooth settings: Checkbox label for enable/disable keyboard connection.  [CHAR LIMIT=40] -->
@@ -1230,9 +1225,13 @@
     <string name="bluetooth_profile_opp">File transfer</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the HID profile. -->
     <string name="bluetooth_profile_hid">Input device</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (accessing Internet through remote device). [CHAR LIMIT=40]-->
+    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (accessing Internet through remote device). [CHAR LIMIT=40] -->
     <string name="bluetooth_profile_pan">Internet access</string>
-    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (sharing this device's Internet connection). [CHAR LIMIT=40]-->
+    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PBAP profile. [CHAR LIMIT=40] -->
+    <string name="bluetooth_profile_pbap">Contact sharing</string>
+    <!-- Bluetooth settings. The user-visible summary string that is used whenever referring to the PBAP profile (sharing contacts). [CHAR LIMIT=60] -->
+    <string name="bluetooth_profile_pbap_summary">Use for contact sharing</string>
+    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile (sharing this device's Internet connection). [CHAR LIMIT=40] -->
     <string name="bluetooth_profile_pan_nap">Internet connection sharing</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the map profile. -->
     <string name="bluetooth_profile_map">Message Access</string>
@@ -1257,7 +1256,7 @@
     <!-- Bluetooth settings.  Connection options screen.  The summary of the online mode checkbox.  This describes what the setting does in the context of the screen. -->
     <string name="bluetooth_device_advanced_online_mode_summary">Connect to Bluetooth device</string>
     <!-- Bluetooth settings.  Connection options screen.  The title of the header that is above all of the profiles. -->
-    <string name="bluetooth_device_advanced_profile_header_title">Profiles</string>
+    <string name="bluetooth_device_advanced_profile_header_title">Use for</string>
     <!-- Bluetooth settings. Connection options screen. Title for option to rename the device. [CHAR LIMIT=30] -->
     <string name="bluetooth_device_advanced_rename_device">Rename</string>
     <!-- Bluetooth settings. Connection options screen. Title for checkbox to enable incoming file transfers [CHAR LIMIT=30] -->
