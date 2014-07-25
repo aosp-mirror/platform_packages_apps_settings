@@ -41,6 +41,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 
 import java.io.BufferedReader;
@@ -212,6 +213,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                     mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_on,
                             Toast.LENGTH_LONG);
                     mDevHitToast.show();
+                    // This is good time to index the Developer Options
+                    Index.getInstance(
+                            getActivity().getApplicationContext()).updateFromClassNameResource(
+                                    DevelopmentSettings.class.getName(), true, true);
+
                 } else if (mDevHitCountdown > 0
                         && mDevHitCountdown < (TAPS_TO_BE_A_DEVELOPER-2)) {
                     if (mDevHitToast != null) {
