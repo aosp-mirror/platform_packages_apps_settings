@@ -412,6 +412,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
                 mDialogId = savedInstanceState.getInt(KEY_DIALOG_ID, 0);
                 mParentFragment = getParentFragment();
                 int mParentFragmentId = savedInstanceState.getInt(KEY_PARENT_FRAGMENT_ID, -1);
+                if (mParentFragment == null) {
+                    mParentFragment = getFragmentManager().findFragmentById(mParentFragmentId);
+                }
                 if (!(mParentFragment instanceof DialogCreatable)) {
                     throw new IllegalArgumentException(
                             (mParentFragment != null
