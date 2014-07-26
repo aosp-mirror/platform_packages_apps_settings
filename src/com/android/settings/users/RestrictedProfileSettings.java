@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
@@ -28,24 +29,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.List;
 
 public class RestrictedProfileSettings extends AppRestrictionsFragment
         implements EditUserInfoController.OnContentChangedCallback {
 
-    static final String KEY_SAVED_PHOTO = "pending_photo";
-    static final String KEY_AWAITING_RESULT = "awaiting_result";
-    static final int DIALOG_ID_EDIT_USER_INFO = 1;
     public static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
+    static final int DIALOG_ID_EDIT_USER_INFO = 1;
+    private static final int DIALOG_CONFIRM_REMOVE = 2;
 
     private View mHeaderView;
     private ImageView mUserIconView;
     private TextView mUserNameView;
+    private ImageView mDeleteButton;
 
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController();
-    private boolean mWaitingForActivityResult;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -53,7 +54,6 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
 
         if (icicle != null) {
             mEditUserInfoController.onRestoreInstanceState(icicle);
-            mWaitingForActivityResult = icicle.getBoolean(KEY_AWAITING_RESULT, false);
         }
 
         init(icicle);
@@ -68,6 +68,8 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
             mHeaderView.setOnClickListener(this);
             mUserIconView = (ImageView) mHeaderView.findViewById(android.R.id.icon);
             mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
+            mDeleteButton = (ImageView) mHeaderView.findViewById(R.id.delete);
+            mDeleteButton.setOnClickListener(this);
             getListView().setFastScrollEnabled(true);
         }
         // This is going to bind the preferences.
@@ -122,6 +124,8 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
     public void onClick(View view) {
         if (view == mHeaderView) {
             showDialog(DIALOG_ID_EDIT_USER_INFO);
+        } else if (view == mDeleteButton) {
+            showDialog(DIALOG_CONFIRM_REMOVE);
         } else {
             super.onClick(view); // in AppRestrictionsFragment
         }
@@ -133,9 +137,28 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
             return mEditUserInfoController.createDialog(this, mUserIconView.getDrawable(),
                     mUserNameView.getText(), R.string.profile_info_settings_title,
                     this, mUser);
+        } else if (dialogId == DIALOG_CONFIRM_REMOVE) {
+            Dialog dlg =
+                    Utils.createRemoveConfirmationDialog(getActivity(), mUser.getIdentifier(),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    removeUser();
+                                }
+                            }
+                    );
+            return dlg;
         }
 
         return null;
+    }
+
+    private void removeUser() {
+        getView().post(new Runnable() {
+            public void run() {
+                mUserManager.removeUser(mUser.getIdentifier());
+                finishFragment();
+            }
+        });
     }
 
     @Override

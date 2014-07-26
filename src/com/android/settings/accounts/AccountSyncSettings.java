@@ -242,7 +242,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         if (!um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle)) {
             MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
                     getString(R.string.remove_account_label))
-                    .setIcon(R.drawable.ic_menu_delete_holo_dark);
+                    .setIcon(R.drawable.ic_menu_delete);
             removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                     MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         }

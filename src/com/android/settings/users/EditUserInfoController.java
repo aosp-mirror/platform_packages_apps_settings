@@ -38,7 +38,14 @@ import android.widget.ImageView;
 
 import com.android.settings.R;
 
+/**
+ * This class encapsulates a Dialog for editing the user nickname and photo.
+ */
 public class EditUserInfoController {
+
+    private static final String KEY_AWAITING_RESULT = "awaiting_result";
+    private static final String KEY_SAVED_PHOTO = "pending_photo";
+
     private Dialog mEditUserInfoDialog;
     private Bitmap mSavedPhoto;
     private EditUserPhotoController mEditUserPhotoController;
@@ -48,7 +55,6 @@ public class EditUserInfoController {
 
     public interface OnContentChangedCallback {
         public void onPhotoChanged(Drawable photo);
-
         public void onLabelChanged(CharSequence label);
     }
 
@@ -62,17 +68,18 @@ public class EditUserInfoController {
     }
 
     public void onRestoreInstanceState(Bundle icicle) {
-        mSavedPhoto = (Bitmap) icicle.getParcelable(RestrictedProfileSettings.KEY_SAVED_PHOTO);
+        mSavedPhoto = (Bitmap) icicle.getParcelable(KEY_SAVED_PHOTO);
+        mWaitingForActivityResult = icicle.getBoolean(KEY_AWAITING_RESULT, false);
     }
 
     public void onSaveInstanceState(Bundle outState) {
         if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
                 && mEditUserPhotoController != null) {
-            outState.putParcelable(RestrictedProfileSettings.KEY_SAVED_PHOTO,
+            outState.putParcelable(KEY_SAVED_PHOTO,
                     mEditUserPhotoController.getNewUserPhotoBitmap());
         }
         if (mWaitingForActivityResult) {
-            outState.putBoolean(RestrictedProfileSettings.KEY_AWAITING_RESULT,
+            outState.putBoolean(KEY_AWAITING_RESULT,
                     mWaitingForActivityResult);
         }
     }
