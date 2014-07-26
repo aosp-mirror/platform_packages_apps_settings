@@ -50,6 +50,7 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
+import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.util.Log;
 import android.util.SparseArray;
@@ -94,6 +95,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_USER = "user_add";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
+    private static final int MENU_ADD_ON_LOCKSCREEN = Menu.FIRST + 1;
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
@@ -282,12 +284,20 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        int pos = 0;
         UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         if (!mIsOwner && !um.hasUserRestriction(UserManager.DISALLOW_REMOVE_USER)) {
             String nickname = mUserManager.getUserName();
-            MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, 0,
+            MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
             removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
+        if (mIsOwner && !um.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
+            MenuItem allowAddOnLockscreen = menu.add(0, MENU_ADD_ON_LOCKSCREEN, pos++,
+                    R.string.user_add_on_lockscreen_menu);
+            allowAddOnLockscreen.setCheckable(true);
+            allowAddOnLockscreen.setChecked(Settings.Global.getInt(getContentResolver(),
+                    Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -297,6 +307,12 @@ public class UserSettings extends SettingsPreferenceFragment
         final int itemId = item.getItemId();
         if (itemId == MENU_REMOVE_USER) {
             onRemoveUserClicked(UserHandle.myUserId());
+            return true;
+        } else if (itemId == MENU_ADD_ON_LOCKSCREEN) {
+            final boolean isChecked = item.isChecked();
+            Settings.Global.putInt(getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED,
+                    isChecked ? 0 : 1);
+            item.setChecked(!isChecked);
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -780,6 +796,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
             }
         }
+
         // Add a temporary entry for the user being created
         if (mAddingUser) {
             Preference pref = new UserPreference(getActivity(), null, UserPreference.USERID_UNKNOWN,
@@ -793,7 +810,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (!mIsGuest) {
             // Add a virtual Guest user for guest defaults
             Preference pref = new UserPreference(getActivity(), null,
-                    UserPreference.USERID_GUEST_DEFAULTS, mIsOwner ? this : null, null);
+                    UserPreference.USERID_GUEST_DEFAULTS,
+                    mIsOwner && voiceCapable? this : null /* settings icon handler */,
+                    null /* delete icon handler */);
             pref.setTitle(R.string.user_guest);
             pref.setIcon(getEncircledGuestDrawable());
             pref.setOnPreferenceClickListener(this);
@@ -926,11 +945,6 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private boolean isInitialized(UserInfo user) {
         return (user.flags & UserInfo.FLAG_INITIALIZED) != 0;
-    }
-
-    private Drawable encircle(int iconResId) {
-        Bitmap icon = BitmapFactory.decodeResource(getResources(), iconResId);
-        return encircle(icon);
     }
 
     private Drawable encircle(Bitmap icon) {

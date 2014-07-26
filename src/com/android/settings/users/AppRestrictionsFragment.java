@@ -988,6 +988,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         + entry.getKey());
                 mAppList.addPreference(p);
                 p.setOnPreferenceChangeListener(AppRestrictionsFragment.this);
+                p.setIcon(R.drawable.empty_icon);
                 preference.mChildren.add(p);
                 count++;
             }

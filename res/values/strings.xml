@@ -5171,11 +5171,11 @@
     <!-- Button text for adding a restricted profile [CHAR LIMIT=25] -->
     <string name="user_add_profile_item_title">Restricted profile</string>
     <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
-    <string name="user_add_user_title">Add new user</string>
+    <string name="user_add_user_title">Add new user?</string>
     <!-- Message for add user confirmation dialog - long version. [CHAR LIMIT=none] -->
-    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with their own apps, wallpaper, and so on. Users can also adjust tablet settings like Wi\u2011Fi that affect everyone.\n\nAfter you create a new user, that person needs to go through a setup process.\n\nAny user can accept updated app permissions on behalf of all other users.</string>
+    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with their own apps, wallpaper, and so on. Users can also adjust tablet settings like Wi\u2011Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users.</string>
     <!-- Message for add user confirmation dialog - short version. [CHAR LIMIT=none] -->
-    <string name="user_add_user_message_short">After you create a new user, that person needs to go through a setup process.\n\nAny user can accept updated app permissions on behalf of all other users.</string>
+    <string name="user_add_user_message_short">When you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. </string>
     <!-- Title of dialog to setup a new user [CHAR LIMIT=30] -->
     <string name="user_setup_dialog_title">Set up user now?</string>
     <!-- Message in dialog to setup a new user after creation [CHAR LIMIT=none] -->
@@ -5195,6 +5195,8 @@
 
     <!-- User details remove user menu [CHAR LIMIT=20] -->
     <string name="user_remove_user_menu">Delete <xliff:g id="user_name">%1$s</xliff:g> from this device</string>
+    <!-- User menu to allow creating new users from lockscreen [CHAR LIMIT=30] -->
+    <string name="user_add_on_lockscreen_menu">Add users when device is locked</string>
     <!-- User details new user name [CHAR LIMIT=30] -->
     <string name="user_new_user_name">New user</string>
     <!-- User details new restricted profile name [CHAR LIMIT=30] -->
@@ -5202,21 +5204,17 @@
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
-    <string name="user_confirm_remove_title">Remove user?</string>
+    <string name="user_confirm_remove_title">Remove this user?</string>
     <!-- Profile removal confirmation title [CHAR LIMIT=25] -->
-    <string name="user_profile_confirm_remove_title">Remove profile?</string>
+    <string name="user_profile_confirm_remove_title">Remove this profile?</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_self_message" product="tablet">You will lose your space and data on this tablet. You can\'t undo this action.</string>
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_self_message" product="default">You will lose your space and data on this phone. You can\'t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_message" product="tablet">This user\'s space and data will disappear from this tablet. You can\'t undo this action.</string>
-    <!-- User removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_message" product="default">This user\'s space and data will disappear from this phone. You can\'t undo this action.</string>
+    <string name="user_confirm_remove_message">All apps and data will be deleted.</string>
     <!-- User profile removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_profile_confirm_remove_message" product="tablet">This profile\'s space and data will disappear from this tablet. You can\'t undo this action.</string>
-    <!-- User profile removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_profile_confirm_remove_message" product="default">This profile\'s space and data will disappear from this phone. You can\'t undo this action.</string>
+    <string name="user_profile_confirm_remove_message">All apps and data will be deleted.</string>
     <!-- Setting label to show that a new user is being added [CHAR LIMIT=30] -->
     <string name="user_adding_new_user">Adding new user\u2026</string>
     <!-- Spoken content description for delete icon beside a user [CHAR LIMIT=none] -->
@@ -5233,11 +5231,19 @@
     <string name="user_exit_guest_confirm_message">Ending the guest session will remove local data.</string>
 
     <!-- Title of preference to enable calling[CHAR LIMIT=35] -->
-    <string name="user_enable_calling">Enable phone calls?</string>
+    <string name="user_enable_calling">Allow phone calls</string>
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=35] -->
-    <string name="user_enable_calling_sms">Enable phone calls and SMS?</string>
+    <string name="user_enable_calling_sms">Allow phone calls and SMS</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
     <string name="user_remove_user">Remove user</string>
+    <!-- Title for confirmation of turning on calls [CHAR LIMIT=35] -->
+    <string name="user_enable_calling_confirm_title">Allow phone calls?</string>
+    <!-- Message for confirmation of turning on calls [CHAR LIMIT=none] -->
+    <string name="user_enable_calling_confirm_message">Call history will be shared with this user.</string>
+    <!-- Title for confirmation of turning on calls and SMS [CHAR LIMIT=35] -->
+    <string name="user_enable_calling_sms_confirm_title">Allow phone calls and SMS?</string>
+    <!-- Message for confirmation of turning on calls and SMS [CHAR LIMIT=none] -->
+    <string name="user_enable_calling_sms_confirm_message">Call and SMS history will be shared with this user.</string>
 
     <!-- Application Restrictions screen title [CHAR LIMIT=45] -->
     <string name="application_restrictions">Allow apps and content</string>
@@ -5376,7 +5382,7 @@
     <string name="work_sim_title">Work SIM</string>
 
     <!-- User app limits screen title [CHAR LIMIT=35] -->
-    <string name="user_restrictions_title">Application and content restrictions</string>
+    <string name="user_restrictions_title">App &amp; content access</string>
     <!-- User limits screen, user name rename text [CHAR LIMIT=15] -->
     <string name="user_rename">RENAME</string>
     <!-- Preference label for custom restrictions [CHAR LIMIT=35] -->
