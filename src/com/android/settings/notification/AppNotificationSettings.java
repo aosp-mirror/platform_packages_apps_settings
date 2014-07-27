@@ -17,9 +17,7 @@
 package com.android.settings.notification;
 
 import android.animation.LayoutTransition;
-import android.app.AlertDialog;
 import android.app.INotificationManager;
-import android.app.ListFragment;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +35,7 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.TypedValue;
@@ -45,11 +44,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -65,18 +60,7 @@ import java.util.List;
 /** Just a sectioned list of installed applications, nothing else to index **/
 public class AppNotificationSettings extends PinnedHeaderListFragment {
     private static final String TAG = "AppNotificationSettings";
-    private static final boolean DEBUG = true;
-
-    /**
-     * Show a checkbox in the per-app notification control dialog to allow the user
-     * to promote this app's notifications to higher priority.
-     */
-    private static final boolean ENABLE_APP_NOTIFICATION_PRIORITY_OPTION = true;
-    /**
-     * Show a checkbox in the per-app notification control dialog to allow the user to
-     * selectively redact this app's notifications on the lockscreen.
-     */
-    private static final boolean ENABLE_APP_NOTIFICATION_PRIVACY_OPTION = false;
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String SECTION_BEFORE_A = "*";
     private static final String SECTION_AFTER_Z = "**";
@@ -189,89 +173,6 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
         return null;
     }
 
-
-    private void showDialog(final View v, final AppRow row) {
-        final RelativeLayout layout = (RelativeLayout)
-                mInflater.inflate(R.layout.notification_app_dialog, null);
-        final ImageView icon = (ImageView) layout.findViewById(android.R.id.icon);
-        icon.setImageDrawable(row.icon);
-        final TextView title = (TextView) layout.findViewById(android.R.id.title);
-        title.setText(row.label);
-        final CheckBox showBox = (CheckBox) layout.findViewById(android.R.id.button1);
-        final CheckBox priBox = (CheckBox) layout.findViewById(android.R.id.button2);
-        final CheckBox senBox = (CheckBox) layout.findViewById(android.R.id.button3);
-
-        if (!ENABLE_APP_NOTIFICATION_PRIORITY_OPTION) {
-            priBox.setVisibility(View.GONE);
-        }
-
-        if (!ENABLE_APP_NOTIFICATION_PRIVACY_OPTION) {
-            senBox.setVisibility(View.GONE);
-        }
-
-        showBox.setChecked(!row.banned);
-        final OnCheckedChangeListener showListener = new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean success = mBackend.setNotificationsBanned(row.pkg, row.uid, !isChecked);
-                if (success) {
-                    row.banned = !isChecked;
-                    mAdapter.bindView(v, row, true /*animate*/);
-                    priBox.setEnabled(!row.banned);
-                    senBox.setEnabled(!row.banned);
-                } else {
-                    showBox.setOnCheckedChangeListener(null);
-                    showBox.setChecked(!isChecked);
-                    showBox.setOnCheckedChangeListener(this);
-                }
-            }
-        };
-        showBox.setOnCheckedChangeListener(showListener);
-
-        priBox.setChecked(row.priority);
-        final OnCheckedChangeListener priListener = new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean success = mBackend.setHighPriority(row.pkg, row.uid, isChecked);
-                if (success) {
-                    row.priority = isChecked;
-                    mAdapter.bindView(v, row, true /*animate*/);
-                } else {
-                    priBox.setOnCheckedChangeListener(null);
-                    priBox.setChecked(!isChecked);
-                    priBox.setOnCheckedChangeListener(this);
-                }
-            }
-        };
-        priBox.setOnCheckedChangeListener(priListener);
-
-        senBox.setChecked(row.sensitive);
-        final OnCheckedChangeListener senListener = new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                boolean success = mBackend.setSensitive(row.pkg, row.uid, isChecked);
-                if (success) {
-                    row.sensitive = isChecked;
-                    mAdapter.bindView(v, row, true /*animate*/);
-                } else {
-                    senBox.setOnCheckedChangeListener(null);
-                    senBox.setChecked(!isChecked);
-                    senBox.setOnCheckedChangeListener(this);
-                }
-            }
-        };
-        senBox.setOnCheckedChangeListener(senListener);
-
-        priBox.setEnabled(!row.banned);
-        senBox.setEnabled(!row.banned);
-
-        final AlertDialog d = new AlertDialog.Builder(mContext)
-            .setView(layout)
-            .setPositiveButton(R.string.app_notifications_dialog_done, null)
-            .create();
-        d.show();
-    }
-
     private static class ViewHolder {
         ViewGroup row;
         ViewGroup appButton;
@@ -366,7 +267,10 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
             vh.appButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showDialog(view, row);
+                    mContext.startActivity(new Intent(mContext, AppNotificationDialog.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            .putExtra(Settings.EXTRA_APP_PACKAGE, row.pkg)
+                            .putExtra(Settings.EXTRA_APP_UID, row.uid));
                 }
             });
             enableLayoutTransitions(vh.appButton, animate);
@@ -428,7 +332,7 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
         public String section;
     }
 
-    private static class AppRow extends Row {
+    public static class AppRow extends Row {
         public String pkg;
         public int uid;
         public Drawable icon;
@@ -448,6 +352,23 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
         }
     };
 
+    public static AppRow loadAppRow(PackageManager pm, PackageInfo pkg, Backend backend) {
+        final AppRow row = new AppRow();
+        row.pkg = pkg.packageName;
+        row.uid = pkg.applicationInfo.uid;
+        try {
+            row.label = pkg.applicationInfo.loadLabel(pm);
+        } catch (Throwable t) {
+            Log.e(TAG, "Error loading application label for " + row.pkg, t);
+            row.label = row.pkg;
+        }
+        row.icon = pkg.applicationInfo.loadIcon(pm);
+        row.banned = backend.getNotificationsBanned(row.pkg, row.uid);
+        row.priority = backend.getHighPriority(row.pkg, row.uid);
+        row.sensitive = backend.getSensitive(row.pkg, row.uid);
+        return row;
+    }
+
     private final Runnable mCollectAppsRunnable = new Runnable() {
         @Override
         public void run() {
@@ -464,23 +385,12 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
                         if (DEBUG) Log.d(TAG, "Skipping " + pkg.packageName);
                         continue;
                     }
-                    final AppRow row = new AppRow();
-                    row.pkg = pkg.packageName;
-                    row.uid = pkg.applicationInfo.uid;
-                    try {
-                        row.label = pkg.applicationInfo.loadLabel(pm);
-                    } catch (Throwable t) {
-                        Log.e(TAG, "Error loading application label for " + row.pkg, t);
-                        row.label = row.pkg;
-                    }
-                    row.icon = pkg.applicationInfo.loadIcon(pm);
-                    row.banned = mBackend.getNotificationsBanned(row.pkg, row.uid);
-                    row.priority = mBackend.getHighPriority(row.pkg, row.uid);
-                    row.sensitive = mBackend.getSensitive(row.pkg, row.uid);
+                    final AppRow row = loadAppRow(pm, pkg, mBackend);
                     mRows.put(row.pkg, row);
                 }
                 // collect config activities
-                Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is " + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
+                if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
+                        + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
                 final List<ResolveInfo> resolveInfos = pm.queryIntentActivities(
                         APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
                         PackageManager.MATCH_DEFAULT_ONLY);
