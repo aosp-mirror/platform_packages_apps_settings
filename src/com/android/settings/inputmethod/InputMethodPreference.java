@@ -112,6 +112,10 @@ class InputMethodPreference extends SwitchPreference implements OnPreferenceClic
         setOnPreferenceChangeListener(this);
     }
 
+    public InputMethodInfo getInputMethodInfo() {
+        return mImi;
+    }
+
     private boolean isImeEnabler() {
         // If this {@link SwitchPreference} doesn't have a widget layout, we explicitly hide the
         // switch widget at constructor.
