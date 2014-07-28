@@ -710,7 +710,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
 
                 for (AccessPoint accessPoint : accessPoints) {
-                    getPreferenceScreen().addPreference(accessPoint);
+                    // Ignore access points that are out of range.
+                    if (accessPoint.getLevel() != -1) {
+                        getPreferenceScreen().addPreference(accessPoint);
+                    }
                 }
                 break;
 
