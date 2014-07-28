@@ -126,8 +126,7 @@ public class EditUserInfoController {
         final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
         Drawable drawable = null;
         if (mSavedPhoto != null) {
-            drawable = CircleFramedDrawable.getInstance(activity,
-                    mSavedPhoto);
+            drawable = CircleFramedDrawable.getInstance(activity, mSavedPhoto);
         } else {
             drawable = currentUserIcon;
             if (drawable == null) {

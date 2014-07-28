@@ -68,6 +68,7 @@ import android.widget.TabWidget;
 
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
+import com.android.settings.users.CircleFramedDrawable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -778,5 +779,15 @@ public final class Utils {
         PersistentDataBlockManager manager =(PersistentDataBlockManager)
                 context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
         manager.setOemUnlockEnabled(enabled);
+    }
+
+    /**
+     * Returns a circular icon for a user.
+     */
+    public static Drawable getUserIcon(Context context, UserManager um, UserInfo user) {
+        if (user.iconPath == null) return null;
+        Bitmap icon = um.getUserIcon(user.id);
+        if (icon == null) return null;
+        return CircleFramedDrawable.getInstance(context, icon);
     }
 }
