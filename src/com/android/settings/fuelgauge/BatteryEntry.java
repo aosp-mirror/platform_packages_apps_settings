@@ -25,9 +25,10 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Handler;
 import android.os.UserManager;
+
 import com.android.internal.os.BatterySipper;
 import com.android.settings.R;
-import com.android.settings.users.UserUtils;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -160,7 +161,7 @@ public class BatteryEntry {
             case USER: {
                 UserInfo info = um.getUserInfo(sipper.userId);
                 if (info != null) {
-                    icon = UserUtils.getUserIcon(context, um, info, context.getResources());
+                    icon = Utils.getUserIcon(context, um, info);
                     name = info != null ? info.name : null;
                     if (name == null) {
                         name = Integer.toString(info.id);
