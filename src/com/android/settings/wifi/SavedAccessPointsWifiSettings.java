@@ -123,6 +123,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                     final int resultsSize = results.size();
                     for (int j = 0; j < resultsSize; ++j){
                         accessPoint.update(results.get(j));
+                        accessPoint.setIcon(null);
                     }
                 }
 
