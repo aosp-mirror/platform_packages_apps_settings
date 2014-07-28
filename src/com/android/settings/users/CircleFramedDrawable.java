@@ -37,7 +37,7 @@ import com.android.settings.R;
  * Converts the user avatar icon to a circularly clipped one.
  * TODO: Move this to an internal framework class and share with the one in Keyguard.
  */
-class CircleFramedDrawable extends Drawable {
+public class CircleFramedDrawable extends Drawable {
 
     private final Bitmap mBitmap;
     private final int mSize;

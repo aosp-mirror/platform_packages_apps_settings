@@ -17,7 +17,7 @@
 package com.android.settings.applications;
 
 import com.android.settings.R;
-import com.android.settings.users.UserUtils;
+import com.android.settings.Utils;
 
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
@@ -837,8 +837,7 @@ public class RunningState {
                 UserInfo info = mUm.getUserInfo(newItem.mUserId);
                 userItem.mUser.mInfo = info;
                 if (info != null) {
-                    userItem.mUser.mIcon = UserUtils.getUserIcon(context, mUm,
-                            info, context.getResources());
+                    userItem.mUser.mIcon = Utils.getUserIcon(context, mUm, info);
                 }
                 String name = info != null ? info.name : null;
                 if (name == null && info != null) {
