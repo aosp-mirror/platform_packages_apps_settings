@@ -117,7 +117,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SIMULATE_COLOR_SPACE = "simulate_color_space";
     private static final String USE_NUPLAYER_KEY = "use_nuplayer";
-    private static final String USE_NUPLAYER_PROPERTY = "persist.sys.media.use-nuplayer";
+    private static final String USE_AWESOMEPLAYER_PROPERTY = "persist.sys.media.use-awesome";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
     private static final String FORCE_MSAA_KEY = "force_msaa";
@@ -1003,11 +1003,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateUseNuplayerOptions() {
-        updateCheckBox(mUseNuplayer, SystemProperties.getBoolean(USE_NUPLAYER_PROPERTY, false));
+        updateCheckBox(
+                mUseNuplayer, !SystemProperties.getBoolean(USE_AWESOMEPLAYER_PROPERTY, false));
     }
 
     private void writeUseNuplayerOptions() {
-        SystemProperties.set(USE_NUPLAYER_PROPERTY, mUseNuplayer.isChecked() ? "true" : "false");
+        SystemProperties.set(
+                USE_AWESOMEPLAYER_PROPERTY, mUseNuplayer.isChecked() ? "false" : "true");
         pokeSystemProperties();
     }
 
