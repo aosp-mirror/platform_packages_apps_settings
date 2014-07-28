@@ -1343,10 +1343,6 @@
     <string name="wifi_assistant_permission_accepted">You gave “Google Wi\u2011Fi Assistant” permission to set up a VPN connection. That means this app can monitor network traffic.</string>
     <!-- Wifi Assistant open app button text.  [CHAR LIMIT=40] -->
     <string name="wifi_assistant_open_app">OPEN APP</string>
-    <!-- Wifi Assistant change wi-fi assistant title.  [CHAR LIMIT=40] -->
-    <string name="wifi_assistant_change_title">Change Wi\u2011Fi assistant?</string>
-    <!-- Wifi Assistant request message.  This message asks the user if it is okay for a 3rd party app to mana wi-fi assistant (instead of Google's wi-fi assistant). CHAR LIMIT=100] -->
-    <string name="wifi_assistant_change_message">Use <xliff:g id="third_party">%1$s</xliff:g> instead of <xliff:g id="google_wifi">%2$s</xliff:g> to manage your network connections?</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast screen</string>
@@ -2584,12 +2580,12 @@
     <string name="sms_change_default_dialog_text" translatable="true">Use <xliff:g id="new_app">%1$s</xliff:g> instead of <xliff:g id="current_app">%2$s</xliff:g> as your SMS app?</string>
     <string name="sms_change_default_no_previous_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> as your SMS app?</string>
 
-    <!-- Network Scorer Application -->
-    <!-- TODO: Final UX and strings, then mark these as translatable. -->
-    <string name="network_scorer_application" translatable="false">Active network scorer</string>
-    <string name="network_scorer_change_active_dialog_title" translatable="false">Change network scorer?</string>
-    <string name="network_scorer_change_active_dialog_text" translatable="false">Use <xliff:g id="new_app">%1$s</xliff:g> instead of <xliff:g id="current_app">%2$s</xliff:g> as your network scorer?</string>
-    <string name="network_scorer_change_active_no_previous_dialog_text" translatable="false">Use <xliff:g id="new_app">%s</xliff:g> as your network scorer?</string>
+    <!-- Wifi Assistant change wi-fi assistant title.  [CHAR LIMIT=40] -->
+    <string name="network_scorer_change_active_dialog_title">Change Wi\u2011Fi assistant?</string>
+    <!-- Wifi Assistant request message.  This message asks the user if it is okay for an app to become the Wifi Assistant instead of the current Wifi Assistant app. [CHAR LIMIT=100] -->
+    <string name="network_scorer_change_active_dialog_text">Use <xliff:g id="new_app">%1$s</xliff:g> instead of <xliff:g id="current_app">%2$s</xliff:g> to manage your network connections?</string>
+    <!-- Wifi Assistant request message.  This message asks the user if it is okay for an app to become the Wifi Assistant. [CHAR LIMIT=100] -->
+    <string name="network_scorer_change_active_no_previous_dialog_text">Use <xliff:g id="new_app">%s</xliff:g> to manage your network connections?</string>
 
     <!-- The SIM operator is not known [CHAR_ LIMIT=50]-->
     <string name="mobile_unknown_sim_operator" translatable="true">Unknown SIM operator</string>
