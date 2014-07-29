@@ -973,6 +973,15 @@
             </intent-filter>
         </activity>
 
+        <activity-alias android:name="SetProfileOwner"
+                android:label="@string/profile_owner_add_title"
+                android:targetActivity="DeviceAdminAdd">
+            <intent-filter android:priority="1000">
+                <action android:name="android.app.action.SET_PROFILE_OWNER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+
         <activity android:name="IccLockSettings"
                 android:label="@string/sim_lock_settings"
                 android:theme="@style/Theme.SubSettingsDialogWhenLarge"
