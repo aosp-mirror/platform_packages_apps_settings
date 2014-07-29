@@ -27,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.TrafficStats;
 import android.os.UserManager;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
@@ -41,8 +42,18 @@ public class UidDetailProvider {
     private final Context mContext;
     private final SparseArray<UidDetail> mUidDetailCache;
 
+    public static final int OTHER_USER_RANGE_START = -2000;
+
     public static int buildKeyForUser(int userHandle) {
-        return -(2000 + userHandle);
+        return OTHER_USER_RANGE_START - userHandle;
+    }
+
+    public static boolean isKeyForUser(int key) {
+        return key <= OTHER_USER_RANGE_START;
+    }
+
+    public static int getUserIdForKey(int key) {
+        return OTHER_USER_RANGE_START - key;
     }
 
     public UidDetailProvider(Context context) {
@@ -113,14 +124,22 @@ public class UidDetailProvider {
                 return detail;
         }
 
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+
         // Handle keys that are actually user handles
-        if (uid <= -2000) {
-            final int userHandle = (-uid) - 2000;
-            final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        if (isKeyForUser(uid)) {
+            final int userHandle = getUserIdForKey(uid);
             final UserInfo info = um.getUserInfo(userHandle);
             if (info != null) {
-                detail.label = res.getString(R.string.running_process_item_user_label, info.name);
-                detail.icon = Utils.getUserIcon(mContext, um, info);
+                if (info.isManagedProfile()) {
+                    detail.label = res.getString(R.string.data_usage_managed_user_text);
+                    detail.icon = Resources.getSystem().getDrawable(
+                            com.android.internal.R.drawable.ic_afw_icon);
+                } else {
+                    detail.label = res.getString(R.string.running_process_item_user_label,
+                            info.name);
+                    detail.icon = Utils.getUserIcon(mContext, um, info);
+                }
                 return detail;
             }
         }
@@ -132,7 +151,8 @@ public class UidDetailProvider {
             if (length == 1) {
                 final ApplicationInfo info = pm.getApplicationInfo(packageNames[0], 0);
                 detail.label = info.loadLabel(pm).toString();
-                detail.icon = info.loadIcon(pm);
+                detail.icon = um.getBadgedDrawableForUser(info.loadIcon(pm),
+                        new UserHandle(UserHandle.getUserId(uid)));
             } else if (length > 1) {
                 detail.detailLabels = new CharSequence[length];
                 for (int i = 0; i < length; i++) {
@@ -144,7 +164,8 @@ public class UidDetailProvider {
                     if (packageInfo.sharedUserLabel != 0) {
                         detail.label = pm.getText(packageName, packageInfo.sharedUserLabel,
                                 packageInfo.applicationInfo).toString();
-                        detail.icon = appInfo.loadIcon(pm);
+                        detail.icon = um.getBadgedDrawableForUser(appInfo.loadIcon(pm),
+                                new UserHandle(UserHandle.getUserId(uid)));
                     }
                 }
             }
