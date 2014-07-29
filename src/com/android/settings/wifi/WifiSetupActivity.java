@@ -59,6 +59,9 @@ public class WifiSetupActivity extends WifiPickerActivity
     private static final String THEME_MATERIAL = "material";
     private static final String THEME_MATERIAL_LIGHT = "material_light";
 
+    // Key for whether the user selected network in saved instance state bundle
+    private static final String PARAM_USER_SELECTED_NETWORK = "userSelectedNetwork";
+
     // Activity result when pressing the Skip button
     private static final int RESULT_SKIP = Activity.RESULT_FIRST_USER;
 
@@ -100,8 +103,18 @@ public class WifiSetupActivity extends WifiPickerActivity
         mAllowSkip = intent.getBooleanExtra(EXTRA_ALLOW_SKIP, true);
         // Behave like the user already selected a network if we do not require selection
         mUserSelectedNetwork = !intent.getBooleanExtra(EXTRA_REQUIRE_USER_NETWORK_SELECTION, false);
+    }
 
-        refreshConnectionState();
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(PARAM_USER_SELECTED_NETWORK, mUserSelectedNetwork);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mUserSelectedNetwork = savedInstanceState.getBoolean(PARAM_USER_SELECTED_NETWORK, true);
     }
 
     private void refreshConnectionState() {
@@ -118,6 +131,9 @@ public class WifiSetupActivity extends WifiPickerActivity
             if (mAutoFinishOnConnection && mUserSelectedNetwork) {
                 Log.d(TAG, "Auto-finishing with connection");
                 finishOrNext(Activity.RESULT_OK);
+                // Require a user selection before auto-finishing next time we are here. The user
+                // can either connect to a different network or press "next" to proceed.
+                mUserSelectedNetwork = false;
             }
             if (mNavigationBar != null) {
                 mNavigationBar.getNextButton().setText(R.string.setup_wizard_next_button_label);
@@ -140,6 +156,7 @@ public class WifiSetupActivity extends WifiPickerActivity
     public void onResume() {
         super.onResume();
         registerReceiver(mReceiver, mFilter);
+        refreshConnectionState();
     }
 
     @Override
@@ -169,17 +186,6 @@ public class WifiSetupActivity extends WifiPickerActivity
     @Override
     /* package */ Class<? extends PreferenceFragment> getWifiSettingsClass() {
         return WifiSettingsForSetupWizard.class;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_CANCELED) {
-            Log.d(TAG, "Back into WifiSetupActivity. Requiring user selection.");
-            // Require a user selection before we auto advance again. Or the user can press the
-            // next button if there is a valid WiFi connection.
-            mUserSelectedNetwork = false;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -226,7 +232,6 @@ public class WifiSetupActivity extends WifiPickerActivity
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        refreshConnectionState();
     }
 
     @Override
