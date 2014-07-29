@@ -23,6 +23,7 @@
             android:title="@string/sim_pin_toggle"
             android:summaryOn="@string/sim_lock_on"
             android:summaryOff="@string/sim_lock_off"/>
+
     <com.android.settings.EditPinPreference
             android:key="sim_pin"
             android:dependency="sim_toggle"
@@ -31,4 +32,5 @@
             android:dialogMessage="@string/sim_enter_old"
             android:positiveButtonText="@string/sim_enter_ok"
             android:negativeButtonText="@string/sim_enter_cancel"/>
-</PreferenceScreen>   
+
+</PreferenceScreen>
