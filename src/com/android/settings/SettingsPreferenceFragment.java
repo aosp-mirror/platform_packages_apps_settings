@@ -66,6 +66,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private boolean mPreferenceHighlighted = false;
     private Drawable mHighlightDrawable;
 
+    private Object mRegisterLock = new Object();
     private boolean mIsDataSetObserverRegistered = false;
     private DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override
@@ -153,16 +154,20 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     }
 
     public void registerObserverIfNeeded() {
-        if (!mIsDataSetObserverRegistered) {
-            getPreferenceScreen().getRootAdapter().registerDataSetObserver(mDataSetObserver);
-            mIsDataSetObserverRegistered = true;
+        synchronized (mRegisterLock) {
+            if (!mIsDataSetObserverRegistered) {
+                getPreferenceScreen().getRootAdapter().registerDataSetObserver(mDataSetObserver);
+                mIsDataSetObserverRegistered = true;
+            }
         }
     }
 
     public void unregisterObserverIfNeeded() {
-        if (mIsDataSetObserverRegistered) {
-            getPreferenceScreen().getRootAdapter().unregisterDataSetObserver(mDataSetObserver);
-            mIsDataSetObserverRegistered = false;
+        synchronized (mRegisterLock) {
+            if (mIsDataSetObserverRegistered) {
+                getPreferenceScreen().getRootAdapter().unregisterDataSetObserver(mDataSetObserver);
+                mIsDataSetObserverRegistered = false;
+            }
         }
     }
 
