@@ -454,7 +454,7 @@ public class InstalledAppDetails extends Fragment
         final View view = inflater.inflate(R.layout.installed_app_details, container, false);
 
         final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
-        Utils.forceCustomPadding(allDetails);
+        Utils.forceCustomPadding(allDetails, true /* additive padding */);
 
         mRootView = view;
         mComputingStr = getActivity().getText(R.string.computing_size);
