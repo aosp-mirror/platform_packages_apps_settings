@@ -20,9 +20,13 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
@@ -35,7 +39,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -72,6 +75,9 @@ public class AccountSettings extends SettingsPreferenceFragment
     private static final String ADD_ACCOUNT_ACTION = "android.settings.ADD_ACCOUNT_SETTINGS";
 
     private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
+
+    private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";
+
 
     private UserManager mUm;
     private SparseArray<ProfileData> mProfiles;
@@ -430,16 +436,66 @@ public class AccountSettings extends SettingsPreferenceFragment
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            // TODO: Add confirmation dialogs. See: http://b/16076571
             if (ActivityManager.isUserAMonkey()) {
                 Log.d(TAG, "ignoring monkey's attempt to flip sync state");
             } else {
-                boolean newSyncState = !item.isChecked();
-                item.setChecked(newSyncState);
-                ContentResolver.setMasterSyncAutomaticallyAsUser(newSyncState,
-                        mUserHandle.getIdentifier());
+                ConfirmAutoSyncChangeFragment.show(AccountSettings.this, !item.isChecked(),
+                        mUserHandle);
             }
             return true;
+        }
+    }
+
+    /**
+     * Dialog to inform user about changing auto-sync setting
+     */
+    public static class ConfirmAutoSyncChangeFragment extends DialogFragment {
+        private static final String SAVE_ENABLING = "enabling";
+        private boolean mEnabling;
+        private UserHandle mUserHandle;
+
+        public static void show(AccountSettings parent, boolean enabling, UserHandle userHandle) {
+            if (!parent.isAdded()) return;
+
+            final ConfirmAutoSyncChangeFragment dialog = new ConfirmAutoSyncChangeFragment();
+            dialog.mEnabling = enabling;
+            dialog.mUserHandle = userHandle;
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_AUTO_SYNC_CHANGE);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+            if (savedInstanceState != null) {
+                mEnabling = savedInstanceState.getBoolean(SAVE_ENABLING);
+            }
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            if (!mEnabling) {
+                builder.setTitle(R.string.data_usage_auto_sync_off_dialog_title);
+                builder.setMessage(R.string.data_usage_auto_sync_off_dialog);
+            } else {
+                builder.setTitle(R.string.data_usage_auto_sync_on_dialog_title);
+                builder.setMessage(R.string.data_usage_auto_sync_on_dialog);
+            }
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ContentResolver.setMasterSyncAutomaticallyAsUser(mEnabling,
+                            mUserHandle.getIdentifier());
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putBoolean(SAVE_ENABLING, mEnabling);
         }
     }
     // TODO Implement a {@link SearchIndexProvider} to allow Indexing and Search of account types
