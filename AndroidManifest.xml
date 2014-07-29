@@ -1846,15 +1846,21 @@
                 android:label="@string/app_notifications_title"
                 android:exported="true"
                 android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_APP_NOTIFICATION_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.AppNotificationSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/notification_settings" />
+        </activity>
+
+        <activity android:name=".notification.AppNotificationDialog"
+                android:theme="@style/Theme.AlertDialog"
+                android:launchMode="singleTop"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.APP_NOTIFICATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- Show regulatory info (from settings item or dialing "*#07#") -->
