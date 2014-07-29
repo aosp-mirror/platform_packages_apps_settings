@@ -68,7 +68,7 @@ import android.widget.TabWidget;
 
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
-import com.android.settings.users.CircleFramedDrawable;
+import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.io.IOException;
 import java.io.InputStream;
