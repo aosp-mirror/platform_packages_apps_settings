@@ -123,14 +123,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     private PreferenceCategory mPrintServicesCategory;
 
     private PrintJobsController mPrintJobsController;
-    private Context mContext;
     private UserSpinnerAdapter mProfileSpinnerAdapter;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mContext = activity;
-    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -200,10 +193,10 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
             final int count = userProfiles.size();
             for (int i = 0; i < count; i++) {
-                userDetails.add(new UserDetails(userProfiles.get(i), um, mContext));
+                userDetails.add(new UserDetails(userProfiles.get(i), um, getActivity()));
             }
 
-            mProfileSpinnerAdapter = new UserSpinnerAdapter(mContext, userDetails);
+            mProfileSpinnerAdapter = new UserSpinnerAdapter(getActivity(), userDetails);
             spinner.setAdapter(mProfileSpinnerAdapter);
             spinner.setOnItemSelectedListener(this);
             setPinnedHeaderView(spinner);
@@ -316,7 +309,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
             Intent intent = new Intent(Settings.ACTION_PRINT_SETTINGS);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivityAsUser(intent, selectedUser);
+            getActivity().startActivityAsUser(intent, selectedUser);
             getActivity().finish();
         }
     }
