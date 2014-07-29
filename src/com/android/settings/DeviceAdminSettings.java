@@ -71,6 +71,13 @@ public class DeviceAdminSettings extends ListFragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        Utils.forceCustomPadding(getListView(), true /* additive padding */);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         mDeviceOwnerPkg = mDPM.getDeviceOwner();
