@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.AppOpsManager;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
@@ -38,6 +39,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.text.TextUtils.TruncateAt;
 import android.util.EventLog;
 import android.util.Log;
@@ -69,11 +71,13 @@ public class DeviceAdminAdd extends Activity {
     AppOpsManager mAppOps;
     DeviceAdminInfo mDeviceAdmin;
     CharSequence mAddMsgText;
+    String mProfileOwnerName;
 
     ImageView mAdminIcon;
     TextView mAdminName;
     TextView mAdminDescription;
     TextView mAddMsg;
+    TextView mProfileOwnerWarning;
     ImageView mAddMsgExpander;
     boolean mAddMsgEllipsized = true;
     TextView mAdminWarning;
@@ -87,6 +91,7 @@ public class DeviceAdminAdd extends Activity {
     boolean mAdding;
     boolean mRefreshing;
     boolean mWaitingForRemoveMsg;
+    boolean mAddingProfileOwner;
     int mCurSysAppOpMode;
     int mCurToastAppOpMode;
 
@@ -105,19 +110,32 @@ public class DeviceAdminAdd extends Activity {
             return;
         }
 
-        ComponentName cn = (ComponentName)getIntent().getParcelableExtra(
+        String action = getIntent().getAction();
+        ComponentName who = (ComponentName)getIntent().getParcelableExtra(
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
-        if (cn == null) {
-            Log.w(TAG, "No component specified in " + getIntent().getAction());
+        if (who == null) {
+            Log.w(TAG, "No component specified in " + action);
             finish();
             return;
         }
 
+        if (action != null && action.equals(DevicePolicyManager.ACTION_SET_PROFILE_OWNER)) {
+            mAddingProfileOwner = true;
+            mProfileOwnerName =
+                    getIntent().getStringExtra(DevicePolicyManager.EXTRA_PROFILE_OWNER_NAME);
+            String callingPackage = getCallingPackage();
+            if (callingPackage == null || !callingPackage.equals(who.getPackageName())) {
+                Log.e(TAG, "Unknown or incorrect caller");
+                finish();
+                return;
+            }
+        }
+
         ActivityInfo ai;
         try {
-            ai = getPackageManager().getReceiverInfo(cn, PackageManager.GET_META_DATA);
+            ai = getPackageManager().getReceiverInfo(who, PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "Unable to retrieve device policy " + cn, e);
+            Log.w(TAG, "Unable to retrieve device policy " + who, e);
             finish();
             return;
         }
@@ -125,7 +143,7 @@ public class DeviceAdminAdd extends Activity {
         // When activating, make sure the given component name is actually a valid device admin.
         // No need to check this when deactivating, because it is safe to deactivate an active
         // invalid device admin.
-        if (!mDPM.isAdminActive(cn)) {
+        if (!mDPM.isAdminActive(who)) {
             List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
                     new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
                     PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS);
@@ -150,7 +168,7 @@ public class DeviceAdminAdd extends Activity {
                 }
             }
             if (!found) {
-                Log.w(TAG, "Request to add invalid device admin: " + cn);
+                Log.w(TAG, "Request to add invalid device admin: " + who);
                 finish();
                 return;
             }
@@ -161,11 +179,11 @@ public class DeviceAdminAdd extends Activity {
         try {
             mDeviceAdmin = new DeviceAdminInfo(this, ri);
         } catch (XmlPullParserException e) {
-            Log.w(TAG, "Unable to retrieve device policy " + cn, e);
+            Log.w(TAG, "Unable to retrieve device policy " + who, e);
             finish();
             return;
         } catch (IOException e) {
-            Log.w(TAG, "Unable to retrieve device policy " + cn, e);
+            Log.w(TAG, "Unable to retrieve device policy " + who, e);
             finish();
             return;
         }
@@ -175,11 +193,11 @@ public class DeviceAdminAdd extends Activity {
         // "OK" immediately.
         if (DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN.equals(getIntent().getAction())) {
             mRefreshing = false;
-            if (mDPM.isAdminActive(cn)) {
+            if (mDPM.isAdminActive(who)) {
                 ArrayList<DeviceAdminInfo.PolicyInfo> newPolicies = mDeviceAdmin.getUsedPolicies();
                 for (int i = 0; i < newPolicies.size(); i++) {
                     DeviceAdminInfo.PolicyInfo pi = newPolicies.get(i);
-                    if (!mDPM.hasGrantedPolicy(cn, pi.ident)) {
+                    if (!mDPM.hasGrantedPolicy(who, pi.ident)) {
                         mRefreshing = true;
                         break;
                     }
@@ -192,6 +210,14 @@ public class DeviceAdminAdd extends Activity {
                 }
             }
         }
+
+        // If we're trying to add a profile owner and user setup hasn't completed yet, no
+        // need to prompt for permission. Just add and finish.
+        if (mAddingProfileOwner && !mDPM.hasUserSetupCompleted()) {
+            addAndFinish();
+            return;
+        }
+
         mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
 
         setContentView(R.layout.device_admin_add);
@@ -199,6 +225,7 @@ public class DeviceAdminAdd extends Activity {
         mAdminIcon = (ImageView)findViewById(R.id.admin_icon);
         mAdminName = (TextView)findViewById(R.id.admin_name);
         mAdminDescription = (TextView)findViewById(R.id.admin_description);
+        mProfileOwnerWarning = (TextView) findViewById(R.id.profile_owner_warning);
 
         mAddMsg = (TextView)findViewById(R.id.add_msg);
         mAddMsgExpander = (ImageView) findViewById(R.id.add_msg_expander);
@@ -225,21 +252,7 @@ public class DeviceAdminAdd extends Activity {
         mActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mAdding) {
-                    try {
-                        mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
-                        setResult(Activity.RESULT_OK);
-                        EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_ACTIVATED_BY_USER,
-                            mDeviceAdmin.getActivityInfo().applicationInfo.uid);
-                    } catch (RuntimeException e) {
-                        // Something bad happened...  could be that it was
-                        // already set, though.
-                        Log.w(TAG, "Exception trying to activate admin "
-                                + mDeviceAdmin.getComponent(), e);
-                        if (mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
-                            setResult(Activity.RESULT_OK);
-                        }
-                    }
-                    finish();
+                    addAndFinish();
                 } else if (!mWaitingForRemoveMsg) {
                     try {
                         // Don't allow the admin to put a dialog up in front
@@ -268,6 +281,32 @@ public class DeviceAdminAdd extends Activity {
                 }
             }
         });
+    }
+
+    void addAndFinish() {
+        try {
+            mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
+            EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_ACTIVATED_BY_USER,
+                mDeviceAdmin.getActivityInfo().applicationInfo.uid);
+            setResult(Activity.RESULT_OK);
+        } catch (RuntimeException e) {
+            // Something bad happened...  could be that it was
+            // already set, though.
+            Log.w(TAG, "Exception trying to activate admin "
+                    + mDeviceAdmin.getComponent(), e);
+            if (mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
+                setResult(Activity.RESULT_OK);
+            }
+        }
+        if (mAddingProfileOwner) {
+            try {
+                mDPM.setProfileOwner(mDeviceAdmin.getComponent(),
+                        mProfileOwnerName, UserHandle.myUserId());
+            } catch (RuntimeException re) {
+                setResult(Activity.RESULT_CANCELED);
+            }
+        }
+        finish();
     }
 
     void continueRemoveAction(CharSequence msg) {
@@ -367,6 +406,9 @@ public class DeviceAdminAdd extends Activity {
         } catch (Resources.NotFoundException e) {
             mAdminDescription.setVisibility(View.GONE);
         }
+        if (mAddingProfileOwner) {
+            mProfileOwnerWarning.setVisibility(View.VISIBLE);
+        }
         if (mAddMsgText != null) {
             mAddMsg.setText(mAddMsgText);
             mAddMsg.setVisibility(View.VISIBLE);
@@ -374,7 +416,8 @@ public class DeviceAdminAdd extends Activity {
             mAddMsg.setVisibility(View.GONE);
             mAddMsgExpander.setVisibility(View.GONE);
         }
-        if (!mRefreshing && mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
+        if (!mRefreshing && !mAddingProfileOwner
+                && mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
             if (mActivePolicies.size() == 0) {
                 ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
                 for (int i=0; i<policies.size(); i++) {
@@ -407,7 +450,11 @@ public class DeviceAdminAdd extends Activity {
             setViewVisibility(mActivePolicies, View.GONE);
             mAdminWarning.setText(getString(R.string.device_admin_warning,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
-            setTitle(getText(R.string.add_device_admin_msg));
+            if (mAddingProfileOwner) {
+                setTitle(getText(R.string.profile_owner_add_title));
+            } else {
+                setTitle(getText(R.string.add_device_admin_msg));
+            }
             mActionButton.setText(getText(R.string.add_device_admin));
             mAdding = true;
         }
