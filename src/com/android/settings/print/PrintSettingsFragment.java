@@ -16,6 +16,7 @@
 
 package com.android.settings.print;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
@@ -31,6 +32,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.os.Process;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -50,9 +54,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
+import com.android.settings.UserSpinnerAdapter;
+import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -64,11 +71,14 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Spinner;
+
 /**
  * Fragment with the top level print settings.
  */
 public class PrintSettingsFragment extends SettingsPreferenceFragment
-        implements DialogCreatable, Indexable {
+        implements DialogCreatable, Indexable, OnItemSelectedListener {
 
     private static final int LOADER_ID_PRINT_JOBS_LOADER = 1;
 
@@ -113,6 +123,14 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     private PreferenceCategory mPrintServicesCategory;
 
     private PrintJobsController mPrintJobsController;
+    private Context mContext;
+    private UserSpinnerAdapter mProfileSpinnerAdapter;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mContext = activity;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -169,6 +187,27 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         textView.setText(R.string.print_no_services_installed);
         contentRoot.addView(emptyView);
         getListView().setEmptyView(emptyView);
+
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+        List<UserHandle> userProfiles = um.getUserProfiles();
+        if (userProfiles.size() >= 2) {
+            Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
+                    R.layout.spinner_view, null);
+
+            UserHandle myUserHandle = Process.myUserHandle();
+            userProfiles.remove(myUserHandle);
+            userProfiles.add(0, myUserHandle);
+            ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
+            final int count = userProfiles.size();
+            for (int i = 0; i < count; i++) {
+                userDetails.add(new UserDetails(userProfiles.get(i), um, mContext));
+            }
+
+            mProfileSpinnerAdapter = new UserSpinnerAdapter(mContext, userDetails);
+            spinner.setAdapter(mProfileSpinnerAdapter);
+            spinner.setOnItemSelectedListener(this);
+            setPinnedHeaderView(spinner);
+        }
     }
 
     private void updateServicesPreferences() {
@@ -269,6 +308,22 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                 prereference.performClick(getPreferenceScreen());
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
+        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
+            Intent intent = new Intent(Settings.ACTION_PRINT_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivityAsUser(intent, selectedUser);
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Nothing to do
     }
 
     private class SettingsPackageMonitor extends PackageMonitor {

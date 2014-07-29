@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.users;
+package com.android.settings.drawable;
 
 import android.content.Context;
 import android.content.res.Resources;

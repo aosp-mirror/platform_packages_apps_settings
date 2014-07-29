@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settings.drawable.CircleFramedDrawable;
 
 /**
  * This class encapsulates a Dialog for editing the user nickname and photo.
