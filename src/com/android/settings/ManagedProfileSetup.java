@@ -47,12 +47,15 @@ public class ManagedProfileSetup extends BroadcastReceiver {
             return;
         }
 
+        final PackageManager pm  = context.getPackageManager();
+        // Clear any previous intent forwarding we set up
+        pm.clearCrossProfileIntentFilters(UserHandle.myUserId());
+
         // Set up intent forwarding for implicit intents
         Intent intent = new Intent();
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setPackage(context.getPackageName());
 
-        final PackageManager pm  = context.getPackageManager();
         // Resolves activities for the managed profile (which we're running as)
         List<ResolveInfo> resolvedIntents = pm.queryIntentActivities(intent,
                 GET_ACTIVITIES | GET_META_DATA | GET_RESOLVED_FILTER);
