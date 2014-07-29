@@ -142,7 +142,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         super.onActivityCreated(savedInstanceState);
 
         ListView listView = getListView();
-        Utils.forceCustomPadding(listView);
+        Utils.forceCustomPadding(listView, false /* non additive padding */);
 
         mAdapter = new NotificationHistoryAdapter(mContext);
         listView.setAdapter(mAdapter);
