@@ -44,6 +44,7 @@ import android.widget.ListAdapter;
 import android.widget.ListPopupWindow;
 
 import com.android.settings.R;
+import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
