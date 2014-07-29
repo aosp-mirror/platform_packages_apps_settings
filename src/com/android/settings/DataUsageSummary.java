@@ -87,6 +87,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -419,7 +420,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mEmpty = (TextView) mHeader.findViewById(android.R.id.empty);
         mStupidPadding = mHeader.findViewById(R.id.stupid_padding);
 
-        mAdapter = new DataUsageAdapter(mUidDetailProvider, mInsetSide);
+        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mAdapter = new DataUsageAdapter(um, mUidDetailProvider, mInsetSide);
         mListView.setOnItemClickListener(mListListener);
         mListView.setAdapter(mAdapter);
 
@@ -1497,7 +1499,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         @Override
         public int compareTo(AppItem another) {
-            int comparison = Integer.compare(another.category, category);
+            int comparison = Integer.compare(category, another.category);
             if (comparison == 0) {
                 comparison = Long.compare(another.total, total);
             }
@@ -1523,13 +1525,15 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     public static class DataUsageAdapter extends BaseAdapter {
         private final UidDetailProvider mProvider;
         private final int mInsetSide;
+        private final UserManager mUm;
 
         private ArrayList<AppItem> mItems = Lists.newArrayList();
         private long mLargest;
 
-        public DataUsageAdapter(UidDetailProvider provider, int insetSide) {
+        public DataUsageAdapter(final UserManager userManager, UidDetailProvider provider, int insetSide) {
             mProvider = checkNotNull(provider);
             mInsetSide = insetSide;
+            mUm = userManager;
         }
 
         /**
@@ -1540,8 +1544,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mLargest = 0;
 
             final int currentUserId = ActivityManager.getCurrentUser();
+            final List<UserHandle> profiles = mUm.getUserProfiles();
             final SparseArray<AppItem> knownItems = new SparseArray<AppItem>();
-            boolean hasApps = false;
 
             NetworkStats.Entry entry = null;
             final int size = stats != null ? stats.size() : 0;
@@ -1550,35 +1554,43 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
                 // Decide how to collapse items together
                 final int uid = entry.uid;
+
                 final int collapseKey;
+                final int category;
+                final int userId = UserHandle.getUserId(uid);
                 if (UserHandle.isApp(uid)) {
-                    if (UserHandle.getUserId(uid) == currentUserId) {
+                    if (profiles.contains(new UserHandle(userId))) {
+                        if (userId != currentUserId) {
+                            // Add to a managed user item.
+                            final int managedKey = UidDetailProvider.buildKeyForUser(userId);
+                            accumulate(managedKey, knownItems, entry,
+                                    AppItem.CATEGORY_USER);
+                        }
+                        // Add to app item.
                         collapseKey = uid;
+                        category = AppItem.CATEGORY_APP;
                     } else {
-                        collapseKey = UidDetailProvider.buildKeyForUser(UserHandle.getUserId(uid));
+                        // Add to other user item.
+                        collapseKey = UidDetailProvider.buildKeyForUser(userId);
+                        category = AppItem.CATEGORY_USER;
                     }
                 } else if (uid == UID_REMOVED || uid == UID_TETHERING) {
                     collapseKey = uid;
+                    category = AppItem.CATEGORY_APP;
                 } else {
                     collapseKey = android.os.Process.SYSTEM_UID;
+                    category = AppItem.CATEGORY_APP;
                 }
-
-                AppItem item = knownItems.get(collapseKey);
-                if (item == null) {
-                    item = new AppItem(collapseKey);
-                    mItems.add(item);
-                    knownItems.put(item.key, item);
-                }
-                item.addUid(uid);
-                item.total += entry.rxBytes + entry.txBytes;
-                if (item.total > mLargest) {
-                    mLargest = item.total;
-                }
+                accumulate(collapseKey, knownItems, entry, category);
             }
 
-            for (int uid : restrictedUids) {
-                // Only splice in restricted state for current user
-                if (UserHandle.getUserId(uid) != currentUserId) continue;
+            final int restrictedUidsMax = restrictedUids.length;
+            for (int i = 0; i < restrictedUidsMax; ++i) {
+                final int uid = restrictedUids[i];
+                // Only splice in restricted state for current user or managed users
+                if (!profiles.contains(new UserHandle(UserHandle.getUserId(uid)))) {
+                    continue;
+                }
 
                 AppItem item = knownItems.get(uid);
                 if (item == null) {
@@ -1590,8 +1602,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 item.restricted = true;
             }
 
-            hasApps = !mItems.isEmpty();
-            if (hasApps) {
+            if (!mItems.isEmpty()) {
                 final AppItem title = new AppItem();
                 title.category = AppItem.CATEGORY_APP_TITLE;
                 mItems.add(title);
@@ -1599,6 +1610,33 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
             Collections.sort(mItems);
             notifyDataSetChanged();
+        }
+
+        /**
+         * Accumulate data usage of a network stats entry for the item mapped by the collapse key.
+         * Creates the item if needed.
+         *
+         * @param collapseKey the collapse key used to map the item.
+         * @param knownItems collection of known (already existing) items.
+         * @param entry the network stats entry to extract data usage from.
+         * @param itemCategory the item is categorized on the list view by this category. Must be
+         *            either AppItem.APP_ITEM_CATEGORY or AppItem.MANAGED_USER_ITEM_CATEGORY
+         */
+        private void accumulate(int collapseKey, final SparseArray<AppItem> knownItems,
+                NetworkStats.Entry entry, int itemCategory) {
+            final int uid = entry.uid;
+            AppItem item = knownItems.get(collapseKey);
+            if (item == null) {
+                item = new AppItem(collapseKey);
+                item.category = itemCategory;
+                mItems.add(item);
+                knownItems.put(item.key, item);
+            }
+            item.addUid(uid);
+            item.total += entry.rxBytes + entry.txBytes;
+            if (mLargest < item.total) {
+                mLargest = item.total;
+            }
         }
 
         @Override
@@ -1616,11 +1654,17 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             return mItems.get(position).key;
         }
 
+        /**
+         * See {@link #getItemViewType} for the view types.
+         */
         @Override
         public int getViewTypeCount() {
             return 2;
         }
 
+        /**
+         * Returns 1 for separator items and 0 for anything else.
+         */
         @Override
         public int getItemViewType(int position) {
             final AppItem item = mItems.get(position);
@@ -1638,6 +1682,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         @Override
         public boolean isEnabled(int position) {
+            if (position > mItems.size()) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
             return getItemViewType(position) == 0;
         }
 
