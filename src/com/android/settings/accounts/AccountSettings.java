@@ -38,6 +38,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -70,9 +71,12 @@ public class AccountSettings extends SettingsPreferenceFragment
 
     private static final String ADD_ACCOUNT_ACTION = "android.settings.ADD_ACCOUNT_SETTINGS";
 
+    private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
+
     private UserManager mUm;
     private SparseArray<ProfileData> mProfiles;
-    private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver;
+    private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver
+                = new ManagedProfileBroadcastReceiver();
     private boolean mIsSingleProfileUi = true;
 
     /**
@@ -102,7 +106,6 @@ public class AccountSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
         mProfiles = new SparseArray<ProfileData>(2);
-        updateUi();
         setHasOptionsMenu(true);
     }
 
@@ -149,6 +152,48 @@ public class AccountSettings extends SettingsPreferenceFragment
             }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUi();
+        mManagedProfileBroadcastReceiver.register(getActivity());
+        listenToAccountUpdates();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopListeningToAccountUpdates();
+        mManagedProfileBroadcastReceiver.unregister(getActivity());
+        cleanUpPreferences();
+    }
+
+    @Override
+    public void onAccountsUpdate(UserHandle userHandle) {
+        final ProfileData profileData = mProfiles.get(userHandle.getIdentifier());
+        if (profileData != null) {
+            updateAccountTypes(profileData);
+        } else {
+            Log.w(TAG, "Missing Settings screen for: " + userHandle.getIdentifier());
+        }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        // Check the preference
+        final int count = mProfiles.size();
+        for (int i = 0; i < count; i++) {
+            ProfileData profileData = mProfiles.valueAt(i);
+            if (preference == profileData.addAccountPreference) {
+                Intent intent = new Intent(ADD_ACCOUNT_ACTION);
+                intent.putExtra(EXTRA_USER, profileData.userHandle);
+                startActivity(intent);
+                return true;
+            }
+        }
+        return false;
+    }
+
     void updateUi() {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.account_settings);
@@ -169,13 +214,11 @@ public class AccountSettings extends SettingsPreferenceFragment
             } else {
                 mIsSingleProfileUi = false;
                 updateProfileUi(currentProfile, KEY_CATEGORY_PERSONAL, KEY_ADD_ACCOUNT_PERSONAL,
-                        new ArrayList<String>());
+                        EMPTY_LIST);
                 final ArrayList<String> unusedPreferences = new ArrayList<String>(2);
                 unusedPreferences.add(KEY_ADD_ACCOUNT);
                 updateProfileUi(managedProfile, KEY_CATEGORY_WORK, KEY_ADD_ACCOUNT_WORK,
                         unusedPreferences);
-                mManagedProfileBroadcastReceiver = new ManagedProfileBroadcastReceiver();
-                mManagedProfileBroadcastReceiver.register(getActivity());
             }
         }
         final int count = mProfiles.size();
@@ -210,33 +253,26 @@ public class AccountSettings extends SettingsPreferenceFragment
         profileData.authenticatorHelper = new AuthenticatorHelper(
                 getActivity(), userHandle, mUm, this);
         mProfiles.put(userHandle.getIdentifier(), profileData);
-
-        profileData.authenticatorHelper.listenToAccountUpdates();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        cleanUp();
-    }
-
-    void cleanUp() {
-        if (mManagedProfileBroadcastReceiver != null) {
-            mManagedProfileBroadcastReceiver.unregister(getActivity());
+    private void cleanUpPreferences() {
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+        if (preferenceScreen != null) {
+            preferenceScreen.removeAll();
         }
+    }
+
+    private void listenToAccountUpdates() {
+        final int count = mProfiles.size();
+        for (int i = 0; i < count; i++) {
+            mProfiles.valueAt(i).authenticatorHelper.listenToAccountUpdates();
+        }
+    }
+
+    private void stopListeningToAccountUpdates() {
         final int count = mProfiles.size();
         for (int i = 0; i < count; i++) {
             mProfiles.valueAt(i).authenticatorHelper.stopListeningToAccountUpdates();
-        }
-    }
-
-    @Override
-    public void onAccountsUpdate(UserHandle userHandle) {
-        final ProfileData profileData = mProfiles.get(userHandle.getIdentifier());
-        if (profileData != null) {
-            updateAccountTypes(profileData);
-        } else {
-            Log.w(TAG, "Missing Settings screen for: " + userHandle.getIdentifier());
         }
     }
 
@@ -303,22 +339,6 @@ public class AccountSettings extends SettingsPreferenceFragment
         return accountTypePreferences;
     }
 
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        // Check the preference
-        final int count = mProfiles.size();
-        for (int i = 0; i < count; i++) {
-            ProfileData profileData = mProfiles.valueAt(i);
-            if (preference == profileData.addAccountPreference) {
-                Intent intent = new Intent(ADD_ACCOUNT_ACTION);
-                intent.putExtra(EXTRA_USER, profileData.userHandle);
-                startActivity(intent);
-                return true;
-            }
-        }
-        return false;
-    }
-
     private class AccountPreference extends Preference implements OnPreferenceClickListener {
         /**
          * Title of the tile that is shown to the user.
@@ -372,8 +392,12 @@ public class AccountSettings extends SettingsPreferenceFragment
             if (intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)
                     || intent.getAction().equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
                 Log.v(TAG, "Received broadcast: " + intent.getAction());
-                cleanUp();
+                // Clean old state
+                stopListeningToAccountUpdates();
+                cleanUpPreferences();
+                // Build new state
                 updateUi();
+                listenToAccountUpdates();
                 return;
             }
             Log.w(TAG, "Cannot handle received broadcast: " + intent.getAction());
