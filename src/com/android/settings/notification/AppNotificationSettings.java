@@ -36,6 +36,8 @@ import android.os.Parcelable;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.TypedValue;
@@ -44,12 +46,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.SectionIndexer;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.PinnedHeaderListFragment;
 import com.android.settings.R;
+import com.android.settings.UserSpinnerAdapter;
+import com.android.settings.UserSpinnerAdapter.UserDetails;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -58,7 +65,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /** Just a sectioned list of installed applications, nothing else to index **/
-public class AppNotificationSettings extends PinnedHeaderListFragment {
+public class AppNotificationSettings extends PinnedHeaderListFragment
+        implements OnItemSelectedListener {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -79,6 +87,7 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
     private Signature[] mSystemSignature;
     private Parcelable mListViewState;
     private Backend mBackend = new Backend();
+    private UserSpinnerAdapter mProfileSpinnerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,9 +98,35 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
         getActivity().setTitle(R.string.app_notifications_title);
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.notification_app_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        List<UserHandle> userProfiles = um.getUserProfiles();
+        if (userProfiles.size() >= 2) {
+            Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
+                    R.layout.spinner_view, null);
+            // TODO: Factor out spinner creation in a method in Utils class. See: http://b/16645615
+            UserHandle myUserHandle = new UserHandle(UserHandle.myUserId());
+            userProfiles.remove(myUserHandle);
+            userProfiles.add(0, myUserHandle);
+            ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
+            final int count = userProfiles.size();
+            for (int i = 0; i < count; i++) {
+                userDetails.add(new UserDetails(userProfiles.get(i), um, mContext));
+            }
+
+            mProfileSpinnerAdapter = new UserSpinnerAdapter(mContext, userDetails);
+            spinner.setAdapter(mProfileSpinnerAdapter);
+            spinner.setOnItemSelectedListener(this);
+            setPinnedHeaderView(spinner);
+        }
     }
 
     @Override
@@ -118,6 +153,24 @@ public class AppNotificationSettings extends PinnedHeaderListFragment {
     public void onResume() {
         super.onResume();
         loadAppsList();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
+        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
+            // TODO: Factor out intent starting in a method in Utils class. See: http://b/16645615
+            Intent intent = new Intent();
+            intent.setClassName(mContext.getPackageName(),
+                    com.android.settings.Settings.AppNotificationSettingsActivity.class.getName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivityAsUser(intent, selectedUser);
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     public void setBackend(Backend backend) {
