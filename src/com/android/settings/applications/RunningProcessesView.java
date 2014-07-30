@@ -429,7 +429,7 @@ public class RunningProcessesView extends FrameLayout
         mAdapter = new ServiceListAdapter(mState);
         mListView.setAdapter(mAdapter);
         mHeader = inflater.inflate(R.layout.running_processes_header, null);
-        mListView.addHeaderView(mHeader);
+        mListView.addHeaderView(mHeader, null, false /* set as not selectable */);
         mColorBar = (LinearColorBar)mHeader.findViewById(R.id.color_bar);
         Resources res = getResources();
         mColorBar.setColors(res.getColor(R.color.running_processes_system_ram),
