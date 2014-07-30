@@ -55,6 +55,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     private static final String KEY_RENAME_DEVICE = "rename_device";
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
     private static final String KEY_UNPAIR = "unpair";
+    private static final String KEY_PBAP_SERVER = "PBAP Server";
 
     public static final String EXTRA_DEVICE = "device";
     private RenameEditTextPreference mRenameDeviceNamePref;
@@ -181,6 +182,16 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             Preference pref = createProfilePreference(profile);
             mProfileContainer.addPreference(pref);
         }
+
+        final int pbapPermission = mCachedDevice.getPhonebookPermissionChoice();
+        // Only provide PBAP cabability if the client device has requested PBAP.
+        if (pbapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
+            final PbapServerProfile psp = mManager.getProfileManager().getPbapProfile();
+            CheckBoxPreference pbapPref = createProfilePreference(psp);
+            pbapPref.setChecked(pbapPermission == CachedBluetoothDevice.ACCESS_ALLOWED);
+            mProfileContainer.addPreference(pbapPref);
+        }
+
         showOrHideProfileGroup();
     }
 
@@ -205,6 +216,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
      */
     private CheckBoxPreference createProfilePreference(LocalBluetoothProfile profile) {
         CheckBoxPreference pref = new CheckBoxPreference(getActivity());
+        pref.setLayoutResource(R.layout.preference_start_widget);
         pref.setKey(profile.toString());
         pref.setTitle(profile.getNameResource(mCachedDevice.getDevice()));
         pref.setPersistent(false);
@@ -264,6 +276,15 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
 
     private void onProfileClicked(LocalBluetoothProfile profile, CheckBoxPreference profilePref) {
         BluetoothDevice device = mCachedDevice.getDevice();
+
+        if (profilePref.getKey().equals(KEY_PBAP_SERVER)) {
+            final int newPermission = mCachedDevice.getPhonebookPermissionChoice()
+                == CachedBluetoothDevice.ACCESS_ALLOWED ? CachedBluetoothDevice.ACCESS_REJECTED
+                : CachedBluetoothDevice.ACCESS_ALLOWED;
+            mCachedDevice.setPhonebookPermissionChoice(newPermission);
+            profilePref.setChecked(newPermission == CachedBluetoothDevice.ACCESS_ALLOWED);
+            return;
+        }
 
         int status = profile.getConnectionStatus(device);
         boolean isConnected =
@@ -351,7 +372,6 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
          */
         profilePref.setEnabled(!mCachedDevice.isBusy());
         profilePref.setChecked(profile.isPreferred(device));
-        profilePref.setSummary(profile.getSummaryResourceForDevice(device));
     }
 
     private LocalBluetoothProfile getProfileOf(Preference pref) {

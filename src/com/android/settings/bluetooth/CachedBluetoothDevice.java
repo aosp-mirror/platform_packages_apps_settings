@@ -76,11 +76,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     // Following constants indicate the user's choices of Phone book/message access settings
     // User hasn't made any choice or settings app has wiped out the memory
-    final static int ACCESS_UNKNOWN = 0;
+    public final static int ACCESS_UNKNOWN = 0;
     // User has accepted the connection and let Settings app remember the decision
-    final static int ACCESS_ALLOWED = 1;
+    public final static int ACCESS_ALLOWED = 1;
     // User has rejected the connection and let Settings app remember the decision
-    final static int ACCESS_REJECTED = 2;
+    public final static int ACCESS_REJECTED = 2;
 
     // how many times did User reject the connection to make the rejected persist.
     final static int PERSIST_REJECTED_TIMES_LIMIT = 2;
