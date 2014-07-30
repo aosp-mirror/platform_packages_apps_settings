@@ -153,8 +153,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
         final PreferenceCategory important =
                 (PreferenceCategory) root.findPreference(KEY_IMPORTANT);
-        final Preference alarmInfo = important.findPreference(KEY_ALARM_INFO);
-        important.removePreference(alarmInfo);
 
         mCalls = (SwitchPreference) important.findPreference(KEY_CALLS);
         if (Utils.isVoiceCapable(mContext)) {
@@ -189,9 +187,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             }
         });
 
-        mStarred = new DropDownPreference(mContext);
-        mStarred.setKey(KEY_STARRED);
-        mStarred.setTitle(R.string.zen_mode_from);
+        mStarred = (DropDownPreference) important.findPreference(KEY_STARRED);
         mStarred.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
         mStarred.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
         mStarred.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
@@ -210,8 +206,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             }
         });
         important.addPreference(mStarred);
-
-        important.addPreference(alarmInfo);
 
         final PreferenceCategory downtime = (PreferenceCategory) root.findPreference(KEY_DOWNTIME);
 
