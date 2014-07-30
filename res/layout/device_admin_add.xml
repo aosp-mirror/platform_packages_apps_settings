@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="16dip">
+
                 <ImageView android:id="@+id/admin_icon"
                     android:layout_width="@android:dimen/app_icon_size"
                     android:layout_height="@android:dimen/app_icon_size"
@@ -46,6 +47,7 @@
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitCenter"
                     android:contentDescription="@null" />
+
                 <TextView android:id="@+id/admin_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,21 +64,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <TextView android:id="@+id/profile_owner_warning"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:visibility="gone"
+                    android:text="@string/adding_profile_owner_warning" />
+
                 <TextView android:id="@+id/admin_description"
                     android:layout_width="fill_parent"
                     android:layout_height="0dip"
                     android:layout_weight="0"
                     android:padding="0dip" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
+
                     <ImageView android:id="@+id/add_msg_expander"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:contentDescription="@null" />
+
                     <TextView android:id="@+id/add_msg"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
