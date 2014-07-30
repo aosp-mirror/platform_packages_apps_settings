@@ -119,7 +119,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
-            mListener.registerAsSystemService(new ComponentName(mContext.getPackageName(),
+            mListener.registerAsSystemService(mContext, new ComponentName(mContext.getPackageName(),
                     this.getClass().getCanonicalName()), ActivityManager.getCurrentUser());
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot register listener", e);
