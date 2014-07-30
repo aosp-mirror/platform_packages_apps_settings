@@ -43,6 +43,11 @@
             android:switchTextOff=""
             android:switchTextOn="" />
 
+        <com.android.settings.notification.DropDownPreference
+                android:key="starred"
+                android:title="@string/zen_mode_from"
+                android:persistent="false" />
+
         <Preference
             android:key="alarm_info"
             android:title=""
