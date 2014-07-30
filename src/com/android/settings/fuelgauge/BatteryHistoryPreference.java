@@ -47,6 +47,8 @@ public class BatteryHistoryPreference extends Preference {
         setLayoutResource(R.layout.preference_batteryhistory);
         mStats = stats;
         mBatteryBroadcast = batteryBroadcast;
+        // Make it non selectable
+        setSelectable(false);
     }
 
     BatteryStats getStats() {
