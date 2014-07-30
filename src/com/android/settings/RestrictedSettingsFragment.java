@@ -54,7 +54,6 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     // If the restriction PIN is entered correctly.
     private boolean mChallengeSucceeded;
     private boolean mChallengeRequested;
-    private boolean mScreenToggledOff;
 
     private UserManager mUserManager;
     private RestrictionsManager mRestrictionsManager;
@@ -68,7 +67,6 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
             if (!mChallengeRequested) {
                 mChallengeSucceeded = false;
                 mChallengeRequested = false;
-                mScreenToggledOff = true;
             }
         }
     };
@@ -93,19 +91,11 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
         if (icicle != null) {
             mChallengeSucceeded = icicle.getBoolean(KEY_CHALLENGE_SUCCEEDED, false);
             mChallengeRequested = icicle.getBoolean(KEY_CHALLENGE_REQUESTED, false);
-        } else {
-            mChallengeSucceeded = false;
-            mChallengeRequested = false;
         }
-        mScreenToggledOff = false;
 
         IntentFilter offFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         offFilter.addAction(Intent.ACTION_USER_PRESENT);
         getActivity().registerReceiver(mScreenOffReceiver, offFilter);
-
-        if (shouldBeProviderProtected(mRestrictionKey)) {
-            ensurePin();
-        }
     }
 
     @Override
@@ -121,11 +111,9 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mScreenToggledOff) {
-            mScreenToggledOff = false;
-            if(shouldBeProviderProtected(mRestrictionKey)) {
-                ensurePin();
-            }
+
+        if (shouldBeProviderProtected(mRestrictionKey)) {
+            ensurePin();
         }
     }
 
