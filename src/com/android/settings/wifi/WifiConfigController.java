@@ -300,7 +300,6 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-
         if (mEdit || (mAccessPoint.getState() == null && mAccessPoint.getLevel() != -1)){
             mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         }else{

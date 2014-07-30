@@ -345,10 +345,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                                    }
                                };
 
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
+        if (savedInstanceState != null) {
             mDlgEdit = savedInstanceState.getBoolean(SAVE_DIALOG_EDIT_MODE);
-            mAccessPointSavedState = savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+            if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
+                mAccessPointSavedState = 
+                    savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+            }
         }
 
         // if we're supposed to enable/disable the Next button based on our current connection
