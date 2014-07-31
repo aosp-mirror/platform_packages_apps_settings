@@ -366,8 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Подключите зарядное устройство и повторите попытку."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Не указан PIN-код или пароль блокировки экрана"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Перед шифрованием необходимо задать PIN-код или пароль блокировки экрана."</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"Чтобы зашифровать данные на устройстве, введите графический ключ."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"Выполнить шифрование?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"Если прервать шифрование, данные будут потеряны. Операция займет не менее часа, в течение которого устройство будет перезагружено несколько раз."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"Если прервать шифрование, данные будут потеряны. Операция займет не менее часа, в течение которого устройство будет перезагружено несколько раз."</string>
@@ -377,8 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Повторите попытку через <xliff:g id="DELAY">^1</xliff:g> с."</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Внимание! Осталось попыток: <xliff:g id="COUNT">^1</xliff:g>. Если вам не удастся выполнить авторизацию, с устройства будут удалены все данные."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Введите пароль"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Сбой шифрования"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Данные на вашем планшетном ПК больше недоступны из-за того, что шифрование было прервано. \n\nЧтобы дальше использовать устройство, нужно сбросить настройки. После этого вы сможете восстановить все данные, для которых в аккаунте Google были созданы резервные копии."</string>
@@ -573,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Отслеживание сетей"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Так как вы разрешили Google Ассистенту Wi‑Fi устанавливать VPN-соединения, это приложение может отслеживать сетевой трафик."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ОТКРЫТЬ ПРИЛОЖЕНИЕ"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"Сменить ассистент Wi‑Fi?"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"Использовать для управления подключениями приложение \"<xliff:g id="THIRD_PARTY">%1$s</xliff:g>\" вместо приложения \"<xliff:g id="GOOGLE_WIFI">%2$s</xliff:g>\"?"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Беспроводной монитор"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Включить"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Устройства не найдены"</string>
@@ -1090,6 +1086,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Смена приложения для обмена SMS"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Использовать приложение \"<xliff:g id="NEW_APP">%1$s</xliff:g>\" вместо \"<xliff:g id="CURRENT_APP">%2$s</xliff:g>\" для обмена SMS-сообщениями?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Использовать приложение \"<xliff:g id="NEW_APP">%s</xliff:g>\" для обмена SMS-сообщениями?"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Неизвестный оператор связи"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"У оператора \"%1$s\" нет веб-сайта для синхронизации"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Вставьте SIM-карту и перезагрузите устройство"</string>
@@ -1828,10 +1830,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Не удалось очистить хранилище."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилище регистрационных данных включено."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Перед использованием хранилища учетных данных необходимо задать PIN-код или пароль блокировки экрана."</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"Доступ к истории использования"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"Приложения, у которых есть доступ к истории использования устройства"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тональный сигнал экстренного вызова"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Настроить режим работы при экстренном вызове"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Восстановление и сброс"</string>
@@ -1864,6 +1864,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Администратор устройства"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" сможет выполнять следующие операции:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Администратор активирован и разрешает приложению <xliff:g id="APP_NAME">%1$s</xliff:g> выполнять следующие операции:"</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Без названия"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Общие"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Журнал уведомлений"</string>
@@ -2020,6 +2022,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Мобильные данные"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Установить лимит использования трафика"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Период статистики"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Интернет-роуминг"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Ограничить фон. режим"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Включить фоновый режим"</string>
@@ -2066,8 +2072,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Если приложению постоянно требуется передавать данные в фоновом режиме, оно может перестать работать при отсутствии подключения к сети Wi-Fi.\n\nРасширенные возможности управления данными доступны в настройках самого приложения."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Чтобы ограничить передачу данных в фоновом режиме, сначала установите лимит мобильного трафика."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Включить автосинхронизацию?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Все изменения, внесенные в аккаунты на компьютере, будут автоматически скопированы на устройство.\n\nВ некоторых случаях также выполняется обратная синхронизация.\n\nЧтобы указать для каждого аккаунта, какие данные нужно синхронизировать, перейдите в меню \"Настройки &gt; Аккаунты\"."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Все изменения, внесенные в аккаунты на компьютере, будут автоматически скопированы на устройство.\n\nВ некоторых случаях также выполняется обратная синхронизация.\n\nЧтобы указать для каждого аккаунта, какие данные нужно синхронизировать, перейдите в меню \"Настройки &gt; Аккаунты\"."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Отключить автосинхронизацию?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Это сократит трафик и расход энергии. Однако чтобы получать новые данные, необходимо будет синхронизировать каждый аккаунт вручную. При этом уведомления об обновлениях отображаться не будут."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Удаление статистики"</string>
@@ -2300,8 +2308,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-карты"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-карты"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"SIM-карта <xliff:g id="SIM_NAME">%1$s</xliff:g>: <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM-карты изменились"</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"Нажмите, чтобы задать действия"</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Мобильные данные недоступны"</string>
@@ -2309,8 +2316,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Всегда использовать для звонков"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Выберите SIM-карту"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM-карта <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"Пустая SIM-карта"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Название SIM-карты"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"SIM-карта"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Оператор"</string>
@@ -2447,8 +2453,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Все"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Только контакты"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Только помеченные контакты"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Будильник и персональные напоминания имеют высший приоритет."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Включать автоматически"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Никогда"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Каждый вечер"</string>

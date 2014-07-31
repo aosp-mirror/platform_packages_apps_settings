@@ -366,8 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"صل الشاحن وأعد المحاولة."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"‏ليس هناك رقم تعريف شخصي (PIN) أو كلمة مرور لتأمين الشاشة"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"يجب تعيين رقم تعريف شخصي أو كلمة مرور لتأمين الشاشة قبل أن تتمكن من بدء عملية التشفير."</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"يجب عليك رسم نقش إلغاء القفل لتأكيد تشفير الجهاز."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"التشفير؟"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"لا يمكن التراجع عن عملية التشفير، وفي حالة مقاطعتها، ستفقد البيانات. تستغرق عملية التشفير ساعة أو أكثر، وسيتم خلالها إعادة تشغيل الجهاز اللوحي عدة مرات."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"لا يمكن التراجع عن عملية التشفير، وفي حالة مقاطعتها، ستفقد البيانات. تستغرق عملية التشفير ساعة أو أكثر، وسيتم خلالها إعادة تشغيل الهاتف عدة مرات."</string>
@@ -377,8 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"انتظر بينما يتم تشفير جهازك اللوحي. الوقت المتبقي: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"انتظر بينما يتم تشفير هاتفك. الوقت المتبقي: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"حاول مرة أخرى خلال <xliff:g id="DELAY">^1</xliff:g> ثانية."</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"تحذير: سيتم محو محتويات جهازك بعد إخفاق <xliff:g id="COUNT">^1</xliff:g> من المحاولات الأخرى لإلغاء القفل!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"اكتب كلمة المرور"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"لم يتم التشفير بنجاح"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"‏تمت مقاطعة التشفير ويتعذر الاستكمال. ونتيجة لذلك، لن تتمكن بعد الآن من الدخول إلى البيانات على جهازك اللوحي. \n\nلاستئناف استخدام الجهاز اللوحي، يلزمك إجراء إعادة ضبط المصنع. وعند إعداد الجهاز اللوحي بعد إعادة الضبط، ستكون لديك فرصة استعادة أي بيانات تم نسخها احتياطيًا إلى حساب Google."</string>
@@ -573,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"مراقبة الشبكات"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"‏لقد منحت تطبيق \"مساعد Wi‑Fi من Google\" إذنًا لإعداد اتصال شبكة ظاهرية خاصة. وهذا يعني أن هذا التطبيق يمكنه مراقبة حركة بيانات الشبكة."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"فتح التطبيق"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"‏هل تريد تغيير تطبيق مساعد Wi‑Fi؟"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"هل تريد استخدام <xliff:g id="THIRD_PARTY">%1$s</xliff:g> بدلاً من <xliff:g id="GOOGLE_WIFI">%2$s</xliff:g> لإدارة اتصالاتك بالشبكة؟"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"بث الشاشة"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"تمكين عرض شاشة لاسلكي"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"لم يتم العثور على أجهزة بالجوار."</string>
@@ -1090,6 +1086,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"‏هل تريد تغيير تطبيق الرسائل القصيرة SMS؟"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"‏هل تريد استخدام <xliff:g id="NEW_APP">%1$s</xliff:g> بدلاً من <xliff:g id="CURRENT_APP">%2$s</xliff:g> كتطبيق للرسائل القصيرة SMS؟"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"‏هل تريد استخدام <xliff:g id="NEW_APP">%s</xliff:g> كتطبيق للرسائل القصيرة SMS؟"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"‏مشغل SIM (مشغل شبكة الجوّال) غير معروف"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"‏ليس لدى %1$s موقع ويب معروف لإدارة حسابات"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"‏الرجاء إدخال بطاقة SIM وإعادة التشغيل"</string>
@@ -1828,10 +1830,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"تعذر محو وحدة تخزين بيانات الاعتماد."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"تم تمكين تخزين بيانات الاعتماد."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"يلزمك تعيين رقم تعريف شخصي لتأمين الشاشة أو كلمة مرور حتى تتمكن من استخدام وحدة تخزين بيانات الاعتماد."</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"الدخول إلى الاستخدام"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"التطبيقات التي لها حق الدخول إلى سجل استخدام جهازك."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"نغمة الطوارئ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"تعيين السلوك عند إجراء اتصال بالطوارئ"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"نسخ احتياطي وإعادة تعيين"</string>
@@ -1864,6 +1864,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"مشرف الجهاز"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"سيؤدي تنشيط هذا المشرف إلى السماح للتطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> بتنفيذ العمليات التالية:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"هذا المشرف نشط ويسمح للتطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> بتنفيذ العمليات التالية:"</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"بلا عنوان"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"إعدادات عامة"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"سجل الإشعارات"</string>
@@ -2020,6 +2022,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"بيانات شبكة الجوّال"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"تعيين حد البيانات"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"دورة استخدام البيانات"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"تجوال البيانات"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"تقييد بيانات الخلفية"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"السماح لبيانات الخلفية"</string>
@@ -2066,8 +2072,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"قد تتسبب هذه الميزة في توقف تطبيق يعتمد على بيانات الخلفية عن العمل عند توفر شبكات الجوّال فقط.\n\nيمكنك العثور على عناصر تحكم أكثر ملاءمة لاستخدام البيانات في الإعدادات المتوفرة داخل التطبيق."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"من الممكن تقييد بيانات الخلفية فقط إذا عينت حدًا لبيانات الجوّال."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"تشغيل مزامنة البيانات تلقائيًا؟"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"‏سيتم نسخ أية تغييرات تجريها على حساباتك على الويب تلقائيًا إلى جهازك اللوحي.\n\nويمكن أن تنسخ بعض الحسابات أيضًا أية تغييرات تجريها على الجهاز اللوحي تلقائيًا إلى الويب. يعمل حساب Google بهذه الطريقة.\n\nلاختيار أنواع المعلومات المراد مزامنتها داخل كل حساب، انتقل إلى الإعدادات &gt; الحسابات."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"‏سيتم نسخ أية تغييرات تجريها على حساباتك على الويب تلقائيًا إلى هاتفك.\n\nويمكن أن تنسخ بعض الحسابات أيضًا أية تغييرات تجريها على الهاتف تلقائيًا إلى الويب. يعمل حساب Google بهذه الطريقة.\n\nلاختيار أنواع المعلومات المراد مزامنتها داخل كل حساب، انتقل إلى الإعدادات &gt; الحسابات."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"إيقاف مزامنة البيانات تلقائيًا؟"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"سيؤدي هذا إلى الحفاظ على استخدام البيانات والبطارية، ولكنك ستحتاج إلى مزامنة كل حساب يدويًا لجمع المعلومات الحديثة. ولن تتلقى إشعارات عند حدوث التحديثات."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"تاريخ إعادة تعيين دورة الاستخدام"</string>
@@ -2298,8 +2306,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"‏بطاقات SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"‏بطاقات SIM"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"‏تم تغيير بطاقات SIM"</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"المس لتعيين الأنشطة"</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"بيانات الجوّال غير متوفرة"</string>
@@ -2307,8 +2314,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"استخدام هذا للمكالمات دائمًا"</string>
     <string name="sim_select_card" msgid="211285163525563293">"‏تحديد بطاقة SIM"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"‏بطاقة SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"‏بطاقة SIM فارغة"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"‏اسم بطاقة SIM"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"‏بطاقة SIM"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"مشغل شبكة الجوّال"</string>
@@ -2445,8 +2451,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"أي شخص"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"جهات الاتصال فقط"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"جهات الاتصال المميزة بنجمة فقط"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"تمثل التنبيهات والتذكيرات الشخصية الأخرى مقاطعات ذات أولوية"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"تشغيل تلقائي"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"مطلقًا"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"كل ليلة"</string>

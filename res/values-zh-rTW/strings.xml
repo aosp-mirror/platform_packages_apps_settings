@@ -366,8 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"連接充電器，再試一次。"</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"沒有鎖定螢幕的 PIN 或密碼"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"您必須先設定鎖定螢幕的 PIN 或密碼，才能開始加密。"</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"畫出解鎖圖形，確認要為您的裝置加密。"</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"加密？"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"您無法取消加密操作，如果過程中斷，資料將會遺失。加密過程可能需要 1 個小時以上的時間，您的平板電腦會在過程中重新啟動數次。"</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"您無法取消加密操作，如果過程中斷，資料將會遺失。加密過程可能需要 1 個小時以上的時間，您的手機會在過程中重新啟動數次。"</string>
@@ -377,8 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"平板電腦加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"手機加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"<xliff:g id="DELAY">^1</xliff:g> 秒內再試一次。"</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"警告：解鎖嘗試次數還剩 <xliff:g id="COUNT">^1</xliff:g> 次！如果持續失敗，您的裝置將會遭到清除。"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"輸入密碼"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"加密失敗"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"加密過程中斷，無法完成，因此您再也不能存取平板電腦上的資料。\n\n如要恢復使用平板電腦，請先將平板電腦重設回原廠設定。完成重設後，您可以在設定平板電腦時，將先前備份至「Google 帳戶」的資料全部還原。"</string>
@@ -573,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"網路監控"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"您授權「Google Wi‑Fi Assistant」設定 VPN 連線，因此該應用程式可監控網路流量。"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"開啟應用程式"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"變更 Wi‑Fi Assistant？"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"使用 <xliff:g id="THIRD_PARTY">%1$s</xliff:g> (而非 <xliff:g id="GOOGLE_WIFI">%2$s</xliff:g>) 管理網路連線？"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"投放螢幕"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"啟用無線螢幕分享"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"找不到附近的裝置。"</string>
@@ -1090,6 +1086,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"變更簡訊應用程式？"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"您要改用 <xliff:g id="NEW_APP">%1$s</xliff:g> 而不再使用 <xliff:g id="CURRENT_APP">%2$s</xliff:g> 做為簡訊應用程式嗎？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"使用 <xliff:g id="NEW_APP">%s</xliff:g> 做為簡訊應用程式嗎？"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"未知的 SIM 卡行動通訊業者"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s 沒有任何已知的佈建網站"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"請插入 SIM 卡，並重新啟動裝置"</string>
@@ -1832,10 +1834,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"無法清除認證儲存空間。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"您必須先設定螢幕鎖定 PIN 或密碼，才能使用憑證儲存空間。"</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"使用紀錄存取權"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"可存取裝置使用紀錄的應用程式。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"備份與重設"</string>
@@ -1868,6 +1868,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"裝置管理員"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"啟用這個管理員將允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
     <string name="device_admin_status" msgid="4252975713178851910">"這個管理員正在作業中，且允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下作業："</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"一般"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"通知紀錄"</string>
@@ -2024,6 +2026,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"行動數據"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"設定數據上限"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"資料用量週期"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"漫遊服務"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"限制背景資料"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"允許背景資料"</string>
@@ -2070,8 +2076,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"在只有行動網路可供使用的情況下，啟用這項功能可能會導致一些必須在背景傳輸數據的應用程式停止運作。\n\n您可以前往應用程式的設定，搜尋更多適當的數據用量選項。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"您必須先設定行動數據上限，才能禁止背景資料傳輸。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"開啟資料自動同步功能？"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"您在網路上對帳戶進行的任何變更都會自動複製到您的平板電腦。\n\n部分帳戶也可能自動將您在平板電腦上進行的所有變更複製到網路上。Google 帳戶會按照這種方式運作。\n\n如要選擇每個帳戶要同步處理的資訊類型，請前往 [設定] &gt; [帳戶]。"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"您在網路上對帳戶進行的任何變更都會自動複製到您的手機。\n\n部分帳戶也可能自動將您在手機上進行的所有變更複製到網路上。Google 帳戶會按照這種方式運作。\n\n如要選擇每個帳戶要同步處理的資訊類型，請前往 [設定] &gt; [帳戶]。"</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"關閉資料自動同步功能？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"這樣可以節省資料用量和電池用量，但您必須手動同步處理每個帳戶才能收集最新資訊。此外，系統進行更新時不會通知您。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"用量週期重設日期"</string>
@@ -2302,8 +2310,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM 卡"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM 卡"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"已更換 SIM 卡"</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"輕觸即可設定活動"</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"行動數據無法使用"</string>
@@ -2311,8 +2318,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"一律使用這張 SIM 卡通話"</string>
     <string name="sim_select_card" msgid="211285163525563293">"選取 SIM 卡"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"未插入 SIM 卡"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM 卡名稱"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"SIM 卡"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"行動通訊業者"</string>
@@ -2449,8 +2455,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"僅限聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"僅限已加星號的聯絡人"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"鬧鐘和其他個人提醒屬於優先干擾"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動開啟"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永遠不要"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>

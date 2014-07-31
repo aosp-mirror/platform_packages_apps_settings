@@ -366,8 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Enchufa tu cargador e inténtalo nuevamente."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Sin contraseña o PIN de pantalla de bloqueo"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Debes configurar una contraseña o PIN de pantalla de bloqueo antes de comenzar con la encriptación."</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"Debes crear tu patrón de desbloqueo para confirmar la encriptación del dispositivo."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"¿Deseas encriptar el dispositivo?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"La encriptación es irreversible y no puede interrumpirse; de lo contrario, perderás información. La encriptación demora al menos una hora. Durante este tiempo, la tablet se reiniciará varias veces."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"La encriptación es irreversible y no puede interrumpirse; de lo contrario, perderás información. La encriptación demora al menos una hora. Durante este tiempo, el dispositivo se reiniciará varias veces."</string>
@@ -377,8 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Espera mientras se encripta la tablet. Tiempo restante: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Espera mientras se encripta el teléfono. Tiempo restante: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Vuelve a intentarlo en <xliff:g id="DELAY">^1</xliff:g> segundos."</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Advertencia: Se borrarán los datos del dispositivo después de otros <xliff:g id="COUNT">^1</xliff:g> intentos fallidos para desbloquearlo."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Escribe la contraseña"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Encriptación incorrecta"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"La encriptación se interrumpió y no se puede completar. Por esta razón, ya no es posible acceder a los datos de tu tablet. \n\n Para reanudar el uso de tu tablet, debes restablecer los datos de fábrica. Cuando configures tu tablet luego de restablecer los datos de fábrica, tendrás la posibilidad de restaurar los datos de los que tengas una copia de seguridad en tu cuenta de Google."</string>
@@ -573,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Supervisión de red"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Permitiste a \"asistente de Wi-Fi de Google\" config. la conexión VPN; la aplic. puede superv. el tráf. de red."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ABRIR APLICACIÓN"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"¿Cambiar de asistente de Wi-Fi?"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"¿Usar <xliff:g id="THIRD_PARTY">%1$s</xliff:g> en lugar de <xliff:g id="GOOGLE_WIFI">%2$s</xliff:g> para administrar las conexiones de red?"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Pantalla de Cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Habilitar pantalla inalámbrica"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No se encontraron dispositivos cercanos."</string>
@@ -1090,6 +1086,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"¿Quieres cambiar la aplicación de SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"¿Quieres usar <xliff:g id="NEW_APP">%1$s</xliff:g> en lugar de <xliff:g id="CURRENT_APP">%2$s</xliff:g> como la aplicación de SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"¿Quieres usar <xliff:g id="NEW_APP">%s</xliff:g> como la aplicación de SMS?"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operador SIM desconocido"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s no tiene ningún sitio de aprovisionamiento."</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Inserta la tarjeta SIM y reinicia."</string>
@@ -1828,10 +1830,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Imposible borrar almac credenc"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"El almacenamiento de credenciales está activado."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Debes establecer un PIN o contraseña de la pantalla de bloqueo antes de usar el almacenamiento de credenciales."</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"Acceso al historial de uso"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"Las aplicaciones que tienen acceso al historial de uso del dispositivo."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tono de emergencia"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Establecer el comportamiento cuando se establece una llamada de emergencia"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Copia de seguridad y restablecer"</string>
@@ -1864,6 +1864,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrador del dispositivo"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Si activas este administrador, la aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> podrá realizar las siguientes operaciones:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Este administrador está activo y permite que la aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> realice las siguientes operaciones:"</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Sin título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Registro de notificaciones"</string>
@@ -2020,6 +2022,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Datos móviles"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Establecer límite de datos"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Ciclo de uso de datos"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de datos"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restr. datos 2.° plano"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Permitir datos seg. plano"</string>
@@ -2033,8 +2039,8 @@
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Tarjetas SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Redes móviles"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronizar datos autom."</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sincr. datos personales auto."</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sincronizar datos trabajo aut."</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sinc. auto. datos personales"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sinc. auto. datos trabajo"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar el ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Día del mes para restablecer el ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Ninguna aplicación usó datos durante este período."</string>
@@ -2066,8 +2072,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Esta función puede provocar que una aplicación que depende de los datos en segundo plano deje de funcionar cuando solo hay redes móviles disponibles.\n\nPuedes encontrar controles de uso de datos más adecuados en la configuración que incluye la aplicación."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Solo se pueden restringir los datos en segundo plano si estableciste un límite de datos móviles."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"¿Activar sinc. automática?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Cualquier cambio que sufran tus cuentas en la Web se copiará automáticamente en tu tablet.\n\nAlgunas cuentas también pueden copiar automáticamente en la Web los cambios que sufre tu tablet. Una cuenta de Google funciona de esta manera.\n\nPara elegir qué tipo de información sincronizar dentro de cada cuenta, ve a Configuración &gt; Cuentas."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Cualquier cambio que sufran tus cuentas en la Web se copiará automáticamente en tu dispositivo.\n\nAlgunas cuentas también pueden copiar automáticamente en la Web los cambios que sufre tu dispositivo. Una cuenta de Google funciona de esta manera.\n\nPara elegir qué tipo de información sincronizar dentro de cada cuenta, ve a Configuración &gt; Cuentas."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"¿Desactivar sinc. automática?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Así ahorrarás datos y energía, pero tendrás que sincronizar cada cuenta manualmente para recopilar la información reciente. Por otro lado, no se te notificarán las actualizaciones."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Fecha de restablecimiento del ciclo de uso"</string>
@@ -2298,8 +2306,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Tarjetas SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Tarjetas SIM"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> (<xliff:g id="SIM_NUMBER">%2$s</xliff:g>)"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"Las tarjetas SIM cambiaron."</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"Toca para establecer actividades."</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Datos móviles no disponibles"</string>
@@ -2307,8 +2314,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Usar siempre para llamadas"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Seleccionar una tarjeta SIM"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"SIM vacía"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Nombre de SIM"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"Tarjeta SIM"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Proveedor"</string>
@@ -2350,7 +2356,7 @@
     <string name="keywords_storage" msgid="7007275853993419928">"espacio en el disco disco rígido"</string>
     <string name="keywords_battery" msgid="3992479295298655138">"energía"</string>
     <string name="keywords_spell_checker" msgid="4509482591225399210">"ortografía"</string>
-    <string name="keywords_voice_input" msgid="3519547605812413860">"herramienta de reconocimiento, entrada, voz, hablar, idioma, manos libres, reconocimiento, palabra ofensivo, historial de audio, auriculares bluetooth"</string>
+    <string name="keywords_voice_input" msgid="3519547605812413860">"herramienta de reconocimiento, entrada, voz, hablar, idioma, manos libres, reconocimiento, palabra ofensiva, historial de audio, auriculares bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="8207889472282225512">"calificar idioma predeterminado hablar hablando"</string>
     <string name="keywords_date_and_time" msgid="7666950126499155141">"reloj"</string>
     <string name="keywords_factory_data_reset" msgid="3693730656843989732">"eliminar"</string>
@@ -2445,8 +2451,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Cualquiera"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Solo contactos"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Solo contactos destacados"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Las alarmas y otros recordatorios personales son interrupciones de prioridad."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activar automáticam."</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nunca"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Todas las noches"</string>
