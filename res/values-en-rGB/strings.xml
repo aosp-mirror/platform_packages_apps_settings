@@ -130,8 +130,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Rename"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Disconnect?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"This will end your connection with:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
-    <!-- no translation found for bluetooth_empty_list_user_restricted (1185354873716211496) -->
-    <skip />
+    <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"You don\'t have permission to change Bluetooth settings."</string>
     <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is now visible to nearby devices."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Disconnect <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Broadcasting"</string>
@@ -367,6 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Please plug in your charger and try again."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"No lock-screen PIN or password"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"You need to set a lock screen PIN or password before you can start encryption."</string>
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"You need to draw your unlock pattern to confirm encrypting your device."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"Encrypt?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"The encryption operation is irreversible and if you interrupt it, you\'ll lose data. Encryption takes an hour or more, during which the tablet will restart several times."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"The encryption operation is irreversible and if you interrupt it, you\'ll lose data. Encryption takes an hour or more, during which the phone will restart several times."</string>
@@ -376,6 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Wait while your tablet is being encrypted. Time remaining: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Wait while your phone is being encrypted. Time remaining: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Try again in <xliff:g id="DELAY">^1</xliff:g> seconds."</string>
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Warning: Your device will be wiped after <xliff:g id="COUNT">^1</xliff:g> more failed attempts to be unlocked!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Type your password"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Encryption unsuccessful"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Encryption was interrupted and can\'t be completed. As a result, the data on your tablet is no longer accessible. \n\n To resume using your tablet, you need to perform a factory reset. When you set up your tablet after the reset, you\'ll have an opportunity to restore any data that was backed up to your Google Account."</string>
@@ -390,7 +391,7 @@
     <string name="unlock_backup_info_summary" msgid="108524727803788172">"When Face Unlock can\'t see you, how do you want to unlock?"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"None"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
-    <string name="unlock_set_unlock_none_title" msgid="2871898266296656162">"Slide"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"Swipe"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"No security"</string>
     <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Face Unlock"</string>
     <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Low security, experimental"</string>
@@ -402,7 +403,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"High security"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Disabled by administrator, encryption policy or credential storage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"None"</string>
-    <string name="unlock_set_unlock_mode_none" msgid="5660014471997663139">"Slide"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Swipe"</string>
     <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Face Unlock"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Pattern"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
@@ -570,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Network monitoring"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"You gave “Google Wi‑Fi Assistant” permission to set up a VPN connection. That means that this app can monitor network traffic."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"OPEN APP"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"Change Wi‑Fi assistant?"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"Use <xliff:g id="THIRD_PARTY">%1$s</xliff:g> instead of <xliff:g id="GOOGLE_WIFI">%2$s</xliff:g> to manage your network connections?"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Cast screen"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Enable wireless display"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No nearby devices were found."</string>
@@ -844,8 +843,7 @@
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Start now"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Settings"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatic brightness"</string>
-    <!-- no translation found for lift_to_wake_title (4555378006856277635) -->
-    <skip />
+    <string name="lift_to_wake_title" msgid="4555378006856277635">"Lift to wake"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Font size"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Font size"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM card lock settings"</string>
@@ -1088,6 +1086,11 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Change SMS app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> as your SMS app?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Use <xliff:g id="NEW_APP">%s</xliff:g> as your SMS app?"</string>
+    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Change Wi‑Fi assistant?"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Unknown SIM operator"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s has no known provisioning website"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Please insert SIM card and restart"</string>
@@ -1189,8 +1192,6 @@
     <string name="install_unknown_applications" msgid="176855644862942064">"Allow installation of apps from unknown sources"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Your tablet and personal data are more vulnerable to attack by apps from unknown sources. You agree that you are solely responsible for any damage to your tablet or loss of data that may result from using these apps."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Your phone and personal data are more vulnerable to attack by apps from unknown sources. You agree that you are solely responsible for any damage to your phone or loss of data that may result from using these apps."</string>
-    <string name="verify_applications" msgid="2959359554974828518">"Verify apps"</string>
-    <string name="verify_applications_summary" msgid="2791141629887492480">"Regularly check device activity for security problems, and prevent or warn about potential harm."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Advanced settings"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Enable more settings options"</string>
     <string name="application_info_label" msgid="5736524913065714880">"App info"</string>
@@ -1321,22 +1322,14 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processes and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processes and <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
-    <!-- no translation found for running_processes_header_title (6588371727640789560) -->
-    <skip />
-    <!-- no translation found for running_processes_header_footer (723908176275428442) -->
-    <skip />
-    <!-- no translation found for running_processes_header_system_prefix (6104153299581682047) -->
-    <skip />
-    <!-- no translation found for running_processes_header_apps_prefix (5787594452716832727) -->
-    <skip />
-    <!-- no translation found for running_processes_header_free_prefix (4620613031737078415) -->
-    <skip />
-    <!-- no translation found for running_processes_header_used_prefix (5924288703085123978) -->
-    <skip />
-    <!-- no translation found for running_processes_header_cached_prefix (7950853188089434987) -->
-    <skip />
-    <!-- no translation found for running_processes_header_ram (996092388884426817) -->
-    <skip />
+    <string name="running_processes_header_title" msgid="6588371727640789560">"Device memory"</string>
+    <string name="running_processes_header_footer" msgid="723908176275428442">"App RAM usage"</string>
+    <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"System"</string>
+    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Apps"</string>
+    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Free"</string>
+    <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Used"</string>
+    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Cached"</string>
+    <string name="running_processes_header_ram" msgid="996092388884426817">"<xliff:g id="RAM_0">%1$s</xliff:g> of RAM"</string>
     <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Running app"</string>
     <string name="no_services" msgid="7133900764462288263">"Not active"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Services"</string>
@@ -1528,9 +1521,6 @@
     <string name="daltonizer_mode_deuteranomaly" msgid="5475532989673586329">"Deuteranomaly (red-green)"</string>
     <string name="daltonizer_mode_protanomaly" msgid="8424148009038666065">"Protanomaly (red-green)"</string>
     <string name="daltonizer_mode_tritanomaly" msgid="481725854987912389">"Tritanomaly (blue-yellow)"</string>
-    <string name="daltonizer_mode_deuteranopia" msgid="3042329512290521285">"Deuteranopia (green)"</string>
-    <string name="daltonizer_mode_protanopia" msgid="1645821472162425420">"Protanopia (red)"</string>
-    <string name="daltonizer_mode_tritanopia" msgid="6994931013805187675">"Tritanopia (blue)"</string>
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Settings"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"On"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Off"</string>
@@ -1839,6 +1829,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Credential storage couldn\'t be erased."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Credential storage is enabled."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"You need to set a lock screen PIN or password before you can use credential storage."</string>
+    <string name="usage_access_title" msgid="7486234618012778690">"Usage access"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"Apps that have access to your device\'s usage history."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Emergency tone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Set behaviour when an emergency call is placed"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Backup &amp; reset"</string>
@@ -1943,8 +1935,7 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"Remove account?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Removing this account will delete all of its messages, contacts and other data from the tablet!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Removing this account will delete all of its messages, contacts and other data from the phone!"</string>
-    <string name="remove_account_failed" product="tablet" msgid="3086620478225952725">"This account is required by some apps. You can only remove it by resetting the tablet to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset."</string>
-    <string name="remove_account_failed" product="default" msgid="6217238709175617517">"This account is required by some apps. You can only remove it by resetting the phone to factory defaults (which deletes all of your personal data) in Settings &gt; Backup &amp; reset."</string>
+    <string name="remove_account_failed" msgid="4010643669489606536">"This change isn\'t allowed by your administrator"</string>
     <string name="provider_label" msgid="7724593781904508866">"Push subscriptions"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
@@ -2027,6 +2018,8 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Mobile data"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Set data limit"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Data usage cycle"</string>
+    <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"App usage"</string>
+    <string name="data_usage_managed_user_text" msgid="7596381108336069969">"Work profile"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Data roaming"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restrict background data"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Allow background data"</string>
@@ -2073,8 +2066,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Restricting background data is possible only when you\'ve set a mobile data limit."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Turn auto-sync data on?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Any changes you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes you make on the tablet to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Any changes you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes you make on the phone to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Turn auto-sync data off?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information. And you won\'t receive notifications when updates occur."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Usage cycle reset date"</string>
@@ -2185,9 +2180,11 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"You can restrict access to apps and content from your account"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"User"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Restricted profile"</string>
-    <string name="user_add_user_title" msgid="3961861593718285403">"Add new user"</string>
-    <string name="user_add_user_message_long" msgid="3086244205384741788">"You can share this device with other people by creating additional users. Each user has their own space, which they can customise with their own apps, wallpaper and so on. Users can also adjust tablet settings like Wi‑Fi that affect everyone.\n\nAfter you create a new user, that person needs to go through a set-up process.\n\nAny user can accept updated app permissions on behalf of all other users."</string>
-    <string name="user_add_user_message_short" msgid="3310933423737035428">"After you create a new user, that person needs to go through a setup process.\n\nAny user can accept updated app permissions on behalf of all other users."</string>
+    <string name="user_add_user_title" msgid="2108112641783146007">"Add new user?"</string>
+    <!-- no translation found for user_add_user_message_long (718192651887726259) -->
+    <skip />
+    <!-- no translation found for user_add_user_message_short (1511354412249044381) -->
+    <skip />
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Set up user now?"</string>
     <string name="user_setup_dialog_message" msgid="614037943337008555">"Make sure the person is available to take the tablet and set up their space"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Set up profile now?"</string>
@@ -2197,17 +2194,16 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Only the phone\'s owner can manage users."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Restricted profiles cannot add accounts"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Delete <xliff:g id="USER_NAME">%1$s</xliff:g> from this device"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Add users when device is locked"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"New user"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"New profile"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Delete yourself?"</string>
-    <string name="user_confirm_remove_title" msgid="3856148232937245711">"Remove user?"</string>
-    <string name="user_profile_confirm_remove_title" msgid="7399928935979459016">"Remove profile?"</string>
+    <string name="user_confirm_remove_title" msgid="1163721647646152032">"Remove this user?"</string>
+    <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Remove this profile?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"You will lose your space and data on this tablet. You can\'t undo this action."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"You will lose your space and data on this phone. You can\'t undo this action."</string>
-    <string name="user_confirm_remove_message" product="tablet" msgid="4610106937214870034">"This user\'s space and data will disappear from this tablet. You can\'t undo this action."</string>
-    <string name="user_confirm_remove_message" product="default" msgid="8130264611683731142">"This user\'s space and data will disappear from this phone. You can\'t undo this action."</string>
-    <string name="user_profile_confirm_remove_message" product="tablet" msgid="3071489858733409187">"This profile\'s space and data will disappear from this tablet. You can\'t undo this action."</string>
-    <string name="user_profile_confirm_remove_message" product="default" msgid="7078238859138335893">"This profile\'s space and data will disappear from this phone. You can\'t undo this action."</string>
+    <string name="user_confirm_remove_message" msgid="1020629390993095037">"All apps and data will be deleted."</string>
+    <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"All apps and data will be deleted."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Adding new user…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Delete user"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Delete"</string>
@@ -2215,9 +2211,13 @@
     <string name="user_exit_guest_title" msgid="45738573948463472">"Exit guest"</string>
     <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Exiting guest session?"</string>
     <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Ending the guest session will remove local data."</string>
-    <string name="user_enable_calling" msgid="8658361356494445631">"Enable phone calls?"</string>
-    <string name="user_enable_calling_sms" msgid="1198756620982093854">"Enable phone calls and SMS?"</string>
+    <string name="user_enable_calling" msgid="8310589470979488255">"Allow phone calls"</string>
+    <string name="user_enable_calling_sms" msgid="794823380737672333">"Allow phone calls and SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Remove user"</string>
+    <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"Allow phone calls?"</string>
+    <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Call history will be shared with this user."</string>
+    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Allow phone calls and SMS?"</string>
+    <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"Call and SMS history will be shared with this user."</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Allow apps and content"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applications with restrictions"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Expand settings for application"</string>
@@ -2263,7 +2263,7 @@
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Preferred network type"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (recommended)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"Work SIM"</string>
-    <string name="user_restrictions_title" msgid="7745810037152772035">"Application and content restrictions"</string>
+    <string name="user_restrictions_title" msgid="5794473784343434273">"App &amp; content access"</string>
     <string name="user_rename" msgid="8523499513614655279">"RENAME"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Set app restrictions"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Controlled by <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -2287,6 +2287,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM cards"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM cards"</string>
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM cards have changed"</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"Touch to set activities"</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Mobile data is unavailable"</string>
@@ -2294,6 +2295,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Always use this for calls"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Select a SIM card"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
+    <string name="sim_slot_empty" msgid="8964505511911854688">"SIM empty"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM name"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"SIM card"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operator"</string>
@@ -2430,7 +2432,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Anyone"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Contacts only"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Starred contacts only"</string>
-    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"Alarms are always priority interruptions"</string>
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Alarms and other personal reminders are priority interruptions"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Automatically turn on"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Never"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Every night"</string>
@@ -2441,8 +2443,7 @@
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"App notifications"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Notification settings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback about this device"</string>
-    <!-- no translation found for restr_pin_enter_admin_pin (2451187374960131018) -->
-    <skip />
+    <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Enter administrator PIN"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"On"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Off"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Screen pinning"</string>
