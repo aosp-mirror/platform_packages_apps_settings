@@ -16,5 +16,10 @@
 
 <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/profile_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/user_spinner_height"
+        android:dropDownVerticalOffset="@dimen/user_spinner_offset"
+        android:dropDownHorizontalOffset="@dimen/user_spinner_offset"
+        android:paddingBottom="@dimen/user_spinner_padding"
+        android:paddingTop="@dimen/user_spinner_padding"
+        android:paddingLeft="@dimen/user_spinner_padding" />
