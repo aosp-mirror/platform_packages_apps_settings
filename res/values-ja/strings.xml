@@ -368,8 +368,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"電源に接続してもう一度お試しください。"</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"画面ロックのPIN/パスワードがありません"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"暗号化を開始するには、画面ロックのPINまたはパスワードを設定する必要があります。"</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"端末を暗号化するには、ロック解除パターンを入力する必要があります。"</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"暗号化しますか？"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"この暗号化操作は元に戻すことができず、途中で中断するとデータが失われます。暗号化には1時間以上かかり、途中でタブレットが何度か再起動されます。"</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"この暗号化操作は元に戻すことができず、途中で中断するとデータが失われます。暗号化には1時間以上かかり、途中で端末が何度か再起動されます。"</string>
@@ -379,8 +378,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"タブレットを暗号化していますのでお待ちください。残り時間: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"携帯電話を暗号化していますのでお待ちください。残り時間: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"<xliff:g id="DELAY">^1</xliff:g>秒後にやり直してください。"</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"警告: ロック解除にあと<xliff:g id="COUNT">^1</xliff:g>回失敗すると、端末のデータが消去されます。"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"パスワードを入力してください"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"暗号化できませんでした"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"暗号化処理が中断されて完了できなかったためタブレット上のデータにアクセスできなくなりました。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
@@ -575,8 +573,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"ネットワーク監視"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"「Google Wi-Fiアシスタント」はVPN接続をセットアップする権限を与えられたので、このアプリでトラフィックを監視できます。"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"アプリを開く"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"Wi‑Fiアシスタントを変更しますか？"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"<xliff:g id="GOOGLE_WIFI">%2$s</xliff:g>の代わりに<xliff:g id="THIRD_PARTY">%1$s</xliff:g>を使用してネットワーク接続を管理しますか？"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"画面のキャスト"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ワイヤレスディスプレイの有効化"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"周辺にデバイスが見つかりません"</string>
@@ -1092,6 +1088,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMSアプリを変更しますか？"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"SMSアプリとして<xliff:g id="CURRENT_APP">%2$s</xliff:g>の代わりに<xliff:g id="NEW_APP">%1$s</xliff:g>を使用しますか？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"SMSアプリとして<xliff:g id="NEW_APP">%s</xliff:g>を使用しますか？"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"不明なSIM事業者"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$sには既知のプロビジョニングウェブサイトがありません"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIMカードを挿入して再起動してください"</string>
@@ -1834,10 +1836,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"認証情報ストレージを消去不可"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"認証情報ストレージが有効になりました。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"認証情報ストレージを使用するには、画面ロックのPINまたはパスワードを設定する必要があります。"</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"使用履歴へのアクセス"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"端末の使用履歴にアクセスできるアプリ"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急時の音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"バックアップとリセット"</string>
@@ -1870,6 +1870,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"デバイス管理者"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"この管理者を有効にすると、次の操作をアプリ<xliff:g id="APP_NAME">%1$s</xliff:g>に許可することになります:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"この管理者は有効であり、アプリ<xliff:g id="APP_NAME">%1$s</xliff:g>に次の操作を許可します:"</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"無題"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"全般"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"通知ログ"</string>
@@ -2026,6 +2028,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"モバイルデータ"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"データの上限の設定"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"データ使用サイクル"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"データローミング"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"バックグラウンドデータを制限する"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"バックグラウンドデータを許可"</string>
@@ -2072,8 +2078,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"この機能をONにすると、モバイルネットワークしか使用できない場合にバックグラウンドデータに依存するアプリが停止する可能性があります。\n\nデータ使用をより適切に管理できるオプションがアプリの設定画面にないかどうかを確認してください。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"バックグラウンドデータの制限は、モバイルデータの上限を設定した場合にのみ有効となります。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"データ自動同期をONにしますか？"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"ウェブでアカウントに変更を加えると自動的にタブレットに反映されます。\n\nGoogleアカウントなど、アカウントによっては、タブレットで変更を加えた場合も自動的にウェブに反映されます。\n\n各アカウント内で同期する情報の種類は[設定]&gt;[アカウント]で選択できます。"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"ウェブでアカウントに変更を加えると自動的に携帯端末に反映されます。\n\nGoogleアカウントなど、アカウントによっては、携帯端末で変更を加えた場合も自動的にウェブに反映されます。\n\n各アカウント内で同期する情報の種類は[設定]&gt;[アカウント]で選択できます。"</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"データ自動同期をOFFにしますか？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"無効にすると、データと電池の使用を節約できますが、最新情報を取得するには手動で各アカウントを同期する必要があります。また、更新があったときに通知されません。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"使用サイクルのリセット日"</string>
@@ -2304,8 +2312,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIMカード"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIMカード"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIMカードが変更されています"</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"タップしてアクティビティを設定する"</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"モバイルデータがありません"</string>
@@ -2313,8 +2320,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"このSIMを常に通話に使用する"</string>
     <string name="sim_select_card" msgid="211285163525563293">"SIMカードを選択"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIMカード番号: <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"SIMが空です"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIMの名前"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"SIMカード"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"携帯通信会社"</string>
@@ -2451,8 +2457,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"全員"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"連絡先のみ"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"スター付きの連絡先のみ"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"アラームやその他の個人的な通知が最優先されます"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動的にON"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"設定しない"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"毎日の夜間"</string>

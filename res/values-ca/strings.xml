@@ -366,8 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Endolla el carregador i torna-ho a provar."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"No hi ha cap PIN ni cap contrasenya de bloqueig de la pantalla"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Has de definir un PIN o una contrasenya de bloqueig de la pàgina per començar l\'encriptació."</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"Has de dibuixar el patró de desbloqueig per confirmar l\'encriptació del dispositiu."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"Vols encriptar?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"L\'operació d\'encriptació és irreversible i, si l\'interromps, perdràs dades. L\'encriptació necessita una hora com a mínim, durant la qual la tauleta es reiniciarà diverses vegades."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"L\'operació d\'encriptació és irreversible i, si l\'interromps, perdràs dades. L\'encriptació necessita una hora com a mínim, durant la qual el telèfon es reiniciarà diverses vegades."</string>
@@ -377,8 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Espera mentre s\'encripta la tauleta. Temps restant: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Espera mentre s\'encripta el telèfon. Temps restant: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Torna-ho a provar d\'aquí a <xliff:g id="DELAY">^1</xliff:g> segons."</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Advertiment: si proves de desbloquejar el dispositiu <xliff:g id="COUNT">^1</xliff:g> vegades més de manera incorrecta, se n\'esborraran totes les dades."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Escriu la contrasenya"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"S\'ha produït un error en encriptar"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"S\'ha interromput l\'encriptació i no es pot completar. A conseqüència d\'això, ja no es pot accedir a les dades de la tauleta. \n\nPer reprendre l\'ús de la tauleta, cal que duguis a terme un restabliment de fàbrica. Quan configuris la tauleta després del restabliment, tindràs l\'oportunitat de restaurar les dades de les quals s\'hagi fet una còpia de seguretat al teu compte de Google."</string>
@@ -573,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Supervisió de la xarxa"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"L\'Assistent de Wi-Fi de Google pot configurar una VPN, de manera que l\'aplicació pot supervisar el trànsit de la xarxa."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"OBRE L\'APLICACIÓ"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"Vols canviar l\'assistent de Wi‑Fi?"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"Vols fer servir <xliff:g id="THIRD_PARTY">%1$s</xliff:g> en lloc de <xliff:g id="GOOGLE_WIFI">%2$s</xliff:g> per gestionar les connexions de xarxa?"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Emet a pantalla"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activa pantalla sense fil"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No s\'ha trobat cap dispositiu a prop."</string>
@@ -1090,6 +1086,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vols canviar l\'aplicació per a SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vols fer servir <xliff:g id="NEW_APP">%1$s</xliff:g> en lloc de <xliff:g id="CURRENT_APP">%2$s</xliff:g> com a aplicació per als SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vols fer servir <xliff:g id="NEW_APP">%s</xliff:g> com a aplicació per als SMS?"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Operador de SIM desconegut"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s no té cap lloc web d\'administració conegut"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insereix la targeta SIM i reinicia"</string>
@@ -1828,10 +1830,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"L\'emmagatzematge de credencials no s\'ha esborrat."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"L\'emmagatzematge de credencials està activat."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Has d\'establir un PIN o una contrasenya a la pantalla de bloqueig per poder fer servir l\'emmagatzematge de credencials."</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"Accés d\'ús"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"Aplicacions que tenen accés a l\'historial d\'ús del dispositiu"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"To d\'emergència"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Defineix el comportament quan es fa una trucada d\'emergència"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Còpia de seguretat i restauració"</string>
@@ -1864,6 +1864,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrador del dispositiu"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"En activar aquest administrador, l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g> podrà dur a terme les operacions següents:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Aquest administrador està actiu i permet que l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g> dugui a terme les operacions següents:"</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Sense títol"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Registre de notificacions"</string>
@@ -2020,6 +2022,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Dades mòbils"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Definir un límit de dades"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cicle d\'ús de dades"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Itinerància de dades"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restringeix dades en segon pla"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Permet dades en segon pla"</string>
@@ -2066,8 +2072,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Aquesta funció pot provocar que una aplicació que depengui de les dades en segon pla deixi de funcionar quan hi hagi només xarxes mòbils disponibles.\n\nPots trobar més controls d\'ús de dades adequats a la configuració disponible a l\'aplicació."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Només pots restringir les dades en segon pla si has definit un límit de dades mòbils."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Activar sincronització automàtica?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Els canvis que facis als teus comptes al web es reflectiran automàticament a la tauleta.\n\nAlguns comptes com ara els comptes de Google també reflectiran al web els canvis que facis a la tauleta.\n\nPer triar els tipus d\'informació que vols que se sincronitzi en cada compte, vés a Configuració &gt; Comptes."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Els canvis que facis als teus comptes al web es reflectiran automàticament al telèfon.\n\nAlguns comptes, com ara els comptes de Google, també reflectiran al web els canvis que hagis fet al telèfon.\n\nPer triar els tipus d\'informació que vols que se sincronitzi en cada compte, vés a Configuració &gt; Comptes."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Desactivar sincronització automàtica?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Es conservaran les dades i l\'ús de bateria, però hauràs de sincronitzar els comptes manualment per recopilar la informació recent. I no rebràs notificacions quan hi hagi actualitzacions."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Data de restabliment del cicle d\'ús"</string>
@@ -2298,8 +2306,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Targetes SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Targetes SIM"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"Les targetes SIM han canviat."</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"Toca per definir les activitats."</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Les dades mòbils no estan disponibles."</string>
@@ -2307,8 +2314,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Utilitza sempre per a les trucades"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Selecciona una targeta SIM"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"Targeta SIM buida"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Nom de la targeta SIM"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"Targeta SIM"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operador de telefonia mòbil"</string>
@@ -2445,8 +2451,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Qualsevol usuari"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Només els contactes"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Només els contactes destacats"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Les alarmes i altres recordatoris personals són interrupcions prioritàries."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activa automàticam."</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Mai"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Cada nit"</string>

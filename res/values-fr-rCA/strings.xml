@@ -366,8 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Veuillez brancher votre chargeur, puis réessayer."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Aucun NIP ni mot de passe saisi pour le verrouillage de l\'écran"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Vous devez définir un NIP ou un mot de passe pour le verrouillage de l\'écran avant de lancer le chiffrement."</string>
-    <!-- no translation found for crypt_keeper_confirm_encrypt (736289627726831055) -->
-    <skip />
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"Vous devez dessiner votre schéma de déverrouillage pour confirmer le chiffrement de votre appareil."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"Chiffrer?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"Le chiffrement est irréversible, et toute interruption du processus peut entraîner la perte de données. L\'opération peut prendre une heure, voire plus, au cours de laquelle la tablette sera redémarrée à plusieurs reprises."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"Le chiffrement est irréversible, et toute interruption du processus peut entraîner la perte de données. L\'opération peut prendre une heure, voire plus, au cours de laquelle le téléphone sera redémarré à plusieurs reprises."</string>
@@ -377,8 +376,7 @@
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Veuillez patienter pendant le chiffrement de votre tablette. Temps restant : <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Veuillez patienter pendant le chiffrement de votre téléphone. Temps restant : <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Réessayez dans <xliff:g id="DELAY">^1</xliff:g> secondes."</string>
-    <!-- no translation found for crypt_keeper_warn_wipe (2738374897337991667) -->
-    <skip />
+    <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Attention : Les données de votre appareil seront effacées si vous effectuez encore <xliff:g id="COUNT">^1</xliff:g> tentatives de déverrouillage infructueuses."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Saisissez votre mot de passe."</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Échec du chiffrement"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Impossible de terminer le chiffrement, car celui-ci a été interrompu. Par conséquent, les données de votre tablette ne sont plus accessibles.\n\nPour continuer d\'utiliser votre tablette, vous devez rétablir la configuration d\'usine. Une fois cette opération terminée, vous pourrez restaurer toutes les données sauvegardées sur votre compte Google lors de la nouvelle configuration de votre tablette."</string>
@@ -573,8 +571,6 @@
     <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Surveillance réseau"</string>
     <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Vous avez autor. assist. Wi‑Fi Google à config. connexion RPV. L\'appli peut contrôler trafic réseau."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"OUVRIR L\'APPLICATION"</string>
-    <string name="wifi_assistant_change_title" msgid="5328722306907867503">"Changer d\'assistant Wi‑Fi?"</string>
-    <string name="wifi_assistant_change_message" msgid="5460174513121389422">"Utiliser « <xliff:g id="THIRD_PARTY">%1$s</xliff:g> » au lieu de « <xliff:g id="GOOGLE_WIFI">%2$s</xliff:g> » pour gérer les connexions réseau?"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Écran de diffusion"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activer l\'affichage sans fil"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Aucun appareil détecté à proximité."</string>
@@ -1090,6 +1086,12 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Modifier l\'application de messagerie texte?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Utiliser <xliff:g id="NEW_APP">%1$s</xliff:g> au lieu de <xliff:g id="CURRENT_APP">%2$s</xliff:g> comme application de messagerie texte?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Utiliser <xliff:g id="NEW_APP">%s</xliff:g> comme application de messagerie texte?"</string>
+    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
+    <skip />
+    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
+    <skip />
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Fournisseur de la carte SIM inconnu"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"Aucun site Web de configuration connu pour %1$s"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insérez la carte SIM, puis redémarrez."</string>
@@ -1830,10 +1832,8 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Impossible eff. stockage identifiants."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Stockage des identifiants activé."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Avant d\'utiliser le stockage d\'identifiants, vous devez définir un NIP ou un mot de passe pour le verrouillage d\'écran."</string>
-    <!-- no translation found for usage_access_title (7486234618012778690) -->
-    <skip />
-    <!-- no translation found for usage_access_summary (5393473213889000980) -->
-    <skip />
+    <string name="usage_access_title" msgid="7486234618012778690">"Accès aux données d\'utilisation"</string>
+    <string name="usage_access_summary" msgid="5393473213889000980">"Applications qui ont accès à l\'historique d\'utilisation de votre appareil."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sonnerie d\'urgence"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Définir le comportement en cas d\'appel d\'urgence"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Sauvegarder et réinitialiser"</string>
@@ -1866,6 +1866,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrateur du périphérique"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"L\'activation de cet administrateur permettra à l\'application <xliff:g id="APP_NAME">%1$s</xliff:g> d\'effectuer les opérations suivantes :"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Cet administrateur est activé et permet à l\'application <xliff:g id="APP_NAME">%1$s</xliff:g> d\'effectuer les opérations suivantes :"</string>
+    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Sans titre"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Général"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Journal des notifications"</string>
@@ -2022,6 +2024,10 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Données cellulaires"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Définir limite consommation de données"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cycle de consommation"</string>
+    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
+    <skip />
+    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
+    <skip />
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Itinérance des données"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Limiter données en arrière-plan"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Autor. données arrière-plan"</string>
@@ -2068,8 +2074,10 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Cette fonctionnalité peut empêcher certaines applications de fonctionner lorsque celles-ci sont dépendantes des données en arrière-plan et que seuls des réseaux cellulaires sont disponibles.\n\nVous trouverez des options plus adaptées en matière de contrôle de la consommation des données dans les paramètres de l\'application."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"La restriction des données en arrière-plan n\'est possible que si vous avez défini une limite pour les données cellulaires."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Activer synchro auto données?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7312283529426636845">"Les modifications que vous apportez à vos comptes sur le Web sont automatiquement copiées sur votre tablette.\n\nCertains comptes permettent également de copier automatiquement sur le Web toutes les modifications que vous effectuez sur la tablette. C\'est le cas des comptes Google.\n\nPour sélectionner le type d\'informations à synchroniser au sein de chaque compte, accédez à Paramètres &gt; Comptes."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="2374996799819303283">"Les modifications que vous apportez à vos comptes sur le Web sont automatiquement copiées sur votre téléphone.\n\nCertains comptes permettent également de copier automatiquement sur le Web toutes les modifications que vous effectuez sur le téléphone. C\'est le cas des comptes Google.\n\nPour sélectionner le type d\'informations à synchroniser au sein de chaque compte, accédez à Paramètres &gt; Comptes."</string>
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
+    <skip />
+    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
+    <skip />
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Désactiver synchro auto données?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Cela limite la consommation des données et l\'utilisation de la batterie, mais vous devrez synchroniser manuellement chaque compte pour recueillir les informations récentes. Par ailleurs, vous ne recevrez pas de notifications en cas de mise à jour."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Date de réinitialisation du cycle de consommation"</string>
@@ -2302,8 +2310,7 @@
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Cartes SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Cartes SIM"</string>
-    <!-- no translation found for sim_settings_summary (4050372057097516088) -->
-    <skip />
+    <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> – <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"Les cartes SIM ont été changées."</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"Touchez pour définir les activités"</string>
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Imposs. accéder rés. donn. cellulaires"</string>
@@ -2311,8 +2318,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Toujours l\'utiliser pour les appels"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Sélectionnez une carte SIM"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"Carte SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <!-- no translation found for sim_slot_empty (8964505511911854688) -->
-    <skip />
+    <string name="sim_slot_empty" msgid="8964505511911854688">"La fente pour carte SIM est vide"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Nom de la carte SIM"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"Carte SIM"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Fournisseur de services"</string>
@@ -2449,8 +2455,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"N\'importe qui"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Contacts seulement"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Contacts favoris seulement"</string>
-    <!-- no translation found for zen_mode_alarm_info (1326662332892889735) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Alarmes et autres rappels personnels constituent des interruptions prioritaires."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activation auto"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Jamais"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Tous les soirs"</string>
