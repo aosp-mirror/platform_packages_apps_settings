@@ -16,11 +16,13 @@
 
 package com.android.settings.vpn2;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
@@ -29,10 +31,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.Process;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.TextUtils;
@@ -44,11 +49,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Spinner;
 
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
@@ -56,6 +64,10 @@ import com.android.internal.net.VpnProfile;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.UserSpinnerAdapter;
+import com.android.settings.UserSpinnerAdapter.UserDetails;
+import com.android.settings.Utils;
+
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -64,11 +76,12 @@ import java.util.List;
 
 public class VpnSettings extends SettingsPreferenceFragment implements
         Handler.Callback, Preference.OnPreferenceClickListener,
-        DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
+        DialogInterface.OnClickListener, DialogInterface.OnDismissListener, OnItemSelectedListener {
     private static final String TAG = "VpnSettings";
 
     private static final String TAG_LOCKDOWN = "lockdown";
 
+    private static final String ACTION_VPN_SETTINGS = "android.net.vpn.SETTINGS";
     private static final String EXTRA_PICK_LOCKDOWN = "android.net.vpn.PICK_LOCKDOWN";
 
     // TODO: migrate to using DialogFragment when editing
@@ -89,6 +102,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     private String mSelectedKey;
 
     private boolean mUnavailable;
+    private UserSpinnerAdapter mProfileSpinnerAdapter;
 
     @Override
     public void onCreate(Bundle savedState) {
@@ -113,6 +127,39 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                         savedState.getBoolean("VpnEditing"));
             }
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Context context = getActivity();
+        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(mUm, getActivity());
+        if (mProfileSpinnerAdapter != null) {
+             Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
+                    R.layout.spinner_view, null);
+
+            spinner.setAdapter(mProfileSpinnerAdapter);
+            spinner.setOnItemSelectedListener(this);
+            setPinnedHeaderView(spinner);
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
+        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
+            Intent intent = new Intent(ACTION_VPN_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Activity activity = getActivity();
+            activity.startActivityAsUser(intent, selectedUser);
+            activity.finish();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Nothing to do
     }
 
     @Override
