@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -31,6 +32,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.settings.drawable.CircleFramedDrawable;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 
@@ -48,12 +50,14 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
         public UserDetails(UserHandle userHandle, UserManager um, Context context) {
             mUserHandle = userHandle;
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
-            name = userInfo.name;
-            Bitmap bitmap = um.getUserIcon(userHandle.getIdentifier());
-            if (bitmap != null) {
-                icon = CircleFramedDrawable.getInstance(context, bitmap);
+            if (userInfo.isManagedProfile()) {
+                name = context.getString(R.string.managed_user_title);
+                icon = Resources.getSystem().getDrawable(
+                        com.android.internal.R.drawable.ic_corp_icon);
             } else {
-                icon = null;
+                name = userInfo.name;
+                Bitmap bitmap = um.getUserIcon(userHandle.getIdentifier());
+                icon = (bitmap == null) ? null : CircleFramedDrawable.getInstance(context, bitmap);
             }
         }
     }
