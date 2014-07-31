@@ -132,7 +132,7 @@ public class UidDetailProvider {
             final UserInfo info = um.getUserInfo(userHandle);
             if (info != null) {
                 if (info.isManagedProfile()) {
-                    detail.label = res.getString(R.string.data_usage_managed_user_text);
+                    detail.label = res.getString(R.string.managed_user_title);
                     detail.icon = Resources.getSystem().getDrawable(
                             com.android.internal.R.drawable.ic_corp_icon);
                 } else {
