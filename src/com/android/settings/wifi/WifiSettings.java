@@ -38,7 +38,6 @@ import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppManager;
 import android.net.NetworkScorerAppManager.NetworkScorerAppData;
 import android.net.wifi.ScanResult;
-import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -871,23 +870,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION.equals(action) ||
                 WifiManager.LINK_CONFIGURATION_CHANGED_ACTION.equals(action)) {
                 updateAccessPoints();
-        } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
-            //Ignore supplicant state changes when network is connected
-            //TODO: we should deprecate SUPPLICANT_STATE_CHANGED_ACTION and
-            //introduce a broadcast that combines the supplicant and network
-            //network state change events so the apps dont have to worry about
-            //ignoring supplicant state change when network is connected
-            //to get more fine grained information.
-            SupplicantState state = (SupplicantState) intent.getParcelableExtra(
-                    WifiManager.EXTRA_NEW_STATE);
-            if (!mConnected.get() && SupplicantState.isHandshakeState(state)) {
-                updateConnectionState(WifiInfo.getDetailedStateOf(state));
-             } else {
-                 // During a connect, we may have the supplicant
-                 // state change affect the detailed network state.
-                 // Make sure a lost connection is updated as well.
-                 updateConnectionState(null);
-             }
         } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);

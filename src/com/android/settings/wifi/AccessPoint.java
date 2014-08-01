@@ -427,17 +427,12 @@ class AccessPoint extends Preference {
         StringBuilder visibility = new StringBuilder();
 
         long now = System.currentTimeMillis();
-        long age = (now - mSeen);
-        if (age < VISIBILITY_MAX_AGE_IN_MILLI) {
-            //show age in seconds, in the form xx
-            visibility.append(Long.toString((age / SECOND_TO_MILLI) % SECOND_TO_MILLI))
-                    .append("s");
-        } else {
-            //not seen for more than 1000 seconds
-            visibility.append("!");
-        }
 
         if (mInfo != null) {
+            String bssid = mInfo.getBSSID();
+            if (bssid != null) {
+                visibility.append(" ").append(bssid);
+            }
             visibility.append(" sc=").append(Integer.toString(mInfo.score));
             visibility.append(" ");
             visibility.append(String.format("tx=%.1f,", mInfo.txSuccessRate));
