@@ -921,20 +921,7 @@ public class ManageApplications extends Fragment implements
         mNumTabs = mTabs.size();
 
         final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        List<UserHandle> userProfiles = um.getUserProfiles();
-        if (userProfiles.size() >= 2) {
-
-            UserHandle myUserHandle = new UserHandle(UserHandle.myUserId());
-            userProfiles.remove(myUserHandle);
-            userProfiles.add(0, myUserHandle);
-            ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
-            final int count = userProfiles.size();
-            for (int i = 0; i < count; i++) {
-                userDetails.add(new UserDetails(userProfiles.get(i), um, mContext));
-            }
-            // TODO: Factor out spinner creation in a method in Utils class. See: http://b/16645615
-            mProfileSpinnerAdapter = new UserSpinnerAdapter(mContext, userDetails);
-        }
+        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, mContext);
     }
 
 
@@ -1047,7 +1034,6 @@ public class ManageApplications extends Fragment implements
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
         if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
-            // TODO: Factor out intent starting in a method in Utils class. See: http://b/16645615
             Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivityAsUser(intent, selectedUser);

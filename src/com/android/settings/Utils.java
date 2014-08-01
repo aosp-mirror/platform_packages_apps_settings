@@ -66,6 +66,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.drawable.CircleFramedDrawable;
@@ -73,6 +74,7 @@ import com.android.settings.drawable.CircleFramedDrawable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -635,6 +637,34 @@ public final class Utils {
     public static boolean isManagedProfile(UserManager userManager) {
         UserInfo currentUser = userManager.getUserInfo(userManager.getUserHandle());
         return currentUser.isManagedProfile();
+    }
+
+    /**
+     * Creates a {@link UserSpinnerAdapter} if there is more than one profile on the device.
+     *
+     * <p> The adapter can be used to populate a spinner that switches between the Settings
+     * app on the different profiles.
+     *
+     * @return a {@link UserSpinnerAdapter} or null if there is only one profile.
+     */
+    public static UserSpinnerAdapter createUserSpinnerAdapter(UserManager userManager,
+            Context context) {
+        List<UserHandle> userProfiles = userManager.getUserProfiles();
+        if (userProfiles.size() < 2) {
+            return null;
+        }
+
+        UserHandle myUserHandle = new UserHandle(UserHandle.myUserId());
+        // The first option should be the current profile
+        userProfiles.remove(myUserHandle);
+        userProfiles.add(0, myUserHandle);
+
+        ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
+        final int count = userProfiles.size();
+        for (int i = 0; i < count; i++) {
+            userDetails.add(new UserDetails(userProfiles.get(i), userManager, context));
+        }
+        return new UserSpinnerAdapter(context, userDetails);
     }
 
     /**
