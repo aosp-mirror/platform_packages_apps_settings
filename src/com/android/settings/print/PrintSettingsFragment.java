@@ -16,7 +16,6 @@
 
 package com.android.settings.print;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
@@ -63,6 +62,7 @@ import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -182,21 +182,10 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         getListView().setEmptyView(emptyView);
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
-        List<UserHandle> userProfiles = um.getUserProfiles();
-        if (userProfiles.size() >= 2) {
+        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, getActivity());
+        if (mProfileSpinnerAdapter != null) {
             Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
                     R.layout.spinner_view, null);
-
-            UserHandle myUserHandle = Process.myUserHandle();
-            userProfiles.remove(myUserHandle);
-            userProfiles.add(0, myUserHandle);
-            ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
-            final int count = userProfiles.size();
-            for (int i = 0; i < count; i++) {
-                userDetails.add(new UserDetails(userProfiles.get(i), um, getActivity()));
-            }
-
-            mProfileSpinnerAdapter = new UserSpinnerAdapter(getActivity(), userDetails);
             spinner.setAdapter(mProfileSpinnerAdapter);
             spinner.setOnItemSelectedListener(this);
             setPinnedHeaderView(spinner);
