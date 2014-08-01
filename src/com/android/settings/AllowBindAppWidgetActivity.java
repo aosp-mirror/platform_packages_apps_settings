@@ -25,7 +25,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.os.UserHandle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
@@ -42,6 +42,7 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
 
     private CheckBox mAlwaysUse;
     private int mAppWidgetId;
+    private UserHandle mProfile;
     private ComponentName mComponentName;
     private String mCallingPackage;
     private AppWidgetManager mAppWidgetManager;
@@ -55,27 +56,32 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
             setResult(RESULT_CANCELED);
             if (mAppWidgetId != -1 && mComponentName != null && mCallingPackage != null) {
                 try {
-                    mAppWidgetManager.bindAppWidgetId(mAppWidgetId, mComponentName);
-                    Intent result = new Intent();
-                    result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-                    setResult(RESULT_OK, result);
+                    final boolean bound = mAppWidgetManager.bindAppWidgetIdIfAllowed(mAppWidgetId,
+                            mProfile, mComponentName, null);
+                    if (bound) {
+                        Intent result = new Intent();
+                        result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+                        setResult(RESULT_OK, result);
+                    }
                 } catch (Exception e) {
                     Log.v("BIND_APPWIDGET", "Error binding widget with id "
                             + mAppWidgetId + " and component " + mComponentName);
                 }
-            }
-            boolean alwaysAllowBind = mAlwaysUse.isChecked();
-            if (alwaysAllowBind != mAppWidgetManager.hasBindAppWidgetPermission(mCallingPackage)) {
-                mAppWidgetManager.setBindAppWidgetPermission(mCallingPackage, alwaysAllowBind);
+
+                final boolean alwaysAllowBind = mAlwaysUse.isChecked();
+                if (alwaysAllowBind != mAppWidgetManager.hasBindAppWidgetPermission(
+                        mCallingPackage)) {
+                    mAppWidgetManager.setBindAppWidgetPermission(mCallingPackage,
+                            alwaysAllowBind);
+                }
             }
         }
         finish();
     }
 
-    protected void onDestroy() {
-        if (!mClicked) {
+    protected void onPause() {
+        if (isDestroyed() && !mClicked) {
             setResult(RESULT_CANCELED);
-            finish();
         }
         super.onDestroy();
     }
@@ -87,7 +93,12 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
         if (intent != null) {
             try {
                 mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-                mComponentName = (ComponentName)
+                mProfile = intent.getParcelableExtra(
+                        AppWidgetManager.EXTRA_APPWIDGET_PROVIDER_PROFILE);
+                if (mProfile == null) {
+                    mProfile = android.os.Process.myUserHandle();
+                }
+                mComponentName =
                         intent.getParcelableExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER);
                 mCallingPackage = getCallingPackage();
                 PackageManager pm = getPackageManager();
@@ -123,7 +134,8 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                         getResources().getDimension(R.dimen.bind_app_widget_dialog_checkbox_bottom_padding)));
 
         mAppWidgetManager = AppWidgetManager.getInstance(this);
-        mAlwaysUse.setChecked(mAppWidgetManager.hasBindAppWidgetPermission(mCallingPackage));
+        mAlwaysUse.setChecked(mAppWidgetManager.hasBindAppWidgetPermission(mCallingPackage,
+                mProfile.getIdentifier()));
 
         setupAlert();
     }
