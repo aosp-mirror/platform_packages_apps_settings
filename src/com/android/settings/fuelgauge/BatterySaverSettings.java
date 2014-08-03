@@ -26,14 +26,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
 import android.util.Log;
+import android.widget.Switch;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.notification.SettingPref;
+import com.android.settings.widget.SwitchBar;
 
-public class BatterySaverSettings extends SettingsPreferenceFragment {
+public class BatterySaverSettings extends SettingsPreferenceFragment
+        implements SwitchBar.OnSwitchChangeListener {
     private static final String TAG = "BatterySaverSettings";
-    private static final String KEY_ALWAYS_ON = "always_on";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String KEY_TURN_ON_AUTOMATICALLY = "turn_on_automatically";
     private static final long WAIT_FOR_SWITCH_ANIM = 500;
 
@@ -42,8 +46,10 @@ public class BatterySaverSettings extends SettingsPreferenceFragment {
 
     private Context mContext;
     private boolean mCreated;
-    private SettingPref mAlwaysOnPref;
     private SettingPref mTriggerPref;
+    private SwitchBar mSwitchBar;
+    private Switch mSwitch;
+    private boolean mValidListener;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -53,25 +59,13 @@ public class BatterySaverSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.battery_saver_settings);
 
         mContext = getActivity();
-        mAlwaysOnPref = new SettingPref(SettingPref.TYPE_GLOBAL, KEY_ALWAYS_ON,
-                Global.LOW_POWER_MODE, 0) {
-            @Override
-            protected boolean setSetting(Context context, int value) {
-                mHandler.removeCallbacks(mStartMode);
-                if (value == 0) {
-                    return super.setSetting(context, value);
-                } else {
-                    // about lose animations, make sure we don't turn the mode on until the switch
-                    // stops moving
-                    mHandler.postDelayed(mStartMode, WAIT_FOR_SWITCH_ANIM);
-                    return true;
-                }
-            }
-        };
+        mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
+        mSwitch = mSwitchBar.getSwitch();
+        mSwitchBar.show();
+
         mTriggerPref = new SettingPref(SettingPref.TYPE_GLOBAL, KEY_TURN_ON_AUTOMATICALLY,
                 Global.LOW_POWER_MODE_TRIGGER_LEVEL,
-                mContext.getResources().getInteger(
-                        com.android.internal.R.integer.config_lowBatteryWarningLevel),
+                0, /*default*/
                 getResources().getIntArray(R.array.battery_saver_trigger_values)) {
             @Override
             protected String getCaption(Resources res, int value) {
@@ -81,20 +75,58 @@ public class BatterySaverSettings extends SettingsPreferenceFragment {
                 return res.getString(R.string.battery_saver_turn_on_automatically_never);
             }
         };
-        mAlwaysOnPref.init(this);
         mTriggerPref.init(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mSwitchBar.hide();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mSettingsObserver.setListening(true);
+        if (!mValidListener) {
+            mSwitchBar.addOnSwitchChangeListener(this);
+            mValidListener = true;
+        }
+        updateSwitch();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mSettingsObserver.setListening(false);
+        if (mValidListener) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+            mValidListener = false;
+        }
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (isChecked) {
+            mHandler.postDelayed(mStartMode, WAIT_FOR_SWITCH_ANIM);
+        } else {
+            if (DEBUG) Log.d(TAG, "Stopping LOW_POWER_MODE from settings");
+            Global.putInt(getContentResolver(), Global.LOW_POWER_MODE, 0);
+        }
+    }
+
+    private void updateSwitch() {
+        final boolean checked = Global.getInt(getContentResolver(), Global.LOW_POWER_MODE, 0) != 0;
+        if (checked == mSwitch.isChecked()) return;
+
+        // set listener to null so that that code below doesn't trigger onCheckedChanged()
+        if (mValidListener) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+        }
+        mSwitch.setChecked(checked);
+        if (mValidListener) {
+            mSwitchBar.addOnSwitchChangeListener(this);
+        }
     }
 
     private final Runnable mStartMode = new Runnable() {
@@ -103,8 +135,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment {
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d(TAG, "Starting LOW_POWER_MODE from settings");
-                    Global.putInt(mContext.getContentResolver(), Global.LOW_POWER_MODE, 1);
+                    if (DEBUG) Log.d(TAG, "Starting LOW_POWER_MODE from settings");
+                    Global.putInt(getContentResolver(), Global.LOW_POWER_MODE, 1);
                 }
             });
         }
@@ -122,7 +154,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (LOW_POWER_MODE_URI.equals(uri)) {
-                mAlwaysOnPref.update(mContext);
+                updateSwitch();
             }
             if (LOW_POWER_MODE_TRIGGER_LEVEL_URI.equals(uri)) {
                 mTriggerPref.update(mContext);
