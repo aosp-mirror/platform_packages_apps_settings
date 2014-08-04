@@ -303,6 +303,9 @@ public class RadioInfo extends Activity {
         imsRegRequiredButton = (Button) findViewById(R.id.ims_reg_required);
         imsRegRequiredButton.setOnClickListener(mImsRegRequiredHandler);
 
+        moOverVolteButton = (Button) findViewById(R.id.mo_over_volte);
+        moOverVolteButton.setOnClickListener(mMoOverVolteHandler);
+
         smsOverImsButton = (Button) findViewById(R.id.sms_over_ims);
         smsOverImsButton.setOnClickListener(mSmsOverImsHandler);
 
@@ -360,6 +363,7 @@ public class RadioInfo extends Activity {
         updatePowerState();
         updateCellInfoListRate();
         updateImsRegRequiredState();
+        updateMoOverImsState();
         updateSmsOverImsState();
         updateLteRamDumpState();
         updateProperties();
@@ -983,6 +987,35 @@ public class RadioInfo extends Activity {
                             getString(R.string.ims_reg_required_off) :
                             getString(R.string.ims_reg_required_on);
         imsRegRequiredButton.setText(buttonText);
+    }
+
+    private Button moOverVolteButton;
+    OnClickListener mMoOverVolteHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            boolean moOverVolteEnabled = isMoOverVolteEnabled();
+            log(String.format("toggle %s: currently %s",
+                    TelephonyProperties.PROPERTY_DBG_IMS_VOLTE_ENABLE,
+                    (moOverVolteEnabled ? "on" : "off")));
+            boolean newValue = !moOverVolteEnabled;
+            SystemProperties.set(TelephonyProperties.PROPERTY_DBG_IMS_VOLTE_ENABLE,
+                    newValue ? "1" : "0");
+            updateMoOverImsState();
+        }
+    };
+
+    private boolean isMoOverVolteEnabled() {
+        return SystemProperties.getInt(TelephonyProperties.PROPERTY_DBG_IMS_VOLTE_ENABLE,
+                TelephonyProperties.PROPERTY_DBG_IMS_VOLTE_ENABLE_DEAFULT) == 1;
+    }
+
+    private void updateMoOverImsState() {
+        boolean moOverVolteEnabled = isMoOverVolteEnabled();
+        log("updateMoOverImsState isMoOverVolteEnabled()=" + moOverVolteEnabled);
+        String buttonText = moOverVolteEnabled ?
+                getString(R.string.mo_over_volte_off) :
+                getString(R.string.mo_over_volte_on);
+        moOverVolteButton.setText(buttonText);
     }
 
     private Button smsOverImsButton;
