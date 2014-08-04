@@ -57,6 +57,12 @@
                 android:title="@string/lift_to_wake_title"
                 android:persistent="false" />
 
+        <SwitchPreference
+                android:key="doze"
+                android:title="@string/doze_title"
+                android:summary="@string/doze_summary"
+                android:persistent="false" />
+
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
