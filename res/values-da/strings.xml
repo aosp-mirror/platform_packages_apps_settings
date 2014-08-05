@@ -366,7 +366,7 @@
     <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"Tilslut din oplader, og prøv igen."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Ingen pinkode eller adgangskode til skærmlås"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"Du skal angive en pinkode eller adgangskode for skærmlås, inden du kan starte krypteringen."</string>
-    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"Du skal tegne dit oplåsningsmønster for at bekræfte krypteringen af din enhed."</string>
+    <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"Du skal tegne dit mønster til at låse op for at bekræfte krypteringen af din enhed."</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"Vil du kryptere?"</string>
     <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"Denne handling kan ikke fortrydes, og den kan ikke afbrydes uden tab af data til følge. Krypteringen tager mindst en time, og i den tid genstartes tabletten flere gange."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"Denne handling kan ikke fortrydes, og den kan ikke afbrydes uden tab af data til følge. Krypteringen tager mindst en time, og i den tid genstartes telefonen flere gange."</string>
@@ -493,7 +493,6 @@
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Enhedsindstillinger"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Parret enhed"</string>
     <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Navn"</string>
-    <string name="bluetooth_preference_paired_dialog_use_label" msgid="8547827103286093381">"Brug til"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Internetforbindelse"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Tastatur"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Kontaktpersoner og opkaldshistorik"</string>
@@ -520,6 +519,10 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Filoverførsel"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Inputenhed"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Internetadgang"</string>
+    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
+    <skip />
+    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
+    <skip />
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Deling af internetforbindelse"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"Adgang til meddelelse"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> afbrydes fra medielyd."</string>
@@ -531,7 +534,8 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Parret Bluetooth-enhed"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Forbind"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Opret forbindelse til Bluetooth-enhed"</string>
-    <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiler"</string>
+    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
+    <skip />
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Omdøb"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Tillad indgående filoverførsler"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Forbundet til medielyd"</string>
@@ -1086,12 +1090,9 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vil du skifte sms-app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vil du bruge <xliff:g id="NEW_APP">%1$s</xliff:g> i stedet for <xliff:g id="CURRENT_APP">%2$s</xliff:g> som din standardapp til sms?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vil du bruge <xliff:g id="NEW_APP">%s</xliff:g> som din sms-app?"</string>
-    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
-    <skip />
+    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Vil du skifte Wi-Fi-assistent?"</string>
+    <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Vil du bruge <xliff:g id="NEW_APP">%1$s</xliff:g> i stedet for <xliff:g id="CURRENT_APP">%2$s</xliff:g> til at administrere dine netværksforbindelser?"</string>
+    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Vil du bruge <xliff:g id="NEW_APP">%s</xliff:g> til at administrere dine netværksforbindelser?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"SIM fra ukendt mobilselskab"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s har intet kendt website til provisionering"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Indsæt SIM-kort, og genstart"</string>
@@ -1688,11 +1689,9 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Medieserver"</string>
     <string name="battery_saver" msgid="1426682272004907982">"Batteribesparelse"</string>
-    <string name="battery_saver_always_on_title" msgid="5204387375575431936">"Altid slået til"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Slå automatisk til"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Aldrig"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"batteriet er på %1$d %%"</string>
-    <string name="battery_saver_description" msgid="8859033102348703807">"For at hjælpe med at forbedre batteriets levetid, reducerer Batteribesparende enhedens ydeevne.\n\nBatteribesparende slukkes, når strømstikket er sat i."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"hukommelse brugt"</string>
@@ -1842,7 +1841,7 @@
     <string name="backup_data_summary" msgid="708773323451655666">"Sikkerhedskopiér appdata, Wi-Fi-adgangskoder og andre indstillinger på Googles servere"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Backupkonto"</string>
     <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Der er ingen konto, der i øjeblikket lagrer sikkerhedskopierede data"</string>
-    <string name="include_app_data_title" msgid="2829970132260278394">"Medtag appdata"</string>
+    <string name="include_app_data_title" msgid="2829970132260278394">"Inkluder appdata"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisk gendannelse"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Når du geninstallerer en app, skal du gendanne sikkerhedskopierede indstillinger og data"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Kode til lokal sikkerhedskopi"</string>
@@ -1858,12 +1857,19 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktiver"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Enhedsadministratorer"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Ingen tilgængelige enhedsadministratorer"</string>
+    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
+    <skip />
+    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
+    <skip />
+    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
+    <skip />
     <string name="no_trust_agents" msgid="7450273545568977523">"Der er ingen tilgængelige trust agents"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Aktivér enhedsadministrator?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Aktivér"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Enhedsadministrator"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Hvis denne administrator aktiveres, får appen <xliff:g id="APP_NAME">%1$s</xliff:g> tilladelse til at foretage følgende handlinger:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Denne administrator er aktiv og tillader, at appen <xliff:g id="APP_NAME">%1$s</xliff:g> kan foretage disse handlinger:"</string>
+    <string name="profile_owner_add_title" msgid="1127236753400079839">"Profilejer"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Ikke-navngivet"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Generelt"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Underretningslogfil"</string>
@@ -1936,8 +1942,7 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"Vil du fjerne kontoen?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Hvis du fjerner denne konto, slettes alle tilknyttede beskeder, kontaktpersoner og andre data fra din tablet!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Hvis du fjerner denne konto, slettes alle tilknyttede beskeder, kontaktpersoner og andre data fra telefonen!"</string>
-    <!-- no translation found for remove_account_failed (4010643669489606536) -->
-    <skip />
+    <string name="remove_account_failed" msgid="4010643669489606536">"Din administrator har ikke givet tilladelse til at foretage denne ændring"</string>
     <string name="provider_label" msgid="7724593781904508866">"Pushabonnementer"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
@@ -2020,10 +2025,7 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Mobildata"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Angiv datagrænse"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cyklus for dataforbrug"</string>
-    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
-    <skip />
-    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
-    <skip />
+    <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Appforbrug"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Dataroaming"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Begræns baggrundsdata"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Tillad baggrundsdata"</string>
@@ -2070,10 +2072,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Denne funktion kan medføre, at en app, som er afhængig af baggrundsdata, ikke længere virker, hvis der kun er mobilnetværk tilgængelige.\n\nDu kan finde flere relevante kontrolelementer til databrug i de tilgængelige indstillinger i appen."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Begrænsning af baggrundsdata er kun muligt, når du har angivet en grænse for mobildata."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Slå aut. synk. af data til?"</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Eventuelle ændringer, som du foretager i dine konti på nettet, kopieres automatisk til din tablet.\n\nNogle konti kan også automatisk kopiere de ændringer, du foretager på din tablet, til nettet. En Google-konto fungerer på denne måde."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Eventuelle ændringer, som du foretager i dine konti på nettet, kopieres automatisk til din telefon.\n\nNogle konti kan også automatisk kopiere de ændringer, du foretager på telefonen, til nettet. En Google-konto fungerer på denne måde."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Slå aut. synk. af data fra?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Dette vil sænke data- og batteriforbruget, men du skal til gengæld synkronisere hver konto manuelt for at hente de seneste oplysninger, og du vil ikke modtage underretninger, når der kommer nye opdateringer."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Dato for nulstilling af forbrugsperiode"</string>
@@ -2184,14 +2184,12 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Du kan begrænse adgangen til apps og indhold fra din konto"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Bruger"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Begrænset profil"</string>
-    <!-- no translation found for user_add_user_title (2108112641783146007) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_long (718192651887726259) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_short (1511354412249044381) -->
-    <skip />
+    <string name="user_add_user_title" msgid="2108112641783146007">"Vil du tilføje den nye bruger?"</string>
+    <string name="user_add_user_message_long" msgid="718192651887726259">"Du kan dele denne enhed med andre ved at oprette flere brugere. Hver bruger har deres eget område, hvor de kan tilpasse deres egne apps, baggrunde osv. Brugere kan også justere enhedsindstillinger, der påvirker alle, såsom Wi-Fi.\n\nNår du tilføjer en ny bruger, skal personen konfigurere sit område.\n\nEnhver bruger kan opdatere apps for alle andre brugere."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"Når du tilføjer en ny bruger, skal personen konfigurere sit område.\n\nEnhver bruger kan opdatere apps for alle andre brugere."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Vil du konfigurere brugeren nu?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Sørg for, at personen kan tage tabletten og konfigurere sit univers"</string>
+    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
+    <skip />
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Vil du oprette en profil nu?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Konfigurer nu"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ikke nu"</string>
@@ -2199,21 +2197,16 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Kun ejeren af telefonen kan administrere brugere."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Begrænsede profiler kan ikke tilføje konti"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Slet <xliff:g id="USER_NAME">%1$s</xliff:g> fra denne enhed"</string>
-    <!-- no translation found for user_add_on_lockscreen_menu (3025132738715222247) -->
-    <skip />
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Tilføj brugere, når enheden er låst"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Ny bruger"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Ny profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vil du slette dig selv?"</string>
-    <!-- no translation found for user_confirm_remove_title (1163721647646152032) -->
-    <skip />
-    <!-- no translation found for user_profile_confirm_remove_title (5573161550669867342) -->
-    <skip />
+    <string name="user_confirm_remove_title" msgid="1163721647646152032">"Vil du fjerne brugeren?"</string>
+    <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Vil du fjerne profilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Du vil miste dit univers og dine data på denne tablet. Du kan ikke fortryde denne handling."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Du vil miste dit univers og dine data på denne telefon. Du kan ikke fortryde denne handling."</string>
-    <!-- no translation found for user_confirm_remove_message (1020629390993095037) -->
-    <skip />
-    <!-- no translation found for user_profile_confirm_remove_message (7373754145959298522) -->
-    <skip />
+    <string name="user_confirm_remove_message" msgid="1020629390993095037">"Alle apps og data slettes."</string>
+    <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Alle apps og data slettes."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Tilføjer ny bruger..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Slet bruger"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Slet"</string>
@@ -2221,19 +2214,13 @@
     <string name="user_exit_guest_title" msgid="45738573948463472">"Afslut gæstesession"</string>
     <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Vil du afslutte gæstesessionen?"</string>
     <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Når gæstesessionen afsluttes, fjernes lokale data."</string>
-    <!-- no translation found for user_enable_calling (8310589470979488255) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms (794823380737672333) -->
-    <skip />
+    <string name="user_enable_calling" msgid="8310589470979488255">"Tillad telefonopkald"</string>
+    <string name="user_enable_calling_sms" msgid="794823380737672333">"Tillad telefonopkald og sms"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Fjern bruger"</string>
-    <!-- no translation found for user_enable_calling_confirm_title (440218975766968124) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_confirm_message (8061594235219352787) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms_confirm_title (188164598768941316) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms_confirm_message (9101983352082865696) -->
-    <skip />
+    <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"Vil du tillade telefonopkald?"</string>
+    <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Opkaldshistorikken deles med denne bruger."</string>
+    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Vil du tillade telefonopkald og sms?"</string>
+    <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"Opkalds- og sms-historikken deles med denne bruger."</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillad apps og indhold"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Applikationer med begrænsninger"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Udvid indstillingerne for applikationen"</string>
@@ -2270,7 +2257,8 @@
     <string name="call_manager_enable_title" msgid="7718226115535784017">"Aktivér Opkaldsstyring"</string>
     <string name="call_manager_enable_summary" msgid="8458447798019519240">"Giv denne tjeneste tilladelse til at styre, hvordan du foretager opkald."</string>
     <string name="call_manager_title" msgid="4479949569744516457">"Opkaldsstyring"</string>
-    <string name="call_manager_summary" msgid="9080932881688238022">"Hangouts"</string>
+    <!-- no translation found for call_manager_summary (5918261959486952674) -->
+    <skip />
     <string name="cell_broadcast_settings" msgid="2451014351355183338">"Nødudsendelser"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Netværksudbydere"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Adgangspunkter (APN)"</string>
@@ -2279,8 +2267,7 @@
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Foretrukken netværkstype"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (anbefales)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"SIM-kort til arbejde"</string>
-    <!-- no translation found for user_restrictions_title (5794473784343434273) -->
-    <skip />
+    <string name="user_restrictions_title" msgid="5794473784343434273">"Adgang til apps og indhold"</string>
     <string name="user_rename" msgid="8523499513614655279">"OMDØB"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Angiv begrænsninger for appen"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Kontrolleret af <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -2318,7 +2305,7 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Mobilselskab"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Nummer"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Farve på SIM-kort"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Vis tal"</string>
+    <string name="sim_editor_num_format" msgid="4681231191387098783">"Vis numre"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"Vælg SIM-kort"</string>
     <string name="color_orange" msgid="4417567658855022517">"Orange"</string>
     <string name="color_purple" msgid="3888532466427762504">"Lilla"</string>
@@ -2449,7 +2436,8 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Alle"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Kun kontaktpersoner"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Kun stjernemarkerede kontakter"</string>
-    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Alarmer og andre personlige påmindelser er prioriterede afbrydelser"</string>
+    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
+    <skip />
     <string name="zen_mode_when" msgid="2767193283311106373">"Aktivér automatisk"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Aldrig"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Hver nat"</string>
@@ -2465,4 +2453,6 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Fra"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Bliv i app"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"Når denne indstilling er slået til, kan du aktivere en tilstand på enheden, der fastholder visningen af det aktuelle skærmbillede.\n\nSådan fastgører du et skærmbillede:\n\n1. Slå denne indstilling til.\n\n2. Åbn en app.\n\n3. Tryk på knappen Seneste .\n\n4. Tryk på markørikonet."</string>
+    <!-- no translation found for managed_user_title (8101244883654409696) -->
+    <skip />
 </resources>

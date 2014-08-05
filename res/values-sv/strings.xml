@@ -493,7 +493,6 @@
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Enhetsinställningar"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Kopplad enhet"</string>
     <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Namn"</string>
-    <string name="bluetooth_preference_paired_dialog_use_label" msgid="8547827103286093381">"Använd för"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Internetanslutning"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Tangentbord"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Kontakter och samtalshistorik"</string>
@@ -520,6 +519,10 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Filöverföring"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Indataenhet"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Internetåtkomst"</string>
+    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
+    <skip />
+    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
+    <skip />
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Delning av Internetanslutning"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"Meddelandeåtkomst"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kopplas ifrån medialjud."</string>
@@ -531,7 +534,8 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Kopplad Bluetooth-enhet"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Anslut"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Anslut till Bluetooth-enhet"</string>
-    <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiler"</string>
+    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
+    <skip />
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Byt namn"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Tillåt inkommande överföringar"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Ansluten till medialjud"</string>
@@ -1086,12 +1090,9 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Vill du byta sms-app?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Vill du använda <xliff:g id="NEW_APP">%1$s</xliff:g> som sms-app i stället för <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Vill du använda <xliff:g id="NEW_APP">%s</xliff:g> som sms-app?"</string>
-    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
-    <skip />
+    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Vill du byta Wi-Fi-assistentapp?"</string>
+    <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Vill du hantera nätverksanslutningarna med <xliff:g id="NEW_APP">%1$s</xliff:g> i stället för med <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
+    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Vill du hantera nätverksanslutningarna med <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Okänd SIM-operatör"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s har ingen känd administrationswebbplats"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"För in SIM-kortet och starta om"</string>
@@ -1688,11 +1689,9 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Operativsystemet Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="battery_saver" msgid="1426682272004907982">"Batterisparläge"</string>
-    <string name="battery_saver_always_on_title" msgid="5204387375575431936">"Alltid på"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Aktivera automatiskt"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Aldrig"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"vid batteri på %1$d%%"</string>
-    <string name="battery_saver_description" msgid="8859033102348703807">"Med batterisparläget minskas enhetens prestanda i syfte att förlänga batteritiden.\n\nBatterisparläget inaktiveras när enheten ansluts till ett uttag."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistik"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nördig statistik om processer som körs"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Minnesanvändning"</string>
@@ -1858,12 +1857,19 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Inaktivera"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Enhetsadministratörer"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Det finns inga tillgängliga enhetsadministratörer"</string>
+    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
+    <skip />
+    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
+    <skip />
+    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
+    <skip />
     <string name="no_trust_agents" msgid="7450273545568977523">"Det finns inga tillgängliga betrodda agenter"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Vill du aktivera enhetsadministratör?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Aktivera"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Enhetsadministratör"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Om du aktiverar den här administratören kan appen <xliff:g id="APP_NAME">%1$s</xliff:g> utföra följande åtgärder:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Den här administratören är aktiv och tillåter att appen <xliff:g id="APP_NAME">%1$s</xliff:g> utför följande åtgärder:"</string>
+    <string name="profile_owner_add_title" msgid="1127236753400079839">"Profilens ägare"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Namnlös"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Allmänt"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Aviseringslogg"</string>
@@ -1936,8 +1942,7 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"Vill du ta bort kontot?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Om du tar bort kontot tar du också bort alla meddelanden, kontakter och andra data från surfplattan!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Om du tar bort kontot tar du också bort alla meddelanden, kontakter och andra data från mobilen!"</string>
-    <!-- no translation found for remove_account_failed (4010643669489606536) -->
-    <skip />
+    <string name="remove_account_failed" msgid="4010643669489606536">"Administratören tillåter inte den här ändringen"</string>
     <string name="provider_label" msgid="7724593781904508866">"Push-prenumerationer"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
     <skip />
@@ -2020,10 +2025,7 @@
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Mobildata"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Ange datagräns"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Dataanvändningscykel"</string>
-    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
-    <skip />
-    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
-    <skip />
+    <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Appanvändning"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Dataroaming"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Begränsa bakgrundsdata"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Tillåt bakgrundsdata"</string>
@@ -2070,10 +2072,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Denna funktion kan leda till att appar som är beroende av bakgrundsdata slutar att fungera när endast mobilnät är tillgängliga.\n\nDu hittar lämpligare kontroller för dataanvändning i appens inställningar."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Du kan endast begränsa bakgrundsdata om du har ställt in en mobildatagräns."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Aktivera automatisk datasynk.?"</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Alla kontoändringar som görs på webben kopieras automatiskt till surfplattan.\n\nFör vissa konton kopieras även alla ändringar som görs på surfplattan automatiskt till webben. Google-konton fungerar på det sättet."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Alla kontoändringar som görs på webben kopieras automatiskt till mobilen.\n\nFör vissa konton kopieras även alla ändringar som görs på mobilen automatiskt till webben. Google-konton fungerar på det sättet."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Inaktivera automatisk datasynk.?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Detta minskar dataanvändningen och sparar batteri, men varje konto måste synkroniseras manuellt varje gång du vill samla in aktuell information. Du får inte heller några meddelanden om uppdateringar."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Återställningsdag för användningscykel"</string>
@@ -2184,14 +2184,12 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Du kan begränsa åtkomsten till appar och innehåll i ditt konto"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Användare"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Begränsad profil"</string>
-    <!-- no translation found for user_add_user_title (2108112641783146007) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_long (718192651887726259) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_short (1511354412249044381) -->
-    <skip />
+    <string name="user_add_user_title" msgid="2108112641783146007">"Lägga till ny användare?"</string>
+    <string name="user_add_user_message_long" msgid="718192651887726259">"Du kan dela enheten med andra om du skapar flera användare. Varje användare får sitt eget utrymme som de kan anpassa som de vill med appar, bakgrund och så vidare. Användarna kan även ändra enhetsinställningar som påverkar alla, t.ex. Wi‑Fi.\n\nNär du lägger till en ny användare måste den personen konfigurera sitt utrymme.\n\nAlla användare kan uppdatera appar för samtliga användares räkning."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"När du lägger till en ny användare måste den personen konfigurera sitt utrymme.\n\nAlla användare kan uppdatera appar för samtliga användares räkning."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Konfigurera användare nu?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Se till att personen har möjlighet att använda surfplattan och konfigurera sitt utrymme"</string>
+    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
+    <skip />
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Vill du konfigurera en profil nu?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Konfigurera nu"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Inte nu"</string>
@@ -2199,21 +2197,16 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Det är bara mobilens ägare som kan hantera användare."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Begränsade profiler kan inte lägga till konton"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Ta bort <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for user_add_on_lockscreen_menu (3025132738715222247) -->
-    <skip />
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Lägg till anv. på låsskärmen"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Ny användare"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Ny profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vill du ta bort dig själv?"</string>
-    <!-- no translation found for user_confirm_remove_title (1163721647646152032) -->
-    <skip />
-    <!-- no translation found for user_profile_confirm_remove_title (5573161550669867342) -->
-    <skip />
+    <string name="user_confirm_remove_title" msgid="1163721647646152032">"Ta bort användaren?"</string>
+    <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Vill du ta bort profilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Ditt utrymme och dina data tas bort från surfplattan. Det går inte att ångra den här åtgärden."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Ditt utrymme och dina data tas bort från mobilen. Det går inte att ångra den här åtgärden."</string>
-    <!-- no translation found for user_confirm_remove_message (1020629390993095037) -->
-    <skip />
-    <!-- no translation found for user_profile_confirm_remove_message (7373754145959298522) -->
-    <skip />
+    <string name="user_confirm_remove_message" msgid="1020629390993095037">"Alla appar och all data raderas."</string>
+    <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Alla appar och all data raderas."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"En ny användare läggs till …"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Ta bort användare"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Ta bort"</string>
@@ -2221,19 +2214,13 @@
     <string name="user_exit_guest_title" msgid="45738573948463472">"Avsluta gästsessionen"</string>
     <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Vill du avsluta gästsessionen?"</string>
     <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Lokal data tas bort när gästsessionen avslutas."</string>
-    <!-- no translation found for user_enable_calling (8310589470979488255) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms (794823380737672333) -->
-    <skip />
+    <string name="user_enable_calling" msgid="8310589470979488255">"Tillåt samtal"</string>
+    <string name="user_enable_calling_sms" msgid="794823380737672333">"Tillåt samtal och sms"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Ta bort användare"</string>
-    <!-- no translation found for user_enable_calling_confirm_title (440218975766968124) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_confirm_message (8061594235219352787) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms_confirm_title (188164598768941316) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms_confirm_message (9101983352082865696) -->
-    <skip />
+    <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"Vill du tillåta telefonsamtal?"</string>
+    <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Samtalshistoriken delas med den här användaren."</string>
+    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Vill du tillåta samtal och sms?"</string>
+    <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"Samtals- och sms-historiken delas med den här användaren."</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Tillåt appar och innehåll"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Appar med begränsningar"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Utöka appens inställningar"</string>
@@ -2270,7 +2257,8 @@
     <string name="call_manager_enable_title" msgid="7718226115535784017">"Aktivera samtalshanterare"</string>
     <string name="call_manager_enable_summary" msgid="8458447798019519240">"Tillåt att tjänsten hanterar hur du ringer samtal."</string>
     <string name="call_manager_title" msgid="4479949569744516457">"Samtalshanterare"</string>
-    <string name="call_manager_summary" msgid="9080932881688238022">"Hangouts"</string>
+    <!-- no translation found for call_manager_summary (5918261959486952674) -->
+    <skip />
     <string name="cell_broadcast_settings" msgid="2451014351355183338">"Nödsändningar"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Nätverksoperatörer"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Åtkomstpunktsnamn"</string>
@@ -2279,8 +2267,7 @@
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Önskad nätverkstyp"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (rekommenderas)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"Jobb-SIM"</string>
-    <!-- no translation found for user_restrictions_title (5794473784343434273) -->
-    <skip />
+    <string name="user_restrictions_title" msgid="5794473784343434273">"Åtkomst till appar och innehåll"</string>
     <string name="user_rename" msgid="8523499513614655279">"BYT NAMN"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Konfigurera appbegränsningar"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Styrs av <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -2449,7 +2436,8 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Vem som helst"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Endast kontakter"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Endast stjärnmärkta kontakter"</string>
-    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Alarm och andra egna påminnelser är prioriterade avbrott"</string>
+    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
+    <skip />
     <string name="zen_mode_when" msgid="2767193283311106373">"Aktivera automatiskt"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Aldrig"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Varje kväll"</string>
@@ -2465,4 +2453,6 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Av"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fästa skärmen"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"När den här inställningen är aktiverad kan du ställa in enheten i ett läge som behåller den aktuella skärmen i vyn.\n\nSå här fäster du skärmen:\n\n1. Aktivera den här inställningen.\n\n2.Öppna en app.\n\n3. Tryck på knappen Senaste.\n\n4. Tryck på nålikonen."</string>
+    <!-- no translation found for managed_user_title (8101244883654409696) -->
+    <skip />
 </resources>
