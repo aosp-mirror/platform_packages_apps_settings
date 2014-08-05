@@ -5739,26 +5739,32 @@
     <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
     <string name="loading_notification_apps">Loading apps...</string>
 
-    <!-- [CHAR LIMIT=NONE] Notification settings: App notifications dialog show option -->
-    <string name="app_notifications_dialog_show">Show notifications</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: Block option title -->
+    <string name="app_notification_block_title">Block</string>
 
-    <!-- [CHAR LIMIT=NONE] Notification settings: App notifications dialog priority option -->
-    <string name="app_notifications_dialog_priority">Display at the top of the list</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: Block option description-->
+    <string name="app_notification_block_summary">Never show notifications from this app</string>
 
-    <!-- [CHAR LIMIT=NONE] Notification settings: App notifications dialog visibility option -->
-    <string name="app_notifications_dialog_visibility">Hide sensitive content when device is locked</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: Priority option title -->
+    <string name="app_notification_priority_title">Priority</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: Priority option description-->
+    <string name="app_notification_priority_summary">Show notifications at the top of the list and keep them coming when the device is set to priority interruptions only</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: Sensitive option title -->
+    <string name="app_notification_sensitive_title">Sensitive</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: Sensitive option description-->
+    <string name="app_notification_sensitive_summary">When the device is locked, hide any sensitive content from this app’s notifications</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
     <string name="app_notification_row_banned">Blocked</string>
 
-    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when high priority -->
-    <string name="app_notification_row_priority">Top of list</string>
+    <!-- [CHAR LIMIT=40] Notification settings: App notifications row summary when high priority -->
+    <string name="app_notification_row_priority">Priority</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when sensitive -->
     <string name="app_notification_row_sensitive">Sensitive</string>
-
-    <!-- [CHAR LIMIT=20] Notification settings: App notifications dialog dismiss button caption -->
-    <string name="app_notifications_dialog_done">Done</string>
 
     <!-- [CHAR LIMIT=30] Zen mode settings: Exit condition selection dialog, default option -->
     <string name="zen_mode_default_option">Until you turn this off</string>
