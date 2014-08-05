@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
+import com.android.settings.notification.RedactionInterstitial;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -408,6 +409,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
                     getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
+                    startActivity(RedactionInterstitial.createStartIntent(getActivity()));
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
                     if (tmp != null) {

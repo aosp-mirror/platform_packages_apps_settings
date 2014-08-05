@@ -22,6 +22,7 @@ import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
+import com.android.settings.notification.RedactionInterstitial;
 
 import static com.android.internal.widget.LockPatternView.DisplayMode;
 
@@ -532,6 +533,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
             getActivity().setResult(RESULT_FINISHED);
             getActivity().finish();
+            startActivity(RedactionInterstitial.createStartIntent(getActivity()));
         }
     }
 }
