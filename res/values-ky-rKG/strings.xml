@@ -730,7 +730,6 @@
     <skip />
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Жупташкан түзмөк"</string>
     <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Аталышы"</string>
-    <string name="bluetooth_preference_paired_dialog_use_label" msgid="8547827103286093381">"Төмөнкү үчүн колдонуу"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Интернет туташуусу"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Баскычтоп"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Байланыштар жана чалуу таржымалы"</string>
@@ -769,6 +768,10 @@
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Киргизүү түзмөгү"</string>
     <!-- no translation found for bluetooth_profile_pan (3391606497945147673) -->
     <skip />
+    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
+    <skip />
+    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
+    <skip />
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Интернет байланышын бөлүшүү"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"Билдирүү алмашуу"</string>
     <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
@@ -788,7 +791,7 @@
     <skip />
     <!-- no translation found for bluetooth_device_advanced_online_mode_summary (1204424107263248336) -->
     <skip />
-    <!-- no translation found for bluetooth_device_advanced_profile_header_title (3764437426089639639) -->
+    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
     <skip />
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Атын өзгөртүү"</string>
     <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
@@ -1591,12 +1594,9 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"SMS колдонмо алмашсынбы?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Сиздин <xliff:g id="CURRENT_APP">%2$s</xliff:g> SMS колдонмоңуз ордуна <xliff:g id="NEW_APP">%1$s</xliff:g> колдонулсунбу?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"<xliff:g id="NEW_APP">%s</xliff:g> SMS колдонмосу болсунбу?"</string>
-    <!-- no translation found for network_scorer_change_active_dialog_title (3776301550387574975) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
-    <skip />
+    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Wi‑Fi жардамчысы өзгөрүлсүнбү?"</string>
+    <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Тармактык туташууларыңызды башкаруу үчүн, <xliff:g id="CURRENT_APP">%2$s</xliff:g> ордуна <xliff:g id="NEW_APP">%1$s</xliff:g> колдоносузбу?"</string>
+    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Тармактык туташууларыңызды башкаруу үчүн <xliff:g id="NEW_APP">%s</xliff:g> колдоносузбу?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Белгисиз SIM оператору"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s операторунда белгилүү камсыздоочу вебсайт жок"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"SIM-картаны салып, кайра иштетиңиз"</string>
@@ -2426,11 +2426,9 @@
     <!-- no translation found for process_mediaserver_label (6500382062945689285) -->
     <skip />
     <string name="battery_saver" msgid="1426682272004907982">"Батареяны үнөмдөгүч"</string>
-    <string name="battery_saver_always_on_title" msgid="5204387375575431936">"Ар дайым күйгүзүлгөн"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Автоматтык түрдө күйгүзүү"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Эч качан"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"батарея %1$d%% болгондо"</string>
-    <string name="battery_saver_description" msgid="8859033102348703807">"Батареяны үнөмдөгүч түзмөгүңүздүн иштешин солгундатып, батареянын кубатын узартат.\n\nТүзмөктү кубаттагычка сайганда, батареяны үнөмдөгүч өчүп калат."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Процесстин статистикасы"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Иштеп жаткан процесстердин өзгөчө статистикасы"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Эс тутумдун пайдаланылышы"</string>
@@ -2661,6 +2659,12 @@
     <skip />
     <!-- no translation found for no_device_admins (702695100241728775) -->
     <skip />
+    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
+    <skip />
+    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
+    <skip />
+    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
+    <skip />
     <string name="no_trust_agents" msgid="7450273545568977523">"Учурда ишеним агенттери жок"</string>
     <!-- no translation found for add_device_admin_msg (6246742476064507965) -->
     <skip />
@@ -2670,8 +2674,7 @@
     <skip />
     <string name="device_admin_warning" msgid="2026747446313628233">"Бул администраторду жандыруу <xliff:g id="APP_NAME">%1$s</xliff:g> колдонмосуна кийинки амалдарды аткарууга уруксат берет:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Бул администратор иштеп турат жана <xliff:g id="APP_NAME">%1$s</xliff:g> колдонмосуна кийинки амалдарды аткарууга уруксат берет:"</string>
-    <!-- no translation found for profile_owner_add_title (1127236753400079839) -->
-    <skip />
+    <string name="profile_owner_add_title" msgid="1127236753400079839">"Профиль ээси"</string>
     <!-- no translation found for untitled_apn (1230060359198685513) -->
     <skip />
     <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
@@ -2781,8 +2784,7 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"Эсеп жок кылынсынбы?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"Бул эсепти жок кылуу, анын бардык билдирүүлөрүн, байланыштарын жана башка берилиштерин планшеттен өчүрүлүшүнө алып келет!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Бул эсепти жок кылуу, анын бардык билдирүүлөрүн, байланыштарын жана башка берилиштерин телефондон өчүрүлүшүнө алып келет!"</string>
-    <!-- no translation found for remove_account_failed (4010643669489606536) -->
-    <skip />
+    <string name="remove_account_failed" msgid="4010643669489606536">"Мындай өзгөртүүгө администраторуңуз тарабынан тыюу салынган."</string>
     <!-- no translation found for provider_label (7724593781904508866) -->
     <skip />
     <!-- no translation found for sync_item_title (4782834606909853006) -->
@@ -2885,10 +2887,7 @@
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Дайындарга чек коюу"</string>
     <!-- no translation found for data_usage_cycle (5652529796195787949) -->
     <skip />
-    <!-- no translation found for data_usage_app_items_header_text (5017850810459372828) -->
-    <skip />
-    <!-- no translation found for data_usage_managed_user_text (7596381108336069969) -->
-    <skip />
+    <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Колдонмонун пайдаланылышы"</string>
     <!-- no translation found for data_usage_menu_roaming (8042359966835203296) -->
     <skip />
     <!-- no translation found for data_usage_menu_restrict_background (1989394568592253331) -->
@@ -2945,10 +2944,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"Ушул мүмкүнчүлүктөн улам, фондук дайындарга көз каранды болгон колдонмо уюктук тармактар жеткиликтүү болгон учурда иштебей калышы мүмкүн.\n\nКолдонмонун ичиндеги жөндөөлөрдөн дайындардын колдонулушун башкарган тийиштүү каражаттарды таба аласыз."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Фондук дайындарды уюктук дайындарга чек коюлгандан кийин гана чектөөгө болот."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Авто-синхрондоо жандырылсынбы?"</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Желеден каттоо эсептериңизге кандайдыр бир өзгөртүүлөр киргизилгенде, алардын баары планшетиңизге автоматтык түрдө көчүрүлөт.\n\nАйрым каттоо эсептеринин планшетиңиздеги өзгөртүүлөрү автоматтык түрдө желеге көчүрүлөт. Кыскасы, Google Каттоо эсеби ушундай жол менен иштейт."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Желеден каттоо эсептериңизге кандайдыр бир өзгөртүүлөр киргизилгенде, алардын баары телефонуңузга автоматтык түрдө көчүрүлөт.\n\nАйрым каттоо эсептеринин телефонуңуздагы өзгөртүүлөрү автоматтык түрдө желеге көчүрүлөт. Кыскасы, Google Каттоо эсеби ушундай жол менен иштейт."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Авто-синхрондоо токтосунбу?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"Бул трафикти жана батарей колдонууну сактайт, бирок сиз акыркы жаңылыктарды алыш үчүн ар бир эсепти кол менен синхрондоп чыгышыңыз керек болот. Жана дагы, жаңыртуулар чыкканда эскертүү албайсыз."</string>
     <!-- no translation found for data_usage_cycle_editor_title (1373797281540188533) -->
@@ -3094,14 +3091,12 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Сиз эсебиңизден колдонмолорго жана мазмундарга жетүүнү чектеп койсоңуз болот"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Колдонуучу"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Чектелген профайл"</string>
-    <!-- no translation found for user_add_user_title (2108112641783146007) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_long (718192651887726259) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_short (1511354412249044381) -->
-    <skip />
+    <string name="user_add_user_title" msgid="2108112641783146007">"Жаңы колдонуучу кошосузбу?"</string>
+    <string name="user_add_user_message_long" msgid="718192651887726259">"Кошумча колдонуучуларды түзүү менен, бул түзмөктү башкалар менен бөлүшө аласыз. Ар бир колдонуучунун өзүнүн мейкиндиги болуп, аны алар өз колдонмолору, тушкагазы ж.б.у.с. нерселер менен өзгөчөлөштүрүп алышат. Мындан тышкары, колдонуучулардын Wi‑Fi сыяктуу жалпы түзмөк жөндөөлөрүн да конфигурациялоо мүмкүнчүлүгү бар.\n\nЖаңы колдонуучу кошулганда, ал өз мейкиндигин түзүп алышы керек.\n\nКолдонмолорду бир колдонуучу жаңыртканда, ал калган бардык колдонуучулар үчүн да жаңырат."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"Жаңы колдонуучу кошулганда, ал өз мейкиндигин түзүп алышы керек.\n\nКолдонмолорду бир колдонуучу жаңыртканда, ал калган бардык колдонуучулар үчүн да жаңырат."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Колдонуучуну азыр түзөлүбү?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Планшетти алып, өзүнүн мейкиндигин тууралоочу киши бар экени анык болсун"</string>
+    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
+    <skip />
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Профайл азыр түзүлсүнбү?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Азыр түзүү"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Азыр эмес"</string>
@@ -3109,21 +3104,16 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Телефондун ээси гана колдонуучуларды башкара алат."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Чектелген профайлдар эсеп жарата алышпайт"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g> бул түзмөктөн жок кылуу"</string>
-    <!-- no translation found for user_add_on_lockscreen_menu (3025132738715222247) -->
-    <skip />
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Кулпудагы түзмөккө колд. кош"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Жаңы колдонуучу"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Жаңы профайл"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Өзүңүздү жок кылалыбы?"</string>
-    <!-- no translation found for user_confirm_remove_title (1163721647646152032) -->
-    <skip />
-    <!-- no translation found for user_profile_confirm_remove_title (5573161550669867342) -->
-    <skip />
+    <string name="user_confirm_remove_title" msgid="1163721647646152032">"Бул колд-ну жок кылалыбы?"</string>
+    <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Профилди алып салалыбы?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Сиз бул планшеттеги мейкиндигиңизди жана берилиштериңизди жоготосуз. Сиз муну артка кайтара албайсыз."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Сиз бул телефондогу мейкиндигиңизди жана берилиштериңизди жоготосуз. Сиз муну артка кайтара албайсыз."</string>
-    <!-- no translation found for user_confirm_remove_message (1020629390993095037) -->
-    <skip />
-    <!-- no translation found for user_profile_confirm_remove_message (7373754145959298522) -->
-    <skip />
+    <string name="user_confirm_remove_message" msgid="1020629390993095037">"Бардык колдонмолор жана дайындар жоголот."</string>
+    <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Бардык колдонмолор жана дайындар жоголот."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Жаңы колдонуучу кошулууда…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Колдонуучуну жок кылуу"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Жок кылуу"</string>
@@ -3131,19 +3121,13 @@
     <string name="user_exit_guest_title" msgid="45738573948463472">"Конок режиминен чыгуу"</string>
     <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Конок сеансынан чыгасызбы?"</string>
     <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Конок сеансын бүтүрсөңүз, жергиликтүү дайындар жоголуп кетет."</string>
-    <!-- no translation found for user_enable_calling (8310589470979488255) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms (794823380737672333) -->
-    <skip />
+    <string name="user_enable_calling" msgid="8310589470979488255">"Телефон чалууларга уруксат берүү"</string>
+    <string name="user_enable_calling_sms" msgid="794823380737672333">"Телефон чалууга жана SMS\'терге уруксат берүү"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Колдонуучуну алып салуу"</string>
-    <!-- no translation found for user_enable_calling_confirm_title (440218975766968124) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_confirm_message (8061594235219352787) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms_confirm_title (188164598768941316) -->
-    <skip />
-    <!-- no translation found for user_enable_calling_sms_confirm_message (9101983352082865696) -->
-    <skip />
+    <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"Телефон чалууларга уруксат берилсинби?"</string>
+    <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Чалуу таржымалы бул колдонуучу менен бөлүшүлөт."</string>
+    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Телефн чалуулрг жана SMS\'трге урукс берлснби?"</string>
+    <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"Чалуу жана SMS таржымалы бул колдонуучу менен бөлүшүлөт."</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Колдонмолорго жана мазмунга уруксат"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Чектелген колдонмолор"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Колдонмонун тууралоолорун ачуу"</string>
@@ -3180,7 +3164,8 @@
     <string name="call_manager_enable_title" msgid="7718226115535784017">"Чалууларды башкаргычты иштетүү"</string>
     <string name="call_manager_enable_summary" msgid="8458447798019519240">"Бул кызматка чалууларды аткарууну башкаруу мүмкүнчүлүгүн берүү."</string>
     <string name="call_manager_title" msgid="4479949569744516457">"Чалууларды башкаргыч"</string>
-    <string name="call_manager_summary" msgid="9080932881688238022">"Hangouts"</string>
+    <!-- no translation found for call_manager_summary (5918261959486952674) -->
+    <skip />
     <string name="cell_broadcast_settings" msgid="2451014351355183338">"Шашылыш таркатмалар"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Тармактык операторлор"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Жетки түйүнүнүн аталыштары"</string>
@@ -3189,8 +3174,7 @@
     <string name="preferred_network_type_title" msgid="3431041717309776341">"Артыкчылыктуу тармактын түрү"</string>
     <string name="preferred_network_type_summary" msgid="6564884693884755019">"LTE (сунушталат)"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"Жумуш SIM"</string>
-    <!-- no translation found for user_restrictions_title (5794473784343434273) -->
-    <skip />
+    <string name="user_restrictions_title" msgid="5794473784343434273">"Колдон жана мазмунду пайдал мүмкүнч"</string>
     <string name="user_rename" msgid="8523499513614655279">"АТ АЛМАШТЫРУУ"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Колдономонун чектөөлөрүн орнотуу"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"<xliff:g id="APP">%1$s</xliff:g> тарабынан башкарылат"</string>
@@ -3361,7 +3345,8 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Баары"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Байланыштар гана"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Жылдызчаланган байланштр гана"</string>
-    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Ойготкучтар жана башка жеке эстеткичтер артыкчылыктуу үзгүлтүккө учураткычтар."</string>
+    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
+    <skip />
     <string name="zen_mode_when" msgid="2767193283311106373">"Автоматтык түрдө күйүү"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Эч качан"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Түн сайын"</string>
@@ -3377,4 +3362,6 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Өчүк"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Экранды кадап коюу"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"Бул жөндөө күйгүзүлгөндө, түзмөк учурдагы экранды көрсөтүп турган абалга коюлат.\n\nЭкранды кадап коюу үчүн:\n\n1. Бул жөндөөнү күйгүзүңүз.\n\n2. Колдонмону ачыңыз.\n\n3. Акыркылар баскычына тийип коюңуз.\n\n4. Кадагыч сүрөтчөсүнө тийиңиз."</string>
+    <!-- no translation found for managed_user_title (8101244883654409696) -->
+    <skip />
 </resources>
