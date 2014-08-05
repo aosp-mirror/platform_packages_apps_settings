@@ -82,7 +82,7 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.NotificationAppList;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.quicklaunch.QuickLaunchSettings;
 import com.android.settings.search.DynamicIndexableContentMonitor;
@@ -94,6 +94,7 @@ import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
+import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConditionProviderSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationSettings;
@@ -286,6 +287,7 @@ public class SettingsActivity extends Activity
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
             InstalledAppDetails.class.getName(),
             BatterySaverSettings.class.getName(),
+            NotificationAppList.class.getName(),
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             QuickLaunchSettings.class.getName()
