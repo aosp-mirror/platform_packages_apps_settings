@@ -493,7 +493,6 @@
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Device settings"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"Paired device"</string>
     <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"Name"</string>
-    <string name="bluetooth_preference_paired_dialog_use_label" msgid="8547827103286093381">"Use for"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"Internet connection"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"Keyboard"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"Contacts and call history"</string>
@@ -520,6 +519,10 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"File transfer"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Input device"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Internet access"</string>
+    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
+    <skip />
+    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
+    <skip />
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Internet connection sharing"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"Message Access"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> will be disconnected from media audio."</string>
@@ -531,7 +534,8 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Paired Bluetooth device"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connect"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connect to Bluetooth device"</string>
-    <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiles"</string>
+    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
+    <skip />
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Rename"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Allow incoming file transfers"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connected to media audio"</string>
@@ -1087,10 +1091,8 @@
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> as your SMS app?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Use <xliff:g id="NEW_APP">%s</xliff:g> as your SMS app?"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Change Wi‑Fi assistant?"</string>
-    <!-- no translation found for network_scorer_change_active_dialog_text (8035173880322990715) -->
-    <skip />
-    <!-- no translation found for network_scorer_change_active_no_previous_dialog_text (7444620909047611601) -->
-    <skip />
+    <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> to manage your network connections?"</string>
+    <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Use <xliff:g id="NEW_APP">%s</xliff:g> to manage your network connections?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Unknown SIM operator"</string>
     <string name="mobile_no_provisioning_url" msgid="2399426808423775711">"%1$s has no known provisioning website"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Please insert SIM card and restart"</string>
@@ -1687,11 +1689,9 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Media server"</string>
     <string name="battery_saver" msgid="1426682272004907982">"Battery saver"</string>
-    <string name="battery_saver_always_on_title" msgid="5204387375575431936">"Always on"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Turn on automatically"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Never"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"at %1$d%% battery"</string>
-    <string name="battery_saver_description" msgid="8859033102348703807">"To help improve battery life, Battery saver will reduce your device’s performance.\n\nBattery saver will be disabled when your device is plugged in."</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Process Stats"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Geeky stats about running processes"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memory use"</string>
@@ -1857,12 +1857,19 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Deactivate"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Device administrators"</string>
     <string name="no_device_admins" msgid="702695100241728775">"No available device administrators"</string>
+    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
+    <skip />
+    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
+    <skip />
+    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
+    <skip />
     <string name="no_trust_agents" msgid="7450273545568977523">"No available trust agents"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Activate device administrator?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Activate"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Device administrator"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Activating this administrator will allow the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"This administrator is active and allows the app <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
+    <string name="profile_owner_add_title" msgid="1127236753400079839">"Profile owner"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Untitled"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Notification log"</string>
@@ -2019,7 +2026,6 @@
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Set data limit"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Data usage cycle"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"App usage"</string>
-    <string name="data_usage_managed_user_text" msgid="7596381108336069969">"Work profile"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Data roaming"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restrict background data"</string>
     <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Allow background data"</string>
@@ -2066,10 +2072,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="5871168521456832764">"This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="4674085030810350875">"Restricting background data is possible only when you\'ve set a mobile data limit."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Turn auto-sync data on?"</string>
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8581983093524041669) -->
-    <skip />
-    <!-- no translation found for data_usage_auto_sync_on_dialog (8651376294887142858) -->
-    <skip />
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Any changes that you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes that you make on the tablet to the web. A Google Account works this way."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Any changes that you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes that you make on the phone to the web. A Google Account works this way."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Turn auto-sync data off?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"This will conserve data and battery usage, but you\'ll need to sync each account manually to collect recent information. And you won\'t receive notifications when updates occur."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Usage cycle reset date"</string>
@@ -2181,12 +2185,11 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"User"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Restricted profile"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Add new user?"</string>
-    <!-- no translation found for user_add_user_message_long (718192651887726259) -->
-    <skip />
-    <!-- no translation found for user_add_user_message_short (1511354412249044381) -->
-    <skip />
+    <string name="user_add_user_message_long" msgid="718192651887726259">"You can share this device with other people by creating additional users. Each user has their own space, which they can customise with their own apps, wallpaper and so on. Users can also adjust device settings like Wi‑Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users."</string>
+    <string name="user_add_user_message_short" msgid="1511354412249044381">"When you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Set up user now?"</string>
-    <string name="user_setup_dialog_message" msgid="614037943337008555">"Make sure the person is available to take the tablet and set up their space"</string>
+    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
+    <skip />
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Set up profile now?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Set up now"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Not now"</string>
@@ -2254,7 +2257,8 @@
     <string name="call_manager_enable_title" msgid="7718226115535784017">"Enable Call Manager"</string>
     <string name="call_manager_enable_summary" msgid="8458447798019519240">"Allow this service to manage how your calls are made."</string>
     <string name="call_manager_title" msgid="4479949569744516457">"Call Manager"</string>
-    <string name="call_manager_summary" msgid="9080932881688238022">"Hangouts"</string>
+    <!-- no translation found for call_manager_summary (5918261959486952674) -->
+    <skip />
     <string name="cell_broadcast_settings" msgid="2451014351355183338">"Emergency broadcasts"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Network operators"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Access point names"</string>
@@ -2432,7 +2436,8 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Anyone"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Contacts only"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Starred contacts only"</string>
-    <string name="zen_mode_alarm_info" msgid="1326662332892889735">"Alarms and other personal reminders are priority interruptions"</string>
+    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
+    <skip />
     <string name="zen_mode_when" msgid="2767193283311106373">"Automatically turn on"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Never"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Every night"</string>
@@ -2448,4 +2453,6 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Off"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Screen pinning"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"When this setting is turned on, you can put the device in a state that keeps the current screen in view.\n\nTo pin a screen:\n\n1. Turn this setting on.\n\n2. Open an app.\n\n3. Touch the Recents button.\n\n4. Touch the pin icon."</string>
+    <!-- no translation found for managed_user_title (8101244883654409696) -->
+    <skip />
 </resources>
