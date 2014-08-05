@@ -16,557 +16,186 @@
 
 package com.android.settings.notification;
 
-import android.animation.LayoutTransition;
-import android.app.INotificationManager;
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
-import android.content.pm.Signature;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Parcelable;
-import android.os.ServiceManager;
-import android.os.SystemClock;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.os.UserHandle;
-import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.SectionIndexer;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.settings.Settings.AppNotificationSettingsActivity;
-import com.android.settings.PinnedHeaderListFragment;
 import com.android.settings.R;
-import com.android.settings.UserSpinnerAdapter;
-import com.android.settings.Utils;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.notification.NotificationAppList.AppRow;
+import com.android.settings.notification.NotificationAppList.Backend;
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-/** Just a sectioned list of installed applications, nothing else to index **/
-public class AppNotificationSettings extends PinnedHeaderListFragment
-        implements OnItemSelectedListener {
+/** These settings are per app, so should not be returned in global search results. */
+public class AppNotificationSettings extends SettingsPreferenceFragment {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private static final String SECTION_BEFORE_A = "*";
-    private static final String SECTION_AFTER_Z = "**";
-    private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
-            = new Intent(Intent.ACTION_MAIN)
-                .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
+    private static final String KEY_BLOCK = "block";
+    private static final String KEY_PRIORITY = "priority";
+    private static final String KEY_SENSITIVE = "sensitive";
 
-    private final Handler mHandler = new Handler();
-    private final ArrayMap<String, AppRow> mRows = new ArrayMap<String, AppRow>();
-    private final ArrayList<AppRow> mSortedRows = new ArrayList<AppRow>();
-    private final ArrayList<String> mSections = new ArrayList<String>();
+    static final String EXTRA_HAS_SETTINGS_INTENT = "has_settings_intent";
+    static final String EXTRA_SETTINGS_INTENT = "settings_intent";
+
+    private final Backend mBackend = new Backend();
 
     private Context mContext;
-    private LayoutInflater mInflater;
-    private NotificationAppAdapter mAdapter;
-    private Signature[] mSystemSignature;
-    private Parcelable mListViewState;
-    private Backend mBackend = new Backend();
-    private UserSpinnerAdapter mProfileSpinnerAdapter;
+    private SwitchPreference mBlock;
+    private SwitchPreference mPriority;
+    private SwitchPreference mSensitive;
+    private AppRow mAppRow;
+    private boolean mCreated;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (DEBUG) Log.d(TAG, "onActivityCreated mCreated=" + mCreated);
+        if (mCreated) {
+            Log.w(TAG, "onActivityCreated: ignoring duplicate call");
+            return;
+        }
+        mCreated = true;
+        if (mAppRow == null) return;
+        final View content = getActivity().findViewById(R.id.main_content);
+        final ViewGroup contentParent = (ViewGroup) content.getParent();
+        final View bar = getActivity().getLayoutInflater().inflate(R.layout.app_notification_header,
+                contentParent, false);
+
+        final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
+        appIcon.setImageDrawable(mAppRow.icon);
+
+        final TextView appName = (TextView) bar.findViewById(R.id.app_name);
+        appName.setText(mAppRow.label);
+
+        final View appSettings = bar.findViewById(R.id.app_settings);
+        if (mAppRow.settingsIntent == null) {
+            appSettings.setVisibility(View.GONE);
+        } else {
+            appSettings.setClickable(true);
+            appSettings.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(mAppRow.settingsIntent);
+                }
+            });
+        }
+        contentParent.addView(bar, 0);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mAdapter = new NotificationAppAdapter(mContext);
-        getActivity().setTitle(R.string.app_notifications_title);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.notification_app_list, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, mContext);
-        if (mProfileSpinnerAdapter != null) {
-            Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
-                    R.layout.spinner_view, null);
-            spinner.setAdapter(mProfileSpinnerAdapter);
-            spinner.setOnItemSelectedListener(this);
-            setPinnedHeaderView(spinner);
-        }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        repositionScrollbar();
-        getListView().setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (DEBUG) Log.d(TAG, "Saving listView state");
-        mListViewState = getListView().onSaveInstanceState();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mListViewState = null;  // you're dead to me
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadAppsList();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
-        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
-            Intent intent = new Intent(getActivity(), AppNotificationSettingsActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivityAsUser(intent, selectedUser);
-            getActivity().finish();
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-    public void setBackend(Backend backend) {
-        mBackend = backend;
-    }
-
-    private void loadAppsList() {
-        AsyncTask.execute(mCollectAppsRunnable);
-    }
-
-    private String getSection(CharSequence label) {
-        if (label == null || label.length() == 0) return SECTION_BEFORE_A;
-        final char c = Character.toUpperCase(label.charAt(0));
-        if (c < 'A') return SECTION_BEFORE_A;
-        if (c > 'Z') return SECTION_AFTER_Z;
-        return Character.toString(c);
-    }
-
-    private void repositionScrollbar() {
-        final int sbWidthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                getListView().getScrollBarSize(),
-                getResources().getDisplayMetrics());
-        final View parent = (View)getView().getParent();
-        final int eat = Math.min(sbWidthPx, parent.getPaddingEnd());
-        if (eat <= 0) return;
-        if (DEBUG) Log.d(TAG, String.format("Eating %dpx into %dpx padding for %dpx scroll, ld=%d",
-                eat, parent.getPaddingEnd(), sbWidthPx, getListView().getLayoutDirection()));
-        parent.setPaddingRelative(parent.getPaddingStart(), parent.getPaddingTop(),
-                parent.getPaddingEnd() - eat, parent.getPaddingBottom());
-    }
-
-    private boolean isSystemApp(PackageInfo pkg) {
-        if (mSystemSignature == null) {
-            mSystemSignature = new Signature[]{ getSystemSignature() };
-        }
-        return mSystemSignature[0] != null && mSystemSignature[0].equals(getFirstSignature(pkg));
-    }
-
-    private static Signature getFirstSignature(PackageInfo pkg) {
-        if (pkg != null && pkg.signatures != null && pkg.signatures.length > 0) {
-            return pkg.signatures[0];
-        }
-        return null;
-    }
-
-    private Signature getSystemSignature() {
-        final PackageManager pm = mContext.getPackageManager();
-        try {
-            final PackageInfo sys = pm.getPackageInfo("android", PackageManager.GET_SIGNATURES);
-            return getFirstSignature(sys);
-        } catch (NameNotFoundException e) {
-        }
-        return null;
-    }
-
-    private static class ViewHolder {
-        ViewGroup row;
-        ViewGroup appButton;
-        ImageView icon;
-        TextView title;
-        TextView subtitle;
-        View settingsDivider;
-        ImageView settingsButton;
-        View rowDivider;
-    }
-
-    private class NotificationAppAdapter extends ArrayAdapter<Row> implements SectionIndexer {
-        public NotificationAppAdapter(Context context) {
-            super(context, 0, 0);
+        Intent intent = getActivity().getIntent();
+        if (DEBUG) Log.d(TAG, "onCreate getIntent()=" + intent);
+        if (intent == null) {
+            Log.w(TAG, "No intent");
+            toastAndFinish();
+            return;
         }
 
-        @Override
-        public boolean hasStableIds() {
-            return true;
+        final int uid = intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
+        final String pkg = intent.getStringExtra(Settings.EXTRA_APP_PACKAGE);
+        if (uid == -1 || TextUtils.isEmpty(pkg)) {
+            Log.w(TAG, "Missing extras: " + Settings.EXTRA_APP_PACKAGE + " was " + pkg + ", "
+                    + Settings.EXTRA_APP_UID + " was " + uid);
+            toastAndFinish();
+            return;
         }
 
-        @Override
-        public long getItemId(int position) {
-            return position;
+        if (DEBUG) Log.d(TAG, "Load details for pkg=" + pkg + " uid=" + uid);
+        final PackageManager pm = getPackageManager();
+        final PackageInfo info = findPackageInfo(pm, pkg, uid);
+        if (info == null) {
+            Log.w(TAG, "Failed to find package info: " + Settings.EXTRA_APP_PACKAGE + " was " + pkg
+                    + ", " + Settings.EXTRA_APP_UID + " was " + uid);
+            toastAndFinish();
+            return;
         }
 
-        @Override
-        public int getViewTypeCount() {
-            return 2;
-        }
+        addPreferencesFromResource(R.xml.app_notification_settings);
+        mBlock = (SwitchPreference) findPreference(KEY_BLOCK);
+        mPriority = (SwitchPreference) findPreference(KEY_PRIORITY);
+        mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
-        @Override
-        public int getItemViewType(int position) {
-            Row r = getItem(position);
-            return r instanceof AppRow ? 1 : 0;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Row r = getItem(position);
-            View v;
-            if (convertView == null) {
-                v = newView(parent, r);
-            } else {
-                v = convertView;
+        mAppRow = NotificationAppList.loadAppRow(pm, info, mBackend);
+        if (intent.hasExtra(EXTRA_HAS_SETTINGS_INTENT)) {
+            // use settings intent from extra
+            if (intent.getBooleanExtra(EXTRA_HAS_SETTINGS_INTENT, false)) {
+                mAppRow.settingsIntent = intent.getParcelableExtra(EXTRA_SETTINGS_INTENT);
             }
-            bindView(v, r, false /*animate*/);
-            return v;
+        } else {
+            // load settings intent
+            ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
+            rows.put(mAppRow.pkg, mAppRow);
+            NotificationAppList.collectConfigActivities(getPackageManager(), rows);
         }
 
-        public View newView(ViewGroup parent, Row r) {
-            if (!(r instanceof AppRow)) {
-                return mInflater.inflate(R.layout.notification_app_section, parent, false);
+        mBlock.setChecked(mAppRow.banned);
+        mPriority.setChecked(mAppRow.priority);
+        mSensitive.setChecked(mAppRow.sensitive);
+
+        mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean block = (Boolean) newValue;
+                return mBackend.setNotificationsBanned(pkg, uid, block);
             }
-            final View v = mInflater.inflate(R.layout.notification_app, parent, false);
-            final ViewHolder vh = new ViewHolder();
-            vh.row = (ViewGroup) v;
-            vh.row.setLayoutTransition(new LayoutTransition());
-            vh.appButton = (ViewGroup) v.findViewById(android.R.id.button1);
-            vh.appButton.setLayoutTransition(new LayoutTransition());
-            vh.icon = (ImageView) v.findViewById(android.R.id.icon);
-            vh.title = (TextView) v.findViewById(android.R.id.title);
-            vh.subtitle = (TextView) v.findViewById(android.R.id.text1);
-            vh.settingsDivider = v.findViewById(R.id.settings_divider);
-            vh.settingsButton = (ImageView) v.findViewById(android.R.id.button2);
-            vh.rowDivider = v.findViewById(R.id.row_divider);
-            v.setTag(vh);
-            return v;
-        }
+        });
 
-        private void enableLayoutTransitions(ViewGroup vg, boolean enabled) {
-            if (enabled) {
-                vg.getLayoutTransition().enableTransitionType(LayoutTransition.APPEARING);
-                vg.getLayoutTransition().enableTransitionType(LayoutTransition.DISAPPEARING);
-            } else {
-                vg.getLayoutTransition().disableTransitionType(LayoutTransition.APPEARING);
-                vg.getLayoutTransition().disableTransitionType(LayoutTransition.DISAPPEARING);
+        mPriority.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean priority = (Boolean) newValue;
+                return mBackend.setHighPriority(pkg, uid, priority);
             }
-        }
+        });
 
-        public void bindView(final View view, Row r, boolean animate) {
-            if (!(r instanceof AppRow)) {
-                // it's a section row
-                final TextView tv = (TextView)view.findViewById(android.R.id.title);
-                tv.setText(r.section);
-                return;
+        mSensitive.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean sensitive = (Boolean) newValue;
+                return mBackend.setSensitive(pkg, uid, sensitive);
             }
-
-            final AppRow row = (AppRow)r;
-            final ViewHolder vh = (ViewHolder) view.getTag();
-            enableLayoutTransitions(vh.row, animate);
-            vh.rowDivider.setVisibility(row.first ? View.GONE : View.VISIBLE);
-            vh.appButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mContext.startActivity(new Intent(mContext, AppNotificationDialog.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            .putExtra(Settings.EXTRA_APP_PACKAGE, row.pkg)
-                            .putExtra(Settings.EXTRA_APP_UID, row.uid));
-                }
-            });
-            enableLayoutTransitions(vh.appButton, animate);
-            vh.icon.setImageDrawable(row.icon);
-            vh.title.setText(row.label);
-            final String sub = getSubtitle(row);
-            vh.subtitle.setText(sub);
-            vh.subtitle.setVisibility(!sub.isEmpty() ? View.VISIBLE : View.GONE);
-            final boolean showSettings = !row.banned && row.settingsIntent != null;
-            vh.settingsDivider.setVisibility(showSettings ? View.VISIBLE : View.GONE);
-            vh.settingsButton.setVisibility(showSettings ? View.VISIBLE : View.GONE);
-            vh.settingsButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (row.settingsIntent != null) {
-                        getContext().startActivity(row.settingsIntent);
-                    }
-                }
-            });
-        }
-
-        private String getSubtitle(AppRow row) {
-            if (row.banned) return mContext.getString(R.string.app_notification_row_banned);
-            if (!row.priority && !row.sensitive) return "";
-            final String priString = mContext.getString(R.string.app_notification_row_priority);
-            final String senString = mContext.getString(R.string.app_notification_row_sensitive);
-            if (row.priority != row.sensitive) {
-                return row.priority ? priString : senString;
-            }
-            return priString + mContext.getString(R.string.summary_divider_text) + senString;
-        }
-
-        @Override
-        public Object[] getSections() {
-            return mSections.toArray(new Object[mSections.size()]);
-        }
-
-        @Override
-        public int getPositionForSection(int sectionIndex) {
-            final String section = mSections.get(sectionIndex);
-            final int n = getCount();
-            for (int i = 0; i < n; i++) {
-                final Row r = getItem(i);
-                if (r.section.equals(section)) {
-                    return i;
-                }
-            }
-            return 0;
-        }
-
-        @Override
-        public int getSectionForPosition(int position) {
-            Row row = getItem(position);
-            return mSections.indexOf(row.section);
-        }
+        });
     }
 
-    private static class Row {
-        public String section;
+    private void toastAndFinish() {
+        Toast.makeText(mContext, R.string.app_not_found_dlg_text, Toast.LENGTH_SHORT).show();
+        getActivity().finish();
     }
 
-    public static class AppRow extends Row {
-        public String pkg;
-        public int uid;
-        public Drawable icon;
-        public CharSequence label;
-        public Intent settingsIntent;
-        public boolean banned;
-        public boolean priority;
-        public boolean sensitive;
-        public boolean first;  // first app in section
-    }
-
-    private static final Comparator<AppRow> mRowComparator = new Comparator<AppRow>() {
-        private final Collator sCollator = Collator.getInstance();
-        @Override
-        public int compare(AppRow lhs, AppRow rhs) {
-            return sCollator.compare(lhs.label, rhs.label);
-        }
-    };
-
-    public static AppRow loadAppRow(PackageManager pm, PackageInfo pkg, Backend backend) {
-        final AppRow row = new AppRow();
-        row.pkg = pkg.packageName;
-        row.uid = pkg.applicationInfo.uid;
-        try {
-            row.label = pkg.applicationInfo.loadLabel(pm);
-        } catch (Throwable t) {
-            Log.e(TAG, "Error loading application label for " + row.pkg, t);
-            row.label = row.pkg;
-        }
-        row.icon = pkg.applicationInfo.loadIcon(pm);
-        row.banned = backend.getNotificationsBanned(row.pkg, row.uid);
-        row.priority = backend.getHighPriority(row.pkg, row.uid);
-        row.sensitive = backend.getSensitive(row.pkg, row.uid);
-        return row;
-    }
-
-    private final Runnable mCollectAppsRunnable = new Runnable() {
-        @Override
-        public void run() {
-            synchronized (mRows) {
-                final long start = SystemClock.uptimeMillis();
-                if (DEBUG) Log.d(TAG, "Collecting apps...");
-                mRows.clear();
-                mSortedRows.clear();
-
-                // collect all non-system apps
-                final PackageManager pm = mContext.getPackageManager();
-                for (PackageInfo pkg : pm.getInstalledPackages(PackageManager.GET_SIGNATURES)) {
-                    if (pkg.applicationInfo == null || isSystemApp(pkg)) {
-                        if (DEBUG) Log.d(TAG, "Skipping " + pkg.packageName);
-                        continue;
-                    }
-                    final AppRow row = loadAppRow(pm, pkg, mBackend);
-                    mRows.put(row.pkg, row);
-                }
-                // collect config activities
-                if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
-                        + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
-                final List<ResolveInfo> resolveInfos = pm.queryIntentActivities(
-                        APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
-                        PackageManager.MATCH_DEFAULT_ONLY);
-                if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities");
-                for (ResolveInfo ri : resolveInfos) {
-                    final ActivityInfo activityInfo = ri.activityInfo;
-                    final ApplicationInfo appInfo = activityInfo.applicationInfo;
-                    final AppRow row = mRows.get(appInfo.packageName);
-                    if (row == null) {
-                        Log.v(TAG, "Ignoring notification preference activity ("
-                                + activityInfo.name + ") for unknown package "
-                                + activityInfo.packageName);
-                        continue;
-                    }
-                    if (row.settingsIntent != null) {
-                        Log.v(TAG, "Ignoring duplicate notification preference activity ("
-                                + activityInfo.name + ") for package "
-                                + activityInfo.packageName);
-                        continue;
-                    }
-                    row.settingsIntent = new Intent(Intent.ACTION_MAIN)
-                            .setClassName(activityInfo.packageName, activityInfo.name);
-                }
-                // sort rows
-                mSortedRows.addAll(mRows.values());
-                Collections.sort(mSortedRows, mRowComparator);
-                // compute sections
-                mSections.clear();
-                String section = null;
-                for (AppRow r : mSortedRows) {
-                    r.section = getSection(r.label);
-                    if (!r.section.equals(section)) {
-                        section = r.section;
-                        mSections.add(section);
-                    }
-                }
-                mHandler.post(mRefreshAppsListRunnable);
-                final long elapsed = SystemClock.uptimeMillis() - start;
-                if (DEBUG) Log.d(TAG, "Collected " + mRows.size() + " apps in " + elapsed + "ms");
-            }
-        }
-    };
-
-    private void refreshDisplayedItems() {
-        if (DEBUG) Log.d(TAG, "Refreshing apps...");
-        mAdapter.clear();
-        synchronized (mSortedRows) {
-            String section = null;
-            final int N = mSortedRows.size();
-            boolean first = true;
+    private static PackageInfo findPackageInfo(PackageManager pm, String pkg, int uid) {
+        final String[] packages = pm.getPackagesForUid(uid);
+        if (packages != null && pkg != null) {
+            final int N = packages.length;
             for (int i = 0; i < N; i++) {
-                final AppRow row = mSortedRows.get(i);
-                if (!row.section.equals(section)) {
-                    section = row.section;
-                    Row r = new Row();
-                    r.section = section;
-                    mAdapter.add(r);
-                    first = true;
+                final String p = packages[i];
+                if (pkg.equals(p)) {
+                    try {
+                        return pm.getPackageInfo(pkg, 0);
+                    } catch (NameNotFoundException e) {
+                        Log.w(TAG, "Failed to load package " + pkg, e);
+                    }
                 }
-                row.first = first;
-                mAdapter.add(row);
-                first = false;
             }
         }
-        if (mListViewState != null) {
-            if (DEBUG) Log.d(TAG, "Restoring listView state");
-            getListView().onRestoreInstanceState(mListViewState);
-            mListViewState = null;
-        }
-        if (DEBUG) Log.d(TAG, "Refreshed " + mSortedRows.size() + " displayed items");
-    }
-
-    private final Runnable mRefreshAppsListRunnable = new Runnable() {
-        @Override
-        public void run() {
-            refreshDisplayedItems();
-        }
-    };
-
-    public static class Backend {
-        public boolean setNotificationsBanned(String pkg, int uid, boolean banned) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-            try {
-                nm.setNotificationsEnabledForPackage(pkg, uid, !banned);
-                return true;
-            } catch (Exception e) {
-               Log.w(TAG, "Error calling NoMan", e);
-               return false;
-            }
-        }
-
-        public boolean getNotificationsBanned(String pkg, int uid) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-            try {
-                final boolean enabled = nm.areNotificationsEnabledForPackage(pkg, uid);
-                return !enabled;
-            } catch (Exception e) {
-                Log.w(TAG, "Error calling NoMan", e);
-                return false;
-            }
-        }
-
-        public boolean getHighPriority(String pkg, int uid) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-            try {
-                return nm.getPackagePriority(pkg, uid) == Notification.PRIORITY_MAX;
-            } catch (Exception e) {
-                Log.w(TAG, "Error calling NoMan", e);
-                return false;
-            }
-        }
-
-        public boolean setHighPriority(String pkg, int uid, boolean highPriority) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-            try {
-                nm.setPackagePriority(pkg, uid,
-                        highPriority ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
-                return true;
-            } catch (Exception e) {
-                Log.w(TAG, "Error calling NoMan", e);
-                return false;
-            }
-        }
-
-        public boolean getSensitive(String pkg, int uid) {
-            // TODO get visibility state from NoMan
-            return false;
-        }
-
-        public boolean setSensitive(String pkg, int uid, boolean sensitive) {
-            // TODO save visibility state to NoMan
-            return true;
-        }
+        return null;
     }
 }
