@@ -1084,19 +1084,21 @@ public class SettingsActivity extends Activity
             while (n >= 0) {
 
                 DashboardTile tile = category.getTile(n);
-
+                boolean removeTile = false;
                 id = (int) tile.id;
                 if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
-                    Utils.updateTileToSpecificActivityFromMetaDataOrRemove(this, category, tile);
+                    if (!Utils.updateTileToSpecificActivityFromMetaDataOrRemove(this, tile)) {
+                        removeTile = true;
+                    }
                 } else if (id == R.id.wifi_settings) {
                     // Remove WiFi Settings if WiFi service is not available.
                     if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 } else if (id == R.id.bluetooth_settings) {
                     // Remove Bluetooth Settings if Bluetooth service is not available.
                     if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 } else if (id == R.id.data_usage_settings) {
                     // Remove data usage when kernel module not enabled
@@ -1104,7 +1106,7 @@ public class SettingsActivity extends Activity
                             .asInterface(ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
                     try {
                         if (!netManager.isBandwidthControlEnabled()) {
-                            category.removeTile(n);
+                            removeTile = true;
                         }
                     } catch (RemoteException e) {
                         // ignored
@@ -1113,11 +1115,11 @@ public class SettingsActivity extends Activity
                     // Remove battery settings when battery is not available. (e.g. TV)
 
                     if (!mBatteryPresent) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 } else if (id == R.id.home_settings) {
                     if (!updateHomeSettingTiles(tile)) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 } else if (id == R.id.user_settings) {
                     boolean hasMultipleUsers =
@@ -1127,38 +1129,40 @@ public class SettingsActivity extends Activity
                             || (!UserManager.supportsMultipleUsers()
                                     && !hasMultipleUsers)
                             || Utils.isMonkeyRunning()) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 } else if (id == R.id.nfc_payment_settings) {
                     if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
-                        category.removeTile(n);
+                        removeTile = true;
                     } else {
                         // Only show if NFC is on and we have the HCE feature
                         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
                         if (!adapter.isEnabled() || !getPackageManager().hasSystemFeature(
                                 PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
-                            category.removeTile(n);
+                            removeTile = true;
                         }
                     }
                 } else if (id == R.id.print_settings) {
                     boolean hasPrintingSupport = getPackageManager().hasSystemFeature(
                             PackageManager.FEATURE_PRINTING);
                     if (!hasPrintingSupport) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 } else if (id == R.id.development_settings) {
                     if (!showDev || um.hasUserRestriction(
                             UserManager.DISALLOW_DEBUGGING_FEATURES)) {
-                        category.removeTile(n);
+                        removeTile = true;
                     }
                 }
 
                 if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
-                        && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)
-                        && n < category.getTilesCount()) {
-                    category.removeTile(n);
+                        && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
+                    removeTile = true;
                 }
 
+                if (removeTile && n < category.getTilesCount()) {
+                    category.removeTile(n);
+                }
                 n--;
             }
         }
