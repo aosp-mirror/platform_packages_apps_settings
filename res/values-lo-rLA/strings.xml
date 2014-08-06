@@ -38,6 +38,8 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"ປິດວິທະຍຸ"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"ເປີດໃຊ້ SMS ຜ່ານ​ IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"ປິດການນຳໃຊ້ SMS ຜ່ານ IMS"</string>
+    <string name="mo_over_volte_on" msgid="8839019743280675289">"ເປີດ​ນຳ​ໃຊ້ MO over PS/VoLTE"</string>
+    <string name="mo_over_volte_off" msgid="662428904067315526">"ປິດ​ການ​ນຳ​ໃຊ້ MO over PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"ຈຳເປັນຕ້ອງເປີດນຳໃຊ້ການລົງທະບຽນ IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"ຈຳເປັນຕ້ອງປິດການລົງທະບຽນ IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"ເປີດການ dump ໜ່ວຍຄວາມຈຳຂອງ LTE"</string>
@@ -519,10 +521,8 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"ການໂອນຍ້າຍໄຟລ໌"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"ອຸປະກອນປ້ອນຂໍ້ມູນ"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"ການເຂົ້າເຖິງອິນເຕີເນັດ"</string>
-    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
-    <skip />
+    <string name="bluetooth_profile_pbap" msgid="5372051906968576809">"ການ​ແບ່ງ​ປັນ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
+    <string name="bluetooth_profile_pbap_summary" msgid="6605229608108852198">"​ໃຊ້​ສຳ​ລັບການ​ແບ່ງ​ປັນ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"ການແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດ"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"ການ​ເຂົ້າ​ເຖິງ​ຂໍ້​ຄວາມ"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຈະຖືກຖອດການເຊື່ອມຕໍ່ຈາກສື່ດ້ານສຽງ."</string>
@@ -534,8 +534,7 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"ອຸປະກອນ Bluetooth ທີ່ຈັບຄູ່ແລ້ວ"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"ເຊື່ອມຕໍ່"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"ເຊື່ອມຕໍ່ຫາອຸປະກອນ Bluetooth"</string>
-    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
-    <skip />
+    <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"​ໃຊ້​ສຳ​ລັບ"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"ປ່ຽນຊື່"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"ອະນຸຍາດໃຫ້ມີການສົ່ງໄຟລ໌ເຂົ້າມາໄດ້"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"ເຊື່ອມຕໍ່ກັບສື່ດ້ານສຽງແລ້ວ"</string>
@@ -595,7 +594,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"ປິດ"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກ NFC ຖືກປິດໄວ້"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="6981652347448777459">"ເມື່ອເປີດໃຊ້ຄຸນສົມບັດນີ້ແລ້ວ ທ່ານຈະສາມາດປ່ອຍຄື່ນສັນຍານ ເພື່ອສົ່ງເນື້ອຫາແອັບຯໄປໃຫ້ອຸປະກອນທີ່ຮອງຮັບ NFC ເຄື່ອງອື່ນໄດ້ໂດຍການນຳອຸປະກອນມາຢູ່ໃກ້ໆກັນ. ຍົກຕົວຢ່າງເຊັ່ນ: ທ່ານສາມາດສົ່ງໜ້າເວັບ, ວິດີໂອ YouTube, ລາຍຊື່ຜູ່ຕິດຕໍ່ ແລະຂໍ້ມູນອື່ນໆ ໃຫ້ກັບອຸປະກອນອື່ນໂດຍໃຊ້ NFC ໄດ້.\n\nພຽງນຳອຸປະກອນມາຢູ່ໃກ້ໆກັນ (ໂດຍປົກກະຕິຈະເອົາດ້ານຫຼັງມາຕິດກັນ) ຈາກນັ້ນແຕະໃສ່ທີ່ໜ້າຈໍຂອງທ່ານ, ແອັບຯກໍຈະກວດສອບວ່າຈະສົ່ງຂໍ້ມູນຫຍັງແດ່."</string>
+    <string name="android_beam_explained" msgid="6981652347448777459">"ເມື່ອ​ເປີດ​ໃຊ້​ຄຸນສົມບັດນີ້​ແລ້ວ​ທ່ານ​ຈະ​ສາມາດ​ປ່ອຍ​ຄື່ນ​ສັນຍານ​ເພື່ອ​ສົ່ງ​ເນື້ອຫາ​ແອັບຯ​ໄປ​ໃຫ້​ອຸປະກອນ​ທີ່​ຮອງຮັບ NFC ເຄື່ອງ​ອື່ນ​ໄດ້​ໂດຍ​ການ​ນຳ​ອຸປະກອນ​ມາ​ຢູ່​ໃກ້ໆ​ກັນ. ເຊັ່ນ: ທ່ານ​ສາມາດ​ສົ່ງ​ໜ້າ​ເວັບ, ວິດີໂອ YouTube, ລາຍຊື່​ຜູ່ຕິດຕໍ່ ແລະ​ຂໍ້ມູນ​ອື່ນໆ ໃຫ້​ກັບ​ອຸປະກອນ​ອື່ນ​ໂດຍ​ໃຊ້ NFC ໄດ້.\n\nພຽງ​ນຳ​ອຸປະກອນ​ມາ​ຢູ່​ໃກ້ໆ​ກັນ (ໂດຍ​ປົກກະຕິ​ຈະ​ເອົາ​ດ້ານ​ຫຼັງ​ມາ​ຕິດ​ກັນ) ຈາກນັ້ນ​ແຕະ​ໃສ່​ທີ່​ໜ້າ​ຈໍ​ຂອງ​ທ່ານ, ແອັບຯ​ກໍ​ຈະ​ກວດ​ສອບ​ວ່າ​ຈະ​ສົ່ງ​ຂໍ້ມູນ​ຫຍັງ​ແດ່."</string>
     <string name="nsd_quick_toggle_title" msgid="3125572815278848258">"ການຄົ້ນຫາບໍລິການເຄືອຂ່າຍ"</string>
     <string name="nsd_quick_toggle_summary" msgid="155692215972781276">"ອະນຸຍາດໃຫ້ແອັບຯໃນອຸປະກອນອື່ນ ສາມາດຊອກເຫັນແອັບຯໃນອຸປະກອນນີ້ໄດ້"</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi​-Fi"</string>
@@ -848,6 +847,8 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"ການຕັ້ງຄ່າ"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ປັບຄວາມແຈ້ງອັດຕະໂນມັດ"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"ຍົກ​ເພື່ອ​ເປີດ​ໜ້າ​ຈໍ"</string>
+    <string name="doze_title" msgid="2259176504273878294">"ການ​ສະ​ແດງ​ຜົນ​ສະ​ພາບ​ແວດ​ລ້ອມ"</string>
+    <string name="doze_summary" msgid="8300817661725517088">"​ເປີດ​ໜ້າ​ຈໍ​ເມື່ອ​​ມີ​ການ​ຈ​ັບ​ອຸ​ປະ​ກອນ​ຂຶ້ນ​ມາ ຫຼື​ມີ​ການ​ແຈ້ງ​ເຕືອນ"</string>
     <string name="title_font_size" msgid="4405544325522105222">"ຂະໜາດໂຕອັກສອນ"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"ຂະໜາດໂຕອັກສອນ"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"ການຕັ້ງຄ່າການລັອກ SIM card"</string>
@@ -1078,8 +1079,8 @@
     <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"ແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງແທັບເລັດເຄື່ອງນີ້ໃຫ້ <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> ອຸປະກອນ"</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"ແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງໂທລະສັບເຄື່ອງນີ້ໃຫ້ <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> ອຸປະກອນ"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="1790242032929221788">"ແບ່ງ​​ປັນການ​ເຊື່ອມ​ຕໍ່​ຂອງ​ອຸ​ປະ​ກອນ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> ນີ້"</string>
-    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"ບໍ່ໄດ້ແບ່ງປັນການເຊື່ອມຕໍ່ຂອງແທັບເລັດນີ້"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"ບໍ່ໄດ້ແບ່ງປັນການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງໂທລະສັບເຄື່ອງນີ້"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"ບໍ່​ໄດ້​ປ່ອຍ​ສັນຍານ​ອິນເຕີເນັດ​ຂອງ​ແທັບເລັດ​ເຄື່ອງ​ນີ້"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"ບໍ່​ໄດ້​ປ່ອຍ​ສັນຍານ​ອິນເຕີເນັດ​ຂອງ​ໂທລະສັບ​ເຄື່ອງ​ນີ້"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"ບໍ່ໄດ້ປ່ອຍສັນຍານ"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="6285122039489881969">"ບໍ່ສາມາດປ່ອຍສັນຍານໃຫ້ໄດ້ຫຼາຍກວ່າ <xliff:g id="MAXCONNECTION">%1$d</xliff:g> ອຸປະກອນ."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຈະຖືກຍົກເລີກການປ່ອຍສັນຍານ."</string>
@@ -1857,12 +1858,9 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"ປິດການນຳໃຊ້"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"ຜູ່ເບິ່ງແຍງລະບົບອຸປະກອນ"</string>
     <string name="no_device_admins" msgid="702695100241728775">"ບໍ່ມີຜູ່ເບິ່ງແຍງລະບົບອຸປະກອນ"</string>
-    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
-    <skip />
-    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
-    <skip />
-    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
-    <skip />
+    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"​ເພື່ອ​ຢຸດ <xliff:g id="APP_NAME">%1$s</xliff:g> ​ຈາກ​ການ​ເຂົ້າ​ເຖິງ​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ​ຂອງ​ທ່ານ, ໃຫ້​​ລຶບ​ໂປຣ​ໄຟລ໌​ດັ່ງ​ກ່າວ​ອອກ​ຢູ່​ໃນ​ເມ​ນູ ການ​ຕັ້ງ​ຄ່າ &gt; ບັນ​ຊີ."</string>
+    <string name="personal_device_admin_title" msgid="2849617316347669861">"​ສ່ວນ​ໂຕ"</string>
+    <string name="managed_device_admin_title" msgid="7853955652864478435">"​ບ່ອນ​ເຮັດ​ວຽກ"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"ບໍ່​ມີ​ຕົວ​ແທນ​ການ​ເຊື່ອ​ຖື​ທີ່​ໃຊ​້​ໄດ້"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"ເປີດນຳໃຊ້ຜູ່ເບິ່ງແຍງລະບົບຂອງອຸປະກອນ?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"ເປິດນຳໃຊ້"</string>
@@ -2188,8 +2186,7 @@
     <string name="user_add_user_message_long" msgid="718192651887726259">"ທ່ານ​ສາ​ມາດ​ແບ່ງ​ປັນ​ອຸ​ປະ​ກອນ​ນີ້​ໃຫ້​ຄົນ​ອື່ນ​ໃຊ້​ໄດ້​ໂດຍ​ການ​ສ້າງ​ຜູ່​ໃຊ້​ເພີ່ມ​ເຕີມ. ແຕ່​ລະ​ຜູ່​ໃຊ້​ຈະ​ມີ​ພື້ນ​ທີ່​ເກັບ​ຂໍ້​ມູນ​ຂອງ​ເຂົາ​ເຈົ້າ​ເອງ​ເຊິ່ງ​ພວກ​ເຂົາ​ຈະ​ສາ​ມາດ​ຈັດ​ລະ​ບຽບ​ແອັບຯ, ຮູບ​ພາບ​ພື້ນຫຼັງ ແລະ​ອື່ນໆ​ຂອງ​ເຂົາ​ເຈົ້າ​ໄດ້. ຜູ່​ໃຊ້​ຕ່າງໆ​ຍັງ​ຈະ​ສາ​ມາດ​ປັບ​ແຕ່ງ​ການ​ຕັ້ງ​ຄ່າ​ຂອງ​ອຸ​ປະ​ກອນ​ໄດ້​ ເຊັ່ນ: Wi‑Fi ເຊິ່ງ​ຈະ​ມີ​ຜົນ​ກັບ​ຜູ່​ໃຊ້​ທຸກ​ຄົນ.\n\nເມື່ອ​ທ່ານ​ເພີ່ມ​ຜູ່​ໃຊ້​ໃໝ່, ຜູ່​ໃຊ້​ນັ້ນ​ຈະ​ຕ້ອງ​ຕັ້ງ​ຄ່າ​ພື້ນ​ທີ່​ບ່ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ຂອງ​ລາວ.\n\nຜູ່​ໃຊ້​ທຸກ​ຄົນ​ສາ​ມາດ​ອັບ​ເດດ​ແອັບຯ​ສຳ​ລັບ​ຜູ່​ໃຊ້​ຄົນ​ອື່ນ​ທັງ​ໝົດ​ໄດ້."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"ເມື່ອ​ທ່ານ​ເພີ່ມ​ຜູ່​ໃຊ້​ໃໝ່, ຜູ່​ໃຊ້​ນັ້ນ​ຈະ​ຕ້ອງ​ຕັ້ງ​ຄ່າ​ພື້ນ​ທີ່​ບ່ອນ​ຈັດ​ເກັບ​ຂໍ້​ມູນ​ຂອງ​ລາວ.\n\nຜູ່​ໃຊ້​ທຸກ​ຄົນ​ສາ​ມາດ​ອັບ​ເດດ​ແອັບຯ​ສຳ​ລັບ​ຜູ່​ໃຊ້​ຄົນ​ອື່ນ​ທັງ​ໝົດ​ໄດ້."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"ຕັ້ງຄ່າຜູ່ໃຊ້ດຽວນີ້?"</string>
-    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
-    <skip />
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"ກວດ​ສອບ​ໃຫ້​ແນ່​ໃຈ​ວ່າ​ບຸກ​ຄົນ​ດັ່ງ​ກ່າວ​ສາ​ມາດ​ຮັບ​ອຸ​ປະ​ກອນ​ແລະ​ຕັ້ງ​ຄ່າ​ພື້ນ​ທີ່​ຂອງ​ພວກ​ເຂົາ​ໄດ້"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"ຕັ້ງຄ່າໂປຣໄຟລ໌ດຽວນີ້?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"ຕັ້ງຄ່າດຽວນີ້"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"ບໍ່ແມ່ນຕອນນີ້"</string>
@@ -2382,6 +2379,8 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"ສະແດງ​ເນື້ອຫາ​ການແຈ້ງເຕືອນ​ທັງໝົດ"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"ເລືອກ​ເນື້ອຫາ​ການແຈ້ງເຕືອນ​ທີ່​ລະອຽດອ່ອນ"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"ບໍ່​ສະ​ແດງ​ການ​ແຈ້ງ​ເຕືອນ​ເລີຍ"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (6164532459432182244) -->
+    <skip />
     <string name="app_notifications_title" msgid="5810577805218003760">"​ການ​ແຈ້ງ​ເຕືອນ​ແອັບຯ"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"ສຽງ​ອື່ນໆ"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ສຽງ​ປຸ່ມ​ກົດ"</string>
@@ -2414,13 +2413,22 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"ເປີດ​ໃຊ້ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> ຈະ​ສາມາດ​ເພີ່ມ​ເງື່ອນ​ໄຂ​ການ​ອອກ​ຈາກ​ໂໝດ​ຫ້າມ​ລົບ​ກວນ​ໄດ້."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"​ກຳ​ລັງ​ໂຫລດ​ແອັບຯ..."</string>
-    <string name="app_notifications_dialog_show" msgid="6912410502091785846">"ສະແດງການແຈ້ງເຕືອນ"</string>
-    <string name="app_notifications_dialog_priority" msgid="3025242591043646494">"​ສະ​ແດງ​ທາງ​ເທິງ​ສຸດ"</string>
-    <string name="app_notifications_dialog_visibility" msgid="2983683711202708107">"​ເຊື່ອງ​ເນື້ອ​ຫາ​ທີ່​ລະ​ອຽດ​ອ່ອນ​ເມື່ອ​ອຸ​ປະ​ກອນ​ຖືກ​ລັອກ"</string>
+    <!-- no translation found for app_notification_block_title (172237877395761371) -->
+    <skip />
+    <!-- no translation found for app_notification_block_summary (9049487483231233726) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_title (1967189807102076587) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (7513344552201639232) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (7707233094233553192) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8850104564623526005) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ບລັອກ​ແລ້ວ"</string>
-    <string name="app_notification_row_priority" msgid="7597101427045166499">"​ສຳ​ຄັນ​ທີ່​ສຸດ"</string>
+    <!-- no translation found for app_notification_row_priority (7723839972982746568) -->
+    <skip />
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"​ລະ​ອຽດ​​ອ່ອນ"</string>
-    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"ແລ້ວໆ"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"ຈົນກວ່າ​ທ່ານ​ຈະ​ປິດ"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"ການ​ລົບກວນ​ສຳຄັນ"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"ດາວທາມ (ການ​ລົບກວນ​ສຳຄັນ​ເທົ່າ​ນັ້ນ)"</string>
@@ -2436,8 +2444,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"ທຸກຄົນ"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"ສະ​ເພາະ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"ສະເພາະ​ລາຍຊື່​ຜູ່ຕິດຕໍ່​ຕິດດາວ"</string>
-    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"​ໂມງ​ປຸກ​ແລະ​ການ​ແຈ້ງ​ເຕືອນອ​ື່ນໆ​ແມ່ນ​ສຳ​ຄັນ​ສະ​ເໝີ"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"ເປີດ​ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"ບໍ່ໃຊ້"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"ທຸກ​ທ່ຽງ​ຄືນ"</string>
@@ -2453,6 +2460,5 @@
     <string name="switch_off_text" msgid="1139356348100829659">"ປິດ"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"ການ​ປັກ​ໝຸດ​ໜ້າ​ຈໍ"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"ເມື່ອ​ການ​ຕັ້ງ​ຄ່າ​ນີ້​ຖືກ​ເປີດ​ໃຊ້​ແລ້ວ, ທ່ານ​ຈະ​ສາ​ມາດ​ກຳ​ນົດ​ໃຫ້​ອຸ​ປະ​ກອນ​​ສະ​ແດງ​ໜ້າ​ຈໍ​ປັດ​ຈຸ​ບັນ​ໄດ້.\n\nເພື່ອ​ປັກ​ໝຸດ​ໜ້າ​ຈໍ:\n\n1. ເປີດ​ໃຊ້​ການ​ຕັ້ງ​ຄ່າ​ນີ້.\n\n2. ເປີດ​ແອັບຯ​ໃດ​ນຶ່ງ​ທີ່​ຕ້ອງ​ການ.\n\n3. ແຕະ​ທີ່​ປຸ່ມ​ \"ເມື່ອ​ໄວໆ​ນີ້\".\n\n4. ແຕະ​ທີ່​ເຄື່ອງ​ໝາຍ​ປັກ​ໝຸດ."</string>
-    <!-- no translation found for managed_user_title (8101244883654409696) -->
-    <skip />
+    <string name="managed_user_title" msgid="8101244883654409696">"​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ"</string>
 </resources>
