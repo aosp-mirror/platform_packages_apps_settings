@@ -38,6 +38,8 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Vypnúť rádio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Zapnúť správy SMS prostredníctvom IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Vypnúť správy SMS prostredníctvom IMS"</string>
+    <string name="mo_over_volte_on" msgid="8839019743280675289">"Povoliť prenos MO cez PS/VoLTE"</string>
+    <string name="mo_over_volte_off" msgid="662428904067315526">"Zakázať prenos MO cez PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Zapnúť požadovanie registrácie IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Vypnúť požadovanie registrácie IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Zapnúť výpis pamäte lte ram"</string>
@@ -519,10 +521,8 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Prenos súborov"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Vstupné zariadenie"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Prístup na Internet"</string>
-    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
-    <skip />
+    <string name="bluetooth_profile_pbap" msgid="5372051906968576809">"Zdieľanie kontaktov"</string>
+    <string name="bluetooth_profile_pbap_summary" msgid="6605229608108852198">"Použiť na zdieľanie kontaktov"</string>
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Zdieľanie pripojenia na Internet"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"Prístup ku správam"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude odpojené od zvukovej jednotky média."</string>
@@ -534,8 +534,7 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Spárované zariadenia Bluetooth"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Pripojiť"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Umožňuje pripojenie zariadenia s rozhraním Bluetooth"</string>
-    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
-    <skip />
+    <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"Použitie"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Premenovať"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Povoliť prichádzajúce prenosy súborov"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Pripojené ku zvukovému médiu"</string>
@@ -848,6 +847,8 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Nastavenia"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatický jas"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Prebudiť zdvihnutím"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Ambientné zobrazenie"</string>
+    <string name="doze_summary" msgid="8300817661725517088">"Prebudiť obrazovku pri zdvihnutí zariadenia alebo pri novom upozornení"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veľkosť písma"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Veľkosť písma"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Nastavenia zámky karty SIM"</string>
@@ -1090,7 +1091,7 @@
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"Zmeniť aplikáciu SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"Použiť aplikáciu <xliff:g id="NEW_APP">%1$s</xliff:g> namiesto <xliff:g id="CURRENT_APP">%2$s</xliff:g> ako aplikáciu pre SMS?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"Použiť aplikáciu <xliff:g id="NEW_APP">%s</xliff:g> ako aplikáciu pre SMS?"</string>
-    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Zmeniť asistenta pripojenia Wi-Fi?"</string>
+    <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"Zmeniť aplikáciu asistent pripojenia Wi-Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"Chcete spravovať sieťové pripojenia pomocou aplikácie <xliff:g id="NEW_APP">%1$s</xliff:g> namiesto aplikácie <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"Chcete spravovať sieťové pripojenia pomocou aplikácie <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="mobile_unknown_sim_operator" msgid="2156912373230276157">"Neznámy operátor SIM karty"</string>
@@ -1857,12 +1858,9 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktivovať"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Správcovia zariadenia"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Nie je k dispozícii žiadny správca nastavení"</string>
-    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
-    <skip />
-    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
-    <skip />
-    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
-    <skip />
+    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"Ak chcete aplikácii <xliff:g id="APP_NAME">%1$s</xliff:g> zakázať prístup k prac. profilu, odstráňte profil v časti Nastavenia &gt; Účet."</string>
+    <string name="personal_device_admin_title" msgid="2849617316347669861">"Osobné"</string>
+    <string name="managed_device_admin_title" msgid="7853955652864478435">"Práca"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nie sú k dispozícii žiadni zástupcovia dôveryhodnosti"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Aktivovať správcu zariadenia?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Aktivovať"</string>
@@ -2185,11 +2183,10 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Používateľ"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Obmedzený profil"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Pridať nového používateľa?"</string>
-    <string name="user_add_user_message_long" msgid="718192651887726259">"Vytvorením ďalších používateľov môžete toto zariadenie zdieľať s inými ľuďmi. Každý používateľ má svoje prostredie, ktoré si môže prispôsobiť vlastnými aplikáciami, tapetou atď. Používatelia tiež môžu upraviť nastavenia zariadenia (napr. Wi-Fi), ktorá ovplyvnia všetkých ostatných používateľov.\n\nKeď pridáte nového používateľa, musí si nastaviť vlastný priestor.\n\nAkýkoľvek používateľ môže aktualizovať aplikácie všetkých ostatných používateľov."</string>
+    <string name="user_add_user_message_long" msgid="718192651887726259">"Vytvorením ďalších používateľov môžete toto zariadenie zdieľať s inými ľuďmi. Každý používateľ má svoje prostredie, ktoré si môže prispôsobiť vlastnými aplikáciami, tapetou atď. Používatelia tiež môžu upraviť nastavenia zariadenia (napr. Wi-Fi), ktoré ovplyvnia všetkých ostatných používateľov.\n\nKeď pridáte nového používateľa, musí si nastaviť vlastný priestor.\n\nAkýkoľvek používateľ môže aktualizovať aplikácie všetkých ostatných používateľov."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Keď pridáte nového používateľa, musí si nastaviť vlastný priestor.\n\nAkýkoľvek používateľ môže aktualizovať aplikácie všetkých ostatných používateľov."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Chcete teraz nastaviť používateľa?"</string>
-    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
-    <skip />
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Zaistite, aby by si daná osoba mohla zariadenie prevziať a nastaviť svoj priestor"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Nastaviť profil?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Nastaviť teraz"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Teraz nie"</string>
@@ -2197,7 +2194,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Používateľov môže spravovať iba vlastník telefónu."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Profily s obmedzeniami nemôžu pridávať účty"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Odstrániť <xliff:g id="USER_NAME">%1$s</xliff:g> zo zariadenia"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Pridať používateľov, keď je zariadenie uzamknuté"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Pridať používateľov počas uzamknutia"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nový používateľ"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nový profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcete odstrániť svoj profil?"</string>
@@ -2382,6 +2379,8 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobraziť všetok obsah upozornení"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Skryť citlivý obsah upozornení"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Nezobrazovať upozornenia"</string>
+    <!-- no translation found for lock_screen_notifications_interstitial_message (6164532459432182244) -->
+    <skip />
     <string name="app_notifications_title" msgid="5810577805218003760">"Upozornenia aplikácií"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Iné zvuky"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Zvuky číselnej klávesnice"</string>
@@ -2414,13 +2413,22 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Povoliť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> bude môcť pridávať podmienky ukončenia do režimu Nerušiť."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Načítavajú sa aplikácie..."</string>
-    <string name="app_notifications_dialog_show" msgid="6912410502091785846">"Zobraziť upozornenia"</string>
-    <string name="app_notifications_dialog_priority" msgid="3025242591043646494">"Zobraziť v hornej časti zoznamu"</string>
-    <string name="app_notifications_dialog_visibility" msgid="2983683711202708107">"Keď je zariadenie uzamknuté, skryť citlivý obsah"</string>
+    <!-- no translation found for app_notification_block_title (172237877395761371) -->
+    <skip />
+    <!-- no translation found for app_notification_block_summary (9049487483231233726) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_title (1967189807102076587) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (7513344552201639232) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (7707233094233553192) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8850104564623526005) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokované"</string>
-    <string name="app_notification_row_priority" msgid="7597101427045166499">"Horná časť zoznamu"</string>
+    <!-- no translation found for app_notification_row_priority (7723839972982746568) -->
+    <skip />
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Citlivé"</string>
-    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Hotovo"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Dokým túto funkciu nevypnete"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Prioritné prerušenia"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Prestoje (iba prioritné prerušenia)"</string>
@@ -2436,8 +2444,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Ktokoľvek"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Iba kontakty"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Iba kontakty označené hviezd."</string>
-    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"Budíky a ďalšie osobné pripomenutia sú vždy prioritné"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Automaticky zapnúť"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nikdy"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Každú noc"</string>
@@ -2453,6 +2460,5 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Vypnuté"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Pripnutie obrazovky"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"Po zapnutí tohto nastavenia môžete zariadenie prepnúť do stavu, v ktorom sa bude zobrazovať iba aktuálna obrazovka.\n\nPostup pripnutia obrazovky:\n\n1. Zapnite toto nastavenie.\n\n2. Otvorte požadovanú aplikáciu.\n\n3. Dotknite sa tlačidla Nedávne.\n\n4. Dotknite sa ikony špendlíka."</string>
-    <!-- no translation found for managed_user_title (8101244883654409696) -->
-    <skip />
+    <string name="managed_user_title" msgid="8101244883654409696">"Pracovný profil"</string>
 </resources>
