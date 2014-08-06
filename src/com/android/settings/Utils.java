@@ -177,7 +177,7 @@ public final class Utils {
     }
 
     public static boolean updateTileToSpecificActivityFromMetaDataOrRemove(Context context,
-            DashboardCategory target, DashboardTile tile) {
+            DashboardTile tile) {
 
         Intent intent = tile.intent;
         if (intent != null) {
@@ -229,9 +229,6 @@ public final class Utils {
                 }
             }
         }
-
-        // Did not find a matching activity, so remove the preference
-        target.removeTile(tile);
 
         return false;
     }
