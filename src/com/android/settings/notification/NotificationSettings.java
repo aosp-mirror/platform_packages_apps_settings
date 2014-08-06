@@ -318,8 +318,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 final boolean show = val == R.string.lock_screen_notifications_summary_show;
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
-                Settings.Global.putInt(getContentResolver(),
-                        Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
                 return true;
             }
         });
@@ -338,8 +338,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     }
 
     private boolean getLockscreenNotificationsEnabled() {
-        return Settings.Global.getInt(getContentResolver(),
-                Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
     }
 
     private boolean getLockscreenAllowPrivateNotifications() {
@@ -378,7 +378,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         private final Uri LOCK_SCREEN_PRIVATE_URI =
                 Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS);
         private final Uri LOCK_SCREEN_SHOW_URI =
-                Settings.Global.getUriFor(Settings.Global.LOCK_SCREEN_SHOW_NOTIFICATIONS);
+                Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS);
 
         public SettingsObserver() {
             super(mHandler);
