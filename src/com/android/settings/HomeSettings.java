@@ -32,18 +32,22 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.content.pm.UserInfo;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -171,6 +175,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         mPrefs = new ArrayList<HomeAppPreference>();
         mHomeComponentSet = new ComponentName[homeActivities.size()];
         int prefIndex = 0;
+        boolean hasManagedProfile = hasManagedProfile();
         for (int i = 0; i < homeActivities.size(); i++) {
             final ResolveInfo candidate = homeActivities.get(i);
             final ActivityInfo info = candidate.activityInfo;
@@ -179,11 +184,19 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
             try {
                 Drawable icon = info.loadIcon(mPm);
                 CharSequence name = info.loadLabel(mPm);
-                HomeAppPreference pref = new HomeAppPreference(context, activityName, prefIndex,
-                        icon, name, this, info);
+                HomeAppPreference pref;
+
+                if (hasManagedProfile && !launcherHasManagedProfilesFeature(candidate)) {
+                    pref = new HomeAppPreference(context, activityName, prefIndex,
+                            icon, name, this, info, false /* not enabled */,
+                            getResources().getString(R.string.home_work_profile_not_supported));
+                } else  {
+                    pref = new HomeAppPreference(context, activityName, prefIndex,
+                            icon, name, this, info, true /* enabled */, null);
+                }
+
                 mPrefs.add(pref);
                 mPrefGroup.addPreference(pref);
-                pref.setEnabled(true);
                 if (activityName.equals(currentDefaultHome)) {
                     mCurrentHome = pref;
                 }
@@ -200,6 +213,31 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
                }
             });
         }
+    }
+
+    private boolean hasManagedProfile() {
+        Context context = getActivity();
+        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        List<UserInfo> profiles = userManager.getProfiles(context.getUserId());
+        for (UserInfo userInfo : profiles) {
+            if (userInfo.isManagedProfile()) return true;
+        }
+        return false;
+    }
+
+    private boolean launcherHasManagedProfilesFeature(ResolveInfo resolveInfo) {
+        try {
+            ApplicationInfo appInfo = getPackageManager().getApplicationInfo(
+                    resolveInfo.activityInfo.packageName, 0 /* default flags */);
+            return versionNumberAtLeastL(appInfo.targetSdkVersion);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    private boolean versionNumberAtLeastL(int versionNumber) {
+        // TODO: remove "|| true" once the build code for L is fixed.
+        return versionNumber >= Build.VERSION_CODES.L || true;
     }
 
     @Override
@@ -245,12 +283,14 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         String uninstallTarget;
 
         public HomeAppPreference(Context context, ComponentName activity,
-                int i, Drawable icon, CharSequence title,
-                HomeSettings parent, ActivityInfo info) {
+                int i, Drawable icon, CharSequence title, HomeSettings parent, ActivityInfo info,
+                boolean enabled, CharSequence summary) {
             super(context);
             setLayoutResource(R.layout.preference_home_app);
             setIcon(icon);
             setTitle(title);
+            setEnabled(enabled);
+            setSummary(summary);
             activityName = activity;
             fragment = parent;
             index = i;
@@ -305,13 +345,15 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
                 icon.setEnabled(false);
                 icon.setColorFilter(grayscaleFilter);
             } else {
+                icon.setEnabled(true);
                 icon.setOnClickListener(mDeleteClickListener);
                 icon.setTag(indexObj);
             }
 
             View v = view.findViewById(R.id.home_app_pref);
-            v.setOnClickListener(mHomeClickListener);
             v.setTag(indexObj);
+
+            v.setOnClickListener(mHomeClickListener);
         }
 
         void setChecked(boolean state) {
