@@ -26,7 +26,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcel;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -46,8 +45,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
@@ -60,6 +57,8 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final String TAG = "PowerUsageSummary";
 
     private static final String KEY_APP_LIST = "app_list";
+
+    private static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
@@ -116,6 +115,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
+        BatteryStatsHelper.dropFile(getActivity(), BATTERY_HISTORY_FILE);
         updateBatteryStatus(getActivity().registerReceiver(mBatteryInfoReceiver,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED)));
         if (mHandler.hasMessages(MSG_REFRESH_STATS)) {
@@ -151,11 +151,9 @@ public class PowerUsageSummary extends PreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference instanceof BatteryHistoryPreference) {
-            Parcel hist = Parcel.obtain();
-            mStatsHelper.getStats().writeToParcelWithoutUids(hist, 0);
-            byte[] histData = hist.marshall();
+            mStatsHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
             Bundle args = new Bundle();
-            args.putByteArray(BatteryHistoryDetail.EXTRA_STATS, histData);
+            args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
             args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST,
                     mStatsHelper.getBatteryBroadcast());
             SettingsActivity sa = (SettingsActivity) getActivity();
