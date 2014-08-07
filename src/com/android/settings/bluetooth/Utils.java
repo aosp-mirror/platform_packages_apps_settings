@@ -24,6 +24,8 @@ import android.content.DialogInterface;
 import android.widget.Toast;
 
 import com.android.settings.R;
+import com.android.settings.search.Index;
+import com.android.settings.search.SearchIndexableRaw;
 
 /**
  * Utils is a helper class that contains constants for various
@@ -100,5 +102,20 @@ final class Utils {
         } else {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Update the search Index for a specific class name and resources.
+     */
+    public static void updateSearchIndex(Context context, String className, String title,
+            String screenTitle, int iconResId, boolean enabled) {
+        SearchIndexableRaw data = new SearchIndexableRaw(context);
+        data.className = className;
+        data.title = title;
+        data.screenTitle = screenTitle;
+        data.iconResId = iconResId;
+        data.enabled = enabled;
+
+        Index.getInstance(context).updateFromSearchIndexableData(data);
     }
 }

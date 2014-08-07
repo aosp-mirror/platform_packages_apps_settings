@@ -18,28 +18,39 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
@@ -63,6 +74,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
+
+    private static View mSettingsDialogView = null;
 
     private BluetoothEnabler mBluetoothEnabler;
 
@@ -371,20 +384,60 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
         public void onClick(View v) {
             // User clicked on advanced options icon for a device in the list
-            if (v.getTag() instanceof CachedBluetoothDevice) {
-                if (isUiRestricted()) return;
-
-                CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
-
-                Bundle args = new Bundle(1);
-                args.putParcelable(DeviceProfilesSettings.EXTRA_DEVICE, device.getDevice());
-
-                ((SettingsActivity) getActivity()).startPreferencePanel(
-                        DeviceProfilesSettings.class.getName(), args,
-                        R.string.bluetooth_device_advanced_title, null, null, 0);
-            } else {
-                Log.w(TAG, "onClick() called for other View: " + v); // TODO remove
+            if (!(v.getTag() instanceof CachedBluetoothDevice)) {
+                Log.w(TAG, "onClick() called for other View: " + v);
+                return;
             }
+
+            final CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
+            final Activity activity = getActivity();
+            DeviceProfilesSettings profileFrag = (DeviceProfilesSettings)activity.
+                getFragmentManager().findFragmentById(R.id.bluetooth_fragment_settings);
+
+            if (mSettingsDialogView != null){
+                ViewGroup parent = (ViewGroup) mSettingsDialogView.getParent();
+                if (parent != null) {
+                    parent.removeView(mSettingsDialogView);
+                }
+            }
+            if (profileFrag == null) {
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_picker, null);
+                profileFrag = (DeviceProfilesSettings)activity.getFragmentManager()
+                .findFragmentById(R.id.bluetooth_fragment_settings);
+            }
+
+            final View dialogLayout = mSettingsDialogView;
+            AlertDialog.Builder settingsDialog = new AlertDialog.Builder(activity);
+            profileFrag.setDevice(device);
+            final EditText deviceName = (EditText)dialogLayout.findViewById(R.id.name);
+            deviceName.setText(device.getName(), TextView.BufferType.EDITABLE);
+            settingsDialog.setView(dialogLayout);
+            settingsDialog.setTitle(R.string.bluetooth_preference_paired_devices);
+            settingsDialog.setPositiveButton(R.string.okay,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    EditText deviceName = (EditText)dialogLayout.findViewById(R.id.name);
+                    device.setName(deviceName.getText().toString());
+                }
+            });
+            final Context context = v.getContext();
+            settingsDialog.setNegativeButton(R.string.forget,
+                    new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    device.unpair();
+                    com.android.settings.bluetooth.Utils.updateSearchIndex(activity,
+                            BluetoothSettings.class.getName(), device.getName(),
+                            context.getResources().getString(R.string.bluetooth_settings),
+                            R.drawable.ic_settings_bluetooth2, false);
+                }
+            });
+
+            AlertDialog dialog = settingsDialog.create();
+            dialog.create();
+            dialog.show();
         }
     };
 
