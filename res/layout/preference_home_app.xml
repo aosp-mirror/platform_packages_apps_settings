@@ -30,6 +30,7 @@
         android:clickable="true"
         android:gravity="center_vertical"
         android:background="?android:attr/selectableItemBackground" >
+
             <RadioButton
                 android:id="@+id/home_radio"
                 android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
                 android:orientation="vertical"
                 android:clickable="false"
                 android:focusable="false" />
+
             <ImageView
                 android:id="@+android:id/icon"
                 android:layout_width="48dp"
@@ -47,17 +49,35 @@
                 android:layout_gravity="center"
                 android:minWidth="48dp"
                 android:scaleType="centerInside"
-                android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"
-                />
-            <TextView
-                android:id="@+android:id/title"
+                android:layout_marginEnd="@*android:dimen/preference_item_padding_inner" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:ellipsize="end" />
+                android:focusable="true"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+android:id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:id="@+android:id/summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            </LinearLayout>
+
     </LinearLayout>
+
     <View
         android:id="@+id/home_divider"
         android:layout_width="2dip"
@@ -65,6 +85,7 @@
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:background="@android:drawable/divider_horizontal_dark" />
+
     <ImageView
         android:id="@+id/home_app_uninstall"
         android:layout_width="wrap_content"
@@ -77,4 +98,5 @@
         android:clickable="true"
         android:focusable="true"
         android:background="?android:attr/selectableItemBackground" />
+
 </LinearLayout>
