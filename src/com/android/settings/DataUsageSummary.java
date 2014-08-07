@@ -402,7 +402,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mAppSwitches = (LinearLayout) mAppDetail.findViewById(R.id.app_switches);
 
             mAppSettings = (Button) mAppDetail.findViewById(R.id.app_settings);
-            mAppSettings.setOnClickListener(mAppSettingsListener);
 
             mAppRestrict = new Switch(inflater.getContext());
             mAppRestrict.setClickable(false);
@@ -853,11 +852,24 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 }
             }
 
+            mAppSettings.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isAdded()) {
+                        return;
+                    }
+
+                    // TODO: target towards entire UID instead of just first package
+                    getActivity().startActivityAsUser(mAppSettingsIntent,
+                            new UserHandle(UserHandle.getUserId(uid)));
+                }
+            });
             mAppSettings.setEnabled(matchFound);
             mAppSettings.setVisibility(View.VISIBLE);
 
         } else {
             mAppSettingsIntent = null;
+            mAppSettings.setOnClickListener(null);
             mAppSettings.setVisibility(View.GONE);
         }
 
@@ -1107,16 +1119,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             } else {
                 setAppRestrictBackground(false);
             }
-        }
-    };
-
-    private OnClickListener mAppSettingsListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (!isAdded()) return;
-
-            // TODO: target torwards entire UID instead of just first package
-            startActivity(mAppSettingsIntent);
         }
     };
 
