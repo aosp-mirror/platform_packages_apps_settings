@@ -34,12 +34,15 @@ public class PowerGaugePreference extends Preference {
     private BatteryEntry mInfo;
     private int mProgress;
     private CharSequence mProgressText;
+    private final String mContentDescription;
 
-    public PowerGaugePreference(Context context, Drawable icon, BatteryEntry info) {
+    public PowerGaugePreference(Context context, Drawable icon, String contentDescription,
+            BatteryEntry info) {
         super(context);
         setLayoutResource(R.layout.preference_app_percentage);
         setIcon(icon != null ? icon : new ColorDrawable(0));
         mInfo = info;
+        mContentDescription = contentDescription;
     }
 
     public void setPercent(double percentOfMax, double percentOfTotal) {
@@ -62,5 +65,10 @@ public class PowerGaugePreference extends Preference {
 
         final TextView text1 = (TextView) view.findViewById(android.R.id.text1);
         text1.setText(mProgressText);
+
+        if (mContentDescription != null) {
+            final TextView titleView = (TextView) view.findViewById(android.R.id.title);
+            titleView.setContentDescription(mContentDescription);
+        }
     }
 }
