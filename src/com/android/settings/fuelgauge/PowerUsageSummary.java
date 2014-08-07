@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
@@ -294,8 +295,14 @@ public class PowerUsageSummary extends PreferenceFragment {
                 }
                 final UserHandle userHandle = new UserHandle(UserHandle.getUserId(sipper.getUid()));
                 final BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
+                final Drawable badgedIcon = mUm.getBadgedDrawableForUser(entry.getIcon(),
+                        userHandle);
+                // TODO: type of this will be replaced by CharSequence (see
+                // https://b.corp.google.com/issue?id=16401636 )
+                final String contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
+                        userHandle);
                 final PowerGaugePreference pref = new PowerGaugePreference(getActivity(),
-                        mUm.getBadgedDrawableForUser(entry.getIcon(), userHandle), entry);
+                        badgedIcon, contentDescription, entry);
 
                 final double percentOfMax = (sipper.value * 100) / mStatsHelper.getMaxPower();
                 sipper.percent = percentOfTotal;
