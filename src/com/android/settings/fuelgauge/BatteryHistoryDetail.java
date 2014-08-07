@@ -18,31 +18,27 @@ package com.android.settings.fuelgauge;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.BatteryStats;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.os.BatteryStatsImpl;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 
 public class BatteryHistoryDetail extends Fragment {
     public static final String EXTRA_STATS = "stats";
     public static final String EXTRA_BROADCAST = "broadcast";
 
-    private BatteryStatsImpl mStats;
+    private BatteryStats mStats;
     private Intent mBatteryBroadcast;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        byte[] data = getArguments().getByteArray(EXTRA_STATS);
-        Parcel parcel = Parcel.obtain();
-        parcel.unmarshall(data, 0, data.length);
-        parcel.setDataPosition(0);
-        mStats = com.android.internal.os.BatteryStatsImpl.CREATOR
-                .createFromParcel(parcel);
+        String histFile = getArguments().getString(EXTRA_STATS);
+        mStats = BatteryStatsHelper.statsFromFile(getActivity(), histFile);
         mBatteryBroadcast = getArguments().getParcelable(EXTRA_BROADCAST);
     }
     
