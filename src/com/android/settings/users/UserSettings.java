@@ -807,7 +807,19 @@ public class UserSettings extends SettingsPreferenceFragment
             mUserListCategory.addPreference(pref);
         }
 
-        if (!mIsGuest) {
+        boolean showGuestPreference = !mIsGuest;
+        // If user has DISALLOW_ADD_USER don't allow creating a guest either.
+        if (showGuestPreference && mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
+            showGuestPreference = false;
+            // If guest already exists, no user creation needed.
+            for (UserInfo user : users) {
+                if (user.isGuest()) {
+                    showGuestPreference = true;
+                    break;
+                }
+            }
+        }
+        if (showGuestPreference) {
             // Add a virtual Guest user for guest defaults
             Preference pref = new UserPreference(getActivity(), null,
                     UserPreference.USERID_GUEST_DEFAULTS,
@@ -936,6 +948,10 @@ public class UserSettings extends SettingsPreferenceFragment
             }
         }
         // No guest user. Create one.
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
+            Log.i(TAG, "Blocking guest creation because it is restricted");
+            return;
+        }
         UserInfo guestUser = mUserManager.createGuest(getActivity(),
                     getResources().getString(R.string.user_guest));
         if (guestUser != null) {
