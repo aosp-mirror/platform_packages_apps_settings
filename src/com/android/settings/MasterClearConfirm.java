@@ -65,7 +65,10 @@ public class MasterClearConfirm extends Fragment {
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
 
             if (pdbManager != null) {
-                pdbManager.wipe();
+                // if OEM unlock is enabled, this will be wiped during FR process.
+                if (!pdbManager.getOemUnlockEnabled()) {
+                    pdbManager.wipe();
+                }
             }
 
             if (mEraseSdCard) {
