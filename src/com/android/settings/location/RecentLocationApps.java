@@ -82,9 +82,9 @@ public class RecentLocationApps {
      * them for accessibility purposes.
      */
     private static class AccessiblePreference extends Preference {
-        public String mContentDescription;
+        public CharSequence mContentDescription;
 
-        public AccessiblePreference(Context context, String contentDescription) {
+        public AccessiblePreference(Context context, CharSequence contentDescription) {
             super(context);
             mContentDescription = contentDescription;
         }
@@ -103,7 +103,7 @@ public class RecentLocationApps {
             Drawable icon,
             CharSequence label,
             boolean isHighBattery,
-            String contentDescription,
+            CharSequence contentDescription,
             Preference.OnPreferenceClickListener listener) {
         AccessiblePreference pref = new AccessiblePreference(mActivity, contentDescription);
         pref.setIcon(icon);
@@ -209,7 +209,7 @@ public class RecentLocationApps {
             Drawable appIcon = mPackageManager.getApplicationIcon(appInfo);
             Drawable icon = um.getBadgedDrawableForUser(appIcon, userHandle);
             CharSequence appLabel = mPackageManager.getApplicationLabel(appInfo);
-            String badgedAppLabel = um.getBadgedLabelForUser(appLabel.toString(), userHandle);
+            CharSequence badgedAppLabel = um.getBadgedLabelForUser(appLabel.toString(), userHandle);
             preference = createRecentLocationEntry(icon,
                     appLabel, highBattery, badgedAppLabel,
                     new PackageEntryClickedListener(packageName));

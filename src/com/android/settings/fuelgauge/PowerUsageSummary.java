@@ -297,9 +297,7 @@ public class PowerUsageSummary extends PreferenceFragment {
                 final BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
                 final Drawable badgedIcon = mUm.getBadgedDrawableForUser(entry.getIcon(),
                         userHandle);
-                // TODO: type of this will be replaced by CharSequence (see
-                // https://b.corp.google.com/issue?id=16401636 )
-                final String contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
+                final CharSequence contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
                         userHandle);
                 final PowerGaugePreference pref = new PowerGaugePreference(getActivity(),
                         badgedIcon, contentDescription, entry);
