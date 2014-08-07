@@ -20,6 +20,8 @@ import android.graphics.drawable.Drawable;
 
 public class UidDetail {
     public CharSequence label;
+    public CharSequence contentDescription;
     public CharSequence[] detailLabels;
+    public CharSequence[] detailContentDescriptions;
     public Drawable icon;
 }

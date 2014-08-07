@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.IPackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Process;
@@ -30,6 +31,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -74,12 +77,35 @@ public class RecentLocationApps {
         }
     }
 
-    private Preference createRecentLocationEntry(
+    /**
+     * Subclass of {@link Preference} to intercept views and allow content description to be set on
+     * them for accessibility purposes.
+     */
+    private static class AccessiblePreference extends Preference {
+        public String mContentDescription;
+
+        public AccessiblePreference(Context context, String contentDescription) {
+            super(context);
+            mContentDescription = contentDescription;
+        }
+
+        @Override
+        protected void onBindView(View view) {
+            super.onBindView(view);
+            if (mContentDescription != null) {
+                final TextView titleView = (TextView) view.findViewById(android.R.id.title);
+                titleView.setContentDescription(mContentDescription);
+            }
+        }
+    }
+
+    private AccessiblePreference createRecentLocationEntry(
             Drawable icon,
             CharSequence label,
             boolean isHighBattery,
+            String contentDescription,
             Preference.OnPreferenceClickListener listener) {
-        Preference pref = new Preference(mActivity);
+        AccessiblePreference pref = new AccessiblePreference(mActivity, contentDescription);
         pref.setIcon(icon);
         pref.setTitle(label);
         if (isHighBattery) {
@@ -172,16 +198,20 @@ public class RecentLocationApps {
         int uid = ops.getUid();
         int userId = UserHandle.getUserId(uid);
 
-        Preference preference = null;
+        AccessiblePreference preference = null;
         try {
             IPackageManager ipm = AppGlobals.getPackageManager();
             ApplicationInfo appInfo =
                     ipm.getApplicationInfo(packageName, PackageManager.GET_META_DATA, userId);
+            Resources res = mActivity.getResources();
 
-            Drawable icon = um.getBadgedDrawableForUser(
-                    mPackageManager.getApplicationIcon(appInfo), new UserHandle(userId));
+            final UserHandle userHandle = new UserHandle(userId);
+            Drawable appIcon = mPackageManager.getApplicationIcon(appInfo);
+            Drawable icon = um.getBadgedDrawableForUser(appIcon, userHandle);
+            CharSequence appLabel = mPackageManager.getApplicationLabel(appInfo);
+            String badgedAppLabel = um.getBadgedLabelForUser(appLabel.toString(), userHandle);
             preference = createRecentLocationEntry(icon,
-                    mPackageManager.getApplicationLabel(appInfo), highBattery,
+                    appLabel, highBattery, badgedAppLabel,
                     new PackageEntryClickedListener(packageName));
         } catch (RemoteException e) {
             Log.w(TAG, "Error while retrieving application info", e);
