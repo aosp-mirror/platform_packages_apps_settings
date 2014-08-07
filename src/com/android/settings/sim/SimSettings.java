@@ -273,8 +273,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     // SubscriptionManager.setDefaultSMSSubId(subId);
                 }
 
-                updateAllOptions();
-
                 return true;
             }
         });
@@ -357,6 +355,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                         mSubInfoRecord.mSubId);
 
                     updateAllOptions();
+                    update();
                 }
             });
 
