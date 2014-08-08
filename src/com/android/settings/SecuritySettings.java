@@ -47,7 +47,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 
@@ -76,6 +78,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_DEVICE_ADMIN_CATEGORY = "device_admin_category";
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
+    private static final String KEY_ADVANCED_SECURITY = "advanced_security";
+    private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
@@ -94,6 +98,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
+
+    // Only allow one trust agent on the platform.
+    private static final boolean ONLY_ONE_TRUST_AGENT = true;
 
     private DevicePolicyManager mDPM;
 
@@ -213,35 +220,23 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Trust Agent preferences
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
-        if (securityCategory != null) {
-            PackageManager pm = getPackageManager();
-            List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
-                    PackageManager.GET_META_DATA);
-            List<ComponentName> enabledTrustAgents = mLockPatternUtils.getEnabledTrustAgents();
-            if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
-                for (ResolveInfo resolveInfo : resolveInfos) {
-                    if (resolveInfo.serviceInfo == null) continue;
-                    if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
-                    TrustAgentUtils.TrustAgentComponentInfo trustAgentComponentInfo =
-                            TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
-                    if (trustAgentComponentInfo.componentName == null ||
-                            !enabledTrustAgents.contains(
-                                    TrustAgentUtils.getComponentName(resolveInfo)) ||
-                            TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
-                    Preference trustAgentPreference =
-                            new Preference(securityCategory.getContext());
-                    trustAgentPreference.setKey(KEY_TRUST_AGENT);
-                    trustAgentPreference.setTitle(trustAgentComponentInfo.title);
-                    trustAgentPreference.setSummary(trustAgentComponentInfo.summary);
-                    // Create intent for this preference.
-                    Intent intent = new Intent();
-                    intent.setComponent(trustAgentComponentInfo.componentName);
-                    intent.setAction(Intent.ACTION_MAIN);
-                    trustAgentPreference.setIntent(intent);
-                    // Add preference to the settings menu.
-                    securityCategory.addPreference(trustAgentPreference);
-                    break; // Only render the first one.
-                }
+        if (securityCategory != null && mLockPatternUtils.isSecure()) {
+            ArrayList<TrustAgentComponentInfo> agents =
+                    getActiveTrustAgents(getPackageManager(), mLockPatternUtils);
+            for (int i = 0; i < agents.size(); i++) {
+                final TrustAgentComponentInfo agent = agents.get(i);
+                Preference trustAgentPreference =
+                        new Preference(securityCategory.getContext());
+                trustAgentPreference.setKey(KEY_TRUST_AGENT);
+                trustAgentPreference.setTitle(agent.title);
+                trustAgentPreference.setSummary(agent.summary);
+                // Create intent for this preference.
+                Intent intent = new Intent();
+                intent.setComponent(agent.componentName);
+                intent.setAction(Intent.ACTION_MAIN);
+                trustAgentPreference.setIntent(intent);
+                // Add preference to the settings menu.
+                securityCategory.addPreference(trustAgentPreference);
             }
         }
 
@@ -341,7 +336,45 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mToggleAppInstallation.setEnabled(false);
         }
 
+        // Advanced Security features
+        PreferenceGroup advancedCategory =
+                (PreferenceGroup)root.findPreference(KEY_ADVANCED_SECURITY);
+        if (advancedCategory != null && !mLockPatternUtils.isSecure()) {
+            Preference manageAgents = advancedCategory.findPreference(KEY_MANAGE_TRUST_AGENTS);
+            if (advancedCategory != null) advancedCategory.removePreference(manageAgents);
+        }
+
+        // The above preferences come and go based on security state, so we need to update
+        // the index. This call is expected to be fairly cheap, but we may want to do something
+        // smarter in the future.
+        Index.getInstance(getActivity())
+                .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
+
         return root;
+    }
+
+    private static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(
+            PackageManager pm, LockPatternUtils utils) {
+        ArrayList<TrustAgentComponentInfo> result = new ArrayList<TrustAgentComponentInfo>();
+        List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
+                PackageManager.GET_META_DATA);
+        List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents();
+        if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
+            for (int i = 0; i < resolveInfos.size(); i++) {
+                ResolveInfo resolveInfo = resolveInfos.get(i);
+                if (resolveInfo.serviceInfo == null) continue;
+                if (!TrustAgentUtils.checkProvidePermission(resolveInfo, pm)) continue;
+                TrustAgentComponentInfo trustAgentComponentInfo =
+                        TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
+                if (trustAgentComponentInfo.componentName == null ||
+                        !enabledTrustAgents.contains(
+                                TrustAgentUtils.getComponentName(resolveInfo)) ||
+                        TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
+                result.add(trustAgentComponentInfo);
+                if (ONLY_ONE_TRUST_AGENT) break;
+            }
+        }
+        return result;
     }
 
     private boolean isNonMarketAppsAllowed() {
@@ -626,7 +659,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new SecuritySearchIndexProvider();
 
-    static private class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
+    private static class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
 
         boolean mIsPrimary;
 
@@ -716,6 +749,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 result.add(data);
             }
 
+            // Advanced
+            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            if (lockPatternUtils.isSecure()) {
+                ArrayList<TrustAgentComponentInfo> agents =
+                        getActiveTrustAgents(context.getPackageManager(), lockPatternUtils);
+                for (int i = 0; i < agents.size(); i++) {
+                    final TrustAgentComponentInfo agent = agents.get(i);
+                    data = new SearchIndexableRaw(context);
+                    data.title = agent.title;
+                    data.screenTitle = screenTitle;
+                    result.add(data);
+                }
+            }
             return result;
         }
 
@@ -743,6 +789,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
             if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
                 keys.add(KEY_CREDENTIALS_MANAGER);
+            }
+
+            // TrustAgent settings disappear when the user has no primary security.
+            if (!lockPatternUtils.isSecure()) {
+                keys.add(KEY_TRUST_AGENT);
+                keys.add(KEY_MANAGE_TRUST_AGENTS);
             }
 
             return keys;
