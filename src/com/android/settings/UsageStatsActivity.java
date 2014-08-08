@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.usage.PackageUsageStats;
+import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import android.text.format.DateUtils;
@@ -48,15 +49,15 @@ import android.widget.AdapterView.OnItemSelectedListener;
 /**
  * Activity to display package usage statistics.
  */
-public class UsageStats extends Activity implements OnItemSelectedListener {
+public class UsageStatsActivity extends Activity implements OnItemSelectedListener {
     private static final String TAG = "UsageStatsActivity";
     private static final boolean localLOGV = false;
     private UsageStatsManager mUsageStatsManager;
     private LayoutInflater mInflater;
     private UsageStatsAdapter mAdapter;
     private PackageManager mPm;
-    
-    public static class AppNameComparator implements Comparator<PackageUsageStats> {
+
+    public static class AppNameComparator implements Comparator<UsageStats> {
         private Map<String, String> mAppLabelList;
 
         AppNameComparator(Map<String, String> appList) {
@@ -64,76 +65,87 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
         }
 
         @Override
-        public final int compare(PackageUsageStats a, PackageUsageStats b) {
+        public final int compare(UsageStats a, UsageStats b) {
             String alabel = mAppLabelList.get(a.getPackageName());
             String blabel = mAppLabelList.get(b.getPackageName());
             return alabel.compareTo(blabel);
         }
     }
 
-    public static class LastTimeUsedComparator implements Comparator<PackageUsageStats> {
+    public static class LastTimeUsedComparator implements Comparator<UsageStats> {
         @Override
-        public final int compare(PackageUsageStats a, PackageUsageStats b) {
+        public final int compare(UsageStats a, UsageStats b) {
             // return by descending order
             return (int)(b.getLastTimeUsed() - a.getLastTimeUsed());
         }
     }
-    
-    public static class UsageTimeComparator implements Comparator<PackageUsageStats> {
+
+    public static class UsageTimeComparator implements Comparator<UsageStats> {
         @Override
-        public final int compare(PackageUsageStats a, PackageUsageStats b) {
-            return (int)(b.getTotalTimeSpent() - a.getTotalTimeSpent());
+        public final int compare(UsageStats a, UsageStats b) {
+            return (int)(b.getTotalTimeInForeground() - a.getTotalTimeInForeground());
         }
     }
-    
+
     // View Holder used when displaying views
     static class AppViewHolder {
         TextView pkgName;
         TextView lastTimeUsed;
         TextView usageTime;
     }
-    
+
     class UsageStatsAdapter extends BaseAdapter {
          // Constants defining order for display order
         private static final int _DISPLAY_ORDER_USAGE_TIME = 0;
         private static final int _DISPLAY_ORDER_LAST_TIME_USED = 1;
         private static final int _DISPLAY_ORDER_APP_NAME = 2;
-        
+
         private int mDisplayOrder = _DISPLAY_ORDER_USAGE_TIME;
         private LastTimeUsedComparator mLastTimeUsedComparator = new LastTimeUsedComparator();
         private UsageTimeComparator mUsageTimeComparator = new UsageTimeComparator();
         private AppNameComparator mAppLabelComparator;
         private final ArrayMap<String, String> mAppLabelMap = new ArrayMap<>();
-        private final ArrayList<PackageUsageStats> mPackageStats = new ArrayList<>();
+        private final ArrayList<UsageStats> mPackageStats = new ArrayList<>();
 
         UsageStatsAdapter() {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DAY_OF_YEAR, -5);
 
-            final android.app.usage.UsageStats stats =
-                    mUsageStatsManager.getRecentStatsSince(cal.getTimeInMillis());
+            final List<UsageStats> stats =
+                    mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST,
+                            cal.getTimeInMillis(), System.currentTimeMillis());
             if (stats == null) {
                 return;
             }
 
-            final int pkgCount = stats.getPackageCount();
-            for (int i = 0; i < pkgCount; i++) {
-                final PackageUsageStats pkgStats = stats.getPackage(i);
+            ArrayMap<String, UsageStats> map = new ArrayMap<>();
+            final int statCount = stats.size();
+            for (int i = 0; i < statCount; i++) {
+                final android.app.usage.UsageStats pkgStats = stats.get(i);
 
                 // load application labels for each application
                 try {
                     ApplicationInfo appInfo = mPm.getApplicationInfo(pkgStats.getPackageName(), 0);
                     String label = appInfo.loadLabel(mPm).toString();
                     mAppLabelMap.put(pkgStats.getPackageName(), label);
-                    mPackageStats.add(pkgStats);
+
+                    UsageStats existingStats =
+                            map.get(pkgStats.getPackageName());
+                    if (existingStats == null) {
+                        map.put(pkgStats.getPackageName(), pkgStats);
+                    } else {
+                        existingStats.add(pkgStats);
+                    }
+
                 } catch (NameNotFoundException e) {
                     // This package may be gone.
                 }
-           }
+            }
+            mPackageStats.addAll(map.values());
 
-           // Sort list
-           mAppLabelComparator = new AppNameComparator(mAppLabelMap);
-           sortList();
+            // Sort list
+            mAppLabelComparator = new AppNameComparator(mAppLabelMap);
+            sortList();
         }
 
         @Override
@@ -177,20 +189,20 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
             }
 
             // Bind the data efficiently with the holder
-            PackageUsageStats pkgStats = mPackageStats.get(position);
+            UsageStats pkgStats = mPackageStats.get(position);
             if (pkgStats != null) {
                 String label = mAppLabelMap.get(pkgStats.getPackageName());
                 holder.pkgName.setText(label);
                 holder.lastTimeUsed.setText(DateUtils.formatSameDayTime(pkgStats.getLastTimeUsed(),
                         System.currentTimeMillis(), DateFormat.MEDIUM, DateFormat.MEDIUM));
                 holder.usageTime.setText(
-                        DateUtils.formatElapsedTime(pkgStats.getTotalTimeSpent() / 1000));
+                        DateUtils.formatElapsedTime(pkgStats.getTotalTimeInForeground() / 1000));
             } else {
                 Log.w(TAG, "No usage stats info for package:" + position);
             }
             return convertView;
         }
-        
+
         void sortList(int sortOrder) {
             if (mDisplayOrder == sortOrder) {
                 // do nothing
@@ -226,7 +238,7 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
 
         Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         typeSpinner.setOnItemSelectedListener(this);
-        
+
         ListView listView = (ListView) findViewById(R.id.pkg_list);
         mAdapter = new UsageStatsAdapter();
         listView.setAdapter(mAdapter);
@@ -242,4 +254,3 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
         // do nothing
     }
 }
-
