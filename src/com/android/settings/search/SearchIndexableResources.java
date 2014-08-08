@@ -92,7 +92,7 @@ public final class SearchIndexableResources {
         sResMap.put(SimSettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(SimSettings.class.getName()),
-                        R.xml.sim_settings,
+                        NO_DATA_RES_ID,
                         SimSettings.class.getName(),
                         R.drawable.ic_sim_sd));
 
