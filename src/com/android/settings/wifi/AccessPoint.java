@@ -520,6 +520,10 @@ class AccessPoint extends Preference {
         final Context context = getContext();
         updateIcon(getLevel(), context);
 
+        // Force new summary
+        setSummary(null);
+
+        // Update to new summary
         StringBuilder summary = new StringBuilder();
 
         if (mState != null) { // This is the active connection
@@ -551,20 +555,16 @@ class AccessPoint extends Preference {
                 summary.append(context.getString(R.string.wifi_remembered));
             }
 
-            if (security != SECURITY_NONE) {
-                String securityStrFormat;
-                if (summary.length() == 0) {
-                    securityStrFormat = context.getString(R.string.wifi_secured_first_item);
-                } else {
-                    securityStrFormat = context.getString(R.string.wifi_secured_second_item);
-                }
-            }
+// TODO: Wi-Fi team needs to decide what to do with this code.
+//            if (security != SECURITY_NONE) {
+//                String securityStrFormat;
+//                if (summary.length() == 0) {
+//                    securityStrFormat = context.getString(R.string.wifi_secured_first_item);
+//                } else {
+//                    securityStrFormat = context.getString(R.string.wifi_secured_second_item);
+//                }
+//            }
 
-        }
-
-        // This is a workaround, see bug report...
-        if (summary.length() < 1) {
-            summary.append("   ");
         }
 
         if (WifiSettings.mVerboseLogging > 0) {
@@ -591,7 +591,11 @@ class AccessPoint extends Preference {
             }
         }
 
-        setSummary(summary.toString());
+        if (summary.length() > 0) {
+            setSummary(summary.toString());
+        } else {
+            showSummary = false;
+        }
     }
 
     /**
