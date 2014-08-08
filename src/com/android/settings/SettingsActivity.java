@@ -1042,7 +1042,7 @@ public class SettingsActivity extends Activity
                             }
 
                             // Show the SIM Cards setting if there are more than 2 SIMs installed.
-                            if(tile.id != R.id.sim_settings || SimSettings.showSimCardScreen(this)){
+                            if(tile.id != R.id.sim_settings || Utils.showSimCardTile(this)){
                                 category.addTile(tile);
                             }
 

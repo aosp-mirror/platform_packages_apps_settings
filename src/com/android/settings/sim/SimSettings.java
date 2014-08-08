@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 
 import android.app.AlertDialog;
@@ -55,6 +56,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.notification.DropDownPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -85,18 +87,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private SubInfoRecord mCellularData = null;
     private SubInfoRecord mCalls = null;
     private SubInfoRecord mSMS = null;
-
-    /**
-     * Return whether or not the user should have a SIM Cards option in Settings.
-     * TODO: Change back to returning true if count is greater than one after testing.
-     * TODO: See bug 16533525.
-     */
-    public static boolean showSimCardScreen(Context context) {
-        final TelephonyManager tm =
-            (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-        return tm.getSimCount() > 0;
-    }
 
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
@@ -370,4 +360,26 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             builder.create().show();
         }
     }
+
+    /**
+     * For search
+     */
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+
+                    if (Utils.showSimCardTile(context)) {
+                        SearchIndexableResource sir = new SearchIndexableResource(context);
+                        sir.xmlResId = R.xml.sim_settings;
+                        result.add(sir);
+                    }
+
+                    return result;
+                }
+            };
+
 }

@@ -823,4 +823,16 @@ public final class Utils {
         if (icon == null) return null;
         return CircleFramedDrawable.getInstance(context, icon);
     }
+
+    /**
+     * Return whether or not the user should have a SIM Cards option in Settings.
+     * TODO: Change back to returning true if count is greater than one after testing.
+     * TODO: See bug 16533525.
+     */
+    public static boolean showSimCardTile(Context context) {
+        final TelephonyManager tm =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+        return tm.getSimCount() > 0;
+    }
 }
