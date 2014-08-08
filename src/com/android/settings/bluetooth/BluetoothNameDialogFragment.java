@@ -178,7 +178,6 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
             mDeviceNameUpdated = true;
             mDeviceNameEdited = false;
             mDeviceNameView.setText(mLocalAdapter.getName());
-            getActivity().setTitle(mLocalAdapter.getName());
         }
     }
 
