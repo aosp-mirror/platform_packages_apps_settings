@@ -1791,10 +1791,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         public static void show(DataUsageSummary parent) {
             if (!parent.isAdded()) return;
 
+            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate);
+            if (policy == null) return;
+
             final Resources res = parent.getResources();
             final CharSequence message;
-            final long minLimitBytes = (long) (
-                    parent.mPolicyEditor.getPolicy(parent.mTemplate).warningBytes * 1.2f);
+            final long minLimitBytes = (long) (policy.warningBytes * 1.2f);
             final long limitBytes;
 
             // TODO: customize default limits based on network template
