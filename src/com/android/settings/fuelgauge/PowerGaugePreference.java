@@ -34,9 +34,9 @@ public class PowerGaugePreference extends Preference {
     private BatteryEntry mInfo;
     private int mProgress;
     private CharSequence mProgressText;
-    private final String mContentDescription;
+    private final CharSequence mContentDescription;
 
-    public PowerGaugePreference(Context context, Drawable icon, String contentDescription,
+    public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
             BatteryEntry info) {
         super(context);
         setLayoutResource(R.layout.preference_app_percentage);
