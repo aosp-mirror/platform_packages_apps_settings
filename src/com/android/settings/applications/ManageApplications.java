@@ -74,7 +74,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.UserSpinnerAdapter;
 import com.android.settings.Settings.RunningServicesActivity;
 import com.android.settings.Settings.StorageUseActivity;
-import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.deviceinfo.StorageMeasurement;
 import com.android.settings.Utils;
@@ -142,6 +141,7 @@ public class ManageApplications extends Fragment implements
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
 
+    private static final String EXTRA_LIST_TYPE = "currentListType";
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_BACKGROUND = "showBackground";
     private static final String EXTRA_DEFAULT_LIST_TYPE = "defaultListType";
@@ -467,7 +467,8 @@ public class ManageApplications extends Fragment implements
 
     // These are for keeping track of activity and spinner switch state.
     private boolean mActivityResumed;
-    
+
+    private static final int LIST_TYPE_MISSING = -1;
     static final int LIST_TYPE_DOWNLOADED = 0;
     static final int LIST_TYPE_RUNNING = 1;
     static final int LIST_TYPE_SDCARD = 2;
@@ -954,9 +955,13 @@ public class ManageApplications extends Fragment implements
 
         if (savedInstanceState == null) {
             // First time init: make sure view pager is showing the correct tab.
-            for (int i = 0; i < mTabs.size(); i++) {
+            int extraCurrentListType = getActivity().getIntent().getIntExtra(EXTRA_LIST_TYPE,
+                    LIST_TYPE_MISSING);
+            int currentListType = (extraCurrentListType != LIST_TYPE_MISSING)
+                    ? extraCurrentListType : mDefaultListType;
+            for (int i = 0; i < mNumTabs; i++) {
                 TabInfo tab = mTabs.get(i);
-                if (tab.mListType == mDefaultListType) {
+                if (tab.mListType == currentListType) {
                     mViewPager.setCurrentItem(i);
                     break;
                 }
@@ -1036,6 +1041,8 @@ public class ManageApplications extends Fragment implements
         if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            int currentTab = mViewPager.getCurrentItem();
+            intent.putExtra(EXTRA_LIST_TYPE, mTabs.get(currentTab).mListType);
             mContext.startActivityAsUser(intent, selectedUser);
             getActivity().finish();
         }
