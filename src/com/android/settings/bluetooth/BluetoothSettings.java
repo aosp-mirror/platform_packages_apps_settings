@@ -99,13 +99,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
-                updateDeviceName();
+                updateDeviceName(context);
             }
         }
 
-        private void updateDeviceName() {
+        private void updateDeviceName(Context context) {
             if (mLocalAdapter.isEnabled() && mMyDevicePreference != null) {
-                mMyDevicePreference.setTitle(mLocalAdapter.getName());
+                mMyDevicePreference.setSummary(context.getResources().getString(
+                            R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
             }
         }
     };
