@@ -19,10 +19,12 @@
     <attr name="ic_menu_moreoverflow" format="reference" />
     <attr name="ic_wps" format="reference" />
     <attr name="setup_divider_color" format="reference" />
+    <attr name="wifi_signal_color" format="reference" />
     <attr name="wifi_signal" format="reference" />
 
     <style name="SetupWizardWifiTheme" parent="android:Theme.Material.NoActionBar">
         <item name="android:alertDialogTheme">@style/Theme.WifiDialog</item>
+        <item name="android:colorAccent">@color/setup_wizard_color_accent_dark</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/setup_wizard_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/setup_wizard_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -32,12 +34,14 @@
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
-        <item name="wifi_signal">@drawable/wifi_signal_dark</item>
-        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
+        <item name="wifi_signal">@drawable/wifi_signal_colored</item>
+        <item name="preferenceBackgroundColor">@color/setup_wizard_preference_background_color_dark</item>
     </style>
 
     <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:alertDialogTheme">@style/Theme.Light.WifiDialog</item>
+        <item name="android:colorAccent">@color/setup_wizard_color_accent_light</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/setup_wizard_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/setup_wizard_margin_sides</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
@@ -47,8 +51,9 @@
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
-        <item name="wifi_signal">@drawable/wifi_signal_light</item>
-        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
+        <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
+        <item name="wifi_signal">@drawable/wifi_signal_colored</item>
+        <item name="preferenceBackgroundColor">@color/setup_wizard_preference_background_color_light</item>
     </style>
 
     <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">
