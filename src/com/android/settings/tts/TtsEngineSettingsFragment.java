@@ -140,7 +140,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
 
             mLocalePreference.setEntries(entries);
             mLocalePreference.setEntryValues(entryValues);
-            mLocalePreference.setValue(value.toString());
+            mLocalePreference.setValue(value != null ? value.toString() : null);
             mLocalePreference.setEnabled(entries.length > 0);
         }
 
