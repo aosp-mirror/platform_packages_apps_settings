@@ -86,7 +86,7 @@ public class BatteryHistoryChart extends View {
 
         void addTick(int x, int bin) {
             if (bin != mLastBin && mNumTicks < mTicks.length) {
-                mTicks[mNumTicks] = x | bin << CHART_DATA_BIN_SHIFT;
+                mTicks[mNumTicks] = (x&CHART_DATA_X_MASK) | (bin<<CHART_DATA_BIN_SHIFT);
                 mNumTicks++;
                 mLastBin = bin;
             }
@@ -540,6 +540,7 @@ public class BatteryHistoryChart extends View {
         }
         mDrainString = "";
         mChargeDurationString = "";
+        setContentDescription(mChargeLabelString);
 
         int pos = 0;
         int lastInteresting = 0;
@@ -804,6 +805,9 @@ public class BatteryHistoryChart extends View {
                 }
                 if (curWalltime != 0 && rec.isDeltaData()) {
                     x = mLevelLeft + (int)(((curWalltime-walltimeStart)*levelWidth)/walltimeChange);
+                    if (x < 0) {
+                        x = 0;
+                    }
                     if (false) {
                         StringBuilder sb = new StringBuilder(128);
                         sb.append("walloff=");
@@ -984,6 +988,9 @@ public class BatteryHistoryChart extends View {
         } else {
             // Figure out where the actual data ends on the screen.
             x = mLevelLeft + (int)(((mEndDataWallTime-walltimeStart)*levelWidth)/walltimeChange);
+            if (x < 0) {
+                x = 0;
+            }
         }
 
         finishPaths(x, h, levelh, startX, lastY, curLevelPath, lastX,
