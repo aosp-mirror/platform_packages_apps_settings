@@ -97,6 +97,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public void onStart() {
         super.onStart();
         mAuthenticatorHelper.listenToAccountUpdates();
+        updateAuthDescriptions();
+        showAccountsIfNeeded();
     }
 
     @Override
@@ -124,8 +126,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         if (args != null && args.containsKey(KEY_ACCOUNT_LABEL)) {
             getActivity().setTitle(args.getString(KEY_ACCOUNT_LABEL));
         }
-        updateAuthDescriptions();
-        showAccountsIfNeeded();
     }
 
     @Override
