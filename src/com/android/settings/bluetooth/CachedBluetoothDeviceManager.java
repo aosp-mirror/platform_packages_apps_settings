@@ -86,7 +86,9 @@ final class CachedBluetoothDeviceManager {
             BluetoothDevice device) {
         CachedBluetoothDevice newDevice = new CachedBluetoothDevice(mContext, adapter,
             profileManager, device);
-        mCachedDevices.add(newDevice);
+        synchronized (mCachedDevices) {
+            mCachedDevices.add(newDevice);
+        }
         return newDevice;
     }
 
@@ -108,6 +110,10 @@ final class CachedBluetoothDeviceManager {
         }
 
         return device.getAddress();
+    }
+
+    public synchronized void clearCachedDevices() {
+        mCachedDevices.clear();
     }
 
     public synchronized void onScanningStateChanged(boolean started) {
