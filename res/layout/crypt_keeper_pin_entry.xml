@@ -20,36 +20,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/crypt_keeper_password_top_margin">
 
     <include layout="@layout/crypt_keeper_status" />
 
     <LinearLayout
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_marginStart="@dimen/crypt_keeper_edit_text_margin"
-        android:layout_marginEnd="@dimen/crypt_keeper_edit_text_margin"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:layout_width="@dimen/crypt_keeper_password_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dip"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/crypt_keeper_password_background">
 
-        <LinearLayout
-            android:background="@color/crypt_keeper_password_background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <include layout="@layout/crypt_keeper_pin_field" />
-        </LinearLayout>
+        <include layout="@layout/crypt_keeper_pin_field" />
 
     </LinearLayout>
 
-    <!-- Emergency call button.
-         Text is set by CryptKeeper.updateEmergencyCallButtonState() -->
-    <Button android:id="@+id/emergencyCallButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/crypt_keeper_emergency_call_space_above"
-        style="?android:attr/borderlessButtonStyle" />
+    <include layout="@layout/crypt_keeper_emergency_button" />
 
 </LinearLayout>
