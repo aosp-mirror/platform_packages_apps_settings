@@ -564,35 +564,33 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
     private void updateHardKeyboards() {
         mHardKeyboardPreferenceList.clear();
-        if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY) {
-            final int[] devices = InputDevice.getDeviceIds();
-            for (int i = 0; i < devices.length; i++) {
-                InputDevice device = InputDevice.getDevice(devices[i]);
-                if (device != null
-                        && !device.isVirtual()
-                        && device.isFullKeyboard()) {
-                    final InputDeviceIdentifier identifier = device.getIdentifier();
-                    final String keyboardLayoutDescriptor =
-                            mIm.getCurrentKeyboardLayoutForInputDevice(identifier);
-                    final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
-                            mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
+        final int[] devices = InputDevice.getDeviceIds();
+        for (int i = 0; i < devices.length; i++) {
+            InputDevice device = InputDevice.getDevice(devices[i]);
+            if (device != null
+                    && !device.isVirtual()
+                    && device.isFullKeyboard()) {
+                final InputDeviceIdentifier identifier = device.getIdentifier();
+                final String keyboardLayoutDescriptor =
+                    mIm.getCurrentKeyboardLayoutForInputDevice(identifier);
+                final KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
+                    mIm.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 
-                    final PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
-                    pref.setTitle(device.getName());
-                    if (keyboardLayout != null) {
-                        pref.setSummary(keyboardLayout.toString());
-                    } else {
-                        pref.setSummary(R.string.keyboard_layout_default_label);
-                    }
-                    pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                        @Override
-                        public boolean onPreferenceClick(Preference preference) {
-                            showKeyboardLayoutDialog(identifier);
-                            return true;
-                        }
-                    });
-                    mHardKeyboardPreferenceList.add(pref);
+                final PreferenceScreen pref = new PreferenceScreen(getActivity(), null);
+                pref.setTitle(device.getName());
+                if (keyboardLayout != null) {
+                    pref.setSummary(keyboardLayout.toString());
+                } else {
+                    pref.setSummary(R.string.keyboard_layout_default_label);
                 }
+                pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        showKeyboardLayoutDialog(identifier);
+                        return true;
+                    }
+                });
+                mHardKeyboardPreferenceList.add(pref);
             }
         }
 
@@ -795,76 +793,74 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             // Hard keyboards
             InputManager inputManager = (InputManager) context.getSystemService(
                     Context.INPUT_SERVICE);
-            if (resources.getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY) {
-                boolean hasHardKeyboards = false;
+            boolean hasHardKeyboards = false;
 
-                final int[] devices = InputDevice.getDeviceIds();
-                for (int i = 0; i < devices.length; i++) {
-                    InputDevice device = InputDevice.getDevice(devices[i]);
-                    if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
-                        continue;
-                    }
-
-                    hasHardKeyboards = true;
-
-                    InputDeviceIdentifier identifier = device.getIdentifier();
-                    String keyboardLayoutDescriptor =
-                            inputManager.getCurrentKeyboardLayoutForInputDevice(identifier);
-                    KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
-                            inputManager.getKeyboardLayout(keyboardLayoutDescriptor) : null;
-
-                    String summary;
-                    if (keyboardLayout != null) {
-                        summary = keyboardLayout.toString();
-                    } else {
-                        summary = context.getString(R.string.keyboard_layout_default_label);
-                    }
-
-                    indexable = new SearchIndexableRaw(context);
-                    indexable.key = device.getName();
-                    indexable.title = device.getName();
-                    indexable.summaryOn = summary;
-                    indexable.summaryOff = summary;
-                    indexable.screenTitle = screenTitle;
-                    indexables.add(indexable);
+            final int[] devices = InputDevice.getDeviceIds();
+            for (int i = 0; i < devices.length; i++) {
+                InputDevice device = InputDevice.getDevice(devices[i]);
+                if (device == null || device.isVirtual() || !device.isFullKeyboard()) {
+                    continue;
                 }
 
-                if (hasHardKeyboards) {
-                    // Hard keyboard category.
-                    indexable = new SearchIndexableRaw(context);
-                    indexable.key = "builtin_keyboard_settings";
-                    indexable.title = context.getString(
-                            R.string.builtin_keyboard_settings_title);
-                    indexable.screenTitle = screenTitle;
-                    indexables.add(indexable);
+                hasHardKeyboards = true;
 
-                    // Auto replace.
-                    indexable = new SearchIndexableRaw(context);
-                    indexable.key = "auto_replace";
-                    indexable.title = context.getString(R.string.auto_replace);
-                    indexable.summaryOn = context.getString(R.string.auto_replace_summary);
-                    indexable.summaryOff = context.getString(R.string.auto_replace_summary);
-                    indexable.screenTitle = screenTitle;
-                    indexables.add(indexable);
+                InputDeviceIdentifier identifier = device.getIdentifier();
+                String keyboardLayoutDescriptor =
+                        inputManager.getCurrentKeyboardLayoutForInputDevice(identifier);
+                KeyboardLayout keyboardLayout = keyboardLayoutDescriptor != null ?
+                        inputManager.getKeyboardLayout(keyboardLayoutDescriptor) : null;
 
-                    // Auto caps.
-                    indexable = new SearchIndexableRaw(context);
-                    indexable.key = "auto_caps";
-                    indexable.title = context.getString(R.string.auto_caps);
-                    indexable.summaryOn = context.getString(R.string.auto_caps_summary);
-                    indexable.summaryOff = context.getString(R.string.auto_caps_summary);
-                    indexable.screenTitle = screenTitle;
-                    indexables.add(indexable);
-
-                    // Auto punctuate.
-                    indexable = new SearchIndexableRaw(context);
-                    indexable.key = "auto_punctuate";
-                    indexable.title = context.getString(R.string.auto_punctuate);
-                    indexable.summaryOn = context.getString(R.string.auto_punctuate_summary);
-                    indexable.summaryOff = context.getString(R.string.auto_punctuate_summary);
-                    indexable.screenTitle = screenTitle;
-                    indexables.add(indexable);
+                String summary;
+                if (keyboardLayout != null) {
+                    summary = keyboardLayout.toString();
+                } else {
+                    summary = context.getString(R.string.keyboard_layout_default_label);
                 }
+
+                indexable = new SearchIndexableRaw(context);
+                indexable.key = device.getName();
+                indexable.title = device.getName();
+                indexable.summaryOn = summary;
+                indexable.summaryOff = summary;
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+            }
+
+            if (hasHardKeyboards) {
+                // Hard keyboard category.
+                indexable = new SearchIndexableRaw(context);
+                indexable.key = "builtin_keyboard_settings";
+                indexable.title = context.getString(
+                        R.string.builtin_keyboard_settings_title);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+
+                // Auto replace.
+                indexable = new SearchIndexableRaw(context);
+                indexable.key = "auto_replace";
+                indexable.title = context.getString(R.string.auto_replace);
+                indexable.summaryOn = context.getString(R.string.auto_replace_summary);
+                indexable.summaryOff = context.getString(R.string.auto_replace_summary);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+
+                // Auto caps.
+                indexable = new SearchIndexableRaw(context);
+                indexable.key = "auto_caps";
+                indexable.title = context.getString(R.string.auto_caps);
+                indexable.summaryOn = context.getString(R.string.auto_caps_summary);
+                indexable.summaryOff = context.getString(R.string.auto_caps_summary);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+
+                // Auto punctuate.
+                indexable = new SearchIndexableRaw(context);
+                indexable.key = "auto_punctuate";
+                indexable.title = context.getString(R.string.auto_punctuate);
+                indexable.summaryOn = context.getString(R.string.auto_punctuate_summary);
+                indexable.summaryOff = context.getString(R.string.auto_punctuate_summary);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
             }
 
             // Voice recognizers.
