@@ -19,35 +19,4 @@
         android:key="account"
         android:title="@string/account_settings_title"
         settings:keywords="@string/keywords_accounts">
-
-        <Preference
-            android:key="add_account"
-            android:title="@string/add_account_label"
-            android:icon="@drawable/ic_menu_add_dark"
-            android:order="2147483648" />
-
-        <PreferenceCategory
-            android:key="account_personal"
-            android:title="@string/category_personal" >
-
-                <Preference
-                    android:key="add_account_personal"
-                    android:title="@string/add_account_label"
-                    android:icon="@drawable/ic_menu_add_dark"
-                    android:order="2147483648" />
-
-        </PreferenceCategory>
-
-        <PreferenceCategory
-            android:key="account_work"
-            android:title="@string/category_work" >
-
-                <Preference
-                    android:key="add_account_work"
-                    android:title="@string/add_account_label"
-                    android:icon="@drawable/ic_menu_add_dark"
-                    android:order="2147483648" />
-
-        </PreferenceCategory>
-
 </PreferenceScreen>
