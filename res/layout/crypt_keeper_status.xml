@@ -31,11 +31,11 @@
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dip"
         android:layout_marginStart="8dip"
         android:layout_marginEnd="8dip"
-        android:textSize="18sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif"
+        android:textColor="@android:color/white"
         android:text="@string/enter_password"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal" />
@@ -51,6 +51,8 @@
         android:ellipsize="marquee"
         android:marqueeRepeatLimit ="marquee_forever"
         android:textSize="16sp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:fontFamily="sans-serif"
+        android:textColor="#B3FFFFFF"
+        android:gravity="center_horizontal" />
 
 </LinearLayout>
