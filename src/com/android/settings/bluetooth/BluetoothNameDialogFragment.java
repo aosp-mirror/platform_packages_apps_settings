@@ -92,7 +92,6 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
             mDeviceNameEdited = savedInstanceState.getBoolean(KEY_NAME_EDITED, false);
         }
         mAlertDialog = new AlertDialog.Builder(getActivity())
-                .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(R.string.bluetooth_rename_device)
                 .setView(createDialogView(deviceName))
                 .setPositiveButton(R.string.bluetooth_rename_button,
