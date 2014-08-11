@@ -88,14 +88,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     // false: on ICS or later
     private static final boolean SHOW_INPUT_METHOD_SWITCHER_SETTINGS = false;
 
-    private static final String[] sSystemSettingNames = {
-        System.TEXT_AUTO_REPLACE, System.TEXT_AUTO_CAPS, System.TEXT_AUTO_PUNCTUATE,
-    };
-
-    private static final String[] sHardKeyboardKeys = {
-        "auto_replace", "auto_caps", "auto_punctuate",
-    };
-
     private int mDefaultInputMethodSelectorVisibility = 0;
     private ListPreference mShowInputMethodSelectorPref;
     private PreferenceCategory mKeyboardSettingsCategory;
@@ -274,16 +266,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         }
 
-        // Hard keyboard
-        if (!mHardKeyboardPreferenceList.isEmpty()) {
-            for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
-                CheckBoxPreference chkPref = (CheckBoxPreference)
-                        mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i]);
-                chkPref.setChecked(
-                        System.getInt(getContentResolver(), sSystemSettingNames[i], 1) > 0);
-            }
-        }
-
         updateInputDevices();
 
         // Refresh internal states in mInputMethodSettingValues to keep the latest
@@ -339,15 +321,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         } else if (preference instanceof CheckBoxPreference) {
             final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-            if (!mHardKeyboardPreferenceList.isEmpty()) {
-                for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
-                    if (chkPref == mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i])) {
-                        System.putInt(getContentResolver(), sSystemSettingNames[i],
-                                chkPref.isChecked() ? 1 : 0);
-                        return true;
-                    }
-                }
-            }
             if (chkPref == mGameControllerCategory.findPreference("vibrate_input_devices")) {
                 System.putInt(getContentResolver(), Settings.System.VIBRATE_INPUT_DEVICES,
                         chkPref.isChecked() ? 1 : 0);
