@@ -27,7 +27,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.location.LocationManager;
@@ -50,6 +49,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -129,7 +129,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
-    private boolean mP2pSupported;
 
     private WifiEnabler mWifiEnabler;
     // An access point being editted is stored here.
@@ -156,7 +155,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private boolean mDlgEdit;
     private AccessPoint mDlgAccessPoint;
     private Bundle mAccessPointSavedState;
-    private Preference mWifiAssistantPreference;
+    private View mWifiAssistantCard;
     private NetworkScorerAppData mWifiAssistantApp;
 
     /** verbose logging flag. this flag is set thru developer debugging options
@@ -164,52 +163,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     public static int mVerboseLogging = 0;
 
     /* End of "used in Wifi Setup context" */
-
-    /** Holds the Wifi Assistant Card. */
-    private class WifiAssistantPreference extends Preference {
-        public WifiAssistantPreference() {
-            super(getActivity());
-            setLayoutResource(R.layout.wifi_assistant_card);
-        }
-
-        @Override
-        public void onBindView(View view) {
-            super.onBindView(view);
-            Button setup = (Button)view.findViewById(R.id.setup);
-            Button noThanks = (Button)view.findViewById(R.id.no_thanks_button);
-
-            if (setup != null && noThanks != null) {
-                setup.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        if (mWifiAssistantApp.mConfigurationActivityClassName != null) {
-                            // App has a custom configuration activity; launch that.
-                            // This custom activity will be responsible for launching the system
-                            // dialog.
-                            intent.setClassName(mWifiAssistantApp.mPackageName,
-                                    mWifiAssistantApp.mConfigurationActivityClassName);
-                        } else {
-                            // Fall back on the system dialog.
-                            intent.setAction(NetworkScoreManager.ACTION_CHANGE_ACTIVE);
-                            intent.putExtra(NetworkScoreManager.EXTRA_PACKAGE_NAME,
-                                    mWifiAssistantApp.mPackageName);
-                        }
-                        startActivityForResult(intent, REQUEST_ENABLE_WIFI_ASSISTANT);
-                    }
-                });
-
-                noThanks.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        setWifiAssistantTimeout();
-                        getPreferenceScreen().removePreference(WifiAssistantPreference.this);
-                        mWifiAssistantApp = null;
-                    }
-                });
-            }
-        }
-    }
 
     /** A restricted multimap for use in constructAccessPoints */
     private static class Multimap<K,V> {
@@ -285,7 +238,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                handleEvent(context, intent);
+                handleEvent(intent);
             }
         };
 
@@ -296,7 +249,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mP2pSupported = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         mConnectListener = new WifiManager.ActionListener() {
@@ -347,7 +299,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (savedInstanceState != null) {
             mDlgEdit = savedInstanceState.getBoolean(SAVE_DIALOG_EDIT_MODE);
             if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
-                mAccessPointSavedState = 
+                mAccessPointSavedState =
                     savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
             }
         }
@@ -384,7 +336,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (requestCode == REQUEST_ENABLE_WIFI_ASSISTANT) {
             if (resultCode == Activity.RESULT_OK) {
                 setWifiAssistantTimeout();
-                getPreferenceScreen().removePreference(mWifiAssistantPreference);
+                getListView().removeHeaderView(mWifiAssistantCard);
                 mWifiAssistantApp = null;
             }
         } else {
@@ -706,8 +658,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                     addMessagePreference(R.string.wifi_empty_list_wifi_on);
                 }
 
+                getListView().removeHeaderView(mWifiAssistantCard);
                 if (mWifiAssistantApp != null) {
-                    getPreferenceScreen().addPreference(mWifiAssistantPreference);
+                    getListView().addHeaderView(mWifiAssistantCard);
                 }
 
                 for (AccessPoint accessPoint : accessPoints) {
@@ -732,38 +685,72 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
-    private boolean prepareWifiAssistantCard() {
-        if (mWifiAssistantPreference == null) {
-            mWifiAssistantPreference = new WifiAssistantPreference();
-        }
-
+    private void prepareWifiAssistantCard() {
         if (getActivity() instanceof WifiPickerActivity) {
-            return false;
+            return;
         }
 
         if (NetworkScorerAppManager.getActiveScorer(getActivity()) != null) {
             // A scorer is already enabled; don't show the card.
-            return false;
+            return;
         }
 
         Collection<NetworkScorerAppData> scorers =
                 NetworkScorerAppManager.getAllValidScorers(getActivity());
         if (scorers.isEmpty()) {
             // No scorers are available to enable; don't show the card.
-            return false;
+            return;
         }
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
         long lastTimeoutEndTime = sharedPreferences.getLong(KEY_ASSISTANT_START_TIME, 0);
         long dismissTime = sharedPreferences.getLong(KEY_ASSISTANT_DISMISS_TIME, 0);
 
-        boolean shouldShow = ((System.currentTimeMillis() - lastTimeoutEndTime) > dismissTime);
-        if (shouldShow) {
-            // TODO: b/13780935 - Implement proper scorer selection. Rather than pick the first
-            // scorer on the system, we should allow the user to select one.
-            mWifiAssistantApp = scorers.iterator().next();
+        if ((System.currentTimeMillis() - lastTimeoutEndTime) <= dismissTime) {
+            return;
         }
-        return shouldShow;
+
+        // TODO: b/13780935 - Implement proper scorer selection. Rather than pick the first
+        // scorer on the system, we should allow the user to select one.
+        mWifiAssistantApp = scorers.iterator().next();
+
+        if (mWifiAssistantCard == null) {
+            mWifiAssistantCard = LayoutInflater.from(getActivity())
+                    .inflate(R.layout.wifi_assistant_card, getListView(), false);
+            Button setup = (Button) mWifiAssistantCard.findViewById(R.id.setup);
+            Button noThanks = (Button) mWifiAssistantCard.findViewById(R.id.no_thanks_button);
+
+            if (setup != null && noThanks != null) {
+                setup.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        if (mWifiAssistantApp.mConfigurationActivityClassName != null) {
+                            // App has a custom configuration activity; launch that.
+                            // This custom activity will be responsible for launching the system
+                            // dialog.
+                            intent.setClassName(mWifiAssistantApp.mPackageName,
+                                    mWifiAssistantApp.mConfigurationActivityClassName);
+                        } else {
+                            // Fall back on the system dialog.
+                            intent.setAction(NetworkScoreManager.ACTION_CHANGE_ACTIVE);
+                            intent.putExtra(NetworkScoreManager.EXTRA_PACKAGE_NAME,
+                                    mWifiAssistantApp.mPackageName);
+                        }
+                        startActivityForResult(intent, REQUEST_ENABLE_WIFI_ASSISTANT);
+                    }
+                });
+
+                noThanks.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setWifiAssistantTimeout();
+                        getListView().removeHeaderView(mWifiAssistantCard);
+                        mWifiAssistantApp = null;
+                    }
+                });
+            }
+        }
     }
 
     private void setWifiAssistantTimeout() {
@@ -861,7 +848,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         return accessPoints;
     }
 
-    private void handleEvent(Context context, Intent intent) {
+    private void handleEvent(Intent intent) {
         String action = intent.getAction();
         if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
             updateWifiState(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
