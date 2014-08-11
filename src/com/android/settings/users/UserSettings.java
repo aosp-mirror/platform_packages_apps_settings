@@ -741,6 +741,10 @@ public class UserSettings extends SettingsPreferenceFragment
         final boolean voiceCapable = Utils.isVoiceCapable(context);
         final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
         for (UserInfo user : users) {
+            if (user.isManagedProfile()) {
+                // Managed profiles appear under Accounts Settings instead
+                continue;
+            }
             Preference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
@@ -773,19 +777,11 @@ public class UserSettings extends SettingsPreferenceFragment
             if (!isInitialized(user)) {
                 if (user.isRestricted()) {
                     pref.setSummary(R.string.user_summary_restricted_not_set_up);
-                } else if (user.isManagedProfile()) {
-                    pref.setSummary(R.string.user_summary_managed_profile_not_set_up);
                 } else {
                     pref.setSummary(R.string.user_summary_not_set_up);
                 }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
-            } else if (user.isManagedProfile()) {
-                if (user.isEnabled()) {
-                    pref.setSummary(R.string.user_summary_managed_profile);
-                } else {
-                    pref.setSummary(R.string.user_summary_managed_profile_not_enabled);
-                }
             }
             if (user.iconPath != null) {
                 if (mUserIcons.get(user.id) == null) {
@@ -911,8 +907,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (!isInitialized(user)) {
                     mHandler.sendMessage(mHandler.obtainMessage(
                             MESSAGE_SETUP_USER, user.id, user.serialNumber));
-                } else if (!user.isManagedProfile()) {
-                    switchUserNow(userId);
                 }
             }
         } else if (pref == mAddUser) {
