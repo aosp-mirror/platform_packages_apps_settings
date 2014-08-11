@@ -29,10 +29,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.Process;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -41,6 +46,7 @@ import android.view.MenuItem;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -50,8 +56,10 @@ import com.android.settings.Utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import static android.content.Intent.EXTRA_USER;
+import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
 
 /**
  * Settings screen for the account types on the device.
@@ -64,26 +72,20 @@ public class AccountSettings extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener,
         OnPreferenceClickListener {
     public static final String TAG = "AccountSettings";
-    private static final String KEY_ACCOUNT = "account";
-    private static final String KEY_ADD_ACCOUNT = "add_account";
 
-    private static final String KEY_CATEGORY_PERSONAL = "account_personal";
-    private static final String KEY_ADD_ACCOUNT_PERSONAL = "add_account_personal";
-    private static final String KEY_CATEGORY_WORK = "account_work";
-    private static final String KEY_ADD_ACCOUNT_WORK = "add_account_work";
+    private static final String KEY_ACCOUNT = "account";
 
     private static final String ADD_ACCOUNT_ACTION = "android.settings.ADD_ACCOUNT_SETTINGS";
-
-    private static final ArrayList<String> EMPTY_LIST = new ArrayList<String>();
-
     private static final String TAG_CONFIRM_AUTO_SYNC_CHANGE = "confirmAutoSyncChange";
 
+    private static final int ORDER_LAST = 1001;
+    private static final int ORDER_NEXT_TO_LAST = 1000;
 
     private UserManager mUm;
-    private SparseArray<ProfileData> mProfiles;
+    private SparseArray<ProfileData> mProfiles = new SparseArray<ProfileData>();
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver
                 = new ManagedProfileBroadcastReceiver();
-    private boolean mIsSingleProfileUi = true;
+    private Preference mProfileNotAvailablePreference;
 
     /**
      * Holds data related to the accounts belonging to one profile.
@@ -98,64 +100,59 @@ public class AccountSettings extends SettingsPreferenceFragment
          */
         public Preference addAccountPreference;
         /**
-         * The user handle of the user that these accounts belong to.
+         * The preference that displays the button to remove the managed profile
          */
-        public UserHandle userHandle;
+        public Preference removeWorkProfilePreference;
         /**
          * The {@link AuthenticatorHelper} that holds accounts data for this profile.
          */
         public AuthenticatorHelper authenticatorHelper;
+        /**
+         * The {@link UserInfo} of the profile.
+         */
+        public UserInfo userInfo;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-        mProfiles = new SparseArray<ProfileData>(2);
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.account_settings, menu);
-        final UserHandle currentProfile = UserHandle.getCallingUserHandle();
-        if (mIsSingleProfileUi) {
-            menu.findItem(R.id.account_settings_menu_auto_sync)
-                    .setVisible(true)
-                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(currentProfile));
-            menu.removeItem(R.id.account_settings_menu_auto_sync_personal);
-            menu.removeItem(R.id.account_settings_menu_auto_sync_work);
-        } else {
-            final UserHandle managedProfile = Utils.getManagedProfile(mUm);
-
-            menu.findItem(R.id.account_settings_menu_auto_sync_personal)
-                    .setVisible(true)
-                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(currentProfile));
-            menu.findItem(R.id.account_settings_menu_auto_sync_work)
-                    .setVisible(true)
-                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(managedProfile));
-            menu.removeItem(R.id.account_settings_menu_auto_sync);
-        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        final UserHandle currentProfile = UserHandle.getCallingUserHandle();
-        if (mIsSingleProfileUi) {
+        final UserHandle currentProfile = Process.myUserHandle();
+        if (mProfiles.size() == 1) {
             menu.findItem(R.id.account_settings_menu_auto_sync)
+                    .setVisible(true)
+                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(currentProfile))
                     .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
                             currentProfile.getIdentifier()));
+            menu.findItem(R.id.account_settings_menu_auto_sync_personal).setVisible(false);
+            menu.findItem(R.id.account_settings_menu_auto_sync_work).setVisible(false);
         } else {
-            final UserHandle managedProfile = Utils.getManagedProfile(mUm);
+            // We assume there's only one managed profile, otherwise UI needs to change
+            final UserHandle managedProfile = mProfiles.valueAt(1).userInfo.getUserHandle();
 
             menu.findItem(R.id.account_settings_menu_auto_sync_personal)
+                    .setVisible(true)
+                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(currentProfile))
                     .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
                             currentProfile.getIdentifier()));
             menu.findItem(R.id.account_settings_menu_auto_sync_work)
+                    .setVisible(true)
+                    .setOnMenuItemClickListener(new MasterSyncStateClickListener(managedProfile))
                     .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
                             managedProfile.getIdentifier()));
-            }
+            menu.findItem(R.id.account_settings_menu_auto_sync).setVisible(false);
+         }
     }
 
     @Override
@@ -192,8 +189,20 @@ public class AccountSettings extends SettingsPreferenceFragment
             ProfileData profileData = mProfiles.valueAt(i);
             if (preference == profileData.addAccountPreference) {
                 Intent intent = new Intent(ADD_ACCOUNT_ACTION);
-                intent.putExtra(EXTRA_USER, profileData.userHandle);
+                intent.putExtra(EXTRA_USER, profileData.userInfo.getUserHandle());
                 startActivity(intent);
+                return true;
+            }
+            if (preference == profileData.removeWorkProfilePreference) {
+                final int userId = profileData.userInfo.id;
+                Utils.createRemoveConfirmationDialog(getActivity(), userId,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mUm.removeUser(userId);
+                            }
+                        }
+                ).show();
                 return true;
             }
         }
@@ -204,61 +213,82 @@ public class AccountSettings extends SettingsPreferenceFragment
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.account_settings);
 
+        if (Utils.isManagedProfile(mUm)) {
+            // This should not happen
+            Log.e(TAG, "We should not be showing settings for a managed profile");
+            finish();
+            return;
+        }
+
+        final PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(KEY_ACCOUNT);
         if(mUm.isLinkedUser()) {
             // Restricted user or similar
-            updateSingleProfileUi();
+            UserInfo userInfo = mUm.getUserInfo(UserHandle.myUserId());
+            updateProfileUi(userInfo, false /* no category needed */, preferenceScreen);
         } else {
-            if (Utils.isManagedProfile(mUm)) {
-                // This should not happen
-                Log.w(TAG, "We should not be showing settings for a managed profile");
-                updateSingleProfileUi();
-            }
-            final UserHandle currentProfile = UserHandle.getCallingUserHandle();
-            final UserHandle managedProfile = Utils.getManagedProfile(mUm);
-            if (managedProfile == null) {
-                updateSingleProfileUi();
-            } else {
-                mIsSingleProfileUi = false;
-                updateProfileUi(currentProfile, KEY_CATEGORY_PERSONAL, KEY_ADD_ACCOUNT_PERSONAL,
-                        EMPTY_LIST);
-                final ArrayList<String> unusedPreferences = new ArrayList<String>(2);
-                unusedPreferences.add(KEY_ADD_ACCOUNT);
-                updateProfileUi(managedProfile, KEY_CATEGORY_WORK, KEY_ADD_ACCOUNT_WORK,
-                        unusedPreferences);
+            List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
+            final int profilesCount = profiles.size();
+            final boolean addCategory = profilesCount > 1;
+            for (int i = 0; i < profilesCount; i++) {
+                updateProfileUi(profiles.get(i), addCategory, preferenceScreen);
             }
         }
-        final int count = mProfiles.size();
-        for (int i = 0; i < count; i++) {
-            updateAccountTypes(mProfiles.valueAt(i));
+
+        // Add all preferences, starting with one for the primary profile.
+        // Note that we're relying on the ordering given by the SparseArray keys, and on the
+        // value of UserHandle.USER_OWNER being smaller than all the rest.
+        final int profilesCount = mProfiles.size();
+        for (int i = 0; i < profilesCount; i++) {
+            ProfileData profileData = mProfiles.valueAt(i);
+            if (!profileData.preferenceGroup.equals(preferenceScreen)) {
+                preferenceScreen.addPreference(profileData.preferenceGroup);
+            }
+            updateAccountTypes(profileData);
         }
     }
 
-    private void updateSingleProfileUi() {
-        final ArrayList<String> unusedPreferences = new ArrayList<String>(2);
-        unusedPreferences.add(KEY_CATEGORY_PERSONAL);
-        unusedPreferences.add(KEY_CATEGORY_WORK);
-        updateProfileUi(UserHandle.getCallingUserHandle(), KEY_ACCOUNT, KEY_ADD_ACCOUNT,
-                unusedPreferences);
-    }
-
-    private void updateProfileUi(final UserHandle userHandle, String categoryKey,
-            String addAccountKey, ArrayList<String> unusedPreferences) {
-        final int count = unusedPreferences.size();
-        for (int i = 0; i < count; i++) {
-            removePreference(unusedPreferences.get(i));
-        }
+    private void updateProfileUi(final UserInfo userInfo, boolean addCategory,
+            PreferenceScreen parent) {
+        final Context context = getActivity();
         final ProfileData profileData = new ProfileData();
-        profileData.preferenceGroup = (PreferenceGroup) findPreference(categoryKey);
-        if (mUm.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, userHandle)) {
-            removePreference(addAccountKey);
+        profileData.userInfo = userInfo;
+        if (addCategory) {
+            profileData.preferenceGroup = new PreferenceCategory(context);
+            profileData.preferenceGroup.setTitle(userInfo.isManagedProfile()
+                    ? R.string.category_work : R.string.category_personal);
+            parent.addPreference(profileData.preferenceGroup);
         } else {
-            profileData.addAccountPreference = findPreference(addAccountKey);
-            profileData.addAccountPreference.setOnPreferenceClickListener(this);
+            profileData.preferenceGroup = parent;
         }
-        profileData.userHandle = userHandle;
-        profileData.authenticatorHelper = new AuthenticatorHelper(
-                getActivity(), userHandle, mUm, this);
-        mProfiles.put(userHandle.getIdentifier(), profileData);
+        if (userInfo.isEnabled()) {
+            profileData.authenticatorHelper = new AuthenticatorHelper(context,
+                    userInfo.getUserHandle(), mUm, this);
+            if (!mUm.hasUserRestriction(DISALLOW_MODIFY_ACCOUNTS, userInfo.getUserHandle())) {
+                profileData.addAccountPreference = newAddAccountPreference(context);
+            }
+        }
+        if (userInfo.isManagedProfile()) {
+            profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
+        }
+        mProfiles.put(userInfo.id, profileData);
+    }
+
+    private Preference newAddAccountPreference(Context context) {
+        Preference preference = new Preference(context);
+        preference.setTitle(R.string.add_account_label);
+        preference.setIcon(R.drawable.ic_menu_add_dark);
+        preference.setOnPreferenceClickListener(this);
+        preference.setOrder(ORDER_NEXT_TO_LAST);
+        return preference;
+    }
+
+    private Preference newRemoveWorkProfilePreference(Context context) {
+        Preference preference = new Preference(context);
+        preference.setTitle(R.string.remove_managed_profile_label);
+        preference.setIcon(R.drawable.ic_menu_delete);
+        preference.setOnPreferenceClickListener(this);
+        preference.setOrder(ORDER_LAST);
+        return preference;
     }
 
     private void cleanUpPreferences() {
@@ -266,32 +296,57 @@ public class AccountSettings extends SettingsPreferenceFragment
         if (preferenceScreen != null) {
             preferenceScreen.removeAll();
         }
+        mProfiles.clear();
     }
 
     private void listenToAccountUpdates() {
         final int count = mProfiles.size();
         for (int i = 0; i < count; i++) {
-            mProfiles.valueAt(i).authenticatorHelper.listenToAccountUpdates();
+            AuthenticatorHelper authenticatorHelper = mProfiles.valueAt(i).authenticatorHelper;
+            if (authenticatorHelper != null) {
+                authenticatorHelper.listenToAccountUpdates();
+            }
         }
     }
 
     private void stopListeningToAccountUpdates() {
         final int count = mProfiles.size();
         for (int i = 0; i < count; i++) {
-            mProfiles.valueAt(i).authenticatorHelper.stopListeningToAccountUpdates();
+            AuthenticatorHelper authenticatorHelper = mProfiles.valueAt(i).authenticatorHelper;
+            if (authenticatorHelper != null) {
+                authenticatorHelper.stopListeningToAccountUpdates();
+            }
         }
     }
 
     private void updateAccountTypes(ProfileData profileData) {
         profileData.preferenceGroup.removeAll();
-        final ArrayList<AccountPreference> preferences = getAccountTypePreferences(
-                profileData.authenticatorHelper, profileData.userHandle);
-        final int count = preferences.size();
-        for (int i = 0; i < count; i++) {
-            profileData.preferenceGroup.addPreference(preferences.get(i));
+        if (profileData.userInfo.isEnabled()) {
+            final ArrayList<AccountPreference> preferences = getAccountTypePreferences(
+                    profileData.authenticatorHelper, profileData.userInfo.getUserHandle());
+            final int count = preferences.size();
+            for (int i = 0; i < count; i++) {
+                profileData.preferenceGroup.addPreference(preferences.get(i));
+            }
+            if (profileData.addAccountPreference != null) {
+                profileData.preferenceGroup.addPreference(profileData.addAccountPreference);
+            }
+        } else {
+            // Put a label instead of the accounts list
+            synchronized (this) {
+                if (mProfileNotAvailablePreference == null) {
+                    mProfileNotAvailablePreference = new Preference(getActivity());
+                    mProfileNotAvailablePreference.setEnabled(false);
+                    mProfileNotAvailablePreference.setIcon(R.drawable.empty_icon);
+                    mProfileNotAvailablePreference.setTitle(null);
+                    mProfileNotAvailablePreference.setSummary(
+                            R.string.managed_profile_not_available_label);
+                }
+            }
+            profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
         }
-        if (profileData.addAccountPreference != null) {
-            profileData.preferenceGroup.addPreference(profileData.addAccountPreference);
+        if (profileData.removeWorkProfilePreference != null) {
+            profileData.preferenceGroup.addPreference(profileData.removeWorkProfilePreference);
         }
     }
 
@@ -404,6 +459,9 @@ public class AccountSettings extends SettingsPreferenceFragment
                 // Build new state
                 updateUi();
                 listenToAccountUpdates();
+                // Force the menu to update. Note that #onPrepareOptionsMenu uses data built by
+                // #updateUi so we must call this later
+                getActivity().invalidateOptionsMenu();
                 return;
             }
             Log.w(TAG, "Cannot handle received broadcast: " + intent.getAction());
