@@ -167,6 +167,12 @@ public abstract class DeviceListPreferenceFragment extends
      }
 
     void createDevicePreference(CachedBluetoothDevice cachedDevice) {
+        if (mDeviceListGroup == null) {
+            Log.w(TAG, "Trying to create a device preference before the list group/category "
+                    + "exists!");
+            return;
+        }
+
         BluetoothDevicePreference preference = new BluetoothDevicePreference(
                 getActivity(), cachedDevice);
 
