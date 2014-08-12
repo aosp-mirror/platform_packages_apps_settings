@@ -44,6 +44,7 @@ import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -683,6 +684,22 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setOffMessage();
                 break;
         }
+    }
+
+    /**
+     * Returns the Network Scorer for the Wifi Assistant App.
+     */
+    public static NetworkScorerAppData getWifiAssistantApp(Context context) {
+        Collection<NetworkScorerAppData> scorers =
+                NetworkScorerAppManager.getAllValidScorers(context);
+
+        if (scorers.isEmpty()) {
+            return null;
+        }
+
+        // TODO: b/13780935 - Implement proper scorer selection. Rather than pick the first
+        // scorer on the system, we should allow the user to select one.
+        return scorers.iterator().next();
     }
 
     private void prepareWifiAssistantCard() {
