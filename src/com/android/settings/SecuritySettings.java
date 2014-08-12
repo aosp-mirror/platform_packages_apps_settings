@@ -31,7 +31,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -99,6 +99,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
 
+    // These switch preferences need special handling since they're not all stored in Settings.
+    private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
+            KEY_LOCK_ENABLED, KEY_VISIBLE_PATTERN, KEY_BIOMETRIC_WEAK_LIVELINESS,
+            KEY_POWER_INSTANTLY_LOCKS, KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS };
+
     // Only allow one trust agent on the platform.
     private static final boolean ONLY_ONE_TRUST_AGENT = true;
 
@@ -108,17 +113,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
 
-    private CheckBoxPreference mBiometricWeakLiveliness;
-    private CheckBoxPreference mVisiblePattern;
+    private SwitchPreference mBiometricWeakLiveliness;
+    private SwitchPreference mVisiblePattern;
 
-    private CheckBoxPreference mShowPassword;
+    private SwitchPreference mShowPassword;
 
     private KeyStore mKeyStore;
     private Preference mResetCredentials;
 
-    private CheckBoxPreference mToggleAppInstallation;
+    private SwitchPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
-    private CheckBoxPreference mPowerButtonInstantlyLocks;
+    private SwitchPreference mPowerButtonInstantlyLocks;
 
     private boolean mIsPrimary;
 
@@ -249,13 +254,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // biometric weak liveliness
         mBiometricWeakLiveliness =
-                (CheckBoxPreference) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
+                (SwitchPreference) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
 
         // visible pattern
-        mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
+        mVisiblePattern = (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN);
 
         // lock instantly on power key press
-        mPowerButtonInstantlyLocks = (CheckBoxPreference) root.findPreference(
+        mPowerButtonInstantlyLocks = (SwitchPreference) root.findPreference(
                 KEY_POWER_INSTANTLY_LOCKS);
         Preference trustAgentPreference = root.findPreference(KEY_TRUST_AGENT);
         if (mPowerButtonInstantlyLocks != null &&
@@ -302,7 +307,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         // Show password
-        mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
+        mShowPassword = (SwitchPreference) root.findPreference(KEY_SHOW_PASSWORD);
         mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
 
         // Credential storage
@@ -326,7 +331,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Application install
         PreferenceGroup deviceAdminCategory = (PreferenceGroup)
                 root.findPreference(KEY_DEVICE_ADMIN_CATEGORY);
-        mToggleAppInstallation = (CheckBoxPreference) findPreference(
+        mToggleAppInstallation = (SwitchPreference) findPreference(
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
         // Side loading of apps.
@@ -341,7 +346,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 (PreferenceGroup)root.findPreference(KEY_ADVANCED_SECURITY);
         if (advancedCategory != null && !mLockPatternUtils.isSecure()) {
             Preference manageAgents = advancedCategory.findPreference(KEY_MANAGE_TRUST_AGENTS);
-            if (advancedCategory != null) advancedCategory.removePreference(manageAgents);
+            if (manageAgents != null) advancedCategory.removePreference(manageAgents);
         }
 
         // The above preferences come and go based on security state, so we need to update
@@ -350,6 +355,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
         Index.getInstance(getActivity())
                 .updateFromClassNameResource(SecuritySettings.class.getName(), true, true);
 
+        for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
+            final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
+            if (pref != null) pref.setOnPreferenceChangeListener(this);
+        }
         return root;
     }
 
@@ -523,8 +532,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
-
-        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
@@ -538,42 +545,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 // Note: currently a backup is required for biometric_weak so this code path
                 // can't be reached, but is here in case things change in the future
                 startBiometricWeakImprove();
-            }
-        } else if (KEY_BIOMETRIC_WEAK_LIVELINESS.equals(key)) {
-            if (isToggled(preference)) {
-                lockPatternUtils.setBiometricWeakLivelinessEnabled(true);
-            } else {
-                // In this case the user has just unchecked the checkbox, but this action requires
-                // them to confirm their password.  We need to re-check the checkbox until
-                // they've confirmed their password
-                mBiometricWeakLiveliness.setChecked(true);
-                ChooseLockSettingsHelper helper =
-                        new ChooseLockSettingsHelper(this.getActivity(), this);
-                if (!helper.launchConfirmationActivity(
-                                CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF, null, null)) {
-                    // If this returns false, it means no password confirmation is required, so
-                    // go ahead and uncheck it here.
-                    // Note: currently a backup is required for biometric_weak so this code path
-                    // can't be reached, but is here in case things change in the future
-                    lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
-                    mBiometricWeakLiveliness.setChecked(false);
-                }
-            }
-        } else if (KEY_LOCK_ENABLED.equals(key)) {
-            lockPatternUtils.setLockPatternEnabled(isToggled(preference));
-        } else if (KEY_VISIBLE_PATTERN.equals(key)) {
-            lockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
-        } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
-            lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
-        } else if (preference == mShowPassword) {
-            Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
-                    mShowPassword.isChecked() ? 1 : 0);
-        } else if (preference == mToggleAppInstallation) {
-            if (mToggleAppInstallation.isChecked()) {
-                mToggleAppInstallation.setChecked(false);
-                warnAppInstallation();
-            } else {
-                setNonMarketAppsAllowed(false);
             }
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
@@ -589,12 +560,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
-
         return true;
-    }
-
-    private boolean isToggled(Preference pref) {
-        return ((CheckBoxPreference) pref).isChecked();
     }
 
     /**
@@ -629,7 +595,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
-        if (preference == mLockAfter) {
+        final String key = preference.getKey();
+        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if (KEY_LOCK_AFTER_TIMEOUT.equals(key)) {
             int timeout = Integer.parseInt((String) value);
             try {
                 Settings.Secure.putInt(getContentResolver(),
@@ -638,6 +606,42 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
             updateLockAfterPreferenceSummary();
+        } else if (KEY_LOCK_ENABLED.equals(key)) {
+            lockPatternUtils.setLockPatternEnabled((Boolean) value);
+        } else if (KEY_VISIBLE_PATTERN.equals(key)) {
+            lockPatternUtils.setVisiblePatternEnabled((Boolean) value);
+        } else  if (KEY_BIOMETRIC_WEAK_LIVELINESS.equals(key)) {
+            if ((Boolean) value) {
+                lockPatternUtils.setBiometricWeakLivelinessEnabled(true);
+            } else {
+                // In this case the user has just unchecked the checkbox, but this action requires
+                // them to confirm their password.  We need to re-check the checkbox until
+                // they've confirmed their password
+                mBiometricWeakLiveliness.setChecked(true);
+                ChooseLockSettingsHelper helper =
+                        new ChooseLockSettingsHelper(this.getActivity(), this);
+                if (!helper.launchConfirmationActivity(
+                                CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF, null, null)) {
+                    // If this returns false, it means no password confirmation is required, so
+                    // go ahead and uncheck it here.
+                    // Note: currently a backup is required for biometric_weak so this code path
+                    // can't be reached, but is here in case things change in the future
+                    lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
+                    mBiometricWeakLiveliness.setChecked(false);
+                }
+            }
+        } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
+            mLockPatternUtils.setPowerButtonInstantlyLocks((Boolean) value);
+        } else if (KEY_SHOW_PASSWORD.equals(key)) {
+            Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
+                    ((Boolean) value) ? 1 : 0);
+        } else if (KEY_TOGGLE_INSTALL_APPLICATIONS.equals(key)) {
+            if ((Boolean) value) {
+                mToggleAppInstallation.setChecked(false);
+                warnAppInstallation();
+            } else {
+                setNonMarketAppsAllowed(false);
+            }
         }
         return true;
     }
