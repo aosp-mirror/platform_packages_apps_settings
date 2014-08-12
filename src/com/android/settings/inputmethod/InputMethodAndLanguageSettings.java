@@ -673,8 +673,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
             List<SearchIndexableRaw> indexables = new ArrayList<>();
 
-            Resources resources = context.getResources();
-            String screenTitle = context.getString(R.string.language_keyboard_settings_title);
+            final Resources resources = context.getResources();
+            final String screenTitle = context.getString(R.string.language_keyboard_settings_title);
 
             // Locale picker.
             if (context.getAssets().getLocales().length > 1) {
@@ -836,44 +836,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 indexables.add(indexable);
             }
 
-            // Voice recognizers.
-            List<ResolveInfo> recognizers = context.getPackageManager()
-                    .queryIntentServices(new Intent(RecognitionService.SERVICE_INTERFACE),
-                            PackageManager.GET_META_DATA);
-
-            final int recognizerCount = recognizers.size();
-
-            // Recognizer settings.
-            if (recognizerCount > 0) {
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = "recognizer_settings";
-                indexable.title = context.getString(R.string.recognizer_settings_title);
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-            }
-
-            if (recognizerCount > 1) {
-                // Recognizer chooser.
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = "recognizer_title";
-                indexable.title = context.getString(R.string.recognizer_title);
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-            }
-
-            for (int i = 0; i < recognizerCount; i++) {
-                ResolveInfo recognizer = recognizers.get(i);
-
-                ServiceInfo serviceInfo = recognizer.serviceInfo;
-                ComponentName componentName = new ComponentName(serviceInfo.packageName,
-                        serviceInfo.name);
-
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = componentName.flattenToString();
-                indexable.title = recognizer.loadLabel(context.getPackageManager()).toString();
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-            }
+            // Voice input
+            indexable = new SearchIndexableRaw(context);
+            indexable.key = "voice_input_settings";
+            indexable.title = context.getString(R.string.voice_input_settings);
+            indexable.screenTitle = screenTitle;
+            indexables.add(indexable);
 
             // Text-to-speech.
             TtsEngines ttsEngines = new TtsEngines(context);
