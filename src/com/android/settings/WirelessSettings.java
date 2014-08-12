@@ -129,9 +129,13 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (mTm.hasIccCard() && (ni != null)) {
             // Check for carrier apps that can handle provisioning first
             Intent provisioningIntent = new Intent(TelephonyIntents.ACTION_CARRIER_SETUP);
-            provisioningIntent.addCategory(TelephonyIntents.CATEGORY_MCCMNC_PREFIX
-                    + mTm.getSimOperator());
-            if (mPm.resolveActivity(provisioningIntent, 0 /* flags */) != null) {
+            List<String> carrierPackages =
+                    mTm.getCarrierPackageNamesForBroadcastIntent(provisioningIntent);
+            if (carrierPackages != null && !carrierPackages.isEmpty()) {
+                if (carrierPackages.size() != 1) {
+                    Log.w(TAG, "Multiple matching carrier apps found, launching the first.");
+                }
+                provisioningIntent.setPackage(carrierPackages.get(0));
                 startActivity(provisioningIntent);
                 return;
             }
