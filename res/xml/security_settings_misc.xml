@@ -36,7 +36,7 @@
     <PreferenceCategory android:title="@string/security_passwords_title"
             android:persistent="false">
 
-        <CheckBoxPreference android:key="show_password"
+        <SwitchPreference android:key="show_password"
                 android:title="@string/show_password"
                 android:persistent="false"/>
 
@@ -52,7 +52,7 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
-        <CheckBoxPreference android:key="toggle_install_applications"
+        <SwitchPreference android:key="toggle_install_applications"
                 android:title="@string/install_applications"
                 android:summaryOff="@string/install_unknown_applications"
                 android:summaryOn="@string/install_unknown_applications"
