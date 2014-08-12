@@ -16,18 +16,33 @@
 
 package com.android.settings.voice;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.preference.Preference;
 import android.provider.Settings;
+import android.service.voice.VoiceInteractionService;
+import android.service.voice.VoiceInteractionServiceInfo;
+import android.speech.RecognitionService;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.voice.VoiceInputPreference.RadioButtonGroupState;
 
 import android.os.Bundle;
 import android.preference.PreferenceCategory;
 import android.widget.Checkable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VoiceInputSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceClickListener, RadioButtonGroupState {
+        Preference.OnPreferenceClickListener, RadioButtonGroupState, Indexable {
 
     private static final String TAG = "VoiceInputSettings";
     private static final boolean DBG = false;
@@ -160,4 +175,68 @@ public class VoiceInputSettings extends SettingsPreferenceFragment implements
         }
         return true;
     }
+
+    // For Search
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+        new BaseSearchIndexProvider() {
+
+            @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                    boolean enabled) {
+
+                List<SearchIndexableRaw> indexables = new ArrayList<>();
+
+                final String screenTitle = context.getString(R.string.voice_input_settings_title);
+
+                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.key = "voice_service_preference_section_title";
+                indexable.title = context.getString(R.string.voice_service_preference_section_title);
+                indexable.screenTitle = screenTitle;
+                indexables.add(indexable);
+
+                final List<ResolveInfo> voiceInteractions =
+                        context.getPackageManager().queryIntentServices(
+                                new Intent(VoiceInteractionService.SERVICE_INTERFACE),
+                                PackageManager.GET_META_DATA);
+
+                final int countInteractions = voiceInteractions.size();
+                for (int i = 0; i < countInteractions; i++) {
+                    ResolveInfo info = voiceInteractions.get(i);
+                    VoiceInteractionServiceInfo visInfo = new VoiceInteractionServiceInfo(
+                            context.getPackageManager(), info.serviceInfo);
+                    if (visInfo.getParseError() != null) {
+                        continue;
+                    }
+                    indexables.add(getSearchIndexableRaw(context, info, screenTitle));
+                }
+
+                final List<ResolveInfo> recognitions =
+                        context.getPackageManager().queryIntentServices(
+                                new Intent(RecognitionService.SERVICE_INTERFACE),
+                                PackageManager.GET_META_DATA);
+
+                final int countRecognitions = recognitions.size();
+                for (int i = 0; i < countRecognitions; i++) {
+                    ResolveInfo info = recognitions.get(i);
+                    indexables.add(getSearchIndexableRaw(context, info, screenTitle));
+                }
+
+                return indexables;
+            }
+
+            private SearchIndexableRaw getSearchIndexableRaw(Context context,
+                    ResolveInfo info, String screenTitle) {
+
+                ServiceInfo serviceInfo = info.serviceInfo;
+                ComponentName componentName = new ComponentName(serviceInfo.packageName,
+                        serviceInfo.name);
+
+                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
+                indexable.key = componentName.flattenToString();
+                indexable.title = info.loadLabel(context.getPackageManager()).toString();
+                indexable.screenTitle = screenTitle;
+
+                return indexable;
+            }
+        };
 }

@@ -43,6 +43,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
+import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
@@ -139,6 +140,7 @@ public final class Ranking {
 
         // IMEs
         sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);
+        sRankMap.put(VoiceInputSettings.class.getName(), RANK_IME);
 
         // Privacy
         sRankMap.put(PrivacySettings.class.getName(), RANK_PRIVACY);

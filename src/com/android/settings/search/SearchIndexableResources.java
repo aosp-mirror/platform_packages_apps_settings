@@ -46,6 +46,7 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.users.UserSettings;
+import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
@@ -228,6 +229,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(InputMethodAndLanguageSettings.class.getName()),
                         NO_DATA_RES_ID,
                         InputMethodAndLanguageSettings.class.getName(),
+                        R.drawable.ic_settings_language));
+
+        sResMap.put(VoiceInputSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(VoiceInputSettings.class.getName()),
+                        NO_DATA_RES_ID,
+                        VoiceInputSettings.class.getName(),
                         R.drawable.ic_settings_language));
 
         sResMap.put(PrivacySettings.class.getName(),
