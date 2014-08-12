@@ -218,6 +218,7 @@ public class WifiSetupActivity extends WifiPickerActivity
         final Intent nextIntent = new Intent(ACTION_NEXT);
         nextIntent.putExtra(EXTRA_SCRIPT_URI, intent.getStringExtra(EXTRA_SCRIPT_URI));
         nextIntent.putExtra(EXTRA_ACTION_ID, intent.getStringExtra(EXTRA_ACTION_ID));
+        nextIntent.putExtra(EXTRA_THEME, intent.getStringExtra(EXTRA_THEME));
         nextIntent.putExtra(EXTRA_RESULT_CODE, resultCode);
         startActivityForResult(nextIntent, NEXT_REQUEST);
     }
