@@ -249,6 +249,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         if (!mAvailableDevicesCategoryIsPresent) {
             getPreferenceScreen().addPreference(mAvailableDevicesCategory);
         }
+        mLocalManager.getCachedDeviceManager().clearCachedDevices();
+        mAvailableDevicesCategory.removeAll();
         mLocalAdapter.startScanning(true);
     }
 
@@ -405,7 +407,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_picker, null);
                 profileFrag = (DeviceProfilesSettings)activity.getFragmentManager()
-                .findFragmentById(R.id.bluetooth_fragment_settings);
+                    .findFragmentById(R.id.bluetooth_fragment_settings);
             }
 
             final View dialogLayout = mSettingsDialogView;
