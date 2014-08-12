@@ -30,7 +30,6 @@ import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.bluetooth.MessageAccessSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -93,7 +92,6 @@ public final class Ranking {
 
         // BT
         sRankMap.put(BluetoothSettings.class.getName(), RANK_BT);
-        sRankMap.put(MessageAccessSettings.class.getName(), RANK_BT);
 
         // SIM Cards
         sRankMap.put(SimSettings.class.getName(), RANK_SIM);
