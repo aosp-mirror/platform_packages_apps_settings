@@ -69,7 +69,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_RENAME_DEVICE = Menu.FIRST + 1;
     private static final int MENU_ID_SHOW_RECEIVED = Menu.FIRST + 2;
-    private static final int MENU_ID_MESSAGE_ACCESS = Menu.FIRST + 3;
 
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
@@ -205,12 +204,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(Menu.NONE, MENU_ID_SHOW_RECEIVED, 0, R.string.bluetooth_show_received_files)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        // Message Access API is still not finished, once completed we undo this check.
-        // Bug 16232864
-        if (android.os.SystemProperties.get("show_bluetooth_message_access").equals("true")){
-            menu.add(Menu.NONE, MENU_ID_MESSAGE_ACCESS, 0, R.string.bluetooth_show_message_access)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -231,14 +224,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case MENU_ID_SHOW_RECEIVED:
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
                 getActivity().sendBroadcast(intent);
-                return true;
-
-            case MENU_ID_MESSAGE_ACCESS:
-                if (getActivity() instanceof SettingsActivity) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
-                            MessageAccessSettings.class.getCanonicalName(), null,
-                            R.string.bluetooth_show_message_access, null, this, 0);
-                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -377,7 +362,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
     }
 
-    @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
         setDeviceListGroup(getPreferenceScreen());
         removeAllDevices();
