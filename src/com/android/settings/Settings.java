@@ -38,6 +38,7 @@ public class Settings extends SettingsActivity {
     public static class InputMethodAndLanguageSettingsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
+    public static class VoiceInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
@@ -63,6 +64,7 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SecuritySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }

@@ -105,6 +105,7 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
+import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
@@ -245,6 +246,7 @@ public class SettingsActivity extends Activity
             DateTimeSettings.class.getName(),
             LocalePicker.class.getName(),
             InputMethodAndLanguageSettings.class.getName(),
+            VoiceInputSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
@@ -256,6 +258,7 @@ public class SettingsActivity extends Activity
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
             SecuritySettings.class.getName(),
+            UsageAccessSettings.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
             AccessibilitySettings.class.getName(),
