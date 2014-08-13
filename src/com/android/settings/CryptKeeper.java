@@ -170,6 +170,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
+            } else if (failedAttempts == -1) {
+                // Right password, but decryption failed. Tell user bad news ...
+                setContentView(R.layout.crypt_keeper_progress);
+                showFactoryReset(true);
+                return;
             } else {
                 // Wrong entry. Handle pattern case.
                 if (mLockPatternView != null) {
@@ -392,7 +397,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private void setupUi() {
         if (mEncryptionGoneBad || isDebugView(FORCE_VIEW_ERROR)) {
             setContentView(R.layout.crypt_keeper_progress);
-            showFactoryReset();
+            showFactoryReset(false);
             return;
         }
 
@@ -508,7 +513,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         updateProgress();
     }
 
-    private void showFactoryReset() {
+    /**
+     * Show factory reset screen allowing the user to reset their phone when
+     * there is nothing else we can do
+     * @param corrupt true if userdata is corrupt, false if encryption failed
+     *        partway through
+     */
+    private void showFactoryReset(boolean corrupt) {
         // Hide the encryption-bot to make room for the "factory reset" button
         findViewById(R.id.encroid).setVisibility(View.GONE);
 
@@ -524,8 +535,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         });
 
         // Alert the user of the failure.
-        ((TextView) findViewById(R.id.title)).setText(R.string.crypt_keeper_failed_title);
-        ((TextView) findViewById(R.id.status)).setText(R.string.crypt_keeper_failed_summary);
+        if (corrupt) {
+            ((TextView) findViewById(R.id.title)).setText(R.string.crypt_keeper_data_corrupt_title);
+            ((TextView) findViewById(R.id.status)).setText(R.string.crypt_keeper_data_corrupt_summary);
+        } else {
+            ((TextView) findViewById(R.id.title)).setText(R.string.crypt_keeper_failed_title);
+            ((TextView) findViewById(R.id.status)).setText(R.string.crypt_keeper_failed_summary);
+        }
 
         final View view = findViewById(R.id.bottom_divider);
         // TODO(viki): Why would the bottom divider be missing in certain layouts? Investigate.
@@ -538,7 +554,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         final String state = SystemProperties.get("vold.encrypt_progress");
 
         if ("error_partially_encrypted".equals(state)) {
-            showFactoryReset();
+            showFactoryReset(false);
             return;
         }
 
