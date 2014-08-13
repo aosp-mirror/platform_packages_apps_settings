@@ -184,8 +184,13 @@ public class SettingsActivity extends Activity
      * that fragment.
      */
     public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
-    public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID = ":settings:show_fragment_title_resid";
-    public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT = ":settings:show_fragment_as_shortcut";
+    public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID =
+            ":settings:show_fragment_title_resid";
+    public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT =
+            ":settings:show_fragment_as_shortcut";
+
+    public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
+            ":settings:show_fragment_as_subsetting";
 
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
         "com.android.settings.FRAGMENT_CLASS";
@@ -290,7 +295,8 @@ public class SettingsActivity extends Activity
             NotificationAppList.class.getName(),
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
-            QuickLaunchSettings.class.getName()
+            QuickLaunchSettings.class.getName(),
+            ApnSettings.class.getName()
     };
 
 
@@ -495,12 +501,15 @@ public class SettingsActivity extends Activity
         final String className = cn.getClassName();
 
         mIsShowingDashboard = className.equals(Settings.class.getName());
-        final boolean isSubSettings = className.equals(SubSettings.class.getName());
 
-        // If this is a sub settings or not the main Dashboard and not a Shortcut and an initial
-        // Fragment then apply the SubSettings theme for the ActionBar content insets
-        if (isSubSettings ||
-                (!mIsShowingDashboard && !mIsShortcut && (initialFragmentName != null))) {
+        // This is a "Sub Settings" when:
+        // - this is a real SubSettings
+        // - or :settings:show_fragment_as_subsetting is passed to the Intent
+        final boolean isSubSettings = className.equals(SubSettings.class.getName()) ||
+                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
+
+        // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content insets
+        if (isSubSettings) {
             // Check also that we are not a Theme Dialog as we don't want to override them
             final int themeResId = getThemeResId();
             if (themeResId != R.style.Theme_DialogWhenLarge &&
@@ -550,6 +559,9 @@ public class SettingsActivity extends Activity
                 } else if (isSubSettings) {
                     mDisplayHomeAsUpEnabled = true;
                     mDisplaySearch = true;
+                } else {
+                    mDisplayHomeAsUpEnabled = false;
+                    mDisplaySearch = false;
                 }
                 setTitleFromIntent(intent);
 

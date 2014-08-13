@@ -295,10 +295,11 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name="ApnSettings"
+        <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
-                android:configChanges="orientation|keyboardHidden|screenSize"
                 android:launchMode="singleTask"
+                android:taskAffinity="com.android.settings"
+                android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WirelessSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -308,6 +309,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ApnSettings" />
         </activity>
 
         <activity android:name="Settings$BluetoothSettingsActivity"

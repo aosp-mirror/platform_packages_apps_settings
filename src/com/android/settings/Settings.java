@@ -98,5 +98,6 @@ public class Settings extends SettingsActivity {
     public static class QuickLaunchSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
+    public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
 }
 
