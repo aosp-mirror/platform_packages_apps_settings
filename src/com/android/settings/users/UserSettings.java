@@ -790,6 +790,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 } else {
                     setPhotoId(pref, user);
                 }
+            } else {
+                pref.setIcon(getEncircledDefaultAvatar());
             }
         }
 
@@ -833,7 +835,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (missingIcons.size() > 0) {
             loadIconsAsync(missingIcons);
         }
-        boolean moreUsers = mUserManager.getMaxSupportedUsers() > users.size();
+        boolean moreUsers = mUserManager.canAddMoreUsers();
         mAddUser.setEnabled(moreUsers);
     }
 
@@ -849,6 +851,9 @@ public class UserSettings extends SettingsPreferenceFragment
             protected Void doInBackground(List<Integer>... values) {
                 for (int userId : values[0]) {
                     Bitmap bitmap = mUserManager.getUserIcon(userId);
+                    if (bitmap == null) {
+                        bitmap = createBitmapFromDrawable(R.drawable.ic_avatar_default_1);
+                    }
                     mUserIcons.append(userId, bitmap);
                 }
                 return null;
