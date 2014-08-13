@@ -16,6 +16,7 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:id="@+id/fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,8 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:foreground="@drawable/illustration_wifi_wide"
-        android:background="@drawable/grass">
+        android:foreground="@drawable/setup_illustration_wifi_wide"
+        android:background="@drawable/setup_illustration_bg"
+        settings:autoMirrored="true">
 
         <LinearLayout
             android:layout_width="match_parent"

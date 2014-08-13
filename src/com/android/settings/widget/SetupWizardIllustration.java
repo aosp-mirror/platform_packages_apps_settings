@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.LayoutDirection;
 import android.util.Log;
 import android.widget.FrameLayout;
 
@@ -45,6 +46,7 @@ public class SetupWizardIllustration extends FrameLayout {
     private int mForegroundHeight = 0;
     private float mScale = 1.0f;
     private float mAspectRatio = 0.0f;
+    private boolean mAutoMirrored;
 
     public SetupWizardIllustration(Context context) {
         this(context, null);
@@ -65,6 +67,8 @@ public class SetupWizardIllustration extends FrameLayout {
             TypedArray a = context.obtainStyledAttributes(attrs,
                     R.styleable.SetupWizardIllustration, 0, 0);
             mAspectRatio = a.getFloat(R.styleable.SetupWizardIllustration_aspectRatio, 0.0f);
+            // TODO: Use framework autoMirrored supported in drawables instead b/17047609
+            mAutoMirrored = a.getBoolean(R.styleable.SetupWizardIllustration_autoMirrored, false);
             a.recycle();
         }
         // Number of pixels of the 8dp baseline grid as defined in material design specs
@@ -131,6 +135,11 @@ public class SetupWizardIllustration extends FrameLayout {
 
     @Override
     public void onDraw(Canvas canvas) {
+        canvas.save();
+        if (mAutoMirrored && getLayoutDirection() == LayoutDirection.RTL) {
+            canvas.scale(-1, 1);
+            canvas.translate(-canvas.getWidth(), 0);
+        }
         if (mBackground != null) {
             canvas.save();
             // Draw the background filling parts not covered by the illustration
@@ -146,6 +155,7 @@ public class SetupWizardIllustration extends FrameLayout {
             mForeground.draw(canvas);
             canvas.restore();
         }
+        canvas.restore();
         super.onDraw(canvas);
     }
 }
