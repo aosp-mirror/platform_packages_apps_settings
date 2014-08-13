@@ -296,14 +296,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 root.findPreference(KEY_SIM_LOCK).setEnabled(false);
             }
         }
-        try {
-            if (Settings.System.getInt(getContentResolver(), Settings.System.LOCK_TO_APP_ENABLED)
-                    != 0) {
-                root.findPreference(KEY_SCREEN_PINNING).setSummary(
-                        getResources().getString(R.string.switch_on_text));
-            }
-        } catch (SettingNotFoundException e) {
-            Log.w(TAG, "No Lock-to-app enabled setting", e);
+        if (Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCK_TO_APP_ENABLED, 0) != 0) {
+            root.findPreference(KEY_SCREEN_PINNING).setSummary(
+                    getResources().getString(R.string.switch_on_text));
         }
 
         // Show password
