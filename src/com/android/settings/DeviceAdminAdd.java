@@ -32,7 +32,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -103,6 +106,7 @@ public class DeviceAdminAdd extends Activity {
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
         mAppOps = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
+        PackageManager packageManager = getPackageManager();
 
         if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
             Log.w(TAG, "Cannot start ADD_DEVICE_ADMIN as a new task");
@@ -120,6 +124,8 @@ public class DeviceAdminAdd extends Activity {
         }
 
         if (action != null && action.equals(DevicePolicyManager.ACTION_SET_PROFILE_OWNER)) {
+            setResult(RESULT_CANCELED);
+            setFinishOnTouchOutside(true);
             mAddingProfileOwner = true;
             mProfileOwnerName =
                     getIntent().getStringExtra(DevicePolicyManager.EXTRA_PROFILE_OWNER_NAME);
@@ -129,11 +135,23 @@ public class DeviceAdminAdd extends Activity {
                 finish();
                 return;
             }
+            try {
+                PackageInfo packageInfo = packageManager.getPackageInfo(callingPackage, 0);
+                if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                    Log.e(TAG, "Cannot set a non-system app as a profile owner");
+                    finish();
+                    return;
+                }
+            } catch (NameNotFoundException nnfe) {
+                Log.e(TAG, "Cannot find the package " + callingPackage);
+                finish();
+                return;
+            }
         }
 
         ActivityInfo ai;
         try {
-            ai = getPackageManager().getReceiverInfo(who, PackageManager.GET_META_DATA);
+            ai = packageManager.getReceiverInfo(who, PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Unable to retrieve device policy " + who, e);
             finish();
@@ -144,7 +162,7 @@ public class DeviceAdminAdd extends Activity {
         // No need to check this when deactivating, because it is safe to deactivate an active
         // invalid device admin.
         if (!mDPM.isAdminActive(who)) {
-            List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
+            List<ResolveInfo> avail = packageManager.queryBroadcastReceivers(
                     new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
                     PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS);
             int count = avail == null ? 0 : avail.size();
