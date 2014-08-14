@@ -16,8 +16,10 @@
 
 package com.android.settings.net;
 
+import android.app.AppGlobals;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -28,7 +30,9 @@ import android.net.ConnectivityManager;
 import android.net.TrafficStats;
 import android.os.UserManager;
 import android.os.UserHandle;
+import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.android.settings.R;
@@ -39,6 +43,7 @@ import com.android.settings.Utils;
  * {@link TrafficStats#UID_TETHERING} and {@link UserInfo}.
  */
 public class UidDetailProvider {
+    private static final String TAG = "DataUsage";
     private final Context mContext;
     private final SparseArray<UidDetail> mUidDetailCache;
 
@@ -148,31 +153,43 @@ public class UidDetailProvider {
         final String[] packageNames = pm.getPackagesForUid(uid);
         final int length = packageNames != null ? packageNames.length : 0;
         try {
-            final UserHandle userHandle = new UserHandle(UserHandle.getUserId(uid));
+            final int userId = UserHandle.getUserId(uid);
+            UserHandle userHandle = new UserHandle(userId);
+            IPackageManager ipm = AppGlobals.getPackageManager();
             if (length == 1) {
-                final ApplicationInfo info = pm.getApplicationInfo(packageNames[0], 0);
-                detail.label = info.loadLabel(pm).toString();
-                detail.icon = um.getBadgedDrawableForUser(info.loadIcon(pm), userHandle);
+                final ApplicationInfo info = ipm.getApplicationInfo(packageNames[0],
+                        0 /* no flags */, userId);
+                if (info != null) {
+                    detail.label = info.loadLabel(pm).toString();
+                    detail.icon = um.getBadgedIconForUser(info.loadIcon(pm),
+                            new UserHandle(userId));
+                }
             } else if (length > 1) {
                 detail.detailLabels = new CharSequence[length];
                 detail.detailContentDescriptions = new CharSequence[length];
                 for (int i = 0; i < length; i++) {
                     final String packageName = packageNames[i];
                     final PackageInfo packageInfo = pm.getPackageInfo(packageName, 0);
-                    final ApplicationInfo appInfo = pm.getApplicationInfo(packageName, 0);
+                    final ApplicationInfo appInfo = ipm.getApplicationInfo(packageName,
+                            0 /* no flags */, userId);
 
-                    detail.detailLabels[i] = appInfo.loadLabel(pm).toString();
-                    detail.detailContentDescriptions[i] = um.getBadgedLabelForUser(
-                            detail.detailLabels[i], userHandle);
-                    if (packageInfo.sharedUserLabel != 0) {
-                        detail.label = pm.getText(packageName, packageInfo.sharedUserLabel,
-                                packageInfo.applicationInfo).toString();
-                        detail.icon = um.getBadgedDrawableForUser(appInfo.loadIcon(pm), userHandle);
+                    if (appInfo != null) {
+                        detail.detailLabels[i] = appInfo.loadLabel(pm).toString();
+                        detail.detailContentDescriptions[i] = um.getBadgedLabelForUser(
+                                detail.detailLabels[i], userHandle);
+                        if (packageInfo.sharedUserLabel != 0) {
+                            detail.label = pm.getText(packageName, packageInfo.sharedUserLabel,
+                                    packageInfo.applicationInfo).toString();
+                            detail.icon = um.getBadgedIconForUser(appInfo.loadIcon(pm), userHandle);
+                        }
                     }
                 }
             }
             detail.contentDescription = um.getBadgedLabelForUser(detail.label, userHandle);
         } catch (NameNotFoundException e) {
+            Log.w(TAG, "Error while building UI detail for uid "+uid, e);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error while building UI detail for uid "+uid, e);
         }
 
         if (TextUtils.isEmpty(detail.label)) {

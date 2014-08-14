@@ -54,7 +54,7 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private static final boolean DEBUG = false;
 
-    private static final String TAG = "PowerUsageSummary";
+    static final String TAG = "PowerUsageSummary";
 
     private static final String KEY_APP_LIST = "app_list";
 
@@ -293,7 +293,7 @@ public class PowerUsageSummary extends PreferenceFragment {
                 }
                 final UserHandle userHandle = new UserHandle(UserHandle.getUserId(sipper.getUid()));
                 final BatteryEntry entry = new BatteryEntry(getActivity(), mHandler, mUm, sipper);
-                final Drawable badgedIcon = mUm.getBadgedDrawableForUser(entry.getIcon(),
+                final Drawable badgedIcon = mUm.getBadgedIconForUser(entry.getIcon(),
                         userHandle);
                 final CharSequence contentDescription = mUm.getBadgedLabelForUser(entry.getLabel(),
                         userHandle);
@@ -337,7 +337,7 @@ public class PowerUsageSummary extends PreferenceFragment {
                     if (pgp != null) {
                         final int userId = UserHandle.getUserId(entry.sipper.getUid());
                         final UserHandle userHandle = new UserHandle(userId);
-                        pgp.setIcon(mUm.getBadgedDrawableForUser(entry.getIcon(), userHandle));
+                        pgp.setIcon(mUm.getBadgedIconForUser(entry.getIcon(), userHandle));
                         pgp.setTitle(entry.name);
                     }
                     break;
