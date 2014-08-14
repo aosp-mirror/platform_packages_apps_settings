@@ -203,6 +203,11 @@ public class RecentLocationApps {
             IPackageManager ipm = AppGlobals.getPackageManager();
             ApplicationInfo appInfo =
                     ipm.getApplicationInfo(packageName, PackageManager.GET_META_DATA, userId);
+            if (appInfo == null) {
+                Log.w(TAG, "Null application info retrieved for package " + packageName
+                        + ", userId " + userId);
+                return null;
+            }
             Resources res = mActivity.getResources();
 
             final UserHandle userHandle = new UserHandle(userId);
@@ -214,7 +219,8 @@ public class RecentLocationApps {
                     appLabel, highBattery, badgedAppLabel,
                     new PackageEntryClickedListener(packageName));
         } catch (RemoteException e) {
-            Log.w(TAG, "Error while retrieving application info", e);
+            Log.w(TAG, "Error while retrieving application info for package " + packageName
+                    + ", userId " + userId, e);
         }
 
         return preference;
