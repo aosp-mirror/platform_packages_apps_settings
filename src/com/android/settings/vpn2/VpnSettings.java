@@ -491,7 +491,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         private static class TitleAdapter extends ArrayAdapter<CharSequence> {
             public TitleAdapter(Context context, List<CharSequence> objects) {
-                super(context, com.android.internal.R.layout.select_dialog_singlechoice_holo,
+                super(context, com.android.internal.R.layout.select_dialog_singlechoice_material,
                         android.R.id.text1, objects);
             }
         }
