@@ -16,15 +16,20 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.AppGlobals;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Handler;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 
 import com.android.internal.os.BatterySipper;
 import com.android.settings.R;
@@ -256,9 +261,17 @@ public class BatteryEntry {
         System.arraycopy(sipper.mPackages, 0, packageLabels, 0, sipper.mPackages.length);
 
         // Convert package names to user-facing labels where possible
+        IPackageManager ipm = AppGlobals.getPackageManager();
+        final int userId = UserHandle.getUserId(uid);
         for (int i = 0; i < packageLabels.length; i++) {
             try {
-                ApplicationInfo ai = pm.getApplicationInfo(packageLabels[i], 0);
+                final ApplicationInfo ai = ipm.getApplicationInfo(packageLabels[i],
+                        0 /* no flags */, userId);
+                if (ai == null) {
+                    Log.d(PowerUsageSummary.TAG, "Retrieving null app info for package "
+                            + packageLabels[i] + ", user " + userId);
+                    continue;
+                }
                 CharSequence label = ai.loadLabel(pm);
                 if (label != null) {
                     packageLabels[i] = label.toString();
@@ -268,10 +281,14 @@ public class BatteryEntry {
                     icon = ai.loadIcon(pm);
                     break;
                 }
-            } catch (PackageManager.NameNotFoundException e) {
+            } catch (RemoteException e) {
+                Log.d(PowerUsageSummary.TAG, "Error while retrieving app info for package "
+                        + packageLabels[i] + ", user " + userId, e);
             }
         }
-        if (icon == null) icon = defaultActivityIcon;
+        if (icon == null) {
+            icon = defaultActivityIcon;
+        }
 
         if (packageLabels.length == 1) {
             name = packageLabels[0];
@@ -279,7 +296,12 @@ public class BatteryEntry {
             // Look for an official name for this UID.
             for (String pkgName : sipper.mPackages) {
                 try {
-                    final PackageInfo pi = pm.getPackageInfo(pkgName, 0);
+                    final PackageInfo pi = ipm.getPackageInfo(pkgName, 0 /* no flags */, userId);
+                    if (pi == null) {
+                        Log.d(PowerUsageSummary.TAG, "Retrieving null package info for package "
+                                + pkgName + ", user " + userId);
+                        continue;
+                    }
                     if (pi.sharedUserLabel != 0) {
                         final CharSequence nm = pm.getText(pkgName,
                                 pi.sharedUserLabel, pi.applicationInfo);
@@ -292,7 +314,9 @@ public class BatteryEntry {
                             break;
                         }
                     }
-                } catch (PackageManager.NameNotFoundException e) {
+                } catch (RemoteException e) {
+                    Log.d(PowerUsageSummary.TAG, "Error while retrieving package info for package "
+                            + pkgName + ", user " + userId, e);
                 }
             }
         }
