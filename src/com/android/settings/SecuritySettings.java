@@ -404,16 +404,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 .setIcon(com.android.internal.R.drawable.ic_dialog_alert)
                 .setMessage(getResources().getString(R.string.install_all_warning))
                 .setPositiveButton(android.R.string.yes, this)
-                .setNegativeButton(android.R.string.no, null)
+                .setNegativeButton(android.R.string.no, this)
                 .show();
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON_POSITIVE) {
-            setNonMarketAppsAllowed(true);
+        if (dialog == mWarnInstallApps) {
+            boolean turnOn = which == DialogInterface.BUTTON_POSITIVE;
+            setNonMarketAppsAllowed(turnOn);
             if (mToggleAppInstallation != null) {
-                mToggleAppInstallation.setChecked(true);
+                mToggleAppInstallation.setChecked(turnOn);
             }
         }
     }
