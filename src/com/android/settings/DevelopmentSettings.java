@@ -117,6 +117,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
     private static final String SIMULATE_COLOR_SPACE = "simulate_color_space";
     private static final String USE_NUPLAYER_KEY = "use_nuplayer";
+    private static final String USB_AUDIO_KEY = "usb_audio";
     private static final String USE_AWESOMEPLAYER_PROPERTY = "persist.sys.media.use-awesome";
     private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
@@ -222,6 +223,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mSimulateColorSpace;
 
     private CheckBoxPreference mUseNuplayer;
+    private CheckBoxPreference mUSBAudio;
     private CheckBoxPreference mImmediatelyDestroyActivities;
 
     private ListPreference mAppProcessLimit;
@@ -343,6 +345,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUseNuplayer = findAndInitCheckboxPref(USE_NUPLAYER_KEY);
+        mUSBAudio = findAndInitCheckboxPref(USB_AUDIO_KEY);
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -549,6 +552,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateWifiAllowScansWithTrafficOptions();
         updateSimulateColorSpace();
         updateUseNuplayerOptions();
+        updateUSBAudioOptions();
     }
 
     private void resetDangerousOptions() {
@@ -1013,6 +1017,17 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         pokeSystemProperties();
     }
 
+    private void updateUSBAudioOptions() {
+        updateCheckBox(mUSBAudio, Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, 0) != 0);
+    }
+
+    private void writeUSBAudioOptions() {
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED,
+                    mUSBAudio.isChecked() ? 1 : 0);
+    }
+
     private void updateForceRtlOptions() {
         updateCheckBox(mForceRtlLayout, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0);
@@ -1417,6 +1432,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeWifiAllowScansWithTrafficOptions();
         } else if (preference == mUseNuplayer) {
             writeUseNuplayerOptions();
+        } else if (preference == mUSBAudio) {
+            writeUSBAudioOptions();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
