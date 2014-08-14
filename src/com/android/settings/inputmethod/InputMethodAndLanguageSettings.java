@@ -807,33 +807,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         R.string.builtin_keyboard_settings_title);
                 indexable.screenTitle = screenTitle;
                 indexables.add(indexable);
-
-                // Auto replace.
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = "auto_replace";
-                indexable.title = context.getString(R.string.auto_replace);
-                indexable.summaryOn = context.getString(R.string.auto_replace_summary);
-                indexable.summaryOff = context.getString(R.string.auto_replace_summary);
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-
-                // Auto caps.
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = "auto_caps";
-                indexable.title = context.getString(R.string.auto_caps);
-                indexable.summaryOn = context.getString(R.string.auto_caps_summary);
-                indexable.summaryOff = context.getString(R.string.auto_caps_summary);
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-
-                // Auto punctuate.
-                indexable = new SearchIndexableRaw(context);
-                indexable.key = "auto_punctuate";
-                indexable.title = context.getString(R.string.auto_punctuate);
-                indexable.summaryOn = context.getString(R.string.auto_punctuate_summary);
-                indexable.summaryOff = context.getString(R.string.auto_punctuate_summary);
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
             }
 
             // Voice input
