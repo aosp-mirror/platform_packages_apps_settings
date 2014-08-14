@@ -20,6 +20,7 @@ import com.android.settings.R;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -266,14 +267,17 @@ class AccessPoint extends Preference {
             Drawable drawable = getIcon();
 
             if (drawable == null) {
-                drawable = context.getTheme().obtainStyledAttributes(
-                        wifi_signal_attributes).getDrawable(0);
+                // To avoid a drawing race condition, we first set the state (SECURE/NONE) and then
+                // set the icon (drawable) to that state's drawable.
+                StateListDrawable sld = (StateListDrawable) context.getTheme()
+                        .obtainStyledAttributes(wifi_signal_attributes).getDrawable(0);
+                sld.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
+                drawable = sld.getCurrent();
                 setIcon(drawable);
             }
 
             if (drawable != null) {
                 drawable.setLevel(level);
-                drawable.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
             }
         }
     }
@@ -554,17 +558,6 @@ class AccessPoint extends Preference {
             if (mConfig != null) { // Is saved network
                 summary.append(context.getString(R.string.wifi_remembered));
             }
-
-// TODO: Wi-Fi team needs to decide what to do with this code.
-//            if (security != SECURITY_NONE) {
-//                String securityStrFormat;
-//                if (summary.length() == 0) {
-//                    securityStrFormat = context.getString(R.string.wifi_secured_first_item);
-//                } else {
-//                    securityStrFormat = context.getString(R.string.wifi_secured_second_item);
-//                }
-//            }
-
         }
 
         if (WifiSettings.mVerboseLogging > 0) {
