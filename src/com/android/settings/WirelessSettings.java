@@ -256,7 +256,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
 
         final Activity activity = getActivity();
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
-        CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
+        SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
         CheckBoxPreference nsd = (CheckBoxPreference) findPreference(KEY_TOGGLE_NSD);
 
