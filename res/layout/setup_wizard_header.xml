@@ -21,10 +21,11 @@
     android:id="@+id/title_area"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/grass"
-    android:foreground="@drawable/illustration_wifi"
+    android:background="@drawable/setup_illustration_bg"
+    android:foreground="@drawable/setup_illustration_wifi"
     android:tag="stickyContainer"
-    settings:aspectRatio="2.0">
+    settings:aspectRatio="2.0"
+    settings:autoMirrored="true">
 
     <TextView
         android:id="@+id/title"
