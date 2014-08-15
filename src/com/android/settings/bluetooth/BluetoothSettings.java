@@ -82,7 +82,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private PreferenceGroup mAvailableDevicesCategory;
     private boolean mAvailableDevicesCategoryIsPresent;
 
-    private boolean mActivityStarted;
+    private boolean mInitialScanStarted;
 
     private TextView mEmptyView;
     private SwitchBar mSwitchBar;
@@ -118,7 +118,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivityStarted = (savedInstanceState == null);    // don't auto start scan after rotation
+        mInitialScanStarted = (savedInstanceState != null);    // don't auto start scan after rotation
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
@@ -153,6 +153,9 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
         super.onResume();
 
+        // Make the device visible to other devices.
+        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+
         if (isUiRestricted()) {
             setDeviceListGroup(getPreferenceScreen());
             removeAllDevices();
@@ -162,11 +165,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mLocalAdapter != null) {
-            updateContent(mLocalAdapter.getBluetoothState(), mActivityStarted);
+            updateContent(mLocalAdapter.getBluetoothState());
         }
-
-        // Make the device visible to other devices.
-        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
 
     @Override
@@ -176,14 +176,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             mBluetoothEnabler.pause();
         }
 
+        // Make the device only visible to connected devices.
+        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
+
         if (isUiRestricted()) {
             return;
         }
 
         getActivity().unregisterReceiver(mReceiver);
-
-        // Make the device only visible to connected devices.
-        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
     }
 
     @Override
@@ -233,9 +233,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         if (isUiRestricted()) return;
         if (!mAvailableDevicesCategoryIsPresent) {
             getPreferenceScreen().addPreference(mAvailableDevicesCategory);
+            mAvailableDevicesCategoryIsPresent = true;
         }
         mLocalManager.getCachedDeviceManager().clearCachedDevices();
         mAvailableDevicesCategory.removeAll();
+        mInitialScanStarted = true;
         mLocalAdapter.startScanning(true);
     }
 
@@ -246,16 +248,18 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     private void addDeviceCategory(PreferenceGroup preferenceGroup, int titleId,
-            BluetoothDeviceFilter.Filter filter) {
+            BluetoothDeviceFilter.Filter filter, boolean addCachedDevices) {
         preferenceGroup.setTitle(titleId);
         getPreferenceScreen().addPreference(preferenceGroup);
         setFilter(filter);
         setDeviceListGroup(preferenceGroup);
-        addCachedDevices();
+        if (addCachedDevices) {
+            addCachedDevices();
+        }
         preferenceGroup.setEnabled(true);
     }
 
-    private void updateContent(int bluetoothState, boolean scanState) {
+    private void updateContent(int bluetoothState) {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         int messageId = 0;
 
@@ -278,8 +282,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 }
                 addDeviceCategory(mPairedDevicesCategory,
                         R.string.bluetooth_preference_paired_devices,
-                        BluetoothDeviceFilter.BONDED_DEVICE_FILTER);
+                        BluetoothDeviceFilter.BONDED_DEVICE_FILTER, true);
                 int numberOfPairedDevices = mPairedDevicesCategory.getPreferenceCount();
+
+                if (isUiRestricted() || numberOfPairedDevices <= 0) {
+                    preferenceScreen.removePreference(mPairedDevicesCategory);
+                }
 
                 // Available devices category
                 if (mAvailableDevicesCategory == null) {
@@ -290,30 +298,17 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 }
                 addDeviceCategory(mAvailableDevicesCategory,
                         R.string.bluetooth_preference_found_devices,
-                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
+                        BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
                 int numberOfAvailableDevices = mAvailableDevicesCategory.getPreferenceCount();
-                mAvailableDevicesCategoryIsPresent = true;
 
-                if (numberOfAvailableDevices == 0) {
-                    preferenceScreen.removePreference(mAvailableDevicesCategory);
-                    mAvailableDevicesCategoryIsPresent = false;
-                }
-
-                if (numberOfPairedDevices == 0) {
-                    preferenceScreen.removePreference(mPairedDevicesCategory);
-                    if (scanState == true) {
-                        mActivityStarted = false;
-                        startScanning();
-                    } else {
-                        if (!mAvailableDevicesCategoryIsPresent) {
-                            getPreferenceScreen().addPreference(mAvailableDevicesCategory);
-                        }
-                    }
+                if (!mInitialScanStarted) {
+                    startScanning();
                 }
 
                 if (mMyDevicePreference == null) {
                     mMyDevicePreference = new Preference(getActivity());
                 }
+
                 mMyDevicePreference.setSummary(getResources().getString(
                             R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
                 mMyDevicePreference.setSelectable(false);
@@ -350,7 +345,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
-        updateContent(bluetoothState, true);
+        updateContent(bluetoothState);
     }
 
     @Override
@@ -365,7 +360,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
         setDeviceListGroup(getPreferenceScreen());
         removeAllDevices();
-        updateContent(mLocalAdapter.getBluetoothState(), false);
+        updateContent(mLocalAdapter.getBluetoothState());
     }
 
     private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
