@@ -54,14 +54,14 @@ public class ZenModeConditionSelection extends RadioGroup {
         b.setChecked(true);
     }
 
-    private RadioButton newRadioButton(Object tag) {
+    private RadioButton newRadioButton(Condition condition) {
         final RadioButton button = new RadioButton(mContext);
-        button.setTag(tag);
+        button.setTag(condition);
         button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    handleSubscribe((Uri)button.getTag());
+                    handleSubscribe((Condition) button.getTag());
                 }
             }
         });
@@ -95,7 +95,7 @@ public class ZenModeConditionSelection extends RadioGroup {
             RadioButton v = (RadioButton) findViewWithTag(c.id);
             if (c.state == Condition.STATE_TRUE || c.state == Condition.STATE_UNKNOWN) {
                 if (v == null) {
-                    v = newRadioButton(c.id);
+                    v = newRadioButton(c);
                 }
             }
             if (v != null) {
@@ -105,10 +105,10 @@ public class ZenModeConditionSelection extends RadioGroup {
         }
     }
 
-    protected void handleSubscribe(Uri id) {
-        if (DEBUG) Log.d(TAG, "handleSubscribe " + id);
+    protected void handleSubscribe(Condition c) {
+        if (DEBUG) Log.d(TAG, "handleSubscribe " + c);
         try {
-            mNoMan.setZenModeCondition(id);
+            mNoMan.setZenModeCondition(c);
         } catch (RemoteException e) {
             // noop
         }
