@@ -39,8 +39,12 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Telephony;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.telephony.Phone;
@@ -50,7 +54,7 @@ import com.android.internal.telephony.TelephonyProperties;
 
 import java.util.ArrayList;
 
-public class ApnSettings extends PreferenceActivity implements
+public class ApnSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
 
@@ -121,33 +125,47 @@ public class ApnSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
+        mMobileStateFilter = new IntentFilter(
+                TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        TextView empty = (TextView) getView().findViewById(android.R.id.empty);
+        if (empty != null) {
+            empty.setText(R.string.apn_settings_not_available);
+            getListView().setEmptyView(empty);
+        }
+
         if (mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
             mUnavailable = true;
-            setContentView(R.layout.apn_disallowed_preference_screen);
+            setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;
         }
 
         addPreferencesFromResource(R.xml.apn_settings);
-        getListView().setItemsCanFocus(true);
 
-        mMobileStateFilter = new IntentFilter(
-                TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
+        getListView().setItemsCanFocus(true);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         if (mUnavailable) {
             return;
         }
 
-        registerReceiver(mMobileStateReceiver, mMobileStateFilter);
+        getActivity().registerReceiver(mMobileStateReceiver, mMobileStateFilter);
 
         if (!mRestoreDefaultApnMode) {
             fillList();
@@ -157,18 +175,18 @@ public class ApnSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         if (mUnavailable) {
             return;
         }
 
-        unregisterReceiver(mMobileStateReceiver);
+        getActivity().unregisterReceiver(mMobileStateReceiver);
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
 
         if (mRestoreDefaultApnThread != null) {
@@ -199,7 +217,7 @@ public class ApnSettings extends PreferenceActivity implements
                 String key = cursor.getString(ID_INDEX);
                 String type = cursor.getString(TYPES_INDEX);
 
-                ApnPreference pref = new ApnPreference(this);
+                ApnPreference pref = new ApnPreference(getActivity());
 
                 pref.setKey(key);
                 pref.setTitle(name);
@@ -228,16 +246,18 @@ public class ApnSettings extends PreferenceActivity implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        menu.add(0, MENU_NEW, 0,
-                getResources().getString(R.string.menu_new))
-                .setIcon(android.R.drawable.ic_menu_add)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        menu.add(0, MENU_RESTORE, 0,
-                getResources().getString(R.string.menu_restore))
-                .setIcon(android.R.drawable.ic_menu_upload);
-        return true;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (!mUnavailable) {
+            menu.add(0, MENU_NEW, 0,
+                    getResources().getString(R.string.menu_new))
+                    .setIcon(android.R.drawable.ic_menu_add)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menu.add(0, MENU_RESTORE, 0,
+                    getResources().getString(R.string.menu_restore))
+                    .setIcon(android.R.drawable.ic_menu_upload);
+        }
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -329,9 +349,9 @@ public class ApnSettings extends PreferenceActivity implements
                     fillList();
                     getPreferenceScreen().setEnabled(true);
                     mRestoreDefaultApnMode = false;
-                    dismissDialog(DIALOG_RESTORE_DEFAULTAPN);
+                    removeDialog(DIALOG_RESTORE_DEFAULTAPN);
                     Toast.makeText(
-                        ApnSettings.this,
+                        getActivity(),
                         getResources().getString(
                                 R.string.restore_default_apn_completed),
                         Toast.LENGTH_LONG).show();
@@ -362,20 +382,13 @@ public class ApnSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id) {
         if (id == DIALOG_RESTORE_DEFAULTAPN) {
-            ProgressDialog dialog = new ProgressDialog(this);
+            ProgressDialog dialog = new ProgressDialog(getActivity());
             dialog.setMessage(getResources().getString(R.string.restore_default_apn));
             dialog.setCancelable(false);
             return dialog;
         }
         return null;
-    }
-
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        if (id == DIALOG_RESTORE_DEFAULTAPN) {
-            getPreferenceScreen().setEnabled(false);
-        }
     }
 }
