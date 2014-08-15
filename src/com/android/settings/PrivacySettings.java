@@ -113,11 +113,13 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
             boolean result = false;
             if (preference == mBackup) {
                 if (nextValue == false) {
+                    // Don't change Switch status until user makes choice in dialog
+                    // so return false here.
                     showEraseBackupDialog();
                 } else {
                     setBackupEnabled(true);
+                    result = true;
                 }
-                result = true;
             } else if (preference == mAutoRestore) {
                 try {
                     mBackupManager.setAutoRestore(nextValue);
