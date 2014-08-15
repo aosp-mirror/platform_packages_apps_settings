@@ -369,12 +369,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mAllPrefs.add(mProcessStats);
 
         mWebViewDataReductionProxy = findAndInitCheckboxPref(WEBVIEW_DATA_REDUCTION_PROXY_KEY);
-        String key = Settings.Global.getString(getActivity().getContentResolver(),
-                Settings.Global.WEBVIEW_DATA_REDUCTION_PROXY_KEY);
-        // Disable the selection if the key is not available for some reason.
-        if (key == null || key.isEmpty()) {
-            disableForUser(mWebViewDataReductionProxy);
-        }
     }
 
     private ListPreference addListPreference(String prefKey) {
