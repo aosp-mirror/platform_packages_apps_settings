@@ -127,8 +127,7 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Profile settings"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No name set, using account name"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Scan for devices"</string>
-    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"Rename tablet"</string>
-    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"Rename phone"</string>
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Rename this device"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Rename"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Disconnect?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"This will end your connection with:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
@@ -383,6 +382,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Encryption unsuccessful"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Encryption was interrupted and can\'t be completed. As a result, the data on your tablet is no longer accessible. \n\n To resume using your tablet, you need to perform a factory reset. When you set up your tablet after the reset, you\'ll have an opportunity to restore any data that was backed up to your Google Account."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Encryption was interrupted and can\'t be completed. As a result, the data on your phone is no longer accessible. \n\nTo resume using your phone, you need to perform a factory reset. When you set up your phone after the reset, you\'ll have an opportunity to restore any data that was backed up to your Google Account."</string>
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Decryption unsuccessful"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"The password you entered is correct, but unfortunately your data is corrupt. \n\nTo resume using your tablet, you need to perform a factory reset. When you set up your tablet after the reset, you\'ll have an opportunity to restore any data that was backed up to your Google Account."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"The password you entered is correct, but unfortunately your data is corrupt. \n\nTo resume using your phone, you need to perform a factory reset. When you set up your phone after the reset, you\'ll have an opportunity to restore any data that was backed up to your Google Account."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Switch input method"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Choose screen lock"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Choose backup lock"</string>
@@ -780,6 +782,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Ringtone"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Notification"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Use incoming call volume for notifications"</string>
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"Doesn\'t support work profiles"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"Default notification sound"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"Media"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Set volume for music and videos"</string>
@@ -1910,6 +1913,10 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Sync"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Sync is currently experiencing problems. It will be back shortly."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Add account"</string>
+    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
+    <skip />
+    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
+    <skip />
     <string name="background_data" msgid="5779592891375473817">"Background data"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Apps can sync, send and receive data at any time"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Disable background data?"</string>
@@ -2168,7 +2175,6 @@
     <string name="user_add_user_menu" msgid="1675956975014862382">"Add user"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Restricted profile"</string>
     <string name="user_summary_managed_profile" msgid="5729429961989469287">"Managed profile"</string>
-    <string name="user_summary_managed_profile_not_enabled" msgid="7236288236345533775">"Managed profile (currently inactive)"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Before you can create a restricted profile, you\'ll need to set up a screen lock to protect your apps and personal data."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Set lock"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Not set up"</string>
@@ -2379,8 +2385,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Hide sensitive notification content"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Don\'t show notifications at all"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (6164532459432182244) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"When your device is locked, how do you want notifications to show?"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"App notifications"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Other sounds"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
@@ -2413,22 +2418,16 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Enable <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> will be able to add exit conditions to Do not disturb mode."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Loading apps..."</string>
-    <!-- no translation found for app_notification_block_title (172237877395761371) -->
-    <skip />
-    <!-- no translation found for app_notification_block_summary (9049487483231233726) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_title (1967189807102076587) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_summary (7513344552201639232) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_title (7707233094233553192) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_summary (8850104564623526005) -->
-    <skip />
+    <string name="app_notification_block_title" msgid="172237877395761371">"Block"</string>
+    <string name="app_notification_block_summary" msgid="9049487483231233726">"Never show notifications from this app"</string>
+    <string name="app_notification_priority_title" msgid="1967189807102076587">"Priority"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Show notifications at the top of the list and keep them coming when the device is set to priority interruptions only"</string>
+    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Sensitive"</string>
+    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"When the device is locked, hide any sensitive content from this app’s notifications"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blocked"</string>
-    <!-- no translation found for app_notification_row_priority (7723839972982746568) -->
-    <skip />
+    <string name="app_notification_row_priority" msgid="7723839972982746568">"Priority"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitive"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Done"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Until you turn this off"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Priority interruptions"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Downtime (priority interruptions only)"</string>
@@ -2461,4 +2460,5 @@
     <string name="screen_pinning_title" msgid="2292573232264116542">"Screen pinning"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"When this setting is turned on, you can put the device in a state that keeps the current screen in view.\n\nTo pin a screen:\n\n1. Turn this setting on.\n\n2. Open an app.\n\n3. Touch the Recents button.\n\n4. Touch the pin icon."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Work profile"</string>
+    <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
 </resources>

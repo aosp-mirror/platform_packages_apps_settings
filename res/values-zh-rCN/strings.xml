@@ -38,10 +38,8 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"关闭无线通信"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"启用通过 IMS 发送短信的功能"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"停用通过 IMS 发送短信的功能"</string>
-    <!-- no translation found for mo_over_volte_on (8839019743280675289) -->
-    <skip />
-    <!-- no translation found for mo_over_volte_off (662428904067315526) -->
-    <skip />
+    <string name="mo_over_volte_on" msgid="8839019743280675289">"开启MO over PS/VoLTE"</string>
+    <string name="mo_over_volte_off" msgid="662428904067315526">"关闭MO over PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"需要打开 IMS 注册"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"需要关闭 IMS 注册"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"打开 LTE RAM 转储"</string>
@@ -129,8 +127,8 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"配置文件设置"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"未设置名称，使用帐户名"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"扫描查找设备"</string>
-    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"重命名平板电脑"</string>
-    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"重命名手机"</string>
+    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
+    <skip />
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"重命名"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"断开连接？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"此操作将会断开您与以下设备的连接：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
@@ -387,6 +385,12 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"加密失败"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"加密过程中断，无法完成。因此，您已无法再使用平板电脑上的数据。\n\n要继续使用您的平板电脑，您需要恢复出厂设置。恢复出厂设置后对平板电脑进行设置时，您可以将之前备份到Google帐户的所有数据恢复到平板电脑中。"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"加密过程中断，无法完成。因此，您已无法再使用手机上的数据。\n\n要继续使用您的手机，您需要恢复出厂设置。恢复出厂设置后对手机进行设置时，您可以将之前备份到Google帐户的所有数据恢复到手机中。"</string>
+    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
+    <skip />
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"切换输入法"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"选择备份锁"</string>
@@ -525,10 +529,8 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"文件传输"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"输入设备"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"互联网访问"</string>
-    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
-    <skip />
+    <string name="bluetooth_profile_pbap" msgid="5372051906968576809">"共享联系人"</string>
+    <string name="bluetooth_profile_pbap_summary" msgid="6605229608108852198">"用于共享联系人"</string>
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"互联网连接共享"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"消息权限"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>将与媒体音频断开连接。"</string>
@@ -540,8 +542,7 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"已配对的蓝牙设备"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"连接"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"连接到蓝牙设备"</string>
-    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
-    <skip />
+    <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"用于"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"重命名"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"允许传输传入的文件"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"已连接到媒体音频"</string>
@@ -796,6 +797,8 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"铃声"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"将来电音量用作通知音量"</string>
+    <!-- no translation found for home_work_profile_not_supported (1357721012342357037) -->
+    <skip />
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"默认通知提示音"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"媒体"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"设置音乐和视频的音量"</string>
@@ -863,10 +866,8 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"设置"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"拿起设备时唤醒"</string>
-    <!-- no translation found for doze_title (2259176504273878294) -->
-    <skip />
-    <!-- no translation found for doze_summary (8300817661725517088) -->
-    <skip />
+    <string name="doze_title" msgid="2259176504273878294">"环境显示"</string>
+    <string name="doze_summary" msgid="8300817661725517088">"拿起设备或收到通知时唤醒屏幕"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"字体大小"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM卡锁定设置"</string>
@@ -1876,12 +1877,9 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"取消激活"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"设备管理器"</string>
     <string name="no_device_admins" msgid="702695100241728775">"没有可供显示的设备管理器"</string>
-    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
-    <skip />
-    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
-    <skip />
-    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
-    <skip />
+    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"要禁止<xliff:g id="APP_NAME">%1$s</xliff:g>访问您的工作资料，请在“设置”&gt;“帐户”下移除相应资料。"</string>
+    <string name="personal_device_admin_title" msgid="2849617316347669861">"个人"</string>
+    <string name="managed_device_admin_title" msgid="7853955652864478435">"工作"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"没有信任的代理"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"要激活设备管理器吗？"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"激活"</string>
@@ -1931,6 +1929,10 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"同步"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"同步操作当前遇到了一些问题，很快便可恢复。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"添加帐户"</string>
+    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
+    <skip />
+    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
+    <skip />
     <string name="background_data" msgid="5779592891375473817">"后台流量"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"应用可以随时同步、发送和接收数据"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"要关闭后台流量吗？"</string>
@@ -2189,7 +2191,6 @@
     <string name="user_add_user_menu" msgid="1675956975014862382">"添加用户"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"受限个人资料"</string>
     <string name="user_summary_managed_profile" msgid="5729429961989469287">"受管理个人资料"</string>
-    <string name="user_summary_managed_profile_not_enabled" msgid="7236288236345533775">"受管理个人资料（目前未在使用中）"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"您需要先设置锁定屏幕来保护您的应用和个人数据，然后才可以创建受限个人资料。"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"设置锁定屏幕"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"未设置"</string>
@@ -2207,8 +2208,7 @@
     <string name="user_add_user_message_long" msgid="718192651887726259">"您可以通过创建新用户来与其他人共享此设备。每个用户都会有自己的空间，其中可用来存储用户自己的应用、壁纸等内容。用户还可以调整WLAN等会影响到所有用户的设备设置。\n\n您添加新用户后，该用户必须设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"您添加新用户后，该用户必须设置自己的空间。\n\n任何用户均可为其他所有用户更新应用。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"是否立即设置用户？"</string>
-    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
-    <skip />
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"确保相应用户可使用该设备并能设置他们自己的空间"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"要立即设置个人资料吗？"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"立即设置"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"以后再说"</string>
@@ -2401,8 +2401,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"隐藏敏感通知内容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"完全不显示通知"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (6164532459432182244) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"在设备锁定时，您希望通知如何显示？"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"应用通知"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"其他提示音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"拨号键盘音效"</string>
@@ -2435,22 +2434,16 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"要启用“<xliff:g id="SERVICE">%1$s</xliff:g>”吗？"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"“<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>”将可为勿扰模式添加退出条件。"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在加载应用…"</string>
-    <!-- no translation found for app_notification_block_title (172237877395761371) -->
-    <skip />
-    <!-- no translation found for app_notification_block_summary (9049487483231233726) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_title (1967189807102076587) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_summary (7513344552201639232) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_title (7707233094233553192) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_summary (8850104564623526005) -->
-    <skip />
+    <string name="app_notification_block_title" msgid="172237877395761371">"屏蔽"</string>
+    <string name="app_notification_block_summary" msgid="9049487483231233726">"一律不显示来自此应用的通知"</string>
+    <string name="app_notification_priority_title" msgid="1967189807102076587">"优先"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"在列表顶部显示通知，并且只在设备设置为“仅限优先打扰内容”时显示"</string>
+    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"敏感"</string>
+    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"来自此应用的敏感通知不会在设备锁定时显示"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"屏蔽"</string>
-    <!-- no translation found for app_notification_row_priority (7723839972982746568) -->
-    <skip />
+    <string name="app_notification_row_priority" msgid="7723839972982746568">"优先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"敏感"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"完成"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"直到您将其关闭"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"优先打扰内容"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"休息时间（仅限优先打扰内容）"</string>
@@ -2466,8 +2459,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"任何人"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"仅限联系人"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"仅限已加星标的联系人"</string>
-    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"闹钟和其他个人提醒始终优先"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自动开启"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>
@@ -2483,6 +2475,6 @@
     <string name="switch_off_text" msgid="1139356348100829659">"关闭"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"单应用模式"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"开启此设置后，您可以使设备一直显示某个屏幕。\n\n要使用单应用模式，请执行以下操作：\n\n1. 开启此设置。\n\n2. 打开某个应用。\n\n3. 触摸“最近用过的应用”按钮。\n\n4. 触摸图钉图标。"</string>
-    <!-- no translation found for managed_user_title (8101244883654409696) -->
-    <skip />
+    <string name="managed_user_title" msgid="8101244883654409696">"工作资料"</string>
+    <string name="experimental_preference" msgid="7083015446690681376">"（实验性）"</string>
 </resources>
