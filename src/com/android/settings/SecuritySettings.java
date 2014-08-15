@@ -592,6 +592,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
+        boolean result = true;
         final String key = preference.getKey();
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_LOCK_AFTER_TIMEOUT.equals(key)) {
@@ -636,11 +637,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if ((Boolean) value) {
                 mToggleAppInstallation.setChecked(false);
                 warnAppInstallation();
+                // Don't change Switch status until user makes choice in dialog, so return false.
+                result = false;
             } else {
                 setNonMarketAppsAllowed(false);
             }
         }
-        return true;
+        return result;
     }
 
     @Override
