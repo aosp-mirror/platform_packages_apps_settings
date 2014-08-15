@@ -203,7 +203,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Ak je pole hostiteľ prázdne, musí byť prázdne aj pole port."</string>
     <string name="proxy_error_invalid_port" msgid="2671425042711054494">"Zadaný port nie je platný."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"Prehliadač používa server proxy pre protokol HTTP, ale ostatné aplikácie ho používať nemusia."</string>
-    <string name="proxy_url" msgid="2523518669129974654">"Adresa URL PAC: "</string>
+    <string name="proxy_url" msgid="2523518669129974654">"Webová adresa PAC: "</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Poloha:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Susedný identifikátor CID:"</string>
     <string name="radio_info_cellinfo_label" msgid="1300937728020622362">"CellInfo:"</string>
@@ -278,15 +278,15 @@
     <string name="radio_controls_title" msgid="6889937359495515769">"Viac..."</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Bezdrôtové pripojenie a siete"</string>
     <string name="radio_controls_summary" msgid="1838624369870907268">"Spravovať Wi-Fi, Bluetooth, režim V lietadle, mobilné siete a siete VPN"</string>
-    <string name="roaming" msgid="3596055926335478572">"Dátové služby pri roamingu"</string>
-    <string name="roaming_enable" msgid="3737380951525303961">"Dátové služby sa môžu pripájať pri roamingu"</string>
-    <string name="roaming_disable" msgid="1295279574370898378">"Dátové služby sa môžu pripojiť pri roamingu"</string>
-    <string name="roaming_reenable_message" msgid="9141007271031717369">"Pripojenie dátových služieb bolo prerušené, pretože ste opustili domovskú sieť a dátové služby pri roamingu máte vypnuté."</string>
+    <string name="roaming" msgid="3596055926335478572">"Dátový roaming"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"Pripájať sa k dátovým službám pri roamingu"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"Pripájať sa k dátovým službám pri roamingu"</string>
+    <string name="roaming_reenable_message" msgid="9141007271031717369">"Dátové pripojenie bolo prerušené, pretože ste opustili domovskú sieť a máte vypnutý dátový roaming."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Zapnúť"</string>
-    <string name="roaming_warning" msgid="7625933694709170887">"Ak povolíte dátové služby pri roamingu, môžu sa účtovať vysoké poplatky."</string>
-    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Ak povolíte dátové služby pri roamingu, môžu sa účtovať vysoké poplatky za roaming!\n\nToto nastavenie ovplyvní všetkých používateľov tohto tabletu."</string>
-    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Ak povolíte dátové služby pri roamingu, môžu sa účtovať vysoké poplatky za roaming!\n\nToto nastavenie ovplyvní všetkých používateľov tohto telefónu."</string>
-    <string name="roaming_reenable_title" msgid="6068100976707316772">"Povoliť dátové služby pri roamingu?"</string>
+    <string name="roaming_warning" msgid="7625933694709170887">"Ak povolíte dátový roaming, môžu sa vám účtovať vysoké poplatky."</string>
+    <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"Ak povolíte dátový roaming, môžu sa vám účtovať vysoké poplatky za roaming!\n\nToto nastavenie ovplyvní všetkých používateľov tohto tabletu."</string>
+    <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"Ak povolíte dátový roaming, môžu sa vám účtovať vysoké poplatky za roaming!\n\nToto nastavenie ovplyvní všetkých používateľov tohto telefónu."</string>
+    <string name="roaming_reenable_title" msgid="6068100976707316772">"Povoliť dátový roaming?"</string>
     <string name="networks" msgid="6333316876545927039">"Výber operátora"</string>
     <string name="sum_carrier_select" msgid="3616956422251879163">"Zvoliť sieťového operátora"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Dátum a čas"</string>
@@ -745,7 +745,7 @@
     <string name="brightness" msgid="2354961343555249270">"Jas"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Nastavenia jasu obrazovky"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Režim spánku"</string>
-    <string name="screen_timeout_summary" msgid="327761329263064327">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti"</string>
+    <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Tapeta"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vybrať tapetu z"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"Šetrič obrazovky"</string>
@@ -765,11 +765,11 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Nastavenia zámky karty SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Zámka karty SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Uzamykať kartu SIM"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Ak chcete použiť tablet, musíte zadať kód PIN"</string>
-    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Ak chcete telefón použiť, musíte zadať kód PIN"</string>
-    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Ak chcete použiť tablet, musíte zadať kód PIN"</string>
-    <string name="sim_lock_off" product="default" msgid="258981978215428916">"Ak chcete telefón použiť, musíte zadať kód PIN"</string>
-    <string name="sim_pin_change" msgid="6311414184279932368">"Zmeniť kód PIN karty SIM"</string>
+    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Na použitie tabletu vyžadovať PIN"</string>
+    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Na použitie telefónu vyžadovať PIN"</string>
+    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Na použitie tabletu vyžadovať PIN"</string>
+    <string name="sim_lock_off" product="default" msgid="258981978215428916">"Na použitie telefónu vyžadovať PIN"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"Zmeniť PIN karty SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"Kód PIN karty SIM"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Uzamykať kartu SIM"</string>
     <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Odomknúť kartu SIM"</string>
@@ -1163,7 +1163,7 @@
     <string name="clear_data_failed" msgid="1907582169616856698">"Údaje aplikácie sa nepodarilo vymazať."</string>
     <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Odinštalovať aktualizácie?"</string>
     <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Všetky aktualizácie tejto systémovej aplikácie systému Android budú odinštalované."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Vymazanie údajov"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Vymazať údaje"</string>
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Údaje aplikácie sa nepodarilo vymazať."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Táto aplikácia môže pristupovať k nasledujúcim funkciám tabletu:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Táto aplikácia môže pristupovať k nasledujúcim funkciám telefónu:"</string>
@@ -1833,7 +1833,7 @@
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Zobrazovať dialóg „Aplikácia neodpovedá“ aj pre aplikácie na pozadí"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Využitie dát"</string>
     <string name="data_usage_cycle" msgid="5652529796195787949">"Cyklus počítania dát"</string>
-    <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Dátové služby pri roamingu"</string>
+    <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Dátový roaming"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Obmedzenie dátových prenosov na pozadí"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Samostatné použitie 4G"</string>
     <string name="data_usage_menu_show_wifi" msgid="5056401102877964564">"Zobraziť využitie Wi-Fi"</string>
@@ -2031,7 +2031,7 @@
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Nastaviť obmedzenia aplikácií"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Riadi: <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="app_not_supported_in_limited" msgid="913035259626149121">"Profily s obmedzeniami nepodporujú túto aplikáciu"</string>
-    <string name="app_sees_restricted_accounts" msgid="7503264525057246240">"Táto aplikácia môže pristupovať k vašim účtom"</string>
+    <string name="app_sees_restricted_accounts" msgid="7503264525057246240">"Táto aplikácia má prístup k vašim účtom"</string>
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Siete Wi-Fi a mobilné siete"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Povoliť úpravu nastavení sietí Wi-Fi a mobilných sietí"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
