@@ -25,6 +25,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 
 import com.android.internal.telephony.PhoneStateIntentReceiver;
@@ -36,7 +37,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     private PhoneStateIntentReceiver mPhoneStateReceiver;
     
-    private final CheckBoxPreference mCheckBoxPref;
+    private final SwitchPreference mSwitchPref;
 
     private static final int EVENT_SERVICE_STATE_CHANGED = 3;
 
@@ -58,10 +59,10 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         }
     };
 
-    public AirplaneModeEnabler(Context context, CheckBoxPreference airplaneModeCheckBoxPreference) {
+    public AirplaneModeEnabler(Context context, SwitchPreference airplaneModeCheckBoxPreference) {
         
         mContext = context;
-        mCheckBoxPref = airplaneModeCheckBoxPreference;
+        mSwitchPref = airplaneModeCheckBoxPreference;
         
         airplaneModeCheckBoxPreference.setPersistent(false);
     
@@ -71,10 +72,10 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     public void resume() {
         
-        mCheckBoxPref.setChecked(isAirplaneModeOn(mContext));
+        mSwitchPref.setChecked(isAirplaneModeOn(mContext));
 
         mPhoneStateReceiver.registerIntent();
-        mCheckBoxPref.setOnPreferenceChangeListener(this);
+        mSwitchPref.setOnPreferenceChangeListener(this);
         mContext.getContentResolver().registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON), true,
                 mAirplaneModeObserver);
@@ -82,7 +83,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
     
     public void pause() {
         mPhoneStateReceiver.unregisterIntent();
-        mCheckBoxPref.setOnPreferenceChangeListener(null);
+        mSwitchPref.setOnPreferenceChangeListener(null);
         mContext.getContentResolver().unregisterContentObserver(mAirplaneModeObserver);
     }
 
@@ -96,7 +97,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 
                                 enabling ? 1 : 0);
         // Update the UI to reflect system setting
-        mCheckBoxPref.setChecked(enabling);
+        mSwitchPref.setChecked(enabling);
         
         // Post the intent
         Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
@@ -113,7 +114,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
      * - mobile does not send failure notification, fail on timeout.
      */
     private void onAirplaneModeChanged() {
-        mCheckBoxPref.setChecked(isAirplaneModeOn(mContext));
+        mSwitchPref.setChecked(isAirplaneModeOn(mContext));
     }
     
     /**
