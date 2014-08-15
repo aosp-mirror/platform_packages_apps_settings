@@ -38,10 +38,8 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"無線通信をOFF"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"SMS over IMSをONにする"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"SMS over IMSをOFFにする"</string>
-    <!-- no translation found for mo_over_volte_on (8839019743280675289) -->
-    <skip />
-    <!-- no translation found for mo_over_volte_off (662428904067315526) -->
-    <skip />
+    <string name="mo_over_volte_on" msgid="8839019743280675289">"MO over PS/VoLTEを有効にする"</string>
+    <string name="mo_over_volte_off" msgid="662428904067315526">"MO over PS/VoLTEを無効にする"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS登録をONにする必要があります"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS登録をOFFにする必要があります"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"LTE RAMダンプをオンにする"</string>
@@ -131,8 +129,8 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"プロフィール設定"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"名前が設定されていない場合、アカウント名を使用する"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"端末をスキャン"</string>
-    <string name="bluetooth_rename_device" product="tablet" msgid="787970073150631155">"タブレットの名前を変更"</string>
-    <string name="bluetooth_rename_device" product="default" msgid="6267987985556136749">"端末の名前を変更"</string>
+    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
+    <skip />
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"名前を変更"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"切断しますか？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"この操作を行うと、次のデバイスとの接続が切断されます:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
@@ -387,6 +385,12 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"暗号化できませんでした"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"暗号化処理が中断されて完了できなかったためタブレット上のデータにアクセスできなくなりました。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"暗号化処理が中断されて完了できなかったため端末上のデータにアクセスできなくなりました。\n\n端末の使用を再開するには出荷時設定にリセットする必要があります。リセット後、端末のセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
+    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
+    <skip />
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"入力方法の切り替え"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"画面ロックを選択"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"バックアップのロックの選択"</string>
@@ -525,10 +529,8 @@
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"ファイル転送"</string>
     <string name="bluetooth_profile_hid" msgid="3680729023366986480">"入力デバイス"</string>
     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"インターネットアクセス"</string>
-    <!-- no translation found for bluetooth_profile_pbap (5372051906968576809) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pbap_summary (6605229608108852198) -->
-    <skip />
+    <string name="bluetooth_profile_pbap" msgid="5372051906968576809">"連絡先の共有"</string>
+    <string name="bluetooth_profile_pbap_summary" msgid="6605229608108852198">"連絡先の共有に使用"</string>
     <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"インターネット接続の共有"</string>
     <string name="bluetooth_profile_map" msgid="5465271250454324383">"メッセージへのアクセス"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>はメディアの音声から切断されます。"</string>
@@ -540,8 +542,7 @@
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"ペア設定したBluetoothデバイス"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"接続"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Bluetoothデバイスに接続"</string>
-    <!-- no translation found for bluetooth_device_advanced_profile_header_title (102745381968579605) -->
-    <skip />
+    <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"使用目的"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"名前を変更"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"ファイル転送の受信を許可"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"メディアの音声に接続"</string>
@@ -787,6 +788,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"着信音"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音にも着信音量を適用"</string>
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"ワークプロフィールをサポートしていません"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"デフォルトの通知音"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"メディア"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"音楽や動画の再生音量"</string>
@@ -854,10 +856,8 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"指を離してスリープ状態から復帰"</string>
-    <!-- no translation found for doze_title (2259176504273878294) -->
-    <skip />
-    <!-- no translation found for doze_summary (8300817661725517088) -->
-    <skip />
+    <string name="doze_title" msgid="2259176504273878294">"アンビエント表示"</string>
+    <string name="doze_summary" msgid="8300817661725517088">"端末が取り上げられたとき、または通知を受信したときにスリープ状態から復帰"</string>
     <string name="title_font_size" msgid="4405544325522105222">"フォントサイズ"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"フォントサイズ"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIMカードロック設定"</string>
@@ -1871,12 +1871,9 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"デバイス管理者"</string>
     <string name="no_device_admins" msgid="702695100241728775">"有効なデバイス管理者がいません"</string>
-    <!-- no translation found for managed_profile_device_admin_info (6105994454581829513) -->
-    <skip />
-    <!-- no translation found for personal_device_admin_title (2849617316347669861) -->
-    <skip />
-    <!-- no translation found for managed_device_admin_title (7853955652864478435) -->
-    <skip />
+    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"<xliff:g id="APP_NAME">%1$s</xliff:g>のアクセスを許可しないワークプロフィールは、[設定]&gt;[アカウント]で削除します。"</string>
+    <string name="personal_device_admin_title" msgid="2849617316347669861">"個人用"</string>
+    <string name="managed_device_admin_title" msgid="7853955652864478435">"職場"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"使用可能な信頼できるエージェントがありません"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"デバイス管理者を有効にしますか？"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"有効にする"</string>
@@ -1926,6 +1923,10 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"同期"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"現在同期で問題が発生しています。しばらくお待ちください。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"アカウントを追加"</string>
+    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
+    <skip />
+    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
+    <skip />
     <string name="background_data" msgid="5779592891375473817">"バックグラウンドデータ"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"アプリがデータをいつでも同期、送信、受信可能にする"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"バックグラウンドを無効化"</string>
@@ -2184,7 +2185,6 @@
     <string name="user_add_user_menu" msgid="1675956975014862382">"ユーザーを追加"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"制限付きプロフィール"</string>
     <string name="user_summary_managed_profile" msgid="5729429961989469287">"管理対象プロフィール"</string>
-    <string name="user_summary_managed_profile_not_enabled" msgid="7236288236345533775">"管理対象プロフィール（現在非アクティブ）"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"制限付きプロフィールを作成する場合は、アプリや個人データを保護するように画面ロックを設定しておく必要があります。"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"ロックを設定"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"セットアップしていません"</string>
@@ -2202,8 +2202,7 @@
     <string name="user_add_user_message_long" msgid="718192651887726259">"追加ユーザーを作成して、この端末を他のユーザーと共有できます。各ユーザーは各自のスペースを所有でき、アプリや壁紙などを使用してカスタマイズできます。Wi-Fiなど、すべてのユーザーに影響する端末設定を変更することもできます。\n\n新しいユーザーを追加したら、そのユーザーは自分のスペースをセットアップする必要があります。\n\nすべてのユーザーは他のユーザーに代わってアプリを更新できます。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"新しいユーザーを追加したら、そのユーザーは自分のスペースをセットアップする必要があります。\n\nすべてのユーザーは他のユーザーに代わってアプリを更新できます。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"ユーザーを今すぐセットアップ"</string>
-    <!-- no translation found for user_setup_dialog_message (1004068621380867148) -->
-    <skip />
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"ユーザーが端末を使って各自のスペースをセットアップできるよう確認してください"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"プロフィールを今すぐセットアップしますか？"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"今すぐセットアップ"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"後で行う"</string>
@@ -2396,8 +2395,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"すべての通知内容を表示します"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"プライベートな通知内容を非表示にします"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"すべての通知を表示しない"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (6164532459432182244) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
@@ -2430,22 +2428,16 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g>を有効にしますか？"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>では出口条件を[通知を非表示]モードに追加できます。"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"アプリを読み込んでいます..."</string>
-    <!-- no translation found for app_notification_block_title (172237877395761371) -->
-    <skip />
-    <!-- no translation found for app_notification_block_summary (9049487483231233726) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_title (1967189807102076587) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_summary (7513344552201639232) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_title (7707233094233553192) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_summary (8850104564623526005) -->
-    <skip />
+    <string name="app_notification_block_title" msgid="172237877395761371">"ブロック"</string>
+    <string name="app_notification_block_summary" msgid="9049487483231233726">"このアプリからの通知を表示しない"</string>
+    <string name="app_notification_priority_title" msgid="1967189807102076587">"優先度"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"リストの一番上にある通知を表示し、端末が優先的な中断に設定されている場合に限りそれらの通知を表示し続ける"</string>
+    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"プライベート"</string>
+    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"端末がロックされている場合、このアプリの通知にプライベートなコンテンツを表示しない"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
-    <!-- no translation found for app_notification_row_priority (7723839972982746568) -->
-    <skip />
+    <string name="app_notification_row_priority" msgid="7723839972982746568">"優先度"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"プライベート"</string>
+    <string name="app_notifications_dialog_done" msgid="3484067728568791014">"完了"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"ユーザーがOFFにするまで"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"優先的な中断"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"ダウンタイム（優先的な中断のみ）"</string>
@@ -2461,8 +2453,7 @@
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"全員"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"連絡先のみ"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"スター付きの連絡先のみ"</string>
-    <!-- no translation found for zen_mode_alarm_info (5061362593677527505) -->
-    <skip />
+    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"アラームやその他の個人的な通知が最優先されます"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動的にON"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"設定しない"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"毎日の夜間"</string>
@@ -2478,6 +2469,6 @@
     <string name="switch_off_text" msgid="1139356348100829659">"OFF"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"画面を固定中"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"この設定をONにすると、端末で現在の画面が常に表示される状態にすることができます。\n\n画面を固定するには:\n\n1. この設定をONにします。\n\n2. アプリを開きます。\n\n3. [最近]ボタンをタップします。\n\n4. 固定アイコンをタップします。"</string>
-    <!-- no translation found for managed_user_title (8101244883654409696) -->
-    <skip />
+    <string name="managed_user_title" msgid="8101244883654409696">"ワークプロフィール"</string>
+    <string name="experimental_preference" msgid="7083015446690681376">"（試験運用）"</string>
 </resources>
