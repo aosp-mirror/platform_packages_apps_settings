@@ -18,6 +18,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,8 +35,8 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra(Intent.EXTRA_TITLE);
-        String details = intent.getStringExtra(Intent.EXTRA_DETAILS);
+        String title = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
+        String details = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
 
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
         if (!helper.launchConfirmationActivity(0 /* request code */, title, details)) {
