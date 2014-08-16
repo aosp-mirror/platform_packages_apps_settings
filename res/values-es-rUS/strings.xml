@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Apagar la radio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Activar SMS por IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Desactivar SMS por IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Habilitar MO por PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Inhabilitar MO por PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Activar el registro de MI requerido"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Desactivar el registro de MI requerido"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Activar volcado LTE RAM"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Configuración del perfil"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No se ha establecido ningún nombre; se utiliza el nombre de cuenta"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Buscar dispositivos"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Cambiar nombre de dispositivo"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Cambiar nombre"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"¿Desconectar?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Esto pondrá fin a tu conexión con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"No tienes permiso para cambiar la configuración de Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ahora está visible para dispositivos cercanos."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"¿Desconectar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Transmisión"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"¿Inhabilitar perfil?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Vinculando solicitud"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toca para realizar una sincronización con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar los archivos recibidos"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Acceso a mensajes"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selector de dispositivos Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitud de permiso de Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Una aplicación desea activar el Bluetooth."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Los dispositivos Bluetooth deben pedir permiso antes de acceder a las cuentas disponibles."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Una aplicación quiere hacer visible tu tablet para otros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Una aplicación quiere hacer visible tu dispositivo para otros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Una aplicación quiere hacer visible tu tablet para otros dispositivos Bluetooth. Puedes cambiar esta configuración más tarde en los ajustes de Bluetooth."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Encriptación incorrecta"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"La encriptación se interrumpió y no se puede completar. Por esta razón, ya no es posible acceder a los datos de tu tablet. \n\n Para reanudar el uso de tu tablet, debes restablecer los datos de fábrica. Cuando configures tu tablet luego de restablecer los datos de fábrica, tendrás la posibilidad de restaurar los datos de los que tengas una copia de seguridad en tu cuenta de Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"La encriptación se interrumpió y no se puede completar. Por esta razón, ya no es posible acceder a los datos de tu dispositivo. \n\nPara reanudar el uso de tu dispositivo, debes restablecer los datos de fábrica. Cuando configures tu dispositivo luego de restablecer los datos de fábrica, tendrás la posibilidad de restaurar los datos de los que tengas una copia de seguridad en tu cuenta de Google."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Desencriptación incorrecta"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"La contraseña ingresada es correcta, pero los datos están dañados. \n\nPara continuar usando la tablet, debes restablecer la configuración de fábrica. Cuando configures la tablet después del restablecimiento, podrás restaurar los datos que hayas tenido en una copia de seguridad en la cuenta de Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"La contraseña ingresada es correcta, pero los datos están dañados. \n\nPara continuar usando el teléfono, debes restablecer la configuración de fábrica. Cuando configures el teléfono después del restablecimiento, podrás restaurar los datos que hayas tenido en una copia de seguridad en la cuenta de Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Cambiar método de introducción"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Elegir bloqueo pant."</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Bloqueo alternativo"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quiere acceder a tus contactos y al historial de llamadas."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quiere sincronizarse con Bluetooth. Al conectarse, podrá acceder a contactos e hist. de llamadas."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispositivos vinculados"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Dispositivos sincronizados pueden ver mensajes de"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispositivos disponibles"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"No hay dispositivos disponibles."</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Conectar"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Siempre permitir la búsqueda"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permitir que el servicio de ubicación de Google y otras aplicaciones busquen redes aunque la conexión Wi-Fi esté desactivada"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Administrar Wi-Fi automáticamente"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Permitir al asistente de Wi‑Fi administrar la conexión Wi‑Fi"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Asistente de Wi-Fi"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Asistente de Wi-Fi de Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Fuera de alcance"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WSP disponible"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WSP disponible)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Protegida con <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", protegida con <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ingresa la contraseña de la red."</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ninguna"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Para mejorar la precisión de la ubicación y para otros fines, <xliff:g id="APP_NAME">%1$s</xliff:g> quiere activar la búsqueda de redes, incluso cuando la conexión Wi-Fi esté desactivada.\n\n¿Quieres permitir esto para todas las aplicaciones que deseen buscar redes?"</string>
@@ -2002,6 +1993,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Seguimientos de OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Usar NuPlayer (experim.)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Usar NuPlayer en lugar de AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Inhab. enrutam. audio USB"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Inhab. enrutam. automático a periféricos audio USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar límites de diseño"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Mostrar límites de recortes, márgenes, etc."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Forzar diseño der. a izq."</string>

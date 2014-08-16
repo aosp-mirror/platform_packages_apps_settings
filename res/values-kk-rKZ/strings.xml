@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Радионы өшіру"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"SMS хабарын IMS арқылы жіберуді қосу"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"SMS хабарын IMS арқылы жіберуді өшіру"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"PS/VoLTE арқылы MO қосу"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"PS/VoLTE арқылы MO өшіру"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Қажетті IMS тіркелімін қосу"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Қажетті IMS тіркеуін өшіру"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Телефонның жедел жадтау құрылғысының дампын қосу"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Профайл параметрлері"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Атау реттелмеген, есептік жазба атауын қолдануда"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Құрылғыларды скандау"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Осы құрылғының атауын өзгерту"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Атауын өзгерту"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ажыратылсын ба?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Бұл келесі құрылғымен байланысты үзеді:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Сізде Bluetooth параметрлерін өзгерту рұқсаты жоқ."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> енді маңайдағы құрылғыларға көрінеді."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ажырату керек пе?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Хабар тарату"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Профайл істен шығарылсын ба?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Жұптау өтініші"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жұптасу үшін оны түртіңіз."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Алынған файлдарды көрсету"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Хабарға қатынасу"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth құрылғысын таңдағыш"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth рұқсат өтініші"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Қолданба Bluetooth қызметін қосуды қалайды."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Қол жетімді есептік жазбаларға қатынасу алдында Bluetooth құрылғылары рұқсат сұрауы керек."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Қолданба планшетіңіздің басқа Bluetooth құрылғыларына <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд аралығында көрсетілуін қалайды."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Қолданба телефоныңыздың басқа Bluetooth құрылғыларына <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд аралығында көрсетілуін қалайды."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Қолданба планшетіңіздің басқа  Bluetooth құрылғыларына көрсетілуін қалайды. Бұны кейін Bluetooth параметрлері арқылы өзгертуге болады."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Кодтау орындалмады"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Кодтау үзілді және аяқтау мүмкін болмайды. Нәтижесінде планшеттегі деректер қол жетімсіз. \n\n Планшетті қолдану мүмкін болу үшін зауыттық параметрін қайтару қажет. Планшетті қайта ретегеннен кейін орнату барысында Google есептік жазбаңыздағы сақтық көшірмелері арқылы деректерді қалпына келтіру мүмкіндігіңіз болады."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Кодтау үзілді және аяқтау мүмкін болмайды. Нәтижесінде телефондағы деректер қол жетімсіз. \n\nТелефонды қолдану мүмкін болу үшін зауыттық параметрін қайтару қажет. Телефонды қайта ретегеннен кейін орнату барысында Google есептік жазбаңыздағы сақтық көшірмелері арқылы деректерді қалпына келтіру мүмкіндігіңіз болады."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Шифрлаудан шығару сәтсіз аяқталды"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Сіз енгізген құпия сөз дұрыс, бірақ өкінішке орай деректеріңіз бүлінген. \n\nПланшетті пайдалануды жалғастыру үшін зауыттық параметрлерді қалпына келтіруді орындау керек. Қалпына келтіруден кейін планшетті реттегенде сізде Google есептік жазбаңызға сақтық көшірмесі жасалған барлық деректерді қалпына келтіру мүмкіндігі болады."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Сіз енгізген құпия сөз дұрыс, бірақ өкінішке орай деректеріңіз бүлінген. \n\nТелефонды пайдалануды жалғастыру үшін зауыттық параметрлерді қалпына келтіруді орындау керек. Қалпына келтіруден кейін телефонды реттегенде сізде Google есептік жазбаңызға сақтық көшірмесі жасалған барлық деректерді қалпына келтіру мүмкіндігі болады."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Енгізу әдістерін ауыстыру"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Экранды бекіту әдісін таңдау"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Сақтық бекітпесін таңдау"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> контактілерге және қоңыраулар тарихына қатынасқысы келеді."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> Bluetooth көмегімен жұптағысы келеді. Қосылған кезде бұл құрылғыда контактілеріңізге және қоңыраулар тарихына қатынас болады."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Жұпталған құрылғылар"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Жұпталған құрылғылар келесіден келген хабарларды көре алады"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Қол жетімді құрылғылар"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Құрылғылар қол жетімді емес"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Жалғау"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Тексеруге әрқашан рұқсат ету"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Google орынды анықтау қызметі және басқа қолданбалар тіпті Wi-Fi өшіріліп тұрса да желілердің бар-жоғын тексереді"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fi желісін автоматты түрде басқару"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Wi‑Fi assistant қолданбасына Wi‑Fi байланысын басқаруға мүмкіндік беру"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Сертификаттар орнату"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Аумақта жоқ"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS қол жетімді"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS қол жетімді)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> арқылы қорғалған"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">",  <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> арқылы қорғалған"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Желі құпия сөзін енгізіңіз"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ешқандай"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Аймақ нақтылығын жақсарту және басқа мақсаттар үшін, <xliff:g id="APP_NAME">%1$s</xliff:g> қолданбасы желі тексеруді қосуды қалайды, Wi-Fi өшіріліп тұрса да.\n\nЖелі тексергісі келетеін барлық қолданбаларға рұқсат берілсін бе?"</string>
@@ -2002,6 +1993,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL (ашық графика кітапханасы) қолданбасы қосу"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer (эксп-тік) пайд."</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"AwesomePlayer орнына NuPlayer пайдалану"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB аудио бағыттау. өшіру"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB перифериялық аудио құр-на автоматты бағ. өшіру"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Орналасу жиектерін көрсету"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Қию шектерін, жиектерін, т.б көрсету."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Оңнан солға орналасу бағытына реттеу"</string>
