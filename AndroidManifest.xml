@@ -1116,11 +1116,6 @@
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <!-- TODO: Remove this once new API is being used -->
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.CONFIRM_DEVICE_CREDENTIAL" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".notification.RedactionInterstitial" />
