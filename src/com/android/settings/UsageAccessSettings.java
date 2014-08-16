@@ -20,8 +20,12 @@ import com.android.internal.content.PackageMonitor;
 
 import android.Manifest;
 import android.app.ActivityThread;
+import android.app.AlertDialog;
 import android.app.AppOpsManager;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -30,6 +34,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.SwitchPreference;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -176,7 +181,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
 
             if (newEntries == null) {
                 mPackageEntryMap.clear();
-                getPreferenceScreen().removeAll();
+                mAppsCategory.removeAll();
                 return;
             }
 
@@ -187,7 +192,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
                 final PackageEntry newPackageEntry = newEntries.get(oldPackageEntry.packageName);
                 if (newPackageEntry == null) {
                     // This package has been removed.
-                    getPreferenceScreen().removePreference(oldPackageEntry.preference);
+                    mAppsCategory.removePreference(oldPackageEntry.preference);
                 } else {
                     // This package already exists in the preference hierarchy, so reuse that
                     // Preference.
@@ -203,7 +208,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
                     packageEntry.preference = new SwitchPreference(mContext);
                     packageEntry.preference.setPersistent(false);
                     packageEntry.preference.setOnPreferenceChangeListener(UsageAccessSettings.this);
-                    getPreferenceScreen().addPreference(packageEntry.preference);
+                    mAppsCategory.addPreference(packageEntry.preference);
                 }
                 updatePreference(packageEntry);
             }
@@ -232,20 +237,22 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private static boolean shouldIgnorePackage(String packageName) {
+    static boolean shouldIgnorePackage(String packageName) {
         return packageName.equals("android") || packageName.equals("com.android.settings");
     }
 
-    private ArrayMap<String, PackageEntry> mPackageEntryMap = new ArrayMap<>();
-    private AppOpsManager mAppOpsManager;
     private AppsRequestingAccessFetcher mLastFetcherTask;
+    ArrayMap<String, PackageEntry> mPackageEntryMap = new ArrayMap<>();
+    AppOpsManager mAppOpsManager;
+    PreferenceCategory mAppsCategory;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.usage_access_settings);
-        getPreferenceScreen().setOrderingAsAdded(false);
+        mAppsCategory = (PreferenceCategory) getPreferenceScreen().findPreference("apps");
+        mAppsCategory.setOrderingAsAdded(false);
         mAppOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
     }
 
@@ -302,11 +309,25 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
 
         // Check if we need to do any work.
         if (pe.appOpMode != newMode) {
-            mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS,
-                    pe.packageInfo.applicationInfo.uid, packageName, newMode);
-            pe.appOpMode = newMode;
+            if (newMode != AppOpsManager.MODE_ALLOWED) {
+                // Turning off the setting has no warning.
+                setNewMode(pe, newMode);
+                return true;
+            }
+
+            // Turning on the setting has a Warning.
+            getFragmentManager().beginTransaction()
+                    .add(new WarningDialog(pe), "warning")
+                    .commit();
+            return false;
         }
         return true;
+    }
+
+    void setNewMode(PackageEntry pe, int newMode) {
+        mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS,
+        pe.packageInfo.applicationInfo.uid, pe.packageName, newMode);
+        pe.appOpMode = newMode;
     }
 
     private final PackageMonitor mPackageMonitor = new PackageMonitor() {
@@ -320,4 +341,34 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
             updateInterestedApps();
         }
     };
+
+    private class WarningDialog extends DialogFragment
+            implements DialogInterface.OnClickListener {
+        private final PackageEntry mEntry;
+
+        public WarningDialog(PackageEntry pe) {
+            mEntry = pe;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.allow_usage_access_title)
+                    .setMessage(R.string.allow_usage_access_message)
+                    .setIconAttribute(android.R.attr.alertDialogIcon)
+                    .setNegativeButton(R.string.cancel, this)
+                    .setPositiveButton(R.string.allow, this)
+                    .create();
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                setNewMode(mEntry, AppOpsManager.MODE_ALLOWED);
+                mEntry.preference.setChecked(true);
+            } else {
+                dialog.cancel();
+            }
+        }
+    }
 }
