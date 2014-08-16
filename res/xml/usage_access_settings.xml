@@ -16,4 +16,16 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="usage_access"
-    android:title="@string/usage_access_title" />
+    android:title="@string/usage_access_title">
+
+    <PreferenceCategory
+        android:key="apps"
+        android:title="@string/usage_access_app_list_header"
+        android:persistent="false" />
+
+    <Preference
+        android:summary="@string/usage_access_body"
+        android:persistent="false"
+        android:selectable="false" />
+
+</PreferenceScreen>
