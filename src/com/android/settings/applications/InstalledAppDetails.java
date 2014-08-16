@@ -347,11 +347,12 @@ public class InstalledAppDetails extends Fragment
 
     private void initUninstallButtons() {
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
+        final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         boolean enabled = true;
         if (mUpdatedSysApp) {
             mUninstallButton.setText(R.string.app_factory_reset);
             boolean showSpecialDisable = false;
-            if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            if (isBundled) {
                 showSpecialDisable = handleDisableable(mSpecialDisableButton);
                 mSpecialDisableButton.setOnClickListener(this);
             }
@@ -361,7 +362,7 @@ public class InstalledAppDetails extends Fragment
             mMoreControlButtons.setVisibility(showSpecialDisable ? View.VISIBLE : View.GONE);
         } else {
             mMoreControlButtons.setVisibility(View.GONE);
-            if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            if (isBundled) {
                 enabled = handleDisableable(mUninstallButton);
             } else if ((mPackageInfo.applicationInfo.flags
                     & ApplicationInfo.FLAG_INSTALLED) == 0
@@ -380,19 +381,27 @@ public class InstalledAppDetails extends Fragment
             enabled = false;
         }
 
-        // If this is the default (or only) home app, suppress uninstall (even if
-        // we still think it should be allowed for other reasons)
+        // Home apps need special handling.  Bundled ones we don't risk downgrading
+        // because that can interfere with home-key resolution.  Furthermore, we
+        // can't allow uninstallation of the only home app, and we don't want to
+        // allow uninstallation of an explicitly preferred one -- the user can go
+        // to Home settings and pick a different one, after which we'll permit
+        // uninstallation of the now-not-default one.
         if (enabled && mHomePackages.contains(mPackageInfo.packageName)) {
-            ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
-            ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
-            if (currentDefaultHome == null) {
-                // No preferred default, so permit uninstall only when
-                // there is more than one candidate
-                enabled = (mHomePackages.size() > 1);
+            if (isBundled) {
+                enabled = false;
             } else {
-                // There is an explicit default home app -- forbid uninstall of
-                // that one, but permit it for installed-but-inactive ones.
-                enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
+                ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
+                ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
+                if (currentDefaultHome == null) {
+                    // No preferred default, so permit uninstall only when
+                    // there is more than one candidate
+                    enabled = (mHomePackages.size() > 1);
+                } else {
+                    // There is an explicit default home app -- forbid uninstall of
+                    // that one, but permit it for installed-but-inactive ones.
+                    enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
+                }
             }
         }
 
