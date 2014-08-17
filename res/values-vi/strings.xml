@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Tắt radio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Bật SMS qua IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Tắt SMS qua IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Kích hoạt MO qua PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Vô hiệu hóa MO qua PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Yêu cầu bật đăng ký IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Yêu cầu tắt đăng ký IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Bật lỗi ram lte"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Cài đặt tiểu sử"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Không có loạt tên, đang sử dụng tên tài khoản"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Dò tìm thiết bị"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Đổi tên thiết bị này"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Đổi tên"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ngắt kết nối?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Tác vụ này sẽ kết thúc kết nối của bạn với:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Bạn không có quyền thay đổi cài đặt Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> hiện hiển thị với các thiết bị lân cận."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Ngắt kết nối <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Phát sóng"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vô hiệu hồ sơ?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Yêu cầu ghép nối"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Chạm để ghép nối với  <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Hiển thị các tệp đã nhận"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Truy cập tin nhắn"</string>
     <string name="device_picker" msgid="8398232791303186677">"Trình chọn thiết bị Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Yêu cầu quyền Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Một ứng dụng muốn bật Bluetooth."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Thiết bị Bluetooth có thể yêu cầu quyền trước khi truy cập các tài khoản sẵn có."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Một ứng dụng muốn đặt điện thoại của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị khác. Bạn có thể thay đổi cài đặt này sau trong cài đặt Bluetooth."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Mã hóa không thành công"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Quá trình mã hóa đã bị gián đoạn và không thể hoàn tất. Do đó, dữ liệu trên máy tính bảng của bạn không còn có thể truy cập được. \n\n Để tiếp tục sử dụng máy tính bảng của mình, bạn cần đặt lại về cài đặt ban đầu. Khi bạn thiết lập máy tính bảng sau khi đặt lại, bạn sẽ có cơ hội khôi phục mọi dữ liệu được sao lưu vào Tài khoản Google của mình."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Quá trình mã hóa bị gián đoạn và không thể hoàn tất. Do đó, dữ liệu trên điện thoại của bạn không còn có thể truy cập được. \n\nĐể tiếp tục sử dụng điện thoại của mình, bạn cần đặt lại về cài đặt ban đầu. Khi bạn thiết lập điện thoại sau khi đặt lại, bạn sẽ có cơ hội khôi phục mọi dữ liệu được sao lưu vào Tài khoản Google của mình."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Giải mã không thành công"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Mật khẩu bạn đã nhập đúng nhưng rất tiếc, dữ liệu của bạn bị hỏng. \n\nĐể tiếp tục sử dụng máy tính bảng của mình, bạn cần đặt lại về cài đặt ban đầu. Khi bạn thiết lập máy tính bảng sau khi đặt lại, bạn sẽ có cơ hội khôi phục mọi dữ liệu được sao lưu vào tài khoản Google của mình."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Mật khẩu bạn đã nhập đúng nhưng rất tiếc, dữ liệu của bạn bị hỏng. \n\nĐể tiếp tục sử dụng điện thoại của mình, bạn cần đặt lại về cài đặt ban đầu. Khi bạn thiết lập điện thoại sau khi đặt lại, bạn sẽ có cơ hội khôi phục mọi dữ liệu được sao lưu vào tài khoản Google của mình."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Chuyển phương thức nhập"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Chọn khóa màn hình"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Chọn khóa dự phòng"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> muốn truy cập danh bạ và lịch sử cuộc gọi của bạn."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> muốn ghép nối với Bluetooth. Khi được kết nối, nó sẽ có quyền truy cập vào danh bạ &amp; nhật ký cuộc gọi."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Thiết bị được ghép nối"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Các thiết bị được ghép nối có thể xem tin nhắn từ"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Thiết bị có sẵn"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Không có thiết bị nào"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Kết nối"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Luôn cho phép quét"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Cho phép dịch vụ định vị và các ứng dụng khác của Google quét tìm mạng, ngay cả khi Wi-Fi bị tắt"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Tự động quản lý Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Cho phép Trình hỗ trợ Wi‑Fi quản lý kết nối Wi‑Fi của bạn"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Trình hỗ trợ Wi‑Fi"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Trình hỗ trợ Wi‑Fi của Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Cài đặt chứng chỉ"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Ngoài vùng phủ sóng"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Có WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Có WPS)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Được bảo mật bằng <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", được bảo mật bằng <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Nhập mật khẩu mạng của bạn"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Không"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, <xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật tính năng quét mạng ngay cả khi Wi-Fi đang tắt.\n\nCho phép cài đặt này đối với tất cả ứng dụng muốn quét?"</string>
@@ -2002,6 +1993,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Bật theo dõi OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Sử dụng NuPlayer (thử nghiệm)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Sử dụng NuPlayer thay vì AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Tắt đ.tuyến âm thanh USB"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Tắt đ.tuyến tự động tới t.bị â.thanh ngoại vi USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Hiển thị ranh giới bố cục"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Hiển thị viền đoạn video, lề, v.v.."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Buộc hướng bố cục RTL"</string>

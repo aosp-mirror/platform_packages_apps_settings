@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Slökkva á loftneti"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Nota spjallþjónustu fyrir SMS-skilaboð"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Ekki nota spjallþjónustu fyrir SMS-skilaboð"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Kveikja á MO yfir PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Slökkva á MO yfir PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Gera IMS-skráningu nauðsynlega"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Gera IMS-skráningu ónauðsynlega"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Kveikja á afritun LTE-gagna úr vinnsluminni"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Prófílstillingar"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Ekkert heiti valið, heiti reiknings verður notað"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Leita að tækjum"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Endurnefna þetta tæki"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Endurnefna"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Aftengja?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Þetta slítur tengingunni við:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Þú hefur ekki heimild til að breyta Bluetooth-stillingum."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er nú sýnilegt nálægum tækjum."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Viltu aftengja <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Útsending"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Gera snið óvirkt?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Beiðni um pörun"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Snertu til að hefja pörun við <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Sýna mótteknar skrár"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Aðgangur að skilaboðum"</string>
     <string name="device_picker" msgid="8398232791303186677">"Val Bluetooth-tækis"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-heimildarbeiðni"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Forrit óskar eftir að kveikja á Bluetooth."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Bluetooth-tæki verða að fara fram á heimild áður en þau fá aðgang að reikningum í boði."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Forrit óskar eftir að gera spjaldtölvuna þína sýnilega öðrum Bluetooth-tækjum í <xliff:g id="TIMEOUT">%1$d</xliff:g> sekúndur."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Forrit óskar eftir að gera símann þinn sýnilegan öðrum Bluetooth-tækjum í <xliff:g id="TIMEOUT">%1$d</xliff:g> sekúndur."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Forrit óskar eftir að gera spjaldtölvuna þína sýnilega öðrum Bluetooth-tækjum. Þú getur breytt þessu síðar í stillingum Bluetooth."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Dulkóðun mistókst"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Dulkóðunin var trufluð og ekki er hægt að ljúka henni. Gögn spjaldtölvunnar eru því ekki aðgengileg lengur. \n\nTil að halda áfram að nota spjaldtölvuna þarftu að núllstilla hana. Þegar þú setur tölvuna upp eftir núllstillinguna gefst þér kostur á að endurheimta öll gögn sem afrituð voru á Google reikninginn þinn."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Dulkóðunin var trufluð og ekki er hægt að ljúka henni. Gögn símans eru því ekki aðgengileg lengur. \n\nTil að halda áfram að nota símann þarftu að núllstilla hann. Þegar þú setur símann upp eftir núllstillinguna gefst þér kostur á að endurheimta öll gögn sem afrituð voru á Google reikninginn þinn."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Afkóðun mistókst"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Aðgangsorðið sem þú slóst inn er rétt en því miður eru gögnin þín skemmd. \n\nÞú þarft að núllstilla spjaldtölvuna til að halda áfram að nota hana. Þegar þú hefur sett spjaldtölvuna upp aftur eftir núllstillingu færðu tækifæri til að endurheimta gögn sem þú hefur afritað yfir á Google reikninginn þinn."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Aðgangsorðið sem þú slóst inn er rétt en því miður eru gögnin þín skemmd. \n\nÞú þarft að núllstilla símann til að halda áfram að nota hann. Þegar þú hefur sett símann upp aftur eftir núllstillingu færðu tækifæri til að endurheimta gögn sem þú hefur afritað yfir á Google reikninginn þinn."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Skipta um innsláttaraðferð"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Veldu skjálás"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Veldu lás fyrir afrit"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vill fá aðgang að tengiliðunum þínum og símtalaferli."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vill parast við Bluetooth. Eftir tengingu hefur það aðgang að tengiliðunum þínum og símtalaferli."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Pöruð tæki"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Pöruð tæki geta skoðað skilaboð frá"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Tiltæk tæki"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Engin tæki í boði"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Tengja"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Leyfa alltaf leit"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Leyfa staðsetningarþjónustu Google og öðrum forritum að leita að Wi-Fi neti, jafnvel þegar slökkt er á Wi-Fi"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Sjálfvirk stjórnun Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Leyfðu Wi-Fi aðstoð að sjá um Wi-Fi tenginguna þína"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fi aðstoð"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi-Fi aðstoð"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Setja upp vottorð"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Ekkert samband"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS tiltækt"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS tiltækt)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Tryggt með <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", tryggt með <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Sláðu inn aðgangsorð netsins"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ekkert"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"<xliff:g id="APP_NAME">%1$s</xliff:g> vill geta leitað að neti, jafnvel þegar slökkt er á Wi-Fi, m.a. til að gera ákvörðun staðsetningar nákvæmari.\n\nLeyfa þetta fyrir öll forrit sem vilja leita að neti?"</string>
@@ -2002,6 +1993,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Kveikja á OpenGL-rakningu"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Nota NuPlayer (tilraun)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Nota NuPlayer í stað AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Slökkva á USB-hljóðbeiningu"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Slökkva á sjálfvirkri beiningu til USB-hljóðtækja"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Sýna mörk í uppsetningu"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Sýna skurðlínur, spássíur o.s.frv."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Þvinga umbrot frá hægri til vinstri"</string>

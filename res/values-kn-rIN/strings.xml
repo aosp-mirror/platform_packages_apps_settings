@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"ರೇಡಿಯೋ ಆಫ್‌ ಮಾಡು"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"IMS ಮೂಲಕ SMS ಅನ್ನು ಆನ್ ಮಾಡಿ"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS ಮೂಲಕ SMS ಅನ್ನು ಆಫ್ ಮಾಡಿ"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"PS/VoLTE ಮೂಲಕ MO ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"PS/VoLTE ಮೂಲಕ MO ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS ನೋಂದಣಿ ಆನ್‌ ಮಾಡುವ ಅಗತ್ಯವಿದೆ"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS ನೋಂದಣಿ ಅಗತ್ಯತೆಯನ್ನು ಆಫ್ ಮಾಡು"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ram ಡಂಪ್ ಅನ್ನು ಆನ್ ಮಾಡಿ"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"ಪ್ರೊಫೈಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"ಯಾವುದೇ ಹೆಸರನ್ನು ಹೊಂದಿಸಿಲ್ಲ, ಖಾತೆಯ ಹೆಸರನ್ನು ಬಳಸಿಕೊಳ್ಳಲಾಗುತ್ತಿದೆ"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"ಸಾಧನಗಳಿಗಾಗಿ ಸ್ಕ್ಯಾನ್ ಮಾಡು"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"ಈ ಸಾಧನವನ್ನು ಮರುಹೆಸರಿಸು"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"ಮರುಹೆಸರಿಸು"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸುವುದೇ?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"ಇದರೊಂದಿಗೆ ನಿಮ್ಮ ಸಂಪರ್ಕವನ್ನು ಇದು ಕೊನೆಗೊಳಿಸುತ್ತದೆ:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"ಬ್ಲೂಟೂತ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲು ನೀವು ಅನುಮತಿ ಹೊಂದಿಲ್ಲ."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಇದೀಗ ಹತ್ತಿರದ ಸಾಧನಗಳಿಗೆ ಗೋಚರಿಸುತ್ತದೆ."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸುವುದೇ?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ಪ್ರಸಾರ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ಪ್ರೊಫೈಲ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವುದೇ?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"ಜೋಡಣೆ ವಿನಂತಿ"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ದೊಂದಿಗೆ ಜೋಡಿಸುವುದಕ್ಕಾಗಿ ಸ್ಪರ್ಶಿಸಿ."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"ಸ್ವೀಕರಿಸಿದ ಫೈಲ್‌ಗಳನ್ನು ತೋರಿಸು"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"ಸಂದೇಶ ಪ್ರವೇಶಿಸುವಿಕೆ"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth ಸಾಧನದ ಆಯ್ಕೆ"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth ಅನುಮತಿ ವಿನಂತಿ"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Bluetooth ಆನ್‌ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ ಬಯಸುತ್ತದೆ."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"ಬ್ಲೂಟೂತ್‌ ಸಾಧನಗಳು ಲಭ್ಯವಿರುವ ಖಾತೆಗಳನ್ನು ಪ್ರವೇಶಿಸುವ ಮೊದಲು ಅನುಮತಿಯನ್ನು ಕೇಳುತ್ತವೆ."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"<xliff:g id="TIMEOUT">%1$d</xliff:g> ಸೆಕೆಂಡುಗಳವರೆಗೆ ಇತರ Bluetooth ಸಾಧನಗಳಿಗೆ ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್‌‌ ಗೋಚರಿಸುವಂತೆ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ ಬಯಸುತ್ತದೆ."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"<xliff:g id="TIMEOUT">%1$d</xliff:g> ಸೆಕೆಂಡುಗಳವರೆಗೆ ಇತರ Bluetooth ಸಾಧನಗಳಿಗೆ ನಿಮ್ಮ ಫೋನ್‌ ಗೋಚರಿಸುವಂತೆ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ ಬಯಸುತ್ತದೆ."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"ಇತರ Bluetooth ಸಾಧನಗಳಿಗೆ ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್ ಗೋಚರಿಸುವಂತೆ ಮಾಡಲು ಅಪ್ಲಿಕೇಶನ್‌ ಬಯಸುತ್ತದೆ. ಇದನ್ನು ನೀವು ನಂತರ Bluetooth ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಬದಲಾಯಿಸಬಹುದು."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"ಎನ್‌ಕ್ರಿಪ್ಷನ್ ಯಶಸ್ವಿಯಾಗಿದೆ"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"ಎನ್‌ಕ್ರಿಪ್ಶನ್‌‌ ಅಡಚಣೆಗೊಳಗಾಗಿದೆ ಮತ್ತು ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಇದರ ಪರಿಣಾಮವಾಗಿ, ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್‌‌ನಲ್ಲಿ ಇನ್ನು ಮುಂದೆ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲಾಗುವುದಿಲ್ಲ. \n\n ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್‌‌ ಅನ್ನು ಬಳಸಿಕೊಂಡು ಪುನರಾರಂಭಿಸಲು, ನಿಮಗೆ ಫ್ಯಾಕ್ಟರಿಯನ್ನು ಮರುಹೊಂದಿಸುವ ಅಗತ್ಯವಿದೆ. ನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್‌ ಅನ್ನು ಮರುಹೊಂದಿಸಿದ ನಂತರ ನೀವು ಅದನ್ನು ಹೊಂದಿಸಿದಾಗ, ನಿಮ್ಮ Google ಖಾತೆಯಲ್ಲಿ ಬ್ಯಾಕಪ್‌ ಆಗಿರುವ ಯಾವುದೇ ಡೇಟಾವನ್ನು ನೀವು ಮರುಸ್ಥಾಪಿಸುವ ಅವಕಾಶವನ್ನು ಹೊಂದಿರುತ್ತೀರಿ."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"ಎನ್‌ಕ್ರಿಪ್ಶನ್‌‌ ಅಡಚಣೆಗೊಳಗಾಗಿದೆ ಮತ್ತು ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. ಇದರ ಪರಿಣಾಮವಾಗಿ, ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಇನ್ನು ಮುಂದೆ ಡೇಟಾವನ್ನು ಪ್ರವೇಶಿಸಲಾಗುವುದಿಲ್ಲ. \n\nನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಬಳಸುವುದನ್ನು ಮುಂದುವರಿಸಲು, ನೀವು ಫ್ಯಾಕ್ಟರಿ ಮರುಹೊಂದಾಣಿಕೆ ಮಾಡುವ ಅಗತ್ಯವಿರುತ್ತದೆ. ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ಮರುಹೊಂದಿಸಿದ ನಂತರ ಅದನ್ನು ನೀವು ಹೊಂದಿಸಿದರೆ, ನಿಮ್ಮ Google ಖಾತೆಯಲ್ಲಿ ಬ್ಯಾಕಪ್‌ ಮಾಡಲಾದ ಯಾವುದೇ ಡೇಟಾವನ್ನು ಮರುಸ್ಥಾಪಿಸುವ ಅವಕಾಶವನ್ನು ನೀವು ಹೊಂದಿರುತ್ತೀರಿ."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"ಡೀಕ್ರಿಪ್ಷನ್ ಯಶಸ್ವಿಯಾಗಿಲ್ಲ"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"ನೀವು ನಮೂದಿಸಿದ ಪಾಸ್‌ವರ್ಡ್‌ ಸರಿಯಾಗಿದೆ, ಆದರೆ ದುರದೃಷ್ಟವಶಾತ್ ನಿಮ್ಮ ಡೇಟಾ ದೋಷಪೂರಿತವಾಗಿದೆ. \n\nನಿಮ್ಮ ಟ್ಯಾಬ್ಲೆಟ್‌ ಅನ್ನು ಪುನರಾರಂಭಿಸಲು, ನೀವು ಫ್ಯಾಕ್ಟರಿಯನ್ನು ಮರುಹೊಂದಿಸಿ ನಿರ್ವಹಿಸುವ ಅಗತ್ಯವಿದೆ. ಮರುಹೊಂದಿಕೆಯ ನಂತರ ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ನೀವು ಹೊಂದಿಸಿದಾಗ, ನಿಮ್ಮ Google ಖಾತೆಗೆ ಬ್ಯಾಕಪ್‌ ಮಾಡಲಾದ ಆ ಯಾವುದೇ ಡೇಟಾವನ್ನು ಮರುಸ್ಥಾಪಿಸಲು ನೀವು ಅವಕಾಶವನ್ನು ಹೊಂದಿರುತ್ತೀರಿ."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"ನೀವು ನಮೂದಿಸಿದ ಪಾಸ್‌ವರ್ಡ್‌ ಸರಿಯಾಗಿದೆ, ಆದರೆ ದುರದೃಷ್ಟವಶಾತ್ ನಿಮ್ಮ ಡೇಟಾ ದೋಷಪೂರಿತವಾಗಿದೆ. \n\nನಿಮ್ಮ ಫೋನ್ ಬಳಸಿಕೊಂಡು ಪುನರಾರಂಭಿಸಲು, ನೀವು ಫ್ಯಾಕ್ಟರಿ ಮರುಹೊಂದಿಸುವಿಕೆಯನ್ನು ಮಾಡಬೇಕಾದ ಅಗತ್ಯವಿದೆ. ಮರುಹೊಂದಿಕೆಯ ನಂತರ ನಿಮ್ಮ ಫೋನ್‌ ಅನ್ನು ನೀವು ಹೊಂದಿಸಿದಾಗ, ನಿಮ್ಮ Google ಖಾತೆಗೆ ಬ್ಯಾಕಪ್‌ ಮಾಡಲಾದ ಆ ಯಾವುದೇ ಡೇಟಾವನ್ನು ಮರುಸ್ಥಾಪಿಸಲು ನೀವು ಅವಕಾಶವನ್ನು ಹೊಂದಿರುತ್ತೀರಿ."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ಇನ್‌ಪುಟ್‌‌ ವಿಧಾನ ಬದಲಿಸಿ"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"ಸ್ಕ್ರೀನ್ ಲಾಕ್ ಆಯ್ಕೆಮಾಡಿ"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"ಬ್ಯಾಕಪ್ ಲಾಕ್ ಆರಿಸಿ"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ನಿಮ್ಮ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆಯ ಇತಿಹಾಸವನ್ನು ಪ್ರವೇಶಿಸಲು ಬಯಸುತ್ತದೆ."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"ಬ್ಲೂಟೂತ್ ಜೊತೆಗೆ ಜೋಡಿಸಲು <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಬಯಸುತ್ತದೆ. ಸಂಪರ್ಕಪಡಿಸಿದಾಗ, ಅದು ನಿಮ್ಮ ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆ ಇತಿಹಾಸಕ್ಕೆ ಪ್ರವೇಶವನ್ನು ಪಡೆಯುತ್ತದೆ."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"ಜೋಡಿ ಮಾಡಲಾದ ಸಾಧನಗಳು"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"ಜೋಡಿಯಾಗಿರುವ ಸಾಧನಗಳು ಇದರಿಂದ ಸಂದೇಶ ವೀಕ್ಷಿಸಬಹುದು"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"ಲಭ್ಯವಿರುವ ಸಾಧನಗಳು"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"ಯಾವುದೇ ಸಾಧನಗಳು ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"ಸಂಪರ್ಕಿಸು"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"ಯಾವಾಗಲೂ ಸ್ಕ್ಯಾನಿಂಗ್ ಅನುಮತಿಸು"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi‑Fi ಆಫ್‌ ಆಗಿದ್ದಾಗಲೂ ಕೂಡ Google ನ ಸ್ಥಳ ಸೇವೆಗಳು ಮತ್ತು ಇತರ ಅಪ್ಲಿಕೇಶನ್‌ ನೆಟ್‌ವರ್ಕ್‌ಗಳನ್ನು ಸ್ಕ್ಯಾನ್‌ ಮಾಡುತ್ತವೆ"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"ಸ್ವಯಂಚಾಲಿತವಾಗಿ Wi‑Fi ನಿರ್ವಹಿಸಿ"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"ನಿಮ್ಮ Wi‑Fi ಸಂಪರ್ಕವನ್ನು Wi‑Fi ಸಹಾಯಕವು ನಿರ್ವಹಿಸುವಂತೆ ಅವಕಾಶ ನೀಡಿ"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi ಸಹಾಯಕ"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi ಸಹಾಯಕ"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ಪ್ರಮಾಣಪತ್ರಗಳನ್ನು ಸ್ಥಾಪಿಸು"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"ವ್ಯಾಪ್ತಿಯಲ್ಲಿಲ್ಲ"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ಲಭ್ಯವಿದೆ"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ಲಭ್ಯವಿದೆ)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> ಜೊತೆ ಸುರಕ್ಷಿತವಾಗಿದೆ"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> ಜೊತೆ ಸುರಕ್ಷಿತವಾಗಿದೆ"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್‌ ಪಾಸ್‌ವರ್ಡ್‌ ನಮೂದಿಸಿ"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"ಯಾವುದೂ ಇಲ್ಲ"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"ಸ್ಥಳ ನಿಖರತೆಯನ್ನು ಸುಧಾರಿಸಲು ಮತ್ತು ಇತರ ಉದ್ದೇಶಗಳಿಗಾಗಿ, Wi-Fi ಆಫ್‌ ಇದ್ದಾಗಲೂ ಸಹ <xliff:g id="APP_NAME">%1$s</xliff:g> ನೆಟ್‌ವರ್ಕ್‌ ಸ್ಕ್ಯಾನಿಂಗ್‌ ಆನ್‌ ಮಾಡಲು ಬಯಸುತ್ತದೆ.\n\nಸ್ಕ್ಯಾನ್ ಮಾಡಲು ಬಯಸುವ ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಇದಕ್ಕೆ ಅನುಮತಿಸುವುದೇ?"</string>
@@ -2002,6 +1993,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL ಕುರುಹುಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer ಬಳಸಿ (ಪ್ರಾಯೋಗಿಕ)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"AwesomePlayer ಬದಲಾಗಿ NuPlayer ಬಳಸಿ"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB ಆಡಿಯೊ ರೂಟಿಂಗ್ ನಿ."</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB ಆಡಿಯೊ ಸಲಕರಣೆಗಳಿಗೆ ಸ್ವಯಂ ರೂಟಿಂಗ್ ನಿಷ್ಕ್ರಿ."</string>
     <string name="debug_layout" msgid="5981361776594526155">"ಲೇಔಟ್ ಪರಿಮಿತಿಗಳನ್ನು ತೋರಿಸು"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"ಕ್ಲಿಪ್‌ನ ಗಡಿಗಳು, ಅಂಚುಗಳು, ಇತ್ಯಾದಿ ತೋರಿಸು."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"RTL ಲೇಔಟ್‌ ಪರಿಮಿತಿಗಳನ್ನು ಪ್ರಬಲಗೊಳಿಸಿ"</string>
@@ -2423,9 +2416,9 @@
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"ಅಡಚಣೆ ಮಾಡಬೇಡ ಮೋಡ್‌ಗೆ ನಿರ್ಗಮನ ಪರಿಸ್ಥಿತಿಗಳನ್ನು <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> ಅವರಿಗೆ ಸೇರಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
     <string name="app_notification_block_title" msgid="172237877395761371">"ನಿರ್ಬಂಧಿಸು"</string>
-    <string name="app_notification_block_summary" msgid="9049487483231233726">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ನಿಂದ ಎಂದಿಗೂ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಬೇಡ"</string>
+    <string name="app_notification_block_summary" msgid="9049487483231233726">"ಈ ಅಪ್ಲಿಕೇಶನ್‌ನ ಅಧಿಸೂಚನೆಗಳನ್ನು ಎಂದಿಗೂ ತೋರಿಸಬೇಡ"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"ಆದ್ಯತೆ"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"ಪಟ್ಟಿಯ ಮೇಲ್ಭಾಗದಲ್ಲಿ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಿ ಮತ್ತು ಆದ್ಯತೆಯ ಅಡಚಣೆಗಳಿಗೆ ಮಾತ್ರ ಸಾಧನವನ್ನು ಹೊಂದಿಸಿದಾಗ ಬರಲಿರುವುದನ್ನು ಇರಿಸಿ"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"ಪಟ್ಟಿಯ ಮೇಲ್ಭಾಗದಲ್ಲಿ ಅಧಿಸೂಚನೆಗಳನ್ನು ತೋರಿಸಿ. ಸಾಧನವನ್ನು ಆದ್ಯತೆಯ ಅಡಚಣೆಗಳಿಗೆ ಹೊಂದಿಸಿದಾಗ ಮಾತ್ರ ಅದು ಕಾಣಿಸಿಕೊಳ್ಳುವಂತೆ ಮಾಡಿ"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"ಸೂಕ್ಷ್ಮ"</string>
     <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"ಸಾಧನವನ್ನು ಲಾಕ್‌ ಮಾಡಿದಾಗ, ಈ ಅಪ್ಲಿಕೇಶನ್‌‌ನ ಅಧಿಸೂಚನೆಗಳಿಂದ ಯಾವುದೇ ಸೂಕ್ಷ್ಮ ವಿಷಯವನ್ನು ಮರೆಮಾಡಿ"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ"</string>

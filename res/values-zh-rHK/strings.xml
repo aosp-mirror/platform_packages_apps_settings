@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"關閉無線電"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"開啟透過 IMS 發送短訊"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"關閉透過 IMS 發送短訊"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"允許透過 PS/VoLTE 傳送短訊"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"停止透過 PS/VoLTE 傳送短訊"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"需要開啟 IMS 註冊"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"需要關閉 IMS 註冊"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"開啟 LTE 記憶體傾印"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"個人資料設定"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"名稱未設定，改用帳戶名稱"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"掃瞄裝置"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"重新命名這部裝置"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"重新命名"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"中斷連線？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"這樣會結束您與下列裝置的連線：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"您沒有變更藍牙設定的權限。"</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"已向附近的裝置顯示<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"解除與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」的連結？"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"廣播"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"停用個人資料？"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"配對連線要求"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"輕觸即可與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」配對。"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"顯示已接收的檔案"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"訊息存取權"</string>
     <string name="device_picker" msgid="8398232791303186677">"藍牙裝置選擇器"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"藍牙權限要求"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"應用程式要求開啟藍牙功能。"</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"藍牙裝置必須先取得權限才能存取可用的帳戶。"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"應用程式要求將平板電腦設為向其他藍牙裝置顯示，顯示的時間長度為 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒。"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"應用程式要求將手機設為向其他藍牙裝置顯示，顯示的時間長度為 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒。"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"應用程式要求將平板電腦設為向其他裝置顯示。您稍後可在 [藍牙] 設定中更改這項設定。"</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"加密失敗"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"加密程序中斷且未完成，因此您無法再存取平板電腦上的資料。\n\n如要繼續使用平板電腦，您必須恢復原廠設定。完成重設後，您可以在設定平板電腦時，還原先前備份至「Google 帳戶」的資料。"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"加密程序中斷且未完成，因此您無法再存取手機上的資料。\n\n如要繼續使用手機，您必須恢復原廠設定。完成重設後，您可以在設定手機時，還原先前備份至「Google 帳戶」的資料。"</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"解密失敗"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"您輸入的密碼正確，不過您的數據已損毀。\n\n如要繼續使用，您必須平板電腦恢復原廠設定。經過重設後，您可以在設定平板電腦時將早前備份到個人 Google 帳戶的數據全部還原。"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"您輸入的密碼正確，不過您的數據已損毀。\n\n如要繼續使用，您必須將手機恢復原廠設定。經過重設後，您可以在設定手機時將早前備份到個人 Google 帳戶的數據全部還原。"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"切換輸入法"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"選擇螢幕鎖定方式"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"選擇備份解鎖方式"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 要求存取您的通訊錄和通話記錄。"</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」提出藍牙配對要求。一旦配對成功，對方將可存取您的通訊錄和通話記錄。"</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"已配對的裝置"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"可透過已配對的裝置查看來自下列來源的訊息："</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"可用的裝置"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"沒有可用裝置"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"連線"</string>
@@ -562,7 +554,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"作為手機揚聲器"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用於音樂與媒體"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"記住設定"</string>
-    <string name="wifi_assistant_intro_setup" msgid="4605105515416995110">"Wi‑Fi Assistant\n隆重登場"</string>
+    <string name="wifi_assistant_intro_setup" msgid="4605105515416995110">"全新推出\nWi‑Fi Assistant"</string>
     <string name="wifi_assistant_no_thanks" msgid="2776983751990143934">"不用了，謝謝"</string>
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"設定"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"透過 Wi‑Fi Assistant 自動連線至可用網絡。"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"永遠執行掃描"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允許 Google 的位置服務和其他應用程式掃描網絡 (即使 Wi-Fi 已關閉)"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"自動管理 Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"允許 Wi‑Fi Assistant 管理您的 Wi‑Fi 連線"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"超出可用範圍"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"有 WPS 可供使用"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (有 WPS 可供使用)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"以 <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> 保護連線安全性"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">"，以 <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> 保護連線安全性"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"輸入您的網絡密碼"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"無"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」要求開啟網絡掃瞄功能 (即使 Wi-Fi 已關閉)，以提升定位精確度及用於其他用途。\n\n您要允許所有需要掃瞄的應用程式這項要求嗎？"</string>
@@ -2006,6 +1997,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"啟用 OpenGL 追蹤"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"使用 NuPlayer (實驗版)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"使用 NuPlayer 取代 AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"停用 USB 音效檔案路由"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"停用 USB 音效檔案周邊設備的自動路由功能"</string>
     <string name="debug_layout" msgid="5981361776594526155">"顯示版面界限"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"顯示剪輯範圍、邊界等"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"強制使用從右至左的版面配置方向"</string>
@@ -2431,7 +2424,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"優先順序"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"在清單頂端顯示通知，並在裝置設為僅限優先干擾時，持續顯示通知"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"敏感"</string>
-    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"當裝置鎖定時，隱藏這個應用程式所通知的任何敏感內容"</string>
+    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"當裝置鎖定時，隱藏這個應用程式所發通知的任何敏感內容"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"已封鎖"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先順序"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"敏感"</string>
@@ -2466,7 +2459,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"開啟"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"開啟這項設定時，可讓裝置鎖定在目前的螢幕。\n\n如何固定螢幕：\n\n1. 開啟這項設定。\n\n2. 開啟應用程式。\n\n3. 輕觸 [最近使用的應用程式] 按鈕。\n\n4. 輕觸圖釘圖示。"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"開啟這項設定時，可讓裝置鎖定在目前的螢幕。\n\n如何固定螢幕：\n\n1. 開啟這項設定。\n\n2. 開啟應用程式。\n\n3. 輕觸 [最近] 按鈕。\n\n4. 輕觸圖釘圖示。"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"工作設定檔"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(實驗性)"</string>
 </resources>

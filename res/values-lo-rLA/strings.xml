@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"ປິດວິທະຍຸ"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"ເປີດໃຊ້ SMS ຜ່ານ​ IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"ປິດການນຳໃຊ້ SMS ຜ່ານ IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"ເປີດ​ນຳ​ໃຊ້ MO over PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"ປິດ​ການ​ນຳ​ໃຊ້ MO over PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"ຈຳເປັນຕ້ອງເປີດນຳໃຊ້ການລົງທະບຽນ IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"ຈຳເປັນຕ້ອງປິດການລົງທະບຽນ IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"ເປີດການ dump ໜ່ວຍຄວາມຈຳຂອງ LTE"</string>
@@ -127,13 +125,12 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"ການຕັ້ງຄ່າໂປຣໄຟລ໌"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"ບໍ່ໄດ້ຕັ້ງຊື່ເທື່ອ, ລະບົບຈະໃຊ້ຊື່ບັນຊີແທນ"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"ສະແກນຫາອຸປະກອນ"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"ປ່ຽນຊື່ອຸ​ປະ​ກອນ​ນີ້"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"ປ່ຽນຊື່"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"ຕັດການເຊື່ອມຕໍ່ຫຼືບໍ່?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"ນີ້ຈະເປັນການຢຸດການເຊື່ອມຕໍ່ຂອງທ່ານກັບ:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"ທ່ານ​ບໍ່​ມີ​ສິດ​ອະນຸຍາດ​ໃນ​ການ​ແກ້ໄຂ​ການ​ຕັ້ງຄ່າ Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຕອນ​ນີ້​ສາ​ມາດ​ເບິ່ງ​ເຫັນ​ໄດ້​ໂດຍ​ອຸ​ປະ​ກອນ​ໃກ້​ຄຽງ​ແລ້ວ."</string>
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ສາ​ມາດ​ເບິ່ງ​ເຫັນ​ໄດ້​ໂດຍ​ອຸ​ປະ​ກອນ​ທີ່​ຢູ່​ໃກ້​ຄຽງ​ເມື່ອ​​ເປີດ​ໃຊ້ Blueooth."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"​ຕັດ​ການ​ເຊື່ອມ​ຕ​ໍ່ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ບໍ່?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ການກະ​ຈາຍ​ສັນຍານ"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ປິດການນຳໃຊ້ໂປຣໄຟລ໌?"</string>
@@ -155,11 +152,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"ຄຳຮ້ອງຂໍການຈັບຄູ່"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"ແຕະເພື່ອຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"ສະແດງໄຟລ໌ທີ່ໄດ້ຮັບ"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"ຈັດ​ການ​ການ​ເຂົ້າ​ເຖິງ"</string>
     <string name="device_picker" msgid="8398232791303186677">"ໂຕເລືອກອຸປະກອນ Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"ຄຳຂໍອະນຸຍາດເພື່ອໃຊ້ Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"ມີແອັບຯຕ້ອງການເປີດນຳໃຊ້ Bluetooth."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"ອຸ​ປະ​ກອນ Bluetooth ຕ້ອງ​ຂໍ​ອະ​ນຸ​ຍາດ​ກ່ອນ​ເຂົ້າ​ເຖິງ​ບັນ​ຊີ​ທີ່​ສາ​ມາດ​ໃຊ້​ໄດ້."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"ມີແອັບຯຕ້ອງການໃຫ້ແທັບເລັດຂອງທ່ານ ສາມາດຊອກເຫັນໄດ້ຈາກອຸປະກອນ Bluetooth ອື່ນເປັນເວລາ <xliff:g id="TIMEOUT">%1$d</xliff:g> ວິນາທີ."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"ມີແອັບຯຕ້ອງການເຮັດໃຫ້ໂທລະສັບຂອງທ່ານ ສາມາດຊອກເຫັນໄດ້ໂດຍອຸປະກອນ Bluetooth ອື່ນເປັນເວລາ <xliff:g id="TIMEOUT">%1$d</xliff:g> ວິນາທີ."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"ມີແອັບຯຕ້ອງການເຮັດໃຫ້ແທັບເລັດຂອງທ່ານ ສາມາດຖືກຊອກເຫັນໄດ້ໂດຍອຸປະກອນ Bluetooth ອື່ນ. ທ່ານສາມາດປ່ຽນການເຮັດວຽກນີ້ໄດ້ໃນພາຍຫຼັງ ໂດຍໄປທີ່ການຕັ້ງຄ່າ Bluetooth."</string>
@@ -383,12 +378,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"ການເຂົ້າລະຫັດບໍ່ສຳເລັດ"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"ການເຂົ້າລະຫັດຖືກລົບກວນ ແລະບໍ່ສາມາດເຮັດໃຫ້ສຳເລັດໄດ້ ສົ່ງຜົນໃຫ້ຂໍ້ມູນໃນແທັບເລັດຂອງທ່ານ ບໍ່ສາມາດເຂົ້າເຖິງໄດ້ອີກຕໍ່ໄປ. \n\n ເພື່ອສືບຕໍ່ນຳໃຊ້ແທັບເລັດຂອງທ່ານ, ທ່ານຕ້ອງດຳເນີນການຣີເຊັດຄ່າຈາກໂຮງງານ. ເມື່ອທ່ານຕັ້ງຄ່າແທັບເລັດຂອງທ່ານຫຼັງຈາກຣີເຊັດແລ້ວ, ທ່ານຈະສາມາດກູ້ຄືນຂໍ້ມູນໃດໆ ທີ່ເຄີຍໄດ້ສຳຮອງໄວ້ກັບບັນຊີ Google ຂອງທ່ານໄດ້."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"ການເຂົ້າລະຫັດຖືກລົບກວນ ແລະບໍ່ສາມາດເຮັດໃຫ້ສຳເລັດໄດ້ ສົ່ງຜົນໃຫ້ຂໍ້ມູນໃນໂທລະສັບຂອງທ່ານ ບໍ່ສາມາດເຂົ້າເຖິງໄດ້ອີກຕໍ່ໄປ. \n\nເພື່ອສືບຕໍ່ນຳໃຊ້ແທັບເລັດຂອງທ່ານ, ທ່ານຕ້ອງດຳເນີນການຣີເຊັດຄ່າຈາກໂຮງງານ. ເມື່ອຮອດຂັ້ນຕອນການຕັ້ງຄ່າໂທລະສັບຂອງທ່ານ ຫຼັງຈາກການຣີເຊັດ, ທ່ານຈະສາມາດກູ້ຄືນຂໍ້ມູນໃດໆ ທີ່ເຄີຍໄດ້ສຳຮອງໄວ້ກັບບັນຊີ Google ຂອງທ່ານໄດ້."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"ການຖອດ​ລະຫັດ​ບໍ່ສຳ​ເລັດ​ຜົນ"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"ລະຫັດ​ຜ່ານທີ່​ທ່ານໃສ່​ລົງໄປ​ນັ້ນຖືກ​ຕ້ອງແລ້ວ, ແຕ່ຂໍ້​ມູນ​ຂອງ​ທ່ານ​ເສຍ​ຫາຍ. \n\nເພື່ອ​ກັບໄປ​ນຳ​ໃຊ້​ແທັບເລັດ​ຂອງທ່ານ, ທ່ານຕ້ອງ​ຣີເຊັດ​ແທັບເລັດ​ຂອງທ່ານ​ກັບໄປເປັນ​ຄ່າຈາກ​ໂຮງງານ. ເມື່ອ​ທ່ານ​ຕັ້ງຄ່າ​ແທັບເລັດ​ຂອງທ່ານ​ຫຼັງຈາກ​ການຣີເຊັດ, ທ່ານ​ຈະສາມາດ​ດຶງ​ຂໍ້ມູນ​ທີ່ທ່ານ​ສຳຮອງ​ໄວ້ໃນ​ບັນຊີ Google Account ຂອງທ່ານ​ຄືນມາໄດ້."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"ລະຫັດ​ຜ່ານທີ່​ທ່ານໃສ່​ລົງໄປ​ນັ້ນຖືກ​ຕ້ອງແລ້ວ, ແຕ່ຂໍ້​ມູນ​ຂອງ​ທ່ານ​ເສຍ​ຫາຍ. \n\nເພື່ອ​ກັບໄປ​ນຳ​ໃຊ້​ໂທລະສັບ​ຂອງທ່ານ, ທ່ານຕ້ອງ​ຣີເຊັດ​ໂທລະສັບ​ຂອງທ່ານ​ກັບໄປເປັນ​ຄ່າຈາກ​ໂຮງງານ. ເມື່ອ​ທ່ານ​ຕັ້ງຄ່າ​ໂທລະສັບ​ຂອງທ່ານ​ຫຼັງຈາກ​ການຣີເຊັດ, ທ່ານ​ຈະສາມາດ​ດຶງ​ຂໍ້ມູນ​ທີ່ທ່ານ​ສຳຮອງ​ໄວ້ໃນ​ບັນຊີ Google Account ຂອງທ່ານ​ຄືນມາໄດ້."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ສະລັບຮູບແບບການປ້ອນຂໍ້ມູນ"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"ເລືອກການລັອກໜ້າຈໍ"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"ເລືອກການລັອກການສຳຮອງຂໍ້ມູນ"</string>
@@ -408,7 +400,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"ຄວາມປອດໄພລະດັບປານກາງຫາສູງ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"ລະຫັດຜ່ານ"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"ຄວາມ​ປອດ​ໄພ​ສູງ​"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"ຄວາມ​ປອດ​ໄພ​ສູງ"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"ຖືກປິດການນຳໃຊ້ໂດຍຜູ່ເບິ່ງແຍງລະບົບ, ນະໂຍບາຍການເຂົ້າລະຫັດ ຫຼືບ່ອນເກັບຂໍ້ມູນຮັບຮອງ"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"ບໍ່ໃຊ້"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"ປັດ​ໄປ​ຂ້າງ"</string>
@@ -503,13 +495,12 @@
     <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"ຊື່"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"​ການ​ເຊື່ອມ​ຕໍ່​ອິນ​ເຕີ​ເນັດ"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"​ແປ້ນ​ພິມ"</string>
-    <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່ ແລະ​ປະ​ຫວັດ​ການ​ໂທ​"</string>
+    <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່ ແລະ​ປະ​ຫວັດ​ການ​ໂທ"</string>
     <string name="bluetooth_pairing_dialog_title" msgid="1417255032435317301">"ຈັບຄູ່ກັບອຸປະກອນນີ້ບໍ?"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"ແບ່ງ​ປັນ​ສະ​ມຸດ​ໂທ​ລະ​ສັບ​ບໍ?"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຕ້ອງ​ການ​ເຂົ້າ​ເຖິງ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່​ ແລະ​ປະ​ຫວັດ​ການ​ໂທ​ຂອງ​ທ່ານ."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຕ້ອງ​ການ​ຈັບ​ຄູ່​ກັບ Bluetooth. ເມື່ອ​ເຊື່ອມ​ຕໍ່​ແລ້ວ, ມັນ​ຈະ​ມີ​ສິດ​ເຂົ້າ​ເຖິງ​ລາຍ​ຊື່​ຜູ່​ຕິດ​ຕໍ່ ແລະ​ປະ​ຫວັດ​ການ​ໂທ​ຂອງ​ທ່ານ."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"ອຸປະກອນທີ່ຈັບຄູ່ກັນແລ້ວ"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"ອຸ​ປະ​ກອນ​ທີ່​ຈັບ​ຄູ່​ກັນ​ສາ​ມາດ​ເບິ່ງ​ຂໍ້​ຄວາມ​ຈາກ"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"ອຸ​ປະ​ກອນ​ທີ່​ໃຊ້ໄດ້"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"ບໍ່​ມີ​ອຸ​ປະ​ກອນ​ທີ່​ສາ​ມາດ​ໃຊ້​ໄດ້"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"ເຊື່ອມຕໍ່"</string>
@@ -625,7 +616,7 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"​ອະ​ນຸ​ຍາດ​ການ​ສະ​ແກນ​ທຸກ​ເທື່ອ"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"ໃຫ້​ບໍລິການ​ສະຖານທີ່​ຂອງ Google ແລະ​ແອັບຯ​ອື່ນໆ​ສະແກນ​ຫາ​ເຄືອ​ຂ່າຍ​ໄດ້, ເຖິງ​ແມ່ນ​ວ່າ Wi-Fi ຈະ​ປິດ​ກໍ​ຕາມ."</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"ຈັດ​ການ Wi‑Fi ໂດຍ​ອັດ​ຕະ​ໂນ​ມັດ"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"ໃຫ້ Wi‑Fi assistant ຈັດ​ການ​ການ​ເຊື່ອມ​ຕໍ່ Wi‑Fi ຂອງ​ທ່ານ"</string>
+    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"ໃຫ້ <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> ຈັດ​ການ​ການ​ເຊື່ອມ​ຕໍ່ Wi‑Fi ຂອງ​ທ່ານ"</string>
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ຕິດຕັ້ງໃບຮັບຮອງ"</string>
@@ -697,13 +688,11 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"ບໍ່ຢູ່ໃນໄລຍະທີ່ເຊື່ອມຕໍ່ໄດ້"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"ສາມາດໃຊ້ WPS ໄດ້"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (ສາມາດໃຊ້ WPS ໄດ້)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"ຖືກປ້ອງກັນດ້ວຍ <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", ປ້ອງກັນດ້ວຍ <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ໃສ່​ລະຫັດ​ເຄືອ​ຂ່າຍ​ຂອງ​ທ່ານ"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"ບໍ່ໃຊ້"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"ເພື່ອປັບປຸງຄວາມຖືກຕ້ອງຂອງສະຖານທີ່ ແລະເພື່ອຈຸດປະສົງອື່ນໆ, <xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງການເປີດນຳໃຊ້ການສະແກນເຄືອຂ່າຍ ເຖິງແມ່ນວ່າ Wi-Fi ຈະປິດກໍຕາມ.\n\nອະນຸຍາດການດຳເນີນການນີ້ ໃຫ້ກັບທຸກແອັບຯທີ່ຕ້ອງການສະແກນບໍ່?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"ເພື່ອ​ປິດ, ໃຫ້​ໄປ​ທີ່​ຫົວ​ຂໍ້​ຂັ້ນ​ສູງ ໃນ​ເມ​ນູ​ໂອ​ເວີ​ໂຟລ."</string>
-    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"ອະ​ນຸ​ຍາດ​"</string>
+    <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"ອະ​ນຸ​ຍາດ"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"ປະ​ຕິ​ເສດ"</string>
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"ເຂົ້າ​ສູ່​ລະ​ບົບ​ເພື່ອ​ເຊື່ອມ​ຕໍ່​ບໍ່?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> ຕ້ອງ​ການ​ໃຫ້​ທ່ານ​ເຂົ້າ​ສູ່​ລະ​ບົບ​ອອນ​ລາຍ​ກ່ອນ​ຈະ​ເຊື່ອມ​ຕໍ່​ຫາ​ເຄືອ​ຂ່າຍ."</string>
@@ -1590,7 +1579,7 @@
     <string name="print_print_jobs" msgid="3582094777756968793">"ວຽກ​ພິມ"</string>
     <string name="print_print_job" msgid="7563741676053287211">"ວຽກ​ພິມ"</string>
     <string name="print_restart" msgid="8373999687329384202">"ປິດເປີດໃໝ່"</string>
-    <string name="print_cancel" msgid="3621199386568672235">"ຍົກ​ເລີກ​"</string>
+    <string name="print_cancel" msgid="3621199386568672235">"ຍົກ​ເລີກ"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"ກຳລັງພິມ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_cancelling_state_title_template" msgid="7102968925358219875">"ກຳລັງຍົກເລີກ <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
@@ -1917,10 +1906,8 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"ຊິ້ງຂໍ້ມູນ"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"ການຊິ້ງຂໍ້ມູນກຳລັງປະສົບບັນຫາຢູ່ໃນປັດຈຸບັນ. ມັນຈະກັບມາໃຊ້ໄດ້ໃນໄວໆນີ້."</string>
     <string name="add_account_label" msgid="7811707265834013767">"ເພີ່ມບັນຊີ"</string>
-    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
-    <skip />
-    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="5113461928275887768">"ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ​ບໍ່​ສາ​ມາດ​ໃຊ້​ໄດ້​ເທື່ອ"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"ລຶບ​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ"</string>
     <string name="background_data" msgid="5779592891375473817">"ຂໍ້ມູນພື້ນຫຼັງ"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"ແອັບຯສາມາດຊິ້ງຂໍ້ມູນ, ສົ່ງ ແລະຮັບຂໍ້ມູນໄດ້ທຸກເວລາ"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"ປິດການນຳໃຊ້ຂໍ້ມູນພື້ນຫຼັງ?"</string>
@@ -2002,6 +1989,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"ເປີດການໃຊ້ຮ່ອງຮອຍໃນ OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"​ໃຊ້ NuPlayer (ທົດ​ລອງ)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"​ໃຊ້ NuPlayer ແທນ AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"ປິດ​ການ​ນຳ​ໃຊ້​ເສັ້ນ​ທາງ​ສຽງ USB"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"ປິດ​​ການ​ນຳ​ໃຊ້​ເສັ້ນ​ທາງ​​ອັດ​ຕະ​ໂນ​ມັດ​ໄປ​ຫາອຸ​ປະ​ກອ​ນ​ຕໍ່​ພ່ວງ​ສຽງ​ USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"ສະແດງຂອບການຈັດວາງ"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"ສະແດງໜ້າປົກຄລິບ, ຂອບ ແລະອື່ນໆ."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"ບັງ​ຄັບ​ໃຫ້ຮູບຮ່າງຂຽນຈາກຂວາຫາຊ້າຍ"</string>
@@ -2108,7 +2097,7 @@
     <string name="data_usage_metered_title" msgid="7383175371006596441">"ການ​ຈຳ​ກັດ​ເຄືອ​ຂ່າຍ"</string>
     <string name="data_usage_metered_body" msgid="3262343834446126044">"​ເຄືອ​ຂ່າຍ​ທີ່​ຖືກ​ນັບ​ຂໍ້​ມູນ​ຈະ​ຖືກ​ປະ​ຕິ​ບັດ​ເຊັ່ນ​ດຽວ​ກັບ​ເຄືອ​ຂ່າຍມ​ື​ຖື​ໃນ​ເວ​ລາ​ທີ່​ຂໍ້​ມູນ​ພື້ນຫຼັງ​ຖືກ​ຈຳ​ກັດ. ແອັບຯ​ຕ່າງໆ​ອາດ​​ເຕືອນ​ກ່ອນ​ນຳ​ໃຊ້​ເຄືອ​ຂ່າຍ​ເຫຼົ່າ​ນີ້​ສຳ​ລັບ​ການ​ດາວ​ໂຫລດ​ໄຟລ໌​ຂະ​ໜາດ​ໃຫຍ່."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"ເຄືອ​ຂ່າຍ​ມື​ຖື"</string>
-    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"​ເຄືອ​ຂ່າຍ​ Wi-Fi ທີ່​ຖືກ​ນັບ​ຂໍ້​ມູນ​"</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"​ເຄືອ​ຂ່າຍ​ Wi-Fi ທີ່​ຖືກ​ນັບ​ຂໍ້​ມູນ"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"ເພື່ອ​ເລືອກ​ເຄືອ​ຂ່າຍ​ທີ່​ຖືກ​ນັບ​ຂໍ້​ມູນ​, ໃຫ້​ເປີດ​ໃຊ້ Wi‑Fi ກ່ອນ."</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"​ການ​ນັບ​ຈ​ຳ​ນວນ​ຂໍ້​ມູນ​ທີ່​ໃຊ້​ຂອງ​ຜູ່​ໃຫ້​ບໍ​ລິ​ການ​ອາດ​ແຕກ​ຕ່າງ​ຈາກ​​ທີ່ອຸ​ປະ​ກອນ​ຂອງ​ທ່ານນັບ."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"ການໂທສຸກເສີນ"</string>
@@ -2357,7 +2346,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"ບໍ່ ບໍ່ລົບກວນ ການລົບກວນ ການຢຸດລົບກວນ"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="782326973714313480">"ການ​ລາຍ​ງານ​ປະຫວັດ​ສະຖານທີ່​ໃກ້​ຄຽງ"</string>
-    <string name="keywords_location_mode" msgid="8584992704568356084">"ຄວາມຖືກຕ້ອງ​"</string>
+    <string name="keywords_location_mode" msgid="8584992704568356084">"ຄວາມຖືກຕ້ອງ"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"ບັນຊີ"</string>
     <string name="keywords_users" msgid="4673901601478559100">"ການຫ້າມ ຫ້າມ ຖືກຫ້າມ"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"ຂໍ້ຄວາມ ການແກ້ໄຂ ແກ້ໄຂ ສຽງ ການສັ່ນ ພາສາ ທ່າທາງ ແນະນຳ ການແນະນຳ ຮູບແບບສີສັນ ຄຳຫຍາບ ພິມ ອີໂມຈິ"</string>
@@ -2432,7 +2421,7 @@
     <string name="app_notification_row_priority" msgid="7723839972982746568">"ລະດັບຄວາມສຳຄັນ"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"​ລະ​ອຽດ​​ອ່ອນ"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"ແລ້ວໆ"</string>
-    <string name="zen_mode_default_option" msgid="6940069025071935243">"ຈົນກວ່າ​ທ່ານ​ຈະ​ປິດ​"</string>
+    <string name="zen_mode_default_option" msgid="6940069025071935243">"ຈົນກວ່າ​ທ່ານ​ຈະ​ປິດ"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"ການ​ລົບກວນ​ສຳຄັນ"</string>
     <string name="zen_mode_downtime_category" msgid="4730179065426038108">"ດາວທາມ (ການ​ລົບກວນ​ສຳຄັນ​ເທົ່າ​ນັ້ນ)"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"ມື້"</string>
@@ -2461,7 +2450,7 @@
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"ໃສ່ PIN ຜູ່​ເບິ່ງ​ແຍງ​ລະບົບ"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"ເປີດ"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"ປິດ"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"ການ​ປັກ​ໝຸດ​ໜ້າ​ຈໍ​"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"ການ​ປັກ​ໝຸດ​ໜ້າ​ຈໍ"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"ເມື່ອ​ການ​ຕັ້ງ​ຄ່າ​ນີ້​ຖືກ​ເປີດ​ໃຊ້​ແລ້ວ, ທ່ານ​ຈະ​ສາ​ມາດ​ກຳ​ນົດ​ໃຫ້​ອຸ​ປະ​ກອນ​​ສະ​ແດງ​ໜ້າ​ຈໍ​ປັດ​ຈຸ​ບັນ​ໄດ້.\n\nເພື່ອ​ປັກ​ໝຸດ​ໜ້າ​ຈໍ:\n\n1. ເປີດ​ໃຊ້​ການ​ຕັ້ງ​ຄ່າ​ນີ້.\n\n2. ເປີດ​ແອັບຯ​ໃດ​ນຶ່ງ​ທີ່​ຕ້ອງ​ການ.\n\n3. ແຕະ​ທີ່​ປຸ່ມ​ \"ເມື່ອ​ໄວໆ​ນີ້\".\n\n4. ແຕະ​ທີ່​ເຄື່ອງ​ໝາຍ​ປັກ​ໝຸດ."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(ທົດ​ລອງ)"</string>
