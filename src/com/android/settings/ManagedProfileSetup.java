@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -37,6 +38,7 @@ import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
  * adds cross-profile intent filters for the appropriate Settings activities).
  */
 public class ManagedProfileSetup extends BroadcastReceiver {
+    private static final String TAG = "Settings";
     private static final String PRIMARY_PROFILE_SETTING =
             "com.android.settings.PRIMARY_PROFILE_CONTROLLED";
 
@@ -46,7 +48,8 @@ public class ManagedProfileSetup extends BroadcastReceiver {
         if (!Utils.isManagedProfile(um)) {
             return;
         }
-
+        Log.i(TAG, "Received broadcast: " + broadcast.getAction()
+                + ". Setting up intent forwarding for managed profile.");
         final PackageManager pm  = context.getPackageManager();
         // Clear any previous intent forwarding we set up
         pm.clearCrossProfileIntentFilters(UserHandle.myUserId());
