@@ -53,6 +53,9 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     private Bundle mAccessPointSavedState;
     private AccessPoint mSelectedAccessPoint;
 
+    // Instance state key
+    private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,13 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(SAVE_DIALOG_ACCESS_POINT_STATE)) {
+                mAccessPointSavedState =
+                    savedInstanceState.getBundle(SAVE_DIALOG_ACCESS_POINT_STATE);
+            }
+        }
     }
 
     private void initPreferences() {
@@ -150,12 +160,31 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case WifiSettings.WIFI_DIALOG_ID:
+                if (mDlgAccessPoint == null) { // For re-launch from saved state
+                    mDlgAccessPoint = new AccessPoint(getActivity(), mAccessPointSavedState);
+                    // Reset the saved access point data
+                    mAccessPointSavedState = null;
+                }
                 mSelectedAccessPoint = mDlgAccessPoint;
                 mDialog = new WifiDialog(getActivity(), this, mDlgAccessPoint, false);
                 return mDialog;
 
         }
         return super.onCreateDialog(dialogId);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // If the dialog is showing, save its state.
+        if (mDialog != null && mDialog.isShowing()) {
+            if (mDlgAccessPoint != null) {
+                mAccessPointSavedState = new Bundle();
+                mDlgAccessPoint.saveWifiState(mAccessPointSavedState);
+                outState.putBundle(SAVE_DIALOG_ACCESS_POINT_STATE, mAccessPointSavedState);
+            }
+        }
     }
 
     @Override
