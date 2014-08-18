@@ -137,7 +137,7 @@ public class AccountSettings extends SettingsPreferenceFragment
                             currentProfile.getIdentifier()));
             menu.findItem(R.id.account_settings_menu_auto_sync_personal).setVisible(false);
             menu.findItem(R.id.account_settings_menu_auto_sync_work).setVisible(false);
-        } else {
+        } else if (mProfiles.size() > 1) {
             // We assume there's only one managed profile, otherwise UI needs to change
             final UserHandle managedProfile = mProfiles.valueAt(1).userInfo.getUserHandle();
 
@@ -152,6 +152,8 @@ public class AccountSettings extends SettingsPreferenceFragment
                     .setChecked(ContentResolver.getMasterSyncAutomaticallyAsUser(
                             managedProfile.getIdentifier()));
             menu.findItem(R.id.account_settings_menu_auto_sync).setVisible(false);
+         } else {
+             Log.w(TAG, "Method onPrepareOptionsMenu called before mProfiles was initialized");
          }
     }
 
