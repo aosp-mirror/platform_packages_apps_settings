@@ -135,7 +135,9 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             wifiAssistant.setOnPreferenceChangeListener(this);
             wifiAssistant.setChecked(checked);
         } else {
-            getPreferenceScreen().removePreference(wifiAssistant);
+            if (wifiAssistant != null) {
+                getPreferenceScreen().removePreference(wifiAssistant);
+            }
         }
 
         Intent wifiDirectIntent = new Intent(context,
