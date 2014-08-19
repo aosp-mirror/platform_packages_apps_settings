@@ -247,7 +247,7 @@ class SettingsInjector {
      * Adds an injected setting to the root.
      */
     private Preference addServiceSetting(List<Preference> prefs, InjectedSetting info) {
-        Preference pref = new Preference(mContext);
+        Preference pref = new DimmableIconPreference(mContext);
         pref.setTitle(info.title);
         pref.setSummary(null);
         PackageManager pm = mContext.getPackageManager();
