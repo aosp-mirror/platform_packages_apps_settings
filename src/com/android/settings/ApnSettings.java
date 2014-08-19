@@ -133,7 +133,9 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         mMobileStateFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
 
-        setHasOptionsMenu(true);
+        if (!mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
+            setHasOptionsMenu(true);
+        }
     }
 
     @Override
