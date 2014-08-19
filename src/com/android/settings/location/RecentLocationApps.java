@@ -81,7 +81,7 @@ public class RecentLocationApps {
      * Subclass of {@link Preference} to intercept views and allow content description to be set on
      * them for accessibility purposes.
      */
-    private static class AccessiblePreference extends Preference {
+    private static class AccessiblePreference extends DimmableIconPreference {
         public CharSequence mContentDescription;
 
         public AccessiblePreference(Context context, CharSequence contentDescription) {
