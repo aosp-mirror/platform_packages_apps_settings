@@ -630,14 +630,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 Dialog dlg = new AlertDialog.Builder(context)
                         .setTitle(R.string.user_exit_guest_confirm_title)
                         .setMessage(R.string.user_exit_guest_confirm_message)
-                        .setPositiveButton(android.R.string.yes,
+                        .setPositiveButton(R.string.user_exit_guest_dialog_remove,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         exitGuest();
                                     }
                                 })
-                        .setNegativeButton(android.R.string.no, null)
+                        .setNegativeButton(android.R.string.cancel, null)
                         .create();
                 return dlg;
             }
