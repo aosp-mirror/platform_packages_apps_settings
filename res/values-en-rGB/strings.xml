@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Turn off radio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Turn on SMS over IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Turn off SMS over IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Enable MO over PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Disable MO over PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Turn on IMS registration required"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Turn off IMS registration required"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Turn on lte ram dump"</string>
@@ -132,7 +130,8 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Disconnect?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"This will end your connection with:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"You don\'t have permission to change Bluetooth settings."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is now visible to nearby devices."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Disconnect <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Broadcasting"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Disable profile?"</string>
@@ -154,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing request"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Touch to pair with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Show files received"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Message access"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth device chooser"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth permission request"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"An app wants to turn Bluetooth ON for this device."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Bluetooth devices must ask for permission before accessing available accounts."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"An app wants to make your tablet visible to other Bluetooth devices for <xliff:g id="TIMEOUT">%1$d</xliff:g> seconds."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"An app wants to make your phone visible to other Bluetooth devices for <xliff:g id="TIMEOUT">%1$d</xliff:g> seconds."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"An app wants to make your tablet visible to other Bluetooth devices. You can change this later in Bluetooth settings."</string>
@@ -505,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> wants to access your contacts and call history."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> wants to pair with Bluetooth. When connected, it will have access to your contacts and call history."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Paired devices"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Paired devices can view messages from"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Available devices"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"No devices available"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connect"</string>
@@ -621,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Always allow scanning"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Let Google\'s location service and other apps scan for networks, even when Wi‑Fi is off"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Automatically manage Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Let a Wi‑Fi assistant manage your Wi‑Fi connection"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Install certificates"</string>
@@ -693,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Not in range"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS available"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS available)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Secured with <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", secured with <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Enter your network password"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"None"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"To improve location accuracy and for other purposes, <xliff:g id="APP_NAME">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?"</string>
@@ -1833,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Credential storage couldn\'t be erased."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Credential storage is enabled."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"You need to set a lock screen PIN or password before you can use credential storage."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Usage access"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Apps that have access to your device\'s usage history."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Apps with usage access"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Apps requesting access"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Only allow apps that you trust to have access to usage data. Apps that you allow will have access to your app usage history, such as the last time an app was used, or the total time that you spent using an app."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Allow access?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"If you allow access, this app can view general info about your apps, such as how often you use them."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Emergency tone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Set behaviour when an emergency call is placed"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Backup &amp; reset"</string>
@@ -1998,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Enable OpenGL traces"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Use NuPlayer (experimental)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Use NuPlayer instead of AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Disable USB audio routing"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Disable automatic routing to USB audio peripherals"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Show layout bounds"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Show clip bounds, margins, etc."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Force RTL layout direction"</string>

@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Искључи радио"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Укључи SMS преко IMS-а"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Искључи SMS преко IMS-а"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Омогући MO преко функције PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Онемогући MO преко функције PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Потребно је укључити IMS регистрацију"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Потребно је да се искључи IMS регистрација"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Укључи слику стања lte ram-а"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Подешавања профила"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Није подешен назив, користи се назив налога"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Скенирај за уређаје"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Преименуј овај уређај"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Преименуј"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Желите ли да прекинете везу?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Овим ћете прекинути везу са уређајем:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Немате дозволу за промену подешавања Bluetooth-а."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"Уређај <xliff:g id="DEVICE_NAME">%1$s</xliff:g> је сада видљив оближњим уређајима."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Желите ли да прекинете везу са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Емитовање"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Желите ли да онемогућите профил?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Захтев за упаривање"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Додирните да бисте упарили са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Приказ примљених датотека"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Приступ порукама"</string>
     <string name="device_picker" msgid="8398232791303186677">"Бирач Bluetooth уређаја"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Захтев за Bluetooth дозволу"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Апликација жели да УКЉУЧИ Bluetooth за овај уређај."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Bluetooth уређаји морају да затраже дозволу пре приступа доступним налозима."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Апликација жели да учини таблет видљивим за друге Bluetooth уређаје на <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Апликација жели да учини телефон видљивим за друге Bluetooth уређаје на <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Апликација жели да учини таблет видљивим за друге Bluetooth уређаје. Ово можете касније да промените у подешавањима Bluetooth-а."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Шифровање није успело"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Шифровање је прекинуто и не може да се доврши. Као последица тога, подаци на таблету више нису доступни. \n\n Да бисте наставили да користите таблет, треба да га ресетујете. Када га подесите након ресетовања на фабричка подешавања, имаћете прилику да вратите све податке за које сте направили резервне копије на Google налогу."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Шифровање је прекинуто и не може да се доврши. Као последица тога, подаци на телефону више нису доступни. \n\nДа бисте наставили да користите телефон, треба да га ресетујете. Када га подесите након ресетовања на фабричка подешавања, имаћете прилику да вратите све податке за које сте направили резервне копије на Google налогу."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Дешифровање није успело"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Лозинка коју сте унели је тачна, али, нажалост, подаци су оштећени. \n\nДа бисте наставили да користите таблет, треба да обавите ресетовање на фабричка подешавања. Током подешавања таблета после ресетовања моћи ћете да вратите све податке чија резервна копија постоји на Google налогу."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Лозинка коју сте унели је тачна, али, нажалост, подаци су оштећени. \n\nДа бисте наставили да користите телефон, треба да обавите ресетовање на фабричка подешавања. Током подешавања телефона после ресетовања моћи ћете да вратите све податке чија резервна копија постоји на Google налогу."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Пребаци методе уноса"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Избор закључав. екрана"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Закључавање рез. коп."</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жели да приступа контактима и историји позива."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жели да се упари помоћу Bluetooth-а. Када се повеже, имаће приступ контактима и историји позива."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Упарени уређаји"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Упарени уређаји могу да прегледају поруке са"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Доступни уређаји"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Није доступан ниједан уређај"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Повежи"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Увек дозвољавај скенирање"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Дозволите Google-овој услузи лоцирања и другим апликацијама да скенирају мреже, чак и када је Wi-Fi искључен"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Аутоматски управљај Wi‑Fi-јем"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Омогући да Wi‑Fi assistant управља Wi‑Fi везом"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Инсталирај сертификате"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Није у опсегу"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS је доступан"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS је доступан)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Обезбеђено помоћу <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", обезбеђено помоћу <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Унесите лозинку за мрежу"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ништа"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Због побољшања прецизности локације и у друге сврхе, <xliff:g id="APP_NAME">%1$s</xliff:g> жели да укључи скенирање мреже чак и када је Wi-Fi искључен.\n\nЖелите ли да дозволите ово за све апликације које желе да скенирају?"</string>
@@ -1068,7 +1059,7 @@
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB Интернет повезивање"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Преносна приступна тачка"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth Интернет веза"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Повезивање са Интернетом"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Повезивање са интернетом"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Повезивање и прист. тачка"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB повезивање"</string>
@@ -1148,7 +1139,7 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Учитавање…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Безбедносне информације"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Безбедносне информације"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="232523852222964470">"Немате везу за пренос података. Да бисте одмах погледали ове информације, идите на %s са било ког рачунара који је повезан са Интернетом."</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="232523852222964470">"Немате везу за пренос података. Да бисте одмах погледали ове информације, идите на %s са било ког рачунара који је повезан са интернетом."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Учитавање…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Одаберите лозинку"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Изаберите шаблон"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Није могуће oбрисати складиште акредитива."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Складиште акредитива је омогућено."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Треба да подесите PIN или лозинку за закључавање екрана да бисте могли да користите складиште акредитива."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Приступ коришћењу"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Апликације које имају приступ историји коришћења уређаја."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Апл. са прист. подацима о кор."</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Апликације које траже приступ"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Дозволите само поузданим апликацијама да приступе подацима о коришћењу. Апликације којима дате дозволу имаће приступ историји коришћења апликација, на пример, времену када је последњи пут апликација коришћена или укупном времену које сте утрошили користећи апликацију."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Желите да дозволите приступ?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"Ако дозволите приступ, ова апликација ће моћи да види опште информације о апликацијама, на пример, колико често их користите."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за хитне позиве"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Подешавање понашања када се успоставља хитни позив"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Резервна копија и ресетовање"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Омогући OpenGL трагове"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Користи NuPlayer (експ.)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Користи NuPlayer а не AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Онемогући USB преусм. звука"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Онемогући аутомат. преусмер. на USB аудио периферне уређаје"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Прикажи границе распореда"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Прикажи границе клипа, маргине итд."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Наметни смер распореда здесна налево"</string>
@@ -2219,8 +2215,8 @@
     <string name="user_delete_button" msgid="5131259553799403201">"Избриши"</string>
     <string name="user_guest" msgid="8475274842845401871">"Гост"</string>
     <string name="user_exit_guest_title" msgid="45738573948463472">"Изађи из режима госта"</string>
-    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Желите ли да изађете из сесије за госта?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Окончањем сесије за госта уклонићете локалне податке."</string>
+    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Желите ли да изађете из сесије госта?"</string>
+    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Окончањем сесије госта уклонићете локалне податке."</string>
     <string name="user_enable_calling" msgid="8310589470979488255">"Омогући телефонске позиве"</string>
     <string name="user_enable_calling_sms" msgid="794823380737672333">"Омогући телефонске позиве и SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Уклони корисника"</string>

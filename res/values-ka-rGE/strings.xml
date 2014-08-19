@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"გადამცემის გამორთვა"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"SMS-ის გამორთვა IMS-ით"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"SMS-ის გამორთვა IMS-ის საშუალებით"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"MO-ს ჩართვა PS/VoLTE-ზე"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"MO-ს გამორთვა PS/VoLTE-ზე"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"აუცილებელი IMS რეგისტრაციის ჩართვა"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"აუცილებელი IMS რეგისტრაციის გამორთვა"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ოპერატიული მეხსიერების დამპირების ჩართვა"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"პროფილის პარამეტრები"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"როცა სახელი მითითებული არ არის გამოიყენე ანგარიშის სახელი"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"მოწყობილობების ძიება"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"ამ მოწყობილობის გადარქმევა"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"გადარქმევა"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"გავწყვიტო კავშირი?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"ეს დაასრულებს თქვენს კავშირს :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"თქვენ არ გაქვთ Bluetooth-ის პარამეტრების შეცვლის ნებართვა."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> უკვე ჩანს ახლომდებარე მოწყობილობაზე."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"გაწყდეს კავშირი <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"მაუწყებლობა"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"გავაუქმოთ პროფილი?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"დაწყვილების თხოვნა"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"შეეხეთ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან დასაწყვილებლად."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"მიღებული ფაილების ნახვა"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"შეტყობინებებზე წვდომა"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth მოწყობილობის ამომრჩეველი"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-ის ჩართვის ნებართვის მოთხოვნა"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"აპს სურს ამ მოწყობილობაზე Bluetooth-ის ჩართვა."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Bluetooth მოწყობილობებს მოუწევს ნებართვის თხოვნა, სანამ ხელმისაწვდომ კონტაქტებზე წვდომას შეძლებდეს."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"აპს სურს, გახადოს თქვენი ტაბლეტი ხილვადი სხვა Bluetooth მოწყობილობებისთვის <xliff:g id="TIMEOUT">%1$d</xliff:g> წამით."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"აპს სურს, გახადოს თქვენი ტელეფონი ხილვადი სხვა Bluetooth მოწყობილობებისთვის <xliff:g id="TIMEOUT">%1$d</xliff:g> წამით."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"აპს სურს, გახადოს თქვენი ტაბლეტი შესამჩნევი სხვა Bluetooth მოწყობილობებისთვის. ამის შეცვლა შეგიძლიათ მოგვიანებით Bluetooth პარამეტრებში."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"დაშიფვრა ვერ შესრულდა"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"დაშიფვრის შეწყვეტის გამო თქვენ ტაბლეტზე შენახული მონაცემები ხელმისაწვდომი აღარ არის. \n\n ტაბლეტის გამოყენების გასაგრძელებლად, მოახდინეთ მონაცემების სრული გადაყენება. ამის შემდეგ გექნებათ თქვენ Google ანგარიშზე დამარქაფებული მონაცემების აღდგენის შესაძლებლობა."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"დაშიფვრის შეწყვეტის გამო თქვენ ტელეფონზე შენახული მონაცემები ხელმისაწვდომი აღარ არის. \n\n ტელეფონით სარგებლობის გასაგრძელებლად, აღადგინეთ ქარხნული მონაცემები. ამის შემდეგ გექნებათ ყველა იმ მონაცემის აღდგენის საშუალება, რომელთათვისაც Google ანგარიშში შექმენით სარეზერვო ასლები."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"გაშიფვრა ვერ განხორციელდა"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"თქვენ მიერ შეყვანილი პაროლი სწორია, თუმცა, სამწუხაროდ თქვენი მონაცემები დაზიანებულია. \n\nთქვენი ტაბლეტის გამოყენების გასაგრძელებლად მოგიწევთ ქარხნულ მონაცემებზე დაბრუნება. როდესაც გადაყენების შემდეგ ტაბლეტს ხელახლა გამართავთ, შეძლებთ აღადგინოთ ყველა ის მონაცემი, რაც თქვენს Google ანგარიშშია დამარქაფებული."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"თქვენ მიერ შეყვანილი პაროლი სწორია, თუმცა, სამწუხაროდ თქვენი მონაცემები დაზიანებულია. \n\nთქვენი ტელეფონის გამოყენების გასაგრძელებლად მოგიწევთ ქარხნულ მონაცემებზე დაბრუნება. როდესაც გადაყენების შემდეგ ტელეფონს ხელახლა გამართავთ, შეძლებთ აღადგინოთ ყველა ის მონაცემი, რაც თქვენს Google ანგარიშშია დამარქაფებული."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"შეყვანის მეთოდის ცვლილება"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"აირჩიეთ ეკრანის დამბლოკველი"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"დაბლოკვის დამატებითი ხერხი"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ს სურს თქვენს კონტაქტებსა და ზარების ჟურნალთან დაკავშირება."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ს Bluetooth-თან დაწყვილების სეერვისის საცდელად მივდივარ. დაკავშირების შემდეგ, მას შეეძლებოდა თქვენ დედა მილიტია/ს, it will have access to your contacts and call history."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"დაწყვილებული მოწყობილობები"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"დაწყვილ.მოწყობილ. შეუძლია შეტყობინ.ნახვა წყაროდან"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"ხელმისაწვდომი მოწყობილობები"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"მოწყობილობები მიუწვდომელია"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"დაკავშირება"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"სკანირების მუდამ დაშვება"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Google მდებარეობის განმსაზღვრელმა სერვისმა და სხვა აპებმა მოახდინონ  ქსელების სკანირება, მაშინაც კი, როცა Wi-Fi გამორთულია"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fi-ს ავტომატური მართვა"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"მიეცით ნება Wi‑Fi ასისტენტს, მართოს თქვენი Wi‑Fi კავშირი"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi ასისტენტი"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi ასისტენტი"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"სერთიფიკატების ინსტალაცია"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"არ არის დიაპაზონში"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"ხელმისაწვდომია WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ხელმისაწვდომია)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"დაცულია <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>-ით"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", დაცული <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>-ის მეშვეობით"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"შეიყვანეთ თქვენი ქსელის პაროლი"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"არცერთი"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"მდებარეობის ზუსტი განსაზღვრის და სხვა ფუნქციების გასაუმჯობესებლად <xliff:g id="APP_NAME">%1$s</xliff:g>-ს სურს, გააქტიურდეს ქსელების მოძიება, მაშინაც კი, როცა გამორთულია Wi-Fi.\n\nმიეცეს ამის უფლება ყველა აპს?"</string>
@@ -1837,8 +1828,16 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"ავტორიზაციის მონაცემების საცავის წაშლა შეუძლებელია."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"ავტორიზაციის მონაცემთა საცავი ჩართულია."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"ავტორიზაციის მონაცემების საცავის გამოყენებამდე, საჭიროა, რომ დააყენოთ ეკრანის დასაბლოკი PIN ან პაროლი."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"გამოყენებაზე წვდომა"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"აპები, რომლებსაც თქვენი მოწყობილობის გამოყენების ისტორიაზე წვდომა აქვს."</string>
+    <!-- no translation found for usage_access_title (332333405495457839) -->
+    <skip />
+    <!-- no translation found for usage_access_app_list_header (5216887502569700574) -->
+    <skip />
+    <!-- no translation found for usage_access_body (3489298559210251891) -->
+    <skip />
+    <!-- no translation found for allow_usage_access_title (2134237975190472249) -->
+    <skip />
+    <!-- no translation found for allow_usage_access_message (7858892531929539963) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"საგანგებო ზარის ტონალური სიგნალი"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ქცევის დაყენება, როცა განხორციელებულია გადაუდებელი ზარი"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"აღდგენა და ჩამოყრა"</string>
@@ -2002,6 +2001,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL კვალის ჩართვა"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer-ის გამოყ.(ექსპ.)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"AwesomePlayer-ის მაგივრად NuPlayer-ის გამოყენება"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB აუდიო მარშრ. გამორთვა"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB აუდიო პერიფერიების ავტ.მარშრუტიზაციის გამორთვა"</string>
     <string name="debug_layout" msgid="5981361776594526155">"ელემენტების საზღვრის ჩვენება"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"კლიპის საზღვრების, მინდვრების ჩვენება და ა.შ."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"მარჯვნიდან მარცხნივ განლაგების მიმართულების იძულება"</string>
@@ -2423,7 +2424,7 @@
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> შეძლებს გასვლის პირობები დაამატოს „არ შემაწუხოთ“ რეჟიმს."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"აპები იტვირთება..."</string>
     <string name="app_notification_block_title" msgid="172237877395761371">"დაბლოკვა"</string>
-    <string name="app_notification_block_summary" msgid="9049487483231233726">"ამ აპზე შეტყოვინებები არასდროს აჩვენო"</string>
+    <string name="app_notification_block_summary" msgid="9049487483231233726">"ამ აპზე შეტყობინებები არასდროს აჩვენო"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"პრიორიტეტი"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"შეტყობინებების სიის თავში ჩვენება, მაშინაც კი, როდესაც მოწყობილობა მხოლოდ პრიორიტეტული შეწყვეტების რეჟიმშია"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"სენსიტიური"</string>

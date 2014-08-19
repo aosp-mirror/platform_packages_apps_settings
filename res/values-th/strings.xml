@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"ปิดวิทยุ"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"เปิดการรับส่ง SMS ผ่าน IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"ปิดการรับส่ง SMS ผ่าน IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"เปิดใช้ MO บน PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"ปิดใช้ MO บน PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"จำเป็นต้องเปิดการลงทะเบียน IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"จำเป็นต้องปิดการลงทะเบียน IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"เปิดการดัมพ์หน่วยความจำระบบของ LTE"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"การตั้งค่าโปรไฟล์"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"ไม่ได้ตั้งชื่อ ใช้ชื่อบัญชี"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"สแกนหาอุปกรณ์"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"เปลี่ยนชื่ออุปกรณ์นี้"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"เปลี่ยนชื่อ"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"ตัดการเชื่อมต่อหรือไม่"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"การดำเนินการนี้จะจบการเชื่อมต่อของคุณกับ:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"คุณไม่มีสิทธิ์ในการเปลี่ยนการตั้งค่าบลูทูธ"</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"อุปกรณ์ที่อยู่ใกล้สามารถเห็น <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ได้แล้วในขณะนี้"</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"ยกเลิกการเชื่อมต่อ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ใช่ไหม"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"การแพร่สัญญาณ"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ปิดใช้งานโปรไฟล์หรือไม่"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"คำขอกำหนดค่าอุปกรณ์ให้ตรงกัน"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"แตะเพื่อจับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"แสดงไฟล์ที่ได้รับ"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"เข้าถึงข้อความ"</string>
     <string name="device_picker" msgid="8398232791303186677">"ตัวเลือกอุปกรณ์บลูทูธ"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"คำขออนุญาตใช้บลูทูธ"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"แอปต้องการเปิดบลูทูธสำหรับอุปกรณ์นี้"</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"อุปกรณ์บลูทูธต้องขออนุญาตก่อนเข้าถึงบัญชีที่มีให้ใช้งาน"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นแท็บเล็ตของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นโทรศัพท์ของคุณได้เป็นเวลา <xliff:g id="TIMEOUT">%1$d</xliff:g> วินาที"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"แอปพลิเคชันต้องการทำให้อุปกรณ์บลูทูธอื่นสามารถมองเห็นแท็บเล็ตของคุณได้ คุณสามารถเปลี่ยนการตั้งค่านี้ได้ในภายหลังในการตั้งค่าบลูทูธ"</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"การเข้ารหัสไม่สำเร็จ"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในแท็บเล็ตได้อีกต่อไป\n\nในการใช้งานแท็บเล็ตต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าแท็บเล็ตหลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"การเข้ารหัสถูกขัดจังหวะและไม่สามารถดำเนินการให้เสร็จสิ้น คุณจึงไม่สามารถเข้าถึงข้อมูลในโทรศัพท์ได้อีกต่อไป\n\nในการใช้งานโทรศัพท์ต่อ คุณต้องรีเซ็ตข้อมูลเป็นค่าเริ่มต้น เมื่อคุณตั้งค่าโทรศัพท์หลังจากรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลทั้งหมดที่มีการสำรองไว้ในบัญชี Google ของคุณได้"</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"การถอดรหัสล้มเหลว"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้แท็บเล็ตต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าแท็บเล็ตหลังรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"รหัสผ่านที่คุณป้อนถูกต้อง แต่ปรากฏว่ามีข้อมูลเสียหาย \n\nหากต้องการใช้โทรศัพท์ต่อ คุณต้องรีเซ็ตเครื่องเป็นค่าเริ่มต้นจากโรงงาน เมื่อคุณตั้งค่าโทรศัพท์หลังรีเซ็ตแล้ว คุณจะสามารถกู้คืนข้อมูลที่ได้สำรองไว้ในบัญชี Google ได้"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"สลับวิธีการป้อนข้อมูล"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"เลือกการล็อกหน้าจอ"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"เลือกการล็อกข้อมูลสำรอง"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ต้องการเข้าถึงที่อยู่ติดต่อและประวัติการโทร"</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ต้องการจับคู่ผ่านบลูทูธ เมื่อเชื่อมต่อแล้วจะสามารถเข้าถึงที่อยู่ติดต่อและประวัติการโทรของคุณได้"</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"อุปกรณ์ที่จับคู่"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"อุปกรณ์ที่จับคู่สามารถดูข้อความจาก"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"อุปกรณ์ที่พบ"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"ไม่พบอุปกรณ์"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"เชื่อมต่อ"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"อนุญาตให้สแกนได้เสมอ"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"ให้บริการตำแหน่งของ Google และแอปอื่นๆ สามารถสแกนหาเครือข่ายได้ แม้ว่า Wi-Fi จะปิดอยู่"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"จัดการ Wi-Fi โดยอัตโนมัติ"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"ให้ Wi‑Fi Assistant จัดการการเชื่อมต่อ Wi‑Fi ของคุณ"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ติดตั้งใบรับรอง"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"ไม่อยู่ในพื้นที่ให้บริการ"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ใช้งานได้"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ใช้งานได้)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"ป้องกันด้วย <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">" ป้องกันด้วย <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ป้อนรหัสผ่านเครือข่าย"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"ไม่มี"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"เพื่อปรับปรุงความแม่นยำของตำแหน่ง และเพื่อวัตถุประสงค์อื่น ๆ <xliff:g id="APP_NAME">%1$s</xliff:g> ต้องการเปิดการสแกนเครือข่าย แม้ในขณะที่ไม่มี WiFi \n \n อนุญาตให้ดำเนินการนี้สำหรับแอปทั้งหมดที่ต้องการสแกนหรือไม่"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"ไม่สามารถลบที่เก็บข้อมูลรับรอง"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"เปิดการใช้งานที่จัดเก็บข้อมูลรับรองไว้"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"คุณต้องตั้ง PIN หรือรหัสผ่านสำหรับการล็อกหน้าจอก่อนจึงจะสามารถใช้ที่เก็บข้อมูลรับรองได้"</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"การเข้าถึงการใช้งาน"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"แอปที่มีสิทธิ์เข้าถึงประวัติการใช้งานของอุปกรณ์ของคุณ"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"แอปที่มีสิทธิ์เข้าถึงการใช้งาน"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"แอปส่งคำขอการเข้าถึง"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"อนุญาตเฉพาะแอปที่คุณเชื่อถือให้สามารถเข้าถึงข้อมูลการใช้งาน แอปที่คุณอนุญาตจะสามารถเข้าถึงประวัติการใช้งานแอปของคุณ เช่น ครั้งล่าสุดที่ใช้แอป หรือเวลาทั้งหมดที่คุณใช้งานแอป"</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"อนุญาตให้เข้าถึงไหม"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"หากคุณอนุญาตให้เข้าถึง แอปนี้จะสามารถดูข้อมูลทั่วไปเกี่ยวกับแอปของคุณ เช่น ความถี่ในการใช้แอป"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"โทนเสียงฉุกเฉิน"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ตั้งค่าการทำงานเมื่อมีการโทรหาหมายเลขฉุกเฉิน"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"การสำรองข้อมูลและการรีเซ็ต"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"เปิดใช้ร่องรอยใน OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"ใช้ NuPlayer (ทดลอง)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"ใช้ NuPlayer แทน AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"ปิดการกำหนดเส้นทางเสียงทาง USB"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"ปิดการกำหนดเส้นทางโดยอัตโนมัติไปยังอุปกรณ์ต่อพ่วงเสียงทาง USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"แสดงขอบของการจัดวาง"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"แสดงหน้าปกคลิป ขอบ ฯลฯ"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"บังคับทิศทางการจัดวาง RTL"</string>

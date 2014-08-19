@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Rádió kikapcsolása"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Kapcsolja be az SMS-t az IMS-en keresztül"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Kapcsolja ki az SMS-t az IMS-en keresztül"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"MO bekapcsolása itt: PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"MO kikapcsolása itt: PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Ehhez be kell kapcsolni a csevegés regisztrációját"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Ehhez ki kell kapcsolni a csevegés regisztrációját"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Ite ramlista bekapcsolása"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Profilbeállítások"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Nem állított be nevet; a fióknév használata"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Eszközök keresése"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Eszköz átnevezése"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Átnevezés"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Leválasztja?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Ezzel befejezi a kapcsolatot a következővel:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Nincs engedélye a Bluetooth-beállítások módosítására."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"A(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> most már látható a közeli eszközök számára."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Leválasztja a következőt: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Sugárzás"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profil tiltása?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Párosítási kérelem"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Érintse meg a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközzel való párosításhoz."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Beérkező fájlok megjelenítése"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Üzenet-hozzáférés"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth-eszközválasztó"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth engedélykérés"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Egy alkalmazás szeretné BEKAPCSOLNI a Bluetooth-t a készüléken."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"A Bluetooth-eszközöknek az elérhető fiókok megnyitása előtt engedélyt kell kérniük."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Egy alkalmazás láthatóvá akarja tenni a táblagépet más Bluetooth-eszközök számára <xliff:g id="TIMEOUT">%1$d</xliff:g> másodpercig."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Egy alkalmazás láthatóvá akarja tenni a telefont más Bluetooth-eszközök számára <xliff:g id="TIMEOUT">%1$d</xliff:g> másodpercig."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Az egyik alkalmazás láthatóvá akarja tenni a táblagépet más eszközök számára. Ezt később módosíthatja a Bluetooth beállításokban."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"A titkosítás sikertelen"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"A titkosítás megszakadt, és nem lehet befejezni. Ezért a táblagépen található adatokhoz nem lehet hozzáférni. \n\nAhhoz, hogy újra használni tudja táblagépét, vissza kell állítani a gyári beállításokat. Amikor a visszaállítás után beállítja táblagépét, lehetősége lesz minden adat visszaállítására, amelyet a rendszer tárolt a Google Fiókjában."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"A titkosítás megszakadt, és nem lehet befejezni. Ezért a telefonon található adatokhoz nem lehet hozzáférni. \n\nAhhoz, hogy újra használni tudja telefonját, vissza kell állítani a gyári beállításokat. Amikor a visszaállítás után beállítja telefonját, lehetősége lesz minden adat visszaállítására, amelyet a rendszer eltárolt a Google Fiókjában."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Titkosítás feloldása sikertelen"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"A megadott jelszó helyes, adatai azonban sajnos sérültek. \n\nA táblagép használatának folytatásához végre kell hajtania a gyári adatok visszaállítását. A táblagép visszaállítást követő beállítása során lehetősége nyílik arra, hogy helyreállítsa mindazokat az adatokat, amelyekről másolat található Google-fiókjában."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"A megadott jelszó helyes, adatai azonban sajnos sérültek. \n\nA telefon használatának folytatásához végre kell hajtania a gyári adatok visszaállítását. A telefon visszaállítást követő beállítása során lehetősége nyílik arra, hogy helyreállítsa mindazokat az adatokat, amelyekről másolat található Google-fiókjában."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Beviteli mód váltása"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Képernyőzár választása"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Biztonsági zárolás"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"A(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> szeretne hozzáférni az Ön névjegyeihez és híváslistájához."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"A(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> párosítást kezdeményez Bluetooth-on. A kapcsolódás után hozzáférhet az Ön névjegyeihez és híváslistájához."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Párosított eszközök"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"A párosított eszközök üzeneteket láthatnak innen:"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Elérhető eszközök"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Nem áll rendelkezésre eszköz"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Kapcsolódás"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Keresés engedélyezése mindig"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"A Google helyszolgáltatása és más alkalmazások akkor is kereshetnek hálózatokat, ha a Wi-Fi ki van kapcsolva"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fi automatikus kezelése"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Engedélyezze, hogy a Wi-Fi-kezelő gondoskodjon a Wi-Fi-kapcsolatról"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi-kezelő"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi-kezelő"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Tanúsítványok telepítése"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Hatókörön kívül"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS elérhető"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS elérhető)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> védelemmel"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> védelemmel"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Adja meg hálózati jelszavát"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Nincs"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"A helymeghatározás pontosságának javítása és egyéb célok érdekében a(z) <xliff:g id="APP_NAME">%1$s</xliff:g> szeretné engedélyezni a hálózatkeresést még kikapcsolt Wi-Fi mellett is.\n\nEngedélyezi ezt az összes olyan alkalmazásnál, amely keresést akar végezni?"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Az azonosítótárolót nem lehet törölni."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"A hitelesítési adatok tárolója engedélyezve van."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Be kell állítania a zárolási képernyő PIN kódját vagy jelszavát, mielőtt használhatná az azonosítótárolót."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Hozzáférés a használathoz"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Olyan alkalmazások, amelyek hozzáférnek az eszköz használati előzményeihez."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Alkalmazások hozzáféréssel"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Hozzáférést kérő alkalmazások"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Csak a megbízható alkalmazásoknak adjon hozzáférést a használati adatokhoz. A hozzáféréssel rendelkező alkalmazások hozzáférnek majd az alkalmazáshasználati előzményekhez – például egy adott alkalmazás utolsó használata időpontjának vagy az alkalmazáshasználat teljes hosszának részleteihez."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Megadja a hozzáférést?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"Ha hozzáférést biztosít, akkor az alkalmazás hozzáfér a többi alkalmazás általános adataihoz, például a használati gyakorisághoz."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Segélyhívás hangja"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Viselkedés beállítása segélyhívás kezdeményezésekor"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Biztonsági mentés és visszaállítás"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL nyomon követése"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer (kísérleti)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"NuPlayer használata az AwesomePlayer helyett"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Hangátirányítás tiltása"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Hangátirányítás tiltása az USB-s hangeszközöknél"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Elrendezéshatár mutatása"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Kliphatárok, margók stb. megjelenítése."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Elrendezés jobbról balra"</string>

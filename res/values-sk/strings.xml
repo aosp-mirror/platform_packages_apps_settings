@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Vypnúť rádio"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Zapnúť správy SMS prostredníctvom IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Vypnúť správy SMS prostredníctvom IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Povoliť prenos MO cez PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Zakázať prenos MO cez PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Zapnúť požadovanie registrácie IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Vypnúť požadovanie registrácie IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Zapnúť výpis pamäte lte ram"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Nastavenia profilu"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Názov nie je nastavený, použije sa názov účtu"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Vyhľadať zariadenia"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Premenovať toto zariadenie"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Premenovať"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Odpojiť?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Táto akcia ukončí vaše pripojenie so zariadením:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Nemáte povolenie na zmenu nastavení Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"Zar. <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je teraz viditeľné pre zariadenia v okolí."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Odpojiť zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Vysielanie"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Zakázať profil?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Žiadosť na párovanie"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> spárujete dotykom."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Zobraziť prijaté súbory"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Správa prístupu"</string>
     <string name="device_picker" msgid="8398232791303186677">"Výber zariadenia Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Žiadosť o povolenie zariadenia Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Aplikácia chce ZAPNÚŤ Bluetooth pre toto zariadenie."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Zariadenia Bluetooth musia požiadať o povolenie predtým, ako začnú pristupovať do účtov, ktoré sú k dispozícii."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Aplikácia chce na <xliff:g id="TIMEOUT">%1$d</xliff:g> s prepnúť váš tablet do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Aplikácia chce na <xliff:g id="TIMEOUT">%1$d</xliff:g> s prepnúť váš telefón do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Aplikácia chce váš tablet prepnúť do režimu, v ktorom bude viditeľný pre ostatné zariadenia Bluetooth. Toto nastavenie môžete neskôr zmeniť v nastaveniach rozhrania Bluetooth."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Šifrovanie bolo neúspešné"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Šifrovanie bolo prerušené a nedá sa dokončiť. Výsledkom je, že údaje vo vašom tablete už nie sú k dispozícii. \n\nAk chcete ďalej používať svoj tablet, musíte obnoviť jeho továrenské nastavenia. Po ich obnovení budete mať počas nastavovania tabletu príležitosť obnoviť všetky údaje, ktoré sa zálohovali do vášho účtu Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Šifrovanie bolo prerušené a nedá sa dokončiť. Výsledkom je, že údaje vo vašom telefóne už nie sú k dispozícii. \n\nAk chcete ďalej používať svoj telefón, musíte obnoviť jeho továrenské nastavenia. Po ich obnovení budete mať počas nastavovania telefónu príležitosť obnoviť všetky údaje, ktoré boli zálohované vo vašom účte Google."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Dešifrovanie sa nepodarilo"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Zadané heslo je správne, avšak údaje sú poškodené. \n\nAk chcete ďalej používať svoj tablet, musíte obnoviť jeho továrenské nastavenia. Po ich obnovení budete mať počas nastavovania tabletu príležitosť obnoviť všetky údaje, ktoré boli zálohované vo vašom účte Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Zadané heslo je správne, avšak údaje sú poškodené. \n\nAk chcete ďalej používať svoj telefón, musíte obnoviť jeho továrenské nastavenia. Po ich obnovení budete mať počas nastavovania telefónu príležitosť obnoviť všetky údaje, ktoré boli zálohované vo vašom účte Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Prepnúť metódu vstupu"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Vybrať zámku obrazovky"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Vybrať zámku zálohy"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> chce pristúpiť k vašim kontaktom a histórii hovorov."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> žiada o spárovanie s rozhraním Bluetooth. Po pripojení bude mať prístup ku kontaktom a histórii hovorov."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Párované zariadenia"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Spárované zariadenie si môžu zobrazovať správy od"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dostupné zariadenia"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Nie sú k dispozícii žiadne zariadenia"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Pripojiť"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Vyhľadávanie vždy zapnuté"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Povoliť službe určovania polohy Google a ostatným aplikáciám vyhľadávať siete aj v prípade, že je sieť Wi-Fi vypnutá"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Automaticky spravovať pripojenie Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Umožnite asistentovi Wi-Fi spravovať vaše pripojenie Wi‑Fi"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Asistent pripojenia Wi‑Fi"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Inštalácia certifikátov"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Mimo dosah"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS je k dispozícii"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS je k dispozícii)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Zabezpečenie: <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", zabezpečenie: <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Zadajte heslo siete"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Žiadne"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Aplikácia <xliff:g id="APP_NAME">%1$s</xliff:g> chce zapnúť vyhľadávanie sietí (z dôvodu dosiahnutia vyššej presnosti určovania polohy aj z iných dôvodov) a hľadať siete aj v prípade, že je vypnutý modul Wi-Fi.\n\nChcete túto možnosť povoliť všetkým aplikáciám, ktoré chcú vyhľadávať siete?"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Úlož. poverení nemožno vymazať"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Úložisko poverení je aktivované."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Pred použitím úložiska poverení musíte nastaviť kód PIN alebo heslo zámky obrazovky."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Prístup k využitiu"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Aplikácie, ktoré majú prístup k histórii využitia vášho zariadenia"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Aplik. s príst. k používaniu"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Aplikácie požadujúce prístup"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Prístup k údajom o používaní povoľte iba aplikáciám, ktorým dôverujete. Aplikácie, ktorým to povolíte, budú môcť pristupovať k histórii používania aplikácií, ako je napríklad čas posledného použitia alebo celkový čas strávený používaním aplikácie."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Povoliť prístup?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"Ak jej povolíte prístup, táto aplikácia si môže zobraziť všeobecné informácie o vašich aplikáciách, ako je napríklad frekvencia ich používania."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tiesňové vyzváňanie"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Nastaviť správanie pri tiesňovom volaní"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Zálohovať a obnoviť"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Trasovanie OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Použiť NuPlayer (experiment.)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Namiesto prehrávača AwesomePlayer použiť NuPlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Vyp. smer. zvuku do USB"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Vyp. aut. smer. zvuku do zvukových periférií USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Zobraziť ohraničenia"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Zobraziť v klipe ohraničenie, okraje a pod."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Rozloženia sprava doľava"</string>

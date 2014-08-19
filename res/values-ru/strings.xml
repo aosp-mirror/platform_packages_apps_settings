@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Отключить радио"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Включить SMS через IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Отключить SMS через IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Включить MO через PS и VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Отключить MO через PS и VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Обязательная регистрация IMS включена"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Обязательная регистрация IMS отключена"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Очищать ОЗУ"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Настройки профиля"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Без настройки имени, использовать имя аккаунта"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Поиск устройств"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Переименовать устройство"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Переименовать"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Отключиться?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Произойдет разъединение с устройством &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"У вас нет разрешения на смену настроек Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> теперь видно на расположенных рядом устройствах."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Отключить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Передача данных"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Отключить профиль?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Запрос на сопряжение"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Нажмите для подключения к устройству \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Полученные файлы"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Доступ к сообщениям"</string>
     <string name="device_picker" msgid="8398232791303186677">"Выбор устройства"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Запрос разрешения на включение Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Приложению требуется включить Bluetooth на устройстве."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Для доступа к существующим аккаунтам устройствам Bluetooth необходимо запросить разрешение."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Одному из приложений требуется, чтобы ваш планшетный ПК был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Одному из приложений требуется, чтобы ваш телефон был доступен для поиска через Bluetooth на других устройствах в течение <xliff:g id="TIMEOUT">%1$d</xliff:g> сек."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Одному из приложений требуется сделать ваш планшетный ПК доступным для поиска через Bluetooth на других устройствах. Позже эти настройки можно будет изменить."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Сбой шифрования"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Данные на вашем планшетном ПК больше недоступны из-за того, что шифрование было прервано. \n\nЧтобы дальше использовать устройство, нужно сбросить настройки. После этого вы сможете восстановить все данные, для которых в аккаунте Google были созданы резервные копии."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Данные на вашем телефоне больше недоступны из-за того, что шифрование было прервано. \n\nЧтобы дальше использовать устройство, нужно сбросить настройки. После этого вы сможете восстановить все данные, для которых в аккаунте Google были созданы резервные копии."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Не удалось расшифровать"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Вы ввели правильный пароль, но данные на планшетном ПК повреждены.\n\nЧтобы продолжить работу, необходимо выполнить возврат к заводским настройкам. После этого вы сможете восстановить данные, резервная копия которых хранится в вашем аккаунте Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Вы ввели правильный пароль, но данные на телефоне повреждены.\n\nЧтобы продолжить работу, необходимо выполнить возврат к заводским настройкам. После этого вы сможете восстановить данные, резервная копия которых хранится в вашем аккаунте Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Сменить способ ввода"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Блокировка экрана"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Доп. способ блокировки"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"Устройство <xliff:g id="DEVICE_NAME">%1$s</xliff:g> запрашивает доступ к контактам и журналу звонков."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> пытается подключиться через Bluetooth. Устройство получит доступ к контактам и журналу звонков."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Подключенные устройства"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Подключенным устройствам видны сообщения аккаунтов"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Доступные устройства"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Нет доступных устройств"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Подключить"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Всегда искать сети"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Разрешить службе геопозиционирования Google и другим приложениям искать сети, даже когда модуль Wi‑Fi отключен"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Включить автоматическое управление Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Разрешить Ассистенту Wi‑Fi управлять подключениями к сетям Wi‑Fi"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Ассистент Wi‑Fi"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Ассистент Wi‑Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Установка сертификатов"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Недоступна"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Поддерживает WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (доступно WPS)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Защита <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", защита <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Введите пароль для подключения к сети."</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Нет"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Чтобы определение местоположения и некоторые другие функции работали лучше, приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" необходимо выполнять поиск сетей, даже если модуль Wi-Fi отключен.\n\nРазрешить?"</string>
@@ -786,8 +777,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Мелодия"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Уведомление"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Использовать этот уровень громкости также для уведомлений"</string>
-    <!-- no translation found for home_work_profile_not_supported (1357721012342357037) -->
-    <skip />
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"Рабочие профили не поддерживаются"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"Звук уведомлений по умолчанию"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"Мультимедиа"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Настроить громкость музыки и видео"</string>
@@ -1838,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Не удалось очистить хранилище."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилище регистрационных данных включено."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Перед использованием хранилища учетных данных необходимо задать PIN-код или пароль блокировки экрана."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Доступ к истории использования"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Приложения, у которых есть доступ к истории использования устройства"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Приложения, получившие доступ"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Приложения, запросившие доступ"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Предоставляйте доступ к истории использования только тем приложениям, которым доверяете. Они получат доступ к таким данным, как время последнего использования приложений и общая продолжительность их работы."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Разрешить доступ?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"Если вы предоставите разрешение, это приложение получит доступ к общей информации о ваших приложениях (например, о частоте их использования)."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тональный сигнал экстренного вызова"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Настроить режим работы при экстренном вызове"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Восстановление и сброс"</string>
@@ -2003,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Вкл. трассировку OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Использовать NuPlayer (эксперимент)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Использовать NuPlayer вместо AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Откл. передачи аудио (USB)"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Откл. автом. маршрутизацию на внеш. USB-устройства"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Показывать границы элементов"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Показывать границы клипа, поля и т. д."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Написание справа налево"</string>

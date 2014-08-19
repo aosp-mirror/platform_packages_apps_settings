@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"रेडिओ बंद करा"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"IMS वरील SMS चालू करा"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS वरील SMS बंद करा"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"PS/VoLTE वरून MO सक्षम करा"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"PS/VoLTE वरून MO अक्षम करा"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS नोंदणी आवश्यक आहे चालू करा"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"आवश्यक IMS नोंदणी बंद करा"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ram डंप चालू करा"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"प्रोफाईल सेटिंग्ज"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"खाते नाव वापरून, कोणतेही नाव सेट केले नाही"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"डिव्हाइसेससाठी स्कॅन करा"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"हा डिव्हाइस पुनर्नामित करा"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"पुनर्नामित करा"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"‍डिस्कनेक्ट करायचे?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"हे यासह आपले कनेक्शन समाप्त करेल:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"आपल्‍याकडे Bluetooth सेटिंग्‍ज बदलण्‍याची परवानगी नाही."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> आता जवळपासच्या डिव्‍हाइसेसना दृश्यमान आहे."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> डिस्कनेक्ट करायचे?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"प्रसारण"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"प्रोफाईल अक्षम करायचे?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"जोडणी विनंती"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सह जोडण्यासाठी स्पर्श करा."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"प्राप्त झालेल्या फायली दर्शवा"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"संदेश प्रवेश"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth डिव्हाइस निवडकर्ता"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth परवानगी विनंती"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"या डिव्हाइसकरिता अॅप Bluetooth चालू करू इच्छित आहे."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Bluetooth डिव्‍हइससेनी उपलब्‍ध खात्‍यांध्‍ये प्रवेश करण्‍यापूर्वी परवानगी घेणे आवश्‍यक आहे."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"एका अॅपला आपला टॅब्लेट इतर Bluetooth डिव्हाइसेससाठी <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंदांकरिता दृश्यमान बनविण्याची आवश्यकता आहे."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"एका अॅपला आपला फोन इतर Bluetooth डिव्हाइसेससाठी <xliff:g id="TIMEOUT">%1$d</xliff:g> सेकंदांकरिता दृश्यमान बनविण्याची आवश्यकता आहे."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"एका अॅपला इतर Bluetooth डिव्हाइसेससाठी आपला टॅब्लेट दृश्यमान बनविण्याची आवश्यकता आहे. आपण नंतर Bluetooth सेटिंग्जमध्ये हे बदलू शकता."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"कूटबद्धीकरण अयशस्वी"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"कूटबद्धीकरणात व्यत्यय आला आणि हे पूर्ण होऊ शकत नाही. परिणामस्वरूप, आपल्या टॅब्लेटवरील डेटा यापुढे प्रवेशयोग्य राहणार नाही. \n\n आपला टॅब्लेट वापरून पुन्हा सुरु करण्यासाठी, आपल्याला फॅक्टरी रीसेट करण्याची आवश्यकता आहे. रीसेट केल्यानंतर आपण आपला टॅब्लेट सेट करता, तेव्हा आपल्याकडे आपल्या Google खात्यावर बॅकअप घेतलेला कोणताही डेटा पुनर्संचयित करण्याची संधी असेल."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"कूटबद्धीकरणात व्यत्यय आला आणि पूर्ण होऊ शकत नाही. परिणामस्वरूप, आपल्या फोनवरील डेटा यापुढे प्रवेशयोग्य नाही.\n\nआपला फोन वापरणे पुन्हा सुरु करण्यासाठी, आपल्याला फॅक्टरी रीसेट करण्याची आवश्यकता आहे. रीसेट केल्यानंतर जेव्हा आपण आपला फोन सेट करता, तेव्हा आपल्याकडे आपल्या Google खात्यावर बॅकअप घेतलेला कोणताही डेटा पुनर्संचयित करण्याची संधी असेल."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"विकूटन अयशस्वी"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"आपण प्रविष्ट केलेला संकेतशब्द चुकीचा आहे, परंतु दुर्दैवाने डेटा दूषित आहे. \n\nआपला टॅब्लेट वापरणे पुनः सुरु करण्यासाठी, आपल्याला फॅक्टरी रीसेट करणे आवश्यक आहे. रीसेट केल्यानंतर आपण आपला टॅब्लेट सेट करता, तेव्हा आपल्याला आपल्या Google खात्यावर बॅक अप घेतलेला कोणताही डेटा पुनर्संचयित करण्याची संधी असेल."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"आपण प्रविष्ट केलेला संकेतशब्द बरोबर आहे, परंतु दुर्दैवाने आपला डेटा दूषित आहे. \n\nआपला फोन वापरणे पुनः सुरु करण्यासाठी, आपल्याला फॅक्टरी रीसेट करणे आवश्यक आहे. रीसेट केल्यानंतर आपण आपला फोन सेट करता, तेव्हा आपल्याला आपल्या Google खात्यावर बॅक अप घेतलेला कोणताही डेटा पुनर्संचयित करण्याची संधी असेल."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"इनपुट पद्धत स्विच करा"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"स्क्रीन लॉक निवडा"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"बॅकअप लॉक निवडा"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> आपल्या संपर्कांवर आणि कॉल इतिहासावर प्रवेश करू इच्छित आहे."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> Bluetooth सह जोडू इच्‍छिते. कनेक्‍ट केले असताना, त्यास आपल्‍या संपर्कांवर आणि कॉल इतिहासावर प्रवेश असेल."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"जोडलेली डिव्हाइसेस"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"जोडणी केलेले डिव्‍हाइसेस यामधील संदेश पाहू शकतात"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"उपलब्ध डिव्हाइसेस"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"कोणतेही डिव्हाइसेस उपलब्ध नाहीत"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"कनेक्ट करा"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"स्कॅनिंगला नेहमी अनुमती द्या"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Google ची स्थान सेवा आणि इतर अॅप्सना नेटवर्कसाठी स्कॅन करु द्या, Wi-Fi बंद असताना देखील"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi-Fi स्वयंचलितपणे व्यवस्थापित करा"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Wi‑Fi सहाय्यकास आपले Wi‑Fi कनेक्‍शन व्‍यवस्‍थापित करू द्या"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fi सहाय्यक"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi-Fi सहाय्यक"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"प्रमाणपत्रे स्थापित करा"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"परिक्षेत्रामध्ये नाही"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS उपलब्ध"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS उपलब्ध)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> सह सुरक्षित"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g> सह सुरक्षित"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"आपला नेटवर्क संकेतशब्द प्रविष्ट करा"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"काहीही नाही"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"स्थान अचूकता सुधारण्यासाठी आणि इतर हेतूंसाठी, <xliff:g id="APP_NAME">%1$s</xliff:g> ला नेटवर्क स्कॅनिंग चालू करण्याची आवश्यकता आहे, Wi-Fi बंद असताना देखील.\n\nस्कॅन करू इच्छित सर्व अॅप्सना अनुमती द्यायची?"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"क्रेडेन्शियल संचयन मिटवता येऊ शकले नाही."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"क्रेडेन्शियल संचयन सक्षम केले आहे."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"आपण क्रेडेन्शियल संचयन वापरु शकण्यापूर्वी आपल्याला एक लॉक स्क्रीन पिन ‍किंवा संकेतशब्द सेट करण्याची आवश्यकता आहे."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"वापर प्रवेश"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"आपल्‍या डिव्‍हाइसेसच्या वापर इतिहासावर प्रवेश असलेले अ‍ॅप्‍स."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"वापर प्रवेशासह अ‍ॅप्स"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"प्रवेशाची विनंती करणारे अ‍ॅप्स"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"केवळ आपला विश्वास असलेल्या अ‍ॅप्सना वापर डेटावरील प्रवेशाची अनुमती द्या. आपण अनुमती देता त्या अ‍ॅप्सना आपल्या अ‍ॅप वापर इतिहासावर प्रवेश असेल, जसे की अ‍ॅप वापरल्याची अंतिम वेळ किंवा अ‍ॅप वापरण्यात आपण घालविलेला एकूण वेळ."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"प्रवेशाची अनुमती द्यायची?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"आपण प्रवेशाची अनुमती दिल्यास, हा अ‍ॅप आपल्या अ‍ॅप्स विषयी सामान्य माहिती पाहू शकतो, जसे की आपण किती वारंवार ते वापरता."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"आणीबाणी टोन"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"आणीबाणी कॉल केला जातो तेव्हा वर्तन सेट करा"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"बॅकअप घ्या आणि रीसेट करा"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL ट्रेस सक्षम करा"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer वापरा (प्रायोगिक)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"AwesomePlayer च्याऐवजी NuPlayer वापरा"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB ऑडिओ राउटिंग अक्षम करा"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB ऑडिओ परिधीय वरील स्वयंचलित राउटिंग अक्षम करा"</string>
     <string name="debug_layout" msgid="5981361776594526155">"लेआउट सीमा दर्शवा"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"क्लिप सीमा, समास इत्यादी दर्शवा."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"RTL लेआउट दिशानिर्देशाची सक्ती करा"</string>
@@ -2425,7 +2421,7 @@
     <string name="app_notification_block_title" msgid="172237877395761371">"अवरोधित करा"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"या अॅपकडील सूचना कधीही दर्शवू नका"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"प्राधान्य"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"सूचीच्या शीर्षस्थानी सूचना दर्शवा आणि जेव्हा डिव्हाइस प्राथमिक व्यत्ययांवर सेट केलेले असताना त्यांना येऊ द्या"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"सूचना सूचीच्या शीर्षस्थानी दर्शवा आणि डिव्हाइस प्राथमिक व्यत्ययांवर सेट केलेले असतानाच त्यांना येऊ द्या"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"संवेदनशील"</string>
     <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"डिव्हाइस लॉक केलेले असताना, या अॅपच्या सूचनांमधील कोणतीही संवेदशनशील सामग्री लपवा"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"अवरोधित"</string>
