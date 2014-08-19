@@ -23,7 +23,7 @@ import com.android.internal.annotations.Immutable;
 import com.android.internal.util.Preconditions;
 
 /**
- * Specifies a setting that is being injected into Settings > Location > Location services.
+ * Specifies a setting that is being injected into Settings &gt; Location &gt; Location services.
  *
  * @see android.location.SettingInjectorService
  */
