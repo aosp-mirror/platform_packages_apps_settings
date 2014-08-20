@@ -230,10 +230,19 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     }
 
     private void startScanning() {
-        if (isUiRestricted()) return;
+        if (isUiRestricted()) {
+            return;
+        }
+
         if (!mAvailableDevicesCategoryIsPresent) {
             getPreferenceScreen().addPreference(mAvailableDevicesCategory);
         }
+
+        if (mAvailableDevicesCategory != null) {
+            setDeviceListGroup(mAvailableDevicesCategory);
+            removeAllDevices();
+        }
+
         mLocalManager.getCachedDeviceManager().clearCachedDevices();
         mAvailableDevicesCategory.removeAll();
         mLocalAdapter.startScanning(true);
