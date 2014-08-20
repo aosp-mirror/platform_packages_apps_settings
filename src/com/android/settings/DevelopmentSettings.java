@@ -110,6 +110,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
+    private static final String DEBUG_VIEW_ATTRIBUTES =  "debug_view_attributes";
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String POINTER_LOCATION_KEY = "pointer_location";
     private static final String SHOW_TOUCHES_KEY = "show_touches";
@@ -187,6 +188,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mBtHciSnoopLog;
     private CheckBoxPreference mEnableOemUnlock;
     private CheckBoxPreference mAllowMockLocation;
+    private CheckBoxPreference mDebugViewAttributes;
 
     private PreferenceScreen mPassword;
     private String mDebugApp;
@@ -295,6 +297,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mEnableOemUnlock = null;
         }
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
+        mDebugViewAttributes = findAndInitCheckboxPref(DEBUG_VIEW_ATTRIBUTES);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
 
@@ -513,6 +516,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
+        updateCheckBox(mDebugViewAttributes, Settings.Global.getInt(cr,
+                Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0) != 0);
         updateHdcpValues();
         updatePasswordSummary();
         updateDebuggerOptions();
@@ -1019,7 +1024,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void writeUSBAudioOptions() {
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED,
-                    mUSBAudio.isChecked() ? 1 : 0);
+                mUSBAudio.isChecked() ? 1 : 0);
     }
 
     private void updateForceRtlOptions() {
@@ -1380,6 +1385,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
+        } else if (preference == mDebugViewAttributes) {
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.DEBUG_VIEW_ATTRIBUTES,
+                    mDebugViewAttributes.isChecked() ? 1 : 0);
         } else if (preference == mDebugAppPref) {
             startActivityForResult(new Intent(getActivity(), AppPicker.class), RESULT_DEBUG_APP);
         } else if (preference == mWaitForDebugger) {
