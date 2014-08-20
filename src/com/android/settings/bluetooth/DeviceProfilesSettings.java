@@ -135,8 +135,10 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         mCachedDevice = cachedDevice;
 
         mCachedDevice.registerCallback(this);
-        addPreferencesForProfiles();
-        refresh();
+        if (isResumed()) {
+            addPreferencesForProfiles();
+            refresh();
+        }
     }
 
     private void addPreferencesForProfiles() {
