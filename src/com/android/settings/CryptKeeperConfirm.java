@@ -25,12 +25,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.os.storage.IMountService;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.android.internal.widget.LockPatternUtils;
 
 public class CryptKeeperConfirm extends Fragment {
 
@@ -88,6 +91,27 @@ public class CryptKeeperConfirm extends Fragment {
         public void onClick(View v) {
             if (Utils.isMonkeyRunning()) {
                 return;
+            }
+
+            /* WARNING - nasty hack!
+               Settings for the lock screen are not available to the crypto
+               screen (CryptKeeper) at boot. We duplicate the ones that
+               CryptKeeper needs to the crypto key/value store when they are
+               modified (see LockPatternUtils).
+               However, prior to encryption, the crypto key/value store is not
+               persisted across reboots, thus modified settings are lost to
+               CryptKeeper.
+               In order to make sure CryptKeeper had the correct settings after
+               first encrypting, we thus need to rewrite them, which ensures the
+               crypto key/value store is up to date. On encryption, this store
+               is then persisted, and the settings will be there on future
+               reboots.
+             */
+            LockPatternUtils utils = new LockPatternUtils(getActivity());
+            utils.setVisiblePatternEnabled(utils.isVisiblePatternEnabled());
+            if (utils.isOwnerInfoEnabled()) {
+                utils.setOwnerInfo(utils.getOwnerInfo(UserHandle.USER_OWNER),
+                                   UserHandle.USER_OWNER);
             }
 
             Intent intent = new Intent(getActivity(), Blank.class);
