@@ -16,9 +16,8 @@
 
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/summary"
+    android:id="@android:id/summary"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="?android:attr/textColorSecondary"
+    android:textAppearance="@android:style/TextAppearance.Material.Body1"
     android:padding="16dip" />
