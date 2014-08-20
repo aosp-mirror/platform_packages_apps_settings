@@ -55,10 +55,10 @@ public abstract class ToggleFeaturePreferenceFragment
                 getActivity());
         setPreferenceScreen(preferenceScreen);
         mSummaryPreference = new Preference(getActivity()) {
-                @Override
+            @Override
             protected void onBindView(View view) {
                 super.onBindView(view);
-                TextView summaryView = (TextView) view.findViewById(R.id.summary);
+                final TextView summaryView = (TextView) view.findViewById(android.R.id.summary);
                 summaryView.setText(getSummary());
                 sendAccessibilityEvent(summaryView);
             }
