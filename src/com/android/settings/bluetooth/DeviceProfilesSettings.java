@@ -58,8 +58,6 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     private static final String KEY_UNPAIR = "unpair";
     private static final String KEY_PBAP_SERVER = "PBAP Server";
 
-    public static final String EXTRA_DEVICE = "device";
-
     private CachedBluetoothDevice mCachedDevice;
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
@@ -102,7 +100,6 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(EXTRA_DEVICE, mCachedDevice.getDevice());
     }
 
     @Override
