@@ -318,6 +318,6 @@ public final class BluetoothDevicePreference extends Preference implements
                 return R.drawable.ic_bt_headset_hfp;
             }
         }
-        return 0;
+        return R.drawable.ic_settings_bluetooth2;
     }
 }
