@@ -86,6 +86,7 @@
         <SwitchPreference
             android:key="toggle_inversion_preference"
             android:title="@string/accessibility_display_inversion_preference_title"
+            android:summary="@string/accessibility_display_inversion_preference_subtitle"
             android:persistent="false" />
         <PreferenceScreen
             android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
