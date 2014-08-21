@@ -80,7 +80,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         InputMethodPreference.OnSavePreferenceListener {
     private static final String KEY_SPELL_CHECKERS = "spellcheckers_settings";
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
-    private static final String KEY_CHOOSE_INPUT_METHODS = "choose_input_methods";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
@@ -154,14 +153,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
             mKeyboardSettingsCategory.removeAll();
             getPreferenceScreen().addPreference(mKeyboardSettingsCategory);
-        } else {
-            final Preference pref = findPreference(KEY_CHOOSE_INPUT_METHODS);
-            final Intent intent = new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS);
-            intent.setClass(activity, SubSettings.class);
-            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, getClass().getName());
-            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
-                    R.string.choose_input_methods);
-            pref.setIntent(intent);
         }
 
         // Build hard keyboard and game controller preference categories.
