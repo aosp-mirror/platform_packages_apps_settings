@@ -27,8 +27,6 @@
         android:id="@+id/text_layout"
         android:layout_width="0dip"
         android:layout_height="match_parent"
-        android:paddingStart="8dip"
-        android:paddingEnd="8dip"
         android:gravity="center_vertical"
         android:layout_weight="1"
         android:focusable="true"
@@ -40,7 +38,7 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+android:id/summary"
@@ -48,13 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@android:id/title"
             android:layout_alignStart="@android:id/title"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:maxLines="2" />
 
     </RelativeLayout>
 
     <RadioButton
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/apn_radiobutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
