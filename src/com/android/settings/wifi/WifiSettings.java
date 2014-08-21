@@ -41,10 +41,10 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -101,12 +101,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
     private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
 
-    private static final String KEY_ASSISTANT_DISMISS_TIME = "wifi_assistant_dismiss_time";
-    private static final String KEY_ASSISTANT_START_TIME = "wifi_assistant_start_time";
-
-    private static final long MILI_SECONDS_30_DAYS = 30L * 24L * 60L * 60L * 1000L;
-    private static final long MILI_SECONDS_90_DAYS = MILI_SECONDS_30_DAYS * 3L;
-    private static final long MILI_SECONDS_180_DAYS = MILI_SECONDS_90_DAYS * 2L;
+    private static final String KEY_ASSISTANT_DISMISS_PLATFORM = "wifi_assistant_dismiss_platform";
 
     public static final int WIFI_DIALOG_ID = 1;
     /* package */ static final int WPS_PBC_DIALOG_ID = 2;
@@ -336,7 +331,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         if (requestCode == REQUEST_ENABLE_WIFI_ASSISTANT) {
             if (resultCode == Activity.RESULT_OK) {
-                setWifiAssistantTimeout();
+                disableWifiAssistantCardUntilPlatformUpgrade();
                 getListView().removeHeaderView(mWifiAssistantCard);
                 mWifiAssistantApp = null;
             }
@@ -720,10 +715,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-        long lastTimeoutEndTime = sharedPreferences.getLong(KEY_ASSISTANT_START_TIME, 0);
-        long dismissTime = sharedPreferences.getLong(KEY_ASSISTANT_DISMISS_TIME, 0);
+        int lastDismissPlatform = sharedPreferences.getInt(KEY_ASSISTANT_DISMISS_PLATFORM, 0);
 
-        if ((System.currentTimeMillis() - lastTimeoutEndTime) <= dismissTime) {
+        if (Build.VERSION.SDK_INT <= lastDismissPlatform) {
+            // User has dismissed the Wi-Fi assistant card on this SDK release. Suppress the card
+            // until the next major platform upgrade.
             return;
         }
 
@@ -761,7 +757,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 noThanks.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        setWifiAssistantTimeout();
+                        disableWifiAssistantCardUntilPlatformUpgrade();
                         getListView().removeHeaderView(mWifiAssistantCard);
                         mWifiAssistantApp = null;
                     }
@@ -770,23 +766,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void setWifiAssistantTimeout() {
+    private void disableWifiAssistantCardUntilPlatformUpgrade() {
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        long dismissTime = sharedPreferences.getLong(KEY_ASSISTANT_DISMISS_TIME, 0);
-
-        if (dismissTime == 0) {
-            dismissTime = MILI_SECONDS_30_DAYS;
-        } else if (dismissTime == MILI_SECONDS_30_DAYS) {
-            dismissTime = MILI_SECONDS_90_DAYS;
-        } else if (dismissTime == MILI_SECONDS_90_DAYS) {
-            dismissTime = MILI_SECONDS_180_DAYS;
-        } else if (dismissTime == MILI_SECONDS_180_DAYS) {
-            dismissTime = java.lang.Long.MAX_VALUE;
-        }
-
-        editor.putLong(KEY_ASSISTANT_DISMISS_TIME, dismissTime);
-        editor.putLong(KEY_ASSISTANT_START_TIME, System.currentTimeMillis());
+        editor.putLong(KEY_ASSISTANT_DISMISS_PLATFORM, Build.VERSION.SDK_INT);
         editor.apply();
     }
 
