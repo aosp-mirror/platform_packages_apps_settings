@@ -45,8 +45,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +58,6 @@ import com.android.internal.net.VpnProfile;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
@@ -349,15 +350,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         if (preference instanceof VpnPreference) {
             VpnProfile profile = ((VpnPreference) preference).getProfile();
-            if (mInfo != null && profile.key.equals(mInfo.key) &&
-                    mInfo.state == LegacyVpnInfo.STATE_CONNECTED) {
-                try {
-                    mInfo.intent.send();
-                    return true;
-                } catch (Exception e) {
-                    // ignore
-                }
-            }
             mDialog = new VpnDialog(getActivity(), this, profile, false);
         } else {
             // Generate a new key. Here we just use the current time.
