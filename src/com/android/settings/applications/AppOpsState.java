@@ -190,13 +190,15 @@ public class AppOpsState {
                     AppOpsManager.OP_WRITE_SETTINGS,
                     AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
                     AppOpsManager.OP_WAKE_LOCK,
-                    AppOpsManager.OP_PROJECT_MEDIA },
+                    AppOpsManager.OP_PROJECT_MEDIA,
+                    AppOpsManager.OP_ACTIVATE_VPN, },
             new boolean[] { false,
                     true,
                     true,
                     true,
                     true,
                     true,
+                    false,
                     false, }
             );
 
