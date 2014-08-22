@@ -4408,8 +4408,8 @@
     <string name="select_device_admin_msg">Device administrators</string>
     <!-- Message when there are no available device admins to display -->
     <string name="no_device_admins">No available device administrators</string>
-    <!-- Message displayed when the device admin can only be disabled by deleting the managed profile [CHAR_LIMIT=120] -->
-    <string name="managed_profile_device_admin_info">To stop <xliff:g id="app_name">%1$s</xliff:g> from accessing your work profile, remove the profile under Settings &gt; Accounts.</string>
+    <!-- Message displayed when the device admin can only be disabled by deleting the work profile [CHAR_LIMIT=120] -->
+    <string name="managed_profile_device_admin_info">To stop <xliff:g id="app_name">%1$s</xliff:g> from accessing your work profile, remove the profile under Settings &gt; Accounts</string>
     <!-- Title for personal device admins on the list [CHAR_LIMIT=25] -->
     <string name="personal_device_admin_title">Personal</string>
     <!-- Title for managed device admins on the list [CHAR_LIMIT=25] -->
@@ -4436,7 +4436,7 @@
     <!-- Title for screen to set a profile owner [CHAR LIMIT=40] -->
     <string name="profile_owner_add_title">Activate Profile Manager?</string>
     <!-- Warning when trying to add a profile owner admin after setup has completed. [CHAR LIMIT=none] -->
-    <string name="adding_profile_owner_warning">By proceeding, your User will be managed by your Administrator which may also be able to store associated data, in addition to your personal data.\n\nYour Administrator has the ability to monitor and manage settings, access, apps, and data associated with this User, including network activity and your device\’s location information.</string>
+    <string name="adding_profile_owner_warning">By proceeding, your User will be managed by your Administrator which may also be able to store associated data, in addition to your personal data.\n\nYour Administrator has the ability to monitor and manage settings, access, apps, and data associated with this User, including network activity and your device\'s location information.</string>
 
     <!-- Name to assign to a Network Access Point that was saved without a name -->
     <string name="untitled_apn">Untitled</string>
@@ -4573,8 +4573,8 @@
     <string name="sync_is_failing">Sync is currently experiencing problems. It will be back shortly.</string>
     <!-- Button label to add an account [CHAR LIMIT=20] -->
     <string name="add_account_label">Add account</string>
-    <!-- Label for the state of the managed profile [CHAR LIMIT=80] -->
-    <string name="managed_profile_not_available_label">Work profile is not available yet</string>
+    <!-- Label for the state of the work profile [CHAR LIMIT=80] -->
+    <string name="managed_profile_not_available_label">Work profile isn\'t available yet</string>
     <!-- Button label to remove the work profile [CHAR LIMIT=35] -->
     <string name="remove_managed_profile_label">Remove work profile</string>
     <!-- Data synchronization settings screen, title of setting that controls whether background data should be used [CHAR LIMIT=30] -->
@@ -5181,7 +5181,7 @@
     <string name="user_add_user_menu">Add user</string>
     <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
     <string name="user_summary_restricted_profile">Restricted profile</string>
-    <!-- User settings summary for a managed profile [CHAR LIMIT=50] -->
+    <!-- User settings summary for a work profile [CHAR LIMIT=50] -->
     <string name="user_summary_managed_profile">Work profile</string>
     <!-- User settings warning that restricted profile needs a screen lock [CHAR LIMIT=NONE] -->
     <string name="user_need_lock_message">Before you can create a restricted profile, you\'ll need to set up a screen lock to protect your apps and personal data.</string>
@@ -5191,7 +5191,7 @@
     <string name="user_summary_not_set_up">Not set up</string>
     <!-- User summary to indicate that restricted profile is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_restricted_not_set_up">Not set up - Restricted profile</string>
-    <!-- User summary to indicate that a managed profile is currently not set up [CHAR LIMIT=100] -->
+    <!-- User summary to indicate that a work profile is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_managed_profile_not_set_up">Not set up - Work profile</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
     <string name="user_owner">Owner</string>
@@ -5793,7 +5793,7 @@
     <string name="app_notification_sensitive_title">Sensitive</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Sensitive option description-->
-    <string name="app_notification_sensitive_summary">When the device is locked, hide any sensitive content from this app’s notifications</string>
+    <string name="app_notification_sensitive_summary">When the device is locked, hide any sensitive content from this app\'s notifications</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
     <string name="app_notification_row_banned">Blocked</string>
@@ -5902,7 +5902,7 @@
     <!-- [CHAR LIMIT=300] Screen pinning description -->
     <string name="screen_pinning_description">When this setting is turned on, you can put the device in a state that keeps the current screen in view.\n\nTo pin a screen:\n\n1. Turn this setting on.\n\n2. Open an app.\n\n3. Touch the Recents button.\n\n4. Touch the pin icon.</string>
 
-    <!-- Title for a managed (work) profile. [CHAR LIMIT=25] -->
+    <!-- Title for a work profile. [CHAR LIMIT=25] -->
     <string name="managed_user_title">Work profile</string>
 
     <!-- Summary Title for saying that the preference is experimental and will evolve over time due to User feedback. [CHAR LIMIT=NONE] -->
