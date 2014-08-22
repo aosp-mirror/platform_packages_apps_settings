@@ -339,16 +339,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         // and want to pretend that the language is valid for all locales.
         // We need a way to support languages that aren't tied to a particular
         // locale instead of hiding the locale qualifier.
-        if (language.equals("zz")) {
-            String country = conf.locale.getCountry();
-            if (country.equals("ZZ")) {
-                localeName = "[Developer] Accented English (zz_ZZ)";
-            } else if (country.equals("ZY")) {
-                localeName = "[Developer] Fake Bi-Directional (zz_ZY)";
-            } else {
-                localeName = "";
-            }
-        } else if (hasOnlyOneLanguageInstance(language,
+        if (hasOnlyOneLanguageInstance(language,
                 Resources.getSystem().getAssets().getLocales())) {
             localeName = conf.locale.getDisplayLanguage(conf.locale);
         } else {

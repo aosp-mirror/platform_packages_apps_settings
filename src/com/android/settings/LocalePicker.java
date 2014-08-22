@@ -48,15 +48,6 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
     }
 
     @Override
-    protected boolean isInDeveloperMode() {
-        final boolean showDev = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
-                Context.MODE_PRIVATE).getBoolean(
-                DevelopmentSettings.PREF_SHOW,
-                android.os.Build.TYPE.equals("eng"));
-        return showDev;
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_TARGET_LOCALE)) {
