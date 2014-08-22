@@ -174,15 +174,17 @@
         <item name="android:paddingTop">@dimen/setup_title_padding_top</item>
     </style>
 
-    <!-- Alternate title style used for some tablet-landscape layouts -->
-    <style name="SetupCardTitle" parent="@android:style/TextAppearance.Material.Display1">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- Alternate title style used for some tablet layouts -->
+    <style name="SetupCardTitle">
         <item name="android:layout_marginTop">@dimen/setup_wizard_card_title_margin_top</item>
-        <item name="android:layout_weight">6</item>
-        <item name="android:paddingStart">@dimen/setup_wizard_card_title_padding_start</item>
+        <item name="android:paddingBottom">@dimen/setup_wizard_card_title_padding_bottom</item>
         <item name="android:paddingEnd">@dimen/setup_wizard_card_title_padding_end</item>
+        <item name="android:paddingStart">@dimen/setup_wizard_card_title_padding_start</item>
         <item name="android:paddingTop">@dimen/setup_wizard_card_title_padding_top</item>
+        <item name="android:textAppearance">@style/TextAppearance.SetupWizardCardTitle</item>
+    </style>
+
+    <style name="TextAppearance.SetupWizardCardTitle" parent="@android:style/TextAppearance.Material.Display1">
         <item name="android:textColor">@android:color/white</item>
     </style>
 
