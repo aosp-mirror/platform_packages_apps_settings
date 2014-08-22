@@ -16,8 +16,8 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="yes" msgid="4676390750360727396">"ဟုတ်သည်"</string>
-    <string name="no" msgid="6731231425810196216">"မဟုတ်ပါ"</string>
+    <string name="yes" msgid="4676390750360727396">"ဟုတ်ကဲ့"</string>
+    <string name="no" msgid="6731231425810196216">"ဟင့်အင်း"</string>
     <string name="create" msgid="3578857613172647409">"ဖန်တီးရန်"</string>
     <string name="allow" msgid="3349662621170855910">"ခွင့်ပြုပါ"</string>
     <string name="deny" msgid="6947806159746484865">"ငြင်းပယ်ခြင်း"</string>
@@ -28,7 +28,7 @@
   </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"သင်ဟာ ယခု တည်ဆောက်သူတစ်ယောက် ဖြစ်နေပါပြီ!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"မလိုတော့ပါ။ သင်သည် တည်ဆောက်သူတစ်ယောက် ဖြစ်နေပြီ ဖြစ်သည်။"</string>
-    <string name="header_category_wireless_networks" msgid="5110914332313954940">"ကြိုးမဲ့ &amp; ကန်ရက်များ"</string>
+    <string name="header_category_wireless_networks" msgid="5110914332313954940">"ကြိုးမဲ့ &amp; ကွန်ရက်များ"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"အဆက်အသွယ်များ"</string>
     <string name="header_category_device" msgid="4544026001618307754">"ကိရိယာ"</string>
     <string name="header_category_personal" msgid="3310195187905720823">"ကိုယ်ရေး"</string>
@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"ချိတ်ဆက်ခြင်းရပ်တန့်မလား?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">":&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;နှင့်ချိတ်ဆက်မှုများကို ပြီးဆုံးစေပါမည်"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"ဘလူးတုသ် ဆက်တင်များကို ပြောင်းလဲရန် သင့်ဆီမှာ ခွင့်ပြုချက် မရှိပါ။"</string>
-    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"ဘလူးတုသ် ဖွင့်ထားလျှင် <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ကို အနီးရှိ ကိရိယာများ မြင်နိုင်သည်။"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ကို အဆက်ဖြတ်ရမလား?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ထုတ်လွှင့်ခြင်း"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ကိုယ်ရေးအချက်အလက်အား ဖျောက်မည်လား"</string>
@@ -617,8 +616,7 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"စကင်လုပ်မှုကို အမြဲတမ်း ခွင့်ပြုရန်"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"ကြိုးမဲ့ကို ပိတ်ထားချိန် မှာတောင်၊ Google တည်နေရာ ၀န်ဆောင်မှု နှင့် အခြား appများက ကွန်ရက်များကို ရှာကြည့်ပါစေ"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"ကြိုးမဲ့ကို အလိုအလျောက် စီမံကွပ်ကဲရန်"</string>
-    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
-    <skip />
+    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> က သင်၏ ကြိုးမဲ့ ချိတ်ဆက်မှုကို စီမံကွပ်ကဲပေးပါစေ"</string>
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Google ကူညီပေးသူ"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google ကြိုးမဲ့ ကူညီပေးသူ"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"အသိအမှတ်ပြုလက်မှတ်များထည့်သွင်းရန်"</string>
@@ -1829,8 +1827,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"သိုလှောင်ရာနေရာအား ဖျက်၍မရပါ"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"အကောင့်သိုလှောင်ရာနေရာရှိသည်"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"ယုံကြည်စိတ်ချရသောသိုလှောင်ရာနေရာမသုံးခင် မျက်နှာပြင်ကို ပိတ်ရန် ပင်နံပါတ် သို့မဟုတ် စကားဝှက် သတ်မှတ်ပါ။"</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"သုံးစွဲမှုကို ရယူသုံးနိုင်"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"သင့် ကိရိယာ၏ သုံးစွဲမှု မှတ်တမ်းကို ရယူသုံးနိုင်ကြသည့် Appများ"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"သုံးစွဲမှုကို ရယူသုံးနိုင်ကြသည့် Appများ"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"ရယူသုံးရန် တောင်းဆိုနေကြသည့် Appများ"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"သုံးစွဲမှု ဒေတာကို ရယူမှာကို သင်က ယုံကြည်နိုင်သည့် appများကိုသာ ခွင့်ပြုပါ။ သင်က ခွင့်ပြုလိုက်သည့် Appများသည် သုံးစွဲမှု မှတ်တမ်းကို၊ app တစ်ခုကို နောက်ဆုံး အကြိမ် သုံးခဲ့ခြင်း သို့မဟုတ် သင်က app တစ်ခုကို သုံးရာမှာ စုစုပေါင်း ကြာခဲ့သည့် အချိန် အပါအဝင်ကို၊ ရယူနိုင်မည်။"</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"ရယူသုံးခွင့် ပြုမလား?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"သင်က ရယူသုံးခွင့် ပြုမည်ဆိုလျှင်၊ ဒီappသည် သင်၏ appများ အကြောင်း၊ သင်က ၎င်းတို့ကို မည်မျှ မကြာခဏ သုံးခြင်းလို၊ အထွေထွေ အင်ဖိုကို ကြည့်ရှုနိုင်မည်။"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"အရေးပေါ်ခေါ်ဆိုမှုအတွက် မြည်သံ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"အရေးပေါ်ခေါ်ဆိုမှုအတွက် လုပ်ဆောင်ပုံကို သတ်မှတ်ရန်"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"အရန်သိမ်းဆည်ရန်နှင့် ပြန်လည်စတင်စေရန်"</string>
@@ -1909,10 +1910,8 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"ထပ်တူ ကိုက်ညီအောင်လုပ်ခြင်း"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"ထပ်တူကိုက်ညီအောင်ပြုလုပ်ခြင်းသည် လက်ရှိပြသနာရှိနေပါသည်။ ခဏကြာလျှင်ပြန်လည်ရရှိပါလိမ့်မည်။"</string>
     <string name="add_account_label" msgid="7811707265834013767">"အကောင့်ထပ်ထည့်ရန်"</string>
-    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
-    <skip />
-    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="5113461928275887768">"အလုပ် ပရိုဖိုင်ကို မရရှိနိုင်သေးပါ"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"အလုပ် ပရိုဖိုင်ကို ဖယ်ရှားပစ်ရန်"</string>
     <string name="background_data" msgid="5779592891375473817">"နောက်ခံတွင်အသုံးပြုသောဒေတာ"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"ဒေတာကိုအချိန်မရွေး ထပ်တူ၊၊ပို့ နှင့်လက်ခံခြင်းလုပ်နိုင်သည်"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"နောက်ခံဒေတာဖျက်မလား"</string>
