@@ -225,7 +225,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Trust Agent preferences
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
-        if (securityCategory != null && mLockPatternUtils.isSecure()) {
+        if (securityCategory != null) {
+            final boolean hasSecurity = mLockPatternUtils.isSecure();
             ArrayList<TrustAgentComponentInfo> agents =
                     getActiveTrustAgents(getPackageManager(), mLockPatternUtils);
             for (int i = 0; i < agents.size(); i++) {
@@ -242,6 +243,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 trustAgentPreference.setIntent(intent);
                 // Add preference to the settings menu.
                 securityCategory.addPreference(trustAgentPreference);
+                if (!hasSecurity) {
+                    trustAgentPreference.setEnabled(false);
+                    trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
+                }
             }
         }
 
@@ -340,9 +345,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Advanced Security features
         PreferenceGroup advancedCategory =
                 (PreferenceGroup)root.findPreference(KEY_ADVANCED_SECURITY);
-        if (advancedCategory != null && !mLockPatternUtils.isSecure()) {
+        if (advancedCategory != null) {
             Preference manageAgents = advancedCategory.findPreference(KEY_MANAGE_TRUST_AGENTS);
-            if (manageAgents != null) advancedCategory.removePreference(manageAgents);
+            if (manageAgents != null && !mLockPatternUtils.isSecure()) {
+                manageAgents.setEnabled(false);
+                manageAgents.setSummary(R.string.disabled_because_no_backup_security);
+            }
         }
 
         // The above preferences come and go based on security state, so we need to update
