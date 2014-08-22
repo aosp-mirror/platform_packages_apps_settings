@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Opriţi radioul"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"Porniţi SMS prin IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"Opriţi SMS prin IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Activați MO în PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Dezactivați MO în PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Este necesară activarea înregistrării IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Este necesară dezactivarea înregistrării IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Activaţi imaginea de memorie RAM LTE"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Setări pentru profil"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Nu s-a setat niciun nume, se utilizează numele contului"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Scanaţi pentru a detecta dispozitive"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Redenumiți acest dispozitiv"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Redenumiţi"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Deconectaţi?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Astfel se va încheia conexiunea cu:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Nu aveți permisiunea de a modifica setările Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> este acum vizibil pt. dispozitive din apropiere."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Deconectați <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Transmitere"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Dezactivaţi profilul?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitare de împerechere"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Atingeţi pentru a împerechea cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Afişaţi fişierele primite"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Acces la mesaje"</string>
     <string name="device_picker" msgid="8398232791303186677">"Selector de dispozitive Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitare de permisiune Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"O aplicație vrea sa activeze Bluetooth pentru acest dispozitiv."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Dispozitivele Bluetooth trebuie să ceară permisiunea înainte de a accesa conturile disponibile."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"O aplicație încearcă să facă tableta vizibilă pentru alte gadgeturi Bluetooth pentru <xliff:g id="TIMEOUT">%1$d</xliff:g> (de) secunde."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"O aplicație încearcă să facă telefonul vizibil pentru alte gadgeturi Bluetooth pentru <xliff:g id="TIMEOUT">%1$d</xliff:g> (de) secunde."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"O aplicație încearcă să facă tableta vizibilă pentru alte gadgeturi Bluetooth. Puteți modifica ulterior acest lucru din setările Bluetooth."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Criptare nereuşită"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Criptarea a fost întreruptă şi nu se poate finaliza. Prin urmare, datele de pe tableta dvs. nu mai sunt accesibile. \n\nPentru a relua utilizarea tabletei, trebuie să efectuaţi o resetare la valorile din fabrică. Când configuraţi tableta după resetare, veţi putea restabili toate datele pentru care aţi creat copii de rezervă în Contul Google."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Criptarea a fost întreruptă şi nu se poate finaliza. Prin urmare, datele de pe telefonul dvs. nu mai sunt accesibile. \n\nPentru a relua utilizarea telefonului, trebuie să efectuaţi o resetare la valorile din fabrică. Când configuraţi telefonul după resetare, veţi putea restabili toate datele pentru care aţi creat copii de rezervă în Contul Google."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Decriptarea nu a reușit"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Parola pe care ați introdus-o este corectă, dar, din păcate, datele sunt deteriorate. \n\nPentru a relua utilizarea tabletei, trebuie să restabiliți setările din fabrică. Când vă configurați tableta după resetare, veți putea să restabiliți toate datele care au backup în Contul Google."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Parola pe care ați introdus-o este corectă, dar, din păcate, datele sunt deteriorate. \n\nPentru a relua utilizarea telefonului, trebuie să restabiliți setările din fabrică. Când vă configurați telefonul după resetare, veți putea să restabiliți toate datele care au backup în Contul Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Comutaţi metoda de introducere"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Alegeţi blocare ecran"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Aleg. blocare rezervă"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> dorește să acceseze Agenda și istoricul apelurilor."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> dorește să se conecteze la Bluetooth. După conectare, acesta va avea acces la agendă și la jurnalul de apeluri."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Dispozitive împerecheate"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Dispozitivele conectate pot vizualiza mesaje de la"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Dispozitive disponibile"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Niciun dispozitiv disponibil"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Conectaţi-vă"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Permiteți întotdeauna scanarea"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permiteți serviciului de localizare Google și altor aplicații să caute rețele, chiar dacă funcția Wi-Fi este dezactivată."</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gestionați automat Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Permiteți-i unui asistent Wi‑Fi să vă gestioneze conexiunea Wi‑Fi"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Asistent Wi-Fi"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Asistent Wi‑Fi Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalați certificate"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"În afara ariei de acoperire"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS disponibil"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponibil)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Securizată cu <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", securizată cu <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Introduceți parola de rețea"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Niciuna"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Pentru a îmbunătăți precizia locației, precum și pentru alte scopuri, <xliff:g id="APP_NAME">%1$s</xliff:g> solicită permisiunea să activeze scanarea rețelelor, chiar și atunci când rețeaua Wi-Fi este dezactivată.\n\nPermiteți acest lucru pentru toate aplicațiile care solicită scanarea?"</string>
@@ -855,7 +846,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Luminozitate automată"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Ridicați pentru a reactiva"</string>
     <string name="doze_title" msgid="2259176504273878294">"Afișare Ambient"</string>
-    <string name="doze_summary" msgid="8300817661725517088">"Activați ecranul când dispozitivul este ridicat sau când sosesc notificări"</string>
+    <string name="doze_summary" msgid="8300817661725517088">"Activează ecranul când dispozitivul este ridicat sau când sosesc notificări"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Dimensiune font"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Dimensiune font"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Setări de blocare a cardului SIM"</string>
@@ -1844,8 +1835,16 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Nu s-a şters sp. stoc. cert."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Stocarea acreditărilor este activată."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Trebuie să setaţi un cod PIN sau o parolă pentru blocarea ecranului înainte de a putea utiliza spaţiul de stocare a certificatelor."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Acces la datele de utilizare"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Aplicații care au acces la istoricul de utilizare a dispozitivului."</string>
+    <!-- no translation found for usage_access_title (332333405495457839) -->
+    <skip />
+    <!-- no translation found for usage_access_app_list_header (5216887502569700574) -->
+    <skip />
+    <!-- no translation found for usage_access_body (3489298559210251891) -->
+    <skip />
+    <!-- no translation found for allow_usage_access_title (2134237975190472249) -->
+    <skip />
+    <!-- no translation found for allow_usage_access_message (7858892531929539963) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ton de urgenţă"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Setaţi comportamentul la efectuarea unui apel de urgenţă"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Backup și resetare"</string>
@@ -2009,6 +2008,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Monitorizări OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Utilizați NuPlayer (beta)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Utilizați NuPlayer în loc de AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Dezact. rutarea audio USB"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Dezact. rutarea automată către perif. audio USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afişaţi limite aspect"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Afişaţi limitele clipului, marginile etc."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Direcție aspect dr. - st."</string>
@@ -2218,7 +2219,7 @@
     <string name="user_add_user_message_long" msgid="718192651887726259">"Puteți să permiteți accesul la acest dispozitiv altor persoane creând utilizatori suplimentari. Fiecare utilizator are propriul spațiu, pe care îl poate personaliza cu propriile aplicații, imagini de fundal etc. De asemenea, utilizatorii pot ajusta setările tabletei, cum ar fi setările pentru Wi-Fi, care afectează pe toți ceilalți utilizatori.\n\nDupă ce creați un utilizator nou, acesta trebuie să-și configureze spațiul.\n\nOrice utilizator poate actualiza aplicațiile pentru toți ceilalți utilizatori."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Când adăugați un utilizator nou, acesta trebuie să-și configureze spațiul.\n\nOrice utilizator poate actualiza aplicațiile pentru toți ceilalți utilizatori."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Configuraţi utilizatorul acum?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Asiguraţi-vă că utilizatorul are posibilitatea de a prelua dispozitivul și de a-și configura spațiul"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Asigurați-vă că utilizatorul are posibilitatea de a prelua dispozitivul și de a-și configura spațiul"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Configurați profilul acum?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Configuraţi acum"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Nu acum"</string>

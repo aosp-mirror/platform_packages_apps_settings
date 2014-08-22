@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"I-off ang radyo"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"I-on ang SMS sa IMS"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"I-off ang SMS sa IMS"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"I-enable ang MO sa PS/VoLTE"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"I-disable ang MO sa PS/VoLTE"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Kinakailangan ang pag-on sa pagpaparehistro ng IMS"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Kinakailangan ang pag-off sa pagpaparehistro ng IMS"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"I-on ang lte ram dump"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Mga setting ng profile"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Walang nakatakdang pangalan, gamit ang pangalan ng account"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Mag-scan para sa mga device"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Palitan ang pangalan ng device"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Palitan ang pangalan"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Idiskonekta?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Tatapusin nito ang iyong koneksyon sa:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Wala kang pahintulot na palitan ang mga setting ng Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"Nakikita na ngayon ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sa mga kalapit na device."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"I-disconnect ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Pagbo-broadcast"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Huwag paganahin ang profile?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Kahilingan sa pagpares"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Pindutin upang ipares sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Ipakita ang mga natanggap na file"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Access sa mensahe"</string>
     <string name="device_picker" msgid="8398232791303186677">"Tagapili ng device ng Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Kahilingan sa pahintulot ng bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Gustong i-ON ng isang app ang Bluetooth para sa device na ito."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Dapat ay humingi ng pahintulot ang mga bluetooth device bago i-access ang mga available na account."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Gusto ng isang app na gawing nakikita ng iba pang mga Bluetooth device ang iyong tablet sa loob ng <xliff:g id="TIMEOUT">%1$d</xliff:g> (na) segundo."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Gusto ng isang app na gawing nakikita ng iba pang mga Bluetooth device ang iyong telepono sa loob ng <xliff:g id="TIMEOUT">%1$d</xliff:g> (na) segundo."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Gusto ng isang app na gawing nakikita ng iba pang mga Bluetooth device ang iyong tablet. Maaari mo itong palitan sa ibang pagkakataon sa mga setting ng Bluetooth."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Hindi matagumpay ang pag-encrypt"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Nagambala at hindi makumpleto ang pag-encrypt. Bilang resulta, hindi na maa-access ang data sa iyong telepono. \n\nUpang patuloy na magamit ang iyong tablet, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong tablet pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong magbalik ng anumang data na na-back up sa iyong Google Account."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Nagambala at hindi makumpleto ang pag-encrypt. Bilang resulta, hindi na maa-access ang data sa iyong telepono. \n\nUpang patuloy na magamit ang iyong telepono, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong telepono pagkatapos ng pag-reset, magkakaraoon ka ng pagkakataong magbalik ng anumang data na na-back up sa iyong Google Account."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Hindi matagumpay ang pag-decrypt"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Tama ang password na inilagay mo, ngunit sa kasamaang-palad ay sira ang iyong data. \n\nUpang maipagpatuloy ang paggamit sa iyong tablet, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong tablet pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong ipanumbalik ang anumang data na na-back up sa iyong Google Account."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Tama ang password na inilagay mo, ngunit sa kasamaang-palad ay sira ang iyong data. \n\nUpang maipagpatuloy ang paggamit sa iyong telepono, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong telepono pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong ipanumbalik ang anumang data na na-back up sa iyong Google Account."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Magpalit ng pamamaraan ng pag-input"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Pumili ng screen lock"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Pumili ng backup na lock"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"Gustong i-access ng <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ang iyong mga contact at history ng tawag."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"Gusto mag-pair ng <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sa Bluetooth. Kapag konektado, magkaka-access ito sa contact at history ng tawag."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Mga ipinares na device"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Paired device, maaaring tumingin mensahe mula sa"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Mga available na device"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Walang available na mga device"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Kumonekta"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Palaging payagan ang pag-i-scan"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Hayaang mag-scan ng mga network ang serbisyo sa lokasyon ng Google at iba pang mga app, kahit na naka-off ang Wi-Fi"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Awtomatikong pamahalaan ang Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Hayaang pamahalaan ng isang Wi‑Fi assistant ang iyong koneksyon sa Wi‑Fi"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Mag-install ng mga certificate"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Wala sa sakop"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Available ang WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Available ang WPS)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Naka-secure gamit ang <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", naka-secure gamit ang <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ilagay ang iyong password sa network"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Wala"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Upang mapahusay ang katumpakan ng lokasyon at para sa iba pang mga layunin, gustong i-on ng <xliff:g id="APP_NAME">%1$s</xliff:g> ang pag-scan ng network, kahit na naka-off ang Wi-Fi.\n\nPayagan ito para sa lahat ng apps na gustong mag-scan?"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Di mbura storage ng krednsyal."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Pinagana ang imbakan ng kredensyal."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Kailangan mong magtakda ng PIN o password ng lock screen bago mo magamit ang storage ng kredensyal."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Access sa paggamit"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Mga app na may access sa history ng paggamit ng iyong device."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"App na may access sa paggamit"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"App na humihiling ng access"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Payagan lang ang mga app na pinagkakatiwalaan mong magkaroon ng access sa data ng paggamit. Magkakaroon ang mga app ng access sa iyong history ng paggamit ng app, gaya ng huling pagkakataon na ginamit ang isang app, o ang kabuuang oras na ginugol mo sa paggamit ng app."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Payagan ang access?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"Kung papayagan mo ang pag-access, matitingnan ng app na ito ang pangkalahatang impormasyon tungkol sa iyong mga app, gaya ng kung gaano mo kadalas gamitin ang mga ito."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tonong pang-emergency"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Itakda ang pag-uugali kapag naganap ang isang pang-emergency na tawag"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"I-backup &amp; i-reset"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Paganahin trace ng OpenGL"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Gamitin ang NuPlayer (pang-eksperimento)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Gamitin ang NuPlayer sa halip na AwesomePlayer"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"I-disable USB audio routing"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"I-disable automatic routing sa USB audio peripheral"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Ipakita mga layout bound"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Ipakita ang mga hangganan ng clip, margin, atbp."</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Force RTL layout dir."</string>

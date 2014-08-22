@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"రేడియోను ఆఫ్ చేయి"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"IMS ద్వారా SMSను ఆన్ చేయండి"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS ద్వారా SMSను ఆఫ్ చేయండి"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"PS/VoLTEలో MOని ప్రారంభించు"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"PS/VoLTEలో MOని నిలిపివేయి"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS నమోదును ప్రారంభించడం అవసరం"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS నమోదును ఆపివేయడం అవసరం"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ర్యామ్ డంప్‌ను ప్రారంభించండి"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"ప్రొఫైల్ సెట్టింగ్‌లు"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"పేరు ఏదీ సెట్ చేయలేదు, ఖాతా పేరు ఉపయోగించబడుతోంది"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"పరికరాల కోసం స్కాన్ చేయి"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"ఈ పరికరం పేరు మార్చు"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"పేరు మార్చు"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"డిస్‌కనెక్ట్ చేయాలా?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"ఇందువలన దీనితో మీరు ఏర్పాటు చేసుకున్న కనెక్షన్ ముగుస్తుంది:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"మీకు బ్లూటూత్ సెట్టింగ్‌లను మార్చడానికి అనుమతి లేదు."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ఇప్పుడు సమీప పరికరాలకు కనిపిస్తోంది."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ను డిస్‌కనెక్ట్ చేయాలా?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"ప్రసారం"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"ప్రొఫైల్‌ను నిలిపివేయాలా?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"జత చేయడానికి అభ్యర్థన"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో జత చేయడానికి తాకండి."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"స్వీకరించబడిన ఫైల్‌లను చూపు"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"సందేశ ప్రాప్యత"</string>
     <string name="device_picker" msgid="8398232791303186677">"బ్లూటూత్ పరికర ఎంపిక"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"బ్లూటూత్ అనుమతి అభ్యర్థన"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"అనువర్తనం ఈ పరికరంలో బ్లూటూత్‌ను ఆన్ చేయాలనుకుంటోంది."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"అందుబాటులో ఉన్న ఖాతాలను ప్రాప్యత చేయడానికి ముందు బ్లూటూత్ పరికరాలు తప్పనిసరిగా అనుమతి కోసం అడగాలి."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"అనువర్తనం మీ టాబ్లెట్‌ను ఇతర బ్లూటూత్ పరికరాలకు <xliff:g id="TIMEOUT">%1$d</xliff:g> సెకన్లు కనిపించేలా చేయాలనుకుంటుంది."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"అనువర్తనం మీ ఫోన్‌ను ఇతర బ్లూటూత్ పరికరాలకు <xliff:g id="TIMEOUT">%1$d</xliff:g> సెకన్లు కనిపించేలా చేయాలనుకుంటుంది."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"అనువర్తనం మీ టాబ్లెట్‌ను ఇతర బ్లూటూత్ పరికరాలకు కనిపించేలా చేయాలనుకుంటుంది. మీరు దీన్ని బ్లూటూత్ సెట్టింగ్‌ల్లో తర్వాత మార్చవచ్చు."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"గుప్తీకరణ విఫలమైంది"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"గుప్తీకరణకు అంతరాయం ఏర్పడింది మరియు పూర్తి చేయడం సాధ్యం కాదు. దీని ఫలితంగా, మీ టాబ్లెట్‌లోని డేటాకు ఇకపై ప్రాప్యత ఉండదు. \n\n మీ టాబ్లెట్‌ను ఉపయోగించడాన్ని పునఃప్రారంభించడానికి, మీరు ఫ్యాక్టరీ రీసెట్‌ను అమలు చేయాల్సి ఉంటుంది. మీరు రీసెట్ తర్వాత మీ టాబ్లెట్‌ను సెటప్ చేసేటప్పుడు, మీరు మీ Google ఖాతాకు బ్యాకప్ చేయబడిన ఏదైనా డేటాను పునరుద్ధరించడానికి మీకు అవకాశం ఉంటుంది."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"గుప్తీకరణ ఆటంకపరచబడింది అందువల్ల పూర్తి చేయడం సాధ్యం కాదు. ఫలితంగా, మీ ఫోన్‌లోని డేటాకు ఇకపై ప్రాప్యత ఉండదు. \n\nమీ ఫోన్‌ను ఉపయోగించడాన్ని పునఃప్రారంభించడానికి, మీరు ఫ్యాక్టరీ రీసెట్‌ను అమలు చేయాల్సి ఉంటుంది. మీరు రీసెట్ తర్వాత మీ ఫోన్‌ను సెటప్ చేసేటప్పుడు, మీ Google ఖాతాకు బ్యాకప్ చేయబడిన ఏదైనా డేటాను పునరుద్ధరించడానికి మీకు అవకాశం ఉంటుంది."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"డిక్రిప్షన్ విజయవంతం కాలేదు"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"మీరు నమోదు చేసిన పాస్‌వర్డ్ తప్పు, అయితే దురదృష్టవశాత్తూ మీ డేటా పాడైంది. \n\nమీ టాబ్లెట్‌ను ఉపయోగించి పునఃప్రారంభించడానికి, మీరు ఫ్యాక్టరీ రీసెట్‌ను అమలు చేయాలి. మీరు రీసెట్ చేసిన తర్వాత మీ టాబ్లెట్‌ను సెటప్ చేసినప్పుడు, మీ Google ఖాతాకు బ్యాకప్ చేసిన ఏదైనా డేటాను పునరుద్ధరించుకునే అవకాశం మీకు అందించబడుతుంది."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"మీరు నమోదు చేసిన పాస్‌వర్డ్ తప్పు, అయితే దురదృష్టవశాత్తూ మీ డేటా పాడైంది. \n\nమీ ఫోన్‌ను ఉపయోగించి పునఃప్రారంభించడానికి, మీరు ఫ్యాక్టరీ రీసెట్‌ను అమలు చేయాలి. మీరు రీసెట్ చేసిన తర్వాత మీ ఫోన్‌ను సెటప్ చేసినప్పుడు, మీ Google ఖాతాకు బ్యాకప్ చేసిన ఏదైనా డేటాను పునరుద్ధరించుకునే అవకాశం మీకు అందించబడుతుంది."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ఇన్‌పుట్ పద్ధతిని మార్చు"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"స్క్రీన్ లాక్‌ను ఎంచుకోండి"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"బ్యాకప్ లాక్‌ను ఎంచుకోండి"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> మీ పరిచయాలను మరియు కాల్ చరిత్రను ప్రాప్యత చేయాలనుకుంటోంది."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> బ్లూటూత్‌తో జత చేయాలనుకుంటోంది. కనెక్ట్ చేసినప్పుడు, ఇది మీ పరిచయాలు మరియు కాల్ చరిత్రకి ప్రాప్యతని కలిగి ఉంటుంది."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"జత చేసిన పరికరాలు"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"జత చేయబడిన పరికరాలు వీటిలోని సందేశాలను వీక్షించగలవు"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"అందుబాటులో ఉన్న పరికరాలు"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"పరికరాలు ఏవీ అందుబాటులో లేవు"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"కనెక్ట్ చేయి"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"ఎల్లప్పుడూ స్కాన్ చేయడాన్ని అనుమతించు"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi‑Fi ఆఫ్‌లో ఉన్నప్పటికీ నెట్‌వర్క్‌ల కోసం స్కాన్ చేయడానికి Google స్థాన సేవ మరియు ఇతర అనువర్తనాలను అనుమతించు"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fiని స్వయంచాలకంగా నిర్వహించు"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"మీ Wi‑Fi కనెక్షన్‌ను నిర్వహించడానికి Wi‑Fi సహాయకాన్ని అనుమతించండి"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi సహాయకం"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi సహాయకం"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ప్రమాణపత్రాలను ఇన్‌స్టాల్ చేయి"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"పరిధిలో లేదు"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS అందుబాటులో ఉంది"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS అందుబాటులో ఉంది)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>తో సురక్షితం చేయబడింది"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>తో సురక్షితం చేయబడింది"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"మీ నెట్‌వర్క్ పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"ఏదీ లేదు"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"స్థాన ఖచ్చితత్వాన్ని మెరుగుపరచడానికి మరియు ఇతర ప్రయోజనాల దృష్ట్యా, <xliff:g id="APP_NAME">%1$s</xliff:g> Wi-Fi ఆఫ్‌లో ఉన్నప్పటికీ, నెట్‌వర్క్‌ను స్కాన్ చేయడం ప్రారంభించాలనుకుంటుంది.\n\nస్కాన్ చేయాలనుకునే అన్ని అనువర్తనాల కోసం దీన్ని అనుమతించాలా?"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"ఆధారాల నిల్వను ఎరేజ్ చేయడం సాధ్యపడలేదు."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"ఆధారాల నిల్వ ప్రారంభించబడింది."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"మీరు ఆధారాల నిల్వను ఉపయోగించడానికి ముందు లాక్ స్క్రీన్ PIN లేదా పాస్‌వర్డ్‌ను సెట్ చేయాల్సి ఉంటుంది."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"వినియోగ ప్రాప్యత"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"మీ పరికర వినియోగ చరిత్రకి ప్రాప్యతను కలిగి ఉన్న అనువర్తనాలు."</string>
+    <string name="usage_access_title" msgid="332333405495457839">"వినియోగ ప్రాప్యత గల అనువర్తనాలు"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"ప్రాప్యతను అభ్యర్థిస్తున్న అనువర్తనాలు"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"వినియోగ డేటాకి ప్రాప్యత పొందడానికి మీరు విశ్వసించే అనువర్తనాలను మాత్రమే అనుమతించండి. మీరు అనుమతించే అనువర్తనాలు మీ అనువర్తన వినియోగ చరిత్రకి అనగా అనువర్తనాన్ని చివరిగా ఎప్పుడు ఉపయోగించారు లేదా మీరు అనువర్తనంపై పని చేసిన మొత్తం సమయం వంటి వివరాలకు ప్రాప్యత పొందుతాయి."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"ప్రాప్యతను అనుమతించాలా?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"మీరు ప్రాప్యతని అనుమతిస్తే, ఈ అనువర్తనం మీరు అనువర్తనాలను ఎంత తరచుగా ఉపయోగిస్తున్నారు వంటి మీ అనువర్తనాలకి సంబంధించిన సాధారణ సమాచారాన్ని వీక్షించగలదు."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"అత్యవసర టోన్"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"అత్యవసర కాల్ వచ్చినప్పుడు చేయాల్సిన విధిని సెట్ చేయండి"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"బ్యాకప్ &amp; రీసెట్"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL ట్రేస్‌లను ప్రారంభించండి"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayerని ఉపయోగించండి (ప్రయోగాత్మకం)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"AwesomePlayerకి బదులుగా NuPlayerని ఉపయోగించండి"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB ఆడియో రూటిం. నిలిపి."</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB ఆడియో పరికరాలకు స్వయం. రూటింగ్‌ను నిలిపివేయండి"</string>
     <string name="debug_layout" msgid="5981361776594526155">"లేఅవుట్ బౌండ్‌లను చూపండి"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"క్లిప్ సరిహద్దులు, అంచులు మొ. చూపు"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"RTL లేఅవుట్ దిశను నిర్భందం చేయండి"</string>

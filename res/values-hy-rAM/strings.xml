@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"Անջատել ռադիոն"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"IMS-ը փոխարինել SMS-ով"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS-ը փոխարինել SMS-ով"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"Միացնել MO-ն՝ PS/VoLTE-ից"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"Անջատել MO-ն՝ PS/VoLTE-ից"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"Միացնել IMS պարտադիր գրանցումը"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"Պահանջվում է անջատել IMS գրանցումը"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"Անջատել բջջային ռամի պարպումը"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Պրոֆիլի կարգավորումներ"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Սահմանված անուն չկա, օգտագործվում է հաշվի անունը"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Սկանավորել` սարքեր գտնելու համար"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"Վերանվանել այս սարքը"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Վերանվանել"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Անջատե՞լ"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Սա կավարտի կապը &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&amp;gt-ի հետ"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Դուք թույլտվություն չունեք փոխելու Bluetooth կարգավորումները:"</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքն այժմ տեսանելի է մոտակա սարքերին:"</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Անջատե՞լ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ը:"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Հեռարձակում"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Կասեցնե՞լ պրոֆիլը:"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Զուգավորման հայց"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Հպեք` <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ի հետ զուգավորվելու համար:"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Ցուցադրել ստացված ֆայլերը"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"Մուտք հաղորդագրություններ"</string>
     <string name="device_picker" msgid="8398232791303186677">"Bluetooth սարք ընտրող"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-ի թույլտվության հայց"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Ինչ-որ ծրագրի ցանկանում է միացնել Bluetooth-ն այս սարքում"</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"Bluetooth սարքերը պետք է թույլտվություն ունենան, որպեսզի կարողանան մուտք գործել հասանելի հաշիվներ:"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Հավելվածը ցանկանում է ձեր գրասալիկը տեսանելի դարձնել այլ Bluetooth սարքերի համար <xliff:g id="TIMEOUT">%1$d</xliff:g> վայրկյանում:"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Ձեր հեռախոսի ծրագրերից մեկը թույլտվություն է հայցում` ձեր հեռախոսը հայտնաբերելի դարձնելու այլ Bluetooth սարքերի կողմից <xliff:g id="TIMEOUT">%1$d</xliff:g> վայրկյանից:"</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"Ծրագիրը ցանկանում է միացնել Bluetooth-ը և ձեր գրասալիկը տեսանելի դարձնել մյուս սարքերի համար: Դուք կարող եք այն փոխել հետագայում Bluetooth-ի կարգավորումներում:"</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Կոդավորումը անհաջող էր"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"Կոդավորումը դադարեցվեց, և այն հնարավոր չէ ավարտել: Արդյունքում ձեր գրասալիկի տվյալները այլևս մատչելի չեն: \n\n Շարունակելու համար օգտագործել ձեր գրասալիկը` դուք պետք է կատարեք գործարանային վերականգնում: Ձեր գրասալիկի վերականգնումից և կարգավորումից հետո դուք հնարավորություն կունենանք վերականգնել ցանկացած տվյալ, որը պահուստավորվել էր ձեր Google Հաշվում:"</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"Կոդավորումն ընդհատվել է և հնարավոր չէ ավարտել: Արդյունքում հեռախոսի տվյալներն այլևս հասանելի չեն:\n\nՀեռախոսը նորից օգտագործելու համար պետք է գործարանային վերականգնում իրականացնեք: Երբ վերականգնումից հետո կարգավորեք հեռախոսը, հնարավորություն կունենաք վերականգնելու ցանկացած տվյալ, որ պահուստավորվել է ձեր Google Հաշվում:"</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"Ապակոդավորումը չհաջողվեց"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"Ձեր մուտքագրած գաղտնաբառը ճիշտ է, բայց ձեր տվյալները վնասված են: \n\nՈրպեսզի կարողանաք օգտագործել ձեռ գրասալիկը, պետք է կատարեք գործարանային տվյալների վերակայում: Վերակայումից հետո գրասալիկը կարգավորելիս հնարավորություն կունենաք վերականգնել ձեր տվյալները, եթե դրանք պահուստավորված են ձեր Google հաշվում:"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"Ձեր մուտքագրած գաղտնաբառը ճիշտ է, բայց ձեր տվյալները վնասված են: \n\nՈրպեսզի կարողանաք օգտագործել ձեռ հեռախոսը, պետք է կատարեք գործարանային տվյալների վերակայում: Վերակայումից հետո հեռախոսը կարգավորելիս հնարավորություն կունենաք վերականգնել ձեր տվյալները, եթե դրանք պահուստավորված են ձեր Google հաշվում:"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Փոխարկել մուտքագրման եղանակը"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ընտրել կողպէկրանը"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"Ընտրել պահուստավորման կողպման տարբերակը"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ը ուզում է մուտք գործել ձեր կոնտակտներ ու զանգերի պատմություն:"</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքը ցանկանում է զուգավորվել Bluetooth-ով: Միանալու դեպքում այն մուտք կունենա դեպի ձեր կոնտակտները և զանգերի պատմությունը:"</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Զուգավորված սարքեր"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"Կապակցված սարքերին տեսանելի են հաղորդագրությունները հետևյալ հաշիվներից՝"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"Հասանելի սարքեր"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"Հասանելի սարքեր չկան"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Միանալ"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Միշտ թույլատրել սկանավորումը"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Թույլատրել Google-ի տեղադրության ծառայությանը և այլ ծրագրերին սկանավորել ցանցեր` նույնիսկ երբ WiFi-ը անջատված է"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Ավտոմատ կառավարել Wi-Fi-ը"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Թողնել, որպեսզի Wi-Fi օգնականը կառավարի Wi-Fi կապը"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fi օգնական"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi-Fi Օգնական"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Տեղադրել վկայականները"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Ընդգրկույթից դուրս է"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS-ը հասանելի է"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS-ը հասանելի է)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"Պաշտպանված է <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>-ով"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">", ապահովված <xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>-ի հետ"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Մուտքագրեք ձեր ցանցի գաղտնաբառը"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"Ոչ մեկը"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Տեղանքի ճշգրտությունը կատարելագործելու կամ այլ նպատակների համար` <xliff:g id="APP_NAME">%1$s</xliff:g>-ը ցանկանում է միացնել ցանցի սկանավորումը, նույնիսկ եթե Wi-Fi-ը անջատված է:\n\nԹույլատրե՞լ բոլոր սկանավորում ցանկացող ծրագրերին:"</string>
@@ -1837,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Վկայագրերի պահոցը չհաջողվեց ջնջել:"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Վկայականի պահոցը միացված է:"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Վկայականների պահոցն օգտագործելու համար անհրաժեշտ է, որ էկրանը կողպող PIN կամ գաղտնաբառ կիրառեք:"</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"Օգտագործման մատչում"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"Ծրագրեր, որոնք ունեն մուտք դեպի ձեր սարքի օգտագործման պատմությունը:"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Թույլատրված ծրագրեր"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Մուտք հայցող ծրագրեր"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Թույլատրեք մուտքն օգտագործման տվյալներ միայն այն ծրագրերին, որոնց վստահում եք: Ձեր թույլատրած ծրագրերը մուտք կունենան ձեր ծրագրերի օգտագործման պատմությանը և կարող են տեսնել, օրինակ, թե վերջին անգամ երբ է տվյալ ծրագիրն օգտագործվել կամ որքան ժամանակ եք ծախսել տվյալ ծրագրի օգտագործման համար:"</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"Թույլատրե՞լ մուտքը:"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"Եթե թույլատրեք մուտքը, ապա այս ծրագիրը կկարողանա դիտել ձեր ծրագրերի վերաբերյալ ընդհանուր տեղեկությունները, օրինակ՝ որքան հաճախ եք դուք օգտագործում դրանք:"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Արտակարգ իրավիճակ ահազանգող ազդանշան"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Սահմանել վարքը արտակարգ իրավիճակների զանգի դեպքում"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Պահուստավորում և վերակայում"</string>
@@ -2002,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Ակտիվացնել OpenGL հետքերը"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"Օգտագործել NuPlayer (փորձնական)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"Օգտագործել NuPlayer-ը՝ AwesomePlayer-ի փոխարեն"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Անջատել USB աուդիո երթուղայնացումը"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Անջատել ավտոմատ երթուղայնացումը դեպի USB աուդիո սարքեր"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Ցուցադրել կապակցումների դասավորությունը"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"Ցույց տալ կտրվածքի սահմանները, լուսանցքները և այլն"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"Փոխել RTL-ի դասավորության ուղղությունը"</string>

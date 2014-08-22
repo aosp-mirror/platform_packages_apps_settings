@@ -38,8 +38,6 @@
     <string name="turn_off_radio" msgid="1820294552893884115">"무선 끄기"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"IMS로 SMS 켜기"</string>
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS로 SMS 끄기"</string>
-    <string name="mo_over_volte_on" msgid="8839019743280675289">"MO over PS/VoLTE 사용 설정"</string>
-    <string name="mo_over_volte_off" msgid="662428904067315526">"MO over PS/VoLTE 사용 중지"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS 등록을 사용해야 합니다."</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS 등록을 사용 중지해야 합니다."</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ram 덤프 사용"</string>
@@ -127,13 +125,13 @@
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"프로필 설정"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"이름을 설정하지 않아 계정 이름 사용"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"장치 검색"</string>
-    <!-- no translation found for bluetooth_rename_device (4352483834491958740) -->
-    <skip />
+    <string name="bluetooth_rename_device" msgid="4352483834491958740">"기기 이름 변경"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"이름 바꾸기"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"연결을 해제하시겠습니까?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;와(과) 연결이 끊어집니다.&lt;br&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"블루투스 설정을 변경할 권한이 없습니다."</string>
-    <string name="bluetooth_is_visible_message" msgid="5654802364438264825">"이제 주변 기기에 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 표시됩니다."</string>
+    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
+    <skip />
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>을(를) 연결 해제하시겠습니까?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"브로드캐스팅"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"프로필을 사용 중지하시겠습니까?"</string>
@@ -155,11 +153,9 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"페어링 요청"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>와(과) 페어링하려면 터치하세요."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"받은 파일 보기"</string>
-    <string name="bluetooth_show_message_access" msgid="3768765622190972161">"메시지 액세스"</string>
     <string name="device_picker" msgid="8398232791303186677">"블루투스 기기 선택기"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"블루투스 권한 요청"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"앱에서 이 기기에 블루투스를 사용 설정하려고 합니다."</string>
-    <string name="bluetooth_message_access_notice" msgid="8517632448594533116">"블루투스 기기에서 사용 가능한 계정에 액세스하려면 권한을 요청해야 합니다."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"앱에서 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 블루투스 기기에 사용자의 태블릿이 표시되도록 설정하려고 합니다."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"앱에서 <xliff:g id="TIMEOUT">%1$d</xliff:g>초 동안 다른 블루투스 기기에 사용자의 휴대전화가 표시되도록 설정하려고 합니다."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"앱에서 다른 블루투스 기기에 사용자의 태블릿이 표시되도록 설정하려고 합니다. 나중에 블루투스 설정에서 변경할 수 있습니다."</string>
@@ -383,12 +379,9 @@
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"암호화하지 못했습니다."</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="4478225241476039013">"암호화가 중단되어 완료할 수 없습니다. 따라서 태블릿의 데이터에 더 이상 액세스할 수 없습니다. \n\n 태블릿을 다시 사용하려면 초기화해야 합니다. 초기화한 후 태블릿을 설정하면, Google 계정에 백업되어 있던 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3083477162766772532">"암호화가 중단되어 완료할 수 없습니다. 따라서 휴대전화의 데이터에 더 이상 액세스할 수 없습니다. \n\n휴대전화를 다시 사용하려면 초기화해야 합니다. 초기화한 후 휴대전화를 설정하면, Google 계정에 백업되어 있던 데이터를 복원할 수 있습니다."</string>
-    <!-- no translation found for crypt_keeper_data_corrupt_title (8759119849089795751) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (3775740783651700375) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_data_corrupt_summary (6898436151871328007) -->
-    <skip />
+    <string name="crypt_keeper_data_corrupt_title" msgid="8759119849089795751">"복호화 실패"</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="3775740783651700375">"입력한 비밀번호는 정확하나 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n내 태블릿을 다시 사용하려면 공장 출하 상태로 초기화해야 합니다. 초기화 후 태블릿을 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
+    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="6898436151871328007">"입력한 비밀번호는 정확하나 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n내 휴대전화를 다시 사용하려면 공장 출하 상태로 초기화해야 합니다. 초기화 후 휴대전화를 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"입력 방법 전환"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"화면 잠금 선택"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"백업 잠금 선택"</string>
@@ -509,7 +502,6 @@
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에서 연락처와 통화 기록에 액세스하려고 합니다."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 블루투스를 통해 페어링하려고 합니다. 연결하면 기기가 주소록과 통화 기록에 액세스할 수 있습니다."</string>
     <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"페어링된 기기"</string>
-    <string name="bluetooth_message_access" msgid="1698228719102461095">"페어링된 기기에서 다음 위치의 메시지 확인 가능:"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"사용할 수 있는 기기"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"사용 가능한 기기가 없습니다."</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"연결"</string>
@@ -625,7 +617,8 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"항상 검색 허용"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi‑Fi가 꺼진 경우에도 Google 위치 서비스 및 기타 앱이 네트워크를 검색하도록 합니다."</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fi 자동 관리"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6514058937939695429">"Wi‑Fi 도우미가 Wi‑Fi 연결을 관리하도록 허용"</string>
+    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
+    <skip />
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi 도우미"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi 도우미"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"인증서 설치"</string>
@@ -697,8 +690,6 @@
     <string name="wifi_not_in_range" msgid="1136191511238508967">"범위 내에 없음"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS 사용 가능"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS 사용 가능)"</string>
-    <string name="wifi_secured_first_item" msgid="4072076186051083451">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>(으)로 보안"</string>
-    <string name="wifi_secured_second_item" msgid="1326000076939056265">"<xliff:g id="WIFI_SECURITY_SHORT">%1$s</xliff:g>(으)로 보안"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"네트워크 비밀번호 입력"</string>
     <string name="wifi_security_none" msgid="7985461072596594400">"없음"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"위치 정확성 개선 등의 목적으로 <xliff:g id="APP_NAME">%1$s</xliff:g>에서 Wi-Fi가 꺼져 있을 때에도 네트워크 검색을 사용하도록 설정하려 합니다.\n\n검색하려는 모든 앱에 대해 이를 허용하시겠습니까?"</string>
@@ -786,8 +777,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"벨소리"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"알림"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"전화 벨소리와 알림을 같은 볼륨으로"</string>
-    <!-- no translation found for home_work_profile_not_supported (1357721012342357037) -->
-    <skip />
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"직장 프로필은 지원하지 않습니다."</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"기본 알림 소리"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"미디어"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"음악 및 동영상에 대한 볼륨 설정"</string>
@@ -855,7 +845,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"설정"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"기기를 들어 대기 모드 해제"</string>
-    <string name="doze_title" msgid="2259176504273878294">"대기 디스플레이"</string>
+    <string name="doze_title" msgid="2259176504273878294">"절전 모드 자동 해제"</string>
     <string name="doze_summary" msgid="8300817661725517088">"기기를 들거나 알림 수신 시 절전 모드 해제"</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"글꼴 크기"</string>
@@ -1838,8 +1828,11 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"자격증명 저장소를 삭제하지 못했습니다."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"자격증명 저장소를 사용합니다."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"자격증명 저장소를 사용하려면 먼저 화면 잠금 PIN 또는 비밀번호를 설정해야 합니다."</string>
-    <string name="usage_access_title" msgid="7486234618012778690">"사용 기록에 액세스"</string>
-    <string name="usage_access_summary" msgid="5393473213889000980">"기기 사용 기록에 액세스할 수 있는 앱"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"사용 액세스 권한을 보유한 앱"</string>
+    <string name="usage_access_app_list_header" msgid="5216887502569700574">"액세스 요청 앱"</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"신뢰하는 앱만 사용 데이터에 액세스하도록 허용해야 합니다. 허용된 앱은 내 앱 사용 기록(예: 앱 마지막 사용 시간, 앱 전체 사용 시간)에 액세스할 수 있습니다."</string>
+    <string name="allow_usage_access_title" msgid="2134237975190472249">"액세스를 허용하시겠습니까?"</string>
+    <string name="allow_usage_access_message" msgid="7858892531929539963">"액세스를 허용하는 경우 이 앱에서 내 앱에 대한 일반 정보(예: 앱 사용 빈도)를 볼 수 있습니다."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"긴급 신호음"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"백업 및 초기화"</string>
@@ -2003,6 +1996,8 @@
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"OpenGL 추적 사용 설정"</string>
     <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer 사용(베타)"</string>
     <string name="use_nuplayer_summary" msgid="1991479067478516714">"AwesomePlayer 대신 NuPlayer 사용"</string>
+    <string name="usb_audio_disable_routing" msgid="8114498436003102671">"USB 오디오 연결 사용 중지"</string>
+    <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"USB 오디오 주변기기로 자동 연결 사용 중지"</string>
     <string name="debug_layout" msgid="5981361776594526155">"레이아웃 범위 표시"</string>
     <string name="debug_layout_summary" msgid="2001775315258637682">"클립 경계, 여백 등을 표시"</string>
     <string name="force_rtl_layout_all_locales" msgid="2259906643093138978">"RTL 레이아웃 방향 강제 적용"</string>
@@ -2197,7 +2192,7 @@
     <string name="user_add_user_message_long" msgid="718192651887726259">"사용자를 추가하여 이 기기를 다른 사람들과 공유할 수 있습니다. 각 사용자는 앱, 배경화면 등으로 꾸밀 수 있는 자신만의 공간을 갖습니다. 또한 사용자는 모든 사람에게 적용되는 Wi-Fi와 같은 기기 설정도 조정할 수 있습니다. \n\n추가된 새로운 사용자는 자신의 공간을 설정해야 합니다.\n\n모든 사용자는 다른 사용자들을 위하여 앱을 업데이트할 수 있습니다."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"추가된 새로운 사용자는 자신의 공간을 설정해야 합니다.\n\n모든 사용자는 다른 사용자들을 위하여 앱을 업데이트할 수 있습니다."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"지금 사용자를 설정하시겠습니까?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"사용자가 기기를 사용하여 자신의 공간을 설정할 수 있는지 확인하세요"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"사용자가 기기를 사용하여 자신의 공간을 설정할 수 있는지 확인하세요."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"지금 프로필을 설정하시겠습니까?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"지금 설정"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"나중에"</string>
