@@ -16,7 +16,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@android:id/widget_frame"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/user_spinner_item_height"
         android:orientation="horizontal" >
 
@@ -39,6 +39,7 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:paddingStart="@dimen/user_spinner_padding"
+            android:paddingEnd="@dimen/user_spinner_padding"
             style="@style/TextAppearance.Medium" />
 
 </LinearLayout>
