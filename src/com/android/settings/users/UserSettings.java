@@ -924,6 +924,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (!isInitialized(user)) {
                     mHandler.sendMessage(mHandler.obtainMessage(
                             MESSAGE_SETUP_USER, user.id, user.serialNumber));
+                } else {
+                    switchUserNow(userId);
                 }
             }
         } else if (pref == mAddUser) {
