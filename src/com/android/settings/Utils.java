@@ -774,17 +774,24 @@ public final class Utils {
             DialogInterface.OnClickListener onConfirmListener) {
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         UserInfo userInfo = um.getUserInfo(removingUserId);
+        int titleResId;
+        int messageResId;
+        if (UserHandle.myUserId() == removingUserId) {
+            titleResId = R.string.user_confirm_remove_self_title;
+            messageResId = R.string.user_confirm_remove_self_message;
+        } else if (userInfo.isRestricted()) {
+            titleResId = R.string.user_profile_confirm_remove_title;
+            messageResId = R.string.user_profile_confirm_remove_message;
+        } else if (userInfo.isManagedProfile()) {
+            titleResId = R.string.work_profile_confirm_remove_title;
+            messageResId = R.string.work_profile_confirm_remove_message;
+        } else {
+            titleResId = R.string.user_confirm_remove_title;
+            messageResId = R.string.user_confirm_remove_message;
+        }
         Dialog dlg = new AlertDialog.Builder(context)
-                .setTitle(UserHandle.myUserId() == removingUserId
-                    ? R.string.user_confirm_remove_self_title
-                    : (userInfo.isRestricted()
-                        ? R.string.user_profile_confirm_remove_title
-                        : R.string.user_confirm_remove_title))
-                .setMessage(UserHandle.myUserId() == removingUserId
-                    ? R.string.user_confirm_remove_self_message
-                    : (userInfo.isRestricted()
-                        ? R.string.user_profile_confirm_remove_message
-                        : R.string.user_confirm_remove_message))
+                .setTitle(titleResId)
+                .setMessage(messageResId)
                 .setPositiveButton(R.string.user_delete_button,
                         onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null)
