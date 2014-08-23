@@ -350,6 +350,15 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         if (preference instanceof VpnPreference) {
             VpnProfile profile = ((VpnPreference) preference).getProfile();
+            if (mInfo != null && profile.key.equals(mInfo.key) &&
+                    mInfo.state == LegacyVpnInfo.STATE_CONNECTED) {
+                try {
+                    mInfo.intent.send();
+                    return true;
+                } catch (Exception e) {
+                    // ignore
+                }
+            }
             mDialog = new VpnDialog(getActivity(), this, profile, false);
         } else {
             // Generate a new key. Here we just use the current time.
