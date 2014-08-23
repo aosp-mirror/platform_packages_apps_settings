@@ -4112,19 +4112,19 @@
          a full voice interaction service.  This is something that provides interactive
          voice control of applications; for example you can tell it commands to have it
          launch and let you interact with applications through your voice. -->
-    <string name="voice_interactor_preference_summary">Full voice interaction</string>
+    <string name="voice_interactor_preference_summary">Full hotword and interaction</string>
     <!-- [CHAR LIMIT=NONE] The summary text for the voice service preference that is
          a simple voice recognition service.  This is something that only provides simple
          speech to text conversions that applications can use when they want to allow you
          to provide text to them through your voice (instead of with a keyboard). -->
-    <string name="voice_recognizer_preference_summary">Simple voice recognition</string>
+    <string name="voice_recognizer_preference_summary">Simple speech to text</string>
     <!-- [CHAR_LIMIT=NONE] Warning message about security implications of enabling a
          voice interaction service, displayed as a dialog
          message when the user selects to enable a service. -->
     <string name="voice_interaction_security_warning">This voice input service will be able to
-        control all voice enabled applications on your behalf.
-        It comes from the <xliff:g id="voice_input_service_app_name">%s</xliff:g> application.
-        Enable the use of this service?</string>
+        perform always-on voice monitoring and control voice enabled applications on your
+        behalf.  It comes from the <xliff:g id="voice_input_service_app_name">%s</xliff:g>
+        application.  Enable the use of this service?</string>
 
     <!-- Text-To-Speech (TTS) settings --><skip />
     <!-- Name of the TTS package as listed by the package manager. -->
