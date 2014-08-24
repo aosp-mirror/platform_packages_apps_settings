@@ -78,6 +78,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.bluetooth_device_advanced);
         getPreferenceScreen().setOrderingAsAdded(false);
         mProfileContainer = (PreferenceGroup) findPreference(KEY_PROFILE_CONTAINER);
+        mProfileContainer.setLayoutResource(R.layout.bluetooth_preference_category);
 
         mManager = LocalBluetoothManager.getInstance(getActivity());
         CachedBluetoothDeviceManager deviceManager =
