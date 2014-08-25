@@ -40,9 +40,9 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -68,12 +68,12 @@ public class TetherSettings extends SettingsPreferenceFragment
     private static final int DIALOG_AP_SETTINGS = 1;
 
     private WebView mView;
-    private CheckBoxPreference mUsbTether;
+    private SwitchPreference mUsbTether;
 
     private WifiApEnabler mWifiApEnabler;
-    private CheckBoxPreference mEnableWifiAp;
+    private SwitchPreference mEnableWifiAp;
 
-    private CheckBoxPreference mBluetoothTether;
+    private SwitchPreference mBluetoothTether;
 
     private BroadcastReceiver mTetherChangeReceiver;
 
@@ -135,10 +135,10 @@ public class TetherSettings extends SettingsPreferenceFragment
         }
 
         mEnableWifiAp =
-                (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
+                (SwitchPreference) findPreference(ENABLE_WIFI_AP);
         Preference wifiApSettings = findPreference(WIFI_AP_SSID_AND_SECURITY);
-        mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
-        mBluetoothTether = (CheckBoxPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
+        mUsbTether = (SwitchPreference) findPreference(USB_TETHER_SETTINGS);
+        mBluetoothTether = (SwitchPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -484,7 +484,7 @@ public class TetherSettings extends SettingsPreferenceFragment
             if (resultCode == Activity.RESULT_OK) {
                 startTethering();
             } else {
-                //BT and USB need checkbox turned off on failure
+                //BT and USB need switch turned off on failure
                 //Wifi tethering is never turned on until afterwards
                 switch (mTetherChoice) {
                     case BLUETOOTH_TETHERING:
