@@ -56,6 +56,8 @@ public final class BluetoothDevicePreference extends Preference implements
 
     private AlertDialog mDisconnectDialog;
 
+    private View mView;
+
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
         super(context);
 
@@ -140,6 +142,7 @@ public final class BluetoothDevicePreference extends Preference implements
             }
         }
 
+        mView = view;
         super.onBindView(view);
     }
 
@@ -179,7 +182,10 @@ public final class BluetoothDevicePreference extends Preference implements
         int bondState = mCachedDevice.getBondState();
 
         if (mCachedDevice.isConnected()) {
-            askDisconnect();
+            if (mOnSettingsClickListener != null) {
+                mView.setTag(mCachedDevice);
+                mOnSettingsClickListener.onClick(mView);
+            }
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
             mCachedDevice.connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
