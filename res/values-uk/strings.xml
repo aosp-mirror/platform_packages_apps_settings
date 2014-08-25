@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Від’єднатися?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Це призведе до роз’єднання з пристроєм:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Ви не маєте дозволу змінювати налаштування Bluetooth."</string>
-    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> видимий для пристроїв поблизу, якщо відкрито налашт. Bluetooth."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Відключити пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Трансляція"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Вимкнути профіль?"</string>
@@ -356,8 +355,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Шифрувати пристрій"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Шифрувати телефон"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Зашифровано"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"Ви можете шифрувати свої облікові записи, налаштування, завантажені додатки та їх дані, медіа-файли й інші файли. Якщо ви встановили блокування екрана (тобто ключ, числовий PIN-код або пароль) і зашифрували планшет, для його розшифрування потрібно буде розблоковувати екран щоразу, коли ви вмикаєте планшет. Єдиний інший спосіб розшифрувати планшет – відновити заводські налаштування, але так стираються всі дані.\n\nШифрування триває не менше години. Перш ніж почати шифрування, переконайтеся, що акумулятор повністю заряджений. Не можна відключати планшет до завершення процесу. Якщо перервати шифрування, буде втрачено деякі або всі дані."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"Ви можете шифрувати свої облікові записи, налаштування, завантажені додатки та їх дані, медіа-файли й інші файли. Якщо ви встановили блокування екрана (тобто ключ, числовий PIN-код або пароль) і зашифрували телефон, для його розшифрування потрібно буде розблоковувати екран щоразу, коли ви вмикаєте телефон. Єдиний інший спосіб розшифрувати телефон – відновити заводські налаштування, але так стираються всі дані.\n\nШифрування триває не менше години. Перш ніж почати шифрування, переконайтеся, що акумулятор повністю заряджений. Не можна відключати телефон до завершення процесу. Якщо перервати шифрування, буде втрачено деякі або всі дані."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"Ви можете шифрувати свої облікові записи, налаштування, завантажені додатки та їх дані, медіа-файли й інші файли. Якщо ви встановили блокування екрана (тобто ключ, числовий PIN-код або пароль) і зашифрували планшет, для його розшифрування потрібно буде розблоковувати екран під час кожного ввімкнення планшета. Розшифрувати планшет також можна шляхом відновлення заводських налаштувань, але в такому випадку буде стерто всі дані.\n\nШифрування триває не менше години. Перш ніж почати шифрування, переконайтеся, що акумулятор заряджено. Не можна відключати планшет до завершення процесу. Якщо перервати шифрування, буде втрачено деякі або всі дані."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Ви можете шифрувати свої облікові записи, налаштування, завантажені додатки та їх дані, медіа-файли й інші файли. Якщо ви встановили блокування екрана (тобто ключ, числовий PIN-код або пароль) і зашифрували телефон, для його розшифрування потрібно буде розблоковувати екран під час кожного ввімкнення телефона. Розшифрувати телефон також можна шляхом відновлення заводських налаштувань, але в такому випадку буде стерто всі дані.\n\nШифрування триває не менше години. Перш ніж почати шифрування, переконайтеся, що акумулятор заряджено. Не можна відключати телефон до завершення процесу. Якщо перервати шифрування, буде втрачено деякі або всі дані."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Шифрувати пристрій"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Шифрувати телефон"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Зарядіть акумулятор і повторіть спробу."</string>
@@ -463,6 +462,8 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Адміністратори пристрою"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Переглянути чи відключити адміністраторів пристрою"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Довірчі агенти"</string>
+    <!-- no translation found for disabled_because_no_backup_security (6877660253409580377) -->
+    <skip />
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Переглядати або вимикати довірчі агенти"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Увімк. Bluetooth"</string>
@@ -617,8 +618,7 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Завжди дозволяти сканування"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Дозволити службі локації Google та іншим додаткам сканувати мережі, навіть якщо Wi-Fi вимкнено"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Автоматично керувати Wi‑Fi"</string>
-    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
-    <skip />
+    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Дозволити додатку <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> керувати вашим з’єднанням Wi‑Fi"</string>
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Установити сертифікати"</string>
@@ -1412,7 +1412,6 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Ярлики"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Текст. введ."</string>
     <string name="input_method" msgid="5434026103176856164">"Метод введення"</string>
-    <string name="choose_input_methods" msgid="3919825636585320942">"Вибрати клавіатури"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Поточна клавіатура"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Вибір методу введення"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Автоматично"</string>
@@ -1457,6 +1456,7 @@
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Виберіть розміри буфера журналу"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Фіктивні місцезнаходження"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Дозв. фіктивні місцезн."</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Увімкнути оцінку атрибуції переглядів"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Дозвол. налагодж. USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Налагодження USB застосовується лише з метою розробки. Його можна використовувати для копіювання даних між комп’ютером і пристроєм, встановлення програм на вашому пристрої без сповіщення та читання даних журналу."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Скасувати доступ до налагодження USB для всіх комп’ютерів, які раніше отримали таке право?"</string>
@@ -1513,7 +1513,9 @@
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Диктувати паролі"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Затримка натискання й утримування"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Інверсія кольорів"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Коригування колірного простору"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"Експериментальна функція. Може вплинути на продуктивність"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"Корекція кольору"</string>
+    <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"Це експериментальна функція. Вона може вплинути на продуктивність."</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Показувати на панелі швидкого налаштування"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Режим корекції"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Замінено на <xliff:g id="TITLE">%1$s</xliff:g>"</string>
@@ -1525,6 +1527,8 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Налаштування"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Увімкнено"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Вимкнено"</string>
+    <!-- no translation found for accessibility_feature_or_input_method_not_allowed (5950315477009501647) -->
+    <skip />
     <string name="captioning_preview_title" msgid="1234015253497016890">"Переглянути"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Стандартні параметри"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Мова"</string>
@@ -1859,7 +1863,8 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Деактивувати"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Адміністратори пристрою"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Немає доступн. адміністраторів мережі"</string>
-    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"Видаліть робочий профіль через Налаштування &gt; Облікові записи, і <xliff:g id="APP_NAME">%1$s</xliff:g> втратить доступ до нього."</string>
+    <!-- no translation found for managed_profile_device_admin_info (5048846624960067582) -->
+    <skip />
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Особисте"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Робота"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Немає довірчих агентів"</string>
@@ -1868,7 +1873,9 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Адміністратор пристрою"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Активація цього адміністратора дозволить програмі <xliff:g id="APP_NAME">%1$s</xliff:g> виконувати такі операції:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Цей адміністратор активний і дозволяє програмі <xliff:g id="APP_NAME">%1$s</xliff:g> виконувати такі операції:"</string>
-    <string name="profile_owner_add_title" msgid="1127236753400079839">"Власник профілю"</string>
+    <string name="profile_owner_add_title" msgid="6249331160676175009">"Активувати диспетчера профілю?"</string>
+    <!-- no translation found for adding_profile_owner_warning (6469780138110334180) -->
+    <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"Без назви"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Загальні"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Журнал сповіщень"</string>
@@ -1911,10 +1918,9 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Синхронізація"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Наразі виникли проблеми із синхронізацією. Незабаром вона відновиться."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Додати обліковий запис"</string>
-    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
+    <!-- no translation found for managed_profile_not_available_label (3489771164851107822) -->
     <skip />
-    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
-    <skip />
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"Видалити службовий профіль"</string>
     <string name="background_data" msgid="5779592891375473817">"Фонові дані"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Програми можуть будь-коли синхроніз., надсил. й отрим. дані"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Вимкн. фонові дані?"</string>
@@ -1953,9 +1959,9 @@
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Синхронізацію для цього елемента зараз вимкнено. Щоб змінити це налаштування, тимчасово ввімкніть фонові дані й автоматичну синхронізацію."</string>
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC-адреса"</string>
-    <string name="enter_password" msgid="4131758584074246224">"Введіть пароль, щоб розшифрувати носій"</string>
-    <string name="enter_pin" msgid="286221169871526876">"Введіть PIN-код, щоб розшифрувати носій"</string>
-    <string name="enter_pattern" msgid="5707838886272453608">"Намалюйте ключ, щоб розшифрувати носій"</string>
+    <string name="enter_password" msgid="8035706727471334122">"Введіть пароль, щоб запустити пристрій Android"</string>
+    <string name="enter_pin" msgid="5305333588093263790">"Введіть PIN-код, щоб запустити пристрій Android"</string>
+    <string name="enter_pattern" msgid="4187435713036808566">"Намалюйте ключ, щоб запустити пристрій Android"</string>
     <string name="try_again" msgid="4272075051293936921">"Повторіть спробу."</string>
     <string name="delete" msgid="4219243412325163003">"Видалити"</string>
     <string name="misc_files" msgid="6720680815969643497">"Різні файли"</string>
@@ -2174,12 +2180,14 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Додати користувача чи профіль"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Додати користувача"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Профіль з обмеженням"</string>
-    <string name="user_summary_managed_profile" msgid="5729429961989469287">"Керований профіль"</string>
+    <!-- no translation found for user_summary_managed_profile (7369539529693048111) -->
+    <skip />
     <string name="user_need_lock_message" msgid="2596365678651842785">"Перш ніж створювати обмежений профіль, потрібно налаштувати блокування екрана, щоб захистити свої програми та особисті дані."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Налаштувати блокування"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не створено"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Не налаштовано – профіль з обмеженням"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"Не налаштовано – керований профіль"</string>
+    <!-- no translation found for user_summary_managed_profile_not_set_up (1659125858619760573) -->
+    <skip />
     <string name="user_owner" msgid="3879126011135546571">"Власник"</string>
     <string name="user_you" msgid="1639158809315025986">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Псевдонім"</string>
@@ -2206,17 +2214,22 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Видалити себе?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Видалити користувача?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Видалити цей профіль?"</string>
+    <!-- no translation found for work_profile_confirm_remove_title (2017323555783522213) -->
+    <skip />
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Вашу пам’ять і дані буде видалено з цього планшетного ПК. Цю дію не можна відмінити."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Вашу пам’ять і дані буде видалено з цього телефону. Цю дію не можна відмінити."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Усі додатки й дані буде видалено."</string>
+    <!-- no translation found for work_profile_confirm_remove_message (7593793549364168783) -->
+    <skip />
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Усі додатки й дані буде видалено."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Додавання нового користувача…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Видалити користувача"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Видалити"</string>
     <string name="user_guest" msgid="8475274842845401871">"Гість"</string>
-    <string name="user_exit_guest_title" msgid="45738573948463472">"Вийти з режиму \"Гість\""</string>
-    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Закінчити сеанс у режимі \"Гість\"?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Якщо закінчити сеанс у режимі \"Гість\", усі локальні дані буде видалено."</string>
+    <string name="user_exit_guest_title" msgid="5613997155527410675">"Вийти з режиму гостя"</string>
+    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"Вийти з режиму гостя?"</string>
+    <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Усі додатки й дані з цього сеансу буде видалено."</string>
+    <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Вийти"</string>
     <string name="user_enable_calling" msgid="8310589470979488255">"Дозволити телефонні дзвінки"</string>
     <string name="user_enable_calling_sms" msgid="794823380737672333">"Дозволити телефонні дзвінки й SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Видалити користувача"</string>
@@ -2357,6 +2370,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"обліковий запис"</string>
     <string name="keywords_users" msgid="4673901601478559100">"обмеження обмежувати обмежено"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"виправлення тексту виправляти звук вібросигнал автоматично мова жест пропонувати пропозиція тема образливе слово водити смайли emoji"</string>
+    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
+    <skip />
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Налаштувати NFC-тег для Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записати"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Торкніться тегу, у який потрібно записати дані…"</string>
@@ -2423,7 +2438,8 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Пріоритетні"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Показувати сповіщення вгорі списку та приймати їх, коли на пристрої вибрано параметр \"Лише пріоритетні сповіщення\""</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Конфіденційно"</string>
-    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"Ховати конфіденційний вміст зі сповіщень цього додатка, коли пристрій заблоковано"</string>
+    <!-- no translation found for app_notification_sensitive_summary (2505314249332316395) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблоковано"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Пріоритетні"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфіденційно"</string>
