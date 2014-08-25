@@ -159,32 +159,15 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         private boolean panelOpen;
         private boolean immutable;
         private List<Preference> mChildren = new ArrayList<Preference>();
-        private final ColorFilter grayscaleFilter;
 
         AppRestrictionsPreference(Context context, OnClickListener listener) {
             super(context);
             setLayoutResource(R.layout.preference_app_restrictions);
             this.listener = listener;
-
-            ColorMatrix colorMatrix = new ColorMatrix();
-            colorMatrix.setSaturation(0f);
-            float[] matrix = colorMatrix.getArray();
-            matrix[18] = 0.5f;
-            grayscaleFilter = new ColorMatrixColorFilter(colorMatrix);
         }
 
         private void setSettingsEnabled(boolean enable) {
             hasSettings = enable;
-        }
-
-        @Override
-        public void setChecked(boolean checked) {
-            if (checked) {
-                getIcon().setColorFilter(null);
-            } else {
-                getIcon().setColorFilter(grayscaleFilter);
-            }
-            super.setChecked(checked);
         }
 
         void setRestrictions(ArrayList<RestrictionEntry> restrictions) {
@@ -246,6 +229,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 final Switch toggle = (Switch) widget.getChildAt(0);
                 toggle.setEnabled(!isImmutable());
                 toggle.setTag(this);
+                toggle.setClickable(true);
+                toggle.setFocusable(true);
                 toggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
