@@ -160,7 +160,7 @@ public class VoiceInputSettings extends SettingsPreferenceFragment implements
             VoiceInputHelper.RecognizerInfo info = mHelper.mAvailableRecognizerInfos.get(i);
             if (info.key.equals(key)) {
                 Settings.Secure.putString(getActivity().getContentResolver(),
-                        Settings.Secure.VOICE_INTERACTION_SERVICE, null);
+                        Settings.Secure.VOICE_INTERACTION_SERVICE, "");
                 Settings.Secure.putString(getActivity().getContentResolver(),
                         Settings.Secure.VOICE_RECOGNITION_SERVICE, key);
                 return;
