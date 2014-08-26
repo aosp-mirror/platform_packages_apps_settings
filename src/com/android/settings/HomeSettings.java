@@ -19,6 +19,7 @@ package com.android.settings;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -58,6 +59,10 @@ import com.android.settings.search.SearchIndexableRaw;
 
 public class HomeSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "HomeSettings";
+
+    // Boolean extra, indicates only launchers that support managed profiles should be shown.
+    // Note: must match the constant defined in ManagedProvisioning
+    private static final String EXTRA_SUPPORT_MANAGED_PROFILES = "support_managed_profiles";
 
     static final int REQUESTING_UNINSTALL = 10;
 
@@ -118,6 +123,8 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
 
         mPm.replacePreferredActivity(mHomeFilter, IntentFilter.MATCH_CATEGORY_EMPTY,
                 mHomeComponentSet, newHome.activityName);
+
+        getActivity().setResult(Activity.RESULT_OK);
     }
 
     void uninstallApp(HomeAppPreference pref) {
@@ -175,7 +182,10 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         mPrefs = new ArrayList<HomeAppPreference>();
         mHomeComponentSet = new ComponentName[homeActivities.size()];
         int prefIndex = 0;
-        boolean hasManagedProfile = hasManagedProfile();
+        boolean supportManagedProfilesExtra =
+                getActivity().getIntent().getBooleanExtra(EXTRA_SUPPORT_MANAGED_PROFILES, false);
+        boolean mustSupportManagedProfile = hasManagedProfile()
+                || supportManagedProfilesExtra;
         for (int i = 0; i < homeActivities.size(); i++) {
             final ResolveInfo candidate = homeActivities.get(i);
             final ActivityInfo info = candidate.activityInfo;
@@ -186,7 +196,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
                 CharSequence name = info.loadLabel(mPm);
                 HomeAppPreference pref;
 
-                if (hasManagedProfile && !launcherHasManagedProfilesFeature(candidate)) {
+                if (mustSupportManagedProfile && !launcherHasManagedProfilesFeature(candidate)) {
                     pref = new HomeAppPreference(context, activityName, prefIndex,
                             icon, name, this, info, false /* not enabled */,
                             getResources().getString(R.string.home_work_profile_not_supported));
@@ -207,6 +217,10 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
         }
 
         if (mCurrentHome != null) {
+            if (mCurrentHome.isEnabled()) {
+                getActivity().setResult(Activity.RESULT_OK);
+            }
+
             new Handler().post(new Runnable() {
                public void run() {
                    mCurrentHome.setChecked(true);
