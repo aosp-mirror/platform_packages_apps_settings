@@ -327,6 +327,13 @@ public class ApnEditor extends PreferenceActivity
         mMvnoType.setSummary(
                 checkNull(mvnoDescription(mMvnoType.getValue())));
         mMvnoMatchData.setSummary(checkNull(mMvnoMatchData.getText()));
+        // allow user to edit carrier_enabled for some APN
+        boolean ceEditable = getResources().getBoolean(R.bool.config_allow_edit_carrier_enabled);
+        if (ceEditable) {
+            mCarrierEnabled.setEnabled(true);
+        } else {
+            mCarrierEnabled.setEnabled(false);
+        }
     }
 
     /**
@@ -571,6 +578,7 @@ public class ApnEditor extends PreferenceActivity
         values.put(Telephony.Carriers.MVNO_TYPE, checkNotSet(mMvnoType.getValue()));
         values.put(Telephony.Carriers.MVNO_MATCH_DATA, checkNotSet(mMvnoMatchData.getText()));
 
+        values.put(Telephony.Carriers.CARRIER_ENABLED, mCarrierEnabled.isChecked() ? 1 : 0);
         getContentResolver().update(mUri, values, null, null);
 
         return true;
@@ -664,6 +672,8 @@ public class ApnEditor extends PreferenceActivity
         if (pref != null) {
             if (pref.equals(mPassword)){
                 pref.setSummary(starify(sharedPreferences.getString(key, "")));
+            } else if (pref.equals(mCarrierEnabled)) {
+                // do nothing
             } else {
                 pref.setSummary(checkNull(sharedPreferences.getString(key, "")));
             }
