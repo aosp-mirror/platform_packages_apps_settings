@@ -133,6 +133,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     // how long we wait to clear a wrong pattern
     private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 1500;
 
+    // how long we wait to clear a right pattern
+    private static final int RIGHT_PATTERN_CLEAR_TIMEOUT_MS = 500;
+
     private Runnable mClearPatternRunnable = new Runnable() {
         public void run() {
             mLockPatternView.clearPattern();
@@ -167,6 +170,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (failedAttempts == 0) {
                 // The password was entered successfully. Simply do nothing
                 // and wait for the service restart to switch to surfacefligner
+                if (mLockPatternView != null) {
+                    mLockPatternView.removeCallbacks(mClearPatternRunnable);
+                    mLockPatternView.postDelayed(mClearPatternRunnable, RIGHT_PATTERN_CLEAR_TIMEOUT_MS);
+                }
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
@@ -409,6 +416,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             new AsyncTask<Void, Void, Void>() {
                 int type = StorageManager.CRYPT_TYPE_PASSWORD;
                 String owner_info;
+                boolean pattern_visible;
 
                 @Override
                 public Void doInBackground(Void... v) {
@@ -416,6 +424,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                         final IMountService service = getMountService();
                         type = service.getPasswordType();
                         owner_info = service.getField("OwnerInfo");
+                        pattern_visible = !("0".equals(service.getField("PatternVisible")));
                     } catch (Exception e) {
                         Log.e(TAG, "Error calling mount service " + e);
                     }
@@ -444,6 +453,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     ownerInfo.setSelected(true); // Required for marquee'ing to work
 
                     passwordEntryInit();
+
+                    if (mLockPatternView != null) {
+                        mLockPatternView.setInStealthMode(!pattern_visible);
+                    }
 
                     if (mCooldown > 0) {
                         setBackFunctionality(false);
