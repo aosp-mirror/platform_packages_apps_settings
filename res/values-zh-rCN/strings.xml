@@ -355,7 +355,7 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"加密平板电脑"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"加密手机"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"已加密"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"您可以对自己的帐户、设置、下载的应用及其数据、媒体和其他文件进行加密。加密平板电脑后，如果您设置了屏幕锁定（即图案、数字PIN码或密码），那么您必须在每次开机时解锁屏幕，才能将平板电脑解密。除此之外，唯一的解密方法就是恢复出厂设置，但这会清除您所有的数据。\n\n加密过程至少需要1个小时的时间。在开始加密之前，您必须先将电池充满电，并让平板电脑在整个加密过程中保持电源接通状态。如果加密过程出现中断，您将丢失部分或所有数据"</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"您可以对自己的帐户、设置、下载的应用及其数据、媒体和其他文件进行加密。加密平板电脑后，如果您设置了屏幕锁定（即图案、数字PIN码或密码），那么您必须在每次开机时解锁屏幕，才能将平板电脑解密。除此之外，唯一的解密方法就是恢复出厂设置，但这会清除您所有的数据。\n\n加密过程至少需要1个小时的时间。在开始加密之前，您必须先将电池充满电，并让平板电脑在整个加密过程中保持电源接通状态。如果加密过程出现中断，您将丢失部分或所有数据。"</string>
     <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"您可以对自己的帐户、设置、下载的应用及其数据、媒体和其他文件进行加密。加密手机后，如果您设置了屏幕锁定（即图案、数字PIN码或密码），那么您必须在每次开机时解锁屏幕，才能将手机解密。除此之外，唯一的解密方法就是恢复出厂设置，但这会清除您所有的数据。\n\n加密过程至少需要1个小时的时间。在开始加密之前，您必须先将电池充满电，并让手机在整个加密过程中保持电源接通状态。如果加密过程出现中断，您将丢失部分或所有数据。"</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"加密平板电脑"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"加密手机"</string>
@@ -1456,8 +1456,7 @@
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"选择每个日志缓冲区的日志记录器大小"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"允许模拟位置"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"允许模拟位置"</string>
-    <!-- no translation found for debug_view_attributes (6485448367803310384) -->
-    <skip />
+    <string name="debug_view_attributes" msgid="6485448367803310384">"启用视图属性检查功能"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"是否允许USB调试？"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB调试仅适用于开发工作。该功能可用于在您的计算机和设备之间复制数据、在您的设备上安装应用而不发送通知以及读取日志数据。"</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"是否针对您之前授权的所有计算机撤消USB调试的访问权限？"</string>
@@ -1528,8 +1527,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"设置"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"开启"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"关闭"</string>
-    <!-- no translation found for accessibility_feature_or_input_method_not_allowed (5950315477009501647) -->
-    <skip />
+    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"您的单位不允许使用"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"预览"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"标准选项"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"语言"</string>
@@ -1736,9 +1734,12 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"语音输入设置"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"语音输入"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"语音输入服务"</string>
-    <string name="voice_interactor_preference_summary" msgid="5995613396290979463">"全语音互动"</string>
-    <string name="voice_recognizer_preference_summary" msgid="878040238053901752">"简单语音识别"</string>
-    <string name="voice_interaction_security_warning" msgid="1272774555442633823">"此语音输入服务能替您控制所有支持语音功能的应用。该服务由<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>应用提供。要启用此服务吗？"</string>
+    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
+    <skip />
+    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
+    <skip />
+    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
+    <skip />
     <string name="tts_settings" msgid="8186971894801348327">"文字转语音设置"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"文字转语音 (TTS) 输出"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"总是使用我的设置"</string>
@@ -1874,8 +1875,7 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"设备管理器"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"激活此管理器可允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
     <string name="device_admin_status" msgid="4252975713178851910">"此管理器已激活，允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
-    <!-- no translation found for profile_owner_add_title (6249331160676175009) -->
-    <skip />
+    <string name="profile_owner_add_title" msgid="6249331160676175009">"要激活个人资料管理器吗？"</string>
     <!-- no translation found for adding_profile_owner_warning (6469780138110334180) -->
     <skip />
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
@@ -2182,14 +2182,12 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"添加用户或个人资料"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"添加用户"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"受限个人资料"</string>
-    <!-- no translation found for user_summary_managed_profile (7369539529693048111) -->
-    <skip />
+    <string name="user_summary_managed_profile" msgid="7369539529693048111">"工作资料"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"您需要先设置锁定屏幕来保护您的应用和个人数据，然后才可以创建受限个人资料。"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"设置锁定屏幕"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"未设置"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"未设置 - 受限个人资料"</string>
-    <!-- no translation found for user_summary_managed_profile_not_set_up (1659125858619760573) -->
-    <skip />
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"未设置 - 工作资料"</string>
     <string name="user_owner" msgid="3879126011135546571">"机主"</string>
     <string name="user_you" msgid="1639158809315025986">"您（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_nickname" msgid="5148818000228994488">"昵称"</string>
