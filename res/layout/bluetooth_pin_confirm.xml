@@ -29,15 +29,61 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/message"
+            android:id="@+id/message_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dip"
-            android:layout_marginEnd="20dip"
-            android:layout_marginTop="20dip"
-            android:layout_marginBottom="20dip"
+            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
+            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginTop="@dimen/bluetooth_dialog_padding"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="@*android:color/secondary_text_material_light"  />
+
+        <TextView
+            android:id="@+id/message_subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
+            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginBottom="@dimen/bluetooth_dialog_padding"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+
+        <TextView
+            android:id="@+id/pairing_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
+            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:gravity="center_vertical"
+            android:text="@string/bluetooth_pairing_key_msg"
+            android:visibility="gone"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="@*android:color/secondary_text_material_light"  />
+
+        <TextView
+            android:id="@+id/pairing_subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
+            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginBottom="@dimen/bluetooth_dialog_padding"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+        <TextView
+            android:id="@+id/pairing_code_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bluetooth_dialog_padding"
+            android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
+            android:layout_marginBottom="@dimen/bluetooth_dialog_padding"
+            android:gravity="center_vertical"
+            android:text="@string/bluetooth_enter_passkey_msg"
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textColor="@*android:color/secondary_text_material_light"
+            android:visibility="gone" />
 
     </LinearLayout>
 
