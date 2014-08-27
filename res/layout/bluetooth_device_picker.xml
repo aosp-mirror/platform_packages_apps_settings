@@ -35,7 +35,7 @@
                     style="@style/wifi_item_label" />
 
             <EditText android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textNoSuggestions"
                     android:maxLength="@integer/bluetooth_name_length"
@@ -45,7 +45,7 @@
             <fragment android:id="@+id/bluetooth_fragment_settings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    class="com.android.settings.bluetooth.DeviceProfilesSettings" />
+                    class="com.android.settings.bluetooth.DevicePickerFragment" />
 
     </LinearLayout>
 
