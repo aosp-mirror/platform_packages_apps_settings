@@ -113,6 +113,12 @@ public class PowerUsageSummary extends PreferenceFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        mStatsHelper.clearStats();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         BatteryStatsHelper.dropFile(getActivity(), BATTERY_HISTORY_FILE);
@@ -250,7 +256,8 @@ public class PowerUsageSummary extends PreferenceFragment {
         mAppListGroup.addPreference(mHistPref);
         boolean addedSome = false;
 
-        PowerProfile powerProfile = mStatsHelper.getPowerProfile();
+        final PowerProfile powerProfile = mStatsHelper.getPowerProfile();
+        final BatteryStats stats = mStatsHelper.getStats();
         final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
         if (averagePower >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP) {
             final List<UserHandle> profiles = mUm.getUserProfiles();
@@ -259,7 +266,7 @@ public class PowerUsageSummary extends PreferenceFragment {
 
             final List<BatterySipper> usageList = mStatsHelper.getUsageList();
 
-            final int dischargeAmount = mStatsHelper.getStats().getDischargeAmount(mStatsType);
+            final int dischargeAmount = stats != null ? stats.getDischargeAmount(mStatsType) : 0;
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
