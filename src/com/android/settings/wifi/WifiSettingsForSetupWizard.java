@@ -18,18 +18,19 @@ package com.android.settings.wifi;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.DataSetObserver;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.AbsListView.LayoutParams;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -47,6 +48,11 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     // show a text regarding data charges when wifi connection is required during setup wizard
     protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
 
+    private View mAddOtherNetworkItem;
+    private ListAdapter mAdapter;
+    private TextView mEmptyFooter;
+    private boolean mListLastEmpty = false;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -60,9 +66,9 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
             list.addHeaderView(header, null, false);
         }
 
-        final View other = inflater.inflate(R.layout.setup_wifi_add_network, list, false);
-        list.addFooterView(other, null, true);
-        other.setOnClickListener(new OnClickListener() {
+        mAddOtherNetworkItem = inflater.inflate(R.layout.setup_wifi_add_network, list, false);
+        list.addFooterView(mAddOtherNetworkItem, null, true);
+        mAddOtherNetworkItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mWifiManager.isWifiEnabled()) {
@@ -92,6 +98,15 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         if (hasNextButton()) {
             getNextButton().setVisibility(View.GONE);
         }
+
+        mAdapter = getPreferenceScreen().getRootAdapter();
+        mAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                updateFooter();
+            }
+        });
     }
 
     @Override
@@ -132,5 +147,31 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         WifiSetupActivity activity = (WifiSetupActivity) getActivity();
         activity.networkSelected();
         super.connect(networkId);
+    }
+
+    @Override
+    protected TextView initEmptyView() {
+        mEmptyFooter = new TextView(getActivity());
+        mEmptyFooter.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT));
+        mEmptyFooter.setGravity(Gravity.CENTER);
+        mEmptyFooter.setCompoundDrawablesWithIntrinsicBounds(0,
+                R.drawable.ic_wifi_emptystate, 0,0);
+        return mEmptyFooter;
+    }
+
+    protected void updateFooter() {
+        final boolean isEmpty = mAdapter.isEmpty();
+        if (isEmpty != mListLastEmpty) {
+            final ListView list = getListView();
+            if (isEmpty) {
+                list.removeFooterView(mAddOtherNetworkItem);
+                list.addFooterView(mEmptyFooter, null, false);
+            } else {
+                list.removeFooterView(mEmptyFooter);
+                list.addFooterView(mAddOtherNetworkItem, null, true);
+            }
+            mListLastEmpty = isEmpty;
+        }
     }
 }
