@@ -393,7 +393,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             }
             if (profileFrag == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
-                mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_picker, null);
+                mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_settings, null);
                 profileFrag = (DeviceProfilesSettings)activity.getFragmentManager()
                     .findFragmentById(R.id.bluetooth_fragment_settings);
             }
