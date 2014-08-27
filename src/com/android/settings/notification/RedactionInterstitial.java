@@ -82,7 +82,7 @@ public class RedactionInterstitial extends SettingsActivity {
             final boolean enabled = Settings.Secure.getInt(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
             final boolean show = Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
+                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1) != 0;
             mShowAllButton.setChecked(enabled && show);
             mRedactSensitiveButton.setChecked(enabled && !show);
             mHideAllButton.setChecked(!enabled);
