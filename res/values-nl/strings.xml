@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ontkoppelen?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Hierdoor wordt uw verbinding met:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; verbroken"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"U heeft geen rechten om de Bluetooth-instellingen te wijzigen."</string>
-    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is zichtbaar voor apparaten in de buurt terwijl \'Bluetooth-instellingen\' is geopend."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ontkoppelen?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Uitzending"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profiel uitschakelen?"</string>
@@ -356,8 +355,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Tablet versleutelen"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Telefoon versleutelen"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Gecodeerd"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"U kunt uw accounts, instellingen, gedownloade apps en bijbehorende gegevens, media en andere bestanden coderen. Als u een schermvergrendeling heeft ingesteld (dat wil zeggen: een patroon of numerieke pincode of wachtwoord), moet u na het coderen van uw tablet het scherm ontgrendelen om de tablet te decoderen wanneer u de tablet inschakelt. De enige andere manier om de tablet te decoderen is de fabrieksinstellingen terugzetten, waarbij al uw gegevens worden gewist.\n\nCodering duurt een uur of langer. U moet beginnen met een opgeladen accu en uw tablet moet gedurende het proces zijn aangesloten op een stopcontact. Als u het proces onderbreekt, verliest u een aantal of alle gegevens."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"U kunt uw accounts, instellingen, gedownloade apps en bijbehorende gegevens, media en andere bestanden coderen. Als u een schermvergrendeling heeft ingesteld (dat wil zeggen: een patroon of numerieke pincode of wachtwoord), moet u na het coderen van uw telefoon het scherm ontgrendelen om de telefoon te decoderen wanneer u de telefoon inschakelt. De enige andere manier om de telefoon te decoderen is de fabrieksinstellingen terugzetten, waarbij al uw gegevens worden gewist.\n\nCodering duurt een uur of langer. U moet beginnen met een opgeladen accu en uw telefoon moet gedurende het proces zijn aangesloten op een stopcontact. Als u het proces onderbreekt, verliest u een aantal of alle gegevens."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"U kunt uw accounts, instellingen, gedownloade apps en bijbehorende gegevens, media en andere bestanden versleutelen. Als u een schermvergrendeling heeft ingesteld (dat wil zeggen: een patroon of numerieke pincode of wachtwoord), moet u na het versleutelen van uw tablet het scherm ontgrendelen om de tablet te ontsleutelen wanneer u de tablet inschakelt. De enige andere manier om de tablet te ontsleutelen is de fabrieksinstellingen terugzetten, waarbij al uw gegevens worden gewist.\n\nversleutelen duurt een uur of langer. U moet beginnen met een opgeladen accu en uw tablet moet gedurende het proces zijn aangesloten op een stopcontact. Als u het proces onderbreekt, verliest u een deel van uw gegevens of alle gegevens"</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"U kunt uw accounts, instellingen, gedownloade apps en bijbehorende gegevens, media en andere bestanden versleutelen. Als u een schermvergrendeling heeft ingesteld (dat wil zeggen: een patroon of numerieke pincode of wachtwoord), moet u na het versleutelen van uw telefoon het scherm ontgrendelen om de telefoon te ontsleutelen wanneer u de telefoon inschakelt. De enige andere manier om de telefoon te ontsleutelen is de fabrieksinstellingen terugzetten, waarbij al uw gegevens worden gewist.\n\nVersleutelen duurt een uur of langer. U moet beginnen met een opgeladen accu en uw telefoon moet gedurende het proces zijn aangesloten op een stopcontact. Als u het proces onderbreekt, verliest u een een deel van uw gegevens of alle gegevens."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Tablet versleutelen"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Telefoon versleutelen"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Laad de accu op en probeer het opnieuw."</string>
@@ -463,6 +462,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Apparaatbeheerders"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Apparaatbeheerders weergeven of uitschakelen"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Trust-agents"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Stel voor gebruik eerst een schermvergrendeling in"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Trust-agents bekijken of uitschakelen"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bluetooth inschakelen"</string>
@@ -617,8 +617,7 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Scannen altijd toestaan"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"De locatieservice en andere apps van Google laten scannen naar netwerken, ook wanneer wifi is uitgeschakeld"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wifi automatisch beheren"</string>
-    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
-    <skip />
+    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Uw wifi-verbinding laten beheren door <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>"</string>
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Certificaten installeren"</string>
@@ -1412,7 +1411,6 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Sneltoetsen"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Tekstinvoer"</string>
     <string name="input_method" msgid="5434026103176856164">"Invoermethode"</string>
-    <string name="choose_input_methods" msgid="3919825636585320942">"Toetsenborden kiezen"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Huidig toetsenbord"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Selectie voor invoermethode"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatisch"</string>
@@ -1457,6 +1455,7 @@
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Kies Logger-grootten per logbuffer"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Neplocaties toestaan"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Inspectie van weergavekenmerk inschakelen"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB-foutopsporing toestaan?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-foutopsporing is alleen bedoeld voor ontwikkeldoeleinden. Het kan worden gebruikt om gegevens te kopiëren tussen uw computer en uw apparaat, apps zonder melding op uw apparaat te installeren en loggegevens te lezen."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Toegang tot USB-foutopsporing intrekken voor alle computers waarvoor u dit eerder heeft toegestaan?"</string>
@@ -1513,7 +1512,9 @@
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Wachtwoorden voorlezen"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Vertraging voor blijven aanraken"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Kleurinversie"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Kleurruimtecorrectie"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimenteel) Kan invloed hebben op de prestaties"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"Kleurcorrectie"</string>
+    <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"Deze functie is experimenteel en kan invloed hebben op de prestaties."</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Weergeven in Snelle instellingen"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Correctiemodus"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Overschreven door <xliff:g id="TITLE">%1$s</xliff:g>"</string>
@@ -1525,6 +1526,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Instellingen"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Aan"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Uit"</string>
+    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Niet toegestaan door uw organisatie"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Voorbeeld"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standaardopties"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Taal"</string>
@@ -1731,9 +1733,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Instellingen voor spraakinvoer"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Spraakinvoer"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Gesproken services"</string>
-    <string name="voice_interactor_preference_summary" msgid="5995613396290979463">"Volledige gesproken interactie"</string>
-    <string name="voice_recognizer_preference_summary" msgid="878040238053901752">"Eenvoudige spraakherkenning"</string>
-    <string name="voice_interaction_security_warning" msgid="1272774555442633823">"Deze gesproken service kan alle spraakgestuurde apps namens u beheren. Deze service is afkomstig van de app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Wilt u het gebruik van deze service inschakelen?"</string>
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Volledige hotword- en interactieservice"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Eenvoudige spraak-naar-tekst"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Deze service voor spraakinvoer kan namens u doorlopende spraakcontrole uitvoeren en spraakgestuurde apps bedienen. De service wordt geleverd door de app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Wilt u het gebruik van deze service inschakelen?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Instellingen tekst-naar-spraak"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Uitvoer voor tekst-naar-spraak"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Mijn instellingen gebruiken"</string>
@@ -1859,7 +1861,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Deactiveren"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Apparaatbeheerders"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Geen apparaatbeheerders beschikbaar"</string>
-    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"Als u de toegang van <xliff:g id="APP_NAME">%1$s</xliff:g> tot uw werkprofiel wilt stoppen, verwijdert u het profiel via Instellingen &gt; Accounts."</string>
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Als u de toegang van <xliff:g id="APP_NAME">%1$s</xliff:g> tot uw werkprofiel wilt stopzetten, verwijdert u het profiel bij Instellingen &gt; Accounts"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Persoonlijk"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Werk"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Geen beschikbare trust-agents"</string>
@@ -1868,7 +1870,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Apparaatbeheerder"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Als u deze beheerder activeert, staat u de app <xliff:g id="APP_NAME">%1$s</xliff:g> toe de volgende bewerkingen uit te voeren:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Deze beheerder is actief en staat de app <xliff:g id="APP_NAME">%1$s</xliff:g> toe de volgende bewerkingen uit te voeren:"</string>
-    <string name="profile_owner_add_title" msgid="1127236753400079839">"Profieleigenaar"</string>
+    <string name="profile_owner_add_title" msgid="6249331160676175009">"Profielbeheerder activeren?"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Als u doorgaat, wordt uw gebruiker beheerd door uw beheerder, waardoor naast uw persoonlijke gegevens ook gekoppelde gegevens kunnen worden opgeslagen.\n\nUw beheerder heeft de mogelijkheid instellingen, toegang, apps en gegevens te controleren en te beheren die horen bij deze gebruiker, waaronder netwerkactiviteit en de locatiegegevens van uw apparaten."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Naamloos"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Algemeen"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Meldingenlogboek"</string>
@@ -1911,10 +1914,8 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Synchroniseren"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Er zijn momenteel problemen met de synchronisatie. Synchronisatie wordt snel opnieuw uitgevoerd."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Account toevoegen"</string>
-    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
-    <skip />
-    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"Werkprofiel is nog niet beschikbaar"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"Werkprofiel verwijderen"</string>
     <string name="background_data" msgid="5779592891375473817">"Achtergrondgegevens"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Onbeperkt gegevens synchroniseren, verzenden en ontvangen"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Achtergrondgegevens uitschakelen?"</string>
@@ -1953,9 +1954,9 @@
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Synchroniseren is op dit moment uitgeschakeld voor dit item. Als u deze instelling wilt wijzigen, schakelt u achtergrondgegevens en automatisch synchroniseren tijdelijk in."</string>
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC-adres"</string>
-    <string name="enter_password" msgid="4131758584074246224">"Typ een wachtwoord om de opslag te decoderen"</string>
-    <string name="enter_pin" msgid="286221169871526876">"Geef uw pincode op om de opslag te decoderen"</string>
-    <string name="enter_pattern" msgid="5707838886272453608">"Teken uw patroon om de opslag te decoderen"</string>
+    <string name="enter_password" msgid="8035706727471334122">"Geef uw wachtwoord op om Android te starten"</string>
+    <string name="enter_pin" msgid="5305333588093263790">"Geef uw pincode op om Android te starten"</string>
+    <string name="enter_pattern" msgid="4187435713036808566">"Teken uw patroon om Android te starten"</string>
     <string name="try_again" msgid="4272075051293936921">"Probeer het opnieuw."</string>
     <string name="delete" msgid="4219243412325163003">"Verwijderen"</string>
     <string name="misc_files" msgid="6720680815969643497">"Diverse bestanden"</string>
@@ -2174,12 +2175,12 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Gebruiker of profiel toevoegen"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Gebruiker toevoegen"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Beperkt profiel"</string>
-    <string name="user_summary_managed_profile" msgid="5729429961989469287">"Beheerd profiel"</string>
+    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Werkprofiel"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Voordat u een beperkt profiel kunt maken, moet u een schermvergrendeling instellen om uw apps en persoonlijke gegevens te beschermen."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Vergrendeling instellen"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Niet ingesteld"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Niet ingesteld - Beperkt profiel"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"Niet ingesteld - Beheerd profiel"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Niet ingesteld - Werkprofiel"</string>
     <string name="user_owner" msgid="3879126011135546571">"Eigenaar"</string>
     <string name="user_you" msgid="1639158809315025986">"U (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Bijnaam"</string>
@@ -2206,17 +2207,20 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Wilt u uzelf verwijderen?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Deze gebr. verwijderen?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Dit profiel verwijderen?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Werkprofiel verwijderen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"U raakt uw opslagruimte en gegevens op deze tablet kwijt. U kunt deze actie niet ongedaan maken."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"U raakt uw opslagruimte en gegevens op deze telefoon kwijt. U kunt deze actie niet ongedaan maken."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Alle apps en gegevens worden verwijderd."</string>
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Alle apps en gegevens in dit profiel worden verwijderd."</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Alle apps en gegevens worden verwijderd."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Nieuwe gebruiker toevoegen…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Gebruiker verwijderen"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Verwijderen"</string>
     <string name="user_guest" msgid="8475274842845401871">"Gast"</string>
-    <string name="user_exit_guest_title" msgid="45738573948463472">"Gastmodus verlaten"</string>
-    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Gastsessie sluiten?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Als u de gastsessie beëindigt, worden lokale gegevens verwijderd."</string>
+    <string name="user_exit_guest_title" msgid="5613997155527410675">"Gast verwijderen"</string>
+    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"Gast verwijderen?"</string>
+    <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Alle apps en gegevens in deze sessie worden verwijderd."</string>
+    <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Verwijderen"</string>
     <string name="user_enable_calling" msgid="8310589470979488255">"Telefoontjes toestaan"</string>
     <string name="user_enable_calling_sms" msgid="794823380737672333">"Telefoontjes en sms toestaan"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Gebruiker verwijderen"</string>
@@ -2357,6 +2361,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
     <string name="keywords_users" msgid="4673901601478559100">"beperking beperken beperkt"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"tekstcorrectie corrigeren geluid trillen automatisch taal gebaar voorstellen suggestie thema aanstootgevend woord typen emoji"</string>
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"vegen wachtwoord patroon pincode"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wifi NFC-tag instellen"</string>
     <string name="write_tag" msgid="8571858602896222537">"Schrijven"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tik op een tag om te schrijven..."</string>
@@ -2423,7 +2428,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioriteit"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Meldingen boven aan de lijst weergeven en blijven aanvullen wanneer het apparaat is ingesteld op alleen prioriteitsonderbrekingen"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Gevoelig"</string>
-    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"Gevoelige inhoud verbergen uit de meldingen van deze app wanneer het apparaat is vergrendeld"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Gevoelige inhoud verbergen uit de meldingen van deze app wanneer het apparaat is vergrendeld"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Geblokkeerd"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioriteit"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Gevoelig"</string>

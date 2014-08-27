@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Desligar?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Isto terminará a sua ligação com:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Não tem autorização para alterar as definições de Bluetooth."</string>
-    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> é visível para dispositivos próximos enquanto Definições Bluetooth estiver aberto."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Desligar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Difusão"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Desativar perfil?"</string>
@@ -356,8 +355,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Encriptar tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Encriptar telefone"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Encriptado"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"Pode encriptar contas, definições, aplicações transferidas e os respetivos dados, ficheiros multimédia e outros. Depois de encriptar o seu tablet, partindo do princípio que configurou um bloqueio de ecrã (ou seja, um padrão ou PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o tablet sempre que o ligar. A outra única forma de desencriptar é efetuar uma reposição de dados de fábrica, apagando todos os seus dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com uma bateria carregada e manter o tablet ligado durante o processo. Se interromper, irá perder alguns ou todos os seus dados."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"Pode encriptar contas, definições, aplicações transferidas e os respetivos dados, ficheiros multimédia e outros. Depois de encriptar o seu telemóvel, partindo do princípio que configurou um bloqueio de ecrã (ou seja, um padrão ou PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o telemóvel sempre que o ligar. A outra única forma de desencriptar é efetuar uma reposição de dados de fábrica, apagando todos os seus dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com uma bateria carregada e manter o telemóvel ligado durante o processo. Se interromper, irá perder alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"Pode encriptar as suas contas, definições, aplicações transferidas e respetivos dados, multimédia e outros ficheiros. Depois de encriptar o tablet, partindo do princípio de que configurou um bloqueio de ecrã (isto é, um padrão, um PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o tablet sempre que o ligar. A única outra forma de desencriptar é efetuar uma reposição de dados de fábrica, ao apagar todos os dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com a bateria carregada e manter o tablet ligado à eletricidade ao longo do processo. Se o interromper, perderá alguns ou todos os dados."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Pode encriptar as suas contas, definições, aplicações transferidas e respetivos dados, multimédia e outros ficheiros. Depois de encriptar o telemóvel, partindo do princípio de que configurou um bloqueio de ecrã (isto é, um padrão, um PIN numérico ou uma palavra-passe), terá de desbloquear o ecrã para desencriptar o telemóvel sempre que o ligar. A única outra forma de desencriptar é efetuar uma reposição de dados de fábrica, ao apagar todos os dados.\n\nA encriptação demora uma hora ou mais. Tem de iniciar com a bateria carregada e manter o telemóvel ligado à eletricidade ao longo do processo. Se o interromper, perderá alguns ou todos os dados."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Encriptar tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Encriptar telefone"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Carregue a bateria e tente novamente."</string>
@@ -463,6 +462,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Administradores do dispositivo"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Ver ou desativar administradores do dispositivo"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Trust agents"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Para utilizar, defina primeiro um bloqueio de ecrã"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Ver ou desativar trust agents"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Ativar Bluetooth"</string>
@@ -617,8 +617,7 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Permitir sempre procura"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permitir que o serviço de localização da Google e outras aplicações procurem redes, mesmo quando o Wi-Fi está desativado"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gerir Wi-Fi automaticamente"</string>
-    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
-    <skip />
+    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Deixe o <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> gerir a sua ligação Wi‑Fi"</string>
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Assistente Wi-Fi"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Assistente Wi‑Fi da Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
@@ -1412,7 +1411,6 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Atalhos"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Entrada de texto"</string>
     <string name="input_method" msgid="5434026103176856164">"Método de entrada"</string>
-    <string name="choose_input_methods" msgid="3919825636585320942">"Escolher teclados"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Teclado atual"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Selector do método de entrada"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automático"</string>
@@ -1457,6 +1455,7 @@
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Selec. tam. reg. p/ mem. int. reg."</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir locais fictícios"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Ativar a inspeção do atributo de visualização"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permitir depuração USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"A depuração USB é utilizada apenas para fins de programação. Utilize-a para copiar dados entre o computador e o aparelho, instalar aplicações no aparelho sem notificação e ler dados de registo."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Revogar acesso à depuração USB de todos os computadores anteriormente autorizados?"</string>
@@ -1513,7 +1512,9 @@
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Dizer palavras-passe"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Atraso ao manter premida a tecla"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inversão de cores"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Correção de espaço de cor"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Experimental) Pode afetar o desempenho"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"Correção da cor"</string>
+    <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"Esta funcionalidade é experimental e pode afetar o desempenho."</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Mostrar nas Definições rápidas"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Modo de correção"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Substituído por <xliff:g id="TITLE">%1$s</xliff:g>"</string>
@@ -1525,6 +1526,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configurações"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ativado"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Desativado"</string>
+    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Não permitido pela sua entidade"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Pré-visualizar"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Opções padrão"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Idioma"</string>
@@ -1731,9 +1733,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Definições de entrada de texto por voz"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Entrada de texto por voz"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Serviços de entrada de texto por voz"</string>
-    <string name="voice_interactor_preference_summary" msgid="5995613396290979463">"Interação por voz total"</string>
-    <string name="voice_recognizer_preference_summary" msgid="878040238053901752">"Reconhecimento de voz simples"</string>
-    <string name="voice_interaction_security_warning" msgid="1272774555442633823">"Este serviço de entrada de texto por voz conseguirá controlar todas as aplicações controladas por voz em seu nome. É proveniente da aplicação <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Pretende ativar a utilização deste serviço?"</string>
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Palavra de ativação e interação completas"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Serviço simples de voz para texto"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada de texto por voz poderá efetuar monitorização de voz permanente e controlar aplicações ativadas por voz em seu nome. É proveniente da aplicação <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Permitir a utilização deste serviço?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Definições de texto para voz"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Saída de texto para voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Utilizar sempre as minhas definições"</string>
@@ -1830,7 +1832,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Para poder utilizar o armazenamento de credenciais, é necessário definir primeiro um PIN ou palavra-passe do ecrã de bloqueio."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplic. com acesso de utiliz."</string>
     <string name="usage_access_app_list_header" msgid="5216887502569700574">"Aplic. que solicitam acesso"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Permita apenas que as aplicações em que confia acedam aos dados de utilização. As aplicações que permitir terão acesso ao seu histórico de utilização de aplicações, como a última vez que uma aplicação foi utilizada ou o tempo total de utilização de uma aplicação."</string>
+    <string name="usage_access_body" msgid="3489298559210251891">"Permita que apenas as aplicações em que confia acedam aos dados de utilização. As aplicações que permitir terão acesso ao seu histórico de utilização de aplicações, como a última vez que uma aplicação foi utilizada ou o tempo total de utilização de uma aplicação."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Permitir acesso?"</string>
     <string name="allow_usage_access_message" msgid="7858892531929539963">"Se permitir o acesso, esta aplicação pode ver as informações gerais acerca das suas aplicações, como a frequência com que as utiliza."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
@@ -1859,7 +1861,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Desativar"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administradores do dispositivo"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Não existem administradores do dispositivo disponíveis"</string>
-    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"Para o <xliff:g id="APP_NAME">%1$s</xliff:g> deixar de aceder ao seu perfil de trabalho, remova o perfil em Definições &gt; Contas."</string>
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Para o <xliff:g id="APP_NAME">%1$s</xliff:g> deixar de aceder ao seu perfil de trabalho, remova o perfil em Definições &gt; Contas"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Pessoal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabalho"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Nenhum agente fidedigno disponível"</string>
@@ -1868,7 +1870,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrador do dispositivo"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"A ativação deste administrador permitirá à aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> efetuar as seguintes operações:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Este administrador está ativo e permite que a aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> efetue as seguintes operações:"</string>
-    <string name="profile_owner_add_title" msgid="1127236753400079839">"Proprietário do perfil"</string>
+    <string name="profile_owner_add_title" msgid="6249331160676175009">"Pretende ativar o Gestor de perfis?"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Ao prosseguir, o seu Utilizador será gerido pelo Administrador, que também poderá armazenar dados associados, além dos seus dados pessoais.\n\nO Administrador tem a capacidade de monitorizar e gerir as definições, o acesso, as aplicações e os dados associados a este Utilizador incluindo a atividade de rede e as informações de localização do seu dispositivo."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sem título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Geral"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Registo de notificações"</string>
@@ -1911,10 +1914,8 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Sincronizar"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"A sincronização está atualmente com problemas e será retomada em breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Adicionar conta"</string>
-    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
-    <skip />
-    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"O perfil de trabalho ainda não está disponível"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"Remover perfil de trabalho"</string>
     <string name="background_data" msgid="5779592891375473817">"Dados em segundo plano"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"As aplicações podem sincronizar, enviar e receber dados em qualquer altura"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Desat. dados seg. plano?"</string>
@@ -1953,9 +1954,9 @@
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"A sincronização deste item está atualmente desativada. Para alterar esta definição, ative temporariamente os dados de segundo plano e a sincronização automática."</string>
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"Endereço MAC de 4G"</string>
-    <string name="enter_password" msgid="4131758584074246224">"Introduzir palavra-passe para desencriptar armazenamento"</string>
-    <string name="enter_pin" msgid="286221169871526876">"Introduza o PIN para desencriptar o armazenamento"</string>
-    <string name="enter_pattern" msgid="5707838886272453608">"Desenhar o padrão para desencriptar o armazenamento"</string>
+    <string name="enter_password" msgid="8035706727471334122">"Para iniciar o Android, introduza a palavra-passe"</string>
+    <string name="enter_pin" msgid="5305333588093263790">"Para iniciar o Android, introduza o PIN"</string>
+    <string name="enter_pattern" msgid="4187435713036808566">"Para iniciar o Android, desenhe o padrão"</string>
     <string name="try_again" msgid="4272075051293936921">"Tente novamente."</string>
     <string name="delete" msgid="4219243412325163003">"Eliminar"</string>
     <string name="misc_files" msgid="6720680815969643497">"Ficheiros diversos"</string>
@@ -2174,12 +2175,12 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Adicionar utilizador ou perfil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Adicionar utilizador"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Perfil restrito"</string>
-    <string name="user_summary_managed_profile" msgid="5729429961989469287">"Perfil gerido"</string>
+    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Perfil de trabalho"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Antes de poder criar um perfil restrito, tem de configurar um bloqueio de ecrã para proteger as suas aplicações e dados pessoais."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Definir bloqueio"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Não configurado"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Não configurado – Perfil restrito"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"Não configurado – Perfil gerido"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Não configurado – Perfil de trabalho"</string>
     <string name="user_owner" msgid="3879126011135546571">"Proprietário"</string>
     <string name="user_you" msgid="1639158809315025986">"Você (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Pseudónimo"</string>
@@ -2206,17 +2207,20 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Eliminar-se a si próprio?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Remover este utilizador?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Remover este perfil?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Rem. perfil de trabalho?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Perderá os dados e espaço neste tablet. Não é possível anular esta ação."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Perderá os dados e espaço neste telemóvel. Não é possível anular esta ação."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Todas as aplicações e os dados serão eliminados."</string>
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Todas as aplicações e todos os dados neste perfil serão eliminados."</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Todas as aplicações e os dados serão eliminados."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"A adicionar novo utilizador..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Eliminar utilizador"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Eliminar"</string>
     <string name="user_guest" msgid="8475274842845401871">"Convidado"</string>
-    <string name="user_exit_guest_title" msgid="45738573948463472">"Sair do modo de convidado"</string>
-    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Sair da sessão de convidado?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Ao terminar a sessão de convidado, os dados locais serão removidos."</string>
+    <string name="user_exit_guest_title" msgid="5613997155527410675">"Remover convidado"</string>
+    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"Pretende remover o convidado?"</string>
+    <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Todas as aplicações e dados desta sessão serão eliminados."</string>
+    <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Remover"</string>
     <string name="user_enable_calling" msgid="8310589470979488255">"Permitir chamadas telefónicas"</string>
     <string name="user_enable_calling_sms" msgid="794823380737672333">"Permitir chamadas telefónicas e SMS"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Remover utilizador"</string>
@@ -2357,6 +2361,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"conta"</string>
     <string name="keywords_users" msgid="4673901601478559100">"restrição restringir restrito"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"correção de texto corrigir som vibrar idioma automático sugestão de toques sugestão tema palavra ofensiva tipo emoji"</string>
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"deslizar lentamente palavra-passe sequência pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Config. etiqueta NFC p/ Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escrever"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toque numa etiqueta para escrever..."</string>
@@ -2423,7 +2428,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioridade"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Mostrar notificações na parte superior da lista e continuar a recebê-las se o dispositivo estiver definido para interrupções prioritárias apenas"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Sensível"</string>
-    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"Quando o dispositivo está bloqueado, ocultar o conteúdo sensível das notificações desta aplicação"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Quando o dispositivo está bloqueado, ocultar qualquer conteúdo sensível das notificações desta aplicação"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloqueado"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioridade"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensível"</string>

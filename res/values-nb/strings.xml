@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Vil du koble fra?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Dette vil avslutte tilkoblingen til:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Du har ikke tillatelse til å endre Bluetooth-innstillingene."</string>
-    <!-- no translation found for bluetooth_is_visible_message (3956514990287788968) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er synlig mens Bluetooth-innstillinger er åpen."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Vil du koble fra <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Kringkasting"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vil du deaktivere profilen?"</string>
@@ -356,8 +355,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Krypter nettbrettet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Krypter telefon"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Kryptert"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="7966195172468864148">"Du kan kryptere kontoene og innstillingene dine, nedlastede apper med tilhørende data, media og andre filer. Etter at du har kryptert nettbrettet ditt, forutsatt at du har konfigurert en skjermlås (det vil si et mønster eller numerisk PIN-kode eller passord), må du låse opp skjermen for å dekryptere nettbrettet hver gang du slår det på. Den eneste andre måten å dekryptere det på, er ved å tilbakestille til fabrikkstandard, som sletter alle dataene dine. \n\nKrypteringen tar en time eller mer. Du må starte med fulladet batteri og ha nettbrettet tilkoblet gjennom hele prosessen. Hvis du avbryter prosessen, mister du deler av eller alle dataene dine."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="9182896617884899822">"Du kan kryptere kontoene og innstillingene dine, nedlastede apper med tilhørende data, media og andre filer. Etter at du har kryptert telefonen, forutsatt at du har konfigurert en skjermlås (det vil si et mønster eller numerisk PIN-kode eller passord), må du låse opp skjermen for å dekryptere telefonen hver gang du slår den på. Den eneste andre måten å dekryptere den på, er ved å tilbakestille til fabrikkstandard, som sletter alle dataene dine. \n\nKrypteringen tar en time eller mer. Du må starte med fulladet batteri og ha telefonen tilkoblet gjennom hele prosessen. Hvis du avbryter prosessen, mister du deler av eller alle dataene dine."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"Du kan kryptere kontoer, innstillinger, nedlastede apper og tilhørende data, media og andre filer. Etter at du har kryptert nettbrettet, forutsatt at du har satt opp en skjermlås (det vil si et mønster, en numerisk PIN-kode eller et passord), må du låse opp skjermen for å dekryptere nettbrettet hver gang du slår det på. Den eneste andre måten å dekryptere det på, er ved å foreta en tilbakestilling til fabrikkstandard, som sletter alle dataene dine. \n\nKrypteringen kommer til å ta en time eller mer. Du må starte med oppladet batteri, og nettbrettet må være tilkoblet under hele prosessen. Hvis du avbryter den, mister du all eller noe av informasjonen din."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Du kan kryptere kontoer, innstillinger, nedlastede apper og tilhørende data, media og andre filer. Etter at du har kryptert telefonen, forutsatt at du har konfigurert en skjermlås (det vil si et mønster, en numerisk PIN-kode eller et passord), må du låse opp skjermen for å dekryptere telefonen hver gang du slår den på. Den eneste andre måten å dekryptere den på, er ved å foreta en tilbakestilling til fabrikkstandard, som sletter alle dataene dine. \n\nKrypteringen kommer til å ta en time eller mer. Du må starte med oppladet batteri, og telefonen må være tilkoblet under hele prosessen. Hvis du avbryter den, mister du all eller noe av informasjonen din."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Krypter nettbrett"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Krypter telefon"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Lad batteriet og prøv på nytt."</string>
@@ -463,6 +462,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Enhetsadministratorer"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Se eller deaktiver enhetsadministratorer"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Tillitsagenter"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Hvis du vil bruke denne funksjonen, må du først angi en skjermlås"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Se eller deaktiver tillitsagenter"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Slå på Bluetooth"</string>
@@ -617,8 +617,7 @@
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Alltid tillat skanning"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Tillat at Googles posisjonstjeneste og andre apper skanner etter nettverk, selv når Wi-Fi er slått av"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Administrer Wi-Fi automatisk"</string>
-    <!-- no translation found for wifi_automatically_manage_summary (6952470763378312488) -->
-    <skip />
+    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"La <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> administrere Wi-Fi-tilkoblingen din"</string>
     <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fi-assistent"</string>
     <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi-Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer sertifikater"</string>
@@ -1260,7 +1259,7 @@
     <string name="clear_data_failed" msgid="1907582169616856698">"Kunne ikke slette appdata."</string>
     <string name="app_factory_reset_dlg_title" msgid="7441012826373143593">"Vil du avinstallere oppdateringer?"</string>
     <string name="app_factory_reset_dlg_text" msgid="6371247225487725860">"Alle oppdateringer i denne Android-systemappen vil bli avinstallert."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Tilbakestill data"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Fjern data"</string>
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Kan ikke slette data for app."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Denne appen har tilgang til følgende på nettbrettet ditt:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Denne appen har tilgang til følgende på telefonen din:"</string>
@@ -1412,7 +1411,6 @@
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Snarveier"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Skriving av tekst"</string>
     <string name="input_method" msgid="5434026103176856164">"Inndatametode"</string>
-    <string name="choose_input_methods" msgid="3919825636585320942">"Velg tastatur"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Gjeldende tastatur"</string>
     <string name="input_method_selector" msgid="4311213129681430709">"Valg av inndatametode"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatisk"</string>
@@ -1457,6 +1455,7 @@
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Velg Loggstørrelser per loggbuffer"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Tillat simulert posisjon"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillat bruk av simulerte GPS-koordinater"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Aktivér inspeksjon av visningsattributtet"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Aktiver USB-debugging?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-feilsøking er bare ment for utviklingsformål. Bruk det til å kopiere data mellom datamaskinen og enheten, installere apper på enheten uten varsel og lese loggdata."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Vil du oppheve tilgangen til USB-feilsøking fra alle datamaskiner du tidligere har autorisert?"</string>
@@ -1513,7 +1512,9 @@
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Les inn passord"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"«Trykk på og hold inne»-forsinkelse"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Fargeinvertering"</string>
-    <string name="accessibility_display_daltonizer_preference_title" msgid="4034958017657406631">"Fargeområdekorrigering"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="8658240868230680912">"(Eksperimentell) Kan påvirke ytelsen"</string>
+    <string name="accessibility_display_daltonizer_preference_title" msgid="5800761362678707872">"Korriger farger"</string>
+    <string name="accessibility_display_daltonizer_preference_subtitle" msgid="3484969015295282911">"Denne funksjonen er eksperimentell og kan påvirke ytelsen."</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Vis i hurtiginnstillingene"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Korrigeringsmodus"</string>
     <string name="daltonizer_type_overridden" msgid="3116947244410245916">"Overstyres av <xliff:g id="TITLE">%1$s</xliff:g>"</string>
@@ -1525,6 +1526,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Innstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"På"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Av"</string>
+    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Ikke tillatt av organisasjonen din"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Forhåndsvisning"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Standardvalg"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Språk"</string>
@@ -1733,9 +1735,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Innstillinger for taleinndata"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Taleinndata"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Taleinndatatjenester"</string>
-    <string name="voice_interactor_preference_summary" msgid="5995613396290979463">"Full taleinteraksjon"</string>
-    <string name="voice_recognizer_preference_summary" msgid="878040238053901752">"Enkel talegjenkjenning"</string>
-    <string name="voice_interaction_security_warning" msgid="1272774555442633823">"Denne taleinndatatjenesten kan kontrollere alle taleaktiverte apper på dine vegne. Den leveres via <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>-appen. Vil du aktivere bruken av denne tjenesten?"</string>
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Full tjeneste for kommandoord og interaksjon"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Enkel tjeneste for tale til tekst"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Denne taleinndata-tjenesten kan utføre «alltid på»-taleovervåking og kontrollere taleaktiverte apper på dine vegne. Den kommer fra <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>-appen. Vil du aktivere bruk av denne tjenesten?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Talesyntese-kontroller"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Tekst-til-tale"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Overstyr innstillinger"</string>
@@ -1861,7 +1863,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktiver"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Enhetsadministratorer"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Ingen tilgjengelige enhetsadministratorer"</string>
-    <string name="managed_profile_device_admin_info" msgid="6105994454581829513">"Nekt <xliff:g id="APP_NAME">%1$s</xliff:g> tilgang til jobbprofilen ved å fjerne den under Innst. &gt; Kontoer."</string>
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Hvis du vil sørge for at <xliff:g id="APP_NAME">%1$s</xliff:g> ikke får tilgang til arbeidsprofilen, kan du fjerne den under Innstillinger &gt; Kontoer."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Personlig"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Jobb"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Ingen tilgjengelige tillitsagenter"</string>
@@ -1870,7 +1872,8 @@
     <string name="device_admin_add_title" msgid="7705551449705676363">"Enhetsadministrator"</string>
     <string name="device_admin_warning" msgid="2026747446313628233">"Aktivering av denne administratoren tillater appen <xliff:g id="APP_NAME">%1$s</xliff:g> å utføre følgende handlinger:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Administratoren er aktiv og tillater at appen <xliff:g id="APP_NAME">%1$s</xliff:g> utfører følgende handlinger:"</string>
-    <string name="profile_owner_add_title" msgid="1127236753400079839">"Profileier"</string>
+    <string name="profile_owner_add_title" msgid="6249331160676175009">"Vil du aktivere profiladministratoren?"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Hvis du fortsetter, kommer brukeren din til å styres av administratoren din, som kanskje kan lagre tilknyttede data, i tillegg til de private dataene dine.\n\nAdministratoren din kan overvåke og administrere innstillinger, tilgang, apper og data tilknyttet denne brukeren, herunder nettverksaktivitet og posisjonsinformasjonen for enhetene dine."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Uten tittel"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Generelt"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Varsellogg"</string>
@@ -1913,10 +1916,8 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Synkronisering"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Det er midlertidige problemer med synkroniseringen. Vent litt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Legg til konto"</string>
-    <!-- no translation found for managed_profile_not_available_label (5113461928275887768) -->
-    <skip />
-    <!-- no translation found for remove_managed_profile_label (3856519337797285325) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"Arbeidsprofilen er ikke tilgjengelig ennå"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"Fjern arbeidsprofilen"</string>
     <string name="background_data" msgid="5779592891375473817">"Bakgrunnsdata"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Apper kan når som helst synkronisere, sende og motta data"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"Vil du deaktivere bakgrunnsdata?"</string>
@@ -1955,9 +1956,9 @@
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"Synkronisering for dette elementet er deaktivert. Hvis du vil endre innstillinger, kan du midlertidig slå på bakgrunnsdata og automatisk synkronisering."</string>
     <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
     <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC-adresse"</string>
-    <string name="enter_password" msgid="4131758584074246224">"Skriv inn passordet for å dekryptere lagring"</string>
-    <string name="enter_pin" msgid="286221169871526876">"Skriv inn PIN-koden for å dekryptere lagringen"</string>
-    <string name="enter_pattern" msgid="5707838886272453608">"Tegn mønsteret ditt for å dekryptere lagringen"</string>
+    <string name="enter_password" msgid="8035706727471334122">"Skriv inn passordet ditt for å starte Android"</string>
+    <string name="enter_pin" msgid="5305333588093263790">"Skriv inn PIN-koden din for å starte Android"</string>
+    <string name="enter_pattern" msgid="4187435713036808566">"Tegn mønsteret ditt for å starte Android"</string>
     <string name="try_again" msgid="4272075051293936921">"Prøv på nytt."</string>
     <string name="delete" msgid="4219243412325163003">"Slett"</string>
     <string name="misc_files" msgid="6720680815969643497">"Diverse filer"</string>
@@ -2176,12 +2177,12 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Legg til en bruker eller profil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Legg til bruker"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Begrenset profil"</string>
-    <string name="user_summary_managed_profile" msgid="5729429961989469287">"Administrert profil"</string>
+    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Jobbprofil"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Før du kan opprette en begrenset profil, må du konfigurere skjermlåsen for å beskytte appene og de personlige dataene dine."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Angi lås"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Ikke konfigurert"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Ikke konfigurert – begrenset profil"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="8571841525128790750">"Ikke konfigurert – administrert profil"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Ikke konfigurert – arbeidsprofil"</string>
     <string name="user_owner" msgid="3879126011135546571">"Eier"</string>
     <string name="user_you" msgid="1639158809315025986">"Deg (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Kallenavn"</string>
@@ -2208,17 +2209,20 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Fjerne denne brukeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Fjerne denne profilen?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Vil du fjerne arbeidsprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Lagringsplassen og dataene dine blir fjernet fra dette nettbrettet. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Lagringsplassen og dataene dine blir fjernet fra telefonen. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Alle apper og data slettes."</string>
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Alle appene og dataene i denne profilen slettes."</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Alle apper og data slettes."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Legger til ny bruker …"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Slett bruker"</string>
     <string name="user_delete_button" msgid="5131259553799403201">"Slett"</string>
     <string name="user_guest" msgid="8475274842845401871">"Gjest"</string>
-    <string name="user_exit_guest_title" msgid="45738573948463472">"Avslutt gjesteøkten"</string>
-    <string name="user_exit_guest_confirm_title" msgid="2512294416196448006">"Vil du avslutte gjesteøkten?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="3338292192386196163">"Hvis du avslutter gjesteøkten, fjernes lokale data."</string>
+    <string name="user_exit_guest_title" msgid="5613997155527410675">"Fjern gjesten"</string>
+    <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"Vil du fjerne gjesten?"</string>
+    <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Alle appene og all informasjon i denne økten kommer til å slettes."</string>
+    <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Fjern"</string>
     <string name="user_enable_calling" msgid="8310589470979488255">"Tillat telefonanrop"</string>
     <string name="user_enable_calling_sms" msgid="794823380737672333">"Tillat anrop og tekstmeldinger"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Slett brukeren"</string>
@@ -2359,6 +2363,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"konto"</string>
     <string name="keywords_users" msgid="4673901601478559100">"begrensning begrens begrenset"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"tekstretting korrekt lyd vibrer automatisk språk bevegelse foreslå forslag tema støtende ord skriv emoji"</string>
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"dra passord mønster PIN-kode"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfigurer NFC-tag for Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Trykk på en brikke for å skrive"</string>
@@ -2425,7 +2430,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioritet"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Vis varsler øverst i listen og fortsett å vise dem når enheten er konfigurert til bare prioriterte forstyrrelser"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Sensitivt"</string>
-    <string name="app_notification_sensitive_summary" msgid="8850104564623526005">"Skjul eventuelt sensitivt innhold fra denne appens varsler når enheten er låst"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Skjul eventuelt sensitivt innhold fra denne appens varsler når enheten er låst"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokkert"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritet"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitivt"</string>
