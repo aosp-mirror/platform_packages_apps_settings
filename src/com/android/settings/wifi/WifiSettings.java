@@ -321,8 +321,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         prepareWifiAssistantCard();
 
-        mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
-        getListView().setEmptyView(mEmptyView);
+        mEmptyView = initEmptyView();
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
     }
@@ -771,6 +770,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong(KEY_ASSISTANT_DISMISS_PLATFORM, Build.VERSION.SDK_INT);
         editor.apply();
+    }
+
+    protected TextView initEmptyView() {
+        TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
+        getListView().setEmptyView(emptyView);
+        return emptyView;
     }
 
     private void setOffMessage() {
