@@ -780,8 +780,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void setOffMessage() {
         if (mEmptyView != null) {
-            mEmptyView.setCompoundDrawablesWithIntrinsicBounds(0,
-                    R.drawable.ic_wifi_emptystate, 0, 0);
             mEmptyView.setText(R.string.wifi_empty_list_wifi_off);
             if (android.provider.Settings.Global.getInt(getActivity().getContentResolver(),
                     android.provider.Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1) {
