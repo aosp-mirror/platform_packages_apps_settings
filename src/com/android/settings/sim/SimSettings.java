@@ -88,6 +88,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private SubInfoRecord mCalls = null;
     private SubInfoRecord mSMS = null;
 
+    private int mNumSims;
+
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
     }
@@ -114,10 +116,14 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         final int numSlots = tm.getSimCount();
         mAvailableSubInfos = new ArrayList<SubInfoRecord>(numSlots);
+        mNumSims = 0;
         for (int i = 0; i < numSlots; ++i) {
             final SubInfoRecord sir = findRecordBySlotId(i);
             simCards.addPreference(new SimPreference(getActivity(), sir, i));
             mAvailableSubInfos.add(sir);
+            if (sir != null) {
+                mNumSims++;
+            }
         }
 
         updateActivitesCategory();
@@ -195,6 +201,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (sir != null) {
             simPref.setSelectedItem(sir.mSlotId + 1);
         }
+        simPref.setEnabled(mNumSims > 1);
     }
 
     private void updateCellularDataValues() {
@@ -203,6 +210,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (sir != null) {
             simPref.setSelectedItem(sir.mSlotId);
         }
+        simPref.setEnabled(mNumSims > 1);
     }
 
     private void updateCallValues() {
@@ -211,6 +219,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (sir != null) {
             simPref.setSelectedItem(sir.mSlotId + 1);
         }
+        simPref.setEnabled(mNumSims > 1);
     }
 
     @Override
