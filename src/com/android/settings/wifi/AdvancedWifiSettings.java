@@ -63,6 +63,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_WPS_PIN = "wps_pin_entry";
 
     private WifiManager mWifiManager;
+    private NetworkScoreManager mNetworkScoreManager;
 
     private IntentFilter mFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -89,6 +90,8 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        mNetworkScoreManager =
+                (NetworkScoreManager) getSystemService(Context.NETWORK_SCORE_SERVICE);
     }
 
     @Override
@@ -258,7 +261,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             }
         } else if (KEY_WIFI_ASSISTANT.equals(key)) {
             if (((Boolean)newValue).booleanValue() == false) {
-                NetworkScorerAppManager.setActiveScorer(context, null);
+                mNetworkScoreManager.setActiveScorer(null);
                 return true;
             }
 
