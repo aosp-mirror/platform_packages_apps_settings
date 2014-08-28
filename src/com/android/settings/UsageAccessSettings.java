@@ -34,7 +34,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -181,7 +181,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
 
             if (newEntries == null) {
                 mPackageEntryMap.clear();
-                mAppsCategory.removeAll();
+                mPreferenceScreen.removeAll();
                 return;
             }
 
@@ -192,7 +192,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
                 final PackageEntry newPackageEntry = newEntries.get(oldPackageEntry.packageName);
                 if (newPackageEntry == null) {
                     // This package has been removed.
-                    mAppsCategory.removePreference(oldPackageEntry.preference);
+                    mPreferenceScreen.removePreference(oldPackageEntry.preference);
                 } else {
                     // This package already exists in the preference hierarchy, so reuse that
                     // Preference.
@@ -208,7 +208,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
                     packageEntry.preference = new SwitchPreference(mContext);
                     packageEntry.preference.setPersistent(false);
                     packageEntry.preference.setOnPreferenceChangeListener(UsageAccessSettings.this);
-                    mAppsCategory.addPreference(packageEntry.preference);
+                    mPreferenceScreen.addPreference(packageEntry.preference);
                 }
                 updatePreference(packageEntry);
             }
@@ -244,15 +244,15 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
     private AppsRequestingAccessFetcher mLastFetcherTask;
     ArrayMap<String, PackageEntry> mPackageEntryMap = new ArrayMap<>();
     AppOpsManager mAppOpsManager;
-    PreferenceCategory mAppsCategory;
+    PreferenceScreen mPreferenceScreen;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.usage_access_settings);
-        mAppsCategory = (PreferenceCategory) getPreferenceScreen().findPreference("apps");
-        mAppsCategory.setOrderingAsAdded(false);
+        mPreferenceScreen = getPreferenceScreen();
+        mPreferenceScreen.setOrderingAsAdded(false);
         mAppOpsManager = (AppOpsManager) getSystemService(Context.APP_OPS_SERVICE);
     }
 
@@ -357,7 +357,7 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
                     .setMessage(R.string.allow_usage_access_message)
                     .setIconAttribute(android.R.attr.alertDialogIcon)
                     .setNegativeButton(R.string.cancel, this)
-                    .setPositiveButton(R.string.allow, this)
+                    .setPositiveButton(android.R.string.ok, this)
                     .create();
         }
 
