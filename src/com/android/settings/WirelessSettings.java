@@ -130,7 +130,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
             // Check for carrier apps that can handle provisioning first
             Intent provisioningIntent = new Intent(TelephonyIntents.ACTION_CARRIER_SETUP);
             List<String> carrierPackages =
-                    mTm.getCarrierPackageNamesForBroadcastIntent(provisioningIntent);
+                    mTm.getCarrierPackageNamesForIntent(provisioningIntent);
             if (carrierPackages != null && !carrierPackages.isEmpty()) {
                 if (carrierPackages.size() != 1) {
                     Log.w(TAG, "Multiple matching carrier apps found, launching the first.");
