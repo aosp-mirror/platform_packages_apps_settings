@@ -90,7 +90,9 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
                         .setContentText(res.getString(R.string.bluetooth_notif_message, name))
                         .setContentIntent(pending)
                         .setAutoCancel(true)
-                        .setDefaults(Notification.DEFAULT_SOUND);
+                        .setDefaults(Notification.DEFAULT_SOUND)
+                        .setColor(res.getColor(
+                                com.android.internal.R.color.system_notification_accent_color));
 
                 NotificationManager manager = (NotificationManager)
                         context.getSystemService(Context.NOTIFICATION_SERVICE);

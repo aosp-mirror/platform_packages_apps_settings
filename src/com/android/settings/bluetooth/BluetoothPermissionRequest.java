@@ -122,17 +122,20 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         break;
                 }
                 Notification notification = new Notification.Builder(context)
-                                        .setContentTitle(title)
-                                        .setTicker(message)
-                                        .setContentText(message)
-                                        .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
-                                        .setAutoCancel(true)
-                                        .setPriority(Notification.PRIORITY_MAX)
-                                        .setOnlyAlertOnce(false)
-                                        .setDefaults(Notification.DEFAULT_ALL)
-                                        .setContentIntent(PendingIntent.getActivity(context, 0, connectionAccessIntent, 0))
-                                        .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent, 0))
-                                        .build();
+                        .setContentTitle(title)
+                        .setTicker(message)
+                        .setContentText(message)
+                        .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
+                        .setAutoCancel(true)
+                        .setPriority(Notification.PRIORITY_MAX)
+                        .setOnlyAlertOnce(false)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setContentIntent(PendingIntent.getActivity(context, 0,
+                                connectionAccessIntent, 0))
+                        .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent, 0))
+                        .setColor(context.getResources().getColor(
+                                com.android.internal.R.color.system_notification_accent_color))
+                        .build();
 
                 notification.flags |= Notification.FLAG_NO_CLEAR; /* cannot be set with the builder */
 
