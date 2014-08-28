@@ -20,9 +20,11 @@ package com.android.settings.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
@@ -42,7 +44,8 @@ public class SetupWizardIllustration extends FrameLayout {
     private float mBaselineGridSize;
     private Drawable mBackground;
     private Drawable mForeground;
-    private int mForegroundHeight = 0;
+    private final Rect mViewBounds = new Rect();
+    private final Rect mForegroundBounds = new Rect();
     private float mScale = 1.0f;
     private float mAspectRatio = 0.0f;
 
@@ -112,36 +115,35 @@ public class SetupWizardIllustration extends FrameLayout {
         final int layoutWidth = right - left;
         final int layoutHeight = bottom - top;
         if (mForeground != null) {
-            final float intrinsicWidth = mForeground.getIntrinsicWidth();
-            final float intrinsicHeight = mForeground.getIntrinsicHeight();
-            if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
-                Log.e(TAG, "Foreground drawable intrinsic size must be defined and positive");
-                mForeground = null;
-                mForegroundHeight = 0;
-                mScale = 1.0f;
-            } else {
-                // Scale the foreground to fill the width of the view
-                mScale = layoutWidth / intrinsicWidth;
-                mForegroundHeight = (int) (intrinsicHeight * mScale);
-                mForeground.setBounds(0, 0, layoutWidth, mForegroundHeight);
+            int intrinsicWidth = mForeground.getIntrinsicWidth();
+            int intrinsicHeight = mForeground.getIntrinsicHeight();
+            final int layoutDirection = getLayoutDirection();
+
+            mViewBounds.set(0, 0, layoutWidth, layoutHeight);
+            if (mAspectRatio != 0f) {
+                mScale = layoutWidth / (float) intrinsicWidth;
+                intrinsicWidth = layoutWidth;
+                intrinsicHeight = (int) (intrinsicHeight * mScale);
             }
+            Gravity.apply(Gravity.FILL_HORIZONTAL | Gravity.TOP, intrinsicWidth, intrinsicHeight,
+                    mViewBounds, mForegroundBounds, layoutDirection);
+            mForeground.setBounds(mForegroundBounds);
         }
         if (mBackground != null) {
             // Scale the bounds by mScale to compensate for the scale done to the canvas before
             // drawing.
             mBackground.setBounds(0, 0, (int) Math.ceil(layoutWidth / mScale),
-                    (int) Math.ceil((layoutHeight - mForegroundHeight) / mScale));
+                    (int) Math.ceil((layoutHeight - mForegroundBounds.height()) / mScale));
         }
         super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.save();
         if (mBackground != null) {
             canvas.save();
             // Draw the background filling parts not covered by the illustration
-            canvas.translate(0, mForegroundHeight);
+            canvas.translate(0, mForegroundBounds.height());
             // Scale the background so its size matches the foreground
             canvas.scale(mScale, mScale, 0, 0);
             mBackground.draw(canvas);
@@ -153,7 +155,6 @@ public class SetupWizardIllustration extends FrameLayout {
             mForeground.draw(canvas);
             canvas.restore();
         }
-        canvas.restore();
         super.onDraw(canvas);
     }
 }
