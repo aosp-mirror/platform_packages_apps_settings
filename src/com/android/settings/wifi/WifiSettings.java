@@ -101,7 +101,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
     private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
 
-    private static final String KEY_ASSISTANT_DISMISS_PLATFORM = "wifi_assistant_dismiss_platform";
+    private static final String KEY_ASSISTANT_DISMISS_PLATFORM = "assistant_dismiss_platform";
 
     public static final int WIFI_DIALOG_ID = 1;
     /* package */ static final int WPS_PBC_DIALOG_ID = 2;
@@ -768,7 +768,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void disableWifiAssistantCardUntilPlatformUpgrade() {
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong(KEY_ASSISTANT_DISMISS_PLATFORM, Build.VERSION.SDK_INT);
+        editor.putInt(KEY_ASSISTANT_DISMISS_PLATFORM, Build.VERSION.SDK_INT);
         editor.apply();
     }
 
