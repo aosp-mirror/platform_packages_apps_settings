@@ -40,6 +40,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -82,6 +83,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private TwoStatePreference mNotificationPulse;
     private DropDownPreference mLockscreen;
     private Preference mNotificationAccess;
+    private boolean mSecure;
+    private int mLockscreenSelectedValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         mContext = getActivity();
         mPM = mContext.getPackageManager();
         mVoiceCapable = Utils.isVoiceCapable(mContext);
+        mSecure = new LockPatternUtils(getActivity()).isSecure();
         addPreferencesFromResource(R.xml.notification_settings);
 
         final PreferenceCategory sound = (PreferenceCategory) findPreference(KEY_SOUND);
@@ -303,10 +307,13 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             Log.i(TAG, "Preference not found: " + KEY_LOCK_SCREEN_NOTIFICATIONS);
             return;
         }
+
         mLockscreen.addItem(R.string.lock_screen_notifications_summary_show,
                 R.string.lock_screen_notifications_summary_show);
-        mLockscreen.addItem(R.string.lock_screen_notifications_summary_hide,
-                R.string.lock_screen_notifications_summary_hide);
+        if (mSecure) {
+            mLockscreen.addItem(R.string.lock_screen_notifications_summary_hide,
+                    R.string.lock_screen_notifications_summary_hide);
+        }
         mLockscreen.addItem(R.string.lock_screen_notifications_summary_disable,
                 R.string.lock_screen_notifications_summary_disable);
         updateLockscreenNotifications();
@@ -314,12 +321,16 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             @Override
             public boolean onItemSelected(int pos, Object value) {
                 final int val = (Integer) value;
+                if (val == mLockscreenSelectedValue) {
+                    return true;
+                }
                 final boolean enabled = val != R.string.lock_screen_notifications_summary_disable;
                 final boolean show = val == R.string.lock_screen_notifications_summary_show;
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
                 Settings.Secure.putInt(getContentResolver(),
                         Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
+                mLockscreenSelectedValue = val;
                 return true;
             }
         });
@@ -329,12 +340,12 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         if (mLockscreen == null) {
             return;
         }
-        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
         final boolean enabled = getLockscreenNotificationsEnabled();
-        final int selectedVal = !enabled ? R.string.lock_screen_notifications_summary_disable :
+        final boolean allowPrivate = !mSecure || getLockscreenAllowPrivateNotifications();
+        mLockscreenSelectedValue = !enabled ? R.string.lock_screen_notifications_summary_disable :
                 allowPrivate ? R.string.lock_screen_notifications_summary_show :
                 R.string.lock_screen_notifications_summary_hide;
-        mLockscreen.setSelectedValue(selectedVal);
+        mLockscreen.setSelectedValue(mLockscreenSelectedValue);
     }
 
     private boolean getLockscreenNotificationsEnabled() {
