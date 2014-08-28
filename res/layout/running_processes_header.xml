@@ -27,152 +27,168 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="48sp"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textColor="?android:attr/colorAccent"
         android:textAlignment="viewStart"
+        android:gravity="left|center_vertical"
         android:text="@string/running_processes_header_title" />
 
     <view class="com.android.settings.applications.LinearColorBar"
         android:id="@+id/color_bar"
         android:layout_width="match_parent"
-        android:layout_height="18sp"
-        android:layout_marginTop="8dp"
+        android:layout_height="16sp"
         android:orientation="horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:baselineAligned="true">
+        android:layout_height="32sp"
+        android:layout_marginTop="8sp"
+        android:orientation="horizontal">
         <ImageView
             android:layout_width="16sp"
             android:layout_height="16sp"
+            android:layout_gravity="center"
             android:scaleType="centerInside"
-            android:baselineAlignBottom="true"
             android:src="@color/running_processes_system_ram"
             android:contentDescription="@null" />
-        <TextView
-            android:id="@+id/systemSizePrefix"
-            android:text="@string/running_processes_header_system_prefix"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:maxLines="1" />
-        <ImageView
-            android:src="@drawable/dotted_line_480px"
-            android:layout_width="0dip"
-            android:layout_weight="1"
-            android:layout_height="1px"
-            android:layout_marginStart="1dip"
-            android:layout_marginEnd="1dip"
-            android:baselineAlignBottom="true"
-            android:scaleType="center"
-            android:contentDescription="@null" />
-        <TextView
-            android:id="@+id/systemSize"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:maxLines="1" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/systemSizePrefix"
+                android:text="@string/running_processes_header_system_prefix"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:maxLines="1" />
+            <ImageView
+                android:src="@drawable/dotted_line_480px"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="1px"
+                android:layout_marginStart="1dip"
+                android:layout_marginEnd="1dip"
+                android:baselineAlignBottom="true"
+                android:scaleType="center"
+                android:contentDescription="@null" />
+            <TextView
+                android:id="@+id/systemSize"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:maxLines="1" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        android:baselineAligned="true">
+        android:layout_height="32sp"
+        android:orientation="horizontal">
         <ImageView
             android:layout_width="16sp"
             android:layout_height="16sp"
-            android:baselineAlignBottom="true"
+            android:layout_gravity="center"
             android:scaleType="centerInside"
             android:src="@color/running_processes_apps_ram"
             android:contentDescription="@null" />
-        <TextView
-            android:id="@+id/appsSizePrefix"
-            android:text="@string/running_processes_header_apps_prefix"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:maxLines="1"
-            android:paddingTop="6dip" />
-        <ImageView
-            android:src="@drawable/dotted_line_480px"
-            android:layout_width="0dip"
-            android:layout_weight="1"
-            android:layout_height="1px"
-            android:baselineAlignBottom="true"
-            android:layout_marginStart="1dip"
-            android:layout_marginEnd="1dip"
-            android:scaleType="center"
-            android:contentDescription="@null" />
-        <TextView
-            android:id="@+id/appsSize"
-            android:paddingTop="6dip"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:maxLines="1" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/appsSizePrefix"
+                android:text="@string/running_processes_header_apps_prefix"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:maxLines="1" />
+            <ImageView
+                android:src="@drawable/dotted_line_480px"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="1px"
+                android:baselineAlignBottom="true"
+                android:layout_marginStart="1dip"
+                android:layout_marginEnd="1dip"
+                android:scaleType="center"
+                android:contentDescription="@null" />
+            <TextView
+                android:id="@+id/appsSize"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:maxLines="1" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        android:baselineAligned="true">
+        android:layout_height="32sp"
+        android:orientation="horizontal">
         <ImageView
             android:layout_width="16sp"
             android:layout_height="16sp"
-            android:baselineAlignBottom="true"
+            android:layout_gravity="center"
             android:scaleType="centerInside"
             android:src="@color/running_processes_free_ram"
             android:contentDescription="@null" />
-        <TextView
-            android:id="@+id/freeSizePrefix"
-            android:text="@string/running_processes_header_free_prefix"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:maxLines="1"
-            android:paddingTop="6dip" />
-        <ImageView
-            android:src="@drawable/dotted_line_480px"
-            android:layout_width="0dip"
-            android:layout_weight="1"
-            android:layout_height="1px"
-            android:baselineAlignBottom="true"
-            android:layout_marginStart="1dip"
-            android:layout_marginEnd="1dip"
-            android:scaleType="center"
-            android:contentDescription="@null" />
-        <TextView
-            android:id="@+id/freeSize"
-            android:paddingTop="6dip"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:maxLines="1" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/freeSizePrefix"
+                android:text="@string/running_processes_header_free_prefix"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:maxLines="1" />
+            <ImageView
+                android:src="@drawable/dotted_line_480px"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:layout_height="1px"
+                android:baselineAlignBottom="true"
+                android:layout_marginStart="1dip"
+                android:layout_marginEnd="1dip"
+                android:scaleType="center"
+                android:contentDescription="@null" />
+            <TextView
+                android:id="@+id/freeSize"
+                android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:maxLines="1" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/listHeader"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8sp"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textColor="?android:attr/colorAccent"
         android:textAlignment="viewStart"
+        android:gravity="left|center_vertical"
         android:text="@string/running_processes_header_footer" />
 
 </LinearLayout>
