@@ -23,8 +23,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
@@ -107,6 +107,7 @@ public class SetupWizardIllustration extends FrameLayout {
             illustrationHeight -= illustrationHeight % mBaselineGridSize;
             setPaddingRelative(0, illustrationHeight, 0, 0);
         }
+        setOutlineProvider(ViewOutlineProvider.BOUNDS);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
