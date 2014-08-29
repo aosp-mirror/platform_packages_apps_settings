@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.notification.NotificationAppList.AppRow;
@@ -134,6 +135,11 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mPriority = (SwitchPreference) findPreference(KEY_PRIORITY);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
+        final boolean secure = new LockPatternUtils(getActivity()).isSecure();
+        if (!secure) {
+            getPreferenceScreen().removePreference(mSensitive);
+        }
+
         mAppRow = NotificationAppList.loadAppRow(pm, info, mBackend);
         if (intent.hasExtra(EXTRA_HAS_SETTINGS_INTENT)) {
             // use settings intent from extra
@@ -149,7 +155,9 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
         mBlock.setChecked(mAppRow.banned);
         mPriority.setChecked(mAppRow.priority);
-        mSensitive.setChecked(mAppRow.sensitive);
+        if (mSensitive != null) {
+            mSensitive.setChecked(mAppRow.sensitive);
+        }
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
@@ -167,13 +175,15 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             }
         });
 
-        mSensitive.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean sensitive = (Boolean) newValue;
-                return mBackend.setSensitive(pkg, uid, sensitive);
-            }
-        });
+        if (mSensitive != null) {
+            mSensitive.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    final boolean sensitive = (Boolean) newValue;
+                    return mBackend.setSensitive(pkg, uid, sensitive);
+                }
+            });
+        }
     }
 
     private void toastAndFinish() {
