@@ -1117,7 +1117,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".notification.RedactionInterstitial" />
+        <activity android:name=".notification.RedactionInterstitial"/>
+
+        <activity android:name=".notification.RedactionSettingsStandalone"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_APP_NOTIFICATION_REDACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name="ConfirmLockPattern"/>
 
