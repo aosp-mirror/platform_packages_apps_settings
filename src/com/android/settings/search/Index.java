@@ -181,6 +181,16 @@ public class Index {
             nonIndexableKeys = new HashMap<String, List<String>>();
         }
 
+        public UpdateData(UpdateData other) {
+            dataToUpdate = new ArrayList<SearchIndexableData>(other.dataToUpdate);
+            dataToDelete = new ArrayList<SearchIndexableData>(other.dataToDelete);
+            nonIndexableKeys = new HashMap<String, List<String>>(other.nonIndexableKeys);
+        }
+
+        public UpdateData copy() {
+            return new UpdateData(this);
+        }
+
         public void clear() {
             dataToUpdate.clear();
             dataToDelete.clear();
@@ -286,7 +296,7 @@ public class Index {
         }
     }
 
-    public boolean update() {
+    public void update() {
         final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
         List<ResolveInfo> list =
                 mContext.getPackageManager().queryIntentContentProviders(intent, 0);
@@ -304,7 +314,7 @@ public class Index {
             addNonIndexablesKeysFromRemoteProvider(packageName, authority);
         }
 
-        return updateInternal();
+        updateInternal();
     }
 
     private boolean addIndexablesFromRemoteProvider(String packageName, String authority) {
@@ -443,11 +453,10 @@ public class Index {
         }
     }
 
-    private boolean updateFromRemoteProvider(String packageName, String authority) {
-        if (!addIndexablesFromRemoteProvider(packageName, authority)) {
-            return false;
+    private void updateFromRemoteProvider(String packageName, String authority) {
+        if (addIndexablesFromRemoteProvider(packageName, authority)) {
+            updateInternal();
         }
-        return updateInternal();
     }
 
     /**
@@ -457,9 +466,8 @@ public class Index {
      * @param rebuild true means that you want to delete the data from the Index first.
      * @param includeInSearchResults true means that you want the bit "enabled" set so that the
      *                               data will be seen included into the search results
-     * @return true of the Index update has been successful.
      */
-    public boolean updateFromClassNameResource(String className, boolean rebuild,
+    public void updateFromClassNameResource(String className, boolean rebuild,
             boolean includeInSearchResults) {
         if (className == null) {
             throw new IllegalArgumentException("class name cannot be null!");
@@ -467,7 +475,7 @@ public class Index {
         final SearchIndexableResource res = SearchIndexableResources.getResourceByName(className);
         if (res == null ) {
             Log.e(LOG_TAG, "Cannot find SearchIndexableResources for class name: " + className);
-            return false;
+            return;
         }
         res.context = mContext;
         res.enabled = includeInSearchResults;
@@ -476,15 +484,14 @@ public class Index {
         }
         addIndexableData(res);
         mDataToProcess.forceUpdate = true;
-        boolean result = updateInternal();
+        updateInternal();
         res.enabled = false;
-        return result;
     }
 
-    public boolean updateFromSearchIndexableData(SearchIndexableData data) {
+    public void updateFromSearchIndexableData(SearchIndexableData data) {
         addIndexableData(data);
         mDataToProcess.forceUpdate = true;
-        return updateInternal();
+        updateInternal();
     }
 
     private SQLiteDatabase getReadableDatabase() {
@@ -510,21 +517,12 @@ public class Index {
                 SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
     }
 
-    private boolean updateInternal() {
+    private void updateInternal() {
         synchronized (mDataToProcess) {
             final UpdateIndexTask task = new UpdateIndexTask();
-            task.execute(mDataToProcess);
-            try {
-                final boolean result = task.get();
-                mDataToProcess.clear();
-                return result;
-            } catch (InterruptedException e) {
-                Log.e(LOG_TAG, "Cannot update index", e);
-                return false;
-            } catch (ExecutionException e) {
-                Log.e(LOG_TAG, "Cannot update index", e);
-                return false;
-            }
+            UpdateData copy = mDataToProcess.copy();
+            task.execute(copy);
+            mDataToProcess.clear();
         }
     }
 
@@ -1143,7 +1141,7 @@ public class Index {
     /**
      * A private class for updating the Index database
      */
-    private class UpdateIndexTask extends AsyncTask<UpdateData, Integer, Boolean> {
+    private class UpdateIndexTask extends AsyncTask<UpdateData, Integer, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -1152,15 +1150,13 @@ public class Index {
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
             mIsAvailable.set(true);
         }
 
         @Override
-        protected Boolean doInBackground(UpdateData... params) {
-            boolean result = false;
-
+        protected Void doInBackground(UpdateData... params) {
             final List<SearchIndexableData> dataToUpdate = params[0].dataToUpdate;
             final List<SearchIndexableData> dataToDelete = params[0].dataToDelete;
             final Map<String, List<String>> nonIndexableKeys = params[0].nonIndexableKeys;
@@ -1180,11 +1176,11 @@ public class Index {
                             forceUpdate);
                 }
                 database.setTransactionSuccessful();
-                result = true;
             } finally {
                 database.endTransaction();
             }
-            return result;
+
+            return null;
         }
 
         private boolean processDataToUpdate(SQLiteDatabase database, String localeStr,
