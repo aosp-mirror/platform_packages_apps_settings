@@ -26,6 +26,7 @@ import android.preference.SeekBarVolumizer;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import com.android.settings.R;
@@ -39,6 +40,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference
     private SeekBar mSeekBar;
     private SeekBarVolumizer mVolumizer;
     private Callback mCallback;
+    private ImageView mIconView;
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -93,9 +95,35 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
         if (mVolumizer == null) {
-            mVolumizer = new SeekBarVolumizer(getContext(), mStream, sampleUri, sbvc);
+            mVolumizer = new SeekBarVolumizer(getContext(), mStream, sampleUri, sbvc) {
+                // we need to piggyback on SBV's SeekBar listener to update our icon
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,
+                        boolean fromTouch) {
+                    super.onProgressChanged(seekBar, progress, fromTouch);
+                    mCallback.onStreamValueChanged(mStream, progress);
+                }
+            };
         }
         mVolumizer.setSeekBar(mSeekBar);
+        mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
+        mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
+    }
+
+    // during initialization, this preference is the SeekBar listener
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress,
+            boolean fromTouch) {
+        super.onProgressChanged(seekBar, progress, fromTouch);
+        mCallback.onStreamValueChanged(mStream, progress);
+    }
+
+    public void showIcon(int resId) {
+        // Instead of using setIcon, which will trigger listeners, this just decorates the
+        // preference temporarily with a new icon.
+        if (mIconView != null) {
+            mIconView.setImageResource(resId);
+        }
     }
 
     private Uri getMediaVolumeUri() {
@@ -106,5 +134,6 @@ public class VolumeSeekBarPreference extends SeekBarPreference
 
     public interface Callback {
         void onSampleStarting(SeekBarVolumizer sbv);
+        void onStreamValueChanged(int stream, int progress);
     }
 }
