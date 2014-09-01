@@ -197,7 +197,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateSmsValues() {
         final DropDownPreference simPref = (DropDownPreference) findPreference(KEY_SMS);
-        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getPreferredSmsSubId());
+        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
         if (sir != null) {
             simPref.setSelectedItem(sir.mSlotId + 1);
         }
@@ -268,8 +268,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 } else if (simPref.getKey().equals(KEY_CALLS)) {
                     SubscriptionManager.setDefaultVoiceSubId(subId);
                 } else if (simPref.getKey().equals(KEY_SMS)) {
-                    // TODO: uncomment once implemented. Bug: 16520931
-                    // SubscriptionManager.setDefaultSMSSubId(subId);
+                    SubscriptionManager.setDefaultSmsSubId(subId);
                 }
 
                 return true;
