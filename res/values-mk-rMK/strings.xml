@@ -462,8 +462,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Администратори на уред"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Погледни или деактивирај администратори на уред"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Агенти од доверба"</string>
-    <!-- no translation found for disabled_because_no_backup_security (6877660253409580377) -->
-    <skip />
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"За да користиш, прво постави заклучување на екран"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Прикажете или деактивирајте агенти од доверба"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Вклучи Bluetooth"</string>
@@ -471,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Управувај со конекции, подеси име и откривливост на уредот"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Барање за спарување со Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"За да се спарите со:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>,внесете го бараниот ПИН на уредот:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"За да се спарите со:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>,внесете ја бараната лозинка на уредот:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Уред"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Код за спарување"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Внесете го кодот за спарување, а потоа притиснете Врати или Внеси"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"ПИН-от содржи букви или симболи"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Обично 0000 или 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Можеби ќе треба да го внесе овој ПИН и на другиот уред."</string>
@@ -1832,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Мемор. за акредитиви е овозм."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Треба да поставите ПИН или лозинка за заклучување на екранот пред да може да ја користите меморијата за акредитиви."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Апликации со пристап до корис."</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Апликации што бараат пристап"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Само на апликациите од доверба, дозволете им пристап до податоците за користењето. Апликациите коишто ќе ги дозволите, ќе имаат пристап до историјата на користење на апликациите, како на пример последниот пат на користење на апликацијата или вкупното време поминато во користење на апликацијата."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Да се дозволи пристап?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Доколку дозволите пристап, оваа апликација ќе може да прикажува општи информации за вашите апликации, како на пример колку често ги користите."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за итен повик"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Подеси однесување кога се прави итен повик"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Резервна копија и ресетирање"</string>
@@ -1862,8 +1861,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Деактивирај"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Администратори на уред"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Не се достапни администратори на уред"</string>
-    <!-- no translation found for managed_profile_device_admin_info (5048846624960067582) -->
-    <skip />
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"За да спречите <xliff:g id="APP_NAME">%1$s</xliff:g> да пристапува до работниот профил, отстранете го профилот во Поставки &gt; Сметки"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Лични"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Работа"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Нема достапни агенти од доверба"</string>
@@ -1873,8 +1871,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"Со активирање на овој администратор ќе се овозможи апликацијата <xliff:g id="APP_NAME">%1$s</xliff:g> да ги врши следниве дејства:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Овој администратор е активен и дозволува апликацијата <xliff:g id="APP_NAME">%1$s</xliff:g> да ги врши следниве дејства:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Да се активира Управникот со профил?"</string>
-    <!-- no translation found for adding_profile_owner_warning (6469780138110334180) -->
-    <skip />
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Ако продолжите, администраторот ќе управува со вашиот Корисник, а ќе може и да складира поврзани податоци, заедно со личните податоци.\n\nАдминистраторот може да ги следи поставките, пристапот, апликациите и податоците поврзани со овој Корисник и да управува со нив, како и со мрежната активност и информациите за локацијата на уредот."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Без наслов"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Општо"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Дневник за известувања"</string>
@@ -1917,8 +1914,7 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Синхронизирај"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Во моментов има проблеми со синхронизацијата. Ќе се среди наскоро."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Додај сметка"</string>
-    <!-- no translation found for managed_profile_not_available_label (3489771164851107822) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"Работниот профил уште не е достапен"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Отстрани го работниот профил"</string>
     <string name="background_data" msgid="5779592891375473817">"Податоци во заднина"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Апл. може секогаш да се синхрон., праќаат и примаат податоци"</string>
@@ -2025,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Граница на процес во зад."</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Прикажи ги сите ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Прикажи „Апл. не реагира“ за. апл. во заднина"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Намалете мрежно користење на WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Намалете мрежно користење со прокси WebView-поврзувања преку сервери на Google за компресија (експериментално)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Користење податоци"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Корист. подат. на аплик."</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Пресметувањето податоци на операторот може да се разликува од вашиот уред."</string>
@@ -2211,13 +2210,11 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Избриши се себеси?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Да се отстрани корисникот?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Да се отстрани профилот?"</string>
-    <!-- no translation found for work_profile_confirm_remove_title (2017323555783522213) -->
-    <skip />
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Отстрани работен профил?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Ќе ги изгубите просторот и податоците на вашиот таблет. Ова дејство не може да се врати."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Ќе ги изгубите просторот и податоците на вашиот телефон. Ова дејство не може да се врати."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Ќе се избришат сите апликации и податоци."</string>
-    <!-- no translation found for work_profile_confirm_remove_message (7593793549364168783) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Сите апликации и податоци на профилот ќе се избришат."</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Ќе се избришат сите апликации и податоци."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"Додавање нов корисник..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Избриши корисник"</string>
@@ -2434,8 +2431,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Приоритет"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Прикажувај известувања најгоре на списокот и собирај ги кога уредот е поставен на само приоритетни прекини"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Чувствителна"</string>
-    <!-- no translation found for app_notification_sensitive_summary (2505314249332316395) -->
-    <skip />
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Кога уредот е заклучен, сокриј ги чувствителните содржини од известувањата на апликацијата"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Блокирана"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Приоритет"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Чувствителна"</string>

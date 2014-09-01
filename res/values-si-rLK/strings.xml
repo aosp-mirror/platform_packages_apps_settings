@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"විසන්ධි කරන්නද?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"මෙය &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; සමඟ ඔබගේ සම්බන්ධය අවසන් කරනු ඇත"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"බ්ලූටූත් සැකසීම් වෙනස් කිරීමට ඔබට අවසර නැත."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"බ්ලූටූත් සිටුවම් විවෘත කරන අතරතුර ආසන්න උපකරණ වලට <xliff:g id="DEVICE_NAME">%1$s</xliff:g> එක දර්ශනය වේ."</string>
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"බ්ලූටූත් සැකසීම් විවෘත කරන අතරතුර ආසන්න උපකරණ වලට <xliff:g id="DEVICE_NAME">%1$s</xliff:g> එක දර්ශනය වේ."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> විසන්ධි කරද?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"විකාශනය කරමින්"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"අක්‍රිය පැතිකඩක්ද?"</string>
@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"බ්ලූටූත්"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"සම්බන්ධතාවයන් කළමනාකරණය කන්න, උපාංගයේ නම සහ සොයාගැනීමේ හැකියාව සකසන්න"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"බ්ලූටූත් යුගල කිරීමේ ඉල්ලීම"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> සමඟ යුගල කිරීමට:උපාංගයේ අවශ්‍ය PIN එක ටයිප් කරන්න:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> සමග යුගල කිරීමට උපාංගයේ අවශ්‍ය මුරයතුර ටයිප් කරන්න:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"උපාංගය"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"යුගල කිරීමේ කේතය"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"යුගල කිරීමේ කේතය ටයිප් කරන්න සහ ඉන් පසු ආපසු එම හෝ ඇතුළු කිරීම ඔබන්න"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN හි අකුරු හෝ සංකේත අඩංගු වේ"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"සාමාන්‍යයෙන් 0000 හෝ 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"ඔබට මෙම PIN එක අනෙක් උපාංගයේ ටයිප් කිරීමට සිදුවනු ඇත."</string>
@@ -1735,12 +1736,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"හඬ ආදාන සැකසීම්"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"හඬ ආදානය"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"හඬ ආදානය සේවා"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"සම්පුර්ණ අණවදන සහ අන්තර්ක්‍රියාව"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"සරළ කථනයෙන් පෙළට"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"හඬ නිරීක්ෂණය කිරීම සැමවිටම සක්‍රියව තැබීමට සහ ඔබ වෙනුවෙන් හඬ සබල කර ඇති යෙදුම් පාලනය කිරීමට හැකියාව හඬ ආදාන සේවාවට තිබේ. <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> යෙදුමෙන් එය පැමිණේ. මෙම සේවාවේ භාවිතා කිරීම සබල කරන්නද?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"පෙළ-සිට-කථාවට සැකසුම්"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"පෙළ-සිට-කථන ප්‍රතිදානය"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"සෑමවිටම මගේ සැකසුම් භාවිතා කරන්න"</string>
@@ -1836,10 +1834,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"අක්තපත්‍ර ආචයනය සක්‍රිය කර ඇත."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"අක්තපත්‍ර ආචයනය ඔබ භාවිතා කිරීමට පෙර අගුළු තිර PIN එකක් හෝ මුරපදයක් ඔබ දැමිය යුතුය."</string>
     <string name="usage_access_title" msgid="332333405495457839">"භාවිත ප්‍රවේශය සමඟ යෙදුම්"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"ප්‍රවේශය ඉල්ලන යෙදුම්"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"ඔබ විශ්වාස කරන යෙදුම් වලට පමණක් ඔබගේ භාවිත දත්ත වලට ඉඩ දෙන්න. අවසාන වරට යෙදුම භාවිතා කරන ලද්දේ, හෝ යෙදුම භාවිත කරමින් ඔබ වැය කළ සම්පුර්ණ කාලය වැනි, ඔබගේ යෙදුම් භාවිත ඉතිහාසයට ඔබ ඉඩ දෙන යෙදුම් වලට අවසර තිබේ."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"ප්‍රවේශයට අවසර දෙන්නද?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"ඔබ ප්‍රවේශයට ඉඩ දේ නම්, කොපමණ කාලයකට වරක් ඔබගේ යෙදුම් භාවිතා කරන්නේද වැනි, ඔබගේ යෙදුම් පිළිබඳ සාමාන්‍ය තොරතුරු මෙම යෙදුමට බැලිය හැක."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"හදිසි නාදය"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"හදිසි ඇමතුමක් ලැබුණ විට හැසිරීම සකසන්න"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"උපස්ථ කරන්න සහ යළි පිහිටුවන්න"</string>
@@ -2026,8 +2023,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"පසුබිම් ක්‍රියාවලි සීමාව"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"සියලුම ANR පෙන්වන්න"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"පසුබිම් යෙදුම් වලට යෙදුම ප්‍රතිචාර නොදක්වයි කවුළුව පෙන්වන්න"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView ජාල භාවිතය අඩු කරන්න"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Google සම්පීඩන සේවාදායකයන් තුළින් WebView සම්බන්ධතා ප්‍රොක්සි කිරීම මඟින් භාවිතය අඩු කරන්න (පරීක්ෂණාත්මක)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"දත්ත භාවිතය"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"යෙදුම් දත්ත භාවිතය"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"ඔබගේ උපාංගයේ වාහක දත්ත ගිණුම් ගත කිරීම ඇතැම් විට වැර දේ."</string>
@@ -2366,8 +2366,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"ගිණුම"</string>
     <string name="keywords_users" msgid="4673901601478559100">"සීමා කිරීම සීමා කරනවා සීමා කරන ලදි"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"පෙළ නිවැරදිකරණය ශබ්ද කම්පනය නිවැරදි කරන්න ස්වයංක්‍රීය භාෂා ඉංගිතය යෝජනා කරන්න තේමාව යෝජනා කිරීම අහිතකර වචන වර්ග ඉමොජි"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"සර්පණය මුරපදය රටාව pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ටැගයක් ස්ථාපනය කරන්න"</string>
     <string name="write_tag" msgid="8571858602896222537">"ලියනවා"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"ලිවීමට ටැගයට තට්ටු කරන්න..."</string>

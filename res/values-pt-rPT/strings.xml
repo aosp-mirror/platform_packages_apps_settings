@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gerir ligações, definir nome e detectabilidade do dispositivo"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Pedido de emparelhamento de Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Para sincronizar com:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Introduza o PIN solicitado pelo dispositivo:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Para sincronizar com:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Introduza a chave de acesso do dispositivo solicitada:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Dispositivo"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Código de sincronização"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Introduza o código de sincronização e, em seguida, prima Return ou Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"O PIN contém letras ou símbolos"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Geralmente 0000 ou 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Poderá também ter de introduzir este PIN no outro aparelho."</string>
@@ -1526,7 +1527,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Configurações"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Ativado"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Desativado"</string>
-    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Não permitido pela sua entidade"</string>
+    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Não é permitido pela sua entidade"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Pré-visualizar"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Opções padrão"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Idioma"</string>
@@ -1735,7 +1736,7 @@
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Serviços de entrada de texto por voz"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Palavra de ativação e interação completas"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Serviço simples de voz para texto"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada de texto por voz poderá efetuar monitorização de voz permanente e controlar aplicações ativadas por voz em seu nome. É proveniente da aplicação <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Permitir a utilização deste serviço?"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada de texto por voz poderá efetuar monitorização de voz permanente e controlar aplicações ativadas por voz em seu nome. É proveniente da aplicação <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Pretende permitir a utilização deste serviço?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Definições de texto para voz"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Saída de texto para voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Utilizar sempre as minhas definições"</string>
@@ -1831,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais está ativado."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Para poder utilizar o armazenamento de credenciais, é necessário definir primeiro um PIN ou palavra-passe do ecrã de bloqueio."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplic. com acesso de utiliz."</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Aplic. que solicitam acesso"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Permita que apenas as aplicações em que confia acedam aos dados de utilização. As aplicações que permitir terão acesso ao seu histórico de utilização de aplicações, como a última vez que uma aplicação foi utilizada ou o tempo total de utilização de uma aplicação."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Permitir acesso?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Se permitir o acesso, esta aplicação pode ver as informações gerais acerca das suas aplicações, como a frequência com que as utiliza."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir o comportamento quando é efetuada uma chamada de emergência"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Cópia de segurança e reposição"</string>
@@ -1871,7 +1871,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"A ativação deste administrador permitirá à aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> efetuar as seguintes operações:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Este administrador está ativo e permite que a aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> efetue as seguintes operações:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Pretende ativar o Gestor de perfis?"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Ao prosseguir, o seu Utilizador será gerido pelo Administrador, que também poderá armazenar dados associados, além dos seus dados pessoais.\n\nO Administrador tem a capacidade de monitorizar e gerir as definições, o acesso, as aplicações e os dados associados a este Utilizador incluindo a atividade de rede e as informações de localização do seu dispositivo."</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Ao prosseguir, o seu Utilizador será gerido pelo Administrador, que também poderá armazenar dados associados, além dos seus dados pessoais.\n\nO Administrador tem a capacidade de monitorizar e gerir as definições, o acesso, as aplicações e os dados associados a este utilizador incluindo a atividade de rede e as informações de localização do seu dispositivo."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sem título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Geral"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Registo de notificações"</string>
@@ -2021,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite proc. em 2º plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Mostrar todos os ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Mostrar erro \"Aplic. não Resp.\" p/ aplic. 2º plano"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Red. util. rede WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Reduzir utilização de rede ao utilizar as ligações WebView como proxy através dos servidores de compressão da Google (experimental)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilização de dados"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Utilização dados da apli."</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"A contagem do operador de dados pode diferir do seu dispositivo."</string>
@@ -2211,7 +2214,7 @@
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Perderá os dados e espaço neste tablet. Não é possível anular esta ação."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Perderá os dados e espaço neste telemóvel. Não é possível anular esta ação."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Todas as aplicações e os dados serão eliminados."</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Todas as aplicações e todos os dados neste perfil serão eliminados."</string>
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"Todas as aplicações e dados neste perfil serão eliminados."</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"Todas as aplicações e os dados serão eliminados."</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"A adicionar novo utilizador..."</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"Eliminar utilizador"</string>

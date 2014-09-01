@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"সংযোগগুলি পরিচালনা করুন, ডিভাইস নাম ও ডিভাইস খুঁজে পাওয়া সেট করুন"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth যুক্ত করার অনুরোধ"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"এর সঙ্গে যুক্ত করতে:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ডিভাইসের প্রয়োজনীয় PIN টাইপ করুন:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"এর সঙ্গে যুক্ত করতে:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ডিভাইসের প্রয়োজনীয় পাস কী টাইপ করুন:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"ডিভাইস"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"যুক্ত করার কোড"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"যুক্ত করার কোড লিখে Return বা Enter টিপুন"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN এ অক্ষর বা চিহ্ন রয়েছে"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"সাধারণত ০০০০ বা ১২৩৪"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"আপনাকে অন্য ডিভাইসে এই PIN টাইপ করতে হতে পারে।"</string>
@@ -1831,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"ক্রেডেনশিয়াল সঞ্চয়স্থান সক্ষম।"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"আপনি ক্রেডেনশিয়াল সঞ্চয়স্থান ব্যবহার করার আগে আপনাকে লক স্ক্রীন PIN বা পাসওয়ার্ড সেট করতে হবে।"</string>
     <string name="usage_access_title" msgid="332333405495457839">"ব্যবহারের অ্যাক্সেস যুক্ত অ্যাপ্লিকেশান"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"অ্যাক্সেসের অনুরোধ করা অ্যাপ্লিকেশান"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"আপনি বিশ্বাস করেন শুধুমাত্র সেসব অ্যাপ্লিকেশানকেই ব্যবহারের ডেটা অ্যাক্সেস করার অনুমতি দিন। আপনি যে অ্যাপ্লিকেশানকে অনুমতি দিবেন সেটি আপনার অ্যাপ্লিকেশান ব্যবহারের ইতিহাস যেমন, সর্বশেষ কোন সময় একটি অ্যাপ্লিকেশান ব্যবহার করা হয়েছে, বা মোট কত সময় আপনি একটি অ্যাপ্লিকেশান ব্যবহার করেছেন ইত্যাদি অ্যাক্সেস করতে পারবে।"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"অ্যাক্সেসের অনুমতি দেবেন?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"আপনি অ্যাক্সেস করতে অনুমতি দিলে, এই অ্যাপ্লিকেশানটি আপনার অ্যাপ্লিকেশানগুলি সম্পর্কে সাধারণ তথ্য যেমন, আপনি কত ঘনঘন সেগুলো ব্যবহার করেন তা দেখতে পারবে।"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"জরুরি টোন"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"জরুরি কল স্থাপন করা সময় কি ধরণের কার্যকলাপ করবে তা সেট করুন"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"ব্যাকআপ ও পুনরায় সেট করুন"</string>
@@ -2021,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"পশ্চাদপট প্রক্রিয়ার সীমা"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"সব ANR দেখান"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"পশ্চাদপটের অ্যাপ্লিকেশানগুলির জন্য অ্যাপ্লিকেশান কোনো প্রতিক্রিয়া দিচ্ছে না এমন কথোপকথন দেখান"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView নেটওয়ার্কের ব্যবহার কমান"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Google এর সংকোচন সার্ভারগুলি ব্যবহার করে WebView সংযোগগুলির প্রক্সি করার মাধ্যমে নেটওয়ার্কের ব্যবহার কমান (পরীক্ষামূলক)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ডেটা ব্যবহার"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"অ্যাপ্লিকেশান ডেটা ব্যবহার"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"পরিষেবা প্রদানকারীর ডেটার হিসাব আপনার ডিভাইস থেকে ভিন্ন হতে পারে।"</string>

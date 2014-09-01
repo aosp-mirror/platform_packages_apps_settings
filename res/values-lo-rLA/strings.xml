@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"ຈັດການການເຊື່ອມຕໍ່, ຕັ້ງຊື່ອຸປະກອນ &amp; ການຊອກເຫັນ"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"ຄຳຂໍການຈັບຄູ່ Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"ເພື່ອຈັບຄູ່ກັບ:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ໃຫ້ພິມລະຫັດ PIN ທີ່ຕ້ອງໃຊ້ກັບອຸປກອນ:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"ເພື່ອຈັບຄູ່ກັບ:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ໃຫ້ພິມ passkey ທີ່ອຸປະກອນຕ້ອງການ:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"ອຸປະກອນ"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"ລະ​ຫັດ​ຈັບ​ຄ​ູ່"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"​ພິມ​ລະ​ຫັດ​ຈັບ​ຄູ່​ແລ້ວ​ກົດ Return ຫຼື Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN ມີໂຕອັກສອນ ຫຼືສັນຍາລັກ"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"ປົກກະຕິແລ້ວໃຊ້ 0000 ຫຼື 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"ທ່ານອາດຕ້ອງພິມລະຫັດ PIN ນີ້ໃສ່ອຸປະກອນອື່ນນຳ."</string>
@@ -1831,10 +1832,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"ການໃຊ້ພື້ນທີ່ຈັດເກັບຂໍ້ມູນຮັບຮອງຖືກເປີດໃຊ້ແລ້ວ."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"ທ່ານຕ້ອງຕັ້ງ PIN ລັອກໜ້າຈໍ ຫຼືລະຫັດຜ່ານ ກ່ອນທີ່ຈະສາມາດໃຊ້ບ່ອນຈັດເກັບຂໍ້ມູນຮັບຮອງໄດ້."</string>
     <string name="usage_access_title" msgid="332333405495457839">"​ແອັບຯ​ທີ່​ມີ​ສິດ​ອະ​ນຸ​ຍາດ​ເຂົ້າ​ເຖິງ"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"ແອັບຯ​ຮ້ອງ​ຂໍ​ສິດ​ເຂົ້າ​ເຖິງ"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"​ອະ​ນຸ​ຍາດ​ໃຫ້​ເຂົ້າ​ເຖິງ​ຂໍ້​ມູນ​ການ​ນຳ​ໃຊ້ສະ​ເພາະ​ແອັບຯ​ທີ່​ທ່ານ​ເຊື່ອຖືເທົ່າ​ນັ້ນ. ແອັບຯ​ທີ່​ທ່ານ​ອະ​ນຸ​ຍາດ​ຈະ​ມີ​ສິດ​ເຂົ້າ​ເຖິງ​ປະ​ຫວັດ​ການ​ນຳ​ໃຊ້​ແອັບຯ​ຂອງ​ທ່ານ ເຊັ່ນ: ເວ​ລາ​ທີ່​ທ່ານ​ໃຊ້​ແອັບຯ​ຄັ້ງຫຼ້າ​ສຸດ ຫຼື​ໄລ​ຍະ​ເວ​ລາ​ຮວມ​ທີ່​ທ່ານ​ໃຊ້​ໄປ​ກັບ​ແອັບຯ​ໃດ​ນຶ່ງ."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"ອະ​ນຸ​ຍາດ​ໃຫ້​ເຂົ້າ​ເຖິງບໍ່?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"​ຫາກ​ທ່ານ​ອະ​ນຸ​ຍາດ​ໃຫ້​ເຂົ້າ​ເຖິງ​ໄດ້, ແອັບຯ​ນີ້​ຈະ​ສາ​ມາດ​ເບິ່ງ​ຂໍ້​ມູນ​ທົ່ວ​ໄປ​ກ່ຽວ​ກັບ​ແອັບຯ​ຕ່າງໆ​ຂອງ​ທ່ານ ເຊັ່ນ: ​ທ່ານ​ໃຊ້​ແອັບຯ​ເຫຼົ່າ​ນັ້ນ​ເລື້ອຍ​ປານ​ໃດ."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"ຫາກ​ທ່ານ​ອະ​ນຸ​ຍາດ​ການ​ເຂົ້າ​ເຖິງ, ແອັບຯ​ນີ້​ສາ​ມາດ​ເບິ່ງ​ຂໍ້​ມູນ​ທົ່ວ​ໄປ​ກ່ຽວ​ກັບ​ແອັບຯ​ຕ່າງໆ​ໃນ​ອຸ​ປະ​ກອນ​ຂອງ​ທ່ານ ເຊັ່ນ: ທ່ານ​ໃຊ້​ແອັບຯ​ເຫຼົ່າ​ນັ້ນ​ເລື້ອຍ​ປານ​ໃດ."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"ໂທນສຽງສຸກເສີນ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ຕັ້ງຄ່າການເຮັດວຽກເມື່ອມີການໂທຫາໝາຍເລກສຸກເສີນ"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"ສຳຮອງຂໍ້ມູນ &amp; ຣີເຊັດ"</string>
@@ -2021,8 +2020,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"ການຈຳກັດໂປຣເຊສໃນພື້ນຫຼັງ"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"ສະ​ແດງ ANRs ທັງ​ຫມົດ"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"ສະແດງໜ້າຈໍແອັບຯທີ່ບໍ່ຕອບສະໜອງສຳລັບແອັບຯພື້ນຫຼັງ"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"ກະ​ລຸ​ນາ​ໃຊ້​ແອັບຯ ການ​ຕັ້ງ​ຄ່າ Google ສຳ​ລັບ​ການ​ດຳ​ເນີນ​ການ​ນີ້"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"ຫຼຸດ​ຜ່ອນ​ການ​ນຳ​ໃຊ້​ເຄືອ​ຂ່າຍ​ຂອງ WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"ຫຼຸດ​ຜ່ອນ​ການ​ນຳ​ໃຊ້​ເຄືອ​ຂ່າຍ​ໂດຍ​ສ້າງ​ການ​ເຊື່ອມ​ຕໍ່​ພ​ຣັອກ​ຊີ WebView ຜ່ານ​ເຊີບ​ເວີ​ບີບ​ອັດ​ຂໍ້​ມູນຂອງ Google (​​ທົດ​ລອງ)"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"ຫຼຸດ​ການ​ນຳ​ໃຊ້​ເຄືອ​ຂ່າຍ​ໂດຍ​ໃຊ້​ການ​ເຊື່ອມ​ຕໍ່​ຜ່ານ​ພຣັອກ​ຊີ WebView ຜ່ານ​ເຊີບ​ເວີ​ບີບ​ອັດ​ຂໍ້​ມູນ​ຂອງ Google"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ການນຳໃຊ້ຂໍ້ມູນ"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"ການ​ນຳ​ໃຊ້​ຂໍ້​ມູນ​ແອັບຯ"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"​ການ​ນັບ​ຈ​ຳ​ນວນ​ຂໍ້​ມູນ​ທີ່​ໃຊ້​ຂອງ​ຜູ່​ໃຫ້​ບໍ​ລິ​ການ​ອາດ​ແຕກ​ຕ່າງ​ຈາກ​​ທີ່ອຸ​ປະ​ກອນ​ຂອງ​ທ່ານນັບ"</string>

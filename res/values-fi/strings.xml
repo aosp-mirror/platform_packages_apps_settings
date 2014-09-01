@@ -470,8 +470,12 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Hallinnoi yhteyksiä, aseta laitteen nimi ja tunnistettavuus"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth-laiteparipyyntö"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Kirjoita laitteen tarvitsema PIN-koodi muodostaaksesi laiteparin laitteen <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> kanssa:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Kirjoita laitteen tarvitsema avain muodostaaksesi laiteparin laitteen <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> kanssa:"</string>
+    <!-- no translation found for bluetooth_enter_pin_msg (4954085254142996877) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_key_msg (333005542843637754) -->
+    <skip />
+    <!-- no translation found for bluetooth_enter_passkey_msg (6813273136442138444) -->
+    <skip />
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN-koodi sisältää kirjaimia tai symboleja"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Yleensä 0000 tai 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Saatat joutua syöttämään tämän PIN-koodin myös toiseen laitteeseen."</string>
@@ -1749,12 +1753,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Äänisyöteasetukset"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Äänisyöte"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Äänisyötepalvelut"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Toimintosanat ja vuorovaikutus"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Yksinkertainen puheesta tekstiksi -palvelu"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Tämä puheohjauspalvelu huolehtii, että puheohjaus on aina päällä ja ohjaa puheohjausta käyttäviä sovelluksia automaattisesti puolestasi. Palvelu sisältyy sovellukseen <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Otetaanko palvelu käyttöön?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Tekstistä puheeksi -asetukset"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Tekstistä puheeksi -toisto"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Käytä aina omia asetuksiani"</string>
@@ -1850,10 +1851,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Käyttöoikeustietojen tallentaminen on käytössä."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Ruudunlukituksen PIN-koodi tai salasana on asetettava ennen kuin käyttöoikeustietojen tallennustilaa voi käyttää."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Sovellukset, joilla on lupa"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Lupaa pyytävät sovellukset"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Myönnä käyttöoikeus vain sovelluksille, joiden haluat tarkastelevan tietojasi. Kyseiset sovellukset voivat tarkastella käyttöhistorian tietoja, kuten edellistä sovelluksen käyttöajankohtaa tai sovelluksen kokonaiskäyttöaikaa."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Myönnetäänkö käyttöoikeus?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Käyttöoikeuden myöntäminen antaa tälle sovellukselle luvan tarkastella sovellustesi yleisiä tietoja, esim. käytön tiheyttä."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Hätäpuhelun ääni"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Aseta toiminta hätäpuhelun tapauksessa"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Varmuuskopioi ja palauta"</string>
@@ -2040,8 +2040,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Taustapros. enintään"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Näytä kaikki ANR:t"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Näytä Sovellus ei vastaa -ikkuna taustasovell."</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Väh. WebView\'n verkon käytt."</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Vähennä verkon käyttöä välittämällä WebView-yhteydet Googlen pakkauspalvelinten kautta (kokeellinen toiminto)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Tietojen käyttö"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Sovelluksen tiedonsiirto"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Operaattorin mittaustulos saattaa erota laitteesi mittaamasta."</string>
@@ -2380,8 +2383,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"tili"</string>
     <string name="keywords_users" msgid="4673901601478559100">"rajoitus rajoittaa rajoitettu"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"teksti korjaus korjaa ääni värinä automaattinen kieli ele ehdota ehdotus teema loukkaava sana tyyppi emoji hymiö"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"liu\'uta salasana lukituksenpoistokuvio PIN-koodi"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Määritä Wi-Fi ja NFC-tunniste"</string>
     <string name="write_tag" msgid="8571858602896222537">"Kirjoita"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Kirjoita napauttamalla tunnistetta…"</string>

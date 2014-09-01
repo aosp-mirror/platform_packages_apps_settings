@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"بلوٹوتھ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"کنکشنز کا نظم کریں، آلہ کا نام اور دریافتگی کو سیٹ کریں"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"بلوٹوتھ جوڑا بنانے کی درخواست"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"‏اس کے ساتھ جوڑا بنانے کیلئے:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>آلہ کا درکار PIN ٹائپ کریں:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"اس کے ساتھ جوڑا بنانے کیلئے:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>آلہ کی درکار پاس کلید ٹائپ کریں:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"آلہ"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"جوڑا بنانے کا کوڈ"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"جوڑا بنانے کا کوڈ ٹائپ کریں پھر ریٹرن یا انٹر دبائیں"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"‏PIN میں حروف یا علامات شامل ہیں"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"عام طور پر 0000 یا 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"‏آپ کو دوسرے آلہ پر بھی یہ PIN ٹائپ کرنے کی ضرورت پڑ سکتی ہے۔"</string>
@@ -1733,12 +1734,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"صوتی ان پٹ کی ترتیبات"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"صوتی ان پٹ"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"صوتی  ان پٹ سروسز"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"مکمل ہاٹ ورڈ اور تعامل"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"آسان اسپیچ ٹو ٹیکسٹ"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"یہ صوتی ان پٹ سروس ہمیشہ آن رہنے والی صوتی مانیٹرنگ کو انجام دے سکے گی اور آپ کی جانب سے آواز فعال کردہ ایپلیکیشنز کو کنٹرول کر سکے گی۔ یہ <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> ایپلیکیشن سے آتی ہے۔ اس سروس کا استعمال فعال کریں؟"</string>
     <string name="tts_settings" msgid="8186971894801348327">"ٹیکسٹ ٹو اسپیچ کی ترتیبات"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"ٹیکسٹ ٹو اسپیچ آؤٹ پٹ"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"ہمیشہ میری ترتیبات استعمال کریں"</string>
@@ -1834,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"اسناد کا اسٹوریج فعال ہے۔"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"‏اس سے پہلے کہ آپ اسنادات اسٹوریج کا استعمال کر سکیں آپ کو اسکرین مقفل کرنے کا ایک PIN یا پاس ورڈ سیٹ کرنا ہوگا۔"</string>
     <string name="usage_access_title" msgid="332333405495457839">"استعمال تک رسائی والی ایپس"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"ایپس رسائی طلب کر رہی ہیں"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"صرف اپنی بھروسہ مند ایپس کو استعمال کے ڈیٹا تک رسائی کی اجازت دیں۔ جن ایپس کو آپ اجازت دیں گے انہیں آپ کی ایپ کے استعمال کی سرگزشت تک رسائی حاصل ہوگی، جیسے ایپ آخری بار کب استعمال ہوئی تھی، یا کوئی ایپ استعمال کرتے ہوئے آپ نے کل کتنا وقت صرف کیا۔"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"رسائی کی اجازت دیں؟"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"اگر آپ رسائی کی اجازت دیتے ہیں تو یہ ایپ آپ کی اپیس کے بارے میں عمومی معلومات دیکھ سکتی ہے، جیسے آپ انہیں کتنی بار استعمال کرتے ہیں۔"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"ہنگامی ٹون"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ہنگامی کال کرتے وقت برتاؤ سیٹ کریں"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"بیک اپ لیں اور دوبارہ ترتیب دیں"</string>
@@ -1874,7 +1871,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"اس منتظم کو فعال کرنے سے <xliff:g id="APP_NAME">%1$s</xliff:g> ایپ کو مندرجہ ذيل اعمال انجام دینے کی اجازت مل جائے گی:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"یہ منتظم فعال ہے اور <xliff:g id="APP_NAME">%1$s</xliff:g> ایپ کو مندرجہ ذیل اعمال انجام دینے کی اجازت دیتا ہے:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"پروفائل مینیجر کو فعال کریں؟"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"جاری رکھنے سے، آپ کا منتظم آپ کے صارف کا نظم کرے گا جو آپ کے ذاتی ڈیٹا کے علاوہ، وابستہ ڈیٹا کو بھی اسٹور کر سکتا ہے۔\n\nآپ کے منتظم کے پاس نیٹ ورک کی سرگرمی اور آپ کے آلات کے مقام کی معلومات کے بشمول، ترتیبات، رسائی، ایپس اور اس صارف کے ساتھ وابستہ ڈیٹا کو مانیٹر کرنے اور ان کا نظم کرنے کی اہلیت ہے۔"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"جاری رکھنے سے، آپ کا منتظم آپ کے صارف کا نظم کرے گا جو آپ کے ذاتی ڈیٹا کے علاوہ، وابستہ ڈیٹا کو بھی اسٹور کر سکتا ہے۔\n\nآپ کے منتظم کے پاس نیٹ ورک کی سرگرمی اور آپ کے آلات کے مقام کی معلومات سمیت ترتیبات، رسائی، ایپس اور اس صارف کے ساتھ وابستہ ڈیٹا کو مانیٹر کرنے اور ان کا نظم کرنے کی اہلیت ہے۔"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"بلا عنوان"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"عمومی"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"اطلاعاتی لاگ"</string>
@@ -2024,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"پس منظر پروسیس کی حد"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏سبھی ANRs کو دکھائیں"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"پس منظر کی ایپس کیلئے ایپ جواب نہیں دے رہی ہے ڈائلاگ دکھائیں"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"‏WebView نیٹ ورک استعمال کم کریں"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"‏WebView کنکشنز کو Google کمپریشن سرورز کے ذریعے پراکسی کر کے نیٹ ورک کا استعمال کم کریں (تجرباتی)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ڈیٹا کا استعمال"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"ایپ کے ڈیٹا کا استعمال"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"کیریئر ڈیٹا کا حساب آپ کے آلہ سے مختلف ہو سکتا ہے۔"</string>
@@ -2364,8 +2364,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"اکاؤنٹ"</string>
     <string name="keywords_users" msgid="4673901601478559100">"پابندی پابندی لگائیں پابندی عائد کردہ"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"‏متن اصلاح اصلاح کریں آواز وائبریٹ کریں خود کار زبان اشارہ تجویز کریں تجویز تھیم ناگوار لفظ قسم emoji"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"‏سلائیڈ پاس ورڈ پیٹرن pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"‏Wi-Fi NFC ٹیگ ترتیب دیں"</string>
     <string name="write_tag" msgid="8571858602896222537">"تحریر کریں"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"لکھنے کیلئے ایک ٹیگ کو تھپتھپائیں…"</string>
