@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Настройка подключений, видимости и имени устройства"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Запрос сопряжения Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Для подключения к устройству <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> введите PIN-код:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Для подключения к устройству <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> введите пароль:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Устройство"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Код подключения"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Введите код подключения и нажмите клавишу ввода"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN-код содержит буквы или символы"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Обычно 0000 или 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Возможно, потребуется ввести PIN-код на другом устройстве."</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Сброс не выполнен, поскольку служба System Clear недоступна."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Выполнить сброс?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Этот пользователь не может выполнять сброс настроек"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Очистить USB-накопитель"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Очистить SD-карту"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Уничтожает все данные на USB-накопителе"</string>
@@ -1653,8 +1658,8 @@
     <string name="usage_type_on_time" msgid="3351200096173733159">"Время работы"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Время отсутствия сигнала"</string>
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"Емкость батареи"</string>
-    <string name="usage_type_computed_power" msgid="5862792259009981479">"Расчетный расход заряда батареи"</string>
-    <string name="usage_type_actual_power" msgid="7047814738685578335">"Зафиксированный расход заряда батареи"</string>
+    <string name="usage_type_computed_power" msgid="5862792259009981479">"Расчетный расход"</string>
+    <string name="usage_type_actual_power" msgid="7047814738685578335">"Фактический расход"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Остановить"</string>
     <string name="battery_action_app_details" msgid="7861051816778419018">"О приложении"</string>
     <string name="battery_action_app_settings" msgid="4570481408106287454">"Настройки приложения"</string>
@@ -1680,7 +1685,7 @@
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"В программе могут быть настройки режима энергосбережения"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"Использование батареи пользователем"</string>
     <string name="battery_desc_unaccounted" msgid="7404256448541818019">"Неучтенный расход заряда батареи"</string>
-    <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Эти данные являются приблизительными и не включают все возможные источники потребления энергии. Приведенный показатель соответствует разнице между примерным расчетным энергопотреблением и фактическим расходом заряда батареи."</string>
+    <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Данные о расходе заряда батареи отдельными приложениями являются приблизительными и не включают всех возможных потребителей энергии. Этот показатель энергопотребления соответствует разнице между расчетным энергопотреблением и фактическим расходом заряда батареи."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Преувеличенное энергопотребление"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мА·ч"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> с момента отключения от питания"</string>
@@ -1733,12 +1738,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Настройки голосового ввода"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Голосовой ввод"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Голосовой ввод"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Расширенный режим: управление с помощью голосовых команд"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Обычный режим: распознавание речи"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Эта служба голосового ввода сможет выполнять непрерывный мониторинг речи и управлять приложениями от вашего имени. Для ее работы необходимо установить приложение \"<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>\". Включить службу?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Настройки синтеза речи"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Синтез речи"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Только мои настройки"</string>
@@ -1834,10 +1836,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилище регистрационных данных включено."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Перед использованием хранилища учетных данных необходимо задать PIN-код или пароль блокировки экрана."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Приложения, получившие доступ"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Приложения, запросившие доступ"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Предоставляйте доступ к истории использования только тем приложениям, которым доверяете. Они получат доступ к таким данным, как время последнего использования приложений и общая продолжительность их работы."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Разрешить доступ?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Если вы предоставите разрешение, это приложение получит доступ к общей информации о ваших приложениях (например, о частоте их использования)."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тональный сигнал экстренного вызова"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Настроить режим работы при экстренном вызове"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Восстановление и сброс"</string>
@@ -2024,8 +2025,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Лимит фоновых процессов"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Все ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Уведомлять о том, что приложение не отвечает"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Сокращать трафик WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Сокращать трафик при обработке WebView за счет подключения к DCP-серверам Google (экспериментальная функция)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Передача данных"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Трафик приложения"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Статистика вашего оператора связи может отличаться от статистики устройства."</string>
@@ -2366,8 +2370,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"аккаунт"</string>
     <string name="keywords_users" msgid="4673901601478559100">"ограничение ограничить ограничено"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"исправление текста исправить звук вибросигнал авто язык жест подсказывать подсказка тема нецензурное слово ввод смайлики"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем по экрану пароль графический ключ PIN-код"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"NFC-метка для настройки Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записать"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Нажмите на метку, чтобы начать запись..."</string>

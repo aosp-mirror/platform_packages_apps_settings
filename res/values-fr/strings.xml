@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gérer les connexions, configurer le nom et l\'identification de l\'appareil"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Demande d\'association Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Pour l\'association à :{<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisir le code PIN requis de l\'appareil :"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Pour l\'association à :<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisir la clé d\'accès requise de l\'appareil :"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Appareil"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Code d\'association"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Saisissez le code d\'association, puis appuyez sur Retour ou Entrée."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Le code PIN contient des lettres ou des symboles."</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Habituellement 0000 ou 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Vous devrez peut-être également saisir ce code PIN sur l\'autre appareil."</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Les données n\'ont pas été réinitialisées, car le service de nettoyage du système n\'est pas disponible."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Réinitialiser ?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Le rétablissement de la configuration d\'usine n\'est pas disponible pour cet utilisateur."</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Effacer la mémoire USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Effacer la carte SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Efface les données de la mémoire USB"</string>
@@ -1735,12 +1740,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Paramètres de saisie vocale"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Saisie vocale"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Services de saisie vocale"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Détection de mot clé et interaction totales"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Reconnaissance vocale uniquement"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Ce service de saisie vocale pourra contrôler en permanence les fonctionnalités vocales et utiliser en votre nom les applications commandées par la voix. Il provient de l\'application <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Autoriser l\'utilisation de ce service ?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Paramètres de la synthèse vocale"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Sortie de la synthèse vocale"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Utiliser mes paramètres"</string>
@@ -1836,10 +1838,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Stockage des identifiants activé"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Avant d\'utiliser le stockage d\'identifiants, vous devez définir un code PIN ou un mot de passe pour le verrouillage d\'écran."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Applis avec accès données util."</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Applications demandant l\'accès"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Seules les applications fiables doivent pouvoir accéder à vos données d\'utilisation. Les applications autorisées ont accès à l\'historique d\'utilisation des applications et peuvent savoir, par exemple, à quel moment une application a été utilisée pour la dernière fois ou la durée totale d\'utilisation d\'une application."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Autoriser l\'accès ?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Si vous autorisez cette application à accéder aux données d\'utilisation, elle pourra obtenir des informations générales sur vos applications, telles que la fréquence à laquelle vous les utilisez."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sonnerie d\'urgence"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Définir le comportement en cas d\'appel d\'urgence"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Sauvegarder et réinitialiser"</string>
@@ -2026,8 +2027,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite processus arr.-plan"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Afficher tous les messages ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Afficher \"L\'application ne répond plus\" pour applis en arrière-plan"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Réduire util. rés. WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Réduire l\'utilisation du réseau en faisant passer les connexions WebView par des serveurs de compression Google (expérimental)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Consommation des données"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Conso données application"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Le suivi de la consommation effectué par votre opérateur peut différer de celui de votre appareil."</string>
@@ -2368,8 +2372,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"compte"</string>
     <string name="keywords_users" msgid="4673901601478559100">"limitation limiter limité"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"texte correction corriger son vibreur auto langue geste suggérer suggestion thème terme choquant type emoji"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"faire glisser mot de passe schéma code d\'accès"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Créer un tag NFC pour Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Modifier"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Appuyer sur un tag pour le modifier…"</string>

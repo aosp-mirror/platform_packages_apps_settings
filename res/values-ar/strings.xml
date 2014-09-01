@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"بلوتوث"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"إدارة الاتصالات، تعيين اسم الجهاز وقابلية الاكتشاف"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"طلب اقتران البلوتوث"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"‏للإقران مع:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>اكتب رمز PIN المطلوب للجهاز:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"للإقران مع:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>اكتب مفتاح المرور المطلوب للجهاز:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"الجهاز"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"شفرة الإقران"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"اكتب شفرة الإقران، ثم اضغط على \"رجوع\" أو \"إدخال\""</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"‏يشتمل رمز PIN على أحرف ورموز"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"0000 أو 1234 عادة"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"‏قد يلزم أيضًا كتابة رمز PIN هذا على الجهاز الآخر."</string>
@@ -1039,6 +1040,8 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"‏لم يتم تنفيذ إعادة التعيين نظرًا لعدم توفر خدمة System Clear."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"هل تريد إعادة الضبط؟"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"لا تتوفر إمكانية إعادة تعيين إعدادات المصنع لهذا المستخدم"</string>
+    <string name="master_clear_progress_title" msgid="5194793778701994634">"جارٍ محو البيانات"</string>
+    <string name="master_clear_progress_text" msgid="6559096229480527510">"يرجى الانتظار..."</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"‏محو وحدة تخزين USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"‏محو بطاقة SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"‏محو كل البيانات في وحدة تخزين USB."</string>
@@ -1831,10 +1834,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"تم تمكين تخزين بيانات الاعتماد."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"يلزمك تعيين رقم تعريف شخصي لتأمين الشاشة أو كلمة مرور حتى تتمكن من استخدام وحدة تخزين بيانات الاعتماد."</string>
     <string name="usage_access_title" msgid="332333405495457839">"تطبيقات مع بيانات الاستخدام"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"تطبيقات الواجب تسجيل الدخول إليها"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"لا تسمح بوصول تطبيقات إلى بيانات الاستخدام غير تلك التي تثق بها. وستصل التطبيقات التي تسمح بها إلى سجل استخدام التطبيقات، مثل آخر مرة تم استخدام التطبيق فيها أو إجمالي الوقت الذي قضيته في استخدام أحد التطبيقات."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"هل تريد السماح بالوصول؟"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"يمكن لهذا التطبيق الاطلاع على المعلومات العامة عن تطبيقاتك إذا أتحت له الوصول إليها، مثل معدل استخدامك للتطبيقات."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"يمكن لهذا التطبيق الاطلاع على المعلومات العامة عن تطبيقاتك إذا أتحت له الوصول إليها، مثل معدل استخدامك للتطبيقات."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"نغمة الطوارئ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"تعيين السلوك عند إجراء اتصال بالطوارئ"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"نسخ احتياطي وإعادة تعيين"</string>
@@ -2021,8 +2022,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"حد العمليات بالخلفية"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏عرض جميع رسائل ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"عرض مربع الحوار \"التطبيق لا يستجيب\" مع تطبيقات الخلفية"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"‏الرجاء استخدام تطبيق إعدادات Google لإجراء هذه العملية"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"‏خفض استخدام شبكة WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"‏خفض استخدام الشبكة عن طريق استخدام الخوادم الوكيلة لإجراء اتصالات WebView من خلال خوادم ضغط Google (ميزة تجريبية)"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"‏تقليل استخدام البيانات من خلال إضافة اتصالات خادم وكيل إلى WebView عبر خوادم الضغط من Google"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"استخدام البيانات"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"استخدام بيانات التطبيق"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"قد تختلف طريقة حساب بيانات مشغل شبكة الجوّال عن طريقة الحساب على جهازك."</string>
