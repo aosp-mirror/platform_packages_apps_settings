@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"ប៊្លូធូស"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"គ្រប់គ្រង​ការ​តភ្ជាប់ កំណត់​ឈ្មោះ​ឧបករណ៍ &amp; ការ​រក​ឃើញ"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"សំណើ​ផ្គូផ្គង​ប៊្លូធូស"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"ដើម្បី​ផ្គូផ្គង​ជា​មួយ៖ <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> បញ្ចូល​កូដ PIN ឧបករណ៍​ដែល​បាន​ទាមទារ៖"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"ដើម្បី​ផ្គូផ្គង​ជា​មួយ៖ <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>បញ្ចូល​លេខ​កូដ​ដែល​ទាមទារ​ដោយ​ឧបករណ៍៖"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"ឧបករណ៍"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"កូដ​ផ្គូផ្គង"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"បញ្ចូល​កូដ​ផ្គូផ្គង បន្ទាប់​មក​ចុច Return ឬ Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"កូដ PIN មាន​អក្សរ និង​និមិត្តសញ្ញា"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"តាម​ធម្មតា 0000 ឬ 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"អ្នក​ក៏​ត្រូវ​បញ្ចូល​កូដ PIN នេះ​លើ​ឧបករណ៍​ផ្សេង​ដែរ។"</string>
@@ -1743,7 +1744,7 @@
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"សេវាកម្ម​បញ្ចូល​សំឡេង"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"hotword ពេញលេញ និង​អន្តរកម្ម"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"ការ​និយាយ​ទៅ​ជា​អត្ថបទ​សាមញ្ញ"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"សេវាកម្ម​បញ្ចូល​សំឡេង​នេះ​នឹង​អាច​អនុវត្ត​ការ​តាមដាន​សំឡេង​ជា​និច្ច និង​ពិនិត្យ​សំឡេង​ដែល​បាន​បើក​កម្មវិធី​ក្នុង​នាម​អ្នក។​ វា​បាន​មក​ពី​កម្មវិធី <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> ។ បើក​ការ​ប្រើ​សេវាកម្ម​នេះ?"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"សេវាកម្ម​បញ្ចូល​សំឡេង​នេះ​នឹង​អាច​អនុវត្ត​ការ​តាមដាន​សំឡេង​ជា​និច្ច និង​ពិនិត្យ​សំឡេង​ដែល​បាន​បើក​កម្មវិធី​ក្នុង​នាម​អ្នក។​ វា​បាន​មកពី​កម្មវិធី <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> ។ បើក​ការ​ប្រើ​សេវាកម្ម​នេះ?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"ការ​កំណត់​អត្ថបទ​ទៅ​ជា​កា​និយាយ"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"លទ្ធផល​អត្ថបទ​ទៅ​ការ​និយាយ"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"ប្រើ​ការកំណត់​របស់​ខ្ញុំ​ជា​និច្ច"</string>
@@ -1839,10 +1840,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"បាន​បើក​ការ​ផ្ទុក​ព័ត៌មាន​សម្ងាត់។"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"អ្នក​ត្រូវ​តែ​កំណត់​ពាក្យសម្ងាត់ ឬ​កូដ​ PIN ចាក់​សោ​អេក្រង់ មុន​នឹង​អ្នក​អាច​ប្រើ​ការ​ផ្ទុក​​​ព័ត៌មាន​សម្ងាត់។"</string>
     <string name="usage_access_title" msgid="332333405495457839">"កម្មវិធី​មាន​សិទ្ធិ​ប្រើប្រាស់"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"កម្មវិធី​ស្នើ​ចូល​ដំណើរការ"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"អនុញ្ញាត​តែ​កម្មវិធី​ដែល​អ្នក​ទុកចិត្ត​ឲ្យ​ចូល​​មើល​ទិន្នន័យ​ប្រើប្រាស់។ កម្មវិធី​ដែល​អ្នក​អនុញ្ញាត​នឹង​មាន​សិទ្ធិ​ចូល​ប្រវត្តិ​ប្រើប្រាស់​កម្មវិធី​របស់​អ្នក ដូចជា​ពេល​ចុងក្រោយ​ដែល​កម្មវិធី​ត្រូវ​បាន​ប្រើ ឬ​ពេលវេលា​សរុប​ដែល​អ្នក​បាន​ប្រើ​កម្មវិធី។"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"អនុញ្ញាត​ឲ្យ​ចូល​ដំណើរការ?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"បើ​អ្នក​អនុញ្ញាត​ឲ្យ​ចូល​ដំណើរការ កម្មវិធី​នេះ​អាច​មើល​ព័ត៌មាន​ទូទៅ​អំពី​កម្មវិធី​របស់​អ្នក​ដូចជា ភាព​ញឹកញាប់​ដែល​អ្នក​ប្រើ​វា។"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"សំឡេង​ពេលអាសន្ន"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"កំណត់​ឥរិយាបថ​ពេល​ហៅ​ពេល​មាន​អាសន្ន"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"បម្រុងទុក &amp; កំណត់​ឡើងវិញ"</string>
@@ -2029,8 +2029,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"ដែន​កំណត់​ដំណើរការ​ក្នុង​ផ្ទៃ​ខាង​ក្រោយ"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"បង្ហាញ ANRs ទាំងអស់"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"បង្ហាញ​ប្រអប់​កម្មវិធី​មិន​ឆ្លើយតប​សម្រាប់​កម្មវិធី​ផ្ទៃ​ខាង​ក្រោយ"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"កាត់បន្ថយការប្រើប្រាស់បណ្ដាញ WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"កាត់​បន្ថយ​ការ​ប្រើប្រាស់​បណ្ដាញ​ដោយ​កំណត់​ប្រូកស៊ី​ការ​​ភ្ជាប់​ WebView តាម​ម៉ាស៊ីន​មេ​បង្ហាប់​របស់ Google (ពិសោធន៍)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ការ​ប្រើ​ទិន្នន័យ"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"ការប្រើទិន្នន័យកម្មវិធី"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"​គណនេយ្យ​ទិន្នន័យ​ក្រុមហ៊ុន​បញ្ជូន​អាច​ខុស​ពី​ឧបករណ៍​របស់​អ្នក។"</string>
@@ -2369,7 +2372,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"គណនី"</string>
     <string name="keywords_users" msgid="4673901601478559100">"ការ​ដាក់​កម្រិត ដាក់កម្រិត បាន​ដាក់​កម្រិត"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"អត្ថបទ ការ​កែ កែ សំឡេង ញ័រ ស្វ័យប្រវត្តិ ភាសា កាយវិការ ស្នើ ការ​ស្នើ រូបរាង បំពាន ពាក្យ វាយ​បញ្ចូល សញ្ញា​អារម្មណ៍"</string>
-    <string name="keywords_lockscreen" msgid="4806191868723291541">"រុញ ពាក្យសម្ងាត់ លំនាំ កូដ pin"</string>
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"រុញ​ពាក្យសម្ងាត់ លំនាំ កូដ pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"រៀបចំ​ស្លាក​អិនអេហ្វ​ស៊ី​វ៉ាយហ្វាយ"</string>
     <string name="write_tag" msgid="8571858602896222537">"សរសេរ"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"ប៉ះ​ស្លាក​ដើម្បី​សរសេរ..."</string>

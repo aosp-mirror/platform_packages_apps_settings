@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Управление на връзки, задаване на име и откриваемост на устройство"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Заявка за сдвояване чрез Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"За сдвояване със:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Въведете задължителния ПИН на устройството:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"За сдвояване със: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Въведете необходимия код за достъп на устройството:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Устройство"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Код за сдвояване"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Въведете кода за сдвояване, след което натиснете „Return“ или „Enter“"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"ПИН кодът съдържа букви или символи"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Обикновено 0000 или 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Възможно е също така да се наложи да въведете този ПИН на другото устройство."</string>
@@ -1831,10 +1832,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилището за идентификационни данни е активирано."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Трябва да зададете ПИН код или парола за заключен екран, преди да можете да използвате хранилището за идентификационни данни."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Прил. с достъп до използването"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Изискващи достъп приложения"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Разрешавайте достъп до данните за използването само на приложения, на които имате доверие. Тези с разрешение от вас ще имат достъп до историята на ползване на приложенията ви – като например кога за последен път е използвано някое или общото време, за което сте го ползвали."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Да се разреши ли достъп?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Ако разрешите достъп, това приложение може да вижда обща информация за приложенията ви – като например колко често ги използвате."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"Ако разрешите достъп, това приложение може да вижда обща информация за приложенията ви на устройството ви – като например колко често ги използвате."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за спешност"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Задаване на поведение при спешно обаждане"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Резервни копия и нулиране"</string>
@@ -2021,8 +2020,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Лимит за фонови процеси"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Всички нереагиращи прил."</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Диалог. прозорец „НП“ за приложения на заден план"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"Моля, използвайте приложението Настройки за Google за тази операция"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView: Намал. на употр. на мреж."</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Намаляване на употребата на мрежата чрез пренасочване на връзките на WebView през сървърите на Google за компресиране (експериментално)"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Намаляване на мрежовия трафик чрез пренасочване на връзките на WebView през сървърите на Google за компресиране"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Използване на данни"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Прилож.: Пренос на данни"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Отчетеният от оператора обем на данните може да се различава от показания на устройството ви."</string>

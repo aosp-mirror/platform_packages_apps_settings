@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Блютүүт"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Холболтуудыг удирдах, төхөөрөмжийн нэр &amp; харагдалтыг тохируулах"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Блютүүт хослуулах хүсэлт"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>-тай хослуулахын тулд төхөөрөмжийн шаардсан PIN-г оруулна уу:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Дараахтай хослуулах:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Төхөөрөмжийн шаардсан түлхүүрийг оруулна уу:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Төхөөрөмж"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Хослуулах код"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Хослуулах кодыг оруулаад Return буюу Enter дарна уу"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN нь үсэг буюу тэмдэгт агуулна"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Гол төлөв 0000 буюу 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Та мөн энэ PIN-г нөгөө төхөөрөмжүүд дээр оруулах хэрэгтэй болж магадгүй."</string>
@@ -1831,10 +1832,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Жуухын санг идэвхжүүлсэн."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Та жуухын санг ашиглаж эхлэхийн өмнө дэлгэцийн түгжээний PIN эсхүл нууц үгийг тохируулах хэрэгтэй."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Ашиглалтын хандалттай апп-ууд"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Хандалт хүссэн апп-ууд"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Зөвхөн өөрийн итгэж байгаа апп-уудад ашиглалтын датад хандалт хийхийг зөвшөөрнө үү. Таны зөвшөөрсөн апп-ууд нь хамгийн сүүлд апп-г ашигласан хугацаа, апп ашигласан нийт хугацаа гэх мэт апп ашиглалтын түүхэнд хандалт хийх боломжтой болно."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Хандалтыг зөвшөөрөх үү?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Хэрэв та хандалтыг зөвшөөрвөл энэ апп нь таны апп-уудын талаар хэр олон удаа ашигладаг гэх мэт ерөнхий мэдээллийг харах боломжтой байна."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"Хэрэв та хандалтыг зөвшөөрвөл энэ апп нь таны апп-уудын талаар хэр олон удаа ашигладаг гэх мэт ерөнхий мэдээллийг харах боломжтой байна."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ослын хонхны ая"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Яаралтай дуудлага хийх үеийн үйлдлийг тохируулах"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Нөөшлөх &amp; дахин шинэчлэх"</string>
@@ -2021,8 +2020,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Далд процессын хязгаар"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Бүх ANRs харуулах"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Далд апп-уудад Апп Хариу Өгөхгүй байна гэснийг харуулах"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"Энэ үйлдэлд Google Тохиргоо апп ашиглана уу"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView Сүлжээний ашиглалтыг багасгах"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"WebView холболтуудыг Google нягтаршуулагч серверүүд (Туршилтын)-р дамжуулан прокси хийх замаар сүлжээний ашиглалтаа бууруулаарай"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"WebView холболтуудыг Google нягтаршуулагч серверүүдээр дамжуулан прокси хийх замаар сүлжээний ашиглалтаа бууруулаарай"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Дата ашиглалт"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Апп дата ашиглалт"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Операторын дата хэмжилт таны төхөөрөмжийнхөөс өөр байж болно."</string>

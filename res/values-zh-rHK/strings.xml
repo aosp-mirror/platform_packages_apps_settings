@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"藍牙"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"管理連線，設定裝置名稱和可偵測性"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"藍牙配對連線要求"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"如要與 <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請輸入裝置的 PIN 碼："</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"如要與 <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請輸入裝置的密鑰："</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"裝置"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"配對代碼"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"輸入配對代碼，然後按 [返回] 或 Enter 鍵"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN 中含有字母或符號"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"一般是 0000 或 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"您可能也必須在另一部裝置上輸入這個 PIN 碼。"</string>
@@ -1733,12 +1734,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"語音輸入設定"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"語音輸入"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"語音輸入服務"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"完全啟動字詞與互動"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"簡易語音轉文字"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"這項語音輸入服務由 <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> 提供，可隨時監控語言輸入，並代您控制具備語音操控功能的應用程式。您要啟用這項服務嗎？"</string>
     <string name="tts_settings" msgid="8186971894801348327">"文字轉語音設定"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"文字轉語音輸出"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"永遠使用我的設定"</string>
@@ -1838,10 +1836,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"您必須先設定螢幕鎖定 PIN 或密碼，才能使用憑證儲存空間。"</string>
     <string name="usage_access_title" msgid="332333405495457839">"擁有使用詳情存取權的應用程式"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"要求存取權的應用程式"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"除非是您信任的應用程式，否則請勿隨意允許應用程式存取使用資料。您允許的應用程式將可存取您的應用程式使用記錄，例如特定應用程式的上次使用時間，或是您花在使用特定應用程式的總時間。"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"允許存取？"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"如果您允許存取，這個應用程式將可查看與您的應用程式相關的一般資訊，例如您使用各應用程式的頻率。"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"備份和重設"</string>
@@ -1878,7 +1875,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"啟用此管理員將允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下操作："</string>
     <string name="device_admin_status" msgid="4252975713178851910">"這個管理員正在作業中，且允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下操作："</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"要啟用設定檔管理員嗎？"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"如果繼續操作，您的使用者將由您的管理員管理。除了您的個人資料以外，管理員可能還會儲存其他相關聯的資料。\n\n您的管理員可以監控及管理設定、存取權、應用程式和資料，包括網絡活動和您的裝置位置資料。"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"如果繼續操作，您的使用者將由您的管理員管理。除了您的個人資料外，管理員可能還會儲存其他相關聯的資料。\n\n您的管理員可以監控及管理設定、存取權、應用程式和資料，包括網絡活動和您的裝置位置資料。"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"一般"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"通知記錄"</string>
@@ -1921,7 +1918,7 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"同步"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"同步處理目前發生問題。將於短時間內恢復。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"新增帳戶"</string>
-    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"尚無工作設定檔可用"</string>
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"工作設定檔未能使用"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"移除工作設定檔"</string>
     <string name="background_data" msgid="5779592891375473817">"背景資料"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"應用程式隨時可以同步處理、傳送和接收資料"</string>
@@ -2028,8 +2025,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"背景處理程序限制"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"顯示所有 ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"顯示背景應用程式的「應用程式無回應」對話框"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"減少 WebView 網絡使用量"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"透過 Google 壓縮伺服器代理 WebView 連線，以減少網絡使用量 (實驗性)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"數據用量"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"應用程式數據用量"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"流動網絡供應商的數據計算方式可能與裝置有所不同。"</string>
@@ -2214,7 +2214,7 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"您要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"移除這位使用者？"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"移除這個設定檔？"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"要移除工作設定檔？"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"要移除工作設定檔嗎？"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您將會失去在這部平板電腦上的空間和資料，您無法復原這項操作。"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"您將會失去在這部手機上的空間和資料，您無法復原這項操作。"</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"所有應用程式和資料都會被刪除。"</string>
@@ -2368,8 +2368,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"帳戶"</string>
     <string name="keywords_users" msgid="4673901601478559100">"限制 限制 受限"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"文字修正 修正 音效 震動 自動 語言 手勢 建議 建議 主題 令人反感的字詞 類型 表情符號"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"滑動 密碼 圖案 PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標籤"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"輕按標籤即可寫入…"</string>

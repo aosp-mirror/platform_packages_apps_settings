@@ -454,7 +454,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Vidhibiti vya kifaa"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Angalia au uzime vidhibiti vya kifaa"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Madalali wa kuaminiwa"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Ili utumie, kwanza weka skrini ya kufunga"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Ili utumie, weka skrini ya kufunga kwanza"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Angalia ama uzime madalali wa kuaminiwa"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Washa Bluetooth"</string>
@@ -462,8 +462,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Dhibiti miunganisho, weka jina na ugunduliwaji wa kifaa"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Ombi la kulinganisha Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Kulinganisha na: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="DEVICE_NAME">%1$s</xliff:g> <xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Andika PIN ya kifaa inayohitajika:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Kulinganisha na: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="DEVICE_NAME">%1$s</xliff:g> <xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Andika ya msimbo wa kifaa inayohitajika:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Kifaa"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Msimbo wa Kuoanisha"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Andika msimbo wa kuoanisha kisha ubonyeze \"Return\" au \"Enter\""</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN inajumlisha herufi au ishara"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Kwa kawaida 0000 au 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Unawezahitaji pia kucharaza PIN hii kwenye kifaa kingine."</string>
@@ -1520,7 +1521,7 @@
     <string name="accessibility_menu_item_settings" msgid="3344942964710773365">"Mipangilio"</string>
     <string name="accessibility_feature_state_on" msgid="2864292320042673806">"Imewashwa"</string>
     <string name="accessibility_feature_state_off" msgid="4172584906487070211">"Imezimwa"</string>
-    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Hairuhusiwi na shirika lako"</string>
+    <string name="accessibility_feature_or_input_method_not_allowed" msgid="5950315477009501647">"Shirika lako haliruhusu"</string>
     <string name="captioning_preview_title" msgid="1234015253497016890">"Chungulia kwanza"</string>
     <string name="captioning_standard_options_title" msgid="3284211791180335844">"Chaguo za kawaida"</string>
     <string name="captioning_locale" msgid="4559155661018823503">"Lugha"</string>
@@ -1729,7 +1730,7 @@
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Huduma za kuweka data kwa kutamka"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Neno tekelezi na mwingiliano kamilifu"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Huduma rahisi ya semi kwenda maandishi"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Huduma hii ya uwekaji data kwa kutamka itakuwa na uwezo wa kutekeleza ufuatiliaji wa hali ya kuwashwa muda wote na kudhibiti programu zinazowashwa kwa sauti kwa niaba yako. Inatoka katika programu ya <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Ungependa kuwasha huduma hii kwa matumizi?"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Huduma hii ya kuweka data kwa kutamka itakuwa na uwezo wa kutekeleza ufuatiliaji wa hali ya kuwashwa muda wote na kudhibiti programu zinazowashwa kwa sauti kwa niaba yako. Inatoka katika programu ya <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Ungependa kuwasha huduma hii kwa matumizi?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Mipangilio ya maandishi kwa hotuba"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Kubadilisha maandishi hadi usemi"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Tumia mipangilio yangu kila wakati"</string>
@@ -1825,10 +1826,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Hifadhi ya hati-tambulishi imewezeshwa."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Unahitaji kuweka PIN au nenosiri la kufunga skrini kabla ya kutumia hifadhi ya hati za uthibitisho."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Programu zinazofikia data ya matumizi"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Programu zinazoomba ufikiaji"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Ruhusu programu unazoamini pekee zifikie data ya matumizi. Programu unazoruhusu zitakifia historia ya matumizi ya programu zako, kama vile mara ya mwisho programu kutumika, au jumla ya muda unaotumia programu."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Ungependa kuruhusu ufikiaji?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Ukiruhusu ufikiaji, programu hii itaweza kuona maelezo ya jumla kuhusu programu zako, marudio yako ya matumizi ya programu"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Mlio wa dharura"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Weka tabia wakati simu ya dharura imepigwa"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Hifadhi nakala na urejeshe mipangilio ya kiwanda"</string>
@@ -1855,7 +1855,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Zima"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Visimamizi vya kifaa"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Hakuna wasimamizi kifaa wanaopatikana"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Ili uzuie <xliff:g id="APP_NAME">%1$s</xliff:g> kufikia wasifu wako wa kazi, ondoa wasifu kwenye Mipangilio &gt; Akaunti."</string>
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Ili uzuie <xliff:g id="APP_NAME">%1$s</xliff:g> kufikia wasifu wako wa kazini, ondoa wasifu kwenye Mipangilio &gt; Akaunti."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Binafsi"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Kazini"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Hakuna madalali wa kuaminiwa wanaopatikana"</string>
@@ -1865,7 +1865,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"Kuwasha kisimamizi hiki kutaruhusu programu ya <xliff:g id="APP_NAME">%1$s</xliff:g> kufanya mambo yafuatayo:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Kidhibiti hiki kinatumika na kinaruhusu programu ya <xliff:g id="APP_NAME">%1$s</xliff:g> kufanya yafuatayo:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Ungependa Kuanzisha Msimamizi wa Wasifu?"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Kwa kuendelea, Mtumiaji wako atasimamiwa na Msimamizi wako ambaye pia ataweza kuhifadhi data inayohusiana, ikiwa ni pamoja na data yako binafsi. \n\n Msimamizi wako ana uwezo wa kufuatilia na kusimamia mipangilio, ufikiaji, programu, na data inayohusiana na Mtumiaji huyu, ikiwa ni pamoja na shughuli ya mtandao na maelezo ya kifaa chako kilipo."</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Kwa kuendelea, Mtumiaji wako atasimamiwa na Msimamizi wako ambaye pia ataweza kuhifadhi data inayohusiana, ikiwa ni pamoja na data yako binafsi. \n\n Msimamizi wako ana uwezo wa kufuatilia na kusimamia mipangilio, ufikiaji, programu, na data inayohusiana na Mtumiaji huyu, ikiwa ni pamoja na shughuli mtandaoni na maelezo kuhusu kilipo kifaa chako."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Haina Kichwa"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Kawaida"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Kumbukumbu ya arifa"</string>
@@ -1908,7 +1908,7 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"Sawazisha"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Kwa sasa usawazishaji una tatizo. Utarudi baada ya muda mfupi."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Ongeza akaunti"</string>
-    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"Wasifu wa kazi bado haupatikani"</string>
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"Wasifu wa kazini bado haupatikani"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Ondoa wasifu wa kazi"</string>
     <string name="background_data" msgid="5779592891375473817">"Data ya maandhari nyuma"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Programu inaweza kusawazisha, kutuma, na kupokea data wakati wowote"</string>
@@ -2015,8 +2015,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Kiwango cha mchakato wa mandari nyuma"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Onyesha ANR zote"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Onyesha kisanduku kidadisi cha Programu Haiitikii kwa programu za usuli"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Punguza Matumizi ya WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Punguza matumizi ya mtandao kwa kutumia miunganisho ya WebView kupitia seva za kubana za Google."</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Matumizi ya data"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Matumizi data ya programu"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Hesabu ya data ya mtoa huduma huenda ikatofautiana na inayofanyika katika kifaa chako."</string>
@@ -2169,12 +2172,12 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Ongeza mtumiaji au wasifu"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Ongeza mtumiaji"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Wasifu uliozuiwa"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Wasifu wa kazi"</string>
+    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Wasifu wa kazini"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Kabla uunde wasifu uliowekekwa vikwazo, utahitajika kuweka skrini iliyofungwa ili kulinda programu zako na data binafsi."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Weka ufunguo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Haijasanidiwa"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"Hajauweka - Wasifu uliozuiwa"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Haujasanidiwa - Wasifu wa kazi"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"Haujasanidiwa - Wasifu wa kazini"</string>
     <string name="user_owner" msgid="3879126011135546571">"Mmiliki"</string>
     <string name="user_you" msgid="1639158809315025986">"Wewe (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"Jina la utani"</string>
@@ -2201,7 +2204,7 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Futa mwenyewe?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Ungependa kuondoa mtumiaji?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Ungependa kuondoa wasifu?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Ungependa kuondoa wasifu wa kazi?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Ungependa kuondoa wasifu wa kazini?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Utapoteza nafasi na data yako kwenye kompyuta hii ndogo. Huwezi kutendua kitendo hiki."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Utapoteza nafasi na data yako kwenye simu hii. Huwezi kutendua kitendo hiki."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Programu zote na data zitafutwa."</string>
@@ -2422,7 +2425,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Kipaumbele"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Onyesha arifa sehemu ya juu ya orodha na uruhusu ziendelee kuonyeshwa kifaa kinapokuwa kimesanidiwa kwa katizo za kipaumbele pekee"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Nyeti"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Kifaa kinapokuwa kimefungwa, ficha maudhui yoyote nyeti kutoka arifa za programu hii"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Kifaa kikiwa kimefungwa, ficha maudhui yoyote nyeti kutoka arifa za programu hii"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Imezuiwa"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Kipaumbele"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Nyeti"</string>

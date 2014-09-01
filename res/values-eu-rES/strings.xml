@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Kudeatu konexioak, ezarri gailuaren izena eta ikusgaitasuna"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth bidez bikotetzeko eskaera"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Honekin parekatzeko:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Idatzi gailuak eskatzen duen PINa:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Honekin parekatzeko:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Idatzi gailuak eskatzen duen pasakodea:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Gailua"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Parekatze-kodea"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Idatzi parekatze-kodea eta sakatu Sartu edo Itzuli"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PINak hizkiak edo ikurrak ditu"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Normalean 0000 edo 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Baliteke PIN hau beste gailuan ere idatzi behar izatea."</string>
@@ -1735,7 +1736,7 @@
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Ahots bidezko idazketa-zerbitzuak"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Erabateko interakzioa eta gako-hitzen erabilera"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Ahoz idazteko eginbide arrunta"</string>
-    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Aginduak ahoz emateko zerbitzu honek uneoro kontrolatuko du ahotsa eta ahozko gaitasuna duten aplikazioak kontrolatu ahal izango ditu. <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> aplikazioarena da. Zerbitzu hau erabiltzeko aukera gaitu nahi duzu?"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Aginduak ahoz emateko zerbitzu honek uneoro kontrolatuko du ahotsa eta ahozko gaitasuna duten aplikazioak ere kontrolatu ahal izango ditu. <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> aplikazioarena da. Zerbitzu hau erabiltzeko aukera gaitu nahi duzu?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Testua ahots bihurtzeko eginbidearen ezarpenak"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Testua ahots bihurtzeko eginbidearen irteera"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Erabili beti nire ezarpenak"</string>
@@ -1831,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Kredentzialen biltegia gaitu da."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Kredentzialen biltegia erabili aurretik, pantaila blokeatzeko PIN kodea edo pasahitza ezarri behar duzu."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Erabilera-datuak atzi ditzaketenak"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Sarbidea eskatzen dutenak"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Fidagarriak diren aplikazioei soilik eman beharko zenieke erabilerari buruzko datuetarako sarbidea. Sarbidea ematen diezun aplikazioek aplikazioen erabilera-historiak atzitu ahal izango dituzte eta, besteak beste, aplikazioak azkeneko aldiz noiz erabili diren edo aplikazio bakoitzean guztira zenbat denbora eman duzun jakin ahal izango dute."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Sarbidea eman nahi diozu?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Sarbidea emanez gero, aplikazioei buruzko informazio orokorra ikusi ahal izango du aplikazioak, kasurako, zer maiztasunarekin erabiltzen dituzun."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Larrialdi-tonua"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Ezarri larrialdi-deiak egitean izan beharreko portaera."</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Babeskopiak eta berrezartzea"</string>
@@ -2021,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Atzeko planoko prozesuen muga"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Erakutsi ANR guztiak"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"\"Erantzunik ez\" mezua atz. planoko aplikazioetarako"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Murriztu WebView erabilera"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Murriztu sarearen erabilera WebView konexioak Google konprimatze-zerbitzarien proxy bidez bideratuta (esperimentala)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Datu-erabilera"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Aplikazioaren datu-erabilera"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Beharbada operadoreak zenbatzen duen datu kopurua eta gailuak zenbatzen duena ez datoz bat."</string>
@@ -2207,7 +2210,7 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Zeure burua ezabatu nahi duzu?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Erabiltzaile hau kendu nahi duzu?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Profil hau kendu nahi duzu?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Laneko profila kendu?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Laneko profila kendu nahi duzu?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Zure eremua eta datuak tabletatik desagertuko dira. Ezin duzu ekintza desegin."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Zure eremua eta datuak telefonotik desagertuko dira. Ezin duzu ekintza desegin."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Aplikazio eta datu guztiak ezabatuko dira."</string>

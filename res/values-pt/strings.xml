@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gerenciar conexões, definir o nome e detecção do dispositivo"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Solicitação de pareamento Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Para parear com:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Digite o PIN solicitado pelo dispositivo:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Para parear com:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Digite a senha solicitada pelo dispositivo:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Dispositivo"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Código de pareamento"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Digite o código de pareamento e pressione \"Return\" ou \"Enter\""</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"O PIN contém letras ou símbolos"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Geralmente, 0000 ou 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Talvez seja necessário digitar este PIN no outro dispositivo."</string>
@@ -1733,12 +1734,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Configurações da entrada de texto por voz"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Entrada de texto por voz"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Serviços de entrada de texto por voz"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Hotword completa e interação"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Conversão simples de fala em texto"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Este serviço de entrada por voz poderá executar monitoramento por voz sempre ativado e apps com o recurso de controle por voz em seu nome. Ele está incluído no app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Deseja ativar o uso deste serviço?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Configurações da conversão de texto em voz"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Conversão de texto em voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Usar minhas configurações"</string>
@@ -1834,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais foi ativado."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"É necessário configurar PIN ou senha para a tela de bloqueio antes de usar o armazenamento de credenciais."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apps com acesso ao uso"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Apps solicitando acesso"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Só autorize o acesso aos dados de uso para apps em que você confia. Os apps com autorização terão acesso a seu histórico de uso de apps, como a última vez que um app foi usado ou o tempo total de uso."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Permitir acesso?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Se você permitir o acesso, este app poderá visualizar as informações gerais sobre seus apps, como a frequência com que eles são usados."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir comportamento durante uma chamada de emergência"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Fazer backup e redefinir"</string>
@@ -2024,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limite do proc. 2º plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Mostrar todos os ANRS"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Exibir \"App não responde\" para app em 2º plano"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Reduzir uso rede WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Reduzir o uso de rede usando proxy em conexões WebView por meio dos servidores de compactação do Google (experimental)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de dados"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Dados de uso de apps"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"O cálculo da operadora poderá ser diferente de seu dispositivo."</string>
@@ -2364,8 +2364,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"conta"</string>
     <string name="keywords_users" msgid="4673901601478559100">"restrição restringir restrito"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"correção de texto corrigir som vibrar automático idioma gesto sugerir sugestão tema palavra ofensiva tipo emoji"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"deslizar senha padrão pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Gravar"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toque em uma marca para gravar…"</string>

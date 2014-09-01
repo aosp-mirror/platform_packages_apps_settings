@@ -462,7 +462,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"Administradores de dispositivos"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Mostra ou desactiva os administradores de dispositivos"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Axentes de confianza"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Para utilizar a configuración, en primeiro lugar establece un bloqueo de pantalla"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Para utilizalo, en primeiro lugar establece un bloqueo de pantalla"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Mostra ou desactiva os axentes de confianza"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Activa o Bluetooth"</string>
@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Xestiona as conexións, define o nome e a detectabilidade do dispositivo"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Solicitude de sincronización por Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Para sincronizar con:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escribe o PIN requirido polo dispositivo:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Para sincronizar con:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Escribe o contrasinal obrigatorio do dispositivo:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Dispositivo"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Código de sincronización"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Escribe o código de sincronización e, a continuación, preme Intro"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"O PIN contén letras ou símbolos"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Normalmente 0000 ou 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"É posible que tamén teñas que escribir este PIN no outro dispositivo."</string>
@@ -1831,10 +1832,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Almacen. credenciais activado"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Tes que definir un PIN ou un contrasinal de pantalla de bloqueo para poder utilizar o almacenamento de credenciais."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplicacións con acceso de uso"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Aplicacións que solic. acceso"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Permite soamente que as aplicacións nas que confías teñan acceso aos datos de uso. Estas aplicacións terán acceso ao teu historial de uso das aplicacións, que inclúe, por exemplo, a última vez que se utilizou unha aplicación ou o tempo total que utilizaches unha aplicación."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Queres permitir o acceso?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Se permites o acceso, esta aplicación pode ver información xeral sobre as túas aplicacións, como a frecuencia coa que as utilizas."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ton de emerxencia"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Define o comportamento cando se realiza unha chamada de emerxencia"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Copia de seguranza e restablecemento"</string>
@@ -1861,7 +1861,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"Desactivar"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administradores de dispositivos"</string>
     <string name="no_device_admins" msgid="702695100241728775">"Non hai administradores de dispositivos dispoñibles"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Para que <xliff:g id="APP_NAME">%1$s</xliff:g> deixe de acceder ao teu perfil do traballo, elimina o perfil en Configuración &gt; Contas."</string>
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Para evitar que <xliff:g id="APP_NAME">%1$s</xliff:g> acceda ao teu perfil do traballo, elimina o perfil en Configuración &gt; Contas."</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Persoal"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Traballo"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Non hai ningún axente de confianza dispoñible"</string>
@@ -1871,7 +1871,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"A activación deste administrador permitirá á aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> levar a cabo as seguintes operacións:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"O administrador está activo e permite á aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> levar a cabo as seguintes operacións:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Queres activar o xestor de perfís?"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Ao continuar, o administrador xestionará o teu usuario, que tamén pode almacenar os datos asociados, ademais dos teus datos persoais.\n\nO teu administrador ten a capacidade de controlar e xestionar a configuración, o acceso, as aplicacións e os datos asociados con este usuario, incluída a actividade da rede e a información de localización do teu dispositivo."</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"Ao continuar, o administrador xestionará o teu usuario e tamén poderá almacenar os datos asociados, ademais dos teus datos persoais.\n\nO teu administrador ten a capacidade de controlar e xestionar a configuración, o acceso, as aplicacións e os datos asociados con este usuario, como a actividade da rede e a información de localización do teu dispositivo."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sen título"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Xeral"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Rexistro de notificacións"</string>
@@ -2021,8 +2021,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Límite proceso 2º plano"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Mostrar todos os ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Informa que aplicación segundo plano non responde"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Reducir o uso de WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Reducir o uso da rede a través das conexións de proxy de WebView  nos servidores de compresión de Google (experimental)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Uso datos da aplicación"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"A contabilidade dos datos do operador pode ser diferente á do teu dispositivo."</string>
@@ -2428,7 +2431,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioridade"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Mostrar as notificacións na parte superior da lista e seguir recibíndoas cando o dispositivo estea establecido unicamente para interrupcións de prioridade."</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Confidencial"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Cando o dispositivo estea bloqueado, ocultar o contido confidencial nas notificacións desta aplicación"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Ocultar o contido delicado nas notificacións desta aplicación cando o dispositivo estea bloqueado."</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloqueada"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioridade"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Confidencial"</string>
