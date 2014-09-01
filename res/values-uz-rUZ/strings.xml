@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Ulanishlar boshqaruvi, qurilmani nomlash va topiluvchanlik"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth biriktirish so‘rovi"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ga biriktirish uchun PIN kodni tering:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ga biriktirish uchun kalit kodini tering:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Qurilma"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Ulanish kodi"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Ulanish kodini kiriting va keyin “Return” yoki “Enter” tugmasini bosing"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN kod harflar va belgilardan iborat bo‘ladi"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Odatda 0000 yoki 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Ushbu PIN kodni boshqa qurilmada ham terish lozim bo‘lishi mumkin."</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Dastlabki sozlamalarni qaytarib bo\'lmadi, chunki Tizimni tozalash xizmati javob bermayapti."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Tozalanilsinmi?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Ushbu foydalanuvchiga sozlamalarni zavod holatiga qaytarishga ruxsat berilmagan"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB xotirani tozalash"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD kartani tozalash"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB xotiradagi barcha ma‘lumotlarni o‘chiradi"</string>
@@ -1733,12 +1738,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Ovoz bilan yozish sozlamalari"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Ovoz bilan yozish"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Ovoz bilan yozish xizmatlari"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Kalit so‘zlar va ovozli boshqaruv"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Nutqni matnga osongina aylantirish"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Ushbu ovoz orqali yozish xizmati sizning nomingizdan ovozli buyruqlarni kuzatishi va ovozli buyruqlar ishlatiladigan ilovalarni nazorat qilishi mumkin. Bu amallar “<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>” ilovasi orqali bajariladi. Ushbu xizmatdan foydalanmoqchimisiz?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Matnni o‘qish sozlamalari"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Matndan-nutqga o‘tkazma"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Doim mening sozlamalarimdan foydalanish"</string>
@@ -1834,10 +1836,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Hisob ma‘lumotlari ombori yoniq."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Hisob ma‘lumotlarini saqlash joyidan foydalana olish uchun, avval ekranda qulf PIN kodi yoki parolni o‘rnatish lozim."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Kirish huquqi bor ilovalar"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Ruxsat so‘rayotgan ilovalar"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Faqat o‘zingiz ishongan ilovalarga ruxsat bering. Siz ruxsat bergan ilovalar ilovalardan foydalanish tarixingizga kirishi mumkin. Masalan, biror ilovadan oxirgi marta qachon foydalangansiz yoki biror ilovadan jami qancha vaqt foydalagansiz va shu kabi ma’lumotlarni ko‘rishi mumkin."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Ruxsat berilsinmi?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Ushbu ilovaga ruxsat bersangiz, u ilovalaringiz haqidagi umumiy ma’lumotlarni ko‘rishi mumkin. Masalan, ulardan qanchalik foydalanishingiz haqidagi ma’lumotlarni."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Favqulodda vaziyat tovushi"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Favqulodda qo‘ng‘iroq uchun xususiyat o‘rnatish"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Zahiralash &amp; qayta tiklash"</string>
@@ -2024,8 +2025,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Fondagi jarayon cheklovi"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Barcha ANRlar"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Fondagi ilovalar uchun Barcha javob bermayotgan ilovalarni ko‘rsatish"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView trafigini kamaytirish"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Google trafikni siqish serverlariga ulanish orqali WebView trafigini kamaytirish (tajribaviy funksiya)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Trafik sarfi"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Ilovaning int-dan foyd-shi"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Aloqa operatorining hisob-kitoblari qurilmangiznikidan farq qilishi mumkin."</string>
@@ -2364,8 +2368,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"hisob"</string>
     <string name="keywords_users" msgid="4673901601478559100">"cheklov cheklash cheklangan"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"matnni sozlash to\'g\'ri tovush tebranish avtomatik til shakl taklifi taklif qilingan mavzu haqoratli so\'z turi emotsi"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"surish, parol, chizmali parol, PIN kod"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi’ni sozlash u-n NFC yorliq"</string>
     <string name="write_tag" msgid="8571858602896222537">"Yozish"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Yozish uchun yorliq ustiga bosing…"</string>

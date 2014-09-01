@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"بلوتوث"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"مدیریت اتصال ها، تنظیم نام دستگاه و قابلیت شناسایی"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"درخواست جفت سازی بلوتوث"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"برای جفت کردن با:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>پین مورد نیاز دستگاه را تایپ کنید:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"برای جفت کردن با:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>کلید عبور ضروری دستگاه را وارد کنید:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"دستگاه"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"کد مرتبط‌سازی"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"کد مرتبط‌سازی را وارد کنید سپس بازگشت یا ورود را فشار دهید"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"پین شامل حروف یا نماد است"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"معمولا 0000 یا 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"ممکن است لازم باشد که این پین را در دستگاه دیگری وارد کنید."</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"هیچ بازنشانی انجام نشد زیرا سرویس پاکسازی سیستم در دسترس نیست."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"بازنشانی؟"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"بازنشانی به تنظیمات کارخانه برای این کاربر در دسترس نیست"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"‏پاک کردن حافظهٔ USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"‏پاک کردن کارت SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"‏حذف همه داده‌های موجود در حافظهٔ USB"</string>
@@ -1831,10 +1836,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"ذخیره‌سازی اطلاعات کاربری فعال شد."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"باید یک پین قفل صفحه یا گذرواژه را قبل از استفاده از حافظه اطلاعات کاربری تنظیم کنید."</string>
     <string name="usage_access_title" msgid="332333405495457839">"برنامه‌های مجاز به دسترسی"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"برنامه‌های درخواست‌کننده دسترسی"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"فقط به برنامه‌هایی که اطمینان دارید اجازه دهید به اطلاعات استفاده دسترسی داشته باشند. برنامه‌هایی که اجازه دسترسی به آنها بدهید به سابقه استفاده‌تان از برنامه دسترسی خواهند داشت، مانند آخرین باری که برنامه‌ای استفاه شده است یا کل زمانی که از برنامه‌ای استفاده کرده‌اید."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"اجازه دسترسی داده شود؟"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"اگر اجازه دسترسی بدهید، این برنامه می‌تواند اطلاعات عمومی راجع به برنامه‌هایتان را مشاهده کند، مانند تعداد دفعات استفاده‌تان از آنها."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"در صورتی که به این برنامه اجازه دسترسی بدهید می‌تواند اطلاعات کلی درباره برنامه‌های روی دستگاهتان را مشاهده کند مانند چند بار از آنها استفاده می‌کنید."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"آهنگ اضطراری"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"واکنش موجود در هنگام برقراری تماس اضطراری را تنظیم کنید"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"تهیهٔ نسخهٔ پشتیبان و بازیابی"</string>
@@ -2021,8 +2024,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"محدودیت پردازش در پس‌زمینه"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏نمایش تمام ANRها"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"نمایش گفتگوی \"برنامه پاسخ نمی‌دهد\" برای برنامه‌های پس‌زمینه"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"‏برای این کارکرد، لطفاً از برنامه تنظیمات Google استفاده کنید"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"‏کاهش استفاده از شبکه WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"‏کاهش استفاده از شبکه با پروکسی کردن ارتباطات WebView از طریق سرورهای فشرده‌سازی Google (آزمایشی)"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"‏با پروکسی اتصالات WebView از طریق سرورهای فشرده‌سازی Google، میزان استفاده از شبکه را کاهش دهید"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"مصرف داده"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"میزان مصرف داده در برنامه"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"ممکن است شرکت مخابراتی داده‌ها را به گونه‌ای متفاوت با دستگاه شما محاسبه کند."</string>

@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Байланыстарды басқарып, құрылғы атауы мен табылу мүмкіндігін тағайындаңыз"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth жұпталу өтініші"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Жұптау үшін:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Құрылғы үшін қажетті PIN кодты теріңіз:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Жұптау үшін:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Құрылғы үшін қажетті кілтпернені теріңіз:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Құрылғы"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Жұптау коды"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Жұптау кодын теріңіз, содан кейін «Оралу» немесе «Енгізу» түймесін басыңыз"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN құрамында әріптер немесе таңбалар болады"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Әдетте 0000 немесе 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Бұл PIN кодты басқа құрылғыда да теру қажет болуы мүмкін."</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Қайта реттеулер орындалмады, себебі Жүйе Тазалау қызметі қол жетімсіз."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Қайта реттелсін бе?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Зауыттық параметрлерді қалпына келтіру бұл пайдаланушы үшін қол жетімді емес"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB жадын өшіру"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD картасын өшіру"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB жадындағы барлық деректерді өшіреді"</string>
@@ -1733,12 +1738,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Дауыспен енгізу параметрлері"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Дауыспен енгізу"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Дауыспен енгізу қызметтері"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Толық арнайы сөз және өзара әрекеттесу"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Қарапайым сөзді мәтінге түрлендіру"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Бұл дауыспен енгізу қызметі сіздің атыңыздан әрқашан қосулы дауысты бақылауды орындай алады және дауысты қолдайтын қолданбаларды басқарады. Ол <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> қолданбасынан келген. Осы қызметті пайдалануды қосу керек пе?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Мәтіннен-сөйлеуге параметрлері"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Мәтіннен сөйлеуге шығысы"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Әрқашан менің параметрлерімді қолдану"</string>
@@ -1834,10 +1836,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Растау деректерінің жады қосылды."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Растау деректері қорын қолдануға дейін экранды бекіту PIN коды немесе кілтсөзін тағайындау қажет."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Пайдалануға қатынасы бар қолданбалар"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Қатынас сұрап жатқан қолданбалар"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Тек өзіңіз сенетін қолданбаларға пайдалану деректеріне қатынасуға рұқсат етіңіз. Сіз рұқсат еткен қолданбаларда қолданбаны пайдалану тарихына, мысалы, қолданбаның соңғы рет пайдаланылуына немесе сіз қолданбаны пайдаланып өткізген жалпы уақытқа қатынас болады."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Қатынасуға рұқсат беру керек пе?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Қатынасуға рұқсат етсеңіз, бұл қолданба қолданбаларыңыз туралы жалпы ақпаратты, мысалы, оларды пайдалану жиілігін, көре алады."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Төтенше әуен"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Төтенше қоңырау шалу әрекетін орнату"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Сақтық көшірме және қайта реттеу"</string>
@@ -2024,8 +2025,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Артқы шеп үрдісінің шектеуі"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Барлық ANR (қолданба жауап бермеді) хабарларын көрсетіңіз"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Артқы шептегі қолданбалар үшін Қолданба жауап бермейді жақтауын көрсету"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView желіні пайдалануын азайту"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"WebView байланыстарын Google сығымдау серверлері арқылы проксилеу арқылы желіні пайдалануды азайту (эксперименттік)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Дерекқор қолдану"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Қолданба деректерін пайдалану"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Оператордың деректер есебі құрылғыңыздан басқаша болуы мүмкін."</string>
@@ -2364,8 +2368,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"есептік жазба"</string>
     <string name="keywords_users" msgid="4673901601478559100">"шектеу шектелген"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"мәтінді түзету түзету дыбыс дірілдету автоматты тіл қимыл ұсыну ұсыныс тақырып тіл тигізетін сөз теру эмодзи"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"сырғыту құпия сөз өрнек PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC белгісін реттеу"</string>
     <string name="write_tag" msgid="8571858602896222537">"Жазу"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Жазу үшін белгіні түртіңіз…"</string>

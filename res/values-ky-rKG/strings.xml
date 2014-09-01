@@ -702,8 +702,9 @@
     <skip />
     <!-- no translation found for bluetooth_pairing_request (6385750334766370310) -->
     <skip />
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Кийинки менен туташуу үчүн:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Түзмөктүн PIN\'ин териңиз:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Кийинки менен туташуу үчүн:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Түзмөктүн кодун териңиз:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Түзмөк"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Жупташтыруу коду"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Жупташтыруу кодун терип, андан соң Артка же Киргизүүнү басыңыз"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN тамгаларды же символдорду камтыйт"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Көбүнчө 0000 же 1234 болот"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Сиз бул PIN\'ди башка түзмөккө дагы киргизишиңиз керек болушу мүмкүн."</string>
@@ -1511,6 +1512,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Тазалоо аткарылган жок, анткени System Clear кызматы жеткиликсиз."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Тазалансынбы?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Бул колдонуучу демейки абалга келтире албайт"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <!-- no translation found for media_format_title (3999653431422767156) -->
     <skip />
     <!-- no translation found for media_format_title (4427528440306787972) -->
@@ -2474,12 +2479,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Үн менен киргизүү жөндөөлөрү"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Үн менен киргизүү"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Үн киргизүү кызматтары"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Толук ачкыч сөз жана өз ара мамиле"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Жөнөкөй сөздөн текстке"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Бул үн киргизүү кызматы сиздин атыңыздан ар дайым күйүк үн көзөмөлүн аткарып жана үн менен иштетилген колдонмолорду иштете алат. Ал <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> колдонмосунан келет. Бул кызматты иштетүүбү?"</string>
     <!-- no translation found for tts_settings (8186971894801348327) -->
     <skip />
     <string name="tts_settings_title" msgid="1237820681016639683">"Текстти-оозекилөө"</string>
@@ -2622,10 +2624,9 @@
     <skip />
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Сертификат сактагычты пайдаланаардан мурун, сиз экранды бөгөтөөчү PIN же сырсөз коюшуңуз керек."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Пайдалануу уруксаты бар колд."</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Уруксат сураган колдонмолор"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Өзүңүз ишенген колдонмолорго гана дайындарды пайдаланууга уруксат алуусуна жол бериңиз. Сиз уруксат берген колдонмолор колдонмону пайдалануу таржымалына, колдонмону акыркы жолу пайдаланган убакыт же колдонмону пайдаланууга кетирген жалпы убакытыңыз сыяктуу, кире алат."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Мүмкүнчүлүк берилсинби?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Эгер кирүүгө уруксат берсеңиз, бул колдонмо колдонмолоруңуз жөнүндө, аларды канча убак аралыгынды пайдаланып турарыңыз сыяктуу, жалпы маалымат ала алат."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <!-- no translation found for emergency_tone_title (1055954530111587114) -->
     <skip />
     <!-- no translation found for emergency_tone_summary (722259232924572153) -->
@@ -2884,8 +2885,11 @@
     <skip />
     <string name="show_all_anrs" msgid="28462979638729082">"Бардык ANR\'лерди көрсөтүү"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Фондогу колдонмолорго Колдонмо Жооп Бербейт деп көрсөтүү"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView тармагын азыраак колдонуу"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"WebView туташууларын Google кысуу серверлери аркылуу проксилештирип тармакты азыраак колдонуу (сынамык)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <!-- no translation found for data_usage_summary_title (3804110657238092929) -->
     <skip />
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Колдонмонун дайындарынын пайдаланылышы"</string>
@@ -3271,8 +3275,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"каттоо эсеби"</string>
     <string name="keywords_users" msgid="4673901601478559100">"чектөө чектөө чектелген"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"текст оңдоо туура үн дирилдөө авто тил жаңсоо сунуштоо сунуштама темасы адепсиз сөз жымың терүү"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"сырсөз үлгү төөнөгүчүн жылмыштыруу"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC тегин орнотуу"</string>
     <string name="write_tag" msgid="8571858602896222537">"Жазуу"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Жазуу үчүн тегди таптап коюңуз…"</string>

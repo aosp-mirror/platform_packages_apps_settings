@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"藍牙"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"管理連線、設定裝置名稱與可偵測性"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"藍牙配對要求"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"如要與 <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請輸入裝置的 PIN："</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"如要與 <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請輸入裝置的密碼金鑰："</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"裝置"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"配對碼"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"輸入配對碼，然後按下返回鍵或 Enter 鍵"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN 碼含有字母或符號"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"通常為 0000 或 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"您可能也必須在另一個裝置上輸入這個 PIN。"</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"無法使用 System Clear 服務，因此未執行任何重設。"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"您要重設嗎？"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"這位使用者無法將裝置恢復原廠設定"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"清除 USB 儲存裝置"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"清除 SD 卡"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"清除 USB 儲存裝置中的所有資料"</string>
@@ -1696,7 +1701,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"處理程序統計資料"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"執行中處理程序的相關完善統計資料"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"記憶體用量"</string>
-    <string name="process_stats_total_duration" msgid="1869761515101180444">"應用程式類型：<xliff:g id="TYPE">%1$s</xliff:g>，統計時間長度：<xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="process_stats_total_duration" msgid="1869761515101180444">"類型：<xliff:g id="TYPE">%1$s</xliff:g>，時間：<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"背景"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"前景"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"快取"</string>
@@ -1733,12 +1738,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"語音輸入設定"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"語音輸入"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"語音輸入服務"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"全語音啟動字詞與互動服務"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"簡易語音轉文字"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"這項語音輸入服務由 <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> 應用程式提供，可隨時監控語音輸入，而且會替您管理所有支援語音功能的應用程式。要啟用這項服務嗎？"</string>
     <string name="tts_settings" msgid="8186971894801348327">"文字轉語音設定"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"文字轉語音輸出"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"永遠使用我的設定"</string>
@@ -1838,10 +1840,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"您必須先設定螢幕鎖定 PIN 或密碼，才能使用憑證儲存空間。"</string>
     <string name="usage_access_title" msgid="332333405495457839">"可存取使用情形資料的應用程式"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"要求存取權的應用程式"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"除非是您信任的應用程式，否則請勿任意允許應用程式存取使用情形資料。您所允許的應用程式將可存取您的應用程式使用紀錄，例如 A 應用程式的上次使用時間，或是 B 應用程式的使用時間總計。"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"允許存取？"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"如果您允許存取，表示這個應用程式可讀取與您的應用程式相關的一般資訊，例如各應用程式的使用頻率。"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"備份與重設"</string>
@@ -2028,8 +2029,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"背景處理程序限制"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"顯示所有無回應程式"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"為背景應用程式顯示「應用程式無回應」對話方塊"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"降低 WebView 網路流量"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"透過 Google 壓縮伺服器 Proxy 處理 WebView 連線，藉此降低網路流量 (實驗性)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"數據用量"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"應用程式數據用量"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"行動通訊業者與裝置的數據計算方式可能有所不同。"</string>
@@ -2368,8 +2372,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"帳戶"</string>
     <string name="keywords_users" msgid="4673901601478559100">"限制 限制 受限"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"文字修正 修正 音效 震動 自動 語言 手勢 建議 建議 主題 令人反感的字詞 類型 表情符號"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"滑動 密碼 圖形 PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標記"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"輕按標記即可寫入..."</string>

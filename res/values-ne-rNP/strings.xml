@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"ब्लुटुथ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"जडान प्रबन्ध गर्नुहोस्, उपकरण नाम मिलाउनुहोस्, पत्ता लगाउन योग्यता"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"ब्लुटुथ जोडा बाँध्ने अनुरोध"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"जोडा बाँध्न: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="DEVICE_NAME">%1$s</xliff:g> <xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> उपकरणको आवाश्यक PIN टाइप गर्नुहोस्:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"यस सँग जोडी पार्न:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>उपकरणको आवश्यक पास कुञ्जी टाइप गर्नुहोस्:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"उपकरण"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"जोडी कोड"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"जोडी कोड टाइप गर्नुहोस् त्यसपछि रिटर्न वा इन्टर थिच्नुहोस्"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN मा अक्षर वा प्रतीकहरू समाविष्ट हुन्छ"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"सामान्यत ०००० वा १२३४"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"तपाईँले अर्को उपकरणमा पनि PIN टाइप गर्न पर्ने हुन सक्छ।"</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"कुनै पुनःसेट हुन सकेन किनभने सिस्टम क्लिएर सेवा उपलब्ध छैन।"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"पुनःसेट गर्ने हो?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"यस प्रयोगकर्ताको लागि कारखाना पुनःसेट गर्ने उपलब्ध छैन"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB भण्डारण मेटाउनुहोस्"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD कार्ड मेटाउनुहोस्"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB भण्डारणमा भएका सम्पूर्ण डेटा मेटाउँछ"</string>
@@ -1735,12 +1740,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"ध्वनि निवेश सेटिङ्"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"ध्वनि निवेश"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"ध्वनि निवेश सेवाहरू"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"पूर्ण हटवर्ड शब्द र अन्तरक्रिया"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"पाठको लागि सरल बोली"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"यो आवाज प्रविष्ट सेवाले आफ्नो तर्फबाट सधैं-आवाज अनुगमन र आवाज नियन्त्रण उपकरण सक्षम प्रदर्शन गर्न सक्षम हुनेछ। यो <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> उपकरणबाट आउँछ। यो सेवाको प्रयोग सक्षम गर्ने हो?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"पाठ-वाचन सेटिङहरू"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"पाठ-बाट-वाणी उत्पादन"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"सधैँ मेरा सेटिङहरू प्रयोग गर्नुहोस्"</string>
@@ -1836,10 +1838,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"प्रमाण संग्रहण सक्षम पारियो।"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"तपाईँले प्रामाणिक डेटा भण्डारण प्रयोग गर्नुअघि तपाईँले लक स्क्रिन PIN वा पासवर्ड सेट गर्नु पर्छ।"</string>
     <string name="usage_access_title" msgid="332333405495457839">"उपयोग पहुँच सँग अनुप्रयोग"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"अनुप्रयोग पहुँचको अनुरोध गर्दै"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"केवल तपाईंको बिश्वासिलो अनुप्रयोगहरूलाई मात्र तपाईंको उपयोगी डेटामा पहुँचको लागि अनुमति दिनुहोस्। तपाईंले अनुमति दिनुभएको अनुप्रयोगको तपाईंको अनुप्रयोग उपयोग इतिहासमा पहुँच हुनेछ, जस्तै अन्तिम समयमा अनुप्रयोग प्रयोग भएको थियो, या अनुप्रयोग प्रयोगमा तपाईंले बिताएको कुल समय।"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"पहुँचका लागि अनुमति दिने हो?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"यदि तपाईंले पहुँचको लागि अनुमति दिनुभयो भने, यो अनुप्रयोगले तपाईं तिनीहरूलाई कसरी प्राय: प्रयोग गर्नुहुन्छ जस्तै आफ्नो अनुप्रयोगहरू बारेमा सामान्य जानकारी हेर्न सक्नुहुन्छ।"</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"यदि तपाईँले पहुँचको अनुमति दिनुभयो भने, यो अनुप्रयोगले तपाईँले तिनीहरूलाई कसरी प्राय: प्रयोग गरे जस्तै तपाईँको उपकरणमा अनुप्रयोगहरू बारेमा सामान्य जानकारी हेर्न सक्नुहुन्छ।"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"आपतकालीन टोन"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"आपातकालीन कल राखिएको बेलाको व्यवहार सेट गर्नुहोस्"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"ब्याकअप र पुनःसेट"</string>
@@ -1876,7 +1876,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"यस व्यवस्थापकलाई सक्रिय गर्नको लागि अनुप्रयोग <xliff:g id="APP_NAME">%1$s</xliff:g> ले  निम्नलिखित कारवाहीहरू गर्नको लागि अनुमति दिने छ:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"यो प्रशासक सक्रिय छ र  निम्नलिखित कारवाही गर्नका लागि <xliff:g id="APP_NAME">%1$s</xliff:g> अनुप्रयोगलाई अनुमति दिन्छ:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"प्रोफाइल प्रबन्धक सक्रिय गर्नुहुन्छ?"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"अगाडि बढेर, तपाईंको प्रयोगकर्ता पनि तपाईँको व्यक्तिगत डेटा साथै, सम्बन्धित डेटा भण्डारण गर्न सक्षम हुन सक्छ जो तपाईँको प्रशासक व्यवस्थित गरिनेछ।\n\nसञ्जाल गतिविधि र तपाईँको उपकरणको स्थान जानकारी सहित तपाईंको प्रशासक संग अनुगमन र यो प्रयोगकर्ता साथ सेटिङ्हरू, पहुँच, उपकरण, र डेटा, व्यवस्थापन गर्न सक्ने क्षमता छ।"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"अगाडि बढेर, तपाईंको प्रयोगकर्ता पनि तपाईँको व्यक्तिगत डेटा साथै, सम्बन्धित डेटा भण्डारण गर्न सक्षम हुन सक्छ जो तपाईँको प्रशासक व्यवस्थित गरिने छ।\n\nसञ्जाल गतिविधि र तपाईँको उपकरणको स्थान जानकारी सहित तपाईंको प्रशासक सँग अनुगमन र यो प्रयोगकर्ता साथ सेटिङ्हरू, पहुँच, उपकरण, र डेटा, व्यवस्थापन गर्न सक्ने क्षमता छ।"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"शीर्षकविहिन"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"सामान्य"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"अधिसूचना लग"</string>
@@ -2026,8 +2026,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"पृष्ठभूमि प्रक्रिया सीमा"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"सबै ANRs देखाउनुहोस्"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"पृष्ठभूमि अनुप्रयोगका लागि जवाफ नदिइरहेका अनुप्रयोगहरू देखाउनुहोस्"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"कृपया यस कार्यका लागि Google सेटिङ्हरू अनुप्रयोग प्रयोग गर्नुहोस्"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView नेटवर्क उपयोग घटाउनुहोस्"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Google सङ्कुचन सर्वरहरू द्वारा WebView को जडानहरू प्रोक्सी गरि नेटवर्क उपयोग घटाउनुहोस् (प्रयोगात्मक)"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Google सङ्कुचन सर्वरहरू द्वारा वेबभ्युको जडानहरू प्रोक्सी गरि सञ्जाल उपयोग घटाउनुहोस्"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"डेटा प्रयोग"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"अनुप्रयोग डेटा उपयोग"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"वाहक डेटा लेखा तपाईँको उपकरणबाट फरक हुन सक्छ।"</string>
@@ -2366,8 +2367,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"खाता"</string>
     <string name="keywords_users" msgid="4673901601478559100">"प्रतिबन्ध सीमित सीमित गरिएको"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"पाठ सुधार सही ध्वनि कम्पन स्वतः भाषा इशारा सुझाव थिम आपत्तिजनक शब्द प्रकार इमोजी सुझाव"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"पासवर्ड प्याटर्न पिन स्लाइड गर्नुहोस्"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ट्याग सेट गर्नुहोस्"</string>
     <string name="write_tag" msgid="8571858602896222537">"लेख्नुहोस्"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"लेख्न ट्याग छुनुहोस्..."</string>

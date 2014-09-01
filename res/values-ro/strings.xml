@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gestionaţi conexiunile, setaţi numele dispozitivului şi detectabilitatea acestuia"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Solicitare de împerechere prin Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Pentru împerecherea cu:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Introduceţi codul PIN necesar al dispozitivului:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Pentru împerecherea cu:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Introduceţi cheia de acces necesară a dispozitivului:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Dispozitiv"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Cod de conectare"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Introduceți codul de conectare, apoi apăsați pe Reveniți sau pe Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"Codul PIN conţine litere sau simboluri"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"De obicei, 0000 sau 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Ar putea fi necesar, de asemenea, să introduceţi acest cod PIN pe celălalt dispozitiv."</string>
@@ -1039,6 +1040,8 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Nu a fost efectuată nicio resetare, deoarece serviciul Golire sistem nu este disponibil."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Resetaţi?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Revenirea la setările din fabrică nu este disponibilă pentru acest utilizator"</string>
+    <string name="master_clear_progress_title" msgid="5194793778701994634">"Se șterge"</string>
+    <string name="master_clear_progress_text" msgid="6559096229480527510">"Așteptați..."</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Ștergeţi stocarea USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Ștergeţi cardul SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Șterge datele din stocarea USB"</string>
@@ -1835,10 +1838,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Stocarea acreditărilor este activată."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Trebuie să setaţi un cod PIN sau o parolă pentru blocarea ecranului înainte de a putea utiliza spaţiul de stocare a certificatelor."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apl. cu acces la date de util."</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Aplicații care solicită acces"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Permiteți accesul la datele de utilizare numai aplicațiilor în care aveți încredere. Aplicațiile cărora le acordați permisiunea vor avea acces la istoricul de utilizare a aplicațiilor, cum ar fi ultima utilizare a unei aplicații sau timpul total de utilizare a unei aplicații."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Permiteţi accesul?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Dacă-i permiteți accesul, această aplicație poate vizualiza informații generale despre aplicațiile dvs., cum ar fi frecvența cu care le utilizați."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"Dacă îi permiteți accesul, această aplicație poate vizualiza informații generale despre aplicațiile de pe dispozitivul dvs., cum ar fi frecvența cu care le utilizați."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ton de urgenţă"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Setaţi comportamentul la efectuarea unui apel de urgenţă"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Backup și resetare"</string>
@@ -1875,7 +1876,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"Activarea acestui administrator va permite aplicaţiei <xliff:g id="APP_NAME">%1$s</xliff:g> să efectueze următoarele operaţiuni:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"Acest administrator este activ şi permite aplicaţiei <xliff:g id="APP_NAME">%1$s</xliff:g> să efectueze următoarele operaţii:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"Activați Administratorul de profil?"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"În cazul în care continuați, Utilizatorul va fi gestionat de Administrator, care s-ar putea să aibă posibilitatea de a stoca, pe lângă datele personale, și date asociate.\n\nAdministratorul are posibilitatea de a monitoriza și a gestiona setările, accesul, aplicațiile și datele asociate cu acest Utilizator, inclusiv activitatea în rețea și informațiile despre locația dispozitivului."</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"În cazul în care continuați, Utilizatorul va fi gestionat de Administrator, care ar putea să stocheze, pe lângă datele personale, și date asociate.\n\nAdministratorul are posibilitatea de a monitoriza și a gestiona setările, accesul, aplicațiile și datele asociate cu acest Utilizator, inclusiv activitatea în rețea și informațiile despre locația dispozitivului."</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Fără titlu"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"Jurnal de notificări"</string>
@@ -2025,8 +2026,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Limita proces. de fundal"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Afişaţi toate elem. ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Afiş. dialog. Aplic. nu răsp. pt. aplic. de fundal"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"Folosiți aplicația Setări Google pentru această operație"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Reduceți utilizarea WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Reduceți utilizarea rețelei folosind ca proxy pentru conexiunile WebView serverele de comprimare Google (experimental)"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Reduceți utilizarea rețelei folosind ca proxy pentru conexiunile WebView serverele de comprimare Google"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Utilizarea datelor"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Utilizarea datelor aplic."</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Datele pot fi contorizate diferit la operator și pe dispozitiv."</string>

@@ -360,13 +360,13 @@
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"加密平板电脑"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"加密手机"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"请为电池充电，然后重试。"</string>
-    <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"插上充电器，然后重试。"</string>
+    <string name="crypt_keeper_unplugged_text" msgid="4785376766063053901">"请插上充电器，然后重试。"</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"没有锁屏PIN码或密码"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="4071395977297369642">"您需要先设置锁屏PIN码或密码才能开始加密。"</string>
     <string name="crypt_keeper_confirm_encrypt" msgid="736289627726831055">"您需要绘制解锁图案，以确认对您的设备进行加密。"</string>
     <string name="crypt_keeper_confirm_title" msgid="5100339496381875522">"要加密吗？"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"加密操作无法撤消，如果您中断该过程，则会丢失数据。加密过程需要 1 小时或更长时间，在此期间，平板电脑会重新启动数次。"</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"加密操作无法撤消，如果您中断该过程，则会丢失数据。加密过程需要 1 小时或更长时间，在此期间，手机会重新启动数次。"</string>
+    <string name="crypt_keeper_final_desc" product="tablet" msgid="4453629424172409792">"加密操作无法撤消，如果您中断该过程，则会丢失数据。加密过程需要1小时或更长时间，在此期间，平板电脑会重新启动数次。"</string>
+    <string name="crypt_keeper_final_desc" product="default" msgid="5682944380460921880">"加密操作无法撤消，如果您中断该过程，则会丢失数据。加密过程需要1小时或更长时间，在此期间，手机会重新启动数次。"</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"正在加密"</string>
     <string name="crypt_keeper_setup_description" product="tablet" msgid="6689952371032099350">"正在加密您的平板电脑（已完成 <xliff:g id="PERCENT">^1</xliff:g>%），请耐心等待。"</string>
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"正在加密您的手机（已完成 <xliff:g id="PERCENT">^1</xliff:g>%），请耐心等待。"</string>
@@ -462,8 +462,7 @@
     <string name="manage_device_admin" msgid="5059296715271077278">"设备管理器"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"查看或停用设备管理器"</string>
     <string name="manage_trust_agents" msgid="4629279457536987768">"信任的代理"</string>
-    <!-- no translation found for disabled_because_no_backup_security (6877660253409580377) -->
-    <skip />
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"要开始使用，请先设置屏幕锁定方式"</string>
     <string name="manage_trust_agents_summary" msgid="6804319935640148441">"查看或停用信任的代理"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"蓝牙"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"打开蓝牙"</string>
@@ -471,8 +470,12 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"蓝牙"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"管理连接、设置设备名称和可检测性"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"蓝牙配对请求"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"要与 <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请键入该设备所需的 PIN："</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"要与 <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 设备配对，请键入该设备所需的配对密钥："</string>
+    <!-- no translation found for bluetooth_enter_pin_msg (4954085254142996877) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_key_msg (333005542843637754) -->
+    <skip />
+    <!-- no translation found for bluetooth_enter_passkey_msg (6813273136442138444) -->
+    <skip />
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN 由字母或符号组成"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"通常为 0000 或 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"您可能还需要在另一设备上输入此PIN码。"</string>
@@ -1040,6 +1043,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"“系统清除”服务不可用，因此未执行重置操作。"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"要重置吗？"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"此用户无权恢复出厂设置"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"格式化USB存储设备"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"格式化SD卡"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"清除USB存储设备中的全部数据"</string>
@@ -1734,12 +1741,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"语音输入设置"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"语音输入"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"语音输入服务"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"全语音启动指令和互动"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"简单的语音转文字"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"此语音输入服务能够始终进行语音监测，并能替您控制所有支持语音功能的应用。该服务由<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>应用提供。要启用此服务吗？"</string>
     <string name="tts_settings" msgid="8186971894801348327">"文字转语音设置"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"文字转语音 (TTS) 输出"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"总是使用我的设置"</string>
@@ -1835,10 +1839,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"凭证存储已启用。"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"您需要先设置锁屏PIN码或密码才能使用凭据存储。"</string>
     <string name="usage_access_title" msgid="332333405495457839">"有权查看使用情况的应用"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"申请查看权限的应用"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"请仅允许您信任的应用查看使用情况数据。您授予权限的应用将能够查看与您的应用相关的使用情况历史记录，例如，上次使用某个应用的时间，或者使用某个应用的总累计时间。"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"要允许查看吗？"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"如果您允许此应用查看使用情况数据，它将可以查看与您的应用相关的常规信息，例如，您使用这些应用的频率。"</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"紧急提示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"备份和重置"</string>
@@ -1865,8 +1868,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"取消激活"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"设备管理器"</string>
     <string name="no_device_admins" msgid="702695100241728775">"没有可供显示的设备管理器"</string>
-    <!-- no translation found for managed_profile_device_admin_info (5048846624960067582) -->
-    <skip />
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"要禁止<xliff:g id="APP_NAME">%1$s</xliff:g>访问您的工作资料，请在“设置”&gt;“帐户”下移除相应资料"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"个人"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"工作"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"没有信任的代理"</string>
@@ -1876,8 +1878,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"激活此管理器可允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
     <string name="device_admin_status" msgid="4252975713178851910">"此管理器已激活，允许应用“<xliff:g id="APP_NAME">%1$s</xliff:g>”执行以下操作："</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"要激活个人资料管理器吗？"</string>
-    <!-- no translation found for adding_profile_owner_warning (6469780138110334180) -->
-    <skip />
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"继续操作即表示您同意由您的管理员管理您的用户个人资料（除了存储您的个人数据外，还可以存储相关数据）。\n\n您的管理员能够监控和管理与此用户个人资料相关的设置、权限、应用以及数据（其中包括网络活动和您设备的位置信息）。"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"常规"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"通知日志"</string>
@@ -1920,8 +1921,7 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"同步"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"同步操作当前遇到了一些问题，很快便可恢复。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"添加帐户"</string>
-    <!-- no translation found for managed_profile_not_available_label (3489771164851107822) -->
-    <skip />
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"工作资料尚不可用"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"移除工作资料"</string>
     <string name="background_data" msgid="5779592891375473817">"后台流量"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"应用可以随时同步、发送和接收数据"</string>
@@ -2028,8 +2028,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"后台进程限制"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"显示所有“应用无响应”(ANR)"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"为后台应用显示“应用无响应”对话框"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"节省WebView网络流量"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"通过将Google压缩服务器用作WebView连接代理，节省网络流量（实验性功能）"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"流量使用情况"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"应用数据流量"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"运营商的流量计算方式可能与您设备的计算方式不同。"</string>
@@ -2184,7 +2187,7 @@
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"受限个人资料"</string>
     <string name="user_summary_managed_profile" msgid="7369539529693048111">"工作资料"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"您需要先设置锁定屏幕来保护您的应用和个人数据，然后才可以创建受限个人资料。"</string>
-    <string name="user_set_lock_button" msgid="8311219392856626841">"设置锁定屏幕"</string>
+    <string name="user_set_lock_button" msgid="8311219392856626841">"设置屏幕锁定方式"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"未设置"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"未设置 - 受限个人资料"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"未设置 - 工作资料"</string>
@@ -2214,13 +2217,11 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"是否删除自己？"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"要移除此用户吗？"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"要移除此个人资料吗？"</string>
-    <!-- no translation found for work_profile_confirm_remove_title (2017323555783522213) -->
-    <skip />
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"要移除工作资料吗？"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您将丢失自己在这台平板电脑上的空间和数据，此操作无法撤消。"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"您将丢失自己在这部手机上的空间和数据，此操作无法撤消。"</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"系统将会删除所有应用和数据。"</string>
-    <!-- no translation found for work_profile_confirm_remove_message (7593793549364168783) -->
-    <skip />
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"此资料中的所有应用和数据都将被删除。"</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"系统将会删除所有应用和数据。"</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"正在添加新用户…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"删除用户"</string>
@@ -2370,8 +2371,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"帐户"</string>
     <string name="keywords_users" msgid="4673901601478559100">"限制 受限"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"文字 更正 提示音 振动 自动 语言 手势 建议 主题 令人反感的字词 输入 表情符号"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"滑动 密码 图案 PIN码"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"设置WLANNFC标签"</string>
     <string name="write_tag" msgid="8571858602896222537">"写入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"点按标签即可写入…"</string>
@@ -2438,8 +2438,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"优先"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"在列表顶部显示通知，并且在设备设置为“仅限优先打扰内容”时也显示"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"敏感"</string>
-    <!-- no translation found for app_notification_sensitive_summary (2505314249332316395) -->
-    <skip />
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"来自此应用的敏感通知内容不会在设备锁定时显示"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"屏蔽"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"优先"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"敏感"</string>

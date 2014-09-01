@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Quản lý kết nối, đặt tên thiết bị &amp; khả năng phát hiện thiết bị"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Yêu cầu ghép nối Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Để ghép nối với:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Nhập mã PIN bắt buộc của thiết bị:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Để ghép nối với:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Nhập mã xác nhận bắt buộc của thiết bị:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Thiết bị"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Mã ghép nối"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Nhập mã ghép nối, sau đó nhấn Quay lại hoặc Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN chứa các ký tự hoặc biểu tượng"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Thương là 0000 hoặc 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Bạn cũng có thể cần nhập mã PIN này trên thiết bị khác."</string>
@@ -1039,6 +1040,10 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Không có tác vụ đặt lại nào được thực hiện vì dịch vụ Xóa hệ thống không khả dụng."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Đặt lại?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Khôi phục cài đặt gốc không khả dụng cho người dùng này"</string>
+    <!-- no translation found for master_clear_progress_title (5194793778701994634) -->
+    <skip />
+    <!-- no translation found for master_clear_progress_text (6559096229480527510) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Xóa bộ nhớ USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Xóa thẻ SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Xóa t.cả dữ liệu trong b.nhớ USB"</string>
@@ -1733,12 +1738,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Cài đặt nhập bằng giọng nói"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Nhập bằng giọng nói"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Dịch vụ nhập bằng giọng nói"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Tương tác và từ nóng đầy đủ"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Ngôn từ đơn giản dễ nhắn tin"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Dịch vụ nhập bằng giọng nói này có thể thực hiện theo dõi bằng giọng nói luôn bật và kiểm soát các ứng dụng hỗ trợ giọng nói thay mặt cho bạn. Dịch vụ này đến từ ứng dụng <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Cho phép sử dụng dịch vụ này?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Cài đặt chuyển văn bản thành giọng nói"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Đầu ra của chuyển văn bản thành giọng nói"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Luôn sử dụng cài đặt của tôi"</string>
@@ -1834,10 +1836,9 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Bộ nhớ thông tin xác thực đã bật."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Bạn cần đặt mã PIN hoặc mật khẩu khóa màn hình trước khi có thể sử dụng vùng lưu trữ thông tin xác thực."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Ứng dụng có quyền truy cập sử dụng"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Ứng dụng yêu cầu truy cập"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Chỉ cho phép các ứng dụng bạn tin tưởng có quyền truy cập cập dữ liệu sử dụng. Các ứng dụng bạn cho phép sẽ có quyền truy cập lịch sử sử dụng ứng dụng, chẳng hạn như lần cuối sử dụng ứng dụng hoặc tổng thời gian đã sử dụng ứng dụng."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Cho phép truy cập?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Nếu bạn cho phép truy cập, ứng dụng này có thể xem thông tin chung về ứng dụng, chẳng hạn như tần suất sử dụng."</string>
+    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Âm khẩn cấp"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Đặt chế độ khi cuộc gọi khẩn cấp được thực hiện"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Sao lưu &amp; đặt lại"</string>
@@ -2024,8 +2025,11 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Giới hạn quá trình nền"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Hiển thị tất cả ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"H.thị h.thoại Ư. dụng ko đáp ứng cho ư.dụng nền"</string>
+    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
+    <skip />
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Giảm sử dụng mạng WebView"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Giảm sử dụng mạng bằng cách ủy quyền kết nối WebView thông qua các máy chủ nén của Google (Thử nghiệm)"</string>
+    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
+    <skip />
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Sử dụng dữ liệu"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Mức sử dụng dữ liệu ứng dụng"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Tính toán dữ liệu của nhà cung cấp dịch vụ có thể khác với thiết bị của bạn."</string>
@@ -2364,8 +2368,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"tài khoản"</string>
     <string name="keywords_users" msgid="4673901601478559100">"hạn chế hạn chế bị hạn chế"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"sửa văn bản sửa âm thanh rung tự động ngôn ngữ cử chỉ đề xuất đề xuất chủ đề từ xúc phạm nhập biểu tượng cảm xúc"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"trượt mật khẩu hình mẫu mã pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Thiết lập thẻ NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Ghi"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Nhấn vào một thẻ để ghi..."</string>
