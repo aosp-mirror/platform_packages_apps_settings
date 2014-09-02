@@ -20,15 +20,11 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingTop="@dimen/wifi_assistant_padding"
-    android:paddingBottom="@dimen/wifi_assistant_padding">
+    android:orientation="vertical">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/wifi_assistant_height">
 
         <ImageView
             android:id="@+id/cardBackground"
@@ -44,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/wifi_assistant_text_padding"
             android:gravity="start"
+            android:paddingStart="@dimen/wifi_assistant_padding_start_end"
+            android:paddingTop="@dimen/wifi_assistant_padding_top_bottom"
             android:text="@string/wifi_assistant_intro_setup"
             style="@style/WifiAssistantText" />
 
