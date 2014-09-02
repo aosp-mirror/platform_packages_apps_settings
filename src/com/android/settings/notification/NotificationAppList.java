@@ -557,13 +557,28 @@ public class NotificationAppList extends PinnedHeaderListFragment
         }
 
         public boolean getSensitive(String pkg, int uid) {
-            // TODO get visibility state from NoMan
-            return false;
+            INotificationManager nm = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            try {
+                return nm.getPackageVisibility(pkg, uid) == Notification.VISIBILITY_PRIVATE;
+            } catch (Exception e) {
+                Log.w(TAG, "Error calling NoMan", e);
+                return false;
+            }
         }
 
         public boolean setSensitive(String pkg, int uid, boolean sensitive) {
-            // TODO save visibility state to NoMan
-            return true;
+            INotificationManager nm = INotificationManager.Stub.asInterface(
+                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+            try {
+                nm.setPackageVisibility(pkg, uid,
+                        sensitive ? Notification.VISIBILITY_PRIVATE
+                                : Notification.VISIBILITY_NO_OVERRIDE);
+                return true;
+            } catch (Exception e) {
+                Log.w(TAG, "Error calling NoMan", e);
+                return false;
+            }
         }
     }
 }
