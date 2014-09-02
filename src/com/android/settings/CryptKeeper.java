@@ -117,6 +117,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private boolean mValidationRequested;
     /** A flag to indicate that the volume is in a bad state (e.g. partially encrypted). */
     private boolean mEncryptionGoneBad;
+    /** If gone bad, should we show encryption failed (false) or corrupt (true)*/
+    private boolean mCorrupt;
     /** A flag to indicate when the back event should be ignored */
     private boolean mIgnoreBack = false;
     private int mCooldown;
@@ -224,12 +226,14 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private class ValidationTask extends AsyncTask<Void, Void, Boolean> {
+        int state;
+
         @Override
         protected Boolean doInBackground(Void... params) {
             final IMountService service = getMountService();
             try {
                 Log.d(TAG, "Validating encryption state.");
-                int state = service.getEncryptionState();
+                state = service.getEncryptionState();
                 if (state == IMountService.ENCRYPTION_STATE_NONE) {
                     Log.w(TAG, "Unexpectedly in CryptKeeper even though there is no encryption.");
                     return true; // Unexpected, but fine, I guess...
@@ -247,6 +251,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (Boolean.FALSE.equals(result)) {
                 Log.w(TAG, "Incomplete, or corrupted encryption detected. Prompting user to wipe.");
                 mEncryptionGoneBad = true;
+                mCorrupt = state == IMountService.ENCRYPTION_STATE_ERROR_CORRUPT;
             } else {
                 Log.d(TAG, "Encryption state validated. Proceeding to configure UI");
             }
@@ -403,7 +408,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private void setupUi() {
         if (mEncryptionGoneBad || isDebugView(FORCE_VIEW_ERROR)) {
             setContentView(R.layout.crypt_keeper_progress);
-            showFactoryReset(false);
+            showFactoryReset(mCorrupt);
             return;
         }
 
