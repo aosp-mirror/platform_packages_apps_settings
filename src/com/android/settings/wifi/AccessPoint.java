@@ -271,9 +271,13 @@ class AccessPoint extends Preference {
                 // set the icon (drawable) to that state's drawable.
                 StateListDrawable sld = (StateListDrawable) context.getTheme()
                         .obtainStyledAttributes(wifi_signal_attributes).getDrawable(0);
-                sld.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
-                drawable = sld.getCurrent();
-                setIcon(drawable);
+                // If sld is null then we are indexing and therefore do not have access to
+                // (nor need to display) the drawable.
+                if (sld != null) {
+                    sld.setState((security != SECURITY_NONE) ? STATE_SECURED : STATE_NONE);
+                    drawable = sld.getCurrent();
+                    setIcon(drawable);
+                }
             }
 
             if (drawable != null) {
