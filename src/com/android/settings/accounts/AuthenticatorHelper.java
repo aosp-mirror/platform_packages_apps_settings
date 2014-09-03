@@ -16,13 +16,17 @@
 
 package com.android.settings.accounts;
 
+import com.google.android.collect.Maps;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SyncAdapterType;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -52,6 +56,7 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
     private AuthenticatorDescription[] mAuthDescs;
     private ArrayList<String> mEnabledAccountTypes = new ArrayList<String>();
     private Map<String, Drawable> mAccTypeIconCache = new HashMap<String, Drawable>();
+    private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = Maps.newHashMap();
 
     private final UserHandle mUserHandle;
     private final UserManager mUm;
@@ -69,7 +74,8 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         mUm = userManager;
         mUserHandle = userHandle;
         mListener = listener;
-        // This guarantees that the helper is ready to use once constructed
+        // This guarantees that the helper is ready to use once constructed: the account types and
+        // authorities are initialized
         onAccountsUpdated(null);
     }
 
@@ -187,6 +193,7 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         if (mListeningToAccountUpdates) {
             mListener.onAccountsUpdate(mUserHandle);
         }
+        buildAccountTypeToAuthoritiesMap();
     }
 
     @Override
@@ -213,6 +220,29 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
         if (mListeningToAccountUpdates) {
             mContext.unregisterReceiver(this);
             mListeningToAccountUpdates = false;
+        }
+    }
+
+    public ArrayList<String> getAuthoritiesForAccountType(String type) {
+        return mAccountTypeToAuthorities.get(type);
+    }
+
+    private void buildAccountTypeToAuthoritiesMap() {
+        mAccountTypeToAuthorities.clear();
+        SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
+                mUserHandle.getIdentifier());
+        for (int i = 0, n = syncAdapters.length; i < n; i++) {
+            final SyncAdapterType sa = syncAdapters[i];
+            ArrayList<String> authorities = mAccountTypeToAuthorities.get(sa.accountType);
+            if (authorities == null) {
+                authorities = new ArrayList<String>();
+                mAccountTypeToAuthorities.put(sa.accountType, authorities);
+            }
+            if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                Log.d(TAG, "Added authority " + sa.authority + " to accountType "
+                        + sa.accountType);
+            }
+            authorities.add(sa.authority);
         }
     }
 }
