@@ -1025,8 +1025,14 @@ public class Index {
             return;
         }
 
+        // The DocID should contains more than the title string itself (you may have two settings
+        // with the same title). So we need to use a combination of the title and the screenTitle.
+        StringBuilder sb = new StringBuilder(updatedTitle);
+        sb.append(screenTitle);
+        int docId = sb.toString().hashCode();
+
         ContentValues values = new ContentValues();
-        values.put(IndexColumns.DOCID, updatedTitle.hashCode());
+        values.put(IndexColumns.DOCID, docId);
         values.put(IndexColumns.LOCALE, locale);
         values.put(IndexColumns.DATA_RANK, rank);
         values.put(IndexColumns.DATA_TITLE, updatedTitle);
