@@ -316,22 +316,13 @@ public class InstalledAppDetails extends Fragment
         }
     }
 
-    private boolean isThisASystemPackage() {
-        try {
-            PackageInfo sys = mPm.getPackageInfo("android", PackageManager.GET_SIGNATURES);
-            return (mPackageInfo != null && mPackageInfo.signatures != null &&
-                    sys.signatures[0].equals(mPackageInfo.signatures[0]));
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
         // Try to prevent the user from bricking their phone
         // by not allowing disabling of apps signed with the
         // system cert and any launcher app in the system.
-        if (mHomePackages.contains(mAppEntry.info.packageName) || isThisASystemPackage()) {
+        if (mHomePackages.contains(mAppEntry.info.packageName)
+                || Utils.isSystemPackage(mPm, mPackageInfo)) {
             // Disable button for core system applications.
             button.setText(R.string.disable_text);
         } else if (mAppEntry.info.enabled) {
@@ -427,7 +418,7 @@ public class InstalledAppDetails extends Fragment
             // this does not bode well
         }
         mNotificationSwitch.setChecked(enabled);
-        if (isThisASystemPackage()) {
+        if (Utils.isSystemPackage(mPm, mPackageInfo)) {
             mNotificationSwitch.setEnabled(false);
         } else {
             mNotificationSwitch.setEnabled(true);
