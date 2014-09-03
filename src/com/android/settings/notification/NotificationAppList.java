@@ -193,30 +193,6 @@ public class NotificationAppList extends PinnedHeaderListFragment
                 parent.getPaddingEnd() - eat, parent.getPaddingBottom());
     }
 
-    private boolean isSystemApp(PackageInfo pkg) {
-        if (mSystemSignature == null) {
-            mSystemSignature = new Signature[]{ getSystemSignature() };
-        }
-        return mSystemSignature[0] != null && mSystemSignature[0].equals(getFirstSignature(pkg));
-    }
-
-    private static Signature getFirstSignature(PackageInfo pkg) {
-        if (pkg != null && pkg.signatures != null && pkg.signatures.length > 0) {
-            return pkg.signatures[0];
-        }
-        return null;
-    }
-
-    private Signature getSystemSignature() {
-        final PackageManager pm = mContext.getPackageManager();
-        try {
-            final PackageInfo sys = pm.getPackageInfo("android", PackageManager.GET_SIGNATURES);
-            return getFirstSignature(sys);
-        } catch (NameNotFoundException e) {
-        }
-        return null;
-    }
-
     private static class ViewHolder {
         ViewGroup row;
         ImageView icon;
@@ -375,6 +351,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
         public boolean priority;
         public boolean sensitive;
         public boolean first;  // first app in section
+        public boolean isSystem;
     }
 
     private static final Comparator<AppRow> mRowComparator = new Comparator<AppRow>() {
@@ -384,6 +361,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
             return sCollator.compare(lhs.label, rhs.label);
         }
     };
+
 
     public static AppRow loadAppRow(PackageManager pm, PackageInfo pkg, Backend backend) {
         final AppRow row = new AppRow();
@@ -399,16 +377,28 @@ public class NotificationAppList extends PinnedHeaderListFragment
         row.banned = backend.getNotificationsBanned(row.pkg, row.uid);
         row.priority = backend.getHighPriority(row.pkg, row.uid);
         row.sensitive = backend.getSensitive(row.pkg, row.uid);
+        row.isSystem = Utils.isSystemPackage(pm, pkg);
         return row;
     }
 
-    public static void collectConfigActivities(PackageManager pm, ArrayMap<String, AppRow> rows) {
+    public static List<ResolveInfo> queryNotificationConfigActivities(PackageManager pm) {
         if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
                 + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
         final List<ResolveInfo> resolveInfos = pm.queryIntentActivities(
                 APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
-                PackageManager.MATCH_DEFAULT_ONLY);
-        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities");
+                0 //PackageManager.MATCH_DEFAULT_ONLY
+        );
+        return resolveInfos;
+    }
+    public static void collectConfigActivities(PackageManager pm, ArrayMap<String, AppRow> rows) {
+        final List<ResolveInfo> resolveInfos = queryNotificationConfigActivities(pm);
+        applyConfigActivities(pm, rows, resolveInfos);
+    }
+
+    public static void applyConfigActivities(PackageManager pm, ArrayMap<String, AppRow> rows,
+            List<ResolveInfo> resolveInfos) {
+        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
+                + (resolveInfos.size() == 0 ? " ;_;" : ""));
         for (ResolveInfo ri : resolveInfos) {
             final ActivityInfo activityInfo = ri.activityInfo;
             final ApplicationInfo appInfo = activityInfo.applicationInfo;
@@ -425,7 +415,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
                         + activityInfo.packageName);
                 continue;
             }
-            row.settingsIntent = new Intent(Intent.ACTION_MAIN)
+            row.settingsIntent = new Intent(APP_NOTIFICATION_PREFS_CATEGORY_INTENT)
                     .setClassName(activityInfo.packageName, activityInfo.name);
         }
     }
@@ -439,18 +429,41 @@ public class NotificationAppList extends PinnedHeaderListFragment
                 mRows.clear();
                 mSortedRows.clear();
 
-                // collect all non-system apps
+                // collect all launchable apps, plus any packages that have notification settings
                 final PackageManager pm = mContext.getPackageManager();
-                for (PackageInfo pkg : pm.getInstalledPackages(PackageManager.GET_SIGNATURES)) {
-                    if (pkg.applicationInfo == null || isSystemApp(pkg)) {
-                        if (DEBUG) Log.d(TAG, "Skipping " + pkg.packageName);
+                final List<ResolveInfo> resolvedApps = pm.queryIntentActivities(
+                        new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER),
+                        PackageManager.MATCH_DEFAULT_ONLY
+                );
+                final List<ResolveInfo> resolvedConfigActivities
+                        = queryNotificationConfigActivities(pm);
+                resolvedApps.addAll(resolvedConfigActivities);
+
+                for (ResolveInfo info : resolvedApps) {
+                    String pkgName = info.activityInfo.packageName;
+                    if (mRows.containsKey(pkgName)) {
+                        // we already have this app, thanks
+                        continue;
+                    }
+
+                    PackageInfo pkg = null;
+                    try {
+                        pkg = pm.getPackageInfo(pkgName,
+                                PackageManager.GET_SIGNATURES);
+                    } catch (NameNotFoundException e) {
+                        if (DEBUG) Log.d(TAG, "Skipping (NNFE): " + pkg.packageName);
+                        continue;
+                    }
+                    if (info.activityInfo.applicationInfo == null) {
+                        if (DEBUG) Log.d(TAG, "Skipping (no applicationInfo): " + pkg.packageName);
                         continue;
                     }
                     final AppRow row = loadAppRow(pm, pkg, mBackend);
-                    mRows.put(row.pkg, row);
+                    mRows.put(pkgName, row);
                 }
-                // collect config activities
-                collectConfigActivities(pm, mRows);
+
+                // add config activities to the list
+                applyConfigActivities(pm, mRows, resolvedConfigActivities);
                 // sort rows
                 mSortedRows.addAll(mRows.values());
                 Collections.sort(mSortedRows, mRowComparator);
