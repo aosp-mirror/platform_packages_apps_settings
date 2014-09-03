@@ -57,7 +57,7 @@ public class WpsDialog extends AlertDialog {
     private static final int WPS_TIMEOUT_S = 120;
 
     private WifiManager mWifiManager;
-    private WifiManager.WpsListener mWpsListener;
+    private WifiManager.WpsCallback mWpsListener;
     private int mWpsSetup;
 
     private final IntentFilter mFilter;
@@ -81,8 +81,9 @@ public class WpsDialog extends AlertDialog {
         mContext = context;
         mWpsSetup = wpsSetup;
 
-        class WpsListener implements WifiManager.WpsListener {
-            public void onStartSuccess(String pin) {
+        class WpsListener extends WifiManager.WpsCallback {
+
+            public void onStarted(String pin) {
                 if (pin != null) {
                     updateDialog(DialogState.WPS_START, String.format(
                             mContext.getString(R.string.wifi_wps_onstart_pin), pin));
@@ -91,12 +92,13 @@ public class WpsDialog extends AlertDialog {
                             R.string.wifi_wps_onstart_pbc));
                 }
             }
-            public void onCompletion() {
+
+            public void onSucceeded() {
                 updateDialog(DialogState.WPS_COMPLETE,
                         mContext.getString(R.string.wifi_wps_complete));
             }
 
-            public void onFailure(int reason) {
+            public void onFailed(int reason) {
                 String msg;
                 switch (reason) {
                     case WifiManager.WPS_OVERLAP_ERROR:
