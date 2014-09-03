@@ -99,7 +99,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         super.onCreate(bundle);
 
         if (mSubInfoList == null) {
-            mSubInfoList = SubscriptionManager.getActivatedSubInfoList(getActivity());
+            mSubInfoList = SubscriptionManager.getActiveSubInfoList();
         }
 
         createPreferences();
@@ -135,7 +135,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     private void updateSimSlotValues() {
-        SubscriptionManager.getAllSubInfoList(getActivity());
+        SubscriptionManager.getAllSubInfoList();
         final PreferenceCategory simCards = (PreferenceCategory)findPreference(SIM_CARD_CATEGORY);
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
@@ -197,7 +197,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateSmsValues() {
         final DropDownPreference simPref = (DropDownPreference) findPreference(KEY_SMS);
-        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getPreferredSmsSubId());
+        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
         if (sir != null) {
             simPref.setSelectedItem(sir.mSlotId + 1);
         }
@@ -344,13 +344,13 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     final Spinner displayNumbers =
                         (Spinner)dialogLayout.findViewById(R.id.display_numbers);
 
-                    SubscriptionManager.setDisplayNumberFormat(getActivity(),
+                    SubscriptionManager.setDisplayNumberFormat(
                         displayNumbers.getSelectedItemPosition() == 0
                             ? SubscriptionManager.DISPLAY_NUMBER_LAST
                             : SubscriptionManager.DISPLAY_NUMBER_FIRST, mSubInfoRecord.mSubId);
 
                     mSubInfoRecord.mDisplayName = nameText.getText().toString();
-                    SubscriptionManager.setDisplayName(getActivity(), mSubInfoRecord.mDisplayName,
+                    SubscriptionManager.setDisplayName(mSubInfoRecord.mDisplayName,
                         mSubInfoRecord.mSubId);
 
                     updateAllOptions();
