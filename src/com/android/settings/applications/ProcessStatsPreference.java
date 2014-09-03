@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 public class ProcessStatsPreference extends Preference {
     private ProcStatsEntry mEntry;
@@ -61,8 +62,7 @@ public class ProcessStatsPreference extends Preference {
 
     public void setPercent(double percentOfWeight, double percentOfTime) {
         mProgress = (int) Math.ceil(percentOfWeight);
-        mProgressText = getContext().getResources().getString(
-                R.string.percentage, (int) Math.round(percentOfTime));
+        mProgressText = Utils.formatPercentage((int) percentOfTime);
         notifyChanged();
     }
 
