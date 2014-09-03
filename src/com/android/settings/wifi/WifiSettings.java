@@ -813,7 +813,13 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
         if (configs != null) {
-            savedNetworksExist = (configs.size() > 0);
+            // Update "Saved Networks" menu option.
+            if (savedNetworksExist != (configs.size() > 0)) {
+                savedNetworksExist = !savedNetworksExist;
+                if (context instanceof Activity) {
+                    ((Activity) context).invalidateOptionsMenu();
+                }
+            }
             for (WifiConfiguration config : configs) {
                 AccessPoint accessPoint = new AccessPoint(context, config);
                 if (lastInfo != null && lastState != null) {
