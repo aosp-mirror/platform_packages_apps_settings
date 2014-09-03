@@ -418,9 +418,11 @@ public class UserSettings extends SettingsPreferenceFragment
         int userId = newUserInfo.id;
         UserHandle user = new UserHandle(userId);
         mUserManager.setUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS, true, user);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, user);
+        // Change the setting before applying the DISALLOW_SHARE_LOCATION restriction, otherwise
+        // the putIntForUser() will fail.
         Secure.putIntForUser(getContentResolver(),
                 Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF, userId);
+        mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, user);
         Bitmap bitmap = createBitmapFromDrawable(
                 USER_DRAWABLES[userId % UserSettings.USER_DRAWABLES.length]);
         mUserManager.setUserIcon(userId, bitmap);
