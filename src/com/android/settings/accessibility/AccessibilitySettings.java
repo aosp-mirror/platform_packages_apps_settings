@@ -513,19 +513,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         if (mServicesCategory.getPreferenceCount() == 0) {
             if (mNoServicesMessagePreference == null) {
-                mNoServicesMessagePreference = new Preference(getActivity()) {
-                        @Override
-                    protected void onBindView(View view) {
-                        super.onBindView(view);
-                        TextView summaryView = (TextView) view.findViewById(R.id.summary);
-                        String title = getString(R.string.accessibility_no_services_installed);
-                        summaryView.setText(title);
-                    }
-                };
+                mNoServicesMessagePreference = new Preference(getActivity());
                 mNoServicesMessagePreference.setPersistent(false);
                 mNoServicesMessagePreference.setLayoutResource(
                         R.layout.text_description_preference);
                 mNoServicesMessagePreference.setSelectable(false);
+                mNoServicesMessagePreference.setSummary(
+                        getString(R.string.accessibility_no_services_installed));
             }
             mServicesCategory.addPreference(mNoServicesMessagePreference);
         }
