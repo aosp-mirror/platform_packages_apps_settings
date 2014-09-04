@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.notification.NotificationAppList.AppRow;
 import com.android.settings.notification.NotificationAppList.Backend;
 
@@ -184,6 +185,12 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                 }
             });
         }
+
+        // Users cannot block notifications from system/signature packages
+        if (Utils.isSystemPackage(pm, info)) {
+            getPreferenceScreen().removePreference(mBlock);
+            mPriority.setDependency(null); // don't have it depend on a preference that's gone
+        }
     }
 
     private void toastAndFinish() {
@@ -199,7 +206,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
                 final String p = packages[i];
                 if (pkg.equals(p)) {
                     try {
-                        return pm.getPackageInfo(pkg, 0);
+                        return pm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
                     } catch (NameNotFoundException e) {
                         Log.w(TAG, "Failed to load package " + pkg, e);
                     }
