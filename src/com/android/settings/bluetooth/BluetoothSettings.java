@@ -83,6 +83,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private boolean mAvailableDevicesCategoryIsPresent;
 
     private boolean mInitialScanStarted;
+    private boolean mInitiateDiscoverable;
 
     private TextView mEmptyView;
     private SwitchBar mSwitchBar;
@@ -119,6 +120,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mInitialScanStarted = (savedInstanceState != null);    // don't auto start scan after rotation
+        mInitiateDiscoverable = true;
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
@@ -153,8 +155,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
         }
         super.onResume();
 
-        // Make the device visible to other devices.
-        mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+        mInitiateDiscoverable = true;
 
         if (isUiRestricted()) {
             setDeviceListGroup(getPreferenceScreen());
@@ -325,6 +326,14 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 preferenceScreen.addPreference(mMyDevicePreference);
 
                 getActivity().invalidateOptionsMenu();
+
+                // mLocalAdapter.setScanMode is internally synchronized so it is okay for multiple
+                // threads to execute.
+                if (mInitiateDiscoverable) {
+                    // Make the device visible to other devices.
+                    mLocalAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+                    mInitiateDiscoverable = false;
+                }
                 return; // not break
 
             case BluetoothAdapter.STATE_TURNING_OFF:
