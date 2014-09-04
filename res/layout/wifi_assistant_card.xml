@@ -69,22 +69,13 @@
 
         <Button
             android:id="@+id/no_thanks_button"
-            android:background="@android:color/white"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="@string/wifi_assistant_no_thanks"
-            android:paddingLeft="@dimen/wifi_assistant_text_padding"
-            android:paddingRight="@dimen/wifi_assistant_text_padding" />
+            style="@style/WifiAssistantButton.Negative" />
 
         <Button
             android:id="@+id/setup"
-            android:background="@android:color/white"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="@dimen/wifi_assistant_text_padding"
-            android:paddingRight="@dimen/wifi_assistant_text_padding"
             android:text="@string/wifi_assistant_setup"
-            style="@style/WifiAssistantButton" />
+            style="@style/WifiAssistantButton.Positive" />
 
     </LinearLayout>
 
