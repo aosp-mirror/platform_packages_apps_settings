@@ -137,7 +137,9 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
         final boolean secure = new LockPatternUtils(getActivity()).isSecure();
-        if (!secure) {
+        final boolean enabled = getLockscreenNotificationsEnabled();
+        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
+        if (!secure || !enabled || !allowPrivate) {
             getPreferenceScreen().removePreference(mSensitive);
         }
 
@@ -191,6 +193,16 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             getPreferenceScreen().removePreference(mBlock);
             mPriority.setDependency(null); // don't have it depend on a preference that's gone
         }
+    }
+
+    private boolean getLockscreenNotificationsEnabled() {
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
+    }
+
+    private boolean getLockscreenAllowPrivateNotifications() {
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
     private void toastAndFinish() {
