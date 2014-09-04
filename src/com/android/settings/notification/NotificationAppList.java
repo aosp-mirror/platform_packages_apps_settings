@@ -351,7 +351,6 @@ public class NotificationAppList extends PinnedHeaderListFragment
         public boolean priority;
         public boolean sensitive;
         public boolean first;  // first app in section
-        public boolean isSystem;
     }
 
     private static final Comparator<AppRow> mRowComparator = new Comparator<AppRow>() {
@@ -377,7 +376,6 @@ public class NotificationAppList extends PinnedHeaderListFragment
         row.banned = backend.getNotificationsBanned(row.pkg, row.uid);
         row.priority = backend.getHighPriority(row.pkg, row.uid);
         row.sensitive = backend.getSensitive(row.pkg, row.uid);
-        row.isSystem = Utils.isSystemPackage(pm, pkg);
         return row;
     }
 
