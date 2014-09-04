@@ -51,7 +51,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
     private static final String TAG = "SettingsPreferenceFragment";
 
     private static final int MENU_HELP = Menu.FIRST + 100;
-    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 400;
+    private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
