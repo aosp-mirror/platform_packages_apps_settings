@@ -185,6 +185,7 @@ public class Index {
             dataToUpdate = new ArrayList<SearchIndexableData>(other.dataToUpdate);
             dataToDelete = new ArrayList<SearchIndexableData>(other.dataToDelete);
             nonIndexableKeys = new HashMap<String, List<String>>(other.nonIndexableKeys);
+            forceUpdate = other.forceUpdate;
         }
 
         public UpdateData copy() {
