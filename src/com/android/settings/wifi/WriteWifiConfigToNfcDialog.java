@@ -125,7 +125,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         String passwordHex = byteArrayToHexString(password.getBytes());
 
         String passwordLength = password.length() >= HEX_RADIX
-                ? "" + Character.forDigit(password.length(), HEX_RADIX)
+                ? Integer.toString(password.length(), HEX_RADIX)
                 : "0" + Character.forDigit(password.length(), HEX_RADIX);
 
         passwordHex = String.format(PASSWORD_FORMAT, passwordLength, passwordHex).toUpperCase();
