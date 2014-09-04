@@ -340,6 +340,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
             case BluetoothAdapter.STATE_TURNING_ON:
                 messageId = R.string.bluetooth_turning_on;
+                mInitialScanStarted = false;
                 break;
         }
 
