@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
@@ -25,6 +24,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.android.settings.R;
 
@@ -33,6 +35,7 @@ import com.android.settings.R;
  * connection management.
  */
 public final class DevicePickerFragment extends DeviceListPreferenceFragment {
+    private static final int MENU_ID_REFRESH = Menu.FIRST;
 
     public DevicePickerFragment() {
         super(null /* Not tied to any user restrictions. */);
@@ -56,12 +59,36 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
+    void initDevicePreference(BluetoothDevicePreference preference) {
+        preference.setWidgetLayoutResource(R.layout.preference_empty_list);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, MENU_ID_REFRESH, 0, R.string.bluetooth_search_for_devices)
+                .setEnabled(true)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_ID_REFRESH:
+                mLocalAdapter.startScanning(true);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(getString(R.string.device_picker));
         UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mStartScanOnResume = !um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)
                 && (savedInstanceState == null);  // don't start scan after rotation
+        setHasOptionsMenu(true);
     }
 
     @Override
