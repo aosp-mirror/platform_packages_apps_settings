@@ -155,8 +155,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
         if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
             Intent intent = new Intent(getActivity(), NotificationAppListActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivityAsUser(intent, selectedUser);
-            getActivity().finish();
         }
     }
 
