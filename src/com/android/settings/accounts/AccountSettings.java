@@ -31,9 +31,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -117,6 +114,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+        mProfileNotAvailablePreference = new Preference(getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -335,16 +333,11 @@ public class AccountSettings extends SettingsPreferenceFragment
             }
         } else {
             // Put a label instead of the accounts list
-            synchronized (this) {
-                if (mProfileNotAvailablePreference == null) {
-                    mProfileNotAvailablePreference = new Preference(getActivity());
-                    mProfileNotAvailablePreference.setEnabled(false);
-                    mProfileNotAvailablePreference.setIcon(R.drawable.empty_icon);
-                    mProfileNotAvailablePreference.setTitle(null);
-                    mProfileNotAvailablePreference.setSummary(
-                            R.string.managed_profile_not_available_label);
-                }
-            }
+            mProfileNotAvailablePreference.setEnabled(false);
+            mProfileNotAvailablePreference.setIcon(R.drawable.empty_icon);
+            mProfileNotAvailablePreference.setTitle(null);
+            mProfileNotAvailablePreference.setSummary(
+                    R.string.managed_profile_not_available_label);
             profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
         }
         if (profileData.removeWorkProfilePreference != null) {
