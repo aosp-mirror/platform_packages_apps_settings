@@ -406,6 +406,8 @@
                 android:value="com.android.settings.vpn2.VpnSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
         </activity>
 
         <activity android:name="Settings$DateTimeSettingsActivity"
