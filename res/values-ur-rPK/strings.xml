@@ -1040,6 +1040,8 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"کوئی ری سیٹ انجام نہیں دیا گیا کیونکہ سسٹم صاف کریں سروس دستیاب نہیں ہے۔"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"دوبارہ ترتیب دیں؟"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"اس صارف کیلئے فیکٹری ری سیٹ دستیاب نہیں ہے"</string>
+    <string name="master_clear_progress_title" msgid="5194793778701994634">"صاف کیا جا رہا ہے"</string>
+    <string name="master_clear_progress_text" msgid="6559096229480527510">"براہ کرم انتظار کریں…"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"‏USB اسٹوریج کو حذف کریں"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"‏SD کارڈ حذف کریں"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"‏USB سٹوریج میں سبھی ڈیٹا حذف کر دیتا ہے"</string>
@@ -1833,8 +1835,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"‏اس سے پہلے کہ آپ اسنادات اسٹوریج کا استعمال کر سکیں آپ کو اسکرین مقفل کرنے کا ایک PIN یا پاس ورڈ سیٹ کرنا ہوگا۔"</string>
     <string name="usage_access_title" msgid="332333405495457839">"استعمال تک رسائی والی ایپس"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"رسائی کی اجازت دیں؟"</string>
-    <!-- no translation found for allow_usage_access_message (2295847177051307496) -->
-    <skip />
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"اگر آپ رسائی کی اجازت دیتے ہیں تو یہ ایپ آپ کے آلہ پر موجود ایپس کے بارے میں عمومی معلومات دیکھ سکتی ہے، جیسے آپ انہیں کتنی بار استعمال کرتے ہیں۔"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"ہنگامی ٹون"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ہنگامی کال کرتے وقت برتاؤ سیٹ کریں"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"بیک اپ لیں اور دوبارہ ترتیب دیں"</string>
@@ -2021,11 +2022,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"پس منظر پروسیس کی حد"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏سبھی ANRs کو دکھائیں"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"پس منظر کی ایپس کیلئے ایپ جواب نہیں دے رہی ہے ڈائلاگ دکھائیں"</string>
-    <!-- no translation found for dev_settings_use_google_settings (2139038099847738861) -->
-    <skip />
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"‏براہ کرم اس کارروائی کیلئے Google ترتیبات ایپ کا استعمال کریں"</string>
     <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"‏WebView نیٹ ورک استعمال کم کریں"</string>
-    <!-- no translation found for webview_data_reduction_proxy_summary (5209841245329895851) -->
-    <skip />
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"‏WebView کنکشنز کو Google کمپریشن سرورز کے ذریعے پراکسی کر کے نیٹ ورک کا استعمال کم کریں"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"ڈیٹا کا استعمال"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"ایپ کے ڈیٹا کا استعمال"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"کیریئر ڈیٹا کا حساب آپ کے آلہ سے مختلف ہو سکتا ہے۔"</string>
@@ -2469,4 +2468,14 @@
     <string name="screen_pinning_description" msgid="3022868253807792488">"یہ ترتیب آن ہونے پر، آپ آلہ کو ایسی حالت میں رکھ سکتے ہیں جو حالیہ اسکرین کو منظر میں رکھتی ہے\n\nکسی اسکرین کو پن کرنے کیلئے:\n\n1۔ اس ترتیب کو آن کریں۔\n\n2۔ ایک ایپ کھولیں۔\n\n3۔ حالیہ بٹن کو ٹچ کریں۔\n\n4۔ پن کے آئیکن کو ٹچ کریں۔"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"دفتر کا پروفائل"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(تجرباتی)"</string>
+    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
+    <skip />
+    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
+    <skip />
+    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
+    <skip />
+    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
+    <skip />
+    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
+    <skip />
 </resources>
