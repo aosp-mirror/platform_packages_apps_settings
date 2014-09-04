@@ -67,6 +67,8 @@ public final class BluetoothDevicePreference extends Preference implements
 
         mCachedDevice = cachedDevice;
 
+        setLayoutResource(R.layout.preference_bt_icon);
+
         if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
             UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
             if (! um.hasUserRestriction(DISALLOW_CONFIG_BLUETOOTH)) {
