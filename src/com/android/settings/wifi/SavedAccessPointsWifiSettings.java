@@ -27,10 +27,13 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+
 import android.util.Log;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -166,7 +169,8 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                     mAccessPointSavedState = null;
                 }
                 mSelectedAccessPoint = mDlgAccessPoint;
-                mDialog = new WifiDialog(getActivity(), this, mDlgAccessPoint, false);
+                mDialog = new WifiDialog(getActivity(), this, mDlgAccessPoint,
+                        false /* not editting */, true /* hide the submit button */);
                 return mDialog;
 
         }
