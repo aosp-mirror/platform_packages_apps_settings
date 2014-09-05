@@ -37,6 +37,7 @@ import android.preference.PreferenceCategory;
 import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
@@ -238,11 +239,16 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         if (ringtoneUri == null) {
             summary = context.getString(com.android.internal.R.string.ringtone_silent);
         } else {
-            // Fetch the ringtone title from the media provider
             Cursor cursor = null;
             try {
-                cursor = context.getContentResolver().query(ringtoneUri,
-                        new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
+                if (MediaStore.AUTHORITY.equals(ringtoneUri.getAuthority())) {
+                    // Fetch the ringtone title from the media provider
+                    cursor = context.getContentResolver().query(ringtoneUri,
+                            new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
+                } else if (ContentResolver.SCHEME_CONTENT.equals(ringtoneUri.getScheme())) {
+                    cursor = context.getContentResolver().query(ringtoneUri,
+                            new String[] { OpenableColumns.DISPLAY_NAME }, null, null, null);
+                }
                 if (cursor != null) {
                     if (cursor.moveToFirst()) {
                         summary = cursor.getString(0);
@@ -250,6 +256,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 }
             } catch (SQLiteException sqle) {
                 // Unknown title for the ringtone
+            } catch (IllegalArgumentException iae) {
+                // Some other error retrieving the column from the provider
             } finally {
                 if (cursor != null) {
                     cursor.close();
