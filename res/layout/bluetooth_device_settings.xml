@@ -31,8 +31,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/bluetooth_preference_paired_dialog_name_label"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textDirection="locale"
-                    android:textColor="?android:attr/colorAccent"
                     style="@style/bt_item_label" />
 
             <EditText android:id="@+id/name"
