@@ -20,7 +20,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.AlertDialog;
 import android.app.ListFragment;
 import android.app.admin.DeviceAdminInfo;
@@ -305,8 +304,8 @@ public class DeviceAdminSettings extends ListFragment {
             final Activity activity = getActivity();
             ViewHolder vh = (ViewHolder) view.getTag();
             Drawable activityIcon = item.loadIcon(activity.getPackageManager());
-            Drawable badgedIcon = mUm.getBadgedDrawableForUser(activityIcon,
-                    new UserHandle(getUserId(item)));
+            Drawable badgedIcon = activity.getPackageManager().getUserBadgedDrawableForDensity(
+                    activityIcon, new UserHandle(getUserId(item)), null, 0);
             vh.icon.setImageDrawable(badgedIcon);
             vh.name.setText(item.loadLabel(activity.getPackageManager()));
             vh.checkbox.setChecked(isActiveAdmin(item));
