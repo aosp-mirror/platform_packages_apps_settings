@@ -27,20 +27,10 @@
         android:gravity="center"
         android:textSize="18sp"/>
 
-    <View
-         android:background="@*android:drawable/code_lock_top"
-         android:layout_width="match_parent"
-         android:layout_height="2dip" />
-
     <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:background="@color/lock_pattern_background" />
-
-    <View
-         android:background="@*android:drawable/code_lock_bottom"
-         android:layout_width="match_parent"
-         android:layout_height="8dip" />
 
     <TextView android:id="@+id/footerText"
         android:layout_width="match_parent"
@@ -48,6 +38,5 @@
         android:layout_weight="1.0"
         android:gravity="center"
         android:textSize="14sp"/>
-
 
 </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
