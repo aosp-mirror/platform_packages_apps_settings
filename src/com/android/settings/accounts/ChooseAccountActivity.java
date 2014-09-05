@@ -18,7 +18,6 @@ package com.android.settings.accounts;
 
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
-import android.app.ActivityManagerNative;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -216,8 +215,8 @@ public class ChooseAccountActivity extends PreferenceActivity {
             try {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
                 Context authContext = createPackageContextAsUser(desc.packageName, 0, mUserHandle);
-                icon = mUm.getBadgedDrawableForUser(
-                        authContext.getResources().getDrawable(desc.iconId), mUserHandle);
+                icon = getPackageManager().getUserBadgedDrawableForDensity(
+                        authContext.getResources().getDrawable(desc.iconId), mUserHandle, null, 0);
             } catch (PackageManager.NameNotFoundException e) {
                 // TODO: place holder icon for missing account icons?
                 Log.w(TAG, "No icon name for account type " + accountType);
