@@ -153,18 +153,19 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     }
 
     private void updateUi() {
-        mPrintJob = mPrintManager.getPrintJob(mPrintJobId);
+        PrintJob printJob = mPrintManager.getPrintJob(mPrintJobId);
 
-        if (mPrintJob == null) {
+        if (printJob == null) {
             finish();
             return;
         }
 
-        if (mPrintJob.isCancelled() || mPrintJob.isCompleted()) {
+        if (printJob.isCancelled() || printJob.isCompleted()) {
             finish();
             return;
         }
 
+        mPrintJob = printJob;
         PrintJobInfo info = mPrintJob.getInfo();
 
         switch (info.getState()) {
