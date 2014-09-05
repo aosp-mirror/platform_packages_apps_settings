@@ -141,7 +141,7 @@ public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
     private void ensurePin() {
         if (!mChallengeSucceeded && !mChallengeRequested
                 && mRestrictionsManager.hasRestrictionsProvider()) {
-            Intent intent = mRestrictionsManager.getLocalApprovalIntent();
+            Intent intent = mRestrictionsManager.createLocalApprovalIntent();
             if (intent != null) {
                 mChallengeRequested = true;
                 mChallengeSucceeded = false;
