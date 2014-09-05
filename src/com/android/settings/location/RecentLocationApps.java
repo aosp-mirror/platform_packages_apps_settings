@@ -212,7 +212,8 @@ public class RecentLocationApps {
 
             final UserHandle userHandle = new UserHandle(userId);
             Drawable appIcon = mPackageManager.getApplicationIcon(appInfo);
-            Drawable icon = um.getBadgedDrawableForUser(appIcon, userHandle);
+            Drawable icon = mPackageManager.getUserBadgedDrawableForDensity(appIcon, userHandle,
+                    null, 0);
             CharSequence appLabel = mPackageManager.getApplicationLabel(appInfo);
             CharSequence badgedAppLabel = um.getBadgedLabelForUser(appLabel.toString(), userHandle);
             preference = createRecentLocationEntry(icon,
