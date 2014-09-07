@@ -304,8 +304,8 @@ public class DeviceAdminSettings extends ListFragment {
             final Activity activity = getActivity();
             ViewHolder vh = (ViewHolder) view.getTag();
             Drawable activityIcon = item.loadIcon(activity.getPackageManager());
-            Drawable badgedIcon = activity.getPackageManager().getUserBadgedDrawableForDensity(
-                    activityIcon, new UserHandle(getUserId(item)), null, 0);
+            Drawable badgedIcon = activity.getPackageManager().getUserBadgedIcon(
+                    activityIcon, new UserHandle(getUserId(item)));
             vh.icon.setImageDrawable(badgedIcon);
             vh.name.setText(item.loadLabel(activity.getPackageManager()));
             vh.checkbox.setChecked(isActiveAdmin(item));
