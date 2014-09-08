@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,11 +72,6 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
     private Button mReportButton;
     private ViewGroup mDetailsParent;
     private ViewGroup mServicesParent;
-
-    public static String makePercentString(Resources res, long amount, long total) {
-        final double percent = (((double)amount) / total) * 100;
-        return res.getString(R.string.percentage, (int) Math.round(percent));
-    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -116,7 +112,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
         final double percentOfWeight = (((double)mEntry.mWeight) / mMaxWeight) * 100;
 
         int appLevel = (int) Math.ceil(percentOfWeight);
-        String appLevelText = makePercentString(getResources(), mEntry.mDuration, mTotalTime);
+        String appLevelText = Utils.formatPercentage(mEntry.mDuration, mTotalTime);
 
         // Set all values in the header.
         final TextView summary = (TextView) mRootView.findViewById(android.R.id.summary);
@@ -203,7 +199,7 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
                 Formatter.formatShortFileSize(getActivity(),
                         (mUseUss ? mEntry.mMaxUss : mEntry.mMaxPss) * 1024));
         addDetailsItem(mDetailsParent, getResources().getText(R.string.process_stats_run_time),
-                makePercentString(getResources(), mEntry.mDuration, mTotalTime));
+                Utils.formatPercentage(mEntry.mDuration, mTotalTime));
     }
 
     final static Comparator<ProcStatsEntry.Service> sServiceCompare
@@ -265,10 +261,8 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
                     if (tail >= 0 && tail < (label.length()-1)) {
                         label = label.substring(tail+1);
                     }
-                    long duration = service.mDuration;
-                    final double percentOfTime = (((double)duration) / mTotalTime) * 100;
-                    addDetailsItem(mServicesParent, label, getActivity().getResources().getString(
-                            R.string.percentage, (int) Math.ceil(percentOfTime)));
+                    String percentage = Utils.formatPercentage(service.mDuration, mTotalTime);
+                    addDetailsItem(mServicesParent, label, percentage);
                 }
             }
         }
