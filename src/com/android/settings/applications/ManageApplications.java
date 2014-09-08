@@ -1041,10 +1041,10 @@ public class ManageApplications extends Fragment implements
         if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             int currentTab = mViewPager.getCurrentItem();
             intent.putExtra(EXTRA_LIST_TYPE, mTabs.get(currentTab).mListType);
             mContext.startActivityAsUser(intent, selectedUser);
-            getActivity().finish();
         }
     }
 
