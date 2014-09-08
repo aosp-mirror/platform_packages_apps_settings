@@ -33,15 +33,15 @@ public class SettingPref {
     public static final int TYPE_GLOBAL = 1;
     public static final int TYPE_SYSTEM = 2;
 
-    private final int mType;
+    protected final int mType;
     private final String mKey;
-    private final String mSetting;
-    private final int mDefault;
+    protected final String mSetting;
+    protected final int mDefault;
     private final int[] mValues;
     private final Uri mUri;
 
-    private TwoStatePreference mTwoState;
-    private DropDownPreference mDropDown;
+    protected TwoStatePreference mTwoState;
+    protected DropDownPreference mDropDown;
 
     public SettingPref(int type, String key, String setting, int def, int... values) {
         mType = type;
@@ -129,7 +129,7 @@ public class SettingPref {
         throw new IllegalArgumentException();
     }
 
-    private static boolean putInt(int type, ContentResolver cr, String setting, int value) {
+    protected static boolean putInt(int type, ContentResolver cr, String setting, int value) {
         switch(type) {
             case TYPE_GLOBAL:
                 return Global.putInt(cr, setting, value);
@@ -139,7 +139,7 @@ public class SettingPref {
         throw new IllegalArgumentException();
     }
 
-    private static int getInt(int type, ContentResolver cr, String setting, int def) {
+    protected static int getInt(int type, ContentResolver cr, String setting, int def) {
         switch(type) {
             case TYPE_GLOBAL:
                 return Global.getInt(cr, setting, def);

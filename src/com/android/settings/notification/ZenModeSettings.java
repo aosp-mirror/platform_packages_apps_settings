@@ -46,11 +46,13 @@ import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.ScrollView;
 import android.widget.TimePicker;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.notification.DropDownPreference.Callback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -81,9 +83,10 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_ENTRY = "entry";
     private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
 
-    private static final SettingPref PREF_ZEN_MODE = new SettingPref(SettingPref.TYPE_GLOBAL,
-            KEY_ZEN_MODE, Global.ZEN_MODE, Global.ZEN_MODE_OFF, Global.ZEN_MODE_OFF,
-            Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, Global.ZEN_MODE_NO_INTERRUPTIONS) {
+    private static final SettingPrefWithCallback PREF_ZEN_MODE = new SettingPrefWithCallback(
+            SettingPref.TYPE_GLOBAL, KEY_ZEN_MODE, Global.ZEN_MODE, Global.ZEN_MODE_OFF,
+            Global.ZEN_MODE_OFF, Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+            Global.ZEN_MODE_NO_INTERRUPTIONS) {
         protected String getCaption(Resources res, int value) {
             switch (value) {
                 case Global.ZEN_MODE_NO_INTERRUPTIONS:
@@ -135,6 +138,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private PreferenceCategory mAutomationCategory;
     private Preference mEntry;
     private Preference mConditionProviders;
+    private AlertDialog mDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -149,6 +153,14 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
 
         final Preference zenMode = PREF_ZEN_MODE.init(this);
+        PREF_ZEN_MODE.setCallback(new SettingPrefWithCallback.Callback() {
+            @Override
+            public void onSettingSelected(int value) {
+                if (value != Global.ZEN_MODE_OFF) {
+                    showConditionSelection(value);
+                }
+            }
+        });
         if (!Utils.isVoiceCapable(mContext)) {
             zenMode.setTitle(R.string.zen_mode_option_title_novoice);
         }
@@ -467,8 +479,44 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         Global.putInt(getContentResolver(), Global.ZEN_MODE, value);
     }
 
-    protected ZenModeConditionSelection newConditionSelection() {
-        return new ZenModeConditionSelection(mContext);
+    protected void showConditionSelection(final int newSettingsValue) {
+        if (mDialog != null) return;
+
+        final ZenModeConditionSelection zenModeConditionSelection =
+                new ZenModeConditionSelection(mContext);
+        DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                zenModeConditionSelection.confirmCondition();
+                mDialog = null;
+            }
+        };
+        final int oldSettingsValue = PREF_ZEN_MODE.getValue(mContext);
+        ScrollView scrollView = new ScrollView(mContext);
+        scrollView.addView(zenModeConditionSelection);
+        mDialog = new AlertDialog.Builder(getActivity())
+                .setTitle(PREF_ZEN_MODE.getCaption(getResources(), newSettingsValue))
+                .setView(scrollView)
+                .setPositiveButton(R.string.okay, positiveListener)
+                .setNegativeButton(R.string.cancel_all_caps, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cancelDialog(oldSettingsValue);
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        cancelDialog(oldSettingsValue);
+                    }
+                }).create();
+        mDialog.show();
+    }
+
+    protected void cancelDialog(int oldSettingsValue) {
+        // If not making a decision, reset drop down to current setting.
+        PREF_ZEN_MODE.setValueWithoutCallback(mContext, oldSettingsValue);
+        mDialog = null;
     }
 
     // Enable indexing of searchable data
@@ -498,6 +546,60 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 return rt;
             }
         };
+
+    private static class SettingPrefWithCallback extends SettingPref {
+
+        private Callback mCallback;
+        private int mValue;
+
+        public SettingPrefWithCallback(int type, String key, String setting, int def,
+                int... values) {
+            super(type, key, setting, def, values);
+        }
+
+        public void setCallback(Callback callback) {
+            mCallback = callback;
+        }
+
+        @Override
+        public void update(Context context) {
+            // Avoid callbacks from non-user changes.
+            mValue = getValue(context);
+            super.update(context);
+        }
+
+        @Override
+        protected boolean setSetting(Context context, int value) {
+            if (value == mValue) return true;
+            mValue = value;
+            if (mCallback != null) {
+                mCallback.onSettingSelected(value);
+            }
+            return super.setSetting(context, value);
+        }
+
+        @Override
+        public Preference init(SettingsPreferenceFragment settings) {
+            Preference ret = super.init(settings);
+            mValue = getValue(settings.getActivity());
+
+            return ret;
+        }
+
+        public boolean setValueWithoutCallback(Context context, int value) {
+            // Set the current value ahead of time, this way we won't trigger a callback.
+            mValue = value;
+            return putInt(mType, context.getContentResolver(), mSetting, value);
+        }
+
+        public int getValue(Context context) {
+            return getInt(mType, context.getContentResolver(), mSetting, mDefault);
+        }
+
+        public interface Callback {
+            void onSettingSelected(int value);
+        }
+    }
 
     private final class SettingsObserver extends ContentObserver {
         private final Uri ZEN_MODE_URI = Global.getUriFor(Global.ZEN_MODE);
