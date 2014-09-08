@@ -63,6 +63,7 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
  */
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener, Indexable {
+    private static final String TRUST_AGENT_CLICK_INTENT = "trust_agent_click_intent";
     static final String TAG = "SecuritySettings";
     private static final Intent TRUST_AGENT_INTENT =
             new Intent(TrustAgentService.SERVICE_INTERFACE);
@@ -127,7 +128,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private boolean mIsPrimary;
 
-    private Preference mClickedTrustAgentPreference;
+    private Intent mTrustAgentClickIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,6 +139,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
+            mTrustAgentClickIntent = savedInstanceState.getParcelable(TRUST_AGENT_CLICK_INTENT);
+        }
     }
 
     private static int getResIdForLockUnlockScreen(Context context,
@@ -505,6 +511,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mTrustAgentClickIntent != null) {
+            outState.putParcelable(TRUST_AGENT_CLICK_INTENT, mTrustAgentClickIntent);
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -554,12 +568,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
-            mClickedTrustAgentPreference = preference;
+            mTrustAgentClickIntent = preference.getIntent();
             if (!helper.launchConfirmationActivity(CHANGE_TRUST_AGENT_SETTINGS, null, null) &&
-                preference.getIntent() != null) {
+                    mTrustAgentClickIntent != null) {
                 // If this returns false, it means no password confirmation is required.
-                startActivity(preference.getIntent());
-                mClickedTrustAgentPreference = null;
+                startActivity(mTrustAgentClickIntent);
+                mTrustAgentClickIntent = null;
             }
         } else {
             // If we didn't handle it, let preferences handle it.
@@ -587,13 +601,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // because mBiometricWeakLiveliness could be null
             return;
         } else if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
-            if (mClickedTrustAgentPreference != null) {
-                Intent intent = mClickedTrustAgentPreference.getIntent();
-                if (intent != null) {
-                    startActivity(intent);
-                }
-                mClickedTrustAgentPreference = null;
+            if (mTrustAgentClickIntent != null) {
+                startActivity(mTrustAgentClickIntent);
+                mTrustAgentClickIntent = null;
             }
+            return;
         }
         createPreferenceHierarchy();
     }
