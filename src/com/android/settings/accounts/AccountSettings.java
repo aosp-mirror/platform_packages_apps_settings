@@ -57,6 +57,7 @@ import java.util.List;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
+import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 /**
  * Settings screen for the account types on the device.
@@ -83,6 +84,8 @@ public class AccountSettings extends SettingsPreferenceFragment
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver
                 = new ManagedProfileBroadcastReceiver();
     private Preference mProfileNotAvailablePreference;
+    private String[] mAuthorities;
+    private int mAuthoritiesCount = 0;
 
     /**
      * Holds data related to the accounts belonging to one profile.
@@ -114,7 +117,10 @@ public class AccountSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-        mProfileNotAvailablePreference = new Preference(getActivity());
+        mAuthorities = getActivity().getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
+        if (mAuthorities != null) {
+            mAuthoritiesCount = mAuthorities.length;
+        }
         setHasOptionsMenu(true);
     }
 
@@ -190,6 +196,7 @@ public class AccountSettings extends SettingsPreferenceFragment
             if (preference == profileData.addAccountPreference) {
                 Intent intent = new Intent(ADD_ACCOUNT_ACTION);
                 intent.putExtra(EXTRA_USER, profileData.userInfo.getUserHandle());
+                intent.putExtra(EXTRA_AUTHORITIES, mAuthorities);
                 startActivity(intent);
                 return true;
             }
@@ -353,6 +360,21 @@ public class AccountSettings extends SettingsPreferenceFragment
 
         for (int i = 0; i < accountTypes.length; i++) {
             final String accountType = accountTypes[i];
+            if (mAuthoritiesCount > 0) {
+                // Skip showing any account that does not have any of the requested authorities
+                final ArrayList<String> authoritiesForType = helper.getAuthoritiesForAccountType(
+                        accountType);
+                boolean show = false;
+                for (int j = 0; j < mAuthoritiesCount; j++) {
+                    if (authoritiesForType.contains(mAuthorities[j])) {
+                        show = true;
+                        break;
+                    }
+                }
+                if (!show) {
+                    continue;
+                }
+            }
             final CharSequence label = helper.getLabelForType(getActivity(), accountType);
             if (label == null) {
                 continue;
