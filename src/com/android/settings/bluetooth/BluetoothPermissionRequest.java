@@ -66,20 +66,30 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             if (DEBUG) Log.d(TAG, "onReceive request type: " + mRequestType + " return "
                     + mReturnPackage + "," + mReturnClass);
 
-            // Check if user had made decisions on accepting or rejecting the phonebook access
-            // request. If there is, reply the request and return, no need to start permission
-            // activity dialog or notification.
+            // Even if the user has already made the choice, Bluetooth still may not know that if
+            // the user preference data have not been migrated from Settings app's shared
+            // preferences to Bluetooth app's. In that case, Bluetooth app broadcasts an
+            // ACTION_CONNECTION_ACCESS_REQUEST intent to ask to Settings app.
+            //
+            // If that happens, 'checkUserChoice()' here will do migration because it finds or
+            // creates a 'CachedBluetoothDevice' object for the device.
+            //
+            // After migration is done, 'checkUserChoice()' replies to the request by sending an
+            // ACTION_CONNECTION_ACCESS_REPLY intent. And we don't need to start permission activity
+            // dialog or notification.
             if (checkUserChoice()) {
                 return;
             }
 
             Intent connectionAccessIntent = new Intent(action);
             connectionAccessIntent.setClass(context, BluetoothPermissionActivity.class);
-            // We use the FLAG_ACTIVITY_MULTIPLE_TASK since we can have multiple concurrent access requests
-            connectionAccessIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-            connectionAccessIntent.setType(Integer.toString(mRequestType)); /* This is needed to create two pending
-                                                                               intents to the same activity.
-                                                                               The value is not used in the activity. */
+            // We use the FLAG_ACTIVITY_MULTIPLE_TASK since we can have multiple concurrent access
+            // requests.
+            connectionAccessIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            // This is needed to create two pending intents to the same activity. The value is not
+            // used in the activity.
+            connectionAccessIntent.setType(Integer.toString(mRequestType));
             connectionAccessIntent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE,
                                             mRequestType);
             connectionAccessIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
@@ -92,8 +102,9 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             PowerManager powerManager =
                 (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 
-            if (powerManager.isScreenOn() &&
-                LocalBluetoothPreferences.shouldShowDialogInForeground(context, deviceAddress) ) {
+            if (powerManager.isScreenOn()
+                    && LocalBluetoothPreferences.shouldShowDialogInForeground(
+                            context, deviceAddress)) {
                 context.startActivity(connectionAccessIntent);
             } else {
                 // Put up a notification that leads to the dialog
@@ -110,15 +121,18 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 switch (mRequestType) {
                     case BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS:
                         title = context.getString(R.string.bluetooth_phonebook_request);
-                        message = context.getString(R.string.bluetooth_pb_acceptance_dialog_text, deviceName, deviceName);
+                        message = context.getString(R.string.bluetooth_pb_acceptance_dialog_text,
+                                deviceName, deviceName);
                         break;
                     case BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS:
                         title = context.getString(R.string.bluetooth_map_request);
-                        message = context.getString(R.string.bluetooth_map_acceptance_dialog_text, deviceName, deviceName);
+                        message = context.getString(R.string.bluetooth_map_acceptance_dialog_text,
+                                deviceName, deviceName);
                         break;
                     default:
                         title = context.getString(R.string.bluetooth_connection_permission_request);
-                        message = context.getString(R.string.bluetooth_connection_dialog_text, deviceName, deviceName);
+                        message = context.getString(R.string.bluetooth_connection_dialog_text,
+                                deviceName, deviceName);
                         break;
                 }
                 Notification notification = new Notification.Builder(context)
@@ -137,12 +151,13 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                                 com.android.internal.R.color.system_notification_accent_color))
                         .build();
 
-                notification.flags |= Notification.FLAG_NO_CLEAR; /* cannot be set with the builder */
+                notification.flags |= Notification.FLAG_NO_CLEAR; // Cannot be set with the builder.
 
                 NotificationManager notificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-                notificationManager.notify(getNotificationTag(mRequestType),NOTIFICATION_ID, notification);
+                notificationManager.notify(getNotificationTag(mRequestType), NOTIFICATION_ID,
+                        notification);
             }
         } else if (action.equals(BluetoothDevice.ACTION_CONNECTION_ACCESS_CANCEL)) {
             // Remove the notification
@@ -174,7 +189,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
         // ignore if it is something else than phonebook/message settings it wants us to remember
         if (mRequestType != BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS
                 && mRequestType != BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
-            if (DEBUG) Log.d(TAG, "Unknown RequestType: " + mRequestType);
+            if (DEBUG) Log.d(TAG, "checkUserChoice(): Unknown RequestType " + mRequestType);
             return processed;
         }
 
@@ -182,71 +197,56 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
         CachedBluetoothDeviceManager cachedDeviceManager =
             bluetoothManager.getCachedDeviceManager();
         CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
-
         if (cachedDevice == null) {
             cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
                 bluetoothManager.getProfileManager(), mDevice);
         }
 
-        if(mRequestType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS) {
+        String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
 
+        if (mRequestType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS) {
             int phonebookPermission = cachedDevice.getPhonebookPermissionChoice();
 
             if (phonebookPermission == CachedBluetoothDevice.ACCESS_UNKNOWN) {
-                return processed;
-            }
-
-            String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
-            if (phonebookPermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
-                sendIntentToReceiver(intentName, true, BluetoothDevice.EXTRA_ALWAYS_ALLOWED, true);
+                // Leave 'processed' as false.
+            } else if (phonebookPermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
+                sendReplyIntentToReceiver(true);
                 processed = true;
             } else if (phonebookPermission == CachedBluetoothDevice.ACCESS_REJECTED) {
-                sendIntentToReceiver(intentName, false,
-                                     null, false ); // dummy value, no effect since previous param is null
+                sendReplyIntentToReceiver(false);
                 processed = true;
             } else {
                 Log.e(TAG, "Bad phonebookPermission: " + phonebookPermission);
             }
-
-        } else if(mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
-
+        } else if (mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
             int messagePermission = cachedDevice.getMessagePermissionChoice();
 
             if (messagePermission == CachedBluetoothDevice.ACCESS_UNKNOWN) {
-                return processed;
-            }
-
-            String intentName = BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY;
-            if (messagePermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
-                sendIntentToReceiver(intentName, true, BluetoothDevice.EXTRA_ALWAYS_ALLOWED, true);
+                // Leave 'processed' as false.
+            } else if (messagePermission == CachedBluetoothDevice.ACCESS_ALLOWED) {
+                sendReplyIntentToReceiver(true);
                 processed = true;
             } else if (messagePermission == CachedBluetoothDevice.ACCESS_REJECTED) {
-                sendIntentToReceiver(intentName, false,
-                                     null, false); // dummy value, no effect since previous param is null
+                sendReplyIntentToReceiver(false);
                 processed = true;
             } else {
                 Log.e(TAG, "Bad messagePermission: " + messagePermission);
             }
         }
-        if(DEBUG) Log.d(TAG,"checkUserChoice(): returning " + processed);
+        if (DEBUG) Log.d(TAG,"checkUserChoice(): returning " + processed);
         return processed;
     }
 
-    private void sendIntentToReceiver(final String intentName, final boolean allowed,
-                                      final String extraName, final boolean extraValue) {
-        Intent intent = new Intent(intentName);
+    private void sendReplyIntentToReceiver(final boolean allowed) {
+        Intent intent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
 
         if (mReturnPackage != null && mReturnClass != null) {
             intent.setClassName(mReturnPackage, mReturnClass);
         }
 
         intent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
-                        allowed ? BluetoothDevice.CONNECTION_ACCESS_YES :
-                        BluetoothDevice.CONNECTION_ACCESS_NO);
-
-        if (extraName != null) {
-            intent.putExtra(extraName, extraValue);
-        }
+                        allowed ? BluetoothDevice.CONNECTION_ACCESS_YES
+                                : BluetoothDevice.CONNECTION_ACCESS_NO);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
         mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
