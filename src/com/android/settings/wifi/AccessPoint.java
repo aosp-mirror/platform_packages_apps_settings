@@ -433,6 +433,8 @@ class AccessPoint extends Preference {
      */
     private String getVisibilityStatus() {
         StringBuilder visibility = new StringBuilder();
+        StringBuilder scans24GHz = null;
+        StringBuilder scans5GHz = null;
 
         long now = System.currentTimeMillis();
 
@@ -441,7 +443,7 @@ class AccessPoint extends Preference {
             if (bssid != null) {
                 visibility.append(" ").append(bssid);
             }
-            visibility.append(" sc=").append(Integer.toString(mInfo.score));
+            visibility.append(" score=").append(mInfo.score);
             visibility.append(" ");
             visibility.append(String.format("tx=%.1f,", mInfo.txSuccessRate));
             visibility.append(String.format("%.1f,", mInfo.txRetriesRate));
@@ -455,63 +457,96 @@ class AccessPoint extends Preference {
             int num5 = 0;
             int num24 = 0;
             int numBlackListed = 0;
+            int n24 = 0; // Number scan results we included in the string
+            int n5 = 0; // Number scan results we included in the string
             Map<String, ScanResult> list = mScanResultCache.snapshot();
+            // TODO: sort list by RSSI or age
             for (ScanResult result : list.values()) {
                 if (result.seen == 0)
                     continue;
 
-                if (result.autoJoinStatus != ScanResult.ENABLED)
-                    numBlackListed++;
+                if (result.autoJoinStatus != ScanResult.ENABLED) numBlackListed++;
 
-                if (result.frequency > LOWER_FREQ_5GHZ
-                        && result.frequency < HIGHER_FREQ_5GHZ) {
-                    //strictly speaking: [4915, 5825]
-                    //number of known BSSID on 5GHz band
+                if (result.frequency >= LOWER_FREQ_5GHZ
+                        && result.frequency <= HIGHER_FREQ_5GHZ) {
+                    // Strictly speaking: [4915, 5825]
+                    // number of known BSSID on 5GHz band
                     num5 = num5 + 1;
-                } else if (result.frequency > LOWER_FREQ_24GHZ
-                        && result.frequency < HIGHER_FREQ_24GHZ) {
-                    //strictly speaking: [2412, 2482]
-                    //number of known BSSID on 2.4Ghz band
+                } else if (result.frequency >= LOWER_FREQ_24GHZ
+                        && result.frequency <= HIGHER_FREQ_24GHZ) {
+                    // Strictly speaking: [2412, 2482]
+                    // number of known BSSID on 2.4Ghz band
                     num24 = num24 + 1;
                 }
 
-                //ignore results seen, older than 20 seconds
+                // Ignore results seen, older than 20 seconds
                 if (now - result.seen > VISIBILITY_OUTDATED_AGE_IN_MILLI) continue;
 
-                if (result.frequency > LOWER_FREQ_5GHZ
-                        &&result.frequency < HIGHER_FREQ_5GHZ) {
+                if (result.frequency >= LOWER_FREQ_5GHZ
+                        && result.frequency <= HIGHER_FREQ_5GHZ) {
                     if (result.level > rssi5) {
                         rssi5 = result.level;
                     }
-                } else if (result.frequency > LOWER_FREQ_24GHZ
-                        && result.frequency < HIGHER_FREQ_24GHZ) {
+                    if (n5 < 4) {
+                        if (scans5GHz == null) scans5GHz = new StringBuilder();
+
+                        scans5GHz.append(" {").append(result.BSSID);
+                        scans5GHz.append("=").append(result.frequency);
+                        scans5GHz.append(",").append(result.level).append("}");
+                        n5++;
+                    }
+                } else if (result.frequency >= LOWER_FREQ_24GHZ
+                        && result.frequency <= HIGHER_FREQ_24GHZ) {
                     if (result.level > rssi24) {
                         rssi24 = result.level;
+                    }
+                    if (n24 < 4) {
+                        if (scans24GHz == null) scans24GHz = new StringBuilder();
+                        scans24GHz.append(" {").append(result.BSSID);
+                        scans24GHz.append("=").append(result.frequency);
+                        scans24GHz.append(",").append(result.level).append("}");
+                        n24++;
                     }
                 }
             }
             visibility.append(" [");
-            if (num24 > 0 || rssi24 > WifiConfiguration.INVALID_RSSI) {
-                visibility.append(Integer.toString(rssi24));
-                visibility.append(",");
-                visibility.append(Integer.toString(num24));
+            if (num24 > 0) {
+                visibility.append("(").append(num24).append(")");
+                if (n24 <= 4) {
+                    if (scans24GHz != null) {
+                        visibility.append(scans24GHz.toString());
+                    }
+                } else {
+                    visibility.append("max=").append(rssi24);
+                    if (scans24GHz != null) {
+                        visibility.append(",").append(scans24GHz.toString());
+                    }
+                }
             }
             visibility.append(";");
-            if (num5 > 0 || rssi5 > WifiConfiguration.INVALID_RSSI) {
-                visibility.append(Integer.toString(rssi5));
-                visibility.append(",");
-                visibility.append(Integer.toString(num5));
+            if (num5 > 0) {
+                visibility.append("(").append(num5).append(")");
+                if (n5 <= 4) {
+                    if (scans5GHz != null) {
+                        visibility.append(scans5GHz.toString());
+                    }
+                } else {
+                    visibility.append("max=").append(rssi5);
+                    if (scans5GHz != null) {
+                        visibility.append(",").append(scans5GHz.toString());
+                    }
+                }
             }
             if (numBlackListed > 0)
-                visibility.append("!");
+                visibility.append("!").append(numBlackListed);
             visibility.append("]");
         } else {
             if (mRssi != Integer.MAX_VALUE) {
-                visibility.append(", ss=");
-                visibility.append(Integer.toString(mRssi));
+                visibility.append(" rssi=");
+                visibility.append(mRssi);
                 if (mScanResult != null) {
-                    visibility.append(", ");
-                    visibility.append(Integer.toString(mScanResult.frequency));
+                    visibility.append(", f=");
+                    visibility.append(mScanResult.frequency);
                 }
             }
         }
