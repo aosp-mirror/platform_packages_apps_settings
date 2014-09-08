@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on
@@ -47,8 +48,7 @@ public class PowerGaugePreference extends Preference {
 
     public void setPercent(double percentOfMax, double percentOfTotal) {
         mProgress = (int) Math.ceil(percentOfMax);
-        mProgressText = getContext().getResources().getString(
-                R.string.percentage, (int) (percentOfTotal+.5));
+        mProgressText = Utils.formatPercentage((int) (percentOfTotal + 0.5));
         notifyChanged();
     }
 
