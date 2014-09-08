@@ -17,15 +17,10 @@
 
 package com.android.settings.accounts;
 
-import com.google.android.collect.Maps;
-
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
-import android.app.ActivityManagerNative;
-import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SyncAdapterType;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -45,7 +40,6 @@ import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
@@ -59,7 +53,6 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
 
     private UserManager mUm;
     private Object mStatusChangeListenerHandle;
-    private HashMap<String, ArrayList<String>> mAccountTypeToAuthorities = null;
     protected AuthenticatorHelper mAuthenticatorHelper;
     protected UserHandle mUserHandle;
 
@@ -136,25 +129,7 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
     };
 
     public ArrayList<String> getAuthoritiesForAccountType(String type) {
-        if (mAccountTypeToAuthorities == null) {
-            mAccountTypeToAuthorities = Maps.newHashMap();
-            SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
-                    mUserHandle.getIdentifier());
-            for (int i = 0, n = syncAdapters.length; i < n; i++) {
-                final SyncAdapterType sa = syncAdapters[i];
-                ArrayList<String> authorities = mAccountTypeToAuthorities.get(sa.accountType);
-                if (authorities == null) {
-                    authorities = new ArrayList<String>();
-                    mAccountTypeToAuthorities.put(sa.accountType, authorities);
-                }
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "added authority " + sa.authority + " to accountType "
-                            + sa.accountType);
-                }
-                authorities.add(sa.authority);
-            }
-        }
-        return mAccountTypeToAuthorities.get(type);
+        return mAuthenticatorHelper.getAuthoritiesForAccountType(type);
     }
 
     /**
