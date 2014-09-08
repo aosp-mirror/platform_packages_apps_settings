@@ -62,31 +62,29 @@ public class MasterClearConfirm extends Fragment {
             final PersistentDataBlockManager pdbManager = (PersistentDataBlockManager)
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
 
-            if (pdbManager != null) {
+            if (pdbManager != null && !pdbManager.getOemUnlockEnabled()) {
                 // if OEM unlock is enabled, this will be wiped during FR process.
-                if (!pdbManager.getOemUnlockEnabled()) {
-                    final ProgressDialog progressDialog = getProgressDialog();
-                    progressDialog.show();
+                final ProgressDialog progressDialog = getProgressDialog();
+                progressDialog.show();
 
-                    // need to prevent orientation changes as we're about to go into
-                    // a long IO request, so we won't be able to access inflate resources on flash
-                    final int oldOrientation = getActivity().getRequestedOrientation();
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... params) {
-                            pdbManager.wipe();
-                            return null;
-                        }
+                // need to prevent orientation changes as we're about to go into
+                // a long IO request, so we won't be able to access inflate resources on flash
+                final int oldOrientation = getActivity().getRequestedOrientation();
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        pdbManager.wipe();
+                        return null;
+                    }
 
-                        @Override
-                        protected void onPostExecute(Void aVoid) {
-                            progressDialog.hide();
-                            getActivity().setRequestedOrientation(oldOrientation);
-                            doMasterClear();
-                        }
-                    }.execute();
-                }
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        progressDialog.hide();
+                        getActivity().setRequestedOrientation(oldOrientation);
+                        doMasterClear();
+                    }
+                }.execute();
             } else {
                 doMasterClear();
             }
