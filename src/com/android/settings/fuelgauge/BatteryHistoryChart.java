@@ -26,6 +26,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.util.TimeUtils;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -489,10 +490,8 @@ public class BatteryHistoryChart extends View {
         mCpuRunningLabel = getContext().getString(R.string.battery_stats_wake_lock_label);
         mPhoneSignalLabel = getContext().getString(R.string.battery_stats_phone_signal_label);
 
-        mMaxPercentLabelString = getContext().getResources().getString(
-                R.string.percentage, 100);
-        mMinPercentLabelString = getContext().getResources().getString(
-                R.string.percentage, 0);
+        mMaxPercentLabelString = Utils.formatPercentage(100);
+        mMinPercentLabelString = Utils.formatPercentage(0);
 
         mBatteryLevel = com.android.settings.Utils.getBatteryLevel(mBatteryBroadcast);
         long remainingTimeUs = 0;
@@ -506,8 +505,7 @@ public class BatteryHistoryChart extends View {
                 mChargeLabelString = getContext().getResources().getString(
                         R.string.power_discharging_duration, mBatteryLevel, timeString);
             } else {
-                mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_discharging, mBatteryLevel);
+                mChargeLabelString = Utils.formatPercentage(mBatteryLevel);
             }
         } else {
             final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);

@@ -53,6 +53,7 @@ import com.android.internal.util.FastPrintWriter;
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.WirelessSettings;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -387,7 +388,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         mTitleView.setText(mTitle);
 
         final TextView text1 = (TextView)mRootView.findViewById(android.R.id.text1);
-        text1.setText(getString(R.string.percentage, percentage));
+        text1.setText(Utils.formatPercentage(percentage));
 
         mTwoButtonsPanel = (ViewGroup)mRootView.findViewById(R.id.two_buttons_panel);
         mForceStopButton = (Button)mRootView.findViewById(R.id.left_button);
@@ -507,7 +508,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                         break;
                     case R.string.usage_type_no_coverage:
                         final int percentage = (int) Math.floor(mValues[i]);
-                        value = getActivity().getString(R.string.percentage, percentage);
+                        value = Utils.formatPercentage(percentage);
                         break;
                     case R.string.usage_type_total_battery_capacity:
                     case R.string.usage_type_computed_power:

@@ -61,6 +61,8 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -76,6 +78,7 @@ import com.android.settings.drawable.CircleFramedDrawable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -122,6 +125,10 @@ public final class Utils {
     private static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
 
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+
+    private static final int SECONDS_PER_MINUTE = 60;
+    private static final int SECONDS_PER_HOUR = 60 * 60;
+    private static final int SECONDS_PER_DAY = 24 * 60 * 60;
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -314,12 +321,28 @@ public final class Utils {
         }
     }
 
+    /** Formats the ratio of amount/total as a percentage. */
+    public static String formatPercentage(long amount, long total) {
+        return formatPercentage(((double) amount) / total);
+    }
+
+    /** Formats an integer from 0..100 as a percentage. */
+    public static String formatPercentage(int percentage) {
+        return formatPercentage(((double) percentage) / 100.0);
+    }
+
+    /** Formats a double from 0.0..1.0 as a percentage. */
+    private static String formatPercentage(double percentage) {
+      BidiFormatter bf = BidiFormatter.getInstance();
+      return bf.unicodeWrap(NumberFormat.getPercentInstance().format(percentage));
+    }
+
     public static boolean isBatteryPresent(Intent batteryChangedIntent) {
         return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
     }
 
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
-        return String.valueOf(getBatteryLevel(batteryChangedIntent)) + "%";
+        return formatPercentage(getBatteryLevel(batteryChangedIntent));
     }
 
     public static int getBatteryLevel(Intent batteryChangedIntent) {
@@ -873,4 +896,58 @@ public final class Utils {
         return null;
     }
 
+    /**
+     * Returns elapsed time for the given millis, in the following format:
+     * 2d 5h 40m 29s
+     * @param context the application context
+     * @param millis the elapsed time in milli seconds
+     * @param withSeconds include seconds?
+     * @return the formatted elapsed time
+     */
+    public static String formatElapsedTime(Context context, double millis, boolean withSeconds) {
+        StringBuilder sb = new StringBuilder();
+        int seconds = (int) Math.floor(millis / 1000);
+        if (!withSeconds) {
+            // Round up.
+            seconds += 30;
+        }
+
+        int days = 0, hours = 0, minutes = 0;
+        if (seconds >= SECONDS_PER_DAY) {
+            days = seconds / SECONDS_PER_DAY;
+            seconds -= days * SECONDS_PER_DAY;
+        }
+        if (seconds >= SECONDS_PER_HOUR) {
+            hours = seconds / SECONDS_PER_HOUR;
+            seconds -= hours * SECONDS_PER_HOUR;
+        }
+        if (seconds >= SECONDS_PER_MINUTE) {
+            minutes = seconds / SECONDS_PER_MINUTE;
+            seconds -= minutes * SECONDS_PER_MINUTE;
+        }
+        if (withSeconds) {
+            if (days > 0) {
+                sb.append(context.getString(R.string.battery_history_days,
+                        days, hours, minutes, seconds));
+            } else if (hours > 0) {
+                sb.append(context.getString(R.string.battery_history_hours,
+                        hours, minutes, seconds));
+            } else if (minutes > 0) {
+                sb.append(context.getString(R.string.battery_history_minutes, minutes, seconds));
+            } else {
+                sb.append(context.getString(R.string.battery_history_seconds, seconds));
+            }
+        } else {
+            if (days > 0) {
+                sb.append(context.getString(R.string.battery_history_days_no_seconds,
+                        days, hours, minutes));
+            } else if (hours > 0) {
+                sb.append(context.getString(R.string.battery_history_hours_no_seconds,
+                        hours, minutes));
+            } else {
+                sb.append(context.getString(R.string.battery_history_minutes_no_seconds, minutes));
+            }
+        }
+        return sb.toString();
+    }
 }
