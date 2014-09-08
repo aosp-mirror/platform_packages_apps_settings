@@ -298,8 +298,8 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
             Intent intent = new Intent(Settings.ACTION_PRINT_SETTINGS);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             getActivity().startActivityAsUser(intent, selectedUser);
-            getActivity().finish();
         }
     }
 
