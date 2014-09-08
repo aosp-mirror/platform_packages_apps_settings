@@ -49,7 +49,7 @@
              <LinearLayout
                        style="@style/wifi_item" >
                  <TextView
-                         style="@style/wifi_item_content"
+                         style="@style/wifi_item_label"
                          android:text="@string/wifi_security" />
 
                  <Spinner android:id="@+id/security"
@@ -148,8 +148,6 @@
                        style="@style/wifi_item" >
                 <TextView
                         style="@style/wifi_item_label"
-                        android:textAppearance="@android:style/TextAppearance.Material.Body2"
-                        android:textColor="?android:attr/colorAccent"
                         android:text="@string/wifi_password" />
 
                 <EditText android:id="@+id/password"
