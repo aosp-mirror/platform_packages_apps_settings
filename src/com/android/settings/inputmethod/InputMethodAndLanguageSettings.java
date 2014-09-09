@@ -55,6 +55,7 @@ import android.view.inputmethod.InputMethodSubtype;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
 
+import com.android.internal.app.LocalePicker;
 import com.android.settings.R;
 import com.android.settings.Settings.KeyboardLayoutPickerActivity;
 import com.android.settings.SettingsActivity;
@@ -74,6 +75,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeSet;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
@@ -252,7 +254,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
 
         if (!mShowsOnlyFullImeAndKeyboardList) {
             if (mLanguagePref != null) {
-                String localeName = getLocaleName(getResources());
+                String localeName = getLocaleName(getActivity());
                 mLanguagePref.setSummary(localeName);
             }
 
@@ -326,42 +328,19 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
-    private static String getLocaleName(Resources resources) {
-        Configuration conf = resources.getConfiguration();
-        String language = conf.locale.getLanguage();
-        String localeName;
-        // TODO: This is not an accurate way to display the locale, as it is
-        // just working around the fact that we support limited dialects
-        // and want to pretend that the language is valid for all locales.
-        // We need a way to support languages that aren't tied to a particular
-        // locale instead of hiding the locale qualifier.
-        if (hasOnlyOneLanguageInstance(language,
-                Resources.getSystem().getAssets().getLocales())) {
-            localeName = conf.locale.getDisplayLanguage(conf.locale);
-        } else {
-            localeName = conf.locale.getDisplayName(conf.locale);
-        }
-
-        if (localeName.length() > 1) {
-            localeName = Character.toUpperCase(localeName.charAt(0))
-                    + localeName.substring(1);
-        }
-
-        return localeName;
-    }
-
-    private static boolean hasOnlyOneLanguageInstance(String languageCode, String[] locales) {
-        int count = 0;
-        for (String localeCode : locales) {
-            if (localeCode.length() > 2
-                    && localeCode.startsWith(languageCode)) {
-                count++;
-                if (count > 1) {
-                    return false;
-                }
+    private static String getLocaleName(Context context) {
+        // We want to show the same string that the LocalePicker used.
+        // TODO: should this method be in LocalePicker instead?
+        Locale currentLocale = context.getResources().getConfiguration().locale;
+        List<LocalePicker.LocaleInfo> locales = LocalePicker.getAllAssetLocales(context, true);
+        for (LocalePicker.LocaleInfo locale : locales) {
+            if (locale.getLocale().equals(currentLocale)) {
+                return locale.getLabel();
             }
         }
-        return count == 1;
+        // This can't happen as long as the locale was one set by Settings.
+        // Fall back in case a developer is testing an unsupported locale.
+        return currentLocale.getDisplayName(currentLocale);
     }
 
     private void saveInputMethodSelectorVisibility(String value) {
@@ -664,12 +643,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
             List<SearchIndexableRaw> indexables = new ArrayList<>();
 
-            final Resources resources = context.getResources();
             final String screenTitle = context.getString(R.string.language_keyboard_settings_title);
 
             // Locale picker.
             if (context.getAssets().getLocales().length > 1) {
-                String localeName = getLocaleName(resources);
+                String localeName = getLocaleName(context);
                 SearchIndexableRaw indexable = new SearchIndexableRaw(context);
                 indexable.key = KEY_PHONE_LANGUAGE;
                 indexable.title = context.getString(R.string.phone_language);
