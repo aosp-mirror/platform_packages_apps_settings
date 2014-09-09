@@ -24,6 +24,8 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.IPackageManager;
@@ -316,9 +318,12 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
             }
 
             // Turning on the setting has a Warning.
-            getFragmentManager().beginTransaction()
-                    .add(new WarningDialog(pe), "warning")
-                    .commit();
+            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+            Fragment prev = getChildFragmentManager().findFragmentByTag("warning");
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            WarningDialogFragment.newInstance(pe.packageName).show(ft, "warning");
             return false;
         }
         return true;
@@ -328,6 +333,17 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
         mAppOpsManager.setMode(AppOpsManager.OP_GET_USAGE_STATS,
         pe.packageInfo.applicationInfo.uid, pe.packageName, newMode);
         pe.appOpMode = newMode;
+    }
+
+    void allowAccess(String packageName) {
+        final PackageEntry entry = mPackageEntryMap.get(packageName);
+        if (entry == null) {
+            Log.w(TAG, "Unable to give access to package " + packageName + ": it does not exist.");
+            return;
+        }
+
+        setNewMode(entry, AppOpsManager.MODE_ALLOWED);
+        entry.preference.setChecked(true);
     }
 
     private final PackageMonitor mPackageMonitor = new PackageMonitor() {
@@ -342,12 +358,16 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
         }
     };
 
-    private class WarningDialog extends DialogFragment
+    public static class WarningDialogFragment extends DialogFragment
             implements DialogInterface.OnClickListener {
-        private final PackageEntry mEntry;
+        private static final String ARG_PACKAGE_NAME = "package";
 
-        public WarningDialog(PackageEntry pe) {
-            mEntry = pe;
+        public static WarningDialogFragment newInstance(String packageName) {
+            WarningDialogFragment dialog = new WarningDialogFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PACKAGE_NAME, packageName);
+            dialog.setArguments(args);
+            return dialog;
         }
 
         @Override
@@ -364,8 +384,8 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
-                setNewMode(mEntry, AppOpsManager.MODE_ALLOWED);
-                mEntry.preference.setChecked(true);
+                ((UsageAccessSettings) getParentFragment()).allowAccess(
+                        getArguments().getString(ARG_PACKAGE_NAME));
             } else {
                 dialog.cancel();
             }
