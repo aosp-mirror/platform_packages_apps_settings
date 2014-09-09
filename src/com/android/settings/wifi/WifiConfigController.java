@@ -327,6 +327,13 @@ public class WifiConfigController implements TextWatcher,
         return (level > -1 && level < mLevels.length) ? mLevels[level] : null;
     }
 
+    void hideSubmitButton() {
+        Button submit = mConfigUi.getSubmitButton();
+        if (submit == null) return;
+
+        submit.setVisibility(View.GONE);
+    }
+
     /* show submit button if password, ip and proxy settings are valid */
     void enableSubmitIfAppropriate() {
         Button submit = mConfigUi.getSubmitButton();
