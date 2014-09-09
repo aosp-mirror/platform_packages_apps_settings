@@ -132,8 +132,8 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     public void setDevice(CachedBluetoothDevice cachedDevice) {
         mCachedDevice = cachedDevice;
 
-        mCachedDevice.registerCallback(this);
         if (isResumed()) {
+            mCachedDevice.registerCallback(this);
             addPreferencesForProfiles();
             refresh();
         }
