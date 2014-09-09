@@ -72,6 +72,8 @@ public class ConfirmLockPassword extends SettingsActivity {
 
     public static class ConfirmLockPasswordFragment extends Fragment implements OnClickListener,
             OnEditorActionListener, TextWatcher {
+        private static final String KEY_NUM_WRONG_CONFIRM_ATTEMPTS
+                = "confirm_lock_password_fragment.key_num_wrong_confirm_attempts";
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private TextView mPasswordEntry;
         private LockPatternUtils mLockPatternUtils;
@@ -93,6 +95,10 @@ public class ConfirmLockPassword extends SettingsActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             mLockPatternUtils = new LockPatternUtils(getActivity());
+            if (savedInstanceState != null) {
+                mNumWrongConfirmAttempts = savedInstanceState.getInt(
+                        KEY_NUM_WRONG_CONFIRM_ATTEMPTS, 0);
+            }
         }
 
         @Override
@@ -164,6 +170,12 @@ public class ConfirmLockPassword extends SettingsActivity {
             if (deadline != 0) {
                 handleAttemptLockout(deadline);
             }
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putInt(KEY_NUM_WRONG_CONFIRM_ATTEMPTS, mNumWrongConfirmAttempts);
         }
 
         private void handleNext() {
