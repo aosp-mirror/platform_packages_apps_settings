@@ -21,10 +21,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-
 import android.preference.SwitchPreference;
+
 import com.android.settings.R;
 
 /**
@@ -38,6 +39,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     private final PreferenceScreen mAndroidBeam;
     private final NfcAdapter mNfcAdapter;
     private final IntentFilter mIntentFilter;
+    private boolean mBeamDisallowed;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -56,6 +58,8 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         mSwitch = switchPreference;
         mAndroidBeam = androidBeam;
         mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
+        mBeamDisallowed = ((UserManager) mContext.getSystemService(Context.USER_SERVICE))
+                .hasUserRestriction(UserManager.DISALLOW_OUTGOING_BEAM);
 
         if (mNfcAdapter == null) {
             // NFC is not supported
@@ -63,6 +67,9 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
             mAndroidBeam.setEnabled(false);
             mIntentFilter = null;
             return;
+        }
+        if (mBeamDisallowed) {
+            mAndroidBeam.setEnabled(false);
         }
         mIntentFilter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
     }
@@ -110,8 +117,8 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         case NfcAdapter.STATE_ON:
             mSwitch.setChecked(true);
             mSwitch.setEnabled(true);
-            mAndroidBeam.setEnabled(true);
-            if (mNfcAdapter.isNdefPushEnabled()) {
+            mAndroidBeam.setEnabled(!mBeamDisallowed);
+            if (mNfcAdapter.isNdefPushEnabled() && !mBeamDisallowed) {
                 mAndroidBeam.setSummary(R.string.android_beam_on_summary);
             } else {
                 mAndroidBeam.setSummary(R.string.android_beam_off_summary);
