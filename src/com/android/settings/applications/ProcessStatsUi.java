@@ -43,7 +43,7 @@ import com.android.internal.app.ProcessStats;
 import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.fuelgauge.Utils;
+import com.android.settings.Utils;
 
 import java.io.IOException;
 import java.io.InputStream;
