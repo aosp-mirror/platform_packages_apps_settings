@@ -18,12 +18,15 @@ package com.android.settings.nfc;
 
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.widget.SwitchBar;
@@ -34,6 +37,7 @@ public class AndroidBeam extends Fragment
     private NfcAdapter mNfcAdapter;
     private SwitchBar mSwitchBar;
     private CharSequence mOldActivityTitle;
+    private boolean mBeamDisallowed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class AndroidBeam extends Fragment
         actionBar.setTitle(R.string.android_beam_settings_title);
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(getActivity());
+        mBeamDisallowed = ((UserManager) getActivity().getSystemService(Context.USER_SERVICE))
+                .hasUserRestriction(UserManager.DISALLOW_OUTGOING_BEAM);
     }
 
     @Override
@@ -62,8 +68,9 @@ public class AndroidBeam extends Fragment
         SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.setChecked(mNfcAdapter.isNdefPushEnabled());
+        mSwitchBar.setChecked(!mBeamDisallowed && mNfcAdapter.isNdefPushEnabled());
         mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.setEnabled(!mBeamDisallowed);
         mSwitchBar.show();
     }
 
