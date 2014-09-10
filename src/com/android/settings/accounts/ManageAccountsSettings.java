@@ -18,6 +18,7 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AuthenticatorDescription;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -25,7 +26,11 @@ import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -423,7 +428,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
      * intent, and hack the location settings to start it as a fragment.
      */
     private void updatePreferenceIntents(PreferenceScreen prefs) {
-        PackageManager pm = getActivity().getPackageManager();
+        final PackageManager pm = getActivity().getPackageManager();
         for (int i = 0; i < prefs.getPreferenceCount();) {
             Preference pref = prefs.getPreference(i);
             Intent intent = pref.getIntent();
@@ -461,8 +466,22 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                         pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                             @Override
                             public boolean onPreferenceClick(Preference preference) {
-                                getActivity().startActivityAsUser(preference.getIntent(),
-                                        mUserHandle);
+                                Intent prefIntent = preference.getIntent();
+                                /*
+                                 * Check the intent to see if it resolves to a exported=false
+                                 * activity that doesn't share a uid with the authenticator.
+                                 *
+                                 * Otherwise the intent is considered unsafe in that it will be
+                                 * exploiting the fact that settings has system privileges.
+                                 */
+                                if (isSafeIntent(pm, prefIntent)) {
+                                    getActivity().startActivityAsUser(prefIntent, mUserHandle);
+                                } else {
+                                    Log.e(TAG,
+                                            "Refusing to launch authenticator intent because"
+                                            + "it exploits Settings permissions: "
+                                            + prefIntent);
+                                }
                                 return true;
                             }
                         });
@@ -470,6 +489,32 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 }
             }
             i++;
+        }
+    }
+
+    /**
+     * Determines if the supplied Intent is safe. A safe intent is one that is
+     * will launch a exported=true activity or owned by the same uid as the
+     * authenticator supplying the intent.
+     */
+    private boolean isSafeIntent(PackageManager pm, Intent intent) {
+        AuthenticatorDescription authDesc =
+                mAuthenticatorHelper.getAccountTypeDescription(mAccountType);
+        ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
+        if (resolveInfo == null) {
+            return false;
+        }
+        ActivityInfo resolvedActivityInfo = resolveInfo.activityInfo;
+        ApplicationInfo resolvedAppInfo = resolvedActivityInfo.applicationInfo;
+        try {
+            ApplicationInfo authenticatorAppInf = pm.getApplicationInfo(authDesc.packageName, 0);
+            return resolvedActivityInfo.exported
+                    || resolvedAppInfo.uid == authenticatorAppInf.uid;
+        } catch (NameNotFoundException e) {
+            Log.e(TAG,
+                    "Intent considered unsafe due to exception.",
+                    e);
+            return false;
         }
     }
 
