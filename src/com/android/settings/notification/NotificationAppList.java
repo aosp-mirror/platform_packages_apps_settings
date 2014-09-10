@@ -26,9 +26,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
+import android.content.pm.LauncherActivityInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
@@ -95,12 +95,19 @@ public class NotificationAppList extends PinnedHeaderListFragment
     private Backend mBackend = new Backend();
     private UserSpinnerAdapter mProfileSpinnerAdapter;
 
+    private PackageManager mPM;
+    private UserManager mUM;
+    private LauncherApps mLauncherApps;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mAdapter = new NotificationAppAdapter(mContext);
+        mUM = UserManager.get(mContext);
+        mPM = mContext.getPackageManager();
+        mLauncherApps = (LauncherApps) mContext.getSystemService(Context.LAUNCHER_APPS_SERVICE);
         getActivity().setTitle(R.string.app_notifications_title);
     }
 
@@ -113,8 +120,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, mContext);
+        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(mUM, mContext);
         if (mProfileSpinnerAdapter != null) {
             Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
                     R.layout.spinner_view, null);
@@ -363,17 +369,18 @@ public class NotificationAppList extends PinnedHeaderListFragment
     };
 
 
-    public static AppRow loadAppRow(PackageManager pm, PackageInfo pkg, Backend backend) {
+    public static AppRow loadAppRow(PackageManager pm, ApplicationInfo app,
+            Backend backend) {
         final AppRow row = new AppRow();
-        row.pkg = pkg.packageName;
-        row.uid = pkg.applicationInfo.uid;
+        row.pkg = app.packageName;
+        row.uid = app.uid;
         try {
-            row.label = pkg.applicationInfo.loadLabel(pm);
+            row.label = app.loadLabel(pm);
         } catch (Throwable t) {
             Log.e(TAG, "Error loading application label for " + row.pkg, t);
             row.label = row.pkg;
         }
-        row.icon = pkg.applicationInfo.loadIcon(pm);
+        row.icon = app.loadIcon(pm);
         row.banned = backend.getNotificationsBanned(row.pkg, row.uid);
         row.priority = backend.getHighPriority(row.pkg, row.uid);
         row.sensitive = backend.getSensitive(row.pkg, row.uid);
@@ -429,40 +436,40 @@ public class NotificationAppList extends PinnedHeaderListFragment
                 mSortedRows.clear();
 
                 // collect all launchable apps, plus any packages that have notification settings
-                final PackageManager pm = mContext.getPackageManager();
-                final List<ResolveInfo> resolvedApps = pm.queryIntentActivities(
-                        new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER),
-                        PackageManager.MATCH_DEFAULT_ONLY
-                );
-                final List<ResolveInfo> resolvedConfigActivities
-                        = queryNotificationConfigActivities(pm);
-                resolvedApps.addAll(resolvedConfigActivities);
+                final List<ApplicationInfo> appInfos = new ArrayList<ApplicationInfo>();
 
-                for (ResolveInfo info : resolvedApps) {
-                    String pkgName = info.activityInfo.packageName;
-                    if (mRows.containsKey(pkgName)) {
+                final List<LauncherActivityInfo> lais
+                        = mLauncherApps.getActivityList(null /* all */,
+                            UserHandle.getCallingUserHandle());
+                if (DEBUG) Log.d(TAG, "  launchable activities:");
+                for (LauncherActivityInfo lai : lais) {
+                    if (DEBUG) Log.d(TAG, "    " + lai.getComponentName().toString());
+                    appInfos.add(lai.getApplicationInfo());
+                }
+
+                final List<ResolveInfo> resolvedConfigActivities
+                        = queryNotificationConfigActivities(mPM);
+                if (DEBUG) Log.d(TAG, "  config activities:");
+                for (ResolveInfo ri : resolvedConfigActivities) {
+                    if (DEBUG) Log.d(TAG, "    "
+                            + ri.activityInfo.packageName + "/" + ri.activityInfo.name);
+                    appInfos.add(ri.activityInfo.applicationInfo);
+                }
+
+                for (ApplicationInfo info : appInfos) {
+                    final String key = info.packageName;
+                    if (mRows.containsKey(key)) {
                         // we already have this app, thanks
                         continue;
                     }
 
-                    PackageInfo pkg = null;
-                    try {
-                        pkg = pm.getPackageInfo(pkgName,
-                                PackageManager.GET_SIGNATURES);
-                    } catch (NameNotFoundException e) {
-                        if (DEBUG) Log.d(TAG, "Skipping (NNFE): " + pkg.packageName);
-                        continue;
-                    }
-                    if (info.activityInfo.applicationInfo == null) {
-                        if (DEBUG) Log.d(TAG, "Skipping (no applicationInfo): " + pkg.packageName);
-                        continue;
-                    }
-                    final AppRow row = loadAppRow(pm, pkg, mBackend);
-                    mRows.put(pkgName, row);
+                    final AppRow row = loadAppRow(mPM, info, mBackend);
+                    mRows.put(key, row);
                 }
 
                 // add config activities to the list
-                applyConfigActivities(pm, mRows, resolvedConfigActivities);
+                applyConfigActivities(mPM, mRows, resolvedConfigActivities);
+
                 // sort rows
                 mSortedRows.addAll(mRows.values());
                 Collections.sort(mSortedRows, mRowComparator);
@@ -520,11 +527,12 @@ public class NotificationAppList extends PinnedHeaderListFragment
     };
 
     public static class Backend {
+        static INotificationManager sINM = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+
         public boolean setNotificationsBanned(String pkg, int uid, boolean banned) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             try {
-                nm.setNotificationsEnabledForPackage(pkg, uid, !banned);
+                sINM.setNotificationsEnabledForPackage(pkg, uid, !banned);
                 return true;
             } catch (Exception e) {
                Log.w(TAG, "Error calling NoMan", e);
@@ -533,10 +541,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
         }
 
         public boolean getNotificationsBanned(String pkg, int uid) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             try {
-                final boolean enabled = nm.areNotificationsEnabledForPackage(pkg, uid);
+                final boolean enabled = sINM.areNotificationsEnabledForPackage(pkg, uid);
                 return !enabled;
             } catch (Exception e) {
                 Log.w(TAG, "Error calling NoMan", e);
@@ -545,10 +551,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
         }
 
         public boolean getHighPriority(String pkg, int uid) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             try {
-                return nm.getPackagePriority(pkg, uid) == Notification.PRIORITY_MAX;
+                return sINM.getPackagePriority(pkg, uid) == Notification.PRIORITY_MAX;
             } catch (Exception e) {
                 Log.w(TAG, "Error calling NoMan", e);
                 return false;
@@ -556,10 +560,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
         }
 
         public boolean setHighPriority(String pkg, int uid, boolean highPriority) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             try {
-                nm.setPackagePriority(pkg, uid,
+                sINM.setPackagePriority(pkg, uid,
                         highPriority ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
                 return true;
             } catch (Exception e) {
@@ -569,10 +571,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
         }
 
         public boolean getSensitive(String pkg, int uid) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             try {
-                return nm.getPackageVisibilityOverride(pkg, uid) == Notification.VISIBILITY_PRIVATE;
+                return sINM.getPackageVisibilityOverride(pkg, uid) == Notification.VISIBILITY_PRIVATE;
             } catch (Exception e) {
                 Log.w(TAG, "Error calling NoMan", e);
                 return false;
@@ -580,10 +580,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
         }
 
         public boolean setSensitive(String pkg, int uid, boolean sensitive) {
-            INotificationManager nm = INotificationManager.Stub.asInterface(
-                    ServiceManager.getService(Context.NOTIFICATION_SERVICE));
             try {
-                nm.setPackageVisibilityOverride(pkg, uid,
+                sINM.setPackageVisibilityOverride(pkg, uid,
                         sensitive ? Notification.VISIBILITY_PRIVATE
                                 : NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE);
                 return true;
