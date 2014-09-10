@@ -19,19 +19,22 @@ package com.android.settings.notification;
 import android.animation.LayoutTransition;
 import android.app.INotificationManager;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.service.notification.Condition;
 import android.service.notification.IConditionListener;
+import android.service.notification.ZenModeConfig;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.android.settings.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ZenModeConditionSelection extends RadioGroup {
     private static final String TAG = "ZenModeConditionSelection";
@@ -40,18 +43,24 @@ public class ZenModeConditionSelection extends RadioGroup {
     private final INotificationManager mNoMan;
     private final H mHandler = new H();
     private final Context mContext;
+    private final List<Condition> mConditions;
+    private Condition mCondition;
 
     public ZenModeConditionSelection(Context context) {
         super(context);
         mContext = context;
+        mConditions = new ArrayList<Condition>();
         setLayoutTransition(new LayoutTransition());
         final int p = mContext.getResources().getDimensionPixelSize(R.dimen.content_margin_left);
         setPadding(p, p, p, 0);
         mNoMan = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         final RadioButton b = newRadioButton(null);
-        b.setText(R.string.zen_mode_default_option);
+        b.setText(mContext.getString(com.android.internal.R.string.zen_mode_forever));
         b.setChecked(true);
+        for (int i = ZenModeConfig.MINUTE_BUCKETS.length - 1; i >= 0; --i) {
+            handleCondition(ZenModeConfig.toTimeCondition(ZenModeConfig.MINUTE_BUCKETS[i]));
+        }
     }
 
     private RadioButton newRadioButton(Condition condition) {
@@ -61,7 +70,7 @@ public class ZenModeConditionSelection extends RadioGroup {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    handleSubscribe((Condition) button.getTag());
+                    setCondition((Condition) button.getTag());
                 }
             }
         });
@@ -91,24 +100,35 @@ public class ZenModeConditionSelection extends RadioGroup {
     }
 
     protected void handleConditions(Condition[] conditions) {
-        for (final Condition c : conditions) {
-            RadioButton v = (RadioButton) findViewWithTag(c.id);
-            if (c.state == Condition.STATE_TRUE || c.state == Condition.STATE_UNKNOWN) {
-                if (v == null) {
-                    v = newRadioButton(c);
-                }
-            }
-            if (v != null) {
-                v.setText(c.summary);
-                v.setEnabled(c.state == Condition.STATE_TRUE);
-            }
+        for (Condition c : conditions) {
+            handleCondition(c);
         }
     }
 
-    protected void handleSubscribe(Condition c) {
-        if (DEBUG) Log.d(TAG, "handleSubscribe " + c);
+    protected void handleCondition(Condition c) {
+        if (mConditions.contains(c)) return;
+        RadioButton v = (RadioButton) findViewWithTag(c.id);
+        if (c.state == Condition.STATE_TRUE || c.state == Condition.STATE_UNKNOWN) {
+            if (v == null) {
+                v = newRadioButton(c);
+            }
+        }
+        if (v != null) {
+            v.setText(c.summary);
+            v.setEnabled(c.state == Condition.STATE_TRUE);
+        }
+        mConditions.add(c);
+    }
+
+    protected void setCondition(Condition c) {
+        if (DEBUG) Log.d(TAG, "setCondition " + c);
+        mCondition = c;
+    }
+
+    public void confirmCondition() {
+        if (DEBUG) Log.d(TAG, "confirmCondition " + mCondition);
         try {
-            mNoMan.setZenModeCondition(c);
+            mNoMan.setZenModeCondition(mCondition);
         } catch (RemoteException e) {
             // noop
         }
@@ -127,7 +147,7 @@ public class ZenModeConditionSelection extends RadioGroup {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == CONDITIONS) handleConditions((Condition[])msg.obj);
+            if (msg.what == CONDITIONS) handleConditions((Condition[]) msg.obj);
         }
     }
 }
