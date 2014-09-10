@@ -112,8 +112,13 @@ final class CachedBluetoothDeviceManager {
         return device.getAddress();
     }
 
-    public synchronized void clearCachedDevices() {
-        mCachedDevices.clear();
+    public synchronized void clearNonBondedDevices() {
+        for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
+            CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
+            if (cachedDevice.getBondState() != BluetoothDevice.BOND_BONDED) {
+                mCachedDevices.remove(i);
+            }
+        }
     }
 
     public synchronized void onScanningStateChanged(boolean started) {
@@ -148,8 +153,8 @@ final class CachedBluetoothDeviceManager {
             for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
                 CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
                 if (cachedDevice.getBondState() != BluetoothDevice.BOND_BONDED) {
-                   cachedDevice.setVisible(false);
-                   mCachedDevices.remove(i);
+                    cachedDevice.setVisible(false);
+                    mCachedDevices.remove(i);
                 } else {
                     // For bonded devices, we need to clear the connection status so that
                     // when BT is enabled next time, device connection status shall be retrieved
