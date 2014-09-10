@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.notification.ZenModeDowntimeDaysSelection.DAYS;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -314,8 +316,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             if (days != null && days.length != 0) {
                 final StringBuilder sb = new StringBuilder();
                 final Calendar c = Calendar.getInstance();
-                for (int i = 0; i < ZenModeConfig.ALL_DAYS.length; i++) {
-                    final int day = ZenModeConfig.ALL_DAYS[i];
+                for (int i = 0; i < DAYS.length; i++) {
+                    final int day = DAYS[i];
                     for (int j = 0; j < days.length; j++) {
                         if (day == days[j]) {
                             c.set(Calendar.DAY_OF_WEEK, day);
