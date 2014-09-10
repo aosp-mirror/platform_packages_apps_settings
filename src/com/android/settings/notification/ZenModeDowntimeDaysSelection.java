@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ZenModeDowntimeDaysSelection extends ScrollView {
-    private static final int[] DAYS = {
+    public static final int[] DAYS = {
         Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY,
         Calendar.SATURDAY, Calendar.SUNDAY
     };
