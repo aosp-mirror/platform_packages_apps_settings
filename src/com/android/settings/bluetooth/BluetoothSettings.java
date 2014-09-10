@@ -44,6 +44,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -322,7 +323,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 mMyDevicePreference.setSummary(getResources().getString(
                             R.string.bluetooth_is_visible_message, mLocalAdapter.getName()));
                 mMyDevicePreference.setSelectable(false);
-                mMyDevicePreference.setEnabled(false);
                 preferenceScreen.addPreference(mMyDevicePreference);
 
                 getActivity().invalidateOptionsMenu();
@@ -401,11 +401,17 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     parent.removeView(mSettingsDialogView);
                 }
             }
+
             if (profileFrag == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_settings, null);
                 profileFrag = (DeviceProfilesSettings)activity.getFragmentManager()
                     .findFragmentById(R.id.bluetooth_fragment_settings);
+
+                // To enable scrolling we store the name field in a seperate header and add to
+                // the ListView of the profileFrag.
+                View header = inflater.inflate(R.layout.bluetooth_device_settings_header, null);
+                profileFrag.getListView().addHeaderView(header);
             }
 
             final View dialogLayout = mSettingsDialogView;
@@ -439,6 +445,10 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             AlertDialog dialog = settingsDialog.create();
             dialog.create();
             dialog.show();
+
+            // We must ensure that clicking on the EditText will bring up the keyboard.
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         }
     };
 
