@@ -23,6 +23,7 @@ import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,6 +63,7 @@ public class AddAccountSettings extends Activity {
      * application.
      */
     private static final String KEY_CALLER_IDENTITY = "pendingIntent";
+    private static final String SHOULD_NOT_RESOLVE = "SHOULDN'T RESOLVE!";
 
     private static final String TAG = "AccountSettings";
 
@@ -184,7 +186,21 @@ public class AddAccountSettings extends Activity {
 
     private void addAccount(String accountType) {
         Bundle addAccountOptions = new Bundle();
-        mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(), 0);
+        /*
+         * The identityIntent is for the purposes of establishing the identity
+         * of the caller and isn't intended for launching activities, services
+         * or broadcasts.
+         *
+         * Unfortunately for legacy reasons we still need to support this. But
+         * we can cripple the intent so that 3rd party authenticators can't
+         * fill in addressing information and launch arbitrary actions.
+         */
+        Intent identityIntent = new Intent();
+        identityIntent.setComponent(new ComponentName(SHOULD_NOT_RESOLVE, SHOULD_NOT_RESOLVE));
+        identityIntent.setAction(SHOULD_NOT_RESOLVE);
+        identityIntent.addCategory(SHOULD_NOT_RESOLVE);
+
+        mPendingIntent = PendingIntent.getBroadcast(this, 0, identityIntent, 0);
         addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
         addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS, Utils.hasMultipleUsers(this));
         AccountManager.get(this).addAccount(
