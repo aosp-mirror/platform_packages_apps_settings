@@ -423,12 +423,12 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
                     switch (printJob.getState()) {
                         case PrintJobInfo.STATE_QUEUED:
                         case PrintJobInfo.STATE_STARTED: {
-                            preference.setIcon(com.android.internal.R.drawable.ic_print);
+                            preference.setIcon(R.drawable.ic_print);
                         } break;
 
                         case PrintJobInfo.STATE_FAILED:
                         case PrintJobInfo.STATE_BLOCKED: {
-                            preference.setIcon(com.android.internal.R.drawable.ic_print_error);
+                            preference.setIcon(R.drawable.ic_print_error);
                         } break;
                     }
 
