@@ -143,7 +143,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             getPreferenceScreen().removePreference(mSensitive);
         }
 
-        mAppRow = NotificationAppList.loadAppRow(pm, info, mBackend);
+        mAppRow = NotificationAppList.loadAppRow(pm, info.applicationInfo, mBackend);
         if (intent.hasExtra(EXTRA_HAS_SETTINGS_INTENT)) {
             // use settings intent from extra
             if (intent.getBooleanExtra(EXTRA_HAS_SETTINGS_INTENT, false)) {
