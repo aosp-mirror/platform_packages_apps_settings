@@ -98,8 +98,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         initPreferences();
-        getActivity().registerReceiver(mReceiver, mFilter,
-                android.Manifest.permission.CHANGE_NETWORK_STATE, null);
+        getActivity().registerReceiver(mReceiver, mFilter);
         refreshWifiInfo();
     }
 
