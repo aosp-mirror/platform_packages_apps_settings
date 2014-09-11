@@ -35,6 +35,7 @@ import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.provider.ContactsContract.DisplayPhoto;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -48,11 +49,14 @@ import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EditUserPhotoController {
+    private static final String TAG = "EditUserPhotoController";
+
     private static final int POPUP_LIST_ITEM_ID_CHOOSE_PHOTO = 1;
     private static final int POPUP_LIST_ITEM_ID_TAKE_PHOTO = 2;
 
@@ -239,12 +243,22 @@ public class EditUserPhotoController {
             @Override
             protected Bitmap doInBackground(Void... params) {
                 if (cropped) {
+                    InputStream imageStream = null;
                     try {
-                        InputStream imageStream = mContext.getContentResolver()
+                        imageStream = mContext.getContentResolver()
                                 .openInputStream(data);
                         return BitmapFactory.decodeStream(imageStream);
                     } catch (FileNotFoundException fe) {
+                        Log.w(TAG, "Cannot find image file", fe);
                         return null;
+                    } finally {
+                        if (imageStream != null) {
+                            try {
+                                imageStream.close();
+                            } catch (IOException ioe) {
+                                Log.w(TAG, "Cannot close image stream", ioe);
+                            }
+                        }
                     }
                 } else {
                     // Scale and crop to a square aspect ratio
