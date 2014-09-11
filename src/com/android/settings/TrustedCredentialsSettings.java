@@ -278,7 +278,11 @@ public class TrustedCredentialsSettings extends Fragment {
         }
         @Override
         public int getChildrenCount(int groupPosition) {
-            return mData.mCertHoldersByUserId.valueAt(groupPosition).size();
+            List<CertHolder> certHolders = mData.mCertHoldersByUserId.valueAt(groupPosition);
+            if (certHolders != null) {
+                return certHolders.size();
+            }
+            return 0;
         }
         @Override
         public UserHandle getGroup(int groupPosition) {
@@ -366,7 +370,11 @@ public class TrustedCredentialsSettings extends Fragment {
             mData.new AliasLoader().execute();
         }
         @Override public int getCount() {
-            return mData.mCertHoldersByUserId.valueAt(0).size();
+            List<CertHolder> certHolders = mData.mCertHoldersByUserId.valueAt(0);
+            if (certHolders != null) {
+                return certHolders.size();
+            }
+            return 0;
         }
         @Override public CertHolder getItem(int position) {
             return mData.mCertHoldersByUserId.valueAt(0).get(position);
