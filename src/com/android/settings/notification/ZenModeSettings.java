@@ -202,7 +202,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         });
 
         mStarred = (DropDownPreference) important.findPreference(KEY_STARRED);
-        mStarred.setDropDownWidth(R.dimen.zen_mode_dropdown_width);
         mStarred.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
         mStarred.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
         mStarred.addItem(R.string.zen_mode_from_contacts, ZenModeConfig.SOURCE_CONTACT);
