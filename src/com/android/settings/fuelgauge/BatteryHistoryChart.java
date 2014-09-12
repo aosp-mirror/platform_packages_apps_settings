@@ -1011,7 +1011,7 @@ public class BatteryHistoryChart extends View {
             mTimeRemainPath.close();
         }
 
-        if (mStartWallTime > 0) {
+        if (mStartWallTime > 0 && mEndWallTime > mStartWallTime) {
             // Create the time labels at the bottom.
             boolean is24hr = is24Hour();
             Calendar calStart = Calendar.getInstance();
