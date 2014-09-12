@@ -392,7 +392,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
             final CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
             final Activity activity = getActivity();
-            DeviceProfilesSettings profileFrag = (DeviceProfilesSettings)activity.
+            DeviceProfilesSettings profileFragment = (DeviceProfilesSettings)activity.
                 getFragmentManager().findFragmentById(R.id.bluetooth_fragment_settings);
 
             if (mSettingsDialogView != null){
@@ -402,23 +402,26 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 }
             }
 
-            if (profileFrag == null) {
+            if (profileFragment == null) {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 mSettingsDialogView = inflater.inflate(R.layout.bluetooth_device_settings, null);
-                profileFrag = (DeviceProfilesSettings)activity.getFragmentManager()
+                profileFragment = (DeviceProfilesSettings)activity.getFragmentManager()
                     .findFragmentById(R.id.bluetooth_fragment_settings);
 
                 // To enable scrolling we store the name field in a seperate header and add to
-                // the ListView of the profileFrag.
+                // the ListView of the profileFragment.
                 View header = inflater.inflate(R.layout.bluetooth_device_settings_header, null);
-                profileFrag.getListView().addHeaderView(header);
+                profileFragment.getListView().addHeaderView(header);
             }
 
             final View dialogLayout = mSettingsDialogView;
             AlertDialog.Builder settingsDialog = new AlertDialog.Builder(activity);
-            profileFrag.setDevice(device);
+            profileFragment.setDevice(device);
             final EditText deviceName = (EditText)dialogLayout.findViewById(R.id.name);
             deviceName.setText(device.getName(), TextView.BufferType.EDITABLE);
+
+            final DeviceProfilesSettings dpsFragment = profileFragment;
+            final Context context = v.getContext();
             settingsDialog.setView(dialogLayout);
             settingsDialog.setTitle(R.string.bluetooth_preference_paired_devices);
             settingsDialog.setPositiveButton(R.string.okay,
@@ -429,7 +432,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     device.setName(deviceName.getText().toString());
                 }
             });
-            final Context context = v.getContext();
+
             settingsDialog.setNegativeButton(R.string.forget,
                     new DialogInterface.OnClickListener() {
                 @Override
@@ -439,6 +442,16 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                             BluetoothSettings.class.getName(), device.getName(),
                             context.getResources().getString(R.string.bluetooth_settings),
                             R.drawable.ic_settings_bluetooth2, false);
+                }
+            });
+
+            // We must ensure that the fragment gets destroyed to avoid duplicate fragments.
+            settingsDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                public void onDismiss(final DialogInterface dialog) {
+                    if (!activity.isDestroyed()) {
+                        activity.getFragmentManager().beginTransaction().remove(dpsFragment)
+                            .commitAllowingStateLoss();
+                    }
                 }
             });
 
