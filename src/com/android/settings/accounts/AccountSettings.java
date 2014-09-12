@@ -117,6 +117,7 @@ public class AccountSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
+        mProfileNotAvailablePreference = new Preference(getActivity());
         mAuthorities = getActivity().getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
         if (mAuthorities != null) {
             mAuthoritiesCount = mAuthorities.length;
