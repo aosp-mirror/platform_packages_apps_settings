@@ -404,10 +404,11 @@ public class ProcessStatsUi extends PreferenceFragment
         mAppListGroup.removeAll();
         mAppListGroup.setOrderingAsAdded(false);
 
+        final long elapsedTime = mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime;
+
         mMemStatusPref.setOrder(-2);
         mAppListGroup.addPreference(mMemStatusPref);
-        String durationString = Utils.formatElapsedTime(getActivity(),
-                mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime, false);
+        String durationString = Utils.formatElapsedTime(getActivity(), elapsedTime, false);
         CharSequence memString;
         CharSequence[] memStatesStr = getResources().getTextArray(R.array.ram_states);
         if (mMemState >= 0 && mMemState < memStatesStr.length) {
@@ -479,6 +480,15 @@ public class ProcessStatsUi extends PreferenceFragment
         float memBadness = ((float)timeGood)/mTotalTime;
         int badnessColor = badColors[1 + Math.round(memBadness*(badColors.length-2))];
         colors.setColors(badnessColor, badnessColor, badnessColor);
+
+        // We are now going to scale the mMemTimes to match the total elapsed time.
+        // These are in uptime, so they will often be smaller than the elapsed time,
+        // but if the user taps on the bar we want to show the times to them.  It is confusing
+        // to see them be smaller than what we told them the measured duration is, so just
+        // scaling them up with make things look reasonable with them none the wiser.
+        for (int i=0; i<ProcessStats.ADJ_MEM_FACTOR_COUNT; i++) {
+            mMemTimes[i] = (long)((mMemTimes[i]*(double)elapsedTime)/mTotalTime);
+        }
 
         ProcessStats.TotalMemoryUseCollection totalMem = new ProcessStats.TotalMemoryUseCollection(
                 ProcessStats.ALL_SCREEN_ADJ, memStates);
@@ -728,15 +738,22 @@ public class ProcessStatsUi extends PreferenceFragment
 
         if (DEBUG) Log.d(TAG, "-------------------- BUILDING UI");
 
-        for (int i=0, N=(entries != null ? entries.size() : 0); i<N; i++) {
+        // Find where we should stop.  Because we have two properties we are looking at,
+        // we need to go from the back looking for the first place either holds.
+        int end = entries != null ? entries.size()-1 : -1;
+        while (end >= 0) {
+            ProcStatsEntry proc = entries.get(end);
+            final double percentOfWeight = (((double)proc.mWeight) / mMaxWeight) * 100;
+            final double percentOfTime = (((double)proc.mDuration) / memTotalTime) * 100;
+            if (percentOfWeight >= 1 || percentOfTime >= 25) {
+                break;
+            }
+            end--;
+        }
+        for (int i=0; i<=end; i++) {
             ProcStatsEntry proc = entries.get(i);
             final double percentOfWeight = (((double)proc.mWeight) / mMaxWeight) * 100;
             final double percentOfTime = (((double)proc.mDuration) / memTotalTime) * 100;
-            if (percentOfWeight < 1 && percentOfTime < 33) {
-                if (DEBUG) Log.d(TAG, "Skipping " + proc.mName + " weight=" + percentOfWeight
-                        + " time=" + percentOfTime);
-                continue;
-            }
             ProcessStatsPreference pref = new ProcessStatsPreference(getActivity());
             pref.init(null, proc);
             proc.evaluateTargetPackage(pm, mStats, totals, sEntryCompare, mUseUss,
