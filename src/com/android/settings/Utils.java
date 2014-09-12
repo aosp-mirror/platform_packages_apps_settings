@@ -70,6 +70,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import com.android.internal.util.ImageUtils;
+import com.android.internal.util.UserIcons;
 import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
@@ -847,10 +849,13 @@ public final class Utils {
      * Returns a circular icon for a user.
      */
     public static Drawable getUserIcon(Context context, UserManager um, UserInfo user) {
-        if (user.iconPath == null) return null;
-        Bitmap icon = um.getUserIcon(user.id);
-        if (icon == null) return null;
-        return CircleFramedDrawable.getInstance(context, icon);
+        if (user.iconPath != null) {
+            Bitmap icon = um.getUserIcon(user.id);
+            if (icon != null) {
+                return CircleFramedDrawable.getInstance(context, icon);
+            }
+        }
+        return UserIcons.getDefaultUserIcon(user.id, /* light= */ false);
     }
 
     /**
