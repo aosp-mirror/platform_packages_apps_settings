@@ -232,7 +232,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
                 status == BluetoothProfile.STATE_CONNECTED;
 
         if (isConnected) {
-            askDisconnect(getActivity(), profile);
+            askDisconnect(mManager.getForegroundActivity(), profile);
         } else {
             if (profile.isPreferred(device)) {
                 // profile is preferred but not connected: disable auto-connect
