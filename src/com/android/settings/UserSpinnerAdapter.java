@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.android.internal.util.UserIcons;
 import com.android.settings.drawable.CircleFramedDrawable;
 import com.android.settings.R;
 
@@ -57,7 +58,11 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
             } else {
                 name = userInfo.name;
                 Bitmap bitmap = um.getUserIcon(userHandle.getIdentifier());
-                icon = (bitmap == null) ? null : CircleFramedDrawable.getInstance(context, bitmap);
+                if (bitmap != null) {
+                    icon = CircleFramedDrawable.getInstance(context, bitmap);
+                } else {
+                    icon = UserIcons.getDefaultUserIcon(userInfo.id, /* light= */ false);
+                }
             }
         }
     }
