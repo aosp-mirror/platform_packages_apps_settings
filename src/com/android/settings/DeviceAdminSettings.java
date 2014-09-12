@@ -126,7 +126,12 @@ public class DeviceAdminSettings extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        DeviceAdminInfo dpi = (DeviceAdminInfo) l.getAdapter().getItem(position);
+        Object o = l.getAdapter().getItem(position);
+        if (!(o instanceof DeviceAdminInfo)) {
+            // race conditions may cause this
+            return;
+        }
+        DeviceAdminInfo dpi = (DeviceAdminInfo) o;
         final Activity activity = getActivity();
         final int userId = getUserId(dpi);
         if (userId == UserHandle.myUserId() || !isProfileOwner(dpi)) {
