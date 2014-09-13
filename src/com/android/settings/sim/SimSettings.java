@@ -38,7 +38,7 @@ import android.preference.PreferenceScreen;
 import android.telephony.SubInfoRecord;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telecomm.PhoneAccount;
+import android.telecom.PhoneAccount;
 import android.telephony.CellInfo;
 import android.text.TextUtils;
 import android.util.Log;

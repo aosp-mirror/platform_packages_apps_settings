@@ -38,7 +38,7 @@ import android.os.UserHandle;
 import android.os.storage.IMountService;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
-import android.telecomm.TelecommManager;
+import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -892,7 +892,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
 
         int textId;
-        if (getTelecommManager().isInCall()) {
+        if (getTelecomManager().isInCall()) {
             // Show "return to call"
             textId = R.string.cryptkeeper_return_to_call;
         } else {
@@ -906,9 +906,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void takeEmergencyCallAction() {
-        TelecommManager telecommManager = getTelecommManager();
-        if (telecommManager.isInCall()) {
-            telecommManager.showInCallScreen(false /* showDialpad */);
+        TelecomManager telecomManager = getTelecomManager();
+        if (telecomManager.isInCall()) {
+            telecomManager.showInCallScreen(false /* showDialpad */);
         } else {
             launchEmergencyDialer();
         }
@@ -927,8 +927,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         return (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     }
 
-    private TelecommManager getTelecommManager() {
-        return (TelecommManager) getSystemService(Context.TELECOMM_SERVICE);
+    private TelecomManager getTelecomManager() {
+        return (TelecomManager) getSystemService(Context.TELECOM_SERVICE);
     }
 
     /**
