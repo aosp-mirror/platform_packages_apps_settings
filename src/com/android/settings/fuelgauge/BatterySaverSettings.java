@@ -16,14 +16,20 @@
 
 package com.android.settings.fuelgauge;
 
+import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
+
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.provider.Settings.Global;
 import android.util.Log;
 import android.widget.Switch;
@@ -43,6 +49,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
 
     private final Handler mHandler = new Handler();
     private final SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
+    private final Receiver mReceiver = new Receiver();
 
     private Context mContext;
     private boolean mCreated;
@@ -50,6 +57,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private boolean mValidListener;
+    private PowerManager mPowerManager;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -76,6 +84,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
             }
         };
         mTriggerPref.init(this);
+
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
     }
 
     @Override
@@ -88,6 +98,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mSettingsObserver.setListening(true);
+        mReceiver.setListening(true);
         if (!mValidListener) {
             mSwitchBar.addOnSwitchChangeListener(this);
             mValidListener = true;
@@ -99,6 +110,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
         mSettingsObserver.setListening(false);
+        mReceiver.setListening(false);
         if (mValidListener) {
             mSwitchBar.removeOnSwitchChangeListener(this);
             mValidListener = false;
@@ -107,27 +119,43 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        mHandler.removeCallbacks(mStartMode);
         if (isChecked) {
             mHandler.postDelayed(mStartMode, WAIT_FOR_SWITCH_ANIM);
         } else {
-            if (DEBUG) Log.d(TAG, "Stopping LOW_POWER_MODE from settings");
-            Global.putInt(getContentResolver(), Global.LOW_POWER_MODE, 0);
+            if (DEBUG) Log.d(TAG, "Stopping low power mode from settings");
+            trySetPowerSaveMode(false);
+        }
+    }
+
+    private void trySetPowerSaveMode(boolean mode) {
+        if (!mPowerManager.setPowerSaveMode(mode)) {
+            if (DEBUG) Log.d(TAG, "Setting mode failed, fallback to current value");
+            mHandler.post(mUpdateSwitch);
         }
     }
 
     private void updateSwitch() {
-        final boolean checked = Global.getInt(getContentResolver(), Global.LOW_POWER_MODE, 0) != 0;
-        if (checked == mSwitch.isChecked()) return;
+        final boolean mode = mPowerManager.isPowerSaveMode();
+        if (DEBUG) Log.d(TAG, "updateSwitch: isChecked=" + mSwitch.isChecked() + " mode=" + mode);
+        if (mode == mSwitch.isChecked()) return;
 
         // set listener to null so that that code below doesn't trigger onCheckedChanged()
         if (mValidListener) {
             mSwitchBar.removeOnSwitchChangeListener(this);
         }
-        mSwitch.setChecked(checked);
+        mSwitch.setChecked(mode);
         if (mValidListener) {
             mSwitchBar.addOnSwitchChangeListener(this);
         }
     }
+
+    private final Runnable mUpdateSwitch = new Runnable() {
+        @Override
+        public void run() {
+            updateSwitch();
+        }
+    };
 
     private final Runnable mStartMode = new Runnable() {
         @Override
@@ -135,15 +163,34 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
-                    if (DEBUG) Log.d(TAG, "Starting LOW_POWER_MODE from settings");
-                    Global.putInt(getContentResolver(), Global.LOW_POWER_MODE, 1);
+                    if (DEBUG) Log.d(TAG, "Starting low power mode from settings");
+                    trySetPowerSaveMode(true);
                 }
             });
         }
     };
 
+    private final class Receiver extends BroadcastReceiver {
+        private boolean mRegistered;
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (DEBUG) Log.d(TAG, "Received " + intent.getAction());
+            mHandler.post(mUpdateSwitch);
+        }
+
+        public void setListening(boolean listening) {
+            if (listening && !mRegistered) {
+                mContext.registerReceiver(this, new IntentFilter(ACTION_POWER_SAVE_MODE_CHANGING));
+                mRegistered = true;
+            } else if (!listening && mRegistered) {
+                mContext.unregisterReceiver(this);
+                mRegistered = false;
+            }
+        }
+    }
+
     private final class SettingsObserver extends ContentObserver {
-        private final Uri LOW_POWER_MODE_URI = Global.getUriFor(Global.LOW_POWER_MODE);
         private final Uri LOW_POWER_MODE_TRIGGER_LEVEL_URI
                 = Global.getUriFor(Global.LOW_POWER_MODE_TRIGGER_LEVEL);
 
@@ -153,9 +200,6 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (LOW_POWER_MODE_URI.equals(uri)) {
-                updateSwitch();
-            }
             if (LOW_POWER_MODE_TRIGGER_LEVEL_URI.equals(uri)) {
                 mTriggerPref.update(mContext);
             }
@@ -164,7 +208,6 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         public void setListening(boolean listening) {
             final ContentResolver cr = getContentResolver();
             if (listening) {
-                cr.registerContentObserver(LOW_POWER_MODE_URI, false, this);
                 cr.registerContentObserver(LOW_POWER_MODE_TRIGGER_LEVEL_URI, false, this);
             } else {
                 cr.unregisterContentObserver(this);
