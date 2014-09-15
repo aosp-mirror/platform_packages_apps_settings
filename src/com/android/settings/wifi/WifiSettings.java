@@ -735,6 +735,10 @@ public class WifiSettings extends RestrictedSettingsFragment
                     .inflate(R.layout.wifi_assistant_card, getListView(), false);
             Button setup = (Button) mWifiAssistantCard.findViewById(R.id.setup);
             Button noThanks = (Button) mWifiAssistantCard.findViewById(R.id.no_thanks_button);
+            TextView assistantText =
+                (TextView) mWifiAssistantCard.findViewById(R.id.wifi_assistant_text);
+            assistantText.setText(getResources().getString(
+                    R.string.wifi_assistant_title_message, mWifiAssistantApp.mScorerName));
 
             if (setup != null && noThanks != null) {
                 setup.setOnClickListener(new OnClickListener() {
