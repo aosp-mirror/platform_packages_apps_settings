@@ -152,8 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Eşleşme isteği"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile eşleştirmek için dokunun."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Alınan dosyaları göster"</string>
-    <!-- no translation found for device_picker (4978696506172252813) -->
-    <skip />
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth cihazı seçin"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth izin isteği"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Bir uygulama Bluetooth\'u açmak istiyor."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Bir uygulama, tabletinizi <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca diğer Bluetooth cihazlarına görünebilir yapmak istiyor."</string>
@@ -828,7 +827,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Parlaklık"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ekranın parlaklığını ayarla"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Uyarlanan parlaklık"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Mevcut ışık koşullarında parlaklık düzeyini optimize et"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Parlaklık düzeyini mevcut ışık koşullarına göre ayarla"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Uyku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekran kapanır"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> işlem yapılmadığında"</string>
@@ -1137,10 +1136,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Telif Hakkı"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisans"</string>
     <string name="terms_title" msgid="7697580845616764642">"Şartlar ve koşullar"</string>
-    <!-- no translation found for wallpaper_attributions (3645880512943433928) -->
-    <skip />
-    <!-- no translation found for wallpaper_attributions_values (2996183537914690469) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Duvar kağıtları"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Uydu görüntüleri sağlayıcıları:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Açık kaynak lisansları"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Lisanslar yüklenirken bir sorun oluştu."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Yükleniyor…"</string>
@@ -1605,7 +1602,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> kaldı"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Şarj olmasına <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> var"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"%%<xliff:g id="LEVEL">%1$d</xliff:g>"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"%%<xliff:g id="LEVEL">%1$d</xliff:g> - yaklaşık <xliff:g id="TIME">%2$s</xliff:g> kaldı"</string>
     <string name="power_charging" msgid="712751285832976915">"%%<xliff:g id="LEVEL">%1$d</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"%%<xliff:g id="LEVEL">%1$d</xliff:g> - Tamamen şarj olmasına <xliff:g id="TIME">%2$s</xliff:g> kaldı"</string>
@@ -1700,7 +1696,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Pil tasarrufu"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Otomatik olarak aç"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hiçbir zaman"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"%1$d%% pil gücü"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"%%%1$d pil gücü"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"İşlem İstatistikleri"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Meraklısı için, çalışan işlemlerle ilgili istatistikler"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Bellek kullanımı"</string>
@@ -2166,7 +2162,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Buraya mevcut tam yedekleme şifrenizi yeniden yazın"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Yedekleme şifresi belirle"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"İptal"</string>
-    <string name="percentage" msgid="5866131581207788624">"%%<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Ek sistem güncellemeleri"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled (Devre dışı)"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive (Serbest)"</string>
@@ -2302,6 +2297,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Son"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Fotoğraf çek"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Galeri\'den fotoğraf seçin"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Fotoğraf seçin"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM kartlar"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM kartlar"</string>

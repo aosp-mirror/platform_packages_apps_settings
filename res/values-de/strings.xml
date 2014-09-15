@@ -152,8 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing-Anfrage"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Für Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> berühren"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Empfangene Dateien anzeigen"</string>
-    <!-- no translation found for device_picker (4978696506172252813) -->
-    <skip />
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth-Gerät auswählen"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-Berechtigungsanfrage"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Eine App versucht, Bluetooth zu aktivieren."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Eine App versucht, Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
@@ -1138,10 +1137,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Urheberrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Lizenz"</string>
     <string name="terms_title" msgid="7697580845616764642">"Nutzungsbedingungen"</string>
-    <!-- no translation found for wallpaper_attributions (3645880512943433928) -->
-    <skip />
-    <!-- no translation found for wallpaper_attributions_values (2996183537914690469) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Hintergründe"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satellitenbilder bereitgestellt von:\n© 2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open-Source-Lizenzen"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Beim Laden der Lizenzen ist ein Problem aufgetreten."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Wird geladen..."</string>
@@ -1606,7 +1603,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Noch <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Verbleibende Ladezeit: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – noch etwa <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -2169,7 +2165,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Neues Passwort für vollständige Sicherungen erneut eingeben"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Passwort festlegen"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Abbrechen"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Zusätzliche Systemupdates"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Deaktiviert"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Moderat"</string>
@@ -2305,6 +2300,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Fertig"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Foto aufnehmen"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Foto aus Galerie auswählen"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Foto auswählen"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-Karten"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-Karten"</string>
@@ -2380,13 +2376,13 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Es können keine Daten in das NFC-Tag geschrieben werden. Sollte das Problem weiterhin bestehen, versuchen Sie es mit einem anderen Tag."</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"In das NFC-Tag kann nicht geschrieben werden. Bitte verwenden Sie ein anderes Tag."</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardton"</string>
-    <string name="notification_settings" msgid="8791730980212496561">"Ton &amp; Benachr."</string>
+    <string name="notification_settings" msgid="8791730980212496561">"Ton &amp; Benachrichtigungen"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Medienlautstärke"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Weckerlautstärke"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Klingeltonlautstärke"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Benachrichtigungslautstärke"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"Unterbrechungen"</string>
-    <string name="zen_mode_option_title" msgid="5061978632306007914">"Wenn Anrufe und Benachrichtigungen eingehen"</string>
+    <string name="zen_mode_option_title" msgid="5061978632306007914">"Bei eingehenden Anrufen und Benachrichtigungen"</string>
     <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"Wenn Benachrichtigungen eingehen"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Immer unterbrechen"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Nur wichtige Unterbrechungen zulassen"</string>
