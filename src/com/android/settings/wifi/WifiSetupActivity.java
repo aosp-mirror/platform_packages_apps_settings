@@ -87,9 +87,10 @@ public class WifiSetupActivity extends WifiPickerActivity
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
-                    WifiManager.EXTRA_NETWORK_INFO);
-            refreshConnectionState(info.isConnected());
+            // Refresh the connection state with the latest connection info. Use the connection info
+            // from ConnectivityManager instead of the one attached in the intent to make sure
+            // we have the most up-to-date connection state. b/17511772
+            refreshConnectionState();
         }
     };
 
