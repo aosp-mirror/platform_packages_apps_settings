@@ -565,10 +565,17 @@ public class BatteryHistoryChart extends View {
                 }
                 if (rec.cmd == HistoryItem.CMD_CURRENT_TIME
                         || rec.cmd == HistoryItem.CMD_RESET) {
+                    // If there is a ridiculously large jump in time, then we won't be
+                    // able to create a good chart with that data, so just ignore the
+                    // times we got before and pretend like our data extends back from
+                    // the time we have now.
+                    if (rec.currentTime > (lastWallTime+(365*24*60*60*1000))) {
+                        mStartWallTime = 0;
+                    }
                     lastWallTime = rec.currentTime;
                     lastRealtime = rec.time;
                     if (mStartWallTime == 0) {
-                        mStartWallTime = lastWallTime;
+                        mStartWallTime = lastWallTime - (lastRealtime-mHistStart);
                     }
                 }
                 if (rec.isDeltaData()) {
@@ -774,7 +781,7 @@ public class BatteryHistoryChart extends View {
         final long walltimeStart = mStartWallTime;
         final long walltimeChange = mEndWallTime > walltimeStart
                 ? (mEndWallTime-walltimeStart) : 1;
-        long curWalltime = 0;
+        long curWalltime = mStartWallTime;
         long lastRealtime = 0;
 
         final int batLow = mBatLow;
@@ -791,17 +798,12 @@ public class BatteryHistoryChart extends View {
         boolean lastWifiRunning = false, lastWifiSupplRunning = false, lastCpuRunning = false;
         int lastWifiSupplState = BatteryStats.WIFI_SUPPL_STATE_INVALID;
         final int N = mNumHist;
-        if (mStats.startIteratingHistoryLocked()) {
+        if (mEndDataWallTime > mStartWallTime && mStats.startIteratingHistoryLocked()) {
             final HistoryItem rec = new HistoryItem();
             while (mStats.getNextHistoryLocked(rec) && i < N) {
-                if (rec.cmd == HistoryItem.CMD_CURRENT_TIME || rec.cmd == HistoryItem.CMD_RESET) {
-                    curWalltime = rec.currentTime;
-                    lastRealtime = rec.time;
-                } else if (curWalltime != 0) {
+                if (rec.isDeltaData()) {
                     curWalltime += rec.time-lastRealtime;
                     lastRealtime = rec.time;
-                }
-                if (curWalltime != 0 && rec.isDeltaData()) {
                     x = mLevelLeft + (int)(((curWalltime-walltimeStart)*levelWidth)/walltimeChange);
                     if (x < 0) {
                         x = 0;
@@ -950,21 +952,36 @@ public class BatteryHistoryChart extends View {
                         }
                     }
 
-                } else if (rec.cmd != HistoryItem.CMD_OVERFLOW
-                        && rec.cmd != HistoryItem.CMD_CURRENT_TIME) {
-                    if (curLevelPath != null) {
-                        finishPaths(x+1, h, levelh, startX, lastY, curLevelPath, lastX,
-                                lastCharging, lastScreenOn, lastGpsOn, lastWifiRunning,
-                                lastCpuRunning, lastLinePath);
-                        lastX = lastY = -1;
-                        curLevelPath = null;
-                        lastLinePath = null;
-                        lastCharging = lastScreenOn = lastGpsOn = lastCpuRunning = false;
+                } else {
+                    long lastWalltime = curWalltime;
+                    if (rec.cmd == HistoryItem.CMD_CURRENT_TIME
+                            || rec.cmd == HistoryItem.CMD_RESET) {
+                        if (rec.currentTime >= mStartWallTime) {
+                            curWalltime = rec.currentTime;
+                        } else {
+                            curWalltime = mStartWallTime + (rec.time-mHistStart);
+                        }
+                        lastRealtime = rec.time;
+                    }
+
+                    if (rec.cmd != HistoryItem.CMD_OVERFLOW
+                            && (rec.cmd != HistoryItem.CMD_CURRENT_TIME
+                                    || Math.abs(lastWalltime-curWalltime) > (60*60*1000))) {
+                        if (curLevelPath != null) {
+                            finishPaths(x+1, h, levelh, startX, lastY, curLevelPath, lastX,
+                                    lastCharging, lastScreenOn, lastGpsOn, lastWifiRunning,
+                                    lastCpuRunning, lastLinePath);
+                            lastX = lastY = -1;
+                            curLevelPath = null;
+                            lastLinePath = null;
+                            lastCharging = lastScreenOn = lastGpsOn = lastCpuRunning = false;
+                        }
                     }
                 }
                 
                 i++;
             }
+            mStats.finishIteratingHistoryLocked();
         }
 
         if (lastY < 0 || lastX < 0) {
