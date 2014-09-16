@@ -569,7 +569,12 @@ public class BatteryHistoryChart extends View {
                     // able to create a good chart with that data, so just ignore the
                     // times we got before and pretend like our data extends back from
                     // the time we have now.
-                    if (rec.currentTime > (lastWallTime+(365*24*60*60*1000))) {
+                    // Also, if we are getting a time change and we are less than 5 minutes
+                    // since the start of the history real time, then also use this new
+                    // time to compute the base time, since whatever time we had before is
+                    // pretty much just noise.
+                    if (rec.currentTime > (lastWallTime+(180*24*60*60*1000L))
+                            || rec.time < (mHistStart+(5*60*1000L))) {
                         mStartWallTime = 0;
                     }
                     lastWallTime = rec.currentTime;
