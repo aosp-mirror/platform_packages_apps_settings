@@ -68,8 +68,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     private int mMessagePermissionChoice;
 
-    private int mPhonebookRejectedTimes;
-
     private int mMessageRejectedTimes;
 
     private final Collection<Callback> mCallbacks = new ArrayList<Callback>();
@@ -87,7 +85,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     private final static String PHONEBOOK_PREFS_NAME = "bluetooth_phonebook_permission";
     private final static String MESSAGE_PREFS_NAME = "bluetooth_message_permission";
-    private final static String PHONEBOOK_REJECT_TIMES = "bluetooth_phonebook_reject";
     private final static String MESSAGE_REJECT_TIMES = "bluetooth_message_reject";
 
     /**
@@ -372,7 +369,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         updateProfiles();
         fetchPhonebookPermissionChoice();
         fetchMessagePermissionChoice();
-        fetchPhonebookRejectTimes();
         fetchMessageRejectTimes();
 
         mVisible = false;
@@ -541,8 +537,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             mConnectAfterPairing = false;  // cancel auto-connect
             setPhonebookPermissionChoice(ACCESS_UNKNOWN);
             setMessagePermissionChoice(ACCESS_UNKNOWN);
-            mPhonebookRejectedTimes = 0;
-            savePhonebookRejectTimes();
             mMessageRejectedTimes = 0;
             saveMessageRejectTimes();
         }
@@ -661,15 +655,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     void setPhonebookPermissionChoice(int permissionChoice) {
-        // if user reject it, only save it when reject exceed limit.
-        if (permissionChoice == ACCESS_REJECTED) {
-            mPhonebookRejectedTimes++;
-            savePhonebookRejectTimes();
-            if (mPhonebookRejectedTimes < PERSIST_REJECTED_TIMES_LIMIT) {
-                return;
-            }
-        }
-
         mPhonebookPermissionChoice = permissionChoice;
 
         SharedPreferences.Editor editor =
@@ -687,24 +672,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                                                                      Context.MODE_PRIVATE);
         mPhonebookPermissionChoice = preference.getInt(mDevice.getAddress(),
                                                        ACCESS_UNKNOWN);
-    }
-
-    private void fetchPhonebookRejectTimes() {
-        SharedPreferences preference = mContext.getSharedPreferences(PHONEBOOK_REJECT_TIMES,
-                                                                     Context.MODE_PRIVATE);
-        mPhonebookRejectedTimes = preference.getInt(mDevice.getAddress(), 0);
-    }
-
-    private void savePhonebookRejectTimes() {
-        SharedPreferences.Editor editor =
-            mContext.getSharedPreferences(PHONEBOOK_REJECT_TIMES,
-                                          Context.MODE_PRIVATE).edit();
-        if (mPhonebookRejectedTimes == 0) {
-            editor.remove(mDevice.getAddress());
-        } else {
-            editor.putInt(mDevice.getAddress(), mPhonebookRejectedTimes);
-        }
-        editor.commit();
     }
 
     int getMessagePermissionChoice() {
