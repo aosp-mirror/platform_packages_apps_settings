@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"যুক্ত করুন"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"যুক্ত করুন"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"বাতিল করুন"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"যুক্ত করা থাকলে তা সংযুক্ত থাকাকালীন অবস্থায় আপনার পরিচিতিগুলি এবং কলের ইতিহাসকে অ্যাক্সেস করতে অনুমোদিত করে৷"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে যুক্ত করা যায়নি।"</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"ভুল PIN বা পাস কী দেওয়ার কারণে <xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সঙ্গে যুক্ত করা যায়নি।"</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"সেট আপ"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"একটি Wi‑Fi সহকারীর সাহায্যে স্বয়ংক্রিয়ভাবে উপলব্ধ নেটওয়ার্কে সংযুক্ত হোন।"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi সহকারী"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi সহকারী স্বয়ংক্রিয়ভাবে উপলব্ধ Wi‑Fi এর মাঝে সেরাটির সাথে আপনাকে সংযুক্ত করে"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi সহকারী আপনার জন্য উপলব্ধ নেটওয়ার্ক সনাক্ত করে এবং শ্রেষ্ঠ গতি ও নির্ভরযোগ্যতা পাওয়া যাবে এমন একটির সাথে আপনার ডিভাইস সংযুক্ত করে।"</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"আপনার ডেটা সুরক্ষা করতে সাহায্য করার জন্য, Google Wi‑Fi সহকারী Google সার্ভারের মাধ্যমে একটি নিরাপদ VPN সংযোগ প্রদান করতে পারে।"</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"না, থাক"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"হ্যাঁ, আমি নিশ্চিত"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"সংযোগের অনুরোধ"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi সহকারী এমন একটি VPN সংযোগ সেটআপ করতে চায় যা তাকে নেটওয়ার্ক ট্রাফিক নিরীক্ষণ করতে অনুমতি দিবে। আপনি যদি উৎসটি বিশ্বাস করেন তবেই কেবল এটি স্বীকার করুন।"</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"VPN সক্রিয় থাকার সময় আপনার স্ক্রীনের উপরের অংশে দেখা যায়।"</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"স্বীকার করুন"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"অস্বীকার করুন"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"নেটওয়ার্ক নিরীক্ষণ"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"আপনি একটা VPN সংযোগ সেটআপ করার জন্য \"Google Wi‑Fi সহকারীকে\" অনুমতি দিয়েছেন। এর অর্থ এই অ্যাপ্লিকেশানটি নেটওয়ার্ক ট্রাফিক নিরীক্ষণ করতে পারবে।"</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> উপলব্ধ Wi‑Fi এর মধ্যে সেরাটির সাথে স্বয়ংক্রিয়ভাবে আপনাকে সংযুক্ত করে"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"অ্যাপ্লিকেশান খুলুন"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"স্ক্রীণ কাস্ট করুন"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ওয়্যারলেস প্রদর্শন সক্ষম করুন"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Google এর অবস্থান পরিষেবা এবং অন্যান্য অ্যাপ্লিকেশানগুলিকে নেটওয়ার্কগুলির খোঁজে স্ক্যান করতে দিন, এমনকি Wi-Fi বন্ধ থাকা অবস্থায়ও"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"স্বয়ংক্রিয়ভাবে Wi-Fi পরিচালনা করুন"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>-কে আপনার Wi‑Fi সংযোগ পরিচালনা করতে দিন"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi সহকারী"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi সহকারী"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"শংসাপত্রগুলি ইনস্টল করুন"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"অবস্থান নির্ভুলতা উন্নতি ও অন্যান্য উদ্দ্যেশ্যের জন্য Google এবং অন্যান্য অ্যাপ্লিকেশান কাছাকাছি নেটওয়ার্কগুলির জন্য স্ক্যান করতে পারে  এমনকি Wi-Fi বন্ধ থাকা সত্ত্বেও। আপনি যদি এটি না চান, তাহলে উন্নতিতে, সবসময় স্ক্যান করা উপলব্ধ এ যান।"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"অ্যাপ্লিকেশানগুলি কাছাকাছি নেটওয়ার্কগুলির জন্য স্ক্যান করতে পারে  এমনকি Wi-Fi বন্ধ থাকা সত্ত্বেও। আপনি যদি এটি না চান, তাহলে উন্নতিতে, সবসময় স্ক্যান করা উপলব্ধ এ যান।"</string>
@@ -1351,8 +1339,8 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"সিস্টেমের পরিষেবা বন্ধ করবেন?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"আপনি যদি এই পরিষেবা বন্ধ করেন তাহলে আপনার ট্যাবলেটের পাওয়ার বন্ধ করে আবার চালু না করা পর্যন্ত কিছু বৈশিষ্ট্য সঠিকভাবে কাজ করা বন্ধ করে দিতে পারে।"</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"আপনি যদি এই পরিষেবা বন্ধ করেন তাহলে আপনার ফোনের পাওয়ার বন্ধ করে আবার চালু না করা পর্যন্ত কিছু বৈশিষ্ট্য সঠিকভাবে কাজ করা বন্ধ করে দিতে পারে।"</string>
-    <string name="language_settings" msgid="5292716747264442359">"ভাষা ও ইনপুট"</string>
-    <string name="language_keyboard_settings_title" msgid="243220021717425813">"ভাষা ও ইনপুট"</string>
+    <string name="language_settings" msgid="5292716747264442359">"ভাষা ও কিবোর্ড"</string>
+    <string name="language_keyboard_settings_title" msgid="243220021717425813">"ভাষা ও কিবোর্ড"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"ভাষা সেটিংস"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"কিবোর্ড ও ইনপুট পদ্ধতি"</string>
     <string name="phone_language" msgid="8870144109924299673">"ভাষা"</string>
