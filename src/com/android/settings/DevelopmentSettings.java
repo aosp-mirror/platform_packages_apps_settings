@@ -1107,9 +1107,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             }
             String[] values = getResources().getStringArray(R.array.select_logd_size_values);
             String[] titles = getResources().getStringArray(R.array.select_logd_size_titles);
+            if (SystemProperties.get("ro.config.low_ram").equals("true")) {
+                mLogdSize.setEntries(R.array.select_logd_size_lowram_titles);
+                titles = getResources().getStringArray(R.array.select_logd_size_lowram_titles);
+            }
             String[] summaries = getResources().getStringArray(R.array.select_logd_size_summaries);
             int index = 1; // punt to second entry if not found
-            for (int i = 0; i < values.length; i++) {
+            for (int i = 0; i < titles.length; i++) {
                 if (currentValue.equals(values[i])
                         || currentValue.equals(titles[i])) {
                     index = i;
@@ -1123,6 +1127,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void writeLogdSizeOption(Object newValue) {
+        String currentValue = SystemProperties.get(SELECT_LOGD_DEFAULT_SIZE_PROPERTY);
+        if (currentValue != null) {
+            DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = currentValue;
+        }
         final String size = (newValue != null) ?
                 newValue.toString() : DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES;
         SystemProperties.set(SELECT_LOGD_SIZE_PROPERTY, size);
