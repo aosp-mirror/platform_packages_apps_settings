@@ -152,8 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitação de pareamento"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toque para parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar arquivos recebidos"</string>
-    <!-- no translation found for device_picker (4978696506172252813) -->
-    <skip />
+    <string name="device_picker" msgid="4978696506172252813">"Escolher dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitação de permissão para Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Um aplicativo quer ativar o Bluetooth neste dispositivo."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Um aplicativo quer tornar seu tablet visível para outros dispositivos Bluetooth por <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
@@ -356,8 +355,8 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Criptografar tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Criptografar telefone"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Criptografado"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"Você pode criptografar suas contas, configurações, aplicativos transferidos e seus dados, mídia e outros arquivos. Após criptografar seu tablet, supondo que um bloqueio de tela tenha sido configurado (ou seja, um padrão, PIN numérico ou senha), será necessário desbloquear a tela para descriptografar o smartphone sempre que você ligá-lo. A única outra maneira de descriptografar é por meio de uma redefinição para configuração original, apagando todos os seus dados.\n\nA criptografia leva um hora ou mais. Você deve iniciar com a bateria carregada e manter seu tablet conectado até que a criptografia seja concluída. Se você interromper o processo de criptografia, perderá alguns ou todos os seus dados."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Você pode criptografar suas contas, configurações, aplicativos transferidos e seus dados, mídia e outros arquivos. Após criptografar seu smartphone, supondo que um bloqueio de tela tenha sido configurado (ou seja, um padrão, PIN numérico ou senha), será necessário desbloquear a tela para descriptografar o smartphone sempre que você ligá-lo. A única outra maneira de descriptografar é por meio de uma redefinição para configuração original, apagando todos os seus dados.\n\nA criptografia leva um hora ou mais. Você deve iniciar com a bateria carregada e manter seu smartphone conectado até que a criptografia seja concluída. Se você interromper o processo de criptografia, perderá alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"Você pode criptografar suas contas, configurações, apps transferidos e seus dados, mídia e outros arquivos. Após criptografar seu tablet, supondo que um bloqueio de tela tenha sido configurado (ou seja, um padrão, PIN numérico ou senha), será necessário desbloquear a tela para descriptografar o smartphone sempre que você ligá-lo. A única outra maneira de descriptografar é por meio de uma redefinição para configuração original, apagando todos os seus dados.\n\nA criptografia leva um hora ou mais. Você deve iniciar com a bateria carregada e manter seu tablet conectado até que a criptografia seja concluída. Se você interromper o processo de criptografia, perderá alguns ou todos os seus dados."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Você pode criptografar suas contas, configurações, apps transferidos e seus dados, mídia e outros arquivos. Após criptografar seu smartphone, supondo que um bloqueio de tela tenha sido configurado (ou seja, um padrão, PIN numérico ou senha), será necessário desbloquear a tela para descriptografar o smartphone sempre que você ligá-lo. A única outra maneira de descriptografar é por meio de uma redefinição para configuração original, apagando todos os seus dados.\n\nA criptografia leva um hora ou mais. Você deve iniciar com a bateria carregada e manter seu smartphone conectado até que a criptografia seja concluída. Se você interromper o processo de criptografia, perderá alguns ou todos os seus dados."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Criptografar tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Criptografar telefone"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Carregue sua bateria e tente novamente."</string>
@@ -484,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Parear"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"PAREAR"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancelar"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"O pareamento dá acesso a seus contatos e ao histórico de chamadas quando estiver conectado."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Não foi possível parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Não foi possível parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g> por causa de um PIN ou senha incorretos."</string>
@@ -561,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"CONFIGURAR"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Conectar automaticamente a redes disponíveis com o Assistente de Wi-Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Assistente de Wi-Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"O Assistente de Wi-Fi do Google conecta-se automaticamente à melhor rede Wi-Fi disponível"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"O Assistente de Wi-Fi do Google detecta as redes disponíveis para você e conecta o dispositivo à rede com a melhor velocidade e mais confiável."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"P/ proteger seus dados, o Assist. de Wi-Fi do Google faz uma con. VPN segura pelos serv. do Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Não, obrigado"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"SIM, VAMOS LÁ"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Pedido de conexão"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"O Assist. de Wi-Fi quer config. uma con. VPN p/ monit. o tráf. de rede. Aceite se confiar na origem."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"exibido na parte superior da tela quando a VPN estiver ativa."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACEITAR"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"NEGAR"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Monitoramento de rede"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"C/ a perm. do \"Assist. de Wi-Fi do Google\" p/ config. uma con. VPN, o app pode monit. tráf. da rede."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> conecta-se automaticamente à melhor rede Wi-Fi disponível"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ABRIR APLICATIVO"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Transmitir tela"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Ativar Display sem fio"</string>
@@ -617,11 +606,9 @@
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Use somente redes que têm uma boa conexão com a Internet"</string>
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Verificação sempre disponível"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Sempre permitir verificação"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permitir que o serviço de localização do Google e outros aplicativos verifiquem redes, mesmo que o Wi-Fi esteja desligado"</string>
+    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permitir que o serviço de localização do Google e outros apps verifiquem redes, mesmo que o Wi-Fi esteja desligado"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gerenciar o Wi-Fi automaticamente"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Permitir que <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> gerencie sua conexão Wi‑Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Assistente de Wi-Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Assistente de Wi-Fi do Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para aumentar a precisão da localização e para outras finalidades, o Google e outros aplicativos podem verificar redes próximas, mesmo que o Wi-Fi esteja desligado. Para impedir, vá para \"Avançado &gt; Verificação sempre disponível\"."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Os aplicativos podem verificar redes Wi-Fi próximas, mesmo que o Wi-Fi esteja desligado. Para impedir, vá para \"Avançado &gt; Verificação sempre disponível\"."</string>
@@ -1115,7 +1102,7 @@
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Usar Wi-Fi e redes celulares para determinar a localização"</string>
     <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Usar GPS para determinar a localização"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Localiz. por Wi-Fi e rede cel."</string>
-    <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que os aplicativos usem o serviço de localização do Google para determinar seu local mais rapidamente. Dados de localização anônimos serão coletados e enviados ao Google."</string>
+    <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que apps usem o serviço de localização do Google para determinar seu local mais rapidamente. Dados de localização anônimos serão coletados e enviados ao Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Localização determinada por Wi-Fi"</string>
     <string name="location_gps" msgid="8392461023569708478">"Satélites de GPS"</string>
     <string name="location_street_level" product="tablet" msgid="1669562198260860802">"Permitir que os aplicativos usem o GPS do tablet para determinar sua posição"</string>
@@ -1137,10 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Direitos autorais"</string>
     <string name="license_title" msgid="1990487604356037871">"Licença"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termos e Condições"</string>
-    <!-- no translation found for wallpaper_attributions (3645880512943433928) -->
-    <skip />
-    <!-- no translation found for wallpaper_attributions_values (2996183537914690469) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Planos de fundo"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Provedores de imagens de satélite:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenças código aberto"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Há um problema ao carregar as licenças."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Carregando..."</string>
@@ -1197,7 +1182,7 @@
     <string name="install_applications" msgid="4872012136210802181">"Fontes desconhecidas"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Permitir todas as origens"</string>
     <string name="install_unknown_applications_title" msgid="663831043139080992">"Permite instalar aplicativos de origens diferentes do Google Play"</string>
-    <string name="install_unknown_applications" msgid="176855644862942064">"Permitir a instalação de aplicativos de fontes desconhecidas"</string>
+    <string name="install_unknown_applications" msgid="176855644862942064">"Permitir a instalação de apps de fontes desconhecidas"</string>
     <string name="install_all_warning" product="tablet" msgid="3263360446508268880">"Seu tablet e seus dados pessoais são mais vulneráveis ​​a ataques de aplicativos de fontes desconhecidas. Você concorda que é o único responsável por qualquer dano a seu tablet ou perda de dados decorrentes do uso desses aplicativos."</string>
     <string name="install_all_warning" product="default" msgid="8113734576826384682">"Seu telefone e seus dados pessoais são mais vulneráveis ​​a ataques de aplicativos de fontes desconhecidas. Você concorda que é o único responsável por qualquer dano ao seu telefone ou perda de dados decorrentes do uso desses aplicativos."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Configurações avançadas"</string>
@@ -1605,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> restantes"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> até carregar"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - cerca de <xliff:g id="TIME">%2$s</xliff:g> restantes"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> até completar"</string>
@@ -2166,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Digite mais uma vez a nova senha de backup completo aqui"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Definir a senha de backup"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Cancelar"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Atualizações adicionais do sistema"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desativado"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissivo"</string>
@@ -2233,7 +2216,7 @@
     <string name="user_remove_user" msgid="6490483480937295389">"Remover usuário"</string>
     <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"Permitir chamadas telefônicas?"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"O histórico de chamadas será compartilhado com este usuário."</string>
-    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Permitir chamadas telefônicas e SMS?"</string>
+    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Permitir cham. telefônicas e SMS?"</string>
     <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"O histórico de chamadas e SMS será compartilhado com este usuário."</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Permitir aplicativos e conteúdo"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Aplicativos com restrições"</string>
@@ -2302,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Concluir"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Tirar foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Escolher foto da Galeria"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Selecionar foto"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Cartões SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Cartões SIM"</string>
@@ -2469,8 +2453,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Inserir PIN do administrador"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Ativado"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desativado"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"Fixar tela"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"Quando a configuração está ativa, você pode colocar o dispositivo em um estado que mantenha a tela atual em visualização.\n\nPara fixar uma tela:\n\n1. Ative esta configuração.\n\n2. Abra um app.\n\n3. Toque no botão \"Recentes\".\n\n4. Toque no ícone de alfinete."</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Fixação de tela"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"Quando esta configuração está ativa, você pode colocar o dispositivo em um estado que mantém a tela atual visível.\n\nPara fixar uma tela:\n\n1. Ative esta configuração.\n\n2. Abra um app.\n\n3. Toque no botão \"Recentes\".\n\n4. Toque no ícone de alfinete."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Perfil de trabalho"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Quando o dispositivo for girado"</string>
