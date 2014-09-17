@@ -26,11 +26,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
@@ -62,7 +59,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
             String action = intent.getAction();
             if (action.equals(BluetoothDevice.ACTION_CONNECTION_ACCESS_CANCEL)) {
                 int requestType = intent.getIntExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE,
-                                               BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS);
+                        BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS);
                 if (requestType != mRequestType) return;
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if (mDevice.equals(device)) dismissDialog();
@@ -186,40 +183,43 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
     private void onPositive() {
         if (DEBUG) Log.d(TAG, "onPositive");
-        savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_ALLOWED);
-        // TODO(edjee): Now that we always save the user's choice,
-        // we can get rid of BluetoothDevice#EXTRA_ALWAYS_ALLOWED.
-        sendIntentToReceiver(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY, true,
-                             BluetoothDevice.EXTRA_ALWAYS_ALLOWED, true);
+        sendReplyIntentToReceiver(true, true);
         finish();
     }
 
     private void onNegative() {
         if (DEBUG) Log.d(TAG, "onNegative");
-        savePermissionChoice(mRequestType, CachedBluetoothDevice.ACCESS_REJECTED);
-        sendIntentToReceiver(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY, false,
-                             null, false // dummy value, no effect since last param is null
-                             );
-        finish();
+
+        boolean always = true;
+        if (mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
+            LocalBluetoothManager bluetoothManager = LocalBluetoothManager.getInstance(this);
+            CachedBluetoothDeviceManager cachedDeviceManager =
+                    bluetoothManager.getCachedDeviceManager();
+            CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
+            if (cachedDevice == null) {
+                cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
+                                                             bluetoothManager.getProfileManager(),
+                                                             mDevice);
+            }
+            always = cachedDevice.checkAndIncreaseMessageRejectionCount();
+        }
+
+        sendReplyIntentToReceiver(false, always);
     }
 
-    private void sendIntentToReceiver(final String intentName, final boolean allowed,
-                                      final String extraName, final boolean extraValue) {
-        Intent intent = new Intent(intentName);
+    private void sendReplyIntentToReceiver(final boolean allowed, final boolean always) {
+        Intent intent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
 
         if (mReturnPackage != null && mReturnClass != null) {
             intent.setClassName(mReturnPackage, mReturnClass);
         }
-        if(DEBUG) Log.i(TAG, "sendIntentToReceiver() Request type: " + mRequestType +
+        if (DEBUG) Log.i(TAG, "sendReplyIntentToReceiver() Request type: " + mRequestType +
                 " mReturnPackage" + mReturnPackage + " mReturnClass" + mReturnClass);
 
         intent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
-                        allowed ? BluetoothDevice.CONNECTION_ACCESS_YES :
-                                  BluetoothDevice.CONNECTION_ACCESS_NO);
-
-        if (extraName != null) {
-            intent.putExtra(extraName, extraValue);
-        }
+                        allowed ? BluetoothDevice.CONNECTION_ACCESS_YES
+                                : BluetoothDevice.CONNECTION_ACCESS_NO);
+        intent.putExtra(BluetoothDevice.EXTRA_ALWAYS_ALLOWED, always);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
         sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
@@ -251,23 +251,4 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         return true;
     }
-
-    private void savePermissionChoice(int permissionType, int permissionChoice) {
-        LocalBluetoothManager bluetoothManager = LocalBluetoothManager.getInstance(this);
-        CachedBluetoothDeviceManager cachedDeviceManager =
-            bluetoothManager.getCachedDeviceManager();
-        CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
-        if (DEBUG) Log.d(TAG, "savePermissionChoice permissionType: " + permissionType);
-        if (cachedDevice == null ) {
-            cachedDevice = cachedDeviceManager.addDevice(bluetoothManager.getBluetoothAdapter(),
-                                                         bluetoothManager.getProfileManager(),
-                                                         mDevice);
-        }
-        if(permissionType == BluetoothDevice.REQUEST_TYPE_PHONEBOOK_ACCESS){
-            cachedDevice.setPhonebookPermissionChoice(permissionChoice);
-        }else if (permissionType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS){
-            cachedDevice.setMessagePermissionChoice(permissionChoice);
-        }
-    }
-
 }
