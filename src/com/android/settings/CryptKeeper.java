@@ -752,8 +752,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         mHandler.removeMessages(MESSAGE_NOTIFY);
         mHandler.sendEmptyMessageDelayed(MESSAGE_NOTIFY, 120 * 1000);
 
-        // Dismiss keyguard while this screen is showing.
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        // Dismiss secure & non-secure keyguards while this screen is showing.
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
     }
 
     /**
