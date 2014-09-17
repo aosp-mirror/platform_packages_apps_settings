@@ -152,8 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Požadavek na párování"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Klepnutím spárujete se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Zobrazit přijaté soubory"</string>
-    <!-- no translation found for device_picker (4978696506172252813) -->
-    <skip />
+    <string name="device_picker" msgid="4978696506172252813">"Zvolit zařízení Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Požadavek na povolení zařízení Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Aplikace chce zapnout Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Aplikace požaduje zviditelnění tabletu pro ostatní zařízení Bluetooth na <xliff:g id="TIMEOUT">%1$d</xliff:g> s."</string>
@@ -484,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Párovat"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"PÁROVAT"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Zrušit"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Párováním připojenému zařízení udělíte přístup ke svým kontaktům a historii volání."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Nelze párovat se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Nelze párovat se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Kód PIN nebo přístupový klíč je nesprávný."</string>
@@ -561,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"NASTAVIT"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Připojte se k dostupným sítím automaticky pomocí aplikace Google Wi-Fi Assistant."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Google Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Aplikace Google Wi‑Fi Assistant vás automaticky připojí k nejlepší dostupné síti Wi-Fi."</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Aplikace Google Wi‑Fi Assistant zjistí dostupné sítě a připojí vaše zařízení k nejrychlejší a nejspolehlivější síti."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Za účelem ochrany vašich dat může aplikace Google Wi‑Fi Assistant poskytovat bezpečné připojení VPN prostřednictvím serverů Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Ne, děkuji"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"ANO, AKTIVOVAT"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Žádost o připojení"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Google Wi‑Fi Assistant žádá o nastavení připojení VPN, pomocí kterého bude moci sledovat síťový provoz. Povolte, jen pokud zdroji důvěřujete."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">": když je síť VPN aktivní, zobrazuje se v horní části obrazovky."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"PŘIJMOUT"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"ODMÍTNOUT"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Monitorování sítě"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Aplikaci Google Wi-Fi Assistant jste udělili oprávnění k nastavení připojení VPN. To znamená, že aplikace smí sledovat síťový provoz."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> vás automaticky připojí k nejlepší dostupné síti Wi‑Fi"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"SPUSTIT APLIKACI"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Odesílání obrazovky"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Povolit bezdrátový displej"</string>
@@ -620,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Povolit službě určování polohy Google a ostatním aplikacím hledat sítě, i když je síť Wi-Fi vypnutá"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Automaticky spravovat připojení Wi‑Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Nechat nástroj <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> spravovat připojení Wi-Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Google Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalace certifikátů"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Za účelem zvýšení přesnosti a k dalším účelům mohou aplikace Google a další aplikace vyhledávat sítě Wi-Fi v okolí, i když je Wi-Fi vypnuta. Chcete-li toto zakázat, přejděte do nabídky Wi-Fi &gt; Rozšířené nastavení &gt; Hledání vždy zapnuto."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikace mohou vyhledávat sítě v okolí i v případě, že je Wi-Fi vypnuta. Chcete-li nastavení změnit, přejděte do nabídky Rozšířené nastavení &gt; Hledání vždy zapnuto."</string>
@@ -1137,10 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Autorská práva"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
     <string name="terms_title" msgid="7697580845616764642">"Smluvní podmínky"</string>
-    <!-- no translation found for wallpaper_attributions (3645880512943433928) -->
-    <skip />
-    <!-- no translation found for wallpaper_attributions_values (2996183537914690469) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Tapety"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Poskytovatelé satelitních snímků:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licence open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Při načítání licencí došlo k chybě."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Načítání..."</string>
@@ -1605,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Zbývá <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do nabití"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – zbývá přibližně <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabití"</string>
@@ -2166,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Sem znovu zadejte aktuální heslo pro úplné zálohy."</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Nastavit heslo pro zálohy"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Zrušit"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Další aktualizace systému"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Zakázáno"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Mírné"</string>
@@ -2302,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Dokončit"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Vyfotit"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Vybrat fotografii z Galerie"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Vybrat fotografii"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM karty"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM karty"</string>
@@ -2435,7 +2419,7 @@
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioritní"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Zobrazovat oznámení na začátku seznamu a nadále je zobrazovat, i když bude zařízení nastaveno pouze na prioritní vyrušení"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Důvěrné"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Když je zařízení uzamčeno, skrýt v oznámeních této aplikace veškerý citlivý obsah"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Když je zařízení uzamčeno, skrýt v oznámeních této aplikace veškerý citlivý obsah"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Zablokováno"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritní"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Důvěrné"</string>
