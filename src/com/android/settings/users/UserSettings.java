@@ -920,8 +920,11 @@ public class UserSettings extends SettingsPreferenceFragment
                 return;
             }
         }
-        // No guest user. Create one.
-        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
+        // No guest user. Create one, if there's no restriction.
+        // If it is not the primary user, then adding users from lockscreen must be enabled
+        if (mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)
+                || (!mIsOwner && Settings.Global.getInt(getContentResolver(),
+                        Settings.Global.ADD_USERS_WHEN_LOCKED, 0) != 1)) {
             Log.i(TAG, "Blocking guest creation because it is restricted");
             return;
         }
