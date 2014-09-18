@@ -84,7 +84,8 @@
             android:layout_marginStart="@dimen/bluetooth_dialog_padding"
             android:layout_marginEnd="@dimen/bluetooth_dialog_padding"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+            android:textColor="@*android:color/secondary_text_material_light"/>
 
         <TextView
             android:id="@+id/phonebook_sharing_message"
