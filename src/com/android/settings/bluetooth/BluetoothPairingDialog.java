@@ -235,6 +235,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY:
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN:
+                messagePairing.setVisibility(View.VISIBLE);
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION:
                 messageCaption = getString(R.string.bluetooth_enter_pin_msg);
                 pairingContent = mPairingKey;
@@ -242,6 +243,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
             case BluetoothDevice.PAIRING_VARIANT_CONSENT:
             case BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT:
+                messagePairing.setVisibility(View.VISIBLE);
                 messageCaption = getString(R.string.bluetooth_enter_pin_msg);
                 break;
 
@@ -259,7 +261,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
             pairingViewCaption.setVisibility(View.VISIBLE);
             pairingViewContent.setVisibility(View.VISIBLE);
             pairingViewContent.setText(pairingContent);
-            messagePairing.setVisibility(View.VISIBLE);
         }
 
         return view;
