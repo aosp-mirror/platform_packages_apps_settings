@@ -609,6 +609,13 @@ public final class Utils {
         }
     }
 
+    public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
+            int titleResId, CharSequence title, boolean isShortcut, UserHandle userHandle) {
+        Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResId,
+                title, isShortcut);
+        context.startActivityAsUser(intent, userHandle);
+    }
+
     /**
      * Build an Intent to launch a new activity showing the selected fragment.
      * The implementation constructs an Intent that re-launches the current activity with the
