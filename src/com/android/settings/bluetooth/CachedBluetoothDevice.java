@@ -387,15 +387,26 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         return mName;
     }
 
+    /**
+     * Populate name from BluetoothDevice.ACTION_FOUND intent
+     */
+    void setNewName(String name) {
+        if (mName == null) {
+            mName = name;
+            if (mName == null || TextUtils.isEmpty(mName)) {
+                mName = mDevice.getAddress();
+            }
+            dispatchAttributesChanged();
+        }
+    }
+
+    /**
+     * user changes the device name
+     */
     void setName(String name) {
         if (!mName.equals(name)) {
-            if (TextUtils.isEmpty(name)) {
-                // TODO: use friendly name for unknown device (bug 1181856)
-                mName = mDevice.getAddress();
-            } else {
-                mName = name;
-                mDevice.setAlias(name);
-            }
+            mName = name;
+            mDevice.setAlias(name);
             dispatchAttributesChanged();
         }
     }
