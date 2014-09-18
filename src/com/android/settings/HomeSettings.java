@@ -250,8 +250,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
     }
 
     private boolean versionNumberAtLeastL(int versionNumber) {
-        // TODO: remove "|| true" once the build code for L is fixed.
-        return versionNumber >= Build.VERSION_CODES.L || true;
+        return versionNumber >= Build.VERSION_CODES.L;
     }
 
     @Override
