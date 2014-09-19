@@ -122,7 +122,7 @@
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-tæki"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Heiti tækis"</string>
     <string name="bluetooth_device_details" msgid="4594773497930028085">"Stillingar tækis"</string>
-    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Prófílstillingar"</string>
+    <string name="bluetooth_profile_details" msgid="6823621790324933337">"Stillingar sniðs"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Ekkert heiti valið, heiti reiknings verður notað"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Leita að tækjum"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"Endurnefna þetta tæki"</string>
@@ -152,8 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Beiðni um pörun"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Snertu til að hefja pörun við <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Sýna mótteknar skrár"</string>
-    <!-- no translation found for device_picker (4978696506172252813) -->
-    <skip />
+    <string name="device_picker" msgid="4978696506172252813">"Veldu Bluetooth-tæki"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-heimildarbeiðni"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"Forrit vill kveikja á Bluetooth í þessu tæki."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Forrit óskar eftir að gera spjaldtölvuna þína sýnilega öðrum Bluetooth-tækjum í <xliff:g id="TIMEOUT">%1$d</xliff:g> sekúndur."</string>
@@ -343,8 +342,8 @@
     <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Sláðu inn texta til að birta á lásskjánum"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Sýna notandaupplýsingar á lásskjá"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Notandaupplýsingar"</string>
-    <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Sýna upplýsingar um snið á lásskjá"</string>
-    <string name="profile_info_settings_title" msgid="3518603215935346604">"Upplýsingar um snið"</string>
+    <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Sýna notandaupplýsingar á lásskjá"</string>
+    <string name="profile_info_settings_title" msgid="3518603215935346604">"Notandaupplýsingar"</string>
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Reikningar"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Staðsetning"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Reikningar"</string>
@@ -484,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Para"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"PARA"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Hætta við"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Pörun veitir aðgang að tengiliðunum þínum og símtalaferli þegar tengingu hefur verið komið á."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Ekki var hægt að para við <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Ekki tókst að para við <xliff:g id="DEVICE_NAME">%1$s</xliff:g> þar sem PIN-númer eða aðgangslykill er rangur."</string>
@@ -561,20 +561,9 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"SETJA UPP"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Tengjast sjálfkrafa við tiltæk net með Wi-Fi aðstoð."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fi aðstoð"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi-Fi aðstoð tengir sjálfkrafa við besta tiltæka Wi-Fi netið"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi-Fi aðstoð greinir hvaða net eru til staðar og tengir tækið við hraðasta og áreiðanlegasta netið."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Til að verja gögnin þín kann Google Wi-Fi aðstoð að koma á VPN-tengingu um netþjóna Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nei, takk"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"JÁ, ÉG ER MEÐ"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Beiðni um tengingu"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi aðstoð vill setja upp VPN-nettengingu sem gerir eiginleikanum kleift að fylgjast með netumferð. Aðeins skal samþykkja þetta ef uppruni beiðninnar er traustur."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"birtist efst á skjánum þegar VPN-net er virkt."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"SAMÞYKKJA"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"HAFNA"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Neteftirlit"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Þú veittir „Google Wi-Fi aðstoð“ heimild til að setja upp VPN-nettengingu. Þetta þýðir að þetta forrit getur fylgst með netumferð."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> tengir þig sjálfkrafa við besta Wi-Fi net sem er í boði"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"OPIÐ FORRIT"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Útsendingarskjár"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Senda út skjá"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Leyfa þráðlausan skjá"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Engin nálæg tæki fundust."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Tengist"</string>
@@ -620,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Leyfa staðsetningarþjónustu Google og öðrum forritum að leita að Wi-Fi neti, jafnvel þegar slökkt er á Wi-Fi"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Sjálfvirk stjórnun Wi-Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Leyfa <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> að stjórna Wi-Fi tengingunni þinni"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fi aðstoð"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi-Fi aðstoð"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Setja upp vottorð"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Til að bæta nákvæmni staðsetningar o.fl. kunna forrit að leita að nálægum netum, jafnvel þegar slökkt er á Wi-Fi. Ef þú vilt koma í veg fyrir þetta skaltu fara í Ítarlegar stillingar &gt; Leit alltaf í boði."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Forrit geta leitað að nálægum netum, jafnvel þegar slökkt er á Wi-Fi. Ef þú vilt koma í veg fyrir þetta skaltu fara í Ítarlegar stillingar &gt; Leit alltaf í boði"</string>
@@ -1137,10 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Höfundarréttur"</string>
     <string name="license_title" msgid="1990487604356037871">"Leyfi"</string>
     <string name="terms_title" msgid="7697580845616764642">"Skilmálar"</string>
-    <!-- no translation found for wallpaper_attributions (3645880512943433928) -->
-    <skip />
-    <!-- no translation found for wallpaper_attributions_values (2996183537914690469) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Veggfóður"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Gervihnattamyndir frá:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Leyfi opins kóða"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Vandamál kom upp við að hlaða leyfin."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Hleður…"</string>
@@ -1605,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> eftir"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> þar til fullri hleðslu er náð"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – u.þ.b. <xliff:g id="TIME">%2$s</xliff:g> eftir"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> þar til fullhlaðið"</string>
@@ -2166,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Sláðu aftur inn nýja aðgangsorðið þitt fyrir fulla afritun hér"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Velja aðgangsorð fyrir afritun"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Hætta við"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Viðbótaruppf. fyrir kerfi"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Óvirkt"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Frávíkjanlegt"</string>
@@ -2213,7 +2196,7 @@
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nýr prófíll"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Eyða sjálfum/sjálfri þér?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Fjarlægja þennan notanda?"</string>
-    <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Fjarlægja þetta snið?"</string>
+    <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Fjarlægja þennan prófíl?"</string>
     <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Fjarlægja vinnusnið?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Þú munt glata svæðinu þínu og gögnum sem eru í þessari spjaldtölvu. Ekki er hægt að afturkalla þessa aðgerð."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Þú munt glata svæðinu þínu og gögnum sem eru í þessum síma. Ekki er hægt að afturkalla þessa aðgerð."</string>
@@ -2302,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Ljúka"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Taka mynd"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Velja mynd úr myndasafni"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Velja mynd"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-kort"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-kort"</string>
@@ -2377,7 +2361,7 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Ekki er hægt að skrifa gögn í NFC-merki. Ef vandamálið er viðvarandi skaltu prófa annað merki"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Ekki er hægt að skrifa í NFC-merkið. Notaðu annað merki."</string>
     <string name="default_sound" msgid="8821684447333687810">"Sjálfgefið hljóð"</string>
-    <string name="notification_settings" msgid="8791730980212496561">"Hljóð og tilkynning"</string>
+    <string name="notification_settings" msgid="8791730980212496561">"Hljóð og tilkynningar"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Hljóðstyrkur margmiðlunarefnis"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Hljóðstyrkur vekjara"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Hljóðstyrkur hringingar"</string>
@@ -2442,9 +2426,9 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Lokið"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Þar til þú slekkur á þessu"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Forgangstruflanir"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Niðritími (aðeins forgangstruflanir)"</string>
+    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Hvíldartími (aðeins forgangstruflanir)"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Dagar"</string>
-    <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Ekkert"</string>
+    <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Engir"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Sjálfvirkni"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Kveikja sjálfkrafa"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2452,9 +2436,9 @@
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Símtöl"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Skilaboð"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"Frá"</string>
-    <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Allir"</string>
-    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Aðeins tengiliðir"</string>
-    <string name="zen_mode_from_starred" msgid="2168651127340381533">"Aðeins tengiliðir með stjörnu"</string>
+    <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Öllum"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Tengiliðum"</string>
+    <string name="zen_mode_from_starred" msgid="2168651127340381533">"Tengiliðum með stjörnu"</string>
     <string name="zen_mode_alarm_info" msgid="5061362593677527505">"Vekjarar og aðrar persónulegar áminningar eru alltaf í forgangi"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Kveikja sjálfkrafa"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Aldrei"</string>

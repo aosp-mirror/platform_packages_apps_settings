@@ -152,8 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"జత చేయడానికి అభ్యర్థన"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో జత చేయడానికి తాకండి."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"స్వీకరించబడిన ఫైల్‌లను చూపు"</string>
-    <!-- no translation found for device_picker (4978696506172252813) -->
-    <skip />
+    <string name="device_picker" msgid="4978696506172252813">"బ్లూటూత్ పరికరాన్ని ఎంచుకోండి"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"బ్లూటూత్ అనుమతి అభ్యర్థన"</string>
     <string name="bluetooth_ask_enablement" msgid="1712443355224737143">"అనువర్తనం ఈ పరికరంలో బ్లూటూత్‌ను ఆన్ చేయాలనుకుంటోంది."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"అనువర్తనం మీ టాబ్లెట్‌ను ఇతర బ్లూటూత్ పరికరాలకు <xliff:g id="TIMEOUT">%1$d</xliff:g> సెకన్లు కనిపించేలా చేయాలనుకుంటుంది."</string>
@@ -484,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"జత చేయి"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"జత చేయి"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"రద్దు చేయి"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"జత చేయడం వలన కనెక్ట్ చేయబడినప్పుడు మీ పరిచయాలకు మరియు కాల్ చరిత్రకు ప్రాప్యతను మంజూరు చేస్తుంది."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో జత చేయడం సాధ్యపడలేదు."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"PIN లేదా పాస్‌కీ చెల్లని కారణంగా <xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో జత చేయడం సాధ్యపడలేదు."</string>
@@ -561,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"సెటప్ చేయి"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Wi‑Fi సహాయకంతో అందుబాటులో ఉన్న నెట్‌వర్క్‌లకు స్వయంచాలకంగా కనెక్ట్ చేయండి."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi సహాయకం"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi సహాయకం మిమ్మల్ని అందుబాటులో ఉన్న ఉత్తమ Wi‑Fiకి స్వయంచాలకంగా కనెక్ట్ చేస్తుంది"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi సహాయకం మీకు అందుబాటులో ఉన్న నెట్‌వర్క్‌లను గుర్తిస్తుంది, అలాగే మీ పరికరాన్ని అత్యంత వేగవంతమైన మరియు విశ్వసనీయ పరికరంతో కనెక్ట్ చేస్తుంది."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"మీ డేటాను రక్షించడంలో సహాయపడటానికి, Google Wi‑Fi సహాయకం Google సర్వర్‌ల ద్వారా సురక్షిత VPN కనెక్షన్‌ను అందిస్తుంది."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"వద్దు, ధన్యవాదాలు"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"అవును, నాకు సమ్మతమే"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"కనెక్షన్ అభ్యర్థన"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi సహాయకం నెట్‌వర్క్ ట్రాఫిక్‌ని పర్యవేక్షించగలగడానికి VPN కనెక్షన్‌ను సెటప్ చేయాలనుకుంటోంది.  మీరు మూలాన్ని విశ్వసిస్తే మాత్రమే ఆమోదించండి."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"VPN సక్రియంగా ఉన్నప్పుడు మీ స్క్రిీన్ ఎగువన కనిపిస్తుంది."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ఆమోదిస్తున్నాను"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"తిరస్కరిస్తున్నాను"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"నెట్‌వర్క్ పర్యవేక్షణ"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"మీరు VPN కనెక్షన్‌ను సెటప్ చేయడానికి “Google Wi‑Fi సహాయకం”కి అనుమతి ఇచ్చారు. అంటే ఈ అనువర్తనం నెట్‌వర్క్ ట్రాఫిక్‌ను పర్యవేక్షించగలదని అర్థం."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> అందుబాటులో ఉన్న ఉత్తమ Wi‑Fiకి మిమ్మల్ని స్వయంచాలకంగా కనెక్ట్ చేస్తుంది"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"అనువర్తనాన్ని తెరువు"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"ప్రసారం స్క్రీన్"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"వైర్‌లెస్ ప్రదర్శనను ప్రారంభించు"</string>
@@ -620,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi‑Fi ఆఫ్‌లో ఉన్నప్పటికీ నెట్‌వర్క్‌ల కోసం స్కాన్ చేయడానికి Google స్థాన సేవ మరియు ఇతర అనువర్తనాలను అనుమతించు"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fiని స్వయంచాలకంగా నిర్వహించు"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"మీ Wi‑Fi కనెక్షన్‌ను నిర్వహించడానికి <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> అనుమతించండి"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi సహాయకం"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi సహాయకం"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"ప్రమాణపత్రాలను ఇన్‌స్టాల్ చేయి"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"స్థాన ఖచ్చితత్వాన్ని మెరుగుపరచడానికి మరియు ఇతర ప్రయోజనాల దృష్ట్యా, Google మరియు ఇతర అనువర్తనాలు Wi-Fi ఆఫ్‌లో ఉన్నప్పటికీ, నెట్‌వర్క్‌ల కోసం అనువర్తనాలు స్కాన్ చేయవచ్చు. మీరు ఇలా జరగకూడదనుకుంటే, అధునాతనం &gt; స్కానింగ్‌ ఎల్లప్పుడూ అందుబాటులో ఉంచుకు వెళ్లండి."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Wi-Fi ఆఫ్‌లో ఉన్నప్పటికీ సమీపంలోని నెట్‌వర్క్‌ల కోసం అనువర్తనాలు స్కాన్ చేయవచ్చు. మీరు ఇలా జరగకూడదనుకుంటే, అధునాతనం &gt; స్కానింగ్‌ ఎల్లప్పుడూ అందుబాటులో ఉంచుకు వెళ్లండి."</string>
@@ -1137,10 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"కాపీరైట్"</string>
     <string name="license_title" msgid="1990487604356037871">"లైసెన్స్"</string>
     <string name="terms_title" msgid="7697580845616764642">"నిబంధనలు మరియు షరతులు"</string>
-    <!-- no translation found for wallpaper_attributions (3645880512943433928) -->
-    <skip />
-    <!-- no translation found for wallpaper_attributions_values (2996183537914690469) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"వాల్‌పేపర్‌లు"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"ఉపగ్రహ చిత్రాల ప్రదాతలు:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"ఓపెన్ సోర్స్ లైసెన్స్‌లు"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"లైసెన్స్‌లను లోడ్ చేయడంలో సమస్య ఉంది."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"లోడ్ చేస్తోంది…"</string>
@@ -1605,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> ఉంది"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>లోపు ఛార్జ్ చేయాలి"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - సుమారు <xliff:g id="TIME">%2$s</xliff:g> మిగిలి ఉంటుంది"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - పూర్తిగా నిండే వరకు <xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -2166,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"మీ కొత్త పూర్తి బ్యాకప్ పాస్‌వర్డ్‌ను ఇక్కడ మళ్లీ టైప్ చేయండి"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"బ్యాకప్ పాస్‌వర్డ్‌ను సెట్ చేయి"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"రద్దు చేయి"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"అదనపు సిస్టమ్ నవీకరణలు"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"నిలిపివేయబడింది"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"అనుమోదక అంశము"</string>
@@ -2229,7 +2212,7 @@
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"ఈ సెషన్‌లోని అన్ని అనువర్తనాలు మరియు డేటా తొలగించబడతాయి."</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"తీసివేయి"</string>
     <string name="user_enable_calling" msgid="8310589470979488255">"ఫోన్ కాల్‌లను అనుమతించండి"</string>
-    <string name="user_enable_calling_sms" msgid="794823380737672333">"ఫోన్ కాల్‌లను మరియు SMSను అనుమతించండి"</string>
+    <string name="user_enable_calling_sms" msgid="794823380737672333">"ఫోన్ కాల్‌లు, SMSను అనుమతించు"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"వినియోగదారును తీసివేయండి"</string>
     <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"ఫోన్ కాల్‌లను అనుమతించాలా?"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"కాల్ చరిత్ర ఈ వినియోగదారుతో భాగస్వామ్యం చేయబడుతుంది."</string>
@@ -2302,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"ముగించు"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"ఫోటో తీయండి"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"గ్యాలరీ నుండి ఫోటోను ఎంచుకోండి"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"ఫోటోను ఎంచుకోండి"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM కార్డులు"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM కార్డులు"</string>
