@@ -40,6 +40,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     private Context mContext;
     private SwitchBar mSwitchBar;
+    private boolean mListeningToOnSwitchChange = false;
     private AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private final WifiManager mWifiManager;
@@ -99,23 +100,41 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
     public void setupSwitchBar() {
         final int state = mWifiManager.getWifiState();
         handleWifiStateChanged(state);
-        mSwitchBar.addOnSwitchChangeListener(this);
+        if (!mListeningToOnSwitchChange) {
+            mSwitchBar.addOnSwitchChangeListener(this);
+            mListeningToOnSwitchChange = true;
+        }
         mSwitchBar.show();
+
+        mContext.registerReceiver(mReceiver, mIntentFilter);
     }
 
     public void teardownSwitchBar() {
-        mSwitchBar.removeOnSwitchChangeListener(this);
+        if (mListeningToOnSwitchChange) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+            mListeningToOnSwitchChange = false;
+        }
         mSwitchBar.hide();
+
+        mContext.unregisterReceiver(mReceiver);
     }
 
     public void resume(Context context) {
         mContext = context;
         // Wi-Fi state is sticky, so just let the receiver update UI
         mContext.registerReceiver(mReceiver, mIntentFilter);
+        if (!mListeningToOnSwitchChange) {
+            mSwitchBar.addOnSwitchChangeListener(this);
+            mListeningToOnSwitchChange = true;
+        }
     }
 
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
+        if (mListeningToOnSwitchChange) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+            mListeningToOnSwitchChange = false;
+        }
     }
 
     private void handleWifiStateChanged(int state) {
