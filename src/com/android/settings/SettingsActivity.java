@@ -858,6 +858,33 @@ public class SettingsActivity extends Activity
     }
 
     /**
+     * Start a new fragment in a new activity containing a preference panel for a given user. If the
+     * preferences are being displayed in multi-pane mode, the given fragment class will be
+     * instantiated and placed in the appropriate pane. If running in single-pane mode, a new
+     * activity will be launched in which to show the fragment.
+     *
+     * @param fragmentClass Full name of the class implementing the fragment.
+     * @param args Any desired arguments to supply to the fragment.
+     * @param titleRes Optional resource identifier of the title of this fragment.
+     * @param titleText Optional text of the title of this fragment.
+     * @param userHandle The user for which the panel has to be started.
+     */
+    public void startPreferencePanelAsUser(String fragmentClass, Bundle args, int titleRes,
+            CharSequence titleText, UserHandle userHandle) {
+        String title = null;
+        if (titleRes < 0) {
+            if (titleText != null) {
+                title = titleText.toString();
+            } else {
+                // There not much we can do in that case
+                title = "";
+            }
+        }
+        Utils.startWithFragmentAsUser(this, fragmentClass, args,
+                titleRes, title, mIsShortcut, userHandle);
+    }
+
+    /**
      * Called by a preference panel fragment to finish itself.
      *
      * @param caller The fragment that is asking to be finished.
