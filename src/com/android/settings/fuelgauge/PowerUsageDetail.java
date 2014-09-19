@@ -104,6 +104,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         args.putSerializable(PowerUsageDetail.EXTRA_DRAIN_TYPE, entry.sipper.drainType);
         args.putBoolean(PowerUsageDetail.EXTRA_SHOW_LOCATION_BUTTON, showLocationButton);
 
+        int userId = UserHandle.myUserId();
         int[] types;
         double[] values;
         switch (entry.sipper.drainType) {
@@ -155,6 +156,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                     printWriter.flush();
                     args.putString(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS,
                             result.toString());
+                    userId = UserHandle.getUserId(uid.getUid());
                 }
             }
             break;
@@ -256,8 +258,9 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         }
         args.putIntArray(PowerUsageDetail.EXTRA_DETAIL_TYPES, types);
         args.putDoubleArray(PowerUsageDetail.EXTRA_DETAIL_VALUES, values);
-        caller.startPreferencePanel(PowerUsageDetail.class.getName(), args,
-                R.string.details_title, null, null, 0);
+
+        caller.startPreferencePanelAsUser(PowerUsageDetail.class.getName(), args,
+                R.string.details_title, null, new UserHandle(userId));
     }
 
     public static final int ACTION_DISPLAY_SETTINGS = 1;
