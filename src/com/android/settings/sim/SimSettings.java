@@ -268,8 +268,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 } else if (simPref.getKey().equals(KEY_CALLS)) {
                     SubscriptionManager.setDefaultVoiceSubId(subId);
                 } else if (simPref.getKey().equals(KEY_SMS)) {
-                    // TODO: uncomment once implemented. Bug: 16520931
-                    // SubscriptionManager.setDefaultSMSSubId(subId);
+                    SubscriptionManager.setDefaultSmsSubId(subId);
                 }
 
                 return true;
