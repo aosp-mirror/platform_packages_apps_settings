@@ -112,13 +112,18 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        if (!getPrintJob().getInfo().isCancelling()) {
+        PrintJob printJob = getPrintJob();
+        if (printJob == null) {
+            return;
+        }
+
+        if (!printJob.getInfo().isCancelling()) {
             MenuItem cancel = menu.add(0, MENU_ITEM_ID_CANCEL, Menu.NONE,
                     getString(R.string.print_cancel));
             cancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
 
-        if (getPrintJob().isFailed()) {
+        if (printJob.isFailed()) {
             MenuItem restart = menu.add(0, MENU_ITEM_ID_RESTART, Menu.NONE,
                     getString(R.string.print_restart));
             restart.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
