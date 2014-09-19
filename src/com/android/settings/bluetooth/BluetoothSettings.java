@@ -98,9 +98,16 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
+            final String action = intent.getAction();
+            final int state =
+                intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+
             if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 updateDeviceName(context);
+            }
+
+            if (state == BluetoothAdapter.STATE_ON) {
+                mInitiateDiscoverable = true;
             }
         }
 
