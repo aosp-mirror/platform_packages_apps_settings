@@ -206,7 +206,7 @@ final class BluetoothEventManager {
             }
             cachedDevice.setRssi(rssi);
             cachedDevice.setBtClass(btClass);
-            cachedDevice.setName(name);
+            cachedDevice.setNewName(name);
             cachedDevice.setVisible(true);
         }
     }
