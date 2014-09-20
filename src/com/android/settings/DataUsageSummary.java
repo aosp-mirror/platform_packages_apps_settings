@@ -513,11 +513,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mMenuSimCards.setVisible(false);
 
         mMenuCellularNetworks = menu.findItem(R.id.data_usage_menu_cellular_networks);
-        if (hasReadyMobileRadio(context)) {
-            mMenuCellularNetworks.setVisible(!appDetailMode);
-        } else {
-            mMenuCellularNetworks.setVisible(false);
-        }
+        mMenuCellularNetworks.setVisible(hasReadyMobileRadio(context)
+                && !appDetailMode && isOwner);
 
         final MenuItem help = menu.findItem(R.id.data_usage_menu_help);
         String helpUrl;
