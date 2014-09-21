@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sidumistaotlus"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Puudutage seadmega <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ühildamiseks."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Näita vastuvõetud faile"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth-seadme valija"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth-seadme valimine"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetoothi loa taotlus"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Rakendus soovib Bluetoothi sisse lülitada."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Rakendus soovib muuta <xliff:g id="TIMEOUT">%1$d</xliff:g> sekundiks teie tahvelarvuti teistele Bluetoothi seadmetele nähtavaks."</string>
@@ -263,7 +263,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"SD-kaardi skannimine meediumi jaoks ..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3624143937437417788">"USB-mälu on kirjutuskaitsega."</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"SD-kaart on paigaldatud kirjutuskaitstuna."</string>
-    <string name="skip_label" msgid="47510779345218297">"Edasi"</string>
+    <string name="skip_label" msgid="47510779345218297">"Jäta vahele"</string>
     <string name="next_label" msgid="4693520878012668114">"Järgmine"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"Keel"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Tegevuse valimine"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Seo"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"SEO"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Tühista"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Sidumine annab ühenduse ajal juurdepääsu kontaktidele ja kõneajaloole."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Ei saanud seadmega <xliff:g id="DEVICE_NAME">%1$s</xliff:g> siduda."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Ei saanud seadmega <xliff:g id="DEVICE_NAME">%1$s</xliff:g> siduda vale PIN-koodi või parooli tõttu."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"SEADISTAMINE"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Automaatne ühendamine saadaolevate võrkudega, kasutades WiFi Assistanti."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"WiFi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google\'i WiFi Assistant ühendab teid automaatselt parima saadaoleva WiFi-võrguga"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google\'i WiFi Assistant tuvastab saadaolevad võrgud ning ühendab seadme kiireima ja töökindlaima võrguga."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Andmete kaitseks võib Google\'i WiFi Assistant pakkuda turvalist VPN-ühendust Google\'i serverite kaudu."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Ei, aitäh"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"JAH, SOBIB"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Ühenduse taotlus"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi Assistant tahab seadistada VPN-i ühenduse, mis laseb jälgida võrguliiklust. Nõustuge siis, kui allikas on usaldusväärne."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"kuvatakse ekraani ülaosas, kui VPN on aktiivne."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"NÕUSTU"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"KEELDU"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Võrgu jälgimine"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Andsite rakendusele „Google\'i WiFi Assistant” loa seadistada VPN-i ühendus. Rakendus saab nüüd jälgida võrguliiklust."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> ühendab teid automaatselt parima saadaoleva WiFi-võrguga"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"AVA RAKENDUS"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Cast-ekraan"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Luba juhtmeta ekraaniühendus"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Lubab Google\'i asukohateenusel ja muudel rakendustel võrke skannida ka juhul, kui WiFi on välja lülitatud"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"WiFi automaatne haldamine"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Lubage <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> halduril WiFi-ühendust hallata"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"WiFi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google\'i WiFi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifikaatide installimine"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Asukoha täpsuse parandamiseks ning muudel eesmärkidel võivad Google ja teised rakendused otsida läheduses olevaid võrke ka siis, kui WiFi on väljas. Kui te seda ei soovi, tehke valikud Täpsem &gt; Otsimine alati saadaval."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Rakendused võivad otsida läheduses olevaid võrke ka siis, kui WiFi on väljas. Kui te seda ei soovi, tehke valikud Täpsem &gt; Otsimine alati saadaval."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Autoriõigus"</string>
     <string name="license_title" msgid="1990487604356037871">"Litsents"</string>
     <string name="terms_title" msgid="7697580845616764642">"Nõuded ja tingimused"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Taustapildid"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satelliitpiltide pakkujad:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Avatud lähtekoodiga litsentsid"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Litsentside laadimisega on probleem."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Laadimine ..."</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Jäänud on <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> laadimise lõpuni"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – umbes <xliff:g id="TIME">%2$s</xliff:g> jäänud"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> täitumiseni"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Sisestage siia uuesti oma täieliku varukoopia uus parool"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Varukoopia määramine"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Tühista"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Süsteemi lisavärskendused"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Keelatud"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Lubav"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Lõpeta"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Jäädvusta foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Vali foto galeriist"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Foto valimine"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-kaardid"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-kaardid"</string>

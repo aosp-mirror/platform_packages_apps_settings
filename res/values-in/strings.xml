@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Permintaan penyandingan"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Sentuh untuk menyandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Tampilkan file yang diterima"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Pemilih perangkat bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Pilih perangkat Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Permintaan izin bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Sebuah aplikasi ingin mengaktifkan Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Sebuah aplikasi ingin menampilkan tablet Anda pada perangkat Bluetooth lain selama <xliff:g id="TIMEOUT">%1$d</xliff:g> detik."</string>
@@ -461,9 +461,9 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Administrasi perangkat"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administrator perangkat"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Lihat atau nonaktifkan administrator perangkat"</string>
-    <string name="manage_trust_agents" msgid="4629279457536987768">"Agen kepercayaan"</string>
+    <string name="manage_trust_agents" msgid="4629279457536987768">"Agen tepercaya"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Untuk menggunakannya, setel kunci layar terlebih dahulu"</string>
-    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Tampilkan atau nonaktifkan agen kepercayaan"</string>
+    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Tampilkan atau nonaktifkan agen tepercaya"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Hidupkan Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Pasangan"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"SANDINGKAN"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Batal"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Penyandingan memberi akses ke kontak dan riwayat panggilan saat tersambung"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Tidak dapat menyandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Tidak dapat menyandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> karena PIN atau kode sandi salah."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"SIAPKAN"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Tersambung ke jaringan yang tersedia secara otomatis dengan Wi‑Fi Assistant."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant menyambungkan Anda ke Wi‑Fi terbaik yang tersedia secara otomatis"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi Assistant mendeteksi jaringan yang tersedia &amp; menyambungkan ke yang memiliki kecepatan &amp; keandalan terbaik."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Untuk melindungi data, Google Wi‑Fi Assistant dapat memberikan sambungan VPN aman via server Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Tidak, terima kasih"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"YA, SAYA IKUT SERTA"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Permintaan Sambungan"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi Assistant akan menyiapkan sambungan VPN guna memantau lalu lintas jaringan. Hanya terima jika sumber tepercaya."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"muncul di bagian atas layar saat VPN aktif."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"TERIMA"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"TOLAK"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Pemantauan jaringan"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Izin diberikan ke “Google Wi‑Fi Assistant” guna menyiapkan sambungan VPN. Artinya aplikasi dapat memantau lalu lintas jaringan."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> otomatis menyambungkan Anda ke Wi-Fi terbaik yang tersedia"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"BUKA APLIKASI"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Layar Transmisi"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktifkan layar nirkabel"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Izinkan layanan lokasi Google dan aplikasi lainnya memindai jaringan saat Wi-Fi tidak aktif sekalipun"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Kelola Wi‑Fi secara otomatis"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Izinkan <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> mengelola koneksi Wi-Fi Anda"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Pasang sertifikat"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Untuk meningkatkan akurasi lokasi dan untuk tujuan lainnya, Google dan aplikasi lainnya dapat memindai jaringan terdekat, bahkan saat Wi-Fi mati. Jika Anda tidak ingin ini terjadi, buka Lanjutan &gt; Pemindaian selalu tersedia."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikasi dapat memindai jaringan terdekat, bahkan saat Wi-Fi mati. Jika Anda tidak ingin ini terjadi, buka Lanjutan &gt; Pemindaian selalu tersedia."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Hak cipta"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisensi"</string>
     <string name="terms_title" msgid="7697580845616764642">"Persyaratan dan ketentuan"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Wallpaper"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Penyedia citra satelit:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Lisensi sumber terbuka"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Ada masalah saat memuat lisensi."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Memuat…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> tersisa"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> lagi agar terisi penuh"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - kira-kira tersisa <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> hingga penuh"</string>
@@ -1865,7 +1854,7 @@
     <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"Untuk menghentikan <xliff:g id="APP_NAME">%1$s</xliff:g> dari mengakses profil kerja Anda, buang profil pada Setelan &gt; Akun"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"Pribadi"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Kantor"</string>
-    <string name="no_trust_agents" msgid="7450273545568977523">"Agen kepercayaan tidak tersedia"</string>
+    <string name="no_trust_agents" msgid="7450273545568977523">"Agen tepercaya tidak tersedia"</string>
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Aktifkan administrator perangkat?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Aktifkan"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Administrator perangkat"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Ketik ulang sandi baru cadangan penuh Anda di sini"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Setel sandi cadangan"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Batal"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Pembaruan sistem tambahan"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Nonaktif"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Tidak Wajib"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Selesai"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Ambil foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Pilih foto dari Galeri"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Pilih foto"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Kartu SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Kartu SIM"</string>
@@ -2465,7 +2454,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Aktif"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Nonaktif"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Penyematan layar"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"Saat setelan ini diaktifkan, Anda dapat menempatkan perangkat dalam keadaan yang terus menampilkan layar yang sedang ditayangkan.\n\nUntuk menyematkan layar:\n\n1. Aktifkan setelan ini.\n\n2. Buka aplikasi.\n\n3. Sentuh tombol Terkini.\n\n4. Sentuh ikon sematkan."</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"Saat setelan ini diaktifkan, Anda dapat menempatkan perangkat dalam keadaan yang terus menampilkan layar yang sedang ditayangkan.\n\nUntuk menyematkan layar:\n\n1. Aktifkan setelan ini.\n\n2. Buka aplikasi.\n\n3. Sentuh tombol Terkini.\n\n4. Sentuh ikon pin."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil kerja"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Eksperimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Saat perangkat diputar"</string>

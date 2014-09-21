@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing-Anfrage"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Für Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> berühren"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Empfangene Dateien anzeigen"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth-Geräteauswahl"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth-Gerät auswählen"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-Berechtigungsanfrage"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Eine App versucht, Bluetooth zu aktivieren."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Eine App versucht, Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Bluetooth-Geräte sichtbar zu machen."</string>
@@ -484,6 +484,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Kopplung durchführen"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"Pairing durchführen"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Abbrechen"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Über das Pairing kann auf Ihre Kontakte und auf Ihren Anrufverlauf zugegriffen werden, wenn eine Verbindung besteht."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> war nicht möglich."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> war nicht möglich, weil die eingegebene PIN oder der Zugangscode falsch ist."</string>
@@ -561,18 +562,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"Einrichten"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Automatisch über Wi-Fi Assistant mit verfügbaren Netzwerken verbinden"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant stellt automatisch eine Verbindung zum besten verfügbaren WLAN her."</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi-Fi Assistant erkennt die Netzwerke, die Ihnen zur Verfügung stehen, und verbindet Ihr Gerät mit dem Netzwerk, das am schnellsten und zuverlässigsten ist."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Zum Schutz Ihrer Daten stellt Google Wi‑Fi Assistant möglicherweise eine sichere VPN-Verbindung über Google-Server bereit."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nein danke"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"Ja, bitte aktivieren"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Verbindungsanfrage"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi Assistant möchte eine VPN-Verbindung zur Überwachung des Netzwerkverkehrs herstellen. Akzeptieren Sie nur, wenn Sie der Quelle vertrauen."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"erscheint oben auf Bildschirm, wenn das VPN aktiv ist."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"Akzeptieren"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"Ablehnen"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Netzwerküberwachung"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Sie haben Google Wi-Fi Assistant das Herstellen einer VPN-Verbindung gestattet. Die App kann dann den Netzwerktraffic überwachen."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> stellt automatisch eine Verbindung mit dem besten verfügbaren WLAN her."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"App öffnen"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Bildschirmübertragung"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Kabellose Übertragung aktivieren"</string>
@@ -620,8 +610,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Der Standortdienst von Google und andere Apps sollen auch bei deaktiviertem WLAN nach Netzwerken suchen."</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"WLAN automatisch verwalten"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Verwaltung Ihrer WLAN-Verbindung an <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> übertragen"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Zertifikate installieren"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Zur Erhöhung der Standortgenauigkeit und aus anderen Gründen können Google und andere Apps auch bei deaktiviertem WLAN nach Netzwerken in der Nähe suchen. Wenn Sie das nicht möchten, können Sie dies unter \"Erweitert\" &gt; \"Scannen immer verfügbar\" ändern."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apps können auch bei deaktiviertem WLAN nach Netzwerken in der Nähe suchen. Wenn Sie das nicht möchten, können Sie dies unter \"Erweitert\" &gt; \"Scannen immer verfügbar\" ändern."</string>
@@ -1137,6 +1125,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Urheberrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Lizenz"</string>
     <string name="terms_title" msgid="7697580845616764642">"Nutzungsbedingungen"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Hintergründe"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satellitenbilder bereitgestellt von:\n© 2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open-Source-Lizenzen"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Beim Laden der Lizenzen ist ein Problem aufgetreten."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Wird geladen..."</string>
@@ -1601,7 +1591,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Noch <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Verbleibende Ladezeit: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – noch etwa <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -2164,7 +2153,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Neues Passwort für vollständige Sicherungen erneut eingeben"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Passwort festlegen"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Abbrechen"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Zusätzliche Systemupdates"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Deaktiviert"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Moderat"</string>
@@ -2300,6 +2288,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Fertig"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Foto aufnehmen"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Foto aus Galerie auswählen"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Foto auswählen"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-Karten"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-Karten"</string>
@@ -2375,13 +2364,13 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Es können keine Daten in das NFC-Tag geschrieben werden. Sollte das Problem weiterhin bestehen, versuchen Sie es mit einem anderen Tag."</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"In das NFC-Tag kann nicht geschrieben werden. Bitte verwenden Sie ein anderes Tag."</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardton"</string>
-    <string name="notification_settings" msgid="8791730980212496561">"Ton &amp; Benachr."</string>
+    <string name="notification_settings" msgid="8791730980212496561">"Ton &amp; Benachrichtigungen"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Medienlautstärke"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Weckerlautstärke"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Klingeltonlautstärke"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Benachrichtigungslautstärke"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"Unterbrechungen"</string>
-    <string name="zen_mode_option_title" msgid="5061978632306007914">"Wenn Anrufe und Benachrichtigungen eingehen"</string>
+    <string name="zen_mode_option_title" msgid="5061978632306007914">"Bei eingehenden Anrufen und Benachrichtigungen"</string>
     <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"Wenn Benachrichtigungen eingehen"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Immer unterbrechen"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Nur wichtige Unterbrechungen zulassen"</string>

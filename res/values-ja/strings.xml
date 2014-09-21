@@ -154,7 +154,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"ペア設定リクエスト"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"タップして<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアに設定"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"受信済みファイルを表示"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetoothデバイスの選択"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetoothデバイスの選択"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth許可リクエスト"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"アプリがBluetoothをONにしようとしています。"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"アプリが、<xliff:g id="TIMEOUT">%1$d</xliff:g>秒間他のBluetoothデバイスにこのタブレットを表示しようとしています。"</string>
@@ -485,6 +485,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"ペア設定する"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ペア設定する"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"キャンセル"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"ペア設定により、接続時に連絡先や通話履歴へのアクセスが許可されます。"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアに設定できません。"</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"PINまたはパスキーが正しくないため、<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアに設定できませんでした。"</string>
@@ -562,18 +563,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"セットアップ"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Wi‑Fiアシスタントを使って、利用可能なネットワークに自動的に接続します。"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fiアシスタント"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fiアシスタントは、利用条件が最も良いWi‑Fiに自動的に接続します。"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fiアシスタントは利用可能なネットワークを検出し、その中で最も速度が速く信頼性に優れたネットワークにこの端末を接続します。"</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"データ保護の目的で、Google Wi‑FiアシスタントはGoogleサーバー経由で安全なVPN接続を提供することがあります。"</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"利用しない"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"利用する"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"接続リクエスト"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fiアシスタントはトラフィック監視用としてVPN接続をセットアップしようとしています。提供元が信頼できる場合のみ許可してください。"</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"が画面上部に表示されているときは、VPNが有効になっています。"</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"同意する"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"許可しない"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"ネットワーク監視"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"「Google Wi-Fiアシスタント」はVPN接続をセットアップする権限を与えられたので、このアプリでトラフィックを監視できます。"</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>は利用条件が最も良いWi‑Fiに自動的に接続します"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"アプリを開く"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"画面のキャスト"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ワイヤレスディスプレイの有効化"</string>
@@ -621,8 +611,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi-FiがOFFになっていても、Googleの位置情報サービスと他のアプリでネットワークをスキャンする"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fiを自動的に管理する"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>を使ってWi‑Fi接続を管理する"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fiアシスタント"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fiアシスタント"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"証明書のインストール"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"位置情報の精度を向上させるため、Wi-FiがOFFの場合でもGoogleやその他のアプリは近くのネットワークをスキャンすることができます。このスキャンが必要ない場合は、[詳細設定] &gt; [スキャンを常に実行する]にアクセスします。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Wi-FiがOFFの場合でもアプリは近くのネットワークをスキャンできます。このスキャンが必要ない場合は、[詳細設定] &gt; [スキャンを常に実行する]にアクセスします。"</string>
@@ -1138,6 +1126,8 @@
     <string name="copyright_title" msgid="865906688917260647">"著作権"</string>
     <string name="license_title" msgid="1990487604356037871">"ライセンス"</string>
     <string name="terms_title" msgid="7697580845616764642">"利用規約"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"壁紙"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"航空写真の提供:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"オープンソースライセンス"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"ライセンスの読み込み中に問題が発生しました。"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"読み込み中..."</string>
@@ -1602,7 +1592,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"残り<xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"充電されるまで<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - 残り約<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - フル充電まで<xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -2167,7 +2156,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"新しいフルバックアップパスワードをここに再入力してください"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"バックアップパスワードを設定"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"キャンセル"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"その他のシステムアップデート"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive"</string>
@@ -2303,6 +2291,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"終了"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"写真を撮影"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"ギャラリーから画像を選ぶ"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"写真を選択"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIMカード"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIMカード"</string>
@@ -2395,8 +2384,8 @@
     <string name="notification_section_header" msgid="95661783916799134">"通知"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"光を点滅させて通知"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"端末がロックされているとき"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"すべての通知内容を表示します"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"プライベートな通知内容を非表示にします"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"すべての通知内容を表示する"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"プライベートな通知内容を非表示にする"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"すべての通知を表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"端末がロックされている場合、通知をどのように表示しますか？"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
@@ -2470,18 +2459,13 @@
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"管理者PINを入力"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"ON"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"OFF"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"画面を固定中"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"この設定をONにすると、端末で現在の画面が常に表示される状態にすることができます。\n\n画面を固定するには:\n\n1. この設定をONにします。\n\n2. アプリを開きます。\n\n3. [最近]ボタンをタップします。\n\n4. 固定アイコンをタップします。"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"画面の固定"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"この設定をONにすると、端末で現在の画面が常に表示されるようになります。\n\n画面を固定するには:\n\n1. この設定をONにします。\n\n2. アプリを開きます。\n\n3. 最近ボタンをタップします。\n\n4. 固定アイコンをタップします。"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"ワークプロフィール"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"（試験運用）"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"端末が回転したとき"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"画面のコンテンツを回転させる"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"縦向きのままにする"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"横向きのままにする"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"現在の向きを維持する"</string>
 </resources>

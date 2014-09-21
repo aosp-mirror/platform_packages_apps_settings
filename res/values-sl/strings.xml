@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Zahteva za seznanitev"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Dotaknite se za povezovanje z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Pokaži prejete datoteke"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Izbirnik naprav Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Izberite napravo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Zahteva za dovoljenje za uporabo funkcije Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Aplikacija želi vklopiti Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Aplikacija želi, da lahko druge naprave Bluetooth vidijo vaš tablični računalnik toliko sekund: <xliff:g id="TIMEOUT">%1$d</xliff:g>."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Seznani"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"SEZNANI"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Prekliči"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Seznanjanje pri vzpostavljeni povezavi omogoči dostop do vaših stikov in zgodovine klicev."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Ni bilo mogoče vzpostaviti povezave z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Zaradi nepravilne kode PIN ali gesla ni mogoče vzpostaviti povezave z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"NASTAVI"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Samodejno povezovanje v razpoložljiva omrežja s Pomočnikom za Wi‑Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Pomočnik za Wi‑Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Pomočnik za Wi-Fi vas samodejno poveže z najboljšim razpoložljivim omrežjem Wi‑Fi"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Pomočnik za Wi‑Fi zazna omrežja, ki so na voljo, in poveže vašo napravo z najhitrejšim ter najzanesljivejšim."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Za zaščito podatkov vam lahko Google Pomočnik za Wi-Fi zagotovi varno povezavo VPN prek Googlovih strežnikov."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Ne, hvala"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"DA, SEM ZA"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Zahteva za povezavo"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Pomočnik za Wi‑Fi želi vzpostaviti povezavo VPN, ki mu omogoča nadzor omrežnega prometa. Sprejmite samo, če zaupate viru."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"se prikaže na vrhu zaslona, ko je povezava VPN aktivna."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"SPREJMI"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"ZAVRNI"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Nadzor omrežja"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Aplikaciji »Google Pomočnik za Wi‑Fi« ste dali dovoljenje za vzpostavitev povezave VPN. To pomeni, da lahko ta aplikacija nadzira omrežni promet."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> vas samodejno poveže z najboljšim razpoložljivim omrežjem Wi-Fi"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ODPRI APLIKACIJO"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Zaslon za predvajanje"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Omogočanje brezžičnega zaslona"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Googlova lokacijska storitev in druge aplikacije naj poiščejo omrežja, tudi če je Wi-Fi izklopljen"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Samodejno upravljanje Wi‑Fi-ja"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Naj <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> upravlja povezavo z omrežjem Wi-Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Pomočnik za Wi‑Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Pomočnik za Wi-Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Namestitev potrdil"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Za večjo natančnost in druge namene dovolite Googlovi lokacijski storitvi in drugim aplikacijam, da iščejo omrežja Wi-Fi v bližini, tudi če je Wi-Fi izklopljen. Če tega ne želite, odprite Dodatno &gt; Iskanje vedno na voljo."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikacije lahko iščejo omrežja Wi-Fi v bližini, tudi če je Wi-Fi izklopljen. Če tega ne želite, odprite Dodatno &gt; Iskanje vedno na voljo."</string>
@@ -1056,7 +1044,7 @@
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Narišite vzorec za odklepanje"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Če želite potrditi brisanje pomnilnika USB, morate narisati vzorec za odklepanje."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Če želite potrditi brisanje kartice SD, morate narisati vzorec za odklepanje."</string>
-    <string name="call_settings_title" msgid="5188713413939232801">"Klicne nastavitve"</string>
+    <string name="call_settings_title" msgid="5188713413939232801">"Nastavitve klicanja"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Nastavite telefonski predal, preusmeritev klicev, čakajoči klic, ID klicatelja"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"Internet prek USB-ja"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Prenosna dostopna točka"</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Avtorska pravica"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenca"</string>
     <string name="terms_title" msgid="7697580845616764642">"Določila in pogoji"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Ozadja"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Ponudniki satelitskih posnetkov: \n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licence za odprto kodo"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Pri nalaganju licenc je prišlo do težave."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Nalaganje …"</string>
@@ -1594,13 +1584,12 @@
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Tiskalnik je blokiral <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Iskalno polje je prikazano"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Iskalno polje je skrito"</string>
-    <string name="power_usage_summary_title" msgid="7190304207330319919">"Baterija"</string>
+    <string name="power_usage_summary_title" msgid="7190304207330319919">"Akumulator"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Kaj porablja energijo baterije"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Podatki o porabi baterije niso na voljo."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Preostali čas: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do napolnjenosti"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – še približno <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="TIME">%2$s</xliff:g> do napolnjenosti"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Znova vnesite novo geslo za popolno varnostno kopiranje"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Nastavi geslo za varnostno kopijo"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Prekliči"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Dodatne posodobitve sistema"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Onemogočeno"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Dopuščajoče"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Dokončaj"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Posnemi fotografijo"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Izberite fotografijo iz galerije"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Izberite fotografijo"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Kartici SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Kartice SIM"</string>

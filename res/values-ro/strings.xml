@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitare de împerechere"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Atingeţi pentru a împerechea cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Afişaţi fişierele primite"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Selector de dispozitive Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Alegeți dispozitivul Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitare de permisiune Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"O aplicație încearcă să activeze Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"O aplicație încearcă să facă tableta vizibilă pentru alte gadgeturi Bluetooth pentru <xliff:g id="TIMEOUT">%1$d</xliff:g> (de) secunde."</string>
@@ -263,7 +263,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"Se scanează cardul SD pentru a se identifica fişiere media..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3624143937437417788">"Stoc.USB mont. numai în citire"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"Cardul SD montat este numai în citire."</string>
-    <string name="skip_label" msgid="47510779345218297">"Omit."</string>
+    <string name="skip_label" msgid="47510779345218297">"Omiteți"</string>
     <string name="next_label" msgid="4693520878012668114">"Înainte"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"Limba"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Alegeţi activitatea"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Asociaţi"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"CONECTAȚI"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Anulaţi"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Asocierea dispozitivelor vă permite accesul la persoanele de contact și la istoricul apelurilor când dispozitivul este conectat."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Nu s-a putut împerechea cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Nu s-a putut împerechea cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g> din cauza unui cod PIN sau al unei chei de acces incorecte."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"CONFIGURAȚI"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Conectați-vă automat la rețelele disponibile cu un asistent Wi-Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Asistent Wi-Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Asistentul Wi-Fi Google vă conectează automat la cele mai bune rețele Wi-Fi disponibile"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Asistentul Wi‑Fi Google detectează rețelele disponibile și vă conectează dispozitivul la rețeaua cu cea mai mare viteză și fiabilitate."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Pentru a vă proteja datele, Asistentul Wi-Fi Google poate oferi o conexiune VPN sigură prin serverele Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nu, mulțumesc"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"DA, ACCEPT"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Solicitare de conexiune"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Asist. Wi-Fi dorește să config. o conex. VPN care îi perm. să monitor. traficul de rețea. Accept. dacă aveți încredere în sursă."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"apare în partea de sus a ecranului când rețeaua VPN este activă."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCEPT"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"REFUZ"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Monitorizarea rețelei"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Ați permis „Asistentului Wi‑Fi Google” să configureze o conexiune VPN, deci aplicația poate monitoriza traficul în rețea."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> vă conectează automat la cea mai bună rețea disponibilă Wi-Fi."</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"DESCHIDEȚI APLICAȚIA"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Proiectați ecranul"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activați ecranul wireless"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permiteți serviciului de localizare Google și altor aplicații să caute rețele, chiar dacă funcția Wi-Fi este dezactivată."</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gestionați automat Wi-Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Permiteți <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> să gestioneze conexiunea dv. Wi-Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Asistent Wi-Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Asistent Wi‑Fi Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalați certificate"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Pentru a îmbunătăți precizia locației, dar și în alte scopuri, Google și alte aplicații pot căuta rețele în apropiere, chiar dacă rețeaua Wi-Fi este dezactivată. Dacă nu doriți acest lucru, accesați Avansate &gt; Scanare mereu disponibilă."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplicațiile pot căuta rețele în apropiere, chiar dacă rețeaua Wi-Fi este dezactivată. Dacă nu doriți acest lucru, accesați Avansate &gt; Scanare mereu disponibilă."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Drept de autor"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenţă"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termeni şi condiţii"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Imagini de fundal"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Furnizorii de imagini din satelit:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenţe open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"A apărut o problemă la încărcarea licenţelor."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Se încarcă…"</string>
@@ -1595,13 +1585,12 @@
     <string name="print_blocked_state_title_template" msgid="9065391617425962424">"Printare blocată: <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
     <string name="print_search_box_shown_utterance" msgid="7730361832020726951">"Caseta de căutare este afișată"</string>
     <string name="print_search_box_hidden_utterance" msgid="7980832833405818400">"Caseta de căutare este ascunsă"</string>
-    <string name="power_usage_summary_title" msgid="7190304207330319919">"Battery"</string>
+    <string name="power_usage_summary_title" msgid="7190304207330319919">"Baterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Ce funcţii au utilizat bateria"</string>
     <string name="power_usage_not_available" msgid="3214000535532434353">"Date utilizare baterie nedisp."</string>
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Timp rămas: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> până la finalizarea încărcării"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – a mai rămas aproximativ <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> până la încărcare completă"</string>
@@ -1734,12 +1723,9 @@
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Căutare vocală"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Tastatură Android"</string>
     <string name="voice_category" msgid="1430370497125803904">"Voce"</string>
-    <!-- no translation found for voice_input_settings (1099937800539324567) -->
-    <skip />
-    <!-- no translation found for voice_input_settings_title (2676028028084981891) -->
-    <skip />
-    <!-- no translation found for voice_service_preference_section_title (3778706644257601021) -->
-    <skip />
+    <string name="voice_input_settings" msgid="1099937800539324567">"Setări de intrare vocală"</string>
+    <string name="voice_input_settings_title" msgid="2676028028084981891">"Intrare vocală"</string>
+    <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Servicii de intrare vocală"</string>
     <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Expresie de activare și interacțiune complete"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Transformare simplă a vorbirii în text"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Acest serviciu de introducere vocală va putea să asigure în permanență monitorizarea vocală și să controleze aplicațiile cu comenzi vocale în locul dvs. Acesta provine din aplicația <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Activați utilizarea acestui serviciu?"</string>
@@ -2040,28 +2026,19 @@
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"Utilizarea aplicațiilor"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"Roaming de date"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"Restricţionaţi datele de fundal"</string>
-    <!-- no translation found for data_usage_menu_allow_background (2694761978633359223) -->
-    <skip />
+    <string name="data_usage_menu_allow_background" msgid="2694761978633359223">"Permiteți date de fundal"</string>
     <string name="data_usage_menu_split_4g" msgid="5322857680792601899">"Utilizarea 4G afişată separat"</string>
     <string name="data_usage_menu_show_wifi" msgid="2296217964873872571">"Afișați Wi-Fi"</string>
-    <!-- no translation found for data_usage_menu_hide_wifi (7290056718050186769) -->
-    <skip />
+    <string name="data_usage_menu_hide_wifi" msgid="7290056718050186769">"Ascundeți Wi‑Fi"</string>
     <string name="data_usage_menu_show_ethernet" msgid="5181361208532314097">"Afişaţi utiliz. conex. Ethernet"</string>
-    <!-- no translation found for data_usage_menu_hide_ethernet (3326702187179943681) -->
-    <skip />
-    <!-- no translation found for data_usage_menu_metered (6235119991372755026) -->
-    <skip />
+    <string name="data_usage_menu_hide_ethernet" msgid="3326702187179943681">"Ascund. utiliz. Ethernet"</string>
+    <string name="data_usage_menu_metered" msgid="6235119991372755026">"Restricții de rețea"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sincronizați automat datele"</string>
-    <!-- no translation found for data_usage_menu_sim_cards (6410498422797244073) -->
-    <skip />
-    <!-- no translation found for data_usage_menu_cellular_networks (5243515735055652279) -->
-    <skip />
-    <!-- no translation found for account_settings_menu_auto_sync (6243013719753700377) -->
-    <skip />
-    <!-- no translation found for account_settings_menu_auto_sync_personal (785541379617346438) -->
-    <skip />
-    <!-- no translation found for account_settings_menu_auto_sync_work (329565580969147026) -->
-    <skip />
+    <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Carduri SIM"</string>
+    <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Rețele mobile"</string>
+    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronizați automat datele"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sincron. auto. date personale"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sincron. auto. date serviciu"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Schimbaţi data ciclului..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Ziua din lună pentru resetarea ciclului de utilizare a datelor:"</string>
     <string name="data_usage_empty" msgid="8621855507876539282">"Nicio aplic. nu a utilizat date în ac. perioadă."</string>
@@ -2085,8 +2062,7 @@
     <string name="data_usage_enable_4g" msgid="3635854097335036738">"Date 4G"</string>
     <string name="data_usage_forground_label" msgid="7654319010655983591">"În prim-plan:"</string>
     <string name="data_usage_background_label" msgid="2722008379947694926">"În fundal:"</string>
-    <!-- no translation found for data_usage_app_settings (2279171379771253165) -->
-    <skip />
+    <string name="data_usage_app_settings" msgid="2279171379771253165">"Setări aplicaţii"</string>
     <string name="data_usage_app_restrict_background" msgid="7510046552380574925">"Restr. datele de fundal ale apl."</string>
     <string name="data_usage_app_restrict_background_summary" msgid="3720075732277934106">"Dezactivați datele de fundal în rețelele mobile."</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="1446565717342917727">"Pt. restr. date fundal pt. aplic., setați limita pt. date mobile"</string>
@@ -2118,17 +2094,12 @@
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>: aproximativ <xliff:g id="TOTAL">%1$s</xliff:g> utilizaţi."</string>
     <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>: aprox. <xliff:g id="TOTAL">%1$s</xliff:g> utilizaţi, conform tabletei. Contabilizarea operatorului poate diferi."</string>
     <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>: aprox. <xliff:g id="TOTAL">%1$s</xliff:g> utilizaţi, conform tel. Contabilizarea operatorului dvs. poate diferi."</string>
-    <!-- no translation found for data_usage_metered_title (7383175371006596441) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_body (3262343834446126044) -->
-    <skip />
+    <string name="data_usage_metered_title" msgid="7383175371006596441">"Restricții de rețea"</string>
+    <string name="data_usage_metered_body" msgid="3262343834446126044">"Rețelele contorizate sunt considerate rețele celulare când datele de fundal sunt restricționate. Aplicațiile pot afișa mesaje de avertizare înainte de a utiliza aceste rețele pentru descărcări de dimensiuni mari."</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Rețele mobile"</string>
-    <!-- no translation found for data_usage_metered_wifi (1761738002328299714) -->
-    <skip />
-    <!-- no translation found for data_usage_metered_wifi_disabled (727808462375941567) -->
-    <skip />
-    <!-- no translation found for data_usage_disclaimer (6887858149980673444) -->
-    <skip />
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Rețele contorizate Wi‑Fi"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Pentru a selecta rețelele Wi-Fi contorizate, porniți Wi-Fi."</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"Datele pot fi contorizate diferit la operator și pe dispozitiv."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Apel de urgenţă"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Reveniţi la apel"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nume"</string>
@@ -2180,7 +2151,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Reintroduceţi aici noua parolă pentru copia de rezervă completă"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Setaţi parola pentru copia de rezervă"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Anulaţi"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Actualizări de sistem suplimentare"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Dezactivat"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Facultativ"</string>
@@ -2316,6 +2286,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Finalizați"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Faceți o fotografie"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Alegeți o fotografie din Galerie"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Selectați o fotografie"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Carduri SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Carduri SIM"</string>
@@ -2359,8 +2330,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi conexiune la rețea"</string>
     <string name="keywords_more_default_sms_app" msgid="2744404159003574745">"mesaj text"</string>
     <string name="keywords_more_mobile_networks" msgid="7813380887358745769">"celulă celular operator wireless"</string>
-    <!-- no translation found for keywords_home (3626170808219458848) -->
-    <skip />
+    <string name="keywords_home" msgid="3626170808219458848">"lansator"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ecran tactil"</string>
     <string name="keywords_display_brightness_level" msgid="8636451602230815191">"estompați ecranul tactil"</string>
     <string name="keywords_display_auto_brightness" msgid="8070218600502753102">"estompați ecranul tactil"</string>
@@ -2370,8 +2340,7 @@
     <string name="keywords_storage" msgid="7007275853993419928">"spațiu hard disk"</string>
     <string name="keywords_battery" msgid="3992479295298655138">"putere"</string>
     <string name="keywords_spell_checker" msgid="4509482591225399210">"ortografie"</string>
-    <!-- no translation found for keywords_voice_input (3519547605812413860) -->
-    <skip />
+    <string name="keywords_voice_input" msgid="3519547605812413860">"recunoaștere introducere vorbire vorbit limbă hands-free mâini libere detectare cuvânt jignitor audio istoric bluetooth cască"</string>
     <string name="keywords_text_to_speech_output" msgid="8207889472282225512">"evaluați limbă implicit vorbit vorbiți"</string>
     <string name="keywords_date_and_time" msgid="7666950126499155141">"ceas"</string>
     <string name="keywords_factory_data_reset" msgid="3693730656843989732">"estompare ștergere"</string>
@@ -2463,14 +2432,13 @@
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Niciuna"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatizare"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Activați automat"</string>
-    <!-- no translation found for summary_divider_text (7228986578690919294) -->
-    <skip />
+    <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Niciodată"</string>
     <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Apeluri telefonice"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Mesaje"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"De la"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Oricine"</string>
-    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Numai persoane de contact"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Numai din agendă"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Numai pers. de contact cu stea"</string>
     <string name="zen_mode_alarm_info" msgid="5061362593677527505">"Alarmele și alte mementouri personale au întotdeauna prioritate"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activați automat"</string>
@@ -2486,20 +2454,13 @@
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Introduceți codul PIN de administrator"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Dezactivat"</string>
-    <!-- no translation found for screen_pinning_title (2292573232264116542) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (3022868253807792488) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Fixarea ecranului"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"Când această setare este activată, puteți modifica starea dispozitivului pentru a menține afișat ecranul curent.\n\nPentru a fixa un ecran:\n\n1. Activați această setare.\n\n2. Deschideți o aplicație.\n\n3. Atingeți butonul Recente.\n\n4. Atingeți pictograma indicator."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil de serviciu"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"Când dispozitivul este rotit"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Rotiți conținutul ecranului"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Mențineți vizualizarea portret"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Mențineți vizualizarea peisaj"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Mențineți orientarea actuală"</string>
 </resources>

@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Demande d\'association"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Appuyez pour associer l\'appareil à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Afficher les fichiers reçus"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Sélecteur d\'appareil Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Sélectionner un appareil Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Demande d\'autorisation Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Une application requiert l\'activation du Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Une application nécessite que d\'autres appareils Bluetooth puissent détecter votre tablette pendant <xliff:g id="TIMEOUT">%1$d</xliff:g> secondes."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Se connecter"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ASSOCIER"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annuler"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"L\'association vous permet d\'accéder à vos contacts et à l\'historique des appels lorsque vous êtes connecté."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Impossible d\'associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Impossible d\'établir l\'association avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> en raison d\'un code PIN ou d\'une clé d\'accès incorrects."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"CONFIGURER"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Connectez-vous automatiquement aux réseaux disponibles à l\'aide d\'un assistant Wi‑Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Assistant Wi‑Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"L\'assistant Wi-Fi Google vous connecte automatiquement au meilleur réseau Wi‑Fi disponible"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"L\'assistant Wi‑Fi Google détecte les réseaux disponibles et connecte votre appareil au meilleur réseau en termes de vitesse et de fiabilité."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Pour protéger vos données, l\'assistant Wi‑Fi Google peut fournir une connex. VPN sécurisée via serveurs Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Non, merci"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"OUI, J\'ACCEPTE"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Demande de connexion"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"L\'assistant Wi‑Fi tente de configurer une connexion VPN pour contrôler le trafic réseau. N\'acceptez que si la source est fiable."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"s\'affiche en haut de l\'écran lorsque la connexion VPN est active."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCEPTER"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"REFUSER"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Contrôle du réseau"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Vous avez autorisé l\'assistant Wi‑Fi Google à configurer une connexion VPN. L\'appli peut donc contrôler le trafic réseau."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> vous connecte automatiquement au meilleur réseau Wi‑Fi disponible"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"OUVRIR L\'APPLICATION"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Caster l\'écran"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activer l\'affichage sans fil"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Autoriser le service de localisation de Google et les autres applications à rechercher des réseaux, même si le Wi-Fi est désactivé"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gérer automatiquement le Wi‑Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Laisser l\'assistant <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> gérer votre connexion Wi-Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Assistant Wi‑Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Assistant Wi‑Fi Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer les certificats"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Pour améliorer la précision et à d\'autres fins, le service de localisation de Google et d\'autres applications peuvent rechercher des réseaux Wi-Fi à proximité, même lorsque le Wi-Fi est désactivé. Vous pouvez modifier ce paramètre dans Options avancées &gt; Recherche toujours disponible."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Les applications peuvent rechercher des réseaux à proximité, même lorsque le Wi-Fi est désactivé. Vous pouvez modifier ce paramètre dans Avancé &gt; Recherche toujours disponible."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Droits d\'auteur"</string>
     <string name="license_title" msgid="1990487604356037871">"Licence"</string>
     <string name="terms_title" msgid="7697580845616764642">"Conditions d\'utilisation"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Fonds d\'écran"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Fournisseurs d\'images satellite :\n© CNES/Astrium, DigitalGlobe, Bluesky 2014"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licences open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Un problème est survenu lors du chargement des licences."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Chargement..."</string>
@@ -1362,7 +1352,7 @@
     <string name="auto_punctuate" msgid="4595367243950425833">"Ponctuation automatique"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Paramètres du clavier physique"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Appuyez deux fois sur la touche Espace pour insérer \".\""</string>
-    <string name="show_password" msgid="3001113966880559611">"Faire apparaître mots de passe"</string>
+    <string name="show_password" msgid="3001113966880559611">"Faire apparaître les mots de passe"</string>
     <string name="ime_security_warning" msgid="4135828934735934248">"Ce mode de saisie est susceptible d\'enregistrer le texte que vous saisissez, y compris vos données personnelles, telles que les mots de passe et les numéros de carte de paiement. Il provient de l\'application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Voulez-vous vraiment l\'activer ?"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'application <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique ?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"Paramètres"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant : <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> avant chargement complet"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – Temps restant : <xliff:g id="TIME">%2$s</xliff:g> environ"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% (chargée à 100 %% dans <xliff:g id="TIME">%2$s</xliff:g>)"</string>
@@ -2163,9 +2152,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Confirmez ici votre nouveau mot de passe de sauvegarde complète."</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Définir le mot de passe de sauvegarde"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annuler"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for percentage (5866131581207788624) -->
-    <skip />
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Mises à jour supplémentaires du système"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Désactivé"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissif"</string>
@@ -2201,7 +2187,7 @@
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Configurer l\'utilisateur ?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Assurez-vous que la personne est disponible, et qu\'elle peut utiliser l\'appareil pour configurer son espace."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Configurer le profil maintenant ?"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Configurer maintenant"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Configurer"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Pas maintenant"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Seul le propriétaire de la tablette peut gérer les utilisateurs."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Seul le propriétaire du téléphone peut gérer les utilisateurs."</string>
@@ -2300,7 +2286,8 @@
     <string name="wizard_next" msgid="3606212602795100640">"Suivant"</string>
     <string name="wizard_finish" msgid="3286109692700083252">"Terminer"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Prendre une photo"</string>
-    <string name="user_image_choose_photo" msgid="7940990613897477057">"Sélectionner une photo dans la galerie"</string>
+    <string name="user_image_choose_photo" msgid="7940990613897477057">"Sélectionner dans la galerie"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Sélectionner une photo"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Cartes SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Cartes SIM"</string>
@@ -2381,11 +2368,11 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume de l\'alarme"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume de la sonnerie"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume des notifications"</string>
-    <string name="zen_mode_settings_title" msgid="7014915558669122902">"Interruptions"</string>
+    <string name="zen_mode_settings_title" msgid="7014915558669122902">"Sonneries"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"À la réception d\'appels et de notifications"</string>
     <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"À la réception de notifications"</string>
-    <string name="zen_mode_option_off" msgid="3167702608910820883">"Toujours interrompre"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"N\'autoriser que les interruptions prioritaires"</string>
+    <string name="zen_mode_option_off" msgid="3167702608910820883">"Toujours sonner"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"N\'autoriser que les sonneries prioritaires"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Ne pas interrompre"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Sonnerie du téléphone"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Sonnerie de notification par défaut"</string>
@@ -2432,7 +2419,7 @@
     <string name="app_notification_block_title" msgid="172237877395761371">"Bloquer"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Ne jamais afficher les notifications de cette application"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioritaire"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Afficher les notifications en haut de la liste et continuer à les recevoir lorsque l\'appareil est configuré pour les interruptions prioritaires seulement"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Afficher les notifications en haut de la liste et continuer à les recevoir lorsque l\'appareil est configuré pour les sonneries prioritaires uniquement"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Sensible"</string>
     <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Lorsque l\'appareil est verrouillé, masquer tout contenu sensible figurant dans les notifications de cette application"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloqué"</string>
@@ -2440,8 +2427,8 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensible"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"OK"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Jusqu\'à désactivation"</string>
-    <string name="zen_mode_important_category" msgid="8123274463331022993">"Interruptions prioritaires"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Arrêt (interruptions prio. seulement)"</string>
+    <string name="zen_mode_important_category" msgid="8123274463331022993">"Sonneries prioritaires"</string>
+    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Arrêt (sonneries prioritaires uniquement)"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Jours"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Aucun"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatisation"</string>
@@ -2452,8 +2439,8 @@
     <string name="zen_mode_messages" msgid="5886440273537510894">"Messages"</string>
     <string name="zen_mode_from" msgid="1777739391289980762">"De"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Tout le monde"</string>
-    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Contacts seulement"</string>
-    <string name="zen_mode_from_starred" msgid="2168651127340381533">"Contacts favoris seulement"</string>
+    <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Contacts uniquement"</string>
+    <string name="zen_mode_from_starred" msgid="2168651127340381533">"Favoris uniquement"</string>
     <string name="zen_mode_alarm_info" msgid="5061362593677527505">"Les alarmes et autres rappels personnels sont toujours prioritaires."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activation auto"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Jamais"</string>
@@ -2468,7 +2455,7 @@
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Saisir le code d\'accès d\'administrateur"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Activé"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Désactivé"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"Épinglage à l\'écran"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Épinglage d\'écran"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"Lorsque ce paramètre est activé, vous pouvez modifier l\'état de l\'appareil afin que l\'écran actuel reste visible.\n\nPour épingler un écran, procédez comme suit :\n\n1. Activez ce paramètre.\n\n2. Ouvrez une application.\n\n3. Appuyez sur le bouton Récents.\n\n4. Appuyez sur l\'icône représentant une punaise."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil professionnel"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Expérimental)"</string>
