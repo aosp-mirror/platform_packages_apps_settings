@@ -128,8 +128,8 @@
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"पुश बटन"</item>
-    <item msgid="1624323946324499595">"साथी उपकरण से पिन"</item>
-    <item msgid="5366790421523328066">"इस उपकरण से पिन"</item>
+    <item msgid="1624323946324499595">"साथी डिवाइस से पिन"</item>
+    <item msgid="5366790421523328066">"इस डिवाइस से पिन"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"कनेक्ट है"</item>
@@ -228,7 +228,7 @@
     <item msgid="2681427309183221543">"GID"</item>
   </string-array>
   <string-array name="app_install_location_entries">
-    <item msgid="8151497958991952759">"आंतरिक उपकरण संग्रहण"</item>
+    <item msgid="8151497958991952759">"आंतरिक डिवाइस मेमोरी"</item>
     <item msgid="3738430123799803530">"निकाले जाने योग्‍य SD कार्ड"</item>
     <item msgid="4498124044785815005">"सिस्‍टम को निर्धारित करने दें"</item>
   </string-array>
@@ -237,7 +237,7 @@
     <item msgid="255608127647030286">"व्यक्तिगत"</item>
     <item msgid="4588829735729884491">"संदेश सेवा"</item>
     <item msgid="886742181977884584">"मीडिया"</item>
-    <item msgid="7924928667052300589">"उपकरण"</item>
+    <item msgid="7924928667052300589">"डिवाइस"</item>
   </string-array>
   <string-array name="app_ops_summaries">
     <item msgid="4979188868761515915">"अस्पष्ट स्थान"</item>
@@ -251,7 +251,7 @@
     <item msgid="446877710771379667">"कैलेंडर पढ़ें"</item>
     <item msgid="7674458294386319722">"कैलेंडर बदलें"</item>
     <item msgid="8281201165558093009">"वाई-फ़ाई स्कैन"</item>
-    <item msgid="8694611243479480497">"सूचना"</item>
+    <item msgid="8694611243479480497">"नोटिफिकेशन"</item>
     <item msgid="7776439107987345446">"सेल स्कैन"</item>
     <item msgid="514615766544675057">"फ़ोन पर कॉल करें"</item>
     <item msgid="8181415497109310680">"SMS पढ़ें"</item>
@@ -278,7 +278,7 @@
     <item msgid="4270236897655923007">"रिंग आवाज़"</item>
     <item msgid="6325739889222559394">"मीडिया वॉल्‍यूम"</item>
     <item msgid="5762123934816216821">"अलार्म आवाज़"</item>
-    <item msgid="785049718065337473">"सूचना वॉल्‍यूम"</item>
+    <item msgid="785049718065337473">"नोटिफिकेशन वॉल्‍यूम"</item>
     <item msgid="6700305533746877052">"bluetooth आवाज़"</item>
     <item msgid="2029227495214047094">"सचेत रखें"</item>
     <item msgid="26109888160231211">"मॉनिटर का स्थान"</item>
@@ -300,7 +300,7 @@
     <item msgid="6093344633066170692">"कैलेंडर पढ़ें"</item>
     <item msgid="1334886368750347692">"कैलेंडर बदलें"</item>
     <item msgid="1638204101698708656">"स्थान"</item>
-    <item msgid="2154671955760380322">"सूचना पोस्ट करें"</item>
+    <item msgid="2154671955760380322">"नोटिफिकेशन पोस्ट करें"</item>
     <item msgid="4282477730595931828">"स्थान"</item>
     <item msgid="4891423912898525905">"फ़ोन पर कॉल करें"</item>
     <item msgid="2623604824935968113">"SMS/MMS पढ़ें"</item>
@@ -327,7 +327,7 @@
     <item msgid="7983336752371254444">"रिंग आवाज़"</item>
     <item msgid="7878027809189330917">"मीडिया वॉल्‍यूम"</item>
     <item msgid="7260546305036218513">"अलार्म आवाज़"</item>
-    <item msgid="9103719301075748925">"सूचना वॉल्‍यूम"</item>
+    <item msgid="9103719301075748925">"नोटिफिकेशन वॉल्‍यूम"</item>
     <item msgid="7025966722295861512">"ब्लूटूथ वॉल्‍यूम"</item>
     <item msgid="4665183401128289653">"सचेत रखें"</item>
     <item msgid="8584357129746649222">"स्थान"</item>
@@ -387,6 +387,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64K प्रति लॉग बफ़र"</item>
@@ -500,8 +505,8 @@
   </string-array>
   <string-array name="entries_zen_mode">
     <item msgid="816404936744485190">"बंद"</item>
-    <item msgid="5656544177755411222">"सीमित रुकावटें"</item>
-    <item msgid="8735337502532332056">"शून्य रुकावटें"</item>
+    <item msgid="5656544177755411222">"कॉल और मैसेज को कभी कभी रोकें"</item>
+    <item msgid="8735337502532332056">"कॉल और मैसेज को कभी ना रोकें"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"सामान्य"</item>
@@ -523,6 +528,6 @@
     <item msgid="2860945127596974299">"अंतिम गतिविधि"</item>
     <item msgid="8610560843693675830">"संचित (गतिविधि)"</item>
     <item msgid="4338089220026248848">"संचित (गतिविधि क्लाइंट)"</item>
-    <item msgid="6652164677254579050">"संचित (रिक्त)"</item>
+    <item msgid="6652164677254579050">"संचित (खाली)"</item>
   </string-array>
 </resources>

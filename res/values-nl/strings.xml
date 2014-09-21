@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Koppelingsverzoek"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Raak dit aan om te koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Ontvangen bestanden weergeven"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth-apparaatkiezer"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth-apparaat kiezen"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Machtigingsverzoek voor Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Een app wil Bluetooth inschakelen."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Een app wil uw tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Koppelen"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"KOPPELEN"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annuleren"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Koppelen verleent toegang tot uw contacten en oproepgeschiedenis wanneer de apparaten zijn verbonden."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Kan niet koppelen aan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Kan niet koppelen aan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> vanwege een onjuiste pincode of toegangscode."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"INSTELLEN"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Automatisch verbinding maken met beschikbare netwerken via een wifi-assistent."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant maakt automatisch verbinding met het beste wifi-netwerk"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi Assistant detecteert netwerken die beschikbaar voor u zijn en maakt op uw apparaat verbinding met het snelste en betrouwbaarste netwerk."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Google Wi‑Fi Assistant kan een veilige VPN-verbinding bieden via Google-servers om uw gegevens te beschermen."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nee, bedankt"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"JA, NU INSCHAKELEN"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Verbindingsverzoek"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi Assistant wil een VPN-verbinding instellen om netwerkverkeer bij te houden. Accepteer alleen als u de bron vertrouwt."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"wordt boven aan het scherm weergegeven wanneer het VPN actief is."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCEPTEREN"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"WEIGEREN"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Netwerkcontrole"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"U heeft \'Google Wi‑Fi Assistant\' een VPN-verbinding laten instellen. Deze app kan nu netwerkverkeer bijhouden."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> maakt automatisch verbinding met het beste wifi-netwerk"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"APP OPENEN"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Scherm casten"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Draadloze weergave inschakelen"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"De locatieservice en andere apps van Google laten scannen naar netwerken, ook wanneer wifi is uitgeschakeld"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wifi automatisch beheren"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Uw wifi-verbinding laten beheren door <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Certificaten installeren"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Als u de nauwkeurigheid van locaties en voor andere doeleinden wilt verbeteren, kunnen Google en andere apps scannen naar netwerken in de buurt, ook wanneer wifi is uitgeschakeld. Als u niet wilt dat dit gebeurt, gaat u naar \'Geavanceerd\' &gt; \'Scannen altijd beschikbaar\'."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apps kunnen scannen naar netwerken in de buurt, ook wanneer wifi is uitgeschakeld. Als u niet wilt dat dit gebeurt, gaat u naar \'Geavanceerd\' &gt; \'Scannen altijd beschikbaar\'."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Auteursrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Licentie"</string>
     <string name="terms_title" msgid="7697580845616764642">"Algemene voorwaarden"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Achtergronden"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Providers van satellietbeelden:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open-sourcelicenties"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Er is een probleem bij het laden van de licenties."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Laden..."</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> tot accu leeg is"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> tot accu is opgeladen"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - ca. <xliff:g id="TIME">%2$s</xliff:g> resterend"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> tot vol"</string>
@@ -1693,7 +1682,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android-besturingssysteem"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="battery_saver" msgid="1426682272004907982">"Accubesparing"</string>
-    <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Automatisch uitschakelen"</string>
+    <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Automatisch inschakelen"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nooit"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"bij %1$d%% accu"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistieken"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Typ hier nogmaals uw nieuwe wachtwoord voor volledige back-up"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Wachtwoord voor back-up instellen"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annuleren"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Aanvullende systeemupdates"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled (Uitgeschakeld)"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive (Tolerant)"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Voltooien"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Foto maken"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Foto kiezen in Galerij"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Foto selecteren"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Simkaarten"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Simkaarten"</string>

@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"配對要求"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"輕觸即可和「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」進行配對。"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"顯示已接收的檔案"</string>
-    <string name="device_picker" msgid="8398232791303186677">"藍牙裝置選擇器"</string>
+    <string name="device_picker" msgid="4978696506172252813">"選擇藍牙裝置"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"藍牙權限要求"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"應用程式要求開啟藍牙功能。"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"應用程式要求開放 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒，讓其他藍牙裝置能搜尋到您的平板電腦。"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"配對"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"配對"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"取消"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"裝置配對完成後，連線時即可存取您的聯絡人和通話紀錄。"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"無法與 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 配對。"</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"無法與 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 配對，因為 PIN 或密碼金鑰不正確。"</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"設定"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"透過 Wi‑Fi Assistant 自動連線到可用網路。"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant 可自動將您的裝置連上目前可用的最佳 Wi-Fi 網路"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi Assistant 會偵測您可使用的網路，將您的裝置連上速度和穩定性最佳的網路。"</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"為保護您的資料，Google Wi‑Fi Assistant 會透過 Google 伺服器提供安全的 VPN 連線。"</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"不用了，謝謝"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"立即啟用"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"連線要求"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi Assistant 要求設定 VPN 連線以供監控網路流量。除非您信任來源，否則請勿接受連線。"</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"VPN 作用時顯示於畫面頂端。"</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"接受"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"拒絕"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"網路監控"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"您授權「Google Wi‑Fi Assistant」設定 VPN 連線，因此該應用程式可監控網路流量。"</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>可自動將您的裝置連上目前可用的最佳 Wi-Fi 網路"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"開啟應用程式"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"投放螢幕"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"啟用無線螢幕分享"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允許 Google 的定位服務和其他應用程式掃描網路 (即使 Wi-Fi 已關閉仍允許掃描)"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"自動管理 Wi‑Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"允許 <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> 管理您的 Wi-Fi 連線"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"為了提升定位精確度及用於其他用途，Google 和其他應用程式可能會掃描附近的 Wi-Fi 網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"應用程式可能會掃描附近的網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"版權"</string>
     <string name="license_title" msgid="1990487604356037871">"授權"</string>
     <string name="terms_title" msgid="7697580845616764642">"條款及細則"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"桌布"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"衛星影像提供者：\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"開放原始碼授權"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"載入授權時發生問題"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"載入中…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"還剩 <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>後充電完畢"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%%：還剩大約 <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%%：<xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g>後充飽"</string>
@@ -2165,7 +2154,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"在這裡重新輸入完整備份的新密碼"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"設定備份密碼"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"取消"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"其他系統更新"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"已停用"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"許可"</string>
@@ -2301,6 +2289,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"完成"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"拍攝相片"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"從圖片庫選擇相片"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"選取相片"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM 卡"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM 卡"</string>
@@ -2469,17 +2458,12 @@
     <string name="switch_on_text" msgid="1124106706920572386">"開啟"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"開啟這項設定時，可讓裝置保持在顯示目前螢幕的狀態。\n\n如何固定螢幕：\n\n1. 開啟這項設定。\n\n2. 開啟應用程式。\n\n3. 輕觸 [最近使用的應用程式] 按鈕。\n\n4. 輕觸圖釘圖示。"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"開啟這項設定時，可讓裝置鎖定在目前的螢幕。\n\n如何固定螢幕：\n\n1. 將螢幕固定功能開啟。\n\n2. 開啟某個應用程式。\n\n3. 輕觸 [最近使用的應用程式] 按鈕。\n\n4. 輕觸圖釘圖示。"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"工作設定檔"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(實驗性)"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"當裝置旋轉時"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"旋轉畫面內容"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"保持直向畫面"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"保持橫向畫面"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"保持目前方向"</string>
 </resources>

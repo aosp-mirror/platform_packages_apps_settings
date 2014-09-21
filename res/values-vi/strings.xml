@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Yêu cầu ghép nối"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Chạm để ghép nối với  <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Hiển thị các tệp đã nhận"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Trình chọn thiết bị Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Chọn thiết bị Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Yêu cầu quyền Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Một ứng dụng muốn bật Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Một ứng dụng muốn đặt máy tính bảng của bạn ở chế độ hiển thị với các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây."</string>
@@ -334,7 +334,7 @@
     <string name="lock_after_timeout" msgid="4590337686681194648">"Tự động khóa"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi ngủ"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sau khi ngủ, trừ khi vẫn mở khóa bởi <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
-    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Hiển thị th.tin chủ sở hữu trên màn hình khóa"</string>
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Hiển thị thông tin chủ sở hữu trên màn hình khóa"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Thông tin chủ sở hữu"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Bật tiện ích con"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Bị tắt bởi quản trị viên"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Ghép nối"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"GHÉP NỐI"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Hủy"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Ghép nối giúp bạn có thể truy cập danh bạ và nhật ký cuộc gọi của mình khi được kết nối."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Không thể ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Không thể ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> do mã PIN hoặc mã xác nhận không đúng."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"THIẾT LẬP"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Tự động kết nối với các mạng có sẵn bằng Trình hỗ trợ Wi‑Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Trình hỗ trợ Wi‑Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Trình hỗ trợ Wi‑Fi của Google tự động kết nối bạn với mạng Wi-Fi tốt nhất hiện có"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Trình hỗ trợ Wi‑Fi của Google phát hiện các mạng sẵn dùng với bạn và kết nối thiết bị của bạn với mạng có tốc độ và độ tin cậy cao nhất."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Để bảo vệ DL, Trình HT Wi‑Fi của Google có thể cung cấp KN VPN an toàn thông qua máy chủ Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Không, xin cảm ơn"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"CÓ, TÔI MUỐN BẬT"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Yêu cầu kết nối"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Trình HT Wi‑Fi muốn t.lập KN VPN cho phép ƯD này g.sát LLTC mạng. Chỉ ch.nhận nếu bạn t.tưởng nguồn."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"xuất hiện ở đầu màn hình của bạn khi VPN đang hoạt động."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"CHẤP NHẬN"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"TỪ CHỐI"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Giám sát mạng"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Bạn đã cấp cho \"Trình HT Wi‑Fi của Google\" quyền t.lập KN VPN, tức là ƯD này có thể g.sát LLTC mạng."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> tự động kết nối bạn với mạng Wi‑Fi tốt nhất có sẵn"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"MỞ ỨNG DỤNG"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Màn hình truyền"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Bật hiển thị không dây"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Cho phép dịch vụ định vị và các ứng dụng khác của Google quét tìm mạng, ngay cả khi Wi-Fi bị tắt"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Tự động quản lý Wi-Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Cho phép <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> quản lý kết nối Wi‑Fi của bạn"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Trình hỗ trợ Wi‑Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Trình hỗ trợ Wi‑Fi của Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Cài đặt chứng chỉ"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Để nâng cao độ chính xác và cho các mục đích khác, Google và các ứng dụng khác có thể quét tìm các mạng gần đó, ngay cả khi Wi-Fi bị tắt. Nếu bạn không muốn điều này xảy ra, hãy đi đến Nâng cao &gt; Tùy chọn quét luôn sẵn sàng."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Ứng dụng có thể quét tìm các mạng gần đó, ngay cả khi Wi-Fi bị tắt. Nếu bạn không muốn điều này xảy ra, hãy đi đến Nâng cao &gt; Tùy chọn quét luôn sẵn sàng."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Bản quyền"</string>
     <string name="license_title" msgid="1990487604356037871">"Giấy phép"</string>
     <string name="terms_title" msgid="7697580845616764642">"Điều khoản và điều kiện"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Hình nền"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Nhà cung cấp ảnh vệ tinh:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Giấy phép nguồn mở"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Đã xảy ra sự cố khi tải giấy phép."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Đang tải…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> còn lại"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> để tính phí"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - còn khoảng <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> cho đến khi đầy"</string>
@@ -2051,7 +2040,7 @@
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"T.động ĐB hóa d.liệu công việc"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Thay đổi chu kỳ..."</string>
     <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Ngày trong tháng để đặt lại chu kỳ sử dụng dữ liệu:"</string>
-    <string name="data_usage_empty" msgid="8621855507876539282">"Ko ứng dụng nào s.dụng dữ liệu trong t.gian này."</string>
+    <string name="data_usage_empty" msgid="8621855507876539282">"Không ứng dụng nào sử dụng dữ liệu lúc này."</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"Nền trước"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"Nền"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"bị hạn chế"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Nhập lại toàn bộ mật khẩu sao lưu mới của bạn vào đây"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Đặt mật khẩu sao lưu"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Hủy"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Bản cập nhật hệ thống bổ sung"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Đã tắt"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Cho phép"</string>
@@ -2197,7 +2185,7 @@
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Thiết lập người dùng ngay bây giờ?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Đảm bảo người đó có mặt để sử dụng thiết bị và thiết lập không gian của mình"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Thiết lập tiểu sử ngay bây giờ?"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Thiết lập ngay bây giờ"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Thiết lập ngay"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Không phải bây giờ"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="8440449301994432789">"Chỉ chủ sở hữu máy tính bảng mới có thể quản lý người dùng."</string>
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Chỉ chủ sở hữu điện thoại mới có thể quản lý người dùng."</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Hoàn tất"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Chụp ảnh"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Chọn ảnh từ Thư viện"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Chọn ảnh"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Thẻ SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Thẻ SIM"</string>
@@ -2468,14 +2457,9 @@
     <string name="screen_pinning_description" msgid="3022868253807792488">"Khi cài đặt này được bật, bạn có thể đưa thiết bị vào trạng thái duy trì hiển thị màn hình hiện tại.\n\nĐể ghim màn hình:\n\n1. Bật cài đặt này.\n\n2. Mở ứng dụng.\n\n3. Chạm vào nút Gần đây.\n\n4. Chạm vào biểu tượng ghim."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Hồ sơ công việc"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Thử nghiệm)"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"Khi xoay thiết bị"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Xoay các nội dung của màn hình"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Giữ nguyên chế độ xem dọc"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Giữ nguyên chế độ xem ngang"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Giữ nguyên hướng hiện tại"</string>
 </resources>

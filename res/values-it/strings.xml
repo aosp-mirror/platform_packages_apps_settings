@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Richiesta accoppiamento"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Tocca per l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostra file ricevuti"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Selettore dispositivo Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Scegli il dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Richiesta autorizzazione Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Un\'app chiede di attivare il Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Un\'app chiede di rendere il tablet visualizzabile da altri dispositivi Bluetooth per <xliff:g id="TIMEOUT">%1$d</xliff:g> secondi."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Accoppia"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ACCOPPIA"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annulla"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"L\'accoppiamento consente l\'accesso ai tuoi contatti e alla cronologia chiamate in caso di connessione"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Impossibile eseguire l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Impossibile eseguire l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. La passkey o il PIN è errato."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"IMPOSTA"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Connetti automaticamente alle reti disponibili con un assistente Wi-Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Assistente Wi‑Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant ti connette automaticamente alla migliore rete Wi‑Fi disponibile"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi-Fi Assistant rileva le reti disponibili e connette il dispositivo a quello avente le migliori velocità e affidabilità."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Per proteggere i dati, Google Wi-Fi Assistant può fornire una connessione VPN protetta con i server di Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"No, grazie"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"ACCETTO"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Richiesta di connessione"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi Assistant desidera impostare una connessione VPN che permetta di monitorare il traffico di rete. Accetta solo se consideri attendibile la fonte."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"visualizzato nella parte superiore dello schermo quando VPN è attivo."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCETTA"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"NON DO IL CONSENSO"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Monitoraggio rete"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"\"Google Wi-Fi Assistant\" è autorizzato a impostare una connessione VPN. Ciò significa che l\'app può monitorare il traffico di rete."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> ti connette automaticamente alla migliore rete Wi‑Fi disponibile"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"APRI APP"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Trasmetti schermo"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Attiva display wireless"</string>
@@ -619,12 +609,10 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Consenti al servizio di geolocalizzazione di Google e ad altre app di eseguire la scansione delle reti, anche quando il Wi-Fi non è attivo"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gestisci automaticamente Wi-Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Delega a <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> la gestione della connessione Wi‑Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Assistente Wi-Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installa certificati"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Per una maggiore precisione nella localizzazione e altri motivi, Google e altre app sono in grado di cercare reti nelle vicinanze, anche quando la connessione Wi-Fi è disattivata. Se non desideri consentire tale ricerca, accedi ad Avanzate &gt; Scansione sempre disponibile."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Le app possono cercare reti nelle vicinanze, anche quando la connessione Wi-Fi è disattivata. Se non desideri consentire tale ricerca, accedi ad Advanzate &gt; Scansione sempre disponibile."</string>
-    <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Non·mostrare·più"</string>
+    <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Non mostrare più"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Tieni attivo Wi‑Fi durante sospensione"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi‑Fi attivo in sospensione"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Si è verificato un problema durante la modifica dell\'impostazione"</string>
@@ -644,7 +632,7 @@
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Elimina rete"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modifica rete"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Scrivi su tag NFC"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Per visualizzare le reti disponibili, attiva Wi‑Fi."</string>
+    <string name="wifi_empty_list_wifi_off" msgid="8056223875951079463">"Per conoscere le reti disponibili, attiva il Wi‑Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="8746108031587976356">"Ricerca reti Wi‑Fi in corso…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="8280257225419947565">"Non disponi dell\'autorizzazione per cambiare la rete Wi-Fi."</string>
     <string name="wifi_other_network" msgid="1484433183857764750">"Aggiungi un\'altra rete"</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenza"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termini e condizioni"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Sfondi"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Fornitori di immagini satellitari:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenze open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Errore durante il caricamento delle licenze."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Caricamento..."</string>
@@ -1147,7 +1137,7 @@
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Scegli la tua sequenza"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Scegli il tuo PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Conferma la tua password"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Conferma il tuo modello"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Conferma la tua sequenza"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Conferma il tuo PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"Password non corrispondente"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"I PIN non corrispondono"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> rimanenti"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> alla ricarica"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - circa <xliff:g id="TIME">%2$s</xliff:g> rimanente"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> alla carica completa"</string>
@@ -1630,7 +1619,7 @@
     <string name="controls_subtitle" msgid="390468421138288702">"Regola consumo alimentazione"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Pacchetti inclusi"</string>
     <string name="power_screen" msgid="3023346080675904613">"Schermo"</string>
-    <string name="power_flashlight" msgid="7794409781003567614">"Flashlight"</string>
+    <string name="power_flashlight" msgid="7794409781003567614">"Torcia"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Cellulare in standby"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Digita nuovamente  la nuova password di backup completo qui"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Imposta password di backup"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annulla"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Aggiornamenti di sistema aggiuntivi"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disattivato"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissivo"</string>
@@ -2192,7 +2180,7 @@
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Utente"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Profilo con limitazioni"</string>
     <string name="user_add_user_title" msgid="2108112641783146007">"Aggiungere un nuovo utente?"</string>
-    <string name="user_add_user_message_long" msgid="718192651887726259">"Puoi condividere questo dispositivo con altri creando utenti aggiuntivi, ciascuno con un proprio spazio personalizzabile con le app, gli sfondi e le altre opzioni che preferisce. Questi utenti possono anche modificare impostazioni (ad es., Wi‑Fi) che influenzano tutti gli altri.\n\nIl nuovo utente, una volta aggiunto, deve impostare il proprio spazio.\n\nQualsiasi utente può aggiornare le app per tutti gli altri."</string>
+    <string name="user_add_user_message_long" msgid="718192651887726259">"Puoi condividere il dispositivo con altre persone creando altri utenti. Ogni utente ha un proprio spazio personalizzabile con le app, gli sfondi e le altre opzioni che preferisce. Gli utenti possono anche regolare le impostazioni che riguardano tutti, come il Wi‑Fi.\n\nIl nuovo utente, una volta aggiunto, dovrà seguire una procedura di configurazione.\n\nQualsiasi utente può aggiornare le app per tutti gli altri utenti."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Il nuovo utente, una volta aggiunto, deve impostare il proprio spazio.\n\nQualsiasi utente può aggiornare le app per tutti gli altri."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Configurare l\'utente ora?"</string>
     <string name="user_setup_dialog_message" msgid="1004068621380867148">"Assicurati che la persona sia disponibile a prendere il dispositivo e configurare il suo spazio"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Fine"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Scatta foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Scegli la foto dalla Galleria"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Seleziona foto"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Schede SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Schede SIM"</string>
@@ -2373,7 +2362,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"Il tag NFC non è modificabile. Utilizza un tag diverso."</string>
     <string name="default_sound" msgid="8821684447333687810">"Suono predefinito"</string>
     <string name="notification_settings" msgid="8791730980212496561">"Audio e notifiche"</string>
-    <string name="media_volume_option_title" msgid="2811531786073003825">"Volume app. multimediali"</string>
+    <string name="media_volume_option_title" msgid="2811531786073003825">"Volume contenuti multimediali"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume sveglia"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume suoneria"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume notifiche"</string>
@@ -2462,10 +2451,10 @@
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Impostazioni di notifica"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Invia feedback sul dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="2451187374960131018">"Inserisci PIN amministratore"</string>
-    <string name="switch_on_text" msgid="1124106706920572386">"Attiva"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Non attiva"</string>
-    <string name="screen_pinning_title" msgid="2292573232264116542">"Blocco della schermata"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"Quando questa impostazione è attiva, puoi impostare lo stato del dispositivo in modo che venga visualizzata la schermata corrente.\n\nPer bloccare una schermata:\n\n1. Attiva questa impostazione.\n\n2. Apri un\'app.\n\n3. Tocca il pulsante Recenti.\n\n4. Tocca l\'icona di blocco."</string>
+    <string name="switch_on_text" msgid="1124106706920572386">"Attivo"</string>
+    <string name="switch_off_text" msgid="1139356348100829659">"Non attivo"</string>
+    <string name="screen_pinning_title" msgid="2292573232264116542">"Blocco su schermo"</string>
+    <string name="screen_pinning_description" msgid="3022868253807792488">"Quando questa impostazione è attiva, puoi far sì che dispositivo mantenga visualizzata la schermata corrente.\n\nPer bloccare una schermata:\n\n1. Attiva questa impostazione.\n\n2. Apri un\'app.\n\n3. Tocca il pulsante Recenti.\n\n4. Tocca l\'icona della puntina."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profilo di lavoro"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Sperimentale)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Quando il dispositivo viene ruotato"</string>

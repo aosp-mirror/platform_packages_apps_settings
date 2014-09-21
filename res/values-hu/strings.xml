@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Párosítási kérelem"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Érintse meg a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközzel való párosításhoz."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Beérkező fájlok megjelenítése"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth-eszközválasztó"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth-eszköz kiválasztása"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth engedélykérés"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Egy alkalmazás be akarja kapcsolni a Bluetooth funkciót."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Egy alkalmazás láthatóvá akarja tenni a táblagépet más Bluetooth-eszközök számára <xliff:g id="TIMEOUT">%1$d</xliff:g> másodpercig."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Párosítás"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"PÁROSÍTÁS"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Mégse"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"A párosítás hozzáférést biztosít a névjegyekhez és híváselőzményekhez összekapcsolt állapotban."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Nem lehet párosítani a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközzel."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"A párosítás sikertelen volt a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközzel hibás PIN kód vagy jelszó miatt."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"BEÁLLÍTÁS"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Automatikusan csatlakozzon a rendelkezésre álló hálózatokhoz egy Wi‑Fi-kezelő segítségével."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi-kezelő"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"A Google Wi‑Fi-kezelő automatikusan csatlakozik a legjobb elérhető Wi-Fi-hálózathoz"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"A Google Wi‑Fi-kezelő érzékeli az elérhető hálózatokat, és a leggyorsabb, legmegbízhatóbb lehetőséghez csatlakoztatja eszközét."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Az adatvédelemhez a Google Wi‑Fi-kezelő biztonságos VPN-kapcsolatot nyújthat a Google szerverein át."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nem, köszönöm"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"IGEN, ENGEDÉLYEZEM"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Kapcsolódási kérés"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"A Wi‑Fi-kezelő VPN-kapcsolatot akar létesíteni, amellyel felügyelheti a hálózati forgalmat. Csak akkor fogadja el, ha megbízik a forrásban."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"a képernyő tetején jelenik meg, ha a VPN aktív."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ELFOGADÁS"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"LETILTÁS"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Hálózatfelügyelet"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Engedélyezte a Google Wi-Fi-kezelőnél a VPN-kapcsolatot, így felügyelhető a hálózati forgalom."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"A(z) <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> automatikusan csatlakozik a legjobb elérhető Wi-Fi-hálózathoz"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ALKALMAZÁS MEGNYITÁSA"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Képernyő tartalmának átküldése"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Vezeték nélküli kijelző engedélyezése"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"A Google helyszolgáltatása és más alkalmazások akkor is kereshetnek hálózatokat, ha a Wi-Fi ki van kapcsolva"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fi automatikus kezelése"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"A(z) <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> kezelje a Wi‑Fi-kapcsolatot"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi-kezelő"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi-kezelő"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Tanúsítványok telepítése"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"A hely pontosságának javítása és egyéb célok érdekében a Google és más alkalmazások kereshetnek közeli Wi-Fi hálózatokat még akkor is, ha a Wi-Fi ki van kapcsolva. Ha nem szeretné ezt, állítsa át a Speciális &gt; A keresés mindig elérhető beállítást."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Az alkalmazások még akkor is megkereshetik a közeli hálózatokat, ha a Wi-Fi ki van kapcsolva. Ha nem szeretné ezt, állítsa át a Speciális &gt; A keresés mindig elérhető beállítást."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Szerzői jog"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenc"</string>
     <string name="terms_title" msgid="7697580845616764642">"Általános Szerződési Feltételek"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Háttérképek"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"A műholdképek szolgáltatói:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Nyílt forráskódú licencek"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Gond van a licencek betöltésével."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Betöltés…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> -- <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> van hátra"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> a feltöltéshez"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – kb. <xliff:g id="TIME">%2$s</xliff:g> van hátra"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> a teljes töltöttségig"</string>
@@ -2161,9 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Még egyszer írja be a teljes mentés új jelszavát"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Biztonsági jelszó beállítása"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Mégse"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for percentage (5866131581207788624) -->
-    <skip />
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"További rendszerfrissítések"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Letiltva"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Engedélyezve"</string>
@@ -2299,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Befejezés"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Fotó készítése"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Fotó kiválasztása a Galériából"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Fotó kiválasztása"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM kártyák"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM kártyák"</string>

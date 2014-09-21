@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Laiteparinmuodostuspyyntö"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Muodosta laitepari laitteeseen <xliff:g id="DEVICE_NAME">%1$s</xliff:g> koskettamalla."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Näytä vastaanotetut tiedostot"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth-laitevalitsin"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Valitse Bluetooth-laite"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-yhteyspyyntö"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Sovellus haluaa ottaa Bluetoothin käyttöön."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Sovellus haluaa asettaa tablet-laitteen muiden Bluetooth-laitteiden tunnistettavaksi <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunnin ajaksi."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Muodosta laitepari"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"MUODOSTA LAITEPARI"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Peruuta"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Laiteparin muodostaminen mahdollistaa yhteystietojen ja soittohistorian käyttämisen yhteyden aikana."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Laiteparin muodostaminen laitteeseen <xliff:g id="DEVICE_NAME">%1$s</xliff:g> epäonnistui."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Laiteparia laitteen <xliff:g id="DEVICE_NAME">%1$s</xliff:g> kanssa ei voitu muodostaa, koska PIN-koodi tai avain oli virheellinen."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"MÄÄRITYS"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Muodosta yhteys käytettävissä oleviin verkkoihin automaattisesti Wi‑Fi Assistantin avulla."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant muodostaa automaattisesti yhteyden parhaaseen käytettävissä olevaan Wi‑Fi-verkkoon."</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi Assistantin avulla löydät käytettävissä olevat verkot. Laitteesi yhdistetään nopeimpaan ja luotettavimpaan verkkoon."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Google Wi‑Fi Assistant saattaa suojata tietosi käyttämällä Googlen palvelinten kautta kulkevaa VPN-yhteyttä."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Ei kiitos"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"KYLLÄ, OTA KÄYTTÖÖN"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Yhteyspyyntö"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi Assistant tarvitsee luvan VPN-yhteyden käyttämiseen ja verkkoliikenteen valvomiseen. Salli vain, jos lähde on luotettava."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"näkyy ruudun yläosassa, kun VPN on käytössä."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"HYVÄKSY"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"ESTÄ"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Verkon valvonta"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Annoit Google Wi‑Fi Assistantille luvan VPN-verkon määrittämiseen. Sovellus voi valvoa verkkoliikennettä."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> yhdistää sinut automaattisesti parhaaseen käytettävissä olevaan Wi‑Fi-verkkoon"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"AVAA SOVELLUS"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Lähetysnäyttö"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Ota langaton näyttö käyttöön"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Anna Googlen sijaintipalvelun ja muiden sovellusten etsiä verkkoja, vaikka Wi-Fi-yhteys on pois käytöstä"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Automaatinen Wi‑Fi-hallinta"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> saa hallinnoida Wi‑Fi-yhteyttä"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Asenna varmenteet"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Voit mm. parantaa Googlen ja muiden sovellusten sijaintitietojen tarkkuutta antamalla luvan etsiä wifi-verkkoja myös silloin, kun wifi ei ole käytössä. Jos et halua sallia sitä, valitse Lisäasetukset &gt; Etsiminen aina käytössä."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Sovellukset voivat etsiä läheisiä verkkoja vaikka wifi ei olisi käytössä. Jos et halua sallia sitä, valitse Lisäasetukset &gt; Etsiminen aina käytössä."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Tekijänoikeudet"</string>
     <string name="license_title" msgid="1990487604356037871">"Käyttölupa"</string>
     <string name="terms_title" msgid="7697580845616764642">"Käyttöehdot"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Taustakuvat"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satelliittikuvat:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Avoimen lähdekoodin käyttöluvat"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Käyttölupien lataamisessa esiintyi ongelma."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Ladataan…"</string>
@@ -1600,9 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> jäljellä"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> latausaikaa jäljellä"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for power_discharging (6023874912674684056) -->
-    <skip />
     <!-- String.format failed for translation -->
     <!-- no translation found for power_discharging_duration (7125493014448497620) -->
     <skip />
@@ -2177,7 +2164,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Anna uusi varmuuskopioinnin salasana uudelleen."</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Aseta varmuuskopion salasana"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Peruuta"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Järjestelmän lisäpäivitykset"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Ei käytössä"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Salliva"</string>
@@ -2313,6 +2299,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Valmis"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Ota kuva"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Valitse kuva galleriasta"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Valitse valokuva"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-kortit"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-kortit"</string>
@@ -2484,14 +2471,9 @@
     <string name="screen_pinning_description" msgid="3022868253807792488">"Kun asetus on käytössä, voit asettaa laitteen tilaan, joka pitää nykyisen näytön näkyvissä.\n\nNäytön kiinnittäminen:\n\n1. Ota asetus käyttöön.\n\n2. Avaa sovellus.\n\n3. Kosketa Viimeaikaiset-painiketta.\n\n4. Kosketa kiinnityskuvaketta."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Työprofiili"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Kokeellinen)"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"Kun laite käännetään"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Kierrä näytön sisältö"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Säilytä pystynäkymä"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Säilytä vaakanäkymä"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Säilytä nykyinen suunta"</string>
 </resources>

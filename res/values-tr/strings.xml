@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Eşleşme isteği"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile eşleştirmek için dokunun."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Alınan dosyaları göster"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth cihaz seçici"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth cihazı seçin"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth izin isteği"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Bir uygulama Bluetooth\'u açmak istiyor."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Bir uygulama, tabletinizi <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca diğer Bluetooth cihazlarına görünebilir yapmak istiyor."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Eşleştir"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"EŞLEŞTİR"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"İptal"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Eşleme işlemi, bağlantı kurulduğunda kişilerinize ve çağrı geçmişine erişim izni verir."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile eşleştirilemedi."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"PIN veya Passkey kodu yanlış olduğundan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ile eşleştirilemedi"</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"YAPILANDIR"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Bir Wi-Fi Assistant ile kullanılabilir ağlara her zaman bağlanın."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant sizi, otomatik olarak kullanılabilir en iyi Kablosuz ağa bağlar"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi Assistant, kullanabileceğiniz ağları tespit eder ve cihazınızı en iyi hıza ve güvenilirliğe sahip ağa bağlar."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Verilerinizin korunmasına yardımcı olmak için Google Wi‑Fi Assistant, Google sunucuları üzerinden güvenli bir VPN bağlantısı sağlayabilir."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Hayır, teşekkürler"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"EVET, İSTİYORUM"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Bağlantı İsteği"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi Assistant, ağ trafiğini izlemesine olanak tanıyacak bir VPN bağlantısı kurmak istiyor. Bunu yalnızca kaynağa güveniyorsanız kabul edin."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"VPN etkin olduğunda ekranınızın üst kısmında görünür."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"KABUL ET"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"REDDET"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Ağ izleme"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"\"Google Wi-Fi Assistant\" uygulamasına bir VPN bağlantısı oluşturması için izin verdiniz. Bu izin, bu uygulamanın ağ trafiğini izleyebileceği anlamına gelir."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> sizi, kullanılabilir durumdaki en iyi Kablosuz ağa otomatik olarak bağlar"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"UYGULAMAYI AÇ"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Yayınlama ekranı"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Kablosuz görüntülemeyi etkinleştir"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Kablosuz özelliği kapalıyken dahi Google\'ın konum hizmetinin ve diğer uygulamaların ağları taramasına izin verin"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Kablosuz\'u otomatik olarak yönet"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> uygulamasının Kablosuz bağlantınızı yönetmesine izin ver"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifika yükle"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Konum doğruluğunu iyileştirmek için ve diğer amaçlarla, Google ve diğer uygulamalar, Kablosuz kapalı olduğunda dahi yakınlardaki ağları tarayabilir. Bunu istemiyorsanız, Gelişmiş &gt; Tarama her zaman kullanılabilir seçeneğine gidin."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Uygulamalar, Kablosuz bağlantı kapalı olduğunda dahi yakınlardaki ağları tarayabilir. Bunu istemiyorsanız, Gelişmiş &gt; Tarama her zaman kullanılabilir seçeneğine gidin."</string>
@@ -827,7 +815,7 @@
     <string name="brightness_title" msgid="5746272622112982836">"Parlaklık"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ekranın parlaklığını ayarla"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Uyarlanan parlaklık"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Mevcut ışık koşullarında parlaklık düzeyini optimize et"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Parlaklık düzeyini mevcut ışık koşullarına göre ayarla"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Uyku"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Ekran kapanır"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> işlem yapılmadığında"</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Telif Hakkı"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisans"</string>
     <string name="terms_title" msgid="7697580845616764642">"Şartlar ve koşullar"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Duvar kağıtları"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Uydu görüntüleri sağlayıcıları:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Açık kaynak lisansları"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Lisanslar yüklenirken bir sorun oluştu."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Yükleniyor…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> kaldı"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Şarj olmasına <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> var"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"%%<xliff:g id="LEVEL">%1$d</xliff:g>"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"%%<xliff:g id="LEVEL">%1$d</xliff:g> - yaklaşık <xliff:g id="TIME">%2$s</xliff:g> kaldı"</string>
     <string name="power_charging" msgid="712751285832976915">"%%<xliff:g id="LEVEL">%1$d</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"%%<xliff:g id="LEVEL">%1$d</xliff:g> - Tamamen şarj olmasına <xliff:g id="TIME">%2$s</xliff:g> kaldı"</string>
@@ -1695,7 +1684,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Pil tasarrufu"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Otomatik olarak aç"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hiçbir zaman"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"%1$d%% pil gücü"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"%%%1$d pil gücü"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"İşlem İstatistikleri"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Meraklısı için, çalışan işlemlerle ilgili istatistikler"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Bellek kullanımı"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Buraya mevcut tam yedekleme şifrenizi yeniden yazın"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Yedekleme şifresi belirle"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"İptal"</string>
-    <string name="percentage" msgid="5866131581207788624">"%%<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Ek sistem güncellemeleri"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Disabled (Devre dışı)"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive (Serbest)"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Son"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Fotoğraf çek"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Galeri\'den fotoğraf seçin"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Fotoğraf seçin"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM kartlar"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM kartlar"</string>
@@ -2468,14 +2457,9 @@
     <string name="screen_pinning_description" msgid="3022868253807792488">"Bu ayar açık olduğunda cihazı, mevcut ekranın görünür olarak kaldığı bir duruma geçirebilirsiniz.\n\nEkranı sabitlemek için:\n\n1. Bu ayarı açın.\n\n2. Uygulamayı açın.\n\n3. Son Kullanılanlar düğmesine dokunun.\n\n4. Raptiye simgesine dokunun."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"İş profili"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Deneysel)"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"Cihaz döndürüldüğünde"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Ekranın içeriğini döndür"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Dikey görünümde kal"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Yatay görünümde kal"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Geçerli yönde kal"</string>
 </resources>

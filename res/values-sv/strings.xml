@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Begäran om parkoppling"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Tryck om du vill koppla till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Visa mottagna filer"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth-enhetsväljare"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Välj Bluetooth-enhet"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Begäran om Bluetooth-behörighet"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"En app vill aktivera Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"En app vill göra din surfplatta synlig för andra Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Parkoppling"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"KOPPLA"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Avbryt"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Om du kopplar enheten får du tillgång till dina kontakter och din samtalshistorik när du är ansluten."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Det gick inte att koppla till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Det gick inte att koppla till <xliff:g id="DEVICE_NAME">%1$s</xliff:g> på grund av en felaktig PIN-kod eller nyckel."</string>
@@ -560,20 +561,9 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"KONFIGURATION"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Anslut automatiskt till tillgängliga nätverk med Wi-Fi Assistant."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi-Fi Assistant ansluter dig automatiskt till den bästa tillgängliga Wi-Fi-anslutningen"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi-Fi Assistant känner av nätverk som är tillgängliga för dig och ansluter enheten till den som har bäst hastighet och tillförlitlighet."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Google Wi-Fi Assistant kan skydda din data genom en säker VPN-anslutning via Googles servrar."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nej tack"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"JA, JAG ÄR MED"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Anslutningsförfrågan"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi Assistant vill skapa VPN-anslutn. och övervaka nätverkstrafik. Godkänn om du litar på källan."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"visas högst upp på skärmen när VPN-anslutningen är aktiv."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCEPTERA"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"NEKA"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Nätverksövervakning"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Du har gett Google Wi-Fi Assistant tillstånd att skapa VPN-anslutn. Appen övervakar nätverkstrafik."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"Du ansluts automatiskt till bästa tillgängliga Wi-Fi via <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ÖPPNA APP"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Överför skärmen"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Casta skärmen"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktivera Wi-Fi-skärmdelning"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Inga enheter fanns i närheten."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Ansluter"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Tillåt att Googles platstjänst och andra appar söker efter nätverk, även när Wi-Fi inte har aktiverats"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Hantera Wi-Fi automatiskt"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Låt <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> hantera Wi-Fi-anslutningen"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi-Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installera certifikat"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"För att bland annat noggrannheten i platsangivelsen ska förbättras kan Google och vissa appar söka efter nätverk i närheten även när Wi-Fi är avstängt. Om du inte vill att detta ska ske väljer du Avancerat &gt; Inställningen \"sök alltid\" är tillgänglig."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Appar kan söka efter nätverk i närheten även om Wi-Fi är avstängt. Om du inte vill att det ska hända väljer du Avancerat &gt; Inställningen \"sök alltid\" är tillgänglig."</string>
@@ -1021,8 +1009,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Återställ standardinst."</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Raderar alla data på surfplattan"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Raderar alla data på telefonen"</string>
-    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Detta raderar alla data från pekdatorns "<b>"interna lagringsutrymme"</b>", bland annat:\n\n"<li>"ditt Google-konto"</li>\n<li>"system- och appdata och inställningar"</li>\n<li>"hämtade appar"</li></string>
-    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Detta raderar alla data från pekdatorns "<b>"interna lagringsutrymme"</b>", bland annat:\n\n"<li>"ditt Google-konto"</li>\n<li>"system- och appdata och inställningar"</li>\n<li>"hämtade appar"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Detta raderar all data från enhetens "<b>"interna lagringsutrymme"</b>", bland annat:\n\n"<li>"ditt Google-konto"</li>\n<li>"system- och appdata och inställningar"</li>\n<li>"hämtade appar"</li></string>
+    <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Detta raderar all data från enhetens "<b>"interna lagringsutrymme"</b>", bland annat:\n\n"<li>"ditt Google-konto"</li>\n<li>"system- och appdata och inställningar"</li>\n<li>"hämtade appar"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Du är inloggad på följande konton:\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musik"</li>\n<li>"Foton"</li>\n<li>"Andra användardata"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Om du vill ta bort musik, bilder och andra användardata måste du radera "<b>"USB-lagringsenheten"</b>"."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Upphovsrätt"</string>
     <string name="license_title" msgid="1990487604356037871">"Licens"</string>
     <string name="terms_title" msgid="7697580845616764642">"Användarvillkor"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Bakgrunder"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Satellitbildsleverantörer:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Öppen källkodslicens"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Ett problem inträffade när licenserna lästes in."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Läser in…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> återstår"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Ladda i <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> till"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – ca <xliff:g id="TIME">%2$s</xliff:g> kvar"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> till fulladdat"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Skriv in det nya fullständiga reservlösenordet här"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Ange lösenord för säkerhetskopia"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Avbryt"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Ytterligare systemuppdateringar"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Inaktiverad"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Tillåtande"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Slutför"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Ta foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Välj ett foto från galleriet"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Välj en bild"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-kort"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-kort"</string>
@@ -2385,7 +2374,7 @@
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Avbryt inte"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefonens ringsignal"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Standardsignal för avisering"</string>
-    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrera även vid samtal"</string>
+    <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrera också vid samtal"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Avisering"</string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Blinkande ljusavisering"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"När enheten är låst"</string>
@@ -2468,14 +2457,9 @@
     <string name="screen_pinning_description" msgid="3022868253807792488">"När den här inställningen är aktiverad kan du ställa in enheten i ett läge som behåller den aktuella skärmen i vyn.\n\nSå här fäster du skärmen:\n\n1. Aktivera den här inställningen.\n\n2.Öppna en app.\n\n3. Tryck på knappen Senaste.\n\n4. Tryck på nålikonen."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Arbetsprofil"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(experimentellt)"</string>
-    <!-- no translation found for display_auto_rotate_title (6176450657107806043) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_rotate (4544299861233497728) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_portrait (292745182318093651) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_landscape (3804752830204062162) -->
-    <skip />
-    <!-- no translation found for display_auto_rotate_stay_in_current (317932372686498096) -->
-    <skip />
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"När enheten roterar"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Rotera skärmens innehåll"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Fortsätt använda stående riktning"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Fortsätt använda liggande riktning"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Fortsätt använda aktuell riktning"</string>
 </resources>

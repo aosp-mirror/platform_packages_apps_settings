@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Anmodning om parring"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Tryk for at parre med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Vis modtagne filer"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Valg af Bluetooth-enhed"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Vælg Bluetooth-enhed"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Anmodning om Bluetooth-tilladelse"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"En app ønsker at aktivere Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"En app ønsker at gøre din tablet synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder."</string>
@@ -291,7 +291,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Administrer Wi-Fi, Bluetooth, flytilstand, mobilnetværk og VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Mobildata"</string>
     <string name="calls_title" msgid="3544471959217176768">"Opkald"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"Sms\'er"</string>
+    <string name="sms_messages_title" msgid="3188611825992624879">"Sms-beskeder"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Tillad databrug via mobilnetværk"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Tillad dataforbrug ved roaming"</string>
     <string name="roaming" msgid="3596055926335478572">"Dataroaming"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Par"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ACCEPTÉR PARRING"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annuller"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Parring giver adgang til dine kontaktpersoner og din opkaldshistorik, når der er forbindelse til Wi-Fi."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Der kunne ikke parres med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Der kunne ikke parres med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> på grund af en forkert pinkode eller adgangsnøgle."</string>
@@ -514,7 +515,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Avanceret"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Avanceret Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Når Bluetooth er aktiveret, kan enheden kommunikere med andre Bluetooth-enheder i nærheden."</string>
-    <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Opret forbindelse til ..."</string>
+    <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Opret forbindelse til..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Medielyd"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Telefonlyd"</string>
     <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Filoverførsel"</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"KONFIGURER"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Opret automatisk forbindelse til tilgængelige netværk med en Wi-Fi-assistent."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fi-assistent"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Googles Wi-Fi-assistent slutter dig automatisk til den bedste tilgængelige Wi-Fi-forbindelse."</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Googles Wi-Fi-assistent registrerer alle tilgængelige netværk og slutter din enhed til det netværk, der er hurtigst og mest pålideligt."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"For at hjælpe med at beskytte dine data kan Googles Wi-Fi-assistent tilbyde en sikker VPN-forbindelse via Googles servere."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nej tak"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"JA TAK"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Forbindelsesanmodning"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi-Fi-assistenten vil gerne konfigurere en VPN-forbindelse, der giver den mulighed for at overvåge netværkstrafik. Du skal kun acceptere dette, hvis du har tillid til kilden."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"vises øverst på din skærm, når VPN-forbindelsen er aktiv."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCEPTÉR"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"AFVIS"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Overvågning af netværk"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Du gav \"Googles Wi-Fi-assistent\" tilladelse til at konfigurere en VPN-forbindelse. Det betyder, at denne app kan overvåge netværkstrafik."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> opretter automatisk forbindelse til det bedste tilgængelige Wi-Fi-netværk"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ÅBN APP"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Skærm til casting"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktivér trådløs skærm"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Lad Googles placeringstjeneste og andre apps søge efter netværk, selv når Wi-Fi er slået fra"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Administrer Wi-Fi automatisk"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Lad <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> administrere din Wi-Fi-forbindelse"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi-Fi-assistent"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Googles Wi-Fi-assistent"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer certifikater"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Google og andre apps søger muligvis efter netværk i nærheden, selv når Wi-Fi er slukket, for at forbedre placeringsnøjagtighed m.m. Hvis du ikke ønsker dette, kan du gå til Avanceret &gt; Søgning altid tilgængelig."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Apps kan søge efter netværk i nærheden, selv når Wi-Fi er slukket. Hvis du ikke ønsker, at dette sker, skal du gå til Avanceret &gt; Scanning altid tilgængelig."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Ophavsret"</string>
     <string name="license_title" msgid="1990487604356037871">"Licens"</string>
     <string name="terms_title" msgid="7697580845616764642">"Vilkår og betingelser"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Baggrunde"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Leverandører af satellitbilleder:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open source-licenser"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Der er problemer med at indlæse licenserne."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Indlæser..."</string>
@@ -1162,7 +1152,7 @@
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Prøv igen:"</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Tegn et oplåsningsmønster"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Tryk på Menu for at få hjælp."</string>
-    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Slip fingeren, når du er færdig"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Slip, når du er færdig"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Forbind mindst <xliff:g id="NUMBER">%d</xliff:g> punkter. Prøv igen."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Mønstret blev registreret"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Tegn mønstret igen for at bekræfte"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> tilbage"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> til batteriet er opladt"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g> %%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – ca. <xliff:g id="TIME">%2$s</xliff:g> tilbage"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="TIME">%2$s</xliff:g> til fuld opladning"</string>
@@ -1695,7 +1684,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Batteribesparelse"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Slå automatisk til"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Aldrig"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"batteriet er på %1$d %%"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"batteri på %1$d %%"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"hukommelse brugt"</string>
@@ -2141,10 +2130,10 @@
     <string name="vpn_create" msgid="5628219087569761496">"Tilføj VPN-profil"</string>
     <string name="vpn_menu_edit" msgid="408275284159243490">"Rediger profil"</string>
     <string name="vpn_menu_delete" msgid="8098021690546891414">"Slet profil"</string>
-    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"Always-on VPN"</string>
-    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Vælg en VPN-profil, som der altid skal være forbindelse til. Netværkstrafik tillades kun, når der er forbindelse til denne VPN."</string>
+    <string name="vpn_menu_lockdown" msgid="7863024538064268139">"VPN altid aktiveret"</string>
+    <string name="vpn_lockdown_summary" msgid="2200032066376720339">"Vælg en VPN-profil, der altid skal være forbindelse til. Netværkstrafik tillades kun, når der er forbindelse til dette VPN-netværk."</string>
     <string name="vpn_lockdown_none" msgid="9214462857336483711">"Ingen"</string>
-    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Always-on VPN kræver en IP-adresse til både server og DNS."</string>
+    <string name="vpn_lockdown_config_error" msgid="3898576754914217248">"Et altid aktiveret VPN kræver en IP-adresse til både server og DNS."</string>
     <string name="vpn_no_network" msgid="3050233675132726155">"Der er ingen netværksforbindelse. Prøv igen senere."</string>
     <string name="vpn_missing_cert" msgid="7972907102570411501">"Der mangler et certifikat. Rediger profilen."</string>
     <string name="trusted_credentials_system_tab" msgid="3984284264816924534">"System"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Gentag din nye adgangskode til ny fuldstændig sikkerhedskopiering her"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Indstil adgangskode til sikkerhedskopi"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Annuller"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g> %%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Yderligere systemopdateringer"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Deaktiveret"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Eftergivende"</string>
@@ -2191,7 +2179,7 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Du kan begrænse adgangen til apps og indhold fra din konto"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Bruger"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Begrænset profil"</string>
-    <string name="user_add_user_title" msgid="2108112641783146007">"Vil du tilføje den nye bruger?"</string>
+    <string name="user_add_user_title" msgid="2108112641783146007">"Vil du tilføje en ny bruger?"</string>
     <string name="user_add_user_message_long" msgid="718192651887726259">"Du kan dele denne enhed med andre ved at oprette flere brugere. Hver bruger har deres eget område, hvor de kan tilpasse deres egne apps, baggrunde osv. Brugere kan også justere enhedsindstillinger, der påvirker alle, såsom Wi-Fi.\n\nNår du tilføjer en ny bruger, skal personen konfigurere sit område.\n\nEnhver bruger kan opdatere apps for alle andre brugere."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Når du tilføjer en ny bruger, skal personen konfigurere sit område.\n\nEnhver bruger kan opdatere apps for alle andre brugere."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Vil du konfigurere brugeren nu?"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Udfør"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Tag billede"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Vælg billede fra Galleri"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Vælg billede"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-kort"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-kort"</string>
@@ -2308,7 +2297,7 @@
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Brug altid denne indstilling til opkald"</string>
     <string name="sim_select_card" msgid="211285163525563293">"Vælg et SIM-kort"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM-kort: <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
-    <string name="sim_slot_empty" msgid="8964505511911854688">"SIM-kortet er tomt"</string>
+    <string name="sim_slot_empty" msgid="8964505511911854688">"Intet SIM-kort"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Navn på SIM-kort"</string>
     <string name="sim_editor_title" msgid="6364331907415443358">"SIM-kort"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Mobilselskab"</string>
@@ -2383,7 +2372,7 @@
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Afbryd altid"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Tillad kun prioriterede afbrydelser"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Afbryd ikke"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Ringetone for telefon"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"Ringetone ved opkald"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Standardringetone for underretninger"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrer også ved opkald"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Underretning"</string>
@@ -2406,7 +2395,7 @@
     <string name="emergency_tone_silent" msgid="1067515631635824291">"Lydløs"</string>
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Advarsel"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
-    <string name="manage_notification_access_title" msgid="7510080164564944891">"Underretningsadgang"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"Adgang til underretninger"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps kan ikke læse underretninger"</string>
   <plurals name="manage_notification_access_summary_nonzero">
     <item quantity="one" msgid="8344183614159211585">"Appen %d kan læse underretninger"</item>

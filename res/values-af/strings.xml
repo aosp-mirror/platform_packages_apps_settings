@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Saambindingsversoek"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Raak om saam te bind aan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Wys ontvangde lêers"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Kieser vir Bluetooth-toestelle"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Kies Bluetooth-toestel"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-toestemmingsversoek"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"\'n Program wil Bluetooth aanskakel."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"\'n Program wil jou tablet sigbaar maak vir ander Bluetooth-toestelle vir <xliff:g id="TIMEOUT">%1$d</xliff:g> sekondes."</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Bind saam"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"BIND SAAM"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Kanselleer"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Saambinding bied toegang tot jou kontakte en oproepgeskiedenis wanneer dit gekoppel is."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Kon nie saambind met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nie."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Kon nie met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> saambind nie weens \'n verkeerde PIN of wagwoordsleutel."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"STEL OP"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Koppel outomaties met \'n Wi-Fi-assistent aan beskikbare netwerke."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi-assistent"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi-assistent koppel jou outomaties aan die beste beskikbare Wi‑Fi"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi-assistent bespeur die beskikbare netwerke en koppel jou toestel aan die vinnigste en betroubaarste een."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Google Wi‑Fi-assistent kan veilige VPN-verbinding deur Google-bedieners gee om data te help beskerm."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Nee, dankie"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"JA, EK\'S IN"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Verbindingversoek"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi-assistent wil VPN-verbinding opstel wat dit toelaat om netwerkverkeer te monitor. Aanvaar net as jy bron vertrou."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"verskyn boaan jou skerm as VPN aktief is."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"AANVAAR"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"WEIER"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Netwerkmonitering"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Jy laat Google Wi‑Fi-assistent toe om VPN-verbinding op te stel. Program kan netwerkverkeer monitor."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> koppel jou outomaties aan die beste beskikbare Wi‑Fi"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"MAAK PROGRAM OOP"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Uitsaaiskerm"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktiveer draadlose skermdeling"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Laat Google se liggingdiens en ander programme skandeer vir netwerke, selfs wanneer Wi-Fi af is"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Bestuur Wi‑Fi outomaties"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Laat <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> jou Wi‑Fi-verbinding bestuur"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi-assistent"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi-assistent"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installeer sertifikate"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Om akkuraatheid te verbeter en vir ander doeleindes, kan Google en ander programme dalk skandeer vir nabygeleë netwerke, selfs wanneer Wi-Fi af is. As jy nie wil hê dat dit gebeur nie, gaan na Gevorderd &gt; Skandering altyd beskikbaar."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Programme kan dalk skandeer vir nabygeleë netwerke, selfs wanneer Wi-Fi af is. As jy nie wil hê dat dit gebeur nie, gaan na Gevorderd &gt; Skandering altyd beskikbaar."</string>
@@ -1136,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Kopiereg"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisensie"</string>
     <string name="terms_title" msgid="7697580845616764642">"Bepalings en voorwaardes"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Muurpapiere"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Verskaffers van satellietbeelde:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Oopbronlisensies"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Daar was \'n probleem om lisensies te loods."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Laai tans…"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> oor"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> tot gelaai"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - ongeveer <xliff:g id="TIME">%2$s</xliff:g> oor"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> tot battery vol is"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Voer weer jou nuwe wagwoord vir volle rugsteun hier in"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Stel rugsteunwagwoord op"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Kanselleer"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Bykomende stelselopdaterings"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Gedeaktiveer"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Toestemmend"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Klaar"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Neem foto"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Kies foto vanuit galery"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Kies foto"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM-kaarte"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM-kaarte"</string>

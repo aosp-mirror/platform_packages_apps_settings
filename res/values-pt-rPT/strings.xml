@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pedido de emparelhamento"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Toque para sincronizar com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Mostrar ficheiros recebidos"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Selecionador de aparelho Bluetooth"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Escolher dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Pedido de emparelhamento de Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Uma aplicação pretende ativar o Bluetooth."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Uma aplicação pretende tornar o seu tablet visível para outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos."</string>
@@ -339,7 +339,7 @@
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Ativar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="1557090442377855233">"Desativados pelo administrador"</string>
     <string name="owner_info_settings_summary" msgid="3800834657847339570"></string>
-    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Introduzir texto a apresentar no ecrã de bloqueio"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="4608681417960923911">"Introduza o texto a apresentar no ecrã de bloqueio"</string>
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostrar info. utilizador no ecrã de bloqueio"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Info. utilizador"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostrar informação do perfil no ecrã de bloqueio"</string>
@@ -461,9 +461,9 @@
     <string name="device_admin_title" msgid="3562216873644263804">"Administração do dispositivo"</string>
     <string name="manage_device_admin" msgid="5059296715271077278">"Administradores do dispositivo"</string>
     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Ver ou desativar administradores do dispositivo"</string>
-    <string name="manage_trust_agents" msgid="4629279457536987768">"Trust agents"</string>
+    <string name="manage_trust_agents" msgid="4629279457536987768">"Agentes fidedignos"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Para utilizar, defina primeiro um bloqueio de ecrã"</string>
-    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Ver ou desativar trust agents"</string>
+    <string name="manage_trust_agents_summary" msgid="6804319935640148441">"Ver ou desativar agentes fidedignos"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Ativar Bluetooth"</string>
     <string name="bluetooth_settings" msgid="1810521656168174329">"Bluetooth"</string>
@@ -483,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Par"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"SINCRONIZAR"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Cancelar"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"A sincronização concede acesso aos seus contactos e ao histórico de chamadas quando tem uma ligação estabelecida."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Não foi possível sincronizar com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Não foi possível sincronizar com <xliff:g id="DEVICE_NAME">%1$s</xliff:g> devido a PIN ou chave de acesso incorreto."</string>
@@ -560,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"CONFIGURAR"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Ligar automaticamente a redes disponíveis com um Assistente Wi-Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Assistente Wi-Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"O Assistente Wi‑Fi da Google liga-se automaticamente à melhor rede Wi‑Fi disponível"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"O Assistente Wi-Fi da Google deteta as redes que tem à sua disposição e liga o seu dispositivo à que tiver a melhor velocidade e fiabilidade."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Para ajudar a proteger os seus dados, o Assistente Wi-Fi da Google pode oferecer uma ligação VPN segura através dos servidores da Google."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Não, obrigado"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"SIM, ACEITO"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Pedido de ligação"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"O Assistente Wi-Fi pretende configurar uma ligação VPN que permite monitorizar o tráfego de rede. Aceitar apenas se confiar na fonte."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"aparece na parte superior do ecrã quando a VPN está ativa."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACEITAR"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"NEGAR"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Monitorização da rede"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"Deu permissão ao \"Assistente Wi‑Fi da Google\" para configurar uma ligação VPN. Isso significa que esta aplicação pode monitorizar o tráfego de rede."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"O <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> estabelece automaticamente ligação ao melhor Wi‑Fi disponível"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ABRIR APLICAÇÃO"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Transmitir ecrã"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Ativar display sem fios"</string>
@@ -619,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permitir que o serviço de localização da Google e outras aplicações procurem redes, mesmo quando o Wi-Fi está desativado"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gerir Wi-Fi automaticamente"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Deixe o <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> gerir a sua ligação Wi‑Fi"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Assistente Wi-Fi"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Assistente Wi‑Fi da Google"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para melhorar a precisão de localização e para outros fins, a Google e outras aplicações poderão procurar redes nas proximidades, mesmo com o Wi-Fi desligado. Se não pretender que isto aconteça, aceda a Avançadas &gt; Procura de redes sempre disponível."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"As aplicações poderão procurar redes nas proximidades, mesmo com o Wi-Fi desligado. Se não pretender que isto aconteça, aceda a Avançadas &gt; Procura sempre disponível."</string>
@@ -1132,10 +1120,12 @@
     <string name="about_settings_summary" msgid="3371517697156165959">"Ver informações jurídicas, estado, versão de software"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informações legais"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Contribuintes"</string>
-    <string name="regulatory_information" msgid="5695464367088752150">"Inform. Regulamentares"</string>
+    <string name="regulatory_information" msgid="5695464367088752150">"Informações regulamentares"</string>
     <string name="copyright_title" msgid="865906688917260647">"Direitos de autor"</string>
     <string name="license_title" msgid="1990487604356037871">"Licença"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termos e condições"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Imagens de fundo"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Fornecedores de imagens de satélite:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenças open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Ocorreu um problema ao carregar as licenças."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"A carregar..."</string>
@@ -1174,7 +1164,7 @@
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Padrão de desbloqueio"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Solicitar padrão"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"É necessário desenhar padrão para desbloquear ecrã"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Visualizar sequência de desbloqueio"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Ver sequência de desbloqueio"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Vibrar ao tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Bloq. c/ botão ligar/desligar"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Exceto quando mantido bloqueado por <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -1600,7 +1590,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> restante(s)"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> a cobrar"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – resta(m) aprox. <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="TIME">%2$s</xliff:g> até ficar completa"</string>
@@ -2161,7 +2150,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Reintroduza a nova palavra-passe da cópia de segurança completa aqui"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Definir palavra-passe de cópia de segurança"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Cancelar"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Atualizações adicionais do sistema"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Desativado"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissivo"</string>
@@ -2297,6 +2285,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Terminar"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Tirar fotografia"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Escolher fotografia da Galeria"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Selecionar fotografia"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"Cartões SIM"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"Cartões SIM"</string>
@@ -2372,7 +2361,7 @@
     <string name="status_failed_to_write" msgid="8072752734686294718">"Não é possível escrever dados na etiqueta NFC. Caso o problema persista, experimente uma etiqueta diferente"</string>
     <string name="status_tag_not_writable" msgid="2511611539977682175">"A etiqueta NFC não é gravável. Utilize uma etiqueta diferente."</string>
     <string name="default_sound" msgid="8821684447333687810">"Som predefinido"</string>
-    <string name="notification_settings" msgid="8791730980212496561">"Som e notificação"</string>
+    <string name="notification_settings" msgid="8791730980212496561">"Som e notificações"</string>
     <string name="media_volume_option_title" msgid="2811531786073003825">"Volume de multimédia"</string>
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Volume do alarme"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Volume do toque"</string>
@@ -2387,13 +2376,13 @@
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Toque de notificação predefinido"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrar também para chamadas"</string>
     <string name="notification_section_header" msgid="95661783916799134">"Notificação"</string>
-    <string name="notification_pulse_title" msgid="1247988024534030629">"Sinalizar luz de notificação"</string>
-    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Com dispositivo bloqueado"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todo o conteúdo de notificação"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ocultar conteúdo de notificação sensível"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Não mostrar qualquer notificação"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Usar luz de notificações"</string>
+    <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Com o dispositivo bloqueado"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Mostrar todas as notificações"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ocultar notificações sensíveis"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Não mostrar notificações"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Como pretende que as notificações sejam apresentadas quando o dispositivo está bloqueado?"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"Notificações da aplicação"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Notificações de aplicações"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Outros sons"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Sons do teclado"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sons de bloqueio de ecrã"</string>
@@ -2407,7 +2396,7 @@
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alerta"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrar"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acesso a notificações"</string>
-    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"As aplicações não conseguem ler notificações"</string>
+    <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"As aplicações não podem ler notificações"</string>
   <plurals name="manage_notification_access_summary_nonzero">
     <item quantity="one" msgid="8344183614159211585">"%d aplicação consegue ler notificações"</item>
     <item quantity="other" msgid="980049191810249052">"%d aplicações conseguem ler notificações"</item>
@@ -2437,7 +2426,7 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Concluído"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Até que o utilizador desative"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Interrupções com prioridade"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Inatividade (apenas inter. com priorid.)"</string>
+    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Inatividade (apenas interrupções com prioridade)"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Dias"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Nenhum"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatização"</string>
