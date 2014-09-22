@@ -105,8 +105,6 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
             mListeningToOnSwitchChange = true;
         }
         mSwitchBar.show();
-
-        mContext.registerReceiver(mReceiver, mIntentFilter);
     }
 
     public void teardownSwitchBar() {
@@ -115,8 +113,6 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
             mListeningToOnSwitchChange = false;
         }
         mSwitchBar.hide();
-
-        mContext.unregisterReceiver(mReceiver);
     }
 
     public void resume(Context context) {
