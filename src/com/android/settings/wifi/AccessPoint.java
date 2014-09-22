@@ -19,6 +19,8 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.NetworkInfo.DetailedState;
@@ -284,6 +286,26 @@ class AccessPoint extends Preference {
                 drawable.setLevel(level);
             }
         }
+    }
+
+    public void showAppIcon() {
+        PackageManager pm = getContext().getPackageManager();
+        String systemName = pm.getNameForUid(android.os.Process.SYSTEM_UID);
+
+        Drawable drawable = pm.getDefaultActivityIcon();
+        if (mConfig == null) {
+            drawable.setAlpha(0);
+        } else if (mConfig.creatorName.equals(systemName)) {
+            drawable = getContext().getApplicationInfo().loadIcon(pm);
+        } else {
+            try {
+                drawable = pm.getApplicationIcon(mConfig.creatorName);
+            } catch (NameNotFoundException nnfe) {
+                // use default app icon
+            }
+        }
+
+        setIcon(drawable);
     }
 
     @Override
