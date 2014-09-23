@@ -1177,8 +1177,9 @@ public class SettingsActivity extends Activity
                     } else {
                         // Only show if NFC is on and we have the HCE feature
                         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
-                        if (!adapter.isEnabled() || !getPackageManager().hasSystemFeature(
-                                PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
+                        if (adapter == null || !adapter.isEnabled() ||
+                                !getPackageManager().hasSystemFeature(
+                                        PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
                             removeTile = true;
                         }
                     }
