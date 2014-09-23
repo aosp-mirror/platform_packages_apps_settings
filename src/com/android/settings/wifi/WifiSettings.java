@@ -829,6 +829,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
             }
             for (WifiConfiguration config : configs) {
+                if (config.selfAdded && config.numAssociation == 0) {
+                    continue;
+                }
                 AccessPoint accessPoint = new AccessPoint(context, config);
                 if (lastInfo != null && lastState != null) {
                     accessPoint.update(lastInfo, lastState);
