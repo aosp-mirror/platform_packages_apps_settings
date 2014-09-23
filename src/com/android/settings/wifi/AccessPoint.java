@@ -435,11 +435,12 @@ class AccessPoint extends Preference {
         StringBuilder visibility = new StringBuilder();
         StringBuilder scans24GHz = null;
         StringBuilder scans5GHz = null;
+        String bssid = null;
 
         long now = System.currentTimeMillis();
 
         if (mInfo != null) {
-            String bssid = mInfo.getBSSID();
+            bssid = mInfo.getBSSID();
             if (bssid != null) {
                 visibility.append(" ").append(bssid);
             }
@@ -489,10 +490,17 @@ class AccessPoint extends Preference {
                     }
                     if (n5 < 4) {
                         if (scans5GHz == null) scans5GHz = new StringBuilder();
-
                         scans5GHz.append(" {").append(result.BSSID);
+                        if (bssid != null && result.BSSID.equals(bssid)) scans5GHz.append("*");
                         scans5GHz.append("=").append(result.frequency);
-                        scans5GHz.append(",").append(result.level).append("}");
+                        scans5GHz.append(",").append(result.level);
+                        if (result.autoJoinStatus != 0) {
+                            scans5GHz.append(",st=").append(result.autoJoinStatus);
+                        }
+                        if (result.numIpConfigFailures != 0) {
+                            scans5GHz.append(",ipf=").append(result.numIpConfigFailures);
+                        }
+                        scans5GHz.append("}");
                         n5++;
                     }
                 } else if (result.frequency >= LOWER_FREQ_24GHZ
@@ -503,8 +511,16 @@ class AccessPoint extends Preference {
                     if (n24 < 4) {
                         if (scans24GHz == null) scans24GHz = new StringBuilder();
                         scans24GHz.append(" {").append(result.BSSID);
+                        if (bssid != null && result.BSSID.equals(bssid)) scans24GHz.append("*");
                         scans24GHz.append("=").append(result.frequency);
-                        scans24GHz.append(",").append(result.level).append("}");
+                        scans24GHz.append(",").append(result.level);
+                        if (result.autoJoinStatus != 0) {
+                            scans24GHz.append(",st=").append(result.autoJoinStatus);
+                        }
+                        if (result.numIpConfigFailures != 0) {
+                            scans24GHz.append(",ipf=").append(result.numIpConfigFailures);
+                        }
+                        scans24GHz.append("}");
                         n24++;
                     }
                 }
@@ -573,9 +589,15 @@ class AccessPoint extends Preference {
             summary.append(Summary.get(context, mState));
         } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
                 mConfig.disableReason != WifiConfiguration.DISABLED_UNKNOWN_REASON)
-               || mConfig.autoJoinStatus >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE)) {
-            if (mConfig.autoJoinStatus >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE) {
-                summary.append(context.getString(R.string.wifi_disabled_password_failure));
+               || mConfig.autoJoinStatus
+                >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE)) {
+            if (mConfig.autoJoinStatus
+                    >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE) {
+                if (mConfig.disableReason == WifiConfiguration.DISABLED_DHCP_FAILURE) {
+                    summary.append(context.getString(R.string.wifi_disabled_network_failure));
+                } else {
+                    summary.append(context.getString(R.string.wifi_disabled_password_failure));
+                }
             } else {
                 switch (mConfig.disableReason) {
                     case WifiConfiguration.DISABLED_AUTH_FAILURE:
@@ -586,9 +608,9 @@ class AccessPoint extends Preference {
                         summary.append(context.getString(R.string.wifi_disabled_network_failure));
                         break;
                     case WifiConfiguration.DISABLED_UNKNOWN_REASON:
-                        //this state is not useful anymore as auto-join may attempt joining
-                        //those networks
+                    case WifiConfiguration.DISABLED_ASSOCIATION_REJECT:
                         summary.append(context.getString(R.string.wifi_disabled_generic));
+                        break;
                 }
             }
         } else if (mRssi == Integer.MAX_VALUE) { // Wifi out of range
