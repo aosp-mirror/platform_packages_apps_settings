@@ -644,8 +644,9 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         if (mPackages == null) return;
         ActivityManager am = (ActivityManager)getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
+        final int userId = UserHandle.getUserId(mUid);
         for (int i = 0; i < mPackages.length; i++) {
-            am.forceStopPackage(mPackages[i]);
+            am.forceStopPackageAsUser(mPackages[i], userId);
         }
         checkForceStop();
     }
