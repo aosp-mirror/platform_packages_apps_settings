@@ -72,6 +72,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_CALLS = "phone_calls";
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_STARRED = "starred";
+    private static final String KEY_EVENTS = "events";
     private static final String KEY_ALARM_INFO = "alarm_info";
 
     private static final String KEY_DOWNTIME = "downtime";
@@ -112,6 +113,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
         rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
         rt.put(R.string.zen_mode_from_starred, KEY_STARRED);
+        rt.put(R.string.zen_mode_events, KEY_EVENTS);
         rt.put(R.string.zen_mode_alarm_info, KEY_ALARM_INFO);
         rt.put(R.string.zen_mode_downtime_category, KEY_DOWNTIME);
         rt.put(R.string.zen_mode_downtime_days, KEY_DAYS);
@@ -132,6 +134,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private SwitchPreference mCalls;
     private SwitchPreference mMessages;
     private DropDownPreference mStarred;
+    private SwitchPreference mEvents;
     private Preference mDays;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
@@ -219,6 +222,20 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             }
         });
         important.addPreference(mStarred);
+
+        mEvents = (SwitchPreference) important.findPreference(KEY_EVENTS);
+        mEvents.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                if (val == mConfig.allowEvents) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange allowEvents=" + val);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowEvents = val;
+                return setZenModeConfig(newConfig);
+            }
+        });
 
         final PreferenceCategory downtime = (PreferenceCategory) root.findPreference(KEY_DOWNTIME);
 
@@ -365,6 +382,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         }
         mMessages.setChecked(mConfig.allowMessages);
         mStarred.setSelectedValue(mConfig.allowFrom);
+        mEvents.setChecked(mConfig.allowEvents);
         updateStarredEnabled();
         updateDays();
         mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
