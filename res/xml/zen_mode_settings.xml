@@ -30,6 +30,13 @@
         android:title="@string/zen_mode_important_category" >
 
         <SwitchPreference
+            android:key="events"
+            android:title="@string/zen_mode_events"
+            android:persistent="false"
+            android:switchTextOff=""
+            android:switchTextOn="" />
+
+        <SwitchPreference
             android:key="phone_calls"
             android:title="@string/zen_mode_phone_calls"
             android:persistent="false"
