@@ -105,10 +105,14 @@ public class MasterClearConfirm extends Fragment {
     private void doMasterClear() {
         if (mEraseSdCard) {
             Intent intent = new Intent(ExternalStorageFormatter.FORMAT_AND_FACTORY_RESET);
+            intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
             intent.setComponent(ExternalStorageFormatter.COMPONENT_NAME);
             getActivity().startService(intent);
         } else {
-            getActivity().sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
+            Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+            intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+            intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
+            getActivity().sendBroadcast(intent);
             // Intent handling is asynchronous -- assume it will happen soon.
         }
     }
