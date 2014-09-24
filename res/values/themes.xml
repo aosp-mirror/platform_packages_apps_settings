@@ -42,7 +42,7 @@
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
-        <item name="preferenceBackgroundColor">@color/setup_wizard_preference_background_color_dark</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
     </style>
 
     <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
@@ -59,7 +59,7 @@
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
-        <item name="preferenceBackgroundColor">@color/setup_wizard_preference_background_color_light</item>
+        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
     </style>
 
     <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">
@@ -145,6 +145,9 @@
     </style>
 
     <style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.Light.DialogWhenLarge">
+        <!-- Explicitly override the background color. -->
+        <item name="android:colorBackground">@android:color/white</item>
+
         <!-- Used by the ActionBar -->
         <item name="android:colorPrimary">@color/theme_primary</item>
         <!-- Used by the StatusBar -->
@@ -178,6 +181,9 @@
 
     <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
+
+        <!-- Explicitly override the background color. -->
+        <item name="android:colorBackground">@android:color/white</item>
 
         <!-- Used by the ActionBar -->
         <item name="android:colorPrimary">@color/theme_primary</item>
