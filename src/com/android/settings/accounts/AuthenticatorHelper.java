@@ -190,10 +190,10 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
                 mEnabledAccountTypes.add(account.type);
             }
         }
+        buildAccountTypeToAuthoritiesMap();
         if (mListeningToAccountUpdates) {
             mListener.onAccountsUpdate(mUserHandle);
         }
-        buildAccountTypeToAuthoritiesMap();
     }
 
     @Override
