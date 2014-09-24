@@ -290,6 +290,7 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         private Stage mUiStage = Stage.Introduction;
+        private boolean mDone = false;
 
         private Runnable mClearPatternRunnable = new Runnable() {
             public void run() {
@@ -363,6 +364,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
             }
+            mDone = false;
             return view;
         }
 
@@ -519,6 +521,7 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         private void saveChosenPatternAndFinish() {
+            if (mDone) return;
             LockPatternUtils utils = mChooseLockSettingsHelper.utils();
             final boolean lockVirgin = !utils.isPatternEverChosen();
 
@@ -533,6 +536,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
             getActivity().setResult(RESULT_FINISHED);
             getActivity().finish();
+            mDone = true;
             startActivity(RedactionInterstitial.createStartIntent(getActivity()));
         }
     }
