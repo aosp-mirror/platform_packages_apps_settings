@@ -96,6 +96,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private Stage mUiStage = Stage.Introduction;
+        private boolean mDone = false;
         private TextView mHeaderText;
         private String mFirstPin;
         private KeyboardView mKeyboardView;
@@ -229,6 +230,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     updateStage(mUiStage);
                 }
             }
+            mDone = false;
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
                 int id = mIsAlphaMode ? R.string.lockpassword_choose_your_password_header
@@ -389,6 +391,8 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         private void handleNext() {
+            if (mDone) return;
+
             final String pin = mPasswordEntry.getText().toString();
             if (TextUtils.isEmpty(pin)) {
                 return;
@@ -409,6 +413,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
                     getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
+                    mDone = true;
                     startActivity(RedactionInterstitial.createStartIntent(getActivity()));
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
