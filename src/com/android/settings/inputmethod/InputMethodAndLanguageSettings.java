@@ -147,9 +147,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mGameControllerCategory = (PreferenceCategory)findPreference(
                 "game_controller_settings_category");
 
+        final Intent startingIntent = activity.getIntent();
         // Filter out irrelevant features if invoked from IME settings button.
         mShowsOnlyFullImeAndKeyboardList = Settings.ACTION_INPUT_METHOD_SETTINGS.equals(
-                activity.getIntent().getAction());
+                startingIntent.getAction());
         if (mShowsOnlyFullImeAndKeyboardList) {
             getPreferenceScreen().removeAll();
             getPreferenceScreen().addPreference(mHardKeyboardCategory);
@@ -182,6 +183,14 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mSettingsObserver = new SettingsObserver(mHandler, activity);
         mDpm = (DevicePolicyManager) (getActivity().
                 getSystemService(Context.DEVICE_POLICY_SERVICE));
+
+        // If we've launched from the keyboard layout notification, go ahead and just show the
+        // keyboard layout dialog.
+        final InputDeviceIdentifier identifier =
+                startingIntent.getParcelableExtra(Settings.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        if (mShowsOnlyFullImeAndKeyboardList && identifier != null) {
+            showKeyboardLayoutDialog(identifier);
+        }
     }
 
     private void updateInputMethodSelectorSummary(int value) {
