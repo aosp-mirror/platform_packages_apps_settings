@@ -155,6 +155,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private class DecryptTask extends AsyncTask<String, Void, Integer> {
+        private void hide(int id) {
+            View view = findViewById(id);
+            if (view != null) {
+                view.setVisibility(View.GONE);
+            }
+        }
+
         @Override
         protected Integer doInBackground(String... params) {
             final IMountService service = getMountService();
@@ -175,6 +182,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     mLockPatternView.removeCallbacks(mClearPatternRunnable);
                     mLockPatternView.postDelayed(mClearPatternRunnable, RIGHT_PATTERN_CLEAR_TIMEOUT_MS);
                 }
+                hide(R.id.passwordEntry);
+                hide(R.id.switch_ime_button);
+                hide(R.id.lockPattern);
+                hide(R.id.status);
+                hide(R.id.owner_info);
+                hide(R.id.emergencyCallButton);
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
                 sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
