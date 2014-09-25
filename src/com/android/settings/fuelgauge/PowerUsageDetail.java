@@ -259,8 +259,14 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         args.putIntArray(PowerUsageDetail.EXTRA_DETAIL_TYPES, types);
         args.putDoubleArray(PowerUsageDetail.EXTRA_DETAIL_VALUES, values);
 
-        caller.startPreferencePanelAsUser(PowerUsageDetail.class.getName(), args,
-                R.string.details_title, null, new UserHandle(userId));
+        // This is a workaround, see b/17523189
+        if (userId == UserHandle.myUserId()) {
+            caller.startPreferencePanel(PowerUsageDetail.class.getName(), args,
+                    R.string.details_title, null, null, 0);
+        } else {
+            caller.startPreferencePanelAsUser(PowerUsageDetail.class.getName(), args,
+                    R.string.details_title, null, new UserHandle(userId));
+        }
     }
 
     public static final int ACTION_DISPLAY_SETTINGS = 1;

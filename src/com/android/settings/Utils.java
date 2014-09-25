@@ -613,6 +613,8 @@ public final class Utils {
             int titleResId, CharSequence title, boolean isShortcut, UserHandle userHandle) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResId,
                 title, isShortcut);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivityAsUser(intent, userHandle);
     }
 
