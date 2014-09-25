@@ -361,20 +361,9 @@ public class AccountSettings extends SettingsPreferenceFragment
 
         for (int i = 0; i < accountTypes.length; i++) {
             final String accountType = accountTypes[i];
-            if (mAuthoritiesCount > 0) {
-                // Skip showing any account that does not have any of the requested authorities
-                final ArrayList<String> authoritiesForType = helper.getAuthoritiesForAccountType(
-                        accountType);
-                boolean show = false;
-                for (int j = 0; j < mAuthoritiesCount; j++) {
-                    if (authoritiesForType.contains(mAuthorities[j])) {
-                        show = true;
-                        break;
-                    }
-                }
-                if (!show) {
-                    continue;
-                }
+            // Skip showing any account that does not have any of the requested authorities
+            if (!accountTypeHasAnyRequestedAuthorities(helper, accountType)) {
+                continue;
             }
             final CharSequence label = helper.getLabelForType(getActivity(), accountType);
             if (label == null) {
@@ -416,6 +405,26 @@ public class AccountSettings extends SettingsPreferenceFragment
             }
         });
         return accountTypePreferences;
+    }
+
+    private boolean accountTypeHasAnyRequestedAuthorities(AuthenticatorHelper helper,
+            String accountType) {
+        if (mAuthoritiesCount == 0) {
+            // No authorities required
+            return true;
+        }
+        final ArrayList<String> authoritiesForType = helper.getAuthoritiesForAccountType(
+                accountType);
+        if (authoritiesForType == null) {
+            Log.d(TAG, "No sync authorities for account type: " + accountType);
+            return false;
+        }
+        for (int j = 0; j < mAuthoritiesCount; j++) {
+            if (authoritiesForType.contains(mAuthorities[j])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private class AccountPreference extends Preference implements OnPreferenceClickListener {
