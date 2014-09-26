@@ -29,6 +29,7 @@ import com.android.settings.search.ResultPayloadUtils;
 import com.android.settings.search.SearchIndexableResources;
 
 import java.text.Normalizer;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -69,9 +70,15 @@ public class IndexData {
     private IndexData(Builder builder) {
         locale = builder.mLocale;
         updatedTitle = normalizeHyphen(builder.mTitle);
-        normalizedTitle = normalizeString(builder.mTitle);
         updatedSummaryOn = normalizeHyphen(builder.mSummaryOn);
-        normalizedSummaryOn = normalizeString(builder.mSummaryOn);
+        if (Locale.JAPAN.toString().equalsIgnoreCase(locale)) {
+            // Special case for JP. Convert charset to the same type for indexing purpose.
+            normalizedTitle = normalizeJapaneseString(builder.mTitle);
+            normalizedSummaryOn = normalizeJapaneseString(builder.mSummaryOn);
+        } else {
+            normalizedTitle = normalizeString(builder.mTitle);
+            normalizedSummaryOn = normalizeString(builder.mSummaryOn);
+        }
         entries = builder.mEntries;
         className = builder.mClassName;
         childClassName = builder.mChildClassName;
@@ -131,6 +138,24 @@ public class IndexData {
         final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFD);
 
         return REMOVE_DIACRITICALS_PATTERN.matcher(normalized).replaceAll("").toLowerCase();
+    }
+
+    public static String normalizeJapaneseString(String input) {
+        final String nohyphen = (input != null) ? input.replaceAll(HYPHEN, EMPTY) : EMPTY;
+        final String normalized = Normalizer.normalize(nohyphen, Normalizer.Form.NFKD);
+        final StringBuffer sb = new StringBuffer();
+        final int length = normalized.length();
+        for (int i = 0; i < length; i++) {
+            char c = normalized.charAt(i);
+            // Convert Hiragana to full-width Katakana
+            if (c >= '\u3041' && c <= '\u3096') {
+                sb.append((char) (c - '\u3041' + '\u30A1'));
+            } else {
+                sb.append(c);
+            }
+        }
+
+        return REMOVE_DIACRITICALS_PATTERN.matcher(sb.toString()).replaceAll("").toLowerCase();
     }
 
     public static class Builder {
@@ -273,8 +298,8 @@ public class IndexData {
                     || TextUtils.equals(mIntentTargetPackage,
                     SearchIndexableResources.SUBSETTING_TARGET_PACKAGE)) {
                 // Action is null, we will launch it as a sub-setting
-                intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context, mClassName, mKey,
-                        mScreenTitle);
+                intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context, mClassName,
+                        mKey, mScreenTitle);
             } else {
                 intent = new Intent(mIntentAction);
                 final String targetClass = mIntentTargetClass;

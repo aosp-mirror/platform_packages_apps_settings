@@ -24,7 +24,10 @@ import android.util.Log;
 
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.indexing.IndexData;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import java.util.Locale;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -129,6 +132,9 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     private String cleanQuery(String query) {
         if (TextUtils.isEmpty(query)) {
             return null;
+        }
+        if (Locale.getDefault().equals(Locale.JAPAN)) {
+            query = IndexData.normalizeJapaneseString(query);
         }
         return query.trim();
     }
