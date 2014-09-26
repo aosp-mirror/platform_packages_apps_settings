@@ -20,7 +20,6 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -530,9 +529,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
                 }
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                    if (ActivityManager.getCurrentUser() == UserHandle.USER_OWNER) {
-                        menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
-                    }
+                    menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
                     menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
 
                     if (mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {

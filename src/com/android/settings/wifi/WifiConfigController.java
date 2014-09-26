@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.IpConfiguration;
@@ -300,8 +299,7 @@ public class WifiConfigController implements TextWatcher,
                     addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
-                if (mAccessPoint.networkId != INVALID_NETWORK_ID
-                        && ActivityManager.getCurrentUser() == UserHandle.USER_OWNER) {
+                if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
                     mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }
