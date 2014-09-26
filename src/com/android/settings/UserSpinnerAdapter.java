@@ -20,7 +20,7 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
-import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -32,8 +32,6 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.internal.util.UserIcons;
-import com.android.settings.drawable.CircleFramedDrawable;
-import com.android.settings.R;
 
 import java.util.ArrayList;
 
@@ -54,14 +52,14 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
             if (userInfo.isManagedProfile()) {
                 name = context.getString(R.string.managed_user_title);
                 icon = Resources.getSystem().getDrawable(
-                        com.android.internal.R.drawable.ic_corp_icon);
+                    com.android.internal.R.drawable.ic_corp_icon);
             } else {
                 name = userInfo.name;
-                Bitmap bitmap = um.getUserIcon(userHandle.getIdentifier());
-                if (bitmap != null) {
-                    icon = CircleFramedDrawable.getInstance(context, bitmap);
+                final int userId = userInfo.id;
+                if (um.getUserIcon(userId) != null) {
+                    icon = new BitmapDrawable(context.getResources(), um.getUserIcon(userId));
                 } else {
-                    icon = UserIcons.getDefaultUserIcon(userInfo.id, /* light= */ false);
+                    icon = UserIcons.getDefaultUserIcon(userId, /* light= */ false);
                 }
             }
         }
