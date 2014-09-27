@@ -64,6 +64,7 @@ public class TetherSettings extends SettingsPreferenceFragment
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final String ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
+    private static final String TETHER_CHOICE = "TETHER_TYPE";
 
     private static final int DIALOG_AP_SETTINGS = 1;
 
@@ -117,6 +118,10 @@ public class TetherSettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        if(icicle != null) {
+            mTetherChoice = icicle.getInt(TETHER_CHOICE);
+        }
         addPreferencesFromResource(R.xml.tether_prefs);
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -178,6 +183,12 @@ public class TetherSettings extends SettingsPreferenceFragment
                 com.android.internal.R.array.config_mobile_hotspot_provision_app);
 
         mView = new WebView(activity);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(TETHER_CHOICE, mTetherChoice);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     private void initWifiTethering() {
@@ -472,6 +483,7 @@ public class TetherSettings extends SettingsPreferenceFragment
         if (isProvisioningNeeded()) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setClassName(mProvisionApp[0], mProvisionApp[1]);
+            intent.putExtra(TETHER_CHOICE, mTetherChoice);
             startActivityForResult(intent, PROVISION_REQUEST);
         } else {
             startTethering();
