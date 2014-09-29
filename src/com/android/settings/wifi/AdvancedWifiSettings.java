@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -151,8 +153,8 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         Preference wpsPushPref = findPreference(KEY_WPS_PUSH);
         wpsPushPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 public boolean onPreferenceClick(Preference arg0) {
-                    WpsDialog wpsDialog = new WpsDialog(context, WpsInfo.PBC);
-                    wpsDialog.show();
+                    WpsFragment wpsFragment = new WpsFragment(WpsInfo.PBC);
+                    wpsFragment.show(getFragmentManager(), KEY_WPS_PUSH);
                     return true;
                 }
         });
@@ -161,8 +163,8 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         Preference wpsPinPref = findPreference(KEY_WPS_PIN);
         wpsPinPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
                 public boolean onPreferenceClick(Preference arg0) {
-                    WpsDialog wpsDialog = new WpsDialog(context, WpsInfo.DISPLAY);
-                    wpsDialog.show();
+                    WpsFragment wpsFragment = new WpsFragment(WpsInfo.DISPLAY);
+                    wpsFragment.show(getFragmentManager(), KEY_WPS_PIN);
                     return true;
                 }
         });
@@ -313,6 +315,26 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         wifiIpAddressPref.setSummary(ipAddress == null ?
                 context.getString(R.string.status_unavailable) : ipAddress);
         wifiIpAddressPref.setSelectable(false);
+    }
+
+    /* Wrapper class for the WPS dialog to properly handle life cycle events like rotation. */
+    public static class WpsFragment extends DialogFragment {
+        private static int mWpsSetup;
+
+        // Public default constructor is required for rotation.
+        public WpsFragment() {
+            super();
+        }
+
+        public WpsFragment(int wpsSetup) {
+            super();
+            mWpsSetup = wpsSetup;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new WpsDialog(getActivity(), mWpsSetup);
+        }
     }
 
 }
