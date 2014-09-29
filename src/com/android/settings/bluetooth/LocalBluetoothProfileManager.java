@@ -309,6 +309,10 @@ final class LocalBluetoothProfileManager {
         return mPbapProfile;
     }
 
+    MapProfile getMapProfile(){
+        return mMapProfile;
+    }
+
     /**
      * Fill in a list of LocalBluetoothProfile objects that are supported by
      * the local device and the remote device.
