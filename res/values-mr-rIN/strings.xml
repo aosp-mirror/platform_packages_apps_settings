@@ -628,6 +628,8 @@
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi-Fi थेट"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"स्कॅन करा"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"प्रगत"</string>
+    <string name="wifi_menu_apps" msgid="6003687912727859577">"अॅप्स दर्शवा"</string>
+    <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"WiFi सामर्थ्य दर्शवा"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"नेटवर्कवर कनेक्ट करा"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"नेटवर्क विसरा"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"नेटवर्क सुधारित करा"</string>
@@ -1590,13 +1592,13 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> शिल्लक"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"चार्ज करण्यासाठी <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - अंदाजे. <xliff:g id="TIME">%2$s</xliff:g> शिल्लक"</string>
+    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - अंदाजे <xliff:g id="TIME">%2$s</xliff:g> शिल्लक"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - पूर्ण होण्यात <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> एसी वर पूर्ण होईपर्यंत"</string>
     <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - USB वर पूर्ण होण्यात <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - वायरलेसवरून पूर्ण होण्यात <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"शेवटचे पूर्ण चार्ज झाल्यापासून वापरा"</string>
+    <string name="power_usage_list_summary" msgid="2409288197839512482">"पूर्ण चार्ज झाल्यानंतरचा वापर"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"अनप्लग केल्यापासून बॅटरी वापर"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"रीसेट केल्यापासून बॅटरी वापर"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"बॅटरीवरील <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -2370,7 +2372,7 @@
     <string name="zen_mode_option_title" msgid="5061978632306007914">"कॉल आणि सूचना येतात तेव्‍हा"</string>
     <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"सूचना येतात तेव्हा"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"नेहमी व्यत्यय आणा"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"केवळ प्राधान्य व्‍यत्‍ययांना अनुमती द्या"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"केवळ प्राधान्य दिलेल्या व्‍यत्‍ययांना अनुमती द्या"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"व्यत्यय आणू नका"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"फोन रिंगटोन"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"डिफॉल्ट सूचना रींगटोन"</string>
@@ -2417,7 +2419,7 @@
     <string name="app_notification_block_title" msgid="172237877395761371">"अवरोधित करा"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"या अॅपकडील सूचना कधीही दर्शवू नका"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"प्राधान्य"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"सूचना सूचीच्या शीर्षस्थानी दर्शवा आणि डिव्हाइस प्राथमिक व्यत्ययांवर सेट केलेले असतानाच त्यांना येऊ द्या"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"सूचना सूचीच्या शीर्षस्थानी दर्शवा आणि डिव्हाइस प्राधान्य दिलेल्या व्यत्ययांवर सेट केलेले असताना त्यांना येऊ द्या"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"संवेदनशील"</string>
     <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"डिव्हाइस लॉक केलेले असताना, या अॅपच्या सूचनांमधील कोणतीही संवेदशनशील सामग्री लपवा"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"अवरोधित"</string>
@@ -2425,21 +2427,22 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"संवेदनशील"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"पूर्ण झाले"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"आपण हे बंद करेपर्यंत"</string>
-    <string name="zen_mode_important_category" msgid="8123274463331022993">"प्राधान्य व्यत्यय"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"कार्य न करण्‍याचा कालावधी (प्राधान्य व्यत्यय केवळ)"</string>
+    <string name="zen_mode_important_category" msgid="8123274463331022993">"प्राधान्य दिलेले व्यत्यय"</string>
+    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"डाउनटाइम (केवळ प्राधान्य दिलेले व्यत्यय)"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"दिवस"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"काहीही नाही"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"स्वयंचलन"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"स्वयंचलितपणे चालू करा"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"कधीही नाही"</string>
-    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"फोन कॉल"</string>
+    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"कॉल"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"संदेश"</string>
-    <string name="zen_mode_from" msgid="1777739391289980762">"प्रेषक"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"कडील कॉल/संदेश"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"कोणीही"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"केवळ संपर्क"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"केवळ तारांकित संपर्क"</string>
-    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"अलार्म आणि अन्य वैयक्तिक स्मरणपत्रांना नेहमीच प्राधान्य असते"</string>
+    <string name="zen_mode_events" msgid="2456995649835437565">"इव्हेंट आणि स्मरणपत्रे"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"अलार्म नेहमी प्राधान्य दिलेले व्‍यत्यय असतात"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वयंचलितपणे चालू करा"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कधीही नाही"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"प्रत्येक रात्री"</string>

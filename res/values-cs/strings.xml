@@ -356,7 +356,7 @@
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifrování telefonu"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Šifrováno"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="2876073029767953111">"Své účty, nastavení, stažené aplikace a jejich data, média a další soubory můžete zašifrovat. Pokud tablet zašifrujete a nastavili jste zámek obrazovky (bezpečnostní gesto, číselný kód PIN nebo heslo), bude třeba jej při každém zapnutí dešifrovat odemknutím obrazovky. Dešifrování lze provést pouze obnovením továrních dat, kterým vymažete všechna svá data.\n\nŠifrování trvá hodinu nebo i déle. Šifrování je třeba zahájit s plně nabitou baterií a tablet je třeba mít během procesu zapojený do zásuvky.Pokud šifrování přerušíte, přijdete o některá nebo všechna svá data."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Své účty, nastavení, stažené aplikace a jejich data, média a další soubory můžete zašifrovat. Pokud telefon zašifrujete a nastavili jste zámek obrazovky (bezpečnostní gesto, číselný kód PIN nebo heslo), bude třeba jej při každém zapnutí dešifrovat odemknutím obrazovky. Dešifrování lze provést pouze obnovením továrních dat, kterým vymažete všechna svá data.\n\nŠifrování trvá hodinu nebo i déle. Šifrování je potřeba zahájit s nabitou baterií a během šifrování je potřeba ponechat telefon připojený ke zdroji napájení. Pokud šifrování přerušíte, přijdete o některá nebo všechna svá data."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="5573427498609458721">"Své účty, nastavení, stažené aplikace a jejich data, média a další soubory můžete zašifrovat. Pokud telefon zašifrujete a nastavili jste zámek obrazovky (bezpečnostní gesto, číselný kód PIN nebo heslo), bude třeba jej při každém zapnutí dešifrovat odemknutím obrazovky. Jediným dalším způsobem dešifrování je  obnovení továrních nastavení, kterým vymažete všechna svá data.\n\nŠifrování trvá hodinu nebo i déle. Šifrování je potřeba zahájit s nabitou baterií a během šifrování je potřeba ponechat telefon připojený ke zdroji napájení. Pokud šifrování přerušíte, přijdete o některá nebo všechna svá data."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Šifrovat tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Šifrovat telefon"</string>
     <string name="crypt_keeper_low_charge_text" msgid="2029407131227814893">"Nabijte baterii a zkuste to znovu."</string>
@@ -628,6 +628,8 @@
     <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi‑Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Vyhledávání"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Rozšířené nastavení"</string>
+    <string name="wifi_menu_apps" msgid="6003687912727859577">"Zobrazit aplikace"</string>
+    <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"Zobrazit sílu Wi-Fi"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Připojit k síti"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Odstranit záznam sítě"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Upravit síť"</string>
@@ -2197,7 +2199,7 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcete se smazat?"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"Odstranit uživatele?"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"Odstranit tento profil?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Odstranit prac. profil?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"Odstranit pracovní profil?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"Přijdete o místo a data v tomto tabletu. Tuto akci nelze vrátit zpět."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"Přijdete o místo a data v tomto telefonu. Tuto akci nelze vrátit zpět."</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"Budou smazány všechny aplikace a data."</string>
@@ -2433,13 +2435,14 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Automaticky zapnout"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Nikdy"</string>
-    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Telefonní hovory"</string>
+    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"Volání"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Zprávy"</string>
-    <string name="zen_mode_from" msgid="1777739391289980762">"Od"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"Volání/zprávy od"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Kohokoli"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Pouze kontakty"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Kontakty s hvězdičkou"</string>
-    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"Budíky a další osobní připomenutí jsou vždy prioritní."</string>
+    <string name="zen_mode_events" msgid="2456995649835437565">"Události a připomenutí"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"Budíky jsou vždy prioritní vyrušení."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Automaticky zapnout"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nikdy"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Každou noc"</string>
