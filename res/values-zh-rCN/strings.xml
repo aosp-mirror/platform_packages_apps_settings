@@ -37,9 +37,9 @@
     <string name="turn_on_radio" msgid="8706561489788373676">"打开无线通信"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"关闭无线通信"</string>
     <string name="sms_over_ims_on" msgid="5085290395865632925">"启用通过 IMS 发送短信的功能"</string>
-    <string name="sms_over_ims_off" msgid="8354792045992793959">"停用通过 IMS 发送短信的功能"</string>
+    <string name="sms_over_ims_off" msgid="8354792045992793959">"关闭通过IMS发送短信的功能"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"需要打开 IMS 注册"</string>
-    <string name="ims_reg_required_off" msgid="1720570343422743943">"需要关闭 IMS 注册"</string>
+    <string name="ims_reg_required_off" msgid="1720570343422743943">"需要关闭IMS注册"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"打开 LTE RAM 转储"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"关闭 LTE RAM 转储"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"查看SIM卡地址簿"</string>
@@ -127,11 +127,11 @@
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"扫描设备"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"重命名此设备"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"重命名"</string>
-    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"断开连接？"</string>
+    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"要断开连接吗？"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"此操作将会断开您与以下设备的连接：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"您无权更改蓝牙设置。"</string>
     <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"在<xliff:g id="DEVICE_NAME">%1$s</xliff:g>上开启蓝牙设置后，附近的设备将可以检测到该设备。"</string>
-    <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接？"</string>
+    <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"要断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接吗？"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"广播"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"要停用配置文件吗？"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"此操作将停用：&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;来自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
@@ -507,7 +507,7 @@
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"可用设备"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"未找到任何设备"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"连接"</string>
-    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开网络共享"</string>
+    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开连接"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"配对和连接"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"取消配对"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"断开连接和取消配对"</string>
@@ -559,7 +559,7 @@
     <string name="wifi_assistant_intro_setup" msgid="4605105515416995110">"全新功能\nWLAN助手"</string>
     <string name="wifi_assistant_no_thanks" msgid="2776983751990143934">"不用了"</string>
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"设置"</string>
-    <string name="wifi_assistant_card_message" msgid="107811647784658536">"通过WLAN助手自动连接到可用网络。"</string>
+    <string name="wifi_assistant_card_message" msgid="107811647784658536">"WLAN助手可帮助您自动连接到可用网络。"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"WLAN助手"</string>
     <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g>会自动将您的设备连接到可用的最佳WLAN网络"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"打开应用"</string>
@@ -660,9 +660,9 @@
     <string name="wifi_speed" msgid="3526198708812322037">"连接速度"</string>
     <string name="wifi_frequency" msgid="7791090119577812214">"频率"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP地址"</string>
-    <string name="wifi_eap_method" msgid="8529436133640730382">"EAP 方法"</string>
-    <string name="please_select_phase2" msgid="5231074529772044898">"阶段 2 身份验证"</string>
-    <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA 证书"</string>
+    <string name="wifi_eap_method" msgid="8529436133640730382">"EAP方法"</string>
+    <string name="please_select_phase2" msgid="5231074529772044898">"阶段2身份验证"</string>
+    <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA证书"</string>
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"用户证书"</string>
     <string name="wifi_eap_identity" msgid="4359453783379679103">"身份"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"匿名身份"</string>
@@ -672,7 +672,7 @@
     <string name="wifi_unchanged" msgid="3410422020930397102">"（未更改）"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"（未指定）"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"已保存"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"未启用"</string>
+    <string name="wifi_disabled_generic" msgid="4259794910584943386">"已停用"</string>
     <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"已停用（互联网连接状况不佳）"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"身份验证出现问题"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"不在范围内"</string>
@@ -734,7 +734,7 @@
     <string name="wifi_p2p_remembered_groups" msgid="3847022927914068230">"已保存的群组"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="8921447388048243547">"无法连接。"</string>
     <string name="wifi_p2p_failed_rename_message" msgid="2562182284946936380">"无法重命名设备。"</string>
-    <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"断开连接？"</string>
+    <string name="wifi_p2p_disconnect_title" msgid="3216846049677448420">"要断开连接吗？"</string>
     <string name="wifi_p2p_disconnect_message" msgid="8227342771610125771">"如果断开连接，您与<xliff:g id="PEER_NAME">%1$s</xliff:g>的连接将中断。"</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="3283805371034883105">"如果断开连接，您与<xliff:g id="PEER_NAME">%1$s</xliff:g>和另外 <xliff:g id="PEER_COUNT">%2$s</xliff:g> 台设备的连接将中断。"</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"取消邀请？"</string>
@@ -1077,7 +1077,7 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"手机套餐"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"默认短信应用"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"要更改短信应用吗？"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"要使用“<xliff:g id="NEW_APP">%1$s</xliff:g>”（取代“<xliff:g id="CURRENT_APP">%2$s</xliff:g>”）作为您的短信应用吗？"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"要使用“<xliff:g id="NEW_APP">%1$s</xliff:g>”取代“<xliff:g id="CURRENT_APP">%2$s</xliff:g>”作为您的短信应用吗？"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"要使用“<xliff:g id="NEW_APP">%s</xliff:g>”作为您的短信应用吗？"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"要更改WLAN助手吗？"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"不再使用<xliff:g id="CURRENT_APP">%2$s</xliff:g>，而改用<xliff:g id="NEW_APP">%1$s</xliff:g>来管理您的网络连接吗？"</string>
@@ -1236,7 +1236,7 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"正在运行"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB存储设备"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD卡中"</string>
-    <string name="disabled" msgid="9206776641295849915">"未启用"</string>
+    <string name="disabled" msgid="9206776641295849915">"已停用"</string>
     <string name="not_installed" msgid="1475144352069281880">"未安装"</string>
     <string name="no_applications" msgid="7336588977497084921">"无应用。"</string>
     <string name="internal_storage" msgid="1584700623164275282">"内部存储空间"</string>
@@ -1614,9 +1614,9 @@
     <string name="bluetooth_on_time" msgid="3056108148042308690">"WLAN开启时间"</string>
     <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> - <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"详细电量使用记录"</string>
-    <string name="details_title" msgid="3792801565213935385">"使用详情"</string>
+    <string name="details_title" msgid="3792801565213935385">"详细使用情况"</string>
     <string name="details_subtitle" msgid="32593908269911734">"详细使用情况"</string>
-    <string name="controls_subtitle" msgid="390468421138288702">"电量调配提示"</string>
+    <string name="controls_subtitle" msgid="390468421138288702">"省电提示"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"包含的软件包"</string>
     <string name="power_screen" msgid="3023346080675904613">"屏幕"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"手电筒"</string>
@@ -1637,13 +1637,13 @@
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"通话"</string>
     <string name="usage_type_data_send" msgid="8971710128438365919">"发送的移动数据包"</string>
     <string name="usage_type_data_recv" msgid="5468564329333954445">"接收的移动数据包"</string>
-    <string name="usage_type_radio_active" msgid="1732647857619420121">"移动无线网络运行时间"</string>
+    <string name="usage_type_radio_active" msgid="1732647857619420121">"移动无线装置运行时间"</string>
     <string name="usage_type_data_wifi_send" msgid="1847552143597396162">"发送的WLAN数据包"</string>
     <string name="usage_type_data_wifi_recv" msgid="5678475911549183829">"接收的WLAN数据包"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"音频"</string>
     <string name="usage_type_video" msgid="4295357792078579944">"视频"</string>
     <string name="usage_type_on_time" msgid="3351200096173733159">"运行时间"</string>
-    <string name="usage_type_no_coverage" msgid="3797004252954385053">"无信号的时间"</string>
+    <string name="usage_type_no_coverage" msgid="3797004252954385053">"无信号时间"</string>
     <string name="usage_type_total_battery_capacity" msgid="3798285287848675346">"电池总容量"</string>
     <string name="usage_type_computed_power" msgid="5862792259009981479">"计算出的耗电量"</string>
     <string name="usage_type_actual_power" msgid="7047814738685578335">"观察到的耗电量"</string>
@@ -1654,8 +1654,8 @@
     <string name="battery_action_wifi" msgid="8181553479021841207">"WLAN设置"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"蓝牙设置"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"语音通话所耗的电量"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"平板电脑待机时所耗的电量"</string>
-    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"手机待机时所耗的电量"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"平板电脑待机所耗的电量"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"手机待机所耗的电量"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"移动网络所耗的电量"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"不在信号覆盖范围内时切换到飞行模式，以节约电量"</string>
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"手电筒所耗的电量"</string>
@@ -1666,7 +1666,7 @@
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"蓝牙所耗的电量"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="1942935021750897422">"请在不使用蓝牙功能时将其关闭"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="4071352514714259230">"尝试连接另一蓝牙设备"</string>
-    <string name="battery_desc_apps" msgid="8530418792605735226">"应用所耗的电量"</string>
+    <string name="battery_desc_apps" msgid="8530418792605735226">"该应用所耗的电量"</string>
     <string name="battery_sugg_apps_info" msgid="6907588126789841231">"停止或卸载应用"</string>
     <string name="battery_sugg_apps_gps" msgid="5959067516281866135">"选择“耗电量低”模式"</string>
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"该应用中可能提供了用于减少耗电量的设置"</string>
@@ -1891,8 +1891,8 @@
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"连接到新的网络"</string>
     <string name="wifi_setup_status_connecting" msgid="4971421484401530740">"正在连接..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"转至下一步"</string>
-    <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"不支持 EAP。"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="1955087534276570962">"您无法在设置过程中配置 EAPWLAN连接。设置完毕后，您可以在“设置”&gt;“无线和网络”中进行配置。"</string>
+    <string name="wifi_setup_status_eap_not_supported" msgid="5335338851032315905">"不支持EAP。"</string>
+    <string name="wifi_setup_eap_not_supported" msgid="1955087534276570962">"您无法在初次设置过程中配置EAP WLAN连接。初次设置完毕后，您可以在“设置”&gt;“无线和网络”中进行配置。"</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"建立连接可能需要几分钟时间..."</string>
     <string name="wifi_setup_description_connected" msgid="736032046548460779">"触摸"<b>"下一步"</b>"可继续进行设置。\n\n触摸"<b>"返回"</b>"可连接到其他WLAN网络。"</string>
     <string name="accessibility_sync_enabled" msgid="558480439730263116">"同步功能已启用"</string>
@@ -2109,7 +2109,7 @@
     <string name="vpn_ipsec_identifier" msgid="4098175859460006296">"IPSec 标识符"</string>
     <string name="vpn_ipsec_secret" msgid="4526453255704888704">"IPSec 预共享密钥"</string>
     <string name="vpn_ipsec_user_cert" msgid="6880651510020187230">"IPSec 用户证书"</string>
-    <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA 证书"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="91338213449148229">"IPSec CA证书"</string>
     <string name="vpn_ipsec_server_cert" msgid="6599276718456935010">"IPSec 服务器证书"</string>
     <string name="vpn_show_options" msgid="7182688955890457003">"显示高级选项"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS搜索网域"</string>
@@ -2142,8 +2142,8 @@
     <string name="trusted_credentials_enable_label" msgid="2498444573635146913">"启用"</string>
     <string name="trusted_credentials_remove_label" msgid="3633691709300260836">"删除"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="83215982842660869">"要启用该系统CA证书吗？"</string>
-    <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"要停用该系统 CA 证书吗？"</string>
-    <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"要永久删除该用户 CA 证书吗？"</string>
+    <string name="trusted_credentials_disable_confirmation" msgid="8199697813361646792">"要停用该系统CA证书吗？"</string>
+    <string name="trusted_credentials_remove_confirmation" msgid="443561923016852941">"要永久移除该用户CA证书吗？"</string>
     <string name="spellcheckers_settings_title" msgid="399981228588011501">"拼写检查工具"</string>
     <string name="current_backup_pw_prompt" msgid="7735254412051914576">"在此键入您当前的完整备份密码"</string>
     <string name="new_backup_pw_prompt" msgid="8755501377391998428">"在此键入新的完整备份密码"</string>
@@ -2151,7 +2151,7 @@
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"设置备份密码"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"取消"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"其他系统更新"</string>
-    <string name="selinux_status_disabled" msgid="924551035552323327">"未启用"</string>
+    <string name="selinux_status_disabled" msgid="924551035552323327">"已停用"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"许可"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"执行中"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"网络可能会受到监控"</string>
@@ -2433,13 +2433,14 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"自动开启"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"， "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"一律不"</string>
-    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"电话"</string>
+    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"通话"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"消息"</string>
-    <string name="zen_mode_from" msgid="1777739391289980762">"来自"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"来电者/消息发送者"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"任何人"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"仅限联系人"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"仅限收藏的联系人"</string>
-    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"闹钟和其他个人提醒始终优先"</string>
+    <string name="zen_mode_events" msgid="2456995649835437565">"活动和提醒"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"闹钟始终为优先打扰内容"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自动开启"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>

@@ -699,9 +699,9 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"警告：如果略過 Wi-Fi 設定，平板電腦將只能透過流動數據連線，以作初始下載及更新。如要避免產生數據傳輸費用，請連線至 Wi-Fi 網絡。"</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"警告：如果略過 Wi-Fi 設定，裝置將只能透過流動數據連線，以作初始下載及更新。如要避免產生數據傳輸費用，請連線至 Wi-Fi 網絡。"</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"警告：如果略過 Wi-Fi 設定，手機將只能透過流動數據連線，以作初始下載及更新。如要避免產生數據傳輸費用，請連線至 Wi-Fi 網絡。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="2393880108322835846">"警告：如果略過 Wi-Fi 設定，平板電腦將無法連線至互聯網，以作任何初始下載或更新。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1707391993265558787">"警告：如果略過 Wi-Fi 設定，裝置將無法連線至互聯網，以作任何初始下載或更新。"</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="1556858507920033022">"警告：如果略過 Wi-Fi 設定，手機將無法連線至互聯網，以作任何初始下載或更新。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="2393880108322835846">"警告：如果略過 Wi-Fi 設定，平板電腦將無法連線至互聯網，以進行初始下載或更新。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1707391993265558787">"警告：如果略過 Wi-Fi 設定，裝置將無法連線至互聯網，以進行初始下載或更新。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="1556858507920033022">"警告：如果略過 Wi-Fi 設定，手機將無法連線至互聯網，以進行初始下載或更新。"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"平板電腦無法連接這個 Wi-Fi 網絡。"</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"裝置無法連線至這個 Wi-Fi 網絡。"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"手機無法連接這個 Wi-Fi 網絡。"</string>
@@ -765,7 +765,7 @@
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"鈴聲"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音量與來電音量相同"</string>
-    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"不支援工作設定檔"</string>
+    <string name="home_work_profile_not_supported" msgid="1357721012342357037">"不支援公司檔案"</string>
     <string name="notification_sound_dialog_title" msgid="3805140135741385667">"預設通知音效"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"媒體"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"設定音樂和影片的音量"</string>
@@ -1077,8 +1077,8 @@
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"流動數據計劃"</string>
     <string name="sms_application_title" msgid="6134351177937015839">"預設短訊應用程式"</string>
     <string name="sms_change_default_dialog_title" msgid="1958688831875804286">"變更短訊應用程式？"</string>
-    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"改用「<xliff:g id="NEW_APP">%1$s</xliff:g>」為您的短訊應用程式，以取代「<xliff:g id="CURRENT_APP">%2$s</xliff:g>」？"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」為您的短訊應用程式？"</string>
+    <string name="sms_change_default_dialog_text" msgid="1522783933230274787">"將 <xliff:g id="NEW_APP">%1$s</xliff:g> 設為您的短訊應用程式，而不使用 <xliff:g id="CURRENT_APP">%2$s</xliff:g>？"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="602683880284921998">"將 <xliff:g id="NEW_APP">%s</xliff:g> 設為您的短訊應用程式？"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="3776301550387574975">"變更 Wi‑Fi Assistant？"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="8035173880322990715">"使用「<xliff:g id="NEW_APP">%1$s</xliff:g>」(取代「<xliff:g id="CURRENT_APP">%2$s</xliff:g>」) 管理您的網絡連線？"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="7444620909047611601">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」管理您的網絡連線？"</string>
@@ -1092,11 +1092,11 @@
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"省電模式"</string>
     <string name="location_mode_sensors_only_title" msgid="3040366132175435160">"只限裝置"</string>
     <string name="location_mode_location_off_title" msgid="2829713015012529465">"位置關閉"</string>
-    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近的定位要求"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近的位置資訊要求"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"最近沒有應用程式要求存取位置資料"</string>
-    <string name="location_category_location_services" msgid="7437150886946685979">"定位服務"</string>
-    <string name="location_high_battery_use" msgid="517199943258508020">"高電池用量"</string>
-    <string name="location_low_battery_use" msgid="8602232529541903596">"低電池用量"</string>
+    <string name="location_category_location_services" msgid="7437150886946685979">"位置資訊服務"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"高耗電量"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"低耗電量"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"定位模式"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"使用 GPS、Wi-Fi 和流動網絡確定位置"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"使用 Wi-Fi 和流動網絡確定位置"</string>
@@ -1672,7 +1672,7 @@
     <string name="battery_sugg_apps_settings" msgid="3974902365643634514">"應用程式可能有提供節省電力的設定"</string>
     <string name="battery_desc_users" msgid="7682989161885027823">"使用者用電量"</string>
     <string name="battery_desc_unaccounted" msgid="7404256448541818019">"其他用電量"</string>
-    <string name="battery_msg_unaccounted" msgid="1963583522633067961">"電池用量是約略的用電量，可能不包含部分耗電來源。經計算的約略用電量與實際監測耗電量之間的差距，就是其他用電量。"</string>
+    <string name="battery_msg_unaccounted" msgid="1963583522633067961">"電池用量是估計的用電量，並非所有耗電來源均計算在內。其他用電量是指估計耗電量與實際電池用量的差額。"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"計算過高的用電量"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"拔除插頭後已耗電 <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1855,7 +1855,7 @@
     <string name="remove_device_admin" msgid="3596845261596451437">"撤銷"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"裝置管理員"</string>
     <string name="no_device_admins" msgid="702695100241728775">"沒有可用的裝置管理員"</string>
-    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"如要停止讓 <xliff:g id="APP_NAME">%1$s</xliff:g> 存取您的工作設定檔，請前往 [設定] &gt; [帳戶] 移除設定檔"</string>
+    <string name="managed_profile_device_admin_info" msgid="5048846624960067582">"如要停止讓 <xliff:g id="APP_NAME">%1$s</xliff:g> 存取您的公司檔案，請前往 [設定] &gt; [帳戶] 移除設定檔"</string>
     <string name="personal_device_admin_title" msgid="2849617316347669861">"個人"</string>
     <string name="managed_device_admin_title" msgid="7853955652864478435">"公司"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"沒有信任的代理程式可供使用"</string>
@@ -1908,8 +1908,8 @@
     <string name="account_sync_settings_title" msgid="5131314922423053588">"同步"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"同步處理目前發生問題。將於短時間內恢復。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"新增帳戶"</string>
-    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"工作設定檔未能使用"</string>
-    <string name="remove_managed_profile_label" msgid="3856519337797285325">"移除工作設定檔"</string>
+    <string name="managed_profile_not_available_label" msgid="3489771164851107822">"公司檔案未能使用"</string>
+    <string name="remove_managed_profile_label" msgid="3856519337797285325">"移除公司檔案"</string>
     <string name="background_data" msgid="5779592891375473817">"背景資料"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"應用程式隨時可以同步處理、傳送和接收資料"</string>
     <string name="background_data_dialog_title" msgid="6059217698124786537">"您要停用背景資料嗎？"</string>
@@ -2169,12 +2169,12 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"新增使用者或個人檔案"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"新增使用者"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"限制存取的個人檔案"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"工作設定檔"</string>
+    <string name="user_summary_managed_profile" msgid="7369539529693048111">"公司檔案"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"建立限制存取的個人檔案前，您必須先設定上鎖畫面來保護您的應用程式和個人資料。"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"設定上鎖畫面"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"未設定"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"未設定 - 限制存取的個人檔案"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"尚未設定 - 工作設定檔"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"尚未設定 - 公司檔案"</string>
     <string name="user_owner" msgid="3879126011135546571">"擁有者"</string>
     <string name="user_you" msgid="1639158809315025986">"您 (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_nickname" msgid="5148818000228994488">"暱稱"</string>
@@ -2201,11 +2201,11 @@
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"您要刪除自己嗎？"</string>
     <string name="user_confirm_remove_title" msgid="1163721647646152032">"移除這位使用者？"</string>
     <string name="user_profile_confirm_remove_title" msgid="5573161550669867342">"移除這個設定檔？"</string>
-    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"要移除工作設定檔嗎？"</string>
+    <string name="work_profile_confirm_remove_title" msgid="2017323555783522213">"要移除公司檔案嗎？"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="8167855311779740207">"您將會失去在這部平板電腦上的空間和資料，您無法復原這項操作。"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5391888073786090274">"您將會失去在這部手機上的空間和資料，您無法復原這項操作。"</string>
     <string name="user_confirm_remove_message" msgid="1020629390993095037">"所有應用程式和資料都會被刪除。"</string>
-    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"這個工作設定檔中的所有應用程式和資料都會被刪除。"</string>
+    <string name="work_profile_confirm_remove_message" msgid="7593793549364168783">"這個公司檔案中的所有應用程式和資料都會被刪除。"</string>
     <string name="user_profile_confirm_remove_message" msgid="7373754145959298522">"所有應用程式和資料都會被刪除。"</string>
     <string name="user_adding_new_user" msgid="1521674650874241407">"正在新增使用者…"</string>
     <string name="user_delete_user_description" msgid="3158592592118767056">"刪除使用者"</string>
@@ -2245,7 +2245,7 @@
     <string name="restriction_menu_reset" msgid="2067644523489568173">"移除限制"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改 PIN 碼"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"顯示通知"</string>
-    <string name="help_label" msgid="6886837949306318591">"說明與意見反映"</string>
+    <string name="help_label" msgid="6886837949306318591">"說明和意見反映"</string>
     <string name="user_account_title" msgid="1127193807312271167">"內容帳戶"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"相片 ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"極嚴重威脅"</string>
@@ -2437,13 +2437,14 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"自動開啟"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"、 "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"永不"</string>
-    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"通話"</string>
+    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"通話"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"訊息"</string>
-    <string name="zen_mode_from" msgid="1777739391289980762">"來自"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"來電者/訊息傳送者"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"只限聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"只限已加星號的聯絡人"</string>
-    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"鬧鐘和其他個人提醒一律設為重要干擾"</string>
+    <string name="zen_mode_events" msgid="2456995649835437565">"活動和提醒"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"鬧鐘一律設為重要干擾"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動開啟"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每天晚上"</string>
@@ -2459,7 +2460,7 @@
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
     <string name="screen_pinning_description" msgid="3022868253807792488">"開啟這項設定時，可讓裝置鎖定在目前的螢幕。\n\n如何固定螢幕：\n\n1. 開啟這項設定。\n\n2. 開啟應用程式。\n\n3. 輕觸 [最近] 按鈕。\n\n4. 輕觸圖釘圖示。"</string>
-    <string name="managed_user_title" msgid="8101244883654409696">"工作設定檔"</string>
+    <string name="managed_user_title" msgid="8101244883654409696">"公司檔案"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(實驗性)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"當裝置旋轉時"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"旋轉畫面內容"</string>
