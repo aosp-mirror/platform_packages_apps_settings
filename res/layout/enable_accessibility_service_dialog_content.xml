@@ -28,6 +28,12 @@
         android:paddingStart="16dip"
         android:paddingEnd="16dip" >
 
+        <TextView android:id="@+id/encryption_warning"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
         <TextView android:id="@+id/capabilities_header"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
