@@ -31,9 +31,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.hardware.usb.IUsbManager;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
@@ -61,7 +59,6 @@ import android.view.HardwareRenderer;
 import android.view.IWindowManager;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.webkit.WebView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -154,11 +151,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
-    private static final String WEBVIEW_DATA_REDUCTION_PROXY_KEY = "webview_data_reduction_proxy";
-    // GoogleSetting name for the data reduction proxy setting.
-    // Setting type: int ( 0 = disallow, 1 = allow )
-    private static final String WEBVIEW_DATA_REDUCTION_PROXY = "use_webview_data_reduction_proxy";
-
     private static final String PROCESS_STATS = "proc_stats";
 
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
@@ -170,11 +162,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final int RESULT_DEBUG_APP = 1000;
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
-
-    // The setting Uri. Used when querying GoogleSettings.
-    private static final Uri GOOGLE_SETTINGS_CONTENT_URI = Uri.parse("content://com.google.settings/partner");
-    private static final String GOOGLE_SETTINGS_COMPONENT = "com.google.android.gms";
-    private static final String GOOGLE_SETTINGS_ACTIVITY = ".app.settings.GoogleSettingsActivity";
 
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
@@ -241,8 +228,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
-
-    private CheckBoxPreference mWebViewDataReductionProxy;
 
     private PreferenceScreen mProcessStats;
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
@@ -380,15 +365,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
         mProcessStats = (PreferenceScreen) findPreference(PROCESS_STATS);
         mAllPrefs.add(mProcessStats);
-
-        mWebViewDataReductionProxy = findAndInitCheckboxPref(WEBVIEW_DATA_REDUCTION_PROXY_KEY);
-        mWebViewDataReductionProxy.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        return handleDataReductionProxyPreferenceChange();
-                    }
-                });
     }
 
     private ListPreference addListPreference(String prefKey) {
@@ -557,7 +533,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
         updateShowAllANRsOptions();
-        updateWebViewDataReductionProxyOptions();
         updateVerifyAppsOverUsbOptions();
         updateBugreportOptions();
         updateForceRtlOptions();
@@ -1302,73 +1277,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
-    // Reads the googlesetting and converts to an int. Throws an exception if GoogleSettings
-    // provider does not exist or if the setting name cannot be found.
-    private int getGoogleSettingValue(String name) throws Exception {
-        String value = null;
-        Cursor c = null;
-        try {
-            ContentResolver resolver = getActivity().getContentResolver();
-            c = resolver.query(GOOGLE_SETTINGS_CONTENT_URI, new String[] { "value" },
-                    "name=?", new String[]{ name }, null);
-            if (c != null && c.moveToNext()) value = c.getString(0);
-        } finally {
-            if (c != null) c.close();
-        }
-        // Throw an exception if value is null. This will indicate that setting is not found.
-        return Integer.parseInt(value);
-    }
-
-    private boolean handleDataReductionProxyPreferenceChange() {
-        int val;
-        try {
-            val = getGoogleSettingValue(WEBVIEW_DATA_REDUCTION_PROXY);
-        } catch (Exception e) {
-            // Accessing GoogleSettings failed. Use the developer setting.
-            return true;
-        }
-
-        Intent i = new Intent();
-        i.setClassName(GOOGLE_SETTINGS_COMPONENT,
-                GOOGLE_SETTINGS_COMPONENT + GOOGLE_SETTINGS_ACTIVITY);
-        try {
-            startActivity(i);
-        } catch (android.content.ActivityNotFoundException ex) {
-            // We found the GoogleSetting but for some reason activity not found.
-            // Do our best and put an alert dialog
-            new AlertDialog.Builder(getActivity()).setMessage(
-                    getActivity().getResources().getString(
-                        R.string.dev_settings_use_google_settings))
-                        .setPositiveButton(android.R.string.ok, this)
-                        .show();
-        }
-        // Use GoogleSettings to set.
-        return false;
-    }
-
-    private void writeWebViewDataReductionProxyOptions() {
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY,
-                mWebViewDataReductionProxy.isChecked() ? 1 : 0);
-        Intent intent = new Intent(WebView.DATA_REDUCTION_PROXY_SETTING_CHANGED);
-        // Broadcast to all apps running as current user.
-        getActivity().sendBroadcastAsUser(intent, UserHandle.CURRENT);
-    }
-
-    private void updateWebViewDataReductionProxyOptions() {
-        int val = -1;
-        try {
-              val = getGoogleSettingValue(WEBVIEW_DATA_REDUCTION_PROXY);
-        } catch (Exception e) {
-            // Accessing GoogleSettings failed. Use the developer setting
-        }
-        if (val == -1) {
-            val = Settings.Secure.getInt(getActivity().getContentResolver(),
-                    Settings.Secure.WEBVIEW_DATA_REDUCTION_PROXY, 0);
-        }
-        updateCheckBox(mWebViewDataReductionProxy, val != 0);
-    }
-
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (switchView != mSwitchBar.getSwitch()) {
@@ -1488,8 +1396,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeImmediatelyDestroyActivitiesOptions();
         } else if (preference == mShowAllANRs) {
             writeShowAllANRsOptions();
-        } else if (preference == mWebViewDataReductionProxy) {
-            writeWebViewDataReductionProxyOptions();
         } else if (preference == mForceHardwareUi) {
             writeHardwareUiOptions();
         } else if (preference == mForceMsaa) {
