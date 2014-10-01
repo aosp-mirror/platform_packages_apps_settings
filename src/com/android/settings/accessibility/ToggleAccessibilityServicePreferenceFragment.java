@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
@@ -200,6 +201,17 @@ public class ToggleAccessibilityServicePreferenceFragment
 
         View content = inflater.inflate(R.layout.enable_accessibility_service_dialog_content,
                 null);
+
+        TextView encryptionWarningView = (TextView) content.findViewById(
+                R.id.encryption_warning);
+        if (LockPatternUtils.isDeviceEncrypted()) {
+            String text = getString(R.string.enable_service_encryption_warning,
+                    info.getResolveInfo().loadLabel(getPackageManager()));
+            encryptionWarningView.setText(text);
+            encryptionWarningView.setVisibility(View.VISIBLE);
+        } else {
+            encryptionWarningView.setVisibility(View.GONE);
+        }
 
         TextView capabilitiesHeaderView = (TextView) content.findViewById(
                 R.id.capabilities_header);

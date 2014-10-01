@@ -3665,6 +3665,14 @@
     <!-- Title for the list of capabilities of an accessibility service. -->
     <string name="capabilities_list_title"><xliff:g id="service" example="TalkBack">%1$s</xliff:g>
         needs to:</string>
+    <!-- Warning that the device data will not be encrypted with password or PIN if
+        enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
+    <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g>, your data\'s encryption won\'t be as strong.</string>
+    <!-- Warning that the device data will not be encrypted with password or PIN if
+         choosing a secure lock and there is an enabled accessibility service. [CHAR LIMIT=NONE] -->
+    <string name="secure_lock_encryption_warning">Because you\'ve turned on an accessibility service,
+        encryption based on this type of lock won\'t be as strong.</string>
 
     <!-- Title for the capability of an accessibility service to receive events and keys. -->
     <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
