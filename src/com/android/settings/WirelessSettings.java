@@ -367,6 +367,10 @@ public class WirelessSettings extends SettingsPreferenceFragment
         } else {
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(Utils.getTetheringLabel(cm));
+
+            // Grey out if provisioning is not available.
+            p.setEnabled(!TetherSettings
+                    .isProvisioningNeededButUnavailable(getActivity()));
         }
 
         // Enable link to CMAS app settings depending on the value in config.xml.
