@@ -154,6 +154,13 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             mProfileContainer.addPreference(pbapPref);
         }
 
+        final MapProfile mapProfile = mManager.getProfileManager().getMapProfile();
+        final int mapPermission = mCachedDevice.getMessagePermissionChoice();
+        if (mapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
+            CheckBoxPreference mapPreference = createProfilePreference(mapProfile);
+            mProfileContainer.addPreference(mapPreference);
+        }
+
         showOrHideProfileGroup();
     }
 
@@ -225,9 +232,13 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         boolean isConnected =
                 status == BluetoothProfile.STATE_CONNECTED;
 
-        if (isConnected) {
+        if (profilePref.isChecked()) {
             askDisconnect(mManager.getForegroundActivity(), profile);
         } else {
+            if (profile instanceof MapProfile) {
+                mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_ALLOWED);
+                refreshProfilePreference(profilePref, profile);
+            }
             if (profile.isPreferred(device)) {
                 // profile is preferred but not connected: disable auto-connect
                 profile.setPreferred(device, false);
@@ -259,6 +270,11 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
             public void onClick(DialogInterface dialog, int which) {
                 device.disconnect(profile);
                 profile.setPreferred(device.getDevice(), false);
+                if (profile instanceof MapProfile) {
+                    device.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+                    refreshProfilePreference(
+                            (CheckBoxPreference)findPreference(profile.toString()), profile);
+                }
             }
         };
 
@@ -297,6 +313,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
                 mProfileContainer.removePreference(profilePref);
             }
         }
+
         showOrHideProfileGroup();
     }
 
@@ -307,7 +324,10 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         // Gray out checkbox while connecting and disconnecting.
         profilePref.setEnabled(!mCachedDevice.isBusy());
 
-        if (profile instanceof PbapServerProfile) {
+        if (profile instanceof MapProfile) {
+            profilePref.setChecked(mCachedDevice.getMessagePermissionChoice()
+                    == CachedBluetoothDevice.ACCESS_ALLOWED);
+        } else if (profile instanceof PbapServerProfile) {
             // Handle PBAP specially.
             profilePref.setChecked(mCachedDevice.getPhonebookPermissionChoice()
                     == CachedBluetoothDevice.ACCESS_ALLOWED);

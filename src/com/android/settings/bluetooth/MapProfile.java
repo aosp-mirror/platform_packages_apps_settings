@@ -113,7 +113,7 @@ final class MapProfile implements LocalBluetoothProfile {
 
     public boolean connect(BluetoothDevice device) {
         if(V)Log.d(TAG,"connect() - should not get called");
-        return true; // MAP never connects out
+        return false; // MAP never connects out
     }
 
     public boolean disconnect(BluetoothDevice device) {

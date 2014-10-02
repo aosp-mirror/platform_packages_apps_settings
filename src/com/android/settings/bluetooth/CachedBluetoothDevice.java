@@ -133,7 +133,9 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         }
         mProfileConnectionState.put(profile, newProfileState);
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
-            if (!mProfiles.contains(profile)) {
+            if (profile instanceof MapProfile) {
+                profile.setPreferred(mDevice, true);
+            } else if (!mProfiles.contains(profile)) {
                 mRemovedProfiles.remove(profile);
                 mProfiles.add(profile);
                 if (profile instanceof PanProfile &&
@@ -142,15 +144,8 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                     mLocalNapRoleConnected = true;
                 }
             }
-            if (profile instanceof MapProfile) {
-                profile.setPreferred(mDevice, true);
-            }
         } else if (profile instanceof MapProfile &&
                 newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
-            if (mProfiles.contains(profile)) {
-                mRemovedProfiles.add(profile);
-                mProfiles.remove(profile);
-            }
             profile.setPreferred(mDevice, false);
         } else if (mLocalNapRoleConnected && profile instanceof PanProfile &&
                 ((PanProfile) profile).isLocalRoleNap(mDevice) &&
