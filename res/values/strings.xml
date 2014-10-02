@@ -3794,22 +3794,22 @@
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when discharging with duration -->
-    <string name="power_discharging_duration"><xliff:g id="level">%1$d</xliff:g>%%
+    <string name="power_discharging_duration"><xliff:g id="level">%1$s</xliff:g>
             - approx. <xliff:g id="time">%2$s</xliff:g> left</string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when charging -->
-    <string name="power_charging"><xliff:g id="level">%1$d</xliff:g>%% -
+    <string name="power_charging"><xliff:g id="level">%1$s</xliff:g> -
             <xliff:g id="state">%2$s</xliff:g></string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
-    <string name="power_charging_duration"><xliff:g id="level">%1$d</xliff:g>%% -
+    <string name="power_charging_duration"><xliff:g id="level">%1$s</xliff:g> -
             <xliff:g id="time">%2$s</xliff:g> until full</string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
-    <string name="power_charging_duration_ac"><xliff:g id="level">%1$d</xliff:g>%% -
+    <string name="power_charging_duration_ac"><xliff:g id="level">%1$s</xliff:g> -
             <xliff:g id="time">%2$s</xliff:g> until full on AC</string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
-    <string name="power_charging_duration_usb"><xliff:g id="level">%1$d</xliff:g>%% -
+    <string name="power_charging_duration_usb"><xliff:g id="level">%1$s</xliff:g> -
             <xliff:g id="time">%2$s</xliff:g> until full over USB</string>
     <!-- [CHAR_LIMIT=40] Label for battery level chart when charging with duration -->
-    <string name="power_charging_duration_wireless"><xliff:g id="level">%1$d</xliff:g>%% -
+    <string name="power_charging_duration_wireless"><xliff:g id="level">%1$s</xliff:g> -
             <xliff:g id="time">%2$s</xliff:g> until full from wireless</string>
     <!-- [CHAR_LIMIT=40] Label for list of apps using battery in power use UI -->
     <string name="power_usage_list_summary">Use since last full charge</string>
@@ -3841,9 +3841,6 @@
     <string name="wifi_on_time">Wi\u2011Fi on time</string>
     <!-- Bluetooth on time -->
     <string name="bluetooth_on_time">Wi\u2011Fi on time</string>
-    <!-- Application name and battery usage percentage -->
-    <string name="usage_name_percent"><xliff:g id="name">%1$s</xliff:g>" - "
-            <xliff:g id="number" example="30">%2$s</xliff:g><xliff:g id="percent" example="%">%%</xliff:g></string>
 
     <!-- Activity title for battery usage history details -->
     <string name="history_details_title">History details</string>
@@ -4011,7 +4008,7 @@
     <string name="battery_saver_turn_on_automatically_never">Never</string>
 
     <!-- [CHAR_LIMIT=40] Battery saver: Value for automatic entry option: pct% battery -->
-    <string name="battery_saver_turn_on_automatically_pct">at %1$d%% battery</string>
+    <string name="battery_saver_turn_on_automatically_pct">at %1$s battery</string>
 
     <!-- Process Stats strings -->
     <skip />
