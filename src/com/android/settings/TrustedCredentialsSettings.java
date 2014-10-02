@@ -316,7 +316,11 @@ public class TrustedCredentialsSettings extends Fragment {
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
             final UserHandle profile = getGroup(groupPosition);
             final UserInfo userInfo = mUserManager.getUserInfo(profile.getIdentifier());
-            title.setText(userInfo.name);
+            if (userInfo.isManagedProfile()) {
+                title.setText(R.string.category_work);
+            } else {
+                title.setText(R.string.category_personal);
+            }
             title.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 
             return convertView;
