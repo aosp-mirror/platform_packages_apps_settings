@@ -443,8 +443,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     try {
                         final IMountService service = getMountService();
                         type = service.getPasswordType();
-                        owner_info = service.getField("OwnerInfo");
-                        pattern_visible = !("0".equals(service.getField("PatternVisible")));
+                        owner_info = service.getField(StorageManager.OWNER_INFO_KEY);
+                        pattern_visible = !("0".equals(service.getField(StorageManager.PATTERN_VISIBLE_KEY)));
                     } catch (Exception e) {
                         Log.e(TAG, "Error calling mount service " + e);
                     }
