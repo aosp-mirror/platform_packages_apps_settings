@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
@@ -32,6 +33,7 @@ import android.util.MutableBoolean;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.ListView;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -213,6 +215,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
                 disableUnusablePreferences(quality, allowBiometric);
+                updatePreferenceSummaryIfNeeded();
             } else {
                 updateUnlockMethodAndFinish(quality, false);
             }
@@ -288,6 +291,28 @@ public class ChooseLockGeneric extends SettingsActivity {
                         pref.setSummary(R.string.unlock_set_unlock_disabled_summary);
                         pref.setEnabled(false);
                     }
+                }
+            }
+        }
+
+        private void updatePreferenceSummaryIfNeeded() {
+            if (AccessibilityManager.getInstance(getActivity()).getEnabledAccessibilityServiceList(
+                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK).isEmpty()) {
+                return;
+            }
+
+            CharSequence summary = getString(R.string.secure_lock_encryption_warning);
+
+            PreferenceScreen screen = getPreferenceScreen();
+            final int preferenceCount = screen.getPreferenceCount();
+            for (int i = 0; i < preferenceCount; i++) {
+                Preference preference = screen.getPreference(i);
+                switch (preference.getKey()) {
+                    case KEY_UNLOCK_SET_PATTERN:
+                    case KEY_UNLOCK_SET_PIN:
+                    case KEY_UNLOCK_SET_PASSWORD: {
+                        preference.setSummary(summary);
+                    } break;
                 }
             }
         }
