@@ -201,7 +201,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (sir != null) {
             simPref.setSelectedItem(sir.slotId + 1);
         }
-        simPref.setEnabled(mNumSims > 1);
+        simPref.setEnabled(mNumSims >= 1);
     }
 
     private void updateCellularDataValues() {
@@ -210,7 +210,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (sir != null) {
             simPref.setSelectedItem(sir.slotId);
         }
-        simPref.setEnabled(mNumSims > 1);
+        simPref.setEnabled(mNumSims >= 1);
     }
 
     private void updateCallValues() {
@@ -219,7 +219,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (sir != null) {
             simPref.setSelectedItem(sir.slotId + 1);
         }
-        simPref.setEnabled(mNumSims > 1);
+        simPref.setEnabled(mNumSims >= 1);
     }
 
     @Override

@@ -877,8 +877,8 @@ public final class Utils {
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
         // TODO: Uncomment to re-enable SimSettings.
-        // return tm.getSimCount() > 0;
-        return false;
+        return tm.getSimCount() > 0;
+        //return false;
     }
 
     /**
