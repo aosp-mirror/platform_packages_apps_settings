@@ -33,6 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
+                    android:paddingStart="@dimen/sim_label_padding"
                     android:text="@string/sim_editor_name"
                     style="?android:attr/textAppearanceMedium" />
 
@@ -40,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:layout_marginStart="@dimen/sim_content_padding"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
                     android:hint="@string/wifi_ssid_hint"
                     android:inputType="textNoSuggestions"
@@ -56,12 +58,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
+                    android:paddingStart="@dimen/sim_label_padding"
                     android:text="@string/sim_editor_carrier" />
 
             <TextView android:id="@+id/carrier"
                     android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/sim_label_padding"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
                     android:singleLine="true"
                     style="?android:attr/textAppearanceMedium" />
@@ -77,12 +81,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
+                    android:paddingStart="@dimen/sim_label_padding"
                     android:text="@string/sim_editor_number" />
 
             <TextView android:id="@+id/number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
+                    android:paddingStart="@dimen/sim_label_padding"
                     android:singleLine="true"
                     android:textColor="@android:color/black"
                     style="?android:attr/textAppearanceMedium" />
@@ -97,6 +103,7 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/sim_label_padding"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
                     android:text="@string/sim_editor_num_format" />
 
@@ -105,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/sim_card_data_range"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
+                    android:paddingStart="@dimen/sim_content_padding"
                     android:prompt="@string/sim_editor_num_format" />
 
         </LinearLayout>

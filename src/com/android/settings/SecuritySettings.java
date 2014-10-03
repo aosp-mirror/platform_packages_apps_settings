@@ -43,6 +43,8 @@ import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
+import android.telephony.SubscriptionManager;
+import android.telephony.SubInfoRecord;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -299,13 +301,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (!mIsPrimary || !tm.hasIccCard()) {
             root.removePreference(root.findPreference(KEY_SIM_LOCK));
         } else {
-            // Disable SIM lock if sim card is missing or unknown
-            if ((TelephonyManager.getDefault().getSimState() ==
-                                 TelephonyManager.SIM_STATE_ABSENT) ||
-                (TelephonyManager.getDefault().getSimState() ==
-                                 TelephonyManager.SIM_STATE_UNKNOWN)) {
-                root.findPreference(KEY_SIM_LOCK).setEnabled(false);
-            }
+            // Disable SIM lock if there is no ready SIM card.
+            root.findPreference(KEY_SIM_LOCK).setEnabled(isSimReady());
         }
         if (Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCK_TO_APP_ENABLED, 0) != 0) {
@@ -370,6 +367,24 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (pref != null) pref.setOnPreferenceChangeListener(this);
         }
         return root;
+    }
+
+    /* Return true if a SIM is ready for locking.
+     * TODO: consider adding to TelephonyManager or SubscritpionManasger.
+     */
+    private static boolean isSimReady() {
+        int simState = TelephonyManager.SIM_STATE_UNKNOWN;
+        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+        if (subInfoList != null) {
+            for (SubInfoRecord subInfo : subInfoList) {
+                simState = TelephonyManager.getDefault().getSimState(subInfo.slotId);
+                if((simState != TelephonyManager.SIM_STATE_ABSENT) &&
+                            (simState != TelephonyManager.SIM_STATE_UNKNOWN)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(
