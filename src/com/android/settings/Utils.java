@@ -335,8 +335,7 @@ public final class Utils {
 
     /** Formats a double from 0.0..1.0 as a percentage. */
     private static String formatPercentage(double percentage) {
-      BidiFormatter bf = BidiFormatter.getInstance();
-      return bf.unicodeWrap(NumberFormat.getPercentInstance().format(percentage));
+      return NumberFormat.getPercentInstance().format(percentage);
     }
 
     public static boolean isBatteryPresent(Intent batteryChangedIntent) {
