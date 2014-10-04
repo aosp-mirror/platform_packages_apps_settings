@@ -494,6 +494,7 @@ public class BatteryHistoryChart extends View {
         mMinPercentLabelString = Utils.formatPercentage(0);
 
         mBatteryLevel = com.android.settings.Utils.getBatteryLevel(mBatteryBroadcast);
+        String batteryPercentString = Utils.formatPercentage(mBatteryLevel);
         long remainingTimeUs = 0;
         mDischarging = true;
         if (mBatteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) {
@@ -503,9 +504,9 @@ public class BatteryHistoryChart extends View {
                 String timeString = Formatter.formatShortElapsedTime(getContext(),
                         drainTime / 1000);
                 mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_discharging_duration, mBatteryLevel, timeString);
+                        R.string.power_discharging_duration, batteryPercentString, timeString);
             } else {
-                mChargeLabelString = Utils.formatPercentage(mBatteryLevel);
+                mChargeLabelString = batteryPercentString;
             }
         } else {
             final long chargeTime = mStats.computeChargeTimeRemaining(elapsedRealtimeUs);
@@ -530,10 +531,10 @@ public class BatteryHistoryChart extends View {
                     resId = R.string.power_charging_duration;
                 }
                 mChargeLabelString = getContext().getResources().getString(
-                        resId, mBatteryLevel, timeString);
+                        resId, batteryPercentString, timeString);
             } else {
                 mChargeLabelString = getContext().getResources().getString(
-                        R.string.power_charging, mBatteryLevel, statusLabel);
+                        R.string.power_charging, batteryPercentString, statusLabel);
             }
         }
         mDrainString = "";
