@@ -654,7 +654,8 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"無線ルーターのセキュリティ設定（TKIP）はサポートされていません"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"認証に失敗しました。もう一度お試しください。"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"別のWPSセッションが検出されました。数分後にもう一度お試しください。"</string>
-    <string name="wifi_ssid" msgid="641393708309146745">"ネットワークSSID"</string>
+    <!-- no translation found for wifi_ssid (5519636102673067319) -->
+    <skip />
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSIDを入力します"</string>
     <string name="wifi_security" msgid="6603611185592956936">"セキュリティ"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"電波強度"</string>
@@ -1553,6 +1554,10 @@
     <string name="color_magenta" msgid="5059212823607815549">"マゼンタ"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g>を利用しますか？"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要:"</string>
+    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
+    <skip />
+    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"操作の監視"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"ユーザーがアプリでアクセスしているときに通知を受け取ります。"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>を停止しますか？"</string>
@@ -2017,9 +2022,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"バックグラウンドプロセスの上限"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"すべてのANRを表示"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"バックグラウンドアプリが応答しない場合に通知する"</string>
-    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"この操作には、Google設定アプリをご使用ください"</string>
-    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebViewネットワーク使用量を削減"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Google圧縮サーバーを介してWebView接続をプロキシすることにより、ネットワーク使用量を削減します"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"データ使用量"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"アプリのデータ使用"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"端末で記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります。"</string>
@@ -2372,12 +2374,12 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"アラームの音量"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"着信音の音量"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"通知の音量"</string>
-    <string name="zen_mode_settings_title" msgid="7014915558669122902">"中断"</string>
+    <string name="zen_mode_settings_title" msgid="7014915558669122902">"割り込み"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"通話の着信時と通知の受信時"</string>
     <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"通知の受信時"</string>
-    <string name="zen_mode_option_off" msgid="3167702608910820883">"常に中断"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"優先的な中断のみ許可"</string>
-    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"中断しない"</string>
+    <string name="zen_mode_option_off" msgid="3167702608910820883">"常に割り込み"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"優先的な割り込みのみ許可"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"割り込みなし"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"着信音"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"デフォルトの通知音"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"着信時もバイブレーションON"</string>
@@ -2423,7 +2425,7 @@
     <string name="app_notification_block_title" msgid="172237877395761371">"ブロック"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"このアプリからの通知を表示しない"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"優先度"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"リストの一番上にある通知を表示し、端末が優先的な中断に設定されている場合に限りそれらの通知を表示し続ける"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"端末が優先的な割り込みに設定されている場合に限り、通知を受け取ってリストの先頭に表示し続ける"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"プライベート"</string>
     <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"端末がロックされている場合、プライベートな内容はこのアプリの通知に表示されません"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
@@ -2431,8 +2433,8 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"プライベート"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"完了"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"ユーザーがOFFにするまで"</string>
-    <string name="zen_mode_important_category" msgid="8123274463331022993">"優先的な中断"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"ダウンタイム（優先的な中断のみ）"</string>
+    <string name="zen_mode_important_category" msgid="8123274463331022993">"優先的な割り込み"</string>
+    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"ダウンタイム（優先的な割り込みのみ）"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"日数"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"なし"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"自動化"</string>
@@ -2446,7 +2448,7 @@
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"連絡先のみ"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"スター付きの連絡先のみ"</string>
     <string name="zen_mode_events" msgid="2456995649835437565">"予定とリマインダー"</string>
-    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"アラームは常に優先して通知されます"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"アラームは常に優先的な割り込みとなります"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動的にON"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"設定しない"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"毎日の夜間"</string>
