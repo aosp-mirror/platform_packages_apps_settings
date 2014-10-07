@@ -655,8 +655,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Die Sicherheitseinstellung für drahtlose Router (TKIP) wird nicht unterstützt."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Authentifizierungsfehler. Bitte versuchen Sie es erneut."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Es wurde eine andere WPS-Sitzung gefunden. Bitte versuchen Sie es in einigen Minuten erneut."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Netzwerkname"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID eingeben"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sicherheit"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signalstärke"</string>
@@ -1555,10 +1554,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> verwenden?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> benötigt:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Wenn Sie <xliff:g id="SERVICE">%1$s</xliff:g> aktivieren, verwendet Ihr Gerät nicht die Displaysperre, um die Datenverschlüsselung zu verbessern."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Da Sie eine Bedienungshilfe aktiviert haben, verwendet Ihr Gerät nicht die Displaysperre, um die Datenverschlüsselung zu verbessern."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Ihre Aktionen beobachten"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Erhält Benachrichtigungen, wenn Sie mit einer App interagieren."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> beenden?"</string>
@@ -1598,12 +1595,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Noch <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Verbleibende Ladezeit: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – noch etwa <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – mit Netzteil voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – über USB-Verbindung voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g> %% – bei kabellosem Laden voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – noch etwa <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – bei Wechselstrom voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – über USB voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – bei kabellosem Laden voll in <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Verbrauch seit letztem vollen Aufladen"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akkuverbrauch seit dem Ausstecken"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akkuverbrauch seit dem Zurücksetzen"</string>
@@ -1620,7 +1617,6 @@
     <string name="awake" msgid="387122265874485088">"Aktivzeit des Geräts"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"WLAN-Aktivzeit"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"WLAN-Aktivzeit"</string>
-    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> - <xliff:g id="NUMBER">%2$s</xliff:g> <xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Verlaufsdetails"</string>
     <string name="details_title" msgid="3792801565213935385">"Details zum Verbrauch"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Details"</string>
@@ -1692,9 +1688,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Energiesparmodus"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Automatisch aktivieren"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nie"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (3033681629861428940) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"bei Akku von %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Prozessstatistiken"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiken zu laufenden Prozessen"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Speichernutzung"</string>
@@ -2470,4 +2464,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Hochformat beibehalten"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Querformat beibehalten"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Aktuelle Ausrichtung beibehalten"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI-Informationen"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"Informationen zur relativen IMEI"</string>
 </resources>

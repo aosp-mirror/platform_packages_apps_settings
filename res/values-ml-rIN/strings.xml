@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"വയർലെസ് റൂട്ടർ സുരക്ഷാ ക്രമീകരണം (TKIP) പിന്തുണയ്‌ക്കുന്നില്ല"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"പ്രാമാണീകരണം പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"മറ്റൊരു WPS സെഷൻ കണ്ടെത്തി. അൽപ്പസമയത്തിനകം വീണ്ടും ശ്രമിക്കുക."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"നെറ്റ്‌വർക്ക് പേര്"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID നൽകുക"</string>
     <string name="wifi_security" msgid="6603611185592956936">"സുരക്ഷ"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"സിഗ്‌നൽ ശക്തി"</string>
@@ -1554,10 +1553,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"മജന്ത"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> ഉപയോഗിക്കണോ?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> എന്നതിന് ഇവ ആവശ്യമാണ്:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> ഓണാക്കിയെങ്കിൽ, ഡാറ്റ എൻക്രിപ്‌ഷൻ മെച്ചപ്പെടുത്താനായി ഉപകരണം നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കില്ല."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"നിങ്ങൾ പ്രവേശനക്ഷമത സേവനം ഓണാക്കിയതിനാൽ, ഡാറ്റ എൻക്രിപ്‌ഷൻ മെച്ചപ്പെടുത്താനായി ഉപകരണം നിങ്ങളുടെ സ്‌ക്രീൻ ലോക്ക് ഉപയോഗിക്കില്ല."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"നിങ്ങളുടെ പ്രവർത്തനങ്ങൾ നിരീക്ഷിക്കുക"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"നിങ്ങൾ ഒരു അപ്ലിക്കേഷനുമായി സംവദിക്കുമ്പോൾ അറിയിപ്പുകൾ നേടുക."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> നിർത്തണോ?"</string>
@@ -1597,12 +1594,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> ശേഷിക്കുന്നു"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"ചാർജ്ജാകാനുള്ള സമയം <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - ഏകദേശം <xliff:g id="TIME">%2$s</xliff:g> ശേഷിക്കുന്നു"</string>
-    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - AC-യിൽ പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - USB വഴി പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - വയർലെസ് വഴി പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - ഏകദേശം <xliff:g id="TIME">%2$s</xliff:g> ശേഷിക്കുന്നു"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - AC-യിൽ പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - USB വഴി പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - വയർലെസ് വഴി പൂർണ്ണമായും ചാർജ്ജാകുന്നതിന്, <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"പൂർണ്ണമായും ചാർജ് ആയതുമുതൽ ഉപയോഗിച്ചവ"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"അൺപ്ലഗ്ഗുചെയ്‌തതിനുശേഷമുള്ള ബാറ്ററി ഉപയോഗം"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"പുനഃസജ്ജമാക്കിയതിന് ശേഷമുള്ള ബാറ്ററി ഉപയോഗം"</string>
@@ -1619,7 +1616,6 @@
     <string name="awake" msgid="387122265874485088">"ഉപകരണം സജീവമായ സമയം"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi‑Fi ഓൺ ടൈം"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi‑Fi ഓൺ ടൈം"</string>
-    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"ചരിത്ര വിശദാംശങ്ങൾ"</string>
     <string name="details_title" msgid="3792801565213935385">"വിശദാംശങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="details_subtitle" msgid="32593908269911734">"വിശദാംശങ്ങൾ ഉപയോഗിക്കുക"</string>
@@ -1691,7 +1687,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"ബാറ്ററി സേവർ"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"ഓട്ടോമാറ്റിക്കായി ഓണാക്കുക"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"ഒരിക്കലുമില്ല"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"%1$d%% ബാറ്ററി"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s ബാറ്ററി"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"പ്രോസസ്സ് സ്ഥിതിവിവരക്കണക്കുകൾ"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"പ്രവർത്തന പ്രോസസ്സുകളെക്കുറിച്ചുള്ള Geeky സ്ഥിതിവിവരക്കണക്കുകൾ"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"മെമ്മറി ഉപയോഗം"</string>
@@ -2467,4 +2463,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"പോർട്രെയ്റ്റ് കാഴ്‌ചയിൽ തുടരുക"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"ലാൻഡ്‌സ്‌കേപ്പ് കാഴ്‌ചയിൽ തുടരുക"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"നിലവിലുള്ള ഓറിയന്റേഷനിൽ തുടരുക"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI വിവരങ്ങൾ"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI അനുബന്ധ വിവരങ്ങൾ"</string>
 </resources>
