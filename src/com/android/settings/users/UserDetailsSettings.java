@@ -30,6 +30,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+import java.util.List;
+
 /**
  * Settings screen for configuring a specific user. It can contain user restrictions
  * and deletion controls. It is shown when you tap on the settings icon in the
@@ -122,6 +124,16 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             // SMS is always disabled for guest
             mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
             mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+            // Update the guest's restrictions, if there is a guest
+            List<UserInfo> users = mUserManager.getUsers(true);
+            for (UserInfo user: users) {
+                if (user.isGuest()) {
+                    UserHandle userHandle = new UserHandle(user.id);
+                    Bundle userRestrictions = mUserManager.getUserRestrictions(userHandle);
+                    userRestrictions.putAll(mDefaultGuestRestrictions);
+                    mUserManager.setUserRestrictions(userRestrictions, userHandle);
+                }
+            }
         } else {
             // TODO: Show confirmation dialog: b/15761405
             UserHandle userHandle = new UserHandle(mUserInfo.id);
