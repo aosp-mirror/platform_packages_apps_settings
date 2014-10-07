@@ -397,7 +397,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private UserInfo createLimitedUser() {
-        UserInfo newUserInfo = mUserManager.createUser(
+        UserInfo newUserInfo = mUserManager.createSecondaryUser(
                 getResources().getString(R.string.user_new_profile_name),
                 UserInfo.FLAG_RESTRICTED);
         int userId = newUserInfo.id;
@@ -421,7 +421,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private UserInfo createTrustedUser() {
-        UserInfo newUserInfo = mUserManager.createUser(
+        UserInfo newUserInfo = mUserManager.createSecondaryUser(
                 getResources().getString(R.string.user_new_user_name), 0);
         if (newUserInfo != null) {
             assignDefaultPhoto(newUserInfo);
