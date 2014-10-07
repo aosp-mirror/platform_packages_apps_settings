@@ -1597,22 +1597,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> jäljellä"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> latausaikaa jäljellä"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for power_discharging_duration (7125493014448497620) -->
-    <skip />
-    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for power_charging_duration (4802183864773082009) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for power_charging_duration_ac (3611179931297824699) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for power_charging_duration_usb (1106605348913397583) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for power_charging_duration_wireless (633606920144617227) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – jäljellä n. <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä (laturilataus)"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä (USB-lataus)"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä (WiFi-lataus)"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Käyttö edellisen täyden latauksen jälk."</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akun käyttö laturin irrottamisen jälkeen"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akun käyttö tilastojen tyhjentämisen jälkeen"</string>
@@ -1629,7 +1619,6 @@
     <string name="awake" msgid="387122265874485088">"Laitteen käytössäoloaika"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi-yhteyden käytössäoloaika"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi-yhteyden käytössäoloaika"</string>
-    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Historiatiedot"</string>
     <string name="details_title" msgid="3792801565213935385">"Käyttötiedot"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Käyttötiedot"</string>
@@ -1701,9 +1690,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Virransäästö"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Käynnistä automaattisesti"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Ei koskaan"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (3033681629861428940) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"kun akkua jäljellä %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Käsittelytiedot"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Käsittelyn tarkat tiedot"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Muistin käyttö"</string>
@@ -2479,4 +2466,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Säilytä pystynäkymä"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Säilytä vaakanäkymä"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Säilytä nykyinen suunta"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI-koodin tiedot"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-koodiin liittyvät tiedot"</string>
 </resources>

@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"வயர்லெஸ் ரூட்டர் பாதுகாப்பு அமைப்பு (TKIP) ஆதரிக்கப்படவில்லை"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"அங்கீகரிப்பு தோல்வியானது. மீண்டும் முயற்சிக்கவும்."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"இன்னொரு WPS அமர்வு கண்டறியப்பட்டது. சில நிமிடங்களுக்குப் பிறகு மீண்டும் முயற்சிக்கவும்."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"நெட்வொர்க் பெயர்"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID ஐ உள்ளிடவும்"</string>
     <string name="wifi_security" msgid="6603611185592956936">"பாதுகாப்பு"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"சிக்னலின் வலிமை"</string>
@@ -1554,10 +1553,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"மெஜந்தா"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> ஐப் பயன்படுத்தவா?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> செய்வது:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>ஐ இயக்கினால், தரவு மறையாக்கத்தை மேம்படுத்த சாதனம் திரைப் பூட்டைப் பயன்படுத்தாது."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"அணுகல்தன்மை சேவையை இயக்கியுள்ளதால், தரவு மறையாக்கத்தை மேம்படுத்த சாதனம் திரைப் பூட்டைப் பயன்படுத்தாது."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"உங்கள் செயல்பாடுகளைக் கவனிக்கிறது"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"நீங்கள் பயன்பாட்டுடன் தொடர்புகொள்ளும்போது அறிவிப்புகளைப் பெறுதல்."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> ஐ நிறுத்தவா?"</string>
@@ -1597,12 +1594,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> மீதமுள்ளது"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"சார்ஜ் செய்வதற்கு <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%%-தோராயமாக <xliff:g id="TIME">%2$s</xliff:g> வரை வரும்"</string>
-    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - முழு சார்ஜாக <xliff:g id="TIME">%2$s</xliff:g> ஆகும்"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - AC மூலம் முழு சார்ஜாக <xliff:g id="TIME">%2$s</xliff:g> ஆகும்"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - USB மூலம் முழு சார்ஜாக <xliff:g id="TIME">%2$s</xliff:g> ஆகும்"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - வயர்லெஸ் மூலம் முழு சார்ஜாக <xliff:g id="TIME">%2$s</xliff:g> ஆகும்"</string>
+    <string name="power_discharging_duration" msgid="1605929174734600590">"தோராயம்: <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> உள்ளது"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"முழு சார்ஜிற்கு: <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"முழு AC சார்ஜிற்கு: <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"முழு USB சார்ஜிற்கு: <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"முழு வயர்லெஸ் சார்ஜிற்கு: <xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"முழு சார்ஜ் ஆனதிலிருந்து இயங்கும் பயன்பாடுகள்"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"செருகல் நீக்கப்பட்டதிலிருந்து பேட்டரியின் பயன்பாடு"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"மீட்டமைக்கப்பட்டதிலிருந்து பேட்டரி பயன்பாடு"</string>
@@ -1619,7 +1616,6 @@
     <string name="awake" msgid="387122265874485088">"சாதனம் விழித்திருக்கும் நேரம்"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"வைஃபை இயக்க நேரம்"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"வைஃபை இயக்க நேரம்"</string>
-    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> - <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"வரலாறு விவரங்கள்"</string>
     <string name="details_title" msgid="3792801565213935385">"பயன்படுத்திய விவரங்கள்"</string>
     <string name="details_subtitle" msgid="32593908269911734">"விவரங்களைப் பயன்படுத்து"</string>
@@ -1691,7 +1687,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"பேட்டரி சேமிப்பான்"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"தானாகவே இயக்கு"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"எப்போதும் வேண்டாம்"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"%1$d%% பேட்டரியில்"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s பேட்டரியில்"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"செயல்முறைப் புள்ளிவிவரங்கள்"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"இயங்கும் செயல்முறைகள் குறித்த ஜிகி புள்ளிவிவரங்கள்"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"நினைவகப் பயன்பாடு"</string>
@@ -2467,4 +2463,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"நீளவாக்கில் வை"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"அகலவாக்கில் வை"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"தற்போதைய திசையமைப்பில் வை"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI தகவல்"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI தொடர்புடைய தகவல்"</string>
 </resources>

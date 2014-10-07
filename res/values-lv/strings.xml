@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Bezvadu maršrutētāja drošības iestatījums (TKIP) netiek atbalstīts."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentificēšana neizdevās. Lūdzu, mēģiniet vēlreiz."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Tika noteikta cita WPS sesija. Lūdzu, pēc dažām minūtēm mēģiniet vēlreiz."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Tīkla nosaukums"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Ievadiet SSID."</string>
     <string name="wifi_security" msgid="6603611185592956936">"Drošība"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signāla stiprums"</string>
@@ -1554,10 +1553,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Fuksīnsarkana"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Vai izmantot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> nepieciešams:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ja ieslēgsiet pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>, ierīce neizmantos ekrāna bloķēšanu datu šifrēšanas uzlabošanai."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Tā kā esat ieslēdzis pieejamības pakalpojumu, ierīce neizmantos ekrāna bloķēšanu datu šifrēšanas uzlabošanai."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Novērot jūsu darbības."</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Saņemt paziņojumus, kad mijiedarbojaties ar lietotni."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Vai apturēt <xliff:g id="SERVICE">%1$s</xliff:g> darbību?"</string>
@@ -1597,12 +1594,18 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> — <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Vēl <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Atlikušais uzlādes laiks: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% — aptuvenais atlikušais laiks: <xliff:g id="TIME">%2$s</xliff:g>"</string>
-    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% — <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% — <xliff:g id="TIME">%2$s</xliff:g> līdz pilnai uzlādei"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% — <xliff:g id="TIME">%2$s</xliff:g> līdz pilnai maiņstrāvas uzlādei"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g>%% — <xliff:g id="TIME">%2$s</xliff:g> līdz pilnai USB uzlādei"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g>%% — <xliff:g id="TIME">%2$s</xliff:g> līdz pilnai bezvadu uzlādei"</string>
+    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
+    <skip />
+    <!-- no translation found for power_charging (1779532561355864267) -->
+    <skip />
+    <!-- no translation found for power_charging_duration (2853265177761520490) -->
+    <skip />
+    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
+    <skip />
+    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
+    <skip />
+    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
+    <skip />
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Lietojums kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akumulatora lietojums kopš atslēgšanas"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akumulatora patēriņš kopš atiestatīšanas"</string>
@@ -1619,7 +1622,6 @@
     <string name="awake" msgid="387122265874485088">"Ierīces nomoda laiks"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi uz laiku"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi uz laiku"</string>
-    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Vēstures dati"</string>
     <string name="details_title" msgid="3792801565213935385">"Lietojuma dati"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Izmantot detaļas"</string>
@@ -1691,7 +1693,8 @@
     <string name="battery_saver" msgid="1426682272004907982">"Akumulatora enerģijas taupīšanas režīms"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Ieslēgt automātiski"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nekad"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"ar akumulatora enerģijas līmeni %1$d%%"</string>
+    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
+    <skip />
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Procesu statistika"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistika par darbības procesiem"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Atmiņas lietojums"</string>
@@ -2467,4 +2470,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Saglabāt portreta skatu"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Saglabāt ainavas skatu"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Saglabāt pašreizējo virzienu"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI informācija"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"Ar IMEI saistīta informācija"</string>
 </resources>

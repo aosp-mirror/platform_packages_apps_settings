@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"ওয়্যারলেস রাউটার নিরাপত্তা সেটিং (TKIP) সমর্থিত নয়"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"প্রমাণীকরণ ব্যর্থ। অনুগ্রহ করে আবার চেষ্টা করুন।"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"আরেকটি WPS অধিবেশন শনাক্ত হয়েছে। দয়া করে কয়েক মিনিটের মধ্যে আবার চেষ্টা করুন।"</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"নেটওয়ার্ক নাম"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID প্রবেশ করুন"</string>
     <string name="wifi_security" msgid="6603611185592956936">"নিরাপত্তা"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"সিগন্যাল ক্ষমতা"</string>
@@ -1554,10 +1553,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"রাণী রঙ"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> ব্যবহার করবেন?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> কে এটি করতে হবে:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"আপনি যদি <xliff:g id="SERVICE">%1$s</xliff:g> চালু করেন, তাহলে ডেটা এনক্রিপশান উন্নত করতে আপনার ডিভাইস আপনার স্ক্রীন লক ব্যবহার করবে না৷"</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"যেহেতু আপনি অ্যাক্সেসযোগ্যতা পরিষেবা চালু করেছেন, তাই ডেটা এনক্রিপশান উন্নত করতে আপনার ডিভাইস আপনার স্ক্রীন লক ব্যবহার করবে না৷"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"আপনার কার্যগুলি নিরীক্ষণ করুন"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"আপনি যখন একটি অ্যাপ্লিকেশানের সঙ্গে ইন্টারেক্ট করছেন তখন বিজ্ঞপ্তি পান।"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> থামাবেন?"</string>
@@ -1597,12 +1594,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> অবশিষ্ট রয়েছে"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> চার্জ করা বাকি"</string>
-    <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - প্রায়৷ <xliff:g id="TIME">%2$s</xliff:g> বাকি"</string>
-    <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> সময় লাগবে"</string>
-    <string name="power_charging_duration_ac" msgid="3611179931297824699">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - AC তে পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> সময় লাগবে"</string>
-    <string name="power_charging_duration_usb" msgid="1106605348913397583">"<xliff:g id="LEVEL">%1$d</xliff:g> %% - USB এর মাধ্যমে পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> সময় লাগবে"</string>
-    <string name="power_charging_duration_wireless" msgid="633606920144617227">"<xliff:g id="LEVEL">%1$d</xliff:g> %% - ওয়্যারলেস থেকে পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> সময় লাগবে"</string>
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - আনুমানিক৷ <xliff:g id="TIME">%2$s</xliff:g> বাকি আছে"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - সম্পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> বাকি"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - ACতে সম্পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> বাকি"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - USB এর মাধ্যমে সম্পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> বাকি"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - তারবিহীনভাবে সম্পূর্ণ হতে <xliff:g id="TIME">%2$s</xliff:g> বাকি"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"শেষ সম্পূর্ণ চার্জ করার সময় থেকে যতটা ব্যবহার হয়েছে"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"আনপ্লাগ করার পর থেকে ব্যাটারি ব্যবহার"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"পুনরায় সেট করা থেকে ব্যাটারি ব্যবহার"</string>
@@ -1619,7 +1616,6 @@
     <string name="awake" msgid="387122265874485088">"ডিভাইস জাগ্রত সময়"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi‑Fi চালু থাকা মোট সময়"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi‑Fi চালু থাকা মোট সময়"</string>
-    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="history_details_title" msgid="3608240585315506067">"ইতিহাস বিবরণ"</string>
     <string name="details_title" msgid="3792801565213935385">"বিশদ বিবরণ ব্যবহার করুন"</string>
     <string name="details_subtitle" msgid="32593908269911734">"বিশদ বিবরণ ব্যবহার করুন"</string>
@@ -1691,7 +1687,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"ব্যাটারি সেভার"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"স্বয়ংক্রিয়ভাবে চালু হবে"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"কখনও নয়"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="3033681629861428940">"ব্যাটারিতে %1$d%% চার্জ থাকলে"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s ব্যাটারি থাকলে"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"প্রক্রিয়ার পরিসংখ্যান"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"চলমান প্রক্রিয়াগুলি গিকি পরিসংখ্যান"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"মেমরি ব্যবহৃত"</string>
@@ -2465,4 +2461,6 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"প্রতিকৃতি দৃশ্যে থাকুন"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"ভূদৃশ্য দৃশ্যে থাকুন"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"বর্তমান সজ্জায় থাকুন"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI তথ্য"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI আপেক্ষিক তথ্য"</string>
 </resources>
