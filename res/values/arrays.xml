@@ -1283,4 +1283,29 @@
         <item>@color/red_500</item>
         <item>@color/orange_500</item>
     </integer-array>
+
+    <!-- USB configuration names for Developer Settings.
+         This can be overridden by devices with additional USB configurations. -->
+    <string-array name="usb_configuration_titles">
+        <item>MTP (Media Transfer Protocol)</item>
+        <item>PTP (Picture Transfer Protocol)</item>
+        <item>RNDIS (USB Ethernet)</item>
+        <item>Audio Source</item>
+    </string-array>
+
+    <!-- USB configuration values for Developer Settings.
+         These are lists of USB functions passed to the USB Manager to change USB configuraton.
+         This can be overridden by devices with additional USB configurations.
+         Do not translate. -->
+    <string-array name="usb_configuration_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>mtp</item>
+        <!-- Do not translate. -->
+        <item>ptp</item>
+        <!-- Do not translate. -->
+        <item>rndis</item>
+        <!-- Do not translate. -->
+        <item>audio_source</item>
+    </string-array>
+
 </resources>

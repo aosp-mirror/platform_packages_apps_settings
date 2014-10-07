@@ -23,15 +23,18 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
 import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.hardware.usb.IUsbManager;
+import android.hardware.usb.UsbManager;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
@@ -142,6 +145,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
     private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
     private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
+    private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
+    private static final String SELECT_USB_CONFIGURATION_PROPERTY = "sys.usb.config";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
@@ -211,6 +216,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mForceRtlLayout;
     private ListPreference mDebugHwOverdraw;
     private ListPreference mLogdSize;
+    private ListPreference mUsbConfiguration;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
     private ListPreference mWindowAnimationScale;
@@ -335,6 +341,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiAggressiveHandover = findAndInitCheckboxPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
         mWifiAllowScansWithTraffic = findAndInitCheckboxPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
+        mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -480,6 +487,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
         mSwitchBar.removeOnSwitchChangeListener(this);
         mSwitchBar.hide();
+        getActivity().unregisterReceiver(mUsbReceiver);
     }
 
     void updateCheckBox(CheckBoxPreference checkBox, boolean value) {
@@ -1120,6 +1128,42 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateLogdSizeValues();
     }
 
+    private void updateUsbConfigurationValues() {
+        if (mUsbConfiguration != null) {
+            String currentValue = SystemProperties.get(SELECT_USB_CONFIGURATION_PROPERTY);
+
+            // Ignore adb interface. The USB Manager adds or removes adb automatically
+            // depending on if USB debugging is enabled.
+            int adbIndex = currentValue.indexOf(",adb");
+            if (adbIndex > 0) {
+                currentValue = currentValue.substring(0, adbIndex);
+            }
+
+            String[] values = getResources().getStringArray(R.array.usb_configuration_values);
+            String[] titles = getResources().getStringArray(R.array.usb_configuration_titles);
+            int index = 1; // punt to second entry if not found
+            for (int i = 0; i < titles.length; i++) {
+                if (currentValue.equals(values[i])) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index >= 0) {
+                mUsbConfiguration.setValue(values[index]);
+                mUsbConfiguration.setSummary(titles[index]);
+            } else {
+                mUsbConfiguration.setValue("");
+                mUsbConfiguration.setSummary("");
+            }
+            mUsbConfiguration.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    private void writeUsbConfigurationOption(Object newValue) {
+        UsbManager manager = (UsbManager)getActivity().getSystemService(Context.USB_SERVICE);
+        manager.setCurrentFunction(newValue.toString(), false);
+    }
+
     private void updateCpuUsageOptions() {
         updateCheckBox(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
@@ -1437,6 +1481,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else if (preference == mLogdSize) {
             writeLogdSizeOption(newValue);
             return true;
+        } else if (preference == mUsbConfiguration) {
+            writeUsbConfigurationOption(newValue);
+            return true;
         } else if (preference == mWindowAnimationScale) {
             writeAnimationScaleOption(0, mWindowAnimationScale, newValue);
             return true;
@@ -1550,6 +1597,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             (new SystemPropPoker()).execute();
         }
     }
+
+    private BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateUsbConfigurationValues();
+        }
+    };
 
     static class SystemPropPoker extends AsyncTask<Void, Void, Void> {
         @Override
