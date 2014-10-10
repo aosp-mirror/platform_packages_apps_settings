@@ -95,28 +95,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/sim_label_padding"
-                    android:layout_marginTop="@dimen/sim_dialog_margin_top"
-                    android:text="@string/sim_editor_num_format" />
-
-            <Spinner android:id="@+id/display_numbers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/sim_card_data_range"
-                    android:paddingBottom="@dimen/sim_dialog_margin_bottom"
-                    android:paddingStart="@dimen/sim_content_padding"
-                    android:prompt="@string/sim_editor_num_format" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </ScrollView>
