@@ -56,10 +56,7 @@ public class ToggleAccessibilityServicePreferenceFragment
             new SettingsContentObserver(new Handler()) {
             @Override
                 public void onChange(boolean selfChange, Uri uri) {
-                    String settingValue = Settings.Secure.getString(getContentResolver(),
-                            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-                    final boolean enabled = settingValue.contains(mComponentName.flattenToString());
-                    mSwitchBar.setCheckedInternal(enabled);
+                    updateSwitchBarToggleSwitch();
                 }
             };
 
@@ -70,6 +67,7 @@ public class ToggleAccessibilityServicePreferenceFragment
     @Override
     public void onResume() {
         mSettingsContentObserver.register(getContentResolver());
+        updateSwitchBarToggleSwitch();
         super.onResume();
     }
 
@@ -193,6 +191,13 @@ public class ToggleAccessibilityServicePreferenceFragment
                 throw new IllegalArgumentException();
             }
         }
+    }
+
+    private void updateSwitchBarToggleSwitch() {
+        String settingValue = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+        final boolean checked = settingValue.contains(mComponentName.flattenToString());
+        mSwitchBar.setCheckedInternal(checked);
     }
 
     private View createEnableDialogContentView(AccessibilityServiceInfo info) {
