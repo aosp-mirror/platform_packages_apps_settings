@@ -449,13 +449,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 @Override
                 public void onClick(DialogInterface dialog, int whichButton) {
                     final EditText nameText = (EditText)dialogLayout.findViewById(R.id.sim_name);
-                    final Spinner displayNumbers =
-                        (Spinner)dialogLayout.findViewById(R.id.display_numbers);
-
-                    SubscriptionManager.setDisplayNumberFormat(
-                        displayNumbers.getSelectedItemPosition() == 0
-                            ? SubscriptionManager.DISPLAY_NUMBER_LAST
-                            : SubscriptionManager.DISPLAY_NUMBER_FIRST, mSubInfoRecord.subId);
 
                     mSubInfoRecord.displayName = nameText.getText().toString();
                     SubscriptionManager.setDisplayName(mSubInfoRecord.displayName,
