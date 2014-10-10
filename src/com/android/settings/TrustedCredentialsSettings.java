@@ -488,9 +488,11 @@ public class TrustedCredentialsSettings extends Fragment {
         }
 
         public void remove(CertHolder certHolder) {
-            final int n = mCertHoldersByUserId.size();
-            for (int i = 0; i < n; ++i) {
-                mCertHoldersByUserId.valueAt(i).remove(certHolder);
+            if (mCertHoldersByUserId != null) {
+                final List<CertHolder> certs = mCertHoldersByUserId.get(certHolder.mProfileId);
+                if (certs != null) {
+                    certs.remove(certHolder);
+                }
             }
         }
     }
