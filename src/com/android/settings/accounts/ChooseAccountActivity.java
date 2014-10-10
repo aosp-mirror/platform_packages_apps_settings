@@ -216,7 +216,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
                 Context authContext = createPackageContextAsUser(desc.packageName, 0, mUserHandle);
                 icon = getPackageManager().getUserBadgedIcon(
-                        authContext.getResources().getDrawable(desc.iconId), mUserHandle);
+                        authContext.getDrawable(desc.iconId), mUserHandle);
             } catch (PackageManager.NameNotFoundException e) {
                 // TODO: place holder icon for missing account icons?
                 Log.w(TAG, "No icon name for account type " + accountType);

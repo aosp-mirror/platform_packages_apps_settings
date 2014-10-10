@@ -231,7 +231,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
         ImageView imageView = (ImageView) capabilityView.findViewById(
                 com.android.internal.R.id.perm_icon);
-        imageView.setImageDrawable(getResources().getDrawable(
+        imageView.setImageDrawable(getActivity().getDrawable(
                 com.android.internal.R.drawable.ic_text_dot));
 
         TextView labelView = (TextView) capabilityView.findViewById(
@@ -257,7 +257,7 @@ public class ToggleAccessibilityServicePreferenceFragment
 
             imageView = (ImageView) capabilityView.findViewById(
                     com.android.internal.R.id.perm_icon);
-            imageView.setImageDrawable(getResources().getDrawable(
+            imageView.setImageDrawable(getActivity().getDrawable(
                     com.android.internal.R.drawable.ic_text_dot));
 
             labelView = (TextView) capabilityView.findViewById(

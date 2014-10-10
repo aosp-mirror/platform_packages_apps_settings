@@ -159,7 +159,7 @@ public class ActivityPicker extends AlertActivity implements
                     Resources res = packageManager.getResourcesForApplication(
                             iconResource.packageName);
                     icon = res.getDrawable(res.getIdentifier(
-                            iconResource.resourceName, null, null));
+                            iconResource.resourceName, null, null), null);
                 } catch (NameNotFoundException e) {
                     // Ignore
                 }

@@ -194,7 +194,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
 
         int iconResource = profile.getDrawableResource(mCachedDevice.getBtClass());
         if (iconResource != 0) {
-            pref.setIcon(getResources().getDrawable(iconResource));
+            pref.setIcon(getActivity().getDrawable(iconResource));
         }
 
         refreshProfilePreference(pref, profile);
