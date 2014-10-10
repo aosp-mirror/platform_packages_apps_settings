@@ -48,7 +48,6 @@ import android.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -250,7 +249,7 @@ public class HomeSettings extends SettingsPreferenceFragment implements Indexabl
     }
 
     private boolean versionNumberAtLeastL(int versionNumber) {
-        return versionNumber >= Build.VERSION_CODES.L;
+        return versionNumber >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     @Override
