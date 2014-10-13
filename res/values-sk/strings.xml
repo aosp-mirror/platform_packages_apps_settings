@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Nastavenie zabezpečenia bezdrôtového smerovača (TKIP) nie je podporované"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Zlyhanie overenia totožnosti. Skúste to znova."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Bola rozpoznaná ďalšia relácia WPS. Skúste to znova o niekoľko minút."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Názov siete"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Zadajte SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Zabezpečenie"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Sila signálu"</string>
@@ -1449,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Povoliť alebo zakázať funkciu Wifi Roam Scans na základe objemu prenosu údajov v rozhraní"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Veľkosti vyrovnávacej pamäte denníka"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Veľkosti den. na vyrov. pamäť den."</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"Vyberte konfiguráciu USB"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Vyberte konfiguráciu USB"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Povoliť simulované polohy"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Povoliť simulované polohy"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Povoliť kontrolu atribútov zobrazenia"</string>
@@ -1554,10 +1555,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Purpurová"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Použiť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Služba <xliff:g id="SERVICE">%1$s</xliff:g> vyžaduje nasledujúce funkcie:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ak zapnete službu <xliff:g id="SERVICE">%1$s</xliff:g>, vaše zariadenie nepoužije zámku obrazovky na zvýšenie miery šifrovania údajov."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Keďže ste zapli služby dostupnosti, vaše zariadenie nepoužije zámku obrazovky na zvýšenie miery šifrovania údajov."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Sledovať vaše akcie"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Dostávajte upozornenia aj pri interakcii s aplikáciami."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Zastaviť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1597,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Zostáva <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do nabitia"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – zostáva približne <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia zo zásuvky"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia cez USB"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> do úplného nabitia bezdrôtovo"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Využitie od posledného úplného dobitia"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Využitie batérie od odpojenia"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Využitie batérie od obnovenia"</string>
@@ -1696,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Šetrič batérie"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Zapnúť automaticky"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nikdy"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s batérie"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Štatistiky procesov"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Podrobné štatistiky spustených procesov"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Využitie pamäte"</string>
@@ -2313,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operátor"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Číslo"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Farba SIM karty"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Zobrazovať čísla"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"Vybrať SIM kartu"</string>
     <string name="color_orange" msgid="4417567658855022517">"Oranžová"</string>
     <string name="color_purple" msgid="3888532466427762504">"Purpurová"</string>

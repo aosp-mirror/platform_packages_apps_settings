@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"‏وائرلیس روٹر سیکیورٹی کی ترتیب (TKIP) تعاون یافتہ نہیں ہے"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"توثیق ناکام رہی۔ براہ کرم دوبارہ کوشش کریں۔"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"‏ایک دوسرے WPS سیشن کا پتہ چلا۔ براہ کرم کچھ منٹ میں دوبارہ کوشش کریں۔"</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"نیٹ ورک کا نام"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"‏SSID درج کریں"</string>
     <string name="wifi_security" msgid="6603611185592956936">"سیکیورٹی"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"سگنل کی قوت"</string>
@@ -1449,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"‏انٹرفیس پر موجود ڈیٹا ٹریفک کی مقدار کی بنیاد پر Wi‑Fi روم اسکینز کی اجازت دیں/اجازت نہ دیں"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"لاگر بفر کے سائز"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"فی لاگ بفر لاگر کے سائز منتخب کریں"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"‏USB کنفیگریشن منتخب کریں"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"‏USB کنفیگریشن منتخب کریں"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"فرضی مقامات کی اجازت دیں"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"فرضی مقامات کی اجازت دیں"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"منظر انتساب کے معائنہ کو فعال کریں"</string>
@@ -1554,10 +1555,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"قرمزی"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> کا استعمال کریں؟"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> کو اس کی ضرورت ہے:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"اگر آپ <xliff:g id="SERVICE">%1$s</xliff:g> کو آن کرتے ہیں تو آپ کا آلہ ڈیٹا کی مرموزکاری کو بڑھانے کیلئے آپ کی اسکرین کا قفل استعمال نہیں کرے گا۔"</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"چونکہ آپ نے حالت رسائی کی ایک سروس کو آن کیا ہے لہذا آپ کا آلہ ڈیٹا کی مرموزکاری کو بڑھانے کیلئے آپ کی اسکرین کا قفل استعمال نہیں کرے گا۔"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"اپنی کارروائیوں کا مشاہدہ کریں"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"آپ کسی ایپ کے ساتھ تعامل کر رہے ہونے کے وقت اطلاعات حاصل کریں۔"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> روکیں؟"</string>
@@ -1597,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> باقی"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> چارج کرنے کیلئے"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"‏‎<xliff:g id="LEVEL">%1$s</xliff:g>‎ - تقریبا <xliff:g id="TIME">%2$s</xliff:g> باقی"</string>
+    <string name="power_charging" msgid="1779532561355864267">"‎<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>‎"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"‏‎<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>‎ پورا ہونے تک"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"‏‎<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> AC‎ پر پورا ہونے تک"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"‏‎<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> USB‎ پر پورا ہونے تک"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"‏‎<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>‎ وائرلیس سے پورا ہونے تک"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"پچھلے مکمل چارج کے بعد سے استعمال"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"پلگ ہٹانے کے بعد سے بیٹری کا استعمال"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"دوبارہ ترتیب دیے جانے کے بعد سے بیٹری کا استعمال"</string>
@@ -1696,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"بیٹری سیور"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"خود کار طور پر آن کریں"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"کبھی نہیں"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"‏‎%1$s‎ بیٹری پر"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"پروسیس کے اعداد و شمار"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"جاری پروسیسز کے بارے میں بے ڈھب اعداد و شمار"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"میموری کا استعمال"</string>
@@ -2313,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"کیریئر"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"نمبر"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"‏SIM کا رنگ"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"نمبرز ڈسپلے کریں"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"‏SIM کارڈ منتخب کریں"</string>
     <string name="color_orange" msgid="4417567658855022517">"نارنجی"</string>
     <string name="color_purple" msgid="3888532466427762504">"جامنی"</string>

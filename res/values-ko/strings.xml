@@ -1448,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"인터페이스에 표시되는 데이터 트래픽의 양을 기반으로 Wi-Fi 로밍 스캔을 허용하거나 허용하지 않습니다."</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"로거 버퍼 크기"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"로그 버퍼당 로거 크기 선택"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"USB 설정 선택"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"USB 설정 선택"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"모의 위치 허용"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"모의 위치 허용"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"보기 속성 검사 사용"</string>
@@ -1594,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> 남음"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> 후 완충"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - 대략 <xliff:g id="TIME">%2$s</xliff:g> 남음"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> 후 충전 완료"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> 후 충전 완료(AC 전원)"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> 후 충전 완료(USB)"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> 후 충전 완료(무선)"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"마지막 충전 완료 후 배터리 사용 내역"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"플러그를 뽑은 이후 배터리 전원 사용"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"초기화 이후 배터리 사용"</string>
@@ -1693,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"배터리 세이버"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"자동으로 사용 설정"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"사용 안함"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s 배터리"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"메모리 사용량"</string>
@@ -2310,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"이동통신사"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"번호"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM 색상"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"숫자 표시"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"SIM 카드 선택"</string>
     <string name="color_orange" msgid="4417567658855022517">"주황색"</string>
     <string name="color_purple" msgid="3888532466427762504">"보라색"</string>

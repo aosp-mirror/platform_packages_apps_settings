@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Non se admite a configuración de seguridade do router sen fíos (TKIP)"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Fallo de autenticación. Téntao de novo."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Detectouse outra sesión WPS. Téntao de novo nuns minutos."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Nome da rede"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Introduce o SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Seguridade"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Intensidade do sinal"</string>
@@ -1449,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Permitir/Non permitir buscas de itinerancia da wifi baseadas na cantidade de tráfico de datos presente na interface"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Tamaños de búfer de rexistrador"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Seleccionar tamaños por búfer"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"Seleccionar configuración USB"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Seleccionar configuración USB"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir localizacións falsas"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permite localizacións falsas"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Activar a inspección de atributos de visualización"</string>
@@ -1554,10 +1555,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Maxenta"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Usar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> precisa:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se activas <xliff:g id="SERVICE">%1$s</xliff:g>, o dispositivo non utilizará o teu bloqueo da pantalla para mellorar o cifrado de datos."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Como activaches un servizo de accesibilidade, o dispositivo non utilizará o teu bloqueo da pantalla para mellorar o cifrado de datos."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observar as túas accións"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Recibir notificacións cando interactúas cunha aplicación."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Queres deter <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1597,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> restante(s)"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> para completar a carga"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - faltan aproximadamente <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> para completar a carga"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> para completar a carga con CA"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> para completar a carga con USB"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> para completar a carga co modo sen fíos"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Uso desde a última carga completa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso da batería desde que se desconectou"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Uso da batería desde o restablecemento"</string>
@@ -1696,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Aforro de batería"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Activar automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nunca"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"cun %1$s de batería"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Estatísticas de procesos"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Estatísticas frikis sobre procesos en execución"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Uso da memoria"</string>
@@ -2313,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operador"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Número"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Cor da SIM"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Mostrar números"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"Seleccionar tarxeta SIM"</string>
     <string name="color_orange" msgid="4417567658855022517">"Laranxa"</string>
     <string name="color_purple" msgid="3888532466427762504">"Violeta"</string>

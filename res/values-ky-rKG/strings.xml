@@ -940,8 +940,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Зымсыз роутердин коопсуздук орнотмолору (TKIP) колдоого алынбайт."</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Аутентификациядан өткөн жок. Кайрадан аракет кылыңыз."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Башка WPS сессиясы табылды. Бир аздан кийин кайра аракет кылыңыз."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Тармактын аталышы"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID киргизиңиз"</string>
     <!-- no translation found for wifi_security (6603611185592956936) -->
     <skip />
@@ -2120,6 +2119,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Интерфейстеги дайындар трафигинин көлөмүнө жараша Wi-Fi Роуминг скандоо мүмкүнчүлүгүн иштетүү/өчүрүү"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Каттагыч буферлеринин өлчөмдөрү"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Каттоо буфери үчүн Каттагычтын көлөмүн тандаңыз"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"USB конфигурациясын тандоо"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"USB конфигурациясын тандоо"</string>
     <!-- no translation found for allow_mock_location (2787962564578664888) -->
     <skip />
     <!-- no translation found for allow_mock_location_summary (317615105156345626) -->
@@ -2240,10 +2241,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Кочкул"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> колдонулсунбу?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> талап кылат:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Эгер <xliff:g id="SERVICE">%1$s</xliff:g> күйгүзүлсө, түзмөгүңүз дайындарды шифрлөөнү күчтөндүрүү үчүн экраныңыздын кулпусун пайдаланбайт."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Атайын мүмкүнчүлүктөр кызматы күйгүзүлгөндүктөн, түзмөгүңүз дайындарды шифрлөөнү күчтөндүрүү үчүн экраныңыздын кулпусун пайдаланбайт."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Иш-аракеттериңизди байкоо"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Колдонмо менен иштеп жатканда эскертмелерди алып туруу."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> токтотулсунбу?"</string>
@@ -2286,18 +2285,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> калды"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> кубаттоо"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - болжол менен <xliff:g id="TIME">%2$s</xliff:g> саат калды"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> толгончо"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> AC аркылуу толгончо"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> USB аркылуу толгончо"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> зымсыз кубаттоо аркылуу толгончо"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Акыркы толук кубатталгндн бери колдонңуз"</string>
     <!-- no translation found for battery_since_unplugged (338073389740738437) -->
     <skip />
@@ -2431,8 +2424,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Батареяны үнөмдөгүч"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Автоматтык түрдө күйгүзүү"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Эч качан"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"батареянын кубаты %1$s болгондо"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Процесстин статистикасы"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Иштеп жаткан процесстердин өзгөчө статистикасы"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Эс тутумдун пайдаланылышы"</string>
@@ -3218,7 +3210,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Оператор"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Номер"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM түсү"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Номерлерди көрсөтүү"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"SIM карта тандаңыз"</string>
     <string name="color_orange" msgid="4417567658855022517">"Кызгылт сары"</string>
     <string name="color_purple" msgid="3888532466427762504">"Кызгылт көгүш"</string>
