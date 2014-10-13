@@ -51,7 +51,7 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             if (userInfo.isManagedProfile()) {
                 name = context.getString(R.string.managed_user_title);
-                icon = Resources.getSystem().getDrawable(
+                icon = context.getDrawable(
                     com.android.internal.R.drawable.ic_corp_icon);
             } else {
                 name = userInfo.name;

@@ -111,7 +111,7 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
                 Context authContext = context.createPackageContextAsUser(desc.packageName, 0,
                         mUserHandle);
                 icon = mContext.getPackageManager().getUserBadgedIcon(
-                        authContext.getResources().getDrawable(desc.iconId), mUserHandle);
+                        authContext.getDrawable(desc.iconId), mUserHandle);
                 synchronized (mAccTypeIconCache) {
                     mAccTypeIconCache.put(accountType, icon);
                 }

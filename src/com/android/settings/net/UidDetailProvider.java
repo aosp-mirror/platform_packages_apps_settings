@@ -138,7 +138,7 @@ public class UidDetailProvider {
             if (info != null) {
                 if (info.isManagedProfile()) {
                     detail.label = res.getString(R.string.managed_user_title);
-                    detail.icon = Resources.getSystem().getDrawable(
+                    detail.icon = mContext.getDrawable(
                             com.android.internal.R.drawable.ic_corp_icon);
                 } else {
                     detail.label = res.getString(R.string.running_process_item_user_label,
