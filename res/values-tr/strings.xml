@@ -652,8 +652,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Kablosuz yönlendirici güvenlik ayarı (TKIP) desteklenmiyor"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Kimlik doğrulama başarısız oldu. Lütfen tekrar deneyin."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Başka bir WPS oturumu saptandı. Lütfen birkaç dakika sonra tekrar deneyin."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Ağ adı"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID\'yi girin"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Güvenlik"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Sinyal gücü"</string>
@@ -1552,10 +1551,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Macenta"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> kullanılsın mı?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> şunları gerektiriyor:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> hizmetini açarsanız cihazınız veri şifrelemeyi geliştirmek için ekran kilidinizi kullanmaz."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Bir erişilebilirlik hizmetini açtığınız için cihazınız veri şifrelemeyi geliştirmek üzere ekran kilidinizi kullanmayacak."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"İşlemlerinizi izleyin"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Bir uygulamayla etkileşim kurduğunuzda bildirim alın."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> durdurulsun mu?"</string>
@@ -1595,18 +1592,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> kaldı"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Şarj olmasına <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> var"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - yaklaşık <xliff:g id="TIME">%2$s</xliff:g> kaldı"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - tam şarj olmasına <xliff:g id="TIME">%2$s</xliff:g> var"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - prize takılı, tam şarj olmasına <xliff:g id="TIME">%2$s</xliff:g> var"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - USB üzerinden şarj olmasına <xliff:g id="TIME">%2$s</xliff:g> var"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - kablosuzdan tam şarj olmasına <xliff:g id="TIME">%2$s</xliff:g> var"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Tamamen şarj olduktan sonra kullanım"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Fişten çekildikten sonra pil kullanımı"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Sıfırlamadan itibaren pil kullanımı"</string>
@@ -1694,8 +1685,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Pil tasarrufu"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Otomatik olarak aç"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hiçbir zaman"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"pil kullanıyor (%1$s)"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"İşlem İstatistikleri"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Meraklısı için, çalışan işlemlerle ilgili istatistikler"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Bellek kullanımı"</string>
