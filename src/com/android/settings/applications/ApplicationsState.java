@@ -144,7 +144,7 @@ public class ApplicationsState {
                     return true;
                 } else {
                     this.mounted = false;
-                    this.icon = context.getResources().getDrawable(
+                    this.icon = context.getDrawable(
                             com.android.internal.R.drawable.sym_app_on_sd_unavailable_icon);
                 }
             } else if (!this.mounted) {

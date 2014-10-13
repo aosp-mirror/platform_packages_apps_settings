@@ -379,7 +379,7 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
                 // Use default icon
             }
         } else if (iconId != 0) {
-            mAppIcon = getActivity().getResources().getDrawable(iconId);
+            mAppIcon = getActivity().getDrawable(iconId);
         }
         if (mAppIcon == null) {
             mAppIcon = getActivity().getPackageManager().getDefaultActivityIcon();
