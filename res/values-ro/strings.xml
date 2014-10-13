@@ -652,8 +652,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Setarea de securitate pentru routerul wireless (TKIP) nu este acceptată"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Autentificare eşuată. Încercaţi din nou."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"A fost detectată altă sesiune WPS. Încercaţi din nou peste câteva minute."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Numele rețelei"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Introduceți identificatorul SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Securitatea"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Putere semnal"</string>
@@ -1553,10 +1552,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Utilizați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> are funcțiile:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Dacă activați <xliff:g id="SERVICE">%1$s</xliff:g>, dispozitivul nu va utiliza blocarea ecranului pentru a îmbunătăți criptarea datelor."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Pentru că ați activat un serviciu de accesibilitate, dispozitivul nu va utiliza blocarea ecranului pentru a îmbunătăți criptarea datelor."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Remarcă acțiunile dvs."</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Primește notificări atunci când interacționați cu o aplicație."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Opriți <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1596,18 +1593,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Timp rămas: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> până la finalizarea încărcării"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – timp rămas: aproximativ <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> până la încărcare completă"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> până la încărcare completă la c.a."</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> până la încărcare completă prin USB"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> până la încărcare completă wireless"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Utilizare de la ultima încărc. completă"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilizarea bateriei de la deconectare"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Utilizarea bateriei de la resetare"</string>
@@ -1695,8 +1686,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Economisirea bateriei"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Activați automat"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Niciodată"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"când bateria ajunge la %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistici de proces"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistici inteligente despre procesele care rulează"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Utilizarea memoriei"</string>

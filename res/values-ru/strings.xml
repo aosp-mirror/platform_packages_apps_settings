@@ -480,7 +480,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Для подключения к устройству&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;на нем должен отображаться этот код доступа:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Запрос от: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Подключиться к этому устройству?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Для подключения к устройству <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> введите на нем код <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, а затем нажмите клавишу Return или Enter."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Сопряжение"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Подключить"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ПОДКЛЮЧИТЬ"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Отмена"</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Подключение обеспечивает доступ к вашим контактам и истории звонков (при наличии связи)."</string>
@@ -652,8 +652,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Безопасная настройка беспроводного маршрутизатора (TKIP) не поддерживаются"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Ошибка аутентификации. Повторите попытку."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Обнаружен другой сеанс WPS. Повторите попытку через несколько минут."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Имя сети"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Введите имя сети (SSID)"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Защита"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Уровень сигнала"</string>
@@ -922,7 +921,7 @@
     <string name="memory_dcim_usage" msgid="558887013613822577">"Изображения и видео"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"Аудио (музыка, рингтоны, подкасты и т. п.)"</string>
     <string name="memory_media_misc_usage" msgid="235452944021647124">"Прочее"</string>
-    <string name="memory_media_cache_usage" msgid="6704293333141177910">"Данные кэша"</string>
+    <string name="memory_media_cache_usage" msgid="6704293333141177910">"Данные кеша"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Безопасное извлечение"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Извлечь SD-карту"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Отключить внутр. USB-накопитель"</string>
@@ -1223,7 +1222,7 @@
     <string name="sort_order_alpha" msgid="1410278099123670628">"Упорядочить по именам"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Упорядочить по размеру"</string>
     <string name="show_running_services" msgid="5736278767975544570">"Показать активные службы"</string>
-    <string name="show_background_processes" msgid="2009840211972293429">"Показать процессы в кэше"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"Показать процессы в кеше"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Сбросить настройки"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Сбросить настройки?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Будут сброшены следующие настройки:\n\n"<li>"список отключенных приложений;"</li>\n<li>"уведомления для отключенных приложений;"</li>\n<li>"список приложений по умолчанию;"</li>\n<li>"ограничения на передачу данных в фоновом режиме;"</li>\n<li>"ограничения на разрешения."</li>\n\n"Данные приложений удалены не будут."</string>
@@ -1300,7 +1299,7 @@
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Работающие приложения"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Просмотр и управление работающими приложениями"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Перезапуск"</string>
-    <string name="cached" msgid="1059590879740175019">"Кэшированный фоновый процесс"</string>
+    <string name="cached" msgid="1059590879740175019">"Кешированный фоновый процесс"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Ничего не запущено."</string>
     <string name="service_started_by_app" msgid="818675099014723551">"Запущено приложением."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
@@ -1552,10 +1551,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Пурпурный"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Включить <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> будет:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Если включить службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\", блокировка экрана будет отключена и надежность защиты зашифрованных данных снизится."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Поскольку включена служба специальных возможностей, блокировка экрана будет отключена и надежность защиты зашифрованных данных может быть снижена."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Обрабатывать ваши действия."</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Получать информацию о том, какие действия вы выполняете в приложении."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Остановить службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1595,18 +1592,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Батарея будет разряжена через <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Батарея будет заряжена через <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – осталось около <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> до полной зарядки"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> до полной зарядки (от сети)"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> до полной зарядки (через USB)"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> до полной зарядки (беспроводная)"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Использование с момента полной зарядки"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Расход заряда батареи с момента отключения от сети питания"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Расход заряда батареи с момента перезагрузки"</string>
@@ -1694,8 +1685,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Режим энергосбережения"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Включать автоматически"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Никогда"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"при уровне заряда %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Статистика процессов"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Статистика запущенных процессов"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Использование памяти"</string>
@@ -2410,7 +2400,7 @@
   </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Службы просмотра уведомлений не установлены."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Включить службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Служба \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет просматривать все уведомления, добавленные системой или любым из установленных приложений, включая личные данные (например, имена контактов и тексты сообщений), а также закрывать уведомления и нажимать на имеющиеся в них кнопки."</string>
+    <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Служба <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> сможет просматривать все уведомления, добавленные системой или любым из установленных приложений, включая личные данные (например, имена контактов и тексты сообщений), а также закрывать уведомления и нажимать на имеющиеся в них кнопки."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Источники условий"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Нет приложений, задающих условия"</string>
   <plurals name="manage_condition_providers_summary_nonzero">
