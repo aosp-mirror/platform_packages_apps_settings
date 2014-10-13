@@ -275,7 +275,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
 
         try {
-            return r.getDrawable(resId);
+            return r.getDrawable(resId, null);
         } catch (RuntimeException e) {
             Log.w(TAG, "Icon not found in "
                     + (pkg != null ? resId : "<system>")

@@ -679,7 +679,7 @@ public class RunningState {
                     return constState.newDrawable();
                 }
             }
-            return context.getResources().getDrawable(
+            return context.getDrawable(
                     com.android.internal.R.drawable.ic_menu_cc);
         }
     }
