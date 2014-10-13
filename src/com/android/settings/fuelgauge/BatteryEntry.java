@@ -189,7 +189,7 @@ public class BatteryEntry {
                 break;
         }
         if (iconId > 0) {
-            icon = context.getResources().getDrawable(iconId);
+            icon = context.getDrawable(iconId);
         }
         if ((name == null || iconId == 0) && this.sipper.uidObj != null) {
             getQuickNameIconForUid(this.sipper.uidObj);
@@ -228,7 +228,7 @@ public class BatteryEntry {
                 name = context.getResources().getString(R.string.process_mediaserver_label);
             }
             iconId = R.drawable.ic_power_system;
-            icon = context.getResources().getDrawable(iconId);
+            icon = context.getDrawable(iconId);
             return;
         } else {
             //name = packages[0];

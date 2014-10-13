@@ -212,7 +212,7 @@ public class MasterClear extends Fragment {
             try {
                 if (desc.iconId != 0) {
                     Context authContext = context.createPackageContext(desc.packageName, 0);
-                    icon = authContext.getResources().getDrawable(desc.iconId);
+                    icon = authContext.getDrawable(desc.iconId);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "No icon for account type " + desc.type);
