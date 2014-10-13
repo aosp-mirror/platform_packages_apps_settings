@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Sikkerhedsindstillingen til trådløse routere (TKIP) understøttes ikke"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Godkendelsesfejl. Prøv igen."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"En anden WPS-session blev registreret. Prøv igen om et par minutter."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Netværksnavn"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"Indtast SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sikkerhed"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signalstyrke"</string>
@@ -1449,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Tillad/forbyd scanning i forbindelse med Wi-Fi-roaming afhængigt af mængden af datatrafik i grænsefladen"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Størrelser for Logger-buffer"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Vælg Logger-størrelser pr. logbuffer"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"Vælg USB-konfiguration"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Vælg USB-konfiguration"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Imiterede placeringer"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillad imiterede placeringer"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Aktivér visning af attributinspektion"</string>
@@ -1554,10 +1555,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Lyslilla"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"Vil du bruge <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> har brug for at:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Hvis du aktiverer <xliff:g id="SERVICE">%1$s</xliff:g>, vil enheden ikke benytte skærmlåsen til at forbedre datakrypteringen."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Fordi du har aktiveret en tilgængelighedstjeneste, vil enheden ikke benytte skærmlåsen for at forbedre datakrypteringen."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"observere dine handlinger"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"modtage underretninger, når du interagerer med en app."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Vil du standse <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -1597,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> tilbage"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> til batteriet er opladt"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – ca. <xliff:g id="TIME">%2$s</xliff:g> tilbage"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> til fuldt opladet"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> til fuldt opladet med adapter"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> til fuldt opladet med USB"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> til fuldt opladet med trådløs"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Forbrug siden sidste fulde opladning"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Batteriforbrug siden afbrydelse"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Batteriforbrug siden nulstilling"</string>
@@ -1696,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Batteribesparelse"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Slå automatisk til"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Aldrig"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"ved %1$s batteri"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"hukommelse brugt"</string>
@@ -2313,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Mobilselskab"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Nummer"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Farve på SIM-kort"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Vis numre"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"Vælg SIM-kort"</string>
     <string name="color_orange" msgid="4417567658855022517">"Orange"</string>
     <string name="color_purple" msgid="3888532466427762504">"Lilla"</string>

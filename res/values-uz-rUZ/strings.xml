@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Simsiz router xavfsizlik sozlamasi (TKIP) qo‘llab-quvvatlanmaydi"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Tasdiqlanmadi. Iltimos, yana takrorlang."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Boshqa WPS sessiyasi aniqlandi. Iltimos, bir necha daqiqadan so‘ng yana takrorlang."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"Tarmoq nomi"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID‘ni kiriting"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Xavfsizlik"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Antena darajasi"</string>
@@ -1449,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Ekranda ko‘rsatilgan internet tragigi miqdoriga qarab Wi-Fi rouming tekshiruviga ruxsat berish/taqiqlash"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Jurnal buferi hajmi"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Jurnal buferi hajmini tanlang"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"USB konfiguratsiyasini tanlang"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"USB konfiguratsiyasini tanlang"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Qo‘lbola joylashuvlarga ruxsat berish"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Joylashuv emulyatsiyasiga ruxsat berish"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Tekshiruv alomatlarini ko‘rish funksiyasini yoqish"</string>
@@ -1554,10 +1555,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"Pushtirang"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g>dan foydalanilsinmi?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>ga zarur:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Agar <xliff:g id="SERVICE">%1$s</xliff:g> xizmatini yoqsangiz, qurilmangiz ma’lumotlarni shifrlashni kuchaytirish uchun ekran qulfidan foydalanmaydi."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Maxsus imkoniyatlar xizmati yoqilganligi tufayli qurilmangiz ma’lumotlarni shifrlashni kuchaytirish uchun ekran qulfidan foydalanmaydi."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Faoliyatlaringizni kuzatish"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Ilova bilan o‘zaro bog‘langanda xabarnomalar qabul qiling."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> ishi to‘xtatilsinmi?"</string>
@@ -1597,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Batareya quvvati <xliff:g id="REMAIN">%1$s</xliff:g>dan so‘ng tugaydi"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Batareya quvvati <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>dan so‘ng to‘ladi"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – taxminan <xliff:g id="TIME">%2$s</xliff:g> qoldi"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g>, to‘lguncha"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g>, o‘zgaruvchan tok orqali to‘lguncha"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g>, USB orqali to‘lguncha"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g>, simsiz quvvatlash orqali to‘lguncha"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"To‘liq quvvat olgandan so‘ng ishlayotgan"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Zaryadlanish to‘xtatilgandan keyingi batareya sarfi"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Statistika tozalandan keyingi batareya sarfi"</string>
@@ -1696,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Quvvat tejash"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Avtomatik ravishda yoqish"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hech qachon"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"batareya quvvati %1$s qolganda"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Jarayon statistikalari"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Ish jarayonlari haqidagi g‘alati statistikalar"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Band xotira"</string>
@@ -2313,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Aloqa operatori"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Raqam"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM karta rangi"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Raqamlarni ko‘rsatish"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"SIM kartani tanlang"</string>
     <string name="color_orange" msgid="4417567658855022517">"To‘q sariq"</string>
     <string name="color_purple" msgid="3888532466427762504">"Binafsharang"</string>

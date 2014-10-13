@@ -1448,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Autoriser ou non la détection de réseaux Wi-Fi en itinérance en fonction de l\'importance du trafic de données dans l\'interface"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Tailles des mémoires tampons Logger"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Tailles Logger par tampon journal"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"Sélectionner une configuration USB"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Sélectionner une configuration USB"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Positions fictives"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Autoriser les positions fictives"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Activer l\'inspection d\'attribut d\'affichage"</string>
@@ -1594,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Temps restant : <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> avant chargement complet"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – Temps restant : <xliff:g id="TIME">%2$s</xliff:g> environ"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> (chargée à 100 %% dans <xliff:g id="TIME">%2$s</xliff:g>)"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> (chargée à 100 %% sur secteur dans <xliff:g id="TIME">%2$s</xliff:g>)"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> (chargée à 100 %% via USB dans <xliff:g id="TIME">%2$s</xliff:g>)"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> (chargée à 100 %% sans fil dans <xliff:g id="TIME">%2$s</xliff:g>)"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Utilis. depuis dernière charge complète"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilisation de la batterie depuis le débranchement"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Utilisation de la batterie depuis la dernière réinitialisation"</string>
@@ -1693,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Économiseur de batterie"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Activer automatiquement"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Jamais"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"lorsque la batterie atteint %1$s"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistiques relatives aux processus"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiques détaillées relatives aux processus en cours d\'exécution"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Utilisation de la mémoire"</string>
@@ -2310,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Opérateur"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Numéro"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Couleur de la carte SIM"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Afficher les numéros"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"Sélectionner une carte SIM"</string>
     <string name="color_orange" msgid="4417567658855022517">"Orange"</string>
     <string name="color_purple" msgid="3888532466427762504">"Violet"</string>

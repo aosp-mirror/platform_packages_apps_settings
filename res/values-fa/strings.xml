@@ -654,8 +654,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"‏تنظیمات امنیتی روتر بیسیم (TKIP) پشتیبانی نمی‌شود"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"تأیید اعتبار انجام نشد. لطفاً دوباره امتحان کنید."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"‏یک جلسه WPS دیگر شناسایی شد. لطفاً پس از چند دقیقه دوباره امتحان کنید."</string>
-    <!-- no translation found for wifi_ssid (5519636102673067319) -->
-    <skip />
+    <string name="wifi_ssid" msgid="5519636102673067319">"نام شبکه"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"‏SSID را وارد کنید"</string>
     <string name="wifi_security" msgid="6603611185592956936">"امنیت"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"قدرت سیگنال"</string>
@@ -1449,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"‏فعال/غیرفعال کردن اسکن‌های رومینگ Wi‑Fi براساس مقدار داده ترافیک حاضر در واسط"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"اندازه‌های حافظه موقت ثبت‌کننده"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"انتخاب اندازه‌ ثبت‌کننده در حافظه موقت ثبت"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"‏انتخاب پیکربندی USB"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"‏انتخاب پیکربندی USB"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"مکان‌های کاذب مجاز هستند"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"مکان‌های کاذب مجاز هستند"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"فعال کردن بازبینی ویژگی بازدید"</string>
@@ -1554,10 +1555,8 @@
     <string name="color_magenta" msgid="5059212823607815549">"زرشکی"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"استفاده از <xliff:g id="SERVICE">%1$s</xliff:g>؟"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> باید:"</string>
-    <!-- no translation found for enable_service_encryption_warning (3064686622453974606) -->
-    <skip />
-    <!-- no translation found for secure_lock_encryption_warning (464101518421886337) -->
-    <skip />
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"اگر <xliff:g id="SERVICE">%1$s</xliff:g> را روشن کنید، دستگاه شما از قفل صفحه شما جهت بهبود رمزگذاری اطلاعات استفاده نخواهد کرد."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"از آنجا که یک سرویس دسترس‌پذیری را روشن کرده‌اید، دستگاه شما از قفل صفحه شما جهت بهبود رمزگذاری اطلاعات استفاده نخواهد کرد."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"عملکردهای خود را مشاهده کنید"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"دریافت اعلان وقتی در حال تعامل با برنامه‌ای هستید."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> متوقف شود؟"</string>
@@ -1597,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> مانده"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> مانده تا شارژ کامل"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - تقریباً ‏<xliff:g id="TIME">%2$s</xliff:g> باقی مانده است"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل با جریان متناوب"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"‏<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل از طریق USB"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - ‏<xliff:g id="TIME">%2$s</xliff:g> تا شارژ کامل به طور بی‌سیم"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"استفاده از زمان آخرین شارژ کامل"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"استفاده از باتری از زمان جدا شدن"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"استفاده از باتری از زمان بازنشانی"</string>
@@ -1696,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"ذخیره کننده باتری"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"روشن شدن خودکار"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"هرگز"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"‏در %1$s نیروی باتری"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"آمار فرآیند"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"آمار دقیق برای فرآیندهای در حال اجرا"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"استفاده از حافظه"</string>
@@ -2014,8 +2006,8 @@
     <string name="force_msaa_summary" msgid="9123553203895817537">"‏فعال کردن 4X MSAA در برنامه‌های OpenGL ES 2.0"</string>
     <string name="show_non_rect_clip" msgid="505954950474595172">"رفع اشکال عملکردهای کلیپ غیر مربع شکل"</string>
     <string name="track_frame_time" msgid="6146354853663863443">"‏اجرای GPU نمایه"</string>
-    <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس انیمیشن پنجره"</string>
-    <string name="transition_animation_scale_title" msgid="387527540523595875">"مقیاس انیمیشن انتقال"</string>
+    <string name="window_animation_scale_title" msgid="6162587588166114700">"مقیاس پویانمایی پنجره"</string>
+    <string name="transition_animation_scale_title" msgid="387527540523595875">"مقیاس پویانمایی انتقالی"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"مقیاس طول مدت انیماتور"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"شبیه‌سازی نمایش‌های ثانویه"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"برنامه‌ها"</string>
@@ -2313,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"شبکه مخابراتی"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"شماره"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"رنگ سیم‌کارت"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"نمایش شماره‌ها"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"انتخاب سیم‌کارت"</string>
     <string name="color_orange" msgid="4417567658855022517">"نارنجی"</string>
     <string name="color_purple" msgid="3888532466427762504">"بنفش"</string>

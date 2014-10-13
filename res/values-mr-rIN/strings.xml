@@ -1448,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Wi‑Fi रोम स्‍कॅनला इंटरफेसवर उपस्‍थित असलेल्‍या रहदारी डेटाच्या प्रमाणावर आधारित अनुमती द्या/अनुमती देऊ नका"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"लॉगर बफर आकार"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"प्रति लॉग बफर लॉगर आकार निवडा"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"USB कॉन्‍फिगरेशन निवडा"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"USB कॉन्‍फिगरेशन निवडा"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"बनावट स्थानांना अनुमती द्या"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"बनावट स्थानांना अनुमती द्या"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"दृश्‍य विशेषता तपासणी सक्षम करा"</string>
@@ -1596,10 +1598,10 @@
     <string name="power_charge_remaining" msgid="6132074970943913135">"चार्ज करण्यासाठी <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
     <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - अंदाजे. <xliff:g id="TIME">%2$s</xliff:g> शिल्लक"</string>
     <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
-    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> पूर्ण होईपर्यंत"</string>
-    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> AC वर पूर्ण होईपर्यंत"</string>
-    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> USB वरून पूर्ण होईपर्यंत"</string>
-    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> वायरलेसवरून पूर्ण होईपर्यंत"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> पूर्ण होण्यात"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> AC वरून पूर्ण होण्यात"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> USB वरून पूर्ण होण्यात"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> वायरलेसवरून पूर्ण होण्यात"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"पूर्ण चार्ज झाल्यानंतरचा वापर"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"अनप्लग केल्यापासून बॅटरी वापर"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"रीसेट केल्यापासून बॅटरी वापर"</string>
@@ -1687,7 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"बॅटरी सेव्हर"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"स्वयंचलितपणे चालू करा"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"कधीही नाही"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"बॅटरी %1$s वर"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s बॅटरी वर"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"प्रक्रिया आकडेवारी"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"चालत असलेल्या प्रक्रियांबद्दल गीकी आकडेवारी"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"मेमरी वापर"</string>
@@ -2303,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"वाहक"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"संख्या"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"सिम रंग"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"नंबर प्रदर्शित करा"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"सिम कार्ड निवडा"</string>
     <string name="color_orange" msgid="4417567658855022517">"नारिंगी"</string>
     <string name="color_purple" msgid="3888532466427762504">"जांभळा"</string>

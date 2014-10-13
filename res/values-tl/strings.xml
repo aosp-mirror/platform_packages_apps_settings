@@ -1448,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"Payagan/Huwag payagan ang Mga Pag-scan sa Roaming ng Wi‑Fi batay sa dami ng trapiko ng data na mayroon sa interface"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"Mga laki ng buffer ng Logger"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Pumili laki Logger kada log buffer"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"Pumili ng USB Configuration"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"Pumili ng USB Configuration"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Payagan ang mga kunwaring lokasyon"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Payagan ang mga kunwaring lokasyon"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"I-enable ang pagsisiyasat sa attribute na view"</string>
@@ -1594,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> natitira"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> upang ma-charge"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - humigit kumulang <xliff:g id="TIME">%2$s</xliff:g> ang natitira"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> bago mapuno"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> bago mapuno sa AC"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> bago mapuno sa USB"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g> bago mapuno mula sa wireless"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"Gumagana noong huling full charge pa"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Paggamit ng baterya mula nang hindi nakasaksak"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Paggamit ng baterya mula ng ini-reset"</string>
@@ -1693,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"Battery saver"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Awtomatikong i-on"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Hindi Kailanman"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"%1$s na lang ang natitirang baterya"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Mga Istatistika ng Proseso"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Mahahalagang istatistika tungkol sa mga tumatakbong proseso"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memory na ginamit"</string>
@@ -2310,7 +2305,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Carrier"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Numero"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Kulay ng SIM"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"Ipakita ang mga numero"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"Pumili ng SIM card"</string>
     <string name="color_orange" msgid="4417567658855022517">"Orange"</string>
     <string name="color_purple" msgid="3888532466427762504">"Lila"</string>

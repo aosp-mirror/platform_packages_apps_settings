@@ -1432,7 +1432,7 @@
     <string name="clear_adb_keys" msgid="4038889221503122743">"撤銷 USB 偵錯授權"</string>
     <string name="bugreport_in_power" msgid="7923901846375587241">"錯誤回報捷徑"</string>
     <string name="bugreport_in_power_summary" msgid="1778455732762984579">"在電源選單中顯示取得錯誤報告的按鈕"</string>
-    <string name="keep_screen_on" msgid="1146389631208760344">"保持清醒"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"螢幕不休眠"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"充電時螢幕不會進入休眠"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"啟用藍牙 HCI 窺探紀錄"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"擷取單一檔案內的所有藍牙 HCI 封包"</string>
@@ -1448,6 +1448,8 @@
     <string name="wifi_allow_scan_with_traffic_summary" msgid="2575101424972686310">"根據介面中目前的數據流量允許/禁止 Wi-Fi 漫遊掃描"</string>
     <string name="select_logd_size_title" msgid="7433137108348553508">"紀錄器緩衝區空間"</string>
     <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"選取每個紀錄緩衝區的紀錄器空間"</string>
+    <string name="select_usb_configuration_title" msgid="2649938511506971843">"選取 USB 設定"</string>
+    <string name="select_usb_configuration_dialog_title" msgid="6385564442851599963">"選取 USB 設定"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"允許模擬位置"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"允許模擬位置"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"啟用檢視屬性檢查"</string>
@@ -1594,18 +1596,12 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"還剩 <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>後充電完畢"</string>
-    <!-- no translation found for power_discharging_duration (1605929174734600590) -->
-    <skip />
-    <!-- no translation found for power_charging (1779532561355864267) -->
-    <skip />
-    <!-- no translation found for power_charging_duration (2853265177761520490) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_ac (3969186192576594254) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_usb (182405645340976546) -->
-    <skip />
-    <!-- no translation found for power_charging_duration_wireless (1829295708243159464) -->
-    <skip />
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> - 大約還剩 <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATE">%2$s</xliff:g>"</string>
+    <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>後充飽"</string>
+    <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>後充飽 (AC)"</string>
+    <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>後充飽 (USB)"</string>
+    <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="TIME">%2$s</xliff:g>後充飽 (無線充電)"</string>
     <string name="power_usage_list_summary" msgid="2409288197839512482">"上次充飽後的使用情形"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重設後的電池使用狀況"</string>
@@ -1693,8 +1689,7 @@
     <string name="battery_saver" msgid="1426682272004907982">"節約耗電量"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"永遠不要"</string>
-    <!-- no translation found for battery_saver_turn_on_automatically_pct (7536784431655058267) -->
-    <skip />
+    <string name="battery_saver_turn_on_automatically_pct" msgid="7536784431655058267">"電量為 %1$s 時"</string>
     <string name="process_stats_summary_title" msgid="1144688045609771677">"處理程序統計資料"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"執行中處理程序的相關完善統計資料"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"記憶體用量"</string>
@@ -2314,7 +2309,6 @@
     <string name="sim_editor_carrier" msgid="5684523444677746573">"行動通訊業者"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"號碼"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM 卡顏色"</string>
-    <string name="sim_editor_num_format" msgid="4681231191387098783">"顯示號碼"</string>
     <string name="sim_card_select_title" msgid="6668492557519243456">"選取 SIM 卡"</string>
     <string name="color_orange" msgid="4417567658855022517">"橘色"</string>
     <string name="color_purple" msgid="3888532466427762504">"紫色"</string>
