@@ -19,13 +19,13 @@
         android:title="@string/date_and_time"
         settings:keywords="@string/keywords_date_and_time">
 
-    <CheckBoxPreference android:key="auto_time"
+    <SwitchPreference android:key="auto_time"
         android:title="@string/date_time_auto"
         android:summaryOn="@string/date_time_auto_summaryOn"
         android:summaryOff="@string/date_time_auto_summaryOff"
         />
 
-    <CheckBoxPreference android:key="auto_zone"
+    <SwitchPreference android:key="auto_zone"
         android:title="@string/zone_auto"
         android:summaryOn="@string/zone_auto_summaryOn"
         android:summaryOff="@string/zone_auto_summaryOff"
@@ -48,7 +48,7 @@
         android:summary="GMT-8:00"
         />
 
-    <CheckBoxPreference android:key="24 hour"
+    <SwitchPreference android:key="24 hour"
         android:title="@string/date_time_24hour"
         />
 

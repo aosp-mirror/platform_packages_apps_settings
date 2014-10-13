@@ -29,10 +29,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.text.BidiFormatter;
@@ -69,10 +69,10 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     // have we been launched from the setup wizard?
     protected static final String EXTRA_IS_FIRST_RUN = "firstRun";
 
-    private CheckBoxPreference mAutoTimePref;
+    private SwitchPreference mAutoTimePref;
     private Preference mTimePref;
     private Preference mTime24Pref;
-    private CheckBoxPreference mAutoTimeZonePref;
+    private SwitchPreference mAutoTimeZonePref;
     private Preference mTimeZone;
     private Preference mDatePref;
     private ListPreference mDateFormat;
@@ -90,7 +90,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         boolean autoTimeEnabled = getAutoState(Settings.Global.AUTO_TIME);
         boolean autoTimeZoneEnabled = getAutoState(Settings.Global.AUTO_TIME_ZONE);
 
-        mAutoTimePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
+        mAutoTimePref = (SwitchPreference) findPreference(KEY_AUTO_TIME);
 
         DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(Context
                 .DEVICE_POLICY_SERVICE);
@@ -108,7 +108,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         mDummyDate = Calendar.getInstance();
 
         mAutoTimePref.setChecked(autoTimeEnabled);
-        mAutoTimeZonePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME_ZONE);
+        mAutoTimeZonePref = (SwitchPreference) findPreference(KEY_AUTO_TIME_ZONE);
         // Override auto-timezone if it's a wifi-only device or if we're still in setup wizard.
         // TODO: Remove the wifiOnly test when auto-timezone is implemented based on wifi-location.
         if (Utils.isWifiOnly(getActivity()) || isFirstRun) {
@@ -168,7 +168,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
 
-        ((CheckBoxPreference)mTime24Pref).setChecked(is24Hour());
+        ((SwitchPreference)mTime24Pref).setChecked(is24Hour());
 
         // Register for time ticks and other reasons for time change
         IntentFilter filter = new IntentFilter();
@@ -318,7 +318,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             removeDialog(DIALOG_TIMEPICKER);
             showDialog(DIALOG_TIMEPICKER);
         } else if (preference == mTime24Pref) {
-            final boolean is24Hour = ((CheckBoxPreference)mTime24Pref).isChecked();
+            final boolean is24Hour = ((SwitchPreference)mTime24Pref).isChecked();
             set24Hour(is24Hour);
             updateTimeAndDateDisplay(getActivity());
             timeUpdated(is24Hour);
