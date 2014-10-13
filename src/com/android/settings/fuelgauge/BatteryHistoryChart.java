@@ -1272,6 +1272,8 @@ public class BatteryHistoryChart extends View {
 
         if (mLargeMode) {
             if (DEBUG) Log.d(TAG, "Drawing large mode labels");
+            Paint.Align align = mTextPaint.getTextAlign();
+            mTextPaint.setTextAlign(textAlignLeft);  // large-mode labels always aligned to start
             if (mHavePhoneSignal) {
                 canvas.drawText(mPhoneSignalLabel, textStartX,
                         height - mPhoneSignalOffset - mTextDescent, mTextPaint);
@@ -1290,6 +1292,7 @@ public class BatteryHistoryChart extends View {
                     height - mChargingOffset - mTextDescent, mTextPaint);
             canvas.drawText(mScreenOnLabel, textStartX,
                     height - mScreenOnOffset - mTextDescent, mTextPaint);
+            mTextPaint.setTextAlign(align);
         }
 
         canvas.drawLine(mLevelLeft-mThinLineWidth, mLevelTop, mLevelLeft-mThinLineWidth,
