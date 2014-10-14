@@ -128,7 +128,11 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
             final int configsSize = configs.size();
             for (int i = 0; i < configsSize; ++i){
-                AccessPoint accessPoint = new AccessPoint(context, configs.get(i));
+                WifiConfiguration config = configs.get(i);
+                if (config.selfAdded && config.numAssociation == 0) {
+                    continue;
+                }
+                AccessPoint accessPoint = new AccessPoint(context, config);
                 final List<ScanResult> results = resultsMap.get(accessPoint.ssid);
 
                 accessPoint.setShowSummary(false);
