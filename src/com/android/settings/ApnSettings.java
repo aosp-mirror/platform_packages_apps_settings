@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -171,8 +172,6 @@ public class ApnSettings extends SettingsPreferenceFragment implements
 
         if (!mRestoreDefaultApnMode) {
             fillList();
-        } else {
-            showDialog(DIALOG_RESTORE_DEFAULTAPN);
         }
     }
 
@@ -348,12 +347,17 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_RESTORE_DEFAULTAPN_COMPLETE:
+                    Activity activity = getActivity();
+                    if (activity == null) {
+                        mRestoreDefaultApnMode = false;
+                        return;
+                    }
                     fillList();
                     getPreferenceScreen().setEnabled(true);
                     mRestoreDefaultApnMode = false;
                     removeDialog(DIALOG_RESTORE_DEFAULTAPN);
                     Toast.makeText(
-                        getActivity(),
+                        activity,
                         getResources().getString(
                                 R.string.restore_default_apn_completed),
                         Toast.LENGTH_LONG).show();
