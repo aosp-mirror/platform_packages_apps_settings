@@ -105,6 +105,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference
                 }
             };
         }
+        mVolumizer.start();
         mVolumizer.setSeekBar(mSeekBar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
