@@ -37,28 +37,28 @@
             android:key="screen_magnification_preference_screen"
             android:title="@string/accessibility_screen_magnification_title"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:key="toggle_large_text_preference"
                 android:title="@string/accessibility_toggle_large_text_preference_title"
                 android:persistent="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:key="toggle_high_text_contrast_preference"
                 android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
                 android:summary="@string/experimental_preference"
                 android:persistent="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:key="toggle_power_button_ends_call_preference"
                 android:title="@string/accessibility_power_button_ends_call_prerefence_title"
                 android:persistent="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:key="toggle_lock_screen_rotation_preference"
                 android:title="@string/accelerometer_title"
                 android:persistent="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:key="toggle_speak_password_preference"
                 android:title="@string/accessibility_toggle_speak_password_preference_title"
                 android:persistent="false"/>
