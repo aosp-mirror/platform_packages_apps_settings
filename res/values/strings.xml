@@ -5918,4 +5918,32 @@
     <string name="imei_information_title">IMEI information</string>
     <!-- Description for IMEI preference [CHAR LIMIT=40] -->
     <string name="imei_information_summary">IMEI relative information</string>
+
+    <!-- Encryption interstitial title [CHAR LIMIT=30] -->
+    <string name="encryption_interstitial_header">Encryption</string>
+
+    <!-- Encryption interstitial button to continue with the shown setting.  Appears on screen that asks the user to opt in/out of encrypting device with a pin/pattern/password. [CHAR LIMIT=NONE] -->
+    <string name="encryption_continue_button">Continue</string>
+
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
+    <string name="encryption_interstitial_message_pin">Because your device is encrypted, you can further protect it by requiring that you enter your PIN before your device starts up.</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
+    <string name="encryption_interstitial_message_pattern">Because your device is encrypted, you can further protect it by requiring that you enter your pattern before your device starts up.</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
+    <string name="encryption_interstitial_message_password">Because your device is encrypted, you can further protect it by requiring that you enter your password before your device starts up.</string>
+
+    <!-- Radio button text that require a PIN to start device [CHAR LIMIT=NONE] -->
+    <string name="encrypt_require_pin">Require PIN to start device</string>
+    <!-- Radio button text that require a pattern to start device [CHAR LIMIT=NONE] -->
+    <string name="encrypt_require_pattern">Require pattern to start device</string>
+    <!-- Radio button text that require a password to start device [CHAR LIMIT=NONE] -->
+    <string name="encrypt_require_password">Require password to start device</string>
+
+    <!-- Radio button text that doesn't require a PIN to decrypt [CHAR LIMIT=NONE] -->
+    <string name="encrypt_dont_require_pin">No thanks</string>
+    <!-- Radio button text that doesn't require a pattern to decrypt [CHAR LIMIT=NONE] -->
+    <string name="encrypt_dont_require_pattern">No thanks</string>
+    <!-- Radio button text that doesn't require a password to decrypt [CHAR LIMIT=NONE] -->
+    <string name="encrypt_dont_require_password">No thanks</string>
+
 </resources>
