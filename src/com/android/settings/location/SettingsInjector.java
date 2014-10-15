@@ -32,11 +32,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.settings.R;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -99,27 +103,29 @@ class SettingsInjector {
     }
 
     /**
-     * Returns a list with one {@link InjectedSetting} object for each {@link android.app.Service}
-     * that responds to {@link SettingInjectorService#ACTION_SERVICE_INTENT} and provides the
-     * expected setting metadata.
+     * Returns a list for a profile with one {@link InjectedSetting} object for each
+     * {@link android.app.Service} that responds to
+     * {@link SettingInjectorService#ACTION_SERVICE_INTENT} and provides the expected setting
+     * metadata.
      *
      * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
      *
      * TODO: unit test
      */
-    private List<InjectedSetting> getSettings() {
+    private List<InjectedSetting> getSettings(final UserHandle userHandle) {
         PackageManager pm = mContext.getPackageManager();
         Intent intent = new Intent(SettingInjectorService.ACTION_SERVICE_INTENT);
 
+        final int profileId = userHandle.getIdentifier();
         List<ResolveInfo> resolveInfos =
-                pm.queryIntentServices(intent, PackageManager.GET_META_DATA);
+                pm.queryIntentServicesAsUser(intent, PackageManager.GET_META_DATA, profileId);
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "Found services: " + resolveInfos);
+            Log.d(TAG, "Found services for profile id " + profileId + ": " + resolveInfos);
         }
         List<InjectedSetting> settings = new ArrayList<InjectedSetting>(resolveInfos.size());
         for (ResolveInfo resolveInfo : resolveInfos) {
             try {
-                InjectedSetting setting = parseServiceInfo(resolveInfo, pm);
+                InjectedSetting setting = parseServiceInfo(resolveInfo, userHandle, pm);
                 if (setting == null) {
                     Log.w(TAG, "Unable to load service info " + resolveInfo);
                 } else {
@@ -132,7 +138,7 @@ class SettingsInjector {
             }
         }
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "Loaded settings: " + settings);
+            Log.d(TAG, "Loaded settings for profile id " + profileId + ": " + settings);
         }
 
         return settings;
@@ -144,8 +150,8 @@ class SettingsInjector {
      *
      * Duplicates some code from {@link android.content.pm.RegisteredServicesCache}.
      */
-    private static InjectedSetting parseServiceInfo(ResolveInfo service, PackageManager pm)
-            throws XmlPullParserException, IOException {
+    private static InjectedSetting parseServiceInfo(ResolveInfo service, UserHandle userHandle,
+            PackageManager pm) throws XmlPullParserException, IOException {
 
         ServiceInfo si = service.serviceInfo;
         ApplicationInfo ai = si.applicationInfo;
@@ -179,8 +185,9 @@ class SettingsInjector {
                         + SettingInjectorService.ATTRIBUTES_NAME + " tag");
             }
 
-            Resources res = pm.getResourcesForApplication(ai);
-            return parseAttributes(si.packageName, si.name, res, attrs);
+            Resources res = pm.getResourcesForApplicationAsUser(si.packageName,
+                    userHandle.getIdentifier());
+            return parseAttributes(si.packageName, si.name, userHandle, res, attrs);
         } catch (PackageManager.NameNotFoundException e) {
             throw new XmlPullParserException(
                     "Unable to load resources for package " + si.packageName);
@@ -194,8 +201,8 @@ class SettingsInjector {
     /**
      * Returns an immutable representation of the static attributes for the setting, or null.
      */
-    private static InjectedSetting parseAttributes(
-            String packageName, String className, Resources res, AttributeSet attrs) {
+    private static InjectedSetting parseAttributes(String packageName, String className,
+            UserHandle userHandle, Resources res, AttributeSet attrs) {
 
         TypedArray sa = res.obtainAttributes(attrs, android.R.styleable.SettingInjectorService);
         try {
@@ -211,7 +218,7 @@ class SettingsInjector {
                         + ", settingsActivity: " + settingsActivity);
             }
             return InjectedSetting.newInstance(packageName, className,
-                    title, iconId, settingsActivity);
+                    title, iconId, userHandle, settingsActivity);
         } finally {
             sa.recycle();
         }
@@ -219,13 +226,24 @@ class SettingsInjector {
 
     /**
      * Gets a list of preferences that other apps have injected.
+     *
+     * @param profileId Identifier of the user/profile to obtain the injected settings for or
+     *                  UserHandle.USER_CURRENT for all profiles associated with current user.
      */
-    public List<Preference> getInjectedSettings() {
-        Iterable<InjectedSetting> settings = getSettings();
+    public List<Preference> getInjectedSettings(final int profileId) {
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        final List<UserHandle> profiles = um.getUserProfiles();
         ArrayList<Preference> prefs = new ArrayList<Preference>();
-        for (InjectedSetting setting : settings) {
-            Preference pref = addServiceSetting(prefs, setting);
-            mSettings.add(new Setting(setting, pref));
+        final int profileCount = profiles.size();
+        for (int i = 0; i < profileCount; ++i) {
+            final UserHandle userHandle = profiles.get(i);
+            if (profileId == UserHandle.USER_CURRENT || profileId == userHandle.getIdentifier()) {
+                Iterable<InjectedSetting> settings = getSettings(userHandle);
+                for (InjectedSetting setting : settings) {
+                    Preference pref = addServiceSetting(prefs, setting);
+                    mSettings.add(new Setting(setting, pref));
+                }
+            }
         }
 
         reloadStatusMessages();
@@ -247,22 +265,44 @@ class SettingsInjector {
      * Adds an injected setting to the root.
      */
     private Preference addServiceSetting(List<Preference> prefs, InjectedSetting info) {
-        Preference pref = new DimmableIconPreference(mContext);
+        PackageManager pm = mContext.getPackageManager();
+        Drawable appIcon = pm.getDrawable(info.packageName, info.iconId, null);
+        Drawable icon = pm.getUserBadgedIcon(appIcon, info.mUserHandle);
+        CharSequence badgedAppLabel = pm.getUserBadgedLabel(info.title, info.mUserHandle);
+        if (info.title.contentEquals(badgedAppLabel)) {
+            // If badged label is not different from original then no need for it as
+            // a separate content description.
+            badgedAppLabel = null;
+        }
+        Preference pref = new DimmableIconPreference(mContext, badgedAppLabel);
         pref.setTitle(info.title);
         pref.setSummary(null);
-        PackageManager pm = mContext.getPackageManager();
-        Drawable icon = pm.getDrawable(info.packageName, info.iconId, null);
         pref.setIcon(icon);
-
-        // Activity to start if they click on the preference. Must start in new task to ensure
-        // that "android.settings.LOCATION_SOURCE_SETTINGS" brings user back to Settings > Location.
-        Intent settingIntent = new Intent();
-        settingIntent.setClassName(info.packageName, info.settingsActivity);
-        settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        pref.setIntent(settingIntent);
+        pref.setOnPreferenceClickListener(new ServiceSettingClickedListener(info));
 
         prefs.add(pref);
         return pref;
+    }
+
+    private class ServiceSettingClickedListener
+            implements Preference.OnPreferenceClickListener {
+        private InjectedSetting mInfo;
+
+        public ServiceSettingClickedListener(InjectedSetting info) {
+            mInfo = info;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            // Activity to start if they click on the preference. Must start in new task to ensure
+            // that "android.settings.LOCATION_SOURCE_SETTINGS" brings user back to
+            // Settings > Location.
+            Intent settingIntent = new Intent();
+            settingIntent.setClassName(mInfo.packageName, mInfo.settingsActivity);
+            settingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivityAsUser(settingIntent, mInfo.mUserHandle);
+            return true;
+        }
     }
 
     /**
@@ -451,9 +491,9 @@ class SettingsInjector {
                 startMillis = 0;
             }
 
-            // Start the service, making sure that this is attributed to the current user rather
-            // than the system user.
-            mContext.startServiceAsUser(intent, android.os.Process.myUserHandle());
+            // Start the service, making sure that this is attributed to the user associated with
+            // the setting rather than the system user.
+            mContext.startServiceAsUser(intent, setting.mUserHandle);
         }
 
         public long getElapsedTime() {
