@@ -26,15 +26,6 @@
        android:layout_height="match_parent"
        android:background="@color/lock_pattern_background" />
 
-   <ImageView android:id="@+id/switch_ime_button"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:src="@drawable/ic_lockscreen_ime"
-       android:clickable="true"
-       android:contentDescription="@string/crypt_keeper_switch_input_method"
-       android:padding="@dimen/crypt_keeper_edit_text_ime_padding"
-       android:layout_gravity="center"
-       android:background="?android:attr/selectableItemBackground"
-       android:visibility="gone" />
+   <include layout="@layout/crypt_keeper_switch_input_method" />
 
 </merge>
