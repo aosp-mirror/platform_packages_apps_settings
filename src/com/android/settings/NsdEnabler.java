@@ -21,18 +21,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.nsd.NsdManager;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
 
-import com.android.settings.R;
+import android.preference.SwitchPreference;
 
 /**
  * NsdEnabler is a helper to manage network service discovery on/off checkbox state.
  */
 public class NsdEnabler implements Preference.OnPreferenceChangeListener {
     private final Context mContext;
-    private final CheckBoxPreference mCheckbox;
+    private final SwitchPreference mSwitchPreference;
     private final IntentFilter mIntentFilter;
     private NsdManager mNsdManager;
 
@@ -47,27 +45,27 @@ public class NsdEnabler implements Preference.OnPreferenceChangeListener {
         }
     };
 
-    public NsdEnabler(Context context, CheckBoxPreference checkBoxPreference) {
+    public NsdEnabler(Context context, SwitchPreference pref) {
         mContext = context;
-        mCheckbox = checkBoxPreference;
+        mSwitchPreference = pref;
         mNsdManager = (NsdManager) mContext.getSystemService(Context.NSD_SERVICE);
         mIntentFilter = new IntentFilter(NsdManager.ACTION_NSD_STATE_CHANGED);
     }
 
     public void resume() {
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        mCheckbox.setOnPreferenceChangeListener(this);
+        mSwitchPreference.setOnPreferenceChangeListener(this);
     }
 
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
-        mCheckbox.setOnPreferenceChangeListener(null);
+        mSwitchPreference.setOnPreferenceChangeListener(null);
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
 
         final boolean desiredState = (Boolean) value;
-        mCheckbox.setEnabled(false);
+        mSwitchPreference.setEnabled(false);
         mNsdManager.setEnabled(desiredState);
         return false;
     }
@@ -75,12 +73,12 @@ public class NsdEnabler implements Preference.OnPreferenceChangeListener {
     private void handleNsdStateChanged(int newState) {
         switch (newState) {
             case NsdManager.NSD_STATE_DISABLED:
-                mCheckbox.setChecked(false);
-                mCheckbox.setEnabled(true);
+                mSwitchPreference.setChecked(false);
+                mSwitchPreference.setEnabled(true);
                 break;
             case NsdManager.NSD_STATE_ENABLED:
-                mCheckbox.setChecked(true);
-                mCheckbox.setEnabled(true);
+                mSwitchPreference.setChecked(true);
+                mSwitchPreference.setEnabled(true);
                 break;
         }
     }

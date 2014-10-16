@@ -24,28 +24,23 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.UserHandle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.System;
-import android.speech.RecognitionService;
 import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.view.InputDevice;
@@ -326,11 +321,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showInputMethodPicker();
             }
-        } else if (preference instanceof CheckBoxPreference) {
-            final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-            if (chkPref == mGameControllerCategory.findPreference("vibrate_input_devices")) {
+        } else if (preference instanceof SwitchPreference) {
+            final SwitchPreference pref = (SwitchPreference) preference;
+            if (pref == mGameControllerCategory.findPreference("vibrate_input_devices")) {
                 System.putInt(getContentResolver(), Settings.System.VIBRATE_INPUT_DEVICES,
-                        chkPref.isChecked() ? 1 : 0);
+                        pref.isChecked() ? 1 : 0);
                 return true;
             }
         }
@@ -601,9 +596,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (haveInputDeviceWithVibrator()) {
             getPreferenceScreen().addPreference(mGameControllerCategory);
 
-            CheckBoxPreference chkPref = (CheckBoxPreference)
+            SwitchPreference pref = (SwitchPreference)
                     mGameControllerCategory.findPreference("vibrate_input_devices");
-            chkPref.setChecked(System.getInt(getContentResolver(),
+            pref.setChecked(System.getInt(getContentResolver(),
                     Settings.System.VIBRATE_INPUT_DEVICES, 1) > 0);
         } else {
             getPreferenceScreen().removePreference(mGameControllerCategory);
