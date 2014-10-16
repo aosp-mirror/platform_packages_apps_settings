@@ -3675,6 +3675,21 @@
     <string name="secure_lock_encryption_warning">Because you\'ve turned on an accessibility service,
         your device won’t use your screen lock to enhance data encryption.</string>
 
+    <!-- Message to the user to enter his pattern before enabling an accessibility service. [CHAR LIMIT=NONE] -->
+    <string name="enable_service_pattern_reason">Turning on <xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g> reduces data protection.
+    </string>
+
+    <!-- Message to the user to enter his PIN before enabling an accessibility service. [CHAR LIMIT=NONE] -->
+    <string name="enable_service_pin_reason">Turning on <xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g> reduces data protection.
+    </string>
+
+    <!-- Message to the user to enter his password before enabling an accessibility service. [CHAR LIMIT=NONE] -->
+    <string name="enable_service_password_reason">Turning on <xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g> reduces data protection.
+    </string>
+
     <!-- Title for the capability of an accessibility service to receive events and keys. -->
     <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
     <!-- Description for the capability of an accessibility service to receive events and keys. -->

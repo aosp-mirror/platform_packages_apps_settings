@@ -30,6 +30,15 @@ import android.util.Log;
 public class ConfirmDeviceCredentialActivity extends Activity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
 
+    public static Intent createIntent(CharSequence title, CharSequence details) {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                ConfirmDeviceCredentialActivity.class.getName());
+        intent.putExtra(KeyguardManager.EXTRA_TITLE, title);
+        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION, details);
+        return intent;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
