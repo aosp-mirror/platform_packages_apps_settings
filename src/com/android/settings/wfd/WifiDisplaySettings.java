@@ -39,12 +39,12 @@ import android.net.wifi.WpsInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.util.Slog;
 import android.util.TypedValue;
@@ -360,7 +360,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
         }
 
         // switch for Listen Mode
-        CheckBoxPreference cbp = new CheckBoxPreference(getActivity()) {
+        SwitchPreference pref = new SwitchPreference(getActivity()) {
             @Override
             protected void onClick() {
                 mListen = !mListen;
@@ -368,12 +368,12 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
                 setChecked(mListen);
             }
         };
-        cbp.setTitle(R.string.wifi_display_listen_mode);
-        cbp.setChecked(mListen);
-        mCertCategory.addPreference(cbp);
+        pref.setTitle(R.string.wifi_display_listen_mode);
+        pref.setChecked(mListen);
+        mCertCategory.addPreference(pref);
 
         // switch for Autonomous GO
-        cbp = new CheckBoxPreference(getActivity()) {
+        pref = new SwitchPreference(getActivity()) {
             @Override
             protected void onClick() {
                 mAutoGO = !mAutoGO;
@@ -385,9 +385,9 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
                 setChecked(mAutoGO);
             }
         };
-        cbp.setTitle(R.string.wifi_display_autonomous_go);
-        cbp.setChecked(mAutoGO);
-        mCertCategory.addPreference(cbp);
+        pref.setTitle(R.string.wifi_display_autonomous_go);
+        pref.setChecked(mAutoGO);
+        mCertCategory.addPreference(pref);
 
         // Drop down list for choosing WPS method (PBC/KEYPAD/DISPLAY)
         ListPreference lp = new ListPreference(getActivity()) {

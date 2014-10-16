@@ -31,9 +31,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,7 +38,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
@@ -929,10 +925,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             Preference p = null;
             switch (entry.getType()) {
             case RestrictionEntry.TYPE_BOOLEAN:
-                p = new CheckBoxPreference(context);
+                p = new SwitchPreference(context);
                 p.setTitle(entry.getTitle());
                 p.setSummary(entry.getDescription());
-                ((CheckBoxPreference)p).setChecked(entry.getSelectedState());
+                ((SwitchPreference)p).setChecked(entry.getSelectedState());
                 break;
             case RestrictionEntry.TYPE_CHOICE:
             case RestrictionEntry.TYPE_CHOICE_LEVEL:
