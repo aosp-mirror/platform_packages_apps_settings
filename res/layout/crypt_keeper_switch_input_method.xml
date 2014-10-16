@@ -17,17 +17,15 @@
 */
 -->
 
-<!-- Contents of the password entry field for CryptKeeper. Comes with an IME
-     switcher, if necessary. Assumed to be in a horizontal LinearLayout. -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <EditText android:id="@+id/passwordEntry"
-        android:layout_height="wrap_content"
-        android:layout_width="0dip"
-        android:layout_weight="1"
-        android:inputType="textPassword"
-        style="@style/TextAppearance.CryptKeeper_PasswordEntry" />
-
-   <include layout="@layout/crypt_keeper_switch_input_method" />
-
-</merge>
+<ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/switch_ime_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_lockscreen_ime"
+    android:clickable="true"
+    android:contentDescription="@string/crypt_keeper_switch_input_method"
+    android:padding="@dimen/crypt_keeper_edit_text_ime_padding"
+    android:layout_gravity="center"
+    android:background="?android:attr/selectableItemBackground"
+    android:visibility="gone" />
