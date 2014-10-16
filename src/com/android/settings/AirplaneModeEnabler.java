@@ -23,7 +23,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
@@ -59,12 +58,12 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         }
     };
 
-    public AirplaneModeEnabler(Context context, SwitchPreference airplaneModeCheckBoxPreference) {
+    public AirplaneModeEnabler(Context context, SwitchPreference airplaneModeSwitchPreference) {
         
         mContext = context;
-        mSwitchPref = airplaneModeCheckBoxPreference;
-        
-        airplaneModeCheckBoxPreference.setPersistent(false);
+        mSwitchPref = airplaneModeSwitchPreference;
+
+        airplaneModeSwitchPreference.setPersistent(false);
     
         mPhoneStateReceiver = new PhoneStateIntentReceiver(mContext, mHandler);
         mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);

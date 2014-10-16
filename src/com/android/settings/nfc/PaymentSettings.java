@@ -22,11 +22,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -95,7 +95,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
             emptyImage.setVisibility(View.VISIBLE);
             getListView().setVisibility(View.GONE);
         } else {
-            CheckBoxPreference foreground = new CheckBoxPreference(getActivity());
+            SwitchPreference foreground = new SwitchPreference(getActivity());
             boolean foregroundMode = mPaymentBackend.isForegroundMode();
             foreground.setPersistent(false);
             foreground.setTitle(getString(R.string.nfc_payment_favor_foreground));
@@ -231,7 +231,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference instanceof CheckBoxPreference) {
+        if (preference instanceof SwitchPreference) {
             mPaymentBackend.setForegroundMode(((Boolean) newValue).booleanValue());
             return true;
         } else {

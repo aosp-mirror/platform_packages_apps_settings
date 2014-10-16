@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import java.util.HashSet;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,8 +25,6 @@ import android.content.RestrictionsManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserManager;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 
 /**
  * Base class for settings screens that should be pin protected when in restricted mode.
