@@ -17,8 +17,10 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.ConfirmDeviceCredentialActivity;
 import com.android.settings.R;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
@@ -52,6 +55,10 @@ public class ToggleAccessibilityServicePreferenceFragment
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
     private static final int DIALOG_ID_DISABLE_WARNING = 2;
 
+    public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL = 1;
+
+    private LockPatternUtils mLockPatternUtils;
+
     private final SettingsContentObserver mSettingsContentObserver =
             new SettingsContentObserver(new Handler()) {
             @Override
@@ -66,6 +73,12 @@ public class ToggleAccessibilityServicePreferenceFragment
     private ComponentName mComponentName;
 
     private int mShownDialogId;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mLockPatternUtils = new LockPatternUtils(getActivity());
+    }
 
     @Override
     public void onResume() {
@@ -270,24 +283,61 @@ public class ToggleAccessibilityServicePreferenceFragment
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ACTIVITY_REQUEST_CONFIRM_CREDENTIAL) {
+            if (resultCode == Activity.RESULT_OK) {
+                handleConfirmServiceEnabled(true);
+            } else {
+                handleConfirmServiceEnabled(false);
+            }
+        }
+    }
+
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         final boolean checked;
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                checked = (mShownDialogId == DIALOG_ID_ENABLE_WARNING);
-                mSwitchBar.setCheckedInternal(checked);
-                getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, checked);
-                onPreferenceToggled(mPreferenceKey, checked);
+                if (mShownDialogId == DIALOG_ID_ENABLE_WARNING) {
+                    if (LockPatternUtils.isDeviceEncrypted()) {
+                        String title = createConfirmCredentialReasonMessage();
+                        Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
+                        startActivityForResult(intent, ACTIVITY_REQUEST_CONFIRM_CREDENTIAL);
+                    } else {
+                        handleConfirmServiceEnabled(true);
+                    }
+                } else {
+                    handleConfirmServiceEnabled(false);
+                }
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
                 checked = (mShownDialogId == DIALOG_ID_DISABLE_WARNING);
-                mSwitchBar.setCheckedInternal(checked);
-                getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, checked);
-                onPreferenceToggled(mPreferenceKey, checked);
+                handleConfirmServiceEnabled(checked);
                 break;
             default:
                 throw new IllegalArgumentException();
         }
+    }
+
+    private void handleConfirmServiceEnabled(boolean confirmed) {
+        mSwitchBar.setCheckedInternal(confirmed);
+        getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, confirmed);
+        onPreferenceToggled(mPreferenceKey, confirmed);
+    }
+
+    private String createConfirmCredentialReasonMessage() {
+        int resId = R.string.enable_service_password_reason;
+        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING: {
+                resId = R.string.enable_service_pattern_reason;
+            } break;
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX: {
+                resId = R.string.enable_service_pin_reason;
+            } break;
+        }
+        return getString(resId, getAccessibilityServiceInfo().getResolveInfo()
+                .loadLabel(getPackageManager()));
     }
 
     @Override
