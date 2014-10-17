@@ -194,6 +194,7 @@ public class WifiApEnabler {
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
                 mSwitch.setSummary(R.string.wifi_tether_stopping);
+                mSwitch.setChecked(false);
                 mSwitch.setEnabled(false);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLED:
