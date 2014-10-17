@@ -25,6 +25,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
@@ -62,6 +63,19 @@ public class ChooseLockPassword extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPasswordFragment.class.getName());
         return modIntent;
+    }
+
+    public static Intent createIntent(Context context, int quality, final boolean isFallback,
+            int minLength, final int maxLength, boolean requirePasswordToDecrypt,
+            boolean confirmCredentials) {
+        Intent intent = new Intent().setClass(context, ChooseLockPassword.class);
+        intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, quality);
+        intent.putExtra(PASSWORD_MIN_KEY, minLength);
+        intent.putExtra(PASSWORD_MAX_KEY, maxLength);
+        intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
+        intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, isFallback);
+        intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePasswordToDecrypt);
+        return intent;
     }
 
     @Override
@@ -412,6 +426,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     final boolean isFallback = getActivity().getIntent().getBooleanExtra(
                             LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
                     mLockPatternUtils.clearLock(isFallback);
+                    final boolean required = getActivity().getIntent().getBooleanExtra(
+                            EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+                    mLockPatternUtils.setCredentialRequiredToDecrypt(required);
                     mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
                     getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
