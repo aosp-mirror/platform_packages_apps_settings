@@ -28,6 +28,7 @@ import static com.android.internal.widget.LockPatternView.DisplayMode;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -66,6 +67,16 @@ public class ChooseLockPattern extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPatternFragment.class.getName());
         return modIntent;
+    }
+
+    public static Intent createIntent(Context context, final boolean isFallback,
+            boolean requirePassword, boolean confirmCredentials) {
+        Intent intent = new Intent(context, ChooseLockPattern.class);
+        intent.putExtra("key_lock_method", "pattern");
+        intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
+        intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, isFallback);
+        intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePassword);
+        return intent;
     }
 
     @Override
@@ -528,6 +539,10 @@ public class ChooseLockPattern extends SettingsActivity {
 
             final boolean isFallback = getActivity().getIntent()
                 .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
+
+            final boolean required = getActivity().getIntent().getBooleanExtra(
+                    EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+            utils.setCredentialRequiredToDecrypt(required);
             utils.saveLockPattern(mChosenPattern, isFallback);
             utils.setLockPatternEnabled(true);
 
