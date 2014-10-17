@@ -331,6 +331,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         private void updatePreferenceSummaryIfNeeded() {
+            if (LockPatternUtils.isDeviceEncrypted()) {
+                return;
+            }
+
             if (AccessibilityManager.getInstance(getActivity()).getEnabledAccessibilityServiceList(
                     AccessibilityServiceInfo.FEEDBACK_ALL_MASK).isEmpty()) {
                 return;
