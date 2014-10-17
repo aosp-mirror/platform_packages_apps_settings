@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<!-- Layout used by SyncStateCheckBoxPreference. This is inflated
+<!-- Layout used by SyncStateSwitchPreference. This is inflated
      inside android.R.layout.preference. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
@@ -38,8 +38,8 @@
         android:layout_marginEnd="8dip"
         android:contentDescription="@string/sync_active" />
 
-    <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@android:id/checkbox"
+    <Switch xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@*android:id/switchWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
