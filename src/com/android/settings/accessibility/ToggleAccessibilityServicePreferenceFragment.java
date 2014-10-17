@@ -55,7 +55,7 @@ public class ToggleAccessibilityServicePreferenceFragment
     private static final int DIALOG_ID_ENABLE_WARNING = 1;
     private static final int DIALOG_ID_DISABLE_WARNING = 2;
 
-    public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL = 1;
+    public static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
 
     private LockPatternUtils mLockPatternUtils;
 
@@ -290,9 +290,17 @@ public class ToggleAccessibilityServicePreferenceFragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ACTIVITY_REQUEST_CONFIRM_CREDENTIAL) {
+        if (requestCode == ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION) {
             if (resultCode == Activity.RESULT_OK) {
                 handleConfirmServiceEnabled(true);
+                // The user confirmed that they accept weaker encryption when
+                // enabling the accessibility service, so change encryption.
+                // Since we came here asynchronously, check encryption again.
+                if (LockPatternUtils.isDeviceEncrypted()) {
+                    mLockPatternUtils.clearEncryptionPassword();
+                    Settings.Global.putInt(getContentResolver(),
+                            Settings.Global.REQUIRE_PASSWORD_TO_DECRYPT, 0);
+                }
             } else {
                 handleConfirmServiceEnabled(false);
             }
@@ -308,7 +316,8 @@ public class ToggleAccessibilityServicePreferenceFragment
                     if (LockPatternUtils.isDeviceEncrypted()) {
                         String title = createConfirmCredentialReasonMessage();
                         Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, null);
-                        startActivityForResult(intent, ACTIVITY_REQUEST_CONFIRM_CREDENTIAL);
+                        startActivityForResult(intent,
+                                ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
                     } else {
                         handleConfirmServiceEnabled(true);
                     }
