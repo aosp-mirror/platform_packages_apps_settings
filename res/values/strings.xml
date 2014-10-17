@@ -5941,11 +5941,20 @@
     <string name="encryption_continue_button">Continue</string>
 
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin">Because your device is encrypted, you can further protect it by requiring that you enter your PIN before your device starts up.</string>
+    <string name="encryption_interstitial_message_pin">
+   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\'t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices.
+   </string>
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern">Because your device is encrypted, you can further protect it by requiring that you enter your pattern before your device starts up.</string>
+    <string name="encryption_interstitial_message_pattern">
+   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\'t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices.
+   </string>
     <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password">Because your device is encrypted, you can further protect it by requiring that you enter your password before your device starts up.</string>
+    <string name="encryption_interstitial_message_password">
+   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\'t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices.
+   </string>
 
     <!-- Radio button text that require a PIN to start device [CHAR LIMIT=NONE] -->
     <string name="encrypt_require_pin">Require PIN to start device</string>
@@ -5960,5 +5969,23 @@
     <string name="encrypt_dont_require_pattern">No thanks</string>
     <!-- Radio button text that doesn't require a password to decrypt [CHAR LIMIT=NONE] -->
     <string name="encrypt_dont_require_password">No thanks</string>
+
+   <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
+   <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
+
+   <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
+   <string name="encrypt_talkback_dialog_require_pattern">Require pattern?</string>
+
+   <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
+   <string name="encrypt_talkback_dialog_require_password">Require password?</string>
+
+   <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
+   <string name="encrypt_talkback_dialog_message_pin">When entering your PIN to start your device, accessibility services like TalkBack won\'t yet be available.</string>
+
+   <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
+   <string name="encrypt_talkback_dialog_message_pattern">When entering your pattern to start your device, accessibility services like TalkBack won\'t yet be available.</string>
+
+   <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
+   <string name="encrypt_talkback_dialog_message_password">When entering your password to start your device, accessibility services like TalkBack won\'t yet be available.</string>
 
 </resources>
