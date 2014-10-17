@@ -19,7 +19,7 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +28,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.widget.AnimatedImageView;
 
-public class SyncStateCheckBoxPreference extends CheckBoxPreference {
+public class SyncStateSwitchPreference extends SwitchPreference {
 
     private boolean mIsActive = false;
     private boolean mIsPending = false;
@@ -42,14 +42,14 @@ public class SyncStateCheckBoxPreference extends CheckBoxPreference {
      */
     private boolean mOneTimeSyncMode = false;
 
-    public SyncStateCheckBoxPreference(Context context, AttributeSet attrs) {
+    public SyncStateSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWidgetLayoutResource(R.layout.preference_widget_sync_toggle);
         mAccount = null;
         mAuthority = null;
     }
 
-    public SyncStateCheckBoxPreference(Context context, Account account, String authority) {
+    public SyncStateSwitchPreference(Context context, Account account, String authority) {
         super(context, null);
         mAccount = account;
         mAuthority = authority;
@@ -70,9 +70,9 @@ public class SyncStateCheckBoxPreference extends CheckBoxPreference {
         final boolean failedVisible = mFailed && !activeVisible;
         syncFailedView.setVisibility(failedVisible ? View.VISIBLE : View.GONE);
 
-        View checkBox = view.findViewById(android.R.id.checkbox);
+        View switchView = view.findViewById(com.android.internal.R.id.switchWidget);
         if (mOneTimeSyncMode) {
-            checkBox.setVisibility(View.GONE);
+            switchView.setVisibility(View.GONE);
 
             /*
              * Override the summary. Fill in the %1$s with the existing summary
@@ -82,7 +82,7 @@ public class SyncStateCheckBoxPreference extends CheckBoxPreference {
             TextView summary = (TextView) view.findViewById(android.R.id.summary);
             summary.setText(getContext().getString(R.string.sync_one_time_sync, getSummary()));
         } else {
-            checkBox.setVisibility(View.VISIBLE);
+            switchView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -131,7 +131,7 @@ public class SyncStateCheckBoxPreference extends CheckBoxPreference {
     @Override
     protected void onClick() {
         // When we're in one-time sync mode, we don't want a click to change the
-        // checkbox state
+        // Switch state
         if (!mOneTimeSyncMode) {
             if (ActivityManager.isUserAMonkey()) {
                 Log.d("SyncState", "ignoring monkey's attempt to flip sync state");

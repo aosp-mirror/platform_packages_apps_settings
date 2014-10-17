@@ -74,8 +74,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private ImageView mProviderIcon;
     private TextView mErrorInfoView;
     private Account mAccount;
-    private ArrayList<SyncStateCheckBoxPreference> mCheckBoxes =
-                new ArrayList<SyncStateCheckBoxPreference>();
+    private ArrayList<SyncStateSwitchPreference> mSwitches =
+                new ArrayList<SyncStateSwitchPreference>();
     private ArrayList<SyncAdapterType> mInvisibleAdapters = Lists.newArrayList();
 
     @Override
@@ -209,9 +209,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         mAuthenticatorHelper.stopListeningToAccountUpdates();
     }
 
-    private void addSyncStateCheckBox(Account account, String authority) {
-        SyncStateCheckBoxPreference item =
-                new SyncStateCheckBoxPreference(getActivity(), account, authority);
+    private void addSyncStateSwitch(Account account, String authority) {
+        SyncStateSwitchPreference item =
+                new SyncStateSwitchPreference(getActivity(), account, authority);
         item.setPersistent(false);
         final ProviderInfo providerInfo = getPackageManager().resolveContentProviderAsUser(
                 authority, 0, mUserHandle.getIdentifier());
@@ -226,7 +226,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         String title = getString(R.string.sync_item_title, providerLabel);
         item.setTitle(title);
         item.setKey(authority);
-        mCheckBoxes.add(item);
+        mSwitches.add(item);
     }
 
     @Override
@@ -282,8 +282,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
-        if (preference instanceof SyncStateCheckBoxPreference) {
-            SyncStateCheckBoxPreference syncPref = (SyncStateCheckBoxPreference) preference;
+        if (preference instanceof SyncStateSwitchPreference) {
+            SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) preference;
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
             final int userId = mUserHandle.getIdentifier();
@@ -326,10 +326,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         int count = getPreferenceScreen().getPreferenceCount();
         for (int i = 0; i < count; i++) {
             Preference pref = getPreferenceScreen().getPreference(i);
-            if (! (pref instanceof SyncStateCheckBoxPreference)) {
+            if (! (pref instanceof SyncStateSwitchPreference)) {
                 continue;
             }
-            SyncStateCheckBoxPreference syncPref = (SyncStateCheckBoxPreference) pref;
+            SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) pref;
             if (!syncPref.isChecked()) {
                 continue;
             }
@@ -376,15 +376,15 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncsAsUser(userId);
         boolean syncIsFailing = false;
 
-        // Refresh the sync status checkboxes - some syncs may have become active.
-        updateAccountCheckboxes();
+        // Refresh the sync status switches - some syncs may have become active.
+        updateAccountSwitches();
 
         for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
             Preference pref = getPreferenceScreen().getPreference(i);
-            if (! (pref instanceof SyncStateCheckBoxPreference)) {
+            if (! (pref instanceof SyncStateSwitchPreference)) {
                 continue;
             }
-            SyncStateCheckBoxPreference syncPref = (SyncStateCheckBoxPreference) pref;
+            SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) pref;
 
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
@@ -450,7 +450,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             finish();
             return;
         }
-        updateAccountCheckboxes();
+        updateAccountSwitches();
         onSyncStateUpdated();
     }
 
@@ -468,7 +468,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         return false;
     }
 
-    private void updateAccountCheckboxes() {
+    private void updateAccountSwitches() {
         mInvisibleAdapters.clear();
 
         SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(
@@ -480,7 +480,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             if (!sa.accountType.equals(mAccount.type)) continue;
             if (sa.isUserVisible()) {
                 if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "updateAccountCheckboxes: added authority " + sa.authority
+                    Log.d(TAG, "updateAccountSwitches: added authority " + sa.authority
                             + " to accountType " + sa.accountType);
                 }
                 authorities.add(sa.authority);
@@ -491,10 +491,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             }
         }
 
-        for (int i = 0, n = mCheckBoxes.size(); i < n; i++) {
-            getPreferenceScreen().removePreference(mCheckBoxes.get(i));
+        for (int i = 0, n = mSwitches.size(); i < n; i++) {
+            getPreferenceScreen().removePreference(mSwitches.get(i));
         }
-        mCheckBoxes.clear();
+        mSwitches.clear();
 
         if (Log.isLoggable(TAG, Log.VERBOSE)) {
             Log.d(TAG, "looking for sync adapters that match account " + mAccount);
@@ -508,13 +508,13 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 Log.d(TAG, "  found authority " + authority + " " + syncState);
             }
             if (syncState > 0) {
-                addSyncStateCheckBox(mAccount, authority);
+                addSyncStateSwitch(mAccount, authority);
             }
         }
 
-        Collections.sort(mCheckBoxes);
-        for (int i = 0, n = mCheckBoxes.size(); i < n; i++) {
-            getPreferenceScreen().addPreference(mCheckBoxes.get(i));
+        Collections.sort(mSwitches);
+        for (int i = 0, n = mSwitches.size(); i < n; i++) {
+            getPreferenceScreen().addPreference(mSwitches.get(i));
         }
     }
 
