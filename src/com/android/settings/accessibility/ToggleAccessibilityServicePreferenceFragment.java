@@ -194,9 +194,10 @@ public class ToggleAccessibilityServicePreferenceFragment
     }
 
     private void updateSwitchBarToggleSwitch() {
-        String settingValue = Settings.Secure.getString(getContentResolver(),
+        final String settingValue = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-        final boolean checked = settingValue.contains(mComponentName.flattenToString());
+        final boolean checked = settingValue != null
+                && settingValue.contains(mComponentName.flattenToString());
         mSwitchBar.setCheckedInternal(checked);
     }
 
