@@ -43,12 +43,12 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -90,17 +90,17 @@ public class TrustedCredentialsSettings extends Fragment {
         private final int mProgress;
         private final int mList;
         private final int mExpandableList;
-        private final boolean mCheckbox;
+        private final boolean mSwitch;
 
         private Tab(String tag, int label, int view, int progress, int list, int expandableList,
-                boolean checkbox) {
+                boolean withSwitch) {
             mTag = tag;
             mLabel = label;
             mView = view;
             mProgress = progress;
             mList = list;
             mExpandableList = expandableList;
-            mCheckbox = checkbox;
+            mSwitch = withSwitch;
         }
 
         private List<ParcelableString> getAliases(IKeyChainService service) throws RemoteException {
@@ -148,7 +148,7 @@ public class TrustedCredentialsSettings extends Fragment {
         }
         private void postOperationUpdate(boolean ok, CertHolder certHolder) {
             if (ok) {
-                if (certHolder.mTab.mCheckbox) {
+                if (certHolder.mTab.mSwitch) {
                     certHolder.mDeleted = !certHolder.mDeleted;
                 } else {
                     certHolder.mAdapter.remove(certHolder);
@@ -586,7 +586,7 @@ public class TrustedCredentialsSettings extends Fragment {
                     convertView.findViewById(R.id.trusted_credential_subject_primary);
             holder.mSubjectSecondaryView = (TextView)
                     convertView.findViewById(R.id.trusted_credential_subject_secondary);
-            holder.mCheckBox = (CheckBox) convertView.findViewById(
+            holder.mSwitch = (Switch) convertView.findViewById(
                     R.id.trusted_credential_status);
             convertView.setTag(holder);
         } else {
@@ -594,9 +594,9 @@ public class TrustedCredentialsSettings extends Fragment {
         }
         holder.mSubjectPrimaryView.setText(certHolder.mSubjectPrimary);
         holder.mSubjectSecondaryView.setText(certHolder.mSubjectSecondary);
-        if (mTab.mCheckbox) {
-            holder.mCheckBox.setChecked(!certHolder.mDeleted);
-            holder.mCheckBox.setVisibility(View.VISIBLE);
+        if (mTab.mSwitch) {
+            holder.mSwitch.setChecked(!certHolder.mDeleted);
+            holder.mSwitch.setVisibility(View.VISIBLE);
         }
         return convertView;
     }
@@ -604,7 +604,7 @@ public class TrustedCredentialsSettings extends Fragment {
     private static class ViewHolder {
         private TextView mSubjectPrimaryView;
         private TextView mSubjectSecondaryView;
-        private CheckBox mCheckBox;
+        private Switch mSwitch;
     }
 
     private void showCertDialog(final CertHolder certHolder) {
