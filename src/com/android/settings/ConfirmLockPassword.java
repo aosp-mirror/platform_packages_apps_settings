@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.text.TextUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
@@ -43,6 +44,9 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 public class ConfirmLockPassword extends SettingsActivity {
+
+    public static final String PACKAGE = "com.android.settings";
+    public static final String HEADER_TEXT = PACKAGE + ".ConfirmLockPattern.header";
 
     public static class InternalActivity extends ConfirmLockPassword {
     }
@@ -122,7 +126,15 @@ public class ConfirmLockPassword extends SettingsActivity {
             mIsAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality;
-            mHeaderText.setText(getDefaultHeader());
+
+            Intent intent = getActivity().getIntent();
+            if (intent != null) {
+                CharSequence headerMessage = intent.getCharSequenceExtra(HEADER_TEXT);
+                if (TextUtils.isEmpty(headerMessage)) {
+                    headerMessage = getString(getDefaultHeader());
+                }
+                mHeaderText.setText(headerMessage);
+            }
 
             final Activity activity = getActivity();
             mKeyboardHelper = new PasswordEntryKeyboardHelper(activity,
