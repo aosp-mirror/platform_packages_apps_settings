@@ -16,17 +16,23 @@
 
 package com.android.settings;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -60,8 +66,9 @@ public class EncryptionInterstitial extends SettingsActivity {
     }
 
     public static class EncryptionInterstitialFragment extends SettingsPreferenceFragment
-            implements View.OnClickListener {
+            implements View.OnClickListener, OnClickListener {
 
+        private static final int ACCESSIBILITY_WARNING_DIALOG = 1;
         private RadioButton mRequirePasswordToDecryptButton;
         private RadioButton mDontRequirePasswordToDecryptButton;
         private TextView mEncryptionMessage;
@@ -100,36 +107,89 @@ public class EncryptionInterstitial extends SettingsActivity {
                     disableId = R.string.encrypt_dont_require_password;
                     break;
             }
-            mPasswordRequired = getActivity().getIntent().getBooleanExtra(
-                    EXTRA_REQUIRE_PASSWORD, true);
-
             mEncryptionMessage.setText(msgId);
 
             mRequirePasswordToDecryptButton.setOnClickListener(this);
             mRequirePasswordToDecryptButton.setText(enableId);
-            mRequirePasswordToDecryptButton.setChecked(mPasswordRequired);
 
             mDontRequirePasswordToDecryptButton.setOnClickListener(this);
             mDontRequirePasswordToDecryptButton.setText(disableId);
-            mDontRequirePasswordToDecryptButton.setChecked(!mPasswordRequired);
 
-            updateRequirePasswordIntent();
+            setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
+                    EXTRA_REQUIRE_PASSWORD, true));
             return view;
         }
 
         @Override
         public void onClick(View v) {
-            mPasswordRequired = (v == mRequirePasswordToDecryptButton);
-            updateRequirePasswordIntent();
+            if (v == mRequirePasswordToDecryptButton) {
+                final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
+                if (accEn && !mPasswordRequired) {
+                    setRequirePasswordState(false); // clear the UI state
+                    showDialog(ACCESSIBILITY_WARNING_DIALOG);
+                } else {
+                    setRequirePasswordState(true);
+                }
+            } else {
+                setRequirePasswordState(false);
+            }
         }
 
-        // Updates the value we want to return.
-        private void updateRequirePasswordIntent() {
+        @Override
+        public Dialog onCreateDialog(int dialogId) {
+            switch(dialogId) {
+                case ACCESSIBILITY_WARNING_DIALOG: {
+                    final int quality = new LockPatternUtils(getActivity())
+                            .getKeyguardStoredPasswordQuality();
+                    final int titleId;
+                    final int messageId;
+                    switch (quality) {
+                        case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                            titleId = R.string.encrypt_talkback_dialog_require_pattern;
+                            messageId = R.string.encrypt_talkback_dialog_message_pattern;
+                            break;
+                        case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                        case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                            titleId = R.string.encrypt_talkback_dialog_require_pin;
+                            messageId = R.string.encrypt_talkback_dialog_message_pin;
+                            break;
+                        default:
+                            titleId = R.string.encrypt_talkback_dialog_require_password;
+                            messageId = R.string.encrypt_talkback_dialog_message_password;
+                            break;
+                    }
+                    return new AlertDialog.Builder(getActivity())
+                        .setTitle(titleId)
+                        .setMessage(messageId)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, this)
+                        .setNegativeButton(android.R.string.cancel, this)
+                        .create();
+                }
+                default: throw new IllegalArgumentException();
+            }
+        }
+
+        private void setRequirePasswordState(boolean required) {
+            mPasswordRequired = required;
+            mRequirePasswordToDecryptButton.setChecked(required);
+            mDontRequirePasswordToDecryptButton.setChecked(!required);
+
+            // Updates value returned by SettingsActivity.onActivityResult().
             SettingsActivity sa = (SettingsActivity)getActivity();
             Intent resultIntentData = sa.getResultIntentData();
             resultIntentData = resultIntentData == null ? new Intent() : resultIntentData;
             resultIntentData.putExtra(EXTRA_REQUIRE_PASSWORD, mPasswordRequired);
             sa.setResultIntentData(resultIntentData);
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                setRequirePasswordState(true);
+            } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                setRequirePasswordState(false);
+            }
         }
     }
 }
