@@ -368,6 +368,8 @@ public class SettingsActivity extends Activity
     private boolean mNeedToRevertToInitialFragment = false;
     private int mHomeActivitiesCount = 1;
 
+    private Intent mResultIntentData;
+
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
     }
@@ -597,21 +599,21 @@ public class SettingsActivity extends Activity
                 Button backButton = (Button)findViewById(R.id.back_button);
                 backButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
-                        setResult(RESULT_CANCELED);
+                        setResult(RESULT_CANCELED, getResultIntentData());
                         finish();
                     }
                 });
                 Button skipButton = (Button)findViewById(R.id.skip_button);
                 skipButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
-                        setResult(RESULT_OK);
+                        setResult(RESULT_OK, getResultIntentData());
                         finish();
                     }
                 });
                 mNextButton = (Button)findViewById(R.id.next_button);
                 mNextButton.setOnClickListener(new OnClickListener() {
                     public void onClick(View v) {
-                        setResult(RESULT_OK);
+                        setResult(RESULT_OK, getResultIntentData());
                         finish();
                     }
                 });
@@ -1344,5 +1346,13 @@ public class SettingsActivity extends Activity
         if (mSearchMenuItem != null) {
             mSearchMenuItem.collapseActionView();
         }
+    }
+
+    public Intent getResultIntentData() {
+        return mResultIntentData;
+    }
+
+    public void setResultIntentData(Intent resultIntentData) {
+        mResultIntentData = resultIntentData;
     }
 }

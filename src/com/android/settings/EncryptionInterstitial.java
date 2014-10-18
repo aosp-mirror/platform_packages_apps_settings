@@ -24,8 +24,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +33,7 @@ import android.widget.TextView;
 public class EncryptionInterstitial extends SettingsActivity {
 
     private static final String EXTRA_PASSWORD_QUALITY = "extra_password_quality";
+    public static final String EXTRA_REQUIRE_PASSWORD = "extra_require_password";
 
     @Override
     public Intent getIntent() {
@@ -48,14 +47,16 @@ public class EncryptionInterstitial extends SettingsActivity {
         return EncryptionInterstitialFragment.class.getName().equals(fragmentName);
     }
 
-    public static Intent createStartIntent(Context ctx, int quality) {
+    public static Intent createStartIntent(Context ctx, int quality,
+            boolean requirePasswordDefault) {
         return new Intent(ctx, EncryptionInterstitial.class)
                 .putExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, true)
                 .putExtra(EXTRA_PREFS_SET_BACK_TEXT, (String) null)
                 .putExtra(EXTRA_PREFS_SET_NEXT_TEXT, ctx.getString(
                         R.string.encryption_continue_button))
                 .putExtra(EXTRA_PASSWORD_QUALITY, quality)
-                .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.encryption_interstitial_header);
+                .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.encryption_interstitial_header)
+                .putExtra(EXTRA_REQUIRE_PASSWORD, requirePasswordDefault);
     }
 
     public static class EncryptionInterstitialFragment extends SettingsPreferenceFragment
@@ -64,6 +65,7 @@ public class EncryptionInterstitial extends SettingsActivity {
         private RadioButton mRequirePasswordToDecryptButton;
         private RadioButton mDontRequirePasswordToDecryptButton;
         private TextView mEncryptionMessage;
+        private boolean mPasswordRequired;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,32 +100,36 @@ public class EncryptionInterstitial extends SettingsActivity {
                     disableId = R.string.encrypt_dont_require_password;
                     break;
             }
+            mPasswordRequired = getActivity().getIntent().getBooleanExtra(
+                    EXTRA_REQUIRE_PASSWORD, true);
+
             mEncryptionMessage.setText(msgId);
+
             mRequirePasswordToDecryptButton.setOnClickListener(this);
             mRequirePasswordToDecryptButton.setText(enableId);
+            mRequirePasswordToDecryptButton.setChecked(mPasswordRequired);
+
             mDontRequirePasswordToDecryptButton.setOnClickListener(this);
             mDontRequirePasswordToDecryptButton.setText(disableId);
+            mDontRequirePasswordToDecryptButton.setChecked(!mPasswordRequired);
+
+            updateRequirePasswordIntent();
             return view;
         }
 
         @Override
-        public void onResume() {
-            super.onResume();
-            loadFromSettings();
-        }
-
-        private void loadFromSettings() {
-            final boolean required = Settings.Global.getInt(getContentResolver(),
-                    Settings.Global.REQUIRE_PASSWORD_TO_DECRYPT, 1) == 1 ? true : false;
-            mRequirePasswordToDecryptButton.setChecked(required);
-            mDontRequirePasswordToDecryptButton.setChecked(!required);
-        }
-
-        @Override
         public void onClick(View v) {
-            final boolean required = (v == mRequirePasswordToDecryptButton);
-            Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.REQUIRE_PASSWORD_TO_DECRYPT, required ? 1 : 0);
+            mPasswordRequired = (v == mRequirePasswordToDecryptButton);
+            updateRequirePasswordIntent();
+        }
+
+        // Updates the value we want to return.
+        private void updateRequirePasswordIntent() {
+            SettingsActivity sa = (SettingsActivity)getActivity();
+            Intent resultIntentData = sa.getResultIntentData();
+            resultIntentData = resultIntentData == null ? new Intent() : resultIntentData;
+            resultIntentData.putExtra(EXTRA_REQUIRE_PASSWORD, mPasswordRequired);
+            sa.setResultIntentData(resultIntentData);
         }
     }
 }
