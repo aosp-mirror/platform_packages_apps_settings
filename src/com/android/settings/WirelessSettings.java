@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.Bundle;
@@ -118,8 +120,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
     }
 
     private String mManageMobilePlanMessage;
-    private static final String CONNECTED_TO_PROVISIONING_NETWORK_ACTION
-            = "com.android.server.connectivityservice.CONNECTED_TO_PROVISIONING_NETWORK_ACTION";
     public void onManageMobilePlanClick() {
         log("onManageMobilePlanClick:");
         mManageMobilePlanMessage = null;
@@ -143,11 +143,16 @@ public class WirelessSettings extends SettingsPreferenceFragment
             // Get provisioning URL
             String url = mCm.getMobileProvisioningUrl();
             if (!TextUtils.isEmpty(url)) {
-                Intent intent = new Intent(CONNECTED_TO_PROVISIONING_NETWORK_ACTION);
-                intent.putExtra("EXTRA_URL", url);
-                Context context = getActivity().getBaseContext();
-                context.sendBroadcast(intent);
-                mManageMobilePlanMessage = null;
+                Intent intent = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,
+                        Intent.CATEGORY_APP_BROWSER);
+                intent.setData(Uri.parse(url));
+                intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Log.w(TAG, "onManageMobilePlanClick: startActivity failed" + e);
+                }
             } else {
                 // No provisioning URL
                 String operatorName = mTm.getSimOperatorName();
