@@ -21,6 +21,9 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.util.List;
+
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -158,9 +161,23 @@ public class EncryptionInterstitial extends SettingsActivity {
                             messageId = R.string.encrypt_talkback_dialog_message_password;
                             break;
                     }
+
+
+                    List<AccessibilityServiceInfo> list =
+                            AccessibilityManager.getInstance(getActivity())
+                            .getEnabledAccessibilityServiceList(
+                                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+                    final CharSequence exampleAccessibility;
+                    if (list.isEmpty()) {
+                        // This should never happen.  But we shouldn't crash
+                        exampleAccessibility = "";
+                    } else {
+                        exampleAccessibility = list.get(0).getResolveInfo()
+                                .loadLabel(getPackageManager());
+                    }
                     return new AlertDialog.Builder(getActivity())
                         .setTitle(titleId)
-                        .setMessage(messageId)
+                        .setMessage(getString(messageId, exampleAccessibility))
                         .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, this)
