@@ -142,7 +142,7 @@
     <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"Prijungta (be telefono ar laikmenos)"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Atsijungęs (-usi)"</string>
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Atjungiama..."</string>
-    <string name="bluetooth_connecting" msgid="8555009514614320497">"Jungiama…"</string>
+    <string name="bluetooth_connecting" msgid="8555009514614320497">"Prisijungiama..."</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Susiejama..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"„Bluetooth“ įrenginys be pavadinimo"</string>
@@ -592,7 +592,7 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"„Wi-Fi“ nustatymai"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Nustatyti ir valdyti bevielius prieigos taškus"</string>
-    <string name="wifi_setup_wizard_title" msgid="8242230950011819054">"Rinktis „Wi-Fi“"</string>
+    <string name="wifi_setup_wizard_title" msgid="8242230950011819054">"Pasirinkite „Wi-Fi“"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Pasirinkti „Wi-Fi“"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"„Wi-Fi“ įjungiama…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"„Wi-Fi“ išjungiama…"</string>
@@ -801,7 +801,7 @@
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Nepaleisti garso įdedant planšetinį kompiuterį į doką ar jį pašalinant"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Nepaleisti garso įterpiant ar pašalinant telefoną iš dėklo"</string>
     <string name="account_settings" msgid="6403589284618783461">"Paskyros"</string>
-    <string name="category_personal" msgid="1299663247844969448">"Asmeniniai"</string>
+    <string name="category_personal" msgid="1299663247844969448">"Asmeninės"</string>
     <string name="category_work" msgid="8699184680584175622">"Darbo"</string>
     <string name="search_settings" msgid="1910951467596035063">"Ieškoti"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Valdyti paieškos nustatymus ir istoriją"</string>
@@ -1553,6 +1553,12 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"„<xliff:g id="SERVICE">%1$s</xliff:g>“ reikia:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jei įjungsite „<xliff:g id="SERVICE">%1$s</xliff:g>“, įrenginyje nebus naudojamas ekrano užraktas siekiant patobulinti duomenų šifruotę."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Kadangi įjungėte pritaikymo neįgaliesiems paslaugą, įrenginyje nebus naudojamas ekrano užraktas siekiant patobulinti duomenų šifruotę."</string>
+    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
+    <skip />
+    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
+    <skip />
+    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Stebėti jūsų veiksmus"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Gauti pranešimus, kai sąveikaujate su programa."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Sustabdyti „<xliff:g id="SERVICE">%1$s</xliff:g>“?"</string>
@@ -2462,4 +2468,30 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Išlaikyti stačiąjį rodinį"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Išlaikyti gulsčiąjį rodinį"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Išlaikyti esamą orientaciją"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Šifruotė"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"Tęsti"</string>
+    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
+    <skip />
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"Paleidžiant įrenginį reikalauti PIN kodo"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Paleidžiant įrenginį reikalauti atrakinimo piešinio"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"Paleidžiant įrenginį reikalauti slaptažodžio"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Ne, ačiū"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Ne, ačiū"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Ne, ačiū"</string>
+    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
+    <skip />
 </resources>

@@ -1555,6 +1555,12 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにすると、端末データの暗号化の強化に画面ロックは使用されなくなります。"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"ユーザー補助サービスがONに設定されているため、端末データの暗号化の強化に画面ロックは使用されません。"</string>
+    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
+    <skip />
+    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
+    <skip />
+    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"操作の監視"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"ユーザーがアプリでアクセスしているときに通知を受け取ります。"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>を停止しますか？"</string>
@@ -2460,8 +2466,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"ON"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"OFF"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"画面の固定"</string>
-    <!-- no translation found for screen_pinning_description (7091642350452605379) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7091642350452605379">"この設定をONにして画面の固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面の固定を使用するには:\n\n1. 画面の固定がONになっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [概要]をタップします。\n\n4. 固定アイコンをタップします。"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"ワークプロフィール"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"（試験運用）"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"端末が回転したとき"</string>
@@ -2469,4 +2474,30 @@
     <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"縦向きのままにする"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"横向きのままにする"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"現在の向きを維持する"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"暗号化"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"次へ"</string>
+    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
+    <skip />
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"端末を起動するにはPINが必須とする"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"端末を起動するにはパターンが必須とする"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"端末を起動するにはパスワードが必須とする"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"必須としない"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"必須としない"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"必須としない"</string>
+    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
+    <skip />
 </resources>
