@@ -1553,6 +1553,12 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要執行下列動作："</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您開啟 <xliff:g id="SERVICE">%1$s</xliff:g>，您的裝置將無法使用螢幕鎖定加強資料加密。"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"您已開啟協助工具服務，因此您的裝置無法使用螢幕鎖定加強資料加密。"</string>
+    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
+    <skip />
+    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
+    <skip />
+    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"記錄您的操作行為"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"在您與應用程式互動時接收通知。"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"停止「<xliff:g id="SERVICE">%1$s</xliff:g>」？"</string>
@@ -2457,8 +2463,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"開啟"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
-    <!-- no translation found for screen_pinning_description (7091642350452605379) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7091642350452605379">"開啟時，您可以使用螢幕固定功能讓目前的畫面持續顯示，直到取消固定為止。\n\n如何使用螢幕固定功能：\n\n1. 確認螢幕固定功能已開啟。\n\n2. 開啟您要固定的畫面。\n\n3. 輕觸總覽按鈕。\n\n4. 輕觸圖釘圖示。"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"工作設定檔"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(實驗性)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"當裝置旋轉時"</string>
@@ -2468,4 +2473,27 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"保持目前方向"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資訊"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 相關資訊"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"加密"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"繼續"</string>
+    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
+    <skip />
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"需要輸入 PIN 才能啟動裝置"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"需要畫出解鎖圖形才能啟動裝置"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"需要輸入密碼才能啟動裝置"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"不用了，謝謝"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"不用了，謝謝"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"不用了，謝謝"</string>
+    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
+    <skip />
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"輸入您的 PIN 以啟動裝置後，您將無法直接使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等協助工具服務。"</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"畫出解鎖圖形以啟動裝置後，您將無法直接使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等協助工具服務。"</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"輸入您的密碼以啟動裝置後，您將無法直接使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等協助工具服務。"</string>
 </resources>

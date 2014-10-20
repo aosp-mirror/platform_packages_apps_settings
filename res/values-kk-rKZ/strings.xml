@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Жұптау өтініші"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жұптасу үшін оны түртіңіз."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Алынған файлдарды көрсету"</string>
-    <string name="device_picker" msgid="8398232791303186677">"Bluetooth құрылғысын таңдағыш"</string>
+    <string name="device_picker" msgid="4978696506172252813">"Bluetooth құрылғысын таңдау"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth рұқсат өтініші"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Қолданба Bluetooth қызметін қосуды қалайды."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Қолданба планшетіңіздің басқа Bluetooth құрылғыларына <xliff:g id="TIMEOUT">%1$d</xliff:g> секунд аралығында көрсетілуін қалайды."</string>
@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Байланыстарды басқарып, құрылғы атауы мен табылу мүмкіндігін тағайындаңыз"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth жұпталу өтініші"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"Жұптау үшін:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Құрылғы үшін қажетті PIN кодты теріңіз:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"Жұптау үшін:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Құрылғы үшін қажетті кілтпернені теріңіз:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"Құрылғы"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"Жұптау коды"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"Жұптау кодын теріңіз, содан кейін «Оралу» немесе «Енгізу» түймесін басыңыз"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN құрамында әріптер немесе таңбалар болады"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"Әдетте 0000 немесе 1234"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"Бұл PIN кодты басқа құрылғыда да теру қажет болуы мүмкін."</string>
@@ -482,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Жұптау"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ЖҰПТАУ"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Бас тарту"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"Жұптау қосылған кезде контактілеріңізге және қоңыраулар тарихына қатынас береді."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> жұпталу орындалмады."</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> құрылғысымен жұптала алмады, себебі PIN немесе кілтсөз дұрыс емес."</string>
@@ -559,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"РЕТТЕУ"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"Wi‑Fi Assistant бар қол жетімді желілерге автоматты түрде қосылу."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google Wi‑Fi Assistant ең жақсы қол жетімді Wi‑Fi желісіне автоматты түрде қосылады"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google Wi‑Fi Assistant сізге қол жетімді желілерді анықтайды және құрылғыңызды ең жақсы жылдамдығы және сенімділігі бар желіге қосады."</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"Деректерді қорғауға көмектесу үшін Google Wi‑Fi Assistant Google серверлері арқылы қорғалған VPN байланысын қамтамасыз ете алады."</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"Жоқ, рақмет"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"ИӘ, ҚАТЫСАМЫН"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"Байланысты сұрау"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"Wi‑Fi Assistant желілік трафикті бақылауға рұқсат ететін VPN байланысын орнатқысы келіп жатыр. Тек көзге сенсеңіз ғана қабылдаңыз."</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"VPN белсенді кезде экранның жоғарғы жағында көрсетіледі."</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ҚАБЫЛДАУ"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"ТЫЙЫМ САЛУ"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"Желіні бақылау"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"«Google Wi‑Fi Assistant» VPN байланысын орнатуға рұқсат еттіңіз. Бұл осы қолданба желілік трафикті бақылай алатынын білдіреді."</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> ең жақсы қол жетімді Wi‑Fi желісіне автоматты түрде қосылады"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ҚОЛДАНБАНЫ АШУ"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Экран дисплейі"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Сымсыз дисплейді қосу"</string>
@@ -618,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Google орынды анықтау қызметі және басқа қолданбалар тіпті Wi-Fi өшіріліп тұрса да желілердің бар-жоғын тексереді"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Wi‑Fi желісін автоматты түрде басқару"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> Wi‑Fi байланысын басқаруға рұқсат ету"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"Wi‑Fi assistant"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google Wi‑Fi Assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Сертификаттар орнату"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Аймақ нақтылығын жақсарту және басқа мақсаттар үшін Google және басқа қолданбалар маңайдағы желілерді тексеруі мүмкін, Wi-Fi өшіріліп тұрса да. Егер бұны қаламасаңыз, Жетілдірілген&gt; Тексеру әрқашан қол жетімді тармақтарына кіріңіз."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Қолданбалардың маңайдағы желілерді тексеру мүмкіндігі болады, Wi-Fi өшіріліп тұрса да. Егер бұны қаламасаңыз, Жетілдірілген&gt; Тексеру әрқашан қол жетімді тармақтарына кіріңіз."</string>
@@ -663,7 +652,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Сымсыз рутер қауіпсіздік параметрінің (TKIP) қолдауы жоқ"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Растау сәтсіздігі. Қайта әрекеттеніңіз."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Басқа WPS (Wi‑Fi-қорғалған) сессиясы анықталды. Бірнеше минуттан кейін қайта әрекеттеніңіз."</string>
-    <string name="wifi_ssid" msgid="641393708309146745">"Желі SSID"</string>
+    <string name="wifi_ssid" msgid="5519636102673067319">"Желі атауы"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID желісіне кіру"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Қауіпсіздік"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Сигнал қуаты"</string>
@@ -1039,6 +1028,8 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"Қайта реттеулер орындалмады, себебі Жүйе Тазалау қызметі қол жетімсіз."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Қайта реттелсін бе?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"Зауыттық параметрлерді қалпына келтіру бұл пайдаланушы үшін қол жетімді емес"</string>
+    <string name="master_clear_progress_title" msgid="5194793778701994634">"Өшірілуде"</string>
+    <string name="master_clear_progress_text" msgid="6559096229480527510">"Күте тұрыңыз…"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB жадын өшіру"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD картасын өшіру"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB жадындағы барлық деректерді өшіреді"</string>
@@ -1133,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"Авторлық құқықтар"</string>
     <string name="license_title" msgid="1990487604356037871">"Лицензия"</string>
     <string name="terms_title" msgid="7697580845616764642">"Шарттары"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"Экранның артқы фондары"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"Жерсерік кескіндерін жеткізушілер:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Бастапқы лицензияларды ашу"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Лицензияларды жүктеу барысында мәселе орын алды."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Жүктелуде..."</string>
@@ -1558,6 +1551,14 @@
     <string name="color_magenta" msgid="5059212823607815549">"Қызылкүрең"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> қолданылсын ба?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне қажет:"</string>
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> қоссаңыз, құрылғыңыз деректерді шифрлау үшін экранды бекітуді пайдаланбайды."</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Сіз арнайы мүмкіндіктер қызметін қосқандықтан, құрылғыңыз деректерді шифрлау үшін экранды бекітуді пайдаланбайды."</string>
+    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
+    <skip />
+    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
+    <skip />
+    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Әрекеттерді шолу"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Қолданбамен қатынасу барысында хабарлар алу."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> тоқтатылсын ба?"</string>
@@ -1597,7 +1598,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> қалды"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"Зарядталғанша <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – шамамен <xliff:g id="TIME">%2$s</xliff:g> қалды"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - толғанған дейін <xliff:g id="TIME">%2$s</xliff:g>"</string>
@@ -1733,12 +1733,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"Дауыспен енгізу параметрлері"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Дауыспен енгізу"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Дауыспен енгізу қызметтері"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"Толық арнайы сөз және өзара әрекеттесу"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"Қарапайым сөзді мәтінге түрлендіру"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"Бұл дауыспен енгізу қызметі сіздің атыңыздан әрқашан қосулы дауысты бақылауды орындай алады және дауысты қолдайтын қолданбаларды басқарады. Ол <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> қолданбасынан келген. Осы қызметті пайдалануды қосу керек пе?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Мәтіннен-сөйлеуге параметрлері"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"Мәтіннен сөйлеуге шығысы"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Әрқашан менің параметрлерімді қолдану"</string>
@@ -1834,10 +1831,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Растау деректерінің жады қосылды."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Растау деректері қорын қолдануға дейін экранды бекіту PIN коды немесе кілтсөзін тағайындау қажет."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Пайдалануға қатынасы бар қолданбалар"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"Қатынас сұрап жатқан қолданбалар"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"Тек өзіңіз сенетін қолданбаларға пайдалану деректеріне қатынасуға рұқсат етіңіз. Сіз рұқсат еткен қолданбаларда қолданбаны пайдалану тарихына, мысалы, қолданбаның соңғы рет пайдаланылуына немесе сіз қолданбаны пайдаланып өткізген жалпы уақытқа қатынас болады."</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Қатынасуға рұқсат беру керек пе?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"Қатынасуға рұқсат етсеңіз, бұл қолданба қолданбаларыңыз туралы жалпы ақпаратты, мысалы, оларды пайдалану жиілігін, көре алады."</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"Егер қатынасуға рұқсат етсеңіз, бұл қолданба құрылғыдағы қолданбалар туралы жалпы ақпаратты көре аласыз, мысалы, оларды қаншалықты жиі пайдаланатыныңыз туралы ақпаратты."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Төтенше әуен"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Төтенше қоңырау шалу әрекетін орнату"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Сақтық көшірме және қайта реттеу"</string>
@@ -2024,8 +2019,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Артқы шеп үрдісінің шектеуі"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Барлық ANR (қолданба жауап бермеді) хабарларын көрсетіңіз"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Артқы шептегі қолданбалар үшін Қолданба жауап бермейді жақтауын көрсету"</string>
-    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView желіні пайдалануын азайту"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"WebView байланыстарын Google сығымдау серверлері арқылы проксилеу арқылы желіні пайдалануды азайту (эксперименттік)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Дерекқор қолдану"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Қолданба деректерін пайдалану"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Оператордың деректер есебі құрылғыңыздан басқаша болуы мүмкін."</string>
@@ -2162,7 +2155,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"Жаңа толық сақтық кілтсөзін осы жерде теріңіз"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"Сақтық кілтсөз тағайындау"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"Бас тарту"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"Қосымша жүйе жаңартулары"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"Өшірілген"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Рұқсат беретін"</string>
@@ -2298,6 +2290,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"Аяқтау"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"Фотосурет түсіру"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"Фотосуретті Галереядан таңдау"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"Фотосурет таңдау"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM карталары"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM карталары"</string>
@@ -2363,8 +2356,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"есептік жазба"</string>
     <string name="keywords_users" msgid="4673901601478559100">"шектеу шектелген"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"мәтінді түзету түзету дыбыс дірілдету автоматты тіл қимыл ұсыну ұсыныс тақырып тіл тигізетін сөз теру эмодзи"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"сырғыту құпия сөз өрнек PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC белгісін реттеу"</string>
     <string name="write_tag" msgid="8571858602896222537">"Жазу"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Жазу үшін белгіні түртіңіз…"</string>
@@ -2445,13 +2437,14 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Автоматты түрде қосу"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Ешқашан"</string>
-    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"Телефон қоңыраулар-з"</string>
+    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"Қоңыраулар"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Хабарлар"</string>
-    <string name="zen_mode_from" msgid="1777739391289980762">"Кімнен"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"Мынадан қоңыраулар/хабарлар"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Кез келген адам"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Тек контактілер"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Тек жұлдызшалы контактілер"</string>
-    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"Дабылдар және басқа жеке секе салғыштар әрқашан басым болады"</string>
+    <string name="zen_mode_events" msgid="2456995649835437565">"Оқиғалар және еске салғыштар"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"Дабылдар әрқашан басым үзулер болып табылады"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Автоматты түрде қосу"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Ешқашан"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Түн сайын"</string>
@@ -2466,7 +2459,40 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Қосулы"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Өшірулі"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Экранды бекіту"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"Бұл параметр қосулы болса, құрылғыны ағымдағы экранды көріністе сақтайтын күйге қоюға болады.\n\nЭкранды бекіту үшін:\n\n1. Осы параметрді қосыңыз.\n\n2. Қолданбаны ашыңыз.\n\n3. «Жақындағылар» түймесін түртіңіз.\n\n4. Бекіту белгішесін түртіңіз."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Қосулы кезде босатқанша ағымдағы экранда көрсетіп тұру үшін экранды бекітуді пайдалануға болады.\n\nЭкранды бекітуді пайдалану үшін:\n\n1. Экранды бекіту қосулы екенін тексеріңіз.\n\n2. Бекіту керек экранды ашыңыз.\n\n3. «Шолу» пәрменін түртіңіз.\n\n4. Бекіту белгішесін түртіңіз."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Жұмыс профилі"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Эксперименттік)"</string>
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"Құрылғы бұрылғанда"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Экран мазмұнын бұру"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Портреттік көріністе қалу"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Пейзаждық көріністе қалу"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Ағымдағы бағдарда қалу"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI ақпараты"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI кодына қатысты ақпарат"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Шифрлау"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"Жалғастыру"</string>
+    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
+    <skip />
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"Құрылғыны іске қосу үшін PIN кодын қажет етеді"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Құрылғыны іске қосу үшін өрнекті қажет етеді"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"Құрылғыны іске қосу үшін құпия сөзді қажет етеді"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Жоқ, рақмет"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Жоқ, рақмет"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Жоқ, рақмет"</string>
+    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
+    <skip />
 </resources>
