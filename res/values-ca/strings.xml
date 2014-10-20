@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necessita:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si actives <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositiu no farà servir el bloqueig de pantalla per millorar l\'encriptació de dades."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Com que has activat un servei d\'accessibilitat, el teu dispositiu no farà servir el bloqueig de pantalla per millorar l\'encriptació de dades."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Cal que confirmis el patró perquè l\'activació del servei <xliff:g id="SERVICE">%1$s</xliff:g> afecta l\'encriptació de les dades."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Cal que confirmis el PIN perquè l\'activació del servei <xliff:g id="SERVICE">%1$s</xliff:g> afecta l\'encriptació de les dades."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Cal que confirmis la contrasenya perquè l\'activació del servei <xliff:g id="SERVICE">%1$s</xliff:g> afecta l\'encriptació de les dades."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observar les teves accions"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Rep notificacions quan interaccionis amb una aplicació."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Vols aturar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2460,7 +2457,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixació de pantalla"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Si l\'opció per fixar la pantalla està activada, pots fer-la servir per mantenir la pantalla actual en primer pla fins que no n\'anul·lis la fixació.\n\nPer fer servir l\'opció per fixar la pantalla:\n\n1. Comprova que tinguis aquesta opció activada.\n\n2. Obre la pantalla que vulguis fixar.\n\n3. Toca Visió general.\n\n4. Toca la icona de la xinxeta."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Si l\'opció per fixar la pantalla està activada, pots fer-la servir per mantenir la pantalla actual en primer pla fins que no n\'anul·lis la fixació.\n\nPer fixar la pantalla:\n\n1. Comprova que tinguis l\'opció activada.\n\n2. Obre la pantalla que vols fixar.\n\n3. Toca Visió general.\n\n4. Toca la icona de la xinxeta."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Perfil professional"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Quan el dispositiu està girat"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Continua amb l\'orientació actual"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Encriptació"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continua"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Per protegir encara més el dispositiu, pots sol·licitar el PIN abans que no s\'iniciï. Fins que no s\'inicia no pot rebre trucades, missatges ni notificacions, incloses alarmes.\n\nAixò permet protegir les dades dels dispositius perduts o robats."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Per protegir encara més el dispositiu, pots sol·licitar el patró abans que no s\'iniciï. Fins que no s\'inicia no pot rebre trucades, missatges ni notificacions, incloses alarmes.\n\nAixò permet protegir les dades dels dispositius perduts o robats."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Per protegir encara més el dispositiu, pots sol·licitar la contrasenya abans que no s\'iniciï. Fins que no s\'inicia no pot rebre trucades, missatges ni notificacions, incloses alarmes.\n\nAixò permet protegir les dades dels dispositius perduts o robats."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Demana el PIN per iniciar el dispositiu"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Demana el patró per iniciar el dispositiu"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Demana la contrasenya per iniciar el dispositiu"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"No, gràcies"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"No, gràcies"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"No, gràcies"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vols demanar el PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vols demanar el patró?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Vols demanar contrasenya?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Quan introdueixis el teu PIN per iniciar aquest dispositiu, els serveis d\'accessibilitat com ara <xliff:g id="SERVICE">%1$s</xliff:g> encara no estaran disponibles."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Quan introdueixis el teu patró per iniciar aquest dispositiu, els serveis d\'accessibilitat com ara <xliff:g id="SERVICE">%1$s</xliff:g> encara no estaran disponibles."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Quan introdueixis la teva contrasenya per iniciar aquest dispositiu, els serveis d\'accessibilitat com ara <xliff:g id="SERVICE">%1$s</xliff:g> encara no estaran disponibles."</string>
 </resources>

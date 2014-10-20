@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> moet het volgende kunnen:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Als u <xliff:g id="SERVICE">%1$s</xliff:g> inschakelt, maakt uw apparaat geen gebruik van schermvergrendeling om de gegevensversleuteling te verbeteren."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Omdat u een toegankelijkheidsservice heeft ingeschakeld, maakt uw apparaat geen gebruik van schermvergrendeling om de gegevensversleuteling te verbeteren."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Aangezien het inschakelen van <xliff:g id="SERVICE">%1$s</xliff:g> van invloed is op de gegevensversleuteling, moet u uw patroon bevestigen."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Aangezien het inschakelen van <xliff:g id="SERVICE">%1$s</xliff:g> van invloed is op de gegevensversleuteling, moet u uw pincode bevestigen."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Aangezien het inschakelen van <xliff:g id="SERVICE">%1$s</xliff:g> van invloed is op de gegevensversleuteling, moet u uw wachtwoord bevestigen."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Uw acties observeren"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Meldingen ontvangen wanneer u een app gebruikt."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> beëindigen?"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"In huidige stand blijven"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Versleuteling"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Doorgaan"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"U kunt dit apparaat verder beveiligen door uw pincode te vereisen voordat het apparaat wordt opgestart. Het apparaat kan pas oproepen, berichten en meldingen, waaronder alarmen, ontvangen nadat het is opgestart. \n\nZo kunnen gegevens op verloren of gestolen apparaten worden beveiligd."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"U kunt dit apparaat verder beveiligen door uw patroon te vereisen voordat het apparaat wordt opgestart. Het apparaat kan pas oproepen, berichten en meldingen, waaronder alarmen, ontvangen nadat het is opgestart. \n\nZo kunnen gegevens op verloren of gestolen apparaten worden beveiligd."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"U kunt dit apparaat verder beveiligen door uw wachtwoord te vereisen voordat het apparaat wordt opgestart. Het apparaat kan pas oproepen, berichten en meldingen, waaronder alarmen, ontvangen nadat het is opgestart. \n\nZo kunnen gegevens op verloren of gestolen apparaten worden beveiligd."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Pincode vereisen om apparaat op te starten"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Patroon vereisen om apparaat op te starten"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Wachtwoord vereisen om apparaat op te starten"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Nee, bedankt"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Nee, bedankt"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Nee, bedankt"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Pincode vereisen?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Patroon vereisen?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Wachtwoord vereisen?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Wanneer u uw pincode opgeeft om dit apparaat te starten, zijn toegankelijkheidsservices zoals <xliff:g id="SERVICE">%1$s</xliff:g> nog niet beschikbaar."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Wanneer u uw patroon opgeeft om dit apparaat te starten, zijn toegankelijkheidsservices zoals <xliff:g id="SERVICE">%1$s</xliff:g> nog niet beschikbaar."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Wanneer u uw wachtwoord opgeeft om dit apparaat te starten, zijn toegankelijkheidsservices zoals <xliff:g id="SERVICE">%1$s</xliff:g> nog niet beschikbaar."</string>
 </resources>

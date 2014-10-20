@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> needs to:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"If you turn on <xliff:g id="SERVICE">%1$s</xliff:g>, your device won’t use your screen lock to enhance data encryption."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Because you\'ve turned on an accessibility service, your device won’t use your screen lock to enhance data encryption."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Because turning on <xliff:g id="SERVICE">%1$s</xliff:g> affects data encryption, you need to confirm your pattern."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Because turning on <xliff:g id="SERVICE">%1$s</xliff:g> affects data encryption, you need to confirm your PIN."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Because turning on <xliff:g id="SERVICE">%1$s</xliff:g> affects data encryption, you need to confirm your password."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observe your actions"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Receive notifications when you\'re interacting with an app."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Stop <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Stay in current orientation"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Encryption"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continue"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\'t receive calls, messages or notifications, including alarms. \n\nThis helps protect data on lost or stolen devices."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\'t receive calls, messages or notifications, including alarms. \n\nThis helps protect data on lost or stolen devices."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\'t receive calls, messages or notifications, including alarms. \n\nThis helps protect data on lost or stolen devices."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Require PIN to start device"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Require pattern to start device"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Require password to start device"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"No, thanks"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"No, thanks"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"No, thanks"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Require PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Require pattern?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Require password?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"When you enter your PIN to start this device, accessibility services like <xliff:g id="SERVICE">%1$s</xliff:g> won\'t yet be available."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"When you enter your pattern to start this device, accessibility services like <xliff:g id="SERVICE">%1$s</xliff:g> won\'t yet be available."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"When you enter your password to start this device, accessibility services like <xliff:g id="SERVICE">%1$s</xliff:g> won\'t yet be available."</string>
 </resources>

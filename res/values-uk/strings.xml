@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"Службі <xliff:g id="SERVICE">%1$s</xliff:g> потрібно:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Якщо ви ввімкнете службу <xliff:g id="SERVICE">%1$s</xliff:g>, дані на пристрої не захищатимуться екраном блокування."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Оскільки ви ввімкнули службу доступності, дані на пристрої не захищатимуться екраном блокування."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Оскільки ввімкнення служби <xliff:g id="SERVICE">%1$s</xliff:g> впливає на шифрування даних, потрібно підтвердити ключ."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Оскільки ввімкнення служби <xliff:g id="SERVICE">%1$s</xliff:g> впливає на шифрування даних, потрібно підтвердити PIN-код."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Оскільки ввімкнення служби <xliff:g id="SERVICE">%1$s</xliff:g> впливає на шифрування даних, потрібно підтвердити пароль."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Спостерігати за вашими діями"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Отримувати сповіщення під час вашої взаємодії з програмою."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Зупинити <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Залишити поточну орієнтацію"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Шифрування"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Продовжити"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Можна додатково захистити пристрій, якщо вводити PIN-код перед увімкненням. Вимкнений пристрій не зможе приймати дзвінки, повідомлення або сповіщення, зокрема сигнали будильника. \n\nЦе допомагає захистити дані на загублених або викрадених пристроях."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Можна додатково захистити пристрій, якщо вводити ключ перед увімкненням. Вимкнений пристрій не зможе приймати дзвінки, повідомлення або сповіщення, зокрема сигнали будильника. \n\nЦе допомагає захистити дані на загублених або викрадених пристроях."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Можна додатково захистити пристрій, якщо вводити пароль перед увімкненням. Вимкнений пристрій не зможе приймати дзвінки, повідомлення або сповіщення, зокрема сигнали будильника. \n\nЦе допомагає захистити дані на загублених або викрадених пристроях."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Вводити PIN-код перед запуском пристрою"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Вводити ключ перед запуском пристрою"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Вводити пароль перед запуском пристрою"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Ні, дякую"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Ні, дякую"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Ні, дякую"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Вводити PIN-код?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Вводити ключ?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Вводити пароль?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Коли ви введете PIN-код і запустите пристрій, служби доступності (як-от <xliff:g id="SERVICE">%1$s</xliff:g>) ще не ввімкнуться."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Коли ви введете ключ і запустите пристрій, служби доступності (як-от <xliff:g id="SERVICE">%1$s</xliff:g>) ще не ввімкнуться."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Коли ви введете пароль і запустите пристрій, служби доступності (як-от <xliff:g id="SERVICE">%1$s</xliff:g>) ще не ввімкнуться."</string>
 </resources>
