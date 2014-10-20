@@ -152,7 +152,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"जोडी पार्ने अनुरोध"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>सँग जोड्न छुनुहोस्।"</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"प्राप्त गरिएका फाइलहरू देखाउनुहोस्"</string>
-    <string name="device_picker" msgid="8398232791303186677">"ब्लुटुथ उपकरण चयनकर्ता"</string>
+    <string name="device_picker" msgid="4978696506172252813">"ब्लुटुथ उपकरण छान्नुहोस्"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"ब्लुटुथ अनुमति अनुरोध"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"एउटा अनुप्रयोग ब्लुटुथ सक्रिय पार्न चाहन्छ।"</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"एक अनुप्रयोगले तपाईँको ट्याब्लेटलाई अन्य ब्लुटुथ उपकरणहरूले हेर्न मिल्ने बनाउन चाहन्छ<xliff:g id="TIMEOUT">%1$d</xliff:g> सेकेन्डका लागि।"</string>
@@ -470,8 +470,9 @@
     <string name="bluetooth_settings_title" msgid="1908745291161353016">"ब्लुटुथ"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"जडान प्रबन्ध गर्नुहोस्, उपकरण नाम मिलाउनुहोस्, पत्ता लगाउन योग्यता"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"ब्लुटुथ जोडा बाँध्ने अनुरोध"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="5698297871117529185">"जोडा बाँध्न: <xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="DEVICE_NAME">%1$s</xliff:g> <xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> उपकरणको आवाश्यक PIN टाइप गर्नुहोस्:"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="2220143735340367939">"यस सँग जोडी पार्न:<xliff:g id="BOLD_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>उपकरणको आवश्यक पास कुञ्जी टाइप गर्नुहोस्:"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="4954085254142996877">"उपकरण"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="333005542843637754">"जोडी कोड"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="6813273136442138444">"जोडी कोड टाइप गर्नुहोस् त्यसपछि रिटर्न वा इन्टर थिच्नुहोस्"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7222713483058171357">"PIN मा अक्षर वा प्रतीकहरू समाविष्ट हुन्छ"</string>
     <string name="bluetooth_pin_values_hint" msgid="3815897557875873646">"सामान्यत ०००० वा १२३४"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="4637977124526813470">"तपाईँले अर्को उपकरणमा पनि PIN टाइप गर्न पर्ने हुन सक्छ।"</string>
@@ -482,6 +483,7 @@
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"जोडी"</string>
     <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"जोडी"</string>
     <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"रद्द गर्नुहोस्"</string>
+    <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"जब जडान हुन्छ जोडी अनुदानले तपाईँको सम्पर्कहरू पहुँच गर्छ र इतिहास सम्झाउँछ।"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>सँग जोडा मिलाउन सकेन"</string>
     <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>गलत PIN वा पासकिका कारण सँग जोडा बाँध्न सक्दैन।"</string>
@@ -559,18 +561,7 @@
     <string name="wifi_assistant_setup" msgid="3772423650475730906">"SET UP"</string>
     <string name="wifi_assistant_card_message" msgid="107811647784658536">"वाइफाइ सहायकसँग उपलब्ध सञ्जाल स्वचालित रूपमा जडान गर्नुहोस्।"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"वाइफाइ सहायक"</string>
-    <string name="wifi_assistant_title_message" msgid="1270518944209872345">"Google वाइफाइ सहायक स्वतः तपाईँसँग राम्रो उपलब्ध वाइफाइ गर्न जडान गर्छ"</string>
-    <string name="wifi_assistant_explanation_message" msgid="4242611602422534795">"Google वाइफाइ सहायक तपाईँलाई उपलब्ध सञ्जाल लगािन्छ र सबै भन्दा राम्रो गति र विश्वसनीयतासँग एउटा आफ्नो उपकरण जडान।"</string>
-    <string name="wifi_assistant_vpn_message" msgid="5474437939154729312">"आफ्नो डेटा रक्षा गर्न, Google वाइफाइ सहायक Google सर्वरहरूमा सुरक्षित VPN जडान उपलब्ध गराउन सक्छ।"</string>
-    <string name="wifi_assistant_activity_no_thanks" msgid="611984000647643330">"होइन, धन्यवाद"</string>
-    <string name="wifi_assistant_activity_yes" msgid="529603077646719710">"हो, म भित्र छु"</string>
-    <string name="wifi_assistant_dialog_title" msgid="9130141448000161787">"जडान अनुरोध"</string>
-    <string name="wifi_assistant_dialog_message" msgid="6483823815004886979">"वाइफाइ सहायक सञ्जाल आवागमन अनुगमन अनुमति दिने VPN जडान सेट चाहन्छ। स्रोतमा भरोसा भए स्वीकार्नुहोस्।"</string>
-    <string name="wifi_assistant_dialog_notice" msgid="7459835068779476953">"VPN सक्रिय छ जब तपाईँको स्क्रिनको माथि देखा पर्ने छ।"</string>
-    <string name="wifi_assistant_accept" msgid="7669587061174451722">"ACCEPT"</string>
-    <string name="wifi_assistant_deny" msgid="7052767926493128944">"DENY"</string>
-    <string name="wifi_assistant_network_title" msgid="5870092585963985624">"सञ्जाल अनुगमन"</string>
-    <string name="wifi_assistant_permission_accepted" msgid="577392827888043634">"VPN जडान सेट अप \"Google वाइफाइ सहायक\" अनुमति भयो। यस अनुप्रयोगले सञ्जाल आवागमन निगरानी गर्न सक्छ।"</string>
+    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> स्वचालित रूपमा तपाईं संग सर्बोकृष्ट उपलब्ध वाइफाइ गर्न जडान हुन्छ"</string>
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"खुला अनुप्रयोग"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"स्क्रिन कास्ट गर्नुहोस्"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"वायरलेस प्रदर्शन सक्षम गर्नुहोस्"</string>
@@ -618,8 +609,6 @@
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"वाइफाइ बन्द हुँदा पनि Googleको स्थान सेवा र अन्य अनुप्रयोगहरूलाई सञ्जाल स्क्यान गर्न दिनुहोस्"</string>
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"स्वचालित वाइफाइ व्यवस्थापन"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> लाई तपाईँको वाइफाइ जडानको प्रबन्ध गर्न दिनुहोस्"</string>
-    <string name="wifi_assistant_setting_title" msgid="7891352922976664256">"वाइफाइ सहायक"</string>
-    <string name="wifi_assistant_setting_summary" msgid="8436161813951180466">"Google वाइफाइ सहायक"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"प्रमाणपत्रहरू स्थापना गर्नुहोस्"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"स्थान सटिकता सुधार गर्न र अन्य प्रायोजनहरूको लागि, Google र अन्य अनुप्रयोगहरूले नजिकका नेटवर्कहरू स्क्यान गर्न सक्दछ, वाइफाइ बन्द भएता पनि। यदि तपाईं यो भएको चाहनुहुन्न भने जटिलमा जानुहोस् र स्क्यान गर्न सधैँ उपलब्ध हुन्छ।"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"वाइफाइ बन्द हुँदा पनि अनुप्रयोगहरूले आसपासका नेटवर्कहरूको स्क्यान गर्न सक्छ। यदि तपाईँ यस्तो हुन दिन चाहनुहुन्न भने जटिलमा जानुहोस्, स्क्यान गर्ने सधैं उपलब्ध हुन्छ।"</string>
@@ -663,7 +652,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"ताररहित राउटर सुरक्षा सेटिङ् (TKIP) समर्थित छैन"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"प्रमाणीकरण विफल भयो। पुनः प्रयास गर्नुहोस्।"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"अर्को WPS सेसन पत्ता लाग्यो। केही मिनेटमा कृपया पुनःप्रयास गर्नुहोस्।"</string>
-    <string name="wifi_ssid" msgid="641393708309146745">"नेटवर्क SSID"</string>
+    <string name="wifi_ssid" msgid="5519636102673067319">"सञ्जाल नाम"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID प्रविष्टि गर्नुहोस्"</string>
     <string name="wifi_security" msgid="6603611185592956936">"सुरक्षा"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"सङ्केत क्षमता"</string>
@@ -1039,6 +1028,8 @@
     <string name="master_clear_failed" msgid="7959646179737950703">"कुनै पुनःसेट हुन सकेन किनभने सिस्टम क्लिएर सेवा उपलब्ध छैन।"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"पुनःसेट गर्ने हो?"</string>
     <string name="master_clear_not_available" msgid="1000370707967468909">"यस प्रयोगकर्ताको लागि कारखाना पुनःसेट गर्ने उपलब्ध छैन"</string>
+    <string name="master_clear_progress_title" msgid="5194793778701994634">"मेटाउँदै"</string>
+    <string name="master_clear_progress_text" msgid="6559096229480527510">"कृपया प्रतीक्षा गर्नुहोला..."</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB भण्डारण मेटाउनुहोस्"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD कार्ड मेटाउनुहोस्"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB भण्डारणमा भएका सम्पूर्ण डेटा मेटाउँछ"</string>
@@ -1133,6 +1124,8 @@
     <string name="copyright_title" msgid="865906688917260647">"प्रतिलिपि अधिकार"</string>
     <string name="license_title" msgid="1990487604356037871">"इजाजतपत्र"</string>
     <string name="terms_title" msgid="7697580845616764642">"सेवाका सर्तहरू"</string>
+    <string name="wallpaper_attributions" msgid="3645880512943433928">"वालपेपरहरु"</string>
+    <string name="wallpaper_attributions_values" msgid="2996183537914690469">"स्याटलाइट कल्पना प्रदायकहरू:\n©२०१४ CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"खुला स्रोत लाइसेन्स"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"लाइसेन्स लोड गर्न समस्या आएको छ।"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"लोड हुँदै..."</string>
@@ -1558,6 +1551,14 @@
     <string name="color_magenta" msgid="5059212823607815549">"म्याजेन्टा"</string>
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> प्रयोग गर्नुहुन्छ?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई आवश्यक:"</string>
+    <string name="enable_service_encryption_warning" msgid="3064686622453974606">"यदि तपाईंले <xliff:g id="SERVICE">%1$s</xliff:g> खोल्नुभयो भने, आफ्नो उपकरणले डेटा गुप्तिकरण अभिवृद्धि गर्न स्क्रिन लक प्रयोग गर्ने छैन।"</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"आफ्नो उपकरणले डेटा गुप्तिकरण अभिवृद्धि गर्न स्क्रिन लक प्रयोग गर्ने छैन, किनभने तपाईंले पहुँच सेवा खोल्नुभएको छ।"</string>
+    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
+    <skip />
+    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
+    <skip />
+    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"तपाईँका कार्यहरूको अवलोकन गर्नुहोस्"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"कुनै अनुप्रयोगसँग अन्तरक्रिया गर्दा सूचना प्राप्त गर्नुहोस्।"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>बन्द गर्नुहुन्छ?"</string>
@@ -1597,7 +1598,6 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> बाँकी"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> चार्जमा"</string>
-    <string name="power_discharging" msgid="6023874912674684056">"<xliff:g id="LEVEL">%1$d</xliff:g>%%"</string>
     <string name="power_discharging_duration" msgid="7125493014448497620">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - लगभग <xliff:g id="TIME">%2$s</xliff:g> बाँकी"</string>
     <string name="power_charging" msgid="712751285832976915">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="4802183864773082009">"<xliff:g id="LEVEL">%1$d</xliff:g>%% - <xliff:g id="TIME">%2$s</xliff:g> पूर्ण नभएसम्म"</string>
@@ -1735,12 +1735,9 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"ध्वनि निवेश सेटिङ्"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"ध्वनि निवेश"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"ध्वनि निवेश सेवाहरू"</string>
-    <!-- no translation found for voice_interactor_preference_summary (1801414022026937190) -->
-    <skip />
-    <!-- no translation found for voice_recognizer_preference_summary (669880813593690527) -->
-    <skip />
-    <!-- no translation found for voice_interaction_security_warning (6378608263983737325) -->
-    <skip />
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"पूर्ण हटवर्ड शब्द र अन्तरक्रिया"</string>
+    <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"पाठको लागि सरल बोली"</string>
+    <string name="voice_interaction_security_warning" msgid="6378608263983737325">"यो आवाज प्रविष्ट सेवाले आफ्नो तर्फबाट सधैं-आवाज अनुगमन र आवाज नियन्त्रण उपकरण सक्षम प्रदर्शन गर्न सक्षम हुनेछ। यो <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> उपकरणबाट आउँछ। यो सेवाको प्रयोग सक्षम गर्ने हो?"</string>
     <string name="tts_settings" msgid="8186971894801348327">"पाठ-वाचन सेटिङहरू"</string>
     <string name="tts_settings_title" msgid="1237820681016639683">"पाठ-बाट-वाणी उत्पादन"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"सधैँ मेरा सेटिङहरू प्रयोग गर्नुहोस्"</string>
@@ -1836,10 +1833,8 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"प्रमाण संग्रहण सक्षम पारियो।"</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"तपाईँले प्रामाणिक डेटा भण्डारण प्रयोग गर्नुअघि तपाईँले लक स्क्रिन PIN वा पासवर्ड सेट गर्नु पर्छ।"</string>
     <string name="usage_access_title" msgid="332333405495457839">"उपयोग पहुँच सँग अनुप्रयोग"</string>
-    <string name="usage_access_app_list_header" msgid="5216887502569700574">"अनुप्रयोग पहुँचको अनुरोध गर्दै"</string>
-    <string name="usage_access_body" msgid="3489298559210251891">"केवल तपाईंको बिश्वासिलो अनुप्रयोगहरूलाई मात्र तपाईंको उपयोगी डेटामा पहुँचको लागि अनुमति दिनुहोस्। तपाईंले अनुमति दिनुभएको अनुप्रयोगको तपाईंको अनुप्रयोग उपयोग इतिहासमा पहुँच हुनेछ, जस्तै अन्तिम समयमा अनुप्रयोग प्रयोग भएको थियो, या अनुप्रयोग प्रयोगमा तपाईंले बिताएको कुल समय।"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"पहुँचका लागि अनुमति दिने हो?"</string>
-    <string name="allow_usage_access_message" msgid="7858892531929539963">"यदि तपाईंले पहुँचको लागि अनुमति दिनुभयो भने, यो अनुप्रयोगले तपाईं तिनीहरूलाई कसरी प्राय: प्रयोग गर्नुहुन्छ जस्तै आफ्नो अनुप्रयोगहरू बारेमा सामान्य जानकारी हेर्न सक्नुहुन्छ।"</string>
+    <string name="allow_usage_access_message" msgid="2295847177051307496">"यदि तपाईँले पहुँचको अनुमति दिनुभयो भने, यो अनुप्रयोगले तपाईँले तिनीहरूलाई कसरी प्राय: प्रयोग गरे जस्तै तपाईँको उपकरणमा अनुप्रयोगहरू बारेमा सामान्य जानकारी हेर्न सक्नुहुन्छ।"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"आपतकालीन टोन"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"आपातकालीन कल राखिएको बेलाको व्यवहार सेट गर्नुहोस्"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"ब्याकअप र पुनःसेट"</string>
@@ -1876,7 +1871,7 @@
     <string name="device_admin_warning" msgid="2026747446313628233">"यस व्यवस्थापकलाई सक्रिय गर्नको लागि अनुप्रयोग <xliff:g id="APP_NAME">%1$s</xliff:g> ले  निम्नलिखित कारवाहीहरू गर्नको लागि अनुमति दिने छ:"</string>
     <string name="device_admin_status" msgid="4252975713178851910">"यो प्रशासक सक्रिय छ र  निम्नलिखित कारवाही गर्नका लागि <xliff:g id="APP_NAME">%1$s</xliff:g> अनुप्रयोगलाई अनुमति दिन्छ:"</string>
     <string name="profile_owner_add_title" msgid="6249331160676175009">"प्रोफाइल प्रबन्धक सक्रिय गर्नुहुन्छ?"</string>
-    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"अगाडि बढेर, तपाईंको प्रयोगकर्ता पनि तपाईँको व्यक्तिगत डेटा साथै, सम्बन्धित डेटा भण्डारण गर्न सक्षम हुन सक्छ जो तपाईँको प्रशासक व्यवस्थित गरिनेछ।\n\nसञ्जाल गतिविधि र तपाईँको उपकरणको स्थान जानकारी सहित तपाईंको प्रशासक संग अनुगमन र यो प्रयोगकर्ता साथ सेटिङ्हरू, पहुँच, उपकरण, र डेटा, व्यवस्थापन गर्न सक्ने क्षमता छ।"</string>
+    <string name="adding_profile_owner_warning" msgid="6469780138110334180">"अगाडि बढेर, तपाईंको प्रयोगकर्ता पनि तपाईँको व्यक्तिगत डेटा साथै, सम्बन्धित डेटा भण्डारण गर्न सक्षम हुन सक्छ जो तपाईँको प्रशासक व्यवस्थित गरिने छ।\n\nसञ्जाल गतिविधि र तपाईँको उपकरणको स्थान जानकारी सहित तपाईंको प्रशासक सँग अनुगमन र यो प्रयोगकर्ता साथ सेटिङ्हरू, पहुँच, उपकरण, र डेटा, व्यवस्थापन गर्न सक्ने क्षमता छ।"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"शीर्षकविहिन"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"सामान्य"</string>
     <string name="notification_log_title" msgid="3766148588239398464">"अधिसूचना लग"</string>
@@ -2026,8 +2021,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"पृष्ठभूमि प्रक्रिया सीमा"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"सबै ANRs देखाउनुहोस्"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"पृष्ठभूमि अनुप्रयोगका लागि जवाफ नदिइरहेका अनुप्रयोगहरू देखाउनुहोस्"</string>
-    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView नेटवर्क उपयोग घटाउनुहोस्"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="4743441353857190066">"Google सङ्कुचन सर्वरहरू द्वारा WebView को जडानहरू प्रोक्सी गरि नेटवर्क उपयोग घटाउनुहोस् (प्रयोगात्मक)"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"डेटा प्रयोग"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"अनुप्रयोग डेटा उपयोग"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"वाहक डेटा लेखा तपाईँको उपकरणबाट फरक हुन सक्छ।"</string>
@@ -2164,7 +2157,6 @@
     <string name="confirm_new_backup_pw_prompt" msgid="3238728882512787864">"तपाईँको नयाँ पूर्ण जगेडा पासवर्ड यहाँ पुनःटाइप गर्नुहोस्"</string>
     <string name="backup_pw_set_button_text" msgid="2387480910044648795">"जगेडा पासवर्ड सेट गर्नुहोस्"</string>
     <string name="backup_pw_cancel_button_text" msgid="8845630125391744615">"रद्द गर्नुहोस्"</string>
-    <string name="percentage" msgid="5866131581207788624">"<xliff:g id="NUMBER">%d</xliff:g>%%"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="214987609894661992">"थप प्रणाली अपडेटहरू"</string>
     <string name="selinux_status_disabled" msgid="924551035552323327">"असक्षम पारियो"</string>
     <string name="selinux_status_permissive" msgid="6004965534713398778">"अनुमोदक"</string>
@@ -2300,6 +2292,7 @@
     <string name="wizard_finish" msgid="3286109692700083252">"समाप्त गर्नुहोस्"</string>
     <string name="user_image_take_photo" msgid="1280274310152803669">"फोटो खिच्नुहोस्"</string>
     <string name="user_image_choose_photo" msgid="7940990613897477057">"ग्यालरीबाट तस्बिर छान्नुहोस्"</string>
+    <string name="user_image_photo_selector" msgid="5492565707299454873">"तस्बिर छान्नुहोस्"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
     <string name="sim_setup_wizard_title" msgid="1732682852692274928">"सिम कार्ड"</string>
     <string name="sim_settings_title" msgid="6822745211458959756">"SIM कार्डहरू"</string>
@@ -2365,8 +2358,7 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"खाता"</string>
     <string name="keywords_users" msgid="4673901601478559100">"प्रतिबन्ध सीमित सीमित गरिएको"</string>
     <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"पाठ सुधार सही ध्वनि कम्पन स्वतः भाषा इशारा सुझाव थिम आपत्तिजनक शब्द प्रकार इमोजी सुझाव"</string>
-    <!-- no translation found for keywords_lockscreen (4806191868723291541) -->
-    <skip />
+    <string name="keywords_lockscreen" msgid="4806191868723291541">"पासवर्ड प्याटर्न पिन स्लाइड गर्नुहोस्"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ट्याग सेट गर्नुहोस्"</string>
     <string name="write_tag" msgid="8571858602896222537">"लेख्नुहोस्"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"लेख्न ट्याग छुनुहोस्..."</string>
@@ -2447,13 +2439,14 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"स्वचालित रूपमा चालू"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"कहिले पनि होइन"</string>
-    <string name="zen_mode_phone_calls" msgid="2872774457193013585">"फोन कलहरू"</string>
+    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"कलहरू"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"सन्देशहरू"</string>
-    <string name="zen_mode_from" msgid="1777739391289980762">"प्रेषक"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"बाट कल / सन्देशहरू"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"कोही पनि"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"सम्पर्कहरू मात्र"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"ताराङ्कित सम्पर्कहरू मात्र"</string>
-    <string name="zen_mode_alarm_info" msgid="5061362593677527505">"सचेतक र अन्य व्यक्तिगत अनुस्मारकहरू सधैं प्राथमिकता हुन्"</string>
+    <string name="zen_mode_events" msgid="2456995649835437565">"घटना र अनुस्मारकहरू"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"अलार्महरू सधैं प्राथमिक रुकावटहरू हुन्छन"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वचालित रूपमा चालू"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कहिले पनि होइन"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"हरेक रात"</string>
@@ -2468,7 +2461,37 @@
     <string name="switch_on_text" msgid="1124106706920572386">"खुल्ला गर्नुहोस्"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"बन्द गर्नुहोस्"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"पर्दा पिन गर्दै"</string>
-    <string name="screen_pinning_description" msgid="3022868253807792488">"जब यो सेटिङ् चालू हुन्छ, तपाईंले हालको पर्दामा हेर्ने स्थितिमा राख्ने उपकरण राख्न सक्छौं।\n\n पर्दाको पिन गर्नुहोस:\n\n१। यो सेटिङ् खोल्नुहोस्।\n\n२। अनुप्रयोग खोल्नुहोस्।\n\n३। हालैका बटनहरू छुनुहोस्।\n\n४। पिन प्रतिमा छुनुहोस्।"</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"जब चालु हुन्छ, तपाईंले अनपिन नगरे सम्म हालैको पर्दा दृश्यमा राख्न पर्दा पिन गरि प्रयोग गर्न सक्छन्।\n\nपर्दा पिन गरि प्रयोग गर्न:\n\n१. पर्दा पिन खुलै छ भनि निश्चित गर्नुहोस्.\n\n२. तपाईंले पिन गर्न चाहनु भएको पर्दा खोल्नुहोस्।.\n\n३. अवलोकन छुनुहोस्।\n\n४. पिन प्रतिमा छुनुहोस्।"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"कार्य प्रोफाइल"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(प्रयोगात्मक)"</string>
+    <string name="display_auto_rotate_title" msgid="6176450657107806043">"जब उपकरण घुमाइन्छ"</string>
+    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"पर्दाको सामग्रीहरु घुमाउनुहोस्"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"चित्र दृष्टिकोणमा रहनुहोस्"</string>
+    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"परिदृश्य दृष्टिकोणमा रहनुहोस्"</string>
+    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"वर्तमान अभिमुखिकरणमा रहनुहोस्"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI जानकारी"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI सान्दर्भिक जानकारी"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"गुप्तिकरण"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"जारी राख्नुहोस्"</string>
+    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
+    <skip />
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"उपकरण सुरु गर्न PIN आवश्यक छ"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"उपकरण सुरु गर्न प्याटर्न आवश्यक छ"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"उपकरण सुरु गर्न पासवर्ड आवश्यक छ"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"धन्यवाद पर्दैन"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"धन्यवाद पर्दैन"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"धन्यवाद पर्दैन"</string>
+    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
+    <skip />
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो PIN प्रविष्टि गर्नुहुन्छ, पहुँच सेवा जस्तै <xliff:g id="SERVICE">%1$s</xliff:g> अझै उपलब्ध हुने छैन।"</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो ढाँचा प्रविष्टि गर्नुहुन्छ, पहुँच सेवा जस्तै <xliff:g id="SERVICE">%1$s</xliff:g> अझै उपलब्ध हुने छैन।"</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो पासवर्ड प्रविष्टि गर्नुहुन्छ, पहुँच सेवा <xliff:g id="SERVICE">%1$s</xliff:g> जस्तो अझै उपलब्ध हुने छैन।"</string>
 </resources>
