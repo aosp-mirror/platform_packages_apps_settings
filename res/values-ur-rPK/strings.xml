@@ -1553,6 +1553,12 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> کو اس کی ضرورت ہے:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"اگر آپ <xliff:g id="SERVICE">%1$s</xliff:g> کو آن کرتے ہیں تو آپ کا آلہ ڈیٹا کی مرموزکاری کو بڑھانے کیلئے آپ کی اسکرین کا قفل استعمال نہیں کرے گا۔"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"چونکہ آپ نے حالت رسائی کی ایک سروس کو آن کیا ہے لہذا آپ کا آلہ ڈیٹا کی مرموزکاری کو بڑھانے کیلئے آپ کی اسکرین کا قفل استعمال نہیں کرے گا۔"</string>
+    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
+    <skip />
+    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
+    <skip />
+    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
+    <skip />
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"اپنی کارروائیوں کا مشاہدہ کریں"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"آپ کسی ایپ کے ساتھ تعامل کر رہے ہونے کے وقت اطلاعات حاصل کریں۔"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> روکیں؟"</string>
@@ -2452,8 +2458,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"آن"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"آف"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"اسکرین کو پن کرنا"</string>
-    <!-- no translation found for screen_pinning_description (7091642350452605379) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7091642350452605379">"آن ہونے پر، آپ جب تک پن ہٹا نہیں دیتے ہیں، موجودہ اسکرین کو اس وقت تک منظر میں رکھنے کیلئے اسکرین پن کرنے کا استعمال کر سکتے ہیں۔\n\nاسکرین پن کرنے کا استعمال کرنے کیلئے:\n\n1۔ یقینی بنائیں کہ اسکرین پن کرنا آن ہے۔\n\n2۔ وہ اسکرین کھولیں جسے آپ پن کرنا چاہتے ہیں۔\n\n3۔ مجموعی جائزہ کو ٹچ کریں۔\n\n4۔ پن آئیکن کو ٹچ کریں۔"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"دفتر کا پروفائل"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(تجرباتی)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"جب آلہ گھمایا جائے"</string>
@@ -2463,4 +2468,27 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"موجودہ سمت بندی میں رہیں"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"‏IMEI کی معلومات"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"‏IMEI سے متعلق معلومات"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"مرموز کاری"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"جاری رکھیں"</string>
+    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
+    <skip />
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"‏آلہ شروع کرنے کیلئے PIN درکار ہے"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"آلہ شروع کرنے کیلئے پیٹرن درکار ہے"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"آلہ شروع کرنے کیلئے پاس ورڈ درکار ہے"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"نہیں شکریہ"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"نہیں شکریہ"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"نہیں شکریہ"</string>
+    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
+    <skip />
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"‏جب آپ یہ آلہ شروع کرنے کیلئے اپنا PIN داخل کریں گے تو اس وقت بھی <xliff:g id="SERVICE">%1$s</xliff:g> جیسی رسائی سروسز دستیاب نہیں ہوں گی۔"</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"یہ آلہ شروع کرنے کیلئے جب آپ اپنا پیٹرن داخل کریں گے تو اس وقت بھی <xliff:g id="SERVICE">%1$s</xliff:g> جیسی رسائی سروسز دستیاب نہیں ہوں گی۔"</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"اس آلہ کو شروع کرنے کیلئے جب آپ اپنا پاس ورڈ درج کریں گے تو اس وقت بھی <xliff:g id="SERVICE">%1$s</xliff:g> جیسی رسائی سروسز دستیاب نہیں ہوں گی۔"</string>
 </resources>
