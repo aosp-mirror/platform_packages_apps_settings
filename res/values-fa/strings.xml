@@ -1553,6 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> باید:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"اگر <xliff:g id="SERVICE">%1$s</xliff:g> را روشن کنید، دستگاه شما از قفل صفحه شما جهت بهبود رمزگذاری اطلاعات استفاده نخواهد کرد."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"از آنجا که یک سرویس دسترس‌پذیری را روشن کرده‌اید، دستگاه شما از قفل صفحه شما جهت بهبود رمزگذاری اطلاعات استفاده نخواهد کرد."</string>
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"از آنجایی که روشن کردن <xliff:g id="SERVICE">%1$s</xliff:g> بر رمزگذاری اطلاعات تأثیر می‌گذارد، باید الگویتان را تأیید کنید."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"از آنجایی که روشن کردن <xliff:g id="SERVICE">%1$s</xliff:g> بر رمزگذاری اطلاعات تأثیر می‌گذارد، باید پینتان را تأیید کنید."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"از آنجایی که روشن کردن <xliff:g id="SERVICE">%1$s</xliff:g> بر رمزگذاری اطلاعات تأثیر می‌گذارد، باید گذرواژه‌تان را تأیید کنید."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"عملکردهای خود را مشاهده کنید"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"دریافت اعلان وقتی در حال تعامل با برنامه‌ای هستید."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> متوقف شود؟"</string>
@@ -2452,8 +2455,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"روشن"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"خاموش"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"پین کردن صفحه"</string>
-    <!-- no translation found for screen_pinning_description (7091642350452605379) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7091642350452605379">"با روشن کردن قابلیت پین کردن صفحه، می‌توانید از آن استفاده کنید تا صفحه فعلی تا وقتی پین آن را برمی‌دارید، در دید باقی بماند.\n\nبرای استفاده از پین کردن صفحه:\n\n‏۱. مطمئن شوید پین کردن صفحه روشن است.\n\n‏۲. صفحه‌ای را که می‌خواهید پین کنید، باز کنید.\n\n‏۳. پیش‌نمایش را لمس کنید.\n\n‏۴. نماد پین را لمس کنید."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"نمایه کاری"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(تجربی)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"وقتی دستگاه چرخانده می‌شود"</string>
@@ -2463,4 +2465,24 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"ماندن در جهت کنونی"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"‏اطلاعات IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"‏اطلاعات مربوط به IMEI"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"رمزگذاری"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"ادامه"</string>
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"می‌توانید برای محافظت بیشتر از دستگاه، قبل از راه‌اندازی آن، پینتان را درخواست کنید. تا زمانی که دستگاه راه‌اندازی نشود، نمی‌تواند تماس‌ها، پیام‌ها، یا اعلان‌ها را، از جمله زنگ‌های هشدار، دریافت کند. \n\nاین امر به حفاظت از اطلاعات در دستگاه‌های گم‌شده یا دزدیده شده کمک می‌کند."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"می‌توانید برای محافظت بیشتر از دستگاه، قبل از راه‌اندازی آن، الگویتان را درخواست کنید. تا زمانی که دستگاه راه‌اندازی نشود، نمی‌تواند تماس‌ها، پیام‌ها، یا اعلان‌ها را، از جمله زنگ‌های هشدار، دریافت کند. \n\nاین امر به حفاظت از اطلاعات در دستگاه‌های گم‌شده یا دزدیده شده کمک می‌کند."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"می‌توانید برای محافظت بیشتر از دستگاه، قبل از راه‌اندازی آن، گذرواژه‌تان را درخواست کنید. تا زمانی که دستگاه راه‌اندازی نشود، نمی‌تواند تماس‌ها، پیام‌ها، یا اعلان‌ها را، از جمله زنگ‌های هشدار، دریافت کند. \n\nاین امر به حفاظت از اطلاعات در دستگاه‌های گم‌شده یا دزدیده شده کمک می‌کند."</string>
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"برای راه‌اندازی دستگاه، پین مورد نیاز است"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"برای راه‌اندازی دستگاه، کشیدن الگو مورد نیاز است"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"برای راه‌اندازی دستگاه، گذرواژه مورد نیاز است"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"خیر، سپاسگزارم"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"خیر، سپاسگزارم"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"خیر، سپاسگزارم"</string>
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"پین درخواست شود؟"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"الگو درخواست شود؟"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"گذرواژه درخواست شود؟"</string>
+    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
+    <skip />
+    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
+    <skip />
 </resources>

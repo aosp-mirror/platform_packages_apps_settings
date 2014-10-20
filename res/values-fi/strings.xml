@@ -1553,6 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> haluaa seuraavat luvat:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jos <xliff:g id="SERVICE">%1$s</xliff:g> otetaan käyttöön, laitteesi ei käytä näytön lukitusta tiedon salauksen parantamiseen."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Laite ei käytä näytön lukitusta tiedon salauksen parantamiseen, koska otit käytettävyyspalvelun käyttöön."</string>
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Koska palvelun <xliff:g id="SERVICE">%1$s</xliff:g> ottaminen käyttöön vaikuttaa tietojen salaukseen, sinun pitää vahvistaa malli."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Koska palvelun <xliff:g id="SERVICE">%1$s</xliff:g> ottaminen käyttöön vaikuttaa tietojen salaukseen, sinun pitää vahvistaa PIN-koodi."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Koska palvelun <xliff:g id="SERVICE">%1$s</xliff:g> ottaminen käyttöön vaikuttaa tietojen salaukseen, sinun pitää vahvistaa salasana."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Tarkkaile toimintojasi"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Vastaanota ilmoituksia käyttäessäsi sovellusta."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Pysäytetäänkö palvelu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2452,8 +2455,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Käytössä"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Ei käytössä"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Näytön kiinnitys"</string>
-    <!-- no translation found for screen_pinning_description (7091642350452605379) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Kun asetus on käytössä, voit käyttää näytön kiinnitystä pitääksesi nykyisen näytön esillä, kunnes poistat sen kiinnityksen.\n\nNäytön kiinnityksen käyttäminen:\n\n1. Varmista, että näytön kiinnitys on käytössä.\n\n2. Avaa näyttö, jonka haluat kiinnittää.\n\n3. Valitse Yleistä.\n\n4. Kosketa kiinnityskuvaketta."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Työprofiili"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Kokeellinen)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Kun laite käännetään"</string>
@@ -2463,4 +2465,21 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Säilytä nykyinen suunta"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-koodin tiedot"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-koodiin liittyvät tiedot"</string>
+    <string name="encryption_interstitial_header" msgid="5790264941172726485">"Salaus"</string>
+    <string name="encryption_continue_button" msgid="1121880322636992402">"Jatka"</string>
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Voit parantaa tämän laitteen suojausta vaatimalla käynnistystä edeltävän PIN-koodin antamisen. Ennen käynnistystä laite ei vastaanota puheluita, viestejä eikä ilmoituksia, mukaan lukien hälytykset. \n\nTämä auttaa suojaamaan kadonneen tai varastetun laitteen sisältämät tiedot."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Voit parantaa tämän laitteen suojausta vaatimalla käynnistystä edeltävän mallin antamisen. Ennen käynnistystä laite ei vastaanota puheluita, viestejä eikä ilmoituksia, mukaan lukien hälytykset. \n\nTämä auttaa suojaamaan kadonneen tai varastetun laitteen sisältämät tiedot."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Voit parantaa tämän laitteen suojausta vaatimalla käynnistystä edeltävän salasanan antamisen. Ennen käynnistystä laite ei vastaanota puheluita, viestejä eikä ilmoituksia, mukaan lukien hälytykset. \n\nTämä auttaa suojaamaan kadonneen tai varastetun laitteen sisältämät tiedot."</string>
+    <string name="encrypt_require_pin" msgid="2063945047845243752">"Vaadi PIN-koodi laitteen käynnistämiseksi"</string>
+    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Vaadi kuvio laitteen käynnistämiseksi"</string>
+    <string name="encrypt_require_password" msgid="8770628366276570518">"Vaadi salasana laitteen käynnistämiseksi"</string>
+    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Ei kiitos"</string>
+    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Ei kiitos"</string>
+    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Ei kiitos"</string>
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vaaditaanko PIN-koodi?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vaaditaanko malli?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Vaaditaanko salasana?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Kun annat PIN-koodisi käynnistääksesi tämän laitteen, käytettävyyspalvelut, kuten <xliff:g id="SERVICE">%1$s</xliff:g>, eivät ole vielä käytettävissä."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Kun annat mallin käynnistääksesi tämän laitteen, käytettävyyspalvelut, kuten <xliff:g id="SERVICE">%1$s</xliff:g>, eivät ole vielä käytettävissä."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Kun annat salasanasi käynnistääksesi tämän laitteen, käytettävyyspalvelut, kuten <xliff:g id="SERVICE">%1$s</xliff:g>, eivät ole vielä käytettävissä."</string>
 </resources>
