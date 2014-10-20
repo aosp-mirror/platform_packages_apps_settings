@@ -390,10 +390,13 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         public void update() {
             final Resources res = getResources();
 
-            setTitle(res.getString(R.string.sim_card_number_title, mSlotId + 1));
             if (mSubInfoRecord != null) {
-                setSummary(res.getString(R.string.sim_settings_summary,
-                            mSubInfoRecord.displayName, mSubInfoRecord.number));
+                if(TextUtils.isEmpty(mSubInfoRecord.displayName)) {
+                    setTitle(getCarrierName());
+                } else {
+                    setTitle(mSubInfoRecord.displayName);
+                }
+                setSummary(mSubInfoRecord.number.toString());
                 setEnabled(true);
             } else {
                 setSummary(R.string.sim_slot_empty);
@@ -428,6 +431,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
 
         public void createEditDialog(SimPreference simPref) {
+            final Resources res = getResources();
+
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             final View dialogLayout = getActivity().getLayoutInflater().inflate(
@@ -443,7 +448,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             TextView carrierView = (TextView)dialogLayout.findViewById(R.id.carrier);
             carrierView.setText(getCarrierName());
 
-            builder.setTitle(R.string.sim_editor_title);
+            builder.setTitle(String.format(res.getString(R.string.sim_editor_title),
+                    (mSubInfoRecord.slotId + 1)));
 
             builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                 @Override
