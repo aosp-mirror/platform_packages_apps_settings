@@ -252,10 +252,10 @@ public class ManageApplications extends Fragment implements
                     : R.layout.manage_applications_apps, null);
             mPinnedHeader = (ViewGroup) mRootView.findViewById(R.id.pinned_header);
             if (mOwner.mProfileSpinnerAdapter != null) {
-                Spinner spinner = (Spinner) inflater.inflate(R.layout.spinner_view, null);
-                spinner.setAdapter(mOwner.mProfileSpinnerAdapter);
-                spinner.setOnItemSelectedListener(mOwner);
-                mPinnedHeader.addView(spinner);
+                mOwner.mSpinner = (Spinner) inflater.inflate(R.layout.spinner_view, null);
+                mOwner.mSpinner.setAdapter(mOwner.mProfileSpinnerAdapter);
+                mOwner.mSpinner.setOnItemSelectedListener(mOwner);
+                mPinnedHeader.addView(mOwner.mSpinner);
                 mPinnedHeader.setVisibility(View.VISIBLE);
             }
             mLoadingContainer = mRootView.findViewById(R.id.loading_container);
@@ -483,6 +483,7 @@ public class ManageApplications extends Fragment implements
     private View mRootView;
     private ViewPager mViewPager;
     private UserSpinnerAdapter mProfileSpinnerAdapter;
+    private Spinner mSpinner;
     private Context mContext;
 
     AlertDialog mResetDialog;
@@ -1045,6 +1046,9 @@ public class ManageApplications extends Fragment implements
             int currentTab = mViewPager.getCurrentItem();
             intent.putExtra(EXTRA_LIST_TYPE, mTabs.get(currentTab).mListType);
             mContext.startActivityAsUser(intent, selectedUser);
+            // Go back to default selection, which is the first one; this makes sure that pressing
+            // the back button takes you into a consistent state
+            mSpinner.setSelection(0);
         }
     }
 

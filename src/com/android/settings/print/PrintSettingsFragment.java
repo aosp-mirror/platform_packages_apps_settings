@@ -124,6 +124,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
 
     private PrintJobsController mPrintJobsController;
     private UserSpinnerAdapter mProfileSpinnerAdapter;
+    private Spinner mSpinner;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -184,11 +185,11 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, getActivity());
         if (mProfileSpinnerAdapter != null) {
-            Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
+            mSpinner = (Spinner) getActivity().getLayoutInflater().inflate(
                     R.layout.spinner_view, null);
-            spinner.setAdapter(mProfileSpinnerAdapter);
-            spinner.setOnItemSelectedListener(this);
-            setPinnedHeaderView(spinner);
+            mSpinner.setAdapter(mProfileSpinnerAdapter);
+            mSpinner.setOnItemSelectedListener(this);
+            setPinnedHeaderView(mSpinner);
         }
     }
 
@@ -300,6 +301,8 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             getActivity().startActivityAsUser(intent, selectedUser);
+            // Go back to default selection, which is the first one
+            mSpinner.setSelection(0);
         }
     }
 
