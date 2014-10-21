@@ -197,8 +197,6 @@ public class ManageApplications extends Fragment implements
 
         private View mListContainer;
 
-        private ViewGroup mPinnedHeader;
-
         // ListView used to display list
         private ListView mListView;
         // Custom view used to display running processes
@@ -245,19 +243,10 @@ public class ManageApplications extends Fragment implements
             if (mRootView != null) {
                 return mRootView;
             }
-
             mInflater = inflater;
             mRootView = inflater.inflate(mListType == LIST_TYPE_RUNNING
                     ? R.layout.manage_applications_running
                     : R.layout.manage_applications_apps, null);
-            mPinnedHeader = (ViewGroup) mRootView.findViewById(R.id.pinned_header);
-            if (mOwner.mProfileSpinnerAdapter != null) {
-                mOwner.mSpinner = (Spinner) inflater.inflate(R.layout.spinner_view, null);
-                mOwner.mSpinner.setAdapter(mOwner.mProfileSpinnerAdapter);
-                mOwner.mSpinner.setOnItemSelectedListener(mOwner);
-                mPinnedHeader.addView(mOwner.mSpinner);
-                mPinnedHeader.setVisibility(View.VISIBLE);
-            }
             mLoadingContainer = mRootView.findViewById(R.id.loading_container);
             mLoadingContainer.setVisibility(View.VISIBLE);
             mListContainer = mRootView.findViewById(R.id.list_container);
@@ -482,6 +471,7 @@ public class ManageApplications extends Fragment implements
     private ViewGroup mContentContainer;
     private View mRootView;
     private ViewPager mViewPager;
+    private ViewGroup mPinnedHeader;
     private UserSpinnerAdapter mProfileSpinnerAdapter;
     private Spinner mSpinner;
     private Context mContext;
@@ -936,7 +926,14 @@ public class ManageApplications extends Fragment implements
                 container, false);
         mContentContainer = container;
         mRootView = rootView;
-
+        mPinnedHeader = (ViewGroup) mRootView.findViewById(R.id.pinned_header);
+        if (mProfileSpinnerAdapter != null) {
+            mSpinner = (Spinner) inflater.inflate(R.layout.spinner_view, null);
+            mSpinner.setAdapter(mProfileSpinnerAdapter);
+            mSpinner.setOnItemSelectedListener(this);
+            mPinnedHeader.addView(mSpinner);
+            mPinnedHeader.setVisibility(View.VISIBLE);
+        }
         mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
         MyPagerAdapter adapter = new MyPagerAdapter();
         mViewPager.setAdapter(adapter);
