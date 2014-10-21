@@ -51,8 +51,6 @@ import android.widget.TimePicker;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settings.notification.DropDownPreference.Callback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -69,7 +67,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_IMPORTANT = "important";
-    private static final String KEY_CALLS = "phone_calls";
+    private static final String KEY_CALLS = "calls";
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_STARRED = "starred";
     private static final String KEY_EVENTS = "events";
@@ -105,12 +103,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static SparseArray<String> allKeyTitles(Context context) {
         final SparseArray<String> rt = new SparseArray<String>();
         rt.put(R.string.zen_mode_important_category, KEY_IMPORTANT);
-        if (Utils.isVoiceCapable(context)) {
-            rt.put(R.string.zen_mode_phone_calls, KEY_CALLS);
-            rt.put(R.string.zen_mode_option_title, KEY_ZEN_MODE);
-        } else {
-            rt.put(R.string.zen_mode_option_title_novoice, KEY_ZEN_MODE);
-        }
+        rt.put(R.string.zen_mode_calls, KEY_CALLS);
+        rt.put(R.string.zen_mode_option_title, KEY_ZEN_MODE);
         rt.put(R.string.zen_mode_messages, KEY_MESSAGES);
         rt.put(R.string.zen_mode_from_starred, KEY_STARRED);
         rt.put(R.string.zen_mode_events, KEY_EVENTS);
@@ -155,7 +149,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mConfig = getZenModeConfig();
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
 
-        final Preference zenMode = PREF_ZEN_MODE.init(this);
+        PREF_ZEN_MODE.init(this);
         PREF_ZEN_MODE.setCallback(new SettingPrefWithCallback.Callback() {
             @Override
             public void onSettingSelected(int value) {
@@ -164,31 +158,23 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                 }
             }
         });
-        if (!Utils.isVoiceCapable(mContext)) {
-            zenMode.setTitle(R.string.zen_mode_option_title_novoice);
-        }
 
         final PreferenceCategory important =
                 (PreferenceCategory) root.findPreference(KEY_IMPORTANT);
 
         mCalls = (SwitchPreference) important.findPreference(KEY_CALLS);
-        if (Utils.isVoiceCapable(mContext)) {
-            mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (mDisableListeners) return true;
-                    final boolean val = (Boolean) newValue;
-                    if (val == mConfig.allowCalls) return true;
-                    if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + val);
-                    final ZenModeConfig newConfig = mConfig.copy();
-                    newConfig.allowCalls = val;
-                    return setZenModeConfig(newConfig);
-                }
-            });
-        } else {
-            important.removePreference(mCalls);
-            mCalls = null;
-        }
+        mCalls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                if (val == mConfig.allowCalls) return true;
+                if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + val);
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.allowCalls = val;
+                return setZenModeConfig(newConfig);
+            }
+        });
 
         mMessages = (SwitchPreference) important.findPreference(KEY_MESSAGES);
         mMessages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -553,14 +539,6 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                     result.add(data);
                 }
                 return result;
-            }
-
-            public List<String> getNonIndexableKeys(Context context) {
-                final ArrayList<String> rt = new ArrayList<String>();
-                if (!Utils.isVoiceCapable(context)) {
-                    rt.add(KEY_CALLS);
-                }
-                return rt;
             }
         };
 
