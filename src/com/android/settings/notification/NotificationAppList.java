@@ -94,6 +94,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
     private Parcelable mListViewState;
     private Backend mBackend = new Backend();
     private UserSpinnerAdapter mProfileSpinnerAdapter;
+    private Spinner mSpinner;
 
     private PackageManager mPM;
     private UserManager mUM;
@@ -122,11 +123,11 @@ public class NotificationAppList extends PinnedHeaderListFragment
         super.onViewCreated(view, savedInstanceState);
         mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(mUM, mContext);
         if (mProfileSpinnerAdapter != null) {
-            Spinner spinner = (Spinner) getActivity().getLayoutInflater().inflate(
+            mSpinner = (Spinner) getActivity().getLayoutInflater().inflate(
                     R.layout.spinner_view, null);
-            spinner.setAdapter(mProfileSpinnerAdapter);
-            spinner.setOnItemSelectedListener(this);
-            setPinnedHeaderView(spinner);
+            mSpinner.setAdapter(mProfileSpinnerAdapter);
+            mSpinner.setOnItemSelectedListener(this);
+            setPinnedHeaderView(mSpinner);
         }
     }
 
@@ -164,6 +165,9 @@ public class NotificationAppList extends PinnedHeaderListFragment
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mContext.startActivityAsUser(intent, selectedUser);
+            // Go back to default selection, which is the first one; this makes sure that pressing
+            // the back button takes you into a consistent state
+            mSpinner.setSelection(0);
         }
     }
 
