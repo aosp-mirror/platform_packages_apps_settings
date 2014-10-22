@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> peab:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Kui lülitate sisse teenuse <xliff:g id="SERVICE">%1$s</xliff:g>, ei kasuta seade andmete krüpteerimise täiustamiseks ekraanilukku."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Kuna lülitasite sisse juurdepääsetavuse teenuse, siis ei kasuta teie seade andmete krüpteerimise täiustamiseks ekraanilukku."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Kuna teenuse <xliff:g id="SERVICE">%1$s</xliff:g> sisselülitamine mõjutab andmete krüpteerimist, peate kinnitama oma mustri."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Kuna teenuse <xliff:g id="SERVICE">%1$s</xliff:g> sisselülitamine mõjutab andmete krüpteerimist, peate kinnitama oma PIN-koodi."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Kuna teenuse <xliff:g id="SERVICE">%1$s</xliff:g> sisselülitamine mõjutab andmete krüpteerimist, peate kinnitama oma parooli."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Toimingute jälgimine"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Saama märguandeid, kui te kasutate rakendust."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Kas peatan teenuse <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2300,11 +2297,15 @@
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Mobiilne andmeside pole saadaval"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"Puudutage, et valida andmeside SIM-kaart"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Kasuta helistamiseks alati seda"</string>
+    <!-- no translation found for select_sim_for_data (2366081042162853044) -->
+    <skip />
+    <!-- no translation found for select_sim_for_calls (3503094771801109334) -->
+    <skip />
     <string name="sim_select_card" msgid="211285163525563293">"SIM-kaardi valimine"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM-kaart on tühi"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM-kaardi nimi"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"SIM-kaart"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"SIM-kaardi pesa %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operaator"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Number"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM-kaardi värv"</string>
@@ -2321,8 +2322,9 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Võrgunime levitamise keelamine"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Võrgunime levitamise keelamine ei lase kolmandatel osapooltel hankida juurdepääsu teie võrguteabele."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Võrgunime levitamise keelamine takistab automaatset ühendamist varjatud võrkudega."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Tegevused"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Küsi esmalt"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Eelistatud SIM-kaart:"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7328134172516945288) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Valik on tegemata"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Seaded"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Seaded"</string>
@@ -2459,7 +2461,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Sees"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Väljas"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Ekraanikuva kinnitamine"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Kui see on sisse lülitatud, saate ekraani kinnitamise abil hoida aktiivse ekraani nähtaval kuni ekraani vabastamiseni.\n\nEkraani kinnitamiseks:\n\n1. Veenduge, et ekraani kinnitamine oleks sisse lülitatud.\n\n2. Avage kinnitatav ekraan.\n\n3. Puudutage nuppu Ülevaade.\n\n4. Puudutage kinnitamisikooni."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Kui see on sisse lülitatud, saate ekraanikuva kinnitamise abil hoida aktiivse ekraanikuva nähtaval kuni ekraanikuva vabastamiseni.\n\nEkraanikuva kinnitamiseks:\n\n1. Veenduge, et ekraanikuva kinnitamine oleks sisse lülitatud.\n\n2. Avage kinnitatav ekraanikuva.\n\n3. Puudutage nuppu Ülevaade.\n\n4. Puudutage kinnitamisikooni."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Tööprofiil"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Katseline)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Kui seade on pööratud"</string>
@@ -2471,24 +2473,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI suhteline teave"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Krüpteerimine"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Jätka"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Seadme täiendavaks kaitsmiseks võite määrata, et seade nõuab käivitumiseks PIN-koodi sisestamist. Kuni seade pole käivitunud, ei saa see vastu võtta kõnesid, sõnumeid ega märguandeid, sh alarme. \n\nSee aitab kaitsta andmeid seadme kaotsimineku või varguse korral."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Seadme täiendavaks kaitsmiseks võite määrata, et seade nõuab käivitumiseks mustri sisestamist. Kuni seade pole käivitunud, ei saa see vastu võtta kõnesid, sõnumeid ega märguandeid, sh alarme. \n\nSee aitab kaitsta andmeid seadme kaotsimineku või varguse korral."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Seadme täiendavaks kaitsmiseks võite määrata, et seade nõuab käivitumiseks parooli sisestamist. Kuni seade pole käivitunud, ei saa see vastu võtta kõnesid, sõnumeid ega märguandeid, sh alarme. \n\nSee aitab kaitsta andmeid seadme kaotsimineku või varguse korral."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Nõua seadme käivitamiseks PIN-koodi sisestamist"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Nõua seadme käivitamiseks mustri sisestamist"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Nõua seadme käivitamiseks parooli sisestamist"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Tänan, ei"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Tänan, ei"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Tänan, ei"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Kas nõuda PIN-koodi?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Kas nõuda mustrit?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Kas nõuda parooli?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Kui sisestate PIN-koodi seadme käivitamiseks, siis pole juurdepääsetavusteenused (nagu <xliff:g id="SERVICE">%1$s</xliff:g>) saadaval."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Kui sisestate mustri seadme käivitamiseks, siis pole juurdepääsetavusteenused (nagu <xliff:g id="SERVICE">%1$s</xliff:g>) saadaval."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Kui sisestate parooli seadme käivitamiseks, siis pole juurdepääsetavusteenused (nagu <xliff:g id="SERVICE">%1$s</xliff:g>) saadaval."</string>

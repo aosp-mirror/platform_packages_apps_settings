@@ -1555,12 +1555,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにすると、端末データの暗号化の強化に画面ロックは使用されなくなります。"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"ユーザー補助サービスがONに設定されているため、端末データの暗号化の強化に画面ロックは使用されません。"</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、パターンの確認が必要となります。"</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、PINの確認が必要となります。"</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、パスワードの確認が必要となります。"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"操作の監視"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"ユーザーがアプリでアクセスしているときに通知を受け取ります。"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g>を停止しますか？"</string>
@@ -2306,11 +2303,15 @@
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"モバイルデータがありません"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"タップしてデータSIMを選択する"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"このSIMを常に通話に使用する"</string>
+    <!-- no translation found for select_sim_for_data (2366081042162853044) -->
+    <skip />
+    <!-- no translation found for select_sim_for_calls (3503094771801109334) -->
+    <skip />
     <string name="sim_select_card" msgid="211285163525563293">"SIMカードを選択"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIMカード番号: <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIMが空です"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIMの名前"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"SIMカード"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"SIMスロット%1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"携帯通信会社"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"番号"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIMの色"</string>
@@ -2327,8 +2328,9 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"SSIDブロードキャスト無効化"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"SSIDブロードキャスト無効化は、第三者があなたのネットワーク情報にアクセスできないようにする機能です。"</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"SSIDブロードキャスト無効化は、非表示のネットワークに対する自動接続を無効にします。"</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"アクティビティ"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"最初に確認する"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"優先SIM:"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7328134172516945288) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"選択してください"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"設定"</string>
     <string name="search_results_title" msgid="1796252422574886932">"設定"</string>
@@ -2465,7 +2467,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"ON"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"OFF"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"画面の固定"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"この設定をONにして画面の固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面の固定を使用するには:\n\n1. 画面の固定がONになっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [概要]をタップします。\n\n4. 固定アイコンをタップします。"</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"この設定をONにして画面の固定を使用すると、固定を解除するまで現在の画面が常に表示されるようになります。\n\n画面の固定を使用するには:\n\n1. 画面の固定がONになっていることを確認します。\n\n2. 固定する画面を開きます。\n\n3. [最近]をタップします。\n\n4. 固定アイコンをタップします。"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"ワークプロフィール"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"（試験運用）"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"端末が回転したとき"</string>
@@ -2477,24 +2479,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI関連情報"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"暗号化"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"次へ"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"この端末の起動前にPINを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"この端末の起動前にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"この端末の起動前にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"端末を起動するにはPINが必須とする"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"端末を起動するにはパターンが必須とする"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"端末を起動するにはパスワードが必須とする"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"必須としない"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"必須としない"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"必須としない"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PINが必要ですか？"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"パターンが必要ですか？"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"パスワードが必要ですか？"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"PINを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"パターンを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"パスワードを入力してこの端末を開始しても、<xliff:g id="SERVICE">%1$s</xliff:g>のようなユーザー補助サービスはまだご利用になれません。"</string>
