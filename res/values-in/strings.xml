@@ -2019,6 +2019,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Batas proses latar blkg"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Tampilkan semua ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Tmplkn dialog Apl Tidak Merespons utk apl ltr blkg"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"Gunakan aplikasi Setelan Google untuk operasi ini"</string>
+    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Kurangi Pemakaian WebView"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Kurangi penggunaan jaringan dengan menggunakan proxy pada sambungan WebView melalui server kompresi Google"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Penggunaan data"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Penggunaan data aplikasi"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Penghitungan data operator mungkin berbeda dengan perangkat Anda."</string>
@@ -2304,7 +2307,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM kosong"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Nama SIM"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"Kartu SIM"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"Slot SIM %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operator"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Nomor"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Warna SIM"</string>
@@ -2321,7 +2324,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Nonaktifkan Siaran Nama Jaringan"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Menonaktifkan Siaran Nama Jaringan melindungi informasi jaringan Anda dari akses pihak ketiga."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Penonaktifan Siaran Nama Jaringan akan mencegah sambungan otomatis ke jaringan tersembunyi."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Kegiatan"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"SIM pilihan untuk"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Tanyakan terlebih dahulu"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Perlu dipilih"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Setelan"</string>
@@ -2372,7 +2375,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Volume pemberitahuan"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"Interupsi"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Saat ada panggilan telepon dan pemberitahuan"</string>
-    <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"Saat ada pemberitahuan"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Selalu ganggu"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Hanya mengizinkan interupsi prioritas"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Jangan ganggu"</string>
@@ -2437,7 +2439,8 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Otomatis aktif"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Tidak pernah"</string>
-    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"Panggilan telepon"</string>
+    <!-- no translation found for zen_mode_calls (7051492091133751208) -->
+    <skip />
     <string name="zen_mode_messages" msgid="5886440273537510894">"Pesan"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"Panggilan telepon/pesan dari"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Semua orang"</string>
@@ -2459,7 +2462,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Aktif"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Nonaktif"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Penyematan layar"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Jika diaktifkan, pemasangan pin pada layar dapat digunakan untuk menampilkan layar saat ini sampai pin dilepas.\n\nUntuk menggunakan pemasangan pin pada layar:\n\n1. Pastikan pemasangan pin pada layar telah diaktifkan.\n\n2. Buka layar yang ingin Anda pasangi pin.\n\n3. Sentuh Ikhtisar.\n\n4. Sentuh ikon pin."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Jika diaktifkan, layar dapat dipasangi pin agar tampilan layar tetap seperti saat ini sampai pin dilepas.\n\nUntuk memasang pin pada layar:\n\n1. Pastikan pemasangan pin pada layar telah diaktifkan.\n\n2. Buka layar yang ingin Anda pasangi pin.\n\n3. Sentuh Ringkasan.\n\n4. Sentuh ikon pin."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil kerja"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Eksperimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Saat perangkat diputar"</string>

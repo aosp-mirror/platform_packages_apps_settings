@@ -2019,6 +2019,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"حد العمليات بالخلفية"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"‏عرض جميع رسائل ANR"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"عرض مربع الحوار \"التطبيق لا يستجيب\" مع تطبيقات الخلفية"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"‏الرجاء استخدام تطبيق إعدادات Google لإجراء هذه العملية"</string>
+    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"‏خفض استخدام شبكة WebView"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"‏تقليل استخدام البيانات من خلال إضافة اتصالات خادم وكيل إلى WebView عبر خوادم الضغط من Google"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"استخدام البيانات"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"استخدام بيانات التطبيق"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"قد تختلف طريقة حساب بيانات مشغل شبكة الجوّال عن طريقة الحساب على جهازك."</string>
@@ -2304,7 +2307,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"‏بطاقة SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"‏بطاقة SIM فارغة"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"‏اسم بطاقة SIM"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"‏بطاقة SIM"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"‏%1$d لمنفذ SIM"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"مشغل شبكة الجوّال"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"الرقم"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"‏لون بطاقة SIM"</string>
@@ -2321,7 +2324,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"تعطيل بث اسم الشبكة"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"يؤدي تعطيل بث اسم الشبكة إلى منع وصول الجهات الخارجية إلى معلومات الشبكة."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"سيؤدي تعطيل بث اسم الشبكة إلى منع الاتصال بالشبكات المخفية تلقائيًا."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"أنشطة"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"‏بطاقة SIM المفضلة لـ"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"السؤال أولاً"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"يلزم التحديد"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"الإعدادات"</string>
@@ -2372,7 +2375,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"مستوى صوت الإشعارات"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"المقاطعات"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"عند تلقي المكالمات والإشعارات"</string>
-    <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"عند تلقي إشعارات"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"المقاطعة دائمًا"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"السماح بالمقاطعات ذات الأولوية فقط"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"عدم المقاطعة"</string>
@@ -2437,7 +2439,8 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"تشغيل تلقائي"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"، "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"مطلقًا"</string>
-    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"المكالمات"</string>
+    <!-- no translation found for zen_mode_calls (7051492091133751208) -->
+    <skip />
     <string name="zen_mode_messages" msgid="5886440273537510894">"الرسائل"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"مكالمات/رسائل من"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"أي شخص"</string>
@@ -2459,7 +2462,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"تشغيل"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"إيقاف"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"تثبيت الشاشة"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"عند تمكين ميزة تثبيت الشاشة، ستتمكن من استخدامها لتصبح الشاشة الحالية في العرض حتى يتم إلغاء التثبيت.\n\nلاستخدام تثبيت الشاشة:\n\n1. تأكد من تمكين تثبيت الشاشة.\n\n2. افتح الشاشة التي تريد تثبيتها.\n\n3. المس \"عرض عام\".\n\n4. المس رمز التثبيت."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"عند تمكين ميزة تثبيت الشاشة، ستتمكن من استخدامها لتصبح الشاشة الحالية في العرض حتى يتم إلغاء التثبيت.\n\nلاستخدام تثبيت الشاشة:\n\n1. تأكد من تمكين تثبيت الشاشة.\n\n2. افتح الشاشة التي تريد تثبيتها.\n\n3. المس \"نظرة عامة\".\n\n4. المس رمز التثبيت."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"الملف الشخصي للعمل"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(تجريبي)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"أوقات تدوير الجهاز"</string>
@@ -2483,10 +2486,7 @@
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"هل يلزم رقم تعريف شخصي؟"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"هل يلزم إدخال نقش؟"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"هل يلزم إدخال كلمة مرور؟"</string>
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"عند إدخال رقم التعريف الشخصي لبدء هذا الجهاز، فلن تكون خدمات الدخول مثل <xliff:g id="SERVICE">%1$s</xliff:g> متاحة."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"عند إدخال نمط لبدء هذا الجهاز، فلن تكون خدمات الدخول مثل <xliff:g id="SERVICE">%1$s</xliff:g> متاحة."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"عند إدخال كلمة المرور لبدء هذا الجهاز، فلن تكون خدمات الدخول مثل <xliff:g id="SERVICE">%1$s</xliff:g> متاحة."</string>
 </resources>
