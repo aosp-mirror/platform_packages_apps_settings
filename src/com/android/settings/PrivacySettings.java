@@ -24,14 +24,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable.SearchIndexProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Gesture lock pattern settings.
@@ -51,6 +60,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mAutoRestore;
     private Dialog mConfirmDialog;
     private PreferenceScreen mConfigure;
+    private boolean mEnabled;
 
     private static final int DIALOG_ERASE_BACKUP = 2;
     private int mDialogType;
@@ -58,9 +68,14 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Don't allow any access if this is a secondary user
+        mEnabled = Process.myUserHandle().isOwner();
+        if (!mEnabled) {
+            return;
+        }
+
         addPreferencesFromResource(R.xml.privacy_settings);
         final PreferenceScreen screen = getPreferenceScreen();
-
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
 
@@ -90,7 +105,9 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         // Refresh UI
-        updateToggles();
+        if (mEnabled) {
+            updateToggles();
+        }
     }
 
     @Override
@@ -233,4 +250,40 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     protected int getHelpResource() {
         return R.string.help_url_backup_reset;
     }
+
+    /**
+     * For Search.
+     */
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new PrivacySearchIndexProvider();
+
+    private static class PrivacySearchIndexProvider extends BaseSearchIndexProvider {
+
+        boolean mIsPrimary;
+
+        public PrivacySearchIndexProvider() {
+            super();
+
+            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_OWNER;
+        }
+
+        @Override
+        public List<SearchIndexableResource> getXmlResourcesToIndex(
+                Context context, boolean enabled) {
+
+            List<SearchIndexableResource> result = new ArrayList<SearchIndexableResource>();
+
+            // For non-primary user, no backup or reset is available
+            if (!mIsPrimary) {
+                return result;
+            }
+
+            SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = R.xml.privacy_settings;
+            result.add(sir);
+
+            return result;
+        }
+    }
+
 }
