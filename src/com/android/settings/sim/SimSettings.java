@@ -428,12 +428,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         public void update() {
             final Resources res = getResources();
 
-            if(mSubInfoRecord.displayName.length() == 0) {
-                setTitle(getCarrierName());
-            } else {
-                setTitle(mSubInfoRecord.displayName);
-            }
             if (mSubInfoRecord != null) {
+                if(TextUtils.isEmpty(mSubInfoRecord.displayName)) {
+                    setTitle(getCarrierName());
+                } else {
+                    setTitle(mSubInfoRecord.displayName);
+                }
                 setSummary(mSubInfoRecord.number.toString());
                 setEnabled(true);
             } else {
