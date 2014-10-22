@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> কে এটি করতে হবে:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"আপনি যদি <xliff:g id="SERVICE">%1$s</xliff:g> চালু করেন, তাহলে ডেটা এনক্রিপশান উন্নত করতে আপনার ডিভাইস আপনার স্ক্রীন লক ব্যবহার করবে না৷"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"যেহেতু আপনি অ্যাক্সেসযোগ্যতা পরিষেবা চালু করেছেন, তাই ডেটা এনক্রিপশান উন্নত করতে আপনার ডিভাইস আপনার স্ক্রীন লক ব্যবহার করবে না৷"</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"কারণ <xliff:g id="SERVICE">%1$s</xliff:g> চালু করলে সেটি ডেটা এনক্রিপশন প্রভাবিত করে, আপনাকে আপনার প্যাটার্ন নিশ্চিত করতে হবে।"</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"কারণ <xliff:g id="SERVICE">%1$s</xliff:g> চালু করলে সেটি ডেটা এনক্রিপশন প্রভাবিত করে, আপনাকে আপনার PIN নিশ্চিত করতে হবে।"</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"কারণ <xliff:g id="SERVICE">%1$s</xliff:g> চালু করলে সেটি ডেটা এনক্রিপশন প্রভাবিত করে, আপনাকে আপনার পাসওয়ার্ড নিশ্চিত করতে হবে।"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"আপনার কার্যগুলি নিরীক্ষণ করুন"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"আপনি যখন একটি অ্যাপ্লিকেশানের সঙ্গে ইন্টারেক্ট করছেন তখন বিজ্ঞপ্তি পান।"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> থামাবেন?"</string>
@@ -2303,7 +2300,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"সিম <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"সিম খালি"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"সিম এর নাম"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"সিম কার্ড"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"SIM স্লট %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"পরিষেবা প্রদানকারী"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"সংখ্যা"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"সিম এর রঙ"</string>
@@ -2320,7 +2317,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"নেটওয়ার্ক নাম সম্প্রচার অক্ষম করুন"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"অক্ষম নেটওয়ার্ক নাম সম্প্রচার আপনার নেটওয়ার্ক তথ্যকে তৃতীয় পক্ষের অ্যাক্সেস হওয়া থেকে রক্ষা করে।"</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"নেটওয়ার্ক নাম সম্প্রচার অক্ষম করলে লুকানো নেটওয়ার্কের সাথে স্বয়ংক্রিয় সংযোগ প্রতিরোধ করা সম্ভব হবে।"</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"কার্যকলাপগুলি"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"এর জন্য পছন্দসই SIM"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"প্রথমে জিজ্ঞাসা করুন"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"নির্বাচন করার প্রয়োজন"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"সেটিংস"</string>
@@ -2371,7 +2368,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"বিজ্ঞপ্তির ভলিউম"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"কল ও ম্যাসেজ আটকান"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"যখন কল এবং বিজ্ঞপ্তিগুলি আসবে"</string>
-    <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"যখন বিজ্ঞপ্তিগুলি আসবে"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"সর্বদা বাধা দিন"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"শুধুমাত্র প্রাধান্য কল ও ম্যাসেজ কখন কখন আটকানোর অনুমতি দিন"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"বাধা দেবেন না"</string>
@@ -2434,7 +2430,8 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"স্বয়ংক্রিয়ভাবে চালু"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"কখনও নয়"</string>
-    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"কলগুলি"</string>
+    <!-- no translation found for zen_mode_calls (7051492091133751208) -->
+    <skip />
     <string name="zen_mode_messages" msgid="5886440273537510894">"বার্তাগুলি"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"এর থেকে কলগুলি/বার্তাগুলি"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"যে কেউ"</string>
@@ -2456,7 +2453,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"চালু করুন"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"বন্ধ করুন"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"স্ক্রীন পিন করা"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"চালু থাকাকালীন, আপনার দ্বারা আনপিন না করা পর্যন্ত বর্তমান স্ক্রীনকে দৃশ্যমান করে রাখতে স্ক্রীন পিন করা ব্যবহার করতে পারেন৷\n\nস্ক্রীন পিন করা ব্যবহার করার জন্য:\n\n১. স্ক্রীন পিন করা চালু রয়েছে কিনা তা নিশ্চিত করুন৷\n\n২. আপনি যে স্ক্রীনটিকে পিন করে রাখতে চান সেটি খুলুন৷\n\n৩. ওভারভিউ-এ স্পর্শ করুন৷\n\n৪. পিন আইকনে স্পর্শ করুন৷"</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"চালু থাকাকালীন, আপনার দ্বারা আনপিন না করা পর্যন্ত বর্তমান স্ক্রীনকে দৃশ্যমান করে রাখতে স্ক্রীন পিন করা ব্যবহার করতে পারেন৷\n\nস্ক্রীন পিন করা ব্যবহার করার জন্য:\n\n১. স্ক্রীন পিন করা চালু রয়েছে কিনা তা নিশ্চিত করুন৷\n\n২. আপনি যে স্ক্রীনটিকে পিন করে রাখতে চান সেটি খুলুন৷\n\n৩. এক নজরে-স্পর্শ করুন৷\n\n৪. পিন আইকনে স্পর্শ করুন৷"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"কর্মস্থলের প্রোফাইল"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(পরীক্ষামূলক)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"ডিভাইস যখন ঘোরানো হবে"</string>
@@ -2468,24 +2465,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI আপেক্ষিক তথ্য"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"এনক্রিপশান"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"অবিরত থাকুন"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"আপনি এই ডিভাইসটিকে, সেটি শুরুর আগে আপনার PIN চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"আপনি এই ডিভাইসটিকে, সেটি শুরুর আগে আপনার প্যাটার্ন চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"আপনি এই ডিভাইসটিকে, সেটি শুরুর আগে আপনার পাসওয়ার্ড চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"ডিভাইস চালু করার জন্য PIN প্রয়োজন"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"ডিভাইস চালু করার জন্য প্যাটার্ন প্রয়োজন"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"ডিভাইস চালু করার জন্য পাসওয়ার্ড প্রয়োজন"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"না থাক"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"না থাক"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"না থাক"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN-এর প্রয়োজন?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"প্যাটার্নের প্রয়োজন?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"পাসওয়ার্ডের প্রয়োজন?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার PIN লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার প্যাটার্ন আঁকবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার পাসওয়ার্ড লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>

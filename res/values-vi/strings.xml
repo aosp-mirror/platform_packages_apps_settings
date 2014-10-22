@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> cần:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Nếu bạn bật <xliff:g id="SERVICE">%1$s</xliff:g>, thiết bị của bạn sẽ không sử dụng khóa màn hình để cải tiến việc mã hóa dữ liệu."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Vì bạn đã bật dịch vụ trợ năng, thiết bị của bạn sẽ không sử dụng khóa màn hình để cải tiến việc mã hóa dữ liệu."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Vì bật <xliff:g id="SERVICE">%1$s</xliff:g> ảnh hưởng đến mã hóa dữ liệu, bạn cần phải xác nhận hình của mình."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Vì bật <xliff:g id="SERVICE">%1$s</xliff:g> ảnh hướng đến mã hóa dữ liệu, bạn cần phải xác nhận mã PIN của mình."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Vì bật <xliff:g id="SERVICE">%1$s</xliff:g> ảnh hưởng đến mã hóa dữ liệu, bạn cần phải xác nhận mật khẩu của mình."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Theo dõi tác vụ của bạn"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Nhận thông báo khi bạn đang tương tác với một ứng dụng."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Dừng <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2303,7 +2300,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"Không có SIM"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Tên SIM"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"Thẻ SIM"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"Khe cắm thẻ SIM %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Nhà cung cấp dịch vụ"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Số"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Màu SIM"</string>
@@ -2320,7 +2317,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Tắt phát sóng tên mạng"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Tắt phát sóng tên mạng sẽ ngăn các bên thứ ba truy cập vào thông tin mạng của bạn."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Việc tắt phát sóng tên mạng sẽ ngăn kết nối tự động với các mạng ẩn."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Hoạt động"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Thẻ SIM ưu tiên cho"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Hỏi trước"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Lựa chọn là bắt buộc"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Cài đặt"</string>
@@ -2371,7 +2368,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Âm lượng thông báo"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"Gián đoạn"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Khi cuộc gọi và thông báo đến"</string>
-    <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"Khi thông báo đến"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Luôn cho phép gián đoạn"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Chỉ cho phép các gián đoạn ưu tiên"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Không cho phép gián đoạn"</string>
@@ -2436,7 +2432,8 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Tự động bật"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Không bao giờ"</string>
-    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"Cuộc gọi"</string>
+    <!-- no translation found for zen_mode_calls (7051492091133751208) -->
+    <skip />
     <string name="zen_mode_messages" msgid="5886440273537510894">"Tin nhắn"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"Cuộc gọi/tin nhắn từ"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Bất kỳ ai"</string>
@@ -2470,24 +2467,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Thông tin liên quan đến IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Mã hóa"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Tiếp tục"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mã PIN của mình trước khi khởi động thiết bị. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động thiết bị. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc lấy cắp."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu hình của mình trước khi khởi động thiết bị. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động thiết bị. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc lấy cắp."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Bạn có thể bảo vệ thiết bị này hơn nữa bằng cách yêu cầu mật khẩu của mình trước khi khởi động thiết bị. Thiết bị không thể nhận cuộc gọi, tin nhắn hoặc thông báo, bao gồm cả báo thức cho đến khi khởi động thiết bị. \n\nĐiều này giúp bảo vệ dữ liệu trên các thiết bị bị mất hoặc lấy cắp."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Yêu cầu mã PIN để khởi động thiết bị"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Yêu cầu hình để khởi động thiết bị"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Yêu cầu mật khẩu để khởi động thiết bị"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Không, cảm ơn"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Không, cảm ơn"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Không, cảm ơn"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Yêu cầu mã PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Yêu cầu hình?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Yêu cầu mật khẩu?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Khi bạn nhập mã PIN của mình để khởi động thiết bị này, các dịch vụ trợ năng như <xliff:g id="SERVICE">%1$s</xliff:g> sẽ chưa khả dụng."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Khi bạn nhập mẫu của mình để khởi động thiết bị này, các dịch vụ trợ năng như <xliff:g id="SERVICE">%1$s</xliff:g> sẽ chưa khả dụng."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Khi bạn nhập mật khẩu của mình để khởi động thiết bị này, các dịch vụ trợ năng như <xliff:g id="SERVICE">%1$s</xliff:g> sẽ chưa khả dụng."</string>
