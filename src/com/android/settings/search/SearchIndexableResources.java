@@ -224,7 +224,7 @@ public final class SearchIndexableResources {
         sResMap.put(PrivacySettings.class.getName(),
                 new SearchIndexableResource(
                         Ranking.getRankForClassName(PrivacySettings.class.getName()),
-                        R.xml.privacy_settings,
+                        NO_DATA_RES_ID,
                         PrivacySettings.class.getName(),
                         R.drawable.ic_settings_backup));
 
