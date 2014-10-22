@@ -1557,12 +1557,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> behöver:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> används inte skärmlåset för att förbättra datakryptering på enheten."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Eftersom du har aktiverat en tillgänglighetstjänst används inte skärmlåset för att förbättra datakryptering på enheten."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta ditt grafiska lösenord."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta din pinkod."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta ditt lösenord."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observera dina aktiviteter"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Ta emot meddelanden när du kommunicerar med en app."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Vill du avbryta <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2022,6 +2019,9 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"Begränsa bakgrundsprocess"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"Visa alla som inte svarar"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"Visa dialogrutan om att appen inte svarar för bakgrundsappar"</string>
+    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"Använd appen Google Inställningar för den här åtgärden"</string>
+    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"Minska nätverksanvändningen via WebView"</string>
+    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Minska nätverksanvändningen genom att använda WebView-anslutningar via proxy genom Googles komprimeringsservrar"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Dataanvändning"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Appens dataanvändning"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Operatörens dataredovisning kan skilja sig från din enhets dataredovisning."</string>
@@ -2307,7 +2307,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM-kort <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM-kortet är tomt"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Namn på SIM-kort"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"SIM-kort"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"SIM-kortsplats %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operatör"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Nummer"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Färg på SIM-kort"</string>
@@ -2324,7 +2324,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Inakt. nätverksnamnsändn."</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Inaktivera Sändning av nätverksnamn och skydda dig från att tredje part får tillgång till nätverksinformation."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Inaktivera sändning av nätverksnamn om du vill förhindra automatisk anslutning till dolda nätverk."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Aktiviteter"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Primärt SIM-kort för"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Fråga först"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Du måste välja något"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Inställningar"</string>
@@ -2375,7 +2375,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Aviseringsvolym"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"Avbrott"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"Vid inkommande samtal och aviseringar"</string>
-    <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"När aviseringar tas emot"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Avbryt alltid"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Tillåt bara prioriterade avbrott"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Avbryt inte"</string>
@@ -2440,7 +2439,7 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Aktivera automatiskt"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Aldrig"</string>
-    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"Samtal"</string>
+    <string name="zen_mode_calls" msgid="7051492091133751208">"Samtal"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Meddelanden"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"Samtal/meddelanden från"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Vem som helst"</string>
@@ -2474,24 +2473,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Relativ information om IMEI-kod"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Kryptering"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Fortsätt"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Du kan skydda enheten ytterligare genom att kräva att pinkoden ska anges innan den startar. Det går inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm, innan enheten har startats. \n\nDetta skyddar data i enheter som har kommit bort eller stulits."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Du kan skydda enheten ytterligare genom att kräva att det grafiska lösenordet ska anges innan den startar. Det går inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm, innan enheten har startats. \n\nDetta skyddar data i enheter som har kommit bort eller stulits."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Du kan skydda enheten ytterligare genom att kräva att lösenordet ska anges innan den startar. Det går inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm, innan enheten har startats. \n\nDetta skyddar data i enheter som har kommit bort eller stulits."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Kräv pinkod för att starta enheten"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Kräv grafiskt lösenord för att starta enheten"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Kräv lösenord för att starta enheten"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Nej tack"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Nej tack"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Nej tack"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Ska pinkod krävas?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Kräv grafiskt lösenord?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Ska lösenord krävas?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Tillgänglighetstjänster som <xliff:g id="SERVICE">%1$s</xliff:g> kommer inte att vara tillgängliga när du anger pinkoden och startar enheten."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Tillgänglighetstjänster som <xliff:g id="SERVICE">%1$s</xliff:g> kommer inte att vara tillgängliga när du ritar ditt mönster och startar enheten."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Tillgänglighetstjänster som <xliff:g id="SERVICE">%1$s</xliff:g> kommer inte att vara tillgängliga när du anger lösenordet och startar enheten."</string>
