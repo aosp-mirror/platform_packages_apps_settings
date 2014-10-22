@@ -2239,12 +2239,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> талап кылат:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Эгер <xliff:g id="SERVICE">%1$s</xliff:g> күйгүзүлсө, түзмөгүңүз дайындарды шифрлөөнү күчтөндүрүү үчүн экраныңыздын кулпусун пайдаланбайт."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Атайын мүмкүнчүлүктөр кызматы күйгүзүлгөндүктөн, түзмөгүңүз дайындарды шифрлөөнү күчтөндүрүү үчүн экраныңыздын кулпусун пайдаланбайт."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> күйгүзүлгөндө дайындарды шифрлөөгө таасир тийгизгендиктен, үлгүңүздү ырасташыңыз керек."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"<xliff:g id="SERVICE">%1$s</xliff:g> күйгүзүлгөндө дайындарды шифрлөөгө таасир тийгизгендиктен, PIN ырасташыңыз керек."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"<xliff:g id="SERVICE">%1$s</xliff:g> күйгүзүлгөндө дайындарды шифрлөөгө таасир тийгизгендиктен, сырсөзүңүздү ырасташыңыз керек."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Иш-аракеттериңизди байкоо"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Колдонмо менен иштеп жатканда эскертмелерди алып туруу."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> токтотулсунбу?"</string>
@@ -3206,11 +3203,15 @@
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Уюктук дайындар жеткиликтүү эмес"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"Дайындар SIM\'ин тандоо үчүн тийиңиз"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Бул нерсе дайым чалуулр үчүн колдонулсн"</string>
+    <!-- no translation found for select_sim_for_data (2366081042162853044) -->
+    <skip />
+    <!-- no translation found for select_sim_for_calls (3503094771801109334) -->
+    <skip />
     <string name="sim_select_card" msgid="211285163525563293">"SIM карта тандаңыз"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM бош"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM аталышы"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"SIM-карта"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"SIM оюкчасы %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Оператор"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Номер"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM түсү"</string>
@@ -3227,8 +3228,9 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Тармак атын жайлтну өчрүү"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Тармактн аталышн жайылтуу мүмкүнчүлгү өчүрүлгндө, үчүнчү жактр тармагыңыздн маалыматн көрбөй калышт."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Тармактн аталышн жайлтуу мүмкүнчлгү өчүрүлгндө, жашырлгн тармактрг автоматтк туташуу мүмкн эмс болт."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Иш-аракеттер"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Биринчи сурасын"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Төмөнкү үчүн тандалган SIM"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7328134172516945288) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Тандоо керек"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Жөндөөлөр"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Жөндөөлөр"</string>
@@ -3379,28 +3381,19 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI байланыштуу маалымат"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Шифрлөө"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Улантуу"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Бул түзмөктү иштетүү үчүн PIN\'ди талап кылуу менен, аны коргосоңуз болот. Түзмөк иштетилмейинче чалуулар, билдирүүлөр же эскертмелер, ошондой эле ойготкучтар алынбайт. \n\nУшуну менен, жоголгон же уурдалган түзмөктөрдөгү дайындар корголот."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Бул түзмөктү иштетүү үчүн үлгүнү талап кылуу менен, аны коргосоңуз болот. Түзмөк иштетилмейинче чалуулар, билдирүүлөр же эскертмелер, ошондой эле ойготкучтар алынбайт. \n\nУшуну менен, жоголгон же уурдалган түзмөктөрдөгү дайындар корголот."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Бул түзмөктү иштетүү үчүн сырсөздү талап кылуу менен, аны коргосоңуз болот. Түзмөк иштетилмейинче чалуулар, билдирүүлөр же эскертмелер, ошондой эле ойготкучтар алынбайт. \n\nУшуну менен, жоголгон же уурдалган түзмөктөрдөгү дайындар корголот."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Түзмөктү жүргүзүү үчүн PIN талап кылуу"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Түзмөктү жүргүзүү үчүн графикалык ачкыч талап кылуу"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Түзмөктү жүргүзүү үчүн сырсөз талап кылуу"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Жок, рахмат"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Жок, рахмат"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Жок, рахмат"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN талап кылынсынбы?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Үлгү талап кылынсынбы?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Сырсөз талап кылынсынбы?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Бул түзмөктү иштетүү үчүн PIN киргизилгенде, <xliff:g id="SERVICE">%1$s</xliff:g> сыяктуу атайын мүмкүнчүлүктөр кызматтары иштебей калат."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Бул түзмөктү иштетүү үчүн үлгүңүз киргизилгенде, <xliff:g id="SERVICE">%1$s</xliff:g> сыяктуу атайын мүмкүнчүлүктөр кызматтары иштебей калат."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Бул түзмөктү иштетүү үчүн сырсөзүңүз киргизилгенде, <xliff:g id="SERVICE">%1$s</xliff:g> сыяктуу атайын мүмкүнчүлүктөр кызматтары иштебей калат."</string>
 </resources>

@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necessita de:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Se ativar o <xliff:g id="SERVICE">%1$s</xliff:g>, o dispositivo não utilizará o bloqueio de ecrã para otimizar a encriptação de dados."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Uma vez que ativou um serviço de acessibilidade, o dispositivo não utilizará o bloqueio de ecrã para otimizar a encriptação de dados."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Uma vez que ligar <xliff:g id="SERVICE">%1$s</xliff:g> afeta a encriptação de dados, o utilizador tem de confirmar o seu padrão."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Uma vez que ligar <xliff:g id="SERVICE">%1$s</xliff:g> afeta a encriptação de dados, o utilizador tem de confirmar o seu PIN."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Uma vez que ligar <xliff:g id="SERVICE">%1$s</xliff:g> afeta a encriptação de dados, o utilizador tem de confirmar a sua palavra-passe."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observar as suas ações"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Receber notificações quando estiver a interagir com uma aplicação."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Parar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2300,11 +2297,15 @@
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Os dados móveis estão indisponíveis"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"Tocar para selecionar um SIM de dados"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Utilizar sempre este para chamadas"</string>
+    <!-- no translation found for select_sim_for_data (2366081042162853044) -->
+    <skip />
+    <!-- no translation found for select_sim_for_calls (3503094771801109334) -->
+    <skip />
     <string name="sim_select_card" msgid="211285163525563293">"Selecionar um cartão SIM"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM vazio"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Nome do SIM"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"Cartão SIM"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"Ranhura para cartão SIM %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operador"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Número"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Cor do SIM"</string>
@@ -2321,8 +2322,9 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Desativar a transmissão do nome da rede"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Desativar a transmissão do nome da rede protege do acesso por terceiros às suas informações de rede."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Desativar a transmissão do nome da rede irá evitar a ligação automática a redes ocultas."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Atividades"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Perguntar primeiro"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Cartão SIM preferido para"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7328134172516945288) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"A seleção é necessária"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Definições"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Definições"</string>
@@ -2471,24 +2473,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Informações relativas do IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Encriptação"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continuar"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"O utilizador pode proteger ainda mais este dispositivo, se solicitar o seu PIN antes do arranque. Até o dispositivo arrancar, não pode receber chamadas, mensagens ou notificações, incluindo alarmes. \n\nIsto ajuda a proteger dados em dispositivos perdidos ou roubados."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"O utilizador pode proteger ainda mais este dispositivo, se solicitar o seu padrão antes do arranque. Até o dispositivo arrancar, não pode receber chamadas, mensagens ou notificações, incluindo alarmes. \n\nIsto ajuda a proteger dados em dispositivos perdidos ou roubados."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"O utilizador pode proteger ainda mais este dispositivo, se solicitar a sua palavra-passe antes do arranque. Até o dispositivo arrancar, não pode receber chamadas, mensagens ou notificações, incluindo alarmes. \n\nIsto ajuda a proteger dados em dispositivos perdidos ou roubados."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Exigir PIN para iniciar o dispositivo"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Exigir sequência para iniciar o dispositivo"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Exigir palavra-passe para iniciar o dispositivo"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Não, obrigado"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Não, obrigado"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Não, obrigado"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Solicitar PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Solicitar padrão?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Solicitar palavra-passe?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Quando introduzir o seu PIN para iniciar este dispositivo, os serviços de acessibilidade, como o <xliff:g id="SERVICE">%1$s</xliff:g>, ainda não estarão disponíveis."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Quando introduzir a sua sequência para iniciar este dispositivo, os serviços de acessibilidade, como o <xliff:g id="SERVICE">%1$s</xliff:g>, ainda não estarão disponíveis."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Quando introduzir a sua palavra-passe para iniciar este dispositivo, os serviços de acessibilidade, como o <xliff:g id="SERVICE">%1$s</xliff:g>, ainda não estarão disponíveis."</string>

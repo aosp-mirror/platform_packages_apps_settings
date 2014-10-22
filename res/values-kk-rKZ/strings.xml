@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне қажет:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> қоссаңыз, құрылғыңыз деректерді шифрлау үшін экранды бекітуді пайдаланбайды."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Сіз арнайы мүмкіндіктер қызметін қосқандықтан, құрылғыңыз деректерді шифрлау үшін экранды бекітуді пайдаланбайды."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> қосу деректерді шифрлауға әсер ететіндіктен, өрнекті растау керек."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"<xliff:g id="SERVICE">%1$s</xliff:g> қосу деректерді шифрлауға әсер ететіндіктен, PIN кодын растау керек."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"<xliff:g id="SERVICE">%1$s</xliff:g> қосу деректерді шифрлауға әсер ететіндіктен, құпия сөзді растау керек."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Әрекеттерді шолу"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Қолданбамен қатынасу барысында хабарлар алу."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> тоқтатылсын ба?"</string>
@@ -2300,11 +2297,15 @@
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"Ұялы деректер қол жетімді емес"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"Деректер SIM картасын таңдау үшін түртіңіз"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"Осыны қоңыраулар үшін әрқашан пайдалану"</string>
+    <!-- no translation found for select_sim_for_data (2366081042162853044) -->
+    <skip />
+    <!-- no translation found for select_sim_for_calls (3503094771801109334) -->
+    <skip />
     <string name="sim_select_card" msgid="211285163525563293">"SIM картасын таңдау"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM бос"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM атауы"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"SIM картасы"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"%1$d SIM слоты"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Оператор"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Нөмір"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM түсі"</string>
@@ -2321,8 +2322,9 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Желі атауын таратуды өшіру"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"«Желі атауын таратуды өшіру» желі туралы ақпаратқа қатынас алатын үшінші тараптардан қорғайды."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"«Желі атауын таратуды өшіру» жасырын желілерге автоматты түрде қосылуды болдырмайды."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Әрекеттер"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Алдымен сұрау"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Келесі үшін таңдаулы SIM"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7328134172516945288) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Таңдау қажет"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Параметрлер"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Параметрлер"</string>
@@ -2471,28 +2473,19 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI кодына қатысты ақпарат"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Шифрлау"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Жалғастыру"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Іске қосылуы алдында PIN кодын талап ету арқылы осы құрылғыны қосымша қорғауға болады. Іске қосылғанша құрылғы қоңырауларды, хабарларды немесе хабарландыруларды, соның ішінде, дабылдарды қабылдай алмайды. \n\nБұл жоғалған немесе ұрланған құрылғылардағы деректерді қорғауға көмектеседі."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Іске қосылуы алдында өрнекті талап ету арқылы осы құрылғыны қосымша қорғауға болады. Іске қосылғанша құрылғы қоңырауларды, хабарларды немесе хабарландыруларды, соның ішінде, дабылдарды қабылдай алмайды. \n\nБұл жоғалған немесе ұрланған құрылғылардағы деректерді қорғауға көмектеседі."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Іске қосылуы алдында құпия сөзді талап ету арқылы осы құрылғыны қосымша қорғауға болады. Іске қосылғанша құрылғы қоңырауларды, хабарларды немесе хабарландыруларды, соның ішінде, дабылдарды қабылдай алмайды. \n\nБұл жоғалған немесе ұрланған құрылғылардағы деректерді қорғауға көмектеседі."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Құрылғыны іске қосу үшін PIN кодын қажет етеді"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Құрылғыны іске қосу үшін өрнекті қажет етеді"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Құрылғыны іске қосу үшін құпия сөзді қажет етеді"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Жоқ, рақмет"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Жоқ, рақмет"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Жоқ, рақмет"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN коды қажет пе?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Өрнек қажет пе?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Құпия сөз қажет пе?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Осы құрылғыны іске қосу үшін PIN кодын енгізгенде <xliff:g id="SERVICE">%1$s</xliff:g> сияқты арнайы мүмкіндіктер қызметтері әлі қол жетімді болмайды."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Осы құрылғыны іске қосу үшін өрнекті енгізгенде <xliff:g id="SERVICE">%1$s</xliff:g> сияқты арнайы мүмкіндіктер қызметтері әлі қол жетімді болмайды."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Осы құрылғыны іске қосу үшін құпия сөзді енгізгенде <xliff:g id="SERVICE">%1$s</xliff:g> сияқты арнайы мүмкіндіктер қызметтері әлі қол жетімді болмайды."</string>
 </resources>
