@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> има нужда от следните неща:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ако включите <xliff:g id="SERVICE">%1$s</xliff:g>, устройството ви няма да използва заключването на екрана ви за подобряване на шифроването на данни."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Тъй като сте включили услуга за достъпност, устройството ви няма да използва заключването на екрана ви за подобряване на шифроването на данни."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Тъй като включването на <xliff:g id="SERVICE">%1$s</xliff:g> засяга шифроването на данни, трябва да потвърдите фигурата си."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Тъй като включването на <xliff:g id="SERVICE">%1$s</xliff:g> засяга шифроването на данни, трябва да потвърдите ПИН кода си."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Тъй като включването на <xliff:g id="SERVICE">%1$s</xliff:g> засяга шифроването на данни, трябва да потвърдите паролата си."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Наблюдение на действията ви"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Получаване на известия, когато взаимодействате с приложение."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Да се спре ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2303,7 +2300,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM карта <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"Слотът за SIM карта е празен"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Име на SIM картата"</string>
-    <string name="sim_editor_title" msgid="6364331907415443358">"SIM карта"</string>
+    <string name="sim_editor_title" msgid="4034301817366627870">"Слот за SIM карта: %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Оператор"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Номер"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"Цвят на SIM картата"</string>
@@ -2320,7 +2317,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Излъчв. на името на мрежата: Деакт."</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Спирането на излъчв. на името на мрежата ви предотвратява достъпа на трети страни до информ. за нея."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Деакт. на излъчването на името на мрежата ще предотврати автоматичното свързване със скрити мрежи."</string>
-    <string name="sim_pref_divider" msgid="4194064766764348209">"Активности"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"Предпочитана SIM карта за"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"Първо да се извежда запитване"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Изборът е задължителен"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Настройки"</string>
@@ -2371,7 +2368,6 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Сила на звука при известие"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"Прекъсвания"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"При получаване на обаждания и известия"</string>
-    <string name="zen_mode_option_title_novoice" msgid="6680706009915204785">"При получаване на известия"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"Прекъсване винаги"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Разрешаване само на приоритетни прекъсвания"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Без прекъсване"</string>
@@ -2436,7 +2432,8 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Автоматично включване"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Никога"</string>
-    <string name="zen_mode_phone_calls" msgid="8956214416859303966">"Обаждания"</string>
+    <!-- no translation found for zen_mode_calls (7051492091133751208) -->
+    <skip />
     <string name="zen_mode_messages" msgid="5886440273537510894">"Съобщения"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"Обаждания/съобщения от"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Всички"</string>
@@ -2470,24 +2467,18 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Информация относно IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Шифроване"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Напред"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете ПИН кодът ви да се изисква при стартиране. Преди въвеждането му няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят. \n\nФункцията помага за защита на данните на загубени или откраднати устройства."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете фигурата ви да се изисква при стартиране. Преди въвеждането й няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят. \n\nФункцията помага за защита на данните на загубени или откраднати устройства."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането й няма да могат да се получават обаждания, съобщения или известия. Будилниците също няма да работят. \n\nФункцията помага за защита на данните на загубени или откраднати устройства."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Да се изисква ПИН код за стартиране на устройството"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Да се изисква фигура за стартиране на устройството"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Да се изисква парола за стартиране на устройството"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Не, благодаря"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Не, благодаря"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Не, благодаря"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Да се изисква ли ПИН код?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Да се изисква ли фигура?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Да се изисква ли парола?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Когато въведете ПИН кода си, за да стартирате това устройство, услугите за достъпност, като например <xliff:g id="SERVICE">%1$s</xliff:g>, още няма да бъдат налични."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Когато въведете фигурата си, за да стартирате това устройство, услугите за достъпност, като например <xliff:g id="SERVICE">%1$s</xliff:g>, още няма да бъдат налични."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Когато въведете паролата си, за да стартирате това устройство, услугите за достъпност, като например <xliff:g id="SERVICE">%1$s</xliff:g>, още няма да бъдат налични."</string>
