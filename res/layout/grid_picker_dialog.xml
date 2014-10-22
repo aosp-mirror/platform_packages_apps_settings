@@ -17,16 +17,21 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingStart="24dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="24dp">
 
     <GridView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="112dp"
+        android:horizontalSpacing="16dp"
+        android:verticalSpacing="16dp"
         android:numColumns="auto_fit"
+        android:columnWidth="96dp"
         android:scrollbarStyle="insideOverlay"
-        android:stretchMode="spacingWidthUniform" />
+        android:stretchMode="columnWidth" />
 
     <!-- HACK: Setting minHeight has no effect within a dialog layout,
          so this view keeps the minimum height above 300dp. -->
