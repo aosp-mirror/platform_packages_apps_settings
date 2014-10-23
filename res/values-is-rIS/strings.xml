@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> þarf að:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ef þú kveikir á <xliff:g id="SERVICE">%1$s</xliff:g> mun tækið ekki nota skjálásinn til að efla dulkóðun gagna."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Þar sem þú hefur kveikt á aðgengisþjónustu mun tækið ekki nota skjálásinn til að efla dulkóðun gagna."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Ef <xliff:g id="SERVICE">%1$s</xliff:g> er gert virkt hefur það áhrif á dulkóðun gagna og því þarftu að staðfesta mynstrið þitt."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Ef <xliff:g id="SERVICE">%1$s</xliff:g> er gert virkt hefur það áhrif á dulkóðun gagna og því þarftu að staðfesta PIN-númerið þitt."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Ef <xliff:g id="SERVICE">%1$s</xliff:g> er gert virkt hefur það áhrif á dulkóðun gagna og því þarftu að staðfesta aðgangsorðið þitt."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Fylgjast með því sem þú gerir"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Taka við tilkynningum þegar þú ert að nota forrit."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Stöðva <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2470,24 +2467,18 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Halda þessari stefnu"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Dulkóðun"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Halda áfram"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Þú getur verndað þetta tæki betur með því að krefjast PIN-númers fyrir ræsingu. Áður en tækið er ræst getur það ekki tekið á móti símtölum, skilaboðum eða tilkynningum, þar á meðal vekjurum. \n\nÞetta eykur gagnavernd í týndum eða stolnum tækjum."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Þú getur verndað þetta tæki betur með því að krefjast mynsturs fyrir ræsingu. Áður en tækið er ræst getur það ekki tekið á móti símtölum, skilaboðum eða tilkynningum, þar á meðal vekjurum. \n\nÞetta eykur gagnavernd í týndum eða stolnum tækjum."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Þú getur verndað þetta tæki betur með því að krefjast aðgangsorðs fyrir ræsingu. Áður en tækið er ræst getur það ekki tekið á móti símtölum, skilaboðum eða tilkynningum, þar á meðal vekjurum. \n\nÞetta eykur gagnavernd í týndum eða stolnum tækjum."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Krefjast PIN-númers til að ræsa tækið"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Krefjast mynsturs til að ræsa tækið"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Krefjast aðgangsorðs til að ræsa tækið"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Nei, takk"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Nei, takk"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Nei, takk"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Krefjast PIN-númers?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Krefjast mynsturs?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Krefjast aðgangsorðs?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Þegar þú slærð inn PIN-númerið þitt til að ræsa þetta tæki verður aðgengisþjónusta á borð við <xliff:g id="SERVICE">%1$s</xliff:g> ekki strax í boði."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Þegar þú teiknar mynstrið þitt til að ræsa þetta tæki verður aðgengisþjónusta á borð við <xliff:g id="SERVICE">%1$s</xliff:g> ekki strax í boði."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Þegar þú slærð inn aðgangsorðið þitt til að ræsa þetta tæki verður aðgengisþjónusta á borð við <xliff:g id="SERVICE">%1$s</xliff:g> ekki strax í boði."</string>

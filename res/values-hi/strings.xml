@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> के लिए यह आवश्यक है:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"यदि आप <xliff:g id="SERVICE">%1$s</xliff:g> को चालू करते हैं, तो आपका डिवाइस डेटा एन्क्रिप्शन को एन्हांस करने के लिए आपके स्क्रीन लॉक का उपयोग नहीं करेगा."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"क्योंकि आपने सरल उपयोग सेवा चालू की हुई है इसलिए आपका डिवाइस डेटा एन्क्रिप्शन को एन्हांस करने के लिए आपके स्क्रीन लॉक का उपयोग नहीं करेगा."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"क्‍योंकि <xliff:g id="SERVICE">%1$s</xliff:g> को चालू करने से डेटा एेन्‍क्रिप्‍शन प्रभावित होता है, इसलिए आपको अपने पैटर्न की पुष्‍टि करनी होगी."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"क्‍योंकि <xliff:g id="SERVICE">%1$s</xliff:g> को चालू करने से डेटा एेन्‍क्रिप्‍शन प्रभावित होता है, इसलिए आपको अपने पिन की पुष्‍टि करनी होगी"</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"क्‍योंकि <xliff:g id="SERVICE">%1$s</xliff:g> को चालू करने से डेटा एेन्‍क्रिप्‍शन प्रभावित होता है, इसलिए आपको अपने पासवर्ड की पुष्‍टि करनी होगी."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"अपनी कार्यवाही ध्यान से देखें"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"किसी ऐप्स  से सहभागिता करते समय नोटिफिकेशन प्राप्त करें."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> को रोकें?"</string>
@@ -2460,7 +2457,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"चालू"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"बंद"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"स्क्रीन पिन करना"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"चालू होने पर, जब तक आप अनपिन नहीं कर देते तब तक वर्तमान स्क्रीन को दृश्य में बनाए रखने के लिए स्क्रीन पिनिंग का उपयोग कर सकते हैं.\n\nस्क्रीन पिनिंग का उपयोग करने के लिए:\n\n1. सुनिश्चित करें कि स्क्रीन पिनिंग चालू है.\n\n2. वह स्क्रीन खोलें जिसे आप पिन करना चाहते हैं.\n\n3. ओवरव्यू स्पर्श करें.\n\n4. पिन आइकन स्पर्श करें."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"चालू होने पर, जब तक आप अनपिन नहीं कर देते तब तक वर्तमान स्क्रीन को दृश्य में बनाए रखने के लिए स्क्रीन पिनिंग का उपयोग कर सकते हैं.\n\nस्क्रीन पिनिंग का उपयोग करने के लिए:\n\n1. सुनिश्चित करें कि स्क्रीन पिनिंग चालू है.\n\n2. वह स्क्रीन खोलें जिसे आप पिन करना चाहते हैं.\n\n3. अवलोकन स्पर्श करें.\n\n4. पिन आइकन स्पर्श करें."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"कार्य प्रोफ़ाइल"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(प्रायोगिक)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"डिवाइस घुमाए जाने पर"</string>
@@ -2470,24 +2467,18 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"वर्तमान अभिविन्यास में बने रहें"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"एैन्‍क्रिप्‍शन"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"जारी रखें"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"आप अपने डिवाइस के प्रारंभ होने से पहले अपना पिन डालना आवश्‍यक बनाकर उसे अधिक सुरक्षित बना सकते हैं. जब तक डिवाइस प्रारंभ नहीं हो जाता, वह अलार्म सहित कॉल, संदेश या नोटिफिकेशन प्राप्‍त नहीं कर सकता. \n\nइससे गुम हुए या चोरी गए डिवाइस पर डेटा की सुरक्षा करने में सहायता मिलती है."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"आप अपने डिवाइस के प्रारंभ होने से पहले अपना पैटर्न डालना आवश्‍यक बनाकर उसे अधिक सुरक्षित बना सकते हैं. जब तक डिवाइस प्रारंभ नहीं हो जाता, वह अलार्म सहित कॉल, संदेश या नोटिफिकेशन प्राप्‍त नहीं कर सकता. \n\nइससे गुम हुए या चोरी गए डिवाइस पर डेटा की सुरक्षा करने में सहायता मिलती है."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"आप अपने डिवाइस के प्रारंभ होने से पहले अपना पासवर्ड डालना आवश्‍यक बनाकर उसे अधिक सुरक्षित बना सकते हैं. जब तक डिवाइस प्रारंभ नहीं हो जाता, वह अलार्म सहित कॉल, संदेश या नोटिफिकेशन प्राप्‍त नहीं कर सकता. \n\nइससे गुम हुए या चोरी गए डिवाइस पर डेटा की सुरक्षा करने में सहायता मिलती है."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"डिवाइस प्रारंभ करने के लिए पिन आवश्यक है"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"डिवाइस प्रारंभ करने के लिए पैटर्न आवश्यक है"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"डिवाइस प्रारंभ करने के लिए पासवर्ड आवश्यक है"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"नहीं, रहने दें"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"नहीं, रहने दें"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"नहीं, रहने दें"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"पिन आवश्‍यक है?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"पैटर्न आवश्‍यक है?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"पासवर्ड आवश्‍यक है?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"जब आप इस डिवाइस को प्रारंभ करने के लिए अपना पिन डालते हैं, तो <xliff:g id="SERVICE">%1$s</xliff:g> जैसी सरल उपयोग सेवाएं अभी भी उपलब्ध नहीं होंगी."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"जब आप इस डिवाइस को प्रारंभ करने के लिए अपना पैटर्न डालते हैं, तो <xliff:g id="SERVICE">%1$s</xliff:g> जैसी सरल उपयोग सेवाएं अभी भी उपलब्ध नहीं होंगी."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"जब आप इस डिवाइस को प्रारंभ करने के लिए अपना पासवर्ड डालते हैं, तो <xliff:g id="SERVICE">%1$s</xliff:g> जैसी सरल उपयोग सेवाएं अभी भी उपलब्ध नहीं होंगी."</string>

@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> potřebuje:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Pokud zapnete službu <xliff:g id="SERVICE">%1$s</xliff:g>, zařízení nebude používat zámek obrazovky k vylepšení šifrování dat."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Vzhledem k tomu, že jste zapnuli službu usnadnění přístupu, nebude zařízení používat zámek obrazovky k vylepšení šifrování dat."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Protože zapnutí služby <xliff:g id="SERVICE">%1$s</xliff:g> má vliv na šifrování dat, je třeba, abyste potvrdili své gesto."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Protože zapnutí služby <xliff:g id="SERVICE">%1$s</xliff:g> má vliv na šifrování dat, je třeba, abyste potvrdili svůj kód PIN."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Protože zapnutí služby <xliff:g id="SERVICE">%1$s</xliff:g> má vliv na šifrování dat, je třeba, abyste potvrdili své heslo."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Sledovat vlastní akce"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Při používání aplikací vás budeme informovat o provedených akcích."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Zastavit službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2245,7 +2242,7 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Omezení"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Odebrat omezení"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Změnit PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Zobrazit upozornění"</string>
+    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Zobrazovat oznámení"</string>
     <string name="help_label" msgid="6886837949306318591">"Nápověda a zpětná vazba"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Účet pro obsah"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"ID fotografie"</string>
@@ -2470,24 +2467,18 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Zachovat aktuální orientaci"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Šifrování"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Pokračovat"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Toto zařízení můžete dále ochránit tím, že před jeho spuštěním bude požadován kód PIN. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků. \n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Toto zařízení můžete dále ochránit tím, že před jeho spuštěním bude požadováno gesto. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků. \n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Toto zařízení můžete dále ochránit tím, že před jeho spuštěním bude požadováno heslo. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků. \n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Při spuštění zařízení požadovat kód PIN"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Při spuštění zařízení požadovat gesto"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Při spuštění zařízení požadovat heslo"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Ne, děkuji"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Ne, děkuji"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Ne, děkuji"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Požadovat kód PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Požadovat gesto?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Požadovat heslo?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Při zadávání kódu PIN ke spuštění zařízení ještě služby usnadnění přístupu, jako je <xliff:g id="SERVICE">%1$s</xliff:g>, nebudou k dispozici."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Při zadávání gesta ke spuštění zařízení ještě služby usnadnění přístupu, jako je <xliff:g id="SERVICE">%1$s</xliff:g>, nebudou k dispozici."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Při zadávání hesla ke spuštění zařízení ještě služby usnadnění přístupu, jako je <xliff:g id="SERVICE">%1$s</xliff:g>, nebudou k dispozici."</string>

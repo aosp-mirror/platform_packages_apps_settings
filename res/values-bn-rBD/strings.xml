@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> কে এটি করতে হবে:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"আপনি যদি <xliff:g id="SERVICE">%1$s</xliff:g> চালু করেন, তাহলে ডেটা এনক্রিপশান উন্নত করতে আপনার ডিভাইস আপনার স্ক্রীন লক ব্যবহার করবে না৷"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"যেহেতু আপনি অ্যাক্সেসযোগ্যতা পরিষেবা চালু করেছেন, তাই ডেটা এনক্রিপশান উন্নত করতে আপনার ডিভাইস আপনার স্ক্রীন লক ব্যবহার করবে না৷"</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"কারণ <xliff:g id="SERVICE">%1$s</xliff:g> চালু করলে সেটি ডেটা এনক্রিপশন প্রভাবিত করে, আপনাকে আপনার প্যাটার্ন নিশ্চিত করতে হবে।"</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"কারণ <xliff:g id="SERVICE">%1$s</xliff:g> চালু করলে সেটি ডেটা এনক্রিপশন প্রভাবিত করে, আপনাকে আপনার PIN নিশ্চিত করতে হবে।"</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"কারণ <xliff:g id="SERVICE">%1$s</xliff:g> চালু করলে সেটি ডেটা এনক্রিপশন প্রভাবিত করে, আপনাকে আপনার পাসওয়ার্ড নিশ্চিত করতে হবে।"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"আপনার কার্যগুলি নিরীক্ষণ করুন"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"আপনি যখন একটি অ্যাপ্লিকেশানের সঙ্গে ইন্টারেক্ট করছেন তখন বিজ্ঞপ্তি পান।"</string>
     <string name="disable_service_title" msgid="3624005212728512896">"<xliff:g id="SERVICE">%1$s</xliff:g> থামাবেন?"</string>
@@ -2458,7 +2455,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"চালু করুন"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"বন্ধ করুন"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"স্ক্রীন পিন করা"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"চালু থাকাকালীন, আপনার দ্বারা আনপিন না করা পর্যন্ত বর্তমান স্ক্রীনকে দৃশ্যমান করে রাখতে স্ক্রীন পিন করা ব্যবহার করতে পারেন৷\n\nস্ক্রীন পিন করা ব্যবহার করার জন্য:\n\n১. স্ক্রীন পিন করা চালু রয়েছে কিনা তা নিশ্চিত করুন৷\n\n২. আপনি যে স্ক্রীনটিকে পিন করে রাখতে চান সেটি খুলুন৷\n\n৩. ওভারভিউ-এ স্পর্শ করুন৷\n\n৪. পিন আইকনে স্পর্শ করুন৷"</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"চালু থাকাকালীন, আপনার দ্বারা আনপিন না করা পর্যন্ত বর্তমান স্ক্রীনকে দৃশ্যমান করে রাখতে স্ক্রীন পিন করা ব্যবহার করতে পারেন৷\n\nস্ক্রীন পিন করা ব্যবহার করার জন্য:\n\n১. স্ক্রীন পিন করা চালু রয়েছে কিনা তা নিশ্চিত করুন৷\n\n২. আপনি যে স্ক্রীনটিকে পিন করে রাখতে চান সেটি খুলুন৷\n\n৩. এক নজরে-স্পর্শ করুন৷\n\n৪. পিন আইকনে স্পর্শ করুন৷"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"কর্মস্থলের প্রোফাইল"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(পরীক্ষামূলক)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"ডিভাইস যখন ঘোরানো হবে"</string>
@@ -2468,24 +2465,18 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"বর্তমান সজ্জায় থাকুন"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"এনক্রিপশান"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"অবিরত থাকুন"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"আপনি এই ডিভাইসটিকে, সেটি শুরুর আগে আপনার PIN চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"আপনি এই ডিভাইসটিকে, সেটি শুরুর আগে আপনার প্যাটার্ন চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"আপনি এই ডিভাইসটিকে, সেটি শুরুর আগে আপনার পাসওয়ার্ড চাইবে, এমন পদ্ধতির মাধ্যমে আরো সুরক্ষিত করতে পারেন। ডিভাইস শুরু না হওয়া পর্যন্ত, এটি অ্যালার্ম সহ কল, বার্তা, বিজ্ঞপ্তি প্রাপ্ত করতে পারবেন না। \n\nআপনার ডিভাইস হারিয়ে বা চুরি হয়ে গেলে ডেটা সুরক্ষার ক্ষেত্রে সহায়তা করে।"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"ডিভাইস চালু করার জন্য PIN প্রয়োজন"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"ডিভাইস চালু করার জন্য প্যাটার্ন প্রয়োজন"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"ডিভাইস চালু করার জন্য পাসওয়ার্ড প্রয়োজন"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"না থাক"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"না থাক"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"না থাক"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN-এর প্রয়োজন?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"প্যাটার্নের প্রয়োজন?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"পাসওয়ার্ডের প্রয়োজন?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার PIN লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার প্যাটার্ন আঁকবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"এই ডিভাইসটি চালু করার জন্য যখন আপনি আপনার পাসওয়ার্ড লিখবেন, তখনও <xliff:g id="SERVICE">%1$s</xliff:g> এর মতো অ্যাক্সেসযোগ্যতা বিষয়ক পরিষেবাগুলি উপলব্ধ হবে না৷"</string>
