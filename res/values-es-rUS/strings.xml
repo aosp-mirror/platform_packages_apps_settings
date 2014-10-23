@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si activas <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Dado que activaste un servicio de accesibilidad, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Dado que la encriptación de datos se ve afectada al activar <xliff:g id="SERVICE">%1$s</xliff:g>, debes confirmar el patrón."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Dado que la encriptación de datos se ve afectada al activar <xliff:g id="SERVICE">%1$s</xliff:g>, debes confirmar el PIN."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Dado que la encriptación de datos se ve afectada al activar <xliff:g id="SERVICE">%1$s</xliff:g>, debes confirmar la contraseña."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Observar tus acciones"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Recibe notificaciones cuando estés interactuando con una aplicación."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"¿Quieres detener <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2460,7 +2457,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activar"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivar"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fijar pantalla"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Al activar esta función, la pantalla actual seguirá visible hasta que dejes de fijarla.\n\nSi quieres usar la función para fijar la pantalla, sigue estos pasos:\n\n1. Asegúrate de que la función esté activada.\n\n2. Abre la pantalla que quieras fijar.\n\n3. Toca Descripción general.\n\n4. Toca el ícono para fijar."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Al activar esta función, la pantalla actual seguirá visible hasta que dejes de fijarla.\n\nSi quieres usar la función para fijar la pantalla, sigue estos pasos:\n\n1. Asegúrate de que la función esté activada.\n\n2. Abre la pantalla que quieras fijar.\n\n3. Toca Recientes.\n\n4. Toca el ícono para fijar."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Perfil de trabajo"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Al girar el dispositivo"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Mantener orientación actual"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Encriptación"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continuar"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Puedes solicitar el PIN del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta configuración ayuda a proteger los datos en dispositivos perdidos o robados."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Puedes solicitar el patrón del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta configuración ayuda a proteger los datos en dispositivos perdidos o robados."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Puedes solicitar la contraseña del dispositivo antes de iniciarlo para aumentar la protección. Hasta que el dispositivo no se inicie, no podrá recibir llamadas, mensajes ni notificaciones, incluidas las alarmas. \n\nEsta configuración ayuda a proteger los datos en dispositivos perdidos o robados."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Solicitar PIN para iniciar dispositivo"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Solicitar patrón para iniciar dispositivo"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Solicitar contraseña para iniciar dispositivo"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"No"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"No"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"No"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"¿Solicitar PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"¿Solicitar patrón?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"¿Solicitar contraseña?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Cuando ingreses el PIN para iniciar el dispositivo, los servicios de accesibilidad, como <xliff:g id="SERVICE">%1$s</xliff:g>, aún no estarán disponibles."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Cuando ingreses el patrón para iniciar el dispositivo, los servicios de accesibilidad, como <xliff:g id="SERVICE">%1$s</xliff:g>, aún no estarán disponibles."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Cuando ingreses la contraseña para iniciar el dispositivo, los servicios de accesibilidad, como <xliff:g id="SERVICE">%1$s</xliff:g>, aún no estarán disponibles."</string>
 </resources>

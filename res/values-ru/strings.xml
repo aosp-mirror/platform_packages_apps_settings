@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> будет:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Если включить службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\", блокировка экрана будет отключена и надежность защиты зашифрованных данных снизится."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Поскольку включена служба специальных возможностей, блокировка экрана будет отключена и надежность защиты зашифрованных данных может быть снижена."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести графический ключ."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести PIN-код."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести пароль."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Обрабатывать ваши действия."</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Получать информацию о том, какие действия вы выполняете в приложении."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Остановить службу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2344,7 +2341,7 @@
     <string name="keywords_storage" msgid="7007275853993419928">"место диск жесткий диск"</string>
     <string name="keywords_battery" msgid="3992479295298655138">"питание"</string>
     <string name="keywords_spell_checker" msgid="4509482591225399210">"правописание"</string>
-    <string name="keywords_voice_input" msgid="3519547605812413860">"распознавание ввод речь произносить язык гарнитура нецензурное слово аудио история bluetooth"</string>
+    <string name="keywords_voice_input" msgid="3519547605812413860">"распознавание ввод речь произносить язык гарнитура нецензурное слово история голосовых запросов bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="8207889472282225512">"оценка язык по умолчанию говорить речь"</string>
     <string name="keywords_date_and_time" msgid="7666950126499155141">"часы"</string>
     <string name="keywords_factory_data_reset" msgid="3693730656843989732">"удалить все данные удалить"</string>
@@ -2460,7 +2457,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"ВКЛ"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"ВЫКЛ"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Блокировка в приложении"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"При необходимости текущий экран можно закрепить.\n\nКак это сделать:\n\n1. Включите функцию закрепления.\n\n2. Откройте нужный экран.\n\n3. Нажмите \"Обзор\".\n\n4. Нажмите на значок канцелярской кнопки."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"При необходимости текущий экран можно зафиксировать.\n\nКак это сделать:\n\n1. Включите функцию блокировки в приложении.\n\n2. Откройте нужный экран.\n\n3. Нажмите \"Обзор\".\n\n4. Нажмите на значок канцелярской кнопки."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Рабочий профиль"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(экспериментальная настройка)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Поворот экрана"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Зафиксировать в текущей ориентации"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Шифрование"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Продолжить"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Для защиты данных вы можете активировать запрос PIN-кода при включении. Звонки, сообщения и оповещения, в том числе будильники, будут недоступны, пока вы не разблокируете устройство.\n\nЭто помогает защитить данные на утерянном или украденном устройстве."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Для защиты данных вы можете активировать запрос графического ключа при включении. Звонки, сообщения и оповещения, в том числе будильники, будут недоступны, пока вы не разблокируете устройство.\n\nЭто помогает защитить данные на утерянном или украденном устройстве."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Для защиты данных вы можете активировать запрос пароля при включении. Звонки, сообщения и оповещения, в том числе будильники, будут недоступны, пока вы не разблокируете устройство.\n\nЭто помогает защитить данные на утерянном или украденном устройстве."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"Запрашивать PIN-код при запуске устройства"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Запрашивать графический ключ при запуске устройства"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Запрашивать пароль при запуске устройства"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Не запрашивать"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Не запрашивать"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Не запрашивать"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Запрашивать PIN-код?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Запрашивать ключ?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Запрашивать пароль?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"При вводе PIN-кода для запуска устройства службы специальных возможностей, такие как <xliff:g id="SERVICE">%1$s</xliff:g>, не будут включаться автоматически."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"При вводе графического ключа для запуска устройства службы специальных возможностей, такие как <xliff:g id="SERVICE">%1$s</xliff:g>, не будут включаться автоматически."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"При вводе пароля для запуска устройства службы специальных возможностей, такие как <xliff:g id="SERVICE">%1$s</xliff:g>, не будут включаться автоматически."</string>
 </resources>

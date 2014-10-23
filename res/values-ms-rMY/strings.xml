@@ -1553,12 +1553,9 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> perlu:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Jika anda menghidupkan <xliff:g id="SERVICE">%1$s</xliff:g>, peranti anda tidak akan menggunakan kunci skrin anda untuk meningkatkan penyulitan data."</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"Oleh sebab anda telah menghidupkan perkhidmatan kebolehaksesan, peranti anda tidak akan menggunakan kunci skrin anda untuk meningkatkan penyulitan data."</string>
-    <!-- no translation found for enable_service_pattern_reason (777577618063306751) -->
-    <skip />
-    <!-- no translation found for enable_service_pin_reason (7882035264853248228) -->
-    <skip />
-    <!-- no translation found for enable_service_password_reason (1224075277603097951) -->
-    <skip />
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"Oleh kerana menghidupkan <xliff:g id="SERVICE">%1$s</xliff:g> mempengaruhi penyulitan data, anda perlu mengesahkan corak anda."</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"Oleh kerana menghidupkan <xliff:g id="SERVICE">%1$s</xliff:g> mempengaruhi penyulitan data, anda perlu mengesahkan PIN anda."</string>
+    <string name="enable_service_password_reason" msgid="1224075277603097951">"Oleh kerana menghidupkan <xliff:g id="SERVICE">%1$s</xliff:g> mempengaruhi penyulitan data, anda perlu mengesahkan kata laluan anda."</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"Perhatikan tindakan anda"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"Terima pemberitahuan apabila anda berinteraksi dengan apl."</string>
     <string name="disable_service_title" msgid="3624005212728512896">"Hentikan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -2460,7 +2457,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Dihidupkan"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Dimatikan"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Penyematan skrin"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Apabila dihidupkan, anda boleh menggunakan penyematan skrin untuk memastikan skrin semasa tetap kelihatan sehingga anda menyahsemat.\n\nUntuk menggunakan penyematan skrin:\n\n1. Pastikan penyematan skrin dihidupkan.\n\n2. Buka skrin yang ingin anda sematkan.\n\n3. Sentuh Gambaran Keseluruhan.\n\n4. Sentuh ikon pin."</string>
+    <string name="screen_pinning_description" msgid="7091642350452605379">"Apabila dihidupkan, anda boleh menggunakan penyematan skrin untuk memastikan skrin semasa tetap kelihatan sehingga anda menyahsemat.\n\nUntuk menggunakan penyematan skrin:\n\n1. Pastikan penyematan skrin dihidupkan.\n\n2. Buka skrin yang ingin anda sematkan.\n\n3. Sentuh Ikhtisar.\n\n4. Sentuh ikon pin."</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil kerja"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Percubaan)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Apabila peranti diputar"</string>
@@ -2470,28 +2467,19 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Kekal dalam orientasi semasa"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Penyulitan"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Teruskan"</string>
-    <!-- no translation found for encryption_interstitial_message_pin (3705622704667901162) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_pattern (2944051427890104942) -->
-    <skip />
-    <!-- no translation found for encryption_interstitial_message_password (1439296580879440802) -->
-    <skip />
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Anda boleh melindungi peranti ini selanjutnya dengan meminta PIN anda sebelum peranti dimulakan. Sehingga peranti dimulakan, peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera. \n\nIni membantu melindungi data pada peranti yang hilang atau dicuri."</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"Anda boleh melindungi peranti ini selanjutnya dengan meminta corak anda sebelum peranti dimulakan. Sehingga peranti dimulakan, peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera. \n\nIni membantu melindungi data pada peranti yang hilang atau dicuri."</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"Anda boleh melindungi peranti ini selanjutnya dengan meminta kata laluan anda sebelum peranti dimulakan. Sehingga peranti dimulakan, peranti tidak boleh menerima panggilan, mesej atau pemberitahuan, termasuk penggera. \n\nIni membantu melindungi data pada peranti yang hilang atau dicuri."</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"PIN diperlukan untuk memulakan peranti"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"Corak diperlukan untuk memulakan peranti"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"Kata laluan diperlukan untuk memulakan peranti"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Tidak"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Tidak"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Tidak"</string>
-    <!-- no translation found for encrypt_talkback_dialog_require_pin (8299960550048989807) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_pattern (1499790256154146639) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_require_password (8841994614218049215) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pin (1890374082842868489) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_pattern (4474332516537386384) -->
-    <skip />
-    <!-- no translation found for encrypt_talkback_dialog_message_password (8166099418487083927) -->
-    <skip />
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Memerlukan PIN?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Memerlukan corak?"</string>
+    <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Memerlukan kata laluan?"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"Apabila anda memasukkan PIN anda untuk memulakan peranti ini, perkhidmatan kebolehaksesan seperti <xliff:g id="SERVICE">%1$s</xliff:g> belum tersedia lagi."</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"Apabila anda memasukkan corak anda untuk memulakan peranti ini, perkhidmatan kebolehaksesan seperti <xliff:g id="SERVICE">%1$s</xliff:g> belum tersedia lagi."</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"Apabila anda memasukkan kata laluan anda untuk memulakan peranti ini, perkhidmatan kebolehaksesan seperti <xliff:g id="SERVICE">%1$s</xliff:g> belum tersedia lagi."</string>
 </resources>
