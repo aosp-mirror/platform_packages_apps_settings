@@ -28,6 +28,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Process;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -234,7 +235,8 @@ public class MasterClear extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        if (UserManager.get(getActivity()).hasUserRestriction(
+        if (!Process.myUserHandle().isOwner()
+                || UserManager.get(getActivity()).hasUserRestriction(
                 UserManager.DISALLOW_FACTORY_RESET)) {
             return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
         }
