@@ -360,7 +360,10 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                             if (value != 0) {
                                 sir = mAvailableSubInfos.get(value -1);
                                 SubscriptionManager.setDefaultVoiceSubId(sir.subId);
-                            } //have to figure out value of subid when user selects "ask everytime"
+                            } else {
+                                SubscriptionManager
+                                    .setDefaultVoiceSubId(SubscriptionManager.ASK_USER_SUB_ID);
+                            }
                         } else if (id == SMS_PICK) {
                             sir = mAvailableSubInfos.get(value);
                             SubscriptionManager.setDefaultSmsSubId(sir.subId);
