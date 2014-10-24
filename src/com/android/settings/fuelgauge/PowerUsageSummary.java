@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -287,6 +288,9 @@ public class PowerUsageSummary extends PreferenceFragment {
                     if (percentOfTotal < 10) {
                         continue;
                     }
+                    if ("user".equals(Build.TYPE)) {
+                        continue;
+                    }
                 }
                 if (sipper.drainType == BatterySipper.DrainType.UNACCOUNTED) {
                     // Don't show over-counted unless it is at least 1/2 the size of
@@ -295,6 +299,9 @@ public class PowerUsageSummary extends PreferenceFragment {
                         continue;
                     }
                     if (percentOfTotal < 5) {
+                        continue;
+                    }
+                    if ("user".equals(Build.TYPE)) {
                         continue;
                     }
                 }
