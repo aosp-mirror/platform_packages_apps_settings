@@ -381,10 +381,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         String[] arr = new String[availableSubInfoLength];
         arr = list.toArray(arr);
 
-        ArrayAdapter<String> adapter =  new ArrayAdapter<String>(getActivity(),
-               android.R.layout.simple_list_item_1, arr);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        ListAdapter adapter = new SelectAccountListAdapter(
+                builder.getContext(),
+                R.layout.select_account_list_item,
+                arr);
 
         if (id == DATA_PICK) {
             builder.setTitle(R.string.select_sim_for_data);
@@ -396,6 +398,49 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         return builder.setAdapter(adapter, selectionListener)
             .create();
+    }
+
+    private class SelectAccountListAdapter extends ArrayAdapter<String> {
+        private Context mContext;
+        private int mResId;
+
+        public SelectAccountListAdapter(
+                Context context, int resource, String[] arr) {
+            super(context, resource, arr);
+            mContext = context;
+            mResId = resource;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater)
+                    mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View rowView;
+            final ViewHolder holder;
+
+            if (convertView == null) {
+                // Cache views for faster scrolling
+                rowView = inflater.inflate(mResId, null);
+                holder = new ViewHolder();
+                holder.textView = (TextView) rowView.findViewById(R.id.text);
+                holder.imageView = (ImageView) rowView.findViewById(R.id.icon);
+                rowView.setTag(holder);
+            }
+            else {
+                rowView = convertView;
+                holder = (ViewHolder) rowView.getTag();
+            }
+
+            holder.textView.setText(getItem(position));
+            holder.imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_sim_sd));
+            return rowView;
+        }
+
+        private class ViewHolder {
+            TextView textView;
+            ImageView imageView;
+        }
     }
 
     private void setActivity(Preference preference, SubInfoRecord sir) {
