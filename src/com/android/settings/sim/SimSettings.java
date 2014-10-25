@@ -479,6 +479,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             if (mSubInfoRecord != null) {
                 if(TextUtils.isEmpty(mSubInfoRecord.displayName)) {
                     setTitle(getCarrierName());
+                    mSubInfoRecord.displayName = getCarrierName();
+                    SubscriptionManager.setDisplayName(getCarrierName(), mSubInfoRecord.subId);
                 } else {
                     setTitle(mSubInfoRecord.displayName);
                 }
@@ -545,6 +547,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     mSubInfoRecord.displayName = nameText.getText().toString();
                     SubscriptionManager.setDisplayName(mSubInfoRecord.displayName,
                         mSubInfoRecord.subId);
+
+                    findRecordBySubId(mSubInfoRecord.subId).displayName =
+                        nameText.getText().toString();
 
                     updateAllOptions();
                     update();
