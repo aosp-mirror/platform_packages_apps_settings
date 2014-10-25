@@ -195,9 +195,11 @@ public class EncryptionInterstitial extends SettingsActivity {
             // Updates value returned by SettingsActivity.onActivityResult().
             SettingsActivity sa = (SettingsActivity)getActivity();
             Intent resultIntentData = sa.getResultIntentData();
-            resultIntentData = resultIntentData == null ? new Intent() : resultIntentData;
+            if (resultIntentData == null) {
+                resultIntentData = new Intent();
+                sa.setResultIntentData(resultIntentData);
+            }
             resultIntentData.putExtra(EXTRA_REQUIRE_PASSWORD, mPasswordRequired);
-            sa.setResultIntentData(resultIntentData);
         }
 
         @Override
