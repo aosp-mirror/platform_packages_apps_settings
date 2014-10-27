@@ -763,7 +763,6 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"रिङ्गर भोल्युम"</string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"मौन भएको बेला भाइब्रेट गर्नुहोस्"</string>
     <string name="notification_sound_title" msgid="5137483249425507572">"पूर्वनिर्धारित सूचना आवाज"</string>
-    <string name="heads_up_enabled_title" msgid="1031078221910921622">"उच्च प्राथमिकता भएमा पपअप"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"रिङटोन"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"सूचना"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"सूचनाहरूको लागि आगमन कल भोल्युम प्रयोग गर्नुहोस्"</string>
@@ -1557,8 +1556,8 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई आवश्यक:"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"यदि तपाईंले <xliff:g id="SERVICE">%1$s</xliff:g> खोल्नुभयो भने, आफ्नो उपकरणले डेटा गुप्तिकरण अभिवृद्धि गर्न स्क्रिन लक प्रयोग गर्ने छैन।"</string>
     <string name="secure_lock_encryption_warning" msgid="464101518421886337">"आफ्नो उपकरणले डेटा गुप्तिकरण अभिवृद्धि गर्न स्क्रिन लक प्रयोग गर्ने छैन, किनभने तपाईंले पहुँच सेवा खोल्नुभएको छ।"</string>
-    <string name="enable_service_pattern_reason" msgid="777577618063306751">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेबा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो ढाँचा पुष्टि गर्न आवश्यक छ।"</string>
-    <string name="enable_service_pin_reason" msgid="7882035264853248228">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेबा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो PIN पुष्टि गर्न आवश्यक छ।"</string>
+    <string name="enable_service_pattern_reason" msgid="777577618063306751">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेवा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईंले आफ्नो प्याटर्न पुष्टि गर्न आवश्यक छ।"</string>
+    <string name="enable_service_pin_reason" msgid="7882035264853248228">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेवा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो PIN पुष्टि गर्न आवश्यक छ।"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"किनभने <xliff:g id="SERVICE">%1$s</xliff:g> सेबा प्रयोग गर्दा डेटा गुप्तिकरणमा असर गर्छ, तपाईं आफ्नो पासवर्ड पुष्टि गर्न आवश्यक छ।"</string>
     <string name="capability_title_receiveAccessibilityEvents" msgid="1869032063969970755">"तपाईँका कार्यहरूको अवलोकन गर्नुहोस्"</string>
     <string name="capability_desc_receiveAccessibilityEvents" msgid="2095111008854376237">"कुनै अनुप्रयोगसँग अन्तरक्रिया गर्दा सूचना प्राप्त गर्नुहोस्।"</string>
@@ -2019,9 +2018,6 @@
     <string name="app_process_limit_title" msgid="4280600650253107163">"पृष्ठभूमि प्रक्रिया सीमा"</string>
     <string name="show_all_anrs" msgid="28462979638729082">"सबै ANRs देखाउनुहोस्"</string>
     <string name="show_all_anrs_summary" msgid="641908614413544127">"पृष्ठभूमि अनुप्रयोगका लागि जवाफ नदिइरहेका अनुप्रयोगहरू देखाउनुहोस्"</string>
-    <string name="dev_settings_use_google_settings" msgid="2139038099847738861">"कृपया यस कार्यका लागि Google सेटिङ्हरू अनुप्रयोग प्रयोग गर्नुहोस्"</string>
-    <string name="webview_data_reduction_proxy" msgid="9184006980398676807">"WebView नेटवर्क उपयोग घटाउनुहोस्"</string>
-    <string name="webview_data_reduction_proxy_summary" msgid="5209841245329895851">"Google सङ्कुचन सर्वरहरू द्वारा वेबभ्युको जडानहरू प्रोक्सी गरि सञ्जाल उपयोग घटाउनुहोस्"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"डेटा प्रयोग"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"अनुप्रयोग डेटा उपयोग"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"वाहक डेटा लेखा तपाईँको उपकरणबाट फरक हुन सक्छ।"</string>
@@ -2303,12 +2299,13 @@
     <string name="sim_cellular_data_unavailable" msgid="9018555543451203035">"सेलुलर डेटा उपलब्ध छैन"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"डेटा SIM चयन गर्न छुनुहोस्"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"सधैं यो कलको लागि प्रयोग गर्नुहोस्"</string>
+    <string name="select_sim_for_data" msgid="2366081042162853044">"डेटाको लागि सिम चयन गर्नुहोस्"</string>
+    <string name="select_sim_for_calls" msgid="3503094771801109334">"संग कल"</string>
     <string name="sim_select_card" msgid="211285163525563293">"SIM कार्ड चयन गर्नुहोस्"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"खाली SIM"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM नाम"</string>
-    <!-- no translation found for sim_editor_title (4034301817366627870) -->
-    <skip />
+    <string name="sim_editor_title" msgid="4034301817366627870">"SIM स्लट %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"वाहक"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"संख्या"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM रङ"</string>
@@ -2325,9 +2322,8 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"सञ्जाल नाम प्रसारण असक्षम"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"आफ्नो सञ्जाल जानकारी तेस्रो दलको पहुँचबाट सञ्जाल नाम प्रसारण जोगाउने कार्य असक्षम पार्नुहोस्।"</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"सञ्जाल नाम प्रसारणले लुकेका सञ्जालहरू स्वचालित जडान हुनमा रोक्ने असक्षम पार्दै।"</string>
-    <!-- no translation found for sim_pref_divider (6778907671867621874) -->
-    <skip />
-    <string name="sim_calls_ask_first_prefs_title" msgid="2897913529999035350">"पहिले सोध्नुहोस्"</string>
+    <string name="sim_pref_divider" msgid="6778907671867621874">"निम्नको लागि उपयुक्त SIM"</string>
+    <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"सँधै सोध्नुहोस्"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"छनौट आवश्यक छ"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"सेटिङहरू"</string>
     <string name="search_results_title" msgid="1796252422574886932">"सेटिङहरू"</string>
@@ -2441,8 +2437,7 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"स्वचालित रूपमा चालू"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"कहिले पनि होइन"</string>
-    <!-- no translation found for zen_mode_calls (7051492091133751208) -->
-    <skip />
+    <string name="zen_mode_calls" msgid="7051492091133751208">"कलहरू"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"सन्देशहरू"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"बाट कल / सन्देशहरू"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"कोही पनि"</string>
@@ -2476,17 +2471,17 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI सान्दर्भिक जानकारी"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"गुप्तिकरण"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"जारी राख्नुहोस्"</string>
-    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"यस उपकरणलाई अझै सुरक्षित गर्न सुरु गर्नु भन्दा अगि आफ्नो पिन हाल्ने बनाउनु सक्नुहुनेछ। उपकरण सुरु नभए सम्म कल, सन्देश, वा सूचनाहरू, प्राप्त गर्न सक्दैन, अलार्म सहित चल्ने छैन। \n\n उपकरण हराएको वा चोरी भएको खण्डा यसले डेटा जोगाउँछ।"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"यस उपकरणलाई अझै सुरक्षित गर्न सुरु गर्नु भन्दा अगि आफ्नो ढाँचा हाल्ने बनाउनु सक्नुहुनेछ। उपकरण सुरु नभए सम्म कल, सन्देश, वा सूचनाहरू, प्राप्त गर्न सक्दैन, अलार्म सहित चल्ने छैन। \n\n उपकरण हराएको वा चोरी भएको खण्डा यसले डेटा जोगाउँछ।"</string>
-    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"यस उपकरणलाई अझै सुरक्षित गर्न सुरु गर्नु भन्दा अगि आफ्नो पासवर्ड हाल्ने बनाउनु सक्नुहुनेछ। उपकरण सुरु नभए सम्म कल, सन्देश, वा सूचनाहरू, प्राप्त गर्न सक्दैन, अलार्म सहित चल्ने छैन। \n\n उपकरण हराएको वा चोरी भएको खण्डा यसले डेटा जोगाउँछ।"</string>
+    <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"यस उपकरणलाई अझै सुरक्षित गर्न सुरु गर्नु भन्दा अगि आफ्नो पिन आवश्यक बनाउन सक्नुहुने छ। उपकरण सुरु नभए सम्म कल, सन्देश, वा सूचनाहरू, प्राप्त गर्न सक्दैन, अलार्म सहित चल्ने छैन। \n\n उपकरण हराएको वा चोरी भएको खण्डमा यसले डेटा जोगाउँछ।"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="2944051427890104942">"यस उपकरणलाई अझै सुरक्षित गर्न सुरु गर्नु भन्दा पहिले आफ्नो प्याटर्न आवश्यक बनाउन सक्नुहुने छ। उपकरण सुरु नभए सम्म कल, सन्देश, वा सूचनाहरू, प्राप्त गर्न सक्दैन, अलार्म सहित चल्ने छैन। \n\n उपकरण हराएको वा चोरी भएको खण्डमा यसले डेटा जोगाउँछ।"</string>
+    <string name="encryption_interstitial_message_password" msgid="1439296580879440802">"यस उपकरणलाई अझै सुरक्षित गर्न सुरु गर्नु भन्दा पहिले आफ्नो पासवर्डलाई आवश्यक बनाउन सक्नुहुने छ। उपकरण सुरु नभए सम्म कल, सन्देश, वा सूचनाहरू, प्राप्त गर्न सक्दैन, अलार्म सहित चल्ने छैन। \n\n उपकरण हराएको वा चोरी भएको खण्डमा यसले डेटा जोगाउँछ।"</string>
     <string name="encrypt_require_pin" msgid="2063945047845243752">"उपकरण सुरु गर्न PIN आवश्यक छ"</string>
     <string name="encrypt_require_pattern" msgid="6898479411004015810">"उपकरण सुरु गर्न प्याटर्न आवश्यक छ"</string>
     <string name="encrypt_require_password" msgid="8770628366276570518">"उपकरण सुरु गर्न पासवर्ड आवश्यक छ"</string>
     <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"धन्यवाद पर्दैन"</string>
     <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"धन्यवाद पर्दैन"</string>
     <string name="encrypt_dont_require_password" msgid="2580403214917009046">"धन्यवाद पर्दैन"</string>
-    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN आवश्यक छ"</string>
-    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"ढाँचा आवश्यक छ?"</string>
+    <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN आवश्यक छ?"</string>
+    <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"प्याटर्न आवश्यक छ?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"पासवर्ड आवश्यक छ?"</string>
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो PIN प्रविष्टि गर्नुहुन्छ, पहुँच सेवा जस्तै <xliff:g id="SERVICE">%1$s</xliff:g> अझै उपलब्ध हुने छैन।"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"यो उपकरण सुरु गर्न जब तपाईँले आफ्नो ढाँचा प्रविष्टि गर्नुहुन्छ, पहुँच सेवा जस्तै <xliff:g id="SERVICE">%1$s</xliff:g> अझै उपलब्ध हुने छैन।"</string>
