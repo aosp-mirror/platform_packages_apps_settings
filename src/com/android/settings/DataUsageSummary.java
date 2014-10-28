@@ -268,7 +268,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private MenuItem mMenuCellularNetworks;
 
     private List<SubInfoRecord> mSubInfoList;
-    private Map<Long,String> mMobileTagMap;
+    private Map<Integer,String> mMobileTagMap;
 
     /** Flag used to ignore listeners during binding. */
     private boolean mBinding;
@@ -932,7 +932,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
      */
     private Boolean mMobileDataEnabled;
 
-    private boolean isMobileDataEnabled(long subId) {
+    private boolean isMobileDataEnabled(int subId) {
         boolean isEnable = false;
         if (mMobileDataEnabled != null) {
             // TODO: deprecate and remove this once enabled flag is on policy
@@ -1352,7 +1352,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         return SystemProperties.get(TEST_SUBSCRIBER_PROP, actualSubscriberId);
     }
 
-    private static String getActiveSubscriberId(Context context, long subId) {
+    private static String getActiveSubscriberId(Context context, int subId) {
         final TelephonyManager tele = TelephonyManager.from(context);
         return tele.getSubscriberId(subId);
     }
@@ -2209,7 +2209,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static String computeTabFromIntent(Intent intent) {
         final NetworkTemplate template = intent.getParcelableExtra(EXTRA_NETWORK_TEMPLATE);
         if (template == null) {
-            final long subId = intent.getLongExtra(PhoneConstants.SUBSCRIPTION_KEY,
+            final int subId = intent.getIntExtra(PhoneConstants.SUBSCRIPTION_KEY,
                     SubscriptionManager.INVALID_SUB_ID);
             if (SubscriptionManager.isValidSubId(subId)) {
                 return TAB_MOBILE + String.valueOf(subId);
@@ -2319,7 +2319,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     /*
      * TODO: consider adding to TelephonyManager or SubscritpionManager.
      */
-    public static boolean hasReadyMobileRadio(Context context, long subId) {
+    public static boolean hasReadyMobileRadio(Context context, int subId) {
         if (TEST_RADIOS) {
             return SystemProperties.get(TEST_RADIOS_PROP).contains("mobile");
         }
@@ -2565,11 +2565,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
          * @param subInfoList The subscription Info List
          * @return The map or null if no activated subscription
          */
-        private Map<Long, String> initMobileTabTag(List<SubInfoRecord> subInfoList) {
-            Map<Long,String> map = null;
+        private Map<Integer, String> initMobileTabTag(List<SubInfoRecord> subInfoList) {
+            Map<Integer, String> map = null;
             if (subInfoList != null) {
                 String mobileTag;
-                map = new HashMap<Long, String>();
+                map = new HashMap<Integer, String>();
                 for (SubInfoRecord subInfo : subInfoList) {
                     mobileTag = TAB_MOBILE + String.valueOf(subInfo.subId);
                     map.put(subInfo.subId,mobileTag);
@@ -2582,9 +2582,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             return currentTab != null ? currentTab.contains(TAB_MOBILE) : false;
         }
 
-        private long getSubId(String currentTab) {
-            Set<Long> set = mMobileTagMap.keySet();
-            for (Long subId : set) {
+        private int getSubId(String currentTab) {
+            Set<Integer> set = mMobileTagMap.keySet();
+            for (Integer subId : set) {
                 if (mMobileTagMap.get(subId).equals(currentTab)) {
                     return subId;
                 }
@@ -2594,8 +2594,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
 
         //SUB SELECT
-        private boolean isMobileDataAvailable(long subId) {
-            long[] subIds = SubscriptionManager.getSubId(PhoneConstants.SUB1);
+        private boolean isMobileDataAvailable(int subId) {
+            int[] subIds = SubscriptionManager.getSubId(PhoneConstants.SUB1);
             return subIds[0] == subId;
         }
 }

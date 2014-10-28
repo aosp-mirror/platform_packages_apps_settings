@@ -241,7 +241,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
      * finds a record with subId.
      * Since the number of SIMs are few, an array is fine.
      */
-    private SubInfoRecord findRecordBySubId(final long subId) {
+    private SubInfoRecord findRecordBySubId(final int subId) {
         final int availableSubInfoLength = mAvailableSubInfos.size();
 
         for (int i = 0; i < availableSubInfoLength; ++i) {
