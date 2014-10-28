@@ -148,6 +148,9 @@ public class WifiSettings extends RestrictedSettingsFragment
     // this boolean extra specifies whether to disable the Next button when not connected. Used by
     // account creation outside of setup wizard.
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+    // This string extra specifies a network to open the connect dialog on, so the user can enter
+    // network credentials.  This is used by quick settings for secured networks.
+    private static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
 
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
@@ -329,6 +332,23 @@ public class WifiSettings extends RestrictedSettingsFragment
         mEmptyView = initEmptyView();
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
+
+        if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
+            String ssid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
+            updateAccessPoints();
+            PreferenceScreen preferenceScreen = getPreferenceScreen();
+            for (int i = 0; i < preferenceScreen.getPreferenceCount(); i++) {
+                Preference preference = preferenceScreen.getPreference(i);
+                if (preference instanceof AccessPoint) {
+                    AccessPoint accessPoint = (AccessPoint) preference;
+                    if (ssid.equals(accessPoint.ssid) && accessPoint.networkId == -1
+                            && accessPoint.security != AccessPoint.SECURITY_NONE) {
+                        onPreferenceTreeClick(preferenceScreen, preference);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     @Override
