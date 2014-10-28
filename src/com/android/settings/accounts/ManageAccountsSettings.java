@@ -99,8 +99,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         mAuthenticatorHelper.listenToAccountUpdates();
         updateAuthDescriptions();
         showAccountsIfNeeded();
@@ -134,10 +134,15 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mAuthenticatorHelper.stopListeningToAccountUpdates();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         final Activity activity = getActivity();
-        mAuthenticatorHelper.stopListeningToAccountUpdates();
         activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
         activity.getActionBar().setCustomView(null);
     }
@@ -231,7 +236,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     private void showSyncState() {
         // Catch any delayed delivery of update messages
-        if (getActivity() == null) return;
+        if (getActivity() == null || getActivity().isFinishing()) return;
 
         final int userId = mUserHandle.getIdentifier();
 
@@ -377,10 +382,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         if (mAccountType != null && mFirstAccount != null) {
             addAuthenticatorSettings();
         } else {
-            // There's no account, reset to top-level of settings
-            Intent settingsTop = new Intent(android.provider.Settings.ACTION_SETTINGS);
-            settingsTop.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            getActivity().startActivity(settingsTop);
+            // There's no account, close activity
+            finish();
         }
     }
 
