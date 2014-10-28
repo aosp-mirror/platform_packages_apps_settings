@@ -466,8 +466,9 @@ class AccessPoint extends Preference {
             if (bssid != null) {
                 visibility.append(" ").append(bssid);
             }
-            visibility.append(" score=").append(mInfo.score);
+            visibility.append(" rssi=").append(mInfo.getRssi());
             visibility.append(" ");
+            visibility.append(" score=").append(mInfo.score);
             visibility.append(String.format("tx=%.1f,", mInfo.txSuccessRate));
             visibility.append(String.format("%.1f,", mInfo.txRetriesRate));
             visibility.append(String.format("%.1f ", mInfo.txBadRate));
@@ -512,7 +513,7 @@ class AccessPoint extends Preference {
                     }
                     if (n5 < 4) {
                         if (scans5GHz == null) scans5GHz = new StringBuilder();
-                        scans5GHz.append(" {").append(result.BSSID);
+                        scans5GHz.append(" \n{").append(result.BSSID);
                         if (bssid != null && result.BSSID.equals(bssid)) scans5GHz.append("*");
                         scans5GHz.append("=").append(result.frequency);
                         scans5GHz.append(",").append(result.level);
@@ -532,7 +533,7 @@ class AccessPoint extends Preference {
                     }
                     if (n24 < 4) {
                         if (scans24GHz == null) scans24GHz = new StringBuilder();
-                        scans24GHz.append(" {").append(result.BSSID);
+                        scans24GHz.append(" \n{").append(result.BSSID);
                         if (bssid != null && result.BSSID.equals(bssid)) scans24GHz.append("*");
                         scans24GHz.append("=").append(result.frequency);
                         scans24GHz.append(",").append(result.level);
