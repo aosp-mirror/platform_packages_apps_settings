@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Vždy"</item>
     <item msgid="844721238536786870">"Pouze při nabíjení"</item>
-    <item msgid="2990218920631468642">"Nikdy (zvyšuje využití dat)"</item>
+    <item msgid="1986753720941888596">"Nikdy"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Vždy"</item>
     <item msgid="7433294150916905997">"Pouze při nabíjení"</item>
     <item msgid="1390404486722375028">"Nikdy"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Posledních 30 dní"</item>
+    <item msgid="6600989128423965319">"Zadat cyklus počítání..."</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"Poslední čtyři číslice"</item>
+    <item msgid="7841762954785375718">"První čtyři číslice"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Automaticky"</item>
+    <item msgid="1013988753804838790">"Automatické"</item>
     <item msgid="6670588712989942178">"Pouze 5 GHz"</item>
     <item msgid="2715516524973207876">"Pouze 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Doba použití"</item>
-    <item msgid="3703676222230317933">"Počet spuštění"</item>
+    <item msgid="4796160515314745154">"Naposledy použito"</item>
     <item msgid="2502754479975776899">"Název aplikace"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +280,13 @@
     <item msgid="5762123934816216821">"hlasitost budíku"</item>
     <item msgid="785049718065337473">"hlasitost oznámení"</item>
     <item msgid="6700305533746877052">"hlasitost Bluetooth"</item>
-    <item msgid="3810969981743709839">"vypnout nebo zapnout zvuk mikrofonu"</item>
-    <item msgid="2627903914574908209">"zakázat režim spánku"</item>
-    <item msgid="1395372654968157578">"sledovat polohu"</item>
-    <item msgid="3238451051299611853">"sledovat energeticky náročné určování polohy"</item>
+    <item msgid="2029227495214047094">"Zakázat režim spánku"</item>
+    <item msgid="26109888160231211">"sledovat polohu"</item>
+    <item msgid="5753382310468855812">"sledování energeticky náročného určování polohy"</item>
+    <item msgid="3356591542543137332">"načíst statistiky využití"</item>
+    <item msgid="3073734345226842233">"vypnout nebo zapnout zvuk mikrofonu"</item>
+    <item msgid="1148142988678569310">"promítat média"</item>
+    <item msgid="9130014005474445273">"aktivovat VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Poloha"</item>
@@ -319,10 +329,13 @@
     <item msgid="7260546305036218513">"Hlasitost budíku"</item>
     <item msgid="9103719301075748925">"Hlasitost oznámení"</item>
     <item msgid="7025966722295861512">"Hlasitost Bluetooth"</item>
-    <item msgid="2265317984004577529">"Vypnout nebo zapnout zvuk mikrofonu"</item>
-    <item msgid="3646325683886507917">"Zakázat režim spánku"</item>
+    <item msgid="4665183401128289653">"Zakázat režim spánku"</item>
+    <item msgid="8584357129746649222">"Poloha"</item>
     <item msgid="7669257279311110599">"Určování polohy"</item>
-    <item msgid="7745724368696313169">"Poloha"</item>
+    <item msgid="3459320345690097795">"Načíst statistiky využití"</item>
+    <item msgid="1312534577834048535">"Vypnout nebo zapnout zvuk mikrofonu"</item>
+    <item msgid="5906017727368097853">"Promítat média"</item>
+    <item msgid="2486614710846178542">"Aktivovat VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Krátká"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"Výchozí"</item>
     <item msgid="1016452621833735880">"Bezpatkové"</item>
     <item msgid="2496277987934654454">"Bezpatkové zúžené"</item>
-    <item msgid="4406003087391086325">"Patkové"</item>
-    <item msgid="1558362802170124073">"Neproporcionální"</item>
-    <item msgid="6857338041963571301">"Neformální"</item>
-    <item msgid="961716102408512888">"Kurzíva"</item>
-    <item msgid="784581717183349567">"Kapitálky"</item>
+    <item msgid="7247838127505318669">"Bezpatkové neproporcionální"</item>
+    <item msgid="4478414822462359763">"Patkové"</item>
+    <item msgid="7502451783483660829">"Patkové neproporcionální"</item>
+    <item msgid="639503332147461010">"Neformální"</item>
+    <item msgid="7967169925231332424">"Kurzíva"</item>
+    <item msgid="561832997193039673">"Kapitálky"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Velmi malé"</item>
@@ -361,7 +375,7 @@
     <item msgid="8342334626783983353">"100 %"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="7009918361545506251">"Použít výchozí nastavení aplikace"</item>
+    <item msgid="7009918361545506251">"Použít výchozí"</item>
     <item msgid="1770533843436933500">"Bílé na černém"</item>
     <item msgid="758587126802411846">"Černé na bílém"</item>
     <item msgid="1495307195241623402">"Žluté na černém"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1 MB"</item>
     <item msgid="6405203239560695266">"4 MB"</item>
     <item msgid="3025431211013424097">"16 MB"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 kB"</item>
+    <item msgid="3534782711045262344">"256 kB"</item>
+    <item msgid="8085867209202153403">"1 MB"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64 kB na vyrovnávací paměť protokolů"</item>

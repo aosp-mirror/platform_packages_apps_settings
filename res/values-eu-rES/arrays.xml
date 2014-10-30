@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Beti"</item>
     <item msgid="844721238536786870">"Entxufatuta dagoenean soilik"</item>
-    <item msgid="2990218920631468642">"Inoiz ez (datu-erabilera areagotzen da)"</item>
+    <item msgid="1986753720941888596">"Inoiz ez"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Beti"</item>
     <item msgid="7433294150916905997">"Entxufatuta dagoenean soilik"</item>
     <item msgid="1390404486722375028">"Inoiz ez"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Azken 30 egunak"</item>
+    <item msgid="6600989128423965319">"Erabilera-zikloa…"</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"Azken 4 digituak"</item>
+    <item msgid="7841762954785375718">"Lehen 4 digituak"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Automatikoa"</item>
+    <item msgid="1013988753804838790">"Automatikoa"</item>
     <item msgid="6670588712989942178">"5 GHz soilik"</item>
     <item msgid="2715516524973207876">"2,4 GHz soilik"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Erabilera-denbora"</item>
-    <item msgid="3703676222230317933">"Abiarazte kopurua"</item>
+    <item msgid="4796160515314745154">"Erabilitako azken aldia"</item>
     <item msgid="2502754479975776899">"Aplikazioaren izena"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +280,13 @@
     <item msgid="5762123934816216821">"alarmaren bolumena"</item>
     <item msgid="785049718065337473">"jakinarazpenen bolumena"</item>
     <item msgid="6700305533746877052">"Bluetootharen bolumena"</item>
-    <item msgid="3810969981743709839">"aktibatu edo desaktibatu mikrofonoa"</item>
-    <item msgid="2627903914574908209">"eduki aktibo"</item>
-    <item msgid="1395372654968157578">"kontrolatu kokapena"</item>
-    <item msgid="3238451051299611853">"egin potentzia handiko kokapen-kontrola"</item>
+    <item msgid="2029227495214047094">"eduki aktibo"</item>
+    <item msgid="26109888160231211">"kontrolatu kokapena"</item>
+    <item msgid="5753382310468855812">"egin potentzia handiko kokapen-kontrola"</item>
+    <item msgid="3356591542543137332">"lortu erabilera-estatistikak"</item>
+    <item msgid="3073734345226842233">"aktibatu edo desaktibatu mikrofonoa"</item>
+    <item msgid="1148142988678569310">"proiektatu multimedia-edukia"</item>
+    <item msgid="9130014005474445273">"aktibatu VPN konexioa"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Kokapena"</item>
@@ -319,10 +329,13 @@
     <item msgid="7260546305036218513">"Alarmaren bolumena"</item>
     <item msgid="9103719301075748925">"Jakinarazpenen bolumena"</item>
     <item msgid="7025966722295861512">"Bluetootharen bolumena"</item>
-    <item msgid="2265317984004577529">"Aktibatu edo desaktibatu mikrofonoa"</item>
-    <item msgid="3646325683886507917">"Mantendu aktibo"</item>
+    <item msgid="4665183401128289653">"Mantendu aktibo"</item>
+    <item msgid="8584357129746649222">"Kokapena"</item>
     <item msgid="7669257279311110599">"Kokapena"</item>
-    <item msgid="7745724368696313169">"Kokapena"</item>
+    <item msgid="3459320345690097795">"Lortu erabilera-estatistikak"</item>
+    <item msgid="1312534577834048535">"Aktibatu edo desaktibatu mikrofonoa"</item>
+    <item msgid="5906017727368097853">"Proiektatu multimedia-edukia"</item>
+    <item msgid="2486614710846178542">"Aktibatu VPN konexioa"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Laburra"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"Lehenetsia"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-serif kondentsatua"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Tarte bakarrekoa"</item>
-    <item msgid="6857338041963571301">"Arrunta"</item>
-    <item msgid="961716102408512888">"Etzana"</item>
-    <item msgid="784581717183349567">"Maiuskula txikiak"</item>
+    <item msgid="7247838127505318669">"Tarte bakarreko sans-serif"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Tarte bakarreko serif"</item>
+    <item msgid="639503332147461010">"Arrunta"</item>
+    <item msgid="7967169925231332424">"Etzana"</item>
+    <item msgid="561832997193039673">"Maiuskula txikiak"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Oso txikia"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1 M"</item>
     <item msgid="6405203239560695266">"4 M"</item>
     <item msgid="3025431211013424097">"16 M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 K"</item>
+    <item msgid="3534782711045262344">"256 K"</item>
+    <item msgid="8085867209202153403">"1 M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64 K erregistroen bufferreko"</item>

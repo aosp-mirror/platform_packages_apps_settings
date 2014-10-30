@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Her zaman"</item>
     <item msgid="844721238536786870">"Yalnızca prize takıldığında"</item>
-    <item msgid="2990218920631468642">"Hiçbir zaman (veri kullanımını artırır)"</item>
+    <item msgid="1986753720941888596">"Hiçbir zaman"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Her zaman"</item>
     <item msgid="7433294150916905997">"Yalnızca prize takıldığında"</item>
     <item msgid="1390404486722375028">"Hiçbir zaman"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Son 30 gün"</item>
+    <item msgid="6600989128423965319">"Kullanım döngüsünü ayarla..."</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"Son 4 rakam"</item>
+    <item msgid="7841762954785375718">"İlk 4 rakam"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Otomatik"</item>
+    <item msgid="1013988753804838790">"Otomatik"</item>
     <item msgid="6670588712989942178">"Yalnızca 5 GHz"</item>
     <item msgid="2715516524973207876">"Yalnızca 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Kullanım süresi"</item>
-    <item msgid="3703676222230317933">"Sayımı başlat"</item>
+    <item msgid="4796160515314745154">"Son kullanıldığı tarih"</item>
     <item msgid="2502754479975776899">"Uygulama adı"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +280,13 @@
     <item msgid="5762123934816216821">"alarm sesi düzeyi"</item>
     <item msgid="785049718065337473">"bildirim sesi düzeyi"</item>
     <item msgid="6700305533746877052">"Bluetooth sesi düzeyi"</item>
-    <item msgid="3810969981743709839">"mikrofonu kapat/aç"</item>
-    <item msgid="2627903914574908209">"uyanık tut"</item>
-    <item msgid="1395372654968157578">"konumu izle"</item>
-    <item msgid="3238451051299611853">"yüksek güç tüketen konum hizmetlerini izle"</item>
+    <item msgid="2029227495214047094">"uyanık tut"</item>
+    <item msgid="26109888160231211">"konumu izle"</item>
+    <item msgid="5753382310468855812">"yüksek güç tüketen konum hizmetlerini izle"</item>
+    <item msgid="3356591542543137332">"kullanım istatistiklerini al"</item>
+    <item msgid="3073734345226842233">"mikrofonu kapat/aç"</item>
+    <item msgid="1148142988678569310">"medya yansıtma"</item>
+    <item msgid="9130014005474445273">"VPN\'yi etkinleştir"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Konum"</item>
@@ -319,10 +329,13 @@
     <item msgid="7260546305036218513">"Alarm sesi düzeyi"</item>
     <item msgid="9103719301075748925">"Bildirim sesi düzeyi"</item>
     <item msgid="7025966722295861512">"Bluetooth ses düzeyi"</item>
-    <item msgid="2265317984004577529">"Mikrofonu kapat/aç"</item>
-    <item msgid="3646325683886507917">"Uyanık tut"</item>
+    <item msgid="4665183401128289653">"Uyanık tut"</item>
+    <item msgid="8584357129746649222">"Konum"</item>
     <item msgid="7669257279311110599">"Konum"</item>
-    <item msgid="7745724368696313169">"Konum"</item>
+    <item msgid="3459320345690097795">"Kullanım istatistiklerini al"</item>
+    <item msgid="1312534577834048535">"Mikrofonu kapat/aç"</item>
+    <item msgid="5906017727368097853">"Medya yansıtma"</item>
+    <item msgid="2486614710846178542">"VPN\'yi etkinleştir"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Kısa"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"Varsayılan"</item>
     <item msgid="1016452621833735880">"Sans Serif"</item>
     <item msgid="2496277987934654454">"Sans Serif dar"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Sabit boşluklu"</item>
-    <item msgid="6857338041963571301">"Klasik"</item>
-    <item msgid="961716102408512888">"El yazısı"</item>
-    <item msgid="784581717183349567">"Küçük boyutlu büyük harfler"</item>
+    <item msgid="7247838127505318669">"Sans-serif sabit aralıklı"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif sabit aralıklı"</item>
+    <item msgid="639503332147461010">"Klasik"</item>
+    <item msgid="7967169925231332424">"Bitişik el yazısı"</item>
+    <item msgid="561832997193039673">"Küçük boyutlu büyük harfler"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Çok küçük"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1 M"</item>
     <item msgid="6405203239560695266">"4 M"</item>
     <item msgid="3025431211013424097">"16 M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 K"</item>
+    <item msgid="3534782711045262344">"256 K"</item>
+    <item msgid="8085867209202153403">"1 M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"Günlük arabelleği başına 64 K"</item>

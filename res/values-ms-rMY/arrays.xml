@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Sentiasa"</item>
     <item msgid="844721238536786870">"Hanya apabila dipalamkan"</item>
-    <item msgid="2990218920631468642">"Jangan sekali-kali (menaikkan penggunaan data)"</item>
+    <item msgid="1986753720941888596">"Jangan sekali-kali"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Sentiasa"</item>
     <item msgid="7433294150916905997">"Hanya apabila dipasang"</item>
     <item msgid="1390404486722375028">"Jangan sekali-kali"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"30 hari terakhir"</item>
+    <item msgid="6600989128423965319">"Ttpkn kitar penggunaan..."</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"4 digit terakhir"</item>
+    <item msgid="7841762954785375718">"4 digit pertama"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Auto"</item>
+    <item msgid="1013988753804838790">"Automatik"</item>
     <item msgid="6670588712989942178">"5 GHz sahaja"</item>
     <item msgid="2715516524973207876">"2.4 GHz sahaja"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Masa penggunaan"</item>
-    <item msgid="3703676222230317933">"Lancarkan kiraan"</item>
+    <item msgid="4796160515314745154">"Kali terakhir digunakan"</item>
     <item msgid="2502754479975776899">"Nama aplikasi"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +280,13 @@
     <item msgid="5762123934816216821">"kelantangan penggera"</item>
     <item msgid="785049718065337473">"kelantangan pemberitahuan"</item>
     <item msgid="6700305533746877052">"kelantangan bluetooth"</item>
-    <item msgid="3810969981743709839">"redam/nyahredam mikrofon"</item>
-    <item msgid="2627903914574908209">"kekal berjaga"</item>
-    <item msgid="1395372654968157578">"pantau lokasi"</item>
-    <item msgid="3238451051299611853">"awasi lokasi kuasa tinggi"</item>
+    <item msgid="2029227495214047094">"kekal berjaga"</item>
+    <item msgid="26109888160231211">"pantau lokasi"</item>
+    <item msgid="5753382310468855812">"awasi lokasi kuasa tinggi"</item>
+    <item msgid="3356591542543137332">"dapatkan statistik penggunaan"</item>
+    <item msgid="3073734345226842233">"redam/nyahredam mikrofon"</item>
+    <item msgid="1148142988678569310">"media projek"</item>
+    <item msgid="9130014005474445273">"aktifkan VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Lokasi"</item>
@@ -319,10 +329,13 @@
     <item msgid="7260546305036218513">"Kelantangan penggera"</item>
     <item msgid="9103719301075748925">"Kelantangan pemberitahuan"</item>
     <item msgid="7025966722295861512">"Kelantangan Bluetooth"</item>
-    <item msgid="2265317984004577529">"Redam/nyahredam mikrofon"</item>
-    <item msgid="3646325683886507917">"Kekal berjaga"</item>
+    <item msgid="4665183401128289653">"Kekal berjaga"</item>
+    <item msgid="8584357129746649222">"Lokasi"</item>
     <item msgid="7669257279311110599">"Lokasi"</item>
-    <item msgid="7745724368696313169">"Lokasi"</item>
+    <item msgid="3459320345690097795">"Dapatkan statistik penggunaan"</item>
+    <item msgid="1312534577834048535">"Redam/nyahredam mikrofon"</item>
+    <item msgid="5906017727368097853">"Media projek"</item>
+    <item msgid="2486614710846178542">"Aktifkan VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Pendek"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"Lalai"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-serif diringkaskan"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Monospace"</item>
-    <item msgid="6857338041963571301">"Kasual"</item>
-    <item msgid="961716102408512888">"Kursif"</item>
-    <item msgid="784581717183349567">"Huruf besar kecil"</item>
+    <item msgid="7247838127505318669">"Sans-serif monoruang"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif monoruang"</item>
+    <item msgid="639503332147461010">"Kasual"</item>
+    <item msgid="7967169925231332424">"Tulisan sambung"</item>
+    <item msgid="561832997193039673">"Huruf besar bersaiz kecil"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Sangat kecil"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64K per pnimbal log"</item>

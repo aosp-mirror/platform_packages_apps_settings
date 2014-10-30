@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"नेहमी"</item>
     <item msgid="844721238536786870">"फक्त प्लग इन केलेले असते तेव्हा"</item>
-    <item msgid="2990218920631468642">"कधीही नाही (डेटा वापर वाढवते)"</item>
+    <item msgid="1986753720941888596">"कधीही नाही"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"नेहमी"</item>
     <item msgid="7433294150916905997">"फक्त प्लग इन केलेले असते तेव्हा"</item>
     <item msgid="1390404486722375028">"कधीही नाही"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"अंतिम 30 दिवस"</item>
+    <item msgid="6600989128423965319">"वापर चक्र सेट करा..."</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"अंतिम 4 अंक"</item>
+    <item msgid="7841762954785375718">"प्रथम 4 अंक"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"स्वयंचलित"</item>
+    <item msgid="1013988753804838790">"स्वयंचलित"</item>
     <item msgid="6670588712989942178">"5 GHz फक्त"</item>
     <item msgid="2715516524973207876">"2.4 GHz फक्त"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"वापर वेळ"</item>
-    <item msgid="3703676222230317933">"लाँच गणना"</item>
+    <item msgid="4796160515314745154">"अंतिम वेळी वापरलेले"</item>
     <item msgid="2502754479975776899">"अॅप नाव"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -243,7 +250,7 @@
     <item msgid="6546959730920410907">"कॉल लॉग सुधारित करा"</item>
     <item msgid="446877710771379667">"कॅलेंडर वाचा"</item>
     <item msgid="7674458294386319722">"कॅलेंडर सुधारित करा"</item>
-    <item msgid="8281201165558093009">"Wi-Fi स्कॅन"</item>
+    <item msgid="8281201165558093009">"वाय-फाय स्कॅन"</item>
     <item msgid="8694611243479480497">"सूचना"</item>
     <item msgid="7776439107987345446">"सेल स्कॅन"</item>
     <item msgid="514615766544675057">"फोनवर कॉल करा"</item>
@@ -272,11 +279,14 @@
     <item msgid="6325739889222559394">"मीडिया व्हॉल्यूम"</item>
     <item msgid="5762123934816216821">"अलार्म व्हॉल्यूम"</item>
     <item msgid="785049718065337473">"सूचना व्हॉल्यूम"</item>
-    <item msgid="6700305533746877052">"Bluetooth व्हॉल्यूम"</item>
-    <item msgid="3810969981743709839">"आपला मायक्रोफोन निःशब्द/सशब्द करा"</item>
-    <item msgid="2627903914574908209">"सक्रिय ठेवा"</item>
-    <item msgid="1395372654968157578">"स्थानाचे परीक्षण करा"</item>
-    <item msgid="3238451051299611853">"उच्च उर्जा स्थानाचे परीक्षण करा"</item>
+    <item msgid="6700305533746877052">"ब व्हॉल्यूम"</item>
+    <item msgid="2029227495214047094">"सक्रिय ठेवा"</item>
+    <item msgid="26109888160231211">"स्थानाचे परीक्षण करा"</item>
+    <item msgid="5753382310468855812">"उच्च उर्जा स्थानाचे परीक्षण करा"</item>
+    <item msgid="3356591542543137332">"वापर आकडेवारी मिळवा"</item>
+    <item msgid="3073734345226842233">"मायक्रोफोन निःशब्द/सशब्द करा"</item>
+    <item msgid="1148142988678569310">"प्रोजेक्‍ट मीडिया"</item>
+    <item msgid="9130014005474445273">"VPN सक्रिय करा"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"स्थान"</item>
@@ -318,11 +328,14 @@
     <item msgid="7878027809189330917">"मीडिया व्हॉल्यूम"</item>
     <item msgid="7260546305036218513">"अलार्म व्हॉल्यूम"</item>
     <item msgid="9103719301075748925">"सूचना व्हॉल्यूम"</item>
-    <item msgid="7025966722295861512">"Bluetooth व्हॉल्यूम"</item>
-    <item msgid="2265317984004577529">"मायक्रोफोन निःशब्द/सशब्द करा"</item>
-    <item msgid="3646325683886507917">"सक्रिय ठेवा"</item>
+    <item msgid="7025966722295861512">"ब व्हॉल्यूम"</item>
+    <item msgid="4665183401128289653">"सक्रिय ठेवा"</item>
+    <item msgid="8584357129746649222">"स्थान"</item>
     <item msgid="7669257279311110599">"स्थान"</item>
-    <item msgid="7745724368696313169">"स्थान"</item>
+    <item msgid="3459320345690097795">"वापर आकडेवारी मिळवा"</item>
+    <item msgid="1312534577834048535">"मायक्रोफोन निःशब्द/सशब्द करा"</item>
+    <item msgid="5906017727368097853">"प्रोजेक्‍ट मीडिया"</item>
+    <item msgid="2486614710846178542">"VPN सक्रिय करा"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"लहान"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"डीफॉल्ट"</item>
     <item msgid="1016452621833735880">"Sans Serif"</item>
     <item msgid="2496277987934654454">"Sans-serif संक्षिप्त"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Monospace"</item>
-    <item msgid="6857338041963571301">"अनौपचारिक"</item>
-    <item msgid="961716102408512888">"Cursive"</item>
-    <item msgid="784581717183349567">"Small capitals"</item>
+    <item msgid="7247838127505318669">"Sans-serif मोनोस्पेस"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif मोनोस्पेस"</item>
+    <item msgid="639503332147461010">"अनौपचारिक"</item>
+    <item msgid="7967169925231332424">"Cursive"</item>
+    <item msgid="561832997193039673">"Small capitals"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"खूप लहान"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"प्रति लॉग बफर 64K"</item>

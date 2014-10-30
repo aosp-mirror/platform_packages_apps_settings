@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Не выключать"</item>
     <item msgid="844721238536786870">"Только при питании от сети"</item>
-    <item msgid="2990218920631468642">"Всегда выключать (увеличивает объем моб. трафика)"</item>
+    <item msgid="1986753720941888596">"Всегда выключать"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Не выключать"</item>
     <item msgid="7433294150916905997">"Только при питании от сети"</item>
     <item msgid="1390404486722375028">"Всегда выключать"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"За последние 30 дней"</item>
+    <item msgid="6600989128423965319">"Цикл использования данных"</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"Последние 4 цифры"</item>
+    <item msgid="7841762954785375718">"Первые 4 цифры"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Авто"</item>
+    <item msgid="1013988753804838790">"Автоматически"</item>
     <item msgid="6670588712989942178">"Только 5 ГГц"</item>
     <item msgid="2715516524973207876">"Только 2,4 ГГц"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Время использования"</item>
-    <item msgid="3703676222230317933">"Подсчитать"</item>
+    <item msgid="4796160515314745154">"Последнее использование"</item>
     <item msgid="2502754479975776899">"Название приложения"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +280,13 @@
     <item msgid="5762123934816216821">"громкость будильника"</item>
     <item msgid="785049718065337473">"громкость уведомлений"</item>
     <item msgid="6700305533746877052">"громкость Bluetooth-устройств"</item>
-    <item msgid="3810969981743709839">"включить/отключить микрофон"</item>
-    <item msgid="2627903914574908209">"не отключать"</item>
-    <item msgid="1395372654968157578">"отслеживать местоположение"</item>
-    <item msgid="3238451051299611853">"контролировать использование заряда батареи при определении местоположения"</item>
+    <item msgid="2029227495214047094">"не отключать"</item>
+    <item msgid="26109888160231211">"Отслеживать местоположение"</item>
+    <item msgid="5753382310468855812">"контролировать использование энергии при определении местоположения"</item>
+    <item msgid="3356591542543137332">"посмотреть статистику использования"</item>
+    <item msgid="3073734345226842233">"включить/отключить микрофон"</item>
+    <item msgid="1148142988678569310">"трансляция контента"</item>
+    <item msgid="9130014005474445273">"активация VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Местоположение"</item>
@@ -319,10 +329,13 @@
     <item msgid="7260546305036218513">"Громкость будильника"</item>
     <item msgid="9103719301075748925">"Громкость уведомлений"</item>
     <item msgid="7025966722295861512">"Громкость Bluetooth-устройств"</item>
-    <item msgid="2265317984004577529">"Включить/отключить микрофон"</item>
-    <item msgid="3646325683886507917">"Не отключать"</item>
+    <item msgid="4665183401128289653">"Не отключать"</item>
+    <item msgid="8584357129746649222">"Местоположение"</item>
     <item msgid="7669257279311110599">"Определение местоположения"</item>
-    <item msgid="7745724368696313169">"Местоположение"</item>
+    <item msgid="3459320345690097795">"Посмотреть статистику использования"</item>
+    <item msgid="1312534577834048535">"Включить/отключить микрофон"</item>
+    <item msgid="5906017727368097853">"Трансляция контента"</item>
+    <item msgid="2486614710846178542">"Активация VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Небольшая"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"По умолчанию"</item>
     <item msgid="1016452621833735880">"Без засечек"</item>
     <item msgid="2496277987934654454">"Без засечек, сжатый"</item>
-    <item msgid="4406003087391086325">"С засечками"</item>
-    <item msgid="1558362802170124073">"Моноширинный"</item>
-    <item msgid="6857338041963571301">"Обычный"</item>
-    <item msgid="961716102408512888">"Курсив"</item>
-    <item msgid="784581717183349567">"Малые прописные"</item>
+    <item msgid="7247838127505318669">"Без засечек, моноширинный"</item>
+    <item msgid="4478414822462359763">"С засечками"</item>
+    <item msgid="7502451783483660829">"C засечками, моноширинный"</item>
+    <item msgid="639503332147461010">"Обычный"</item>
+    <item msgid="7967169925231332424">"Курсив"</item>
+    <item msgid="561832997193039673">"Капитель"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Очень мелкий"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1 МБ"</item>
     <item msgid="6405203239560695266">"4 МБ"</item>
     <item msgid="3025431211013424097">"16 МБ"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 КБ"</item>
+    <item msgid="3534782711045262344">"256 КБ"</item>
+    <item msgid="8085867209202153403">"1 МБ"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"Буфер: макс. 64 КБ"</item>

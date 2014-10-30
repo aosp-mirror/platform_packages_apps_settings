@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,29 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"항상"</item>
     <item msgid="844721238536786870">"충전 중인 경우에만"</item>
-    <item msgid="2990218920631468642">"안함(데이터 사용 증가)"</item>
+    <item msgid="1986753720941888596">"절전 모드로 전환 안함"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"항상"</item>
     <item msgid="7433294150916905997">"충전 중인 경우에만"</item>
     <item msgid="1390404486722375028">"안함"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"최근 30일"</item>
+    <item msgid="6600989128423965319">"사용 주기 설정..."</item>
+  </string-array>
+  <string-array name="sim_card_data_range">
+    <item msgid="676666889014650266">"마지막 4자리 숫자"</item>
+    <item msgid="7841762954785375718">"처음 4자리 숫자"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"자동"</item>
+    <item msgid="1013988753804838790">"자동"</item>
     <item msgid="6670588712989942178">"5GHz 전용"</item>
     <item msgid="2715516524973207876">"2.4GHz 전용"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"사용 시간"</item>
-    <item msgid="3703676222230317933">"계수 시작"</item>
+    <item msgid="4796160515314745154">"최근 사용"</item>
     <item msgid="2502754479975776899">"앱 이름"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +280,13 @@
     <item msgid="5762123934816216821">"알람 볼륨"</item>
     <item msgid="785049718065337473">"알림 볼륨"</item>
     <item msgid="6700305533746877052">"블루투스 볼륨"</item>
-    <item msgid="3810969981743709839">"마이크 음소거/음소거 해제"</item>
-    <item msgid="2627903914574908209">"켜진 상태로 유지"</item>
-    <item msgid="1395372654968157578">"위치 모니터링"</item>
-    <item msgid="3238451051299611853">"고전력 위치 모니터링"</item>
+    <item msgid="2029227495214047094">"켜진 상태로 유지"</item>
+    <item msgid="26109888160231211">"위치 모니터링"</item>
+    <item msgid="5753382310468855812">"고전력 위치 모니터링"</item>
+    <item msgid="3356591542543137332">"사용 통계 가져오기"</item>
+    <item msgid="3073734345226842233">"마이크 음소거/음소거 해제"</item>
+    <item msgid="1148142988678569310">"프로젝트 미디어"</item>
+    <item msgid="9130014005474445273">"VPN 활성화"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"위치"</item>
@@ -319,10 +329,13 @@
     <item msgid="7260546305036218513">"알람 볼륨"</item>
     <item msgid="9103719301075748925">"알림 볼륨"</item>
     <item msgid="7025966722295861512">"블루투스 볼륨"</item>
-    <item msgid="2265317984004577529">"마이크 음소거/음소거 해제"</item>
-    <item msgid="3646325683886507917">"켜진 상태로 유지"</item>
+    <item msgid="4665183401128289653">"켜진 상태로 유지"</item>
+    <item msgid="8584357129746649222">"위치"</item>
     <item msgid="7669257279311110599">"위치"</item>
-    <item msgid="7745724368696313169">"위치"</item>
+    <item msgid="3459320345690097795">"사용 통계 가져오기"</item>
+    <item msgid="1312534577834048535">"마이크 음소거/음소거 해제"</item>
+    <item msgid="5906017727368097853">"프로젝트 미디어"</item>
+    <item msgid="2486614710846178542">"VPN 활성화"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"짧게"</item>
@@ -333,11 +346,12 @@
     <item msgid="1319652728542138112">"기본값"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"좁은 Sans-serif"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"고정 너비"</item>
-    <item msgid="6857338041963571301">"Casual"</item>
-    <item msgid="961716102408512888">"Cursive"</item>
-    <item msgid="784581717183349567">"Small capitals"</item>
+    <item msgid="7247838127505318669">"Sans Serif 고정 너비"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif 고정 너비"</item>
+    <item msgid="639503332147461010">"캐주얼"</item>
+    <item msgid="7967169925231332424">"필기체"</item>
+    <item msgid="561832997193039673">"작은 대문자"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"아주 작게"</item>
@@ -374,6 +388,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"로그 버퍼당 64K"</item>
