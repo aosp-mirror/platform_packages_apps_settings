@@ -80,6 +80,7 @@ public class RunningState {
     final PackageManager mPm;
     final UserManager mUm;
     final int mMyUserId;
+    final boolean mHideManagedProfiles;
 
     OnRefreshUiListener mRefreshUiListener;
 
@@ -744,6 +745,7 @@ public class RunningState {
         mPm = mApplicationContext.getPackageManager();
         mUm = (UserManager)mApplicationContext.getSystemService(Context.USER_SERVICE);
         mMyUserId = UserHandle.myUserId();
+        mHideManagedProfiles = mMyUserId != UserHandle.USER_OWNER;
         mResumed = false;
         mBackgroundThread = new HandlerThread("RunningState:Background");
         mBackgroundThread.start();
@@ -828,6 +830,12 @@ public class RunningState {
         MergedItem userItem = userItems.get(newItem.mUserId);
         boolean first = userItem == null || userItem.mCurSeq != mSequence;
         if (first) {
+            UserState userState = mUsers.get(newItem.mUserId);
+            UserInfo info = userState != null
+                    ? userState.mInfo : mUm.getUserInfo(newItem.mUserId);
+            if (mHideManagedProfiles && info.isManagedProfile()) {
+                return;
+            }
             if (userItem == null) {
                 userItem = new MergedItem(newItem.mUserId);
                 userItems.put(newItem.mUserId, userItem);
@@ -835,9 +843,8 @@ public class RunningState {
                 userItem.mChildren.clear();
             }
             userItem.mCurSeq = mSequence;
-            if ((userItem.mUser=mUsers.get(newItem.mUserId)) == null) {
+            if (userState == null) {
                 userItem.mUser = new UserState();
-                UserInfo info = mUm.getUserInfo(newItem.mUserId);
                 userItem.mUser.mInfo = info;
                 userItem.mUser.mIcon = Utils.getUserIcon(context, mUm, info);
                 userItem.mUser.mLabel = Utils.getUserLabel(context, info);
