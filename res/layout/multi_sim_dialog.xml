@@ -50,6 +50,28 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sim_dialog_margin_top"
+                android:paddingStart="@dimen/sim_label_padding"
+                android:text="@string/color_title"
+                style="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sim_dialog_margin_top"
+                android:paddingStart="@dimen/sim_label_padding" />
+
+        </LinearLayout>
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
