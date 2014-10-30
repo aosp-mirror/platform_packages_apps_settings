@@ -1260,21 +1260,23 @@
         <item>Cached (empty)</item>
     </string-array>
 
-    <!-- Multi-SIM titles for captioning color preference. -->
-    <string-array name="sim_info_picker_color_titles" translatable="false" >
-        <item>@string/color_blue</item>
-        <item>@string/color_green</item>
-        <item>@string/color_purple</item>
-        <item>@string/color_red</item>
-        <item>@string/color_orange</item>
-    </string-array>
+    <!-- Array storing rgb values of sim colors for multi-sim -->
+    <array name="sim_colors">
+        <item>@color/Teal_700</item>
+        <item>@color/Blue_700</item>
+        <item>@color/Indigo_700</item>
+        <item>@color/Purple_700</item>
+        <item>@color/Pink_700</item>
+        <item>@color/Red_700</item>
+    </array>
 
-    <!-- Multi-SIM colors. -->
-    <integer-array name="sim_info_picker_color_values" translatable="false" >
-        <item>@color/blue_500</item>
-        <item>@color/green_500</item>
-        <item>@color/purple_500</item>
-        <item>@color/red_500</item>
-        <item>@color/orange_500</item>
-    </integer-array>
+    <!-- Array of titles for sim color for multi-sim -->
+    <string-array name="color_picker">
+        <item>Teal</item>
+        <item>Blue</item>
+        <item>Indigo</item>
+        <item>Purple</item>
+        <item>Pink</item>
+        <item>Red</item>
+    </string-array>
 </resources>
