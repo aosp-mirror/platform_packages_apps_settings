@@ -131,6 +131,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         createPreferences();
         updateAllOptions();
+
+        SimBootReceiver.cancelNotification(getActivity());
     }
 
     private void createPreferences() {
@@ -583,5 +585,4 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     return result;
                 }
             };
-
 }
