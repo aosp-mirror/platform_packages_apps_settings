@@ -941,7 +941,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mMobileDataEnabled = null;
         } else {
             //SUB SELECT
-            isEnable = mTelephonyManager.getDataEnabled() && isMobileDataAvailable(subId);
+            isEnable = mTelephonyManager.getDataEnabled()
+                && (subId == SubscriptionManager.getDefaultDataSubId());
         }
         return isEnable;
     }
@@ -2594,8 +2595,21 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
 
         //SUB SELECT
-        private boolean isMobileDataAvailable(int subId) {
+        private boolean isMobileDataAvailable(long subId) {
             int[] subIds = SubscriptionManager.getSubId(PhoneConstants.SUB1);
-            return subIds[0] == subId;
+            if (subIds != null && subIds[0] == subId) {
+                return true;
+            }
+
+            subIds = SubscriptionManager.getSubId(PhoneConstants.SUB2);
+            if (subIds != null && subIds[0] == subId) {
+                return true;
+            }
+
+            subIds = SubscriptionManager.getSubId(PhoneConstants.SUB3);
+            if (subIds != null && subIds[0] == subId) {
+                return true;
+            }
+            return false;
         }
 }

@@ -121,9 +121,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
      * By UX design we use only one Subscription Information(SubInfo) record per SIM slot.
      * mAvalableSubInfos is the list of SubInfos we present to the user.
      * mSubInfoList is the list of all SubInfos.
+     * mSelectableSubInfos is the list of SubInfos that a user can select for data, calls, and SMS.
      */
     private List<SubInfoRecord> mAvailableSubInfos = null;
     private List<SubInfoRecord> mSubInfoList = null;
+    private List<SubInfoRecord> mSelectableSubInfos = null;
 
     private SubInfoRecord mCellularData = null;
     private SubInfoRecord mCalls = null;
@@ -186,6 +188,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         final int numSlots = tm.getSimCount();
         mAvailableSubInfos = new ArrayList<SubInfoRecord>(numSlots);
+        mSelectableSubInfos = new ArrayList<SubInfoRecord>();
         mNumSims = 0;
         for (int i = 0; i < numSlots; ++i) {
             final SubInfoRecord sir = findRecordBySlotId(i);
@@ -193,6 +196,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             mAvailableSubInfos.add(sir);
             if (sir != null) {
                 mNumSims++;
+                mSelectableSubInfos.add(sir);
             }
         }
 
@@ -345,7 +349,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     @Override
     public Dialog onCreateDialog(final int id) {
         final ArrayList<String> list = new ArrayList<String>();
-        final int availableSubInfoLength = mAvailableSubInfos.size();
+        final int selectableSubInfoLength = mSelectableSubInfos.size();
 
         final DialogInterface.OnClickListener selectionListener =
                 new DialogInterface.OnClickListener() {
@@ -355,18 +359,18 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                         final SubInfoRecord sir;
 
                         if (id == DATA_PICK) {
-                            sir = mAvailableSubInfos.get(value);
+                            sir = mSelectableSubInfos.get(value);
                             SubscriptionManager.setDefaultDataSubId(sir.subId);
                         } else if (id == CALLS_PICK) {
                             if (value != 0) {
-                                sir = mAvailableSubInfos.get(value -1);
+                                sir = mSelectableSubInfos.get(value -1);
                                 SubscriptionManager.setDefaultVoiceSubId(sir.subId);
                             } else {
                                 SubscriptionManager
                                     .setDefaultVoiceSubId(SubscriptionManager.ASK_USER_SUB_ID);
                             }
                         } else if (id == SMS_PICK) {
-                            sir = mAvailableSubInfos.get(value);
+                            sir = mSelectableSubInfos.get(value);
                             SubscriptionManager.setDefaultSmsSubId(sir.subId);
                         }
 
@@ -377,12 +381,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         if (id == CALLS_PICK) {
             list.add(getResources().getString(R.string.sim_calls_ask_first_prefs_title));
         }
-        for (int i = 0; i < availableSubInfoLength; ++i) {
-            final SubInfoRecord sir = mAvailableSubInfos.get(i);
+        for (int i = 0; i < selectableSubInfoLength; ++i) {
+            final SubInfoRecord sir = mSelectableSubInfos.get(i);
             list.add(sir.displayName);
         }
 
-        String[] arr = new String[availableSubInfoLength];
+        String[] arr = new String[selectableSubInfoLength];
         arr = list.toArray(arr);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
