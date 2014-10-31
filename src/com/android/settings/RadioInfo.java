@@ -876,7 +876,7 @@ public class RadioInfo extends Activity {
             // other than the Dialer process, which causes a lot of stuff to
             // break.
             intent.setClassName("com.android.phone",
-                    "com.android.phone.FdnList");
+                    "com.android.phone.settings.fdn.FdnList");
             startActivity(intent);
             return true;
         }
