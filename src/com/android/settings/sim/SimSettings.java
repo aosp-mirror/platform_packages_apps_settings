@@ -16,70 +16,51 @@
 
 package com.android.settings.sim;
 
-import android.graphics.Color;
-import android.provider.SearchIndexableResource;
-import com.android.settings.R;
-
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.ContentUris;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.os.UserHandle;
-import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
+import android.provider.SearchIndexableResource;
 import android.provider.Telephony;
 import android.telephony.SubInfoRecord;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.PhoneNumberUtils;
 import android.telecom.PhoneAccount;
-import android.telephony.CellInfo;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.notification.DropDownPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.Indexable.SearchIndexProvider;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {
@@ -294,7 +275,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     private void updateCellularDataValues() {
-        final Preference simPref = (Preference) findPreference(KEY_CELLULAR_DATA);
+        final Preference simPref = findPreference(KEY_CELLULAR_DATA);
         final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultDataSubId());
         simPref.setTitle(R.string.cellular_data_title);
         if (mSubInfoList.size() == 1) {
@@ -308,17 +289,15 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     private void updateCallValues() {
-        final Preference simPref = (Preference) findPreference(KEY_CALLS);
-        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultVoiceSubId());
+        final Preference simPref = findPreference(KEY_CALLS);
+        final TelecomManager telecomManager = TelecomManager.from(getActivity());
+        final PhoneAccountHandle phoneAccount =
+            telecomManager.getUserSelectedOutgoingPhoneAccount();
+
         simPref.setTitle(R.string.calls_title);
-        if (mSubInfoList.size() == 1) {
-            simPref.setSummary(mSubInfoList.get(0).displayName);
-        } else if (sir != null) {
-            simPref.setSummary(sir.displayName);
-        } else if (sir == null) {
-            simPref.setSummary(R.string.sim_calls_ask_first_prefs_title);
-        }
-        simPref.setEnabled(mNumSims >= 1);
+        simPref.setSummary(phoneAccount == null
+                ? getResources().getString(R.string.sim_selection_required_pref)
+                : (String)telecomManager.getPhoneAccount(phoneAccount).getLabel());
     }
 
     @Override
@@ -362,13 +341,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                             sir = mSelectableSubInfos.get(value);
                             SubscriptionManager.setDefaultDataSubId(sir.subId);
                         } else if (id == CALLS_PICK) {
-                            if (value != 0) {
-                                sir = mSelectableSubInfos.get(value -1);
-                                SubscriptionManager.setDefaultVoiceSubId(sir.subId);
-                            } else {
-                                SubscriptionManager
-                                    .setDefaultVoiceSubId(SubscriptionManager.ASK_USER_SUB_ID);
-                            }
+                            final TelecomManager telecomManager =
+                                    TelecomManager.from(getActivity());
+                            final List<PhoneAccountHandle> phoneAccountsList =
+                                    telecomManager.getCallCapablePhoneAccounts();
+                            telecomManager.setUserSelectedOutgoingPhoneAccount(
+                                    value < 1 ? null : phoneAccountsList.get(value - 1));
                         } else if (id == SMS_PICK) {
                             sir = mSelectableSubInfos.get(value);
                             SubscriptionManager.setDefaultSmsSubId(sir.subId);
@@ -379,11 +357,21 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 };
 
         if (id == CALLS_PICK) {
+            final TelecomManager telecomManager = TelecomManager.from(getActivity());
+            final Iterator<PhoneAccountHandle> phoneAccounts =
+                    telecomManager.getCallCapablePhoneAccounts().listIterator();
+
             list.add(getResources().getString(R.string.sim_calls_ask_first_prefs_title));
-        }
-        for (int i = 0; i < selectableSubInfoLength; ++i) {
-            final SubInfoRecord sir = mSelectableSubInfos.get(i);
-            list.add(sir.displayName);
+            while (phoneAccounts.hasNext()) {
+                final PhoneAccount phoneAccount =
+                        telecomManager.getPhoneAccount(phoneAccounts.next());
+                list.add((String)phoneAccount.getLabel());
+            }
+        } else {
+            for (int i = 0; i < selectableSubInfoLength; ++i) {
+                final SubInfoRecord sir = mSelectableSubInfos.get(i);
+                list.add(sir.displayName);
+            }
         }
 
         String[] arr = new String[selectableSubInfoLength];
