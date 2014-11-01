@@ -31,6 +31,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.hardware.usb.IUsbManager;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -161,6 +162,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final int RESULT_DEBUG_APP = 1000;
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
+
+    private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
@@ -1311,6 +1314,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 writeDebuggerOptions();
                 updateDebuggerOptions();
             }
+        } else if (requestCode == REQUEST_CODE_ENABLE_OEM_UNLOCK) {
+            if (resultCode == Activity.RESULT_OK) {
+                Utils.setOemUnlockEnabled(getActivity(), mEnableOemUnlock.isChecked());
+            }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -1364,7 +1371,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
         } else if (preference == mEnableOemUnlock) {
-            Utils.setOemUnlockEnabled(getActivity(), mEnableOemUnlock.isChecked());
+            if (!showKeyguardConfirmation(getResources(), REQUEST_CODE_ENABLE_OEM_UNLOCK)) {
+                Utils.setOemUnlockEnabled(getActivity(), mEnableOemUnlock.isChecked());
+            }
         } else if (preference == mAllowMockLocation) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
@@ -1424,6 +1433,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
 
         return false;
+    }
+
+    private boolean showKeyguardConfirmation(Resources resources, int requestCode) {
+        return new ChooseLockSettingsHelper(getActivity(), this)
+                .launchConfirmationActivity(requestCode,
+                        resources.getString(R.string.oem_unlock_enable_pin_prompt),
+                        resources.getString(R.string.oem_unlock_enable_pin_description));
     }
 
     @Override
