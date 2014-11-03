@@ -290,7 +290,7 @@
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"無線與網路"</string>
     <string name="radio_controls_summary" msgid="2837395036275123133">"管理 Wi-Fi、藍牙、飛航模式、行動網路和 VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"行動數據"</string>
-    <string name="calls_title" msgid="3544471959217176768">"通話"</string>
+    <string name="calls_title" msgid="3544471959217176768">"來電"</string>
     <string name="sms_messages_title" msgid="3188611825992624879">"簡訊"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"允許在行動網路中使用數據服務"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"允許在漫遊時使用數據服務"</string>
@@ -1541,6 +1541,7 @@
     <string name="captioning_preview_text" msgid="4067935959797375065">"字幕外觀範例"</string>
     <string name="captioning_preview_characters" msgid="7105909138497851769">"Aa"</string>
     <string name="locale_default" msgid="2593883646136326969">"預設"</string>
+    <string name="color_title" msgid="4258931051732243983">"顏色"</string>
     <string name="color_unspecified" msgid="5179683785413568326">"預設"</string>
     <string name="color_none" msgid="3475640044925814795">"無"</string>
     <string name="color_white" msgid="8045195170201590239">"白色"</string>
@@ -1741,7 +1742,7 @@
     <string name="use_default_tts_settings_summary" msgid="5916421806783703823">"下列預設設定會覆寫應用程式設定"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"預設設定"</string>
     <string name="tts_default_synth_title" msgid="4755558388333117572">"預設引擎"</string>
-    <string name="tts_default_synth_summary" msgid="6482936537135251690">"將語音合成引擎設為處理語音"</string>
+    <string name="tts_default_synth_summary" msgid="7326298606388069173">"設定用於執行文字轉語音作業的語音合成引擎"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"語音速率"</string>
     <string name="tts_default_rate_summary" msgid="4061815292287182801">"文字轉語音的播放速度"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"音調"</string>
@@ -2029,7 +2030,7 @@
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"應用程式資訊"</string>
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"行動數據"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"設定數據上限"</string>
-    <string name="data_usage_cycle" msgid="5652529796195787949">"資料用量週期"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"數據用量週期"</string>
     <string name="data_usage_app_items_header_text" msgid="5017850810459372828">"應用程式數據傳輸量"</string>
     <string name="data_usage_menu_roaming" msgid="8042359966835203296">"漫遊服務"</string>
     <string name="data_usage_menu_restrict_background" msgid="1989394568592253331">"限制背景資料"</string>
@@ -2047,8 +2048,8 @@
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"自動同步處理個人資料"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"自動同步處理工作資料"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"變更週期…"</string>
-    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"資料用量週期的重設日期："</string>
-    <string name="data_usage_empty" msgid="8621855507876539282">"沒有任何應用程式在這段期間產生資料用量。"</string>
+    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"數據用量週期的重設日期："</string>
+    <string name="data_usage_empty" msgid="8621855507876539282">"沒有任何應用程式在這段期間產生數據用量。"</string>
     <string name="data_usage_label_foreground" msgid="4938034231928628164">"前景"</string>
     <string name="data_usage_label_background" msgid="3225844085975764519">"背景"</string>
     <string name="data_usage_app_restricted" msgid="3568465218866589705">"限制"</string>
@@ -2080,13 +2081,13 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在網路上對帳戶進行的所有變更都會自動複製到您的平板電腦。\n\n有些帳戶還可以自動將您在平板電腦上進行的所有變更複製到網路上，Google 帳戶即是按照這種方式運作。"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在網路上對帳戶進行的所有變更都會自動複製到您的手機。\n\n有些帳戶還可以自動將您在手機上進行的所有變更複製到網路上，Google 帳戶即是按照這種方式運作。"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"關閉資料自動同步功能？"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"這樣可以節省資料用量和電池用量，但您必須手動同步處理每個帳戶才能收集最新資訊。此外，系統進行更新時不會通知您。"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4744145757533455623">"這樣可以節省數據用量和電池用量，但您必須手動同步處理每個帳戶才能收集最新資訊。此外，系統進行更新時不會通知您。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"用量週期重設日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"每月固定日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"儲存設定"</string>
     <string name="data_usage_warning_editor_title" msgid="3704136912240060339">"設定數據用量警告"</string>
     <string name="data_usage_limit_editor_title" msgid="9153595142385030015">"設定數據用量上限"</string>
-    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制資料用量"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"限制數據用量"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5788774061143636263">"一旦平板電腦達到指定的行動數據上限，將關閉行動數據功能。\n\n由於數據用量是由平板電腦自行計算，而行動通訊業者對用量的計算方式可能有所不同，建議您在設定上限時保留一些空間。"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="3511301596446820549">"一旦手機達到指定的行動數據上限，將關閉行動數據功能。\n\n由於數據用量是由手機自行計算，而行動通訊業者對用量的計算方式可能有所不同，建議您在設定上限時保留一些空間。"</string>
     <string name="data_usage_restrict_background_title" msgid="2201315502223035062">"限制背景資料？"</string>
@@ -2099,8 +2100,8 @@
     <string name="data_usage_uninstalled_apps_users" msgid="7986294489899813194">"已移除的應用程式和使用者"</string>
     <string name="data_usage_received_sent" msgid="5039699009276621757">"已接收 <xliff:g id="RECEIVED">%1$s</xliff:g>，已傳送 <xliff:g id="SENT">%2$s</xliff:g>"</string>
     <string name="data_usage_total_during_range" msgid="4091294280619255237">"<xliff:g id="RANGE">%2$s</xliff:g>：已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。"</string>
-    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>：根據平板電腦計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的行動通訊業者對於資料用量的計算方式可能會有所不同。"</string>
-    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>：根據手機計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的行動通訊業者對於資料用量的計算方式可能會有所不同。"</string>
+    <string name="data_usage_total_during_range_mobile" product="tablet" msgid="5961720793603268572">"<xliff:g id="RANGE">%2$s</xliff:g>：根據平板電腦計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的行動通訊業者對於數據用量的計算方式可能會有所不同。"</string>
+    <string name="data_usage_total_during_range_mobile" product="default" msgid="1625833170144610767">"<xliff:g id="RANGE">%2$s</xliff:g>：根據手機計算，已使用約 <xliff:g id="TOTAL">%1$s</xliff:g>。您的行動通訊業者對於數據用量的計算方式可能會有所不同。"</string>
     <string name="data_usage_metered_title" msgid="7383175371006596441">"網路限制"</string>
     <string name="data_usage_metered_body" msgid="3262343834446126044">"計量付費網路在背景資料受限時等同行動網路。使用這類網路下載大量資料前，應用程式可能會顯示警告訊息。"</string>
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"行動網路"</string>
@@ -2376,7 +2377,7 @@
     <string name="ring_volume_option_title" msgid="6767101703671248309">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"通知音量"</string>
     <string name="zen_mode_settings_title" msgid="7014915558669122902">"干擾"</string>
-    <string name="zen_mode_option_title" msgid="5061978632306007914">"來電和收到通知時"</string>
+    <string name="zen_mode_option_title" msgid="5061978632306007914">"收到來電和通知時"</string>
     <string name="zen_mode_option_off" msgid="3167702608910820883">"一律允許干擾"</string>
     <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"僅允許優先干擾"</string>
     <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"不允許干擾"</string>
@@ -2441,7 +2442,7 @@
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"自動開啟"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"、 "</string>
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"永遠不要"</string>
-    <string name="zen_mode_calls" msgid="7051492091133751208">"通話"</string>
+    <string name="zen_mode_calls" msgid="7051492091133751208">"來電"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"訊息"</string>
     <string name="zen_mode_from" msgid="1033337300289871697">"來電者/訊息傳送者"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"所有人"</string>
@@ -2490,4 +2491,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"輸入您的 PIN 啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"畫出解鎖圖形啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"輸入您的密碼啟動裝置後，您將無法使用 <xliff:g id="SERVICE">%1$s</xliff:g> 等各項協助工具服務。"</string>
+    <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資訊"</string>
+    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 相關資訊"</string>
+    <string name="slot_number" msgid="3762676044904653577">"(插槽 <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
 </resources>
