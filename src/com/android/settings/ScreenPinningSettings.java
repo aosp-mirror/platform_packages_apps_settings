@@ -15,23 +15,29 @@
  */
 package com.android.settings;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Screen pinning settings.
@@ -39,18 +45,29 @@ import com.android.settings.widget.SwitchBar;
 public class ScreenPinningSettings extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener, Indexable {
 
+    private static final CharSequence KEY_USE_SCREEN_LOCK = "use_screen_lock";
+    private static final int CHANGE_LOCK_METHOD_REQUEST = 43;
+
     private SwitchBar mSwitchBar;
+    private SwitchPreference mUseScreenLock;
+    private LockPatternUtils mLockPatternUtils;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
+        mLockPatternUtils = new LockPatternUtils(activity);
+
+        View emptyView = LayoutInflater.from(activity)
+                .inflate(R.layout.screen_pinning_instructions, null);
+        ((ViewGroup) getListView().getParent()).addView(emptyView);
+        getListView().setEmptyView(emptyView);
 
         mSwitchBar = activity.getSwitchBar();
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
-        mSwitchBar.setChecked(isLockToAppEnabled());
+        mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
     }
 
     @Override
@@ -61,24 +78,69 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         mSwitchBar.hide();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.screen_pinning_instructions, null);
-    }
-
-    private boolean isLockToAppEnabled() {
-        try {
-            return Settings.System.getInt(getContentResolver(), Settings.System.LOCK_TO_APP_ENABLED)
-                != 0;
-        } catch (SettingNotFoundException e) {
-            return false;
-        }
+    private static boolean isLockToAppEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.LOCK_TO_APP_ENABLED, 0) != 0;
     }
 
     private void setLockToAppEnabled(boolean isEnabled) {
         Settings.System.putInt(getContentResolver(), Settings.System.LOCK_TO_APP_ENABLED,
                 isEnabled ? 1 : 0);
+    }
+
+    private boolean isScreenLockUsed() {
+        int def = getCurrentSecurityTitle() != R.string.screen_pinning_unlock_none ? 1 : 0;
+        return Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCK_TO_APP_EXIT_LOCKED, def) != 0;
+    }
+
+    private boolean setScreenLockUsed(boolean isEnabled) {
+        if (isEnabled) {
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+            if (lockPatternUtils.getKeyguardStoredPasswordQuality()
+                    == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
+                Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+                chooseLockIntent.putExtra(
+                        ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+                startActivityForResult(chooseLockIntent, CHANGE_LOCK_METHOD_REQUEST);
+                return false;
+            }
+        }
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCK_TO_APP_EXIT_LOCKED,
+                isEnabled ? 1 : 0);
+        return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHANGE_LOCK_METHOD_REQUEST) {
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+            boolean validPassQuality = lockPatternUtils.getKeyguardStoredPasswordQuality()
+                    != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+            setScreenLockUsed(validPassQuality);
+            // Make sure the screen updates.
+            mUseScreenLock.setChecked(validPassQuality);
+        }
+    }
+
+    private int getCurrentSecurityTitle() {
+        int quality = mLockPatternUtils.getKeyguardStoredPasswordQuality();
+        switch (quality) {
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                return R.string.screen_pinning_unlock_pin;
+            case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+                return R.string.screen_pinning_unlock_password;
+            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                if (mLockPatternUtils.isLockPatternEnabled()) {
+                    return R.string.screen_pinning_unlock_pattern;
+                }
+        }
+        return R.string.screen_pinning_unlock_none;
     }
 
     /**
@@ -87,6 +149,28 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         setLockToAppEnabled(isChecked);
+        updateDisplay();
+    }
+
+    public void updateDisplay() {
+        PreferenceScreen root = getPreferenceScreen();
+        if (root != null) {
+            root.removeAll();
+        }
+        if (isLockToAppEnabled(getActivity())) {
+            addPreferencesFromResource(R.xml.screen_pinning_settings);
+            root = getPreferenceScreen();
+
+            mUseScreenLock = (SwitchPreference) root.findPreference(KEY_USE_SCREEN_LOCK);
+            mUseScreenLock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return setScreenLockUsed((boolean) newValue);
+                }
+            });
+            mUseScreenLock.setChecked(isScreenLockUsed());
+            mUseScreenLock.setTitle(getCurrentSecurityTitle());
+        }
     }
 
     /**
@@ -106,11 +190,19 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
                 data.screenTitle = res.getString(R.string.screen_pinning_title);
                 result.add(data);
 
-                // Screen pinning description.
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.screen_pinning_description);
-                data.screenTitle = res.getString(R.string.screen_pinning_title);
-                result.add(data);
+                if (isLockToAppEnabled(context)) {
+                    // Screen lock option
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.screen_pinning_unlock_none);
+                    data.screenTitle = res.getString(R.string.screen_pinning_title);
+                    result.add(data);
+                } else {
+                    // Screen pinning description.
+                    data = new SearchIndexableRaw(context);
+                    data.title = res.getString(R.string.screen_pinning_description);
+                    data.screenTitle = res.getString(R.string.screen_pinning_title);
+                    result.add(data);
+                }
 
                 return result;
             }
