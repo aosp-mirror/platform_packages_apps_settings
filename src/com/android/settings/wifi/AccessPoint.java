@@ -299,7 +299,6 @@ class AccessPoint extends Preference {
         // Reachable one goes before unreachable one.
         if (mRssi != Integer.MAX_VALUE && other.mRssi == Integer.MAX_VALUE) return -1;
         if (mRssi == Integer.MAX_VALUE && other.mRssi != Integer.MAX_VALUE) return 1;
-        if (mRssi == Integer.MAX_VALUE && other.mRssi != Integer.MAX_VALUE) return 1;
 
         // Configured one goes before unconfigured one.
         if (networkId != WifiConfiguration.INVALID_NETWORK_ID
@@ -447,7 +446,7 @@ class AccessPoint extends Preference {
             visibility.append(" rssi=").append(mInfo.getRssi());
             visibility.append(" ");
             visibility.append(" score=").append(mInfo.score);
-            visibility.append(String.format("tx=%.1f,", mInfo.txSuccessRate));
+            visibility.append(String.format(" tx=%.1f,", mInfo.txSuccessRate));
             visibility.append(String.format("%.1f,", mInfo.txRetriesRate));
             visibility.append(String.format("%.1f ", mInfo.txBadRate));
             visibility.append(String.format("rx=%.1f", mInfo.rxSuccessRate));
@@ -588,6 +587,8 @@ class AccessPoint extends Preference {
 
         if (mState != null) { // This is the active connection
             summary.append(Summary.get(context, mState));
+        } else if (mConfig != null && mConfig.noInternetAccess) {
+            summary.append(context.getString(R.string.wifi_no_internet));
         } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
                 mConfig.disableReason != WifiConfiguration.DISABLED_UNKNOWN_REASON)
                || mConfig.autoJoinStatus
@@ -596,8 +597,10 @@ class AccessPoint extends Preference {
                     >= WifiConfiguration.AUTO_JOIN_DISABLED_ON_AUTH_FAILURE) {
                 if (mConfig.disableReason == WifiConfiguration.DISABLED_DHCP_FAILURE) {
                     summary.append(context.getString(R.string.wifi_disabled_network_failure));
-                } else {
+                } else if (mConfig.disableReason == WifiConfiguration.DISABLED_AUTH_FAILURE) {
                     summary.append(context.getString(R.string.wifi_disabled_password_failure));
+                } else {
+                    summary.append(context.getString(R.string.wifi_disabled_wifi_failure));
                 }
             } else {
                 switch (mConfig.disableReason) {
@@ -626,7 +629,7 @@ class AccessPoint extends Preference {
             //add RSSI/band information for this config, what was seen up to 6 seconds ago
             //verbose WiFi Logging is only turned on thru developers settings
             if (mInfo != null && mState != null) { // This is the active connection
-                summary.append(" (f=" + Integer.toString(mInfo.getFrequency()) + ")");
+                summary.append(" f=" + Integer.toString(mInfo.getFrequency()));
             }
             summary.append(" " + getVisibilityStatus());
             if (mConfig != null && mConfig.autoJoinStatus > 0) {
@@ -643,6 +646,15 @@ class AccessPoint extends Preference {
                     summary.append( Long.toString(sec) + "s ");
                 }
                 summary.append(")");
+            }
+            if (mConfig != null && mConfig.numIpConfigFailures > 0) {
+                summary.append(" ipf=").append(mConfig.numIpConfigFailures);
+            }
+            if (mConfig != null && mConfig.numConnectionFailures > 0) {
+                summary.append(" cf=").append(mConfig.numConnectionFailures);
+            }
+            if (mConfig != null && mConfig.numAuthFailures > 0) {
+                summary.append(" authf=").append(mConfig.numAuthFailures);
             }
         }
 
