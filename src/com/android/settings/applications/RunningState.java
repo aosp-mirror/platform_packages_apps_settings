@@ -16,9 +16,6 @@
 
 package com.android.settings.applications;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
-
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.ActivityThread;
@@ -31,6 +28,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Drawable.ConstantState;
 import android.os.Handler;
@@ -43,6 +42,10 @@ import android.os.UserManager;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
+
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -836,17 +839,8 @@ public class RunningState {
                 userItem.mUser = new UserState();
                 UserInfo info = mUm.getUserInfo(newItem.mUserId);
                 userItem.mUser.mInfo = info;
-                if (info != null) {
-                    userItem.mUser.mIcon = Utils.getUserIcon(context, mUm, info);
-                }
-                String name = info != null ? info.name : null;
-                if (name == null && info != null) {
-                    name = Integer.toString(info.id);
-                } else if (info == null) {
-                    name = context.getString(R.string.unknown);
-                }
-                userItem.mUser.mLabel = context.getResources().getString(
-                        R.string.running_process_item_user_label, name);
+                userItem.mUser.mIcon = Utils.getUserIcon(context, mUm, info);
+                userItem.mUser.mLabel = Utils.getUserLabel(context, info);
             }
             newMergedItems.add(userItem);
         }

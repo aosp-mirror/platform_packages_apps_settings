@@ -136,15 +136,8 @@ public class UidDetailProvider {
             final int userHandle = getUserIdForKey(uid);
             final UserInfo info = um.getUserInfo(userHandle);
             if (info != null) {
-                if (info.isManagedProfile()) {
-                    detail.label = res.getString(R.string.managed_user_title);
-                    detail.icon = mContext.getDrawable(
-                            com.android.internal.R.drawable.ic_corp_icon);
-                } else {
-                    detail.label = res.getString(R.string.running_process_item_user_label,
-                            info.name);
-                    detail.icon = Utils.getUserIcon(mContext, um, info);
-                }
+                detail.label = Utils.getUserLabel(mContext, info);
+                detail.icon = Utils.getUserIcon(mContext, um, info);
                 return detail;
             }
         }
