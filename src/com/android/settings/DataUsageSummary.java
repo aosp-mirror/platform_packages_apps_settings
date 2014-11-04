@@ -1134,7 +1134,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final SubInfoRecord nextSir = SubscriptionManager.getSubInfoForSubscriber(
                 SubscriptionManager.getDefaultDataSubId());
 
-        if (currentSir.subId == nextSir.subId) {
+        if (currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
             setMobileDataEnabled(true);
             updateBody();
             return;
@@ -1144,12 +1144,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         builder.setTitle(R.string.sim_change_data_title);
         builder.setMessage(getActivity().getResources().getString(R.string.sim_change_data_message,
-                    currentSir.displayName, nextSir.displayName));
+                    currentSir.getDisplayName(), nextSir.getDisplayName()));
 
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SubscriptionManager.setDefaultDataSubId(currentSir.subId);
+                SubscriptionManager.setDefaultDataSubId(currentSir.getSubscriptionId());
                 setMobileDataEnabled(true);
                 updateBody();
             }
@@ -2347,7 +2347,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         // require both supported network and ready SIM
         boolean isReady = true;
         for (SubInfoRecord subInfo : subInfoList) {
-            isReady = isReady & tele.getSimState(subInfo.slotId) == SIM_STATE_READY;
+            isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
         }
         return conn.isNetworkSupported(TYPE_MOBILE) && isReady;
     }
@@ -2588,9 +2588,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         private void addMobileTab(Context context, List<SubInfoRecord> subInfoList) {
             if (subInfoList != null) {
                 for (SubInfoRecord subInfo : mSubInfoList) {
-                    if (hasReadyMobileRadio(context, subInfo.subId)) {
-                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.subId),
-                                subInfo.displayName));
+                    if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
+                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
+                                subInfo.getDisplayName().toString()));
                     }
                 }
             }
@@ -2601,7 +2601,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 final int currentTagIndex = mTabHost.getCurrentTab();
                 int i = 0;
                 for (SubInfoRecord subInfo : mSubInfoList) {
-                    if (hasReadyMobileRadio(context, subInfo.subId)) {
+                    if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
                         if (i++ == currentTagIndex) {
                             return subInfo;
                         }
@@ -2622,8 +2622,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 String mobileTag;
                 map = new HashMap<Integer, String>();
                 for (SubInfoRecord subInfo : subInfoList) {
-                    mobileTag = TAB_MOBILE + String.valueOf(subInfo.subId);
-                    map.put(subInfo.subId,mobileTag);
+                    mobileTag = TAB_MOBILE + String.valueOf(subInfo.getSubscriptionId());
+                    map.put(subInfo.getSubscriptionId(), mobileTag);
                 }
             }
             return map;

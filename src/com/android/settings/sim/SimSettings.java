@@ -232,7 +232,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         for (int i = 0; i < availableSubInfoLength; ++i) {
             final SubInfoRecord sir = mAvailableSubInfos.get(i);
-            if (sir != null && sir.subId == subId) {
+            if (sir != null && sir.getSubscriptionId() == subId) {
                 return sir;
             }
         }
@@ -250,7 +250,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
             for (int i = 0; i < availableSubInfoLength; ++i) {
                 final SubInfoRecord sir = mSubInfoList.get(i);
-                if (sir.slotId == slotId) {
+                if (sir.getSimSlotIndex() == slotId) {
                     //Right now we take the first subscription on a SIM.
                     return sir;
                 }
@@ -265,9 +265,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
         simPref.setTitle(R.string.sms_messages_title);
         if (mSubInfoList.size() == 1) {
-            simPref.setSummary(mSubInfoList.get(0).displayName);
+            simPref.setSummary(mSubInfoList.get(0).getDisplayName());
         } else if (sir != null) {
-            simPref.setSummary(sir.displayName);
+            simPref.setSummary(sir.getDisplayName());
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
         }
@@ -279,9 +279,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultDataSubId());
         simPref.setTitle(R.string.cellular_data_title);
         if (mSubInfoList.size() == 1) {
-            simPref.setSummary(mSubInfoList.get(0).displayName);
+            simPref.setSummary(mSubInfoList.get(0).getDisplayName());
         } else if (sir != null) {
-            simPref.setSummary(sir.displayName);
+            simPref.setSummary(sir.getDisplayName());
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
         }
@@ -339,7 +339,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
                         if (id == DATA_PICK) {
                             sir = mSelectableSubInfos.get(value);
-                            SubscriptionManager.setDefaultDataSubId(sir.subId);
+                            SubscriptionManager.setDefaultDataSubId(sir.getSubscriptionId());
                         } else if (id == CALLS_PICK) {
                             final TelecomManager telecomManager =
                                     TelecomManager.from(getActivity());
@@ -349,7 +349,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                                     value < 1 ? null : phoneAccountsList.get(value - 1));
                         } else if (id == SMS_PICK) {
                             sir = mSelectableSubInfos.get(value);
-                            SubscriptionManager.setDefaultSmsSubId(sir.subId);
+                            SubscriptionManager.setDefaultSmsSubId(sir.getSubscriptionId());
                         }
 
                         updateActivitesCategory();
@@ -370,7 +370,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         } else {
             for (int i = 0; i < selectableSubInfoLength; ++i) {
                 final SubInfoRecord sir = mSelectableSubInfos.get(i);
-                list.add(sir.displayName);
+                list.add(sir.getDisplayName().toString());
             }
         }
 
@@ -472,14 +472,16 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             final Resources res = getResources();
 
             if (mSubInfoRecord != null) {
-                if(TextUtils.isEmpty(mSubInfoRecord.displayName)) {
+                if(TextUtils.isEmpty(mSubInfoRecord.getDisplayName())) {
                     setTitle(getCarrierName());
-                    mSubInfoRecord.displayName = getCarrierName();
-                    SubscriptionManager.setDisplayName(getCarrierName(), mSubInfoRecord.subId);
+                    String displayName = getCarrierName();
+                    mSubInfoRecord.setDisplayName(displayName);
+                    SubscriptionManager.setDisplayName(displayName,
+                            mSubInfoRecord.getSubscriptionId());
                 } else {
-                    setTitle(mSubInfoRecord.displayName);
+                    setTitle(mSubInfoRecord.getDisplayName());
                 }
-                setSummary(mSubInfoRecord.number.toString());
+                setSummary(mSubInfoRecord.getNumber().toString());
                 setEnabled(true);
             } else {
                 setSummary(R.string.sim_slot_empty);
@@ -489,7 +491,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
 
         public String getCarrierName() {
-            Uri mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, mSubInfoRecord.subId);
+            Uri mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI,
+                    mSubInfoRecord.getSubscriptionId());
             Cursor mCursor = getActivity().managedQuery(mUri, sProjection, null, null);
             mCursor.moveToFirst();
             return mCursor.getString(1);
@@ -523,7 +526,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             builder.setView(dialogLayout);
 
             EditText nameText = (EditText)dialogLayout.findViewById(R.id.sim_name);
-            nameText.setText(mSubInfoRecord.displayName);
+            nameText.setText(mSubInfoRecord.getDisplayName());
 
             final Spinner colorSpinner = (Spinner) dialogLayout.findViewById(R.id.spinner);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -532,7 +535,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             colorSpinner.setAdapter(adapter);
 
             for (int i = 0; i < colorArr.length; i++) {
-                if (colorArr[i] == mSubInfoRecord.color) {
+                if (colorArr[i] == mSubInfoRecord.getColor()) {
                     colorSpinner.setSelection(i);
                     break;
                 }
@@ -557,23 +560,25 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             carrierView.setText(getCarrierName());
 
             builder.setTitle(String.format(res.getString(R.string.sim_editor_title),
-                    (mSubInfoRecord.slotId + 1)));
+                    (mSubInfoRecord.getSimSlotIndex() + 1)));
 
             builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int whichButton) {
                     final EditText nameText = (EditText)dialogLayout.findViewById(R.id.sim_name);
 
-                    mSubInfoRecord.displayName = nameText.getText().toString();
-                    SubscriptionManager.setDisplayName(mSubInfoRecord.displayName,
-                        mSubInfoRecord.subId);
-                    findRecordBySubId(mSubInfoRecord.subId).displayName =
-                        nameText.getText().toString();
+                    String displayName = nameText.getText().toString();
+                    int subId = mSubInfoRecord.getSubscriptionId();
+                    mSubInfoRecord.setDisplayName(displayName);
+                    SubscriptionManager.setDisplayName(displayName, subId);
+                    findRecordBySubId(subId).setDisplayName(displayName);
 
                     final int colorSelected = colorSpinner.getSelectedItemPosition();
-                    mSubInfoRecord.color = colorArr[colorSelected];
-                    SubscriptionManager.setColor(colorArr[colorSelected], mSubInfoRecord.subId);
-                    findRecordBySubId(mSubInfoRecord.subId).color = colorArr[colorSelected];
+                    int subscriptionId = mSubInfoRecord.getSubscriptionId();
+                    int color = colorArr[colorSelected];
+                    mSubInfoRecord.setColor(color);
+                    SubscriptionManager.setColor(color, subscriptionId);
+                    findRecordBySubId(subscriptionId).setColor(color);
 
                     updateAllOptions();
                     update();
@@ -603,9 +608,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
                 @Override
                 public int compare(SubInfoRecord arg0, SubInfoRecord arg1) {
-                    int flag = arg0.slotId - arg1.slotId;
+                    int flag = arg0.getSimSlotIndex() - arg1.getSimSlotIndex();
                     if (flag == 0) {
-                        return (int) (arg0.subId - arg1.subId);
+                        return (int) (arg0.getSubscriptionId() - arg1.getSubscriptionId());
                     }
                     return flag;
                 }

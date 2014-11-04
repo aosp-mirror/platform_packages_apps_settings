@@ -374,7 +374,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
         if (subInfoList != null) {
             for (SubInfoRecord subInfo : subInfoList) {
-                simState = TelephonyManager.getDefault().getSimState(subInfo.slotId);
+                simState = TelephonyManager.getDefault().getSimState(subInfo.getSimSlotIndex());
                 if((simState != TelephonyManager.SIM_STATE_ABSENT) &&
                             (simState != TelephonyManager.SIM_STATE_UNKNOWN)){
                     return true;
