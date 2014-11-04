@@ -1112,7 +1112,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             final String currentTab = mCurrentTab;
             if (isMobileTab(currentTab)) {
                 if (dataEnabled) {
-                    setMobileDataEnabled(true);
+                    // If we are showing the Sim Card tile then we are a Multi-Sim device.
+                    if (Utils.showSimCardTile(getActivity())) {
+                        handleMultiSimDataDialog();
+                    } else {
+                        setMobileDataEnabled(true);
+                    }
                 } else {
                     // disabling data; show confirmation dialog which eventually
                     // calls setMobileDataEnabled() once user confirms.
@@ -1123,6 +1128,36 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             updatePolicy(false);
         }
     };
+
+    private void handleMultiSimDataDialog() {
+        final SubInfoRecord currentSir = getCurrentTabSubInfo(getActivity());
+        final SubInfoRecord nextSir = SubscriptionManager.getSubInfoForSubscriber(
+                SubscriptionManager.getDefaultDataSubId());
+
+        if (currentSir.subId == nextSir.subId) {
+            setMobileDataEnabled(true);
+            updateBody();
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle(R.string.sim_change_data_title);
+        builder.setMessage(getActivity().getResources().getString(R.string.sim_change_data_message,
+                    currentSir.displayName, nextSir.displayName));
+
+        builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                SubscriptionManager.setDefaultDataSubId(currentSir.subId);
+                setMobileDataEnabled(true);
+                updateBody();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, null);
+
+        builder.create().show();
+    }
 
     private View.OnClickListener mDisableAtLimitListener = new View.OnClickListener() {
         @Override
@@ -2553,12 +2588,27 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         private void addMobileTab(Context context, List<SubInfoRecord> subInfoList) {
             if (subInfoList != null) {
                 for (SubInfoRecord subInfo : mSubInfoList) {
-                    if (hasReadyMobileRadio(context,subInfo.subId)) {
+                    if (hasReadyMobileRadio(context, subInfo.subId)) {
                         mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.subId),
                                 subInfo.displayName));
                     }
                 }
             }
+        }
+
+        private SubInfoRecord getCurrentTabSubInfo(Context context) {
+            if (mSubInfoList != null && mTabHost != null) {
+                final int currentTagIndex = mTabHost.getCurrentTab();
+                int i = 0;
+                for (SubInfoRecord subInfo : mSubInfoList) {
+                    if (hasReadyMobileRadio(context, subInfo.subId)) {
+                        if (i++ == currentTagIndex) {
+                            return subInfo;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         /**
