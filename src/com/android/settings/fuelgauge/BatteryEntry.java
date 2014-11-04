@@ -167,12 +167,7 @@ public class BatteryEntry {
                 UserInfo info = um.getUserInfo(sipper.userId);
                 if (info != null) {
                     icon = Utils.getUserIcon(context, um, info);
-                    name = info != null ? info.name : null;
-                    if (name == null) {
-                        name = Integer.toString(info.id);
-                    }
-                    name = context.getResources().getString(
-                            R.string.running_process_item_user_label, name);
+                    name = Utils.getUserLabel(context, info);
                 } else {
                     icon = null;
                     name = context.getResources().getString(
