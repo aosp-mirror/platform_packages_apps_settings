@@ -1279,6 +1279,24 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
+    private void confirmEnableOemUnlock() {
+        DialogInterface.OnClickListener onConfirmListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Utils.setOemUnlockEnabled(getActivity(), true);
+                updateAllOptions();
+            }
+        };
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.confirm_enable_oem_unlock_title)
+                .setMessage(R.string.confirm_enable_oem_unlock_text)
+                .setPositiveButton(R.string.yes, onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create()
+                .show();
+    }
+
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (switchView != mSwitchBar.getSwitch()) {
@@ -1316,7 +1334,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             }
         } else if (requestCode == REQUEST_CODE_ENABLE_OEM_UNLOCK) {
             if (resultCode == Activity.RESULT_OK) {
-                Utils.setOemUnlockEnabled(getActivity(), mEnableOemUnlock.isChecked());
+                if (mEnableOemUnlock.isChecked()) {
+                    confirmEnableOemUnlock();
+                } else {
+                    Utils.setOemUnlockEnabled(getActivity(), false);
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -1372,7 +1394,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeBtHciSnoopLogOptions();
         } else if (preference == mEnableOemUnlock) {
             if (!showKeyguardConfirmation(getResources(), REQUEST_CODE_ENABLE_OEM_UNLOCK)) {
-                Utils.setOemUnlockEnabled(getActivity(), mEnableOemUnlock.isChecked());
+                if (mEnableOemUnlock.isChecked()) {
+                    confirmEnableOemUnlock();
+                } else {
+                    Utils.setOemUnlockEnabled(getActivity(), false);
+                }
             }
         } else if (preference == mAllowMockLocation) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
