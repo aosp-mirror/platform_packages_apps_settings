@@ -61,8 +61,6 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.telephony.TelephonyManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -70,10 +68,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
-import com.android.internal.util.ImageUtils;
 import com.android.internal.util.UserIcons;
 import com.android.settings.UserSpinnerAdapter.UserDetails;
-import com.android.settings.dashboard.DashboardCategory;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.drawable.CircleFramedDrawable;
 
@@ -858,6 +854,12 @@ public final class Utils {
      * Returns a circular icon for a user.
      */
     public static Drawable getUserIcon(Context context, UserManager um, UserInfo user) {
+        if (user.isManagedProfile()) {
+            // We use predefined values for managed profiles
+            Bitmap b = BitmapFactory.decodeResource(context.getResources(),
+                    com.android.internal.R.drawable.ic_corp_icon);
+            return CircleFramedDrawable.getInstance(context, b);
+        }
         if (user.iconPath != null) {
             Bitmap icon = um.getUserIcon(user.id);
             if (icon != null) {
@@ -865,6 +867,23 @@ public final class Utils {
             }
         }
         return UserIcons.getDefaultUserIcon(user.id, /* light= */ false);
+    }
+
+    /**
+     * Returns a label for the user, in the form of "User: user name" or "Work profile".
+     */
+    public static String getUserLabel(Context context, UserInfo info) {
+        if (info.isManagedProfile()) {
+            // We use predefined values for managed profiles
+            return context.getString(R.string.managed_user_title);
+        }
+        String name = info != null ? info.name : null;
+        if (name == null && info != null) {
+            name = Integer.toString(info.id);
+        } else if (info == null) {
+            name = context.getString(R.string.unknown);
+        }
+        return context.getResources().getString(R.string.running_process_item_user_label, name);
     }
 
     /**
