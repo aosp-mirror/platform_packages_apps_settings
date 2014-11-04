@@ -110,7 +110,7 @@ public class ImeiInformation extends PreferenceActivity {
         final Phone[] phones = PhoneFactory.getPhones();
         for (int i = 0; i < phones.length; i++) {
             // Currently we only operate with the first subscription of a SIM.
-            if (phones[i].getSubId() == subInfos.get(0).subId) {
+            if (phones[i].getSubId() == subInfos.get(0).getSubscriptionId()) {
                 return phones[i];
             }
         }
