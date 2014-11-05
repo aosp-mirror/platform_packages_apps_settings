@@ -469,7 +469,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             mSlotId = slotId;
             setKey("sim" + mSlotId);
             update();
-            colorArr = context.getResources().getIntArray(R.array.sim_colors);
+            colorArr = context.getResources().getIntArray(com.android.internal.R.array.sim_colors);
         }
 
         public void update() {
