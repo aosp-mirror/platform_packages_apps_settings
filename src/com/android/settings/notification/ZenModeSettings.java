@@ -63,7 +63,7 @@ import java.util.Objects;
 
 public class ZenModeSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "ZenModeSettings";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_IMPORTANT = "important";
@@ -77,6 +77,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_DAYS = "days";
     private static final String KEY_START_TIME = "start_time";
     private static final String KEY_END_TIME = "end_time";
+    private static final String KEY_DOWNTIME_MODE = "downtime_mode";
 
     private static final String KEY_AUTOMATION = "automation";
     private static final String KEY_ENTRY = "entry";
@@ -113,6 +114,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         rt.put(R.string.zen_mode_downtime_days, KEY_DAYS);
         rt.put(R.string.zen_mode_start_time, KEY_START_TIME);
         rt.put(R.string.zen_mode_end_time, KEY_END_TIME);
+        rt.put(R.string.zen_mode_downtime_mode_title, KEY_DOWNTIME_MODE);
         rt.put(R.string.zen_mode_automation_category, KEY_AUTOMATION);
         rt.put(R.string.manage_condition_providers, KEY_CONDITION_PROVIDERS);
         return rt;
@@ -132,6 +134,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private Preference mDays;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
+    private DropDownPreference mDowntimeMode;
     private PreferenceCategory mAutomationCategory;
     private Preference mEntry;
     private Preference mConditionProviders;
@@ -300,6 +303,24 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         downtime.addPreference(mEnd);
         mEnd.setDependency(mDays.getKey());
 
+        mDowntimeMode = (DropDownPreference) downtime.findPreference(KEY_DOWNTIME_MODE);
+        mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_priority, false);
+        mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_none, true);
+        mDowntimeMode.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos, Object value) {
+                if (mDisableListeners) return true;
+                final boolean sleepNone = value instanceof Boolean ? ((Boolean) value) : false;
+                if (mConfig == null || mConfig.sleepNone == sleepNone) return false;
+                final ZenModeConfig newConfig = mConfig.copy();
+                newConfig.sleepNone = sleepNone;
+                if (DEBUG) Log.d(TAG, "onPrefChange sleepNone=" + sleepNone);
+                return setZenModeConfig(newConfig);
+            }
+        });
+        mDowntimeMode.setOrder(10);  // sort at the bottom of the category
+        mDowntimeMode.setDependency(mDays.getKey());
+
         mAutomationCategory = (PreferenceCategory) findPreference(KEY_AUTOMATION);
         mEntry = findPreference(KEY_ENTRY);
         mEntry.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -373,6 +394,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         updateDays();
         mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
         mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
+        mDowntimeMode.setSelectedValue(mConfig.sleepNone);
         mDisableListeners = false;
         refreshAutomationSection();
         updateEndSummary();
