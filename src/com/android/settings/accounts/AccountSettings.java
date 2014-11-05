@@ -536,6 +536,7 @@ public class AccountSettings extends SettingsPreferenceFragment
      */
     public static class ConfirmAutoSyncChangeFragment extends DialogFragment {
         private static final String SAVE_ENABLING = "enabling";
+        private static final String SAVE_USER_HANDLE = "userHandle";
         private boolean mEnabling;
         private UserHandle mUserHandle;
 
@@ -554,6 +555,7 @@ public class AccountSettings extends SettingsPreferenceFragment
             final Context context = getActivity();
             if (savedInstanceState != null) {
                 mEnabling = savedInstanceState.getBoolean(SAVE_ENABLING);
+                mUserHandle = (UserHandle) savedInstanceState.getParcelable(SAVE_USER_HANDLE);
             }
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -581,6 +583,7 @@ public class AccountSettings extends SettingsPreferenceFragment
         public void onSaveInstanceState(Bundle outState) {
             super.onSaveInstanceState(outState);
             outState.putBoolean(SAVE_ENABLING, mEnabling);
+            outState.putParcelable(SAVE_USER_HANDLE, mUserHandle);
         }
     }
     // TODO Implement a {@link SearchIndexProvider} to allow Indexing and Search of account types
