@@ -570,7 +570,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     String displayName = nameText.getText().toString();
                     int subId = mSubInfoRecord.getSubscriptionId();
                     mSubInfoRecord.setDisplayName(displayName);
-                    SubscriptionManager.setDisplayName(displayName, subId);
+                    SubscriptionManager.setDisplayName(displayName, subId,
+                            SubscriptionManager.NAME_SOURCE_USER_INPUT);
                     findRecordBySubId(subId).setDisplayName(displayName);
 
                     final int colorSelected = colorSpinner.getSelectedItemPosition();
