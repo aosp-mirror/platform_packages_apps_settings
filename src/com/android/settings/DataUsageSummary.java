@@ -710,7 +710,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     /**
      * Build {@link TabSpec} with thin indicator, and empty content.
      */
-    private TabSpec buildTabSpec(String tag, String title) {
+    private TabSpec buildTabSpec(String tag, CharSequence title) {
         return mTabHost.newTabSpec(tag).setIndicator(title).setContent(
                 mEmptyTabContent);
     }
@@ -2590,7 +2590,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 for (SubInfoRecord subInfo : mSubInfoList) {
                     if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
                         mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
-                                subInfo.getDisplayName().toString()));
+                                subInfo.getDisplayName()));
                     }
                 }
             }
