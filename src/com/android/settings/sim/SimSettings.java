@@ -370,7 +370,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         } else {
             for (int i = 0; i < selectableSubInfoLength; ++i) {
                 final SubInfoRecord sir = mSelectableSubInfos.get(i);
-                list.add(sir.getDisplayName().toString());
+                CharSequence displayName = sir.getDisplayName();
+                if (displayName == null) {
+                    displayName = "";
+                }
+                list.add(displayName.toString());
             }
         }
 
