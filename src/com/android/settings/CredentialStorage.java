@@ -22,11 +22,13 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Process;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyChain.KeyChainConnection;
@@ -126,8 +128,7 @@ public final class CredentialStorage extends Activity {
             if (ACTION_RESET.equals(action)) {
                 new ResetDialog();
             } else {
-                if (ACTION_INSTALL.equals(action)
-                        && "com.android.certinstaller".equals(getCallingPackage())) {
+                if (ACTION_INSTALL.equals(action) && checkCallerIsCertInstallerOrSelfInProfile()) {
                     mInstallBundle = intent.getExtras();
                 }
                 // ACTION_UNLOCK also handled here in addition to ACTION_INSTALL
@@ -215,54 +216,74 @@ public final class CredentialStorage extends Activity {
      * Install credentials if available, otherwise do nothing.
      */
     private void installIfAvailable() {
-        if (mInstallBundle != null && !mInstallBundle.isEmpty()) {
-            Bundle bundle = mInstallBundle;
-            mInstallBundle = null;
-
-            final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, -1);
-
-            if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
-                String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
-                byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
-
-                int flags = KeyStore.FLAG_ENCRYPTED;
-                if (uid == Process.WIFI_UID && isHardwareBackedKey(value)) {
-                    // Hardware backed keystore is secure enough to allow for WIFI stack
-                    // to enable access to secure networks without user intervention
-                    Log.d(TAG, "Saving private key with FLAG_NONE for WIFI_UID");
-                    flags = KeyStore.FLAG_NONE;
-                }
-
-                if (!mKeyStore.importKey(key, value, uid, flags)) {
-                    Log.e(TAG, "Failed to install " + key + " as user " + uid);
-                    return;
-                }
-            }
-
-            int flags = (uid == Process.WIFI_UID) ? KeyStore.FLAG_NONE : KeyStore.FLAG_ENCRYPTED;
-
-            if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
-                String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
-                byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
-
-                if (!mKeyStore.put(certName, certData, uid, flags)) {
-                    Log.e(TAG, "Failed to install " + certName + " as user " + uid);
-                    return;
-                }
-            }
-
-            if (bundle.containsKey(Credentials.EXTRA_CA_CERTIFICATES_NAME)) {
-                String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
-                byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
-
-                if (!mKeyStore.put(caListName, caListData, uid, flags)) {
-                    Log.e(TAG, "Failed to install " + caListName + " as user " + uid);
-                    return;
-                }
-            }
-
-            setResult(RESULT_OK);
+        if (mInstallBundle == null || mInstallBundle.isEmpty()) {
+            return;
         }
+
+        Bundle bundle = mInstallBundle;
+        mInstallBundle = null;
+
+        final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, -1);
+
+        if (!UserHandle.isSameUser(uid, Process.myUid())) {
+            int dstUserId = UserHandle.getUserId(uid);
+            int myUserId = UserHandle.myUserId();
+
+            // Restrict install target to the wifi uid.
+            if (uid != Process.WIFI_UID) {
+                Log.e(TAG, "Failed to install credentials as uid " + uid + ": cross-user installs"
+                        + " may only target wifi uids");
+                return;
+            }
+
+            Intent installIntent = new Intent(ACTION_INSTALL)
+                    .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                    .putExtras(bundle);
+            startActivityAsUser(installIntent, new UserHandle(dstUserId));
+            return;
+        }
+
+        if (bundle.containsKey(Credentials.EXTRA_USER_PRIVATE_KEY_NAME)) {
+            String key = bundle.getString(Credentials.EXTRA_USER_PRIVATE_KEY_NAME);
+            byte[] value = bundle.getByteArray(Credentials.EXTRA_USER_PRIVATE_KEY_DATA);
+
+            int flags = KeyStore.FLAG_ENCRYPTED;
+            if (uid == Process.WIFI_UID && isHardwareBackedKey(value)) {
+                // Hardware backed keystore is secure enough to allow for WIFI stack
+                // to enable access to secure networks without user intervention
+                Log.d(TAG, "Saving private key with FLAG_NONE for WIFI_UID");
+                flags = KeyStore.FLAG_NONE;
+            }
+
+            if (!mKeyStore.importKey(key, value, uid, flags)) {
+                Log.e(TAG, "Failed to install " + key + " as uid " + uid);
+                return;
+            }
+        }
+
+        int flags = (uid == Process.WIFI_UID) ? KeyStore.FLAG_NONE : KeyStore.FLAG_ENCRYPTED;
+
+        if (bundle.containsKey(Credentials.EXTRA_USER_CERTIFICATE_NAME)) {
+            String certName = bundle.getString(Credentials.EXTRA_USER_CERTIFICATE_NAME);
+            byte[] certData = bundle.getByteArray(Credentials.EXTRA_USER_CERTIFICATE_DATA);
+
+            if (!mKeyStore.put(certName, certData, uid, flags)) {
+                Log.e(TAG, "Failed to install " + certName + " as uid " + uid);
+                return;
+            }
+        }
+
+        if (bundle.containsKey(Credentials.EXTRA_CA_CERTIFICATES_NAME)) {
+            String caListName = bundle.getString(Credentials.EXTRA_CA_CERTIFICATES_NAME);
+            byte[] caListData = bundle.getByteArray(Credentials.EXTRA_CA_CERTIFICATES_DATA);
+
+            if (!mKeyStore.put(caListName, caListData, uid, flags)) {
+                Log.e(TAG, "Failed to install " + caListName + " as uid " + uid);
+                return;
+            }
+        }
+
+        setResult(RESULT_OK);
     }
 
     /**
@@ -368,6 +389,42 @@ public final class CredentialStorage extends Activity {
             }
             finish();
         }
+    }
+
+    /**
+     * Check that the caller is either certinstaller or Settings running in a profile of this user.
+     */
+    private boolean checkCallerIsCertInstallerOrSelfInProfile() {
+        if (TextUtils.equals("com.android.certinstaller", getCallingPackage())) {
+            // CertInstaller is allowed to install credentials
+            return true;
+        }
+
+        final int launchedFromUserId;
+        try {
+            int launchedFromUid = android.app.ActivityManagerNative.getDefault()
+                    .getLaunchedFromUid(getActivityToken());
+            if (launchedFromUid == -1) {
+                Log.e(TAG, ACTION_INSTALL + " must be started with startActivityForResult");
+                return false;
+            }
+            if (!UserHandle.isSameApp(launchedFromUid, Process.myUid())) {
+                // Not the same app
+                return false;
+            }
+            launchedFromUserId = UserHandle.getUserId(launchedFromUid);
+        } catch (RemoteException re) {
+            // Error talking to ActivityManager, just give up
+            return false;
+        }
+
+        UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
+        UserInfo parentInfo = userManager.getProfileParent(launchedFromUserId);
+        if (parentInfo == null || parentInfo.id != UserHandle.myUserId()) {
+            // Caller is not running in a profile of this user
+            return false;
+        }
+        return true;
     }
 
     /**
