@@ -33,6 +33,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
+import android.net.NetworkInfo.State;
 import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppManager;
 import android.net.NetworkScorerAppManager.NetworkScorerAppData;
@@ -132,7 +133,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     // An access point being editted is stored here.
     private AccessPoint mSelectedAccessPoint;
 
-    private DetailedState mLastState;
+    private NetworkInfo mLastNetworkInfo;
     private WifiInfo mLastInfo;
 
     private final AtomicBoolean mConnected = new AtomicBoolean(false);
@@ -544,9 +545,22 @@ public class WifiSettings extends RestrictedSettingsFragment
             if (preference instanceof AccessPoint) {
                 mSelectedAccessPoint = (AccessPoint) preference;
                 menu.setHeaderTitle(mSelectedAccessPoint.ssid);
-                if (mSelectedAccessPoint.getLevel() != -1
-                        && mSelectedAccessPoint.getState() == null) {
-                    menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
+                if (mSelectedAccessPoint.getLevel() != -1) {
+                    int connectStringRes = 0;
+                    if (mSelectedAccessPoint.getState() == null) {
+                        connectStringRes = R.string.wifi_menu_connect;
+                    } else if (mSelectedAccessPoint.networkId == INVALID_NETWORK_ID &&
+                            mSelectedAccessPoint.getNetworkInfo().getState()
+                                != State.DISCONNECTED) {
+                        // State is non-null (and not disconnected) but this network has no
+                        // configuration, which means it is ephemeral. Allow the user to save the
+                        // configuration permanently (but still issue this as a CONNECT command).
+                        connectStringRes = R.string.wifi_menu_remember;
+                    }
+
+                    if (connectStringRes != 0) {
+                        menu.add(Menu.NONE, MENU_ID_CONNECT, 0, connectStringRes);
+                    }
                 }
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                     menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
@@ -684,7 +698,8 @@ public class WifiSettings extends RestrictedSettingsFragment
             case WifiManager.WIFI_STATE_ENABLED:
                 // AccessPoints are automatically sorted with TreeSet.
                 final Collection<AccessPoint> accessPoints =
-                        constructAccessPoints(getActivity(), mWifiManager, mLastInfo, mLastState);
+                        constructAccessPoints(getActivity(), mWifiManager, mLastInfo,
+                                mLastNetworkInfo);
                 getPreferenceScreen().removeAll();
                 if (accessPoints.size() == 0) {
                     addMessagePreference(R.string.wifi_empty_list_wifi_on);
@@ -850,7 +865,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     /** Returns sorted list of access points */
     private static List<AccessPoint> constructAccessPoints(Context context,
-            WifiManager wifiManager, WifiInfo lastInfo, DetailedState lastState) {
+            WifiManager wifiManager, WifiInfo lastInfo, NetworkInfo lastNetworkInfo) {
         ArrayList<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
         /** Lookup table to more quickly update AccessPoints by only considering objects with the
          * correct SSID.  Maps SSID -> List of AccessPoints with the given SSID.  */
@@ -870,8 +885,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                     continue;
                 }
                 AccessPoint accessPoint = new AccessPoint(context, config);
-                if (lastInfo != null && lastState != null) {
-                    accessPoint.update(lastInfo, lastState);
+                if (lastInfo != null && lastNetworkInfo != null) {
+                    accessPoint.update(lastInfo, lastNetworkInfo);
                 }
                 accessPoints.add(accessPoint);
                 apMap.put(accessPoint.ssid, accessPoint);
@@ -894,6 +909,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
                 if (!found) {
                     AccessPoint accessPoint = new AccessPoint(context, result);
+                    if (lastInfo != null && lastNetworkInfo != null) {
+                        accessPoint.update(lastInfo, lastNetworkInfo);
+                    }
                     accessPoints.add(accessPoint);
                     apMap.put(accessPoint.ssid, accessPoint);
                 }
@@ -920,28 +938,29 @@ public class WifiSettings extends RestrictedSettingsFragment
             mConnected.set(info.isConnected());
             changeNextButtonState(info.isConnected());
             updateAccessPoints();
-            updateConnectionState(info.getDetailedState());
+            updateNetworkInfo(info);
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
-            updateConnectionState(null);
+            updateNetworkInfo(null);
         }
     }
 
-    private void updateConnectionState(DetailedState state) {
+    private void updateNetworkInfo(NetworkInfo networkInfo) {
         /* sticky broadcasts can call this when wifi is disabled */
         if (!mWifiManager.isWifiEnabled()) {
             mScanner.pause();
             return;
         }
 
-        if (state == DetailedState.OBTAINING_IPADDR) {
+        if (networkInfo != null &&
+                networkInfo.getDetailedState() == DetailedState.OBTAINING_IPADDR) {
             mScanner.pause();
         } else {
             mScanner.resume();
         }
 
         mLastInfo = mWifiManager.getConnectionInfo();
-        if (state != null) {
-            mLastState = state;
+        if (networkInfo != null) {
+            mLastNetworkInfo = networkInfo;
         }
 
         for (int i = getPreferenceScreen().getPreferenceCount() - 1; i >= 0; --i) {
@@ -949,7 +968,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             Preference preference = getPreferenceScreen().getPreference(i);
             if (preference instanceof AccessPoint) {
                 final AccessPoint accessPoint = (AccessPoint) preference;
-                accessPoint.update(mLastInfo, mLastState);
+                accessPoint.update(mLastInfo, mLastNetworkInfo);
             }
         }
     }
@@ -975,7 +994,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         mLastInfo = null;
-        mLastState = null;
+        mLastNetworkInfo = null;
         mScanner.pause();
     }
 
