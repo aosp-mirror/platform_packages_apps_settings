@@ -172,7 +172,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         mSelectableSubInfos = new ArrayList<SubInfoRecord>();
         mNumSims = 0;
         for (int i = 0; i < numSlots; ++i) {
-            final SubInfoRecord sir = findRecordBySlotId(i);
+            final SubInfoRecord sir = Utils.findRecordBySlotId(i);
             mSimCards.addPreference(new SimPreference(getActivity(), sir, i));
             mAvailableSubInfos.add(sir);
             if (sir != null) {
@@ -192,7 +192,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         mNumSims = 0;
         mAvailableSubInfos = new ArrayList<SubInfoRecord>(numSlots);
         for (int i = 0; i < numSlots; ++i) {
-            final SubInfoRecord sir = findRecordBySlotId(i);
+            final SubInfoRecord sir = Utils.findRecordBySlotId(i);
             mAvailableSubInfos.add(sir);
             if (sir != null) {
                 mNumSims++;
@@ -223,46 +223,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         updateSmsValues();
     }
 
-    /**
-     * finds a record with subId.
-     * Since the number of SIMs are few, an array is fine.
-     */
-    private SubInfoRecord findRecordBySubId(final int subId) {
-        final int availableSubInfoLength = mAvailableSubInfos.size();
-
-        for (int i = 0; i < availableSubInfoLength; ++i) {
-            final SubInfoRecord sir = mAvailableSubInfos.get(i);
-            if (sir != null && sir.getSubscriptionId() == subId) {
-                return sir;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * finds a record with slotId.
-     * Since the number of SIMs are few, an array is fine.
-     */
-    private SubInfoRecord findRecordBySlotId(final int slotId) {
-        if (mSubInfoList != null){
-            final int availableSubInfoLength = mSubInfoList.size();
-
-            for (int i = 0; i < availableSubInfoLength; ++i) {
-                final SubInfoRecord sir = mSubInfoList.get(i);
-                if (sir.getSimSlotIndex() == slotId) {
-                    //Right now we take the first subscription on a SIM.
-                    return sir;
-                }
-            }
-        }
-
-        return null;
-    }
-
     private void updateSmsValues() {
         final Preference simPref = (Preference) findPreference(KEY_SMS);
-        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
+        final SubInfoRecord sir = Utils.findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
         simPref.setTitle(R.string.sms_messages_title);
         if (mSubInfoList.size() == 1) {
             simPref.setSummary(mSubInfoList.get(0).getDisplayName());
@@ -276,7 +239,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateCellularDataValues() {
         final Preference simPref = findPreference(KEY_CELLULAR_DATA);
-        final SubInfoRecord sir = findRecordBySubId(SubscriptionManager.getDefaultDataSubId());
+        final SubInfoRecord sir = Utils.findRecordBySubId(SubscriptionManager.getDefaultDataSubId());
         simPref.setTitle(R.string.cellular_data_title);
         if (mSubInfoList.size() == 1) {
             simPref.setSummary(mSubInfoList.get(0).getDisplayName());
@@ -576,14 +539,14 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     mSubInfoRecord.setDisplayName(displayName);
                     SubscriptionManager.setDisplayName(displayName, subId,
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
-                    findRecordBySubId(subId).setDisplayName(displayName);
+                    Utils.findRecordBySubId(subId).setDisplayName(displayName);
 
                     final int colorSelected = colorSpinner.getSelectedItemPosition();
                     int subscriptionId = mSubInfoRecord.getSubscriptionId();
                     int color = colorArr[colorSelected];
                     mSubInfoRecord.setColor(color);
                     SubscriptionManager.setColor(color, subscriptionId);
-                    findRecordBySubId(subscriptionId).setColor(color);
+                    Utils.findRecordBySubId(subscriptionId).setColor(color);
 
                     updateAllOptions();
                     update();

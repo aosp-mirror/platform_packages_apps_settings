@@ -60,6 +60,8 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
+import android.telephony.SubInfoRecord;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -981,4 +983,42 @@ public final class Utils {
         }
         return sb.toString();
     }
+
+    /**
+     * finds a record with subId.
+     * Since the number of SIMs are few, an array is fine.
+     */
+    public static SubInfoRecord findRecordBySubId(final int subId) {
+        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+        final int subInfoLength = subInfoList.size();
+
+        for (int i = 0; i < subInfoLength; ++i) {
+            final SubInfoRecord sir = subInfoList.get(i);
+            if (sir != null && sir.getSubscriptionId() == subId) {
+                return sir;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * finds a record with slotId.
+     * Since the number of SIMs are few, an array is fine.
+     */
+    public static SubInfoRecord findRecordBySlotId(final int slotId) {
+        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+        final int subInfoLength = subInfoList.size();
+
+        for (int i = 0; i < subInfoLength; ++i) {
+            final SubInfoRecord sir = subInfoList.get(i);
+            if (sir.getSimSlotIndex() == slotId) {
+                //Right now we take the first subscription on a SIM.
+                return sir;
+            }
+        }
+
+        return null;
+    }
+
 }
