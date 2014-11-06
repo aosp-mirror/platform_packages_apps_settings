@@ -728,7 +728,9 @@ public class InstalledAppDetails extends Fragment
             Log.i(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
         boolean hasUsbDefaults = false;
         try {
-            hasUsbDefaults = mUsbManager.hasDefaults(packageName, UserHandle.myUserId());
+            if (mUsbManager != null) {
+                hasUsbDefaults = mUsbManager.hasDefaults(packageName, UserHandle.myUserId());
+            }
         } catch (RemoteException e) {
             Log.e(TAG, "mUsbManager.hasDefaults", e);
         }
@@ -1377,17 +1379,19 @@ public class InstalledAppDetails extends Fragment
         } else if(v == mSpecialDisableButton) {
             showDialogInner(DLG_SPECIAL_DISABLE, 0);
         } else if(v == mActivitiesButton) {
-            mPm.clearPackagePreferredActivities(packageName);
-            try {
-                mUsbManager.clearDefaults(packageName, UserHandle.myUserId());
-            } catch (RemoteException e) {
-                Log.e(TAG, "mUsbManager.clearDefaults", e);
+            if (mUsbManager != null) {
+                mPm.clearPackagePreferredActivities(packageName);
+                try {
+                    mUsbManager.clearDefaults(packageName, UserHandle.myUserId());
+                } catch (RemoteException e) {
+                    Log.e(TAG, "mUsbManager.clearDefaults", e);
+                }
+                mAppWidgetManager.setBindAppWidgetPermission(packageName, false);
+                TextView autoLaunchTitleView =
+                        (TextView) mRootView.findViewById(R.id.auto_launch_title);
+                TextView autoLaunchView = (TextView) mRootView.findViewById(R.id.auto_launch);
+                resetLaunchDefaultsUi(autoLaunchTitleView, autoLaunchView);
             }
-            mAppWidgetManager.setBindAppWidgetPermission(packageName, false);
-            TextView autoLaunchTitleView =
-                    (TextView) mRootView.findViewById(R.id.auto_launch_title);
-            TextView autoLaunchView = (TextView) mRootView.findViewById(R.id.auto_launch);
-            resetLaunchDefaultsUi(autoLaunchTitleView, autoLaunchView);
         } else if(v == mClearDataButton) {
             if (mAppEntry.info.manageSpaceActivityName != null) {
                 if (!Utils.isMonkeyRunning()) {
