@@ -631,6 +631,8 @@
     <string name="wifi_menu_apps" msgid="6003687912727859577">"Uygulamaları Göster"</string>
     <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"Kablosuz Gücünü Göster"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Ağa bağlan"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Ağı unut"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Ağı değiştir"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"NFC etiketine yaz"</string>
@@ -675,9 +677,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(belirtilmemiş)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Kaydedildi"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Devre dışı"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Kötü İnternet bağlantısından kaçınıldı"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Kimlik doğrulama sorunu"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Kapsama alanı dışında"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS kullanılabilir"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS kullanılabilir)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ağ şifrenizi girin"</string>
@@ -863,6 +870,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"İptal"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Birden çok SIM bulundu"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Hücresel veri için tercih ettiğiniz SIM\'i seçin."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Veriler için SIM değiştirilsin mi?"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"Cep telefonu verileri için <xliff:g id="OLD_SIM">%2$s</xliff:g> yerine <xliff:g id="NEW_SIM">%1$s</xliff:g> kullanılsın mı?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Yanlış SIM PIN kodu. Cihazınızın kilidini açmak için artık operatörünüzle bağlantı kurmanız gerekiyor."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Yanlış SIM PIN kodu. Cihazının kilidini açmak için operatörünüzle bağlantı kurmak zorunda kalmadan önce <xliff:g id="NUMBER">%d</xliff:g> deneme hakkınız kaldı."</item>
@@ -1024,7 +1033,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Telefonu sıfırla"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Tüm kişisel bilgilerinizi ve indirilen tüm uygulamaları silmek istiyor musunuz? Bu işlem geri döndürülemez!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Her şeyi sil"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Kilit açma deseninizi çizin"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Fabrika verilerine sıfırlamayı onaylamak için kilit açma deseninizi çizmeniz gerekir."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Sistem Temizleme hizmeti kullanılamadığından sıfırlama yapılmadı."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Sıfırlansın mı?"</string>
@@ -1042,7 +1050,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"USB bellek silinsin mi? Depolama biriminde saklanan tüm dosyalar silinir. Bu işlemi geri alamazsınız!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"SD kart silinsin mi? Burada saklanan tüm dosyalar silinir. Geri alınamaz!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Her şeyi sil"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Kilit açma deseninizi çizin"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"USB belleği silmek istediğinizi onaylamak için kilit açma deseninizi çizmeniz gerekir."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"SD kartı silmek istediğinizi onaylamak için kilit açma deseninizi çizmeniz gerekir."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Çağrı ayarları"</string>
@@ -1437,6 +1444,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Bir dosyadaki tüm Bluetooth HCI paketlerini yakala"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"OEM kilidini açma etkin"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Cihazın OEM kilidinin açılmasına izin ver"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Kablosuz ekran sertifikası"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Kablosuz Ayrıntılı Günlük Kaydını etkinleştir"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Kablosuz\'dan Hücresel Ağa agresif geçiş"</string>
@@ -1816,7 +1831,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Donanım destekli"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Yalnızca yazılım"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Bu kullanıcı için kimlik bilgileri kullanılamıyor"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Kilit açma deseninizi çizin"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Kimlik bilgisi yüklemesini onaylamak için kilit açma desenini çizmeniz gerekiyor."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Kimlik bilgileri deposu için şifreyi yazın."</string>
@@ -2170,7 +2184,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Kullanıcı veya profil ekle"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Kullanıcı ekle"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Kısıtlı profil"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"İş profili"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Kısıtlanmış bir profil oluşturabilmeniz için uygulamalarınızı ve kişisel verilerinizi korumak üzere bir ekran kilidi oluşturmanız gerekir."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Kilidi ayarla"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Yapılandırılmadı"</string>
@@ -2431,9 +2444,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Tamam"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Siz bunu kapatana kadar"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Öncelikli kesintiler"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Kapalı kalma süresi (sadece öncelikli kesintiler)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Gün"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Yok"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Otomasyon"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Otomatik olarak aç"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2461,6 +2481,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Kapalı"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Ekran sabitleme"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Açıldığında, geçerli ekranın görüntülenmeye devam etmesini sağlamak için ekran sabitleme özelliğini kullanabilirsiniz.\n\nEkran sabitleme özelliğini kullanmak için:\n\n1. Ekran sabitleme özelliğinin açık olduğundan emin olun.\n\n2. Sabitlemek istediğiniz ekranı açın.\n\n3. Genel Bakış\'a dokunun.\n\n4. Raptiye simgesine dokunun."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Sabitlemeyi kaldırmadan önce kilit açma desenini sor"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Sabitlemeyi kaldırmadan önce PIN\'i sor"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Sabitlemeyi kaldırmadan önce şifre sor"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Sabitlemeyi kaldırırken cihazı kilitle"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"İş profili"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Deneysel)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Cihaz döndürüldüğünde"</string>

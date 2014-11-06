@@ -631,6 +631,8 @@
     <string name="wifi_menu_apps" msgid="6003687912727859577">"Показати додатки"</string>
     <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"Потужність Wi-Fi"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Підключ. до мережі"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Видалити мережу"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Змінити мережу"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Записати дані в NFC-тег"</string>
@@ -675,9 +677,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(не вказано)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Збережено"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Вимкнено"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Слабке з’єднання з Інтернетом не встановлено"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Проблема з автентифікацією"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Не в діапазоні"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Є доступ до WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" Є доступ до WPS"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Введіть пароль своєї мережі"</string>
@@ -863,6 +870,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Скасувати"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Виявлено декілька SIM-карт"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Виберіть SIM-карту для мобільних даних."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Змінити SIM-карту для даних?"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"Використовувати карту <xliff:g id="NEW_SIM">%1$s</xliff:g> замість <xliff:g id="OLD_SIM">%2$s</xliff:g> для мобільного передавання даних?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Неправильний PIN-код SIM-карти. Зв’яжіться зі своїм оператором, щоб розблокувати пристрій."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Неправильний PIN-код SIM-карти. У вас залишилась <xliff:g id="NUMBER">%d</xliff:g> спроба. Після цього потрібно буде зв’язатися з оператором, щоб розблокувати пристрій."</item>
@@ -1024,7 +1033,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Скинути налаштування"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Стерти всю особисту інформацію та завантажені програми? Цю дію не можна скасувати!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Видалити все"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Намалюйте ключ розблокування"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Щоб підтвердити відновлення заводських налаштувань, потрібно намалювати ключ розблокування."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Скидання не виконано, оскільки служба очищення системи не доступна."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Скинути?"</string>
@@ -1042,7 +1050,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"Стерти носій USB, видаливши всі збережені на ньому файли? Цю дію не можна скасувати!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Стерти карту SD, видаливши всі збережені на ній файли? Цю дію не можна скасувати!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Видалити все"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Намалюйте ключ розблокування"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Щоб підтвердити очищення носія USB, треба намалювати ключ розблокування."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Щоб підтвердити очищення карти SD, треба намалювати ключ розблокування."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Виклики"</string>
@@ -1437,6 +1444,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Робити знімки всіх пакетів інтерфейсу Bluetooth у файлі"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Увімкнути розблокув. OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Дозволити розблокування пристрою виробником (OEM)"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Сертифікація бездротового екрана"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Докладний запис у журнал Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Перемикатись із Wi-Fi на моб. мережу"</string>
@@ -1816,7 +1831,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Апаратне забезпечення"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Лише програмне забезпечення"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Облікові дані недоступні для цього користувача"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Намалюйте ключ розблокування"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Щоб підтвердити встановлення облікових даних, потрібно намалювати ключ розблокування."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Ввести пароль для сховища облікових даних."</string>
@@ -2170,7 +2184,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Додати користувача чи профіль"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Додати користувача"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Профіль з обмеженням"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Робочий профіль"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Перш ніж створювати обмежений профіль, потрібно налаштувати блокування екрана, щоб захистити свої програми та особисті дані."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Налаштувати блокування"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Не створено"</string>
@@ -2431,9 +2444,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Готово"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Доки ви не вимкнете"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Пріоритетні сповіщення"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Простій (лише пріоритетні сповіщення)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Дні"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Немає"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Автоматизація"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Вмикати автоматично"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2461,6 +2481,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Вимкнено"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Закріплення екрана"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Коли цю функцію ввімкнено, ви можете закріпити поточний екран, щоб постійно бачити його, доки не відкріпите.\n\nВиконайте вказані нижче дії.\n\n1. Переконайтеся, що функцію закріплення екрана ввімкнено.\n\n2. Відкрийте екран, який ви хочете закріпити.\n\n3. Торкніться опції \"Огляд\".\n\n4. Торкніться значка шпильки."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Запитувати ключ розблокування перед відкріпленням"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Запитувати PIN-код перед відкріпленням"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Запитувати пароль перед відкріпленням"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Блокувати пристрій після відкріплення"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Робочий профіль"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Експериментальна функція)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Коли пристрій обертають"</string>

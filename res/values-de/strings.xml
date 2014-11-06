@@ -632,6 +632,8 @@
     <string name="wifi_menu_apps" msgid="6003687912727859577">"Apps anzeigen"</string>
     <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"WLAN-Stärke anzeigen"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Mit Netzwerk verbinden"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Netzwerk entfernen"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Netzwerk ändern"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"In NFC-Tag schreiben"</string>
@@ -676,9 +678,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(keine Angabe)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Gespeichert"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Deaktiviert"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Schlechte Verbindung"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Authentifizierungsproblem"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Nicht in Reichweite"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS verfügbar"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS verfügbar)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Geben Sie Ihr Netzwerkpasswort ein."</string>
@@ -864,6 +871,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Abbrechen"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Mehrere SIM-Karten gefunden"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Wählen Sie Ihre bevorzugte SIM-Karte für Mobilfunkdaten aus."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Daten-SIM ändern?"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"<xliff:g id="NEW_SIM">%1$s</xliff:g> statt <xliff:g id="OLD_SIM">%2$s</xliff:g> für Mobilfunkdaten verwenden?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Falscher PIN-Code der SIM-Karte. Bitte wenden Sie sich an Ihren Mobilfunkanbieter, damit er Ihr Gerät entsperrt."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Falscher PIN-Code der SIM-Karte. Sie haben noch <xliff:g id="NUMBER">%d</xliff:g> Versuch, bevor Sie das Gerät von Ihrem Mobilfunkanbieter entsperren lassen müssen."</item>
@@ -1025,7 +1034,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Telefon zurücksetzen"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Alle personenbezogenen Daten und heruntergeladenen Apps löschen? Diese Aktion kann nicht rückgängig gemacht werden!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Alles löschen"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Bitte zeichnen Sie Ihr Entsperrungsmuster."</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Sie müssen Ihr Entsperrungsmuster eingeben, um das Zurücksetzen auf die Werkseinstellungen zu bestätigen."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Die Zurücksetzung konnte nicht durchgeführt werden, weil der Dienst zur Systembereinigung nicht verfügbar ist."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Zurücksetzen?"</string>
@@ -1043,7 +1051,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"USB-Speicher und alle darauf gespeicherten Dateien löschen? Diese Aktion kann nicht rückgängig gemacht werden!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"SD-Karte und alle darauf gespeicherten Dateien löschen? Die Aktion kann nicht rückgängig gemacht werden!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Alles löschen"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Bitte zeichnen Sie Ihr Entsperrungsmuster."</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Sie müssen Ihr Entsperrungsmuster zeichnen, um die Löschung des USB-Speichers zu bestätigen."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Sie müssen Ihr Entsperrungsmuster zeichnen, um das Löschen der SD-Karte zu bestätigen."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Anrufeinstellungen"</string>
@@ -1438,6 +1445,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Alle Bluetooth HCI-Pakete in einer Datei erfassen"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"OEM-Entsperrung aktivieren"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"OEM-Entsperrung des Geräts zulassen"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Kabellose Übertragung"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Ausführliche WLAN-Protokolle aktivieren"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressives Handover von WLAN an Mobilfunk"</string>
@@ -1817,7 +1832,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardware-gestützt"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Nur Software"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Anmeldedaten sind für diesen Nutzer nicht verfügbar."</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Bitte zeichnen Sie Ihr Entsperrungsmuster."</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Sie müssen Ihr Entsperrungsmuster eingeben, um das Installieren der Anmeldedaten zu bestätigen."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Geben Sie das Passwort für den Anmeldeinformationsspeicher ein."</string>
@@ -2171,7 +2185,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Nutzer oder Profil hinzufügen"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Nutzer hinzufügen"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Eingeschränktes Profil"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Arbeitsprofil"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Vor dem Erstellen eines eingeschränkten Profils müssen Sie eine Displaysperre einrichten, um Ihre Apps und personenbezogenen Daten zu schützen."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Sperre einrichten"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Nicht eingerichtet"</string>
@@ -2432,9 +2445,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Fertig"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Bis zur Deaktivierung"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Wichtige Unterbrechungen"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Inaktivität (nur wichtige Unterbrechungen)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Tage"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Keine"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatisierung"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Automatisch aktivieren"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2462,6 +2482,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Aus"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Bildschirm anheften"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Hiermit können Sie die Ansicht des aktuellen Bildschirms fixieren.\n\nSo verwenden Sie die Bildschirmfixierung:\n\n1. Prüfen Sie, ob die Bildschirmfixierung aktiviert ist.\n\n2. Öffnen Sie den Bildschirm, den Sie fixieren möchten.\n\n3. Tippen Sie auf \"Übersicht\".\n\n4. Tippen Sie auf das Stecknadelsymbol."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Vor dem Beenden nach Entsperrungsmuster fragen"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Vor dem Beenden nach PIN fragen"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Vor dem Beenden nach Passwort fragen"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Gerät beim Beenden sperren"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Arbeitsprofil"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimentell)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Bei Drehung des Geräts"</string>
