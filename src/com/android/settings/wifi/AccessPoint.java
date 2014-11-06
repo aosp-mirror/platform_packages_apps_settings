@@ -21,7 +21,9 @@ import com.android.settings.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
+import android.net.NetworkInfo.State;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
@@ -70,7 +72,7 @@ class AccessPoint extends Preference {
     public LruCache<String, ScanResult> mScanResultCache;
 
 
-    private static final String KEY_DETAILEDSTATE = "key_detailedstate";
+    private static final String KEY_NETWORKINFO = "key_networkinfo";
     private static final String KEY_WIFIINFO = "key_wifiinfo";
     private static final String KEY_SCANRESULT = "key_scanresult";
     private static final String KEY_CONFIG = "key_config";
@@ -113,7 +115,8 @@ class AccessPoint extends Preference {
     private long mSeen = 0;
 
     private WifiInfo mInfo;
-    private DetailedState mState;
+    private NetworkInfo mNetworkInfo;
+    private TextView mSummaryView;
 
     private static final int VISIBILITY_MAX_AGE_IN_MILLI = 1000000;
     private static final int VISIBILITY_OUTDATED_AGE_IN_MILLI = 20000;
@@ -211,18 +214,18 @@ class AccessPoint extends Preference {
             loadResult(mScanResult);
         }
         mInfo = (WifiInfo) savedState.getParcelable(KEY_WIFIINFO);
-        if (savedState.containsKey(KEY_DETAILEDSTATE)) {
-            mState = DetailedState.valueOf(savedState.getString(KEY_DETAILEDSTATE));
+        if (savedState.containsKey(KEY_NETWORKINFO)) {
+            mNetworkInfo = savedState.getParcelable(KEY_NETWORKINFO);
         }
-        update(mInfo, mState);
+        update(mInfo, mNetworkInfo);
     }
 
     public void saveWifiState(Bundle savedState) {
         savedState.putParcelable(KEY_CONFIG, mConfig);
         savedState.putParcelable(KEY_SCANRESULT, mScanResult);
         savedState.putParcelable(KEY_WIFIINFO, mInfo);
-        if (mState != null) {
-            savedState.putString(KEY_DETAILEDSTATE, mState.toString());
+        if (mNetworkInfo != null) {
+            savedState.putParcelable(KEY_NETWORKINFO, mNetworkInfo);
         }
     }
 
@@ -253,9 +256,8 @@ class AccessPoint extends Preference {
         super.onBindView(view);
         updateIcon(getLevel(), getContext());
 
-        final TextView summaryView = (TextView) view.findViewById(
-                com.android.internal.R.id.summary);
-        summaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
+        mSummaryView = (TextView) view.findViewById(com.android.internal.R.id.summary);
+        mSummaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
 
         notifyChanged();
     }
@@ -293,8 +295,8 @@ class AccessPoint extends Preference {
         }
         AccessPoint other = (AccessPoint) preference;
         // Active one goes first.
-        if (mInfo != null && other.mInfo == null) return -1;
-        if (mInfo == null && other.mInfo != null) return 1;
+        if (isActive() && !other.isActive()) return -1;
+        if (!isActive() && other.isActive()) return 1;
 
         // Reachable one goes before unreachable one.
         if (mRssi != Integer.MAX_VALUE && other.mRssi == Integer.MAX_VALUE) return -1;
@@ -361,19 +363,30 @@ class AccessPoint extends Preference {
         return false;
     }
 
-    void update(WifiInfo info, DetailedState state) {
+    /** Return whether the given {@link WifiInfo} is for this access point. */
+    private boolean isInfoForThisAccessPoint(WifiInfo info) {
+        if (networkId != WifiConfiguration.INVALID_NETWORK_ID) {
+            return networkId == info.getNetworkId();
+        } else {
+            // Might be an ephemeral connection with no WifiConfiguration. Try matching on SSID.
+            // (Note that we only do this if the WifiConfiguration explicitly equals INVALID).
+            // TODO: Handle hex string SSIDs.
+            return ssid.equals(removeDoubleQuotes(info.getSSID()));
+        }
+    }
+
+    void update(WifiInfo info, NetworkInfo networkInfo) {
         boolean reorder = false;
-        if (info != null && networkId != WifiConfiguration.INVALID_NETWORK_ID
-                && networkId == info.getNetworkId()) {
+        if (info != null && isInfoForThisAccessPoint(info)) {
             reorder = (mInfo == null);
             mRssi = info.getRssi();
             mInfo = info;
-            mState = state;
+            mNetworkInfo = networkInfo;
             refresh();
         } else if (mInfo != null) {
             reorder = true;
             mInfo = null;
-            mState = null;
+            mNetworkInfo = null;
             refresh();
         }
         if (reorder) {
@@ -396,8 +409,12 @@ class AccessPoint extends Preference {
         return mInfo;
     }
 
+    NetworkInfo getNetworkInfo() {
+        return mNetworkInfo;
+    }
+
     DetailedState getState() {
-        return mState;
+        return mNetworkInfo != null ? mNetworkInfo.getDetailedState() : null;
     }
 
     static String removeDoubleQuotes(String string) {
@@ -418,8 +435,11 @@ class AccessPoint extends Preference {
      *
      * @param showSummary true will show the summary, false will hide the summary
      */
-    public void setShowSummary(boolean showSummary){
+    public void setShowSummary(boolean showSummary) {
         this.showSummary = showSummary;
+        if (mSummaryView != null) {
+            mSummaryView.setVisibility(showSummary ? View.VISIBLE : View.GONE);
+        } // otherwise, will be handled in onBindView.
     }
 
     /**
@@ -571,6 +591,17 @@ class AccessPoint extends Preference {
     }
 
     /**
+     * Return whether this is the active connection.
+     * For ephemeral connections (networkId is invalid), this returns false if the network is
+     * disconnected.
+     */
+    private boolean isActive() {
+        return mNetworkInfo != null &&
+                (networkId != WifiConfiguration.INVALID_NETWORK_ID ||
+                 mNetworkInfo.getState() != State.DISCONNECTED);
+    }
+
+    /**
      * Updates the title and summary; may indirectly call notifyChanged().
      */
     private void refresh() {
@@ -585,8 +616,8 @@ class AccessPoint extends Preference {
         // Update to new summary
         StringBuilder summary = new StringBuilder();
 
-        if (mState != null) { // This is the active connection
-            summary.append(Summary.get(context, mState));
+        if (isActive()) {
+            summary.append(Summary.get(context, getState()));
         } else if (mConfig != null && mConfig.noInternetAccess) {
             summary.append(context.getString(R.string.wifi_no_internet));
         } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
@@ -628,7 +659,7 @@ class AccessPoint extends Preference {
         if (WifiSettings.mVerboseLogging > 0) {
             //add RSSI/band information for this config, what was seen up to 6 seconds ago
             //verbose WiFi Logging is only turned on thru developers settings
-            if (mInfo != null && mState != null) { // This is the active connection
+            if (mInfo != null && mNetworkInfo != null) { // This is the active connection
                 summary.append(" f=" + Integer.toString(mInfo.getFrequency()));
             }
             summary.append(" " + getVisibilityStatus());
@@ -660,8 +691,9 @@ class AccessPoint extends Preference {
 
         if (summary.length() > 0) {
             setSummary(summary.toString());
+            setShowSummary(true);
         } else {
-            showSummary = false;
+            setShowSummary(false);
         }
     }
 
