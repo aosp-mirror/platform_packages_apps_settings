@@ -485,7 +485,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 } else {
                     setTitle(mSubInfoRecord.getDisplayName());
                 }
-                setSummary(mSubInfoRecord.getNumber().toString());
+                setSummary(mSubInfoRecord.getNumber());
                 setEnabled(true);
             } else {
                 setSummary(R.string.sim_slot_empty);
