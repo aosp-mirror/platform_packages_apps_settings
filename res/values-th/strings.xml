@@ -629,6 +629,8 @@
     <string name="wifi_menu_scan" msgid="1470911530412095868">"สแกน"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"ขั้นสูง"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"เชื่อมต่อกับเครือข่าย"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"ไม่จำเครือข่าย"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"แก้ไขเครือข่าย"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"เขียนไปยังแท็ก NFC"</string>
@@ -673,9 +675,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(ไม่ได้ระบุ)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"บันทึกแล้ว"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"ปิดอยู่"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"หลีกเลี่ยงการเชื่อมต่ออินเทอร์เน็ตที่สัญญาณไม่แรงพอ"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"ปัญหาในการตรวจสอบสิทธิ์"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"ไม่อยู่ในพื้นที่ให้บริการ"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ใช้งานได้"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ใช้งานได้)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ป้อนรหัสผ่านเครือข่าย"</string>
@@ -861,6 +868,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ยกเลิก"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"พบหลายซิม"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"เลือกซิมที่คุณต้องการเก็บข้อมูลมือถือ"</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"เปลี่ยนซิมข้อมูลไหม"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"ใช้ <xliff:g id="NEW_SIM">%1$s</xliff:g> แทน <xliff:g id="OLD_SIM">%2$s</xliff:g> สำหรับเก็บข้อมูลมือถือไหม"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"รหัส PIN ของซิมไม่ถูกต้อง ตอนนี้คุณต้องติดต่อผู้ให้บริการเพื่อปลดล็อกอุปกรณ์ของคุณ"</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"รหัส PIN ของซิมไม่ถูกต้อง คุณสามารถพยายามได้อีก <xliff:g id="NUMBER">%d</xliff:g> ครั้งก่อนที่จะต้องติดต่อผู้ให้บริการเพื่อปลดล็อกอุปกรณ์ของคุณ"</item>
@@ -1022,7 +1031,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"รีเซ็ตโทรศัพท์"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"ลบข้อมูลส่วนบุคคลและแอปพลิเคชันที่ดาวน์โหลดของคุณทั้งหมดหรือไม่ คุณไม่สามารถย้อนกลับการทำงานนี้ได้!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"ลบทุกอย่าง"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"วาดรูปแบบการปลดล็อก"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"คุณต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันการรีเซ็ตข้อมูลเป็นค่าเริ่มต้น"</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"ไม่มีการรีเซ็ตเนื่องจากบริการล้างข้อมูลระบบไม่พร้อมใช้งาน"</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"รีเซ็ตหรือไม่"</string>
@@ -1040,7 +1048,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"ลบที่จัดเก็บข้อมูล USB ซึ่งจะเป็นการลบไฟล์ทั้งหมดที่จัดเก็บอยู่ในนั้นหรือไม่ คุณไม่สามารถกลับการทำงานนี้ได้!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"ต้องการลบการ์ด SD ซึ่งจะเป็นการลบไฟล์ทั้งหมดที่จัดเก็บไว้หรือไม่ คุณไม่สามารถย้อนกลับการทำงานนี้ได้!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"ลบทุกอย่าง"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"วาดรูปแบบการปลดล็อก"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"คุณต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันว่าคุณต้องการลบที่จัดเก็บข้อมูล USB"</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"คุณต้องวาดรูปแบบการปลดล็อกเพื่อยืนยันว่าคุณต้องการลบการด์ SD"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"การตั้งค่าการโทร"</string>
@@ -1435,6 +1442,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"บันทึกแพ็คเก็ตบลูทูธ HCI ทั้งหมดในไฟล์"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"เปิดใช้การปลดล็อกแบบ OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"อนุญาตให้ปลดล็อกอุปกรณ์แบบ OEM"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"การรับรองการแสดงผลแบบไร้สาย"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"เปิดใช้การบันทึกรายละเอียด Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"สลับ Wi‑Fi เป็นมือถือเมื่อสัญญาณอ่อน"</string>
@@ -1812,7 +1827,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"ใช้ฮาร์ดแวร์"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"ซอฟต์แวร์เท่านั้น"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"ข้อมูลรับรองไม่พร้อมใช้งานสำหรับผู้ใช้รายนี้"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"วาดรูปแบบการปลดล็อกของคุณ"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"คุณจำเป็นต้องวาดรูปแบบการปลดล็อกของคุณเพื่อยืนยันการติดตั้งข้อมูลรับรอง"</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"พิมพ์รหัสผ่านสำหรับที่เก็บข้อมูลรับรอง"</string>
@@ -2166,7 +2180,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"เพิ่มผู้ใช้หรือโปรไฟล์"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"เพิ่มผู้ใช้"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"โปรไฟล์ที่ถูกจำกัด"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"โปรไฟล์งาน"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"ก่อนที่คุณจะสามารถสร้างโปรไฟล์ที่ถูกจำกัดได้ คุณจะต้องตั้งค่าล็อกหน้าจอเพื่อปกป้องแอปและข้อมูลส่วนตัวของคุณ"</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"ตั้งค่าล็อก"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"ไม่ได้ตั้งค่า"</string>
@@ -2427,9 +2440,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"เสร็จสิ้น"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"จนกว่าคุณจะปิดฟังก์ชันนี้"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"เรื่องสำคัญ"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"หยุดทำงาน (ยกเว้นเรื่องสำคัญ)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"วัน"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"ไม่มี"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"ระบบอัตโนมัติ"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"เปิดโดยอัตโนมัติ"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2457,6 +2477,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"ปิด"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"การตรึงหน้าจอ"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"เมื่อเปิด คุณสามารถใช้การตรึงหน้าจอเพื่อเปิดหน้าจอปัจจุบันไว้จนกว่าคุณจะเลิกตรึง\n\nหากต้องการใช้การตรึงหน้าจอ ให้ทำดังนี้:\n\n1. เปิดการตรึงหน้าจอ\n\n2. เปิดหน้าจอที่คุณต้องการตรึง\n\n3. แตะภาพรวม\n\n4. แตะไอคอนหมุด"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"ขอรูปแบบการปลดล็อกก่อนเลิกตรึง"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"ขอ PIN ก่อนเลิกตรึง"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"ขอรหัสผ่านก่อนเลิกตรึง"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"ล็อกอุปกรณ์เมื่อเลิกตรึง"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"โปรไฟล์งาน"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(ทดลอง)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"เมื่อหมุนอุปกรณ์"</string>

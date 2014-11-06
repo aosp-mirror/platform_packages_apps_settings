@@ -629,6 +629,8 @@
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Σάρωση"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Σύνθετα"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Σύνδεση στο δίκτυο"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Διαγραφή δικτύου από τη μνήμη"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Τροποποίηση δικτύου"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Εγγραφή στην ετικέτα ΕΚΠ"</string>
@@ -673,9 +675,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(δεν έχει καθοριστεί)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Αποθηκευμένο"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Απενεργοποιημένο"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Αποφυγή κακής σύνδεσης στο Διαδίκτυο"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Πρόβλημα ελέγχου ταυτότητας"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Εκτός εμβέλειας"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Διαθέσιμο WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Διαθέσιμο WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Εισαγάγετε κωδικό πρόσβασης δικτύου"</string>
@@ -861,6 +868,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Ακύρωση"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Βρέθηκαν πολλές SIM"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Επιλέξτε τη SIM που προτιμάτε για δεδομένα κινητής τηλεφωνίας."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Αλλαγή SIM δεδομένων;"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"Χρήση της κάρτας <xliff:g id="NEW_SIM">%1$s</xliff:g> αντί για την κάρτα <xliff:g id="OLD_SIM">%2$s</xliff:g> για τα δεδομένα κινητής τηλεφωνίας;"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Εσφαλμένος κωδικός PIN κάρτας SIM. Θα πρέπει να επικοινωνήσετε με τον πάροχο κινητής τηλεφωνίας σας για να ξεκλειδώσετε τη συσκευή σας."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Εσφαλμένος κωδικός PIN κάρτας SIM. Απομένει άλλη <xliff:g id="NUMBER">%d</xliff:g> προσπάθεια. Στη συνέχεια, θα πρέπει να επικοινωνήσετε με τον πάροχο κινητής τηλεφωνίας σας για να ξεκλειδώσετε τη συσκευή σας."</item>
@@ -1022,7 +1031,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Επαναφορά τηλεφώνου"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Να διαγραφούν όλα τα προσωπικά σας στοιχεία και οι ληφθείσες εφαρμογές; Δεν μπορείτε να αναστρέψετε αυτήν την ενέργεια!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Διαγραφή όλων"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Σχεδιάστε το μοτίβο ξεκλειδώματος"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Πρέπει να σχεδιάσετε το μοτίβο ξεκλειδώματος για να επιβεβαιώσετε την επαναφορά στις εργοστασιακές ρυθμίσεις."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Δεν πραγματοποιήθηκε επαναφορά επειδή η υπηρεσία Εκκαθάρισης συστήματος δεν είναι διαθέσιμη."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Να γίνει επαναφορά;"</string>
@@ -1040,7 +1048,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"Να γίνει διαγραφή του αποθηκευτικού χώρου USB, η οποία θα διαγράψει όλα τα αρχεία που έχετε αποθηκεύσει εκεί; Δεν μπορείτε να αναστρέψετε αυτήν την ενέργεια!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Να γίνει διαγραφή της κάρτας SD, με την οποία θα διαγραφούν όλα τα αρχεία που έχετε αποθηκεύσει εκεί; Αυτή η ενέργεια είναι μη αναστρέψιμη!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Διαγραφή όλων"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Σχεδιάστε το μοτίβο ξεκλειδώματος"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Πρέπει να σχεδιάσετε το μοτίβο ξεκλειδώματος για να επιβεβαιώσετε ότι θέλετε να διαγράψετε το χώρο αποθήκευσης USB."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Πρέπει να σχεδιάσετε το μοτίβο ξεκλειδώματος για να επιβεβαιώσετε ότι θέλετε να διαγράψετε την κάρτα SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Ρυθμίσεις κλήσης"</string>
@@ -1435,6 +1442,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Καταγραφή όλων των πακέτων bluetooth HCI σε ένα αρχείο"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Ενεργ. ξεκλειδώματος OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Να επιτρέπεται το ξεκλείδωμα OEM της συσκευής"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Πιστοποίηση ασύρματης οθόνης"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Ενεργοποίηση λεπτομερ. καταγραφής Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Επιθ.μεταβ. Wi-Fi σε δίκτυο κιν.τηλ."</string>
@@ -1812,7 +1827,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Με υποστήριξη εξοπλισμού"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Μόνο λογισμικό"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Τα διαπιστευτήρια δεν είναι διαθέσιμα γι\' αυτόν το χρήστη"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Σχεδιάστε το μοτίβο ξεκλειδώματος"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Πρέπει να σχεδιάσετε το μοτίβο ξεκλειδώματος για να επιβεβαιώσετε την εγκατάσταση των διαπιστευτηρίων."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Πληκτρολογήστε τον κωδικό πρόσβασης του αποθηκευτικού χώρου διαπιστευτηρίων."</string>
@@ -2166,7 +2180,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Προσθήκη χρήστη ή προφίλ"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Προσθήκη χρήστη"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Προφίλ περιορισμένης πρόσβασης"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Προφίλ εργασίας"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Προκειμένου να μπορέσετε να δημιουργήσετε ένα περιορισμένο προφίλ, θα πρέπει να δημιουργήσετε ένα κλείδωμα οθόνης για την προστασία των εφαρμογών και των προσωπικών δεδομένων σας."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Ορισμός κλειδώματος"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Δεν υπάρχει ρύθμιση"</string>
@@ -2429,9 +2442,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Τέλος"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Μέχρι να το απενεργοποιήσετε"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Διακοπές προτεραιότητας"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Νεκρός χρόνος (μόνο διακοπ. προτεραιότ.)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Ημέρες"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Καμία"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Αυτοματοποίηση"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Αυτόματη ενεργοποίηση"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2459,6 +2479,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Ανενεργό"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Καρφίτσωμα οθόνης"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Όταν είναι ενεργό, μπορείτε να χρησιμοποιήσετε το καρφίτσωμα οθόνης για να διατηρήσετε την τρέχουσα οθόνη σε προβολή έως ότου την ξεκαρφιτσώσετε.\n\nΓια να χρησιμοποιήσετε το καρφίτσωμα οθόνης:\n\n1. Βεβαιωθείτε ότι το καρφίτσωμα οθόνης είναι ενεργό.\n\n2. Ανοίξτε την οθόνη που θέλετε να καρφιτσώσετε.\n\n3. Αγγίξτε \"Επισκόπηση\".\n\n4. Αγγίξτε το εικονίδιο με την καρφίτσα."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Να ζητείται το μοτίβο ξεκλειδώματος πριν από το ξεκαρφίτσωμα"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Να ζητείται το PIN πριν από το ξεκαρφίτσωμα"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Να ζητείται κωδικός πρόσβασης πριν από το ξεκαρφίτσωμα"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Κλείδωμα της συσκευής κατά το ξεκαρφίτσωμα"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Προφίλ εργασίας"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Πειραματικό)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Κατά την περιστροφή της συσκευής"</string>
