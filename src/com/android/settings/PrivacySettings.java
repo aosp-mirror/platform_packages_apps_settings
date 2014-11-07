@@ -37,6 +37,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.search.Indexable.SearchIndexProvider;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ import java.util.List;
  * Gesture lock pattern settings.
  */
 public class PrivacySettings extends SettingsPreferenceFragment implements
-        DialogInterface.OnClickListener {
+        DialogInterface.OnClickListener, Indexable {
 
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
