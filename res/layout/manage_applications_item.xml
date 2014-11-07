@@ -45,7 +45,7 @@
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        android:textAlignment="viewStart" />
+        android:textAlignment="viewStart"/>
 
     <CheckBox android:id="@+id/app_on_sdcard"
         android:layout_marginStart="8dip"
@@ -57,7 +57,8 @@
 
     <TextView
         android:id="@+id/app_size"
-        android:layout_width="0dip"
+        android:layout_column="1"
+        android:layout_row="1"
         android:layout_gravity="fill_horizontal|top"
         android:textAppearance="@android:style/TextAppearance.Material.Body1"
         android:textColor="?android:attr/textColorSecondary"
@@ -65,9 +66,13 @@
 
     <TextView
         android:id="@+id/app_disabled"
+        android:layout_width="0dip"
         android:layout_marginStart="8dip"
-        android:layout_gravity="top"
+        android:layout_gravity="fill_horizontal|top"
         android:textAppearance="@android:style/TextAppearance.Material.Body1"
-        android:textColor="?android:attr/textColorSecondary" />
+        android:textColor="?android:attr/textColorSecondary"
+        android:textAlignment="viewEnd"
+        android:singleLine="true"
+        android:ellipsize="marquee" />
 
 </GridLayout>
