@@ -666,6 +666,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             indexable.key = KEY_SPELL_CHECKERS;
             indexable.title = context.getString(R.string.spellcheckers_settings_title);
             indexable.screenTitle = screenTitle;
+            indexable.keywords = context.getString(R.string.keywords_spell_checker);
             indexables.add(indexable);
 
             // User dictionary.
@@ -682,6 +683,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             indexable.key = "keyboard_settings";
             indexable.title = context.getString(R.string.keyboard_settings_category);
             indexable.screenTitle = screenTitle;
+            indexable.keywords = context.getString(R.string.keywords_keyboard_and_ime);
             indexables.add(indexable);
 
             InputMethodSettingValuesWrapper immValues = InputMethodSettingValuesWrapper
@@ -787,6 +789,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             indexable.key = "voice_input_settings";
             indexable.title = context.getString(R.string.voice_input_settings);
             indexable.screenTitle = screenTitle;
+            indexable.keywords = context.getString(R.string.keywords_voice_input);
             indexables.add(indexable);
 
             // Text-to-speech.
@@ -796,6 +799,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                 indexable.key = "tts_settings";
                 indexable.title = context.getString(R.string.tts_settings_title);
                 indexable.screenTitle = screenTitle;
+                indexable.keywords = context.getString(R.string.keywords_text_to_speech_output);
                 indexables.add(indexable);
             }
 
