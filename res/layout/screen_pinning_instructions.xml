@@ -17,14 +17,11 @@
 */
 -->
 
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/instructions_area"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingStart="@dimen/screen_margin_sides"
-    android:paddingEnd="@dimen/screen_margin_sides">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/screen_pinning_description"
@@ -34,6 +31,8 @@
         android:paddingTop="@dimen/screen_pinning_textview_padding"
         android:text="@string/screen_pinning_description"
         android:textAppearance="@style/TextAppearance.Medium"
+        android:paddingStart="@dimen/screen_margin_sides"
+        android:paddingEnd="@dimen/screen_margin_sides"
         />
 
-</LinearLayout>
+</ScrollView>
