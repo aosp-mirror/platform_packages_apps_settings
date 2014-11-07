@@ -420,6 +420,9 @@ public class InstalledAppDetails extends Fragment
         mNotificationSwitch.setChecked(enabled);
         if (Utils.isSystemPackage(mPm, mPackageInfo)) {
             mNotificationSwitch.setEnabled(false);
+        } else if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+            // App is not installed on the current user
+            mNotificationSwitch.setEnabled(false);
         } else {
             mNotificationSwitch.setEnabled(true);
             mNotificationSwitch.setOnCheckedChangeListener(this);
