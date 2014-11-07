@@ -129,7 +129,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         pref.setIntent(intent);
 
         final Context context = getActivity();
-        NetworkScorerAppData scorer = WifiSettings.getWifiAssistantApp(context);
+        NetworkScorerAppData scorer = getWifiAssistantApp(context);
         SwitchPreference wifiAssistant = (SwitchPreference)findPreference(KEY_WIFI_ASSISTANT);
         if (scorer != null) {
             final boolean checked = NetworkScorerAppManager.getActiveScorer(context) != null;
@@ -265,7 +265,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
                 return true;
             }
 
-            NetworkScorerAppData wifiAssistant = WifiSettings.getWifiAssistantApp(context);
+            NetworkScorerAppData wifiAssistant = getWifiAssistantApp(context);
             Intent intent = new Intent();
             if (wifiAssistant.mConfigurationActivityClassName != null) {
                 // App has a custom configuration activity; launch that.
@@ -314,6 +314,22 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         wifiIpAddressPref.setSummary(ipAddress == null ?
                 context.getString(R.string.status_unavailable) : ipAddress);
         wifiIpAddressPref.setSelectable(false);
+    }
+
+    /**
+     * Returns the Network Scorer for the Wifi Assistant App.
+     */
+    public static NetworkScorerAppData getWifiAssistantApp(Context context) {
+        Collection<NetworkScorerAppData> scorers =
+                NetworkScorerAppManager.getAllValidScorers(context);
+
+        if (scorers.isEmpty()) {
+            return null;
+        }
+
+        // TODO: b/13780935 - Implement proper scorer selection. Rather than pick the first
+        // scorer on the system, we should allow the user to select one.
+        return scorers.iterator().next();
     }
 
     /* Wrapper class for the WPS dialog to properly handle life cycle events like rotation. */
