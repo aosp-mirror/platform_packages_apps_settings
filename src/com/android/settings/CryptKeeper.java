@@ -61,8 +61,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
@@ -138,6 +136,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final int RIGHT_PATTERN_CLEAR_TIMEOUT_MS = 500;
 
     private Runnable mClearPatternRunnable = new Runnable() {
+        @Override
         public void run() {
             mLockPatternView.clearPattern();
         }
@@ -163,6 +162,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            final TextView status = (TextView) findViewById(R.id.status);
+            status.setText(R.string.checking_decryption);
+        }
+
+        @Override
         protected Integer doInBackground(String... params) {
             final IMountService service = getMountService();
             try {
@@ -182,10 +188,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     mLockPatternView.removeCallbacks(mClearPatternRunnable);
                     mLockPatternView.postDelayed(mClearPatternRunnable, RIGHT_PATTERN_CLEAR_TIMEOUT_MS);
                 }
+                final TextView status = (TextView) findViewById(R.id.status);
+                status.setText(R.string.starting_android);
                 hide(R.id.passwordEntry);
                 hide(R.id.switch_ime_button);
                 hide(R.id.lockPattern);
-                hide(R.id.status);
                 hide(R.id.owner_info);
                 hide(R.id.emergencyCallButton);
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
@@ -219,8 +226,23 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                                                                         Integer.toString(remainingAttempts));
                         status.setText(warning);
                     } else {
-                        status.setText(R.string.try_again);
+                        int passwordType = StorageManager.CRYPT_TYPE_PASSWORD;
+                        try {
+                            final IMountService service = getMountService();
+                            passwordType = service.getPasswordType();
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error calling mount service " + e);
+                        }
+
+                        if (passwordType == StorageManager.CRYPT_TYPE_PIN) {
+                            status.setText(R.string.cryptkeeper_wrong_pin);
+                        } else if (passwordType == StorageManager.CRYPT_TYPE_PATTERN) {
+                            status.setText(R.string.cryptkeeper_wrong_password);
+                        } else {
+                            status.setText(R.string.cryptkeeper_wrong_pin);
+                        }
                     }
+
 
                     if (mLockPatternView != null) {
                         mLockPatternView.setDisplayMode(DisplayMode.Wrong);
@@ -434,7 +456,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             encryptionProgressInit();
         } else if (mValidationComplete || isDebugView(FORCE_VIEW_PASSWORD)) {
             new AsyncTask<Void, Void, Void>() {
-                int type = StorageManager.CRYPT_TYPE_PASSWORD;
+                int passwordType = StorageManager.CRYPT_TYPE_PASSWORD;
                 String owner_info;
                 boolean pattern_visible;
 
@@ -442,7 +464,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 public Void doInBackground(Void... v) {
                     try {
                         final IMountService service = getMountService();
-                        type = service.getPasswordType();
+                        passwordType = service.getPasswordType();
                         owner_info = service.getField(StorageManager.OWNER_INFO_KEY);
                         pattern_visible = !("0".equals(service.getField(StorageManager.PATTERN_VISIBLE_KEY)));
                     } catch (Exception e) {
@@ -454,10 +476,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
                 @Override
                 public void onPostExecute(java.lang.Void v) {
-                    if(type == StorageManager.CRYPT_TYPE_PIN) {
+                    if(passwordType == StorageManager.CRYPT_TYPE_PIN) {
                         setContentView(R.layout.crypt_keeper_pin_entry);
                         mStatusString = R.string.enter_pin;
-                    } else if (type == StorageManager.CRYPT_TYPE_PATTERN) {
+                    } else if (passwordType == StorageManager.CRYPT_TYPE_PATTERN) {
                         setContentView(R.layout.crypt_keeper_pattern_entry);
                         setBackFunctionality(false);
                         mStatusString = R.string.enter_pattern;
@@ -851,7 +873,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mPasswordEntry.setEnabled(false);
             setBackFunctionality(false);
 
-            Log.d(TAG, "Attempting to send command to decrypt");
             new DecryptTask().execute(password);
 
             return true;
