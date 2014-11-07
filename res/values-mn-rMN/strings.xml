@@ -629,6 +629,8 @@
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Скан хийх"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Дэлгэрэнгүй"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Сүлжээнд холбогдох"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Сүлжээг мартах"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Сүлжээг өөрчлөх"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"NFC тагьруу бичих"</string>
@@ -673,9 +675,11 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(тодорхойлоогүй)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Хадгалагдсан"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Идэвхгүйжүүлсэн"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Муу Интернэт холболтыг алгассан"</string>
+    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"IP тохируулга амжилтгүй"</string>
+    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"WiFi холболт амжилтгүй"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Гэрчлэлийн асуудал"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Хүрээнд байхгүй"</string>
+    <string name="wifi_no_internet" msgid="9151470775868728896">"Интернэт холболт илэрсэнгүй, автоматаар дахин холболт хийгдэхгүй"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS боломжтой"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS боломжтой)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Сүлжээний нууц үгээ оруулна уу"</string>
@@ -861,6 +865,10 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Цуцлах"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Олон SIM байна"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Үүрэн датад ашиглах SIM сонгох."</string>
+    <!-- no translation found for sim_change_data_title (294357201685244532) -->
+    <skip />
+    <!-- no translation found for sim_change_data_message (1313940695939674633) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"СИМ ПИН код буруу, та төхөөрөмжийн түгжээх тайлахын тулд өөрийн оператор компанитай холбоо барина уу."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"СИМ ПИН код буруу байна, танд мобайл оператор компанитай холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдсэн байна."</item>
@@ -1022,7 +1030,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Утсыг дахин шинэчлэх"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Таны бүх хувийн мэдээлэл болон татсан апп-уудыг устгах уу? Та энэ үйлдлийг дараа буцаах боломжгүй!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Бүгдийг устгах"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Өөрийн тайлах хээг зурна уу"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Утасны дахин шинэчлэлтийг баталгаажуулахын тулд та өөрийн тайлах загвараа зурах шаардлагатай."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Системийг Цэвэрлэх үйлчилгээг ашиглах боломжгүй байгаа учраас дахин шинэчлэх үйлдлийг гүйцэтгээгүй."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Дахин шинэчлэх үү?"</string>
@@ -1040,7 +1047,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"USB санг арилгаж хадгалагдсан бүх файлыг устгах уу? Та энэ үйлдлийг буцаах боломжгүй!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"SD картыг арилгаж хадгалагдсан бүх файлыг устгах уу? Та энэ үйлдлийг буцаах боломжгүй!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Бүгдийг устгах"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Өөрийн тайлах хээг зурна уу"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Та USB санг арилгахыг хүсэж байгаагаа баталгаажуулахын тулд өөрийн тайлах загварыг зурах шаардлагатай."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Та SD картыг арилгахыг хүсэж байгаагаа баталгаажуулахын тулд өөрийн тайлах загварыг зурах шаардлагатай."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Дуудлагын тохиргоо"</string>
@@ -1435,6 +1441,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Файл доторх бүх блютүүт HCI пакетуудыг унших"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"OEM түгжээ тайлахыг идэвхжүүлэх"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Төхөөрөмжийн OEM түгжээ тайлахыг зөвшөөрөх"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Утасгүй дэлгэцийн сертификат"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Wi‑Fi Verbose лог-г идэвхжүүлэх"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Үүрэн шилжүүлэг рүү идэвхтэй Wi‑Fi"</string>
@@ -1812,7 +1826,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Техник хангамжаар дэмжигдсэн"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Зөвхөн програм"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Энэ хэрэглэгчид итгэмжлэл байхгүй байна"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Өөрийн тайлах хээг зурна уу"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Та жуухын суулгалтыг баталгаажуулахын тулд өөрийн тайлах хээг зурах шаардлагатай."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Жуухын санд зориулсан нууц үгийг бичих."</string>
@@ -2166,7 +2179,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Хэрэглэгч буюу профайл нэмэх"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Хэрэглэгч нэмэх"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Хязгаарлагдсан профайл"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Ажлын профайл"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Та хязгаарлагдсан профайл үүсгэхийн өмнө өөрийн апп-ууд болон хувийн өгөгдлийг хамгаалахын тулд дэлгэцийн түгжээг тохируулах шаардлагатай."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Түгжээг тохируулах"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Тохируулаагүй"</string>
@@ -2427,9 +2439,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Дууссан"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Таныг унтраах хүртэл"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Нэн тэргүүний тасалдал"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Зогсолт (зөвхөн нэн тэргүүний тасалдалд)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Өдөр"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Хоосон"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Автоматжуулалт"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Автоматаар асаах"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2457,6 +2476,14 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Идэвхгүй"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Дэлгэц хадгалах"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Асаасан үед та одоогийн дэлгэцийг хадгалахын тулд дэлгэц тогтоохыг ашиглаж болно.\n\nДэлгэц тогтоохыг ашиглахын тулд:\n\n1. Дэлгэц тогтоогч идэвхжсэн эсэхийг шалгана.\n\n2. Тогтоохыг хүсэж буй дэлгэцийг нээнэ.\n\n3. Ерөнхий харагдацад хүрнэ.\n\n4. Тогтоогчийн дүрсэнд хүрнэ."</string>
+    <!-- no translation found for screen_pinning_unlock_pattern (8282268570060313339) -->
+    <skip />
+    <!-- no translation found for screen_pinning_unlock_pin (8757588350454795286) -->
+    <skip />
+    <!-- no translation found for screen_pinning_unlock_password (2514079566873826434) -->
+    <skip />
+    <!-- no translation found for screen_pinning_unlock_none (3814188275713871856) -->
+    <skip />
     <string name="managed_user_title" msgid="8101244883654409696">"Ажлын профайл"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Туршилтын)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Төхөөрөмжийг эргүүлсэн үед"</string>
