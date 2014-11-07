@@ -115,33 +115,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private PreferenceCategory mSimCards = null;
 
     private int mNumSims;
-    /**
-     * Standard projection for the interesting columns of a normal note.
-     */
-    private static final String[] sProjection = new String[] {
-            Telephony.Carriers._ID,     // 0
-            Telephony.Carriers.NAME,    // 1
-            Telephony.Carriers.APN,     // 2
-            Telephony.Carriers.PROXY,   // 3
-            Telephony.Carriers.PORT,    // 4
-            Telephony.Carriers.USER,    // 5
-            Telephony.Carriers.SERVER,  // 6
-            Telephony.Carriers.PASSWORD, // 7
-            Telephony.Carriers.MMSC, // 8
-            Telephony.Carriers.MCC, // 9
-            Telephony.Carriers.MNC, // 10
-            Telephony.Carriers.NUMERIC, // 11
-            Telephony.Carriers.MMSPROXY,// 12
-            Telephony.Carriers.MMSPORT, // 13
-            Telephony.Carriers.AUTH_TYPE, // 14
-            Telephony.Carriers.TYPE, // 15
-            Telephony.Carriers.PROTOCOL, // 16
-            Telephony.Carriers.CARRIER_ENABLED, // 17
-            Telephony.Carriers.BEARER, // 18
-            Telephony.Carriers.ROAMING_PROTOCOL, // 19
-            Telephony.Carriers.MVNO_TYPE,   // 20
-            Telephony.Carriers.MVNO_MATCH_DATA  // 21
-    };
 
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
@@ -476,30 +449,16 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             final Resources res = getResources();
 
             if (mSubInfoRecord != null) {
-                if(TextUtils.isEmpty(mSubInfoRecord.getDisplayName())) {
-                    setTitle(getCarrierName());
-                    String displayName = getCarrierName();
-                    mSubInfoRecord.setDisplayName(displayName);
-                    SubscriptionManager.setDisplayName(displayName,
-                            mSubInfoRecord.getSubscriptionId());
-                } else {
-                    setTitle(mSubInfoRecord.getDisplayName());
-                }
-                setSummary(mSubInfoRecord.getNumber());
+                setTitle(String.format(res.getString(R.string.sim_editor_title),
+                        (mSubInfoRecord.getSimSlotIndex() + 1)));
+                setSummary(mSubInfoRecord.getDisplayName() + " - " +
+                        mSubInfoRecord.getNumber().toString());
                 setEnabled(true);
             } else {
                 setSummary(R.string.sim_slot_empty);
                 setFragment(null);
                 setEnabled(false);
             }
-        }
-
-        public String getCarrierName() {
-            Uri mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI,
-                    mSubInfoRecord.getSubscriptionId());
-            Cursor mCursor = getActivity().managedQuery(mUri, sProjection, null, null);
-            mCursor.moveToFirst();
-            return mCursor.getString(1);
         }
 
         public String getFormattedPhoneNumber() {
@@ -561,7 +520,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             numberView.setText(simPref.getFormattedPhoneNumber());
 
             TextView carrierView = (TextView)dialogLayout.findViewById(R.id.carrier);
-            carrierView.setText(getCarrierName());
+            carrierView.setText(mSubInfoRecord.getCarrierName());
 
             builder.setTitle(String.format(res.getString(R.string.sim_editor_title),
                     (mSubInfoRecord.getSimSlotIndex() + 1)));
