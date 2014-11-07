@@ -631,6 +631,8 @@
     <string name="wifi_menu_apps" msgid="6003687912727859577">"Show Apps"</string>
     <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"Show Wi-Fi Strength"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Connect to network"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Forget network"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modify network"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Write to NFC tag"</string>
@@ -675,9 +677,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(unspecified)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Saved"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Disabled"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Avoided poor Internet connection"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Authentication problem"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Not in range"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS available"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS available)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Enter your network password"</string>
@@ -863,6 +870,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Cancel"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Multiple SIMs found"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Choose the SIM that you prefer for mobile data."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Change data SIM?"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"Use <xliff:g id="NEW_SIM">%1$s</xliff:g> instead of <xliff:g id="OLD_SIM">%2$s</xliff:g> for mobile data?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Incorrect SIM PIN code; you must now contact your carrier to unlock your device."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Incorrect SIM PIN code; you have <xliff:g id="NUMBER">%d</xliff:g> remaining attempt/s before you must contact your carrier to unlock your device."</item>
@@ -1024,7 +1033,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Reset phone"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Erase all your personal information and downloaded apps? You cannot reverse this action!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Erase everything"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Draw your unlock pattern"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"You need to draw your unlock pattern to confirm a factory data reset."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"No reset was performed because the System Clear service isn\'t available."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Reset?"</string>
@@ -1042,7 +1050,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"Erase the USB storage, deleting all files stored there? You cannot reverse this action!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Erase the SD card, deleting all files stored there? You cannot reverse this action!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Erase everything"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Draw your unlock pattern"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"You need to draw your unlock pattern to confirm that you want to erase the USB storage."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"You need to draw your unlock pattern to confirm that you want to erase the SD card."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Call settings"</string>
@@ -1437,6 +1444,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Capture all Bluetooth HCI packets in a file"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Enable OEM unlock"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Allow the device to be OEM unlocked"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Wireless display certification"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Enable Wi‑Fi verbose logging"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressive Wi‑Fi to Mobile handover"</string>
@@ -1816,7 +1831,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Hardware-backed"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Software only"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Credentials are not available for this user"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Draw your unlock pattern"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"You need to draw your unlock pattern to confirm credential installation."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Type the password for credential storage."</string>
@@ -2170,7 +2184,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Add user or profile"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Add user"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Restricted profile"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Work profile"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Before you can create a restricted profile, you\'ll need to set up a screen lock to protect your apps and personal data."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Set lock"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Not set up"</string>
@@ -2431,9 +2444,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Done"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Until you turn this off"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Priority interruptions"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Downtime (priority interruptions only)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Days"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"None"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automation"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Automatically turn on"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2461,6 +2481,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Off"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Screen pinning"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"When turned on, you can use screen pinning to keep the current screen in view until you unpin.\n\nTo use screen pinning:\n\n1. Make sure screen pinning is turned on.\n\n2. Open the screen that you want to pin.\n\n3. Touch Overview.\n\n4. Touch the pin icon."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Ask for unlock pattern before unpinning"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Ask for PIN before unpinning"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Ask for password before unpinning"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Lock device when unpinning"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Work profile"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"When device is rotated"</string>

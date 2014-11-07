@@ -623,6 +623,8 @@
     <string name="wifi_menu_apps" msgid="6003687912727859577">"Onyesha Programu"</string>
     <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"Onyesha Nguvu ya WiFi"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Unganisha kwa mtandao"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Sahau mtandao"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Mtandao umerekebishwa"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Andika kwenye tagi ya NFC"</string>
@@ -667,9 +669,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(haijabainishwa)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Imehifadhiwa"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Imelemazwa"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"Kuepukwa muunganisho mbaya wa Tovuti"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Tatizo la uthibitishaji"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Haiko karibu"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS inapatikana"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" WPS inapatikana"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Weka nenosiri la mtandao wako"</string>
@@ -855,6 +862,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Ghairi"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"SIM nyingi zimepatikana"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Chagua SIM unayopendelea kwa data ya simu za mkononi."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Je, ungependa kubadilisha SIM ya data?"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"Je, ungependa kutumia <xliff:g id="NEW_SIM">%1$s</xliff:g> badala ya <xliff:g id="OLD_SIM">%2$s</xliff:g> kwa data ya vifaa vya mkononi?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Msimbo wa PIN ya SIM usio sahihi sasa lazima uwasiliane na mtoa huduma wako ili ufungue kifaa chako."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Msimbo wa PIN ya SIM usio sahihi, umesalia na majaribio <xliff:g id="NUMBER">%d</xliff:g> kabla ulazimike kuwasiliana na mtoa huduma wako ili ufungue kifaa chako."</item>
@@ -1016,7 +1025,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Rejesha mipangilio ya mwanzoni ya simu"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Ungependa kufuta taarifa zako zote za kibinafsi na zilizopakuliwa? Hauwezi kutendua hatua hii!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Futa kila kitu"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Mchoro wa kufungua"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Unahitaji kuweka mchoro wa kufungua ili uthibitishe urejeshaji mipangilio ambayo ilitoka nayo kiwandani."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Hakuna mpangilio mpya uliofanywa kwa sababu huduma ya Mfumo wa Kufuta haipatikani."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Iwekwe upya?"</string>
@@ -1034,7 +1042,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"Futa hifadhi ya USB, inafuta faili zote zilizohifadhiwa hapo? Hatua hii haiwezi kutenguliwa!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Futa kadi ya SD, inafuta faili zote zilizohifadhiwa huko? Hauwezi kutengua hatua hii!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Futa kila kitu"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Chora mchoro wako wa kufungua"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Unahitaji kuweka mchoro wako wa kufungua ili uthibitishe kwamba unataka kufuta hifadhi ya USB."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Unahitaji kuweka mchoro wako wa kufungua ili uthibitishe kwamba unataka kufuta kadi ya SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Mipangilio ya simu"</string>
@@ -1431,6 +1438,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Nasa pakiti zote za Bluetooth HCI katika faili"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Washa kufungua kwa OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Ruhusu kifaa kifunguliwe kwa OEM"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Chaguo za cheti cha kuonyesha pasiwaya"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Washa Uwekaji kumbukumbu za WiFi kutumia Sauti"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Ukabidhi kutoka Wifi kwenda Mtandao wa Simu"</string>
@@ -1810,7 +1825,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Inaweza kutumiwa na maunzi"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Programu pekee"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Kitambulisho hakipatikani kwa mtumiaji huyu"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Chora mchoro wako wa kufungua"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Unahitaji kuweka mchoro wako wa kufungua ili uthibitishe usakinishaji wa hati tambulishi."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Weka nenosiri ili stakabadhi zihifadhiwe"</string>
@@ -2164,7 +2178,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Ongeza mtumiaji au wasifu"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Ongeza mtumiaji"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Wasifu uliozuiwa"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Wasifu wa kazini"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Kabla uunde wasifu uliowekekwa vikwazo, utahitajika kuweka skrini iliyofungwa ili kulinda programu zako na data binafsi."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Weka ufunguo"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Haijasanidiwa"</string>
@@ -2425,9 +2438,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Nimemaliza"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Hadi utakapozima hili"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Kukatizwa na vipaumbele pekee"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Kipindi cha kutofanya kazi (kukatizwa na vipaumbele pekee)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Siku"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Hamna"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Uwekaji otomatiki"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Washa kiotomatiki"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2455,6 +2475,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Imezimwa"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Ubandikaji wa skrini"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Inapowashwa, unaweza kutumia ubandikaji wa skrini ili kuweka skrini ya sasa iendelee kuonekana hadi uibanue. \n\n Ili utumie ubandikaji wa skrini: \n\n 1. Hakikisha umewasha ubandikaji wa skrini. \n\n 2. Fungua skrini unayotaka kubandika. \n\n 3 Gusa Muhtasari. \n\n 4 Gusa aikoni ya kubandika."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Omba mchoro wa kufungua kabla hujabandua"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Omba PIN kabla hujabandua"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Omba nenosiri kabla hujabandua"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Funga kifaa wakati wa kubandua"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Wasifu wa kazi"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Majaribio)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Kifaa kinapozungushwa"</string>
