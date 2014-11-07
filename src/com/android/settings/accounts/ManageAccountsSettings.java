@@ -104,6 +104,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         mAuthenticatorHelper.listenToAccountUpdates();
         updateAuthDescriptions();
         showAccountsIfNeeded();
+        showSyncState();
     }
 
     @Override
@@ -234,6 +235,10 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         showSyncState();
     }
 
+    /**
+     * Shows the sync state of the accounts. Note: it must be called after the accounts have been
+     * loaded, @see #showAccountsIfNeeded().
+     */
     private void showSyncState() {
         // Catch any delayed delivery of update messages
         if (getActivity() == null || getActivity().isFinishing()) return;
