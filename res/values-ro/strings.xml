@@ -629,6 +629,8 @@
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Scanaţi"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Avansate"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Conectaţi-vă la reţea"</string>
+    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
+    <skip />
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Eliminaţi reţeaua"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modificaţi reţeaua"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Scrieți într-o etichetă NFC"</string>
@@ -673,9 +675,14 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(neindicat)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Salvată"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Dezactivată"</string>
-    <string name="wifi_disabled_network_failure" msgid="3111321240793227690">"S-a evitat o conexiune de internet slabă"</string>
+    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
+    <skip />
+    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
+    <skip />
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problemă la autentificare"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"În afara ariei de acoperire"</string>
+    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
+    <skip />
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS disponibil"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponibil)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Introduceți parola de rețea"</string>
@@ -861,6 +868,8 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Anulaţi"</string>
     <string name="sim_multi_sims_title" msgid="9159427879911231239">"Mai multe carduri SIM găsite"</string>
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Alegeți cardul SIM pe care îl preferați pentru date mobile."</string>
+    <string name="sim_change_data_title" msgid="294357201685244532">"Schimbați cartela SIM de date?"</string>
+    <string name="sim_change_data_message" msgid="1313940695939674633">"Utilizați <xliff:g id="NEW_SIM">%1$s</xliff:g> în loc de <xliff:g id="OLD_SIM">%2$s</xliff:g> pentru datele mobile?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Codul PIN pentru cardul SIM este incorect. Contactați operatorul pentru a vă debloca dispozitivul."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Codul PIN pentru cardul SIM este incorect. V-a mai rămas <xliff:g id="NUMBER">%d</xliff:g> încercare, după care va trebui să contactați operatorul pentru a vă debloca dispozitivul."</item>
@@ -1022,7 +1031,6 @@
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Resetaţi telefonul"</string>
     <string name="master_clear_final_desc" msgid="7209547812233487345">"Ștergeţi toate informaţiile personale şi aplicaţiile descărcate? Nu puteţi anula această acţiune!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Ștergeţi tot"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Desenaţi modelul pentru deblocare"</string>
     <string name="master_clear_gesture_explanation" msgid="826193821455182780">"Trebuie să desenaţi modelul de deblocare pentru a confirma resetarea configurării din fabrică."</string>
     <string name="master_clear_failed" msgid="7959646179737950703">"Nu a fost efectuată nicio resetare, deoarece serviciul Golire sistem nu este disponibil."</string>
     <string name="master_clear_confirm_title" msgid="7572642091599403668">"Resetaţi?"</string>
@@ -1040,7 +1048,6 @@
     <string name="media_format_final_desc" product="nosdcard" msgid="699929778486375913">"Ștergeţi stocarea USB şi toate fişierele stocate pe aceasta? Nu puteţi anula această acţiune!"</string>
     <string name="media_format_final_desc" product="default" msgid="3344525419872744989">"Ștergeţi cardul SD şi toate fişierele stocate pe acesta? Acţiunea nu poate fi anulată!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Ștergeţi tot"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Desenaţi modelul pentru deblocare"</string>
     <string name="media_format_gesture_explanation" product="nosdcard" msgid="2192044794228379224">"Trebuie să desenaţi modelul de deblocare pentru a confirma că doriţi să ştergeţi stocarea USB."</string>
     <string name="media_format_gesture_explanation" product="default" msgid="6288926293245938415">"Trebuie să desenaţi modelul de deblocare pentru a confirma că doriţi să ştergeţi cardul SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Setări apel"</string>
@@ -1436,6 +1443,14 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Înregistrați toate pachetele HCI Bluetooth într-un fișier"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Activați deblocarea OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Permiteți dispozitivului să fie deblocat OEM"</string>
+    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
+    <skip />
+    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
+    <skip />
+    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
+    <skip />
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificare Ecran wireless"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Act. înr. prin Wi-Fi a vol. mari de date"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Înlocuire Wi-Fi cu mobil agresivă"</string>
@@ -1813,7 +1828,6 @@
     <string name="credential_storage_type_hardware" msgid="6077193544333904427">"Stocare hardware"</string>
     <string name="credential_storage_type_software" msgid="4403117271207715378">"Stocare software"</string>
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"Datele de conectare nu sunt disponibile pentru acest utilizator"</string>
-    <string name="credentials_install_gesture_prompt" msgid="2207390278112395082">"Desenaţi modelul pentru deblocare"</string>
     <string name="credentials_install_gesture_explanation" msgid="7408921172253634829">"Trebuie să desenaţi modelul pentru deblocare pentru a confirma instalarea acreditării."</string>
     <string name="credentials_unlock" msgid="385427939577366499"></string>
     <string name="credentials_unlock_hint" msgid="2301301378040499348">"Introduceţi parola pentru spaţiul de stocare a certificatelor."</string>
@@ -2167,7 +2181,6 @@
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Adăugați un utilizator/un profil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Adăugaţi utilizator"</string>
     <string name="user_summary_restricted_profile" msgid="6354966213806839107">"Profil limitat"</string>
-    <string name="user_summary_managed_profile" msgid="7369539529693048111">"Profil de serviciu"</string>
     <string name="user_need_lock_message" msgid="2596365678651842785">"Înainte de a putea crea un profil cu permisiuni limitate, va trebui să configurați blocarea ecranului pentru a vă proteja aplicațiile și datele personale."</string>
     <string name="user_set_lock_button" msgid="8311219392856626841">"Configurați blocarea"</string>
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"Neconfigurat"</string>
@@ -2428,9 +2441,16 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Terminat"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Până la dezactivare"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Întreruperi cu prioritate"</string>
-    <string name="zen_mode_downtime_category" msgid="4730179065426038108">"Inactivitate (numai întrer. cu priorit.)"</string>
+    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
+    <skip />
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Zile"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Niciuna"</string>
+    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
+    <skip />
+    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
+    <skip />
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatizare"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Activați automat"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2458,6 +2478,10 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Dezactivat"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixarea ecranului"</string>
     <string name="screen_pinning_description" msgid="7091642350452605379">"Când fixarea pe ecran este activată, o puteți utiliza pentru a menține ecranul actual în vizualizare până anulați fixarea.\n\nPentru a utiliza fixarea pe ecran:\n\n1. asigurați-vă că fixarea este activată;\n\n2. deschideți ecranul pentru fixare;\n\n3. atingeți Vizualizare generală;\n\n4. atingeți pictograma de fixare."</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Solicitați modelul pentru deblocare înainte de a anula fixarea"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Solicitați codul PIN înainte de a anula fixarea"</string>
+    <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Solicitați parola înainte de a anula fixarea"</string>
+    <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Blocați dispozitivul la anularea fixării"</string>
     <string name="managed_user_title" msgid="8101244883654409696">"Profil de serviciu"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Când dispozitivul este rotit"</string>
