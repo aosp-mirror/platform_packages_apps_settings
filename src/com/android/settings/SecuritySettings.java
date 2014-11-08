@@ -44,7 +44,7 @@ import android.security.KeyStore;
 import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
 import android.telephony.SubscriptionManager;
-import android.telephony.SubInfoRecord;
+import android.telephony.SubscriptionInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -371,9 +371,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
      */
     private static boolean isSimReady() {
         int simState = TelephonyManager.SIM_STATE_UNKNOWN;
-        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+        final List<SubscriptionInfo> subInfoList = SubscriptionManager.getActiveSubscriptionInfoList();
         if (subInfoList != null) {
-            for (SubInfoRecord subInfo : subInfoList) {
+            for (SubscriptionInfo subInfo : subInfoList) {
                 simState = TelephonyManager.getDefault().getSimState(subInfo.getSimSlotIndex());
                 if((simState != TelephonyManager.SIM_STATE_ABSENT) &&
                             (simState != TelephonyManager.SIM_STATE_UNKNOWN)){

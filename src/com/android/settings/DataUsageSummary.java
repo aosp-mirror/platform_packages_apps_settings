@@ -88,7 +88,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.telephony.SubInfoRecord;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -267,7 +267,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private MenuItem mMenuSimCards;
     private MenuItem mMenuCellularNetworks;
 
-    private List<SubInfoRecord> mSubInfoList;
+    private List<SubscriptionInfo> mSubInfoList;
     private Map<Integer,String> mMobileTagMap;
 
     /** Flag used to ignore listeners during binding. */
@@ -1130,8 +1130,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     };
 
     private void handleMultiSimDataDialog() {
-        final SubInfoRecord currentSir = getCurrentTabSubInfo(getActivity());
-        final SubInfoRecord nextSir = SubscriptionManager.getSubInfoForSubscriber(
+        final SubscriptionInfo currentSir = getCurrentTabSubInfo(getActivity());
+        final SubscriptionInfo nextSir = SubscriptionManager.getSubscriptionInfoForSubscriber(
                 SubscriptionManager.getDefaultDataSubId());
 
         if (currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
@@ -2339,14 +2339,14 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final ConnectivityManager conn = ConnectivityManager.from(context);
         final TelephonyManager tele = TelephonyManager.from(context);
 
-        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+        final List<SubscriptionInfo> subInfoList = SubscriptionManager.getActiveSubscriptionInfoList();
         // No activated Subscription
         if (subInfoList == null) {
             return false;
         }
         // require both supported network and ready SIM
         boolean isReady = true;
-        for (SubInfoRecord subInfo : subInfoList) {
+        for (SubscriptionInfo subInfo : subInfoList) {
             isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
         }
         return conn.isNetworkSupported(TYPE_MOBILE) && isReady;
@@ -2585,9 +2585,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             }
         };
 
-        private void addMobileTab(Context context, List<SubInfoRecord> subInfoList) {
+        private void addMobileTab(Context context, List<SubscriptionInfo> subInfoList) {
             if (subInfoList != null) {
-                for (SubInfoRecord subInfo : mSubInfoList) {
+                for (SubscriptionInfo subInfo : mSubInfoList) {
                     if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
                         mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
                                 subInfo.getDisplayName()));
@@ -2596,11 +2596,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             }
         }
 
-        private SubInfoRecord getCurrentTabSubInfo(Context context) {
+        private SubscriptionInfo getCurrentTabSubInfo(Context context) {
             if (mSubInfoList != null && mTabHost != null) {
                 final int currentTagIndex = mTabHost.getCurrentTab();
                 int i = 0;
-                for (SubInfoRecord subInfo : mSubInfoList) {
+                for (SubscriptionInfo subInfo : mSubInfoList) {
                     if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
                         if (i++ == currentTagIndex) {
                             return subInfo;
@@ -2616,12 +2616,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
          * @param subInfoList The subscription Info List
          * @return The map or null if no activated subscription
          */
-        private Map<Integer, String> initMobileTabTag(List<SubInfoRecord> subInfoList) {
+        private Map<Integer, String> initMobileTabTag(List<SubscriptionInfo> subInfoList) {
             Map<Integer, String> map = null;
             if (subInfoList != null) {
                 String mobileTag;
                 map = new HashMap<Integer, String>();
-                for (SubInfoRecord subInfo : subInfoList) {
+                for (SubscriptionInfo subInfo : subInfoList) {
                     mobileTag = TAB_MOBILE + String.valueOf(subInfo.getSubscriptionId());
                     map.put(subInfo.getSubscriptionId(), mobileTag);
                 }
