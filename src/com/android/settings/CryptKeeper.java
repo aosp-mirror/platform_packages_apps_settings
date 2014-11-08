@@ -237,9 +237,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                         if (passwordType == StorageManager.CRYPT_TYPE_PIN) {
                             status.setText(R.string.cryptkeeper_wrong_pin);
                         } else if (passwordType == StorageManager.CRYPT_TYPE_PATTERN) {
-                            status.setText(R.string.cryptkeeper_wrong_password);
+                            status.setText(R.string.cryptkeeper_wrong_pattern);
                         } else {
-                            status.setText(R.string.cryptkeeper_wrong_pin);
+                            status.setText(R.string.cryptkeeper_wrong_password);
                         }
                     }
 
