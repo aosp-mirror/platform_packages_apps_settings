@@ -197,7 +197,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     private void updateSmsValues() {
-        final Preference simPref = (Preference) findPreference(KEY_SMS);
+        final Preference simPref = findPreference(KEY_SMS);
         final SubInfoRecord sir = Utils.findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
         simPref.setTitle(R.string.sms_messages_title);
         if (mSubInfoList.size() == 1) {
@@ -250,11 +250,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             final Preference preference) {
         if (preference instanceof SimPreference) {
             ((SimPreference)preference).createEditDialog((SimPreference)preference);
-        } else if ((Preference) findPreference(KEY_CELLULAR_DATA) == preference) {
+        } else if (findPreference(KEY_CELLULAR_DATA) == preference) {
             showDialog(DATA_PICK);
-        } else if ((Preference) findPreference(KEY_CALLS) == preference) {
+        } else if (findPreference(KEY_CALLS) == preference) {
             showDialog(CALLS_PICK);
-        } else if ((Preference) findPreference(KEY_SMS) == preference) {
+        } else if (findPreference(KEY_SMS) == preference) {
             showDialog(SMS_PICK);
         }
 
@@ -396,7 +396,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private class SimPreference extends Preference{
         private SubInfoRecord mSubInfoRecord;
         private int mSlotId;
-        private int[] colorArr;
+        private int[] tintArr;
 
         public SimPreference(Context context, SubInfoRecord subInfoRecord, int slotId) {
             super(context);
@@ -405,7 +405,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             mSlotId = slotId;
             setKey("sim" + mSlotId);
             update();
-            colorArr = context.getResources().getIntArray(com.android.internal.R.array.sim_colors);
+            tintArr = context.getResources().getIntArray(com.android.internal.R.array.sim_colors);
         }
 
         public void update() {
@@ -454,24 +454,24 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             EditText nameText = (EditText)dialogLayout.findViewById(R.id.sim_name);
             nameText.setText(mSubInfoRecord.getDisplayName());
 
-            final Spinner colorSpinner = (Spinner) dialogLayout.findViewById(R.id.spinner);
+            final Spinner tintSpinner = (Spinner) dialogLayout.findViewById(R.id.spinner);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                     R.array.color_picker, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            colorSpinner.setAdapter(adapter);
+            tintSpinner.setAdapter(adapter);
 
-            for (int i = 0; i < colorArr.length; i++) {
-                if (colorArr[i] == mSubInfoRecord.getColor()) {
-                    colorSpinner.setSelection(i);
+            for (int i = 0; i < tintArr.length; i++) {
+                if (tintArr[i] == mSubInfoRecord.getIconTint()) {
+                    tintSpinner.setSelection(i);
                     break;
                 }
             }
 
-            colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            tintSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view,
                     int pos, long id){
-                    colorSpinner.setSelection(pos);
+                    tintSpinner.setSelection(pos);
                 }
 
                 @Override
@@ -500,12 +500,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
                     Utils.findRecordBySubId(subId).setDisplayName(displayName);
 
-                    final int colorSelected = colorSpinner.getSelectedItemPosition();
+                    final int tintSelected = tintSpinner.getSelectedItemPosition();
                     int subscriptionId = mSubInfoRecord.getSubscriptionId();
-                    int color = colorArr[colorSelected];
-                    mSubInfoRecord.setColor(color);
-                    SubscriptionManager.setColor(color, subscriptionId);
-                    Utils.findRecordBySubId(subscriptionId).setColor(color);
+                    int tint = tintArr[tintSelected];
+                    mSubInfoRecord.setIconTint(tint);
+                    SubscriptionManager.setIconTint(tint, subscriptionId);
+                    Utils.findRecordBySubId(subscriptionId).setIconTint(tint);
 
                     updateAllOptions();
                     update();
@@ -537,7 +537,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 public int compare(SubInfoRecord arg0, SubInfoRecord arg1) {
                     int flag = arg0.getSimSlotIndex() - arg1.getSimSlotIndex();
                     if (flag == 0) {
-                        return (int) (arg0.getSubscriptionId() - arg1.getSubscriptionId());
+                        return arg0.getSubscriptionId() - arg1.getSubscriptionId();
                     }
                     return flag;
                 }
