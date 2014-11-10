@@ -29,6 +29,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -129,9 +130,9 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         pref.setIntent(intent);
 
         final Context context = getActivity();
-        NetworkScorerAppData scorer = getWifiAssistantApp(context);
         SwitchPreference wifiAssistant = (SwitchPreference)findPreference(KEY_WIFI_ASSISTANT);
-        if (scorer != null) {
+        NetworkScorerAppData scorer = getWifiAssistantApp(context);
+        if (UserHandle.myUserId() == UserHandle.USER_OWNER && scorer != null) {
             final boolean checked = NetworkScorerAppManager.getActiveScorer(context) != null;
             wifiAssistant.setSummary(getResources().getString(
                     R.string.wifi_automatically_manage_summary, scorer.mScorerName));
