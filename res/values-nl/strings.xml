@@ -129,7 +129,7 @@
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Naam wijzigen"</string>
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ontkoppelen?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Hierdoor wordt uw verbinding met:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; verbroken"</string>
-    <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"U heeft geen rechten om de Bluetooth-instellingen te wijzigen."</string>
+    <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"U heeft geen toestemming om de Bluetooth-instellingen te wijzigen."</string>
     <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is zichtbaar voor apparaten in de buurt terwijl \'Bluetooth-instellingen\' is geopend."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ontkoppelen?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Uitzending"</string>
@@ -153,7 +153,7 @@
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"Raak dit aan om te koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Ontvangen bestanden weergeven"</string>
     <string name="device_picker" msgid="4978696506172252813">"Bluetooth-apparaat kiezen"</string>
-    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Machtigingsverzoek voor Bluetooth"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Toestemmingsverzoek voor Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="637355677176904990">"Een app wil Bluetooth inschakelen."</string>
     <string name="bluetooth_ask_discovery" product="tablet" msgid="786921566047356213">"Een app wil uw tablet <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"Een app wil uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar maken voor andere Bluetooth-apparaten."</string>
@@ -1225,7 +1225,7 @@
     <string name="show_background_processes" msgid="2009840211972293429">"Gecachte processen weerg."</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Appvoorkeuren herstellen"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Appvoorkeuren herstellen?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Hiermee worden alle voorkeuren opnieuw ingesteld voor:\n\n "<li>"Uitgeschakelde apps"</li>\n" "<li>"Uitgeschakelde app-meldingen"</li>\n" "<li>"Standaardapps voor acties"</li>\n" "<li>"Beperkingen voor achtergrondgegevens voor apps"</li>\n" "<li>"Beperkingen voor rechten"</li>\n\n" U verliest geen app-gegevens."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Hiermee worden alle voorkeuren opnieuw ingesteld voor:\n\n "<li>"Uitgeschakelde apps"</li>\n" "<li>"Uitgeschakelde app-meldingen"</li>\n" "<li>"Standaardapps voor acties"</li>\n" "<li>"Beperkingen voor achtergrondgegevens voor apps"</li>\n" "<li>"Beperkingen voor machtigingen"</li>\n\n" U verliest geen app-gegevens."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Apps herstellen"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Ruimte beheren"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
@@ -1256,8 +1256,8 @@
     <string name="clear_failed_dlg_text" msgid="1092177570631523106">"Kan gegevens voor de app niet wissen."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"Deze app heeft toegang tot de volgende opties van uw tablet:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Deze app heeft toegang tot de volgende opties van uw telefoon:"</string>
-    <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Deze app heeft toegang tot het volgende op uw tablet. Om de prestaties te verbeteren en het geheugengebruik te beperken, zijn sommige van deze rechten beschikbaar voor <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> omdat deze wordt uitgevoerd in hetzelfde proces als <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
-    <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Deze app heeft toegang tot het volgende op uw telefoon. Om de prestaties te verbeteren en het geheugengebruik te beperken, zijn sommige van deze rechten beschikbaar voor <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> omdat deze wordt uitgevoerd in hetzelfde proces als <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Deze app heeft toegang tot het volgende op uw tablet. Om de prestaties te verbeteren en het geheugengebruik te beperken, zijn sommige van deze machtigingen beschikbaar voor <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> omdat deze wordt uitgevoerd in hetzelfde proces als <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
+    <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"Deze app heeft toegang tot het volgende op uw telefoon. Om de prestaties te verbeteren en het geheugengebruik te beperken, zijn sommige van deze machtigingen beschikbaar voor <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> omdat deze wordt uitgevoerd in hetzelfde proces als <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> en <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_many_items_last" msgid="5925635036718502724">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> en <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
     <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>, <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
@@ -2193,7 +2193,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Alleen de eigenaar van de telefoon kan gebruikers beheren."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Beperkte profielen kunnen geen accounts toevoegen"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"<xliff:g id="USER_NAME">%1$s</xliff:g> verwijderen van dit apparaat"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Gebruikers toevoegen als apparaat is vergrendeld"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Gebr. vergrendeld toevoegen"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nieuwe gebruiker"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nieuw profiel"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Wilt u uzelf verwijderen?"</string>
