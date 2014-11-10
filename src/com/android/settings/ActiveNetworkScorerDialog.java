@@ -23,6 +23,7 @@ import android.net.NetworkScoreManager;
 import android.net.NetworkScorerAppManager;
 import android.net.NetworkScorerAppManager.NetworkScorerAppData;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -69,6 +70,10 @@ public final class ActiveNetworkScorerDialog extends AlertActivity implements
     }
 
     private boolean buildDialog() {
+        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+            Log.i(TAG, "Can only set scorer for owner user.");
+            return false;
+        }
         NetworkScorerAppData newScorer = NetworkScorerAppManager.getScorer(this, mNewPackageName);
         if (newScorer == null) {
             Log.e(TAG, "New package " + mNewPackageName + " is not a valid scorer.");
