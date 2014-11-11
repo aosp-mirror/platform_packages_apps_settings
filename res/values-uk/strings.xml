@@ -556,13 +556,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Як пристр.гучн.зв’язку"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музики та медіа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запам\'ятати налашт."</string>
-    <string name="wifi_assistant_intro_setup" msgid="4605105515416995110">"Представляємо\nWi‑Fi Assistant"</string>
-    <string name="wifi_assistant_no_thanks" msgid="2776983751990143934">"НІ, ДЯКУЮ"</string>
-    <string name="wifi_assistant_setup" msgid="3772423650475730906">"НАЛАШТУВАТИ"</string>
-    <string name="wifi_assistant_card_message" msgid="107811647784658536">"Автоматично під‘єднуйтеся до доступних мереж за допомогою Wi‑Fi Assistant."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> автоматично під’єднує ваш пристрій до найкращої доступної мережі Wi-Fi"</string>
-    <string name="wifi_assistant_open_app" msgid="4803044899535675063">"ВІДКРИТИ ДОДАТОК"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Транслювати екран"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Увімкнути бездротовий екран"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Не знайдено пристроїв поблизу."</string>
@@ -631,8 +625,7 @@
     <string name="wifi_menu_apps" msgid="6003687912727859577">"Показати додатки"</string>
     <string name="wifi_menu_apps_strength" msgid="3322614241441509660">"Потужність Wi-Fi"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Підключ. до мережі"</string>
-    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
-    <skip />
+    <string name="wifi_menu_remember" msgid="8814185749388713796">"Зберегти мережу"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Видалити мережу"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Змінити мережу"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Записати дані в NFC-тег"</string>
@@ -1245,7 +1238,8 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Носій USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"На карті SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Вимкнено"</string>
-    <string name="not_installed" msgid="1475144352069281880">"Не встановлено"</string>
+    <!-- no translation found for not_installed (2797554494953450291) -->
+    <skip />
     <string name="no_applications" msgid="7336588977497084921">"Програм немає."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Внутр. пам\'ять"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Носій USB"</string>
@@ -1327,7 +1321,7 @@
     <string name="running_processes_header_footer" msgid="723908176275428442">"Використання оперативної пам’яті додатками"</string>
     <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"Система"</string>
     <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Додатки"</string>
-    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Безкоштовно"</string>
+    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Вільно"</string>
     <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Використано"</string>
     <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Кеш"</string>
     <string name="running_processes_header_ram" msgid="996092388884426817">"<xliff:g id="RAM_0">%1$s</xliff:g> оперативної пам’яті"</string>
@@ -1444,14 +1438,10 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Робити знімки всіх пакетів інтерфейсу Bluetooth у файлі"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Увімкнути розблокув. OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Дозволити розблокування пристрою виробником (OEM)"</string>
-    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
-    <skip />
-    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
-    <skip />
-    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
-    <skip />
+    <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Введіть PIN-код"</string>
+    <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Щоб увімкнути розблокування OEM, введіть PIN-код пристрою"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Застереження"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Якщо ввімкнути розблокування OEM, функції захисту від крадіжок буде вимкнено на цьому пристрої. Окрім того, це може призвести до скасування гарантії. Продовжити?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Сертифікація бездротового екрана"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Докладний запис у журнал Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Перемикатись із Wi-Fi на моб. мережу"</string>
@@ -1728,7 +1718,7 @@
     <string name="mem_use_native_type" msgid="5976704902328347400">"Рідні процеси"</string>
     <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"Кеші ядра"</string>
     <string name="mem_use_zram_type" msgid="9087217476795358232">"Заміна модуля ZRam"</string>
-    <string name="mem_use_free_type" msgid="717708548454880840">"Безкоштовно"</string>
+    <string name="mem_use_free_type" msgid="717708548454880840">"Вільно"</string>
     <string name="mem_use_total" msgid="6308786055749777934">"Усього"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 години"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 годин"</string>
@@ -1969,7 +1959,16 @@
     <string name="enter_password" msgid="8035706727471334122">"Введіть пароль, щоб запустити пристрій Android"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Введіть PIN-код, щоб запустити пристрій Android"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Намалюйте ключ, щоб запустити пристрій Android"</string>
-    <string name="try_again" msgid="4272075051293936921">"Повторіть спробу."</string>
+    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
+    <skip />
+    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
+    <skip />
+    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
+    <skip />
+    <!-- no translation found for checking_decryption (8287458611802609493) -->
+    <skip />
+    <!-- no translation found for starting_android (8581493237458496835) -->
+    <skip />
     <string name="delete" msgid="4219243412325163003">"Видалити"</string>
     <string name="misc_files" msgid="6720680815969643497">"Різні файли"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"вибрано <xliff:g id="NUMBER">%1$d</xliff:g> з <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2346,22 +2345,33 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Останні пошукові запити"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Результати"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi network connection"</string>
-    <string name="keywords_more_default_sms_app" msgid="2744404159003574745">"текстове повідомлення"</string>
-    <string name="keywords_more_mobile_networks" msgid="7813380887358745769">"стільниковий мобільний оператор бездротові мережі"</string>
+    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
+    <skip />
+    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
+    <skip />
     <string name="keywords_home" msgid="3626170808219458848">"панель запуску"</string>
     <string name="keywords_display" msgid="6709007669501628320">"сенсорний екран дисплея"</string>
-    <string name="keywords_display_brightness_level" msgid="8636451602230815191">"сенсорний екран затемненого дисплея"</string>
-    <string name="keywords_display_auto_brightness" msgid="8070218600502753102">"сенсорний екран затемненого дисплея"</string>
-    <string name="keywords_display_wallpaper" msgid="4315466287469834939">"фон"</string>
+    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
+    <skip />
+    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
+    <skip />
+    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
+    <skip />
     <string name="keywords_display_font_size" msgid="3404655440064726124">"розмір шрифту"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"проект"</string>
-    <string name="keywords_storage" msgid="7007275853993419928">"місце диск жорсткий диск"</string>
-    <string name="keywords_battery" msgid="3992479295298655138">"живлення"</string>
-    <string name="keywords_spell_checker" msgid="4509482591225399210">"перевірка орфографії"</string>
+    <!-- no translation found for keywords_storage (6572905220031852173) -->
+    <skip />
+    <!-- no translation found for keywords_battery (2096185085932675704) -->
+    <skip />
+    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
+    <skip />
     <string name="keywords_voice_input" msgid="3519547605812413860">"розпізнавач ввід мовлення диктувати мова гарнітура розпізнавання образливе слово аудіо історія bluetooth динамік"</string>
-    <string name="keywords_text_to_speech_output" msgid="8207889472282225512">"швидкість мова за умовчанням диктувати диктування"</string>
-    <string name="keywords_date_and_time" msgid="7666950126499155141">"годинник"</string>
-    <string name="keywords_factory_data_reset" msgid="3693730656843989732">"стерти"</string>
+    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
+    <skip />
+    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
+    <skip />
+    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
+    <skip />
     <string name="keywords_printing" msgid="1701778563617114846">"принтер"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"сигнал динаміка"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"не турбувати переривати переривання пріоритетні сповіщення втручатися"</string>
@@ -2370,7 +2380,8 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"точність"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"обліковий запис"</string>
     <string name="keywords_users" msgid="4673901601478559100">"обмеження обмежувати обмежено"</string>
-    <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"виправлення тексту виправляти звук вібросигнал автоматично мова жест пропонувати пропозиція тема образливе слово водити смайли emoji"</string>
+    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем пароль ключ PIN-код"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Налаштувати NFC-тег для Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записати"</string>
@@ -2444,16 +2455,12 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Готово"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Доки ви не вимкнете"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Пріоритетні сповіщення"</string>
-    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
-    <skip />
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Простій"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Дні"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Немає"</string>
-    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
-    <skip />
-    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
-    <skip />
-    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
-    <skip />
+    <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Сповіщення дозволено"</string>
+    <string name="zen_mode_downtime_mode_priority" msgid="1599184173608032994">"Лише пріоритетні"</string>
+    <string name="zen_mode_downtime_mode_none" msgid="8572229891146527069">"Немає"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Автоматизація"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Вмикати автоматично"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2480,7 +2487,8 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Увімкнено"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Вимкнено"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Закріплення екрана"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Коли цю функцію ввімкнено, ви можете закріпити поточний екран, щоб постійно бачити його, доки не відкріпите.\n\nВиконайте вказані нижче дії.\n\n1. Переконайтеся, що функцію закріплення екрана ввімкнено.\n\n2. Відкрийте екран, який ви хочете закріпити.\n\n3. Торкніться опції \"Огляд\".\n\n4. Торкніться значка шпильки."</string>
+    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
+    <skip />
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Запитувати ключ розблокування перед відкріпленням"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Запитувати PIN-код перед відкріпленням"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Запитувати пароль перед відкріпленням"</string>
