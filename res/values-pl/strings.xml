@@ -556,13 +556,7 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Jako telefon w trybie głośnika"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Dla muzyki i multimediów"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamiętaj ustawienia"</string>
-    <string name="wifi_assistant_intro_setup" msgid="4605105515416995110">"Poznaj\nAsystenta Wi‑Fi"</string>
-    <string name="wifi_assistant_no_thanks" msgid="2776983751990143934">"NIE, DZIĘKUJĘ"</string>
-    <string name="wifi_assistant_setup" msgid="3772423650475730906">"SKONFIGURUJ"</string>
-    <string name="wifi_assistant_card_message" msgid="107811647784658536">"Automatycznie łącz się z dostępnymi sieciami dzięki Asystentowi Wi‑Fi."</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Asystent Wi‑Fi"</string>
-    <string name="wifi_assistant_title_message" msgid="6240721017579074015">"<xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> automatycznie łączy urządzenie z najlepszą dostępną siecią Wi‑Fi"</string>
-    <string name="wifi_assistant_open_app" msgid="4803044899535675063">"OTWÓRZ APLIKACJĘ"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Ekran Cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Wyświetlacz bezprzewodowy"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Brak urządzeń w pobliżu."</string>
@@ -629,8 +623,7 @@
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Skanuj"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Zaawansowane"</string>
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Połącz z siecią"</string>
-    <!-- no translation found for wifi_menu_remember (8814185749388713796) -->
-    <skip />
+    <string name="wifi_menu_remember" msgid="8814185749388713796">"Zapamiętaj sieć"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Zapomnij sieć"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Modyfikuj sieć"</string>
     <string name="wifi_menu_write_to_nfc" msgid="7692881642188240324">"Zapisz do tagu NFC"</string>
@@ -675,14 +668,11 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(nie określono)"</string>
     <string name="wifi_remembered" msgid="4955746899347821096">"Zapisana"</string>
     <string name="wifi_disabled_generic" msgid="4259794910584943386">"Wyłączona"</string>
-    <!-- no translation found for wifi_disabled_network_failure (2364951338436007124) -->
-    <skip />
-    <!-- no translation found for wifi_disabled_wifi_failure (3081668066612876581) -->
-    <skip />
+    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"Błąd konfiguracji IP"</string>
+    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"Błąd połączenia Wi-Fi"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problem z uwierzytelnianiem"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Poza zasięgiem"</string>
-    <!-- no translation found for wifi_no_internet (9151470775868728896) -->
-    <skip />
+    <string name="wifi_no_internet" msgid="9151470775868728896">"Nie wykryto dostępu do internetu. Nie można automatycznie przywrócić połączenia."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Protokół WPS jest dostępny"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (protokół WPS dostępny)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Podaj hasło do sieci"</string>
@@ -1243,7 +1233,8 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Nośnik USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Na karcie SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Wyłączone"</string>
-    <string name="not_installed" msgid="1475144352069281880">"Nie zainstalowano"</string>
+    <!-- no translation found for not_installed (2797554494953450291) -->
+    <skip />
     <string name="no_applications" msgid="7336588977497084921">"Brak aplikacji"</string>
     <string name="internal_storage" msgid="1584700623164275282">"Pamięć wewnętrzna"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Nośnik USB"</string>
@@ -1442,14 +1433,10 @@
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Przechwyć wszystkie pakiety Bluetooth HCI do pliku"</string>
     <string name="oem_unlock_enable" msgid="6629321276287913315">"Włącz zdjęcie blokady OEM"</string>
     <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Zezwól na zdjęcie blokady OEM urządzenia"</string>
-    <!-- no translation found for oem_unlock_enable_pin_prompt (2398518281753145705) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_pin_description (1373634087885107329) -->
-    <skip />
-    <!-- no translation found for confirm_enable_oem_unlock_title (5704707409461191290) -->
-    <skip />
-    <!-- no translation found for confirm_enable_oem_unlock_text (3613451506484517501) -->
-    <skip />
+    <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Wpisz kod PIN"</string>
+    <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Aby włączyć zdjęcie blokady OEM, wpisz kod PIN urządzenia"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Ostrzeżenie"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Włączenie zdjęcia blokady OEM wyłączy funkcje ochrony przed kradzieżą na tym urządzeniu i może unieważnić gwarancję. Kontynuować?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Wyświetlacz bezprzewodowy"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Włącz szczegółowe rejestrowanie Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Agresywne przeł. Wi‑Fi na sieć komórkową"</string>
@@ -1840,7 +1827,7 @@
     <string name="credentials_not_erased" msgid="93461830775441220">"Nie można wymazać magazynu."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Magazyn danych logowania jest włączony."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="6757119179588664966">"Aby korzystać z magazynu danych logowania, musisz ustawić kod PIN lub hasło blokady ekranu."</string>
-    <string name="usage_access_title" msgid="332333405495457839">"Mają dostęp do użytkowania"</string>
+    <string name="usage_access_title" msgid="332333405495457839">"Aplikacje monitorujące"</string>
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Zezwolić na dostęp?"</string>
     <string name="allow_usage_access_message" msgid="2295847177051307496">"Jeśli zezwolisz tej aplikacji na dostęp, będzie ona mogła sprawdzać ogólne informacje o aplikacjach na urządzeniu – np. jak często ich używasz."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sygnał alarmowy"</string>
@@ -1965,7 +1952,16 @@
     <string name="enter_password" msgid="8035706727471334122">"Aby uruchomić Androida, wpisz hasło"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Aby uruchomić Androida, wpisz kod PIN"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Aby uruchomić Androida, narysuj wzór"</string>
-    <string name="try_again" msgid="4272075051293936921">"Spróbuj ponownie."</string>
+    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
+    <skip />
+    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
+    <skip />
+    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
+    <skip />
+    <!-- no translation found for checking_decryption (8287458611802609493) -->
+    <skip />
+    <!-- no translation found for starting_android (8581493237458496835) -->
+    <skip />
     <string name="delete" msgid="4219243412325163003">"Usuń"</string>
     <string name="misc_files" msgid="6720680815969643497">"Różne pliki"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"wybrano <xliff:g id="NUMBER">%1$d</xliff:g> z <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2205,7 +2201,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Użytkownikami może zarządzać tylko właściciel telefonu."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Profile z ograniczeniami nie mogą dodawać kont"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Usuń użytkownika <xliff:g id="USER_NAME">%1$s</xliff:g> z tego urządzenia"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Dodawaj użytkowników, gdy urządzenie jest zablokowane"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Dodawaj użytk. przy blokadzie"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nowy użytkownik"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nowy profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcesz usunąć siebie?"</string>
@@ -2342,22 +2338,33 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Niedawno wyszukiwane hasła"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Wyniki"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi połączenie internet"</string>
-    <string name="keywords_more_default_sms_app" msgid="2744404159003574745">"wiadomość tekstowa"</string>
-    <string name="keywords_more_mobile_networks" msgid="7813380887358745769">"operator sieci komórkowej komórkowy bezprzewodowy"</string>
+    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
+    <skip />
+    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
+    <skip />
     <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ekran dotykowy"</string>
-    <string name="keywords_display_brightness_level" msgid="8636451602230815191">"przyciemnij ekran dotykowy"</string>
-    <string name="keywords_display_auto_brightness" msgid="8070218600502753102">"przyciemnij ekran dotykowy"</string>
-    <string name="keywords_display_wallpaper" msgid="4315466287469834939">"tło"</string>
+    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
+    <skip />
+    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
+    <skip />
+    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
+    <skip />
     <string name="keywords_display_font_size" msgid="3404655440064726124">"rozmiar tekstu"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"projekcja"</string>
-    <string name="keywords_storage" msgid="7007275853993419928">"miejsce dysk twardy"</string>
-    <string name="keywords_battery" msgid="3992479295298655138">"zasilanie"</string>
-    <string name="keywords_spell_checker" msgid="4509482591225399210">"pisownia"</string>
+    <!-- no translation found for keywords_storage (6572905220031852173) -->
+    <skip />
+    <!-- no translation found for keywords_battery (2096185085932675704) -->
+    <skip />
+    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
+    <skip />
     <string name="keywords_voice_input" msgid="3519547605812413860">"rozpoznawanie wejście wprowadzanie mowa mówić język zestaw głośnomówiący obsługa bez użycia rąk rozpoznawanie obraźliwe słowo historia dźwięku zestaw słuchawkowy bluetooth"</string>
-    <string name="keywords_text_to_speech_output" msgid="8207889472282225512">"szybkość język domyślny mowa mówienie"</string>
-    <string name="keywords_date_and_time" msgid="7666950126499155141">"zegar"</string>
-    <string name="keywords_factory_data_reset" msgid="3693730656843989732">"wymazywanie usuwanie"</string>
+    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
+    <skip />
+    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
+    <skip />
+    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
+    <skip />
     <string name="keywords_printing" msgid="1701778563617114846">"drukarka"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"sygnał dźwiękowy"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"nie przeszkadzać przerywać zakłócać"</string>
@@ -2366,7 +2373,8 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"dokładność"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"konto"</string>
     <string name="keywords_users" msgid="4673901601478559100">"ograniczenie ogranicz ograniczony"</string>
-    <string name="keywords_keyboard_and_ime" msgid="1103378692379215672">"poprawianie tekstu korekta dźwięk wibracje auto język gest podpowiadanie podpowiedź sugestia sugestie motyw obraźliwe słowo pisanie emotikon"</string>
+    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"przesuwanie hasło wzór pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Skonfiguruj tag NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Zapisz"</string>
@@ -2440,16 +2448,12 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Gotowe"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Dopóki nie wyłączysz"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Przerwy priorytetowe"</string>
-    <!-- no translation found for zen_mode_downtime_category (2654477732333340290) -->
-    <skip />
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Powiadomienia wyłączone"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Dni"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Brak"</string>
-    <!-- no translation found for zen_mode_downtime_mode_title (7249388756365079715) -->
-    <skip />
-    <!-- no translation found for zen_mode_downtime_mode_priority (1599184173608032994) -->
-    <skip />
-    <!-- no translation found for zen_mode_downtime_mode_none (8572229891146527069) -->
-    <skip />
+    <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Powiadomienia dozwolone"</string>
+    <string name="zen_mode_downtime_mode_priority" msgid="1599184173608032994">"Tylko priorytetowe"</string>
+    <string name="zen_mode_downtime_mode_none" msgid="8572229891146527069">"Brak"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatyzacja"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Włącz automatycznie"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
@@ -2476,7 +2480,8 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Wł."</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Wył."</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Przypinanie ekranu"</string>
-    <string name="screen_pinning_description" msgid="7091642350452605379">"Kiedy włączysz przypięcie ekranu, bieżący ekran będzie ciągle widoczny, póki go nie odepniesz.\n\nAby skorzystać z przypięcia ekranu:\n\n1. Upewnij się, że funkcja przypinania ekranu jest włączona.\n\n2. Otwórz ekran, który chcesz przypiąć.\n\n3. Kliknij Przegląd.\n\n4. Kliknij ikonę pinezki."</string>
+    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
+    <skip />
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Aby odpiąć, poproś o wzór odblokowania"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Aby odpiąć, poproś o PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Aby odpiąć, poproś o hasło"</string>
