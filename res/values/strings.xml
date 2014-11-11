@@ -5902,8 +5902,14 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: End time option -->
     <string name="zen_mode_end_time">End time</string>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: End time option: Summary text value format -->
-    <string name="zen_mode_end_time_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
+    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when downtime mode = priority and end time = next day -->
+    <string name="zen_mode_end_time_priority_next_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
+
+    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when downtime mode = none and end time = same day -->
+    <string name="zen_mode_end_time_none_same_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> or any alarm before</string>
+
+    <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when downtime mode = none and end time = next day -->
+    <string name="zen_mode_end_time_none_next_day_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day or any alarm before</string>
 
     <!-- [CHAR LIMIT=20] Notifications settings: Apps section header -->
     <string name="notification_settings_apps_title">App notifications</string>

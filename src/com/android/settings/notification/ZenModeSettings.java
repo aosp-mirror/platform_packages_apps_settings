@@ -379,7 +379,15 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         final int startMin = 60 * mConfig.sleepStartHour + mConfig.sleepStartMinute;
         final int endMin = 60 * mConfig.sleepEndHour + mConfig.sleepEndMinute;
         final boolean nextDay = startMin >= endMin;
-        mEnd.setSummaryFormat(nextDay ? R.string.zen_mode_end_time_summary_format : 0);
+        final int summaryFormat;
+        if (mConfig.sleepNone) {
+            summaryFormat = nextDay ? R.string.zen_mode_end_time_none_next_day_summary_format
+                    : R.string.zen_mode_end_time_none_same_day_summary_format;
+        } else {
+            summaryFormat = nextDay ? R.string.zen_mode_end_time_priority_next_day_summary_format
+                    : 0;
+        }
+        mEnd.setSummaryFormat(summaryFormat);
     }
 
     private void updateControls() {
