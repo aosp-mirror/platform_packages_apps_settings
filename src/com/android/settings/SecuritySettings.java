@@ -336,7 +336,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
         // Side loading of apps.
-        mToggleAppInstallation.setEnabled(mIsPrimary);
+        // Disable for restricted profiles. For others, check if policy disallows it.
+        mToggleAppInstallation.setEnabled(!um.getUserInfo(UserHandle.myUserId()).isRestricted());
         if (um.hasUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES)
                 || um.hasUserRestriction(UserManager.DISALLOW_INSTALL_APPS)) {
             mToggleAppInstallation.setEnabled(false);
