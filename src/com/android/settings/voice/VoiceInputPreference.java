@@ -110,7 +110,9 @@ public final class VoiceInputPreference extends Preference {
         textLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onRadioButtonClicked(rb, !rb.isChecked());
+                if (!rb.isChecked()) {
+                    onRadioButtonClicked(rb, true);
+                }
             }
         });
 
@@ -216,6 +218,7 @@ public final class VoiceInputPreference extends Preference {
         mSharedState.setCurrentKey(getKey());
         updateCheckedState(true);
         callChangeListener(mSharedState.getCurrentKey());
+        current.setChecked(true);
     }
 
     /**
