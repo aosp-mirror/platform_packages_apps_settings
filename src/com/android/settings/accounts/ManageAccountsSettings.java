@@ -28,7 +28,6 @@ import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -84,6 +83,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     // If an account type is set, then show only accounts of that type
     private String mAccountType;
     // Temporary hack, to deal with backward compatibility 
+    // mFirstAccount is used for the injected preferences
     private Account mFirstAccount;
 
     @Override
@@ -170,11 +170,9 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
-                getString(R.string.sync_menu_sync_now))
+        menu.add(0, MENU_SYNC_NOW_ID, 0, getString(R.string.sync_menu_sync_now))
                 .setIcon(R.drawable.ic_menu_refresh_holo_dark);
-        MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
-                getString(R.string.sync_menu_sync_cancel))
+        menu.add(0, MENU_SYNC_CANCEL_ID, 0, getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -182,10 +180,10 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        boolean syncActive = ContentResolver.getCurrentSyncsAsUser(
+        boolean syncActive = !ContentResolver.getCurrentSyncsAsUser(
                 mUserHandle.getIdentifier()).isEmpty();
-        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive && mFirstAccount != null);
-        menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive && mFirstAccount != null);
+        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
+        menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
     }
 
     @Override
@@ -233,6 +231,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     protected void onSyncStateUpdated() {
         showSyncState();
+        getActivity().invalidateOptionsMenu();
     }
 
     /**
@@ -380,7 +379,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                 getPreferenceScreen().addPreference(preference);
                 if (mFirstAccount == null) {
                     mFirstAccount = account;
-                    getActivity().invalidateOptionsMenu();
                 }
             }
         }

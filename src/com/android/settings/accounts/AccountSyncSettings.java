@@ -258,7 +258,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         // Note that this also counts accounts that are not currently displayed
-        boolean syncActive = ContentResolver.getCurrentSyncsAsUser(
+        boolean syncActive = !ContentResolver.getCurrentSyncsAsUser(
                 mUserHandle.getIdentifier()).isEmpty();
         menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
@@ -367,6 +367,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     protected void onSyncStateUpdated() {
         if (!isResumed()) return;
         setFeedsState();
+        getActivity().invalidateOptionsMenu();
     }
 
     private void setFeedsState() {
