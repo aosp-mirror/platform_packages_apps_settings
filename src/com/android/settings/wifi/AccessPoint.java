@@ -616,9 +616,10 @@ class AccessPoint extends Preference {
         // Update to new summary
         StringBuilder summary = new StringBuilder();
 
-        if (isActive()) {
+        if (isActive()) { // This is the active connection
             summary.append(Summary.get(context, getState()));
-        } else if (mConfig != null && mConfig.noInternetAccess) {
+        } else if (mConfig != null
+                && mConfig.hasNoInternetAccess()) {
             summary.append(context.getString(R.string.wifi_no_internet));
         } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
                 mConfig.disableReason != WifiConfiguration.DISABLED_UNKNOWN_REASON)
@@ -657,8 +658,8 @@ class AccessPoint extends Preference {
         }
 
         if (WifiSettings.mVerboseLogging > 0) {
-            //add RSSI/band information for this config, what was seen up to 6 seconds ago
-            //verbose WiFi Logging is only turned on thru developers settings
+            // Add RSSI/band information for this config, what was seen up to 6 seconds ago
+            // verbose WiFi Logging is only turned on thru developers settings
             if (mInfo != null && mNetworkInfo != null) { // This is the active connection
                 summary.append(" f=" + Integer.toString(mInfo.getFrequency()));
             }
@@ -686,6 +687,9 @@ class AccessPoint extends Preference {
             }
             if (mConfig != null && mConfig.numAuthFailures > 0) {
                 summary.append(" authf=").append(mConfig.numAuthFailures);
+            }
+            if (mConfig != null && mConfig.numNoInternetAccessReports > 0) {
+                summary.append(" noInt=").append(mConfig.numNoInternetAccessReports);
             }
         }
 
