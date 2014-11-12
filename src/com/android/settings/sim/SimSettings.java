@@ -22,6 +22,7 @@ import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -322,7 +323,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         ListAdapter adapter = new SelectAccountListAdapter(
                 builder.getContext(),
                 R.layout.select_account_list_item,
-                arr);
+                arr, id);
 
         if (id == DATA_PICK) {
             builder.setTitle(R.string.select_sim_for_data);
@@ -339,43 +340,61 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private class SelectAccountListAdapter extends ArrayAdapter<String> {
         private Context mContext;
         private int mResId;
+        private int mDialogId;
+        private final float OPACITY = 0.54f;
 
         public SelectAccountListAdapter(
-                Context context, int resource, String[] arr) {
+                Context context, int resource, String[] arr, int dialogId) {
             super(context, resource, arr);
             mContext = context;
             mResId = resource;
+            mDialogId = dialogId;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater)
                     mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
             View rowView;
             final ViewHolder holder;
+            SubscriptionInfo sir;
 
             if (convertView == null) {
                 // Cache views for faster scrolling
                 rowView = inflater.inflate(mResId, null);
                 holder = new ViewHolder();
-                holder.textView = (TextView) rowView.findViewById(R.id.text);
-                holder.imageView = (ImageView) rowView.findViewById(R.id.icon);
+                holder.title = (TextView) rowView.findViewById(R.id.title);
+                holder.summary = (TextView) rowView.findViewById(R.id.summary);
+                holder.icon = (ImageView) rowView.findViewById(R.id.icon);
                 rowView.setTag(holder);
-            }
-            else {
+            } else {
                 rowView = convertView;
                 holder = (ViewHolder) rowView.getTag();
             }
 
-            holder.textView.setText(getItem(position));
-            holder.imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_sim_sd));
+            if (mDialogId == CALLS_PICK && position == 0) {
+                holder.title.setText(getItem(position));
+                holder.summary.setText("");
+                holder.icon.setImageDrawable(getResources()
+                        .getDrawable(R.drawable.ic_live_help));
+                holder.icon.setAlpha(OPACITY);
+            } else {
+                if (mDialogId == CALLS_PICK && position != 0) {
+                    sir = mSelectableSubInfos.get(position - 1);
+                } else {
+                    sir = mSelectableSubInfos.get(position);
+                }
+                holder.title.setText(sir.getDisplayName());
+                holder.summary.setText(sir.getNumber());
+                holder.icon.setImageBitmap(sir.createIconBitmap(mContext));
+            }
             return rowView;
         }
 
         private class ViewHolder {
-            TextView textView;
-            ImageView imageView;
+            TextView title;
+            TextView summary;
+            ImageView icon;
         }
     }
 
@@ -397,10 +416,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         private SubscriptionInfo mSubInfoRecord;
         private int mSlotId;
         private int[] tintArr;
+        Context mContext;
 
         public SimPreference(Context context, SubscriptionInfo subInfoRecord, int slotId) {
             super(context);
 
+            mContext = context;
             mSubInfoRecord = subInfoRecord;
             mSlotId = slotId;
             setKey("sim" + mSlotId);
@@ -411,30 +432,21 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         public void update() {
             final Resources res = getResources();
 
+            setTitle(String.format(getResources()
+                    .getString(R.string.sim_editor_title), (mSlotId + 1)));
             if (mSubInfoRecord != null) {
-                setTitle(String.format(res.getString(R.string.sim_editor_title),
-                        (mSubInfoRecord.getSimSlotIndex() + 1)));
-                setSummary(mSubInfoRecord.getDisplayName() + " - " +
-                        mSubInfoRecord.getNumber().toString());
-                setEnabled(true);
+                if (TextUtils.isEmpty(mSubInfoRecord.getNumber().toString())) {
+                   setSummary(mSubInfoRecord.getDisplayName());
+                } else {
+                    setSummary(mSubInfoRecord.getDisplayName() + " - " +
+                            mSubInfoRecord.getNumber().toString());
+                    setEnabled(true);
+                }
+                setIcon(new BitmapDrawable(res, (mSubInfoRecord.createIconBitmap(mContext))));
             } else {
                 setSummary(R.string.sim_slot_empty);
                 setFragment(null);
                 setEnabled(false);
-            }
-        }
-
-        public String getFormattedPhoneNumber() {
-            try{
-                final String rawNumber = PhoneFactory.getPhone(mSlotId).getLine1Number();
-                String formattedNumber = null;
-                if (!TextUtils.isEmpty(rawNumber)) {
-                    formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
-                }
-
-                return formattedNumber;
-            } catch (java.lang.IllegalStateException ise){
-                return "Unknown";
             }
         }
 
@@ -480,7 +492,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             });
 
             TextView numberView = (TextView)dialogLayout.findViewById(R.id.number);
-            numberView.setText(simPref.getFormattedPhoneNumber());
+            final String rawNumber = mSubInfoRecord.getNumber();
+            if (TextUtils.isEmpty(rawNumber)) {
+                numberView.setText(res.getString(com.android.internal.R.string.unknownName));
+            } else {
+                numberView.setText(PhoneNumberUtils.formatNumber(rawNumber));
+            }
 
             TextView carrierView = (TextView)dialogLayout.findViewById(R.id.carrier);
             carrierView.setText(mSubInfoRecord.getCarrierName());
