@@ -24,7 +24,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.telephony.SubInfoRecord;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -101,7 +101,7 @@ public class ImeiInformation extends PreferenceActivity {
     }
 
     private Phone getPhoneFromSlotId(int slotId) {
-        final List<SubInfoRecord> subInfos = SubscriptionManager.getSubInfoUsingSlotId(slotId);
+        final List<SubscriptionInfo> subInfos = SubscriptionManager.getSubscriptionInfoUsingSlotId(slotId);
 
         if (subInfos == null || subInfos.size() < 1) {
             return null;
