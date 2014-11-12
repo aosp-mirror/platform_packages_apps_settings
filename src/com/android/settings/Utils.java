@@ -60,7 +60,7 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.service.persistentdata.PersistentDataBlockManager;
-import android.telephony.SubInfoRecord;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -988,12 +988,13 @@ public final class Utils {
      * finds a record with subId.
      * Since the number of SIMs are few, an array is fine.
      */
-    public static SubInfoRecord findRecordBySubId(final int subId) {
-        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+    public static SubscriptionInfo findRecordBySubId(final int subId) {
+        final List<SubscriptionInfo> subInfoList =
+                SubscriptionManager.getActiveSubscriptionInfoList();
         final int subInfoLength = subInfoList.size();
 
         for (int i = 0; i < subInfoLength; ++i) {
-            final SubInfoRecord sir = subInfoList.get(i);
+            final SubscriptionInfo sir = subInfoList.get(i);
             if (sir != null && sir.getSubscriptionId() == subId) {
                 return sir;
             }
@@ -1006,12 +1007,13 @@ public final class Utils {
      * finds a record with slotId.
      * Since the number of SIMs are few, an array is fine.
      */
-    public static SubInfoRecord findRecordBySlotId(final int slotId) {
-        final List<SubInfoRecord> subInfoList = SubscriptionManager.getActiveSubInfoList();
+    public static SubscriptionInfo findRecordBySlotId(final int slotId) {
+        final List<SubscriptionInfo> subInfoList =
+                SubscriptionManager.getActiveSubscriptionInfoList();
         final int subInfoLength = subInfoList.size();
 
         for (int i = 0; i < subInfoLength; ++i) {
-            final SubInfoRecord sir = subInfoList.get(i);
+            final SubscriptionInfo sir = subInfoList.get(i);
             if (sir.getSimSlotIndex() == slotId) {
                 //Right now we take the first subscription on a SIM.
                 return sir;
