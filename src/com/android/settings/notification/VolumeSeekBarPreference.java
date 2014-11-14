@@ -23,13 +23,17 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.preference.SeekBarPreference;
 import android.preference.SeekBarVolumizer;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.android.settings.R;
+
+import java.util.Objects;
 
 /** A slider preference that directly controls an audio stream volume (no dialog) **/
 public class VolumeSeekBarPreference extends SeekBarPreference
@@ -41,10 +45,13 @@ public class VolumeSeekBarPreference extends SeekBarPreference
     private SeekBarVolumizer mVolumizer;
     private Callback mCallback;
     private ImageView mIconView;
+    private TextView mSuppressionTextView;
+    private String mSuppressionText;
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        setLayoutResource(R.layout.preference_volume_slider);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -108,13 +115,14 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         mVolumizer.start();
         mVolumizer.setSeekBar(mSeekBar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
+        mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
         mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
+        updateSuppressionText();
     }
 
     // during initialization, this preference is the SeekBar listener
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress,
-            boolean fromTouch) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
         super.onProgressChanged(seekBar, progress, fromTouch);
         mCallback.onStreamValueChanged(mStream, progress);
     }
@@ -131,6 +139,21 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
                 + getContext().getPackageName()
                 + "/" + R.raw.media_volume);
+    }
+
+    public void setSuppressionText(String text) {
+        if (Objects.equals(text, mSuppressionText)) return;
+        mSuppressionText = text;
+        updateSuppressionText();
+    }
+
+    private void updateSuppressionText() {
+        if (mSuppressionTextView != null && mSeekBar != null) {
+            mSuppressionTextView.setText(mSuppressionText);
+            final boolean showSuppression = !TextUtils.isEmpty(mSuppressionText);
+            mSuppressionTextView.setVisibility(showSuppression ? View.VISIBLE : View.INVISIBLE);
+            mSeekBar.setVisibility(showSuppression ? View.INVISIBLE : View.VISIBLE);
+        }
     }
 
     public interface Callback {
