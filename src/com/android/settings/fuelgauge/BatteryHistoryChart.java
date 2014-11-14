@@ -666,32 +666,10 @@ public class BatteryHistoryChart extends View {
     }
 
     private boolean isDayFirst() {
-        String value = Settings.System.getString(mContext.getContentResolver(),
-                Settings.System.DATE_FORMAT);
-        if (value == null) {
-            LocaleData d = LocaleData.get(mContext.getResources().getConfiguration().locale);
-            value = d.shortDateFormat4;
-        }
+        LocaleData d = LocaleData.get(mContext.getResources().getConfiguration().locale);
+        String value = d.shortDateFormat4;
         return value.indexOf('M') > value.indexOf('d');
     }
-
-    /*
-    private void buildTime() {
-        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
-        final Calendar now = Calendar.getInstance();
-        mDummyDate.setTimeZone(now.getTimeZone());
-        // We use December 31st because it's unambiguous when demonstrating the date format.
-        // We use 13:00 so we can demonstrate the 12/24 hour options.
-        mDummyDate.set(now.get(Calendar.YEAR), 11, 31, 13, 0, 0);
-        Date dummyDate = mDummyDate.getTime();
-        mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
-        mTimeZone.setSummary(getTimeZoneText(now.getTimeZone(), true));
-        mDatePref.setSummary(shortDateFormat.format(now.getTime()));
-        mDateFormat.setSummary(shortDateFormat.format(dummyDate));
-        mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
-
-    }
-    */
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
