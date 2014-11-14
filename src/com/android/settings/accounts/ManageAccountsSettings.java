@@ -231,7 +231,11 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     @Override
     protected void onSyncStateUpdated() {
         showSyncState();
-        getActivity().invalidateOptionsMenu();
+        // Catch any delayed delivery of update messages
+        final Activity activity = getActivity();
+        if (activity != null) {
+            activity.invalidateOptionsMenu();
+        }
     }
 
     /**
