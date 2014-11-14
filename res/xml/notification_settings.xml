@@ -27,25 +27,25 @@
         <!-- Media volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="media_volume"
-                android:icon="@drawable/ic_audio_vol_24dp"
+                android:icon="@*android:drawable/ic_audio_vol"
                 android:title="@string/media_volume_option_title" />
 
         <!-- Alarm volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="alarm_volume"
-                android:icon="@drawable/ic_audio_alarm_24dp"
+                android:icon="@*android:drawable/ic_audio_alarm"
                 android:title="@string/alarm_volume_option_title" />
 
         <!-- Ring volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="ring_volume"
-                android:icon="@drawable/ring_notif"
+                android:icon="@*android:drawable/ic_audio_ring_notif"
                 android:title="@string/ring_volume_option_title" />
 
         <!-- Notification volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="notification_volume"
-                android:icon="@drawable/ring_notif"
+                android:icon="@*android:drawable/ic_audio_ring_notif"
                 android:title="@string/notification_volume_option_title" />
 
         <!-- Also vibrate for calls -->

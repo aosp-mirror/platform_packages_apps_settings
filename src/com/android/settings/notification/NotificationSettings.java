@@ -16,9 +16,15 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
@@ -42,7 +48,6 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 
-import android.widget.SeekBar;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -53,6 +58,7 @@ import com.android.settings.search.Indexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class NotificationSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "NotificationSettings";
@@ -75,6 +81,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private final VolumePreferenceCallback mVolumeCallback = new VolumePreferenceCallback();
     private final H mHandler = new H();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
+    private final Receiver mReceiver = new Receiver();
 
     private Context mContext;
     private PackageManager mPM;
@@ -90,6 +97,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private Preference mNotificationAccess;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
+    private ComponentName mSuppressor;
+    private int mRingOrNotificationProgress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,6 +137,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
+        updateEffectsSuppressor();
     }
 
     @Override
@@ -136,6 +146,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         refreshNotificationListeners();
         lookupRingtoneNames();
         mSettingsObserver.register(true);
+        mReceiver.register(true);
+        updateEffectsSuppressor();
     }
 
     @Override
@@ -143,6 +155,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         super.onPause();
         mVolumeCallback.stopSample();
         mSettingsObserver.register(false);
+        mReceiver.register(false);
     }
 
     // === Volumes ===
@@ -154,12 +167,46 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         return volumePref;
     }
 
-    private void updateRingOrNotificationIcon(int progress) {
-        mRingOrNotificationPreference.showIcon(progress > 0
-                    ? R.drawable.ring_notif
-                    : (mVibrator == null
-                            ? R.drawable.ring_notif_mute
-                            : R.drawable.ring_notif_vibrate));
+    private void updateRingOrNotificationIcon() {
+        mRingOrNotificationPreference.showIcon(mSuppressor != null
+                ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
+                : mRingOrNotificationProgress > 0
+                        ? com.android.internal.R.drawable.ic_audio_ring_notif
+                        : (mVibrator == null
+                                ? com.android.internal.R.drawable.ic_audio_ring_notif_mute
+                                : com.android.internal.R.drawable.ic_audio_ring_notif_vibrate));
+    }
+
+    private void updateEffectsSuppressor() {
+        final ComponentName suppressor = NotificationManager.from(mContext).getEffectsSuppressor();
+        if (Objects.equals(suppressor, mSuppressor)) return;
+        mSuppressor = suppressor;
+        if (mRingOrNotificationPreference != null) {
+            final String text = suppressor != null ?
+                    mContext.getString(com.android.internal.R.string.muted_by,
+                            getSuppressorCaption(suppressor)) : null;
+            mRingOrNotificationPreference.setSuppressionText(text);
+        }
+        updateRingOrNotificationIcon();
+    }
+
+    private String getSuppressorCaption(ComponentName suppressor) {
+        final PackageManager pm = mContext.getPackageManager();
+        try {
+            final ServiceInfo info = pm.getServiceInfo(suppressor, 0);
+            if (info != null) {
+                final CharSequence seq = info.loadLabel(pm);
+                if (seq != null) {
+                    final String str = seq.toString().trim();
+                    if (str.length() > 0) {
+                        return str;
+                    }
+                }
+            }
+        } catch (Throwable e) {
+            Log.w(TAG, "Error loading suppressor caption", e);
+        }
+        return suppressor.getPackageName();
     }
 
     private final class VolumePreferenceCallback implements VolumeSeekBarPreference.Callback {
@@ -464,6 +511,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         private static final int UPDATE_NOTIFICATION_RINGTONE = 2;
         private static final int STOP_SAMPLE = 3;
         private static final int UPDATE_RINGER_ICON = 4;
+        private static final int UPDATE_EFFECTS_SUPPRESSOR = 5;
 
         private H() {
             super(Looper.getMainLooper());
@@ -482,9 +530,33 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                     mVolumeCallback.stopSample();
                     break;
                 case UPDATE_RINGER_ICON:
-                    updateRingOrNotificationIcon(msg.arg1);
+                    mRingOrNotificationProgress = msg.arg1;
+                    updateRingOrNotificationIcon();
+                    break;
+                case UPDATE_EFFECTS_SUPPRESSOR:
+                    updateEffectsSuppressor();
                     break;
             }
+        }
+    }
+
+    private class Receiver extends BroadcastReceiver {
+        private boolean mRegistered;
+
+        public void register(boolean register) {
+            if (mRegistered == register) return;
+            if (register) {
+                mContext.registerReceiver(this,
+                        new IntentFilter(NotificationManager.ACTION_EFFECTS_SUPPRESSOR_CHANGED));
+            } else {
+                mContext.unregisterReceiver(this);
+            }
+            mRegistered = register;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mHandler.sendEmptyMessage(H.UPDATE_EFFECTS_SUPPRESSOR);
         }
     }
 
