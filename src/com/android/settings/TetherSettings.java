@@ -16,11 +16,7 @@
 
 package com.android.settings;
 
-import com.android.settings.wifi.WifiApEnabler;
-import com.android.settings.wifi.WifiApDialog;
-
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
@@ -31,7 +27,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
@@ -44,16 +39,13 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
-import android.text.TextUtils;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.webkit.WebView;
 import android.widget.TextView;
 
-import java.io.InputStream;
+import com.android.settings.wifi.WifiApDialog;
+import com.android.settings.wifi.WifiApEnabler;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.Locale;
 
 /*
  * Displays preferences for Tethering.
@@ -69,7 +61,6 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     private static final int DIALOG_AP_SETTINGS = 1;
 
-    private WebView mView;
     private SwitchPreference mUsbTether;
 
     private WifiApEnabler mWifiApEnabler;
@@ -182,8 +173,6 @@ public class TetherSettings extends SettingsPreferenceFragment
 
         mProvisionApp = getResources().getStringArray(
                 com.android.internal.R.array.config_mobile_hotspot_provision_app);
-
-        mView = new WebView(activity);
     }
 
     @Override
