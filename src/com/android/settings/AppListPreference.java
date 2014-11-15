@@ -67,6 +67,11 @@ public class AppListPreference extends ListPreference {
         }
     }
 
+    public AppListPreference(Context context, AttributeSet attrs,
+            int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
     public AppListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -105,6 +110,8 @@ public class AppListPreference extends ListPreference {
         setEntryValues(packageNames);
         if (selectedIndex != -1) {
             setValueIndex(selectedIndex);
+        } else {
+            setValue(null);
         }
     }
 
