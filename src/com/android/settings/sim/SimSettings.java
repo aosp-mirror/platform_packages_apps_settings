@@ -115,8 +115,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private PreferenceCategory mSimCards = null;
 
-    private int mNumSims;
-
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
     }
@@ -144,13 +142,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         final int numSlots = tm.getSimCount();
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
         mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
-        mNumSims = 0;
         for (int i = 0; i < numSlots; ++i) {
             final SubscriptionInfo sir = Utils.findRecordBySlotId(i);
             mSimCards.addPreference(new SimPreference(getActivity(), sir, i));
             mAvailableSubInfos.add(sir);
             if (sir != null) {
-                mNumSims++;
                 mSelectableSubInfos.add(sir);
             }
         }
@@ -163,13 +159,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         final int numSlots = tm.getSimCount();
 
-        mNumSims = 0;
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
         for (int i = 0; i < numSlots; ++i) {
             final SubscriptionInfo sir = Utils.findRecordBySlotId(i);
             mAvailableSubInfos.add(sir);
             if (sir != null) {
-                mNumSims++;
             }
         }
     }
@@ -208,7 +202,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
         }
-        simPref.setEnabled(mNumSims >= 1);
+        simPref.setEnabled(mSelectableSubInfos.size() >= 1);
     }
 
     private void updateCellularDataValues() {
@@ -222,7 +216,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
         }
-        simPref.setEnabled(mNumSims >= 1);
+        simPref.setEnabled(mSelectableSubInfos.size() >= 1);
     }
 
     private void updateCallValues() {
@@ -315,8 +309,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             }
         }
 
-        String[] arr = new String[selectableSubInfoLength];
-        arr = list.toArray(arr);
+        String[] arr = list.toArray(new String[0]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -372,18 +365,14 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 holder = (ViewHolder) rowView.getTag();
             }
 
-            if (mDialogId == CALLS_PICK && position == 0) {
+            if (mDialogId == CALLS_PICK) {
                 holder.title.setText(getItem(position));
                 holder.summary.setText("");
                 holder.icon.setImageDrawable(getResources()
                         .getDrawable(R.drawable.ic_live_help));
                 holder.icon.setAlpha(OPACITY);
             } else {
-                if (mDialogId == CALLS_PICK && position != 0) {
-                    sir = mSelectableSubInfos.get(position - 1);
-                } else {
-                    sir = mSelectableSubInfos.get(position);
-                }
+                sir = mSelectableSubInfos.get(position);
                 holder.title.setText(sir.getDisplayName());
                 holder.summary.setText(sir.getNumber());
                 holder.icon.setImageBitmap(sir.createIconBitmap(mContext));
@@ -396,20 +385,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             TextView summary;
             ImageView icon;
         }
-    }
-
-    private void setActivity(Preference preference, SubscriptionInfo sir) {
-        final String key = preference.getKey();
-
-        if (key.equals(KEY_CELLULAR_DATA)) {
-            mCellularData = sir;
-        } else if (key.equals(KEY_CALLS)) {
-            mCalls = sir;
-        } else if (key.equals(KEY_SMS)) {
-            mSMS = sir;
-        }
-
-        updateActivitesCategory();
     }
 
     private class SimPreference extends Preference{
