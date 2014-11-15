@@ -312,6 +312,10 @@
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 
+    <style name="AppListSwitchPreference" parent="@*android:style/Preference.Material.DialogPreference">
+        <item name="android:widgetLayout">@*android:layout/preference_widget_switch</item>
+    </style>
+
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium">
     </style>
 
@@ -341,5 +345,4 @@
     <style name="Widget.TimePicker" parent="@*android:style/Widget.Material.Light.TimePicker">
         <item name="@android:numbersBackgroundColor">@android:color/white</item>
     </style>
-
 </resources>
