@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Espera mentre s\'encripta el telèfon. <xliff:g id="PERCENT">^1</xliff:g>% completat."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Espera mentre s\'encripta la tauleta. Temps restant: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Espera mentre s\'encripta el telèfon. Temps restant: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Torna-ho a provar d\'aquí a <xliff:g id="DELAY">^1</xliff:g> segons."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Advertiment: si proves de desbloquejar el dispositiu <xliff:g id="COUNT">^1</xliff:g> vegades més de manera incorrecta, se n\'esborraran totes les dades."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Escriu la contrasenya"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"S\'ha produït un error en encriptar"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Cerca xarxes sempre"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Permet sempre la cerca"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permet que el servei d\'ubicacions de Google i altres aplicacions cerquin xarxes, fins i tot si la Wi-Fi està desactivada."</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gestiona automàticament la Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Permet que <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> gestioni la connexió Wi‑Fi"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Connecta amb una Wi‑Fi oberta autom."</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Permet que un Assistent de Wi‑Fi valori autom. xarxes Wi-Fi obertes d\'alta qualitat i s\'hi connecti"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Selecciona un Assistent de Wi‑Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instal·la els certificats"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Per millorar la precisió de la ubicació i per a altres finalitats, Google i altres aplicacions poden cercar xarxes properes tot i que la Wi-Fi estigui desactivada. Si no vols que això passi, accedeix a Avançat &gt; Cerca xarxes sempre."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Les aplicacions poden cercar xarxes properes tot i que la Wi-Fi estigui desactivada. Si no vols que això passi, accedeix a Avançat &gt; Cerca xarxes sempre."</string>
@@ -1234,8 +1238,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Emmagatzematge USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"A la targeta SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Desactivada"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"No instal·lada per a l\'usuari"</string>
     <string name="no_applications" msgid="7336588977497084921">"No hi ha aplicacions."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Emmagatzematge intern"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Emmagatzematge USB"</string>
@@ -1953,16 +1956,11 @@
     <string name="enter_password" msgid="8035706727471334122">"Per iniciar Android, introdueix la contrasenya."</string>
     <string name="enter_pin" msgid="5305333588093263790">"Per iniciar Android, introdueix el PIN."</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Per iniciar Android, dibuixa el patró."</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Patró incorrecte"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Contrasenya incorrecta"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"PIN incorrecte"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"S\'està comprovant..."</string>
+    <string name="starting_android" msgid="8581493237458496835">"S\'està iniciant Android."</string>
     <string name="delete" msgid="4219243412325163003">"Suprimeix"</string>
     <string name="misc_files" msgid="6720680815969643497">"Fitxers diversos"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"s\'han seleccionat <xliff:g id="NUMBER">%1$d</xliff:g> de <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2329,6 +2327,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Desactivar nom de xarxa"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Si desactives l\'emissió del nom de la xarxa, els tercers no podran veure la informació de la xarxa."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Si desactives l\'emissió del nom de la xarxa, no et podràs connectar automàticament a xarxes ocultes."</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"SIM preferida per a"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Demana-m\'ho cada vegada"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Has de seleccionar una preferència."</string>
@@ -2339,33 +2338,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Cerques recents"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Resultats"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"connexió xarxa wifi wi-fi"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"missatge de text missatges de text missatges missatgeria"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mòbil telèfon mòbil operador de telefonia mòbil dades sense fil 4g 3g 2g lte"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"pantalla pantalla tàctil"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"pantalla atenuada pantalla tàctil bateria"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"pantalla atenuada pantalla tàctil bateria"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"fons de pantalla personalitzar adaptar pantalla"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"mida del text"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"projecte"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"espai disc unitat de disc dur dispositiu ús"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"ús de la bateria càrrega"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"ortografia diccionari corrector ortogràfic correcció automàtica"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"reconeixedor entrada veu parlar idioma mans lliures mans-lliures gratuït reconeixement paraula ofensiva àudio historial bluetooth auriculars"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"puntuar idioma parla predeterminada parlar síntesi de veu accessibilitat lector invident"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"rellotge 24 hores"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"esborrar suprimir restaurar eliminar suprimir"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"impressora"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"bip de l\'altaveu"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"no molesteu interrompeu interrupció pausa"</string>
@@ -2374,8 +2362,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"precisió"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"compte"</string>
     <string name="keywords_users" msgid="4673901601478559100">"restricció restringir restringit"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"text correcció corregir so vibració automàtic idioma gest suggerir suggeriment tema ofensiu paraula tipus emoji internacional"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"fer lliscar el dit, contrasenya, patró, PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configura l\'etiqueta de NFC per a Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Escriu-hi"</string>
@@ -2486,8 +2473,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixació de pantalla"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Quan aquest paràmetre estigui activat, pots fixar la pantalla per mantenir visible la pantalla actual fins que no n\'anul·lis la fixació.\n\nFes el següent:\n\n1. Assegura\'t que la fixació de la pantalla estigui activada.\n\n2. Obre la pantalla que vulguis fixar.\n\n3. Toca Visió general.\n\n4. Fes lliscar el dit cap amunt i toca la icona de fixar."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Sol·licita el patró de desbloqueig abans d\'anul·lar la fixació"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demana el codi PIN abans d\'anul·lar la fixació"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demana la contrasenya abans d\'anul·lar la fixació"</string>
