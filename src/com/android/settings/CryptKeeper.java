@@ -88,17 +88,15 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final String TAG = "CryptKeeper";
 
     private static final String DECRYPT_STATE = "trigger_restart_framework";
+
     /** Message sent to us to indicate encryption update progress. */
     private static final int MESSAGE_UPDATE_PROGRESS = 1;
-    /** Message sent to us to cool-down (waste user's time between password attempts) */
-    private static final int MESSAGE_COOLDOWN = 2;
     /** Message sent to us to indicate alerting the user that we are waiting for password entry */
-    private static final int MESSAGE_NOTIFY = 3;
+    private static final int MESSAGE_NOTIFY = 2;
 
     // Constants used to control policy.
-    private static final int MAX_FAILED_ATTEMPTS = 30;
+    private static final int MAX_FAILED_ATTEMPTS = 100;
     private static final int COOL_DOWN_ATTEMPTS = 10;
-    private static final int COOL_DOWN_INTERVAL = 30; // 30 seconds
 
     // Intent action for launching the Emergency Dialer activity.
     static final String ACTION_EMERGENCY_DIAL = "com.android.phone.EmergencyDialer.DIAL";
@@ -119,7 +117,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private boolean mCorrupt;
     /** A flag to indicate when the back event should be ignored */
     private boolean mIgnoreBack = false;
-    private int mCooldown;
+    /** When set, blocks unlocking. Set every COOL_DOWN_ATTEMPTS attempts, only cleared
+        by power cycling phone. */
+    private boolean mCooldown = false;
+
     PowerManager.WakeLock mWakeLock;
     private EditText mPasswordEntry;
     private LockPatternView mLockPatternView;
@@ -138,6 +139,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     // When the user enters a short pin/password, run this to show an error,
     // but don't count it against attempts.
     private final Runnable mFakeUnlockAttemptRunnable = new Runnable() {
+        @Override
         public void run() {
             handleBadAttempt(1 /* failedAttempt */);
         }
@@ -235,7 +237,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
         }
         if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
-            mCooldown = COOL_DOWN_INTERVAL;
+            mCooldown = true;
+            // No need to setBackFunctionality(false) - it's already done
+            // at this point.
             cooldown();
         } else {
             final TextView status = (TextView) findViewById(R.id.status);
@@ -320,10 +324,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             switch (msg.what) {
             case MESSAGE_UPDATE_PROGRESS:
                 updateProgress();
-                break;
-
-            case MESSAGE_COOLDOWN:
-                cooldown();
                 break;
 
             case MESSAGE_NOTIFY:
@@ -495,7 +495,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
                 @Override
                 public void onPostExecute(java.lang.Void v) {
-                    if(passwordType == StorageManager.CRYPT_TYPE_PIN) {
+                    if (passwordType == StorageManager.CRYPT_TYPE_PIN) {
                         setContentView(R.layout.crypt_keeper_pin_entry);
                         mStatusString = R.string.enter_pin;
                     } else if (passwordType == StorageManager.CRYPT_TYPE_PATTERN) {
@@ -518,11 +518,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     if (mLockPatternView != null) {
                         mLockPatternView.setInStealthMode(!pattern_visible);
                     }
-
-                    if (mCooldown > 0) {
+                    if (mCooldown) {
+                        // in case we are cooling down and coming back from emergency dialler
                         setBackFunctionality(false);
-                        cooldown(); // in case we are cooling down and coming back from emergency dialler
+                        cooldown();
                     }
+
                 }
             }.execute();
         } else if (!mValidationRequested) {
@@ -535,7 +536,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     @Override
     public void onStop() {
         super.onStop();
-        mHandler.removeMessages(MESSAGE_COOLDOWN);
         mHandler.removeMessages(MESSAGE_UPDATE_PROGRESS);
         mHandler.removeMessages(MESSAGE_NOTIFY);
     }
@@ -672,39 +672,20 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         mHandler.sendEmptyMessageDelayed(MESSAGE_UPDATE_PROGRESS, 1000);
     }
 
-    /** Disable password input for a while to force the user to waste time between retries */
+    /** Insist on a power cycle to force the user to waste time between retries.
+     *
+     * Call setBackFunctionality(false) before calling this. */
     private void cooldown() {
-        final TextView status = (TextView) findViewById(R.id.status);
-
-        if (mCooldown <= 0) {
-            // Re-enable the password entry and back presses.
-            if (mPasswordEntry != null) {
-                mPasswordEntry.setEnabled(true);
-                final InputMethodManager imm = (InputMethodManager) getSystemService(
-                                          Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(mPasswordEntry, 0);
-                setBackFunctionality(true);
-            }
-            if (mLockPatternView != null) {
-                mLockPatternView.setEnabled(true);
-            }
-            status.setText(mStatusString);
-        } else {
-            // Disable the password entry and back presses.
-            if (mPasswordEntry != null) {
-                mPasswordEntry.setEnabled(false);
-            }
-            if (mLockPatternView != null) {
-                mLockPatternView.setEnabled(false);
-            }
-
-            CharSequence template = getText(R.string.crypt_keeper_cooldown);
-            status.setText(TextUtils.expandTemplate(template, Integer.toString(mCooldown)));
-
-            mCooldown--;
-            mHandler.removeMessages(MESSAGE_COOLDOWN);
-            mHandler.sendEmptyMessageDelayed(MESSAGE_COOLDOWN, 1000); // Tick every second
+        // Disable the password entry.
+        if (mPasswordEntry != null) {
+            mPasswordEntry.setEnabled(false);
         }
+        if (mLockPatternView != null) {
+            mLockPatternView.setEnabled(false);
+        }
+
+        final TextView status = (TextView) findViewById(R.id.status);
+        status.setText(R.string.crypt_keeper_force_power_cycle);
     }
 
     /**
@@ -810,7 +791,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         // Asynchronously throw up the IME, since there are issues with requesting it to be shown
         // immediately.
-        if (mLockPatternView == null && mCooldown <= 0) {
+        if (mLockPatternView == null && !mCooldown) {
             mHandler.postDelayed(new Runnable() {
                 @Override public void run() {
                     imm.showSoftInputUnchecked(0, null);
