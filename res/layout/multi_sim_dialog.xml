@@ -21,7 +21,6 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/sim_dialog_padding"
             android:orientation="vertical">
 
         <LinearLayout android:id="@+id/type"
@@ -33,19 +32,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
-                    android:paddingStart="@dimen/sim_label_padding"
-                    android:text="@string/sim_editor_name"
-                    style="?android:attr/textAppearanceMedium" />
+                    android:paddingStart="@dimen/sim_content_padding"
+                    android:text="@string/sim_editor_name" />
 
             <EditText android:id="@+id/sim_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:layout_marginStart="@dimen/sim_content_padding"
+                    android:paddingStart="@dimen/sim_content_padding"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
                     android:hint="@string/wifi_ssid_hint"
                     android:inputType="textNoSuggestions"
-                    android:maxLength="@integer/sim_name_length" />
+                    android:maxLength="@integer/sim_name_length"
+                    android:textColor="@android:color/black"
+                    style="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 
@@ -58,16 +58,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/sim_dialog_margin_top"
-                android:paddingStart="@dimen/sim_label_padding"
-                android:text="@string/color_title"
-                style="?android:attr/textAppearanceMedium" />
+                android:paddingStart="@dimen/sim_content_padding"
+                android:text="@string/color_title" />
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/color_picker_width"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/sim_dialog_margin_top"
-                android:paddingStart="@dimen/sim_label_padding" />
+                android:paddingStart="@dimen/sim_content_padding" />
 
         </LinearLayout>
 
@@ -80,14 +78,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
-                    android:paddingStart="@dimen/sim_label_padding"
+                    android:paddingStart="@dimen/sim_content_padding"
                     android:text="@string/sim_editor_carrier" />
 
             <TextView android:id="@+id/carrier"
                     android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/sim_label_padding"
+                    android:paddingStart="@dimen/sim_content_padding"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
                     android:singleLine="true"
                     style="?android:attr/textAppearanceMedium" />
@@ -103,14 +101,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/sim_dialog_margin_top"
-                    android:paddingStart="@dimen/sim_label_padding"
+                    android:paddingStart="@dimen/sim_content_padding"
                     android:text="@string/sim_editor_number" />
 
             <TextView android:id="@+id/number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/sim_dialog_margin_bottom"
-                    android:paddingStart="@dimen/sim_label_padding"
+                    android:paddingStart="@dimen/sim_content_padding"
                     android:singleLine="true"
                     android:textColor="@android:color/black"
                     style="?android:attr/textAppearanceMedium" />
