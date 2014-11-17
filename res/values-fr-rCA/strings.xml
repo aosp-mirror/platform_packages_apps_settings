@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Veuillez patienter pendant le chiffrement de votre téléphone. <xliff:g id="PERCENT">^1</xliff:g> % effectué(s)."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Veuillez patienter pendant le chiffrement de votre tablette. Temps restant : <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Veuillez patienter pendant le chiffrement de votre téléphone. Temps restant : <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Réessayez dans <xliff:g id="DELAY">^1</xliff:g> secondes."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Attention : Les données de votre appareil seront effacées si vous effectuez encore <xliff:g id="COUNT">^1</xliff:g> tentatives de déverrouillage infructueuses."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Saisissez votre mot de passe."</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Échec du chiffrement"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Recherche toujours disponible"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Toujours autoriser la recherche"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Autoriser le service de localisation de Google et les autres applications à rechercher des réseaux, même si le Wi-Fi est désactivé"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Gérer automatiquement le Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Laisser <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> gérer votre connexion Wi-Fi"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Connexion automatique au Wi-Fi ouvert"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Un assistant Wi‑Fi évalue automatiquement les réseaux Wi-Fi ouverts de bonne qualité et s\'y connecte"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Sélectionner un assistant Wi‑Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer les certificats"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Pour améliorer la précision, entre autres, le service de localisation de Google et d\'autres applications peuvent rechercher des réseaux Wi-Fi à proximité, même lorsque le Wi-Fi est désactivé. Vous pouvez modifier ce paramètre dans Options avancées &gt; Recherche toujours disponible."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Les applications peuvent rechercher des réseaux à proximité, même lorsque le Wi-Fi est désactivé. Vous pouvez modifier ce paramètre dans Options avancées &gt; Recherche toujours disponible."</string>
@@ -1236,8 +1240,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Mémoire de stockage USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Sur la carte SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Désactivés"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"Pas installée pour cet utilisateur"</string>
     <string name="no_applications" msgid="7336588977497084921">"Aucune application"</string>
     <string name="internal_storage" msgid="1584700623164275282">"Mémoire de stockage interne"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Mémoire de stockage USB"</string>
@@ -1957,16 +1960,11 @@
     <string name="enter_password" msgid="8035706727471334122">"Pour lancer Android, entrez votre mot de passe"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Pour lancer Android, entrez votre NIP"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Pour lancer Android, dessinez votre schéma."</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Schéma erroné"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Mot de passe incorrect"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"NIP erroné"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"Vérification en cours…"</string>
+    <string name="starting_android" msgid="8581493237458496835">"Démarrage d\'Android en cours..."</string>
     <string name="delete" msgid="4219243412325163003">"Supprimer"</string>
     <string name="misc_files" msgid="6720680815969643497">"Fichiers divers"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="NUMBER">%1$d</xliff:g> fichiers sélectionnés sur <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2333,6 +2331,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Désact. diff. nom réseau"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"La désactivation de la diffusion du nom du réseau empêche les tiers d\'accéder aux détails du réseau."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"La désactivation de la diffusion du nom du réseau bloque la connexion automatique aux réseaux masqués"</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Carte SIM préférée pour"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Toujours demander"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Veuillez indiquer votre préférence"</string>
@@ -2343,33 +2342,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Recherches récentes"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Résultats"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi connexion réseau wi-fi"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"message texte envoyer des messages messages messagerie"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"cellulaire fournisseur de services données sans fil 4g 3g 2g lte"</string>
     <string name="keywords_home" msgid="3626170808219458848">"lanceur d\'applications"</string>
     <string name="keywords_display" msgid="6709007669501628320">"écran tactile"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"assombrir l\'écran écran tactile pile"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"assombrir l\'écran écran tactile pile"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"personnaliser arrière-plan personnaliser écran"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"taille du texte"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"projet"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"espace disque disque dur utilisation appareil"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"frais de consommation d\'énergie"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"orthographe dictionnaire correcteur orthographique correction automatique"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"détecteur entrée voix parler langue mains libres reconnaissance mains libres terme choquant historique audio écouteur bluetooth"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"débit langue valeur par défaut parler discuter tts accessibilité lecteur aveugle"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"horloge militaire"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"réinitialiser supprimer restaurer effacer"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"imprimante"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"haut-parleur signal sonore"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"ne pas déranger interrompre interruption pause"</string>
@@ -2378,8 +2366,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"précision"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"compte"</string>
     <string name="keywords_users" msgid="4673901601478559100">"limitation limiter limité"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"correction de texte corriger son vibreur automatique langue geste suggérer suggestion thème choquant type de mot emoji international"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"glisser mot de passe schéma nip"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Créer une balise NFC par Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Écrire"</string>
@@ -2490,8 +2477,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activé"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Désactivé"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Épinglage à l\'écran"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Lorsque ce paramètre est activé, vous pouvez épingler l\'écran afin de l\'ancrer dans sa vue actuelle jusqu\'à ce que vous l\'annuliez.\n\nPour épingler l\'écran, procédez comme suit :\n\n1. Assurez-vous que l\'épinglage de l\'écran est activé.\n\n2. Ouvrez l\'écran que vous voulez épingler.\n\n3. Touchez « Aperçu ».\n\n4. Balayez l\'écran vers le haut, puis touchez l\'icône d\'épinglage."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Demander le schéma de déverrouillage avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demander le NIP avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demander le mot de passe avant d\'annuler l\'épinglage"</string>
