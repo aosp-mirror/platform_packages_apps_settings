@@ -112,8 +112,8 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"خطای ناشناس"</string>
     <string name="battery_info_health_cold" msgid="3835692786176707318">"سرد"</string>
     <string name="bluetooth" msgid="5549625000628014477">"بلوتوث"</string>
-    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"قابل مشاهده برای تمام دستگاه‌های بلوتوث مجاور (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
-    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"قابل مشاهده برای تمام دستگاه‌های بلوتوث مجاور"</string>
+    <string name="bluetooth_is_discoverable" msgid="8373421452106840526">"قابل مشاهده برای تمام دستگاه‌های بلوتوث اطراف (<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>)"</string>
+    <string name="bluetooth_is_discoverable_always" msgid="2849387702249327748">"قابل مشاهده برای تمام دستگاه‌های بلوتوث اطراف"</string>
     <string name="bluetooth_not_visible_to_other_devices" msgid="9120274591523391910">"برای دیگر دستگاه‌های بلوتوث قابل مشاهده نیست"</string>
     <string name="bluetooth_only_visible_to_paired_devices" msgid="2049983392373296028">"فقط برای دستگاه‌های مرتبط شده قابل مشاهده است"</string>
     <string name="bluetooth_visibility_timeout" msgid="8002247464357005429">"پایان زمان قابل مشاهده بودن"</string>
@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"اتصال قطع شود؟"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"‏این کار اتصال شما را با این دستگاه قطع می‌کند:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;."</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"اجازه ندارید تنظیمات بلوتوث را تغییر دهید."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"هنگام باز بودن تنظیمات بلوتوث، <xliff:g id="DEVICE_NAME">%1$s</xliff:g> برای دستگاه‌های نزدیک قابل مشاهده است."</string>
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"هنگام باز بودن تنظیمات بلوتوث، <xliff:g id="DEVICE_NAME">%1$s</xliff:g> برای دستگاه‌های اطراف قابل مشاهده است."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"ارتباط <xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع شود؟"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"پخش"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"غیر فعال کردن نمایه؟"</string>
@@ -147,7 +147,7 @@
     <string name="bluetooth_pairing" msgid="1426882272690346242">"در حال مرتبط‌سازی..."</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"دستگاه بلوتوث بدون نام"</string>
     <string name="progress_scanning" msgid="192587958424295789">"در حال جستجو"</string>
-    <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"هیچ دستگاه بلوتوثی در این نزدیکی یافت نشد."</string>
+    <string name="bluetooth_no_devices_found" msgid="1085232930277181436">"هیچ دستگاه بلوتوثی در این اطراف پیدا نشد."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"درخواست مرتبط‌سازی"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"درخواست مرتبط‌سازی"</string>
     <string name="bluetooth_notif_message" msgid="5300852675110479862">"لمس کردن برای جفت کردن با <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -159,9 +159,9 @@
     <string name="bluetooth_ask_discovery" product="default" msgid="5510358858113713272">"برنامه‌ای می‌خواهد تلفن شما را برای سایر دستگاه‌های بلوتوث به مدت <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانیه قابل مشاهده کند."</string>
     <string name="bluetooth_ask_lasting_discovery" product="tablet" msgid="8863617309580598607">"برنامه‌ای می‌خواهد رایانه لوحی شما را برای سایر دستگاه‌های بلوتوث قابل مشاهده کند. شما می‌توانید این حالت را بعداً در تنظیمات بلوتوث تغییر دهید."</string>
     <string name="bluetooth_ask_lasting_discovery" product="default" msgid="6487606808683607975">"برنامه‌ای می‌خواهد تلفن شما را برای سایر دستگاه‌های بلوتوث قابل مشاهده کند. شما می‌توانید این حالت را بعداً در تنظیمات بلوتوث تغییر دهید."</string>
-    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد پخش بلوتوث را برای برقراری ارتباط با دستگاه‌های نزدیک دیگر روشن کند. این تنظیم را می‌توانید بعداً در تنظیمات بلوتوث تغییر دهید."</string>
-    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد بلوتوث و پخش بلوتوث را برای برقراری ارتباط با دستگاه‌های نزدیک دیگر روشن کند. این تنظیم را می‌توانید بعداً در تنظیمات بلوتوث تغییر دهید."</string>
-    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"هنگامی که این قابلیت روشن باشد، تلفن شما می‌تواند با دستگاه‌های نزدیک دیگر ارتباط برقرار کند.\n\nپخش از سیگنال‌های بلوتوث کم قدرت استفاده می‌کند."</string>
+    <string name="bluetooth_ask_start_broadcast" product="default" msgid="3535628155254187911">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد پخش بلوتوث را برای برقراری ارتباط با دستگاه‌های دیگر همین اطراف روشن کند. این تنظیم را می‌توانید بعداً در تنظیمات بلوتوث تغییر دهید."</string>
+    <string name="bluetooth_ask_enablement_and_start_broadcast" product="default" msgid="8810858601242763295">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد بلوتوث و پخش بلوتوث را برای برقراری ارتباط با دستگاه‌های دیگر همین اطراف روشن کند. این تنظیم را می‌توانید بعداً در تنظیمات بلوتوث تغییر دهید."</string>
+    <string name="bluetooth_broadcasting_explaination" product="default" msgid="4249322115655011799">"هنگامی که این قابلیت روشن باشد، تلفنتان می‌تواند با دستگاه‌های دیگر همین اطراف ارتباط برقرار کند.\n\nپخش از سیگنال‌های بلوتوث کم قدرت استفاده می‌کند."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="3346529092809011149">"برنامه‌ای می‌خواهد بلوتوث را روشن کند و رایانه لوحی شما را برای سایر دستگاه‌ها به مدت <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانیه قابل مشاهده کند."</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="4724094889807196118">"برنامه‌ای می‌خواهد بلوتوث را روشن کند و تلفن شما را برای سایر دستگاه‌های دیگر به مدت <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانیه قابل مشاهده کند."</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet" msgid="989613204829097159">"برنامه‌ای می‌خواهد بلوتوث را روشن کند و رایانه لوحی شما را برای سایر دستگاه‌ها قابل مشاهده کند. شما می‌توانید این حالت را بعداً در تنظیمات بلوتوث تغییر دهید."</string>
@@ -514,7 +514,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"گزینه‌ها…"</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"پیشرفته"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"بلوتوث پیشرفته"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"وقتی بلوتوث روشن است، دستگاه شما می‌تواند با سایر دستگاه‌های بلوتوث نزدیک ارتباط برقرار کند."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"وقتی بلوتوث روشن است، دستگاه شما می‌تواند با سایر دستگاه‌های بلوتوث اطراف ارتباط برقرار کند."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"اتصال به..."</string>
     <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"رسانه صوتی"</string>
     <string name="bluetooth_profile_headset" msgid="8658779596261212609">"صدای تلفن"</string>
@@ -565,7 +565,7 @@
     <string name="wifi_assistant_open_app" msgid="4803044899535675063">"باز کردن برنامه"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"فرستادن صفحه‌نمایش"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"فعال کردن امکان نمایش بی‌سیم"</string>
-    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"هیچ دستگاهی در این نزدیکی یافت نشد."</string>
+    <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"هیچ دستگاهی در اطراف پیدا نشد."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"در حال اتصال"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"متصل"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"درحال استفاده"</string>
@@ -610,8 +610,8 @@
     <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"‏مدیریت خودکار Wi‑Fi"</string>
     <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"‏به <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> اجازه داده شود اتصال Wi-Fi شما را مدیریت کند"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"نصب گواهی‌ها"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"‏برای بهبود میزان دقت موقعیت مکانی و به منظور اهداف دیگر، Google و سایر برنامه‌ها ممکن است شبکه‌های نزدیک را اسکن کنند، حتی وقتی Wi-Fi خاموش است. اگر نمی‌خواهید چنین شود، به پیشرفته &gt; همیشه اسکن موجود باشد، بروید."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"‏برنامه‌ها ممکن است شبکه‌های نزدیک را اسکن کنند، حتی زمانی که Wi-Fi خاموش است. اگر نمی‌خواهید چنین شود، به پیشرفته &gt; همیشه اسکن موجود باشد، بروید."</string>
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"‏برای بهبود میزان دقت موقعیت مکانی و به منظور اهداف دیگر، Google و سایر برنامه‌ها ممکن است شبکه‌های اطراف را اسکن کنند، حتی وقتی Wi-Fi خاموش است. اگر نمی‌خواهید چنین شود، به پیشرفته &gt; همیشه اسکن موجود باشد، بروید."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"‏برنامه‌ها ممکن است شبکه‌های اطراف را اسکن کنند، حتی زمانی که Wi-Fi خاموش است. اگر نمی‌خواهید چنین شود، به پیشرفته &gt; همیشه اسکن موجود باشد، بروید."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"دوباره نشان داده نشود"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"‏هنگام خواب، Wi-Fi را روشن بگذارید"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"‏روشن بودن Wi-Fi در هنگام خواب"</string>
@@ -2350,7 +2350,7 @@
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"بیپ بلندگو"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"مزاحم نشوید قطع وقفه توقف"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
-    <string name="keywords_location" msgid="782326973714313480">"نزدیک مکان سابقه گزارش دادن"</string>
+    <string name="keywords_location" msgid="782326973714313480">"گزارش‌دهی سابقه مکان اطراف"</string>
     <string name="keywords_location_mode" msgid="8584992704568356084">"دقت"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"حساب"</string>
     <string name="keywords_users" msgid="4673901601478559100">"محدودیت محدود محدود شده"</string>
