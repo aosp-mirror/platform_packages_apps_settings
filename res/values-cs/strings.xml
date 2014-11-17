@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Počkejte prosím, než bude telefon zašifrován. Dokončeno: <xliff:g id="PERCENT">^1</xliff:g> %"</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Počkejte prosím, než bude tablet zašifrován. Zbývající čas: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Počkejte prosím, než bude telefon zašifrován. Zbývající čas: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Zkuste to znovu za: <xliff:g id="DELAY">^1</xliff:g> s."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Upozornění: Po <xliff:g id="COUNT">^1</xliff:g> dalších neúspěšných pokusech o odemknutí bude zařízení vymazáno!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Zadejte heslo"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Šifrování se nezdařilo"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Hledání vždy zapnuto"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Vždy povolit vyhledávání sítí"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Povolit službě určování polohy Google a ostatním aplikacím hledat sítě, i když je síť Wi-Fi vypnutá"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Automaticky spravovat připojení Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Nechat nástroj <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> spravovat připojení Wi-Fi"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Automaticky připojovat k otevřené Wi-Fi"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Povolit, aby asistent Wi-Fi automaticky hodnotil a připojoval se k otevřeným sítím Wi-Fi, které byly zjištěny jako kvalitní"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Vyberte asistenta Wi-Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalace certifikátů"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Za účelem zvýšení přesnosti a k dalším účelům mohou aplikace Google a další aplikace vyhledávat sítě Wi-Fi v okolí, i když je Wi-Fi vypnuta. Chcete-li toto zakázat, přejděte do nabídky Wi-Fi &gt; Rozšířené nastavení &gt; Hledání vždy zapnuto."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikace mohou vyhledávat sítě v okolí i v případě, že je Wi-Fi vypnuta. Chcete-li nastavení změnit, přejděte do nabídky Rozšířené nastavení &gt; Hledání vždy zapnuto."</string>
@@ -1236,8 +1240,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Úložiště USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Na kartě SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Deaktivováno"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"Pro tohoto uživ. nenainstal."</string>
     <string name="no_applications" msgid="7336588977497084921">"Žádné aplikace"</string>
     <string name="internal_storage" msgid="1584700623164275282">"Interní úložiště"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Úložiště USB"</string>
@@ -1957,16 +1960,11 @@
     <string name="enter_password" msgid="8035706727471334122">"Chcete-li spustit Android, zadejte heslo"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Chcete-li spustit Android, zadejte PIN"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Chcete-li spustit Android, nakreslete gesto"</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Nesprávné gesto"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Nesprávné heslo"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"Nesprávný kód PIN"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"Kontrola…"</string>
+    <string name="starting_android" msgid="8581493237458496835">"Spouštění systému Android"</string>
     <string name="delete" msgid="4219243412325163003">"Smazat"</string>
     <string name="misc_files" msgid="6720680815969643497">"Různé soubory"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"vybráno: <xliff:g id="NUMBER">%1$d</xliff:g> z <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2206,7 +2204,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Uživatele smí spravovat pouze vlastník telefonu."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Pomocí omezených profilů nelze přidávat účty."</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Smazat <xliff:g id="USER_NAME">%1$s</xliff:g> ze zařízení"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Přidat uživatele, když je zařízení uzamčeno"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Přid. uživatele i při uzamčení"</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Nový uživatel"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Nový profil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Chcete se smazat?"</string>
@@ -2333,6 +2331,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Zakázat vysílání názvu sítě"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Zakázáním vysílání názvu sítě zabráníte třetím stranám v zobrazení informací o vaší síti."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Zakázáním vysílání názvu sítě zabráníte automatickému připojování ke skrytým sítím."</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Preferovaná SIM karta pro"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Pokaždé se zeptat"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Vyžadován výběr"</string>
@@ -2343,33 +2342,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Poslední vyhledávání"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Výsledky"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi síť připojení"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"textová zpráva SMS odesílání zpráv"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobilní operátor mobilní data bezdrátový přenos 4g 3g 2g lte"</string>
     <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"obrazovka dotykový displej"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ztlumit obrazovka dotykový displej baterie"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"ztlumit obrazovka dotykový displej baterie"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"pozadí personalizace přizpůsobení displej"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"velikost textu"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"projekce"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"místo disk pevný disk zařízení využití"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"využití energie nabití"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"pravopis slovník kontrola pravopisu automatické opravy"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"recognizer input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"sazba jazyk výchozí řeč mluvit tts usnadnění čtečka nevidomí"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"hodiny čas"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"smazat vymazat obnovit vymazání odstranění"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"tiskárna"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"reproduktor pípnutí"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"nerušit vyrušení vyrušit"</string>
@@ -2378,8 +2366,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"přesnost"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"účet"</string>
     <string name="keywords_users" msgid="4673901601478559100">"omezení omezit omezeno"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"oprava textu opravit zvuk vibrace automatický výběr jazyka návrh navrhování motiv nevhodné slovo psaní emodži mezinárodní"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"přejetí prstem heslo gesto pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Nastavení štítku NFC pro Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Zapsat"</string>
@@ -2490,8 +2477,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Zapnuto"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Vypnuto"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Připnutí obrazovky"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Pokud je toto nastavení zapnuto, můžete pomocí připnutí obrazovky zajistit zobrazení aktuální obrazovky, dokud ji neuvolníte.\n\nPostup připnutí obrazovky:\n\n1. Zkontrolujte, zda je funkce připnutí obrazovky zapnutá.\n\n2. Otevřete obrazovku, kterou chcete připnout.\n\n3. Klepněte na Přehled.\n\n4. Přejeďte prstem nahoru a poté klepněte na ikonu špendlíku."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Před uvolněním požádat o bezpečnostní gesto"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Před uvolněním požádat o kód PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Před uvolněním požádat o heslo"</string>

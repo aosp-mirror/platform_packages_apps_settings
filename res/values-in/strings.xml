@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Tunggu sampai ponsel selesai dienkripsi. <xliff:g id="PERCENT">^1</xliff:g>% selesai."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Tunggu, tablet sedang dienkripsi. Sisa waktu: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Tunggu, ponsel sedang dienkripsi. Sisa waktu: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Coba lagi dalam <xliff:g id="DELAY">^1</xliff:g> detik."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Peringatan: Perangkat Anda akan dihapus setelah <xliff:g id="COUNT">^1</xliff:g> percobaan gagal lagi dalam pembukaan kunci!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Ketikkan sandi Anda"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Enkripsi gagal"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Pemindaian selalu tersedia"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Selalu izinkan pemindaian"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Izinkan layanan lokasi Google dan aplikasi lainnya memindai jaringan saat Wi-Fi tidak aktif sekalipun"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Kelola Wi‑Fi secara otomatis"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Izinkan <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> mengelola koneksi Wi-Fi Anda"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Sambungkan untuk otomatis membuka Wi‑Fi"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Izinkan bantuan Wi‑Fi untuk otomatis memberi nilai dan menyambung ke jaringan Wi‑Fi terbuka yang ditetapkan sebagai berkualitas tinggi"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Pilih bantuan Wi‑Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Pasang sertifikat"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Untuk meningkatkan akurasi lokasi dan untuk tujuan lainnya, Google dan aplikasi lainnya dapat memindai jaringan terdekat, bahkan saat Wi-Fi mati. Jika Anda tidak ingin ini terjadi, buka Lanjutan &gt; Pemindaian selalu tersedia."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplikasi dapat memindai jaringan terdekat, bahkan saat Wi-Fi mati. Jika Anda tidak ingin ini terjadi, buka Lanjutan &gt; Pemindaian selalu tersedia."</string>
@@ -674,7 +678,7 @@
     <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"Kegagalan Sambungan Wi-Fi"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Masalah autentikasi"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Tidak dalam jangkauan"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"Akses Internet Tidak Terdeteksi, tidak akan otomatis tersambung ulang."</string>
+    <string name="wifi_no_internet" msgid="9151470775868728896">"Akses Internet Tidak Terdeteksi, tidak akan menyambung ulang secara otomatis."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS tersedia"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS tersedia)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Masukkan sandi jaringan Anda"</string>
@@ -1236,8 +1240,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Penyimpanan USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Pada kartu SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Dinonaktifkan"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"Tidak dipasang untuk pengguna ini"</string>
     <string name="no_applications" msgid="7336588977497084921">"Tidak ada apl."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Penyimpanan internal"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Penyimpanan USB"</string>
@@ -1439,7 +1442,7 @@
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Masukkan PIN"</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Masukkan PIN perangkat untuk mengaktifkan buka kunci OEM"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Peringatan"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Mengaktifkan buka kunci OEM akan menonaktifkan fitur perlindungan terhadap maling di perangkat ini dan dapat membatalkan garansi. Lanjutkan?"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Mengaktifkan buka kunci OEM akan menonaktifkan fitur perlindungan dari pencurian di perangkat ini dan dapat membatalkan garansi. Lanjutkan?"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Sertifikasi layar nirkabel"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Aktifkan Pencatatan Log Panjang Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Pengalihan Wi-Fi Agresif ke Seluler"</string>
@@ -1957,16 +1960,11 @@
     <string name="enter_password" msgid="8035706727471334122">"Untuk memulai Android, masukkan sandi"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Untuk memulai Android, masukkan PIN"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Untuk memulai Android, gambar pola Anda"</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Pola Salah"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Sandi Salah"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"PIN Salah"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"Memeriksa…"</string>
+    <string name="starting_android" msgid="8581493237458496835">"Memulai Android"</string>
     <string name="delete" msgid="4219243412325163003">"Hapus"</string>
     <string name="misc_files" msgid="6720680815969643497">"File Serbaneka"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"Terpilih <xliff:g id="NUMBER">%1$d</xliff:g> dari <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2333,6 +2331,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Nonaktifkan Siaran Nama Jaringan"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Menonaktifkan Siaran Nama Jaringan melindungi informasi jaringan Anda dari akses pihak ketiga."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Penonaktifan Siaran Nama Jaringan akan mencegah sambungan otomatis ke jaringan tersembunyi."</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"SIM pilihan untuk"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Selalu tanya"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Perlu dipilih"</string>
@@ -2343,33 +2342,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Penelusuran terkini"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Hasil"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi network connection sambungan jaringan"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"teks pesan mengirim SMS pesan perpesanan"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"seluler sel operator nirkabel data 4g 3g 2g lte"</string>
     <string name="keywords_home" msgid="3626170808219458848">"peluncur"</string>
     <string name="keywords_display" msgid="6709007669501628320">"layar sentuh"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"layar redup layar sentuh baterai"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"layar redup layar sentuh baterai"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"latar belakang personalisasi sesuaikan tampilan"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"ukuran teks"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"proyeksi"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"ruang disk hard drive perangkat penggunaan"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"penggunaan daya isi daya"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"ejaan kamus periksaejaan koreksi-otomatis"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"recognizer input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset pengenal masukan ucapan ucapkan bahasa handsfree pengenalan kata menyinggung audio riwayat bluetooth headset"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"rating bahasa default berbicara berbicara text to speech aksesibilitas pembaca tunanetra"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"jam militer"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"sapu hapus pulihkan kosongkan buang"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"bip pengeras suara"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"jangan jangan ganggu mengganggu gangguan terputus"</string>
@@ -2378,8 +2366,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"akurasi"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"akun"</string>
     <string name="keywords_users" msgid="4673901601478559100">"pembatasan membatasi dibatasi"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"teks koreksi benar suara getar otomatis bahasa isyarat sarankan saran tema menyinggung kata jenis emoji internasional"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"geser pin pola sandi"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Siapkan Tag NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Tulis"</string>
@@ -2453,7 +2440,7 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Selesai"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Hingga Anda menonaktifkan ini"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Interupsi prioritas"</string>
-    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Waktu henti"</string>
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Waktu non-operasional"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Hari"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Tidak ada"</string>
     <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Gangguan diizinkan"</string>
@@ -2490,8 +2477,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Aktif"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Nonaktif"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Penyematan layar"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Jika setelan ini diaktifkan, Anda dapat memasang pin ke layar agar layar aktif tetap ditampilkan sampai Anda melepas pin.\n\nUntuk memasang pin ke layar:\n\n1. Pastikan fitur pasang pin ke layar diaktifkan.\n\n2. Buka layar yang ingin Anda pasangkan pin.\n\n3. Sentuh Ringkasan.\n\n4. Gesek ke atas, lalu sentuh ikon pin."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Minta pola pembuka kunci sebelum melepas pin"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Minta PIN sebelum melepas pin"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Minta sandi sebelum melepas pin"</string>
