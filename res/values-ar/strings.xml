@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"انتظر حتى يتم تشفير هاتفك. اكتمل <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"انتظر بينما يتم تشفير جهازك اللوحي. الوقت المتبقي: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"انتظر بينما يتم تشفير هاتفك. الوقت المتبقي: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"حاول مرة أخرى خلال <xliff:g id="DELAY">^1</xliff:g> ثانية."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"تحذير: سيتم محو محتويات جهازك بعد إخفاق <xliff:g id="COUNT">^1</xliff:g> من المحاولات الأخرى لإلغاء القفل!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"اكتب كلمة المرور"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"لم يتم التشفير بنجاح"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"إتاحة الفحص دائمًا"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"السماح بالبحث دائمًا"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"‏السماح لخدمة الموقع في Google والتطبيقات الأخرى بالبحث عن الشبكات، حتى عند عدم تشغيل Wi-Fi"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"‏إدارة اتصال Wi‑Fi تلقائيًا"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"‏السماح لتطبيق <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> بإدارة اتصال Wi‑Fi"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"‏الاتصال بشبكة Wi‑Fi المفتوحة تلقائيًا"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"‏السماح لمساعد Wi‑Fi بتقييم شبكات Wi‑Fi المفتوحة ذات الجودة العالية والاتصال بها تلقائيًا"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"‏تحديد مساعد Wi‑Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"تثبيت شهادات"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"‏لتحسين مستوى دقة الموقع ولأغراض أخرى، قد تُجري Google والتطبيقات الأخرى فحصًا للعثور على الشبكات القريبة، حتى عندما تكون ميزة Wi-Fi معطّلة. إذا لم تكن تريد إجراء هذا الفحص، فانتقل إلى الإعدادات المتقدمة &gt; إتاحة الفحص دائمًا."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"‏قد تُجري التطبيقات فحصًا للعثور على الشبكات القريبة، حتى عندما تكون Wi-Fi معطّلة. إذا لم تكن تريد إجراء هذا الفحص، فانتقل إلى الإعدادات المتقدمة &gt; إتاحة الفحص دائمًا."</string>
@@ -2323,6 +2327,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"تعطيل بث اسم الشبكة"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"يؤدي تعطيل بث اسم الشبكة إلى منع وصول الجهات الخارجية إلى معلومات الشبكة."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"سيؤدي تعطيل بث اسم الشبكة إلى منع الاتصال بالشبكات المخفية تلقائيًا."</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> ديسبل ميلي واط <xliff:g id="ASU">%2$d</xliff:g> وحدة إشارة واحدة"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"‏بطاقة SIM المفضلة لـ"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"طرح السؤال كل مرة"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"يلزم التحديد"</string>
