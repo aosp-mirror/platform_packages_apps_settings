@@ -22,7 +22,10 @@ import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -392,8 +395,10 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private class SimPreference extends Preference{
         private SubscriptionInfo mSubInfoRecord;
         private int mSlotId;
-        private int[] tintArr;
+        private int[] mTintArr;
         Context mContext;
+        private String[] mColorStrings;
+        private int mTintSelectorPos;
 
         public SimPreference(Context context, SubscriptionInfo subInfoRecord, int slotId) {
             super(context);
@@ -403,7 +408,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             mSlotId = slotId;
             setKey("sim" + mSlotId);
             update();
-            tintArr = context.getResources().getIntArray(com.android.internal.R.array.sim_colors);
+            mTintArr = context.getResources().getIntArray(com.android.internal.R.array.sim_colors);
+            mColorStrings = context.getResources().getStringArray(R.array.color_picker);
+            mTintSelectorPos = 0;
         }
 
         public void update() {
@@ -444,14 +451,15 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             nameText.setText(mSubInfoRecord.getDisplayName());
 
             final Spinner tintSpinner = (Spinner) dialogLayout.findViewById(R.id.spinner);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                    R.array.color_picker, android.R.layout.simple_spinner_item);
+            SelectColorAdapter adapter = new SelectColorAdapter(getContext(),
+                     R.layout.settings_color_picker_item, mColorStrings);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             tintSpinner.setAdapter(adapter);
 
-            for (int i = 0; i < tintArr.length; i++) {
-                if (tintArr[i] == mSubInfoRecord.getIconTint()) {
+            for (int i = 0; i < mTintArr.length; i++) {
+                if (mTintArr[i] == mSubInfoRecord.getIconTint()) {
                     tintSpinner.setSelection(i);
+                    mTintSelectorPos = i;
                     break;
                 }
             }
@@ -461,6 +469,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 public void onItemSelected(AdapterView<?> parent, View view,
                     int pos, long id){
                     tintSpinner.setSelection(pos);
+                    mTintSelectorPos = pos;
                 }
 
                 @Override
@@ -496,7 +505,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
                     final int tintSelected = tintSpinner.getSelectedItemPosition();
                     int subscriptionId = mSubInfoRecord.getSubscriptionId();
-                    int tint = tintArr[tintSelected];
+                    int tint = mTintArr[tintSelected];
                     mSubInfoRecord.setIconTint(tint);
                     SubscriptionManager.setIconTint(tint, subscriptionId);
                     Utils.findRecordBySubId(subscriptionId).setIconTint(tint);
@@ -515,6 +524,76 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
             builder.create().show();
         }
+
+        private class SelectColorAdapter extends ArrayAdapter<CharSequence> {
+            private Context mContext;
+            private int mResId;
+
+            public SelectColorAdapter(
+                Context context, int resource, String[] arr) {
+                super(context, resource, arr);
+                mContext = context;
+                mResId = resource;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                LayoutInflater inflater = (LayoutInflater)
+                    mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                View rowView;
+                final ViewHolder holder;
+                Resources res = getResources();
+                int iconSize = res.getDimensionPixelSize(R.dimen.color_swatch_size);
+                int strokeWidth = res.getDimensionPixelSize(R.dimen.color_swatch_stroke_width);
+
+                if (convertView == null) {
+                    // Cache views for faster scrolling
+                    rowView = inflater.inflate(mResId, null);
+                    holder = new ViewHolder();
+                    ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
+                    drawable.setIntrinsicHeight(iconSize);
+                    drawable.setIntrinsicWidth(iconSize);
+                    drawable.getPaint().setStrokeWidth(strokeWidth);
+                    holder.label = (TextView) rowView.findViewById(R.id.color_text);
+                    holder.icon = (ImageView) rowView.findViewById(R.id.color_icon);
+                    holder.swatch = drawable;
+                    rowView.setTag(holder);
+                } else {
+                    rowView = convertView;
+                    holder = (ViewHolder) rowView.getTag();
+                }
+
+                holder.label.setText(getItem(position));
+                holder.swatch.getPaint().setColor(mTintArr[position]);
+                holder.swatch.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
+                holder.icon.setVisibility(View.VISIBLE);
+                holder.icon.setImageDrawable(holder.swatch);
+                return rowView;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View rowView = getView(position, convertView, parent);
+                final ViewHolder holder = (ViewHolder) rowView.getTag();
+
+                if (mTintSelectorPos == position) {
+                    holder.swatch.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
+                } else {
+                    holder.swatch.getPaint().setStyle(Paint.Style.STROKE);
+                }
+                holder.icon.setVisibility(View.VISIBLE);
+                return rowView;
+            }
+
+            private class ViewHolder {
+                TextView label;
+                ImageView icon;
+                ShapeDrawable swatch;
+            }
+        }
+
+
     }
 
     /**
