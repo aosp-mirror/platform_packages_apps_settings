@@ -59,7 +59,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     // The date value is dummy (independent of actual date).
     private Calendar mDummyDate;
 
-    private static final String KEY_DATE_FORMAT = "date_format";
     private static final String KEY_AUTO_TIME = "auto_time";
     private static final String KEY_AUTO_TIME_ZONE = "auto_zone";
 
@@ -75,7 +74,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private SwitchPreference mAutoTimeZonePref;
     private Preference mTimeZone;
     private Preference mDatePref;
-    private ListPreference mDateFormat;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -121,40 +119,9 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         mTime24Pref = findPreference("24 hour");
         mTimeZone = findPreference("timezone");
         mDatePref = findPreference("date");
-        mDateFormat = (ListPreference) findPreference(KEY_DATE_FORMAT);
         if (isFirstRun) {
             getPreferenceScreen().removePreference(mTime24Pref);
-            getPreferenceScreen().removePreference(mDateFormat);
         }
-
-        String [] dateFormats = getResources().getStringArray(R.array.date_format_values);
-        String [] formattedDates = new String[dateFormats.length];
-        String currentFormat = getDateFormat();
-        // Initialize if DATE_FORMAT is not set in the system settings
-        // This can happen after a factory reset (or data wipe)
-        if (currentFormat == null) {
-            currentFormat = "";
-        }
-
-        // Prevents duplicated values on date format selector.
-        mDummyDate.set(mDummyDate.get(Calendar.YEAR), mDummyDate.DECEMBER, 31, 13, 0, 0);
-
-        for (int i = 0; i < formattedDates.length; i++) {
-            String formatted =
-                    DateFormat.getDateFormatForSetting(getActivity(), dateFormats[i])
-                    .format(mDummyDate.getTime());
-
-            if (dateFormats[i].length() == 0) {
-                formattedDates[i] = getResources().
-                    getString(R.string.normal_date_format, formatted);
-            } else {
-                formattedDates[i] = formatted;
-            }
-        }
-
-        mDateFormat.setEntries(formattedDates);
-        mDateFormat.setEntryValues(R.array.date_format_values);
-        mDateFormat.setValue(currentFormat);
 
         mTimePref.setEnabled(!autoTimeEnabled);
         mDatePref.setEnabled(!autoTimeEnabled);
@@ -189,17 +156,15 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     }
 
     public void updateTimeAndDateDisplay(Context context) {
-        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
         final Calendar now = Calendar.getInstance();
         mDummyDate.setTimeZone(now.getTimeZone());
         // We use December 31st because it's unambiguous when demonstrating the date format.
         // We use 13:00 so we can demonstrate the 12/24 hour options.
         mDummyDate.set(now.get(Calendar.YEAR), 11, 31, 13, 0, 0);
         Date dummyDate = mDummyDate.getTime();
+        mDatePref.setSummary(DateFormat.getLongDateFormat(context).format(now.getTime()));
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
         mTimeZone.setSummary(getTimeZoneText(now.getTimeZone(), true));
-        mDatePref.setSummary(shortDateFormat.format(now.getTime()));
-        mDateFormat.setSummary(shortDateFormat.format(dummyDate));
         mTime24Pref.setSummary(DateFormat.getTimeFormat(getActivity()).format(dummyDate));
     }
 
@@ -227,13 +192,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-        if (key.equals(KEY_DATE_FORMAT)) {
-            String format = preferences.getString(key,
-                    getResources().getString(R.string.default_date_format));
-            Settings.System.putString(getContentResolver(),
-                    Settings.System.DATE_FORMAT, format);
-            updateTimeAndDateDisplay(getActivity());
-        } else if (key.equals(KEY_AUTO_TIME)) {
+        if (key.equals(KEY_AUTO_TIME)) {
             boolean autoEnabled = preferences.getBoolean(key, true);
             Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,
                     autoEnabled ? 1 : 0);
@@ -348,11 +307,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         Settings.System.putString(getContentResolver(),
                 Settings.System.TIME_12_24,
                 is24Hour? HOURS_24 : HOURS_12);
-    }
-
-    private String getDateFormat() {
-        return Settings.System.getString(getContentResolver(),
-                Settings.System.DATE_FORMAT);
     }
 
     private boolean getAutoState(String name) {
