@@ -29,12 +29,25 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabContentFactory;
+import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
 import android.widget.Toast;
 
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implements the preference screen to enable/disable ICC lock and
@@ -85,6 +98,10 @@ public class IccLockSettings extends PreferenceActivity
     private String mError;
     // Are we trying to enable or disable ICC lock?
     private boolean mToState;
+
+    private TabHost mTabHost;
+    private TabWidget mTabWidget;
+    private ListView mListView;
 
     private Phone mPhone;
 
@@ -143,6 +160,10 @@ public class IccLockSettings extends PreferenceActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Context context = getApplicationContext();
+        final TelephonyManager tm =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        final int numSims = tm.getSimCount();
 
         if (Utils.isMonkeyRunning()) {
             finish();
@@ -182,13 +203,38 @@ public class IccLockSettings extends PreferenceActivity
         // Don't need any changes to be remembered
         getPreferenceScreen().setPersistent(false);
 
+        if (numSims > 1) {
+            setContentView(R.layout.icc_lock_tabs);
+
+            mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+            mTabWidget = (TabWidget) findViewById(android.R.id.tabs);
+            mListView = (ListView) findViewById(android.R.id.list);
+
+            mTabHost.setup();
+            mTabHost.setOnTabChangedListener(mTabListener);
+            mTabHost.clearAllTabs();
+
+            for (int i = 0; i < numSims; ++i) {
+                final SubscriptionInfo subInfo = Utils.findRecordBySlotId(i);
+                mTabHost.addTab(buildTabSpec(String.valueOf(i),
+                        String.valueOf(subInfo == null
+                            ? context.getString(R.string.sim_editor_title, i + 1)
+                            : subInfo.getDisplayName())));
+            }
+        }
+
         mPhone = PhoneFactory.getDefaultPhone();
         mRes = getResources();
         updatePreferences();
     }
 
     private void updatePreferences() {
-        mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
+        mPinDialog.setEnabled(mPhone != null);
+        mPinToggle.setEnabled(mPhone != null);
+
+        if (mPhone != null) {
+            mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
+        }
     }
 
     @Override
@@ -417,5 +463,31 @@ public class IccLockSettings extends PreferenceActivity
         mPin = "";
         setDialogValues();
         mDialogState = OFF_MODE;
+    }
+
+    private OnTabChangeListener mTabListener = new OnTabChangeListener() {
+        @Override
+        public void onTabChanged(String tabId) {
+            final int slotId = Integer.parseInt(tabId);
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(slotId);
+
+            mPhone = (sir == null) ? null
+                : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
+
+            // The User has changed tab; update the body.
+            updatePreferences();
+        }
+    };
+
+    private TabContentFactory mEmptyTabContent = new TabContentFactory() {
+        @Override
+        public View createTabContent(String tag) {
+            return new View(mTabHost.getContext());
+        }
+    };
+
+    private TabSpec buildTabSpec(String tag, String title) {
+        return mTabHost.newTabSpec(tag).setIndicator(title).setContent(
+                mEmptyTabContent);
     }
 }
