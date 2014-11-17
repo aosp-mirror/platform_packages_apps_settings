@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Bíddu á meðan verið er að dulkóða símann. <xliff:g id="PERCENT">^1</xliff:g>% lokið."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Bíddu á meðan verið er að dulkóða spjaldtölvuna. Tími eftir: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Bíddu á meðan verið er að dulkóða símann. Tími eftir: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Reyndu aftur eftir <xliff:g id="DELAY">^1</xliff:g> sekúndur."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Viðvörun: Eftir <xliff:g id="COUNT">^1</xliff:g> misheppnaðar opnunartilraunir í viðbót verður allt þurrkað út úr tækinu."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Sláðu inn aðgangsorðið þitt"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Dulkóðun mistókst"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Leit alltaf í boði"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Leyfa alltaf leit"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Leyfa staðsetningarþjónustu Google og öðrum forritum að leita að Wi-Fi neti, jafnvel þegar slökkt er á Wi-Fi"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Sjálfvirk stjórnun Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Leyfa <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> að stjórna Wi-Fi tengingunni þinni"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Tengjast opnum Wi-Fi netum sjálfkrafa"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Leyfa Wi-Fi aðstoð að velja opin Wi-Fi net og tengjast þeim sjálfkrafa ef gæði þeirra eru mikil"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Veldu Wi-Fi aðstoð"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Setja upp vottorð"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Til að bæta nákvæmni staðsetningar o.fl. kunna forrit að leita að nálægum netum, jafnvel þegar slökkt er á Wi-Fi. Ef þú vilt koma í veg fyrir þetta skaltu fara í Ítarlegar stillingar &gt; Leit alltaf í boði."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Forrit geta leitað að nálægum netum, jafnvel þegar slökkt er á Wi-Fi. Ef þú vilt koma í veg fyrir þetta skaltu fara í Ítarlegar stillingar &gt; Leit alltaf í boði"</string>
@@ -1234,8 +1238,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-geymsla"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Á SD-korti"</string>
     <string name="disabled" msgid="9206776641295849915">"Óvirkt"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"Ekki uppsett fyrir þennan notanda"</string>
     <string name="no_applications" msgid="7336588977497084921">"Engin forrit."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Innbyggð geymsla"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB-geymsla"</string>
@@ -1953,16 +1956,11 @@
     <string name="enter_password" msgid="8035706727471334122">"Sláðu inn aðgangsorðið þitt til að ræsa Android"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Sláðu inn PIN-númerið þitt til að ræsa Android"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Teiknaðu opnunarmynstrið til að ræsa Android"</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Rangt mynstur"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Rangt aðgangsorð"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"Rangt PIN-númer"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"Athugar…"</string>
+    <string name="starting_android" msgid="8581493237458496835">"Ræsir Android"</string>
     <string name="delete" msgid="4219243412325163003">"Eyða"</string>
     <string name="misc_files" msgid="6720680815969643497">"Ýmsar skrár"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="NUMBER">%1$d</xliff:g> valdar af <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2329,6 +2327,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"Slökkva á birtingu netheitis"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"„Slökkva á birtingu netheitis“ ver netupplýsingarnar þínar fyrir aðgangi þriðju aðila."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"„Slökkva á birtingu netheitis“ kemur í veg fyrir sjálfvirka tengingu við falin net."</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Valið SIM-kort fyrir"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Spyrja í hvert skipti"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Val er áskilið"</string>
@@ -2339,33 +2338,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Nýleg leit"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Niðurstöður"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi nettenging"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"skilaboð sms textaskilaboð sms-skilaboð"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"farsími farsímakerfi símafyrirtæki þráðlaust gögn 4g 3g 2g lte"</string>
     <string name="keywords_home" msgid="3626170808219458848">"ræsiforrit"</string>
     <string name="keywords_display" msgid="6709007669501628320">"skjár snertiskjár"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"myrkva skjár snertiskjár rafhlaða"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"myrkva skjár snertiskjár rafhlaða"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"bakgrunnur sérsníða sérstilla skjár"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"textastærð"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"verkefni"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"pláss harður diskur drif tæki notkun"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"orka notkun hleðsla"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"stafsetning orðabók ritvilluleit sjálfvirk leiðrétting"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"talgreinir inntak tal tala tungumál handfrjálst talkennsl raddkennsl dónalegt orð hljóð ferill bluetooth höfuðtól"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"hraði tungumál sjálfgefið tala tal talgervill aðgengi lesari blint"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"klukka tími"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"þurrka eyða endurheimta hreinsa Ffjarlægja"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"prentari"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"hátalari hljóðmerki"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"ekki trufla ónáðið ekki truflun hlé pása"</string>
@@ -2374,8 +2362,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"nákvæmni"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"reikningur"</string>
     <string name="keywords_users" msgid="4673901601478559100">"takmörkun takmarka takmarkað"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"texti leiðrétting leiðrétta hljóð titringur sjálfvirkt tungumál bending stinga upp á tillaga þema móðgandi orð skrifa emoji alþjóðlegt"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"renna aðgangsorð mynstur pin-númer"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Setja upp Wi-Fi NFC-merki"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skrifa"</string>
@@ -2486,8 +2473,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Kveikt"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Slökkt"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Skjáfesting"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Þegar kveikt er á þessari stillingu geturðu notað skjáfestingu til að hafa núverandi skjá opinn þangað til þú losar.\n\nTil að nota skjáfestingu:\n\n1. Gakktu úr skugga um að kveikt sé á skjáfestingu.\n\n2. Opnaðu skjáinn sem þú vilt festa.\n\n3. Snertu Yfirlit.\n\n4. Strjúktu upp og snertu svo festingartáknið."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Biðja um opnunarmynstur til að losa"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Biðja um PIN-númer til að losa"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Biðja um aðgangsorð til að losa"</string>

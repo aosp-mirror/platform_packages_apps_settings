@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"手機正在進行加密，請稍候 (已完成 <xliff:g id="PERCENT">^1</xliff:g>%)。"</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"平板電腦加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"手機加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"<xliff:g id="DELAY">^1</xliff:g> 秒後再試一次。"</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"警告：解鎖嘗試次數只剩 <xliff:g id="COUNT">^1</xliff:g> 次！如果持續失敗，您的裝置將被清除。"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"輸入密碼"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"加密失敗"</string>
@@ -601,8 +604,12 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"永遠可掃瞄"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"永遠執行掃描"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允許 Google 的位置服務和其他應用程式掃描網絡 (即使 Wi-Fi 已關閉)"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"自動管理 Wi‑Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"允許 <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> 管理您的 Wi-Fi 連線"</string>
+    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
+    <skip />
+    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
+    <skip />
+    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
+    <skip />
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"為了提高位置精確度並用作其他用途，即使 Wi-Fi 已關閉，Google 和其他應用程式亦可能會掃瞄附近的網絡。如不想啟用此功能，可前往 [進階] &gt; [永遠可掃瞄] 更改設定。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"即使 Wi-Fi 已關閉，應用程式亦可能會掃瞄附近的網絡。如不想啟用此功能，可前往 [進階] &gt; [永遠可掃瞄] 更改設定。"</string>
@@ -672,7 +679,7 @@
     <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"WiFi 連線失敗"</string>
     <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"驗證問題"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"超出可用範圍"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"沒有偵測到互聯網連線，因此不會自動重新連線。"</string>
+    <string name="wifi_no_internet" msgid="9151470775868728896">"未能偵測到互聯網連線，因此不會自動重新連線。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"有 WPS 可供使用"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (有 WPS 可供使用)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"輸入您的網絡密碼"</string>
@@ -1234,8 +1241,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB 儲存裝置"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"於 SD 卡"</string>
     <string name="disabled" msgid="9206776641295849915">"已停用"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"沒有為此使用者安裝"</string>
     <string name="no_applications" msgid="7336588977497084921">"沒有應用程式。"</string>
     <string name="internal_storage" msgid="1584700623164275282">"內部儲存空間"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB 儲存裝置"</string>
@@ -1957,16 +1963,11 @@
     <string name="enter_password" msgid="8035706727471334122">"如要啟動 Android，請輸入密碼"</string>
     <string name="enter_pin" msgid="5305333588093263790">"如要啟動 Android，請輸入您的 PIN"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"如要啟動 Android，請畫出解鎖圖案"</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"圖案錯誤"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"密碼錯誤"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"PIN 錯誤"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"正在檢查…"</string>
+    <string name="starting_android" msgid="8581493237458496835">"正在啟動 Andriod"</string>
     <string name="delete" msgid="4219243412325163003">"刪除"</string>
     <string name="misc_files" msgid="6720680815969643497">"其他檔案"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"已選取 <xliff:g id="NUMBER">%1$d</xliff:g> 個，共 <xliff:g id="TOTAL">%2$d</xliff:g> 個"</string>
@@ -2333,6 +2334,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"停用網絡名稱廣播"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"停用網絡名稱廣播以防止第三方取得您的網絡資料。"</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"停用網絡名稱廣播將無法自動連線至隱藏的網絡。"</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"首選 SIM 卡用於："</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"每次都詢問"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"請選取偏好設定"</string>
@@ -2343,33 +2345,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"最近的搜尋查詢"</string>
     <string name="search_results_label" msgid="4163304782363526148">"搜尋結果"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"WiFi Wi-Fi 網絡連線"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"文字訊息 訊息 傳送文字訊息 簡訊 傳送短訊"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"流動網絡 手機網絡 流動網絡供應商 無線 網絡數據 4G 3G 2G LTE"</string>
     <string name="keywords_home" msgid="3626170808219458848">"應用程式啟動器"</string>
     <string name="keywords_display" msgid="6709007669501628320">"觸控式螢幕"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"變暗 螢幕 觸控螢幕 電池"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"變暗 螢幕 觸控螢幕 電池"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"背景 個人化 自訂 顯示"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"文字大小"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"投影"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"空間 磁碟 硬碟 裝置 使用量"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"電源 使用量 充電"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"拼寫 字典 拼字檢查 自動修正"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"辨識器 輸入 語音 說話 語言 免提耳機 免提 辨識 不雅字詞 音效記錄 藍牙耳機"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"速度 語言 預設 說話 語音 文字轉語音 無障礙功能 閱讀器 失明"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"時鐘 軍用"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"掃除 刪除 還原 清除 移除"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"打印機"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"揚聲器提示音"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"不得干擾 中斷 中斷"</string>
@@ -2378,8 +2369,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"精確度"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"帳戶"</string>
     <string name="keywords_users" msgid="4673901601478559100">"限制 限制 受限"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"文字 更正 修正 聲音 震動 自動 語言 手勢 建議 字詞建議 主題背景 令人反感的文字 輸入 表情圖案 國際"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"滑動 密碼 圖案 PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標籤"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
@@ -2490,8 +2480,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"開啟"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"關閉"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"螢幕固定"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"開啟這項設定時，您可以使用螢幕固定功能讓目前的畫面持續顯示，直至您取消固定。\n\n如何使用螢幕固定功能：\n\n1. 確認螢幕固定功能已開啟。\n\n2. 開啟您要固定的畫面。\n\n3. 輕觸 [概覽]。\n\n4. 向上快速滑動並輕觸圖釘圖示。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"取消固定時必須畫出解鎖圖案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"取消固定時必須輸入 PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"取消固定時必須輸入密碼"</string>

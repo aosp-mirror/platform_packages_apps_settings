@@ -372,7 +372,10 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Maghintay habang ine-encrypt ang iyong telepono. <xliff:g id="PERCENT">^1</xliff:g>% (na) kumpleto."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Maghintay habang ine-encrypt ang iyong tablet. Natitirang oras: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Maghintay habang ine-encrypt ang iyong telepono. Natitirang oras: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Subukang muli sa loob ng <xliff:g id="DELAY">^1</xliff:g> (na) segundo."</string>
+    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
+    <skip />
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Babala: Mabubura ang iyong device pagkatapos ng <xliff:g id="COUNT">^1</xliff:g> pang hindi matagumpay na pagsubok na mag-unlock!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"I-type ang iyong password"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Hindi matagumpay ang pag-encrypt"</string>
@@ -601,8 +604,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Palaging available ang pag-scan"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Palaging payagan ang pag-i-scan"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Hayaang mag-scan ng mga network ang serbisyo sa lokasyon ng Google at iba pang mga app, kahit na naka-off ang Wi-Fi"</string>
-    <string name="wifi_automatically_manage_title" msgid="6249976570008992746">"Awtomatikong pamahalaan ang Wi-Fi"</string>
-    <string name="wifi_automatically_manage_summary" msgid="6952470763378312488">"Hayaan ang <xliff:g id="WIFI_ASSISTANT">%1$s</xliff:g> na pamahalaan ang iyong koneksyon sa Wi‑Fi"</string>
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Awtomatikong kumonekta sa bukas na Wi‑Fi"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Payagan ang isang Wi‑Fi assistant na awtomatikong i-rate at kumonekta sa mga bukas na Wi‑Fi network na natukoy na may mataas na kalidad"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Pumili ng Wi‑Fi assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Mag-install ng mga certificate"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Upang mapahusay ang katumpakan ng lokasyon at para sa iba pang mga layunin, maaaring mag-scan ang Google at ang iba pang app kung may mga network sa malapit, kahit na naka-off ang Wi-Fi. Kung hindi mo ito gustong mangyari, pumunta sa Advanced &gt; Palaging available ang pag-scan."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Maaaring mag-scan ang apps kung may mga network sa malapit, kahit na naka-off ang Wi-Fi. Kung hindi mo ito gustong mangyari, pumunta sa Advanced &gt; Palaging available ang pag-scan."</string>
@@ -1234,8 +1238,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Imbakan na USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Sa SD card"</string>
     <string name="disabled" msgid="9206776641295849915">"Hindi Pinagana"</string>
-    <!-- no translation found for not_installed (2797554494953450291) -->
-    <skip />
+    <string name="not_installed" msgid="2797554494953450291">"Hindi naka-install para sa user na ito"</string>
     <string name="no_applications" msgid="7336588977497084921">"Walang apps."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Panloob na storage"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Imbakan na USB"</string>
@@ -1953,16 +1956,11 @@
     <string name="enter_password" msgid="8035706727471334122">"Upang magsimula sa Android, ilagay ang iyong password"</string>
     <string name="enter_pin" msgid="5305333588093263790">"Upang magsimula sa Android, ilagay ang iyong PIN"</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Upang magsimula sa Android, iguhit ang iyong pattern"</string>
-    <!-- no translation found for cryptkeeper_wrong_pattern (8423835922362956999) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_password (5200857195368904047) -->
-    <skip />
-    <!-- no translation found for cryptkeeper_wrong_pin (755720788765259382) -->
-    <skip />
-    <!-- no translation found for checking_decryption (8287458611802609493) -->
-    <skip />
-    <!-- no translation found for starting_android (8581493237458496835) -->
-    <skip />
+    <string name="cryptkeeper_wrong_pattern" msgid="8423835922362956999">"Maling Pattern"</string>
+    <string name="cryptkeeper_wrong_password" msgid="5200857195368904047">"Maling Password"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="755720788765259382">"Maling PIN"</string>
+    <string name="checking_decryption" msgid="8287458611802609493">"Sinusuri…"</string>
+    <string name="starting_android" msgid="8581493237458496835">"Sinisimulan ang Android"</string>
     <string name="delete" msgid="4219243412325163003">"Tanggalin"</string>
     <string name="misc_files" msgid="6720680815969643497">"Misc na mga file"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"pinili <xliff:g id="NUMBER">%1$d</xliff:g> sa <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -2329,6 +2327,7 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"I-disable ang Pag-broadcast ng Pangalan ng Network"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Pinipigilan ng Disable Network Name Broadcast ang pag-access ng third party sa iyong network info."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Pipigilan ng Pag-disable sa Network Name Broadcast ang awtomatikong pagkonekta sa tagong network."</string>
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Ginustong SIM para sa"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Magtanong palagi"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Kinakailangang pumili"</string>
@@ -2339,33 +2338,22 @@
     <string name="search_recents_queries_label" msgid="2128811638532309069">"Mga kamakailang paghahanap"</string>
     <string name="search_results_label" msgid="4163304782363526148">"Mga Resulta"</string>
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi network connection"</string>
-    <!-- no translation found for keywords_more_default_sms_app (895656981962034647) -->
-    <skip />
-    <!-- no translation found for keywords_more_mobile_networks (4939725094449606744) -->
-    <skip />
+    <string name="keywords_more_default_sms_app" msgid="895656981962034647">"text message pagte-text mga mensahe pagmemensahe"</string>
+    <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"cellular cell carrier wireless na data 4g 3g 2g lte"</string>
     <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"screen na touchscreen"</string>
-    <!-- no translation found for keywords_display_brightness_level (8923289340474728990) -->
-    <skip />
-    <!-- no translation found for keywords_display_auto_brightness (8357056338746666901) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (6043033055096511751) -->
-    <skip />
+    <string name="keywords_display_brightness_level" msgid="8923289340474728990">"i-dim ang screen touchscreen baterya"</string>
+    <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"i-dim ang screen touchscreen baterya"</string>
+    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"background i-personalize i-customize ang display"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"laki ng text"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"proyekto"</string>
-    <!-- no translation found for keywords_storage (6572905220031852173) -->
-    <skip />
-    <!-- no translation found for keywords_battery (2096185085932675704) -->
-    <skip />
-    <!-- no translation found for keywords_spell_checker (6106749039734174140) -->
-    <skip />
+    <string name="keywords_storage" msgid="6572905220031852173">"espasyo disk hard drive device paggamit"</string>
+    <string name="keywords_battery" msgid="2096185085932675704">"paggamit ng baterya i-charge"</string>
+    <string name="keywords_spell_checker" msgid="6106749039734174140">"pagbabaybay diksyunaryo spellcheck auto-correct"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"recognizer input speech speak language hands-free hand free recognition offensive word audio history bluetooth headset"</string>
-    <!-- no translation found for keywords_text_to_speech_output (392447904221657930) -->
-    <skip />
-    <!-- no translation found for keywords_date_and_time (2631808108134830066) -->
-    <skip />
-    <!-- no translation found for keywords_factory_data_reset (4355133848707691977) -->
-    <skip />
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"rate wika default magsalita nagsasalita tts na accessibility reader bulag"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"orasan military"</string>
+    <string name="keywords_factory_data_reset" msgid="4355133848707691977">"i-wipe i-delete i-restore i-clear alisin"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"pag-beep ng speaker"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="2912933812460077912">"hindi huwag abalahin pag-abala putol"</string>
@@ -2374,8 +2362,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"katumpakan"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
     <string name="keywords_users" msgid="4673901601478559100">"paghihigpit paghigpitan pinaghigpitan"</string>
-    <!-- no translation found for keywords_keyboard_and_ime (5251531893531063855) -->
-    <skip />
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"pagwawasto ng text tama tunog i-vibrate awtomatiko wika galaw magmungkahi suhestyon tema nakakapanakit na salita i-type emoji international"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"i-slide password pattern pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"I-set up ang Tag ng NFC sa Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Magsulat"</string>
@@ -2486,8 +2473,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Naka-on"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Naka-off"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Pagpi-pin ng screen"</string>
-    <!-- no translation found for screen_pinning_description (1137904524037468263) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Kapag naka-on ang setting na ito, maaari mong gamitin ang pagpi-pin sa screen para panatilihing nasa view ang kasalukuyang screen hanggang sa mag-unpin ka.\n\nPara magamit ang pagpi-pin sa screen:\n\n1. Siguraduhing naka-on ang pagpi-pin sa screen.\n\n2. Buksan ang screen na gusto mong i-pin.\n\n3. Pindutin ang Pangkalahatang-ideya.\n\n4. Mag-swipe pataas, pagkatapos ay pindutin ang icon na pin."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Humingi ng pattern sa pag-unlock bago mag-unpin"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Humingi ng PIN bago mag-unpin"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Humingi ng password bago mag-unpin"</string>
