@@ -2027,6 +2027,15 @@
                 android:resource="@id/sim_settings" />
         </activity>
 
+        <activity android:name=".sim.SimDialogActivity"
+                android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar"
+                android:label="@string/sim_settings_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <provider
             android:name=".search.SettingsSearchIndexablesProvider"
             android:authorities="com.android.settings"

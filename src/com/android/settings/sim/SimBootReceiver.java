@@ -38,6 +38,7 @@ import com.android.settings.Utils;
 import java.util.List;
 
 public class SimBootReceiver extends BroadcastReceiver {
+    private static final String TAG = "SimBootReceiver";
     private static final int SLOT_EMPTY = -1;
     private static final int NOTIFICATION_ID = 1;
     private static final String SHARED_PREFERENCES_NAME = "sim_state";
@@ -61,6 +62,9 @@ public class SimBootReceiver extends BroadcastReceiver {
 
     private void detectChangeAndNotify() {
         final int numSlots = mTelephonyManager.getSimCount();
+        boolean notificationSent = false;
+        int numSIMsDetected = 0;
+        int lastSIMSlotDetected = -1;
 
         // Do not create notifications on single SIM devices.
         if (numSlots < 2) {
@@ -82,15 +86,31 @@ public class SimBootReceiver extends BroadcastReceiver {
             final int lastSubId = getLastSubId(key);
 
             if (sir != null) {
+                numSIMsDetected++;
                 final int currentSubId = sir.getSubscriptionId();
                 if (lastSubId != currentSubId) {
                     createNotification(mContext);
                     setLastSubId(key, currentSubId);
+                    notificationSent = true;
                 }
+                lastSIMSlotDetected = i;
             } else if (lastSubId != SLOT_EMPTY) {
                 createNotification(mContext);
                 setLastSubId(key, SLOT_EMPTY);
+                notificationSent = true;
             }
+        }
+
+        if (notificationSent) {
+            Intent intent = new Intent(mContext, SimDialogActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (numSIMsDetected == 1) {
+                intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.PREFERRED_PICK);
+                intent.putExtra(SimDialogActivity.PREFERRED_SIM, lastSIMSlotDetected);
+            } else {
+                intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
+            }
+            mContext.startActivity(intent);
         }
     }
 
@@ -141,4 +161,5 @@ public class SimBootReceiver extends BroadcastReceiver {
             detectChangeAndNotify();
         }
     };
+
 }
