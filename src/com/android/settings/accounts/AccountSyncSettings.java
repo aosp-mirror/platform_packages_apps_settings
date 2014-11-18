@@ -24,6 +24,7 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
@@ -313,12 +314,18 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     private void startSyncForEnabledProviders() {
         requestOrCancelSyncForEnabledProviders(true /* start them */);
-        getActivity().invalidateOptionsMenu();
+        final Activity activity = getActivity();
+        if (activity != null) {
+            activity.invalidateOptionsMenu();
+        }
     }
 
     private void cancelSyncForEnabledProviders() {
         requestOrCancelSyncForEnabledProviders(false /* cancel them */);
-        getActivity().invalidateOptionsMenu();
+        final Activity activity = getActivity();
+        if (activity != null) {
+            activity.invalidateOptionsMenu();
+        }
     }
 
     private void requestOrCancelSyncForEnabledProviders(boolean startSync) {
@@ -367,7 +374,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     protected void onSyncStateUpdated() {
         if (!isResumed()) return;
         setFeedsState();
-        getActivity().invalidateOptionsMenu();
+        final Activity activity = getActivity();
+        if (activity != null) {
+            activity.invalidateOptionsMenu();
+        }
     }
 
     private void setFeedsState() {
@@ -440,7 +450,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
         mErrorInfoView.setVisibility(syncIsFailing ? View.VISIBLE : View.GONE);
-        getActivity().invalidateOptionsMenu();
     }
 
     @Override
