@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Vols desconnectar-te?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Això posarà fi a la teva connexió amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"No tens permís per canviar la configuració del Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> visible disp. propers amb conf. Bluetooth oberta."</string>
+    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> serà visible per a dispositius propers amb la configuració de Bluetooth activada."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Vols desconnectar el dispositiu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Emissió"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vols desactivar el perfil?"</string>
@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s vol accedir als teus missatges. Vols donar-li accés a %2$s?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data i hora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Selecció de la zona horària"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"Regional (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Previsualitza:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Cos de lletra:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Selecciona la zona horària"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Data"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Defineix la data"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Format de data"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Format de data"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Ordena alfabèticament"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordena per zona horària"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Espera mentre s\'encripta el telèfon. <xliff:g id="PERCENT">^1</xliff:g>% completat."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Espera mentre s\'encripta la tauleta. Temps restant: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Espera mentre s\'encripta el telèfon. Temps restant: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Per desbloquejar la tauleta, l\'hauràs d\'apagar i tornar-la a engegar."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Per desbloquejar el telèfon, l\'hauràs d\'apagar i tornar-lo a engegar."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Advertiment: si proves de desbloquejar el dispositiu <xliff:g id="COUNT">^1</xliff:g> vegades més de manera incorrecta, se n\'esborraran totes les dades."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Escriu la contrasenya"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"S\'ha produït un error en encriptar"</string>
@@ -2108,7 +2103,7 @@
     <string name="data_usage_metered_mobile" msgid="2326986339431119372">"Xarxes mòbils"</string>
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Xarxes Wi‑Fi amb mètriques"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Per seleccionar xarxes amb mesurament d\'ús, activa la Wi‑Fi."</string>
-    <string name="data_usage_disclaimer" msgid="6887858149980673444">"El recompte de dades de l\'operador de tel. mòbil pot diferir del del dispositiu."</string>
+    <string name="data_usage_disclaimer" msgid="6887858149980673444">"El recompte de dades de l\'operador de telefonia mòbil pot ser diferent del del dispositiu."</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Trucada d\'emergència"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Torna a la trucada"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Nom"</string>
@@ -2265,7 +2260,7 @@
     <string name="call_manager_title" msgid="4479949569744516457">"Gestor de trucades"</string>
     <!-- no translation found for call_manager_summary (5918261959486952674) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="2451014351355183338">"Emissions d\'emergència"</string>
+    <string name="cell_broadcast_settings" msgid="2451014351355183338">"Missatges d\'emergència"</string>
     <string name="network_operators_settings" msgid="2583178259504630435">"Operadors de xarxa"</string>
     <string name="access_point_names" msgid="1381602020438634481">"Noms dels punts d\'accés"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="5808043757309522392">"Mode LTE 4G millorat"</string>
@@ -2328,6 +2323,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Si desactives l\'emissió del nom de la xarxa, els tercers no podran veure la informació de la xarxa."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Si desactives l\'emissió del nom de la xarxa, no et podràs connectar automàticament a xarxes ocultes."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"S\'han canviat les targetes SIM"</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Toca per fer les configuracions."</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"SIM preferida per a"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Demana-m\'ho cada vegada"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Has de seleccionar una preferència."</string>
@@ -2482,7 +2479,7 @@
     <string name="experimental_preference" msgid="7083015446690681376">"(Experimental)"</string>
     <string name="display_auto_rotate_title" msgid="6176450657107806043">"Quan el dispositiu està girat"</string>
     <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Gira el contingut de la pantalla"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Continua amb l\'orientació vertical"</string>
+    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Continua amb el mode vertical"</string>
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Continua amb l\'orientació horitzontal"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Continua amb l\'orientació actual"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informació sobre l\'IMEI"</string>

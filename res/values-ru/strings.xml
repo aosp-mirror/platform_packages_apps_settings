@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s хочет получить доступ к вашим сообщениям. Предоставить доступ %2$s?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Дата и время"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Выбрать часовой пояс"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"По умолчанию (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Предпросмотр:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Размер шрифта:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Часовой пояс"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Дата"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Дата"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Формат даты"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Формат даты"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Упорядочить по алфавиту"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Упорядочить по часовому поясу"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Дата"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Дождитесь завершения шифрования телефона. Выполнено: <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Чтобы разблокировать планшетный ПК, выключите его и снова включите."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Чтобы разблокировать телефон, выключите его и снова включите."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Внимание! Осталось попыток: <xliff:g id="COUNT">^1</xliff:g>. Если вам не удастся выполнить авторизацию, память устройства будет очищена."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Введите пароль"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Сбой шифрования"</string>
@@ -604,12 +599,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Всегда искать сети"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Всегда искать сети"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Разрешить службе геопозиционирования Google и другим приложениям искать сети, даже когда модуль Wi‑Fi отключен"</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Подключаться к доступным сетям Wi-Fi"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Разрешить ассистенту Wi-Fi автоматически оценивать доступные сети и подключаться к ним"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Выбор Ассистента Wi-Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Установка сертификатов"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Чтобы улучшить определение местоположения, а также для достижения других целей, Google и другие приложения могут выполнять поиск сетей поблизости, даже если сеть Wi-Fi отключена. Чтобы изменить эти настройки, перейдите в меню \"Дополнительно &gt; Всегда искать сети\"."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Приложения могут выполнять поиск сетей поблизости, даже если сеть Wi-Fi отключена. Чтобы изменить эти настройки, перейдите в меню \"Дополнительно &gt; Всегда искать сети\"."</string>
@@ -2331,6 +2323,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Параметр \"Не показывать имя сети\" делает невозможным доступ третьих лиц к данным о сети."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Параметр \"Не показывать имя сети\" делает невозможным автоматическое подключение к скрытым сетям."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> дБмВт, asu: <xliff:g id="ASU">%2$d</xliff:g>"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM-карты заменены"</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Нажмите, чтобы настроить"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Использовать SIM-карту для"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Спрашивать каждый раз"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Выберите SIM-карту"</string>

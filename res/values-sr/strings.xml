@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s жели да приступи порукама. Желите ли да одобрите приступ за %2$s?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Датум и време"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Избор временске зоне"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"Регионално (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Преглед:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Величина фонта:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Избор временске зоне"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Датум"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Подешавање датума"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Формат датума"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Избор формата датума"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Сортирај према абецеди"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Сортирај према временској зони"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Датум"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Сачекајте да се телефон шифрује. Довршено је <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Сачекајте док се таблет шифрује. Преостало време: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Сачекајте док се телефон шифрује. Преостало време: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Да бисте откључали таблет, искључите га, па га поново укључите."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Да бисте откључали телефон, искључите га, па га поново укључите."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Упозорење: Подаци са уређаја ће бити обрисани ако не успете да га откључате још <xliff:g id="COUNT">^1</xliff:g> пута!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Унесите лозинку"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Шифровање није успело"</string>
@@ -604,12 +599,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Скенирање је увек доступно"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Увек дозвољавај скенирање"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Дозволите Google-овој услузи лоцирања и другим апликацијама да скенирају мреже, чак и када је Wi-Fi искључен"</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Аутом. се повежи на отворене Wi‑Fi мреже"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Дозволите Wi‑Fi помоћнику да аутоматски оцени отворене Wi‑Fi мреже и повеже се на оне за које утврди да су високог квалитета"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Изаберите Wi‑Fi помоћника"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Инсталирај сертификате"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Да би, између осталог, побољшале тачност локације, Google и друге апликације могу да скенирају оближње мреже, чак и када је Wi-Fi искључен. Ако не желите да се то дешава, идите на Напредно &gt; Скенирање је увек доступно."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Апликације могу да скенирају оближње мреже, чак и када је Wi-Fi искључен. Ако не желите да се то дешава, идите на Напредно &gt; Скенирање је увек доступно."</string>
@@ -1316,7 +1308,7 @@
     <string name="running_process_item_user_label" msgid="3129887865552025943">"Корисник: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="running_process_item_removed_user_label" msgid="8250168004291472959">"Уклоњени корисник"</string>
     <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процес и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуга"</string>
-    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процес и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуге"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процес и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуге(а)"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процеса и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуга"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процеса и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуга"</string>
     <string name="running_processes_header_title" msgid="6588371727640789560">"Меморија уређаја"</string>
@@ -1838,7 +1830,7 @@
     <string name="allow_usage_access_title" msgid="2134237975190472249">"Желите да дозволите приступ?"</string>
     <string name="allow_usage_access_message" msgid="2295847177051307496">"Ако дозволите приступ, ова апликација ће моћи да прегледа опште информације у вези са апликацијама на уређају, на пример, колико их често користите."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за хитне позиве"</string>
-    <string name="emergency_tone_summary" msgid="722259232924572153">"Подешавање понашања када се успоставља хитни позив"</string>
+    <string name="emergency_tone_summary" msgid="722259232924572153">"Подешавање понашања када се успоставља хитан позив"</string>
     <string name="privacy_settings" msgid="5446972770562918934">"Резервна копија и ресетовање"</string>
     <string name="privacy_settings_title" msgid="4856282165773594890">"Резервна копија и ресетовање"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Резервна копија и ресетовање"</string>
@@ -2112,7 +2104,7 @@
     <string name="data_usage_metered_wifi" msgid="1761738002328299714">"Wi‑Fi мреже са ограничењем"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"Да бисте изабрали мреже са ограничењем, укључите Wi-Fi."</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"Обрачун података код мобилног оператера се можда разликује од вашег уређаја."</string>
-    <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Хитни позив"</string>
+    <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"Хитан позив"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"Назад на позив"</string>
     <string name="vpn_name" msgid="4689699885361002297">"Назив"</string>
     <string name="vpn_type" msgid="5435733139514388070">"Тип"</string>
@@ -2331,6 +2323,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Опција Онемогући емитовање назива мреже спречава треће стране да приступају информацијама о мрежи."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Онемогућавањем емитовања назива мреже спречавате аутоматско повезивање са скривеним мрежама."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM картице су промењене."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Додирните да бисте подесили"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Жељена SIM картица за"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Увек питај"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Потребно је да изаберете нешто"</string>
