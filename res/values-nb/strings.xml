@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s ønsker adgang til meldingene dine. Vil du gi %2$s tilgang?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Dato og klokkeslett"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Velg tidssone"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"Regional (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Forhåndsvisning:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Skriftstørrelse:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Tidssone"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Dato"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Angi dato"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Datoformat"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Velg datoformat"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sorter alfabetisk"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sorter etter tidssone"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dato"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Vent mens telefonen krypteres. <xliff:g id="PERCENT">^1</xliff:g> fullført."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Vent mens nettbrettet ditt krypteres. Tid som gjenstår: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Vent mens telefonen din krypteres. Tid som gjenstår: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"For å låse opp nettbrettet ditt må du slå det av og så på igjen."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"For å låse opp telefonen din må du slå den av og så på igjen."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Advarsel: Enheten din tømmes etter <xliff:g id="COUNT">^1</xliff:g> mislykkede opplåsningsforsøk til."</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Skriv inn passordet"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Kryptering mislykket"</string>
@@ -2332,6 +2327,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"«Deaktiver kringkasting av nettverksnavn» beskytter mot at tredjeparter får tilgang til nettverksinformasjonen din."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Deaktiver kringkasting av nettverksnavn hindrer automatisk tilkobling til skjulte nettverk."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM-kortene er endret."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Trykk for å konfigurere"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Prioritert SIM-kort for"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Spør hver gang"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Du må velge en SIM-innstilling"</string>
@@ -2355,8 +2352,8 @@
     <string name="keywords_battery" msgid="2096185085932675704">"strømforbruk lade"</string>
     <string name="keywords_spell_checker" msgid="6106749039734174140">"stavemåte ordliste stavekontroll autokorrektur"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"gjenkjenning inndata tale snakk språk håndfri hånd fri gjenkjenning støtende ord lydlogg bluetooth hodetelefoner"</string>
-    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"takst språk standard snakk snakking tekst til tale tilgjengelighet skjermleser blind"</string>
-    <string name="keywords_date_and_time" msgid="2631808108134830066">"militær klokke"</string>
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"takst språk standard snakk snakking tekst til tale tilgjengelighet leser blind"</string>
+    <string name="keywords_date_and_time" msgid="2631808108134830066">"24-timersklokke"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"visk ut slett gjenopprett tøm fjern"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"skriver"</string>
     <string name="keywords_sounds_and_notifications" msgid="5965996187974887000">"høyttalerpip"</string>

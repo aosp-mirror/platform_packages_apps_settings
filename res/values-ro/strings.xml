@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s dorește să acceseze mesajele dvs. Oferiți acces pentru %2$s?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Data şi ora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Selectaţi fusul orar"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"Regional (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Previzualizaţi:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Dimensiune font:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Selectaţi un fus orar"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Dată"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Setaţi data"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Formatul datei"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Alegeţi formatul de dată"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sortaţi în ordine alfabetică"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortaţi după fusul orar"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Aşteptaţi criptarea telefonului. Finalizat <xliff:g id="PERCENT">^1</xliff:g>%."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Așteptați criptarea tabletei. Finalizat: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Așteptați criptarea telefonului. Finalizat: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Pentru a debloca tableta, opriți-o și reporniți-o."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Pentru a debloca telefonul, opriți-l și reporniți-l."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Avertisment: datele de pe dispozitiv vor fi șterse după încă <xliff:g id="COUNT">^1</xliff:g> încercări nereușite de deblocare!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Introduceţi parola"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Criptare nereuşită"</string>
@@ -604,12 +599,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Scanare mereu disponibilă"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Permiteți întotdeauna scanarea"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permiteți serviciului de localizare Google și altor aplicații să caute rețele, chiar dacă funcția Wi-Fi este dezactivată."</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Conectați-vă automat la Wi‑Fi deschis"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Permiteți asistentului Wi‑Fi să evalueze și să vă conecteze automat la rețele Wi‑Fi deschise de calitate"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Selectați un asistent Wi‑Fi"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalați certificate"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Pentru a îmbunătăți precizia locației, dar și în alte scopuri, Google și alte aplicații pot căuta rețele în apropiere, chiar dacă rețeaua Wi-Fi este dezactivată. Dacă nu doriți acest lucru, accesați Avansate &gt; Scanare mereu disponibilă."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Aplicațiile pot căuta rețele în apropiere, chiar dacă rețeaua Wi-Fi este dezactivată. Dacă nu doriți acest lucru, accesați Avansate &gt; Scanare mereu disponibilă."</string>
@@ -1101,8 +1093,8 @@
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Solicitări recente de localiz."</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Nicio aplicație nu a solicitat locația recent"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Servicii de localizare"</string>
-    <string name="location_high_battery_use" msgid="517199943258508020">"Utilizarea intensă a bateriei"</string>
-    <string name="location_low_battery_use" msgid="8602232529541903596">"Utilizarea redusă a bateriei"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"Utilizare intensă a bateriei"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"Utilizare redusă a bateriei"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Mod de localizare"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Utilizează GPS, Wi-Fi și rețelele mobile pentru determinarea locației"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Utilizează rețelele Wi-Fi și mobile pentru determinarea locației"</string>
@@ -2336,6 +2328,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Dezactivarea trimiterii numelui rețelei împiedică utiliz. terță parte să acceseze info. de rețea."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Dezactivarea trimiterii numelui rețelei împiedică conectarea automată la rețele ascunse."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"Cardurile SIM au fost schimbate."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Atingeți pentru a configura"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Cartelă SIM preferată pentru"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Se întreabă de fiecare dată"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Selectați o opțiune"</string>
@@ -2397,10 +2391,10 @@
     <string name="notification_pulse_title" msgid="1247988024534030629">"Indicator luminos intermitent"</string>
     <string name="lock_screen_notifications_title" msgid="9118805570775519455">"Când dispozitivul este blocat"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afișați integral conținutul notificărilor"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ascundeți conținutul confidențial din notificări"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Ascundeți conținutul notificărilor sensibile"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3001013816427963576">"Nu afișați nicio notificare"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Când dispozitivul este blocat, cum doriți să se afișeze notificările?"</string>
-    <string name="app_notifications_title" msgid="5810577805218003760">"Notificări despre aplicații"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Notificări din aplicații"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Alte sunete"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Tonuri pentru tastatura numerică"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Sunete la blocarea ecranului"</string>

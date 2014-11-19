@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s හට ඔබගේ පණිවිඩ වෙත ප්‍රවේශ විමට අවශ්‍යයි. %2$s හට ප්‍රවේශය දෙන්නද?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"දිනය සහ වේලාව"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"වේලා කලාපය තෝරන්න"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"ප්‍රාදේශික (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"පෙරදසුන:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"අකුරු ප්‍රමාණය:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"කාල කලාපය තෝරන්න"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"දිනය"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"දිනය සකසන්න"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"දින ආකාරය"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"දින ආකෘතිය තෝරන්න"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"අකුරු අනුපිළිවෙලට සකසන්න"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"වේලා කලාපය අනුව පෙළගස්වන්න"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"දිනය"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"ඔබගේ දුරකථනය සංකේතනය වන අතරතුර රැඳී සිටින්න. <xliff:g id="PERCENT">^1</xliff:g>% සම්පූර්ණයි."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"ඔබගේ ටැබ්ලටය සංකේතිත වන තෙක් රැදී සිටින්න. ඉතිරි කාලය: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"ඔබගේ දුරකථනය සංකේතිත වන තෙක් රැදී සිටින්න. ඉතිරි කාලය: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"ඔබේ තල පරිගණකය අගුලු හැරීමට, එය අක්‍රිය කර අනතුරුව සක්‍රිය කරන්න."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"ඔබේ දුරකථනය අගුලු හැරීමට, එය අක්‍රිය කර අනතුරුව සක්‍රිය කරන්න."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"අවවාදය: ඔබගේ උපාංගය අඟුල ඇරීමට අවස්ථා <xliff:g id="COUNT">^1</xliff:g> වඩා අසාර්ථක වූ හොත් එය පිසදමන්න!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"ඔබගේ මුරපදය ටයිප් කරන්න"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"සංකේතනය අසාර්ථකයි"</string>
@@ -2334,6 +2329,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"ජාලයේ නම විකාශනය අබල කිරීමෙන් ඔබගේ ජාල තොරතුරු තුන්වැනි පාර්ශව ලබාගැනීමෙන් ආරක්ෂා වේ."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"ජාලයේ නම විකාශනය කිරීම අබල කිරීමෙන් සැඟවුණු ජාල වලට ස්වයංක්‍රිය සම්බන්ධ වීම වලක්වයි."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM කාඩ්පත් වෙනස් කෙරිණි."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"සකස් කිරීමට ස්පර්ශ කරන්න"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"සඳහා වඩා කැමති SIM"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"සෑම වේලාවකම ආසන්න"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"තේරීමක් අවශ්‍යයි"</string>

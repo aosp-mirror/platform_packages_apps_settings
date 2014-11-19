@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"உங்கள் செய்திகளை %1$s அணுக விரும்புகிறது. %2$s க்கு அணுகலை வழங்கவா?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"தேதி &amp; நேரம்"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"நேரமண்டலத்தைத் தேர்வுசெய்க"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"மண்டலம் (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"மாதிரிக்காட்சி:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"எழுத்துரு அளவு:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"நேரமண்டலத்தை அமை"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"தேதி"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"தேதியை அமை"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"தேதி வடிவம்"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"தேதி வடிவமைப்பைத் தேர்வுசெய்யவும்"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"அகர வரிசைப்படி வரிசைப்படுத்து"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"நேர மண்டலத்தின்படி வரிசைப்படுத்து"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"தேதி"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"உங்கள் மொபைல் முறைமையாக்கம் செய்யப்படுகிறது, காத்திருக்கவும். <xliff:g id="PERCENT">^1</xliff:g>% முடிந்தது."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"டேப்லெட் குறியாக்கப்படும் வரை காத்திருக்கவும். மீதமுள்ள நேரம்: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"ஃபோன் குறியாக்கப்படும் வரை காத்திருக்கவும். மீதமுள்ள நேரம்: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"டேப்லெட்டைத் திறக்க, அதை முடக்கி, பின் இயக்கவும்."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"மொபைலைத் திறக்க, அதை முடக்கி, பின் இயக்கவும்."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"எச்சரிக்கை: சாதனத்தைத் திறப்பதற்கான <xliff:g id="COUNT">^1</xliff:g> முயற்சிகளும் தோல்வி அடைந்தால், சாதனத்தின் தரவு அழிக்கப்படும்!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"உங்கள் கடவுச்சொல்லை உள்ளிடவும்"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"முறைமையாக்கம் தோல்வி"</string>
@@ -2332,6 +2327,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"நெட்வொர்க் பெயர் அலைபரப்பை முடக்குவது, மூன்றாம் தரப்பினர் உங்கள் நெட்வொர்க் தகவலின் அணுகலைப் பெறுவதைத் தடுக்கும்."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"நெட்வொர்க் பெயர் அலைபரப்புவதை முடக்குவது, மறைக்கப்பட்ட நெட்வொர்க்குகளுடன் தானாக இணைப்பதைத் தடுக்கும்."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"சிம் கார்டுகள் மாற்றப்பட்டன."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"அமைக்கத் தொடவும்"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"இதற்குப் பயன்படுத்த வேண்டிய SIM"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"ஒவ்வொரு முறையும் கேள்"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"தேர்வு தேவை"</string>
@@ -2355,7 +2352,7 @@
     <string name="keywords_battery" msgid="2096185085932675704">"பவர் பயன்பாடு சார்ஜ்"</string>
     <string name="keywords_spell_checker" msgid="6106749039734174140">"உச்சரிப்பு அகராதி எழுத்துச்சரிபார்ப்பு தன்னியக்க திருத்தம்"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"கண்டறிவான் உள்ளீடு பேச்சு பேசு மொழி ஹேண்ட்ஸ்-ஃப்ரீ ஹேண்ட்ஃப்ரீ அறிதல் தீய வார்த்தை ஆடியோ வரலாறு புளுடூத் ஹெட்செட்"</string>
-    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"வீதம் மொழி இயல்பு பேசு பேசுதல் tts அணுகல்தன்மை ரீடர் குருடு"</string>
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"வீதம் மொழி இயல்பு பேசு பேசுதல் tts அணுகல்தன்மை ரீடர் பார்வையற்றவர்"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"கடிகாரம் மிலிட்டரி"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"அழி நீக்கு மீட்டமை அழி அகற்று"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"பிரிண்டர்"</string>
@@ -2366,7 +2363,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"துல்லியம்"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"கணக்கு"</string>
     <string name="keywords_users" msgid="4673901601478559100">"வரம்பிடல் வரம்பு வரம்பிட்டது"</string>
-    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"உரை திருத்தம் சரிசெய் ஒலி அதிர்வு தானியங்கு மொழி சைகை பரிந்துரை பரிந்துரைப்பு தீம் வன்முறை சொல் வகை ஈமோஜி சர்வதேசம்"</string>
+    <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"உரை திருத்தம் சரிசெய் ஒலி அதிர்வு தானியங்கு மொழி சைகை பரிந்துரை பரிந்துரைப்பு தீம் வன்மொழி சொல் வகை ஈமோஜி சர்வதேசம்"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"ஸ்லைடு கடவுச்சொல் வடிவம் pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"வைஃபை NFC குறியை அமை"</string>
     <string name="write_tag" msgid="8571858602896222537">"எழுது"</string>

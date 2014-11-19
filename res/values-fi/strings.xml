@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s haluaa käyttää viestejäsi. Myönnetäänkö käyttöoikeus kohteeseen %2$s?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Päivämäärä ja aika"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Valitse aikavyöhyke"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"Paikallinen (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Esikatselu:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Kirjasimen koko:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Valitse aikavyöhyke"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Päiväys"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Aseta päivämäärä"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Päiväyksen muoto"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Valitse päivämäärän muoto"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Lajittelu aakkosjärjestyksessä"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Lajittelu aikavyöhykkeen mukaan"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Päiväys"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Odota, puhelinta salataan. <xliff:g id="PERCENT">^1</xliff:g> % valmiina."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Odota, tablet-laitteesi salataan. Aikaa jäljellä: <xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Odota, puhelimesi salataan. Aikaa jäljellä: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Avaa lukitus käynnistämällä tabletti uudelleen."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Avaa lukitus käynnistämällä puhelin uudelleen."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Varoitus: laite tyhjennetään <xliff:g id="COUNT">^1</xliff:g> epäonnistuneen lukituksenpoistoyrityksen jälkeen!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Kirjoita salasana"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Salaus epäonnistui"</string>
@@ -604,12 +599,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Haku aina käytettävissä"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Salli verkkojen etsiminen"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Anna Googlen sijaintipalvelun ja muiden sovellusten etsiä verkkoja, vaikka Wi-Fi-yhteys on pois käytöstä"</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Yhdistä avoimeen Wi‑Fiin automaattisesti"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Salli Wi‑Fi-apurin arvioida automaattisesti avoimia Wi‑Fi-verkkoja ja yhdistää laadukkaisiin verkkoihin."</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Valitse Wi‑Fi-apuri"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Asenna varmenteet"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Voit mm. parantaa Googlen ja muiden sovellusten sijaintitietojen tarkkuutta antamalla luvan etsiä wifi-verkkoja myös silloin, kun wifi ei ole käytössä. Jos et halua sallia sitä, valitse Lisäasetukset &gt; Etsiminen aina käytössä."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Sovellukset voivat etsiä läheisiä verkkoja vaikka wifi ei olisi käytössä. Jos et halua sallia sitä, valitse Lisäasetukset &gt; Etsiminen aina käytössä."</string>
@@ -2335,6 +2327,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Älä lähetä verkon nimeä -asetus estää kolmansia osapuolia urkkimasta verkkotietojasi."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Älä lähetä verkon nimeä -asetus estää automaattisen yhdistämisen piilotettuihin verkkoihin."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM-kortteja on muutettu."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Määritä asetukset koskettamalla"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Ensisijainen SIM-kortti seuraaville toiminnoille:"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Kysy aina"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Valinta on pakollinen"</string>
@@ -2435,11 +2429,11 @@
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Älä koskaan näytä ilmoituksia tästä sovelluksesta"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"Tärkeät"</string>
     <string name="app_notification_priority_summary" msgid="7513344552201639232">"Näytä ilmoitukset luettelon kärjessä ja jatka niiden näyttämistä kun laite on asetettu näyttämään vain tärkeät häiriöt"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Herkkä"</string>
+    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Yksityisluontoinen"</string>
     <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Piilota arkaluonteinen sisältö tämän sovelluksen ilmoituksista, kun laite on lukittu"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Estetty"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Tärkeät"</string>
-    <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Herkkä"</string>
+    <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Yksityisluontoinen"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Valmis"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Kunnes poistat tämän käytöstä"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Tärkeät häiriöt"</string>
