@@ -91,20 +91,20 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                         new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO: We need an API to remove an account from a different user.
-                        // See: http://b/15466880
-                        AccountManager.get(AccountSyncSettings.this.getActivity())
-                                .removeAccountAsUser(mAccount,
-                                new AccountManagerCallback<Boolean>() {
+                        Activity activity = getActivity();
+                        AccountManager.get(activity)
+                                .removeAccountAsUser(mAccount, activity,
+                                new AccountManagerCallback<Bundle>() {
                             @Override
-                            public void run(AccountManagerFuture<Boolean> future) {
+                            public void run(AccountManagerFuture<Bundle> future) {
                                 // If already out of this screen, don't proceed.
                                 if (!AccountSyncSettings.this.isResumed()) {
                                     return;
                                 }
                                 boolean failed = true;
                                 try {
-                                    if (future.getResult() == true) {
+                                    if (future.getResult()
+                                            .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
                                         failed = false;
                                     }
                                 } catch (OperationCanceledException e) {
