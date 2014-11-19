@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s 要求存取您的訊息。要將存取權授予 %2$s 嗎？"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和時間"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"選擇時區"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"本地 (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"預覽："</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"字型大小："</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"選取時區"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"日期"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"設定日期"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"日期格式"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"選擇日期格式"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"依照字母排序"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"依時區排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
@@ -372,10 +369,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"正在對手機加密，請稍候 (已完成 <xliff:g id="PERCENT">^1</xliff:g>%)。"</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"平板電腦加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"手機加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"如要解除鎖定平板電腦，請關閉平板電腦後再開機。"</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"如要解除鎖定手機，請關閉手機後再開機。"</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"警告：解鎖嘗試次數還剩 <xliff:g id="COUNT">^1</xliff:g> 次！如果持續失敗，您的裝置將會遭到清除。"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"輸入密碼"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"加密失敗"</string>
@@ -604,12 +599,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"一律執行掃描"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"一律執行掃描"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允許 Google 的定位服務和其他應用程式掃描網路 (即使 Wi-Fi 已關閉仍允許掃描)"</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"自動連線至開放 Wi‑Fi"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"允許 Wi‑Fi 小幫手自動為開放 Wi‑Fi 網路評分，並連線至判定為高品質的開放 Wi‑Fi 網路"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"選取 Wi‑Fi 小幫手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"為了提升定位精確度及用於其他用途，Google 和其他應用程式可能會掃描附近的 Wi-Fi 網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"應用程式可能會掃描附近的網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
@@ -2335,6 +2327,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"停用網路名稱廣播以防第三方取得您的網路資訊。"</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"停用網路名稱廣播將無法自動連線到隱藏的網路。"</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM 卡已變更。"</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"輕觸即可設定"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"適用於以下用途的偏好 SIM 卡"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"每次皆詢問"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"請選取偏好設定"</string>

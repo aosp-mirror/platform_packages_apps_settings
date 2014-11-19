@@ -268,7 +268,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s сиздин баарлашуу билдирүүлөрүңүзгө жеткиси келет. %2$s уруксат берилсинби?"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Күн жана убакыт"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Саат алкагын тандаңыз"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"Жергиликтүү (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <!-- no translation found for display_preview_label (1127597250917274792) -->
     <skip />
     <!-- no translation found for display_font_size_label (8941851418397475389) -->
@@ -506,8 +505,6 @@
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Дата"</string>
     <!-- no translation found for date_time_set_date (7021491668550232105) -->
     <skip />
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"Дата форматы"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"Датанын форматын тандоо"</string>
     <!-- no translation found for zone_list_menu_sort_alphabetically (5683377702671088588) -->
     <skip />
     <!-- no translation found for zone_list_menu_sort_by_timezone (2720190443744884114) -->
@@ -574,10 +571,8 @@
     <string name="crypt_keeper_setup_description" product="default" msgid="951918761585534875">"Телефонуңуз шифрленгичке күтө туруңуз. <xliff:g id="PERCENT">^1</xliff:g>% аткарылды."</string>
     <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="1655047311546745695">"Планшетиңиз шифрленгенче күтө туруңуз. <xliff:g id="DURATION">^1</xliff:g> убакыт калды."</string>
     <string name="crypt_keeper_setup_time_remaining" product="default" msgid="1862964662304683072">"Телефонуңуз шифрленгенче күтө туруңуз. <xliff:g id="DURATION">^1</xliff:g> убакыт калды."</string>
-    <!-- no translation found for crypt_keeper_force_power_cycle (556504311511212648) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_force_power_cycle (1794353635603020327) -->
-    <skip />
+    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="556504311511212648">"Планшетиңиздин кулпусун ачуу үчүн, аны өчүрүп күйгүзүңүз."</string>
+    <string name="crypt_keeper_force_power_cycle" product="default" msgid="1794353635603020327">"Телефонуңуздун кулпусун ачуу үчүн, аны өчүрүп күйгүзүңүз."</string>
     <string name="crypt_keeper_warn_wipe" msgid="2738374897337991667">"Эскертүү: Кулпуну дагы <xliff:g id="COUNT">^1</xliff:g> жолу ача албай койсоңуз, түзмөгүңүз тазаланат!"</string>
     <string name="crypt_keeper_enter_password" msgid="2223340178473871064">"Сырсөзүңүздү териңиз"</string>
     <string name="crypt_keeper_failed_title" msgid="7133499413023075961">"Шифрлөө ийгиликсиз аяктады"</string>
@@ -882,12 +877,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Дайым жеткиликтүүнү скандоо"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Ар дайым иликтей алышсын"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi-Fi өчүп турса да, Google\'дун жайгашкан жерди аныктоо кызматына жана башка колдонмолорго тармактарды иликтөөгө мүмкүндүк берүү"</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"Ачык Wi‑Fi\'га автоматтык түрдө туташуу"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"Wi‑Fi жардамчсы жогорк сапатта деп аныкталгн ачык Wi‑Fi тармактарн автоматтк түрд баалп, туташа алат"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"Wi‑Fi жардамчысын тандоо"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Сертификаттарды орнотуу"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Жайгаштыруунун тактыгын жогорулатуу жана башка максаттарда, Google жана башка колдонмолор, Wi-Fi өчүк болсо да түйүндөрдү скандашы мүмкүн. Эгер сиз муну каалабасаңыз, Илгерилетилген &gt; Скандоо дайым жеткиликтүүгө барыңыз."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Колдонмолор Wi-Fi өчүк болсо да, жакын арадагы түйүндөрдү скандай алышат. Эгер сиз муну каалабасаңыз, Илгерилетилген &gt; Скандоо дайым жеткиликтүүгө барыңыз."</string>
@@ -3233,6 +3225,8 @@
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"Тармактн аталышн жайылтуу мүмкүнчүлгү өчүрүлгндө, үчүнчү жактр тармагыңыздн маалыматн көрбөй калышт."</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"Тармактн аталышн жайлтуу мүмкүнчлгү өчүрүлгндө, жашырлгн тармактрг автоматтк туташуу мүмкн эмс болт."</string>
     <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <string name="sim_notification_title" msgid="6272913297433198340">"SIM-карталар алмаштырылды."</string>
+    <string name="sim_notification_summary" msgid="5024470200658902406">"Орнотуу үчүн тийиңиз"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Төмөнкү үчүн тандалган SIM"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Чалган сайын суралсын"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Тандоо керек"</string>

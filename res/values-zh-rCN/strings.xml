@@ -180,7 +180,6 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"“%1$s”想要查看您的消息。要向“%2$s”授予权限吗？"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和时间"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"选择时区"</string>
-    <string name="normal_date_format" msgid="7636406984925498359">"所在区域 (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"预览:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"字号："</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -322,8 +321,6 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"选择时区"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"日期"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"设置日期"</string>
-    <string name="date_time_date_format_title" msgid="3976171711988766411">"日期格式"</string>
-    <string name="date_time_date_format" msgid="6951498879879281102">"选择日期格式"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"按字母顺序排序"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"按时区排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
@@ -604,12 +601,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"随时都可扫描"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"始终允许扫描网络"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允许Google的位置信息服务和其他应用扫描网络（即使WLAN已关闭）"</string>
-    <!-- no translation found for wifi_automatically_connect_title (8353642610637161933) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (9217192868150142222) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (8555215237759365671) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="8353642610637161933">"自动连接到开放 WLAN 网络"</string>
+    <string name="wifi_automatically_connect_summary" msgid="9217192868150142222">"允许 WLAN 助手自动对开放 WLAN 网络进行评分并连接到评定为优质的网络上"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="8555215237759365671">"选择 WLAN 助手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安装证书"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"为了提高位置信息精确度以及其他目的，Google 和其他应用可扫描附近的网络（在关闭了WLAN时也可进行扫描）。如果您不希望应用这么做，请进入“高级”&gt;“随时都可扫描”进行设置。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"应用可扫描附近的网络（在关闭了WLAN时也可进行扫描）。如果您不希望应用这么做，请进入“高级”&gt;“随时都可扫描”进行设置。"</string>
@@ -2330,7 +2324,10 @@
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"关闭网络名称广播"</string>
     <string name="preferred_network_offload_footer" msgid="5857279426054744020">"关闭网络名称广播可防止第三方获取您的网络信息。"</string>
     <string name="preferred_network_offload_popup" msgid="2252915199889604600">"关闭网络名称广播可防止设备自动连接到隐藏的网络。"</string>
-    <!-- no translation found for sim_signal_strength (9144010043784767984) -->
+    <string name="sim_signal_strength" msgid="9144010043784767984">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
+    <!-- no translation found for sim_notification_title (6272913297433198340) -->
+    <skip />
+    <!-- no translation found for sim_notification_summary (5024470200658902406) -->
     <skip />
     <string name="sim_pref_divider" msgid="6778907671867621874">"首选 SIM 卡"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"每次都询问"</string>
