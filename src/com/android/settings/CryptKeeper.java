@@ -137,6 +137,17 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     // how long we wait to clear a right pattern
     private static final int RIGHT_PATTERN_CLEAR_TIMEOUT_MS = 500;
 
+    // When the user enters a short pin/password, run this to show an error,
+    // but don't count it against attempts.
+    private final Runnable mFakeUnlockAttemptRunnable = new Runnable() {
+        public void run() {
+            handleBadAttempt(1 /* failedAttempt */);
+        }
+    };
+
+    // TODO: this should be tuned to match minimum decryption timeout
+    private static final int FAKE_ATTEMPT_DELAY = 1000;
+
     private Runnable mClearPatternRunnable = new Runnable() {
         public void run() {
             mLockPatternView.clearPattern();
@@ -200,43 +211,47 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 showFactoryReset(true);
                 return;
             } else {
-                // Wrong entry. Handle pattern case.
-                if (mLockPatternView != null) {
-                    mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-                    mLockPatternView.removeCallbacks(mClearPatternRunnable);
-                    mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
-                }
-                if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
-                    mCooldown = COOL_DOWN_INTERVAL;
-                    cooldown();
-                } else {
-                    final TextView status = (TextView) findViewById(R.id.status);
+                handleBadAttempt(failedAttempts);
+            }
+        }
+    }
 
-                    int remainingAttempts = MAX_FAILED_ATTEMPTS - failedAttempts;
-                    if (remainingAttempts < COOL_DOWN_ATTEMPTS) {
-                        CharSequence warningTemplate = getText(R.string.crypt_keeper_warn_wipe);
-                        CharSequence warning = TextUtils.expandTemplate(warningTemplate,
-                                                                        Integer.toString(remainingAttempts));
-                        status.setText(warning);
-                    } else {
-                        status.setText(R.string.try_again);
-                    }
+    private void handleBadAttempt(Integer failedAttempts) {
+        // Wrong entry. Handle pattern case.
+        if (mLockPatternView != null) {
+            mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+            mLockPatternView.removeCallbacks(mClearPatternRunnable);
+            mLockPatternView.postDelayed(mClearPatternRunnable, WRONG_PATTERN_CLEAR_TIMEOUT_MS);
+        }
+        if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
+            mCooldown = COOL_DOWN_INTERVAL;
+            cooldown();
+        } else {
+            final TextView status = (TextView) findViewById(R.id.status);
 
-                    if (mLockPatternView != null) {
-                        mLockPatternView.setDisplayMode(DisplayMode.Wrong);
-                    }
-                    // Reenable the password entry
-                    if (mPasswordEntry != null) {
-                        mPasswordEntry.setEnabled(true);
-                        final InputMethodManager imm = (InputMethodManager) getSystemService(
-                                                  Context.INPUT_METHOD_SERVICE);
-                        imm.showSoftInput(mPasswordEntry, 0);
-                        setBackFunctionality(true);
-                    }
-                    if (mLockPatternView != null) {
-                        mLockPatternView.setEnabled(true);
-                    }
-                }
+            int remainingAttempts = MAX_FAILED_ATTEMPTS - failedAttempts;
+            if (remainingAttempts < COOL_DOWN_ATTEMPTS) {
+                CharSequence warningTemplate = getText(R.string.crypt_keeper_warn_wipe);
+                CharSequence warning = TextUtils.expandTemplate(warningTemplate,
+                        Integer.toString(remainingAttempts));
+                status.setText(warning);
+            } else {
+                status.setText(R.string.try_again);
+            }
+
+            if (mLockPatternView != null) {
+                mLockPatternView.setDisplayMode(DisplayMode.Wrong);
+            }
+            // Reenable the password entry
+            if (mPasswordEntry != null) {
+                mPasswordEntry.setEnabled(true);
+                final InputMethodManager imm = (InputMethodManager) getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(mPasswordEntry, 0);
+                setBackFunctionality(true);
+            }
+            if (mLockPatternView != null) {
+                mLockPatternView.setEnabled(true);
             }
         }
     }
@@ -306,6 +321,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             | StatusBarManager.DISABLE_HOME
             | StatusBarManager.DISABLE_SEARCH
             | StatusBarManager.DISABLE_RECENT;
+
+    protected static final int MIN_LENGTH_BEFORE_REPORT = LockPatternUtils.MIN_LOCK_PATTERN_SIZE;
 
     /** @return whether or not this Activity was started for debugging the UI only. */
     private boolean isDebugView() {
@@ -679,6 +696,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
+    private void fakeUnlockAttempt(View postingView) {
+        postingView.postDelayed(mFakeUnlockAttemptRunnable, FAKE_ATTEMPT_DELAY);
+    }
+
     protected LockPatternView.OnPatternListener mChooseNewLockPatternListener =
         new LockPatternView.OnPatternListener() {
 
@@ -694,7 +715,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         @Override
         public void onPatternDetected(List<LockPatternView.Cell> pattern) {
             mLockPatternView.setEnabled(false);
-            new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
+            if (pattern.size() >= MIN_LENGTH_BEFORE_REPORT) {
+                new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
+            } else {
+                // Allow user to make as many of these as they want.
+                fakeUnlockAttempt(mLockPatternView);
+            }
         }
 
         @Override
@@ -851,8 +877,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mPasswordEntry.setEnabled(false);
             setBackFunctionality(false);
 
-            Log.d(TAG, "Attempting to send command to decrypt");
-            new DecryptTask().execute(password);
+            if (password.length() >= LockPatternUtils.MIN_LOCK_PATTERN_SIZE) {
+                Log.d(TAG, "Attempting to send command to decrypt");
+                new DecryptTask().execute(password);
+            } else {
+                // Allow user to make as many of these as they want.
+                fakeUnlockAttempt(mPasswordEntry);
+            }
 
             return true;
         }
