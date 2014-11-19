@@ -372,10 +372,25 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
             if (mDialogId == CALLS_PICK) {
                 holder.title.setText(getItem(position));
-                holder.summary.setText("");
-                holder.icon.setImageDrawable(getResources()
-                        .getDrawable(R.drawable.ic_live_help));
-                holder.icon.setAlpha(OPACITY);
+                if (position == 0) {
+                    holder.icon.setImageDrawable(getResources()
+                            .getDrawable(R.drawable.ic_live_help));
+                    holder.icon.setAlpha(OPACITY);
+                    holder.summary.setText("");
+                } else {
+                    final TelecomManager telecomManager = TelecomManager.from(getActivity());
+                    final Iterator<PhoneAccountHandle> phoneAccounts =
+                            telecomManager.getCallCapablePhoneAccounts().listIterator();
+                    while (phoneAccounts.hasNext()) {
+                        final PhoneAccount phoneAccount =
+                                telecomManager.getPhoneAccount(phoneAccounts.next());
+                        if (getItem(position).equals((String) phoneAccount.getLabel())) {
+                            holder.icon.setImageBitmap(phoneAccount.getIconBitmap());
+                            holder.summary
+                                    .setText(phoneAccount.getAddress().getSchemeSpecificPart());
+                        }
+                    }
+                }
             } else {
                 sir = mSelectableSubInfos.get(position);
                 holder.title.setText(sir.getDisplayName());
