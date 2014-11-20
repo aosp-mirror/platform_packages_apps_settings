@@ -19,6 +19,8 @@ package com.android.settings.sim;
 import com.android.settings.R;
 import com.android.settings.Settings.SimSettingsActivity;
 
+import java.util.List;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -29,9 +31,10 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
+import android.util.Log;
 
 import com.android.settings.Utils;
 
@@ -44,17 +47,16 @@ public class SimBootReceiver extends BroadcastReceiver {
     private SharedPreferences mSharedPreferences = null;
     private TelephonyManager mTelephonyManager;
     private Context mContext;
-    private SubscriptionManager mSubscriptionManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mContext = context;
-        mSubscriptionManager = SubscriptionManager.from(mContext);
         mSharedPreferences = mContext.getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE);
 
-        mSubscriptionManager.registerOnSubscriptionsChangedListener(mSubscriptionListener);
+        SubscriptionManager.register(mContext, mSubscriptionListener,
+                SubscriptionListener.LISTEN_SUBSCRIPTION_INFO_LIST_CHANGED);
     }
 
     private void detectChangeAndNotify() {
@@ -69,12 +71,12 @@ public class SimBootReceiver extends BroadcastReceiver {
         // by checking if the list is empty.
         // This is not completely correct, but works for most cases.
         // See Bug: 18377252
-        if (mSubscriptionManager.getActiveSubscriptionInfoList().size() < 1) {
+        if (SubscriptionManager.getActiveSubscriptionInfoList().size() < 1) {
             return;
         }
 
         for (int i = 0; i < numSlots; i++) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(mContext, i);
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(i);
             final String key = SLOT_PREFIX+i;
             final int lastSubId = getLastSubId(key);
 
@@ -131,10 +133,9 @@ public class SimBootReceiver extends BroadcastReceiver {
         notificationManager.cancel(NOTIFICATION_ID);
     }
 
-    private final OnSubscriptionsChangedListener mSubscriptionListener =
-            new OnSubscriptionsChangedListener() {
+    private final SubscriptionListener mSubscriptionListener = new SubscriptionListener() {
         @Override
-        public void onSubscriptionsChanged() {
+        public void onSubscriptionInfoChanged() {
             detectChangeAndNotify();
         }
     };
