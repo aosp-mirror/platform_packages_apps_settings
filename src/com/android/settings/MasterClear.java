@@ -24,15 +24,19 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Process;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +44,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -164,7 +170,8 @@ public class MasterClear extends Fragment {
             });
         }
 
-        loadAccountList();
+        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
+        loadAccountList(um);
     }
 
     private boolean isExtStorageEncrypted() {
@@ -172,63 +179,85 @@ public class MasterClear extends Fragment {
         return !"".equals(state);
     }
 
-    private void loadAccountList() {
+    private void loadAccountList(final UserManager um) {
         View accountsLabel = mContentView.findViewById(R.id.accounts_label);
         LinearLayout contents = (LinearLayout)mContentView.findViewById(R.id.accounts);
         contents.removeAllViews();
 
         Context context = getActivity();
+        final List<UserInfo> profiles = um.getProfiles(UserHandle.myUserId());
+        final int profilesSize = profiles.size();
 
         AccountManager mgr = AccountManager.get(context);
-        Account[] accounts = mgr.getAccounts();
-        final int N = accounts.length;
-        if (N == 0) {
-            accountsLabel.setVisibility(View.GONE);
-            contents.setVisibility(View.GONE);
-            return;
-        }
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
-        AuthenticatorDescription[] descs = AccountManager.get(context).getAuthenticatorTypes();
-        final int M = descs.length;
-
-        for (int i=0; i<N; i++) {
-            Account account = accounts[i];
-            AuthenticatorDescription desc = null;
-            for (int j=0; j<M; j++) {
-                if (account.type.equals(descs[j].type)) {
-                    desc = descs[j];
-                    break;
-                }
-            }
-            if (desc == null) {
-                Log.w(TAG, "No descriptor for account name=" + account.name
-                        + " type=" + account.type);
+        int accountsCount = 0;
+        for (int profileIndex = 0; profileIndex < profilesSize; profileIndex++) {
+            final UserInfo userInfo = profiles.get(profileIndex);
+            final int profileId = userInfo.id;
+            final UserHandle userHandle = new UserHandle(profileId);
+            Account[] accounts = mgr.getAccountsAsUser(profileId);
+            final int N = accounts.length;
+            if (N == 0) {
                 continue;
             }
-            Drawable icon = null;
-            try {
-                if (desc.iconId != 0) {
-                    Context authContext = context.createPackageContext(desc.packageName, 0);
-                    icon = authContext.getDrawable(desc.iconId);
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "No icon for account type " + desc.type);
-            }
+            accountsCount += N;
 
-            TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
-                    contents, false);
-            child.setText(account.name);
-            if (icon != null) {
-                child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+            AuthenticatorDescription[] descs = AccountManager.get(context)
+                    .getAuthenticatorTypesAsUser(profileId);
+            final int M = descs.length;
+
+            View titleView = newTitleView(contents, inflater);
+            final TextView titleText = (TextView) titleView.findViewById(android.R.id.title);
+            titleText.setText(userInfo.isManagedProfile() ? R.string.category_work
+                    : R.string.category_personal);
+            contents.addView(titleView);
+
+            for (int i = 0; i < N; i++) {
+                Account account = accounts[i];
+                AuthenticatorDescription desc = null;
+                for (int j = 0; j < M; j++) {
+                    if (account.type.equals(descs[j].type)) {
+                        desc = descs[j];
+                        break;
+                    }
+                }
+                if (desc == null) {
+                    Log.w(TAG, "No descriptor for account name=" + account.name
+                            + " type=" + account.type);
+                    continue;
+                }
+                Drawable icon = null;
+                try {
+                    if (desc.iconId != 0) {
+                        Context authContext = context.createPackageContext(desc.packageName, 0);
+                        icon = context.getPackageManager().getUserBadgedIcon(
+                                authContext.getDrawable(desc.iconId), userHandle);
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.w(TAG, "No icon for account type " + desc.type);
+                }
+
+                TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
+                        contents, false);
+                child.setText(account.name);
+                if (icon != null) {
+                    child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+                }
+                contents.addView(child);
             }
-            contents.addView(child);
         }
 
-        accountsLabel.setVisibility(View.VISIBLE);
-        contents.setVisibility(View.VISIBLE);
+        if (accountsCount > 0) {
+            accountsLabel.setVisibility(View.VISIBLE);
+            contents.setVisibility(View.VISIBLE);
+        }
+        // Checking for all other users and their profiles if any.
+        View otherUsers = mContentView.findViewById(R.id.other_users_present);
+        final boolean hasOtherUsers = (um.getUserCount() - profilesSize) > 0;
+        otherUsers.setVisibility(hasOtherUsers ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -244,5 +273,14 @@ public class MasterClear extends Fragment {
 
         establishInitialState();
         return mContentView;
+    }
+
+    private View newTitleView(ViewGroup parent, LayoutInflater inflater) {
+        final TypedArray a = inflater.getContext().obtainStyledAttributes(null,
+                com.android.internal.R.styleable.Preference,
+                com.android.internal.R.attr.preferenceCategoryStyle, 0);
+        final int resId = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
+                0);
+        return inflater.inflate(resId, parent, false);
     }
 }
