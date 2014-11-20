@@ -69,7 +69,6 @@ import java.util.List;
 
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {
     private static final String TAG = "SimSettings";
-    private static final boolean DBG = false;
 
     private static final String DISALLOW_CONFIG_SIM = "no_config_sim";
     private static final String SIM_CARD_CATEGORY = "sim_cards";
@@ -119,9 +118,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private PreferenceCategory mSimCards = null;
 
-    private SubscriptionManager mSubscriptionManager;
-    private Utils mUtils;
-
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
     }
@@ -130,13 +126,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     public void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
 
-        mSubscriptionManager = SubscriptionManager.from(getActivity());
-
         if (mSubInfoList == null) {
-            mSubInfoList = mSubscriptionManager.getActiveSubscriptionInfoList();
-            // FIXME: b/18385348, SimSettings.java needs to handle null from getActiveSubscription
+            mSubInfoList = SubscriptionManager.getActiveSubscriptionInfoList();
         }
-        if (DBG) log("[onCreate] mSubInfoList=" + mSubInfoList);
 
         createPreferences();
         updateAllOptions();
@@ -156,7 +148,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
         mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
         for (int i = 0; i < numSlots; ++i) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(getActivity(), i);
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(i);
             mSimCards.addPreference(new SimPreference(getActivity(), sir, i));
             mAvailableSubInfos.add(sir);
             if (sir != null) {
@@ -174,7 +166,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
         for (int i = 0; i < numSlots; ++i) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(getActivity(), i);
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(i);
             mAvailableSubInfos.add(sir);
             if (sir != null) {
             }
@@ -187,7 +179,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     private void updateSimSlotValues() {
-        mSubscriptionManager.getAllSubscriptionInfoList();
+        SubscriptionManager.getAllSubscriptionInfoList();
 
         final int prefSize = mSimCards.getPreferenceCount();
         for (int i = 0; i < prefSize; ++i) {
@@ -206,11 +198,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateSmsValues() {
         final Preference simPref = findPreference(KEY_SMS);
-        final SubscriptionInfo sir = Utils.findRecordBySubId(getActivity(),
-                mSubscriptionManager.getDefaultSmsSubId());
+        final SubscriptionInfo sir = Utils.findRecordBySubId(SubscriptionManager.getDefaultSmsSubId());
         simPref.setTitle(R.string.sms_messages_title);
-        if (DBG) log("[updateSmsValues] mSubInfoList=" + mSubInfoList);
-        if (mSubInfoList != null && mSubInfoList.size() == 1) {
+        if (mSubInfoList.size() == 1) {
             simPref.setSummary(mSubInfoList.get(0).getDisplayName());
         } else if (sir != null) {
             simPref.setSummary(sir.getDisplayName());
@@ -222,12 +212,9 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateCellularDataValues() {
         final Preference simPref = findPreference(KEY_CELLULAR_DATA);
-        final SubscriptionInfo sir = Utils.findRecordBySubId(getActivity(),
-                mSubscriptionManager.getDefaultDataSubId());
+        final SubscriptionInfo sir = Utils.findRecordBySubId(SubscriptionManager.getDefaultDataSubId());
         simPref.setTitle(R.string.cellular_data_title);
-        if (DBG) log("[updateCellularDataValues] mSubInfoList=" + mSubInfoList);
-
-        if (mSubInfoList != null && mSubInfoList.size() == 1) {
+        if (mSubInfoList.size() == 1) {
             simPref.setSummary(mSubInfoList.get(0).getDisplayName());
         } else if (sir != null) {
             simPref.setSummary(sir.getDisplayName());
@@ -253,9 +240,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     public void onResume() {
         super.onResume();
 
-        mSubInfoList = mSubscriptionManager.getActiveSubscriptionInfoList();
-        if (DBG) log("[onResme] mSubInfoList=" + mSubInfoList);
-
+        mSubInfoList = SubscriptionManager.getActiveSubscriptionInfoList();
         updateAvailableSubInfos();
         updateAllOptions();
     }
@@ -290,7 +275,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
                         if (id == DATA_PICK) {
                             sir = mSelectableSubInfos.get(value);
-                            mSubscriptionManager.setDefaultDataSubId(sir.getSubscriptionId());
+                            SubscriptionManager.setDefaultDataSubId(sir.getSubscriptionId());
                         } else if (id == CALLS_PICK) {
                             final TelecomManager telecomManager =
                                     TelecomManager.from(getActivity());
@@ -300,7 +285,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                                     value < 1 ? null : phoneAccountsList.get(value - 1));
                         } else if (id == SMS_PICK) {
                             sir = mSelectableSubInfos.get(value);
-                            mSubscriptionManager.setDefaultSmsSubId(sir.getSubscriptionId());
+                            SubscriptionManager.setDefaultSmsSubId(sir.getSubscriptionId());
                         }
 
                         updateActivitesCategory();
@@ -514,16 +499,16 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     String displayName = nameText.getText().toString();
                     int subId = mSubInfoRecord.getSubscriptionId();
                     mSubInfoRecord.setDisplayName(displayName);
-                    mSubscriptionManager.setDisplayName(displayName, subId,
+                    SubscriptionManager.setDisplayName(displayName, subId,
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
-                    Utils.findRecordBySubId(getActivity(), subId).setDisplayName(displayName);
+                    Utils.findRecordBySubId(subId).setDisplayName(displayName);
 
                     final int tintSelected = tintSpinner.getSelectedItemPosition();
                     int subscriptionId = mSubInfoRecord.getSubscriptionId();
                     int tint = mTintArr[tintSelected];
                     mSubInfoRecord.setIconTint(tint);
-                    mSubscriptionManager.setIconTint(tint, subscriptionId);
-                    Utils.findRecordBySubId(getActivity(), subscriptionId).setIconTint(tint);
+                    SubscriptionManager.setIconTint(tint, subscriptionId);
+                    Utils.findRecordBySubId(subscriptionId).setIconTint(tint);
 
                     updateAllOptions();
                     update();
@@ -611,8 +596,27 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     }
 
-    private void log(String s) {
-        Log.d(TAG, s);
+    /**
+     * Sort Subscription List in SIM Id, Subscription Id
+     * @param context The Context
+     * @return Sorted Subscription List or NULL if no activated Subscription
+     */
+    public static List<SubscriptionInfo> getSortedSubInfoList(Context context) {
+        List<SubscriptionInfo> infoList = SubscriptionManager.getActiveSubscriptionInfoList();
+        if (infoList != null) {
+            Collections.sort(infoList, new Comparator<SubscriptionInfo>() {
+
+                @Override
+                public int compare(SubscriptionInfo arg0, SubscriptionInfo arg1) {
+                    int flag = arg0.getSimSlotIndex() - arg1.getSimSlotIndex();
+                    if (flag == 0) {
+                        return arg0.getSubscriptionId() - arg1.getSubscriptionId();
+                    }
+                    return flag;
+                }
+            });
+        }
+        return infoList;
     }
 
     /**
