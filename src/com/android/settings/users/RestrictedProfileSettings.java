@@ -87,7 +87,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
         super.onResume();
 
         // Check if user still exists
-        UserInfo info = getExistingUser(mUser);
+        UserInfo info = Utils.getExistingUser(mUserManager, mUser);
         if (info == null) {
             finishFragment();
         } else {
@@ -95,16 +95,6 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
             ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(
                     getCircularUserIcon());
         }
-    }
-
-    private UserInfo getExistingUser(UserHandle thisUser) {
-        final List<UserInfo> users = mUserManager.getUsers(true); // Only get non-dying
-        for (UserInfo user : users) {
-            if (user.id == thisUser.getIdentifier()) {
-                return user;
-            }
-        }
-        return null;
     }
 
     @Override
