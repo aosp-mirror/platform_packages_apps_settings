@@ -42,9 +42,12 @@ public class ImeiInformation extends PreferenceActivity {
     private static final String KEY_IMEI = "imei";
     private static final String KEY_IMEI_SV = "imei_sv";
 
+    private SubscriptionManager mSubscriptionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSubscriptionManager = SubscriptionManager.from(this);
         final TelephonyManager telephonyManager =
             (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         initPreferenceScreen(telephonyManager.getSimCount());
@@ -100,17 +103,17 @@ public class ImeiInformation extends PreferenceActivity {
         }
     }
 
-    private Phone getPhoneFromSlotId(int slotId) {
-        final List<SubscriptionInfo> subInfos = SubscriptionManager.getSubscriptionInfoUsingSlotId(slotId);
+    private Phone getPhoneFromSlotId(int slotIdx) {
+        final SubscriptionInfo subInfo =
+                mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(slotIdx);
 
-        if (subInfos == null || subInfos.size() < 1) {
+        if (subInfo == null) {
             return null;
         }
 
         final Phone[] phones = PhoneFactory.getPhones();
         for (int i = 0; i < phones.length; i++) {
-            // Currently we only operate with the first subscription of a SIM.
-            if (phones[i].getSubId() == subInfos.get(0).getSubscriptionId()) {
+            if (phones[i].getSubId() == subInfo.getSubscriptionId()) {
                 return phones[i];
             }
         }
