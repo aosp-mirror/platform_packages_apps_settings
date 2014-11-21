@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
-￼* limitations under the License.
+ * limitations under the License.
  */
 
 package com.android.settings.deviceinfo;
@@ -143,7 +143,7 @@ public class SimStatus extends PreferenceActivity {
         mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
 
         for (int i = 0; i < mTelephonyManager.getSimCount(); i++) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(i);
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(this, i);
             if (sir != null) {
                 mSelectableSubInfos.add(sir);
             }
@@ -355,7 +355,7 @@ public class SimStatus extends PreferenceActivity {
         final Phone phone = PhoneFactory.getPhone(SubscriptionManager.getPhoneId(
                         mSir.getSubscriptionId()));
         if (UserHandle.myUserId() == UserHandle.USER_OWNER
-                && mSir.getSubscriptionId() != SubscriptionManager.INVALID_SUB_ID) {
+                && mSir.getSubscriptionId() != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             if (phone == null) {
                 Log.e(TAG, "Unable to locate a phone object for the given Subscription ID.");
                 return;
