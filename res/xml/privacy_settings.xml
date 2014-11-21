@@ -43,6 +43,14 @@
                 android:summary="@string/auto_restore_summary"
                 android:persistent="false" />
 
+        <Preference
+                android:key="backup_inactive"
+                android:title="@string/backup_inactive_title"
+                android:summary="@string/backup_inactive_summary"
+                android:persistent="false"
+                android:enabled="false"
+                android:selectable="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="personal_data_category"
