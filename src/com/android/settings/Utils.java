@@ -1023,4 +1023,21 @@ public final class Utils {
         return null;
     }
 
+    /**
+     * Queries for the UserInfo of a user. Returns null if the user doesn't exist (was removed).
+     * @param userManager Instance of UserManager
+     * @param checkUser The user to check the existence of.
+     * @return UserInfo of the user or null for non-existent user.
+     */
+    public static UserInfo getExistingUser(UserManager userManager, UserHandle checkUser) {
+        final List<UserInfo> users = userManager.getUsers(true /* excludeDying */);
+        final int checkUserId = checkUser.getIdentifier();
+        for (UserInfo user : users) {
+            if (user.id == checkUserId) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 }
