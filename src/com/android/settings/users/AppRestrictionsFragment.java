@@ -59,6 +59,7 @@ import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
@@ -644,75 +645,81 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         if (context == null) return;
         final PackageManager pm = mPackageManager;
         final IPackageManager ipm = mIPm;
+        final int userId = mUser.getIdentifier();
 
+        // Check if the user was removed in the meantime.
+        if (Utils.getExistingUser(mUserManager, mUser) == null) {
+            return;
+        }
         mAppList.removeAll();
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
         int i = 0;
-        if (mVisibleApps.size() > 0) {
-            for (SelectableAppInfo app : mVisibleApps) {
-                String packageName = app.packageName;
-                if (packageName == null) continue;
-                final boolean isSettingsApp = packageName.equals(context.getPackageName());
-                AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
-                final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
-                p.setIcon(app.icon != null ? app.icon.mutate() : null);
-                p.setChecked(false);
-                p.setTitle(app.activityName);
-                if (app.masterEntry != null) {
-                    p.setSummary(context.getString(R.string.user_restrictions_controlled_by,
-                            app.masterEntry.activityName));
-                }
-                p.setKey(getKeyForPackage(packageName));
-                p.setSettingsEnabled((hasSettings || isSettingsApp) && app.masterEntry == null);
-                p.setPersistent(false);
-                p.setOnPreferenceChangeListener(this);
-                p.setOnPreferenceClickListener(this);
-                PackageInfo pi = null;
-                try {
-                    pi = ipm.getPackageInfo(packageName,
-                            PackageManager.GET_UNINSTALLED_PACKAGES
-                            | PackageManager.GET_SIGNATURES, mUser.getIdentifier());
-                } catch (RemoteException e) {
-                }
-                if (pi != null && (pi.requiredForAllUsers || isPlatformSigned(pi))) {
-                    p.setChecked(true);
-                    p.setImmutable(true);
-                    // If the app is required and has no restrictions, skip showing it
-                    if (!hasSettings && !isSettingsApp) continue;
-                    // Get and populate the defaults, since the user is not going to be
-                    // able to toggle this app ON (it's ON by default and immutable).
-                    // Only do this for restricted profiles, not single-user restrictions
-                    // Also don't do this for slave icons
-                    if (hasSettings && app.masterEntry == null) {
-                        requestRestrictionsForApp(packageName, p, false);
-                    }
-                } else if (!mNewUser && isAppEnabledForUser(pi)) {
-                    p.setChecked(true);
-                }
-                if (mRestrictedProfile
-                        && pi.requiredAccountType != null && pi.restrictedAccountType == null) {
-                    p.setChecked(false);
-                    p.setImmutable(true);
-                    p.setSummary(R.string.app_not_supported_in_limited);
-                }
-                if (mRestrictedProfile && pi.restrictedAccountType != null) {
-                    p.setSummary(R.string.app_sees_restricted_accounts);
-                }
-                if (app.masterEntry != null) {
-                    p.setImmutable(true);
-                    p.setChecked(mSelectedPackages.get(packageName));
-                }
-                mAppList.addPreference(p);
-                if (isSettingsApp) {
-                    p.setOrder(MAX_APP_RESTRICTIONS * 1);
-                } else {
-                    p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
-                }
-                mSelectedPackages.put(packageName, p.isChecked());
-                mAppListChanged = true;
-                i++;
+        for (SelectableAppInfo app : mVisibleApps) {
+            String packageName = app.packageName;
+            if (packageName == null) continue;
+            final boolean isSettingsApp = packageName.equals(context.getPackageName());
+            AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
+            final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
+            p.setIcon(app.icon != null ? app.icon.mutate() : null);
+            p.setChecked(false);
+            p.setTitle(app.activityName);
+            if (app.masterEntry != null) {
+                p.setSummary(context.getString(R.string.user_restrictions_controlled_by,
+                        app.masterEntry.activityName));
             }
+            p.setKey(getKeyForPackage(packageName));
+            p.setSettingsEnabled((hasSettings || isSettingsApp) && app.masterEntry == null);
+            p.setPersistent(false);
+            p.setOnPreferenceChangeListener(this);
+            p.setOnPreferenceClickListener(this);
+            PackageInfo pi = null;
+            try {
+                pi = ipm.getPackageInfo(packageName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES
+                        | PackageManager.GET_SIGNATURES, userId);
+            } catch (RemoteException e) {
+            }
+            if (pi == null) {
+                continue;
+            }
+            if (pi.requiredForAllUsers || isPlatformSigned(pi)) {
+                p.setChecked(true);
+                p.setImmutable(true);
+                // If the app is required and has no restrictions, skip showing it
+                if (!hasSettings && !isSettingsApp) continue;
+                // Get and populate the defaults, since the user is not going to be
+                // able to toggle this app ON (it's ON by default and immutable).
+                // Only do this for restricted profiles, not single-user restrictions
+                // Also don't do this for slave icons
+                if (hasSettings && app.masterEntry == null) {
+                    requestRestrictionsForApp(packageName, p, false);
+                }
+            } else if (!mNewUser && isAppEnabledForUser(pi)) {
+                p.setChecked(true);
+            }
+            if (mRestrictedProfile
+                    && pi.requiredAccountType != null && pi.restrictedAccountType == null) {
+                p.setChecked(false);
+                p.setImmutable(true);
+                p.setSummary(R.string.app_not_supported_in_limited);
+            }
+            if (mRestrictedProfile && pi.restrictedAccountType != null) {
+                p.setSummary(R.string.app_sees_restricted_accounts);
+            }
+            if (app.masterEntry != null) {
+                p.setImmutable(true);
+                p.setChecked(mSelectedPackages.get(packageName));
+            }
+            mAppList.addPreference(p);
+            if (isSettingsApp) {
+                p.setOrder(MAX_APP_RESTRICTIONS * 1);
+            } else {
+                p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
+            }
+            mSelectedPackages.put(packageName, p.isChecked());
+            mAppListChanged = true;
+            i++;
         }
         // If this is the first time for a new profile, install/uninstall default apps for profile
         // to avoid taking the hit in onPause(), which can cause race conditions on user switch.
