@@ -111,6 +111,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final boolean ONLY_ONE_TRUST_AGENT = true;
 
     private DevicePolicyManager mDPM;
+    private SubscriptionManager mSubscriptionManager;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
@@ -135,6 +136,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSubscriptionManager = SubscriptionManager.from(getActivity());
 
         mLockPatternUtils = new LockPatternUtils(getActivity());
 
@@ -370,9 +373,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
     /* Return true if a SIM is ready for locking.
      * TODO: consider adding to TelephonyManager or SubscritpionManasger.
      */
-    private static boolean isSimReady() {
+    private boolean isSimReady() {
         int simState = TelephonyManager.SIM_STATE_UNKNOWN;
-        final List<SubscriptionInfo> subInfoList = SubscriptionManager.getActiveSubscriptionInfoList();
+        final List<SubscriptionInfo> subInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
                 simState = TelephonyManager.getDefault().getSimState(subInfo.getSimSlotIndex());
