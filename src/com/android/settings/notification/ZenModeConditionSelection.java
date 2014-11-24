@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.service.notification.Condition;
 import android.service.notification.IConditionListener;
 import android.service.notification.ZenModeConfig;
@@ -61,7 +62,7 @@ public class ZenModeConditionSelection extends RadioGroup {
         b.setChecked(true);
         for (int i = ZenModeConfig.MINUTE_BUCKETS.length - 1; i >= 0; --i) {
             handleCondition(ZenModeConfig.toTimeCondition(mContext,
-                    ZenModeConfig.MINUTE_BUCKETS[i]));
+                    ZenModeConfig.MINUTE_BUCKETS[i], UserHandle.myUserId()));
         }
     }
 
