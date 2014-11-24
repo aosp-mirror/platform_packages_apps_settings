@@ -59,6 +59,7 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.HashMap;
 
 public class TrustedCredentialsSettings extends Fragment {
 
@@ -162,6 +163,9 @@ public class TrustedCredentialsSettings extends Fragment {
     }
 
     private TabHost mTabHost;
+    private AliasOperation mAliasOperation;
+    private HashMap<Tab, AdapterData.AliasLoader>
+            mAliasLoaders = new HashMap<Tab, AdapterData.AliasLoader>(2);
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
 
@@ -187,6 +191,13 @@ public class TrustedCredentialsSettings extends Fragment {
     }
     @Override
     public void onDestroy() {
+        for (AdapterData.AliasLoader aliasLoader : mAliasLoaders.values()) {
+            aliasLoader.cancel(true);
+        }
+        if (mAliasOperation != null) {
+            mAliasOperation.cancel(true);
+            mAliasOperation = null;
+        }
         closeKeyChainConnections();
         super.onDestroy();
     }
@@ -405,6 +416,12 @@ public class TrustedCredentialsSettings extends Fragment {
         private class AliasLoader extends AsyncTask<Void, Integer, SparseArray<List<CertHolder>>> {
             private ProgressBar mProgressBar;
             private View mList;
+            private Context mContext;
+
+            public AliasLoader() {
+                mContext = getActivity();
+                mAliasLoaders.put(mTab, this);
+            }
 
             @Override protected void onPreExecute() {
                 View content = mTabHost.getTabContentView();
@@ -428,12 +445,15 @@ public class TrustedCredentialsSettings extends Fragment {
                     for (int i = 0; i < n; ++i) {
                         UserHandle profile = profiles.get(i);
                         int profileId = profile.getIdentifier();
-                        KeyChainConnection keyChainConnection = KeyChain.bindAsUser(getActivity(),
+                        KeyChainConnection keyChainConnection = KeyChain.bindAsUser(mContext,
                                 profile);
                         // Saving the connection for later use on the certificate dialog.
                         mKeyChainConnectionByProfileId.put(profileId, keyChainConnection);
                         IKeyChainService service = keyChainConnection.getService();
                         List<ParcelableString> aliases = mTab.getAliases(service);
+                        if (isCancelled()) {
+                            return new SparseArray<List<CertHolder>>();
+                        }
                         max += aliases.size();
                         aliasesByProfileId.put(profileId, aliases);
                     }
@@ -441,6 +461,9 @@ public class TrustedCredentialsSettings extends Fragment {
                         UserHandle profile = profiles.get(i);
                         int profileId = profile.getIdentifier();
                         List<ParcelableString> aliases = aliasesByProfileId.get(profileId);
+                        if (isCancelled()) {
+                            return new SparseArray<List<CertHolder>>();
+                        }
                         IKeyChainService service = mKeyChainConnectionByProfileId.get(profileId)
                                 .getService();
                         List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
@@ -484,6 +507,7 @@ public class TrustedCredentialsSettings extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 mList.setVisibility(View.VISIBLE);
                 mProgressBar.setProgress(0);
+                mAliasLoaders.remove(mTab);
             }
         }
 
@@ -724,6 +748,7 @@ public class TrustedCredentialsSettings extends Fragment {
 
         private AliasOperation(CertHolder certHolder) {
             mCertHolder = certHolder;
+            mAliasOperation = this;
         }
 
         @Override
@@ -756,6 +781,7 @@ public class TrustedCredentialsSettings extends Fragment {
         @Override
         protected void onPostExecute(Boolean ok) {
             mCertHolder.mTab.postOperationUpdate(ok, mCertHolder);
+            mAliasOperation = null;
         }
     }
 }
