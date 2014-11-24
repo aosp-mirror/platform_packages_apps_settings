@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.DashPathEffect;
 import android.os.BatteryManager;
-import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -667,8 +666,8 @@ public class BatteryHistoryChart extends View {
     }
 
     private boolean isDayFirst() {
-        LocaleData d = LocaleData.get(mContext.getResources().getConfiguration().locale);
-        String value = d.shortDateFormat4;
+        final String value = LocaleData.get(getResources().getConfiguration().locale)
+                .getDateFormat(java.text.DateFormat.SHORT);
         return value.indexOf('M') > value.indexOf('d');
     }
 
