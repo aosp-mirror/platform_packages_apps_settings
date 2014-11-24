@@ -128,8 +128,8 @@
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"പുഷ് ബട്ടൺ"</item>
-    <item msgid="1624323946324499595">"പിയർ ഉപകരണത്തിൽ നിന്നുള്ള PIN"</item>
-    <item msgid="5366790421523328066">"ഈ ഉപകരണത്തിൽ നിന്നുള്ള PIN"</item>
+    <item msgid="1624323946324499595">"പിയർ ഉപകരണത്തിൽ നിന്നുള്ള പിൻ"</item>
+    <item msgid="5366790421523328066">"ഈ ഉപകരണത്തിൽ നിന്നുള്ള പിൻ"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"കണക്റ്റുചെയ്‌തു"</item>
@@ -231,7 +231,7 @@
   <string-array name="app_ops_categories">
     <item msgid="6358963769537892925">"ലൊക്കേഷൻ"</item>
     <item msgid="255608127647030286">"വ്യക്തിഗതം"</item>
-    <item msgid="4588829735729884491">"സന്ദേശമയയ്‌ക്കൽ"</item>
+    <item msgid="4588829735729884491">"സന്ദേശം"</item>
     <item msgid="886742181977884584">"മീഡിയ"</item>
     <item msgid="7924928667052300589">"ഉപകരണം"</item>
   </string-array>
@@ -275,7 +275,7 @@
     <item msgid="6325739889222559394">"മീഡിയ വോളിയം"</item>
     <item msgid="5762123934816216821">"അലാറം വോളിയം"</item>
     <item msgid="785049718065337473">"അറിയിപ്പ് വോളിയം"</item>
-    <item msgid="6700305533746877052">"bluetooth വോളിയം"</item>
+    <item msgid="6700305533746877052">"ബ്ലൂടൂത്ത് വോളിയം"</item>
     <item msgid="2029227495214047094">"സജീവമായി തുടരുക"</item>
     <item msgid="26109888160231211">"ലൊക്കേഷൻ നിരീക്ഷിക്കുക"</item>
     <item msgid="5753382310468855812">"ഉയർന്ന പവർ ലൊക്കേഷൻ നിരീക്ഷിക്കുക"</item>
@@ -324,7 +324,7 @@
     <item msgid="7878027809189330917">"മീഡിയ വോളിയം"</item>
     <item msgid="7260546305036218513">"അലാറം വോളിയം"</item>
     <item msgid="9103719301075748925">"അറിയിപ്പ് വോളിയം"</item>
-    <item msgid="7025966722295861512">"Bluetooth വോളിയം"</item>
+    <item msgid="7025966722295861512">"ബ്ലൂടൂത്ത് വോളിയം"</item>
     <item msgid="4665183401128289653">"സജീവമായി തുടരുക"</item>
     <item msgid="8584357129746649222">"ലൊക്കേഷൻ"</item>
     <item msgid="7669257279311110599">"ലൊക്കേഷൻ"</item>
@@ -342,11 +342,12 @@
     <item msgid="1319652728542138112">"സ്ഥിരമായത്"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-serif കട്ടിയുള്ളത്"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"മോണോസ്‌പെയ്സ്"</item>
-    <item msgid="6857338041963571301">"സാധാരണം"</item>
-    <item msgid="961716102408512888">"കൂട്ടെഴുത്ത്"</item>
-    <item msgid="784581717183349567">"ചെറിയ കാപ്പിറ്റലുകൾ"</item>
+    <item msgid="7247838127505318669">"Sans-serif മോണോസ്പെയ്സ്"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif മോണോസ്പെയ്സ്"</item>
+    <item msgid="639503332147461010">"സാധാരണം"</item>
+    <item msgid="7967169925231332424">"കൂട്ടെഴുത്ത്"</item>
+    <item msgid="561832997193039673">"ചെറിയ കാപ്പിറ്റലുകൾ"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"തീരെ ചെറുത്"</item>
@@ -383,6 +384,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"ഓരോ ലോഗ് ബഫറിനും 64K"</item>
@@ -520,5 +526,13 @@
     <item msgid="8610560843693675830">"കാഷെചെയ്‌തു (പ്രവർത്തനം)"</item>
     <item msgid="4338089220026248848">"കാഷെചെയ്‌തു (പ്രവർത്തന ക്ലയന്റ്)"</item>
     <item msgid="6652164677254579050">"കാഷെചെയ്‌തു (ശൂന്യം)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"ടീല്‍"</item>
+    <item msgid="8332294763632946560">"നീല"</item>
+    <item msgid="2023216417616991392">"ഇൻഡിഗോ"</item>
+    <item msgid="3170497246594232819">"പര്‍പ്പിള്‍"</item>
+    <item msgid="4608643045752965568">"പിങ്ക്"</item>
+    <item msgid="6131821495505931173">"ചുവപ്പ്"</item>
   </string-array>
 </resources>
