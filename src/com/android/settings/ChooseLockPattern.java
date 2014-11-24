@@ -540,6 +540,8 @@ public class ChooseLockPattern extends SettingsActivity {
             final boolean isFallback = getActivity().getIntent()
                 .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
 
+            boolean wasSecureBefore = utils.isSecure();
+
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
             utils.setCredentialRequiredToDecrypt(required);
@@ -553,7 +555,9 @@ public class ChooseLockPattern extends SettingsActivity {
             getActivity().setResult(RESULT_FINISHED);
             getActivity().finish();
             mDone = true;
-            startActivity(RedactionInterstitial.createStartIntent(getActivity()));
+            if (!wasSecureBefore) {
+                startActivity(RedactionInterstitial.createStartIntent(getActivity()));
+            }
         }
     }
 }
