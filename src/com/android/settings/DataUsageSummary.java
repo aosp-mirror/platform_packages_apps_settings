@@ -195,6 +195,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private INetworkStatsService mStatsService;
     private NetworkPolicyManager mPolicyManager;
     private TelephonyManager mTelephonyManager;
+    private SubscriptionManager mSubscriptionManager;
 
     private INetworkStatsSession mStatsSession;
 
@@ -286,13 +287,14 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         mPolicyManager = NetworkPolicyManager.from(context);
         mTelephonyManager = TelephonyManager.from(context);
+        mSubscriptionManager = SubscriptionManager.from(context);
 
         mPrefs = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
         mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
         mPolicyEditor.read();
 
-        mSubInfoList = SimSettings.getSortedSubInfoList(getActivity());
+        mSubInfoList = mSubscriptionManager.getActiveSubscriptionInfoList();
         mMobileTagMap = initMobileTabTag(mSubInfoList);
 
         try {
@@ -942,7 +944,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         } else {
             //SUB SELECT
             isEnable = mTelephonyManager.getDataEnabled()
-                && (subId == SubscriptionManager.getDefaultDataSubId());
+                && (subId == mSubscriptionManager.getDefaultDataSubId());
         }
         return isEnable;
     }
@@ -1131,8 +1133,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
     private void handleMultiSimDataDialog() {
         final SubscriptionInfo currentSir = getCurrentTabSubInfo(getActivity());
-        final SubscriptionInfo nextSir = SubscriptionManager.getSubscriptionInfoForSubscriber(
-                SubscriptionManager.getDefaultDataSubId());
+        final SubscriptionInfo nextSir = mSubscriptionManager.getActiveSubscriptionInfo(
+                mSubscriptionManager.getDefaultDataSubId());
 
         if (currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
             setMobileDataEnabled(true);
@@ -1149,7 +1151,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SubscriptionManager.setDefaultDataSubId(currentSir.getSubscriptionId());
+                mSubscriptionManager.setDefaultDataSubId(currentSir.getSubscriptionId());
                 setMobileDataEnabled(true);
                 updateBody();
             }
@@ -2246,7 +2248,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final NetworkTemplate template = intent.getParcelableExtra(EXTRA_NETWORK_TEMPLATE);
         if (template == null) {
             final int subId = intent.getIntExtra(PhoneConstants.SUBSCRIPTION_KEY,
-                    SubscriptionManager.INVALID_SUB_ID);
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             if (SubscriptionManager.isValidSubId(subId)) {
                 return TAB_MOBILE + String.valueOf(subId);
             }
@@ -2339,8 +2341,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final ConnectivityManager conn = ConnectivityManager.from(context);
         final TelephonyManager tele = TelephonyManager.from(context);
 
-        final List<SubscriptionInfo> subInfoList = SubscriptionManager.getActiveSubscriptionInfoList();
-        // No activated Subscription
+        final List<SubscriptionInfo> subInfoList =
+                SubscriptionManager.from(context).getActiveSubscriptionInfoList();
+        // No activated Subscriptions
         if (subInfoList == null) {
             return false;
         }
@@ -2586,7 +2589,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         };
 
         private void addMobileTab(Context context, List<SubscriptionInfo> subInfoList) {
-            if (subInfoList != null) {
+            if (subInfoList != null && mMobileTagMap != null) {
                 for (SubscriptionInfo subInfo : mSubInfoList) {
                     if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
                         mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
@@ -2634,10 +2637,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
 
         private int getSubId(String currentTab) {
-            Set<Integer> set = mMobileTagMap.keySet();
-            for (Integer subId : set) {
-                if (mMobileTagMap.get(subId).equals(currentTab)) {
-                    return subId;
+            if (mMobileTagMap != null) {
+                Set<Integer> set = mMobileTagMap.keySet();
+                for (Integer subId : set) {
+                    if (mMobileTagMap.get(subId).equals(currentTab)) {
+                        return subId;
+                    }
                 }
             }
             Log.e(TAG, "currentTab = " + currentTab + " non mobile tab called this function");
