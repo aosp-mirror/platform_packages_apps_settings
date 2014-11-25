@@ -95,7 +95,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final int MESSAGE_NOTIFY = 2;
 
     // Constants used to control policy.
-    private static final int MAX_FAILED_ATTEMPTS = 100;
+    private static final int MAX_FAILED_ATTEMPTS = 30;
     private static final int COOL_DOWN_ATTEMPTS = 10;
 
     // Intent action for launching the Emergency Dialer activity.
