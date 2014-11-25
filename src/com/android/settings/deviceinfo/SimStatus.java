@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.ServiceManager;
+import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.Preference;
@@ -34,9 +36,11 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.provider.Telephony;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.telephony.ITelephony;
 import com.android.internal.telephony.DefaultPhoneNotifier;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
@@ -232,11 +236,18 @@ public class SimStatus extends PreferenceActivity {
     private void updateNetworkType() {
         // Whether EDGE, UMTS, etc...
         String networktype = null;
-        if (TelephonyManager.NETWORK_TYPE_UNKNOWN
-                != mTelephonyManager.getNetworkType(mSir.getSubscriptionId())) {
-            networktype = mTelephonyManager.getNetworkTypeName(
-                    mTelephonyManager.getNetworkType(mSir.getSubscriptionId()));
+        final ITelephony telephony = ITelephony.Stub.asInterface(
+                ServiceManager.getService(Context.TELEPHONY_SERVICE));
+        try {
+            final int actualNetworkType = telephony.getVoiceNetworkTypeForSubscriber(
+                    mSir.getSubscriptionId());
+            if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualNetworkType) {
+                networktype = mTelephonyManager.getNetworkTypeName(actualNetworkType);
+            }
+        } catch (RemoteException remoteException){
+            // Do nothing, networkType will remain null.
         }
+
         setSummaryText(KEY_NETWORK_TYPE, networktype);
     }
 
