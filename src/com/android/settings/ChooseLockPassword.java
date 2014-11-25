@@ -425,6 +425,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 if (mFirstPin.equals(pin)) {
                     final boolean isFallback = getActivity().getIntent().getBooleanExtra(
                             LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
+                    boolean wasSecureBefore = mLockPatternUtils.isSecure();
                     mLockPatternUtils.clearLock(isFallback);
                     final boolean required = getActivity().getIntent().getBooleanExtra(
                             EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
@@ -433,7 +434,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
                     mDone = true;
-                    startActivity(RedactionInterstitial.createStartIntent(getActivity()));
+                    if (!wasSecureBefore) {
+                        startActivity(RedactionInterstitial.createStartIntent(getActivity()));
+                    }
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();
                     if (tmp != null) {
