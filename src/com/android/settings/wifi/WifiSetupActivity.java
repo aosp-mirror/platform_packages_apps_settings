@@ -25,7 +25,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
@@ -35,6 +34,7 @@ import android.util.Log;
 
 import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 import com.android.setupwizard.navigationbar.SetupWizardNavBar.NavigationBarListener;
 
@@ -43,7 +43,6 @@ public class WifiSetupActivity extends WifiPickerActivity
     private static final String TAG = "WifiSetupActivity";
 
     private static final String EXTRA_ALLOW_SKIP = "allowSkip";
-    private static final String EXTRA_USE_IMMERSIVE_MODE = "useImmersiveMode";
 
     // this boolean extra specifies whether to auto finish when connection is established
     private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
@@ -52,25 +51,11 @@ public class WifiSetupActivity extends WifiPickerActivity
     private static final String EXTRA_REQUIRE_USER_NETWORK_SELECTION =
             "wifi_require_user_network_selection";
 
-    // Extra containing the resource name of the theme to be used
-    private static final String EXTRA_THEME = "theme";
-    private static final String THEME_HOLO = "holo";
-    private static final String THEME_HOLO_LIGHT = "holo_light";
-    private static final String THEME_MATERIAL = "material";
-    private static final String THEME_MATERIAL_LIGHT = "material_light";
-
     // Key for whether the user selected network in saved instance state bundle
     private static final String PARAM_USER_SELECTED_NETWORK = "userSelectedNetwork";
 
     // Activity result when pressing the Skip button
     private static final int RESULT_SKIP = Activity.RESULT_FIRST_USER;
-
-    // From WizardManager (must match constants maintained there)
-    private static final String ACTION_NEXT = "com.android.wizard.NEXT";
-    private static final String EXTRA_SCRIPT_URI = "scriptUri";
-    private static final String EXTRA_ACTION_ID = "actionId";
-    private static final String EXTRA_RESULT_CODE = "com.android.setupwizard.ResultCode";
-    private static final int NEXT_REQUEST = 10000;
 
     // Whether we allow skipping without a valid network connection
     private boolean mAllowSkip = true;
@@ -168,14 +153,7 @@ public class WifiSetupActivity extends WifiPickerActivity
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        String themeName = getIntent().getStringExtra(EXTRA_THEME);
-        if (THEME_HOLO_LIGHT.equalsIgnoreCase(themeName) ||
-                THEME_MATERIAL_LIGHT.equalsIgnoreCase(themeName)) {
-            resid = R.style.SetupWizardWifiTheme_Light;
-        } else if (THEME_HOLO.equalsIgnoreCase(themeName) ||
-                THEME_MATERIAL.equalsIgnoreCase(themeName)) {
-            resid = R.style.SetupWizardWifiTheme;
-        }
+        resid = SetupWizardUtils.getTheme(getIntent(), resid);
         super.onApplyThemeResource(theme, resid, first);
     }
 
@@ -195,45 +173,19 @@ public class WifiSetupActivity extends WifiPickerActivity
      */
     public void finishOrNext(int resultCode) {
         Log.d(TAG, "finishOrNext resultCode=" + resultCode
-                + " isUsingWizardManager=" + isUsingWizardManager());
-        if (isUsingWizardManager()) {
-            sendResultsToSetupWizard(resultCode);
+                + " isUsingWizardManager=" + SetupWizardUtils.isUsingWizardManager(this));
+        if (SetupWizardUtils.isUsingWizardManager(this)) {
+            SetupWizardUtils.sendResultsToSetupWizard(this, resultCode);
         } else {
             setResult(resultCode);
             finish();
         }
     }
 
-    private boolean isUsingWizardManager() {
-        return getIntent().hasExtra(EXTRA_SCRIPT_URI);
-    }
-
-    /**
-     * Send the results of this activity to WizardManager, which will then send out the next
-     * scripted activity. WizardManager does not actually return an activity result, but if we
-     * invoke WizardManager without requesting a result, the framework will choose not to issue a
-     * call to onActivityResult with RESULT_CANCELED when navigating backward.
-     */
-    private void sendResultsToSetupWizard(int resultCode) {
-        final Intent intent = getIntent();
-        final Intent nextIntent = new Intent(ACTION_NEXT);
-        nextIntent.putExtra(EXTRA_SCRIPT_URI, intent.getStringExtra(EXTRA_SCRIPT_URI));
-        nextIntent.putExtra(EXTRA_ACTION_ID, intent.getStringExtra(EXTRA_ACTION_ID));
-        nextIntent.putExtra(EXTRA_THEME, intent.getStringExtra(EXTRA_THEME));
-        nextIntent.putExtra(EXTRA_RESULT_CODE, resultCode);
-        startActivityForResult(nextIntent, NEXT_REQUEST);
-    }
-
     @Override
     public void onNavigationBarCreated(final SetupWizardNavBar bar) {
         mNavigationBar = bar;
-        final boolean useImmersiveMode =
-                getIntent().getBooleanExtra(EXTRA_USE_IMMERSIVE_MODE, false);
-        bar.setUseImmersiveMode(useImmersiveMode);
-        if (useImmersiveMode) {
-            getWindow().setNavigationBarColor(Color.TRANSPARENT);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+        SetupWizardUtils.setImmersiveMode(this, bar);
     }
 
     @Override
