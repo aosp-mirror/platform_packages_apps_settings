@@ -137,6 +137,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
     private boolean mServiceEnabled;
 
+    private SearchView mSearchView;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -148,6 +150,9 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
+        if (mSearchView != null) {
+            mSearchView.setOnQueryTextListener(null);
+        }
         super.onPause();
     }
 
@@ -408,8 +413,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
 
         MenuItem searchItem = menu.findItem(R.id.print_menu_item_search);
         if (mServiceEnabled && mPrintersAdapter.getUnfilteredCount() > 0) {
-            SearchView searchView = (SearchView) searchItem.getActionView();
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            mSearchView = (SearchView) searchItem.getActionView();
+            mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     return true;
@@ -421,7 +426,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                     return true;
                 }
             });
-            searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            mSearchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
                 @Override
                 public void onViewAttachedToWindow(View view) {
                     if (AccessibilityManager.getInstance(getActivity()).isEnabled()) {
