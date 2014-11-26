@@ -22,7 +22,12 @@ import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
 
 class Summary {
-    static String get(Context context, String ssid, DetailedState state) {
+    static String get(Context context, String ssid, DetailedState state, boolean isEphemeral) {
+        if (state == DetailedState.CONNECTED && isEphemeral && ssid == null) {
+            // Special case for connected + ephemeral networks.
+            return context.getString(R.string.connected_via_wfa);
+        }
+
         String[] formats = context.getResources().getStringArray((ssid == null)
                 ? R.array.wifi_status : R.array.wifi_status_with_ssid);
         int index = state.ordinal();
@@ -33,7 +38,7 @@ class Summary {
         return String.format(formats[index], ssid);
     }
 
-    static String get(Context context, DetailedState state) {
-        return get(context, null, state);
+    static String get(Context context, DetailedState state, boolean isEphemeral) {
+        return get(context, null, state, isEphemeral);
     }
 }
