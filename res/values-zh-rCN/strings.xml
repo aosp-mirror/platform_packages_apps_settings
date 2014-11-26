@@ -600,12 +600,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"随时都可扫描"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"始终允许扫描网络"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允许Google的位置信息服务和其他应用扫描网络（即使WLAN已关闭）"</string>
-    <!-- no translation found for wifi_automatically_connect_title (7950640291510621742) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (6722194413023965902) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (4014645210955009439) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"自动使用开放的 WLAN 网络"</string>
+    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"允许 WLAN 助手自动连接到评定为优质的开放网络上"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"选择助手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安装证书"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"为了提高位置信息精确度以及其他目的，Google 和其他应用可扫描附近的网络（在关闭了WLAN时也可进行扫描）。如果您不希望应用这么做，请进入“高级”&gt;“随时都可扫描”进行设置。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"应用可扫描附近的网络（在关闭了WLAN时也可进行扫描）。如果您不希望应用这么做，请进入“高级”&gt;“随时都可扫描”进行设置。"</string>
@@ -1016,8 +1013,7 @@
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"此操作会清除您平板电脑"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐户"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"此操作会清除您手机"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐户"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"目前，您已登录以下帐户：\n"</string>
-    <!-- no translation found for master_clear_other_users_present (5161423070702470742) -->
-    <skip />
+    <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"此设备上目前还有其他用户。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他的用户数据"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"要清除音乐、照片和其他用户数据，请清空该 "<b>"USB存储设备"</b>"。"</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"要清除音乐、图片和其他用户数据，您需要清空该 "<b>"SD卡"</b>"。"</string>
@@ -1444,16 +1440,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"充电时屏幕不会休眠"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"启用蓝牙 HCI 信息收集日志"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"捕获单个文件中的所有蓝牙 HCI 包"</string>
-    <!-- no translation found for oem_unlock_enable (6040763321967327691) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_summary (4720281828891618376) -->
-    <skip />
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"OEM 解锁"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"允许解锁引导加载程序"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"输入您的 PIN 码"</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"输入您的设备 PIN 码即可启用 OEM 解锁"</string>
-    <!-- no translation found for confirm_enable_oem_unlock_title (4802157344812385674) -->
-    <skip />
-    <!-- no translation found for confirm_enable_oem_unlock_text (5517144575601647022) -->
-    <skip />
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"要允许 OEM 解锁吗？"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"警告：如果开启此设置，此设备上的设备保护功能将无法使用。"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"无线显示认证"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"启用WLAN详细日志记录功能"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"主动从WLAN网络切换到移动数据网络"</string>
@@ -2015,10 +2007,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"始终使用 GPU 进行屏幕合成"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"模拟颜色空间"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"启用 OpenGL 跟踪"</string>
-    <!-- no translation found for use_awesomeplayer (1583337008516364226) -->
-    <skip />
-    <!-- no translation found for use_awesomeplayer_summary (6757734070733387140) -->
-    <skip />
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"使用 AwesomePlayer（已弃用）"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"使用 AwesomePlayer（取代 NuPlayer）播放大多数媒体内容"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"关闭USB音频转接"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"关闭自动转接至USB音频外围设备的功能"</string>
     <string name="debug_layout" msgid="5981361776594526155">"显示布局边界"</string>
@@ -2484,8 +2474,8 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"开始时间"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"结束时间"</string>
     <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"次日 <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> 或任何早于该时间的闹钟响铃时"</string>
-    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"次日 <xliff:g id="FORMATTED_TIME">%s</xliff:g> 或任何早于该时间的闹钟响铃时"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> 或早于该时间的闹钟响铃时"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"次日 <xliff:g id="FORMATTED_TIME">%s</xliff:g> 或早于该时间的闹钟响铃时"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"应用通知"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"通知设置"</string>
     <string name="device_feedback" msgid="3238056036766293294">"发送有关此设备的反馈"</string>

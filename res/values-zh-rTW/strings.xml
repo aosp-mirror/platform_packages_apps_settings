@@ -600,12 +600,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"一律執行掃描"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"一律執行掃描"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允許 Google 的定位服務和其他應用程式掃描網路 (即使 Wi-Fi 已關閉仍允許掃描)"</string>
-    <!-- no translation found for wifi_automatically_connect_title (7950640291510621742) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (6722194413023965902) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (4014645210955009439) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"自動使用開放 Wi-Fi"</string>
+    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"允許 Wi‑Fi 小幫手自動連線到系統測定為高品質的開放網路"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"選擇小幫手"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安裝憑證"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"為了提升定位精確度及用於其他用途，Google 和其他應用程式可能會掃描附近的 Wi-Fi 網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"應用程式可能會掃描附近的網路 (即使 Wi-Fi 連線功能已關閉)。如果您不想授予這項權限，可隨時前往 [進階] &gt; [掃描] 變更設定。"</string>
@@ -1016,8 +1013,7 @@
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"這會清除您平板電腦"<b>"內部儲存裝置"</b>"中的所有資料，包括：\n\n"<li>"您的 Google 帳戶"</li>\n<li>"系統和應用程式資料及設定"</li>\n<li>"已下載的應用程式"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"這會清除您手機"<b>"內部儲存裝置"</b>"中的所有資料，包括：\n\n"<li>"您的 Google 帳戶"</li>\n<li>"系統和應用程式資料及設定"</li>\n<li>"已下載的應用程式"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"您目前已登入下列帳戶：\n"</string>
-    <!-- no translation found for master_clear_other_users_present (5161423070702470742) -->
-    <skip />
+    <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"這個裝置上還有其他使用者。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音樂"</li>\n<li>"相片"</li>\n<li>"其他使用者資料"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"如要一併清除音樂、圖片及其他用戶資料，則需清除 "<b>"USB 儲存裝置"</b>"資料。"</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"如要清除音樂、圖片及其他使用者資料，必須先清除 "<b>"SD 卡"</b>"。"</string>
@@ -1444,16 +1440,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"充電時螢幕不會進入休眠"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"啟用藍牙 HCI 窺探紀錄"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"擷取單一檔案內的所有藍牙 HCI 封包"</string>
-    <!-- no translation found for oem_unlock_enable (6040763321967327691) -->
-    <skip />
-    <!-- no translation found for oem_unlock_enable_summary (4720281828891618376) -->
-    <skip />
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"原始設備製造商 (OEM) 解鎖"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"允許解除鎖定開機載入器"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"輸入您的 PIN"</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"如要啟用 OEM 解鎖設定，請輸入您的裝置 PIN"</string>
-    <!-- no translation found for confirm_enable_oem_unlock_title (4802157344812385674) -->
-    <skip />
-    <!-- no translation found for confirm_enable_oem_unlock_text (5517144575601647022) -->
-    <skip />
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"允許原始設備製造商 (OEM) 解鎖？"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"警告：開啟這項設定時，這個裝置的裝置保護功能無法正常運作。"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"無線螢幕分享認證"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"啟用 Wi‑Fi 詳細紀錄設定"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi-Fi 至行動數據轉換強化"</string>
@@ -2019,10 +2011,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"一律使用 GPU 進行畫面合成"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"模擬色彩空間"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"啟用 OpenGL 追蹤"</string>
-    <!-- no translation found for use_awesomeplayer (1583337008516364226) -->
-    <skip />
-    <!-- no translation found for use_awesomeplayer_summary (6757734070733387140) -->
-    <skip />
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"使用 AwesomePlayer (已淘汰)"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"使用 AwesomePlayer (取代 NuPlayer) 播放大多數媒體"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"停用 USB 音訊路由"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"停用 USB 音訊周邊設備的自動路由功能"</string>
     <string name="debug_layout" msgid="5981361776594526155">"顯示版面配置界限"</string>
