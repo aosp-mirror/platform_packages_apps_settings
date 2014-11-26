@@ -835,8 +835,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Løft enheden for at vække den"</string>
     <string name="doze_title" msgid="2259176504273878294">"Aktiv låseskærm"</string>
-    <!-- no translation found for doze_summary (7128970177894383698) -->
-    <skip />
+    <string name="doze_summary" msgid="7128970177894383698">"Væk skærmen, når du tager enheden op eller modtager meddelelser"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Skriftstørrelse"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Skriftstørrelse"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Indstillinger for lås af SIM-kort"</string>
@@ -1443,12 +1442,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Skærmen går ikke i dvale under opladning"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Aktivér Bluetooth HCI snoop log"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Gem alle Bluetooth HCI-pakker i en fil"</string>
-    <string name="oem_unlock_enable" msgid="6629321276287913315">"Aktivér OEM-oplåsning"</string>
-    <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Tillad OEM-oplåsning af enheden"</string>
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"OEM-oplåsning"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Tillad, at startindlæseren låses op"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Indtast din pinkode"</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Indtast pinkoden for din enhed for at aktivere OEM-oplåsning"</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Advarsel"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Hvis du aktiverer OEM-oplåsning, deaktiveres tyverisikringsfunktionerne på denne enhed, og din garanti kan risikere at frafalde. Vil du fortsætte?"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Vil du tillade OEM-oplåsning?"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ADVARSEL! Funktioner, der beskytter enheden, fungerer ikke på denne enhed, når denne indstilling er slået til."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificering af trådløs skærm"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Aktivér detaljeret Wi-Fi-logføring"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Gennemtving skift fra Wi-Fi til mobildata"</string>
@@ -2012,8 +2011,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Brug altid GPU til skærmsammensætning"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simuler farverum"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Aktivér OpenGL-spor"</string>
-    <string name="use_nuplayer" msgid="5699257393367904387">"Brug NuPlayer (eksperimentel)"</string>
-    <string name="use_nuplayer_summary" msgid="1991479067478516714">"Brug NuPlayer i stedet for AwesomePlayer"</string>
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"Brug AwesomePlayer (forældet)"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Brug AwesomePlayer i stedet for NuPlayer til de fleste typer medieafspilning"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Slå USB-lydhåndtering fra"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Slå autom. lydhåndtering fra for USB-lydenheder"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Vis layoutgrænser"</string>
@@ -2478,12 +2477,9 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Hverdagsaftener"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Starttidspunkt"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Sluttidspunkt"</string>
-    <!-- no translation found for zen_mode_end_time_priority_next_day_summary_format (2910982148167785730) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_same_day_summary_format (2002665300812473888) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_next_day_summary_format (732719357166551378) -->
-    <skip />
+    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> næste dag"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> eller en tidligere alarm"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> næste dag eller en tidligere alarm"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Appunderretninger"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Indstillinger for underretninger"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback om denne enhed"</string>

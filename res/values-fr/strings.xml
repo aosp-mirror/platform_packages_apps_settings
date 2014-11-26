@@ -600,12 +600,9 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Recherche toujours disponible"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Toujours autoriser la recherche"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Autoriser le service de localisation de Google et les autres applications à rechercher des réseaux, même si le Wi-Fi est désactivé"</string>
-    <!-- no translation found for wifi_automatically_connect_title (7950640291510621742) -->
-    <skip />
-    <!-- no translation found for wifi_automatically_connect_summary (6722194413023965902) -->
-    <skip />
-    <!-- no translation found for wifi_select_assistant_dialog_title (4014645210955009439) -->
-    <skip />
+    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Utiliser automatiquement le Wi-Fi ouvert"</string>
+    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Laisser un assistant Wi‑Fi se connecter automatiquement aux réseaux ouverts jugés de bonne qualité"</string>
+    <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Sélectionner un assistant"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer les certificats"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Pour améliorer la précision et à d\'autres fins, le service de localisation de Google et d\'autres applications peuvent rechercher des réseaux Wi-Fi à proximité, même lorsque le Wi-Fi est désactivé. Vous pouvez modifier ce paramètre dans Options avancées &gt; Recherche toujours disponible."</string>
     <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"Les applications peuvent rechercher des réseaux à proximité, même lorsque le Wi-Fi est désactivé. Vous pouvez modifier ce paramètre dans Avancé &gt; Recherche toujours disponible."</string>
@@ -838,8 +835,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Soulever pour activer"</string>
     <string name="doze_title" msgid="2259176504273878294">"Affichage en mode Veille"</string>
-    <!-- no translation found for doze_summary (7128970177894383698) -->
-    <skip />
+    <string name="doze_summary" msgid="7128970177894383698">"Activer l\'écran lors de la prise en main de l\'appareil ou de la réception de notifications"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Taille de la police"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Taille de police"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres verrouillage SIM"</string>
@@ -1019,8 +1015,7 @@
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Cette action effacera toutes les données de la "<b>"mémoire de stockage interne"</b>" de votre tablette, y compris :\n\n"<li>"Votre compte Google"</li>\n<li>"Les données et paramètres du système et de l\'application"</li>\n<li>"Les applications téléchargées"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Cette action effacera toutes les données du "<b>"stockage interne"</b>" de votre téléphone, y compris :\n\n"<li>"Votre compte Google"</li>\n<li>"Les données et paramètres du système et de l\'application"</li>\n<li>"Les applications téléchargées"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Vous êtes actuellement connecté aux comptes suivants :\n"</string>
-    <!-- no translation found for master_clear_other_users_present (5161423070702470742) -->
-    <skip />
+    <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"D\'autres personnes utilisent cet appareil.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musique"</li>\n<li>"Photos"</li>\n<li>"Autres données utilisateur"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Pour supprimer la musique, les photos et les autres données utilisateur, vous devez effacer la "<b>"mémoire de stockage USB"</b>"."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Pour supprimer la musique, les photos et les autres données utilisateur, vous devez effacer la "<b>"carte SD"</b>"."</string>
@@ -1447,12 +1442,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"L\'écran ne se met jamais en veille lors du chargement."</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Activer journaux HCI Bluetooth"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Enregistrer tous les paquets HCI Bluetooth dans un fichier"</string>
-    <string name="oem_unlock_enable" msgid="6629321276287913315">"Activer déverrouillage OEM"</string>
-    <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Autoriser le déverrouillage OEM de l\'appareil"</string>
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"Déverrouillage OEM"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Autoriser le déverrouillage du chargeur d\'amorçage"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Saisissez votre code d\'accès."</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Saisir le code d\'accès de l\'appareil pour activer le déverrouillage OEM"</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Avertissement"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Si vous activez le déverrouillage OEM, les fonctionnalités de protection de cet appareil contre le vol sont désactivées, et cela peut entraîner l\'annulation de la garantie. Voulez-vous continuer ?"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Autoriser le déverrouillage OEM ?"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"AVERTISSEMENT : Les fonctionnalités de protection de l\'appareil sont désactivées tant que ce paramètre est activé."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certification de l\'affichage sans fil"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Autoriser enreg. infos Wi-Fi détaillées"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Passage forcé du Wi-Fi aux données mobiles"</string>
@@ -2016,8 +2011,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Toujours utiliser le GPU pour la composition écran"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simuler espace colori."</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Activer les traces OpenGL"</string>
-    <string name="use_nuplayer" msgid="5699257393367904387">"NuPlayer (expérimental)"</string>
-    <string name="use_nuplayer_summary" msgid="1991479067478516714">"Utiliser NuPlayer au lieu de AwesomePlayer"</string>
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"Utiliser AwesomePlayer (obsolète)"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Utiliser AwesomePlayer au lieu de NuPlayer pour la lecture de la plupart des contenus médias"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Désact. routage audio USB"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Désactiver routage auto vers périph. audio USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Afficher les contours"</string>
@@ -2482,12 +2477,9 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Les soirs de semaine"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Heure de début"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Heure de fin"</string>
-    <!-- no translation found for zen_mode_end_time_priority_next_day_summary_format (2910982148167785730) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_same_day_summary_format (2002665300812473888) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_next_day_summary_format (732719357166551378) -->
-    <skip />
+    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> le lendemain"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ou toute alarme définie avant cette heure"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> le lendemain ou toute alarme définie avant cette heure"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notifications appli."</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Paramètres de notification"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Envoyer commentaires sur appareil"</string>

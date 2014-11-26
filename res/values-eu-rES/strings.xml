@@ -560,7 +560,7 @@
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Ez da gailurik aurkitu inguruan."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Konektatzen"</string>
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Konektatuta"</string>
-    <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Erabiltzen"</string>
+    <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Abian"</string>
     <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Ez dago erabilgarri."</string>
     <string name="wifi_display_details" msgid="7791118209992162698">"Bistaratze-aukerak"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Hari gabeko pantailaren aukerak"</string>
@@ -1342,8 +1342,8 @@
     <string name="background_process_stop_description" msgid="5034773197139654588">"Aplikazio-prozesu zaharra da hau, baina geroago behar bada erabiltzeko ari da exekutatzen. Normalean ez dago hori gelditzeko arrazoirik."</string>
     <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: erabiltzen ari da. Kontrolatzeko, ukitu Ezarpenak."</string>
     <string name="main_running_process_description" msgid="1130702347066340890">"Abian den prozesu nagusia."</string>
-    <string name="process_service_in_use_description" msgid="8993335064403217080">"<xliff:g id="COMP_NAME">%1$s</xliff:g> zerbitzua erabiltzen ari da."</string>
-    <string name="process_provider_in_use_description" msgid="5586603325677678940">"<xliff:g id="COMP_NAME">%1$s</xliff:g> hornitzailea erabiltzen ari da"</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"<xliff:g id="COMP_NAME">%1$s</xliff:g> zerbitzua abian da."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"<xliff:g id="COMP_NAME">%1$s</xliff:g> hornitzailea abian da"</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Sistemaren zerbitzua gelditu?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Zerbitzua gelditzen baduzu, agian tabletako eginbide batzuk behar bezala funtzionatzeari utziko diote, tableta itzali eta berriro piztu arte."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Zerbitzua gelditzen baduzu, agian telefonoko eginbide batzuk behar bezala funtzionatzeari utziko diote, telefonoa itzali eta berriro piztu arte."</string>
@@ -1442,12 +1442,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Pantaila ez da inoiz inaktibo ezarriko kargatu bitartean"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Gaitu Bluetooth HCI miatze-erregistroa"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Bildu Bluetooth HCI pakete guztiak fitxategi batean"</string>
-    <string name="oem_unlock_enable" msgid="6629321276287913315">"Gaitu jatorrizkoak desblok. aukera"</string>
-    <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Baimendu jatorrizko ezarpenak desblokeatzea"</string>
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"OEM desblokeoa"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Onartu abiarazlea desblokeatzea"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Idatzi PIN kodea"</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"OEM desblokeoa gaitzeko, idatzi gailuaren PIN kodea"</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Kontuz"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"OEM desblokeoa gaitzen baduzu, gailuak lapurreten aurka dituen elementuak desgaituko dira eta bermea baliorik gabe gera daiteke. Jarraitu nahi duzu?"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"OEM desblokeoa onartu nahi duzu?"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ABISUA: ezarpen hau aktibatuta dagoen bitartean, gailuaren babes-eginbideek ez dute gailu honetan funtzionatuko."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Hari gabeko bistaratze-egiaztatzea"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Gaitu Wi-Fi sareetan saioa hasteko modu xehatua"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Behartu Wi-Fi konexiotik datuenera aldatzera"</string>
@@ -2011,8 +2011,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Erabili beti GPU pantaila-muntaietarako"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simulatu kolore-espazioa"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Gaitu OpenGL aztarnak"</string>
-    <string name="use_nuplayer" msgid="5699257393367904387">"Erabili NuPlayer (esperimentala)"</string>
-    <string name="use_nuplayer_summary" msgid="1991479067478516714">"Erabili NuPlayer AwesomePlayer-en ordez"</string>
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"Erabili AwesomePlayer (zaharkituta)"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Erabili AwesomePlayer, eta ez NuPlayer, elementu gehienetarako"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Desgaitu USB audio-bideratzea"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Desgaitu USB audio-gailuetara automatikoki bideratzea"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Erakutsi diseinuaren mugak"</string>

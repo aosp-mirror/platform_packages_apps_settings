@@ -835,8 +835,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Samodejna svetlost"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Preklop iz stanja pripravlj. z dviganjem"</string>
     <string name="doze_title" msgid="2259176504273878294">"Prikaz na podlagi okolja"</string>
-    <!-- no translation found for doze_summary (7128970177894383698) -->
-    <skip />
+    <string name="doze_summary" msgid="7128970177894383698">"Preklop zaslona iz stanja pripravljenosti, ko primete napravo ali prejmete obvestila"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Velikost pisave"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Velikost pisave"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Nastavitve zaklepanja kartice SIM"</string>
@@ -1443,12 +1442,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Med polnjenjem se zaslon ne bo nikoli zaklenil"</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Omogoči dnevnik vohljanja Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Zajemi vse pakete Bluetooth HCI v datoteko"</string>
-    <string name="oem_unlock_enable" msgid="6629321276287913315">"Omogočanje odklepanja OEM"</string>
-    <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Omogoči odklepanje OEM naprave"</string>
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"Odklepanje OEM"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Dovoli odklepanje zagonskega nalagalnika"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Vnesite kodo PIN"</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Če želite omogočiti odklepanje OEM, vnesite kodo PIN naprave"</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Opozorilo"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Če omogočite odklepanje OEM, onemogočite funkcije zaščite pred krajo v napravi in morda izničite garancijo. Ali želite nadaljevati?"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Želite omogočiti odklepanje OEM?"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"OPOZORILO: Ko je vklopljena ta nastavitev, funkcije za zaščito naprave v tej napravi ne bodo delovale."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Potrdilo brezžičnega zaslona"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Omogoči podrob. zapis. dnevnika za Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Odločen prehod iz Wi-Fi-ja v mobil. omr."</string>
@@ -2012,8 +2011,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Za sestavljanje slike vedno uporabi graf. procesor"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simul. barvnega prostora"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Omogoči sledi OpenGL"</string>
-    <string name="use_nuplayer" msgid="5699257393367904387">"Uporabi NuPlayer (presk.)"</string>
-    <string name="use_nuplayer_summary" msgid="1991479067478516714">"Uporabi NuPlayer namesto AwesomePlayerja"</string>
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"Uporabi AwesomePlayer (zastarelo)"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"Uporaba AwesomePlayerja namesto NuPlayerja za predvajanje večine predstavnosti"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"On. us. zvoka prek USB-ja"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Onem. samod. usmerjanja na zun. zvoč. naprave USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Prikaz mej postavitve"</string>
@@ -2478,12 +2477,9 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Noči med tednom"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Ura začetka"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Ura konca"</string>
-    <!-- no translation found for zen_mode_end_time_priority_next_day_summary_format (2910982148167785730) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_same_day_summary_format (2002665300812473888) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_next_day_summary_format (732719357166551378) -->
-    <skip />
+    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> naslednji dan"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> ali kateri koli alarm prej"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> naslednji dan ali kateri koli alarm prej"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Obvestila aplikacij"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Nastavitve obvestil"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Pošlji povratne info. o tej napravi"</string>

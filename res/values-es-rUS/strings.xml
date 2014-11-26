@@ -835,8 +835,7 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
-    <!-- no translation found for doze_summary (7128970177894383698) -->
-    <skip />
+    <string name="doze_summary" msgid="7128970177894383698">"Permite activar la pantalla cuando recoges el dispositivo o recibes notificaciones."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
     <string name="dialog_title_font_size" msgid="2231507851258955038">"Tamaño de fuente"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Configuración de bloqueo de la tarjeta SIM"</string>
@@ -1443,12 +1442,12 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"La pantalla nunca quedará inactiva mientras el dispositivo se esté cargando."</string>
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Registro de búsq. de HCI de Bluetooth"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Capturar todos los paquetes de HCI de Bluetooth en un archivo"</string>
-    <string name="oem_unlock_enable" msgid="6629321276287913315">"Habilitar desbloqueo OEM"</string>
-    <string name="oem_unlock_enable_summary" msgid="3546686263996628110">"Permitir que el dispositivo se desbloquee con OEM"</string>
+    <string name="oem_unlock_enable" msgid="6040763321967327691">"Desbloqueo de OEM"</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Permitir que el cargador de inicio se desbloquee"</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Ingresa el PIN."</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Ingresa el PIN del dispositivo para habilitar el desbloqueo OEM."</string>
-    <string name="confirm_enable_oem_unlock_title" msgid="5704707409461191290">"Advertencia"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="3613451506484517501">"Habilitar el desbloqueo OEM inhabilita las funciones de protección contra robo en este dispositivo y es posible que anule la garantía. ¿Deseas continuar?"</string>
+    <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"¿Permitir desbloqueo de OEM?"</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ADVERTENCIA: Las funciones de protección de dispositivos no funcionarán en este dispositivo mientras esta configuración esté activada."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificación de pantalla inalámbrica"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Habilitar registro detallado de Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Transferencia intensa de Wi‑Fi a celular"</string>
@@ -2012,8 +2011,8 @@
     <string name="disable_overlays_summary" msgid="3578941133710758592">"Usar GPU para combinar pantallas"</string>
     <string name="simulate_color_space" msgid="6745847141353345872">"Simular espacio de color"</string>
     <string name="enable_opengl_traces_title" msgid="6790444011053219871">"Seguimientos de OpenGL"</string>
-    <string name="use_nuplayer" msgid="5699257393367904387">"Usar NuPlayer (experim.)"</string>
-    <string name="use_nuplayer_summary" msgid="1991479067478516714">"Usar NuPlayer en lugar de AwesomePlayer"</string>
+    <string name="use_awesomeplayer" msgid="1583337008516364226">"AwesomePlayer (desuso)"</string>
+    <string name="use_awesomeplayer_summary" msgid="6757734070733387140">"AwesomePlayer, no NuPlayer, para reproducciones"</string>
     <string name="usb_audio_disable_routing" msgid="8114498436003102671">"Inhab. enrutam. audio USB"</string>
     <string name="usb_audio_disable_routing_summary" msgid="980282760277312264">"Inhab. enrutam. automático a periféricos audio USB"</string>
     <string name="debug_layout" msgid="5981361776594526155">"Mostrar límites de diseño"</string>
@@ -2478,12 +2477,9 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Noches entre semana"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Hora de inicio"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Hora de finalización"</string>
-    <!-- no translation found for zen_mode_end_time_priority_next_day_summary_format (2910982148167785730) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_same_day_summary_format (2002665300812473888) -->
-    <skip />
-    <!-- no translation found for zen_mode_end_time_none_next_day_summary_format (732719357166551378) -->
-    <skip />
+    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> el día siguiente"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> o cualquier alarma anterior"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> el día siguiente o cualquier alarma anterior"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Notif. aplicaciones"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Configuración de notificaciones"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Envía comentarios del dispositivo"</string>
