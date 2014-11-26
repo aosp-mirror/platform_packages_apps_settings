@@ -65,7 +65,7 @@ public class ChooseLockPattern extends SettingsActivity {
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPatternFragment.class.getName());
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         return modIntent;
     }
 
@@ -83,6 +83,10 @@ public class ChooseLockPattern extends SettingsActivity {
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockPatternFragment.class.getName().equals(fragmentName)) return true;
         return false;
+    }
+
+    /* package */ Class<? extends Fragment> getFragmentClass() {
+        return ChooseLockPatternFragment.class;
     }
 
     @Override
@@ -327,9 +331,12 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.choose_lock_pattern, container, false);
+        }
 
-            // setupViews()
-            View view = inflater.inflate(R.layout.choose_lock_pattern, null);
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
@@ -377,7 +384,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
             }
             mDone = false;
-            return view;
         }
 
         public void onClick(View v) {

@@ -18,27 +18,34 @@ package com.android.settings;
 
 import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-public class SetupChooseLockGeneric extends ChooseLockGeneric
+public class SetupChooseLockPattern extends ChooseLockPattern
         implements SetupWizardNavBar.NavigationBarListener {
 
-    @Override
-    protected boolean isValidFragment(String fragmentName) {
-        return SetupChooseLockGenericFragment.class.getName().equals(fragmentName);
+    public static Intent createIntent(Context context, final boolean isFallback,
+            boolean requirePassword, boolean confirmCredentials) {
+        Intent intent = ChooseLockPattern.createIntent(context, isFallback, requirePassword,
+                confirmCredentials);
+        intent.setClass(context, SetupChooseLockPattern.class);
+        return intent;
     }
 
     @Override
-    /* package */ Class<? extends PreferenceFragment> getFragmentClass() {
-        return SetupChooseLockGenericFragment.class;
+    protected boolean isValidFragment(String fragmentName) {
+        return SetupChooseLockPatternFragment.class.getName().equals(fragmentName);
+    }
+
+    @Override
+    /* package */ Class<? extends Fragment> getFragmentClass() {
+        return SetupChooseLockPatternFragment.class;
     }
 
     @Override
@@ -50,7 +57,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
         SetupWizardUtils.setImmersiveMode(this, bar);
-        bar.getNextButton().setEnabled(false);
     }
 
     @Override
@@ -62,18 +68,14 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
     public void onNavigateNext() {
     }
 
-    public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment {
+    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            final View view = inflater.inflate(R.layout.setup_preference, container, false);
-            ListView list = (ListView) view.findViewById(android.R.id.list);
-            View title = view.findViewById(R.id.title);
-            if (title == null) {
-                final View header = inflater.inflate(R.layout.setup_wizard_header, list, false);
-                list.addHeaderView(header, null, false);
-            }
+            final View view = inflater.inflate(R.layout.setup_template, container, false);
+            ViewGroup setupContent = (ViewGroup) view.findViewById(R.id.setup_content);
+            inflater.inflate(R.layout.setup_choose_lock_pattern, setupContent, true);
             return view;
         }
 
@@ -81,25 +83,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
-        }
-
-        @Override
-        protected Intent getLockPasswordIntent(Context context, int quality, boolean isFallback,
-                int minLength, int maxLength, boolean requirePasswordToDecrypt,
-                boolean confirmCredentials) {
-            final Intent intent = SetupChooseLockPassword.createIntent(context, quality,
-                    isFallback, minLength, maxLength, requirePasswordToDecrypt, confirmCredentials);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getLockPatternIntent(Context context, boolean isFallback,
-                boolean requirePassword, boolean confirmCredentials) {
-            final Intent intent = SetupChooseLockPattern.createIntent(context, isFallback,
-                    requirePassword, confirmCredentials);
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
         }
     }
 }
