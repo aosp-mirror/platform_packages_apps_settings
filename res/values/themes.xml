@@ -28,7 +28,7 @@
         <item name="android:windowBackground">@null</item>
     </style>
 
-    <style name="SetupWizardWifiTheme" parent="android:Theme.Material.NoActionBar">
+    <style name="SetupWizardTheme" parent="android:Theme.Material.NoActionBar">
         <item name="android:alertDialogTheme">@style/Theme.WifiDialog</item>
         <item name="android:colorAccent">@color/setup_wizard_color_accent_dark</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/setup_wizard_margin_sides</item>
@@ -45,7 +45,7 @@
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
     </style>
 
-    <style name="SetupWizardWifiTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="SetupWizardTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:alertDialogTheme">@style/Theme.Light.WifiDialog</item>
         <item name="android:colorAccent">@color/setup_wizard_color_accent_light</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/setup_wizard_margin_sides</item>

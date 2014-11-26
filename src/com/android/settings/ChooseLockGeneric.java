@@ -19,6 +19,7 @@ package com.android.settings;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.ActivityManagerNative;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -50,7 +51,7 @@ public class ChooseLockGeneric extends SettingsActivity {
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockGenericFragment.class.getName());
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         return modIntent;
     }
 
@@ -58,6 +59,10 @@ public class ChooseLockGeneric extends SettingsActivity {
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockGenericFragment.class.getName().equals(fragmentName)) return true;
         return false;
+    }
+
+    /* package */ Class<? extends Fragment> getFragmentClass() {
+        return ChooseLockGenericFragment.class;
     }
 
     public static class InternalActivity extends ChooseLockGeneric {
