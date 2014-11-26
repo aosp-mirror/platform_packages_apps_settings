@@ -958,6 +958,9 @@
     <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_password_summary">High security</string>
 
+    <!--  Content of warning dialog about disabling device protection features when user is switching from a secure unlock method to an insecure one. [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content">Device protection features will no longer work.</string>
+
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by administrator, encryption policy, or credential storage</string>
 
@@ -983,6 +986,8 @@
     <string name="unlock_disable_lock_pin_summary">Remove unlock PIN</string>
     <!-- Summary shown under unlock_disable_lock_title when password is in use and can be removed [CHAR LIMIT=45]-->
     <string name="unlock_disable_lock_password_summary">Remove unlock password</string>
+    <!-- Summary shown under unlock_disable_lock_title when an unknown secure unlocking method is in use and can be removed [CHAR LIMIT=45]-->
+    <string name="unlock_disable_lock_unknown_summary">Remove screen lock</string>
 
     <!-- Title shown on security settings to allow the user to change their lockscreen pattern [CHAR LIMIT=22] -->
     <string name="unlock_change_lock_pattern_title">Change unlock pattern</string>
