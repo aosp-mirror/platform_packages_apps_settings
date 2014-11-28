@@ -47,6 +47,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference
     private ImageView mIconView;
     private TextView mSuppressionTextView;
     private String mSuppressionText;
+    private boolean mMuted;
+    private int mIconResId;
+    private int mMuteIconResId;
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -99,22 +102,27 @@ public class VolumeSeekBarPreference extends SeekBarPreference
                     mCallback.onSampleStarting(sbv);
                 }
             }
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
+                if (mCallback != null) {
+                    mCallback.onStreamValueChanged(mStream, progress);
+                }
+            }
+            @Override
+            public void onMuted(boolean muted) {
+                if (mMuted == muted) return;
+                mMuted = muted;
+                updateIconView();
+            }
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
         if (mVolumizer == null) {
-            mVolumizer = new SeekBarVolumizer(getContext(), mStream, sampleUri, sbvc) {
-                // we need to piggyback on SBV's SeekBar listener to update our icon
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress,
-                        boolean fromTouch) {
-                    super.onProgressChanged(seekBar, progress, fromTouch);
-                    mCallback.onStreamValueChanged(mStream, progress);
-                }
-            };
+            mVolumizer = new SeekBarVolumizer(getContext(), mStream, sampleUri, sbvc);
         }
         mVolumizer.start();
         mVolumizer.setSeekBar(mSeekBar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
+        updateIconView();
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
         mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
         updateSuppressionText();
@@ -133,12 +141,29 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         mCallback.onStreamValueChanged(mStream, progress);
     }
 
+    private void updateIconView() {
+        if (mIconView == null) return;
+        if (mIconResId != 0) {
+            mIconView.setImageResource(mIconResId);
+        } else if (mMuteIconResId != 0 && mMuted) {
+            mIconView.setImageResource(mMuteIconResId);
+        } else {
+            mIconView.setImageDrawable(getIcon());
+        }
+    }
+
     public void showIcon(int resId) {
         // Instead of using setIcon, which will trigger listeners, this just decorates the
         // preference temporarily with a new icon.
-        if (mIconView != null) {
-            mIconView.setImageResource(resId);
-        }
+        if (mIconResId == resId) return;
+        mIconResId = resId;
+        updateIconView();
+    }
+
+    public void setMuteIcon(int resId) {
+        if (mMuteIconResId == resId) return;
+        mMuteIconResId = resId;
+        updateIconView();
     }
 
     private Uri getMediaVolumeUri() {
