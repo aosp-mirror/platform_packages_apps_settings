@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.INotificationManager;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -131,6 +132,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private SwitchPreference mMessages;
     private DropDownPreference mStarred;
     private SwitchPreference mEvents;
+    private boolean mDowntimeSupported;
     private Preference mDays;
     private TimePickerPreference mStart;
     private TimePickerPreference mEnd;
@@ -227,99 +229,103 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         });
 
         final PreferenceCategory downtime = (PreferenceCategory) root.findPreference(KEY_DOWNTIME);
-
-        mDays = downtime.findPreference(KEY_DAYS);
-        mDays.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                new AlertDialog.Builder(mContext)
-                        .setTitle(R.string.zen_mode_downtime_days)
-                        .setView(new ZenModeDowntimeDaysSelection(mContext, mConfig.sleepMode) {
-                              @Override
-                              protected void onChanged(String mode) {
-                                  if (mDisableListeners) return;
-                                  if (Objects.equals(mode, mConfig.sleepMode)) return;
-                                  if (DEBUG) Log.d(TAG, "days.onChanged sleepMode=" + mode);
-                                  final ZenModeConfig newConfig = mConfig.copy();
-                                  newConfig.sleepMode = mode;
-                                  setZenModeConfig(newConfig);
-                              }
-                        })
-                        .setOnDismissListener(new OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialog) {
-                                updateDays();
-                            }
-                        })
-                        .setPositiveButton(R.string.done_button, null)
-                        .show();
-                return true;
-            }
-        });
-
-        final FragmentManager mgr = getFragmentManager();
-
-        mStart = new TimePickerPreference(mContext, mgr);
-        mStart.setKey(KEY_START_TIME);
-        mStart.setTitle(R.string.zen_mode_start_time);
-        mStart.setCallback(new TimePickerPreference.Callback() {
-            @Override
-            public boolean onSetTime(int hour, int minute) {
-                if (mDisableListeners) return true;
-                if (!ZenModeConfig.isValidHour(hour)) return false;
-                if (!ZenModeConfig.isValidMinute(minute)) return false;
-                if (hour == mConfig.sleepStartHour && minute == mConfig.sleepStartMinute) {
+        mDowntimeSupported = isDowntimeSupported(mContext);
+        if (!mDowntimeSupported) {
+            removePreference(KEY_DOWNTIME);
+        } else {
+            mDays = downtime.findPreference(KEY_DAYS);
+            mDays.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle(R.string.zen_mode_downtime_days)
+                            .setView(new ZenModeDowntimeDaysSelection(mContext, mConfig.sleepMode) {
+                                  @Override
+                                  protected void onChanged(String mode) {
+                                      if (mDisableListeners) return;
+                                      if (Objects.equals(mode, mConfig.sleepMode)) return;
+                                      if (DEBUG) Log.d(TAG, "days.onChanged sleepMode=" + mode);
+                                      final ZenModeConfig newConfig = mConfig.copy();
+                                      newConfig.sleepMode = mode;
+                                      setZenModeConfig(newConfig);
+                                  }
+                            })
+                            .setOnDismissListener(new OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    updateDays();
+                                }
+                            })
+                            .setPositiveButton(R.string.done_button, null)
+                            .show();
                     return true;
                 }
-                if (DEBUG) Log.d(TAG, "onPrefChange sleepStart h=" + hour + " m=" + minute);
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.sleepStartHour = hour;
-                newConfig.sleepStartMinute = minute;
-                return setZenModeConfig(newConfig);
-            }
-        });
-        downtime.addPreference(mStart);
-        mStart.setDependency(mDays.getKey());
+            });
 
-        mEnd = new TimePickerPreference(mContext, mgr);
-        mEnd.setKey(KEY_END_TIME);
-        mEnd.setTitle(R.string.zen_mode_end_time);
-        mEnd.setCallback(new TimePickerPreference.Callback() {
-            @Override
-            public boolean onSetTime(int hour, int minute) {
-                if (mDisableListeners) return true;
-                if (!ZenModeConfig.isValidHour(hour)) return false;
-                if (!ZenModeConfig.isValidMinute(minute)) return false;
-                if (hour == mConfig.sleepEndHour && minute == mConfig.sleepEndMinute) {
-                    return true;
+            final FragmentManager mgr = getFragmentManager();
+
+            mStart = new TimePickerPreference(mContext, mgr);
+            mStart.setKey(KEY_START_TIME);
+            mStart.setTitle(R.string.zen_mode_start_time);
+            mStart.setCallback(new TimePickerPreference.Callback() {
+                @Override
+                public boolean onSetTime(int hour, int minute) {
+                    if (mDisableListeners) return true;
+                    if (!ZenModeConfig.isValidHour(hour)) return false;
+                    if (!ZenModeConfig.isValidMinute(minute)) return false;
+                    if (hour == mConfig.sleepStartHour && minute == mConfig.sleepStartMinute) {
+                        return true;
+                    }
+                    if (DEBUG) Log.d(TAG, "onPrefChange sleepStart h=" + hour + " m=" + minute);
+                    final ZenModeConfig newConfig = mConfig.copy();
+                    newConfig.sleepStartHour = hour;
+                    newConfig.sleepStartMinute = minute;
+                    return setZenModeConfig(newConfig);
                 }
-                if (DEBUG) Log.d(TAG, "onPrefChange sleepEnd h=" + hour + " m=" + minute);
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.sleepEndHour = hour;
-                newConfig.sleepEndMinute = minute;
-                return setZenModeConfig(newConfig);
-            }
-        });
-        downtime.addPreference(mEnd);
-        mEnd.setDependency(mDays.getKey());
+            });
+            downtime.addPreference(mStart);
+            mStart.setDependency(mDays.getKey());
 
-        mDowntimeMode = (DropDownPreference) downtime.findPreference(KEY_DOWNTIME_MODE);
-        mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_priority, false);
-        mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_none, true);
-        mDowntimeMode.setCallback(new DropDownPreference.Callback() {
-            @Override
-            public boolean onItemSelected(int pos, Object value) {
-                if (mDisableListeners) return true;
-                final boolean sleepNone = value instanceof Boolean ? ((Boolean) value) : false;
-                if (mConfig == null || mConfig.sleepNone == sleepNone) return false;
-                final ZenModeConfig newConfig = mConfig.copy();
-                newConfig.sleepNone = sleepNone;
-                if (DEBUG) Log.d(TAG, "onPrefChange sleepNone=" + sleepNone);
-                return setZenModeConfig(newConfig);
-            }
-        });
-        mDowntimeMode.setOrder(10);  // sort at the bottom of the category
-        mDowntimeMode.setDependency(mDays.getKey());
+            mEnd = new TimePickerPreference(mContext, mgr);
+            mEnd.setKey(KEY_END_TIME);
+            mEnd.setTitle(R.string.zen_mode_end_time);
+            mEnd.setCallback(new TimePickerPreference.Callback() {
+                @Override
+                public boolean onSetTime(int hour, int minute) {
+                    if (mDisableListeners) return true;
+                    if (!ZenModeConfig.isValidHour(hour)) return false;
+                    if (!ZenModeConfig.isValidMinute(minute)) return false;
+                    if (hour == mConfig.sleepEndHour && minute == mConfig.sleepEndMinute) {
+                        return true;
+                    }
+                    if (DEBUG) Log.d(TAG, "onPrefChange sleepEnd h=" + hour + " m=" + minute);
+                    final ZenModeConfig newConfig = mConfig.copy();
+                    newConfig.sleepEndHour = hour;
+                    newConfig.sleepEndMinute = minute;
+                    return setZenModeConfig(newConfig);
+                }
+            });
+            downtime.addPreference(mEnd);
+            mEnd.setDependency(mDays.getKey());
+
+            mDowntimeMode = (DropDownPreference) downtime.findPreference(KEY_DOWNTIME_MODE);
+            mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_priority, false);
+            mDowntimeMode.addItem(R.string.zen_mode_downtime_mode_none, true);
+            mDowntimeMode.setCallback(new DropDownPreference.Callback() {
+                @Override
+                public boolean onItemSelected(int pos, Object value) {
+                    if (mDisableListeners) return true;
+                    final boolean sleepNone = value instanceof Boolean ? ((Boolean) value) : false;
+                    if (mConfig == null || mConfig.sleepNone == sleepNone) return false;
+                    final ZenModeConfig newConfig = mConfig.copy();
+                    newConfig.sleepNone = sleepNone;
+                    if (DEBUG) Log.d(TAG, "onPrefChange sleepNone=" + sleepNone);
+                    return setZenModeConfig(newConfig);
+                }
+            });
+            mDowntimeMode.setOrder(10);  // sort at the bottom of the category
+            mDowntimeMode.setDependency(mDays.getKey());
+        }
 
         mAutomationCategory = (PreferenceCategory) findPreference(KEY_AUTOMATION);
         mEntry = findPreference(KEY_ENTRY);
@@ -376,6 +382,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     }
 
     private void updateEndSummary() {
+        if (!mDowntimeSupported) return;
         final int startMin = 60 * mConfig.sleepStartHour + mConfig.sleepStartMinute;
         final int endMin = 60 * mConfig.sleepEndHour + mConfig.sleepEndMinute;
         final boolean nextDay = startMin >= endMin;
@@ -399,10 +406,12 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mStarred.setSelectedValue(mConfig.allowFrom);
         mEvents.setChecked(mConfig.allowEvents);
         updateStarredEnabled();
-        updateDays();
-        mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
-        mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
-        mDowntimeMode.setSelectedValue(mConfig.sleepNone);
+        if (mDowntimeSupported) {
+            updateDays();
+            mStart.setTime(mConfig.sleepStartHour, mConfig.sleepStartMinute);
+            mEnd.setTime(mConfig.sleepEndHour, mConfig.sleepEndMinute);
+            mDowntimeMode.setSelectedValue(mConfig.sleepNone);
+        }
         mDisableListeners = false;
         refreshAutomationSection();
         updateEndSummary();
@@ -552,9 +561,15 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mDialog = null;
     }
 
+    private static boolean isDowntimeSupported(Context context) {
+        return NotificationManager.from(context)
+                .isSystemConditionProviderEnabled(ZenModeConfig.DOWNTIME_PATH);
+    }
+
     // Enable indexing of searchable data
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
+
             @Override
             public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
                 final SparseArray<String> keyTitles = allKeyTitles(context);
@@ -569,6 +584,19 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
                     result.add(data);
                 }
                 return result;
+            }
+
+            @Override
+            public List<String> getNonIndexableKeys(Context context) {
+                final ArrayList<String> rt = new ArrayList<String>();
+                if (!isDowntimeSupported(context)) {
+                    rt.add(KEY_DOWNTIME);
+                    rt.add(KEY_DAYS);
+                    rt.add(KEY_START_TIME);
+                    rt.add(KEY_END_TIME);
+                    rt.add(KEY_DOWNTIME_MODE);
+                }
+                return rt;
             }
         };
 
