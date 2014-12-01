@@ -555,6 +555,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For musikk og medier"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Husk innstillinger"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fi Assistant"</string>
+    <string name="connected_via_wfa" msgid="3805736726317410714">"Koblet til via en Wi-Fi-assistent"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Cast skjermen"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktiver trådløs skjermdeling"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Finner ingen enheter i nærheten."</string>
@@ -584,8 +585,7 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Innstillinger for Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Sett opp og styr trådløse aksesspunkt"</string>
-    <!-- no translation found for wifi_setup_wizard_title (7873622558088429710) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Velg Wi-Fi-nettverk"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Velg Wi-Fi-nettverk"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Slår på Wi-Fi …"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Slår av Wi-Fi …"</string>
@@ -600,7 +600,7 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Skanning er alltid tilgjengelig"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Alltid tillat skanning"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Tillat at Googles posisjonstjeneste og andre apper skanner etter nettverk, selv når Wi-Fi er slått av"</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Bruk til å åpne Wi‑Fi automatisk"</string>
+    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Bruk åpen Wi‑Fi automatisk"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Tillat at en Wi‑Fi-assistent automatisk kobler til nettverk som ser ut til å være av høy kvalitet"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Velg assistent"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installer sertifikater"</string>
@@ -696,12 +696,9 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"ADVARSEL: Hvis du hopper over Wi-Fi, bruker nettbrettet ditt bare mobildata for automatiske nedlastinger og oppdateringer. For å unngå mulige datakostnader bør du koble til Wi-Fi."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"ADVARSEL: Hvis du hopper over Wi-Fi, bruker enheten din bare mobildata for automatiske nedlastinger og oppdateringer. For å unngå mulige datakostnader bør du koble til Wi-Fi."</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"ADVARSEL: Hvis du hopper over Wi-Fi, bruker telefonen din bare mobildata for automatiske nedlastinger og oppdateringer. For å unngå mulige datakostnader bør du koble til Wi-Fi."</string>
-    <!-- no translation found for wifi_and_mobile_skipped_message (5872240361944591105) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1013689568018268332) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (5245835374169369770) -->
-    <skip />
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5872240361944591105">"Hvis du hopper over Wi-Fi:\n\nNettbrettet får ikke Internett-tilkobling.\n\nDu får ikke programvareoppdateringer før du er tilkoblet Internett.\n\nDu kan ikke aktivere funksjonene for enhetsbeskyttelse nå."</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1013689568018268332">"Hvis du hopper over Wi-Fi:\n\nEnheten får ingen Internett-tilkobling.\n\nDu får ikke programvareoppdateringer før du er koblet til Internett.\n\nDu kan ikke aktivere funksjonene for enhetsbeskyttelse nå."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="5245835374169369770">"Hvis du hopper over Wi-Fi:\n\nTelefonen får ikke Internett-tilkobling.\n\nDu får ikke programvareoppdateringer før du er koblet til Internett.\n\nDu kan ikke aktivere funksjonene for enhetsbeskyttelse nå."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Nettbrettet kunne ikke koble til Wi-Fi-nettverket."</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Enheten kunne ikke koble til dette Wi-Fi-nettverket."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Telefonen kunne ikke koble til Wi-Fi-nettverket."</string>
@@ -878,7 +875,7 @@
     <string name="fcc_equipment_id" msgid="149114368246356737">"Utstyrs-ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Basisbåndversjon"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kjerneversjon"</string>
-    <string name="build_number" msgid="3075795840572241758">"Byggnummer"</string>
+    <string name="build_number" msgid="3075795840572241758">"Delversjonsnummer"</string>
     <string name="selinux_status" msgid="6212165375172061672">"SELinux-status"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Ikke tilgjengelig"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
@@ -1087,12 +1084,9 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Sett inn SIM-kortet og start enheten på nytt"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Koble deg til Internett"</string>
     <string name="location_title" msgid="1029961368397484576">"Min posisjon"</string>
-    <!-- no translation found for managed_profile_location_category (6992546457880004735) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_title (6712332547063039683) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_lockdown (3851708343340350369) -->
-    <skip />
+    <string name="managed_profile_location_category" msgid="6992546457880004735">"Jobbprofil"</string>
+    <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Sted for arbeidsprofil"</string>
+    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"Deaktivert av bedriften."</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Modus"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Stor nøyaktighet"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Batterisparing"</string>
@@ -1200,7 +1194,7 @@
     <string name="screen_compatibility_label" msgid="663250687205465394">"Skjermkompatibilitet"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Rettigheter"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Hurtiglager"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Fjern hurtiglager"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Tøm bufferen"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Hurtiglager"</string>
     <string name="controls_label" msgid="7611113077086853799">"Kontroller"</string>
     <string name="force_stop" msgid="7435006169872876756">"Tving avslutning"</string>
@@ -1852,10 +1846,8 @@
     <string name="include_app_data_title" msgid="2829970132260278394">"Inkluder appdata"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Auto-gjenoppretting"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Gjenopprett sikkerhetskopierte innstillinger og data når apper installeres"</string>
-    <!-- no translation found for backup_inactive_title (5355557151569037197) -->
-    <skip />
-    <!-- no translation found for backup_inactive_summary (7630412094703573180) -->
-    <skip />
+    <string name="backup_inactive_title" msgid="5355557151569037197">"Sikkerhetskopieringstjenesten er inaktiv."</string>
+    <string name="backup_inactive_summary" msgid="7630412094703573180">"Dette er angitt i retningslinjene for enheten."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Passord for sikkerhetskopiering på datamaskin"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Fullstendig sikkerhetskopiering på datamaskin beskyttes ikke for øyeblikket."</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Trykk for å endre eller fjerne passordet for fullstendige sikkerhetskopier på datamaskinen"</string>
@@ -2319,8 +2311,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM-kort <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"Tomt SIM-kort"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Navn på SIM-kort"</string>
-    <!-- no translation found for sim_name_hint (7038643345238968930) -->
-    <skip />
+    <string name="sim_name_hint" msgid="7038643345238968930">"Skriv inn SIM-navn"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM-kortspor %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operatør"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Nummer"</string>
@@ -2473,9 +2464,9 @@
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"Kvelder på ukedager"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Starttidspunkt"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Sluttidspunkt"</string>
-    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> dagen etter"</string>
+    <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> neste dag"</string>
     <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> eller en alarm før"</string>
-    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> dagen etter eller en alarm før"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> neste dag eller en alarm før"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Appvarsler"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Varselinnstillinger"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send tilbakemelding om enheten"</string>

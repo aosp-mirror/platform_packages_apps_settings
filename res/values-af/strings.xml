@@ -555,6 +555,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Vir musiek en media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Onthou instellings"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi-assistent"</string>
+    <string name="connected_via_wfa" msgid="3805736726317410714">"Gekoppel via Wi-Fi-assistent"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Uitsaaiskerm"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktiveer draadlose skermdeling"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Geen nabygeleë toestelle is gekry nie."</string>
@@ -584,8 +585,7 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Wi-Fi-instellings"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Stel en beheer draadlose toegangspunte"</string>
-    <!-- no translation found for wifi_setup_wizard_title (7873622558088429710) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Kies Wi-Fi-netwerk"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Kies Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"Skakel tans Wi-Fi aan…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Skakel tans Wi-Fi af…"</string>
@@ -696,12 +696,9 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"WAARSKUWING: As jy Wi-Fi oorslaan, sal jou tablet net sellulêre data vir aanvanklike aflaaie en opdaterings gebruik. Koppel aan Wi-Fi om moontlike dataheffings te vermy."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"WAARSKUWING: As jy Wi-Fi oorslaan, sal jou toestel net sellulêre data vir aanvanklike aflaaie en opdaterings gebruik. Koppel aan Wi-Fi om moontlike dataheffings te vermy."</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"WAARSKUWING: As jy Wi-Fi oorslaan, sal jou foon net sellulêre data vir aanvanklike aflaaie en opdaterings gebruik. Koppel aan Wi-Fi om moontlike dataheffings te vermy."</string>
-    <!-- no translation found for wifi_and_mobile_skipped_message (5872240361944591105) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1013689568018268332) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (5245835374169369770) -->
-    <skip />
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5872240361944591105">"As jy Wi‑Fi oorslaan:\n\nJou tablet sal nie \'n internetverbinding hê nie.\n\nJy sal nie sagtewareopdaterings kry voordat jy aan die internet koppel nie.\n\nJy kan nie op die oomblik kenmerke vir toestelbeskerming aktiveer nie."</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1013689568018268332">"As jy Wi‑Fi oorslaan:\n\nJou toestel sal nie \'n internetverbinding hê nie.\n\nJy sal nie sagtewareopdaterings kry voordat jy aan die internet koppel nie.\n\nJy kan nie op die oomblik kenmerke vir toestelbeskerming aktiveer nie."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="5245835374169369770">"As jy Wi‑Fi oorslaan:\n\nJou foon sal nie \'n internetverbinding hê nie.\n\nJy sal nie sagtewareopdaterings kry voordat jy aan die internet koppel nie.\n\nJy kan nie op die oomblik kenmerke vir toestelbeskerming aktiveer nie."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"Die tablet kon nie aan hierdie Wi-Fi-netwerk koppel nie."</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"Die toestel kon nie aan hierdie Wi-Fi-netwerk koppel nie."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"Die foon kon nie aan hierdie Wi-Fi-netwerk koppel nie."</string>
@@ -1087,12 +1084,9 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Steek asseblief SIM-kaart in en herbegin"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Koppel asseblief aan die internet"</string>
     <string name="location_title" msgid="1029961368397484576">"My ligging"</string>
-    <!-- no translation found for managed_profile_location_category (6992546457880004735) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_title (6712332547063039683) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_lockdown (3851708343340350369) -->
-    <skip />
+    <string name="managed_profile_location_category" msgid="6992546457880004735">"Werkprofiel"</string>
+    <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Ligging vir werkprofiel"</string>
+    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"Deur jou maatskappy afgeskakel"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Modus"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Hoë akkuraatheid"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Batterybesparend"</string>
@@ -1852,10 +1846,8 @@
     <string name="include_app_data_title" msgid="2829970132260278394">"Sluit programdata in"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Outomatiese teruglaai"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Wanneer \'n program weer geïnstalleer word, herstel gerugsteunde instellings en data"</string>
-    <!-- no translation found for backup_inactive_title (5355557151569037197) -->
-    <skip />
-    <!-- no translation found for backup_inactive_summary (7630412094703573180) -->
-    <skip />
+    <string name="backup_inactive_title" msgid="5355557151569037197">"Rugsteundiens in onaktief."</string>
+    <string name="backup_inactive_summary" msgid="7630412094703573180">"Dit word deur jou toestelbeleid gestel."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Werkskerm-rugsteunwagwoord"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Volle rekenaarrugsteune word nie tans beskerm nie"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Raak om die wagwoord vir volledige rekenaarrugsteune te verander of te verwyder"</string>
@@ -2319,8 +2311,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"SIM leeg"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM-naam"</string>
-    <!-- no translation found for sim_name_hint (7038643345238968930) -->
-    <skip />
+    <string name="sim_name_hint" msgid="7038643345238968930">"Voer SIM-naam in"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM-gleuf %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Diensverskaffer"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Nommer"</string>
@@ -2474,8 +2465,8 @@
     <string name="zen_mode_start_time" msgid="8102602297273744441">"Begintyd"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"Eindigtyd"</string>
     <string name="zen_mode_end_time_priority_next_day_summary_format" msgid="2910982148167785730">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> volgende dag"</string>
-    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> of enige wekker daarvoor"</string>
-    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> volgende dag of enige wekker daarvoor"</string>
+    <string name="zen_mode_end_time_none_same_day_summary_format" msgid="2002665300812473888">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> of enige wekker voor dit"</string>
+    <string name="zen_mode_end_time_none_next_day_summary_format" msgid="732719357166551378">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> volgende dag of enige wekker voor dit"</string>
     <string name="notification_settings_apps_title" msgid="1125354590652967250">"Programkennisgewings"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Kennisgewingsinstellings"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Stuur terugvoer oor hierdie toestel"</string>
