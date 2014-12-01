@@ -555,6 +555,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per a música i contingut multimèdia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recorda la configuració"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Assistent de Wi‑Fi"</string>
+    <string name="connected_via_wfa" msgid="3805736726317410714">"Connectat mitjançant l\'assistent de Wi‑Fi"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Emet pantalla"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Activa pantalla sense fil"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No s\'ha trobat cap dispositiu a prop."</string>
@@ -584,8 +585,7 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"Configuració de Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configura i gestiona els punts d\'accés sense fil"</string>
-    <!-- no translation found for wifi_setup_wizard_title (7873622558088429710) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"Selecciona una xarxa Wi‑Fi"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"Selecciona una xarxa Wi-Fi"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"S\'està activant la Wi-Fi..."</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"S\'està desactivant la Wi-Fi..."</string>
@@ -600,8 +600,8 @@
     <string name="wifi_scan_always_available" msgid="3470564139944368030">"Cerca xarxes sempre"</string>
     <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Permet sempre la cerca"</string>
     <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Permet que el servei d\'ubicacions de Google i altres aplicacions cerquin xarxes, fins i tot si la Wi-Fi està desactivada."</string>
-    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Utilitza automàticament Wi-Fi obertes"</string>
-    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Permet que un assistent de Wi-Fi es connecti automàticament a les xarxes obertes de qualitat alta"</string>
+    <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Utilitza automàticament xarxes Wi-Fi obertes"</string>
+    <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Permet que un assistent de Wi-Fi es connecti automàticament a les xarxes obertes considerades de bona qualitat"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Tria de l\'assistent"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instal·la els certificats"</string>
     <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Per millorar la precisió de la ubicació i per a altres finalitats, Google i altres aplicacions poden cercar xarxes properes tot i que la Wi-Fi estigui desactivada. Si no vols que això passi, accedeix a Avançat &gt; Cerca xarxes sempre."</string>
@@ -698,12 +698,9 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"ADVERTIMENT: si omets la connexió Wi‑Fi, la tauleta utilitzarà només les dades mòbils per dur a terme les baixades inicials i les actualitzacions. Per evitar els possibles càrrecs per dades, connecta\'t a la xarxa Wi‑Fi."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"ADVERTIMENT: si omets la connexió Wi‑Fi, el dispositiu utilitzarà només les dades mòbils per dur a terme les baixades inicials i les actualitzacions. Per evitar els possibles càrrecs per dades, connecta\'t a la xarxa Wi‑Fi."</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"ADVERTIMENT: si omets la connexió Wi‑Fi, el telèfon utilitzarà només les dades mòbils per dur a terme les baixades inicials i les actualitzacions. Per evitar els possibles càrrecs per dades, connecta\'t a la xarxa Wi‑Fi."</string>
-    <!-- no translation found for wifi_and_mobile_skipped_message (5872240361944591105) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1013689568018268332) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (5245835374169369770) -->
-    <skip />
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5872240361944591105">"Si omets la Wi‑Fi, passarà el següent:\n\nLa tauleta no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nEn aquest moment no pots activar les funcions de protecció del dispositiu."</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1013689568018268332">"Si omets la Wi‑Fi, passarà el següent:\n\nEl dispositiu no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nEn aquest moment no pots activar les funcions de protecció del dispositiu."</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="5245835374169369770">"Si omets la Wi‑Fi, passarà el següent:\n\nEl telèfon no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nEn aquest moment no pots activar les funcions de protecció del dispositiu."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"La tauleta no ha pogut connectar amb aquesta xarxa Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"El dispositiu no s\'ha pogut connectar a la xarxa Wi‑Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"El telèfon no ha pogut connectar amb aquesta xarxa Wi-Fi."</string>
@@ -1089,12 +1086,9 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Insereix la targeta SIM i reinicia"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Connecta a Internet"</string>
     <string name="location_title" msgid="1029961368397484576">"La meva ubicació"</string>
-    <!-- no translation found for managed_profile_location_category (6992546457880004735) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_title (6712332547063039683) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_lockdown (3851708343340350369) -->
-    <skip />
+    <string name="managed_profile_location_category" msgid="6992546457880004735">"Perfil professional"</string>
+    <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Ubicació perfil professional"</string>
+    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"Desactivada per l\'empresa"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"Mode"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"Alta precisió"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"Estalvi de bateria"</string>
@@ -1443,11 +1437,11 @@
     <string name="bt_hci_snoop_log" msgid="3340699311158865670">"Activa el registre de cerca HCI de Bluetooth"</string>
     <string name="bt_hci_snoop_log_summary" msgid="730247028210113851">"Captura tots els paquets HCI de Bluetooth en un fitxer"</string>
     <string name="oem_unlock_enable" msgid="6040763321967327691">"Desbloqueig d\'OEM"</string>
-    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Permet el desbloqueig del carregador d\'inici."</string>
+    <string name="oem_unlock_enable_summary" msgid="4720281828891618376">"Permet el desbloqueig del carregador d\'arrencada."</string>
     <string name="oem_unlock_enable_pin_prompt" msgid="2398518281753145705">"Introdueix el PIN."</string>
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Per activar el desbloqueig OEM, introdueix el PIN del dispositiu."</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Vols permetre el desbloqueig d\'OEM?"</string>
-    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ADVERTIMENT: les característiques de protecció del dispositiu no funcionaran mentre aquesta opció de configuració estigui activada."</string>
+    <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ADVERTIMENT: les característiques de protecció del dispositiu no funcionaran mentre aquesta opció estigui activada."</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificació de pantalla sense fil"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Activa el registre detallat de la Wi‑Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Traspàs agressiu de Wi-Fi a dades mòbils"</string>
@@ -1856,10 +1850,8 @@
     <string name="include_app_data_title" msgid="2829970132260278394">"Inclou dades de l\'aplicació"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restauració automàtica"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Quan tornis a instal·lar una aplicació, restaura la configuració i les dades incloses a la còpia de seguretat"</string>
-    <!-- no translation found for backup_inactive_title (5355557151569037197) -->
-    <skip />
-    <!-- no translation found for backup_inactive_summary (7630412094703573180) -->
-    <skip />
+    <string name="backup_inactive_title" msgid="5355557151569037197">"El servei de còpia de seguretat està inactiu."</string>
+    <string name="backup_inactive_summary" msgid="7630412094703573180">"Es defineix a la política del dispositiu."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Contrasenya per a còpies d\'ordinador"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Les còpies de seguretat d\'ordinador completes no estan protegides"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Toca per canviar o eliminar la contrasenya per a còpies de seguretat d\'ordinador completes"</string>
@@ -2323,8 +2315,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"Targeta SIM buida"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"Nom de la targeta SIM"</string>
-    <!-- no translation found for sim_name_hint (7038643345238968930) -->
-    <skip />
+    <string name="sim_name_hint" msgid="7038643345238968930">"Introdueix el nom de la SIM"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"Ranura per a la targeta SIM %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"Operador de telefonia mòbil"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"Número"</string>

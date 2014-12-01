@@ -383,9 +383,9 @@
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"选择屏幕锁定方式"</string>
     <string name="backup_lock_settings_picker_title" msgid="8530380598637963916">"选择备份锁"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定方式"</string>
-    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改锁定屏幕"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="5045866882028324941">"更改屏幕锁定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"更改或关闭图案、PIN码或密码保护"</string>
-    <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"选择锁定屏幕的方法"</string>
+    <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"选择屏幕锁定方式"</string>
     <string name="unlock_backup_info_summary" msgid="108524727803788172">"当人脸解锁识别不出您时，您希望如何解锁？"</string>
     <string name="unlock_set_unlock_off_title" msgid="7117155352183088342">"无"</string>
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
@@ -555,6 +555,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用于音乐和媒体"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"WLAN助手"</string>
+    <string name="connected_via_wfa" msgid="3805736726317410714">"已通过 WLAN 助手连接"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"投射屏幕"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"开启无线显示"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"未在附近找到设备。"</string>
@@ -584,8 +585,7 @@
     <string name="wifi_settings_category" msgid="8719175790520448014">"WLAN设置"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"WLAN"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"设置和管理无线接入点"</string>
-    <!-- no translation found for wifi_setup_wizard_title (7873622558088429710) -->
-    <skip />
+    <string name="wifi_setup_wizard_title" msgid="7873622558088429710">"选择 WLAN 网络"</string>
     <string name="wifi_select_network" msgid="4210954938345463209">"选择WLAN网络"</string>
     <string name="wifi_starting" msgid="6732377932749942954">"正在打开WLAN…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"正在关闭WLAN…"</string>
@@ -698,12 +698,9 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"警告：如果您跳过WLAN网络设置，您的平板电脑将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"警告：如果您跳过WLAN网络设置，您的设备将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"警告：如果您跳过WLAN网络设置，您的手机将只能通过移动数据网络进行初始下载和更新。为了避免产生数据流量费，请连接到WLAN网络。"</string>
-    <!-- no translation found for wifi_and_mobile_skipped_message (5872240361944591105) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (1013689568018268332) -->
-    <skip />
-    <!-- no translation found for wifi_and_mobile_skipped_message (5245835374169369770) -->
-    <skip />
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5872240361944591105">"如果您跳过 WLAN 网络设置：\n\n您的平板电脑将不会连接到互联网。\n\n您必须先连接到互联网，才能获取软件更新。\n\n您目前将无法启用设备保护功能。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1013689568018268332">"如果您跳过 WLAN 网络设置：\n\n您的设备将不会连接到互联网。\n\n您必须先连接到互联网，才能获取软件更新。\n\n您目前将无法启用设备保护功能。"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="5245835374169369770">"如果您跳过 WLAN 网络设置：\n\n您的手机将不会连接到互联网。\n\n您必须先连接到互联网，才能获取软件更新。\n\n您目前将无法启用设备保护功能。"</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"平板电脑无法连接到此WLAN网络。"</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"设备无法连接到此WLAN网络。"</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"手机无法连接到此WLAN网络。"</string>
@@ -1089,12 +1086,9 @@
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"请插入SIM卡，然后重新启动"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"请连接到互联网"</string>
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
-    <!-- no translation found for managed_profile_location_category (6992546457880004735) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_title (6712332547063039683) -->
-    <skip />
-    <!-- no translation found for managed_profile_location_switch_lockdown (3851708343340350369) -->
-    <skip />
+    <string name="managed_profile_location_category" msgid="6992546457880004735">"工作资料"</string>
+    <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"工作资料存储位置"</string>
+    <string name="managed_profile_location_switch_lockdown" msgid="3851708343340350369">"您的公司已将其关闭"</string>
     <string name="location_mode_title" msgid="3982009713118421689">"模式"</string>
     <string name="location_mode_high_accuracy_title" msgid="8241802585110932849">"准确度高"</string>
     <string name="location_mode_battery_saving_title" msgid="711273645208158637">"耗电量低"</string>
@@ -1856,10 +1850,8 @@
     <string name="include_app_data_title" msgid="2829970132260278394">"包括应用数据"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"自动还原"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"重新安装某个应用后，系统会还原已经备份的设置和数据"</string>
-    <!-- no translation found for backup_inactive_title (5355557151569037197) -->
-    <skip />
-    <!-- no translation found for backup_inactive_summary (7630412094703573180) -->
-    <skip />
+    <string name="backup_inactive_title" msgid="5355557151569037197">"备份服务未启用。"</string>
+    <string name="backup_inactive_summary" msgid="7630412094703573180">"这是由您的设备规范所设定的。"</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"桌面备份密码"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"桌面完整备份当前未设置密码保护"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"触摸可更改或删除用于桌面完整备份的密码"</string>
@@ -2323,8 +2315,7 @@
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM卡<xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"未插入SIM卡"</string>
     <string name="sim_editor_name" msgid="1722945976676142029">"SIM卡名称"</string>
-    <!-- no translation found for sim_name_hint (7038643345238968930) -->
-    <skip />
+    <string name="sim_name_hint" msgid="7038643345238968930">"输入 SIM 卡名称"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM 卡插槽 %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"运营商"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"号码"</string>
