@@ -239,7 +239,7 @@ public class WifiSetupActivity extends WifiPickerActivity
             return new AlertDialog.Builder(getActivity())
                     .setMessage(messageRes)
                     .setCancelable(false)
-                    .setNegativeButton(R.string.wifi_skip_anyway,
+                    .setPositiveButton(R.string.wifi_skip_anyway,
                             new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
@@ -247,7 +247,7 @@ public class WifiSetupActivity extends WifiPickerActivity
                             activity.finishOrNext(RESULT_SKIP);
                         }
                     })
-                    .setPositiveButton(R.string.wifi_dont_skip,
+                    .setNegativeButton(R.string.wifi_dont_skip,
                             new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
