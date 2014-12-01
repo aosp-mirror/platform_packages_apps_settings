@@ -82,6 +82,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private final H mHandler = new H();
     private final SettingsObserver mSettingsObserver = new SettingsObserver();
     private final Receiver mReceiver = new Receiver();
+    private final ArrayList<VolumeSeekBarPreference> mVolumePrefs = new ArrayList<>();
 
     private Context mContext;
     private PackageManager mPM;
@@ -148,6 +149,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         mSettingsObserver.register(true);
         mReceiver.register(true);
         updateEffectsSuppressor();
+        for (VolumeSeekBarPreference volumePref : mVolumePrefs) {
+            volumePref.onActivityResume();
+        }
     }
 
     @Override
@@ -159,11 +163,11 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     }
 
     // === Volumes ===
-
     private VolumeSeekBarPreference initVolumePreference(String key, int stream) {
         final VolumeSeekBarPreference volumePref = (VolumeSeekBarPreference) findPreference(key);
         volumePref.setCallback(mVolumeCallback);
         volumePref.setStream(stream);
+        mVolumePrefs.add(volumePref);
         return volumePref;
     }
 
