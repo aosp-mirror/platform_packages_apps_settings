@@ -189,13 +189,13 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (Process.myUserHandle().isOwner() && LockPatternUtils.isDeviceEncryptionEnabled()) {
                 mEncryptionRequestQuality = quality;
                 mEncryptionRequestDisabled = disabled;
+                final Context context = getActivity();
                 // If accessibility is enabled and the user hasn't seen this dialog before, set the
                 // default state to agree with that which is compatible with accessibility
                 // (password not required).
-                final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
+                final boolean accEn = AccessibilityManager.getInstance(context).isEnabled();
                 final boolean required = mLockPatternUtils.isCredentialRequiredToDecrypt(!accEn);
-                Intent intent = EncryptionInterstitial.createStartIntent(
-                        getActivity(), quality, required);
+                Intent intent = getEncryptionInterstitialIntent(context, quality, required);
                 startActivityForResult(intent, ENABLE_ENCRYPTION_REQUEST);
             } else {
                 mRequirePassword = false; // device encryption not enabled or not device owner.
@@ -412,6 +412,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                 final boolean requirePassword, final boolean confirmCredentials) {
             return ChooseLockPattern.createIntent(context, isFallback, requirePassword,
                     confirmCredentials);
+        }
+
+        protected Intent getEncryptionInterstitialIntent(Context context, int quality,
+                boolean required) {
+            return EncryptionInterstitial.createStartIntent(context, quality, required);
         }
 
         /**
