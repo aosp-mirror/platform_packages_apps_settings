@@ -103,4 +103,10 @@ public class SetupWizardUtils {
     public static void setHeaderText(Activity activity, CharSequence text) {
         getHeader(activity).setText(text);
     }
+
+    public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
+        toIntent.putExtra(EXTRA_THEME, fromIntent.getStringExtra(EXTRA_THEME));
+        toIntent.putExtra(EXTRA_USE_IMMERSIVE_MODE,
+                fromIntent.getBooleanExtra(EXTRA_USE_IMMERSIVE_MODE, false));
+    }
 }
