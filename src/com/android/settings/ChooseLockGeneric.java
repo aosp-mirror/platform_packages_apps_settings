@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
-import android.app.ActivityManagerNative;
 import android.app.Fragment;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
@@ -27,8 +26,6 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.Process;
-import android.os.RemoteException;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -404,6 +401,19 @@ public class ChooseLockGeneric extends SettingsActivity {
             return intent;
         }
 
+        protected Intent getLockPasswordIntent(Context context, int quality,
+                final boolean isFallback, int minLength, final int maxLength,
+                boolean requirePasswordToDecrypt, boolean confirmCredentials) {
+            return ChooseLockPassword.createIntent(context, quality, isFallback, minLength,
+                    maxLength, requirePasswordToDecrypt, confirmCredentials);
+        }
+
+        protected Intent getLockPatternIntent(Context context, final boolean isFallback,
+                final boolean requirePassword, final boolean confirmCredentials) {
+            return ChooseLockPattern.createIntent(context, isFallback, requirePassword,
+                    confirmCredentials);
+        }
+
         /**
          * Invokes an activity to change the user's pattern, password or PIN based on given quality
          * and minimum quality specified by DevicePolicyManager. If quality is
@@ -424,14 +434,15 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             quality = upgradeQuality(quality, null);
 
+            final Context context = getActivity();
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null);
                 if (minLength < MIN_PASSWORD_LENGTH) {
                     minLength = MIN_PASSWORD_LENGTH;
                 }
                 final int maxLength = mDPM.getPasswordMaximumLength(quality);
-                Intent intent = ChooseLockPassword.createIntent(getActivity(), quality, isFallback,
-                        minLength, maxLength, mRequirePassword, false /* confirm credentials */);
+                Intent intent = getLockPasswordIntent(context, quality, isFallback, minLength,
+                        maxLength, mRequirePassword,  /* confirm credentials */false);
                 if (isFallback) {
                     startActivityForResult(intent, FALLBACK_REQUEST);
                     return;
@@ -441,8 +452,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     startActivity(intent);
                 }
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-                Intent intent = ChooseLockPattern.createIntent(getActivity(),
-                        isFallback, mRequirePassword, false /* confirm credentials */);
+                Intent intent = getLockPatternIntent(context, isFallback, mRequirePassword,
+                        /* confirm credentials */false);
                 if (isFallback) {
                     startActivityForResult(intent, FALLBACK_REQUEST);
                     return;
