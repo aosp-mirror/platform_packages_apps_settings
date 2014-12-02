@@ -727,10 +727,12 @@ public class InstalledAppDetails extends Fragment
         if (localLOGV)
             Log.i(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
         boolean hasUsbDefaults = false;
-        try {
-            hasUsbDefaults = mUsbManager.hasDefaults(packageName, UserHandle.myUserId());
-        } catch (RemoteException e) {
-            Log.e(TAG, "mUsbManager.hasDefaults", e);
+        if (mUsbManager != null) { // may be null because USB service is optional
+            try {
+                hasUsbDefaults = mUsbManager.hasDefaults(packageName, UserHandle.myUserId());
+            } catch (RemoteException e) {
+                Log.e(TAG, "mUsbManager.hasDefaults", e);
+            }
         }
         boolean hasBindAppWidgetPermission =
                 mAppWidgetManager.hasBindAppWidgetPermission(mAppEntry.info.packageName);
@@ -1378,10 +1380,12 @@ public class InstalledAppDetails extends Fragment
             showDialogInner(DLG_SPECIAL_DISABLE, 0);
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
-            try {
-                mUsbManager.clearDefaults(packageName, UserHandle.myUserId());
-            } catch (RemoteException e) {
-                Log.e(TAG, "mUsbManager.clearDefaults", e);
+            if (mUsbManager != null) { // may be null because USB service is optional
+                try {
+                    mUsbManager.clearDefaults(packageName, UserHandle.myUserId());
+                } catch (RemoteException e) {
+                    Log.e(TAG, "mUsbManager.clearDefaults", e);
+                }
             }
             mAppWidgetManager.setBindAppWidgetPermission(packageName, false);
             TextView autoLaunchTitleView =
