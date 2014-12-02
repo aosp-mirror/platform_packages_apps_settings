@@ -61,7 +61,7 @@ public class ChooseLockPassword extends SettingsActivity {
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPasswordFragment.class.getName());
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         return modIntent;
     }
 
@@ -82,6 +82,10 @@ public class ChooseLockPassword extends SettingsActivity {
     protected boolean isValidFragment(String fragmentName) {
         if (ChooseLockPasswordFragment.class.getName().equals(fragmentName)) return true;
         return false;
+    }
+
+    /* package */ Class<? extends Fragment> getFragmentClass() {
+        return ChooseLockPasswordFragment.class;
     }
 
     @Override
@@ -200,8 +204,12 @@ public class ChooseLockPassword extends SettingsActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.choose_lock_password, container, false);
+        }
 
-            View view = inflater.inflate(R.layout.choose_lock_password, null);
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
 
             mCancelButton = (Button) view.findViewById(R.id.cancel_button);
             mCancelButton.setOnClickListener(this);
@@ -254,8 +262,6 @@ public class ChooseLockPassword extends SettingsActivity {
                 CharSequence title = getText(id);
                 sa.setTitle(title);
             }
-
-            return view;
         }
 
         @Override
