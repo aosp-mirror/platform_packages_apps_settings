@@ -140,6 +140,7 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
+import com.android.settings.widget.ChartNetworkSeriesView;
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
@@ -209,6 +210,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private ViewGroup mTabsContainer;
     private TabWidget mTabWidget;
     private ListView mListView;
+    private ChartNetworkSeriesView mSeries;
+    private ChartNetworkSeriesView mDetailedSeries;
     private DataUsageAdapter mAdapter;
 
     /** Distance to inset content from sides, when needed. */
@@ -400,6 +403,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mCycleSpinner.setOnItemSelectedListener(mCycleListener);
             mCycleSummary = (TextView) mCycleView.findViewById(R.id.cycle_summary);
             mNetworkSwitches.addView(mCycleView);
+            mSeries = (ChartNetworkSeriesView)view.findViewById(R.id.series);
+            mDetailedSeries = (ChartNetworkSeriesView)view.findViewById(R.id.detail_series);
         }
 
         mChart = (ChartDataUsageView) mHeader.findViewById(R.id.chart);
@@ -658,16 +663,17 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final Context context = getActivity();
         mTabHost.clearAllTabs();
 
-        final boolean mobileSplit = isMobilePolicySplit();
-        if (mobileSplit && hasReadyMobile4gRadio(context)) {
-            mTabHost.addTab(buildTabSpec(TAB_3G, R.string.data_usage_tab_3g));
-            mTabHost.addTab(buildTabSpec(TAB_4G, R.string.data_usage_tab_4g));
-        } else if (hasReadyMobileRadio(context)) {
-            addMobileTab(context, mSubInfoList);
+        for (int i = 0; i < mTelephonyManager.getSimCount(); i++) {
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(context, i);
+            if (sir != null) {
+                addMobileTab(context, sir);
+            }
         }
+
         if (mShowWifi && hasWifiRadio(context)) {
             mTabHost.addTab(buildTabSpec(TAB_WIFI, R.string.data_usage_tab_wifi));
         }
+
         if (mShowEthernet && hasEthernet(context)) {
             mTabHost.addTab(buildTabSpec(TAB_ETHERNET, R.string.data_usage_tab_ethernet));
         }
@@ -736,6 +742,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         if (!isAdded()) return;
 
         final Context context = getActivity();
+        final Resources resources = context.getResources();
         final String currentTab = mTabHost.getCurrentTabTag();
         final boolean isOwner = ActivityManager.getCurrentUser() == UserHandle.USER_OWNER;
 
@@ -799,6 +806,21 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         getActivity().invalidateOptionsMenu();
 
         mBinding = false;
+
+        int seriesColor = resources.getColor(R.color.sim_noitification);
+        if (mCurrentTab != null && mCurrentTab.length() > TAB_MOBILE.length() ){
+            final int slotId = Integer.parseInt(mCurrentTab.substring(TAB_MOBILE.length(),
+                    mCurrentTab.length()));
+            final SubscriptionInfo sir = com.android.settings.Utils.findRecordBySlotId(context,
+                    slotId);
+
+            if (sir != null) {
+                seriesColor = sir.getIconTint();
+            }
+        }
+
+        mSeries.setChartColor(Color.BLACK, seriesColor, seriesColor);
+        mDetailedSeries.setChartColor(Color.BLACK, seriesColor, seriesColor);
     }
 
     private boolean isAppDetailMode() {
@@ -2588,13 +2610,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             }
         };
 
-        private void addMobileTab(Context context, List<SubscriptionInfo> subInfoList) {
-            if (subInfoList != null && mMobileTagMap != null) {
-                for (SubscriptionInfo subInfo : mSubInfoList) {
-                    if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
-                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
-                                subInfo.getDisplayName()));
-                    }
+        private void addMobileTab(Context context, SubscriptionInfo subInfo) {
+            if (subInfo != null && mMobileTagMap != null) {
+                if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
+                    mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
+                            subInfo.getDisplayName()));
                 }
             }
         }
@@ -2620,13 +2640,17 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
          * @return The map or null if no activated subscription
          */
         private Map<Integer, String> initMobileTabTag(List<SubscriptionInfo> subInfoList) {
+            final Context context = getActivity();
             Map<Integer, String> map = null;
             if (subInfoList != null) {
                 String mobileTag;
                 map = new HashMap<Integer, String>();
-                for (SubscriptionInfo subInfo : subInfoList) {
-                    mobileTag = TAB_MOBILE + String.valueOf(subInfo.getSubscriptionId());
-                    map.put(subInfo.getSubscriptionId(), mobileTag);
+                for (int i = 0; i < mTelephonyManager.getSimCount(); i++) {
+                    final SubscriptionInfo subInfo = Utils.findRecordBySlotId(context, i);
+                    mobileTag = TAB_MOBILE + i;
+                    if (subInfo != null) {
+                        map.put(subInfo.getSubscriptionId(), mobileTag);
+                    }
                 }
             }
             return map;
