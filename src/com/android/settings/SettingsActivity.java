@@ -184,6 +184,11 @@ public class SettingsActivity extends Activity
      * that fragment.
      */
     public static final String EXTRA_SHOW_FRAGMENT_TITLE = ":settings:show_fragment_title";
+    /**
+     * The package name used to resolve the title resource id.
+     */
+    public static final String EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME =
+            ":settings:show_fragment_title_res_package_name";
     public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID =
             ":settings:show_fragment_title_resid";
     public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT =
@@ -657,7 +662,23 @@ public class SettingsActivity extends Activity
         if (initialTitleResId > 0) {
             mInitialTitle = null;
             mInitialTitleResId = initialTitleResId;
-            setTitle(mInitialTitleResId);
+
+            final String initialTitleResPackageName = intent.getStringExtra(
+                    EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME);
+            if (initialTitleResPackageName != null) {
+                try {
+                    Context authContext = createPackageContextAsUser(initialTitleResPackageName,
+                            0 /* flags */, new UserHandle(UserHandle.myUserId()));
+                    mInitialTitle = authContext.getResources().getText(mInitialTitleResId);
+                    setTitle(mInitialTitle);
+                    mInitialTitleResId = -1;
+                    return;
+                } catch (NameNotFoundException e) {
+                    Log.w(LOG_TAG, "Could not find package" + initialTitleResPackageName);
+                }
+            } else {
+                setTitle(mInitialTitleResId);
+            }
         } else {
             mInitialTitleResId = -1;
             final String initialTitle = intent.getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
