@@ -47,6 +47,9 @@ public class SetupChooseLockPassword extends ChooseLockPassword
         return intent;
     }
 
+    private SetupWizardNavBar mNavigationBar;
+    private SetupChooseLockPasswordFragment mFragment;
+
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return SetupChooseLockPasswordFragment.class.getName().equals(fragmentName);
@@ -65,6 +68,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword
 
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
+        mNavigationBar = bar;
         SetupWizardUtils.setImmersiveMode(this, bar);
     }
 
@@ -75,6 +79,17 @@ public class SetupChooseLockPassword extends ChooseLockPassword
 
     @Override
     public void onNavigateNext() {
+        if (mFragment != null) {
+            mFragment.handleNext();
+        }
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof SetupChooseLockPasswordFragment) {
+            mFragment = (SetupChooseLockPasswordFragment) fragment;
+        }
     }
 
     public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment {
@@ -99,6 +114,18 @@ public class SetupChooseLockPassword extends ChooseLockPassword
             Intent intent = SetupRedactionInterstitial.createStartIntent(context);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
+        }
+
+        @Override
+        protected void setNextEnabled(boolean enabled) {
+            SetupChooseLockPassword activity = (SetupChooseLockPassword) getActivity();
+            activity.mNavigationBar.getNextButton().setEnabled(enabled);
+        }
+
+        @Override
+        protected void setNextText(int text) {
+            SetupChooseLockPassword activity = (SetupChooseLockPassword) getActivity();
+            activity.mNavigationBar.getNextButton().setText(text);
         }
     }
 }
