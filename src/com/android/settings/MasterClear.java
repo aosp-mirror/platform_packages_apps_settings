@@ -232,7 +232,8 @@ public class MasterClear extends Fragment {
                 Drawable icon = null;
                 try {
                     if (desc.iconId != 0) {
-                        Context authContext = context.createPackageContext(desc.packageName, 0);
+                        Context authContext = context.createPackageContextAsUser(desc.packageName,
+                                0, userHandle);
                         icon = context.getPackageManager().getUserBadgedIcon(
                                 authContext.getDrawable(desc.iconId), userHandle);
                     }
