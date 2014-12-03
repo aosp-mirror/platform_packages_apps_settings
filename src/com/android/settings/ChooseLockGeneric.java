@@ -18,10 +18,15 @@ package com.android.settings;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
@@ -31,6 +36,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
 import android.util.EventLog;
+import android.util.Log;
 import android.util.MutableBoolean;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,9 +87,11 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
         private static final String FINISH_PENDING = "finish_pending";
+        private static final String TAG = "ChooseLockGenericFragment";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
         public static final String ENCRYPT_REQUESTED_QUALITY = "encrypt_requested_quality";
         public static final String ENCRYPT_REQUESTED_DISABLED = "encrypt_requested_disabled";
+        public static final String TAG_FRP_WARNING_DIALOG = "frp_warning_dialog";
 
         private static final boolean ALWAY_SHOW_TUTORIAL = true;
 
@@ -150,32 +158,15 @@ public class ChooseLockGeneric extends SettingsActivity {
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
                 Preference preference) {
             final String key = preference.getKey();
-            boolean handled = true;
 
-            EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, key);
-
-            if (KEY_UNLOCK_SET_OFF.equals(key)) {
-                updateUnlockMethodAndFinish(
-                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);
-            } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
-                updateUnlockMethodAndFinish(
-                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false);
-            } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(key)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK, false);
-            }else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
-            } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
-            } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
+            if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure()) {
+                // Show the disabling FRP warning only when the user is switching from a secure
+                // unlock method to an insecure one
+                showFactoryResetProtectionWarningDialog(key);
+                return true;
             } else {
-                handled = false;
+                return setUnlockMethod(key);
             }
-            return handled;
         }
 
         /**
@@ -481,5 +472,113 @@ public class ChooseLockGeneric extends SettingsActivity {
             return R.string.help_url_choose_lockscreen;
         }
 
+        private int getResIdForFactoryResetProtectionWarningTitle() {
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                    return R.string.unlock_disable_lock_pattern_summary;
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                    return R.string.unlock_disable_lock_pin_summary;
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+                    return R.string.unlock_disable_lock_password_summary;
+                default:
+                    return R.string.unlock_disable_lock_unknown_summary;
+            }
+        }
+
+        private boolean isUnlockMethodSecure(String unlockMethod) {
+            return !(KEY_UNLOCK_SET_OFF.equals(unlockMethod) ||
+                    KEY_UNLOCK_SET_NONE.equals(unlockMethod));
+        }
+
+        private boolean setUnlockMethod(String unlockMethod) {
+            EventLog.writeEvent(EventLogTags.LOCK_SCREEN_TYPE, unlockMethod);
+
+            if (KEY_UNLOCK_SET_OFF.equals(unlockMethod)) {
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true /* disabled */ );
+            } else if (KEY_UNLOCK_SET_NONE.equals(unlockMethod)) {
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false /* disabled */ );
+            } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(unlockMethod)) {
+                maybeEnableEncryption(
+                        DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK, false);
+            } else if (KEY_UNLOCK_SET_PATTERN.equals(unlockMethod)) {
+                maybeEnableEncryption(
+                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
+            } else if (KEY_UNLOCK_SET_PIN.equals(unlockMethod)) {
+                maybeEnableEncryption(
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
+            } else if (KEY_UNLOCK_SET_PASSWORD.equals(unlockMethod)) {
+                maybeEnableEncryption(
+                        DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
+            } else {
+                Log.e(TAG, "Encountered unknown unlock method to set: " + unlockMethod);
+                return false;
+            }
+            return true;
+        }
+
+        private void showFactoryResetProtectionWarningDialog(String unlockMethodToSet) {
+            int title = getResIdForFactoryResetProtectionWarningTitle();
+            FactoryResetProtectionWarningDialog dialog =
+                    FactoryResetProtectionWarningDialog.newInstance(title, unlockMethodToSet);
+            dialog.show(getChildFragmentManager(), TAG_FRP_WARNING_DIALOG);
+        }
+
+        public static class FactoryResetProtectionWarningDialog extends DialogFragment {
+
+            private static final String ARG_TITLE_RES = "titleRes";
+            private static final String ARG_UNLOCK_METHOD_TO_SET = "unlockMethodToSet";
+
+            public static FactoryResetProtectionWarningDialog newInstance(int title,
+                    String unlockMethodToSet) {
+                FactoryResetProtectionWarningDialog frag =
+                        new FactoryResetProtectionWarningDialog();
+                Bundle args = new Bundle();
+                args.putInt(ARG_TITLE_RES, title);
+                args.putString(ARG_UNLOCK_METHOD_TO_SET, unlockMethodToSet);
+                frag.setArguments(args);
+                return frag;
+            }
+
+            @Override
+            public void show(FragmentManager manager, String tag) {
+                if (manager.findFragmentByTag(tag) == null) {
+                    // Prevent opening multiple dialogs if tapped on button quickly
+                    super.show(manager, tag);
+                }
+            }
+
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                final Bundle args = getArguments();
+
+                return new AlertDialog.Builder(getActivity())
+                        .setTitle(args.getInt(ARG_TITLE_RES))
+                        .setMessage(R.string.unlock_disable_frp_warning_content)
+                        .setPositiveButton(R.string.okay,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        ((ChooseLockGenericFragment) getParentFragment())
+                                                .setUnlockMethod(
+                                                        args.getString(ARG_UNLOCK_METHOD_TO_SET));
+                                    }
+                                }
+                        )
+                        .setNegativeButton(R.string.cancel,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        dismiss();
+                                    }
+                                }
+                        )
+                        .create();
+            }
+        }
     }
 }
