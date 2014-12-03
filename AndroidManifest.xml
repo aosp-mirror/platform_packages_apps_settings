@@ -1110,6 +1110,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SetupRedactionInterstitial"
+            android:theme="@style/SetupWizardDisableAppStartingTheme"/>
+
         <activity android:name=".notification.RedactionInterstitial"/>
 
         <activity android:name=".notification.RedactionSettingsStandalone"
@@ -1173,6 +1176,9 @@
 
         <activity android:name="ChooseLockPassword" android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
+
+        <activity android:name=".SetupEncryptionInterstitial"
+            android:theme="@style/SetupWizardDisableAppStartingTheme"/>
 
         <activity android:name=".EncryptionInterstitial"/>
 
