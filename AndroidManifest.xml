@@ -352,6 +352,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".EnableWifiTether"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:excludeFromRecents="true" />
+
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
                 android:taskAffinity="">
