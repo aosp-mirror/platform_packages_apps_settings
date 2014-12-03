@@ -769,8 +769,15 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             if (LOGD) Log.d(TAG, "updateBody() mobile tab");
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_mobile_limit);
-            mTemplate = buildTemplateMobileAll(getActiveSubscriberId(context,getSubId(currentTab)));
             mDataEnabledSupported = isMobileDataAvailable(getSubId(currentTab));
+
+            // Match mobile traffic for this subscriber, but normalize it to
+            // catch any other merged subscribers.
+            mTemplate = buildTemplateMobileAll(
+                    getActiveSubscriberId(context, getSubId(currentTab)));
+            mTemplate = NetworkTemplate.normalize(mTemplate,
+                    mTelephonyManager.getMergedSubscriberIds());
+
         } else if (TAB_3G.equals(currentTab)) {
             if (LOGD) Log.d(TAG, "updateBody() 3g tab");
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_3g);
@@ -1393,30 +1400,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mStupidPadding.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         }
     };
-
-    @Deprecated
-    private boolean isMobilePolicySplit() {
-        final Context context = getActivity();
-        boolean retVal;
-        if (hasReadyMobileRadio(context)) {
-            final TelephonyManager tele = TelephonyManager.from(context);
-            retVal = mPolicyEditor.isMobilePolicySplit(getActiveSubscriberId(context));
-        } else {
-            retVal = false;
-        }
-        if (LOGD) Log.d(TAG, "isMobilePolicySplit: retVal=" + retVal);
-        return retVal;
-    }
-
-    @Deprecated
-    private void setMobilePolicySplit(boolean split) {
-        final Context context = getActivity();
-        if (hasReadyMobileRadio(context)) {
-            final TelephonyManager tele = TelephonyManager.from(context);
-            if (LOGD) Log.d(TAG, "setMobilePolicySplit: split=" + split);
-            mPolicyEditor.setMobilePolicySplit(getActiveSubscriberId(context), split);
-        }
-    }
 
     private static String getActiveSubscriberId(Context context) {
         final TelephonyManager tele = TelephonyManager.from(context);
