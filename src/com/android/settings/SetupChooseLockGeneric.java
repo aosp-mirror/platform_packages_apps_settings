@@ -28,6 +28,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+/**
+ * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
+ * from ChooseLockGeneric class, and should remain similar to that behaviorally. This class should
+ * only overload base methods for minor theme and behavior differences specific to Setup Wizard.
+ * Other changes should be done to ChooseLockGeneric class instead and let this class inherit
+ * those changes.
+ */
 public class SetupChooseLockGeneric extends ChooseLockGeneric
         implements SetupWizardNavBar.NavigationBarListener {
 
@@ -98,6 +105,15 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
                 boolean requirePassword, boolean confirmCredentials) {
             final Intent intent = SetupChooseLockPattern.createIntent(context, isFallback,
                     requirePassword, confirmCredentials);
+            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
+            return intent;
+        }
+
+        @Override
+        protected Intent getEncryptionInterstitialIntent(Context context, int quality,
+                boolean required) {
+            Intent intent = SetupEncryptionInterstitial.createStartIntent(context, quality,
+                    required);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

@@ -299,6 +299,10 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
+        protected Intent getRedactionInterstitialIntent(Context context) {
+            return RedactionInterstitial.createStartIntent(context);
+        }
+
         protected void updateStage(Stage stage) {
             final Stage previousStage = mUiStage;
             mUiStage = stage;
@@ -441,7 +445,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     getActivity().finish();
                     mDone = true;
                     if (!wasSecureBefore) {
-                        startActivity(RedactionInterstitial.createStartIntent(getActivity()));
+                        startActivity(getRedactionInterstitialIntent(getActivity()));
                     }
                 } else {
                     CharSequence tmp = mPasswordEntry.getText();

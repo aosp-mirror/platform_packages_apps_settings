@@ -386,6 +386,10 @@ public class ChooseLockPattern extends SettingsActivity {
             mDone = false;
         }
 
+        protected Intent getRedactionInterstitialIntent(Context context) {
+            return RedactionInterstitial.createStartIntent(context);
+        }
+
         public void onClick(View v) {
             if (v == mFooterLeftButton) {
                 if (mUiStage.leftMode == LeftButtonMode.Retry) {
@@ -562,7 +566,7 @@ public class ChooseLockPattern extends SettingsActivity {
             getActivity().finish();
             mDone = true;
             if (!wasSecureBefore) {
-                startActivity(RedactionInterstitial.createStartIntent(getActivity()));
+                startActivity(getRedactionInterstitialIntent(getActivity()));
             }
         }
     }
