@@ -20,12 +20,7 @@ import static android.net.NetworkPolicy.CYCLE_NONE;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicy.SNOOZE_NEVER;
 import static android.net.NetworkPolicy.WARNING_DISABLED;
-import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
-import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
 import static android.net.NetworkTemplate.MATCH_WIFI;
-import static android.net.NetworkTemplate.buildTemplateMobile3gLower;
-import static android.net.NetworkTemplate.buildTemplateMobile4g;
-import static android.net.NetworkTemplate.buildTemplateMobileAll;
 import static com.android.internal.util.Preconditions.checkNotNull;
 
 import android.net.NetworkPolicy;
@@ -37,11 +32,8 @@ import android.text.TextUtils;
 import android.text.format.Time;
 
 import com.google.android.collect.Lists;
-import com.google.android.collect.Sets;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
 
 /**
  * Utility class to modify list of {@link NetworkPolicy}. Specifically knows
@@ -77,11 +69,6 @@ public class NetworkPolicyEditor {
             }
 
             mPolicies.add(policy);
-        }
-
-        // force combine any split policies when disabled
-        if (!ENABLE_SPLIT_POLICIES) {
-            modified |= forceMobilePolicyCombined();
         }
 
         // when we cleaned policies above, write back changes
@@ -244,108 +231,6 @@ public class NetworkPolicyEditor {
         }
 
         if (modified) writeAsync();
-    }
-
-    /**
-     * Remove any split {@link NetworkPolicy}.
-     */
-    private boolean forceMobilePolicyCombined() {
-        final HashSet<String> subscriberIds = Sets.newHashSet();
-        for (NetworkPolicy policy : mPolicies) {
-            subscriberIds.add(policy.template.getSubscriberId());
-        }
-
-        boolean modified = false;
-        for (String subscriberId : subscriberIds) {
-            modified |= setMobilePolicySplitInternal(subscriberId, false);
-        }
-        return modified;
-    }
-
-    @Deprecated
-    public boolean isMobilePolicySplit(String subscriberId) {
-        boolean has3g = false;
-        boolean has4g = false;
-        for (NetworkPolicy policy : mPolicies) {
-            final NetworkTemplate template = policy.template;
-            if (Objects.equals(subscriberId, template.getSubscriberId())) {
-                switch (template.getMatchRule()) {
-                    case MATCH_MOBILE_3G_LOWER:
-                        has3g = true;
-                        break;
-                    case MATCH_MOBILE_4G:
-                        has4g = true;
-                        break;
-                }
-            }
-        }
-        return has3g && has4g;
-    }
-
-    @Deprecated
-    public void setMobilePolicySplit(String subscriberId, boolean split) {
-        if (setMobilePolicySplitInternal(subscriberId, split)) {
-            writeAsync();
-        }
-    }
-
-    /**
-     * Mutate {@link NetworkPolicy} for given subscriber, combining or splitting
-     * the policy as requested.
-     *
-     * @return {@code true} when any {@link NetworkPolicy} was mutated.
-     */
-    @Deprecated
-    private boolean setMobilePolicySplitInternal(String subscriberId, boolean split) {
-        final boolean beforeSplit = isMobilePolicySplit(subscriberId);
-
-        final NetworkTemplate template3g = buildTemplateMobile3gLower(subscriberId);
-        final NetworkTemplate template4g = buildTemplateMobile4g(subscriberId);
-        final NetworkTemplate templateAll = buildTemplateMobileAll(subscriberId);
-
-        if (split == beforeSplit) {
-            // already in requested state; skip
-            return false;
-
-        } else if (beforeSplit && !split) {
-            // combine, picking most restrictive policy
-            final NetworkPolicy policy3g = getPolicy(template3g);
-            final NetworkPolicy policy4g = getPolicy(template4g);
-
-            NetworkPolicy restrictive = null;
-            if ((policy3g == null) && (policy4g == null)) {
-                return false;
-            } else if (policy3g == null) {
-                restrictive = policy4g;
-            } else if (policy4g == null) {
-                restrictive = policy3g;
-            } else {
-                restrictive = policy3g.compareTo(policy4g) < 0 ? policy3g : policy4g;
-            }
-            mPolicies.remove(policy3g);
-            mPolicies.remove(policy4g);
-            mPolicies.add(new NetworkPolicy(templateAll, restrictive.cycleDay,
-                    restrictive.cycleTimezone, restrictive.warningBytes, restrictive.limitBytes,
-                    SNOOZE_NEVER, SNOOZE_NEVER, restrictive.metered, restrictive.inferred));
-            return true;
-
-        } else if (!beforeSplit && split) {
-            // duplicate existing policy into two rules
-            final NetworkPolicy policyAll = getPolicy(templateAll);
-            if (policyAll == null) {
-                return false;
-            }
-            mPolicies.remove(policyAll);
-            mPolicies.add(new NetworkPolicy(template3g, policyAll.cycleDay, policyAll.cycleTimezone,
-                    policyAll.warningBytes, policyAll.limitBytes, SNOOZE_NEVER, SNOOZE_NEVER,
-                    policyAll.metered, policyAll.inferred));
-            mPolicies.add(new NetworkPolicy(template4g, policyAll.cycleDay, policyAll.cycleTimezone,
-                    policyAll.warningBytes, policyAll.limitBytes, SNOOZE_NEVER, SNOOZE_NEVER,
-                    policyAll.metered, policyAll.inferred));
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
