@@ -148,6 +148,33 @@ final public class AuthenticatorHelper extends BroadcastReceiver {
     }
 
     /**
+     * Gets the package associated with a particular account type. If none found, return null.
+     * @param accountType the type of account
+     * @return the package name or null if one cannot be found.
+     */
+    public String getPackageForType(final String accountType) {
+        if (mTypeToAuthDescription.containsKey(accountType)) {
+            AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
+            return desc.packageName;
+        }
+        return null;
+    }
+
+    /**
+     * Gets the resource id of the label associated with a particular account type. If none found,
+     * return -1.
+     * @param accountType the type of account
+     * @return a resource id for the label or -1 if none found;
+     */
+    public int getLabelIdForType(final String accountType) {
+        if (mTypeToAuthDescription.containsKey(accountType)) {
+            AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
+            return desc.labelId;
+        }
+        return -1;
+    }
+
+    /**
      * Updates provider icons. Subclasses should call this in onCreate()
      * and update any UI that depends on AuthenticatorDescriptions in onAuthDescriptionsUpdated().
      */
