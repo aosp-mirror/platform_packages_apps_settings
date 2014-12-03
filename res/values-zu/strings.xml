@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Ungaxhumeki kwi-inthanethi?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Lokhu kuzophelisa uxhumano nge:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Awunayo imvume yokushintsha izilungiselelo ze-Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"I-<xliff:g id="DEVICE_NAME">%1$s</xliff:g> iyabonakala kumadivayisi aseduzane ngenkathi izilungiselelo ze-Bluetooth zivulekile."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"I-<xliff:g id="DEVICE_NAME">%1$s</xliff:g> iyabonakala kumadivayisi aseduzane ngenkathi izilungiselelo ze-Bluetooth zivulekile."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Nqamula i-<xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Ukusakaza"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vimbela iphrofayli?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Phatha i-Wi‑Fi, Bluetooth, imodi yendiza, amanethiwekhi weselula, nama-VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Idatha yeselula"</string>
     <string name="calls_title" msgid="3544471959217176768">"Amakholi"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"Imilayezo ye-SMS"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"Imilayezo ye-SMS"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Vumela ukusetshenziswa kwedatha ngenethiwekhi yeselula"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Vumela ukusetshenziswa kwedatha uma izula"</string>
     <string name="roaming" msgid="3596055926335478572">"Ukuzulazula kwedatha"</string>
@@ -399,6 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Ukuphepha okuphakathi nendawo kuya kokuphezulu"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Iphasiwedi"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Ukuphepha okuphezulu"</string>
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Izici zokuvikela idivayisi ngeke zisasebenza."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Khubaza umqondisi, ukubethela inqubomgomo, noma isitoreji sobuqinisekisa"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Lutho"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Swayipha"</string>
@@ -410,6 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Khipha iphathini yokuvula"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Khipha ukuvala i-PIN"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Khipha iphasiwedi yokuvula"</string>
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Susa isikrini sokukhiya"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Shintsha iphathini yokuvula"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Shintsha i-PIN yokuvula"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Shintsha iphasiwedi yokuvula"</string>
@@ -2328,7 +2330,6 @@
     <string name="color_purple" msgid="3888532466427762504">"Phephuli"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"Awekho amakhadi we-SIM afakiwe"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"Isimo se-SIM"</string>
-    <string name="sim_status_summary" msgid="4934558018015161369">"Ulwazi oluhlobene ne-SIM"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Shayela emuva kusuka ku-SIM yokuzenzakalelayo"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"I-SIM yamakholi aphumayo"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Ezinye izilungiselelo zekholi"</string>
@@ -2494,7 +2495,6 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Hlala ekubukweni kokwakheka kwezwe"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Hlala kumumo wamanje"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Ulwazi le-IMEI"</string>
-    <string name="imei_information_summary" msgid="2074095606556565233">"Ulwazi oluhlobene lwe-IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Ukubethelwa"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Qhubeka"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Ungavikela ngokuthuthukile le divayisi ngokudinga iphasiwedi yakho ngaphambi kokuthi iqale. Ize iqale idivayisi, ayikwazi ukuthola amakholi, imilayezo, noma izaziso kufaka phakathi ama-alamu. \n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma atshontshiwe."</string>

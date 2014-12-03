@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Desconectar?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Isto finalizará a túa conexión con:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Non tes permiso para cambiar a configuración de Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> visible para disp próximos con axus BT abertos."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será visible para dispositivos próximos coa configuración de Bluetooth activada."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Queres desconectar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Difusión"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Desactivar o perfil?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Xestiona a wifi, o Bluetooth, o modo avión, redes de telefonía móbil e VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Datos móbiles"</string>
     <string name="calls_title" msgid="3544471959217176768">"Chamadas"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"Mensaxes SMS"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"Mensaxes SMS"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Permitir o uso de datos na rede móbil"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Permitir datos en itinerancia"</string>
     <string name="roaming" msgid="3596055926335478572">"Itinerancia de datos"</string>
@@ -399,6 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Seguridade de media a alta"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contrasinal"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Alta seguridade"</string>
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"As funcións de protección do dispositivo deixarán de funcionar."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desactivado por admin, política encriptación ou almacenamento credenciais"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ningunha"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Pasar o dedo"</string>
@@ -410,6 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Elimina o padrón de desbloqueo"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Elimina o PIN de desbloqueo"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Elimina o contrasinal de desbloqueo"</string>
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Eliminar bloqueo da pantalla"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Mudar padrón desbloq."</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Cambiar PIN desbloq."</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Mudar contrasinal desbloq."</string>
@@ -604,8 +606,8 @@
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Permitir ao asistente wifi conectarse automaticamente a redes abertas de alta calidade"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Seleccionar asistente"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para mellorar a precisión da localización e para outros fins, é posible que Google e outras aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, vai a Avanzado &gt; Exploración sempre dispoñible."</string>
-    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"É posible que as aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, vai a Avanzado &gt; Exploración sempre dispoñible."</string>
+    <string name="wifi_scan_notify_text_location_on" msgid="8135076005488914200">"Para mellorar a precisión da localización e para outros fins, é posible que Google e outras aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, accede a Avanzado &gt; Buscar redes sempre."</string>
+    <string name="wifi_scan_notify_text_location_off" msgid="6323983741393280935">"É posible que as aplicacións busquen redes próximas, aínda que a wifi estea desactivada. Se non queres que isto pase, accede a Avanzado &gt; Buscar redes sempre."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="5340097010842405981">"Non mostrar outra vez"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Manter a wifi activada durante o modo de suspensión"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wifi activada na suspensión"</string>
@@ -1239,7 +1241,7 @@
     <string name="disabled" msgid="9206776641295849915">"Desactivada"</string>
     <string name="not_installed" msgid="2797554494953450291">"Sen instalar para este usuario"</string>
     <string name="no_applications" msgid="7336588977497084921">"Ningunha aplicación."</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Almac. interno"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Almacenamento interno"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Almac. USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Tarxeta SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Recalculando o tamaño…"</string>
@@ -2046,7 +2048,7 @@
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"Sincronización automática de datos"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"Tarxetas SIM"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"Redes móbiles"</string>
-    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronización de datos auto."</string>
+    <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"Sincronización automática"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"Sincr. auto. de datos persoais"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="329565580969147026">"Sincr. auto. datos do traballo"</string>
     <string name="data_usage_change_cycle" msgid="7776556448920114866">"Cambiar ciclo…"</string>
@@ -2201,7 +2203,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="1133251987818014757">"Só o propietario do teléfono pode xestionar usuarios."</string>
     <string name="user_cannot_add_accounts_message" msgid="5116692653439737050">"Os perfís restrinxidos non poden engadir contas"</string>
     <string name="user_remove_user_menu" msgid="6897150520686691355">"Eliminar <xliff:g id="USER_NAME">%1$s</xliff:g> do dispositivo"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Engadir us. co disp. bloqueado"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="3025132738715222247">"Engade usuarios co disp. bloq."</string>
     <string name="user_new_user_name" msgid="369856859816028856">"Novo usuario"</string>
     <string name="user_new_profile_name" msgid="2632088404952119900">"Novo perfil"</string>
     <string name="user_confirm_remove_self_title" msgid="8432050170899479556">"Queres eliminarte a ti mesmo?"</string>
@@ -2321,7 +2323,6 @@
     <string name="color_purple" msgid="3888532466427762504">"Violeta"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"Non hai ningunha tarxeta SIM inserida"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"Estado da SIM"</string>
-    <string name="sim_status_summary" msgid="4934558018015161369">"Información relacionada coa SIM"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Devolver chamada da SIM predeterminada"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"Tarxeta SIM para chamadas saíntes"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Outras configuracións de chamada"</string>
@@ -2474,7 +2475,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activado"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivado"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixar pantalla"</string>
-    <string name="screen_pinning_description" msgid="1137904524037468263">"Se activas esta configuración, podes fixar a pantalla para manter visible a pantalla actual ata que non anules a fixación.\n\nFai o seguinte:\n\n1. Asegúrate de que a fixación de pantalla está activada.\n\n2. Abre a pantalla que queres fixar.\n\n3. Toca Visión xeral.\n\n4. Pasa o dedo cara arriba e toca a icona de fixación."</string>
+    <string name="screen_pinning_description" msgid="1137904524037468263">"Se esta opción está activada, podes fixar a pantalla para manter visible a pantalla actual ata que non anules a fixación.\n\nFai o seguinte:\n\n1. Asegúrate de que a fixación de pantalla está activada.\n\n2. Abre a pantalla que queres fixar.\n\n3. Toca Visión xeral.\n\n4. Pasa o dedo cara arriba e toca a icona de fixación."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Solicitar un padrón de desbloqueo antes de soltar a pantalla"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Solicitar un PIN antes de soltar a pantalla"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Solicitar un contrasinal antes de soltar a pantalla"</string>
@@ -2487,7 +2488,6 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Permanecer na vista horizontal"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Permanecer na orientación actual"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Información de IMEI"</string>
-    <string name="imei_information_summary" msgid="2074095606556565233">"Información relativa de IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Cifrado"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continuar"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Podes protexer aínda máis este dispositivo requirindo o teu PIN antes de inicialo. Ata que o dispositivo se inicie, non poderá recibir chamadas, mensaxes nin notificacións, incluídas as alarmas. \n\nEsta acción axudará a protexer os datos en dispositivos perdidos ou roubados."</string>
