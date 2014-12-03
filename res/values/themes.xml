@@ -19,6 +19,7 @@
     <attr name="ic_menu_moreoverflow" format="reference" />
     <attr name="ic_wps" format="reference" />
     <attr name="setup_divider_color" format="reference" />
+    <attr name="side_margin" format="reference|dimension" />
     <attr name="wifi_signal_color" format="reference" />
     <attr name="wifi_signal" format="reference" />
 
@@ -40,6 +41,7 @@
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="setup_divider_color">@color/setup_divider_color_dark</item>
+        <item name="side_margin">0dip</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
@@ -57,6 +59,7 @@
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
         <item name="ic_wps">@drawable/ic_wps_light</item>
         <item name="setup_divider_color">@color/setup_divider_color_light</item>
+        <item name="side_margin">0dip</item>
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
@@ -98,6 +101,7 @@
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
         <item name="ic_wps">@drawable/ic_wps_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
+        <item name="side_margin">@dimen/settings_side_margin</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
