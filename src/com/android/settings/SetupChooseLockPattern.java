@@ -27,6 +27,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
+ * from ChooseLockPattern class, and should remain similar to that behaviorally. This class should
+ * only overload base methods for minor theme and behavior differences specific to Setup Wizard.
+ * Other changes should be done to ChooseLockPattern class instead and let this class inherit
+ * those changes.
+ */
 public class SetupChooseLockPattern extends ChooseLockPattern
         implements SetupWizardNavBar.NavigationBarListener {
 
@@ -83,6 +90,13 @@ public class SetupChooseLockPattern extends ChooseLockPattern
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
+        }
+
+        @Override
+        protected Intent getRedactionInterstitialIntent(Context context) {
+            Intent intent = SetupRedactionInterstitial.createStartIntent(context);
+            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
+            return intent;
         }
     }
 }
