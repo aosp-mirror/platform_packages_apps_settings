@@ -210,9 +210,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                 mSubscriptionManager.getDefaultSmsSubId());
         simPref.setTitle(R.string.sms_messages_title);
         if (DBG) log("[updateSmsValues] mSubInfoList=" + mSubInfoList);
-        if (mSubInfoList != null && mSubInfoList.size() == 1) {
-            simPref.setSummary(mSubInfoList.get(0).getDisplayName());
-        } else if (sir != null) {
+
+        if (sir != null) {
             simPref.setSummary(sir.getDisplayName());
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
@@ -227,9 +226,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         simPref.setTitle(R.string.cellular_data_title);
         if (DBG) log("[updateCellularDataValues] mSubInfoList=" + mSubInfoList);
 
-        if (mSubInfoList != null && mSubInfoList.size() == 1) {
-            simPref.setSummary(mSubInfoList.get(0).getDisplayName());
-        } else if (sir != null) {
+        if (sir != null) {
             simPref.setSummary(sir.getDisplayName());
         } else if (sir == null) {
             simPref.setSummary(R.string.sim_selection_required_pref);
