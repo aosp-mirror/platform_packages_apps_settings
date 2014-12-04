@@ -399,6 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Միջինից մինչև բարձր անվտանգություն"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Գաղտնաբառ"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Բարձր անվտանգություն"</string>
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Սարքի պաշտպանության գործառույթներն այլևս չեն գործելու:"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Կասեցված է ադմինիստրատորի, կոդավորման ծրագրի կամ վկայագրերի պահոցի կողմից"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ոչ մեկը"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Սահահարվածել"</string>
@@ -410,6 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Հեռացնել ապակողպման կաղապարը"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Հեռացնել PIN-ի ապակողպումը"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Հեռացնել գաղտնաբառի ապակողպումը"</string>
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Հեռացնել էկրանի փականը"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Փոխել ապակողպման կաղապարը"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Փոխել ապակողպման PIN-ը"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Փոխել ապակողպման գաղտնաբառը"</string>
@@ -555,7 +557,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Երաժշտության և մեդիայի համար"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Հիշել կարգավորումները"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi-Fi Օգնական"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"Կապակցված է Wi‑Fi օգնականի միջոցով"</string>
+    <string name="connected_via_wfa" msgid="3805736726317410714">"Կապակցված է Wi‑Fi Օգնականի միջոցով"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Հեռակա էկրան"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Միացնել անլար էկրանը"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Մոտակայքում սարքեր չեն գտնվել:"</string>
@@ -1148,11 +1150,11 @@
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-ը սահմանված է"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Նախշը կարգավորված է"</string>
     <string name="lock_settings_title" msgid="335025124489630932">"Էկրանի անվտանգություն"</string>
-    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Փոխել ապակողպման կաղապարը"</string>
+    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Փոխել ապակողպող նախշը"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Փոխել ապակողպման PIN-ը"</string>
-    <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Հաստատել պահված նախշը"</string>
+    <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Հաստատեք պահված նախշը"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="4694973540770105678">"Կրկին փորձեք`"</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Պատկերեք ապակողպման կաղապարը"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Գծեք ապակողպող նախշը"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Սեղմեք Ցանկ` օգնության համար:"</string>
     <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Հեռացրեք մատը ավարտելուց հետո"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Միացրեք առնվազն <xliff:g id="NUMBER">%d</xliff:g> կետ: Փորձեք կրկին:"</string>
@@ -1164,15 +1166,15 @@
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Կրկին փորձել"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Շարունակել"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Ապակողպող նախշը"</string>
-    <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Պահանջել կաղապար"</string>
-    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Պետք է պատկերել կաղապարը` էկրանը ապակողպելու համար"</string>
+    <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Պահանջել նախշ"</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Օգտագործել նախշ՝ հեռախոսը պաշտպանելու համար"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="2615606088906120711">"Կաղապարը տեսանելի դարձնել"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="8898518337442601027">"Թրթրռալ հպումից"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Հոսանքի կոճակը անկնթարթորեն կողպվում է"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Բացառությամբ, երբ ապակողպված է պահվում <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ի կողմից"</string>
-    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Սահմանել ապակողպման կաղապարը"</string>
-    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Փոխել ապակողպման կաղապարը"</string>
-    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Ինչպես պատկերել ապակողպման նախշը"</string>
+    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Ստեղծել նախշ"</string>
+    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Փոխել ապակողպող նախշը"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Ինչպես ապակողպող նախշ գծել"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Չափից շատ սխալ փորձեր"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Կրկին փորձեք <xliff:g id="NUMBER">%d</xliff:g> վայրկյանից:"</string>
     <string name="activity_not_found" msgid="5551664692991605325">"Հավելվածը տեղադրված չէ ձեր հեռախոսում:"</string>
@@ -2325,7 +2327,6 @@
     <string name="color_purple" msgid="3888532466427762504">"Մանուշակագույն"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"SIM քարտը տեղադրված չէ"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"SIM-ի կարգավիճակը"</string>
-    <string name="sim_status_summary" msgid="4934558018015161369">"SIM-ին վերաբերող տվյալներ"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Հետ զանգել կանխադրված SIM-ով"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"SIM՝ ելքային զանգերի համար"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Այլ զանգերի կարգավորումներ"</string>
@@ -2491,7 +2492,6 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Մնալ լանդշաֆտային դիրքով"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Մնալ ընթացիկ դիրքով"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-ի վերաբերյալ տվյալներ"</string>
-    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-ին վերաբերող տվյալներ"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Գաղտնագրում"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Շարունակել"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Դուք կարող եք նաև պաշտպանել այս սարքը՝ այն մեկնարկելուց առաջ պահանջելով մուտքագրել PIN-ը: Մինչև մեկնարկը սարքը չի կարող ստանալ զանգեր, հաղորդագրություններ կամ տեղեկացումներ, այդ թվում՝ զարթուցիչներ: \n\n Այս գործառույթն օգնում է պաշտպանել տվյալները՝ կորած կամ գողացված սարքերում:"</string>

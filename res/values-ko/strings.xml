@@ -399,6 +399,8 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"중상급 보안"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"비밀번호"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"상급 보안"</string>
+    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"관리자, 암호화 정책 또는 자격증명 저장소로 인해 사용 중지됨"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"없음"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"스와이프"</string>
@@ -410,6 +412,8 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"잠금해제 패턴 삭제"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"잠금해제 PIN 삭제"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"잠금해제 비밀번호 삭제"</string>
+    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
+    <skip />
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"잠금해제 패턴 변경"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"잠금해제 PIN 변경"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"잠금해제 비밀번호 변경"</string>
@@ -2325,7 +2329,6 @@
     <string name="color_purple" msgid="3888532466427762504">"보라색"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"SIM 카드가 장착되지 않음"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"SIM 상태"</string>
-    <string name="sim_status_summary" msgid="4934558018015161369">"SIM 관련 정보"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"기본 SIM에서 다시 전화하기"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"발신 전화용 SIM"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"기타 통화 설정"</string>
@@ -2385,11 +2388,11 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"알람 볼륨"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"벨소리 볼륨"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"알림 볼륨"</string>
-    <string name="zen_mode_settings_title" msgid="7014915558669122902">"알림"</string>
+    <string name="zen_mode_settings_title" msgid="7014915558669122902">"소리/진동 알림"</string>
     <string name="zen_mode_option_title" msgid="5061978632306007914">"전화 및 알림 수신 시"</string>
-    <string name="zen_mode_option_off" msgid="3167702608910820883">"항상 알림"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"최우선 알림만 허용"</string>
-    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"알림 차단"</string>
+    <string name="zen_mode_option_off" msgid="3167702608910820883">"항상 소리/진동 알림"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"중요 소리/진동 알림만 허용"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"소리/진동 알림 차단"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"전화 벨소리"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"기본 알림 벨소리"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"전화 올 때 벨소리와 함께 진동"</string>
@@ -2443,7 +2446,7 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"중요"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"완료"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"이 기능을 사용 중지할 때까지"</string>
-    <string name="zen_mode_important_category" msgid="8123274463331022993">"최우선 알림"</string>
+    <string name="zen_mode_important_category" msgid="8123274463331022993">"중요 소리/진동 알림"</string>
     <string name="zen_mode_downtime_category" msgid="2654477732333340290">"다운타임"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"일"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"없음"</string>
@@ -2461,7 +2464,7 @@
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"주소록에 있는 사용자만"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"별표 표시한 주소록에 있는 사용자만"</string>
     <string name="zen_mode_events" msgid="2456995649835437565">"일정 및 알림"</string>
-    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"알람은 항상 최우선 알림입니다."</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"알람은 항상 중요 소리/진동 알림입니다."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"자동 사용 설정"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"사용 안함"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"매일 밤"</string>
@@ -2491,7 +2494,6 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"가로 보기 유지"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"현재 방향 유지"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 정보"</string>
-    <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 상대 정보"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"암호화"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"계속"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"기기를 시작할 때 PIN을 입력하도록 설정하면 기기를 보호할 수 있습니다. 기기가 시작되기 전까지 전화, 메시지 및 알람을 포함한 알림을 받을 수 없게 됩니다. \n\n이를 통해 분실 또는 도난된 기기에서 데이터를 보호할 수 있습니다."</string>
