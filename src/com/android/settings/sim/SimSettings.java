@@ -247,7 +247,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         simPref.setTitle(R.string.calls_title);
         simPref.setSummary(phoneAccount == null
-                ? getResources().getString(R.string.sim_selection_required_pref)
+                ? getResources().getString(R.string.sim_calls_ask_first_prefs_title)
                 : (String)telecomManager.getPhoneAccount(phoneAccount).getLabel());
     }
 
