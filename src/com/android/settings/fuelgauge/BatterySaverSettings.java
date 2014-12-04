@@ -63,7 +63,10 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mCreated) return;
+        if (mCreated) {
+            mSwitchBar.show();
+            return;
+        }
         mCreated = true;
         addPreferencesFromResource(R.xml.battery_saver_settings);
 
