@@ -22,10 +22,11 @@
     android:orientation="vertical">
 
     <com.android.settings.widget.SetupWizardIllustration
+        android:id="@+id/setup_illustration"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:foreground="@drawable/setup_illustration_wifi_wide"
+        android:foreground="@drawable/setup_illustration"
         android:background="@drawable/setup_illustration_bg">
 
         <LinearLayout

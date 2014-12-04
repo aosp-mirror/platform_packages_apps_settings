@@ -35,12 +35,12 @@
             android:clipChildren="false">
 
             <com.android.settings.widget.SetupWizardIllustration
-                android:id="@+id/illustration_phone"
+                android:id="@+id/setup_illustration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/setup_wizard_title_area_elevation"
                 android:background="@drawable/setup_illustration_bg"
-                android:foreground="@drawable/setup_illustration_wifi"
+                android:foreground="@drawable/setup_illustration"
                 android:tag="stickyContainer"
                 settings:aspectRatio="2.22">
 
@@ -58,7 +58,7 @@
                 android:id="@+id/setup_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/illustration_phone"
+                android:layout_below="@id/setup_illustration"
                 android:clipChildren="false"/>
 
         </RelativeLayout>
