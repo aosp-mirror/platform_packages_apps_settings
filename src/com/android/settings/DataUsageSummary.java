@@ -761,20 +761,25 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mDataEnabledSupported = isOwner;
         mDisableAtLimitSupported = true;
 
-        // TODO: remove mobile tabs when SIM isn't ready
+        // TODO: remove mobile tabs when SIM isn't ready probably by
+        // TODO: using SubscriptionManager.getActiveSubscriptionInfoList.
+        if (LOGD) Log.d(TAG, "updateBody() isMobileTab=" + isMobileTab(currentTab));
 
         if (isMobileTab(currentTab)) {
+            if (LOGD) Log.d(TAG, "updateBody() mobile tab");
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_mobile_limit);
             mTemplate = buildTemplateMobileAll(getActiveSubscriberId(context,getSubId(currentTab)));
             mDataEnabledSupported = isMobileDataAvailable(getSubId(currentTab));
         } else if (TAB_3G.equals(currentTab)) {
+            if (LOGD) Log.d(TAG, "updateBody() 3g tab");
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_3g);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_3g_limit);
             // TODO: bind mDataEnabled to 3G radio state
             mTemplate = buildTemplateMobile3gLower(getActiveSubscriberId(context));
 
         } else if (TAB_4G.equals(currentTab)) {
+            if (LOGD) Log.d(TAG, "updateBody() 4g tab");
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_4g);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_4g_limit);
             // TODO: bind mDataEnabled to 4G radio state
@@ -782,17 +787,20 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         } else if (TAB_WIFI.equals(currentTab)) {
             // wifi doesn't have any controls
+            if (LOGD) Log.d(TAG, "updateBody() wifi tab");
             mDataEnabledSupported = false;
             mDisableAtLimitSupported = false;
             mTemplate = buildTemplateWifiWildcard();
 
         } else if (TAB_ETHERNET.equals(currentTab)) {
             // ethernet doesn't have any controls
+            if (LOGD) Log.d(TAG, "updateBody() ethernet tab");
             mDataEnabledSupported = false;
             mDisableAtLimitSupported = false;
             mTemplate = buildTemplateEthernet();
 
         } else {
+            if (LOGD) Log.d(TAG, "updateBody() unknown tab");
             throw new IllegalStateException("unknown tab: " + currentTab);
         }
 
@@ -1389,12 +1397,15 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     @Deprecated
     private boolean isMobilePolicySplit() {
         final Context context = getActivity();
+        boolean retVal;
         if (hasReadyMobileRadio(context)) {
             final TelephonyManager tele = TelephonyManager.from(context);
-            return mPolicyEditor.isMobilePolicySplit(getActiveSubscriberId(context));
+            retVal = mPolicyEditor.isMobilePolicySplit(getActiveSubscriberId(context));
         } else {
-            return false;
+            retVal = false;
         }
+        if (LOGD) Log.d(TAG, "isMobilePolicySplit: retVal=" + retVal);
+        return retVal;
     }
 
     @Deprecated
@@ -1402,6 +1413,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final Context context = getActivity();
         if (hasReadyMobileRadio(context)) {
             final TelephonyManager tele = TelephonyManager.from(context);
+            if (LOGD) Log.d(TAG, "setMobilePolicySplit: split=" + split);
             mPolicyEditor.setMobilePolicySplit(getActiveSubscriberId(context), split);
         }
     }
@@ -1409,12 +1421,16 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static String getActiveSubscriberId(Context context) {
         final TelephonyManager tele = TelephonyManager.from(context);
         final String actualSubscriberId = tele.getSubscriberId();
-        return SystemProperties.get(TEST_SUBSCRIBER_PROP, actualSubscriberId);
+        String retVal = SystemProperties.get(TEST_SUBSCRIBER_PROP, actualSubscriberId);
+        if (LOGD) Log.d(TAG, "getActiveSubscriberId=" + retVal + " actualSubscriberId=" + actualSubscriberId);
+        return retVal;
     }
 
     private static String getActiveSubscriberId(Context context, int subId) {
         final TelephonyManager tele = TelephonyManager.from(context);
-        return tele.getSubscriberId(subId);
+        String retVal = tele.getSubscriberId(subId);
+        if (LOGD) Log.d(TAG, "getActiveSubscriberId=" + retVal + " subId=" + subId);
+        return retVal;
     }
 
     private DataUsageChartListener mChartListener = new DataUsageChartListener() {
@@ -2367,14 +2383,23 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 SubscriptionManager.from(context).getActiveSubscriptionInfoList();
         // No activated Subscriptions
         if (subInfoList == null) {
+            if (LOGD) Log.d(TAG, "hasReadyMobileRadio: subInfoList=null");
             return false;
         }
         // require both supported network and ready SIM
         boolean isReady = true;
         for (SubscriptionInfo subInfo : subInfoList) {
             isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
+            if (LOGD) Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
         }
-        return conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        if (LOGD) {
+            Log.d(TAG, "hasReadyMobileRadio:"
+                    + " conn.isNetworkSupported(TYPE_MOBILE)="
+                                            + conn.isNetworkSupported(TYPE_MOBILE)
+                    + " isReady=" + isReady);
+        }
+        return retVal;
     }
 
     /*
@@ -2390,7 +2415,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final int slotId = SubscriptionManager.getSlotId(subId);
         final boolean isReady = tele.getSimState(slotId) == SIM_STATE_READY;
 
-        return conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        boolean retVal =  conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        if (LOGD) Log.d(TAG, "hasReadyMobileRadio: subId=" + subId
+                + " conn.isNetworkSupported(TYPE_MOBILE)=" + conn.isNetworkSupported(TYPE_MOBILE)
+                + " isReady=" + isReady);
+        return retVal;
     }
 
     /**
@@ -2616,6 +2645,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                     mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
                             subInfo.getDisplayName()));
                 }
+            } else {
+                if (LOGD) Log.d(TAG, "addMobileTab: subInfoList is null");
             }
         }
 
@@ -2640,17 +2671,13 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
          * @return The map or null if no activated subscription
          */
         private Map<Integer, String> initMobileTabTag(List<SubscriptionInfo> subInfoList) {
-            final Context context = getActivity();
             Map<Integer, String> map = null;
             if (subInfoList != null) {
                 String mobileTag;
                 map = new HashMap<Integer, String>();
-                for (int i = 0; i < mTelephonyManager.getSimCount(); i++) {
-                    final SubscriptionInfo subInfo = Utils.findRecordBySlotId(context, i);
-                    mobileTag = TAB_MOBILE + i;
-                    if (subInfo != null) {
-                        map.put(subInfo.getSubscriptionId(), mobileTag);
-                    }
+                for (SubscriptionInfo subInfo : subInfoList) {
+                    mobileTag = TAB_MOBILE + String.valueOf(subInfo.getSubscriptionId());
+                    map.put(subInfo.getSubscriptionId(), mobileTag);
                 }
             }
             return map;
