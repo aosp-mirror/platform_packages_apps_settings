@@ -153,7 +153,7 @@ public class SimStatus extends PreferenceActivity {
             }
         }
 
-        mSir = mSelectableSubInfos.get(0);
+        mSir = mSelectableSubInfos.size() > 0 ? mSelectableSubInfos.get(0) : null;
         if (mSelectableSubInfos.size() > 1) {
             setContentView(R.layout.sim_information);
 
@@ -363,33 +363,35 @@ public class SimStatus extends PreferenceActivity {
     }
 
     private void updatePhoneInfos() {
-        final Phone phone = PhoneFactory.getPhone(SubscriptionManager.getPhoneId(
+        if (mSir != null) {
+            final Phone phone = PhoneFactory.getPhone(SubscriptionManager.getPhoneId(
                         mSir.getSubscriptionId()));
-        if (UserHandle.myUserId() == UserHandle.USER_OWNER
-                && mSir.getSubscriptionId() != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            if (phone == null) {
-                Log.e(TAG, "Unable to locate a phone object for the given Subscription ID.");
-                return;
+            if (UserHandle.myUserId() == UserHandle.USER_OWNER
+                    && mSir.getSubscriptionId() != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                if (phone == null) {
+                    Log.e(TAG, "Unable to locate a phone object for the given Subscription ID.");
+                    return;
+                }
+
+                mPhone = phone;
+                mPhoneStateListener = new PhoneStateListener(mSir.getSubscriptionId()) {
+                    @Override
+                    public void onDataConnectionStateChanged(int state) {
+                        updateDataState();
+                        updateNetworkType();
+                    }
+
+                    @Override
+                    public void onSignalStrengthsChanged(SignalStrength signalStrength) {
+                        updateSignalStrength(signalStrength);
+                    }
+
+                    @Override
+                    public void onServiceStateChanged(ServiceState serviceState) {
+                        updateServiceState(serviceState);
+                    }
+                };
             }
-
-            mPhone = phone;
-            mPhoneStateListener = new PhoneStateListener(mSir.getSubscriptionId()) {
-                @Override
-                public void onDataConnectionStateChanged(int state) {
-                    updateDataState();
-                    updateNetworkType();
-                }
-
-                @Override
-                public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-                    updateSignalStrength(signalStrength);
-                }
-
-                @Override
-                public void onServiceStateChanged(ServiceState serviceState) {
-                    updateServiceState(serviceState);
-                }
-            };
         }
     }
     private OnTabChangeListener mTabListener = new OnTabChangeListener() {
