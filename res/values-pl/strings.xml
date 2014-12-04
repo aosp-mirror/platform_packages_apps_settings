@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Rozłączyć?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Spowoduje to zakończenie połączenia z urządzeniem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Nie masz uprawnień, by zmienić ustawienia Bluetootha."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> – widoczne dla urządzeń w pobliżu po otwarciu ustawień Bluetootha."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jest widoczne dla urządzeń w pobliżu, gdy są otwarte ustawienia Bluetooth."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Odłączyć urządzenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Transmisja"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Wyłączyć profil?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Zarządzaj Wi‑Fi, Bluetoothem, trybem samolotowym, sieciami komórkowymi i VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Komórkowa transmisja danych"</string>
     <string name="calls_title" msgid="3544471959217176768">"Połączenia"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"SMS-y"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"SMS-y"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Zezwalaj na komórkową transmisję danych"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Transmisja danych w roamingu"</string>
     <string name="roaming" msgid="3596055926335478572">"Roaming danych"</string>
@@ -399,6 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Średni i wysoki poziom zabezpieczeń"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Hasło"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Wysoki poziom zabezpieczeń"</string>
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Funkcje chroniące urządzenie przestaną działać."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Wyłączone przez administratora lub ze względu na zasady szyfrowania albo magazyn danych logowania"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Brak"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Przesuń palcem"</string>
@@ -410,6 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Usuń wzór odblokowania"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Usuń kod PIN odblokowania"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Usuń hasło odblokowania"</string>
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Usuń blokadę ekranu"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Zmień wzór odblokowania"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Zmień kod PIN odblokowania"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Zmień hasło odblokowania"</string>
@@ -2321,7 +2323,6 @@
     <string name="color_purple" msgid="3888532466427762504">"Fioletowy"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"Brak włożonych kart SIM"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"Stan karty SIM"</string>
-    <string name="sim_status_summary" msgid="4934558018015161369">"Informacje związane z kartą SIM"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Oddzwoń za pomocą domyślnej karty SIM"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"Karta SIM do połączeń wychodzących"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Inne ustawienia połączenia"</string>
@@ -2381,11 +2382,11 @@
     <string name="alarm_volume_option_title" msgid="8219324421222242421">"Głośność alarmu"</string>
     <string name="ring_volume_option_title" msgid="6767101703671248309">"Głośność dzwonka"</string>
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Głośność powiadomień"</string>
-    <string name="zen_mode_settings_title" msgid="7014915558669122902">"Przerwy"</string>
-    <string name="zen_mode_option_title" msgid="5061978632306007914">"Gdy ktoś dzwoni i przychodzą powiadomienia"</string>
-    <string name="zen_mode_option_off" msgid="3167702608910820883">"Zawsze przerywaj"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Zezwalaj tylko na przerwy priorytetowe"</string>
-    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Nie przerywaj"</string>
+    <string name="zen_mode_settings_title" msgid="7014915558669122902">"Dozwolone dźwięki"</string>
+    <string name="zen_mode_option_title" msgid="5061978632306007914">"Gdy ktoś dzwoni lub przychodzi powiadomienie"</string>
+    <string name="zen_mode_option_off" msgid="3167702608910820883">"Zezwalaj na wszystkie dźwięki"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="2320263300561981257">"Zezwalaj na dźwięki priorytetowe"</string>
+    <string name="zen_mode_option_no_interruptions" msgid="5664234817617301449">"Nie zezwalaj na żadne dźwięki"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Dzwonek telefonu"</string>
     <string name="notification_ringtone_title" msgid="3361201340352664272">"Domyślny dzwonek powiadomień"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Wibracja podczas połączeń"</string>
@@ -2439,11 +2440,11 @@
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Poufne"</string>
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Gotowe"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Dopóki nie wyłączysz"</string>
-    <string name="zen_mode_important_category" msgid="8123274463331022993">"Przerwy priorytetowe"</string>
+    <string name="zen_mode_important_category" msgid="8123274463331022993">"Dźwięki priorytetowe"</string>
     <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Powiadomienia wyłączone"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Dni"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Brak"</string>
-    <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Powiadomienia dozwolone"</string>
+    <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Dozwolone powiadomienia"</string>
     <string name="zen_mode_downtime_mode_priority" msgid="1599184173608032994">"Tylko priorytetowe"</string>
     <string name="zen_mode_downtime_mode_none" msgid="8572229891146527069">"Brak"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Automatyzacja"</string>
@@ -2452,12 +2453,12 @@
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Nigdy"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Połączenia"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"Wiadomości"</string>
-    <string name="zen_mode_from" msgid="1033337300289871697">"Połączenia/wiadomości od"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"Połączenia lub wiadomości od"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Każdy"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Tylko kontakty"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Tylko kontakty z gwiazdką"</string>
     <string name="zen_mode_events" msgid="2456995649835437565">"Wydarzenia i przypomnienia"</string>
-    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"Alarmy mają zawsze priorytet"</string>
+    <string name="zen_mode_alarm_info" msgid="3195430795475795398">"Alarmy mają zawsze priorytet."</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Włącz automatycznie"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Nigdy"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Każdej nocy"</string>
@@ -2487,7 +2488,6 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Pozostaw orientację poziomą"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Pozostaw obecną orientację"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informacje o IMEI"</string>
-    <string name="imei_information_summary" msgid="2074095606556565233">"Informacje związane z IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Szyfrowanie"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Dalej"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Możesz wzmocnić ochronę urządzenia przez wymaganie kodu PIN do jego uruchomienia. Dopiero po uruchomieniu urządzenie może odbierać połączenia, wiadomości czy powiadomienia, w tym alarmy. \n\nZwiększa to bezpieczeństwo danych na zgubionym lub skradzionym urządzeniu."</string>

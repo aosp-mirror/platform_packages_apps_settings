@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Vols desconnectar-te?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Això posarà fi a la teva connexió amb:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"No tens permís per canviar la configuració del Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> serà visible per a dispositius propers amb la configuració de Bluetooth activada."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> serà visible per a dispositius propers amb la configuració de Bluetooth activada."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Vols desconnectar el dispositiu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Emissió"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vols desactivar el perfil?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Permet gestionar la Wi‑Fi, el Bluetooth, el mode d\'avió, les xarxes mòbils i les VPN."</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Dades mòbils"</string>
     <string name="calls_title" msgid="3544471959217176768">"Trucades"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"Missatges SMS"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"Missatges SMS"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Permet l\'ús de dades amb la xarxa mòbil."</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Permet ús dades en itinerància"</string>
     <string name="roaming" msgid="3596055926335478572">"Itinerància de dades"</string>
@@ -399,6 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Nivell de seguretat mitjà o alt"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contrasenya"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Nivell de seguretat alt"</string>
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Les funcions de protecció del dispositiu deixaran de funcionar."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desactivat per administrador, política d\'encriptació o emmagatzematge de credencials"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Cap"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Fes lliscar el dit"</string>
@@ -410,6 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Elimina el patró de desbloqueig"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Elimina el PIN de desbloqueig"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Elimina la contrasenya de desbloqueig"</string>
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Suprimeix el bloqueig de pantalla."</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Canvia el patró de desbloqueig"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Canvia el PIN de desbloqueig"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Canvia la contrasenya de desbloqueig"</string>
@@ -696,9 +698,9 @@
     <string name="wifi_skipped_message" product="tablet" msgid="6761689889733331124">"ADVERTIMENT: si omets la connexió Wi‑Fi, la tauleta utilitzarà només les dades mòbils per dur a terme les baixades inicials i les actualitzacions. Per evitar els possibles càrrecs per dades, connecta\'t a la xarxa Wi‑Fi."</string>
     <string name="wifi_skipped_message" product="device" msgid="1385490367826852775">"ADVERTIMENT: si omets la connexió Wi‑Fi, el dispositiu utilitzarà només les dades mòbils per dur a terme les baixades inicials i les actualitzacions. Per evitar els possibles càrrecs per dades, connecta\'t a la xarxa Wi‑Fi."</string>
     <string name="wifi_skipped_message" product="default" msgid="6084295135297772350">"ADVERTIMENT: si omets la connexió Wi‑Fi, el telèfon utilitzarà només les dades mòbils per dur a terme les baixades inicials i les actualitzacions. Per evitar els possibles càrrecs per dades, connecta\'t a la xarxa Wi‑Fi."</string>
-    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5872240361944591105">"Si omets la Wi‑Fi, passarà el següent:\n\nLa tauleta no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nEn aquest moment no pots activar les funcions de protecció del dispositiu."</string>
-    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1013689568018268332">"Si omets la Wi‑Fi, passarà el següent:\n\nEl dispositiu no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nEn aquest moment no pots activar les funcions de protecció del dispositiu."</string>
-    <string name="wifi_and_mobile_skipped_message" product="default" msgid="5245835374169369770">"Si omets la Wi‑Fi, passarà el següent:\n\nEl telèfon no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nEn aquest moment no pots activar les funcions de protecció del dispositiu."</string>
+    <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5872240361944591105">"Si omets la Wi‑Fi:\n\nLa tauleta no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nNo podràs activar les funcions de protecció del dispositiu en aquest moment."</string>
+    <string name="wifi_and_mobile_skipped_message" product="device" msgid="1013689568018268332">"Si omets la Wi‑Fi:\n\nEl dispositiu no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\nNo podràs activar les funcions de protecció del dispositiu en aquest moment.\n"</string>
+    <string name="wifi_and_mobile_skipped_message" product="default" msgid="5245835374169369770">"Si omets la Wi‑Fi:\n\nEl telèfon no tindrà connexió a Internet.\n\nNo podràs obtenir actualitzacions de programari fins que no et connectis a Internet.\n\nNo podràs activar les funcions de protecció del dispositiu en aquest moment."</string>
     <string name="wifi_connect_failed_message" product="tablet" msgid="4474691090681670156">"La tauleta no ha pogut connectar amb aquesta xarxa Wi-Fi."</string>
     <string name="wifi_connect_failed_message" product="device" msgid="8870885845666880869">"El dispositiu no s\'ha pogut connectar a la xarxa Wi‑Fi."</string>
     <string name="wifi_connect_failed_message" product="default" msgid="2185803140161396572">"El telèfon no ha pogut connectar amb aquesta xarxa Wi-Fi."</string>
@@ -2321,7 +2323,6 @@
     <string name="color_purple" msgid="3888532466427762504">"Porpra"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"No s\'ha inserit cap targeta SIM."</string>
     <string name="sim_status_title" msgid="6744870675182447160">"Estat de la targeta SIM"</string>
-    <string name="sim_status_summary" msgid="4934558018015161369">"Informació relacionada amb la targeta SIM"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Torna la trucada des de la SIM predeterminada"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"SIM per a trucades sortints"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Altres opcions de trucades"</string>
@@ -2487,7 +2488,6 @@
     <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Continua amb l\'orientació horitzontal"</string>
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Continua amb l\'orientació actual"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"Informació sobre l\'IMEI"</string>
-    <string name="imei_information_summary" msgid="2074095606556565233">"Informació relativa a l\'IMEI"</string>
     <string name="encryption_interstitial_header" msgid="5790264941172726485">"Encriptació"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Continua"</string>
     <string name="encryption_interstitial_message_pin" msgid="3705622704667901162">"Per protegir encara més el dispositiu, pots sol·licitar el PIN abans que no s\'iniciï. Fins que no s\'inicia no pot rebre trucades, missatges ni notificacions, incloses alarmes.\n\nAixò permet protegir les dades dels dispositius perduts o robats."</string>
