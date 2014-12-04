@@ -418,7 +418,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             } else {
                 sir = mSelectableSubInfos.get(position);
                 holder.title.setText(sir.getDisplayName());
-                holder.summary.setText(sir.getNumber());
+                holder.summary.setText(getPhoneNumber(sir));
                 holder.icon.setImageBitmap(sir.createIconBitmap(mContext));
             }
             return rowView;
@@ -458,11 +458,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             setTitle(String.format(getResources()
                     .getString(R.string.sim_editor_title), (mSlotId + 1)));
             if (mSubInfoRecord != null) {
-                if (TextUtils.isEmpty(mSubInfoRecord.getNumber())) {
+                if (TextUtils.isEmpty(getPhoneNumber(mSubInfoRecord))) {
                    setSummary(mSubInfoRecord.getDisplayName());
                 } else {
                     setSummary(mSubInfoRecord.getDisplayName() + " - " +
-                            mSubInfoRecord.getNumber());
+                            getPhoneNumber(mSubInfoRecord));
                     setEnabled(true);
                 }
                 setIcon(new BitmapDrawable(res, (mSubInfoRecord.createIconBitmap(mContext))));
@@ -517,7 +517,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             });
 
             TextView numberView = (TextView)dialogLayout.findViewById(R.id.number);
-            final String rawNumber = mSubInfoRecord.getNumber();
+            final String rawNumber = getPhoneNumber(mSubInfoRecord);
             if (TextUtils.isEmpty(rawNumber)) {
                 numberView.setText(res.getString(com.android.internal.R.string.unknownName));
             } else {
@@ -633,6 +633,14 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
 
 
+    }
+
+    // Returns the line1Number. Line1number should always be read from TelephonyManager since it can
+    // be overridden for display purposes.
+    private String getPhoneNumber(SubscriptionInfo info) {
+        final TelephonyManager tm =
+            (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getLine1NumberForSubscriber(info.getSubscriptionId());
     }
 
     private void log(String s) {

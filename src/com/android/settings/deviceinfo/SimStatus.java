@@ -343,7 +343,7 @@ public class SimStatus extends PreferenceActivity {
             }
         }
 
-        String rawNumber = mPhone.getLine1Number();  // may be null or empty
+        String rawNumber = mTelephonyManager.getLine1Number();  // may be null or empty
         String formattedNumber = null;
         if (!TextUtils.isEmpty(rawNumber)) {
             formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
@@ -353,9 +353,7 @@ public class SimStatus extends PreferenceActivity {
         final String imei = mPhone.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                 ? mPhone.getImei() : mPhone.getDeviceId();
         setSummaryText(KEY_IMEI, imei);
-        setSummaryText(KEY_IMEI_SV,
-                ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
-                .getDeviceSoftwareVersion(/*slotId*/));
+        setSummaryText(KEY_IMEI_SV, mTelephonyManager.getDeviceSoftwareVersion(/*slotId*/));
 
         if (!mShowLatestAreaInfo) {
             removePreferenceFromScreen(KEY_LATEST_AREA_INFO);
