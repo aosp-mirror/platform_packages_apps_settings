@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContentUris;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Paint;
@@ -264,14 +265,21 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     @Override
     public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
             final Preference preference) {
+        final Context context = getActivity();
+        Intent intent = new Intent(context, SimDialogActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         if (preference instanceof SimPreference) {
             ((SimPreference)preference).createEditDialog((SimPreference)preference);
         } else if (findPreference(KEY_CELLULAR_DATA) == preference) {
-            showDialog(DATA_PICK);
+            intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
+            context.startActivity(intent);
         } else if (findPreference(KEY_CALLS) == preference) {
-            showDialog(CALLS_PICK);
+            intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.CALLS_PICK);
+            context.startActivity(intent);
         } else if (findPreference(KEY_SMS) == preference) {
-            showDialog(SMS_PICK);
+            intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.SMS_PICK);
+            context.startActivity(intent);
         }
 
         return true;
