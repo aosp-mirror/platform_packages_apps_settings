@@ -41,7 +41,7 @@ import android.widget.TextView;
 
 public class EncryptionInterstitial extends SettingsActivity {
 
-    private static final String EXTRA_PASSWORD_QUALITY = "extra_password_quality";
+    protected static final String EXTRA_PASSWORD_QUALITY = "extra_password_quality";
     public static final String EXTRA_REQUIRE_PASSWORD = "extra_require_password";
 
     @Override
