@@ -573,20 +573,22 @@ public class UserSettings extends SettingsPreferenceFragment
                 addProfileItem.put(KEY_SUMMARY, getString(R.string.user_add_profile_item_summary));
                 data.add(addUserItem);
                 data.add(addProfileItem);
-                Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(R.string.user_add_user_type_title)
-                        .setAdapter(new SimpleAdapter(context, data, R.layout.two_line_list_item,
-                                new String[] {KEY_TITLE, KEY_SUMMARY},
-                                new int[] {R.id.title, R.id.summary}),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        onAddUserClicked(which == 0
-                                                ? USER_TYPE_USER
-                                                : USER_TYPE_RESTRICTED_PROFILE);
-                                    }
-                                })
-                        .create();
-                return dlg;
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                SimpleAdapter adapter = new SimpleAdapter(builder.getContext(),
+                        data, R.layout.two_line_list_item,
+                        new String[] {KEY_TITLE, KEY_SUMMARY},
+                        new int[] {R.id.title, R.id.summary});
+                builder.setTitle(R.string.user_add_user_type_title);
+                builder.setAdapter(adapter,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                onAddUserClicked(which == 0
+                                        ? USER_TYPE_USER
+                                        : USER_TYPE_RESTRICTED_PROFILE);
+                            }
+                        });
+                return builder.create();
             }
             case DIALOG_NEED_LOCKSCREEN: {
                 Dialog dlg = new AlertDialog.Builder(context)
