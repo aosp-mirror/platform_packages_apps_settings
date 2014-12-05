@@ -18,6 +18,7 @@ package com.android.settings;
 
 import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -93,12 +94,27 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial
             return view;
         }
 
+        private int getHeaderTextResource() {
+            final int quality = getActivity().getIntent().getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
+            switch (quality) {
+                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                    return R.string.unlock_set_unlock_pattern_title;
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                    return R.string.unlock_set_unlock_pin_title;
+                default:
+                    return R.string.unlock_set_unlock_password_title;
+            }
+        }
+
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             SetupWizardUtils.setIllustration(getActivity(),
                     R.drawable.setup_illustration_lock_screen);
-            SetupWizardUtils.setHeaderText(getActivity(), R.string.encryption_interstitial_header);
+            final int title = getHeaderTextResource();
+            getActivity().setTitle(title);
+            SetupWizardUtils.setHeaderText(getActivity(), title);
         }
     }
 }
