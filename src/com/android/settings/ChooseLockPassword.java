@@ -24,14 +24,12 @@ import com.android.settings.notification.RedactionInterstitial;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
@@ -416,7 +414,7 @@ public class ChooseLockPassword extends SettingsActivity {
             return null;
         }
 
-        private void handleNext() {
+        public void handleNext() {
             if (mDone) return;
 
             final String pin = mPasswordEntry.getText().toString();
@@ -458,6 +456,14 @@ public class ChooseLockPassword extends SettingsActivity {
             if (errorMsg != null) {
                 showError(errorMsg, mUiStage);
             }
+        }
+
+        protected void setNextEnabled(boolean enabled) {
+            mNextButton.setEnabled(enabled);
+        }
+
+        protected void setNextText(int text) {
+            mNextButton.setText(text);
         }
 
         public void onClick(View v) {
@@ -502,22 +508,22 @@ public class ChooseLockPassword extends SettingsActivity {
                     String msg = getString(mIsAlphaMode ? R.string.lockpassword_password_too_short
                             : R.string.lockpassword_pin_too_short, mPasswordMinLength);
                     mHeaderText.setText(msg);
-                    mNextButton.setEnabled(false);
+                    setNextEnabled(false);
                 } else {
                     String error = validatePassword(password);
                     if (error != null) {
                         mHeaderText.setText(error);
-                        mNextButton.setEnabled(false);
+                        setNextEnabled(false);
                     } else {
                         mHeaderText.setText(R.string.lockpassword_press_continue);
-                        mNextButton.setEnabled(true);
+                        setNextEnabled(true);
                     }
                 }
             } else {
                 mHeaderText.setText(mIsAlphaMode ? mUiStage.alphaHint : mUiStage.numericHint);
-                mNextButton.setEnabled(length > 0);
+                setNextEnabled(length > 0);
             }
-            mNextButton.setText(mUiStage.buttonText);
+            setNextText(mUiStage.buttonText);
         }
 
         public void afterTextChanged(Editable s) {

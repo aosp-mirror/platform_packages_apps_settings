@@ -150,6 +150,14 @@ public class ChooseLockPattern extends SettingsActivity {
             }
         }
 
+        protected void setRightButtonEnabled(boolean enabled) {
+            mFooterRightButton.setEnabled(enabled);
+        }
+
+        protected void setRightButtonText(int text) {
+            mFooterRightButton.setText(text);
+        }
+
         /**
          * The pattern listener that responds according to a user choosing a new
          * lock pattern.
@@ -390,43 +398,51 @@ public class ChooseLockPattern extends SettingsActivity {
             return RedactionInterstitial.createStartIntent(context);
         }
 
+        public void handleLeftButton() {
+            if (mUiStage.leftMode == LeftButtonMode.Retry) {
+                mChosenPattern = null;
+                mLockPatternView.clearPattern();
+                updateStage(Stage.Introduction);
+            } else if (mUiStage.leftMode == LeftButtonMode.Cancel) {
+                // They are canceling the entire wizard
+                getActivity().setResult(RESULT_FINISHED);
+                getActivity().finish();
+            } else {
+                throw new IllegalStateException("left footer button pressed, but stage of " +
+                        mUiStage + " doesn't make sense");
+            }
+        }
+
+        public void handleRightButton() {
+            if (mUiStage.rightMode == RightButtonMode.Continue) {
+                if (mUiStage != Stage.FirstChoiceValid) {
+                    throw new IllegalStateException("expected ui stage "
+                            + Stage.FirstChoiceValid + " when button is "
+                            + RightButtonMode.Continue);
+                }
+                updateStage(Stage.NeedToConfirm);
+            } else if (mUiStage.rightMode == RightButtonMode.Confirm) {
+                if (mUiStage != Stage.ChoiceConfirmed) {
+                    throw new IllegalStateException("expected ui stage " + Stage.ChoiceConfirmed
+                            + " when button is " + RightButtonMode.Confirm);
+                }
+                saveChosenPatternAndFinish();
+            } else if (mUiStage.rightMode == RightButtonMode.Ok) {
+                if (mUiStage != Stage.HelpScreen) {
+                    throw new IllegalStateException("Help screen is only mode with ok button, "
+                            + "but stage is " + mUiStage);
+                }
+                mLockPatternView.clearPattern();
+                mLockPatternView.setDisplayMode(DisplayMode.Correct);
+                updateStage(Stage.Introduction);
+            }
+        }
+
         public void onClick(View v) {
             if (v == mFooterLeftButton) {
-                if (mUiStage.leftMode == LeftButtonMode.Retry) {
-                    mChosenPattern = null;
-                    mLockPatternView.clearPattern();
-                    updateStage(Stage.Introduction);
-                } else if (mUiStage.leftMode == LeftButtonMode.Cancel) {
-                    // They are canceling the entire wizard
-                    getActivity().setResult(RESULT_FINISHED);
-                    getActivity().finish();
-                } else {
-                    throw new IllegalStateException("left footer button pressed, but stage of " +
-                        mUiStage + " doesn't make sense");
-                }
+                handleLeftButton();
             } else if (v == mFooterRightButton) {
-
-                if (mUiStage.rightMode == RightButtonMode.Continue) {
-                    if (mUiStage != Stage.FirstChoiceValid) {
-                        throw new IllegalStateException("expected ui stage " + Stage.FirstChoiceValid
-                                + " when button is " + RightButtonMode.Continue);
-                    }
-                    updateStage(Stage.NeedToConfirm);
-                } else if (mUiStage.rightMode == RightButtonMode.Confirm) {
-                    if (mUiStage != Stage.ChoiceConfirmed) {
-                        throw new IllegalStateException("expected ui stage " + Stage.ChoiceConfirmed
-                                + " when button is " + RightButtonMode.Confirm);
-                    }
-                    saveChosenPatternAndFinish();
-                } else if (mUiStage.rightMode == RightButtonMode.Ok) {
-                    if (mUiStage != Stage.HelpScreen) {
-                        throw new IllegalStateException("Help screen is only mode with ok button, but " +
-                                "stage is " + mUiStage);
-                    }
-                    mLockPatternView.clearPattern();
-                    mLockPatternView.setDisplayMode(DisplayMode.Correct);
-                    updateStage(Stage.Introduction);
-                }
+                handleRightButton();
             }
         }
 
@@ -489,8 +505,8 @@ public class ChooseLockPattern extends SettingsActivity {
                 mFooterLeftButton.setEnabled(stage.leftMode.enabled);
             }
 
-            mFooterRightButton.setText(stage.rightMode.text);
-            mFooterRightButton.setEnabled(stage.rightMode.enabled);
+            setRightButtonText(stage.rightMode.text);
+            setRightButtonEnabled(stage.rightMode.enabled);
 
             // same for whether the patten is enabled
             if (stage.patternEnabled) {
