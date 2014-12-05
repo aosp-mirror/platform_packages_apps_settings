@@ -30,7 +30,6 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Telephony;
@@ -118,7 +117,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private SubscriptionInfo mCalls = null;
     private SubscriptionInfo mSMS = null;
 
-    private PreferenceCategory mSimCards = null;
+    private PreferenceScreen mSimCards = null;
 
     private SubscriptionManager mSubscriptionManager;
     private Utils mUtils;
@@ -151,14 +150,16 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
         addPreferencesFromResource(R.xml.sim_settings);
 
-        mSimCards = (PreferenceCategory)findPreference(SIM_CARD_CATEGORY);
+        mSimCards = (PreferenceScreen)findPreference(SIM_CARD_CATEGORY);
 
         final int numSlots = tm.getSimCount();
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
         mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
         for (int i = 0; i < numSlots; ++i) {
             final SubscriptionInfo sir = Utils.findRecordBySlotId(getActivity(), i);
-            mSimCards.addPreference(new SimPreference(getActivity(), sir, i));
+            SimPreference simPreference = new SimPreference(getActivity(), sir, i);
+            simPreference.setOrder(i-numSlots);
+            mSimCards.addPreference(simPreference);
             mAvailableSubInfos.add(sir);
             if (sir != null) {
                 mSelectableSubInfos.add(sir);
