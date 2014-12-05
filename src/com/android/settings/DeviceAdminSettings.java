@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
@@ -25,9 +24,11 @@ import android.app.ListFragment;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -49,14 +50,13 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Collection;
 
 public class DeviceAdminSettings extends ListFragment {
     static final String TAG = "DeviceAdminSettings";
 
-    static final int DIALOG_WARNING = 1;
     private DevicePolicyManager mDPM;
     private UserManager mUm;
 
@@ -69,6 +69,18 @@ public class DeviceAdminSettings extends ListFragment {
 
     private String mDeviceOwnerPkg;
     private SparseArray<ComponentName> mProfileOwnerComponents = new SparseArray<ComponentName>();
+
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Refresh the list, if state change has been received. It could be that checkboxes
+            // need to be updated
+            if (DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED.equals(
+                    intent.getAction())) {
+                updateList();
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -93,6 +105,10 @@ public class DeviceAdminSettings extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
+        getActivity().registerReceiverAsUser(
+                mBroadcastReceiver, UserHandle.ALL, filter, null, null);
         mDeviceOwnerPkg = mDPM.getDeviceOwner();
         if (mDeviceOwnerPkg != null && !mDPM.isDeviceOwner(mDeviceOwnerPkg)) {
             mDeviceOwnerPkg = null;
@@ -105,6 +121,12 @@ public class DeviceAdminSettings extends ListFragment {
             mProfileOwnerComponents.put(profileId, mDPM.getProfileOwnerAsUser(profileId));
         }
         updateList();
+    }
+
+    @Override
+    public void onPause() {
+        getActivity().unregisterReceiver(mBroadcastReceiver);
+        super.onPause();
     }
 
     /**
@@ -264,6 +286,10 @@ public class DeviceAdminSettings extends ListFragment {
                     && (isDeviceOwner(info) || isProfileOwner(info))) {
                 return false;
             }
+            // Disable item if admin is being removed
+            if (isRemovingAdmin(info)) {
+                return false;
+            }
             return true;
         }
 
@@ -338,6 +364,10 @@ public class DeviceAdminSettings extends ListFragment {
 
     private boolean isActiveAdmin(DeviceAdminInfo item) {
         return mDPM.isAdminActiveAsUser(item.getComponent(), getUserId(item));
+    }
+
+    private boolean isRemovingAdmin(DeviceAdminInfo item) {
+        return mDPM.isRemovingAdmin(item.getComponent(), getUserId(item));
     }
 
     /**
