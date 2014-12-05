@@ -21,7 +21,9 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothPbap;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothUuid;
 import android.content.Context;
+import android.os.ParcelUuid;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -43,6 +45,13 @@ final class PbapServerProfile implements LocalBluetoothProfile {
 
     // Order of this profile in device profiles list
     private static final int ORDINAL = 6;
+
+    // The UUIDs indicate that remote device might access pbap server
+    static final ParcelUuid[] PBAB_CLIENT_UUIDS = {
+        BluetoothUuid.HSP,
+        BluetoothUuid.Handsfree,
+        BluetoothUuid.PBAP_PCE
+    };
 
     // These callbacks run on the main thread.
     private final class PbapServiceListener
