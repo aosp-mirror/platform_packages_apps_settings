@@ -18,16 +18,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:autoMirrored="true">
 
-    <item>
-        <bitmap android:src="@drawable/setup_illustration_horizontal_tile"
-            android:gravity="top"
-            android:tileModeX="repeat"
-            android:tileModeY="disabled" />
-    </item>
-
     <item android:id="@+id/illustration_image">
-        <bitmap android:src="@drawable/setup_illustration_wifi_wide_image"
-            android:gravity="top|start" />
+        <bitmap android:src="@drawable/setup_illustration_wifi"
+            android:gravity="fill" />
     </item>
 
 </layer-list>
