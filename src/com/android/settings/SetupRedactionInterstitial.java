@@ -22,7 +22,6 @@ import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +95,8 @@ public class SetupRedactionInterstitial extends RedactionInterstitial
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            SetupWizardUtils.setIllustration(getActivity(),
+                    R.drawable.setup_illustration_lock_screen);
             SetupWizardUtils.setHeaderText(getActivity(), R.string.notification_section_header);
         }
     }

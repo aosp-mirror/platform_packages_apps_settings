@@ -16,12 +16,17 @@
 
 package com.android.settings;
 
+import com.android.settings.widget.SetupWizardIllustration;
 import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.view.Gravity;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -108,5 +113,25 @@ public class SetupWizardUtils {
         toIntent.putExtra(EXTRA_THEME, fromIntent.getStringExtra(EXTRA_THEME));
         toIntent.putExtra(EXTRA_USE_IMMERSIVE_MODE,
                 fromIntent.getBooleanExtra(EXTRA_USE_IMMERSIVE_MODE, false));
+    }
+
+    public static void setIllustration(Activity activity, int asset) {
+        SetupWizardIllustration illustration =
+                (SetupWizardIllustration) activity.findViewById(R.id.setup_illustration);
+        if (illustration != null) {
+            Drawable drawable = activity.getDrawable(R.drawable.setup_illustration);
+            Drawable newIllustration = activity.getDrawable(asset);
+            if (drawable instanceof LayerDrawable) {
+                LayerDrawable layers = (LayerDrawable) drawable;
+                Drawable oldIllustration = layers.findDrawableByLayerId(R.id.illustration_image);
+                if (newIllustration instanceof BitmapDrawable
+                        && oldIllustration instanceof BitmapDrawable) {
+                    final int gravity = ((BitmapDrawable) oldIllustration).getGravity();
+                    ((BitmapDrawable) newIllustration).setGravity(gravity);
+                }
+                layers.setDrawableByLayerId(R.id.illustration_image, newIllustration);
+                illustration.setForeground(layers);
+            }
+        }
     }
 }
