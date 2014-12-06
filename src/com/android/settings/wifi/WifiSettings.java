@@ -502,26 +502,21 @@ public class WifiSettings extends RestrictedSettingsFragment
                 mSelectedAccessPoint = (AccessPoint) preference;
                 menu.setHeaderTitle(mSelectedAccessPoint.ssid);
                 if (mSelectedAccessPoint.getLevel() != -1) {
-                    int connectStringRes = 0;
                     if (mSelectedAccessPoint.getState() == null) {
-                        connectStringRes = R.string.wifi_menu_connect;
-                    } else if (mSelectedAccessPoint.networkId == INVALID_NETWORK_ID &&
-                            mSelectedAccessPoint.getNetworkInfo().getState()
-                                != State.DISCONNECTED) {
-                        // State is non-null (and not disconnected) but this network has no
-                        // configuration, which means it is ephemeral. Allow the user to save the
-                        // configuration permanently (but still issue this as a CONNECT command).
-                        connectStringRes = R.string.wifi_menu_remember;
-                    }
-
-                    if (connectStringRes != 0) {
-                        menu.add(Menu.NONE, MENU_ID_CONNECT, 0, connectStringRes);
+                        menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
                     }
                 }
+
+                if (ActivityManager.getCurrentUser() == UserHandle.USER_OWNER &&
+                        (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID ||
+                        (mSelectedAccessPoint.getNetworkInfo() != null &&
+                        mSelectedAccessPoint.getNetworkInfo().getState() != State.DISCONNECTED))) {
+                    // Allow forgetting a network if the current user is the owner and either the
+                    // network is saved or ephemerally connected. (In the latter case, "forget"
+                    // blacklists the network so it won't be used again, ephemerally).
+                    menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
+                }
                 if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
-                    if (ActivityManager.getCurrentUser() == UserHandle.USER_OWNER) {
-                        menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
-                    }
                     menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
 
                     if (mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {
@@ -552,7 +547,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return true;
             }
             case MENU_ID_FORGET: {
-                mWifiManager.forget(mSelectedAccessPoint.networkId, mForgetListener);
+                forget();
                 return true;
             }
             case MENU_ID_MODIFY: {
@@ -571,9 +566,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         if (preference instanceof AccessPoint) {
             mSelectedAccessPoint = (AccessPoint) preference;
-            /** Bypass dialog for unsecured, unsaved networks */
+            /** Bypass dialog for unsecured, unsaved, and inactive networks */
             if (mSelectedAccessPoint.security == AccessPoint.SECURITY_NONE &&
-                    mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
+                    mSelectedAccessPoint.networkId == INVALID_NETWORK_ID &&
+                    !mSelectedAccessPoint.isActive()) {
                 mSelectedAccessPoint.generateOpenNetworkConfig();
                 if (!savedNetworksExist) {
                     savedNetworksExist = true;
@@ -903,12 +899,19 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     /* package */ void forget() {
         if (mSelectedAccessPoint.networkId == INVALID_NETWORK_ID) {
-            // Should not happen, but a monkey seems to trigger it
-            Log.e(TAG, "Failed to forget invalid network " + mSelectedAccessPoint.getConfig());
-            return;
+            if (mSelectedAccessPoint.getNetworkInfo().getState() != State.DISCONNECTED) {
+                // Network is active but has no network ID - must be ephemeral.
+                mWifiManager.disableEphemeralNetwork(
+                        AccessPoint.convertToQuotedString(mSelectedAccessPoint.ssid));
+            } else {
+                // Should not happen, but a monkey seems to trigger it
+                Log.e(TAG, "Failed to forget invalid network " + mSelectedAccessPoint.getConfig());
+                return;
+            }
+        } else {
+            mWifiManager.forget(mSelectedAccessPoint.networkId, mForgetListener);
         }
 
-        mWifiManager.forget(mSelectedAccessPoint.networkId, mForgetListener);
 
         if (mWifiManager.isWifiEnabled()) {
             mScanner.resume();
