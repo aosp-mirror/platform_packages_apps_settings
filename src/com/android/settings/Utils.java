@@ -948,7 +948,7 @@ public final class Utils {
         final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
-        return tm.getSimCount() > 0;
+        return tm.getSimCount() > 1;
     }
 
     /**
