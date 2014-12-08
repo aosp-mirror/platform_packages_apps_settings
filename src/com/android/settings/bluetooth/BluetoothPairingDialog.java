@@ -17,12 +17,14 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothUuid;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
@@ -111,6 +113,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
         mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         mType = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, BluetoothDevice.ERROR);
+        mDevice.fetchUuidsWithSdp();
 
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
@@ -318,7 +321,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         }
     }
 
-    private void allowPhonebookAccess() {
+    private void processPhonebookAccess() {
         CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(mDevice);
         if (cachedDevice == null) {
             cachedDevice = mCachedDeviceManager.addDevice(
@@ -326,11 +329,14 @@ public final class BluetoothPairingDialog extends AlertActivity implements
                     mBluetoothManager.getProfileManager(),
                     mDevice);
         }
-        cachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_ALLOWED);
+        ParcelUuid[] uuids = mDevice.getUuids();
+        if (BluetoothUuid.containsAnyUuid(uuids, PbapServerProfile.PBAB_CLIENT_UUIDS)) {
+            cachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_ALLOWED);
+        }
     }
 
     private void onPair(String value) {
-        allowPhonebookAccess();
+        processPhonebookAccess();
 
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
