@@ -96,6 +96,8 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            SetupWizardUtils.setIllustration(getActivity(),
+                    R.drawable.setup_illustration_lock_screen);
             SetupWizardUtils.setHeaderText(getActivity(), R.string.encryption_interstitial_header);
         }
     }
