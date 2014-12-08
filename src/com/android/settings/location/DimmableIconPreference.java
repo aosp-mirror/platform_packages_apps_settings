@@ -16,10 +16,14 @@
 
 package com.android.settings.location;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * A preference item that can dim the icon when it's disabled, either directly or because its parent
@@ -29,16 +33,23 @@ public class DimmableIconPreference extends Preference {
     private static final int ICON_ALPHA_ENABLED = 255;
     private static final int ICON_ALPHA_DISABLED = 102;
 
-    public DimmableIconPreference(Context context, AttributeSet attrs, int defStyle) {
+    private final CharSequence mContentDescription;
+
+    public DimmableIconPreference(Context context, AttributeSet attrs, int defStyle,
+            @Nullable CharSequence contentDescription) {
         super(context, attrs, defStyle);
+        mContentDescription = contentDescription;
     }
 
-    public DimmableIconPreference(Context context, AttributeSet attrs) {
+    public DimmableIconPreference(Context context, AttributeSet attrs,
+            @Nullable CharSequence contentDescription) {
         super(context, attrs);
+        mContentDescription = contentDescription;
     }
 
-    public DimmableIconPreference(Context context) {
+    public DimmableIconPreference(Context context, @Nullable CharSequence contentDescription) {
         super(context);
+        mContentDescription = contentDescription;
     }
 
     private void dimIcon(boolean dimmed) {
@@ -59,5 +70,14 @@ public class DimmableIconPreference extends Preference {
     public void setEnabled(boolean enabled) {
         dimIcon(!enabled);
         super.setEnabled(enabled);
+    }
+
+    @Override
+    protected void onBindView(View view) {
+        super.onBindView(view);
+        if (!TextUtils.isEmpty(mContentDescription)) {
+            final TextView titleView = (TextView) view.findViewById(android.R.id.title);
+            titleView.setContentDescription(mContentDescription);
+        }
     }
 }
