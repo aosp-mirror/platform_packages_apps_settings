@@ -38,31 +38,16 @@ public class EnableWifiTether extends Activity {
         super.onCreate(icicle);
         mProvisionApp = getResources().getStringArray(
                 com.android.internal.R.array.config_mobile_hotspot_provision_app);
-        setContentView(R.layout.settings_main_dashboard);
-        startProvisioningIfNecessary();
+        startProvisioning();
     }
 
-    private static boolean isProvisioningNeeded(String[] provisionApp) {
-        if (SystemProperties.getBoolean("net.tethering.noprovisioning", false)
-                || provisionApp == null) {
-            return false;
-        }
-        return (provisionApp.length == 2);
-    }
-
-    private void startProvisioningIfNecessary() {
-
-        if (isProvisioningNeeded(mProvisionApp)) {
-            Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-            sendBroadcast(closeDialog);
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClassName(mProvisionApp[0], mProvisionApp[1]);
-            intent.putExtra(TETHER_CHOICE, WIFI_TETHERING);
-            startActivityForResult(intent, PROVISION_REQUEST);
-        } else {
-            enableTethering();
-            finish();
-        }
+    private void startProvisioning() {
+        Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        sendBroadcast(closeDialog);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClassName(mProvisionApp[0], mProvisionApp[1]);
+        intent.putExtra(TETHER_CHOICE, WIFI_TETHERING);
+        startActivityForResult(intent, PROVISION_REQUEST);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -72,8 +57,8 @@ public class EnableWifiTether extends Activity {
             if (resultCode == Activity.RESULT_OK) {
                 enableTethering();
             }
+            finish();
         }
-        finish();
     }
 
     private void enableTethering() {
