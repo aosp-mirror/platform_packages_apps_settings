@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Tenganisha?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Hii ikakata muunganisho wako na:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Huna ruhusa ya kubadilisha mipangilio ya Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> inaonekana kwenye vifaa vya karibu wakati Mipangilio ya Bluetooth ipo wazi."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> inaonekana kwenye vifaa vya karibu mipangilio ya Bluetooth ikiwa imefunguliwa."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Ungependa kuondoa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Inasambaza"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Wasifu ulemazwe?"</string>
@@ -292,7 +292,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Simamia Wi-Fi, Bluetooth, hali ya ndegeni, mitandao ya simu za mkononi na VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Data ya simu za mkononi"</string>
     <string name="calls_title" msgid="3544471959217176768">"Simu zilizopigwa"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"Ujumbe wa SMS"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"Ujumbe wa SMS"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Ruhusu matumizi ya data kwenye mtandao wa simu"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Ruhusu data kwenye mitandao mingine"</string>
     <string name="roaming" msgid="3596055926335478572">"Data nje ya mtandao wa kawaida"</string>
@@ -401,8 +401,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Wastani hadi usalama wa juu"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Nenosiri"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Usalama wa juu"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Vipengele vya ulinzi wa kifaa havitaendelea kufanya kazi."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Imelemazwa na msimamizi, sera ya usimbaji fiche, au hifadhi ya stakabadhi"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Hamna"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Telezesha kidole"</string>
@@ -414,8 +413,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Ondoa umbo la kufungua"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Ondoa PIN ufunguaji"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Ondoa nenosiri la kufungua"</string>
-    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
-    <skip />
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Ondoa kufunga skrini"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Badilisha umbo la kufungua"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Badilisha PIN ya kufungua"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Badilisha nenosiri la kufungua"</string>
@@ -858,6 +856,8 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Chagua SIM unayopendelea kwa data ya simu za mkononi."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"Je, ungependa kubadilisha SIM ya data?"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"Je, ungependa kutumia <xliff:g id="NEW_SIM">%1$s</xliff:g> badala ya <xliff:g id="OLD_SIM">%2$s</xliff:g> kwa data ya vifaa vya mkononi?"</string>
+    <string name="sim_preferred_title" msgid="5567909634636045268">"Badilisha SIM kadi pendwa?"</string>
+    <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ni SIM pekee katika kifaa chako. Je, unataka kutumia SIM hii kwa data ya simu za mkononi, kupiga simu, na ujumbe wa SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Msimbo wa PIN ya SIM usio sahihi sasa lazima uwasiliane na mtoa huduma wako ili ufungue kifaa chako."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Msimbo wa PIN ya SIM usio sahihi, umesalia na majaribio <xliff:g id="NUMBER">%d</xliff:g> kabla ulazimike kuwasiliana na mtoa huduma wako ili ufungue kifaa chako."</item>
@@ -873,7 +873,7 @@
     <string name="fcc_equipment_id" msgid="149114368246356737">"Kitambulisho cha Kifaa"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Toleo la Baseband"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Toleo la kiini"</string>
-    <string name="build_number" msgid="3075795840572241758">"Nambari ya ujenzi"</string>
+    <string name="build_number" msgid="3075795840572241758">"Nambari ya muundo"</string>
     <string name="selinux_status" msgid="6212165375172061672">"Hali ya SELinux"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Haipatikani"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Hali"</string>

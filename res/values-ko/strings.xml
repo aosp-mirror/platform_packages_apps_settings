@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"연결을 해제하시겠습니까?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;와(과) 연결이 끊어집니다.&lt;br&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"블루투스 설정을 변경할 권한이 없습니다."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"블루투스 설정이 열려 있는 동안 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 주변의 기기에 표시됩니다."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"블루투스 설정이 열려 있는 동안 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 주변의 기기에 표시됩니다."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>을(를) 연결 해제하시겠습니까?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"브로드캐스팅"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"프로필을 사용 중지하시겠습니까?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Wi‑Fi, 블루투스, 비행기 모드, 이동통신망 및 VPN을 관리합니다."</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"셀룰러 데이터"</string>
     <string name="calls_title" msgid="3544471959217176768">"통화"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"SMS 메시지"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"SMS 메시지"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"이동통신망 데이터 사용 허용"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"로밍 중 데이터 사용 허용"</string>
     <string name="roaming" msgid="3596055926335478572">"데이터 로밍"</string>
@@ -399,8 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"중상급 보안"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"비밀번호"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"상급 보안"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"기기 보호 기능이 더 이상 작동하지 않습니다."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"관리자, 암호화 정책 또는 자격증명 저장소로 인해 사용 중지됨"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"없음"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"스와이프"</string>
@@ -412,8 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"잠금해제 패턴 삭제"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"잠금해제 PIN 삭제"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"잠금해제 비밀번호 삭제"</string>
-    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
-    <skip />
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"화면 잠금 삭제"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"잠금해제 패턴 변경"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"잠금해제 PIN 변경"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"잠금해제 비밀번호 변경"</string>
@@ -866,6 +864,10 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"셀룰러 데이터에 사용할 SIM을 선택하세요."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"데이터 SIM을 변경하시겠습니까?"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"모바일 네트워크 연결에 <xliff:g id="NEW_SIM">%1$s</xliff:g> 대신 <xliff:g id="OLD_SIM">%2$s</xliff:g>을(를) 사용하시겠습니까?"</string>
+    <!-- no translation found for sim_preferred_title (5567909634636045268) -->
+    <skip />
+    <!-- no translation found for sim_preferred_message (301251431163650167) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM PIN 코드가 잘못되었습니다. 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER">%d</xliff:g>회 이상 실패할 경우 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</item>

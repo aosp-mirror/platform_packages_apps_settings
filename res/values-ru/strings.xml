@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Отключиться?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Произойдет разъединение с устройством &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"У вас нет разрешения на смену настроек Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"Устройства поблизости могут обнаружить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, пока открыты настройки Bluetooth."</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Устройства поблизости могут обнаружить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, пока открыты настройки Bluetooth."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Отключить <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Передача данных"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Отключить профиль?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Настройки Wi‑Fi, Bluetooth, режима полета, мобильных сетей и VPN"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Мобильные данные"</string>
     <string name="calls_title" msgid="3544471959217176768">"Телефонные звонки"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"SMS"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"SMS"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Разрешить использовать мобильные данные"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Передавать данные в роуминге"</string>
     <string name="roaming" msgid="3596055926335478572">"Интернет-роуминг"</string>
@@ -399,8 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Уровень безопасности от среднего до высокого"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Пароль"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Высокий уровень защиты"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Защита устройства будет отключена."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Запрещено администратором, политикой шифрования или хранилищем учетных данных"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Нет"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Провести по экрану"</string>
@@ -412,8 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Удалить графический ключ разблокировки"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Удалить ПИН-код разблокировки"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Удалить пароль разблокировки"</string>
-    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
-    <skip />
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Отключить блокировку экрана"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Изменить графический ключ разблокировки"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Изменить ПИН-код разблокировки"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Изменить пароль разблокировки"</string>
@@ -866,6 +864,10 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Выберите SIM-карту для мобильных данных."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"SIM-карта для передачи данных"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"Использовать для передачи данных по мобильной сети эту SIM-карту: <xliff:g id="NEW_SIM">%1$s</xliff:g> (вместо <xliff:g id="OLD_SIM">%2$s</xliff:g>)?"</string>
+    <!-- no translation found for sim_preferred_title (5567909634636045268) -->
+    <skip />
+    <!-- no translation found for sim_preferred_message (301251431163650167) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Неверный PIN-код. Обратитесь к оператору связи, чтобы разблокировать SIM-карту."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Неверный PIN-код. Осталось попыток: <xliff:g id="NUMBER">%d</xliff:g>. После этого SIM-карта будет заблокирована и вам придется обратиться к оператору связи."</item>
@@ -1501,7 +1503,7 @@
     <string name="accessibility_services_title" msgid="2592221829284342237">"Службы"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"Система"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"Экран"</string>
-    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Титры"</string>
+    <string name="accessibility_captioning_title" msgid="7589266662024836291">"Субтитры"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"Жесты для увеличения"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"Эта функция позволяет увеличивать и уменьшать изображение, трижды нажав на экран.\n\nПри увеличенном масштабе можно:\n"<ul><li>"панорамировать – проведите пальцами по экрану;"</li>\n<li>"изменять масштаб – сведите или разведите пальцы."</li></ul>\n\n"Чтобы временно увеличить изображение под пальцем, трижды нажмите на экран и удерживайте его. Проведя пальцем, вы можете посмотреть на другие области экрана. Чтобы вернуть экран в прежнее состояние, уберите палец.\n\nПримечание. Тройным нажатием увеличиваются все области, кроме клавиатуры и панели навигации."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"Быстрое включение"</string>

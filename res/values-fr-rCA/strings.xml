@@ -130,7 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Voulez-vous vraiment vous déconnecter?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Cette opération va mettre fin à votre connexion avec :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Vous n\'êtes pas autorisé à modifier les paramètres Bluetooth."</string>
-    <string name="bluetooth_is_visible_message" msgid="3956514990287788968">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> est visible aux app prox. si param. Bluetooth ouverts"</string>
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> est visible dans les appareils à proximité si les paramètres Bluetooth sont ouverts."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Déconnecter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Diffusion"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Désactiver le profil?"</string>
@@ -290,7 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Gérer le Wi‑Fi, le Bluetooth, le mode Avion, les réseaux cellulaires et les RPV"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Données cellulaires"</string>
     <string name="calls_title" msgid="3544471959217176768">"Appels"</string>
-    <string name="sms_messages_title" msgid="3188611825992624879">"Messages texte"</string>
+    <string name="sms_messages_title" msgid="1778636286080572535">"Messages texte"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Autoriser l\'utilisation des données sur le réseau cellulaire"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Autor. util. données en itin."</string>
     <string name="roaming" msgid="3596055926335478572">"Itinérance des données"</string>
@@ -399,8 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Sécurité moyenne à élevée"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Mot de passe"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Sécurité élevée"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Les fonctions de protection de l\'appareil ne fonctionneront plus."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Désactivé par admin., règles chiffrement ou stockage des identifiants"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Aucun"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Balayer l\'écran"</string>
@@ -412,8 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Supprimer le schéma de déverrouillage"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Supprimer le NIP de déverrouillage"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Supprimer le mot de passe de déverrouillage"</string>
-    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
-    <skip />
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Retirer le verrouillage de l\'écran"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Modifier le schéma"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Modifier le NIP de déverrouillage"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Modifier le mot de passe de déverrouillage"</string>
@@ -866,6 +864,10 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Sélectionnez la carte SIM que vous préférez pour les données cellulaires."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"Changer de SIM pour les données?"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"Utiliser <xliff:g id="NEW_SIM">%1$s</xliff:g> au lieu de <xliff:g id="OLD_SIM">%2$s</xliff:g> pour les données cellulaires?"</string>
+    <!-- no translation found for sim_preferred_title (5567909634636045268) -->
+    <skip />
+    <!-- no translation found for sim_preferred_message (301251431163650167) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"NIP de carte SIM incorrect. Vous devez maintenant communiquer avec votre fournisseur de services pour déverrouiller votre appareil."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"NIP de carte SIM incorrect. Il vous reste <xliff:g id="NUMBER">%d</xliff:g> tentative. Après cela, vous devrez communiquer avec votre fournisseur de services pour déverrouiller votre appareil."</item>
