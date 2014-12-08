@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Vai pārtraukt savienojumu?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Tiks pārtraukts savienojums ar:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Jums nav atļaujas mainīt Bluetooth iestatījumus."</string>
-    <!-- no translation found for bluetooth_is_visible_message (6222396240776971862) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Kamēr Bluetooth iestatījumi atvērti, ierīce <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ir redzama citām ierīcēm tuvumā."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Vai atvienot <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Apraidīšana"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Vai atspējot profilu?"</string>
@@ -291,8 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Wi-Fi, Bluetooth, lidojuma režīma, mobilo tīklu un VPN pārvaldība"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Mobilie dati"</string>
     <string name="calls_title" msgid="3544471959217176768">"Zvani"</string>
-    <!-- no translation found for sms_messages_title (1778636286080572535) -->
-    <skip />
+    <string name="sms_messages_title" msgid="1778636286080572535">"Īsziņas"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Atļaut datu izmantošanu mobilajā tīklā"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Datu lietojums viesabonēšanā"</string>
     <string name="roaming" msgid="3596055926335478572">"Datu viesabonēšana"</string>
@@ -401,8 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Vidējs līdz augsts drošības līmenis"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Parole"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Augsts drošības līmenis"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Ierīces aizsardzības funkcijas vairs nedarbosies."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Atspēj. admin., šifr. polit. vai akred. datu krāt."</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nav"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Vilkt"</string>
@@ -414,8 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Noņemt atbloķēšanas kombināciju"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Noņemt atbloķēšanas PIN"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Noņemt atbloķēšanas paroli"</string>
-    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
-    <skip />
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Noņemt ekrāna bloķēšanu"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Atbloķēšanas kombinācijas maiņa"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Mainīt atbloķēšanas PIN"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Mainīt atbloķēšanas paroli"</string>
@@ -866,6 +862,10 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Izvēlieties SIM karti, kuru izmantot mobilajiem datiem."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"Vai mainīt datu SIM karti?"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"Vai mobilajiem datiem lietot <xliff:g id="NEW_SIM">%1$s</xliff:g>, nevis <xliff:g id="OLD_SIM">%2$s</xliff:g>?"</string>
+    <!-- no translation found for sim_preferred_title (5567909634636045268) -->
+    <skip />
+    <!-- no translation found for sim_preferred_message (301251431163650167) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Nepareizs SIM kartes PIN kods. Lai atbloķētu ierīci, sazinieties ar mobilo sakaru operatoru."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Nepareizs SIM kartes PIN kods. Varat mēģināt vēl <xliff:g id="NUMBER">%d</xliff:g> reizi. Kļūdas gadījumā būs jāsazinās ar mobilo sakaru operatoru, lai tas atbloķētu jūsu ierīci."</item>
@@ -2338,7 +2338,8 @@
     <string name="sim_notification_title" msgid="6272913297433198340">"SIM kartes nomainītas."</string>
     <string name="sim_notification_summary" msgid="5024470200658902406">"Pieskarieties, lai iestatītu"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Vēlamā SIM karte šai ierīcei:"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Vaicāt katru reizi"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7941299533514115976) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Nepieciešams veikt atlasi."</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Iestatījumi"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Iestatījumi"</string>

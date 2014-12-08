@@ -181,7 +181,7 @@
     <string name="date_and_time" msgid="9062980487860757694">"Fecha y hora"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Seleccionar zona horaria"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Vista previa:"</string>
-    <string name="display_font_size_label" msgid="8941851418397475389">"Tamaño de fuente:"</string>
+    <string name="display_font_size_label" msgid="8941851418397475389">"Tamaño de la fuente:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"Enviar <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
@@ -340,7 +340,7 @@
     <string name="show_user_info_on_lockscreen_label" msgid="8408914624925608365">"Mostrar información de usuario en la pantalla de bloqueo"</string>
     <string name="user_info_settings_title" msgid="1195015434996724736">"Información del usuario"</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="2741208907263877990">"Mostrar información de perfil en pantalla bloqueo"</string>
-    <string name="profile_info_settings_title" msgid="3518603215935346604">"Información perfil"</string>
+    <string name="profile_info_settings_title" msgid="3518603215935346604">"Información de perfil"</string>
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Cuentas"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Ubicación"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Cuentas"</string>
@@ -833,8 +833,8 @@
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Levantar el dispositivo para activarlo"</string>
     <string name="doze_title" msgid="2259176504273878294">"Pantalla ambiente"</string>
     <string name="doze_summary" msgid="7128970177894383698">"Activar pantalla al coger el dispositivo o recibir notificaciones"</string>
-    <string name="title_font_size" msgid="4405544325522105222">"Tamaño de fuente"</string>
-    <string name="dialog_title_font_size" msgid="2231507851258955038">"Tamaño de fuente"</string>
+    <string name="title_font_size" msgid="4405544325522105222">"Tamaño de la fuente"</string>
+    <string name="dialog_title_font_size" msgid="2231507851258955038">"Tamaño de la fuente"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ajustes de bloqueo tarjeta SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Bloqueo de tarjeta SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Bloqueo de tarjeta SIM"</string>
@@ -862,6 +862,8 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Selecciona la SIM que prefieras usar para datos móviles."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"¿Cambiar SIM de datos?"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"¿Usar <xliff:g id="NEW_SIM">%1$s</xliff:g> en lugar de <xliff:g id="OLD_SIM">%2$s</xliff:g> para datos móviles?"</string>
+    <string name="sim_preferred_title" msgid="5567909634636045268">"¿Actualizar tarjeta SIM preferida?"</string>
+    <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> es la única tarjeta SIM del dispositivo. ¿Quieres utilizar esta tarjeta SIM para datos móviles, llamadas y mensajes SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Código PIN de la tarjeta SIM incorrecto. Debes ponerte en contacto con tu operador para desbloquear el dispositivo."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Código PIN de la tarjeta SIM incorrecto. Queda <xliff:g id="NUMBER">%d</xliff:g> intento para tener que ponerte en contacto con tu operador para desbloquear el dispositivo."</item>
@@ -1704,8 +1706,8 @@
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"En primer plano"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"En caché"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Actualmente, la memoria del dispositivo es <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"Uso de RAM medio"</string>
-    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"Uso de RAM máximo"</string>
+    <string name="process_stats_avg_ram_use" msgid="6972943528929394396">"Uso medio de RAM"</string>
+    <string name="process_stats_max_ram_use" msgid="3273876448926689261">"Uso máximo de RAM"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Duración"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Servicios"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Duración"</string>
@@ -2030,7 +2032,7 @@
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de datos"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"Uso datos de aplicación"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"El uso de datos determinado por el operador puede ser diferente al recuento del dispositivo."</string>
-    <string name="data_usage_app" msgid="4970478397515423303">"Uso de la aplicación"</string>
+    <string name="data_usage_app" msgid="4970478397515423303">"Uso de las aplicaciones"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"INFORMACIÓN DE LA APLICACIÓN"</string>
     <string name="data_usage_cellular_data" msgid="4859424346276043677">"Datos móviles"</string>
     <string name="data_usage_data_limit" msgid="1193930999713192703">"Establecer límite de datos"</string>
@@ -2191,7 +2193,7 @@
     <string name="user_add_profile_item_summary" msgid="5931663986889138941">"Desde tu cuenta, puedes restringir el acceso a las aplicaciones y al contenido"</string>
     <string name="user_add_user_item_title" msgid="8212199632466198969">"Usuario"</string>
     <string name="user_add_profile_item_title" msgid="8353515490730363621">"Perfil limitado"</string>
-    <string name="user_add_user_title" msgid="2108112641783146007">"¿Añadir usuario nuevo?"</string>
+    <string name="user_add_user_title" msgid="2108112641783146007">"¿Añadir nuevo usuario?"</string>
     <string name="user_add_user_message_long" msgid="718192651887726259">"Puedes crear usuarios adicionales para compartir este dispositivo con otros usuarios. Cada usuario tiene su propio espacio y puede personalizarlo con sus aplicaciones, fondos de pantalla, etc. Los usuarios también pueden modificar opciones de configuración del dispositivo, como la conexión Wi‑Fi, que afectan a todos los usuarios.\n\nAl añadir un usuario nuevo, este debe configurar su espacio.\n\nCualquier usuario puede actualizar las aplicaciones del resto de usuarios."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Al añadir un usuario nuevo, este debe configurar su espacio.\n\nCualquier usuario puede actualizar las aplicaciones del resto de usuarios."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"¿Configurar usuario ahora?"</string>
@@ -2238,7 +2240,7 @@
     <string name="global_change_warning" product="tablet" msgid="8045013389464294039">"Esta configuración afecta a todos los usuarios de este tablet."</string>
     <string name="global_change_warning" product="default" msgid="2461264421590324675">"Esta configuración afecta a todos los usuarios de este teléfono."</string>
     <string name="global_locale_change_title" msgid="5956281361384221451">"Cambiar idioma"</string>
-    <string name="global_font_change_title" msgid="1887126466191012035">"Cambiar tamaño de fuente"</string>
+    <string name="global_font_change_title" msgid="1887126466191012035">"Cambiar tamaño de la fuente"</string>
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Tocar y pagar"</string>
     <string name="google_wallet" msgid="9122936252378589227">"Google Wallet"</string>
     <string name="nfc_payment_no_apps" msgid="2481080809791416010">"Paga con solo dar un toque"</string>
@@ -2334,7 +2336,8 @@
     <string name="sim_notification_title" msgid="6272913297433198340">"Tarjetas SIM cambiadas."</string>
     <string name="sim_notification_summary" msgid="5024470200658902406">"Toca para configurar"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"SIM preferida para"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Preguntar siempre"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7941299533514115976) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Es necesario seleccionar una opción"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Ajustes"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Ajustes"</string>
