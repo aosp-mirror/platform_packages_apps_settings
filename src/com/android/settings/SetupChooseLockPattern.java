@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -45,6 +46,9 @@ public class SetupChooseLockPattern extends ChooseLockPattern
         return intent;
     }
 
+    private SetupWizardNavBar mNavigationBar;
+    private SetupChooseLockPatternFragment mFragment;
+
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return SetupChooseLockPatternFragment.class.getName().equals(fragmentName);
@@ -63,6 +67,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern
 
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
+        mNavigationBar = bar;
         SetupWizardUtils.setImmersiveMode(this, bar);
     }
 
@@ -73,9 +78,22 @@ public class SetupChooseLockPattern extends ChooseLockPattern
 
     @Override
     public void onNavigateNext() {
+        if (mFragment != null) {
+            mFragment.handleRightButton();
+        }
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof ChooseLockPatternFragment) {
+            mFragment = (SetupChooseLockPatternFragment) fragment;
+        }
     }
 
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
+
+        private Button mRetryButton;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +106,8 @@ public class SetupChooseLockPattern extends ChooseLockPattern
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
+            mRetryButton = (Button) view.findViewById(R.id.retryButton);
+            mRetryButton.setOnClickListener(this);
             super.onViewCreated(view, savedInstanceState);
             SetupWizardUtils.setIllustration(getActivity(),
                     R.drawable.setup_illustration_lock_screen);
@@ -99,6 +119,34 @@ public class SetupChooseLockPattern extends ChooseLockPattern
             Intent intent = SetupRedactionInterstitial.createStartIntent(context);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v == mRetryButton) {
+                handleLeftButton();
+            } else {
+                super.onClick(v);
+            }
+        }
+
+        @Override
+        protected void setRightButtonEnabled(boolean enabled) {
+            SetupChooseLockPattern activity = (SetupChooseLockPattern) getActivity();
+            activity.mNavigationBar.getNextButton().setEnabled(enabled);
+        }
+
+        @Override
+        protected void setRightButtonText(int text) {
+            SetupChooseLockPattern activity = (SetupChooseLockPattern) getActivity();
+            activity.mNavigationBar.getNextButton().setText(text);
+        }
+
+        @Override
+        protected void updateStage(Stage stage) {
+            super.updateStage(stage);
+            // Only enable the button for retry
+            mRetryButton.setEnabled(stage == Stage.FirstChoiceValid);
         }
     }
 }
