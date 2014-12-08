@@ -19,6 +19,7 @@ package com.android.settings.location;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.os.UserHandle;
 import com.android.internal.annotations.Immutable;
 import com.android.internal.util.Preconditions;
 
@@ -53,17 +54,23 @@ class InjectedSetting {
     public final int iconId;
 
     /**
+     * The user/profile associated with this setting (e.g. managed profile)
+     */
+    public final UserHandle mUserHandle;
+
+    /**
      * The activity to launch to allow the user to modify the settings value. Assumed to be in the
      * {@link #packageName} package.
      */
     public final String settingsActivity;
 
     private InjectedSetting(String packageName, String className,
-            String title, int iconId, String settingsActivity) {
+            String title, int iconId, UserHandle userHandle, String settingsActivity) {
         this.packageName = Preconditions.checkNotNull(packageName, "packageName");
         this.className = Preconditions.checkNotNull(className, "className");
         this.title = Preconditions.checkNotNull(title, "title");
         this.iconId = iconId;
+        this.mUserHandle = userHandle;
         this.settingsActivity = Preconditions.checkNotNull(settingsActivity);
     }
 
@@ -71,7 +78,7 @@ class InjectedSetting {
      * Returns a new instance, or null.
      */
     public static InjectedSetting newInstance(String packageName, String className,
-            String title, int iconId, String settingsActivity) {
+            String title, int iconId, UserHandle userHandle, String settingsActivity) {
         if (packageName == null || className == null ||
                 TextUtils.isEmpty(title) || TextUtils.isEmpty(settingsActivity)) {
             if (Log.isLoggable(SettingsInjector.TAG, Log.WARN)) {
@@ -81,7 +88,8 @@ class InjectedSetting {
             }
             return null;
         }
-        return new InjectedSetting(packageName, className, title, iconId, settingsActivity);
+        return new InjectedSetting(packageName, className, title, iconId, userHandle,
+                settingsActivity);
     }
 
     @Override
@@ -91,6 +99,7 @@ class InjectedSetting {
                 ", mClassName='" + className + '\'' +
                 ", label=" + title +
                 ", iconId=" + iconId +
+                ", userId=" + mUserHandle.getIdentifier() +
                 ", settingsActivity='" + settingsActivity + '\'' +
                 '}';
     }
@@ -113,6 +122,7 @@ class InjectedSetting {
 
         return packageName.equals(that.packageName) && className.equals(that.className)
                 && title.equals(that.title) && iconId == that.iconId
+                && mUserHandle.equals(that.mUserHandle)
                 && settingsActivity.equals(that.settingsActivity);
     }
 
@@ -122,6 +132,7 @@ class InjectedSetting {
         result = 31 * result + className.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + iconId;
+        result = 31 * result + mUserHandle.hashCode();
         result = 31 * result + settingsActivity.hashCode();
         return result;
     }

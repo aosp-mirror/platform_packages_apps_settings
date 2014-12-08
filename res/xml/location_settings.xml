@@ -26,6 +26,21 @@
             settings:keywords="@string/keywords_location_mode"
             android:summary="@string/location_mode_location_off_title" />
 
+        <!-- This preference category gets removed if there is no managed profile -->
+        <PreferenceCategory
+            android:key="managed_profile_location_category"
+            android:title="@string/managed_profile_location_category">
+
+            <Preference
+                android:key="managed_profile_location_switch"
+                android:title="@string/managed_profile_location_switch_title"
+                android:summary="@string/managed_profile_location_switch_lockdown"
+                android:persistent="false"
+                android:enabled="false"
+                android:selectable="false" />
+
+        </PreferenceCategory>
+
         <PreferenceCategory
             android:key="recent_location_requests"
             android:title="@string/location_category_recent_location_requests" />
