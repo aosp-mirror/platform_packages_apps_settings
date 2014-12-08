@@ -18,11 +18,13 @@ package com.android.settings;
 
 import com.android.setupwizard.navigationbar.SetupWizardNavBar;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.util.MutableBoolean;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +92,27 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
             SetupWizardUtils.setIllustration(getActivity(),
                     R.drawable.setup_illustration_lock_screen);
             SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
+        }
+
+        /***
+         * Disables preferences that are less secure than required quality and shows only secure
+         * screen lock options here.
+         *
+         * @param quality the requested quality.
+         * @param allowBiometric whether to allow biometic screen lock
+         */
+        @Override
+        protected void disableUnusablePreferences(final int quality,
+                MutableBoolean allowBiometric) {
+            // At this part of the flow, the user has already indicated they want to add a pin,
+            // pattern or password, so don't show "None" or "Slide". We disable them here and set
+            // the HIDE_DISABLED flag to true to hide them. This only happens for setup wizard.
+            // We do the following max check here since the device may already have a Device Admin
+            // installed with a policy we need to honor.
+            final int newQuality = Math.max(quality,
+                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+            super.disableUnusablePreferencesImpl(newQuality, allowBiometric,
+                    true /* hideDisabled */);
         }
 
         @Override
