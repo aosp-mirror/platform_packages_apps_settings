@@ -26,10 +26,26 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import java.util.Comparator;
+
 public class UserPreference extends Preference {
 
     public static final int USERID_UNKNOWN = -10;
     public static final int USERID_GUEST_DEFAULTS = -11;
+    public static final Comparator<UserPreference> SERIAL_NUMBER_COMPARATOR =
+            new Comparator<UserPreference>() {
+                @Override
+                public int compare(UserPreference p1, UserPreference p2) {
+                    int sn1 = p1.getSerialNumber();
+                    int sn2 = p2.getSerialNumber();
+                    if (sn1 < sn2) {
+                        return -1;
+                    } else if (sn1 > sn2) {
+                        return 1;
+                    }
+                    return 0;
+                }
+            };
 
     private OnClickListener mDeleteClickListener;
     private OnClickListener mSettingsClickListener;
@@ -104,13 +120,5 @@ public class UserPreference extends Preference {
 
     public int getUserId() {
         return mUserId;
-    }
-
-    public int compareTo(Preference another) {
-        if (another instanceof UserPreference) {
-            return getSerialNumber() > ((UserPreference) another).getSerialNumber() ? 1 : -1;
-        } else {
-            return 1;
-        }
     }
 }

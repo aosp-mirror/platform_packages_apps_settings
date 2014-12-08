@@ -44,6 +44,7 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.util.Log;
@@ -67,6 +68,7 @@ import com.android.settings.Utils;
 import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -123,13 +125,14 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_SUMMARY = "summary";
 
     private PreferenceGroup mUserListCategory;
-    private Preference mMePreference;
+    private UserPreference mMePreference;
     private SelectableEditTextPreference mNicknamePreference;
     private Preference mAddUser;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
     private boolean mEnabled = true;
+    private boolean mCanAddUser = true;
     private boolean mCanAddRestrictedProfile = true;
 
     private final Object mUserLock = new Object();
@@ -212,17 +215,21 @@ public class UserSettings extends SettingsPreferenceFragment
             mMePreference.setSummary(R.string.user_owner);
         }
         mAddUser = findPreference(KEY_ADD_USER);
+        DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        // No restricted profiles for tablets with a device owner, or phones.
+        if (dpm.getDeviceOwner() != null || Utils.isVoiceCapable(context)) {
+            mCanAddRestrictedProfile = false;
+        }
+        // Determine if add user/profile button should be visible
         if (!mIsOwner || UserManager.getMaxSupportedUsers() < 2
                 || !UserManager.supportsMultipleUsers()
                 || mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
-            removePreference(KEY_ADD_USER);
+            mCanAddUser = false;
         } else {
             mAddUser.setOnPreferenceClickListener(this);
-            DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
-                    Context.DEVICE_POLICY_SERVICE);
-            // No restricted profiles for tablets with a device owner, or phones.
-            if (dpm.getDeviceOwner() != null || Utils.isVoiceCapable(context)) {
-                mCanAddRestrictedProfile = false;
+            // change label to only mention user, if restricted profiles are not supported
+            if (!mCanAddRestrictedProfile) {
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
         }
@@ -712,18 +719,17 @@ public class UserSettings extends SettingsPreferenceFragment
         List<UserInfo> users = mUserManager.getUsers(true);
         final Context context = getActivity();
 
-        mUserListCategory.removeAll();
-        mUserListCategory.setOrderingAsAdded(false);
-        mUserListCategory.addPreference(mMePreference);
-
         final boolean voiceCapable = Utils.isVoiceCapable(context);
-        final ArrayList<Integer> missingIcons = new ArrayList<Integer>();
+        final ArrayList<Integer> missingIcons = new ArrayList<>();
+        final ArrayList<UserPreference> userPreferences = new ArrayList<>();
+        userPreferences.add(mMePreference);
+
         for (UserInfo user : users) {
             if (user.isManagedProfile()) {
                 // Managed profiles appear under Accounts Settings instead
                 continue;
             }
-            Preference pref;
+            UserPreference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
             } else if (user.isGuest()) {
@@ -746,7 +752,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         showDelete ? this : null);
                 pref.setOnPreferenceClickListener(this);
                 pref.setKey("id=" + user.id);
-                mUserListCategory.addPreference(pref);
+                userPreferences.add(pref);
                 if (user.id == UserHandle.USER_OWNER) {
                     pref.setSummary(R.string.user_owner);
                 }
@@ -777,14 +783,66 @@ public class UserSettings extends SettingsPreferenceFragment
 
         // Add a temporary entry for the user being created
         if (mAddingUser) {
-            Preference pref = new UserPreference(getActivity(), null, UserPreference.USERID_UNKNOWN,
-                    null, null);
+            UserPreference pref = new UserPreference(getActivity(), null,
+                    UserPreference.USERID_UNKNOWN, null, null);
             pref.setEnabled(false);
             pref.setTitle(R.string.user_new_user_name);
             pref.setIcon(getEncircledDefaultIcon());
-            mUserListCategory.addPreference(pref);
+            userPreferences.add(pref);
         }
 
+        if (shouldShowGuestUserPreference(users)) {
+            // Add a virtual Guest user for guest defaults
+            UserPreference pref = new UserPreference(getActivity(), null,
+                    UserPreference.USERID_GUEST_DEFAULTS,
+                    mIsOwner && voiceCapable? this : null /* settings icon handler */,
+                    null /* delete icon handler */);
+            pref.setTitle(R.string.user_guest);
+            pref.setIcon(getEncircledDefaultIcon());
+            pref.setOnPreferenceClickListener(this);
+            userPreferences.add(pref);
+        }
+
+        // Sort list of users by serialNum
+        Collections.sort(userPreferences, UserPreference.SERIAL_NUMBER_COMPARATOR);
+
+        getActivity().invalidateOptionsMenu();
+
+        // Load the icons
+        if (missingIcons.size() > 0) {
+            loadIconsAsync(missingIcons);
+        }
+
+        PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.removeAll();
+
+        // If profiles are supported, userPreferences will be added to the category labeled
+        // "User & Profiles", otherwise the category is skipped and elements are added directly
+        // to preferenceScreen
+        PreferenceGroup groupToAddUsers;
+        if (mCanAddRestrictedProfile) {
+            mUserListCategory.removeAll();
+            mUserListCategory.setOrder(Preference.DEFAULT_ORDER);
+            preferenceScreen.addPreference(mUserListCategory);
+            groupToAddUsers = mUserListCategory;
+        } else {
+            groupToAddUsers = preferenceScreen;
+        }
+        for (UserPreference userPreference : userPreferences) {
+            userPreference.setOrder(Preference.DEFAULT_ORDER);
+            groupToAddUsers.addPreference(userPreference);
+        }
+
+        // Append Add user to the end of the list
+        if (mCanAddUser) {
+            boolean moreUsers = mUserManager.canAddMoreUsers();
+            mAddUser.setEnabled(moreUsers);
+            mAddUser.setOrder(Preference.DEFAULT_ORDER);
+            preferenceScreen.addPreference(mAddUser);
+        }
+    }
+
+    private boolean shouldShowGuestUserPreference(List<UserInfo> users) {
         boolean showGuestPreference = !mIsGuest;
         // If user has DISALLOW_ADD_USER don't allow creating a guest either.
         if (showGuestPreference && mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER)) {
@@ -797,27 +855,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
             }
         }
-        if (showGuestPreference) {
-            // Add a virtual Guest user for guest defaults
-            Preference pref = new UserPreference(getActivity(), null,
-                    UserPreference.USERID_GUEST_DEFAULTS,
-                    mIsOwner && voiceCapable? this : null /* settings icon handler */,
-                    null /* delete icon handler */);
-            pref.setTitle(R.string.user_guest);
-            pref.setIcon(getEncircledDefaultIcon());
-            pref.setOnPreferenceClickListener(this);
-            mUserListCategory.addPreference(pref);
-        }
-
-        getActivity().invalidateOptionsMenu();
-
-        // Load the icons
-        if (missingIcons.size() > 0) {
-            loadIconsAsync(missingIcons);
-        }
-        boolean moreUsers = mUserManager.canAddMoreUsers();
-        mAddUser.setEnabled(moreUsers);
+        return showGuestPreference;
     }
+
 
     private void loadIconsAsync(List<Integer> missingIcons) {
         final Resources resources = getResources();
