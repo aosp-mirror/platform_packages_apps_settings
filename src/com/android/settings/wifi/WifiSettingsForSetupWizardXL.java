@@ -285,7 +285,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         default:  // DISCONNECTED, FAILED
             if (mScreenState != SCREEN_STATE_CONNECTED &&
                     mWifiSettings.getAccessPointsCount() > 0) {
-                showDisconnectedState(Summary.get(this, state));
+                showDisconnectedState(Summary.get(this, state, false /* isEphemeral */));
             }
             break;
         }

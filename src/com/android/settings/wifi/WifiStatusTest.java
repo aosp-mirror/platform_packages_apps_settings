@@ -17,12 +17,16 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
+
 import android.net.wifi.ScanResult;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.util.List;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,6 +34,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -40,6 +45,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -294,8 +300,9 @@ public class WifiStatusTest extends Activity {
 
     private void handleNetworkStateChanged(NetworkInfo networkInfo) {
         if (mWifiManager.isWifiEnabled()) {
-            String summary = Summary.get(this, mWifiManager.getConnectionInfo().getSSID(),
-                    networkInfo.getDetailedState());
+            WifiInfo info = mWifiManager.getConnectionInfo();
+            String summary = Summary.get(this, info.getSSID(), networkInfo.getDetailedState(),
+                    info.getNetworkId() == WifiConfiguration.INVALID_NETWORK_ID);
             mNetworkState.setText(summary);
         }
     }
