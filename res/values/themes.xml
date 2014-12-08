@@ -46,6 +46,11 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_dark</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+
+        <!-- LockPatternView colors -->
+        <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
+        <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_dark</item>
+        <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
     </style>
 
     <style name="SetupWizardTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
@@ -65,6 +70,11 @@
         <item name="wifi_signal_color">@color/setup_wizard_wifi_color_light</item>
         <item name="wifi_signal">@drawable/wifi_signal_teal</item>
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+
+        <!-- LockPatternView colors -->
+        <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
+        <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
+        <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
     </style>
 
     <style name="Animation.SetupWizard" parent="@android:style/Animation.Activity">
