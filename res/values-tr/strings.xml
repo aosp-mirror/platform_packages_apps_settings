@@ -130,8 +130,7 @@
     <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Bağlantı kesilsin mi?"</string>
     <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Şu cihazla bağlantınız kesilecek:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="1185354873716211496">"Bluetooth ayarlarını değiştirmek için izniniz yok."</string>
-    <!-- no translation found for bluetooth_is_visible_message (6222396240776971862) -->
-    <skip />
+    <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, Bluetooth ayarları açıkken yakındaki cihazlar tarafından görülebilir."</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> bağlantısı kesilsin mi?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Yayınlama"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Profil devre dışı bırakılsın mı?"</string>
@@ -291,8 +290,7 @@
     <string name="radio_controls_summary" msgid="2837395036275123133">"Kablosuz, Bluetooth, uçak modu, hücresel ağlar ve VPN\'leri yönetin"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Hücresel veri"</string>
     <string name="calls_title" msgid="3544471959217176768">"Çağrılar"</string>
-    <!-- no translation found for sms_messages_title (1778636286080572535) -->
-    <skip />
+    <string name="sms_messages_title" msgid="1778636286080572535">"SMS iletileri"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Hücresel ağ üzerinden veri kullanımına izin verin"</string>
     <string name="allow_data_usage_title" msgid="2238205944729213062">"Dolaşımda veri kullanımına izin ver"</string>
     <string name="roaming" msgid="3596055926335478572">"Veri dolaşımı"</string>
@@ -401,8 +399,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="907878650556383388">"Orta-yüksek düzey güvenlik"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Şifre"</string>
     <string name="unlock_set_unlock_password_summary" msgid="8856220848940929546">"Yüksek düzey güvenlik"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content (7070131836291098244) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content" msgid="7070131836291098244">"Cihaz koruma özellikleri artık çalışmayacak."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Devre dışı bırakıldı"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Hiçbiri"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Hızlıca kaydırın"</string>
@@ -414,8 +411,7 @@
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Kilit açma desenini kaldır"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Kilit açma PIN\'ini kaldır"</string>
     <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Kilit açma şifresini kaldır"</string>
-    <!-- no translation found for unlock_disable_lock_unknown_summary (8688498722601653961) -->
-    <skip />
+    <string name="unlock_disable_lock_unknown_summary" msgid="8688498722601653961">"Ekran kilidini kaldır"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Kilit açma desenini değiştir"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Kilit açma PIN\'ini değiştir"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Kilit açma şifresini değiştir"</string>
@@ -866,6 +862,10 @@
     <string name="sim_multi_sims_summary" msgid="7018740080801483990">"Hücresel veri için tercih ettiğiniz SIM\'i seçin."</string>
     <string name="sim_change_data_title" msgid="294357201685244532">"Veriler için SIM değiştirilsin mi?"</string>
     <string name="sim_change_data_message" msgid="1313940695939674633">"Cep telefonu verileri için <xliff:g id="OLD_SIM">%2$s</xliff:g> yerine <xliff:g id="NEW_SIM">%1$s</xliff:g> kullanılsın mı?"</string>
+    <!-- no translation found for sim_preferred_title (5567909634636045268) -->
+    <skip />
+    <!-- no translation found for sim_preferred_message (301251431163650167) -->
+    <skip />
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Yanlış SIM PIN kodu. Cihazınızın kilidini açmak için artık operatörünüzle bağlantı kurmanız gerekiyor."</string>
   <plurals name="wrong_pin_code">
     <item quantity="one" msgid="4840607930166101114">"Yanlış SIM PIN kodu. Cihazının kilidini açmak için operatörünüzle bağlantı kurmak zorunda kalmadan önce <xliff:g id="NUMBER">%d</xliff:g> deneme hakkınız kaldı."</item>
@@ -2338,7 +2338,8 @@
     <string name="sim_notification_title" msgid="6272913297433198340">"SIM kartlar değiştirildi."</string>
     <string name="sim_notification_summary" msgid="5024470200658902406">"Ayarlamak için dokunun"</string>
     <string name="sim_pref_divider" msgid="6778907671867621874">"Şunun için tercih edilen SIM:"</string>
-    <string name="sim_calls_ask_first_prefs_title" msgid="7328134172516945288">"Her zaman sor"</string>
+    <!-- no translation found for sim_calls_ask_first_prefs_title (7941299533514115976) -->
+    <skip />
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Seçim gerekiyor"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Ayarlar"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Ayarlar"</string>
