@@ -298,7 +298,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Do not display SIM lock for devices without an Icc card
         TelephonyManager tm = TelephonyManager.getDefault();
-        if (!mIsPrimary || !tm.hasIccCard()) {
+        if (!mIsPrimary || !isSimIccReady()) {
             root.removePreference(root.findPreference(KEY_SIM_LOCK));
         } else {
             // Disable SIM lock if there is no ready SIM card.
@@ -368,6 +368,24 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (pref != null) pref.setOnPreferenceChangeListener(this);
         }
         return root;
+    }
+
+    /* Return true if a there is a Slot that has Icc.
+     */
+    private boolean isSimIccReady() {
+        TelephonyManager tm = TelephonyManager.getDefault();
+        final List<SubscriptionInfo> subInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
+
+        if (subInfoList != null) {
+            for (SubscriptionInfo subInfo : subInfoList) {
+                if (tm.hasIccCard(subInfo.getSubscriptionId())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /* Return true if a SIM is ready for locking.
