@@ -221,9 +221,13 @@ public class IccLockSettings extends PreferenceActivity
                             ? context.getString(R.string.sim_editor_title, i + 1)
                             : subInfo.getDisplayName())));
             }
-        }
+            final SubscriptionInfo sir = Utils.findRecordBySlotId(getBaseContext(), 0);
 
-        mPhone = PhoneFactory.getDefaultPhone();
+            mPhone = (sir == null) ? null
+                : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
+        } else {
+            mPhone = PhoneFactory.getDefaultPhone();
+        }
         mRes = getResources();
         updatePreferences();
     }
