@@ -77,35 +77,13 @@ public class RecentLocationApps {
         }
     }
 
-    /**
-     * Subclass of {@link Preference} to intercept views and allow content description to be set on
-     * them for accessibility purposes.
-     */
-    private static class AccessiblePreference extends DimmableIconPreference {
-        public CharSequence mContentDescription;
-
-        public AccessiblePreference(Context context, CharSequence contentDescription) {
-            super(context);
-            mContentDescription = contentDescription;
-        }
-
-        @Override
-        protected void onBindView(View view) {
-            super.onBindView(view);
-            if (mContentDescription != null) {
-                final TextView titleView = (TextView) view.findViewById(android.R.id.title);
-                titleView.setContentDescription(mContentDescription);
-            }
-        }
-    }
-
-    private AccessiblePreference createRecentLocationEntry(
+    private DimmableIconPreference createRecentLocationEntry(
             Drawable icon,
             CharSequence label,
             boolean isHighBattery,
             CharSequence contentDescription,
             Preference.OnPreferenceClickListener listener) {
-        AccessiblePreference pref = new AccessiblePreference(mActivity, contentDescription);
+        DimmableIconPreference pref = new DimmableIconPreference(mActivity, contentDescription);
         pref.setIcon(icon);
         pref.setTitle(label);
         if (isHighBattery) {
@@ -198,7 +176,7 @@ public class RecentLocationApps {
         int uid = ops.getUid();
         int userId = UserHandle.getUserId(uid);
 
-        AccessiblePreference preference = null;
+        DimmableIconPreference preference = null;
         try {
             IPackageManager ipm = AppGlobals.getPackageManager();
             ApplicationInfo appInfo =
@@ -215,6 +193,11 @@ public class RecentLocationApps {
             Drawable icon = mPackageManager.getUserBadgedIcon(appIcon, userHandle);
             CharSequence appLabel = mPackageManager.getApplicationLabel(appInfo);
             CharSequence badgedAppLabel = mPackageManager.getUserBadgedLabel(appLabel, userHandle);
+            if (appLabel.toString().contentEquals(badgedAppLabel)) {
+                // If badged label is not different from original then no need for it as
+                // a separate content description.
+                badgedAppLabel = null;
+            }
             preference = createRecentLocationEntry(icon,
                     appLabel, highBattery, badgedAppLabel,
                     new PackageEntryClickedListener(packageName));
