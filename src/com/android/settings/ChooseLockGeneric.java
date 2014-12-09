@@ -288,14 +288,30 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         /***
+         * Disables preferences that are less secure than required quality. The actual
+         * implementation is in disableUnusablePreferenceImpl.
+         *
+         * @param quality the requested quality.
+         * @param allowBiometric whether to allow biometic screen lock.
+         */
+        protected void disableUnusablePreferences(final int quality,
+                MutableBoolean allowBiometric) {
+            disableUnusablePreferencesImpl(quality, allowBiometric, false /* hideDisabled */);
+        }
+
+        /***
          * Disables preferences that are less secure than required quality.
          *
          * @param quality the requested quality.
+         * @param allowBiometric whether to allow biometic screen lock.
+         * @param hideDisabled whether to hide disable screen lock options.
          */
-        private void disableUnusablePreferences(final int quality, MutableBoolean allowBiometric) {
+        protected void disableUnusablePreferencesImpl(final int quality,
+                MutableBoolean allowBiometric, boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
-            final boolean onlyShowFallback = getActivity().getIntent()
-                    .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
+            final Intent intent = getActivity().getIntent();
+            final boolean onlyShowFallback = intent.getBooleanExtra(
+                    LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
             final boolean weakBiometricAvailable =
                     mChooseLockSettingsHelper.utils().isBiometricWeakInstalled();
 
@@ -325,6 +341,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
                     } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
+                    }
+                    if (hideDisabled) {
+                        visible = visible && enabled;
                     }
                     if (!visible || (onlyShowFallback && !allowedForFallback(key))) {
                         entries.removePreference(pref);
