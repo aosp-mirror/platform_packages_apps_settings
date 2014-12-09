@@ -756,6 +756,8 @@ public class RunningState {
         synchronized (mLock) {
             mResumed = true;
             mRefreshUiListener = listener;
+            // TODO: The set of users may have changed too, so we should probably recompute it
+            // each time, but that might be costly. See http://b/18696308
             if (mInterestingConfigChanges.applyNewConfig(mApplicationContext.getResources())) {
                 mHaveData = false;
                 mBackgroundHandler.removeMessages(MSG_RESET_CONTENTS);
@@ -833,6 +835,10 @@ public class RunningState {
             UserState userState = mUsers.get(newItem.mUserId);
             UserInfo info = userState != null
                     ? userState.mInfo : mUm.getUserInfo(newItem.mUserId);
+            if (info == null) {
+                // The user no longer exists, skip
+                return;
+            }
             if (mHideManagedProfiles && info.isManagedProfile()) {
                 return;
             }
@@ -856,7 +862,7 @@ public class RunningState {
 
     private boolean update(Context context, ActivityManager am) {
         final PackageManager pm = context.getPackageManager();
-        
+
         mSequence++;
         
         boolean changed = false;
@@ -1146,7 +1152,6 @@ public class RunningState {
             
             ArrayList<BaseItem> newItems = new ArrayList<BaseItem>();
             ArrayList<MergedItem> newMergedItems = new ArrayList<MergedItem>();
-            SparseArray<MergedItem> otherUsers = null;
             mProcessItems.clear();
             for (int i=0; i<sortedProcesses.size(); i++) {
                 ProcessItem pi = sortedProcesses.get(i);
