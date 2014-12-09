@@ -617,7 +617,7 @@ class AccessPoint extends Preference {
      * For ephemeral connections (networkId is invalid), this returns false if the network is
      * disconnected.
      */
-    private boolean isActive() {
+    boolean isActive() {
         return mNetworkInfo != null &&
                 (networkId != WifiConfiguration.INVALID_NETWORK_ID ||
                  mNetworkInfo.getState() != State.DISCONNECTED);
@@ -639,7 +639,8 @@ class AccessPoint extends Preference {
         StringBuilder summary = new StringBuilder();
 
         if (isActive()) { // This is the active connection
-            summary.append(Summary.get(context, getState()));
+            summary.append(Summary.get(context, getState(),
+                    networkId == WifiConfiguration.INVALID_NETWORK_ID));
         } else if (mConfig != null
                 && mConfig.hasNoInternetAccess()) {
             summary.append(context.getString(R.string.wifi_no_internet));
