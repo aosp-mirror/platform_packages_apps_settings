@@ -39,6 +39,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Telephony;
+import android.telephony.SubscriptionInfo;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -88,6 +89,7 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     private RestoreApnUiHandler mRestoreApnUiHandler;
     private RestoreApnProcessHandler mRestoreApnProcessHandler;
     private HandlerThread mRestoreDefaultApnThread;
+    private SubscriptionInfo mSubscriptionInfo;
 
     private UserManager mUm;
 
@@ -128,6 +130,8 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final Activity activity = getActivity();
+        final int subId = activity.getIntent().getIntExtra("sub_id", -1);
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
@@ -137,6 +141,8 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         if (!mUm.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
             setHasOptionsMenu(true);
         }
+
+        mSubscriptionInfo = Utils.findRecordBySubId(activity, subId);
     }
 
     @Override
@@ -196,8 +202,11 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     }
 
     private void fillList() {
-        String where = "numeric=\""
-            + android.os.SystemProperties.get(TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC, "")
+        final String mccmnc = mSubscriptionInfo == null ? ""
+            : Integer.toString(mSubscriptionInfo.getMcc())
+                + Integer.toString(mSubscriptionInfo.getMnc());
+        final String where = "numeric=\""
+            + mccmnc
             + "\"";
 
         Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
