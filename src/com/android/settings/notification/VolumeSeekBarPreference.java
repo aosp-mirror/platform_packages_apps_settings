@@ -50,6 +50,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference
     private boolean mMuted;
     private int mIconResId;
     private int mMuteIconResId;
+    private boolean mStopped;
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -77,8 +78,15 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         mCallback = callback;
     }
 
+    public void onActivityResume() {
+        if (mStopped) {
+            init();
+        }
+    }
+
     @Override
     public void onActivityStop() {
+        mStopped = true;
         if (mVolumizer != null) {
             mVolumizer.stop();
         }
@@ -91,10 +99,15 @@ public class VolumeSeekBarPreference extends SeekBarPreference
             Log.w(TAG, "No stream found, not binding volumizer");
             return;
         }
+        mSeekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
+        mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
+        mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
+        init();
+    }
+
+    private void init() {
+        if (mSeekBar == null) return;
         getPreferenceManager().registerOnActivityStopListener(this);
-        final SeekBar seekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
-        if (seekBar == mSeekBar) return;
-        mSeekBar = seekBar;
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
             public void onSampleStarting(SeekBarVolumizer sbv) {
@@ -121,17 +134,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference
         }
         mVolumizer.start();
         mVolumizer.setSeekBar(mSeekBar);
-        mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         updateIconView();
-        mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
         mCallback.onStreamValueChanged(mStream, mSeekBar.getProgress());
         updateSuppressionText();
-    }
-
-    public void onActivityResume() {
-        if (mVolumizer != null) {
-            mVolumizer.start();
-        }
     }
 
     // during initialization, this preference is the SeekBar listener
