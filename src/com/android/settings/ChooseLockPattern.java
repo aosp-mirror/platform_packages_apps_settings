@@ -571,8 +571,8 @@ public class ChooseLockPattern extends SettingsActivity {
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
             utils.setCredentialRequiredToDecrypt(required);
-            utils.saveLockPattern(mChosenPattern, isFallback);
             utils.setLockPatternEnabled(true);
+            utils.saveLockPattern(mChosenPattern, isFallback);
 
             if (lockVirgin) {
                 utils.setVisiblePatternEnabled(true);
