@@ -966,22 +966,29 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     }
 
     /**
-     * Local cache of value, used to work around delay when
-     * {@link ConnectivityManager#setMobileDataEnabled(boolean)} is async.
+     * Local cache of value, used to work around delays.
      */
     private Boolean mMobileDataEnabled;
 
     private boolean isMobileDataEnabled(int subId) {
+        if (LOGD) Log.d(TAG, "isMobileDataEnabled:+ subId=" + subId);
         boolean isEnable = false;
         if (mMobileDataEnabled != null) {
             // TODO: deprecate and remove this once enabled flag is on policy
             // Multiple Subscriptions, the value need to be reseted
             isEnable = mMobileDataEnabled.booleanValue();
+            if (LOGD) {
+                Log.d(TAG, "isMobileDataEnabled: != null, subId=" + subId
+                        + " isEnable=" + isEnable);
+            }
             mMobileDataEnabled = null;
         } else {
-            //SUB SELECT
-            isEnable = mTelephonyManager.getDataEnabled()
-                && (subId == mSubscriptionManager.getDefaultDataSubId());
+            // SUB SELECT
+            isEnable = mTelephonyManager.getDataEnabled(subId);
+            if (LOGD) {
+                Log.d(TAG, "isMobileDataEnabled: == null, subId=" + subId
+                        + " isEnable=" + isEnable);
+            }
         }
         return isEnable;
     }
