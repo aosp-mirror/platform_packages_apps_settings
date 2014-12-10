@@ -68,15 +68,16 @@ public class WifiApEnabler {
             } else if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(action)) {
                 enableWifiSwitch();
             }
-
         }
     };
 
     public WifiApEnabler(Context context, SwitchPreference switchPreference) {
         mContext = context;
         mSwitch = switchPreference;
-        mOriginalSummary = switchPreference.getSummary();
-        switchPreference.setPersistent(false);
+        mOriginalSummary = switchPreference != null ? switchPreference.getSummary() : "";
+        if (switchPreference != null) {
+            switchPreference.setPersistent(false);
+        }
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mCm = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -121,10 +122,14 @@ public class WifiApEnabler {
         }
 
         if (mWifiManager.setWifiApEnabled(null, enable)) {
-            /* Disable here, enabled on receiving success broadcast */
-            mSwitch.setEnabled(false);
+            if (mSwitch != null) {
+                /* Disable here, enabled on receiving success broadcast */
+                mSwitch.setEnabled(false);
+            }
         } else {
-            mSwitch.setSummary(R.string.wifi_error);
+            if (mSwitch != null) {
+                mSwitch.setSummary(R.string.wifi_error);
+            }
         }
 
         /**
