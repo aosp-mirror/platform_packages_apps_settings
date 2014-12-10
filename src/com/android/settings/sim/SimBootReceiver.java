@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -62,12 +63,14 @@ public class SimBootReceiver extends BroadcastReceiver {
 
     private void detectChangeAndNotify() {
         final int numSlots = mTelephonyManager.getSimCount();
+        final boolean isInProvisioning = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0) == 0;
         boolean notificationSent = false;
         int numSIMsDetected = 0;
         int lastSIMSlotDetected = -1;
 
-        // Do not create notifications on single SIM devices.
-        if (numSlots < 2) {
+        // Do not create notifications on single SIM devices or when provisiong.
+        if (numSlots < 2 || isInProvisioning) {
             return;
         }
 
