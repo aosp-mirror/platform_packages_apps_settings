@@ -68,13 +68,14 @@ public class WifiSetupActivity extends WifiPickerActivity
 
     private SetupWizardNavBar mNavigationBar;
 
-    private final IntentFilter mFilter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+    private IntentFilter mFilter = new IntentFilter();
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Refresh the connection state with the latest connection info. Use the connection info
             // from ConnectivityManager instead of the one attached in the intent to make sure
             // we have the most up-to-date connection state. b/17511772
+
             refreshConnectionState();
         }
     };
@@ -84,6 +85,8 @@ public class WifiSetupActivity extends WifiPickerActivity
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
+        mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 
         mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
         mAllowSkip = intent.getBooleanExtra(EXTRA_ALLOW_SKIP, true);
@@ -108,6 +111,7 @@ public class WifiSetupActivity extends WifiPickerActivity
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean connected = connectivity != null &&
                 connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+
         refreshConnectionState(connected);
     }
 
