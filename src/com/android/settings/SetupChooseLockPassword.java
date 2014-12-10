@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -92,12 +93,15 @@ public class SetupChooseLockPassword extends ChooseLockPassword
         }
     }
 
-    public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment {
+    public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
+            implements View.OnApplyWindowInsetsListener {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             final View view = inflater.inflate(R.layout.setup_template, container, false);
+            View scrollView = view.findViewById(R.id.bottom_scroll_view);
+            scrollView.setOnApplyWindowInsetsListener(this);
             ViewGroup setupContent = (ViewGroup) view.findViewById(R.id.setup_content);
             inflater.inflate(R.layout.setup_choose_lock_password, setupContent, true);
             return view;
@@ -128,6 +132,21 @@ public class SetupChooseLockPassword extends ChooseLockPassword
         protected void setNextText(int text) {
             SetupChooseLockPassword activity = (SetupChooseLockPassword) getActivity();
             activity.mNavigationBar.getNextButton().setText(text);
+        }
+
+        @Override
+        public WindowInsets onApplyWindowInsets(View view, WindowInsets insets) {
+            SetupChooseLockPassword activity = (SetupChooseLockPassword) getActivity();
+            final int bottomMargin = Math.max(insets.getSystemWindowInsetBottom()
+                    - activity.mNavigationBar.getView().getHeight(), 0);
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, bottomMargin);
+            view.setLayoutParams(lp);
+            return insets.replaceSystemWindowInsets(
+                    insets.getSystemWindowInsetLeft(),
+                    insets.getSystemWindowInsetTop(),
+                    insets.getSystemWindowInsetRight(),
+                    0 /* bottom */);
         }
     }
 }
