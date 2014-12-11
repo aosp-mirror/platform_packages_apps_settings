@@ -61,9 +61,11 @@ public class RecentLocationApps {
     private class PackageEntryClickedListener
             implements Preference.OnPreferenceClickListener {
         private String mPackage;
+        private UserHandle mUserHandle;
 
-        public PackageEntryClickedListener(String packageName) {
+        public PackageEntryClickedListener(String packageName, UserHandle userHandle) {
             mPackage = packageName;
+            mUserHandle = userHandle;
         }
 
         @Override
@@ -71,8 +73,8 @@ public class RecentLocationApps {
             // start new fragment to display extended information
             Bundle args = new Bundle();
             args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackage);
-            mActivity.startPreferencePanel(InstalledAppDetails.class.getName(), args,
-                    R.string.application_info_label, null, null, 0);
+            mActivity.startPreferencePanelAsUser(InstalledAppDetails.class.getName(), args,
+                    R.string.application_info_label, null, mUserHandle);
             return true;
         }
     }
@@ -200,7 +202,7 @@ public class RecentLocationApps {
             }
             preference = createRecentLocationEntry(icon,
                     appLabel, highBattery, badgedAppLabel,
-                    new PackageEntryClickedListener(packageName));
+                    new PackageEntryClickedListener(packageName, userHandle));
         } catch (RemoteException e) {
             Log.w(TAG, "Error while retrieving application info for package " + packageName
                     + ", userId " + userId, e);
