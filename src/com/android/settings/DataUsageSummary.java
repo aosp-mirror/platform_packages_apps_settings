@@ -1176,21 +1176,29 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     };
 
     private void handleMultiSimDataDialog() {
-        final SubscriptionInfo currentSir = getCurrentTabSubInfo(getActivity());
+        final Context context = getActivity();
+        final SubscriptionInfo currentSir = getCurrentTabSubInfo(context);
         final SubscriptionInfo nextSir = mSubscriptionManager.getActiveSubscriptionInfo(
                 mSubscriptionManager.getDefaultDataSubId());
 
-        if (currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
+        // If the device is single SIM or is enabling data on the active data SIM then forgo
+        // the pop-up.
+        if (!Utils.showSimCardTile(context) ||
+                (nextSir != null && currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
             setMobileDataEnabled(true);
             updateBody();
             return;
         }
 
+        final String previousName = (nextSir == null)
+            ? context.getResources().getString(R.string.sim_selection_required_pref)
+            : nextSir.getDisplayName().toString();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle(R.string.sim_change_data_title);
         builder.setMessage(getActivity().getResources().getString(R.string.sim_change_data_message,
-                    currentSir.getDisplayName(), nextSir.getDisplayName()));
+                    currentSir.getDisplayName(), previousName));
 
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             @Override
