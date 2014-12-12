@@ -32,6 +32,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.internal.util.UserIcons;
+import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 
@@ -43,18 +44,19 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
     /** Holder for user details */
     public static class UserDetails {
         private final UserHandle mUserHandle;
-        private final String name;
-        private final Drawable icon;
+        private final String mName;
+        private final Drawable mIcon;
 
         public UserDetails(UserHandle userHandle, UserManager um, Context context) {
             mUserHandle = userHandle;
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
+            Drawable icon;
             if (userInfo.isManagedProfile()) {
-                name = context.getString(R.string.managed_user_title);
+                mName = context.getString(R.string.managed_user_title);
                 icon = context.getDrawable(
                     com.android.internal.R.drawable.ic_corp_icon);
             } else {
-                name = userInfo.name;
+                mName = userInfo.name;
                 final int userId = userInfo.id;
                 if (um.getUserIcon(userId) != null) {
                     icon = new BitmapDrawable(context.getResources(), um.getUserIcon(userId));
@@ -62,6 +64,11 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
                     icon = UserIcons.getDefaultUserIcon(userId, /* light= */ false);
                 }
             }
+            this.mIcon = encircle(context, icon);
+        }
+
+        private static Drawable encircle(Context context, Drawable icon) {
+            return CircleFramedDrawable.getInstance(context, UserIcons.convertToBitmap(icon));
         }
     }
     private ArrayList<UserDetails> data;
@@ -87,8 +94,8 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
         final View row = convertView != null ? convertView : createUser(parent);
 
         UserDetails user = data.get(position);
-        ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(user.icon);
-        ((TextView) row.findViewById(android.R.id.title)).setText(user.name);
+        ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(user.mIcon);
+        ((TextView) row.findViewById(android.R.id.title)).setText(user.mName);
         return row;
     }
 
