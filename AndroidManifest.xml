@@ -1114,6 +1114,7 @@
         </activity>
 
         <activity android:name=".SetupRedactionInterstitial"
+            android:taskAffinity="com.android.wizard"
             android:theme="@style/SetupWizardDisableAppStartingTheme"/>
 
         <activity android:name=".notification.RedactionInterstitial"/>
@@ -1168,12 +1169,14 @@
 
         <activity android:name="SetupChooseLockPattern"
             android:exported="false"
+            android:taskAffinity="com.android.wizard"
             android:theme="@style/SetupWizardDisableAppStartingTheme" />
 
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
         <activity android:name="SetupChooseLockPassword"
             android:exported="false"
+            android:taskAffinity="com.android.wizard"
             android:theme="@style/SetupWizardDisableAppStartingTheme"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
@@ -1181,6 +1184,7 @@
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity android:name=".SetupEncryptionInterstitial"
+            android:taskAffinity="com.android.wizard"
             android:theme="@style/SetupWizardDisableAppStartingTheme"/>
 
         <activity android:name=".EncryptionInterstitial"/>
