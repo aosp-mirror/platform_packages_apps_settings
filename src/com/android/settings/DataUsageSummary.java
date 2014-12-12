@@ -62,6 +62,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -141,6 +142,7 @@ import com.android.settings.sim.SimSettings;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.ChartNetworkSeriesView;
+
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
@@ -1695,9 +1697,16 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                         collapseKey = uid;
                         category = AppItem.CATEGORY_APP;
                     } else {
-                        // Add to other user item.
-                        collapseKey = UidDetailProvider.buildKeyForUser(userId);
-                        category = AppItem.CATEGORY_USER;
+                        // If it is a removed user add it to the removed users' key
+                        final UserInfo info = mUm.getUserInfo(userId);
+                        if (info == null) {
+                            collapseKey = UID_REMOVED;
+                            category = AppItem.CATEGORY_APP;
+                        } else {
+                            // Add to other user item.
+                            collapseKey = UidDetailProvider.buildKeyForUser(userId);
+                            category = AppItem.CATEGORY_USER;
+                        }
                     }
                 } else if (uid == UID_REMOVED || uid == UID_TETHERING) {
                     collapseKey = uid;
