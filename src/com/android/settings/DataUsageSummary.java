@@ -2285,7 +2285,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         if (template == null) {
             final int subId = intent.getIntExtra(PhoneConstants.SUBSCRIPTION_KEY,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            if (SubscriptionManager.isValidSubId(subId)) {
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
                 return TAB_MOBILE + String.valueOf(subId);
             }
             return null;

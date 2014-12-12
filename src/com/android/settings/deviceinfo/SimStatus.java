@@ -365,7 +365,7 @@ public class SimStatus extends PreferenceActivity {
             final Phone phone = PhoneFactory.getPhone(SubscriptionManager.getPhoneId(
                         mSir.getSubscriptionId()));
             if (UserHandle.myUserId() == UserHandle.USER_OWNER
-                    && mSir.getSubscriptionId() != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    && SubscriptionManager.isValidSubscriptionId(mSir.getSubscriptionId())) {
                 if (phone == null) {
                     Log.e(TAG, "Unable to locate a phone object for the given Subscription ID.");
                     return;
