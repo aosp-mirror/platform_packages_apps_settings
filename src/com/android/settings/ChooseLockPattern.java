@@ -578,12 +578,12 @@ public class ChooseLockPattern extends SettingsActivity {
                 utils.setVisiblePatternEnabled(true);
             }
 
-            getActivity().setResult(RESULT_FINISHED);
-            getActivity().finish();
-            mDone = true;
             if (!wasSecureBefore) {
                 startActivity(getRedactionInterstitialIntent(getActivity()));
             }
+            getActivity().setResult(RESULT_FINISHED);
+            getActivity().finish();
+            mDone = true;
         }
     }
 }
