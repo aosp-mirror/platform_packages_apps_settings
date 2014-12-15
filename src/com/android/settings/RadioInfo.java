@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -55,10 +54,8 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -745,18 +742,22 @@ public class RadioInfo extends Activity {
      * This function checks for basic functionality of HTTP Client.
      */
     private void httpClientTest() {
-        HttpClient client = new DefaultHttpClient();
+        HttpURLConnection urlConnection = null;
         try {
-            HttpGet request = new HttpGet("http://www.google.com");
-            HttpResponse response = client.execute(request);
-            if (response.getStatusLine().getStatusCode() == 200) {
+            // TODO: Hardcoded for now, make it UI configurable
+            URL url = new URL("http://www.google.com");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            if (urlConnection.getResponseCode() == 200) {
                 mHttpClientTestResult = "Pass";
             } else {
-                mHttpClientTestResult = "Fail: Code: " + String.valueOf(response);
+                mHttpClientTestResult = "Fail: Code: " + urlConnection.getResponseMessage();
             }
-            request.abort();
         } catch (IOException e) {
             mHttpClientTestResult = "Fail: IOException";
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
         }
     }
 
