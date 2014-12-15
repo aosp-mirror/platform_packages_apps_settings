@@ -18,26 +18,21 @@ package com.android.settings.sim;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
-import android.provider.Telephony;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.PhoneNumberUtils;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
@@ -49,12 +44,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.app.Dialog;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
-
-import com.android.internal.telephony.PhoneFactory;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -62,9 +53,6 @@ import com.android.settings.search.Indexable;
 import com.android.settings.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 public class SimSettings extends RestrictedSettingsFragment implements Indexable {
@@ -121,6 +109,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private SubscriptionManager mSubscriptionManager;
     private Utils mUtils;
+
 
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
@@ -281,152 +270,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
 
         return true;
-    }
-
-    @Override
-    public Dialog onCreateDialog(final int id) {
-        final ArrayList<String> list = new ArrayList<String>();
-        final int selectableSubInfoLength = mSelectableSubInfos.size();
-
-        final DialogInterface.OnClickListener selectionListener =
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int value) {
-
-                        final SubscriptionInfo sir;
-
-                        if (id == DATA_PICK) {
-                            sir = mSelectableSubInfos.get(value);
-                            mSubscriptionManager.setDefaultDataSubId(sir.getSubscriptionId());
-                        } else if (id == CALLS_PICK) {
-                            final TelecomManager telecomManager =
-                                    TelecomManager.from(getActivity());
-                            final List<PhoneAccountHandle> phoneAccountsList =
-                                    telecomManager.getCallCapablePhoneAccounts();
-                            telecomManager.setUserSelectedOutgoingPhoneAccount(
-                                    value < 1 ? null : phoneAccountsList.get(value - 1));
-                        } else if (id == SMS_PICK) {
-                            sir = mSelectableSubInfos.get(value);
-                            mSubscriptionManager.setDefaultSmsSubId(sir.getSubscriptionId());
-                        }
-
-                        updateActivitesCategory();
-                    }
-                };
-
-        if (id == CALLS_PICK) {
-            final TelecomManager telecomManager = TelecomManager.from(getActivity());
-            final Iterator<PhoneAccountHandle> phoneAccounts =
-                    telecomManager.getCallCapablePhoneAccounts().listIterator();
-
-            list.add(getResources().getString(R.string.sim_calls_ask_first_prefs_title));
-            while (phoneAccounts.hasNext()) {
-                final PhoneAccount phoneAccount =
-                        telecomManager.getPhoneAccount(phoneAccounts.next());
-                list.add((String)phoneAccount.getLabel());
-            }
-        } else {
-            for (int i = 0; i < selectableSubInfoLength; ++i) {
-                final SubscriptionInfo sir = mSelectableSubInfos.get(i);
-                CharSequence displayName = sir.getDisplayName();
-                if (displayName == null) {
-                    displayName = "";
-                }
-                list.add(displayName.toString());
-            }
-        }
-
-        String[] arr = list.toArray(new String[0]);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        ListAdapter adapter = new SelectAccountListAdapter(
-                builder.getContext(),
-                R.layout.select_account_list_item,
-                arr, id);
-
-        if (id == DATA_PICK) {
-            builder.setTitle(R.string.select_sim_for_data);
-        } else if (id == CALLS_PICK) {
-            builder.setTitle(R.string.select_sim_for_calls);
-        } else if (id == SMS_PICK) {
-            builder.setTitle(R.string.sim_card_select_title);
-        }
-
-        return builder.setAdapter(adapter, selectionListener)
-            .create();
-    }
-
-    private class SelectAccountListAdapter extends ArrayAdapter<String> {
-        private Context mContext;
-        private int mResId;
-        private int mDialogId;
-        private final float OPACITY = 0.54f;
-
-        public SelectAccountListAdapter(
-                Context context, int resource, String[] arr, int dialogId) {
-            super(context, resource, arr);
-            mContext = context;
-            mResId = resource;
-            mDialogId = dialogId;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater)
-                    mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View rowView;
-            final ViewHolder holder;
-            SubscriptionInfo sir;
-
-            if (convertView == null) {
-                // Cache views for faster scrolling
-                rowView = inflater.inflate(mResId, null);
-                holder = new ViewHolder();
-                holder.title = (TextView) rowView.findViewById(R.id.title);
-                holder.summary = (TextView) rowView.findViewById(R.id.summary);
-                holder.icon = (ImageView) rowView.findViewById(R.id.icon);
-                rowView.setTag(holder);
-            } else {
-                rowView = convertView;
-                holder = (ViewHolder) rowView.getTag();
-            }
-
-            if (mDialogId == CALLS_PICK) {
-                holder.title.setText(getItem(position));
-                if (position == 0) {
-                    holder.icon.setImageDrawable(getResources()
-                            .getDrawable(R.drawable.ic_live_help));
-                    holder.icon.setAlpha(OPACITY);
-                    holder.summary.setText("");
-                } else {
-                    final TelecomManager telecomManager = TelecomManager.from(getActivity());
-                    final Iterator<PhoneAccountHandle> phoneAccounts =
-                            telecomManager.getCallCapablePhoneAccounts().listIterator();
-                    while (phoneAccounts.hasNext()) {
-                        final PhoneAccount phoneAccount =
-                                telecomManager.getPhoneAccount(phoneAccounts.next());
-                        if (getItem(position).equals((String) phoneAccount.getLabel())) {
-                            holder.icon.setImageBitmap(phoneAccount.getIconBitmap());
-                            holder.summary
-                                    .setText(phoneAccount.getAddress().getSchemeSpecificPart());
-                        }
-                    }
-                }
-            } else {
-                sir = mSelectableSubInfos.get(position);
-                holder.title.setText(sir.getDisplayName());
-                holder.summary.setText(getPhoneNumber(sir));
-                holder.icon.setImageBitmap(sir.createIconBitmap(mContext));
-            }
-            return rowView;
-        }
-
-        private class ViewHolder {
-            TextView title;
-            TextView summary;
-            ImageView icon;
-        }
     }
 
     private class SimPreference extends Preference{

@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -115,6 +116,7 @@ public class SimDialogActivity extends Activity {
     private static void setDefaultDataSubId(final Context context, final int subId) {
         final SubscriptionManager subscriptionManager = SubscriptionManager.from(context);
         subscriptionManager.setDefaultDataSubId(subId);
+        Toast.makeText(context, R.string.data_switch_started, Toast.LENGTH_LONG).show();
     }
 
     private static void setDefaultSmsSubId(final Context context, final int subId) {
