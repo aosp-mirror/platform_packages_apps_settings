@@ -63,8 +63,8 @@ public class ImeiInformation extends PreferenceActivity {
         }
     }
 
-    private void setPreferenceValue(int slotId) {
-        final Phone phone = getPhoneFromSlotId(slotId);
+    private void setPreferenceValue(int phoneId) {
+        final Phone phone = PhoneFactory.getPhone(phoneId);
 
         if (phone != null) {
             if (phone.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
@@ -92,7 +92,7 @@ public class ImeiInformation extends PreferenceActivity {
                 setSummaryText(KEY_IMEI, phone.getDeviceId());
                 setSummaryText(KEY_IMEI_SV,
                         ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
-                        .getDeviceSoftwareVersion(/*slotId*/));
+                        .getDeviceSoftwareVersion(phoneId));
                 // device is not CDMA, do not display CDMA features
                 // check Null in case no specified preference in overlay xml
                 removePreferenceFromScreen(KEY_PRL_VERSION);
@@ -101,24 +101,6 @@ public class ImeiInformation extends PreferenceActivity {
                 removePreferenceFromScreen(KEY_ICC_ID);
             }
         }
-    }
-
-    private Phone getPhoneFromSlotId(int slotIdx) {
-        final SubscriptionInfo subInfo =
-                mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(slotIdx);
-
-        if (subInfo == null) {
-            return null;
-        }
-
-        final Phone[] phones = PhoneFactory.getPhones();
-        for (int i = 0; i < phones.length; i++) {
-            if (phones[i].getSubId() == subInfo.getSubscriptionId()) {
-                return phones[i];
-            }
-        }
-
-        return null;
     }
 
     // Modify the preference key with prefix "_", so new added information preference can be set
