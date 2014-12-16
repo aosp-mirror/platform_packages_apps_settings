@@ -200,16 +200,26 @@ public class SimDialogActivity extends Activity {
                 }
             };
 
+        ArrayList<SubscriptionInfo> callsSubInfoList = new ArrayList<SubscriptionInfo>();
         if (id == CALLS_PICK) {
             final TelecomManager telecomManager = TelecomManager.from(context);
             final Iterator<PhoneAccountHandle> phoneAccounts =
                     telecomManager.getCallCapablePhoneAccounts().listIterator();
 
             list.add(getResources().getString(R.string.sim_calls_ask_first_prefs_title));
+            callsSubInfoList.add(null);
             while (phoneAccounts.hasNext()) {
                 final PhoneAccount phoneAccount =
                         telecomManager.getPhoneAccount(phoneAccounts.next());
                 list.add((String)phoneAccount.getLabel());
+                if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+                    final String phoneAccountId = phoneAccount.getAccountHandle().getId();
+                    final SubscriptionInfo sir = Utils.findRecordBySubId(context,
+                            Integer.parseInt(phoneAccountId));
+                    callsSubInfoList.add(sir);
+                } else {
+                    callsSubInfoList.add(null);
+                }
             }
         } else {
             for (int i = 0; i < selectableSubInfoLength; ++i) {
@@ -227,7 +237,7 @@ public class SimDialogActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         ListAdapter adapter = new SelectAccountListAdapter(
-                subInfoList,
+                id == CALLS_PICK ? callsSubInfoList : subInfoList,
                 builder.getContext(),
                 R.layout.select_account_list_item,
                 arr, id);
@@ -276,7 +286,6 @@ public class SimDialogActivity extends Activity {
                     mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View rowView;
             final ViewHolder holder;
-            SubscriptionInfo sir;
 
             if (convertView == null) {
                 // Cache views for faster scrolling
@@ -291,14 +300,14 @@ public class SimDialogActivity extends Activity {
                 holder = (ViewHolder) rowView.getTag();
             }
 
-            if (mDialogId == CALLS_PICK) {
+            final SubscriptionInfo sir = mSubInfoList.get(position);
+            if (sir == null) {
                 holder.title.setText(getItem(position));
                 holder.summary.setText("");
                 holder.icon.setImageDrawable(getResources()
                         .getDrawable(R.drawable.ic_live_help));
                 holder.icon.setAlpha(OPACITY);
             } else {
-                sir = mSubInfoList.get(position);
                 holder.title.setText(sir.getDisplayName());
                 holder.summary.setText(sir.getNumber());
                 holder.icon.setImageBitmap(sir.createIconBitmap(mContext));
