@@ -260,6 +260,13 @@ public class SimDialogActivity extends Activity {
         Dialog dialog = builder.setAdapter(adapter, selectionListener).create();
         dialog.setOnKeyListener(keyListener);
 
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                finish();
+            }
+        });
+
         return dialog;
 
     }
