@@ -93,10 +93,10 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     private boolean mBluetoothEnableForTether;
 
-    private static final int INVALID             = -1;
-    private static final int WIFI_TETHERING      = 0;
-    private static final int USB_TETHERING       = 1;
-    private static final int BLUETOOTH_TETHERING = 2;
+    public static final int INVALID             = -1;
+    public static final int WIFI_TETHERING      = 0;
+    public static final int USB_TETHERING       = 1;
+    public static final int BLUETOOTH_TETHERING = 2;
 
     /* One of INVALID, WIFI_TETHERING, USB_TETHERING or BLUETOOTH_TETHERING */
     private int mTetherChoice = INVALID;
@@ -456,6 +456,9 @@ public class TetherSettings extends SettingsPreferenceFragment
         if (enable) {
             startProvisioningIfNecessary(WIFI_TETHERING);
         } else {
+            if (isProvisioningNeeded(mProvisionApp)) {
+                TetherService.cancelRecheckAlarmIfNecessary(getActivity(), WIFI_TETHERING);
+            }
             mWifiApEnabler.setSoftapEnabled(false);
         }
         return false;
@@ -505,6 +508,7 @@ public class TetherSettings extends SettingsPreferenceFragment
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == PROVISION_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
+                TetherService.scheduleRecheckAlarm(getActivity(), mTetherChoice);
                 startTethering();
             } else {
                 //BT and USB need switch turned off on failure
@@ -572,6 +576,9 @@ public class TetherSettings extends SettingsPreferenceFragment
             if (newState) {
                 startProvisioningIfNecessary(USB_TETHERING);
             } else {
+                if (isProvisioningNeeded(mProvisionApp)) {
+                    TetherService.cancelRecheckAlarmIfNecessary(getActivity(), USB_TETHERING);
+                }
                 setUsbTethering(newState);
             }
         } else if (preference == mBluetoothTether) {
@@ -580,6 +587,9 @@ public class TetherSettings extends SettingsPreferenceFragment
             if (bluetoothTetherState) {
                 startProvisioningIfNecessary(BLUETOOTH_TETHERING);
             } else {
+                if (isProvisioningNeeded(mProvisionApp)) {
+                    TetherService.cancelRecheckAlarmIfNecessary(getActivity(), BLUETOOTH_TETHERING);
+                }
                 boolean errored = false;
 
                 String [] tethered = cm.getTetheredIfaces();
