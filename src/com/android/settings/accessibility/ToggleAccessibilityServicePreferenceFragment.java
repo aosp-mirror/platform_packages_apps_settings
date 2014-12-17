@@ -32,11 +32,13 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ConfirmDeviceCredentialActivity;
@@ -168,11 +170,13 @@ public class ToggleAccessibilityServicePreferenceFragment
         switch (dialogId) {
             case DIALOG_ID_ENABLE_WARNING: {
                 mShownDialogId = DIALOG_ID_ENABLE_WARNING;
-                AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+
+                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
                 if (info == null) {
                     return null;
                 }
-                AlertDialog ad = new AlertDialog.Builder(getActivity())
+
+                final AlertDialog ad = new AlertDialog.Builder(getActivity())
                         .setTitle(getString(R.string.enable_service_title,
                                 info.getResolveInfo().loadLabel(getPackageManager())))
                         .setView(createEnableDialogContentView(info))
@@ -180,8 +184,24 @@ public class ToggleAccessibilityServicePreferenceFragment
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, this)
                         .create();
+
+                final View.OnTouchListener filterTouchListener = new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        // Filter obscured touches by consuming them.
+                        if ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0) {
+                            if (event.getAction() == MotionEvent.ACTION_UP) {
+                                Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                };
+
                 ad.create();
-                ad.getButton(AlertDialog.BUTTON_POSITIVE).setFilterTouchesWhenObscured(true);
+                ad.getButton(AlertDialog.BUTTON_POSITIVE).setOnTouchListener(filterTouchListener);
                 return ad;
             }
             case DIALOG_ID_DISABLE_WARNING: {
