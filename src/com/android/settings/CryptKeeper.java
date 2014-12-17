@@ -17,7 +17,9 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.StatusBarManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -408,11 +410,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // If we are not encrypted or encrypting, get out quickly.
         final String state = SystemProperties.get("vold.decrypt");
         if (!isDebugView() && ("".equals(state) || DECRYPT_STATE.equals(state))) {
-            // Disable the crypt keeper.
-            PackageManager pm = getPackageManager();
-            ComponentName name = new ComponentName(this, CryptKeeper.class);
-            pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
+            disableCryptKeeperComponent(this);
             // Typically CryptKeeper is launched as the home app.  We didn't
             // want to be running, so need to finish this activity.  We can count
             // on the activity manager re-launching the new home app upon finishing
@@ -1020,5 +1018,26 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     @Override
     public void afterTextChanged(Editable s) {
         return;
+    }
+
+    private static void disableCryptKeeperComponent(Context context) {
+        PackageManager pm = context.getPackageManager();
+        ComponentName name = new ComponentName(context, CryptKeeper.class);
+        Log.d(TAG, "Disabling component " + name);
+        pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
+    public static class UserInitBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String intentAction = intent.getAction();
+            // Disable CryptKeeper activity if user is not primary
+            if (Intent.ACTION_USER_INITIALIZE.equals(intentAction)
+                    && UserHandle.USER_OWNER != UserHandle.myUserId()) {
+                disableCryptKeeperComponent(context);
+            }
+        }
     }
 }

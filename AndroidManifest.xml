@@ -1736,6 +1736,12 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".CryptKeeper$UserInitBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER_INITIALIZE" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".CryptKeeper$FadeToBlack"
             android:immersive="true"
             android:launchMode="singleTop"
