@@ -17,17 +17,14 @@
 package com.android.settings.wifi;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AbsListView.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,9 +32,9 @@ import com.android.settings.R;
 
 /**
  * This customized version of WifiSettings is shown to the user only during Setup Wizard. Menu
- * selections are limited, clicking on an access point will auto-advance to the next screen (once
- * connected), and, if the user opts to skip ahead without a wifi connection, a warning message
- * alerts of possible carrier data charges or missing software updates.
+ * is not shown, clicking on an access point will auto-advance to the next screen (once connected),
+ * and, if the user opts to skip ahead without a wifi connection, a warning message alerts of
+ * possible carrier data charges or missing software updates.
  */
 public class WifiSettingsForSetupWizard extends WifiSettings {
 
@@ -115,18 +112,8 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     @Override
-    /* package */ void addOptionsMenuItems(Menu menu) {
-        final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
-        final TypedArray ta = getActivity().getTheme()
-                .obtainStyledAttributes(new int[] {R.attr.ic_wps});
-        menu.add(Menu.NONE, MENU_ID_WPS_PBC, 0, R.string.wifi_menu_wps_pbc)
-                .setIcon(ta.getDrawable(0))
-                .setEnabled(wifiIsEnabled)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
-                .setEnabled(wifiIsEnabled)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        ta.recycle();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do not show menu during setup wizard
     }
 
     @Override
