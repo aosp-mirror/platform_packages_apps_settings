@@ -42,45 +42,22 @@ public class CircleFramedDrawable extends Drawable {
     private final Bitmap mBitmap;
     private final int mSize;
     private final Paint mPaint;
-    private final float mShadowRadius;
-    private final float mStrokeWidth;
-    private final int mFrameColor;
-    private final int mHighlightColor;
-    private final int mFrameShadowColor;
 
     private float mScale;
-    private Path mFramePath;
     private Rect mSrcRect;
     private RectF mDstRect;
-    private RectF mFrameRect;
-    private boolean mPressed;
 
     public static CircleFramedDrawable getInstance(Context context, Bitmap icon) {
         Resources res = context.getResources();
         float iconSize = res.getDimension(R.dimen.circle_avatar_size);
-        float strokeWidth = res.getDimension(R.dimen.circle_avatar_frame_stroke_width);
-        float shadowRadius = res.getDimension(R.dimen.circle_avatar_frame_shadow_radius);
-        int frameColor = res.getColor(R.color.circle_avatar_frame_color);
-        int frameShadowColor = res.getColor(R.color.circle_avatar_frame_shadow_color);
-        int highlightColor = res.getColor(R.color.circle_avatar_frame_pressed_color);
 
-        CircleFramedDrawable instance = new CircleFramedDrawable(icon,
-                (int) iconSize, frameColor, strokeWidth, frameShadowColor, shadowRadius,
-                highlightColor);
+        CircleFramedDrawable instance = new CircleFramedDrawable(icon, (int) iconSize);
         return instance;
     }
 
-    public CircleFramedDrawable(Bitmap icon, int size,
-            int frameColor, float strokeWidth,
-            int frameShadowColor, float shadowRadius,
-            int highlightColor) {
+    public CircleFramedDrawable(Bitmap icon, int size) {
         super();
         mSize = size;
-        mShadowRadius = shadowRadius;
-        mFrameColor = frameColor;
-        mFrameShadowColor = frameShadowColor;
-        mStrokeWidth = strokeWidth;
-        mHighlightColor = highlightColor;
 
         mBitmap = Bitmap.createBitmap(mSize, mSize, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(mBitmap);
@@ -91,8 +68,6 @@ public class CircleFramedDrawable extends Drawable {
 
         final Rect cropRect = new Rect((width - square) / 2, (height - square) / 2, square, square);
         final RectF circleRect = new RectF(0f, 0f, mSize, mSize);
-        circleRect.inset(mStrokeWidth / 2f, mStrokeWidth / 2f);
-        circleRect.inset(mShadowRadius, mShadowRadius);
 
         final Path fillPath = new Path();
         fillPath.addArc(circleRect, 0f, 360f);
@@ -117,8 +92,6 @@ public class CircleFramedDrawable extends Drawable {
 
         mSrcRect = new Rect(0, 0, mSize, mSize);
         mDstRect = new RectF(0, 0, mSize, mSize);
-        mFrameRect = new RectF(mDstRect);
-        mFramePath = new Path();
     }
 
     @Override
@@ -128,28 +101,6 @@ public class CircleFramedDrawable extends Drawable {
 
         mDstRect.set(pad, pad, mSize - pad, mSize - pad);
         canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
-
-        mFrameRect.set(mDstRect);
-        mFrameRect.inset(mStrokeWidth / 2f, mStrokeWidth / 2f);
-        mFrameRect.inset(mShadowRadius, mShadowRadius);
-
-        mFramePath.reset();
-        mFramePath.addArc(mFrameRect, 0f, 360f);
-
-        // white frame
-        if (mPressed) {
-            mPaint.setStyle(Paint.Style.FILL);
-            mPaint.setColor(Color.argb((int) (0.33f * 255),
-                            Color.red(mHighlightColor),
-                            Color.green(mHighlightColor),
-                            Color.blue(mHighlightColor)));
-            canvas.drawPath(mFramePath, mPaint);
-        }
-        mPaint.setStrokeWidth(mStrokeWidth);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(mPressed ? mHighlightColor : mFrameColor);
-        mPaint.setShadowLayer(mShadowRadius, 0f, 0f, mFrameShadowColor);
-        canvas.drawPath(mFramePath, mPaint);
     }
 
     public void setScale(float scale) {
@@ -158,10 +109,6 @@ public class CircleFramedDrawable extends Drawable {
 
     public float getScale() {
         return mScale;
-    }
-
-    public void setPressed(boolean pressed) {
-        mPressed = pressed;
     }
 
     @Override
