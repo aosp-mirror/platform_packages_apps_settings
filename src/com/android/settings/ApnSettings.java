@@ -53,6 +53,7 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
+import android.telephony.TelephonyManager;
 
 import java.util.ArrayList;
 
@@ -131,7 +132,8 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Activity activity = getActivity();
-        final int subId = activity.getIntent().getIntExtra("sub_id", -1);
+        // Fixme: Workaround for single sim device.
+        mSubscriptionInfo = Utils.findRecordBySlotId(activity, 0);
 
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
@@ -142,7 +144,6 @@ public class ApnSettings extends SettingsPreferenceFragment implements
             setHasOptionsMenu(true);
         }
 
-        mSubscriptionInfo = Utils.findRecordBySubId(activity, subId);
     }
 
     @Override
@@ -202,9 +203,10 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     }
 
     private void fillList() {
+        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         final String mccmnc = mSubscriptionInfo == null ? ""
-            : Integer.toString(mSubscriptionInfo.getMcc())
-                + Integer.toString(mSubscriptionInfo.getMnc());
+              : tm.getSimOperator(mSubscriptionInfo.getSubscriptionId());
+        Log.d(TAG, "mccmnc = " + mccmnc);
         final String where = "numeric=\""
             + mccmnc
             + "\"";
