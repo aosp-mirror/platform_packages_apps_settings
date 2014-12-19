@@ -67,6 +67,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,6 +133,8 @@ public final class Utils {
     private static final int SECONDS_PER_MINUTE = 60;
     private static final int SECONDS_PER_HOUR = 60 * 60;
     private static final int SECONDS_PER_DAY = 24 * 60 * 60;
+
+    private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<Bitmap>();
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -1083,4 +1086,22 @@ public final class Utils {
         return (sm.getStorageBytesUntilLow(context.getFilesDir()) < 0);
     }
 
+
+    /**
+     * Returns a default user icon (as a {@link Bitmap}) for the given user.
+     *
+     * Note that for guest users, you should pass in {@code UserHandle.USER_NULL}.
+     * @param userId the user id or {@code UserHandle.USER_NULL} for a non-user specific icon
+     */
+    public static Bitmap getDefaultUserIconAsBitmap(int userId) {
+        Bitmap bitmap = null;
+        // Try finding the corresponding bitmap in the dark bitmap cache
+        bitmap = sDarkDefaultUserBitmapCache.get(userId);
+        if (bitmap == null) {
+            bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(userId, false));
+            // Save it to cache
+            sDarkDefaultUserBitmapCache.put(userId, bitmap);
+        }
+        return bitmap;
+    }
 }
