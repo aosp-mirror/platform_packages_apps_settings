@@ -327,7 +327,9 @@ public class RunningState {
 
         public Drawable loadIcon(Context context, RunningState state) {
             if (mPackageInfo != null) {
-                return mPackageInfo.loadIcon(state.mPm);
+                Drawable unbadgedIcon = mPackageInfo.loadUnbadgedIcon(state.mPm);
+                Drawable icon = state.mPm.getUserBadgedIcon(unbadgedIcon, new UserHandle(mUserId));
+                return icon;
             }
             return null;
         }
