@@ -1811,8 +1811,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             final AppItem item = mItems.get(position);
             if (getItemViewType(position) == 1) {
                 if (convertView == null) {
-                    convertView = inflateCategoryHeader(LayoutInflater.from(parent.getContext()),
-                            parent);
+                    convertView = Utils.inflateCategoryHeader(LayoutInflater.from(
+                            parent.getContext()), parent);
                 }
 
                 final TextView title = (TextView) convertView.findViewById(android.R.id.title);
@@ -2501,14 +2501,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                 android.R.id.widget_frame);
         widgetFrame.addView(widget, new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
         return view;
-    }
-
-    private static View inflateCategoryHeader(LayoutInflater inflater, ViewGroup root) {
-        final TypedArray a = inflater.getContext().obtainStyledAttributes(null,
-                com.android.internal.R.styleable.Preference,
-                com.android.internal.R.attr.preferenceCategoryStyle, 0);
-        final int resId = a.getResourceId(com.android.internal.R.styleable.Preference_layout, 0);
-        return inflater.inflate(resId, root, false);
     }
 
     /**
