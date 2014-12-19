@@ -43,6 +43,7 @@ public class ImeiInformation extends PreferenceActivity {
     private static final String KEY_IMEI_SV = "imei_sv";
 
     private SubscriptionManager mSubscriptionManager;
+    private boolean isMultiSIM = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class ImeiInformation extends PreferenceActivity {
     // Since there are multiple phone for dsds, therefore need to show information for different
     // phones.
     private void initPreferenceScreen(int slotCount) {
+        isMultiSIM = (slotCount > 1);
         for (int slotId = 0; slotId < slotCount; slotId ++) {
             addPreferencesFromResource(R.xml.device_info_phone_status);
             setPreferenceValue(slotId);
@@ -122,8 +124,10 @@ public class ImeiInformation extends PreferenceActivity {
     private void updateTitle(Preference pref, int slotId) {
         if (pref != null) {
             String title = pref.getTitle().toString();
-            // Slot starts from 1, slotId starts from 0 so plus 1
-            title = title + getResources().getString(R.string.slot_number, slotId + 1);
+            if (isMultiSIM) {
+                // Slot starts from 1, slotId starts from 0 so plus 1
+                title += " " + getResources().getString(R.string.slot_number, slotId + 1);
+            }
             pref.setTitle(title);
         }
     }
