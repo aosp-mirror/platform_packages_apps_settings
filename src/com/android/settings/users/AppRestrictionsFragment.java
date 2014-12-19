@@ -327,16 +327,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return getPreferenceScreen();
     }
 
-    Drawable getCircularUserIcon() {
-        Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
-        if (userIcon == null) {
-            return null;
-        }
-        CircleFramedDrawable circularIcon =
-                CircleFramedDrawable.getInstance(this.getActivity(), userIcon);
-        return circularIcon;
-    }
-
     protected void clearSelectedApps() {
         mSelectedPackages.clear();
     }

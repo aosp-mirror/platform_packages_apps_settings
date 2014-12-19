@@ -37,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.drawable.CircleFramedDrawable;
 
 /**
@@ -98,16 +99,6 @@ public class EditUserInfoController {
         }
     }
 
-    Drawable getCircularUserIcon(Activity activity) {
-        Bitmap userIcon = mUserManager.getUserIcon(mUser.getIdentifier());
-        if (userIcon == null) {
-            return null;
-        }
-        CircleFramedDrawable circularIcon =
-                CircleFramedDrawable.getInstance(activity, userIcon);
-        return circularIcon;
-    }
-
     public Dialog createDialog(final Fragment fragment, final Drawable currentUserIcon,
             final CharSequence currentUserName,
             int titleResId, final OnContentChangedCallback callback, UserHandle user) {
@@ -131,7 +122,7 @@ public class EditUserInfoController {
         } else {
             drawable = currentUserIcon;
             if (drawable == null) {
-                drawable = getCircularUserIcon(activity);
+                drawable = Utils.getUserIcon(activity, mUserManager, info);
             }
         }
         userPhotoView.setImageDrawable(drawable);
