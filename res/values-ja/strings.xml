@@ -576,7 +576,7 @@
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"タブレットが他のデバイスと接触したときのデータ交換を許可する"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"端末が他のデバイスと接触したときのデータ交換を許可する"</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Androidビーム"</string>
-    <string name="android_beam_on_summary" msgid="3618057099355636830">"アプリコンテンツをNFCで転送する準備が整いました"</string>
+    <string name="android_beam_on_summary" msgid="3618057099355636830">"アプリコンテンツをNFCで転送できます"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"OFF"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"NFCがOFFのため使用できません"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Androidビーム"</string>
@@ -820,7 +820,7 @@
     <string name="screen_timeout_title" msgid="5130038655092628247">"画面がOFFになったとき"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"壁紙"</string>
-    <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙の選択先:"</string>
+    <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"壁紙タイプの選択"</string>
     <string name="screensaver_settings_title" msgid="3349790120327233241">"スクリーンセーバー"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"ホルダー装着時またはスリープ/充電時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"いずれか"</string>
@@ -1101,8 +1101,8 @@
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"最近の位置情報リクエスト"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"位置情報を最近リクエストしたアプリはありません"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"位置情報サービス"</string>
-    <string name="location_high_battery_use" msgid="517199943258508020">"高い電池使用量"</string>
-    <string name="location_low_battery_use" msgid="8602232529541903596">"低い電池使用量"</string>
+    <string name="location_high_battery_use" msgid="517199943258508020">"電池使用量: 高"</string>
+    <string name="location_low_battery_use" msgid="8602232529541903596">"電池使用量: 低"</string>
     <string name="location_mode_screen_title" msgid="4528716772270246542">"位置情報モード"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"GPS、Wi‑Fi、モバイルネットワークで現在地を特定する"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Wi‑Fiとモバイルネットワークで現在地を特定する"</string>
@@ -2316,8 +2316,7 @@
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"タップしてデータSIMを選択する"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"このSIMを常に通話に使用する"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"データに使用するSIMを選択してください"</string>
-    <!-- no translation found for data_switch_started (2040761479817166311) -->
-    <skip />
+    <string name="data_switch_started" msgid="2040761479817166311">"データSIMに切り替えています。最大で1分ほどかかる場合があります..."</string>
     <string name="select_sim_for_calls" msgid="3503094771801109334">"通話に使用するSIMを選択してください"</string>
     <string name="sim_select_card" msgid="211285163525563293">"SIMカードを選択"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIMカード番号: <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -2442,9 +2441,9 @@
     <string name="app_notification_block_title" msgid="172237877395761371">"ブロック"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"このアプリからの通知を表示しない"</string>
     <string name="app_notification_priority_title" msgid="1967189807102076587">"優先度"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"端末が優先的な割り込みに設定されている場合に限り、通知を受け取ってリストの先頭に表示し続ける"</string>
+    <string name="app_notification_priority_summary" msgid="7513344552201639232">"通知をリストの先頭に表示し、端末が優先的な割り込みのみ許可に設定されていても表示する"</string>
     <string name="app_notification_sensitive_title" msgid="7707233094233553192">"プライベート"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"端末がロックされている場合、プライベートな内容はこのアプリの通知に表示されません"</string>
+    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"端末がロックされている場合、このアプリの通知のプライベートな内容を表示しない"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先度"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"プライベート"</string>
