@@ -236,16 +236,11 @@ public class SimStatus extends PreferenceActivity {
     private void updateNetworkType() {
         // Whether EDGE, UMTS, etc...
         String networktype = null;
-        final ITelephony telephony = ITelephony.Stub.asInterface(
-                ServiceManager.getService(Context.TELEPHONY_SERVICE));
-        try {
-            final int actualNetworkType = telephony.getVoiceNetworkTypeForSubscriber(
-                    mSir.getSubscriptionId());
-            if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualNetworkType) {
-                networktype = mTelephonyManager.getNetworkTypeName(actualNetworkType);
-            }
-        } catch (RemoteException remoteException){
-            // Do nothing, networkType will remain null.
+        final int subId = mSir.getSubscriptionId();
+        final int actualNetworkType = mTelephonyManager.getDataNetworkType(
+                mSir.getSubscriptionId());
+        if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualNetworkType) {
+            networktype = mTelephonyManager.getNetworkTypeName(actualNetworkType);
         }
 
         setSummaryText(KEY_NETWORK_TYPE, networktype);
