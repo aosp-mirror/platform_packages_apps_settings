@@ -502,7 +502,7 @@ public class UserSettings extends SettingsPreferenceFragment
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE: {
                 Dialog dlg =
-                        Utils.createRemoveConfirmationDialog(getActivity(), mRemovingUserId,
+                        UserDialogs.createRemoveDialog(getActivity(), mRemovingUserId,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         removeUserNow();

@@ -49,6 +49,7 @@ import android.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.users.UserDialogs;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -203,7 +204,7 @@ public class AccountSettings extends SettingsPreferenceFragment
             }
             if (preference == profileData.removeWorkProfilePreference) {
                 final int userId = profileData.userInfo.id;
-                Utils.createRemoveConfirmationDialog(getActivity(), userId,
+                UserDialogs.createRemoveDialog(getActivity(), userId,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

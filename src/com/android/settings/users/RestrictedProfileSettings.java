@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,8 +29,6 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-
-import java.util.List;
 
 public class RestrictedProfileSettings extends AppRestrictionsFragment
         implements EditUserInfoController.OnContentChangedCallback {
@@ -129,7 +126,7 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
                     this, mUser);
         } else if (dialogId == DIALOG_CONFIRM_REMOVE) {
             Dialog dlg =
-                    Utils.createRemoveConfirmationDialog(getActivity(), mUser.getIdentifier(),
+                    UserDialogs.createRemoveDialog(getActivity(), mUser.getIdentifier(),
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     removeUser();

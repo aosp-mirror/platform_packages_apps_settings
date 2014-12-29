@@ -846,43 +846,6 @@ public final class Utils {
                || um.getUserProfiles().contains(otherUser);
    }
 
-    /**
-     * Creates a dialog to confirm with the user if it's ok to remove the user
-     * and delete all the data.
-     *
-     * @param context a Context object
-     * @param removingUserId The userId of the user to remove
-     * @param onConfirmListener Callback object for positive action
-     * @return the created Dialog
-     */
-    public static Dialog createRemoveConfirmationDialog(Context context, int removingUserId,
-            DialogInterface.OnClickListener onConfirmListener) {
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        UserInfo userInfo = um.getUserInfo(removingUserId);
-        int titleResId;
-        int messageResId;
-        if (UserHandle.myUserId() == removingUserId) {
-            titleResId = R.string.user_confirm_remove_self_title;
-            messageResId = R.string.user_confirm_remove_self_message;
-        } else if (userInfo.isRestricted()) {
-            titleResId = R.string.user_profile_confirm_remove_title;
-            messageResId = R.string.user_profile_confirm_remove_message;
-        } else if (userInfo.isManagedProfile()) {
-            titleResId = R.string.work_profile_confirm_remove_title;
-            messageResId = R.string.work_profile_confirm_remove_message;
-        } else {
-            titleResId = R.string.user_confirm_remove_title;
-            messageResId = R.string.user_confirm_remove_message;
-        }
-        Dialog dlg = new AlertDialog.Builder(context)
-                .setTitle(titleResId)
-                .setMessage(messageResId)
-                .setPositiveButton(R.string.user_delete_button,
-                        onConfirmListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-        return dlg;
-    }
 
     /**
      * Returns whether or not this device is able to be OEM unlocked.
