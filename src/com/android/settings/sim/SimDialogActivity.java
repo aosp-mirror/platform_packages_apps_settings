@@ -87,30 +87,37 @@ public class SimDialogActivity extends Activity {
         final Context context = getApplicationContext();
         final SubscriptionInfo sir = Utils.findRecordBySlotId(context, slotId);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(R.string.sim_preferred_title);
-        alertDialogBuilder.setMessage(res.getString(
-                    R.string.sim_preferred_message, sir.getDisplayName()));
+        if (sir != null) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle(R.string.sim_preferred_title);
+            alertDialogBuilder.setMessage(res.getString(
+                        R.string.sim_preferred_message, sir.getDisplayName()));
 
-        alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                final int subId = sir.getSubscriptionId();
-                PhoneAccountHandle phoneAccountHandle = subscriptionIdToPhoneAccountHandle(subId);
-                setDefaultDataSubId(context, subId);
-                setDefaultSmsSubId(context, subId);
-                setUserSelectedOutgoingPhoneAccount(phoneAccountHandle);
-                finish();
-            }
-        });
-        alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog,int id) {
-                finish();
-            }
-        });
+            alertDialogBuilder.setPositiveButton(R.string.yes, new
+                    DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    final int subId = sir.getSubscriptionId();
+                    PhoneAccountHandle phoneAccountHandle =
+                            subscriptionIdToPhoneAccountHandle(subId);
+                    setDefaultDataSubId(context, subId);
+                    setDefaultSmsSubId(context, subId);
+                    setUserSelectedOutgoingPhoneAccount(phoneAccountHandle);
+                    finish();
+                }
+            });
+            alertDialogBuilder.setNegativeButton(R.string.no, new
+                    DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog,int id) {
+                    finish();
+                }
+            });
 
-        alertDialogBuilder.create().show();
+            alertDialogBuilder.create().show();
+        } else {
+            finish();
+        }
     }
 
     private static void setDefaultDataSubId(final Context context, final int subId) {
