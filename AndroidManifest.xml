@@ -1112,7 +1112,8 @@
 
         <!-- Lock screen settings -->
         <activity android:name="ConfirmDeviceCredentialActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Transparent">
             <intent-filter>
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
