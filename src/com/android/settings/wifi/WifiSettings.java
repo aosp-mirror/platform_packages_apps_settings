@@ -39,6 +39,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -524,7 +525,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                     }
                     menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
 
-                    if (mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {
+                    NfcAdapter nfcAdapter = NfcAdapter.getNfcAdapter(getActivity());
+                    if (nfcAdapter != null && nfcAdapter.isEnabled() &&
+                            mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {
                         // Only allow writing of NFC tags for password-protected networks.
                         menu.add(Menu.NONE, MENU_ID_WRITE_NFC, 0, R.string.wifi_menu_write_to_nfc);
                     }
