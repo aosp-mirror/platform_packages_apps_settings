@@ -219,7 +219,10 @@ public class SimDialogActivity extends Activity {
                 final PhoneAccount phoneAccount =
                         telecomManager.getPhoneAccount(phoneAccounts.next());
                 list.add((String)phoneAccount.getLabel());
-                if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)) {
+                // Added check to add entry into callsSubInforList only if phoneAccountId is int
+                // Todo : Might have to change it later based on b/18904714
+                if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION) &&
+                        TextUtils.isDigitsOnly(phoneAccount.getAccountHandle().getId())) {
                     final String phoneAccountId = phoneAccount.getAccountHandle().getId();
                     final SubscriptionInfo sir = Utils.findRecordBySubId(context,
                             Integer.parseInt(phoneAccountId));
