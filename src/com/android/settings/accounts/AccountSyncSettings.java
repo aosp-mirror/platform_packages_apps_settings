@@ -34,7 +34,6 @@ import android.content.SyncAdapterType;
 import android.content.SyncInfo;
 import android.content.SyncStatusInfo;
 import android.content.pm.ProviderInfo;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -440,12 +439,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     !initialSync);
 
             syncPref.setFailed(lastSyncFailed);
-            ConnectivityManager connManager =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            final boolean masterSyncAutomatically =
-                    ContentResolver.getMasterSyncAutomaticallyAsUser(userId);
-            final boolean backgroundDataEnabled = connManager.getBackgroundDataSetting();
-            final boolean oneTimeSyncMode = !masterSyncAutomatically || !backgroundDataEnabled;
+            final boolean oneTimeSyncMode = !ContentResolver.getMasterSyncAutomaticallyAsUser(
+                userId);
             syncPref.setOneTimeSyncMode(oneTimeSyncMode);
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
