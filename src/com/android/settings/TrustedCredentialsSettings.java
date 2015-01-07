@@ -620,6 +620,9 @@ public class TrustedCredentialsSettings extends Fragment {
         holder.mSubjectSecondaryView.setText(certHolder.mSubjectSecondary);
         if (mTab.mSwitch) {
             holder.mSwitch.setChecked(!certHolder.mDeleted);
+            holder.mSwitch.setEnabled(!mUserManager.hasUserRestriction(
+                    UserManager.DISALLOW_CONFIG_CREDENTIALS,
+                    new UserHandle(certHolder.mProfileId)));
             holder.mSwitch.setVisibility(View.VISIBLE);
         }
         return convertView;
@@ -680,7 +683,8 @@ public class TrustedCredentialsSettings extends Fragment {
         Button removeButton = (Button) inflater.inflate(R.layout.trusted_credential_details,
                                                         body,
                                                         false);
-        if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
+        if (!mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS,
+                new UserHandle(certHolder.mProfileId))) {
             body.addView(removeButton);
         }
         removeButton.setText(certHolder.mTab.getButtonLabel(certHolder));
@@ -764,16 +768,10 @@ public class TrustedCredentialsSettings extends Fragment {
                 } else {
                     return service.deleteCaCertificate(mCertHolder.mAlias);
                 }
-            } catch (CertificateEncodingException e) {
+            } catch (CertificateEncodingException | SecurityException | IllegalStateException
+                    | RemoteException e) {
                 Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias,
                         e);
-                return false;
-            } catch (IllegalStateException e) {
-                // used by installCaCertificate to report errors
-                Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias, e);
-                return false;
-            } catch (RemoteException e) {
-                Log.w(TAG, "Error while toggling alias " + mCertHolder.mAlias, e);
                 return false;
             }
         }
