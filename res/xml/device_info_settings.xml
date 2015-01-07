@@ -72,6 +72,13 @@
                 <intent android:action="android.settings.TERMS" />
             </PreferenceScreen>
 
+            <!-- System WebView License information -->
+            <PreferenceScreen
+                    android:key="webview_license"
+                    android:title="@string/webview_license_title">
+                <intent android:action="android.settings.WEBVIEW_LICENSE" />
+            </PreferenceScreen>
+
             <Preference
                     android:key="wallpaper_attributions"
                     android:title="@string/wallpaper_attributions"
