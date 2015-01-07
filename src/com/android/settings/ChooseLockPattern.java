@@ -69,12 +69,11 @@ public class ChooseLockPattern extends SettingsActivity {
         return modIntent;
     }
 
-    public static Intent createIntent(Context context, final boolean isFallback,
+    public static Intent createIntent(Context context,
             boolean requirePassword, boolean confirmCredentials) {
         Intent intent = new Intent(context, ChooseLockPattern.class);
         intent.putExtra("key_lock_method", "pattern");
         intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
-        intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, isFallback);
         intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePassword);
         return intent;
     }
@@ -563,16 +562,13 @@ public class ChooseLockPattern extends SettingsActivity {
             LockPatternUtils utils = mChooseLockSettingsHelper.utils();
             final boolean lockVirgin = !utils.isPatternEverChosen();
 
-            final boolean isFallback = getActivity().getIntent()
-                .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
-
             boolean wasSecureBefore = utils.isSecure();
 
             final boolean required = getActivity().getIntent().getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
             utils.setCredentialRequiredToDecrypt(required);
             utils.setLockPatternEnabled(true);
-            utils.saveLockPattern(mChosenPattern, isFallback);
+            utils.saveLockPattern(mChosenPattern);
 
             if (lockVirgin) {
                 utils.setVisiblePatternEnabled(true);

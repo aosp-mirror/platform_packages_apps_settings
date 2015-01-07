@@ -76,12 +76,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final String KEY_UNLOCK_BACKUP_INFO = "unlock_backup_info";
         private static final String KEY_UNLOCK_SET_OFF = "unlock_set_off";
         private static final String KEY_UNLOCK_SET_NONE = "unlock_set_none";
-        private static final String KEY_UNLOCK_SET_BIOMETRIC_WEAK = "unlock_set_biometric_weak";
         private static final String KEY_UNLOCK_SET_PIN = "unlock_set_pin";
         private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
         private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
         private static final int CONFIRM_EXISTING_REQUEST = 100;
-        private static final int FALLBACK_REQUEST = 101;
         private static final int ENABLE_ENCRYPTION_REQUEST = 102;
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
 
@@ -195,31 +193,12 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View v = super.onCreateView(inflater, container, savedInstanceState);
-            final boolean onlyShowFallback = getActivity().getIntent()
-                    .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
-            if (onlyShowFallback) {
-                View header = v.inflate(getActivity(),
-                        R.layout.weak_biometric_fallback_header, null);
-                ((ListView) v.findViewById(android.R.id.list)).addHeaderView(header, null, false);
-            }
-
-            return v;
-        }
-
-        @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             mWaitingForConfirmation = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 updatePreferencesOrFinish();
-            } else if (requestCode == FALLBACK_REQUEST) {
-                mChooseLockSettingsHelper.utils().deleteTempGallery();
-                getActivity().setResult(resultCode);
-                finish();
             } else if (requestCode == ENABLE_ENCRYPTION_REQUEST
                     && resultCode == Activity.RESULT_OK) {
                 mRequirePassword = data.getBooleanExtra(
@@ -248,22 +227,21 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (quality == -1) {
                 // If caller didn't specify password quality, show UI and allow the user to choose.
                 quality = intent.getIntExtra(MINIMUM_QUALITY_KEY, -1);
-                MutableBoolean allowBiometric = new MutableBoolean(false);
-                quality = upgradeQuality(quality, allowBiometric);
+                quality = upgradeQuality(quality);
                 final PreferenceScreen prefScreen = getPreferenceScreen();
                 if (prefScreen != null) {
                     prefScreen.removeAll();
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
-                disableUnusablePreferences(quality, allowBiometric);
+                disableUnusablePreferences(quality);
                 updatePreferenceSummaryIfNeeded();
             } else {
                 updateUnlockMethodAndFinish(quality, false);
             }
         }
 
-        /** increases the quality if necessary, and returns whether biometric is allowed */
-        private int upgradeQuality(int quality, MutableBoolean allowBiometric) {
+        /** increases the quality if necessary */
+        private int upgradeQuality(int quality) {
             quality = upgradeQualityForDPM(quality);
             quality = upgradeQualityForKeyStore(quality);
             return quality;
@@ -292,28 +270,21 @@ public class ChooseLockGeneric extends SettingsActivity {
          * implementation is in disableUnusablePreferenceImpl.
          *
          * @param quality the requested quality.
-         * @param allowBiometric whether to allow biometic screen lock.
          */
-        protected void disableUnusablePreferences(final int quality,
-                MutableBoolean allowBiometric) {
-            disableUnusablePreferencesImpl(quality, allowBiometric, false /* hideDisabled */);
+        protected void disableUnusablePreferences(final int quality) {
+            disableUnusablePreferencesImpl(quality, false /* hideDisabled */);
         }
 
         /***
          * Disables preferences that are less secure than required quality.
          *
          * @param quality the requested quality.
-         * @param allowBiometric whether to allow biometic screen lock.
          * @param hideDisabled whether to hide disable screen lock options.
          */
         protected void disableUnusablePreferencesImpl(final int quality,
-                MutableBoolean allowBiometric, boolean hideDisabled) {
+                boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
             final Intent intent = getActivity().getIntent();
-            final boolean onlyShowFallback = intent.getBooleanExtra(
-                    LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
-            final boolean weakBiometricAvailable =
-                    mChooseLockSettingsHelper.utils().isBiometricWeakInstalled();
 
             // if there are multiple users, disable "None" setting
             UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -331,10 +302,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                         visible = singleUser; // don't show when there's more than 1 user
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-                    } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(key)) {
-                        enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK ||
-                                allowBiometric.value;
-                        visible = weakBiometricAvailable; // If not available, then don't show it.
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
                     } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
@@ -345,7 +312,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                     if (hideDisabled) {
                         visible = visible && enabled;
                     }
-                    if (!visible || (onlyShowFallback && !allowedForFallback(key))) {
+                    if (!visible) {
                         entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setSummary(R.string.unlock_set_unlock_disabled_summary);
@@ -381,46 +348,16 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        /**
-         * Check whether the key is allowed for fallback (e.g. bio sensor). Returns true if it's
-         * supported as a backup.
-         *
-         * @param key
-         * @return true if allowed
-         */
-        private boolean allowedForFallback(String key) {
-            return KEY_UNLOCK_BACKUP_INFO.equals(key)  ||
-                    KEY_UNLOCK_SET_PATTERN.equals(key) || KEY_UNLOCK_SET_PIN.equals(key);
-        }
-
-        private Intent getBiometricSensorIntent() {
-            Intent fallBackIntent = new Intent().setClass(getActivity(),
-                    ChooseLockGeneric.InternalActivity.class);
-            fallBackIntent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, true);
-            fallBackIntent.putExtra(CONFIRM_CREDENTIALS, false);
-            fallBackIntent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE,
-                    R.string.backup_lock_settings_picker_title);
-
-            boolean showTutorial = ALWAY_SHOW_TUTORIAL ||
-                    !mChooseLockSettingsHelper.utils().isBiometricWeakEverChosen();
-            Intent intent = new Intent();
-            intent.setClassName("com.android.facelock", "com.android.facelock.SetupIntro");
-            intent.putExtra("showTutorial", showTutorial);
-            PendingIntent pending = PendingIntent.getActivity(getActivity(), 0, fallBackIntent, 0);
-            intent.putExtra("PendingIntent", pending);
-            return intent;
-        }
-
         protected Intent getLockPasswordIntent(Context context, int quality,
-                final boolean isFallback, int minLength, final int maxLength,
+                int minLength, final int maxLength,
                 boolean requirePasswordToDecrypt, boolean confirmCredentials) {
-            return ChooseLockPassword.createIntent(context, quality, isFallback, minLength,
+            return ChooseLockPassword.createIntent(context, quality, minLength,
                     maxLength, requirePasswordToDecrypt, confirmCredentials);
         }
 
-        protected Intent getLockPatternIntent(Context context, final boolean isFallback,
-                final boolean requirePassword, final boolean confirmCredentials) {
-            return ChooseLockPattern.createIntent(context, isFallback, requirePassword,
+        protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
+                final boolean confirmCredentials) {
+            return ChooseLockPattern.createIntent(context, requirePassword,
                     confirmCredentials);
         }
 
@@ -444,10 +381,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 throw new IllegalStateException("Tried to update password without confirming it");
             }
 
-            final boolean isFallback = getActivity().getIntent()
-                .getBooleanExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
-
-            quality = upgradeQuality(quality, null);
+            quality = upgradeQuality(quality);
 
             final Context context = getActivity();
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
@@ -456,33 +390,19 @@ public class ChooseLockGeneric extends SettingsActivity {
                     minLength = MIN_PASSWORD_LENGTH;
                 }
                 final int maxLength = mDPM.getPasswordMaximumLength(quality);
-                Intent intent = getLockPasswordIntent(context, quality, isFallback, minLength,
+                Intent intent = getLockPasswordIntent(context, quality, minLength,
                         maxLength, mRequirePassword,  /* confirm credentials */false);
-                if (isFallback) {
-                    startActivityForResult(intent, FALLBACK_REQUEST);
-                    return;
-                } else {
-                    mFinishPending = true;
-                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    startActivity(intent);
-                }
-            } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-                Intent intent = getLockPatternIntent(context, isFallback, mRequirePassword,
-                        /* confirm credentials */false);
-                if (isFallback) {
-                    startActivityForResult(intent, FALLBACK_REQUEST);
-                    return;
-                } else {
-                    mFinishPending = true;
-                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    startActivity(intent);
-                }
-            } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK) {
-                Intent intent = getBiometricSensorIntent();
                 mFinishPending = true;
+                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                startActivity(intent);
+            } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
+                Intent intent = getLockPatternIntent(context, mRequirePassword,
+                        /* confirm credentials */false);
+                mFinishPending = true;
+                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(intent);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
-                mChooseLockSettingsHelper.utils().clearLock(false);
+                mChooseLockSettingsHelper.utils().clearLock();
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
                 getActivity().setResult(Activity.RESULT_OK);
                 finish();
@@ -526,9 +446,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (KEY_UNLOCK_SET_NONE.equals(unlockMethod)) {
                 updateUnlockMethodAndFinish(
                         DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false /* disabled */ );
-            } else if (KEY_UNLOCK_SET_BIOMETRIC_WEAK.equals(unlockMethod)) {
-                maybeEnableEncryption(
-                        DevicePolicyManager.PASSWORD_QUALITY_BIOMETRIC_WEAK, false);
             } else if (KEY_UNLOCK_SET_PATTERN.equals(unlockMethod)) {
                 maybeEnableEncryption(
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
