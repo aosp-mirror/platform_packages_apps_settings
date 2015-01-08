@@ -995,9 +995,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         return isEnable;
     }
 
-    private void setMobileDataEnabled(boolean enabled) {
+    private void setMobileDataEnabled(int subId, boolean enabled) {
         if (LOGD) Log.d(TAG, "setMobileDataEnabled()");
-        mTelephonyManager.setDataEnabled(enabled);
+        mTelephonyManager.setDataEnabled(subId, enabled);
         mMobileDataEnabled = enabled;
         updatePolicy(false);
     }
@@ -1164,12 +1164,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                     if (Utils.showSimCardTile(getActivity())) {
                         handleMultiSimDataDialog();
                     } else {
-                        setMobileDataEnabled(true);
+                        setMobileDataEnabled(getSubId(currentTab), true);
                     }
                 } else {
                     // disabling data; show confirmation dialog which eventually
                     // calls setMobileDataEnabled() once user confirms.
-                    ConfirmDataDisableFragment.show(DataUsageSummary.this);
+                    ConfirmDataDisableFragment.show(DataUsageSummary.this, getSubId(mCurrentTab));
                 }
             }
 
@@ -1187,7 +1187,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         // the pop-up.
         if (!Utils.showSimCardTile(context) ||
                 (nextSir != null && currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
-            setMobileDataEnabled(true);
+            setMobileDataEnabled(currentSir.getSubscriptionId(), true);
             updateBody();
             return;
         }
@@ -1206,7 +1206,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 mSubscriptionManager.setDefaultDataSubId(currentSir.getSubscriptionId());
-                setMobileDataEnabled(true);
+                setMobileDataEnabled(currentSir.getSubscriptionId(), true);
                 updateBody();
             }
         });
@@ -2151,7 +2151,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
      * Dialog to request user confirmation before disabling data.
      */
     public static class ConfirmDataDisableFragment extends DialogFragment {
-        public static void show(DataUsageSummary parent) {
+        static int mSubId;
+        public static void show(DataUsageSummary parent, int subId) {
+            mSubId = subId;
             if (!parent.isAdded()) return;
 
             final ConfirmDataDisableFragment dialog = new ConfirmDataDisableFragment();
@@ -2172,7 +2174,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
                     final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
                     if (target != null) {
                         // TODO: extend to modify policy enabled flag.
-                        target.setMobileDataEnabled(false);
+                        target.setMobileDataEnabled(mSubId, false);
                     }
                 }
             });
