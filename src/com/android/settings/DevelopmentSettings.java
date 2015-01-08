@@ -61,7 +61,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -478,6 +480,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             setPrefsEnabledState(mLastEnabledState);
         }
         mSwitchBar.show();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(UsbManager.ACTION_USB_STATE);
+        getActivity().registerReceiver(mUsbReceiver, filter);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
