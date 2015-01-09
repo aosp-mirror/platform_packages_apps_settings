@@ -237,10 +237,14 @@ public class SimStatus extends PreferenceActivity {
         // Whether EDGE, UMTS, etc...
         String networktype = null;
         final int subId = mSir.getSubscriptionId();
-        final int actualNetworkType = mTelephonyManager.getDataNetworkType(
+        final int actualDataNetworkType = mTelephonyManager.getDataNetworkType(
                 mSir.getSubscriptionId());
-        if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualNetworkType) {
-            networktype = mTelephonyManager.getNetworkTypeName(actualNetworkType);
+        final int actualVoiceNetworkType = mTelephonyManager.getVoiceNetworkType(
+                mSir.getSubscriptionId());
+        if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualDataNetworkType) {
+            networktype = mTelephonyManager.getNetworkTypeName(actualDataNetworkType);
+        } else if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualVoiceNetworkType) {
+            networktype = mTelephonyManager.getNetworkTypeName(actualVoiceNetworkType);
         }
 
         setSummaryText(KEY_NETWORK_TYPE, networktype);
