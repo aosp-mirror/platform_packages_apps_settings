@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static com.android.settings.notification.AppNotificationSettings.EXTRA_HAS_SETTINGS_INTENT;
 import static com.android.settings.notification.AppNotificationSettings.EXTRA_SETTINGS_INTENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.animation.LayoutTransition;
 import android.app.INotificationManager;
@@ -49,6 +50,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -127,6 +129,8 @@ public class NotificationAppList extends PinnedHeaderListFragment
                     R.layout.spinner_view, null);
             mSpinner.setAdapter(mProfileSpinnerAdapter);
             mSpinner.setOnItemSelectedListener(this);
+            // Set layout parameters, otherwise we get the default ones
+            mSpinner.setLayoutParams(new LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
             setPinnedHeaderView(mSpinner);
         }
     }
