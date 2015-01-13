@@ -59,7 +59,7 @@ public class SimBootReceiver extends BroadcastReceiver {
         mSharedPreferences = mContext.getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE);
 
-        mSubscriptionManager.registerOnSubscriptionsChangedListener(mSubscriptionListener);
+        mSubscriptionManager.addOnSubscriptionsChangedListener(mSubscriptionListener);
     }
 
     private void detectChangeAndNotify() {
