@@ -148,7 +148,7 @@ public class ConfirmLockPattern extends SettingsActivity {
                 // on first launch, if no lock pattern is set, then finish with
                 // success (don't want user to get stuck confirming something that
                 // doesn't exist).
-                if (!mLockPatternUtils.savedPatternExists()) {
+                if (!mLockPatternUtils.isLockPatternEnabled()) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
                 }

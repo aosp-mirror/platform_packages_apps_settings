@@ -95,7 +95,7 @@ public final class ChooseLockSettingsHelper {
      */
     private boolean confirmPattern(int request, CharSequence message,
                                    CharSequence details, boolean returnCredentials) {
-        if (!mLockPatternUtils.isLockPatternEnabled() || !mLockPatternUtils.savedPatternExists()) {
+        if (!mLockPatternUtils.isLockPatternEnabled()) {
             return false;
         }
         final Intent intent = new Intent();
