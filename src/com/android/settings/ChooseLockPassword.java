@@ -63,7 +63,7 @@ public class ChooseLockPassword extends SettingsActivity {
         return modIntent;
     }
 
-    public static Intent createIntent(Context context, int quality, final boolean isFallback,
+    public static Intent createIntent(Context context, int quality,
             int minLength, final int maxLength, boolean requirePasswordToDecrypt,
             boolean confirmCredentials) {
         Intent intent = new Intent().setClass(context, ChooseLockPassword.class);
@@ -71,7 +71,6 @@ public class ChooseLockPassword extends SettingsActivity {
         intent.putExtra(PASSWORD_MIN_KEY, minLength);
         intent.putExtra(PASSWORD_MAX_KEY, maxLength);
         intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, confirmCredentials);
-        intent.putExtra(LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, isFallback);
         intent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, requirePasswordToDecrypt);
         return intent;
     }
@@ -431,14 +430,12 @@ public class ChooseLockPassword extends SettingsActivity {
                 }
             } else if (mUiStage == Stage.NeedToConfirm) {
                 if (mFirstPin.equals(pin)) {
-                    final boolean isFallback = getActivity().getIntent().getBooleanExtra(
-                            LockPatternUtils.LOCKSCREEN_BIOMETRIC_WEAK_FALLBACK, false);
                     boolean wasSecureBefore = mLockPatternUtils.isSecure();
-                    mLockPatternUtils.clearLock(isFallback);
+                    mLockPatternUtils.clearLock();
                     final boolean required = getActivity().getIntent().getBooleanExtra(
                             EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
                     mLockPatternUtils.setCredentialRequiredToDecrypt(required);
-                    mLockPatternUtils.saveLockPassword(pin, mRequestedQuality, isFallback);
+                    mLockPatternUtils.saveLockPassword(pin, mRequestedQuality);
                     getActivity().setResult(RESULT_FINISHED);
                     getActivity().finish();
                     mDone = true;

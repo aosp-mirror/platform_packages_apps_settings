@@ -72,9 +72,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
-    private static final String KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING =
-            "biometric_weak_improve_matching";
-    private static final String KEY_BIOMETRIC_WEAK_LIVELINESS = "biometric_weak_liveliness";
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
@@ -85,8 +82,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
-    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
-    private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
 
     // Misc Settings
@@ -104,7 +99,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
-            KEY_LOCK_ENABLED, KEY_VISIBLE_PATTERN, KEY_BIOMETRIC_WEAK_LIVELINESS,
+            KEY_LOCK_ENABLED, KEY_VISIBLE_PATTERN,
             KEY_POWER_INSTANTLY_LOCKS, KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS };
 
     // Only allow one trust agent on the platform.
@@ -117,7 +112,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
 
-    private SwitchPreference mBiometricWeakLiveliness;
     private SwitchPreference mVisiblePattern;
 
     private SwitchPreference mShowPassword;
@@ -165,9 +159,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 resid = R.xml.security_settings_chooser;
             }
-        } else if (lockPatternUtils.usingBiometricWeak() &&
-                lockPatternUtils.isBiometricWeakInstalled()) {
-            resid = R.xml.security_settings_biometric_weak;
         } else {
             switch (lockPatternUtils.getKeyguardStoredPasswordQuality()) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
@@ -265,10 +256,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             updateLockAfterPreferenceSummary();
         }
 
-        // biometric weak liveliness
-        mBiometricWeakLiveliness =
-                (SwitchPreference) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
-
         // visible pattern
         mVisiblePattern = (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN);
 
@@ -282,15 +269,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mPowerButtonInstantlyLocks.setSummary(getString(
                     R.string.lockpattern_settings_power_button_instantly_locks_summary,
                     trustAgentPreference.getTitle()));
-        }
-
-        // don't display visible pattern if biometric and backup is not pattern
-        if (resid == R.xml.security_settings_biometric_weak &&
-                mLockPatternUtils.getKeyguardStoredPasswordQuality() !=
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-            if (securityCategory != null && mVisiblePattern != null) {
-                securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
-            }
         }
 
         // Append the rest of the settings
@@ -562,10 +540,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         createPreferenceHierarchy();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
-        if (mBiometricWeakLiveliness != null) {
-            mBiometricWeakLiveliness.setChecked(
-                    lockPatternUtils.isBiometricWeakLivelinessEnabled());
-        }
         if (mVisiblePattern != null) {
             mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
         }
@@ -589,17 +563,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
-        } else if (KEY_BIOMETRIC_WEAK_IMPROVE_MATCHING.equals(key)) {
-            ChooseLockSettingsHelper helper =
-                    new ChooseLockSettingsHelper(this.getActivity(), this);
-            if (!helper.launchConfirmationActivity(
-                    CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST, null, null)) {
-                // If this returns false, it means no password confirmation is required, so
-                // go ahead and start improve.
-                // Note: currently a backup is required for biometric_weak so this code path
-                // can't be reached, but is here in case things change in the future
-                startBiometricWeakImprove();
-            }
         } else if (KEY_TRUST_AGENT.equals(key)) {
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
@@ -623,19 +586,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST &&
-                resultCode == Activity.RESULT_OK) {
-            startBiometricWeakImprove();
-            return;
-        } else if (requestCode == CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF &&
-                resultCode == Activity.RESULT_OK) {
-            final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
-            lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
-            // Setting the mBiometricWeakLiveliness checked value to false is handled when onResume
-            // is called by grabbing the value from lockPatternUtils.  We can't set it here
-            // because mBiometricWeakLiveliness could be null
-            return;
-        } else if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
+        if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
             if (mTrustAgentClickIntent != null) {
                 startActivity(mTrustAgentClickIntent);
                 mTrustAgentClickIntent = null;
@@ -663,26 +614,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             lockPatternUtils.setLockPatternEnabled((Boolean) value);
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
             lockPatternUtils.setVisiblePatternEnabled((Boolean) value);
-        } else  if (KEY_BIOMETRIC_WEAK_LIVELINESS.equals(key)) {
-            if ((Boolean) value) {
-                lockPatternUtils.setBiometricWeakLivelinessEnabled(true);
-            } else {
-                // In this case the user has just unchecked the checkbox, but this action requires
-                // them to confirm their password.  We need to re-check the checkbox until
-                // they've confirmed their password
-                mBiometricWeakLiveliness.setChecked(true);
-                ChooseLockSettingsHelper helper =
-                        new ChooseLockSettingsHelper(this.getActivity(), this);
-                if (!helper.launchConfirmationActivity(
-                                CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF, null, null)) {
-                    // If this returns false, it means no password confirmation is required, so
-                    // go ahead and uncheck it here.
-                    // Note: currently a backup is required for biometric_weak so this code path
-                    // can't be reached, but is here in case things change in the future
-                    lockPatternUtils.setBiometricWeakLivelinessEnabled(false);
-                    mBiometricWeakLiveliness.setChecked(false);
-                }
-            }
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
             mLockPatternUtils.setPowerButtonInstantlyLocks((Boolean) value);
         } else if (KEY_SHOW_PASSWORD.equals(key)) {
@@ -704,12 +635,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     protected int getHelpResource() {
         return R.string.help_url_security;
-    }
-
-    public void startBiometricWeakImprove(){
-        Intent intent = new Intent();
-        intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
-        startActivity(intent);
     }
 
     /**
@@ -831,13 +756,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
             // Add options for lock/unlock screen
             int resId = getResIdForLockUnlockScreen(context, lockPatternUtils);
-
-            // don't display visible pattern if biometric and backup is not pattern
-            if (resId == R.xml.security_settings_biometric_weak &&
-                    lockPatternUtils.getKeyguardStoredPasswordQuality() !=
-                            DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
-                keys.add(KEY_VISIBLE_PATTERN);
-            }
 
             // Do not display SIM lock for devices without an Icc card
             TelephonyManager tm = TelephonyManager.getDefault();

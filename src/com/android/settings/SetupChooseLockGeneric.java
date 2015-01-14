@@ -99,11 +99,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
          * screen lock options here.
          *
          * @param quality the requested quality.
-         * @param allowBiometric whether to allow biometic screen lock
          */
         @Override
-        protected void disableUnusablePreferences(final int quality,
-                MutableBoolean allowBiometric) {
+        protected void disableUnusablePreferences(final int quality) {
             // At this part of the flow, the user has already indicated they want to add a pin,
             // pattern or password, so don't show "None" or "Slide". We disable them here and set
             // the HIDE_DISABLED flag to true to hide them. This only happens for setup wizard.
@@ -111,24 +109,23 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
             // installed with a policy we need to honor.
             final int newQuality = Math.max(quality,
                     DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-            super.disableUnusablePreferencesImpl(newQuality, allowBiometric,
-                    true /* hideDisabled */);
+            super.disableUnusablePreferencesImpl(newQuality, true /* hideDisabled */);
         }
 
         @Override
-        protected Intent getLockPasswordIntent(Context context, int quality, boolean isFallback,
+        protected Intent getLockPasswordIntent(Context context, int quality,
                 int minLength, int maxLength, boolean requirePasswordToDecrypt,
                 boolean confirmCredentials) {
             final Intent intent = SetupChooseLockPassword.createIntent(context, quality,
-                    isFallback, minLength, maxLength, requirePasswordToDecrypt, confirmCredentials);
+                    minLength, maxLength, requirePasswordToDecrypt, confirmCredentials);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }
 
         @Override
-        protected Intent getLockPatternIntent(Context context, boolean isFallback,
+        protected Intent getLockPatternIntent(Context context,
                 boolean requirePassword, boolean confirmCredentials) {
-            final Intent intent = SetupChooseLockPattern.createIntent(context, isFallback,
+            final Intent intent = SetupChooseLockPattern.createIntent(context,
                     requirePassword, confirmCredentials);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
