@@ -465,7 +465,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
             super(context);
             mPrintManager = ((PrintManager) context.getSystemService(
                     Context.PRINT_SERVICE)).getGlobalPrintManagerForUser(
-                        ActivityManager.getCurrentUser());
+                    context.getUserId());
         }
 
         @Override
