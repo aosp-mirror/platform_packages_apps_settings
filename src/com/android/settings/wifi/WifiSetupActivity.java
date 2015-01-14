@@ -42,10 +42,14 @@ public class WifiSetupActivity extends WifiPickerActivity
         implements ButtonBarHandler, NavigationBarListener {
     private static final String TAG = "WifiSetupActivity";
 
-    private static final String EXTRA_ALLOW_SKIP = "allowSkip";
-
     // this boolean extra specifies whether to auto finish when connection is established
     private static final String EXTRA_AUTO_FINISH_ON_CONNECT = "wifi_auto_finish_on_connect";
+
+    // This boolean extra specifies whether network is required
+    private static final String EXTRA_IS_NETWORK_REQUIRED = "is_network_required";
+
+    // This boolean extra specifies whether wifi is required
+    private static final String EXTRA_IS_WIFI_REQUIRED = "is_wifi_required";
 
     // Whether auto finish is suspended until user connects to an access point
     private static final String EXTRA_REQUIRE_USER_NETWORK_SELECTION =
@@ -57,10 +61,12 @@ public class WifiSetupActivity extends WifiPickerActivity
     // Activity result when pressing the Skip button
     private static final int RESULT_SKIP = Activity.RESULT_FIRST_USER;
 
-    // Whether we allow skipping without a valid network connection
-    private boolean mAllowSkip = true;
     // Whether to auto finish when the user selected a network and successfully connected
     private boolean mAutoFinishOnConnection;
+    // Whether network is required to proceed. This is decided in SUW and passed in as an extra.
+    private boolean mIsNetworkRequired;
+    // Whether wifi is required to proceed. This is decided in SUW and passed in as an extra.
+    private boolean mIsWifiRequired;
     // Whether the user connected to a network. This excludes the auto-connecting by the system.
     private boolean mUserSelectedNetwork;
     // Whether the device is connected to WiFi
@@ -75,7 +81,6 @@ public class WifiSetupActivity extends WifiPickerActivity
             // Refresh the connection state with the latest connection info. Use the connection info
             // from ConnectivityManager instead of the one attached in the intent to make sure
             // we have the most up-to-date connection state. b/17511772
-
             refreshConnectionState();
         }
     };
@@ -89,7 +94,8 @@ public class WifiSetupActivity extends WifiPickerActivity
         mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 
         mAutoFinishOnConnection = intent.getBooleanExtra(EXTRA_AUTO_FINISH_ON_CONNECT, false);
-        mAllowSkip = intent.getBooleanExtra(EXTRA_ALLOW_SKIP, true);
+        mIsNetworkRequired = intent.getBooleanExtra(EXTRA_IS_NETWORK_REQUIRED, false);
+        mIsWifiRequired = intent.getBooleanExtra(EXTRA_IS_WIFI_REQUIRED, false);
         // Behave like the user already selected a network if we do not require selection
         mUserSelectedNetwork = !intent.getBooleanExtra(EXTRA_REQUIRE_USER_NETWORK_SELECTION, false);
     }
@@ -106,18 +112,17 @@ public class WifiSetupActivity extends WifiPickerActivity
         mUserSelectedNetwork = savedInstanceState.getBoolean(PARAM_USER_SELECTED_NETWORK, true);
     }
 
-    private void refreshConnectionState() {
+    private boolean isWifiConnected() {
         final ConnectivityManager connectivity = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean connected = connectivity != null &&
+        boolean wifiConnected = connectivity != null &&
                 connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
-
-        refreshConnectionState(connected);
+        mWifiConnected = wifiConnected;
+        return wifiConnected;
     }
 
-    private void refreshConnectionState(boolean connected) {
-        mWifiConnected = connected;
-        if (connected) {
+    private void refreshConnectionState() {
+        if (isWifiConnected()) {
             if (mAutoFinishOnConnection && mUserSelectedNetwork) {
                 Log.d(TAG, "Auto-finishing with connection");
                 finishOrNext(Activity.RESULT_OK);
@@ -125,15 +130,33 @@ public class WifiSetupActivity extends WifiPickerActivity
                 // can either connect to a different network or press "next" to proceed.
                 mUserSelectedNetwork = false;
             }
-            if (mNavigationBar != null) {
-                mNavigationBar.getNextButton().setText(R.string.setup_wizard_next_button_label);
-                mNavigationBar.getNextButton().setEnabled(true);
-            }
+            setNextButtonText(R.string.setup_wizard_next_button_label);
+            setNextButtonEnabled(true);
+        } else if (mIsWifiRequired || (mIsNetworkRequired && !isNetworkConnected())) {
+            // We do not want the user to skip wifi setting if
+            // - wifi is required, but wifi connection hasn't been established yet;
+            // - or network is required, but no valid connection has been established.
+            setNextButtonText(R.string.skip_label);
+            setNextButtonEnabled(false);
         } else {
-            if (mNavigationBar != null) {
-                mNavigationBar.getNextButton().setText(R.string.skip_label);
-                mNavigationBar.getNextButton().setEnabled(mAllowSkip);
-            }
+            // In other cases, user can choose to skip. Specifically these cases are
+            // - wifi is not required;
+            // - and network is not required;
+            // -     or network is required and a valid connection has been established.
+            setNextButtonText(R.string.skip_label);
+            setNextButtonEnabled(true);
+        }
+    }
+
+    private void setNextButtonEnabled(boolean enabled) {
+        if (mNavigationBar != null) {
+            mNavigationBar.getNextButton().setEnabled(enabled);
+        }
+    }
+
+    private void setNextButtonText(int resId) {
+        if (mNavigationBar != null) {
+            mNavigationBar.getNextButton().setText(resId);
         }
     }
 
