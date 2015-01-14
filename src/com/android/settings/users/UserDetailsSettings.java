@@ -28,7 +28,6 @@ import android.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 
 import java.util.List;
 
@@ -55,7 +54,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_CONFIRM_ENABLE_CALLING = 2;
-    private static final int DIALOG_CONFIRM_ENABLE_CALLING_SMS = 3;
+    private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 3;
 
     private UserManager mUserManager;
     private SwitchPreference mPhonePref;
@@ -117,10 +116,18 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (Boolean.TRUE.equals(newValue)) {
+            showDialog(mGuestUser? DIALOG_CONFIRM_ENABLE_CALLING : DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
+            return false;
+        }
+        enableCallsAndSms(false);
+        return true;
+    }
+
+    void enableCallsAndSms(boolean enabled) {
+        mPhonePref.setChecked(enabled);
         if (mGuestUser) {
-            // TODO: Show confirmation dialog: b/15761405
-            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS,
-                    !((Boolean) newValue));
+            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
             // SMS is always disabled for guest
             mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
             mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
@@ -135,14 +142,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 }
             }
         } else {
-            // TODO: Show confirmation dialog: b/15761405
             UserHandle userHandle = new UserHandle(mUserInfo.id);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
-                    !((Boolean) newValue), userHandle);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS,
-                    !((Boolean) newValue), userHandle);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled,
+                    userHandle);
+            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
         }
-        return true;
     }
 
     @Override
@@ -150,20 +154,29 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         Context context = getActivity();
         if (context == null) return null;
         switch (dialogId) {
-            case DIALOG_CONFIRM_REMOVE: {
-                Dialog dlg = Utils.createRemoveConfirmationDialog(getActivity(), mUserInfo.id,
+            case DIALOG_CONFIRM_REMOVE:
+                return UserDialogs.createRemoveDialog(getActivity(), mUserInfo.id,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 removeUser();
                             }
                         });
-                return dlg;
-            }
             case DIALOG_CONFIRM_ENABLE_CALLING:
-            case DIALOG_CONFIRM_ENABLE_CALLING_SMS:
-                // TODO: b/15761405
+                return UserDialogs.createEnablePhoneCallsDialog(getActivity(),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                enableCallsAndSms(true);
+                            }
+                        });
+            case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
+                return UserDialogs.createEnablePhoneCallsAndSmsDialog(getActivity(),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                enableCallsAndSms(true);
+                            }
+                        });
         }
-        return null;
+        throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
 
     void removeUser() {
