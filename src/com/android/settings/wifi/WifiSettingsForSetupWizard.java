@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.database.DataSetObserver;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -29,7 +28,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView.LayoutParams;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,7 +47,6 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     protected static final String EXTRA_SHOW_WIFI_REQUIRED_INFO = "wifi_show_wifi_required_info";
 
     private View mAddOtherNetworkItem;
-    private ListAdapter mAdapter;
     private TextView mEmptyFooter;
     private boolean mListLastEmpty = false;
 
@@ -98,15 +95,12 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
         if (hasNextButton()) {
             getNextButton().setVisibility(View.GONE);
         }
+    }
 
-        mAdapter = getPreferenceScreen().getRootAdapter();
-        mAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                updateFooter();
-            }
-        });
+    @Override
+    protected void updateAccessPoints() {
+        super.updateAccessPoints();
+        updateFooter(getPreferenceScreen().getPreferenceCount() == 0);
     }
 
     @Override
@@ -151,17 +145,12 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
 
     @Override
     protected TextView initEmptyView() {
-        mEmptyFooter = new TextView(getActivity());
-        mEmptyFooter.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT));
-        mEmptyFooter.setGravity(Gravity.CENTER);
-        mEmptyFooter.setCompoundDrawablesWithIntrinsicBounds(0,
-                R.drawable.ic_wifi_emptystate, 0,0);
+        final LayoutInflater inflater = LayoutInflater.from(getActivity());
+        mEmptyFooter = (TextView) inflater.inflate(R.layout.setup_wifi_empty, getListView(), false);
         return mEmptyFooter;
     }
 
-    protected void updateFooter() {
-        final boolean isEmpty = mAdapter.isEmpty();
+    protected void updateFooter(boolean isEmpty) {
         if (isEmpty != mListLastEmpty) {
             final ListView list = getListView();
             if (isEmpty) {

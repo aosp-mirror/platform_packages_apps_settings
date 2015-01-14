@@ -652,7 +652,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      * Shows the latest access points available with supplemental information like
      * the strength of network and the security for it.
      */
-    private void updateAccessPoints() {
+    protected void updateAccessPoints() {
         // Safeguard from some delayed event handling
         if (getActivity() == null) return;
 
