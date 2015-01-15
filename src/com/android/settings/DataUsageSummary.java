@@ -279,6 +279,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
     private UidDetailProvider mUidDetailProvider;
 
+    /**
+     * Local cache of data enabled for subId, used to work around delays.
+     */
+    private final Map<String, Boolean> mMobileDataEnabled = new HashMap<String, Boolean>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -965,23 +970,18 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         updatePolicy(false);
     }
 
-    /**
-     * Local cache of value, used to work around delays.
-     */
-    private Boolean mMobileDataEnabled;
-
     private boolean isMobileDataEnabled(int subId) {
         if (LOGD) Log.d(TAG, "isMobileDataEnabled:+ subId=" + subId);
         boolean isEnable = false;
-        if (mMobileDataEnabled != null) {
-            // TODO: deprecate and remove this once enabled flag is on policy
-            // Multiple Subscriptions, the value need to be reseted
-            isEnable = mMobileDataEnabled.booleanValue();
+        if (mMobileDataEnabled.get(String.valueOf(subId)) != null) {
+            //TODO: deprecate and remove this once enabled flag is on policy
+            //Multiple Subscriptions, the value need to be reseted
+            isEnable = mMobileDataEnabled.get(String.valueOf(subId)).booleanValue();
             if (LOGD) {
                 Log.d(TAG, "isMobileDataEnabled: != null, subId=" + subId
                         + " isEnable=" + isEnable);
             }
-            mMobileDataEnabled = null;
+            mMobileDataEnabled.put(String.valueOf(subId), null);
         } else {
             // SUB SELECT
             isEnable = mTelephonyManager.getDataEnabled(subId);
@@ -996,7 +996,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private void setMobileDataEnabled(int subId, boolean enabled) {
         if (LOGD) Log.d(TAG, "setMobileDataEnabled()");
         mTelephonyManager.setDataEnabled(subId, enabled);
-        mMobileDataEnabled = enabled;
+        mMobileDataEnabled.put(String.valueOf(subId), enabled);
         updatePolicy(false);
     }
 
@@ -1149,6 +1149,16 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         }
     }
 
+    private void disableDataForOtherSubscriptions(SubscriptionInfo currentSir) {
+        if (mSubInfoList != null) {
+            for (SubscriptionInfo subInfo : mSubInfoList) {
+                if (subInfo.getSubscriptionId() != currentSir.getSubscriptionId()) {
+                    setMobileDataEnabled(subInfo.getSubscriptionId(), false);
+                }
+            }
+        }
+    }
+
     private View.OnClickListener mDataEnabledListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -1184,8 +1194,13 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         // If the device is single SIM or is enabling data on the active data SIM then forgo
         // the pop-up.
         if (!Utils.showSimCardTile(context) ||
-                (nextSir != null && currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
+                (nextSir != null && currentSir != null &&
+                currentSir.getSubscriptionId() == nextSir.getSubscriptionId())) {
             setMobileDataEnabled(currentSir.getSubscriptionId(), true);
+            if (nextSir != null && currentSir != null &&
+                currentSir.getSubscriptionId() == nextSir.getSubscriptionId()) {
+                disableDataForOtherSubscriptions(currentSir);
+            }
             updateBody();
             return;
         }
@@ -1205,6 +1220,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             public void onClick(DialogInterface dialog, int id) {
                 mSubscriptionManager.setDefaultDataSubId(currentSir.getSubscriptionId());
                 setMobileDataEnabled(currentSir.getSubscriptionId(), true);
+                disableDataForOtherSubscriptions(currentSir);
                 updateBody();
             }
         });
