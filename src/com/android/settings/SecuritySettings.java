@@ -356,7 +356,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
-                if (tm.hasIccCard(subInfo.getSubscriptionId())) {
+                if (tm.hasIccCard(subInfo.getSimSlotIndex())) {
                     return true;
                 }
             }
