@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.ParcelUuid;
@@ -487,6 +488,11 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         ParcelUuid[] localUuids = mLocalAdapter.getUuids();
         if (localUuids == null) return false;
 
+        /**
+         * Now we know if the device supports PBAP, update permissions...
+         */
+        processPhonebookAccess();
+
         mProfileManager.updateProfiles(uuids, localUuids, mProfiles, mRemovedProfiles,
                                        mLocalNapRoleConnected, mDevice);
 
@@ -766,5 +772,16 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             editor.putInt(mDevice.getAddress(), mMessageRejectionCount);
         }
         editor.commit();
+    }
+
+    private void processPhonebookAccess() {
+        if (mDevice.getBondState() != BluetoothDevice.BOND_BONDED) return;
+
+        ParcelUuid[] uuids = mDevice.getUuids();
+        if (BluetoothUuid.containsAnyUuid(uuids, PbapServerProfile.PBAB_CLIENT_UUIDS)) {
+            // The pairing dialog now warns of phone-book access for paired devices.
+            // No separate prompt is displayed after pairing.
+            setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_ALLOWED);
+        }
     }
 }
