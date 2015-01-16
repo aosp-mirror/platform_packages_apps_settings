@@ -50,9 +50,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
@@ -178,16 +178,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
         boolean isImmutable() {
             return immutable;
-        }
-
-        RestrictionEntry getRestriction(String key) {
-            if (restrictions == null) return null;
-            for (RestrictionEntry entry : restrictions) {
-                if (entry.getKey().equals(key)) {
-                    return entry;
-                }
-            }
-            return null;
         }
 
         ArrayList<RestrictionEntry> getRestrictions() {
@@ -654,25 +644,16 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         mAppList.removeAll();
         Intent restrictionsIntent = new Intent(Intent.ACTION_GET_RESTRICTION_ENTRIES);
         final List<ResolveInfo> receivers = pm.queryBroadcastReceivers(restrictionsIntent, 0);
-        int i = 0;
         for (SelectableAppInfo app : mVisibleApps) {
             String packageName = app.packageName;
             if (packageName == null) continue;
             final boolean isSettingsApp = packageName.equals(context.getPackageName());
             AppRestrictionsPreference p = new AppRestrictionsPreference(context, this);
             final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
-            p.setIcon(app.icon != null ? app.icon.mutate() : null);
-            p.setChecked(false);
-            p.setTitle(app.activityName);
-            if (app.masterEntry != null) {
-                p.setSummary(context.getString(R.string.user_restrictions_controlled_by,
-                        app.masterEntry.activityName));
+            if (isSettingsApp) {
+                addLocationAppRestrictionsPreference(app, p);
+                continue;
             }
-            p.setKey(getKeyForPackage(packageName));
-            p.setSettingsEnabled((hasSettings || isSettingsApp) && app.masterEntry == null);
-            p.setPersistent(false);
-            p.setOnPreferenceChangeListener(this);
-            p.setOnPreferenceClickListener(this);
             PackageInfo pi = null;
             try {
                 pi = ipm.getPackageInfo(packageName,
@@ -683,50 +664,93 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             if (pi == null) {
                 continue;
             }
+            if (mRestrictedProfile && isAppUnsupportedInRestrictedProfile(pi)) {
+                continue;
+            }
+            p.setIcon(app.icon != null ? app.icon.mutate() : null);
+            p.setChecked(false);
+            p.setTitle(app.activityName);
+            p.setKey(getKeyForPackage(packageName));
+            p.setSettingsEnabled(hasSettings && app.masterEntry == null);
+            p.setPersistent(false);
+            p.setOnPreferenceChangeListener(this);
+            p.setOnPreferenceClickListener(this);
+            p.setSummary(getPackageSummary(pi, app));
             if (pi.requiredForAllUsers || isPlatformSigned(pi)) {
                 p.setChecked(true);
                 p.setImmutable(true);
                 // If the app is required and has no restrictions, skip showing it
-                if (!hasSettings && !isSettingsApp) continue;
+                if (!hasSettings) continue;
                 // Get and populate the defaults, since the user is not going to be
                 // able to toggle this app ON (it's ON by default and immutable).
                 // Only do this for restricted profiles, not single-user restrictions
                 // Also don't do this for slave icons
-                if (hasSettings && app.masterEntry == null) {
+                if (app.masterEntry == null) {
                     requestRestrictionsForApp(packageName, p, false);
                 }
             } else if (!mNewUser && isAppEnabledForUser(pi)) {
                 p.setChecked(true);
             }
-            if (mRestrictedProfile
-                    && pi.requiredAccountType != null && pi.restrictedAccountType == null) {
-                p.setChecked(false);
-                p.setImmutable(true);
-                p.setSummary(R.string.app_not_supported_in_limited);
-            }
-            if (mRestrictedProfile && pi.restrictedAccountType != null) {
-                p.setSummary(R.string.app_sees_restricted_accounts);
-            }
             if (app.masterEntry != null) {
                 p.setImmutable(true);
                 p.setChecked(mSelectedPackages.get(packageName));
             }
-            mAppList.addPreference(p);
-            if (isSettingsApp) {
-                p.setOrder(MAX_APP_RESTRICTIONS * 1);
-            } else {
-                p.setOrder(MAX_APP_RESTRICTIONS * (i + 2));
-            }
-            mSelectedPackages.put(packageName, p.isChecked());
-            mAppListChanged = true;
-            i++;
+            p.setOrder(MAX_APP_RESTRICTIONS * (mAppList.getPreferenceCount() + 2));
+            addToAppList(p, packageName);
         }
+        mAppListChanged = true;
         // If this is the first time for a new profile, install/uninstall default apps for profile
         // to avoid taking the hit in onPause(), which can cause race conditions on user switch.
         if (mNewUser && mFirstTime) {
             mFirstTime = false;
             applyUserAppsStates();
         }
+    }
+
+    private String getPackageSummary(PackageInfo pi, SelectableAppInfo app) {
+        // Check for 3 cases:
+        // - Slave entry that can see primary user accounts
+        // - Slave entry that cannot see primary user accounts
+        // - Master entry that can see primary user accounts
+        // Otherwise no summary is returned
+        if (app.masterEntry != null) {
+            if (mRestrictedProfile && pi.restrictedAccountType != null) {
+                return getString(R.string.app_sees_restricted_accounts_and_controlled_by,
+                        app.masterEntry.activityName);
+            }
+            return getString(R.string.user_restrictions_controlled_by,
+                    app.masterEntry.activityName);
+        } else if (pi.restrictedAccountType != null) {
+            return getString(R.string.app_sees_restricted_accounts);
+        }
+        return null;
+    }
+
+    private static boolean isAppUnsupportedInRestrictedProfile(PackageInfo pi) {
+        return pi.requiredAccountType != null && pi.restrictedAccountType == null;
+    }
+
+    private void addLocationAppRestrictionsPreference(SelectableAppInfo app,
+            AppRestrictionsPreference p) {
+        String packageName = app.packageName;
+        p.setIcon(R.drawable.ic_settings_location);
+        p.setKey(getKeyForPackage(packageName));
+        ArrayList<RestrictionEntry> restrictions = RestrictionUtils.getRestrictions(
+                getActivity(), mUser);
+        RestrictionEntry locationRestriction = restrictions.get(0);
+        p.setTitle(locationRestriction.getTitle());
+        p.setRestrictions(restrictions);
+        p.setSummary(locationRestriction.getDescription());
+        p.setChecked(locationRestriction.getSelectedState());
+        p.setPersistent(false);
+        p.setOnPreferenceClickListener(this);
+        p.setOrder(MAX_APP_RESTRICTIONS);
+        addToAppList(p, packageName);
+    }
+
+    private void addToAppList(AppRestrictionsPreference p, String packageName) {
+        mSelectedPackages.put(packageName, p.isChecked());
+        mAppList.addPreference(p);
     }
 
     private String getKeyForPackage(String packageName) {
@@ -772,6 +796,12 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             } else if (!pref.isImmutable()) {
                 pref.setChecked(!pref.isChecked());
                 final String packageName = pref.getKey().substring(PKG_PREFIX.length());
+                // Settings/Location is handled as a top-level entry
+                if (packageName.equals(getActivity().getPackageName())) {
+                    pref.restrictions.get(0).setSelectedState(pref.isChecked());
+                    RestrictionUtils.setRestrictions(getActivity(), pref.restrictions, mUser);
+                    return;
+                }
                 mSelectedPackages.put(packageName, pref.isChecked());
                 if (pref.isChecked() && pref.hasSettings
                         && pref.restrictions == null) {
@@ -822,13 +852,9 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         default:
                             continue;
                         }
-                        if (packageName.equals(getActivity().getPackageName())) {
-                            RestrictionUtils.setRestrictions(getActivity(), restrictions, mUser);
-                        } else {
-                            mUserManager.setApplicationRestrictions(packageName,
-                                    RestrictionUtils.restrictionsToBundle(restrictions),
-                                    mUser);
-                        }
+                        mUserManager.setApplicationRestrictions(packageName,
+                                RestrictionUtils.restrictionsToBundle(restrictions),
+                                mUser);
                         break;
                     }
                 }
@@ -850,14 +876,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 removeRestrictionsForApp(preference);
             } else {
                 String packageName = preference.getKey().substring(PKG_PREFIX.length());
-                if (packageName.equals(getActivity().getPackageName())) {
-                    // Settings, fake it by using user restrictions
-                    ArrayList<RestrictionEntry> restrictions = RestrictionUtils.getRestrictions(
-                            getActivity(), mUser);
-                    onRestrictionsReceived(preference, packageName, restrictions);
-                } else {
-                    requestRestrictionsForApp(packageName, preference, true /*invoke if custom*/);
-                }
+                requestRestrictionsForApp(packageName, preference, true /*invoke if custom*/);
             }
             preference.setPanelOpen(!preference.isPanelOpen());
         }
@@ -979,9 +998,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 ((MultiSelectListPreference)p).setEntryValues(entry.getChoiceValues());
                 ((MultiSelectListPreference)p).setEntries(entry.getChoiceEntries());
                 HashSet<String> set = new HashSet<String>();
-                for (String s : entry.getAllSelectedStrings()) {
-                    set.add(s);
-                }
+                Collections.addAll(set, entry.getAllSelectedStrings());
                 ((MultiSelectListPreference)p).setValues(set);
                 ((MultiSelectListPreference)p).setDialogTitle(entry.getTitle());
                 break;
