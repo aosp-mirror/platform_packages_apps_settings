@@ -113,7 +113,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
         mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         mType = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, BluetoothDevice.ERROR);
-        mDevice.fetchUuidsWithSdp();
 
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
@@ -321,23 +320,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
         }
     }
 
-    private void processPhonebookAccess() {
-        CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(mDevice);
-        if (cachedDevice == null) {
-            cachedDevice = mCachedDeviceManager.addDevice(
-                    mBluetoothManager.getBluetoothAdapter(),
-                    mBluetoothManager.getProfileManager(),
-                    mDevice);
-        }
-        ParcelUuid[] uuids = mDevice.getUuids();
-        if (BluetoothUuid.containsAnyUuid(uuids, PbapServerProfile.PBAB_CLIENT_UUIDS)) {
-            cachedDevice.setPhonebookPermissionChoice(CachedBluetoothDevice.ACCESS_ALLOWED);
-        }
-    }
-
     private void onPair(String value) {
-        processPhonebookAccess();
-
         switch (mType) {
             case BluetoothDevice.PAIRING_VARIANT_PIN:
                 byte[] pinBytes = BluetoothDevice.convertPinToBytes(value);
