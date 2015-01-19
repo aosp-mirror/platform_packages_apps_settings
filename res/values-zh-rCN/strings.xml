@@ -325,9 +325,6 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"按时区排序"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"日期"</string>
     <string name="time_picker_title" msgid="483460752287255019">"时间"</string>
-    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"改善面部匹配"</string>
-    <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"真人判断"</string>
-    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"解锁时需要眨眼"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"自动锁定"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"休眠<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>让屏幕保持解锁状态时除外）"</string>
@@ -391,8 +388,6 @@
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"滑动"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"无安全措施"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"人脸解锁"</string>
-    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"安全性低、实验性"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"图案"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"中等安全性"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN码"</string>
@@ -403,7 +398,6 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"由于管理员、加密策略或凭据存储的要求，您无法使用此选项"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"滑动"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"人脸解锁"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"图案"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN码"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"密码"</string>
@@ -1497,18 +1491,18 @@
     <string name="app_name_label" msgid="5440362857006046193">"应用"</string>
     <string name="last_time_used_label" msgid="8459441968795479307">"上次使用时间"</string>
     <string name="usage_time_label" msgid="295954901452833058">"使用时间"</string>
-    <string name="accessibility_settings" msgid="3975902491934816215">"辅助功能"</string>
-    <string name="accessibility_settings_title" msgid="2130492524656204459">"辅助功能设置"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"无障碍"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"无障碍设置"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"服务"</string>
     <string name="accessibility_system_title" msgid="7187919089874130484">"系统"</string>
     <string name="accessibility_display_title" msgid="7610175687949675162">"显示"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"字幕"</string>
     <string name="accessibility_screen_magnification_title" msgid="7001782548715744981">"放大手势"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2380627654189671754">"启用此功能后，您可以通过点按屏幕三次进行缩放。\n\n放大时，您可以：\n"<ul><li>"平移：在屏幕上拖动两根或更多根手指。"</li>\n<li>"调整缩放级别：开合两根或更多根手指。"</li></ul>\n\n"同时，您还可以通过点按三次并按住的方法来暂时性地放大手指触摸到的内容。在此放大状态下，您可以拖动手指查看屏幕上的各个部分。松开手指即可返回之前的状态。\n\n请注意：点按屏幕三次进行放大的方法适用于除键盘和导航栏外的所有情况。"</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"辅助功能快捷方式"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="6752037184140789970">"无障碍快捷方式"</string>
     <string name="accessibility_global_gesture_preference_summary_on" msgid="6180927399052022181">"开启"</string>
     <string name="accessibility_global_gesture_preference_summary_off" msgid="8102103337813609849">"关闭"</string>
-    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"启用该功能后，您只需两步即可迅速启用辅助功能：\n\n步骤 1：持续按住电源按钮，直到您听到提示音或感觉到震动。\n\n步骤 2：用两根手指触摸屏幕并按住，直到您听到确认提示音。\n\n如果该设备有多个用户，在锁定屏幕上进行此快捷操作可暂时启用辅助功能，直到该设备解锁。"</string>
+    <string name="accessibility_global_gesture_preference_description" msgid="750438015254396963">"启用该功能后，您只需两步即可迅速启用无障碍功能：\n\n步骤 1：持续按住电源按钮，直到您听到提示音或感觉到震动。\n\n步骤 2：用两根手指触摸屏幕并按住，直到您听到确认提示音。\n\n如果该设备有多个用户，在锁定屏幕上进行此快捷操作可暂时启用无障碍功能，直到该设备解锁。"</string>
     <string name="accessibility_toggle_large_text_preference_title" msgid="6307247527580207161">"大号字体"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"高对比度文字"</string>
     <string name="accessibility_toggle_screen_magnification_preference_title" msgid="2472285215737820469">"屏幕放大"</string>
@@ -1567,7 +1561,7 @@
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g>需要："</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"由于某个应用遮挡了权限请求界面，因此“设置”应用无法验证您的回应。"</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"如果您开启<xliff:g id="SERVICE">%1$s</xliff:g>，您的设备将无法使用屏幕锁定来增强数据加密。"</string>
-    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"由于您已开启辅助功能服务，因此您的设备将无法使用屏幕锁定来增强数据加密。"</string>
+    <string name="secure_lock_encryption_warning" msgid="464101518421886337">"由于您已开启无障碍服务，因此您的设备将无法使用屏幕锁定来增强数据加密。"</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的解锁图案。"</string>
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的 PIN 码。"</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"由于开启<xliff:g id="SERVICE">%1$s</xliff:g>会影响数据加密，因此您需要确认您的密码。"</string>
@@ -2231,13 +2225,13 @@
     <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"要移除访客吗？"</string>
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"此会话中的所有应用和数据都将被删除。"</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"移除"</string>
-    <string name="user_enable_calling" msgid="8310589470979488255">"允许接打电话"</string>
-    <string name="user_enable_calling_sms" msgid="794823380737672333">"允许接打电话和收发短信"</string>
+    <string name="user_enable_calling" msgid="5128605672081602348">"开启通话功能"</string>
+    <string name="user_enable_calling_sms" msgid="9172507088023097063">"开启通话和短信功能"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"移除用户"</string>
-    <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"要允许接打电话吗？"</string>
+    <string name="user_enable_calling_confirm_title" msgid="4315789475268695378">"要开启通话功能吗？"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"将与此用户共享通话记录。"</string>
-    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"要允许接打电话和收发短信吗？"</string>
-    <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"将与此用户共享通话记录和短信记录。"</string>
+    <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"要开启通话和短信功能吗？"</string>
+    <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"将与此用户共享通话记录和短信记录。"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"允许应用和内容"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"展开应用设置"</string>
@@ -2288,8 +2282,9 @@
     <string name="user_rename" msgid="8523499513614655279">"重命名"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"设置应用限制"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"受“<xliff:g id="APP">%1$s</xliff:g>”控制"</string>
-    <string name="app_not_supported_in_limited" msgid="913035259626149121">"受限个人资料无法使用此应用"</string>
     <string name="app_sees_restricted_accounts" msgid="7503264525057246240">"此应用可使用您的帐户"</string>
+    <!-- no translation found for app_sees_restricted_accounts_and_controlled_by (6968697624437267294) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"WLAN和移动网络"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"允许修改WLAN和移动网络设置"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"蓝牙"</string>
@@ -2365,7 +2360,7 @@
     <string name="keywords_battery" msgid="2096185085932675704">"耗电量 充电"</string>
     <string name="keywords_spell_checker" msgid="6106749039734174140">"拼写 字典 词典 拼写检查 自动更正"</string>
     <string name="keywords_voice_input" msgid="3519547605812413860">"识别程序 输入 语音 说出 语言 免触摸 识别 令人反感的字词 音频记录 蓝牙耳机"</string>
-    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"语速 语言 默认 说出 语音 TTS 辅助功能 阅读器 读者 盲人"</string>
+    <string name="keywords_text_to_speech_output" msgid="392447904221657930">"语速 语言 默认 说出 语音 TTS 无障碍 阅读器 读者 盲人"</string>
     <string name="keywords_date_and_time" msgid="2631808108134830066">"时钟 军用"</string>
     <string name="keywords_factory_data_reset" msgid="4355133848707691977">"擦除 删除 恢复 清除 移除"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"打印机"</string>
@@ -2511,9 +2506,9 @@
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"要求输入 PIN 码吗？"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"要求绘制图案吗？"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"要求输入密码吗？"</string>
-    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"当您输入 PIN 码以启动此设备时，<xliff:g id="SERVICE">%1$s</xliff:g>等辅助功能服务还未开启。"</string>
-    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"当您绘制解锁图案以启动此设备时，<xliff:g id="SERVICE">%1$s</xliff:g>等辅助功能服务还未开启。"</string>
-    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"当您输入密码以启动此设备时，<xliff:g id="SERVICE">%1$s</xliff:g>等辅助功能服务还未开启。"</string>
+    <string name="encrypt_talkback_dialog_message_pin" msgid="1890374082842868489">"当您输入 PIN 码以启动此设备时，<xliff:g id="SERVICE">%1$s</xliff:g>等无障碍服务还未开启。"</string>
+    <string name="encrypt_talkback_dialog_message_pattern" msgid="4474332516537386384">"当您绘制解锁图案以启动此设备时，<xliff:g id="SERVICE">%1$s</xliff:g>等无障碍服务还未开启。"</string>
+    <string name="encrypt_talkback_dialog_message_password" msgid="8166099418487083927">"当您输入密码以启动此设备时，<xliff:g id="SERVICE">%1$s</xliff:g>等无障碍服务还未开启。"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI信息"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI相关信息"</string>
     <string name="slot_number" msgid="3762676044904653577">"（插槽<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>

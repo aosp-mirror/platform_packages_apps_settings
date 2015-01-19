@@ -325,9 +325,6 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Տեսակավորել ըստ ժամային գոտու"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Ամսաթիվ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ժամանակը"</string>
-    <string name="biometric_weak_improve_matching_title" msgid="8754080894393195194">"Կատարելագործել դիմային համապատասխանեցումը"</string>
-    <string name="biometric_weak_liveliness_title" msgid="2661613702124561096">"Կենդանի ստուգում"</string>
-    <string name="biometric_weak_liveliness_summary" msgid="4199587000948042325">"Ապակողպելիս աչքի թարթոց է անհրաժեշտ"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Ինքնակողպում"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> հանգստի վիճակից հետո"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> քնից հետո՝ բացառությամբ, երբ ապակողպված է պահվում <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ի կողմից"</string>
@@ -391,8 +388,6 @@
     <string name="unlock_set_unlock_off_summary" msgid="94361581669110415"></string>
     <string name="unlock_set_unlock_none_title" msgid="5679243878975864640">"Սահահարվածել"</string>
     <string name="unlock_set_unlock_none_summary" msgid="8914673583104628191">"Անվտանգություն չկա"</string>
-    <string name="unlock_set_unlock_biometric_weak_title" msgid="2227215291604628670">"Դեմքով ապակողպում"</string>
-    <string name="unlock_set_unlock_biometric_weak_summary" msgid="180083326982058964">"Ցածր անվտանգություն, փորձնական"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Նախշ"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="7062696666227725593">"Միջին անվտանգություն"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
@@ -403,7 +398,6 @@
     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Կասեցված է ադմինիստրատորի, կոդավորման ծրագրի կամ վկայագրերի պահոցի կողմից"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ոչ մեկը"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"Սահահարվածել"</string>
-    <string name="unlock_set_unlock_mode_biometric_weak" msgid="3008473624490350142">"Դեմքով ապակողպում"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="7837270780919299289">"Կաղապար"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="3541326261341386690">"PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="1203938057264146610">"Գաղտնաբառ"</string>
@@ -2231,13 +2225,13 @@
     <string name="user_exit_guest_confirm_title" msgid="3405527634738147409">"Հեռացնե՞լ հյուրին:"</string>
     <string name="user_exit_guest_confirm_message" msgid="2194459201944413257">"Այս աշխատաշրջանի բոլոր ծրագրերն ու տվյալները կջնջվեն:"</string>
     <string name="user_exit_guest_dialog_remove" msgid="6351370829952745350">"Հեռացնել"</string>
-    <string name="user_enable_calling" msgid="8310589470979488255">"Թույլատրել հեռախոսազանգերը"</string>
-    <string name="user_enable_calling_sms" msgid="794823380737672333">"Թույլատրել հեռախոսազանգերը և SMS-ը"</string>
+    <string name="user_enable_calling" msgid="5128605672081602348">"Միացնել հեռախոսազանգերը"</string>
+    <string name="user_enable_calling_sms" msgid="9172507088023097063">"Միացնել հեռախոսազանգերն ու SMS-ները"</string>
     <string name="user_remove_user" msgid="6490483480937295389">"Հեռացնել օգտվողին"</string>
-    <string name="user_enable_calling_confirm_title" msgid="440218975766968124">"Թույլատրե՞լ հեռախոսազանգերը:"</string>
+    <string name="user_enable_calling_confirm_title" msgid="4315789475268695378">"Միացնե՞լ հեռախոսազանգերը:"</string>
     <string name="user_enable_calling_confirm_message" msgid="8061594235219352787">"Զանգերի պատմությունը կհամօգտագործվի այս օգտվողի հետ:"</string>
-    <string name="user_enable_calling_sms_confirm_title" msgid="188164598768941316">"Թույլատրե՞լ հեռախոսազանգերը և SMS-ը:"</string>
-    <string name="user_enable_calling_sms_confirm_message" msgid="9101983352082865696">"Զանգերի և SMS պատմությունը կհամօգտագործվի այս օգտվողի հետ:"</string>
+    <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"Միացնե՞լ հեռախոսազանգերն ու SMS-ները:"</string>
+    <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"Զանգերի և SMS-ների պատմությունը հասանելի կլինի այս օգտվողին:"</string>
     <string name="application_restrictions" msgid="8207332020898004394">"Թույլատրել ծրագրերը և բովանդակությունը"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Սահմանափակումներով ծրագրեր"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"Ընդլայնել ծրագրի կարգավորումները"</string>
@@ -2288,8 +2282,9 @@
     <string name="user_rename" msgid="8523499513614655279">"Վերանվանել"</string>
     <string name="app_restrictions_custom_label" msgid="6160672982086584261">"Սահմանել ծրագրային սահմանափակումներ"</string>
     <string name="user_restrictions_controlled_by" msgid="3164078767438313899">"Վերահսկվում է <xliff:g id="APP">%1$s</xliff:g>-ի կողմից"</string>
-    <string name="app_not_supported_in_limited" msgid="913035259626149121">"Այս ծրագիրը չի աջակցվում սահմանափակված պրոֆիլներում"</string>
     <string name="app_sees_restricted_accounts" msgid="7503264525057246240">"Այս ծրագիրը կարող է մուտք գործել ձեր հաշիվներ"</string>
+    <!-- no translation found for app_sees_restricted_accounts_and_controlled_by (6968697624437267294) -->
+    <skip />
     <string name="restriction_wifi_config_title" msgid="8889556384136994814">"Wi‑Fi և շարժական"</string>
     <string name="restriction_wifi_config_summary" msgid="70888791513065244">"Թույլատրել Wi‑Fi-ի և շարժական կարգավորումների փոփոխությունները"</string>
     <string name="restriction_bluetooth_config_title" msgid="8871681580962503671">"Bluetooth"</string>
