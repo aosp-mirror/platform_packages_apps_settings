@@ -198,7 +198,8 @@
                 android:theme="@style/SetupWizardDisableAppStartingTheme"
                 android:label="@string/wifi_setup_wizard_title"
                 android:icon="@drawable/empty_icon"
-                android:clearTaskOnLaunch="true">
+                android:clearTaskOnLaunch="true"
+                android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.net.wifi.SETUP_WIFI_NETWORK" />
