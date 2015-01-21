@@ -19,8 +19,11 @@ package com.android.settings.applications;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.ActivityThread;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
@@ -28,8 +31,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Drawable.ConstantState;
 import android.os.Handler;
@@ -45,7 +46,6 @@ import android.util.SparseArray;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,9 +123,6 @@ public class RunningState {
     // If there are other users on the device, these are the merged items
     // representing all items that would be put in mUserBackgroundItems for that user.
     final SparseArray<MergedItem> mOtherUserBackgroundItems = new SparseArray<MergedItem>();
-
-    // Tracking of information about users.
-    final SparseArray<UserState> mUsers = new SparseArray<UserState>();
 
     static class AppProcessInfo {
         final ActivityManager.RunningAppProcessInfo info;
@@ -285,6 +282,42 @@ public class RunningState {
             }
         }
     };
+
+    private final class UserManagerBroadcastReceiver extends BroadcastReceiver {
+        private volatile boolean usersChanged;
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            synchronized (mLock) {
+                if (mResumed) {
+                    mHaveData = false;
+                    mBackgroundHandler.removeMessages(MSG_RESET_CONTENTS);
+                    mBackgroundHandler.sendEmptyMessage(MSG_RESET_CONTENTS);
+                    mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
+                    mBackgroundHandler.sendEmptyMessage(MSG_UPDATE_CONTENTS);
+                } else {
+                    usersChanged = true;
+                }
+            }
+        }
+
+        public boolean checkUsersChangedLocked() {
+            boolean oldValue = usersChanged;
+            usersChanged = false;
+            return oldValue;
+        }
+
+        void register(Context context) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_USER_STOPPED);
+            filter.addAction(Intent.ACTION_USER_STARTED);
+            filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
+            context.registerReceiverAsUser(this, UserHandle.ALL, filter, null, null);
+        }
+    }
+
+    private final UserManagerBroadcastReceiver mUmBroadcastReceiver =
+            new UserManagerBroadcastReceiver();
 
     // ----- DATA STRUCTURES -----
 
@@ -752,15 +785,17 @@ public class RunningState {
         mBackgroundThread = new HandlerThread("RunningState:Background");
         mBackgroundThread.start();
         mBackgroundHandler = new BackgroundHandler(mBackgroundThread.getLooper());
+        mUmBroadcastReceiver.register(mApplicationContext);
     }
 
     void resume(OnRefreshUiListener listener) {
         synchronized (mLock) {
             mResumed = true;
             mRefreshUiListener = listener;
-            // TODO: The set of users may have changed too, so we should probably recompute it
-            // each time, but that might be costly. See http://b/18696308
-            if (mInterestingConfigChanges.applyNewConfig(mApplicationContext.getResources())) {
+            boolean usersChanged = mUmBroadcastReceiver.checkUsersChangedLocked();
+            boolean configChanged =
+                    mInterestingConfigChanges.applyNewConfig(mApplicationContext.getResources());
+            if (usersChanged || configChanged) {
                 mHaveData = false;
                 mBackgroundHandler.removeMessages(MSG_RESET_CONTENTS);
                 mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
@@ -826,7 +861,6 @@ public class RunningState {
         mRunningProcesses.clear();
         mProcessItems.clear();
         mAllProcessItems.clear();
-        mUsers.clear();
     }
 
     private void addOtherUserItem(Context context, ArrayList<MergedItem> newMergedItems,
@@ -834,9 +868,7 @@ public class RunningState {
         MergedItem userItem = userItems.get(newItem.mUserId);
         boolean first = userItem == null || userItem.mCurSeq != mSequence;
         if (first) {
-            UserState userState = mUsers.get(newItem.mUserId);
-            UserInfo info = userState != null
-                    ? userState.mInfo : mUm.getUserInfo(newItem.mUserId);
+            UserInfo info = mUm.getUserInfo(newItem.mUserId);
             if (info == null) {
                 // The user no longer exists, skip
                 return;
@@ -851,12 +883,10 @@ public class RunningState {
                 userItem.mChildren.clear();
             }
             userItem.mCurSeq = mSequence;
-            if (userState == null) {
-                userItem.mUser = new UserState();
-                userItem.mUser.mInfo = info;
-                userItem.mUser.mIcon = Utils.getUserIcon(context, mUm, info);
-                userItem.mUser.mLabel = Utils.getUserLabel(context, info);
-            }
+            userItem.mUser = new UserState();
+            userItem.mUser.mInfo = info;
+            userItem.mUser.mIcon = Utils.getUserIcon(context, mUm, info);
+            userItem.mUser.mLabel = Utils.getUserLabel(context, info);
             newMergedItems.add(userItem);
         }
         userItem.mChildren.add(newItem);
@@ -1403,12 +1433,6 @@ public class RunningState {
         }
         
         return changed;
-    }
-    
-    ArrayList<BaseItem> getCurrentItems() {
-        synchronized (mLock) {
-            return mItems;
-        }
     }
     
     void setWatchingBackgroundItems(boolean watching) {
