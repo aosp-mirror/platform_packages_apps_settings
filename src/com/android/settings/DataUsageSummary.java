@@ -1188,6 +1188,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private void handleMultiSimDataDialog() {
         final Context context = getActivity();
         final SubscriptionInfo currentSir = getCurrentTabSubInfo(context);
+
+        //If sim has not loaded after toggling data switch, return.
+        if (currentSir == null) {
+            return;
+        }
+
         final SubscriptionInfo nextSir = mSubscriptionManager.getActiveSubscriptionInfo(
                 mSubscriptionManager.getDefaultDataSubId());
 
