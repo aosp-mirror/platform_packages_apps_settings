@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.QueuedWork;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,6 +56,9 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.ims.ImsConfig;
+import com.android.ims.ImsException;
+import com.android.ims.ImsManager;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -195,6 +199,7 @@ public class RadioInfo extends Activity {
                 case EVENT_SERVICE_STATE_CHANGED:
                     updateServiceState();
                     updatePowerState();
+                    updateImsVoLteProvisionedState();
                     break;
 
                 case EVENT_QUERY_PREFERRED_TYPE_DONE:
@@ -303,6 +308,9 @@ public class RadioInfo extends Activity {
         imsRegRequiredButton = (Button) findViewById(R.id.ims_reg_required);
         imsRegRequiredButton.setOnClickListener(mImsRegRequiredHandler);
 
+        imsVoLteProvisionedButton = (Button) findViewById(R.id.volte_provisioned_flag);
+        imsVoLteProvisionedButton.setOnClickListener(mImsVoLteProvisionedHandler);
+
         smsOverImsButton = (Button) findViewById(R.id.sms_over_ims);
         smsOverImsButton.setOnClickListener(mSmsOverImsHandler);
 
@@ -360,6 +368,7 @@ public class RadioInfo extends Activity {
         updatePowerState();
         updateCellInfoListRate();
         updateImsRegRequiredState();
+        updateImsVoLteProvisionedState();
         updateSmsOverImsState();
         updateLteRamDumpState();
         updateProperties();
@@ -1000,6 +1009,49 @@ public class RadioInfo extends Activity {
 
     private boolean isSmsOverImsEnabled() {
         return SystemProperties.getBoolean(PROPERTY_SMS_OVER_IMS, false);
+    }
+
+    private Button imsVoLteProvisionedButton;
+    OnClickListener mImsVoLteProvisionedHandler = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            log(String.format("toggle VoLTE provisioned: currently %s",
+                    (isImsVoLteProvisioned() ? "on":"off")));
+            final boolean newValue = !isImsVoLteProvisioned();
+            if (phone != null) {
+                final ImsManager imsManager = ImsManager.getInstance(phone.getContext(), phone.getSubId());
+                if (imsManager != null) {
+                    QueuedWork.singleThreadExecutor().submit(new Runnable() {
+                        public void run() {
+                            try {
+                                imsManager.getConfigInterface().setProvisionedValue(
+                                        ImsConfig.ConfigConstants.VLT_SETTING_ENABLED,
+                                        newValue? 1 : 0);
+                            } catch (ImsException e) {
+                                Log.e(TAG, "setImsVoLteProvisioned() exception:", e);
+                            }
+                        }
+                    });
+                }
+            }
+            updateImsVoLteProvisionedState();
+        }
+    };
+
+    private boolean isImsVoLteProvisioned() {
+        if (phone != null) {
+            ImsManager imsManager = ImsManager.getInstance(phone.getContext(), phone.getSubId());
+            return imsManager.isVolteProvisionedOnDevice(phone.getContext());
+        }
+        return false;
+    }
+
+    private void updateImsVoLteProvisionedState() {
+        log("updateImsVoLteProvisionedState isImsVoLteProvisioned()=" + isImsVoLteProvisioned());
+        String buttonText = isImsVoLteProvisioned() ?
+                getString(R.string.volte_provisioned_flag_off) :
+                getString(R.string.volte_provisioned_flag_on);
+        imsVoLteProvisionedButton.setText(buttonText);
     }
 
     private void updateSmsOverImsState() {
