@@ -263,24 +263,26 @@ public class WifiSetupActivity extends WifiPickerActivity
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             int messageRes = getArguments().getInt("messageRes");
-            return new AlertDialog.Builder(getActivity())
+            final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                     .setMessage(messageRes)
                     .setCancelable(false)
                     .setPositiveButton(R.string.wifi_skip_anyway,
                             new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            WifiSetupActivity activity = (WifiSetupActivity) getActivity();
-                            activity.finishOrNext(RESULT_SKIP);
-                        }
-                    })
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    WifiSetupActivity activity = (WifiSetupActivity) getActivity();
+                                    activity.finishOrNext(RESULT_SKIP);
+                                }
+                            })
                     .setNegativeButton(R.string.wifi_dont_skip,
                             new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    })
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                }
+                            })
                     .create();
+            SetupWizardUtils.applyImmersiveFlags(dialog);
+            return dialog;
         }
     }
 }
