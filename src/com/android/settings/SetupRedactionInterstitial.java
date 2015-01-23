@@ -67,6 +67,7 @@ public class SetupRedactionInterstitial extends RedactionInterstitial
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
         SetupWizardUtils.setImmersiveMode(this, bar);
+        bar.getBackButton().setEnabled(false);
     }
 
     @Override

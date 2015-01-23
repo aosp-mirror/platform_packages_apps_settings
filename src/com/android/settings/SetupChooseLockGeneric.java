@@ -94,6 +94,15 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
             SetupWizardUtils.setHeaderText(getActivity(), getActivity().getTitle());
         }
 
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (resultCode != RESULT_CANCELED) {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+            // If the started activity was cancelled (e.g. the user presses back), then this
+            // activity will be resumed to foreground.
+        }
+
         /***
          * Disables preferences that are less secure than required quality and shows only secure
          * screen lock options here.
