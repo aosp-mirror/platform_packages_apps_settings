@@ -209,7 +209,7 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         Log.d(TAG, "mccmnc = " + mccmnc);
         final String where = "numeric=\""
             + mccmnc
-            + "\"";
+            + "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL))";
 
         Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
                 "_id", "name", "apn", "type"}, where, null,
