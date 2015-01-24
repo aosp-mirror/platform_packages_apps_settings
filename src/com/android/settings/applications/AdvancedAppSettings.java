@@ -18,6 +18,7 @@ package com.android.settings.applications;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
@@ -26,7 +27,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.os.AsyncTask;
@@ -35,11 +35,9 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,14 +61,16 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
 
     private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_ALL_APPS = "all_apps";
+    private static final String KEY_APP_DOMAIN_URLS = "domain_urls";
     private static final String KEY_RESET_ALL = "reset_all";
     private static final String EXTRA_RESET_DIALOG = "resetDialog";
 
     private ApplicationsState mApplicationsState;
     private Session mSession;
-    private Preference mAppPerms;
-    private Preference mAllApps;
-    private Preference mResetAll;
+    private Preference mAppPermsPreference;
+    private Preference mAppDomainURLsPreference;
+    private Preference mAllAppsPreference;
+    private Preference mResetAllPreference;
 
     AlertDialog mResetDialog;
 
@@ -91,17 +91,18 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
         mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
         mSession = mApplicationsState.newSession(this);
 
-        mAppPerms = findPreference(KEY_APP_PERM);
-        mAllApps = findPreference(KEY_ALL_APPS);
-        mResetAll = findPreference(KEY_RESET_ALL);
-        mResetAll.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        mAppPermsPreference = findPreference(KEY_APP_PERM);
+        mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
+        mAllAppsPreference = findPreference(KEY_ALL_APPS);
+        mResetAllPreference = findPreference(KEY_RESET_ALL);
+        mResetAllPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 buildResetDialog();
                 return true;
             }
         });
-        updateAllAppsSummary();
+        updateUI();
 
         mPm = getActivity().getPackageManager();
         mIPm = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
@@ -112,8 +113,19 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
         mHandler = new Handler(getActivity().getMainLooper());
     }
 
-    private void updateAllAppsSummary() {
-        mAllApps.setSummary(getString(R.string.all_apps_summary, mSession.getAllApps().size()));
+    private void updateUI() {
+        ArrayList<AppEntry> allApps = mSession.getAllApps();
+        mAllAppsPreference.setSummary(getString(R.string.all_apps_summary, allApps.size()));
+
+        int countAppWithDomainURLs = 0;
+        for (AppEntry entry : allApps) {
+            boolean hasDomainURLs =
+                    (entry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
+            if (hasDomainURLs) countAppWithDomainURLs++;
+        }
+        String summary = getResources().getQuantityString(
+                R.plurals.domain_urls_apps_summary, countAppWithDomainURLs, countAppWithDomainURLs);
+        mAppDomainURLsPreference.setSummary(summary);
     }
 
     @Override
@@ -241,7 +253,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
 
     @Override
     public void onPackageListChanged() {
-        updateAllAppsSummary();
+        updateUI();
     }
 
     @Override
@@ -276,7 +288,9 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
 
     @Override
     public void onPermissionLoadComplete() {
-        mAppPerms.setSummary(getActivity().getString(R.string.app_permissions_summary,
+        Activity activity = getActivity();
+        if (activity == null) return;
+        mAppPermsPreference.setSummary(activity.getString(R.string.app_permissions_summary,
                 mPermissionsInfo.getRuntimePermAppsGrantedCount(),
                 mPermissionsInfo.getRuntimePermAppsCount()));
     }

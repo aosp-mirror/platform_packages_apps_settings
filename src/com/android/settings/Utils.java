@@ -25,10 +25,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -43,6 +45,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.hardware.usb.IUsbManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Uri;
@@ -76,6 +79,7 @@ import android.widget.TabWidget;
 
 import com.android.internal.util.UserIcons;
 import com.android.settings.UserAdapter.UserDetails;
+import com.android.settings.applications.ApplicationsState;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.drawable.CircleFramedDrawable;
 
@@ -84,6 +88,7 @@ import java.io.InputStream;
 import java.net.InetAddress;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -1101,7 +1106,6 @@ public final class Utils {
         return (sm.getStorageBytesUntilLow(context.getFilesDir()) < 0);
     }
 
-
     /**
      * Returns a default user icon (as a {@link Bitmap}) for the given user.
      *
@@ -1118,5 +1122,40 @@ public final class Utils {
             sDarkDefaultUserBitmapCache.put(userId, bitmap);
         }
         return bitmap;
+    }
+
+    public static boolean hasUsbDefaults(IUsbManager usbManager, String packageName) {
+        try {
+            if (usbManager != null) {
+                return usbManager.hasDefaults(packageName, UserHandle.myUserId());
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "mUsbManager.hasDefaults", e);
+        }
+        return false;
+    }
+
+    public static boolean hasPreferredActivities(PackageManager pm, String packageName) {
+        // Get list of preferred activities
+        List<ComponentName> prefActList = new ArrayList<>();
+        // Intent list cannot be null. so pass empty list
+        List<IntentFilter> intentList = new ArrayList<>();
+        pm.getPreferredActivities(intentList, prefActList, packageName);
+        Log.d(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
+        return prefActList.size() > 0;
+    }
+
+    public static CharSequence getLaunchByDeafaultSummary(ApplicationsState.AppEntry appEntry,
+            IUsbManager usbManager, PackageManager pm, Context context) {
+        String packageName = appEntry.info.packageName;
+        boolean hasPreferred = hasPreferredActivities(pm, packageName)
+                || hasUsbDefaults(usbManager, packageName);
+        int status = pm.getIntentVerificationStatus(packageName, UserHandle.myUserId());
+        boolean hasDomainURLsPreference =
+                (status == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS) ||
+                (status == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER);
+        return context.getString(hasPreferred || hasDomainURLsPreference
+                ? R.string.launch_defaults_some
+                : R.string.launch_defaults_none);
     }
 }

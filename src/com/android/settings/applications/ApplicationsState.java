@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings.applications;
 
 import android.app.ActivityManager;
@@ -116,7 +132,7 @@ public class ApplicationsState {
         }
 
         // Need to synchronize on 'this' for the following.
-        ApplicationInfo info;
+        public ApplicationInfo info;
         Drawable icon;
         String sizeStr;
         String internalSizeStr;
@@ -320,6 +336,16 @@ public class ApplicationsState {
         @Override
         public boolean filterApp(AppEntry entry) {
             return true;
+        }
+    };
+
+    public static final AppFilter FILTER_WITH_DOMAIN_URLS = new AppFilter() {
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry entry) {
+            return (entry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
         }
     };
 
