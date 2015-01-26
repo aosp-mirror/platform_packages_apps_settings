@@ -841,8 +841,10 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             }
         }
 
-        mSeries.setChartColor(Color.BLACK, seriesColor, seriesColor);
-        mDetailedSeries.setChartColor(Color.BLACK, seriesColor, seriesColor);
+        final int secondaryColor = Color.argb(127, Color.red(seriesColor), Color.green(seriesColor),
+                Color.blue(seriesColor));
+        mSeries.setChartColor(Color.BLACK, seriesColor, secondaryColor);
+        mDetailedSeries.setChartColor(Color.BLACK, seriesColor, secondaryColor);
     }
 
     private boolean isAppDetailMode() {
