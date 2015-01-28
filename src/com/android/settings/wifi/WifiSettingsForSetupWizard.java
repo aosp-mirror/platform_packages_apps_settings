@@ -95,8 +95,8 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
     }
 
     @Override
-    protected void updateAccessPoints() {
-        super.updateAccessPoints();
+    public void onAccessPointsChanged() {
+        super.onAccessPointsChanged();
         updateFooter(getPreferenceScreen().getPreferenceCount() == 0);
     }
 

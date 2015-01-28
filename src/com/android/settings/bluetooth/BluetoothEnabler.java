@@ -24,14 +24,13 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.WirelessSettings;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.WirelessUtils;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
@@ -177,7 +176,7 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         // Show toast message if Bluetooth is not allowed in airplane mode
         if (isChecked &&
-                !WirelessSettings.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
+                !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off
             switchView.setChecked(false);

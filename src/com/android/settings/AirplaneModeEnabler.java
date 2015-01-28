@@ -29,6 +29,7 @@ import android.provider.Settings;
 
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.settingslib.WirelessUtils;
 
 public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListener {
 
@@ -71,7 +72,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     public void resume() {
         
-        mSwitchPref.setChecked(isAirplaneModeOn(mContext));
+        mSwitchPref.setChecked(WirelessUtils.isAirplaneModeOn(mContext));
 
         mPhoneStateReceiver.registerIntent();
         mSwitchPref.setOnPreferenceChangeListener(this);
@@ -84,11 +85,6 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         mPhoneStateReceiver.unregisterIntent();
         mSwitchPref.setOnPreferenceChangeListener(null);
         mContext.getContentResolver().unregisterContentObserver(mAirplaneModeObserver);
-    }
-
-    public static boolean isAirplaneModeOn(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 
     private void setAirplaneModeOn(boolean enabling) {
@@ -113,7 +109,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
      * - mobile does not send failure notification, fail on timeout.
      */
     private void onAirplaneModeChanged() {
-        mSwitchPref.setChecked(isAirplaneModeOn(mContext));
+        mSwitchPref.setChecked(WirelessUtils.isAirplaneModeOn(mContext));
     }
     
     /**

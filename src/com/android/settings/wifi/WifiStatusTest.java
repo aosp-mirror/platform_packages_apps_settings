@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
 
 import android.net.wifi.ScanResult;
 import java.net.HttpURLConnection;
@@ -297,7 +298,8 @@ public class WifiStatusTest extends Activity {
     private void handleNetworkStateChanged(NetworkInfo networkInfo) {
         if (mWifiManager.isWifiEnabled()) {
             WifiInfo info = mWifiManager.getConnectionInfo();
-            String summary = Summary.get(this, info.getSSID(), networkInfo.getDetailedState(),
+            String summary = AccessPoint.getSummary(this, info.getSSID(),
+                    networkInfo.getDetailedState(),
                     info.getNetworkId() == WifiConfiguration.INVALID_NETWORK_ID);
             mNetworkState.setText(summary);
         }

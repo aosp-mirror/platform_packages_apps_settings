@@ -230,16 +230,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
         Log.d(TAG, s);
     }
 
-    public static boolean isRadioAllowed(Context context, String type) {
-        if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
-            return true;
-        }
-        // Here we use the same logic in onCreate().
-        String toggleable = Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        return toggleable != null && toggleable.contains(type);
-    }
-
     private boolean isSmsSupported() {
         // Some tablet has sim card but could not do telephony operations. Skip those.
         return mTm.isSmsCapable();

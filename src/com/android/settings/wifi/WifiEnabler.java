@@ -31,9 +31,9 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.WirelessSettings;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.WirelessUtils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -196,7 +196,7 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
             return;
         }
         // Show toast message if Wi-Fi is not allowed in airplane mode
-        if (isChecked && !WirelessSettings.isRadioAllowed(mContext, Settings.Global.RADIO_WIFI)) {
+        if (isChecked && !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_WIFI)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off. No infinite check/listenenr loop.
             mSwitchBar.setChecked(false);

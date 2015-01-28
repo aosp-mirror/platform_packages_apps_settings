@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.IpConfiguration;
@@ -27,7 +25,6 @@ import android.net.LinkAddress;
 import android.net.NetworkInfo.DetailedState;
 import android.net.NetworkUtils;
 import android.net.ProxyInfo;
-import android.net.RouteInfo;
 import android.net.StaticIpConfiguration;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
@@ -38,7 +35,6 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.os.Handler;
-import android.os.UserHandle;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -60,6 +56,7 @@ import android.widget.TextView;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.InetAddress;
 import java.net.Inet4Address;
@@ -156,7 +153,7 @@ public class WifiConfigController implements TextWatcher,
         mView = view;
         mAccessPoint = accessPoint;
         mAccessPointSecurity = (accessPoint == null) ? AccessPoint.SECURITY_NONE :
-                accessPoint.security;
+                accessPoint.getSecurity();
         mEdit = edit;
 
         mTextViewChangedHandler = new Handler();
@@ -209,12 +206,12 @@ public class WifiConfigController implements TextWatcher,
 
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
         } else {
-            mConfigUi.setTitle(mAccessPoint.ssid);
+            mConfigUi.setTitle(mAccessPoint.getSsid());
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 
             boolean showAdvancedFields = false;
-            if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
+            if (mAccessPoint.isSaved()) {
                 WifiConfiguration config = mAccessPoint.getConfig();
                 if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
@@ -241,7 +238,7 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
 
-            if ((mAccessPoint.networkId == INVALID_NETWORK_ID && !mAccessPoint.isActive())
+            if ((!mAccessPoint.isSaved() && !mAccessPoint.isActive())
                     || mEdit) {
                 showSecurityFields();
                 showIpConfigFields();
@@ -258,16 +255,15 @@ public class WifiConfigController implements TextWatcher,
             if (mEdit) {
                 mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
             } else {
-                final DetailedState state = mAccessPoint.getState();
+                final DetailedState state = mAccessPoint.getDetailedState();
                 final String signalLevel = getSignalString();
 
                 if (state == null && signalLevel != null) {
                     mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
                     if (state != null) {
-                        addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(),
-                                state, mAccessPoint.networkId ==
-                                WifiConfiguration.INVALID_NETWORK_ID));
+                        addRow(group, R.string.wifi_status, AccessPoint.getSummary(
+                                mConfigUi.getContext(), state, !mAccessPoint.isSaved()));
                     }
 
                     if (signalLevel != null) {
@@ -301,14 +297,14 @@ public class WifiConfigController implements TextWatcher,
                     addRow(group, R.string.wifi_security, mAccessPoint.getSecurityString(false));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
-                if (mAccessPoint.networkId != INVALID_NETWORK_ID || mAccessPoint.isActive()) {
+                if (mAccessPoint.isSaved() || mAccessPoint.isActive()) {
                     mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }
         }
 
         if ((mEdit) || (mAccessPoint != null
-                && mAccessPoint.getState() == null && mAccessPoint.getLevel() != -1)){
+                && mAccessPoint.getDetailedState() == null && mAccessPoint.getLevel() != -1)){
             mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         }else{
             mConfigUi.setCancelButton(res.getString(R.string.wifi_display_options_done));
@@ -353,7 +349,7 @@ public class WifiConfigController implements TextWatcher,
         }
 
         if ((mSsidView != null && mSsidView.length() == 0) ||
-            ((mAccessPoint == null || mAccessPoint.networkId == INVALID_NETWORK_ID) &&
+            ((mAccessPoint == null || !mAccessPoint.isSaved()) &&
             passwordInvalid)) {
             enabled = false;
         } else {
@@ -367,7 +363,7 @@ public class WifiConfigController implements TextWatcher,
     }
 
     /* package */ WifiConfiguration getConfig() {
-        if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID && !mEdit) {
+        if (mAccessPoint != null && mAccessPoint.isSaved() && !mEdit) {
             return null;
         }
 
@@ -378,11 +374,11 @@ public class WifiConfigController implements TextWatcher,
                     mSsidView.getText().toString());
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = true;
-        } else if (mAccessPoint.networkId == INVALID_NETWORK_ID) {
+        } else if (!mAccessPoint.isSaved()) {
             config.SSID = AccessPoint.convertToQuotedString(
-                    mAccessPoint.ssid);
+                    mAccessPoint.getSsid());
         } else {
-            config.networkId = mAccessPoint.networkId;
+            config.networkId = mAccessPoint.getConfig().networkId;
         }
 
         switch (mAccessPointSecurity) {
@@ -628,7 +624,7 @@ public class WifiConfigController implements TextWatcher,
             ((CheckBox) mView.findViewById(R.id.show_password))
                 .setOnCheckedChangeListener(this);
 
-            if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
+            if (mAccessPoint != null && mAccessPoint.isSaved()) {
                 mPasswordView.setHint(R.string.wifi_unchanged);
             }
         }
@@ -652,7 +648,7 @@ public class WifiConfigController implements TextWatcher,
             loadCertificates(mEapUserCertSpinner, Credentials.USER_PRIVATE_KEY);
 
             // Modifying an existing network
-            if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
+            if (mAccessPoint != null && mAccessPoint.isSaved()) {
                 WifiEnterpriseConfig enterpriseConfig = mAccessPoint.getConfig().enterpriseConfig;
                 int eapMethod = enterpriseConfig.getEapMethod();
                 int phase2Method = enterpriseConfig.getPhase2Method();
@@ -794,7 +790,7 @@ public class WifiConfigController implements TextWatcher,
 
         mView.findViewById(R.id.ip_fields).setVisibility(View.VISIBLE);
 
-        if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
+        if (mAccessPoint != null && mAccessPoint.isSaved()) {
             config = mAccessPoint.getConfig();
         }
 
@@ -846,7 +842,7 @@ public class WifiConfigController implements TextWatcher,
 
         mView.findViewById(R.id.proxy_settings_fields).setVisibility(View.VISIBLE);
 
-        if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
+        if (mAccessPoint != null && mAccessPoint.isSaved()) {
             config = mAccessPoint.getConfig();
         }
 

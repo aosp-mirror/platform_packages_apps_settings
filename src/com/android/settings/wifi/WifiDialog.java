@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
 
 import android.app.AlertDialog;
 import android.content.Context;

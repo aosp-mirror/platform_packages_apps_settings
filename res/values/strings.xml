@@ -1317,8 +1317,6 @@
 
     <!-- Wifi Assistant title.  [CHAR LIMIT=40] -->
     <string name="wifi_assistant_title">Wi\u2011Fi Assistant</string>
-    <!-- Status message of Wi-Fi when it is connected by a Wi-Fi assistant application. [CHAR LIMIT=NONE] -->
-    <string name="connected_via_wfa">Connected via Wi\u2011Fi assistant</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast screen</string>
@@ -1422,8 +1420,6 @@
     <string name="wifi_error">Error</string>
     <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
     <string name="wifi_in_airplane_mode">In Airplane mode</string>
-    <!-- Toast message when Wi-Fi cannot scan for networks -->
-    <string name="wifi_fail_to_scan">Can\'t scan for networks</string>
     <!-- Checkbox title for option to notify user when open networks are nearby -->
     <string name="wifi_notify_open_networks">Network notification</string>
     <!-- Checkbox summary for option to notify user when open networks are nearby [CHAR LIMIT=60]-->
@@ -1578,21 +1574,6 @@
     <string name="wifi_unchanged">(unchanged)</string>
     <!-- Hint for unspecified fields -->
     <string name="wifi_unspecified">(unspecified)</string>
-    <!-- Summary for the remembered network. -->
-    <string name="wifi_remembered">Saved</string>
-    <!-- Status for networks disabled for unknown reason -->
-    <string name="wifi_disabled_generic">Disabled</string>
-    <!-- Status for networked disabled from a DNS or DHCP failure -->
-    <string name="wifi_disabled_network_failure">IP Configuration Failure</string>
-    <!-- Status for networked disabled from a wifi association failure -->
-    <string name="wifi_disabled_wifi_failure">WiFi Connection Failure</string>
-    <!-- Status for networks disabled from authentication failure (wrong password
-         or certificate). -->
-    <string name="wifi_disabled_password_failure">Authentication problem</string>
-    <!-- Summary for the remembered network but currently not in range. -->
-    <string name="wifi_not_in_range">Not in range</string>
-    <!-- Summary for the remembered network but no internet connection was detected. -->
-    <string name="wifi_no_internet">No Internet Access Detected, won\'t automatically reconnect.</string>
     <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
          string is listed first [CHAR LIMIT=20]-->
     <string name="wifi_wps_available_first_item">WPS available</string>
@@ -1601,35 +1582,6 @@
     <string name="wifi_wps_available_second_item">\u0020(WPS available)</string>
     <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR_LIMIT=40] -->
     <string name="wifi_wps_nfc_enter_password">Enter your network password</string>
-
-    <!-- Do not translate.  Concise terminology for wifi with WEP security -->
-    <string name="wifi_security_short_wep">WEP</string>
-    <!-- Do not translate.  Concise terminology for wifi with WPA security -->
-    <string name="wifi_security_short_wpa">WPA</string>
-    <!-- Do not translate.  Concise terminology for wifi with WPA2 security -->
-    <string name="wifi_security_short_wpa2">WPA2</string>
-    <!-- Do not translate.  Concise terminology for wifi with both WPA/WPA2 security -->
-    <string name="wifi_security_short_wpa_wpa2">WPA/WPA2</string>
-    <!-- Do not translate.  Concise terminology for wifi with unknown PSK type -->
-    <string name="wifi_security_short_psk_generic">@string/wifi_security_short_wpa_wpa2</string>
-    <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
-    <string name="wifi_security_short_eap">802.1x</string>
-
-    <!-- Used in Wi-Fi settings dialogs when Wi-Fi does not have any security. -->
-    <string name="wifi_security_none">None</string>
-
-    <!-- Do not translate.  Terminology for wifi with WEP security -->
-    <string name="wifi_security_wep">WEP</string>
-    <!-- Do not translate.  Terminology for wifi with WPA security -->
-    <string name="wifi_security_wpa">WPA PSK</string>
-    <!-- Do not translate.  Terminology for wifi with WPA2 security -->
-    <string name="wifi_security_wpa2">WPA2 PSK</string>
-    <!-- Do not translate.  Terminology for wifi with both WPA/WPA2 security, or unknown -->
-    <string name="wifi_security_wpa_wpa2">WPA/WPA2 PSK</string>
-    <!-- Do not translate.  Terminology for wifi with unknown PSK type -->
-    <string name="wifi_security_psk_generic">@string/wifi_security_wpa_wpa2</string>
-    <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
-    <string name="wifi_security_eap">802.1x EAP</string>
 
     <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
     <!-- Message informing the user how to turn off  [CHAR LIMIT=200] -->

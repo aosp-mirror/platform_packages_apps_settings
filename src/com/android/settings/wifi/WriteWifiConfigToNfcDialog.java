@@ -45,6 +45,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
 
 import java.io.IOException;
 
@@ -121,7 +122,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
         String password = mPasswordView.getText().toString();
         String wpsNfcConfigurationToken
-                = mWifiManager.getWpsNfcConfigurationToken(mAccessPoint.networkId);
+                = mWifiManager.getWpsNfcConfigurationToken(mAccessPoint.getConfig().networkId);
         String passwordHex = byteArrayToHexString(password.getBytes());
 
         String passwordLength = password.length() >= HEX_RADIX
@@ -224,9 +225,9 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private void enableSubmitIfAppropriate() {
 
         if (mPasswordView != null) {
-            if (mAccessPoint.security == AccessPoint.SECURITY_WEP) {
+            if (mAccessPoint.getSecurity() == AccessPoint.SECURITY_WEP) {
                 mSubmitButton.setEnabled(mPasswordView.length() > 0);
-            } else if (mAccessPoint.security == AccessPoint.SECURITY_PSK) {
+            } else if (mAccessPoint.getSecurity() == AccessPoint.SECURITY_PSK) {
                 mSubmitButton.setEnabled(mPasswordView.length() >= 8);
             }
         } else {

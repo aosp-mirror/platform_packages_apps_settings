@@ -20,28 +20,22 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
-
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
-
 import android.util.Log;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * UI to manage saved networks/access points.
@@ -88,14 +82,17 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         final Context context = getActivity();
 
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        final List<AccessPoint> accessPoints = constructSavedAccessPoints(context, mWifiManager);
+        final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context, true,
+                false);
 
         preferenceScreen.removeAll();
 
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i){
-            preferenceScreen.addPreference(accessPoints.get(i));
+            AccessPointPreference preference = new AccessPointPreference(accessPoints.get(i),
+                    context);
+            preference.setShowSummary(false);
+            preferenceScreen.addPreference(preference);
         }
 
         if(getPreferenceScreen().getPreferenceCount() < 1) {
@@ -103,62 +100,14 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         }
     }
 
-    private static List<AccessPoint> constructSavedAccessPoints(Context context,
-            WifiManager wifiManager){
-        List<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
-        Map<String, List<ScanResult>> resultsMap = new HashMap<String, List<ScanResult>>();
-
-        final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
-        final List<ScanResult> scanResults = wifiManager.getScanResults();
-
-        if (configs != null) {
-            //Construct a Map for quick searching of a wifi network via ssid.
-            final int scanResultsSize = scanResults.size();
-            for (int i = 0; i < scanResultsSize; ++i){
-                final ScanResult result = scanResults.get(i);
-                List<ScanResult> res = resultsMap.get(result.SSID);
-
-                if(res == null){
-                    res = new ArrayList<ScanResult>();
-                    resultsMap.put(result.SSID, res);
-                }
-
-                res.add(result);
-            }
-
-            final int configsSize = configs.size();
-            for (int i = 0; i < configsSize; ++i){
-                WifiConfiguration config = configs.get(i);
-                if (config.selfAdded && config.numAssociation == 0) {
-                    continue;
-                }
-                AccessPoint accessPoint = new AccessPoint(context, config);
-                final List<ScanResult> results = resultsMap.get(accessPoint.ssid);
-
-                accessPoint.setShowSummary(false);
-                if(results != null){
-                    final int resultsSize = results.size();
-                    for (int j = 0; j < resultsSize; ++j){
-                        accessPoint.update(results.get(j));
-                        accessPoint.setIcon(null);
-                    }
-                }
-
-                accessPoints.add(accessPoint);
-            }
-        }
-
-        return accessPoints;
-    }
-
-    private void showDialog(AccessPoint accessPoint, boolean edit) {
+    private void showDialog(AccessPointPreference accessPoint, boolean edit) {
         if (mDialog != null) {
             removeDialog(WifiSettings.WIFI_DIALOG_ID);
             mDialog = null;
         }
 
         // Save the access point and edit mode
-        mDlgAccessPoint = accessPoint;
+        mDlgAccessPoint = accessPoint.getAccessPoint();
 
         showDialog(WifiSettings.WIFI_DIALOG_ID);
     }
@@ -198,16 +147,16 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
     @Override
     public void onClick(DialogInterface dialogInterface, int button) {
         if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
-            mWifiManager.forget(mSelectedAccessPoint.networkId, null);
-            getPreferenceScreen().removePreference(mSelectedAccessPoint);
+            mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, null);
+            getPreferenceScreen().removePreference((Preference) mSelectedAccessPoint.getTag());
             mSelectedAccessPoint = null;
         }
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
-        if (preference instanceof AccessPoint) {
-            showDialog((AccessPoint) preference, false);
+        if (preference instanceof AccessPointPreference) {
+            showDialog((AccessPointPreference) preference, false);
             return true;
         } else{
             return super.onPreferenceTreeClick(screen, preference);
@@ -233,15 +182,13 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
                 result.add(data);
 
                 // Add available Wi-Fi access points
-                WifiManager wifiManager =
-                        (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                final List<AccessPoint> accessPoints =
-                        constructSavedAccessPoints(context, wifiManager);
+                final List<AccessPoint> accessPoints = WifiTracker.getCurrentAccessPoints(context,
+                        true, false);
 
                 final int accessPointsSize = accessPoints.size();
                 for (int i = 0; i < accessPointsSize; ++i){
                     data = new SearchIndexableRaw(context);
-                    data.title = accessPoints.get(i).getTitle().toString();
+                    data.title = accessPoints.get(i).getSsid();
                     data.screenTitle = title;
                     data.enabled = enabled;
                     result.add(data);

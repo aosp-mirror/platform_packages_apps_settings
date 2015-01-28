@@ -24,8 +24,6 @@ import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,6 +37,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.Collection;
 import java.util.EnumMap;
@@ -285,7 +284,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         default:  // DISCONNECTED, FAILED
             if (mScreenState != SCREEN_STATE_CONNECTED &&
                     mWifiSettings.getAccessPointsCount() > 0) {
-                showDisconnectedState(Summary.get(this, state, false /* isEphemeral */));
+                showDisconnectedState(AccessPoint.getSummary(this, state, false /* isEphemeral */));
             }
             break;
         }
@@ -422,8 +421,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mScreenState = SCREEN_STATE_EDITING;
 
         if (selectedAccessPoint != null &&
-                (selectedAccessPoint.security == AccessPoint.SECURITY_WEP ||
-                        selectedAccessPoint.security == AccessPoint.SECURITY_PSK)) {
+                (selectedAccessPoint.getSecurity() == AccessPoint.SECURITY_WEP ||
+                        selectedAccessPoint.getSecurity() == AccessPoint.SECURITY_PSK)) {
             // We forcibly set edit as true so that users can modify every field if they want,
             // while config UI doesn't allow them to edit some of them when edit is false
             // (e.g. password field is hiden when edit==false).
@@ -446,17 +445,17 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
             showDisconnectedProgressBar();
             showEditingButtonState();
-        } else if (selectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
-            mNetworkName = selectedAccessPoint.getTitle().toString();
+        } else if (selectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
+            mNetworkName = selectedAccessPoint.getSsid().toString();
 
             // onConnectButtonPressed() will change visibility status.
             mConnectButton.performClick();
         } else {
-            mNetworkName = selectedAccessPoint.getTitle().toString();
+            mNetworkName = selectedAccessPoint.getSsid().toString();
             showEditingTitle();
             showDisconnectedProgressBar();
             showEditingButtonState();
-            if (selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
+            if (selectedAccessPoint.getSecurity() == AccessPoint.SECURITY_EAP) {
                 onEapNetworkSelected();
             } else {
                 mConnectButton.setVisibility(View.VISIBLE);
@@ -657,8 +656,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
 
         for (AccessPoint accessPoint : accessPoints) {
-            accessPoint.setLayoutResource(R.layout.custom_preference);
-            preferenceScreen.addPreference(accessPoint);
+            AccessPointPreference preference = (AccessPointPreference) accessPoint.getTag();
+            if (preference == null) continue;
+            preference.setLayoutResource(R.layout.custom_preference);
+            preferenceScreen.addPreference(preference);
         }
     }
 
