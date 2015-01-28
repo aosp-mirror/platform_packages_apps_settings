@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
         package="com.android.settings"
         coreApp="true"
         android:sharedUserId="android.uid.system">
@@ -1724,6 +1725,7 @@
             android:theme="@style/Theme.SubSettingsDialogWhenLarge"/>
 
         <activity android:name=".CryptKeeper"
+                  androidprv:primaryUserOnly="true"
                   android:immersive="true"
                   android:launchMode="singleTop"
                   android:excludeFromRecents="true"
@@ -1737,12 +1739,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <receiver android:name=".CryptKeeper$UserInitBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.USER_INITIALIZE" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name=".CryptKeeper$FadeToBlack"
             android:immersive="true"

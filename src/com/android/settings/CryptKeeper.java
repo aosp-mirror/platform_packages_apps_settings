@@ -17,9 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.StatusBarManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -50,10 +48,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -68,9 +66,9 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 
-import static com.android.internal.widget.LockPatternView.DisplayMode;
-
 import java.util.List;
+
+import static com.android.internal.widget.LockPatternView.DisplayMode;
 
 /**
  * Settings screens to show the UI flows for encrypting/decrypting the device.
@@ -1026,18 +1024,5 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         Log.d(TAG, "Disabling component " + name);
         pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
-    }
-
-    public static class UserInitBroadcastReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String intentAction = intent.getAction();
-            // Disable CryptKeeper activity if user is not primary
-            if (Intent.ACTION_USER_INITIALIZE.equals(intentAction)
-                    && UserHandle.USER_OWNER != UserHandle.myUserId()) {
-                disableCryptKeeperComponent(context);
-            }
-        }
     }
 }
