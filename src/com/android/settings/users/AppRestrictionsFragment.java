@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.RestrictionEntry;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
@@ -909,12 +910,32 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             } else if (restrictionsIntent != null) {
                 preference.setRestrictions(restrictions);
                 if (invokeIfCustom && AppRestrictionsFragment.this.isResumed()) {
+                    assertSafeToStartCustomActivity(restrictionsIntent);
                     int requestCode = generateCustomActivityRequestCode(
                             RestrictionsResultReceiver.this.preference);
                     AppRestrictionsFragment.this.startActivityForResult(
                             restrictionsIntent, requestCode);
                 }
             }
+        }
+
+        private void assertSafeToStartCustomActivity(Intent intent) {
+            // Activity can be started if it belongs to the same app
+            if (intent.getPackage() != null && intent.getPackage().equals(packageName)) {
+                return;
+            }
+            // Activity can be started if intent resolves to multiple activities
+            List<ResolveInfo> resolveInfos = AppRestrictionsFragment.this.mPackageManager
+                    .queryIntentActivities(intent, 0 /* no flags */);
+            if (resolveInfos.size() != 1) {
+                return;
+            }
+            // Prevent potential privilege escalation
+            ActivityInfo activityInfo = resolveInfos.get(0).activityInfo;
+            if (!packageName.equals(activityInfo.packageName)) {
+                throw new SecurityException("Application " + packageName
+                        + " is not allowed to start activity " + intent);
+            };
         }
     }
 
