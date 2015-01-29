@@ -28,6 +28,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.RestrictionEntry;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
@@ -839,6 +840,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
+                        assertSafeToStartCustomActivity(customIntent);
                         int requestCode = generateCustomActivityRequestCode(
                                 RestrictionsResultReceiver.this.preference);
                         AppRestrictionsFragment.this.startActivityForResult(
@@ -852,6 +854,25 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 mAppList.addPreference(p);
                 preference.setRestrictions(restrictions);
             }
+        }
+
+        private void assertSafeToStartCustomActivity(Intent intent) {
+            // Activity can be started if it belongs to the same app
+            if (intent.getPackage() != null && intent.getPackage().equals(packageName)) {
+                return;
+            }
+            // Activity can be started if intent resolves to multiple activities
+            List<ResolveInfo> resolveInfos = AppRestrictionsFragment.this.mPackageManager
+                    .queryIntentActivities(intent, 0 /* no flags */);
+            if (resolveInfos.size() != 1) {
+                return;
+            }
+            // Prevent potential privilege escalation
+            ActivityInfo activityInfo = resolveInfos.get(0).activityInfo;
+            if (!packageName.equals(activityInfo.packageName)) {
+                throw new SecurityException("Application " + packageName
+                        + " is not allowed to start activity " + intent);
+            };
         }
     }
 
