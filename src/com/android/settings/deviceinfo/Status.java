@@ -66,6 +66,7 @@ public class Status extends PreferenceActivity {
     private static final String KEY_SERIAL_NUMBER = "serial_number";
     private static final String KEY_WIMAX_MAC_ADDRESS = "wimax_mac_address";
     private static final String KEY_SIM_STATUS = "sim_status";
+    private static final String KEY_IMEI_INFO = "imei_info";
 
     // Broadcasts to listen to for connectivity changes.
     private static final String[] CONNECTIVITY_INTENTS = {
@@ -201,6 +202,12 @@ public class Status extends PreferenceActivity {
             setSummaryText(KEY_SERIAL_NUMBER, serial);
         } else {
             removePreferenceFromScreen(KEY_SERIAL_NUMBER);
+        }
+
+        //Remove SimStatus and Imei for Secondary user as it access Phone b/19165700
+        if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
+            removePreferenceFromScreen(KEY_SIM_STATUS);
+            removePreferenceFromScreen(KEY_IMEI_INFO);
         }
 
         // Make every pref on this screen copy its data to the clipboard on longpress.
