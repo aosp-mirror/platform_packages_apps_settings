@@ -4059,8 +4059,9 @@
     <!-- [CHAR LIMIT=NONE] Label for amount of memory use -->
     <string name="app_memory_use">Memory use</string>
     <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
-    <string name="process_stats_total_duration"><xliff:g id="type">%1$s</xliff:g> apps over
-        <xliff:g id="time">%2$s</xliff:g></string>
+    <string name="process_stats_total_duration"><xliff:g id="usedRam">%1$s</xliff:g>
+        of <xliff:g id="totalRam">%2$s</xliff:g> used over
+        <xliff:g id="time">%3$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
     <string name="process_stats_type_background">Background</string>
     <!-- [CHAR LIMIT=NONE] Label for process stats, text for stats type -->
@@ -4070,12 +4071,24 @@
     <!-- [CHAR LIMIT=NONE] Label for process stats, duration of time the stats are over -->
     <string name="process_stats_memory_status">Device memory is currently
         <xliff:g id="memstate">%1$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Label OS "process" app -->
+    <string name="process_stats_os_label">Android OS</string>
+    <!-- [CHAR LIMIT=NONE] Name of OS "process" for all native processes -->
+    <string name="process_stats_os_native">Native</string>
+    <!-- [CHAR LIMIT=NONE] Name of OS "process" for all kernel memory -->
+    <string name="process_stats_os_kernel">Kernel</string>
+    <!-- [CHAR LIMIT=NONE] Name of OS "process" for all zram memory -->
+    <string name="process_stats_os_zram">Z-Ram</string>
+    <!-- [CHAR LIMIT=NONE] Name of OS "process" for base memory needed for caches -->
+    <string name="process_stats_os_cache">Caches</string>
     <!-- [CHAR LIMIT=NONE] Label for item showing details of average RAM use -->
-    <string name="process_stats_avg_ram_use">Average RAM use</string>
-    <!-- [CHAR LIMIT=NONE] Label for item showing details of maximum RAM use -->
-    <string name="process_stats_max_ram_use">Maximum RAM use</string>
+    <string name="process_stats_ram_use">RAM use</string>
+    <!-- [CHAR LIMIT=NONE] Label for item showing details of average RAM use -->
+    <string name="process_stats_bg_ram_use">RAM use (background)</string>
     <!-- [CHAR LIMIT=NONE] Label for item showing percent of time spent running -->
     <string name="process_stats_run_time">Run time</string>
+    <!-- [CHAR LIMIT=NONE] Subtitle for process stats processes list -->
+    <string name="processes_subtitle">Processes</string>
     <!-- [CHAR LIMIT=NONE] Subtitle for process stats services list -->
     <string name="services_subtitle">Services</string>
     <!-- [CHAR LIMIT=NONE] Menu for process stats to select duration of stats to show -->

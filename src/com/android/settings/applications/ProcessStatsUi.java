@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
@@ -50,6 +51,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public class ProcessStatsUi extends PreferenceFragment
         implements LinearColorBar.OnRegionTappedListener {
@@ -75,13 +77,30 @@ public class ProcessStatsUi extends PreferenceFragment
     final static Comparator<ProcStatsEntry> sEntryCompare = new Comparator<ProcStatsEntry>() {
         @Override
         public int compare(ProcStatsEntry lhs, ProcStatsEntry rhs) {
-            if (lhs.mWeight < rhs.mWeight) {
+            if (lhs.mRunWeight < rhs.mRunWeight) {
                 return 1;
-            } else if (lhs.mWeight > rhs.mWeight) {
+            } else if (lhs.mRunWeight > rhs.mRunWeight) {
                 return -1;
-            } else if (lhs.mDuration < rhs.mDuration) {
+            } else if (lhs.mRunDuration < rhs.mRunDuration) {
                 return 1;
-            } else if (lhs.mDuration > rhs.mDuration) {
+            } else if (lhs.mRunDuration > rhs.mRunDuration) {
+                return -1;
+            }
+            return 0;
+        }
+    };
+
+    final static Comparator<ProcStatsPackageEntry> sPackageEntryCompare
+            = new Comparator<ProcStatsPackageEntry>() {
+        @Override
+        public int compare(ProcStatsPackageEntry lhs, ProcStatsPackageEntry rhs) {
+            if (lhs.mRunWeight < rhs.mRunWeight) {
+                return 1;
+            } else if (lhs.mRunWeight > rhs.mRunWeight) {
+                return -1;
+            } else if (lhs.mRunDuration < rhs.mRunDuration) {
+                return 1;
+            } else if (lhs.mRunDuration > rhs.mRunDuration) {
                 return -1;
             }
             return 0;
@@ -112,7 +131,7 @@ public class ProcessStatsUi extends PreferenceFragment
     private PreferenceGroup mAppListGroup;
     private Preference mMemStatusPref;
 
-    long mMaxWeight;
+    double mMaxWeight;
     long mTotalTime;
 
     long[] mMemTimes = new long[ProcessStats.ADJ_MEM_FACTOR_COUNT];
@@ -123,6 +142,7 @@ public class ProcessStatsUi extends PreferenceFragment
     double mMemKernelWeight;
     double mMemNativeWeight;
     double mMemTotalWeight;
+    double mWeightToRam;
 
     // The actual duration value to use for each duration option.  Note these
     // are lower than the actual duration, since our durations are computed in
@@ -218,9 +238,10 @@ public class ProcessStatsUi extends PreferenceFragment
 
         ProcessStatsPreference pgp = (ProcessStatsPreference) preference;
         Bundle args = new Bundle();
-        args.putParcelable(ProcessStatsDetail.EXTRA_ENTRY, pgp.getEntry());
+        args.putParcelable(ProcessStatsDetail.EXTRA_PACKAGE_ENTRY, pgp.getEntry());
         args.putBoolean(ProcessStatsDetail.EXTRA_USE_USS, mUseUss);
-        args.putLong(ProcessStatsDetail.EXTRA_MAX_WEIGHT, mMaxWeight);
+        args.putDouble(ProcessStatsDetail.EXTRA_MAX_WEIGHT, mMaxWeight);
+        args.putDouble(ProcessStatsDetail.EXTRA_WEIGHT_TO_RAM, mWeightToRam);
         args.putLong(ProcessStatsDetail.EXTRA_TOTAL_TIME, mTotalTime);
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 ProcessStatsDetail.class.getName(), args, R.string.details_title, null, null, 0);
@@ -406,31 +427,6 @@ public class ProcessStatsUi extends PreferenceFragment
 
         final long elapsedTime = mStats.mTimePeriodEndRealtime-mStats.mTimePeriodStartRealtime;
 
-        mMemStatusPref.setOrder(-2);
-        mAppListGroup.addPreference(mMemStatusPref);
-        String durationString = Utils.formatElapsedTime(getActivity(), elapsedTime, false);
-        CharSequence memString;
-        CharSequence[] memStatesStr = getResources().getTextArray(R.array.ram_states);
-        if (mMemState >= 0 && mMemState < memStatesStr.length) {
-            memString = memStatesStr[mMemState];
-        } else {
-            memString = "?";
-        }
-        mMemStatusPref.setTitle(getActivity().getString(R.string.process_stats_total_duration,
-                getActivity().getString(statsLabel), durationString));
-        mMemStatusPref.setSummary(getActivity().getString(R.string.process_stats_memory_status,
-                        memString));
-        /*
-        mMemStatusPref.setTitle(DateFormat.format(DateFormat.getBestDateTimePattern(
-                getActivity().getResources().getConfiguration().locale,
-                "MMMM dd, yyyy h:mm a"), mStats.mTimePeriodStartClock));
-        */
-        /*
-        BatteryHistoryPreference hist = new BatteryHistoryPreference(getActivity(), mStats);
-        hist.setOrder(-1);
-        mAppListGroup.addPreference(hist);
-        */
-
         long now = SystemClock.uptimeMillis();
 
         final PackageManager pm = getActivity().getPackageManager();
@@ -470,9 +466,13 @@ public class ProcessStatsUi extends PreferenceFragment
                 memStates = ProcessStats.ALL_MEM_ADJ;
                 break;
         }
-        colors.setColoredRegions(LinearColorBar.REGION_RED);
+        Resources res = getResources();
+        colors.setColors(res.getColor(R.color.running_processes_apps_ram),
+                res.getColor(R.color.running_processes_apps_ram),
+                res.getColor(R.color.running_processes_free_ram));
 
         // Compute memory badness for chart color.
+        /*
         int[] badColors = com.android.settings.Utils.BADNESS_COLORS;
         long timeGood = mMemTimes[ProcessStats.ADJ_MEM_FACTOR_NORMAL];
         timeGood += (mMemTimes[ProcessStats.ADJ_MEM_FACTOR_MODERATE]*2)/3;
@@ -480,6 +480,7 @@ public class ProcessStatsUi extends PreferenceFragment
         float memBadness = ((float)timeGood)/mTotalTime;
         int badnessColor = badColors[1 + Math.round(memBadness*(badColors.length-2))];
         colors.setColors(badnessColor, badnessColor, badnessColor);
+        */
 
         // We are now going to scale the mMemTimes to match the total elapsed time.
         // These are in uptime, so they will often be smaller than the elapsed time,
@@ -547,6 +548,8 @@ public class ProcessStatsUi extends PreferenceFragment
         memReader.readMemInfo();
         double realTotalRam = memReader.getTotalSize();
         double totalScale = realTotalRam / totalRam;
+        mWeightToRam = totalScale / memTotalTime * 1024;
+        mMaxWeight = totalRam / mWeightToRam;
         double realUsedRam = usedRam * totalScale;
         double realFreeRam = freeRam * totalScale;
         if (DEBUG) {
@@ -558,12 +561,15 @@ public class ProcessStatsUi extends PreferenceFragment
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         ((ActivityManager)getActivity().getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(
                 memInfo);
+        long baseCacheRam;
         if (memInfo.hiddenAppThreshold >= realFreeRam) {
             realUsedRam = realFreeRam;
             realFreeRam = 0;
+            baseCacheRam = (long)realFreeRam;
         } else {
             realUsedRam += memInfo.hiddenAppThreshold;
             realFreeRam -= memInfo.hiddenAppThreshold;
+            baseCacheRam = memInfo.hiddenAppThreshold;
         }
         if (DEBUG) {
             Log.i(TAG, "Adj Scaled Used RAM: " + Formatter.formatShortFileSize(getActivity(),
@@ -572,6 +578,22 @@ public class ProcessStatsUi extends PreferenceFragment
                     (long)realFreeRam));
         }
 
+        mMemStatusPref.setOrder(-2);
+        mAppListGroup.addPreference(mMemStatusPref);
+        String durationString = Utils.formatElapsedTime(getActivity(), elapsedTime, false);
+        String usedString = Formatter.formatShortFileSize(getActivity(), (long) realUsedRam);
+        String totalString = Formatter.formatShortFileSize(getActivity(), (long)realTotalRam);
+        CharSequence memString;
+        CharSequence[] memStatesStr = getResources().getTextArray(R.array.ram_states);
+        if (mMemState >= 0 && mMemState < memStatesStr.length) {
+            memString = memStatesStr[mMemState];
+        } else {
+            memString = "?";
+        }
+        mMemStatusPref.setTitle(getActivity().getString(R.string.process_stats_total_duration,
+                usedString, totalString, durationString));
+        mMemStatusPref.setSummary(getActivity().getString(R.string.process_stats_memory_status,
+                        memString)); 
         float usedRatio = (float)(realUsedRam/(realFreeRam+realUsedRam));
         colors.setRatios(usedRatio, 0, 1-usedRatio);
 
@@ -605,17 +627,20 @@ public class ProcessStatsUi extends PreferenceFragment
 
         mAppListGroup.addPreference(colors);
 
-        ProcessStats.ProcessDataCollection totals = new ProcessStats.ProcessDataCollection(
+        ProcessStats.ProcessDataCollection bgTotals = new ProcessStats.ProcessDataCollection(
                 ProcessStats.ALL_SCREEN_ADJ, memStates, stats);
+        ProcessStats.ProcessDataCollection runTotals = new ProcessStats.ProcessDataCollection(
+                ProcessStats.ALL_SCREEN_ADJ, memStates, ProcessStats.NON_CACHED_PROC_STATES);
 
-        ArrayList<ProcStatsEntry> entries = new ArrayList<ProcStatsEntry>();
+        final ArrayList<ProcStatsEntry> procEntries = new ArrayList<>();
+        final ArrayList<ProcStatsPackageEntry> pkgEntries = new ArrayList<>();
 
         /*
         ArrayList<ProcessStats.ProcessState> rawProcs = mStats.collectProcessesLocked(
                 ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ,
                 ProcessStats.BACKGROUND_PROC_STATES, now, null);
         for (int i=0, N=(rawProcs != null ? rawProcs.size() : 0); i<N; i++) {
-            procs.add(new ProcStatsEntry(rawProcs.get(i), totals));
+            procs.add(new ProcStatsEntry(rawProcs.get(i), bgTotals));
         }
         */
 
@@ -640,15 +665,15 @@ public class ProcessStatsUi extends PreferenceFragment
                         }
                         ProcStatsEntry ent = entriesMap.get(proc.mName, proc.mUid);
                         if (ent == null) {
-                            ent = new ProcStatsEntry(proc, st.mPackageName, totals, mUseUss,
-                                    mStatsType == MENU_TYPE_BACKGROUND);
-                            if (ent.mDuration > 0) {
+                            ent = new ProcStatsEntry(proc, st.mPackageName, bgTotals, runTotals,
+                                    mUseUss);
+                            if (ent.mRunWeight > 0) {
                                 if (DEBUG) Log.d(TAG, "Adding proc " + proc.mName + "/"
-                                        + proc.mUid + ": time=" + makeDuration(ent.mDuration) + " ("
-                                        + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)"
-                                        + " pss=" + ent.mAvgPss);
+                                        + proc.mUid + ": time=" + makeDuration(ent.mRunDuration) + " ("
+                                        + ((((double)ent.mRunDuration) / memTotalTime) * 100) + "%)"
+                                        + " pss=" + ent.mAvgRunMem);
                                 entriesMap.put(proc.mName, proc.mUid, ent);
-                                entries.add(ent);
+                                procEntries.add(ent);
                             }
                         }  else {
                             ent.addPackage(st.mPackageName);
@@ -672,7 +697,8 @@ public class ProcessStatsUi extends PreferenceFragment
                         for (int is=0, NS=ps.mServices.size(); is<NS; is++) {
                             ProcessStats.ServiceState ss = ps.mServices.valueAt(is);
                             if (ss.mProcessName != null) {
-                                ProcStatsEntry ent = entriesMap.get(ss.mProcessName, uids.keyAt(iu));
+                                ProcStatsEntry ent = entriesMap.get(ss.mProcessName,
+                                        uids.keyAt(iu));
                                 if (ent != null) {
                                     if (DEBUG) Log.d(TAG, "Adding service " + ps.mPackageName
                                             + "/" + ss.mName + "/" + uids.keyAt(iu) + " to proc "
@@ -689,90 +715,99 @@ public class ProcessStatsUi extends PreferenceFragment
             }
         }
 
-        /*
-        SparseArray<ArrayMap<String, ProcStatsEntry>> processes
-                = new SparseArray<ArrayMap<String, ProcStatsEntry>>();
-        for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
-            SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
-            for (int iu=0; iu<uids.size(); iu++) {
-                ProcessStats.ProcessState st = uids.valueAt(iu);
-                ProcStatsEntry ent = new ProcStatsEntry(st, totals, mUseUss,
-                        mStatsType == MENU_TYPE_BACKGROUND);
-                if (ent.mDuration > 0) {
-                    if (DEBUG) Log.d(TAG, "Adding proc " + st.mName + "/" + st.mUid + ": time="
-                            + makeDuration(ent.mDuration) + " ("
-                            + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)");
-                    procs.add(ent);
-                    ArrayMap<String, ProcStatsEntry> uidProcs = processes.get(ent.mUid);
-                    if (uidProcs == null) {
-                        uidProcs = new ArrayMap<String, ProcStatsEntry>();
-                        processes.put(ent.mUid, uidProcs);
-                    }
-                    uidProcs.put(ent.mName, ent);
-                }
+        // Combine processes into packages.
+        HashMap<String, ProcStatsPackageEntry> pkgMap = new HashMap<>();
+        for (int i=procEntries.size()-1; i>=0; i--) {
+            ProcStatsEntry proc = procEntries.get(i);
+            proc.evaluateTargetPackage(pm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
+            ProcStatsPackageEntry pkg = pkgMap.get(proc.mBestTargetPackage);
+            if (pkg == null) {
+                pkg = new ProcStatsPackageEntry(proc.mBestTargetPackage);
+                pkgMap.put(proc.mBestTargetPackage, pkg);
+                pkgEntries.add(pkg);
             }
+            pkg.addEntry(proc);
         }
-        */
 
-        Collections.sort(entries, sEntryCompare);
+        // Add in fake entry representing the OS itself.
+        ProcStatsPackageEntry osPkg = new ProcStatsPackageEntry("os");
+        pkgMap.put("os", osPkg);
+        pkgEntries.add(osPkg);
+        ProcStatsEntry osEntry;
+        if (totalMem.sysMemNativeWeight > 0) {
+            osEntry = new ProcStatsEntry("os", 0,
+                    getString(R.string.process_stats_os_native), memTotalTime,
+                    (long)(totalMem.sysMemNativeWeight/memTotalTime));
+            osEntry.evaluateTargetPackage(pm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
+            osPkg.addEntry(osEntry);
+        }
+        if (totalMem.sysMemKernelWeight > 0) {
+            osEntry = new ProcStatsEntry("os", 0,
+                    getString(R.string.process_stats_os_kernel), memTotalTime,
+                    (long)(totalMem.sysMemKernelWeight/memTotalTime));
+            osEntry.evaluateTargetPackage(pm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
+            osPkg.addEntry(osEntry);
+        }
+        if (totalMem.sysMemZRamWeight > 0) {
+            osEntry = new ProcStatsEntry("os", 0,
+                    getString(R.string.process_stats_os_zram), memTotalTime,
+                    (long)(totalMem.sysMemZRamWeight/memTotalTime));
+            osEntry.evaluateTargetPackage(pm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
+            osPkg.addEntry(osEntry);
+        }
+        if (baseCacheRam > 0) {
+            osEntry = new ProcStatsEntry("os", 0,
+                    getString(R.string.process_stats_os_cache), memTotalTime, baseCacheRam/1024);
+            osEntry.evaluateTargetPackage(pm, mStats, bgTotals, runTotals, sEntryCompare, mUseUss);
+            osPkg.addEntry(osEntry);
+        }
 
-        long maxWeight = 1;
-        for (int i=0, N=(entries != null ? entries.size() : 0); i<N; i++) {
-            ProcStatsEntry proc = entries.get(i);
-            if (maxWeight < proc.mWeight) {
-                maxWeight = proc.mWeight;
-            }
+        for (int i=0, N=pkgEntries.size(); i<N; i++) {
+            ProcStatsPackageEntry pkg = pkgEntries.get(i);
+            pkg.updateMetrics();
         }
-        if (mStatsType == MENU_TYPE_BACKGROUND) {
-            mMaxWeight = (long)(mShowSystem ? persBackgroundWeight : backgroundWeight);
-            if (mMaxWeight < maxWeight) {
-                mMaxWeight = maxWeight;
-            }
-            if (DEBUG) {
-                Log.i(TAG, "Bar max RAM: " + Formatter.formatShortFileSize(getActivity(),
-                        (mMaxWeight * 1024) / memTotalTime));
-            }
-        } else {
-            mMaxWeight = maxWeight;
-        }
+
+        Collections.sort(pkgEntries, sPackageEntryCompare);
+
+        // Now collect the per-process information into applications, so that applications
+        // running as multiple processes will have only one entry representing all of them.
 
         if (DEBUG) Log.d(TAG, "-------------------- BUILDING UI");
 
         // Find where we should stop.  Because we have two properties we are looking at,
         // we need to go from the back looking for the first place either holds.
-        int end = entries != null ? entries.size()-1 : -1;
+        int end = pkgEntries.size()-1;
         while (end >= 0) {
-            ProcStatsEntry proc = entries.get(end);
-            final double percentOfWeight = (((double)proc.mWeight) / mMaxWeight) * 100;
-            final double percentOfTime = (((double)proc.mDuration) / memTotalTime) * 100;
-            if (percentOfWeight >= 1 || percentOfTime >= 25) {
+            ProcStatsPackageEntry pkg = pkgEntries.get(end);
+            final double percentOfWeight = (pkg.mRunWeight / mMaxWeight) * 100;
+            final double percentOfTime = (((double)pkg.mRunDuration) / memTotalTime) * 100;
+            if (percentOfWeight >= .01 || percentOfTime >= 25) {
                 break;
             }
             end--;
         }
         for (int i=0; i<=end; i++) {
-            ProcStatsEntry proc = entries.get(i);
-            final double percentOfWeight = (((double)proc.mWeight) / mMaxWeight) * 100;
-            final double percentOfTime = (((double)proc.mDuration) / memTotalTime) * 100;
+            ProcStatsPackageEntry pkg = pkgEntries.get(i);
+            final double percentOfWeight = (pkg.mRunWeight / mMaxWeight) * 100;
+            final double percentOfTime = (((double)pkg.mRunDuration) / memTotalTime) * 100;
             ProcessStatsPreference pref = new ProcessStatsPreference(getActivity());
-            pref.init(null, proc);
-            proc.evaluateTargetPackage(pm, mStats, totals, sEntryCompare, mUseUss,
-                    mStatsType == MENU_TYPE_BACKGROUND);
-            proc.retrieveUiData(pm);
-            pref.setTitle(proc.mUiLabel);
-            if (proc.mUiTargetApp != null) {
-                pref.setIcon(proc.mUiTargetApp.loadIcon(pm));
+            pref.init(null, pkg);
+            pkg.retrieveUiData(getActivity(), pm);
+            pref.setTitle(pkg.mUiLabel);
+            if (pkg.mUiTargetApp != null) {
+                pref.setIcon(pkg.mUiTargetApp.loadIcon(pm));
             }
             pref.setOrder(i);
-            pref.setPercent(percentOfWeight, percentOfTime);
+            pref.setPercent(percentOfWeight, percentOfTime,
+                    (long)(pkg.mRunWeight * mWeightToRam));
             mAppListGroup.addPreference(pref);
             if (mStatsType == MENU_TYPE_BACKGROUND) {
                 if (DEBUG) {
-                    Log.i(TAG, "App " + proc.mUiLabel + ": weightedRam="
+                    Log.i(TAG, "App " + pkg.mUiLabel + ": weightedRam="
                             + Formatter.formatShortFileSize(getActivity(),
-                                    (proc.mWeight * 1024) / memTotalTime)
+                                    (long)((pkg.mRunWeight * 1024) / memTotalTime))
                             + ", avgRam=" + Formatter.formatShortFileSize(getActivity(),
-                                    (proc.mAvgPss*1024)));
+                                    (pkg.mAvgRunMem *1024)));
                 }
 
             }

@@ -29,7 +29,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 
 public class ProcessStatsPreference extends Preference {
-    private ProcStatsEntry mEntry;
+    private ProcStatsPackageEntry mEntry;
     private int mProgress;
     private CharSequence mProgressText;
 
@@ -51,18 +51,19 @@ public class ProcessStatsPreference extends Preference {
         setLayoutResource(R.layout.preference_app_percentage);
     }
 
-    public void init(Drawable icon, ProcStatsEntry entry) {
+    public void init(Drawable icon, ProcStatsPackageEntry entry) {
         mEntry = entry;
         setIcon(icon != null ? icon : new ColorDrawable(0));
     }
 
-    public ProcStatsEntry getEntry() {
+    public ProcStatsPackageEntry getEntry() {
         return mEntry;
     }
 
-    public void setPercent(double percentOfWeight, double percentOfTime) {
+    public void setPercent(double percentOfWeight, double percentOfTime, long memory) {
         mProgress = (int) Math.ceil(percentOfWeight);
-        mProgressText = Utils.formatPercentage((int) percentOfTime);
+        //mProgressText = Utils.formatPercentage((int) percentOfTime);
+        mProgressText = Formatter.formatShortFileSize(getContext(), memory);
         notifyChanged();
     }
 
