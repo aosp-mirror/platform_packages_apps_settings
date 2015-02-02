@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"IMS üzerinden SMS\'i kapat"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"IMS kaydını gerektirmeyi aç"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"IMS kaydını gerektirmeyi kapat"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"VoLTE temel hazırlık işaretini aç"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"VoLTE temel hazırlık işaretini kapat"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"lte ram dökümünü aç"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"lte ram dökümünü kapat"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"SIM adres defterini görüntüle"</string>
@@ -292,10 +294,10 @@
     <string name="calls_title" msgid="3544471959217176768">"Çağrılar"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"SMS iletileri"</string>
     <string name="cellular_data_summary" msgid="4575500999626276446">"Hücresel ağ üzerinden veri kullanımına izin verin"</string>
-    <string name="allow_data_usage_title" msgid="2238205944729213062">"Dolaşımda veri kullanımına izin ver"</string>
+    <string name="allow_data_usage_title" msgid="2238205944729213062">"Dolaşımdayken veri kullanımına izin ver"</string>
     <string name="roaming" msgid="3596055926335478572">"Veri dolaşımı"</string>
-    <string name="roaming_enable" msgid="3737380951525303961">"Dolaşırken veri hizmetlerine bağlan"</string>
-    <string name="roaming_disable" msgid="1295279574370898378">"Dolaşırken veri hizmetlerine bağlan"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"Dolaşımdayken veri hizmetlerine bağlan"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"Dolaşımdayken veri hizmetlerine bağlan"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"Veri dolaşımı kapalıyken ana ağınızdan ayrıldığınız için veri bağlantısını kaybettiniz."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Açın"</string>
     <string name="roaming_warning" msgid="7625933694709170887">"Veri dolaşımına izin verdiğinizde, yüksek miktarda dolaşım ücretleri ödeyebilirsiniz!"</string>
@@ -955,7 +957,7 @@
     <string name="storage_title_usb" msgid="679612779321689418">"USB bilgisayar bağlantısı"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Şu şekilde bağlan:"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Medya cihazı (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="4617321473211391236">"Windows\'da ya da Mac üzerinde Android Dosya Aktarımı (www.android.com/filetransfer sayfasına bakın) ile medya dosyalarını aktarma olanağı sağlar"</string>
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"Windows\'da ya da Android Dosya Aktarımı\'nı kullanarak Mac üzerinde (www.android.com/filetransfer sayfasına bakın) medya dosyalarını aktarma olanağı sağlar"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"Kamera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Kamera yazılımını kullanarak fotoğrafları ve MTP\'yi desteklemeyen bilgisayarlardaki her türlü dosyayı aktarmanıza olanak sağlar."</string>
     <string name="usb_label_installer_cd" msgid="4331173824920630215">"Dosya aktarma araçlarını yükle"</string>
@@ -1322,7 +1324,7 @@
     <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Uygulamalar"</string>
     <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Boş"</string>
     <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Kullanılan"</string>
-    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Önbelleğe alınanlar"</string>
+    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Önbelleğe alınan"</string>
     <string name="running_processes_header_ram" msgid="996092388884426817">"<xliff:g id="RAM_0">%1$s</xliff:g> RAM"</string>
     <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Çalışan uygulama"</string>
     <string name="no_services" msgid="7133900764462288263">"Etkin değil"</string>
@@ -1331,10 +1333,10 @@
     <string name="service_stop" msgid="6369807553277527248">"Durdur"</string>
     <string name="service_manage" msgid="1876642087421959194">"Ayarlar"</string>
     <string name="service_stop_description" msgid="9146619928198961643">"Bu hizmet, uygulaması tarafından başlatıldı. Hizmetin durdurulması uygulamanın başarısız olmasına neden olabilir."</string>
-    <string name="heavy_weight_stop_description" msgid="2979218727598321095">"Bu uygulama güvenli bir şekilde durdurulamıyor. Durdurursanız, bazı mevcut işlerinizin kaybına neden olabilir."</string>
+    <string name="heavy_weight_stop_description" msgid="2979218727598321095">"Bu uygulama güvenli bir şekilde durdurulamıyor. Durdurursanız, mevcut işlerinizin bir kısmını kaybedebilirsiniz."</string>
     <string name="background_process_stop_description" msgid="5034773197139654588">"Bu, tekrar gerekirse diye hâlâ çalışan eski bir uygulama işlemidir. Genellikle bunu durdurmanız gerekmez."</string>
     <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: şu anda kullanılıyor. Kontrol etmek için Ayarlar\'a dokunun."</string>
-    <string name="main_running_process_description" msgid="1130702347066340890">"Ana işlem kullanımda."</string>
+    <string name="main_running_process_description" msgid="1130702347066340890">"Kullanımda olan ana işlem."</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"<xliff:g id="COMP_NAME">%1$s</xliff:g> hizmeti kullanımda."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Sağlayıcı <xliff:g id="COMP_NAME">%1$s</xliff:g> kullanımda."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Sis hiz durdrlsn mu?"</string>
@@ -2129,13 +2131,13 @@
     <string name="vpn_show_options" msgid="7182688955890457003">"Gelişmiş seçenekleri göster"</string>
     <string name="vpn_search_domains" msgid="5391995501541199624">"DNS arama alan adları"</string>
     <string name="vpn_dns_servers" msgid="5570715561245741829">"DNS sunucuları (ör. 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="3818655448226312232">"Rotalar yönlendiriliyor (ör. 10.0.0.0/8)"</string>
+    <string name="vpn_routes" msgid="3818655448226312232">"Yönlendirme rotaları (ör. 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="1863901629860867849">"Kullanıcı adı"</string>
     <string name="vpn_password" msgid="6756043647233596772">"Şifre"</string>
     <string name="vpn_save_login" msgid="6350322456427484881">"Hesap bilgilerini kaydet"</string>
     <string name="vpn_not_used" msgid="9094191054524660891">"(kullanılmıyor)"</string>
     <string name="vpn_no_ca_cert" msgid="2095005387500126113">"(sunucuyu doğrulama)"</string>
-    <string name="vpn_no_server_cert" msgid="2167487440231913330">"(sunucudan alındı)"</string>
+    <string name="vpn_no_server_cert" msgid="2167487440231913330">"(sunucudan alınır)"</string>
     <string name="vpn_cancel" msgid="1979937976123659332">"İptal"</string>
     <string name="vpn_save" msgid="4233484051644764510">"Kaydet"</string>
     <string name="vpn_connect" msgid="8469608541746132301">"Bağlan"</string>
@@ -2170,7 +2172,7 @@
     <string name="selinux_status_permissive" msgid="6004965534713398778">"Permissive (Serbest)"</string>
     <string name="selinux_status_enforcing" msgid="2252703756208463329">"Enforcing (Zorunlu)"</string>
     <string name="ssl_ca_cert_warning" msgid="2045866713601984673">"Ağ etkinliği izlenebilir"</string>
-    <string name="done_button" msgid="1991471253042622230">"Tamamlandı"</string>
+    <string name="done_button" msgid="1991471253042622230">"Tamam"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="5339377665264149395">"Ağ izleme"</string>
     <string name="ssl_ca_cert_info_message" msgid="4583879256548819713">"Bu cihaz, şu alan adı tarafından yönetiliyor:\n<xliff:g id="MANAGING_DOMAIN">%s</xliff:g>\n\nYöneticiniz, e-postalar, uygulamalar ve güvenli web siteleri dahil olmak üzere ağ etkinliğinizi izleme olanağına sahiptir.\n\nDaha fazla bilgi için yöneticinizle bağlantı kurun."</string>
     <string name="ssl_ca_cert_warning_message" msgid="8216218659139190498">"E-postalarınız, uygulamalarınız ve güvenli web siteleriniz dahil olmak üzere ağ etkinliğiniz üçüncü bir tarafça izlenebilir.\n\nCihazınızda yüklü güvenilir bir kimlik bilgisi bunu mümkün kılmaktadır."</string>
@@ -2444,11 +2446,11 @@
     <string name="app_notifications_dialog_done" msgid="3484067728568791014">"Tamam"</string>
     <string name="zen_mode_default_option" msgid="6940069025071935243">"Siz bunu kapatana kadar"</string>
     <string name="zen_mode_important_category" msgid="8123274463331022993">"Öncelikli kesintiler"</string>
-    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Kesinti"</string>
+    <string name="zen_mode_downtime_category" msgid="2654477732333340290">"Bildirim istenmeyen zaman"</string>
     <string name="zen_mode_downtime_days" msgid="3361856902633311616">"Gün"</string>
     <string name="zen_mode_downtime_days_none" msgid="8454857121193391322">"Yok"</string>
     <string name="zen_mode_downtime_mode_title" msgid="7249388756365079715">"Kesintilere izin verilir"</string>
-    <string name="zen_mode_downtime_mode_priority" msgid="1599184173608032994">"Yalnızca öncelikli"</string>
+    <string name="zen_mode_downtime_mode_priority" msgid="1599184173608032994">"Yalnızca öncelikliler"</string>
     <string name="zen_mode_downtime_mode_none" msgid="8572229891146527069">"Yok"</string>
     <string name="zen_mode_automation_category" msgid="4653551005950835761">"Otomasyon"</string>
     <string name="zen_mode_entry_conditions_title" msgid="8467976490601914289">"Otomatik olarak aç"</string>
@@ -2456,7 +2458,7 @@
     <string name="zen_mode_entry_conditions_summary_none" msgid="6589476427475076533">"Hiçbir zaman"</string>
     <string name="zen_mode_calls" msgid="7051492091133751208">"Çağrılar"</string>
     <string name="zen_mode_messages" msgid="5886440273537510894">"İletiler"</string>
-    <string name="zen_mode_from" msgid="1033337300289871697">"Şuradan çağrılar/iletiler"</string>
+    <string name="zen_mode_from" msgid="1033337300289871697">"Şunlardan çağrılar/iletiler"</string>
     <string name="zen_mode_from_anyone" msgid="1180865188673992959">"Herkes"</string>
     <string name="zen_mode_from_contacts" msgid="8751503728985572786">"Yalnızca kişiler"</string>
     <string name="zen_mode_from_starred" msgid="2168651127340381533">"Yalnızca yıldızlı kişiler"</string>
