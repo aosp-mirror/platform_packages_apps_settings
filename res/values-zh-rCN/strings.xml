@@ -40,6 +40,8 @@
     <string name="sms_over_ims_off" msgid="8354792045992793959">"关闭通过IMS发送短信的功能"</string>
     <string name="ims_reg_required_on" msgid="3885152087309614653">"需要打开 IMS 注册"</string>
     <string name="ims_reg_required_off" msgid="1720570343422743943">"需要关闭IMS注册"</string>
+    <string name="volte_provisioned_flag_on" msgid="6023503159480902956">"开启 VoLTE 配置标记"</string>
+    <string name="volte_provisioned_flag_off" msgid="6168612015904744405">"关闭 VoLTE 配置标记"</string>
     <string name="lte_ram_dump_on" msgid="8568568019520172177">"打开 LTE RAM 转储"</string>
     <string name="lte_ram_dump_off" msgid="2514507918652378283">"关闭 LTE RAM 转储"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"查看SIM卡地址簿"</string>
@@ -2049,7 +2051,7 @@
     <string name="data_usage_menu_hide_ethernet" msgid="3326702187179943681">"隐藏有线网络流量"</string>
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"网络限制"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"自动同步数据"</string>
-    <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM卡"</string>
+    <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"SIM 卡"</string>
     <string name="data_usage_menu_cellular_networks" msgid="5243515735055652279">"移动网络"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"自动同步数据"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"自动同步个人帐户数据"</string>
@@ -2302,8 +2304,8 @@
     <string name="user_image_choose_photo" msgid="7940990613897477057">"从图库中选择照片"</string>
     <string name="user_image_photo_selector" msgid="5492565707299454873">"选择照片"</string>
     <string name="regulatory_info_text" msgid="5623087902354026557"></string>
-    <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM卡"</string>
-    <string name="sim_settings_title" msgid="6822745211458959756">"SIM卡"</string>
+    <string name="sim_setup_wizard_title" msgid="1732682852692274928">"SIM 卡"</string>
+    <string name="sim_settings_title" msgid="6822745211458959756">"SIM 卡"</string>
     <string name="sim_settings_summary" msgid="4050372057097516088">"<xliff:g id="SIM_NAME">%1$s</xliff:g> - <xliff:g id="SIM_NUMBER">%2$s</xliff:g>"</string>
     <string name="sim_cards_changed_message" msgid="7900721153345139783">"SIM 卡已更改"</string>
     <string name="sim_cards_changed_message_summary" msgid="5452545583546944683">"触摸即可进行设置"</string>
@@ -2313,22 +2315,22 @@
     <string name="select_sim_for_data" msgid="2366081042162853044">"选择用于数据网络的 SIM 卡"</string>
     <string name="data_switch_started" msgid="2040761479817166311">"正在切换用于连接数据网络的 SIM 卡，这最多可能需要 1 分钟的时间…"</string>
     <string name="select_sim_for_calls" msgid="3503094771801109334">"选择用于通话的 SIM 卡"</string>
-    <string name="sim_select_card" msgid="211285163525563293">"选择SIM卡"</string>
-    <string name="sim_card_number_title" msgid="7845379943474336488">"SIM卡<xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
+    <string name="sim_select_card" msgid="211285163525563293">"选择 SIM 卡"</string>
+    <string name="sim_card_number_title" msgid="7845379943474336488">"SIM 卡 <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
     <string name="sim_slot_empty" msgid="8964505511911854688">"未插入SIM卡"</string>
-    <string name="sim_editor_name" msgid="1722945976676142029">"SIM卡名称"</string>
+    <string name="sim_editor_name" msgid="1722945976676142029">"SIM 卡名称"</string>
     <string name="sim_name_hint" msgid="7038643345238968930">"输入 SIM 卡名称"</string>
     <string name="sim_editor_title" msgid="4034301817366627870">"SIM 卡插槽 %1$d"</string>
     <string name="sim_editor_carrier" msgid="5684523444677746573">"运营商"</string>
     <string name="sim_editor_number" msgid="6705955651035440667">"号码"</string>
     <string name="sim_editor_color" msgid="2542605938562414355">"SIM卡颜色"</string>
-    <string name="sim_card_select_title" msgid="6668492557519243456">"选择SIM卡"</string>
+    <string name="sim_card_select_title" msgid="6668492557519243456">"选择 SIM 卡"</string>
     <string name="color_orange" msgid="4417567658855022517">"橙色"</string>
     <string name="color_purple" msgid="3888532466427762504">"紫色"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"尚未插入SIM卡"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"SIM卡状态"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"使用默认SIM卡回电"</string>
-    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"用于外拨电话的SIM卡"</string>
+    <string name="sim_outgoing_call_title" msgid="1019763076116874255">"用于外拨电话的 SIM 卡"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"其他通话设置"</string>
     <string name="preferred_network_offload_title" msgid="1605829724169550275">"首选分流网络"</string>
     <string name="preferred_network_offload_header" msgid="2321173571529106767">"关闭网络名称广播"</string>
