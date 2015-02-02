@@ -223,9 +223,9 @@ public final class CredentialStorage extends Activity {
         Bundle bundle = mInstallBundle;
         mInstallBundle = null;
 
-        final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, -1);
+        final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, KeyStore.UID_SELF);
 
-        if (!UserHandle.isSameUser(uid, Process.myUid())) {
+        if (uid != KeyStore.UID_SELF && !UserHandle.isSameUser(uid, Process.myUid())) {
             int dstUserId = UserHandle.getUserId(uid);
             int myUserId = UserHandle.myUserId();
 
