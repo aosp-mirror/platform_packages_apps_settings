@@ -21,6 +21,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Process;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
@@ -38,37 +39,49 @@ public final class ProcStatsEntry implements Parcelable {
     final int mUid;
     final String mName;
     final ArrayList<String> mPackages = new ArrayList<String>();
-    final long mDuration;
-    final long mAvgPss;
-    final long mMaxPss;
-    final long mAvgUss;
-    final long mMaxUss;
-    final long mWeight;
+    final long mBgDuration;
+    final long mAvgBgMem;
+    final long mMaxBgMem;
+    final double mBgWeight;
+    final long mRunDuration;
+    final long mAvgRunMem;
+    final long mMaxRunMem;
+    final double mRunWeight;
 
     String mBestTargetPackage;
 
     ArrayMap<String, ArrayList<Service>> mServices = new ArrayMap<String, ArrayList<Service>>(1);
 
-    public ApplicationInfo mUiTargetApp;
-    public String mUiLabel;
-    public String mUiBaseLabel;
-    public String mUiPackage;
-
     public ProcStatsEntry(ProcessStats.ProcessState proc, String packageName,
-            ProcessStats.ProcessDataCollection tmpTotals, boolean useUss, boolean weightWithTime) {
-        ProcessStats.computeProcessData(proc, tmpTotals, 0);
+            ProcessStats.ProcessDataCollection tmpBgTotals,
+            ProcessStats.ProcessDataCollection tmpRunTotals, boolean useUss) {
+        ProcessStats.computeProcessData(proc, tmpBgTotals, 0);
+        ProcessStats.computeProcessData(proc, tmpRunTotals, 0);
         mPackage = proc.mPackage;
         mUid = proc.mUid;
         mName = proc.mName;
         mPackages.add(packageName);
-        mDuration = tmpTotals.totalTime;
-        mAvgPss = tmpTotals.avgPss;
-        mMaxPss = tmpTotals.maxPss;
-        mAvgUss = tmpTotals.avgUss;
-        mMaxUss = tmpTotals.maxUss;
-        mWeight = (weightWithTime ? mDuration : 1) * (useUss ? mAvgUss : mAvgPss);
-        if (DEBUG) Log.d(TAG, "New proc entry " + proc.mName + ": dur=" + mDuration
-                + " avgpss=" + mAvgPss + " weight=" + mWeight);
+        mBgDuration = tmpBgTotals.totalTime;
+        mAvgBgMem = useUss ? tmpBgTotals.avgUss : tmpBgTotals.avgPss;
+        mMaxBgMem = useUss ? tmpBgTotals.maxUss : tmpBgTotals.maxPss;
+        mBgWeight = mAvgBgMem * (double) mBgDuration;
+        mRunDuration = tmpRunTotals.totalTime;
+        mAvgRunMem = useUss ? tmpRunTotals.avgUss : tmpRunTotals.avgPss;
+        mMaxRunMem = useUss ? tmpRunTotals.maxUss : tmpRunTotals.maxPss;
+        mRunWeight = mAvgRunMem * (double) mRunDuration;
+        if (DEBUG) Log.d(TAG, "New proc entry " + proc.mName + ": dur=" + mBgDuration
+                + " avgpss=" + mAvgBgMem + " weight=" + mBgWeight);
+    }
+
+    public ProcStatsEntry(String pkgName, int uid, String procName, long duration, long mem) {
+        mPackage = pkgName;
+        mUid = uid;
+        mName = procName;
+        mBgDuration = mRunDuration = duration;
+        mAvgBgMem = mMaxBgMem = mAvgRunMem = mMaxRunMem = mem;
+        mBgWeight = mRunWeight = ((double)duration) * mem;
+        if (DEBUG) Log.d(TAG, "New proc entry " + procName + ": dur=" + mBgDuration
+                + " avgpss=" + mAvgBgMem + " weight=" + mBgWeight);
     }
 
     public ProcStatsEntry(Parcel in) {
@@ -76,12 +89,14 @@ public final class ProcStatsEntry implements Parcelable {
         mUid = in.readInt();
         mName = in.readString();
         in.readStringList(mPackages);
-        mDuration = in.readLong();
-        mAvgPss = in.readLong();
-        mMaxPss = in.readLong();
-        mAvgUss = in.readLong();
-        mMaxUss = in.readLong();
-        mWeight = in.readLong();
+        mBgDuration = in.readLong();
+        mAvgBgMem = in.readLong();
+        mMaxBgMem = in.readLong();
+        mBgWeight = in.readDouble();
+        mRunDuration = in.readLong();
+        mAvgRunMem = in.readLong();
+        mMaxRunMem = in.readLong();
+        mRunWeight = in.readDouble();
         mBestTargetPackage = in.readString();
         final int N = in.readInt();
         if (N > 0) {
@@ -100,166 +115,139 @@ public final class ProcStatsEntry implements Parcelable {
     }
 
     public void evaluateTargetPackage(PackageManager pm, ProcessStats stats,
-            ProcessStats.ProcessDataCollection totals, Comparator<ProcStatsEntry> compare,
-            boolean useUss, boolean weightWithTime) {
+            ProcessStats.ProcessDataCollection bgTotals,
+            ProcessStats.ProcessDataCollection runTotals, Comparator<ProcStatsEntry> compare,
+            boolean useUss) {
         mBestTargetPackage = null;
         if (mPackages.size() == 1) {
             if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": single pkg " + mPackages.get(0));
             mBestTargetPackage = mPackages.get(0);
-        } else {
-            // See if there is one significant package that was running here.
-            ArrayList<ProcStatsEntry> subProcs = new ArrayList<ProcStatsEntry>();
-            for (int ipkg=0; ipkg<mPackages.size(); ipkg++) {
-                SparseArray<ProcessStats.PackageState> vpkgs
-                        = stats.mPackages.get(mPackages.get(ipkg), mUid);
-                for (int ivers=0;  ivers<vpkgs.size(); ivers++) {
-                    ProcessStats.PackageState pkgState = vpkgs.valueAt(ivers);
-                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ", pkg "
-                            + pkgState + ":");
-                    if (pkgState == null) {
-                        Log.w(TAG, "No package state found for " + mPackages.get(ipkg) + "/"
-                                + mUid + " in process " + mName);
-                        continue;
-                    }
-                    ProcessStats.ProcessState pkgProc = pkgState.mProcesses.get(mName);
-                    if (pkgProc == null) {
-                        Log.w(TAG, "No process " + mName + " found in package state "
-                                + mPackages.get(ipkg) + "/" + mUid);
-                        continue;
-                    }
-                    subProcs.add(new ProcStatsEntry(pkgProc, pkgState.mPackageName, totals, useUss,
-                            weightWithTime));
-                }
-            }
-            if (subProcs.size() > 1) {
-                Collections.sort(subProcs, compare);
-                if (subProcs.get(0).mWeight > (subProcs.get(1).mWeight*3)) {
-                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": best pkg "
-                            + subProcs.get(0).mPackage + " weight " + subProcs.get(0).mWeight
-                            + " better than " + subProcs.get(1).mPackage
-                            + " weight " + subProcs.get(1).mWeight);
-                    mBestTargetPackage = subProcs.get(0).mPackage;
-                    return;
-                }
-                // Couldn't find one that is best by weight, let's decide on best another
-                // way: the one that has the longest running service, accounts for at least
-                // half of the maximum weight, and has specified an explicit app icon.
-                long maxWeight = subProcs.get(0).mWeight;
-                long bestRunTime = -1;
-                for (int i=0; i<subProcs.size(); i++) {
-                    if (subProcs.get(i).mWeight < (maxWeight/2)) {
-                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
-                                + subProcs.get(i).mPackage + " weight " + subProcs.get(i).mWeight
-                                + " too small");
-                        continue;
-                    }
-                    try {
-                        ApplicationInfo ai = pm.getApplicationInfo(subProcs.get(i).mPackage, 0);
-                        if (ai.icon == 0) {
-                            if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
-                                    + subProcs.get(i).mPackage + " has no icon");
-                            continue;
-                        }
-                    } catch (PackageManager.NameNotFoundException e) {
-                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
-                                + subProcs.get(i).mPackage + " failed finding app info");
-                        continue;
-                    }
-                    ArrayList<Service> subProcServices = null;
-                    for (int isp=0, NSP=mServices.size(); isp<NSP; isp++) {
-                        ArrayList<Service> subServices = mServices.valueAt(isp);
-                        if (subServices.get(0).mPackage.equals(subProcs.get(i).mPackage)) {
-                            subProcServices = subServices;
-                            break;
-                        }
-                    }
-                    long thisRunTime = 0;
-                    if (subProcServices != null) {
-                        for (int iss=0, NSS=subProcServices.size(); iss<NSS; iss++) {
-                            Service service = subProcServices.get(iss);
-                            if (service.mDuration > thisRunTime) {
-                                if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
-                                        + subProcs.get(i).mPackage + " service " + service.mName
-                                        + " run time is " + service.mDuration);
-                                thisRunTime = service.mDuration;
-                                break;
-                            }
-                        }
-                    }
-                    if (thisRunTime > bestRunTime) {
-                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
-                                + subProcs.get(i).mPackage + " new best run time " + thisRunTime);
-                        mBestTargetPackage = subProcs.get(i).mPackage;
-                        bestRunTime = thisRunTime;
-                    } else {
-                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
-                                + subProcs.get(i).mPackage + " run time " + thisRunTime
-                                + " not as good as last " + bestRunTime);
-                    }
-                }
-            } else if (subProcs.size() == 1) {
-                mBestTargetPackage = subProcs.get(0).mPackage;
-            }
+            return;
         }
-    }
 
-    public void retrieveUiData(PackageManager pm) {
-        mUiTargetApp = null;
-        mUiLabel = mUiBaseLabel = mName;
-        mUiPackage = mBestTargetPackage;
-        if (mUiPackage != null) {
-            // Only one app associated with this process.
-            try {
-                mUiTargetApp = pm.getApplicationInfo(mUiPackage,
-                        PackageManager.GET_DISABLED_COMPONENTS |
-                        PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
-                String name = mUiBaseLabel = mUiTargetApp.loadLabel(pm).toString();
-                if (mName.equals(mUiPackage)) {
-                    mUiLabel = name;
-                } else {
-                    if (mName.startsWith(mUiPackage)) {
-                        int off = mUiPackage.length();
-                        if (mName.length() > off) {
-                            off++;
-                        }
-                        mUiLabel = name + " (" + mName.substring(off) + ")";
-                    } else {
-                        mUiLabel = name + " (" + mName + ")";
-                    }
-                }
-            } catch (PackageManager.NameNotFoundException e) {
+        // If one of the packages is the framework itself, that wins.
+        // See if there is one significant package that was running here.
+        for (int ipkg=0; ipkg<mPackages.size(); ipkg++) {
+            if ("android".equals(mPackages.get(ipkg))) {
+                mBestTargetPackage = mPackages.get(ipkg);
+                return;
             }
         }
-        if (mUiTargetApp == null) {
-            String[] packages = pm.getPackagesForUid(mUid);
-            if (packages != null) {
-                for (String curPkg : packages) {
-                    try {
-                        final PackageInfo pi = pm.getPackageInfo(curPkg,
-                                PackageManager.GET_DISABLED_COMPONENTS |
-                                PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                                PackageManager.GET_UNINSTALLED_PACKAGES);
-                        if (pi.sharedUserLabel != 0) {
-                            mUiTargetApp = pi.applicationInfo;
-                            final CharSequence nm = pm.getText(curPkg,
-                                    pi.sharedUserLabel, pi.applicationInfo);
-                            if (nm != null) {
-                                mUiBaseLabel = nm.toString();
-                                mUiLabel = mUiBaseLabel + " (" + mName + ")";
-                            } else {
-                                mUiBaseLabel = mUiTargetApp.loadLabel(pm).toString();
-                                mUiLabel = mUiBaseLabel + " (" + mName + ")";
-                            }
-                            break;
+
+        // Collect information about each package running in the process.
+        ArrayList<ProcStatsEntry> subProcs = new ArrayList<>();
+        for (int ipkg=0; ipkg<mPackages.size(); ipkg++) {
+            SparseArray<ProcessStats.PackageState> vpkgs
+                    = stats.mPackages.get(mPackages.get(ipkg), mUid);
+            for (int ivers=0;  ivers<vpkgs.size(); ivers++) {
+                ProcessStats.PackageState pkgState = vpkgs.valueAt(ivers);
+                if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ", pkg "
+                        + pkgState + ":");
+                if (pkgState == null) {
+                    Log.w(TAG, "No package state found for " + mPackages.get(ipkg) + "/"
+                            + mUid + " in process " + mName);
+                    continue;
+                }
+                ProcessStats.ProcessState pkgProc = pkgState.mProcesses.get(mName);
+                if (pkgProc == null) {
+                    Log.w(TAG, "No process " + mName + " found in package state "
+                            + mPackages.get(ipkg) + "/" + mUid);
+                    continue;
+                }
+                subProcs.add(new ProcStatsEntry(pkgProc, pkgState.mPackageName, bgTotals,
+                        runTotals, useUss));
+            }
+        }
+
+        if (subProcs.size() > 1) {
+            Collections.sort(subProcs, compare);
+            if (subProcs.get(0).mRunWeight > (subProcs.get(1).mRunWeight *3)) {
+                if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": best pkg "
+                        + subProcs.get(0).mPackage + " weight " + subProcs.get(0).mRunWeight
+                        + " better than " + subProcs.get(1).mPackage
+                        + " weight " + subProcs.get(1).mRunWeight);
+                mBestTargetPackage = subProcs.get(0).mPackage;
+                return;
+            }
+            // Couldn't find one that is best by weight, let's decide on best another
+            // way: the one that has the longest running service, accounts for at least
+            // half of the maximum weight, and has specified an explicit app icon.
+            double maxWeight = subProcs.get(0).mRunWeight;
+            long bestRunTime = -1;
+            boolean bestPersistent = false;
+            for (int i=0; i<subProcs.size(); i++) {
+                final ProcStatsEntry subProc = subProcs.get(i);
+                if (subProc.mRunWeight < (maxWeight/2)) {
+                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                            + subProc.mPackage + " weight " + subProc.mRunWeight
+                            + " too small");
+                    continue;
+                }
+                try {
+                    ApplicationInfo ai = pm.getApplicationInfo(subProc.mPackage, 0);
+                    if (ai.icon == 0) {
+                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                + subProc.mPackage + " has no icon");
+                        continue;
+                    }
+                    if ((ai.flags&ApplicationInfo.FLAG_PERSISTENT) != 0) {
+                        long thisRunTime = subProc.mRunDuration;
+                        if (!bestPersistent || thisRunTime > bestRunTime) {
+                            if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                    + subProc.mPackage + " new best pers run time "
+                                    + thisRunTime);
+                            bestRunTime = thisRunTime;
+                            bestPersistent = true;
+                        } else {
+                            if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                    + subProc.mPackage + " pers run time " + thisRunTime
+                                    + " not as good as last " + bestRunTime);
                         }
-                    } catch (PackageManager.NameNotFoundException e) {
+                        continue;
+                    } else if (bestPersistent) {
+                        if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                + subProc.mPackage + " is not persistent");
+                        continue;
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                            + subProc.mPackage + " failed finding app info");
+                    continue;
+                }
+                ArrayList<Service> subProcServices = null;
+                for (int isp=0, NSP=mServices.size(); isp<NSP; isp++) {
+                    ArrayList<Service> subServices = mServices.valueAt(isp);
+                    if (subServices.get(0).mPackage.equals(subProc.mPackage)) {
+                        subProcServices = subServices;
+                        break;
                     }
                 }
-            } else {
-                // no current packages for this uid, typically because of uninstall
-                Log.i(TAG, "No package for uid " + mUid);
+                long thisRunTime = 0;
+                if (subProcServices != null) {
+                    for (int iss=0, NSS=subProcServices.size(); iss<NSS; iss++) {
+                        Service service = subProcServices.get(iss);
+                        if (service.mDuration > thisRunTime) {
+                            if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                                    + subProc.mPackage + " service " + service.mName
+                                    + " run time is " + service.mDuration);
+                            thisRunTime = service.mDuration;
+                            break;
+                        }
+                    }
+                }
+                if (thisRunTime > bestRunTime) {
+                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                            + subProc.mPackage + " new best run time " + thisRunTime);
+                    mBestTargetPackage = subProc.mPackage;
+                    bestRunTime = thisRunTime;
+                } else {
+                    if (DEBUG) Log.d(TAG, "Eval pkg of " + mName + ": pkg "
+                            + subProc.mPackage + " run time " + thisRunTime
+                            + " not as good as last " + bestRunTime);
+                }
             }
+        } else if (subProcs.size() == 1) {
+            mBestTargetPackage = subProcs.get(0).mPackage;
         }
     }
 
@@ -283,12 +271,14 @@ public final class ProcStatsEntry implements Parcelable {
         dest.writeInt(mUid);
         dest.writeString(mName);
         dest.writeStringList(mPackages);
-        dest.writeLong(mDuration);
-        dest.writeLong(mAvgPss);
-        dest.writeLong(mMaxPss);
-        dest.writeLong(mAvgUss);
-        dest.writeLong(mMaxUss);
-        dest.writeLong(mWeight);
+        dest.writeLong(mBgDuration);
+        dest.writeLong(mAvgBgMem);
+        dest.writeLong(mMaxBgMem);
+        dest.writeDouble(mBgWeight);
+        dest.writeLong(mRunDuration);
+        dest.writeLong(mAvgRunMem);
+        dest.writeLong(mMaxRunMem);
+        dest.writeDouble(mRunWeight);
         dest.writeString(mBestTargetPackage);
         final int N = mServices.size();
         dest.writeInt(N);
