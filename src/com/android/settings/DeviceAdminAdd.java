@@ -259,6 +259,7 @@ public class DeviceAdminAdd extends Activity {
         mAdminWarning = (TextView) findViewById(R.id.admin_warning);
         mAdminPolicies = (ViewGroup) findViewById(R.id.admin_policies);
         mCancelButton = (Button) findViewById(R.id.cancel_button);
+        mCancelButton.setFilterTouchesWhenObscured(true);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_DECLINED_BY_USER,
@@ -267,6 +268,7 @@ public class DeviceAdminAdd extends Activity {
             }
         });
         mActionButton = (Button) findViewById(R.id.action_button);
+        mActionButton.setFilterTouchesWhenObscured(true);
         mActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mAdding) {
