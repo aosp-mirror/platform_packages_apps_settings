@@ -19,6 +19,7 @@ package com.android.settings.print;
 import android.content.ComponentName;
 import android.content.Context;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.text.TextUtils.SimpleStringSplitter;
 
 import java.util.ArrayList;import java.util.List;
@@ -39,7 +40,7 @@ public class PrintSettingsUtils {
 
         String enabledServicesSetting = Settings.Secure.getString(context
                 .getContentResolver(), Settings.Secure.ENABLED_PRINT_SERVICES);
-        if (enabledServicesSetting == null) {
+        if (TextUtils.isEmpty(enabledServicesSetting)) {
             return enabledServices;
         }
 
@@ -51,7 +52,9 @@ public class PrintSettingsUtils {
             String componentNameString = colonSplitter.next();
             ComponentName enabledService = ComponentName.unflattenFromString(
                     componentNameString);
-            enabledServices.add(enabledService);
+            if (enabledService != null) {
+                enabledServices.add(enabledService);
+            }
         }
 
         return enabledServices;
