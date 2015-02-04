@@ -43,6 +43,9 @@ import android.widget.TextView;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
 import android.view.KeyEvent;
 
 import java.util.Locale;
@@ -103,7 +106,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
             return;
         }
 
-        mBluetoothManager = LocalBluetoothManager.getInstance(this);
+        mBluetoothManager = Utils.getLocalBtManager(this);
         if (mBluetoothManager == null) {
             Log.e(TAG, "Error: BluetoothAdapter not supported by system");
             finish();

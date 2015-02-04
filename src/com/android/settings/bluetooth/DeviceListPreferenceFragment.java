@@ -16,8 +16,12 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -26,6 +30,11 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
 import java.util.WeakHashMap;
@@ -74,7 +83,7 @@ public abstract class DeviceListPreferenceFragment extends
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLocalManager = LocalBluetoothManager.getInstance(getActivity());
+        mLocalManager = Utils.getLocalBtManager(getActivity());
         if (mLocalManager == null) {
             Log.e(TAG, "Bluetooth is not supported on this device");
             return;
@@ -164,7 +173,7 @@ public abstract class DeviceListPreferenceFragment extends
         if (mFilter.matches(cachedDevice.getDevice())) {
             createDevicePreference(cachedDevice);
         }
-     }
+    }
 
     void createDevicePreference(CachedBluetoothDevice cachedDevice) {
         if (mDeviceListGroup == null) {

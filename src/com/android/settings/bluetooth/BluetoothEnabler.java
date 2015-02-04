@@ -31,6 +31,8 @@ import com.android.settings.R;
 import com.android.settings.search.Index;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.WirelessUtils;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
@@ -77,7 +79,7 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         mSwitch = switchBar.getSwitch();
         mValidListener = false;
 
-        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+        LocalBluetoothManager manager = Utils.getLocalBtManager(context);
         if (manager == null) {
             // Bluetooth is not supported
             mLocalAdapter = null;

@@ -28,6 +28,9 @@ import android.os.UserManager;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * BluetoothPermissionRequest is a receiver to receive Bluetooth connection
@@ -200,7 +203,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
             return processed;
         }
 
-        LocalBluetoothManager bluetoothManager = LocalBluetoothManager.getInstance(mContext);
+        LocalBluetoothManager bluetoothManager = Utils.getLocalBtManager(mContext);
         CachedBluetoothDeviceManager cachedDeviceManager =
             bluetoothManager.getCachedDeviceManager();
         CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);

@@ -28,12 +28,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
@@ -44,17 +41,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -506,7 +504,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 result.add(data);
 
                 // Add cached paired BT devices
-                LocalBluetoothManager lbtm = LocalBluetoothManager.getInstance(context);
+                LocalBluetoothManager lbtm = Utils.getLocalBtManager(context);
                 // LocalBluetoothManager.getInstance can return null if the device does not
                 // support bluetooth (e.g. the emulator).
                 if (lbtm != null) {

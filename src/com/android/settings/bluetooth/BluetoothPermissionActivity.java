@@ -31,8 +31,10 @@ import android.widget.Button;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
-
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * BluetoothPermissionActivity shows a dialog for accepting incoming
@@ -192,7 +194,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
 
         boolean always = true;
         if (mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
-            LocalBluetoothManager bluetoothManager = LocalBluetoothManager.getInstance(this);
+            LocalBluetoothManager bluetoothManager = Utils.getLocalBtManager(this);
             CachedBluetoothDeviceManager cachedDeviceManager =
                     bluetoothManager.getCachedDeviceManager();
             CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(mDevice);
