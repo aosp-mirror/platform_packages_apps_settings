@@ -220,4 +220,6 @@ public abstract class DeviceListPreferenceFragment extends
             updateProgressUi(false);
         }
     }
+
+    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
 }

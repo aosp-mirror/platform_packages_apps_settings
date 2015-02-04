@@ -937,6 +937,7 @@ public final class DockService extends Service implements ServiceListener {
         public void onBluetoothStateChanged(int bluetoothState) { }
         public void onDeviceAdded(CachedBluetoothDevice cachedDevice) { }
         public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) { }
+        public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
 
         @Override
         public void onScanningStateChanged(boolean started) {
