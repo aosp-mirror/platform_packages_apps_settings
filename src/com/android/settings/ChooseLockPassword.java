@@ -101,7 +101,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private static final String KEY_FIRST_PIN = "first_pin";
         private static final String KEY_UI_STAGE = "ui_stage";
         private TextView mPasswordEntry;
-        private int mPasswordMinLength = 4;
+        private int mPasswordMinLength = LockPatternUtils.MIN_LOCK_PASSWORD_SIZE;
         private int mPasswordMaxLength = 16;
         private int mPasswordMinLetters = 0;
         private int mPasswordMinUpperCase = 0;
@@ -178,9 +178,10 @@ public class ChooseLockPassword extends SettingsActivity {
             }
             mRequestedQuality = Math.max(intent.getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
                     mRequestedQuality), mLockPatternUtils.getRequestedPasswordQuality());
-            mPasswordMinLength = Math.max(
-                    intent.getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength), mLockPatternUtils
-                            .getRequestedMinimumPasswordLength());
+            mPasswordMinLength = Math.max(Math.max(
+                    LockPatternUtils.MIN_LOCK_PASSWORD_SIZE,
+                    intent.getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength)),
+                    mLockPatternUtils.getRequestedMinimumPasswordLength());
             mPasswordMaxLength = intent.getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
             mPasswordMinLetters = Math.max(intent.getIntExtra(PASSWORD_MIN_LETTERS_KEY,
                     mPasswordMinLetters), mLockPatternUtils.getRequestedPasswordMinimumLetters());
