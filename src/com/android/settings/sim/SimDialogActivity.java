@@ -29,6 +29,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -138,17 +139,14 @@ public class SimDialogActivity extends Activity {
 
     private PhoneAccountHandle subscriptionIdToPhoneAccountHandle(final int subId) {
         final TelecomManager telecomManager = TelecomManager.from(this);
+        final TelephonyManager telephonyManager = TelephonyManager.from(this);
         final Iterator<PhoneAccountHandle> phoneAccounts =
                 telecomManager.getCallCapablePhoneAccounts().listIterator();
 
         while (phoneAccounts.hasNext()) {
             final PhoneAccountHandle phoneAccountHandle = phoneAccounts.next();
             final PhoneAccount phoneAccount = telecomManager.getPhoneAccount(phoneAccountHandle);
-            final String phoneAccountId = phoneAccountHandle.getId();
-
-            if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION)
-                    && TextUtils.isDigitsOnly(phoneAccountId)
-                    && Integer.parseInt(phoneAccountId) == subId){
+            if (subId == telephonyManager.getSubIdForPhoneAccount(phoneAccount)) {
                 return phoneAccountHandle;
             }
         }
@@ -210,6 +208,7 @@ public class SimDialogActivity extends Activity {
         ArrayList<SubscriptionInfo> callsSubInfoList = new ArrayList<SubscriptionInfo>();
         if (id == CALLS_PICK) {
             final TelecomManager telecomManager = TelecomManager.from(context);
+            final TelephonyManager telephonyManager = TelephonyManager.from(context);
             final Iterator<PhoneAccountHandle> phoneAccounts =
                     telecomManager.getCallCapablePhoneAccounts().listIterator();
 
@@ -219,13 +218,9 @@ public class SimDialogActivity extends Activity {
                 final PhoneAccount phoneAccount =
                         telecomManager.getPhoneAccount(phoneAccounts.next());
                 list.add((String)phoneAccount.getLabel());
-                // Added check to add entry into callsSubInforList only if phoneAccountId is int
-                // Todo : Might have to change it later based on b/18904714
-                if (phoneAccount.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION) &&
-                        TextUtils.isDigitsOnly(phoneAccount.getAccountHandle().getId())) {
-                    final String phoneAccountId = phoneAccount.getAccountHandle().getId();
-                    final SubscriptionInfo sir = Utils.findRecordBySubId(context,
-                            Integer.parseInt(phoneAccountId));
+                int subId = telephonyManager.getSubIdForPhoneAccount(phoneAccount);
+                if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    final SubscriptionInfo sir = Utils.findRecordBySubId(context, subId);
                     callsSubInfoList.add(sir);
                 } else {
                     callsSubInfoList.add(null);
