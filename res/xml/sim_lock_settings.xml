@@ -21,6 +21,7 @@
     <SwitchPreference
             android:key="sim_toggle"
             android:title="@string/sim_pin_toggle"
+            android:persistent="false"
             android:summaryOn="@string/sim_lock_on"
             android:summaryOff="@string/sim_lock_off"/>
 
@@ -30,6 +31,7 @@
             android:title="@string/sim_pin_change"
             android:dialogTitle="@string/sim_change_pin"
             android:dialogMessage="@string/sim_enter_old"
+            android:persistent="false"
             android:positiveButtonText="@string/sim_enter_ok"
             android:negativeButtonText="@string/sim_enter_cancel"/>
 
