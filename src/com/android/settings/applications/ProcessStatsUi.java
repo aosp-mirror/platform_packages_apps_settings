@@ -370,11 +370,19 @@ public class ProcessStatsUi extends PreferenceFragment
         mAppListGroup.addPreference(notAvailable);
     }
 
+    /**
+     * All states in which we consider a process to be actively running (rather than
+     * something that can be freely killed to reclaim RAM).  Note this also includes
+     * the HOME state, because we prioritize home over all cached processes even when
+     * it is in the background, so it is effectively always running from the perspective
+     * of the information we want to show the user here.
+     */
     public static final int[] BACKGROUND_AND_SYSTEM_PROC_STATES = new int[] {
             ProcessStats.STATE_PERSISTENT, ProcessStats.STATE_IMPORTANT_FOREGROUND,
             ProcessStats.STATE_IMPORTANT_BACKGROUND, ProcessStats.STATE_BACKUP,
             ProcessStats.STATE_HEAVY_WEIGHT, ProcessStats.STATE_SERVICE,
-            ProcessStats.STATE_SERVICE_RESTARTING, ProcessStats.STATE_RECEIVER
+            ProcessStats.STATE_SERVICE_RESTARTING, ProcessStats.STATE_RECEIVER,
+            ProcessStats.STATE_HOME
     };
 
     public static final int[] FOREGROUND_PROC_STATES = new int[] {
