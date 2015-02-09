@@ -553,7 +553,6 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"برای موسیقی و رسانه"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"به خاطر سپردن تنظیمات"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Assistant"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"‏متصل شده از طریق دستیار Wi-Fi"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"فرستادن صفحه‌نمایش"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"فعال کردن امکان نمایش بی‌سیم"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"هیچ دستگاهی در اطراف پیدا نشد."</string>
@@ -589,7 +588,6 @@
     <string name="wifi_stopping" msgid="8952524572499500804">"‏خاموش کردن Wi-Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"خطا"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"در حالت هواپیما"</string>
-    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"اسکن شبکه‌ها امکان‌پذیر نیست"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"اعلان شبکه"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"زمانی که یک شبکه عمومی در دسترس است، اطلاع داده شود"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"اجتناب از اتصالات ضعیف"</string>
@@ -666,17 +664,9 @@
     <string name="wifi_ip_settings" msgid="3359331401377059481">"‏تنظیمات IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(بدون تغییر)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(مشخص نشده)"</string>
-    <string name="wifi_remembered" msgid="4955746899347821096">"ذخیره‌شده"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"غیرفعال شد"</string>
-    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"‏پیکربندی IP انجام نشد"</string>
-    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"‏اتصال Wi-Fi برقرار نشد"</string>
-    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"مشکل تأیید اعتبار"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"در محدوده نیست"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"دسترسی به اینترنت شناسایی نشد، به صورت خودکار وصل نمی‌شود."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"‏WPS در دسترس است"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" ‏ (WPS در دسترس است)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"گذرواژه شبکه‌تان را وارد کنید"</string>
-    <string name="wifi_security_none" msgid="7985461072596594400">"هیچکدام"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"‏برای بهبود دقت موقعیت مکانی و مقاصد دیگر، <xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد اسکن کردن شبکه را فعال کند، حتی هنگامی که Wi-Fi خاموش است.\n\nاین مورد را برای همه برنامه‌هایی که می‌خواهند اسکن کنند مجاز می‌کنید؟"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"برای خاموش کردن این مورد، در منوی ادامه موارد، به «پیشرفته» بروید."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"مجاز"</string>
@@ -1703,29 +1693,20 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"آمار فرآیند"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"آمار دقیق برای فرآیندهای در حال اجرا"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"استفاده از حافظه"</string>
-    <!-- no translation found for process_stats_total_duration (428112131357744626) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="428112131357744626">"<xliff:g id="USEDRAM">%1$s</xliff:g> از <xliff:g id="TOTALRAM">%2$s</xliff:g> در طول <xliff:g id="TIME">%3$s</xliff:g> استفاده شد"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"پس‌زمینه"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"پیش‌زمینه"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"در حافظه پنهان"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"حافظه دستگاه در حال حاضر <xliff:g id="MEMSTATE">%1$s</xliff:g> است"</string>
-    <!-- no translation found for process_stats_os_label (4813434110442733392) -->
-    <skip />
-    <!-- no translation found for process_stats_os_native (5322428494231768472) -->
-    <skip />
-    <!-- no translation found for process_stats_os_kernel (1938523592369780924) -->
-    <skip />
-    <!-- no translation found for process_stats_os_zram (677138324651671575) -->
-    <skip />
-    <!-- no translation found for process_stats_os_cache (6432533624875078233) -->
-    <skip />
-    <!-- no translation found for process_stats_ram_use (976912589127397307) -->
-    <skip />
-    <!-- no translation found for process_stats_bg_ram_use (5398191511030462404) -->
-    <skip />
+    <string name="process_stats_os_label" msgid="4813434110442733392">"‏سیستم عامل Android"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"داخلی"</string>
+    <string name="process_stats_os_kernel" msgid="1938523592369780924">"مرکزی"</string>
+    <string name="process_stats_os_zram" msgid="677138324651671575">"Z-Ram"</string>
+    <string name="process_stats_os_cache" msgid="6432533624875078233">"حافظه‌های پنهان"</string>
+    <string name="process_stats_ram_use" msgid="976912589127397307">"‏استفاده از RAM"</string>
+    <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"‏استفاده از RAM (پس‌زمینه)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"مدت اجرا"</string>
-    <!-- no translation found for processes_subtitle (6827502409379462438) -->
-    <skip />
+    <string name="processes_subtitle" msgid="6827502409379462438">"پردازش‌ها"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"خدمات"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"مدت"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"جزئیات حافظه"</string>

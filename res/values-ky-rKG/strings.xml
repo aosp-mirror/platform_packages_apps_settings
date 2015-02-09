@@ -827,7 +827,6 @@
     <!-- no translation found for bluetooth_dock_settings_remember (5551459057010609115) -->
     <skip />
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi Жардамчысы"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"Wi‑Fi жардамчысы аркылуу туташып турат"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Сырткы экранга чыгаруу"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Зымсыз дисплейди иштетүү"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Жакын арада эч бир түзмөк табылган жок."</string>
@@ -866,7 +865,6 @@
     <!-- no translation found for wifi_error (3207971103917128179) -->
     <skip />
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Учак тартибинде"</string>
-    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Түйүндөрдү издөө мүмкүн эмес"</string>
     <!-- no translation found for wifi_notify_open_networks (3755768188029653293) -->
     <skip />
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Коомдук тармак жеткиликтүү болгондо эскертме берилсин"</string>
@@ -967,18 +965,9 @@
     <skip />
     <!-- no translation found for wifi_unspecified (5431501214192991253) -->
     <skip />
-    <string name="wifi_remembered" msgid="4955746899347821096">"Сакталды"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"Өчүрүлгөн"</string>
-    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"IP конфигурациясы бузулду"</string>
-    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"WiFi туташуусу бузулду"</string>
-    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Аутентификация маселеси бар"</string>
-    <!-- no translation found for wifi_not_in_range (1136191511238508967) -->
-    <skip />
-    <string name="wifi_no_internet" msgid="9151470775868728896">"Интернетке кирүү мүмкүнчүлүгү табылган жок, андыктан автоматтык түрдө кайра туташпайт."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS жеткиликтүү"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS жеткиликтүү)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Тармактагы сырсөзүңүздү киргизиңиз"</string>
-    <string name="wifi_security_none" msgid="7985461072596594400">"Жок"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Жайгаштыруунун тактыгын жогорулатуу жана башка максаттарда, Wi-Fi өчүк болсо да, <xliff:g id="APP_NAME">%1$s</xliff:g> желелерди скандагысы келет.\n\nБардык скандоону кааалаган колдонмолорго уруксат берелсинби?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Муну өчүрүү үчүн, жөндөөлөр менюсунан Өркүндөтүлгөндөргө өтүңүз."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Уруксат"</string>
@@ -2435,29 +2424,20 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Процесстин статистикасы"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Иштеп жаткан процесстердин өзгөчө статистикасы"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Эс тутумдун пайдаланылышы"</string>
-    <!-- no translation found for process_stats_total_duration (428112131357744626) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="428112131357744626">"<xliff:g id="TIME">%3$s</xliff:g> бою <xliff:g id="TOTALRAM">%2$s</xliff:g> ичинен <xliff:g id="USEDRAM">%1$s</xliff:g> колдонулган"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Фондук"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Алдынкы планда"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Кэштелген"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Түзмөктүн эс тутуму учурда <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_os_label (4813434110442733392) -->
-    <skip />
-    <!-- no translation found for process_stats_os_native (5322428494231768472) -->
-    <skip />
-    <!-- no translation found for process_stats_os_kernel (1938523592369780924) -->
-    <skip />
-    <!-- no translation found for process_stats_os_zram (677138324651671575) -->
-    <skip />
-    <!-- no translation found for process_stats_os_cache (6432533624875078233) -->
-    <skip />
-    <!-- no translation found for process_stats_ram_use (976912589127397307) -->
-    <skip />
-    <!-- no translation found for process_stats_bg_ram_use (5398191511030462404) -->
-    <skip />
+    <string name="process_stats_os_label" msgid="4813434110442733392">"Android OS"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"Өздүк"</string>
+    <string name="process_stats_os_kernel" msgid="1938523592369780924">"Өзөк"</string>
+    <string name="process_stats_os_zram" msgid="677138324651671575">"Z-Ram"</string>
+    <string name="process_stats_os_cache" msgid="6432533624875078233">"Кештер"</string>
+    <string name="process_stats_ram_use" msgid="976912589127397307">"RAM колдонуу"</string>
+    <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"RAM колдонуу (фон)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Иштеген убактысы"</string>
-    <!-- no translation found for processes_subtitle (6827502409379462438) -->
-    <skip />
+    <string name="processes_subtitle" msgid="6827502409379462438">"Иштеп чыгуулар"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Кызматтар"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Узактыгы"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"Эстутумдун чоо-жайы"</string>

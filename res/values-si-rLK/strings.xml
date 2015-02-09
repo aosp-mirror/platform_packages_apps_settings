@@ -553,7 +553,6 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"සංගීතය සහ මාධ්‍යය සඳහා"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"සැකසීම් මතක තබාගන්න"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi සහායක"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"Wi‑Fi සහායක හරහා සම්බන්ධ කරන ලදි"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"රංගන තිරය"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"රැහැන් රහිත දර්ශනය සබල කරන්න"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"කිසිඳු උපාංගයක් අවටින් සොයාගත්තේ නැත."</string>
@@ -589,7 +588,6 @@
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-Fi අක්‍රිය කරමින්..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"දෝෂය"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"අහස්යානා ආකාරය තුළ"</string>
-    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"ජාල සඳහා පරිලෝකනය කළ නොහැක"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"ජාල දැනුම්දීම"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"පොදු ජාල තිබෙන්නේ කොහේ දැයි දැනුම් දෙන්න"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"දුර්වල සම්බන්ධතා මඟහරින්න"</string>
@@ -666,17 +664,9 @@
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP සැකසීම්"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(වෙනස් නොකළ)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(සඳහන් නොකළ)"</string>
-    <string name="wifi_remembered" msgid="4955746899347821096">"සුරකින ලදි"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"අබලයි"</string>
-    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"IP වින්‍යාස කිරීම අසාර්ථකයි"</string>
-    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"WiFi සම්බන්ධතාව අසාර්ථකයි"</string>
-    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"සත්‍යාපනයේ ගැටලුවකි"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"පරාසයේ නැත"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"අන්තර්ජාල ප්‍රවේශය අනාවරණය වුයේ නැත, ස්වයංක්‍රිය නැවත සම්බන්ධ වීම වූ නැත"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ඇත"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS පවතී)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ඔබගේ ජාල මුරපදය ඇතුළත් කරන්න"</string>
-    <string name="wifi_security_none" msgid="7985461072596594400">"කිසිවක් නැත"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"ස්ථාන නිරවද්‍යතාවය වැඩි කිරීමට සහ වෙනත් අරමුණු සඳහා, Wi-Fi අක්‍රිය වුවද <xliff:g id="APP_NAME">%1$s</xliff:g>  හට ජාල පරිලෝකනය සක්‍රිය කිරීමට අවශ්‍යය. \n\nපරිලෝකනය අවශ්‍ය සියලු යෙදුම් සඳහා මෙයට අවසර දෙන්නේ ද?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"මෙය අක්‍රිය කිරීමට, ඉතිරී ගිය මෙනුව තුළ උසස් වෙත යන්න."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"අවසර දෙන්න"</string>
@@ -1705,29 +1695,20 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"ක්‍රියාවලි සංඛ්‍යා ලේඛන"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"ධාවන ක්‍රියාවලි පිළිබඳ ගීක සංඛ්‍යා ලේඛන"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"මතක භාවිතය"</string>
-    <!-- no translation found for process_stats_total_duration (428112131357744626) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="428112131357744626">"<xliff:g id="TOTALRAM">%2$s</xliff:g> න් <xliff:g id="USEDRAM">%1$s</xliff:g> ක් <xliff:g id="TIME">%3$s</xliff:g> ඔස්සේ භාවිතා කර ඇත"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"පසුබිම"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"පෙරබිම"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"හැඹිලි කළ"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"වර්තමානයේදී උපාංග මතකය <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_os_label (4813434110442733392) -->
-    <skip />
-    <!-- no translation found for process_stats_os_native (5322428494231768472) -->
-    <skip />
-    <!-- no translation found for process_stats_os_kernel (1938523592369780924) -->
-    <skip />
-    <!-- no translation found for process_stats_os_zram (677138324651671575) -->
-    <skip />
-    <!-- no translation found for process_stats_os_cache (6432533624875078233) -->
-    <skip />
-    <!-- no translation found for process_stats_ram_use (976912589127397307) -->
-    <skip />
-    <!-- no translation found for process_stats_bg_ram_use (5398191511030462404) -->
-    <skip />
+    <string name="process_stats_os_label" msgid="4813434110442733392">"Android OS"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"ජන්ම"</string>
+    <string name="process_stats_os_kernel" msgid="1938523592369780924">"කර්නල්"</string>
+    <string name="process_stats_os_zram" msgid="677138324651671575">"Z-Ram"</string>
+    <string name="process_stats_os_cache" msgid="6432533624875078233">"නිහිත"</string>
+    <string name="process_stats_ram_use" msgid="976912589127397307">"RAM භාවිතය"</string>
+    <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"RAM භාවිතය (පසුබිම)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"ධාවන කාලය"</string>
-    <!-- no translation found for processes_subtitle (6827502409379462438) -->
-    <skip />
+    <string name="processes_subtitle" msgid="6827502409379462438">"ක්‍රියාවලි"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"සේවා"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"කාල සීමාව"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"මතක විස්තර"</string>

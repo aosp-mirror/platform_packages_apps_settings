@@ -553,7 +553,6 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Cho nhạc và phương tiện"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Nhớ cài đặt"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Trình hỗ trợ Wi‑Fi"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"Được kết nối qua trình hỗ trợ Wi‑Fi"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Màn hình truyền"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Bật hiển thị không dây"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Không tìm thấy thiết bị lân cận nào."</string>
@@ -589,7 +588,6 @@
     <string name="wifi_stopping" msgid="8952524572499500804">"Đang tắt Wi‑Fi…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Lỗi"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"Ở chế độ trên máy bay"</string>
-    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"Không thể dò tìm mạng"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Thông báo mạng"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Thông báo bất cứ khi nào có mạng công cộng"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Tránh kết nối kém"</string>
@@ -666,17 +664,9 @@
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Cài đặt IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(không thay đổi)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(không xác định)"</string>
-    <string name="wifi_remembered" msgid="4955746899347821096">"Đã lưu"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"Đã tắt"</string>
-    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"Lỗi cấu hình IP"</string>
-    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"Lỗi kết nối WiFi"</string>
-    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Sự cố xác thực"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"Ngoài vùng phủ sóng"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"Không phát hiện thấy truy cập Internet nào, mạng sẽ không được tự động kết nối lại."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Có WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Có WPS)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Nhập mật khẩu mạng của bạn"</string>
-    <string name="wifi_security_none" msgid="7985461072596594400">"Không"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Để nâng cao độ chính xác vị trí và phục vụ các mục đích khác, <xliff:g id="APP_NAME">%1$s</xliff:g> muốn bật tính năng quét mạng ngay cả khi Wi-Fi đang tắt.\n\nCho phép cài đặt này đối với tất cả ứng dụng muốn quét?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Để tắt tính năng này, đi tới phần Nâng cao trong trình đơn mục bổ sung."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Cho phép"</string>
@@ -1703,29 +1693,20 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Số liệu thống kê về quy trình"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Số liệu thống kê chi tiết về các quy trình đang chạy"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Mức sử dụng bộ nhớ"</string>
-    <!-- no translation found for process_stats_total_duration (428112131357744626) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="428112131357744626">"Đã sử dụng <xliff:g id="USEDRAM">%1$s</xliff:g> / <xliff:g id="TOTALRAM">%2$s</xliff:g> trong hơn <xliff:g id="TIME">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Nền"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Nền trước"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Đã lưu trong bộ nhớ Cache"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"Bộ nhớ thiết bị hiện tại là <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_os_label (4813434110442733392) -->
-    <skip />
-    <!-- no translation found for process_stats_os_native (5322428494231768472) -->
-    <skip />
-    <!-- no translation found for process_stats_os_kernel (1938523592369780924) -->
-    <skip />
-    <!-- no translation found for process_stats_os_zram (677138324651671575) -->
-    <skip />
-    <!-- no translation found for process_stats_os_cache (6432533624875078233) -->
-    <skip />
-    <!-- no translation found for process_stats_ram_use (976912589127397307) -->
-    <skip />
-    <!-- no translation found for process_stats_bg_ram_use (5398191511030462404) -->
-    <skip />
+    <string name="process_stats_os_label" msgid="4813434110442733392">"Hệ điều hành Android"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"Gốc"</string>
+    <string name="process_stats_os_kernel" msgid="1938523592369780924">"Kernel"</string>
+    <string name="process_stats_os_zram" msgid="677138324651671575">"Z-Ram"</string>
+    <string name="process_stats_os_cache" msgid="6432533624875078233">"Bộ nhớ cache"</string>
+    <string name="process_stats_ram_use" msgid="976912589127397307">"Sử dụng RAM"</string>
+    <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"Sử dụng RAM (nền)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Thời gian chạy"</string>
-    <!-- no translation found for processes_subtitle (6827502409379462438) -->
-    <skip />
+    <string name="processes_subtitle" msgid="6827502409379462438">"Quá trình"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Dịch vụ"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Thời lượng"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"Chi tiết bộ nhớ"</string>

@@ -553,7 +553,6 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"음악 및 미디어"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"설정 기억"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Wi‑Fi 도우미"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"Wi‑Fi 도우미를 통해 연결됨"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"화면 전송"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"무선 디스플레이 사용"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"근처에 기기가 없습니다."</string>
@@ -589,7 +588,6 @@
     <string name="wifi_stopping" msgid="8952524572499500804">"Wi-Fi 사용 중지 중..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"오류"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"비행기 모드"</string>
-    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"네트워크를 검색할 수 없습니다."</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"네트워크 알림"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"공용 네트워크가 사용 가능한 경우 알림"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"불량 네트워크 방지"</string>
@@ -666,17 +664,9 @@
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP 설정"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(변경 안함)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(지정되지 않음)"</string>
-    <string name="wifi_remembered" msgid="4955746899347821096">"저장됨"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"사용 중지됨"</string>
-    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"IP 설정 실패"</string>
-    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"Wi-Fi 연결 실패"</string>
-    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"인증 문제"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"범위 내에 없음"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"감지된 인터넷 액세스가 없으며 자동으로 다시 연결되지 않습니다."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS 사용 가능"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS 사용 가능)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"네트워크 비밀번호 입력"</string>
-    <string name="wifi_security_none" msgid="7985461072596594400">"없음"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"위치 정확성 개선 등의 목적으로 <xliff:g id="APP_NAME">%1$s</xliff:g>에서 Wi-Fi가 꺼져 있을 때에도 네트워크 검색을 사용하도록 설정하려 합니다.\n\n검색하려는 모든 앱에 대해 이를 허용하시겠습니까?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"이 기능을 사용 중지하려면 더보기 메뉴에서 고급으로 이동하세요."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"허용"</string>
@@ -1703,29 +1693,20 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"메모리 사용량"</string>
-    <!-- no translation found for process_stats_total_duration (428112131357744626) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="428112131357744626">"<xliff:g id="TIME">%3$s</xliff:g> 동안 <xliff:g id="USEDRAM">%1$s</xliff:g>/<xliff:g id="TOTALRAM">%2$s</xliff:g> 사용"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"백그라운드"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"포그라운드"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"캐시된 프로세스"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"현재 기기 메모리 수준: <xliff:g id="MEMSTATE">%1$s</xliff:g>"</string>
-    <!-- no translation found for process_stats_os_label (4813434110442733392) -->
-    <skip />
-    <!-- no translation found for process_stats_os_native (5322428494231768472) -->
-    <skip />
-    <!-- no translation found for process_stats_os_kernel (1938523592369780924) -->
-    <skip />
-    <!-- no translation found for process_stats_os_zram (677138324651671575) -->
-    <skip />
-    <!-- no translation found for process_stats_os_cache (6432533624875078233) -->
-    <skip />
-    <!-- no translation found for process_stats_ram_use (976912589127397307) -->
-    <skip />
-    <!-- no translation found for process_stats_bg_ram_use (5398191511030462404) -->
-    <skip />
+    <string name="process_stats_os_label" msgid="4813434110442733392">"Android OS"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"기본"</string>
+    <string name="process_stats_os_kernel" msgid="1938523592369780924">"커널"</string>
+    <string name="process_stats_os_zram" msgid="677138324651671575">"Z-RAM"</string>
+    <string name="process_stats_os_cache" msgid="6432533624875078233">"캐시"</string>
+    <string name="process_stats_ram_use" msgid="976912589127397307">"RAM 사용"</string>
+    <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"RAM 사용(백그라운드)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"재생 시간"</string>
-    <!-- no translation found for processes_subtitle (6827502409379462438) -->
-    <skip />
+    <string name="processes_subtitle" msgid="6827502409379462438">"프로세스"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"서비스"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"기간"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"메모리 세부정보"</string>

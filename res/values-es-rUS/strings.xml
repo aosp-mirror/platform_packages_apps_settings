@@ -553,7 +553,6 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música y medios"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Recordar la configuración"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Asistente de Wi-Fi"</string>
-    <string name="connected_via_wfa" msgid="3805736726317410714">"Conexión por asistente de Wi-Fi"</string>
     <string name="wifi_display_settings_title" msgid="2925465988657380522">"Pantalla de Cast"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Habilitar pantalla inalámbrica"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"No se encontraron dispositivos cercanos."</string>
@@ -589,7 +588,6 @@
     <string name="wifi_stopping" msgid="8952524572499500804">"Desactivando Wi-Fi..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
     <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"En modo avión"</string>
-    <string name="wifi_fail_to_scan" msgid="1265540342578081461">"No se pueden buscar las redes."</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Notificación de red"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Notificarme cuando haya una red pública disponible"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Evitar malas conexiones"</string>
@@ -666,17 +664,9 @@
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Configuración de IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sin cambios)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(sin especificar)"</string>
-    <string name="wifi_remembered" msgid="4955746899347821096">"Guardada"</string>
-    <string name="wifi_disabled_generic" msgid="4259794910584943386">"Inhabilitada"</string>
-    <string name="wifi_disabled_network_failure" msgid="2364951338436007124">"Error de configuración IP"</string>
-    <string name="wifi_disabled_wifi_failure" msgid="3081668066612876581">"Error de conexión Wi-Fi"</string>
-    <string name="wifi_disabled_password_failure" msgid="8659805351763133575">"Problema de autenticación"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"Fuera de alcance"</string>
-    <string name="wifi_no_internet" msgid="9151470775868728896">"No se detectó el acceso a Internet. No se volverá a conectar de forma automática."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WSP disponible"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WSP disponible)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Ingresa la contraseña de la red."</string>
-    <string name="wifi_security_none" msgid="7985461072596594400">"Ninguna"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Para mejorar la precisión de la ubicación y para otros fines, <xliff:g id="APP_NAME">%1$s</xliff:g> quiere activar la búsqueda de redes, incluso cuando la conexión Wi-Fi esté desactivada.\n\n¿Quieres permitir esto para todas las aplicaciones que deseen buscar redes?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Para desactivar la opción, accede a la sección Avanzada del menú ampliado."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Permitir"</string>
@@ -1117,7 +1107,7 @@
     <string name="location_access_title" msgid="7064108942964081243">"Acceso a mi ubicación"</string>
     <string name="location_access_summary" msgid="69031404093194341">"Permitir que las aplicaciones que solicitaron permiso usen la información de tu ubicación"</string>
     <string name="location_sources_heading" msgid="1278732419851088319">"Fuentes de ubicación"</string>
-    <string name="about_settings" product="tablet" msgid="593457295516533765">"Acerca del tablet"</string>
+    <string name="about_settings" product="tablet" msgid="593457295516533765">"Acerca de la tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Acerca del dispositivo"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Ver información legal, estado, versión de software del tablet"</string>
     <string name="legal_information" msgid="5769301644270604095">"Información legal"</string>
@@ -1703,29 +1693,20 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Estadísticas para geeks sobre procesos activos"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Uso de memoria"</string>
-    <!-- no translation found for process_stats_total_duration (428112131357744626) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="428112131357744626">"Uso: <xliff:g id="USEDRAM">%1$s</xliff:g> de <xliff:g id="TOTALRAM">%2$s</xliff:g> durante <xliff:g id="TIME">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"En el fondo"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"En primer plano"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"En caché"</string>
     <string name="process_stats_memory_status" msgid="4251599550196193093">"En este momento, el estado de la memoria del dispositivo es <xliff:g id="MEMSTATE">%1$s</xliff:g>."</string>
-    <!-- no translation found for process_stats_os_label (4813434110442733392) -->
-    <skip />
-    <!-- no translation found for process_stats_os_native (5322428494231768472) -->
-    <skip />
-    <!-- no translation found for process_stats_os_kernel (1938523592369780924) -->
-    <skip />
-    <!-- no translation found for process_stats_os_zram (677138324651671575) -->
-    <skip />
-    <!-- no translation found for process_stats_os_cache (6432533624875078233) -->
-    <skip />
-    <!-- no translation found for process_stats_ram_use (976912589127397307) -->
-    <skip />
-    <!-- no translation found for process_stats_bg_ram_use (5398191511030462404) -->
-    <skip />
+    <string name="process_stats_os_label" msgid="4813434110442733392">"Sistema operativo Android"</string>
+    <string name="process_stats_os_native" msgid="5322428494231768472">"Nativo"</string>
+    <string name="process_stats_os_kernel" msgid="1938523592369780924">"Kernel"</string>
+    <string name="process_stats_os_zram" msgid="677138324651671575">"Zram"</string>
+    <string name="process_stats_os_cache" msgid="6432533624875078233">"Memorias caché"</string>
+    <string name="process_stats_ram_use" msgid="976912589127397307">"Uso de RAM"</string>
+    <string name="process_stats_bg_ram_use" msgid="5398191511030462404">"Uso de RAM (en segundo plano)"</string>
     <string name="process_stats_run_time" msgid="6520628955709369115">"Tiempo de ejecución"</string>
-    <!-- no translation found for processes_subtitle (6827502409379462438) -->
-    <skip />
+    <string name="processes_subtitle" msgid="6827502409379462438">"Procesos"</string>
     <string name="services_subtitle" msgid="4296402367067266425">"Servicios"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Duración"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"Detalles de la memoria"</string>
