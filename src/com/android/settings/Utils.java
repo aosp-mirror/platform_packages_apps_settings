@@ -37,6 +37,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.content.res.Resources.NotFoundException;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -65,6 +66,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -1056,6 +1058,16 @@ public final class Utils {
             }
         }
         return null;
+    }
+
+    public static View inflateCategoryHeader(LayoutInflater inflater, ViewGroup parent) {
+        final TypedArray a = inflater.getContext().obtainStyledAttributes(null,
+                com.android.internal.R.styleable.Preference,
+                com.android.internal.R.attr.preferenceCategoryStyle, 0);
+        final int resId = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
+                0);
+        a.recycle();
+        return inflater.inflate(resId, parent, false);
     }
 
 }

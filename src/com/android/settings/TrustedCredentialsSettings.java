@@ -321,7 +321,7 @@ public class TrustedCredentialsSettings extends Fragment {
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getActivity()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflateCategoryHeader(inflater, parent);
+                convertView = Utils.inflateCategoryHeader(inflater, parent);
             }
 
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
@@ -354,15 +354,6 @@ public class TrustedCredentialsSettings extends Fragment {
         public int getListViewId(Tab tab) {
             return tab.mExpandableList;
         }
-        private View inflateCategoryHeader(LayoutInflater inflater, ViewGroup parent) {
-            final TypedArray a = inflater.getContext().obtainStyledAttributes(null,
-                    com.android.internal.R.styleable.Preference,
-                    com.android.internal.R.attr.preferenceCategoryStyle, 0);
-            final int resId = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
-                    0);
-            return inflater.inflate(resId, parent, false);
-        }
-
     }
 
     private class TrustedCertificateAdapter extends BaseAdapter implements
