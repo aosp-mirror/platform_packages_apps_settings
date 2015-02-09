@@ -884,7 +884,8 @@ public final class Utils {
                 return CircleFramedDrawable.getInstance(context, icon);
             }
         }
-        return UserIcons.getDefaultUserIcon(user.id, /* light= */ false);
+        return CircleFramedDrawable.getInstance(context, UserIcons.convertToBitmap(
+                UserIcons.getDefaultUserIcon(user.id, /* light= */ false)));
     }
 
     /**
