@@ -16,6 +16,11 @@
 
 package com.android.settings;
 
+import static com.android.settingslib.TetherUtil.TETHERING_INVALID;
+import static com.android.settingslib.TetherUtil.TETHERING_WIFI;
+import static com.android.settingslib.TetherUtil.TETHERING_USB;
+import static com.android.settingslib.TetherUtil.TETHERING_BLUETOOTH;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -43,6 +48,7 @@ import android.widget.TextView;
 
 import com.android.settings.wifi.WifiApDialog;
 import com.android.settings.wifi.WifiApEnabler;
+import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
@@ -93,13 +99,8 @@ public class TetherSettings extends SettingsPreferenceFragment
 
     private boolean mBluetoothEnableForTether;
 
-    public static final int INVALID             = -1;
-    public static final int WIFI_TETHERING      = 0;
-    public static final int USB_TETHERING       = 1;
-    public static final int BLUETOOTH_TETHERING = 2;
-
     /* One of INVALID, WIFI_TETHERING, USB_TETHERING or BLUETOOTH_TETHERING */
-    private int mTetherChoice = INVALID;
+    private int mTetherChoice = TETHERING_INVALID;
 
     /* Stores the package name and the class name of the provisioning app */
     private String[] mProvisionApp;
@@ -454,10 +455,10 @@ public class TetherSettings extends SettingsPreferenceFragment
         boolean enable = (Boolean) value;
 
         if (enable) {
-            startProvisioningIfNecessary(WIFI_TETHERING);
+            startProvisioningIfNecessary(TETHERING_WIFI);
         } else {
-            if (isProvisioningNeeded(mProvisionApp)) {
-                TetherService.cancelRecheckAlarmIfNecessary(getActivity(), WIFI_TETHERING);
+            if (TetherUtil.isProvisioningNeeded(getActivity())) {
+                TetherService.cancelRecheckAlarmIfNecessary(getActivity(), TETHERING_WIFI);
             }
             mWifiApEnabler.setSoftapEnabled(false);
         }
@@ -465,16 +466,13 @@ public class TetherSettings extends SettingsPreferenceFragment
     }
 
     public static boolean isProvisioningNeededButUnavailable(Context context) {
-        String[] provisionApp = context.getResources().getStringArray(
-                com.android.internal.R.array.config_mobile_hotspot_provision_app);
-        return (isProvisioningNeeded(provisionApp)
-                && !isIntentAvailable(context, provisionApp));
+        return (TetherUtil.isProvisioningNeeded(context)
+                && !isIntentAvailable(context));
     }
 
-    private static boolean isIntentAvailable(Context context, String[] provisionApp) {
-        if (provisionApp.length <  2) {
-            throw new IllegalArgumentException("provisionApp length should at least be 2");
-        }
+    private static boolean isIntentAvailable(Context context) {
+        String[] provisionApp = context.getResources().getStringArray(
+                com.android.internal.R.array.config_mobile_hotspot_provision_app);
         final PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(provisionApp[0], provisionApp[1]);
@@ -483,18 +481,9 @@ public class TetherSettings extends SettingsPreferenceFragment
                 PackageManager.MATCH_DEFAULT_ONLY).size() > 0);
     }
 
-
-    private static boolean isProvisioningNeeded(String[] provisionApp) {
-        if (SystemProperties.getBoolean("net.tethering.noprovisioning", false)
-                || provisionApp == null) {
-            return false;
-        }
-        return (provisionApp.length == 2);
-    }
-
     private void startProvisioningIfNecessary(int choice) {
         mTetherChoice = choice;
-        if (isProvisioningNeeded(mProvisionApp)) {
+        if (TetherUtil.isProvisioningNeeded(getActivity())) {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setClassName(mProvisionApp[0], mProvisionApp[1]);
             intent.putExtra(TETHER_CHOICE, mTetherChoice);
@@ -514,24 +503,24 @@ public class TetherSettings extends SettingsPreferenceFragment
                 //BT and USB need switch turned off on failure
                 //Wifi tethering is never turned on until afterwards
                 switch (mTetherChoice) {
-                    case BLUETOOTH_TETHERING:
+                    case TETHERING_BLUETOOTH:
                         mBluetoothTether.setChecked(false);
                         break;
-                    case USB_TETHERING:
+                    case TETHERING_USB:
                         mUsbTether.setChecked(false);
                         break;
                 }
-                mTetherChoice = INVALID;
+                mTetherChoice = TETHERING_INVALID;
             }
         }
     }
 
     private void startTethering() {
         switch (mTetherChoice) {
-            case WIFI_TETHERING:
+            case TETHERING_WIFI:
                 mWifiApEnabler.setSoftapEnabled(true);
                 break;
-            case BLUETOOTH_TETHERING:
+            case TETHERING_BLUETOOTH:
                 // turn on Bluetooth first
                 BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
                 if (adapter.getState() == BluetoothAdapter.STATE_OFF) {
@@ -545,7 +534,7 @@ public class TetherSettings extends SettingsPreferenceFragment
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_available_subtext);
                 }
                 break;
-            case USB_TETHERING:
+            case TETHERING_USB:
                 setUsbTethering(true);
                 break;
             default:
@@ -574,10 +563,10 @@ public class TetherSettings extends SettingsPreferenceFragment
             boolean newState = mUsbTether.isChecked();
 
             if (newState) {
-                startProvisioningIfNecessary(USB_TETHERING);
+                startProvisioningIfNecessary(TETHERING_USB);
             } else {
-                if (isProvisioningNeeded(mProvisionApp)) {
-                    TetherService.cancelRecheckAlarmIfNecessary(getActivity(), USB_TETHERING);
+                if (TetherUtil.isProvisioningNeeded(getActivity())) {
+                    TetherService.cancelRecheckAlarmIfNecessary(getActivity(), TETHERING_USB);
                 }
                 setUsbTethering(newState);
             }
@@ -585,10 +574,10 @@ public class TetherSettings extends SettingsPreferenceFragment
             boolean bluetoothTetherState = mBluetoothTether.isChecked();
 
             if (bluetoothTetherState) {
-                startProvisioningIfNecessary(BLUETOOTH_TETHERING);
+                startProvisioningIfNecessary(TETHERING_BLUETOOTH);
             } else {
-                if (isProvisioningNeeded(mProvisionApp)) {
-                    TetherService.cancelRecheckAlarmIfNecessary(getActivity(), BLUETOOTH_TETHERING);
+                if (TetherUtil.isProvisioningNeeded(getActivity())) {
+                    TetherService.cancelRecheckAlarmIfNecessary(getActivity(), TETHERING_BLUETOOTH);
                 }
                 boolean errored = false;
 
@@ -651,18 +640,5 @@ public class TetherSettings extends SettingsPreferenceFragment
     @Override
     public int getHelpResource() {
         return R.string.help_url_tether;
-    }
-
-    /**
-     * Checks whether this screen will have anything to show on this device. This is called by
-     * the shortcut picker for Settings shortcuts (home screen widget).
-     * @param context a context object for getting a system service.
-     * @return whether Tether & portable hotspot should be shown in the shortcuts picker.
-     */
-    public static boolean showInShortcuts(Context context) {
-        final ConnectivityManager cm =
-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        final boolean isSecondaryUser = UserHandle.myUserId() != UserHandle.USER_OWNER;
-        return !isSecondaryUser && cm.isTetheringSupported();
     }
 }

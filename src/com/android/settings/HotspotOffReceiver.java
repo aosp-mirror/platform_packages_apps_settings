@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 
+import com.android.settingslib.TetherUtil;
+
 /**
  * This receiver catches when quick settings turns off the hotspot, so we can
  * cancel the alarm in that case.  All other cancels are handled in tethersettings.
@@ -18,7 +20,7 @@ public class HotspotOffReceiver extends BroadcastReceiver {
             WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             if (wifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED) {
                 // The hotspot has been turned off, we don't need to recheck tethering.
-                TetherService.cancelRecheckAlarmIfNecessary(context, TetherSettings.WIFI_TETHERING);
+                TetherService.cancelRecheckAlarmIfNecessary(context, TetherUtil.TETHERING_WIFI);
             }
         }
     }

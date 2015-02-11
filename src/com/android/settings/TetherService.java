@@ -37,18 +37,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.wifi.WifiApEnabler;
+import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
 
 public class TetherService extends Service {
     private static final String TAG = "TetherService";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-
-    public static final String EXTRA_ADD_TETHER_TYPE = "extraAddTetherType";
-    public static final String EXTRA_REM_TETHER_TYPE = "extraRemTetherType";
-    public static final String EXTRA_SET_ALARM = "extraSetAlarm";
-    public static final String EXTRA_RUN_PROVISION = "extraRunProvision";
-    public static final String EXTRA_ENABLE_WIFI_TETHER = "extraEnableWifiTether";
 
     private static final String EXTRA_RESULT = "EntitlementResult";
 
@@ -88,15 +83,17 @@ public class TetherService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.hasExtra(EXTRA_ADD_TETHER_TYPE)) {
-            int type = intent.getIntExtra(EXTRA_ADD_TETHER_TYPE, TetherSettings.INVALID);
+        if (intent.hasExtra(TetherUtil.EXTRA_ADD_TETHER_TYPE)) {
+            int type = intent.getIntExtra(TetherUtil.EXTRA_ADD_TETHER_TYPE,
+                    TetherUtil.TETHERING_INVALID);
             if (!mCurrentTethers.contains(type)) {
                 if (DEBUG) Log.d(TAG, "Adding tether " + type);
                 mCurrentTethers.add(type);
             }
         }
-        if (intent.hasExtra(EXTRA_REM_TETHER_TYPE)) {
-            int type = intent.getIntExtra(EXTRA_REM_TETHER_TYPE, TetherSettings.INVALID);
+        if (intent.hasExtra(TetherUtil.EXTRA_REM_TETHER_TYPE)) {
+            int type = intent.getIntExtra(TetherUtil.EXTRA_REM_TETHER_TYPE,
+                    TetherUtil.TETHERING_INVALID);
             if (DEBUG) Log.d(TAG, "Removing tether " + type);
             int index = mCurrentTethers.indexOf(type);
             if (index >= 0) {
@@ -112,16 +109,16 @@ public class TetherService extends Service {
         // Only set the alarm if we have one tether, meaning the one just added,
         // to avoid setting it when it was already set previously for another
         // type.
-        if (intent.getBooleanExtra(EXTRA_SET_ALARM, false)
+        if (intent.getBooleanExtra(TetherUtil.EXTRA_SET_ALARM, false)
                 && mCurrentTethers.size() == 1) {
             scheduleAlarm();
         }
 
-        if (intent.getBooleanExtra(EXTRA_ENABLE_WIFI_TETHER, false)) {
+        if (intent.getBooleanExtra(TetherUtil.EXTRA_ENABLE_WIFI_TETHER, false)) {
             mEnableWifiAfterCheck = true;
         }
 
-        if (intent.getBooleanExtra(EXTRA_RUN_PROVISION, false)) {
+        if (intent.getBooleanExtra(TetherUtil.EXTRA_RUN_PROVISION, false)) {
             startProvisioning(mCurrentTypeIndex);
         } else if (!mInProvisionCheck) {
             // If we aren't running any provisioning, no reason to stay alive.
@@ -172,14 +169,13 @@ public class TetherService extends Service {
     }
 
     private void enableWifiTetheringIfNeeded() {
-        if (!isHotspotEnabled(this)) {
-            new WifiApEnabler(this, null).setSoftapEnabled(true);
+        if (!TetherUtil.isWifiTetherEnabled(this)) {
+            TetherUtil.setWifiTethering(true, this);
         }
     }
 
     private void disableWifiTethering() {
-        WifiApEnabler enabler = new WifiApEnabler(this, null);
-        enabler.setSoftapEnabled(false);
+        TetherUtil.setWifiTethering(false, this);
     }
 
     private void disableUsbTethering() {
@@ -216,21 +212,16 @@ public class TetherService extends Service {
         mInProvisionCheck = true;
     }
 
-    private static boolean isHotspotEnabled(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
-        return wifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED;
-    }
-
     public static void scheduleRecheckAlarm(Context context, int type) {
         Intent intent = new Intent(context, TetherService.class);
-        intent.putExtra(EXTRA_ADD_TETHER_TYPE, type);
-        intent.putExtra(EXTRA_SET_ALARM, true);
+        intent.putExtra(TetherUtil.EXTRA_ADD_TETHER_TYPE, type);
+        intent.putExtra(TetherUtil.EXTRA_SET_ALARM, true);
         context.startService(intent);
     }
 
     private void scheduleAlarm() {
         Intent intent = new Intent(this, TetherService.class);
-        intent.putExtra(EXTRA_RUN_PROVISION, true);
+        intent.putExtra(TetherUtil.EXTRA_RUN_PROVISION, true);
 
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -250,7 +241,7 @@ public class TetherService extends Service {
      */
     public static void cancelRecheckAlarmIfNecessary(final Context context, int type) {
         Intent intent = new Intent(context, TetherService.class);
-        intent.putExtra(EXTRA_REM_TETHER_TYPE, type);
+        intent.putExtra(TetherUtil.EXTRA_REM_TETHER_TYPE, type);
         context.startService(intent);
     }
 
@@ -276,19 +267,19 @@ public class TetherService extends Service {
                 mInProvisionCheck = false;
                 int checkType = mCurrentTethers.get(mCurrentTypeIndex);
                 if (intent.getIntExtra(EXTRA_RESULT, RESULT_DEFAULT) == RESULT_OK) {
-                    if (checkType == TetherSettings.WIFI_TETHERING && mEnableWifiAfterCheck) {
+                    if (checkType == TetherUtil.TETHERING_WIFI && mEnableWifiAfterCheck) {
                         enableWifiTetheringIfNeeded();
                         mEnableWifiAfterCheck = false;
                     }
                 } else {
                     switch (checkType) {
-                        case TetherSettings.WIFI_TETHERING:
+                        case TetherUtil.TETHERING_WIFI:
                             disableWifiTethering();
                             break;
-                        case TetherSettings.BLUETOOTH_TETHERING:
+                        case TetherUtil.TETHERING_BLUETOOTH:
                             disableBtTethering();
                             break;
-                        case TetherSettings.USB_TETHERING:
+                        case TetherUtil.TETHERING_USB:
                             disableUsbTethering();
                             break;
                     }

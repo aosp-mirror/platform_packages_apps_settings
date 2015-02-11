@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settingslib.TetherUtil;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class CreateShortcut extends LauncherActivity {
         for (int i = activities.size() - 1; i >= 0; i--) {
             ResolveInfo info = activities.get(i);
             if (info.activityInfo.name.endsWith(TetherSettingsActivity.class.getSimpleName())) {
-                if (!TetherSettings.showInShortcuts(this)) {
+                if (!TetherUtil.isTetheringSupported(this)) {
                     activities.remove(i);
                 }
             }
