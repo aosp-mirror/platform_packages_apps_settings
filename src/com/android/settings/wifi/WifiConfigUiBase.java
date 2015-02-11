@@ -21,8 +21,7 @@ import android.view.LayoutInflater;
 import android.widget.Button;
 
 /**
- * Foundation interface glues between Activities and UIs like
- * {@link WifiDialog} or {@link WifiConfigUiForSetupWizardXL}.
+ * Foundation interface glues between Activities and UIs like {@link WifiDialog}.
  */
 public interface WifiConfigUiBase {
     public Context getContext();
