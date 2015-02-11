@@ -208,13 +208,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".wifi.WifiSettingsForSetupWizardXL"
-                android:theme="@android:style/Theme.Material.Light.NoActionBar"
-                android:screenOrientation="behind"
-                android:clearTaskOnLaunch="true"
-                android:windowSoftInputMode="adjustResize"
-                android:exported="true" />
-
         <activity android:name="Settings$AdvancedWifiSettingsActivity"
                 android:taskAffinity="com.android.settings"
                 android:label="@string/wifi_advanced_settings_label"
