@@ -448,7 +448,8 @@ public class Index {
         final PackageManager pm = mContext.getPackageManager();
         try {
             PackageInfo packInfo = pm.getPackageInfo(packageName, 0);
-            return ((packInfo.applicationInfo.flags & ApplicationInfo.FLAG_PRIVILEGED) != 0);
+            return ((packInfo.applicationInfo.privateFlags
+                & ApplicationInfo.PRIVATE_FLAG_PRIVILEGED) != 0);
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
