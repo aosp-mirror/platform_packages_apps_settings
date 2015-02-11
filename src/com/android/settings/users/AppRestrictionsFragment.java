@@ -368,7 +368,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                         Log.d(TAG, "Installing " + packageName);
                     }
                 }
-                if (info != null && (info.flags&ApplicationInfo.FLAG_HIDDEN) != 0
+                if (info != null && (info.privateFlags&ApplicationInfo.PRIVATE_FLAG_HIDDEN) != 0
                         && (info.flags&ApplicationInfo.FLAG_INSTALLED) != 0) {
                     disableUiForPackage(packageName);
                     mIPm.setApplicationHiddenSettingAsUser(packageName, false, userId);
@@ -635,9 +635,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     private boolean isAppEnabledForUser(PackageInfo pi) {
         if (pi == null) return false;
         final int flags = pi.applicationInfo.flags;
+        final int privateFlags = pi.applicationInfo.privateFlags;
         // Return true if it is installed and not hidden
         return ((flags&ApplicationInfo.FLAG_INSTALLED) != 0
-                && (flags&ApplicationInfo.FLAG_HIDDEN) == 0);
+                && (privateFlags&ApplicationInfo.PRIVATE_FLAG_HIDDEN) == 0);
     }
 
     private void populateApps() {
