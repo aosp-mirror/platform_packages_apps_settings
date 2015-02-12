@@ -1272,31 +1272,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="Settings$QuickLaunchSettingsActivity"
-                android:label="@string/quick_launch_title"
-                android:theme="@style/Theme.SubSettingsDialogWhenLarge">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.QUICK_LAUNCH_SETTINGS" />
-                <action android:name="com.android.settings.QUICK_LAUNCH_SETTINGS" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.quicklaunch.QuickLaunchSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <activity android:name=".quicklaunch.BookmarkPicker"
-                  android:label="@string/quick_launch_title"
-                  android:theme="@style/Theme.SubSettingsDialogWhenLarge">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$DevelopmentSettingsActivity"
                 android:label="@string/development_settings_title"
                 android:taskAffinity="com.android.settings"
