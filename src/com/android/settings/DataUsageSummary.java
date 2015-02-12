@@ -670,10 +670,12 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final Context context = getActivity();
         mTabHost.clearAllTabs();
 
-        for (int i = 0; i < mTelephonyManager.getSimCount(); i++) {
+        int simCount = mTelephonyManager.getSimCount();
+
+        for (int i = 0; i < simCount; i++) {
             final SubscriptionInfo sir = Utils.findRecordBySlotId(context, i);
             if (sir != null) {
-                addMobileTab(context, sir);
+                addMobileTab(context, sir, (simCount > 1));
             }
         }
 
@@ -2672,11 +2674,16 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             }
         };
 
-        private void addMobileTab(Context context, SubscriptionInfo subInfo) {
+        private void addMobileTab(Context context, SubscriptionInfo subInfo, boolean isMultiSim) {
             if (subInfo != null && mMobileTagMap != null) {
                 if (hasReadyMobileRadio(context, subInfo.getSubscriptionId())) {
-                    mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
-                            subInfo.getDisplayName()));
+                    if (isMultiSim) {
+                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
+                                subInfo.getDisplayName()));
+                    } else {
+                        mTabHost.addTab(buildTabSpec(mMobileTagMap.get(subInfo.getSubscriptionId()),
+                                R.string.data_usage_tab_mobile));
+                    }
                 }
             } else {
                 if (LOGD) Log.d(TAG, "addMobileTab: subInfoList is null");
