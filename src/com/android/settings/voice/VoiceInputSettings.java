@@ -146,12 +146,11 @@ public class VoiceInputSettings extends SettingsPreferenceFragment implements
                 // Put the new value back into secure settings.
                 Settings.Secure.putString(getActivity().getContentResolver(),
                         Settings.Secure.VOICE_INTERACTION_SERVICE, key);
-                // Eventually we will require that an interactor always specify a recognizer
-                if (info.settings != null) {
-                    Settings.Secure.putString(getActivity().getContentResolver(),
-                            Settings.Secure.VOICE_RECOGNITION_SERVICE,
-                            info.settings.flattenToShortString());
-                }
+                Settings.Secure.putString(getActivity().getContentResolver(),
+                        Settings.Secure.VOICE_RECOGNITION_SERVICE,
+                        new ComponentName(info.service.packageName,
+                                info.serviceInfo.getRecognitionService())
+                                .flattenToShortString());
                 return;
             }
         }

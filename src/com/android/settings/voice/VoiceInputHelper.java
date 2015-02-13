@@ -136,10 +136,8 @@ public final class VoiceInputHelper {
                 continue;
             }
             mAvailableInteractionInfos.add(new InteractionInfo(mContext.getPackageManager(), info));
-            if (info.getRecognitionService() != null) {
-                interactorRecognizers.add(new ComponentName(resolveInfo.serviceInfo.packageName,
-                        info.getRecognitionService()));
-            }
+            interactorRecognizers.add(new ComponentName(resolveInfo.serviceInfo.packageName,
+                    info.getRecognitionService()));
         }
         Collections.sort(mAvailableInteractionInfos);
 
