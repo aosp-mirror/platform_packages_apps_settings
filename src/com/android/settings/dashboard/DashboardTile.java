@@ -21,7 +21,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.TextUtils;
+
+import java.util.ArrayList;
 
 /**
  * Description of a single dashboard tile that the user can select.
@@ -73,6 +76,11 @@ public class DashboardTile implements Parcelable {
     public int iconRes;
 
     /**
+     * Optional package to pull the icon resource from.
+     */
+    public String iconPkg;
+
+    /**
      * Full class name of the fragment to display when this tile is
      * selected.
      * @attr ref android.R.styleable#PreferenceHeader_fragment
@@ -89,6 +97,11 @@ public class DashboardTile implements Parcelable {
      * Intent to launch when the preference is selected.
      */
     public Intent intent;
+
+    /**
+     * Optional list of user handles which the intent should be launched on.
+     */
+    public ArrayList<UserHandle> userHandle = new ArrayList<>();
 
     /**
      * Optional additional data for use by subclasses of the activity
@@ -136,6 +149,7 @@ public class DashboardTile implements Parcelable {
         dest.writeInt(summaryRes);
         TextUtils.writeToParcel(summary, dest, flags);
         dest.writeInt(iconRes);
+        dest.writeString(iconPkg);
         dest.writeString(fragment);
         dest.writeBundle(fragmentArguments);
         if (intent != null) {
@@ -143,6 +157,11 @@ public class DashboardTile implements Parcelable {
             intent.writeToParcel(dest, flags);
         } else {
             dest.writeInt(0);
+        }
+        final int N = userHandle.size();
+        dest.writeInt(N);
+        for (int i = 0; i < N; i++) {
+            dest.writeParcelable(userHandle.get(i), flags);
         }
         dest.writeBundle(extras);
     }
@@ -154,10 +173,15 @@ public class DashboardTile implements Parcelable {
         summaryRes = in.readInt();
         summary = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         iconRes = in.readInt();
+        iconPkg = in.readString();
         fragment = in.readString();
         fragmentArguments = in.readBundle();
         if (in.readInt() != 0) {
             intent = Intent.CREATOR.createFromParcel(in);
+        }
+        final int N = in.readInt();
+        for (int i = 0; i < N; i++) {
+            userHandle.add(UserHandle.CREATOR.createFromParcel(in));
         }
         extras = in.readBundle();
     }

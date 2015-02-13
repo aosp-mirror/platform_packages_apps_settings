@@ -75,7 +75,7 @@ import android.widget.ListView;
 import android.widget.TabWidget;
 
 import com.android.internal.util.UserIcons;
-import com.android.settings.UserSpinnerAdapter.UserDetails;
+import com.android.settings.UserAdapter.UserDetails;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settings.drawable.CircleFramedDrawable;
 
@@ -114,19 +114,19 @@ public final class Utils {
      * Name of the meta-data item that should be set in the AndroidManifest.xml
      * to specify the icon that should be displayed for the preference.
      */
-    private static final String META_DATA_PREFERENCE_ICON = "com.android.settings.icon";
+    public static final String META_DATA_PREFERENCE_ICON = "com.android.settings.icon";
 
     /**
      * Name of the meta-data item that should be set in the AndroidManifest.xml
      * to specify the title that should be displayed for the preference.
      */
-    private static final String META_DATA_PREFERENCE_TITLE = "com.android.settings.title";
+    public static final String META_DATA_PREFERENCE_TITLE = "com.android.settings.title";
 
     /**
      * Name of the meta-data item that should be set in the AndroidManifest.xml
      * to specify the summary text that should be displayed for the preference.
      */
-    private static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
+    public static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
 
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
@@ -198,14 +198,17 @@ public final class Utils {
         if (intent != null) {
             // Find the activity that is in the system image
             PackageManager pm = context.getPackageManager();
-            List<ResolveInfo> list = pm.queryIntentActivities(intent, PackageManager.GET_META_DATA);
+            List<ResolveInfo> list = tile.userHandle.size() != 0
+                    ? pm.queryIntentActivitiesAsUser(intent, PackageManager.GET_META_DATA,
+                            tile.userHandle.get(0).getIdentifier())
+                    : pm.queryIntentActivities(intent, PackageManager.GET_META_DATA);
             int listSize = list.size();
             for (int i = 0; i < listSize; i++) {
                 ResolveInfo resolveInfo = list.get(i);
                 if ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)
                         != 0) {
-                    Drawable icon = null;
-                    String title = null;
+                    int icon = 0;
+                    CharSequence title = null;
                     String summary = null;
 
                     // Get the activity's meta-data
@@ -215,14 +218,18 @@ public final class Utils {
                         Bundle metaData = resolveInfo.activityInfo.metaData;
 
                         if (res != null && metaData != null) {
-                            icon = res.getDrawable(
-                                    metaData.getInt(META_DATA_PREFERENCE_ICON), null);
-                            title = res.getString(metaData.getInt(META_DATA_PREFERENCE_TITLE));
-                            summary = res.getString(metaData.getInt(META_DATA_PREFERENCE_SUMMARY));
+                            if (metaData.containsKey(META_DATA_PREFERENCE_ICON)) {
+                                icon = metaData.getInt(META_DATA_PREFERENCE_ICON);
+                            }
+                            if (metaData.containsKey(META_DATA_PREFERENCE_TITLE)) {
+                                title = res.getString(metaData.getInt(META_DATA_PREFERENCE_TITLE));
+                            }
+                            if (metaData.containsKey(META_DATA_PREFERENCE_SUMMARY)) {
+                                summary = res.getString(
+                                        metaData.getInt(META_DATA_PREFERENCE_SUMMARY));
+                            }
                         }
-                    } catch (NameNotFoundException e) {
-                        // Ignore
-                    } catch (NotFoundException e) {
+                    } catch (NameNotFoundException | NotFoundException e) {
                         // Ignore
                     }
 
@@ -231,10 +238,13 @@ public final class Utils {
                     if (TextUtils.isEmpty(title)) {
                         title = resolveInfo.loadLabel(pm).toString();
                     }
+                    if (icon == 0) {
+                        icon = resolveInfo.activityInfo.icon;
+                    }
 
                     // Set icon, title and summary for the preference
-                    // TODO:
-                    //tile.icon = icon;
+                    tile.iconRes = icon;
+                    tile.iconPkg = resolveInfo.activityInfo.packageName;
                     tile.title = title;
                     tile.summary = summary;
                     // Replace the intent with this specific activity
@@ -728,14 +738,14 @@ public final class Utils {
     }
 
     /**
-     * Creates a {@link UserSpinnerAdapter} if there is more than one profile on the device.
+     * Creates a {@link UserAdapter} if there is more than one profile on the device.
      *
      * <p> The adapter can be used to populate a spinner that switches between the Settings
      * app on the different profiles.
      *
-     * @return a {@link UserSpinnerAdapter} or null if there is only one profile.
+     * @return a {@link UserAdapter} or null if there is only one profile.
      */
-    public static UserSpinnerAdapter createUserSpinnerAdapter(UserManager userManager,
+    public static UserAdapter createUserSpinnerAdapter(UserManager userManager,
             Context context) {
         List<UserHandle> userProfiles = userManager.getUserProfiles();
         if (userProfiles.size() < 2) {
@@ -747,12 +757,17 @@ public final class Utils {
         userProfiles.remove(myUserHandle);
         userProfiles.add(0, myUserHandle);
 
+        return createUserAdapter(userManager, context, userProfiles);
+    }
+
+    public static UserAdapter createUserAdapter(UserManager userManager,
+            Context context, List<UserHandle> userProfiles) {
         ArrayList<UserDetails> userDetails = new ArrayList<UserDetails>(userProfiles.size());
         final int count = userProfiles.size();
         for (int i = 0; i < count; i++) {
             userDetails.add(new UserDetails(userProfiles.get(i), userManager, context));
         }
-        return new UserSpinnerAdapter(context, userDetails);
+        return new UserAdapter(context, userDetails);
     }
 
     /**

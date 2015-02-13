@@ -16,14 +16,16 @@
 
 package com.android.settings.dashboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.settings.ProfileSelectDialog;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -93,7 +95,14 @@ public class DashboardTileView extends FrameLayout implements View.OnClickListen
             Utils.startWithFragment(getContext(), mTile.fragment, mTile.fragmentArguments, null, 0,
                     mTile.titleRes, mTile.getTitle(getResources()));
         } else if (mTile.intent != null) {
-            getContext().startActivity(mTile.intent);
+            int numUserHandles = mTile.userHandle.size();
+            if (numUserHandles > 1) {
+                ProfileSelectDialog.show(((Activity) getContext()).getFragmentManager(), mTile);
+            } else if (numUserHandles == 1) {
+                getContext().startActivityAsUser(mTile.intent, mTile.userHandle.get(0));
+            } else {
+                getContext().startActivity(mTile.intent);
+            }
         }
     }
 }

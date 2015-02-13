@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -49,8 +51,10 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
+import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.util.Xml;
 import android.view.Menu;
@@ -81,9 +85,6 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.notification.OtherSoundSettings;
-import com.android.settings.search.DynamicIndexableContentMonitor;
-import com.android.settings.search.Index;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -96,9 +97,12 @@ import com.android.settings.notification.ConditionProviderSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.NotificationStation;
+import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.search.DynamicIndexableContentMonitor;
+import com.android.settings.search.Index;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
@@ -110,15 +114,15 @@ import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
-import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
 
 public class SettingsActivity extends Activity
         implements PreferenceManager.OnPreferenceTreeClickListener,
@@ -200,6 +204,35 @@ public class SettingsActivity extends Activity
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
     private static final String EMPTY_QUERY = "";
+
+    /**
+     * Settings will search for system activities of this action and add them as a top level
+     * settings tile using the following parameters.
+     *
+     * <p>A category must be specified in the meta-data for the activity named
+     * {@link #EXTRA_CATEGORY_KEY}
+     *
+     * <p>The title may be defined by meta-data named {@link Utils#META_DATA_PREFERENCE_TITLE}
+     * otherwise the label for the activity will be used.
+     *
+     * <p>The icon may be defined by meta-data named {@link Utils#META_DATA_PREFERENCE_ICON}
+     * otherwise the icon for the activity will be used.
+     *
+     * <p>A summary my be defined by meta-data named {@link Utils#META_DATA_PREFERENCE_SUMMARY}
+     */
+    private static final String EXTRA_SETTINGS_ACTION =
+            "com.android.settings.action.EXTRA_SETTINGS";
+
+    /**
+     * The key used to get the category from metadata of activities of action
+     * {@link #EXTRA_SETTINGS_ACTION}
+     * The value must be one of:
+     * <li>com.android.settings.category.wireless</li>
+     * <li>com.android.settings.category.device</li>
+     * <li>com.android.settings.category.personal</li>
+     * <li>com.android.settings.category.system</li>
+     */
+    private static final String EXTRA_CATEGORY_KEY = "com.android.settings.category";
 
     private static boolean sShowNoHomeNotice = false;
 
@@ -1035,6 +1068,17 @@ public class SettingsActivity extends Activity
                         }
                     }
                     sa.recycle();
+                    sa = obtainStyledAttributes(attrs, com.android.internal.R.styleable.Preference);
+                    tv = sa.peekValue(
+                            com.android.internal.R.styleable.Preference_key);
+                    if (tv != null && tv.type == TypedValue.TYPE_STRING) {
+                        if (tv.resourceId != 0) {
+                            category.key = getString(tv.resourceId);
+                        } else {
+                            category.key = tv.string.toString();
+                        }
+                    }
+                    sa.recycle();
 
                     final int innerDepth = parser.getDepth();
                     while ((type=parser.next()) != XmlPullParser.END_DOCUMENT
@@ -1110,6 +1154,8 @@ public class SettingsActivity extends Activity
                                 category.addTile(tile);
                             }
 
+                        } else if (innerNodeName.equals("external-tiles")) {
+                            category.externalIndex = category.getTilesCount();
                         } else {
                             XmlUtils.skipCurrentTag(parser);
                         }
@@ -1231,6 +1277,73 @@ public class SettingsActivity extends Activity
                 n--;
             }
         }
+        addExternalTiles(target);
+    }
+
+    private void addExternalTiles(List<DashboardCategory> target) {
+        Map<Pair<String, String>, DashboardTile> addedCache =
+                new ArrayMap<Pair<String, String>, DashboardTile>();
+        UserManager userManager = UserManager.get(this);
+        for (UserHandle user : userManager.getUserProfiles()) {
+            addExternalTiles(target, user, addedCache);
+        }
+    }
+
+    private void addExternalTiles(List<DashboardCategory> target, UserHandle user,
+            Map<Pair<String, String>, DashboardTile> addedCache) {
+        PackageManager pm = getPackageManager();
+        Intent intent = new Intent(EXTRA_SETTINGS_ACTION);
+        List<ResolveInfo> results = pm.queryIntentActivitiesAsUser(intent,
+                PackageManager.GET_META_DATA, user.getIdentifier());
+        for (ResolveInfo resolved : results) {
+            if (!resolved.system) {
+                // Do not allow any app to add to settings, only system ones.
+                continue;
+            }
+            ActivityInfo activityInfo = resolved.activityInfo;
+            Bundle metaData = activityInfo.metaData;
+            if ((metaData == null) || !metaData.containsKey(EXTRA_CATEGORY_KEY)) {
+                Log.w(LOG_TAG, "Found " + resolved.activityInfo.name + " for action "
+                        + EXTRA_SETTINGS_ACTION + " missing metadata " +
+                        (metaData == null ? "" : EXTRA_CATEGORY_KEY));
+                continue;
+            }
+            String categoryKey = metaData.getString(EXTRA_CATEGORY_KEY);
+            DashboardCategory category = getCategory(target, categoryKey);
+            if (category == null) {
+                Log.w(LOG_TAG, "Activity " + resolved.activityInfo.name + " has unknown "
+                        + "category key " + categoryKey);
+                continue;
+            }
+            Pair<String, String> key = new Pair<String, String>(activityInfo.packageName,
+                    activityInfo.name);
+            DashboardTile tile = addedCache.get(key);
+            if (tile == null) {
+                tile = new DashboardTile();
+                tile.intent = new Intent().setClassName(
+                        activityInfo.packageName, activityInfo.name);
+                Utils.updateTileToSpecificActivityFromMetaDataOrRemove(this, tile);
+
+                if (category.externalIndex == -1) {
+                    // If no location for external tiles has been specified for this category,
+                    // then just put them at the end.
+                    category.addTile(tile);
+                } else {
+                    category.addTile(category.externalIndex, tile);
+                }
+                addedCache.put(key, tile);
+            }
+            tile.userHandle.add(user);
+        }
+    }
+
+    private DashboardCategory getCategory(List<DashboardCategory> target, String categoryKey) {
+        for (DashboardCategory category : target) {
+            if (categoryKey.equals(category.key)) {
+                return category;
+            }
+        }
+        return null;
     }
 
     private boolean updateHomeSettingTiles(DashboardTile tile) {

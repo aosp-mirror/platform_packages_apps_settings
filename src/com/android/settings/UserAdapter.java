@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.database.DataSetObserver;
@@ -27,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
@@ -38,7 +40,7 @@ import java.util.ArrayList;
 /**
  * Adapter for a spinner that shows a list of users.
  */
-public class UserSpinnerAdapter implements SpinnerAdapter {
+public class UserAdapter implements SpinnerAdapter, ListAdapter {
     // TODO: Update UI. See: http://b/16518801
     /** Holder for user details */
     public static class UserDetails {
@@ -73,7 +75,7 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
     private ArrayList<UserDetails> data;
     private final LayoutInflater mInflater;
 
-    public UserSpinnerAdapter(Context context, ArrayList<UserDetails> users) {
+    public UserAdapter(Context context, ArrayList<UserDetails> users) {
         if (users == null) {
             throw new IllegalArgumentException("A list of user details must be provided");
         }
@@ -94,8 +96,18 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
 
         UserDetails user = data.get(position);
         ((ImageView) row.findViewById(android.R.id.icon)).setImageDrawable(user.mIcon);
-        ((TextView) row.findViewById(android.R.id.title)).setText(user.mName);
+        ((TextView) row.findViewById(android.R.id.title)).setText(getTitle(user));
         return row;
+    }
+
+    private int getTitle(UserDetails user) {
+        int userHandle = user.mUserHandle.getIdentifier();
+        if (userHandle == UserHandle.USER_CURRENT
+                || userHandle == ActivityManager.getCurrentUser()) {
+            return R.string.category_personal;
+        } else {
+            return R.string.category_work;
+        }
     }
 
     private View createUser(ViewGroup parent) {
@@ -150,5 +162,15 @@ public class UserSpinnerAdapter implements SpinnerAdapter {
     @Override
     public boolean isEmpty() {
         return data.isEmpty();
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
     }
 }

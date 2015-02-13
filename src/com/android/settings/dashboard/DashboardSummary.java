@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
@@ -148,7 +150,15 @@ public class DashboardSummary extends Fragment {
     private void updateTileView(Context context, Resources res, DashboardTile tile,
             ImageView tileIcon, TextView tileTextView, TextView statusTextView) {
 
-        if (tile.iconRes > 0) {
+        if (!TextUtils.isEmpty(tile.iconPkg)) {
+            try {
+                tileIcon.setImageDrawable(context.getPackageManager()
+                        .getResourcesForApplication(tile.iconPkg).getDrawable(tile.iconRes, null));
+            } catch (NameNotFoundException | Resources.NotFoundException e) {
+                tileIcon.setImageDrawable(null);
+                tileIcon.setBackground(null);
+            }
+        } else if (tile.iconRes > 0) {
             tileIcon.setImageResource(tile.iconRes);
         } else {
             tileIcon.setImageDrawable(null);
