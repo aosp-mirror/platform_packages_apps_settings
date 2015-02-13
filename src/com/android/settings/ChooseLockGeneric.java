@@ -81,10 +81,10 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
         private static final int CONFIRM_EXISTING_REQUEST = 100;
         private static final int ENABLE_ENCRYPTION_REQUEST = 102;
+        private static final int CHOOSE_LOCK_REQUEST = 103;
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
 
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
-        private static final String FINISH_PENDING = "finish_pending";
         private static final String TAG = "ChooseLockGenericFragment";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
         public static final String ENCRYPT_REQUESTED_QUALITY = "encrypt_requested_quality";
@@ -98,7 +98,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private KeyStore mKeyStore;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
-        private boolean mFinishPending = false;
         private int mEncryptionRequestQuality;
         private boolean mEncryptionRequestDisabled;
         private boolean mRequirePassword;
@@ -123,7 +122,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
                 mWaitingForConfirmation = savedInstanceState.getBoolean(WAITING_FOR_CONFIRMATION);
-                mFinishPending = savedInstanceState.getBoolean(FINISH_PENDING);
                 mEncryptionRequestQuality = savedInstanceState.getInt(ENCRYPT_REQUESTED_QUALITY);
                 mEncryptionRequestDisabled = savedInstanceState.getBoolean(
                         ENCRYPT_REQUESTED_DISABLED);
@@ -140,15 +138,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 } else {
                     mWaitingForConfirmation = true;
                 }
-            }
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            if (mFinishPending) {
-                mFinishPending = false;
-                finish();
             }
         }
 
@@ -204,6 +193,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mRequirePassword = data.getBooleanExtra(
                         EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
                 updateUnlockMethodAndFinish(mEncryptionRequestQuality, mEncryptionRequestDisabled);
+            } else if (requestCode == CHOOSE_LOCK_REQUEST) {
+                getActivity().setResult(resultCode, data);
+                finish();
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
@@ -216,7 +208,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             // Saved so we don't force user to re-enter their password if configuration changes
             outState.putBoolean(PASSWORD_CONFIRMED, mPasswordConfirmed);
             outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
-            outState.putBoolean(FINISH_PENDING, mFinishPending);
             outState.putInt(ENCRYPT_REQUESTED_QUALITY, mEncryptionRequestQuality);
             outState.putBoolean(ENCRYPT_REQUESTED_DISABLED, mEncryptionRequestDisabled);
         }
@@ -392,15 +383,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                 final int maxLength = mDPM.getPasswordMaximumLength(quality);
                 Intent intent = getLockPasswordIntent(context, quality, minLength,
                         maxLength, mRequirePassword,  /* confirm credentials */false);
-                mFinishPending = true;
-                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                startActivity(intent);
+                startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
                 Intent intent = getLockPatternIntent(context, mRequirePassword,
                         /* confirm credentials */false);
-                mFinishPending = true;
-                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                startActivity(intent);
+                startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mChooseLockSettingsHelper.utils().clearLock();
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
