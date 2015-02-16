@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"அனுமதி"</string>
     <string name="deny" msgid="6947806159746484865">"நிராகரி"</string>
     <string name="device_info_default" msgid="7847265875578739287">"அறியப்படாத"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"நீங்கள் டெவெலப்பராக மாறுவதற்கு இப்போது <xliff:g id="STEP_COUNT">%1$d</xliff:g> படியே உள்ளது."</item>
-    <item quantity="other" msgid="6722953419953594148">"நீங்கள் டெவெலப்பராக மாறுவதற்கு இப்போது <xliff:g id="STEP_COUNT">%1$d</xliff:g> படிகளே உள்ளன."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> படிகளே உள்ளன.</item>
+      <item quantity="one">டெவெலப்பராவதற்கு இப்போது <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> படியே உள்ளது.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"இப்போது டெவெலப்பராகிவிட்டீர்கள்!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"தேவையில்லை, நீங்கள் ஏற்கனவே ஒரு டெவெலப்பர்."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"வயர்லெஸ் &amp; நெட்வொர்க்குகள்"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"கடவுச்சொல்லில் குறைந்தது ஒரு எழுத்து இருக்க வேண்டும்."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"கடவுச்சொல் குறைந்தது ஒரு இலக்கம் இருக்க வேண்டும்."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"கடவுச்சொல்லில் குறைந்தது ஒரு எழுத்துக்குறி இருக்க வேண்டும்."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"கடவுச்சொல்லில் குறைந்தது 1 எழுத்தாவது இருக்க வேண்டும்."</item>
-    <item quantity="other" msgid="8186027808415585970">"கடவுச்சொல்லில் குறைந்தது %d எழுத்துகளாவது இருக்க வேண்டும்."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"கடவுச்சொல்லில் குறைந்தது 1 சிற்றெழுத்தாவது இருக்க வேண்டும்."</item>
-    <item quantity="other" msgid="2693910942679679225">"கடவுச்சொல்லில் குறைந்தது %d சிற்றெழுத்துகளாவது இருக்க வேண்டும்."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"கடவுச்சொல்லில் குறைந்தது 1 பேரெழுத்து இருக்க வேண்டும்."</item>
-    <item quantity="other" msgid="3030801209112209245">"கடவுச்சொல்லில் குறைந்தது %d பேரெழுத்துகள் இருக்க வேண்டும்."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"கடவுச்சொல்லில் குறைந்தது 1 எண் இலக்கமாவது இருக்க வேண்டும்."</item>
-    <item quantity="other" msgid="4703982391407595924">"கடவுச்சொல்லில் குறைந்தது %d எண் இலக்கங்கள் இருக்க வேண்டும்."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"கடவுச்சொல்லில் குறைந்தது 1 சிறப்பு குறியீடு இருக்க வேண்டும்."</item>
-    <item quantity="other" msgid="1221290525051187757">"கடவுச்சொல்லில் குறைந்தது %d சிறப்பு குறியீடுகள் இருக்க வேண்டும்."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"கடவுச்சொல்லில் குறைந்தது 1 எழுத்து அல்லாத குறி இருக்க வேண்டும்."</item>
-    <item quantity="other" msgid="3952508584649046404">"கடவுச்சொல்லில் குறைந்தது %d எழுத்து அல்லாத குறிகள் இருக்க வேண்டும்."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">கடவுச்சொல்லில் குறைந்தது %d எழுத்துகள் இருக்க வேண்டும்.</item>
+      <item quantity="one">கடவுச்சொல்லில் குறைந்தது 1 எழுத்து இருக்க வேண்டும்.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">கடவுச்சொல்லில் குறைந்தது %d சிற்றெழுத்துகள் இருக்க வேண்டும்.</item>
+      <item quantity="one">கடவுச்சொல்லில் குறைந்தது 1 சிற்றெழுத்து இருக்க வேண்டும்.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">கடவுச்சொல்லில் குறைந்தது %d பேரெழுத்துகள் இருக்க வேண்டும்.</item>
+      <item quantity="one">கடவுச்சொல்லில் குறைந்தது 1 பேரெழுத்து இருக்க வேண்டும்.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">கடவுச்சொல்லில் குறைந்தது %d எண் இலக்கங்கள் இருக்க வேண்டும்.</item>
+      <item quantity="one">கடவுச்சொல்லில் குறைந்தது 1 எண் இலக்கம் இருக்க வேண்டும்.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">கடவுச்சொல்லில் குறைந்தது %d சிறப்பு குறியீடுகள் இருக்க வேண்டும்.</item>
+      <item quantity="one">கடவுச்சொல்லில் குறைந்தது 1 சிறப்பு குறியீடு இருக்க வேண்டும்.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">கடவுச்சொல்லில் குறைந்தது %d எழுத்து அல்லாத குறிகள் இருக்க வேண்டும்.</item>
+      <item quantity="one">கடவுச்சொல்லில் குறைந்தது 1 எழுத்து அல்லாத குறி இருக்க வேண்டும்.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"சாதன நிர்வாகி சமீபத்திய கடவுச்சொல்லைப் பயன்படுத்துவதை அனுமதிக்கமாட்டார்."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"இலக்கங்களை ஏறுவரிசைப்படுத்துவது, இறக்குவரிசைப்படுத்துவது அல்லது மீண்டும் வரிசைப்படுத்துவது தடுக்கப்பட்டுள்ளது"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"சரி"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"விருப்ப சிம் கார்டை மாற்றவா?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"உங்கள் சாதனத்தில் <xliff:g id="NEW_SIM">%1$s</xliff:g> சிம் மட்டுமே உள்ளது. செல்லுலார் தரவு, அழைப்புகள் மற்றும் SMS செய்திகளுக்கு இந்தச் சிம்மைப் பயன்படுத்தவா?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"சிம் பின் குறியீடு தவறானது, உங்கள் சாதனத்தைத் திறக்க, உங்கள் மொபைல் நிறுவனத்தைத் தொடர்புகொள்ள வேண்டும்."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"சிம் பின் குறியீடு தவறானது, உங்கள் சாதனத்தைத் திறக்க, உங்கள் மொபைல் நிறுவனத்தைத் தொடர்புகொள்ளும் முன், மேலும் <xliff:g id="NUMBER">%d</xliff:g> முறை முயற்சிக்கலாம்."</item>
-    <item quantity="other" msgid="77103619544346451">"சிம் பின் குறியீடு தவறானது, மேலும் <xliff:g id="NUMBER">%d</xliff:g> முறை முயற்சிக்கலாம்."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">சிம்மின் பின் குறியீடு தவறானது, உங்களிடம் <xliff:g id="NUMBER_1">%d</xliff:g> முயற்சிகள் மீதமுள்ளன.</item>
+      <item quantity="one">சிம்மின் பின் குறியீடு தவறானது, மேலும் <xliff:g id="NUMBER_0">%d</xliff:g> முயற்சிக்குப் பின்னர், சாதனத்தைத் திறக்க, கண்டிப்பாக உங்கள் மொபைல் நிறுவனத்தைத் தொடர்புகொள்ள வேண்டும்.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"சிம் பின் செயல்பாடு தோல்வி!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"டேப்லெட் நிலை"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"மொபைலின் நிலை"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"செயல்முறைப் புள்ளிவிவரங்கள்"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"இயங்கும் செயல்முறைகள் குறித்த ஜிகி புள்ளிவிவரங்கள்"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"நினைவகப் பயன்பாடு"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> நேரத்தில் <xliff:g id="TOTALRAM">%2$s</xliff:g> இல் <xliff:g id="USEDRAM">%1$s</xliff:g> பயன்படுத்தப்பட்டது"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"பின்புலம்"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"முன்புலம்"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"தற்காலிகச் சேமிப்பு"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"அதிர்வு"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"அறிவிப்பு அணுகல்"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"பயன்பாடுகளால் அறிவிப்புகளைப் படிக்க முடியாது"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d பயன்பாடு அறிவிப்புகளைப் படிக்கலாம்"</item>
-    <item quantity="other" msgid="980049191810249052">"%d பயன்பாடுகள் அறிவிப்புகளைப் படிக்கலாம்"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d பயன்பாடுகள் அறிவிப்புகளைப் படிக்கலாம்</item>
+      <item quantity="one">%d பயன்பாடு அறிவிப்புகளைப் படிக்கலாம்</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"அறிவிப்பு கவனிப்பான்கள் எதுவும் நிறுவப்படவில்லை."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> ஐ இயக்கவா?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"முறைமை அல்லது நிறுவப்பட்ட எந்தப் பயன்பாட்டின் மூலமும் இடுகையிடப்பட்ட எல்லா அறிவிப்புகளையும் <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ஆல் படிக்க முடியும், இதில் தொடர்பு பெயர்கள் மற்றும் உங்களுக்கு அனுப்பிய செய்திகளின் உரை போன்ற தனிப்பட்டத் தகவலும் உள்ளடங்கலாம். மேலும் இது, அறிவிப்புகளையும் அல்லது அதில் உள்ள தொடு செயல் பொத்தான்களையும் நிராகரிக்கலாம்."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"நிபந்தனை வழங்குநர்கள்"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"பயன்பாடுகள் எதுவும் நிபந்தனைகளை வழங்கவில்லை"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d பயன்பாடு நிபந்தனைகளை வழங்குகிறது"</item>
-    <item quantity="other" msgid="358057362115673258">"%d பயன்பாடுகள் நிபந்தனைகளை வழங்குகின்றன"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d பயன்பாடுகள் நிபந்தனைகளை வழங்குகின்றன</item>
+      <item quantity="one">%d பயன்பாடு நிபந்தனைகளை வழங்குகிறது</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"நிபந்தனை வழங்குநர்கள் எதுவும் நிறுவப்படவில்லை."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> ஐ இயக்கவா?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"தொந்தரவு செய்யாதே பயன்முறையில், <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> ஆல் முடிவு நிலைகளைச் சேர்க்க முடியும்."</string>

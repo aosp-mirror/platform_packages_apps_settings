@@ -22,10 +22,11 @@
     <string name="allow" msgid="3349662621170855910">"Дозволи"</string>
     <string name="deny" msgid="6947806159746484865">"Одбиј"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Непознато"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Треба да обавите још <xliff:g id="STEP_COUNT">%1$d</xliff:g> корак да бисте постали програмер."</item>
-    <item quantity="other" msgid="6722953419953594148">"Треба да обавите још <xliff:g id="STEP_COUNT">%1$d</xliff:g> корака да бисте постали програмер."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">Треба да обавите још <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> корак да бисте постали програмер.</item>
+      <item quantity="few">Треба да обавите још <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> корака да бисте постали програмер.</item>
+      <item quantity="other">Треба да обавите још <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> корака да бисте постали програмер.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Постали сте програмер!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Нема потребе, већ сте програмер."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Бежична веза и мреже"</string>
@@ -423,30 +424,36 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Лозинка мора да садржи најмање једно слово."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Лозинка мора да садржи најмање једну цифру."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Лозинка мора да садржи најмање један симбол."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Лозинка мора да садржи најмање 1 слово."</item>
-    <item quantity="other" msgid="8186027808415585970">"Лозинка мора да садржи најмање %d слова."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Лозинка мора да садржи најмање 1 мало слово."</item>
-    <item quantity="other" msgid="2693910942679679225">"Лозинка мора да садржи најмање %d мала(их) слова."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Лозинка мора да садржи најмање 1 велико слово."</item>
-    <item quantity="other" msgid="3030801209112209245">"Лозинка мора да садржи најмање %d велика(их) слова."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Лозинка мора да садржи најмање 1 цифру."</item>
-    <item quantity="other" msgid="4703982391407595924">"Лозинка мора да садржи најмање %d цифре(ара)."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Лозинка мора да садржи најмање 1 посебан симбол."</item>
-    <item quantity="other" msgid="1221290525051187757">"Лозинка мора да садржи најмање %d посебна(их) симбола."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Лозинка мора да садржи најмање 1 знак који није слово."</item>
-    <item quantity="other" msgid="3952508584649046404">"Лозинка мора да садржи најмање %d знак(ов)а који нису слова."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">Лозинка мора да садржи најмање %d слово.</item>
+      <item quantity="few">Лозинка мора да садржи најмање %d слова.</item>
+      <item quantity="other">Лозинка мора да садржи најмање %d слова.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">Лозинка мора да садржи најмање %d мало слово.</item>
+      <item quantity="few">Лозинка мора да садржи најмање %d мала слова.</item>
+      <item quantity="other">Лозинка мора да садржи најмање %d малих слова.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">Лозинка мора да садржи најмање %d велико слово.</item>
+      <item quantity="few">Лозинка мора да садржи најмање %d велика слова.</item>
+      <item quantity="other">Лозинка мора да садржи најмање %d великих слова.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">Лозинка мора да садржи најмање %d цифру.</item>
+      <item quantity="few">Лозинка мора да садржи најмање %d цифре.</item>
+      <item quantity="other">Лозинка мора да садржи најмање %d цифара.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">Лозинка мора да садржи најмање %d специјалан симбол.</item>
+      <item quantity="few">Лозинка мора да садржи најмање %d специјална симбола.</item>
+      <item quantity="other">Лозинка мора да садржи најмање %d специјалних симбола.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">Лозинка мора да садржи најмање %d знак који није слово.</item>
+      <item quantity="few">Лозинка мора да садржи најмање %d знака који нису слова.</item>
+      <item quantity="other">Лозинка мора да садржи најмање %d знакова који нису слова.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Администратор уређаја не дозвољава употребу недавно коришћене лозинке."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Растући, опадајући или поновљени низ цифара је забрањен"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Потврди"</string>
@@ -853,10 +860,11 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Ажурирати жељени SIM?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> је једина SIM картица у уређају. Да ли желите да користите ову SIM картицу за мобилне податке, позиве и SMS-ове?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Нетачан SIM PIN кôд. Сада морате да контактирате мобилног оператера да бисте откључали уређај."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Нетачан SIM PIN кôд. Имате још <xliff:g id="NUMBER">%d</xliff:g> покушај, а онда морате да контактирате мобилног оператера да бисте откључали уређај."</item>
-    <item quantity="other" msgid="77103619544346451">"Нетачан SIM PIN кôд. Имате још <xliff:g id="NUMBER">%d</xliff:g> покушаја."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">Нетачан SIM PIN кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушај.</item>
+      <item quantity="few">Нетачан SIM PIN кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушаја.</item>
+      <item quantity="other">Нетачан SIM PIN кôд. Имате још <xliff:g id="NUMBER_1">%d</xliff:g> покушаја.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Радња са SIM PIN кодом није успела!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Статус таблета"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Статус телефона"</string>
@@ -1682,8 +1690,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Статистика процеса"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Штреберска статистика о активним процесима"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Искоришћеност меморије"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> од <xliff:g id="TOTALRAM">%2$s</xliff:g> је употребљено током <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"У позадини"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"У првом плану"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Кеширано"</string>
@@ -2403,19 +2410,21 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Вибрација"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Приступ обавештењима"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Апликације не могу да читају обавештења"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d апликација може да чита обавештења"</item>
-    <item quantity="other" msgid="980049191810249052">"Апликације (%d) могу да читају обавештења"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d апликација може да чита обавештења</item>
+      <item quantity="few">%d апликације могу да читају обавештења</item>
+      <item quantity="other">%d апликација може да чита обавештења</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Нема инсталираних монитора обавештења."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Желите ли да омогућите <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ће моћи да чита сва обавештења која поставља систем или било која инсталирана апликација, што може да обухвата личне податке као што су имена контаката и текстови порука које примате. Такође ће моћи да одбацује ова обавештења или додирује дугмад за радње у оквиру њих."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Добављачи услова"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Ниједна апликација не пружа услове"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d апликација пружа услове"</item>
-    <item quantity="other" msgid="358057362115673258">"%d апликације(а) пружају услове"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">%d апликација пружа услове</item>
+      <item quantity="few">%d апликације пружају услове</item>
+      <item quantity="other">%d апликација пружа услове</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Ниједан добављач услова није инсталиран."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Желите ли да омогућите <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> ће моћи да додаје услове за излаз режиму Не узнемиравај."</string>

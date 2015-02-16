@@ -22,10 +22,11 @@
     <string name="allow" msgid="3349662621170855910">"Atļaut"</string>
     <string name="deny" msgid="6947806159746484865">"Aizliegt"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nezināms"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Lai jūs kļūtu par izstrādātāju, atlikusi <xliff:g id="STEP_COUNT">%1$d</xliff:g> darbība."</item>
-    <item quantity="other" msgid="6722953419953594148">"Lai jūs kļūtu par izstrādātāju, atlikušas <xliff:g id="STEP_COUNT">%1$d</xliff:g> darbības."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="zero">Lai jūs kļūtu par izstrādātāju, atlikušas <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> darbības.</item>
+      <item quantity="one">Lai jūs kļūtu par izstrādātāju, atlikusi <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> darbība.</item>
+      <item quantity="other">Lai jūs kļūtu par izstrādātāju, atlikušas <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> darbības.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Tagad jūs esat izstrādātājs!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nav nepieciešams, ja jau esat izstrādātājs."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Bezvadu pakalpojums un tīkli"</string>
@@ -423,30 +424,36 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Parolē ir jābūt vismaz vienam burtam."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Parolē ir jābūt vismaz vienam ciparam."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Parolē ir jābūt vismaz vienam simbolam."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Parolē ir jābūt vismaz 1 burtam."</item>
-    <item quantity="other" msgid="8186027808415585970">"Parolē ir jābūt vismaz %d burtiem."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Parolē ir jābūt vismaz 1 mazajam burtam."</item>
-    <item quantity="other" msgid="2693910942679679225">"Parolē ir jābūt vismaz %d mazajiem burtiem."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Parolē ir jābūt vismaz 1 lielajam burtam."</item>
-    <item quantity="other" msgid="3030801209112209245">"Parolē ir jābūt vismaz %d lielajiem burtiem."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Parolē ir jābūt vismaz 1 ciparam."</item>
-    <item quantity="other" msgid="4703982391407595924">"Parolē ir jābūt vismaz %d cipariem."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Parolē ir jābūt vismaz 1 īpašajam simbolam."</item>
-    <item quantity="other" msgid="1221290525051187757">"Parolē ir jābūt vismaz %d īpašajiem simboliem."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Parolē ir jābūt vismaz 1 rakstzīmei, kas nav burts."</item>
-    <item quantity="other" msgid="3952508584649046404">"Parolē ir jābūt vismaz %d rakstzīmēm, kas nav burti."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="zero">Parolē ir jābūt vismaz %d burtiem.</item>
+      <item quantity="one">Parolē ir jābūt vismaz %d burtam.</item>
+      <item quantity="other">Parolē ir jābūt vismaz %d burtiem.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="zero">Parolē ir jābūt vismaz %d mazajiem burtiem.</item>
+      <item quantity="one">Parolē ir jābūt vismaz %d mazajam burtam.</item>
+      <item quantity="other">Parolē ir jābūt vismaz %d mazajiem burtiem..</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="zero">Parolē ir jābūt vismaz %d lielajiem burtiem.</item>
+      <item quantity="one">Parolē ir jābūt vismaz %d lielajam burtam.</item>
+      <item quantity="other">Parolē ir jābūt vismaz %d lielajiem burtiem.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="zero">Parolē ir jābūt vismaz %d cipariem.</item>
+      <item quantity="one">Parolē ir jābūt vismaz %d ciparam.</item>
+      <item quantity="other">Parolē ir jābūt vismaz %d cipariem.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="zero">Parolē ir jābūt vismaz %d speciālajiem simboliem.</item>
+      <item quantity="one">Parolē ir jābūt vismaz %d speciālajam simbolam.</item>
+      <item quantity="other">Parolē ir jābūt vismaz %d speciālajiem simboliem.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="zero">Parolē ir jābūt vismaz %d rakstzīmēm, kas nav burti.</item>
+      <item quantity="one">Parolē ir jābūt vismaz %d rakstzīmei, kas nav burti.</item>
+      <item quantity="other">Parolē ir jābūt vismaz %d rakstzīmēm, kas nav burti.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Ierīces administrators neļauj izmantot nesen izveidotu paroli."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Augoša, dilstoša vai atkārtota ciparu secība nav atļauta."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Labi"</string>
@@ -853,10 +860,11 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Vai atjaunināt izvēlēto SIM?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ir vienīgā SIM karte jūsu ierīcē. Vai vēlaties izmantot šo SIM karti mobilajiem datiem, zvaniem un īsziņām?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Nepareizs SIM kartes PIN kods. Lai atbloķētu ierīci, sazinieties ar mobilo sakaru operatoru."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Nepareizs SIM kartes PIN kods. Varat mēģināt vēl <xliff:g id="NUMBER">%d</xliff:g> reizi. Kļūdas gadījumā būs jāsazinās ar mobilo sakaru operatoru, lai tas atbloķētu jūsu ierīci."</item>
-    <item quantity="other" msgid="77103619544346451">"Nepareizs SIM kartes PIN kods. Varat mēģināt vēl <xliff:g id="NUMBER">%d</xliff:g> reizi(-es)."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="zero">Nepareizs SIM kartes PIN kods. Varat mēģināt vēl <xliff:g id="NUMBER_1">%d</xliff:g> reizes.</item>
+      <item quantity="one">Nepareizs SIM kartes PIN kods. Varat mēģināt vēl <xliff:g id="NUMBER_1">%d</xliff:g> reizi.</item>
+      <item quantity="other">Nepareizs SIM kartes PIN kods. Varat mēģināt vēl <xliff:g id="NUMBER_1">%d</xliff:g> reizes.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM kartes PIN koda ievadīšana neizdevās."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Planšetdatora statuss"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Tālruņa statuss"</string>
@@ -1682,8 +1690,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Procesu statistika"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistika par darbības procesiem"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Atmiņas lietojums"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"Izmantots <xliff:g id="USEDRAM">%1$s</xliff:g> no <xliff:g id="TOTALRAM">%2$s</xliff:g> šādā periodā: <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Fons"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Priekšplāns"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Saglabāts kešatmiņā"</string>
@@ -2403,19 +2410,21 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrozvans"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Piekļuve paziņojumiem"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Lietotnēs nevar lasīt paziņojumus."</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d lietotnē var lasīt paziņojumus."</item>
-    <item quantity="other" msgid="980049191810249052">"%d lietotnēs var lasīt paziņojumus."</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="zero">%d lietotnēs var lasīt paziņojumus</item>
+      <item quantity="one">%d lietotnē var lasīt paziņojumus</item>
+      <item quantity="other">%d lietotnē var lasīt paziņojumus</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Nav instalēts neviens paziņojumu uztvērējs."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Vai iespējot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Uztvērējs <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, ko publicējusi sistēma vai jebkura instalētā lietotne. Šajos paziņojumos var būt ietverta personas informācija, piemēram, kontaktpersonu vārdi un saņemtās īsziņas. Šis uztvērējs arī varēs paslēpt šos paziņojumus un pieskarties paziņojumos esošajām darbību pogām."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Nosacījumu sniedzēji"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Nosacījumi nav sniegti nevienā lietotnē"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"Nosacījumi sniegti %d lietotnē"</item>
-    <item quantity="other" msgid="358057362115673258">"Nosacījumi sniegti %d lietotnēs"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="zero">Nosacījumi sniegti %d lietotnēs</item>
+      <item quantity="one">Nosacījumi sniegti %d lietotnē</item>
+      <item quantity="other">Nosacījumi sniegti %d lietotnēs</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Nav instalēts neviens nosacījumu sniedzējs."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Vai iespējot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> varēs pievienot iziešanas nosacījumus režīmā “Netraucēt”."</string>

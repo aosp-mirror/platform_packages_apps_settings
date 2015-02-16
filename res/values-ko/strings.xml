@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"허용"</string>
     <string name="deny" msgid="6947806159746484865">"거부"</string>
     <string name="device_info_default" msgid="7847265875578739287">"알 수 없음"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"개발자가 되려면 <xliff:g id="STEP_COUNT">%1$d</xliff:g>단계가 남았습니다."</item>
-    <item quantity="other" msgid="6722953419953594148">"개발자가 되려면 <xliff:g id="STEP_COUNT">%1$d</xliff:g>단계가 남았습니다."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g>단계만 더 완료하면 개발자가 될 수 있습니다.</item>
+      <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g>단계만 더 완료하면 개발자가 될 수 있습니다.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"개발자가 되셨습니다."</string>
     <string name="show_dev_already" msgid="2151632240145446227">"이미 개발자입니다."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"무선 및 네트워크"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"비밀번호에는 적어도 하나의 문자가 포함되어야 합니다."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"비밀번호에는 적어도 하나의 숫자가 포함되어야 합니다."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"비밀번호에는 적어도 하나의 기호가 포함되어야 합니다."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"비밀번호에는 적어도 하나의 문자가 포함되어야 합니다."</item>
-    <item quantity="other" msgid="8186027808415585970">"비밀번호에는 적어도 %d개의 문자가 포함되어야 합니다."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"비밀번호에는 적어도 하나의 소문자가 포함되어야 합니다."</item>
-    <item quantity="other" msgid="2693910942679679225">"비밀번호에는 적어도 %d개의 소문자가 포함되어야 합니다."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"비밀번호에는 적어도 하나의 대문자가 포함되어야 합니다."</item>
-    <item quantity="other" msgid="3030801209112209245">"비밀번호에는 적어도 %d개의 대문자가 포함되어야 합니다."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"비밀번호에는 적어도 하나의 숫자가 포함되어야 합니다."</item>
-    <item quantity="other" msgid="4703982391407595924">"비밀번호에는 적어도 %d개의 숫자가 포함되어야 합니다."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"비밀번호에는 적어도 하나의 특수 기호가 포함되어야 합니다."</item>
-    <item quantity="other" msgid="1221290525051187757">"비밀번호에는 적어도 %d개의 특수 기호가 포함되어야 합니다."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"비밀번호에는 글자가 아닌 문자가 한 개 이상 포함되어야 합니다."</item>
-    <item quantity="other" msgid="3952508584649046404">"비밀번호에는 적어도 %d개 이상의 글자가 아닌 문자가 포함되어야 합니다."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">비밀번호에는 문자가 %d자 이상 포함되어야 합니다.</item>
+      <item quantity="one">비밀번호에는 문자가 1자 이상 포함되어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">비밀번호에는 소문자가 %d자 이상 포함되어야 합니다.</item>
+      <item quantity="one">비밀번호에는 소문자가 1자 이상 포함되어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">비밀번호에는 대문자가 %d자 이상 포함되어야 합니다.</item>
+      <item quantity="one">비밀번호에는 대문자가 1자 이상 포함되어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">비밀번호에는 숫자가 %d개 이상 포함되어야 합니다.</item>
+      <item quantity="one">비밀번호에는 숫자가 1개 이상 포함되어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">비밀번호에는 특수 기호가 %d개 이상 포함되어야 합니다.</item>
+      <item quantity="one">비밀번호에는 특수 기호가 1개 이상 포함되어야 합니다.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">비밀번호에는 글자가 아닌 문자가 %d개 이상 포함되어야 합니다.</item>
+      <item quantity="one">비밀번호에는 글자가 아닌 문자가 1개 이상 포함되어야 합니다.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"기기 관리자가 최근 비밀번호 사용을 허용하지 않습니다."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"오름차순, 내림차순 또는 숫자의 반복된 순서는 금지됨"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"확인"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"기본 SIM 카드 업데이트"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g>은(는) 기기에 있는 유일한 SIM입니다. 이 SIM을 모바일 데이터, 통화, SMS 메시지에 사용하시겠습니까?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM PIN 코드가 잘못되었습니다. 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER">%d</xliff:g>회 이상 실패할 경우 이동통신사에 문의하여 기기를 잠금 해제해야 합니다."</item>
-    <item quantity="other" msgid="77103619544346451">"SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER">%d</xliff:g>번의 기회가 남았습니다."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER_1">%d</xliff:g>번 더 시도할 수 있습니다.</item>
+      <item quantity="one">SIM PIN 코드가 잘못되었습니다. <xliff:g id="NUMBER_0">%d</xliff:g>번 더 실패하면 이동통신사에 문의하여 기기를 잠금 해제해야 합니다.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM PIN 작업이 실패했습니다."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"태블릿 상태"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"휴대전화 상태"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"프로세스 실행에 관한 통계"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"메모리 사용량"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> 동안 <xliff:g id="USEDRAM">%1$s</xliff:g>/<xliff:g id="TOTALRAM">%2$s</xliff:g> 사용"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"백그라운드"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"포그라운드"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"캐시된 프로세스"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"진동"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"알림 액세스"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"앱에서 알림을 읽을 수 없습니다."</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d개의 앱이 알림을 읽을 수 있습니다."</item>
-    <item quantity="other" msgid="980049191810249052">"%d개의 앱이 알림을 읽을 수 있습니다."</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d개 앱이 알림을 읽을 수 있습니다.</item>
+      <item quantity="one">%d개 앱이 알림을 읽을 수 있습니다.</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"알림 수신기가 설치되지 않았습니다."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하시겠습니까?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>이(가) 시스템 또는 설치된 앱이 게시하는 모든 알림(연락처 이름 및 수신된 이메일 텍스트와 같은 개인정보가 포함될 수 있음)을 읽을 수 있습니다. 또한 이러한 알림을 닫거나 알림 내에 있는 작업 버튼을 터치할 수도 있습니다."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"조건 제공자"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"조건을 제공하는 앱이 없음"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d개의 앱이 조건을 제공"</item>
-    <item quantity="other" msgid="358057362115673258">"%d개의 앱이 조건을 제공"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d개 앱에서 조건을 제공합니다.</item>
+      <item quantity="one">%d개 앱에서 조건을 제공합니다.</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"조건 제공자가 설치되지 않았습니다."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하도록 설정하시겠습니까?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>은(는) 알림 일시중지 모드에 종료 조건을 추가할 수 있습니다."</string>

@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"允许"</string>
     <string name="deny" msgid="6947806159746484865">"拒绝"</string>
     <string name="device_info_default" msgid="7847265875578739287">"未知"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"只需 <xliff:g id="STEP_COUNT">%1$d</xliff:g> 步操作即可进入开发者模式。"</item>
-    <item quantity="other" msgid="6722953419953594148">"只需 <xliff:g id="STEP_COUNT">%1$d</xliff:g> 步操作即可进入开发者模式。"</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">现在只需再执行 <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 步操作即可进入开发者模式。</item>
+      <item quantity="one">现在只需再执行 <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 步操作即可进入开发者模式。</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"您现在处于开发者模式！"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"您已处于开发者模式，无需进行此操作。"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"无线和网络"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"密码必须包含至少 1 个字母。"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"密码必须包含至少 1 个数字。"</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"密码必须包含至少 1 个符号。"</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"密码必须包含至少 1 个字母。"</item>
-    <item quantity="other" msgid="8186027808415585970">"密码必须包含至少 %d 个字母。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"密码必须包含至少 1 个小写字母。"</item>
-    <item quantity="other" msgid="2693910942679679225">"密码必须包含至少 %d 个小写字母。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"密码必须包含至少 1 个大写字母。"</item>
-    <item quantity="other" msgid="3030801209112209245">"密码必须包含至少 %d 个大写字母。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"密码必须包含至少 1 个数字。"</item>
-    <item quantity="other" msgid="4703982391407595924">"密码必须包含至少 %d 个数字。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"密码必须包含至少 1 个特殊符号。"</item>
-    <item quantity="other" msgid="1221290525051187757">"密码必须包含至少 %d 个特殊符号。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"密码至少应包含1个非字母字符。"</item>
-    <item quantity="other" msgid="3952508584649046404">"密码至少应包含%d个非字母字符。"</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">密码应至少包含 %d 个字母。</item>
+      <item quantity="one">密码应至少包含 1 个字母。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">密码应至少包含 %d 个小写字母。</item>
+      <item quantity="one">密码应至少包含 1 个小写字母。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">密码应至少包含 %d 个大写字母。</item>
+      <item quantity="one">密码应至少包含 1 个大写字母。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">密码应至少包含 %d 个数字。</item>
+      <item quantity="one">密码应至少包含 1 个数字。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">密码应至少包含 %d 个特殊符号。</item>
+      <item quantity="one">密码应至少包含 1 个特殊符号。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">密码应至少包含 %d 个非字母字符。</item>
+      <item quantity="one">密码应至少包含 1 个非字母字符。</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"设备管理器不允许使用最近用过的密码。"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"禁止使用以升序、降序或重复序列进行排列的一串数字"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"要更新首选 SIM 卡吗？"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g>是此设备上唯一的 SIM 卡。您想将此 SIM 卡用于连接移动数据网络、通话或发送短信吗？"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM卡PIN码不正确，您现在必须联系运营商为您解锁设备。"</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"SIM卡PIN码不正确，您还有<xliff:g id="NUMBER">%d</xliff:g>次尝试机会。如果仍然失败，则必须联系运营商帮您解锁设备。"</item>
-    <item quantity="other" msgid="77103619544346451">"SIM卡PIN码不正确，您还有<xliff:g id="NUMBER">%d</xliff:g>次尝试机会。"</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">SIM 卡 PIN 码不正确，您还可尝试 <xliff:g id="NUMBER_1">%d</xliff:g> 次。</item>
+      <item quantity="one">SIM 卡 PIN 码不正确，您还可尝试 <xliff:g id="NUMBER_0">%d</xliff:g> 次。如果仍不正确，则需要联系运营商帮您解锁设备。</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM卡PIN码操作失败！"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"平板电脑状态"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"手机状态"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"进程统计信息"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"运行中进程的相关技术统计信息"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"内存用量"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"过去 <xliff:g id="TIMEDURATION">%3$s</xliff:g>内使用了 <xliff:g id="USEDRAM">%1$s</xliff:g>（共 <xliff:g id="TOTALRAM">%2$s</xliff:g>）"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"后台"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"前台"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"缓存"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"振动"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知使用权"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"应用无法读取通知"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d个应用可以读取通知"</item>
-    <item quantity="other" msgid="980049191810249052">"%d个应用可以读取通知"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d 个应用可以读取通知</item>
+      <item quantity="one">%d 个应用可以读取通知</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"未安装任何通知侦听器。"</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予此权限吗？"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将可读取系统或任何已安装的应用发布的任何通知（可能包括联系人姓名和别人发送给您的消息等个人信息），还可关闭这些通知或触摸其中的操作按钮。"</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"条件提供程序"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"没有任何应用可提供条件"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d个应用可提供条件"</item>
-    <item quantity="other" msgid="358057362115673258">"%d个应用可提供条件"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d 个应用可提供条件</item>
+      <item quantity="one">%d 个应用可提供条件</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"未安装任何条件提供程序。"</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"要启用<xliff:g id="SERVICE">%1$s</xliff:g>吗？"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"“<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>”将可为勿扰模式添加退出条件。"</string>

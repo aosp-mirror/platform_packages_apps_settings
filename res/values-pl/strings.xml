@@ -22,10 +22,12 @@
     <string name="allow" msgid="3349662621170855910">"Zezwól"</string>
     <string name="deny" msgid="6947806159746484865">"Odmów"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Nieznane"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT">%1$d</xliff:g> krok."</item>
-    <item quantity="other" msgid="6722953419953594148">"Od zostania programistą dzieli Cię już tylko tyle kroków: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="few">Od zostania programistą dzielą Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroki.</item>
+      <item quantity="many">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroków.</item>
+      <item quantity="other">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroku.</item>
+      <item quantity="one">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> krok.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Jesteś teraz programistą!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"W porządku, już jesteś programistą."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Sieci zwykłe i bezprzewodowe"</string>
@@ -312,7 +314,7 @@
     <string name="date_time_auto" msgid="7076906458515908345">"Automatyczna data i czas"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Użyj czasu podanego przez sieć"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Użyj czasu podanego przez sieć"</string>
-    <string name="zone_auto" msgid="334783869352026648">"Auto strefa czasowa"</string>
+    <string name="zone_auto" msgid="334783869352026648">"Automatyczna strefa czasowa"</string>
     <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Użyj strefy czasowej podanej przez sieć"</string>
     <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Użyj strefy czasowej podanej przez sieć"</string>
     <string name="date_time_24hour_title" msgid="3203537578602803850">"Format 24-godzinny"</string>
@@ -423,30 +425,42 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Hasło musi zawierać co najmniej jedną literę."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Hasło musi zawierać co najmniej jedną cyfrę."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Hasło musi zawierać co najmniej jeden symbol."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Hasło musi zawierać co najmniej jedną literę."</item>
-    <item quantity="other" msgid="8186027808415585970">"Hasło musi zawierać litery (co najmniej %d)."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Hasło musi zawierać co najmniej jedną małą literę."</item>
-    <item quantity="other" msgid="2693910942679679225">"Hasło musi zawierać małe litery (co najmniej %d)."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Hasło musi zawierać co najmniej jedną wielką literę."</item>
-    <item quantity="other" msgid="3030801209112209245">"Hasło musi zawierać wielkie litery (co najmniej %d)."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Hasło musi zawierać co najmniej jedną cyfrę."</item>
-    <item quantity="other" msgid="4703982391407595924">"Hasło musi zawierać cyfry (co najmniej %d)."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Hasło musi zawierać co najmniej jeden symbol specjalny."</item>
-    <item quantity="other" msgid="1221290525051187757">"Hasło musi zawierać symbole specjalne (co najmniej %d)."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Hasło musi zawierać co najmniej jeden znak niebędący literą."</item>
-    <item quantity="other" msgid="3952508584649046404">"Hasło musi zawierać znaki inne niż litery (co najmniej %d)."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="few">Hasło musi zawierać co najmniej %d litery.</item>
+      <item quantity="many">Hasło musi zawierać co najmniej %d liter.</item>
+      <item quantity="other">Hasło musi zawierać co najmniej %d litery.</item>
+      <item quantity="one">Hasło musi zawierać co najmniej jedną literę.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="few">Hasło musi zawierać co najmniej %d małe litery.</item>
+      <item quantity="many">Hasło musi zawierać co najmniej %d małych liter.</item>
+      <item quantity="other">Hasło musi zawierać co najmniej %d małej litery.</item>
+      <item quantity="one">Hasło musi zawierać co najmniej jedną małą literę.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="few">Hasło musi zawierać co najmniej %d wielkie litery.</item>
+      <item quantity="many">Hasło musi zawierać co najmniej %d wielkich liter.</item>
+      <item quantity="other">Hasło musi zawierać co najmniej %d wielkiej litery.</item>
+      <item quantity="one">Hasło musi zawierać co najmniej jedną wielką literę.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="few">Hasło musi zawierać co najmniej %d cyfry.</item>
+      <item quantity="many">Hasło musi zawierać co najmniej %d cyfr.</item>
+      <item quantity="other">Hasło musi zawierać co najmniej %d cyfry.</item>
+      <item quantity="one">Hasło musi zawierać co najmniej jedną cyfrę.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="few">Hasło musi zawierać co najmniej %d symbole specjalne.</item>
+      <item quantity="many">Hasło musi zawierać co najmniej %d symboli specjalnych.</item>
+      <item quantity="other">Hasło musi zawierać co najmniej %d symbolu specjalnego.</item>
+      <item quantity="one">Hasło musi zawierać co najmniej jeden symbol specjalny.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="few">Hasło musi zawierać co najmniej %d znaki niebędące literą.</item>
+      <item quantity="many">Hasło musi zawierać co najmniej %d znaków niebędących literą.</item>
+      <item quantity="other">Hasło musi zawierać co najmniej %d znaku niebędącego literą.</item>
+      <item quantity="one">Hasło musi zawierać co najmniej jeden znak niebędący literą.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Administrator urządzenia nie zezwala na ustawianie niedawno używanego hasła."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Ciąg cyfr rosnących, malejących lub powtarzających się jest niedozwolony"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -553,7 +567,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Dla muzyki i multimediów"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamiętaj ustawienia"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Asystent Wi‑Fi"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Ekran Cast"</string>
+    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Prześlij ekran"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Wyświetlacz bezprzewodowy"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Brak urządzeń w pobliżu."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Łączenie"</string>
@@ -853,10 +867,12 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Zmienić preferowaną kartę SIM?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> to jedyna karta SIM w urządzeniu. Czy chcesz ją wykorzystywać do transmisji danych komórkowych, połączeń i SMS-ów?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Nieprawidłowy kod PIN karty SIM. Musisz teraz skontaktować się z operatorem, by odblokował Twoje urządzenie."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER">%d</xliff:g> próbę, zanim będziesz musiał skontaktować się z operatorem, by odblokował Twoje urządzenie."</item>
-    <item quantity="other" msgid="77103619544346451">"Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER">%d</xliff:g> prób(y)."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="few">Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER_1">%d</xliff:g> próby.</item>
+      <item quantity="many">Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER_1">%d</xliff:g> prób.</item>
+      <item quantity="other">Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER_1">%d</xliff:g> próby.</item>
+      <item quantity="one">Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER_0">%d</xliff:g> próbę, zanim będziesz musiał skontaktować się z operatorem, by odblokować swoje urządzenie.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Operacja z kodem PIN karty SIM nie udała się."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Stan tabletu"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Stan telefonu"</string>
@@ -1682,8 +1698,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statystyki procesów"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Rozbudowane statystyki uruchomionych procesów"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Użycie pamięci"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> z <xliff:g id="TOTALRAM">%2$s</xliff:g> wykorzystane w czasie <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"w tle"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"na pierwszym planie"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"w pamięci podręcznej"</string>
@@ -2403,19 +2418,23 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Wibracje"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Dostęp do powiadomień"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikacje nie mogą odczytywać powiadomień"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d aplikacja może odczytywać powiadomienia"</item>
-    <item quantity="other" msgid="980049191810249052">"Aplikacje, które mogą odczytywać powiadomienia: %d"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="few">%d aplikacje mogą odczytywać powiadomienia</item>
+      <item quantity="many">%d aplikacji może odczytywać powiadomienia</item>
+      <item quantity="other">%d aplikacji może odczytywać powiadomienia</item>
+      <item quantity="one">%d aplikacja może odczytywać powiadomienia</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Brak zainstalowanych odbiorników powiadomień."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Włączyć usługę <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Usługa <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> będzie w stanie odczytywać wszystkie wysyłane przez system lub dowolną zainstalowaną aplikację powiadomienia, które mogą zawierać informacje osobiste, takie jak nazwy kontaktów oraz tekst wiadomości wysłanych do Ciebie. Usługa będzie również mogła odrzucać te powiadomienia lub używać przycisków czynności w ich obrębie."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Dostawcy warunków"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Żadne aplikacje nie dostarczają warunków"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"Warunki dostarcza %d aplikacja"</item>
-    <item quantity="other" msgid="358057362115673258">"Warunki dostarcza kilka aplikacji (%d)"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="few">Warunki dostarczają %d aplikacje</item>
+      <item quantity="many">Warunki dostarcza %d aplikacji</item>
+      <item quantity="other">Warunki dostarcza %d aplikacji</item>
+      <item quantity="one">Warunki dostarcza %d aplikacja</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Brak zainstalowanych dostawców warunków."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Włączyć usługę <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> będzie mieć możliwość dodania warunków zamknięcia do trybu Nie przeszkadzać."</string>

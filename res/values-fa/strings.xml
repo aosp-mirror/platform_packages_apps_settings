@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"اجازه دادن"</string>
     <string name="deny" msgid="6947806159746484865">"ردکردن"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ناشناس"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"شما در حال حاضر، <xliff:g id="STEP_COUNT">%1$d</xliff:g> قدم تا برنامه‌نویس شدن فاصله دارید."</item>
-    <item quantity="other" msgid="6722953419953594148">"شما در حال حاضر، <xliff:g id="STEP_COUNT">%1$d</xliff:g> قدم تا برنامه‌نویس شدن فاصله دارید."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">اکنون <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم با برنامه‌نویس شدن فاصله دارید.</item>
+      <item quantity="other">اکنون <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم با برنامه‌نویس شدن فاصله دارید.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"شما اکنون یک برنامه‌نویس هستید!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"نیازی نیست، شما در حال حاضر یک برنامه‌نویس هستید."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"بی‌سیم و شبکه‌ها"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"گذرواژه باید حداقل دارای یک حرف باشد."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"گذرواژه باید دارای حداقل یک رقم باشد."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"گذرواژه باید دارای حداقل یک نماد باشد."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"گذرواژه باید دارای حداقل 1 حرف باشد."</item>
-    <item quantity="other" msgid="8186027808415585970">"‏گذرواژه باید دارای حداقل %d حرف باشد."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"گذرواژه باید دارای حداقل 1 حرف کوچک باشد."</item>
-    <item quantity="other" msgid="2693910942679679225">"‏گذروازه باید دارای حداقل %d حرف کوچک باشد."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"گذرواژه باید دارای حداقل 1 حرف بزرگ باشد."</item>
-    <item quantity="other" msgid="3030801209112209245">"‏گذرواژه باید دارای حداقل %d حرف بزرگ باشد."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"گذرواژه باید دارای حداقل 1 رقم باشد."</item>
-    <item quantity="other" msgid="4703982391407595924">"‏گذرواژه باید دارای حداقل %d رقم باشد."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"گذرواژه باید دارای حداقل 1 نماد ویژه باشد."</item>
-    <item quantity="other" msgid="1221290525051187757">"‏گذرواژه باید دارای حداقل %d نماد ویژه باشد."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"گذرواژه باید حداقل دارای 1 نویسه غیرحرفی باشد."</item>
-    <item quantity="other" msgid="3952508584649046404">"‏گذرواژه باید دارای حداقل %d نویسه غیرحرفی باشد."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">‏گذرواژه باید دارای حداقل %d حرف باشد.</item>
+      <item quantity="other">‏گذرواژه باید دارای حداقل %d حرف باشد.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">‏ گذرواژه باید دارای حداقل %d حرف کوچک باشد.</item>
+      <item quantity="other">‏ گذرواژه باید دارای حداقل %d حرف کوچک باشد.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">‏گذرواژه باید دارای حداقل %d حرف بزرگ باشد.</item>
+      <item quantity="other">‏گذرواژه باید دارای حداقل %d حرف بزرگ باشد.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">‏گذرواژه باید دارای حداقل %d رقم باشد.</item>
+      <item quantity="other">‏گذرواژه باید دارای حداقل %d رقم باشد.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">‏گذرواژه باید دارای حداقل %d نماد ویژه باشد.</item>
+      <item quantity="other">‏گذرواژه باید دارای حداقل %d نماد ویژه باشد.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">‏گذرواژه باید حداقل دارای %d نویسه غیرحرفی باشد.</item>
+      <item quantity="other">‏گذرواژه باید حداقل دارای %d نویسه غیرحرفی باشد.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"سرپرست دستگاه اجازه استفاده از گذرواژه اخیر را نمی‌دهد."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"ترتیب صعودی، نزولی یا تکراری ارقام ممنوع است"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"تأیید"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"سیم‌کارت ترجیجی به‌روز شود؟"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> تنها سیم‌کارت روی دستگاه شماست. می‌خواهید از این سیم‌کارت برای داده‌های شبکه تلفن همراه، تماس‌ها و پیامک استفاده کنید؟"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"کد پین سیم کارت اشتباه است، اکنون برای گشودن قفل دستگاهتان باید با شرکت مخابراتی تماس بگیرید."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"کد پین سیم کارت اشتباه است، <xliff:g id="NUMBER">%d</xliff:g> بار دیگر می‌توانید تلاش کنید و پس از آن برای گشودن قفل دستگاهتان باید با شرکت مخابراتی تماس بگیرید."</item>
-    <item quantity="other" msgid="77103619544346451">"کد پین سیم کارت اشتباه است، <xliff:g id="NUMBER">%d</xliff:g> بار دیگر می‌توانید تلاش کنید."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">کد پین سیم‌کارت اشتباه است، <xliff:g id="NUMBER_1">%d</xliff:g> بار دیگر می‌توانید تلاش کنید.</item>
+      <item quantity="other">کد پین سیم‌کارت اشتباه است، <xliff:g id="NUMBER_1">%d</xliff:g> بار دیگر می‌توانید تلاش کنید.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"عملیات پین سیم کارت ناموفق بود!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"وضعیت رایانهٔ لوحی"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"وضعیت تلفن"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"آمار فرآیند"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"آمار دقیق برای فرآیندهای در حال اجرا"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"استفاده از حافظه"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> از <xliff:g id="TOTALRAM">%2$s</xliff:g> در طول <xliff:g id="TIMEDURATION">%3$s</xliff:g> استفاده شد"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"پس‌زمینه"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"پیش‌زمینه"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"در حافظه پنهان"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"لرزش"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"دسترسی به اعلان"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"برنامه‌ها نمی‌توانند اعلان‌ها را بخوانند"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"‏%d برنامه می‌تواند اعلان‌ها را بخواند"</item>
-    <item quantity="other" msgid="980049191810249052">"‏%d برنامه‌‌ می‌توانند اعلان‌ها را بخوانند"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">‏%d برنامه می‌تواند اعلان‌ها را بخواند</item>
+      <item quantity="other">‏%d برنامه می‌تواند اعلان‌ها را بخواند</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"هیچ شنونده اعلانی نصب نشده است."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> فعال‌ شود؟"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> می‌تواند تمام اعلان‌های پست شده از طرف سیستم یا هر یک از برنامه‌های نصب شده را بخواند، که ممکن است حاوی اطلاعات شخصی مانند نام مخاطبین و متن پیام‌های ارسال شده به شما باشد. همچنین می‌تواند این اعلان‌ها را رد کند یا امکان لمس دکمه‌های عملکردی موجود در آنها را فراهم کند."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"ارائه‌دهندگان شرایط"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"هیچ برنامه‌ای ارائه‌دهنده شرایط نیست"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"‏برنامه %d ارائه‌دهنده شرایط است"</item>
-    <item quantity="other" msgid="358057362115673258">"‏برنامه‌های %d ارائه‌دهنده شرایط هستند"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">‏%d برنامه ارائه‌دهنده شرایط است</item>
+      <item quantity="other">‏%d برنامه ارائه‌دهنده شرایط هستند</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"هیچ ارائه‌دهنده شرایطی نصب نیست."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> فعال‌ شود؟"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> قادر خواهد بود شرایط خروج را به حالت «مزاحم نشوید» اضافه کند."</string>

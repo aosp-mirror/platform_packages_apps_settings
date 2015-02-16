@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Ruhusu"</string>
     <string name="deny" msgid="6947806159746484865">"Kana"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Haijulikani"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Sasa umebakisha hatua <xliff:g id="STEP_COUNT">%1$d</xliff:g> uwe msanidi programu."</item>
-    <item quantity="other" msgid="6722953419953594148">"Sasa umebakisha hatua <xliff:g id="STEP_COUNT">%1$d</xliff:g> uwe msanidi programu."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">Umebakisha hatua <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ili uwe msanidi programu.</item>
+      <item quantity="one">Umebakisha hatua <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> ili uwe msanidi programu.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Sasa wewe ni msanidi programu!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Hakuna haja, tayari wewe ni msanidi programu."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Isiyotumia waya na mitandao"</string>
@@ -427,18 +427,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Nenosiri lazima liwe na angalau herufi moja."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Nenosiri lazima liwe na angalau tarakimu moja."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Nenosiri lazima liwe na angalau alama moja."</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_letters:other (8186027808415585970) -->
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:other (2693910942679679225) -->
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:other (3030801209112209245) -->
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_numeric:other (4703982391407595924) -->
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_symbols:other (1221290525051187757) -->
-    <!-- String.format failed for translation -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:other (3952508584649046404) -->
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">Nenosiri lazima liwe na angalau herufi %d.</item>
+      <item quantity="one">Nenosiri lazima liwe na angalau herufi moja.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">Nenosiri lazima liwe na angalau herufi %d ndogo.</item>
+      <item quantity="one">Nenosiri lazima liwe na angalau herufi moja ndogo.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">Nenosiri lazima liwe na angalau herufi %d kubwa.</item>
+      <item quantity="one">Nenosiri lazima liwe na angalau herufi moja kubwa.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">Nenosiri lazima liwe na angalau tarakimu % d.</item>
+      <item quantity="one">Nenosiri lazima liwe na angalau tarakimu moja.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">Nenosiri lazima liwe na angalau alama % d maalum.</item>
+      <item quantity="one">Nenosiri lazima liwe na angalau alama 1 maalum.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">Nenosiri lazima liwe na angalau herufi %d ambazo si herufi za alfabeti.</item>
+      <item quantity="one">Nenosiri lazima liwe na angalau herufi moja ambayo si ya alfabeti.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Kidhibiti cha kifaa haruhusu kutumia nenosiri lililotumiwa hivi karibuni."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Mlolongo wa kupanda, kushuka au kujirudia wa tarakakimu hauruhusiwi"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Sawa"</string>
@@ -845,10 +857,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Unataka kubadili SIM kadi?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ndiyo SIM ya pekee katika kifaa chako. Unataka kutumia SIM hii kupata huduma ya data, kupiga simu, na ujumbe wa SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Msimbo wa PIN ya SIM usio sahihi sasa lazima uwasiliane na mtoa huduma wako ili ufungue kifaa chako."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Msimbo wa PIN ya SIM usio sahihi, umesalia na majaribio <xliff:g id="NUMBER">%d</xliff:g> kabla ulazimike kuwasiliana na mtoa huduma wako ili ufungue kifaa chako."</item>
-    <item quantity="other" msgid="77103619544346451">"Msimbo wa PIN ya SIM usio sahihi, umesalia na majaribio <xliff:g id="NUMBER">%d</xliff:g>."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">Msimbo wa PIN ya SIM si sahihi, umebakisha majaribio <xliff:g id="NUMBER_1">%d</xliff:g>.</item>
+      <item quantity="one">Msimbo wa PIN ya SIM si sahihi, umebakisha majaribio <xliff:g id="NUMBER_0">%d</xliff:g> kabla ya kulazimika kuwasiliana na mtoa huduma wako ili afungue kifaa chako.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Utendakazi wa PIN ya SIM umeshindwa!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Hali ya kompyuta kibao"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Hali ya simu"</string>
@@ -1676,8 +1688,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Takwimu za Mchakato"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Takwimu za kitaalamu kuhusu michakato inayoendeshwa"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Kumbukumbu iliyotumika"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> kati ya <xliff:g id="TOTALRAM">%2$s</xliff:g> ilitumika katika kipindi cha <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Ikifanya kazi chinichini"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Ikifanya kazi waziwazi"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Iliyowekwa kwenye akiba"</string>
@@ -2397,19 +2408,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Tetema"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Kufikia arifa"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Programu haziwezi kusoma arifa"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"Programu %d inaweza kusoma arifa"</item>
-    <item quantity="other" msgid="980049191810249052">"Programu %d zinaweza kusoma arifa"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">Programu %d zinaweza kusoma arifa</item>
+      <item quantity="one">Programu %d inaweza kusoma arifa</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Hakuna visikilizaji vya arifa vilivyosakinishwa."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Je, unataka kuwezesha <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> itaweza kusoma arifa zote zilizochapishwa na mfumo au programu yoyote iliyosakinishwa, inayoweza kujumuisha maelezo ya binafsi kama vile majina ya anwani na maandishi ya ujumbe uliotumwa kwako. Pia itaweza kukataa arifa hizi au kugusa vitufe vya kutenda ndani yake."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Vitoa masharti"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Hakuna programu za kutoa masharti"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d programu hutoa masharti"</item>
-    <item quantity="other" msgid="358057362115673258">"%d programu zinatoa masharti"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">Programu %d hutoa masharti</item>
+      <item quantity="one">Programu %d hutoa masharti</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Hakuna vitoa masharti vilivyosanikishwa."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Je, ungependa kuwasha <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> itaweza kuongeza au kuondoa masharti katika hali ya Usinisumbue."</string>

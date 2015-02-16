@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Tillat"</string>
     <string name="deny" msgid="6947806159746484865">"Avslå"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Ukjent"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Du er nå <xliff:g id="STEP_COUNT">%1$d</xliff:g> trinn fra å bli en utvikler."</item>
-    <item quantity="other" msgid="6722953419953594148">"Du er nå <xliff:g id="STEP_COUNT">%1$d</xliff:g> trinn fra å bli en utvikler."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">Nå er du <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> steg fra å bli utvikler.</item>
+      <item quantity="one">Nå er du <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> steg fra å bli utvikler.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Du er nå utvikler!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Det trengs ikke, du er allerede utvikler."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Trådløst og nettverk"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Passordet må inneholde minst én bokstav."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Passordet må inneholde minst ett siffer."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Passordet må inneholde minst ett symbol."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Passordet må inneholde minst én bokstav."</item>
-    <item quantity="other" msgid="8186027808415585970">"Passordet må inneholde minst %d bokstaver"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Passordet må inneholde minst én liten bokstav."</item>
-    <item quantity="other" msgid="2693910942679679225">"Passordet må inneholde minst %d små bokstaver."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Passordet må inneholde minst én stor bokstav."</item>
-    <item quantity="other" msgid="3030801209112209245">"Passordet må inneholde minst %d store bokstaver."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Passordet må inneholde minst ett siffer."</item>
-    <item quantity="other" msgid="4703982391407595924">"Passordet må inneholde minst %d sifre."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Passordet må inneholde minst ett spesialtegn."</item>
-    <item quantity="other" msgid="1221290525051187757">"Passordet må inneholde minst %d spesialtegn."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Passordet må inneholde minst ett tegn som ikke er en bokstav."</item>
-    <item quantity="other" msgid="3952508584649046404">"Passordet må inneholde minst %d tegn som ikke er bokstaver."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">Passordet må inneholde minst %d bokstaver.</item>
+      <item quantity="one">Passordet må inneholde minst én bokstav.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">Passordet må inneholde minst %d små bokstaver.</item>
+      <item quantity="one">Passordet må inneholde minst én liten bokstav.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">Passordet må inneholde minst %d store bokstaver.</item>
+      <item quantity="one">Passordet må inneholde minst én stor bokstav.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">Passordet må inneholde minst %d sifre.</item>
+      <item quantity="one">Passordet må inneholde minst ett siffer.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">Passordet må inneholde minst %d spesialtegn.</item>
+      <item quantity="one">Passordet må inneholde minst ett spesialtegn.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">Passordet må inneholde minst %d tegn som ikke er bokstaver.</item>
+      <item quantity="one">Passordet må inneholde minst ett tegn som ikke er en bokstav.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Enhetsadmin. forbyr nylig brukte passord."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"En stigende, synkende eller gjentatt sekvens av tall er ikke tillat"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Oppdater foretrukket SIM-kort?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> er det eneste SIM-kortet i enheten din. Vil du bruke dette SIM-kortet for mobildata, telefonanrop og SMS-meldinger?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Feil PIN-kode for SIM-kortet. Du må nå kontakte operatøren din for å låse opp enheten."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Feil PIN-kode for SIM-kortet. Du har <xliff:g id="NUMBER">%d</xliff:g> forsøk igjen før du må kontakte operatøren din for å låse opp enheten."</item>
-    <item quantity="other" msgid="77103619544346451">"Feil PIN-kode for SIM-kortet. Du har <xliff:g id="NUMBER">%d</xliff:g> forsøk igjen."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">Feil PIN-kode for SIM-kortet. Du har <xliff:g id="NUMBER_1">%d</xliff:g> forsøk igjen.</item>
+      <item quantity="one">Feil PIN-kode for SIM-kortet. Du har <xliff:g id="NUMBER_0">%d</xliff:g> forsøk igjen før du må kontakte operatøren din for å låse opp enheten.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"PIN-koden for SIM-kortet ble avvist."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Status for nettbrettet"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefonstatus"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Prosess-statistikk"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nerdete statistikk om prosesser som er i gang"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Minnebruk"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> av <xliff:g id="TOTALRAM">%2$s</xliff:g> ble brukt på <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Bakgrunn"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Forgrunn"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Bufret"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Varseltilgang"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apper kan ikke lese varsler"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d app kan lese varsler"</item>
-    <item quantity="other" msgid="980049191810249052">"%d apper kan lese varsler"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d apper kan lese varsler</item>
+      <item quantity="one">%d app kan lese varsler</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Ingen varselslyttere er installert."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Vil du aktivere <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler lagt inn av systemet eller installerte apper. Dette kan omfatte personlig informasjon, som for eksempel kontaktnavn og innholdet i meldinger som sendes til deg. Den kan også avvise disse varslene, eller trykke på handlingsknapper i dem."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Apper som inneholder vilkår"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Ingen apper angir betingelser"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d app angir betingelser"</item>
-    <item quantity="other" msgid="358057362115673258">"%d apper angir betingelser"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d apper angir betingelser</item>
+      <item quantity="one">%d app angir betingelser</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Ingen apper som angir vlkår er installert."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Vil du aktivere <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> kan legge til avslutsningsbetingelser for «Ikke forstyrr»-modusen."</string>

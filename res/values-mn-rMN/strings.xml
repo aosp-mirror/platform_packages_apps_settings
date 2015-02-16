@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Зөвшөөрөх"</string>
     <string name="deny" msgid="6947806159746484865">"Татгалзах"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Тодорхойгүй"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT">%1$d</xliff:g> алхам дутуу байна."</item>
-    <item quantity="other" msgid="6722953419953594148">"Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT">%1$d</xliff:g> алхам дутуу байна."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> алхам дутуу байна.</item>
+      <item quantity="one">Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> алхам дутуу байна.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Та одоо хөгжүүлэгч боллоо!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Шаардлагагүй, та аль хэдийн хөгжүүлэгч болсон."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Утасгүй &amp; сүлжээ"</string>
@@ -423,30 +423,20 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Нууц үгэнд дор хаяж нэг үсэг орсон байх ёстой."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Нууц үгэнд дор хаяж нэг цифр орсон байх ёстой."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Нууц үгэнд дор хаяж нэг тэмдэгт орсон байх ёстой."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Нууц үгэнд дор хаяж 1 үсэг орсон байх ёстой"</item>
-    <item quantity="other" msgid="8186027808415585970">"Нууц үгэнд дор хаяж %d үсэг орсон байх ёстой"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Нууц үгэнд дор хаяж 1 жижиг үсэг орсон байх ёстой."</item>
-    <item quantity="other" msgid="2693910942679679225">"Нууц үгэнд дор хаяж %d жижиг үсэг орсон байх ёстой."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Нууц үгэнд дор хаяж 1 том үсэг орсон байх ёстой."</item>
-    <item quantity="other" msgid="3030801209112209245">"Нууц үгэнд дор хаяж %d том үсэг орсон байх ёстой."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Нууц үгэнд дор хаяж 1 цифр орсон байх ёстой"</item>
-    <item quantity="other" msgid="4703982391407595924">"Нууц үгэнд дор хаяж %d цифр орсон байх ёстой"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Нууц үгэнд дор хаяж 1 тусгай тэмдэгт орсон байх ёстой."</item>
-    <item quantity="other" msgid="1221290525051187757">"Нууц үгэнд дор хаяж %d тусгай тэмдэгт орсон байх ёстой."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Нууц үгэнд дор хаяж 1 үсэг биш тэмдэгт орсон байх ёстой."</item>
-    <item quantity="other" msgid="3952508584649046404">"Нууц үгэнд дор хаяж %d үсэг биш тэмдэгт орсон байх ёстой."</item>
-  </plurals>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for lockpassword_password_requires_letters (5677371623980347934) -->
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">Password must contain at least %d lowercase letters.</item>
+      <item quantity="one">Нууц үгэнд хамгийн багадаа 1 жижиг үсэг оросон байх шаардлагатай.</item>
+    </plurals>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for lockpassword_password_requires_uppercase (2483949715040341677) -->
+    <!-- String.format failed for translation -->
+    <!-- no translation found for lockpassword_password_requires_numeric (9156410893744210033) -->
+    <!-- String.format failed for translation -->
+    <!-- no translation found for lockpassword_password_requires_symbols (5384442837439742233) -->
+    <!-- String.format failed for translation -->
+    <!-- no translation found for lockpassword_password_requires_nonletter (4175064976268466293) -->
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Төхөөрөмжийн администратор саяхны нууц үгийг ашиглахыг зөвшөөрөхгүй."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Цифрийн өссөн, уруудсан, давтагдсан дарааллыг хориглоно"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Тийм"</string>
@@ -853,10 +843,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Өөрийн сонгосон SIM картаа шинэчлэх үү?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> нь таны төхөөрөмжинд байгаа цорын ганц SIM болно. Та энэ  SIM-ийг гар утасны мэдээлэл, дуудлага, мессеж зэрэгт ашиглахыг хүсч байна уу?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"СИМ ПИН код буруу, та төхөөрөмжийн түгжээх тайлахын тулд өөрийн оператор компанитай холбоо барина уу."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"СИМ ПИН код буруу байна, танд мобайл оператор компанитай холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдсэн байна."</item>
-    <item quantity="other" msgid="77103619544346451">"СИМ ПИН код буруу байна, танд <xliff:g id="NUMBER">%d</xliff:g> оролдлого хийх боломж үлдлээ."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">СИМ-ны ПИН код буруу байна. Та <xliff:g id="NUMBER_1">%d</xliff:g> удаа оролдлого хийх боломжтой байна.</item>
+      <item quantity="one">СИМ-ны ПИН код буруу байна. Танд мобайл оператортойгоо холбогдохгүйгээр төхөөрөмжийн түгжээг тайлахад <xliff:g id="NUMBER_0">%d</xliff:g> оролдлого хийх боломж үлдсэн байна.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"СИМ ПИН ажиллуулах амжилтгүй боллоо!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Таблетын статус"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Утасны статус"</string>
@@ -1682,8 +1672,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Процессын статус"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Ажиллаж байгаа процессуудын талаарх статус"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Санах ойн ашиглалт"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> нь <xliff:g id="TOTALRAM">%2$s</xliff:g>-с <xliff:g id="TIMEDURATION">%3$s</xliff:g> ашиглагдсан байна"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Далд"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Ил"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Кеш хийгдсэн"</string>
@@ -2403,19 +2392,15 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Чичиргээ"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Мэдэгдлийн хандалт"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Апп-ууд мэдэгдлийг уншиж чадахгүй"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d апп мэдэгдлийг уншиж чадна"</item>
-    <item quantity="other" msgid="980049191810249052">"%d апп-ууд мэдэгдлийг уншиж чадна"</item>
-  </plurals>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for manage_notification_access_summary_nonzero (7930130030691218387) -->
     <string name="no_notification_listeners" msgid="2767405417723149879">"Мэдэгдэл сонсогч суулгагдаагүй."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g>-г идэвхжүүлэх үү?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> нь систем буюу аливаа суулгасан апп-н гаргасан бүх мэдэгдлүүдийг унших боломжтой байна, үүнд харилцагчийн нэрс, танд ирсэн зурвасууд гэх мэт хувийн мэдээллүүд орж болно. Энэ мөн тэдгээр мэдэгдлүүдийг болиулах буюу тэдгээрийн доторх үйлдлийн товчнуудад хүрэх боломжтой."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Нөхцөл нийлүүлэгч"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Нөхцөл нийлүүлэх апп байхгүй"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d апп нөхцөлүүдийг нийлүүлнэ"</item>
-    <item quantity="other" msgid="358057362115673258">"%d апп нөхцөлүүдийг нийлүүлнэ"</item>
-  </plurals>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for manage_condition_providers_summary_nonzero (1398308139164964218) -->
     <string name="no_condition_providers" msgid="6183782892066424125">"Нөхцөл нийлүүлэгч суулгаагүй байна."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g>-г идэвхжүүлэх үү?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> нь \"Бүү саад бол\" горимоос гарах нөхцөлүүдийг нэмэх боломж олгоно."</string>
