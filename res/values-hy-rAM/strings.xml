@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Թույլատրել"</string>
     <string name="deny" msgid="6947806159746484865">"Մերժել"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Անհայտ"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Դուք այժմ ծրագրավորող դառնալուց հեռու եք <xliff:g id="STEP_COUNT">%1$d</xliff:g> քայլ:"</item>
-    <item quantity="other" msgid="6722953419953594148">"Դուք այժմ <xliff:g id="STEP_COUNT">%1$d</xliff:g> քայլ եք հեռու ծրագրավորող կոչվելուց:"</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">Ծրագրավորող դառնալու համար ձեզ մնացել է կատարել <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> քայլ:</item>
+      <item quantity="other">Ծրագրավորող դառնալու համար ձեզ մնացել է կատարել <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> քայլ:</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Դուք արդեն ծրագրավորո՛ղ եք:"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Կարիք չկա, դուք արդեն իսկ ծրագրավորող եք:"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Անլար կապ և ցանցեր"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Գաղտնաբառը պետք է առնվազն մեկ տառ պարունակի:"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Գաղտնաբառը պետք է պարունակի առնվազն մեկ թվանշան:"</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Գաղտնաբառը պետք է պարունակի առնվազն մեկ նիշ:"</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Գաղտնաբառը պետք է պարունակի առնվազն 1 տառ:"</item>
-    <item quantity="other" msgid="8186027808415585970">"Գաղտնաբառը պետք է պարունակի առնվազն %d տառ:"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Գաղտնաբառը պետք է  առնվազն 1 փոքրատառ տառ պարունակի:"</item>
-    <item quantity="other" msgid="2693910942679679225">"Գաղտնաբառը պետք է առնվազն %d փոքրատառ տառ պարունակի:"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Գաղտնաբառը պետք է պարունակի առնվազն 1 մեծատառ տառ:"</item>
-    <item quantity="other" msgid="3030801209112209245">"Գաղտնաբառը պետք է պարունակի առնվազն %d մեծատառ տառ:"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Գաղտնաբառը պետք է պարունակի  առնվազն 1 թվային նիշ:"</item>
-    <item quantity="other" msgid="4703982391407595924">"Գաղտնաբառը պետք է պարունակի առնվազն %d թվային նշան:"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Գաղտնաբառը պետք է պարունակի առնվազն 1 հատուկ նշան:"</item>
-    <item quantity="other" msgid="1221290525051187757">"Գաղտնաբառը պետք է առնվազն %d հատուկ նշան պարունակի:"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Գաղտնաբառը պետք է պարունակի առնվազն 1 ոչ տառային նիշ:"</item>
-    <item quantity="other" msgid="3952508584649046404">"Գաղտնաբառը պետք է առնվազն %d ոչ-տառային նիշ պարունակի:"</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">Գաղտնաբառը պետք է պարունակի առնվազն %d տառ:</item>
+      <item quantity="other">Գաղտնաբառը պետք է պարունակի առնվազն %d տառ:</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">Գաղտնաբառը պետք է պարունակի առնվազն %d փոքրատառ նիշ:</item>
+      <item quantity="other">Գաղտնաբառը պետք է պարունակի առնվազն %d փոքրատառ նիշ:</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">Գաղտնաբառը պետք է պարունակի առնվազն %d մեծատառ նիշ:</item>
+      <item quantity="other">Գաղտնաբառը պետք է պարունակի առնվազն %d մեծատառ նիշ:</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">Գաղտնաբառը պետք է պարունակի առնվազն %d թվային նիշ:</item>
+      <item quantity="other">Գաղտնաբառը պետք է պարունակի առնվազն %d թվային նիշ:</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">Գաղտնաբառը պետք է պարունակի առնվազն %d հատուկ նիշ:</item>
+      <item quantity="other">Գաղտնաբառը պետք է պարունակի առնվազն %d հատուկ նիշ:</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">Գաղտնաբառը պետք է պարունակի առնվազն %d ոչ-տառային նիշ:</item>
+      <item quantity="other">Գաղտնաբառը պետք է պարունակի առնվազն %d ոչ-տառային նիշ:</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Սարքի վարիչը թույլ չի տալիս օգտագործել վերջին գաղտնաբառը:"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Թվերի աճող, նվազող կամ կրկնվող հաջորդականությունն արգելված է:"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Լավ"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Փոխե՞լ նախընտրելի SIM քարտը:"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"Այս սարքի վրա միակ SIM քարտը <xliff:g id="NEW_SIM">%1$s</xliff:g> է: Ցանկանո՞ւմ եք օգտագործել այս SIM-ը բջջային տվյալների փոխանցման, զանգերի և SMS հաղորդագրությունների համար:"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM PIN կոդը սխալ է: Պետք է դիմեք ձեր օպերատորին՝ սարքն արգելաբացելու համար:"</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"SIM PIN կոդը սխալ է: Մնաց <xliff:g id="NUMBER">%d</xliff:g> փորձ, որից հետո պետք է դիմեք ձեր օպերատորին՝ սարքն արգելաբացելու համար:"</item>
-    <item quantity="other" msgid="77103619544346451">"SIM PIN կոդը սխալ է: Մնաց <xliff:g id="NUMBER">%d</xliff:g> փորձ:"</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">SIM PIN կոդը սխալ է: Մնաց <xliff:g id="NUMBER_1">%d</xliff:g> փորձ:</item>
+      <item quantity="other">SIM PIN կոդը սխալ է: Մնաց <xliff:g id="NUMBER_1">%d</xliff:g> փորձ:</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM PIN կոդի գործողությունը ձախողվեց:"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Գրասալիկի կարգավիճակը"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Հեռախոսի կարգավիճակը"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Գործընթացի վիճակագրություն"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Ընթացիկ գործընթացների տեխնիկական վիճակագրություն"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Օգտագործվող հիշողություն"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g>-ը <xliff:g id="TOTALRAM">%2$s</xliff:g>-ից օգտագործված <xliff:g id="TIMEDURATION">%3$s</xliff:g> ժամանակահատվածում"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Հետնաշերտ"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Առջևք"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Պահված"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Թրթռալ"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Մուտք ծանուցումներին"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Ծրագրիը չի կարող կարդալ ծանուցումները"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d ծրագիրը կարող է կարդալ ծանուցումները"</item>
-    <item quantity="other" msgid="980049191810249052">"%d հավելված կարող է կարդալ ծանուցումները"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d հավելված կարող է ծանուցումներ կարդալ</item>
+      <item quantity="other">%d հավելված կարող է ծանուցումներ կարդալ</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Ծանուցման ունկնդիրներ տեղադրված չեն:"</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Միացնե՞լ <xliff:g id="SERVICE">%1$s</xliff:g>-ը:"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-ը կկարողանա կարդալ համակարգի կամ ցանկացած տեղադրված ծրագրի կողմից փակցված բոլոր ծանուցումները, որոնք կարող են պարունակել այնպիսի անձնական տեղեկություններ, ինչպիսիք են կոնտակտների անունները և ձեզ ուղարկված հաղորդագրությունների պարունակությունը: Այն նաև կկարողանա մերժել այս ծանուցումները կամ հպված գործողության կոճակները իրենց մեջ:"</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Պայմանների աղբյուրներ"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Ոչ մի ծրագիր պայմաններ չի տալիս"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d ծրագիր տալիս է պայմաններ"</item>
-    <item quantity="other" msgid="358057362115673258">"%d ծրագիր տալիս են պայմաններ"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">%d հավելված տրամադրում է պայմաններ</item>
+      <item quantity="other">%d հավելված տրամադրում է պայմաններ</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Պայմանների աղբյուրներ տեղադրված չեն:"</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Միացնե՞լ <xliff:g id="SERVICE">%1$s</xliff:g> ծառայությունը:"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>-ը կկարողանա ավելացնել պայմաններ «Չխանգարել» ռեժիմից դուրս գալու համար:"</string>

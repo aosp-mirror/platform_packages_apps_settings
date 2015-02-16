@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Tillad"</string>
     <string name="deny" msgid="6947806159746484865">"Afvis"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Ukendt"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Du er nu <xliff:g id="STEP_COUNT">%1$d</xliff:g> skridt væk fra at være udvikler."</item>
-    <item quantity="other" msgid="6722953419953594148">"Du er nu <xliff:g id="STEP_COUNT">%1$d</xliff:g> skridt væk fra at være udvikler."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">Du er nu <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> skridt fra at være udvikler.</item>
+      <item quantity="other">Du er nu <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> skridt fra at være udvikler.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Nu er du udvikler."</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Det behøver du ikke. Du er allerede udvikler."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Trådløs og netværk"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Adgangskoden skal indeholde mindst ét bogstav."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Adgangskoden skal indeholde mindst ét tal."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Adgangskoden skal indeholde mindst ét symbol."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Adgangskoden skal indeholde mindst ét bogstav."</item>
-    <item quantity="other" msgid="8186027808415585970">"Adgangskoden skal indeholde mindst %d bogstaver."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Adgangskoden skal indeholde mindst ét lille bogstav."</item>
-    <item quantity="other" msgid="2693910942679679225">"Adgangskoden skal indeholde mindst %d små bogstaver."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Adgangskoden skal indeholde mindst ét stort bogstav."</item>
-    <item quantity="other" msgid="3030801209112209245">"Adgangskoden skal indeholde mindst %d store bogstaver."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Adgangskoden skal indeholde mindst 1 tal."</item>
-    <item quantity="other" msgid="4703982391407595924">"Adgangskoden skal indeholde mindst %d tal."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Adgangskoden skal indeholde mindst ét specialtegn."</item>
-    <item quantity="other" msgid="1221290525051187757">"Adgangskoden skal indeholde mindst %d specialtegn."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Adgangskoden skal indeholde mindst ét tegn, der ikke er et bogstav."</item>
-    <item quantity="other" msgid="3952508584649046404">"Adgangskoden skal indeholde mindst %d tegn, der ikke er bogstaver."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">Adgangskoden skal indeholder mindst %d bogstaver.</item>
+      <item quantity="other">Adgangskoden skal indeholder mindst %d bogstaver.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">Adgangskoden skal indeholde mindst %d små bogstaver.</item>
+      <item quantity="other">Adgangskoden skal indeholde mindst %d små bogstaver.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">Adgangskoden skal indeholde mindst %d store bogstaver.</item>
+      <item quantity="other">Adgangskoden skal indeholde mindst %d store bogstaver.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">Adgangskoden skal indeholde mindst %d tal.</item>
+      <item quantity="other">Adgangskoden skal indeholde mindst %d tal.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">Adgangskoden skal indeholde mindst %d specialtegn.</item>
+      <item quantity="other">Adgangskoden skal indeholde mindst %d specialtegn.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">Adgangskoden skal indeholde mindst %d tegn, der ikke er bogstaver.</item>
+      <item quantity="other">Adgangskoden skal indeholde mindst %d tegn, der ikke er bogstaver.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Enhedens administrator tillader ikke brug af en nylig brugt adgangskode."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"En stigende eller faldende sekvens af cifre og gentagne cifre er ikke tilladt"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Skal dit SIM-kort opdateres?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> er det eneste SIM-kort i enheden. Vil du bruge dette SIM-kort til mobildata, opkald og sms-beskeder?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Forkert pinkode til SIM-kort. Du skal nu kontakte dit mobilselskab for at låse din enhed op."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Forkert pinkode til SIM-kort. Du har <xliff:g id="NUMBER">%d</xliff:g> forsøg tilbage, før du skal kontakte dit mobilselskab for at låse din enhed op."</item>
-    <item quantity="other" msgid="77103619544346451">"Forkert pinkode til SIM-kort. Du har <xliff:g id="NUMBER">%d</xliff:g> forsøg tilbage."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">Forkert pinkode til SIM-kort. Du har <xliff:g id="NUMBER_1">%d</xliff:g> forsøg tilbage.</item>
+      <item quantity="other">Forkert pinkode til SIM-kort. Du har <xliff:g id="NUMBER_1">%d</xliff:g> forsøg tilbage.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Pinkoden til SIM-kortet blev afvist."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Status for tabletcomputeren"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefonstatus"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Processtatistikker"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Nørdede statistikker om kørende processer"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"hukommelse brugt"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> ud af <xliff:g id="TOTALRAM">%2$s</xliff:g> brugt i løbet af <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Baggrund"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Forgrund"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Cachelagret"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrer"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Adgang til underretninger"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apps kan ikke læse underretninger"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"Appen %d kan læse underretninger"</item>
-    <item quantity="other" msgid="980049191810249052">"Appene %d kan læse underretninger"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d apps kan læse underretninger</item>
+      <item quantity="other">%d apps kan læse underretninger</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Ingen underretningslyttere er installeret."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Skal <xliff:g id="SERVICE">%1$s</xliff:g> aktiveres?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vil kunne læse alle underretninger, der er sendt af systemet eller en hvilken som helst installeret app, som kan indeholde personlige oplysninger, som f.eks. kontaktpersoner og teksten i beskeder, der sendes til dig. Den vil også kunne afvise disse underretninger eller trykke på handlingsknapper i dem."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Tjenester til formidling af betingelser"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Ingen apps formidler betingelser"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d app formidler betingelser"</item>
-    <item quantity="other" msgid="358057362115673258">"%d apps formidler betingelser"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">%d apps angiver betingelser</item>
+      <item quantity="other">%d apps angiver betingelser</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Der er ikke installeret nogen tjenester til formidling af betingelser."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Skal <xliff:g id="SERVICE">%1$s</xliff:g> aktiveres?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> kan tilføje afslutningsbetingelser til tilstanden Vil ikke forstyrres."</string>

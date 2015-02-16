@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Benarkan"</string>
     <string name="deny" msgid="6947806159746484865">"Nafikan"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Tidak diketahui"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Anda kini <xliff:g id="STEP_COUNT">%1$d</xliff:g> langkah daripada menjadi pemaju."</item>
-    <item quantity="other" msgid="6722953419953594148">"Anda kini <xliff:g id="STEP_COUNT">%1$d</xliff:g> langkah daripada menjadi pemaju."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">Anda kini <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> langkah daripada menjadi pembangun.</item>
+      <item quantity="one">Anda kini <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> langkah daripada menjadi pembangun.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Anda kini pemaju!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Tidak perlu, anda sudah pun menjadi pemaju."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Wayarles &amp; rangkaian"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Kata laluan mesti mengandungi sekurang-kurangnya satu huruf."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Kata laluan mesti mengandungi sekurang-kurangnya satu digit."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Kata laluan mesti mengandungi sekurang-kurangnya satu simbol."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Kata laluan mesti mengandungi sekurang-kurangnya 1 huruf."</item>
-    <item quantity="other" msgid="8186027808415585970">"Kata laluan mesti mengandungi sekurang-kurangnya %d huruf."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Kata laluan mesti mengandungi sekurang-kurangnya 1 huruf kecil."</item>
-    <item quantity="other" msgid="2693910942679679225">"Kata laluan mesti mengandungi sekurang-kurangnya %d huruf kecil."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Kata laluan mesti mengandungi sekurang-kurangnya 1 huruf besar."</item>
-    <item quantity="other" msgid="3030801209112209245">"Kata laluan mesti mengandungi sekurang-kurangnya %d huruf besar."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Kata laluan mesti mengandungi sekurang-kurangnya 1 digit angka."</item>
-    <item quantity="other" msgid="4703982391407595924">"Kata laluan mesti mengandungi sekurang-kurangnya %d digit angka."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Kata laluan mesti mengandungi sekurang-kurangnya 1 simbol khas."</item>
-    <item quantity="other" msgid="1221290525051187757">"Kata laluan mesti mengandungi sekurang-kurangnya %d simbol khas."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Kata laluan mesti mengandungi sekurang-kurangnya 1 aksara bukan huruf."</item>
-    <item quantity="other" msgid="3952508584649046404">"Kata laluan mesti mengandungi sekurang-kurangnya %d aksara bukan huruf."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">Kata laluan mesti mengandungi sekurang-kurangnya %d huruf.</item>
+      <item quantity="one">Kata laluan mesti mengandungi sekurang-kurangnya 1 huruf.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">Kata laluan mesti mengandungi sekurang-kurangnya %d huruf kecil.</item>
+      <item quantity="one">Kata laluan mesti mengandungi sekurang-kurangnya 1 huruf kecil.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">Kata laluan mesti mengandungi sekurang-kurangnya %d huruf besar.</item>
+      <item quantity="one">Kata laluan mesti mengandungi sekurang-kurangnya 1 huruf besar.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">Kata laluan mesti mengandungi sekurang-kurangnya %d digit angka.</item>
+      <item quantity="one">Kata laluan mesti mengandungi sekurang-kurangnya 1 digit angka.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">Kata laluan mesti mengandungi sekurang-kurangnya %d simbol khas.</item>
+      <item quantity="one">Kata laluan mesti mengandungi sekurang-kurangnya 1 simbol khas.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">Kata laluan mesti mengandungi sekurang-kurangnya %d aksara bukan huruf.</item>
+      <item quantity="one">Kata laluan mesti mengandungi sekurang-kurangnya 1 aksara bukan huruf.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Pentadbir peranti tidak membenarkan menggunakan kata laluan yang baharu."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Urutan digit yang menaik, menurun atau berulang adalah dilarang"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Kemas kini kad SIM pilihan?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> adalah satu-satunya SIM dalam peranti anda. Adakah anda ingin menggunakan SIM ini untuk data selular, panggilan dan mesej SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Kod PIN SIM tidak betul, jadi anda harus menghubungi pembawa anda untuk membuka kunci peranti."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Kod PIN SIM tidak betul. Anda mempunyai <xliff:g id="NUMBER">%d</xliff:g> percubaan lagi sebelum anda harus menghubungi pembawa anda untuk membuka kunci peranti."</item>
-    <item quantity="other" msgid="77103619544346451">"Kod PIN SIM tidak betul, anda mempunyai <xliff:g id="NUMBER">%d</xliff:g> percubaan lagi."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">Kod PIN SIM salah, anda ada <xliff:g id="NUMBER_1">%d</xliff:g> cubaan lagi.</item>
+      <item quantity="one">Kod PIN SIM tidak betul. Anda ada <xliff:g id="NUMBER_0">%d</xliff:g> cubaan lagi sebelum anda harus menghubungi pembawa anda untuk membuka kunci peranti.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Operasi PIN SIM gagal!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Status tablet"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Status telefon"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistik Proses"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistik skema tentang proses yang sedang berjalan"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Penggunaan memori"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> daripada <xliff:g id="TOTALRAM">%2$s</xliff:g> digunakan sepanjang <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Latar Belakang"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Latar Depan"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Dicache"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Bergetar"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Akses pemberitahuan"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Apl tidak boleh membaca pemberitahuan"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d apl boleh membaca pemberitahuan"</item>
-    <item quantity="other" msgid="980049191810249052">"%d apl boleh membaca pemberitahuan"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d apl boleh membaca pemberitahuan</item>
+      <item quantity="one">%d apl boleh membaca pemberitahuan</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Tiada pendengar pemberitahuan dipasang."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Dayakan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> akan dapat membaca semua pemberitahuan yang disiarkan oleh sistem atau mana-mana apl yang dipasang, yang mungkin termasuk maklumat peribadi seperti nama kenalan dan teks dalam mesej yang dihantar kepada anda. Pendengar juga akan dapat mengetepikan pemberitahuan ini atau menyentuh butang tindakan dalam pemberitahuan itu."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Pembekal keadaan"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Tiada apl yang menyediakan keadaan"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d apl menyediakan keadaan"</item>
-    <item quantity="other" msgid="358057362115673258">"%d apl menyediakan keadaan"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d apl menyediakan keadaan</item>
+      <item quantity="one">%d apl menyediakan keadaan</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Tiada pembekal keadaan dipasang."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Dayakan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> akan dapat menambahkan keadaan keluar kepada mod Jangan Ganggu."</string>

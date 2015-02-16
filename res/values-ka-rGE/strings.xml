@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"ნების დართვა"</string>
     <string name="deny" msgid="6947806159746484865">"უარყოფა"</string>
     <string name="device_info_default" msgid="7847265875578739287">"უცნობი"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"დეველოპერობამდე <xliff:g id="STEP_COUNT">%1$d</xliff:g> ნაბიჯი დაგრჩათ."</item>
-    <item quantity="other" msgid="6722953419953594148">"დეველოპერობამდე რამდენიმე ნაბიჯი დაგრჩათ <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">დეველოპერობამდე <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ნაბიჯი დაგრჩათ.</item>
+      <item quantity="one">დეველოპერობამდე <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> ნაბიჯი დაგრჩათ.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"ახლა დეველოპერი ხართ!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"არ არის საჭირო, თქვენ უკვე დეველოპერი ხართ."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"უსადენო კავშირი და ქსელები"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"პაროლს უნდა ჰქონდეს სულ მცირე ერთი ასო მაინც."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"პაროლი უნდა შეიცავდეს სულ მცირე ერთ ციფრს."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"პაროლი უნდა შეიცავდეს სულ მცირე ერთ სიმბოლოს."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"პაროლი უნდა შეიცავდეს სულ მცირე 1 ასოს."</item>
-    <item quantity="other" msgid="8186027808415585970">"პაროლი უნდა შეიცავდეს სულ მცირე %d ასოს."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"პაროლი უნდა შეიცავდეს სულ მცირე 1 ქვედა რეგისტრის ასოს."</item>
-    <item quantity="other" msgid="2693910942679679225">"პაროლი უნდა შეიცავდეს სულ მცირე %d ქვედა რეგისტრის ასოს."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"პაროლი უნდა შეიცავდეს სულ მცირე 1 ზედა რეგისტრის ასოს."</item>
-    <item quantity="other" msgid="3030801209112209245">"პაროლი უნდა შეიცავდეს სულ მცირე %d ზედა რეგისტრის ასოს."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"პაროლი უნდა შეიცავდეს სულ ცოტა 1 ციფრს."</item>
-    <item quantity="other" msgid="4703982391407595924">"პაროლი უნდა შეიცავდეს სულ მცირე %d ციფრულ ნიშანს."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"პაროლი უნდა შეიცავდეს სულ მცირე 1 სპეციალურ სიმბოლოს."</item>
-    <item quantity="other" msgid="1221290525051187757">"პაროლი უნდა შეიცავდეს სულ ცოტა %d სპეციალურ სიმბოლოს."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"პაროლი უნდა შეიცავდეს სულ მცირე 1 არაანბანურ სიმბოლოს."</item>
-    <item quantity="other" msgid="3952508584649046404">"პაროლი უნდა შეიცავდეს სულ მცირე %d არაანბანურ სიმბოლოს."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">პაროლი უნდა შეიცავდეს, სულ მცირე, %d ასოს.</item>
+      <item quantity="one">პაროლი უნდა შეიცავდეს, სულ მცირე, 1 ასოს.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">პაროლი უნდა შეიცავდეს, სულ მცირე, %d ქვედა რეგისტრის ასოს.</item>
+      <item quantity="one">პაროლი უნდა შეიცავდეს, სულ მცირე, 1 ქვედა რეგისტრის ასოს.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">პაროლი უნდა შეიცავდეს, სულ მცირე, %d ზედა რეგისტრის ასოს.</item>
+      <item quantity="one">პაროლი უნდა შეიცავდეს, სულ მცირე, 1 ზედა რეგისტრის ასოს.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">პაროლი უნდა შეიცავდეს, სულ მცირე, %d ციფრს.</item>
+      <item quantity="one">პაროლი უნდა შეიცავდეს, სულ მცირე, 1 ციფრს.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">პაროლი უნდა შეიცავდეს, სულ მცირე, %d სპეციალურ სიმბოლოს.</item>
+      <item quantity="one">პაროლი უნდა შეიცავდეს, სულ მცირე, 1 სპეციალურ სიმბოლოს.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">პაროლი უნდა შეიცავდეს, სულ მცირე, %d არაანბანურ სიმბოლოს.</item>
+      <item quantity="one">პაროლი უნდა შეიცავდეს, სულ მცირე, 1 არაანბანურ სიმბოლოს.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"მოწყობილობის ადმინისტრატორს აკრძალული აქვს წინა პაროლის ხელახალი გამოყენება."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"ციფრების აღმავალი, დაღმავალი ან გამეორებული მიმდევრობა აკრძალულია"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"კარგი"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"განახლდეს უპირატესი სიმ ბარათი?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> არის ერთადერთი სიმი თქვენს მოწყობილობაში. გსურთ, გამოიყენოთ ეს სიმი ფიჭური მონაცემების, ზარებისა და SMS შეტყობინებებისათვის?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM-ის არასწორი PIN კოდი. თქვენ ახლა მოგიწევთ მოწყობილობის განსაბლოკად მიმართოთ ოპერატორს."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"SIM-ის არასწორი PIN კოდი. თქვენ დაგრჩათ <xliff:g id="NUMBER">%d</xliff:g> მცდელობა, სანამ მოგიწევთ თქვენი მოწყობილობის განსაბლოკად ოპერატორთან დაკავშირება."</item>
-    <item quantity="other" msgid="77103619544346451">"არასწორი SIM-ის PIN კოდი. თქვენ დაგრჩათ <xliff:g id="NUMBER">%d</xliff:g> მცდელობა."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">SIM-ის PIN არასწორია. დაგრჩათ <xliff:g id="NUMBER_1">%d</xliff:g> მცდელობა.</item>
+      <item quantity="one">SIM-ის PIN არასწორია. დაგრჩათ <xliff:g id="NUMBER_0">%d</xliff:g> მცდელობა, სანამ მოგიწევთ მოწყობილობის განსაბლოკად ოპერატორთან დაკავშირება.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM PIN ოპერაცია ჩაიშალა!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"ტაბლეტის სტატუსი"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"ტელეფონის სტატუსი"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"პროცესის სტატისტიკა"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"მიმდინარე პროცესების შემაჯამებელი სტატისტიკა"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"გამოყენებული მეხსიერება"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> პერიოდისათვის გამოყენებულია <xliff:g id="TOTALRAM">%2$s</xliff:g> -დან <xliff:g id="USEDRAM">%1$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"ფონი"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"წინა პლანი"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"ქეშირებული"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ვიბრაცია"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"შეტყობინებებზე წვდომა"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"აპები ვერ კითხულობს შეტყობინებებს"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"შეტყობინებების წაკითხვა შეუძლია %d აპლიკაციას"</item>
-    <item quantity="other" msgid="980049191810249052">"%d აპს შეუძლია შეტყობინებების წაკითხვა"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d აპს შეუძლია შეტყობინებების წაკითხვა</item>
+      <item quantity="one">%d აპს შეუძლია შეტყობინებების წაკითხვა</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"არცერთი შეტყობინებების მსმენელი არ არის დაინსტალირებული."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"ჩავრთოთ <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> შეძლებს სისტემური ან ნებისმიერი დაყენებული აპლიკაციის შეტყობინებების წაკითხვას, რომლებიც შეიძლება შეიცავდნენ პერსონალურ ინფორმაციას, მაგ.: კონტაქტების სახელებს ან თქვენთვის გამოგზავნილ ტექსტურ შეტყობინებებს. მას ასევე შეეძლება შეტყობინებების დახურვა და მათში არსებული ღილაკების დაჭერა."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"პირობების პროვაიდერები"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"პირობებს არცერთი აპი არ გაწვდით"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d აპი გაწვდით პირობებს"</item>
-    <item quantity="other" msgid="358057362115673258">"%d აპი გაწვდით პირობებს"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d აპი გაწვდით პირობებს</item>
+      <item quantity="one">%d აპი გაწვდით პირობებს</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"პირობების პროვაიდერები ინსტალირებული არ არის."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"ჩაირთოს <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> შეძლებს გასვლის პირობები დაამატოს „არ შემაწუხოთ“ რეჟიმს."</string>

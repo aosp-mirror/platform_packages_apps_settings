@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"ಅನುಮತಿಸು"</string>
     <string name="deny" msgid="6947806159746484865">"ನಿರಾಕರಿಸು"</string>
     <string name="device_info_default" msgid="7847265875578739287">"ಅಜ್ಞಾತ"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"ಡೆವಲಪರ್‌ ಆಗುವುದಕ್ಕಾಗಿ ಇದೀಗ ನೀವು ಕೇವಲ <xliff:g id="STEP_COUNT">%1$d</xliff:g> ಹೆಜ್ಜೆ ದೂರದಲ್ಲಿರುವಿರಿ."</item>
-    <item quantity="other" msgid="6722953419953594148">"ಡೆವಲಪರ್ ಆಗುವುದರಿಂದ ನೀವು ಇದೀಗ <xliff:g id="STEP_COUNT">%1$d</xliff:g> ಹೆಜ್ಜೆಗಳು ದೂರದಲ್ಲಿರುವಿರಿ."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">ಡೆವಲಪರ್‌ ಆಗಲು ಇದೀಗ ನೀವು ಕೇವಲ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ಹೆಜ್ಜೆಗಳು ದೂರದಲ್ಲಿರುವಿರಿ.</item>
+      <item quantity="other">ಡೆವಲಪರ್‌ ಆಗಲು ಇದೀಗ ನೀವು ಕೇವಲ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ಹೆಜ್ಜೆಗಳು ದೂರದಲ್ಲಿರುವಿರಿ.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"ಇದೀಗ ನೀವು ಡೆವಲಪರ್‌!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"ಅಗತ್ಯವಿಲ್ಲ, ನೀವು ಈಗಾಗಲೇ ಡೆವಲಪರ್‌ ಆಗಿರುವಿರಿ."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"ವೈರ್‌ಲೆಸ್ &amp; ನೆಟ್‌ವರ್ಕ್‌ಗಳು"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ ಒಂದು ಅಕ್ಷರವನ್ನು ಹೊಂದಿರಬೇಕು."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ ಒಂದು ಸಂಖ್ಯಾತ್ಮಕ ಅಂಕಿಯನ್ನು ಹೊಂದಿರಬೇಕು."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ ಒಂದು ಚಿಹ್ನೆಯನ್ನು ಹೊಂದಿರಬೇಕು."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ 1 ಅಕ್ಷರವನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-    <item quantity="other" msgid="8186027808415585970">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ 1 ಸಣ್ಣ ಅಕ್ಷರವನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-    <item quantity="other" msgid="2693910942679679225">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ಸಣ್ಣ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ 1 ದೊಡ್ಡ ಅಕ್ಷರವನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-    <item quantity="other" msgid="3030801209112209245">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ದೊಡ್ಡ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ 1 ಸಂಖ್ಯಾತ್ಮಕ ಅಂಕಿಯನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-    <item quantity="other" msgid="4703982391407595924">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ಸಂಖ್ಯಾತ್ಮಕ ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ 1 ವಿಶೇಷ ಚಿಹ್ನೆಯನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-    <item quantity="other" msgid="1221290525051187757">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ವಿಶೇಷ ಚಿಹ್ನೆಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ 1 ಅಕ್ಷರವಲ್ಲದ ಅಕ್ಷರವನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-    <item quantity="other" msgid="3952508584649046404">"ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ಅಕ್ಷರವಲ್ಲದ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+      <item quantity="other">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಸಣ್ಣ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+      <item quantity="other">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಸಣ್ಣ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ದೊಡ್ಡ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+      <item quantity="other">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ %d ದೊಡ್ಡ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಸಂಖ್ಯಾತ್ಮಕ ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+      <item quantity="other">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಸಂಖ್ಯಾತ್ಮಕ ಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">ಪಾಸ್‌ವರ್ಡ್ ಕನಿಷ್ಠ  %d ವಿಶೇಷ ಚಿಹ್ನೆಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+      <item quantity="other">ಪಾಸ್‌ವರ್ಡ್ ಕನಿಷ್ಠ  %d ವಿಶೇಷ ಚಿಹ್ನೆಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಅಕ್ಷರವಲ್ಲದ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+      <item quantity="other">ಪಾಸ್‌ವರ್ಡ್‌ ಕನಿಷ್ಠ  %d ಅಕ್ಷರವಲ್ಲದ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರಬೇಕು.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"ಸಾಧನ ನಿರ್ವಾಹಕ ಇತ್ತೀಚಿನ ಪಾಸ್‌ವರ್ಡ್‌ ಬಳಸಲು ಅನುಮತಿಸುವುದಿಲ್ಲ."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"ಅಂಕಿಗಳ ಆರೋಹಣ, ಅವರೋಹಣ ಅಥವಾ ಪುನಾವರ್ತಿತ ಅನುಕ್ರಮವನ್ನು ನಿಷೇಧಿಸಲಾಗಿದೆ"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"ಸರಿ"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"ಪ್ರಾಶಸ್ತ್ಯದ ಸಿಮ್‌ ಕಾರ್ಡ್ ನವೀಕರಿಸುವುದೇ?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ <xliff:g id="NEW_SIM">%1$s</xliff:g> ಸಿಮ್‌ ಮಾತ್ರವಿದೆ. ಸೆಲ್ಯುಲಾರ್ ಡೇಟಾ, ಕರೆಗಳು ಮತ್ತು SMS ಸಂದೇಶಗಳಿಗೆ ನೀವು ಈ ಸಿಮ್‌‌ ಬಳಸಬೇಕೆಂದು ಬಯಸುತ್ತೀರಾ?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"ಸಿಮ್‌ ಪಿನ್‌ ಕೋಡ್‌ ತಪ್ಪಾಗಿದೆ ನಿಮ್ಮ ಸಾಧನವನ್ನು ಅನ್‌ಲಾಕ್‌ ಮಾಡಲು ನೀವು ಈ ಕೂಡಲೇ ನಿಮ್ಮ ವಾಹಕವನ್ನು ಸಂಪರ್ಕಿಸಬೇಕು."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"ಸಿಮ್‌ ಪಿನ್‌ ಕೋಡ್ ತಪ್ಪಾಗಿದೆ, ನಿಮ್ಮ ಸಾಧನವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡುವ ಸಲುವಾಗಿ ನಿಮ್ಮ ವಾಹಕವನ್ನು ನೀವು ಸಂಪರ್ಕಿಸುವುದಕ್ಕೂ ಮೊದಲು ನಿಮ್ಮಲ್ಲಿ <xliff:g id="NUMBER">%d</xliff:g> ಪ್ರಯತ್ನಗಳು ಬಾಕಿ ಉಳಿದಿವೆ."</item>
-    <item quantity="other" msgid="77103619544346451">"ತಪ್ಪಾಗಿರುವ ಸಿಮ್‌ ಪಿನ್‌ ಕೋಡ್, ನಿಮ್ಮಲ್ಲಿ <xliff:g id="NUMBER">%d</xliff:g> ಪ್ರಯತ್ನಗಳು ಬಾಕಿ ಉಳಿದಿವೆ."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">ಸಿಮ್‌ ಪಿನ್ ಕೋಡ್‌ ತಪ್ಪಾಗಿದೆ, ನಿಮ್ಮಲ್ಲಿ <xliff:g id="NUMBER_1">%d</xliff:g> ಪ್ರಯತ್ನಗಳು ಬಾಕಿ ಉಳಿದಿವೆ.</item>
+      <item quantity="other">ಸಿಮ್‌ ಪಿನ್ ಕೋಡ್‌ ತಪ್ಪಾಗಿದೆ, ನಿಮ್ಮಲ್ಲಿ <xliff:g id="NUMBER_1">%d</xliff:g> ಪ್ರಯತ್ನಗಳು ಬಾಕಿ ಉಳಿದಿವೆ.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"ಸಿಮ್‌ ಪಿನ್‌ ಕಾರ್ಯಾಚರಣೆ ವಿಫಲವಾಗಿದೆ!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"ಟ್ಯಾಬ್ಲೆಟ್ ಸ್ಥಿತಿ"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"ಫೋನ್ ಸ್ಥಿತಿ"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"ಪ್ರಕ್ರಿಯೆಯ ಅಂಕಿಅಂಶಗಳು"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"ಚಾಲನೆಯಲ್ಲಿರುವ ಪ್ರಕ್ರಿಯೆಗಳ ಕುರಿತು Geeky ಅಂಕಿಅಂಶಗಳು"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"ಸ್ಮರಣೆ ಬಳಕೆ"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> ಸಮಯದಲ್ಲಿ <xliff:g id="TOTALRAM">%2$s</xliff:g> ರಲ್ಲಿ <xliff:g id="USEDRAM">%1$s</xliff:g> ರಷ್ಟು ಬಳಸಲಾಗಿದೆ"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"ಹಿನ್ನೆಲೆ"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"ಮುನ್ನೆಲೆ"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ವೈಬ್ರೇಟ್‌‌"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"ಅಧಿಸೂಚನೆ ಪ್ರವೇಶ"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d ಅಪ್ಲಿಕೇಶನ್ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಬಹುದು"</item>
-    <item quantity="other" msgid="980049191810249052">"%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಬಹುದು"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಬಹುದು</item>
+      <item quantity="other">%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಧಿಸೂಚನೆಗಳನ್ನು ಓದಬಹುದು</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"ಯಾವುದೇ ಅಧಿಸೂಚನೆಯನ್ನು ಕೇಳುಗರನ್ನು ಸ್ಥಾಪಿಸಲಾಗಿಲ್ಲ."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> ಸಕ್ರಿಯಗೊಳಿಸುವುದೇ?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"ಸಿಸ್ಟಮ್ ಅಥವಾ ಯಾವುದೇ ಸ್ಥಾಪಿಸಲಾದ ಅಪ್ಲಿಕೇಶನ್‌ನಿಂದ ಪೋಸ್ಟ್‌ ಮಾಡಲಾದ ಎಲ್ಲ ಅಧಿಸೂಚನೆಗಳನ್ನು <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ಅವರಿಗೆ ಓದಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ, ಇದು ಸಂಪರ್ಕ ಹೆಸರುಗಳು ಮತ್ತು ನಿಮಗೆ ಕಳುಹಿಸಿರುವಂತಹ ಸಂದೇಶಗಳ ಪಠ್ಯದಂತಹ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಒಳಗೊಂಡಿರಬಹುದು. ಇದಕ್ಕೆ ಈ ಅಧಿಸೂಚನೆಗಳನ್ನು ವಜಾಗೊಳಿಸಲು ಅಥವಾ ಅವುಗಳಲ್ಲಿನ ಕ್ರಿಯೆ ಬಟನ್‌ಗಳನ್ನು ಸ್ಪರ್ಶಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"ಕಂಡೀಶನ್ ಪೂರೈಕೆದಾರರು"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"ಯಾವುದೇ ಪೂರೈಕೆದಾರರು ಕಂಡೀಶನ್‌‌ಗಳ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಲ್ಲ"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d ಅಪ್ಲಿಕೇಶನ್‌ ಪೂರೈಕೆದಾರರ ಪರಿಸ್ಥಿತಿಗಳು"</item>
-    <item quantity="other" msgid="358057362115673258">"%d ಅಪ್ಲಿಕೇಶನ್‌‌ಗಳ ಪೂರೈಕೆದಾರರ ಪರಿಸ್ಥಿತಿಗಳು"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಷರತ್ತುಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ</item>
+      <item quantity="other">%d ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಷರತ್ತುಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"ಯಾವುದೇ ಕಂಡೀಶನ್‌‌ ಪೂರೈಕೆದಾರರನ್ನು ಸ್ಥಾಪಿಸಲಾಗಿಲ್ಲ."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> ಸಕ್ರಿಯಗೊಳಿಸುವುದೇ?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"ಅಡಚಣೆ ಮಾಡಬೇಡ ಮೋಡ್‌ಗೆ ನಿರ್ಗಮನ ಪರಿಸ್ಥಿತಿಗಳನ್ನು <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> ಅವರಿಗೆ ಸೇರಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ."</string>

@@ -22,10 +22,12 @@
     <string name="allow" msgid="3349662621170855910">"Дозволити"</string>
     <string name="deny" msgid="6947806159746484865">"Заборонити"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Невідомо"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Щоб стати розробником, залишився лише <xliff:g id="STEP_COUNT">%1$d</xliff:g> крок."</item>
-    <item quantity="other" msgid="6722953419953594148">"Щоб стати розробником, залишилося лише стільки кроків: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">Щоб стати розробником, залишився ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> крок.</item>
+      <item quantity="few">Щоб стати розробником, залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроки.</item>
+      <item quantity="many">Щоб стати розробником, залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроків.</item>
+      <item quantity="other">Щоб стати розробником, залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Тепер ви – розробник!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Немає потреби, ви вже розробник."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Бездротові та дротові мережі"</string>
@@ -423,30 +425,42 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Пароль має містити принаймні одну букву."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Пароль має містити принаймні одну цифру."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Пароль має містити принаймні один символ."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Пароль має містити принаймні 1 літеру."</item>
-    <item quantity="other" msgid="8186027808415585970">"Пароль має містити принаймні стільки літер: %d."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Пароль має містити принаймні 1 малу літеру."</item>
-    <item quantity="other" msgid="2693910942679679225">"Пароль має містити принаймні стільки малих літер: %d."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Пароль має містити принаймні 1 велику літеру."</item>
-    <item quantity="other" msgid="3030801209112209245">"Пароль має містити принаймні стільки великих літер: %d."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Пароль має містити принаймні 1 цифру."</item>
-    <item quantity="other" msgid="4703982391407595924">"Пароль має містити принаймні стільки цифр: %d."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Пароль має містити принаймні 1 спеціальний символ."</item>
-    <item quantity="other" msgid="1221290525051187757">"Пароль має містити принаймні стільки спеціальних символів: %d."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Пароль має містити принаймні 1 небуквений символ."</item>
-    <item quantity="other" msgid="3952508584649046404">"Пароль має містити принаймні стільки небуквених символів: %d."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">Пароль має містити принаймні %d літеру.</item>
+      <item quantity="few">Пароль має містити принаймні %d літери.</item>
+      <item quantity="many">Пароль має містити принаймні %d літер.</item>
+      <item quantity="other">Пароль має містити принаймні %d літери.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">Пароль має містити принаймні %d малу літеру.</item>
+      <item quantity="few">Пароль має містити принаймні %d малі літери.</item>
+      <item quantity="many">Пароль має містити принаймні %d малих літер.</item>
+      <item quantity="other">Пароль має містити принаймні %d малої літери.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">Пароль має містити принаймні %d велику літеру.</item>
+      <item quantity="few">Пароль має містити принаймні %d великі літери.</item>
+      <item quantity="many">Пароль має містити принаймні %d великих літер.</item>
+      <item quantity="other">Пароль має містити принаймні %d великої літери.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">Пароль має містити принаймні %d цифру.</item>
+      <item quantity="few">Пароль має містити принаймні %d цифри.</item>
+      <item quantity="many">Пароль має містити принаймні %d цифр.</item>
+      <item quantity="other">Пароль має містити принаймні %d цифри.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">Пароль має містити принаймні %d спеціальний символ.</item>
+      <item quantity="few">Пароль має містити принаймні %d спеціальні символи.</item>
+      <item quantity="many">Пароль має містити принаймні %d спеціальних символів.</item>
+      <item quantity="other">Пароль має містити принаймні %d спеціального символу.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">Пароль має містити принаймні %d небуквений символ.</item>
+      <item quantity="few">Пароль має містити принаймні %d небуквені символи.</item>
+      <item quantity="many">Пароль має містити принаймні %d небуквених символів.</item>
+      <item quantity="other">Пароль має містити принаймні %d небуквеного символу.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Адміністратор пристрою не дозволяє використовувати останній пароль."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Цифри в порядку зростання чи спадання та повторювані цифри заборонені"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +867,12 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Змінити основну SIM-карту?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> – єдина SIM-карта у вашому пристрої. Використовувати її для мобільного Інтернету, дзвінків і SMS-повідомлень?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Неправильний PIN-код SIM-карти. Зв’яжіться зі своїм оператором, щоб розблокувати пристрій."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Неправильний PIN-код SIM-карти. У вас залишилась <xliff:g id="NUMBER">%d</xliff:g> спроба. Після цього потрібно буде зв’язатися з оператором, щоб розблокувати пристрій."</item>
-    <item quantity="other" msgid="77103619544346451">"Неправильний PIN-код SIM-карти. У вас залишилося стільки спроб: <xliff:g id="NUMBER">%d</xliff:g>."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">Неправильний PIN-код SIM-карти. У вас залишилась <xliff:g id="NUMBER_1">%d</xliff:g> спроба.</item>
+      <item quantity="few">Неправильний PIN-код SIM-карти. У вас залишилося <xliff:g id="NUMBER_1">%d</xliff:g> спроби.</item>
+      <item quantity="many">Неправильний PIN-код SIM-карти. У вас залишилося <xliff:g id="NUMBER_1">%d</xliff:g> спроб.</item>
+      <item quantity="other">Неправильний PIN-код SIM-карти. У вас залишилося <xliff:g id="NUMBER_1">%d</xliff:g> спроби.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Помилка введення PIN-коду SIM-карти."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Стан пристрою"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Стан телефону"</string>
@@ -1682,8 +1698,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Статистика про процеси"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Статистика про запущені процеси"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Використання пам’яті"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"Використовувалося <xliff:g id="USEDRAM">%1$s</xliff:g> з <xliff:g id="TOTALRAM">%2$s</xliff:g> протягом <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Фонові"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Активні"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Кешовані"</string>
@@ -2403,19 +2418,23 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Вібросигнал"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Доступ до сповіщень"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Додатки не можуть читати сповіщення"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"Програми, що можуть читати сповіщення: %d"</item>
-    <item quantity="other" msgid="980049191810249052">"Програми, що можуть читати сповіщення: %d"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d додаток може читати сповіщення</item>
+      <item quantity="few">%d додатки можуть читати сповіщення</item>
+      <item quantity="many">%d додатків можуть читати сповіщення</item>
+      <item quantity="other">%d додатка можуть читати сповіщення</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Служби читання сповіщень не встановлено."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Увімкнути <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе читати всі сповіщення, надіслані системою або будь-якою встановленою програмою. У сповіщеннях може бути особиста інформація, зокрема імена контактів і текст отриманих повідомлень. Ця програма також зможе закривати сповіщення або активувати в них кнопки."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Додатки, які надають умови"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Немає додатків, які надають умови"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"Додаток %d надає умови"</item>
-    <item quantity="other" msgid="358057362115673258">"Додатки %d надають умови"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">%d додаток надає умови</item>
+      <item quantity="few">%d додатки надають умови</item>
+      <item quantity="many">%d додатків надають умови</item>
+      <item quantity="other">%d додатка надають умови</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Не встановлено додатків, які надають умови."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Увімкнути <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> зможе додавати умови виходу для режиму \"Не турбувати\"."</string>

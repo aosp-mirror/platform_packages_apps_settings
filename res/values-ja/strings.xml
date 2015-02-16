@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"許可"</string>
     <string name="deny" msgid="6947806159746484865">"許可しない"</string>
     <string name="device_info_default" msgid="7847265875578739287">"不明"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"デベロッパーになるまであと<xliff:g id="STEP_COUNT">%1$d</xliff:g>ステップです。"</item>
-    <item quantity="other" msgid="6722953419953594148">"デベロッパーになるまであと<xliff:g id="STEP_COUNT">%1$d</xliff:g>ステップです。"</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">デベロッパーになるまであと<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>ステップです。</item>
+      <item quantity="one">デベロッパーになるまであと<xliff:g id="STEP_COUNT_0">%1$d</xliff:g>ステップです。</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"これでデベロッパーになりました！"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"必要ありません。既にデベロッパーです。"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"無線とネットワーク"</string>
@@ -425,30 +425,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"パスワードには英字が1文字以上必要です。"</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"パスワードには数字が1つ以上必要です。"</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"パスワードには記号が1つ以上必要です。"</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"パスワードには英字が1文字以上必要です。"</item>
-    <item quantity="other" msgid="8186027808415585970">"パスワードには英字が%d文字以上必要です。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"パスワードには小文字の英字が1文字以上必要です。"</item>
-    <item quantity="other" msgid="2693910942679679225">"パスワードには小文字の英字が%d文字以上必要です。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"パスワードには大文字の英字が1文字以上必要です。"</item>
-    <item quantity="other" msgid="3030801209112209245">"パスワードには大文字の英字が%d文字以上必要です。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"パスワードには数字が1つ以上必要です。"</item>
-    <item quantity="other" msgid="4703982391407595924">"パスワードには数字が%d個以上必要です。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"パスワードには記号が1つ以上必要です。"</item>
-    <item quantity="other" msgid="1221290525051187757">"パスワードには記号が%d個以上必要です。"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"パスワードには記号または数字が1つ以上必要です。"</item>
-    <item quantity="other" msgid="3952508584649046404">"パスワードには記号または数字が%d個以上必要です。"</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">パスワードには英字が%d文字以上必要です。</item>
+      <item quantity="one">パスワードには英字が1文字以上必要です。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">パスワードには小文字の英字が%d文字以上必要です。</item>
+      <item quantity="one">パスワードには小文字の英字が1文字以上必要です。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">パスワードには大文字の英字が%d文字以上必要です。</item>
+      <item quantity="one">パスワードには大文字の英字が1文字以上必要です。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">パスワードには数字が%d個以上必要です。</item>
+      <item quantity="one">パスワードには数字が1つ以上必要です。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">パスワードには記号が%d個以上必要です。</item>
+      <item quantity="one">パスワードには記号が1つ以上必要です。</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">パスワードには記号または数字が%d個以上必要です。</item>
+      <item quantity="one">パスワードには記号または数字が1つ以上必要です。</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"最近使用したパスワードは使用できません。"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"一連の数字を昇順や降順にしたり、繰り返したりすることはできません"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -855,10 +855,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"優先SIMカードを更新しますか？"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"端末内のSIMは<xliff:g id="NEW_SIM">%1$s</xliff:g>のみです。このSIMをモバイルデータ、通話、SMSメッセージ用に使用しますか？"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM PINコードが無効です。お使いの端末をロック解除するには携帯通信会社にお問い合わせいただく必要があります。"</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"SIM PINコードが無効です。入力できるのはあと<xliff:g id="NUMBER">%d</xliff:g>回です。この回数を超えると、お使いの端末をロック解除するのに携帯通信会社にお問い合わせいただく必要があります。"</item>
-    <item quantity="other" msgid="77103619544346451">"SIM PINコードが無効です。入力できるのはあと<xliff:g id="NUMBER">%d</xliff:g>回です。"</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">SIM PINコードが無効です。入力できるのはあと<xliff:g id="NUMBER_1">%d</xliff:g>回です。</item>
+      <item quantity="one">SIM PINコードが無効です。入力できるのはあと<xliff:g id="NUMBER_0">%d</xliff:g>回です。この回数を超えた場合は、携帯通信会社にお問い合わせください。</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM PIN操作に失敗しました。"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"タブレットの状態"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"端末の状態"</string>
@@ -1684,8 +1684,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"メモリ使用"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g>/<xliff:g id="TOTALRAM">%2$s</xliff:g>（<xliff:g id="TIMEDURATION">%3$s</xliff:g>）"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"バックグラウンド"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"フォアグラウンド"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"キャッシュ"</string>
@@ -2409,19 +2408,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"バイブレーション"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知へのアクセス"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"アプリは通知を読み取ることができません"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d個のアプリが通知を読み取ることができます"</item>
-    <item quantity="other" msgid="980049191810249052">"%d個のアプリが通知を読み取ることができます"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d個のアプリが通知を読み取れます</item>
+      <item quantity="one">%d個のアプリが通知を読み取れます</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"通知リスナーはインストールされていません。"</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g>を有効にしますか？"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>はシステムやインストール済みのアプリが投稿した通知をすべて読み取ることができます。通知には、連絡先名などの個人情報やユーザーに送信されたメールの本文が含まれる場合があります。また、これらの通知を非表示にしたり、通知内の操作ボタンをタップしたりすることもできます。"</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"コンディションプロバイダ"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"条件を指定しているアプリはありません"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d個のアプリが条件を指定しています"</item>
-    <item quantity="other" msgid="358057362115673258">"%d個のアプリが条件を指定しています"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d個のアプリが条件を指定しています</item>
+      <item quantity="one">%d個のアプリが条件を指定しています</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"コンディションプロバイダはインストールされていません。"</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g>を有効にしますか？"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>では出口条件を[通知を非表示]モードに追加できます。"</string>

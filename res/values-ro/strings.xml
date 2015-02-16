@@ -22,10 +22,11 @@
     <string name="allow" msgid="3349662621170855910">"Permiteți"</string>
     <string name="deny" msgid="6947806159746484865">"Refuzați"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Necunoscut"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Mai aveți de parcurs <xliff:g id="STEP_COUNT">%1$d</xliff:g> pas pentru a deveni dezvoltator."</item>
-    <item quantity="other" msgid="6722953419953594148">"Mai aveți de parcurs <xliff:g id="STEP_COUNT">%1$d</xliff:g> pași pentru a deveni dezvoltator."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="few">Mai aveți <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pași pentru a deveni dezvoltator.</item>
+      <item quantity="other">Mai aveți <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> de pași pentru a deveni dezvoltator.</item>
+      <item quantity="one">Mai aveți <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> pas pentru a deveni dezvoltator.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Aţi devenit dezvoltator!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nu mai este nevoie, sunteţi deja dezvoltator."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Reţele wireless"</string>
@@ -423,30 +424,36 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Parola trebuie să conţină cel puţin o literă."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Parola trebuie să conţină minimum o cifră."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Parola trebuie să conţină cel puţin un simbol."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Parola trebuie să conţină cel puţin 1 literă."</item>
-    <item quantity="other" msgid="8186027808415585970">"Parola trebuie să conţină cel puţin %d litere."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Parola trebuie să conţină cel puţin 1 minusculă."</item>
-    <item quantity="other" msgid="2693910942679679225">"Parola trebuie să conţină cel puţin %d minuscule."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Parola trebuie să conţină cel puţin 1 majusculă."</item>
-    <item quantity="other" msgid="3030801209112209245">"Parola trebuie să conţină cel puţin %d majuscule."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Parola trebuie să conţină cel puţin 1 cifră."</item>
-    <item quantity="other" msgid="4703982391407595924">"Parola trebuie să conţină cel puţin %d cifre."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Parola trebuie să conţină cel puţin 1 simbol special."</item>
-    <item quantity="other" msgid="1221290525051187757">"Parola trebuie să conţină cel puţin %d simboluri speciale."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Parola trebuie să conţină cel puţin 1 caracter care să nu fie o literă."</item>
-    <item quantity="other" msgid="3952508584649046404">"Parola trebuie să conţină cel puţin %d caractere care să nu fie litere."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="few">Parola trebuie să conțină cel puțin %d litere.</item>
+      <item quantity="other">Parola trebuie să conțină cel puțin %d de litere.</item>
+      <item quantity="one">Parola trebuie să conțină cel puțin o literă.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="few">Parola trebuie să conțină cel puțin %d minuscule.</item>
+      <item quantity="other">Parola trebuie să conțină cel puțin %d de minuscule.</item>
+      <item quantity="one">Parola trebuie să conțină cel puțin o minusculă.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="few">Parola trebuie să conțină cel puțin %d majuscule.</item>
+      <item quantity="other">Parola trebuie să conțină cel puțin %d de majuscule.</item>
+      <item quantity="one">Parola trebuie să conțină cel puțin o majusculă.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="few">Parola trebuie să conțină cel puțin %d cifre.</item>
+      <item quantity="other">Parola trebuie să conțină cel puțin %d de cifre.</item>
+      <item quantity="one">Parola trebuie să conțină cel puțin o cifră.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="few">Parola trebuie să conțină cel puțin %d simboluri speciale.</item>
+      <item quantity="other">Parola trebuie să conțină cel puțin %d de simboluri speciale.</item>
+      <item quantity="one">Parola trebuie să conțină cel puțin un simbol special.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="few">Parola trebuie să conțină cel puțin %d caractere care să nu fie litere.</item>
+      <item quantity="other">Parola trebuie să conțină cel puțin %d de caractere care să nu fie litere.</item>
+      <item quantity="one">Parola trebuie să conțină cel puțin un caracter care să nu fie o literă.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Administrator dispozitiv nu permite parolă recentă."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Șirurile de cifre ascendente, descendente sau repetate sunt interzise"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +860,11 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Actualizați card SIM preferat?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> este singurul card SIM de pe dispozitiv. Doriți să folosiți acest card SIM pentru date mobile, pentru apeluri și pentru mesaje SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Codul PIN pentru cardul SIM este incorect. Contactați operatorul pentru a vă debloca dispozitivul."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Codul PIN pentru cardul SIM este incorect. V-a mai rămas <xliff:g id="NUMBER">%d</xliff:g> încercare, după care va trebui să contactați operatorul pentru a vă debloca dispozitivul."</item>
-    <item quantity="other" msgid="77103619544346451">"Codul PIN pentru cardul SIM este incorect. V-au mai rămas <xliff:g id="NUMBER">%d</xliff:g> încercări."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="few">Codul PIN pentru cardul SIM este incorect. V-au mai rămas <xliff:g id="NUMBER_1">%d</xliff:g> încercări.</item>
+      <item quantity="other">Codul PIN pentru cardul SIM este incorect. V-au mai rămas <xliff:g id="NUMBER_1">%d</xliff:g> de încercări.</item>
+      <item quantity="one">Cod PIN incorect pt. card SIM. <xliff:g id="NUMBER_0">%d</xliff:g> încercare rămasă, apoi deblocați dispozitivul contactând operatorul.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Deblocarea cu ajutorul codului PIN pentru cardul SIM nu a reușit!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Stare tabletă"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Stare telefon"</string>
@@ -1683,8 +1691,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistici de proces"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistici inteligente despre procesele care rulează"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Utilizarea memoriei"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> din <xliff:g id="TOTALRAM">%2$s</xliff:g> folosiți în <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"În fundal"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"În prim-plan"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"În cache"</string>
@@ -2404,19 +2411,21 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrează"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Acces la notificări"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplicațiile nu pot citi notificările"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d aplicație poate citi notificările"</item>
-    <item quantity="other" msgid="980049191810249052">"%d aplicații pot citi notificările"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="few">%d aplicații pot citi notificările</item>
+      <item quantity="other">%d de aplicații pot citi notificările</item>
+      <item quantity="one">%d aplicație poate citi notificările</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Nu sunt instalate aplicații de citire a notificărilor."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Activați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> va putea să citească toate notificările postate de sistem sau de aplicațiile instalate, care ar putea include informații personale, cum ar fi numele persoanelor de contact și textul mesajelor care vă sunt trimise. De asemenea, va putea să închidă aceste notificări sau să atingă butoanele de acțiuni din cadrul acestora."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Furnizori de condiții"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Nicio aplicație nu furnizează condiții"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d aplicație furnizează condiții"</item>
-    <item quantity="other" msgid="358057362115673258">"%d aplicații furnizează condiții"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="few">%d aplicații oferă condiții</item>
+      <item quantity="other">%d de aplicații oferă condiții</item>
+      <item quantity="one">%d aplicație oferă condiții</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Nu sunt instalați furnizori de condiții."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Activați <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> va putea să adauge condiții de ieșire la modul Nu deranja."</string>

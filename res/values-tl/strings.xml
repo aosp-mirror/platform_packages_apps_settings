@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Payagan"</string>
     <string name="deny" msgid="6947806159746484865">"Tanggihan"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Hindi Kilala"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"<xliff:g id="STEP_COUNT">%1$d</xliff:g> (na) hakbang na lang ang layo mo mula sa pagiging isang developer."</item>
-    <item quantity="other" msgid="6722953419953594148">"<xliff:g id="STEP_COUNT">%1$d</xliff:g> (na) hakbang na lang ang layo mo mula sa pagiging isang developer."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> hakbang na lang, magiging developer ka na.</item>
+      <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> na hakbang na lang, magiging developer ka na.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Isa ka nang developer!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Hindi na kailangan, isa ka nang developer."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Wireless &amp; mga network"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Dapat na maglaman ng hindi bababa sa isang titik ang password."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Dapat na maglaman ng hindi bababa sa isang digit ang password."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Dapat na maglaman ng hindi bababa sa isang simbolo ang password."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Dapat na maglaman ang password ng hindi bababa sa 1 titik."</item>
-    <item quantity="other" msgid="8186027808415585970">"Dapat na maglaman ng hindi bababa sa %d (na) titik ang password."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Dapat na maglaman ng hindi bababa sa 1 lowercase na titik ang password."</item>
-    <item quantity="other" msgid="2693910942679679225">"Dapat na maglaman ng hindi bababa sa %d (na) lowercase na titik ang password."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Dapat na maglaman ng hindi bababa sa 1 uppercase na titik ang password."</item>
-    <item quantity="other" msgid="3030801209112209245">"Dapat na maglaman ng hindi bababa sa %d (na) uppercase na titik ang password."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Dapat na maglaman ng hindi bababa sa 1 numerical na digit ang password."</item>
-    <item quantity="other" msgid="4703982391407595924">"Dapat na maglaman ng hindi bababa sa %d (na) numerical na digit ang password."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Dapat na maglaman ng hindi bababa sa 1 espesyal na simbolo ang password."</item>
-    <item quantity="other" msgid="1221290525051187757">"Dapat na maglaman ng hindi bababa sa %d (na) espesyal na simbolo ang password."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Dapat na maglaman ng hindi bababa sa 1 character na hindi titik ang password."</item>
-    <item quantity="other" msgid="3952508584649046404">"Dapat na maglaman ng hindi bababa sa %d (na) character na hindi titik ang password."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">Dapat na maglaman ang password ng kahit %d titik lang.</item>
+      <item quantity="other">Dapat na maglaman ang password ng kahit %d na titik lang.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">Dapat na maglaman ang password ng kahit %d maliit na titik lang.</item>
+      <item quantity="other">Dapat na maglaman ang password ng kahit %d na maliit na titik lang.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">Dapat na maglaman ang password ng kahit %d malaking titik lang.</item>
+      <item quantity="other">Dapat na maglaman ang password ng kahit %d na malaking titik lang.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">Dapat na maglaman ang password ng kahit %d digit lang.</item>
+      <item quantity="other">Dapat na maglaman ang password ng kahit %d na digit lang.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">Dapat na maglaman ang password ng kahit %d espesyal na simbolo lang.</item>
+      <item quantity="other">Dapat na maglaman ang password ng kahit %d na espesyal na simbolo lang.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">Dapat na maglaman ang password ng kahit %d character lang na hindi titik.</item>
+      <item quantity="other">Dapat na maglaman ang password ng kahit %d na character lang na hindi titik.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Hindi pinapayagan ng administrator ng device ang paggamit ng kamakailang password."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Ipinagbabawal ang pataas, pababa o paulit-ulit na pagkakasunud-sunod ng mga digit"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"I-update ang gustong SIM card?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"Ang <xliff:g id="NEW_SIM">%1$s</xliff:g> ay ang nag-iisang SIM sa iyong device. Gusto mo bang gamitin ang SIM na ito para sa cellular data, mga tawag at mensaheng SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Maling PIN code ng SIM, dapat ka nang makipag-ugnay sa iyong carrier upang i-unlock ang iyong device."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Maling PIN code ng SIM, mayroon kang <xliff:g id="NUMBER">%d</xliff:g> (na) natitirang pagsubok bago ka dapat makipag-ugnay sa iyong carrier upang i-unlock ang iyong device."</item>
-    <item quantity="other" msgid="77103619544346451">"Maling PIN code ng SIM, mayroon kang <xliff:g id="NUMBER">%d</xliff:g> (na) natitirang pagsubok."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">Maling SIM PIN code, <xliff:g id="NUMBER_1">%d</xliff:g> subok na lang bago ka makipag-ugnayan sa carrier mo upang i-unlock ang device.</item>
+      <item quantity="other">Maling SIM PIN code, <xliff:g id="NUMBER_1">%d</xliff:g> subok na lang bago ka makipag-ugnayan sa carrier mo upang i-unlock ang device.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Nabigo ang operasyon ng SIM PIN!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Katayuan ng tablet"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Katayuan ng telepono"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Stats ng Proseso"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Mahahalagang istatistika tungkol sa mga tumatakbong proseso"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Memory na ginamit"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> ng <xliff:g id="TOTALRAM">%2$s</xliff:g> ang nagamit sa loob ng <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Background"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Foreground"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Naka-cache"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Mag-vibrate"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Access sa notification"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Hindi makakapagbasa ng mga notification ang apps"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d app ang makakapagbasa ng mga notification"</item>
-    <item quantity="other" msgid="980049191810249052">"%d (na) apps ang makakapagbasa ng mga notification"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d app ang makakapagbasa ng mga notification</item>
+      <item quantity="other">%d na app ang makakapagbasa ng mga notification</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Walang mga naka-install na notification listener."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Paganahin ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"Mababasa ng <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ang lahat ng notification na na-post ng system o ng anumang naka-install na app, na maaaring may kasamang personal na impormasyon tulad ng mga pangalan ng contact at teksto ng mga mensaheng ipinadala sa iyo. Magagawa din nitong i-dismiss ang mga notification na ito o pumindot ng mga button ng pagkilos sa loob ng mga ito."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Mga provider ng kundisyon"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Walang app ang nagbibigay ng mga kundisyon"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"Nagbibigay ang %d app ng mga kundisyon"</item>
-    <item quantity="other" msgid="358057362115673258">"Nagbibigay ang %d (na) app ng mga kundisyon"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">Nagbibigay ang %d app ng mga kundisyon</item>
+      <item quantity="other">Nagbibigay ang %d na app ng mga kundisyon</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Walang naka-install na mga provider ng kundisyon."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"I-enable ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"Magagawa ng <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> na magdagdag ng mga kundisyon sa paglabas sa mode na Huwag istorbohin."</string>

@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"අවසර දෙන්න"</string>
     <string name="deny" msgid="6947806159746484865">"ප්‍රතික්ෂේප කරන්න"</string>
     <string name="device_info_default" msgid="7847265875578739287">"නොදනී"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"ඔබට දැන් වර්ධකයකු වීමට ඇත්තේ පියවර <xliff:g id="STEP_COUNT">%1$d</xliff:g> කි."</item>
-    <item quantity="other" msgid="6722953419953594148">"ඔබට දැන් වර්ධකයකු වීමට ඇත්තේ පියවර <xliff:g id="STEP_COUNT">%1$d</xliff:g> කි."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">ඔබට දැන් සංවර්ධකයකු වීමට ඇත්තේ පියවර <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> කි.</item>
+      <item quantity="other">ඔබට දැන් සංවර්ධකයකු වීමට ඇත්තේ පියවර <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> කි.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"ඔබ දැන් වර්ධකයෙකි"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"අවශ්‍ය නැත, ඔබ දැනටමත් වර්ධකයෙකි."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"නොරැහැන් සහ ජාලා"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"මුරපදයෙහි අවම වශයෙන් අකුරු එකක් වත් තිබිය යුතුය."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"මුරපදයේ අඩුම ගණනේ එක සංඛ්‍යාංකයක්වත් අඩංගු විය යුතුය."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"මුරපදයෙහි අවම වශයෙන් සංකේත එකක් වත් තිබිය යුතුය."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"මුරපදයෙහි අවම වශයෙන් අකුරු 1 ක් වත් තිබිය යුතුය."</item>
-    <item quantity="other" msgid="8186027808415585970">"මුරපදයෙහි අවම වශයෙන් අකුරු %d ක් වත් තිබිය යුතුය."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"මුරපදයෙහි අවම වශයෙන් කුඩා අකුරු 1 ක් වත් තිබිය යුතුය."</item>
-    <item quantity="other" msgid="2693910942679679225">"මුරපදයෙහි අවම වශයෙන් කුඩා අකුරු %d ක් වත් තිබිය යුතුය."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"මුරපදයෙහි අවම වශයෙන් කැපිටල් අකුරු 1 ක් වත් තිබිය යුතුය."</item>
-    <item quantity="other" msgid="3030801209112209245">"මුරපදයෙහි අවම වශයෙන් කැපිටල් අකුරු %d ක් වත් තිබිය යුතුය."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"මුරපදයෙහි අවම වශයෙන් සංඛ්‍යාත්මක ඉලක්කම් 1 ක් වත් තිබිය යුතුය."</item>
-    <item quantity="other" msgid="4703982391407595924">"මුරපදයෙහි අවම වශයෙන් සංඛ්‍යාත්මක ඉලක්කම් %d ක් වත් තිබිය යුතුය."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"රහස්පදය සඳහා අඩුතරමේ එක් විශේෂ සලකුණක් වත් අඩංගු විය යුතුය."</item>
-    <item quantity="other" msgid="1221290525051187757">"මුරපදයෙහි අවම වශයෙන් විශේෂ සංකේත %d ක් වත් තිබිය යුතුය."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"මුරපදයෙහි අවම වශයෙන් අකුරක් නොවන අක්ෂර 1 ක් වත් තිබිය යුතුය."</item>
-    <item quantity="other" msgid="3952508584649046404">"මුරපදයෙහි අවම වශයෙන් අකුරක් නොවන අක්ෂර %d ක් වත් තිබිය යුතුය."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">මුරපදයෙහි අඩුම තරමේ අකුරු %d ක් වත් තිබිය යුතුය.</item>
+      <item quantity="other">මුරපදයෙහි අඩුම තරමේ අකුරු %d ක් වත් තිබිය යුතුය.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">මුරපදයෙහි අඩුම තරමේ කුඩා අකුරු %d ක් වත් තිබිය යුතුය.</item>
+      <item quantity="other">මුරපදයෙහි අඩුම තරමේ කුඩා අකුරු %d ක් වත් තිබිය යුතුය.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">මුරපදයෙහි අඩුම තරමේ ලොකු අකුරු %d ක් වත් තිබිය යුතුය.</item>
+      <item quantity="other">මුරපදයෙහි අඩුම තරමේ ලොකු අකුරු %d ක් වත් තිබිය යුතුය.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">මුරපදයෙහි අඩුම තරමේ ඉලක්කම් %d ක් වත් තිබිය යුතුය.</item>
+      <item quantity="other">මුරපදයෙහි අඩුම තරමේ ඉලක්කම් %d ක් වත් තිබිය යුතුය.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">මුරපදයෙහි අඩුම තරමේ විශේෂ සංකේත %d ක් වත් අඩංගු විය යුතුය.</item>
+      <item quantity="other">මුරපදයෙහි අඩුම තරමේ විශේෂ සංකේත %d ක් වත් අඩංගු විය යුතුය.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">මුරපදයෙහි අඩුම තරමේ අකුරක් නොවන අක්ෂර %d ක් වත් තිබිය යුතුය.</item>
+      <item quantity="other">මුරපදයෙහි අඩුම තරමේ අකුරක් නොවන අක්ෂර %d ක් වත් තිබිය යුතුය.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"උපාංග පරිපාලක මෑත මුරපදයක් භාවිතා කිරීමට අවසර නොදේ."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"ආරෝහණ, අවරෝහණ හෝ ප්‍රනරාවර්ත අනුක්‍රමයේ අංක තහනම් කරන ලදි"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"හරි"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"යාවත්කාලීන වලට මනාප කළ SIM කාඩ්පත කුමක්ද?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"SIM එක <xliff:g id="NEW_SIM">%1$s</xliff:g> පමණක් ඔබගේ උපාංගය තුළ තිබේ. සෙල්‍යුලර් දත්ත, ඇමතුම්, සහ SMS පණිවිඩ සඳහා මෙම SIM එක භාවිතා කිරීමට ඔබට අවශ්‍යද?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"වැරදී SIM PIN කේතයකි, ඔබගේ දුරකතනයේ අඟුල හැරීමට ඔබගේ වාහකයා ඔබ දැන් සම්බන්ධ කරගත යුතුය."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"වැරදී SIM PIN කේතයකි, ඔබගේ දුරකතනයේ අඟුල හැරීමට ඔබගේ වාහකයා සම්බන්ධ කරගැනීමට පෙර ඔබ සතුව තවත් උත්සාහයන් <xliff:g id="NUMBER">%d</xliff:g> ඉතිරිව ඇත."</item>
-    <item quantity="other" msgid="77103619544346451">"වැරදී SIM PIN කේතයකි, ඔබ සතුව තවත් උත්සාහයන් <xliff:g id="NUMBER">%d</xliff:g> ඉතිරිව ඇත."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">වැරදී SIM PIN කේතයකි, ඔබගේ දුරකථනයේ අඟුල හැරීමට ඔබගේ වාහකයා සම්බන්ධ කරගැනීමට පෙර ඔබ සතුව තවත් උත්සාහයන් <xliff:g id="NUMBER_1">%d</xliff:g> ක් ඉතිරිව ඇත.</item>
+      <item quantity="other">වැරදී SIM PIN කේතයකි, ඔබගේ දුරකථනයේ අඟුල හැරීමට ඔබගේ වාහකයා සම්බන්ධ කරගැනීමට පෙර ඔබ සතුව තවත් උත්සාහයන් <xliff:g id="NUMBER_1">%d</xliff:g> ක් ඉතිරිව ඇත.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM PIN ක්‍රියාවලිය අපොහොසත් විය!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"ටැබ්ලට් තත්වය"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"දුරකථනයේ තත්වය"</string>
@@ -1684,8 +1684,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"ක්‍රියාවලි සංඛ්‍යා ලේඛන"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"ධාවන ක්‍රියාවලි පිළිබඳ ගීක සංඛ්‍යා ලේඛන"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"මතක භාවිතය"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> ක් තිස්සේ භාවිත කළ <xliff:g id="TOTALRAM">%2$s</xliff:g> කින් <xliff:g id="USEDRAM">%1$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"පසුබිම"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"පෙරබිම"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"හැඹිලි කළ"</string>
@@ -2405,19 +2404,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"කම්පනය වන්න"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"දැනුම්දීම් ප්‍රවේශනය"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"යෙදුම්වලට දැනුම් දීම් කියවිය නොහැක"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"යෙදුම් %d කට දැනුම්දීම් කියවිය හැක"</item>
-    <item quantity="other" msgid="980049191810249052">"යෙදුම් %d කට දැනුම්දීම් කියවිය හැක"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
+      <item quantity="other">යෙදුම් %d කට දැනුම්දීම් කියවිය හැක</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"දැනුම් දීම් ශ්‍රාවකයන් ස්ථාපනය කර නොමැත."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> සබලද?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> වෙත සම්බන්ධතා නම් සහ ඔබට එවා ඇති පණිවිඩ වල පෙළ වැනි පෞද්ගලික තොරතුරු ඇතුළත්ව පද්ධතියෙන් හෝ ඕනෑම ස්ථාපනය කළ යෙදුමකින් පළ කළ සියලු දැනුම්දීම් කියවිය හැක. එය මෙම දැනුම්දීම් අස් කිරීම හෝ ඒවා තුළ ඇති ක්‍රියා බොත්තම් ස්පර්ශ කළ හැක."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"කොන්දේසි ප්‍රතිපාදකයින්"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"යෙදුම් ප්‍රතිපාදනය කරන කොන්දේසි නැත"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d යෙදුම ප්‍රතිපාදනය කරන කොන්දේසි"</item>
-    <item quantity="other" msgid="358057362115673258">"%d යෙදුම් ප්‍රතිපාදනය කරන කොන්දේසි"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">යෙදුම් %d ක් සපයන කොන්දේසි</item>
+      <item quantity="other">යෙදුම් %d ක් සපයන කොන්දේසි</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"කොන්දේසි ප්‍රතිපාදකයින් ස්ථාපනය කර නැත."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> සබලද?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"බාධා නොකරන්න ආකාරයට පිටවීමේ කොන්දේසි එකතු කිරීමට <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> හැකිවේ."</string>

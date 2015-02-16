@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Autoriser"</string>
     <string name="deny" msgid="6947806159746484865">"Refusers"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Plus que <xliff:g id="STEP_COUNT">%1$d</xliff:g> étape pour devenir un développeur."</item>
-    <item quantity="other" msgid="6722953419953594148">"Plus que <xliff:g id="STEP_COUNT">%1$d</xliff:g> étapes pour devenir un développeur."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="one">Plus qu’<xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir un développeur.</item>
+      <item quantity="other">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étapes pour devenir un développeur.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Vous êtes désormais un développeur!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Inuti, vous êtes déjà un développeur."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Sans fil et réseaux"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Le mot de passe doit comporter au moins une lettre."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Le mot de passe doit comporter au moins un chiffre."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Le mot de passe doit comporter au moins un symbole."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Le mot de passe doit comporter au moins une lettre."</item>
-    <item quantity="other" msgid="8186027808415585970">"Le mot de passe doit comporter au moins %d lettres."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Le mot de passe doit comporter au moins une lettre minuscule."</item>
-    <item quantity="other" msgid="2693910942679679225">"Le mot de passe doit comporter au moins %d lettres minuscules."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Le mot de passe doit comporter au moins une lettre majuscule."</item>
-    <item quantity="other" msgid="3030801209112209245">"Le mot de passe doit comporter au moins %d lettres majuscules."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Le mot de passe doit comporter au moins un chiffre."</item>
-    <item quantity="other" msgid="4703982391407595924">"Le mot de passe doit comporter au moins %dchiffres."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Le mot de passe doit comporter au moins un caractère spécial."</item>
-    <item quantity="other" msgid="1221290525051187757">"Le mot de passe doit comporter au moins %d caractères spéciaux."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Le mot de passe doit comporter au moins un caractère autre qu\'une lettre."</item>
-    <item quantity="other" msgid="3952508584649046404">"Le mot de passe doit comporter au moins %d caractères autres que des lettres."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="one">Le mot de passe doit contenir au moins %d lettre.</item>
+      <item quantity="other">Le mot de passe doit contenir au moins %d lettres.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="one">Le mot de passe doit contenir au moins %d lettre minuscule.</item>
+      <item quantity="other">Le mot de passe doit contenir au moins %d lettres minuscules.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="one">Le mot de passe doit contenir au moins %d lettre majuscule.</item>
+      <item quantity="other">Le mot de passe doit contenir au moins %d lettres majuscules.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="one">Le mot de passe doit contenir au moins %d chiffre.</item>
+      <item quantity="other">Le mot de passe doit contenir au moins %d chiffres.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="one">Le mot de passe doit contenir au moins un caractère spécial.</item>
+      <item quantity="other">Le mot de passe doit contenir au moins un caractères spéciaux.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="one">Le mot de passe doit contenir au moins %d caractère qui n\'est pas une lettre.</item>
+      <item quantity="other">Le mot de passe doit contenir au moins %d caractères qui ne sont pas une lettre.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"L\'administrateur de l\'appareil ne permet pas l\'utilisation d\'un mot de passe récent."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Les suites de chiffres croissantes, décroissantes ou répétitives ne sont pas autorisées."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"M. à jour la carte SIM préf.?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> est la seule carte SIM dans votre appareil. Voulez-vous utiliser cette carte SIM pour les données cellulaires, les appels et les textos?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"NIP de carte SIM incorrect. Vous devez maintenant communiquer avec votre fournisseur de services pour déverrouiller votre appareil."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"NIP de carte SIM incorrect. Il vous reste <xliff:g id="NUMBER">%d</xliff:g> tentative. Après cela, vous devrez communiquer avec votre fournisseur de services pour déverrouiller votre appareil."</item>
-    <item quantity="other" msgid="77103619544346451">"NIP de carte SIM incorrect. Il vous reste <xliff:g id="NUMBER">%d</xliff:g> tentative(s)."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="one">Le NIP de la carte SIM incorrect. Il vous reste <xliff:g id="NUMBER_1">%d</xliff:g> tentative.</item>
+      <item quantity="other">Le NIP de la carte SIM incorrect. Il vous reste <xliff:g id="NUMBER_1">%d</xliff:g> tentatives.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Le déverrouillage par NIP de carte SIM a échoué."</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"État de la tablette"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"État du téléphone"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Statistiques des processus"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Statistiques détaillées sur les processus en cours d\'exécution"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Mémoire utilisée"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> de <xliff:g id="TOTALRAM">%2$s</xliff:g> utilisé sur <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Arrière-plan"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Avant-plan"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"En cache"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibreur"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accès aux notifications"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Les applications ne peuvent pas lire les notifications."</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d application peut lire les notifications."</item>
-    <item quantity="other" msgid="980049191810249052">"%d applications peuvent lire les notifications."</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="one">%d application peut lire les notifications</item>
+      <item quantity="other">%d application peuvent lire les notifications</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Aucun outil d\'écoute des notifications installé."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Activer <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications publiées par le système ou toute application installée. Ces notifications peuvent comporter des informations personnelles, telles que des noms de contacts et le texte de messages qui vous ont été envoyés. L\'application pourra également masquer ces notifications ou sélectionner les boutons d\'action qu\'elles contiennent."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Fournisseurs de conditions"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Aucune application ne fournit de conditions"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d application fournit des conditions"</item>
-    <item quantity="other" msgid="358057362115673258">"%d applications fournissent des conditions"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="one">%d application fournit des conditions</item>
+      <item quantity="other">%d applications fournissent des conditions</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Aucun fournisseur de conditions n\'est installé."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Activer <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> pourra ajouter des conditions de sortie au mode Ne pas déranger."</string>

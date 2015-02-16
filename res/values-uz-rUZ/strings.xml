@@ -22,10 +22,10 @@
     <string name="allow" msgid="3349662621170855910">"Ruxsat berish"</string>
     <string name="deny" msgid="6947806159746484865">"Rad qilish"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Noma’lum"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Dasturchi bo‘lishingizga bor-yo‘g‘i <xliff:g id="STEP_COUNT">%1$d</xliff:g> qadam qoldi."</item>
-    <item quantity="other" msgid="6722953419953594148">"Dasturchi bo‘lishingizga bor-yo‘g‘i  <xliff:g id="STEP_COUNT">%1$d</xliff:g> qadam qoldi."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="other">Dasturchi sifatida ro‘yxatdan o‘tishni yakunlashga <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> qadam qoldi.</item>
+      <item quantity="one">Dasturchi sifatida ro‘yxatdan o‘tishni yakunlashga <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> qadam qoldi.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Siz endi dasturchisiz!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Bunga ehtiyoj yo‘q. Siz allaqachon dasturchisiz."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Simsiz &amp; tarmoqlar"</string>
@@ -423,30 +423,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Parolda kamida bitta harf bo‘lishi lozim."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Parolda kamida bitta raqam bo‘lishi lozim."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Parolda kamida bitta belgi bo‘lishi lozim."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Parol kamida 1 harfga ega bo‘lishi kerak."</item>
-    <item quantity="other" msgid="8186027808415585970">"Parol kamida %d harflarga ega bo‘lishi kerak"</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Parol kamida 1 kichik harfga ega bo‘lishi kerak."</item>
-    <item quantity="other" msgid="2693910942679679225">"Parol kamida %d kichik harflarga ega bo‘lishi kerak."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Parol kamida 1 katta harfga ega bo‘lishi kerak."</item>
-    <item quantity="other" msgid="3030801209112209245">"Parol kamida %d katta harflarga ega bo‘lishi kerak."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Parol kamida 1 raqamga ega bo‘lishi kerak."</item>
-    <item quantity="other" msgid="4703982391407595924">"Parol kamida %d raqamga ega bo‘lishi kerak."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Parol kamida 1 maxsus belgiga ega bo‘lishi kerak."</item>
-    <item quantity="other" msgid="1221290525051187757">"Parol kamida %d maxsus belgilarga ega bo‘lishi kerak."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Parol kamida 1 belgiga ega bo‘lishi kerak."</item>
-    <item quantity="other" msgid="3952508584649046404">"Parol kamida %d belgilarga ega bo‘lishi kerak."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="other">Parol tarkibida kamida %d ta harf bo‘lishi lozim.</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta harf bo‘lishi lozim.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="other">Parol tarkibida kamida %d ta kichik harf bo‘lishi lozim.</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta kichik harf bo‘lishi lozim.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="other">Parol tarkibida kamida %d ta bosh harf bo‘lishi lozim.</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta bosh harf bo‘lishi lozim.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="other">Parol tarkibida kamida %d ta raqam bo‘lishi lozim.</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta raqam bo‘lishi lozim.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="other">Parol tarkibida kamida %d ta maxsus belgi bo‘lishi lozim.</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta maxsus belgi bo‘lishi lozim.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="other">Parol tarkibida kamida %d ta harf bo‘lmagan belgi bo‘lishi lozim.</item>
+      <item quantity="one">Parol tarkibida kamida 1 ta harf bo‘lmagan belgi bo‘lishi lozim.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Qurilma administratori yaqinda foydalanilgan paroldan yana foydalanishga ruxsat bermaydi."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"O\'sib boruvchi, pasayib boruvchi yoki qaytarilgan ketma-ketlik raqamlari cheklangan"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +853,10 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Ma’qul SIM karta o‘zg-sinmi?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> – qurilmangizdagi yagona SIM karta. Undan qo‘ng‘iroqlar, mobil internet va SMS xabarlar uchun foydalanmoqchimisiz?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"SIM karta noto‘g‘ri PIN kodi. Endi siz qurilmangiz qulfini ochish uchun operatoringizga murojaat qilishingiz lozim."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"SIM kartaning PIN kodi noto‘g‘ri terildi. Qurilmangiz qulflanib uni qulfdan ochish maqsadida operatoringizga qo‘ng‘iroq qilishdan oldin, siz yana <xliff:g id="NUMBER">%d</xliff:g> marta urinib ko‘rishingiz mumkin."</item>
-    <item quantity="other" msgid="77103619544346451">"SIM kartaning PIN kodi noto‘g‘ri terildi. Siz yana <xliff:g id="NUMBER">%d</xliff:g> marta urinib ko‘rishingiz mumkin."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="other">SIM kartaning PIN kodi noto‘g‘ri. Sizda yana <xliff:g id="NUMBER_1">%d</xliff:g> ta urinish qoldi.</item>
+      <item quantity="one">SIM kartaning PIN kodi noto‘g‘ri. Qurilmani qulfdan chiqarish uchun sizda yana <xliff:g id="NUMBER_0">%d</xliff:g> ta urinish qoldi.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"SIM karta PIN kodining amaliyoti bajarilmadi!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Planshet holati"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefon ahvoli"</string>
@@ -1682,8 +1682,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Jarayon statistikalari"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Ish jarayonlari haqidagi g‘alati statistikalar"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Band xotira"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="TIMEDURATION">%3$s</xliff:g> davomida <xliff:g id="USEDRAM">%1$s</xliff:g> / <xliff:g id="TOTALRAM">%2$s</xliff:g> ishlatildi"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Fon"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Ahamiyatli"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"Keshlangan"</string>
@@ -2403,19 +2402,19 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Tebranish"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Bildirishnomalarga kirish"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Ilovalar xabarnomalarni o‘qiy olmayapti"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d ilovasi xabarnomalarni o‘qishi mumkin"</item>
-    <item quantity="other" msgid="980049191810249052">"%d ilovalari xabarnomalarni o‘qishi mumkin"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="other">%d ilova bildirishnomalarni o‘qishi mumkin</item>
+      <item quantity="one">%d ta ilova bildirishnomalarni o‘qishi mumkin</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Hech qanday xabarnoma qabul qiluvchi ilova o‘rnatilmagan."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"<xliff:g id="SERVICE">%1$s</xliff:g> yoqilsinmi?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aloqa nomlari va sizga yuborilgan xabarlar matni kabi shaxsiy ma‘lumotlardan iborat bo‘lishi mumkin bo‘lgan tizim yoki o‘rnatilgan ilova tomonidan post sifatida qoldirilgan barcha xabarnomalarni o‘qish imkoniyatiga ega bo‘ladi. Shuningdek, u bu xabarnomalarni e‘tiborsiz qoldirish yoki ulardagi vazifalar tugmalarini bosish imkoniyatiga ham ega bo‘ladi."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Shartlarning manbalari"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Hech qaysi ilova shart qo‘ymaydi"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d ta ilova shart qo‘yadi"</item>
-    <item quantity="other" msgid="358057362115673258">"%d ta ilova shart qo‘yadi"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="other">%d ta ilova shart qo‘yadi</item>
+      <item quantity="one">%d ta ilova shart qo‘yadi</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Shartlar manbasi o‘rnatilmagan."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> yoqilsinmi?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> “Bezovta qilmaslik” rejimidan chiqish shartlarini qo‘shishi mumkin."</string>

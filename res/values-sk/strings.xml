@@ -22,10 +22,12 @@
     <string name="allow" msgid="3349662621170855910">"Povoliť"</string>
     <string name="deny" msgid="6947806159746484865">"Odmietnuť"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Neznáme"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"Počet krokov do získania stavu vývojára: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
-    <item quantity="other" msgid="6722953419953594148">"Počet krokov do získania stavu vývojára: <xliff:g id="STEP_COUNT">%1$d</xliff:g>."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="few">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> krok a bude z vás vývojár.</item>
+      <item quantity="many">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroka a bude z vás vývojár.</item>
+      <item quantity="other">Ešte <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> krokov a bude z vás vývojár.</item>
+      <item quantity="one">Ešte <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> krok a bude z vás vývojár.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Teraz ste vývojár!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Nie je to potrebné, už ste vývojár."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Bezdrôtové pripojenie a siete"</string>
@@ -423,30 +425,42 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"Heslo musí obsahovať najmenej jedno písmeno."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"Heslo musí obsahovať najmenej jednu číslicu."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"Heslo musí obsahovať najmenej jeden symbol."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"Heslo musí obsahovať najmenej jedno písmeno."</item>
-    <item quantity="other" msgid="8186027808415585970">"Heslo musí obsahovať najmenej %d písmen."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"Heslo musí obsahovať najmenej jedno malé písmeno."</item>
-    <item quantity="other" msgid="2693910942679679225">"Heslo musí obsahovať najmenej %d malých písmen."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"Heslo musí obsahovať najmenej jedno veľké písmeno."</item>
-    <item quantity="other" msgid="3030801209112209245">"Heslo musí obsahovať najmenej %d veľkých písmen."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"Heslo musí obsahovať najmenej jednu číslicu."</item>
-    <item quantity="other" msgid="4703982391407595924">"Heslo musí obsahovať najmenej %d číslic."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"Heslo musí obsahovať najmenej jeden špeciálny symbol."</item>
-    <item quantity="other" msgid="1221290525051187757">"Heslo musí obsahovať najmenej %d špeciálnych znakov."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"Heslo musí obsahovať najmenej jeden znak iný ako písmeno."</item>
-    <item quantity="other" msgid="3952508584649046404">"Heslo musí obsahovať najmenej %d znakov iných ako písmená."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="few">Heslo musí obsahovať najmenej %d písmená</item>
+      <item quantity="many">Heslo musí obsahovať najmenej %d písmena</item>
+      <item quantity="other">Heslo musí obsahovať najmenej %d písmen</item>
+      <item quantity="one">Heslo musí obsahovať najmenej 1 písmeno</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="few">Heslo musí obsahovať najmenej %d malé písmená</item>
+      <item quantity="many">Heslo musí obsahovať najmenej %d malého písmena</item>
+      <item quantity="other">Heslo musí obsahovať najmenej %d malých písmen</item>
+      <item quantity="one">Heslo musí obsahovať najmenej 1 malé písmeno</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="few">Heslo musí obsahovať najmenej %d veľké písmená</item>
+      <item quantity="many">Heslo musí obsahovať najmenej %d veľkého písmena</item>
+      <item quantity="other">Heslo musí obsahovať najmenej %d veľkých písmen</item>
+      <item quantity="one">Heslo musí obsahovať najmenej 1 veľké písmeno</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="few">Heslo musí obsahovať najmenej %d číslice</item>
+      <item quantity="many">Heslo musí obsahovať najmenej %d číslice</item>
+      <item quantity="other">Heslo musí obsahovať najmenej %d číslic</item>
+      <item quantity="one">Heslo musí obsahovať najmenej 1 číslicu</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="few">Heslo musí obsahovať najmenej %d špeciálne symboly</item>
+      <item quantity="many">Heslo musí obsahovať najmenej %d špeciálneho symbolu</item>
+      <item quantity="other">Heslo musí obsahovať najmenej %d špeciálnych symbolov</item>
+      <item quantity="one">Heslo musí obsahovať najmenej 1 špeciálny symbol</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="few">Heslo musí obsahovať najmenej %d znaky iné ako písmeno</item>
+      <item quantity="many">Heslo musí obsahovať najmenej %d znaku iného ako písmeno</item>
+      <item quantity="other">Heslo musí obsahovať najmenej %d znakov iných ako písmeno</item>
+      <item quantity="one">Heslo musí obsahovať najmenej 1 znak iný ako písmeno</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"Správca zariadení neumožňuje používanie nedávneho hesla."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"Vzostupná, zostupná alebo opakovaná sekvencia čísiel je zakázaná"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
@@ -853,10 +867,12 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"Aktualizovať pref. SIM kartu?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"<xliff:g id="NEW_SIM">%1$s</xliff:g> je jediná SIM karta vo vašom zariadení. Chcete použiť túto SIM kartu pre mobilné dáta, hovory a správy SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"Nesprávny kód PIN karty SIM. Teraz musíte kontaktovať svojho operátora, aby vám odomkol zariadenie."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"Nesprávny kód PIN karty SIM. Zostáva vám <xliff:g id="NUMBER">%d</xliff:g> pokus, inak budete musieť kontaktovať svojho operátora, aby vám odomkol zariadenie."</item>
-    <item quantity="other" msgid="77103619544346451">"Nesprávny kód PIN karty SIM. Počet zostávajúcich pokusov: <xliff:g id="NUMBER">%d</xliff:g>."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="few">Nesprávny kód PIN SIM karty. Zostávajú vám <xliff:g id="NUMBER_1">%d</xliff:g> pokusy.</item>
+      <item quantity="many">Nesprávny kód PIN SIM karty. Zostáva vám <xliff:g id="NUMBER_1">%d</xliff:g> pokusu.</item>
+      <item quantity="other">Nesprávny kód PIN SIM karty. Zostáva vám <xliff:g id="NUMBER_1">%d</xliff:g> pokusov.</item>
+      <item quantity="one">Nesprávny kód PIN SIM karty. Zostáva vám <xliff:g id="NUMBER_0">%d</xliff:g> pokus, potom budete musieť kontaktovať svojho operátora, aby vám odomkol zariadenie.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"Operácia kódu PIN karty SIM zlyhala!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Stav tabletu"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Stav telefónu"</string>
@@ -1682,8 +1698,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"Štatistiky procesov"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"Podrobné štatistiky spustených procesov"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"Využitie pamäte"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"<xliff:g id="USEDRAM">%1$s</xliff:g> z <xliff:g id="TOTALRAM">%2$s</xliff:g> za <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"Pozadie"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"Popredie"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"V pamäti"</string>
@@ -2403,19 +2418,23 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibrovanie"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Prístup k upozorneniam"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Aplikácie nesmú čítať upozornenia"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"%d aplikácia dokáže čítať upozornenia"</item>
-    <item quantity="other" msgid="980049191810249052">"Aplikácie, ktoré dokážu čítať upozornenia (celkom %d)"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="few">%d aplikácie dokážu čítať upozornenia</item>
+      <item quantity="many">%d aplikácie dokáže čítať upozornenia</item>
+      <item quantity="other">%d aplikácií dokáže čítať upozornenia</item>
+      <item quantity="one">%d aplikácia dokáže čítať upozornenia</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"Nie sú nainštalované žiadne aplikácie na počúvanie upozornení."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"Povoliť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia, ktoré uverejní systém alebo ktorákoľvek z nainštalovaných aplikácií. Upozornenia môžu obsahovať osobné informácie, ako sú napríklad mená kontaktov alebo texty vám poslaných správ. Aplikácia bude tiež môcť tieto upozornenia zatvoriť alebo sa dotknúť tlačidiel akcií v upozorneniach."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"Poskytovatelia podmienok"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"Žiadne aplikácie neposkytujú podmienky"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"%d aplikácia poskytuje podmienky"</item>
-    <item quantity="other" msgid="358057362115673258">"Počet aplikácií poskytujúcich podmienky: %d"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="few">%d aplikácie poskytujú podmienky</item>
+      <item quantity="many">%d aplikácie poskytuje podmienky</item>
+      <item quantity="other">%d aplikácií poskytuje podmienky</item>
+      <item quantity="one">%d aplikácia poskytuje podmienky</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"Nie sú nainštalovaní žiadni poskytovatelia podmienok."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Povoliť službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> bude môcť pridávať podmienky ukončenia do režimu Nerušiť."</string>

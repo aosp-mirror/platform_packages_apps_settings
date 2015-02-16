@@ -22,10 +22,12 @@
     <string name="allow" msgid="3349662621170855910">"אפשר"</string>
     <string name="deny" msgid="6947806159746484865">"דחה"</string>
     <string name="device_info_default" msgid="7847265875578739287">"לא ידוע"</string>
-  <plurals name="show_dev_countdown">
-    <item quantity="one" msgid="5295687242294085452">"אתה כעת במרחק של צעד <xliff:g id="STEP_COUNT">%1$d</xliff:g> מלהיות מפתח."</item>
-    <item quantity="other" msgid="6722953419953594148">"אתה כעת במרחק של <xliff:g id="STEP_COUNT">%1$d</xliff:g> צעדים מלהיות מפתח."</item>
-  </plurals>
+    <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
+      <item quantity="two">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
+      <item quantity="many">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
+      <item quantity="other">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
+      <item quantity="one">אתה כעת במרחק של צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> מלהיות מפתח.</item>
+    </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"אתה כעת מפתח!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"אין צורך, אתה כבר מפתח."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"רשתות ותקשורת אלחוטית"</string>
@@ -423,30 +425,42 @@
     <string name="lockpassword_password_requires_alpha" msgid="5203836082520634764">"הסיסמה צריכה להכיל אות אחת לפחות."</string>
     <string name="lockpassword_password_requires_digit" msgid="3958033271435659825">"הסיסמה צריכה להכיל ספרה אחת לפחות."</string>
     <string name="lockpassword_password_requires_symbol" msgid="7226621405629726899">"הסיסמה צריכה להכיל סמל אחד לפחות."</string>
-  <plurals name="lockpassword_password_requires_letters">
-    <item quantity="one" msgid="3063853802158131458">"הסיסמה צריכה להכיל אות אחת לפחות."</item>
-    <item quantity="other" msgid="8186027808415585970">"‏הסיסמה צריכה להכיל %d אותיות לפחות."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_lowercase">
-    <item quantity="one" msgid="5583986519662091001">"הסיסמה צריכה להכיל אות קטנה אחת לפחות."</item>
-    <item quantity="other" msgid="2693910942679679225">"‏הסיסמה צריכה להכיל %d אותיות קטנות לפחות."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_uppercase">
-    <item quantity="one" msgid="2611909966725502768">"הסיסמה צריכה להכיל אות גדולה אחת לפחות."</item>
-    <item quantity="other" msgid="3030801209112209245">"‏הסיסמה צריכה להכיל %d אותיות גדולות לפחות."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_numeric">
-    <item quantity="one" msgid="3820355568839621231">"הסיסמה צריכה להכיל ספרה אחת לפחות."</item>
-    <item quantity="other" msgid="4703982391407595924">"‏הסיסמה צריכה להכיל %d ספרות לפחות."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_symbols">
-    <item quantity="one" msgid="8456579939292408631">"הסיסמה צריכה להכיל סמל מיוחד אחד לפחות."</item>
-    <item quantity="other" msgid="1221290525051187757">"‏הסיסמה צריכה להכיל %d סמלים מיוחדים לפחות."</item>
-  </plurals>
-  <plurals name="lockpassword_password_requires_nonletter">
-    <item quantity="one" msgid="4594051152085925921">"הסיסמה צריכה להכיל תו אחד לפחות שאינו אות."</item>
-    <item quantity="other" msgid="3952508584649046404">"‏הסיסמה צריכה להכיל %d תווים לפחות שאינם אותיות."</item>
-  </plurals>
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="5677371623980347934">
+      <item quantity="two">‏הסיסמה צריכה להכיל %d אותיות לפחות.</item>
+      <item quantity="many">‏הסיסמה צריכה להכיל %d אותיות לפחות.</item>
+      <item quantity="other">‏הסיסמה צריכה להכיל %d אותיות לפחות.</item>
+      <item quantity="one">הסיסמה צריכה להכיל אות אחת לפחות.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="5396846200894553640">
+      <item quantity="two">‏הסיסמה צריכה להכיל %d אותיות קטנות לפחות.</item>
+      <item quantity="many">‏הסיסמה צריכה להכיל %d אותיות קטנות לפחות.</item>
+      <item quantity="other">‏הסיסמה צריכה להכיל %d אותיות קטנות לפחות.</item>
+      <item quantity="one">הסיסמה צריכה להכיל אות קטנה אחת לפחות.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="2483949715040341677">
+      <item quantity="two">‏הסיסמה צריכה להכיל %d אותיות גדולות לפחות.</item>
+      <item quantity="many">‏הסיסמה צריכה להכיל %d אותיות גדולות לפחות.</item>
+      <item quantity="other">‏הסיסמה צריכה להכיל %d אותיות גדולות לפחות.</item>
+      <item quantity="one">הסיסמה צריכה להכיל אות גדולה אחת לפחות.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="9156410893744210033">
+      <item quantity="two">‏הסיסמה צריכה להכיל %d ספרות לפחות.</item>
+      <item quantity="many">‏הסיסמה צריכה להכיל %d ספרות לפחות.</item>
+      <item quantity="other">‏הסיסמה צריכה להכיל %d ספרות לפחות.</item>
+      <item quantity="one">הסיסמה צריכה להכיל ספרה אחת לפחות.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="5384442837439742233">
+      <item quantity="two">‏הסיסמה צריכה להכיל %d סמלים מיוחדים לפחות.</item>
+      <item quantity="many">‏הסיסמה צריכה להכיל %d סמלים מיוחדים לפחות.</item>
+      <item quantity="other">‏הסיסמה צריכה להכיל %d סמלים מיוחדים לפחות.</item>
+      <item quantity="one">הסיסמה צריכה להכיל סמל מיוחד אחד לפחות.</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4175064976268466293">
+      <item quantity="two">‏הסיסמה צריכה להכיל %d תווים לפחות שאינם אותיות.</item>
+      <item quantity="many">‏הסיסמה צריכה להכיל %d תווים לפחות שאינם אותיות.</item>
+      <item quantity="other">‏הסיסמה צריכה להכיל %d תווים לפחות שאינם אותיות.</item>
+      <item quantity="one">הסיסמה צריכה להכיל תו אחד לפחות שאינו אות.</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="6098087796784262081">"מנהל המכשירים אינו מאפשר שימוש בסיסמה שנעשה בה שימוש לאחרונה."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"אין להגדיר רצף ספרות עולה, יורד או חוזר"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"אישור"</string>
@@ -853,10 +867,12 @@
     <string name="sim_preferred_title" msgid="5567909634636045268">"‏האם לעדכן כרטיס SIM מועדף?"</string>
     <string name="sim_preferred_message" msgid="301251431163650167">"‏<xliff:g id="NEW_SIM">%1$s</xliff:g> הוא ה-SIM היחיד במכשיר שלך. האם ברצונך להשתמש בו עבור נתונים סלולריים, שיחות והודעות SMS?"</string>
     <string name="wrong_pin_code_pukked" msgid="4003655226832658066">"‏מספר PIN שגוי של כרטיס ה-SIM. עליך ליצור כעת קשר עם הספק על מנת לבטל את נעילת המכשיר."</string>
-  <plurals name="wrong_pin_code">
-    <item quantity="one" msgid="4840607930166101114">"‏מספר PIN שגוי של כרטיס ה-SIM. נותר לך ניסיון <xliff:g id="NUMBER">%d</xliff:g> נוסף לפני שיהיה עליך ליצור קשר עם הספק על מנת לבטל את נעילת המכשיר."</item>
-    <item quantity="other" msgid="77103619544346451">"‏מספר PIN שגוי של כרטיס ה-SIM. נותרו לך <xliff:g id="NUMBER">%d</xliff:g> ניסיונות נוספים."</item>
-  </plurals>
+    <plurals name="wrong_pin_code" formatted="false" msgid="1582398808893048097">
+      <item quantity="two">‏קוד PIN שגוי של כרטיס SIM. נותרו לך <xliff:g id="NUMBER_1">%d</xliff:g> ניסיונות.</item>
+      <item quantity="many">‏קוד PIN שגוי של כרטיס SIM. נותרו לך <xliff:g id="NUMBER_1">%d</xliff:g> ניסיונות.</item>
+      <item quantity="other">‏קוד PIN שגוי של כרטיס SIM. נותרו לך <xliff:g id="NUMBER_1">%d</xliff:g> ניסיונות.</item>
+      <item quantity="one">‏קוד PIN שגוי של כרטיס SIM. נותר לך ניסיון <xliff:g id="NUMBER_0">%d</xliff:g> לפני שיהיה עליך ליצור קשר עם הספק כדי לבטל את נעילת המכשיר.</item>
+    </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"‏פעולת מספר ה-PIN של כרטיס ה-SIM נכשלה!"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"סטטוס טאבלט"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"מצב טלפון"</string>
@@ -1682,8 +1698,7 @@
     <string name="process_stats_summary_title" msgid="1144688045609771677">"סטטיסטיקה של תהליך"</string>
     <string name="process_stats_summary" msgid="109387941605607762">"סטטיסטיקה של מומחי מחשבים על התהליכים הפועלים"</string>
     <string name="app_memory_use" msgid="7849258480392171939">"זיכרון בשימוש"</string>
-    <!-- no translation found for process_stats_total_duration (2243876627952936205) -->
-    <skip />
+    <string name="process_stats_total_duration" msgid="2243876627952936205">"נעשה שימוש ב-<xliff:g id="USEDRAM">%1$s</xliff:g> מתוך <xliff:g id="TOTALRAM">%2$s</xliff:g> במשך <xliff:g id="TIMEDURATION">%3$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="3934992858120683459">"רקע"</string>
     <string name="process_stats_type_foreground" msgid="7713118254089580536">"חזית"</string>
     <string name="process_stats_type_cached" msgid="6314925846944806511">"בקובץ שמור"</string>
@@ -2403,19 +2418,23 @@
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"רטט"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"גישה אל הודעות"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"אפליקציות לא יכולות לקרוא התראות"</string>
-  <plurals name="manage_notification_access_summary_nonzero">
-    <item quantity="one" msgid="8344183614159211585">"‏אפליקציה %d יכולה לקרוא התראות"</item>
-    <item quantity="other" msgid="980049191810249052">"‏%d אפליקציות יכולות לקרוא התראות"</item>
-  </plurals>
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
+      <item quantity="two">‏%d אפליקציות יכולות לקרוא הודעות</item>
+      <item quantity="many">‏%d אפליקציות יכולות לקרוא הודעות</item>
+      <item quantity="other">‏%d אפליקציות יכולות לקרוא הודעות</item>
+      <item quantity="one">‏אפליקציה %d יכולה לקרוא הודעות</item>
+    </plurals>
     <string name="no_notification_listeners" msgid="2767405417723149879">"לא מותקנים מאזינים להתראות."</string>
     <string name="notification_listener_security_warning_title" msgid="6494221261778885893">"האם להפעיל את <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="2780319203595885564">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> יוכל לקרוא את כל ההתראות שפורסמו על ידי המערכת או על ידי אפליקציה מותקנת כלשהי, והדבר עשוי לכלול מידע אישי כמו שמות אנשי קשר ואת הטקסט בהודעות שנשלחו אליך. הוא יוכל גם לסגור את ההתראות האלה או להשתמש בלחצני פעולה בתוכן."</string>
     <string name="manage_condition_providers" msgid="3039306415273606730">"ספקי תנאים"</string>
     <string name="manage_condition_providers_summary_zero" msgid="3760902189574984100">"אין אפליקציות המספקות תנאים"</string>
-  <plurals name="manage_condition_providers_summary_nonzero">
-    <item quantity="one" msgid="7871716594997778198">"‏אפליקציה %d מספקת תנאים"</item>
-    <item quantity="other" msgid="358057362115673258">"‏%d אפליקציות מספקות תנאים"</item>
-  </plurals>
+    <plurals name="manage_condition_providers_summary_nonzero" formatted="false" msgid="1398308139164964218">
+      <item quantity="two">‏%d אפליקציות מספקות תנאים</item>
+      <item quantity="many">‏%d אפליקציות מספקות תנאים</item>
+      <item quantity="other">‏%d אפליקציות מספקות תנאים</item>
+      <item quantity="one">‏אפליקציה %d מספקת תנאים</item>
+    </plurals>
     <string name="no_condition_providers" msgid="6183782892066424125">"לא מותקנים ספקי תנאים."</string>
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"האם להפעיל את <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> יוכל להוסיף תנאי יציאה למצב \'נא לא להפריע\'."</string>
