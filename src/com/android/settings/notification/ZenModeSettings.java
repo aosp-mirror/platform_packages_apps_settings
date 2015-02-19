@@ -197,8 +197,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
         mStarred = (DropDownPreference) important.findPreference(KEY_STARRED);
         mStarred.addItem(R.string.zen_mode_from_anyone, ZenModeConfig.SOURCE_ANYONE);
-        mStarred.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
         mStarred.addItem(R.string.zen_mode_from_contacts, ZenModeConfig.SOURCE_CONTACT);
+        mStarred.addItem(R.string.zen_mode_from_starred, ZenModeConfig.SOURCE_STAR);
         mStarred.setCallback(new DropDownPreference.Callback() {
             @Override
             public boolean onItemSelected(int pos, Object newValue) {
