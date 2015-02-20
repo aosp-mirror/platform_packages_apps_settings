@@ -186,13 +186,16 @@ class InputMethodSettingValuesWrapper {
         if (imi.isAuxiliaryIme()) {
             return false;
         }
-        if (InputMethodUtils.isValidSystemDefaultIme(true /* isSystemReady */, imi, context)) {
+        final Locale systemLocale = context.getResources().getConfiguration().locale;
+        if (InputMethodUtils.isSystemImeThatHasSubtypeOf(imi, context,
+                    true /* checkDefaultAttribute */, systemLocale, false /* checkCountry */,
+                    InputMethodUtils.SUBTYPE_MODE_ANY)) {
             return true;
         }
         if (mAsciiCapableEnabledImis.isEmpty()) {
             Log.w(TAG, "ascii capable subtype enabled imi not found. Fall back to English"
                     + " Keyboard subtype.");
-            return InputMethodUtils.containsSubtypeOf(imi, Locale.ENGLISH.getLanguage(),
+            return InputMethodUtils.containsSubtypeOf(imi, Locale.ENGLISH, false /* checkCountry */,
                     InputMethodUtils.SUBTYPE_MODE_KEYBOARD);
         }
         return mAsciiCapableEnabledImis.contains(imi);
