@@ -72,6 +72,8 @@
     <uses-permission android:name="android.permission.READ_SEARCH_INDEXABLES" />
     <uses-permission android:name="android.permission.OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.MANAGE_FINGERPRINT" />
 
     <application android:label="@string/settings_label"
             android:icon="@mipmap/ic_launcher_settings"
@@ -1218,6 +1220,9 @@
 
         <activity android:name="ConfirmLockPassword"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
+
+        <activity android:name="FingerprintSettings" android:exported="false"/>
+        <activity android:name="FingerprintEnroll" android:exported="false"/>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name="ConfirmLockPattern$InternalActivity"

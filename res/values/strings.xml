@@ -756,6 +756,54 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
+    <!-- Fingerprint enrollment and settings --><skip />
+    <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
+    <!-- Message shown for menu item that launches fingerprint settings or enrollment -->
+    <plurals name="security_settings_fingerprint_preference_summary">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> fingerprint enrolled</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints enrolled</item>
+    </plurals>
+    <!-- Introduction title shown in fingerprint enrollment dialog [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_onboard_title">Fingerprint setup</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog -->
+    <string name="security_settings_fingerprint_enroll_onboard_message">
+        To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:
+        \n\u2713 Set up your background screen lock method
+        \n\u2713 Add your fingerprint</string>
+    <!-- Title shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=22]-->
+    <string name="security_settings_fingerprint_enroll_start_title">Let\'s start!</string>
+    <!-- Message shown in fingerprint enrollment dialog to begin enrollment -->
+    <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the fingerprint sensor. Lift after you feel a vibration.</string>
+    <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_repeat_title">Great! Now repeat.</string>
+    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor -->
+    <string name="security_settings_fingerprint_enroll_repeat_message">Put the same finger on the fingerprint sensor and lift after you feel a vibration.</string>
+    <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added!</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
+    <string name="security_settings_fingerprint_enroll_finish_message">Whenever you see this icon, you can use your fingerprint for identification or to authorize a purchase.</string>
+    <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
+    <string name="fingerprint_enroll_button_add">Add</string>
+    <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
+    <string name="fingerprint_enroll_button_next">Next</string>
+    <!-- Error message shown when the fingerprint cannot be recognized -->
+    <string name="fingerprint_acquired_try_again">Partial fingerprint detected. Please try again.</string>
+    <!-- Error message shown when the fingerprint sensor needs cleaning -->
+    <string name="fingerprint_acquired_imager_dirty">Fingerprint sensor is dirty. Please clean and try again.</string>
+    <!-- Error message shown when the user removes their finger from the sensor too quickly -->
+    <string name="fingerprint_acquired_too_fast">Finger moved to fast. Please try again.</string>
+    <!-- Error message shown when the user moves their finger too slowly -->
+    <string name="fingerprint_acquired_too_slow">Finger moved to slow. Please try again.</string>
+    <!-- Generic error message shown when the fingerprint hardware can't recognize the fingerprint -->
+    <string name="fingerprint_error_unable_to_process">Unable to process. Try again.</string>
+    <!-- Error message shown when the fingerprint hardware can't be accessed -->
+    <string name="fingerprint_error_hw_not_available">Hardware not available.</string>
+    <!-- Error message shown when the fingerprint hardware has run out of room for storing fingerprints -->
+    <string name="fingerprint_error_no_space">Fingerprint can\'t be stored. Please remove an existing fingerprint.</string>
+    <!-- Error message shown when the fingerprint hardware timer has expired and the user needs to restart the operation. -->
+    <string name="fingerprint_error_timeout">Fingerprint time out reached. Try again.</string>
+
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
 

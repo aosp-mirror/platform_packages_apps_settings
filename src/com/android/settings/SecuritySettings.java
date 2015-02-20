@@ -41,6 +41,8 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
+import android.service.fingerprint.FingerprintManager;
+import android.service.fingerprint.FingerprintManager.FingerprintItem;
 import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
 import android.telephony.SubscriptionManager;
@@ -220,32 +222,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
 
-        // Trust Agent preferences
+        // Fingerprint and trust agents
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
-            final boolean hasSecurity = mLockPatternUtils.isSecure();
-            ArrayList<TrustAgentComponentInfo> agents =
-                    getActiveTrustAgents(getPackageManager(), mLockPatternUtils);
-            for (int i = 0; i < agents.size(); i++) {
-                final TrustAgentComponentInfo agent = agents.get(i);
-                Preference trustAgentPreference =
-                        new Preference(securityCategory.getContext());
-                trustAgentPreference.setKey(KEY_TRUST_AGENT);
-                trustAgentPreference.setTitle(agent.title);
-                trustAgentPreference.setSummary(agent.summary);
-                // Create intent for this preference.
-                Intent intent = new Intent();
-                intent.setComponent(agent.componentName);
-                intent.setAction(Intent.ACTION_MAIN);
-                trustAgentPreference.setIntent(intent);
-                // Add preference to the settings menu.
-                securityCategory.addPreference(trustAgentPreference);
-                if (!hasSecurity) {
-                    trustAgentPreference.setEnabled(false);
-                    trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
-                }
-            }
+            maybeAddFingerprintPreference(securityCategory);
+            addTrustAgentSettings(securityCategory);
         }
 
         // lock after preference
@@ -345,6 +327,58 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (pref != null) pref.setOnPreferenceChangeListener(this);
         }
         return root;
+    }
+
+    private void maybeAddFingerprintPreference(PreferenceGroup securityCategory) {
+        FingerprintManager fpm = (FingerprintManager) getActivity().getSystemService(
+                Context.FINGERPRINT_SERVICE);
+        if (!fpm.isHardwareDetected()) {
+            Log.v(TAG, "No fingerprint hardware detected!!");
+            return;
+        }
+        Preference fingerprintPreference = new Preference(securityCategory.getContext());
+        fingerprintPreference.setKey(KEY_TRUST_AGENT);
+        fingerprintPreference.setTitle(R.string.security_settings_fingerprint_preference_title);
+        Intent intent = new Intent();
+        List<FingerprintItem> items = fpm.getEnrolledFingerprints();
+        int fingerprintCount = items.size();
+        if (fingerprintCount > 0) {
+            fingerprintPreference.setSummary(getResources().getQuantityString(
+                    R.plurals.security_settings_fingerprint_preference_summary,
+                    fingerprintCount, fingerprintCount));
+            // TODO: Launch fingerprintSettings instead...
+            intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+        } else {
+            // No fingerprints registered, launch directly into fingerprint enrollment wizard
+            intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+        }
+        fingerprintPreference.setIntent(intent);
+        securityCategory.addPreference(fingerprintPreference);
+    }
+
+    private void addTrustAgentSettings(PreferenceGroup securityCategory) {
+        final boolean hasSecurity = mLockPatternUtils.isSecure();
+        ArrayList<TrustAgentComponentInfo> agents =
+                getActiveTrustAgents(getPackageManager(), mLockPatternUtils);
+        for (int i = 0; i < agents.size(); i++) {
+            final TrustAgentComponentInfo agent = agents.get(i);
+            Preference trustAgentPreference =
+                    new Preference(securityCategory.getContext());
+            trustAgentPreference.setKey(KEY_TRUST_AGENT);
+            trustAgentPreference.setTitle(agent.title);
+            trustAgentPreference.setSummary(agent.summary);
+            // Create intent for this preference.
+            Intent intent = new Intent();
+            intent.setComponent(agent.componentName);
+            intent.setAction(Intent.ACTION_MAIN);
+            trustAgentPreference.setIntent(intent);
+            // Add preference to the settings menu.
+            securityCategory.addPreference(trustAgentPreference);
+            if (!hasSecurity) {
+                trustAgentPreference.setEnabled(false);
+                trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
+            }
+        }
     }
 
     /* Return true if a there is a Slot that has Icc.
