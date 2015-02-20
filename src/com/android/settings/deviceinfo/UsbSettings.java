@@ -41,10 +41,12 @@ public class UsbSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_MTP = "usb_mtp";
     private static final String KEY_PTP = "usb_ptp";
+    private static final String KEY_MIDI = "usb_midi";
 
     private UsbManager mUsbManager;
     private CheckBoxPreference mMtp;
     private CheckBoxPreference mPtp;
+    private CheckBoxPreference mMidi;
     private boolean mUsbAccessoryMode;
 
     private final BroadcastReceiver mStateReceiver = new BroadcastReceiver() {
@@ -68,6 +70,7 @@ public class UsbSettings extends SettingsPreferenceFragment {
 
         mMtp = (CheckBoxPreference)root.findPreference(KEY_MTP);
         mPtp = (CheckBoxPreference)root.findPreference(KEY_PTP);
+        mMidi = (CheckBoxPreference)root.findPreference(KEY_MIDI);
 
         UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         if (um.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
@@ -107,27 +110,37 @@ public class UsbSettings extends SettingsPreferenceFragment {
         if (UsbManager.USB_FUNCTION_MTP.equals(function)) {
             mMtp.setChecked(true);
             mPtp.setChecked(false);
+            mMidi.setChecked(false);
         } else if (UsbManager.USB_FUNCTION_PTP.equals(function)) {
             mMtp.setChecked(false);
             mPtp.setChecked(true);
+            mMidi.setChecked(false);
+        } else if (UsbManager.USB_FUNCTION_MIDI.equals(function)) {
+            mMtp.setChecked(false);
+            mPtp.setChecked(false);
+            mMidi.setChecked(true);
         } else  {
             mMtp.setChecked(false);
             mPtp.setChecked(false);
+            mMidi.setChecked(false);
         }
         UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         if (um.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER)) {
             Log.e(TAG, "USB is locked down");
             mMtp.setEnabled(false);
             mPtp.setEnabled(false);
+            mMidi.setEnabled(true);
         } else if (!mUsbAccessoryMode) {
             //Enable MTP and PTP switch while USB is not in Accessory Mode, otherwise disable it
             Log.e(TAG, "USB Normal Mode");
             mMtp.setEnabled(true);
             mPtp.setEnabled(true);
+            mMidi.setEnabled(true);
         } else {
             Log.e(TAG, "USB Accessory Mode");
             mMtp.setEnabled(false);
             mPtp.setEnabled(false);
+            mMidi.setEnabled(false);
         }
     }
 
@@ -151,6 +164,8 @@ public class UsbSettings extends SettingsPreferenceFragment {
             function = UsbManager.USB_FUNCTION_MTP;
         } else if (preference == mPtp && mPtp.isChecked()) {
             function = UsbManager.USB_FUNCTION_PTP;
+        } else if (preference == mMidi && mMidi.isChecked()) {
+            function = UsbManager.USB_FUNCTION_MIDI;
         }
 
         mUsbManager.setCurrentFunction(function, true);
