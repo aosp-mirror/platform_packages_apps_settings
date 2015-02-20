@@ -88,7 +88,7 @@
                 android:taskAffinity="com.android.settings"
                 android:label="@string/settings_label_launcher"
                 android:launchMode="singleTask">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -135,11 +135,14 @@
                 android:taskAffinity="com.android.settings"
                 android:label="@string/wireless_networks_settings_title"
                 android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
                 <action android:name="android.settings.NFC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -158,9 +161,12 @@
                 android:taskAffinity=""
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.WIFI_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -187,9 +193,12 @@
         <activity android:name=".wifi.WifiPickerActivity"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -201,8 +210,7 @@
                 android:icon="@drawable/empty_icon"
                 android:clearTaskOnLaunch="true"
                 android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="com.android.net.wifi.SETUP_WIFI_NETWORK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -213,9 +221,12 @@
                 android:label="@string/wifi_advanced_settings_label"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WifiSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_IP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.WIFI_IP_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -230,9 +241,12 @@
                 android:label="@string/wifi_saved_access_points_label"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WifiSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_IF_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.WIFI_IF_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -297,9 +311,12 @@
                 android:taskAffinity="com.android.settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:parentActivityName="Settings$WirelessSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.APN_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.APN_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -312,9 +329,12 @@
         <activity android:name="Settings$BluetoothSettingsActivity"
                 android:label="@string/bluetooth_settings_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.BLUETOOTH_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -402,9 +422,12 @@
         <activity android:name="Settings$VpnSettingsActivity"
                 android:label="@string/vpn_settings_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.net.vpn.SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.net.vpn.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -420,9 +443,12 @@
         <activity android:name="Settings$DateTimeSettingsActivity"
                 android:label="@string/date_and_time"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.DATE_SETTINGS" />
                 <action android:name="android.intent.action.QUICK_CLOCK" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -448,9 +474,12 @@
                 android:label="@string/language_picker_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.LOCALE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.LOCALE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -466,9 +495,12 @@
                 android:label="@string/language_keyboard_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -484,9 +516,12 @@
                 android:label="@string/voice_input_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -538,9 +573,12 @@
         <activity android:name=".inputmethod.InputMethodAndSubtypeEnablerActivity"
                 android:label=""
                 android:clearTaskOnLaunch="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.INPUT_METHOD_SUBTYPE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.INPUT_METHOD_SUBTYPE_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -562,9 +600,12 @@
                 android:label="@string/user_dict_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.USER_DICTIONARY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.USER_DICTIONARY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -582,11 +623,10 @@
                   android:windowSoftInputMode="stateVisible"
                   android:noHistory="true"
                   android:excludeFromRecents="true">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
                 <action android:name="com.android.settings.USER_DICTIONARY_EDIT" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
@@ -607,9 +647,12 @@
                 android:label="@string/zen_mode_settings_title"
                 android:exported="true"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ZEN_MODE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ZEN_MODE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -624,9 +667,12 @@
         <activity android:name="Settings$HomeSettingsActivity"
                 android:label="@string/home_settings"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HOME_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.HOME_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -641,10 +687,13 @@
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
                 android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
                 <action android:name="android.settings.DISPLAY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -673,9 +722,12 @@
                 android:label="@string/device_info_settings"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DEVICE_INFO_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.DEVICE_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -691,7 +743,7 @@
                 android:label="@string/settings_license_activity_title"
                 android:theme="@android:style/Theme.Material.Light.Panel"
                 android:configChanges="orientation|screenSize">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.LICENSE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -702,11 +754,14 @@
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
                 android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
                 <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
                 <action android:name="android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -774,7 +829,7 @@
                 android:label="@string/application_info_label"
                 android:exported="true"
                 android:targetActivity=".applications.InstalledAppDetailsTop">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
@@ -803,10 +858,13 @@
                 android:label="@string/storageuse_settings_title"
                 android:taskAffinity=""
                 android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
                 <category android:name="android.intent.category.MONKEY" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -852,9 +910,12 @@
                 android:label="@string/location_settings_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -872,10 +933,13 @@
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
                 android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.SECURITY_SETTINGS" />
                 <action android:name="android.credentials.UNLOCK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -891,9 +955,12 @@
                 android:label="@string/ssl_ca_cert_dialog_title"
                 android:theme="@style/Transparent"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.MONITORING_CERT_INFO" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.MONITORING_CERT_INFO" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -901,10 +968,13 @@
         <activity android:name="Settings$TrustedCredentialsSettingsActivity"
                 android:label="@string/trusted_credentials"
                 android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TRUSTED_CREDENTIALS" />
                 <action android:name="com.android.settings.TRUSTED_CREDENTIALS_USER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -931,10 +1001,13 @@
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
                 <action android:name="android.settings.BACKUP_AND_RESET_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -955,7 +1028,7 @@
                 android:theme="@style/Transparent"
                 android:launchMode="singleTop"
                 android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="com.android.credentials.UNLOCK" />
                 <action android:name="com.android.credentials.INSTALL" />
                 <action android:name="com.android.credentials.RESET" />
@@ -1003,9 +1076,12 @@
                 android:label="@string/usage_access_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$SecuritySettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.USAGE_ACCESS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.USAGE_ACCESS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1038,9 +1114,12 @@
                 android:label="@string/accessibility_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -1057,9 +1136,12 @@
                 android:label="@string/accessibility_display_daltonizer_preference_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$AccessibilitySettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.ACCESSIBILITY_COLOR_SPACE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.ACCESSIBILITY_COLOR_SPACE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1074,9 +1156,12 @@
                 android:label="@string/accessibility_captioning_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$AccessibilitySettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.CAPTIONING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.CAPTIONING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1091,8 +1176,7 @@
                 android:label="@string/tts_settings"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$InputMethodAndLanguageSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1110,7 +1194,7 @@
         <activity android:name="ConfirmDeviceCredentialActivity"
             android:exported="true"
             android:theme="@style/Transparent">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1124,7 +1208,7 @@
 
         <activity android:name=".notification.RedactionSettingsStandalone"
                   android:exported="true">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.ACTION_APP_NOTIFICATION_REDACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1148,7 +1232,7 @@
             android:taskAffinity="com.android.wizard"
             android:theme="@style/SetupWizardDisableAppStartingTheme"
             android:label="@string/lock_settings_picker_title">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SETUP_LOCK_SCREEN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1157,7 +1241,7 @@
         <activity android:name="ChooseLockGeneric"
             android:label="@string/lockpassword_choose_lock_generic_header"
             android:excludeFromRecents="true" >
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.app.action.SET_NEW_PASSWORD" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1232,10 +1316,13 @@
                 android:label="@string/storage_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS" />
                 <action android:name="android.settings.MEMORY_CARD_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -1276,8 +1363,7 @@
                 android:label="@string/development_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1294,9 +1380,12 @@
                 android:label="@string/print_settings"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACTION_PRINT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_PRINT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -1310,7 +1399,7 @@
                 android:label="@string/print_print_job"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$PrintSettingsActivity">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.ACTION_PRINT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="printjob" android:pathPattern="*" />
@@ -1339,10 +1428,13 @@
                 android:label="@string/storage_title_usb"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$StorageSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.STORAGE_USB_SETTINGS" />
                 <action android:name="com.android.settings.STORAGE_USB_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1370,7 +1462,7 @@
                   android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1403,7 +1495,7 @@
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH"
                   android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.adapter.action.REQUEST_DISCOVERABLE" />
                 <action android:name="android.bluetooth.adapter.action.REQUEST_ENABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1413,7 +1505,7 @@
         <activity android:name=".wifi.WifiScanModeActivity"
                   android:excludeFromRecents="true"
                   android:theme="@style/Transparent">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.net.wifi.action.REQUEST_SCAN_ALWAYS_AVAILABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1447,7 +1539,7 @@
                   android:excludeFromRecents="true"
                   android:permission="android.permission.BLUETOOTH_ADMIN"
                   android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1458,7 +1550,7 @@
                 android:label="@string/activity_picker_label"
                 android:theme="@*android:style/Theme.Material.Light.Dialog.Alert"
                 android:finishOnCloseSystemDialogs="true">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1469,9 +1561,12 @@
                 android:label="@string/android_beam_settings_title"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WirelessSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NFCSHARING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.NFCSHARING_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1483,10 +1578,13 @@
         <activity android:name="Settings$WifiDisplaySettingsActivity"
                 android:label="@string/wifi_display_settings_title"
                 android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_DISPLAY_SETTINGS" />
                 <action android:name="android.settings.CAST_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1572,7 +1670,7 @@
                 android:label="@string/widget_picker_title"
                 android:theme="@*android:style/Theme.Material.Light.Dialog.Alert"
                 android:finishOnCloseSystemDialogs="true">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.appwidget.action.APPWIDGET_PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1582,7 +1680,7 @@
                 android:theme="@*android:style/Theme.Material.Light.Dialog.Alert"
                 android:finishOnCloseSystemDialogs="true"
                 android:excludeFromRecents="true">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.appwidget.action.APPWIDGET_BIND" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1600,9 +1698,12 @@
         <activity android:name="Settings$PowerUsageSummaryActivity"
                 android:label="@string/power_usage_summary_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -1626,9 +1727,12 @@
         <activity android:name="Settings$BatterySaverSettingsActivity"
                 android:label="@string/battery_saver"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -1644,9 +1748,12 @@
             android:label="@string/account_settings_title"
             android:taskAffinity=""
             android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SYNC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1659,9 +1766,12 @@
             android:label="@string/account_sync_settings_title"
             android:taskAffinity=""
             android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCOUNT_SYNC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACCOUNT_SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1678,9 +1788,12 @@
             android:label="@string/header_add_an_account"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings$ManageAccountsSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ADD_ACCOUNT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ADD_ACCOUNT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -1723,9 +1836,12 @@
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.app.action.START_ENCRYPTION" />
+                <category android:name="android.intent.category.DEFAULT" /> />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.app.action.START_ENCRYPTION" />
                 <category android:name="android.intent.category.DEFAULT" /> />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1751,9 +1867,12 @@
         <activity android:name="Settings$DreamSettingsActivity"
                 android:label="@string/screensaver_settings_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DREAM_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.DREAM_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -1768,9 +1887,12 @@
         <activity android:name="Settings$UserSettingsActivity"
                 android:label="@string/user_settings_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.USER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.USER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1784,9 +1906,12 @@
         <activity android:name="Settings$PaymentSettingsActivity"
                 android:label="@string/nfc_payment_settings_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NFC_PAYMENT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.NFC_PAYMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1801,7 +1926,7 @@
                   android:label="@string/nfc_payment_set_default_label"
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.nfc.cardemulation.action.ACTION_CHANGE_DEFAULT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1813,7 +1938,7 @@
                   android:label="@string/sms_application_title"
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.provider.Telephony.ACTION_CHANGE_DEFAULT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1823,7 +1948,7 @@
                   android:label="@string/wifi_assistant_title"
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.net.scoring.CHANGE_ACTIVE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1832,9 +1957,12 @@
         <activity android:name="Settings$NotificationAccessSettingsActivity"
                   android:label="@string/manage_notification_access_title"
                   android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1846,9 +1974,12 @@
         <activity android:name="Settings$ConditionProviderSettingsActivity"
                   android:label="@string/manage_condition_providers"
                   android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1861,9 +1992,12 @@
                 android:label="@string/notification_settings"
                 android:exported="true"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
@@ -1880,10 +2014,13 @@
                 android:label="@string/notification_settings"
                 android:taskAffinity=""
                 android:targetActivity="Settings$NotificationSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="android.settings.SOUND_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -1910,9 +2047,12 @@
                 android:label="@string/other_sound_settings"
                 android:exported="true"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.ACTION_OTHER_SOUND_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1936,9 +2076,12 @@
         <activity android:name="Settings$AppNotificationSettingsActivity"
                 android:label="@string/app_notifications_title"
                 android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.APP_NOTIFICATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.APP_NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2009,9 +2152,12 @@
         <activity android:name="Settings$SimSettingsActivity"
                 android:label="@string/sim_settings_title"
                 android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
