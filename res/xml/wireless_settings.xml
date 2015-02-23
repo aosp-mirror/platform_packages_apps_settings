@@ -63,6 +63,11 @@
             android:targetClass="com.android.phone.MobileNetworkSettings" />
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:key="wifi_calling_settings"
+        android:title="@string/wifi_calling_settings_title"
+        android:fragment="com.android.settings.WifiCallingSettings" />
+
     <Preference
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"

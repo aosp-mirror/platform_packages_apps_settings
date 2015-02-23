@@ -47,6 +47,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.ims.ImsConfig;
+import com.android.ims.ImsManager;
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.internal.telephony.TelephonyIntents;
@@ -54,6 +56,7 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.WifiCallingSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +79,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+    private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -95,6 +99,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
 
     private AppListPreference mSmsApplicationPreference;
+    private PreferenceScreen mButtonWfc;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -282,6 +287,12 @@ public class WirelessSettings extends SettingsPreferenceFragment
             initSmsApplicationSetting();
         }
 
+        if (ImsManager.isWfcEnabledByPlatform(activity)) {
+            mButtonWfc = (PreferenceScreen) findPreference(KEY_WFC_SETTINGS);
+        } else {
+            removePreference(KEY_WFC_SETTINGS);
+        }
+
         // Remove NSD checkbox by default
         getPreferenceScreen().removePreference(nsd);
         //mNsdEnabler = new NsdEnabler(activity, nsd);
@@ -422,6 +433,12 @@ public class WirelessSettings extends SettingsPreferenceFragment
         }
         if (mNsdEnabler != null) {
             mNsdEnabler.resume();
+        }
+
+        final Context context = getActivity();
+        if (ImsManager.isWfcEnabledByPlatform(context)) {
+            mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
+                    context, ImsManager.getWfcMode(context)));
         }
     }
 
