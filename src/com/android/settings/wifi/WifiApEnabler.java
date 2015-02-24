@@ -16,28 +16,20 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-import com.android.settings.WirelessSettings;
-
-import java.util.ArrayList;
-
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
+
+import com.android.settings.R;
+import com.android.settingslib.TetherUtil;
+
+import java.util.ArrayList;
 
 public class WifiApEnabler {
     private final Context mContext;
@@ -74,10 +66,8 @@ public class WifiApEnabler {
     public WifiApEnabler(Context context, SwitchPreference switchPreference) {
         mContext = context;
         mSwitch = switchPreference;
-        mOriginalSummary = switchPreference != null ? switchPreference.getSummary() : "";
-        if (switchPreference != null) {
-            switchPreference.setPersistent(false);
-        }
+        mOriginalSummary = switchPreference.getSummary();
+        switchPreference.setPersistent(false);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mCm = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -110,43 +100,13 @@ public class WifiApEnabler {
     }
 
     public void setSoftapEnabled(boolean enable) {
-        final ContentResolver cr = mContext.getContentResolver();
-        /**
-         * Disable Wifi if enabling tethering
-         */
-        int wifiState = mWifiManager.getWifiState();
-        if (enable && ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
-                    (wifiState == WifiManager.WIFI_STATE_ENABLED))) {
-            mWifiManager.setWifiEnabled(false);
-            Settings.Global.putInt(cr, Settings.Global.WIFI_SAVED_STATE, 1);
-        }
-
-        if (mWifiManager.setWifiApEnabled(null, enable)) {
-            if (mSwitch != null) {
-                /* Disable here, enabled on receiving success broadcast */
-                mSwitch.setEnabled(false);
-            }
+        if (TetherUtil.setWifiTethering(enable, mContext)) {
+            /* Disable here, enabled on receiving success broadcast */
+            mSwitch.setEnabled(false);
         } else {
-            if (mSwitch != null) {
-                mSwitch.setSummary(R.string.wifi_error);
-            }
+            mSwitch.setSummary(R.string.wifi_error);
         }
 
-        /**
-         *  If needed, restore Wifi on tether disable
-         */
-        if (!enable) {
-            int wifiSavedState = 0;
-            try {
-                wifiSavedState = Settings.Global.getInt(cr, Settings.Global.WIFI_SAVED_STATE);
-            } catch (Settings.SettingNotFoundException e) {
-                ;
-            }
-            if (wifiSavedState == 1) {
-                mWifiManager.setWifiEnabled(true);
-                Settings.Global.putInt(cr, Settings.Global.WIFI_SAVED_STATE, 0);
-            }
-        }
     }
 
     public void updateConfigSummary(WifiConfiguration wifiConfig) {
