@@ -17,24 +17,27 @@
 package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.DockService.DockBluetoothCallback;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
+import com.android.settingslib.bluetooth.Utils.ErrorListener;
 
 /**
  * Utils is a helper class that contains constants for various
  * Android resource IDs, debug logging flags, and static methods
  * for creating dialogs.
  */
-final class Utils {
-    static final boolean V = false; // verbose logging
-    static final boolean D = true;  // regular logging
+public final class Utils {
+    static final boolean V = com.android.settingslib.bluetooth.Utils.V; // verbose logging
+    static final boolean D =  com.android.settingslib.bluetooth.Utils.D;  // regular logging
 
     private Utils() {
     }
@@ -91,7 +94,7 @@ final class Utils {
 
     static void showError(Context context, String name, int messageResId) {
         String message = context.getString(messageResId, name);
-        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+        LocalBluetoothManager manager = getLocalBtManager(context);
         Context activity = manager.getForegroundActivity();
         if(manager.isForegroundActivity()) {
             new AlertDialog.Builder(activity)
@@ -118,4 +121,25 @@ final class Utils {
 
         Index.getInstance(context).updateFromSearchIndexableData(data);
     }
+
+    public static LocalBluetoothManager getLocalBtManager(Context context) {
+        return LocalBluetoothManager.getInstance(context, mOnInitCallback);
+    }
+
+    private static final ErrorListener mErrorListener = new ErrorListener() {
+        @Override
+        public void onShowError(Context context, String name, int messageResId) {
+            showError(context, name, messageResId);
+        }
+    };
+
+    private static final BluetoothManagerCallback mOnInitCallback = new BluetoothManagerCallback() {
+        @Override
+        public void onBluetoothManagerInitialized(Context appContext,
+                LocalBluetoothManager bluetoothManager) {
+            bluetoothManager.getEventManager().registerCallback(
+                    new DockBluetoothCallback(appContext));
+            com.android.settingslib.bluetooth.Utils.setErrorListener(mErrorListener);
+        }
+    };
 }

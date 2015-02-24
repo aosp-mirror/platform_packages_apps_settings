@@ -37,6 +37,11 @@ import android.widget.ImageView;
 import com.android.settings.R;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.bluetooth.A2dpProfile;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HeadsetProfile;
+import com.android.settingslib.bluetooth.HidProfile;
+import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
 import java.util.List;
 

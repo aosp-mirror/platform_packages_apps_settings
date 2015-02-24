@@ -42,6 +42,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfile;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.bluetooth.MapProfile;
+import com.android.settingslib.bluetooth.PbapServerProfile;
 
 import java.util.HashMap;
 
@@ -80,7 +87,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         mProfileContainer = (PreferenceGroup) findPreference(KEY_PROFILE_CONTAINER);
         mProfileContainer.setLayoutResource(R.layout.bluetooth_preference_category);
 
-        mManager = LocalBluetoothManager.getInstance(getActivity());
+        mManager = Utils.getLocalBtManager(getActivity());
         CachedBluetoothDeviceManager deviceManager =
                 mManager.getCachedDeviceManager();
         mProfileManager = mManager.getProfileManager();

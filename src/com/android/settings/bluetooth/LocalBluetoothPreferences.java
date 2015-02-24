@@ -22,6 +22,9 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.util.Log;
 
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
 /**
  * LocalBluetoothPreferences provides an interface to the preferences
  * related to Bluetooth.
@@ -60,7 +63,7 @@ final class LocalBluetoothPreferences {
 
     static boolean shouldShowDialogInForeground(Context context,
             String deviceAddress) {
-        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+        LocalBluetoothManager manager = Utils.getLocalBtManager(context);
         if (manager == null) {
             if(DEBUG) Log.v(TAG, "manager == null - do not show dialog.");
             return false;

@@ -41,8 +41,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothAdapter;
-import com.android.settings.bluetooth.LocalBluetoothManager;
+import com.android.settings.bluetooth.Utils;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * Provides control of power-related settings from a widget.
@@ -448,7 +449,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         @Override
         public int getActualState(Context context) {
             if (sLocalBluetoothAdapter == null) {
-                LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+                LocalBluetoothManager manager = Utils.getLocalBtManager(context);
                 if (manager == null) {
                     return STATE_UNKNOWN;  // On emulator?
                 }

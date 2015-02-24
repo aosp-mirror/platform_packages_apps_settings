@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.android.settingslib.bluetooth.BluetoothEventManager;
+
 /**
  * BluetoothDiscoveryReceiver updates a timestamp when the
  * Bluetooth adapter starts or finishes discovery mode. This

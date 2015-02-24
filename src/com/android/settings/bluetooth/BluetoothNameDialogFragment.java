@@ -40,6 +40,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * Dialog fragment for renaming the local Bluetooth device.
@@ -80,7 +82,7 @@ public final class BluetoothNameDialogFragment extends DialogFragment implements
     };
 
     public BluetoothNameDialogFragment() {
-        LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(getActivity());
+        LocalBluetoothManager localManager = Utils.getLocalBtManager(getActivity());
         mLocalAdapter = localManager.getBluetoothAdapter();
     }
 
