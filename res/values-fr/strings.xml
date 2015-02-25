@@ -137,14 +137,10 @@
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Diffusion"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Désactiver le profil ?"</string>
     <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"Le profil :&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;va être désactivé sur :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt;"</string>
-    <string name="bluetooth_connected" msgid="6038755206916626419">"Connecté"</string>
     <string name="bluetooth_connected_no_headset" msgid="2866994875046035609">"Connecté (sans audio pour appels tél.)"</string>
     <string name="bluetooth_connected_no_a2dp" msgid="4576188601581440337">"Connecté (sans audio contenu mutimédia)"</string>
     <string name="bluetooth_connected_no_map" msgid="6504436917057479986">"Connecté (sans accès aux messages)"</string>
     <string name="bluetooth_connected_no_headset_no_a2dp" msgid="9195757766755553810">"Connecté (sans audio tel./multimédia)"</string>
-    <string name="bluetooth_disconnected" msgid="6557104142667339895">"Déconnecté"</string>
-    <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Déconnexion…"</string>
-    <string name="bluetooth_connecting" msgid="8555009514614320497">"Connexion…"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Association…"</string>
     <string name="bluetooth_device" msgid="5291950341750186887">"Appareil Bluetooth sans nom"</string>
@@ -476,15 +472,8 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que le mot de passe &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Associer à cet appareil ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Pour l\'association à :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur \"Retour\" ou sur \"Entrée\"."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Se connecter"</string>
-    <string name="bluetooth_pairing_accept_all_caps" msgid="6061699265220789149">"ASSOCIER"</string>
-    <string name="bluetooth_pairing_decline" msgid="4185420413578948140">"Annuler"</string>
     <string name="bluetooth_pairing_will_share_phonebook" msgid="4982239145676394429">"L\'association vous permet d\'accéder à vos contacts et à l\'historique des appels lorsque vous êtes connecté."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
-    <string name="bluetooth_pairing_error_message" msgid="3748157733635947087">"Impossible d\'associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="8337234855188925274">"Impossible d\'établir l\'association avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> en raison d\'un code PIN ou d\'une clé d\'accès incorrects."</string>
-    <string name="bluetooth_pairing_device_down_error_message" msgid="7870998403045801381">"Impossible d\'établir la communication avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Association refusée par <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_connecting_error_message" msgid="229861986106185022">"Impossible de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Rechercher des appareils"</string>
     <string name="bluetooth_search_for_devices" msgid="2754007356491461674">"Actualiser"</string>
@@ -512,15 +501,6 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Paramètres Bluetooth avancés"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"L\'activation du Bluetooth permet à votre appareil de communiquer avec les appareils Bluetooth à proximité."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Se connecter à…"</string>
-    <string name="bluetooth_profile_a2dp" msgid="2031475486179830674">"Multimédia"</string>
-    <string name="bluetooth_profile_headset" msgid="8658779596261212609">"Appels et notifications"</string>
-    <string name="bluetooth_profile_opp" msgid="9168139293654233697">"Transfert de fichier"</string>
-    <string name="bluetooth_profile_hid" msgid="3680729023366986480">"Périphérique d\'entrée"</string>
-    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Accès Internet"</string>
-    <string name="bluetooth_profile_pbap" msgid="5372051906968576809">"Partage de contacts"</string>
-    <string name="bluetooth_profile_pbap_summary" msgid="6605229608108852198">"Utiliser pour le partage de contacts"</string>
-    <string name="bluetooth_profile_pan_nap" msgid="8429049285027482959">"Partage de connexion Internet"</string>
-    <string name="bluetooth_profile_map" msgid="5465271250454324383">"Accès aux messages"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté de l\'audio du support."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté de l\'audio en mains libres."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté du périphérique d\'entrée."</string>
@@ -533,20 +513,8 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"Utiliser pour"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Renommer"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Autoriser les fichiers entrants"</string>
-    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connecté aux paramètres audio du média"</string>
-    <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Connecté aux paramètres audio du téléphone"</string>
-    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Connexion au serveur de transfert de fichiers"</string>
-    <string name="bluetooth_map_profile_summary_connected" msgid="8191407438851351713">"Connecté à la carte"</string>
-    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Connexion au serveur de transfert de fichiers non établie"</string>
-    <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Connecté au périphérique d\'entrée"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Connecté à l\'appareil pour accès Internet"</string>
     <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Connexion Internet locale partagée"</string>
-    <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utiliser pour les paramètres audio du média"</string>
-    <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Utiliser pour les paramètres audio du téléphone"</string>
-    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Utiliser pour le transfert de fichiers"</string>
-    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utiliser comme entrée"</string>
-    <string name="bluetooth_pan_profile_summary_use_for" msgid="5664884523822068653">"Utiliser pour l\'accès à Internet"</string>
-    <string name="bluetooth_map_profile_summary_use_for" msgid="5154200119919927434">"Utiliser pour la carte"</string>
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Paramètres de la station d\'accueil"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Utiliser station d\'accueil pour l\'audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Comme téléphone à haut-parleur"</string>
@@ -950,7 +918,8 @@
     <string name="usb_mtp_summary" msgid="4617321473211391236">"Permet de transférer des fichiers multimédias sous Windows ou à l\'aide de l\'application Android File Transfer pour Mac (voir www.android.com/filetransfer)"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"Appareil photo (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"Permet de transférer des photos à l\'aide du logiciel photo et de transférer des fichiers sur les ordinateurs non compatibles avec le protocole MTP."</string>
-    <string name="usb_label_installer_cd" msgid="4331173824920630215">"Installer des outils de transfert de fichiers"</string>
+    <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
+    <string name="usb_midi_summary" msgid="539169474810956358">"Permettre aux applications compatibles avec le protocole MIDI de fonctionner via USB avec des logiciels MIDI sur votre ordinateur"</string>
     <string name="storage_other_users" msgid="808708845102611856">"Autres utilisateurs"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"État de la batterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Niveau de la batterie"</string>
