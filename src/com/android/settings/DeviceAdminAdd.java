@@ -88,13 +88,11 @@ public class DeviceAdminAdd extends Activity {
     Button mActionButton;
     Button mCancelButton;
 
-    final ArrayList<View> mAddingPolicies = new ArrayList<View>();
-    final ArrayList<View> mActivePolicies = new ArrayList<View>();
-
     boolean mAdding;
     boolean mRefreshing;
     boolean mWaitingForRemoveMsg;
     boolean mAddingProfileOwner;
+    boolean mAdminPoliciesInitialized;
     int mCurSysAppOpMode;
     int mCurToastAppOpMode;
 
@@ -386,8 +384,7 @@ public class DeviceAdminAdd extends Activity {
         switch (id) {
             case DIALOG_WARNING: {
                 CharSequence msg = args.getCharSequence(DeviceAdminReceiver.EXTRA_DISABLE_WARNING);
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        DeviceAdminAdd.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(msg);
                 builder.setPositiveButton(R.string.dlg_ok,
                         new DialogInterface.OnClickListener() {
@@ -406,13 +403,6 @@ public class DeviceAdminAdd extends Activity {
             default:
                 return super.onCreateDialog(id, args);
 
-        }
-    }
-
-    static void setViewVisibility(ArrayList<View> views, int visibility) {
-        final int N = views.size();
-        for (int i=0; i<N; i++) {
-            views.get(i).setVisibility(visibility);
         }
     }
 
@@ -438,36 +428,14 @@ public class DeviceAdminAdd extends Activity {
         }
         if (!mRefreshing && !mAddingProfileOwner
                 && mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
-            if (mActivePolicies.size() == 0) {
-                ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
-                for (int i=0; i<policies.size(); i++) {
-                    DeviceAdminInfo.PolicyInfo pi = policies.get(i);
-                    View view = AppSecurityPermissions.getPermissionItemView(
-                            this, getText(pi.label), "", true);
-                    mActivePolicies.add(view);
-                    mAdminPolicies.addView(view);
-                }
-            }
-            setViewVisibility(mActivePolicies, View.VISIBLE);
-            setViewVisibility(mAddingPolicies, View.GONE);
+            addDeviceAdminPolicies(false /* showDescription */);
             mAdminWarning.setText(getString(R.string.device_admin_status,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
             setTitle(getText(R.string.active_device_admin_msg));
             mActionButton.setText(getText(R.string.remove_device_admin));
             mAdding = false;
         } else {
-            if (mAddingPolicies.size() == 0) {
-                ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
-                for (int i=0; i<policies.size(); i++) {
-                    DeviceAdminInfo.PolicyInfo pi = policies.get(i);
-                    View view = AppSecurityPermissions.getPermissionItemView(
-                            this, getText(pi.label), getText(pi.description), true);
-                    mAddingPolicies.add(view);
-                    mAdminPolicies.addView(view);
-                }
-            }
-            setViewVisibility(mAddingPolicies, View.VISIBLE);
-            setViewVisibility(mActivePolicies, View.GONE);
+            addDeviceAdminPolicies(true /* showDescription */);
             mAdminWarning.setText(getString(R.string.device_admin_warning,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
             if (mAddingProfileOwner) {
@@ -480,6 +448,19 @@ public class DeviceAdminAdd extends Activity {
         }
     }
 
+    private void addDeviceAdminPolicies(boolean showDescription) {
+        if (!mAdminPoliciesInitialized) {
+            boolean isOwner = UserHandle.getCallingUserHandle().isOwner();
+            for (DeviceAdminInfo.PolicyInfo pi : mDeviceAdmin.getUsedPolicies()) {
+                int descriptionId = isOwner ? pi.description : pi.descriptionForSecondaryUsers;
+                int labelId = isOwner ? pi.label : pi.labelForSecondaryUsers;
+                View view = AppSecurityPermissions.getPermissionItemView(this, getText(labelId),
+                        showDescription ? getText(descriptionId) : "", true);
+                mAdminPolicies.addView(view);
+            }
+            mAdminPoliciesInitialized = true;
+        }
+    }
 
     void toggleMessageEllipsis(View v) {
         TextView tv = (TextView) v;
