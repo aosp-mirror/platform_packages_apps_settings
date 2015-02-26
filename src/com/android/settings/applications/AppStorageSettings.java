@@ -345,7 +345,7 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
         if (result == PackageManager.MOVE_SUCCEEDED) {
             Log.i(TAG, "Moved resources for " + packageName);
             // Refresh size information again.
-            mState.requestSize(mAppEntry.info.packageName);
+            mState.requestSize(mPackageName, mUserId);
         } else {
             showDialogInner(DLG_MOVE_FAILED, result);
         }
@@ -362,7 +362,7 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
         mClearDataButton.setText(R.string.clear_user_data_text);
         if(result == OP_SUCCESSFUL) {
             Log.i(TAG, "Cleared user data for package : "+packageName);
-            mState.requestSize(mAppEntry.info.packageName);
+            mState.requestSize(mPackageName, mUserId);
         } else {
             mClearDataButton.setEnabled(true);
         }
@@ -443,7 +443,7 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
                     break;
                 case MSG_CLEAR_CACHE:
                     // Refresh size info
-                    mState.requestSize(mPackageName);
+                    mState.requestSize(mPackageName, mUserId);
                     break;
                 case MSG_PACKAGE_MOVE:
                     processMoveMsg(msg);
