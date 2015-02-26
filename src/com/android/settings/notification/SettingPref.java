@@ -26,6 +26,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings.Global;
 import android.provider.Settings.System;
 
+import com.android.settings.DropDownPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
 /** Helper to manage a two-state or dropdown preference bound to a global or system setting. */

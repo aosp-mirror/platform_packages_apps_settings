@@ -50,6 +50,7 @@ import android.util.SparseArray;
 import android.widget.ScrollView;
 import android.widget.TimePicker;
 
+import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;

@@ -109,7 +109,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     private boolean mInitialized;
     private boolean mShowUninstalled;
-    private HeaderPreference mHeader;
+    private LayoutPreference mHeader;
     private Button mUninstallButton;
     private boolean mUpdatedSysApp = false;
     private TextView mAppVersion;
@@ -259,7 +259,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void handleHeader() {
-        mHeader = (HeaderPreference) findPreference(KEY_HEADER);
+        mHeader = (LayoutPreference) findPreference(KEY_HEADER);
 
         // Get Control button panel
         View btnPanel = mHeader.findViewById(R.id.control_buttons_panel);

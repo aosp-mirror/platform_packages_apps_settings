@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,20 +15,20 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/battery_saver"
-        android:key="battery_saver">
+                  android:title="@string/application_info_label">
 
-    <!-- Turn on automatically -->
     <com.android.settings.DropDownPreference
-            android:key="turn_on_automatically"
-            android:title="@string/battery_saver_turn_on_automatically_title"
-            android:persistent="false" />
+        android:key="app_location_setting"
+        android:title="@string/storage_used"
+        android:summary="@string/storage_type_internal"
+        android:selectable="true" />
 
-    <!-- Feature description text -->
-    <com.android.settings.fuelgauge.WallOfTextPreference
-            android:key="description"
-            android:summary="@*android:string/battery_saver_description"
-            android:persistent="false"
-            android:selectable="false" />
+    <com.android.settings.applications.LayoutPreference
+        android:key="storage_settings"
+        android:layout="@layout/app_storage_settings" />
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="cache_settings"
+        android:layout="@layout/app_cache_settings" />
 
 </PreferenceScreen>

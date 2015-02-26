@@ -32,10 +32,8 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.text.format.Formatter;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -43,8 +41,10 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Callbacks;
+import com.android.settings.DropDownPreference;
 
-public class AppStorageSettings extends AppInfoWithHeader implements OnClickListener, Callbacks {
+public class AppStorageSettings extends AppInfoWithHeader
+        implements OnClickListener, Callbacks, DropDownPreference.Callback {
     private static final String TAG = AppStorageSettings.class.getSimpleName();
 
     //internal constants used in Handler
@@ -65,6 +65,10 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 2;
     private static final int DLG_MOVE_FAILED = DLG_BASE + 3;
 
+    private static final String KEY_MOVE_PREFERENCE = "app_location_setting";
+    private static final String KEY_STORAGE_SETTINGS = "storage_settings";
+    private static final String KEY_CACHE_SETTINGS = "cache_settings";
+
     private CanBeOnSdCardChecker mCanBeOnSdCardChecker;
     private TextView mTotalSize;
     private TextView mAppSize;
@@ -76,7 +80,8 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
     private TextView mCacheSize;
     private Button mClearDataButton;
     private Button mClearCacheButton;
-    private Button mMoveAppButton;
+
+    private DropDownPreference mMoveDropDown;
     private boolean mMoveInProgress = false;
 
     private boolean mCanClearData = true;
@@ -102,40 +107,38 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
         super.onCreate(savedInstanceState);
 
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
+        addPreferencesFromResource(R.xml.app_storage_settings);
+        setupViews();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.storage_settings, container, false);
-
-        final ViewGroup allDetails = (ViewGroup)view.findViewById(R.id.all_details);
-        Utils.forceCustomPadding(allDetails, true /* additive padding */);
+    private void setupViews() {
         mComputingStr = getActivity().getText(R.string.computing_size);
         mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
+        LayoutPreference view = (LayoutPreference) findPreference(KEY_STORAGE_SETTINGS);
 
         // Set default values on sizes
-        mTotalSize = (TextView)view.findViewById(R.id.total_size_text);
-        mAppSize = (TextView)view.findViewById(R.id.application_size_text);
-        mDataSize = (TextView)view.findViewById(R.id.data_size_text);
-        mExternalCodeSize = (TextView)view.findViewById(R.id.external_code_size_text);
-        mExternalDataSize = (TextView)view.findViewById(R.id.external_data_size_text);
+        mTotalSize = (TextView) view.findViewById(R.id.total_size_text);
+        mAppSize = (TextView) view.findViewById(R.id.application_size_text);
+        mDataSize = (TextView) view.findViewById(R.id.data_size_text);
+        mExternalCodeSize = (TextView) view.findViewById(R.id.external_code_size_text);
+        mExternalDataSize = (TextView) view.findViewById(R.id.external_data_size_text);
 
         if (Environment.isExternalStorageEmulated()) {
-            ((View)mExternalCodeSize.getParent()).setVisibility(View.GONE);
-            ((View)mExternalDataSize.getParent()).setVisibility(View.GONE);
+            ((View) mExternalCodeSize.getParent()).setVisibility(View.GONE);
+            ((View) mExternalDataSize.getParent()).setVisibility(View.GONE);
         }
+        mClearDataButton = (Button) view.findViewById(R.id.clear_data_button)
+                .findViewById(R.id.button);
 
-        // Initialize clear data and move install location buttons
-        View data_buttons_panel = view.findViewById(R.id.data_buttons_panel);
-        mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
+        mMoveDropDown = (DropDownPreference) findPreference(KEY_MOVE_PREFERENCE);
+        mMoveDropDown.setCallback(this);
 
+        view = (LayoutPreference) findPreference(KEY_CACHE_SETTINGS);
         // Cache section
-        mCacheSize = (TextView)view.findViewById(R.id.cache_size_text);
-        mClearCacheButton = (Button)view.findViewById(R.id.clear_cache_button);
-        mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
-
-        return view;
+        mCacheSize = (TextView) view.findViewById(R.id.cache_size_text);
+        mClearCacheButton = (Button) view.findViewById(R.id.clear_cache_button)
+                .findViewById(R.id.button);
+        mClearCacheButton.setText(R.string.clear_cache_btn_text);
     }
 
     @Override
@@ -157,16 +160,24 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
             } else {
                 showDialogInner(DLG_CLEAR_DATA, 0);
             }
-        } else if (v == mMoveAppButton) {
+        }
+    }
+
+    @Override
+    public boolean onItemSelected(int pos, Object value) {
+        boolean selectedExternal = (Boolean) value;
+        boolean isExternal = (mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
+        if (selectedExternal ^ isExternal) {
             if (mPackageMoveObserver == null) {
                 mPackageMoveObserver = new PackageMoveObserver();
             }
-            int moveFlags = (mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ?
-                    PackageManager.MOVE_INTERNAL : PackageManager.MOVE_EXTERNAL_MEDIA;
+            int moveFlags = selectedExternal ? PackageManager.MOVE_EXTERNAL_MEDIA
+                    : PackageManager.MOVE_INTERNAL;
             mMoveInProgress = true;
             refreshButtons();
             mPm.movePackage(mAppEntry.info.packageName, mPackageMoveObserver, moveFlags);
         }
+        return true;
     }
 
     private String getSizeStr(long size) {
@@ -248,16 +259,26 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
         retrieveAppEntry();
         refreshButtons();
         refreshSizeInfo();
+        boolean isExternal = (mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
+        mMoveDropDown.setSelectedItem(isExternal ? 1 : 0);
         return true;
     }
 
     private void refreshButtons() {
         if (!mMoveInProgress) {
-            initMoveButton();
+            initMoveDropDown();
             initDataButtons();
         } else {
-            mMoveAppButton.setText(R.string.moving);
-            mMoveAppButton.setEnabled(false);
+            mMoveDropDown.setSummary(R.string.moving);
+            mMoveDropDown.setSelectable(false);
+        }
+    }
+
+    private void updateMoveEnabled(boolean enabled) {
+        mMoveDropDown.clearItems();
+        mMoveDropDown.addItem(R.string.storage_type_internal, false);
+        if (enabled) {
+            mMoveDropDown.addItem(R.string.storage_type_external, true);
         }
     }
 
@@ -287,30 +308,22 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
         }
     }
 
-    private void initMoveButton() {
+    private void initMoveDropDown() {
         if (Environment.isExternalStorageEmulated()) {
-            mMoveAppButton.setVisibility(View.INVISIBLE);
+            updateMoveEnabled(false);
             return;
         }
         boolean dataOnly = (mPackageInfo == null) && (mAppEntry != null);
         boolean moveDisable = true;
-        if (dataOnly) {
-            mMoveAppButton.setText(R.string.move_app);
-        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
-            mMoveAppButton.setText(R.string.move_app_to_internal);
+        if ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
             // Always let apps move to internal storage from sdcard.
             moveDisable = false;
         } else {
-            mMoveAppButton.setText(R.string.move_app_to_sdcard);
             mCanBeOnSdCardChecker.init();
             moveDisable = !mCanBeOnSdCardChecker.check(mAppEntry.info);
         }
-        if (moveDisable || mAppControlRestricted) {
-            mMoveAppButton.setEnabled(false);
-        } else {
-            mMoveAppButton.setOnClickListener(this);
-            mMoveAppButton.setEnabled(true);
-        }
+        updateMoveEnabled(!moveDisable);
+        mMoveDropDown.setSelectable(!mAppControlRestricted);
     }
 
     /*
@@ -360,7 +373,7 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
         int result = msg.arg1;
         String packageName = mAppEntry.info.packageName;
         mClearDataButton.setText(R.string.clear_user_data_text);
-        if(result == OP_SUCCESSFUL) {
+        if (result == OP_SUCCESSFUL) {
             Log.i(TAG, "Cleared user data for package : "+packageName);
             mState.requestSize(mPackageName, mUserId);
         } else {
@@ -485,7 +498,7 @@ public class AppStorageSettings extends AppInfoWithHeader implements OnClickList
     class ClearUserDataObserver extends IPackageDataObserver.Stub {
        public void onRemoveCompleted(final String packageName, final boolean succeeded) {
            final Message msg = mHandler.obtainMessage(MSG_CLEAR_USER_DATA);
-           msg.arg1 = succeeded?OP_SUCCESSFUL:OP_FAILED;
+           msg.arg1 = succeeded ? OP_SUCCESSFUL : OP_FAILED;
            mHandler.sendMessage(msg);
         }
     }

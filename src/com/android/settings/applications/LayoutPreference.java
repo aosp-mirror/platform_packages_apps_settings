@@ -27,18 +27,18 @@ import android.view.ViewGroup;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
-public class HeaderPreference extends Preference {
+public class LayoutPreference extends Preference {
 
     private View mRootView;
 
-    public HeaderPreference(Context context, AttributeSet attrs) {
+    public LayoutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, com.android.internal.R.styleable.Preference, 0, 0);
         int layoutResource = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
                 0);
         if (layoutResource == 0) {
-            throw new IllegalArgumentException("HeaderPreference requires a layout to be defined");
+            throw new IllegalArgumentException("LayoutPreference requires a layout to be defined");
         }
         // Need to create view now so that findViewById can be called immediately.
         final View view = LayoutInflater.from(getContext())
