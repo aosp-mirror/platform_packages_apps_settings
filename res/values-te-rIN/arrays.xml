@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -129,8 +128,8 @@
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"పుష్ బటన్"</item>
-    <item msgid="1624323946324499595">"పీర్ పరికరం నుండి PIN"</item>
-    <item msgid="5366790421523328066">"ఈ పరికరం నుండి PIN"</item>
+    <item msgid="1624323946324499595">"పీర్ పరికరం నుండి పిన్‌"</item>
+    <item msgid="5366790421523328066">"ఈ పరికరం నుండి పిన్‌"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"కనెక్ట్ చేయబడింది"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"ఎల్లప్పుడూ"</item>
     <item msgid="844721238536786870">"ప్లగిన్ చేయబడినప్పుడు మాత్రమే"</item>
-    <item msgid="2990218920631468642">"ఎప్పటికీ వద్దు (డేటా వినియోగాన్ని పెంచుతుంది)"</item>
+    <item msgid="1986753720941888596">"ఎప్పటికీ వద్దు"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"ఎల్లప్పుడూ"</item>
     <item msgid="7433294150916905997">"ప్లగిన్ చేయబడినప్పుడు మాత్రమే"</item>
     <item msgid="1390404486722375028">"ఎప్పటికీ వద్దు"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"గత 30 రోజులు"</item>
+    <item msgid="6600989128423965319">"విని. పునరా. సెట్ చేయి..."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"స్వయంచాలకం"</item>
+    <item msgid="1013988753804838790">"స్వయంచాలకం"</item>
     <item msgid="6670588712989942178">"5 GHz మాత్రమే"</item>
     <item msgid="2715516524973207876">"2.4 GHz మాత్రమే"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"వినియోగ సమయం"</item>
-    <item msgid="3703676222230317933">"ప్రారంభ గణన"</item>
+    <item msgid="4796160515314745154">"చివరిగా ఉపయోగించినది"</item>
     <item msgid="2502754479975776899">"అనువర్తనం పేరు"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"అలారం వాల్యూమ్"</item>
     <item msgid="785049718065337473">"నోటిఫికేషన్ వాల్యూమ్"</item>
     <item msgid="6700305533746877052">"బ్లూటూత్ వాల్యూమ్"</item>
-    <item msgid="3810969981743709839">"మైక్రోఫోన్‌ను మ్యూట్ చేయి/అన్‌మ్యూట్ చేయి"</item>
-    <item msgid="2627903914574908209">"సక్రియంగా ఉంచు"</item>
-    <item msgid="1395372654968157578">"స్థానాన్ని పర్యవేక్షించు"</item>
-    <item msgid="3238451051299611853">"అధిక శక్తివంతమైన స్థానాన్ని పర్యవేక్షించు"</item>
+    <item msgid="2029227495214047094">"సక్రియంగా ఉంచండి"</item>
+    <item msgid="26109888160231211">"స్థానాన్ని పర్యవేక్షించండి"</item>
+    <item msgid="5753382310468855812">"అధిక శక్తివంతమైన స్థానాన్ని పర్యవేక్షించండి"</item>
+    <item msgid="3356591542543137332">"వినియోగ గణాంకాలను పొందండి"</item>
+    <item msgid="3073734345226842233">"మైక్రోఫోన్‌ను మ్యూట్ చేయండి/అన్‌మ్యూట్ చేయండి"</item>
+    <item msgid="1148142988678569310">"ప్రాజెక్ట్ మీడియా"</item>
+    <item msgid="9130014005474445273">"VPNని సక్రియం చేయండి"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"స్థానం"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"అలారం వాల్యూమ్"</item>
     <item msgid="9103719301075748925">"నోటిఫికేషన్ వాల్యూమ్"</item>
     <item msgid="7025966722295861512">"బ్లూటూత్ వాల్యూమ్"</item>
-    <item msgid="2265317984004577529">"మైక్రోఫోన్‌ను మ్యూట్ చేయి/అన్‌మ్యూట్ చేయి"</item>
-    <item msgid="3646325683886507917">"సక్రియంగా ఉంచు"</item>
+    <item msgid="4665183401128289653">"సక్రియంగా ఉంచండి"</item>
+    <item msgid="8584357129746649222">"స్థానం"</item>
     <item msgid="7669257279311110599">"స్థానం"</item>
-    <item msgid="7745724368696313169">"స్థానం"</item>
+    <item msgid="3459320345690097795">"వినియోగ గణాంకాలను పొందండి"</item>
+    <item msgid="1312534577834048535">"మైక్రోఫోన్‌ను మ్యూట్ చేయండి/అన్‌మ్యూట్ చేయండి"</item>
+    <item msgid="5906017727368097853">"ప్రాజెక్ట్ మీడియా"</item>
+    <item msgid="2486614710846178542">"VPNని సక్రియం చేయండి"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"తక్కువ సేపు"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"డిఫాల్ట్"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-serif సంక్షిప్తం"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"మోనోస్పేస్"</item>
-    <item msgid="6857338041963571301">"సాధారణం"</item>
-    <item msgid="961716102408512888">"కర్సివ్"</item>
-    <item msgid="784581717183349567">"చిన్న క్యాపిటల్‌లు"</item>
+    <item msgid="7247838127505318669">"Sans-serif మోనోస్పేస్"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif మోనోస్పేస్"</item>
+    <item msgid="639503332147461010">"సాధారణం"</item>
+    <item msgid="7967169925231332424">"కర్సివ్"</item>
+    <item msgid="561832997193039673">"చిన్న క్యాపిటల్‌లు"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"చాలా చిన్నది"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"లాగ్ బఫర్‌కి 64K"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"కాష్ చేసినవి (కార్యాచరణ)"</item>
     <item msgid="4338089220026248848">"కాష్ చేసినవి (కార్యాచరణ క్లయింట్)"</item>
     <item msgid="6652164677254579050">"కాష్ చేసినవి (ఖాళీ)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"నీలి ఆకుపచ్చ"</item>
+    <item msgid="8332294763632946560">"నీలం"</item>
+    <item msgid="2023216417616991392">"నీలిరంగు"</item>
+    <item msgid="3170497246594232819">"ఊదా"</item>
+    <item msgid="4608643045752965568">"గులాబీ"</item>
+    <item msgid="6131821495505931173">"ఎరుపు"</item>
   </string-array>
 </resources>

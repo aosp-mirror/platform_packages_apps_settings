@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"همیشه"</item>
     <item msgid="844721238536786870">"تنها زمانی که وصل است"</item>
-    <item msgid="2990218920631468642">"هرگز (استفاده از داده افزایش می‌یابد)"</item>
+    <item msgid="1986753720941888596">"هرگز"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"همیشه"</item>
     <item msgid="7433294150916905997">"تنها زمانی که وصل است"</item>
     <item msgid="1390404486722375028">"هیچوقت"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"۳۰ روز گذشته"</item>
+    <item msgid="6600989128423965319">"تنظیم چرخه مصرف..."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"خودکار"</item>
+    <item msgid="1013988753804838790">"خودکار"</item>
     <item msgid="6670588712989942178">"فقط 5 گیگاهرتز"</item>
     <item msgid="2715516524973207876">"فقط 2.4 گیگاهرتز"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"زمان استفاده"</item>
-    <item msgid="3703676222230317933">"تعداد راه‌اندازی‌ها"</item>
+    <item msgid="4796160515314745154">"آخرین زمان استفاده"</item>
     <item msgid="2502754479975776899">"نام برنامه"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"میزان صدای زنگ هشدار"</item>
     <item msgid="785049718065337473">"میزان صدای اعلان"</item>
     <item msgid="6700305533746877052">"میزان صدای بلوتوث"</item>
-    <item msgid="3810969981743709839">"صدادار/بی‌صداکردن میکروفون"</item>
-    <item msgid="2627903914574908209">"بیدارباش"</item>
-    <item msgid="1395372654968157578">"کنترل موقعیت مکانی"</item>
-    <item msgid="3238451051299611853">"کنترل مکان پرقدرت"</item>
+    <item msgid="2029227495214047094">"بیدار باش"</item>
+    <item msgid="26109888160231211">"کنترل موقعیت مکانی"</item>
+    <item msgid="5753382310468855812">"کنترل مکان پرقدرت"</item>
+    <item msgid="3356591542543137332">"دریافت آمار استفاده"</item>
+    <item msgid="3073734345226842233">"صدادار/بی‌صدا کردن میکروفن"</item>
+    <item msgid="1148142988678569310">"فرستادن رسانه"</item>
+    <item msgid="9130014005474445273">"‏فعال‌سازی VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"موقعیت مکانی"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"میزان صدای زنگ هشدار"</item>
     <item msgid="9103719301075748925">"میزان صدای اعلان"</item>
     <item msgid="7025966722295861512">"میزان صدای بلوتوث"</item>
-    <item msgid="2265317984004577529">"صدادار/بی‌صداکردن میکروفون"</item>
-    <item msgid="3646325683886507917">"بیدار باش"</item>
+    <item msgid="4665183401128289653">"بیدار باش"</item>
+    <item msgid="8584357129746649222">"موقعیت مکانی"</item>
     <item msgid="7669257279311110599">"مکان"</item>
-    <item msgid="7745724368696313169">"مکان"</item>
+    <item msgid="3459320345690097795">"دریافت آمار استفاده"</item>
+    <item msgid="1312534577834048535">"صدادار/بی‌صدا کردن میکروفن"</item>
+    <item msgid="5906017727368097853">"فرستادن رسانه"</item>
+    <item msgid="2486614710846178542">"‏فعال‌سازی VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"کوتاه"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"پیش‌فرض"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"‏Sans-serif فشرده"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"هم‌عرض"</item>
-    <item msgid="6857338041963571301">"معمولی"</item>
-    <item msgid="961716102408512888">"شکسته"</item>
-    <item msgid="784581717183349567">"حروف بزرگ با اندازه کوچک"</item>
+    <item msgid="7247838127505318669">"‏Sans-serif با عرض ثابت"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"‏Serif با عرض ثابت"</item>
+    <item msgid="639503332147461010">"غیررسمی"</item>
+    <item msgid="7967169925231332424">"شکسته"</item>
+    <item msgid="561832997193039673">"حروف بزرگ با اندازه کوچک"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"بسیار کوچک"</item>
@@ -375,6 +385,11 @@
     <item msgid="6405203239560695266">"۴ مگابایت"</item>
     <item msgid="3025431211013424097">"۱۶ مگابایت"</item>
   </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"۶۴ کیلوبایت"</item>
+    <item msgid="3534782711045262344">"۲۵۶ کیلوبایت"</item>
+    <item msgid="8085867209202153403">"۱ مگابایت"</item>
+  </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"‏۶۴K در حافظه موقت ثبت"</item>
     <item msgid="2822309747675758628">"‏۲۵۶Kدر حافظه موقت ثبت"</item>
@@ -393,31 +408,31 @@
     <item msgid="45075631231212732">"‏همیشه از بررسی HDCP استفاده شود"</item>
   </string-array>
   <string-array name="window_animation_scale_entries">
-    <item msgid="8134156599370824081">"انیمیشن خاموش"</item>
-    <item msgid="6624864048416710414">"‏مقیاس انیمیشن 0.5x"</item>
-    <item msgid="2219332261255416635">"‏مقیاس انیمیشن 1x"</item>
-    <item msgid="3544428804137048509">"‏مقیاس انیمیشن 1.5x"</item>
-    <item msgid="3110710404225974514">"‏مقیاس انیمیشن 2x"</item>
-    <item msgid="4402738611528318731">"‏مقیاس انیمیشن 5x"</item>
-    <item msgid="6189539267968330656">"‏مقیاس انیمیشن 10X"</item>
+    <item msgid="8134156599370824081">"پویانمایی خاموش"</item>
+    <item msgid="6624864048416710414">"‏مقیاس پویانمایی 0.5x"</item>
+    <item msgid="2219332261255416635">"‏مقیاس پویانمایی 1x"</item>
+    <item msgid="3544428804137048509">"‏مقیاس پویانمایی 1.5x"</item>
+    <item msgid="3110710404225974514">"‏مقیاس پویانمایی 2x"</item>
+    <item msgid="4402738611528318731">"‏مقیاس پویانمایی 5x"</item>
+    <item msgid="6189539267968330656">"‏مقیاس پویانمایی 10X"</item>
   </string-array>
   <string-array name="transition_animation_scale_entries">
-    <item msgid="8464255836173039442">"انیمیشن خاموش"</item>
-    <item msgid="3375781541913316411">"‏مقیاس انیمیشن 0.5x"</item>
-    <item msgid="1991041427801869945">"‏مقیاس انیمیشن 1x"</item>
-    <item msgid="4012689927622382874">"‏مقیاس انیمیشن 1.5x"</item>
-    <item msgid="3289156759925947169">"‏مقیاس انیمیشن 2x"</item>
-    <item msgid="7705857441213621835">"‏مقیاس انیمیشن 5x"</item>
-    <item msgid="6660750935954853365">"‏مقیاس انیمیشن 10X"</item>
+    <item msgid="8464255836173039442">"پویانمایی خاموش"</item>
+    <item msgid="3375781541913316411">"‏مقیاس پویانمایی 0.5x"</item>
+    <item msgid="1991041427801869945">"‏مقیاس پویانمایی 1x"</item>
+    <item msgid="4012689927622382874">"‏مقیاس پویانمایی 1.5x"</item>
+    <item msgid="3289156759925947169">"‏مقیاس پویانمایی 2x"</item>
+    <item msgid="7705857441213621835">"‏مقیاس پویانمایی 5x"</item>
+    <item msgid="6660750935954853365">"‏مقیاس پویانمایی 10X"</item>
   </string-array>
   <string-array name="animator_duration_scale_entries">
-    <item msgid="6039901060648228241">"انیمیشن خاموش"</item>
-    <item msgid="1138649021950863198">"مقیاس انیمیشن 0.5 برابر"</item>
-    <item msgid="4394388961370833040">"مقیاس انیمیشن 1 برابر"</item>
-    <item msgid="8125427921655194973">"مقیاس انیمیشن 1.5 برابر"</item>
-    <item msgid="3334024790739189573">"مقیاس انیمیشن 2 برابر"</item>
-    <item msgid="3170120558236848008">"مقیاس انیمیشن 5 برابر"</item>
-    <item msgid="1069584980746680398">"مقیاس انیمیشن 10 برابر"</item>
+    <item msgid="6039901060648228241">"پویانمایی خاموش"</item>
+    <item msgid="1138649021950863198">"مقیاس پویانمایی 0.5 برابر"</item>
+    <item msgid="4394388961370833040">"مقیاس پویانمایی 1 برابر"</item>
+    <item msgid="8125427921655194973">"مقیاس پویانمایی 1.5 برابر"</item>
+    <item msgid="3334024790739189573">"مقیاس پویانمایی 2 برابر"</item>
+    <item msgid="3170120558236848008">"مقیاس پویانمایی 5 برابر"</item>
+    <item msgid="1069584980746680398">"مقیاس پویانمایی 10 برابر"</item>
   </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"هیچکدام"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"قرار داده شده در حافظه پنهان (فعالیت)"</item>
     <item msgid="4338089220026248848">"قرار داده شده در حافظه پنهان (کلاینت فعالیت)"</item>
     <item msgid="6652164677254579050">"قرار داده شده در حافظه پنهان (خالی)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"فیروزه‌ای"</item>
+    <item msgid="8332294763632946560">"آبی"</item>
+    <item msgid="2023216417616991392">"نیلی"</item>
+    <item msgid="3170497246594232819">"بنفش"</item>
+    <item msgid="4608643045752965568">"صورتی"</item>
+    <item msgid="6131821495505931173">"قرمز"</item>
   </string-array>
 </resources>

@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -129,14 +128,14 @@
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="5085064298144493867">"புஷ் பொத்தான்"</item>
-    <item msgid="1624323946324499595">"பியர் சாதனத்திலிருந்து PIN"</item>
-    <item msgid="5366790421523328066">"இந்தச் சாதனத்தில் உள்ள PIN"</item>
+    <item msgid="1624323946324499595">"பியர் சாதனத்திலிருந்து பின்"</item>
+    <item msgid="5366790421523328066">"இந்தச் சாதனத்தில் உள்ள பின்"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
     <item msgid="1701505390737218306">"இணைக்கப்பட்டது"</item>
     <item msgid="3189211552661432651">"அழைக்கப்பட்டது"</item>
     <item msgid="3206450250360237549">"தோல்வி"</item>
-    <item msgid="7785896708926971207">"கிடைக்கிறது"</item>
+    <item msgid="7785896708926971207">"உள்ளது"</item>
     <item msgid="2330782789550628803">"எல்லைக்கு வெளியே உள்ளது"</item>
   </string-array>
   <string-array name="bluetooth_visibility_timeout_entries">
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"எப்போதும்"</item>
     <item msgid="844721238536786870">"செருகப்பட்டிருக்கும்போது மட்டும்"</item>
-    <item msgid="2990218920631468642">"எப்போதும் வேண்டாம் (தரவு பயன்பாட்டை அதிகரிக்கும்)"</item>
+    <item msgid="1986753720941888596">"எப்போதும் வேண்டாம்"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"எப்போதும்"</item>
     <item msgid="7433294150916905997">"செருகப்பட்டிருக்கும்போது மட்டும்"</item>
     <item msgid="1390404486722375028">"ஒருபோதும் வேண்டாம்"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"கடந்த 30 நாட்கள்"</item>
+    <item msgid="6600989128423965319">"பயன்பாட்டு சுழற்சியை அமை..."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"தானியங்கு"</item>
+    <item msgid="1013988753804838790">"தானியங்கு"</item>
     <item msgid="6670588712989942178">"5 GHz மட்டும்"</item>
     <item msgid="2715516524973207876">"2.4 GHz மட்டும்"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"பயன்படுத்திய நேரம்"</item>
-    <item msgid="3703676222230317933">"துவக்க எண்ணிக்கை"</item>
+    <item msgid="4796160515314745154">"கடைசியாகப் பயன்படுத்தியது"</item>
     <item msgid="2502754479975776899">"பயன்பாட்டின் பெயர்"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -228,7 +231,7 @@
   <string-array name="app_ops_categories">
     <item msgid="6358963769537892925">"இருப்பிடம்"</item>
     <item msgid="255608127647030286">"தனிப்பட்டவை"</item>
-    <item msgid="4588829735729884491">"செய்தியிடல்"</item>
+    <item msgid="4588829735729884491">"மெசேஜ்"</item>
     <item msgid="886742181977884584">"ஊடகம்"</item>
     <item msgid="7924928667052300589">"சாதனம்"</item>
   </string-array>
@@ -243,7 +246,7 @@
     <item msgid="6546959730920410907">"அழைப்புப் பதிவை மாற்று"</item>
     <item msgid="446877710771379667">"கேலெண்டரைப் படி"</item>
     <item msgid="7674458294386319722">"கேலெண்டரை மாற்று"</item>
-    <item msgid="8281201165558093009">"wi-fi ஸ்கேன்"</item>
+    <item msgid="8281201165558093009">"வைஃபை ஸ்கேன்"</item>
     <item msgid="8694611243479480497">"அறிவிப்பு"</item>
     <item msgid="7776439107987345446">"கைபேசியை ஸ்கேன் செய்"</item>
     <item msgid="514615766544675057">"தொலைபேசியை அழை"</item>
@@ -268,15 +271,18 @@
     <item msgid="4547883971364273343">"ஆடியோவை மையப்படுத்து"</item>
     <item msgid="2603878814882344450">"முதன்மை ஒலியளவு"</item>
     <item msgid="7136963238377062018">"குரல் ஒலியளவு"</item>
-    <item msgid="4270236897655923007">"ரிங் ஒலியளவு"</item>
+    <item msgid="4270236897655923007">"அழைப்பு - ஒலியளவு"</item>
     <item msgid="6325739889222559394">"மீடியாவின் ஒலியளவு"</item>
     <item msgid="5762123934816216821">"அலாரத்தின் ஒலியளவு"</item>
     <item msgid="785049718065337473">"அறிவிப்பின் ஒலியளவு"</item>
-    <item msgid="6700305533746877052">"Bluetooth ஒலியளவு"</item>
-    <item msgid="3810969981743709839">"மைக்ரோஃபோனை முடக்கு/இயக்கு"</item>
-    <item msgid="2627903914574908209">"எப்போதும் செயலில்"</item>
-    <item msgid="1395372654968157578">"இருப்பிடத்தைக் கண்காணி"</item>
-    <item msgid="3238451051299611853">"அதிக ஆற்றல் இடத்தைக் கண்காணி"</item>
+    <item msgid="6700305533746877052">"புளூடூத் ஒலியளவு"</item>
+    <item msgid="2029227495214047094">"செயலில்"</item>
+    <item msgid="26109888160231211">"இருப்பிடத்தைக் கண்காணி"</item>
+    <item msgid="5753382310468855812">"அதிக ஆற்றல் இடத்தைக் கண்காணி"</item>
+    <item msgid="3356591542543137332">"பயன்பாட்டு புள்ளிவிவரத்தைப் பெறுக"</item>
+    <item msgid="3073734345226842233">"மைக்ரோஃபோனை முடக்கு/இயக்கு"</item>
+    <item msgid="1148142988678569310">"புராஜக்ட் மீடியா"</item>
+    <item msgid="9130014005474445273">"VPNஐ இயக்கு"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"இருப்பிடம்"</item>
@@ -314,15 +320,18 @@
     <item msgid="3265262911688671938">"ஆடியோவை மையப்படுத்து"</item>
     <item msgid="2098976479485046797">"முதன்மை ஒலியளவு"</item>
     <item msgid="5660213838861789350">"குரல் ஒலியளவு"</item>
-    <item msgid="7983336752371254444">"ரிங் ஒலியளவு"</item>
+    <item msgid="7983336752371254444">"அழைப்பு - ஒலியளவு"</item>
     <item msgid="7878027809189330917">"மீடியாவின் ஒலியளவு"</item>
     <item msgid="7260546305036218513">"அலாரத்தின் ஒலியளவு"</item>
     <item msgid="9103719301075748925">"அறிவிப்பின் ஒலியளவு"</item>
-    <item msgid="7025966722295861512">"Bluetooth ஒலியளவு"</item>
-    <item msgid="2265317984004577529">"மைக்ரோஃபோனை முடக்கு/இயக்கு"</item>
-    <item msgid="3646325683886507917">"எப்போதும் செயலில்"</item>
+    <item msgid="7025966722295861512">"புளூடூத் ஒலியளவு"</item>
+    <item msgid="4665183401128289653">"விழிப்பில்"</item>
+    <item msgid="8584357129746649222">"இருப்பிடம்"</item>
     <item msgid="7669257279311110599">"இருப்பிடம்"</item>
-    <item msgid="7745724368696313169">"இருப்பிடம்"</item>
+    <item msgid="3459320345690097795">"பயன்பாட்டு புள்ளிவிவரத்தைப் பெறுக"</item>
+    <item msgid="1312534577834048535">"மைக்ரோஃபோனை முடக்கு/இயக்கு"</item>
+    <item msgid="5906017727368097853">"புராஜக்ட் மீடியா"</item>
+    <item msgid="2486614710846178542">"VPNஐ இயக்கு"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"குறுகியது"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"இயல்புநிலை"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-serif குறுகியது"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"மோனோஸ்பேஸ்"</item>
-    <item msgid="6857338041963571301">"கேஷ்வல்"</item>
-    <item msgid="961716102408512888">"இணைவெழுத்து முறை"</item>
-    <item msgid="784581717183349567">"சிறிய எழுத்துகள்"</item>
+    <item msgid="7247838127505318669">"Sans-serif monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif monospace"</item>
+    <item msgid="639503332147461010">"கேஷ்வல்"</item>
+    <item msgid="7967169925231332424">"இணைவெழுத்து முறை"</item>
+    <item msgid="561832997193039673">"சிறிய எழுத்துகள்"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"மிகச் சிறிய"</item>
@@ -375,12 +385,17 @@
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
   </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
+  </string-array>
   <string-array name="select_logd_size_summaries">
-    <item msgid="7346595473588765019">"64K / லாக் பவ்ஃவர்"</item>
-    <item msgid="2822309747675758628">"256K / லாக் பவ்ஃவர்"</item>
-    <item msgid="6699306198357496731">"1M / லாக் பவ்ஃவர்"</item>
-    <item msgid="5748528643937500349">"4M / லாக் பவ்ஃவர்"</item>
-    <item msgid="1978629051085111592">"16M / லாக் பவ்ஃவர்"</item>
+    <item msgid="7346595473588765019">"64K / லாக் பஃபர்"</item>
+    <item msgid="2822309747675758628">"256K / லாக் பஃபர்"</item>
+    <item msgid="6699306198357496731">"1M / லாக் பஃபர்"</item>
+    <item msgid="5748528643937500349">"4M / லாக் பஃபர்"</item>
+    <item msgid="1978629051085111592">"16M / லாக் பஃபர்"</item>
   </string-array>
   <string-array name="hdcp_checking_titles">
     <item msgid="441827799230089869">"எப்போதும் சரிபார்க்க வேண்டாம்"</item>
@@ -487,8 +502,8 @@
   </string-array>
   <string-array name="entries_zen_mode">
     <item msgid="816404936744485190">"முடக்கத்தில்"</item>
-    <item msgid="5656544177755411222">"வரையறுத்த குறுக்கீடுகள்"</item>
-    <item msgid="8735337502532332056">"பூஜ்ஜிய குறுக்கீடுகள்"</item>
+    <item msgid="5656544177755411222">"குறிப்பிட்ட அறிவிப்புகள் மட்டும்"</item>
+    <item msgid="8735337502532332056">"எதையும் தெரிவிக்காதே"</item>
   </string-array>
   <string-array name="proc_stats_memory_states">
     <item msgid="8845855295876909468">"இயல்பு"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"தற்காலிகச் சேமிப்பு (செயல்பாடு)"</item>
     <item msgid="4338089220026248848">"தற்காலிகச் சேமிப்பு (செயல்பாட்டு கிளையன்ட்)"</item>
     <item msgid="6652164677254579050">"தற்காலிகச் சேமிப்பு (காலி)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"பசும் நீலம்"</item>
+    <item msgid="8332294763632946560">"நீலம்"</item>
+    <item msgid="2023216417616991392">"அடர் நீலம்"</item>
+    <item msgid="3170497246594232819">"ஊதா"</item>
+    <item msgid="4608643045752965568">"பிங்க்"</item>
+    <item msgid="6131821495505931173">"சிவப்பு"</item>
   </string-array>
 </resources>

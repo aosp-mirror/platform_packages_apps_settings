@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Altijd"</item>
     <item msgid="844721238536786870">"Alleen indien aangesloten"</item>
-    <item msgid="2990218920631468642">"Nooit (verhoogt het gegevensgebruik)"</item>
+    <item msgid="1986753720941888596">"Nooit"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Altijd"</item>
     <item msgid="7433294150916905997">"Alleen indien aangesloten"</item>
     <item msgid="1390404486722375028">"Nooit"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Afgelopen 30 dagen"</item>
+    <item msgid="6600989128423965319">"Gebruikscyclus instellen…"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Automatisch"</item>
+    <item msgid="1013988753804838790">"Automatisch"</item>
     <item msgid="6670588712989942178">"Alleen 5 GHz"</item>
     <item msgid="2715516524973207876">"Alleen 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Gebruikstijd"</item>
-    <item msgid="3703676222230317933">"Aantal keer gestart"</item>
+    <item msgid="4796160515314745154">"Laatst gebruikt"</item>
     <item msgid="2502754479975776899">"App-naam"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"alarmvolume"</item>
     <item msgid="785049718065337473">"meldingsvolume"</item>
     <item msgid="6700305533746877052">"bluetooth-volume"</item>
-    <item msgid="3810969981743709839">"microfoon dempen/dempen opheffen"</item>
-    <item msgid="2627903914574908209">"ingeschakeld houden"</item>
-    <item msgid="1395372654968157578">"monitorlocatie"</item>
-    <item msgid="3238451051299611853">"locatie met hoog energieverbruik controleren"</item>
+    <item msgid="2029227495214047094">"ingeschakeld houden"</item>
+    <item msgid="26109888160231211">"monitorlocatie"</item>
+    <item msgid="5753382310468855812">"locatie met hoog energieverbruik controleren"</item>
+    <item msgid="3356591542543137332">"gebruiksstatistieken ophalen"</item>
+    <item msgid="3073734345226842233">"microfoon dempen/dempen opheffen"</item>
+    <item msgid="1148142988678569310">"media projecteren"</item>
+    <item msgid="9130014005474445273">"VPN activeren"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Locatie"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"Alarmvolume"</item>
     <item msgid="9103719301075748925">"Meldingsvolume"</item>
     <item msgid="7025966722295861512">"Bluetooth-volume"</item>
-    <item msgid="2265317984004577529">"Microfoon dempen/dempen opheffen"</item>
-    <item msgid="3646325683886507917">"Ingeschakeld houden"</item>
+    <item msgid="4665183401128289653">"Ingeschakeld houden"</item>
+    <item msgid="8584357129746649222">"Locatie"</item>
     <item msgid="7669257279311110599">"Locatie"</item>
-    <item msgid="7745724368696313169">"Locatie"</item>
+    <item msgid="3459320345690097795">"Gebruiksstatistieken ophalen"</item>
+    <item msgid="1312534577834048535">"Microfoon dempen/dempen opheffen"</item>
+    <item msgid="5906017727368097853">"Media projecteren"</item>
+    <item msgid="2486614710846178542">"VPN activeren"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Kort"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"Standaard"</item>
     <item msgid="1016452621833735880">"Sans Serif"</item>
     <item msgid="2496277987934654454">"Sans Serif versmald"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Monospace"</item>
-    <item msgid="6857338041963571301">"Casual games"</item>
-    <item msgid="961716102408512888">"Cursief"</item>
-    <item msgid="784581717183349567">"Kleine kapitalen"</item>
+    <item msgid="7247838127505318669">"Sans-serif monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif monospace"</item>
+    <item msgid="639503332147461010">"Casual"</item>
+    <item msgid="7967169925231332424">"Cursief"</item>
+    <item msgid="561832997193039673">"Kleine kapitalen"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Zeer klein"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64K per logbuffer"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"Gecacht (activiteit)"</item>
     <item msgid="4338089220026248848">"Gecacht (activiteitsclient)"</item>
     <item msgid="6652164677254579050">"Gecacht (leeg)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Blauwgroen"</item>
+    <item msgid="8332294763632946560">"Blauw"</item>
+    <item msgid="2023216417616991392">"Indigo"</item>
+    <item msgid="3170497246594232819">"Paars"</item>
+    <item msgid="4608643045752965568">"Roze"</item>
+    <item msgid="6131821495505931173">"Rood"</item>
   </string-array>
 </resources>

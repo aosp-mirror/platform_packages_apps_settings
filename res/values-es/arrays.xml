@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Siempre"</item>
     <item msgid="844721238536786870">"Solo si se está cargando"</item>
-    <item msgid="2990218920631468642">"Nunca (aumenta el uso de datos)"</item>
+    <item msgid="1986753720941888596">"Nunca"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Siempre"</item>
     <item msgid="7433294150916905997">"Solo si se está cargando"</item>
     <item msgid="1390404486722375028">"Nunca"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Últimos 30 días"</item>
+    <item msgid="6600989128423965319">"Establecer ciclo uso..."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Automático"</item>
+    <item msgid="1013988753804838790">"Automático"</item>
     <item msgid="6670588712989942178">"Solo 5 GHz"</item>
     <item msgid="2715516524973207876">"Solo 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Tiempo de uso"</item>
-    <item msgid="3703676222230317933">"Número de ejecuciones"</item>
+    <item msgid="4796160515314745154">"Último uso"</item>
     <item msgid="2502754479975776899">"Nombre de la aplicación"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -196,7 +199,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"Ninguno"</item>
     <item msgid="8673874894887358090">"Manual"</item>
-    <item msgid="168893341855953140">"Ajustes automáticos proxy"</item>
+    <item msgid="168893341855953140">"Proxy autoconfigurado"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="3856896061242872146">"Ninguno"</item>
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"volumen de la alarma"</item>
     <item msgid="785049718065337473">"volumen de las notificaciones"</item>
     <item msgid="6700305533746877052">"volumen de Bluetooth"</item>
-    <item msgid="3810969981743709839">"silenciar/activar micrófono"</item>
-    <item msgid="2627903914574908209">"mantener activo"</item>
-    <item msgid="1395372654968157578">"controlar ubicación"</item>
-    <item msgid="3238451051299611853">"supervisar ubicación de alta potencia"</item>
+    <item msgid="2029227495214047094">"mantener activo"</item>
+    <item msgid="26109888160231211">"controlar ubicación"</item>
+    <item msgid="5753382310468855812">"supervisar ubicación de alta potencia"</item>
+    <item msgid="3356591542543137332">"obtener estadísticas de uso"</item>
+    <item msgid="3073734345226842233">"silenciar/activar micrófono"</item>
+    <item msgid="1148142988678569310">"proyectar contenido multimedia"</item>
+    <item msgid="9130014005474445273">"activar VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Ubicación"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"Volumen de alarma"</item>
     <item msgid="9103719301075748925">"Volumen de notificaciones"</item>
     <item msgid="7025966722295861512">"Volumen de Bluetooth"</item>
-    <item msgid="2265317984004577529">"Silenciar/activar micrófono"</item>
-    <item msgid="3646325683886507917">"Mantener activo"</item>
+    <item msgid="4665183401128289653">"Mantener activo"</item>
+    <item msgid="8584357129746649222">"Ubicación"</item>
     <item msgid="7669257279311110599">"Ubicación"</item>
-    <item msgid="7745724368696313169">"Ubicación"</item>
+    <item msgid="3459320345690097795">"Obtener estadísticas de uso"</item>
+    <item msgid="1312534577834048535">"Silenciar/activar micrófono"</item>
+    <item msgid="5906017727368097853">"Proyectar contenido multimedia"</item>
+    <item msgid="2486614710846178542">"Activar VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Corto"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"Predeterminado"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-serif condensed"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Monospace"</item>
-    <item msgid="6857338041963571301">"Casual"</item>
-    <item msgid="961716102408512888">"Cursiva"</item>
-    <item msgid="784581717183349567">"Versalitas"</item>
+    <item msgid="7247838127505318669">"Sans-serif monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif monospace"</item>
+    <item msgid="639503332147461010">"Casual"</item>
+    <item msgid="7967169925231332424">"Cursiva"</item>
+    <item msgid="561832997193039673">"Versalitas"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Muy pequeña"</item>
@@ -361,7 +371,7 @@
     <item msgid="8342334626783983353">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="7009918361545506251">"Usar predeterminados aplicación"</item>
+    <item msgid="7009918361545506251">"Por defecto"</item>
     <item msgid="1770533843436933500">"Blanco sobre negro"</item>
     <item msgid="758587126802411846">"Negro sobre blanco"</item>
     <item msgid="1495307195241623402">"Amarillo sobre negro"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1 M"</item>
     <item msgid="6405203239560695266">"4 M"</item>
     <item msgid="3025431211013424097">"16 M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 K"</item>
+    <item msgid="3534782711045262344">"256 K"</item>
+    <item msgid="8085867209202153403">"1 M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64 K/búfer registro"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"En caché (actividad)"</item>
     <item msgid="4338089220026248848">"En caché (cliente de actividad)"</item>
     <item msgid="6652164677254579050">"En caché (vacío)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Turquesa"</item>
+    <item msgid="8332294763632946560">"Azul"</item>
+    <item msgid="2023216417616991392">"Índigo"</item>
+    <item msgid="3170497246594232819">"Violeta"</item>
+    <item msgid="4608643045752965568">"Rosa"</item>
+    <item msgid="6131821495505931173">"Rojo"</item>
   </string-array>
 </resources>

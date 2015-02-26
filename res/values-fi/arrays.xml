@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Aina"</item>
     <item msgid="844721238536786870">"Vain, kun laturi on kytketty"</item>
-    <item msgid="2990218920631468642">"Ei koskaan (lisää mobiilitiedonsiirtoa)"</item>
+    <item msgid="1986753720941888596">"Ei koskaan"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Aina"</item>
     <item msgid="7433294150916905997">"Vain, kun laturi on kytketty"</item>
     <item msgid="1390404486722375028">"Ei koskaan"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"30 viime päivää"</item>
+    <item msgid="6600989128423965319">"Aseta käyttöjakso…"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Automaattinen"</item>
+    <item msgid="1013988753804838790">"Automaattinen"</item>
     <item msgid="6670588712989942178">"Vain 5 GHz"</item>
     <item msgid="2715516524973207876">"Vain 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Käyttöaika"</item>
-    <item msgid="3703676222230317933">"Käynnistyskertojen lukumäärä"</item>
+    <item msgid="4796160515314745154">"Viimeinen käyttöaika"</item>
     <item msgid="2502754479975776899">"Sovelluksen nimi"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -243,7 +246,7 @@
     <item msgid="6546959730920410907">"muokkaa puhelulokia"</item>
     <item msgid="446877710771379667">"lue kalenteria"</item>
     <item msgid="7674458294386319722">"muokkaa kalenteria"</item>
-    <item msgid="8281201165558093009">"wifi-haku"</item>
+    <item msgid="8281201165558093009">"Wi-Fi-haku"</item>
     <item msgid="8694611243479480497">"ilmoitus"</item>
     <item msgid="7776439107987345446">"soluhaku"</item>
     <item msgid="514615766544675057">"soita numeroon"</item>
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"hälytyksen äänenvoimakkuus"</item>
     <item msgid="785049718065337473">"ilmoituksen äänenvoimakkuus"</item>
     <item msgid="6700305533746877052">"bluetooth-äänenvoimakkuus"</item>
-    <item msgid="3810969981743709839">"mykistä mikrofoni / poista mykistys"</item>
-    <item msgid="2627903914574908209">"ei virransäästötilaa"</item>
-    <item msgid="1395372654968157578">"sijainnin seuranta"</item>
-    <item msgid="3238451051299611853">"suuritehoinen sijainnin seuranta"</item>
+    <item msgid="2029227495214047094">"ei virransäästötilaa"</item>
+    <item msgid="26109888160231211">"sijainnin seuranta"</item>
+    <item msgid="5753382310468855812">"seuraa suuritehoista sijaintia"</item>
+    <item msgid="3356591542543137332">"hae käyttötilastot"</item>
+    <item msgid="3073734345226842233">"mykistä mikrofoni / poista mykistys"</item>
+    <item msgid="1148142988678569310">"lähetä media"</item>
+    <item msgid="9130014005474445273">"aktivoi VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Sijainti"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"Hälytyksen voimakkuus"</item>
     <item msgid="9103719301075748925">"Ilmoituksen äänenvoimakkuus"</item>
     <item msgid="7025966722295861512">"Bluetooth-äänenvoimakkuus"</item>
-    <item msgid="2265317984004577529">"Mykistä mikrofoni / poista mykistys"</item>
-    <item msgid="3646325683886507917">"Ei virransäästötilaa"</item>
+    <item msgid="4665183401128289653">"Ei virransäästötilaa"</item>
+    <item msgid="8584357129746649222">"Sijainti"</item>
     <item msgid="7669257279311110599">"Sijainti"</item>
-    <item msgid="7745724368696313169">"Sijainti"</item>
+    <item msgid="3459320345690097795">"Hae käyttötilastot"</item>
+    <item msgid="1312534577834048535">"Mykistä mikrofoni / poista mykistys"</item>
+    <item msgid="5906017727368097853">"Lähetä media"</item>
+    <item msgid="2486614710846178542">"Aktivoi VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Lyhyt"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"Oletus"</item>
     <item msgid="1016452621833735880">"Sans Serif"</item>
     <item msgid="2496277987934654454">"Sans Serif, tiivistetty"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Monospace"</item>
-    <item msgid="6857338041963571301">"Tavallinen"</item>
-    <item msgid="961716102408512888">"Kursiivi"</item>
-    <item msgid="784581717183349567">"Isot kirjaimet"</item>
+    <item msgid="7247838127505318669">"Sans Serif Monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif Monospace"</item>
+    <item msgid="639503332147461010">"Casual"</item>
+    <item msgid="7967169925231332424">"Kursiivi"</item>
+    <item msgid="561832997193039673">"Isot kirjaimet"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Hyvin pieni"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1 Mt"</item>
     <item msgid="6405203239560695266">"4 Mt"</item>
     <item msgid="3025431211013424097">"16 Mt"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 kt"</item>
+    <item msgid="3534782711045262344">"256 kt"</item>
+    <item msgid="8085867209202153403">"1 Mt"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64 kt / lokipuskuri"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"Välimuistissa (toiminta)"</item>
     <item msgid="4338089220026248848">"Välimuistissa (toiminnan suorittaja)"</item>
     <item msgid="6652164677254579050">"Välimuistissa (tyhjä)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Turkoosi"</item>
+    <item msgid="8332294763632946560">"Sininen"</item>
+    <item msgid="2023216417616991392">"Indigo"</item>
+    <item msgid="3170497246594232819">"Violetti"</item>
+    <item msgid="4608643045752965568">"Vaaleanpunainen"</item>
+    <item msgid="6131821495505931173">"Punainen"</item>
   </string-array>
 </resources>

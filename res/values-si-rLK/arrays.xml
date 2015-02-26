@@ -89,7 +89,7 @@
     <item msgid="8513729475867537913">"සම්බන්ධ වෙමින්…"</item>
     <item msgid="515055375277271756">"සත්‍යාපනය වෙමින්…"</item>
     <item msgid="1943354004029184381">"IP ලිපිනය ලබාගනිමින්…"</item>
-    <item msgid="4221763391123233270">"සම්බන්ධිත"</item>
+    <item msgid="4221763391123233270">"සම්බන්ධිතයි"</item>
     <item msgid="624838831631122137">"අත්හිටුවන ලදි"</item>
     <item msgid="7979680559596111948">"විසන්ධි වෙමින්…"</item>
     <item msgid="1634960474403853625">"විසන්ධි වුණි"</item>
@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -133,7 +132,7 @@
     <item msgid="5366790421523328066">"මෙම උපකරණයේ සිට PIN"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
-    <item msgid="1701505390737218306">"සම්බන්ධිත"</item>
+    <item msgid="1701505390737218306">"සම්බන්ධිතයි"</item>
     <item msgid="3189211552661432651">"ආරාධිත"</item>
     <item msgid="3206450250360237549">"අසාර්ථකයි"</item>
     <item msgid="7785896708926971207">"ලබා ගත හැකියි"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"සැමවිටම"</item>
     <item msgid="844721238536786870">"පේනුව ගත කළ විට පමණක්"</item>
-    <item msgid="2990218920631468642">"කිසි දිනෙක එපා (දත්ත භාවිතය වැඩි කරන්න)"</item>
+    <item msgid="1986753720941888596">"කවදාවත් නොවේ"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"සැමවිටම"</item>
     <item msgid="7433294150916905997">"පේනුව සක්‍රිය කලවිට පමණක්"</item>
     <item msgid="1390404486722375028">"කවදාවත් නොවේ"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"අවසන් දින 30"</item>
+    <item msgid="6600989128423965319">"භාවිත කිරීමේ කවය සකසන්න..."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"ස්වයංක්‍රීය"</item>
+    <item msgid="1013988753804838790">"ස්වයංක්‍රිය"</item>
     <item msgid="6670588712989942178">"5 GHz පමණි"</item>
     <item msgid="2715516524973207876">"2.4 GHz පමණි"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"භාවිතා කාලය"</item>
-    <item msgid="3703676222230317933">"දියත් කිරීම් ගණන"</item>
+    <item msgid="4796160515314745154">"අවසන් වරට භාවිත කළේ"</item>
     <item msgid="2502754479975776899">"යෙදුමේ නම"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"සීනුවේ ශබ්දය"</item>
     <item msgid="785049718065337473">"දැනුම්දීමේ ශබ්දය"</item>
     <item msgid="6700305533746877052">"බ්ලූටූත් ශබ්දය"</item>
-    <item msgid="3810969981743709839">"නිශ්ශබ්ද/නිශ්ශබ්ද නැති මයික්‍රෝෆෝනය"</item>
-    <item msgid="2627903914574908209">"අවදිව සිටින්න"</item>
-    <item msgid="1395372654968157578">"නිරීක්ෂණ ස්ථානය"</item>
-    <item msgid="3238451051299611853">"වැඩි බල ස්ථානය නිරීක්ෂණය"</item>
+    <item msgid="2029227495214047094">"අවදිව සිටින්න"</item>
+    <item msgid="26109888160231211">"නිරීක්ෂණ ස්ථානය"</item>
+    <item msgid="5753382310468855812">"වැඩි බල ස්ථානය නිරීක්ෂණය"</item>
+    <item msgid="3356591542543137332">"භාවිත කිරීමේ තත්ත්ව ලබාගන්න"</item>
+    <item msgid="3073734345226842233">"මයික්‍රෝෆෝනය නිශ්ශබ්ද/නිශ්ශබ්ද නැති කරන්න"</item>
+    <item msgid="1148142988678569310">"මාධ්‍ය ව්‍යාපෘතිය"</item>
+    <item msgid="9130014005474445273">"VPN සක්‍රිය කරන්න"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"ස්ථානය"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"සීනුවේ ශබ්දය"</item>
     <item msgid="9103719301075748925">"දැනුම්දීමේ ශබ්දය"</item>
     <item msgid="7025966722295861512">"බ්ලූටූත් ශබ්දය"</item>
-    <item msgid="2265317984004577529">"නිශ්ශබ්ද/නිශ්ශබ්ද නැති මයික්‍රෝෆෝනය"</item>
-    <item msgid="3646325683886507917">"අවදිව සිටින්න"</item>
+    <item msgid="4665183401128289653">"අවදිව සිටින්න"</item>
+    <item msgid="8584357129746649222">"ස්ථානය"</item>
     <item msgid="7669257279311110599">"ස්ථානය"</item>
-    <item msgid="7745724368696313169">"ස්ථානය"</item>
+    <item msgid="3459320345690097795">"භාවිත කිරීමේ තත්ත්ව ලබාගන්න"</item>
+    <item msgid="1312534577834048535">"මයික්‍රෝෆෝනය නිශ්ශබ්ද/නිශ්ශබ්ද නැති කරන්න"</item>
+    <item msgid="5906017727368097853">"මාධ්‍ය ව්‍යාපෘතිය"</item>
+    <item msgid="2486614710846178542">"VPN සක්‍රිය කරන්න"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"කොට"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"සුපුරුදු"</item>
     <item msgid="1016452621833735880">"සෑන්ස්-සේරිෆ්"</item>
     <item msgid="2496277987934654454">"සෑන්ස්-සේරිෆ් කන්ඩෙන්ස්ඩ්"</item>
-    <item msgid="4406003087391086325">"සේරිෆ්"</item>
-    <item msgid="1558362802170124073">"Monospace"</item>
-    <item msgid="6857338041963571301">"සාමාන්‍ය"</item>
-    <item msgid="961716102408512888">"බැඳි අකුරුමය"</item>
-    <item msgid="784581717183349567">"කුඩා ලොකු අකුරු"</item>
+    <item msgid="7247838127505318669">"සැන්ස්-සේරිෆ් මොනෝස්පේස්"</item>
+    <item msgid="4478414822462359763">"සේරිෆ්"</item>
+    <item msgid="7502451783483660829">"සේරිෆ් මොනෝස්පේස්"</item>
+    <item msgid="639503332147461010">"සාමාන්‍ය"</item>
+    <item msgid="7967169925231332424">"බැඳි අකුරුමය"</item>
+    <item msgid="561832997193039673">"කුඩා ලොකු අකුරු"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"ඉතා කුඩා"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64K"</item>
+    <item msgid="3534782711045262344">"256K"</item>
+    <item msgid="8085867209202153403">"1M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"ලොග අන්තරාවකට 64K"</item>
@@ -441,12 +456,12 @@
     <item msgid="1064373276095698656">"පරික්ෂා කරන ලද ඇඳීමේ විධාන කොළ පැහැයෙන් ඉස්මතු කරන්න"</item>
   </string-array>
   <string-array name="track_frame_time_entries">
-    <item msgid="2193584639058893150">"අක්‍රිය කරන්න"</item>
+    <item msgid="2193584639058893150">"අක්‍රියයි"</item>
     <item msgid="2751513398307949636">"තිරයෙහි පටි ලෙස"</item>
     <item msgid="1851438178120770973">"Adb shell dumpsys gfxinfo තුළ"</item>
   </string-array>
   <string-array name="debug_hw_overdraw_entries">
-    <item msgid="8190572633763871652">"අක්‍රිය කරන්න"</item>
+    <item msgid="8190572633763871652">"අක්‍රියයි"</item>
     <item msgid="7688197031296835369">"වැඩිකොට දක්වනවා ඇති ප්‍රදේශ පෙන්වන්න"</item>
     <item msgid="2290859360633824369">"අපවිෂවීම සඳහා ප්‍රදේශ පෙන්වන්න"</item>
   </string-array>
@@ -470,7 +485,7 @@
     <item msgid="8621078286418985762">"විසන්ධි විය"</item>
     <item msgid="6692305604213080515">"මුල පුරමින්…"</item>
     <item msgid="8001704909356800092">"සම්බන්ධ වෙමින්…"</item>
-    <item msgid="4039737283841672166">"සම්බන්ධිත"</item>
+    <item msgid="4039737283841672166">"සම්බන්ධිතයි"</item>
     <item msgid="4042143101664725090">"කල් ඉකුත්වීම"</item>
     <item msgid="7664124146786465092">"අසාර්ථකයි"</item>
   </string-array>
@@ -486,7 +501,7 @@
     <item msgid="4212263919458209842">"අවදානම්"</item>
   </string-array>
   <string-array name="entries_zen_mode">
-    <item msgid="816404936744485190">"අක්‍රිය කරන්න"</item>
+    <item msgid="816404936744485190">"අක්‍රියයි"</item>
     <item msgid="5656544177755411222">"සීමා කළ අතුරු බිදුම්"</item>
     <item msgid="8735337502532332056">"ශූන්‍ය අතුරු බිදුම්"</item>
   </string-array>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"හැඹිලි ගත කළ (ක්‍රියාකාරකම)"</item>
     <item msgid="4338089220026248848">"හැඹිලි ගත කළ (ක්‍රියාකාරකම් සේවාලාභියා)"</item>
     <item msgid="6652164677254579050">"හැඹිලි ගත කළ (හිස්)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"සේරා"</item>
+    <item msgid="8332294763632946560">"නිල්"</item>
+    <item msgid="2023216417616991392">"ඉන්ඩිගෝ"</item>
+    <item msgid="3170497246594232819">"දම්"</item>
+    <item msgid="4608643045752965568">"රෝස"</item>
+    <item msgid="6131821495505931173">"රතු"</item>
   </string-array>
 </resources>

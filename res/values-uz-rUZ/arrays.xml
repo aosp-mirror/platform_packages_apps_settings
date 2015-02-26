@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Doimo"</item>
     <item msgid="844721238536786870">"Faqat quvvatlantirilayotganda"</item>
-    <item msgid="2990218920631468642">"Hech qachon (internetni tezlashtiradi)"</item>
+    <item msgid="1986753720941888596">"Hech qachon"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Doimo"</item>
     <item msgid="7433294150916905997">"Faqat quvvatlantirilayotganda"</item>
     <item msgid="1390404486722375028">"Hech qachon"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"So‘nggi 30 kun"</item>
+    <item msgid="6600989128423965319">"Internetdan foyd-sh davri…"</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Avto"</item>
+    <item msgid="1013988753804838790">"Avtomatik"</item>
     <item msgid="6670588712989942178">"faqat 5 GHz"</item>
     <item msgid="2715516524973207876">"faqat 2.4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Sarf vaqti"</item>
-    <item msgid="3703676222230317933">"Ishga tushirish hisobi"</item>
+    <item msgid="4796160515314745154">"So‘nggi marta foydalanish"</item>
     <item msgid="2502754479975776899">"Ilova nomi"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"signal tovush balandligi"</item>
     <item msgid="785049718065337473">"xabarnoma tovush balandligi"</item>
     <item msgid="6700305533746877052">"bluetooth tovush balandligi"</item>
-    <item msgid="3810969981743709839">"mikrofonni o‘chirish/yoqish"</item>
-    <item msgid="2627903914574908209">"faol rejimda qolsin"</item>
-    <item msgid="1395372654968157578">"joylashuvni kuzatish"</item>
-    <item msgid="3238451051299611853">"joylashuvni aniqlashda batareya quvvatidan foydalanishni nazorat qilish"</item>
+    <item msgid="2029227495214047094">"uyg‘oq turish"</item>
+    <item msgid="26109888160231211">"joylashuvni kuzatish"</item>
+    <item msgid="5753382310468855812">"yuqori elektr kuchlanishga ega joylashuvlarni kuzatish"</item>
+    <item msgid="3356591542543137332">"foydalanish statistikasini ko‘rish"</item>
+    <item msgid="3073734345226842233">"mikrofonni o‘chirish/yoqish"</item>
+    <item msgid="1148142988678569310">"kontentni translatsiya qilish"</item>
+    <item msgid="9130014005474445273">"VPN tarmog‘ini faollashtirish"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Joylashuv"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"Signal tovush balandligi"</item>
     <item msgid="9103719301075748925">"Xabarnoma tovush balandligi"</item>
     <item msgid="7025966722295861512">"Bluetooth tovush balandligi"</item>
-    <item msgid="2265317984004577529">"Mikrofonni o‘chirish/yoqish"</item>
-    <item msgid="3646325683886507917">"Faol rejimda qolsin"</item>
+    <item msgid="4665183401128289653">"Uyg‘oq turish"</item>
+    <item msgid="8584357129746649222">"Joylashuv"</item>
     <item msgid="7669257279311110599">"Joylashuv"</item>
-    <item msgid="7745724368696313169">"Joylashuv"</item>
+    <item msgid="3459320345690097795">"Foydalanish statistikasini ko‘rish"</item>
+    <item msgid="1312534577834048535">"Mikrofonni o‘chirish/yoqish"</item>
+    <item msgid="5906017727368097853">"Kontentni translatsiya qilish"</item>
+    <item msgid="2486614710846178542">"VPN tarmog‘ini faollashtirish"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Qisqa"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"Standart"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Ixchamlashtirilgan Sans-serif"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Teng kenglik"</item>
-    <item msgid="6857338041963571301">"Tasodifiy"</item>
-    <item msgid="961716102408512888">"Kursiv"</item>
-    <item msgid="784581717183349567">"Kichiklashtirilgan katta harflar"</item>
+    <item msgid="7247838127505318669">"Sans-serif (bir xil oraliqli)"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif (bir xil oraliqli)"</item>
+    <item msgid="639503332147461010">"Norasmiy"</item>
+    <item msgid="7967169925231332424">"Qiya"</item>
+    <item msgid="561832997193039673">"Kichik bosh harflar"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Juda kichikina"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1 MB"</item>
     <item msgid="6405203239560695266">"4 MB"</item>
     <item msgid="3025431211013424097">"16 MB"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 KB"</item>
+    <item msgid="3534782711045262344">"256 KB"</item>
+    <item msgid="8085867209202153403">"1 MB"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"Bufer: maks. 64 KB"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"Keshlangan (harakat)"</item>
     <item msgid="4338089220026248848">"Keshlangan (harakat mijozi)"</item>
     <item msgid="6652164677254579050">"Keshlangan (bo‘sh)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Moviy"</item>
+    <item msgid="8332294763632946560">"Havorang"</item>
+    <item msgid="2023216417616991392">"To‘q ko‘k"</item>
+    <item msgid="3170497246594232819">"Binafsharang"</item>
+    <item msgid="4608643045752965568">"Pushti"</item>
+    <item msgid="6131821495505931173">"Qizil"</item>
   </string-array>
 </resources>

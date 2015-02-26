@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -136,7 +135,7 @@
     <item msgid="1701505390737218306">"Поврзано"</item>
     <item msgid="3189211552661432651">"Покането"</item>
     <item msgid="3206450250360237549">"Неуспешено"</item>
-    <item msgid="7785896708926971207">"Достапен"</item>
+    <item msgid="7785896708926971207">"Слободен"</item>
     <item msgid="2330782789550628803">"Надвор од опсег"</item>
   </string-array>
   <string-array name="bluetooth_visibility_timeout_entries">
@@ -154,21 +153,25 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Секогаш"</item>
     <item msgid="844721238536786870">"Само кога е вклучено"</item>
-    <item msgid="2990218920631468642">"Никогаш (зголемува искористување на податоци)"</item>
+    <item msgid="1986753720941888596">"Никогаш"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Секогаш"</item>
     <item msgid="7433294150916905997">"Само кога е вклучено"</item>
     <item msgid="1390404486722375028">"Никогаш"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Последните 30 дена"</item>
+    <item msgid="6600989128423965319">"Пост. цикл. на корист...."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Автоматски"</item>
+    <item msgid="1013988753804838790">"Автоматски"</item>
     <item msgid="6670588712989942178">"Само 5 GHz"</item>
     <item msgid="2715516524973207876">"Само 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Време на употреба"</item>
-    <item msgid="3703676222230317933">"Број на стартирања"</item>
+    <item msgid="4796160515314745154">"Користено последен пат"</item>
     <item msgid="2502754479975776899">"Име на апликација"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"јачина на звук на аларм"</item>
     <item msgid="785049718065337473">"јачина на звук на известување"</item>
     <item msgid="6700305533746877052">"јачина на звук на Bluetooth"</item>
-    <item msgid="3810969981743709839">"вклучи/исклучи звук на микрофон"</item>
-    <item msgid="2627903914574908209">"остани активен"</item>
-    <item msgid="1395372654968157578">"следи локација"</item>
-    <item msgid="3238451051299611853">"следи локација од големо значење"</item>
+    <item msgid="2029227495214047094">"остани активен"</item>
+    <item msgid="26109888160231211">"следи локација"</item>
+    <item msgid="5753382310468855812">"следи локација од големо значење"</item>
+    <item msgid="3356591542543137332">"добиј статистики за користење"</item>
+    <item msgid="3073734345226842233">"вклучи/исклучи звук на микрофон"</item>
+    <item msgid="1148142988678569310">"проектирај медиуми"</item>
+    <item msgid="9130014005474445273">"активирај ВПН"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Локација"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"Јачина на звук на аларм"</item>
     <item msgid="9103719301075748925">"Јачина на звук на известување"</item>
     <item msgid="7025966722295861512">"Јачина на звук на Bluetooth"</item>
-    <item msgid="2265317984004577529">"Вклучи/исклучи звук на микрофон"</item>
-    <item msgid="3646325683886507917">"Остани активен"</item>
+    <item msgid="4665183401128289653">"Остани активен"</item>
+    <item msgid="8584357129746649222">"Локација"</item>
     <item msgid="7669257279311110599">"Локација"</item>
-    <item msgid="7745724368696313169">"Локација"</item>
+    <item msgid="3459320345690097795">"Добиј статистики за користење"</item>
+    <item msgid="1312534577834048535">"Вклучи/исклучи звук на микрофон"</item>
+    <item msgid="5906017727368097853">"Проектирај медиуми"</item>
+    <item msgid="2486614710846178542">"Активирај ВПН"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Кратко"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"Стандардни"</item>
     <item msgid="1016452621833735880">"Sans-serif"</item>
     <item msgid="2496277987934654454">"Sans-Serif збиени"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Со еднаква широчина"</item>
-    <item msgid="6857338041963571301">"Обични"</item>
-    <item msgid="961716102408512888">"Курзив"</item>
-    <item msgid="784581717183349567">"Мали големи букви"</item>
+    <item msgid="7247838127505318669">"Sans-serif со еднаква ширина"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif со еднаква ширина"</item>
+    <item msgid="639503332147461010">"Обичен"</item>
+    <item msgid="7967169925231332424">"Курзив"</item>
+    <item msgid="561832997193039673">"Мали големи букви"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Многу мали"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1 M"</item>
     <item msgid="6405203239560695266">"4 M"</item>
     <item msgid="3025431211013424097">"16 M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64.000"</item>
+    <item msgid="3534782711045262344">"256.000"</item>
+    <item msgid="8085867209202153403">"1 M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64 K/меѓумеморија"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"Кеширана (активност)"</item>
     <item msgid="4338089220026248848">"Кеширана (клиент за активност)"</item>
     <item msgid="6652164677254579050">"Кеширана (празна)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Тиркизна"</item>
+    <item msgid="8332294763632946560">"Сина"</item>
+    <item msgid="2023216417616991392">"Индиго"</item>
+    <item msgid="3170497246594232819">"Виолетова"</item>
+    <item msgid="4608643045752965568">"Розова"</item>
+    <item msgid="6131821495505931173">"Црвена"</item>
   </string-array>
 </resources>

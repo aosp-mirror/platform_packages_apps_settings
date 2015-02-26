@@ -120,7 +120,6 @@
     <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
     <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
     <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
-    <!-- no translation found for wifi_ap_security:2 (3112452131886885338) -->
   <string-array name="wifi_eap_method">
     <item msgid="1160193392455075561">"PEAP"</item>
     <item msgid="7981731051382306293">"TLS"</item>
@@ -147,28 +146,32 @@
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Slab"</item>
-    <item msgid="5615082285463430971">"Corect"</item>
+    <item msgid="5615082285463430971">"Acceptabil"</item>
     <item msgid="3565079809875324621">"Bun"</item>
     <item msgid="5702329417707689835">"Excelent"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3269131034472904310">"Întotdeauna"</item>
     <item msgid="844721238536786870">"Doar atunci când este conectat"</item>
-    <item msgid="2990218920631468642">"Niciodată (măreşte utilizarea datelor)"</item>
+    <item msgid="1986753720941888596">"Niciodată"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries_wifi_only">
     <item msgid="2124319326282651391">"Întotdeauna"</item>
     <item msgid="7433294150916905997">"Doar atunci când este conectat"</item>
     <item msgid="1390404486722375028">"Niciodată"</item>
   </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Ultimele 30 de zile"</item>
+    <item msgid="6600989128423965319">"Setați ciclu utilizare..."</item>
+  </string-array>
   <string-array name="wifi_frequency_band_entries">
-    <item msgid="624340809384223320">"Automat"</item>
+    <item msgid="1013988753804838790">"Automat"</item>
     <item msgid="6670588712989942178">"Numai pe 5 GHz"</item>
     <item msgid="2715516524973207876">"Numai pe 2,4 GHz"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="2100172576767439288">"Durată de utilizare"</item>
-    <item msgid="3703676222230317933">"Numărul lansărilor"</item>
+    <item msgid="4796160515314745154">"Ultima utilizare"</item>
     <item msgid="2502754479975776899">"Numele aplicaţiei"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
@@ -273,10 +276,13 @@
     <item msgid="5762123934816216821">"volum alarmă"</item>
     <item msgid="785049718065337473">"volum notificări"</item>
     <item msgid="6700305533746877052">"volumul Bluetooth"</item>
-    <item msgid="3810969981743709839">"activează/dezactivează microfonul"</item>
-    <item msgid="2627903914574908209">"menține starea activă"</item>
-    <item msgid="1395372654968157578">"monitorizează locația"</item>
-    <item msgid="3238451051299611853">"monitorizează solicitările de localizare care necesită consum ridicat de energie"</item>
+    <item msgid="2029227495214047094">"mențineți activ"</item>
+    <item msgid="26109888160231211">"monitorizarea locației"</item>
+    <item msgid="5753382310468855812">"monitorizarea localizării cu consum ridicat de energie"</item>
+    <item msgid="3356591542543137332">"obțineți statistici de utilizare"</item>
+    <item msgid="3073734345226842233">"activați/dezactivați microfonul"</item>
+    <item msgid="1148142988678569310">"proiectați conținutul media"</item>
+    <item msgid="9130014005474445273">"activați serviciul VPN"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Locație"</item>
@@ -319,10 +325,13 @@
     <item msgid="7260546305036218513">"Volum alarmă"</item>
     <item msgid="9103719301075748925">"Volum notificări"</item>
     <item msgid="7025966722295861512">"Volum Bluetooth"</item>
-    <item msgid="2265317984004577529">"Activează/dezactivează microfonul"</item>
-    <item msgid="3646325683886507917">"Menține starea activă"</item>
+    <item msgid="4665183401128289653">"Păstrare în activitate"</item>
+    <item msgid="8584357129746649222">"Locație"</item>
     <item msgid="7669257279311110599">"Locație"</item>
-    <item msgid="7745724368696313169">"Locație"</item>
+    <item msgid="3459320345690097795">"Obțineți statistici de utilizare"</item>
+    <item msgid="1312534577834048535">"Activați/dezactivați microfonul"</item>
+    <item msgid="5906017727368097853">"Proiectați conținutul media"</item>
+    <item msgid="2486614710846178542">"Activați serviciul VPN"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Scurtă"</item>
@@ -333,11 +342,12 @@
     <item msgid="1319652728542138112">"Prestabilit"</item>
     <item msgid="1016452621833735880">"Sans Serif"</item>
     <item msgid="2496277987934654454">"Sans Serif condensat"</item>
-    <item msgid="4406003087391086325">"Serif"</item>
-    <item msgid="1558362802170124073">"Cu un singur spațiu"</item>
-    <item msgid="6857338041963571301">"Familiar"</item>
-    <item msgid="961716102408512888">"Cursiv"</item>
-    <item msgid="784581717183349567">"Majuscule mici"</item>
+    <item msgid="7247838127505318669">"Sans-serif monospace"</item>
+    <item msgid="4478414822462359763">"Serif"</item>
+    <item msgid="7502451783483660829">"Serif monospace"</item>
+    <item msgid="639503332147461010">"Obișnuit"</item>
+    <item msgid="7967169925231332424">"Cursiv"</item>
+    <item msgid="561832997193039673">"Majuscule mici"</item>
   </string-array>
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="4800919809575254054">"Foarte mic"</item>
@@ -374,6 +384,11 @@
     <item msgid="6361286924268716397">"1M"</item>
     <item msgid="6405203239560695266">"4M"</item>
     <item msgid="3025431211013424097">"16M"</item>
+  </string-array>
+  <string-array name="select_logd_size_lowram_titles">
+    <item msgid="524799395770610154">"64 K"</item>
+    <item msgid="3534782711045262344">"256 K"</item>
+    <item msgid="8085867209202153403">"1 M"</item>
   </string-array>
   <string-array name="select_logd_size_summaries">
     <item msgid="7346595473588765019">"64K/tampon jurnal"</item>
@@ -511,5 +526,13 @@
     <item msgid="8610560843693675830">"În cache (activitate)"</item>
     <item msgid="4338089220026248848">"În cache (client de activitate)"</item>
     <item msgid="6652164677254579050">"În cache (gol)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Turcoaz"</item>
+    <item msgid="8332294763632946560">"Albastru"</item>
+    <item msgid="2023216417616991392">"Indigo"</item>
+    <item msgid="3170497246594232819">"Violet"</item>
+    <item msgid="4608643045752965568">"Roz"</item>
+    <item msgid="6131821495505931173">"Roșu"</item>
   </string-array>
 </resources>
