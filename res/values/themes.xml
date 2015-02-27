@@ -137,9 +137,6 @@
         <item name="@*android:regularColor">@color/lock_pattern_view_regular_color</item>
         <item name="@*android:successColor">@color/lock_pattern_view_success_color</item>
         <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
-
-        <!-- For the TimePicker -->
-        <item name="@android:timePickerStyle">@style/Widget.TimePicker</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
@@ -149,7 +146,7 @@
         <item name="switchBarTheme">@style/Theme.SwitchBar.SubSettings</item>
     </style>
 
-    <style name="Theme.ActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
+    <style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
@@ -157,27 +154,17 @@
         <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
-    <style name="Theme.SwitchBar.Settings" parent="@android:style/Theme.Material">
+    <style name="Theme.SwitchBar.Settings" parent="@android:style/Theme.Material.Settings">
         <item name="switchBarMarginStart">@dimen/switchbar_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_margin_end</item>
     </style>
 
-    <style name="Theme.SwitchBar.SubSettings" parent="@android:style/Theme.Material">
+    <style name="Theme.SwitchBar.SubSettings" parent="@android:style/Theme.Material.Settings">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
     </style>
 
-    <style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.Light.DialogWhenLarge">
-        <!-- Explicitly override the background color. -->
-        <item name="android:colorBackground">@android:color/white</item>
-
-        <!-- Used by the ActionBar -->
-        <item name="android:colorPrimary">@color/theme_primary</item>
-        <!-- Used by the StatusBar -->
-        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
-        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
-        <item name="android:colorAccent">@color/theme_accent</item>
-
+    <style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.DayNight.DialogWhenLarge">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
 
@@ -203,18 +190,8 @@
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
     </style>
 
-    <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.Light.Dialog.Alert">
+    <style name="Theme.AlertDialog" parent="@*android:style/Theme.Material.DayNight.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
-
-        <!-- Explicitly override the background color. -->
-        <item name="android:colorBackground">@android:color/white</item>
-
-        <!-- Used by the ActionBar -->
-        <item name="android:colorPrimary">@color/theme_primary</item>
-        <!-- Used by the StatusBar -->
-        <item name="android:colorPrimaryDark">@color/theme_primary_dark</item>
-        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
-        <item name="android:colorAccent">@color/theme_accent</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
