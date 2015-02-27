@@ -43,6 +43,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -532,7 +533,12 @@ public class SettingsActivity extends Activity
         getFragmentManager().addOnBackStackChangedListener(this);
 
         if (mIsShowingDashboard) {
-            Index.getInstance(getApplicationContext()).update();
+            // Run the Index update only if we have some space
+            if (!Utils.isLowStorage(this)) {
+                Index.getInstance(getApplicationContext()).update();
+            } else {
+                Log.w(LOG_TAG, "Cannot update the Indexer as we are running low on storage space!");
+            }
         }
 
         if (savedState != null) {
