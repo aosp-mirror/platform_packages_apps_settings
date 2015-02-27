@@ -52,6 +52,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.preference.Preference;
 import android.preference.PreferenceFrameLayout;
 import android.preference.PreferenceGroup;
@@ -1069,6 +1070,17 @@ public final class Utils {
                 0);
         a.recycle();
         return inflater.inflate(resId, parent, false);
+    }
+
+    /**
+     * Return if we are running low on storage space or not.
+     *
+     * @param context The context
+     * @return true if we are running low on storage space
+     */
+    public static boolean isLowStorage(Context context) {
+        final StorageManager sm = StorageManager.from(context);
+        return (sm.getStorageBytesUntilLow(context.getFilesDir()) < 0);
     }
 
 }
