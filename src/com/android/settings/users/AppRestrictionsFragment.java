@@ -317,10 +317,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         return getPreferenceScreen();
     }
 
-    protected void clearSelectedApps() {
-        mSelectedPackages.clear();
-    }
-
     private void applyUserAppsStates() {
         final int userId = mUser.getIdentifier();
         if (!mUserManager.getUserInfo(userId).isRestricted() && userId != UserHandle.myUserId()) {
@@ -643,6 +639,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             final boolean hasSettings = resolveInfoListHasPackage(receivers, packageName);
             if (isSettingsApp) {
                 addLocationAppRestrictionsPreference(app, p);
+                // Settings app should be available to restricted user
+                mSelectedPackages.put(packageName, true);
                 continue;
             }
             PackageInfo pi = null;
@@ -687,7 +685,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 p.setChecked(mSelectedPackages.get(packageName));
             }
             p.setOrder(MAX_APP_RESTRICTIONS * (mAppList.getPreferenceCount() + 2));
-            addToAppList(p, packageName);
+            mSelectedPackages.put(packageName, p.isChecked());
+            mAppList.addPreference(p);
         }
         mAppListChanged = true;
         // If this is the first time for a new profile, install/uninstall default apps for profile
@@ -736,11 +735,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         p.setPersistent(false);
         p.setOnPreferenceClickListener(this);
         p.setOrder(MAX_APP_RESTRICTIONS);
-        addToAppList(p, packageName);
-    }
-
-    private void addToAppList(AppRestrictionsPreference p, String packageName) {
-        mSelectedPackages.put(packageName, p.isChecked());
         mAppList.addPreference(p);
     }
 
