@@ -343,6 +343,29 @@
     <string name="security_settings_summary" msgid="967393342537986570">"मेरो स्थान, स्क्रिन अनलक, SIM कार्ड लक, प्रामाणिक भण्डारण लक सेट गर्नुहोस्"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"मेरो स्थान, स्क्रिन अनलक, भण्डारण लकका गोप्य डेटा सेट गर्नुहोस्"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"पासवर्डहरू"</string>
+    <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"औंठाछाप"</string>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> औठाछापहरू नामाङ्कन गरियो</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> औठाछाप नामाङ्कन गरियो</item>
+    </plurals>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"औँठाछाप सेटअप"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"तपाईँको स्क्रिन अनलक गर्न वा खरीदहरू पुष्टि गर्नको लागि तपाईँको औंठाछाप प्रयोग गर्न, हामीलाई निम्न आवश्यक छ: \n ✓ तपाईँको पृष्ठभूमि स्क्रिन लक विधि सेट अप गर्नुहोस् \n ✓ तपाईँको औंठाछाप थप्नुहोस्"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"सुरु गरौं!"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"औठाछाप सेन्सरमा तपाईँको औंला राख्नुहोस्। तपाईंले एक कम्पन महसुस गर्नुभएपछि उठाउनुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"उत्तम! अब दोहोर्‍याउनुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"औंठाछाप सेन्सरमा उही औंला राख्नुहोस् र तपाईंले एक कम्पन महसुस गर्नुभएपछि औंला उठाउनुहोस्।"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"औँठाछाप थपियो!"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"तपाईं यस प्रतिमा जहिले देख्नुहुन्छ, तपाईं पहिचानको लागि वा एक खरीद अधिकारको निम्ति आफ्नो औठाछाप प्रयोग गर्न सक्नुहुन्छ।"</string>
+    <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"थप्नुहोस्"</string>
+    <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"अर्को"</string>
+    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"आंशिक औठाछाप पत्ता लाग्यो। कृपया फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"औँठाछाप सेन्सर फोहोर छ। कृपया सफा गरेर फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"औंला निकै छिटो सारियो। कृपया फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"औंला निकै ढिला सारियो। कृपया फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"प्रक्रिया गर्न असमर्थ। फेरि प्रयास गर्नुहोस्।"</string>
+    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"हार्डवेयर उपलब्ध छैन।"</string>
+    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"औँठाछाप भण्डारण गर्न सकिँदैन। कृपया अवस्थित औठाछाप हटाउनुहोस्।"</string>
+    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"औँठाछापको समय सकिएको छ। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"एन्क्रिप्सन"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"इन्क्रिप्ट ट्याब्लेट"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"फोन इन्क्रिप्ट गर्नुहोस्"</string>
@@ -770,6 +793,11 @@
     <string name="brightness_summary" msgid="838917350127550703">"स्क्रिनको उज्यालोपना मिलाउनुहोस्"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"अनुकूलीत चमक"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"उपलब्ध प्रकाशका लागि चमक तह प्रभावकारी बनाउँछ"</string>
+    <string name="night_mode_title" msgid="6928425617491943384">"विषयवस्तु"</string>
+    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
+    <string name="night_mode_no" msgid="7682792841791457238">"लाइट"</string>
+    <string name="night_mode_yes" msgid="4847655033618591567">"गाढा"</string>
+    <string name="night_mode_auto" msgid="7508348175804304327">"स्वचालित"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"निष्क्रिय"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"स्क्रिन बन्द हुन्छ"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> निष्क्रियता पछि"</string>
@@ -919,7 +947,7 @@
     <string name="usb_ptp_title" msgid="3852760810622389620">"क्यामेरा (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7673397474756664929">"तपाईँलाई क्यामेरा सफ्टवेयर प्रयोग गरेर फोटाहरू स्थानान्तरण गर्न, र MTP समर्थन नगर्ने कम्प्युटरमा कुनै पनि फाइलहरू स्थानान्तरण दिन्छ।"</string>
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
-    <string name="usb_midi_summary" msgid="539169474810956358">"MIDI द्वारा सक्रिय अनुप्रयोगहरूलाई तपाईंको कम्प्यूटरमा USB मार्फत MIDI सफ्टवेयरसँग काम गर्न दिन्छ।"</string>
+    <string name="usb_midi_summary" msgid="539169474810956358">"MIDI द्वारा सक्रिय अनुप्रयोगहरूलाई तपाईंको कम्प्युटरमा USB मार्फत MIDI सफ्टवेयरसँग काम गर्न दिन्छ।"</string>
     <string name="storage_other_users" msgid="808708845102611856">"अन्य प्रयोगकर्ताहरू"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"ब्याट्रि स्थिति"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"ब्याट्रि स्तर"</string>
@@ -1061,7 +1089,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"स्थान मोड"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"स्थान निर्धारण गर्न GPS, वाइफाइ र सेलुलर सञ्जाल प्रयोग गर्नुहोस्"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"स्थान निर्धारण गर्न वाइफाइ र सेलुलर सञ्जाल प्रयोग गर्नुहोस्"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"स्थान अनुमानका लागि GPS प्रयोग गर्नुहोस्"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"स्थान निर्धारण गर्न GPS प्रयोग गर्नुहोस्"</string>
     <string name="location_network_based" msgid="6010456018401296590">"वाइफाइ र सेलुलर सञ्जाल स्थान"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"तपाईँको स्थानलाई सीघ्र अनुमान गर्न अनुप्रयोगहरूलाई गुगल स्थान सेवा प्रयोग गर्न अनुमति दिनुहोस्। बेनामी स्थान डेटा भेला गरिने छ र गुगलमा पठाइने छ।"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"वाइ-फाइद्वारा निर्धारित स्थान"</string>
@@ -2266,7 +2294,7 @@
     <string name="sim_cellular_data_unavailable_summary" msgid="3654805961942166428">"डेटा SIM चयन गर्न छुनुहोस्"</string>
     <string name="sim_calls_always_use" msgid="7936774751250119715">"सधैं यो कलको लागि प्रयोग गर्नुहोस्"</string>
     <string name="select_sim_for_data" msgid="2366081042162853044">"डेटाको लागि सिम चयन गर्नुहोस्"</string>
-    <string name="data_switch_started" msgid="2040761479817166311">"डाटा सिम स्विच गर्दै, यसलाई करिब एक मिनेट लाग्न सक्छ ..."</string>
+    <string name="data_switch_started" msgid="2040761479817166311">"डेटा SIM स्विच गर्दै, यसलाई करिब एक मिनेट लाग्न सक्छ ..."</string>
     <string name="select_sim_for_calls" msgid="3503094771801109334">"संग कल"</string>
     <string name="sim_select_card" msgid="211285163525563293">"SIM कार्ड चयन गर्नुहोस्"</string>
     <string name="sim_card_number_title" msgid="7845379943474336488">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -2308,7 +2336,8 @@
     <string name="keywords_display" msgid="6709007669501628320">"स्क्रिन टचस्क्रिन"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"मधुरो स्क्रिन छोएर चल्ने स्क्रिन ब्याट्री"</string>
     <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"मधुरो स्क्रिन छोएर चल्ने स्क्रिन ब्याट्री"</string>
-    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"व्यक्तिगत अनुकूलित प्रदर्शन पृष्ठभूमि"</string>
+    <string name="keywords_display_night_mode" msgid="7652025075378505346">"अँध्यारो विषयवस्तु रात मोड मधुरो स्क्रिन इन्भर्ट चमक"</string>
+    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"पृष्ठभूमि व्यक्तिगत अनुकूलन प्रदर्शन"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"पाठ आकार"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"परियोजना"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"ठाउँ डिस्क हार्ड ड्राइभ उपकरण उपयोग"</string>

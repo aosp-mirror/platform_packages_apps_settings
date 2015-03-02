@@ -343,6 +343,29 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Set My Location, screen unlock, SIM card lock, credential storage lock"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Set My Location, screen unlock, credential storage lock"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Passwords"</string>
+    <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingerprints enrolled</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingerprint enrolled</item>
+    </plurals>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Fingerprint setup"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to: \n✓ Set up your background screen lock method \n✓ Add your fingerprint"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"Let\'s start!"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Put your finger on the fingerprint sensor. Lift after you feel a vibration."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"Great! Now repeat."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Put the same finger on the fingerprint sensor and lift after you feel a vibration."</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingerprint added!"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Whenever you see this icon, you can use your fingerprint for identification or to authorise a purchase."</string>
+    <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Add"</string>
+    <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Next"</string>
+    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Partial fingerprint detected. Please try again."</string>
+    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Fingerprint sensor is dirty. Please clean and try again."</string>
+    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Finger moved to fast. Please try again."</string>
+    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Finger moved to slow. Please try again."</string>
+    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Unable to process. Try again."</string>
+    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Hardware not available."</string>
+    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Fingerprint can\'t be stored. Please remove an existing fingerprint."</string>
+    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Fingerprint timeout reached. Try again."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Encryption"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Encrypt tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Encrypt phone"</string>
@@ -770,6 +793,11 @@
     <string name="brightness_summary" msgid="838917350127550703">"Adjust the brightness of the screen"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Adaptive brightness"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimise brightness level for available light"</string>
+    <string name="night_mode_title" msgid="6928425617491943384">"Theme"</string>
+    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
+    <string name="night_mode_no" msgid="7682792841791457238">"Light"</string>
+    <string name="night_mode_yes" msgid="4847655033618591567">"Dark"</string>
+    <string name="night_mode_auto" msgid="7508348175804304327">"Automatic"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Sleep"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Screen turns off"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
@@ -1061,7 +1089,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Location mode"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Use GPS, Wi‑Fi and mobile networks to determine location"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Use Wi‑Fi and mobile networks to determine location"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"Use GPS to determine your location"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Use GPS to determine location"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi &amp; mobile network location"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Let apps use Google\'s location service to estimate your location faster. Anonymous location data will be collected and sent to Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Location determined by Wi‑Fi"</string>
@@ -2308,7 +2336,8 @@
     <string name="keywords_display" msgid="6709007669501628320">"screen touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"dim screen touchscreen battery"</string>
     <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"dim screen touchscreen battery"</string>
-    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"background personalise customise display"</string>
+    <string name="keywords_display_night_mode" msgid="7652025075378505346">"dark theme night mode dim screen invert brightness"</string>
+    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"background personalise customise display"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"text size"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"project"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"space disk hard drive device usage"</string>

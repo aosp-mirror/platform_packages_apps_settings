@@ -343,6 +343,29 @@
     <string name="security_settings_summary" msgid="967393342537986570">"ตั้งค่าตำแหน่งของฉัน ปลดล็อกหน้าจอ ล็อกซิมการ์ด ล็อกที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"ตั้งค่าตำแหน่งของฉัน การปลดล็อกหน้าจอ การล็อกที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"รหัสผ่าน"</string>
+    <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"ลายนิ้วมือ"</string>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
+      <item quantity="other">ลงทะเบียนแล้ว <xliff:g id="COUNT_1">%1$d</xliff:g> ลายนิ้วมือ</item>
+      <item quantity="one">ลงทะเบียนแล้ว <xliff:g id="COUNT_0">%1$d</xliff:g> ลายนิ้วมือ</item>
+    </plurals>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"การตั้งค่าลายนิ้วมือ"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"หากต้องการใช้ลายนิ้วมือเพื่อปลดล็อกหน้าจอหรือยืนยันการซื้อ เราจะต้อง: \n✓ ตั้งค่าวิธีการล็อกหน้าจอพื้นหลัง \n✓ เพิ่มลายนิ้วมือของคุณ"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"มาเริ่มต้นกันเลย!"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"วางนิ้วมือบนเซ็นเซอร์ลายนิ้วมือ แล้วยกขึ้นหลังจากที่คุณรู้สึกว่ามีการสั่น"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"เยี่ยม! ทำซ้ำเลย"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"วางนิ้วมือเดียวกันบนเซ็นเซอร์ลายนิ้วมือและยกขึ้นหลังจากที่คุณรู้สึกว่ามีการสั่น"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"เพิ่มลายนิ้วมือแล้ว!"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"เมื่อใดก็ตามที่คุณเห็นไอคอนนี้ คุณสามารถใช้ลายนิ้วมือเพื่อระบุตัวตนหรือเพื่ออนุญาตการซื้อได้"</string>
+    <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"เพิ่ม"</string>
+    <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"ถัดไป"</string>
+    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"ตรวจพบลายนิ้วมือเพียงบางส่วน โปรดลองอีกครั้ง"</string>
+    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"เซ็นเซอร์ลายนิ้วมือไม่สะอาด โปรดทำความสะอาดและลองอีกครั้ง"</string>
+    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"เคลื่อนนิ้วเร็วเกินไป โปรดลองอีกครั้ง"</string>
+    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"เคลื่อนนิ้วช้าเกินไป โปรดลองอีกครั้ง"</string>
+    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"ไม่สามารถดำเนินการได้ โปรดลองอีกครั้ง"</string>
+    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"ฮาร์ดแวร์ไม่พร้อมใช้งาน"</string>
+    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"ไม่สามารถเก็บลายนิ้วมือได้ โปรดนำลายนิ้วมือที่มีอยู่ออก"</string>
+    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"หมดเวลาใช้ลายนิ้วมือแล้ว โปรดลองอีกครั้ง"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัส"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสแท็บเล็ต"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสโทรศัพท์"</string>
@@ -770,6 +793,11 @@
     <string name="brightness_summary" msgid="838917350127550703">"ปรับความสว่างหน้าจอ"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"ปรับระดับความสว่างให้เหมาะกับแสงที่มีอยู่"</string>
+    <string name="night_mode_title" msgid="6928425617491943384">"ธีม"</string>
+    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
+    <string name="night_mode_no" msgid="7682792841791457238">"สีสว่าง"</string>
+    <string name="night_mode_yes" msgid="4847655033618591567">"สีมืด"</string>
+    <string name="night_mode_auto" msgid="7508348175804304327">"อัตโนมัติ"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"สลีป"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"หน้าจอปิด"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"หลังจากไม่ได้ทำงานเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1061,7 +1089,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"โหมดตำแหน่ง"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"ใช้ GPS, Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"ใช้ Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"ใช้ GPS เพื่อหาตำแหน่งของคุณ"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ใช้ GPS เพื่อระบุตำแหน่ง"</string>
     <string name="location_network_based" msgid="6010456018401296590">"ตำแหน่ง Wi-Fi และเครือข่าย"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ให้แอปต่างๆ ใช้บริการระบุตำแหน่งของ Google เพื่อระบุตำแหน่งโดยประมาณของคุณรวดเร็วยิ่งขึ้น โดยจะมีการรวบรวมและส่งข้อมูลตำแหน่งที่ไม่ระบุชื่อให้ Google"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ตำแหน่งที่กำหนดโดย WiFi"</string>
@@ -2308,7 +2336,8 @@
     <string name="keywords_display" msgid="6709007669501628320">"หน้าจอ หน้าจอสัมผัส"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"หน้าจอสลัว หน้าจอสัมผัส แบตเตอรี่"</string>
     <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"หน้าจอสลัว หน้าจอสัมผัส แบตเตอรี่"</string>
-    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"พื้นหลัง ปรับเปลี่ยนในแบบของคุณ กำหนดค่า หน้าจอ"</string>
+    <string name="keywords_display_night_mode" msgid="7652025075378505346">"ธีมสีมืด โหมดกลางคืน หน้าจอสลัว สลับความสว่าง"</string>
+    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"พื้นหลัง ปรับเปลี่ยนในแบบของคุณ กำหนดค่า การแสดงผล"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"ขนาดข้อความ"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"ฉาย"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"ที่ว่าง ดิสก์ ฮาร์ดไดร์ฟ อุปกรณ์ การใช้"</string>

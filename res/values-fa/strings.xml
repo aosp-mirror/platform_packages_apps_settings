@@ -93,7 +93,7 @@
     <string name="battery_info_awake_plugged" msgid="176716874713478188">"زمان بیداری هنگام شارژ کردن:"</string>
     <string name="battery_info_screen_on" msgid="376277447175613889">"زمان روشن بودن صفحه:"</string>
     <string name="battery_info_status_unknown" msgid="196130600938058547">"ناشناس"</string>
-    <string name="battery_info_status_charging" msgid="1705179948350365604">"شارژ کردن"</string>
+    <string name="battery_info_status_charging" msgid="1705179948350365604">"در حال شارژ شدن"</string>
     <string name="battery_info_status_charging_ac" msgid="2909861890674399949">"شارژ با جریان متناوب"</string>
     <string name="battery_info_status_charging_usb" msgid="2207489369680923929">"‏شارژ از طریق USB"</string>
     <string name="battery_info_status_charging_wireless" msgid="3574032603735446573">"شارژ به صورت بی‌سیم"</string>
@@ -343,6 +343,29 @@
     <string name="security_settings_summary" msgid="967393342537986570">"تنظیم مکان من، قفل صفحه، قفل سیم کارت، قفل محل ذخیره اطلاعات کاربری"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"تنظیم مکان من، بازگشایی قفل صفحه، قفل محل ذخیره اطلاعات کاربری"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"گذرواژه‌ها"</string>
+    <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"اثر انگشت"</string>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
+      <item quantity="one">‏<xliff:g id="COUNT_1">%1$d</xliff:g> اثر انگشت ثبت شد</item>
+      <item quantity="other">‏<xliff:g id="COUNT_1">%1$d</xliff:g> اثر انگشت ثبت شد</item>
+    </plurals>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"تنظیم اثر انگشت"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"برای استفاده از اثر انگشت جهت باز کردن قفل صفحه‌نمایش یا تأیید خرید، باید: \n‏✓ روش قفل صفحه پس‌زمینه‌تان را تنظیم کنید \n‏✓ اثر انگشتتان را اضافه کنید"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"بیایید شروع کنیم."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"انگشتتان را روی حسگر اثر انگشت بگذارید. بعد از احساس لرزش آن را بردارید."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"عالی است! اکنون دوباره تکرار کنید."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"همان انگشت را روی حسگر اثر انگشت بگذارید و بعد از احساس لرزش آن را بردارید."</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"اثر انگشت اضافه شد."</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"هر زمان این نماد را ببینید، می‌توانید از اثر انگشتتان برای شناسایی یا تأیید خرید استفاده کنید."</string>
+    <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"افزودن"</string>
+    <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"بعدی"</string>
+    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"بخشی از اثر انگشت شناسایی شد. لطفاً دوباره امتحان کنید."</string>
+    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"حسگر اثر انگشت کثیف است. لطفاً آن را تمیز کنید و دوباره امتحان نمایید."</string>
+    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"انگشت خیلی سریع حرکت کرد. لطفاً دوباره امتحان کنید."</string>
+    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"انگشت خیلی آهسته حرکت کرد. لطفاً دوباره امتحان کنید."</string>
+    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"پردازش ممکن نیست. دوباره امتحان کنید."</string>
+    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"سخت‌افزار در دسترس نیست."</string>
+    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"ذخیره اثر انگشت ممکن نیست. لطفاً یک اثر انگشت موجود را حذف کنید."</string>
+    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"مهلت زمانی ثبت اثر انگشت به پایان رسید. دوباره امتحان کنید."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"رمزگذاری"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"رمزگذاری رایانهٔ لوحی"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"رمزگذاری تلفن"</string>
@@ -770,6 +793,11 @@
     <string name="brightness_summary" msgid="838917350127550703">"تنظیم روشنایی صفحه"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"روشنایی تطبیقی"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"بهینه‌سازی سطح روشنایی برای نور در دسترس"</string>
+    <string name="night_mode_title" msgid="6928425617491943384">"طرح‌زمینه"</string>
+    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
+    <string name="night_mode_no" msgid="7682792841791457238">"روشن"</string>
+    <string name="night_mode_yes" msgid="4847655033618591567">"تیره"</string>
+    <string name="night_mode_auto" msgid="7508348175804304327">"خودکار"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"حالت خواب"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"صفحه نمایش خاموش می‌شود"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"پس از گذشت <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> از غیر فعال بودن"</string>
@@ -1061,7 +1089,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"حالت مکان"</string>
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"‏استفاده از GPS،‏ Wi-Fi و شبکه‌های تلفن همراه برای تعیین مکان"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"‏استفاده از Wi-Fi و شبکه‌های تلفن همراه برای تعیین مکان"</string>
-    <string name="location_mode_sensors_only_description" msgid="7178415350457794366">"‏استفاده از GPS برای تعیین مکان شما"</string>
+    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"‏استفاده از GPS برای تعیین موقعیت مکانی"</string>
     <string name="location_network_based" msgid="6010456018401296590">"‏مکان شبکه تلفن همراه و Wi-Fi"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"‏به برنامه‌ها اجازه داده شود با استفاده از خدمات مکانی Google مکان شما را سریع‌تر تخمین بزنند. داده‌های مکان به‌طور ناشناس جمع‌آوری شده و به Google ارسال خواهد شد."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"‏موقعیت مکانی تعیین شده توسط Wi-Fi"</string>
@@ -1565,7 +1593,7 @@
     <string name="battery_since_reset" msgid="7464546661121187045">"استفاده از باتری از زمان بازنشانی"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> در باتری"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> از زمان جدا کردن"</string>
-    <string name="battery_stats_charging_label" msgid="4223311142875178785">"شارژ کردن"</string>
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"در حال شارژ شدن"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"صفحه روشن"</string>
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"‏GPS در"</string>
     <string name="battery_stats_wifi_running_label" msgid="1845839195549226252">"Wi-Fi"</string>
@@ -2308,7 +2336,8 @@
     <string name="keywords_display" msgid="6709007669501628320">"صفحه نمایش صفحه لمسی"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"باتری صفحه‌لمسی صفحه کم نور"</string>
     <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"باتری صفحه‌لمسی صفحه کم نور"</string>
-    <string name="keywords_display_wallpaper" msgid="6043033055096511751">"پس‌زمینه شخصی‌سازی سفارشی‌سازی نمایشگر"</string>
+    <string name="keywords_display_night_mode" msgid="7652025075378505346">"طرح‌زمینه تیره حالت شب تار کردن صفحه‌نمایش معکوس کردن روشنایی"</string>
+    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"شخصی‌سازی پس‌زمینه سفارشی کردن نمایشگر"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"اندازه نوشتار"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"پروژه"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"فضا دیسک دیسک سخت دستگاه استفاده"</string>
