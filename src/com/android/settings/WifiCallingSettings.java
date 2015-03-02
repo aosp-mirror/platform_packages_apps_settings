@@ -28,7 +28,6 @@ import android.widget.Switch;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -38,7 +37,7 @@ import com.android.settings.widget.SwitchBar;
  */
 public class WifiCallingSettings extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener,
-        Preference.OnPreferenceChangeListener, Indexable {
+        Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "WifiCallingSettings";
 
