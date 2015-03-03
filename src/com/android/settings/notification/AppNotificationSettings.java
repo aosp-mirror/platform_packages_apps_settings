@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -74,30 +75,8 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         }
         mCreated = true;
         if (mAppRow == null) return;
-        final View content = getActivity().findViewById(R.id.main_content);
-        final ViewGroup contentParent = (ViewGroup) content.getParent();
-        final View bar = getActivity().getLayoutInflater().inflate(R.layout.app_notification_header,
-                contentParent, false);
-
-        final ImageView appIcon = (ImageView) bar.findViewById(R.id.app_icon);
-        appIcon.setImageDrawable(mAppRow.icon);
-
-        final TextView appName = (TextView) bar.findViewById(R.id.app_name);
-        appName.setText(mAppRow.label);
-
-        final View appSettings = bar.findViewById(R.id.app_settings);
-        if (mAppRow.settingsIntent == null) {
-            appSettings.setVisibility(View.GONE);
-        } else {
-            appSettings.setClickable(true);
-            appSettings.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mContext.startActivity(mAppRow.settingsIntent);
-                }
-            });
-        }
-        contentParent.addView(bar, 0);
+        AppHeader.createAppHeader(getActivity(), mAppRow.icon, mAppRow.label,
+                mAppRow.settingsIntent);
     }
 
     @Override
