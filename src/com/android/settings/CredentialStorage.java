@@ -135,7 +135,13 @@ public final class CredentialStorage extends Activity {
                 handleUnlockOrInstall();
             }
         } else {
-            finish();
+            // Users can set a screen lock if there is none even if they can't modify the
+            // credentials store.
+            if (ACTION_UNLOCK.equals(action) && mKeyStore.state() == KeyStore.State.UNINITIALIZED) {
+                ensureKeyGuard();
+            } else {
+                finish();
+            }
         }
     }
 
