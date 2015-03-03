@@ -45,7 +45,7 @@ import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Callbacks;
 
 public class AppStorageSettings extends AppInfoWithHeader implements OnClickListener, Callbacks {
-    private static final String TAG = "AppStorageSettings";
+    private static final String TAG = AppStorageSettings.class.getSimpleName();
 
     //internal constants used in Handler
     private static final int OP_SUCCESSFUL = 1;

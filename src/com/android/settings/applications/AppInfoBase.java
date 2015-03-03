@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.applications;
 
 import android.app.Activity;
@@ -151,15 +152,29 @@ public abstract class AppInfoBase extends PreferenceFragment
     protected abstract AlertDialog createDialog(int id, int errorCode);
 
     @Override
-    public void onRunningStateChanged(boolean running) { }
+    public void onRunningStateChanged(boolean running) {
+        // No op.
+    }
+
     @Override
-    public void onRebuildComplete(ArrayList<AppEntry> apps) { }
+    public void onRebuildComplete(ArrayList<AppEntry> apps) {
+        // No op.
+    }
+
     @Override
-    public void onPackageIconChanged() { }
+    public void onPackageIconChanged() {
+        // No op.
+    }
+
     @Override
-    public void onPackageSizeChanged(String packageName) { }
+    public void onPackageSizeChanged(String packageName) {
+        // No op.
+    }
+
     @Override
-    public void onAllSizesComputed() { }
+    public void onAllSizesComputed() {
+        // No op.
+    }
 
     @Override
     public void onPackageListChanged() {
