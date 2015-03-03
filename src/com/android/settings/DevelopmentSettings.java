@@ -138,8 +138,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
+    private static final String ENABLE_MULTI_WINDOW_KEY = "enable_multi_window";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
-    private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
     private static final String WIFI_AGGRESSIVE_HANDOVER_KEY = "wifi_aggressive_handover";
@@ -160,8 +160,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String PROCESS_STATS = "proc_stats";
 
-    private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
-
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
@@ -174,6 +172,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static String DEFAULT_LOG_RING_BUFFER_SIZE_IN_BYTES = "262144"; // 256K
 
+    private static final String MULTI_WINDOW_SYSTEM_PROPERTY = "persist.sys.debug.multi_window";
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
@@ -211,6 +210,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mShowTouches;
     private SwitchPreference mShowScreenUpdates;
     private SwitchPreference mDisableOverlays;
+    private SwitchPreference mEnableMultiWindow;
     private SwitchPreference mShowCpuUsage;
     private SwitchPreference mForceHardwareUi;
     private SwitchPreference mForceMsaa;
@@ -277,7 +277,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
-
         mEnableAdb = findAndInitSwitchPref(ENABLE_ADB);
         mClearAdbKeys = findPreference(CLEAR_ADB_KEYS);
         if (!SystemProperties.getBoolean("ro.adb.secure", false)) {
@@ -351,6 +350,18 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
         mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
+        mEnableMultiWindow = findAndInitSwitchPref(ENABLE_MULTI_WINDOW_KEY);
+        if (!showEnableMultiWindowPreference()) {
+            final PreferenceGroup drawingGroup =
+                    (PreferenceGroup)findPreference("debug_drawing_category");
+            if (drawingGroup != null) {
+                drawingGroup.removePreference(mEnableMultiWindow);
+            } else {
+                mEnableMultiWindow.setEnabled(false);
+            }
+            removePreference(mEnableMultiWindow);
+            mEnableMultiWindow = null;
+        }
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUseAwesomePlayer = findAndInitSwitchPref(USE_AWESOMEPLAYER_KEY);
@@ -428,6 +439,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void removePreference(Preference preference) {
         getPreferenceScreen().removePreference(preference);
         mAllPrefs.remove(preference);
+        mResetSwitchPrefs.remove(preference);
     }
 
     private void setPrefsEnabledState(boolean enabled) {
@@ -550,6 +562,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateDebugLayoutOptions();
         updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
+        if (mEnableMultiWindow != null) {
+            updateSwitchPreference(mEnableMultiWindow,
+                    SystemProperties.getBoolean(MULTI_WINDOW_SYSTEM_PROPERTY, false));
+        }
         updateOpenGLTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
         updateAppProcessLimitOptions();
@@ -712,6 +728,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         return !SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("");
     }
 
+    private boolean showEnableMultiWindowPreference() {
+        return !"user".equals(Build.TYPE);
+    }
+
+    private void setEnableMultiWindow(boolean value) {
+        SystemProperties.set(MULTI_WINDOW_SYSTEM_PROPERTY, String.valueOf(value));
+        pokeSystemProperties();
+    }
+
     private void updateBugreportOptions() {
         if ("user".equals(Build.TYPE)) {
             final ContentResolver resolver = getActivity().getContentResolver();
@@ -762,7 +787,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updatePointerLocationOptions() {
-        updateSwitchPreference(mPointerLocation, Settings.System.getInt(getActivity().getContentResolver(),
+        updateSwitchPreference(mPointerLocation,
+                Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.POINTER_LOCATION, 0) != 0);
     }
 
@@ -772,7 +798,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateShowTouchesOptions() {
-        updateSwitchPreference(mShowTouches, Settings.System.getInt(getActivity().getContentResolver(),
+        updateSwitchPreference(mShowTouches,
+                Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SHOW_TOUCHES, 0) != 0);
     }
 
@@ -1041,7 +1068,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateForceRtlOptions() {
-        updateSwitchPreference(mForceRtlLayout, Settings.Global.getInt(getActivity().getContentResolver(),
+        updateSwitchPreference(mForceRtlLayout,
+                Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0);
     }
 
@@ -1178,7 +1206,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateCpuUsageOptions() {
-        updateSwitchPreference(mShowCpuUsage, Settings.Global.getInt(getActivity().getContentResolver(),
+        updateSwitchPreference(mShowCpuUsage,
+                Settings.Global.getInt(getActivity().getContentResolver(),
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
     }
 
@@ -1352,6 +1381,24 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 .show();
     }
 
+    private void confirmEnableMultiWindowMode() {
+        DialogInterface.OnClickListener onConfirmListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setEnableMultiWindow((which == DialogInterface.BUTTON_POSITIVE) ? true : false);
+                updateAllOptions();
+            }
+        };
+
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.confirm_enable_multi_window_title)
+                .setMessage(R.string.confirm_enable_multi_window_text)
+                .setPositiveButton(R.string.enable_text, onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, onConfirmListener)
+                .create()
+                .show();
+    }
+
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (switchView != mSwitchBar.getSwitch()) {
@@ -1479,6 +1526,12 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeShowUpdatesOption();
         } else if (preference == mDisableOverlays) {
             writeDisableOverlaysOption();
+        } else if (preference == mEnableMultiWindow) {
+            if (mEnableMultiWindow.isChecked()) {
+                confirmEnableMultiWindowMode();
+            } else {
+                setEnableMultiWindow(false);
+            }
         } else if (preference == mShowCpuUsage) {
             writeCpuUsageOptions();
         } else if (preference == mImmediatelyDestroyActivities) {
