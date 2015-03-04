@@ -68,7 +68,7 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial
 
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
-        SetupWizardUtils.setImmersiveMode(this, bar);
+        SetupWizardUtils.setImmersiveMode(this);
     }
 
     @Override

@@ -29,14 +29,11 @@
         <item name="android:windowBackground">@null</item>
     </style>
 
-    <style name="SetupWizardTheme" parent="android:Theme.Material.NoActionBar">
+    <style name="SetupWizardTheme" parent="SuwThemeMaterial">
         <item name="android:alertDialogTheme">@style/Theme.WifiDialog</item>
-        <item name="android:colorAccent">@color/setup_wizard_color_accent_dark</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/setup_wizard_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/setup_wizard_margin_sides</item>
-        <item name="android:windowAnimationStyle">@style/Animation.SetupWizard</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
-        <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_dark</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
@@ -53,14 +50,11 @@
         <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
     </style>
 
-    <style name="SetupWizardTheme.Light" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="SetupWizardTheme.Light" parent="SuwThemeMaterial.Light">
         <item name="android:alertDialogTheme">@style/Theme.Light.WifiDialog</item>
-        <item name="android:colorAccent">@color/setup_wizard_color_accent_light</item>
         <item name="android:listPreferredItemPaddingEnd">@dimen/setup_wizard_margin_sides</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/setup_wizard_margin_sides</item>
-        <item name="android:windowAnimationStyle">@style/Animation.SetupWizard</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
-        <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="@*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="ic_menu_add">@drawable/ic_menu_add_light</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_material</item>
@@ -75,13 +69,6 @@
         <item name="@*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
         <item name="@*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
         <item name="@*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
-    </style>
-
-    <style name="Animation.SetupWizard" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_next_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_next_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_back_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_back_out</item>
     </style>
 
     <style name="Theme.WifiDialog" parent="@*android:style/Theme.Material.Dialog.Alert">

@@ -68,7 +68,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern
     @Override
     public void onNavigationBarCreated(SetupWizardNavBar bar) {
         mNavigationBar = bar;
-        SetupWizardUtils.setImmersiveMode(this, bar);
+        SetupWizardUtils.setImmersiveMode(this);
     }
 
     @Override

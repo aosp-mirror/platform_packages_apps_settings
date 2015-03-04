@@ -212,7 +212,7 @@ public class WifiSetupActivity extends WifiPickerActivity
     @Override
     public void onNavigationBarCreated(final SetupWizardNavBar bar) {
         mNavigationBar = bar;
-        SetupWizardUtils.setImmersiveMode(this, bar);
+        SetupWizardUtils.setImmersiveMode(this);
     }
 
     @Override

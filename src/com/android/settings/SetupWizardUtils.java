@@ -17,43 +17,22 @@
 package com.android.settings;
 
 import com.android.settings.widget.SetupWizardIllustration;
-import com.android.setupwizard.navigationbar.SetupWizardNavBar;
-
+import com.android.setupwizardlib.util.SystemBarHelper;
+import com.android.setupwizardlib.util.WizardManagerHelper;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 public class SetupWizardUtils {
     private static final String TAG = "SetupWizardUtils";
 
-    public static final int DIALOG_IMMERSIVE_FLAGS = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-    // Extra containing the resource name of the theme to be used
-    public static final String EXTRA_THEME = "theme";
-    public static final String THEME_HOLO = "holo";
-    public static final String THEME_HOLO_LIGHT = "holo_light";
-    public static final String THEME_MATERIAL = "material";
-    public static final String THEME_MATERIAL_LIGHT = "material_light";
-    public static final String THEME_MATERIAL_BLUE = "material_blue";
-    public static final String THEME_MATERIAL_BLUE_LIGHT = "material_blue_light";
-
-    public static final String EXTRA_USE_IMMERSIVE_MODE = "useImmersiveMode";
-
     // From WizardManager (must match constants maintained there)
-    public static final String ACTION_NEXT = "com.android.wizard.NEXT";
     public static final String EXTRA_SCRIPT_URI = "scriptUri";
-    public static final String EXTRA_ACTION_ID = "actionId";
-    public static final String EXTRA_RESULT_CODE = "com.android.setupwizard.ResultCode";
     public static final int NEXT_REQUEST = 10000;
 
     public static boolean isUsingWizardManager(Activity activity) {
@@ -68,21 +47,15 @@ public class SetupWizardUtils {
      */
     public static void sendResultsToSetupWizard(Activity activity, int resultCode) {
         final Intent intent = activity.getIntent();
-        final Intent nextIntent = new Intent(ACTION_NEXT);
-        nextIntent.putExtra(EXTRA_SCRIPT_URI, intent.getStringExtra(EXTRA_SCRIPT_URI));
-        nextIntent.putExtra(EXTRA_ACTION_ID, intent.getStringExtra(EXTRA_ACTION_ID));
-        nextIntent.putExtra(EXTRA_THEME, intent.getStringExtra(EXTRA_THEME));
-        nextIntent.putExtra(EXTRA_RESULT_CODE, resultCode);
+        final Intent nextIntent = WizardManagerHelper.getNextIntent(intent, resultCode);
         activity.startActivityForResult(nextIntent, NEXT_REQUEST);
     }
 
     public static int getTheme(Intent intent) {
-        final String themeName = intent.getStringExtra(EXTRA_THEME);
-        if (THEME_HOLO.equalsIgnoreCase(themeName) || THEME_MATERIAL.equalsIgnoreCase(themeName)
-                || THEME_MATERIAL_BLUE.equalsIgnoreCase(themeName)) {
-            return R.style.SetupWizardTheme;
-        } else {
+        if (WizardManagerHelper.isLightTheme(intent, true)) {
             return R.style.SetupWizardTheme_Light;
+        } else {
+            return R.style.SetupWizardTheme;
         }
     }
 
@@ -90,25 +63,16 @@ public class SetupWizardUtils {
      * Sets the immersive mode related flags based on the extra in the intent which started the
      * activity.
      */
-    public static void setImmersiveMode(Activity activity, SetupWizardNavBar navBar) {
-        final boolean useImmersiveMode =
-                activity.getIntent().getBooleanExtra(EXTRA_USE_IMMERSIVE_MODE, false);
-        navBar.setUseImmersiveMode(useImmersiveMode);
+    public static void setImmersiveMode(Activity activity) {
+        final boolean useImmersiveMode = activity.getIntent().getBooleanExtra(
+                WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false);
         if (useImmersiveMode) {
-            final Window window = activity.getWindow();
-            window.setNavigationBarColor(Color.TRANSPARENT);
-            window.setStatusBarColor(Color.TRANSPARENT);
+            SystemBarHelper.hideSystemBars(activity.getWindow());
         }
     }
 
     public static void applyImmersiveFlags(final Dialog dialog) {
-        applyImmersiveFlags(dialog.getWindow(), DIALOG_IMMERSIVE_FLAGS);
-    }
-
-    private static void applyImmersiveFlags(final Window window, final int vis) {
-        WindowManager.LayoutParams attrs = window.getAttributes();
-        attrs.systemUiVisibility |= vis;
-        window.setAttributes(attrs);
+        SystemBarHelper.hideSystemBars(dialog);
     }
 
     public static TextView getHeader(Activity activity) {
@@ -124,9 +88,10 @@ public class SetupWizardUtils {
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
-        toIntent.putExtra(EXTRA_THEME, fromIntent.getStringExtra(EXTRA_THEME));
-        toIntent.putExtra(EXTRA_USE_IMMERSIVE_MODE,
-                fromIntent.getBooleanExtra(EXTRA_USE_IMMERSIVE_MODE, false));
+        toIntent.putExtra(WizardManagerHelper.EXTRA_THEME,
+                fromIntent.getStringExtra(WizardManagerHelper.EXTRA_THEME));
+        toIntent.putExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE,
+                fromIntent.getBooleanExtra(WizardManagerHelper.EXTRA_USE_IMMERSIVE_MODE, false));
     }
 
     public static void setIllustration(Activity activity, int asset) {
