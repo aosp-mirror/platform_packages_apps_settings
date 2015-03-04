@@ -345,45 +345,31 @@
     <string name="security_settings_summary" msgid="967393342537986570">"‏הגדר את \'המיקום שלי\', ביטול נעילת מסך, נעילת כרטיס SIM, נעילת אחסון אישורים"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"הגדר את \'המיקום שלי\', ביטול נעילת מסך, נעילת אחסון אישורים"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"סיסמאות"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_title (2488725232406204350) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_preference_summary (4776063289827470602) -->
-    <!-- no translation found for security_settings_fingerprint_enroll_onboard_title (4735546436672054254) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_onboard_message (8275201068478623705) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_start_title (1063375657071124812) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_start_message (6294541599045187369) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (3732060789409510229) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (8846866512704467036) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_title (4798692662828257300) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (835496875787664316) -->
-    <skip />
-    <!-- no translation found for fingerprint_enroll_button_add (9087063833311608281) -->
-    <skip />
-    <!-- no translation found for fingerprint_enroll_button_next (6247009337616342759) -->
-    <skip />
-    <!-- no translation found for fingerprint_acquired_try_again (3543246847519773670) -->
-    <skip />
-    <!-- no translation found for fingerprint_acquired_imager_dirty (1069333738311915876) -->
-    <skip />
-    <!-- no translation found for fingerprint_acquired_too_fast (4068036120000203641) -->
-    <skip />
-    <!-- no translation found for fingerprint_acquired_too_slow (1030658686087736299) -->
-    <skip />
-    <!-- no translation found for fingerprint_error_unable_to_process (3695170439991347449) -->
-    <skip />
-    <!-- no translation found for fingerprint_error_hw_not_available (3535489559110151108) -->
-    <skip />
-    <!-- no translation found for fingerprint_error_no_space (7350970359618153619) -->
-    <skip />
-    <!-- no translation found for fingerprint_error_timeout (7509454501138740556) -->
-    <skip />
+    <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"טביעת אצבע"</string>
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
+      <item quantity="two"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבעות נרשמו</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבעות נרשמו</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> טביעות אצבעות נרשמו</item>
+      <item quantity="one">טביעת אצבע <xliff:g id="COUNT_0">%1$d</xliff:g> נרשמה</item>
+    </plurals>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"הגדרה של טביעת אצבע"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"כדי להשתמש בטביעת האצבע לביטול נעילת המסך או אישור רכישות, יש לבצע את הפעולות הבאות: \n✓ להגדיר את השיטה של נעילת המסך ברקע \n✓ להוסיף את טביעת האצבע"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"אפשר להתחיל!"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"הנח את אותה האצבע על חיישן טביעות האצבעות. הרם אותה לאחר שתחוש רטט."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"נהדר! כעת חזור על הפעולה."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"הנח את אותה האצבע על חיישן טביעות האצבעות והרם אותה לאחר שתחוש רטט."</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"טביעת האצבע נוספה!"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"כשתראה את הסמל הזה, תוכל להשתמש בטביעת האצבע שלך לצורך זיהוי או אישור רכישה."</string>
+    <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"הוסף"</string>
+    <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"הבא"</string>
+    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"זוהתה טביעת אצבע חלקית. נסה שוב."</string>
+    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"החיישן של טביעות האצבעות מלוכלך. נקה אותו ונסה שוב."</string>
+    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"האצבע זזה מהר מדי, נסה שוב."</string>
+    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"האצבע זזה לאט מדי, נסה שוב."</string>
+    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"אין אפשרות לעבד. נסה שוב."</string>
+    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"החומרה לא זמינה."</string>
+    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"לא ניתן לאחסן טביעת אצבע. הסר טביעת אצבע קיימת."</string>
+    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"חלף זמן קצוב לתפוגה של טביעת אצבע. נסה שוב."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"הצפנה"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"הצפן טאבלט"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"הצפן טלפון"</string>
@@ -823,16 +809,11 @@
     <string name="brightness_summary" msgid="838917350127550703">"התאם את בהירות המסך"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"בהירות מותאמת"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"התאם את רמת הבהירות ביחס לתאורה הזמינה"</string>
-    <!-- no translation found for night_mode_title (6928425617491943384) -->
-    <skip />
-    <!-- no translation found for night_mode_summary (9196605054622017193) -->
-    <skip />
-    <!-- no translation found for night_mode_no (7682792841791457238) -->
-    <skip />
-    <!-- no translation found for night_mode_yes (4847655033618591567) -->
-    <skip />
-    <!-- no translation found for night_mode_auto (7508348175804304327) -->
-    <skip />
+    <string name="night_mode_title" msgid="6928425617491943384">"עיצוב"</string>
+    <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
+    <string name="night_mode_no" msgid="7682792841791457238">"בהיר"</string>
+    <string name="night_mode_yes" msgid="4847655033618591567">"כהה"</string>
+    <string name="night_mode_auto" msgid="7508348175804304327">"באופן אוטומטי"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"שינה"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"כיבוי מסך"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"לאחר <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> של חוסר פעילות"</string>
@@ -2044,6 +2025,14 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"קנה מידה של הנפשת מעבר"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"קנה מידת משך זמן למנפיש"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"צור הדמיית תצוגות משניות"</string>
+    <!-- no translation found for enable_multi_window (1091779249819137016) -->
+    <skip />
+    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
+    <skip />
+    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
+    <skip />
+    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
+    <skip />
     <string name="debug_applications_category" msgid="4206913653849771549">"Apps"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"אל תשמור פעילויות"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"השמד כל פעילות ברגע שהמשתמש עוזב אותה"</string>
@@ -2373,10 +2362,8 @@
     <string name="keywords_display" msgid="6709007669501628320">"מסך מגע"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"מסך עמום סוללה מסך מגע"</string>
     <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"מסך עמום סוללה מסך מגע"</string>
-    <!-- no translation found for keywords_display_night_mode (7652025075378505346) -->
-    <skip />
-    <!-- no translation found for keywords_display_wallpaper (7778443098569037063) -->
-    <skip />
+    <string name="keywords_display_night_mode" msgid="7652025075378505346">"עיצוב כהה, מצב לילה, עמעם מסך, הפוך בהירות"</string>
+    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"התאם אישית רקע ותצוגה"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"גודל טקסט"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"הקרן"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"שטח דיסק כונן קשיח מכשיר שימוש"</string>
@@ -2539,4 +2526,27 @@
     <string name="imei_information_title" msgid="8499085421609752290">"‏פרטי IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"‏מידע הקשור ל-IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(חריץ <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
+    <!-- no translation found for launch_by_default (2184141780491382435) -->
+    <skip />
+    <!-- no translation found for storage_summary_format (5419902362347539755) -->
+    <skip />
+    <!-- no translation found for storage_type_internal (410824961149037234) -->
+    <skip />
+    <!-- no translation found for storage_type_external (8928374515368986503) -->
+    <skip />
+    <!-- no translation found for notifications_enabled (6983396130566021385) -->
+    <skip />
+    <!-- no translation found for notifications_disabled (4326096527874762629) -->
+    <skip />
+    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
+    <skip />
+    <!-- no translation found for notifications_priority (1812498477331421719) -->
+    <skip />
+    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
+    <skip />
+    <!-- no translation found for permissions_summary (6402730318075959117) -->
+    <!-- no translation found for launch_defaults_some (313159469856372621) -->
+    <skip />
+    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
+    <skip />
 </resources>
