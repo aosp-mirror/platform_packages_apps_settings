@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
+import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -52,6 +53,8 @@ import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.R;
+import android.os.SystemProperties;
+import com.android.internal.telephony.TelephonyProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -245,9 +248,37 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         // FIXME: b/18385348, needs to handle null from getActiveSubscriptionInfoList
         if (DBG) log("[onResme] mSubInfoList=" + mSubInfoList);
 
+        final TelephonyManager tm =
+                (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+
         updateAvailableSubInfos();
         updateAllOptions();
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+    }
+
+    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+        // Disable Sim selection for Data when voice call is going on as changing the default data
+        // sim causes a modem reset currently and call gets disconnected
+        // ToDo : Add subtext on disabled preference to let user know that default data sim cannot
+        // be changed while call is going on
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            if (DBG) log("PhoneStateListener.onCallStateChanged: state=" + state);
+             final Preference pref = findPreference(KEY_CELLULAR_DATA);
+            if (pref != null) {
+                final boolean ecbMode = SystemProperties.getBoolean(
+                        TelephonyProperties.PROPERTY_INECM_MODE, false);
+                pref.setEnabled((state == TelephonyManager.CALL_STATE_IDLE) && !ecbMode);
+            }
+        }
+    };
 
     @Override
     public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
