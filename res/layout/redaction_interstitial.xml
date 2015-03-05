@@ -26,7 +26,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/redaction_vertical_margins"
             android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
             android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
             android:text="@string/lock_screen_notifications_interstitial_message"
@@ -35,7 +35,7 @@
     <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/redaction_vertical_margins"
             android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
             android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
             android:checkedButton="@+id/redact_sensitive">
@@ -44,21 +44,21 @@
                 android:id="@+id/show_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/redaction_vertical_margins"
                 android:text="@string/lock_screen_notifications_summary_show" />
 
         <RadioButton
                 android:id="@+id/redact_sensitive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/redaction_vertical_margins"
                 android:text="@string/lock_screen_notifications_summary_hide" />
 
         <RadioButton
                 android:id="@+id/hide_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/redaction_vertical_margins"
                 android:text="@string/lock_screen_notifications_summary_disable" />
 
     </RadioGroup>
