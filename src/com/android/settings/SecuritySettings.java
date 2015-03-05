@@ -67,8 +67,9 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
  */
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener, Indexable {
+
+    private static final String TAG = "SecuritySettings";
     private static final String TRUST_AGENT_CLICK_INTENT = "trust_agent_click_intent";
-    static final String TAG = "SecuritySettings";
     private static final Intent TRUST_AGENT_INTENT =
             new Intent(TrustAgentService.SERVICE_INTERFACE);
 
@@ -81,6 +82,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String KEY_ADVANCED_SECURITY = "advanced_security";
     private static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
+    private static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
@@ -337,21 +339,22 @@ public class SecuritySettings extends SettingsPreferenceFragment
             return;
         }
         Preference fingerprintPreference = new Preference(securityCategory.getContext());
-        fingerprintPreference.setKey(KEY_TRUST_AGENT);
+        fingerprintPreference.setKey(KEY_FINGERPRINT_SETTINGS);
         fingerprintPreference.setTitle(R.string.security_settings_fingerprint_preference_title);
         Intent intent = new Intent();
         List<FingerprintItem> items = fpm.getEnrolledFingerprints();
         int fingerprintCount = items.size();
+        final String clazz;
         if (fingerprintCount > 0) {
             fingerprintPreference.setSummary(getResources().getQuantityString(
                     R.plurals.security_settings_fingerprint_preference_summary,
                     fingerprintCount, fingerprintCount));
-            // TODO: Launch fingerprintSettings instead...
-            intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+            clazz = FingerprintSettings.class.getName();
         } else {
-            // No fingerprints registered, launch directly into fingerprint enrollment wizard
-            intent.setClassName("com.android.settings", FingerprintEnroll.class.getName());
+            // No fingerprints registered, launch directly into enrollment wizard
+            clazz = FingerprintEnroll.class.getName();
         }
+        intent.setClassName("com.android.settings", clazz);
         fingerprintPreference.setIntent(intent);
         securityCategory.addPreference(fingerprintPreference);
     }

@@ -25,7 +25,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.3"
+        android:layout_weight="0.25"
         android:background="@color/fingerprint_title_area_bg">
 
         <TextView
@@ -44,7 +44,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.6"
+        android:layout_weight="0.75"
         android:orientation="vertical">
 
         <TextView
@@ -57,53 +57,55 @@
             android:layout_marginBottom="36dip"
             style="@style/TextAppearance.FingerprintMessage"/>
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/fingerprint_view_selector"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:gravity="center">
 
-            <FrameLayout
+            <!-- Only one of the following views will show for any given mode -->
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/fingerprint_progress_ring_bg">
+                android:layout_centerInParent="true">
 
-                <!-- One of the following views will show for any given mode -->
+                <ImageView
+                    android:id="@+id/fingerprint_animator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/fingerprint_indicator" />
+
                 <ProgressBar
                     android:id="@+id/fingerprint_progress_bar"
-                    style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="200dip"
                     android:layout_height="200dip"
-                    android:max="100"
+                    android:layout_centerInParent="true"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:max="10000"
                     android:progress="0"
                     android:indeterminate="false"
                     android:progressDrawable="@drawable/fingerprint_progress_ring" />
 
-                <ImageView
-                    android:id="@+id/fingerprint_sensor_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/fingerprint_sensor_location" />
+            </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/fingerprint_animator"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:src="@drawable/fingerprint_animation" />
+            <ImageView
+                android:id="@+id/fingerprint_sensor_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/fingerprint_sensor_location" />
 
-                <ImageView
-                    android:id="@+id/fingerprint_in_app_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/fingerprint_in_app_indicator" />
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/fingerprint_in_app_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/fingerprint_in_app_indicator" />
 
-        </FrameLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -117,12 +119,15 @@
         <Button
             android:id="@+id/fingerprint_enroll_button_add"
             style="@style/SecurityPreferenceButton"
-            android:text="@string/fingerprint_enroll_button_add" />
+            android:text="@string/fingerprint_enroll_button_add"
+            android:layout_margin="10dip" />
 
         <Button
             android:id="@+id/fingerprint_enroll_button_next"
             style="@style/SecurityPreferenceButton"
-            android:text="@string/fingerprint_enroll_button_next" />
+            android:text="@string/fingerprint_enroll_button_next"
+            android:layout_margin="10dip" />
+
     </LinearLayout>
 
 </LinearLayout>

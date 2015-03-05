@@ -35,6 +35,8 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
+import android.service.fingerprint.FingerprintManager;
+import android.service.fingerprint.FingerprintManagerReceiver;
 import android.util.EventLog;
 import android.util.Log;
 import android.util.MutableBoolean;
@@ -102,11 +104,14 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mEncryptionRequestDisabled;
         private boolean mRequirePassword;
         private LockPatternUtils mLockPatternUtils;
+        private FingerprintManager mFingerprintManager;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            mFingerprintManager =
+                (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
             mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mKeyStore = KeyStore.getInstance();
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
@@ -391,11 +396,34 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mChooseLockSettingsHelper.utils().clearLock();
                 mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
+                removeAllFingerprintTemplates();
                 getActivity().setResult(Activity.RESULT_OK);
                 finish();
             } else {
+                removeAllFingerprintTemplates();
                 finish();
             }
+        }
+
+        // TODO: This is only required because we used to enforce clients have a listener,
+        // which is no longer required in the new API.  Remove when that happens.
+        FingerprintManagerReceiver mReceiver = new FingerprintManagerReceiver() {
+            public void onRemoved(int fingerprintId) {
+                Log.v(TAG, "onRemoved(id=" + fingerprintId + ")");
+            }
+        };
+
+        private void removeAllFingerprintTemplates() {
+            mFingerprintManager.startListening(mReceiver);
+            if (mFingerprintManager != null) {
+                mFingerprintManager.remove(0 /* all fingerprint templates */);
+            }
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            mFingerprintManager.stopListening();
         }
 
         @Override

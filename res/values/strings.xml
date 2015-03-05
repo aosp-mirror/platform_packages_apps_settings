@@ -759,7 +759,15 @@
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
-    <!-- Message shown for menu item that launches fingerprint settings or enrollment -->
+    <!-- Fingerprint managment category title - configuration options for managing enrolled fingerprints [CHAR LIMIT=22] -->
+    <string name="fingerprint_manage_category_title">Manage fingerprints</string>
+    <!-- Fingerprint category title - configuration options for managing fingerprint enrollment [CHAR LIMIT=22] -->
+	<string name="fingerprint_usage_category_title">Use fingerprint for</string>
+	<!-- Preference to add another fingerprint -->
+	<string name="fingerprint_add_title">Add</string>
+	<!-- switch for allowing fingerprint to be used for keyguard -->
+	<string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
+    <!-- message shown for menu item that launches fingerprint settings or enrollment -->
     <plurals name="security_settings_fingerprint_preference_summary">
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> fingerprint enrolled</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints enrolled</item>
@@ -769,8 +777,19 @@
     <!-- Introduction detail message shown in fingerprint enrollment dialog -->
     <string name="security_settings_fingerprint_enroll_onboard_message">
         To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:
-        \n\u2713 Set up your background screen lock method
-        \n\u2713 Add your fingerprint</string>
+        \n\n\u2713 Set up your background screen lock method
+        \n\n\u2713 Add your fingerprint</string>
+    <!-- Introduction title shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_find_sensor_title">Find the sensor</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog -->
+    <string name="security_settings_fingerprint_enroll_find_sensor_message">
+        Locate the fingerprint sensor on the back of your phone.</string>
+    <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_dialog_name_label">Name</string>
+    <!-- Button text shown in fingerprint dialog that allows the user to rename a fingerprint template [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_dialog_ok">OK</string>
+    <!-- Button text shown in fingerprint dialog that allows the user to delete the fingerprint template [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_dialog_delete">Delete</string>
     <!-- Title shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=22]-->
     <string name="security_settings_fingerprint_enroll_start_title">Let\'s start!</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment -->
@@ -2675,7 +2694,7 @@
 
     <!-- Lock Pattern settings -->
     <!-- Security & location settings screen, header -->
-    <string name="lock_settings_title">Screen security</string>
+    <string name="lock_settings_title">Device security</string>
     <!-- Security & location settings screen, setting option name -->
     <string name="lockpattern_change_lock_pattern_label">Change unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction when the user chooses "Change unlock pattern".  We first ask the user toe nter the current pattern, and this is the message seen -->

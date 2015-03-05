@@ -21,10 +21,12 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -80,11 +82,13 @@ public class FingerprintEnroll extends SettingsActivity {
     }
 
     public static class FingerprintEnrollFragment extends Fragment implements View.OnClickListener {
+        private static final int PROGRESS_BAR_MAX = 10000;
         private static final String TAG = "FingerprintEnroll";
         private static final boolean DEBUG = true;
         private static final int CONFIRM_REQUEST = 101;
         private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
         private static final long ENROLL_TIMEOUT = 300*1000;
+        private static final int FINISH_DELAY = 250;
 
         private PowerManager mPowerManager;
         private FingerprintManager mFingerprintManager;
@@ -98,6 +102,15 @@ public class FingerprintEnroll extends SettingsActivity {
         private ProgressBar mProgressBar;
         private ImageView mFingerprintAnimator;
         private ObjectAnimator mProgressAnim;
+
+        // Give the user a chance to see progress completed before jumping to the next stage.
+        Runnable mDelayedFinishRunnable = new Runnable() {
+            @Override
+            public void run() {
+                updateStage(Stage.EnrollingFinish);
+            }
+        };
+
         private final AnimatorListener mProgressAnimationListener = new AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) { }
@@ -107,8 +120,8 @@ public class FingerprintEnroll extends SettingsActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (mProgressBar.getProgress() >= 100) {
-                    updateStage(Stage.EnrollingFinish);
+                if (mProgressBar.getProgress() >= PROGRESS_BAR_MAX) {
+                    mContentView.postDelayed(mDelayedFinishRunnable, FINISH_DELAY);
                 }
             }
 
@@ -133,12 +146,17 @@ public class FingerprintEnroll extends SettingsActivity {
             R.id.fingerprint_enroll_button_next
         };
 
-        private static final int VIEWS_ENROLL_START[] = {
+        private static final int VIEWS_ENROLL_FIND_SENSOR[] = {
             R.id.fingerprint_sensor_location,
-            R.id.fingerprint_progress_bar
+            R.id.fingerprint_enroll_button_area,
+            R.id.fingerprint_enroll_button_next
         };
 
-        private static final int VIEWS_ENROLL_PROGRESS[] = {
+        private static final int VIEWS_ENROLL_START[] = {
+            R.id.fingerprint_animator,
+        };
+
+        private static final int VIEWS_ENROLL_REPEAT[] = {
             R.id.fingerprint_animator,
             R.id.fingerprint_progress_bar
         };
@@ -149,17 +167,21 @@ public class FingerprintEnroll extends SettingsActivity {
             R.id.fingerprint_enroll_button_add,
             R.id.fingerprint_enroll_button_next
         };
+        private static final boolean ALWAYS_SHOW_FIND_SCREEN = true;
 
-        enum Stage {
-            EnrollingOnboarding(R.string.security_settings_fingerprint_enroll_onboard_title,
+        private enum Stage {
+            EnrollingOnboard(R.string.security_settings_fingerprint_enroll_onboard_title,
                     R.string.security_settings_fingerprint_enroll_onboard_message,
                     VIEWS_ENROLL_ONBOARD),
+            EnrollingFindSensor(R.string.security_settings_fingerprint_enroll_find_sensor_title,
+                    R.string.security_settings_fingerprint_enroll_find_sensor_message,
+                    VIEWS_ENROLL_FIND_SENSOR),
             EnrollingStart(R.string.security_settings_fingerprint_enroll_start_title,
                     R.string.security_settings_fingerprint_enroll_start_message,
                     VIEWS_ENROLL_START),
             EnrollingRepeat(R.string.security_settings_fingerprint_enroll_repeat_title,
                     R.string.security_settings_fingerprint_enroll_repeat_message,
-                    VIEWS_ENROLL_PROGRESS),
+                    VIEWS_ENROLL_REPEAT),
             EnrollingFinish(R.string.security_settings_fingerprint_enroll_finish_title,
                     R.string.security_settings_fingerprint_enroll_finish_message,
                     VIEWS_ENROLL_FINISH);
@@ -196,22 +218,29 @@ public class FingerprintEnroll extends SettingsActivity {
         }
 
         private void startFingerprintAnimator() {
-            AnimationDrawable drawable = (AnimationDrawable) mFingerprintAnimator.getDrawable();
-            drawable.start();
+            final Drawable d = mFingerprintAnimator.getDrawable();
+            if (d instanceof AnimationDrawable) {
+                ((AnimationDrawable) d).start();
+            }
         }
 
         private void stopFingerprintAnimator() {
-            AnimationDrawable drawable = (AnimationDrawable) mFingerprintAnimator.getDrawable();
-            drawable.stop();
-            drawable.setLevel(0);
+            final Drawable d = mFingerprintAnimator.getDrawable();
+            if (d instanceof AnimationDrawable) {
+                final AnimationDrawable drawable = (AnimationDrawable) d;
+                drawable.stop();
+                drawable.setLevel(0);
+            }
         }
 
         private void onStageChanged(Stage stage) {
             // Update state
             switch (stage) {
-                case EnrollingOnboarding:
+                case EnrollingOnboard: // pass through
+                case EnrollingFindSensor:
                     mEnrollmentSteps = -1;
                     mEnrolling = false;
+                    mFingerprintManager.stopListening();
                     break;
 
                 case EnrollingStart:
@@ -288,7 +317,7 @@ public class FingerprintEnroll extends SettingsActivity {
                 }
                 if (remaining >= 0) {
                     int progress = Math.max(0, mEnrollmentSteps + 1 - remaining);
-                    updateProgress(100*progress / (mEnrollmentSteps + 1));
+                    updateProgress(PROGRESS_BAR_MAX * progress / (mEnrollmentSteps + 1));
                     // Treat fingerprint like a touch event
                     mPowerManager.userActivity(SystemClock.uptimeMillis(),
                             PowerManager.USER_ACTIVITY_EVENT_OTHER,
@@ -371,7 +400,7 @@ public class FingerprintEnroll extends SettingsActivity {
             if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
                 if (resultCode == RESULT_FINISHED) {
                     // The lock pin/pattern/password was set. Start enrolling!
-                    updateStage(Stage.EnrollingStart);
+                    updateStage(Stage.EnrollingFindSensor);
                 }
             }
         }
@@ -401,7 +430,10 @@ public class FingerprintEnroll extends SettingsActivity {
             LockPatternUtils utils = new LockPatternUtils(activity);
             if (!utils.isSecure()) {
                 // Device doesn't have any security. Set that up first.
-                updateStage(Stage.EnrollingOnboarding);
+                updateStage(Stage.EnrollingOnboard);
+            } else if (ALWAYS_SHOW_FIND_SCREEN
+                    || mFingerprintManager.getEnrolledFingerprints().size() == 0) {
+                updateStage(Stage.EnrollingFindSensor);
             } else {
                 updateStage(Stage.EnrollingStart);
             }
@@ -415,8 +447,10 @@ public class FingerprintEnroll extends SettingsActivity {
                     updateStage(Stage.EnrollingStart);
                     break;
                 case R.id.fingerprint_enroll_button_next:
-                    if (mStage == Stage.EnrollingOnboarding) {
+                    if (mStage == Stage.EnrollingOnboard) {
                         launchChooseLock();
+                    } else if (mStage == Stage.EnrollingFindSensor) {
+                        updateStage(Stage.EnrollingStart);
                     } else if (mStage == Stage.EnrollingFinish) {
                         getActivity().finish();
                     } else {
@@ -429,6 +463,8 @@ public class FingerprintEnroll extends SettingsActivity {
         private void launchChooseLock() {
             Intent intent = new Intent();
             intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
+            intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
             startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
         }
     }
