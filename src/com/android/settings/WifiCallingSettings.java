@@ -16,7 +16,12 @@
 
 package com.android.settings;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -28,6 +33,7 @@ import android.widget.Switch;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
+import com.android.internal.telephony.imsphone.ImsPhone;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -104,6 +110,41 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mSwitchBar.hide();
     }
 
+    private void showAlert(Intent intent) {
+        Context context = getActivity();
+
+        CharSequence title = intent.getCharSequenceExtra(ImsPhone.EXTRA_KEY_ALERT_TITLE);
+        CharSequence message = intent.getCharSequenceExtra(ImsPhone.EXTRA_KEY_ALERT_MESSAGE);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message)
+                .setTitle(title)
+                .setIcon(android.R.drawable.stat_sys_warning)
+                .setPositiveButton(android.R.string.ok, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private IntentFilter mIntentFilter;
+
+    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(ImsPhone.REGISTRATION_ERROR)) {
+                // If this fragment is active then we are immediately
+                // showing alert on screen. There is no need to add
+                // notification in this case.
+                //
+                // In order to communicate to ImsPhone that it should
+                // not show notification, we are changing result code here.
+                setResultCode(Activity.RESULT_CANCELED);
+
+                showAlert(intent);
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +156,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         mButtonWfcRoam = (SwitchPreference) findPreference(BUTTON_WFC_ROAM);
         mButtonWfcRoam.setOnPreferenceChangeListener(this);
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(ImsPhone.REGISTRATION_ERROR);
     }
 
     @Override
@@ -142,11 +186,20 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcRoam.setChecked(wfcEnabled
                 && (wfcMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY)
                 && ImsManager.isWfcRoamingEnabledByUser(context));
+
+        context.registerReceiver(mIntentReceiver, mIntentFilter);
+
+        Intent intent = getActivity().getIntent();
+        if (intent.getBooleanExtra(ImsPhone.EXTRA_KEY_ALERT_SHOW, false)) {
+            showAlert(intent);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        final Context context = getActivity();
 
         if (ImsManager.isWfcEnabledByPlatform(getActivity())) {
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -154,6 +207,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
             mSwitchBar.removeOnSwitchChangeListener(this);
         }
+
+        context.unregisterReceiver(mIntentReceiver);
     }
 
     /**
