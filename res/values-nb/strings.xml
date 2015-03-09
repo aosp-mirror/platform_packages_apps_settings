@@ -348,12 +348,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> fingeravtrykk er registrert</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingeravtrykk er registrert</item>
     </plurals>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Fingeravtrykkonfig."</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"Hvis du vil bruke fingeravtrykk til å låse opp skjermen eller bekrefte kjøp, må vi \n✓ konfigurere låsemetoden for bakgrunnsskjermen din \n✓ legge til fingeravtrykket ditt"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Registrer fingeravtrykk"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"Hvis du vil bruke fingeravtrykk til å låse opp skjermen eller bekrefte kjøp, må du \n✓ konfigurere låsemetoden for bakgrunnsskjermen din \n✓ legge til fingeravtrykket ditt"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"La oss sette i gang!"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Plassér fingeren på fingeravtrykksensoren. Løft etter at du kjenner en vibrasjon."</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"Plassér fingeren på fingeravtrykksensoren. Løft den når du har kjent en vibrasjon."</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"Flott! Gjenta nå."</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Plassér den samme fingeren på fingeravtrykksensoren og løft etter at du kjenner en vibrasjon."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"Plassér den samme fingeren på fingeravtrykksensoren, og løft den når du har kjent en vibrasjon."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Fingeravtr. lagt til."</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Når du ser dette ikonet, kan du bruke fingeravtrykket ditt som identifikasjon eller til å godkjenne kjøp."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Legg til"</string>
@@ -362,9 +362,9 @@
     <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Fingeravtrykksensoren er skitten. Rengjør den og prøv på nytt."</string>
     <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Fingeren ble fjernet for raskt. Prøv på nytt."</string>
     <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Fingeren ble fjernet for sakte. Prøv på nytt."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Kunne ikke behandle det. Prøv på nytt."</string>
+    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Kunne ikke behandle fingeravtrykket. Prøv på nytt."</string>
     <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Maskinvaren er ikke tilgjengelig."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Fingeravtrykk kan ikke lagres. Fjern et eksisterende fingeravtrykk."</string>
+    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Fingeravtrykketet kan ikke lagres. Fjern det eksisterende fingeravtrykket."</string>
     <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Tidsavbrudd for fingeravtrykk er nådd. Prøv på nytt."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Kryptering"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Kryptér nettbrettet"</string>
@@ -2007,14 +2007,10 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Overgangsanimasjonsskala"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Varighetsskala, animatør"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simulering av sekundærskjermer"</string>
-    <!-- no translation found for enable_multi_window (1091779249819137016) -->
-    <skip />
-    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
-    <skip />
+    <string name="enable_multi_window" msgid="1091779249819137016">"Modus for flere vinduer"</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"Flere aktiviteter på skjermen samtidig."</string>
+    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"Vil du slå på modusen for flere vinduer?"</string>
+    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"ADVARSEL: Dette er en svært eksperimentell funksjon som gjør at du kan ha flere aktiviteter på skjermen samtidig gjennom Nylige apper-brukergrensesnittet. Noen apper kan krasje eller ikke fungere riktig når de brukes med denne funksjonen."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Apper"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Ikke behold aktiviteter"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Fjern hver aktivitet så fort brukeren forlater den"</string>
@@ -2344,8 +2340,8 @@
     <string name="keywords_display" msgid="6709007669501628320">"berøringsskjerm"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"dimme skjerm berøringsskjerm batteri"</string>
     <string name="keywords_display_auto_brightness" msgid="8357056338746666901">"dimme skjerm berøringsskjerm batteri"</string>
-    <string name="keywords_display_night_mode" msgid="7652025075378505346">"mørkt tema nattmodus ton ned skjerm inverter lysstyrken"</string>
-    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"bakgrunn gi personlig preg tilpass skjerm"</string>
+    <string name="keywords_display_night_mode" msgid="7652025075378505346">"mørkt tema nattmodus ton ned skjermen inverter lysstyrken"</string>
+    <string name="keywords_display_wallpaper" msgid="7778443098569037063">"bakgrunn gi personlig preg tilpass skjermen"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"tekststørrelse"</string>
     <string name="keywords_display_cast_screen" msgid="8887412173792143329">"prosjekt"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"plass disk harddisk enhetsbruk"</string>
@@ -2504,27 +2500,19 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-informasjon"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-relatert informasjon"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Spor <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (2184141780491382435) -->
-    <skip />
-    <!-- no translation found for storage_summary_format (5419902362347539755) -->
-    <skip />
-    <!-- no translation found for storage_type_internal (410824961149037234) -->
-    <skip />
-    <!-- no translation found for storage_type_external (8928374515368986503) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (6983396130566021385) -->
-    <skip />
-    <!-- no translation found for notifications_disabled (4326096527874762629) -->
-    <skip />
-    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1812498477331421719) -->
-    <skip />
-    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
-    <skip />
-    <!-- no translation found for permissions_summary (6402730318075959117) -->
-    <!-- no translation found for launch_defaults_some (313159469856372621) -->
-    <skip />
-    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
-    <skip />
+    <string name="launch_by_default" msgid="2184141780491382435">"Start som standard"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> brukt av <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="410824961149037234">"internt minne"</string>
+    <string name="storage_type_external" msgid="8928374515368986503">"eksternt minne"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"På"</string>
+    <string name="notifications_disabled" msgid="4326096527874762629">"Blokkér"</string>
+    <string name="notifications_sensitive" msgid="3139432048186620878">"Sensitivt"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"Prioritet"</string>
+    <string name="notifications_priority_sensitive" msgid="9011871917486793616">"Prioritet og sensitiv"</string>
+    <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> tillatelser er gitt</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> tillatelse er gitt</item>
+    </plurals>
+    <string name="launch_defaults_some" msgid="313159469856372621">"Noen standardvalg er angitt"</string>
+    <string name="launch_defaults_none" msgid="4241129108140034876">"Ingen standardvalg er angitt"</string>
 </resources>

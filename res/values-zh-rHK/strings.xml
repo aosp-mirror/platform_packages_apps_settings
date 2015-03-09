@@ -351,9 +351,9 @@
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"已設定指紋"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"若要使用您的指紋解鎖螢幕或確認購買，我們需要：\n✓ 設定您的背景螢幕鎖定方法\n✓ 加入您的指紋"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"開始登記指紋！"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"將您的手指放在指紋感應器上，並在感到震動後抬起手指。"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"太好了！再做一次。"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"將同一根手指放在指紋感應器上，並在感到震動後抬起手指。"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"將您的手指放在指紋感應器上，並在感到震動後移開手指。"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="3732060789409510229">"做得好！請再做一次。"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="8846866512704467036">"將同一根手指放在指紋感應器上，並在感到震動後移開手指。"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"已加入指紋！"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"如果看到這個圖示，您可以使用您的指紋加以識別或授權購買。"</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"加入"</string>
@@ -2011,14 +2011,10 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"轉場動畫比例"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animator 片長比例"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"模擬次要顯示器"</string>
-    <!-- no translation found for enable_multi_window (1091779249819137016) -->
-    <skip />
-    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
-    <skip />
+    <string name="enable_multi_window" msgid="1091779249819137016">"多重視窗模式"</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"螢幕同時顯示多個活動。"</string>
+    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"要啟用多重視窗模式嗎?"</string>
+    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"警告：這項功能還在初期實驗階段。這項功能透過最近用過的應用程式用戶介面，允許螢幕同時顯示多個活動。部分應用程式與這項功能同時使用時，可能會出現當機或程式不能正常運作的情況。"</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"應用程式"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"不要保留活動"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"使用者離開活動後隨即銷毀活動"</string>
@@ -2508,27 +2504,19 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI 資料"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI 相對資料"</string>
     <string name="slot_number" msgid="3762676044904653577">"(插槽 <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (2184141780491382435) -->
-    <skip />
-    <!-- no translation found for storage_summary_format (5419902362347539755) -->
-    <skip />
-    <!-- no translation found for storage_type_internal (410824961149037234) -->
-    <skip />
-    <!-- no translation found for storage_type_external (8928374515368986503) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (6983396130566021385) -->
-    <skip />
-    <!-- no translation found for notifications_disabled (4326096527874762629) -->
-    <skip />
-    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1812498477331421719) -->
-    <skip />
-    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
-    <skip />
-    <!-- no translation found for permissions_summary (6402730318075959117) -->
-    <!-- no translation found for launch_defaults_some (313159469856372621) -->
-    <skip />
-    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
-    <skip />
+    <string name="launch_by_default" msgid="2184141780491382435">"按預設啟動"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>已使用 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="410824961149037234">"內部記憶體"</string>
+    <string name="storage_type_external" msgid="8928374515368986503">"外部記憶體"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"開啟"</string>
+    <string name="notifications_disabled" msgid="4326096527874762629">"封鎖"</string>
+    <string name="notifications_sensitive" msgid="3139432048186620878">"敏感"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"重要"</string>
+    <string name="notifications_priority_sensitive" msgid="9011871917486793616">"優先順序和敏感"</string>
+    <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="other">已授予 <xliff:g id="COUNT_1">%d</xliff:g> 項權限</item>
+      <item quantity="one">已授予 <xliff:g id="COUNT_0">%d</xliff:g> 項權限</item>
+    </plurals>
+    <string name="launch_defaults_some" msgid="313159469856372621">"已設定部分預設值"</string>
+    <string name="launch_defaults_none" msgid="4241129108140034876">"未設定預設值"</string>
 </resources>

@@ -348,7 +348,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> फिंगरप्रिंट नोंदणी</item>
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> फिंगरप्रिंट नोंदणी</item>
     </plurals>
-    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"फिंगरप्रिंट सेटअप"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"फिंगरप्रिंट सेटअप करा"</string>
     <string name="security_settings_fingerprint_enroll_onboard_message" msgid="8275201068478623705">"आपली स्क्रीन अनलॉक किंवा खरेदीची पुष्टी करण्याकरिता आपले फिंगरप्रिंट वापरण्यासाठी, आम्हाला याची आवश्यकता असेल: \n✓ आपली पार्श्वभूमी स्क्रीन लॉक पद्धत सेट करा \n✓ आपले फिंगरप्रिंट जोडा"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="1063375657071124812">"आपण प्रारंभ करूया!"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="6294541599045187369">"फिंगरप्रिंट सेन्सरवर आपले बोट ठेवा. आपल्याला कंपन जाणवल्यानंतर उचला."</string>
@@ -360,8 +360,8 @@
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"पुढील"</string>
     <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"आंशिक फिंगरप्रिंट आढळली. कृपया पुन्हा प्रयत्न करा."</string>
     <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"फिंगरप्रिंट सेन्सर खराब आहे. कृपया साफ करा आणि पुन्हा प्रयत्न करा."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"बोट जलद वर हलविले. कृपया पुन्हा प्रयत्न करा."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"बोट धीमे वर हलविले. कृपया पुन्हा प्रयत्न करा."</string>
+    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"बोट लवकर हलविले. कृपया पुन्हा प्रयत्न करा."</string>
+    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"बोट हळू हलविले. कृपया पुन्हा प्रयत्न करा."</string>
     <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"प्रक्रिया करण्यात अयशस्वी. पुन्हा प्रयत्न करा."</string>
     <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"हार्डवेअर उपलब्ध नाही."</string>
     <string name="fingerprint_error_no_space" msgid="7350970359618153619">"फिंगरप्रिंट संचयित केले जाऊ शकत नाही. कृपया विद्यमान फिंगरप्रिंट काढा."</string>
@@ -2007,14 +2007,10 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"संक्रमण अॅनिमेशन स्केल"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"अॅनिमेटर कालावधी स्केल"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"दुय्यम प्रदर्शनांची बतावणी करा"</string>
-    <!-- no translation found for enable_multi_window (1091779249819137016) -->
-    <skip />
-    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
-    <skip />
+    <string name="enable_multi_window" msgid="1091779249819137016">"एकाधिक-विंडो मोड"</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"एकाचवेळी स्क्रीनवरील एकाधिक क्रियाकलाप."</string>
+    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"एकाधिक-विंडो मोड सक्षम करायचा?"</string>
+    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"चेतावणी: हे उच्च प्रायोगिक वैशिष्‍ट्य आहे जे अलीकडील अ‍ॅप्‍स UI द्वारे स्क्रीन-वरील एकाधिक क्रियाकलापांना एकाचवेळी अनुमती देते. काही अ‍ॅप्‍स या वैशिष्‍ट्यासह वापरले जातात तेव्हा ते क्रॅश होऊ शकतात किंवा योग्यरित्या कार्य करू शकत नाहीत."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"अॅप्स"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"क्रियाकलाप ठेवू नका"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"वापरकर्त्याने प्रत्येक क्रियाकलाप सोडताच तो नष्ट करा"</string>
@@ -2504,27 +2500,19 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI माहिती"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI सापेक्ष माहिती"</string>
     <string name="slot_number" msgid="3762676044904653577">"(स्लॉट<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (2184141780491382435) -->
-    <skip />
-    <!-- no translation found for storage_summary_format (5419902362347539755) -->
-    <skip />
-    <!-- no translation found for storage_type_internal (410824961149037234) -->
-    <skip />
-    <!-- no translation found for storage_type_external (8928374515368986503) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (6983396130566021385) -->
-    <skip />
-    <!-- no translation found for notifications_disabled (4326096527874762629) -->
-    <skip />
-    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1812498477331421719) -->
-    <skip />
-    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
-    <skip />
-    <!-- no translation found for permissions_summary (6402730318075959117) -->
-    <!-- no translation found for launch_defaults_some (313159469856372621) -->
-    <skip />
-    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
-    <skip />
+    <string name="launch_by_default" msgid="2184141780491382435">"डीफॉल्टनुसार लाँच करा"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> मध्‍ये <xliff:g id="SIZE">%1$s</xliff:g> वापरले"</string>
+    <string name="storage_type_internal" msgid="410824961149037234">"अंतर्गत मेमरी"</string>
+    <string name="storage_type_external" msgid="8928374515368986503">"बाह्य मेमरी"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"चालू"</string>
+    <string name="notifications_disabled" msgid="4326096527874762629">"अवरोधित करा"</string>
+    <string name="notifications_sensitive" msgid="3139432048186620878">"संवेदनशील"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"प्राधान्य"</string>
+    <string name="notifications_priority_sensitive" msgid="9011871917486793616">"प्राधान्य आणि संवेदनशील"</string>
+    <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> परवानगीस मंजूरी दिली</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> परवानग्यांना मंजूरी दिली</item>
+    </plurals>
+    <string name="launch_defaults_some" msgid="313159469856372621">"काही डीफॉल्‍ट सेट केले"</string>
+    <string name="launch_defaults_none" msgid="4241129108140034876">"कोणतेही डीफॉल्ट सेट केले नाही"</string>
 </resources>

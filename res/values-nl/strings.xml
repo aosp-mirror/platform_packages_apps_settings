@@ -260,7 +260,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"SD-kaart scannen op media..."</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3624143937437417788">"Gekop. USB-opsl. alleen-lezen."</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4518291824764698112">"De gekoppelde SD-kaart is alleen-lezen."</string>
-    <string name="skip_label" msgid="47510779345218297">"Ovrsl"</string>
+    <string name="skip_label" msgid="47510779345218297">"\"Overslaan\""</string>
     <string name="next_label" msgid="4693520878012668114">"Volgende"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"Taal"</string>
     <string name="activity_picker_label" msgid="6295660302548177109">"Een activiteit kiezen"</string>
@@ -282,10 +282,10 @@
     <string name="settings_label" msgid="1626402585530130914">"Instellingen"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Instellingen"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"Snelkoppeling voor instellingen"</string>
-    <string name="airplane_mode" msgid="8837269988154128601">"Vliegmodus"</string>
+    <string name="airplane_mode" msgid="8837269988154128601">"Vliegtuigmodus"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"Meer"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Draadloos en netwerken"</string>
-    <string name="radio_controls_summary" msgid="2837395036275123133">"Wifi, Bluetooth, vliegmodus, mobiele netwerken en VPN\'s beheren"</string>
+    <string name="radio_controls_summary" msgid="2837395036275123133">"Wifi, Bluetooth, vliegtuigmodus, mobiele netwerken en VPN\'s beheren"</string>
     <string name="cellular_data_title" msgid="2525947635539415202">"Mobiele gegevens"</string>
     <string name="calls_title" msgid="3544471959217176768">"Oproepen"</string>
     <string name="sms_messages_title" msgid="1778636286080572535">"Sms\'jes"</string>
@@ -578,7 +578,7 @@
     <string name="wifi_starting" msgid="6732377932749942954">"Wifi inschakelen…"</string>
     <string name="wifi_stopping" msgid="8952524572499500804">"Wifi uitschakelen…"</string>
     <string name="wifi_error" msgid="3207971103917128179">"Fout"</string>
-    <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"In vliegmodus"</string>
+    <string name="wifi_in_airplane_mode" msgid="8652520421778203796">"In vliegtuigmodus"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Netwerkmelding"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3716818008370391253">"Melden wanneer een openbaar netwerk beschikbaar is"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Slechte verbindingen vermijden"</string>
@@ -1648,7 +1648,7 @@
     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Accu gebruikt wanneer tablet inactief is"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Accu gebruikt wanneer telefoon inactief is"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Accu gebruikt door radio"</string>
-    <string name="battery_sugg_radio" msgid="8211336978326295047">"Schakel over naar de vliegmodus om energie te besparen in gebieden zonder mobiel bereik"</string>
+    <string name="battery_sugg_radio" msgid="8211336978326295047">"Schakel over naar de vliegtuigmodus om energie te besparen in gebieden zonder mobiel bereik"</string>
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"Accu gebruikt door de zaklamp"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Accu gebruikt door scherm en achtergrondverlichting"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Verlaag de helderheid van het scherm en/of geef een kortere time-out voor het scherm op"</string>
@@ -2007,14 +2007,10 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Overgangsanimatieschaal"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Duur van animatieschaal"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"Secundaire displays simuleren"</string>
-    <!-- no translation found for enable_multi_window (1091779249819137016) -->
-    <skip />
-    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
-    <skip />
+    <string name="enable_multi_window" msgid="1091779249819137016">"Modus meerdere vensters"</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"Meerdere activiteiten tegelijk op het scherm."</string>
+    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"Modus voor meerdere vensters inschakelen?"</string>
+    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"WAARSCHUWING: Dit is een bijzonder experimentele functie waarmee meerdere activiteiten tegelijk op het scherm kunnen worden weergegeven via de gebruikersinterface voor recente apps. Sommige apps kunnen vastlopen of functioneren mogelijk niet correct wanneer ze met deze functie worden gebruikt."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Apps"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Activiteiten niet opslaan"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Activiteit wissen zodra de gebruiker deze verlaat"</string>
@@ -2504,27 +2500,19 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-informatie"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relatieve IMEI-informatie"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Positie <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (2184141780491382435) -->
-    <skip />
-    <!-- no translation found for storage_summary_format (5419902362347539755) -->
-    <skip />
-    <!-- no translation found for storage_type_internal (410824961149037234) -->
-    <skip />
-    <!-- no translation found for storage_type_external (8928374515368986503) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (6983396130566021385) -->
-    <skip />
-    <!-- no translation found for notifications_disabled (4326096527874762629) -->
-    <skip />
-    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1812498477331421719) -->
-    <skip />
-    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
-    <skip />
-    <!-- no translation found for permissions_summary (6402730318075959117) -->
-    <!-- no translation found for launch_defaults_some (313159469856372621) -->
-    <skip />
-    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
-    <skip />
+    <string name="launch_by_default" msgid="2184141780491382435">"Standaard starten"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> gebruikt in <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="410824961149037234">"intern geheugen"</string>
+    <string name="storage_type_external" msgid="8928374515368986503">"extern geheugen"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"Aan"</string>
+    <string name="notifications_disabled" msgid="4326096527874762629">"Blokkeren"</string>
+    <string name="notifications_sensitive" msgid="3139432048186620878">"Gevoelig"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"Prioriteit"</string>
+    <string name="notifications_priority_sensitive" msgid="9011871917486793616">"Prioriteit en gevoelig"</string>
+    <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> machtigingen verleend</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> machtiging verleend</item>
+    </plurals>
+    <string name="launch_defaults_some" msgid="313159469856372621">"Enkele standaardwaarden ingesteld"</string>
+    <string name="launch_defaults_none" msgid="4241129108140034876">"Geen standaardwaarden ingesteld"</string>
 </resources>

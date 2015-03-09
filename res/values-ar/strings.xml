@@ -2043,14 +2043,10 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"حجم الرسوم المتحركة للنقل"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"طول مدة الرسوم المتحركة"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"محاكاة الشاشات الثانوية"</string>
-    <!-- no translation found for enable_multi_window (1091779249819137016) -->
-    <skip />
-    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
-    <skip />
+    <string name="enable_multi_window" msgid="1091779249819137016">"وضع النوافذ المتعددة"</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"أنشطة متعددة على الشاشة في آنٍ واحد."</string>
+    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"هل تريد تمكين وضع النوافذ المتعددة؟"</string>
+    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"تحذير: هذه ميزة تجريبية إلى حد كبير تسمح بإجراء أنشطة متعددة على الشاشة في آنٍ واحد من خلال واجهة مستخدم التطبيقات المستخدمة مؤخرًا. وقد تتعطل بعض التطبيقات أو قد لا تعمل بشكل صحيح عند استخدامها مع هذه الميزة."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"التطبيقات"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"عدم الاحتفاظ بالأنشطة"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"مسح كل نشاط فور مغادرة المستخدم له"</string>
@@ -2548,27 +2544,23 @@
     <string name="imei_information_title" msgid="8499085421609752290">"‏معلومات IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"‏المعلومات ذات الصلة بـ IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(فتحة <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (2184141780491382435) -->
-    <skip />
-    <!-- no translation found for storage_summary_format (5419902362347539755) -->
-    <skip />
-    <!-- no translation found for storage_type_internal (410824961149037234) -->
-    <skip />
-    <!-- no translation found for storage_type_external (8928374515368986503) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (6983396130566021385) -->
-    <skip />
-    <!-- no translation found for notifications_disabled (4326096527874762629) -->
-    <skip />
-    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1812498477331421719) -->
-    <skip />
-    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
-    <skip />
-    <!-- no translation found for permissions_summary (6402730318075959117) -->
-    <!-- no translation found for launch_defaults_some (313159469856372621) -->
-    <skip />
-    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
-    <skip />
+    <string name="launch_by_default" msgid="2184141780491382435">"تشغيل بشكل افتراضي"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"تم استخدام <xliff:g id="SIZE">%1$s</xliff:g> في <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="410824961149037234">"ذاكرة داخلية"</string>
+    <string name="storage_type_external" msgid="8928374515368986503">"ذاكرة خارجية"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"تشغيل"</string>
+    <string name="notifications_disabled" msgid="4326096527874762629">"حظر"</string>
+    <string name="notifications_sensitive" msgid="3139432048186620878">"الحساسية"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"الأولوية"</string>
+    <string name="notifications_priority_sensitive" msgid="9011871917486793616">"الأولوية والحساسية"</string>
+    <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="zero">تم منح <xliff:g id="COUNT_1">%d</xliff:g> من الأذونات</item>
+      <item quantity="two">تم منح إذنين (<xliff:g id="COUNT_1">%d</xliff:g>)</item>
+      <item quantity="few">تم منح <xliff:g id="COUNT_1">%d</xliff:g> أذونات</item>
+      <item quantity="many">تم منح <xliff:g id="COUNT_1">%d</xliff:g> إذنًا</item>
+      <item quantity="other">تم منح <xliff:g id="COUNT_1">%d</xliff:g> من الأذونات</item>
+      <item quantity="one">تم منح <xliff:g id="COUNT_0">%d</xliff:g> إذن</item>
+    </plurals>
+    <string name="launch_defaults_some" msgid="313159469856372621">"تم تعيين بعض الإعدادات الافتراضية"</string>
+    <string name="launch_defaults_none" msgid="4241129108140034876">"لم يتم تعيين إعدادات افتراضية"</string>
 </resources>

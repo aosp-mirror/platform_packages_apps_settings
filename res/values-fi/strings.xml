@@ -792,18 +792,18 @@
     <string name="brightness_title" msgid="5746272622112982836">"Kirkkaus"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Säädä näytön kirkkautta"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"Kirkkauden säätö"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"Optimoi kirkkaustaso valotilanteen mukaan"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"Näytön kirkkaus määräytyy valoisuuden mukaan."</string>
     <string name="night_mode_title" msgid="6928425617491943384">"Teema"</string>
     <string name="night_mode_summary" msgid="9196605054622017193">"%s"</string>
     <string name="night_mode_no" msgid="7682792841791457238">"Vaalea"</string>
     <string name="night_mode_yes" msgid="4847655033618591567">"Tumma"</string>
     <string name="night_mode_auto" msgid="7508348175804304327">"Automaattinen"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"Virransäästö"</string>
+    <string name="screen_timeout" msgid="4351334843529712571">"Siirtyminen virransäästöön"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Näyttö sammuu"</string>
-    <string name="screen_timeout_summary" msgid="327761329263064327">"Kun laite on ollut käyttämättä <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="screen_timeout_summary" msgid="327761329263064327">"Laitteen oltua käyttämättä: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"Taustakuva"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Valitse taustakuva"</string>
-    <string name="screensaver_settings_title" msgid="3349790120327233241">"Unelmat"</string>
+    <string name="screensaver_settings_title" msgid="3349790120327233241">"Päiväunet"</string>
     <string name="screensaver_settings_summary_either_long" msgid="2458481525925378465">"Telakoituna tai virransäästötilassa ja ladattaessa"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Kumpi vain"</string>
     <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Latauksen aikana"</string>
@@ -1582,13 +1582,13 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> jäljellä"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> latausaikaa jäljellä"</string>
-    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – jäljellä n. <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="power_discharging_duration" msgid="1605929174734600590">"<xliff:g id="LEVEL">%1$s</xliff:g> – noin <xliff:g id="TIME">%2$s</xliff:g> jäljellä"</string>
     <string name="power_charging" msgid="1779532561355864267">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATE">%2$s</xliff:g>"</string>
     <string name="power_charging_duration" msgid="2853265177761520490">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä"</string>
     <string name="power_charging_duration_ac" msgid="3969186192576594254">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä (laturilataus)"</string>
     <string name="power_charging_duration_usb" msgid="182405645340976546">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä (USB-lataus)"</string>
     <string name="power_charging_duration_wireless" msgid="1829295708243159464">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="TIME">%2$s</xliff:g> kunnes täynnä (WiFi-lataus)"</string>
-    <string name="power_usage_list_summary" msgid="2409288197839512482">"Käyttö edellisen täyden latauksen jälk."</string>
+    <string name="power_usage_list_summary" msgid="2409288197839512482">"Kulutus täyteen lataamisen jälkeen"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akun käyttö laturin irrottamisen jälkeen"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Akun käyttö tilastojen tyhjentämisen jälkeen"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> akkuvirralla"</string>
@@ -2007,14 +2007,10 @@
     <string name="transition_animation_scale_title" msgid="387527540523595875">"Siirtymän anim.asteikko"</string>
     <string name="animator_duration_scale_title" msgid="3406722410819934083">"Animatorin keston mittakaava"</string>
     <string name="overlay_display_devices_title" msgid="5364176287998398539">"Simuloi toissijaiset näytöt"</string>
-    <!-- no translation found for enable_multi_window (1091779249819137016) -->
-    <skip />
-    <!-- no translation found for enable_multi_window_summary (5837641304114783514) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_title (950964546995895971) -->
-    <skip />
-    <!-- no translation found for confirm_enable_multi_window_text (565834092374755117) -->
-    <skip />
+    <string name="enable_multi_window" msgid="1091779249819137016">"Usean ikkunan tila"</string>
+    <string name="enable_multi_window_summary" msgid="5837641304114783514">"Useita toimintoja ruudulla samaan aikaan."</string>
+    <string name="confirm_enable_multi_window_title" msgid="950964546995895971">"Otetaanko usean ikkunan tila käyttöön?"</string>
+    <string name="confirm_enable_multi_window_text" msgid="565834092374755117">"Varoitus: Tämä on kokeellinen ominaisuus, joka mahdollistaa useiden toimintojen näyttämisen ruudulla Viimeaikaiset sovellukset -käyttöliittymän avulla. Jotkin sovellukset voivat kaatua tai toimia virheellisesti."</string>
     <string name="debug_applications_category" msgid="4206913653849771549">"Sovellukset"</string>
     <string name="immediately_destroy_activities" msgid="8366775083630234121">"Älä säilytä toimintoja"</string>
     <string name="immediately_destroy_activities_summary" msgid="3592221124808773368">"Tuhoa kaikki toiminnot, kun käyttäjä poistuu"</string>
@@ -2504,27 +2500,19 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-koodin tiedot"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI-koodiin liittyvät tiedot"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Paikka <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <!-- no translation found for launch_by_default (2184141780491382435) -->
-    <skip />
-    <!-- no translation found for storage_summary_format (5419902362347539755) -->
-    <skip />
-    <!-- no translation found for storage_type_internal (410824961149037234) -->
-    <skip />
-    <!-- no translation found for storage_type_external (8928374515368986503) -->
-    <skip />
-    <!-- no translation found for notifications_enabled (6983396130566021385) -->
-    <skip />
-    <!-- no translation found for notifications_disabled (4326096527874762629) -->
-    <skip />
-    <!-- no translation found for notifications_sensitive (3139432048186620878) -->
-    <skip />
-    <!-- no translation found for notifications_priority (1812498477331421719) -->
-    <skip />
-    <!-- no translation found for notifications_priority_sensitive (9011871917486793616) -->
-    <skip />
-    <!-- no translation found for permissions_summary (6402730318075959117) -->
-    <!-- no translation found for launch_defaults_some (313159469856372621) -->
-    <skip />
-    <!-- no translation found for launch_defaults_none (4241129108140034876) -->
-    <skip />
+    <string name="launch_by_default" msgid="2184141780491382435">"Käynnistä oletuksena"</string>
+    <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> käytössä kohteessa <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="410824961149037234">"sisäinen muisti"</string>
+    <string name="storage_type_external" msgid="8928374515368986503">"ulkoinen muisti"</string>
+    <string name="notifications_enabled" msgid="6983396130566021385">"Käytössä"</string>
+    <string name="notifications_disabled" msgid="4326096527874762629">"Estä"</string>
+    <string name="notifications_sensitive" msgid="3139432048186620878">"Yksityisluontoinen"</string>
+    <string name="notifications_priority" msgid="1812498477331421719">"Tärkeät"</string>
+    <string name="notifications_priority_sensitive" msgid="9011871917486793616">"Tärkeät ja yksityisluontoiset"</string>
+    <plurals name="permissions_summary" formatted="false" msgid="6402730318075959117">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> käyttöoikeutta myönnetty</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> käyttöoikeus myönnetty</item>
+    </plurals>
+    <string name="launch_defaults_some" msgid="313159469856372621">"Joitakin oletuksia on asetettu."</string>
+    <string name="launch_defaults_none" msgid="4241129108140034876">"Oletuksia ei asetettu."</string>
 </resources>
