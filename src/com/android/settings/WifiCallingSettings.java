@@ -137,7 +137,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         int wfcMode = ImsManager.getWfcMode(context);
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
-        mButtonWfcMode.setSummary(getWfcModeSummary(context, ImsManager.getWfcMode(context)));
+        mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
 
         mButtonWfcRoam.setChecked(wfcEnabled
                 && (wfcMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY)
@@ -165,9 +165,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         ImsManager.setWfcSetting(context, isChecked);
 
+        int wfcMode = ImsManager.getWfcMode(context);
+        mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
         mButtonWfcMode.setEnabled(isChecked);
-        boolean wfcHandoffEnabled = (ImsManager.getWfcMode(context)
-                != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY);
+        boolean wfcHandoffEnabled = (wfcMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY);
         mButtonWfcRoam.setEnabled(isChecked && wfcHandoffEnabled);
         mButtonWfcRoam.setChecked(isChecked && wfcHandoffEnabled
                 && ImsManager.isWfcRoamingEnabledByUser(context));
