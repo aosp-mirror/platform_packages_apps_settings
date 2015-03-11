@@ -51,15 +51,6 @@
                 android:elevation="@dimen/setup_wizard_card_elevation"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/wifi_required_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:text="@string/wifi_required_info_text"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:visibility="gone" />
-
                 <ListView
                     android:id="@android:id/list"
                     android:layout_width="match_parent"

@@ -73,7 +73,9 @@ public class WifiSettingsForSetupWizard extends WifiSettings {
 
         final Intent intent = getActivity().getIntent();
         if (intent.getBooleanExtra(EXTRA_SHOW_WIFI_REQUIRED_INFO, false)) {
-            view.findViewById(R.id.wifi_required_info).setVisibility(View.VISIBLE);
+            final View requiredInfo =
+                    inflater.inflate(R.layout.setup_wifi_required_info, list, false);
+            list.addHeaderView(requiredInfo, null, false);
         }
 
         return view;
