@@ -432,7 +432,6 @@ public class ChooseLockPassword extends SettingsActivity {
             } else if (mUiStage == Stage.NeedToConfirm) {
                 if (mFirstPin.equals(pin)) {
                     boolean wasSecureBefore = mLockPatternUtils.isSecure();
-                    mLockPatternUtils.clearLock();
                     final boolean required = getActivity().getIntent().getBooleanExtra(
                             EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
                     mLockPatternUtils.setCredentialRequiredToDecrypt(required);
