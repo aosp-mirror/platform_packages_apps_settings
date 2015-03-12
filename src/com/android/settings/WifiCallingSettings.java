@@ -25,7 +25,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.SwitchPreference;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -38,8 +37,7 @@ import com.android.settings.widget.SwitchBar;
 
 /**
  * "Wi-Fi Calling settings" screen.  This preference screen lets you
- * enable/disable Wi-Fi Calling, change mode, enable/disable
- * handover while on roaming.
+ * enable/disable Wi-Fi Calling and change Wi-Fi Calling mode.
  */
 public class WifiCallingSettings extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener,
@@ -49,13 +47,11 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
     //String keys for preference lookup
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
-    private static final String BUTTON_WFC_ROAM = "wifi_calling_roam";
 
     //UI objects
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private ListPreference mButtonWfcMode;
-    private SwitchPreference mButtonWfcRoam;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -77,17 +73,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
                     && isNonTtyOrTtyOnVolteEnabled);
 
             Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
-            int wfcMode = ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY;
             if (pref != null) {
                 pref.setEnabled(isWfcEnabled
-                        && (state == TelephonyManager.CALL_STATE_IDLE));
-                ListPreference prefWfcMode = (ListPreference) pref;
-                wfcMode = Integer.valueOf(prefWfcMode.getValue()).intValue();
-            }
-            pref = getPreferenceScreen().findPreference(BUTTON_WFC_ROAM);
-            if (pref != null) {
-                pref.setEnabled(isWfcEnabled
-                        && (wfcMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY)
                         && (state == TelephonyManager.CALL_STATE_IDLE));
             }
         }
@@ -154,9 +141,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoam = (SwitchPreference) findPreference(BUTTON_WFC_ROAM);
-        mButtonWfcRoam.setOnPreferenceChangeListener(this);
-
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(ImsPhone.REGISTRATION_ERROR);
     }
@@ -182,10 +166,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         int wfcMode = ImsManager.getWfcMode(context);
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
         mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
-
-        mButtonWfcRoam.setChecked(wfcEnabled
-                && (wfcMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY)
-                && ImsManager.isWfcRoamingEnabledByUser(context));
 
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
@@ -223,10 +203,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         int wfcMode = ImsManager.getWfcMode(context);
         mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
         mButtonWfcMode.setEnabled(isChecked);
-        boolean wfcHandoffEnabled = (wfcMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY);
-        mButtonWfcRoam.setEnabled(isChecked && wfcHandoffEnabled);
-        mButtonWfcRoam.setChecked(isChecked && wfcHandoffEnabled
-                && ImsManager.isWfcRoamingEnabledByUser(context));
     }
 
     @Override
@@ -240,15 +216,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
                 ImsManager.setWfcMode(context, buttonMode);
                 mButtonWfcMode.setSummary(getWfcModeSummary(context, buttonMode));
             }
-            boolean wfcHandoffEnabled =
-                    (buttonMode != ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY);
-            mButtonWfcRoam.setEnabled(wfcHandoffEnabled);
-            mButtonWfcRoam.setChecked(wfcHandoffEnabled &&
-                    ImsManager.isWfcRoamingEnabledByUser(context));
-        } else if (preference == mButtonWfcRoam) {
-            SwitchPreference wfcRoamPref = (SwitchPreference) preference;
-            wfcRoamPref.setChecked(!wfcRoamPref.isChecked());
-            ImsManager.setWfcRoamingSetting(context, wfcRoamPref.isChecked());
         }
         return true;
     }
