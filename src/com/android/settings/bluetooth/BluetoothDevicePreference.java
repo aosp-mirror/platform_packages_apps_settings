@@ -112,7 +112,7 @@ public final class BluetoothDevicePreference extends Preference implements
          */
         setTitle(mCachedDevice.getName());
 
-        int summaryResId = getConnectionSummary();
+        int summaryResId = mCachedDevice.getConnectionSummary();
         if (summaryResId != 0) {
             setSummary(summaryResId);
         } else {
@@ -229,60 +229,6 @@ public final class BluetoothDevicePreference extends Preference implements
             data.enabled = true;
 
             Index.getInstance(context).updateFromSearchIndexableData(data);
-        }
-    }
-
-    private int getConnectionSummary() {
-        final CachedBluetoothDevice cachedDevice = mCachedDevice;
-
-        boolean profileConnected = false;       // at least one profile is connected
-        boolean a2dpNotConnected = false;       // A2DP is preferred but not connected
-        boolean headsetNotConnected = false;    // Headset is preferred but not connected
-
-        for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
-            int connectionStatus = cachedDevice.getProfileConnectionState(profile);
-
-            switch (connectionStatus) {
-                case BluetoothProfile.STATE_CONNECTING:
-                case BluetoothProfile.STATE_DISCONNECTING:
-                    return Utils.getConnectionStateSummary(connectionStatus);
-
-                case BluetoothProfile.STATE_CONNECTED:
-                    profileConnected = true;
-                    break;
-
-                case BluetoothProfile.STATE_DISCONNECTED:
-                    if (profile.isProfileReady()) {
-                        if (profile instanceof A2dpProfile) {
-                            a2dpNotConnected = true;
-                        } else if (profile instanceof HeadsetProfile) {
-                            headsetNotConnected = true;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        if (profileConnected) {
-            if (a2dpNotConnected && headsetNotConnected) {
-                return R.string.bluetooth_connected_no_headset_no_a2dp;
-            } else if (a2dpNotConnected) {
-                return R.string.bluetooth_connected_no_a2dp;
-            } else if (headsetNotConnected) {
-                return R.string.bluetooth_connected_no_headset;
-            } else {
-                return R.string.bluetooth_connected;
-            }
-        }
-
-        switch (cachedDevice.getBondState()) {
-            case BluetoothDevice.BOND_BONDING:
-                return R.string.bluetooth_pairing;
-
-            case BluetoothDevice.BOND_BONDED:
-            case BluetoothDevice.BOND_NONE:
-            default:
-                return 0;
         }
     }
 
