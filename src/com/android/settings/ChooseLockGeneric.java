@@ -414,8 +414,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         };
 
         private void removeAllFingerprintTemplates() {
-            mFingerprintManager.startListening(mReceiver);
-            if (mFingerprintManager != null) {
+            if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
+                mFingerprintManager.startListening(mReceiver);
                 mFingerprintManager.remove(0 /* all fingerprint templates */);
             }
         }
