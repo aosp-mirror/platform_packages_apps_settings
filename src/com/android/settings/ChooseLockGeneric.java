@@ -74,26 +74,24 @@ public class ChooseLockGeneric extends SettingsActivity {
     }
 
     public static class ChooseLockGenericFragment extends SettingsPreferenceFragment {
+        private static final String TAG = "ChooseLockGenericFragment";
         private static final int MIN_PASSWORD_LENGTH = 4;
-        private static final String KEY_UNLOCK_BACKUP_INFO = "unlock_backup_info";
         private static final String KEY_UNLOCK_SET_OFF = "unlock_set_off";
         private static final String KEY_UNLOCK_SET_NONE = "unlock_set_none";
         private static final String KEY_UNLOCK_SET_PIN = "unlock_set_pin";
         private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
         private static final String KEY_UNLOCK_SET_PATTERN = "unlock_set_pattern";
-        private static final int CONFIRM_EXISTING_REQUEST = 100;
-        private static final int ENABLE_ENCRYPTION_REQUEST = 102;
-        private static final int CHOOSE_LOCK_REQUEST = 103;
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
-
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
-        private static final String TAG = "ChooseLockGenericFragment";
         public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
+        public static final String HIDE_DISABLED_PREFS = "hide_disabled_prefs";
         public static final String ENCRYPT_REQUESTED_QUALITY = "encrypt_requested_quality";
         public static final String ENCRYPT_REQUESTED_DISABLED = "encrypt_requested_disabled";
         public static final String TAG_FRP_WARNING_DIALOG = "frp_warning_dialog";
 
-        private static final boolean ALWAY_SHOW_TUTORIAL = true;
+        private static final int CONFIRM_EXISTING_REQUEST = 100;
+        private static final int ENABLE_ENCRYPTION_REQUEST = 101;
+        private static final int CHOOSE_LOCK_REQUEST = 102;
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
@@ -224,12 +222,14 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // If caller didn't specify password quality, show UI and allow the user to choose.
                 quality = intent.getIntExtra(MINIMUM_QUALITY_KEY, -1);
                 quality = upgradeQuality(quality);
+                final boolean hideDisabledPrefs = intent.getBooleanExtra(
+                        HIDE_DISABLED_PREFS, false);
                 final PreferenceScreen prefScreen = getPreferenceScreen();
                 if (prefScreen != null) {
                     prefScreen.removeAll();
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
-                disableUnusablePreferences(quality);
+                disableUnusablePreferences(quality, hideDisabledPrefs);
                 updatePreferenceSummaryIfNeeded();
             } else {
                 updateUnlockMethodAndFinish(quality, false);
@@ -266,9 +266,11 @@ public class ChooseLockGeneric extends SettingsActivity {
          * implementation is in disableUnusablePreferenceImpl.
          *
          * @param quality the requested quality.
+         * @param hideDisabledPrefs if false preferences show why they were disabled; otherwise
+         * they're not shown at all.
          */
-        protected void disableUnusablePreferences(final int quality) {
-            disableUnusablePreferencesImpl(quality, false /* hideDisabled */);
+        protected void disableUnusablePreferences(final int quality, boolean hideDisabledPrefs) {
+            disableUnusablePreferencesImpl(quality, hideDisabledPrefs);
         }
 
         /***
