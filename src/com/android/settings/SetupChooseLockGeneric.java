@@ -110,7 +110,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
          * @param quality the requested quality.
          */
         @Override
-        protected void disableUnusablePreferences(final int quality) {
+        protected void disableUnusablePreferences(final int quality, boolean hideDisabled) {
             // At this part of the flow, the user has already indicated they want to add a pin,
             // pattern or password, so don't show "None" or "Slide". We disable them here and set
             // the HIDE_DISABLED flag to true to hide them. This only happens for setup wizard.

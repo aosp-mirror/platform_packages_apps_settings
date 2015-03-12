@@ -465,6 +465,7 @@ public class FingerprintEnroll extends SettingsActivity {
             intent.setClassName("com.android.settings", ChooseLockGeneric.class.getName());
             intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                     DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+            intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
             startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
         }
     }
