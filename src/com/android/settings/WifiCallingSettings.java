@@ -118,7 +118,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(ImsPhone.REGISTRATION_ERROR)) {
+            if (action.equals(ImsManager.ACTION_IMS_REGISTRATION_ERROR)) {
                 // If this fragment is active then we are immediately
                 // showing alert on screen. There is no need to add
                 // notification in this case.
@@ -126,6 +126,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
                 // In order to communicate to ImsPhone that it should
                 // not show notification, we are changing result code here.
                 setResultCode(Activity.RESULT_CANCELED);
+
+                // UX requirement is to disable WFC in case of "permanent" registration failures.
+                mSwitch.setChecked(false);
 
                 showAlert(intent);
             }
@@ -142,7 +145,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
         mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(ImsPhone.REGISTRATION_ERROR);
+        mIntentFilter.addAction(ImsManager.ACTION_IMS_REGISTRATION_ERROR);
     }
 
     @Override
