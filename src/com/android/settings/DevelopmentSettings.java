@@ -728,7 +728,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         return !SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("");
     }
 
-    private boolean showEnableMultiWindowPreference() {
+    private static boolean showEnableMultiWindowPreference() {
         return !"user".equals(Build.TYPE);
     }
 
@@ -1780,6 +1780,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                     final List<String> keys = new ArrayList<String>();
                     if (!showEnableOemUnlockPreference()) {
                         keys.add(ENABLE_OEM_UNLOCK);
+                    }
+                    if (!showEnableMultiWindowPreference()) {
+                        keys.add(ENABLE_MULTI_WINDOW_KEY);
                     }
                     return keys;
                 }
