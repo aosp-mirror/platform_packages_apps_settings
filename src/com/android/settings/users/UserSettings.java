@@ -872,8 +872,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 for (int userId : values[0]) {
                     Bitmap bitmap = mUserManager.getUserIcon(userId);
                     if (bitmap == null) {
-                        bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(userId,
-                                /* light= */ false));
+                        bitmap = Utils.getDefaultUserIconAsBitmap(userId);
                     }
                     mUserIcons.append(userId, bitmap);
                 }
@@ -889,15 +888,13 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void assignDefaultPhoto(UserInfo user) {
-        Bitmap bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(user.id,
-                /* light= */ false));
+        Bitmap bitmap = Utils.getDefaultUserIconAsBitmap(user.id);
         mUserManager.setUserIcon(user.id, bitmap);
     }
 
     private Drawable getEncircledDefaultIcon() {
         if (mDefaultIconDrawable == null) {
-            mDefaultIconDrawable = encircle(UserIcons.convertToBitmap(
-                    UserIcons.getDefaultUserIcon(UserHandle.USER_NULL, /* light= */ false)));
+            mDefaultIconDrawable = encircle(Utils.getDefaultUserIconAsBitmap(UserHandle.USER_NULL));
         }
         return mDefaultIconDrawable;
     }
