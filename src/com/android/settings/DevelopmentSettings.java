@@ -135,13 +135,16 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
+    private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
+    private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
+    private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
+
+    private static final String DEBUG_NETWORKING_CATEGORY_KEY = "debug_networking_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
     private static final String WIFI_AGGRESSIVE_HANDOVER_KEY = "wifi_aggressive_handover";
     private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
-    private static final String SELECT_LOGD_SIZE_KEY = "select_logd_size";
-    private static final String SELECT_LOGD_SIZE_PROPERTY = "persist.logd.size";
-    private static final String SELECT_LOGD_DEFAULT_SIZE_PROPERTY = "ro.logd.size";
+    private static final String WIFI_LEGACY_DHCP_CLIENT_KEY = "legacy_dhcp_client";
 
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
@@ -197,6 +200,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private SwitchPreference mWifiDisplayCertification;
     private SwitchPreference mWifiVerboseLogging;
     private SwitchPreference mWifiAggressiveHandover;
+    private SwitchPreference mLegacyDhcpClient;
 
     private SwitchPreference mWifiAllowScansWithTraffic;
     private SwitchPreference mStrictMode;
@@ -336,6 +340,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiVerboseLogging = findAndInitSwitchPref(WIFI_VERBOSE_LOGGING_KEY);
         mWifiAggressiveHandover = findAndInitSwitchPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
         mWifiAllowScansWithTraffic = findAndInitSwitchPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
+        mLegacyDhcpClient = findAndInitSwitchPref(WIFI_LEGACY_DHCP_CLIENT_KEY);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
@@ -543,6 +548,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateWifiVerboseLoggingOptions();
         updateWifiAggressiveHandoverOptions();
         updateWifiAllowScansWithTrafficOptions();
+        updateLegacyDhcpClientOptions();
         updateSimulateColorSpace();
         updateUseNuplayerOptions();
         updateUSBAudioOptions();
@@ -1073,6 +1079,18 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiManager.setAllowScansWithTraffic(mWifiAllowScansWithTraffic.isChecked() ? 1 : 0);
     }
 
+    private void updateLegacyDhcpClientOptions() {
+        updateSwitchPreference(mLegacyDhcpClient, Settings.Global.getInt(
+                getActivity().getContentResolver(),
+                Settings.Global.LEGACY_DHCP_CLIENT, 0) != 0);
+    }
+
+    private void writeLegacyDhcpClientOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.LEGACY_DHCP_CLIENT,
+                mLegacyDhcpClient.isChecked() ? 1 : 0);
+    }
+
     private void updateLogdSizeValues() {
         if (mLogdSize != null) {
             String currentValue = SystemProperties.get(SELECT_LOGD_SIZE_PROPERTY);
@@ -1450,6 +1468,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeWifiAggressiveHandoverOptions();
         } else if (preference == mWifiAllowScansWithTraffic) {
             writeWifiAllowScansWithTrafficOptions();
+        } else if (preference == mLegacyDhcpClient) {
+            writeLegacyDhcpClientOptions();
         } else if (preference == mUseAwesomePlayer) {
             writeUseAwesomePlayerOptions();
         } else if (preference == mUSBAudio) {
