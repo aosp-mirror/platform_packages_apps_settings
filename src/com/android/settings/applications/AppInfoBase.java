@@ -30,6 +30,7 @@ import android.hardware.usb.IUsbManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFragment;
 import android.util.Log;
@@ -53,6 +54,7 @@ public abstract class AppInfoBase extends PreferenceFragment
     private ApplicationsState.Session mSession;
     protected ApplicationsState.AppEntry mAppEntry;
     protected PackageInfo mPackageInfo;
+    protected int mUserId;
     protected String mPackageName;
 
     protected IUsbManager mUsbManager;
@@ -115,7 +117,8 @@ public abstract class AppInfoBase extends PreferenceFragment
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
-        mAppEntry = mState.getEntry(mPackageName);
+        mUserId = UserHandle.myUserId();
+        mAppEntry = mState.getEntry(mPackageName, mUserId);
         if (mAppEntry != null) {
             // Get application info again to refresh changed properties of application
             try {

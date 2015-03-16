@@ -482,8 +482,9 @@ public class InstalledAppDetails extends AppInfoBase
         ActivityManager am = (ActivityManager)getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.forceStopPackage(pkgName);
-        mState.invalidatePackage(pkgName);
-        ApplicationsState.AppEntry newEnt = mState.getEntry(pkgName);
+        int userId = UserHandle.getUserId(mAppEntry.info.uid);
+        mState.invalidatePackage(pkgName, userId);
+        ApplicationsState.AppEntry newEnt = mState.getEntry(pkgName, userId);
         if (newEnt != null) {
             mAppEntry = newEnt;
         }

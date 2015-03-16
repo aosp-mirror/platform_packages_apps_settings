@@ -35,6 +35,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -70,13 +71,12 @@ import android.widget.Spinner;
 import com.android.internal.app.IMediaContainerService;
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.UserSpinnerAdapter;
 import com.android.settings.Settings.RunningServicesActivity;
 import com.android.settings.Settings.StorageUseActivity;
+import com.android.settings.UserSpinnerAdapter;
+import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.deviceinfo.StorageMeasurement;
-import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -135,8 +135,7 @@ interface AppClickListener {
  * intent.
  */
 public class ManageApplications extends Fragment implements
-        AppClickListener, DialogInterface.OnClickListener,
-        DialogInterface.OnDismissListener, OnItemSelectedListener  {
+        AppClickListener, DialogInterface.OnClickListener, DialogInterface.OnDismissListener  {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
@@ -451,6 +450,7 @@ public class ManageApplications extends Fragment implements
     private LayoutInflater mInflater;
     
     private String mCurrentPkgName;
+    private int mCurrentUid;
     
     private Menu mOptionsMenu;
 
@@ -472,7 +472,6 @@ public class ManageApplications extends Fragment implements
     private View mRootView;
     private ViewPager mViewPager;
     private ViewGroup mPinnedHeader;
-    private UserSpinnerAdapter mProfileSpinnerAdapter;
     private Spinner mSpinner;
     private Context mContext;
 
@@ -911,9 +910,6 @@ public class ManageApplications extends Fragment implements
         mTabs.add(tab);
 
         mNumTabs = mTabs.size();
-
-        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mProfileSpinnerAdapter = Utils.createUserSpinnerAdapter(um, mContext);
     }
 
 
@@ -926,14 +922,6 @@ public class ManageApplications extends Fragment implements
                 container, false);
         mContentContainer = container;
         mRootView = rootView;
-        mPinnedHeader = (ViewGroup) mRootView.findViewById(R.id.pinned_header);
-        if (mProfileSpinnerAdapter != null) {
-            mSpinner = (Spinner) inflater.inflate(R.layout.spinner_view, null);
-            mSpinner.setAdapter(mProfileSpinnerAdapter);
-            mSpinner.setOnItemSelectedListener(this);
-            mPinnedHeader.addView(mSpinner);
-            mPinnedHeader.setVisibility(View.VISIBLE);
-        }
         mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
         MyPagerAdapter adapter = new MyPagerAdapter();
         mViewPager.setAdapter(adapter);
@@ -1029,29 +1017,8 @@ public class ManageApplications extends Fragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
-            mApplicationsState.requestSize(mCurrentPkgName);
+            mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        UserHandle selectedUser = mProfileSpinnerAdapter.getUserHandle(position);
-        if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
-            Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            int currentTab = mViewPager.getCurrentItem();
-            intent.putExtra(EXTRA_LIST_TYPE, mTabs.get(currentTab).mListType);
-            mContext.startActivityAsUser(intent, selectedUser);
-            // Go back to default selection, which is the first one; this makes sure that pressing
-            // the back button takes you into a consistent state
-            mSpinner.setSelection(0);
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Nothing to do
     }
 
     private void updateNumTabs() {
@@ -1076,13 +1043,13 @@ public class ManageApplications extends Fragment implements
 
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
-        // start new fragment to display extended information
-        Bundle args = new Bundle();
-        args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
-
-        SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
-                R.string.application_info_label, null, this, INSTALLED_APP_DETAILS);
+        // TODO: Figure out if there is a way where we can spin up the profile's settings
+        // process ahead of time, to avoid a long load of data when user clicks on a managed app.
+        // Maybe when they load the list of apps that contains managed profile apps.
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.fromParts("package", mCurrentPkgName, null));
+        getActivity().startActivityAsUser(intent,
+                new UserHandle(UserHandle.getUserId(mCurrentUid)));
     }
     
     @Override
@@ -1273,6 +1240,7 @@ public class ManageApplications extends Fragment implements
         if (tab.mApplications != null && tab.mApplications.getCount() > position) {
             ApplicationsState.AppEntry entry = tab.mApplications.getAppEntry(position);
             mCurrentPkgName = entry.info.packageName;
+            mCurrentUid = entry.info.uid;
             startApplicationDetailsActivity();
         }
     }
