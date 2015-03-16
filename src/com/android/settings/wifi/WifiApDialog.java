@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -32,8 +33,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
 
 import com.android.settings.R;
+
+import android.util.Log;
 
 /**
  * Dialog to configure the SSID and security settings
@@ -53,8 +58,14 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
     private TextView mSsid;
     private int mSecurityTypeIndex = OPEN_INDEX;
     private EditText mPassword;
+    private RadioGroup mChannel;
+    private RadioButton mChannel2G;
+    private RadioButton mChannel5G;
 
     WifiConfiguration mWifiConfig;
+    WifiManager mWifiManager;
+
+    private static final String TAG = "WifiApDialog";
 
     public WifiApDialog(Context context, DialogInterface.OnClickListener listener,
             WifiConfiguration wifiConfig) {
@@ -64,6 +75,7 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
         if (wifiConfig != null) {
             mSecurityTypeIndex = getSecurityTypeIndex(wifiConfig);
         }
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
     public static int getSecurityTypeIndex(WifiConfiguration wifiConfig) {
@@ -84,6 +96,16 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
          * make things consistent and clean it up
          */
         config.SSID = mSsid.getText().toString();
+
+        //obtain the band configure
+        if (mChannel2G.isChecked()) {
+            config.apBand = 0;
+        } else if(mChannel5G.isChecked()) {
+            config.apBand = 1;
+        } else {
+            Log.e("TAG", "AP band configure error!");
+            return null;
+        }
 
         switch (mSecurityTypeIndex) {
             case OPEN_INDEX:
@@ -118,15 +140,36 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
         mSsid = (TextView) mView.findViewById(R.id.ssid);
         mPassword = (EditText) mView.findViewById(R.id.password);
 
+        mChannel = (RadioGroup) mView.findViewById(R.id.choose_channel);
+        mChannel2G = (RadioButton) mView.findViewById(R.id.ap_2G_band);
+        mChannel5G = (RadioButton) mView.findViewById(R.id.ap_5G_band);
+
+        String countryCode = mWifiManager.getCountryCode();
+        if (!mWifiManager.is5GHzBandSupported() || countryCode == null) {
+            //If no country code, 5GHz AP is forbidden
+            Log.e(TAG," NO country code, forbid 5GHz");
+            mChannel5G.setVisibility(View.INVISIBLE);
+            mWifiConfig.apBand = 0;
+        } else {
+            mChannel5G.setVisibility(View.VISIBLE);
+        }
+
+
         setButton(BUTTON_SUBMIT, context.getString(R.string.wifi_save), mListener);
         setButton(DialogInterface.BUTTON_NEGATIVE,
         context.getString(R.string.wifi_cancel), mListener);
 
         if (mWifiConfig != null) {
             mSsid.setText(mWifiConfig.SSID);
+            if (mWifiConfig.apBand == 0) {
+                mChannel2G.setChecked(true);
+            } else {
+                mChannel5G.setChecked(true);
+            }
+
             mSecurity.setSelection(mSecurityTypeIndex);
             if (mSecurityTypeIndex == WPA2_INDEX) {
-                  mPassword.setText(mWifiConfig.preSharedKey);
+                mPassword.setText(mWifiConfig.preSharedKey);
             }
         }
 
