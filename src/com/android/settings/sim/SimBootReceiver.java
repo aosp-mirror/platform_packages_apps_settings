@@ -24,8 +24,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
@@ -40,13 +38,8 @@ import java.util.List;
 
 public class SimBootReceiver extends BroadcastReceiver {
     private static final String TAG = "SimBootReceiver";
-    private static final int SLOT_EMPTY = -1;
     private static final int NOTIFICATION_ID = 1;
-    private static final String SHARED_PREFERENCES_NAME = "sim_state";
-    private static final String SLOT_PREFIX = "sim_slot_";
-    private static final int INVALID_SLOT = -2; // Used when upgrading from K to LMR1
 
-    private SharedPreferences mSharedPreferences = null;
     private TelephonyManager mTelephonyManager;
     private Context mContext;
     private SubscriptionManager mSubscriptionManager;
@@ -56,9 +49,6 @@ public class SimBootReceiver extends BroadcastReceiver {
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mContext = context;
         mSubscriptionManager = SubscriptionManager.from(mContext);
-        mSharedPreferences = mContext.getSharedPreferences(SHARED_PREFERENCES_NAME,
-                Context.MODE_PRIVATE);
-
         mSubscriptionManager.addOnSubscriptionsChangedListener(mSubscriptionListener);
     }
 
@@ -75,6 +65,22 @@ public class SimBootReceiver extends BroadcastReceiver {
             return;
         }
 
+        // Cancel any previous notifications
+        cancelNotification(mContext);
+
+        // Clear defaults for any subscriptions which no longer exist
+        mSubscriptionManager.clearDefaultsForInactiveSubIds();
+
+        boolean dataSelected = SubscriptionManager.isUsableSubIdValue(
+                SubscriptionManager.getDefaultDataSubId());
+        boolean smsSelected = SubscriptionManager.isUsableSubIdValue(
+                SubscriptionManager.getDefaultSmsSubId());
+
+        // If data and sms defaults are selected, dont show notification (Calls default is optional)
+        if (dataSelected && smsSelected) {
+            return;
+        }
+
         // We wait until SubscriptionManager returns a valid list of Subscription informations
         // by checking if the list is empty.
         // This is not completely correct, but works for most cases.
@@ -82,57 +88,34 @@ public class SimBootReceiver extends BroadcastReceiver {
         List<SubscriptionInfo> sil = mSubscriptionManager.getActiveSubscriptionInfoList();
         if (sil == null || sil.size() < 1) {
             return;
-        }
+        } else {
+            // Create a notification to tell the user that some defaults are missing
+            createNotification(mContext);
 
-        for (int i = 0; i < numSlots; i++) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(mContext, i);
-            final String key = SLOT_PREFIX+i;
-            final int lastSubId = getLastSubId(key);
-
-            if (sir != null) {
-                numSIMsDetected++;
-                final int currentSubId = sir.getSubscriptionId();
-                if (lastSubId == INVALID_SLOT) {
-                    setLastSubId(key, currentSubId);
-                } else if (lastSubId != currentSubId) {
-                    createNotification(mContext);
-                    setLastSubId(key, currentSubId);
-                    notificationSent = true;
-                }
-                lastSIMSlotDetected = i;
-            } else if (lastSubId != SLOT_EMPTY) {
-                createNotification(mContext);
-                setLastSubId(key, SLOT_EMPTY);
-                notificationSent = true;
-            }
-        }
-
-        if (notificationSent) {
-            Intent intent = new Intent(mContext, SimDialogActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (numSIMsDetected == 1) {
+            if (sil.size() == 1) {
+                // If there is only one subscription, ask if user wants to use if for everything
+                Intent intent = new Intent(mContext, SimDialogActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.PREFERRED_PICK);
-                intent.putExtra(SimDialogActivity.PREFERRED_SIM, lastSIMSlotDetected);
-            } else {
+                intent.putExtra(SimDialogActivity.PREFERRED_SIM, sil.get(0).getSimSlotIndex());
+                mContext.startActivity(intent);
+            } else if (!dataSelected) {
+                // TODO(sanketpadawe): This should not be shown if the user is looking at the
+                // SimSettings page - its just annoying
+                // If there are mulitple, ensure they pick default data
+                Intent intent = new Intent(mContext, SimDialogActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
+                mContext.startActivity(intent);
             }
-            mContext.startActivity(intent);
         }
-    }
 
-    private int getLastSubId(String strSlotId) {
-        return mSharedPreferences.getInt(strSlotId, INVALID_SLOT);
-    }
-
-    private void setLastSubId(String strSlotId, int value) {
-        Editor editor = mSharedPreferences.edit();
-        editor.putInt(strSlotId, value);
-        editor.commit();
     }
 
     private void createNotification(Context context){
         final Resources resources = context.getResources();
 
+        // TODO(sanketpadawe): This notification should not be dissmissable by the user
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
