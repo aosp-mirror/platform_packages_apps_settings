@@ -21,13 +21,13 @@
         android:layout="@layout/installed_app_details" />
 
     <Preference
-        android:key="notification_settings"
-        android:title="@string/notification_section_header"
+        android:key="storage_settings"
+        android:title="@string/storage_settings"
         android:selectable="true" />
 
     <Preference
-        android:key="storage_settings"
-        android:title="@string/storage_settings"
+        android:key="data_settings"
+        android:title="@string/data_size_label"
         android:selectable="true" />
 
     <Preference
@@ -36,8 +36,8 @@
         android:selectable="true" />
 
     <Preference
-        android:key="data_settings"
-        android:title="@string/data_size_label"
+        android:key="notification_settings"
+        android:title="@string/notification_section_header"
         android:selectable="true" />
 
     <Preference
