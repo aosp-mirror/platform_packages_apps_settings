@@ -71,6 +71,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_PHONE_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
+    private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_NOTIFICATION = "notification";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
@@ -601,6 +602,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             } else {
                 rt.add(KEY_RING_VOLUME);
                 rt.add(KEY_PHONE_RINGTONE);
+                rt.add(KEY_WIFI_DISPLAY);
                 rt.add(KEY_VIBRATE_WHEN_RINGING);
             }
             return rt;
