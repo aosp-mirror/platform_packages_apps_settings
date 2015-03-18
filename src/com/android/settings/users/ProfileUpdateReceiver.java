@@ -22,8 +22,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-
 import com.android.settings.Utils;
 
 

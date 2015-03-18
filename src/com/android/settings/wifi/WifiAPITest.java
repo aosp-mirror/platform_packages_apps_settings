@@ -20,7 +20,6 @@ import com.android.settings.R;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.wifi.WifiManager;
 
 import android.os.Bundle;

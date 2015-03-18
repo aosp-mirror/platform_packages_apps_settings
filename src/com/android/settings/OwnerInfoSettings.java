@@ -17,11 +17,9 @@
 package com.android.settings;
 
 import android.app.Fragment;
-import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;

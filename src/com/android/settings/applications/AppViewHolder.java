@@ -2,7 +2,6 @@ package com.android.settings.applications;
 
 import com.android.settings.R;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

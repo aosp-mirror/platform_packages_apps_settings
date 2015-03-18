@@ -30,7 +30,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -40,8 +39,6 @@ import android.util.Log;
 
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.Indexable.SearchIndexProvider;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;

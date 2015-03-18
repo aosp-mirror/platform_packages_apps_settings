@@ -18,14 +18,10 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -42,10 +38,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.ListPopupWindow;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;

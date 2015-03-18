@@ -22,7 +22,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.UserInfo;
-import android.content.res.TypedArray;
 import android.net.http.SslCertificate;
 import android.os.AsyncTask;
 import android.os.Bundle;

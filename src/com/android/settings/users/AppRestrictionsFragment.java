@@ -31,7 +31,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -60,8 +59,6 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.drawable.CircleFramedDrawable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

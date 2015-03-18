@@ -19,7 +19,6 @@ package com.android.settings.dashboard;
 import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 import android.text.TextUtils;
 
 import java.util.ArrayList;

@@ -17,19 +17,16 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothUuid;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.ParcelUuid;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.InputFilter.LengthFilter;
 import android.util.Log;

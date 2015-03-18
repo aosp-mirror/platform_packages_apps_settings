@@ -19,7 +19,6 @@ package com.android.settings.sim;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -30,8 +29,6 @@ import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +41,6 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneFactory;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

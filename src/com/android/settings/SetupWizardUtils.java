@@ -26,7 +26,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.view.Gravity;
 import android.view.Window;
 import android.widget.TextView;
 

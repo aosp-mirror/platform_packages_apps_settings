@@ -23,7 +23,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.RingtonePreference;
 import android.util.AttributeSet;
-import android.util.Log;
 
 public class DefaultRingtonePreference extends RingtonePreference {
     private static final String TAG = "DefaultRingtonePreference";

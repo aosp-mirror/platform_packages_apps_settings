@@ -16,7 +16,6 @@
 
 package com.android.settings.print;
 
-import android.app.ActivityManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
@@ -33,7 +32,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.Process;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -58,7 +56,6 @@ import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.UserSpinnerAdapter;
-import com.android.settings.UserSpinnerAdapter.UserDetails;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;

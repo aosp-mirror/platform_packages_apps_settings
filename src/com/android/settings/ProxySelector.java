@@ -23,14 +23,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Proxy;
 import android.net.ProxyInfo;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -43,8 +41,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.net.InetSocketAddress;
 
 public class ProxySelector extends Fragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";

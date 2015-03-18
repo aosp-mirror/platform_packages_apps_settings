@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.content.Context;
 import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;

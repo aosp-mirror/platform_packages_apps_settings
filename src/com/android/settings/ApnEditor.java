@@ -26,10 +26,8 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
@@ -40,11 +38,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConstants;
-import com.android.internal.telephony.RILConstants;
-import com.android.internal.telephony.TelephonyProperties;
 
 
 public class ApnEditor extends PreferenceActivity

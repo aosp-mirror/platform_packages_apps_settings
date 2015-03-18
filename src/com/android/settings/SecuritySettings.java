@@ -39,7 +39,6 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.security.KeyStore;
 import android.service.fingerprint.FingerprintManager;
 import android.service.fingerprint.FingerprintManager.FingerprintItem;

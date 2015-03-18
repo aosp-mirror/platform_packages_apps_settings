@@ -16,7 +16,6 @@
 
 package com.android.settings.print;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

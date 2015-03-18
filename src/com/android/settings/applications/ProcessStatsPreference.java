@@ -26,7 +26,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 public class ProcessStatsPreference extends Preference {
     private ProcStatsPackageEntry mEntry;

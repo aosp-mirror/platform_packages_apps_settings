@@ -16,8 +16,6 @@
 
 package com.android.settings.wfd;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;

@@ -46,9 +46,6 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Implements the preference screen to enable/disable ICC lock and
  * also the dialogs to change the ICC PIN. In the former case, enabling/disabling

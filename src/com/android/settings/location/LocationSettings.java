@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.SettingInjectorService;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -29,8 +28,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.Switch;
 

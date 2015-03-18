@@ -21,7 +21,6 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.UserManager;
@@ -37,9 +36,7 @@ import android.widget.ImageView;
 import com.android.settings.R;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 

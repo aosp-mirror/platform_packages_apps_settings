@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,13 +38,7 @@ import android.service.fingerprint.FingerprintManager;
 import android.service.fingerprint.FingerprintManagerReceiver;
 import android.util.EventLog;
 import android.util.Log;
-import android.util.MutableBoolean;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.ListView;
-
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.List;

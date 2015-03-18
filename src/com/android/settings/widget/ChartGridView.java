@@ -29,14 +29,10 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
-
-import java.util.Locale;
 
 /**
  * Background of {@link ChartView} that renders grid lines as requested by

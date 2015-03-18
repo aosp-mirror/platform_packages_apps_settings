@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;

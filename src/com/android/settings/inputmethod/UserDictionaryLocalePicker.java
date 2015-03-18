@@ -16,8 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import java.util.Locale;
-
 public class UserDictionaryLocalePicker extends com.android.internal.app.LocalePicker {
     public UserDictionaryLocalePicker(final UserDictionaryAddWordFragment parent) {
         super();

@@ -31,9 +31,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.InstalledAppDetails;

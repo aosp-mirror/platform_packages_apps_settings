@@ -46,7 +46,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-import libcore.icu.ICU;
 import libcore.icu.TimeZoneNames;
 
 /**

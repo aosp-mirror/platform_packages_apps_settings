@@ -47,7 +47,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
@@ -56,8 +55,6 @@ import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.WifiCallingSettings;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

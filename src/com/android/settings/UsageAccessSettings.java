@@ -17,8 +17,6 @@
 package com.android.settings;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.settings.DataUsageSummary.AppItem;
-
 import android.Manifest;
 import android.app.ActivityThread;
 import android.app.AlertDialog;
@@ -43,7 +41,6 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.util.ArrayMap;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 

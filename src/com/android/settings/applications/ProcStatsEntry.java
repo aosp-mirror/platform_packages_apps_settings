@@ -17,11 +17,9 @@
 package com.android.settings.applications;
 
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Process;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;

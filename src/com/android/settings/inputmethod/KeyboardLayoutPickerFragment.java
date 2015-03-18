@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.Context;

@@ -56,7 +56,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 
-import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.OwnerInfoSettings;

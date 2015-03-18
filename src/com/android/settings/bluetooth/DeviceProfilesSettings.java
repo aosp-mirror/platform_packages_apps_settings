@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -27,21 +26,12 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
-import android.text.TextWatcher;
-import android.app.Dialog;
-import android.widget.Button;
-import android.text.Editable;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.Index;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;

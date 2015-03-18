@@ -30,13 +30,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.wifi.WifiApEnabler;
 import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;

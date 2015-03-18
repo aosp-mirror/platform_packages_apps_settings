@@ -17,17 +17,13 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 
 import com.android.internal.app.LocalePicker;
 import com.android.settings.R;
 
-import java.text.Collator;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * List preference that allows the user to pick a locale from the list of
