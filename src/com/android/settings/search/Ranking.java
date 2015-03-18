@@ -29,6 +29,7 @@ import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
@@ -67,16 +68,17 @@ public final class Ranking {
     public static final int RANK_NOTIFICATIONS = 9;
     public static final int RANK_STORAGE = 10;
     public static final int RANK_POWER_USAGE = 11;
-    public static final int RANK_USERS = 12;
-    public static final int RANK_LOCATION = 13;
-    public static final int RANK_SECURITY = 14;
-    public static final int RANK_IME = 15;
-    public static final int RANK_PRIVACY = 16;
-    public static final int RANK_DATE_TIME = 17;
-    public static final int RANK_ACCESSIBILITY = 18;
-    public static final int RANK_PRINTING = 19;
-    public static final int RANK_DEVELOPEMENT = 20;
-    public static final int RANK_DEVICE_INFO = 21;
+    public static final int RANK_APPS = 12;
+    public static final int RANK_USERS = 13;
+    public static final int RANK_LOCATION = 14;
+    public static final int RANK_SECURITY = 15;
+    public static final int RANK_IME = 16;
+    public static final int RANK_PRIVACY = 17;
+    public static final int RANK_DATE_TIME = 18;
+    public static final int RANK_ACCESSIBILITY = 19;
+    public static final int RANK_PRINTING = 20;
+    public static final int RANK_DEVELOPEMENT = 21;
+    public static final int RANK_DEVICE_INFO = 22;
 
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;
@@ -128,6 +130,9 @@ public final class Ranking {
         // Battery
         sRankMap.put(PowerUsageSummary.class.getName(), RANK_POWER_USAGE);
         sRankMap.put(BatterySaverSettings.class.getName(), RANK_POWER_USAGE);
+
+        // Advanced app settings
+        sRankMap.put(AdvancedAppSettings.class.getName(), RANK_APPS);
 
         // Users
         sRankMap.put(UserSettings.class.getName(), RANK_USERS);

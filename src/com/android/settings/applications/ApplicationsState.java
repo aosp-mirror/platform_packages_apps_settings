@@ -1,5 +1,6 @@
 package com.android.settings.applications;
 
+import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.Application;
 import android.content.BroadcastReceiver;
@@ -12,6 +13,7 @@ import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.content.pm.ParceledListSlice;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -54,11 +56,12 @@ public class ApplicationsState {
         public void onPackageIconChanged();
         public void onPackageSizeChanged(String packageName);
         public void onAllSizesComputed();
+        public void onLauncherInfoChanged();
     }
 
     public static interface AppFilter {
         public void init();
-        public boolean filterApp(ApplicationInfo info);
+        public boolean filterApp(AppEntry info);
     }
 
     static final int SIZE_UNKNOWN = -1;
@@ -90,7 +93,7 @@ public class ApplicationsState {
         // for purposes of cleaning them up in the app details UI.
         long externalCacheSize;
     }
-    
+
     public static class AppEntry extends SizeInfo {
         final File apkFile;
         final long id;
@@ -100,7 +103,9 @@ public class ApplicationsState {
         long externalSize;
 
         boolean mounted;
-        
+
+        boolean hasLauncherEntry;
+
         String getNormalizedLabel() {
             if (normalizedLabel != null) {
                 return normalizedLabel;
@@ -128,7 +133,7 @@ public class ApplicationsState {
             this.sizeStale = true;
             ensureLabel(context);
         }
-        
+
         void ensureLabel(Context context) {
             if (this.label == null || !this.mounted) {
                 if (!this.apkFile.exists()) {
@@ -141,7 +146,7 @@ public class ApplicationsState {
                 }
             }
         }
-        
+
         boolean ensureIconLocked(Context context, PackageManager pm) {
             if (this.icon == null) {
                 if (this.apkFile.exists()) {
@@ -175,13 +180,6 @@ public class ApplicationsState {
         private final Collator sCollator = Collator.getInstance();
         @Override
         public int compare(AppEntry object1, AppEntry object2) {
-            final boolean normal1 = object1.info.enabled
-                    && (object1.info.flags&ApplicationInfo.FLAG_INSTALLED) != 0;
-            final boolean normal2 = object2.info.enabled
-                    && (object2.info.flags&ApplicationInfo.FLAG_INSTALLED) != 0;
-            if (normal1 != normal2) {
-                return normal1 ? -1 : 1;
-            }
             return sCollator.compare(object1.label, object2.label);
         }
     };
@@ -219,58 +217,105 @@ public class ApplicationsState {
         }
     };
 
-    public static final AppFilter THIRD_PARTY_FILTER = new AppFilter() {
+    public static final AppFilter FILTER_PERSONAL = new AppFilter() {
+        private int mCurrentUser;
+
+        public void init() {
+            mCurrentUser = ActivityManager.getCurrentUser();
+        }
+
+        @Override
+        public boolean filterApp(AppEntry entry) {
+            return UserHandle.getUserId(entry.info.uid) == mCurrentUser;
+        }
+    };
+
+    public static final AppFilter FILTER_WORK = new AppFilter() {
+        private int mCurrentUser;
+
+        public void init() {
+            mCurrentUser = ActivityManager.getCurrentUser();
+        }
+
+        @Override
+        public boolean filterApp(AppEntry entry) {
+            return UserHandle.getUserId(entry.info.uid) != mCurrentUser;
+        }
+    };
+
+    public static final AppFilter FILTER_DOWNLOADED_AND_LAUNCHER = new AppFilter() {
         public void init() {
         }
-        
+
         @Override
-        public boolean filterApp(ApplicationInfo info) {
-            if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+        public boolean filterApp(AppEntry entry) {
+            if ((entry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
                 return true;
-            } else if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+            } else if ((entry.info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                return true;
+            } else if (entry.hasLauncherEntry) {
                 return true;
             }
             return false;
         }
     };
 
-    public static final AppFilter ON_SD_CARD_FILTER = new AppFilter() {
+    public static final AppFilter FILTER_THIRD_PARTY = new AppFilter() {
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry entry) {
+            if ((entry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                return true;
+            } else if ((entry.info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                return true;
+            }
+            return false;
+        }
+    };
+
+    public static final AppFilter FILTER_ON_SD_CARD = new AppFilter() {
         final CanBeOnSdCardChecker mCanBeOnSdCardChecker
                 = new CanBeOnSdCardChecker();
-        
+
         public void init() {
             mCanBeOnSdCardChecker.init();
         }
-        
+
         @Override
-        public boolean filterApp(ApplicationInfo info) {
-            return mCanBeOnSdCardChecker.check(info);
+        public boolean filterApp(AppEntry entry) {
+            return mCanBeOnSdCardChecker.check(entry.info);
         }
     };
 
-    public static final AppFilter DISABLED_FILTER = new AppFilter() {
+    public static final AppFilter FILTER_DISABLED = new AppFilter() {
         public void init() {
         }
-        
+
         @Override
-        public boolean filterApp(ApplicationInfo info) {
-            if (!info.enabled) {
-                return true;
-            }
-            return false;
+        public boolean filterApp(AppEntry entry) {
+            return !entry.info.enabled;
         }
     };
 
-    public static final AppFilter ALL_ENABLED_FILTER = new AppFilter() {
+    public static final AppFilter FILTER_ALL_ENABLED = new AppFilter() {
         public void init() {
         }
-        
+
         @Override
-        public boolean filterApp(ApplicationInfo info) {
-            if (info.enabled) {
-                return true;
-            }
-            return false;
+        public boolean filterApp(AppEntry entry) {
+            return entry.info.enabled;
+        }
+    };
+
+    public static final AppFilter FILTER_EVERYTHING = new AppFilter() {
+        public void init() {
+        }
+
+        @Override
+        public boolean filterApp(AppEntry entry) {
+            return true;
         }
     };
 
@@ -398,6 +443,7 @@ public class ApplicationsState {
         static final int MSG_PACKAGE_SIZE_CHANGED = 4;
         static final int MSG_ALL_SIZES_COMPUTED = 5;
         static final int MSG_RUNNING_STATE_CHANGED = 6;
+        static final int MSG_LAUNCHER_INFO_CHANGED = 7;
 
         @Override
         public void handleMessage(Message msg) {
@@ -434,6 +480,11 @@ public class ApplicationsState {
                     for (int i=0; i<mActiveSessions.size(); i++) {
                         mActiveSessions.get(i).mCallbacks.onRunningStateChanged(
                                 msg.arg1 != 0);
+                    }
+                } break;
+                case MSG_LAUNCHER_INFO_CHANGED: {
+                    for (int i=0; i<mActiveSessions.size(); i++) {
+                        mActiveSessions.get(i).mCallbacks.onLauncherInfoChanged();
                     }
                 } break;
             }
@@ -487,7 +538,7 @@ public class ApplicationsState {
          * it keeps running and locking again it can prevent the main thread from
          * acquiring its lock for a long time...  sometimes even > 5 seconds
          * (leading to an ANR).
-         * 
+         *
          * Dalvik will promote a monitor to a "real" lock if it detects enough
          * contention on it.  It doesn't figure this out fast enough for us
          * here, though, so this little trick will force it to turn into a real
@@ -540,6 +591,12 @@ public class ApplicationsState {
                     doPauseIfNeededLocked();
                 }
                 if (DEBUG_LOCKING) Log.v(TAG, "...pause releasing lock");
+            }
+        }
+
+        ArrayList<AppEntry> getAllApps() {
+            synchronized (mEntriesMap) {
+                return new ArrayList<>(mAppEntries);
             }
         }
 
@@ -600,22 +657,21 @@ public class ApplicationsState {
             if (filter != null) {
                 filter.init();
             }
-            
-            List<ApplicationInfo> apps;
+
+            List<AppEntry> apps;
             synchronized (mEntriesMap) {
-                apps = new ArrayList<ApplicationInfo>(mApplications);
+                apps = new ArrayList<>(mAppEntries);
             }
 
             ArrayList<AppEntry> filteredApps = new ArrayList<AppEntry>();
             if (DEBUG) Log.i(TAG, "Rebuilding...");
             for (int i=0; i<apps.size(); i++) {
-                ApplicationInfo info = apps.get(i);
-                if (filter == null || filter.filterApp(info)) {
+                AppEntry entry = apps.get(i);
+                if (filter == null || filter.filterApp(entry)) {
                     synchronized (mEntriesMap) {
                         if (DEBUG_LOCKING) Log.v(TAG, "rebuild acquired lock");
-                        AppEntry entry = getEntryLocked(info);
                         entry.ensureLabel(mContext);
-                        if (DEBUG) Log.i(TAG, "Using " + info.packageName + ": " + entry);
+                        if (DEBUG) Log.i(TAG, "Using " + entry.info.packageName + ": " + entry);
                         filteredApps.add(entry);
                         if (DEBUG_LOCKING) Log.v(TAG, "rebuild releasing lock");
                     }
@@ -757,7 +813,7 @@ public class ApplicationsState {
             return entry;
         }
     }
-    
+
     void ensureIcon(AppEntry entry) {
         if (entry.icon != null) {
             return;
@@ -766,7 +822,7 @@ public class ApplicationsState {
             entry.ensureIconLocked(mContext, mPm);
         }
     }
-    
+
     void requestSize(String packageName, int userId) {
         if (DEBUG_LOCKING) Log.v(TAG, "requestSize about to acquire lock...");
         synchronized (mEntriesMap) {
@@ -790,7 +846,7 @@ public class ApplicationsState {
         }
         return sum;
     }
-    
+
     int indexOfApplicationInfoLocked(String pkgName, int userId) {
         for (int i=mApplications.size()-1; i>=0; i--) {
             ApplicationInfo appInfo = mApplications.get(i);
@@ -962,6 +1018,7 @@ public class ApplicationsState {
         static final int MSG_LOAD_ENTRIES = 2;
         static final int MSG_LOAD_ICONS = 3;
         static final int MSG_LOAD_SIZES = 4;
+        static final int MSG_LOAD_LAUNCHER = 5;
 
         boolean mRunning;
 
@@ -1074,8 +1131,39 @@ public class ApplicationsState {
                     if (numDone >= 6) {
                         sendEmptyMessage(MSG_LOAD_ENTRIES);
                     } else {
-                        sendEmptyMessage(MSG_LOAD_ICONS);
+                        sendEmptyMessage(MSG_LOAD_LAUNCHER);
                     }
+                } break;
+                case MSG_LOAD_LAUNCHER: {
+                    Intent launchIntent = new Intent(Intent.ACTION_MAIN, null)
+                            .addCategory(Intent.CATEGORY_LAUNCHER);
+
+                    for (int i = 0; i < mEntriesMap.size(); i++) {
+                        int userId = mEntriesMap.keyAt(i);
+                        List<ResolveInfo> intents = mPm.queryIntentActivitiesAsUser(launchIntent,
+                                PackageManager.GET_DISABLED_COMPONENTS, userId);
+                        synchronized (mEntriesMap) {
+                            if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_LAUNCHER acquired lock");
+                            HashMap<String, AppEntry> userEntries = mEntriesMap.valueAt(i);
+                            final int N = intents.size();
+                            for (int j = 0; j < N; j++) {
+                                String packageName = intents.get(j).activityInfo.packageName;
+                                AppEntry entry = userEntries.get(packageName);
+                                if (entry != null) {
+                                    entry.hasLauncherEntry = true;
+                                } else {
+                                    Log.w(TAG, "Cannot find pkg: " + packageName
+                                            + " on user " + userId);
+                                }
+                            }
+                            if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_LAUNCHER releasing lock");
+                        }
+                    }
+
+                    if (!mMainHandler.hasMessages(MainHandler.MSG_LAUNCHER_INFO_CHANGED)) {
+                        mMainHandler.sendEmptyMessage(MainHandler.MSG_LAUNCHER_INFO_CHANGED);
+                    }
+                    sendEmptyMessage(MSG_LOAD_ICONS);
                 } break;
                 case MSG_LOAD_ICONS: {
                     int numDone = 0;

@@ -47,6 +47,7 @@ public class Settings extends SettingsActivity {
     public static class DeviceInfoSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageApplicationsActivity extends SettingsActivity { /* empty */ }
+    public static class AllApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class AppOpsSummaryActivity extends SettingsActivity {
         @Override
         public boolean isValidFragment(String className) {
