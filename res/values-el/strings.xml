@@ -558,7 +558,8 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Για μουσική και πολυμέσα"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Διατήρηση ρυθμίσεων"</string>
     <string name="wifi_assistant_title" msgid="2553267316621598101">"Βοηθός Wi-Fi"</string>
-    <string name="wifi_display_settings_title" msgid="2925465988657380522">"Μετάδοση οθόνης"</string>
+    <!-- no translation found for wifi_display_settings_title (8740852850033480136) -->
+    <skip />
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Ενεργοποίηση ασύρματης οθόνης"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Δεν βρέθηκαν κοντινές συσκευές."</string>
     <string name="wifi_display_status_connecting" msgid="5688608834000748607">"Γίνεται σύνδεση"</string>
@@ -666,12 +667,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Ανώνυμη ταυτότητα"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Κωδικός πρόσβασης"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Εμφάνιση κωδικού πρόσβασης"</string>
-    <!-- no translation found for wifi_ap_band_config (219415018348922629) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_2G (8724267386885036210) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_5G (8137061170937978040) -->
-    <skip />
+    <string name="wifi_ap_band_config" msgid="219415018348922629">"Διαμόρφωση ζώνης σημείου πρόσβασης"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Ζώνη 2,4 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"Ζώνη 5 GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Ρυθμίσεις IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(δεν έγινε αλλαγή)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(δεν έχει καθοριστεί)"</string>
@@ -750,30 +748,25 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Φορ. σημ. πρόσ. Wi-Fi AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Φορητό σημείο πρόσβασης Wi-Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_calling_settings_title (4102921303993404577) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_title (3208568886184788972) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_dialog_title (8149690312199253909) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_choices:0 (2124257075906188844) -->
-    <!-- no translation found for wifi_calling_mode_choices:1 (5267397515594230396) -->
-    <!-- no translation found for wifi_calling_mode_choices:2 (3132912693346866895) -->
-    <!-- no translation found for wifi_calling_mode_values:0 (4799585830102342375) -->
-    <!-- no translation found for wifi_calling_mode_values:1 (1171822231056612021) -->
-    <!-- no translation found for wifi_calling_mode_values:2 (3194458950573886239) -->
-    <!-- no translation found for wifi_calling_off_summary (1973102843796728910) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_preferred_summary (2538605598404726187) -->
-    <skip />
-    <!-- no translation found for wfc_mode_cellular_preferred_summary (3409009182901031134) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_only_summary (6783204292010626433) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_title (1949055516180908425) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_summary (8613368213416864074) -->
-    <skip />
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Κλήση Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="3208568886184788972">"Λειτουργία κλήσης Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Λειτουργία κλήσης Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Προτίμηση Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Προτίμηση δικτύου κινητής τηλεφωνίας"</item>
+    <item msgid="3132912693346866895">"Μόνο Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+    <string name="wifi_calling_off_summary" msgid="1973102843796728910">"Ανενεργό"</string>
+    <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Προτίμηση Wi-Fi (Χρησιμοποιεί δίκτυο κινητής τηλεφωνίας μόνο εάν δεν υπάρχει διαθέσιμο Wi-Fi)"</string>
+    <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Προτίμηση δικτύου κινητής τηλεφωνίας (Χρήση Wi-Fi μόνο αν δεν υπάρχει δίκτυο κινητής τηλεφωνίας)"</string>
+    <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Μόνο Wi-Fi (Χωρίς χρήση δικτύου κιν.τηλεφωνίας. Αδύνατη πραγματοποίηση ή λήψη κλήσεων χωρίς Wi-Fi)"</string>
+    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Μεταβίβαση WFC σε περιαγωγή"</string>
+    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Ενεργοποίηση μεταβίβασης φων.κλήσεων Wi-Fi σε δίκτυο κιν.τηλεφωνίας σε περιαγωγή"</string>
     <string name="home_settings" msgid="212375129455718176">"Αρχική σελίδα"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Προβολή"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Ήχος"</string>
@@ -2383,8 +2376,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi σύνδεση δικτύου"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"μήνυμα κειμένου ανταλλαγή μηνυμάτων κειμένου μηνύματα ανταλλαγή μηνυμάτων"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"δίκτυο κινητής τηλεφωνίας κελί εταιρεία κινητής τηλεφωνίας ασύρματα δεδομένα 4g 3g 2g lte"</string>
-    <!-- no translation found for keywords_wifi_calling (3032400528043215568) -->
-    <skip />
+    <string name="keywords_wifi_calling" msgid="3032400528043215568">"Wi-Fi κλήση Wi-Fi κλήσεις περιαγωγή μεταβίβαση"</string>
     <string name="keywords_home" msgid="3626170808219458848">"λειτουργία εκκίνησης"</string>
     <string name="keywords_display" msgid="6709007669501628320">"οθόνη αφής"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"μείωση φωτεινότητας οθόνης οθόνη αφής μπαταρία"</string>
@@ -2392,7 +2384,8 @@
     <string name="keywords_display_night_mode" msgid="7652025075378505346">"σκούρο θέμα νυχτερινή λειτουργία σκοτεινή οθόνη επαναφορά φωτεινότητας"</string>
     <string name="keywords_display_wallpaper" msgid="7778443098569037063">"φόντο εξατομίκευση προσαρμογή οθόνης"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"μέγεθος κειμένου"</string>
-    <string name="keywords_display_cast_screen" msgid="8887412173792143329">"έργο"</string>
+    <!-- no translation found for keywords_display_cast_screen (3167261692257302743) -->
+    <skip />
     <string name="keywords_storage" msgid="6572905220031852173">"χώρος στο δίσκο σκληρός δίσκος χρήση συσκευής"</string>
     <string name="keywords_battery" msgid="2096185085932675704">"χρήση ισχύος φόρτιση"</string>
     <string name="keywords_spell_checker" msgid="6106749039734174140">"ορθογραφικό λεξικό ορθογραφικός έλεγχος αυτόματη διόρθωση"</string>
