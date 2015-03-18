@@ -447,7 +447,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             case MENU_ID_CONNECT: {
                 if (mSelectedAccessPoint.isSaved()) {
                     connect(mSelectedAccessPoint.getConfig());
-                } else if (mSelectedAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
+                } else if (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
                     connect(mSelectedAccessPoint.getConfig());
