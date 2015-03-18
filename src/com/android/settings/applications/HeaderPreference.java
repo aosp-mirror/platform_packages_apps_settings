@@ -47,6 +47,7 @@ public class HeaderPreference extends Preference {
         final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
         Utils.forceCustomPadding(allDetails, true /* additive padding */);
         mRootView = view;
+        setShouldDisableView(false);
     }
 
     @Override
