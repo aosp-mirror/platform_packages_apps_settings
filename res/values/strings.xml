@@ -6040,11 +6040,17 @@
    <string name="launch_by_default">Launch by default</string>
 
    <!-- Summary for app storage preference [CHAR LIMIT=15] -->
-   <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
-   <!-- Internal storage label [CHAR LIMIT=25] -->
-   <string name="storage_type_internal">internal memory</string>
-   <!-- External storage label [CHAR LIMIT=25] -->
-   <string name="storage_type_external">external memory</string>
+   <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal storage">%2$s</xliff:g></string>
+
+   <!-- Summary describing internal storage for applications [CHAR LIMIT=25] -->
+   <string name="storage_type_internal">internal storage</string>
+   <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
+   <string name="storage_type_external">external storage</string>
+
+   <!-- Title for data usage screen when entered from app info [CHAR LIMIT=30] -->
+   <string name="app_data_usage">App data usage</string>
+   <!-- Summary for data usage preference [CHAR LIMIT=15] -->
+   <string name="data_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used since <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
 
    <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
    <string name="notifications_enabled">On</string>
@@ -6067,5 +6073,8 @@
    <string name="launch_defaults_some">Some defaults set</string>
    <!-- Launch defaults preference summary with none set [CHAR LIMIT=40] -->
    <string name="launch_defaults_none">No defaults set</string>
+
+   <!-- Warning toast shown when data usage screen can't find specified app -->
+   <string name="unknown_app">Unknown app</string>
 
 </resources>

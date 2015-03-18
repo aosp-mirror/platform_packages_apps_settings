@@ -62,6 +62,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -120,6 +121,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
@@ -142,7 +144,6 @@ import com.android.settings.sim.SimSettings;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.ChartNetworkSeriesView;
-
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
@@ -190,6 +191,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
     private static final String DATA_USAGE_DISABLE_MOBILE_LIMIT_KEY =
             "data_usage_disable_mobile_limit";
     private static final String DATA_USAGE_CYCLE_KEY = "data_usage_cycle";
+
+    public static final String EXTRA_SHOW_APP_IMMEDIATE_PKG = "showAppImmediatePkg";
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
@@ -281,6 +284,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
     private UidDetailProvider mUidDetailProvider;
 
+    // Indicates request to show app immediately rather than list.
+    private String mShowAppImmediatePkg;
+
     /**
      * Local cache of data enabled for subId, used to work around delays.
      */
@@ -332,6 +338,13 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             mShowEthernet = true;
         }
 
+        mUidDetailProvider = new UidDetailProvider(context);
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mShowAppImmediatePkg = arguments.getString(EXTRA_SHOW_APP_IMMEDIATE_PKG);
+        }
+
         setHasOptionsMenu(true);
     }
 
@@ -342,7 +355,6 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         final Context context = inflater.getContext();
         final View view = inflater.inflate(R.layout.data_usage_summary, container, false);
 
-        mUidDetailProvider = new UidDetailProvider(context);
 
         mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
         mTabsContainer = (ViewGroup) view.findViewById(R.id.tabs_container);
@@ -448,7 +460,32 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         mListView.setOnItemClickListener(mListListener);
         mListView.setAdapter(mAdapter);
 
+        showRequestedAppIfNeeded();
+
         return view;
+    }
+
+    private void showRequestedAppIfNeeded() {
+        if (mShowAppImmediatePkg == null) {
+            return;
+        }
+        try {
+            int uid = getActivity().getPackageManager().getPackageUid(mShowAppImmediatePkg,
+                UserHandle.myUserId());
+            AppItem app = new AppItem(uid);
+            app.addUid(uid);
+
+            final UidDetail detail = mUidDetailProvider.getUidDetail(app.key, true);
+            // When we are going straight to an app then we are coming from App Info and want
+            // a header at the top.
+            AppHeader.createAppHeader(getActivity(), detail.icon, detail.label, null);
+            AppDetailsFragment.show(DataUsageSummary.this, app, detail.label, false);
+        } catch (NameNotFoundException e) {
+            Log.w(TAG, "Could not find " + mShowAppImmediatePkg, e);
+            Toast.makeText(getActivity(), getString(R.string.unknown_app), Toast.LENGTH_LONG)
+                    .show();
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -639,6 +676,10 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
      * only be assigned after initial layout is complete.
      */
     private void ensureLayoutTransitions() {
+        if (mShowAppImmediatePkg != null) {
+            // If we are skipping right to showing an app, we don't care about transitions.
+            return;
+        }
         // skip when already setup
         if (mChart.getLayoutTransition() != null) return;
 
@@ -1887,6 +1928,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         private static final String EXTRA_APP = "app";
 
         public static void show(DataUsageSummary parent, AppItem app, CharSequence label) {
+            show(parent, app, label, true);
+        }
+
+        public static void show(DataUsageSummary parent, AppItem app, CharSequence label,
+                boolean addToBack) {
             if (!parent.isAdded()) return;
 
             final Bundle args = new Bundle();
@@ -1897,7 +1943,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             fragment.setTargetFragment(parent, 0);
             final FragmentTransaction ft = parent.getFragmentManager().beginTransaction();
             ft.add(fragment, TAG_APP_DETAILS);
-            ft.addToBackStack(TAG_APP_DETAILS);
+            if (addToBack) {
+                ft.addToBackStack(TAG_APP_DETAILS);
+            }
             ft.setBreadCrumbTitle(
                     parent.getResources().getString(R.string.data_usage_app_summary_title));
             ft.commitAllowingStateLoss();

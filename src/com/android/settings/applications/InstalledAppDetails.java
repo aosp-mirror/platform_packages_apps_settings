@@ -19,23 +19,33 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.net.INetworkStatsService;
+import android.net.INetworkStatsSession;
+import android.net.NetworkTemplate;
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.provider.Settings;
+import android.text.format.DateUtils;
+import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,10 +54,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.settings.DataUsageSummary;
+import com.android.settings.DataUsageSummary.AppItem;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settings.net.ChartData;
+import com.android.settings.net.ChartDataLoader;
 import com.android.settings.notification.NotificationAppList;
 import com.android.settings.notification.NotificationAppList.AppRow;
 import com.android.settings.notification.NotificationAppList.Backend;
@@ -75,6 +89,8 @@ public class InstalledAppDetails extends AppInfoBase
     // Result code identifiers
     public static final int REQUEST_UNINSTALL = 0;
     private static final int SUB_INFO_FRAGMENT = 1;
+
+    private static final int LOADER_CHART_DATA = 2;
 
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
@@ -108,6 +124,9 @@ public class InstalledAppDetails extends AppInfoBase
     private boolean mDisableAfterUninstall;
     // Used for updating notification preference.
     private final Backend mBackend = new Backend();
+
+    private ChartData mChartData;
+    private INetworkStatsSession mStatsSession;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -207,6 +226,37 @@ public class InstalledAppDetails extends AppInfoBase
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details);
+
+        INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
+                ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
+        try {
+            mStatsSession = statsService.openSession();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppItem app = new AppItem(mAppEntry.info.uid);
+        app.addUid(mAppEntry.info.uid);
+        getLoaderManager().restartLoader(LOADER_CHART_DATA,
+                ChartDataLoader.buildArgs(NetworkTemplate.buildTemplateMobileWildcard(), app),
+                mDataCallbacks);
+    }
+
+    @Override
+    public void onPause() {
+        getLoaderManager().destroyLoader(LOADER_CHART_DATA);
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        TrafficStats.closeQuietly(mStatsSession);
+
+        super.onDestroy();
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -223,8 +273,6 @@ public class InstalledAppDetails extends AppInfoBase
         mLaunchPreference.setOnPreferenceClickListener(this);
         mDataPreference = findPreference(KEY_DATA);
         mDataPreference.setOnPreferenceClickListener(this);
-        // Data isn't ready, lets just pull it for now.
-        getPreferenceScreen().removePreference(mDataPreference);
     }
 
     private void handleHeader() {
@@ -384,6 +432,7 @@ public class InstalledAppDetails extends AppInfoBase
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
                 mBackend));
+        mDataPreference.setSummary(getDataSummary());
 
         if (!mInitialized) {
             // First time init: are we displaying an uninstalled app?
@@ -408,6 +457,18 @@ public class InstalledAppDetails extends AppInfoBase
         }
 
         return true;
+    }
+
+    private CharSequence getDataSummary() {
+        if (mChartData != null) {
+            long totalBytes = mChartData.detail.getTotalBytes();
+            Context context = getActivity();
+            return getString(R.string.data_summary_format,
+                    Formatter.formatFileSize(context, totalBytes),
+                    DateUtils.formatDateTime(context, mChartData.detail.getStart(),
+                            DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH));
+        }
+        return getString(R.string.computing_size);
     }
 
     @Override
@@ -579,7 +640,13 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mLaunchPreference) {
             startAppInfoFragment(AppLaunchSettings.class, mLaunchPreference.getTitle());
         } else if (preference == mDataPreference) {
-            // Not yet.
+            Bundle args = new Bundle();
+            args.putString(DataUsageSummary.EXTRA_SHOW_APP_IMMEDIATE_PKG,
+                    mAppEntry.info.packageName);
+
+            SettingsActivity sa = (SettingsActivity) getActivity();
+            sa.startPreferencePanel(DataUsageSummary.class.getName(), args, -1,
+                    getString(R.string.app_data_usage), this, SUB_INFO_FRAGMENT);
         } else {
             return false;
         }
@@ -626,6 +693,26 @@ public class InstalledAppDetails extends AppInfoBase
             return null;
         }
     }
+
+    private final LoaderCallbacks<ChartData> mDataCallbacks = new LoaderCallbacks<ChartData>() {
+
+        @Override
+        public Loader<ChartData> onCreateLoader(int id, Bundle args) {
+            return new ChartDataLoader(getActivity(), mStatsSession, args);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
+            mChartData = data;
+            mDataPreference.setSummary(getDataSummary());
+        }
+
+        @Override
+        public void onLoaderReset(Loader<ChartData> loader) {
+            mChartData = null;
+            mDataPreference.setSummary(getDataSummary());
+        }
+    };
 
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
         @Override
