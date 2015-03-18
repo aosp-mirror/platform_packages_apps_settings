@@ -42,7 +42,6 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListener {
@@ -168,9 +167,9 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
 
     private static boolean hasPreferredActivities(PackageManager pm, String packageName) {
         // Get list of preferred activities
-        List<ComponentName> prefActList = Collections.emptyList();
+        List<ComponentName> prefActList = new ArrayList<>();
         // Intent list cannot be null. so pass empty list
-        List<IntentFilter> intentList = Collections.emptyList();
+        List<IntentFilter> intentList = new ArrayList<>();
         pm.getPreferredActivities(intentList, prefActList, packageName);
         if (localLOGV) {
             Log.i(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
