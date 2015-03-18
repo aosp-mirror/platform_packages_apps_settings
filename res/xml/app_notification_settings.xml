@@ -23,7 +23,7 @@
             android:key="block"
             android:title="@string/app_notification_block_title"
             android:summary="@string/app_notification_block_summary"
-            android:disableDependentsState="true"
+            android:order="1"
             android:persistent="false" />
 
     <!-- Priority -->
@@ -31,7 +31,15 @@
             android:key="priority"
             android:title="@string/app_notification_priority_title"
             android:summary="@string/app_notification_priority_summary"
-            android:dependency="block"
+            android:order="2"
+            android:persistent="false" />
+
+    <!-- Peekable -->
+    <SwitchPreference
+            android:key="peekable"
+            android:title="@string/app_notification_peekable_title"
+            android:summary="@string/app_notification_peekable_summary"
+            android:order="3"
             android:persistent="false" />
 
     <!-- Sensitive -->
@@ -39,6 +47,7 @@
             android:key="sensitive"
             android:title="@string/app_notification_sensitive_title"
             android:summary="@string/app_notification_sensitive_summary"
+            android:order="4"
             android:persistent="false" />
 
 </PreferenceScreen>

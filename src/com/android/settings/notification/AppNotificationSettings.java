@@ -46,6 +46,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_BLOCK = "block";
     private static final String KEY_PRIORITY = "priority";
+    private static final String KEY_PEEKABLE = "peekable";
     private static final String KEY_SENSITIVE = "sensitive";
 
     static final String EXTRA_HAS_SETTINGS_INTENT = "has_settings_intent";
@@ -56,9 +57,11 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private Context mContext;
     private SwitchPreference mBlock;
     private SwitchPreference mPriority;
+    private SwitchPreference mPeekable;
     private SwitchPreference mSensitive;
     private AppRow mAppRow;
     private boolean mCreated;
+    private boolean mIsSystemPackage;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -104,18 +107,13 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             toastAndFinish();
             return;
         }
+        mIsSystemPackage = Utils.isSystemPackage(pm, info);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
         mBlock = (SwitchPreference) findPreference(KEY_BLOCK);
         mPriority = (SwitchPreference) findPreference(KEY_PRIORITY);
+        mPeekable = (SwitchPreference) findPreference(KEY_PEEKABLE);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
-
-        final boolean secure = new LockPatternUtils(getActivity()).isSecure();
-        final boolean enabled = getLockscreenNotificationsEnabled();
-        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
-        if (!secure || !enabled || !allowPrivate) {
-            getPreferenceScreen().removePreference(mSensitive);
-        }
 
         mAppRow = NotificationAppList.loadAppRow(pm, info.applicationInfo, mBackend);
         if (intent.hasExtra(EXTRA_HAS_SETTINGS_INTENT)) {
@@ -131,16 +129,20 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         }
 
         mBlock.setChecked(mAppRow.banned);
+        updateDependents(mAppRow.banned);
         mPriority.setChecked(mAppRow.priority);
-        if (mSensitive != null) {
-            mSensitive.setChecked(mAppRow.sensitive);
-        }
+        mPeekable.setChecked(mAppRow.peekable);
+        mSensitive.setChecked(mAppRow.sensitive);
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                final boolean block = (Boolean) newValue;
-                return mBackend.setNotificationsBanned(pkg, uid, block);
+                final boolean banned = (Boolean) newValue;
+                final boolean success =  mBackend.setNotificationsBanned(pkg, uid, banned);
+                if (success) {
+                    updateDependents(banned);
+                }
+                return success;
             }
         });
 
@@ -152,20 +154,42 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             }
         });
 
-        if (mSensitive != null) {
-            mSensitive.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    final boolean sensitive = (Boolean) newValue;
-                    return mBackend.setSensitive(pkg, uid, sensitive);
-                }
-            });
-        }
+        mPeekable.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean peekable = (Boolean) newValue;
+                return mBackend.setPeekable(pkg, uid, peekable);
+            }
+        });
 
-        // Users cannot block notifications from system/signature packages
-        if (Utils.isSystemPackage(pm, info)) {
-            getPreferenceScreen().removePreference(mBlock);
-            mPriority.setDependency(null); // don't have it depend on a preference that's gone
+        mSensitive.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean sensitive = (Boolean) newValue;
+                return mBackend.setSensitive(pkg, uid, sensitive);
+            }
+        });
+    }
+
+    private void updateDependents(boolean banned) {
+        final boolean lockscreenSecure = new LockPatternUtils(getActivity()).isSecure();
+        final boolean lockscreenNotificationsEnabled = getLockscreenNotificationsEnabled();
+        final boolean allowPrivate = getLockscreenAllowPrivateNotifications();
+
+        setVisible(mBlock, !mIsSystemPackage);
+        setVisible(mPriority, mIsSystemPackage || !banned);
+        setVisible(mPeekable, mIsSystemPackage || !banned);
+        setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
+                && lockscreenNotificationsEnabled && allowPrivate);
+    }
+
+    private void setVisible(Preference p, boolean visible) {
+        final boolean isVisible = getPreferenceScreen().findPreference(p.getKey()) != null;
+        if (isVisible == visible) return;
+        if (visible) {
+            getPreferenceScreen().addPreference(p);
+        } else {
+            getPreferenceScreen().removePreference(p);
         }
     }
 
