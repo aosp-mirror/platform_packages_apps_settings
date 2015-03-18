@@ -2403,15 +2403,29 @@
     <!-- APNs screen toast message to inform reset default APN settings is completed -->
     <string name="restore_default_apn_completed">Reset default APN settings completed.</string>
 
+    <!-- Reset Network -->
+    <!-- SD card & phone storage settings screen, setting option name under Backup & Restore heading -->
+    <string name="reset_network_title">Network settings reset</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
+    <string name="reset_network_desc">This will reset all settings related to networking to the factory defaults, including:\n\n<li>Wifi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
+    <string name="reset_network_button_text">Reset settings</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button -->
+    <string name="reset_network_final_desc">Reset all network settings? You can\'t reverse this action!</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Reset settings button -->
+    <string name="reset_network_final_button_text">Reset settings</string>
+    <!-- Explanation of drawing unlock pattern to reset settings -->
+    <string name="reset_network_gesture_explanation">You need to draw your unlock pattern to confirm a network settings reset.</string>
+    <!-- Reset settings confirmation screen title [CHAR LIMIT=30] -->
+    <string name="reset_network_confirm_title">Reset?</string>
+    <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
+    <string name="reset_network_complete_toast">Network settings reset</string>
+
     <!-- Master Clear -->
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading [CHAR LIMIT=30] -->
     <string name="device_reset_title">Reset device</string>
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
-    <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
-    <string name="master_clear_summary" product="tablet">Erases all data on tablet</string>
-    <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
-    <string name="master_clear_summary" product="default">Erases all data on phone</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -4370,8 +4384,6 @@
     <string name="backup_data_summary">Back up app data, Wi\u2011Fi passwords, and other settings to Google servers</string>
     <!-- Configure backup account options menu title [CHAR LIMIT=25]-->
     <string name="backup_configure_account_title">Backup account</string>
-    <!-- Default summary text of the "Configure backup account" setting [CHAR LIMIT=80]-->
-    <string name="backup_configure_account_default_summary">No account is currently storing backed up data</string>
     <!-- Auto-restore menu title [CHAR LIMIT=30] -->
     <string name="include_app_data_title">Include app data</string>
     <!-- Auto-restore menu title -->
@@ -4380,8 +4392,6 @@
     <string name="auto_restore_summary">When reinstalling an app, restore backed up settings and data</string>
     <!-- Title of the preference informing the user about the backup service being inactive [CHAR LIMIT=50]-->
     <string name="backup_inactive_title">Backup service is inactive.</string>
-    <!-- Summary text of the preference informing the user about the backup service being inactive, explaining that this is likely set by device policy [CHAR LIMIT=150]-->
-    <string name="backup_inactive_summary">This is set by your device policy.</string>
 
     <!-- Local (desktop) backup password menu title [CHAR LIMIT=25] -->
     <string name="local_backup_password_title">Desktop backup password</string>

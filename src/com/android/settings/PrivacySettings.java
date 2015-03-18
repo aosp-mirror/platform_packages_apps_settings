@@ -43,7 +43,10 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.Indexable.SearchIndexProvider;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Gesture lock pattern settings.
@@ -53,12 +56,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
 
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
-    private static final String BACKUP_CATEGORY = "backup_category";
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
     private static final String CONFIGURE_ACCOUNT = "configure_account";
     private static final String BACKUP_INACTIVE = "backup_inactive";
-    private static final String PERSONAL_DATA_CATEGORY = "personal_data_category";
+    private static final String FACTORY_RESET = "factory_reset";
     private static final String TAG = "PrivacySettings";
     private IBackupManager mBackupManager;
     private SwitchPreference mBackup;
@@ -92,7 +94,8 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
 
         mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
 
-        ArrayList<String> keysToRemove = getNonVisibleKeys(getActivity());
+        Set<String> keysToRemove = new HashSet<>();
+        getNonVisibleKeys(getActivity(), keysToRemove);
         final int screenPreferenceCount = screen.getPreferenceCount();
         for (int i = screenPreferenceCount - 1; i >= 0; --i) {
             Preference preference = screen.getPreference(i);
@@ -100,16 +103,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
                 screen.removePreference(preference);
             }
         }
-        PreferenceCategory backupCategory = (PreferenceCategory) findPreference(BACKUP_CATEGORY);
-        if (backupCategory != null) {
-            final int backupCategoryPreferenceCount = backupCategory.getPreferenceCount();
-            for (int i = backupCategoryPreferenceCount - 1; i >= 0; --i) {
-                Preference preference = backupCategory.getPreference(i);
-                if (keysToRemove.contains(preference.getKey())) {
-                    backupCategory.removePreference(preference);
-                }
-            }
-        }
+
         updateToggles();
     }
 
@@ -300,12 +294,13 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
 
         @Override
         public List<String> getNonIndexableKeys(Context context) {
-            return getNonVisibleKeys(context);
+            final List<String> nonVisibleKeys = new ArrayList<>();
+            getNonVisibleKeys(context, nonVisibleKeys);
+            return nonVisibleKeys;
         }
     }
 
-    private static ArrayList<String> getNonVisibleKeys(Context context) {
-        final ArrayList<String> nonVisibleKeys = new ArrayList<String>();
+    private static void getNonVisibleKeys(Context context, Collection<String> nonVisibleKeys) {
         final IBackupManager backupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         boolean isServiceActive = false;
@@ -315,22 +310,19 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
             Log.w(TAG, "Failed querying backup manager service activity status. " +
                     "Assuming it is inactive.");
         }
-        if (isServiceActive) {
+        boolean vendorSpecific = context.getPackageManager().
+                resolveContentProvider(GSETTINGS_PROVIDER, 0) == null;
+        if (vendorSpecific || isServiceActive) {
             nonVisibleKeys.add(BACKUP_INACTIVE);
-        } else {
+        }
+        if (vendorSpecific || !isServiceActive) {
+            nonVisibleKeys.add(BACKUP_DATA);
             nonVisibleKeys.add(AUTO_RESTORE);
             nonVisibleKeys.add(CONFIGURE_ACCOUNT);
-            nonVisibleKeys.add(BACKUP_DATA);
         }
         if (UserManager.get(context).hasUserRestriction(
                 UserManager.DISALLOW_FACTORY_RESET)) {
-            nonVisibleKeys.add(PERSONAL_DATA_CATEGORY);
+            nonVisibleKeys.add(FACTORY_RESET);
         }
-        // Vendor specific
-        if (context.getPackageManager().
-                resolveContentProvider(GSETTINGS_PROVIDER, 0) == null) {
-            nonVisibleKeys.add(BACKUP_CATEGORY);
-        }
-        return nonVisibleKeys;
     }
 }
