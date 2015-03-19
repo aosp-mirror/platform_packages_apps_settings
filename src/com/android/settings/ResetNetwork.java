@@ -140,7 +140,7 @@ public class ResetNetwork extends Fragment {
         mSubscriptionSpinner = (Spinner) mContentView.findViewById(R.id.reset_network_subscription);
 
         mSubscriptions = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
-        if (mSubscriptions.size() > 0) {
+        if (mSubscriptions != null && mSubscriptions.size() > 0) {
             // Get the default subscription in the order of data, voice, sms, first up.
             int defaultSubscription = SubscriptionManager.getDefaultDataSubId();
             if (!SubscriptionManager.isUsableSubIdValue(defaultSubscription)) {
