@@ -85,6 +85,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     // Menu identifiers
     public static final int UNINSTALL_ALL_USERS_MENU = 1;
+    public static final int UNINSTALL_UPDATES = 2;
 
     // Result code identifiers
     public static final int REQUEST_UNINSTALL = 0;
@@ -110,8 +111,6 @@ public class InstalledAppDetails extends AppInfoBase
     private boolean mShowUninstalled;
     private HeaderPreference mHeader;
     private Button mUninstallButton;
-    private View mMoreControlButtons;
-    private Button mSpecialDisableButton;
     private boolean mUpdatedSysApp = false;
     private TextView mAppVersion;
     private Button mForceStopButton;
@@ -149,34 +148,18 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void initUninstallButtons() {
-        mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         boolean enabled = true;
-        if (mUpdatedSysApp) {
-            mUninstallButton.setText(R.string.app_factory_reset);
-            boolean showSpecialDisable = false;
-            if (isBundled) {
-                showSpecialDisable = handleDisableable(mSpecialDisableButton);
-                mSpecialDisableButton.setOnClickListener(this);
-            }
-            if (mAppControlRestricted) {
-                showSpecialDisable = false;
-            }
-            mMoreControlButtons.setVisibility(showSpecialDisable ? View.VISIBLE : View.GONE);
+        if (isBundled) {
+            enabled = handleDisableable(mUninstallButton);
         } else {
-            mMoreControlButtons.setVisibility(View.GONE);
-            if (isBundled) {
-                enabled = handleDisableable(mUninstallButton);
-            } else if ((mPackageInfo.applicationInfo.flags
-                    & ApplicationInfo.FLAG_INSTALLED) == 0
+            if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
                     && mUserManager.getUsers().size() >= 2) {
                 // When we have multiple users, there is a separate menu
                 // to uninstall for all users.
-                mUninstallButton.setText(R.string.uninstall_text);
                 enabled = false;
-            } else {
-                mUninstallButton.setText(R.string.uninstall_text);
             }
+            mUninstallButton.setText(R.string.uninstall_text);
         }
         // If this is a device admin, it can't be uninstalled or disabled.
         // We do this here so the text of the button is still set correctly.
@@ -284,16 +267,12 @@ public class InstalledAppDetails extends AppInfoBase
         mForceStopButton.setText(R.string.force_stop);
         mUninstallButton = (Button) btnPanel.findViewById(R.id.left_button);
         mForceStopButton.setEnabled(false);
-
-        // Get More Control button panel
-        mMoreControlButtons = mHeader.findViewById(R.id.more_control_buttons_panel);
-        mMoreControlButtons.findViewById(R.id.right_button).setVisibility(View.INVISIBLE);
-        mSpecialDisableButton = (Button) mMoreControlButtons.findViewById(R.id.left_button);
-        mMoreControlButtons.setVisibility(View.GONE);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(0, UNINSTALL_UPDATES, 0, R.string.app_factory_reset)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(0, UNINSTALL_ALL_USERS_MENU, 1, R.string.uninstall_all_users_text)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
     }
@@ -315,14 +294,19 @@ public class InstalledAppDetails extends AppInfoBase
             showIt = false;
         }
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
+        mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
+        menu.findItem(UNINSTALL_UPDATES).setVisible(mUpdatedSysApp && !mAppControlRestricted);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int menuId = item.getItemId();
-        if (menuId == UNINSTALL_ALL_USERS_MENU) {
-            uninstallPkg(mAppEntry.info.packageName, true, false);
-            return true;
+        switch (item.getItemId()) {
+            case UNINSTALL_ALL_USERS_MENU:
+                uninstallPkg(mAppEntry.info.packageName, true, false);
+                return true;
+            case UNINSTALL_UPDATES:
+                showDialogInner(DLG_FACTORY_RESET, 0);
+                return true;
         }
         return false;
     }
@@ -604,25 +588,23 @@ public class InstalledAppDetails extends AppInfoBase
     public void onClick(View v) {
         String packageName = mAppEntry.info.packageName;
         if(v == mUninstallButton) {
-            if (mUpdatedSysApp) {
-                showDialogInner(DLG_FACTORY_RESET, 0);
-            } else {
-                if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                    if (mAppEntry.info.enabled) {
-                        showDialogInner(DLG_DISABLE, 0);
+            if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                if (mAppEntry.info.enabled) {
+                    if (mUpdatedSysApp) {
+                        showDialogInner(DLG_SPECIAL_DISABLE, 0);
                     } else {
-                        new DisableChanger(this, mAppEntry.info,
-                                PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
-                        .execute((Object)null);
+                        showDialogInner(DLG_DISABLE, 0);
                     }
-                } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                    uninstallPkg(packageName, true, false);
                 } else {
-                    uninstallPkg(packageName, false, false);
+                    new DisableChanger(this, mAppEntry.info,
+                            PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
+                                    .execute((Object) null);
                 }
+            } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+                uninstallPkg(packageName, true, false);
+            } else {
+                uninstallPkg(packageName, false, false);
             }
-        } else if(v == mSpecialDisableButton) {
-            showDialogInner(DLG_SPECIAL_DISABLE, 0);
         } else if (v == mForceStopButton) {
             showDialogInner(DLG_FORCE_STOP, 0);
             //forceStopPackage(mAppInfo.packageName);
