@@ -100,7 +100,7 @@ public class ResetNetwork extends Fragment {
 
     private void showFinalConfirmation() {
         Bundle args = new Bundle();
-        if (mSubscriptions.size() > 0) {
+        if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
