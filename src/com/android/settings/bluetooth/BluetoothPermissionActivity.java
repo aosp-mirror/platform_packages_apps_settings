@@ -99,6 +99,8 @@ public class BluetoothPermissionActivity extends AlertActivity implements
             showDialog(getString(R.string.bluetooth_phonebook_request), mRequestType);
         } else if (mRequestType == BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS) {
             showDialog(getString(R.string.bluetooth_map_request), mRequestType);
+        } else if (mRequestType == BluetoothDevice.REQUEST_TYPE_SIM_ACCESS) {
+            showDialog(getString(R.string.bluetooth_sap_request), mRequestType);
         }
         else {
             Log.e(TAG, "Error: bad request type: " + mRequestType);
@@ -126,6 +128,9 @@ public class BluetoothPermissionActivity extends AlertActivity implements
             break;
         case BluetoothDevice.REQUEST_TYPE_MESSAGE_ACCESS:
             p.mView = createMapDialogView();
+            break;
+        case BluetoothDevice.REQUEST_TYPE_SIM_ACCESS:
+            p.mView = createSapDialogView();
             break;
         }
         p.mPositiveButtonText = getString(R.string.yes);
@@ -177,6 +182,15 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_map_acceptance_dialog_text,
+                mRemoteName, mRemoteName));
+        return mView;
+    }
+
+    private View createSapDialogView() {
+        String mRemoteName = createRemoteName();
+        mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
+        messageView = (TextView)mView.findViewById(R.id.message);
+        messageView.setText(getString(R.string.bluetooth_sap_acceptance_dialog_text,
                 mRemoteName, mRemoteName));
         return mView;
     }

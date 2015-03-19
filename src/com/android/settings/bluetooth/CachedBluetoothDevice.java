@@ -66,10 +66,6 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
     private boolean mVisible;
 
-    private int mPhonebookPermissionChoice;
-
-    private int mMessagePermissionChoice;
-
     private int mMessageRejectionCount;
 
     private final Collection<Callback> mCallbacks = new ArrayList<Callback>();
@@ -553,6 +549,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             mConnectAfterPairing = false;  // cancel auto-connect
             setPhonebookPermissionChoice(ACCESS_UNKNOWN);
             setMessagePermissionChoice(ACCESS_UNKNOWN);
+            setSimPermissionChoice(ACCESS_UNKNOWN);
             mMessageRejectionCount = 0;
             saveMessageRejectionCount();
         }
@@ -707,6 +704,26 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(mDevice.getAddress());
         editor.commit();
+    }
+
+    int getSimPermissionChoice() {
+        int permission = mDevice.getSimAccessPermission();
+        if (permission == BluetoothDevice.ACCESS_ALLOWED) {
+            return ACCESS_ALLOWED;
+        } else if (permission == BluetoothDevice.ACCESS_REJECTED) {
+            return ACCESS_REJECTED;
+        }
+        return ACCESS_UNKNOWN;
+    }
+
+    void setSimPermissionChoice(int permissionChoice) {
+        int permission = BluetoothDevice.ACCESS_UNKNOWN;
+        if (permissionChoice == ACCESS_ALLOWED) {
+            permission = BluetoothDevice.ACCESS_ALLOWED;
+        } else if (permissionChoice == ACCESS_REJECTED) {
+            permission = BluetoothDevice.ACCESS_REJECTED;
+        }
+        mDevice.setSimAccessPermission(permission);
     }
 
     int getMessagePermissionChoice() {

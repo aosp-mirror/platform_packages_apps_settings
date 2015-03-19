@@ -389,6 +389,11 @@
     <!-- Bluetooth message permission Alert Activity text [CHAR LIMIT=none] -->
     <string name="bluetooth_map_acceptance_dialog_text">%1$s wants to access your messages. Give access to %2$s?</string>
 
+    <!-- Activity label of BluetoothMessagePermissionActivity, also used as Strings in the permission dialog [CHAR LIMIT=none] -->
+    <string name="bluetooth_sap_request">"SIM Access request"</string>
+
+    <!-- Bluetooth message permission Alert Activity text [CHAR LIMIT=none] -->
+    <string name="bluetooth_sap_acceptance_dialog_text">%1$s wants to access your SIM card. Give access to %2$s?</string>
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
     <!-- The title of the activity to pick a time zone. -->
@@ -1257,6 +1262,8 @@
     <string name="bluetooth_profile_pan_nap">Internet connection sharing</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the map profile. -->
     <string name="bluetooth_profile_map">Message Access</string>
+    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the sap profile (sharing SIM card). -->
+    <string name="bluetooth_profile_sap">SIM Access</string>
 
     <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
@@ -1292,6 +1299,8 @@
     <string name="bluetooth_opp_profile_summary_connected">Connected to file transfer server</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference when map is connected. -->
     <string name="bluetooth_map_profile_summary_connected">Connected to map</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the sap checkbox preference when sap is connected. -->
+    <string name="bluetooth_sap_profile_summary_connected">Connected to sap</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is not connected. -->
     <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
@@ -1317,6 +1326,8 @@
     <string name="bluetooth_pan_profile_summary_use_for">Use for Internet access</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the map checkbox preference that describes how checking it will set the map profile as preferred. -->
     <string name="bluetooth_map_profile_summary_use_for">Use for map</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the sap checkbox preference that describes how checking it will set the sap profile as preferred. -->
+    <string name="bluetooth_sap_profile_summary_use_for">Use for sap</string>
 
     <!-- Bluetooth settings.  Dock Setting Title -->
     <string name="bluetooth_dock_settings">Dock Settings</string>
