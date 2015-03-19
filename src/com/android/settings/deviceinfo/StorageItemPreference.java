@@ -39,7 +39,7 @@ public class StorageItemPreference extends Preference {
         super(context);
 
         if (colorRes != 0) {
-            this.color = context.getResources().getColor(colorRes);
+            this.color = context.getColor(colorRes);
 
             final Resources res = context.getResources();
             final int width = res.getDimensionPixelSize(R.dimen.device_memory_usage_button_width);

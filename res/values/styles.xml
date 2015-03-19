@@ -335,9 +335,8 @@
     <style name="TextAppearance.Switch" parent="TextAppearance.Medium">
     </style>
 
-    <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Small">
-        <item name="android:textColor">@color/theme_accent</item>
-        <item name="android:textStyle">bold</item>
+    <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Body2">
+        <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Medium">
