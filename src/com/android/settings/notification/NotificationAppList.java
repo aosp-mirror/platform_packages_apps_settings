@@ -364,6 +364,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
         public Intent settingsIntent;
         public boolean banned;
         public boolean priority;
+        public boolean peekable;
         public boolean sensitive;
         public boolean first;  // first app in section
     }
@@ -391,6 +392,7 @@ public class NotificationAppList extends PinnedHeaderListFragment
         row.icon = app.loadIcon(pm);
         row.banned = backend.getNotificationsBanned(row.pkg, row.uid);
         row.priority = backend.getHighPriority(row.pkg, row.uid);
+        row.peekable = backend.getPeekable(row.pkg, row.uid);
         row.sensitive = backend.getSensitive(row.pkg, row.uid);
         return row;
     }
@@ -575,6 +577,25 @@ public class NotificationAppList extends PinnedHeaderListFragment
             } catch (Exception e) {
                 Log.w(TAG, "Error calling NoMan", e);
                 return false;
+            }
+        }
+
+        public boolean getPeekable(String pkg, int uid) {
+            try {
+                return sINM.getPackagePeekable(pkg, uid);
+            } catch (Exception e) {
+                Log.w(TAG, "Error calling NoMan", e);
+                return false;
+            }
+        }
+
+        public boolean setPeekable(String pkg, int uid, boolean peekable) {
+            try {
+                sINM.setPackagePeekable(pkg, uid, peekable);
+                return true;
+            } catch (Exception e) {
+               Log.w(TAG, "Error calling NoMan", e);
+               return false;
             }
         }
 
