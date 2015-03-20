@@ -384,15 +384,6 @@ public class FingerprintEnroll extends SettingsActivity {
             }
         };
 
-        private boolean runConfirmDeviceCredentials(int request) {
-            if (DEBUG) Log.v(TAG, "runKeyguardConfirmation(" + request + ")");
-            Resources res = getResources();
-            return new ChooseLockSettingsHelper(getActivity(), this)
-                    .launchConfirmationActivity(request,
-                            res.getText(R.string.master_clear_gesture_prompt),
-                            res.getText(R.string.master_clear_gesture_explanation));
-        }
-
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
