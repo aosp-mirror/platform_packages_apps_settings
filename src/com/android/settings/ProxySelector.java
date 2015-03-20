@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
 import android.app.Activity;
@@ -42,7 +43,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ProxySelector extends Fragment implements DialogCreatable {
+public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";
 
     EditText    mHostnameField;
@@ -270,4 +271,9 @@ public class ProxySelector extends Fragment implements DialogCreatable {
                 }
             }
         };
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.PROXY_SELECTOR;
+    }
 }

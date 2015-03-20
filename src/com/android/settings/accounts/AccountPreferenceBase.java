@@ -41,7 +41,7 @@ import com.android.settings.Utils;
 import java.util.ArrayList;
 import java.util.Date;
 
-class AccountPreferenceBase extends SettingsPreferenceFragment
+abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
 
     protected static final String TAG = "AccountSettings";

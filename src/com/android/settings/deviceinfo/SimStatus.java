@@ -36,9 +36,11 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.DefaultPhoneNotifier;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
+import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -65,7 +67,7 @@ import java.util.List;
  * # Signal Strength
  *
  */
-public class SimStatus extends PreferenceActivity {
+public class SimStatus extends InstrumentedPreferenceActivity {
     private static final String TAG = "SimStatus";
 
     private static final String KEY_DATA_STATE = "data_state";
@@ -167,6 +169,11 @@ public class SimStatus extends PreferenceActivity {
         }
 
         updatePhoneInfos();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DEVICEINFO_SIM_STATUS;
     }
 
     @Override

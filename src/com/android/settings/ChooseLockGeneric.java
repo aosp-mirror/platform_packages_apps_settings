@@ -42,6 +42,7 @@ import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.List;
@@ -111,6 +112,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
             }
         };
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.CHOOSE_LOCK_GENERIC;
+        }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

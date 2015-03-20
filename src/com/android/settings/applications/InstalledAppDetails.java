@@ -56,6 +56,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DataUsageSummary;
 import com.android.settings.DataUsageSummary.AppItem;
 import com.android.settings.R;
@@ -220,6 +221,11 @@ public class InstalledAppDetails extends AppInfoBase
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_INSTALLED_APP_DETAILS;
     }
 
     @Override

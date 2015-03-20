@@ -46,6 +46,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -112,6 +113,11 @@ public class AccountSettings extends SettingsPreferenceFragment
          * The {@link UserInfo} of the profile.
          */
         public UserInfo userInfo;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ACCOUNT;
     }
 
     @Override

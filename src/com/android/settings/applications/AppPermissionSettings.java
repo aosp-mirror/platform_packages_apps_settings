@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.ISms;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settings.R;
@@ -181,6 +182,11 @@ public class AppPermissionSettings extends AppInfoWithHeader {
         int count = asp.getPermissionCount();
         return context.getResources().getQuantityString(R.plurals.permissions_summary,
                 count, count);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_APP_PERMISSION;
     }
 
     private static class PremiumSmsSelectionListener implements AdapterView.OnItemSelectedListener {

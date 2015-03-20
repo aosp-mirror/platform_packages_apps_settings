@@ -37,6 +37,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
@@ -485,6 +486,11 @@ public class AppStorageSettings extends AppInfoWithHeader
             return context.getText(R.string.invalid_size_value);
         }
         return Formatter.formatFileSize(context, size);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_APP_STORAGE;
     }
 
     class ClearCacheObserver extends IPackageDataObserver.Stub {

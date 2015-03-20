@@ -44,6 +44,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -120,6 +121,11 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     public BluetoothSettings() {
         super(DISALLOW_CONFIG_BLUETOOTH);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.BLUETOOTH;
     }
 
     @Override

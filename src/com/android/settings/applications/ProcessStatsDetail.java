@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.app.ActivityManager;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +31,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -42,7 +43,7 @@ import java.util.HashMap;
 
 import static com.android.settings.Utils.prepareCustomPreferencesList;
 
-public class ProcessStatsDetail extends Fragment implements Button.OnClickListener {
+public class ProcessStatsDetail extends InstrumentedFragment implements Button.OnClickListener {
     private static final String TAG = "ProcessStatsDetail";
 
     public static final int ACTION_FORCE_STOP = 1;
@@ -95,6 +96,11 @@ public class ProcessStatsDetail extends Fragment implements Button.OnClickListen
         mRootView = view;
         createDetails();
         return view;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_PROCESS_STATS_DETAIL;
     }
 
     @Override

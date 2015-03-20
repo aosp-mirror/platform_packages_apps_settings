@@ -16,7 +16,6 @@
 
 package com.android.settings.dashboard;
 
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +36,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -44,7 +45,7 @@ import com.android.settings.search.Index;
 
 import java.util.HashMap;
 
-public class SearchResultsSummary extends Fragment {
+public class SearchResultsSummary extends InstrumentedFragment {
 
     private static final String LOG_TAG = "SearchResultsSummary";
 
@@ -242,6 +243,11 @@ public class SearchResultsSummary extends Fragment {
                 null, false);
 
         return view;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DASHBOARD_SEARCH_RESULTS;
     }
 
     @Override

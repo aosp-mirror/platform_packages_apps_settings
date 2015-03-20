@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.google.android.collect.Lists;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
@@ -101,7 +102,7 @@ public class ChooseLockPattern extends SettingsActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public static class ChooseLockPatternFragment extends Fragment
+    public static class ChooseLockPatternFragment extends InstrumentedFragment
             implements View.OnClickListener {
 
         public static final int CONFIRM_EXISTING_REQUEST = 55;
@@ -204,6 +205,11 @@ public class ChooseLockPattern extends SettingsActivity {
                     mFooterRightButton.setEnabled(false);
                 }
          };
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.CHOOSE_LOCK_PATTERN;
+        }
 
 
         /**

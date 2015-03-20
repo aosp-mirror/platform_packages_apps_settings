@@ -50,6 +50,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
@@ -89,6 +90,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     private String mSelectedKey;
 
     private boolean mUnavailable;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.VPN;
+    }
 
     @Override
     public void onCreate(Bundle savedState) {

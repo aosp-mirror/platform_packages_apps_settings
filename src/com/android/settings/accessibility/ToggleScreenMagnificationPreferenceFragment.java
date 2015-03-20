@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.provider.Settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
@@ -41,5 +42,10 @@ public class ToggleScreenMagnificationPreferenceFragment
                 return false;
             }
         });
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
     }
 }

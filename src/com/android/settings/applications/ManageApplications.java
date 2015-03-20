@@ -52,6 +52,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.android.internal.content.PackageHelper;
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
@@ -113,8 +115,8 @@ final class CanBeOnSdCardChecker {
  * can be launched through Settings or via the ACTION_MANAGE_PACKAGE_STORAGE
  * intent.
  */
-public class ManageApplications extends Fragment implements OnItemClickListener,
-        OnItemSelectedListener {
+public class ManageApplications extends InstrumentedFragment
+        implements OnItemClickListener, OnItemSelectedListener {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -317,6 +319,20 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
             return FILTER_APPS_DOWNLOADED_AND_LAUNCHER;
         }
         return FILTER_APPS_ALL;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        switch (mListType) {
+            case LIST_TYPE_MAIN:
+                return MetricsLogger.MANAGE_APPLICATIONS;
+            case LIST_TYPE_ALL:
+                return MetricsLogger.MANAGE_APPLICATIONS_ALL;
+            case LIST_TYPE_NOTIFICATION:
+                return MetricsLogger.MANAGE_APPLICATIONS_NOTIFICATIONS;
+            default:
+                return MetricsLogger.VIEW_UNKNOWN;
+        }
     }
 
     @Override

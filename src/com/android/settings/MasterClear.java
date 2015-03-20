@@ -41,6 +41,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.android.internal.logging.MetricsLogger;
 
 import java.util.List;
 
@@ -54,7 +55,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class MasterClear extends Fragment {
+public class MasterClear extends InstrumentedFragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
@@ -269,5 +270,10 @@ public class MasterClear extends Fragment {
 
         establishInitialState();
         return mContentView;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.MASTER_CLEAR;
     }
 }

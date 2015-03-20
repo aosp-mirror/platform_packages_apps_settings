@@ -43,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 
 /**
@@ -81,7 +82,8 @@ public class FingerprintEnroll extends SettingsActivity {
         setTitle(msg);
     }
 
-    public static class FingerprintEnrollFragment extends Fragment implements View.OnClickListener {
+    public static class FingerprintEnrollFragment extends InstrumentedFragment
+            implements View.OnClickListener {
         private static final String EXTRA_PROGRESS = "progress";
         private static final String EXTRA_STAGE = "stage";
         private static final int PROGRESS_BAR_MAX = 10000;
@@ -170,6 +172,11 @@ public class FingerprintEnroll extends SettingsActivity {
             R.id.fingerprint_enroll_button_next
         };
         private static final boolean ALWAYS_SHOW_FIND_SCREEN = true;
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.FINGERPRINT_ENROLL;
+        }
 
         private enum Stage {
             EnrollingOnboard(R.string.security_settings_fingerprint_enroll_onboard_title,

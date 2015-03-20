@@ -39,6 +39,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
@@ -58,7 +59,7 @@ import java.util.List;
  *
  * This is the confirmation screen.
  */
-public class ResetNetworkConfirm extends Fragment {
+public class ResetNetworkConfirm extends InstrumentedFragment {
 
     private View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -194,5 +195,10 @@ public class ResetNetworkConfirm extends Fragment {
             mSubId = args.getInt(PhoneConstants.SUBSCRIPTION_KEY,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.RESET_NETWORK_CONFIRM;
     }
 }

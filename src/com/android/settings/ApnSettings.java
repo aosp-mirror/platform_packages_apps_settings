@@ -47,6 +47,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import android.telephony.TelephonyManager;
@@ -122,6 +123,11 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         } else {
             return PhoneConstants.DataState.DISCONNECTED;
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APN;
     }
 
     @Override

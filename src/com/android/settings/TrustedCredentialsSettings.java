@@ -51,6 +51,7 @@ import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.ParcelableString;
 
 import java.security.cert.CertificateEncodingException;
@@ -60,13 +61,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
 
-public class TrustedCredentialsSettings extends Fragment {
+public class TrustedCredentialsSettings extends InstrumentedFragment {
 
     private static final String TAG = "TrustedCredentialsSettings";
 
     private UserManager mUserManager;
 
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.TRUSTED_CREDENTIALS;
+    }
 
     private enum Tab {
         SYSTEM("system",

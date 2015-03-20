@@ -19,6 +19,7 @@ package com.android.settings.location;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 
 /**
@@ -40,6 +41,11 @@ public class LocationMode extends LocationSettingsBase
     private RadioButtonPreference mBatterySaving;
     private static final String KEY_SENSORS_ONLY = "sensors_only";
     private RadioButtonPreference mSensorsOnly;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.LOCATION_MODE;
+    }
 
     @Override
     public void onResume() {

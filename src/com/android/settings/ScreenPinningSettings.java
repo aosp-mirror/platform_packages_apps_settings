@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -51,6 +52,11 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private SwitchBar mSwitchBar;
     private SwitchPreference mUseScreenLock;
     private LockPatternUtils mLockPatternUtils;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.SCREEN_PINNING;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

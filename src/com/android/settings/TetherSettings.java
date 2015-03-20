@@ -44,6 +44,7 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.wifi.WifiApDialog;
 import com.android.settings.wifi.WifiApEnabler;
 import com.android.settingslib.TetherUtil;
@@ -105,6 +106,11 @@ public class TetherSettings extends SettingsPreferenceFragment
     private static final int PROVISION_REQUEST = 0;
 
     private boolean mUnavailable;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.TETHER;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

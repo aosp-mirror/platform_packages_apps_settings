@@ -40,6 +40,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.Indexable;
 
 import java.util.List;
@@ -146,6 +147,11 @@ public class FingerprintSettings extends SettingsActivity {
                 }
             };
         };
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.FINGERPRINT;
+        }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

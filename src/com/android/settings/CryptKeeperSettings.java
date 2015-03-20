@@ -34,8 +34,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.android.internal.logging.MetricsLogger;
 
-public class CryptKeeperSettings extends Fragment {
+public class CryptKeeperSettings extends InstrumentedFragment {
     private static final String TAG = "CryptKeeper";
 
     private static final int KEYGUARD_REQUEST = 55;
@@ -108,6 +109,11 @@ public class CryptKeeperSettings extends Fragment {
         mBatteryWarning = mContentView.findViewById(R.id.warning_low_charge);
 
         return mContentView;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.CRYPT_KEEPER;
     }
 
     @Override

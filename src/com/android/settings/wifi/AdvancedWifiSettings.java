@@ -42,6 +42,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AppListSwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -79,6 +80,11 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
             }
         }
     };
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.WIFI_ADVANCED;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

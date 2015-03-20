@@ -30,6 +30,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -67,6 +68,11 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
 
     private AlertDialog mDisconnectDialog;
     private boolean mProfileGroupIsRemoved;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.BLUETOOTH_DEVICE_PROFILES;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

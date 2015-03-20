@@ -41,6 +41,8 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+import com.android.internal.logging.MetricsLogger;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,6 +75,11 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private SwitchPreference mAutoTimeZonePref;
     private Preference mTimeZone;
     private Preference mDatePref;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DATE_TIME;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

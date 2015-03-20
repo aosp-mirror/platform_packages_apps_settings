@@ -34,12 +34,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
 import java.util.List;
 
-public class DashboardSummary extends Fragment {
+public class DashboardSummary extends InstrumentedFragment {
     private static final String LOG_TAG = "DashboardSummary";
 
     private LayoutInflater mLayoutInflater;
@@ -65,6 +68,11 @@ public class DashboardSummary extends Fragment {
         }
     }
     private HomePackageReceiver mHomePackageReceiver = new HomePackageReceiver();
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DASHBOARD_SUMMARY;
+    }
 
     @Override
     public void onResume() {

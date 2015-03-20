@@ -37,6 +37,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import java.util.ArrayList;
@@ -68,6 +69,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
 
     private static final int DIALOG_ERASE_BACKUP = 2;
     private int mDialogType;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.PRIVACY;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

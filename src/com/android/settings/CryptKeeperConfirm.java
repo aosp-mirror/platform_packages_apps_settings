@@ -33,13 +33,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.Locale;
 
-public class CryptKeeperConfirm extends Fragment {
+public class CryptKeeperConfirm extends InstrumentedFragment {
 
     private static final String TAG = "CryptKeeperConfirm";
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.CRYPT_KEEPER_CONFIRM;
+    }
 
     public static class Blank extends Activity {
         private Handler mHandler = new Handler();

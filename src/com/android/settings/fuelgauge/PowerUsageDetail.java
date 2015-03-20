@@ -47,10 +47,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.FastPrintWriter;
 import com.android.settings.DisplaySettings;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -64,7 +66,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-public class PowerUsageDetail extends Fragment implements Button.OnClickListener {
+public class PowerUsageDetail extends InstrumentedFragment implements Button.OnClickListener {
 
     // Note: Must match the sequence of the DrainType
     private static int[] sDrainTypeDesciptions = new int[] {
@@ -342,6 +344,11 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
         mRootView = view;
         createDetails();
         return view;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FUELGAUGE_POWER_USAGE_DETAIL;
     }
 
     @Override

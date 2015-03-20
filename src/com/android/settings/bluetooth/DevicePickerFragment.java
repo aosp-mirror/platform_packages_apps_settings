@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
@@ -81,6 +82,11 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.BLUETOOTH_DEVICE_PICKER;
     }
 
     @Override

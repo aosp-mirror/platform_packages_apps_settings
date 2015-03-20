@@ -41,6 +41,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
@@ -124,6 +125,11 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
             mResetDialog.dismiss();
             mResetDialog = null;
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_ADVANCED;
     }
 
     @Override

@@ -34,7 +34,9 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.CharSequences;
+import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -54,7 +56,7 @@ import static android.content.Intent.EXTRA_USER;
  * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
  * which the action needs to be performed is different to the one the Settings App will run in.
  */
-public class ChooseAccountActivity extends PreferenceActivity {
+public class ChooseAccountActivity extends InstrumentedPreferenceActivity {
 
     private static final String TAG = "ChooseAccountActivity";
     private String[] mAuthorities;
@@ -86,6 +88,11 @@ public class ChooseAccountActivity extends PreferenceActivity {
             }
             return CharSequences.compareToIgnoreCase(name, another.name);
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ACCOUNTS_CHOOSE_ACCOUNT_ACTIVITY;
     }
 
     @Override

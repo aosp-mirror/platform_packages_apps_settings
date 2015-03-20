@@ -43,6 +43,7 @@ import android.preference.SwitchPreference;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+import com.android.internal.logging.MetricsLogger;
 
 import java.util.List;
 import java.util.Collections;
@@ -398,6 +399,11 @@ public class UsageAccessSettings extends SettingsPreferenceFragment implements
         R.string.category_personal,
         R.string.category_work
     };
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.USAGE_ACCESS;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

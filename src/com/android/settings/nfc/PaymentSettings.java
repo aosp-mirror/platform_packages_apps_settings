@@ -42,6 +42,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -56,6 +57,11 @@ public class PaymentSettings extends SettingsPreferenceFragment implements
     private PaymentBackend mPaymentBackend;
     private final PackageMonitor mSettingsPackageMonitor = new SettingsPackageMonitor();
 
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NFC_PAYMENT;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

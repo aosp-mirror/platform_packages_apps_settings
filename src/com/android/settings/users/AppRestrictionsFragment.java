@@ -56,6 +56,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -255,6 +256,11 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
         addPreferencesFromResource(R.xml.app_restrictions);
         mAppList = getAppPreferenceGroup();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.USERS_APP_RESTRICTIONS;
     }
 
     @Override

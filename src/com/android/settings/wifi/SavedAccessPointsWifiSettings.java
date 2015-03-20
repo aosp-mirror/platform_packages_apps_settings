@@ -26,6 +26,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -52,6 +53,11 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
 
     // Instance state key
     private static final String SAVE_DIALOG_ACCESS_POINT_STATE = "wifi_ap_state";
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.WIFI_SAVED_ACCESS_POINTS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

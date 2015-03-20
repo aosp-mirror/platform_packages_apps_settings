@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -76,6 +77,11 @@ public class EncryptionInterstitial extends SettingsActivity {
         private RadioButton mDontRequirePasswordToDecryptButton;
         private TextView mEncryptionMessage;
         private boolean mPasswordRequired;
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.ENCRYPTION;
+        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,

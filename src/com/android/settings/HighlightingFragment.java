@@ -23,7 +23,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HighlightingFragment extends Fragment {
+public abstract class HighlightingFragment extends InstrumentedFragment {
 
     private static final String TAG = "HighlightSettingsFragment";
 

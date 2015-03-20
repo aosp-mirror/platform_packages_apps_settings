@@ -16,7 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -24,10 +23,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 
-public class BatteryHistoryDetail extends Fragment {
+public class BatteryHistoryDetail extends InstrumentedFragment {
     public static final String EXTRA_STATS = "stats";
     public static final String EXTRA_BROADCAST = "broadcast";
 
@@ -49,5 +50,10 @@ public class BatteryHistoryDetail extends Fragment {
                 R.id.battery_history_chart);
         chart.setStats(mStats, mBatteryBroadcast);
         return view;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FUELGAUGE_BATTERY_HISTORY_DETAIL;
     }
 }

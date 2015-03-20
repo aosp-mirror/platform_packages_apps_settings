@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.service.persistentdata.PersistentDataBlockManager;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.storage.ExternalStorageFormatter;
 
 import android.app.Fragment;
@@ -42,7 +43,7 @@ import android.widget.Button;
  *
  * This is the confirmation screen.
  */
-public class MasterClearConfirm extends Fragment {
+public class MasterClearConfirm extends InstrumentedFragment {
 
     private View mContentView;
     private boolean mEraseSdCard;
@@ -143,5 +144,10 @@ public class MasterClearConfirm extends Fragment {
 
         Bundle args = getArguments();
         mEraseSdCard = args != null && args.getBoolean(MasterClear.ERASE_EXTERNAL_EXTRA);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.MASTER_CLEAR_CONFIRM;
     }
 }

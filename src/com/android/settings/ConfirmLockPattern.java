@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
@@ -84,7 +85,7 @@ public class ConfirmLockPattern extends SettingsActivity {
         return false;
     }
 
-    public static class ConfirmLockPatternFragment extends Fragment {
+    public static class ConfirmLockPatternFragment extends InstrumentedFragment {
 
         // how long we wait to clear a wrong pattern
         private static final int WRONG_PATTERN_CLEAR_TIMEOUT_MS = 2000;
@@ -169,6 +170,11 @@ public class ConfirmLockPattern extends SettingsActivity {
             if (mCountdownTimer != null) {
                 mCountdownTimer.cancel();
             }
+        }
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.CONFIRM_LOCK_PATTERN;
         }
 
         @Override

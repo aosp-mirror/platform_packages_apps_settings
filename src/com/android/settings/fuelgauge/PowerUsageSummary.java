@@ -38,10 +38,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.HelpUtils;
+import com.android.settings.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 
@@ -51,7 +53,7 @@ import java.util.List;
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
  * consumed since the last time it was unplugged.
  */
-public class PowerUsageSummary extends PreferenceFragment {
+public class PowerUsageSummary extends InstrumentedPreferenceFragment {
 
     private static final boolean DEBUG = false;
 
@@ -117,6 +119,11 @@ public class PowerUsageSummary extends PreferenceFragment {
     public void onStart() {
         super.onStart();
         mStatsHelper.clearStats();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FUELGAUGE_POWER_USAGE_SUMMARY;
     }
 
     @Override

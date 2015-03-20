@@ -49,6 +49,7 @@ import android.telephony.SubscriptionInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -128,6 +129,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private boolean mIsPrimary;
 
     private Intent mTrustAgentClickIntent;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.SECURITY;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

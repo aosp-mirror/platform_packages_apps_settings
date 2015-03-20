@@ -29,9 +29,10 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 
-public class OwnerInfoSettings extends Fragment {
+public class OwnerInfoSettings extends InstrumentedFragment {
 
     public static final String EXTRA_SHOW_NICKNAME = "show_nickname";
 
@@ -96,6 +97,11 @@ public class OwnerInfoSettings extends Fragment {
         if (!TextUtils.isEmpty(info)) {
             mOwnerInfo.setText(info);
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OWNER_INFO;
     }
 
     @Override

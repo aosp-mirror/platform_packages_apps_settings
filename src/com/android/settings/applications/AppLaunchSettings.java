@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
@@ -187,4 +188,8 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
                 : R.string.launch_defaults_none);
     }
 
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_APP_LAUNCH;
+    }
 }

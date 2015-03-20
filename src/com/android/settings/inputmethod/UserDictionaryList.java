@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -41,6 +42,11 @@ public class UserDictionaryList extends SettingsPreferenceFragment {
     public static final String USER_DICTIONARY_SETTINGS_INTENT_ACTION =
             "android.settings.USER_DICTIONARY_SETTINGS";
     private String mLocale;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.INPUTMETHOD_USER_DICTIONARY;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

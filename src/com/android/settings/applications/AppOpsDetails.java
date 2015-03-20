@@ -38,13 +38,15 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 
 import java.util.List;
 
-public class AppOpsDetails extends Fragment {
+public class AppOpsDetails extends InstrumentedFragment {
     static final String TAG = "AppOpsDetails";
 
     public static final String ARG_PACKAGE_NAME = "package";
@@ -189,6 +191,11 @@ public class AppOpsDetails extends Fragment {
         mRootView = view;
         mOperationsSection = (LinearLayout)view.findViewById(R.id.operations_section);
         return view;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APP_OPS_DETAILS;
     }
 
     @Override

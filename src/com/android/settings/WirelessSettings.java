@@ -48,6 +48,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.ims.ImsManager;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
 import com.android.internal.telephony.TelephonyIntents;
@@ -235,6 +236,11 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private boolean isSmsSupported() {
         // Some tablet has sim card but could not do telephony operations. Skip those.
         return mTm.isSmsCapable();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.WIRELESS;
     }
 
     @Override

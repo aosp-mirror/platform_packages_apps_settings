@@ -34,6 +34,7 @@ import android.provider.Settings.Global;
 import android.util.Log;
 import android.widget.Switch;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -59,6 +60,11 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
     private Switch mSwitch;
     private boolean mValidListener;
     private PowerManager mPowerManager;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.FUELGAUGE_BATTERY_SAVER;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

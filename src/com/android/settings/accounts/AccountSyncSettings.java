@@ -16,6 +16,7 @@
 
 package com.android.settings.accounts;
 
+import com.android.internal.logging.MetricsLogger;
 import com.google.android.collect.Lists;
 
 import android.accounts.Account;
@@ -138,6 +139,11 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 .create();
         }
         return dialog;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ACCOUNTS_ACCOUNT_SYNC;
     }
 
     @Override

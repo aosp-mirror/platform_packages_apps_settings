@@ -40,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ConfirmDeviceCredentialActivity;
 import com.android.settings.R;
@@ -72,6 +73,11 @@ public class ToggleAccessibilityServicePreferenceFragment
     private ComponentName mComponentName;
 
     private int mShownDialogId;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ACCESSIBILITY_SERVICE;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

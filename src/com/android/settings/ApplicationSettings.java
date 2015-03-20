@@ -24,6 +24,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import com.android.internal.logging.MetricsLogger;
 
 public class ApplicationSettings extends SettingsPreferenceFragment {
     
@@ -41,6 +42,11 @@ public class ApplicationSettings extends SettingsPreferenceFragment {
     
     private CheckBoxPreference mToggleAdvancedSettings;
     private ListPreference mInstallLocation;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATION;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

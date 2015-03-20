@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.content.Context;
@@ -47,6 +48,11 @@ public class KeyboardLayoutPickerFragment extends SettingsPreferenceFragment
      * layout is to be changed.
      */
     public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.INPUTMETHOD_KEYBOARD;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

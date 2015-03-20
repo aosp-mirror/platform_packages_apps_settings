@@ -35,6 +35,7 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
@@ -84,6 +85,11 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         if (mAppRow == null) return;
         AppHeader.createAppHeader(getActivity(), mAppRow.icon, mAppRow.label,
                 mAppRow.settingsIntent);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NOTIFICATION_APP_NOTIFICATION;
     }
 
     @Override

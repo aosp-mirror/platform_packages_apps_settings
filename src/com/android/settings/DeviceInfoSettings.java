@@ -37,6 +37,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -82,6 +83,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     long[] mHits = new long[3];
     int mDevHitCountdown;
     Toast mDevHitToast;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DEVICEINFO;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

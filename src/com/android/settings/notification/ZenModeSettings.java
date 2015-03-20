@@ -50,6 +50,7 @@ import android.util.SparseArray;
 import android.widget.ScrollView;
 import android.widget.TimePicker;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -142,6 +143,11 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private Preference mEntry;
     private Preference mConditionProviders;
     private AlertDialog mDialog;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NOTIFICATION_ZEN_MODE;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

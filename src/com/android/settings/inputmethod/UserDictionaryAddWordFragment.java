@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +26,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
@@ -40,7 +41,7 @@ import java.util.Locale;
  * As opposed to the UserDictionaryActivity, this is only invoked within Settings
  * from the UserDictionarySettings.
  */
-public class UserDictionaryAddWordFragment extends Fragment
+public class UserDictionaryAddWordFragment extends InstrumentedFragment
         implements AdapterView.OnItemSelectedListener,
         com.android.internal.app.LocalePicker.LocaleSelectionListener {
 
@@ -106,6 +107,11 @@ public class UserDictionaryAddWordFragment extends Fragment
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.INPUTMETHOD_USER_DICTIONARY_ADD_WORD;
     }
 
     @Override

@@ -28,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -79,6 +80,11 @@ public class UsbSettings extends SettingsPreferenceFragment {
         }
 
         return root;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DEVICEINFO_USB;
     }
 
     @Override

@@ -68,6 +68,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
@@ -258,6 +259,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DEVELOPMENT;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

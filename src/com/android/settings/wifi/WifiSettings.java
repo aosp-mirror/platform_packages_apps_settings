@@ -47,6 +47,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
@@ -319,6 +320,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         showAppMenuItem = menu.add(Menu.NONE, MENU_ID_APPS, 0, R.string.wifi_menu_apps);
         showAppMenuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         ta.recycle();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.WIFI;
     }
 
     @Override

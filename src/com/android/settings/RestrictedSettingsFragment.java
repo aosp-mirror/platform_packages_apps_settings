@@ -37,7 +37,7 @@ import android.os.UserManager;
  * {@link RestrictionsManager.hasRestrictionsProvider()} returns true, pass in
  * {@link RESTRICT_IF_OVERRIDABLE} to the constructor instead of a restrictions key.
  */
-public class RestrictedSettingsFragment extends SettingsPreferenceFragment {
+public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment {
 
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";
 

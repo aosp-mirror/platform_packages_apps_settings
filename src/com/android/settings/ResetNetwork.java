@@ -43,6 +43,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class ResetNetwork extends Fragment {
+public class ResetNetwork extends InstrumentedFragment {
     private static final String TAG = "ResetNetwork";
 
     // Arbitrary to avoid conficts
@@ -194,5 +195,10 @@ public class ResetNetwork extends Fragment {
 
         establishInitialState();
         return mContentView;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.RESET_NETWORK;
     }
 }

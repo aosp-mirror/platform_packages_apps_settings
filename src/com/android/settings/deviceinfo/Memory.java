@@ -47,6 +47,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -83,6 +84,11 @@ public class Memory extends SettingsPreferenceFragment implements Indexable {
     private UsbManager mUsbManager;
 
     private ArrayList<StorageVolumePreferenceCategory> mCategories = Lists.newArrayList();
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DEVICEINFO_MEMORY;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

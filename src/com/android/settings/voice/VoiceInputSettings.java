@@ -27,6 +27,7 @@ import android.provider.Settings;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
 import android.speech.RecognitionService;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -71,6 +72,11 @@ public class VoiceInputSettings extends SettingsPreferenceFragment implements
     private Checkable mCurrentChecked;
 
     private VoiceInputHelper mHelper;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.VOICE_INPUT;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

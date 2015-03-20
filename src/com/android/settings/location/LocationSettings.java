@@ -34,6 +34,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Switch;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -82,6 +83,11 @@ public class LocationSettings extends LocationSettingsBase
     private BroadcastReceiver mReceiver;
     private SettingsInjector injector;
     private UserManager mUm;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.LOCATION;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

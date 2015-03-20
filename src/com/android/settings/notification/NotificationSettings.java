@@ -48,6 +48,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.DropDownPreference;
 import com.android.settings.R;
@@ -103,6 +104,11 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private int mLockscreenSelectedValue;
     private ComponentName mSuppressor;
     private int mRingerMode = -1;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NOTIFICATION;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -43,6 +43,7 @@ import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.DreamBackend.DreamInfo;
 import com.android.settings.widget.SwitchBar;
 
@@ -74,6 +75,11 @@ public class DreamSettings extends SettingsPreferenceFragment implements
         logd("onAttach(%s)", activity.getClass().getSimpleName());
         super.onAttach(activity);
         mContext = activity;
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DREAM;
     }
 
     @Override

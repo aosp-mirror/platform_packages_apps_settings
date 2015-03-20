@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroupAdapter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -46,7 +45,8 @@ import android.widget.ListView;
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
-public class SettingsPreferenceFragment extends PreferenceFragment implements DialogCreatable {
+public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
+        implements DialogCreatable {
 
     private static final String TAG = "SettingsPreferenceFragment";
 

@@ -26,6 +26,7 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.SwitchPreference;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -63,6 +64,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private UserInfo mUserInfo;
     private boolean mGuestUser;
     private Bundle mDefaultGuestRestrictions;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.USER_DETAILS;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

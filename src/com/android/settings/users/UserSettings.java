@@ -56,6 +56,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.ChooseLockGeneric;
 import com.android.settings.OwnerInfoSettings;
@@ -177,6 +178,11 @@ public class UserSettings extends SettingsPreferenceFragment
             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
         }
     };
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.USER;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

@@ -33,6 +33,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -43,7 +45,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RunningServiceDetails extends Fragment
+public class RunningServiceDetails extends InstrumentedFragment
         implements RunningState.OnRefreshUiListener {
     static final String TAG = "RunningServicesDetails";
 
@@ -530,6 +532,11 @@ public class RunningServiceDetails extends Fragment
         super.onPause();
         mHaveData = false;
         mState.pause();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.RUNNING_SERVICE_DETAILS;
     }
 
     @Override

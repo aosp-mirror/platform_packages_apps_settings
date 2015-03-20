@@ -41,7 +41,9 @@ import android.view.SubMenu;
 import com.android.internal.app.IProcessStats;
 import com.android.internal.app.ProcessMap;
 import com.android.internal.app.ProcessStats;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.MemInfoReader;
+import com.android.settings.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -53,7 +55,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class ProcessStatsUi extends PreferenceFragment
+public class ProcessStatsUi extends InstrumentedPreferenceFragment
         implements LinearColorBar.OnRegionTappedListener {
     static final String TAG = "ProcessStatsUi";
     static final boolean DEBUG = false;
@@ -184,14 +186,14 @@ public class ProcessStatsUi extends PreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        refreshStats();
+    protected int getMetricsCategory() {
+        return MetricsLogger.APPLICATIONS_PROCESS_STATS_UI;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onResume() {
+        super.onResume();
+        refreshStats();
     }
 
     @Override

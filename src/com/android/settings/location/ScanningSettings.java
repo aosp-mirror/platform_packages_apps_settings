@@ -21,6 +21,7 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings.Global;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -29,6 +30,11 @@ import com.android.settings.SettingsPreferenceFragment;
  */
 public class ScanningSettings extends SettingsPreferenceFragment {
     private static final String KEY_WIFI_SCAN_ALWAYS_AVAILABLE = "wifi_always_scanning";
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.LOCATION_SCANNING;
+    }
 
     @Override
     public void onResume() {

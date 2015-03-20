@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.text.TextUtils;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
@@ -74,8 +75,8 @@ public class ConfirmLockPassword extends SettingsActivity {
         setTitle(msg);
     }
 
-    public static class ConfirmLockPasswordFragment extends Fragment implements OnClickListener,
-            OnEditorActionListener, TextWatcher {
+    public static class ConfirmLockPasswordFragment extends InstrumentedFragment
+            implements OnClickListener, OnEditorActionListener, TextWatcher {
         private static final String KEY_NUM_WRONG_CONFIRM_ATTEMPTS
                 = "confirm_lock_password_fragment.key_num_wrong_confirm_attempts";
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
@@ -171,6 +172,11 @@ public class ConfirmLockPassword extends SettingsActivity {
                 mCountdownTimer.cancel();
                 mCountdownTimer = null;
             }
+        }
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.CONFIRM_LOCK_PASSWORD;
         }
 
         @Override

@@ -127,6 +127,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.drawable.InsetBoundsDrawable;
 import com.android.settings.net.ChartData;
@@ -289,6 +290,11 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
      * Local cache of data enabled for subId, used to work around delays.
      */
     private final Map<String, Boolean> mMobileDataEnabled = new HashMap<String, Boolean>();
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DATA_USAGE_SUMMARY;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

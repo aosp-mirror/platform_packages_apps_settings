@@ -38,9 +38,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.android.internal.logging.MetricsLogger;
 
 
-public class ApnEditor extends PreferenceActivity
+public class ApnEditor extends InstrumentedPreferenceActivity
         implements SharedPreferences.OnSharedPreferenceChangeListener,
                     Preference.OnPreferenceChangeListener {
 
@@ -225,6 +226,11 @@ public class ApnEditor extends PreferenceActivity
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
         fillUi();
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.APN_EDITOR;
     }
 
     @Override

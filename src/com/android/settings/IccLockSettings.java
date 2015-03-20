@@ -42,6 +42,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
@@ -55,7 +56,7 @@ import com.android.internal.telephony.TelephonyIntents;
  * these operations.
  *
  */
-public class IccLockSettings extends PreferenceActivity
+public class IccLockSettings extends InstrumentedPreferenceActivity
         implements EditPinPreference.OnPinEnteredListener {
     private static final String TAG = "IccLockSettings";
     private static final boolean DBG = true;
@@ -236,6 +237,11 @@ public class IccLockSettings extends PreferenceActivity
         if (mPhone != null) {
             mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
         }
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ICC_LOCK;
     }
 
     @Override

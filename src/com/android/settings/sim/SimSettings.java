@@ -46,6 +46,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -113,6 +114,11 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     public SimSettings() {
         super(DISALLOW_CONFIG_SIM);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.SIM;
     }
 
     @Override

@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
@@ -96,7 +97,7 @@ public class ChooseLockPassword extends SettingsActivity {
         setTitle(msg);
     }
 
-    public static class ChooseLockPasswordFragment extends Fragment
+    public static class ChooseLockPasswordFragment extends InstrumentedFragment
             implements OnClickListener, OnEditorActionListener,  TextWatcher {
         private static final String KEY_FIRST_PIN = "first_pin";
         private static final String KEY_UI_STAGE = "ui_stage";
@@ -260,6 +261,11 @@ public class ChooseLockPassword extends SettingsActivity {
                 CharSequence title = getText(id);
                 sa.setTitle(title);
             }
+        }
+
+        @Override
+        protected int getMetricsCategory() {
+            return MetricsLogger.CHOOSE_LOCK_PASSWORD;
         }
 
         @Override

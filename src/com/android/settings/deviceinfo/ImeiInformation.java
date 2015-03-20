@@ -15,6 +15,7 @@
  */
 package com.android.settings.deviceinfo;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
@@ -27,9 +28,10 @@ import android.preference.PreferenceScreen;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import com.android.settings.InstrumentedPreferenceActivity;
 import com.android.settings.R;
 
-public class ImeiInformation extends PreferenceActivity {
+public class ImeiInformation extends InstrumentedPreferenceActivity {
 
     private static final String KEY_PRL_VERSION = "prl_version";
     private static final String KEY_MIN_NUMBER = "min_number";
@@ -151,4 +153,8 @@ public class ImeiInformation extends PreferenceActivity {
         }
     }
 
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DEVICEINFO_IMEI_INFORMATION;
+    }
 }

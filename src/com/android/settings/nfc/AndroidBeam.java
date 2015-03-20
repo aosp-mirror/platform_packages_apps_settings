@@ -27,11 +27,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
+import com.android.internal.logging.MetricsLogger;
+import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.widget.SwitchBar;
 
-public class AndroidBeam extends Fragment
+public class AndroidBeam extends InstrumentedFragment
         implements SwitchBar.OnSwitchChangeListener {
     private View mView;
     private NfcAdapter mNfcAdapter;
@@ -97,5 +99,10 @@ public class AndroidBeam extends Fragment
             mSwitchBar.setChecked(desiredState);
         }
         mSwitchBar.setEnabled(true);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.NFC_BEAM;
     }
 }

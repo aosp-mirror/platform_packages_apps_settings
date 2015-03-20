@@ -47,6 +47,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.AccountPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -85,6 +86,11 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     // Temporary hack, to deal with backward compatibility 
     // mFirstAccount is used for the injected preferences
     private Account mFirstAccount;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.ACCOUNTS_MANAGE_ACCOUNTS;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
