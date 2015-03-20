@@ -24,6 +24,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -738,6 +739,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private void updateBugreportOptions() {
+        final ComponentName bugreportStorageProviderComponentName =
+                new ComponentName("com.android.shell",
+                        "com.android.shell.BugreportStorageProvider");
         if ("user".equals(Build.TYPE)) {
             final ContentResolver resolver = getActivity().getContentResolver();
             final boolean adbEnabled = Settings.Global.getInt(
@@ -745,14 +749,23 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             if (adbEnabled) {
                 mBugreport.setEnabled(true);
                 mBugreportInPower.setEnabled(true);
+                getPackageManager().setComponentEnabledSetting(
+                        bugreportStorageProviderComponentName,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
             } else {
                 mBugreport.setEnabled(false);
                 mBugreportInPower.setEnabled(false);
                 mBugreportInPower.setChecked(false);
                 Settings.Secure.putInt(resolver, Settings.Secure.BUGREPORT_IN_POWER_MENU, 0);
+                getPackageManager().setComponentEnabledSetting(
+                        bugreportStorageProviderComponentName,
+                        PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);
             }
         } else {
             mBugreportInPower.setEnabled(true);
+            getPackageManager().setComponentEnabledSetting(
+                    bugreportStorageProviderComponentName,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
         }
     }
 
