@@ -57,6 +57,7 @@ public class ApplicationsState {
         public void onPackageSizeChanged(String packageName);
         public void onAllSizesComputed();
         public void onLauncherInfoChanged();
+        public void onLoadEntriesCompleted();
     }
 
     public static interface AppFilter {
@@ -124,6 +125,9 @@ public class ApplicationsState {
         long sizeLoadStart;
 
         String normalizedLabel;
+
+        // A location where extra info can be placed to be used by custom filters.
+        Object extraInfo;
 
         AppEntry(Context context, ApplicationInfo info, long id) {
             apkFile = new File(info.sourceDir);
@@ -444,6 +448,7 @@ public class ApplicationsState {
         static final int MSG_ALL_SIZES_COMPUTED = 5;
         static final int MSG_RUNNING_STATE_CHANGED = 6;
         static final int MSG_LAUNCHER_INFO_CHANGED = 7;
+        static final int MSG_LOAD_ENTRIES_COMPLETE = 8;
 
         @Override
         public void handleMessage(Message msg) {
@@ -485,6 +490,11 @@ public class ApplicationsState {
                 case MSG_LAUNCHER_INFO_CHANGED: {
                     for (int i=0; i<mActiveSessions.size(); i++) {
                         mActiveSessions.get(i).mCallbacks.onLauncherInfoChanged();
+                    }
+                } break;
+                case MSG_LOAD_ENTRIES_COMPLETE: {
+                    for (int i=0; i<mActiveSessions.size(); i++) {
+                        mActiveSessions.get(i).mCallbacks.onLoadEntriesCompleted();
                     }
                 } break;
             }
@@ -550,6 +560,10 @@ public class ApplicationsState {
             } catch (InterruptedException e) {
             }
         }
+    }
+
+    Looper getBackgroundLooper() {
+        return mThread.getLooper();
     }
 
     public class Session {
@@ -1131,6 +1145,9 @@ public class ApplicationsState {
                     if (numDone >= 6) {
                         sendEmptyMessage(MSG_LOAD_ENTRIES);
                     } else {
+                        if (!mMainHandler.hasMessages(MainHandler.MSG_LOAD_ENTRIES_COMPLETE)) {
+                            mMainHandler.sendEmptyMessage(MainHandler.MSG_LOAD_ENTRIES_COMPLETE);
+                        }
                         sendEmptyMessage(MSG_LOAD_LAUNCHER);
                     }
                 } break;

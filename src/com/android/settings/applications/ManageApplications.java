@@ -54,10 +54,13 @@ import android.widget.Spinner;
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
+import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
+import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.NotificationBackend.AppRow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,8 +138,11 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
     public static final int FILTER_APPS_ALL                     = 1;
     public static final int FILTER_APPS_ENABLED                 = 2;
     public static final int FILTER_APPS_DISABLED                = 3;
-    public static final int FILTER_APPS_PERSONAL                = 4;
-    public static final int FILTER_APPS_WORK                    = 5;
+    public static final int FILTER_APPS_BLOCKED                 = 4;
+    public static final int FILTER_APPS_PRIORITY                = 5;
+    public static final int FILTER_APPS_SENSITIVE               = 6;
+    public static final int FILTER_APPS_PERSONAL                = 7;
+    public static final int FILTER_APPS_WORK                    = 8;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
@@ -144,6 +150,9 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
         R.string.filter_all_apps,      // All apps
         R.string.filter_enabled_apps,  // Enabled
         R.string.filter_apps_disabled, // Disabled
+        R.string.filter_notif_blocked_apps,   // Blocked Notifications
+        R.string.filter_notif_priority_apps,  // Priority Notifications
+        R.string.filter_notif_sensitive_apps, // Sensitive Notifications
         R.string.filter_personal_apps, // Personal
         R.string.filter_work_apps,     // Work
     };
@@ -154,6 +163,9 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
         ApplicationsState.FILTER_EVERYTHING,  // All apps
         ApplicationsState.FILTER_ALL_ENABLED, // Enabled
         ApplicationsState.FILTER_DISABLED,    // Disabled
+        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
+        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
+        AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SENSITIVE, // Sensitive Notifications
         ApplicationsState.FILTER_PERSONAL,    // Personal
         ApplicationsState.FILTER_WORK,        // Work
     };
@@ -194,12 +206,14 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
 
     public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_ALL = 1;
+    public static final int LIST_TYPE_NOTIFICATION = 2;
 
     private View mRootView;
 
     private View mSpinnerHeader;
     private Spinner mFilterSpinner;
     private FilterSpinnerAdapter mFilterAdapter;
+    private NotificationBackend mNotifBackend;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -214,9 +228,11 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
         if (className == null) {
             className = intent.getComponent().getClassName();
         }
-        if (Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS.equals(action)
-                || className.equals(AllApplicationsActivity.class.getName())) {
+        if (className.equals(AllApplicationsActivity.class.getName())) {
             mListType = LIST_TYPE_ALL;
+        } else if (className.equals(NotificationAppListActivity.class.getName())) {
+            mListType = LIST_TYPE_NOTIFICATION;
+            mNotifBackend = new NotificationBackend();
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -289,6 +305,11 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
         }
+        if (mListType == LIST_TYPE_NOTIFICATION) {
+            mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
+            mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
+            mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
+        }
     }
 
     private int getDefaultFilter() {
@@ -335,19 +356,30 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
-            mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
+            if (mListType == LIST_TYPE_NOTIFICATION) {
+                mApplications.mNotifBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
+            } else {
+                mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
+            }
         }
     }
 
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
-        // TODO: Figure out if there is a way where we can spin up the profile's settings
-        // process ahead of time, to avoid a long load of data when user clicks on a managed app.
-        // Maybe when they load the list of apps that contains managed profile apps.
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.fromParts("package", mCurrentPkgName, null));
-        getActivity().startActivityAsUser(intent,
-                new UserHandle(UserHandle.getUserId(mCurrentUid)));
+        if (mListType == LIST_TYPE_NOTIFICATION) {
+            getActivity().startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    .putExtra(Settings.EXTRA_APP_PACKAGE, mCurrentPkgName)
+                    .putExtra(Settings.EXTRA_APP_UID, mCurrentUid));
+        } else {
+            // TODO: Figure out if there is a way where we can spin up the profile's settings
+            // process ahead of time, to avoid a long load of data when user clicks on a managed app.
+            // Maybe when they load the list of apps that contains managed profile apps.
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.fromParts("package", mCurrentPkgName, null));
+            getActivity().startActivityAsUser(intent,
+                    new UserHandle(UserHandle.getUserId(mCurrentUid)));
+        }
     }
 
     @Override
@@ -517,12 +549,14 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
      * The order of applications in the list is mirrored in mAppLocalList
      */
     static class ApplicationsAdapter extends BaseAdapter implements Filterable,
-            ApplicationsState.Callbacks, AbsListView.RecyclerListener {
+            ApplicationsState.Callbacks, AppStateNotificationBridge.Callback,
+            AbsListView.RecyclerListener {
         private final ApplicationsState mState;
         private final ApplicationsState.Session mSession;
         private final ManageApplications mManageApplications;
         private final Context mContext;
         private final ArrayList<View> mActive = new ArrayList<View>();
+        private final AppStateNotificationBridge mNotifBridge;
         private int mFilterMode;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
@@ -558,6 +592,13 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
             mManageApplications = manageApplications;
             mContext = manageApplications.getActivity();
             mFilterMode = filterMode;
+            if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
+                mNotifBridge = new AppStateNotificationBridge(
+                        mContext.getPackageManager(), mState,
+                        manageApplications.mNotifBackend, this);
+            } else {
+                mNotifBridge = null;
+            }
         }
 
         public void setFilter(int filter) {
@@ -571,6 +612,9 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
                 mResumed = true;
                 mSession.resume();
                 mLastSortMode = sort;
+                if (mNotifBridge != null) {
+                    mNotifBridge.resume();
+                }
                 rebuild(true);
             } else {
                 rebuild(sort);
@@ -581,11 +625,17 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
             if (mResumed) {
                 mResumed = false;
                 mSession.pause();
+                if (mNotifBridge != null) {
+                    mNotifBridge.pause();
+                }
             }
         }
 
         public void release() {
             mSession.release();
+            if (mNotifBridge != null) {
+                mNotifBridge.release();
+            }
         }
 
         public void rebuild(int sort) {
@@ -681,6 +731,13 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
         }
 
         @Override
+        public void onNotificationInfoUpdated() {
+            if (mFilterMode != mManageApplications.getDefaultFilter()) {
+                rebuild(false);
+            }
+        }
+
+        @Override
         public void onRunningStateChanged(boolean running) {
             mManageApplications.getActivity().setProgressBarIndeterminateVisibility(running);
         }
@@ -712,12 +769,19 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
         }
 
         @Override
+        public void onLoadEntriesCompleted() {
+            // No op.
+        }
+
+        @Override
         public void onPackageSizeChanged(String packageName) {
             for (int i=0; i<mActive.size(); i++) {
                 AppViewHolder holder = (AppViewHolder)mActive.get(i).getTag();
                 if (holder.entry.info.packageName.equals(packageName)) {
                     synchronized (holder.entry) {
-                        holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                        if (mManageApplications.mListType != LIST_TYPE_NOTIFICATION) {
+                            holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                        }
                     }
                     if (holder.entry.info.packageName.equals(mManageApplications.mCurrentPkgName)
                             && mLastSortMode == SORT_ORDER_SIZE) {
@@ -780,7 +844,16 @@ public class ManageApplications extends Fragment implements OnItemClickListener,
                 if (entry.icon != null) {
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
-                holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
+                    if (entry.extraInfo != null) {
+                        holder.summary.setText(InstalledAppDetails.getNotificationSummary(
+                                (AppRow) entry.extraInfo, mContext));
+                    } else {
+                        holder.summary.setText("");
+                    }
+                } else {
+                    holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                }
                 if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
                     holder.disabled.setVisibility(View.VISIBLE);
                     holder.disabled.setText(R.string.not_installed);

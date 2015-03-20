@@ -114,7 +114,11 @@
         <PreferenceScreen
                 android:key="app_notifications"
                 android:title="@string/app_notifications_title"
-                android:fragment="com.android.settings.notification.NotificationAppList" />
+                android:fragment="com.android.settings.applications.ManageApplications">
+                <extra
+                    android:name="classname"
+                    android:value="com.android.settings.Settings$NotificationAppListActivity" />
+        </PreferenceScreen>
 
         <!-- Notification access -->
         <Preference

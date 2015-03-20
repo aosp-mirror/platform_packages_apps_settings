@@ -81,7 +81,6 @@ import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.notification.NotificationAppList;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search.Index;
@@ -296,7 +295,6 @@ public class SettingsActivity extends Activity
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
             InstalledAppDetails.class.getName(),
             BatterySaverSettings.class.getName(),
-            NotificationAppList.class.getName(),
             AppNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),

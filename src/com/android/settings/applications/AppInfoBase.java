@@ -185,6 +185,11 @@ public abstract class AppInfoBase extends PreferenceFragment
     }
 
     @Override
+    public void onLoadEntriesCompleted() {
+        // No op.
+    }
+
+    @Override
     public void onPackageListChanged() {
         refreshUi();
     }

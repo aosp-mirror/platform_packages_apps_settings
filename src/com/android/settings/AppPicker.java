@@ -118,10 +118,10 @@ public class AppPicker extends ListActivity {
             holder.appName.setText(info.label);
             if (info.info != null) {
                 holder.appIcon.setImageDrawable(info.info.loadIcon(getPackageManager()));
-                holder.appSize.setText(info.info.packageName);
+                holder.summary.setText(info.info.packageName);
             } else {
                 holder.appIcon.setImageDrawable(null);
-                holder.appSize.setText("");
+                holder.summary.setText("");
             }
             holder.disabled.setVisibility(View.GONE);
             holder.checkBox.setVisibility(View.GONE);

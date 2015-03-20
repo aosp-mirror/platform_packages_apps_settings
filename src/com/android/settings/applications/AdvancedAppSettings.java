@@ -254,4 +254,9 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
         // No-op.
     }
 
+    @Override
+    public void onLoadEntriesCompleted() {
+        // No-op.
+    }
+
 }

@@ -16,11 +16,15 @@
 
 package com.android.settings.notification;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -36,8 +40,9 @@ import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.notification.NotificationAppList.AppRow;
-import com.android.settings.notification.NotificationAppList.Backend;
+import com.android.settings.notification.NotificationBackend.AppRow;
+
+import java.util.List;
 
 /** These settings are per app, so should not be returned in global search results. */
 public class AppNotificationSettings extends SettingsPreferenceFragment {
@@ -52,7 +57,11 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     static final String EXTRA_HAS_SETTINGS_INTENT = "has_settings_intent";
     static final String EXTRA_SETTINGS_INTENT = "settings_intent";
 
-    private final Backend mBackend = new Backend();
+    private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
+            = new Intent(Intent.ACTION_MAIN)
+                .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
+
+    private final NotificationBackend mBackend = new NotificationBackend();
 
     private Context mContext;
     private SwitchPreference mBlock;
@@ -115,7 +124,8 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mPeekable = (SwitchPreference) findPreference(KEY_PEEKABLE);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
 
-        mAppRow = NotificationAppList.loadAppRow(pm, info.applicationInfo, mBackend);
+        mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
+
         if (intent.hasExtra(EXTRA_HAS_SETTINGS_INTENT)) {
             // use settings intent from extra
             if (intent.getBooleanExtra(EXTRA_HAS_SETTINGS_INTENT, false)) {
@@ -125,7 +135,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             // load settings intent
             ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
             rows.put(mAppRow.pkg, mAppRow);
-            NotificationAppList.collectConfigActivities(getPackageManager(), rows);
+            collectConfigActivities(getPackageManager(), rows);
         }
 
         mBlock.setChecked(mAppRow.banned);
@@ -224,5 +234,45 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             }
         }
         return null;
+    }
+
+    public static List<ResolveInfo> queryNotificationConfigActivities(PackageManager pm) {
+        if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
+                + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
+        final List<ResolveInfo> resolveInfos = pm.queryIntentActivities(
+                APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
+                0 //PackageManager.MATCH_DEFAULT_ONLY
+        );
+        return resolveInfos;
+    }
+
+    public static void collectConfigActivities(PackageManager pm, ArrayMap<String, AppRow> rows) {
+        final List<ResolveInfo> resolveInfos = queryNotificationConfigActivities(pm);
+        applyConfigActivities(pm, rows, resolveInfos);
+    }
+
+    public static void applyConfigActivities(PackageManager pm, ArrayMap<String, AppRow> rows,
+            List<ResolveInfo> resolveInfos) {
+        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
+                + (resolveInfos.size() == 0 ? " ;_;" : ""));
+        for (ResolveInfo ri : resolveInfos) {
+            final ActivityInfo activityInfo = ri.activityInfo;
+            final ApplicationInfo appInfo = activityInfo.applicationInfo;
+            final AppRow row = rows.get(appInfo.packageName);
+            if (row == null) {
+                if (DEBUG) Log.v(TAG, "Ignoring notification preference activity ("
+                        + activityInfo.name + ") for unknown package "
+                        + activityInfo.packageName);
+                continue;
+            }
+            if (row.settingsIntent != null) {
+                if (DEBUG) Log.v(TAG, "Ignoring duplicate notification preference activity ("
+                        + activityInfo.name + ") for package "
+                        + activityInfo.packageName);
+                continue;
+            }
+            row.settingsIntent = new Intent(APP_NOTIFICATION_PREFS_CATEGORY_INTENT)
+                    .setClassName(activityInfo.packageName, activityInfo.name);
+        }
     }
 }

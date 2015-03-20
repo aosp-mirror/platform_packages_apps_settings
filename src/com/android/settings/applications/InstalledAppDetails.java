@@ -62,9 +62,8 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.net.ChartData;
 import com.android.settings.net.ChartDataLoader;
-import com.android.settings.notification.NotificationAppList;
-import com.android.settings.notification.NotificationAppList.AppRow;
-import com.android.settings.notification.NotificationAppList.Backend;
+import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.NotificationBackend.AppRow;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -122,7 +121,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     private boolean mDisableAfterUninstall;
     // Used for updating notification preference.
-    private final Backend mBackend = new Backend();
+    private final NotificationBackend mBackend = new NotificationBackend();
 
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
@@ -636,13 +635,16 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     public static CharSequence getNotificationSummary(AppEntry appEntry, Context context) {
-        return getNotificationSummary(appEntry, context, new Backend());
+        return getNotificationSummary(appEntry, context, new NotificationBackend());
     }
 
     public static CharSequence getNotificationSummary(AppEntry appEntry, Context context,
-            Backend backend) {
-        AppRow appRow = NotificationAppList.loadAppRow(context.getPackageManager(), appEntry.info,
-                backend);
+            NotificationBackend backend) {
+        AppRow appRow = backend.loadAppRow(context.getPackageManager(), appEntry.info);
+        return getNotificationSummary(appRow, context);
+    }
+
+    public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
         if (appRow.banned) {
             return context.getString(R.string.notifications_disabled);
         } else if (appRow.priority) {

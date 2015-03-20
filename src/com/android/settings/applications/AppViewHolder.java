@@ -15,7 +15,7 @@ public class AppViewHolder {
     public View rootView;
     public TextView appName;
     public ImageView appIcon;
-    public TextView appSize;
+    public TextView summary;
     public TextView disabled;
     public CheckBox checkBox;
 
@@ -29,7 +29,7 @@ public class AppViewHolder {
             holder.rootView = convertView;
             holder.appName = (TextView) convertView.findViewById(R.id.app_name);
             holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
-            holder.appSize = (TextView) convertView.findViewById(R.id.app_size);
+            holder.summary = (TextView) convertView.findViewById(R.id.app_size);
             holder.disabled = (TextView) convertView.findViewById(R.id.app_disabled);
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.app_on_sdcard);
             convertView.setTag(holder);
@@ -42,22 +42,22 @@ public class AppViewHolder {
     }
 
     void updateSizeText(CharSequence invalidSizeStr, int whichSize) {
-        if (ManageApplications.DEBUG) Log.i(ManageApplications.TAG, "updateSizeText of " + entry.label + " " + entry
-                + ": " + entry.sizeStr);
+        if (ManageApplications.DEBUG) Log.i(ManageApplications.TAG, "updateSizeText of "
+                + entry.label + " " + entry + ": " + entry.sizeStr);
         if (entry.sizeStr != null) {
             switch (whichSize) {
                 case ManageApplications.SIZE_INTERNAL:
-                    appSize.setText(entry.internalSizeStr);
+                    summary.setText(entry.internalSizeStr);
                     break;
                 case ManageApplications.SIZE_EXTERNAL:
-                    appSize.setText(entry.externalSizeStr);
+                    summary.setText(entry.externalSizeStr);
                     break;
                 default:
-                    appSize.setText(entry.sizeStr);
+                    summary.setText(entry.sizeStr);
                     break;
             }
         } else if (entry.size == ApplicationsState.SIZE_INVALID) {
-            appSize.setText(invalidSizeStr);
+            summary.setText(invalidSizeStr);
         }
     }
 }
