@@ -136,7 +136,7 @@ public class SimBootReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
-                .setColor(resources.getColor(R.color.sim_noitification))
+                .setColor(context.getColor(R.color.sim_noitification))
                 .setContentTitle(resources.getString(R.string.sim_notification_title))
                 .setContentText(resources.getString(R.string.sim_notification_summary));
         Intent resultIntent = new Intent(context, SimSettingsActivity.class);

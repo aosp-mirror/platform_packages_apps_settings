@@ -870,7 +870,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         mBinding = false;
 
-        int seriesColor = resources.getColor(R.color.sim_noitification);
+        int seriesColor = context.getColor(R.color.sim_noitification);
         if (mCurrentTab != null && mCurrentTab.length() > TAB_MOBILE.length() ){
             final int slotId = Integer.parseInt(mCurrentTab.substring(TAB_MOBILE.length(),
                     mCurrentTab.length()));

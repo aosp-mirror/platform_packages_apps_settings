@@ -474,10 +474,10 @@ public class ProcessStatsUi extends PreferenceFragment
                 memStates = ProcessStats.ALL_MEM_ADJ;
                 break;
         }
-        Resources res = getResources();
-        colors.setColors(res.getColor(R.color.running_processes_apps_ram),
-                res.getColor(R.color.running_processes_apps_ram),
-                res.getColor(R.color.running_processes_free_ram));
+        final Context context = getActivity();
+        colors.setColors(context.getColor(R.color.running_processes_apps_ram),
+                context.getColor(R.color.running_processes_apps_ram),
+                context.getColor(R.color.running_processes_free_ram));
 
         // Compute memory badness for chart color.
         /*
