@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Täpsemad valikud"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Kaitstud WiFi seadistamine"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS-i käivitamine …"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"Vajutage ruuteril nuppu Seadista kaitstud Wi‑Fi. Selle nimi võib olla ka „WPS” või see võib sisaldada sümbolit:"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Sisestage WiFi-ruuteril PIN-kood <xliff:g id="NUMBER">%1$s</xliff:g>. Seadistuse lõpuleviimiseks võib kuluda kuni kaks minutit."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS õnnestus. Võrguga ühenduse loomine …"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Ühendus on loodud WiFi-võrguga <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1029,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"APN-i vaikeseadete taastamine."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Lähtesta vaikeseadetele"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN-i vaikeseadete lähtestamine on lõpule viidud."</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"Võrguseadete lähtestamine"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"See lähtestab kõik võrguühendusega seotud seaded tehase vaikeseadetele, sh:\n\n"<li>"WiFi"</li>\n<li>"mobiilne andmeside"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"Lähtesta seaded"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"Kas lähtestada kõik võrguseaded? Seda toimingut ei saa tagasi võtta."</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"Lähtesta seaded"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"Võrguseadete lähtestamise kinnitamiseks peate joonistama avamismustri."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"Kas lähtestada?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"Võrguseadete lähtestamine"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Lähtesta seade"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Tehaseandmete lähtestamine"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Kustutab kõik tahvelarvutis olevad andmed"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Kustutab kõik andmed telefonis"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"See kustutab kõik andmed teie tahvelarvuti "<b>"sisemälust"</b>", sh:\n\n"<li>"teie Google\'i konto"</li>\n<li>"süsteemi ja rakenduste andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"See kustutab kõik andmed telefoni "<b>"sisemälust"</b>", sh:\n\n"<li>"teie Google\'i konto"</li>\n<li>"süsteemi ja rakenduse andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Olete praegu sisse logitud järgmistele kontodele:\n"</string>
@@ -1868,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Minu andmete varundamine"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Varundage rakenduse andmed, WiFi-paroolid ja muud seaded Google\'i serverites"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Varukonto"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Ühelegi kontole ei ole praegu salvestatud varundatud andmeid"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Kaasa rakenduse andmed"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automaatne taastamine"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Rakenduse uuesti installimisel taasta varundatud seaded ja andmed"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Varundamisteenus ei ole aktiivne."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"Selle määravad teie seadmereeglid."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Arvutivarunduse parool"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Täielikud arvutivarundused pole praegu kaitstud"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Puudutage, et muuta või eemaldada täielike arvutivarunduste parool"</string>
@@ -2461,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Kas luban teenuse <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> võib režiimile Mitte segada väljumistingimusi lisada."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Rakenduste laadimine ..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"Blokeeri"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Ära kuva kunagi selle rakenduse märguandeid"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioriteet"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Kuva märguanded loendi ülaservas ja kuva need ka siis, kui seadmes on määratud seade Ainult prioriteetsed katkestused"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Tundlik"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Kui seade on lukus, peida rakenduse märguannetes tundlik sisu"</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blokeeritud"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioriteet"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Tundlik"</string>
@@ -2542,8 +2556,14 @@
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>. pesa)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Vaikekäivitus"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"Tüübis <xliff:g id="STORAGE_TYPE">%2$s</xliff:g> on kasutusel <xliff:g id="SIZE">%1$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"sisemälu"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"väline mälu"</string>
+    <!-- no translation found for storage_type_internal (6042049833565674948) -->
+    <skip />
+    <!-- no translation found for storage_type_external (7738894330670001898) -->
+    <skip />
+    <string name="app_data_usage" msgid="7942375313697452803">"Rakenduse andmekasutus"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> kasut. alates <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for storage_used (7128074132917008743) -->
+    <skip />
     <string name="notifications_enabled" msgid="6983396130566021385">"Sees"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Blokeerimine"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"Tundlik"</string>
@@ -2555,4 +2575,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Määratud on mõned vaikevalikud"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Ühtegi vaikevalikut pole määratud"</string>
+    <string name="unknown_app" msgid="5275921288718717656">"Tundmatu rakendus"</string>
 </resources>

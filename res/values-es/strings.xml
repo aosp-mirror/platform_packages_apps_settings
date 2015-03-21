@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Opciones avanzadas"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Configuración WPS"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Iniciando configuración WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"Pulsa el botón de configuración WPS del router. Es posible que ponga \"WPS\" o que incluya este símbolo:"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Introduce el código <xliff:g id="NUMBER">%1$s</xliff:g> en el router Wi‑Fi. El proceso de configuración puede tardar hasta dos minutos."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"La configuración WPS se ha iniciado correctamente. Estableciendo conexión con la red…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Conectado a la red Wi‑Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -667,12 +668,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Identidad anónima"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Contraseña"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Mostrar contraseña"</string>
-    <!-- no translation found for wifi_ap_band_config (219415018348922629) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_2G (8724267386885036210) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_5G (8137061170937978040) -->
-    <skip />
+    <string name="wifi_ap_band_config" msgid="219415018348922629">"Configurar banda de AP"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Banda de 2,4 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"Banda de 5 GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Ajustes de IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(sin modificar)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(no especificado)"</string>
@@ -751,30 +749,25 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Zona Wi-Fi portátil AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Zona Wi-Fi portátil: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> (<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>)"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_calling_settings_title (4102921303993404577) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_title (3208568886184788972) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_dialog_title (8149690312199253909) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_choices:0 (2124257075906188844) -->
-    <!-- no translation found for wifi_calling_mode_choices:1 (5267397515594230396) -->
-    <!-- no translation found for wifi_calling_mode_choices:2 (3132912693346866895) -->
-    <!-- no translation found for wifi_calling_mode_values:0 (4799585830102342375) -->
-    <!-- no translation found for wifi_calling_mode_values:1 (1171822231056612021) -->
-    <!-- no translation found for wifi_calling_mode_values:2 (3194458950573886239) -->
-    <!-- no translation found for wifi_calling_off_summary (1973102843796728910) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_preferred_summary (2538605598404726187) -->
-    <skip />
-    <!-- no translation found for wfc_mode_cellular_preferred_summary (3409009182901031134) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_only_summary (6783204292010626433) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_title (1949055516180908425) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_summary (8613368213416864074) -->
-    <skip />
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Llamadas Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="3208568886184788972">"Modo de llamadas Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Modo de llamadas Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Preferir Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Preferir datos móviles"</item>
+    <item msgid="3132912693346866895">"Solo conexión Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+    <string name="wifi_calling_off_summary" msgid="1973102843796728910">"Desactivadas"</string>
+    <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Preferir conexión Wi-Fi (solo se usa la red móvil si la conexión Wi-Fi no está disponible)"</string>
+    <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Preferir conexión móvil (solo se usa la conexión Wi-Fi si la red móvil no está disponible)"</string>
+    <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Solo conexión Wi-Fi (no se usa la red móvil; no es posible hacer ni recibir llamadas sin Wi-Fi)"</string>
+    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Transferencia de WFC en itinerancia"</string>
+    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Permitir que las llamadas de voz Wi-Fi se transfieran a una red móvil en itinerancia"</string>
     <string name="home_settings" msgid="212375129455718176">"Inicio"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Pantalla"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Sonido"</string>
@@ -1037,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Restaurando la configuración de APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer configuración"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Se ha restablecido la configuración predeterminada de APN."</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"Restablecimiento de ajustes de red"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"Se restablecerán los valores de fábrica de todos los ajustes relacionados con las redes, como:\n\n"<li>"Wi-Fi"</li>\n<li>"Datos móviles"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"Restablecer ajustes"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"¿Quieres restablecer todos los ajustes de red? Esta acción no se puede deshacer."</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"Restablecer ajustes"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"Debes dibujar el patrón de desbloqueo para confirmar que quieres que se restablezcan los ajustes de red."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"¿Restablecer?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"Restablecimiento de ajustes de red"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Restablecer dispositivo"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Restablecer datos de fábrica"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Borra todos los datos del tablet."</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Borrar todos los datos del teléfono"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del tablet, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Has accedido a las cuentas que se indican a continuación:\n"</string>
@@ -1876,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Copiar mis datos"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Crear copia de seguridad de datos de aplicaciones, contraseñas Wi-Fi y otros ajustes en los servidores de Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Cuenta de copia de seguridad"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Ninguna cuenta está almacenando datos con copia de seguridad en estos momentos."</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Incluir datos de aplicaciones"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restauración automática"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Cuando vuelvas a instalar una aplicación, restaurar la configuración y los datos incluidos en la copia"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"El servicio de copia de seguridad está inactivo."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"Establecido por la política de tu dispositivo."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Contraseña para copias de ordenador"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Las copias de seguridad completas de ordenador no están protegidas"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Tocar para cambiar o eliminar la contraseña para las copias de seguridad completas de ordenador"</string>
@@ -2382,8 +2379,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi, wi-fi, red, conexión"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"mensaje texto, mensajes texto, mensajes"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"celular, móvil, conexión inalámbrica, datos, 4g, 3g, 2g, lte"</string>
-    <!-- no translation found for keywords_wifi_calling (3032400528043215568) -->
-    <skip />
+    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi llamada llamadas itinerancia transferencia"</string>
     <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"pantalla táctil"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"atenuar, patalla, pantalla táctil, batería"</string>
@@ -2470,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"¿Quieres habilitar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> podrá añadir condiciones de salida al modo No molestar."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Cargando aplicaciones..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"Bloquear"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"No mostrar nunca notificaciones de esta aplicación"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"Prioridad"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Mostrar notificaciones en la parte superior de la lista y seguir recibiéndolas cuando el dispositivo esté configurado únicamente para interrupciones de prioridad"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Sensible"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Cuando el dispositivo esté bloqueado, ocultar contenido de carácter sensible en las notificaciones de esta aplicación"</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloqueada"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioridad"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensible"</string>
@@ -2551,8 +2556,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(N.º <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Abrir de forma predeterminada"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> utilizados en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"memoria interna"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"memoria externa"</string>
+    <string name="storage_type_internal" msgid="6042049833565674948">"Almacenamiento interno"</string>
+    <string name="storage_type_external" msgid="7738894330670001898">"Almacenamiento externo"</string>
+    <string name="app_data_usage" msgid="7942375313697452803">"Uso de datos de aplicación"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> de uso desde <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="storage_used" msgid="7128074132917008743">"Almacenamiento utilizado"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Activadas"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Bloquear"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"Sensible"</string>
@@ -2564,4 +2572,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Se han establecido algunos valores predeterminados"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"No se han establecido valores predeterminados"</string>
+    <string name="unknown_app" msgid="5275921288718717656">"Aplicación desconocida"</string>
 </resources>

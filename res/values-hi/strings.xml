@@ -348,8 +348,8 @@
     <!-- no translation found for fingerprint_enable_keyguard_toggle_title (5078060939636911795) -->
     <skip />
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="4776063289827470602">
-      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> अंगुली की छाप नामांकित किए गए</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> अंगुली की छाप नामांकित किए गए</item>
+      <item quantity="one"><xliff:g id="COUNT_1">%1$d</xliff:g> अंगुली की छाप नामांकित की गई</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> अंगुली की छाप नामांकित की गई</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"अंगुली की छाप सेटअप"</string>
     <!-- no translation found for security_settings_fingerprint_enroll_onboard_message (6402483378460350233) -->
@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"अतिरिक्त सेटिंग"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"वाई-फ़ाई  सुरक्षित सेटअप"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS प्रारंभ हो रहा है…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"अपने राउटर पर वाई-फ़ाई  सुरक्षित सेटअप बटन दबाएं. इसे \"WPS\" कहा जा सकता है या इसमें यह चिन्ह हो सकता है:"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"अपने Wi‑Fi राउटर पर <xliff:g id="NUMBER">%1$s</xliff:g> पिन डालें. सेटअप पूर्ण होने में दो मिनट तक लग सकते हैं."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS सफल रहा. नेटवर्क से कनेक्‍ट हो रहा है…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"वाई-फ़ाई  नेटवर्क <xliff:g id="NETWORK_NAME">%s</xliff:g> से कनेक्ट है"</string>
@@ -667,12 +668,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"अनाम पहचान"</string>
     <string name="wifi_password" msgid="5948219759936151048">"पासवर्ड"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"पासवर्ड दिखाएं"</string>
-    <!-- no translation found for wifi_ap_band_config (219415018348922629) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_2G (8724267386885036210) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_5G (8137061170937978040) -->
-    <skip />
+    <string name="wifi_ap_band_config" msgid="219415018348922629">"कॉन्‍फ़िग AP बैंड"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4 GHz बैंड"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz बैंड"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP सेटिंग"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(अपरिवर्तित)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(अनिर्दिष्ट)"</string>
@@ -751,30 +749,25 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK पोर्टेबल वाई-फ़ाई हॉटस्पॉट"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> पोर्टेबल वाई-फ़ाई  हॉटस्‍पॉट"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_calling_settings_title (4102921303993404577) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_title (3208568886184788972) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_dialog_title (8149690312199253909) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_choices:0 (2124257075906188844) -->
-    <!-- no translation found for wifi_calling_mode_choices:1 (5267397515594230396) -->
-    <!-- no translation found for wifi_calling_mode_choices:2 (3132912693346866895) -->
-    <!-- no translation found for wifi_calling_mode_values:0 (4799585830102342375) -->
-    <!-- no translation found for wifi_calling_mode_values:1 (1171822231056612021) -->
-    <!-- no translation found for wifi_calling_mode_values:2 (3194458950573886239) -->
-    <!-- no translation found for wifi_calling_off_summary (1973102843796728910) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_preferred_summary (2538605598404726187) -->
-    <skip />
-    <!-- no translation found for wfc_mode_cellular_preferred_summary (3409009182901031134) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_only_summary (6783204292010626433) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_title (1949055516180908425) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_summary (8613368213416864074) -->
-    <skip />
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"वाई-फ़ाई कॉलिंग"</string>
+    <string name="wifi_calling_mode_title" msgid="3208568886184788972">"वाई-फ़ाई कॉलिंग मोड"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"वाई-फ़ाई कॉलिंग मोड"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"वाई-फ़ाई को प्राथमिकता"</item>
+    <item msgid="5267397515594230396">"सेल्‍युलर को प्राथमिकता"</item>
+    <item msgid="3132912693346866895">"केवल वाई-फ़ाई"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+    <string name="wifi_calling_off_summary" msgid="1973102843796728910">"बंद"</string>
+    <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"वाई-फ़ाई को प्राथमिकता (वाई-फ़ाई उपलब्‍ध ना होने पर ही सेल नेटवर्क का उपयोग करती है)"</string>
+    <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"सेल्‍युलर को प्राथमिकता (सेल नेटवर्क उपलब्‍ध ना होने पर ही वाई-फ़ाई का उपयोग करती है)"</string>
+    <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"केवल वाई-फ़ाई (कभी भी सेल नेटवर्क का उपयोग नहीं करती. वाई-फ़ाई ना हो तो कॉल करना या पाना संभव नहीं)"</string>
+    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"रोमिंग में होने पर WFC हैंडऑफ़"</string>
+    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"रोमिंग में होने पर वाई-फ़ाई वॉइस कॉल को सेल नेटवर्क में हैंडऑफ़ की अनुमति दें"</string>
     <string name="home_settings" msgid="212375129455718176">"होम"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"स्क्रीन सेटिंग देखें"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ध्वनि"</string>
@@ -1037,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"डिफ़ॉल्‍ट APN सेटिंग पुनर्स्थापित हो रही हैं."</string>
     <string name="menu_restore" msgid="8260067415075573273">"डिफ़ॉल्ट पर रीसेट करें"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"डिफ़ॉल्‍ट APN सेटिंग रीसेट करना पूर्ण हुआ."</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"नेटवर्क सेटिंग रीसेट कर दी गई"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"यह नेटवर्किंग से संंबंधित सभी सेटिंग को फैक्टरी डिफ़ॉल्ट में रीसेट कर देगा, इसमें निम्न शामिल हैं:\n\n"<li>"वाई-फ़ाई"</li>\n<li>"मोबाइल डेटा"</li>\n<li>"ब्लूटूथ"</li></string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"सेटिंग रीसेट करें"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"सभी नेटवर्क सेटिंग को रीसेट करना है? आप इस कार्रवाई को वापस पहले जैसा नहीं कर सकते!"</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"सेटिंग रीसेट करें"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"आपको नेटवर्क सेटिंग रीसेट की पुष्टि करने के लिए अपने अनलॉक पैटर्न का आरेख बनाना होगा."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"रीसेट करें?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"नेटवर्क सेटिंग रीसेट कर दी गई"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"डिवाइस रीसेट करें"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"फ़ैक्टरी डेटा रीसेट"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"टेबलेट से सभी डेटा मिटाएं"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"फ़ोन से सभी डेटा मिटाएं"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"इससे आपके टेबलेट के "<b>"मोबाइल मेमोरी"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और ऐप्स डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्स"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"इससे आपके फ़ोन के "<b>"मोबाइल मेमोरी"</b>" से सभी डेटा मिट जाएगा, जिसमें शामिल है:\n\n"<li>"आपका Google खाता"</li>\n<li>"सिस्‍टम और ऐप्स डेटा और सेटिंग"</li>\n<li>"डाउनलोड किए गए ऐप्स"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"आप वर्तमान में निम्‍न खातों में प्रवेश हैं:\n"</string>
@@ -1876,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"मेरे डेटा को सुरक्षित करें"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"ऐप्स  डेटा, वाई-फ़ाई पासवर्ड, और अन्य सेटिंग को Google सर्वर पर सुरक्षित रखें"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"सुरक्षित खाता"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"वर्तमान में कोई भी खाता बैकअप डेटा संग्रहीत नहीं कर रहा है"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"ऐप्स डेटा शामिल करें"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"अपने आप डेटा रिस्टोर करें"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"किसी ऐप्स को पुन: इंस्‍टॉल करने पर, बैकअप ली गई सेटिंग और डेटा पुनर्स्‍थापित करें"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"बैकअप सेवा निष्‍क्रिय है."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"इसे आपकी डिवाइस नीति द्वारा सेट किया गया है."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"डेस्‍कटॉप बैकअप पासवर्ड"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"डेस्‍कटॉप पूर्ण बैकअप वर्तमान में सुरक्षित नहीं हैं"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"डेस्कटॉप के पूर्ण बैकअप के पासवर्ड को बदलने या निकालने के लिए स्‍पर्श करें."</string>
@@ -2382,8 +2379,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi वाई-फ़ाई नेटवर्क कनेक्शन"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"text message texting messages messaging"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"cellular cell carrier wireless data 4g 3g 2g lte"</string>
-    <!-- no translation found for keywords_wifi_calling (3032400528043215568) -->
-    <skip />
+    <string name="keywords_wifi_calling" msgid="3032400528043215568">"वाईफ़ाई वाई-फ़ाई कॉल कॉलिंग रोमिंग हैंडऑफ़"</string>
     <string name="keywords_home" msgid="3626170808219458848">"लॉन्चर"</string>
     <string name="keywords_display" msgid="6709007669501628320">"स्क्रीन टचस्क्रीन"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"हल्की रोशनी वाली टचस्‍क्रीन बैटरी"</string>
@@ -2470,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> सक्षम करें?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> परेशान न करें मोड में अतिरिक्त शर्तें जोड़ सकेगा."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"ऐप्स लोड हो रहे हैं..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"अवरुद्ध करें"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"इस ऐप्स से कभी भी नोटिफिकेशन न दिखाएं"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"प्राथमिकता"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"जब डिवाइस को केवल प्राथमिकता वाले कॉल और मैसेज को रोकने के लिए सेट किया गया हो, तो नोटिफिकेशन को सूची में सबसे ऊपर दिखाएं और उन्हें आते रहने दें"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"संवेदनशील"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"जब डिवाइस लॉक हो, तो किसी भी संवेदनशील सामग्री को इस ऐप्स की नोटिफिकेशन से छिपाएं"</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"अवरोधित"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"प्राथमिकता"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"संवेदनशील"</string>
@@ -2551,8 +2556,14 @@
     <string name="slot_number" msgid="3762676044904653577">"(स्लॉट<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"डिफ़ॉल्‍ट रूप से लॉन्‍च करें"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> में <xliff:g id="SIZE">%1$s</xliff:g> का उपयोग किया गया"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"आंतरिक मेमोरी"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"बाहरी मेमोरी"</string>
+    <!-- no translation found for storage_type_internal (6042049833565674948) -->
+    <skip />
+    <!-- no translation found for storage_type_external (7738894330670001898) -->
+    <skip />
+    <string name="app_data_usage" msgid="7942375313697452803">"ऐप्स डेटा उपयोग"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="DATE">%2$s</xliff:g> से <xliff:g id="SIZE">%1$s</xliff:g> उपयोग हुआ"</string>
+    <!-- no translation found for storage_used (7128074132917008743) -->
+    <skip />
     <string name="notifications_enabled" msgid="6983396130566021385">"चालू"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"अवरुद्ध करें"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"संवेदनशील"</string>
@@ -2564,4 +2575,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"कुछ डिफ़ॉल्‍ट सेट हैं"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"कोई डिफ़ॉल्‍ट सेट नहीं है"</string>
+    <string name="unknown_app" msgid="5275921288718717656">"अज्ञात ऐप"</string>
 </resources>

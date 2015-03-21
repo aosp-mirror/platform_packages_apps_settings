@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"გაფართოებული ვარიანტები"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi‑Fi პარამეტრების უსაფრთხო დაყენება"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS იწყება…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"დააჭირეთ თქვენს როუტერზე Wi‑Fi პარამეტრების უსაფრთხო დაყენების ღილაკს. მას შეიძლება ერქვას \"WPS\" ან შეიცავდეს სიმბოლოს:"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"შეიყვანეთ  Wi‑Fi როუტერში <xliff:g id="NUMBER">%1$s</xliff:g> PIN კოდი. პარამეტრების დაყენებას შეიძლება დასჭირდეს 2 წუთამდე."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS შეცდომების გარეშეა. მიმდინარეობს ქსელთან დაკავშირება…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"დაკავშირებულია Wi‑Fi ქსელთან: <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -667,12 +668,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"უცნობი"</string>
     <string name="wifi_password" msgid="5948219759936151048">"პაროლი"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"პაროლის გამოჩენა"</string>
-    <!-- no translation found for wifi_ap_band_config (219415018348922629) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_2G (8724267386885036210) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_5G (8137061170937978040) -->
-    <skip />
+    <string name="wifi_ap_band_config" msgid="219415018348922629">"წვდომის წერტილის დიაპაზონის კონფიგურაცია"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2,4 GHz დიაპაზონი"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5 GHz დიაპაზონი"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP პარამეტრები"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(უცვლელი)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(არ არის მითითებული)"</string>
@@ -751,30 +749,25 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK პორტაბელური Wi‑Fi უსადენო ქსელი"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> პორტატიული Wi‑Fi hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_calling_settings_title (4102921303993404577) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_title (3208568886184788972) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_dialog_title (8149690312199253909) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_choices:0 (2124257075906188844) -->
-    <!-- no translation found for wifi_calling_mode_choices:1 (5267397515594230396) -->
-    <!-- no translation found for wifi_calling_mode_choices:2 (3132912693346866895) -->
-    <!-- no translation found for wifi_calling_mode_values:0 (4799585830102342375) -->
-    <!-- no translation found for wifi_calling_mode_values:1 (1171822231056612021) -->
-    <!-- no translation found for wifi_calling_mode_values:2 (3194458950573886239) -->
-    <!-- no translation found for wifi_calling_off_summary (1973102843796728910) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_preferred_summary (2538605598404726187) -->
-    <skip />
-    <!-- no translation found for wfc_mode_cellular_preferred_summary (3409009182901031134) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_only_summary (6783204292010626433) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_title (1949055516180908425) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_summary (8613368213416864074) -->
-    <skip />
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"დარეკვა Wi-Fi-ს მეშვეობით"</string>
+    <string name="wifi_calling_mode_title" msgid="3208568886184788972">"Wi-Fi-თი დარეკვის რეჟიმი"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi-თი დარეკვის რეჟიმი"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"სასურველია Wi-Fi"</item>
+    <item msgid="5267397515594230396">"სასურველია ფიჭური ინტერნეტი"</item>
+    <item msgid="3132912693346866895">"მხოლოდ Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+    <string name="wifi_calling_off_summary" msgid="1973102843796728910">"გამორთული"</string>
+    <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"სასურველია Wi-Fi (იყენებს ფიჭურ ქსელს მხოლოდ, როცა Wi-Fi მიუწვდომელია)"</string>
+    <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"სასურველია ფიჭური ინტერნეტი (იყენებს Wi-Fi-ს მხოლოდ, როცა ფიჭური ქსელი მიუწვდომელია)"</string>
+    <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"მხოლოდ Wi-Fi (არ იყენებს ფიჭურ ქსელს. დარეკვა და ზარების მიღება შეუძლებელია, როცა Wi-Fi მიუწვდომელია)"</string>
+    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"როუმინგის დროს, WFC გადაცემა"</string>
+    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"როუმინგის დროს, Wi-Fi ხმოვანი ზარების ფიჭურ ქსელზე გადაცემის დაშვება"</string>
     <string name="home_settings" msgid="212375129455718176">"სახლი"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ეკრანი"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ხმა"</string>
@@ -1037,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"ნაგულისხმევი APN პარამეტრების აღდგენა."</string>
     <string name="menu_restore" msgid="8260067415075573273">"საწყის პარამეტრებზე ჩამოყრა"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"ნაგულისხმევი APN პარამეტრების  აღდგენა დასრულებულია"</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"ქსელის პარამეტრების ჩამოყრა"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"ეს ქსელთან დაკავშირებულ ყველა პარამეტრს ქარხნულ ნაგულისხმევ პარამეტრებზე ჩამოყრის, მათ შორის:\n\n"<li>"Wifi-ს"</li>\n<li>"მობილურ ინტერნეტს"</li>\n<li>"Bluetooth-ს"</li></string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"პარამეტრების ჩამოყრა"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"ჩამოვყაროთ ქსელის ყველა პარამეტრი? ამ მოქმედების უკუქცევა შეუძლებელია!"</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"პარამეტრების ჩამოყრა"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"ქსელის პარამეტრების ჩამოყრის დასადასტურებლად, უნდა დახატოთ თქვენი განბლოკვის ნიმუში."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"ჩამოვყაროთ პარამეტრები?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"ქსელის პარამეტრების ჩამოყრა"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"მოწყობილობის საწყისზე დაბრ."</string>
     <string name="master_clear_title" msgid="5907939616087039756">"ქარხნული მონაცემების აღდგენა"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"წაიშლება ყველა მონაცემი ტაბლეტზე"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"მთლიანად შლის ტელეფონზე არსებულ მონაცემებს და აღადგენს მას ქარნულ მდგომარეობაში"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"ეს მოქმედება წაშლის ყველა მონაცემებს თქვენი ტაბლეტის "<b>"შიდა მეხსიერებიდან"</b>", მათ შორის:\n\n"<li>"თქვენს Google-ის ანგარიშს"</li>\n<li>"სისტემისა და აპების მონაცემებს და პარამეტრებს"</li>\n<li>"ჩამოტვირთულ აპებს"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"ეს მოქმედება წაშლის ყველა მონაცემებს თქვენი ტელეფონის "<b>"შიდა მეხსიერებიდან"</b>", მათ შორის:\n\n"<li>"თქვენს Google-ის ანგარიშს"</li>\n<li>"სისტემისა და აპების მონაცემებს და პარამეტრებს"</li>\n<li>"ჩამოტვირთულ აპებს"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"ამჟამად შესული ხართ შემდეგ ანგარიშებში:\n"</string>
@@ -1876,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"მონაცემების სარეზერვო კოპირება"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Google სერვერებზე აპების მონაცემების, Wi-Fi პაროლების და სხვა პარამეტრების შენახვა"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"სარეზერვო ანგარიში"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"ამჟამად არცერთი ანგარიში არ ინახავს დამარქაფებულ მონაცემებს"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"აპის მონაცემების ჩათვლით"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"ავტომატური აღდგენა"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"აპის ხელახალი ინსტალაციისას აღდგეს პარამეტრები და მონაცემები სარეზერვო კოპიიდან, თუ ის არსებობს"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"სარეზერვო სამსახური არ არის აქტიური."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"ეს დაყენებულია თქვენი მოწყობილობის პოლიტიკით."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"დესკტოპის სარეზერვო ასლის პაროლი"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"დესკტოპის სრული სარეზერვო ასლები ამჟამად დაცული არ არის"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"შეეხეთ დესკტოპის სრული სარეზერვო ასლების პაროლის შესაცვლელად ან წასაშლელად"</string>
@@ -2382,8 +2379,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi ქსელის კავშირი"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"ტექსტი შეტყობინება SMS დამესიჯება მესიჯი"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"მობილური ფიჭური ოპერატორი უსადენო ინტერნეტი 4g 3g 2g lte"</string>
-    <!-- no translation found for keywords_wifi_calling (3032400528043215568) -->
-    <skip />
+    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi ზარი როუმინგულ გადართვაზე დარეკვისას"</string>
     <string name="keywords_home" msgid="3626170808219458848">"გამშვები"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ეკრანის სენსორი"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ეკრანის ჩაბნელება სენსორული ეკრანი ბატარეა"</string>
@@ -2470,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"ჩაირთოს <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> შეძლებს გასვლის პირობები დაამატოს „არ შემაწუხოთ“ რეჟიმს."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"აპები იტვირთება..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"დაბლოკვა"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"ამ აპზე შეტყობინებები არასდროს აჩვენო"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"პრიორიტეტი"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"შეტყობინებების სიის თავში ჩვენება, მაშინაც კი, როდესაც მოწყობილობა მხოლოდ პრიორიტეტული შეწყვეტების რეჟიმშია"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"სენსიტიური"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"როდესაც მოწყობილობა დაბლოკილია, დამალეთ ნებისმიერი სენსიტიური ინფორმაცია ამ აპის შეტყობინებებისგან."</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"დაბლოკილი"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"პრიორიტეტი"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"სენსიტიური"</string>
@@ -2551,8 +2556,14 @@
     <string name="slot_number" msgid="3762676044904653577">"(სლოტი<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"გაშვება ნაგულისხმევად"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> გამოიყენება საცავში: <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"შიდა მეხსიერება"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"გარე მეხსიერება"</string>
+    <!-- no translation found for storage_type_internal (6042049833565674948) -->
+    <skip />
+    <!-- no translation found for storage_type_external (7738894330670001898) -->
+    <skip />
+    <string name="app_data_usage" msgid="7942375313697452803">"აპის მონაცემთა გამოყენება"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> გამოიყენ. <xliff:g id="DATE">%2$s</xliff:g>-დან"</string>
+    <!-- no translation found for storage_used (7128074132917008743) -->
+    <skip />
     <string name="notifications_enabled" msgid="6983396130566021385">"ჩართული"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"დაბლოკვა"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"სენსიტიური"</string>
@@ -2564,4 +2575,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"ზოგიერთი ნაგულისხმევი პარამეტრი დაყენებულია"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"ნაგულისხმევი პარამეტრები არ არის დაყენებული."</string>
+    <string name="unknown_app" msgid="5275921288718717656">"უცნობი აპი"</string>
 </resources>

@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"고급 옵션"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi Protected 설정"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS을 시작하는 중…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"공유기에서 Wi-Fi Protected 설정 버튼을 누르세요. \'WPS\'라고 줄여 부르기도 하며 다음 기호를 포함할 수도 있습니다."</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Wi-Fi 공유기에 PIN(개인 식별 번호) <xliff:g id="NUMBER">%1$s</xliff:g>을(를) 입력하세요. 설정을 완료하는 데 최대 2분이 소요됩니다."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS 성공. 네트워크에 연결 중…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Wi-Fi 네트워크 <xliff:g id="NETWORK_NAME">%s</xliff:g>에 연결됨"</string>
@@ -667,12 +668,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"익명 ID"</string>
     <string name="wifi_password" msgid="5948219759936151048">"비밀번호"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"비밀번호 표시"</string>
-    <!-- no translation found for wifi_ap_band_config (219415018348922629) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_2G (8724267386885036210) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_5G (8137061170937978040) -->
-    <skip />
+    <string name="wifi_ap_band_config" msgid="219415018348922629">"AP 대역 설정"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"2.4GHz 대역"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"5GHz 대역"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"IP 설정"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(변경 안함)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(지정되지 않음)"</string>
@@ -751,30 +749,25 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"AndroidAP WPA2 PSK 휴대용 Wi‑Fi 핫스팟"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"<xliff:g id="NETWORK_SECURITY">%2$s</xliff:g><xliff:g id="NETWORK_SSID">%1$s</xliff:g> 휴대용 Wi-Fi 핫스팟"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_calling_settings_title (4102921303993404577) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_title (3208568886184788972) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_dialog_title (8149690312199253909) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_choices:0 (2124257075906188844) -->
-    <!-- no translation found for wifi_calling_mode_choices:1 (5267397515594230396) -->
-    <!-- no translation found for wifi_calling_mode_choices:2 (3132912693346866895) -->
-    <!-- no translation found for wifi_calling_mode_values:0 (4799585830102342375) -->
-    <!-- no translation found for wifi_calling_mode_values:1 (1171822231056612021) -->
-    <!-- no translation found for wifi_calling_mode_values:2 (3194458950573886239) -->
-    <!-- no translation found for wifi_calling_off_summary (1973102843796728910) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_preferred_summary (2538605598404726187) -->
-    <skip />
-    <!-- no translation found for wfc_mode_cellular_preferred_summary (3409009182901031134) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_only_summary (6783204292010626433) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_title (1949055516180908425) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_summary (8613368213416864074) -->
-    <skip />
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 통화"</string>
+    <string name="wifi_calling_mode_title" msgid="3208568886184788972">"Wi-Fi 통화 모드"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi 통화 모드"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Wi-Fi를 기본으로 설정"</item>
+    <item msgid="5267397515594230396">"모바일 데이터를 기본으로 설정"</item>
+    <item msgid="3132912693346866895">"Wi-Fi에서만"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+    <string name="wifi_calling_off_summary" msgid="1973102843796728910">"사용 안함"</string>
+    <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi를 기본으로 설정(Wi-Fi를 사용할 수 없는 경우에만 모바일 네트워크 사용)"</string>
+    <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"모바일 데이터를 기본으로 설정(모바일 네트워크를 사용할 수 없는 경우에만 Wi-Fi 사용)"</string>
+    <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi에서만(모바일 네트워크를 사용하지 않으며 Wi-Fi를 사용할 수 없는 경우 전화를 걸거나 받을 수 없음)"</string>
+    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"로밍 시 Wi-Fi 통화 핸드오프"</string>
+    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"로밍 시 모바일 네트워크에 Wi-Fi 음성 통화 핸드오프 허용"</string>
     <string name="home_settings" msgid="212375129455718176">"홈"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"디스플레이"</string>
     <string name="sound_settings" msgid="5534671337768745343">"소리"</string>
@@ -1037,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"기본 APN 설정 복원 중"</string>
     <string name="menu_restore" msgid="8260067415075573273">"초기화"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"기본 APN 설정을 초기화했습니다."</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"네트워크 설정 초기화"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">\n\n<li>"Wi-Fi"</li>\n<li>"모바일 데이터"</li>\n<li>"블루투스"</li>" 등 네트워크와 관련된 모든 설정이 초기화됩니다."</string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"설정 초기화"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"모든 네트워크 설정을 초기화하시겠습니까? 수행한 후에는 되돌릴 수 없습니다."</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"설정 초기화"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"네트워크 설정 초기화를 확인하려면 잠금해제 패턴을 그려야 합니다."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"초기화하시겠습니까?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"네트워크 설정 초기화"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"기기 재설정"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"공장 초기화"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"태블릿의 모든 데이터 지우기"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"휴대전화의 모든 데이터 지우기"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"공장 초기화하면 태블릿의 "<b>"내부 저장소의 모든 데이터가 삭제됩니다."</b>\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"공장 초기화하면 휴대전화 "<b>"내부 저장소의 모든 데이터가 삭제됩니다."</b>\n\n<li>"Google 계정"</li>\n<li>"시스템과 앱 데이터 및 설정"</li>\n<li>"다운로드된 앱"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"현재 로그인한 계정:\n"</string>
@@ -1876,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"내 데이터 백업"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"앱 데이터, Wi-Fi 비밀번호 및 기타 설정을 Google 서버에 백업"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"백업 계정"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"현재 백업한 데이터가 저장된 계정이 없습니다."</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"앱 데이터 포함"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"자동 복원"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"앱을 다시 설치하면 백업된 설정과 데이터 복원"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"백업 서비스가 비활성 상태입니다."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"기기 정책에 따라 설정되었습니다."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"데스크톱 백업 비밀번호"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"데스크톱 전체 백업에 비밀번호가 설정되어 있지 않음"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"데스크톱 전체 백업에 대한 비밀번호를 변경하거나 삭제하려면 터치하세요."</string>
@@ -2382,8 +2379,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi Wi-Fi 네트워크 연결"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"문자 메시지 문자 메시지 전송 메시지"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"휴대전화 셀 이동통신사 무선 데이터 4G 3G 2G LTE"</string>
-    <!-- no translation found for keywords_wifi_calling (3032400528043215568) -->
-    <skip />
+    <string name="keywords_wifi_calling" msgid="3032400528043215568">"Wi-Fi Wi-Fi 전화 통화 로밍 핸드오프"</string>
     <string name="keywords_home" msgid="3626170808219458848">"런처"</string>
     <string name="keywords_display" msgid="6709007669501628320">"화면 터치스크린"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"화면 어둡게 하기 터치스크린 배터리"</string>
@@ -2470,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g>을(를) 사용하도록 설정하시겠습니까?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g>은(는) 알림 일시중지 모드에 종료 조건을 추가할 수 있습니다."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"앱 로드 중..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"차단"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"이 앱의 알림 표시 안함"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"최우선만 수신"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"목록 상단에 알림 표시(기기에 최우선 알림만 표시되도록 설정한 경우에만 계속 표시)"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"중요"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"기기가 잠겨 있는 경우 앱 알림에서 중요한 콘텐츠를 모두 숨깁니다."</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"차단됨"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"최우선만 수신"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"중요"</string>
@@ -2551,8 +2556,14 @@
     <string name="slot_number" msgid="3762676044904653577">"(슬롯 <xliff:g id="SLOT_NUM">%1$d</xliff:g>개)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"기본으로 실행"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>에 <xliff:g id="SIZE">%1$s</xliff:g>이(가) 사용되었습니다."</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"내부 메모리"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"외부 메모리"</string>
+    <!-- no translation found for storage_type_internal (6042049833565674948) -->
+    <skip />
+    <!-- no translation found for storage_type_external (7738894330670001898) -->
+    <skip />
+    <string name="app_data_usage" msgid="7942375313697452803">"앱 데이터 사용"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="DATE">%2$s</xliff:g> 이후 <xliff:g id="SIZE">%1$s</xliff:g> 사용"</string>
+    <!-- no translation found for storage_used (7128074132917008743) -->
+    <skip />
     <string name="notifications_enabled" msgid="6983396130566021385">"사용"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"차단"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"중요"</string>
@@ -2564,4 +2575,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"일부 기본값이 설정되었습니다."</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"기본값이 설정되지 않았습니다."</string>
+    <string name="unknown_app" msgid="5275921288718717656">"알 수 없는 앱"</string>
 </resources>

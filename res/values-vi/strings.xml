@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Tùy chọn nâng cao"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Thiết lập Wi‑Fi được bảo vệ"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Đang khởi động WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"Nhấn nút Thiết lập Wi‑Fi được bảo vệ trên bộ định tuyến của bạn. Nút này có thể được gọi là \"WPS\" hoặc chứa ký hiệu sau:"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Nhập mã pin <xliff:g id="NUMBER">%1$s</xliff:g> trên bộ định tuyến Wi‑Fi của bạn. Thiết lập có thể mất tối đa hai phút để hoàn tất."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS đã thành công. Đang kết nối với mạng…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Đã kết nối với mạng Wi‑Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -667,12 +668,9 @@
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Danh tính ẩn danh"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Mật khẩu"</string>
     <string name="wifi_show_password" msgid="6461249871236968884">"Hiển thị mật khẩu"</string>
-    <!-- no translation found for wifi_ap_band_config (219415018348922629) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_2G (8724267386885036210) -->
-    <skip />
-    <!-- no translation found for wifi_ap_choose_5G (8137061170937978040) -->
-    <skip />
+    <string name="wifi_ap_band_config" msgid="219415018348922629">"Định cấu hình băng tần AP"</string>
+    <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"Băng tần 2,4 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8137061170937978040">"Băng tần 5 GHz"</string>
     <string name="wifi_ip_settings" msgid="3359331401377059481">"Cài đặt IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(không thay đổi)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(không xác định)"</string>
@@ -751,30 +749,25 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5618031116920832182">"Điểm phát sóng Wi‑Fi DĐ AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_subtext" msgid="7957547035983257748">"Điểm phát sóng Wi‑Fi di động <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_calling_settings_title (4102921303993404577) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_title (3208568886184788972) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_dialog_title (8149690312199253909) -->
-    <skip />
-    <!-- no translation found for wifi_calling_mode_choices:0 (2124257075906188844) -->
-    <!-- no translation found for wifi_calling_mode_choices:1 (5267397515594230396) -->
-    <!-- no translation found for wifi_calling_mode_choices:2 (3132912693346866895) -->
-    <!-- no translation found for wifi_calling_mode_values:0 (4799585830102342375) -->
-    <!-- no translation found for wifi_calling_mode_values:1 (1171822231056612021) -->
-    <!-- no translation found for wifi_calling_mode_values:2 (3194458950573886239) -->
-    <!-- no translation found for wifi_calling_off_summary (1973102843796728910) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_preferred_summary (2538605598404726187) -->
-    <skip />
-    <!-- no translation found for wfc_mode_cellular_preferred_summary (3409009182901031134) -->
-    <skip />
-    <!-- no translation found for wfc_mode_wifi_only_summary (6783204292010626433) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_title (1949055516180908425) -->
-    <skip />
-    <!-- no translation found for wifi_calling_roam_summary (8613368213416864074) -->
-    <skip />
+    <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Gọi qua Wi-Fi"</string>
+    <string name="wifi_calling_mode_title" msgid="3208568886184788972">"Chế độ gọi qua Wi-Fi"</string>
+    <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Chế độ gọi qua Wi-Fi"</string>
+  <string-array name="wifi_calling_mode_choices">
+    <item msgid="2124257075906188844">"Ưu tiên Wi-Fi"</item>
+    <item msgid="5267397515594230396">"Ưu tiên mạng di động"</item>
+    <item msgid="3132912693346866895">"Chỉ Wi-Fi"</item>
+  </string-array>
+  <string-array name="wifi_calling_mode_values">
+    <item msgid="4799585830102342375">"2"</item>
+    <item msgid="1171822231056612021">"1"</item>
+    <item msgid="3194458950573886239">"0"</item>
+  </string-array>
+    <string name="wifi_calling_off_summary" msgid="1973102843796728910">"Tắt"</string>
+    <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Ưu tiên Wi-Fi (Chỉ sử dụng mạng di động nếu không có Wi-Fi)"</string>
+    <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Ưu tiên mạng di động (Chỉ sử dụng Wi-Fi nếu không có mạng di động)"</string>
+    <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Chỉ Wi-Fi (Không bao giờ sử dụng mạng di động. Không thể nhận hoặc thực hiện cuộc gọi nếu không có Wi-Fi)"</string>
+    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Chuyển WFC khi chuyển vùng"</string>
+    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Cho phép chuyển cuộc gọi thoại qua Wi-Fi sang mạng di động khi chuyển vùng"</string>
     <string name="home_settings" msgid="212375129455718176">"Trang chủ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Hiển thị"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Âm thanh"</string>
@@ -1037,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Đang khôi phục cài đặt APN mặc định."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Đặt lại về mặc định"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Đặt lại cài đặt APN mặc định đã hoàn tất."</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"Đã đặt lại cài đặt mạng"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"Điều này sẽ đặt lại tất cả các cài đặt liên quan đến mạng về mặc định ban đầu, bao gồm:\n\n"<li>"Wifi"</li>\n<li>"Dữ liệu di động"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"Đặt lại cài đặt"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"Đặt lại tất cả cài đặt mạng? Bạn không thể hoàn nguyên tác vụ này!"</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"Đặt lại cài đặt"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"Bạn cần phải vẽ hình mở khóa của mình để xác nhận đặt lại cài đặt mạng."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"Đặt lại?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"Đã đặt lại cài đặt mạng"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Đặt lại thiết bị"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Đặt lại về dữ liệu gốc"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Xóa tất cả dữ liệu trên máy tính bảng"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Xóa tất cả dữ liệu trên điện thoại"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Tác vụ này sẽ xóa tất cả dữ liệu từ "<b>"bộ nhớ trong"</b>" của máy tính bảng, bao gồm:\n\n"<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Tác vụ này sẽ xóa tất cả dữ liệu từ "<b>"bộ nhớ trong"</b>" của điện thoại, bao gồm:\n\n"<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Bạn hiện đã đăng nhập vào các tài khoản sau đây:\n"</string>
@@ -1876,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Sao lưu dữ liệu của tôi"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Sao lưu dữ liệu ứng dụng, mật khẩu Wi-Fi và các cài đặt khác vào máy chủ Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sao lưu tài khoản"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Hiện không có tài khoản nào lưu trữ dữ liệu được sao lưu"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Bao gồm dữ liệu ứng dụng"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Tự động khôi phục"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"Khi cài đặt lại một ứng dụng, khôi phục dữ liệu và cài đặt đã sao lưu"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Dịch vụ sao lưu không hoạt động."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"Tùy chọn này do chính sách thiết bị của bạn đặt."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"MK sao lưu của m.tính"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"Sao lưu toàn bộ tới máy tính hiện không được bảo vệ"</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Chạm để thay đổi hoặc xóa mật khẩu dành cho bộ sao lưu toàn bộ tới máy tính"</string>
@@ -2382,8 +2379,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi kết nối mạng"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"tin nhắn văn bản nhắn tin tin nhắn nhắn tin"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"di động điện thoại nhà cung cấp không dây dữ liệu 4g 3g 2g lte"</string>
-    <!-- no translation found for keywords_wifi_calling (3032400528043215568) -->
-    <skip />
+    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi gọi gọi điện chuyển vùng chuyển"</string>
     <string name="keywords_home" msgid="3626170808219458848">"trình chạy"</string>
     <string name="keywords_display" msgid="6709007669501628320">"màn hình màn hình cảm ứng"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"làm mờ màn hình màn hình cảm ứng pin"</string>
@@ -2470,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Bật <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> có thể thêm điều kiện thoát vào chế độ Không làm phiền."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Đang tải ứng dụng..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"Chặn"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Không bao giờ hiển thị thông báo từ ứng dụng này"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"Mức độ ưu tiên"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Hiển thị thông báo ở đầu danh sách và tiếp tục hiển thị khi đặt thiết bị thành chỉ các gián đoạn ưu tiên"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Nhạy cảm"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Khi thiết bị bị khóa, hãy ẩn mọi nội dung nhạy cảm khỏi thông báo của ứng dụng này"</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bị chặn"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Mức độ ưu tiên"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Nhạy cảm"</string>
@@ -2551,8 +2556,14 @@
     <string name="slot_number" msgid="3762676044904653577">"(Khe cắm<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Khởi chạy theo mặc định"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> đã được sử dụng trong <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"bộ nhớ trong"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"bộ nhớ ngoài"</string>
+    <!-- no translation found for storage_type_internal (6042049833565674948) -->
+    <skip />
+    <!-- no translation found for storage_type_external (7738894330670001898) -->
+    <skip />
+    <string name="app_data_usage" msgid="7942375313697452803">"Mức sử dụng dữ liệu ứng dụng"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> được sử dụng từ <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <!-- no translation found for storage_used (7128074132917008743) -->
+    <skip />
     <string name="notifications_enabled" msgid="6983396130566021385">"Bật"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Chặn"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"Nhạy cảm"</string>
@@ -2564,4 +2575,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Đã đặt một số mặc định"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Chưa đặt mặc định"</string>
+    <string name="unknown_app" msgid="5275921288718717656">"Ứng dụng không xác định"</string>
 </resources>

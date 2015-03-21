@@ -641,7 +641,8 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Opzioni avanzate"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi‑Fi Protected Setup"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Avvvio WPS..."</string>
-    <string name="wifi_wps_onstart_pbc" msgid="5940801028985255304">"Premi il pulsante Wi‑Fi Protected Setup del router. Il pulsante potrebbe essere denominato \"WPS\" o contenere questo simbolo:"</string>
+    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
+    <skip />
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Inserisci il PIN <xliff:g id="NUMBER">%1$s</xliff:g> sul router Wi‑Fi. Il completamento della configurazione può richiedere fino a due minuti."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"Configurazione WPS riuscita. Connessione alla rete..."</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Connesso alla rete Wi‑Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1029,10 +1030,16 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"Ripristino delle impostazioni APN predefinite."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Ripristina impostazioni predefinite"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Ripristino delle impostazioni APN predefinite completato."</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"Reimpostazione della rete"</string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"Questa operazione determina il ripristino delle impostazioni predefinte di fabbrica per la rete, di conseguenza riguarda anche le seguenti opzioni: \n\n"<li>"Wi-Fi"</li>\n<li>"Dati mobili"</li>\n<li>"Bluetooth"</li></string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"Reimposta impostazioni"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"Reimpostare tutte le impostazioni di rete? L\'operazione non potrà essere annullata."</string>
+    <string name="reset_network_final_button_text" msgid="1797434793741744635">"Reimposta impostazioni"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"Devi tracciare la sequenza di sblocco per confermare la reimpostazione della rete."</string>
+    <string name="reset_network_confirm_title" msgid="1759888886976962773">"Reimpostare?"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"Reimpostazione della rete"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"Ripristina dispositivo"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Ripristino dati di fabbrica"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Cancella tutti i dati sul tablet"</string>
-    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Cancella tutti i dati sul telefono"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"Questa operazione cancellerà tutti i dati memorizzati nell\'"<b>"archivio interno"</b>" del tablet, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle applicazioni"</li>\n<li>"Applicazioni scaricate"</li></string>
     <string name="master_clear_desc" product="default" msgid="9165016501623540228">"Questa operazione cancellerà tutti i dati memorizzati nell\'"<b>"archivio interno"</b>" del telefono, compresi:\n\n"<li>"Il tuo account Google"</li>\n<li>"Dati e impostazioni del sistema e delle applicazioni"</li>\n<li>"Applicazioni scaricate"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Al momento sei collegato ai seguenti account:\n"</string>
@@ -1868,12 +1875,10 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Backup dei miei dati"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"Effettua il backup di dati delle app, password Wi-Fi e altre impostazioni sui server di Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Account di backup"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Al momento nessun account memorizza i dati di backup"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"Includi dati app"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Ripristino automatico"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"In caso di reinstallazione di un\'applicazione, ripristina impostazioni e dati di backup"</string>
     <string name="backup_inactive_title" msgid="5355557151569037197">"Il servizio di backup non è attivo."</string>
-    <string name="backup_inactive_summary" msgid="7630412094703573180">"Viene impostato in base alla norma del dispositivo."</string>
     <string name="local_backup_password_title" msgid="3860471654439418822">"Password di backup desktop"</string>
     <string name="local_backup_password_summary_none" msgid="393503434408227110">"I backup desktop completi non sono attualmente protetti."</string>
     <string name="local_backup_password_summary_change" msgid="2731163425081172638">"Tocca per modificare o rimuovere la password per i backup desktop completi"</string>
@@ -2461,12 +2466,21 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Attivare <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> potrà aggiungere condizioni di uscita alla modalità Non disturbare."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Caricamento app..."</string>
-    <string name="app_notification_block_title" msgid="172237877395761371">"Blocca"</string>
+    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
+    <skip />
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Non mostrare mai notifiche di questa app"</string>
-    <string name="app_notification_priority_title" msgid="1967189807102076587">"Priorità"</string>
-    <string name="app_notification_priority_summary" msgid="7513344552201639232">"Mostra le notifiche in cima all\'elenco e continua a riceverle quando il dispositivo è impostato su interruzioni con priorità"</string>
-    <string name="app_notification_sensitive_title" msgid="7707233094233553192">"Riservati"</string>
-    <string name="app_notification_sensitive_summary" msgid="2505314249332316395">"Quando il dispositivo è bloccato, nascondi i contenuti riservati dalle notifiche dell\'app"</string>
+    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
+    <skip />
+    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
+    <skip />
+    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
+    <skip />
+    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
+    <skip />
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bloccate"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priorità"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Riservate"</string>
@@ -2542,8 +2556,11 @@
     <string name="slot_number" msgid="3762676044904653577">"(Slot <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
     <string name="launch_by_default" msgid="2184141780491382435">"Avvia per impostazione predefinita"</string>
     <string name="storage_summary_format" msgid="5419902362347539755">"<xliff:g id="SIZE">%1$s</xliff:g> in uso nella <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="410824961149037234">"memoria interna"</string>
-    <string name="storage_type_external" msgid="8928374515368986503">"memoria esterna"</string>
+    <string name="storage_type_internal" msgid="6042049833565674948">"Memoria interna"</string>
+    <string name="storage_type_external" msgid="7738894330670001898">"Memoria esterna"</string>
+    <string name="app_data_usage" msgid="7942375313697452803">"Dati sull\'utilizzo dell\'app"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="SIZE">%1$s</xliff:g> utilizzati dal giorno <xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="storage_used" msgid="7128074132917008743">"Spazio di archiviazione utilizzato"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"Attive"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"Bloccate"</string>
     <string name="notifications_sensitive" msgid="3139432048186620878">"Riservate"</string>
@@ -2555,4 +2572,5 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Alcune applicazioni predefinite impostate"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Nessuna applicazione predefinita impostata"</string>
+    <string name="unknown_app" msgid="5275921288718717656">"Applicazione sconosciuta"</string>
 </resources>
