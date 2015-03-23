@@ -180,6 +180,11 @@ public abstract class AppInfoBase extends PreferenceFragment
     }
 
     @Override
+    public void onLauncherInfoChanged() {
+        // No op.
+    }
+
+    @Override
     public void onPackageListChanged() {
         refreshUi();
     }

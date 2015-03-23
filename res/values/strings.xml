@@ -5626,6 +5626,8 @@
     <string name="keywords_accounts">account</string>
     <string name="keywords_users">restriction restrict restricted</string>
     <string name="keywords_keyboard_and_ime">text correction correct sound vibrate auto language gesture suggest suggestion theme offensive word type emoji international</string>
+    <string name="keywords_reset_apps">reset preferences default</string>
+    <string name="keywords_all_apps">apps download applications system</string>
     <!-- Search keywords for different screen unlock modes : slide to unlock, password, pattern and PIN [CHAR LIMIT=none] -->
     <string name="keywords_lockscreen">slide password pattern pin</string>
 
@@ -6088,10 +6090,29 @@
        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
    </plurals>
 
-   <!-- Launch defaults preference summary with some set [CHAR LIMIT=40] -->
-   <string name="launch_defaults_some">Some defaults set</string>
-   <!-- Launch defaults preference summary with none set [CHAR LIMIT=40] -->
-   <string name="launch_defaults_none">No defaults set</string>
+    <!-- Launch defaults preference summary with some set [CHAR LIMIT=40] -->
+    <string name="launch_defaults_some">Some defaults set</string>
+    <!-- Launch defaults preference summary with none set [CHAR LIMIT=40] -->
+    <string name="launch_defaults_none">No defaults set</string>
+
+    <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
+    <string name="filter_all_apps">All apps</string>
+    <!-- Label for showing enabled apps in list [CHAR LIMIT=30] -->
+    <string name="filter_enabled_apps">Enabled</string>
+    <!-- Label for showing personal apps in list [CHAR LIMIT=30] -->
+    <string name="filter_personal_apps">Personal</string>
+    <!-- Label for showing work apps in list [CHAR LIMIT=30] -->
+    <string name="filter_work_apps">Work</string>
+
+    <!-- Description for advanced menu option to reset app preferences [CHAR LIMIT=NONE] -->
+    <string name="reset_app_preferences_description">Reset preferences across all apps to defaults</string>
+
+    <!-- Description of settings item that leads to list of all apps
+         [CHAR LIMIT=NONE] -->
+    <string name="all_apps_summary"><xliff:g id="count" example="10">%d</xliff:g> apps installed, including system and downloaded apps</string>
+
+    <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
+    <string name="advanced_apps">Advanced</string>
 
    <!-- Warning toast shown when data usage screen can't find specified app -->
    <string name="unknown_app">Unknown app</string>
