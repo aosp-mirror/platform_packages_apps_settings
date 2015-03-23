@@ -38,6 +38,12 @@
         android:persistent="false" />
 
     <PreferenceScreen
+        android:key="wifi_calling_settings"
+        android:title="@string/wifi_calling_settings_title"
+        settings:keywords="@string/keywords_wifi_calling"
+        android:fragment="com.android.settings.WifiCallingSettings" />
+
+    <PreferenceScreen
         android:fragment="com.android.settings.nfc.AndroidBeam"
         android:key="android_beam_settings"
         android:title="@string/android_beam_settings_title" />
@@ -62,12 +68,6 @@
             android:targetPackage="com.android.phone"
             android:targetClass="com.android.phone.MobileNetworkSettings" />
     </PreferenceScreen>
-
-    <PreferenceScreen
-        android:key="wifi_calling_settings"
-        android:title="@string/wifi_calling_settings_title"
-        settings:keywords="@string/keywords_wifi_calling"
-        android:fragment="com.android.settings.WifiCallingSettings" />
 
     <Preference
         android:key="manage_mobile_plan"
