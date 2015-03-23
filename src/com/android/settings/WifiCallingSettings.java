@@ -25,10 +25,12 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
@@ -52,6 +54,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private ListPreference mButtonWfcMode;
+    private TextView mEmptyView;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -89,6 +92,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mSwitchBar = activity.getSwitchBar();
         mSwitch = mSwitchBar.getSwitch();
         mSwitchBar.show();
+
+        mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
+        getListView().setEmptyView(mEmptyView);
+        mEmptyView.setText(R.string.wifi_calling_off_explanation);
     }
 
     @Override
@@ -106,7 +113,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
                 .setTitle(title)
-                .setIcon(android.R.drawable.stat_sys_warning)
+                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.ok, null);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -206,6 +213,13 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         int wfcMode = ImsManager.getWfcMode(context);
         mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
         mButtonWfcMode.setEnabled(isChecked);
+
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        if (isChecked) {
+            preferenceScreen.addPreference(mButtonWfcMode);
+        } else {
+            preferenceScreen.removePreference(mButtonWfcMode);
+        }
     }
 
     @Override
@@ -224,17 +238,17 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     }
 
     static int getWfcModeSummary(Context context, int wfcMode) {
-        int resId = R.string.wifi_calling_off_summary;
+        int resId = com.android.internal.R.string.wifi_calling_off_summary;
         if (ImsManager.isWfcEnabledByUser(context)) {
             switch (wfcMode) {
                 case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
-                    resId = R.string.wfc_mode_wifi_only_summary;
+                    resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
                     break;
                 case ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED:
-                    resId = R.string.wfc_mode_cellular_preferred_summary;
+                    resId = com.android.internal.R.string.wfc_mode_cellular_preferred_summary;
                     break;
                 case ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED:
-                    resId = R.string.wfc_mode_wifi_preferred_summary;
+                    resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
                     break;
                 default:
                     Log.e(TAG, "Unexpected WFC mode value: " + wfcMode);
