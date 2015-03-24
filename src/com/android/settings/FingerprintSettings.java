@@ -69,7 +69,7 @@ public class FingerprintSettings extends SettingsActivity {
     public static class FingerprintSettingsFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, Indexable {
         private static final String TAG = "FingerprintSettings";
-        private static final String KEY_FINGERPRINT_ITEM = "key_fingerprint_item";
+        private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
         private static final String KEY_USAGE_CATEGORY = "fingerprint_usage_category";
         private static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
         private static final String KEY_MANAGE_CATEGORY = "fingerprint_manage_category";
@@ -202,7 +202,7 @@ public class FingerprintSettings extends SettingsActivity {
         }
 
         private static String genKey(int id) {
-            return KEY_FINGERPRINT_ITEM + "_" + id;
+            return KEY_FINGERPRINT_ITEM_PREFIX + "_" + id;
         }
 
         @Override
