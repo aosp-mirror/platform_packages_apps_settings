@@ -24,16 +24,16 @@ import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.service.fingerprint.FingerprintManager;
-import android.service.fingerprint.FingerprintManagerReceiver;
+import android.service.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,12 +82,13 @@ public class FingerprintEnroll extends SettingsActivity {
     }
 
     public static class FingerprintEnrollFragment extends Fragment implements View.OnClickListener {
+        private static final String EXTRA_PROGRESS = "progress";
+        private static final String EXTRA_STAGE = "stage";
         private static final int PROGRESS_BAR_MAX = 10000;
         private static final String TAG = "FingerprintEnroll";
         private static final boolean DEBUG = true;
         private static final int CONFIRM_REQUEST = 101;
         private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
-        private static final long ENROLL_TIMEOUT = 300*1000;
         private static final int FINISH_DELAY = 250;
 
         private PowerManager mPowerManager;
@@ -128,6 +129,7 @@ public class FingerprintEnroll extends SettingsActivity {
             @Override
             public void onAnimationCancel(Animator animation) { }
         };
+        private CancellationSignal mEnrollmentCancel = new CancellationSignal();
 
         // This contains a list of all views managed by the UI. Used to determine which views
         // need to be shown/hidden at each stage. It should be the union of the lists that follow
@@ -240,13 +242,12 @@ public class FingerprintEnroll extends SettingsActivity {
                 case EnrollingFindSensor:
                     mEnrollmentSteps = -1;
                     mEnrolling = false;
-                    mFingerprintManager.stopListening();
                     break;
 
                 case EnrollingStart:
                     mEnrollmentSteps = -1;
-                    mFingerprintManager.startListening(mReceiver);
-                    mFingerprintManager.enroll(ENROLL_TIMEOUT);
+                    long challenge = 0x12345; // TODO: get from keyguard confirmation
+                    mFingerprintManager.enroll(challenge, mEnrollmentCallback, mEnrollmentCancel,0);
                     mProgressBar.setProgress(0);
                     mEnrolling = true;
                     startFingerprintAnimator(); // XXX hack - this should follow fingerprint detection
@@ -257,12 +258,10 @@ public class FingerprintEnroll extends SettingsActivity {
 
                 case EnrollingFinish:
                     stopFingerprintAnimator(); // XXX hack - this should follow fingerprint detection
-                    mFingerprintManager.stopListening();
                     mEnrolling = false;
                     break;
 
                 default:
-                    mFingerprintManager.stopListening();
                     break;
             }
         }
@@ -270,7 +269,7 @@ public class FingerprintEnroll extends SettingsActivity {
         private void cancelEnrollment() {
             if (mEnrolling) {
                 if (DEBUG) Log.v(TAG, "Cancel enrollment\n");
-                mFingerprintManager.enrollCancel();
+                mEnrollmentCancel.cancel();
                 mEnrolling = false;
             }
         }
@@ -278,9 +277,7 @@ public class FingerprintEnroll extends SettingsActivity {
         @Override
         public void onDetach() {
             super.onDetach();
-            // Do a little cleanup
-            cancelEnrollment();
-            mFingerprintManager.stopListening();
+            cancelEnrollment(); // Do a little cleanup
         }
 
         private void updateProgress(int progress) {
@@ -300,6 +297,10 @@ public class FingerprintEnroll extends SettingsActivity {
             mProgressAnim = anim;
         }
 
+        protected void setMessage(CharSequence msg) {
+            if (msg != null) mMessageText.setText(msg);
+        }
+
         private void setMessage(int id) {
             if (id != 0) mMessageText.setText(id);
         }
@@ -308,9 +309,11 @@ public class FingerprintEnroll extends SettingsActivity {
             if (title != 0) mTitleText.setText(title);
         }
 
-        private FingerprintManagerReceiver mReceiver = new FingerprintManagerReceiver() {
-            public void onEnrollResult(int fingerprintId, int remaining) {
-                if (DEBUG) Log.v(TAG, "onEnrollResult(id=" + fingerprintId + ", rem=" + remaining);
+        private EnrollmentCallback mEnrollmentCallback = new EnrollmentCallback() {
+
+            @Override
+            public void onEnrollmentProgress(int remaining) {
+                if (DEBUG) Log.v(TAG, "onEnrollResult(id=" + ", rem=" + remaining);
                 if (mEnrollmentSteps == -1) {
                     mEnrollmentSteps = remaining;
                     updateStage(Stage.EnrollingRepeat);
@@ -325,62 +328,14 @@ public class FingerprintEnroll extends SettingsActivity {
                 }
             }
 
-            public void onError(int error) {
-                switch(error) {
-                    case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
-                        setMessage(R.string.fingerprint_error_unable_to_process);
-                        break;
-                    case FingerprintManager.FINGERPRINT_ERROR_HW_UNAVAILABLE:
-                        setMessage(R.string.fingerprint_error_hw_not_available);
-                        break;
-                    case FingerprintManager.FINGERPRINT_ERROR_NO_SPACE:
-                        setMessage(R.string.fingerprint_error_no_space);
-                        break;
-                    case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
-                        setMessage(R.string.fingerprint_error_timeout);
-                        break;
-                    case FingerprintManager.FINGERPRINT_ERROR_NO_RECEIVER:
-                        Log.w(TAG, "Receiver not registered");
-                        break;
-                }
-            }
-
-            public void onRemoved(int fingerprintId) {
-                if (DEBUG) Log.v(TAG, "onRemoved(id=" + fingerprintId + ")");
+            @Override
+            public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
+                setMessage(helpString);
             }
 
             @Override
-            public void onProcessed(int fingerprintId) {
-                if (DEBUG) Log.v(TAG, "onProcessed(id=" + fingerprintId + ")");
-            }
-
-            public void onAcquired(int scanInfo) {
-                int msgId = 0;
-                startFingerprintAnimator();
-                switch(scanInfo) {
-                    case FingerprintManager.FINGERPRINT_ACQUIRED_GOOD:
-                        break;
-                    case FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
-                        msgId = R.string.fingerprint_acquired_imager_dirty;
-                        break;
-                    case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
-                        msgId = R.string.fingerprint_acquired_too_fast;
-                        break;
-                    case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
-                        msgId = R.string.fingerprint_acquired_too_slow;
-                        break;
-                    case FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
-                    case FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
-                        msgId = R.string.fingerprint_acquired_try_again;
-                        break;
-                    default:
-                        // Try not to be too verbose in the UI. The user just needs to try again.
-                        // Log the message so we can dig into the issue if necessary.
-                        Log.w(TAG, "Try again because scanInfo was " + scanInfo);
-                        msgId = R.string.fingerprint_acquired_try_again;
-                        break;
-                }
-                setMessage(msgId);
+            public void onEnrollmentError(int errMsgId, CharSequence errString) {
+                setMessage(errString);
             }
         };
 
@@ -429,6 +384,31 @@ public class FingerprintEnroll extends SettingsActivity {
                 updateStage(Stage.EnrollingStart);
             }
             return mContentView;
+        }
+
+        @Override
+        public void onSaveInstanceState(final Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putString(EXTRA_STAGE, mStage.toString());
+            if (mStage == Stage.EnrollingRepeat) {
+                outState.putInt(EXTRA_PROGRESS, mProgressBar.getProgress());
+            }
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            if (savedInstanceState != null) {
+                //probably orientation change
+                String stageSaved = savedInstanceState.getString(EXTRA_STAGE, null);
+                if (stageSaved != null) {
+                    Stage stage = Stage.valueOf(stageSaved);
+                    updateStage(stage);
+                    if (stage == Stage.EnrollingRepeat) {
+                        mProgressBar.setProgress(savedInstanceState.getInt(EXTRA_PROGRESS));
+                    }
+                }
+            }
         }
 
         @Override

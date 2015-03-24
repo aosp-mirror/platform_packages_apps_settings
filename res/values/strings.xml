@@ -764,7 +764,8 @@
     </plurals>
     <!-- Introduction title shown in fingerprint enrollment dialog [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_onboard_title">Fingerprint setup</string>
-    <!-- Introduction detail message shown in fingerprint enrollment dialog -->
+    <!-- Introduction message shown in fingerprint enrollment dialog when the user needs to choose an 
+         alternate screen unlock (pin, pattern or password) as a backup to fingerprint. -->
     <string name="security_settings_fingerprint_enroll_onboard_message">
         To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to:
         \n\n\u2713 Set up your background screen lock method
@@ -796,22 +797,6 @@
     <string name="fingerprint_enroll_button_add">Add</string>
     <!-- Button text shown at the end of enrollment that allows the user to move to the next step -->
     <string name="fingerprint_enroll_button_next">Next</string>
-    <!-- Error message shown when the fingerprint cannot be recognized -->
-    <string name="fingerprint_acquired_try_again">Partial fingerprint detected. Please try again.</string>
-    <!-- Error message shown when the fingerprint sensor needs cleaning -->
-    <string name="fingerprint_acquired_imager_dirty">Fingerprint sensor is dirty. Please clean and try again.</string>
-    <!-- Error message shown when the user removes their finger from the sensor too quickly -->
-    <string name="fingerprint_acquired_too_fast">Finger moved to fast. Please try again.</string>
-    <!-- Error message shown when the user moves their finger too slowly -->
-    <string name="fingerprint_acquired_too_slow">Finger moved to slow. Please try again.</string>
-    <!-- Generic error message shown when the fingerprint hardware can't recognize the fingerprint -->
-    <string name="fingerprint_error_unable_to_process">Unable to process. Try again.</string>
-    <!-- Error message shown when the fingerprint hardware can't be accessed -->
-    <string name="fingerprint_error_hw_not_available">Hardware not available.</string>
-    <!-- Error message shown when the fingerprint hardware has run out of room for storing fingerprints -->
-    <string name="fingerprint_error_no_space">Fingerprint can\'t be stored. Please remove an existing fingerprint.</string>
-    <!-- Error message shown when the fingerprint hardware timer has expired and the user needs to restart the operation. -->
-    <string name="fingerprint_error_timeout">Fingerprint time out reached. Try again.</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
