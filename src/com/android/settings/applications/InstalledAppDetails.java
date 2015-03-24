@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -46,6 +47,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.provider.Settings;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -81,6 +83,8 @@ import java.util.List;
  */
 public class InstalledAppDetails extends AppInfoBase
         implements View.OnClickListener, OnPreferenceClickListener {
+
+    private static final String LOG_TAG = "InstalledAppDetails";
 
     // Menu identifiers
     public static final int UNINSTALL_ALL_USERS_MENU = 1;
@@ -563,6 +567,17 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
+    private void startManagePermissionsActivity() {
+        // start new activity to manage app permissions
+        Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
+        intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.w(LOG_TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS");
+        }
+    }
+
     private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, CharSequence title) {
         // start new fragment to display extended information
         Bundle args = new Bundle();
@@ -617,7 +632,7 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mNotificationPreference) {
             startNotifications();
         } else if (preference == mPermissionsPreference) {
-            startAppInfoFragment(AppPermissionSettings.class, mPermissionsPreference.getTitle());
+            startManagePermissionsActivity();
         } else if (preference == mLaunchPreference) {
             startAppInfoFragment(AppLaunchSettings.class, mLaunchPreference.getTitle());
         } else if (preference == mDataPreference) {
