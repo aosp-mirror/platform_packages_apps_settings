@@ -431,7 +431,7 @@ public class RunningProcessesView extends FrameLayout
         mMyUserId = UserHandle.myUserId();
     }
     
-    public void doCreate(Bundle savedInstanceState) {
+    public void doCreate() {
         mAm = (ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE);
         mState = RunningState.getInstance(getContext());
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(
