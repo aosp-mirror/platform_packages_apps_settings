@@ -60,6 +60,12 @@
             android:fragment="com.android.settings.applications.ProcessStatsUi">
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:key="running_apps"
+        android:title="@string/runningservices_settings_title"
+        android:summary="@string/runningservices_settings_summary"
+        android:fragment="com.android.settings.applications.RunningServices" />
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
