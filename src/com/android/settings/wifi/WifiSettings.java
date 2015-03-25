@@ -653,6 +653,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
                 // AccessPoints are automatically sorted with TreeSet.
+                mLastInfo = mWifiManager.getConnectionInfo();
                 final Collection<AccessPoint> accessPoints =
                         constructAccessPoints(getActivity(), mWifiManager, mLastInfo,
                                 mLastNetworkInfo);
@@ -721,6 +722,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         /** Lookup table to more quickly update AccessPoints by only considering objects with the
          * correct SSID.  Maps SSID -> List of AccessPoints with the given SSID.  */
         Multimap<String, AccessPoint> apMap = new Multimap<String, AccessPoint>();
+        WifiConfiguration connectionConfig = null;
 
         final List<WifiConfiguration> configs = wifiManager.getConfiguredNetworks();
         if (configs != null) {
@@ -732,13 +734,23 @@ public class WifiSettings extends RestrictedSettingsFragment
                 }
             }
             for (WifiConfiguration config : configs) {
+                if (lastInfo != null && lastInfo.getNetworkId() == config.networkId) {
+                    connectionConfig = config;
+                }
+
                 if (config.selfAdded && config.numAssociation == 0) {
                     continue;
                 }
+
+                if (config.isPasspoint()) {
+                    continue;
+                }
+
                 AccessPoint accessPoint = new AccessPoint(context, config);
                 if (lastInfo != null && lastNetworkInfo != null) {
                     accessPoint.update(lastInfo, lastNetworkInfo);
                 }
+
                 accessPoints.add(accessPoint);
                 apMap.put(accessPoint.ssid, accessPoint);
             }
@@ -758,11 +770,22 @@ public class WifiSettings extends RestrictedSettingsFragment
                     if (accessPoint.update(result))
                         found = true;
                 }
+
                 if (!found) {
+
                     AccessPoint accessPoint = new AccessPoint(context, result);
                     if (lastInfo != null && lastNetworkInfo != null) {
                         accessPoint.update(lastInfo, lastNetworkInfo);
                     }
+
+                    if (lastInfo != null && lastInfo.getBSSID() != null
+                            && lastInfo.getBSSID().equals(result.BSSID)
+                            && connectionConfig != null && connectionConfig.isPasspoint()) {
+                        /* This network is connected via this passpoint config */
+                        /* SSID match is not going to work for it; so update explicitly */
+                        accessPoint.update(connectionConfig);
+                    }
+
                     accessPoints.add(accessPoint);
                     apMap.put(accessPoint.ssid, accessPoint);
                 }
