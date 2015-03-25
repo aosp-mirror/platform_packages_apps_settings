@@ -102,6 +102,7 @@ public class ResetNetworkConfirm extends Fragment {
                 for (WifiConfiguration config : networks) {
                     wifiManager.removeNetwork(config.networkId);
                 }
+                wifiManager.saveConfiguration();
             }
 
             // Turn mobile hotspot off
