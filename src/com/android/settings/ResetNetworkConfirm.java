@@ -134,22 +134,20 @@ public class ResetNetworkConfirm extends Fragment {
             }
 
             if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
-                int phoneId = SubscriptionManager.getPhoneId(mSubId);
-                Phone phone = PhoneFactory.getPhone(phoneId);
-
                 // Turn mobile data on
-                phone.setDataEnabled(true);
+                telephonyManager.setDataEnabled(mSubId, true);
 
                 // Set mobile network selection mode to automatic
-                phone.setNetworkSelectionModeAutomatic(null);
+                // TODO set network selection mode to automatic
+                // phone.setNetworkSelectionModeAutomatic(null);
 
                 // Set preferred mobile network type to manufacturer's recommended
                 // int networkType = ; // TODO get manufacturer's default
-                // phone.setPreferredNetworkType(networkType, null);
+                // telephonyManager.setPreferredNetworkType(networkType);
 
                 // Turn roaming to manufacturer's default
                 // boolean enabled = ; // TODO get manufacturer's default
-                // phone.setDataRoamingEnabled(enabled);
+                // SubscriptionManager.from(getContext()).setDataRoaming(enabled, mSubId);
 
                 String subscriberId = telephonyManager.getSubscriberId(mSubId);
                 NetworkTemplate template = NetworkTemplate.buildTemplateMobileAll(subscriberId);
