@@ -36,6 +36,7 @@ public final class ProcStatsEntry implements Parcelable {
     final String mPackage;
     final int mUid;
     final String mName;
+    public CharSequence mLabel;
     final ArrayList<String> mPackages = new ArrayList<String>();
     final long mBgDuration;
     final long mAvgBgMem;
