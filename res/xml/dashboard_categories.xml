@@ -20,6 +20,7 @@
     <!-- WIRELESS and NETWORKS -->
     <dashboard-category
             android:id="@+id/wireless_section"
+            android:key="@string/category_key_wireless"
             android:title="@string/header_category_wireless_networks" >
 
         <!-- Wifi -->
@@ -74,6 +75,7 @@
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"
+            android:key="@string/category_key_device"
             android:title="@string/header_category_device" >
 
         <!-- Home -->
@@ -152,6 +154,7 @@
     <!-- PERSONAL -->
     <dashboard-category
             android:id="@+id/personal_section"
+            android:key="@string/category_key_personal"
             android:title="@string/header_category_personal" >
 
         <!-- Location -->
@@ -178,6 +181,9 @@
                 android:icon="@drawable/ic_settings_accounts"
                 />
 
+        <!-- Marker for where to place external tiles in this category -->
+        <external-tiles />
+
         <!-- Language -->
         <dashboard-tile
                 android:id="@+id/language_settings"
@@ -199,6 +205,7 @@
     <!-- SYSTEM -->
     <dashboard-category
         android:id="@+id/system_section"
+        android:key="@string/category_key_system"
         android:title="@string/header_category_system" >
 
         <!-- Date & Time -->

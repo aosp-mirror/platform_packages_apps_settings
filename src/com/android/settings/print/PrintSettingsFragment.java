@@ -52,13 +52,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.settings.UserSpinnerAdapter;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.UserAdapter;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -67,9 +69,6 @@ import com.android.settings.search.SearchIndexableRaw;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Spinner;
 
 /**
  * Fragment with the top level print settings.
@@ -120,7 +119,7 @@ public class PrintSettingsFragment extends SettingsPreferenceFragment
     private PreferenceCategory mPrintServicesCategory;
 
     private PrintJobsController mPrintJobsController;
-    private UserSpinnerAdapter mProfileSpinnerAdapter;
+    private UserAdapter mProfileSpinnerAdapter;
     private Spinner mSpinner;
 
     @Override
