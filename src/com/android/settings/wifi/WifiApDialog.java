@@ -184,6 +184,15 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
         validate();
     }
 
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mPassword.setInputType(
+                InputType.TYPE_CLASS_TEXT |
+                (((CheckBox) mView.findViewById(R.id.show_password)).isChecked() ?
+                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
+                InputType.TYPE_TEXT_VARIATION_PASSWORD));
+    }
+
     private void validate() {
         if ((mSsid != null && mSsid.length() == 0) ||
                    ((mSecurityTypeIndex == WPA2_INDEX)&&

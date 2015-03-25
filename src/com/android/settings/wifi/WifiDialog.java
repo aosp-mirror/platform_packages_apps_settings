@@ -75,6 +75,11 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
         }
     }
 
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+            super.onRestoreInstanceState(savedInstanceState);
+            mController.updatePassword();
+    }
+
     @Override
     public boolean isEdit() {
         return mEdit;

@@ -971,14 +971,12 @@ public class WifiConfigController implements TextWatcher,
     /**
      * Make the characters of the password visible if show_password is checked.
      */
-    private void updatePasswordVisibility(boolean checked) {
-        int pos = mPasswordView.getSelectionEnd();
-        mPasswordView.setInputType(
-                InputType.TYPE_CLASS_TEXT | (checked ?
-                        InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
-                            InputType.TYPE_TEXT_VARIATION_PASSWORD));
-        if (pos >= 0) {
-            ((EditText)mPasswordView).setSelection(pos);
-        }
+    public void updatePassword() {
+        TextView passwdView = (TextView) mView.findViewById(R.id.password);
+        passwdView.setInputType(
+                InputType.TYPE_CLASS_TEXT |
+                (((CheckBox) mView.findViewById(R.id.show_password)).isChecked() ?
+                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
+                InputType.TYPE_TEXT_VARIATION_PASSWORD));
     }
 }
