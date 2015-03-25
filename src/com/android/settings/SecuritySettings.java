@@ -40,8 +40,8 @@ import android.preference.PreferenceScreen;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.KeyStore;
+import android.service.fingerprint.Fingerprint;
 import android.service.fingerprint.FingerprintManager;
-import android.service.fingerprint.FingerprintManager.FingerprintItem;
 import android.service.trust.TrustAgentService;
 import android.telephony.TelephonyManager;
 import android.telephony.SubscriptionManager;
@@ -341,8 +341,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         fingerprintPreference.setKey(KEY_FINGERPRINT_SETTINGS);
         fingerprintPreference.setTitle(R.string.security_settings_fingerprint_preference_title);
         Intent intent = new Intent();
-        List<FingerprintItem> items = fpm.getEnrolledFingerprints();
-        int fingerprintCount = items.size();
+        final List<Fingerprint> items = fpm.getEnrolledFingerprints();
+        final int fingerprintCount = items != null ? items.size() : 0;
         final String clazz;
         if (fingerprintCount > 0) {
             fingerprintPreference.setSummary(getResources().getQuantityString(

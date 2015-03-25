@@ -34,11 +34,14 @@ import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
+import android.service.fingerprint.Fingerprint;
 import android.service.fingerprint.FingerprintManager;
-import android.service.fingerprint.FingerprintManagerReceiver;
+import android.service.fingerprint.FingerprintManager.RemovalCallback;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.Toast;
+
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.List;
@@ -96,6 +99,18 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mRequirePassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
+        private RemovalCallback mRemovalCallback = new RemovalCallback() {
+
+            @Override
+            public void onRemovalSucceeded(Fingerprint fingerprint) {
+                Log.v(TAG, "Fingerprint removed: " + fingerprint.getFingerId());
+            }
+
+            @Override
+            public void onRemovalError(Fingerprint fp, int errMsgId, CharSequence errString) {
+                Toast.makeText(getActivity(), errString, Toast.LENGTH_SHORT);
+            }
+        };
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -400,25 +415,15 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        // TODO: This is only required because we used to enforce clients have a listener,
-        // which is no longer required in the new API.  Remove when that happens.
-        FingerprintManagerReceiver mReceiver = new FingerprintManagerReceiver() {
-            public void onRemoved(int fingerprintId) {
-                Log.v(TAG, "onRemoved(id=" + fingerprintId + ")");
-            }
-        };
-
         private void removeAllFingerprintTemplates() {
             if (mFingerprintManager != null && mFingerprintManager.isHardwareDetected()) {
-                mFingerprintManager.startListening(mReceiver);
-                mFingerprintManager.remove(0 /* all fingerprint templates */);
+                mFingerprintManager.remove(new Fingerprint(null, 0, 0, 0), mRemovalCallback);
             }
         }
 
         @Override
         public void onDestroy() {
             super.onDestroy();
-            mFingerprintManager.stopListening();
         }
 
         @Override
