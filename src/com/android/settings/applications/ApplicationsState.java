@@ -327,6 +327,7 @@ public class ApplicationsState {
     final PackageManager mPm;
     final IPackageManager mIpm;
     final UserManager mUm;
+    final int mOwnerRetrieveFlags;
     final int mRetrieveFlags;
     PackageIntentReceiver mPackageIntentReceiver;
 
@@ -531,14 +532,11 @@ public class ApplicationsState {
         mBackgroundHandler = new BackgroundHandler(mThread.getLooper());
 
         // Only the owner can see all apps.
-        if (UserHandle.myUserId() == 0) {
-            mRetrieveFlags = PackageManager.GET_UNINSTALLED_PACKAGES |
-                    PackageManager.GET_DISABLED_COMPONENTS |
-                    PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS;
-        } else {
-            mRetrieveFlags = PackageManager.GET_DISABLED_COMPONENTS |
-                    PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS;
-        }
+        mOwnerRetrieveFlags = PackageManager.GET_UNINSTALLED_PACKAGES |
+                PackageManager.GET_DISABLED_COMPONENTS |
+                PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS;
+        mRetrieveFlags = PackageManager.GET_DISABLED_COMPONENTS |
+                PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS;
 
         /**
          * This is a trick to prevent the foreground thread from being delayed.
@@ -742,7 +740,9 @@ public class ApplicationsState {
         for (UserHandle user : mUm.getUserProfiles()) {
             try {
                 ParceledListSlice<ApplicationInfo> list =
-                        mIpm.getInstalledApplications(mRetrieveFlags, user.getIdentifier());
+                        mIpm.getInstalledApplications(
+                                user.isOwner() ? mOwnerRetrieveFlags : mRetrieveFlags,
+                                user.getIdentifier());
                 mApplications.addAll(list.getList());
             } catch (RemoteException e) {
             }
@@ -817,7 +817,8 @@ public class ApplicationsState {
             if (entry == null) {
                 for (int i=0; i<mApplications.size(); i++) {
                     ApplicationInfo info = mApplications.get(i);
-                    if (packageName.equals(info.packageName)) {
+                    if (packageName.equals(info.packageName)
+                            && userId == UserHandle.getUserId(info.uid)) {
                         entry = getEntryLocked(info);
                         break;
                     }
@@ -889,7 +890,9 @@ public class ApplicationsState {
                     if (DEBUG_LOCKING) Log.v(TAG, "addPackage release lock: already exists");
                     return;
                 }
-                ApplicationInfo info = mIpm.getApplicationInfo(pkgName, mRetrieveFlags, userId);
+                ApplicationInfo info = mIpm.getApplicationInfo(pkgName,
+                        userId == UserHandle.USER_OWNER ? mOwnerRetrieveFlags : mRetrieveFlags,
+                                userId);
                 if (info == null) {
                     return;
                 }
