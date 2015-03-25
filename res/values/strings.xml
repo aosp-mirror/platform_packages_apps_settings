@@ -1841,10 +1841,6 @@
     <string name="wfc_mode_cellular_preferred_summary">Cellular preferred (Uses Wi-Fi only if cell network isn\'t available)</string>
     <!-- WFC, summary for Wi-Fi Only [CHAR LIMIT=100] -->
     <string name="wfc_mode_wifi_only_summary">Wi-Fi only (Never uses cell network. Can\'t make or receive calls if Wi-Fi isn\'t available)</string>
-    <!-- WFC roam enable/disable [CHAR LIMIT=30] -->
-    <string name="wifi_calling_roam_title">WFC handoff while roaming</string>
-    <!-- WFC roam summary [CHAR LIMIT=80] -->
-    <string name="wifi_calling_roam_summary">Allow Wi-Fi voice calls handoff to cell network when roaming</string>
 
     <!-- Sound and alerts settings -->
     <skip/>
@@ -3382,6 +3378,21 @@
     <string name="confirm_enable_oem_unlock_text">WARNING: Device protection features will not work on this device while this setting is turned on.</string>
 
 
+    <!-- UI debug setting: limit size of Android logger buffers -->
+    <string name="select_logd_size_title">Logger buffer sizes</string>
+    <!-- UI debug setting: limit size of Android logger buffers [CHAR LIMIT=59] -->
+    <string name="select_logd_size_dialog_title">Select Logger sizes per log buffer</string>
+    <!-- Setting Checkbox title whether to allow mock locations -->
+    <string name="allow_mock_location">Allow mock locations</string>
+    <!-- setting Checkbox summary whether to allow mock locations  -->
+    <string name="allow_mock_location_summary">Allow mock locations</string>
+    <!-- Setting Checkbox title whether to enable view attribute inspection -->
+    <string name="debug_view_attributes">Enable view attribute inspection</string>
+    <!-- Title of warning dialog about the implications of enabling USB debugging -->
+
+    <!-- Preference category for networking debugging development settings. [CHAR LIMIT=50] -->
+    <string name="debug_networking_category">Networking</string>
+
     <!-- Setting Checkbox title whether to show options for wireless display certification -->
     <string name="wifi_display_certification">Wireless display certification</string>
     <!-- Setting Checkbox title whether to enable WiFi Verbose Logging. [CHAR LIMIT=40] -->
@@ -3390,6 +3401,9 @@
     <string name="wifi_aggressive_handover">Aggressive Wi\u2011Fi to Cellular handover</string>
     <!-- Setting Checkbox title whether to enable WiFi Scanning in the presence of traffic. [CHAR LIMIT=80] -->
     <string name="wifi_allow_scan_with_traffic">Always allow Wi\u2011Fi Roam Scans</string>
+    <!-- Setting Checkbox title whether to enable WiFi Scanning in the presence of traffic. [CHAR LIMIT=80] -->
+    <string name="legacy_dhcp_client">Use legacy DHCP client</string>
+
     <!-- setting Checkbox summary whether to show options for wireless display certification  -->
     <string name="wifi_display_certification_summary">Show options for wireless display certification</string>
     <!-- Setting Checkbox summary whether to enable Wifi verbose Logging [CHAR LIMIT=80] -->
@@ -3413,6 +3427,8 @@
     <!-- Setting Checkbox title whether to enable view attribute inspection -->
     <string name="debug_view_attributes">Enable view attribute inspection</string>
     <!-- Title of warning dialog about the implications of enabling USB debugging -->
+    <!-- Setting Checkbox summary whether to use DHCP client from Lollipop (Android 5.0) [CHAR LIMIT=130] -->
+    <string name="legacy_dhcp_client_summary">Use the DHCP client from Lollipop instead of the new Android DHCP client.</string>
     <string name="adb_warning_title">Allow USB debugging?</string>
     <!-- Warning text to user about the implications of enabling USB debugging -->
     <string name="adb_warning_message">USB debugging is intended for development purposes only. Use it to copy data between your computer and your device, install apps on your device without notification, and read log data.</string>
@@ -5600,7 +5616,7 @@
     <string name="keywords_wifi">wifi wi-fi network connection</string>
     <string name="keywords_more_default_sms_app">text message texting messages messaging</string>
     <string name="keywords_more_mobile_networks">cellular cell carrier wireless data 4g 3g 2g lte</string>
-    <string name="keywords_wifi_calling">wifi wi-fi call calling roaming handoff</string>
+    <string name="keywords_wifi_calling">wifi wi-fi call calling</string>
     <string name="keywords_home">launcher</string>
     <string name="keywords_display">screen touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen touchscreen battery</string>
