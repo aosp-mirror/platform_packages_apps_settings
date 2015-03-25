@@ -348,7 +348,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> औठाछाप नामाङ्कन गरियो</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"औँठाछाप सेटअप"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="6402483378460350233">"तपाईँको स्क्रीन अनलक गर्न खरीद पुष्टि गर्न तपाईँको औठाछाप प्रयोग गर्न, हामीलाई निम्न  आवश्यक छ: \n\n ✓ तपाईँको पृष्ठभूमि स्क्रिन लक विधि सेट अप गर्नुहोस् \n\n ✓ तपाईँको औठाछाप थप्नुहोस्"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"खरिद पुष्टि गर्न वा तपाईँको स्क्रिन अनलक गर्न तपाईँको औँठा छाप प्रयोग गर्न, हामीलाई : \n\n ✓ तपाईँको ब्याकअप स्क्रिन लक विधि गर्नुहोस् \n\n आवश्यक पर्छ ✓ तपाईँको औँठाछाप थप्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"सेन्सर खोज्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"तपाईँको फोनको पछाडि तर्फ औठाछाप सेन्सरको स्थान निर्धारण गर्नुहोस्।"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"नाम"</string>
@@ -588,9 +588,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"कमजोर जडान त्याग्नुहोस्"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"वाइफाइ नेटवर्क राम्रो इन्टरनेट जडान नभएसम्म प्रयोग नगर्नुहोस्।"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"केवल राम्रो इन्टरनेट जडान हुने सञ्जालको उपयोग गर्नुहोस्"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"स्क्यान गर्न सधैँ उपलव्ध छ"</string>
-    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"सधैँ स्क्यान गर्न अनुमति दिनुहोस्"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"वाइफाइ बन्द हुँदा पनि Googleको स्थान सेवा र अन्य अनुप्रयोगहरूलाई सञ्जाल स्क्यान गर्न दिनुहोस्"</string>
     <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"खुला Wi-Fi लाई स्वत: प्रयोग गर्नुहोस्"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Wi-Fi सहायकलाई स्वतः उच्च गुणस्तर निर्धारण भएको खुला सञ्जालहरूसँग जडान गर्ने अनुमति दिनुहोस्"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"सहायक छान्नुहोस्"</string>
@@ -1122,6 +1119,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"स्थान निर्धारण गर्न GPS, वाइफाइ र सेलुलर सञ्जाल प्रयोग गर्नुहोस्"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"स्थान निर्धारण गर्न वाइफाइ र सेलुलर सञ्जाल प्रयोग गर्नुहोस्"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"स्थान निर्धारण गर्न GPS प्रयोग गर्नुहोस्"</string>
+    <string name="location_menu_scanning" msgid="8536245838478802959">"स्क्यान गर्दै"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"स्क्यान गर्दै"</string>
     <string name="location_network_based" msgid="6010456018401296590">"वाइफाइ र सेलुलर सञ्जाल स्थान"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"तपाईँको स्थानलाई सीघ्र अनुमान गर्न अनुप्रयोगहरूलाई गुगल स्थान सेवा प्रयोग गर्न अनुमति दिनुहोस्। बेनामी स्थान डेटा भेला गरिने छ र गुगलमा पठाइने छ।"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"वाइ-फाइद्वारा निर्धारित स्थान"</string>
@@ -2391,6 +2390,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"खाता"</string>
     <string name="keywords_users" msgid="4673901601478559100">"प्रतिबन्ध सीमित सीमित गरिएको"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"पाठ सुधार सही ध्वनि कम्पन स्वतः भाषा इशारा सुझाव दिनु सुझाव विषय आपत्तिजनक शब्द प्रकार इमोजी अन्तर्राष्ट्रिय"</string>
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"प्राथमिकताहरू पूर्वनिर्धारित रिसेट गर्नुहोस्"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"अनुप्रयोगहरू डाउनलोड अनुप्रयोगहरू प्रणाली"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"पासवर्ड प्याटर्न पिन स्लाइड गर्नुहोस्"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ट्याग सेट गर्नुहोस्"</string>
     <string name="write_tag" msgid="8571858602896222537">"लेख्नुहोस्"</string>
@@ -2551,5 +2552,15 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"केही पूर्वनिर्धारितहरू सेट गरिएका छन्"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"कुनै पूर्वनिर्धारित सेट गरिएको छैन"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"सबै अनुप्रयोगहरू"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"सक्रिय गरियो"</string>
+    <string name="filter_personal_apps" msgid="3277727374174355971">"व्यक्तिगत"</string>
+    <string name="filter_work_apps" msgid="24519936790795574">"कार्य"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"रोकियो"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"प्राथमिकता"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"संवेदनशील"</string>
+    <string name="reset_app_preferences_description" msgid="7718912868244058770">"सबै अनुप्रयोगहरूभरि प्राथमिकताहरू पूर्वनिर्धारितमा रिसेट गर्नुहोस्"</string>
+    <string name="all_apps_summary" msgid="3754827293203127282">"प्रणाली र डाउनलोड गरिएका अनुप्रयोगहरूसहित <xliff:g id="COUNT">%d</xliff:g> अनुप्रयोगहरू स्थापना गरिए"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"उन्नत"</string>
     <string name="unknown_app" msgid="5275921288718717656">"अज्ञात अनुप्रयोग"</string>
 </resources>

@@ -348,7 +348,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ඇඟිලි සලකුණු ලියාපදිංචි කරන ලදි</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"ඇඟිලි සලකුණු පිහිටුවීම"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="6402483378460350233">"ඔබේ තිරය අගුලු හැරීමට හෝ මිලදී ගැනීම් තහවුරු කිරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කිරීමට, අපට පහත ඒවා කිරීම අවශ්‍ය වේ: \n\n✓ ඔබේ පසුබිම් තිර අගුලු ක්‍රමය පිහිටුවීම \n\n✓ ඔබේ ඇඟිලි සලකුණ එක් කිරීම"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_onboard_message (1892198885652894680) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"සංවේදකය සොයන්න"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"ඔබේ දුරකථනයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය ස්ථානගත කරන්න."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"නම‍"</string>
@@ -588,9 +589,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"දුර්වල සම්බන්ධතා මඟහරින්න"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"හොඳ අන්තර්ජාල සම්බන්ධතාවයක් නොමැති නම් Wi‑Fi ජාල භාවිතා නොකරන්න"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"හොඳ අන්තර්ජාල සම්බන්ධතාවක් තිබෙන ජාල පමණක් භාවිතා කරන්න"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"පරිලෝකනය සැමවිට ලබාගත හැක"</string>
-    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"සැමවිටම පරිලෝකනය කිරීමට ඉඩ දෙන්න"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Wi-Fi අක්‍රිය විටත් Google ගේ ස්ථාන සේවා සහ වෙනත් යෙදුම් ජාල සඳහා පරිලෝකනය කරන්න"</string>
     <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"විවෘත Wi‑Fi ස්වයංක්‍රියව භාවිතා කරන්න"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"විවෘත ජාල තත්ත්වයෙන් උසස් යැයි නිර්ණය කර ඒවාට ස්වයංක්‍රියව සම්බන්ධ වීමට Wi‑Fi සහායකට ඉඩ දෙන්න"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"සහායක තෝරන්න"</string>
@@ -630,8 +628,7 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"උසස් විකල්ප"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi රක්ෂිත පිහිටුම"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"WPS ආරම්භ කරමින්…"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="7464388959427032052">"ඔබගේ රවුටරයේ Wi-Fi ආරක්ෂිත පිහිටුම් බොත්තම ඔබන්න. එය \"WPS\" ලෙස හඳුන්වා තිබීමට හෝ මෙම සංකේතය සමගින් සලකුණු කර තිබීමට හැකිය:"</string>
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"ඔබගේ Wi-Fi රවුටරයේ <xliff:g id="NUMBER">%1$s</xliff:g> PIN එක ඇතුලත් කරන්න. පිහිටුම සම්පූර්ණ වීමට මිනිත්තු 2 ක් දක්වා ගත විය හැක."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS සාර්ථකවිය. ජාලයට සම්බන්ධ වෙමින්…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"<xliff:g id="NETWORK_NAME">%s</xliff:g> Wi-Fi ජාලයට සම්බන්ධ වුණි"</string>
@@ -1019,14 +1016,14 @@
     <string name="restore_default_apn" msgid="8178010218751639581">"සුපුරුදු APN සැකසුම් යළි පිහිටුවමින්."</string>
     <string name="menu_restore" msgid="8260067415075573273">"සුපුරුදු වෙත යළි සකසන්න"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"සුපුරුදු APN සැකසීම නැවත සැකසීම සම්පූර්ණ කරන ලදි."</string>
-    <string name="reset_network_title" msgid="4557113742173895074">"ජාල සැකසීම් යළි පිහිටුවන ලදී"</string>
+    <string name="reset_network_title" msgid="4557113742173895074">"ජාල සැකසීම් යළි පිහිටුවන ලදි"</string>
     <string name="reset_network_desc" msgid="5805796658276223307">"මෙය පහත ඒවා ඇතුළුව, කර්මාන්තශාලා පෙරනිමි වෙත ජාලකරණයට සම්බන්ධ සියලු සැකසීම් යළි පිහිටවනු ඇත:\n\n"<li>"Wifi"</li>\n<li>"ජංගම දත්ත"</li>\n<li>"බ්ලූටූත්"</li></string>
-    <string name="reset_network_button_text" msgid="2035676527471089853">"සැකසීම් යළි පිහිටුවන ලදී"</string>
+    <string name="reset_network_button_text" msgid="2035676527471089853">"සැකසීම් යළි පිහිටුවන ලදි"</string>
     <string name="reset_network_final_desc" msgid="1745138973574945389">"සියලු ජාල සැකසීම් යළි පිහිටුවන්නද? ඔබට මෙම ක්‍රියාව ආපසු හැරවිය නොහැකිය!"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"සැකසීම් යළි පිහිටුවන්න"</string>
     <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"ජාල සැකසීම් යළි පිහිටුවීමක් තහවුරු කිරීමට ඔබ ඔබේ අගුලු හැරීමේ රටාව ඇඳීමට අවශ්‍යයි."</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"යළි පිහිටුවන්නද?"</string>
-    <string name="reset_network_complete_toast" msgid="6898753798089969372">"ජාල සැකසීම් යළි පිහිටුවන ලදී"</string>
+    <string name="reset_network_complete_toast" msgid="6898753798089969372">"ජාල සැකසීම් යළි පිහිටුවන ලදි"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"උපාංගය යළි පිහිටුවන්න"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"කර්මාන්තශාලා දත්ත යළි පිහිටුම"</string>
     <string name="master_clear_desc" product="tablet" msgid="8317211882509025841">"ඔබගේ ටැබ්ලටයේ "<b>"අභ්‍යන්තර ආචනය"</b>", සියලු දත්ත මකයි:\n\n"<li>"ඔබගේ Google ගිණුම"</li>\n<li>"පද්ධති සහ යෙදුම් දත්ත සහ සැකසීම්"</li>\n<li>"බාගත යෙදුම්"</li>" අන්තර්ගතය."</string>
@@ -1125,6 +1122,10 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"ස්ථානය නිමානය කිරීමට GPS, Wi-Fi සහ සෙලියුලර් ජාල භාවිතා කරන්න"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"ස්ථානය නිමානය කිරීමට Wi-Fi සහ සෙලියුලර් ජාල භාවිතා කරන්න"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ඔබේ ස්ථානය නිර්ණය කිරීමට GPS භාවිත කරන්න"</string>
+    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
+    <skip />
+    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
+    <skip />
     <string name="location_network_based" msgid="6010456018401296590">"Wi-Fi සහ සෙලියුලර් ජාල ස්ථාන"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ඔබගේ ස්ථානය ඉක්මනින් තීරණය කිරීමට යෙදුම් හට Google හි ස්ථාන සේවා භාවිතා කිරීමට ඉඩ දෙන්න. නිර්නාමික ස්ථාන දත්ත එකතු කර Google වෙත යැවෙනු ඇත."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi‑Fi මඟින් ස්ථානය හඳුනාගන්නා ලදි"</string>
@@ -2394,6 +2395,10 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"ගිණුම"</string>
     <string name="keywords_users" msgid="4673901601478559100">"සීමා කිරීම සීමා කරනවා සීමා කරන ලදි"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"පෙළ නිවැරදි කිරීම ශබ්ද නිවැරදි කරන්න කම්පනය වන්න ස්වයං භාෂා ඉංගිතය යෝජනා කරන්න යෝජනා කළ තේමා අහිතකර වචන ඉමොජි වර්ග අන්තර්ජාතික"</string>
+    <!-- no translation found for keywords_reset_apps (6420313678620788457) -->
+    <skip />
+    <!-- no translation found for keywords_all_apps (5377153522551809915) -->
+    <skip />
     <string name="keywords_lockscreen" msgid="4806191868723291541">"සර්පණය මුරපදය රටාව pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC ටැගයක් ස්ථාපනය කරන්න"</string>
     <string name="write_tag" msgid="8571858602896222537">"ලියනවා"</string>
@@ -2455,21 +2460,14 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"<xliff:g id="SERVICE">%1$s</xliff:g> සබලද?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"බාධා නොකරන්න ආකාරයට පිටවීමේ කොන්දේසි එකතු කිරීමට <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> හැකිවේ."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"යෙදුම් පූරණය වේ..."</string>
-    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
-    <skip />
+    <string name="app_notification_block_title" msgid="4069351066849087649">"සියල්ල අවහිර කරන්න"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"මෙම යෙදුමෙන් කවදාවත් දැනුම්දීම් පෙන්වන්න එපා"</string>
-    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
-    <skip />
-    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
-    <skip />
-    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
-    <skip />
+    <string name="app_notification_priority_title" msgid="5949923919607295595">"ප්‍රමුඛතාව ලෙස සලකන්න"</string>
+    <string name="app_notification_priority_summary" msgid="242979561927455238">"බාධා නොකරන්න යන්න ප්‍රමුඛතාව පමණි වෙත සකසා ඇති විට මෙම යෙදුමේ දැනුම්දීම් ඇසීමට ඉඩ දෙන්න"</string>
+    <string name="app_notification_peekable_title" msgid="8647856880382324822">"හොරෙන් බැලීමට ඉඩ දෙන්න"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"වත්මන් තිරය මත බැලීමට ඒවා සැකෙවින් ස්ලයිඩ් කිරීම මගින් සමහර දැනුම්දීම් අවධාරණය කිරීමට මෙම යෙදුමට ඉඩ දෙන්න"</string>
+    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"සංවේදී අන්තර්ගතය සඟවන්න"</string>
+    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"උපාංගය අගුළු දමා ඇති විට, මෙම යෙදුමේ දැනුම්දීම්වල ඇති පෞද්ගලික තොරතුරු අනාවරණය කළ හැකි අන්තර්ගතය සඟවන්න"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"අවහිර කරන ලදි"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"ප්‍රමුඛතාව"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"සංවේදී"</string>
@@ -2561,5 +2559,25 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"ඇතැම් පෙරනිමියන් සකස් කර ඇත"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"පෙරනිමියන් සකසා නොමැත"</string>
+    <!-- no translation found for filter_all_apps (1988403195820688644) -->
+    <skip />
+    <!-- no translation found for filter_enabled_apps (3318021007093070639) -->
+    <skip />
+    <!-- no translation found for filter_personal_apps (3277727374174355971) -->
+    <skip />
+    <!-- no translation found for filter_work_apps (24519936790795574) -->
+    <skip />
+    <!-- no translation found for filter_notif_blocked_apps (3446926933792244485) -->
+    <skip />
+    <!-- no translation found for filter_notif_priority_apps (5965001885749195239) -->
+    <skip />
+    <!-- no translation found for filter_notif_sensitive_apps (412490487743581673) -->
+    <skip />
+    <!-- no translation found for reset_app_preferences_description (7718912868244058770) -->
+    <skip />
+    <!-- no translation found for all_apps_summary (3754827293203127282) -->
+    <skip />
+    <!-- no translation found for advanced_apps (4812975097124803873) -->
+    <skip />
     <string name="unknown_app" msgid="5275921288718717656">"නොදන්නා යෙදුම"</string>
 </resources>

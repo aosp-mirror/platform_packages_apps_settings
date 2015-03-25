@@ -348,7 +348,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> fingerprint enrolled</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Fingerprint setup"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="6402483378460350233">"To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to: \n\n✓ Set up your background screen lock method \n\n✓ Add your fingerprint"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"To use your fingerprint to unlock your screen or confirm purchases, we\'ll need to: \n\n✓ Set up your backup screen lock method \n\n✓ Add your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Find the sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Locate the fingerprint sensor on the back of your phone."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Name"</string>
@@ -588,9 +588,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Avoid poor connections"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Don\'t use a Wi‑Fi network unless it has a good Internet connection"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Only use networks that have a good Internet connection"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Scanning always available"</string>
-    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Always allow scanning"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Let Google\'s location service and other apps scan for networks, even when Wi‑Fi is off"</string>
     <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Use open Wi‑Fi automatically"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Let a Wi‑Fi assistant automatically connect to open networks determined to be high quality"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Choose assistant"</string>
@@ -1122,6 +1119,10 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Use GPS, Wi‑Fi and mobile networks to determine location"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Use Wi‑Fi and mobile networks to determine location"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Use GPS to determine location"</string>
+    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
+    <skip />
+    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
+    <skip />
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi &amp; mobile network location"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Let apps use Google\'s location service to estimate your location faster. Anonymous location data will be collected and sent to Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Location determined by Wi‑Fi"</string>
@@ -2391,6 +2392,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
     <string name="keywords_users" msgid="4673901601478559100">"restriction restrict restricted"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"text correction correct sound vibrate auto language gesture suggest suggestion theme offensive word type emoji international"</string>
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"reset preferences default"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"apps download applications system"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"slide password pattern pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Set up Wi-Fi NFC Tag"</string>
     <string name="write_tag" msgid="8571858602896222537">"Write"</string>
@@ -2551,5 +2554,15 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Some defaults set"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"No defaults set"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"All apps"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"Enabled"</string>
+    <string name="filter_personal_apps" msgid="3277727374174355971">"Personal"</string>
+    <string name="filter_work_apps" msgid="24519936790795574">"Work"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blocked"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Priority"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Sensitive"</string>
+    <string name="reset_app_preferences_description" msgid="7718912868244058770">"Reset preferences across all apps to defaults"</string>
+    <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> apps installed, including system and downloaded apps"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"Advanced"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Unknown app"</string>
 </resources>

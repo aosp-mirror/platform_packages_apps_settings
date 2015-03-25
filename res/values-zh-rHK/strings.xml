@@ -348,7 +348,7 @@
       <item quantity="one">已登記 <xliff:g id="COUNT_0">%1$d</xliff:g> 個指紋</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"已設定指紋"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="6402483378460350233">"要使用您的指紋解鎖螢幕或確認購買項目，我們需要：\n\n✓ 設定您的背景螢幕鎖定方式\n\n✓ 加入您的指紋"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"要使用您的指紋解鎖螢幕或確認購買項目，我們需要：\n\n✓ 設定您的備份螢幕鎖定方式\n\n✓ 加入您的指紋"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"尋找感應器"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"在您的手機背面可以找到指紋感應器。"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"名稱"</string>
@@ -588,9 +588,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"已避免欠佳的連線"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"除非互聯網連線穩定，否則不要使用 Wi-Fi 網絡"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"只使用連線品質穩定的網絡"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"永遠可掃瞄"</string>
-    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"永遠執行掃描"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"允許 Google 的位置服務和其他應用程式掃描網絡 (即使 Wi-Fi 已關閉)"</string>
     <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"自動使用開放的 Wi-Fi"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"讓 Wi‑Fi 小幫手自動連線至優質的開放網絡"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"選擇小幫手"</string>
@@ -630,7 +627,7 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"進階選項"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi 保護設定"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"正在啟動 WPS…"</string>
-    <string name="wifi_wps_onstart_pbc" msgid="7464388959427032052">"按路由器上的 Wi-Fi 保護設定按鈕，該按鈕可能標示為「WPS」或帶有這個符號："</string>
+    <string name="wifi_wps_onstart_pbc" msgid="7464388959427032052">"按路由器上的 Wi-Fi 保護設定按鈕，該按鈕可能標示為「WPS」或顯示這個符號："</string>
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"請在 WiFi 路由器上輸入 PIN 碼 <xliff:g id="NUMBER">%1$s</xliff:g>，設定可能需要長達兩分鐘方能完成。"</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS 已成功，正在連接網絡…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"已連接 Wi-Fi 網絡 <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1019,11 +1016,11 @@
     <string name="menu_restore" msgid="8260067415075573273">"重設回預設值"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"重設預設 APN 設定已完成。"</string>
     <string name="reset_network_title" msgid="4557113742173895074">"重設網絡設定"</string>
-    <string name="reset_network_desc" msgid="5805796658276223307">"這將重設所有與網絡相關的設定到出廠預設值，包括：\n\n"<li>"Wi-Fi"</li>\n<li>"流動數據"</li>\n<li>"藍牙"</li></string>
+    <string name="reset_network_desc" msgid="5805796658276223307">"這樣做會將所有與網絡相關的設定重設至出廠預設值，包括：\n\n"<li>"Wi-Fi"</li>\n<li>"流動數據"</li>\n<li>"藍牙"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"重設設定"</string>
-    <string name="reset_network_final_desc" msgid="1745138973574945389">"要重設所有網絡設定嗎？您將不能復原這個操作！"</string>
+    <string name="reset_network_final_desc" msgid="1745138973574945389">"要重設所有網絡設定嗎？這個操作不能復原！"</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"重設設定"</string>
-    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"您需要畫出您的解鎖圖案而確認重設網絡設定。"</string>
+    <string name="reset_network_gesture_explanation" msgid="8615374120762720549">"您必須畫出解鎖圖案，確認重設網絡設定。"</string>
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"重設？"</string>
     <string name="reset_network_complete_toast" msgid="6898753798089969372">"重設網絡設定"</string>
     <string name="device_reset_title" msgid="2384019005638768076">"重設裝置"</string>
@@ -1122,6 +1119,10 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"使用 GPS、Wi-Fi 和流動網絡確定位置"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"使用 Wi-Fi 和流動網絡確定位置"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"使用 GPS 確定位置"</string>
+    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
+    <skip />
+    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
+    <skip />
     <string name="location_network_based" msgid="6010456018401296590">"Wi-Fi 和流動網絡位置資料"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"允許應用程式使用 Google 的位置資訊服務，藉此更快確定您的約略位置。系統會收集匿名的位置資料傳送給 Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"根據 Wi-Fi 確定位置"</string>
@@ -2395,6 +2396,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"帳戶"</string>
     <string name="keywords_users" msgid="4673901601478559100">"限制 限制 受限"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"文字 更正 修正 聲音 震動 自動 語言 手勢 建議 字詞建議 主題背景 令人反感的文字 輸入 表情圖案 國際"</string>
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"重設偏好設定預設值"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"應用程式 下載應用程式 系統"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"滑動 密碼 圖案 PIN"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標籤"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
@@ -2459,11 +2462,11 @@
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部封鎖"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"永不顯示這個應用程式的通知"</string>
     <string name="app_notification_priority_title" msgid="5949923919607295595">"優先處理"</string>
-    <string name="app_notification_priority_summary" msgid="242979561927455238">"允許這個應用程式的通知在「請勿騷擾」設定為「僅限優先」時可以被聽到"</string>
+    <string name="app_notification_priority_summary" msgid="242979561927455238">"允許這個應用程式的通知在「請勿騷擾」設定為「僅限優先」時發出"</string>
     <string name="app_notification_peekable_title" msgid="8647856880382324822">"允許快速預覽"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"允許這個應用程式以短暫滑入當前畫面的方式強調某些通知"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"允許這個應用程式將部分通知短暫滑入目前畫面，以示強調"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"隱藏敏感內容"</string>
-    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"當裝置鎖定時，隱藏這個應用程式的通知中，可能會透露個人資訊的內容"</string>
+    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"當裝置鎖定時，隱藏這個應用程式可能透露個人資訊的通知內容"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"已封鎖"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"重要"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"敏感"</string>
@@ -2542,7 +2545,7 @@
     <string name="storage_type_internal" msgid="6042049833565674948">"內部儲存空間"</string>
     <string name="storage_type_external" msgid="7738894330670001898">"外部儲存空間"</string>
     <string name="app_data_usage" msgid="7942375313697452803">"應用程式數據用量"</string>
-    <string name="data_summary_format" msgid="6213211533341068366">"<xliff:g id="DATE">%2$s</xliff:g>至今使用了 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="data_summary_format" msgid="6213211533341068366">"自 <xliff:g id="DATE">%2$s</xliff:g>至今使用了 <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_used" msgid="7128074132917008743">"已使用的儲存空間"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"開啟"</string>
     <string name="notifications_disabled" msgid="4326096527874762629">"封鎖"</string>
@@ -2555,5 +2558,15 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"已設定部分預設值"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"未設定預設值"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"所有應用程式"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"已啟用"</string>
+    <string name="filter_personal_apps" msgid="3277727374174355971">"個人"</string>
+    <string name="filter_work_apps" msgid="24519936790795574">"工作"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"已封鎖"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"重要"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"敏感"</string>
+    <string name="reset_app_preferences_description" msgid="7718912868244058770">"重設所有應用程式的偏好設定到預設值"</string>
+    <string name="all_apps_summary" msgid="3754827293203127282">"已安裝 <xliff:g id="COUNT">%d</xliff:g> 個應用程式，包括系統和已下載應用程式"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"進階"</string>
     <string name="unknown_app" msgid="5275921288718717656">"不明應用程式"</string>
 </resources>

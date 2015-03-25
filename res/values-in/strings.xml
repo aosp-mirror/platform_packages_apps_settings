@@ -348,7 +348,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> sidik jari didaftarkan</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Penyiapan sidik jari"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="6402483378460350233">"Untuk menggunakan sidik jari guna membuka kunci layar atau mengonfirmasi pembelian, kami harus: \n\n✓ Menyiapkan metode kunci layar latar belakang \n\n✓ Menambahkan sidik jari Anda"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"Untuk menggunakan sidik jari guna membuka kunci layar atau mengonfirmasi pembelian, kami harus: \n\n✓ Menyiapkan metode kunci layar cadangan \n\n✓ Menambahkan sidik jari Anda"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Temukan sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Cari sensor sidik jari di bagian belakang ponsel."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Nama"</string>
@@ -588,9 +588,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Hindari sambungan buruk"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Jangan gunakan jaringan Wi-Fi kecuali koneksi internetnya bagus"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Hanya gunakan jaringan yang memiliki koneksi internet kuat"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Pemindaian selalu tersedia"</string>
-    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Selalu izinkan pemindaian"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Izinkan layanan lokasi Google dan aplikasi lainnya memindai jaringan saat Wi-Fi tidak aktif sekalipun"</string>
     <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Gunakan Wi-Fi terbuka secara otomatis"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Izinkan Asisten Wi-Fi tersambung otomatis ke jaringan terbuka yang ditentukan berkualitas tinggi"</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Pilih asisten"</string>
@@ -630,8 +627,7 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Opsi lanjutan"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Penyiapan Wi-Fi yang Dilindungi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Memulai WPS..."</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="7464388959427032052">"Tekan tombol Penyiapan Wi-Fi yang Dilindungi di router. Ini dapat disebut \"WPS\" atau ditandai dengan simbol ini:"</string>
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Masukkan PIN <xliff:g id="NUMBER">%1$s</xliff:g> pada router Wi-Fi. Penyiapan perlu waktu hingga dua menit untuk selesai."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"WPS berhasil. Menyambung ke jaringan..."</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Tersambung ke jaringan Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1123,6 +1119,10 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Gunakan GPS, Wi‑Fi, dan jaringan seluler untuk menentukan lokasi"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Gunakan Wi‑Fi dan jaringan seluler untuk menentukan lokasi"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Menggunakan GPS untuk menentukan lokasi"</string>
+    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
+    <skip />
+    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
+    <skip />
     <string name="location_network_based" msgid="6010456018401296590">"Lokasi jaringan Wi‑Fi &amp; seluler"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Izinkan aplikasi menggunakan layanan lokasi Google untuk memperkirakan lokasi Anda dengan lebih cepat. Data lokasi anonim akan dikumpulkan dan dikirim ke Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Lokasi yang ditentukan oleh Wi-Fi"</string>
@@ -2392,6 +2392,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"akun"</string>
     <string name="keywords_users" msgid="4673901601478559100">"pembatasan membatasi dibatasi"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"teks koreksi benar suara getar otomatis bahasa isyarat sarankan saran tema menyinggung kata jenis emoji internasional"</string>
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"setel ulang preferensi default"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"apl unduh aplikasi sistem"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"geser pin pola sandi"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Siapkan Tag NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Tulis"</string>
@@ -2453,21 +2455,14 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"Aktifkan <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"<xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> akan dapat menambah ketentuan keluar ke mode Jangan ganggu."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Memuat aplikasi..."</string>
-    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
-    <skip />
+    <string name="app_notification_block_title" msgid="4069351066849087649">"Blokir semua"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Jangan pernah tampilkan pemberitahuan dari aplikasi ini"</string>
-    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
-    <skip />
-    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
-    <skip />
-    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
-    <skip />
+    <string name="app_notification_priority_title" msgid="5949923919607295595">"Perlakukan sebagai prioritas"</string>
+    <string name="app_notification_priority_summary" msgid="242979561927455238">"Izinkan notifikasi aplikasi ini didengarkan saat Jangan ganggu disetel menjadi Hanya untuk prioritas"</string>
+    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Izinkan mengintip"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Izinkan aplikasi ini menekankan notifikasi tertentu dengan menggeser sebentar untuk ditampilkan di layar saat ini"</string>
+    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Sembunyikan konten sensitif"</string>
+    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"Jika perangkat terkunci, sembunyikan konten notifikasi aplikasi ini yang dapat mengungkapkan informasi pribadi"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Diblokir"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Prioritas"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitif"</string>
@@ -2559,5 +2554,15 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Beberapa setelan default"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Tidak ada setelan default"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"Semua aplikasi"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"Diaktifkan"</string>
+    <string name="filter_personal_apps" msgid="3277727374174355971">"Pribadi"</string>
+    <string name="filter_work_apps" msgid="24519936790795574">"Kantor"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Diblokir"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Prioritas"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Sensitif"</string>
+    <string name="reset_app_preferences_description" msgid="7718912868244058770">"Menyetel ulang preferensi di semua aplikasi menjadi default"</string>
+    <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> aplikasi dipasang, termasuk aplikasi sistem dan yang diunduh"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"Lanjutan"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplikasi tak dikenal"</string>
 </resources>

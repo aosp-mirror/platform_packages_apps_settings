@@ -348,7 +348,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> na fingerprint ang naka-enroll</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Setup ng fingerprint"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="6402483378460350233">"Upang magamit ang iyong fingerprint upang i-unlock ang iyong screen o kumpirmahin ang mga pagbili, kakailanganin naming: \n\n✓ I-set up ang iyong paraan ng pag-lock ng screen sa background \n\n✓ Idagdag ang iyong fingerprint"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"Upang magamit ang iyong fingerprint upang i-unlock ang iyong screen o kumpirmahin ang mga pagbili, kakailanganin naming: \n\n✓ I-set up ang iyong backup na paraan ng pag-lock ng screen \n\n✓ Idagdag ang iyong fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Hanapin ang sensor"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Hanapin ang fingerprint sensor sa likod ng iyong telepono."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Pangalan"</string>
@@ -588,9 +588,6 @@
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Iwasan ang mahihinang koneksyon"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7843672905900544785">"Huwag gumamit ng Wi-Fi network maliban kung mayroon itong mahusay na koneksyon sa Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Gamit lang ng network na may maayos na koneksyon sa Internet"</string>
-    <string name="wifi_scan_always_available" msgid="3470564139944368030">"Palaging available ang pag-scan"</string>
-    <string name="wifi_scan_always_available_title" msgid="1518769058260729007">"Palaging payagan ang pag-i-scan"</string>
-    <string name="wifi_scan_always_available_summary" msgid="5442775583708315387">"Hayaang mag-scan ng mga network ang serbisyo sa lokasyon ng Google at iba pang mga app, kahit na naka-off ang Wi-Fi"</string>
     <string name="wifi_automatically_connect_title" msgid="7950640291510621742">"Awtomatikong gamitin ang bukas na Wi‑Fi"</string>
     <string name="wifi_automatically_connect_summary" msgid="6722194413023965902">"Hayaan ang Wi‑Fi assistant na awtomatikong kumonekta sa bukas na network na mataas ang kalidad."</string>
     <string name="wifi_select_assistant_dialog_title" msgid="4014645210955009439">"Pumili ng assistant"</string>
@@ -630,8 +627,7 @@
     <string name="wifi_show_advanced" msgid="3409422789616520979">"Mga advanced na opsyon"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Protektadong Setup ng Wi-Fi"</string>
     <string name="wifi_wps_setup_msg" msgid="315174329121275092">"Sinisimulan ang WPS…"</string>
-    <!-- no translation found for wifi_wps_onstart_pbc (7464388959427032052) -->
-    <skip />
+    <string name="wifi_wps_onstart_pbc" msgid="7464388959427032052">"Pindutin ang button ng Wi‑Fi Protected Setup sa iyong router. Maaaring tinatawag itong \"WPS\" o may marka ng simbolong ito:"</string>
     <string name="wifi_wps_onstart_pin" msgid="223344506445335358">"Ilagay ang pin na <xliff:g id="NUMBER">%1$s</xliff:g> sa iyong Wi-Fi router. Maaaring tumagal nang hanggang dalawang minuto bago makumpleto ang pag-setup."</string>
     <string name="wifi_wps_complete" msgid="2388138550456729134">"Nagtagumpay ang WPS. Kumokonekta sa network…"</string>
     <string name="wifi_wps_connected" msgid="7153432445748931183">"Nakakonekta sa Wi‑Fi network na <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
@@ -1123,6 +1119,10 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Gumamit ng GPS, Wi‑Fi at mga cellular network upang matukoy ang lokasyon"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Gumamit ng Wi-Fi at cellular network upang matukoy ang lokasyon"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Gamitin ang GPS upang matukoy ang lokasyon"</string>
+    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
+    <skip />
+    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
+    <skip />
     <string name="location_network_based" msgid="6010456018401296590">"Lokasyon ng Wi-Fi at cellular network"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Ipagamit sa apps ang serbisyo ng lok. ng Google para mabilis na itantya ang iyong lok.  Kokolektahin at ipapadala sa Google ang mga di alam na data ng lok."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Natukoy ng Wi-Fi ang lokasyon"</string>
@@ -2392,6 +2392,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"account"</string>
     <string name="keywords_users" msgid="4673901601478559100">"paghihigpit paghigpitan pinaghigpitan"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"pagwawasto ng text tama tunog i-vibrate awtomatiko wika galaw magmungkahi suhestyon tema nakakapanakit na salita i-type emoji international"</string>
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"i-reset ang mga kagustuhan sa default"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"system ng mga application ng pag-download ng mga app"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"i-slide password pattern pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"I-set up ang Tag ng NFC sa Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Magsulat"</string>
@@ -2453,21 +2455,14 @@
     <string name="condition_provider_security_warning_title" msgid="5834347345913614926">"I-enable ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="condition_provider_security_warning_summary" msgid="640037330610551763">"Magagawa ng <xliff:g id="CONDITION_PROVIDER_NAME">%1$s</xliff:g> na magdagdag ng mga kundisyon sa paglabas sa mode na Huwag istorbohin."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Naglo-load ng mga app..."</string>
-    <!-- no translation found for app_notification_block_title (4069351066849087649) -->
-    <skip />
+    <string name="app_notification_block_title" msgid="4069351066849087649">"I-block lahat"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Huwag kailanman magpakita ng mga notification mula sa app na ito"</string>
-    <!-- no translation found for app_notification_priority_title (5949923919607295595) -->
-    <skip />
-    <!-- no translation found for app_notification_priority_summary (242979561927455238) -->
-    <skip />
-    <!-- no translation found for app_notification_peekable_title (8647856880382324822) -->
-    <skip />
-    <!-- no translation found for app_notification_peekable_summary (678845517890921158) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_title (8465860579482264139) -->
-    <skip />
-    <!-- no translation found for app_notification_sensitive_summary (8433315579173105209) -->
-    <skip />
+    <string name="app_notification_priority_title" msgid="5949923919607295595">"Ituring na may priyoridad"</string>
+    <string name="app_notification_priority_summary" msgid="242979561927455238">"Marinig ang mga notification ng app na ito kapag nakatakda sa May priyoridad lang ang Huwag istorbohin"</string>
+    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Payagan ang pagpi-peek"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Hayaan ang app na ito na bigyang-diin ang ilang notification sa pamamagitan ng pag-slide sa mga iyon nang panandalian sa view sa kasalukuyang screen"</string>
+    <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Itago ang sensitibong content"</string>
+    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"Kapag naka-lock ang device, itago ang content sa mga notification ng app na ito na maaaring magsiwalat ng pribadong impormasyon"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Naka-block"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priyoridad"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Sensitibo"</string>
@@ -2559,5 +2554,15 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"May nakatakdang ilang default"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Walang nakatakdang mga default"</string>
+    <string name="filter_all_apps" msgid="1988403195820688644">"Lahat ng app"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"Naka-enable"</string>
+    <string name="filter_personal_apps" msgid="3277727374174355971">"Personal"</string>
+    <string name="filter_work_apps" msgid="24519936790795574">"Trabaho"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Na-block"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Priyoridad"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Sensitibo"</string>
+    <string name="reset_app_preferences_description" msgid="7718912868244058770">"I-reset ang mga kagustuhan sa lahat ng app sa mga default"</string>
+    <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> (na) app ang naka-install, kasama na ang system at mga na-download na app"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"Advanced"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Hindi kilalang app"</string>
 </resources>
