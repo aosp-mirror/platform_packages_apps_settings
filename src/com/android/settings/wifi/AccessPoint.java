@@ -230,7 +230,11 @@ class AccessPoint extends Preference {
     }
 
     private void loadConfig(WifiConfiguration config) {
-        ssid = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
+        if (config.isPasspoint())
+            ssid = config.providerFriendlyName;
+        else
+            ssid = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
+
         bssid = config.BSSID;
         security = getSecurity(config);
         networkId = config.networkId;
@@ -360,6 +364,7 @@ class AccessPoint extends Preference {
             refresh();
             return true;
         }
+
         return false;
     }
 
@@ -392,6 +397,11 @@ class AccessPoint extends Preference {
         if (reorder) {
             notifyHierarchyChanged();
         }
+    }
+
+    void update(WifiConfiguration config) {
+        mConfig = config;
+        refresh();
     }
 
     int getLevel() {
@@ -617,8 +627,10 @@ class AccessPoint extends Preference {
         StringBuilder summary = new StringBuilder();
 
         if (isActive()) { // This is the active connection
+            String passpointProvider = (mConfig != null && mConfig.isPasspoint()) ?
+                    mConfig.providerFriendlyName : null;
             summary.append(Summary.get(context, getState(),
-                    networkId == WifiConfiguration.INVALID_NETWORK_ID));
+                    networkId == WifiConfiguration.INVALID_NETWORK_ID, passpointProvider));
         } else if (mConfig != null
                 && mConfig.hasNoInternetAccess()) {
             summary.append(context.getString(R.string.wifi_no_internet));

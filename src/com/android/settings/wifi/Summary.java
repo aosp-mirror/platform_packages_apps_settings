@@ -20,12 +20,20 @@ import com.android.settings.R;
 
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
+import android.text.TextUtils;
 
 class Summary {
-    static String get(Context context, String ssid, DetailedState state, boolean isEphemeral) {
-        if (state == DetailedState.CONNECTED && isEphemeral && ssid == null) {
-            // Special case for connected + ephemeral networks.
-            return context.getString(R.string.connected_via_wfa);
+    static String get(Context context, String ssid, DetailedState state, boolean isEphemeral,
+                      String passpointProvider) {
+        if (state == DetailedState.CONNECTED) {
+            if (TextUtils.isEmpty(passpointProvider) == false) {
+                // Special case for connected + ephemeral networks.
+                String format = context.getString(R.string.connected_via_passpoint);
+                return String.format(format, passpointProvider);
+            } else if (isEphemeral && ssid == null) {
+                // Special case for connected + ephemeral networks.
+                return context.getString(R.string.connected_via_wfa);
+            }
         }
 
         String[] formats = context.getResources().getStringArray((ssid == null)
@@ -38,7 +46,15 @@ class Summary {
         return String.format(formats[index], ssid);
     }
 
+    static String get(Context context, String ssid, DetailedState state, boolean isEphemeral) {
+        return get(context, ssid, state, isEphemeral, null);
+    }
     static String get(Context context, DetailedState state, boolean isEphemeral) {
-        return get(context, null, state, isEphemeral);
+        return get(context, null, state, isEphemeral, null);
+    }
+
+    static String get(Context context, DetailedState state, boolean isEphemeral,
+                      String passpointProvider) {
+        return get(context, null, state, isEphemeral, passpointProvider);
     }
 }
