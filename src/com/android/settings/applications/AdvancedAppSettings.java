@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.os.AsyncTask;
@@ -34,9 +35,11 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,22 +50,25 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Callbacks;
 import com.android.settings.applications.ApplicationsState.Session;
+import com.android.settings.applications.PermissionsInfo.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdvancedAppSettings extends SettingsPreferenceFragment implements Callbacks,
-        DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
+        DialogInterface.OnClickListener, DialogInterface.OnDismissListener, Callback {
 
     static final String TAG = "AdvancedAppSettings";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
+    private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_ALL_APPS = "all_apps";
     private static final String KEY_RESET_ALL = "reset_all";
     private static final String EXTRA_RESET_DIALOG = "resetDialog";
 
     private ApplicationsState mApplicationsState;
     private Session mSession;
+    private Preference mAppPerms;
     private Preference mAllApps;
     private Preference mResetAll;
 
@@ -75,6 +81,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
     private NetworkPolicyManager mNpm;
     private AppOpsManager mAom;
     private Handler mHandler;
+    private PermissionsInfo mPermissionsInfo;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -84,6 +91,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
         mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
         mSession = mApplicationsState.newSession(this);
 
+        mAppPerms = findPreference(KEY_APP_PERM);
         mAllApps = findPreference(KEY_ALL_APPS);
         mResetAll = findPreference(KEY_RESET_ALL);
         mResetAll.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -136,6 +144,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
     public void onResume() {
         super.onResume();
         mActivityResumed = true;
+        mPermissionsInfo = new PermissionsInfo(getActivity(), this);
     }
 
     @Override
@@ -263,6 +272,13 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
     @Override
     public void onLoadEntriesCompleted() {
         // No-op.
+    }
+
+    @Override
+    public void onPermissionLoadComplete() {
+        mAppPerms.setSummary(getActivity().getString(R.string.app_permissions_summary,
+                mPermissionsInfo.getRuntimePermAppsGrantedCount(),
+                mPermissionsInfo.getRuntimePermAppsCount()));
     }
 
 }
