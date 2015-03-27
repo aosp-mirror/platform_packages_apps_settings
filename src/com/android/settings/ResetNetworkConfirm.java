@@ -103,6 +103,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 for (WifiConfiguration config : networks) {
                     wifiManager.removeNetwork(config.networkId);
                 }
+                wifiManager.saveConfiguration();
             }
 
             // Turn mobile hotspot off
