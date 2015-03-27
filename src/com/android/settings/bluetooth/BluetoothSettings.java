@@ -33,7 +33,10 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.text.Spannable;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,8 +48,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -136,6 +141,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
+        mEmptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
@@ -352,7 +358,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 break;
 
             case BluetoothAdapter.STATE_OFF:
-                messageId = R.string.bluetooth_empty_list_bluetooth_off;
+                setOffMessage();
                 if (isUiRestricted()) {
                     messageId = R.string.bluetooth_empty_list_user_restricted;
                 }
@@ -366,10 +372,37 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
         setDeviceListGroup(preferenceScreen);
         removeAllDevices();
-        mEmptyView.setText(messageId);
+        if (messageId != 0) {
+            mEmptyView.setText(messageId);
+        }
         if (!isUiRestricted()) {
             getActivity().invalidateOptionsMenu();
         }
+    }
+
+    private void setOffMessage() {
+        if (mEmptyView == null) {
+            return;
+        }
+        final CharSequence briefText = getText(R.string.bluetooth_empty_list_bluetooth_off);
+        final StringBuilder contentBuilder = new StringBuilder();
+        contentBuilder.append(briefText);
+        contentBuilder.append("\n\n");
+        contentBuilder.append(getText(R.string.ble_scan_notify_text));
+        getPreferenceScreen().removeAll();
+        LinkifyUtils.linkify(mEmptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
+            @Override
+            public void onClick() {
+                final SettingsActivity activity =
+                        (SettingsActivity) BluetoothSettings.this.getActivity();
+                activity.startPreferencePanel(ScanningSettings.class.getName(), null,
+                        R.string.location_scanning_screen_title, null, null, 0);
+            }
+        });
+        Spannable boldSpan = (Spannable) mEmptyView.getText();
+        boldSpan.setSpan(
+                new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
+                briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     @Override
