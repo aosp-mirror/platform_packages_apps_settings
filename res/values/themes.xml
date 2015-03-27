@@ -126,7 +126,7 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
         <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
 
-        <item name="switchBarTheme">@style/Theme.SwitchBar.Settings</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
 
         <item name="preferenceBackgroundColor">@drawable/preference_background</item>
 
@@ -143,7 +143,7 @@
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
 
-        <item name="switchBarTheme">@style/Theme.SwitchBar.SubSettings</item>
+        <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.SubSettings</item>
     </style>
 
     <style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
@@ -154,12 +154,12 @@
         <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
-    <style name="Theme.SwitchBar.Settings" parent="@android:style/Theme.Material.Settings">
+    <style name="ThemeOverlay.SwitchBar.Settings" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_margin_end</item>
     </style>
 
-    <style name="Theme.SwitchBar.SubSettings" parent="@android:style/Theme.Material.Settings">
+    <style name="ThemeOverlay.SwitchBar.SubSettings" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
     </style>
