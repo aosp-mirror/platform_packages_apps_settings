@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"هر زمان این نماد را ببینید، می‌توانید از اثر انگشتتان برای شناسایی یا تأیید خرید استفاده کنید."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"افزودن"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"بعدی"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"بخشی از اثر انگشت شناسایی شد. لطفاً دوباره امتحان کنید."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"حسگر اثر انگشت کثیف است. لطفاً آن را تمیز کنید و دوباره امتحان نمایید."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"انگشت خیلی سریع حرکت کرد. لطفاً دوباره امتحان کنید."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"انگشت خیلی آهسته حرکت کرد. لطفاً دوباره امتحان کنید."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"پردازش ممکن نیست. دوباره امتحان کنید."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"سخت‌افزار در دسترس نیست."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"ذخیره اثر انگشت ممکن نیست. لطفاً یک اثر انگشت موجود را حذف کنید."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"مهلت زمانی ثبت اثر انگشت به پایان رسید. دوباره امتحان کنید."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"رمزگذاری"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"رمزگذاری رایانهٔ لوحی"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"رمزگذاری تلفن"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"‏Wi-Fi ترجیحی (تنها در صورت در دسترس نبودن Wi-Fi، از شبکه همراه استفاده می‌کند)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"‏شبکه همراه ترجیحی (تنها در صورت در دسترس نبودن شبکه همراه، از Wi-Fi استفاده می‌کند)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"‏فقط Wi-Fi (هرگز از شبکه همراه استفاده نمی‌کند. در صورت در دسترس نبودن Wi-Fi، برقراری یا دریافت تماس امکان‌پذیر نیست)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"‏انتقال WFC هنگام رومینگ"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"‏هنگام رومینگ، به انتقال تماس صوتی Wi-Fi به شبکه همراه اجازه داده شود"</string>
     <string name="home_settings" msgid="212375129455718176">"صفحه اصلی"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"صفحهٔ نمایش"</string>
     <string name="sound_settings" msgid="5534671337768745343">"صدا"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"‏استفاده از GPS،‏ Wi-Fi و شبکه‌های تلفن همراه برای تعیین مکان"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"‏استفاده از Wi-Fi و شبکه‌های تلفن همراه برای تعیین مکان"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"‏استفاده از GPS برای تعیین موقعیت مکانی"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"اسکن کردن"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"اسکن کردن"</string>
     <string name="location_network_based" msgid="6010456018401296590">"‏مکان شبکه تلفن همراه و Wi-Fi"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"‏به برنامه‌ها اجازه داده شود با استفاده از خدمات مکانی Google مکان شما را سریع‌تر تخمین بزنند. داده‌های مکان به‌طور ناشناس جمع‌آوری شده و به Google ارسال خواهد شد."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"‏موقعیت مکانی تعیین شده توسط Wi-Fi"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"پین دستگاهتان را وارد کنید تا بازکردن قفل سازنده محصول اصلی را فعال کنید"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"اجازه می‌هید قفل سازنده تجهیزات اصلی باز شود؟"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"اخطار: وقتی این تنظیم روشن باشد، ویژگی‌های حفاظتی دستگاه در این دستگاه کار نمی‌کند."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"اندازه‌های حافظه موقت ثبت‌کننده"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"انتخاب اندازه‌ ثبت‌کننده در حافظه موقت ثبت"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"مکان‌های کاذب مجاز هستند"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"مکان‌های کاذب مجاز هستند"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"فعال کردن بازبینی ویژگی بازدید"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"شبکه"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"گواهینامه نمایش بدون سیم"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"‏فعال کردن گزارش‌گیری طولانی Wi‑Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"‏Wi‑Fi فعال برای واگذاری به شبکه سلولی"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"‏همواره به اسکن‌های رومینگ Wi‑Fi اجازه داده شود"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"‏استفاده از کلاینت DHCP قدیمی"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"نمایش گزینه‌ها برای گواهینامه نمایش بدون سیم"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"‏افزایش سطح گزارش‌گیری Wi‑Fi، نمایش به ازای SSID RSSI در انتخاب‌کننده Wi‑Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"‏وقتی فعال است، در شرایط پایین بودن سیگنال، Wi‑Fi برای واگذار کردن اتصال داده به شبکه سلولی فعال‌تر خواهد بود."</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"مکان‌های کاذب مجاز هستند"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"مکان‌های کاذب مجاز هستند"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"فعال کردن بازبینی ویژگی بازدید"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"‏به جای کلاینت Android DHCP جدید، از کلاینت Lollipop DHCP استفاده کنید."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"‏رفع عیب USB انجام شود؟"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"‏رفع عیب USB فقط برای اهداف برنامه‌نویسی در نظر گرفته شده است. از آن برای رونوشت‌برداری داده بین رایانه و دستگاه خود، نصب برنامه‌ها در دستگاه خود بدون اعلان و خواندن داده‌های گزارش استفاده کنید."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"‏دسترسی به اشکال‌زدایی USB از تمام رایانه‌هایی که قبلاً مجاز دانسته‌اید لغو شود؟"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"‏wifi ‏اتصال شبکه wi-fi"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"پیام نوشتاری ارسال پیامک پیام‌ها پیام‌رسانی"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"‏شبکه تلفن همراه تلفن همراه شرکت مخابراتی بی‌سیم داده 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"‏wifi، تماس از طریق wi-fi، تماس، رومینگ، انتقال"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"‏wifi، تماس wifi، تماس"</string>
     <string name="keywords_home" msgid="3626170808219458848">"راه‌انداز"</string>
     <string name="keywords_display" msgid="6709007669501628320">"صفحه نمایش صفحه لمسی"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"باتری صفحه‌لمسی صفحه کم نور"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> برنامه نصب شده است، از جمله برنامه‌های سیستم و دانلود شده"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"پیشرفته"</string>
     <string name="unknown_app" msgid="5275921288718717656">"برنامه ناشناخته"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"انتخاب نمایه"</string>
 </resources>

@@ -551,14 +551,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Бул сөлөкөттү качан көрсөңүз да аныктоо же сатып алууга уруксат берүү үчүн манжа изиңизди пайдалана аласыз."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Кошуу"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Кийинки"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Манжа изи жарым-жартылай аныкталды. Кайра аракет кылыңыз."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Манжа изинин сенсору кирдеп калган. Тазалап, кайра аракет кылыңыз."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Манжа өтө тез жылдырылды. Кайра аракет кылыңыз."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Манжа өтө жай жылдырылды. Кайра аракет кылыңыз."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Иштетилбей жатат. Кайра аракет кылыңыз."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Аппараттык камсыздоо жеткиликтүү эмес."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Манжа изин сактоо мүмкүн эмес. Учурдагы манжа изин алып салыңыз."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Манжа изин күтүү мөөнөтү бүттү. Кайра аракет кылыңыз."</string>
     <!-- no translation found for crypt_keeper_settings_title (4219233835490520414) -->
     <skip />
     <!-- no translation found for crypt_keeper_encrypt_title (1060273569887301457) -->
@@ -1051,8 +1043,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi тандалган (Эгер Wi-Fi болбосо, уюлдук тармакты гана колдонот)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Уюлдук тармак тандалган (Эгер уюлдук тармак жеткиликтүү эмес болсо, Wi-Fi гана пайдаланат)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi гана (Эч качан уюлдук тармак колдонбойт. Эгер Wi-Fi болбосо, чалуу жасап же кабыл ала албайт)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Роуминг учурунда WFC өткөрүү"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Роуминг учурунда Wi-Fi үн чалууларын уюлдук тармакка өткөрүүгө уруксат берүү"</string>
     <string name="home_settings" msgid="212375129455718176">"Үйгө"</string>
     <!-- no translation found for display_settings_title (1708697328627382561) -->
     <skip />
@@ -1599,10 +1589,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Жайгашкан жерди аныктоо үчүн GPS, Wi‑Fi жана уюктук тармактарды колдонуңуз"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Жайгашкан жерди аныктоо үчүн Wi‑Fi жана уюктук тармактарды колдонуңуз"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Жайгашкан жерди аныктоо үчүн GPS колдонуңуз"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Скандалууда…"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Скандалууда…"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi &amp; уюкт тарм жайг жер"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Колдонмолорго Google жайгаштыруу м-н ордуңузду тактоого жол берүү. Жайгашуу берилиштери аноним. чогултулат ж-а Google\'га берилет."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Жайгашуу Wi‑Fi аркылуу аныкталды"</string>
@@ -2091,10 +2079,19 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"OEM кулпуну ачууну иштетүү үчүн түзмөгүңүздүн PIN\'ин киргизиңиз"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"OEM бөгөттөн чыгарууга уруксатпы?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ЭСКЕРТҮҮ: Бул жөндөө күйгүзүлүп турганда түзмөктү коргоо өзгөчөлүктөрү иштебейт."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Каттагыч буферлеринин өлчөмдөрү"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Каттоо буфери үчүн Каттагычтын көлөмүн тандаңыз"</string>
+    <!-- no translation found for allow_mock_location (2787962564578664888) -->
+    <skip />
+    <!-- no translation found for allow_mock_location_summary (317615105156345626) -->
+    <skip />
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Аттрибут текшерүүсүнүн көрүнүшүн иштетүү"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Тармактык байланыштарды кеңейтүү"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Зымсыз дисплейди аныктоо"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Wi‑Fi дайын-даректүү протоколун иштетүү"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Уюктук хэндоверге өжөр Wi-Fi"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Wi-Fi Роуминг Скандоо мүмкүнчүлүгүнө ар дайым уруксат берилсин"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Эскирген DHCP кардарын колдонуу"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Зымсыз дисплейди сертификатто мүмкүнчүлүктөрүн көргөзүү"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Wi-Fi Кармагычта Wi‑Fi протокол деңгээлин жогорулатуу жана ар бир SSID RSSI үчүн көрсөтүү."</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Иштетилгенде, Wi-Fi байланышы үзүл-кесил болуп жатканда, Wi-Fi дайындарды уюктук операторго өжөрлүк менен өткөрөт."</string>
@@ -2108,6 +2105,7 @@
     <!-- no translation found for allow_mock_location_summary (317615105156345626) -->
     <skip />
     <string name="debug_view_attributes" msgid="6485448367803310384">"Аттрибут текшерүүсүнүн көрүнүшүн иштетүү"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Жаңы Android DHCP кардарынын ордуна Lollipop\'тон DHCP кардарын колдонуңуз."</string>
     <!-- no translation found for adb_warning_title (6234463310896563253) -->
     <skip />
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-жөндөө - өндүрүү максатында гана  түзүлгөн. Аны компүтериңиз менен түзмөгүңүздүн ортосунда берилиштерди алмашуу, түзмөгүңүзгө колдонмолорду эскертүүсүз орнотуу жана лог берилиштерин окуу үчүн колдонсоңуз болот."</string>
@@ -3238,7 +3236,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi түйүнүнө байланышуу"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"SMS билдирүү SMS билдирүүлөрүн жазышуу билдирүү жазышуу"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"уюлдук уюл оператор зымсыз дайындар 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi чалуу чалууда роуминг өткөрүү"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi чалуу чалуу"</string>
     <string name="keywords_home" msgid="3626170808219458848">"ишке киргизгич"</string>
     <string name="keywords_display" msgid="6709007669501628320">"экран, сенсордук экран"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"күңүрт экран сенсордук экран батарея"</string>
@@ -3438,4 +3436,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> колдонмо орнотулду, анын ичинде тутумдук жана жүктөлүп алынган колдонмолор бар"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Өркүндөтүлгөн"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Белгисиз колдонмо"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Профиль тандоо"</string>
 </resources>

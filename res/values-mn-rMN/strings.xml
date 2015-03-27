@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Энэ тэмдэг гарч ирсэн тохиолдолд та өөрийн хурууны хээг оруулах эсвэл худалдан авалт хийх зөвшөөрөл олгох боломжтой болох юм."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Нэмэх"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Дараах"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Хурууны хээг тал уншуулсан байна. Дахин оролдоно уу."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Хурууны хээ мэдрэгч бохирдсон байна. Та цэвэрлэсний дараагаар дахин оролдоно уу."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Хурууг уншиж дуусаагүй байхад авсан байна. Та дахин уншуулна уу."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Хурууг хэт удаан уншуулсан байна. Та дахин уншуулна уу."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Мэдээллийг оруулах боломжгүй байна. Дахин оролдоно уу."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Техник хангамж бэлэн бус байна."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Хурууны хээг хадгалах боломжгүй байна. Одоо байгаа хурууны хээг арилгана уу."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Хурууны хээ оруулах хугацаа өнгөрсөн байна. Дахин оруулна уу."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифрлэлт"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Таблетыг шифрлэх"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Утсыг шифрлэх"</string>
@@ -741,8 +733,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi илүүд эрхэмлэдэг (Wi-Fi байхгүй тохиолдолд зөвхөн үүрэн сүлжээг ашигладаг)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Үүрэн сүлжээг эрхэмлэх (Үүрэн сүлжээг ашиглах боломжгүй байгаа тохиолдолд зөвхөн Wi-Fi ашигладаг)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Зөвхөн Wi-Fi (Үүрэн сүлжээг огт ашигладаггүй. Wi-Fi байхгүй тохиолдолд дуудлага хийж, хүлээн авах боломжгүй)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Роуминг үйлчилгээ ашиглаж байхад WFC шилжих"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Роуминг үйлчилгээг ашиглаж байхад Wi-Fi дуут ярианаас үүрэн сүлжээнд шилжихийг зөвшөөр"</string>
     <string name="home_settings" msgid="212375129455718176">"Нүүр"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Дэлгэц"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Дуу"</string>
@@ -1109,10 +1099,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Байршил тодорхойлоход GPS, Wi‑Fi, болон үүрэн сүлжээ ашиглах"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Байршил тодорхойлоход Wi‑Fi болон үүрэн сүлжээ ашиглах"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Байршлыг тогтоохын тулд GPS ашиглах"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Скан хийж байна"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Скан хийж байна"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi &amp; үүрэн сүлжээний байршил"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Апп-уудад Google-н байршлын үйлчилгээ ашиглан таны байршлыг хурдан олохыг зөвшөөрөх. Нэргүй байршлын мэдээлэл цуглуулагдаж Google рүү илгээгдэх болно."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi-р тодорхойлогдсон байршил"</string>
@@ -1442,10 +1430,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"OEM түгжээ тайлагчийг идэвхжүүлэхийн тулд төхөөрөмжийнхөө пин кодыг оруулна уу."</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"OEM түгжээ тайлагчийг зөвшөөрөх үү?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"АНХААР: Энэ тохиргоо асаалттай байгаа үед тухайн төхөөрөмжийн хамгаалалтын функцүүд ажиллахгүй."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Логгерын буферын хэмжээ"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Лог буфер бүрт ногдох логгерын хэмжээг сонгоно уу"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Хуурамч байршлыг зөвшөөрөх"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Хуурамч байршлыг зөвшөөрөх"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Харах тохируулгын шалгалтыг идэвхжүүлэх"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Сүлжээ"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Утасгүй дэлгэцийн сертификат"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Wi‑Fi Verbose лог-г идэвхжүүлэх"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Үүрэн шилжүүлэг рүү идэвхтэй Wi‑Fi"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Wi‑Fi Роум сканыг байнга зөвшөөрөх"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Хуучин DHCP харилцагчийг хэрэглэх"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Утасгүй дэлгэцийн сертификатын сонголтыг харуулах"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Wi‑Fi лог-н түвшинг нэмэгдүүлэх, Wi‑Fi Сонгогч дээрх SSID-д ногдох RSSI-г харуулах"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Идэвхжүүлсэн үед Wi‑Fi дохио сул бол дата холболтыг Үүрэн рүү шилжүүлэхдээ илүү идэвхтэй байх болно"</string>
@@ -1457,6 +1452,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Хуурамч байршлыг зөвшөөрөх"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Хуурамч байршлыг зөвшөөрөх"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Харах тохируулгын шалгалтыг идэвхжүүлэх"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Шинэ Андройд DHCP харилцагчийн оронд Lollipop-ийн DHCP харилцагчийг хэрэглэ."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB дебаг хийхийг зөвшөөрөх үү?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB дебаг нь зөвхөн хөгжүүлэлтийн зорилготой. Үүнийг өөрийн компьютер болон төхөөрөмжийн хооронд өгөгдөл хуулах, өөрийн төхөөрөмж дээр мэдэгдэлгүйгээр аппликешн суулгах, лог датаг унших зэрэгт ашиглаж болно."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Таны өмнө нь зөвшөөрөл өгсөн бүх компьютерээс USB дебаг хандалтыг нь хураах уу?"</string>
@@ -2357,7 +2353,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi сүлжээний холболт"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"Зурвас зурвас бичих зурвасаар харилцах"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"үүрэн холбоо үүрэн зөөгч утасгүй өгөгдөл 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi дуудлаг дуудаж байна роуминг шилжүүлэх"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi дуудлага дуудаж байна"</string>
     <string name="keywords_home" msgid="3626170808219458848">"ажиллуулагч"</string>
     <string name="keywords_display" msgid="6709007669501628320">"дэлгэц мэдрэгчтэй"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"бүдэг дэлгэц мэдрэгчтэй дэлгэц тэжээл"</string>
@@ -2551,4 +2547,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> апп суулгасан байна. Үүнд системийн болон татаж авсан апп-уудыг оруулсан"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Боловсронгуй"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Үл мэдэгдэх апп"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Профайлаа сонгоно уу"</string>
 </resources>

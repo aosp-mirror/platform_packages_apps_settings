@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"เมื่อใดก็ตามที่คุณเห็นไอคอนนี้ คุณสามารถใช้ลายนิ้วมือเพื่อระบุตัวตนหรือเพื่ออนุญาตการซื้อได้"</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"เพิ่ม"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"ถัดไป"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"ตรวจพบลายนิ้วมือเพียงบางส่วน โปรดลองอีกครั้ง"</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"เซ็นเซอร์ลายนิ้วมือไม่สะอาด โปรดทำความสะอาดและลองอีกครั้ง"</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"เคลื่อนนิ้วเร็วเกินไป โปรดลองอีกครั้ง"</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"เคลื่อนนิ้วช้าเกินไป โปรดลองอีกครั้ง"</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"ไม่สามารถดำเนินการได้ โปรดลองอีกครั้ง"</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"ฮาร์ดแวร์ไม่พร้อมใช้งาน"</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"ไม่สามารถเก็บลายนิ้วมือได้ โปรดนำลายนิ้วมือที่มีอยู่ออก"</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"หมดเวลาใช้ลายนิ้วมือแล้ว โปรดลองอีกครั้ง"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"การเข้ารหัส"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"เข้ารหัสแท็บเล็ต"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"เข้ารหัสโทรศัพท์"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"ต้องการใช้ Wi-Fi (ใช้เครือข่ายมือถือต่อเมื่อ Wi-Fi ไม่พร้อมใช้งาน)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"ต้องการใช้เครือข่ายมือถือ (ใช้ Wi-Fi ต่อเมื่อเครือข่ายมือถือไม่พร้อมใช้งาน)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi เท่านั้น (ไม่ใช้เครือข่ายมือถือเลย ไม่สามารถโทรออกหรือรับสายได้หาก Wi-Fi ไม่พร้อมใช้งาน)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"โอน WFC ขณะโรมมิ่ง"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"อนุญาตให้โอนการโทรด้วยเสียงผ่าน Wi-Fi ไปยังเครือข่ายมือถือเมื่อโรมมิ่ง"</string>
     <string name="home_settings" msgid="212375129455718176">"หน้าแรก"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"แสดง"</string>
     <string name="sound_settings" msgid="5534671337768745343">"เสียง"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"ใช้ GPS, Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"ใช้ Wi-Fi และเครือข่ายมือถือเพื่อระบุตำแหน่ง"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ใช้ GPS เพื่อระบุตำแหน่ง"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"การสแกน"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"การสแกน"</string>
     <string name="location_network_based" msgid="6010456018401296590">"ตำแหน่ง Wi-Fi และเครือข่าย"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ให้แอปต่างๆ ใช้บริการระบุตำแหน่งของ Google เพื่อระบุตำแหน่งโดยประมาณของคุณรวดเร็วยิ่งขึ้น โดยจะมีการรวบรวมและส่งข้อมูลตำแหน่งที่ไม่ระบุชื่อให้ Google"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ตำแหน่งที่กำหนดโดย WiFi"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"ป้อน PIN ของอุปกรณ์เพื่อเปิดใช้การปลดล็อก OEM"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"อนุญาตการปลดล็อก OEM ไหม"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"คำเตือน: คุณลักษณะการปกป้องอุปกรณ์จะไม่ทำงานบนอุปกรณ์นี้ขณะที่การตั้งค่านี้เปิดอยู่"</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"ขนาดบัฟเฟอร์ของ Logger"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"เลือกขนาด Logger ต่อบัฟเฟอร์ไฟล์บันทึก"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"อนุญาตให้จำลองตำแหน่ง"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"อนุญาตให้จำลองตำแหน่ง"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"เปิดใช้การตรวจสอบแอตทริบิวต์มุมมอง"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"เครือข่าย"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"การรับรองการแสดงผลแบบไร้สาย"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"เปิดใช้การบันทึกรายละเอียด Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"สลับ Wi‑Fi เป็นมือถือเมื่อสัญญาณอ่อน"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"ใช้การสแกน Wi-Fi ข้ามเครือข่ายเสมอ"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"ใช้ไคลเอ็นต์ DHCP เดิม"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"แสดงตัวเลือกสำหรับการรับรองการแสดงผล แบบไร้สาย"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"เพิ่มระดับการบันทึก Wi‑Fi แสดงต่อ SSID RSSI ในตัวเลือก Wi‑Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"เมื่อเปิดใช้แล้ว Wi-Fi จะส่งผ่านการเชื่อมต่อข้อมูลไปยังเครือข่ายมือถือในทันทีที่พบสัญญาณ Wi-Fi อ่อน"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"อนุญาตให้จำลองตำแหน่ง"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"อนุญาตให้จำลองตำแหน่ง"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"เปิดใช้การตรวจสอบแอตทริบิวต์มุมมอง"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"ใช้ไคลเอ็นต์ DHCP จาก Lollipop แทนไคลเอ็นต์ DHCP ใหม่บน Android"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"อนุญาตให้แก้ไขข้อบกพร่อง USB หรือไม่"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"การแก้ไขข้อบกพร่อง USB มีไว้เพื่อการพัฒนาเท่านั้น ให้ใช้การแก้ไขนี้เพื่อคัดลอกข้อมูลระหว่างคอมพิวเตอร์และอุปกรณ์ ติดตั้งแอปพลิเคชันบนอุปกรณ์โดยไม่มีการแจ้งเตือน และอ่านข้อมูลบันทึก"</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"ยกเลิกการเข้าถึงเพื่อแก้ปัญหา USB จากคอมพิวเตอร์ทุกเครื่องที่คุณได้ให้สิทธิ์ก่อนหน้านี้หรือไม่"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"การเชื่อมต่อเครือข่าย wifi wi-fi"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"ข้อความ การส่งข้อความ ข้อความ การส่งข้อความ"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"มือถือ ผู้ให้บริการมือถือ ไร้สาย ข้อมูล 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi โทร การโทร โรมมิ่ง โอนช่องสัญญาณ"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"WiFi Wi-Fi โทร การโทร"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"หน้าจอ หน้าจอสัมผัส"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"หน้าจอสลัว หน้าจอสัมผัส แบตเตอรี่"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"ติดตั้ง <xliff:g id="COUNT">%d</xliff:g> แอป รวมถึงแอประบบและแอปที่ดาวน์โหลดแล้ว"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"ขั้นสูง"</string>
     <string name="unknown_app" msgid="5275921288718717656">"แอปที่ไม่รู้จัก"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"เลือกโปรไฟล์"</string>
 </resources>

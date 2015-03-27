@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Ha ezt az ikont látja, akkor lehetősége van arra, hogy ujjlenyomatával azonosítsa magát, vagy engedélyezze a vásárlást."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Hozzáadás"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Következő"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"A rendszer az ujjlenyomatnak csak egy részletét érzékelte. Próbálkozzon újra."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Az ujjlenyomat-olvasó koszos. Tisztítsa meg, majd próbálkozzon újra."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Túl hamar vette el az ujját. Próbálkozzon újra."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Túl lassan vette el az ujját. Próbálkozzon újra."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"A feldolgozás sikertelen. Próbálkozzon újra."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"A hardver nem érhető el."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Az ujjlenyomat nem tárolható. Távolítson el egy meglévő ujjlenyomatot."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Az ujjlenyomat-beolvasási művelet időtúllépést követett el. Próbálkozzon újra."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Titkosítás"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Táblagép titkosítása"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Telefon titkosítása"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi előnyben részesítve (csak akkor használ mobilhálózatot, ha a Wi-Fi nem érhető el)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Mobilhálózat előnyben részesítve (csak akkor használ Wi-Fi-t, ha a mobilhálózat nem érhető el)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Csak Wi-Fi (Nem használ mobilhálózatot. Nem lehet hívásokat indítani vagy fogadni, ha nincs Wi-Fi.)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"WFC-átadás adatbarangoláskor"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"A Wi-Fi-hanghívások átadásának engedélyezése mobilhálózatoknak adatbarangoláskor"</string>
     <string name="home_settings" msgid="212375129455718176">"Főoldal"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Megjelenítés"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Hang"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"GPS, Wi‑Fi- és mobilhálózatok használata a tartózkodási hely megállapításához"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Wi‑Fi- és mobilhálózatok használata a tartózkodási hely megállapításához"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"GPS használata a tartózkodási hely meghatározásához"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Beolvasás"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Beolvasás"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Hely Wi‑Fi és mobil alapján"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Engedélyezze az alkalmazásoknak, hogy a Google helymeghatározó szolgáltatásával gyorsabban megbecsüljék tartózkodási helyét. A névtelen helyadatok összegyűjtés után a Google-hoz kerülnek."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Helymeghatározás Wi-Fi-vel"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Adja meg az eszköz PIN kódját a kártyafüggetlenítéshez"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Engedélyezi az OEM-feloldást?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"FIGYELEM! Az eszközvédelmi funkciók addig nem fognak működni ezen az eszközön, amíg ez a beállítás be van kapcsolva."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Logger pufferméret"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Logger naplópufferméret választása"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Helyutánzatok engedélyezése"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Helyutánzatok engedélyezése"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Nézetattribútum vizsgálatának engedélyezése"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Hálózatok"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Vezeték nélküli kijelző tanúsítványa"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Részletes Wi-Fi-naplózás engedélyezése"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Agresszív Wi‑Fi–mobilhálózat átadás"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Wi‑Fi-roaming ellenőrzésének engedélyezése mindig"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Korábbi DHCP-kliens használata"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Beállítások megjelenítése a vezeték nélküli kijelző tanúsítványával kapcsolatban"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Wi‑Fi-naplózási szint növelése, RSSI/SSID megjelenítése a Wi‑Fi-választóban"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Ha engedélyezi, a Wi-Fi agresszívebben fogja átadni az adatkapcsolatot a mobilhálózatnak gyenge Wi-Fi-jel esetén"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Helyutánzatok engedélyezése"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Helyutánzatok engedélyezése"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Nézetattribútum vizsgálatának engedélyezése"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"A Lollipop DHCP-kliensének használata az új androidos DHCP-kliens helyett."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Engedélyezi az USB hibakeresést?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Az USB hibakeresés fejlesztési célokat szolgál. Használhatja adatok másolására a számítógép és a készülék között, alkalmazások a készülékre való értesítés nélküli telepítésére és naplózási adatok olvasására."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Visszavonja a hozzáférést az USB-s hibakereséshez az összes számítógépről, ahol korábban engedélyezte azt?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi, wi-fi hálózati kapcsolat"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"szöveges üzenet szöveges üzenet küldése üzenetek üzenetváltás"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobil cella szolgáltató vezeték nélküli adat 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi hív hívás adatbarangolás átadás"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi hív hívás"</string>
     <string name="keywords_home" msgid="3626170808219458848">"indító"</string>
     <string name="keywords_display" msgid="6709007669501628320">"képernyő érintőképernyő"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"képernyő sötétítése érintőképernyő akkumulátor"</string>
@@ -2460,7 +2456,7 @@
     <string name="app_notification_priority_title" msgid="5949923919607295595">"Kezelje prioritást élvezőként"</string>
     <string name="app_notification_priority_summary" msgid="242979561927455238">"Az alkalmazásból származó értesítések legyenek hallhatók, amikor a „Ne zavarjanak” mód „Csak prioritást élvezők” értékre van állítva"</string>
     <string name="app_notification_peekable_title" msgid="8647856880382324822">"Betekintés engedélyezése"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Az alkalmazás kiemelhet bizonyos értesítéseket úgy, hogy kissé becsúsztatja azokat az éppen aktuális képernyő szélén"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Az alkalmazás kiemelhet bizonyos értesítéseket úgy, hogy rövid időre becsúsztatja azokat az éppen aktuális képernyő szélén"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Bizalmas tartalom elrejtése"</string>
     <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"A bizalmas tartalom elrejtése az alkalmazás értesítéseiből, ha az eszköz zárolva van"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Letiltva"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> alkalmazás telepítve, beleértve a rendszer- és a letöltött alkalmazásokat"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Speciális"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Ismeretlen alkalmazás"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Profil kiválasztása"</string>
 </resources>

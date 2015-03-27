@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"När du ser den här ikonen kan du identifiera dig eller auktorisera ett köp med hjälp av ditt fingeravtryck."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Lägg till"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Nästa"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Ofullständigt fingeravtryck. Försök igen."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Fingeravtryckssensorn är smutsig. Rengör den och försök igen."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Du flyttade fingret för snabbt. Försök igen."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Du flyttade fingret för långsamt. Försök igen."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Det går inte att bearbeta fingeravtrycket. Försök igen."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Maskinvaran är inte tillgänglig."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Fingeravtrycket kan inte lagras. Ta bort ett befintligt fingeravtryck."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Tidsgränsen för fingeravtrycket har uppnåtts. Försök igen."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Kryptering"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Kryptera surfplattan"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Kryptera telefonen"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi i första hand (Använder endast mobilnätverk om Wi-Fi inte är tillgängligt)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Mobil i första hand (Använder endast Wi-Fi om mobilnätverket inte är tillgängligt)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Endast Wi-Fi (Använder aldrig mobilnätverk. Det går inte att ringa eller ta emot samtal om Wi-Fi inte är tillgängligt)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"WFC-överlämning vid roaming"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Tillåt överlämning av röstsamtal till mobilnätverk vid roaming"</string>
     <string name="home_settings" msgid="212375129455718176">"Startskärm"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skärm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Ljud"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Använd GPS, Wi-Fi och mobilnät för att bestämma plats"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Använd Wi-Fi och mobilnät för att bestämma plats"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Avgör plats med hjälp av GPS"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Genomsöker"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Genomsöker"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi-Fi- och mobilnätsplats"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Ge appar möjlighet att snabbare se var du är med Googles platstjänst. Anonym platsinformation samlas in och skickas till Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Platsen fastställs via Wi-Fi"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Ange enhetens pinkod om du vill aktivera OEM-upplåsning"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Vill du tillåta OEM-upplåsning?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"Varning! Funktionerna för enhetsskydd fungerar inte på enheten när den här inställningen är aktiverad."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Buffertstorlekar för logg"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Välj loggstorlekar per loggbuffert"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Tillåt skenplatser"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillåt skenplatser"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Aktivera inspektion av visningsattribut"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Nätverk"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certifiering för Wi-Fi-skärmdelning"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Aktivera utförlig loggning för Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressiv överlämning fr. Wi-Fi t. mobil"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Tillåt alltid sökning efter Wi-Fi-roaming"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Använd äldre DHCP-klient"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Visa certifieringsalternativ för Wi-Fi-skärmdelning"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Öka loggningsnivån för Wi-Fi, visa per SSID RSSI i Wi‑Fi Picker"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"När funktionen har aktiverats kommer dataanslutningen lämnas över från Wi-Fi till mobilen på ett aggressivare sätt när Wi-Fi-signalen är svag"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Tillåt skenplatser"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillåt skenplatser"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Aktivera inspektion av visningsattribut"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Använd DHCP-klienten från Lollipop i stället för den nya Android DHCP-klienten."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Ska USB-felsökning tillåtas?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-felsökning ska endast användas i utvecklingssyfte. Använd den för att kopiera data mellan datorn och enheten, installera appar på enheten utan meddelanden och läsa loggdata."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Vill du återkalla åtkomst till USB-felsökning för alla datorer som du tidigare har godkänt?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi-nätverksanslutning"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"textmeddelande sms:a meddelanden skicka sms"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobiltelefon mobil operatör trådlös data 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi samtal ringer roaming överlämning"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi samtal ringer"</string>
     <string name="keywords_home" msgid="3626170808219458848">"översikt"</string>
     <string name="keywords_display" msgid="6709007669501628320">"skärm pekskärm"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"tona ned skärm pekskärm batteri"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> appar har installerats, inklusive systemappar och nedladdade appar"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avancerat"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Okänd app"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Välj profil"</string>
 </resources>

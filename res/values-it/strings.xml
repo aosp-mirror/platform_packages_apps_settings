@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Quando viene visualizzata questa icona, puoi utilizzare la tua impronta digitale per l\'identificazione o per autorizzare un acquisto."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Aggiungi"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Avanti"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Rilevata impronta digitale parziale. Riprova."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Il sensore di impronte digitali è sporco. Puliscilo e riprova."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Movimento del dito troppo rapido. Riprova."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Movimento del dito troppo lento. Riprova."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Impossibile elaborare l\'impronta. Riprova."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Hardware non disponibile."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Impossibile memorizzare l\'impronta digitale. Rimuovi un\'impronta esistente."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Timeout impronta digitale. Riprova."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Crittografia"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Esegui crittografia tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Esegui crittografia telefono"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Rete preferita: Wi-Fi (utilizza la rete cellulare solo se il Wi-Fi non è disponibile)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Rete preferita: cellulare (utilizza il Wi-Fi solo se la rete cellulare non è disponibile)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Solo Wi-Fi (non usa mai la rete cell. Non può eseguire/ricevere chiamate se il Wi-Fi non è dispon.)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Passaggio WFC durante roaming"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Consenti passaggio chiamate vocali Wi-Fi alla rete cellulare durante il roaming"</string>
     <string name="home_settings" msgid="212375129455718176">"Home page"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
@@ -1450,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Inserisci il PIN del dispositivo per attivare lo sblocco OEM"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Consentire lo sblocco OEM?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"AVVISO. Le funzioni di protezione del dispositivo non funzionano su questo dispositivo se questa impostazione è attiva."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Dimensioni buffer Logger"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Seleziona dim. Logger buffer log"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Posizioni fittizie"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Consenti posizioni fittizie"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Attiva controllo attributi visualizzazione"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Reti"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificazione display wireless"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Attiva registrazione dettagliata Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Wi‑Fi aggressivo per passaggio a cellulare"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Consenti sempre scansioni roaming Wi-Fi"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Utilizza il client della versione precedente di DHCP"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostra opzioni per la certificazione display wireless"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Aumenta il livello di registrazione Wi-Fi, mostrando il SSID RSSI nel selettore Wi-Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Quando questa impostazione è attivata, il Wi-Fi sarà più aggressivo nel passare la connessione dati al cellulare, quando il segnale Wi-Fi è basso"</string>
@@ -1465,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Posizioni fittizie"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Consenti posizioni fittizie"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Attiva controllo attributi visualizzazione"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Utilizza il client DHCP di Lollipop anziché il nuovo client DHCP Android."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Consentire debug USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Il debug USB è solo a scopo di sviluppo. Utilizzalo per copiare dati tra il computer e il dispositivo, per installare applicazioni sul tuo dispositivo senza notifica e per leggere i dati dei log."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Revocare l\'accesso al debug USB da tutti i computer precedentemente autorizzati?"</string>
@@ -2365,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi connessione rete Wi-Fi"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"SMS invio di messaggi messaggi"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"cellulare cell operatore wireless dati 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi chiamata chiamare roaming passaggio"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi chiamata chiamare"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Avvio applicazioni"</string>
     <string name="keywords_display" msgid="6709007669501628320">"display touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"attenuazione schermo touchscreen batteria"</string>
@@ -2563,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> app installate, incluse app di sistema e scaricate"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanzate"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Applicazione sconosciuta"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Scegli profilo"</string>
 </resources>

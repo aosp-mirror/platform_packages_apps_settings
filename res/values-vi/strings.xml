@@ -348,7 +348,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> vân tay được đăng ký</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Thiết lập vân tay"</string>
-    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"Để sử dụng vân tay của bạn để mở khóa màn hình hoặc xác nhận mua hàng, chúng tôi cần phải: \n\n✓ Thiệt lập phương pháp khóa màn hình sao lưu của bạn \n\n✓ Thêm vân tay của bạn"</string>
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"Để sử dụng vân tay của bạn để mở khóa màn hình hoặc xác nhận mua hàng, chúng tôi cần phải: \n\n✓ Thiết lập phương pháp khóa màn hình sao lưu của bạn \n\n✓ Thêm vân tay của bạn"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Tìm cảm biến"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Tìm cảm biến vân tay trên mặt sau điện thoại của bạn."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Tên"</string>
@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Bất cứ khi nào nhìn thấy biểu tượng này, bạn có thể sử dụng vân tay của mình để nhận dạng hoặc ủy quyền mua hàng."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Thêm"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Tiếp theo"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Đã phát hiện được một phần vân tay. Vui lòng thử lại."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Cảm biến vân tay bị bẩn. Hãy làm sạch và thử lại."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Ngón tay đã di chuyển quá nhanh. Vui lòng thử lại."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Ngón tay đã di chuyển quá chậm. Vui lòng thử lại."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Không thể xử lý. Hãy thử lại."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Phần cứng không có sẵn."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Không thể lưu vân tay. Vui lòng xóa vân tay hiện có."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Đã hết thời gian chờ vân tay. Hãy thử lại."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Mã hóa"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Mã hóa máy tính bảng"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Mã hóa điện thoại"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Ưu tiên Wi-Fi (Chỉ sử dụng mạng di động nếu không có Wi-Fi)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Ưu tiên mạng di động (Chỉ sử dụng Wi-Fi nếu không có mạng di động)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Chỉ Wi-Fi (Không bao giờ sử dụng mạng di động. Không thể nhận hoặc thực hiện cuộc gọi nếu không có Wi-Fi)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Chuyển WFC khi chuyển vùng"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Cho phép chuyển cuộc gọi thoại qua Wi-Fi sang mạng di động khi chuyển vùng"</string>
     <string name="home_settings" msgid="212375129455718176">"Trang chủ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Hiển thị"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Âm thanh"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Sử dụng mạng GPS, Wi-Fi và di động để xác định vị trí"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Sử dụng mạng di động và Wi-Fi để xác định vị trí"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Sử dụng GPS để xác định vị trí"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Đang quét"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Đang quét"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Vị trí mạng di động và Wi‑Fi"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Cho phép ứng dụng dùng DV vị trí của Google để ước đoán vị trí nhanh hơn. Dữ liệu vị trí ẩn danh sẽ được thu thập và gửi tới Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Vị trí được xác định bằng Wi‑Fi"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Nhập mã PIN thiết bị của bạn để bật tính năng mở khóa OEM"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Cho phép mở khóa OEM?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"CẢNH BÁO: Tính năng Bảo vệ thiết bị sẽ không hoạt động trên thiết bị này trong khi bạn bật cài đặt này."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Kích cỡ tải trình ghi"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Chọn k.cỡ Trình ghi/lần tải n.ký"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Cho phép vị trí mô phỏng"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Cho phép vị trí mô phỏng"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Cho phép kiểm tra thuộc tính của chế độ xem"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Mạng"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Chứng nhận hiển thị không dây"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Bật ghi nhật ký chi tiết Wi‑Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Chuyển vùng Wi‑Fi tích cực sang mạng DĐ"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Luôn cho phép quét chuyển vùng Wi‑Fi"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Sử dụng ứng dụng DHCP cũ"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Hiển thị tùy chọn chứng nhận hiển thị không dây"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Tăng mức ghi nhật ký Wi‑Fi, hiển thị mỗi SSID RSSI trong bộ chọn Wi‑Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Khi được bật, Wi‑Fi sẽ tích cực hơn trong việc chuyển vùng kết nối dữ liệu sang mạng di động khi tín hiệu Wi‑Fi yếu"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Cho phép vị trí mô phỏng"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Cho phép vị trí mô phỏng"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Cho phép kiểm tra thuộc tính của chế độ xem"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Sử dụng ứng dụng DHCP từ Lollipop thay vì ứng dụng DHCP mới của Android."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Cho phép gỡ lỗi USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Gỡ lỗi USB chỉ dành cho mục đích phát triển. Hãy sử dụng tính năng này để sao chép dữ liệu giữa máy tính và thiết bị của bạn, cài đặt ứng dụng trên thiết bị của bạn mà không thông báo và đọc dữ liệu nhật ký."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Thu hồi quyền truy cập gỡ lỗi USB từ tất cả máy tính mà bạn đã ủy quyền trước đó?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi kết nối mạng"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"tin nhắn văn bản nhắn tin tin nhắn nhắn tin"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"di động điện thoại nhà cung cấp không dây dữ liệu 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi gọi gọi điện chuyển vùng chuyển"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"gọi điện qua Wi-Fi"</string>
     <string name="keywords_home" msgid="3626170808219458848">"trình chạy"</string>
     <string name="keywords_display" msgid="6709007669501628320">"màn hình màn hình cảm ứng"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"làm mờ màn hình màn hình cảm ứng pin"</string>
@@ -2392,8 +2388,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"tài khoản"</string>
     <string name="keywords_users" msgid="4673901601478559100">"hạn chế hạn chế bị hạn chế"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"sửa văn bản sửa âm thanh rung tự động ngôn ngữ cử chỉ đề xuất đề xuất chủ đề từ xúc phạm nhập biểu tượng cảm xúc quốc tế"</string>
-    <string name="keywords_reset_apps" msgid="6420313678620788457">"đặt lại mặc định tùy chọn"</string>
-    <string name="keywords_all_apps" msgid="5377153522551809915">"hệ thống ứng dụng tải xuống ứng dụngapps download applications system"</string>
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"đặt lại tùy chọn về mặc định"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"hệ thống ứng dụng tải xuống ứng dụng"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"trượt mật khẩu hình mẫu mã pin"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Thiết lập thẻ NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Ghi"</string>
@@ -2460,7 +2456,7 @@
     <string name="app_notification_priority_title" msgid="5949923919607295595">"Coi là ưu tiên"</string>
     <string name="app_notification_priority_summary" msgid="242979561927455238">"Bật âm cho thông báo của ứng dụng này khi Không làm phiền được đặt thành Chỉ ưu tiên"</string>
     <string name="app_notification_peekable_title" msgid="8647856880382324822">"Cho phép xem nhanh"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Cho phép ứng dụng này nhấn mạnh các thông báo nhất định bằng cách trượt nhanh các thông báo đó vào chế độ xem trên màn hình hiện tại"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Cho phép ứng dụng này nhấn mạnh các thông báo nhất định bằng cách trượt nhanh chúng vào chế độ xem trên màn hình hiện tại"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Ẩn nội dung nhạy cảm"</string>
     <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"Khi thiết bị bị khóa, hãy ẩn nội dung có thể tiết lộ thông tin cá nhân trong thông báo của ứng dụng này"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Bị chặn"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"Đã cài đặt <xliff:g id="COUNT">%d</xliff:g> ứng dụng, bao gồm các ứng dụng đã tải xuống và ứng dụng hệ thống"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Nâng cao"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Ứng dụng không xác định"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Chọn hồ sơ"</string>
 </resources>

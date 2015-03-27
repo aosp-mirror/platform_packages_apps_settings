@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"ይህን አዶ ባዩ ቁጥር፣ ማንነትን ለይቶ ለማወቅ ወይም ግዢን ፈቃድ ለመስጠት የእርስዎን የጣት አሻራ መጠቀም ይችላሉ።"</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"አክል"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"ቀጣይ"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"ከፊል የጣት አሻራ ተገኝቷል። እባክዎ እንደገና ይሞክሩ።"</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"የጣት አሻራ አነፍናፊ ቆሽሿል። እባክዎ ያጽዱት እና እንደገና ይሞክሩ።"</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"ጣት በጣም በፍጥነት ተንቀሳቅሷል። እባክዎ እንደገና ይሞክሩ።"</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"ጣት በጣም በዝግታ ተንቀሳቅሷል። እባክዎ እንደገና ይሞክሩ።"</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"ሂደትን ለማከናወን አልተቻለም። እንደገና ይሞክሩ።"</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"ሃርድዌር ሊገኝ አይገኝም።"</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"የጣት አሻራ ሊከማች አይችልም። አሁን ያለ የጣት አሻራን እባክዎ ያስወግዱ።"</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"የጣት አሻራ ማብቂያ ጊዜ ደርሷል። እንደገና ይሞክሩ።"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"ማመስጠሪያ"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"ጡባዊ አመስጥር"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"ስልክ አመስጥር"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"የWi-Fi ተመራጭ (Wi-Fi በማይገኝበት ጊዜ ብቻ ተንቀሳቃሽ ስልክ አውታረ መረብን ይጠቀማል)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"የተንቀሳቃሽ ስልክ ተመራጭ (የተንቀሳቃሽ ስልክ በማይገኝበት ጊዜ ብቻ Wi-Fi ይጠቀማል)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi ብቻ (በጭራሽ የተንቀሳቃሽ ስልክ አውታረ መረብ አይጠቀምም። Wi-Fi የማይገኝ ከሆነ ጥሪዎችን ማድረግ ሆነ መቀበል አይቻልም)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"WFC መልቀቂያ ከአገልግሎት ክልል ውጭ ሲሆን"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"ከአገልግሎት ክልል ውጭ ሲሆን የ Wi-Fi ድምጽ ጥሪዎችን መልቀቂያ ወደ ተንቀሳቃሽ ስልክ አውታረ መረብ ፍቀድ"</string>
     <string name="home_settings" msgid="212375129455718176">"መነሻ"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"አሳይ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ድምፅ"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"አካባቢ ለማወቅ ጂፒኤስ፣ Wi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦችን ተጠቀም"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"አካባቢ ለማወቅ Wi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረቦችን ተጠቀም"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"አካባቢን ለማወቅ ጂ ፒ ኤስ ተጠቀም"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"በመቃኘት ላይ"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"በመቃኘት ላይ"</string>
     <string name="location_network_based" msgid="6010456018401296590">"የWi‑Fi እና የተንቀሳቃሽ ስልክ አውታረ መረብ አካባቢ"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"መተግበሪያዎች አካባቢዎትን በበለጠ ፍጥነት እንዲገምቱ የGoogle የአካባቢ አገልግሎትን ይጠቀሙ። ስም አልባ የአካባቢ ውሂብ ተሰብስቦ ወደ Google ይላካል።"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"አካባቢ በWi-Fi ይታወቃል"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"OEM መክፈቻን ለማንቃት የእርስዎን መሣሪያ ፒን ይስገቡ"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"የOEM መክፈቻ ይፈቀድ?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ማስጠንቀቂያ፦ ይህ ቅንብር በሚበራበት ጊዜ የመሣሪያ ጥበቃ ባህሪዎች በዚህ መሣሪያ ላይ አይሰሩም።"</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"የምዝግብ ማስታወሻ ያዥ መጠኖች"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"በአንድ ምዝግብ ማስታወሻ ቋጥ የሚኖረው የምዝግብ ማስታወሻ ያዥ መጠኖች ይምረጡ"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"አስቂኝ ሥፍራዎችን ፍቀድ"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"አስቂኝ ሥፍራዎችን ፍቀድ"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"የእይታ አይነታ ምርመራን አንቃ"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"አውታረ መረብ"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"የገመድ አልባ ማሳያ እውቅና ማረጋገጫ"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"የWi‑Fi ተጨማሪ ቃላት ምዝግብ ማስታወሻ መያዝ"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"አስገዳጅ የWi‑Fi ወደ ተንቀሳቃሽ ርክክብ"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"ሁልጊዜ የWi‑Fi ማንቀሳቀስ ቅኝቶችን ይፍቀዱ"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"የቆየ የDHCP ደንበኛ ይጠቀሙ"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"የገመድ አልባ ማሳያ እውቅና ማረጋገጫ አማራጮችን አሳይ"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"የWi‑Fi ምዝግብ ማስታወሻ አያያዝ ደረጃ ጨምር፣ በWi‑Fi መምረጫ ውስጥ በአንድ SSID RSSI አሳይ"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"ሲነቃ የWi‑Fi ምልክት ዝቅተኛ ሲሆን Wi‑Fi የውሂብ ግንኙነት ለተንቀሳቃሽ ማስረከብ ላይ ይበልጥ አስገዳጅ ይሆናል"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"አስቂኝ ሥፍራዎችን ፍቀድ"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"አስቂኝ ሥፍራዎችን ፍቀድ"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"የእይታ አይነታ ምርመራን አንቃ"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"ከአዲሱ የAndroid DHCP ደንበኛ ይልቅ የLollipop DHCP ደንበኛውን ይጠቀሙ።"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"የUSB ማረሚያ ይፈቀድ?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"የUSB አድስ ለግንባታ አላማ ብቻ የታሰበ ነው። ከኮምፒዩተርህ ወደ መሳሪያህ ውሂብ ለመገልበጥ፣ መሣሪያህ ላይ ያለ ማሳወቂያ መተግበሪያዎችን መጫን፣ እና ማስታወሻ ውሂብ ማንበብ ለመጠቀም ይቻላል።"</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"የዩ ኤስ ቢ ማረም መዳረሻ ከዚህ ቀደም ፍቃድ ከሰጧቸው ኮምፒውተሮች ላይ ይሻሩ?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"የwifi wi-fi አውታረ መረብ ግንኙነት"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"ጽሑፍ መልዕክት መላክ መልዕክቶች መልዕክት አላላክ"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"የተንቀሳቃሽ ስልክ ድምጸ ተያያዥ ሞደም ውሂብ 4ጂ 3ጂ 2ጂ lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi ጥሪ መደወል ከአገልግሎት መስጫ ክልል ውጭ መልቀቂያ"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi ጥሪ መደወል"</string>
     <string name="keywords_home" msgid="3626170808219458848">"አስጀማሪ"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ማያ ገጽ ተነኪ ማያ ገጽ"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"አጨልም ማያንካ ባትሪ"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> መተግበሪያዎች ተጭነዋል፣ የስርዓት እና የወረዱ መተግበሪያዎችንም ጨምሮ"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"የላቀ"</string>
     <string name="unknown_app" msgid="5275921288718717656">"ያልታወቀ መተግበሪያ"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"መገለጫ ይምረጡ"</string>
 </resources>

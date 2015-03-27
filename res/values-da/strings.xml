@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Når du ser dette ikon, kan du bruge dit fingeraftryk til brugeridentifikation eller til at godkende et køb."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Tilføj"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Næste"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Der blev registreret et delvist fingeraftryk. Prøv igen."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Sensoren til registrering af fingeraftryk er beskidt. Tør den af, og prøv igen."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Du bevægede fingeren for hurtigt. Prøv igen."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Du bevægede fingeren for langsomt. Prøv igen."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Registreringen kan ikke gennemføres. Prøv igen."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Hardwaren er ikke tilgængelig."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Fingeraftrykket kan ikke gemmes. Fjern et eksisterende fingeraftryk."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Registrering af fingeraftryk fik timeout. Prøv igen."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Kryptering"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Krypter tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Krypter telefon"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi er foretrukket (Bruger kun mobilnetværk, hvis Wi-Fi ikke er tilgængeligt)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Mobilnetværk er foretrukket (Bruger Wi-Fi, hvis mobilnetværk ikke er tilgængeligt)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Kun Wi-Fi (Bruger aldrig mobilnetværk. Det er ikke muligt at foretage/modtage opkald uden Wi-Fi)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"WFC-videregivelse ved roaming"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Tillad, at taleopkald via Wi-Fi videregives til mobilnetværk under roaming"</string>
     <string name="home_settings" msgid="212375129455718176">"Startskærm"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skærm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Lyd"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Brug GPS, Wi-Fi- og mobilnetværk til at fastslå din placering"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Brug Wi-Fi- og mobilnetværk til at fastslå din placering"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Brug GPS-signal til at fastslå din placering"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Søger"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Søger"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Placering via Wi-Fi og mobilnetværk"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Tillad, at apps bruger Googles placeringstjeneste til at beregne din placering hurtigere. Der indsamles anonyme placeringsdata, som sendes til Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Placeringen fastlægges af Wi-Fi"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Indtast pinkoden for din enhed for at aktivere OEM-oplåsning"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Vil du tillade OEM-oplåsning?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ADVARSEL! Funktioner, der beskytter enheden, fungerer ikke på denne enhed, når denne indstilling er slået til."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Størrelser for Logger-buffer"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Vælg Logger-størrelser pr. logbuffer"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Imiterede placeringer"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillad imiterede placeringer"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Aktivér visning af attributinspektion"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Netværk"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificering af trådløs skærm"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Aktivér detaljeret Wi-Fi-logføring"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Gennemtving skift fra Wi-Fi til mobildata"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Tillad altid scanning af Wi-Fi-roaming"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Brug ældre DHCP-klient"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Vis valgmuligheder for certificering af trådløs skærm"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Øg mængden af Wi‑Fi-logføring. Vis opdelt efter SSID RSSI i Wi‑Fi-vælgeren"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Når dette er aktiveret, gennemtvinges en overdragelse af dataforbindelsen fra Wi-Fi til mobilnetværk, når Wi-Fi-signalet er svagt"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Imiterede placeringer"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillad imiterede placeringer"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Aktivér visning af attributinspektion"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Brug DHCP-klienten fra Lollipop i stedet for den nye DHCP-klient fra Android."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Vil du tillade USB-fejlretning?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-fejlretning er kun beregnet til udvikling og kan bruges til at kopiere data mellem din computer og enheden, installere apps på enheden uden meddelelser og læse logdata."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Vil du ophæve adgangen til USB-fejlfinding for alle computere, du tidligere har godkendt?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi netværk forbindelse"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"sms besked beskeder chat"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobil mobilselskab trådløst netværk data 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi ring op opkald roaming videregivelse"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi ring op opkald"</string>
     <string name="keywords_home" msgid="3626170808219458848">"starter"</string>
     <string name="keywords_display" msgid="6709007669501628320">"skærm berøringsskærm"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"dæmpe skærm touchskærm batteri"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> apps er installeret, herunder systemapps og downloadede apps"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avanceret"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Ukendt app"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Vælg profil"</string>
 </resources>

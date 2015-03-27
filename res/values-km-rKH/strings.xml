@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"នៅពេលដែលអ្នកឃើញរូបតំណាងនេះ អ្នកអាចប្រើស្នាមម្រាមដៃដើម្បីធ្វើជាអត្តសញ្ញាណ ឬដើម្បីអនុញ្ញាតការទិញ។"</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"បន្ថែម"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"បន្ទាប់"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"បានផ្តិតយកស្នាមម្រាមដៃមិនពេញលក្ខណៈ។ សូមព្យាយាមម្តងទៀត។"</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"ឧបករណ៍ផ្តិតម្រាមដៃប្រលាក់ហើយ។ សូមសម្អាត ហើយព្យាយាមម្តងទៀត។"</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"ម្រាមដៃមានចលនារហ័សពេក។ សូមព្យាយាមម្តងទៀត។"</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"ម្រាមដៃមានចលនាយឺតពេក។ សូមព្យាយាមម្តងទៀត។"</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"មិនអាចដំណើរការបានទេ។ ព្យាយាមម្តងទៀត។"</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"មិនមានផ្នែករឹងទេ។"</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"មិនអាចផ្ទុកស្នាមម្រាមដៃទេ។ សូមយកស្នាមម្រាមដៃដែលមានស្រាប់ចេញ។"</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"ការផ្តិតម្រាមដៃបានអស់ពេល។ សូមព្យាយាមម្តងទៀត។"</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"ការ​ដាក់​លេខ​កូដ"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"ដាក់​លេខ​កូដ​កុំព្យូទ័រ​បន្ទះ"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"ដាក់​លេខ​កូដ​ទូរស័ព្ទ"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"គួរប្រើ Wi-Fi (ប្រើតែបណ្តាញទូរស័ព្ទប៉ុណ្ណោះ ប្រសិនមិនមាន Wi-Fi)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"គួរប្រើបណ្តាញទូរស័ព្ទ (ប្រើតែ Wi-Fi ប៉ុណ្ណោះ ប្រសិនបើមិនមានបណ្តាញទូរស័ព្ទ)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi តែប៉ុណ្ណោះ (កុំប្រើបណ្តាញទូរស័ព្ទ។ មិនអាចធ្វើការហៅ និងទទួលការហៅបានទេប្រសិនបើមិនមាន Wi-Fi)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"ឆ្លាស់ទៅ WFC នៅពេលរ៉ូមីង"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"អនុញ្ញាតឲ្យការហៅជាសម្លេងតាម Wi-Fi ឆ្លាស់ទៅបណ្តាញទូរស័ព្ទនៅពេលរ៉ូមីង"</string>
     <string name="home_settings" msgid="212375129455718176">"ដើម"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"បង្ហាញ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"សំឡេង"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"ប្រើ ជីភីអេស, វ៉ាយហ្វាយ និង​បណ្ដាញ​ចល័ត ដើម្បី​កំណត់​ទីតាំង"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"ប្រើ​វ៉ាយហ្វាយ និង​បណ្ដាញ​ចល័ត ដើម្បី​កំណត់​ទីតាំង"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"ប្រើ GPS ដើម្បីកំណត់ទីតាំងរបស់អ្នក"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"ការស្កេន"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"ការស្កេន"</string>
     <string name="location_network_based" msgid="6010456018401296590">"ទីតាំងបណ្ដាញចល័ត &amp; វ៉ាយហ្វាយ"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"ឲ្យ​កម្មវិធី​ប្រើ​សេវាកម្ម​ទីតាំង​របស់ Google ដើម្បី​ស្មាន​ទីតាំង​របស់​អ្នក​កាន់តែ​លឿន។ ទិន្នន័យ​ទីតាំង​អនាមិក​នឹង​ត្រូវ​បាន​ប្រមូល​ រួច​ផ្ញើ​ទៅ Google ។"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ទីតាំង​បាន​កំណត់​ដោយ​វ៉ាយហ្វាយ"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"បញ្ចូល​កូដ PIN ឧបករណ៍​របស់​អ្នក ដើម្បី​បើក​ការ​ដោះ​សោ OEM"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"អនុញ្ញាតការដោះសោ OEM?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ព្រមាន៖ លក្ខណៈពិសេសការពារឧបករណ៍នឹងមិនដំណើរការនៅលើឧបករណ៍នេះទេ ខណៈពេលដែលការកំណត់នេះត្រូវបានបើក។"</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"ទំហំ buffer របស់ Logger"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"ជ្រើស​ទំហំ Logger per log buffer"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"ឲ្យ​ក្លែង​ទីតាំង"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"អនុញ្ញាត​ទីតាំង​ក្លែងក្លាយ"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"បើក​ការ​ត្រួតពិនិត្យ​គុណ​លក្ខណៈ​ទិដ្ឋភាព"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"ការភ្ជាប់បណ្ដាញ"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"បង្ហាញ​ការ​កំណត់​រចនាសម្ព័ន្ធ​ឥត​ខ្សែ"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"បើក​កំណត់ហេតុ​រៀបរាប់​វ៉ាយហ្វាយ"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"វ៉ាយហ្វាយ​បង្ខំ​ទៅ​ការ​បញ្ជូន​ចល័ត"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"តែងតែ​អនុញ្ញាត​​​ការវិភាគ​រ៉ូម​វ៉ាយហ្វាយ"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"ប្រើម៉ាស៊ីនកូន DHCP ចាស់"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"បង្ហាញ​ជម្រើស​សម្រាប់​វិញ្ញាបនបត្រ​បង្ហាញ​ឥត​ខ្សែ"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"បង្កើនកម្រិតកំណត់ហេតុវ៉ាយហ្វាយបង្ហាញក្នុង SSID RSSI ក្នុងកម្មវិធីជ្រើស​វ៉ាយហ្វាយ"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"ពេល​បាន​បើក វ៉ាយហ្វាយ​នឹង​កាន់តែ​បង្ខំ​ក្នុង​ការ​បញ្ជូន​ការ​ភ្ជាប់​ទិន្នន័យ​ទៅ​បណ្ដាញ​ចល័ត នៅ​ពេល​សញ្ញា​វ៉ាយហ្វាយ​យឺត"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"ឲ្យ​ក្លែង​ទីតាំង"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"អនុញ្ញាត​ទីតាំង​ក្លែងក្លាយ"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"បើក​ការ​ត្រួតពិនិត្យ​គុណ​លក្ខណៈ​ទិដ្ឋភាព"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"ប្រើម៉ាស៊ីនកូន DHCP ចេញពី Lollipop ជំនួសឲ្យម៉ាស៊ីនកូន Android DHCP ថ្មី។"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"អនុញ្ញាត​ការ​កែ​កំហុស​យូអេសប៊ី?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"ការ​កែ​កំហុស​​យូអេសប៊ី​គឺ​សម្រាប់​តែ​ការ​អភិវឌ្ឍ​ប៉ុណ្ណោះ។ ប្រើ​វា​ដើម្បី​ចម្លង​ទិន្នន័យ​រវាង​កុំព្យូទ័រ និង​ឧបករណ៍​របស់​អ្នក ដំឡើង​កម្មវិធី​ក្នុង​ឧបករណ៍​របស់​អ្នក​ដោយ​មិន​ជូន​ដំណឹង និង​អាន​ទិន្នន័យ​កំណត់ហេតុ។"</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"ដក​សិទ្ធិ​ចូល​ការ​កែ​កំហុស​តាម​យូអេសប៊ី​ពី​គ្រប់​កុំព្យូទ័រ​ដែល​អ្នក​បាន​ផ្ដល់​សិទ្ធិ​ពី​មុន?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"ការ​ភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"សារ​អត្ថបទ សរសេរ​សារ​អត្ថបទ ការ​ផ្ញើ​សារ"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"ចល័ត ចល័ត​ ក្រុមហ៊ុន​បញ្ជូន ឥត​ខ្សែ ទិន្នន័យ 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi call calling roaming handoff"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi call calling"</string>
     <string name="keywords_home" msgid="3626170808219458848">"កម្មវិធី​ចាប់ផ្ដើម"</string>
     <string name="keywords_display" msgid="6709007669501628320">"អេក្រង់ ប៉ះ​អេក្រង់"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ធ្វើ​ឲ្យ​អេក្រង់​ព្រិល​ពេល​ប៉ះ​ថ្ម"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"បានដំឡើងកម្មវិធី <xliff:g id="COUNT">%d</xliff:g> រួមបញ្ចូលទាំងកម្មវិធីប្រព័ន្ធ និងកម្មវិធីដែលបានទាញយក"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"កម្រិតខ្ពស់"</string>
     <string name="unknown_app" msgid="5275921288718717656">"កម្មវិធីមិនស្គាល់"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"ជ្រើសប្រវត្តិរូប"</string>
 </resources>

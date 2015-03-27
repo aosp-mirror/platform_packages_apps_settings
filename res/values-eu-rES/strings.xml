@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Ikono hau ikusten duzunean, hatz-marka digitala erabil dezakezu zeure burua identifikatzeko edo erosketak baimentzeko."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Gehitu"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Hurrengoa"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Hatz-marka digitala ez da osorik hauteman da. Saiatu berriro."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Hatz-marka digitalen sentsorea zikina dago. Garbi ezazu, eta saiatu berriro."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Hatza bizkorregi mugitu duzu. Saiatu berriro."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Hatza mantsoegi mugitu duzu. Saiatu berriro."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Ezin da prozesatu. Saiatu berriro."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Ez dago erabilgarri hardwarea."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Ezin da gorde hatz-marka digitala. Kendu lehendik gordeta duzunetako bat."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Hatz-marka digitalak prozesatzeko denbora-muga gainditu da. Saiatu berriro."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Enkriptatzea"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Enkriptatu tableta"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Enkriptatu telefonoa"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi sarea hobetsia (Wi-Fi sarea erabilgarri ez badago soilik erabiltzen du sare mugikorra)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Sare mugikorra hobetsia (sare mugikorra erabilgarri ez badago soilik erabiltzen du Wi-Fi sarea)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi sarea soilik (Ez du sare mugikorra erabiltzen inoiz. Ezin da deirik egin edo jaso Wi-Fi sarera konektatuta egon ezean.)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Wi-Fi deiak ibiltaritzan"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Onartu Wi-Fi bidezko deiak sare mugikorreko dei bihurtzea ibiltaritzan bazaude"</string>
     <string name="home_settings" msgid="212375129455718176">"Hasiera"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Bistaratzea"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Soinua"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Erabili GPS antena, Wi‑Fi sarea eta sare mugikorrak kokapena zehazteko"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Erabili Wi‑Fi sarea eta sare mugikorrak kokapena zehazteko"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Erabili GPS sistema kokapena zehazteko"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Bilatzea"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Bilatzea"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi eta sare mugikor bidezko kokapena"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Utzi aplikazioei zure kokapena bizkorrago zehazteko Google-ren kokapen-zerbitzua erabiltzen. Kokapen-datu anonimoak bildu eta Google-ra bidaliko dira."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Kokapena Wi-Fi bidez zehaztuta"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"OEM desblokeoa gaitzeko, idatzi gailuaren PIN kodea"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"OEM desblokeoa onartu nahi duzu?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ABISUA: ezarpen hau aktibatuta dagoen bitartean, gailuaren babes-eginbideek ez dute gailu honetan funtzionatuko."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Erregistroen buffer-tamainak"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Hautatu erregistroen buffer-tamainak"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Onartu kokapen faltsuak"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Onartu kokapen faltsuak"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Gaitu ikuspegiaren atributuak ikuskatzeko aukera"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Sareak"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Hari gabeko bistaratze-egiaztatzea"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Gaitu Wi-Fi sareetan saioa hasteko modu xehatua"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Behartu Wi-Fi konexiotik datuenera aldatzera"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Onartu beti ibiltaritzan Wi-Fi sareak bilatzea"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Erabili aurreko bertsioko DHCP bezeroa"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Erakutsi hari gabeko bistaratze-egiaztapenaren aukerak"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Erakutsi datu gehiago Wi-Fi sareetan saioa hasterakoan. Erakutsi sarearen identifikatzailea eta seinalearen indarra Wi‑Fi sareen hautagailuan."</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Aukera hori gaituz gero, gailua errazago aldatuko da datu mugikorren konexiora Wi-Fi seinalea ahultzen dela nabaritutakoan"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Onartu kokapen faltsuak"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Onartu kokapen faltsuak"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Gaitu ikuspegiaren atributuak ikuskatzeko aukera"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Erabili Lollipop bertsioko DHCP bezeroa eta ez Android DHCP bezero berria."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB arazketa onartu?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB arazketa garapen-xedeetarako soilik dago diseinatuta. Erabil ezazu ordenagailuaren eta gailuaren artean datuak kopiatzeko, aplikazioak gailuan jakinarazi gabe instalatzeko eta erregistro-datuak irakurtzeko."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Aurretik baimendutako ordenagailu guztiei USB arazketarako sarbidea baliogabetu nahi diezu?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi sareko konexioa"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"testu-mezua, testu-mezuak, mezuak"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mugikorra, operadorea, eramailea, hari gabeko datuak, 4g, 3g, 2g, lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi dei deitu ibiltaritza bihurtu"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi deia deitzea"</string>
     <string name="keywords_home" msgid="3626170808219458848">"abiarazlea"</string>
     <string name="keywords_display" msgid="6709007669501628320">"ukipen pantaila"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"ilundu pantaila, ukipen-pantaila, bateria"</string>
@@ -2555,14 +2551,15 @@
     <string name="launch_defaults_some" msgid="313159469856372621">"Hobespen lehenetsi batzuk ezarrita daude"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Ez dago hobespen lehenetsirik ezarrita"</string>
     <string name="filter_all_apps" msgid="1988403195820688644">"Aplikazio guztiak"</string>
-    <string name="filter_enabled_apps" msgid="3318021007093070639">"Gaituta"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"Gaitutakoak"</string>
     <string name="filter_personal_apps" msgid="3277727374174355971">"Pertsonalak"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Lanekoak"</string>
-    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokeatuta"</string>
-    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Lehentasuna"</string>
-    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Isilpekotasuna"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Blokeatutakoak"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Lehentasunezkoak"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Isilpekoak"</string>
     <string name="reset_app_preferences_description" msgid="7718912868244058770">"Berrezarri aplikazio guztien hobespenak balio lehenetsietara"</string>
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> aplikazio instalatu dira, sistemakoak eta deskargatutakoak barne"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Ezarpen aurreratuak"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Aplikazio ezezaguna"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Aukeratu profila"</string>
 </resources>

@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Wanneer jy hierdie ikoon sien, kan jy jou vingerafdruk gebruik vir identifisering of om \'n aankoop te magtig."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Voeg by"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Volgende"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Gedeeltelike vinngerafdruk bespeur. Probeer weer."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Vingerafdruksensor is vuil. Maak dit skoon en probeer weer."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Vinger is te vinnig beweeg. Probeer weer."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Vinger is te stadig beweeg. Probeer weer."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Kon nie verwerk nie. Probeer weer."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Hardeware nie beskikbaar nie."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Vingerafdruk kan nie geberg word nie. Verwyder asseblief \'n bestaande vingerafdruk."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Vingerafdrukuittelling is bereik. Probeer weer."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Enkripsie"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Enkripteer tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Enkripteer foon"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Verkieslik Wi-Fi (Gebruik selnetwerk net as Wi-Fi nie beskikbaar is nie)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Verkieslik sellulêr (Gebruik Wi-Fi net as selnetwerk nie beskikbaar is nie)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Net Wi-Fi (Gebruik nooit selnetwerk nie. Kan nie oproepe maak of ontvang as daar nie Wi-Fi is nie)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"WFC-oordrag tydens swerwing"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Laat toe dat Wi-Fi-stemoproepe tydens swerwing na selnetwerk oorgedra word"</string>
     <string name="home_settings" msgid="212375129455718176">"Tuis"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skerm"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Klank"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Gebruik GPS, Wi‑Fi en sellulêre netwerke om ligging te bepaal"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Gebruik Wi‑Fi en sellulêre netwerke om ligging te bepaal"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Gebruik GPS om ligging te bepaal"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Skandeer"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Skandeer"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi- en selnetwerkligging"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Laat programme Google se liggingsdiens gebruik om jou ligging vinniger te beraam. Anonieme liggingsdata sal ingesamel word en aan Google gestuur word."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Ligging deur Wi-Fi vasgestel"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Voer jou PIN in om OEM-ontsluit te aktiveer"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Laat OEM-ontsluit toe?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"WAARSKUWING: Toestelbeskermingkenmerke sal nie op hierdie toestel werk terwyl hierdie instelling aangeskakel is nie."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Loggerbuffer se groottes"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Kies loggergroottes per logbuffer"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Laat skynliggings toe"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Laat skynliggings toe"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Aktiveer aansigkenmerkinspeksie"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Inligtingruiling"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Draadlose skermsertifisering"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Aktiveer Wi-Fi-woordryke aanmelding"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Aggressiewe Wi-Fi na selfoon-oordrag"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Laat altyd Wi-Fi-swerfskanderings toe"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Gebruik vorige DHCP-kliënt"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Wys opsies vir draadlose skermsertifisering"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Verhoog Wi-Fi-aantekeningvlak, wys per SSID RSSI in Wi‑Fi-kieser"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Wanneer dit geaktiveer is, sal Wi-Fi meer aggressief wees om die dataverbinding na selfoon oor te dra wanneer die Wi-Fi-sein swak is"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Laat skynliggings toe"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Laat skynliggings toe"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Aktiveer aansigkenmerkinspeksie"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Gebruik eerder die DHCP-kliënt van Lollipop af as die nuwe Android DHCP-kliënt."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Laat USB-ontfouting toe?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"USB-ontfouting is net vir ontwikkelingsdoeleindes bedoel. Gebruik dit om data te kopieer tussen jou rekenaar en jou toestel, programme op jou toestel te installeer sonder kennisgewing en om loglêerdata te lees."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Herroep toegang tot USB-ontfouting vanaf alle rekenaars wat jy voorheen gemagtig het?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi Wi-Fi netwerk verbinding"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"SMS stuur SMS boodskappe boodskapdiens"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"sellulêr selfoondiensverskaffer draadloos data 4 g 3 g 2 g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi oproep bel swerwing oordrag"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi oproep bel"</string>
     <string name="keywords_home" msgid="3626170808219458848">"lanseerder"</string>
     <string name="keywords_display" msgid="6709007669501628320">"skerm raakskerm"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"dempskerm raakskerm battery"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> programme geïnstalleer, insluitend stelsel- en afgelaaide programme"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Gevorderd"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Onbekende program"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Kies profiel"</string>
 </resources>

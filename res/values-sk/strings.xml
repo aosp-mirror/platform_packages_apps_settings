@@ -366,14 +366,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Kedykoľvek uvidíte túto ikonu, môžete na identifikáciu alebo povolenie nákupu použiť odtlačok prsta."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Pridať"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Ďalej"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Podarilo sa nám rozpoznať iba časť odtlačku. Skúste to znova."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Snímač odtlačkov je špinavý. Vyčistite ho a skúste to znova."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Pohli ste prstom príliš rýchlo. Skúste to znova."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Pohli ste prstom príliš pomaly. Skúste to znova."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Došlo k chybe spracovania. Skúste to znova."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Hardvér nie je k dispozícii"</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Odtlačok prsta nie je možné uložiť. Odstráňte existujúci odtlačok."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Časový limit rozpoznania odtlačku vypršal. Skúste to znova."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Šifrovanie"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Šifrovať tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Šifrovať telefón"</string>
@@ -767,8 +759,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Uprednostňuje sa Wi-Fi (ak je Wi-Fi nedostupná, použije sa mobilná sieť)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Uprednostňuje sa mobilné pripojenie (Wi-Fi sa použije iba vtedy, keď bude mobilná sieť nedostupná)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Iba Wi-Fi (Mob. sieť sa nepoužije nikdy. Ak je Wi-Fi nedostupná, nedajú sa hovory prijímať ani uskutočňovať)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Odovzdanie volaní cez Wi-Fi pri roamingu"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Umožnite pri roamingu odovzdanie hovorov v sieti Wi-Fi do mobilnej siete"</string>
     <string name="home_settings" msgid="212375129455718176">"Domovská stránka"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Zobraziť"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Zvuk"</string>
@@ -1137,10 +1127,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Na určenie polohy používať technológiu GPS, sieť Wi-Fi a mobilné siete"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Na určenie polohy používať sieť Wi-Fi a mobilné siete"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Určovať polohu pomocou GPS"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Vyhľadávanie"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Vyhľadávanie"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Urč. polohy pomocou Wi-Fi a mobil. siete"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Povoliť apl. používať službu urč. polohy Google a rýchl. odhad. vašu polohu. Anonym. údaje o polohe sa budú odosielať spol. Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Poloha je určená podľa siete Wi-Fi"</string>
@@ -1470,10 +1458,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Ak chcete aktivovať odomknutie OEM, zadajte kód PIN zariadenia"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Povoliť odblokovanie OEM?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"UPOZORNENIE: V prípade, že bude toto nastavenie zapnuté, funkcie ochrany zariadenia nebudú na tomto zariadení fungovať."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Veľkosti vyrovnávacej pamäte denníka"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Veľkosti den. na vyrov. pamäť den."</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Povoliť simulované polohy"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Povoliť simulované polohy"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Povoliť kontrolu atribútov zobrazenia"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Možnosti siete"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certifikácia bezdrôtového displeja"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Povoliť prihlasovanie Wi-Fi Verbose"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Agres. odovzdávať Wi-Fi na mobilnú sieť"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Vždy povoliť funkciu Wi-Fi Roam Scans"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Použiť staršiu verziu klienta DHCP"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Zobraziť možnosti certifikácie bezdrôtového displeja"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Zvýšiť úroveň prihlasov. do Wi-Fi, zobraziť na SSID RSSI v nástroji Wi-Fi Picker"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Keď túto možnosť povolíte, Wi-Fi bude s väčšou intenzitou odovzdávať dát. pripoj. na mob. sieť vtedy, keď bude slabý signál Wi-Fi"</string>
@@ -1485,6 +1480,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Povoliť simulované polohy"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Povoliť simulované polohy"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Povoliť kontrolu atribútov zobrazenia"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Použitie klienta DHCP z verzie Lollipop namiesto nového klienta Android DHCP."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Povoliť ladenie USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Ladenie prostredníctvom USB je určené iba na účely vývoja. Použite ho na kopírovanie dát medzi počítačom a zariadením, inštaláciu aplikácií do zariadenia bez upozornenia a čítanie údajov denníka."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Odvolať prístup k ladeniu USB zo všetkých počítačov, ktoré ste predtým autorizovali?"</string>
@@ -2385,7 +2381,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi sieť pripojenie"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"textová správa poslať správy SMS a MMS"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"mobilný operátor mobilné dáta bezdrôtový prenos 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi hovor volanie roaming odovzdanie"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi hovor volanie"</string>
     <string name="keywords_home" msgid="3626170808219458848">"launcher"</string>
     <string name="keywords_display" msgid="6709007669501628320">"obrazovka dotyková obrazovka"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"stlmiť displej dotyková obrazovka batéria"</string>
@@ -2589,4 +2585,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"Boli nainštalované aplikácie vrátane systémových a stiahnutých aplikácií (počet: <xliff:g id="COUNT">%d</xliff:g>)"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Rozšírené"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Neznáma aplikácia"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Výber profilu"</string>
 </resources>

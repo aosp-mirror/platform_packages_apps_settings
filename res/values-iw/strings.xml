@@ -366,14 +366,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"כשתראה את הסמל הזה, תוכל להשתמש בטביעת האצבע שלך לצורך זיהוי או אישור רכישה."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"הוסף"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"הבא"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"זוהתה טביעת אצבע חלקית. נסה שוב."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"החיישן של טביעות האצבעות מלוכלך. נקה אותו ונסה שוב."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"האצבע זזה מהר מדי, נסה שוב."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"האצבע זזה לאט מדי, נסה שוב."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"אין אפשרות לעבד. נסה שוב."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"החומרה לא זמינה."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"לא ניתן לאחסן טביעת אצבע. הסר טביעת אצבע קיימת."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"חלף זמן קצוב לתפוגה של טביעת אצבע. נסה שוב."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"הצפנה"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"הצפן טאבלט"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"הצפן טלפון"</string>
@@ -767,8 +759,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"‏Wi-Fi מועדף (שימוש ברשת סלולרית רק אם Wi-Fi אינו זמין)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"‏סלולרי מועדף (שימוש ב-Wi-Fi רק אם רשת סלולרית אינה זמינה)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"‏Wi-Fi בלבד (לעולם לא ייעשה שימוש ברשת סלולרית. לא ניתן לבצע או לקבל שיחות אם Wi-Fi אינו זמין)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"‏מסירת WFC בעת נדידה"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"‏אפשר מסירת שיחות קוליות ב-Wi-Fi לרשת סלולרית בעת נדידה"</string>
     <string name="home_settings" msgid="212375129455718176">"דף הבית"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"תצוגה"</string>
     <string name="sound_settings" msgid="5534671337768745343">"צלילים"</string>
@@ -1137,10 +1127,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"‏השתמש ב-GPS‏, Wi‑Fi ורשתות סלולריות לקביעת המיקום"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"‏השתמש ב-Wi-Fi ורשתות סלולריות לקביעת המיקום"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"‏השתמש ב-GPS לקביעת המיקום"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"סריקה"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"סריקה"</string>
     <string name="location_network_based" msgid="6010456018401296590">"‏מיקום עם Wi‑Fi ורשת סלולרית"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"‏אפשר לאפליקציות להשתמש בשירות המיקום של Google כדי להעריך את מיקומך מהר יותר. נתוני מיקום אנונימיים ייאספו ויישלחו אל Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"‏המיקום נקבע באמצעות Wi-Fi"</string>
@@ -1470,10 +1458,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"‏הזן את מספר ה-PIN של המכשיר כדי להפעיל ביטול נעילה של OEM (יצרן ציוד מקורי)"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"‏האם לאפשר ביטול נעילה של OEM (יצרן ציוד מקורי)?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"אזהרה: תכונות הגנת מכשיר לא יפעלו במכשיר הזה כשההגדרה הזו פועלת."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"גדלי מאגר של יוצר יומן"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"בחר גדלים של יוצר יומן לכל מאגר יומן"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"אפשר מיקומים מדומים"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"אפשר מיקומים מדומים"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"אפשר בדיקת תכונת תצוגה"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"תקשורת רשתות"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"‏אישור של תצוגת WiFi"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"‏הפעל רישום מפורט של Wi‑Fi ביומן"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"‏העברה אגרסיבית מ-Wi‑Fi לרשת סלולרית"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"‏התר תמיד סריקות נדידה של Wi‑Fi"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"‏השתמש בלקוח DHCP מדור קודם"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"‏הצג אפשרויות עבור אישור של תצוגת WiFi"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"‏העלה את רמת הרישום של Wi‑Fi ביומן, הצג לכל SSID RSSI ב-Wi‑Fi Picker"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"‏כשתכונה זו מופעלת, Wi-Fi יתנהג בצורה אגרסיבית יותר בעת העברת חיבור הנתונים לרשת הסלולרית כשאות ה-Wi-Fi חלש."</string>
@@ -1485,6 +1480,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"אפשר מיקומים מדומים"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"אפשר מיקומים מדומים"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"אפשר בדיקת תכונת תצוגה"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"‏השתמש בלקוח DHCP של Lollipop במקום לקוח DHCP החדש של Android."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"‏לאפשר ניקוי באגים של USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"‏ניקוי באגים באמצעות USB מיועד למטרות פיתוח בלבד. השתמש בו להעתקת נתונים בין המחשב והמכשיר שלך, להתקנת אפליקציות במכשיר ללא התראה ולקריאת נתוני יומן."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"‏האם לבטל את הגישה לניקוי באגים ב-USB מכל המחשבים שהענקת להם בעבר הרשאה?"</string>
@@ -2385,7 +2381,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"‏wifi wi-fi חיבור רשת"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"הודעת טקסט שליחת הודעות טקסט הודעות העברת הודעות"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"‏סלולרי תא ספק אלחוטי נתונים 4 g ‏3g ‏2g ‏lte "</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"‏wifi שיחת wi-fi שיחה התקשרות נדידה מסירה"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"‏wifi wi-fi שיחה התקשרות"</string>
     <string name="keywords_home" msgid="3626170808219458848">"מפעיל האפליקציות"</string>
     <string name="keywords_display" msgid="6709007669501628320">"מסך מגע"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"מסך עמום סוללה מסך מגע"</string>
@@ -2589,4 +2585,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> אפליקציות מותקנות, כולל אפליקציות מערכת ואפליקציות שהורדת"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"מתקדם"</string>
     <string name="unknown_app" msgid="5275921288718717656">"אפליקציה לא מוכרת"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"בחר פרופיל"</string>
 </resources>

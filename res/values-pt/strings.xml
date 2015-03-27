@@ -362,14 +362,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Sempre que esse ícone é exibido, você pode usar sua impressão digital para fins de identificação ou para autorizar uma compra."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Adicionar"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Próximo"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Impressão digital parcial detectada. Tente novamente."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"O sensor de impressão digital está sujo. Limpe-o e tente novamente."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"O dedo foi retirado rápido demais. Tente novamente."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"O movimento do dedo está muito lento. Tente novamente."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Não foi possível concluir o processamento. Tente novamente."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Hardware indisponível."</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Não foi possível armazenar a impressão digital. Remova uma impressão digital já existente."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Tempo máximo para captura da impressão digital atingido. Tente novamente."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Criptografia"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Criptografar tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Criptografar telefone"</string>
@@ -751,8 +743,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Wi-Fi preferido: usa a rede celular apenas se o Wi-Fi não está disponível"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Celular preferido: usa o Wi-Fi apenas se a rede celular não está disponível"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Wi-Fi apenas: nunca usa rede celular. Não faz nem recebe chamadas se o Wi-Fi não está disponível"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Transf. WFC durante roaming"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Permite transferência de chamada de voz Wi-Fi para rede celular durante roaming"</string>
     <string name="home_settings" msgid="212375129455718176">"Início"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Tela"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Som"</string>
@@ -1119,10 +1109,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Usar GPS, Wi‑Fi e redes celulares para determinar a localização"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Usar Wi-Fi e redes celulares para determinar a localização"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Usar GPS para determinar local"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Verificação"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Verificação"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Localiz. por Wi-Fi e rede cel."</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Permitir que apps usem o serviço de localização do Google para determinar seu local mais rapidamente. Dados de localização anônimos serão coletados e enviados ao Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Localização determinada por Wi-Fi"</string>
@@ -1452,10 +1440,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Digite o PIN do dispositivo para ativar o desbloqueio de OEM"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Permitir desbloqueio de OEM?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"AVISO: os recursos de proteção do dispositivo não funcionarão neste dispositivo enquanto esta configuração estiver desativada."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Tamanhos de buffer de logger"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Sel. tam. de logger/buffer de log"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir locais fictícios"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Ativar visualiz. insp. atributo"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Redes"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Certificação de Display sem fio"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Ativar registro extenso de Wi-Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Transf. agressiva de Wi-Fi para celular"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Sempre permitir verif. de roaming de Wi-Fi"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Usar cliente DHCP legado"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Mostrar opções de certificação de Display sem fio"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"Aumentar o nível de registro do Wi-Fi; mostrar conforme o RSSI de SSID na Seleção de Wi-Fi"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Quando ativada, o Wi-Fi será mais agressivo em transferir a conexão de dados para celular, quando o sinal de Wi-Fi estiver fraco"</string>
@@ -1467,6 +1462,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Permitir locais fictícios"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir locais fictícios"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Ativar visualiz. insp. atributo"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Use o cliente DHCP do Lollipop, em vez do novo cliente DHCP do Android."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Permitir a depuração USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"A depuração USB serve apenas para fins de desenvolvimento. Use-a para copiar dados entre o computador e o dispositivo, instalar apps no seu aparelho sem notificação e ler dados de registro."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Revogar o acesso à depuração USB para todos os computadores autorizados?"</string>
@@ -2367,7 +2363,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi rede conexão"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"mensagem de texto enviar mensagens de texto mensagens mensagens"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"celular operadora de celular dados sem fio 4G 3G 2G LTE"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi chamada chamando roaming transferência"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi chamada chamando"</string>
     <string name="keywords_home" msgid="3626170808219458848">"tela de início"</string>
     <string name="keywords_display" msgid="6709007669501628320">"tela touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"escurecer tela touchscreen bateria"</string>
@@ -2565,4 +2561,5 @@
     <string name="all_apps_summary" msgid="3754827293203127282">"<xliff:g id="COUNT">%d</xliff:g> apps instalados, incluindo o sistema e apps baixados"</string>
     <string name="advanced_apps" msgid="4812975097124803873">"Avançadas"</string>
     <string name="unknown_app" msgid="5275921288718717656">"App desconhecido"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Escolher perfil"</string>
 </resources>

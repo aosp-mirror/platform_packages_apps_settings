@@ -352,8 +352,7 @@
       <item quantity="other">Отсканировано <xliff:g id="COUNT_1">%1$d</xliff:g> отпечатка</item>
     </plurals>
     <string name="security_settings_fingerprint_enroll_onboard_title" msgid="4735546436672054254">"Добавление отпечатка"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_onboard_message (1892198885652894680) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_onboard_message" msgid="1892198885652894680">"Чтобы разблокировать экран и подтверждать покупки с помощью сканера: \n\n✓ настройте дополнительный способ блокировки экрана; \n\n✓ сохраните отпечаток своего пальца."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Найдите сканер"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Найдите сканер отпечатков пальцев на задней поверхности телефона."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Название"</string>
@@ -367,14 +366,6 @@
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Этот значок сообщает, что вы можете подтверждать покупки и проходить индентификацию с помощью отпечатка пальца."</string>
     <string name="fingerprint_enroll_button_add" msgid="9087063833311608281">"Добавить"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Далее"</string>
-    <string name="fingerprint_acquired_try_again" msgid="3543246847519773670">"Отсканирована только часть пальца. Повторите попытку."</string>
-    <string name="fingerprint_acquired_imager_dirty" msgid="1069333738311915876">"Очистите сканер отпечатков пальцев и повторите попытку."</string>
-    <string name="fingerprint_acquired_too_fast" msgid="4068036120000203641">"Вы слишком быстро убрали палец. Повторите попытку."</string>
-    <string name="fingerprint_acquired_too_slow" msgid="1030658686087736299">"Вы слишком долго удерживали палец. Повторите попытку."</string>
-    <string name="fingerprint_error_unable_to_process" msgid="3695170439991347449">"Не удалось распознать отпечаток. Повторите попытку."</string>
-    <string name="fingerprint_error_hw_not_available" msgid="3535489559110151108">"Сканер отпечатков пальцев недоступен"</string>
-    <string name="fingerprint_error_no_space" msgid="7350970359618153619">"Нельзя сохранить отпечаток. Удалите существующий."</string>
-    <string name="fingerprint_error_timeout" msgid="7509454501138740556">"Превышено время ожидания. Повторите попытку."</string>
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Шифрование"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Зашифровать данные"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Зашифровать данные"</string>
@@ -768,8 +759,6 @@
     <string name="wfc_mode_wifi_preferred_summary" msgid="2538605598404726187">"Приоритет у Wi-Fi (использовать мобильную сеть, только если сети Wi-Fi недоступны)"</string>
     <string name="wfc_mode_cellular_preferred_summary" msgid="3409009182901031134">"Приоритет у моб. сети (использовать Wi-Fi, только если мобильная сеть недоступна)"</string>
     <string name="wfc_mode_wifi_only_summary" msgid="6783204292010626433">"Только Wi-Fi (без Wi-Fi нельзя звонить и принимать звонки, даже если мобильная сеть доступна)"</string>
-    <string name="wifi_calling_roam_title" msgid="1949055516180908425">"Переадресация в роуминге"</string>
-    <string name="wifi_calling_roam_summary" msgid="8613368213416864074">"Разрешить использовать мобильную сеть для приема Wi-Fi-звонков в роуминге"</string>
     <string name="home_settings" msgid="212375129455718176">"Домашний экран"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Экран"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Звук"</string>
@@ -1138,10 +1127,8 @@
     <string name="location_mode_high_accuracy_description" msgid="5349014493087338351">"Использовать GPS, Wi‑Fi и мобильные сети для определения местоположения"</string>
     <string name="location_mode_battery_saving_description" msgid="7581657383062066461">"Использовать Wi‑Fi и мобильные сети для определения местоположения"</string>
     <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Использовать GPS для определения местоположения"</string>
-    <!-- no translation found for location_menu_scanning (8536245838478802959) -->
-    <skip />
-    <!-- no translation found for location_scanning_screen_title (4408076862929611554) -->
-    <skip />
+    <string name="location_menu_scanning" msgid="8536245838478802959">"Поиск"</string>
+    <string name="location_scanning_screen_title" msgid="4408076862929611554">"Поиск"</string>
     <string name="location_network_based" msgid="6010456018401296590">"Wi‑Fi и мобильные сети"</string>
     <string name="location_neighborhood_level" msgid="5626515380188353712">"Разрешить отправлять анонимные геоданные и позволить приложениям определять ваше местоположение с помощью Wi-Fi и мобильных сетей"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"С помощью Wi-Fi"</string>
@@ -1471,10 +1458,17 @@
     <string name="oem_unlock_enable_pin_description" msgid="1373634087885107329">"Введите PIN-код устройства, чтобы разрешить заводскую разблокировку"</string>
     <string name="confirm_enable_oem_unlock_title" msgid="4802157344812385674">"Разрешить заводскую разблокировку?"</string>
     <string name="confirm_enable_oem_unlock_text" msgid="5517144575601647022">"ВНИМАНИЕ! Функции защиты не будут работать на устройстве, пока включен этот параметр."</string>
+    <string name="select_logd_size_title" msgid="7433137108348553508">"Размер буфера журнала"</string>
+    <string name="select_logd_size_dialog_title" msgid="1206769310236476760">"Выберите размер буфера журнала"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Фиктивные местоположения"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Разрешить использование фиктивных местоположений"</string>
+    <string name="debug_view_attributes" msgid="6485448367803310384">"Включить проверку атрибутов"</string>
+    <string name="debug_networking_category" msgid="7044075693643009662">"Сети"</string>
     <string name="wifi_display_certification" msgid="8611569543791307533">"Серт. беспроводн. мониторов"</string>
     <string name="wifi_verbose_logging" msgid="4203729756047242344">"Подробный журнал Wi‑Fi"</string>
     <string name="wifi_aggressive_handover" msgid="9194078645887480917">"Переключаться на мобильную сеть"</string>
     <string name="wifi_allow_scan_with_traffic" msgid="3601853081178265786">"Всегда включать поиск сетей Wi-Fi"</string>
+    <string name="legacy_dhcp_client" msgid="694426978909127287">"Использовать устаревший DHCP-клиент"</string>
     <string name="wifi_display_certification_summary" msgid="1155182309166746973">"Показывать параметры сертификации беспроводных мониторов"</string>
     <string name="wifi_verbose_logging_summary" msgid="6615071616111731958">"При выборе Wi‑Fi указывать в журнале RSSI для каждого SSID"</string>
     <string name="wifi_aggressive_handover_summary" msgid="6328455667642570371">"Принудительно переключаться на мобильную сеть, если сигнал Wi-Fi слабый"</string>
@@ -1486,6 +1480,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Фиктивные местоположения"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Разрешить использование фиктивных местоположений"</string>
     <string name="debug_view_attributes" msgid="6485448367803310384">"Включить проверку атрибутов"</string>
+    <string name="legacy_dhcp_client_summary" msgid="163383566317652040">"Использовать DHCP-клиент для Android 5.0, а не для новой версии."</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Разрешить отладку USB?"</string>
     <string name="adb_warning_message" msgid="7316799925425402244">"Отладка по USB – это режим, который позволяет использовать ваше устройство как внешний накопитель: перемещать файлы (с компьютера и на компьютер), напрямую устанавливать приложения, а также просматривать системные журналы."</string>
     <string name="adb_keys_warning_message" msgid="6932230298032192937">"Запретить доступ для USB-отладки на всех компьютерах, на которых вы входили в аккаунт?"</string>
@@ -2386,7 +2381,7 @@
     <string name="keywords_wifi" msgid="8947676711698613374">"wifi wi-fi сетевое подключение"</string>
     <string name="keywords_more_default_sms_app" msgid="895656981962034647">"текст сообщение отправка текстовый SMS"</string>
     <string name="keywords_more_mobile_networks" msgid="4939725094449606744">"мобильный сотовый беспроводной оператор 4g 3g 2g lte"</string>
-    <string name="keywords_wifi_calling" msgid="3032400528043215568">"wifi wi-fi вызов звонки роуминг переадресация"</string>
+    <string name="keywords_wifi_calling" msgid="5497735076883598019">"wifi wi-fi вызов звонок"</string>
     <string name="keywords_home" msgid="3626170808219458848">"Google Старт"</string>
     <string name="keywords_display" msgid="6709007669501628320">"экран сенсорный экран"</string>
     <string name="keywords_display_brightness_level" msgid="8923289340474728990">"яркость сенсорный экран батарея"</string>
@@ -2394,7 +2389,7 @@
     <string name="keywords_display_night_mode" msgid="7652025075378505346">"темное оформление ночной режим затемнение экрана инверсия"</string>
     <string name="keywords_display_wallpaper" msgid="7778443098569037063">"фон настройка пользовательский дисплей"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"размер шрифта"</string>
-    <string name="keywords_display_cast_screen" msgid="3167261692257302743">"трансляция проекта"</string>
+    <string name="keywords_display_cast_screen" msgid="3167261692257302743">"трансляция экрана"</string>
     <string name="keywords_storage" msgid="6572905220031852173">"пространство диск жесткий устройство использование"</string>
     <string name="keywords_battery" msgid="2096185085932675704">"электропитание расход зарядка"</string>
     <string name="keywords_spell_checker" msgid="6106749039734174140">"правописание проверка словарь автозамена"</string>
@@ -2411,10 +2406,8 @@
     <string name="keywords_accounts" msgid="1957925565953357627">"аккаунт"</string>
     <string name="keywords_users" msgid="4673901601478559100">"ограничение ограничить ограничено"</string>
     <string name="keywords_keyboard_and_ime" msgid="5251531893531063855">"текст исправление автокоррекция звук вибрация авто язык жест подсказка тема неприемлемый слово ввод эмодзи смайлик интернациональный"</string>
-    <!-- no translation found for keywords_reset_apps (6420313678620788457) -->
-    <skip />
-    <!-- no translation found for keywords_all_apps (5377153522551809915) -->
-    <skip />
+    <string name="keywords_reset_apps" msgid="6420313678620788457">"сброс настройки по умолчанию"</string>
+    <string name="keywords_all_apps" msgid="5377153522551809915">"приложения скачать установить система"</string>
     <string name="keywords_lockscreen" msgid="4806191868723291541">"провести пальцем по экрану пароль графический ключ PIN-код"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Настройка NFC-метки"</string>
     <string name="write_tag" msgid="8571858602896222537">"Записать"</string>
@@ -2482,12 +2475,12 @@
     <string name="loading_notification_apps" msgid="5031818677010335895">"Загрузка..."</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"Блокировать все"</string>
     <string name="app_notification_block_summary" msgid="9049487483231233726">"Не показывать уведомления из этого приложения"</string>
-    <string name="app_notification_priority_title" msgid="5949923919607295595">"Отметить оповещения как важные"</string>
-    <string name="app_notification_priority_summary" msgid="242979561927455238">"Разрешить приложению отправлять звуковые оповещения в режиме \"Не беспокоить\""</string>
-    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Показывать оповещения"</string>
-    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Разрешить приложению ненадолго выводить некоторые оповещения на текущий экран"</string>
+    <string name="app_notification_priority_title" msgid="5949923919607295595">"Считать уведомления важными"</string>
+    <string name="app_notification_priority_summary" msgid="242979561927455238">"Разрешить звуковые уведомления от этого приложения в режиме оповещения \"Важные\""</string>
+    <string name="app_notification_peekable_title" msgid="8647856880382324822">"Разрешить краткие уведомления"</string>
+    <string name="app_notification_peekable_summary" msgid="678845517890921158">"Разрешить приложению ненадолго выводить некоторые уведомления на текущий экран"</string>
     <string name="app_notification_sensitive_title" msgid="8465860579482264139">"Скрыть конфиденциальные данные"</string>
-    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"Не показывать конфиденциальные данные в оповещениях этого приложения, когда устройство заблокировано"</string>
+    <string name="app_notification_sensitive_summary" msgid="8433315579173105209">"Не показывать конфиденциальные данные в уведомлениях этого приложения, когда устройство заблокировано"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Заблокированные"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Важные"</string>
     <string name="app_notification_row_sensitive" msgid="1809610030432329940">"Конфиденциальные"</string>
@@ -2581,25 +2574,16 @@
     </plurals>
     <string name="launch_defaults_some" msgid="313159469856372621">"Установлены некоторые настройки по умолчанию"</string>
     <string name="launch_defaults_none" msgid="4241129108140034876">"Настройки по умолчанию не установлены"</string>
-    <!-- no translation found for filter_all_apps (1988403195820688644) -->
-    <skip />
-    <!-- no translation found for filter_enabled_apps (3318021007093070639) -->
-    <skip />
-    <!-- no translation found for filter_personal_apps (3277727374174355971) -->
-    <skip />
-    <!-- no translation found for filter_work_apps (24519936790795574) -->
-    <skip />
-    <!-- no translation found for filter_notif_blocked_apps (3446926933792244485) -->
-    <skip />
-    <!-- no translation found for filter_notif_priority_apps (5965001885749195239) -->
-    <skip />
-    <!-- no translation found for filter_notif_sensitive_apps (412490487743581673) -->
-    <skip />
-    <!-- no translation found for reset_app_preferences_description (7718912868244058770) -->
-    <skip />
-    <!-- no translation found for all_apps_summary (3754827293203127282) -->
-    <skip />
-    <!-- no translation found for advanced_apps (4812975097124803873) -->
-    <skip />
+    <string name="filter_all_apps" msgid="1988403195820688644">"Все приложения"</string>
+    <string name="filter_enabled_apps" msgid="3318021007093070639">"Активные"</string>
+    <string name="filter_personal_apps" msgid="3277727374174355971">"Личные"</string>
+    <string name="filter_work_apps" msgid="24519936790795574">"Рабочие"</string>
+    <string name="filter_notif_blocked_apps" msgid="3446926933792244485">"Заблокированные"</string>
+    <string name="filter_notif_priority_apps" msgid="5965001885749195239">"Важные"</string>
+    <string name="filter_notif_sensitive_apps" msgid="412490487743581673">"Конфиденциальные"</string>
+    <string name="reset_app_preferences_description" msgid="7718912868244058770">"Восстановить настройки по умолчанию для всех приложений"</string>
+    <string name="all_apps_summary" msgid="3754827293203127282">"Всего приложений: <xliff:g id="COUNT">%d</xliff:g> (включая системные и установленные пользователем)"</string>
+    <string name="advanced_apps" msgid="4812975097124803873">"Дополнительные настройки"</string>
     <string name="unknown_app" msgid="5275921288718717656">"Неизвестное приложение"</string>
+    <string name="choose_profile" msgid="8229363046053568878">"Выберите профиль"</string>
 </resources>
