@@ -23,10 +23,11 @@ import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.HomeSettings;
-import com.android.settings.ScreenPinningSettings;
 import com.android.settings.PrivacySettings;
+import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
+import com.android.settings.WifiCallingSettings;
 import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.applications.AdvancedAppSettings;
@@ -37,6 +38,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
@@ -48,7 +50,6 @@ import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
-import com.android.settings.WifiCallingSettings;
 
 import java.util.HashMap;
 
@@ -139,6 +140,7 @@ public final class Ranking {
 
         // Location
         sRankMap.put(LocationSettings.class.getName(), RANK_LOCATION);
+        sRankMap.put(ScanningSettings.class.getName(), RANK_LOCATION);
 
         // Security
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);

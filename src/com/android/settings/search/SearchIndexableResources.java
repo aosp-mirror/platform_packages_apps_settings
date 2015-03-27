@@ -39,6 +39,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
@@ -208,6 +209,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(LocationSettings.class.getName()),
                         R.xml.location_settings,
                         LocationSettings.class.getName(),
+                        R.drawable.ic_settings_location));
+
+        sResMap.put(ScanningSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(ScanningSettings.class.getName()),
+                        R.xml.location_scanning,
+                        ScanningSettings.class.getName(),
                         R.drawable.ic_settings_location));
 
         sResMap.put(SecuritySettings.class.getName(),
