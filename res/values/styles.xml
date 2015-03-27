@@ -306,10 +306,7 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Small">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Widget.TabWidget" />
 
     <style name="KeyguardAppWidgetItem">
         <item name="android:textSize">18sp</item>
@@ -326,30 +323,18 @@
         <item name="android:widgetLayout">@*android:layout/preference_widget_switch</item>
     </style>
 
-    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium">
-    </style>
-
-    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small">
-    </style>
-
-    <style name="TextAppearance.Switch" parent="TextAppearance.Medium">
-    </style>
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small" />
+    <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Material.Title" />
 
     <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Body2">
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
-    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Medium">
-    </style>
-
-    <style name="TextAppearance.TileSubTitle" parent="@android:style/TextAppearance.Material.Small">
-    </style>
-
-    <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle">
-    </style>
-
-    <style name="TextAppearance.ResultTitle" parent="TextAppearance.CategoryTitle">
-    </style>
+    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead" />
+    <style name="TextAppearance.TileSubTitle" parent="@android:style/TextAppearance.Material.Body1" />
+    <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle" />
+    <style name="TextAppearance.ResultTitle" parent="TextAppearance.CategoryTitle" />
 
     <style name="TextAppearance.FingerprintTitle"
         parent="android:TextAppearance.Material.Large.Inverse">
