@@ -358,6 +358,7 @@ public class ManageApplications extends InstrumentedFragment
         updateOptionsMenu();
         if (mApplications != null) {
             mApplications.resume(mSortOrder);
+            mApplications.updateLoading();
         }
     }
 
@@ -746,15 +747,18 @@ public class ManageApplications extends InstrumentedFragment
             }
             notifyDataSetChanged();
 
-            if (entries == null) {
-                mManageApplications.mListContainer.setVisibility(View.INVISIBLE);
-                mManageApplications.mLoadingContainer.setVisibility(View.VISIBLE);
-            } else {
-                mManageApplications.mListContainer.setVisibility(View.VISIBLE);
-                mManageApplications.mLoadingContainer.setVisibility(View.GONE);
+            if (mEntries.size() != 0
+                    && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
+                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
+                        mManageApplications.mListContainer, true, true);
             }
 
             mManageApplications.setHasDisabled(hasDisabledApps());
+        }
+
+        private void updateLoading() {
+            Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
+                    mManageApplications.mListContainer, mEntries.size() != 0, false);
         }
 
         private boolean hasDisabledApps() {

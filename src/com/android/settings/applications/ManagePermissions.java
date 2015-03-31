@@ -36,7 +36,6 @@ public class ManagePermissions extends SettingsPreferenceFragment
 
     private static final String TAG = "ManagePermissions";
 
-    private boolean mLoadComplete;
     private PermissionsInfo mPermissionsInfo;
 
     @Override
@@ -44,6 +43,13 @@ public class ManagePermissions extends SettingsPreferenceFragment
         super.onResume();
 
         mPermissionsInfo = new PermissionsInfo(getActivity(), this);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        showLoadingWhenEmpty();
     }
 
     private void refreshUi() {

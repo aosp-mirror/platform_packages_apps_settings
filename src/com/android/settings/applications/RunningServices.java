@@ -23,9 +23,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 public class RunningServices extends Fragment {
 
@@ -69,12 +69,7 @@ public class RunningServices extends Fragment {
     public void onResume() {
         super.onResume();
         boolean haveData = mRunningProcessesView.doResume(this, mRunningProcessesAvail);
-        if (haveData) {
-            mRunningProcessesView.setVisibility(View.VISIBLE);
-            mLoadingContainer.setVisibility(View.INVISIBLE);
-        } else {
-            mLoadingContainer.setVisibility(View.VISIBLE);
-        }
+        Utils.handleLoadingContainer(mLoadingContainer, mRunningProcessesView, haveData, false);
     }
 
     @Override
@@ -110,19 +105,10 @@ public class RunningServices extends Fragment {
         mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
     }
 
-    private void handleRunningProcessesAvail() {
-        mLoadingContainer.startAnimation(AnimationUtils.loadAnimation(getActivity(),
-                android.R.anim.fade_out));
-        mRunningProcessesView.startAnimation(AnimationUtils.loadAnimation(getActivity(),
-                android.R.anim.fade_in));
-        mRunningProcessesView.setVisibility(View.VISIBLE);
-        mLoadingContainer.setVisibility(View.GONE);
-    }
-
     private final Runnable mRunningProcessesAvail = new Runnable() {
         @Override
         public void run() {
-            handleRunningProcessesAvail();
+            Utils.handleLoadingContainer(mLoadingContainer, mRunningProcessesView, true, true);
         }
     };
 

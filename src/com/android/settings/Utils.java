@@ -39,8 +39,8 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.content.res.Resources.NotFoundException;
+import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -74,6 +74,9 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
@@ -1157,5 +1160,40 @@ public final class Utils {
         return context.getString(hasPreferred || hasDomainURLsPreference
                 ? R.string.launch_defaults_some
                 : R.string.launch_defaults_none);
+    }
+
+    public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
+            boolean animate) {
+        setViewShown(loading, !done, animate);
+        setViewShown(doneLoading, done, animate);
+    }
+
+    private static void setViewShown(final View view, boolean shown, boolean animate) {
+        if (animate) {
+            Animation animation = AnimationUtils.loadAnimation(view.getContext(),
+                    shown ? android.R.anim.fade_in : android.R.anim.fade_out);
+            if (shown) {
+                view.setVisibility(View.VISIBLE);
+            } else {
+                animation.setAnimationListener(new AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+            view.startAnimation(animation);
+        } else {
+            view.clearAnimation();
+            view.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 }

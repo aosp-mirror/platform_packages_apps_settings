@@ -158,6 +158,11 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         unregisterObserverIfNeeded();
     }
 
+    public void showLoadingWhenEmpty() {
+        View loading = getView().findViewById(R.id.loading_container);
+        getListView().setEmptyView(loading);
+    }
+
     public void registerObserverIfNeeded() {
         if (!mIsDataSetObserverRegistered) {
             if (mCurrentRootAdapter != null) {
