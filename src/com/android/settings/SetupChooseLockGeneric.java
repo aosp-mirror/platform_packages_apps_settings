@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.hardware.fingerprint.FingerprintManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,13 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric
             if (title == null) {
                 final View header = inflater.inflate(R.layout.setup_wizard_header, list, false);
                 list.addHeaderView(header, null, false);
+            }
+            final FingerprintManager fpm = (FingerprintManager)
+                    getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
+            if (fpm != null && fpm.isHardwareDetected()) {
+                final View footer = inflater.inflate(
+                        R.layout.setup_screen_lock_fingerprint_details, list, false);
+                list.addFooterView(footer, null, false);
             }
             return view;
         }
