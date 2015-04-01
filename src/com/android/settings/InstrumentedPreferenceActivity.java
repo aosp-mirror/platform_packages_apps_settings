@@ -23,6 +23,13 @@ import com.android.internal.logging.MetricsLogger;
  * Instrumented activity that logs visibility state.
  */
 public abstract class InstrumentedPreferenceActivity extends PreferenceActivity {
+    /**
+     * Declare the view of this category.
+     *
+     * Categories are defined in {@link com.android.internal.logging.MetricsLogger}
+     * or if there is no relevant existing category you may define one in
+     * {@link com.android.settings.InstrumentedFragment}.
+     */
     protected abstract int getMetricsCategory();
 
     @Override
