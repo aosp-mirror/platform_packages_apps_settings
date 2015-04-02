@@ -1799,7 +1799,7 @@
     <!-- Wireless networks, item title to go into the WFC settings [CHAR LIMIT=30] -->
     <string name="wifi_calling_settings_title">Wi-Fi calling</string>
     <!-- WFC mode [CHAR LIMIT=30] -->
-    <string name="wifi_calling_mode_title">Wi-Fi calling mode</string>
+    <string name="wifi_calling_mode_title">Calling preference</string>
     <!-- WFC mode dialog [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_dialog_title">Wi-Fi calling mode</string>
     <string-array name="wifi_calling_mode_choices">
@@ -1812,14 +1812,8 @@
         <item>"1"</item>
         <item>"0"</item>
     </string-array>
-    <!-- WFC, summary for Disabled [CHAR LIMIT=100] -->
-    <string name="wifi_calling_off_summary">Off</string>
-    <!-- WFC, summary for Wi-Fi Preferred [CHAR LIMIT=100] -->
-    <string name="wfc_mode_wifi_preferred_summary">Wi-Fi preferred (Uses cell network only if Wi-Fi isn\'t available)</string>
-    <!-- WFC, summary for Cellular Preferred [CHAR LIMIT=100] -->
-    <string name="wfc_mode_cellular_preferred_summary">Cellular preferred (Uses Wi-Fi only if cell network isn\'t available)</string>
-    <!-- WFC, summary for Wi-Fi Only [CHAR LIMIT=100] -->
-    <string name="wfc_mode_wifi_only_summary">Wi-Fi only (Never uses cell network. Can\'t make or receive calls if Wi-Fi isn\'t available)</string>
+    <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
+    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\'s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
 
     <!-- Sound and alerts settings -->
     <skip/>
