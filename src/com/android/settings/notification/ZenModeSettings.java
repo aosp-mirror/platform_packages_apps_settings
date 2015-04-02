@@ -88,12 +88,14 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
     private static final SettingPrefWithCallback PREF_ZEN_MODE = new SettingPrefWithCallback(
             SettingPref.TYPE_GLOBAL, KEY_ZEN_MODE, Global.ZEN_MODE, Global.ZEN_MODE_OFF,
-            Global.ZEN_MODE_OFF, Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+            Global.ZEN_MODE_OFF, Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, Global.ZEN_MODE_ALARMS,
             Global.ZEN_MODE_NO_INTERRUPTIONS) {
         protected String getCaption(Resources res, int value) {
             switch (value) {
                 case Global.ZEN_MODE_NO_INTERRUPTIONS:
                     return res.getString(R.string.zen_mode_option_no_interruptions);
+                case Global.ZEN_MODE_ALARMS:
+                    return res.getString(R.string.zen_mode_option_alarms);
                 case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
                     return res.getString(R.string.zen_mode_option_important_interruptions);
                 default:
