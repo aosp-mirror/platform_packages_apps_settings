@@ -24,6 +24,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.security.NetworkSecurityPolicy;
 import android.test.InstrumentationTestCase;
 import android.test.InstrumentationTestRunner;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -225,6 +226,13 @@ public class VpnTests extends InstrumentationTestCase {
     private String getIpAddress() {
         String ip = null;
         HttpURLConnection urlConnection = null;
+        // TODO: Rewrite this test to use an HTTPS URL.
+        // Because this test uses cleartext HTTP, the network security policy of this app needs to
+        // be temporarily relaxed to permit such traffic.
+        NetworkSecurityPolicy networkSecurityPolicy = NetworkSecurityPolicy.getInstance();
+        boolean cleartextTrafficPermittedBeforeTest =
+                networkSecurityPolicy.isCleartextTrafficPermitted();
+        networkSecurityPolicy.setCleartextTrafficPermitted(true);
         try {
             URL url = new URL(EXTERNAL_SERVER);
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -248,6 +256,7 @@ public class VpnTests extends InstrumentationTestCase {
         } catch (JSONException e) {
             Log.e(TAG, "exception while creating JSONObject: " + e.toString());
         } finally {
+            networkSecurityPolicy.setCleartextTrafficPermitted(cleartextTrafficPermittedBeforeTest);
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
