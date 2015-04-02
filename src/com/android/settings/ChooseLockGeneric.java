@@ -94,6 +94,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mEncryptionRequestQuality;
         private boolean mEncryptionRequestDisabled;
         private boolean mRequirePassword;
+        private String mUserPassword;
         private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
         private RemovalCallback mRemovalCallback = new RemovalCallback() {
@@ -146,7 +147,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
                 if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                        getString(R.string.unlock_set_unlock_launch_picker_title))) {
+                        getString(R.string.unlock_set_unlock_launch_picker_title), true)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish();
                 } else {
@@ -177,6 +178,8 @@ public class ChooseLockGeneric extends SettingsActivity {
          * @param quality
          * @param disabled
          */
+        // TODO: why does this take disabled, its always called with a quality higher than
+        // what makes sense with disabled == true
         private void maybeEnableEncryption(int quality, boolean disabled) {
             if (Process.myUserHandle().isOwner() && LockPatternUtils.isDeviceEncryptionEnabled()) {
                 mEncryptionRequestQuality = quality;
@@ -201,6 +204,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             mWaitingForConfirmation = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
+                mUserPassword = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 updatePreferencesOrFinish();
             } else if (requestCode == ENABLE_ENCRYPTION_REQUEST
                     && resultCode == Activity.RESULT_OK) {
@@ -385,10 +389,25 @@ public class ChooseLockGeneric extends SettingsActivity {
                     maxLength, requirePasswordToDecrypt, confirmCredentials);
         }
 
+        // SetupWizard version will not need this as they will never be changing a password
+        // TODO: confirm
+        private Intent getLockPasswordIntent(Context context, int quality, int minLength,
+                final int maxLength, boolean requirePasswordToDecrypt, String password) {
+            return ChooseLockPassword.createIntent(context, quality, minLength, maxLength,
+                    requirePasswordToDecrypt, password);
+        }
+
         protected Intent getLockPatternIntent(Context context, final boolean requirePassword,
                 final boolean confirmCredentials) {
             return ChooseLockPattern.createIntent(context, requirePassword,
                     confirmCredentials);
+        }
+
+        // SetupWizard version will not need this as they will never be changing a password
+        // TODO: confirm
+        private Intent getLockPatternIntent(Context context, final boolean requirePassword,
+                final String pattern) {
+            return ChooseLockPattern.createIntent(context, requirePassword, pattern);
         }
 
         protected Intent getEncryptionInterstitialIntent(Context context, int quality,
@@ -421,11 +440,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 final int maxLength = mDPM.getPasswordMaximumLength(quality);
                 Intent intent = getLockPasswordIntent(context, quality, minLength,
-                        maxLength, mRequirePassword,  /* confirm credentials */false);
+                        maxLength, mRequirePassword, mUserPassword);
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_SOMETHING) {
                 Intent intent = getLockPatternIntent(context, mRequirePassword,
-                        /* confirm credentials */false);
+                        mUserPassword);
                 startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
             } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 mChooseLockSettingsHelper.utils().clearLock();
