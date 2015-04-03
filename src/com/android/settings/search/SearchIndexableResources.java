@@ -43,6 +43,7 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
 import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
+import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
@@ -160,6 +161,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(ZenModeSettings.class.getName()),
                         NO_DATA_RES_ID,
                         ZenModeSettings.class.getName(),
+                        R.drawable.ic_settings_notifications));
+
+        sResMap.put(ZenModePrioritySettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(ZenModePrioritySettings.class.getName()),
+                        R.xml.zen_mode_priority_settings,
+                        ZenModePrioritySettings.class.getName(),
                         R.drawable.ic_settings_notifications));
 
         sResMap.put(Memory.class.getName(),
