@@ -25,45 +25,11 @@
             android:title="@string/zen_mode_option_title"
             android:persistent="false" />
 
-    <PreferenceCategory
-        android:key="important"
-        android:title="@string/zen_mode_important_category" >
-
-        <SwitchPreference
-            android:key="events"
-            android:title="@string/zen_mode_events"
-            android:persistent="false"
-            android:switchTextOff=""
-            android:switchTextOn="" />
-
-        <SwitchPreference
-            android:key="calls"
-            android:title="@string/zen_mode_calls"
-            android:persistent="false"
-            android:switchTextOff=""
-            android:switchTextOn="" />
-
-        <SwitchPreference
-            android:key="messages"
-            android:title="@string/zen_mode_messages"
-            android:persistent="false"
-            android:switchTextOff=""
-            android:switchTextOn="" />
-
-        <com.android.settings.DropDownPreference
-                android:key="starred"
-                android:title="@string/zen_mode_from"
-                android:persistent="false" />
-
-        <Preference
-            android:key="alarm_info"
-            android:title=""
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/colorForegroundInverse"
-            android:selectable="false"
-            android:summary="@string/zen_mode_alarm_info" />
-
-    </PreferenceCategory>
+    <!-- Priority only allows -->
+    <PreferenceScreen
+            android:key="priority_settings"
+            android:title="@string/zen_mode_priority_settings_title"
+            android:fragment="com.android.settings.notification.ZenModePrioritySettings" />
 
     <!-- Downtime -->
     <PreferenceCategory
