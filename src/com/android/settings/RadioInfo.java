@@ -754,7 +754,7 @@ public class RadioInfo extends Activity {
         HttpURLConnection urlConnection = null;
         try {
             // TODO: Hardcoded for now, make it UI configurable
-            URL url = new URL("http://www.google.com");
+            URL url = new URL("https://www.google.com");
             urlConnection = (HttpURLConnection) url.openConnection();
             if (urlConnection.getResponseCode() == 200) {
                 mHttpClientTestResult = "Pass";
