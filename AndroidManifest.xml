@@ -309,6 +309,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".wifi.WifiNoInternetDialog"
+                  android:clearTaskOnLaunch="true"
+                  android:excludeFromRecents="true"
+                  android:exported="true"
+                  android:permission="android.permission.CONNECTIVITY_INTERNAL"
+                  android:taskAffinity=""
+                  android:theme="@*android:style/Theme.Material.Light.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.net.conn.PROMPT_UNVALIDATED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
         <activity-alias android:name=".wifi.WifiApSettings"
                 android:targetActivity="Settings">
