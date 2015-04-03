@@ -32,41 +32,8 @@
             android:fragment="com.android.settings.notification.ZenModePrioritySettings" />
 
     <!-- Downtime -->
-    <PreferenceCategory
-        android:key="downtime"
-        android:title="@string/zen_mode_downtime_category" >
-
-        <!-- Days -->
-        <Preference
-            android:key="days"
-            android:title="@string/zen_mode_downtime_days"
-            android:persistent="false" />
-
-        <!-- Start time/End time added and removed here! :-) -->
-
-        <!-- Interruptions allowed -->
-        <com.android.settings.DropDownPreference
-                android:key="downtime_mode"
-                android:title="@string/zen_mode_downtime_mode_title"
-                android:order="100"
-                android:persistent="false" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="automation"
-        android:title="@string/zen_mode_automation_category" >
-
-        <Preference
-            android:key="entry"
-            android:title="@string/zen_mode_entry_conditions_title"
-            android:persistent="false" />
-
-        <Preference
-                android:key="manage_condition_providers"
-                android:title="@string/manage_condition_providers"
-                android:persistent="false"
-                android:fragment="com.android.settings.notification.ConditionProviderSettings" />
-
-    </PreferenceCategory>
-
+    <PreferenceScreen
+            android:key="automation_settings"
+            android:title="@string/zen_mode_automation_settings_title"
+            android:fragment="com.android.settings.notification.ZenModeAutomationSettings" />
 </PreferenceScreen>
