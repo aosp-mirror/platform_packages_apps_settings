@@ -244,10 +244,38 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
                 disableUnusablePreferences(quality, hideDisabledPrefs);
+                updateCurrentPreference();
                 updatePreferenceSummaryIfNeeded();
             } else {
                 updateUnlockMethodAndFinish(quality, false);
             }
+        }
+
+        private void updateCurrentPreference() {
+            String currentKey = getKeyForCurrent();
+            Preference preference = findPreference(currentKey);
+            if (preference != null) {
+                preference.setSummary(R.string.current_screen_lock);
+            }
+        }
+
+        private String getKeyForCurrent() {
+            if (mLockPatternUtils.isLockScreenDisabled()) {
+                return KEY_UNLOCK_SET_OFF;
+            }
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                    return KEY_UNLOCK_SET_PATTERN;
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                    return KEY_UNLOCK_SET_PIN;
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                    return KEY_UNLOCK_SET_PASSWORD;
+                case DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED:
+                    return KEY_UNLOCK_SET_NONE;
+            }
+            return null;
         }
 
         /** increases the quality if necessary */
