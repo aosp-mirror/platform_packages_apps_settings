@@ -90,18 +90,4 @@ public class RestrictionUtils {
         }
         um.setUserRestrictions(userRestrictions, user);
     }
-
-    public static Bundle restrictionsToBundle(ArrayList<RestrictionEntry> entries) {
-        final Bundle bundle = new Bundle();
-        for (RestrictionEntry entry : entries) {
-            if (entry.getType() == RestrictionEntry.TYPE_BOOLEAN) {
-                bundle.putBoolean(entry.getKey(), entry.getSelectedState());
-            } else if (entry.getType() == RestrictionEntry.TYPE_MULTI_SELECT) {
-                bundle.putStringArray(entry.getKey(), entry.getAllSelectedStrings());
-            } else {
-                bundle.putString(entry.getKey(), entry.getSelectedString());
-            }
-        }
-        return bundle;
-    }
 }

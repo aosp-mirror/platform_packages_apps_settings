@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.RestrictionEntry;
+import android.content.RestrictionsManager;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
@@ -841,7 +842,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                             continue;
                         }
                         mUserManager.setApplicationRestrictions(packageName,
-                                RestrictionUtils.restrictionsToBundle(restrictions),
+                                RestrictionsManager.convertRestrictionsToBundle(restrictions),
                                 mUser);
                         break;
                     }
@@ -915,7 +916,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 onRestrictionsReceived(preference, packageName, restrictions);
                 if (mRestrictedProfile) {
                     mUserManager.setApplicationRestrictions(packageName,
-                            RestrictionUtils.restrictionsToBundle(restrictions), mUser);
+                            RestrictionsManager.convertRestrictionsToBundle(restrictions), mUser);
                 }
             } else if (restrictionsIntent != null) {
                 preference.setRestrictions(restrictions);
@@ -1046,7 +1047,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 // If there's a valid result, persist it to the user manager.
                 pref.setRestrictions(list);
                 mUserManager.setApplicationRestrictions(packageName,
-                        RestrictionUtils.restrictionsToBundle(list), mUser);
+                        RestrictionsManager.convertRestrictionsToBundle(list), mUser);
             } else if (bundle != null) {
                 // If there's a valid result, persist it to the user manager.
                 mUserManager.setApplicationRestrictions(packageName, bundle, mUser);
