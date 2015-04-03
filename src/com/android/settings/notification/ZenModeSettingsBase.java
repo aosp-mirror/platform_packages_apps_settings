@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.INotificationManager;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -81,6 +82,11 @@ abstract public class ZenModeSettingsBase extends SettingsPreferenceFragment {
            Log.w(TAG, "Error calling NoMan", e);
            return false;
         }
+    }
+
+    protected static boolean isDowntimeSupported(Context context) {
+        return NotificationManager.from(context)
+                .isSystemConditionProviderEnabled(ZenModeConfig.DOWNTIME_PATH);
     }
 
     private void updateZenModeConfig() {
