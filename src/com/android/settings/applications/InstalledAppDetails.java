@@ -261,10 +261,17 @@ public class InstalledAppDetails extends AppInfoBase
         mStoragePreference.setOnPreferenceClickListener(this);
         mPermissionsPreference = findPreference(KEY_PERMISSION);
         mPermissionsPreference.setOnPreferenceClickListener(this);
-        mLaunchPreference = findPreference(KEY_LAUNCH);
-        mLaunchPreference.setOnPreferenceClickListener(this);
         mDataPreference = findPreference(KEY_DATA);
         mDataPreference.setOnPreferenceClickListener(this);
+
+        mLaunchPreference = findPreference(KEY_LAUNCH);
+        if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+            mLaunchPreference.setEnabled(false);
+        } else if (!mAppEntry.info.enabled) {
+            mLaunchPreference.setEnabled(false);
+        } else {
+            mLaunchPreference.setOnPreferenceClickListener(this);
+        }
     }
 
     private void handleHeader() {
@@ -421,7 +428,7 @@ public class InstalledAppDetails extends AppInfoBase
         Activity context = getActivity();
         mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
         mPermissionsPreference.setSummary(AppPermissionSettings.getSummary(mAppEntry, context));
-        mLaunchPreference.setSummary(AppLaunchSettings.getSummary(mAppEntry, mUsbManager,
+        mLaunchPreference.setSummary(Utils.getLaunchByDeafaultSummary(mAppEntry, mUsbManager,
                 mPm, context));
         mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
                 mBackend));

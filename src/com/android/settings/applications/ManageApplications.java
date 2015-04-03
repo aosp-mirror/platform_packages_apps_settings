@@ -17,12 +17,13 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
+import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +33,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.provider.Settings;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,10 +65,12 @@ import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.AppFilter;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.Settings.DomainsURLsAppListActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 final class CanBeOnSdCardChecker {
     final IPackageManager mPm;
@@ -145,6 +149,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int FILTER_APPS_SENSITIVE               = 6;
     public static final int FILTER_APPS_PERSONAL                = 7;
     public static final int FILTER_APPS_WORK                    = 8;
+    public static final int FILTER_APPS_WITH_DOMAIN_URLS        = 9;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[] {
@@ -157,6 +162,7 @@ public class ManageApplications extends InstrumentedFragment
         R.string.filter_notif_sensitive_apps, // Sensitive Notifications
         R.string.filter_personal_apps, // Personal
         R.string.filter_work_apps,     // Work
+        R.string.filter_with_domain_urls_apps,     // Domain URLs
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
@@ -170,6 +176,7 @@ public class ManageApplications extends InstrumentedFragment
         AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SENSITIVE, // Sensitive Notifications
         ApplicationsState.FILTER_PERSONAL,    // Personal
         ApplicationsState.FILTER_WORK,        // Work
+        ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
     };
 
     // sort order that can be changed through the menu can be sorted alphabetically
@@ -209,6 +216,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_MAIN = 0;
     public static final int LIST_TYPE_ALL = 1;
     public static final int LIST_TYPE_NOTIFICATION = 2;
+    public static final int LIST_TYPE_DOMAINS_URLS = 3;
 
     private View mRootView;
 
@@ -224,7 +232,6 @@ public class ManageApplications extends InstrumentedFragment
         mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
 
         Intent intent = getActivity().getIntent();
-        String action = intent.getAction();
         String className = getArguments() != null
                 ? getArguments().getString("classname") : null;
         if (className == null) {
@@ -235,6 +242,8 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mNotifBackend = new NotificationBackend();
+        } else if (className.equals(DomainsURLsAppListActivity.class.getName())) {
+            mListType = LIST_TYPE_DOMAINS_URLS;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -311,12 +320,17 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
             mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
             mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
+        } else if (mListType == LIST_TYPE_DOMAINS_URLS) {
+            mFilterAdapter.disableFilter(FILTER_APPS_ALL);
+            mFilterAdapter.enableFilter(FILTER_APPS_WITH_DOMAIN_URLS);
         }
     }
 
     private int getDefaultFilter() {
         if (mListType == LIST_TYPE_MAIN) {
             return FILTER_APPS_DOWNLOADED_AND_LAUNCHER;
+        } else if (mListType == LIST_TYPE_DOMAINS_URLS) {
+            return FILTER_APPS_WITH_DOMAIN_URLS;
         }
         return FILTER_APPS_ALL;
     }
@@ -330,6 +344,8 @@ public class ManageApplications extends InstrumentedFragment
                 return MetricsLogger.MANAGE_APPLICATIONS_ALL;
             case LIST_TYPE_NOTIFICATION:
                 return MetricsLogger.MANAGE_APPLICATIONS_NOTIFICATIONS;
+            case LIST_TYPE_DOMAINS_URLS:
+                return MetricsLogger.MANAGE_DOMAIN_URLS;
             default:
                 return MetricsLogger.VIEW_UNKNOWN;
         }
@@ -382,24 +398,39 @@ public class ManageApplications extends InstrumentedFragment
 
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
+        Activity activity = getActivity();
         if (mListType == LIST_TYPE_NOTIFICATION) {
-            getActivity().startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+            activity.startActivity(new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     .putExtra(Settings.EXTRA_APP_PACKAGE, mCurrentPkgName)
                     .putExtra(Settings.EXTRA_APP_UID, mCurrentUid));
+        } else if (mListType == LIST_TYPE_DOMAINS_URLS) {
+            final String title = getString(R.string.auto_launch_label);
+            startAppInfoFragment(AppLaunchSettings.class, title);
         } else {
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
             // Maybe when they load the list of apps that contains managed profile apps.
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.setData(Uri.fromParts("package", mCurrentPkgName, null));
-            getActivity().startActivityAsUser(intent,
-                    new UserHandle(UserHandle.getUserId(mCurrentUid)));
+            activity.startActivityAsUser(intent, new UserHandle(UserHandle.getUserId(mCurrentUid)));
         }
+    }
+
+    private void startAppInfoFragment(Class<? extends AppInfoBase> fragment, CharSequence title) {
+        Bundle args = new Bundle();
+        args.putString("package", mCurrentPkgName);
+
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.startPreferencePanel(fragment.getName(), args, -1, title, this, 0);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (mListType == LIST_TYPE_DOMAINS_URLS) {
+            // No option menu
+            return;
+        }
         mOptionsMenu = menu;
         if (mListType == LIST_TYPE_MAIN) {
             // Only show advanced options when in the main app list (from dashboard).
@@ -426,7 +457,6 @@ public class ManageApplications extends InstrumentedFragment
         if (mOptionsMenu == null) {
             return;
         }
-
         if (mListType != LIST_TYPE_MAIN) {
             // Allow sorting except on main apps list.
             mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
@@ -580,6 +610,7 @@ public class ManageApplications extends InstrumentedFragment
         private int mLastSortMode=-1;
         private int mWhichSize = SIZE_TOTAL;
         CharSequence mCurFilterPrefix;
+        private PackageManager mPm;
 
         private Filter mFilter = new Filter() {
             @Override
@@ -607,6 +638,7 @@ public class ManageApplications extends InstrumentedFragment
             mSession = state.newSession(this);
             mManageApplications = manageApplications;
             mContext = manageApplications.getActivity();
+            mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mNotifBridge = new AppStateNotificationBridge(
@@ -842,6 +874,24 @@ public class ManageApplications extends InstrumentedFragment
             return mEntries.get(position).id;
         }
 
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            ApplicationsState.AppEntry entry = mEntries.get(position);
+            synchronized (entry) {
+                if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+                    return false;
+                } else if (!entry.info.enabled) {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public View getView(int position, View convertView, ViewGroup parent) {
             // A ViewHolder keeps references to children views to avoid unnecessary calls
             // to findViewById() on each row.
@@ -860,15 +910,23 @@ public class ManageApplications extends InstrumentedFragment
                 if (entry.icon != null) {
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
-                if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
-                    if (entry.extraInfo != null) {
-                        holder.summary.setText(InstalledAppDetails.getNotificationSummary(
-                                (AppRow) entry.extraInfo, mContext));
-                    } else {
-                        holder.summary.setText("");
-                    }
-                } else {
-                    holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                switch (mManageApplications.mListType) {
+                    case LIST_TYPE_NOTIFICATION:
+                        if (entry.extraInfo != null) {
+                            holder.summary.setText(InstalledAppDetails.getNotificationSummary(
+                                    (AppRow) entry.extraInfo, mContext));
+                        } else {
+                            holder.summary.setText("");
+                        }
+                        break;
+
+                    case LIST_TYPE_DOMAINS_URLS:
+                        holder.summary.setText(getDomainsSummary(entry.info.packageName));
+                        break;
+
+                    default:
+                        holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                        break;
                 }
                 if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
                     holder.disabled.setVisibility(View.VISIBLE);
@@ -894,6 +952,24 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onMovedToScrapHeap(View view) {
             mActive.remove(view);
+        }
+
+        private CharSequence getDomainsSummary(String packageName) {
+            ArraySet<String> result = new ArraySet<>();
+            List<IntentFilterVerificationInfo> list =
+                    mPm.getIntentFilterVerifications(packageName);
+            for (IntentFilterVerificationInfo ivi : list) {
+                for (String host : ivi.getDomains()) {
+                    result.add(host);
+                }
+            }
+            if (result.size() == 0) {
+                return mContext.getString(R.string.domain_urls_summary_none);
+            } else if (result.size() == 1) {
+                return mContext.getString(R.string.domain_urls_summary_one, result.valueAt(0));
+            } else {
+                return mContext.getString(R.string.domain_urls_summary_some, result.valueAt(0));
+            }
         }
     }
 }

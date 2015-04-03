@@ -3055,6 +3055,9 @@
     <!-- [CHAR LIMIT=NONE] Time label for an operation that has never executed. -->
     <string name="app_ops_never_used">(Never used)</string>
 
+    <!-- [CHAR LIMIT=25] Text shown when there are no default Apps -->
+    <string name="no_default_apps">No default Apps.</string>
+
     <!-- [CHAR LIMIT=25] Services settings screen, setting option name for the user to go to the screen to view app storage use -->
     <string name="storageuse_settings_title">Storage use</string>
     <!-- Services settings screen, setting option summary for the user to go to the screen to app storage use -->
@@ -6077,6 +6080,20 @@
    <!-- Summary for app storage preference [CHAR LIMIT=15] -->
    <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal storage">%2$s</xliff:g></string>
 
+   <!-- Category name for App Launch -->
+   <string name="app_launch_domain_links_title">Domain links</string>
+   <string name="app_launch_open_domain_urls_title">Open Domain URLs</string>
+   <string name="app_launch_open_domain_urls_summary">Allow app to directly open Domain URLs</string>
+   <string name="app_launch_supported_domain_urls_title">Supported domains URLs</string>
+   <string name="app_launch_other_defaults_title">Other defaults</string>
+
+   <!-- Summary for app storage preference -->
+   <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
+   <!-- Internal storage label -->
+   <string name="storage_type_internal">internal memory</string>
+   <!-- External storage label -->
+   <string name="storage_type_external">external memory</string>
+
    <!-- Summary describing internal storage for applications [CHAR LIMIT=25] -->
    <string name="storage_type_internal">Internal storage</string>
    <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
@@ -6126,12 +6143,13 @@
     <string name="filter_notif_priority_apps">Priority</string>
     <!-- Label for showing apps with sensitive notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_sensitive_apps">Sensitive</string>
+    <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
+    <string name="filter_with_domain_urls_apps">With domain URLs</string>
 
     <!-- Description for advanced menu option to reset app preferences [CHAR LIMIT=NONE] -->
     <string name="reset_app_preferences_description">Reset preferences across all apps to defaults</string>
 
-    <!-- Description of settings item that leads to list of all apps
-         [CHAR LIMIT=NONE] -->
+    <!-- Description of settings item that leads to list of all apps [CHAR LIMIT=NONE] -->
     <string name="all_apps_summary"><xliff:g id="count" example="10">%d</xliff:g> apps installed, including system and downloaded apps</string>
 
     <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
@@ -6150,5 +6168,24 @@
    <!-- Summary of number of apps currently granted a single permission [CHAR
         LIMIT=45] -->
    <string name="app_permissions_group_summary"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> apps allowed</string>
+
+    <!-- Label for the Domain URLs list that shows domain urls per App [CHAR LIMIT=30] -->
+    <string name="domain_urls_title">Domain URLs</string>
+
+    <!-- Summary for an App that dont open any domain URLs [CHAR LIMIT=45] -->
+    <string name="domain_urls_summary_none">Don\'t open any domain URL</string>
+
+    <!-- Summary of number of App that can open one and only one domain URLs [CHAR LIMIT=45] -->
+    <string name="domain_urls_summary_one">Open \'<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\'</string>
+
+    <!-- Summary of number of App that can open several domain URLs [CHAR LIMIT=45] -->
+    <string name="domain_urls_summary_some">Open \'<xliff:g id="domain" example="mail.google.com">%s</xliff:g>\' and related URLs</string>
+
+    <!-- Description of settings item that leads to list of all apps with Domain URLs [CHAR LIMIT=NONE] -->
+    <plurals name="domain_urls_apps_summary">
+        <item quantity="zero">No app can open any domain URL</item>
+        <item quantity="one">One app can open its domain URLs</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can open their domain URLs</item>
+    </plurals>
 
 </resources>

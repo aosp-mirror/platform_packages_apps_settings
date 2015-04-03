@@ -34,7 +34,8 @@
         android:layout_rowSpan="2"
         android:layout_marginEnd="8dip"
         android:scaleType="centerInside"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@+id/app_name"
@@ -45,7 +46,8 @@
         android:singleLine="true"
         android:ellipsize="marquee"
         android:textAppearance="@android:style/TextAppearance.Material.Subhead"
-        android:textAlignment="viewStart"/>
+        android:textAlignment="viewStart"
+        android:duplicateParentState="true" />
 
     <CheckBox android:id="@+id/app_on_sdcard"
         android:layout_marginStart="8dip"
@@ -53,7 +55,8 @@
         android:layout_rowSpan="2"
         android:visibility="gone"
         android:clickable="false"
-        android:focusable="false" />
+        android:focusable="false"
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@+id/app_size"
@@ -62,7 +65,8 @@
         android:layout_gravity="fill_horizontal|top"
         android:textAppearance="@android:style/TextAppearance.Material.Body1"
         android:textColor="?android:attr/textColorSecondary"
-        android:textAlignment="viewStart" />
+        android:textAlignment="viewStart"
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@+id/app_disabled"
@@ -73,6 +77,7 @@
         android:textColor="?android:attr/textColorSecondary"
         android:textAlignment="viewEnd"
         android:singleLine="true"
-        android:ellipsize="marquee" />
+        android:ellipsize="marquee"
+        android:duplicateParentState="true" />
 
 </GridLayout>
