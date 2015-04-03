@@ -269,9 +269,15 @@ public class WifiConfigController implements TextWatcher,
                     mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
                     if (state != null) {
-                        addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(),
-                                state, mAccessPoint.networkId ==
-                                WifiConfiguration.INVALID_NETWORK_ID));
+                        WifiConfiguration config = mAccessPoint.getConfig();
+                        if (config != null && config.isPasspoint()) {
+                            addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(),
+                                    state, false, config.providerFriendlyName));
+                        } else {
+                            addRow(group, R.string.wifi_status, Summary.get(mConfigUi.getContext(),
+                                    state, mAccessPoint.networkId ==
+                                            WifiConfiguration.INVALID_NETWORK_ID));
+                        }
                     }
 
                     if (signalLevel != null) {

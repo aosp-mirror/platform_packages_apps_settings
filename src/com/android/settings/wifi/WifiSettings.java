@@ -778,6 +778,13 @@ public class WifiSettings extends RestrictedSettingsFragment
                         accessPoint.update(lastInfo, lastNetworkInfo);
                     }
 
+                    if (result.passpointNetwork) {
+                        WifiConfiguration config = wifiManager.getMatchingWifiConfig(result);
+                        if (config != null) {
+                            accessPoint.update(config);
+                        }
+                    }
+
                     if (lastInfo != null && lastInfo.getBSSID() != null
                             && lastInfo.getBSSID().equals(result.BSSID)
                             && connectionConfig != null && connectionConfig.isPasspoint()) {

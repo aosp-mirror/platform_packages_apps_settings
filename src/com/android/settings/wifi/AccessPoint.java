@@ -401,6 +401,7 @@ class AccessPoint extends Preference {
 
     void update(WifiConfiguration config) {
         mConfig = config;
+        networkId = config.networkId;
         refresh();
     }
 
@@ -631,8 +632,10 @@ class AccessPoint extends Preference {
                     mConfig.providerFriendlyName : null;
             summary.append(Summary.get(context, getState(),
                     networkId == WifiConfiguration.INVALID_NETWORK_ID, passpointProvider));
-        } else if (mConfig != null
-                && mConfig.hasNoInternetAccess()) {
+        } else if (mConfig != null && mConfig.isPasspoint()) {
+            String format = context.getString(R.string.available_via_passpoint);
+            summary.append(String.format(format, mConfig.providerFriendlyName));
+        } else if (mConfig != null && mConfig.hasNoInternetAccess()) {
             summary.append(context.getString(R.string.wifi_no_internet));
         } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
                 mConfig.disableReason != WifiConfiguration.DISABLED_UNKNOWN_REASON)
