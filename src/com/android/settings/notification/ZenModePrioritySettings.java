@@ -132,7 +132,11 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     }
 
     @Override
-    protected void updateControls() {
+    protected void onZenModeConfigChanged() {
+        updateControls();
+    }
+
+    private void updateControls() {
         mDisableListeners = true;
         if (mCalls != null) {
             mCalls.setChecked(mConfig.allowCalls);

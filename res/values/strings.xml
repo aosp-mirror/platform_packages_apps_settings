@@ -5692,20 +5692,17 @@
     <!-- Sound & notification > Sound section: Title for the zen mode automation option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_automation_settings_title">Automatic rules</string>
 
-    <!-- Sound & notification > Sound section: Title for the zen mode option. [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_title">When calls and notifications arrive</string>
-
-    <!-- Sound & notification > Sound section: Zen mode option: Off [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_off">Always interrupt</string>
-
     <!-- Sound & notification > Sound section: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_important_interruptions">Allow only priority interruptions</string>
+    <string name="zen_mode_option_important_interruptions">Priority only</string>
 
     <!-- Sound & notification > Sound section: Zen mode option: Alarms only [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_alarms">Allow only alarms</string>
+    <string name="zen_mode_option_alarms">Alarms only</string>
 
     <!-- Sound & notification > Sound section: Zen mode option: No interruptions [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_no_interruptions">Don\'t interrupt</string>
+    <string name="zen_mode_option_no_interruptions">No interruptions</string>
+
+    <!-- Sound & notification > Sound section: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
+    <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g> <xliff:g id="exit condition" example="until you turn this off">%2$s</xliff:g></string>
 
     <!-- Sound & notification > Sound section: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
@@ -5874,9 +5871,6 @@
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications dialog dismiss button caption -->
     <string name="app_notifications_dialog_done">Done</string>
-
-    <!-- [CHAR LIMIT=30] Zen mode settings: Exit condition selection dialog, default option -->
-    <string name="zen_mode_default_option">Until you turn this off</string>
 
     <!-- [CHAR LIMIT=60] Zen mode settings: Downtime category text -->
     <string name="zen_mode_downtime_category">Downtime</string>

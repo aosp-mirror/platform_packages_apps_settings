@@ -24,51 +24,87 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Global;
+import android.service.notification.Condition;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.widget.ScrollView;
+import android.widget.Switch;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.widget.SwitchBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
-    private static final String KEY_ZEN_MODE = "zen_mode";
+public class ZenModeSettings extends ZenModeSettingsBase
+        implements Indexable, SwitchBar.OnSwitchChangeListener {
     private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
     private static final String KEY_AUTOMATION_SETTINGS = "automation_settings";
 
-    private static final SettingPrefWithCallback PREF_ZEN_MODE = new SettingPrefWithCallback(
-            SettingPref.TYPE_GLOBAL, KEY_ZEN_MODE, Global.ZEN_MODE, Global.ZEN_MODE_OFF,
-            Global.ZEN_MODE_OFF, Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, Global.ZEN_MODE_ALARMS,
-            Global.ZEN_MODE_NO_INTERRUPTIONS) {
-        protected String getCaption(Resources res, int value) {
-            switch (value) {
-                case Global.ZEN_MODE_NO_INTERRUPTIONS:
-                    return res.getString(R.string.zen_mode_option_no_interruptions);
-                case Global.ZEN_MODE_ALARMS:
-                    return res.getString(R.string.zen_mode_option_alarms);
-                case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
-                    return res.getString(R.string.zen_mode_option_important_interruptions);
-                default:
-                    return res.getString(R.string.zen_mode_option_off);
-            }
-        }
-    };
-
     private Preference mPrioritySettings;
     private AlertDialog mDialog;
+    private SwitchBar mSwitchBar;
+    private boolean mShowing;
 
-    private static SparseArray<String> allKeyTitles(Context context) {
-        final SparseArray<String> rt = new SparseArray<String>();
-        rt.put(R.string.zen_mode_option_title, KEY_ZEN_MODE);
-        rt.put(R.string.zen_mode_priority_settings_title, KEY_PRIORITY_SETTINGS);
-        rt.put(R.string.zen_mode_automation_settings_title, KEY_AUTOMATION_SETTINGS);
-        return rt;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        addPreferencesFromResource(R.xml.zen_mode_settings);
+        final PreferenceScreen root = getPreferenceScreen();
+
+        mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
+        if (!isDowntimeSupported(mContext)) {
+            removePreference(KEY_AUTOMATION_SETTINGS);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar.show();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mSwitchBar.removeOnSwitchChangeListener(this);
+        mSwitchBar.hide();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateControls();
+        mShowing = true;
+    }
+
+    @Override
+    public void onPause() {
+        mShowing = false;
+        super.onPause();
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (DEBUG) Log.d(TAG, "onSwitchChanged " + isChecked + " mShowing=" + mShowing);
+        if (!mShowing) return; // not from the user
+        if (isChecked) {
+            setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+            showConditionSelection(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+        } else {
+            setZenMode(Global.ZEN_MODE_OFF);
+        }
     }
 
     @Override
@@ -78,36 +114,52 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
     protected void onZenModeChanged() {
-        PREF_ZEN_MODE.update(mContext);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.zen_mode_settings);
-        final PreferenceScreen root = getPreferenceScreen();
-
-        PREF_ZEN_MODE.init(this);
-        PREF_ZEN_MODE.setCallback(new SettingPrefWithCallback.Callback() {
-            @Override
-            public void onSettingSelected(int value) {
-                if (value != Global.ZEN_MODE_OFF) {
-                    showConditionSelection(value);
-                }
-            }
-        });
-
-        mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
-        if (!isDowntimeSupported(mContext)) {
-            removePreference(KEY_AUTOMATION_SETTINGS);
-        }
-
         updateControls();
     }
 
     @Override
-    protected void updateControls() {
+    protected void onZenModeConfigChanged() {
+        updateControls();
+    }
+
+    private String computeZenModeCaption(int zenMode) {
+        switch (zenMode) {
+            case Global.ZEN_MODE_ALARMS:
+                return getString(R.string.zen_mode_option_alarms);
+            case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
+                return getString(R.string.zen_mode_option_important_interruptions);
+            case Global.ZEN_MODE_NO_INTERRUPTIONS:
+                return getString(R.string.zen_mode_option_no_interruptions);
+            default:
+                return null;
+        }
+    }
+
+    private String computeExitConditionText() {
+        return mConfig == null || mConfig.exitCondition == null
+                ? getString(com.android.internal.R.string.zen_mode_forever)
+                : computeConditionText(mConfig.exitCondition);
+    }
+
+    public static String computeConditionText(Condition c) {
+        return !TextUtils.isEmpty(c.line1) ? c.line1
+                : !TextUtils.isEmpty(c.summary) ? c.summary
+                : "";
+    }
+
+    private String computeZenModeSummaryLine() {
+        final String caption = computeZenModeCaption(mZenMode);
+        if (caption == null) return null;
+        final String conditionText = computeExitConditionText().toLowerCase();
+        return getString(R.string.zen_mode_summary_combination, caption, conditionText);
+    }
+
+    private void updateControls() {
+        if (mSwitchBar != null) {
+            final String summaryLine = computeZenModeSummaryLine();
+            mSwitchBar.setChecked(summaryLine != null);
+            mSwitchBar.setSummary(summaryLine);
+        }
         updatePrioritySettingsSummary();
     }
 
@@ -128,7 +180,7 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
         return s;
     }
 
-    protected void showConditionSelection(final int newSettingsValue) {
+    protected void showConditionSelection(final int zenMode) {
         if (mDialog != null) return;
 
         final ZenModeConditionSelection zenModeConditionSelection =
@@ -140,32 +192,39 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
                 mDialog = null;
             }
         };
-        final int oldSettingsValue = PREF_ZEN_MODE.getValue(mContext);
         ScrollView scrollView = new ScrollView(mContext);
         scrollView.addView(zenModeConditionSelection);
         mDialog = new AlertDialog.Builder(getActivity())
-                .setTitle(PREF_ZEN_MODE.getCaption(getResources(), newSettingsValue))
+                .setTitle(computeZenModeCaption(zenMode))
                 .setView(scrollView)
                 .setPositiveButton(R.string.okay, positiveListener)
                 .setNegativeButton(R.string.cancel_all_caps, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        cancelDialog(oldSettingsValue);
+                        cancelDialog();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        cancelDialog(oldSettingsValue);
+                        cancelDialog();
                     }
                 }).create();
         mDialog.show();
     }
 
-    protected void cancelDialog(int oldSettingsValue) {
-        // If not making a decision, reset drop down to current setting.
-        PREF_ZEN_MODE.setValueWithoutCallback(mContext, oldSettingsValue);
+    private void cancelDialog() {
+        if (DEBUG) Log.d(TAG, "cancelDialog");
+        // If not making a decision, reset zen to off.
+        setZenMode(Global.ZEN_MODE_OFF);
         mDialog = null;
+    }
+
+    private static SparseArray<String> allKeyTitles(Context context) {
+        final SparseArray<String> rt = new SparseArray<String>();
+        rt.put(R.string.zen_mode_priority_settings_title, KEY_PRIORITY_SETTINGS);
+        rt.put(R.string.zen_mode_automation_settings_title, KEY_AUTOMATION_SETTINGS);
+        return rt;
     }
 
     // Enable indexing of searchable data
@@ -197,58 +256,4 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
                 return rt;
             }
         };
-
-    private static class SettingPrefWithCallback extends SettingPref {
-
-        private Callback mCallback;
-        private int mValue;
-
-        public SettingPrefWithCallback(int type, String key, String setting, int def,
-                int... values) {
-            super(type, key, setting, def, values);
-        }
-
-        public void setCallback(Callback callback) {
-            mCallback = callback;
-        }
-
-        @Override
-        public void update(Context context) {
-            // Avoid callbacks from non-user changes.
-            mValue = getValue(context);
-            super.update(context);
-        }
-
-        @Override
-        protected boolean setSetting(Context context, int value) {
-            if (value == mValue) return true;
-            mValue = value;
-            if (mCallback != null) {
-                mCallback.onSettingSelected(value);
-            }
-            return super.setSetting(context, value);
-        }
-
-        @Override
-        public Preference init(SettingsPreferenceFragment settings) {
-            Preference ret = super.init(settings);
-            mValue = getValue(settings.getActivity());
-
-            return ret;
-        }
-
-        public boolean setValueWithoutCallback(Context context, int value) {
-            // Set the current value ahead of time, this way we won't trigger a callback.
-            mValue = value;
-            return putInt(mType, context.getContentResolver(), mSetting, value);
-        }
-
-        public int getValue(Context context) {
-            return getInt(mType, context.getContentResolver(), mSetting, mDefault);
-        }
-
-        public interface Callback {
-            void onSettingSelected(int value);
-        }
-    }
 }
