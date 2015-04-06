@@ -30,6 +30,7 @@ import com.android.settings.SettingsPreferenceFragment;
  */
 public class ScanningSettings extends SettingsPreferenceFragment {
     private static final String KEY_WIFI_SCAN_ALWAYS_AVAILABLE = "wifi_always_scanning";
+    private static final String KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE = "bluetooth_always_scanning";
 
     @Override
     protected int getMetricsCategory() {
@@ -54,10 +55,14 @@ public class ScanningSettings extends SettingsPreferenceFragment {
     }
 
     private void initPreferences() {
-        SwitchPreference scanAlwaysAvailable =
+        final SwitchPreference wifiScanAlwaysAvailable =
             (SwitchPreference) findPreference(KEY_WIFI_SCAN_ALWAYS_AVAILABLE);
-        scanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
+        wifiScanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
                     Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
+        final SwitchPreference bleScanAlwaysAvailable =
+            (SwitchPreference) findPreference(KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE);
+        bleScanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
+                    Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1);
     }
 
     @Override
@@ -66,6 +71,10 @@ public class ScanningSettings extends SettingsPreferenceFragment {
         if (KEY_WIFI_SCAN_ALWAYS_AVAILABLE.equals(key)) {
             Global.putInt(getContentResolver(),
                     Global.WIFI_SCAN_ALWAYS_AVAILABLE,
+                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
+        } else if (KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE.equals(key)) {
+            Global.putInt(getContentResolver(),
+                    Global.BLE_SCAN_ALWAYS_AVAILABLE,
                     ((SwitchPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);
