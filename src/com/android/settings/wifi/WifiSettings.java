@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -25,7 +26,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.location.LocationManager;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
@@ -36,21 +37,27 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.text.Spannable;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -608,27 +615,41 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected TextView initEmptyView() {
         TextView emptyView = (TextView) getActivity().findViewById(android.R.id.empty);
+        emptyView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         getListView().setEmptyView(emptyView);
         return emptyView;
     }
 
     private void setOffMessage() {
-        if (mEmptyView != null) {
-            mEmptyView.setText(R.string.wifi_empty_list_wifi_off);
-            if (android.provider.Settings.Global.getInt(getActivity().getContentResolver(),
-                    android.provider.Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1) {
-                mEmptyView.append("\n\n");
-                int resId;
-                if (android.provider.Settings.Secure.isLocationProviderEnabled(
-                        getActivity().getContentResolver(), LocationManager.NETWORK_PROVIDER)) {
-                    resId = R.string.wifi_scan_notify_text_location_on;
-                } else {
-                    resId = R.string.wifi_scan_notify_text_location_off;
-                }
-                CharSequence charSeq = getText(resId);
-                mEmptyView.append(charSeq);
-            }
+        if (mEmptyView == null) {
+            return;
         }
+
+        final CharSequence briefText = getText(R.string.wifi_empty_list_wifi_off);
+        if (isUiRestricted()) {
+            // Show only the brief text if the user is not allowed to configure scanning settings.
+            mEmptyView.setText(briefText, BufferType.SPANNABLE);
+        } else {
+            // Append the description of scanning settings with link.
+            final StringBuilder contentBuilder = new StringBuilder();
+            contentBuilder.append(briefText);
+            contentBuilder.append("\n\n");
+            contentBuilder.append(getText(R.string.wifi_scan_notify_text));
+            LinkifyUtils.linkify(mEmptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
+                @Override
+                public void onClick() {
+                    final SettingsActivity activity =
+                            (SettingsActivity) WifiSettings.this.getActivity();
+                    activity.startPreferencePanel(ScanningSettings.class.getName(), null,
+                            R.string.location_scanning_screen_title, null, null, 0);
+                }
+            });
+        }
+        // Embolden and enlarge the brief description anyway.
+        Spannable boldSpan = (Spannable) mEmptyView.getText();
+        boldSpan.setSpan(
+                new TextAppearanceSpan(getActivity(), android.R.style.TextAppearance_Medium), 0,
+                briefText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getPreferenceScreen().removeAll();
     }
 

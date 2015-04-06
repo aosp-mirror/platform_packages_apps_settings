@@ -1246,6 +1246,12 @@
     <string name="bluetooth_advanced_titlebar">Advanced Bluetooth</string>
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.</string>
+    <!-- Message to describe "BLE scan always available feature" when Bluetooth is off. The
+      place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring
+      the user to "scanning settings" screen. -->
+    <string name="ble_scan_notify_text">To improve location accuracy, Google services will scan for
+        Bluetooth devices, even when Bluetooth is off. You can change this in LINK_BEGINscanning
+        settingsLINK_END.</string>
 
 
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the user to choose which one he wants to connect to. -->
@@ -1416,8 +1422,12 @@
     <string name="wifi_select_assistant_dialog_title">Choose assistant</string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
-    <string name="wifi_scan_notify_text_location_on">To improve location accuracy and for other purposes, Google and other apps may scan for nearby networks, even when Wi-Fi is off. If you don\'t want this to happen, go to Advanced &gt; Scanning always available.</string>
-    <string name="wifi_scan_notify_text_location_off">Apps may scan for nearby networks, even when Wi-Fi is off. If you don\'t want this to happen, go to Advanced &gt; Scanning always available.</string>
+    <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off. The
+      place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring
+      the user to "scanning settings" screen. -->
+    <string name="wifi_scan_notify_text">To improve location accuracy, Google services will scan for
+        Wi\u2011Fi networks, even when Wi\u2011Fi is off. You can change this in LINK_BEGINscanning
+        settingsLINK_END.</string>
     <!-- Wifi scan always mode checkbox text -->
     <string name="wifi_scan_notify_remember_choice">Don\'t show again</string>
     <!-- Setting title for setting the wifi sleep policy. Do we keep Wi-Fi active when the screen turns off? -->
