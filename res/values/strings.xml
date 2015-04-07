@@ -835,12 +835,6 @@
     <string name="crypt_keeper_dialog_need_password_message">You need to set a lock screen PIN or
     password before you can start encryption.</string>
 
-    <!-- String at bottom of screen when prompting for pattern.
-         Note: This is only for the pattern case. -->
-    <string name="crypt_keeper_confirm_encrypt">
-    You need to draw your unlock pattern to confirm encrypting your device.
-    </string>
-
     <!-- Title of the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_confirm_title">Encrypt?</string>
     <!-- Warning text in the final confirmation screen before starting device encryption -->
@@ -2430,8 +2424,6 @@
     <string name="reset_network_final_desc">Reset all network settings? You can\'t reverse this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset settings button -->
     <string name="reset_network_final_button_text">Reset settings</string>
-    <!-- Explanation of drawing unlock pattern to reset settings -->
-    <string name="reset_network_gesture_explanation">You need to draw your unlock pattern to confirm a network settings reset.</string>
     <!-- Reset settings confirmation screen title [CHAR LIMIT=30] -->
     <string name="reset_network_confirm_title">Reset?</string>
     <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
@@ -2472,8 +2464,6 @@
     <string name="master_clear_final_desc">Erase all your personal information and downloaded apps? You can\'t reverse this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
     <string name="master_clear_final_button_text">Erase everything</string>
-    <!-- Explanation of drawing unlock pattern to reset phone -->
-    <string name="master_clear_gesture_explanation">You need to draw your unlock pattern to confirm a factory data reset.</string>
     <!-- Master clear failed message -->
     <string name="master_clear_failed">No reset was performed because the System Clear service isn\'t available.</string>
     <!-- Master clear confirmation screen title [CHAR LIMIT=30] -->
@@ -2508,10 +2498,6 @@
     <string name="media_format_final_desc" product="default">Erase the SD card, deleting all files stored there? You can\'t reverse this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Format media button -->
     <string name="media_format_final_button_text">Erase everything</string>
-    <!-- Explanation of drawing unlock pattern to format card [CHAR LIMIT=NONE] -->
-    <string name="media_format_gesture_explanation" product="nosdcard">You need to draw your unlock pattern to confirm that you want to erase the USB storage.</string>
-    <!-- Explanation of drawing unlock pattern to format card [CHAR LIMIT=NONE] -->
-    <string name="media_format_gesture_explanation" product="default">You need to draw your unlock pattern to confirm that you want to erase the SD card.</string>
 
     <!-- Main settings screen, Call settings title for item to go into the call settings -->
     <string name="call_settings_title">Call settings</string>
@@ -2764,6 +2750,26 @@
     <!-- Toast shown if setting pattern was successful -->
     <string name="lockpassword_pattern_set_toast">Pattern has been set</string>
 
+    <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
+         particular operation. [CHAR LIMIT=70]-->
+    <string name="lockpassword_confirm_your_pattern_generic">Use your device pattern to continue.</string>
+    <!-- Message to be used to explain the user that he needs to enter his PIN to continue a
+         particular operation. [CHAR LIMIT=70]-->
+    <string name="lockpassword_confirm_your_pin_generic">Enter your device PIN to continue.</string>
+    <!-- Message to be used to explain the user that he needs to enter his password to continue a
+         particular operation. [CHAR LIMIT=70]-->
+    <string name="lockpassword_confirm_your_password_generic">Enter your device password to continue.</string>
+
+    <!-- Security & location settings screen, change security method screen instruction if user
+         enters incorrect PIN [CHAR LIMIT=30] -->
+    <string name="lockpassword_invalid_pin">Wrong PIN</string>
+    <!-- Security & location settings screen, change security method screen instruction if user
+         enters incorrect password [CHAR LIMIT=30] -->
+    <string name="lockpassword_invalid_password">Wrong password</string>
+    <!-- Security & location settings screen, change unlock pattern screen instruction if user
+         draws incorrect pattern [CHAR LIMIT=30] -->
+    <string name="lockpattern_need_to_unlock_wrong">Wrong pattern</string>
+
     <!-- Lock Pattern settings -->
     <!-- Security & location settings screen, header -->
     <string name="lock_settings_title">Device security</string>
@@ -2771,14 +2777,6 @@
     <string name="lockpattern_change_lock_pattern_label">Change unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction when the user chooses "Change unlock pattern".  We first ask the user toe nter the current pattern, and this is the message seen -->
     <string name="lockpattern_change_lock_pin_label">Change unlock PIN</string>
-    <!-- Security & location settings screen, change unlock pattern screen instruction when the user chooses "Change unlock pattern".  We first ask the user toe nter the current pattern, and this is the message seen -->
-    <string name="lockpattern_need_to_unlock">Confirm saved pattern</string>
-    <!-- Do not translate. -->
-    <string name="lockpattern_need_to_unlock_footer" />
-    <!-- Security & location settings screen, change unlock pattern screen instruction if user draws incorrect pattern -->
-    <string name="lockpattern_need_to_unlock_wrong">Try again:</string>
-    <!-- Do not translate. -->
-    <string name="lockpattern_need_to_unlock_wrong_footer" />
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen.  This si when they are supposed to draw a new unlock pattern (for example, if they are changing their unlock patterns)..-->
     <string name="lockpattern_recording_intro_header">Draw an unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen hint on bottom of screen.  We are telling them to press the menu button to see more options or help. -->
@@ -2820,10 +2818,9 @@
     <string name="lockpattern_settings_change_lock_pattern">Change unlock pattern</string>
     <!-- Security & location settings screen, the help instructions (an animation) caption -->
     <string name="lockpattern_settings_help_how_to_record">How to draw an unlock pattern</string>
-    <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen after too many incorrect attempts -->
-    <string name="lockpattern_too_many_failed_confirmation_attempts_header">Too many incorrect attempts!</string>
-    <!-- Security & location settings screen, change unlock pattern screen countdown hint on bottom of screen after too many incorrect attempts -->
-    <string name="lockpattern_too_many_failed_confirmation_attempts_footer">Try again in <xliff:g id="number">%d</xliff:g> seconds.</string>
+    <!-- Security & location settings screen, confirm unlock pattern screen hint at the bottom after
+         too many incorrect attempts [CHAR LIMIT=120]-->
+    <string name="lockpattern_too_many_failed_confirmation_attempts">Too many incorrect attempts. Try again in <xliff:g id="number">%d</xliff:g> seconds.</string>
     <!-- Displayed when user launches a widget configuration activity that was uninstalled -->
     <string name="activity_not_found">Application is not installed on your phone.</string>
 
@@ -3410,10 +3407,6 @@
     <string name="oem_unlock_enable">OEM unlocking</string>
     <!-- setting Checkbox summary whether to enable OEM unlock [CHAR_LIMIT=50] -->
     <string name="oem_unlock_enable_summary">Allow the bootloader to be unlocked</string>
-    <!-- Message to enter device PIN to enable OEM unlock -->
-    <string name="oem_unlock_enable_pin_prompt">Enter your PIN</string>
-    <!-- Explanation to enter device pin to enable OEM unlock -->
-    <string name="oem_unlock_enable_pin_description">Enter your device PIN to enable OEM unlock</string>
     <!-- Confirmation dialog title to ensure user wishes to enable OEM unlock and disable theft protection features -->
     <string name="confirm_enable_oem_unlock_title">Allow OEM unlocking?</string>
     <!-- Warning dialog message to confirm user wishes to enable OEM unlock and disable theft protection features -->
@@ -4387,9 +4380,6 @@
     <string name="credential_storage_type_software">Software only</string>
     <!-- Error message for users that aren't allowed to see or modify credentials [CHAR LIMIT=none] -->
     <string name="credentials_settings_not_available">Credentials are not available for this user</string>
-
-    <!-- Explanation of drawing unlock pattern to install credentials -->
-    <string name="credentials_install_gesture_explanation">You need to draw your unlock pattern to confirm credential installation.</string>
 
     <!-- Title of dialog to enable credential storage [CHAR LIMIT=30] -->
     <string name="credentials_unlock"></string>
@@ -6223,6 +6213,9 @@
         <item quantity="one">One app can open its domain URLs</item>
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can open their domain URLs</item>
     </plurals>
+
+    <!-- Fingerprint hint message when finger was not recognized.-->
+    <string name="fingerprint_not_recognized">Not recognized</string>
 
     <!-- Title for Default Apps settings [CHAR LIMIT=30] -->
     <string name="default_apps_title">Default Apps</string>

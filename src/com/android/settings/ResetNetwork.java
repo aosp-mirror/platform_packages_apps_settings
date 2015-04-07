@@ -78,8 +78,8 @@ public class ResetNetwork extends InstrumentedFragment {
      */
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
-        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(request,
-                null, res.getText(R.string.reset_network_gesture_explanation));
+        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
+                request, res.getText(R.string.reset_network_title));
     }
 
     @Override

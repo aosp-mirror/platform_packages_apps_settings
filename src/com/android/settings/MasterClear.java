@@ -75,8 +75,8 @@ public class MasterClear extends InstrumentedFragment {
      */
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
-        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(request,
-                null, res.getText(R.string.master_clear_gesture_explanation));
+        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
+                request, res.getText(R.string.master_clear_title));
     }
 
     @Override

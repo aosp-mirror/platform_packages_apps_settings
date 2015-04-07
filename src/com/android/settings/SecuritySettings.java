@@ -603,8 +603,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             ChooseLockSettingsHelper helper =
                     new ChooseLockSettingsHelper(this.getActivity(), this);
             mTrustAgentClickIntent = preference.getIntent();
-            if (!helper.launchConfirmationActivity(CHANGE_TRUST_AGENT_SETTINGS, null, null) &&
-                    mTrustAgentClickIntent != null) {
+            boolean confirmationLaunched = helper.launchConfirmationActivity(
+                    CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
+            if (!confirmationLaunched&&  mTrustAgentClickIntent != null) {
                 // If this returns false, it means no password confirmation is required.
                 startActivity(mTrustAgentClickIntent);
                 mTrustAgentClickIntent = null;

@@ -379,7 +379,8 @@ public class ChooseLockPattern extends SettingsActivity {
                     updateStage(Stage.NeedToConfirm);
                     boolean launchedConfirmationActivity =
                         mChooseLockSettingsHelper.launchConfirmationActivity(
-                                CONFIRM_EXISTING_REQUEST, null, null);
+                                CONFIRM_EXISTING_REQUEST,
+                                getString(R.string.unlock_set_unlock_launch_picker_title));
                     if (!launchedConfirmationActivity) {
                         updateStage(Stage.Introduction);
                     }

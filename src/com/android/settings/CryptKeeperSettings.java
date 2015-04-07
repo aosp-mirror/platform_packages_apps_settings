@@ -166,9 +166,8 @@ public class CryptKeeperSettings extends InstrumentedFragment {
             return true;
         }
 
-        return helper.launchConfirmationActivity(request, null,
-                res.getText(R.string.crypt_keeper_confirm_encrypt),
-                true);
+        return helper.launchConfirmationActivity(request,
+                res.getText(R.string.crypt_keeper_encrypt_title), true);
     }
 
     @Override

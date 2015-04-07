@@ -1610,10 +1610,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private boolean showKeyguardConfirmation(Resources resources, int requestCode) {
-        return new ChooseLockSettingsHelper(getActivity(), this)
-                .launchConfirmationActivity(requestCode,
-                        resources.getString(R.string.oem_unlock_enable_pin_prompt),
-                        resources.getString(R.string.oem_unlock_enable_pin_description));
+        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
+                requestCode, resources.getString(R.string.oem_unlock_enable));
     }
 
     @Override

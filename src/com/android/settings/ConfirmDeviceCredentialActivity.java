@@ -48,7 +48,8 @@ public class ConfirmDeviceCredentialActivity extends Activity {
         String details = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
 
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        if (!helper.launchConfirmationActivity(0 /* request code */, title, details)) {
+        if (!helper.launchConfirmationActivity(0 /* request code */, null /* title */, title,
+                details, false /* returnCredentials */, true /* isExternal */)) {
             Log.d(TAG, "No pattern, password or PIN set.");
             setResult(Activity.RESULT_OK);
             finish();

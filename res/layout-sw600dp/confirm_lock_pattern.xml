@@ -13,48 +13,19 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/topLayout"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:paddingTop="48dp"
+    android:background="#80000000">
 
-    <!-- top: instructions and buttons -->
-    <!-- header message -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="96dip">
+    <View android:layout_width="328dp"
+        android:layout_height="match_parent"
+        android:background="@color/confirm_device_credential_dark_background"
+        android:layout_gravity="center_horizontal"/>
 
-        <TextView android:id="@+id/headerText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    </ScrollView>
-
-    <!-- footer message -->
-    <TextView android:id="@+id/footerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dip"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <!-- bottom: lock pattern -->
-    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-         android:layout_width="354dip"
-         android:layout_height="354dip"
-         android:layout_marginTop="80dip"
-         android:background="@color/lock_pattern_background"
-         aspect="square"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"/>
-
-</com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+    <include layout="@layout/confirm_lock_pattern_base"
+        android:layout_width="328dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"/>
+</FrameLayout>

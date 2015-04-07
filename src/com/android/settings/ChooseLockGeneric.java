@@ -145,7 +145,8 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(this.getActivity(), this);
-                if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST, null, null)) {
+                if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
+                        getString(R.string.unlock_set_unlock_launch_picker_title))) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish();
                 } else {
