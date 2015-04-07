@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import com.android.internal.util.ArrayUtils;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +24,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.preference.ListPreference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -47,6 +47,25 @@ public class DefaultEmergencyPreference extends ListPreference {
         super(context, attrs);
         mContentResolver = context.getContentResolver();
         load();
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        return new SavedState(getEntries(), getEntryValues(), getSummary(), superState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof SavedState) {
+            SavedState savedState = (SavedState) state;
+            setEntries(savedState.entries);
+            setEntryValues(savedState.entryValues);
+            setSummary(savedState.summary);
+            super.onRestoreInstanceState(savedState.superState);
+        } else {
+            super.onRestoreInstanceState(state);
+        }
     }
 
     @Override
@@ -133,5 +152,50 @@ public class DefaultEmergencyPreference extends ListPreference {
     private static boolean isSystemApp(PackageInfo info) {
         return info.applicationInfo != null
                 && (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+    }
+
+    private static class SavedState implements Parcelable {
+
+        public final CharSequence[] entries;
+        public final CharSequence[] entryValues;
+        public final CharSequence summary;
+        public final Parcelable superState;
+
+        public SavedState(CharSequence[] entries, CharSequence[] entryValues,
+                CharSequence summary, Parcelable superState) {
+            this.entries = entries;
+            this.entryValues = entryValues;
+            this.summary = summary;
+            this.superState = superState;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeCharSequenceArray(entries);
+            dest.writeCharSequenceArray(entryValues);
+            dest.writeCharSequence(summary);
+            dest.writeParcelable(superState, flags);
+        }
+
+        public Creator<SavedState> CREATOR = new Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel source) {
+                CharSequence[] entries = source.readCharSequenceArray();
+                CharSequence[] entryValues = source.readCharSequenceArray();
+                CharSequence summary = source.readCharSequence();
+                Parcelable superState = source.readParcelable(getClass().getClassLoader());
+                return new SavedState(entries, entryValues, summary, superState);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }
