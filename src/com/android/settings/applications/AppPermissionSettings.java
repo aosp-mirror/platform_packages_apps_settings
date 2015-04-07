@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -177,6 +178,13 @@ public class AppPermissionSettings extends AppInfoWithHeader {
     }
 
     public static CharSequence getSummary(AppEntry appEntry, Context context) {
+        if (appEntry.info.targetSdkVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            AppPermissions appPerms = new AppPermissions(context, appEntry.info.packageName);
+            int count = appPerms.getPermissionCount();
+            int grantedCount = appPerms.getGrantedPermissionsCount();
+            return context.getResources().getQuantityString(R.plurals.runtime_permissions_summary,
+                    count, grantedCount, count);
+        }
         AppSecurityPermissions asp = new AppSecurityPermissions(context,
                 appEntry.info.packageName);
         int count = asp.getPermissionCount();
