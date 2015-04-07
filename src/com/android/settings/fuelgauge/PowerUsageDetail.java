@@ -21,7 +21,6 @@ import static com.android.settings.Utils.prepareCustomPreferencesList;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ApplicationErrorReport;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -93,9 +92,9 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
         Bundle args = new Bundle();
         args.putString(PowerUsageDetail.EXTRA_TITLE, entry.name);
         args.putInt(PowerUsageDetail.EXTRA_PERCENT, (int)
-                ((entry.sipper.value * dischargeAmount / helper.getTotalPower()) + .5));
+                ((entry.sipper.totalPowerMah * dischargeAmount / helper.getTotalPower()) + .5));
         args.putInt(PowerUsageDetail.EXTRA_GAUGE, (int)
-                Math.ceil(entry.sipper.value * 100 / helper.getMaxPower()));
+                Math.ceil(entry.sipper.totalPowerMah * 100 / helper.getMaxPower()));
         args.putLong(PowerUsageDetail.EXTRA_USAGE_DURATION, helper.getStatsPeriod());
         args.putString(PowerUsageDetail.EXTRA_ICON_PACKAGE, entry.defaultPackageName);
         args.putInt(PowerUsageDetail.EXTRA_ICON_ID, entry.iconId);
@@ -129,11 +128,11 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                     R.string.usage_type_video,
                 };
                 values = new double[] {
-                    entry.sipper.cpuTime,
-                    entry.sipper.cpuFgTime,
-                    entry.sipper.wakeLockTime,
-                    entry.sipper.gpsTime,
-                    entry.sipper.wifiRunningTime,
+                    entry.sipper.cpuTimeMs,
+                    entry.sipper.cpuFgTimeMs,
+                    entry.sipper.wakeLockTimeMs,
+                    entry.sipper.gpsTimeMs,
+                    entry.sipper.wifiRunningTimeMs,
                     entry.sipper.mobileRxPackets,
                     entry.sipper.mobileTxPackets,
                     entry.sipper.mobileActive,
@@ -170,7 +169,7 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                     R.string.usage_type_radio_active,
                 };
                 values = new double[] {
-                    entry.sipper.usageTime,
+                    entry.sipper.usageTimeMs,
                     entry.sipper.noCoveragePercent,
                     entry.sipper.mobileActive
                 };
@@ -189,10 +188,10 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                     R.string.usage_type_data_wifi_send,
                 };
                 values = new double[] {
-                    entry.sipper.usageTime,
-                    entry.sipper.cpuTime,
-                    entry.sipper.cpuFgTime,
-                    entry.sipper.wakeLockTime,
+                    entry.sipper.usageTimeMs,
+                    entry.sipper.cpuTimeMs,
+                    entry.sipper.cpuFgTimeMs,
+                    entry.sipper.wakeLockTimeMs,
                     entry.sipper.mobileRxPackets,
                     entry.sipper.mobileTxPackets,
                     entry.sipper.wifiRxPackets,
@@ -212,10 +211,10 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                     R.string.usage_type_data_wifi_send,
                 };
                 values = new double[] {
-                    entry.sipper.usageTime,
-                    entry.sipper.cpuTime,
-                    entry.sipper.cpuFgTime,
-                    entry.sipper.wakeLockTime,
+                    entry.sipper.usageTimeMs,
+                    entry.sipper.cpuTimeMs,
+                    entry.sipper.cpuFgTimeMs,
+                    entry.sipper.wakeLockTimeMs,
                     entry.sipper.mobileRxPackets,
                     entry.sipper.mobileTxPackets,
                     entry.sipper.wifiRxPackets,
@@ -254,7 +253,7 @@ public class PowerUsageDetail extends InstrumentedFragment implements Button.OnC
                     R.string.usage_type_on_time
                 };
                 values = new double[] {
-                    entry.sipper.usageTime
+                    entry.sipper.usageTimeMs
                 };
             }
         }

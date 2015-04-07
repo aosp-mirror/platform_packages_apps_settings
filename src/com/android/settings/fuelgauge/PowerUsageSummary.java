@@ -30,7 +30,6 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -278,18 +277,18 @@ public class PowerUsageSummary extends InstrumentedPreferenceFragment {
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
-                if ((sipper.value * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP) {
+                if ((sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP) {
                     continue;
                 }
                 final double percentOfTotal =
-                        ((sipper.value / mStatsHelper.getTotalPower()) * dischargeAmount);
+                        ((sipper.totalPowerMah / mStatsHelper.getTotalPower()) * dischargeAmount);
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
                 }
                 if (sipper.drainType == BatterySipper.DrainType.OVERCOUNTED) {
                     // Don't show over-counted unless it is at least 2/3 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.value < ((mStatsHelper.getMaxRealPower()*2)/3)) {
+                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower()*2)/3)) {
                         continue;
                     }
                     if (percentOfTotal < 10) {
@@ -302,7 +301,7 @@ public class PowerUsageSummary extends InstrumentedPreferenceFragment {
                 if (sipper.drainType == BatterySipper.DrainType.UNACCOUNTED) {
                     // Don't show over-counted unless it is at least 1/2 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.value < (mStatsHelper.getMaxRealPower()/2)) {
+                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower()/2)) {
                         continue;
                     }
                     if (percentOfTotal < 5) {
@@ -321,7 +320,7 @@ public class PowerUsageSummary extends InstrumentedPreferenceFragment {
                 final PowerGaugePreference pref = new PowerGaugePreference(getActivity(),
                         badgedIcon, contentDescription, entry);
 
-                final double percentOfMax = (sipper.value * 100) / mStatsHelper.getMaxPower();
+                final double percentOfMax = (sipper.totalPowerMah * 100) / mStatsHelper.getMaxPower();
                 sipper.percent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
