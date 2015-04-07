@@ -27,10 +27,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.Process;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.security.KeyStore;
@@ -44,8 +42,6 @@ import android.widget.Toast;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.widget.LockPatternUtils;
-
-import java.util.List;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
@@ -296,22 +292,15 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected void disableUnusablePreferencesImpl(final int quality,
                 boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
-            final Intent intent = getActivity().getIntent();
-
-            // if there are multiple users, disable "None" setting
-            UserManager mUm = (UserManager) getSystemService(Context.USER_SERVICE);
-            List<UserInfo> users = mUm.getUsers(true);
-            final boolean singleUser = users.size() == 1;
 
             for (int i = entries.getPreferenceCount() - 1; i >= 0; --i) {
                 Preference pref = entries.getPreference(i);
                 if (pref instanceof PreferenceScreen) {
-                    final String key = ((PreferenceScreen) pref).getKey();
+                    final String key = pref.getKey();
                     boolean enabled = true;
                     boolean visible = true;
                     if (KEY_UNLOCK_SET_OFF.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-                        visible = singleUser; // don't show when there's more than 1 user
                     } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                     } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
@@ -322,7 +311,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                         enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
                     }
                     if (hideDisabled) {
-                        visible = visible && enabled;
+                        visible = enabled;
                     }
                     if (!visible) {
                         entries.removePreference(pref);
