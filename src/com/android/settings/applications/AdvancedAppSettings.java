@@ -38,6 +38,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -51,12 +52,14 @@ import com.android.settings.applications.ApplicationsState.AppEntry;
 import com.android.settings.applications.ApplicationsState.Callbacks;
 import com.android.settings.applications.ApplicationsState.Session;
 import com.android.settings.applications.PermissionsInfo.Callback;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdvancedAppSettings extends SettingsPreferenceFragment implements Callbacks,
-        DialogInterface.OnClickListener, DialogInterface.OnDismissListener, Callback {
+        DialogInterface.OnClickListener, DialogInterface.OnDismissListener, Callback, Indexable {
 
     static final String TAG = "AdvancedAppSettings";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -64,6 +67,7 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
     private static final String KEY_APP_PERM = "manage_perms";
     private static final String KEY_ALL_APPS = "all_apps";
     private static final String KEY_RESET_ALL = "reset_all";
+    private static final String KEY_DEFAULT_EMERGENCY_APP = "default_emergency_app";
     private static final String EXTRA_RESET_DIALOG = "resetDialog";
 
     private ApplicationsState mApplicationsState;
@@ -110,6 +114,10 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
         mNpm = NetworkPolicyManager.from(getActivity());
         mAom = (AppOpsManager)getActivity().getSystemService(Context.APP_OPS_SERVICE);
         mHandler = new Handler(getActivity().getMainLooper());
+
+        if (!DefaultEmergencyPreference.isAvailable(getActivity())) {
+            removePreference(KEY_DEFAULT_EMERGENCY_APP);
+        }
     }
 
     private void updateAllAppsSummary() {
@@ -281,4 +289,25 @@ public class AdvancedAppSettings extends SettingsPreferenceFragment implements C
                 mPermissionsInfo.getRuntimePermAppsCount()));
     }
 
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                boolean enabled) {
+            ArrayList<SearchIndexableResource> result = new ArrayList<>(1);
+            SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = R.xml.advanced_apps;
+            result.add(sir);
+            return result;
+        }
+
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            ArrayList<String> result = new ArrayList<>(1);
+            if (!DefaultEmergencyPreference.isAvailable(context)) {
+                result.add(KEY_DEFAULT_EMERGENCY_APP);
+            }
+            return result;
+        }
+    };
 }
