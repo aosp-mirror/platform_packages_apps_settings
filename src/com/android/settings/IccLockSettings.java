@@ -212,14 +212,15 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
             mTabHost.setOnTabChangedListener(mTabListener);
             mTabHost.clearAllTabs();
 
+            SubscriptionManager sm = SubscriptionManager.from(this);
             for (int i = 0; i < numSims; ++i) {
-                final SubscriptionInfo subInfo = Utils.findRecordBySlotId(this, i);
+                final SubscriptionInfo subInfo = sm.getActiveSubscriptionInfoForSimSlotIndex(i);
                 mTabHost.addTab(buildTabSpec(String.valueOf(i),
                         String.valueOf(subInfo == null
                             ? context.getString(R.string.sim_editor_title, i + 1)
                             : subInfo.getDisplayName())));
             }
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(getBaseContext(), 0);
+            final SubscriptionInfo sir = sm.getActiveSubscriptionInfoForSimSlotIndex(0);
 
             mPhone = (sir == null) ? null
                 : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
@@ -476,7 +477,8 @@ public class IccLockSettings extends InstrumentedPreferenceActivity
         @Override
         public void onTabChanged(String tabId) {
             final int slotId = Integer.parseInt(tabId);
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(getBaseContext(), slotId);
+            final SubscriptionInfo sir = SubscriptionManager.from(getBaseContext())
+                    .getActiveSubscriptionInfoForSimSlotIndex(slotId);
 
             mPhone = (sir == null) ? null
                 : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));

@@ -151,7 +151,10 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
         mSelectableSubInfos = new ArrayList<SubscriptionInfo>();
         for (int i = 0; i < numSlots; ++i) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(getActivity(), i);
+            // Less efficient than getActiveSubscriptionInfoList but we need to show a disable
+            // preference if the slot is empty
+            final SubscriptionInfo sir = mSubscriptionManager
+                    .getActiveSubscriptionInfoForSimSlotIndex(i);
             SimPreference simPreference = new SimPreference(getActivity(), sir, i);
             simPreference.setOrder(i-numSlots);
             mSimCards.addPreference(simPreference);
@@ -165,17 +168,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     }
 
     private void updateAvailableSubInfos(){
-        final TelephonyManager tm =
-            (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        final int numSlots = tm.getSimCount();
-
-        mAvailableSubInfos = new ArrayList<SubscriptionInfo>(numSlots);
-        for (int i = 0; i < numSlots; ++i) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(getActivity(), i);
-            mAvailableSubInfos.add(sir);
-            if (sir != null) {
-            }
-        }
+        mAvailableSubInfos = mSubscriptionManager.getActiveSubscriptionInfoList();
     }
 
     private void updateAllOptions() {
@@ -203,8 +196,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateSmsValues() {
         final Preference simPref = findPreference(KEY_SMS);
-        final SubscriptionInfo sir = Utils.findRecordBySubId(getActivity(),
-                mSubscriptionManager.getDefaultSmsSubId());
+        final SubscriptionInfo sir = mSubscriptionManager.getDefaultSmsSubscriptionInfo();
         simPref.setTitle(R.string.sms_messages_title);
         if (DBG) log("[updateSmsValues] mSubInfoList=" + mSubInfoList);
 
@@ -218,8 +210,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
     private void updateCellularDataValues() {
         final Preference simPref = findPreference(KEY_CELLULAR_DATA);
-        final SubscriptionInfo sir = Utils.findRecordBySubId(getActivity(),
-                mSubscriptionManager.getDefaultDataSubId());
+        final SubscriptionInfo sir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
         simPref.setTitle(R.string.cellular_data_title);
         if (DBG) log("[updateCellularDataValues] mSubInfoList=" + mSubInfoList);
 
@@ -396,14 +387,12 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                     mSubInfoRecord.setDisplayName(displayName);
                     mSubscriptionManager.setDisplayName(displayName, subId,
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
-                    Utils.findRecordBySubId(getActivity(), subId).setDisplayName(displayName);
 
                     final int tintSelected = tintSpinner.getSelectedItemPosition();
                     int subscriptionId = mSubInfoRecord.getSubscriptionId();
                     int tint = mTintArr[tintSelected];
                     mSubInfoRecord.setIconTint(tint);
                     mSubscriptionManager.setIconTint(tint, subscriptionId);
-                    Utils.findRecordBySubId(getActivity(), subscriptionId).setIconTint(tint);
 
                     updateAllOptions();
                     update();

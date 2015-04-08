@@ -146,7 +146,7 @@ public class ApnSettings extends SettingsPreferenceFragment implements
             setHasOptionsMenu(true);
         }
 
-        mSubscriptionInfo = Utils.findRecordBySubId(activity, subId);
+        mSubscriptionInfo = SubscriptionManager.from(activity).getActiveSubscriptionInfo(subId);
     }
 
     @Override

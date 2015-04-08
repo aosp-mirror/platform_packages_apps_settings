@@ -717,9 +717,9 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
 
         int simCount = mTelephonyManager.getSimCount();
 
-        for (int i = 0; i < simCount; i++) {
-            final SubscriptionInfo sir = Utils.findRecordBySlotId(context, i);
-            if (sir != null) {
+        List<SubscriptionInfo> sirs = mSubscriptionManager.getActiveSubscriptionInfoList();
+        if (sirs != null) {
+            for (SubscriptionInfo sir : sirs) {
                 addMobileTab(context, sir, (simCount > 1));
             }
         }
@@ -880,8 +880,8 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
         if (mCurrentTab != null && mCurrentTab.length() > TAB_MOBILE.length() ){
             final int slotId = Integer.parseInt(mCurrentTab.substring(TAB_MOBILE.length(),
                     mCurrentTab.length()));
-            final SubscriptionInfo sir = com.android.settings.Utils.findRecordBySlotId(context,
-                    slotId);
+            final SubscriptionInfo sir = mSubscriptionManager
+                    .getActiveSubscriptionInfoForSimSlotIndex(slotId);
 
             if (sir != null) {
                 seriesColor = sir.getIconTint();
@@ -1245,8 +1245,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             return;
         }
 
-        final SubscriptionInfo nextSir = mSubscriptionManager.getActiveSubscriptionInfo(
-                mSubscriptionManager.getDefaultDataSubId());
+        final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
 
         // If the device is single SIM or is enabling data on the active data SIM then forgo
         // the pop-up.
@@ -2784,22 +2783,7 @@ public class DataUsageSummary extends HighlightingFragment implements Indexable 
             return -1;
         }
 
-        //SUB SELECT
-        private boolean isMobileDataAvailable(long subId) {
-            int[] subIds = SubscriptionManager.getSubId(PhoneConstants.SUB1);
-            if (subIds != null && subIds[0] == subId) {
-                return true;
-            }
-
-            subIds = SubscriptionManager.getSubId(PhoneConstants.SUB2);
-            if (subIds != null && subIds[0] == subId) {
-                return true;
-            }
-
-            subIds = SubscriptionManager.getSubId(PhoneConstants.SUB3);
-            if (subIds != null && subIds[0] == subId) {
-                return true;
-            }
-            return false;
+        private boolean isMobileDataAvailable(int subId) {
+            return mSubscriptionManager.getActiveSubscriptionInfo(subId) != null;
         }
 }
