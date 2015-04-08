@@ -157,12 +157,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             LockPatternUtils lockPatternUtils) {
         int resid = 0;
         if (!lockPatternUtils.isSecure()) {
-            // if there are multiple users, disable "None" setting
-            UserManager mUm = (UserManager) context. getSystemService(Context.USER_SERVICE);
-            List<UserInfo> users = mUm.getUsers(true);
-            final boolean singleUser = users.size() == 1;
-
-            if (singleUser && lockPatternUtils.isLockScreenDisabled()) {
+            if (lockPatternUtils.isLockScreenDisabled()) {
                 resid = R.xml.security_settings_lockscreen;
             } else {
                 resid = R.xml.security_settings_chooser;
