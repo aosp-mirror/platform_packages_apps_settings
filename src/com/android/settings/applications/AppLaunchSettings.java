@@ -17,8 +17,13 @@
 package com.android.settings.applications;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.Preference;
@@ -31,6 +36,10 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 
 import java.util.List;
+
+import static android.content.pm.PackageManager.GET_ACTIVITIES;
+import static android.content.pm.PackageManager.GET_META_DATA;
+import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
 
 public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListener,
         Preference.OnPreferenceChangeListener {
@@ -57,29 +66,48 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         mOpenDomainUrls = (SwitchPreference) findPreference(KEY_OPEN_DOMAIN_URLS);
         mOpenDomainUrls.setOnPreferenceChangeListener(this);
 
-        final int status = mPm.getIntentVerificationStatus(mPackageName, myUserId);
-        boolean checked = status == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
-        mOpenDomainUrls.setChecked(checked);
+        boolean hasDomainUrls =
+                (mAppEntry.info.privateFlags & ApplicationInfo.PRIVATE_FLAG_HAS_DOMAIN_URLS) != 0;
+        List<IntentFilterVerificationInfo> iviList = mPm.getIntentFilterVerifications(mPackageName);
+
+        boolean enabled = hasDomainUrls && (iviList.size() != 0);
+
+        mOpenDomainUrls.setEnabled(enabled);
+        if (enabled) {
+            final int status = mPm.getIntentVerificationStatus(mPackageName, myUserId);
+            boolean checked =
+                    (status == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS);
+            mOpenDomainUrls.setChecked(checked);
+        }
+
+        List<IntentFilter> filters = mPm.getAllIntentFilters(mPackageName);
 
         mAppDomainUrls = (AppDomainsPreference) findPreference(KEY_SUPPORTED_DOMAIN_URLS);
-        CharSequence[] entries = getEntries(mPackageName);
+        CharSequence[] entries = getEntries(iviList, filters);
         mAppDomainUrls.setTitles(entries);
         mAppDomainUrls.setValues(new int[entries.length]);
 
         mClearDefaultsPreference = (ClearDefaultsPreference) findPreference(KEY_CLEAR_DEFAULTS);
     }
 
-    private CharSequence[] getEntries(String packageName) {
+    private CharSequence[] getEntries(List<IntentFilterVerificationInfo> iviList,
+            List<IntentFilter> filters) {
         ArraySet<String> result = new ArraySet<>();
-
-        List<IntentFilterVerificationInfo> list =
-                mPm.getIntentFilterVerifications(packageName);
-        for (IntentFilterVerificationInfo ivi : list) {
-            for (String host : ivi.getDomains()) {
-                result.add(host);
+        if (iviList.size() > 0) {
+            for (IntentFilterVerificationInfo ivi : iviList) {
+                for (String host : ivi.getDomains()) {
+                    result.add(host);
+                }
             }
         }
-
+        if (filters != null && filters.size() > 0) {
+            for (IntentFilter filter : filters) {
+                if (filter.hasDataScheme(IntentFilter.SCHEME_HTTP) ||
+                        filter.hasDataScheme(IntentFilter.SCHEME_HTTPS)) {
+                    result.addAll(filter.getHostsList());
+                }
+            }
+        }
         return result.toArray(new CharSequence[0]);
     }
 

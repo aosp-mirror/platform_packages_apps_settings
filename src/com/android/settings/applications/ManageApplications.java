@@ -497,7 +497,9 @@ public class ManageApplications extends InstrumentedFragment
             ApplicationsState.AppEntry entry = mApplications.getAppEntry(position);
             mCurrentPkgName = entry.info.packageName;
             mCurrentUid = entry.info.uid;
-            startApplicationDetailsActivity();
+            if (isAppEntryViewEnabled(entry)) {
+                startApplicationDetailsActivity();
+            }
         }
     }
 
@@ -583,6 +585,13 @@ public class ManageApplications extends InstrumentedFragment
             return mManageApplications.getString(FILTER_LABELS[filter]);
         }
 
+    }
+
+    private static boolean isAppEntryViewEnabled(AppEntry entry) {
+        if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 || !entry.info.enabled) {
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -879,19 +888,6 @@ public class ManageApplications extends InstrumentedFragment
             return false;
         }
 
-        @Override
-        public boolean isEnabled(int position) {
-            ApplicationsState.AppEntry entry = mEntries.get(position);
-            synchronized (entry) {
-                if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
-                    return false;
-                } else if (!entry.info.enabled) {
-                    return false;
-                }
-                return true;
-            }
-        }
-
         public View getView(int position, View convertView, ViewGroup parent) {
             // A ViewHolder keeps references to children views to avoid unnecessary calls
             // to findViewById() on each row.
@@ -928,6 +924,7 @@ public class ManageApplications extends InstrumentedFragment
                         holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
                         break;
                 }
+                convertView.setEnabled(isAppEntryViewEnabled(entry));
                 if ((entry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
                     holder.disabled.setVisibility(View.VISIBLE);
                     holder.disabled.setText(R.string.not_installed);
