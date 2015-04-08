@@ -46,7 +46,10 @@ public class DefaultEmergencyPreference extends ListPreference {
     public DefaultEmergencyPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContentResolver = context.getContentResolver();
-        load();
+
+        if (isAvailable(context)) {
+            load();
+        }
     }
 
     @Override
@@ -147,6 +150,11 @@ public class DefaultEmergencyPreference extends ListPreference {
         }
 
         return packages;
+    }
+
+    public static boolean isAvailable(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_voice_capable);
     }
 
     private static boolean isSystemApp(PackageInfo info) {
